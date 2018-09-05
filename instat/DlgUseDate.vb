@@ -169,6 +169,7 @@ Public Class dlgUseDate
         'TODO This should probably be the default for this control, hence this is temporary
         ucrInputComboBoxStartingMonth.bUpdateRCodeFromControl = False
 
+        ttYearNumeric.SetToolTip(ucrChkShiftYearNum.chkCheck, "When the year is shifted, this gives the starting year, for example 1984-1985 is given as 1984")
     End Sub
 
     Private Sub SetDefaults()
