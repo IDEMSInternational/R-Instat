@@ -26,12 +26,15 @@ Public Class dlgClimaticMaps
     Private clsYlabFunction As New RFunction
     Private clsXScaleContinuousFunction As New RFunction
     Private clsYScaleContinuousFunction As New RFunction
+    Private clsXlimFunction, clsYlimFunction As New RFunction
     Private clsRFacetFunction As New RFunction
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private clsLocalRaesFunction As New RFunction
     Private bResetSubdialog As Boolean = True
     Private bResetSFLayerSubdialog As Boolean = True
+
+
 
 
     Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -141,6 +144,9 @@ Public Class dlgClimaticMaps
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
 
+        clsXlimFunction.SetRCommand("xlim")
+        clsYlimFunction.SetRCommand("ylim")
+
         clsGGplotOperator.SetAssignTo("last_map", strTempDataframe:=ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_map")
         ucrBase.clsRsyntax.SetBaseROperator(clsGGplotOperator)
     End Sub
@@ -174,8 +180,9 @@ Public Class dlgClimaticMaps
     End Sub
 
     Private Sub cmdMapOptions_Click_1(sender As Object, e As EventArgs) Handles cmdMapOptions.Click
-        sdgMapOption.SetRCode(clsBaseOperator:=clsGGplotOperator, clsXlim:=, clsylim:=, bReset:=bReset)
+        sdgMapOption.SetRCode(clsBaseOperator:=clsGGplotOperator, clsXlim:=clsXlimFunction, clsylim:=clsYlimFunction, bReset:=bResetSubdialog)
         sdgMapOption.ShowDialog()
+        bResetSubdialog = False
     End Sub
 
     Private Sub TestOkEnabled()
