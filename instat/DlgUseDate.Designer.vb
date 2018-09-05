@@ -38,6 +38,7 @@ Partial Class dlgUseDate
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgUseDate))
         Me.lblDateVariable = New System.Windows.Forms.Label()
         Me.ucrChkDayInMonthNum = New instat.ucrCheck()
@@ -61,6 +62,7 @@ Partial Class dlgUseDate
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorUseDate = New instat.ucrSelectorByDataFrameAddRemove()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ucrChkShiftYearName = New instat.ucrCheck()
         Me.lblShifted = New System.Windows.Forms.Label()
         Me.lblDayinYear366 = New System.Windows.Forms.Label()
         Me.ucrChkShiftPentadAbbr = New instat.ucrCheck()
@@ -85,7 +87,7 @@ Partial Class dlgUseDate
         Me.ucrChkShiftDayInYearNum366 = New instat.ucrCheck()
         Me.ucrChkShiftPentadNum = New instat.ucrCheck()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.ucrChkShiftYearName = New instat.ucrCheck()
+        Me.ttYearNumeric = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -244,6 +246,12 @@ Partial Class dlgUseDate
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
+        'ucrChkShiftYearName
+        '
+        resources.ApplyResources(Me.ucrChkShiftYearName, "ucrChkShiftYearName")
+        Me.ucrChkShiftYearName.Checked = False
+        Me.ucrChkShiftYearName.Name = "ucrChkShiftYearName"
+        '
         'lblShifted
         '
         resources.ApplyResources(Me.lblShifted, "lblShifted")
@@ -392,12 +400,6 @@ Partial Class dlgUseDate
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
-        'ucrChkShiftYearName
-        '
-        resources.ApplyResources(Me.ucrChkShiftYearName, "ucrChkShiftYearName")
-        Me.ucrChkShiftYearName.Checked = False
-        Me.ucrChkShiftYearName.Name = "ucrChkShiftYearName"
-        '
         'dlgUseDate
         '
         resources.ApplyResources(Me, "$this")
@@ -468,4 +470,5 @@ Partial Class dlgUseDate
     Friend WithEvents lblDayinYear366 As Label
     Friend WithEvents lblShifted As Label
     Friend WithEvents ucrChkShiftYearName As ucrCheck
+    Friend WithEvents ttYearNumeric As ToolTip
 End Class

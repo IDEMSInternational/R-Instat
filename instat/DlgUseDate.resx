@@ -1468,6 +1468,12 @@ Year (365)</value>
   <data name="$this.Text" xml:space="preserve">
     <value>Use Date</value>
   </data>
+  <data name="&gt;&gt;ttYearNumeric.Name" xml:space="preserve">
+    <value>ttYearNumeric</value>
+  </data>
+  <data name="&gt;&gt;ttYearNumeric.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgUseDate</value>
   </data>
@@ -1498,4 +1504,7 @@ Year (365)</value>
   <data name="&gt;&gt;ucrReceiverUseDate.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <metadata name="ttYearNumeric.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>
