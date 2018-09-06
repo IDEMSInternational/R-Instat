@@ -30,20 +30,21 @@ Public Class sdgMapOption
 
     Private Sub InitialiseDialog()
         ucrInputLongMin.SetParameter(New RParameter("longmin", bNewIncludeArgumentName:=False))
-        ucrInputLongMin.SetValidationTypeAsNumeric()
+        ucrInputLongMin.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
         ucrInputLongMin.AddQuotesIfUnrecognised = False
 
         ucrInputLongMax.SetParameter(New RParameter("longmax", bNewIncludeArgumentName:=False))
-        ucrInputLongMax.SetValidationTypeAsNumeric()
+        ucrInputLongMax.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
         ucrInputLongMax.AddQuotesIfUnrecognised = False
 
         ucrInputLatMin.SetParameter(New RParameter("latmin", bNewIncludeArgumentName:=False))
-        ucrInputLatMin.SetValidationTypeAsNumeric()
+        ucrInputLatMin.SetValidationTypeAsNumeric(dcmMin:=-90, dcmMax:=90)
         ucrInputLatMin.AddQuotesIfUnrecognised = False
 
         ucrInputLatMax.SetParameter(New RParameter("latmax", bNewIncludeArgumentName:=False))
-        ucrInputLatMax.SetValidationTypeAsNumeric()
+        ucrInputLatMax.SetValidationTypeAsNumeric(dcmMin:=-90, dcmMax:=90)
         ucrInputLatMax.AddQuotesIfUnrecognised = False
+
 
         bControlsInitalised = True
     End Sub
@@ -57,14 +58,6 @@ Public Class sdgMapOption
         clsGgplotOperator = clsBaseOperator
         clsXlimFunction = clsXlim
         clsYlimFunction = clsylim
-
-        If Not clsGgplotOperator.ContainsParameter("xlim") Then
-            clsGgplotOperator.AddParameter("xlim", clsRFunctionParameter:=clsXlimFunction)
-        End If
-
-        If Not clsGgplotOperator.ContainsParameter("ylim") Then
-            clsGgplotOperator.AddParameter("ylim", clsRFunctionParameter:=clsYlimFunction)
-        End If
 
         ucrInputLongMin.SetRCode(clsXlimFunction, bReset)
         ucrInputLongMax.SetRCode(clsXlimFunction, bReset)
@@ -81,7 +74,23 @@ Public Class sdgMapOption
 
         'End If
     End Sub
-    Private Sub ucrInputLatMax_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLatMax.ControlValueChanged, ucrInputLongMax.ControlValueChanged
+    Private Sub ucrInputLatMax_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLatMax.ControlValueChanged, ucrInputLongMax.ControlValueChanged, ucrInputLatMin.ControlValueChanged, ucrInputLongMin.ControlValueChanged
         'CheckMinMaxValues()
+        AddRemoveLimits()
     End Sub
+
+    Private Sub AddRemoveLimits()
+
+        If Not ucrInputLongMin.IsEmpty AndAlso Not ucrInputLongMax.IsEmpty Then
+            clsGgplotOperator.AddParameter("xlim", clsRFunctionParameter:=clsXlimFunction)
+        Else
+            clsGgplotOperator.RemoveParameterByName("xlim")
+        End If
+        If Not ucrInputLatMin.IsEmpty AndAlso Not ucrInputLatMax.IsEmpty Then
+            clsGgplotOperator.AddParameter("ylim", clsRFunctionParameter:=clsYlimFunction)
+        Else
+            clsGgplotOperator.RemoveParameterByName("ylim")
+        End If
+    End Sub
+
 End Class
