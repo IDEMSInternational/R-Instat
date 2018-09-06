@@ -1871,7 +1871,16 @@ instat_object$set("public","tidy_climatic_data", function(x, format, stack_cols,
   }
   else if(format == "years") {
     
-    if(nrow(x) != 366) stop("data must have exactly 366 rows when format = 'years'")
+    by_cols <- c()
+    if(!missing(station)) by_cols <- c(by_cols, station)
+    if(!missing(element)) by_cols <- c(by_cols, element)
+    
+    if(length(by_cols) > 0) {
+      group_lengths <- x %>% dplyr::group_by(!!! rlang::syms(by_cols)) %>% dplyr::summarise(n = n())
+      print(group_lengths)
+      if(any(group_lengths$n != 366)) stop("data must have exactly 366 rows per station per element when format = 'years'")
+    }
+    else if(nrow(x) != 366) stop("data must have exactly 366 rows for a single station and element when format = 'years'")
     
     if(!missing(stack_years) && length(year_list) != length(stack_cols)) stop("stack_years must be the same length as stack_cols")
     
@@ -1897,11 +1906,11 @@ instat_object$set("public","tidy_climatic_data", function(x, format, stack_cols,
     y$year <- plyr::mapvalues(y$year, stack_cols, stack_years)
     y$year <- as.numeric(levels(y$year))[y$year]
     
-    #Replacing day 60 with 0 for non-leap years.This will result into NA dates
+    # Replacing day 60 with 0 for non-leap years. This will result in NA dates.
     y$doy[(!lubridate::leap_year(y$year)) & y$doy == 60] <- 0
     y$doy[(!lubridate::leap_year(y$year)) & y$doy > 60] <- y$doy[(!lubridate::leap_year(y$year)) & y$doy > 60] - 1
     y$date <- as.Date(paste(y$year, y$doy), format = paste("%Y", "%j"))
-    # Put day 0 back as 60 as needed in error displaying
+    # Put day 0 back as 60. Needed in error displaying only.
     y$doy[y$doy == 0] <- 60
   }
   
@@ -1915,22 +1924,22 @@ instat_object$set("public","tidy_climatic_data", function(x, format, stack_cols,
       invalid_data <- dplyr::filter(y, invalid_ind)
       if(format == "days" || format == "months") {
         invalid_data_display <- invalid_data %>% select(year, month, day)
-        if(!missing(station)) {
-          invalid_data_display <- data.frame(station = invalid_data$station, invalid_data_display)
-        }
-        if(!missing(element)) {
-          invalid_data_display <- data.frame(element = invalid_data$element, invalid_data_display)
-        }
       }
       else {
         invalid_data_display <- invalid_data %>% select(year, doy)
+      }
+      if(!missing(station)) {
+        invalid_data_display <- data.frame(station = invalid_data$station, invalid_data_display)
+      }
+      if(!missing(element)) {
+        invalid_data_display <- data.frame(element = invalid_data$element, invalid_data_display)
       }
       invalid_data_display[[element_name]] <- invalid_data[[element_name]]
       print(invalid_data_display, row.names = FALSE)
     }
     if(ignore_invalid) cat("Warning: These rows have been removed.\n")
     else {
-      # Not stop here for that output can be displayed by R-Instat
+      # Don't use a stop here so that output can be displayed by R-Instat
       cat("There are:", sum(invalid_ind), "measurement values on invalid dates. Correct these or specify ignore_invalid = TRUE to ignore them. See output for more details.")
       continue <- FALSE
     }
@@ -1938,19 +1947,19 @@ instat_object$set("public","tidy_climatic_data", function(x, format, stack_cols,
   
   if(continue) {
     # Standard format of slowest varying structure variables first (station then date) followed by measurements
-    if(!missing(station) && format != "years") z <- data.frame(station = y$station, date = y$date)
+    if(!missing(station)) z <- data.frame(station = y$station, date = y$date)
     else z <- data.frame(date = y$date)
     z[[element_name]] <- y[[element_name]]
     
-    if(!missing(element) && format != "years") z$element <- y$element
+    if(!missing(element)) z$element <- y$element
     
     z <- dplyr::filter(z, !is.na(date))
     
     # If data contains multiple elements, unstack the element column
-    if(!missing(element) && format != "years") {
+    if(!missing(element)) {
       z <- reshape2::dcast(z, ... ~ element, value.var = element_name)
     }
-    if(!missing(station) && format != "years") z <- z %>% dplyr::group_by(station) %>% dplyr::arrange(date, .by_group = TRUE) %>% ungroup()
+    if(!missing(station)) z <- z %>% dplyr::group_by(station) %>% dplyr::arrange(date, .by_group = TRUE) %>% ungroup()
     else z <- z %>% dplyr::arrange(date)
     
     if(missing(new_name) || new_name == "") new_name <- next_default_item("data", existing_names = self$get_data_names())
