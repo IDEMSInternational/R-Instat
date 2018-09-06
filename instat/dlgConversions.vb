@@ -147,6 +147,7 @@ Public Class dlgConversions
         ucrNudDecimal.SetLinkedDisplayControl(lblDecimal)
         ucrReceiverStation.SetLinkedDisplayControl(lblStation)
         ucrReceiverDate.SetLinkedDisplayControl(lblDate)
+        ucrPnlLatitude.SetLinkedDisplayControl(grpLatitude)
 
         ucrSaveConversions.SetLabelText("Result into:")
         ucrSaveConversions.SetSaveTypeAsColumn()
@@ -257,11 +258,9 @@ Public Class dlgConversions
         If rdoDayLength.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDayLengthFunction)
             ucrReceiverDate.SetMeAsReceiver()
-            grpLatitude.Show()
         ElseIf rdoUnits.Checked Then
             SetBaseFunction()
             ucrReceiverElement.SetMeAsReceiver()
-            grpLatitude.Hide()
         End If
     End Sub
 
