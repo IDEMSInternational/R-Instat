@@ -173,6 +173,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
+        mnuHelp.Enabled = False 'TODO. Remove this after help is developed
         mnuRunCurrentLine.ShortcutKeys = Keys.Enter Or Keys.Control
         txtScript.WordWrap = False
         EnableCopyCut()
