@@ -29,7 +29,7 @@
 
 Imports instat.Translations
 Public Class sdgSaveColumnPosition
-    Private clsDefaultFunction As New RFunction
+    Private clsDefaultFunction As RFunction
     Public bControlsInitialised As Boolean = True
     Public bUserSelected As Boolean = False
     Private strDefaultCol As String = ""
@@ -40,7 +40,6 @@ Public Class sdgSaveColumnPosition
             InitialiseControl()
             bControlsInitialised = False
         End If
-
     End Sub
 
     Private Sub InitialiseControl()
@@ -93,7 +92,7 @@ Public Class sdgSaveColumnPosition
         'Else
         '    bUserSelected = False
         'End If
-        bUserSelected = False
+        bUserSelected = False 'TODO
     End Sub
 
     'TODO. Can this be done implictly by the panel control ?
