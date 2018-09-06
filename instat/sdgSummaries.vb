@@ -106,6 +106,10 @@ Public Class sdgSummaries
         ucrReceiverSecondVariable.SetMeAsReceiver()
         ucrReceiverSecondVariable.SetIncludedDataTypes({"numeric"})
 
+        ucrReceiverOrderBy.Selector = ucrSelectorOrderBy
+        ucrReceiverOrderBy.SetMeAsReceiver()
+        ucrReceiverOrderBy.SetIncludedDataTypes({"numeric"})
+
         ucrChkFirst.SetParameter(New RParameter("summary_first", 23), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_first" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkFirst.SetText("First")
 
@@ -218,6 +222,7 @@ Public Class sdgSummaries
         Next
         bControlsInitialised = True
         MissingOptionsVisibilty()
+        PositionOptions()
     End Sub
 
     Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
@@ -232,6 +237,7 @@ Public Class sdgSummaries
         If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
             strDataFrame = ucrBaseSelector.strCurrentDataFrame
             ucrSelectorSecondVariable.SetDataframe(strDataFrame, False)
+            ucrSelectorOrderBy.SetDataframe(strDataFrame, False)
         End If
 
         ucrNudPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
@@ -284,6 +290,7 @@ Public Class sdgSummaries
         If bReset Then
             tbSummaries.SelectedIndex = 0
             ucrSelectorSecondVariable.Reset()
+            ucrSelectorOrderBy.Reset()
         End If
     End Sub
 
@@ -325,6 +332,18 @@ Public Class sdgSummaries
         End If
     End Sub
 
+    Private Sub PositionOptions()
+        If ucrChkFirst.Checked OrElse ucrChkLast.Checked OrElse ucrChknth.Checked Then
+            ucrSelectorOrderBy.Show()
+            ucrReceiverOrderBy.Show()
+            lblOrderBy.Show()
+        Else
+            ucrSelectorOrderBy.Hide()
+            ucrReceiverOrderBy.Hide()
+            lblOrderBy.Hide()
+        End If
+    End Sub
+
     Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged, ucrChkCovariance.ControlValueChanged, ucrReceiverSecondVariable.ControlValueChanged
         MissingOptionsVisibilty()
         If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked Then
@@ -332,11 +351,14 @@ Public Class sdgSummaries
         Else
             clsDefaultFunction.RemoveParameterByName("y")
         End If
-        'This might be required when order_by parameter is implemented for last,first and nth functions
-        '    If ucrChkFirst.Checked OrElse ucrChkLast.Checked OrElse ucrChknth.Checked Then
-        '        clsDefaultFunction.AddParameter("order_by", ucrReceiverSecondVariable.GetVariableNames, iPosition:=4)
-        '    Else
-        '        clsDefaultFunction.RemoveParameterByName("order_by")
-        '    End If
+    End Sub
+
+    Private Sub ucrReceiverOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOrderBy.ControlValueChanged, ucrChkFirst.ControlValueChanged, ucrChkLast.ControlValueChanged, ucrChknth.ControlValueChanged
+        PositionOptions()
+        If Not ucrReceiverOrderBy.IsEmpty Then
+            clsDefaultFunction.AddParameter("order_by", ucrReceiverOrderBy.GetVariableNames, iPosition:=4)
+        Else
+            clsDefaultFunction.RemoveParameterByName("order_by")
+        End If
     End Sub
 End Class
