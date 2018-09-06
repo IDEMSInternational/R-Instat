@@ -29,11 +29,11 @@ Partial Class sdgMapOption
         Me.lblLongMax = New System.Windows.Forms.Label()
         Me.lblLatMin = New System.Windows.Forms.Label()
         Me.lblLong = New System.Windows.Forms.Label()
+        Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.ucrInputLatMax = New instat.ucrInputTextBox()
         Me.ucrInputLongMax = New instat.ucrInputTextBox()
         Me.ucrInputLatMin = New instat.ucrInputTextBox()
         Me.ucrInputLongMin = New instat.ucrInputTextBox()
-        Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
         'lblLat
@@ -65,6 +65,11 @@ Partial Class sdgMapOption
         '
         resources.ApplyResources(Me.lblLong, "lblLong")
         Me.lblLong.Name = "lblLong"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'ucrInputLatMax
         '
@@ -98,15 +103,11 @@ Partial Class sdgMapOption
         resources.ApplyResources(Me.ucrInputLongMin, "ucrInputLongMin")
         Me.ucrInputLongMin.Name = "ucrInputLongMin"
         '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
         'sdgMapOption
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblLat)
         Me.Controls.Add(Me.lblLongMin)
         Me.Controls.Add(Me.lblLatMax)
@@ -117,7 +118,6 @@ Partial Class sdgMapOption
         Me.Controls.Add(Me.ucrInputLatMin)
         Me.Controls.Add(Me.lblLong)
         Me.Controls.Add(Me.ucrInputLongMin)
-        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -126,8 +126,6 @@ Partial Class sdgMapOption
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ucrBase As ucrButtonsSubdialogue
     Friend WithEvents lblLat As Label
     Friend WithEvents lblLongMin As Label
     Friend WithEvents lblLatMax As Label
@@ -138,4 +136,5 @@ Partial Class sdgMapOption
     Friend WithEvents ucrInputLatMin As ucrInputTextBox
     Friend WithEvents lblLong As Label
     Friend WithEvents ucrInputLongMin As ucrInputTextBox
+    Friend WithEvents ucrBase As ucrButtonsSubdialogue
 End Class
