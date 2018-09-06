@@ -50,8 +50,8 @@ Public Class dlgConversions
         ucrPnlConversions.AddFunctionNamesCondition(rdoUnits, {"convert_precip", "convert_temperature", "convert_wind_speed"})
         ucrPnlConversions.AddFunctionNamesCondition(rdoDayLength, "daylength")
 
-        ucrPnlLatitude.AddRadioButton(rdoValue)
-        ucrPnlLatitude.AddRadioButton(rdoVariable)
+        ucrPnlLatitude.AddRadioButton(rdoSingleValue)
+        ucrPnlLatitude.AddRadioButton(rdoColumn)
 
         ucrReceiverElement.SetParameter(New RParameter("precip", 0))
         ucrReceiverElement.bWithQuotes = False
@@ -130,10 +130,10 @@ Public Class dlgConversions
 
         ucrPnlConversions.AddToLinkedControls(ucrReceiverStation, {rdoDayLength}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrReceiverDate, {rdoDayLength}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlConversions.AddToLinkedControls(ucrPnlLatitude, {rdoDayLength}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoValue)
+        ucrPnlConversions.AddToLinkedControls(ucrPnlLatitude, {rdoDayLength}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoSingleValue)
 
-        ucrPnlLatitude.AddToLinkedControls(ucrInputLatitude, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlLatitude.AddToLinkedControls(ucrReceiverLatitude, {rdoVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlLatitude.AddToLinkedControls(ucrInputLatitude, {rdoSingleValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlLatitude.AddToLinkedControls(ucrReceiverLatitude, {rdoColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputElement.AddToLinkedControls(ucrInputFromPrecipitation, {"Rain"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputElement.AddToLinkedControls(ucrInputToPrecipitation, {"Rain"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -215,7 +215,7 @@ Public Class dlgConversions
     Private Sub TestOkEnabled()
         If rdoUnits.Checked AndAlso Not ucrReceiverElement.IsEmpty AndAlso ucrNudDecimal.GetText <> "" AndAlso ucrSaveConversions.IsComplete Then
             ucrBase.OKEnabled(True)
-        ElseIf rdoDayLength.Checked AndAlso Not ucrReceiverDate.IsEmpty AndAlso (rdoValue.Checked AndAlso Not ucrInputLatitude.IsEmpty) OrElse (rdoVariable.Checked AndAlso Not ucrReceiverLatitude.IsEmpty) Then
+        ElseIf rdoDayLength.Checked AndAlso Not ucrReceiverDate.IsEmpty AndAlso (rdoSingleValue.Checked AndAlso Not ucrInputLatitude.IsEmpty) OrElse (rdoColumn.Checked AndAlso Not ucrReceiverLatitude.IsEmpty) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -245,9 +245,9 @@ Public Class dlgConversions
 
     Private Sub ucrPnlLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLatitude.ControlValueChanged
         If rdoDayLength.Checked Then
-            If rdoVariable.Checked Then
+            If rdoColumn.Checked Then
                 ucrReceiverLatitude.SetMeAsReceiver()
-            ElseIf rdoValue.Checked Then
+            ElseIf rdoSingleValue.Checked Then
                 ucrReceiverDate.SetMeAsReceiver()
             End If
         End If
@@ -257,9 +257,11 @@ Public Class dlgConversions
         If rdoDayLength.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDayLengthFunction)
             ucrReceiverDate.SetMeAsReceiver()
+            grpLatitude.Show()
         ElseIf rdoUnits.Checked Then
             SetBaseFunction()
             ucrReceiverElement.SetMeAsReceiver()
+            grpLatitude.Hide()
         End If
     End Sub
 

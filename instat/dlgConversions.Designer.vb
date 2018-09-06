@@ -32,15 +32,16 @@ Partial Class dlgConversions
         Me.lblDecimal = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.rdoVariable = New System.Windows.Forms.RadioButton()
-        Me.rdoValue = New System.Windows.Forms.RadioButton()
+        Me.rdoColumn = New System.Windows.Forms.RadioButton()
+        Me.rdoSingleValue = New System.Windows.Forms.RadioButton()
+        Me.grpLatitude = New System.Windows.Forms.GroupBox()
+        Me.ucrInputLatitude = New instat.ucrInputTextBox()
+        Me.ucrPnlLatitude = New instat.UcrPanel()
+        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
         Me.ucrInputFromTemperature = New instat.ucrInputComboBox()
         Me.ucrInputToWindSpeed = New instat.ucrInputComboBox()
         Me.ucrInputToTemperature = New instat.ucrInputComboBox()
         Me.ucrInputFromWindSpeed = New instat.ucrInputComboBox()
-        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
-        Me.ucrInputLatitude = New instat.ucrInputTextBox()
-        Me.ucrPnlLatitude = New instat.UcrPanel()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrNudDecimal = New instat.ucrNud()
@@ -52,6 +53,7 @@ Partial Class dlgConversions
         Me.ucrPnlConversions = New instat.UcrPanel()
         Me.ucrSelectorConversions = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.grpLatitude.SuspendLayout()
         Me.SuspendLayout()
         '
         'rdoDayLength
@@ -110,19 +112,52 @@ Partial Class dlgConversions
         resources.ApplyResources(Me.lblStation, "lblStation")
         Me.lblStation.Name = "lblStation"
         '
-        'rdoVariable
+        'rdoColumn
         '
-        resources.ApplyResources(Me.rdoVariable, "rdoVariable")
-        Me.rdoVariable.Name = "rdoVariable"
-        Me.rdoVariable.TabStop = True
-        Me.rdoVariable.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoColumn, "rdoColumn")
+        Me.rdoColumn.Name = "rdoColumn"
+        Me.rdoColumn.TabStop = True
+        Me.rdoColumn.UseVisualStyleBackColor = True
         '
-        'rdoValue
+        'rdoSingleValue
         '
-        resources.ApplyResources(Me.rdoValue, "rdoValue")
-        Me.rdoValue.Name = "rdoValue"
-        Me.rdoValue.TabStop = True
-        Me.rdoValue.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoSingleValue, "rdoSingleValue")
+        Me.rdoSingleValue.Name = "rdoSingleValue"
+        Me.rdoSingleValue.TabStop = True
+        Me.rdoSingleValue.UseVisualStyleBackColor = True
+        '
+        'grpLatitude
+        '
+        Me.grpLatitude.Controls.Add(Me.rdoColumn)
+        Me.grpLatitude.Controls.Add(Me.ucrInputLatitude)
+        Me.grpLatitude.Controls.Add(Me.rdoSingleValue)
+        Me.grpLatitude.Controls.Add(Me.ucrPnlLatitude)
+        Me.grpLatitude.Controls.Add(Me.ucrReceiverLatitude)
+        resources.ApplyResources(Me.grpLatitude, "grpLatitude")
+        Me.grpLatitude.Name = "grpLatitude"
+        Me.grpLatitude.TabStop = False
+        '
+        'ucrInputLatitude
+        '
+        Me.ucrInputLatitude.AddQuotesIfUnrecognised = True
+        Me.ucrInputLatitude.IsMultiline = False
+        Me.ucrInputLatitude.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLatitude, "ucrInputLatitude")
+        Me.ucrInputLatitude.Name = "ucrInputLatitude"
+        '
+        'ucrPnlLatitude
+        '
+        resources.ApplyResources(Me.ucrPnlLatitude, "ucrPnlLatitude")
+        Me.ucrPnlLatitude.Name = "ucrPnlLatitude"
+        '
+        'ucrReceiverLatitude
+        '
+        Me.ucrReceiverLatitude.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverLatitude, "ucrReceiverLatitude")
+        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
+        Me.ucrReceiverLatitude.Selector = Nothing
+        Me.ucrReceiverLatitude.strNcFilePath = ""
+        Me.ucrReceiverLatitude.ucrSelector = Nothing
         '
         'ucrInputFromTemperature
         '
@@ -151,28 +186,6 @@ Partial Class dlgConversions
         Me.ucrInputFromWindSpeed.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputFromWindSpeed, "ucrInputFromWindSpeed")
         Me.ucrInputFromWindSpeed.Name = "ucrInputFromWindSpeed"
-        '
-        'ucrReceiverLatitude
-        '
-        Me.ucrReceiverLatitude.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverLatitude, "ucrReceiverLatitude")
-        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
-        Me.ucrReceiverLatitude.Selector = Nothing
-        Me.ucrReceiverLatitude.strNcFilePath = ""
-        Me.ucrReceiverLatitude.ucrSelector = Nothing
-        '
-        'ucrInputLatitude
-        '
-        Me.ucrInputLatitude.AddQuotesIfUnrecognised = True
-        Me.ucrInputLatitude.IsMultiline = False
-        Me.ucrInputLatitude.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLatitude, "ucrInputLatitude")
-        Me.ucrInputLatitude.Name = "ucrInputLatitude"
-        '
-        'ucrPnlLatitude
-        '
-        resources.ApplyResources(Me.ucrPnlLatitude, "ucrPnlLatitude")
-        Me.ucrPnlLatitude.Name = "ucrPnlLatitude"
         '
         'ucrReceiverDate
         '
@@ -259,15 +272,11 @@ Partial Class dlgConversions
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpLatitude)
         Me.Controls.Add(Me.ucrInputFromTemperature)
         Me.Controls.Add(Me.ucrInputToWindSpeed)
         Me.Controls.Add(Me.ucrInputToTemperature)
         Me.Controls.Add(Me.ucrInputFromWindSpeed)
-        Me.Controls.Add(Me.rdoVariable)
-        Me.Controls.Add(Me.rdoValue)
-        Me.Controls.Add(Me.ucrReceiverLatitude)
-        Me.Controls.Add(Me.ucrInputLatitude)
-        Me.Controls.Add(Me.ucrPnlLatitude)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverDate)
@@ -292,6 +301,8 @@ Partial Class dlgConversions
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgConversions"
+        Me.grpLatitude.ResumeLayout(False)
+        Me.grpLatitude.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -317,8 +328,8 @@ Partial Class dlgConversions
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
-    Friend WithEvents rdoVariable As RadioButton
-    Friend WithEvents rdoValue As RadioButton
+    Friend WithEvents rdoColumn As RadioButton
+    Friend WithEvents rdoSingleValue As RadioButton
     Friend WithEvents ucrReceiverLatitude As ucrReceiverSingle
     Friend WithEvents ucrInputLatitude As ucrInputTextBox
     Friend WithEvents ucrPnlLatitude As UcrPanel
@@ -326,4 +337,5 @@ Partial Class dlgConversions
     Friend WithEvents ucrInputToWindSpeed As ucrInputComboBox
     Friend WithEvents ucrInputToTemperature As ucrInputComboBox
     Friend WithEvents ucrInputFromWindSpeed As ucrInputComboBox
+    Friend WithEvents grpLatitude As GroupBox
 End Class
