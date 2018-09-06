@@ -102,6 +102,10 @@ Partial Class sdgSummaries
         Me.ucrSelectorSecondVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSecondVariable = New instat.ucrReceiverSingle()
         Me.tbPosition = New System.Windows.Forms.TabPage()
+        Me.ucrChkOrderBy = New instat.ucrCheck()
+        Me.lblOrderBy = New System.Windows.Forms.Label()
+        Me.ucrSelectorOrderBy = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverOrderBy = New instat.ucrReceiverSingle()
         Me.grpPosition = New System.Windows.Forms.GroupBox()
         Me.ucrInputN = New instat.ucrInputTextBox()
         Me.lblInputN = New System.Windows.Forms.Label()
@@ -111,9 +115,6 @@ Partial Class sdgSummaries
         Me.tbModel = New System.Windows.Forms.TabPage()
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
-        Me.lblOrderBy = New System.Windows.Forms.Label()
-        Me.ucrSelectorOrderBy = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverOrderBy = New instat.ucrReceiverSingle()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpProportionsPercentiles.SuspendLayout()
@@ -595,6 +596,7 @@ Partial Class sdgSummaries
         '
         'tbPosition
         '
+        Me.tbPosition.Controls.Add(Me.ucrChkOrderBy)
         Me.tbPosition.Controls.Add(Me.lblOrderBy)
         Me.tbPosition.Controls.Add(Me.ucrSelectorOrderBy)
         Me.tbPosition.Controls.Add(Me.ucrReceiverOrderBy)
@@ -602,6 +604,34 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.tbPosition, "tbPosition")
         Me.tbPosition.Name = "tbPosition"
         Me.tbPosition.UseVisualStyleBackColor = True
+        '
+        'ucrChkOrderBy
+        '
+        Me.ucrChkOrderBy.Checked = False
+        resources.ApplyResources(Me.ucrChkOrderBy, "ucrChkOrderBy")
+        Me.ucrChkOrderBy.Name = "ucrChkOrderBy"
+        '
+        'lblOrderBy
+        '
+        resources.ApplyResources(Me.lblOrderBy, "lblOrderBy")
+        Me.lblOrderBy.Name = "lblOrderBy"
+        '
+        'ucrSelectorOrderBy
+        '
+        Me.ucrSelectorOrderBy.bDropUnusedFilterLevels = False
+        Me.ucrSelectorOrderBy.bShowHiddenColumns = False
+        Me.ucrSelectorOrderBy.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorOrderBy, "ucrSelectorOrderBy")
+        Me.ucrSelectorOrderBy.Name = "ucrSelectorOrderBy"
+        '
+        'ucrReceiverOrderBy
+        '
+        Me.ucrReceiverOrderBy.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverOrderBy, "ucrReceiverOrderBy")
+        Me.ucrReceiverOrderBy.Name = "ucrReceiverOrderBy"
+        Me.ucrReceiverOrderBy.Selector = Nothing
+        Me.ucrReceiverOrderBy.strNcFilePath = ""
+        Me.ucrReceiverOrderBy.ucrSelector = Nothing
         '
         'grpPosition
         '
@@ -662,28 +692,6 @@ Partial Class sdgSummaries
         '
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
-        '
-        'lblOrderBy
-        '
-        resources.ApplyResources(Me.lblOrderBy, "lblOrderBy")
-        Me.lblOrderBy.Name = "lblOrderBy"
-        '
-        'ucrSelectorOrderBy
-        '
-        Me.ucrSelectorOrderBy.bDropUnusedFilterLevels = False
-        Me.ucrSelectorOrderBy.bShowHiddenColumns = False
-        Me.ucrSelectorOrderBy.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorOrderBy, "ucrSelectorOrderBy")
-        Me.ucrSelectorOrderBy.Name = "ucrSelectorOrderBy"
-        '
-        'ucrReceiverOrderBy
-        '
-        Me.ucrReceiverOrderBy.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverOrderBy, "ucrReceiverOrderBy")
-        Me.ucrReceiverOrderBy.Name = "ucrReceiverOrderBy"
-        Me.ucrReceiverOrderBy.Selector = Nothing
-        Me.ucrReceiverOrderBy.strNcFilePath = ""
-        Me.ucrReceiverOrderBy.ucrSelector = Nothing
         '
         'sdgSummaries
         '
@@ -798,4 +806,5 @@ Partial Class sdgSummaries
     Friend WithEvents lblOrderBy As Label
     Friend WithEvents ucrSelectorOrderBy As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverOrderBy As ucrReceiverSingle
+    Friend WithEvents ucrChkOrderBy As ucrCheck
 End Class

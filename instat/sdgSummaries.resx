@@ -1563,6 +1563,27 @@
   <data name="&gt;&gt;tbTwoVariables.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrChkOrderBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 101</value>
+  </data>
+  <data name="ucrChkOrderBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 20</value>
+  </data>
+  <data name="ucrChkOrderBy.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOrderBy.Name" xml:space="preserve">
+    <value>ucrChkOrderBy</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOrderBy.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOrderBy.Parent" xml:space="preserve">
+    <value>tbPosition</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOrderBy.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="lblOrderBy.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1570,7 +1591,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblOrderBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 127</value>
+    <value>242, 168</value>
   </data>
   <data name="lblOrderBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
@@ -1591,10 +1612,10 @@
     <value>tbPosition</value>
   </data>
   <data name="&gt;&gt;lblOrderBy.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrSelectorOrderBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 99</value>
+    <value>18, 140</value>
   </data>
   <data name="ucrSelectorOrderBy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1615,10 +1636,10 @@
     <value>tbPosition</value>
   </data>
   <data name="&gt;&gt;ucrSelectorOrderBy.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrReceiverOrderBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 143</value>
+    <value>239, 184</value>
   </data>
   <data name="ucrReceiverOrderBy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1639,7 +1660,7 @@
     <value>tbPosition</value>
   </data>
   <data name="&gt;&gt;ucrReceiverOrderBy.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrInputN.Location" type="System.Drawing.Point, System.Drawing">
     <value>279, 17</value>
@@ -1777,7 +1798,7 @@
     <value>tbPosition</value>
   </data>
   <data name="&gt;&gt;grpPosition.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="tbPosition.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
