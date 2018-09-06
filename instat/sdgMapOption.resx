@@ -127,13 +127,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblLat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 127</value>
-  </data>
-  <data name="lblLat.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>10, 83</value>
   </data>
   <data name="lblLat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 20</value>
+    <value>48, 13</value>
   </data>
   <data name="lblLat.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -151,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLat.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="lblLongMin.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -160,13 +157,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblLongMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 79</value>
-  </data>
-  <data name="lblLongMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>72, 51</value>
   </data>
   <data name="lblLongMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 20</value>
+    <value>27, 13</value>
   </data>
   <data name="lblLongMin.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -184,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLongMin.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="lblLatMax.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -193,13 +187,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblLatMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>358, 127</value>
-  </data>
-  <data name="lblLatMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>208, 83</value>
   </data>
   <data name="lblLatMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 20</value>
+    <value>30, 13</value>
   </data>
   <data name="lblLatMax.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -217,7 +208,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLatMax.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lblLongMax.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -226,13 +217,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblLongMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>358, 79</value>
-  </data>
-  <data name="lblLongMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>208, 51</value>
   </data>
   <data name="lblLongMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 20</value>
+    <value>30, 13</value>
   </data>
   <data name="lblLongMax.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -250,7 +238,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLongMax.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblLatMin.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -259,13 +247,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblLatMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 127</value>
-  </data>
-  <data name="lblLatMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>72, 83</value>
   </data>
   <data name="lblLatMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 20</value>
+    <value>27, 13</value>
   </data>
   <data name="lblLatMin.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -283,7 +268,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLatMin.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblLong.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -292,13 +277,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblLong.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 79</value>
-  </data>
-  <data name="lblLong.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>10, 51</value>
   </data>
   <data name="lblLong.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 20</value>
+    <value>57, 13</value>
   </data>
   <data name="lblLong.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -316,16 +298,37 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLong.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 132</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrInputLatMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>406, 120</value>
+    <value>240, 78</value>
   </data>
   <data name="ucrInputLatMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>14, 18, 14, 18</value>
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrInputLatMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 32</value>
+    <value>99, 21</value>
   </data>
   <data name="ucrInputLatMax.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -340,16 +343,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputLatMax.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrInputLongMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>404, 73</value>
+    <value>238, 47</value>
   </data>
   <data name="ucrInputLongMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>14, 18, 14, 18</value>
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrInputLongMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 32</value>
+    <value>99, 21</value>
   </data>
   <data name="ucrInputLongMax.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -364,16 +367,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputLongMax.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrInputLatMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 120</value>
+    <value>102, 78</value>
   </data>
   <data name="ucrInputLatMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>14, 18, 14, 18</value>
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrInputLatMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 32</value>
+    <value>99, 21</value>
   </data>
   <data name="ucrInputLatMin.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -388,16 +391,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputLatMin.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="ucrInputLongMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 73</value>
+    <value>102, 47</value>
   </data>
   <data name="ucrInputLongMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>14, 18, 14, 18</value>
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrInputLongMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 32</value>
+    <value>99, 21</value>
   </data>
   <data name="ucrInputLongMin.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -412,43 +415,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputLongMin.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 198</value>
-  </data>
-  <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 46</value>
-  </data>
-  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
-    <value>ucrBase</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
-    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>9, 20</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>574, 279</value>
+    <value>383, 181</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
