@@ -349,10 +349,10 @@ Public Class sdgSummaries
     Private Sub OrderByCheckEnabled()
         If ucrChkFirst.Checked OrElse ucrChkLast.Checked OrElse ucrChknth.Checked Then
             ucrChkOrderBy.Enabled = True
-        Else
+        ElseIf Not ucrChkFirst.Checked AndAlso Not ucrChkLast.Checked AndAlso Not ucrChknth.Checked Then
+            ucrChkOrderBy.Checked = False
             ucrChkOrderBy.Enabled = False
         End If
-
     End Sub
 
     Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged, ucrChkCovariance.ControlValueChanged, ucrReceiverSecondVariable.ControlValueChanged
