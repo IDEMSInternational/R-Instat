@@ -64,27 +64,32 @@ Public Class dlgClimaticMaps
 
         ucrReceiverFill.SetParameter(New RParameter("fill", 0))
         ucrReceiverFill.Selector = ucrSelectorOutline
-        ucrReceiverFill.SetParameterIsRFunction()
+        ucrReceiverFill.SetParameterIsString()
+        ucrReceiverFill.bWithQuotes = False
 
         ucrReceiverLongitude.SetParameter(New RParameter("x", 0))
         ucrReceiverLongitude.Selector = ucrSelectorStation
         ucrReceiverLongitude.SetIncludedDataTypes({"numeric"})
         ucrReceiverLongitude.strSelectorHeading = "Numerics"
-        ucrReceiverLongitude.SetParameterIsRFunction()
+        ucrReceiverLongitude.SetParameterIsString()
+        ucrReceiverLongitude.bWithQuotes = False
 
         ucrReceiverLatitude.SetParameter(New RParameter("y", 1))
         ucrReceiverLatitude.Selector = ucrSelectorStation
         ucrReceiverLatitude.SetIncludedDataTypes({"numeric"})
         ucrReceiverLatitude.strSelectorHeading = "Numerics"
-        ucrReceiverLatitude.SetParameterIsRFunction()
+        ucrReceiverLatitude.SetParameterIsString()
+        ucrReceiverLatitude.bWithQuotes = False
 
         ucrReceiverShape.SetParameter(New RParameter("shape", 2))
         ucrReceiverShape.Selector = ucrSelectorStation
-        ucrReceiverShape.SetParameterIsRFunction()
+        ucrReceiverShape.SetParameterIsString()
+        ucrReceiverShape.bWithQuotes = False
 
         ucrReceiverColor.SetParameter(New RParameter("color", 3))
         ucrReceiverColor.Selector = ucrSelectorStation
-        ucrReceiverColor.SetParameterIsRFunction()
+        ucrReceiverColor.SetParameterIsString()
+        ucrReceiverColor.bWithQuotes = False
 
         ucrSaveMap.SetPrefix("Map")
         ucrSaveMap.SetSaveTypeAsGraph()
@@ -152,7 +157,7 @@ Public Class dlgClimaticMaps
     End Sub
 
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
-        sdgPlots.SetRCode(clsGGplotOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsSfAesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorOutline, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsGGplotOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsSfAesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorStation, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
