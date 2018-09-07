@@ -19,6 +19,7 @@ Public Class ucrScript
     Private strComment As String = "Code run from Script Window"
     Private strCurrentDirectory As String = ""
     Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
+    Private strClearedText As String = "" 'stores cleared text for undoing
 
     Public Sub CopyText()
         txtScript.Copy()
@@ -41,6 +42,7 @@ Public Class ucrScript
         txtScript.SelectionStart = txtScript.Text.Length
         txtScript.ScrollToCaret()
         txtScript.Refresh()
+        strClearedText = ""
     End Sub
 
     Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click
@@ -48,6 +50,7 @@ Public Class ucrScript
         If txtScript.Text <> "" Then
             dlgResponse = MessageBox.Show("Are you sure you want to clear the contents of the script window?" & Me.Text, "Clear " & Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
             If dlgResponse = DialogResult.Yes Then
+                strClearedText = txtScript.Text
                 txtScript.Clear()
             End If
         End If
@@ -76,9 +79,6 @@ Public Class ucrScript
     Private Sub RunText(strText As String)
         If strText <> "" Then
             frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
-            'If MsgBox("Running code from the script window is not yet a stable operation." & vbNewLine & vbNewLine & "Do you want to proceed?", MessageBoxButtons.YesNo, "Warning") = MsgBoxResult.Yes Then
-            'frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
-            'End If
         End If
     End Sub
 
@@ -100,14 +100,14 @@ Public Class ucrScript
             File.WriteAllText(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename), frmMain.clsRLink.GetRSetupScript() & txtScript.Text)
             Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
         Catch
-            MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+            MessageBox.Show("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Open Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
     Private Sub mnuSaveScript_Click(sender As Object, e As EventArgs) Handles mnuSaveScript.Click
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save Script To File"
-            dlgSave.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
+            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
 
             dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
 
@@ -115,29 +115,29 @@ Public Class ucrScript
                 Try
                     File.WriteAllText(dlgSave.FileName, txtScript.Text)
                 Catch
-                    MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                    MessageBox.Show("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Save Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
 
             End If
         End Using
     End Sub
 
-    Private Sub mnuOpenScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuLoadScriptFromFile.Click
+    Private Sub mnuLoadScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuLoadScriptFromFile.Click
 
         Dim msgWarning As DialogResult
 
-        Using dlgOpen As New OpenFileDialog
-            dlgOpen.Title = "Open Script From Text File"
-            dlgOpen.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
-            dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+        Using dlgLoad As New OpenFileDialog
+            dlgLoad.Title = "Load Script From Text File"
+            dlgLoad.Filter = "Text & R Script Files(*.txt,*.R)|*.txt;*.R|R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+            dlgLoad.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
 
-            If dlgOpen.ShowDialog() = DialogResult.OK Then
-                msgWarning = MessageBox.Show("Opening a script from file will clear your current script" & Environment.NewLine & "Do you want still want to open?", "Open Script From File", MessageBoxButtons.YesNo)
+            If dlgLoad.ShowDialog() = DialogResult.OK Then
+                msgWarning = MessageBox.Show("Loading a script from file will clear your current script" & Environment.NewLine & "Do you still want to load?", "Load Script From File", MessageBoxButtons.YesNo)
                 If msgWarning = DialogResult.Yes Then
                     Try
-                        txtScript.Text = File.ReadAllText(dlgOpen.FileName)
+                        txtScript.Text = File.ReadAllText(dlgLoad.FileName)
                     Catch
-                        MsgBox("Could not open the script from file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                        MessageBox.Show("Could not load the script from file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Load Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End Try
                 End If
             End If
@@ -213,6 +213,9 @@ Public Class ucrScript
             txtScript.Undo()
             'Clear the undo buffer to prevent last action from being redone.
             txtScript.ClearUndo()
+        ElseIf strClearedText <> "" Then
+            txtScript.Text = strClearedText
+            strClearedText = ""
         End If
     End Sub
 
