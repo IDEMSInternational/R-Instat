@@ -54,7 +54,7 @@ Public Class dlgUseDate
         ucrReceiverUseDate.SetParameterIsString()
 
         'Year
-        ucrChkShiftYearNum.SetParameter(New RParameter("year", 2))
+        ucrChkShiftYearNum.SetParameter(New RParameter("year_val", 2))
         ucrChkShiftYearNum.SetText("")
         ucrChkShiftYearNum.SetRDefault("FALSE")
 
