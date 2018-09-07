@@ -1076,6 +1076,12 @@
   <data name="mnuClimaticFileExportToCPT.Text" xml:space="preserve">
     <value>Export to CPT...</value>
   </data>
+  <data name="ShapsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="ShapsToolStripMenuItem.Text" xml:space="preserve">
+    <value>shaps</value>
+  </data>
   <data name="mnuClimaticFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
   </data>
@@ -1178,6 +1184,15 @@
   <data name="mnuClimaticDefineClimaticData.Text" xml:space="preserve">
     <value>Define Climatic Data...</value>
   </data>
+  <data name="mnuClimaticCheckDataMaps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="mnuClimaticCheckDataMaps.Text" xml:space="preserve">
+    <value>Maps...</value>
+  </data>
+  <data name="ToolStripSeparator51.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 6</value>
+  </data>
   <data name="mnuClimaticCheckDataInventory.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
@@ -1267,9 +1282,6 @@
   </data>
   <data name="ToolStripSeparator46.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 6</value>
-  </data>
-  <data name="mnuClimaticPrepareEvapotranspiration.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="mnuClimaticPrepareEvapotranspiration.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 22</value>
@@ -1903,6 +1915,12 @@
   </data>
   <data name="mnuClimateMethods.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="MapsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="MapsToolStripMenuItem.Text" xml:space="preserve">
+    <value>maps</value>
   </data>
   <data name="mnuClimatic.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 20</value>
@@ -3553,7 +3571,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrColumnMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 176</value>
+    <value>74, 175</value>
   </data>
   <data name="ucrColumnMeta.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3592,7 +3610,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrDataFrameMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 176</value>
+    <value>177, 175</value>
   </data>
   <data name="ucrDataFrameMeta.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3622,7 +3640,7 @@
     <value>1</value>
   </data>
   <data name="splMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 176</value>
+    <value>256, 175</value>
   </data>
   <data name="splMetadata.SplitterDistance" type="System.Int32, mscorlib">
     <value>74</value>
@@ -3673,7 +3691,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrLogWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 176</value>
+    <value>179, 175</value>
   </data>
   <data name="ucrLogWindow.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3712,7 +3730,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrScriptWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 176</value>
+    <value>389, 175</value>
   </data>
   <data name="ucrScriptWindow.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3742,10 +3760,10 @@
     <value>1</value>
   </data>
   <data name="splLogScript.Size" type="System.Drawing.Size, System.Drawing">
-    <value>573, 176</value>
+    <value>573, 175</value>
   </data>
   <data name="splLogScript.SplitterDistance" type="System.Int32, mscorlib">
-    <value>180</value>
+    <value>179</value>
   </data>
   <data name="splLogScript.SplitterWidth" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3778,7 +3796,7 @@
     <value>1</value>
   </data>
   <data name="splExtraWindows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>834, 176</value>
+    <value>834, 175</value>
   </data>
   <data name="splExtraWindows.SplitterDistance" type="System.Int32, mscorlib">
     <value>256</value>
@@ -3829,7 +3847,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrDataViewer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>384, 218</value>
+    <value>384, 219</value>
   </data>
   <data name="ucrDataViewer.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3868,7 +3886,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>445, 218</value>
+    <value>445, 219</value>
   </data>
   <data name="ucrOutput.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3898,7 +3916,7 @@
     <value>1</value>
   </data>
   <data name="splDataOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>834, 218</value>
+    <value>834, 219</value>
   </data>
   <data name="splDataOutput.SplitterDistance" type="System.Int32, mscorlib">
     <value>384</value>
@@ -3937,7 +3955,7 @@
     <value>834, 399</value>
   </data>
   <data name="splOverall.SplitterDistance" type="System.Int32, mscorlib">
-    <value>176</value>
+    <value>175</value>
   </data>
   <data name="splOverall.SplitterWidth" type="System.Int32, mscorlib">
     <value>5</value>
@@ -6588,6 +6606,12 @@
   <data name="&gt;&gt;mnuClimaticFileExportToCPT.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ShapsToolStripMenuItem.Name" xml:space="preserve">
+    <value>ShapsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;ShapsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ToolStripSeparator18.Name" xml:space="preserve">
     <value>ToolStripSeparator18</value>
   </data>
@@ -6689,6 +6713,18 @@
   </data>
   <data name="&gt;&gt;mnuClimaticCheckData.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCheckDataMaps.Name" xml:space="preserve">
+    <value>mnuClimaticCheckDataMaps</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCheckDataMaps.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator51.Name" xml:space="preserve">
+    <value>ToolStripSeparator51</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator51.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticCheckDataInventory.Name" xml:space="preserve">
     <value>mnuClimaticCheckDataInventory</value>
@@ -7258,6 +7294,12 @@
     <value>mnuClimateMethodsCreateClimateObject</value>
   </data>
   <data name="&gt;&gt;mnuClimateMethodsCreateClimateObject.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MapsToolStripMenuItem.Name" xml:space="preserve">
+    <value>MapsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;MapsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuFileSave.Name" xml:space="preserve">
