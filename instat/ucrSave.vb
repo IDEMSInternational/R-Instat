@@ -432,7 +432,7 @@ Public Class ucrSave
         bUserSelectedColumn = sdgSaveColumnPosition.bUserSelected 'set if user selection happened
     End Sub
 
-    Public Sub setLinkedReceiver(ucrLinkedReceiver As ucrReceiverSingle)
+    Public Sub setLinkedReceiver(ucrLinkedReceiver As ucrReceiver)
         Me.ucrLinkedReceiver = ucrLinkedReceiver
         AddHandler ucrLinkedReceiver.ControlValueChanged, AddressOf LinkedReceiverControlValueChanged
     End Sub
