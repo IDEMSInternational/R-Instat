@@ -22,34 +22,34 @@ Partial Class sdgSaveColumnPosition
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.grpDuplicatedColumn = New System.Windows.Forms.GroupBox()
+        Me.grpColumnPosition = New System.Windows.Forms.GroupBox()
         Me.rdoEnd = New System.Windows.Forms.RadioButton()
         Me.rdoAfter = New System.Windows.Forms.RadioButton()
         Me.rdoBefore = New System.Windows.Forms.RadioButton()
         Me.rdoStart = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlColumnPosition = New instat.UcrPanel()
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorColumns = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrPnlColumnPosition = New instat.UcrPanel()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.grpDuplicatedColumn.SuspendLayout()
+        Me.grpColumnPosition.SuspendLayout()
         Me.SuspendLayout()
         '
-        'grpDuplicatedColumn
+        'grpColumnPosition
         '
-        Me.grpDuplicatedColumn.Controls.Add(Me.rdoEnd)
-        Me.grpDuplicatedColumn.Controls.Add(Me.rdoAfter)
-        Me.grpDuplicatedColumn.Controls.Add(Me.rdoBefore)
-        Me.grpDuplicatedColumn.Controls.Add(Me.rdoStart)
-        Me.grpDuplicatedColumn.Controls.Add(Me.ucrPnlColumnPosition)
-        Me.grpDuplicatedColumn.Location = New System.Drawing.Point(13, 14)
-        Me.grpDuplicatedColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.grpDuplicatedColumn.Name = "grpDuplicatedColumn"
-        Me.grpDuplicatedColumn.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.grpDuplicatedColumn.Size = New System.Drawing.Size(444, 90)
-        Me.grpDuplicatedColumn.TabIndex = 12
-        Me.grpDuplicatedColumn.TabStop = False
-        Me.grpDuplicatedColumn.Text = "New column will be at:"
+        Me.grpColumnPosition.Controls.Add(Me.rdoEnd)
+        Me.grpColumnPosition.Controls.Add(Me.rdoAfter)
+        Me.grpColumnPosition.Controls.Add(Me.rdoBefore)
+        Me.grpColumnPosition.Controls.Add(Me.rdoStart)
+        Me.grpColumnPosition.Controls.Add(Me.ucrPnlColumnPosition)
+        Me.grpColumnPosition.Location = New System.Drawing.Point(13, 14)
+        Me.grpColumnPosition.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.grpColumnPosition.Name = "grpColumnPosition"
+        Me.grpColumnPosition.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.grpColumnPosition.Size = New System.Drawing.Size(444, 90)
+        Me.grpColumnPosition.TabIndex = 12
+        Me.grpColumnPosition.TabStop = False
+        Me.grpColumnPosition.Text = "New column will be at:"
         '
         'rdoEnd
         '
@@ -101,6 +101,14 @@ Partial Class sdgSaveColumnPosition
         Me.rdoStart.Text = "Start"
         Me.rdoStart.UseVisualStyleBackColor = True
         '
+        'ucrPnlColumnPosition
+        '
+        Me.ucrPnlColumnPosition.Location = New System.Drawing.Point(9, 29)
+        Me.ucrPnlColumnPosition.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
+        Me.ucrPnlColumnPosition.Name = "ucrPnlColumnPosition"
+        Me.ucrPnlColumnPosition.Size = New System.Drawing.Size(396, 48)
+        Me.ucrPnlColumnPosition.TabIndex = 0
+        '
         'lblColumns
         '
         Me.lblColumns.AutoSize = True
@@ -135,14 +143,6 @@ Partial Class sdgSaveColumnPosition
         Me.ucrSelectorColumns.Size = New System.Drawing.Size(315, 277)
         Me.ucrSelectorColumns.TabIndex = 13
         '
-        'ucrPnlColumnPosition
-        '
-        Me.ucrPnlColumnPosition.Location = New System.Drawing.Point(9, 29)
-        Me.ucrPnlColumnPosition.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
-        Me.ucrPnlColumnPosition.Name = "ucrPnlColumnPosition"
-        Me.ucrPnlColumnPosition.Size = New System.Drawing.Size(396, 48)
-        Me.ucrPnlColumnPosition.TabIndex = 0
-        '
         'ucrBaseSubdialog
         '
         Me.ucrBaseSubdialog.Location = New System.Drawing.Point(160, 407)
@@ -159,7 +159,7 @@ Partial Class sdgSaveColumnPosition
         Me.Controls.Add(Me.ucrReceiverColumn)
         Me.Controls.Add(Me.ucrSelectorColumns)
         Me.Controls.Add(Me.lblColumns)
-        Me.Controls.Add(Me.grpDuplicatedColumn)
+        Me.Controls.Add(Me.grpColumnPosition)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -168,14 +168,14 @@ Partial Class sdgSaveColumnPosition
         Me.Name = "sdgSaveColumnPosition"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Save Column Position"
-        Me.grpDuplicatedColumn.ResumeLayout(False)
-        Me.grpDuplicatedColumn.PerformLayout()
+        Me.grpColumnPosition.ResumeLayout(False)
+        Me.grpColumnPosition.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrBaseSubdialog As ucrButtonsSubdialogue
-    Friend WithEvents grpDuplicatedColumn As GroupBox
+    Friend WithEvents grpColumnPosition As GroupBox
     Friend WithEvents rdoEnd As RadioButton
     Friend WithEvents rdoAfter As RadioButton
     Friend WithEvents rdoBefore As RadioButton
