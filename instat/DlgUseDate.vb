@@ -58,6 +58,10 @@ Public Class dlgUseDate
         ucrChkShiftYearNum.SetText("")
         ucrChkShiftYearNum.SetRDefault("FALSE")
 
+        ucrChkShiftYearName.SetParameter(New RParameter("year_name", 2))
+        ucrChkShiftYearName.SetText("")
+        ucrChkShiftYearName.SetRDefault("FALSE")
+
         ucrChkLeapYearNum.SetParameter(New RParameter("leap_year", 3))
         ucrChkLeapYearNum.SetText("")
         ucrChkLeapYearNum.SetRDefault("FALSE")
@@ -165,6 +169,7 @@ Public Class dlgUseDate
         'TODO This should probably be the default for this control, hence this is temporary
         ucrInputComboBoxStartingMonth.bUpdateRCodeFromControl = False
 
+        ttYearNumeric.SetToolTip(ucrChkShiftYearNum.chkCheck, "When the year is shifted, this gives the starting year, for example 1984-1985 is given as 1984")
     End Sub
 
     Private Sub SetDefaults()
@@ -184,7 +189,7 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkWeekName.Checked OrElse ucrChkWeekdayNum.Checked OrElse ucrChkWeekNum.Checked OrElse ucrChkShiftPentadNum.Checked OrElse ucrChkShiftPentadAbbr.Checked OrElse ucrChkShiftDekadAbbr.Checked OrElse ucrChkWeekAbbr.Checked OrElse ucrChkShiftMonthNum.Checked OrElse ucrChkLeapYearNum.Checked OrElse ucrChkWeekdayName.Checked OrElse ucrChkShiftMonthName.Checked OrElse ucrChkShiftDekadNum.Checked OrElse ucrChkDayInMonthNum.Checked OrElse ucrChkDayInYearNum.Checked OrElse ucrChkWeekdayAbbr.Checked OrElse ucrChkShiftMonthAbbr.Checked OrElse ucrChkShiftYearNum.Checked OrElse ucrChkShiftDayInYearNum366.Checked OrElse ucrChkShiftQuarterNum.Checked AndAlso Not ucrInputComboBoxStartingMonth.IsEmpty)) Then
+        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkWeekName.Checked OrElse ucrChkWeekdayNum.Checked OrElse ucrChkWeekNum.Checked OrElse ucrChkShiftPentadNum.Checked OrElse ucrChkShiftPentadAbbr.Checked OrElse ucrChkShiftDekadAbbr.Checked OrElse ucrChkWeekAbbr.Checked OrElse ucrChkShiftMonthNum.Checked OrElse ucrChkLeapYearNum.Checked OrElse ucrChkWeekdayName.Checked OrElse ucrChkShiftMonthName.Checked OrElse ucrChkShiftDekadNum.Checked OrElse ucrChkDayInMonthNum.Checked OrElse ucrChkDayInYearNum.Checked OrElse ucrChkWeekdayAbbr.Checked OrElse ucrChkShiftMonthAbbr.Checked OrElse ucrChkShiftYearNum.Checked OrElse ucrChkShiftYearName.Checked OrElse ucrChkShiftDayInYearNum366.Checked OrElse ucrChkShiftQuarterNum.Checked AndAlso Not ucrInputComboBoxStartingMonth.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -208,8 +213,19 @@ Public Class dlgUseDate
         strDefaultColumn = ""
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkWeekName.ControlContentsChanged, ucrChkWeekdayNum.ControlContentsChanged, ucrChkWeekNum.ControlContentsChanged, ucrChkShiftPentadNum.ControlContentsChanged, ucrChkShiftPentadAbbr.ControlContentsChanged, ucrChkShiftDekadAbbr.ControlContentsChanged, ucrChkWeekAbbr.ControlContentsChanged, ucrChkShiftMonthNum.ControlContentsChanged, ucrChkLeapYearNum.ControlContentsChanged, ucrChkWeekdayName.ControlContentsChanged, ucrChkShiftMonthName.ControlContentsChanged, ucrChkShiftDekadNum.ControlContentsChanged, ucrChkDayInMonthNum.ControlContentsChanged, ucrChkDayInYearNum.ControlContentsChanged, ucrChkWeekdayAbbr.ControlContentsChanged, ucrChkShiftMonthAbbr.ControlContentsChanged, ucrChkShiftDayInYearNum366.ControlContentsChanged, ucrChkShiftYearNum.ControlContentsChanged, ucrChkShiftDayInYearNum366.ControlContentsChanged, ucrChkShiftQuarterNum.ControlContentsChanged, ucrInputComboBoxStartingMonth.ControlContentsChanged
+    Private Sub Shifted()
+        If ucrInputComboBoxStartingMonth.GetText() = "January" Then
+            lblShifted.Visible = False
+        Else
+            lblShifted.Visible = True
+        End If
+    End Sub
+
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkWeekName.ControlContentsChanged, ucrChkWeekdayNum.ControlContentsChanged, ucrChkWeekNum.ControlContentsChanged, ucrChkShiftPentadNum.ControlContentsChanged, ucrChkShiftPentadAbbr.ControlContentsChanged, ucrChkShiftDekadAbbr.ControlContentsChanged, ucrChkWeekAbbr.ControlContentsChanged, ucrChkShiftMonthNum.ControlContentsChanged, ucrChkLeapYearNum.ControlContentsChanged, ucrChkWeekdayName.ControlContentsChanged, ucrChkShiftMonthName.ControlContentsChanged, ucrChkShiftDekadNum.ControlContentsChanged, ucrChkDayInMonthNum.ControlContentsChanged, ucrChkDayInYearNum.ControlContentsChanged, ucrChkWeekdayAbbr.ControlContentsChanged, ucrChkShiftMonthAbbr.ControlContentsChanged, ucrChkShiftDayInYearNum366.ControlContentsChanged, ucrChkShiftYearNum.ControlContentsChanged, ucrChkShiftYearName.ControlContentsChanged, ucrChkShiftDayInYearNum366.ControlContentsChanged, ucrChkShiftQuarterNum.ControlContentsChanged, ucrInputComboBoxStartingMonth.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrInputComboBoxStartingMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboBoxStartingMonth.ControlValueChanged
+        Shifted()
+    End Sub
 End Class
