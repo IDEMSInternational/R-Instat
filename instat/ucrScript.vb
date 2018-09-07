@@ -58,15 +58,27 @@ Public Class ucrScript
             RunText(txtScript.SelectedText)
         Else
             MessageBox.Show("You need to select some text before running" & Me.Text, "No text selected" & Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
+    End Sub
 
+    Private Sub mnuRunCurrentLine_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLine.Click
+        If txtScript.TextLength > 0 Then
+            Dim lineNum As Integer = txtScript.GetLineFromCharIndex(txtScript.GetFirstCharIndexOfCurrentLine())
+            If lineNum < txtScript.Lines.Length Then
+                RunText(txtScript.Lines(lineNum))
+                If lineNum < txtScript.Lines.Length - 1 Then
+                    txtScript.SelectionStart = txtScript.GetFirstCharIndexFromLine(lineNum + 1)
+                End If
+            End If
         End If
     End Sub
 
     Private Sub RunText(strText As String)
         If strText <> "" Then
-            If MsgBox("Running code from the script window is not yet a stable operation." & vbNewLine & vbNewLine & "Do you want to proceed?", MessageBoxButtons.YesNo, "Warning") = MsgBoxResult.Yes Then
-                frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
-            End If
+            frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
+            'If MsgBox("Running code from the script window is not yet a stable operation." & vbNewLine & vbNewLine & "Do you want to proceed?", MessageBoxButtons.YesNo, "Warning") = MsgBoxResult.Yes Then
+            'frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
+            'End If
         End If
     End Sub
 
@@ -89,7 +101,6 @@ Public Class ucrScript
             Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
         Catch
             MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
-            End
         End Try
     End Sub
 
@@ -162,6 +173,9 @@ Public Class ucrScript
     End Sub
 
     Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
+        mnuHelp.Enabled = False 'TODO. Remove this after help is developed
+        mnuRunCurrentLine.ShortcutKeys = Keys.Enter Or Keys.Control
+        txtScript.WordWrap = False
         EnableCopyCut()
         EnableMenusWhenScriptNotEmpty()
     End Sub
@@ -173,17 +187,22 @@ Public Class ucrScript
     Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
         EnableMenusWhenScriptNotEmpty()
     End Sub
+
     Private Sub EnableMenusWhenScriptNotEmpty()
         If txtScript.Text <> "" Then
             cmdRun.Enabled = True
             mnuOpenScriptasFile.Enabled = True
             mnuClearContents.Enabled = True
             mnuSaveScript.Enabled = True
+            mnuRunCurrentLine.Enabled = True
+            mnuRunAllText.Enabled = True
         Else
             cmdRun.Enabled = False
             mnuOpenScriptasFile.Enabled = False
             mnuClearContents.Enabled = False
             mnuSaveScript.Enabled = False
+            mnuRunCurrentLine.Enabled = False
+            mnuRunAllText.Enabled = False
         End If
     End Sub
 
@@ -199,5 +218,9 @@ Public Class ucrScript
 
     Private Sub mnuRunAllText_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click
         RunText(txtScript.Text)
+    End Sub
+
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
+        'TODO
     End Sub
 End Class
