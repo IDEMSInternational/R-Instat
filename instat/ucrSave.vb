@@ -30,7 +30,7 @@ Public Class ucrSave
     Private bInsertColumnBefore As Boolean = False
     Private strAssignToIfUnchecked As String = ""
     Private strGlobalDataName As String = ""
-    Private ucrLinkedReceiver As ucrReceiverSingle
+    Private ucrLinkedReceiver As ucrReceiver
     Private clsColPosFunction As New RFunction
     Private bUserSelectedColumn As Boolean = False
 
@@ -59,6 +59,8 @@ Public Class ucrSave
         SetSaveType(strSaveType)
         LabelOrCheckboxSettings()
         UpdateRCode()
+        'update the variables used for column position
+        UpdateColumnPositionVariables(True)
     End Sub
 
     Public Sub SetLabelText(strText As String)
@@ -436,20 +438,14 @@ Public Class ucrSave
     End Sub
 
     Private Sub LinkedReceiverControlValueChanged()
+        'if the user has not explictly set the column position then set it to after the specified column by default
         If Not bUserSelectedColumn Then
-            'if the user has not explictly set the column position then set it to after the specified column by default
             clsColPosFunction.AddParameter(strParameterName:="before", strParameterValue:="FALSE")
             If Not ucrLinkedReceiver.IsEmpty Then
                 clsColPosFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrLinkedReceiver.GetVariableNames())
             Else
                 clsColPosFunction.RemoveParameterByName("adjacent_column")
             End If
-        Else
-            'TODO
-
-            'If clsColPosFunction.GetParameter("adjacent_column") IsNot Nothing Then
-            '    clsColPosFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrLinkedReceiver.GetVariableNames(bWithQuotes:=False))
-            'End If
         End If
         UpdateColumnPositionVariables()
     End Sub

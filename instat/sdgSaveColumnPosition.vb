@@ -32,7 +32,7 @@ Public Class sdgSaveColumnPosition
     Private clsDefaultFunction As RFunction
     Public bControlsInitialised As Boolean = True
     Public bUserSelected As Boolean = False
-    Private strDefaultCol As String = ""
+    Public bRcodeFlag As Boolean = False
 
     Private Sub sdgSaveColumnPosition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -78,46 +78,55 @@ Public Class sdgSaveColumnPosition
 
         ucrSelectorColumns.SetDataframe(strDataFrameName, False)
 
-        ucrReceiverColumn.SetRCode(clsDefaultFunction, True)
+        bRcodeFlag = True
         ucrPnlColumnPosition.SetRCode(clsDefaultFunction, True)
-
-        strDefaultCol = ucrReceiverColumn.GetVariableNames()
+        ucrReceiverColumn.SetRCode(clsDefaultFunction, True)
+        bRcodeFlag = False
+        SetColumnControlsAndParameterState()
 
     End Sub
 
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnPosition.ControlValueChanged, ucrReceiverColumn.ControlValueChanged
-        PositionOfDuplicatedColumn()
-        'If ucrReceiverColumn.GetVariableNames() <> strDefaultCol Then
-        '    bUserSelected = True
-        'Else
-        '    bUserSelected = False
-        'End If
-        bUserSelected = False 'TODO
+        If Not bRcodeFlag Then
+            SetColumnControlsAndParameterState()
+            bUserSelected = True 'in future this should be moved to UserValueChanged event
+        End If
     End Sub
 
-    'TODO. Can this be done implictly by the panel control ?
-    Private Sub PositionOfDuplicatedColumn()
+    Private Sub SetColumnControlsAndParameterState()
         If rdoStart.Checked Then
             clsDefaultFunction.RemoveParameterByName("adjacent_column")
+            ucrSelectorColumns.Enabled = False
+            ucrReceiverColumn.Enabled = False
+            lblColumns.Enabled = False
+            grpColumnPosition.Text = "New column will be at the: "
         ElseIf rdoEnd.Checked Then
             clsDefaultFunction.RemoveParameterByName("adjacent_column")
+            ucrSelectorColumns.Enabled = False
+            ucrReceiverColumn.Enabled = False
+            lblColumns.Enabled = False
+            grpColumnPosition.Text = "New column will be at the: "
         ElseIf rdoBefore.Checked Then
             If Not ucrReceiverColumn.IsEmpty Then
                 clsDefaultFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrReceiverColumn.GetVariableNames())
             Else
                 clsDefaultFunction.RemoveParameterByName("adjacent_column")
             End If
+            ucrSelectorColumns.Enabled = True
+            ucrReceiverColumn.Enabled = True
+            lblColumns.Enabled = True
+            grpColumnPosition.Text = "New column will be: "
         ElseIf rdoAfter.Checked Then
             If Not ucrReceiverColumn.IsEmpty Then
                 clsDefaultFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrReceiverColumn.GetVariableNames())
             Else
                 clsDefaultFunction.RemoveParameterByName("adjacent_column")
             End If
+            ucrSelectorColumns.Enabled = True
+            ucrReceiverColumn.Enabled = True
+            lblColumns.Enabled = True
+            grpColumnPosition.Text = "New column will be: "
         End If
-    End Sub
-
-    Private Sub TestOk()
-        'TODO
     End Sub
 
 End Class
