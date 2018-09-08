@@ -1877,7 +1877,6 @@ instat_object$set("public","tidy_climatic_data", function(x, format, stack_cols,
     
     if(length(by_cols) > 0) {
       group_lengths <- x %>% dplyr::group_by(!!! rlang::syms(by_cols)) %>% dplyr::summarise(n = n())
-      print(group_lengths)
       if(any(group_lengths$n != 366)) stop("data must have exactly 366 rows per station per element when format = 'years'")
     }
     else if(nrow(x) != 366) stop("data must have exactly 366 rows for a single station and element when format = 'years'")
