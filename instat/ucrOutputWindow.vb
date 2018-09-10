@@ -118,6 +118,4 @@ Public Class ucrOutputWindow
         frmMain.clsInstatOptions.SetCommandInOutpt(Not frmMain.clsInstatOptions.bCommandsinOutput)
     End Sub
 
-
-
 End Class
