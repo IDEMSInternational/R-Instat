@@ -26,7 +26,6 @@ Partial Class dlgConversions
         Me.rdoDayLength = New System.Windows.Forms.RadioButton()
         Me.rdoUnits = New System.Windows.Forms.RadioButton()
         Me.lblElement = New System.Windows.Forms.Label()
-        Me.lblElementName = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblDecimal = New System.Windows.Forms.Label()
@@ -35,9 +34,13 @@ Partial Class dlgConversions
         Me.rdoColumn = New System.Windows.Forms.RadioButton()
         Me.rdoSingleValue = New System.Windows.Forms.RadioButton()
         Me.grpLatitude = New System.Windows.Forms.GroupBox()
+        Me.rdoRain = New System.Windows.Forms.RadioButton()
+        Me.rdoWindSpeed = New System.Windows.Forms.RadioButton()
+        Me.rdoTemperature = New System.Windows.Forms.RadioButton()
+        Me.grpElements = New System.Windows.Forms.GroupBox()
         Me.ucrInputLatitude = New instat.ucrInputTextBox()
-        Me.ucrPnlLatitude = New instat.UcrPanel()
         Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
+        Me.ucrPnlLatitude = New instat.UcrPanel()
         Me.ucrInputFromTemperature = New instat.ucrInputComboBox()
         Me.ucrInputToWindSpeed = New instat.ucrInputComboBox()
         Me.ucrInputToTemperature = New instat.ucrInputComboBox()
@@ -48,12 +51,13 @@ Partial Class dlgConversions
         Me.ucrSaveConversions = New instat.ucrSave()
         Me.ucrInputToPrecipitation = New instat.ucrInputComboBox()
         Me.ucrInputFromPrecipitation = New instat.ucrInputComboBox()
-        Me.ucrInputElement = New instat.ucrInputComboBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrPnlConversions = New instat.UcrPanel()
         Me.ucrSelectorConversions = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlElements = New instat.UcrPanel()
         Me.grpLatitude.SuspendLayout()
+        Me.grpElements.SuspendLayout()
         Me.SuspendLayout()
         '
         'rdoDayLength
@@ -81,11 +85,6 @@ Partial Class dlgConversions
         '
         resources.ApplyResources(Me.lblElement, "lblElement")
         Me.lblElement.Name = "lblElement"
-        '
-        'lblElementName
-        '
-        resources.ApplyResources(Me.lblElementName, "lblElementName")
-        Me.lblElementName.Name = "lblElementName"
         '
         'lblFrom
         '
@@ -128,14 +127,45 @@ Partial Class dlgConversions
         '
         'grpLatitude
         '
-        Me.grpLatitude.Controls.Add(Me.rdoColumn)
         Me.grpLatitude.Controls.Add(Me.ucrInputLatitude)
+        Me.grpLatitude.Controls.Add(Me.ucrReceiverLatitude)
+        Me.grpLatitude.Controls.Add(Me.rdoColumn)
         Me.grpLatitude.Controls.Add(Me.rdoSingleValue)
         Me.grpLatitude.Controls.Add(Me.ucrPnlLatitude)
-        Me.grpLatitude.Controls.Add(Me.ucrReceiverLatitude)
         resources.ApplyResources(Me.grpLatitude, "grpLatitude")
         Me.grpLatitude.Name = "grpLatitude"
         Me.grpLatitude.TabStop = False
+        '
+        'rdoRain
+        '
+        resources.ApplyResources(Me.rdoRain, "rdoRain")
+        Me.rdoRain.Name = "rdoRain"
+        Me.rdoRain.TabStop = True
+        Me.rdoRain.UseVisualStyleBackColor = True
+        '
+        'rdoWindSpeed
+        '
+        resources.ApplyResources(Me.rdoWindSpeed, "rdoWindSpeed")
+        Me.rdoWindSpeed.Name = "rdoWindSpeed"
+        Me.rdoWindSpeed.TabStop = True
+        Me.rdoWindSpeed.UseVisualStyleBackColor = True
+        '
+        'rdoTemperature
+        '
+        resources.ApplyResources(Me.rdoTemperature, "rdoTemperature")
+        Me.rdoTemperature.Name = "rdoTemperature"
+        Me.rdoTemperature.TabStop = True
+        Me.rdoTemperature.UseVisualStyleBackColor = True
+        '
+        'grpElements
+        '
+        Me.grpElements.Controls.Add(Me.rdoWindSpeed)
+        Me.grpElements.Controls.Add(Me.rdoRain)
+        Me.grpElements.Controls.Add(Me.rdoTemperature)
+        Me.grpElements.Controls.Add(Me.ucrPnlElements)
+        resources.ApplyResources(Me.grpElements, "grpElements")
+        Me.grpElements.Name = "grpElements"
+        Me.grpElements.TabStop = False
         '
         'ucrInputLatitude
         '
@@ -145,11 +175,6 @@ Partial Class dlgConversions
         resources.ApplyResources(Me.ucrInputLatitude, "ucrInputLatitude")
         Me.ucrInputLatitude.Name = "ucrInputLatitude"
         '
-        'ucrPnlLatitude
-        '
-        resources.ApplyResources(Me.ucrPnlLatitude, "ucrPnlLatitude")
-        Me.ucrPnlLatitude.Name = "ucrPnlLatitude"
-        '
         'ucrReceiverLatitude
         '
         Me.ucrReceiverLatitude.frmParent = Nothing
@@ -158,6 +183,11 @@ Partial Class dlgConversions
         Me.ucrReceiverLatitude.Selector = Nothing
         Me.ucrReceiverLatitude.strNcFilePath = ""
         Me.ucrReceiverLatitude.ucrSelector = Nothing
+        '
+        'ucrPnlLatitude
+        '
+        resources.ApplyResources(Me.ucrPnlLatitude, "ucrPnlLatitude")
+        Me.ucrPnlLatitude.Name = "ucrPnlLatitude"
         '
         'ucrInputFromTemperature
         '
@@ -234,13 +264,6 @@ Partial Class dlgConversions
         resources.ApplyResources(Me.ucrInputFromPrecipitation, "ucrInputFromPrecipitation")
         Me.ucrInputFromPrecipitation.Name = "ucrInputFromPrecipitation"
         '
-        'ucrInputElement
-        '
-        Me.ucrInputElement.AddQuotesIfUnrecognised = True
-        Me.ucrInputElement.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputElement, "ucrInputElement")
-        Me.ucrInputElement.Name = "ucrInputElement"
-        '
         'ucrReceiverElement
         '
         Me.ucrReceiverElement.frmParent = Me
@@ -268,6 +291,11 @@ Partial Class dlgConversions
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrPnlElements
+        '
+        resources.ApplyResources(Me.ucrPnlElements, "ucrPnlElements")
+        Me.ucrPnlElements.Name = "ucrPnlElements"
+        '
         'dlgConversions
         '
         resources.ApplyResources(Me, "$this")
@@ -286,10 +314,8 @@ Partial Class dlgConversions
         Me.Controls.Add(Me.ucrSaveConversions)
         Me.Controls.Add(Me.lblTo)
         Me.Controls.Add(Me.lblFrom)
-        Me.Controls.Add(Me.lblElementName)
         Me.Controls.Add(Me.ucrInputToPrecipitation)
         Me.Controls.Add(Me.ucrInputFromPrecipitation)
-        Me.Controls.Add(Me.ucrInputElement)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.rdoDayLength)
@@ -297,12 +323,15 @@ Partial Class dlgConversions
         Me.Controls.Add(Me.ucrPnlConversions)
         Me.Controls.Add(Me.ucrSelectorConversions)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.grpElements)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgConversions"
         Me.grpLatitude.ResumeLayout(False)
         Me.grpLatitude.PerformLayout()
+        Me.grpElements.ResumeLayout(False)
+        Me.grpElements.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -317,10 +346,8 @@ Partial Class dlgConversions
     Friend WithEvents lblElement As Label
     Friend WithEvents lblTo As Label
     Friend WithEvents lblFrom As Label
-    Friend WithEvents lblElementName As Label
     Friend WithEvents ucrInputToPrecipitation As ucrInputComboBox
     Friend WithEvents ucrInputFromPrecipitation As ucrInputComboBox
-    Friend WithEvents ucrInputElement As ucrInputComboBox
     Friend WithEvents lblDecimal As Label
     Friend WithEvents ucrNudDecimal As ucrNud
     Friend WithEvents ucrSaveConversions As ucrSave
@@ -338,4 +365,9 @@ Partial Class dlgConversions
     Friend WithEvents ucrInputToTemperature As ucrInputComboBox
     Friend WithEvents ucrInputFromWindSpeed As ucrInputComboBox
     Friend WithEvents grpLatitude As GroupBox
+    Friend WithEvents grpElements As GroupBox
+    Friend WithEvents rdoWindSpeed As RadioButton
+    Friend WithEvents rdoRain As RadioButton
+    Friend WithEvents rdoTemperature As RadioButton
+    Friend WithEvents ucrPnlElements As UcrPanel
 End Class
