@@ -68,7 +68,11 @@ Public Class ucrOutputWindow
             deleteRTB.Enabled = True
         End If
 
-        SetMenuHideCommandsText()
+        If frmMain.clsInstatOptions.bCommandsinOutput Then
+            mnuHideCommands.Text = "Hide (future) commands"
+        Else
+            mnuHideCommands.Text = "Show commands"
+        End If
 
     End Sub
 
@@ -112,16 +116,8 @@ Public Class ucrOutputWindow
 
     Private Sub mnuHideCommands_Click(sender As Object, e As EventArgs) Handles mnuHideCommands.Click
         frmMain.clsInstatOptions.SetCommandInOutpt(Not frmMain.clsInstatOptions.bCommandsinOutput)
-        'frmMain.clsInstatOptions.SetCommandInOutpt(mnuHideCommands.Text = "Show commands")
-        'SetMenuHideCommandsText()
     End Sub
 
-    Private Sub SetMenuHideCommandsText()
-        If frmMain.clsInstatOptions.bCommandsinOutput Then
-            mnuHideCommands.Text = "Hide (future) commands"
-        Else
-            mnuHideCommands.Text = "Show commands"
-        End If
-    End Sub
+
 
 End Class
