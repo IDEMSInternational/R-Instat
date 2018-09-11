@@ -104,7 +104,7 @@ Public Class ucrButtons
             strComments = ""
         End If
         If Not bRun AndAlso strComments <> "" Then
-            frmMain.AddToScriptWindow("# " & strComments & Environment.NewLine)
+            frmMain.AddToScriptWindow(getFormattedComment(strComments) & Environment.NewLine)
         End If
 
         'Get this list before doing ToScript then no need for global variable name
@@ -115,7 +115,7 @@ Public Class ucrButtons
         lstBeforeCodes = clsRsyntax.GetBeforeCodes()
         For i As Integer = 0 To clsRsyntax.lstBeforeCodes.Count - 1
             If bFirstCode Then
-                strComment = strComments
+                strComment = getFormattedComment(strComments, bAppendFirstLineWithHash:=False)
                 bFirstCode = False
             Else
                 strComment = ""
@@ -130,7 +130,7 @@ Public Class ucrButtons
         'Run base code from RSyntax
         If bRun Then
             If bFirstCode Then
-                strComment = strComments
+                strComment = getFormattedComment(strComments, bAppendFirstLineWithHash:=False)
                 bFirstCode = False
             Else
                 strComment = ""
@@ -150,7 +150,7 @@ Public Class ucrButtons
         For i As Integer = 0 To lstAfterCodes.Count - 1
             If bRun Then
                 If bFirstCode Then
-                    strComment = strComments
+                    strComment =  getFormattedComment(strComments, bAppendFirstLineWithHash:=False)
                     bFirstCode = False
                 Else
                     strComment = ""
@@ -195,6 +195,10 @@ Public Class ucrButtons
     End Sub
 
     Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        'TODO. Remove this line and Do it on the designer
+        txtComment.Multiline = True
+
         frmMain.clsRecentItems.addToMenu(Me.Parent)
         translateEach(Controls, Me)
         If bFirstLoad Then
@@ -275,4 +279,25 @@ Public Class ucrButtons
             cmdLanguage.FlatStyle = FlatStyle.Popup
         End If
     End Sub
+
+    'construct and format the comment
+    Private Function getFormattedComment(strComment As String, Optional bAppendFirstLineWithHash As Boolean = True) As String
+        Dim strReconstructedComment As String = ""
+        Dim strCommentParts As String()
+        If strComment.Length > 0 Then
+            strCommentParts = strComment.Split(ControlChars.CrLf.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+            For Each part As String In strCommentParts
+                If strReconstructedComment = "" Then
+                    If bAppendFirstLineWithHash Then
+                        strReconstructedComment = "# " & part
+                    Else
+                        strReconstructedComment = part
+                    End If
+                Else
+                    strReconstructedComment = strReconstructedComment & Environment.NewLine & "# " & part
+                End If
+            Next
+        End If
+        Return strReconstructedComment
+    End Function
 End Class
