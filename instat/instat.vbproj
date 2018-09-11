@@ -377,6 +377,12 @@
     <Compile Include="dlgExportToCMSAF.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgComment.Designer.vb">
+      <DependentUpon>sdgComment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgComment.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgMapOption.Designer.vb">
       <DependentUpon>sdgMapOption.vb</DependentUpon>
     </Compile>
@@ -2678,6 +2684,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMakeDate.sw-KE.resx">
       <DependentUpon>dlgMakeDate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgComment.resx">
+      <DependentUpon>sdgComment.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMapOption.resx">
       <DependentUpon>sdgMapOption.vb</DependentUpon>
