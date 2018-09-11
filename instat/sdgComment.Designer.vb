@@ -22,17 +22,9 @@ Partial Class sdgComment
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBaseSdg = New instat.ucrButtonsSubdialogue()
         Me.txtComment = New System.Windows.Forms.TextBox()
+        Me.ucrBaseSdg = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
-        '
-        'ucrBaseSdg
-        '
-        Me.ucrBaseSdg.Location = New System.Drawing.Point(132, 118)
-        Me.ucrBaseSdg.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrBaseSdg.Name = "ucrBaseSdg"
-        Me.ucrBaseSdg.Size = New System.Drawing.Size(213, 46)
-        Me.ucrBaseSdg.TabIndex = 0
         '
         'txtComment
         '
@@ -43,13 +35,21 @@ Partial Class sdgComment
         Me.txtComment.Size = New System.Drawing.Size(472, 107)
         Me.txtComment.TabIndex = 2
         '
+        'ucrBaseSdg
+        '
+        Me.ucrBaseSdg.Location = New System.Drawing.Point(135, 117)
+        Me.ucrBaseSdg.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrBaseSdg.Name = "ucrBaseSdg"
+        Me.ucrBaseSdg.Size = New System.Drawing.Size(213, 46)
+        Me.ucrBaseSdg.TabIndex = 4
+        '
         'sdgComment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(477, 169)
-        Me.Controls.Add(Me.txtComment)
         Me.Controls.Add(Me.ucrBaseSdg)
+        Me.Controls.Add(Me.txtComment)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgComment"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
@@ -58,7 +58,6 @@ Partial Class sdgComment
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ucrBaseSdg As ucrButtonsSubdialogue
     Friend WithEvents txtComment As TextBox
+    Friend WithEvents ucrBaseSdg As ucrButtonsSubdialogue
 End Class
