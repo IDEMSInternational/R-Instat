@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgPICSARainfall
     Public bFirstLoad As Boolean = True
     Private clsRggplotFunction As New RFunction
@@ -38,6 +39,8 @@ Public Class dlgPICSARainfall
     Private clsXAxisLabels, clsYAxisLabels As New RFunction
     Private clsMeanLine, clsMedianLine, clsTretile As New RFunction
     Private clsPnlBackgroundFunction, clsPnlGridLinesFunction As RFunction
+    Private clsFactorLevels As New RFunction
+    Private FactorLevel As RDotNet.SymbolicExpression
 
     Private Sub dlgPCSARainfall_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -107,6 +110,7 @@ Public Class dlgPICSARainfall
         clsRgeomlineplotFunction = New RFunction
         clsRaesFunction = New RFunction
         clsBaseOperator = New ROperator
+        clsFactorLevels = New RFunction
 
         Dim clsPanelBackgroundElementRect As New RFunction
         Dim clsXElementLabels As New RFunction
@@ -178,6 +182,8 @@ Public Class dlgPICSARainfall
             clsXElementLabels.AddParameter("angle", "90")
             clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsXElementLabels)
         End If
+
+        clsFactorLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
 
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrPICSARainfallSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -272,5 +278,17 @@ Public Class dlgPICSARainfall
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorOptionalReceiver.ControlValueChanged
+        'We have to check this incase we have more than one station because we want the colours to be different colours for the stations
+        clsFactorLevels.AddParameter("col_name", ucrFactorOptionalReceiver.GetVariableNames)
+        FactorLevel = frmMain.clsRLink.RunInternalScriptGetValue(clsFactorLevels.ToScript(), bSilent:=True).AsInteger
+        'If Not ucrFactorOptionalReceiver.IsEmpty Then
+        '    If FactorLevel > 1 Then
+        '        clsRgeomlineplotFunction.RemoveParameterByName("colour")
+        '    End If
 
+        ' Else
+        clsRgeomlineplotFunction.AddParameter("colour", Chr(34) & "blue" & Chr(34))
+        ' End If
+    End Sub
 End Class
