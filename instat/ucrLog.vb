@@ -15,23 +15,21 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.IO
-Imports RDotNet
-Imports instat
 Imports System.ComponentModel
 
 Public Class ucrLog
     Private strComment As String = "Code run from Log Window"
-
     Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
+
     Public Sub CopyText()
         txtLog.Copy()
     End Sub
+
     Public Sub SelectAllText()
         txtLog.SelectAll()
     End Sub
 
     Private Sub mnuOpenLogFile_Click(sender As Object, e As EventArgs) Handles mnuOpenLogFile.Click
-        Dim clsProcessStart As New RFunction
         Dim strLogFilename As String = ""
         Dim i As Integer
 
@@ -40,7 +38,6 @@ Public Class ucrLog
                 Directory.CreateDirectory(strRInstatLogFilesFolderPath)
             End If
             strLogFilename = "RInstatLog.R"
-
             While File.Exists(Path.Combine(strRInstatLogFilesFolderPath, strLogFilename))
                 i = i + 1
                 strLogFilename = "RInstatLog" & i & ".R"
@@ -48,16 +45,15 @@ Public Class ucrLog
             File.WriteAllText(Path.Combine(strRInstatLogFilesFolderPath, strLogFilename), txtLog.Text)
             Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strLogFilename))
         Catch
-            MsgBox("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
-            End
+            MessageBox.Show("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Save Log File", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
     Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
         If txtLog.SelectionLength = 0 Then
-            txtLog.SelectAll()
+            SelectAllText()
         End If
-        txtLog.Copy()
+        CopyText()
     End Sub
 
     Private Sub txtLog_TextChanged(sender As Object, e As EventArgs) Handles txtLog.TextChanged
@@ -67,15 +63,52 @@ Public Class ucrLog
     End Sub
 
     Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
-        If txtLog.SelectedText <> "" AndAlso txtLog.SelectionLength > 0 Then
-            Dim strSelectedScript As String = txtLog.SelectedText
-            If MsgBox("Running selected code from the log window is not yet a stable operation e.g. if a selection is incomplete or if the data has changed." & vbNewLine & vbNewLine & "Do you want to proceed?", MessageBoxButtons.YesNo, "Warning") = MsgBoxResult.Yes Then
-                frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strSelectedScript, strNewComment:=strComment)
-            End If
+        If txtLog.SelectionLength > 0 Then
+            RunText(txtLog.SelectedText)
         End If
     End Sub
 
     Private Sub mnuContextLogFile_Opening(sender As Object, e As CancelEventArgs) Handles mnuContextLogFile.Opening
-        mnuRunSelectedText.Enabled = (txtLog.SelectedText <> "" AndAlso txtLog.SelectionLength > 0)
+        mnuRunSelectedText.Enabled = (txtLog.SelectionLength > 0)
+        mnuRunCurrentLine.Enabled = (txtLog.TextLength > 0)
+    End Sub
+
+    Private Sub mnuRunCurrentLine_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLine.Click
+        'TODO. Probably set bRun here to true so that the curret doesn't move to the last appended text
+        If txtLog.TextLength > 0 Then
+            Dim lineNum As Integer = txtLog.GetLineFromCharIndex(txtLog.GetFirstCharIndexOfCurrentLine())
+            If lineNum < txtLog.Lines.Length Then
+                RunText(txtLog.Lines(lineNum))
+                If lineNum < txtLog.Lines.Length - 1 Then
+                    txtLog.SelectionStart = txtLog.GetFirstCharIndexFromLine(lineNum + 1)
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrLog_Load(sender As Object, e As EventArgs) Handles Me.Load
+        mnuRunCurrentLine.ShortcutKeys = Keys.Enter Or Keys.Control
+        txtLog.WordWrap = False 'For the run current line to work well
+    End Sub
+
+    Private Sub RunText(strText As String)
+        If strText <> "" Then
+            frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
+        End If
+    End Sub
+
+    Private Sub mnuSaveLogFile_Click(sender As Object, e As EventArgs) Handles mnuSaveLogFile.Click
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save Log File"
+            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+            dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                Try
+                    File.WriteAllText(dlgSave.FileName, txtLog.Text)
+                Catch
+                    MessageBox.Show("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Save Log File", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End If
+        End Using
     End Sub
 End Class
