@@ -21,6 +21,7 @@ Public Class ucrLog
     Private strComment As String = "Code run from Log Window"
     Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
     Private bRunCurrentLine As Boolean = False
+
     Public Sub CopyText()
         txtLog.Copy()
     End Sub
@@ -32,7 +33,6 @@ Public Class ucrLog
     Private Sub mnuOpenLogFile_Click(sender As Object, e As EventArgs) Handles mnuOpenLogFile.Click
         Dim strLogFilename As String = ""
         Dim i As Integer
-
         Try
             If Not Directory.Exists(strRInstatLogFilesFolderPath) Then
                 Directory.CreateDirectory(strRInstatLogFilesFolderPath)
@@ -64,17 +64,6 @@ Public Class ucrLog
         End If
     End Sub
 
-    Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
-        If txtLog.SelectionLength > 0 Then
-            RunText(txtLog.SelectedText)
-        End If
-    End Sub
-
-    Private Sub mnuContextLogFile_Opening(sender As Object, e As CancelEventArgs) Handles mnuContextLogFile.Opening
-        mnuRunSelectedText.Enabled = (txtLog.SelectionLength > 0)
-        mnuRunCurrentLine.Enabled = (txtLog.TextLength > 0)
-    End Sub
-
     Private Sub mnuRunCurrentLine_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLine.Click
         If txtLog.TextLength > 0 Then
             Dim lineNum As Integer = txtLog.GetLineFromCharIndex(txtLog.GetFirstCharIndexOfCurrentLine())
@@ -90,7 +79,26 @@ Public Class ucrLog
         End If
     End Sub
 
+    Private Sub mnuContextLogFile_Opening(sender As Object, e As CancelEventArgs) Handles mnuContextLogFile.Opening
+        mnuRunCurrentLine.Enabled = (txtLog.TextLength > 0)
+        mnuRunAll.Enabled = (txtLog.TextLength > 0)
+        mnuRunSelectedText.Enabled = (txtLog.SelectionLength > 0)
+    End Sub
+
+    Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
+        If txtLog.SelectionLength > 0 Then
+            RunText(txtLog.SelectedText)
+        End If
+    End Sub
+
+    Private Sub mnuRunAll_Click(sender As Object, e As EventArgs) Handles mnuRunAll.Click
+        If txtLog.TextLength > 0 Then
+            RunText(txtLog.Text)
+        End If
+    End Sub
+
     Private Sub ucrLog_Load(sender As Object, e As EventArgs) Handles Me.Load
+        mnuHelp.Enabled = False 'TODO. Remove this line once the help document is ready
         mnuRunCurrentLine.ShortcutKeys = Keys.Enter Or Keys.Control
         txtLog.WordWrap = False 'For the run current line to work well
     End Sub
@@ -115,4 +123,9 @@ Public Class ucrLog
             End If
         End Using
     End Sub
+
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
+        'TODO
+    End Sub
+
 End Class
