@@ -48,6 +48,11 @@ Partial Class ucrLog
         Me.mnuSaveLogFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuRunAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextLogFile.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -70,9 +75,9 @@ Partial Class ucrLog
         'mnuContextLogFile
         '
         Me.mnuContextLogFile.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOpenLogFile, Me.mnuCopy, Me.mnuRunCurrentLine, Me.mnuRunSelectedText, Me.mnuSaveLogFile})
+        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCopy, Me.ToolStripSeparator3, Me.mnuRunCurrentLine, Me.mnuRunSelectedText, Me.mnuRunAll, Me.ToolStripSeparator2, Me.mnuSaveLogFile, Me.mnuOpenLogFile, Me.ToolStripSeparator1, Me.mnuHelp})
         Me.mnuContextLogFile.Name = "mnuContextLogFile"
-        Me.mnuContextLogFile.Size = New System.Drawing.Size(316, 154)
+        Me.mnuContextLogFile.Size = New System.Drawing.Size(316, 265)
         '
         'mnuOpenLogFile
         '
@@ -137,6 +142,35 @@ Partial Class ucrLog
         Me.tlpTableContainer.Size = New System.Drawing.Size(796, 638)
         Me.tlpTableContainer.TabIndex = 9
         '
+        'mnuHelp
+        '
+        Me.mnuHelp.Name = "mnuHelp"
+        Me.mnuHelp.Size = New System.Drawing.Size(315, 30)
+        Me.mnuHelp.Text = "Help"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(312, 6)
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(312, 6)
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(312, 6)
+        '
+        'mnuRunAll
+        '
+        Me.mnuRunAll.Name = "mnuRunAll"
+        Me.mnuRunAll.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
+            Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
+        Me.mnuRunAll.Size = New System.Drawing.Size(315, 30)
+        Me.mnuRunAll.Text = "Run All"
+        '
         'ucrLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -161,4 +195,9 @@ Partial Class ucrLog
     Friend WithEvents mnuRunSelectedText As ToolStripMenuItem
     Friend WithEvents mnuRunCurrentLine As ToolStripMenuItem
     Friend WithEvents mnuSaveLogFile As ToolStripMenuItem
+    Friend WithEvents mnuHelp As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents mnuRunAll As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
 End Class
