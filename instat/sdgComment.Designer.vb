@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgComment
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,40 +20,31 @@ Partial Class sdgComment
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgComment))
         Me.txtComment = New System.Windows.Forms.TextBox()
         Me.ucrBaseSdg = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
         'txtComment
         '
-        Me.txtComment.Location = New System.Drawing.Point(2, 3)
-        Me.txtComment.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txtComment.Multiline = True
+        resources.ApplyResources(Me.txtComment, "txtComment")
         Me.txtComment.Name = "txtComment"
-        Me.txtComment.Size = New System.Drawing.Size(472, 107)
-        Me.txtComment.TabIndex = 2
         '
         'ucrBaseSdg
         '
-        Me.ucrBaseSdg.Location = New System.Drawing.Point(135, 117)
-        Me.ucrBaseSdg.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        resources.ApplyResources(Me.ucrBaseSdg, "ucrBaseSdg")
         Me.ucrBaseSdg.Name = "ucrBaseSdg"
-        Me.ucrBaseSdg.Size = New System.Drawing.Size(213, 46)
-        Me.ucrBaseSdg.TabIndex = 4
         '
         'sdgComment
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(477, 169)
         Me.Controls.Add(Me.ucrBaseSdg)
         Me.Controls.Add(Me.txtComment)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgComment"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Comment"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
