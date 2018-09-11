@@ -20,7 +20,7 @@ Imports System.ComponentModel
 Public Class ucrLog
     Private strComment As String = "Code run from Log Window"
     Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
-
+    Private bRunCurrentLine As Boolean = False
     Public Sub CopyText()
         txtLog.Copy()
     End Sub
@@ -57,9 +57,11 @@ Public Class ucrLog
     End Sub
 
     Private Sub txtLog_TextChanged(sender As Object, e As EventArgs) Handles txtLog.TextChanged
-        txtLog.SelectionStart = txtLog.Text.Length
-        txtLog.ScrollToCaret()
-        txtLog.Refresh()
+        If Not bRunCurrentLine Then
+            txtLog.SelectionStart = txtLog.Text.Length
+            txtLog.ScrollToCaret()
+            txtLog.Refresh()
+        End If
     End Sub
 
     Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
@@ -74,14 +76,16 @@ Public Class ucrLog
     End Sub
 
     Private Sub mnuRunCurrentLine_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLine.Click
-        'TODO. Probably set bRun here to true so that the curret doesn't move to the last appended text
         If txtLog.TextLength > 0 Then
             Dim lineNum As Integer = txtLog.GetLineFromCharIndex(txtLog.GetFirstCharIndexOfCurrentLine())
             If lineNum < txtLog.Lines.Length Then
+                bRunCurrentLine = True
                 RunText(txtLog.Lines(lineNum))
                 If lineNum < txtLog.Lines.Length - 1 Then
                     txtLog.SelectionStart = txtLog.GetFirstCharIndexFromLine(lineNum + 1)
+                    txtLog.ScrollToCaret()
                 End If
+                bRunCurrentLine = False
             End If
         End If
     End Sub
