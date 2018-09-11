@@ -92,7 +92,7 @@ instat_comment$set("public", "data_clone", function(...) {
 }
 )
 
-instat_object$set("public", "add_comment", function(data_name, new_comment) {
+DataBook$set("public", "add_comment", function(data_name, new_comment) {
   self$get_data_objects(data_name)$add_comment(new_comment)
 }
 )
@@ -108,7 +108,7 @@ data_object$set("public", "add_comment", function(new_comment) {
 }
 )
 
-instat_object$set("public", "delete_comment", function(data_name, comment_id) {
+DataBook$set("public", "delete_comment", function(data_name, comment_id) {
   self$get_data_objects(data_name)$delete_comment(comment_id)
 }
 )
@@ -119,7 +119,7 @@ data_object$set("public", "delete_comment", function(comment_id) {
 }
 )
 
-instat_object$set("public", "get_comment_ids", function(data_name) {
+DataBook$set("public", "get_comment_ids", function(data_name) {
   return(self$get_data_objects(data_name)$get_comment_ids())
 }
 )
@@ -129,7 +129,7 @@ data_object$set("public", "get_comment_ids", function() {
 }
 )
 
-instat_object$set("public", "get_comments_as_data_frame", function(data_name) {
+DataBook$set("public", "get_comments_as_data_frame", function(data_name) {
   return(self$get_data_objects(data_name)$get_comments_as_data_frame())
 }
 )

@@ -21,7 +21,7 @@ obyc_type_label = "O_by_C_Type"
 # Data frame metadata
 is_obyc_label = "Is_O_by_C"
 
-instat_object$set("public","define_as_options_by_context", function(data_name, obyc_types = NULL, key_columns = NULL) {
+DataBook$set("public","define_as_options_by_context", function(data_name, obyc_types = NULL, key_columns = NULL) {
   self$append_to_dataframe_metadata(data_name, is_obyc_label, TRUE)
   for(curr_data_name in self$get_data_names()) {
     if(!self$get_data_objects(data_name)$is_metadata(is_obyc_label)) {
