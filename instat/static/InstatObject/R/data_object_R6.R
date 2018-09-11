@@ -2319,7 +2319,7 @@ climatic_type_label = "Climatic_Type"
 # Data frame metadata
 is_climatic_label = "Is_Climatic"
 
-instat_object$set("public","define_as_climatic", function(data_name, types, key_col_names, key_name) {
+DataBook$set("public","define_as_climatic", function(data_name, types, key_col_names, key_name) {
   self$add_key(data_name = data_name, col_names = key_col_names, key_name = key_name)
   self$append_to_dataframe_metadata(data_name, is_climatic_label, TRUE)
 
@@ -2679,7 +2679,7 @@ corruption_contract_level_label = "Contract_Level"
 corruption_country_level_label = "Country_Level"
 
 
-instat_object$set("public","define_corruption_outputs", function(data_name, output_columns = c()) {
+DataBook$set("public","define_corruption_outputs", function(data_name, output_columns = c()) {
   self$get_data_objects(data_name)$define_corruption_outputs(output_columns)
 }
 )
@@ -2696,7 +2696,7 @@ data_object$set("public","define_corruption_outputs", function(output_columns = 
 }
 )
 
-instat_object$set("public","define_red_flags", function(data_name, red_flags = c()) {
+DataBook$set("public","define_red_flags", function(data_name, red_flags = c()) {
   self$get_data_objects(data_name)$define_red_flags(red_flags)
 }
 )
@@ -2712,7 +2712,7 @@ data_object$set("public","define_red_flags", function(red_flags = c()) {
 }
 )
 
-instat_object$set("public","define_as_procurement", function(data_name, primary_types = c(), calculated_types = c(), country_data_name, country_types, auto_generate = TRUE) {
+DataBook$set("public","define_as_procurement", function(data_name, primary_types = c(), calculated_types = c(), country_data_name, country_types, auto_generate = TRUE) {
   self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_contract_level_label)
   self$get_data_objects(data_name)$set_procurement_types(primary_types, calculated_types, auto_generate)
   if(!missing(country_data_name)) {
@@ -2721,7 +2721,7 @@ instat_object$set("public","define_as_procurement", function(data_name, primary_
 }
 )
 
-instat_object$set("public","define_as_procurement_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
+DataBook$set("public","define_as_procurement_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
   self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_country_level_label)
   self$get_data_objects(data_name)$define_as_procurement_country_level_data(types, auto_generate)
   contract_level_country_name <- self$get_corruption_column_name(contract_level_data_name, corruption_country_label)
@@ -2743,7 +2743,7 @@ data_object$set("public","is_corruption_type_present", function(type) {
 }
 )
 
-instat_object$set("public","get_CRI_component_column_names", function(data_name) {
+DataBook$set("public","get_CRI_component_column_names", function(data_name) {
   self$get_data_objects(data_name)$get_CRI_component_column_names()
 }
 )
@@ -2755,7 +2755,7 @@ data_object$set("public","get_CRI_component_column_names", function() {
 }
 )
 
-instat_object$set("public","get_red_flag_column_names", function(data_name) {
+DataBook$set("public","get_red_flag_column_names", function(data_name) {
   self$get_data_objects(data_name)$get_red_flag_column_names()
 }
 )
@@ -2767,7 +2767,7 @@ data_object$set("public","get_red_flag_column_names", function() {
 }
 )
 
-instat_object$set("public","get_CRI_column_names", function(data_name) {
+DataBook$set("public","get_CRI_column_names", function(data_name) {
   self$get_data_objects(data_name)$get_CRI_column_names()
 }
 )
@@ -2780,7 +2780,7 @@ data_object$set("public","get_CRI_column_names", function() {
 }
 )
 
-instat_object$set("public","get_corruption_column_name", function(data_name, type) {
+DataBook$set("public","get_corruption_column_name", function(data_name, type) {
   self$get_data_objects(data_name)$get_corruption_column_name(type)
 }
 )
@@ -3280,7 +3280,7 @@ standardise_country_names <- function(country) {
   return(country_names)
 }
 
-instat_object$set("public","standardise_country_names", function(data_name, country_columns = c()) {
+DataBook$set("public","standardise_country_names", function(data_name, country_columns = c()) {
   self$get_data_objects(data_name)$standardise_country_names(country_columns)
 }
 )
