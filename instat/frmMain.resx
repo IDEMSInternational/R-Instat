@@ -1910,12 +1910,6 @@
   <data name="mnuClimateMethods.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="MapsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 30</value>
-  </data>
-  <data name="MapsToolStripMenuItem.Text" xml:space="preserve">
-    <value>maps</value>
-  </data>
   <data name="mnuClimatic.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 29</value>
   </data>
@@ -5733,6 +5727,9 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
@@ -7309,12 +7306,6 @@
     <value>mnuClimateMethodsCreateClimateObject</value>
   </data>
   <data name="&gt;&gt;mnuClimateMethodsCreateClimateObject.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MapsToolStripMenuItem.Name" xml:space="preserve">
-    <value>MapsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;MapsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuFileSave.Name" xml:space="preserve">
