@@ -195,13 +195,12 @@ Public Class ucrButtons
     End Sub
 
     Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        'TODO. Remove this line and Do it on the designer
-        txtComment.Multiline = True
-
         frmMain.clsRecentItems.addToMenu(Me.Parent)
         translateEach(Controls, Me)
         If bFirstLoad Then
+            'TODO. Temp this could be done on the designer
+            txtComment.Multiline = True
+            AddButtonInCommentTextbox()
             SetDefaults()
             bFirstLoad = False
             If frmMain.clsInstatOptions IsNot Nothing Then
@@ -217,6 +216,7 @@ Public Class ucrButtons
                 cmdLanguage.Visible = False
             End If
         End If
+
     End Sub
 
     Private Sub SetDefaults()
@@ -300,4 +300,58 @@ Public Class ucrButtons
         End If
         Return strReconstructedComment
     End Function
+
+    Private Sub AddButtonInCommentTextbox()
+        Dim btnMoreComment As New Button
+        'add it first
+        txtComment.Controls.Clear()
+        txtComment.Controls.Add(btnMoreComment)
+
+        'then set the  button properties
+        btnMoreComment.Text = ":::" 'temp. This will be shown as centered ... An image is preferred
+        'btn.Image = Image.FromFile("C:\patowhiz\3dots.png")
+        btnMoreComment.Size = New Size(25, txtComment.ClientSize.Height + 2)
+        btnMoreComment.TextAlign = ContentAlignment.TopCenter
+        btnMoreComment.FlatStyle = FlatStyle.Standard
+        btnMoreComment.FlatAppearance.BorderSize = 0
+        btnMoreComment.Cursor = Cursors.Default
+        'btn.Margin = New Padding(btn.Margin.Left, 0, 0, 0)
+        'btn.Location = New Point(txtComment.ClientSize.Width - btn.Width - 1, -1)
+        btnMoreComment.Dock = DockStyle.Right
+        btnMoreComment.BackColor = cmdOk.BackColor
+        btnMoreComment.UseVisualStyleBackColor = True
+
+        'set the event handler
+        AddHandler btnMoreComment.Click, Sub()
+                                             AddHandler sdgComment.evtLostFocus, Sub()
+                                                                                     txtComment.Text = sdgComment.getComment
+                                                                                     txtComment.Focus()
+                                                                                 End Sub
+
+                                             If sdgComment.Visible Then
+                                                 sdgComment.Close()
+                                             Else
+                                                 sdgComment.setComment(txtComment.Text)
+                                                 Dim ctlpos As Point = txtComment.PointToScreen(New Point(0, 0)) 'Point.Empty is not function so use Point(0, 0)
+                                                 sdgComment.StartPosition = FormStartPosition.Manual 'set it to manual
+                                                 'if user wanted below the control. Left here for future reference
+                                                 'sdgComment.Location = New Point(ctlpos.X - 2, ctlpos.Y + txtComment.Height - 2) 'then locate its position
+                                                 sdgComment.Location = New Point(ctlpos.X - 2, ctlpos.Y - sdgComment.Height - 2) 'then locate its position
+                                                 sdgComment.Show()
+                                             End If
+
+                                         End Sub
+
+
+        AddHandler txtComment.LostFocus, Sub()
+                                             'if the internal button is not the one with focus always try to close the subdialog
+                                             If Not btnMoreComment.Focused Then
+                                                 sdgComment.Close()
+                                             End If
+                                         End Sub
+
+    End Sub
+
+
+
 End Class
