@@ -1663,7 +1663,7 @@
     <value>3</value>
   </data>
   <data name="ucrInputN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 19</value>
+    <value>279, 18</value>
   </data>
   <data name="ucrInputN.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 20</value>
@@ -1690,7 +1690,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblInputN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 19</value>
+    <value>261, 21</value>
   </data>
   <data name="lblInputN.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 13</value>
