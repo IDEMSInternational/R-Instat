@@ -2082,7 +2082,7 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
 )
 
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
-data_object$set("public","split_date", function(col_name = "", year = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE,  weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE,  dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1) {
+data_object$set("public","split_date", function(col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE,  weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE,  dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!lubridate::is.Date(col_data)) stop("This column must be a date or time!")
   
@@ -2116,7 +2116,7 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
     col_name <- next_default_item(prefix = "leap_year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = leap_year_vector)
   }
-  if(year) {
+  if(year_val) {
     if(s_shift) {
       col_name <- next_default_item(prefix = "s_year", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = temp_s_year_num)
@@ -2126,6 +2126,23 @@ data_object$set("public","split_date", function(col_name = "", year = FALSE, lea
       year_vector <- lubridate::year(col_data)
       col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = year_vector)
+    }
+    if(is_climatic) self$set_climatic_types(types = c(year = col_name))
+    self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
+  }
+  if(year_name) {
+    if(s_shift) {
+      col_name <- next_default_item(prefix = "s_year", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = temp_s_year)
+      self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted year starting on day", s_start_day))
+      new_labels <- sort(unique(temp_s_year_num))
+      names(new_labels) <- sort(unique(temp_s_year))
+      self$append_to_variables_metadata(col_names = col_name, property = labels_label, new_val = new_labels)
+    }
+    else {
+      year_vector <- lubridate::year(col_data)
+      col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = factor(year_vector))
     }
     if(is_climatic) self$set_climatic_types(types = c(year = col_name))
     self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
