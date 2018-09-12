@@ -187,7 +187,6 @@ Partial Class frmMain
         Me.mnuClimaticFileCliData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ShapsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticTidyandExamine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineTidyDailyData = New System.Windows.Forms.ToolStripMenuItem()
@@ -1382,7 +1381,7 @@ Partial Class frmMain
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportGriddedData, Me.OpenNetCDFToolStripMenuItem, Me.mnuClimaticFileImportShapeFile, Me.mnuClimateFileClimSoft, Me.mnuClimaticFileCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT, Me.ShapsToolStripMenuItem})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportGriddedData, Me.OpenNetCDFToolStripMenuItem, Me.mnuClimaticFileImportShapeFile, Me.mnuClimateFileClimSoft, Me.mnuClimaticFileCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         resources.ApplyResources(Me.mnuClimaticFile, "mnuClimaticFile")
         '
@@ -1426,11 +1425,6 @@ Partial Class frmMain
         Me.mnuClimaticFileExportToCPT.Name = "mnuClimaticFileExportToCPT"
         resources.ApplyResources(Me.mnuClimaticFileExportToCPT, "mnuClimaticFileExportToCPT")
         Me.mnuClimaticFileExportToCPT.Tag = "Export_to_CPT"
-        '
-        'ShapsToolStripMenuItem
-        '
-        Me.ShapsToolStripMenuItem.Name = "ShapsToolStripMenuItem"
-        resources.ApplyResources(Me.ShapsToolStripMenuItem, "ShapsToolStripMenuItem")
         '
         'ToolStripSeparator18
         '
@@ -4159,7 +4153,6 @@ Partial Class frmMain
     Friend WithEvents mnuTbLastGraph As ToolStripButton
     Friend WithEvents mnuClimaticCMSAFExporttoCMSAFRToolbox As ToolStripMenuItem
     Friend WithEvents MapsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ShapsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckDataMaps As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator51 As ToolStripSeparator
 End Class
