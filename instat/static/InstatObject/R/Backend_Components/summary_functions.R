@@ -650,18 +650,18 @@ summary_cov <- function(x, y, na.rm = FALSE, na_type = "", method = c("pearson",
 }
 }
 # first function
-summary_first <- function(x, order_by = NULL, default = default_missing(x), ...) {
-    return(dplyr::first(x = x, order_by = order_by, default = default))
+summary_first <- function(x, order_by = NULL, ...) {
+    return(dplyr::first(x = x, order_by = order_by))
 }
 
 # last function
-summary_last <- function(x, order_by = NULL, default = default_missing(x), ...) {
-     return(dplyr::last(x = x, order_by = order_by, default = default))
+summary_last <- function(x, order_by = NULL, ...) {
+     return(dplyr::last(x = x, order_by = order_by))
 }
 
 # nth function
-summary_nth <- function(x, nth_value, order_by = NULL, default = default_missing(x), ...) {
-    return(dplyr::nth(x = x, n = nth_value, order_by = order_by, default = default_missing(x)))
+summary_nth <- function(x, nth_value, order_by = NULL, ...) {
+    return(dplyr::nth(x = x, n = nth_value, order_by = order_by))
 }
 
 # n_distinct function
