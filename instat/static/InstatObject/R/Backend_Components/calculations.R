@@ -74,7 +74,7 @@ DataBook$set("public", "save_calculation", function(end_data_frame, calc) {
 }
 )
 
-data_object$set("public", "save_calculation", function(calc) {
+DataSheet$set("public", "save_calculation", function(calc) {
   if(calc$name == "") calc$name <- next_default_item("calc", names(private$calculations))
   if(calc$name %in% names(private$calculations)) warning("There is already a calculation called ", calc$name, ". It will be replaced.")
   private$calculations[[calc$name]] <- calc

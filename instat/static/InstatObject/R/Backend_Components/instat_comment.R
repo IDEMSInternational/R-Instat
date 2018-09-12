@@ -1,5 +1,5 @@
 # A comment is metadata for a row or cell of a data frame
-# A data_object will contain a list of instat_comment objects as part of the metadata for the data frame
+# A DataSheet will contain a list of instat_comment objects as part of the metadata for the data frame
 # id : numeric/character - A unique identifier for the comment. id must be unique within a data frame.
 #                     This could be a number or a character
 # key_values : named character vector - This identifies the row the comment is on. 
@@ -97,7 +97,7 @@ DataBook$set("public", "add_comment", function(data_name, new_comment) {
 }
 )
 
-data_object$set("public", "add_comment", function(new_comment) {
+DataSheet$set("public", "add_comment", function(new_comment) {
   if(!self$has_key()) stop("Define a key before adding comments. Comments can only be added to data frames when rows can be identified by a key.")
   if(!"instat_comment" %in% class(new_comment)) stop("new_comment must be of class 'instat_comment'")
   if(!self$is_key(names(new_comment$key_values))) stop("The columns specified as the names of key_values must be a key in the data frame")
@@ -113,7 +113,7 @@ DataBook$set("public", "delete_comment", function(data_name, comment_id) {
 }
 )
 
-data_object$set("public", "delete_comment", function(comment_id) {
+DataSheet$set("public", "delete_comment", function(comment_id) {
   if(!comment_id %in% self$get_comment_ids()) stop("No comment with id: ", comment_id, " was found.")
   private$comments[[comment_id]] <- NULL
 }
@@ -124,7 +124,7 @@ DataBook$set("public", "get_comment_ids", function(data_name) {
 }
 )
 
-data_object$set("public", "get_comment_ids", function() {
+DataSheet$set("public", "get_comment_ids", function() {
   return(names(private$comments))
 }
 )
@@ -134,7 +134,7 @@ DataBook$set("public", "get_comments_as_data_frame", function(data_name) {
 }
 )
 
-data_object$set("public", "get_comments_as_data_frame", function() {
+DataSheet$set("public", "get_comments_as_data_frame", function() {
   id <- sapply(private$comments, function(x) x$id)
   # Needs expanding for each key column
   key_columns <- unique(unlist(sapply(private$comments, function(x) names(x$key_values))))
