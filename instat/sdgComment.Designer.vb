@@ -24,7 +24,6 @@ Partial Class sdgComment
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgComment))
         Me.txtComment = New System.Windows.Forms.TextBox()
-        Me.ucrBaseSdg = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
         'txtComment
@@ -32,23 +31,17 @@ Partial Class sdgComment
         resources.ApplyResources(Me.txtComment, "txtComment")
         Me.txtComment.Name = "txtComment"
         '
-        'ucrBaseSdg
-        '
-        resources.ApplyResources(Me.ucrBaseSdg, "ucrBaseSdg")
-        Me.ucrBaseSdg.Name = "ucrBaseSdg"
-        '
         'sdgComment
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrBaseSdg)
         Me.Controls.Add(Me.txtComment)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "sdgComment"
+        Me.ShowInTaskbar = False
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents txtComment As TextBox
-    Friend WithEvents ucrBaseSdg As ucrButtonsSubdialogue
 End Class
