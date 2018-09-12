@@ -2193,8 +2193,9 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
   }
   if(day_in_year) {
-    day_in_year_vector <- (lubridate::yday(col_data) + (367 - s_start_month)) %% 366
-	  day_in_year_vector <- ifelse(day_in_year_vector == 0, 365, day_in_year_vector)
+    day_in_year_vector <- lubridate::yday(col_data) - s_start_day + 1 + (!lubridate::leap_year(col_data) & s_start_day > 59)
+    day_in_year_vector <- dplyr::if_else(lubridate::leap_year(col_data), day_in_year_vector %% 366, day_in_year_vector %% 365)
+	  day_in_year_vector <- dplyr::if_else(day_in_year_vector == 0, dplyr::if_else(lubridate::leap_year(col_data), 366, 365), day_in_year_vector)
     col_name <- next_default_item(prefix = "doy_365", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_year_vector)
     if(is_climatic) self$set_climatic_types(types = c(doy = col_name))
