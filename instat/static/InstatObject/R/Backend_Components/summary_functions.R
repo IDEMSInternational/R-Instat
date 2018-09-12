@@ -1,5 +1,5 @@
 #Methods temporarily here to avoid conflicts
-data_object$set("public", "merge_data", function(new_data, by = NULL, type = "left", match = "all") {
+DataSheet$set("public", "merge_data", function(new_data, by = NULL, type = "left", match = "all") {
   #TODO how to use match argument with dplyr join functions
   old_metadata <- attributes(private$data)
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
@@ -300,7 +300,7 @@ DataBook$set("public", "summary", function(data_name, columns_to_summarise, summ
 }
 )
 
-data_object$set("public", "calculate_summary", function(calc, ...) {
+DataSheet$set("public", "calculate_summary", function(calc, ...) {
   columns_to_summarise = calc[["parameters"]][["columns_to_summarise"]]
   summaries = calc[["parameters"]][["summaries"]]
   factors = calc[["parameters"]][["factors"]]

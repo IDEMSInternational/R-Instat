@@ -20,24 +20,24 @@ DataBook <- R6::R6Class("DataBook",
                                                 imported_from=imported_from, messages=messages, convert=convert, create=create, data_tables_filters = data_tables_filters)
                              }
                              
-                             private$.data_objects_changed <- FALSE
+                             private$.data_sheets_changed <- FALSE
                            }
                          ),
                          private = list(
-                           .data_objects = list(),
+                           .data_sheets = list(),
                            .metadata = list(),
                            .objects = list(),
                            .links = list(),
-                           .data_objects_changed = FALSE,
+                           .data_sheets_changed = FALSE,
                            .database_connection = NULL,
                            .last_graph = NULL
                          ),
                          active = list(
                            data_objects_changed = function(new_value) {
-                             if(missing(new_value)) return(private$.data_objects_changed)
+                             if(missing(new_value)) return(private$.data_sheets_changed)
                              else {
                                if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
-                               private$.data_objects_changed <- new_value
+                               private$.data_sheets_changed <- new_value
                                #TODO is this behaviour we want?
                                invisible(sapply(self$get_data_objects(), function(x) x$data_changed <- new_value))
                              }
@@ -81,7 +81,7 @@ DataBook$set("public", "import_data", function(data_tables = list(), data_tables
     # data.frame given
     new_data_objects = list()
     for ( i in (1:length(data_tables)) ) {
-      new_data = data_object$new(data=data_tables[[i]], data_name = names(data_tables)[[i]],
+      new_data = DataSheet$new(data=data_tables[[i]], data_name = names(data_tables)[[i]],
                                  variables_metadata = data_tables_variables_metadata[[i]],
                                  metadata = data_tables_metadata[[i]], 
                                  imported_from = imported_from[[i]], 
@@ -111,7 +111,7 @@ DataBook$set("public", "set_data_objects", function(new_data_objects) {
   if(!is.list(new_data_objects) || (length(new_data_objects) > 0 && !all("data_object" %in% sapply(new_data_objects, class)))) {
     stop("new_data_objects must be a list of data_objects")
   }
-  else private$.data_objects <- new_data_objects
+  else private$.data_sheets <- new_data_objects
 }
 )
 
@@ -210,7 +210,7 @@ DataBook$set("public", "clone_data_object", function(curr_data_object, include_o
   if("get_keys" %in% curr_names) new_keys <- curr_data_object$get_keys()
   else new_keys <- list()
   
-  new_data_object <- data_object$new(data = new_data, data_name = new_data_name, filters = new_filters, objects = new_objects, calculations = new_calculations, keys = new_keys, comments = new_comments, keep_attributes = include_metadata)
+  new_data_object <- DataSheet$new(data = new_data, data_name = new_data_name, filters = new_filters, objects = new_objects, calculations = new_calculations, keys = new_keys, comments = new_comments, keep_attributes = include_metadata)
   if(include_logs && "get_changes" %in% curr_names) {
     new_changes <- curr_data_object$get_changes()
   }
@@ -257,27 +257,28 @@ DataBook$set("public", "set_objects", function(new_objects) {
 
 DataBook$set("public", "append_data_object", function(name, obj) {
   if(!is.character(name)) stop("name must be a character")
-  if(!"data_object" %in% class(obj)) {
+  # obj could be of old class type 'data_object'
+  if(!any(c("data_object", "DataSheet") %in% class(obj))) {
     stop("obj must be a data object")
   }
   obj$append_to_metadata(data_name_label, name)
-  private$.data_objects[[name]] <- obj
+  private$.data_sheets[[name]] <- obj
 }
 )
 
 DataBook$set("public", "get_data_objects", function(data_name, as_list = FALSE, ...) {
   if(missing(data_name)) {
-    return(private$.data_objects)
+    return(private$.data_sheets)
   }
   else{
     if(all(is.character(data_name))) type = "character"
     else if(all(is.numeric(data_name)) && all((data_name %% 1) == 0)) type = "integer"
     else stop("data_name must be of type character or integer")
     
-    if(type=="character" && !all(data_name %in% names(private$.data_objects))) stop(paste(data_name, "not found"))
-    if(type=="integer" && (!all(1 <= data_name) || !all(data_name <= length(private$.data_objects)))) stop(paste(data_name, "not found"))
-    if(length(data_name) > 1 || as_list) return(private$.data_objects[data_name])
-    else return(private$.data_objects[[data_name]])
+    if(type=="character" && !all(data_name %in% names(private$.data_sheets))) stop(paste(data_name, "not found"))
+    if(type=="integer" && (!all(1 <= data_name) || !all(data_name <= length(private$.data_sheets)))) stop(paste(data_name, "not found"))
+    if(length(data_name) > 1 || as_list) return(private$.data_sheets[data_name])
+    else return(private$.data_sheets[[data_name]])
   }
 }
 )
@@ -296,7 +297,7 @@ DataBook$set("public", "get_data_frame", function(data_name, convert_to_characte
   }
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
-    if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found."))
+    if(!data_name %in% names(private$.data_sheets)) stop(paste(data_name, "not found."))
     return(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name, stack_data = TRUE, ...))
   }
 }
@@ -305,7 +306,7 @@ DataBook$set("public", "get_data_frame", function(data_name, convert_to_characte
 DataBook$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE) { 
   if(missing(data_name)) {
     retlist <- list()
-    for (curr_obj in private$.data_objects) {
+    for (curr_obj in private$.data_sheets) {
       retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, direct_from_attributes = direct_from_attributes)
     }
     return(retlist)
@@ -332,7 +333,7 @@ DataBook$set("public", "get_data_frame_metadata", function(data_name, label, inc
 DataBook$set("public", "get_combined_metadata", function(convert_to_character = FALSE) { 
   retlist <- data.frame()
   i = 1
-  for (curr_obj in private$.data_objects) {
+  for (curr_obj in private$.data_sheets) {
     templist = curr_obj$get_metadata()
     for (j in (1:length(templist))) {
       if(length(templist[[j]]) > 1 || is.list(templist[[j]])) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
@@ -356,7 +357,7 @@ DataBook$set("public", "get_metadata", function(name, ...) {
 )
 
 DataBook$set("public", "get_data_names", function(as_list = FALSE, include, exclude, excluded_items, include_hidden = TRUE, ...) { 
-  ret <- names(private$.data_objects)
+  ret <- names(private$.data_sheets)
   if(!include_hidden) {
     ret <- ret[sapply(ret, function(x) !isTRUE(self$get_data_objects(x)$get_metadata(label = is_hidden_label)))]
   }
@@ -368,7 +369,7 @@ DataBook$set("public", "get_data_names", function(as_list = FALSE, include, excl
 DataBook$set("public", "get_data_changed", function(data_name) {
   if(missing(data_name)) {
     if(self$data_objects_changed) return (TRUE)
-    for(curr_obj in private$.data_objects) {
+    for(curr_obj in private$.data_sheets) {
       if(curr_obj$data_changed) return(TRUE)
     }
     return(FALSE)
@@ -381,8 +382,8 @@ DataBook$set("public", "get_data_changed", function(data_name) {
 
 DataBook$set("public", "get_variables_metadata_changed", function(data_name) { 
   if(missing(data_name)) {
-    if(private$.data_objects_changed) return(TRUE)
-    return(any(sapply(private$.data_objects, function(x) x$variables_metadata_changed)))
+    if(private$.data_sheets_changed) return(TRUE)
+    return(any(sapply(private$.data_sheets, function(x) x$variables_metadata_changed)))
   }
   else {
     return(self$get_data_objects(data_name)$variables_metadata_changed)
@@ -392,8 +393,8 @@ DataBook$set("public", "get_variables_metadata_changed", function(data_name) {
 
 DataBook$set("public", "get_metadata_changed", function(data_name) { 
   if(missing(data_name)) {
-    if(private$.data_objects_changed) return(TRUE)
-    for(curr_obj in private$.data_objects) {
+    if(private$.data_sheets_changed) return(TRUE)
+    for(curr_obj in private$.data_sheets) {
       if(curr_obj$metadata_changed) return(TRUE)
     }
     return(FALSE)
@@ -415,13 +416,13 @@ DataBook$set("public", "get_calculation_names", function(data_name) {
 )
 
 DataBook$set("public", "dataframe_count", function() {
-  return(length(private$.data_objects))
+  return(length(private$.data_sheets))
 } 
 )
 
 DataBook$set("public", "set_data_frames_changed", function(data_name = "", new_val) {
   if(data_name == "") {
-    for(curr_obj in private$.data_objects) {
+    for(curr_obj in private$.data_sheets) {
       curr_obj$data_changed <- new_val
     }
   }
@@ -431,7 +432,7 @@ DataBook$set("public", "set_data_frames_changed", function(data_name = "", new_v
 
 DataBook$set("public", "set_variables_metadata_changed", function(data_name = "", new_val) {
   if(data_name == "") {
-    for(curr_obj in private$.data_objects) {
+    for(curr_obj in private$.data_sheets) {
       curr_obj$variables_metadata_changed <- new_val
     }
   }
@@ -441,7 +442,7 @@ DataBook$set("public", "set_variables_metadata_changed", function(data_name = ""
 
 DataBook$set("public", "set_metadata_changed", function(data_name = "", new_val) {
   if(data_name == "") {
-    for(curr_obj in private$.data_objects) {
+    for(curr_obj in private$.data_sheets) {
       curr_obj$set_metadata_changed(new_val)
     }
   }
@@ -458,7 +459,7 @@ DataBook$set("public", "add_columns_to_data", function(data_name, col_name = "",
 DataBook$set("public", "get_columns_from_data", function(data_name, col_names, from_stacked_data = FALSE, force_as_data_frame = FALSE, use_current_filter = TRUE, remove_labels = FALSE, drop_unused_filter_levels = FALSE) {
   if(missing(data_name)) stop("data_name is required")
   if(!from_stacked_data) {
-    if(!data_name %in% names(private$.data_objects)) stop(data_name, "not found")
+    if(!data_name %in% names(private$.data_sheets)) stop(data_name, "not found")
     self$get_data_objects(data_name)$get_columns_from_data(col_names, force_as_data_frame, use_current_filter = use_current_filter, remove_labels = remove_labels, drop_unused_filter_levels = drop_unused_filter_levels)
   }
   else {
@@ -783,13 +784,13 @@ DataBook$set("public", "remove_rows_in_data", function(data_name, row_names) {
 DataBook$set("public", "get_next_default_column_name", function(data_name, prefix) {
   if(missing(data_name)) {
     out = list()
-    for(curr_obj in private$.data_objects) {
+    for(curr_obj in private$.data_sheets) {
       out[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_next_default_column_name(prefix)
     }
     return(out)
   }
   if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop("dataframe: ", data_name, " not found")
+  if(!data_name %in% names(private$.data_sheets)) stop("dataframe: ", data_name, " not found")
   return(self$get_data_objects(data_name)$get_next_default_column_name(prefix))
 } 
 )
@@ -822,14 +823,14 @@ DataBook$set("public", "get_data_frame_length", function(data_name, use_current_
 )
 
 DataBook$set("public", "get_next_default_dataframe_name", function(prefix, include_index = TRUE, start_index = 1) {
-  next_default_item(prefix = prefix, existing_names = names(private$.data_objects), include_index = include_index, start_index = start_index)
+  next_default_item(prefix = prefix, existing_names = names(private$.data_sheets), include_index = include_index, start_index = start_index)
 } 
 )
 
 DataBook$set("public", "delete_dataframes", function(data_names) {
   # TODO need a set or append
   for(name in data_names) {
-    private$.data_objects[[name]] <- NULL
+    private$.data_sheets[[name]] <- NULL
     data_objects_changed <- TRUE
     link_names <- c()
     for(i in seq_along(private$.links)) {
@@ -870,8 +871,8 @@ DataBook$set("public", "sort_dataframe", function(data_name, col_names = c(), de
 DataBook$set("public", "rename_dataframe", function(data_name, new_value = "", label = "") {
   data_obj <- self$get_data_objects(data_name)
   if(data_name != new_value) {
-    if(new_value %in% names(private$.data_objects)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
-    names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
+    if(new_value %in% names(private$.data_sheets)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
+    names(private$.data_sheets)[names(private$.data_sheets) == data_name] <- new_value
     data_obj$append_to_metadata(data_name_label, new_value)
     self$update_links_rename_data_frame(data_name, new_value)
   }
@@ -922,10 +923,10 @@ DataBook$set("public", "add_metadata_field", function(data_name, property, new_v
 )
 
 DataBook$set("public", "reorder_dataframes", function(data_frames_order) {
-  if(length(data_frames_order) != length(names(private$.data_objects))) stop("number data frames to order should be equal to number of dataframes in the object")
-  if(!setequal(data_frames_order,names(private$.data_objects))) stop("data_frames_order must be a permutation of the dataframe names.")
+  if(length(data_frames_order) != length(names(private$.data_sheets))) stop("number data frames to order should be equal to number of dataframes in the object")
+  if(!setequal(data_frames_order,names(private$.data_sheets))) stop("data_frames_order must be a permutation of the dataframe names.")
   
-  self$set_data_objects(private$.data_objects[data_frames_order])
+  self$set_data_objects(private$.data_sheets[data_frames_order])
   self$data_objects_changed <- TRUE
 } 
 )
@@ -971,7 +972,7 @@ DataBook$set("public","get_data_type", function(data_name, col_name) {
 )
 
 DataBook$set("public","copy_data_frame", function(data_name, new_name, label = "") {
-  if(new_name %in% names(private$.data_objects)) stop("Cannot copy data frame since ", new_name, " is an existing data frame.")
+  if(new_name %in% names(private$.data_sheets)) stop("Cannot copy data frame since ", new_name, " is an existing data frame.")
   curr_obj <- self$get_data_objects(data_name)$clone(deep = TRUE)
   
   if(missing(new_name)) new_name <- next_default_item(data_name, self$get_data_names())
@@ -1005,7 +1006,7 @@ DataBook$set("public","set_hidden_data_frames", function(data_names = c()) {
 )
 
 DataBook$set("public","get_hidden_data_frames", function() {
-  all_data_names <- names(private$.data_objects)
+  all_data_names <- names(private$.data_sheets)
   visible_data_names <- all_data_names[sapply(all_data_names, function(x) !isTRUE(self$get_data_objects(x)$get_metadata(label = is_hidden_label)))]
   hidden_data_names <- setdiff(all_data_names, visible_data_names)
   return(hidden_data_names)
@@ -1073,7 +1074,7 @@ DataBook$set("public","is_variables_metadata", function(data_name, property, col
 )
 
 DataBook$set("public","data_frame_exists", function(data_name) {
-  return(data_name %in% names(private$.data_objects))
+  return(data_name %in% names(private$.data_sheets))
 } 
 )
 
