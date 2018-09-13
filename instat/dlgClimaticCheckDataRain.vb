@@ -342,7 +342,7 @@ Public Class dlgClimaticCheckDataRain
         clsUpperOutlierLimitFunc.SetRCommand("summary_outlier_limit")
         clsUpperOutlierLimitFunc.bToScriptAsRString = True
         clsUpperOutlierLimitFunc.AddParameter("bskewedcalc", "TRUE", iPosition:=4)
-        clsUpperOutlierLimitFunc.AddParameter("ignore_zero", "FALSE", iPosition:=7)
+        clsUpperOutlierLimitFunc.AddParameter("ignore_zero", "TRUE", iPosition:=7)
 
         'Outlier Operator 
         clsUpperOutlierOperator.SetOperation(">")
