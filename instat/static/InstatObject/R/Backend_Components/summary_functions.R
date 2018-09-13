@@ -567,23 +567,26 @@ summary_skewness_mc <- function(x, na.rm = FALSE, na_type = "", ...) {
 }
 
 # skewness outlier limit function
-summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc = FALSE, skewnessweight = 4, na.rm = TRUE, na_type = "", ...){ 
+summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc = FALSE, skewnessweight = 4, na.rm = TRUE, na_type = "", ignore_zero = FALSE, ...){ 
+  if(ignore_zero){
+    x <- x[x!=0]
+  }
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-      else{
-      quart <- quantile(x, na.rm = na.rm)
-      Q1 <- quart[[2]]
-      Q3 <- quart[[4]]
-      IQR <- Q3 - Q1
-      MC <- 0
-      if(bskewedcalc){
-        MC <- robustbase::mc(x, na.rm = na.rm)
-      }
-      if(bupperlimit){
-        Q3 + coef*exp(skewnessweight*MC)*IQR
-      } else {
-        Q1 - coef*exp(-skewnessweight*MC)*IQR
-      }
-      }
+  else{
+    quart <- quantile(x, na.rm = na.rm)
+    Q1 <- quart[[2]]
+    Q3 <- quart[[4]]
+    IQR <- Q3 - Q1
+    MC <- 0
+    if(bskewedcalc){
+      MC <- robustbase::mc(x, na.rm = na.rm)
+    }
+    if(bupperlimit){
+      Q3 + coef*exp(skewnessweight*MC)*IQR
+    } else {
+      Q1 - coef*exp(-skewnessweight*MC)*IQR
+    }
+  }
 }
 
 # kurtosis function
