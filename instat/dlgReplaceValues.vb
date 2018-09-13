@@ -49,7 +49,6 @@ Public Class dlgReplaceValues
         ucrReceiverReplace.SetMeAsReceiver()
         ucrReceiverReplace.SetSingleTypeStatus(True)
         ucrReceiverReplace.SetParameterIsString()
-        ucrReceiverReplace.SetExcludedDataTypes({"Date"})
 
         'Old Values
         ucrPnlOld.AddRadioButton(rdoOldValue)
