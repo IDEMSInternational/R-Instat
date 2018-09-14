@@ -1,9 +1,9 @@
-instat_object$set("public", "display_daily_table", function(data_name, climatic_element, date_col, year_col, station_col, Misscode, Tracecode, Zerocode, monstats = c("min", "mean", "median", "max", "IQR", "sum")) {
+DataBook$set("public", "display_daily_table", function(data_name, climatic_element, date_col, year_col, station_col, Misscode, Tracecode, Zerocode, monstats = c("min", "mean", "median", "max", "IQR", "sum")) {
   self$get_data_objects(data_name)$display_daily_table(data_name = data_name, climatic_element = climatic_element, date_col = date_col, year_col =year_col, station_col = station_col, Misscode = Misscode, Tracecode = Tracecode, Zerocode = Zerocode, monstats = monstats)
 }
 )
 
-data_object$set("public", "display_daily_table", function(data_name, climatic_element, date_col = date_col, year_col = year_col, station_col = station_col, Misscode, Tracecode, Zerocode, monstats = c("min", "mean", "median", "max", "IQR", "sum")) {
+DataSheet$set("public", "display_daily_table", function(data_name, climatic_element, date_col = date_col, year_col = year_col, station_col = station_col, Misscode, Tracecode, Zerocode, monstats = c("min", "mean", "median", "max", "IQR", "sum")) {
   curr_data <- self$get_data_frame()
   if(missing(station_col)) curr_data[["Station"]] <- self$get_metadata(data_name_label)
   else names(curr_data)[names(curr_data) == station_col] <- "Station"
