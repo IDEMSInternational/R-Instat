@@ -70,6 +70,8 @@ Partial Class dlgTransformClimatic
         Me.ucrInputSum = New instat.ucrInputComboBox()
         Me.ucrNudCountOver = New instat.ucrNud()
         Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
+        Me.lblPosition = New System.Windows.Forms.Label()
+        Me.ucrInputPosition = New instat.ucrInputComboBox()
         Me.ucrChkGroupByYear = New instat.ucrCheck()
         Me.ucrInputColName = New instat.ucrInputTextBox()
         Me.ucrPnlTransform = New instat.UcrPanel()
@@ -79,6 +81,8 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrSelectorTransform = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkCircular = New instat.ucrCheck()
+        Me.ucrInputCircularPosition = New instat.ucrInputComboBox()
         Me.grpTransform.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -333,6 +337,18 @@ Partial Class dlgTransformClimatic
         Me.rdoMultSpells.Name = "rdoMultSpells"
         Me.rdoMultSpells.UseVisualStyleBackColor = True
         '
+        'lblPosition
+        '
+        resources.ApplyResources(Me.lblPosition, "lblPosition")
+        Me.lblPosition.Name = "lblPosition"
+        '
+        'ucrInputPosition
+        '
+        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
+        Me.ucrInputPosition.Name = "ucrInputPosition"
+        '
         'ucrChkGroupByYear
         '
         Me.ucrChkGroupByYear.Checked = False
@@ -401,10 +417,27 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrChkCircular
+        '
+        Me.ucrChkCircular.Checked = False
+        resources.ApplyResources(Me.ucrChkCircular, "ucrChkCircular")
+        Me.ucrChkCircular.Name = "ucrChkCircular"
+        '
+        'ucrInputCircularPosition
+        '
+        Me.ucrInputCircularPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputCircularPosition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCircularPosition, "ucrInputCircularPosition")
+        Me.ucrInputCircularPosition.Name = "ucrInputCircularPosition"
+        '
         'dlgTransformClimatic
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputCircularPosition)
+        Me.Controls.Add(Me.ucrChkCircular)
+        Me.Controls.Add(Me.lblPosition)
+        Me.Controls.Add(Me.ucrInputPosition)
         Me.Controls.Add(Me.rdoMultSpells)
         Me.Controls.Add(Me.ucrChkGroupByYear)
         Me.Controls.Add(Me.grpTransform)
@@ -476,4 +509,8 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrReceiverEvap As ucrReceiverSingle
     Friend WithEvents rdoEvapVariable As RadioButton
     Friend WithEvents rdoEvapValue As RadioButton
+    Friend WithEvents lblPosition As Label
+    Friend WithEvents ucrInputPosition As ucrInputComboBox
+    Friend WithEvents ucrChkCircular As ucrCheck
+    Friend WithEvents ucrInputCircularPosition As ucrInputComboBox
 End Class
