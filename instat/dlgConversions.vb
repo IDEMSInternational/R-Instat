@@ -1,3 +1,267 @@
-﻿Public Class dlgConversions
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
+Public Class dlgConversions
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsPrecipitationFunction, clsTemperatureFunction, clsWindSpeedFunction As New RFunction
+    Private clsDayLengthFunction As New RFunction
+
+    Private Sub dlgConversions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
+        autoTranslate(Me)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
+        Dim dctPrecipitationUnits As New Dictionary(Of String, String)
+        Dim dctTemperatureUnits As New Dictionary(Of String, String)
+        Dim dctWindSpeedUnits As New Dictionary(Of String, String)
+
+        Dim lstLabels As New List(Of Control)
+        lstLabels.AddRange({lblFrom, lblTo, lblDecimal})
+
+        ucrPnlConversions.AddRadioButton(rdoUnits)
+        ucrPnlConversions.AddRadioButton(rdoDayLength)
+
+        ucrPnlConversions.AddFunctionNamesCondition(rdoUnits, {"convert_precip", "convert_temperature", "convert_wind_speed"})
+        ucrPnlConversions.AddFunctionNamesCondition(rdoDayLength, "daylength")
+
+        ucrPnlLatitude.AddRadioButton(rdoSingleValue)
+        ucrPnlLatitude.AddRadioButton(rdoColumn)
+
+        ucrPnlElements.AddRadioButton(rdoRain)
+        ucrPnlElements.AddRadioButton(rdoTemperature)
+        ucrPnlElements.AddRadioButton(rdoWindSpeed)
+
+        ucrPnlElements.AddFunctionNamesCondition(rdoRain, "convert_precip")
+        ucrPnlElements.AddFunctionNamesCondition(rdoTemperature, "convert_temperature")
+        ucrPnlElements.AddFunctionNamesCondition(rdoWindSpeed, "convert_wind_speed")
+
+        ucrReceiverElement.SetParameter(New RParameter("precip", 0))
+        ucrReceiverElement.bWithQuotes = False
+        ucrReceiverElement.SetParameterIsRFunction()
+        ucrReceiverElement.Selector = ucrSelectorConversions
+
+        ucrReceiverStation.SetParameterIsString()
+        ucrReceiverStation.SetClimaticType("station")
+        ucrReceiverStation.bAutoFill = True
+        ucrReceiverStation.strSelectorHeading = "Station Variables"
+        ucrReceiverStation.Selector = ucrSelectorConversions
+
+        ucrReceiverDate.SetParameter(New RParameter("doy", 1))
+        ucrReceiverDate.SetParameterIsRFunction()
+        ucrReceiverDate.Selector = ucrSelectorConversions
+
+        ucrReceiverLatitude.SetParameter(New RParameter("lat", 0, False))
+        ucrReceiverLatitude.bWithQuotes = False
+        ucrReceiverLatitude.SetParameterIsRFunction()
+        ucrReceiverLatitude.Selector = ucrSelectorConversions
+
+        ucrInputLatitude.SetParameter(New RParameter("lat", 0, False))
+        ucrInputLatitude.SetValidationTypeAsNumeric(dcmMin:=-90, dcmMax:=90)
+        ucrInputLatitude.AddQuotesIfUnrecognised = False
+
+        ucrInputFromPrecipitation.SetParameter(New RParameter("old_metric", 1))
+        dctPrecipitationUnits.Add("inches", Chr(34) & "inches" & Chr(34))
+        dctPrecipitationUnits.Add("mm", Chr(34) & "mm" & Chr(34))
+        dctPrecipitationUnits.Add("cm", Chr(34) & "cm" & Chr(34))
+        ucrInputFromPrecipitation.SetItems(dctPrecipitationUnits)
+        ucrInputFromPrecipitation.SetDropDownStyleAsNonEditable()
+        ucrInputFromPrecipitation.bAllowNonConditionValues = True
+
+        ucrInputToPrecipitation.SetParameter(New RParameter("new_metric", 2))
+        ucrInputToPrecipitation.SetItems(dctPrecipitationUnits)
+        ucrInputToPrecipitation.SetDropDownStyleAsNonEditable()
+        ucrInputToPrecipitation.bAllowNonConditionValues = True
+
+        ucrInputFromTemperature.SetParameter(New RParameter("old_metric", 1))
+        dctTemperatureUnits.Add("celsius", Chr(34) & "celsius" & Chr(34))
+        dctTemperatureUnits.Add("fahrenheit", Chr(34) & "fahrenheit" & Chr(34))
+        dctTemperatureUnits.Add("kelvin", Chr(34) & "kelvin" & Chr(34))
+        ucrInputFromTemperature.SetItems(dctTemperatureUnits)
+        ucrInputFromTemperature.SetDropDownStyleAsNonEditable()
+
+        ucrInputToTemperature.SetParameter(New RParameter("new_metric", 2))
+        ucrInputToTemperature.SetItems(dctTemperatureUnits)
+        ucrInputToTemperature.SetDropDownStyleAsNonEditable()
+
+        ucrInputFromWindSpeed.SetParameter(New RParameter("old_metric", 1))
+        dctWindSpeedUnits.Add("knots: Knots", Chr(34) & "knots" & Chr(34))
+        dctWindSpeedUnits.Add("mph: Miles per hour", Chr(34) & "mph" & Chr(34))
+        dctWindSpeedUnits.Add("mps: Meters per second", Chr(34) & "mps" & Chr(34))
+        dctWindSpeedUnits.Add("ftps: Feet per second", Chr(34) & "ftps" & Chr(34))
+        dctWindSpeedUnits.Add("kmph: Kilometers per hour", Chr(34) & "kmph" & Chr(34))
+        ucrInputFromWindSpeed.SetItems(dctWindSpeedUnits)
+        ucrInputFromWindSpeed.SetDropDownStyleAsNonEditable()
+
+        ucrInputToWindSpeed.SetParameter(New RParameter("new_metric", 2))
+        ucrInputToWindSpeed.SetItems(dctWindSpeedUnits)
+        ucrInputToWindSpeed.SetDropDownStyleAsNonEditable()
+
+        ucrNudDecimal.SetParameter(New RParameter("round", 3))
+        ucrNudDecimal.SetMinMax(0, 3)
+
+        ucrPnlConversions.AddToLinkedControls(ucrReceiverElement, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConversions.AddToLinkedControls(ucrNudDecimal, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConversions.AddToLinkedControls(ucrPnlElements, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoRain)
+
+        ucrPnlConversions.AddToLinkedControls(ucrReceiverStation, {rdoDayLength}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConversions.AddToLinkedControls(ucrReceiverDate, {rdoDayLength}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConversions.AddToLinkedControls(ucrPnlLatitude, {rdoDayLength}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoSingleValue)
+
+        ucrPnlLatitude.AddToLinkedControls(ucrInputLatitude, {rdoSingleValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlLatitude.AddToLinkedControls(ucrReceiverLatitude, {rdoColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrPnlElements.AddToLinkedControls(ucrInputFromPrecipitation, {rdoRain}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlElements.AddToLinkedControls(ucrInputToPrecipitation, {rdoRain}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlElements.AddToLinkedControls(ucrInputFromTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="celsius")
+        ucrPnlElements.AddToLinkedControls(ucrInputToTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="celsius")
+        ucrPnlElements.AddToLinkedControls(ucrInputFromWindSpeed, {rdoWindSpeed}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="knots: Knots")
+        ucrPnlElements.AddToLinkedControls(ucrInputToWindSpeed, {rdoWindSpeed}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="knots: Knots")
+
+        ucrReceiverElement.SetLinkedDisplayControl(lblElement)
+        ucrNudDecimal.SetLinkedDisplayControl(lstLabels)
+        ucrReceiverStation.SetLinkedDisplayControl(lblStation)
+        ucrReceiverDate.SetLinkedDisplayControl(lblDate)
+        ucrPnlLatitude.SetLinkedDisplayControl(grpLatitude)
+        ucrPnlElements.SetLinkedDisplayControl(grpElements)
+
+        ucrSaveConversions.SetLabelText("Result into:")
+        ucrSaveConversions.SetSaveTypeAsColumn()
+        ucrSaveConversions.SetIsTextBox()
+        ucrSaveConversions.SetDataFrameSelector(ucrSelectorConversions.ucrAvailableDataFrames)
+        ucrSaveConversions.SetPrefix("Conversion")
+    End Sub
+
+    Private Sub SetDefaults()
+        clsPrecipitationFunction = New RFunction
+        clsTemperatureFunction = New RFunction
+        clsWindSpeedFunction = New RFunction
+        clsDayLengthFunction = New RFunction
+
+        ucrSelectorConversions.Reset()
+        ucrSaveConversions.Reset()
+        ucrReceiverElement.SetMeAsReceiver()
+
+        clsPrecipitationFunction.SetPackageName("weathermetrics")
+        clsPrecipitationFunction.SetRCommand("convert_precip")
+        clsPrecipitationFunction.AddParameter("round", 1, iPosition:=3)
+        clsPrecipitationFunction.AddParameter("old_metric", Chr(34) & "inches" & Chr(34), iPosition:=1)
+        clsPrecipitationFunction.AddParameter("new_metric", Chr(34) & "inches" & Chr(34), iPosition:=1)
+
+        clsTemperatureFunction.SetPackageName("weathermetrics")
+        clsTemperatureFunction.SetRCommand("convert_temperature")
+
+        clsWindSpeedFunction.SetPackageName("weathermetrics")
+        clsWindSpeedFunction.SetRCommand("convert_wind_speed")
+
+        clsDayLengthFunction.SetPackageName("geosphere")
+        clsDayLengthFunction.SetRCommand("daylength")
+
+        clsPrecipitationFunction.SetAssignTo(ucrSaveConversions.GetText, strTempDataframe:=ucrSelectorConversions.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveConversions.GetText, bAssignToIsPrefix:=True)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsPrecipitationFunction)
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsTemperatureFunction, (New RParameter("temperature", 0)), iAdditionalPairNo:=1)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsWindSpeedFunction, (New RParameter("wind_speed", 0)), iAdditionalPairNo:=2)
+        ucrNudDecimal.AddAdditionalCodeParameterPair(clsTemperatureFunction, (New RParameter("round", 3)), iAdditionalPairNo:=1)
+        ucrNudDecimal.AddAdditionalCodeParameterPair(clsWindSpeedFunction, (New RParameter("round", 3)), iAdditionalPairNo:=2)
+        ucrSaveConversions.AddAdditionalRCode(clsTemperatureFunction, iAdditionalPairNo:=1)
+        ucrSaveConversions.AddAdditionalRCode(clsWindSpeedFunction, iAdditionalPairNo:=2)
+        ucrSaveConversions.AddAdditionalRCode(clsDayLengthFunction, iAdditionalPairNo:=3)
+
+        ucrSaveConversions.SetRCode(clsPrecipitationFunction, bReset)
+        ucrReceiverElement.SetRCode(clsPrecipitationFunction, bReset)
+        ucrInputFromPrecipitation.SetRCode(clsPrecipitationFunction, bReset)
+        ucrInputToPrecipitation.SetRCode(clsPrecipitationFunction, bReset)
+        ucrInputFromTemperature.SetRCode(clsTemperatureFunction, bReset)
+        ucrInputToTemperature.SetRCode(clsTemperatureFunction, bReset)
+        ucrInputFromWindSpeed.SetRCode(clsWindSpeedFunction, bReset)
+        ucrInputToWindSpeed.SetRCode(clsWindSpeedFunction, bReset)
+        ucrNudDecimal.SetRCode(clsPrecipitationFunction, bReset)
+        If bReset Then
+            ucrPnlConversions.SetRCode(clsPrecipitationFunction, bReset)
+        End If
+        ucrReceiverDate.SetRCode(clsDayLengthFunction, bReset)
+        ucrReceiverLatitude.SetRCode(clsDayLengthFunction, bReset)
+        ucrInputLatitude.SetRCode(clsDayLengthFunction, bReset)
+    End Sub
+
+    Private Sub TestOkEnabled()
+        If rdoUnits.Checked AndAlso Not ucrReceiverElement.IsEmpty AndAlso ucrNudDecimal.GetText <> "" AndAlso ucrSaveConversions.IsComplete Then
+            ucrBase.OKEnabled(True)
+        ElseIf rdoDayLength.Checked AndAlso Not ucrReceiverDate.IsEmpty AndAlso ((rdoSingleValue.Checked AndAlso Not ucrInputLatitude.IsEmpty) OrElse (rdoColumn.Checked AndAlso Not ucrReceiverLatitude.IsEmpty)) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeforControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub SetBaseFunction()
+        If rdoRain.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPrecipitationFunction)
+        ElseIf rdoTemperature.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsTemperatureFunction)
+        ElseIf rdoWindSpeed.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsWindSpeedFunction)
+        End If
+    End Sub
+
+    Private Sub ucrPnlLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLatitude.ControlValueChanged
+        If rdoDayLength.Checked Then
+            If rdoColumn.Checked Then
+                ucrReceiverLatitude.SetMeAsReceiver()
+            ElseIf rdoSingleValue.Checked Then
+                ucrReceiverDate.SetMeAsReceiver()
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrPnlConversions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlConversions.ControlValueChanged
+        If rdoDayLength.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDayLengthFunction)
+            ucrReceiverDate.SetMeAsReceiver()
+        ElseIf rdoUnits.Checked Then
+            SetBaseFunction()
+            ucrReceiverElement.SetMeAsReceiver()
+        End If
+    End Sub
+
+    Private Sub ucrPnlConversions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlConversions.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrSaveConversions.ControlContentsChanged, ucrNudDecimal.ControlContentsChanged, ucrPnlLatitude.ControlContentsChanged, ucrInputLatitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrPnlElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlElements.ControlValueChanged
+        SetBaseFunction()
+    End Sub
 End Class
