@@ -23,6 +23,7 @@ Public Class dlgTransformClimatic
     Private clsTransformCheck As New RFunction
     'Moving
     Private clsRMovingFunction As New RFunction
+    Private clsRasterFuction As New RFunction
 
     'Count and Spells
     Private clsRRainday, clsRRaindayMatch, clsRCountFunction, clsRollConsecutiveSumFunction As New RFunction
@@ -52,6 +53,8 @@ Public Class dlgTransformClimatic
 
     Private Sub InitialiseDialog()
         Dim dctInputSumPairs As New Dictionary(Of String, String)
+        Dim dctInputPosition As New Dictionary(Of String, String)
+        Dim dctInputCircularPosition As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 358
 
         'Overall Panel
@@ -121,10 +124,33 @@ Public Class dlgTransformClimatic
         ucrInputSum.SetLinkedDisplayControl(lblSumOver)
         ucrInputSum.bAllowNonConditionValues = True
 
+
+        ucrInputPosition.SetParameter(New RParameter("align", 4))
+        dctInputPosition.Add("Right", Chr(39) & "right" & Chr(39))
+        dctInputPosition.Add("Centred", Chr(39) & "center" & Chr(39))
+        dctInputPosition.Add("Left", Chr(39) & "left" & Chr(39))
+        ucrInputPosition.SetItems(dctInputPosition)
+        ucrInputPosition.SetDropDownStyleAsNonEditable()
+        ucrInputPosition.SetLinkedDisplayControl(lblPosition)
+        ucrInputPosition.bAllowNonConditionValues = True
+
+        ucrInputCircularPosition.SetParameter(New RParameter("type", 4))
+        dctInputCircularPosition.Add("Right", Chr(39) & "to" & Chr(39))
+        dctInputCircularPosition.Add("Centred", Chr(39) & "around" & Chr(39))
+        dctInputCircularPosition.Add("Left", Chr(39) & "from" & Chr(39))
+        ucrInputCircularPosition.SetItems(dctInputCircularPosition)
+        ucrInputCircularPosition.SetDropDownStyleAsNonEditable()
+        ucrInputCircularPosition.SetLinkedDisplayControl(lblPosition)
+        ucrInputCircularPosition.bAllowNonConditionValues = True
+
         ucrNudSumOver.SetParameter(New RParameter("width", 1))
         ucrNudSumOver.SetMinMax(1, 366)
         ucrNudSumOver.Increment = 1
         ucrNudSumOver.SetLinkedDisplayControl(lblSumRows)
+
+        ucrChkCircular.SetParameter(New RParameter("circular", 2))
+        ucrChkCircular.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkCircular.SetText("Circular")
 
         ' Count
         ucrNudCountOver.SetParameter(New RParameter("width", 1))
@@ -169,7 +195,8 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls({ucrInputCondition}, {rdoCount, rdoSpell, rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Between")
 
         ucrPnlTransform.AddToLinkedControls(ucrInputSum, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Sum")
-        ucrPnlTransform.AddToLinkedControls(ucrNudSumOver, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrPnlTransform.AddToLinkedControls(ucrNudSumOver, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=3)
+        ucrPnlTransform.AddToLinkedControls(ucrInputPosition, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Right")
 
         ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"<=", "Between", ">=", "Outer"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
         ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between", "Outer"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
@@ -194,6 +221,7 @@ Public Class dlgTransformClimatic
         clsRTransformCountSpellSub = New RFunction
 
         clsRMovingFunction = New RFunction
+        clsRasterFuction = New RFunction
         clsGroupByYear.Clear()
         clsReplaceNAasElement = New RFunction
         clsRCountFunction = New RFunction
@@ -267,10 +295,14 @@ Public Class dlgTransformClimatic
         clsRMovingFunction.bToScriptAsRString = True
         clsRMovingFunction.SetPackageName("zoo")
         clsRMovingFunction.SetRCommand("rollapply")
-        clsRMovingFunction.AddParameter("width", 2, iPosition:=1)
         clsRMovingFunction.AddParameter("FUN", "sum", iPosition:=2)
         clsRMovingFunction.AddParameter("fill", "NA", iPosition:=3)
         clsRMovingFunction.AddParameter("align", Chr(39) & "right" & Chr(39), iPosition:=4)
+
+        clsRasterFuction.bToScriptAsRString = True
+        clsRasterFuction.SetPackageName("raster")
+        clsRasterFuction.SetRCommand("movingFun")
+        clsRasterFuction.AddParameter("na.rm", "TRUE")
 
         ' Water Balance
         clsRWaterBalanceFunction.bToScriptAsRString = True
@@ -309,6 +341,7 @@ Public Class dlgTransformClimatic
         clsRTransform.SetRCommand("instat_calculation$new")
         clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1) ' changes depending on the rdo
+        clsRTransform.AddParameter("raster", clsRFunctionParameter:=clsRasterFuction, iPosition:=1)
         clsRTransform.AddParameter("result_name", Chr(34) & "moving_sum" & Chr(34), iPosition:=2)
         clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=5)
         clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
@@ -327,15 +360,18 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverData.AddAdditionalCodeParameterPair(clsReplaceNAasElement, New RParameter("element", 0, False), iAdditionalPairNo:=1)
-        ucrReceiverData.AddAdditionalCodeParameterPair(clsRRaindayLowerOperator, New RParameter("rain", 0), iAdditionalPairNo:=2)
-        ucrReceiverData.AddAdditionalCodeParameterPair(clsRRaindayUpperOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
-        ucrReceiverData.AddAdditionalCodeParameterPair(clsRWaterBalanceFunction, New RParameter("replace_na", 1, False), iAdditionalPairNo:=4)
-        ucrReceiverData.AddAdditionalCodeParameterPair(clsReduceOpEvapValue, New RParameter("left", 0, False), iAdditionalPairNo:=5)
-        ucrReceiverData.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=6)
-        ucrReceiverData.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=7)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("x", 0, False), iAdditionalPairNo:=1)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsReplaceNAasElement, New RParameter("element", 0, False), iAdditionalPairNo:=2)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsRRaindayLowerOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsRRaindayUpperOperator, New RParameter("rain", 0), iAdditionalPairNo:=4)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsRWaterBalanceFunction, New RParameter("replace_na", 1, False), iAdditionalPairNo:=5)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsReduceOpEvapValue, New RParameter("left", 0, False), iAdditionalPairNo:=6)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=7)
+        ucrReceiverData.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=8)
         ucrInputSpellUpper.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
+        ucrNudSumOver.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("n", 0, False), iAdditionalPairNo:=1)
+        ucrInputSum.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("fun", 0, False), iAdditionalPairNo:=1)
 
         ucrPnlTransform.SetRCode(clsTransformCheck, bReset)
         ucrChkGroupByYear.SetRCode(clsTransformManipulationsFunc, bReset)
@@ -343,7 +379,10 @@ Public Class dlgTransformClimatic
         ' Moving
         ucrNudSumOver.SetRCode(clsRMovingFunction, bReset)
         ucrInputSum.SetRCode(clsRMovingFunction, bReset)
+        ucrInputPosition.SetRCode(clsRMovingFunction, bReset)
         ucrReceiverData.SetRCode(clsRMovingFunction, bReset)
+        ucrInputCircularPosition.SetRCode(clsRasterFuction, bReset)
+        ucrChkCircular.SetRCode(clsRasterFuction, bReset)
 
         'mult spells
         ucrNudMultSpells.SetRCode(clsRollConsecutiveSumFunction, bReset)
@@ -410,7 +449,13 @@ Public Class dlgTransformClimatic
             clsRTransform.RemoveParameterByName("calculated_from")
             clsTransformCheck = clsRTransform
         ElseIf rdoMoving.Checked Then
-            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
+            If Not ucrChkCircular.Checked Then
+                clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
+                clsRTransform.RemoveParameterByName("raster")
+            ElseIf ucrChkCircular.Checked Then
+                clsRTransform.AddParameter("raster", clsRFunctionParameter:=clsRasterFuction, iPosition:=1)
+                clsRTransform.RemoveParameterByName("function_exp")
+            End If
             clsRTransform.RemoveParameterByName("sub_calculations")
             clsTransformCheck = clsRTransform
         ElseIf rdoSpell.Checked Then
@@ -549,5 +594,21 @@ Public Class dlgTransformClimatic
     Private Sub ucrPnlEvap_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvap.ControlContentsChanged
         Evaporation()
         TestOkEnabled()
+    End Sub
+
+    Private Sub RasterPosition()
+        If ucrChkCircular.Checked Then
+            ucrInputCircularPosition.Show()
+        Else
+            ucrInputCircularPosition.Hide()
+        End If
+    End Sub
+
+    Private Sub ucrInputCircularPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCircularPosition.ControlValueChanged
+        RasterPosition()
+    End Sub
+
+    Private Sub ucrChkCircular_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCircular.ControlValueChanged
+
     End Sub
 End Class
