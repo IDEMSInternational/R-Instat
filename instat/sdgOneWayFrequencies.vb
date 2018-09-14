@@ -31,38 +31,11 @@ Public Class sdgOneWayFrequencies
         ucrInputGraphTitle.SetParameter(New RParameter("title", 2))
 
         'Table Only
-        ucrChkHighlightedRows.SetParameter(New RParameter("altr.row.col", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkHighlightedRows.SetRDefault("FALSE")
-        ucrChkHighlightedRows.SetText("Alternate Rows Coloured")
+        ucrInputTitle.SetParameter(New RParameter("title", 5))
 
         'Table Only
-        ucrInputCountsName.SetParameter(New RParameter("string.cnt", 5))
-        ucrInputCountsName.SetRDefault(Chr(34) & "N" & Chr(34))
-        ucrChkCountName.SetParameter(ucrInputCountsName.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkCountName.SetText("Count Name")
-        ucrChkCountName.AddToLinkedControls(ucrInputCountsName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        'Table Only
-        ucrChkMedian.SetParameter(New RParameter("emph.md", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkMedian.SetRDefault("FALSE")
-        ucrChkMedian.SetText("Emphasise Median")
-
-        'Table Only
-        ucrChkShowSummary.SetParameter(New RParameter("show.summary", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkShowSummary.SetText("Show Summary")
-
-        'Table Only
-        ucrInputOmitZero.SetParameter(New RParameter("skip.zero", 8))
-        dctOmitZero.Add("Auto", Chr(34) & "auto" & Chr(34))
-        dctOmitZero.Add("True", Chr(34) & "TRUE" & Chr(34))
-        dctOmitZero.Add("False", Chr(34) & "FALSE" & Chr(34))
-        ucrInputOmitZero.SetItems(dctOmitZero)
-        ucrInputOmitZero.SetRDefault(Chr(34) & "auto" & Chr(34))
-        ucrInputOmitZero.bUpdateRCodeFromControl = False
-
-        'Table Only
-        ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 10))
-        ucrNudDecimalPlaces.SetMinMax(0, 4)
+        ucrChkShowStrings.SetParameter(New RParameter("show.strings", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowStrings.SetText("Show Strings")
 
         'Graph Only
         ucrPnlGraphType.SetParameter(New RParameter("type", 4))
@@ -124,14 +97,8 @@ Public Class sdgOneWayFrequencies
         clsOneWayGraphFreq = clsNewSjpFrq
         clsOneWayPlotGrid = clsNewPlotGrid
 
-        ucrChkMedian.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
-        ucrChkShowSummary.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
-        ucrChkHighlightedRows.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
-        ucrNudDecimalPlaces.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
-        ucrInputOmitZero.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
-        ucrInputCountsName.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
-        ucrChkCountName.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
-
+        ucrChkShowStrings.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrInputTitle.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
         ucrChkShowCount.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
         ucrChkShowPercentage.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
         ucrChkShowMissing.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)

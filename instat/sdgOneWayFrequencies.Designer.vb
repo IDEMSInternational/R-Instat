@@ -42,15 +42,9 @@ Partial Class sdgOneWayFrequencies
         Me.tbpOneWayFrequencies = New System.Windows.Forms.TabControl()
         Me.tbpTable = New System.Windows.Forms.TabPage()
         Me.grpTableOptions = New System.Windows.Forms.GroupBox()
-        Me.lblOmitZero = New System.Windows.Forms.Label()
-        Me.ucrInputOmitZero = New instat.ucrInputComboBox()
-        Me.ucrChkCountName = New instat.ucrCheck()
-        Me.ucrInputCountsName = New instat.ucrInputTextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ucrNudDecimalPlaces = New instat.ucrNud()
-        Me.ucrChkHighlightedRows = New instat.ucrCheck()
-        Me.ucrChkMedian = New instat.ucrCheck()
-        Me.ucrChkShowSummary = New instat.ucrCheck()
+        Me.lblTableTitle = New System.Windows.Forms.Label()
+        Me.ucrInputTitle = New instat.ucrInputTextBox()
+        Me.ucrChkShowStrings = New instat.ucrCheck()
         Me.tbpGraph = New System.Windows.Forms.TabPage()
         Me.grpGraphOptions = New System.Windows.Forms.GroupBox()
         Me.lblTitle = New System.Windows.Forms.Label()
@@ -93,77 +87,31 @@ Partial Class sdgOneWayFrequencies
         '
         'grpTableOptions
         '
-        Me.grpTableOptions.Controls.Add(Me.lblOmitZero)
-        Me.grpTableOptions.Controls.Add(Me.ucrInputOmitZero)
-        Me.grpTableOptions.Controls.Add(Me.ucrChkCountName)
-        Me.grpTableOptions.Controls.Add(Me.ucrInputCountsName)
-        Me.grpTableOptions.Controls.Add(Me.Label1)
-        Me.grpTableOptions.Controls.Add(Me.ucrNudDecimalPlaces)
-        Me.grpTableOptions.Controls.Add(Me.ucrChkHighlightedRows)
-        Me.grpTableOptions.Controls.Add(Me.ucrChkMedian)
-        Me.grpTableOptions.Controls.Add(Me.ucrChkShowSummary)
+        Me.grpTableOptions.Controls.Add(Me.lblTableTitle)
+        Me.grpTableOptions.Controls.Add(Me.ucrInputTitle)
+        Me.grpTableOptions.Controls.Add(Me.ucrChkShowStrings)
         resources.ApplyResources(Me.grpTableOptions, "grpTableOptions")
         Me.grpTableOptions.Name = "grpTableOptions"
         Me.grpTableOptions.TabStop = False
         '
-        'lblOmitZero
+        'lblTableTitle
         '
-        resources.ApplyResources(Me.lblOmitZero, "lblOmitZero")
-        Me.lblOmitZero.Name = "lblOmitZero"
+        resources.ApplyResources(Me.lblTableTitle, "lblTableTitle")
+        Me.lblTableTitle.Name = "lblTableTitle"
         '
-        'ucrInputOmitZero
+        'ucrInputTitle
         '
-        Me.ucrInputOmitZero.AddQuotesIfUnrecognised = True
-        Me.ucrInputOmitZero.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputOmitZero, "ucrInputOmitZero")
-        Me.ucrInputOmitZero.Name = "ucrInputOmitZero"
+        Me.ucrInputTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputTitle.IsMultiline = False
+        Me.ucrInputTitle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTitle, "ucrInputTitle")
+        Me.ucrInputTitle.Name = "ucrInputTitle"
         '
-        'ucrChkCountName
+        'ucrChkShowStrings
         '
-        Me.ucrChkCountName.Checked = False
-        resources.ApplyResources(Me.ucrChkCountName, "ucrChkCountName")
-        Me.ucrChkCountName.Name = "ucrChkCountName"
-        '
-        'ucrInputCountsName
-        '
-        Me.ucrInputCountsName.AddQuotesIfUnrecognised = True
-        Me.ucrInputCountsName.IsMultiline = False
-        Me.ucrInputCountsName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputCountsName, "ucrInputCountsName")
-        Me.ucrInputCountsName.Name = "ucrInputCountsName"
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        '
-        'ucrNudDecimalPlaces
-        '
-        Me.ucrNudDecimalPlaces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimalPlaces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudDecimalPlaces, "ucrNudDecimalPlaces")
-        Me.ucrNudDecimalPlaces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDecimalPlaces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimalPlaces.Name = "ucrNudDecimalPlaces"
-        Me.ucrNudDecimalPlaces.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkHighlightedRows
-        '
-        Me.ucrChkHighlightedRows.Checked = False
-        resources.ApplyResources(Me.ucrChkHighlightedRows, "ucrChkHighlightedRows")
-        Me.ucrChkHighlightedRows.Name = "ucrChkHighlightedRows"
-        '
-        'ucrChkMedian
-        '
-        Me.ucrChkMedian.Checked = False
-        resources.ApplyResources(Me.ucrChkMedian, "ucrChkMedian")
-        Me.ucrChkMedian.Name = "ucrChkMedian"
-        '
-        'ucrChkShowSummary
-        '
-        Me.ucrChkShowSummary.Checked = False
-        resources.ApplyResources(Me.ucrChkShowSummary, "ucrChkShowSummary")
-        Me.ucrChkShowSummary.Name = "ucrChkShowSummary"
+        Me.ucrChkShowStrings.Checked = False
+        resources.ApplyResources(Me.ucrChkShowStrings, "ucrChkShowStrings")
+        Me.ucrChkShowStrings.Name = "ucrChkShowStrings"
         '
         'tbpGraph
         '
@@ -311,9 +259,7 @@ Partial Class sdgOneWayFrequencies
     Friend WithEvents tbpOneWayFrequencies As TabControl
     Friend WithEvents tbpTable As TabPage
     Friend WithEvents grpTableOptions As GroupBox
-    Friend WithEvents ucrChkHighlightedRows As ucrCheck
-    Friend WithEvents ucrChkMedian As ucrCheck
-    Friend WithEvents ucrChkShowSummary As ucrCheck
+    Friend WithEvents ucrChkShowStrings As ucrCheck
     Friend WithEvents tbpGraph As TabPage
     Friend WithEvents grpGraphOptions As GroupBox
     Friend WithEvents ucrChkShowMissing As ucrCheck
@@ -322,7 +268,6 @@ Partial Class sdgOneWayFrequencies
     Friend WithEvents ucrInputHorizontalLabels As ucrInputComboBox
     Friend WithEvents ucrInputVerticalLabels As ucrInputComboBox
     Friend WithEvents ucrInputGraphTitle As ucrInputTextBox
-    Friend WithEvents ucrNudDecimalPlaces As ucrNud
     Friend WithEvents grpGraphType As GroupBox
     Friend WithEvents ucrPnlGraphType As UcrPanel
     Friend WithEvents rdoLine As RadioButton
@@ -331,9 +276,6 @@ Partial Class sdgOneWayFrequencies
     Friend WithEvents lblTitle As Label
     Friend WithEvents lblHjust As Label
     Friend WithEvents lblVjust As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents ucrInputCountsName As ucrInputTextBox
-    Friend WithEvents ucrChkCountName As ucrCheck
-    Friend WithEvents lblOmitZero As Label
-    Friend WithEvents ucrInputOmitZero As ucrInputComboBox
+    Friend WithEvents ucrInputTitle As ucrInputTextBox
+    Friend WithEvents lblTableTitle As Label
 End Class
