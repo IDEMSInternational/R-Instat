@@ -228,10 +228,15 @@ Public Class dlgMakeDate
         'when rdoTwoColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrInputComboBoxMonthTwo, {rdoTwoColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="366")
 
+        ucrInputUnits.SetItems({"Days", "Hours", "Minutes", "Seconds"})
+        ucrInputUnits.SetDropDownStyleAsNonEditable()
+
         'when rdoThreeColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrPnlYearType, {rdoThreeColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoYearColumn)
         ucrPnlDate.AddToLinkedControls(ucrPnlMonthType, {rdoThreeColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoMonthColumn)
         ucrPnlDate.AddToLinkedControls(ucrPnlDayType, {rdoThreeColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDayColumn)
+        ucrInputOrigin.AddToLinkedControls(ucrInputUnits, {"Specify"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Days")
+        ucrInputUnits.SetLinkedDisplayControl(lblUnits)
 
         'TODO - Add ucrinputFomat to construct format
         'ucrInputSeparator.SetItems({"/", "-", "_", ".", ",", ";", ":"})
