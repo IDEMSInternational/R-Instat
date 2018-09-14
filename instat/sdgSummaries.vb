@@ -106,6 +106,11 @@ Public Class sdgSummaries
         ucrReceiverSecondVariable.SetMeAsReceiver()
         ucrReceiverSecondVariable.SetIncludedDataTypes({"numeric"})
 
+
+        ucrReceiverOrderBy.Selector = ucrSelectorOrderBy
+        ucrReceiverOrderBy.SetMeAsReceiver()
+
+
         ucrChkFirst.SetParameter(New RParameter("summary_first", 23), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_first" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkFirst.SetText("First")
 
@@ -114,6 +119,8 @@ Public Class sdgSummaries
 
         ucrChknth.SetParameter(New RParameter("summary_nth", 25), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_nth" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChknth.SetText("nth")
+
+        ucrChkOrderBy.SetText("Order by another variable")
 
         ucrChkn_distinct.SetParameter(New RParameter("summary_n_distinct", 26), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_n_distinct" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkn_distinct.SetText("n_distinct")
@@ -218,6 +225,10 @@ Public Class sdgSummaries
         Next
         bControlsInitialised = True
         MissingOptionsVisibilty()
+
+        PositionOptions()
+        OrderByCheckEnabled()
+
     End Sub
 
     Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
@@ -325,6 +336,29 @@ Public Class sdgSummaries
         End If
     End Sub
 
+
+    Private Sub PositionOptions()
+        If ucrChkOrderBy.Checked Then
+            ucrSelectorOrderBy.Show()
+            ucrReceiverOrderBy.Show()
+            lblOrderBy.Show()
+        Else
+            ucrSelectorOrderBy.Hide()
+            ucrReceiverOrderBy.Hide()
+            lblOrderBy.Hide()
+        End If
+    End Sub
+
+    Private Sub OrderByCheckEnabled()
+        If ucrChkFirst.Checked OrElse ucrChkLast.Checked OrElse ucrChknth.Checked Then
+            ucrChkOrderBy.Enabled = True
+        ElseIf Not ucrChkFirst.Checked AndAlso Not ucrChkLast.Checked AndAlso Not ucrChknth.Checked Then
+            ucrChkOrderBy.Checked = False
+            ucrChkOrderBy.Enabled = False
+        End If
+    End Sub
+
+
     Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged, ucrChkCovariance.ControlValueChanged, ucrReceiverSecondVariable.ControlValueChanged
         MissingOptionsVisibilty()
         If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked Then
@@ -332,11 +366,25 @@ Public Class sdgSummaries
         Else
             clsDefaultFunction.RemoveParameterByName("y")
         End If
-        'This might be required when order_by parameter is implemented for last,first and nth functions
-        '    If ucrChkFirst.Checked OrElse ucrChkLast.Checked OrElse ucrChknth.Checked Then
-        '        clsDefaultFunction.AddParameter("order_by", ucrReceiverSecondVariable.GetVariableNames, iPosition:=4)
-        '    Else
-        '        clsDefaultFunction.RemoveParameterByName("order_by")
-        '    End If
+
+    End Sub
+
+    Private Sub ucrReceiverOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOrderBy.ControlValueChanged
+        PositionOptions()
+        If Not ucrReceiverOrderBy.IsEmpty Then
+            clsDefaultFunction.AddParameter("order_by", ucrReceiverOrderBy.GetVariableNames, iPosition:=4)
+        Else
+            clsDefaultFunction.RemoveParameterByName("order_by")
+        End If
+
+    End Sub
+
+    Private Sub ucrChkFirst_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirst.ControlValueChanged, ucrChkLast.ControlValueChanged, ucrChknth.ControlValueChanged
+        OrderByCheckEnabled()
+    End Sub
+
+    Private Sub ucrChkOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOrderBy.ControlValueChanged
+        PositionOptions()
+        OrderByCheckEnabled()
     End Sub
 End Class

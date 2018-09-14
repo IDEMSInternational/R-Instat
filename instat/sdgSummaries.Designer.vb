@@ -107,6 +107,19 @@ Partial Class sdgSummaries
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.ucrSelectorSecondVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSecondVariable = New instat.ucrReceiverSingle()
+
+        Me.tbPosition = New System.Windows.Forms.TabPage()
+        Me.ucrChkOrderBy = New instat.ucrCheck()
+        Me.lblOrderBy = New System.Windows.Forms.Label()
+        Me.ucrSelectorOrderBy = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverOrderBy = New instat.ucrReceiverSingle()
+        Me.grpPosition = New System.Windows.Forms.GroupBox()
+        Me.ucrInputN = New instat.ucrInputTextBox()
+        Me.lblInputN = New System.Windows.Forms.Label()
+        Me.ucrChkFirst = New instat.ucrCheck()
+        Me.ucrChkLast = New instat.ucrCheck()
+        Me.ucrChknth = New instat.ucrCheck()
+
         Me.tbModel = New System.Windows.Forms.TabPage()
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
@@ -630,6 +643,89 @@ Partial Class sdgSummaries
         Me.ucrReceiverSecondVariable.strNcFilePath = ""
         Me.ucrReceiverSecondVariable.ucrSelector = Nothing
         '
+
+        'tbPosition
+        '
+        Me.tbPosition.Controls.Add(Me.ucrChkOrderBy)
+        Me.tbPosition.Controls.Add(Me.lblOrderBy)
+        Me.tbPosition.Controls.Add(Me.ucrSelectorOrderBy)
+        Me.tbPosition.Controls.Add(Me.ucrReceiverOrderBy)
+        Me.tbPosition.Controls.Add(Me.grpPosition)
+        resources.ApplyResources(Me.tbPosition, "tbPosition")
+        Me.tbPosition.Name = "tbPosition"
+        Me.tbPosition.UseVisualStyleBackColor = True
+        '
+        'ucrChkOrderBy
+        '
+        Me.ucrChkOrderBy.Checked = False
+        resources.ApplyResources(Me.ucrChkOrderBy, "ucrChkOrderBy")
+        Me.ucrChkOrderBy.Name = "ucrChkOrderBy"
+        '
+        'lblOrderBy
+        '
+        resources.ApplyResources(Me.lblOrderBy, "lblOrderBy")
+        Me.lblOrderBy.Name = "lblOrderBy"
+        '
+        'ucrSelectorOrderBy
+        '
+        Me.ucrSelectorOrderBy.bDropUnusedFilterLevels = False
+        Me.ucrSelectorOrderBy.bShowHiddenColumns = False
+        Me.ucrSelectorOrderBy.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorOrderBy, "ucrSelectorOrderBy")
+        Me.ucrSelectorOrderBy.Name = "ucrSelectorOrderBy"
+        '
+        'ucrReceiverOrderBy
+        '
+        Me.ucrReceiverOrderBy.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverOrderBy, "ucrReceiverOrderBy")
+        Me.ucrReceiverOrderBy.Name = "ucrReceiverOrderBy"
+        Me.ucrReceiverOrderBy.Selector = Nothing
+        Me.ucrReceiverOrderBy.strNcFilePath = ""
+        Me.ucrReceiverOrderBy.ucrSelector = Nothing
+        '
+        'grpPosition
+        '
+        Me.grpPosition.Controls.Add(Me.ucrInputN)
+        Me.grpPosition.Controls.Add(Me.lblInputN)
+        Me.grpPosition.Controls.Add(Me.ucrChkFirst)
+        Me.grpPosition.Controls.Add(Me.ucrChkLast)
+        Me.grpPosition.Controls.Add(Me.ucrChknth)
+        resources.ApplyResources(Me.grpPosition, "grpPosition")
+        Me.grpPosition.Name = "grpPosition"
+        Me.grpPosition.TabStop = False
+        '
+        'ucrInputN
+        '
+        Me.ucrInputN.AddQuotesIfUnrecognised = True
+        Me.ucrInputN.IsMultiline = False
+        Me.ucrInputN.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputN, "ucrInputN")
+        Me.ucrInputN.Name = "ucrInputN"
+        '
+        'lblInputN
+        '
+        resources.ApplyResources(Me.lblInputN, "lblInputN")
+        Me.lblInputN.Name = "lblInputN"
+        '
+        'ucrChkFirst
+        '
+        Me.ucrChkFirst.Checked = False
+        resources.ApplyResources(Me.ucrChkFirst, "ucrChkFirst")
+        Me.ucrChkFirst.Name = "ucrChkFirst"
+        '
+        'ucrChkLast
+        '
+        Me.ucrChkLast.Checked = False
+        resources.ApplyResources(Me.ucrChkLast, "ucrChkLast")
+        Me.ucrChkLast.Name = "ucrChkLast"
+        '
+        'ucrChknth
+        '
+        Me.ucrChknth.Checked = False
+        resources.ApplyResources(Me.ucrChknth, "ucrChknth")
+        Me.ucrChknth.Name = "ucrChknth"
+        '
+
         'tbModel
         '
         Me.tbModel.Controls.Add(Me.ucrChkStandardErrorOfMean)
@@ -755,4 +851,17 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkStandardErrorOfMean As ucrCheck
     Friend WithEvents ucrNudNumber As ucrNud
     Friend WithEvents ucrNudPercentage As ucrNud
+
+    Friend WithEvents tbPosition As TabPage
+    Friend WithEvents grpPosition As GroupBox
+    Friend WithEvents ucrInputN As ucrInputTextBox
+    Friend WithEvents lblInputN As Label
+    Friend WithEvents ucrChkFirst As ucrCheck
+    Friend WithEvents ucrChkLast As ucrCheck
+    Friend WithEvents ucrChknth As ucrCheck
+    Friend WithEvents lblOrderBy As Label
+    Friend WithEvents ucrSelectorOrderBy As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverOrderBy As ucrReceiverSingle
+    Friend WithEvents ucrChkOrderBy As ucrCheck
+
 End Class
