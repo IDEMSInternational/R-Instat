@@ -40,8 +40,8 @@ Partial Class sdgSummaries
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgSummaries))
         Me.tbMissingOptions = New System.Windows.Forms.TabPage()
-        Me.ucrNudPercentage = New instat.ucrNud()
         Me.ucrNudNumber = New instat.ucrNud()
+        Me.ucrNudPercentage = New instat.ucrNud()
         Me.lblPercentage = New System.Windows.Forms.Label()
         Me.lblNumber = New System.Windows.Forms.Label()
         Me.rdoPercentage = New System.Windows.Forms.RadioButton()
@@ -49,12 +49,6 @@ Partial Class sdgSummaries
         Me.ucrPnlMissingOptions = New instat.UcrPanel()
         Me.ucrChkIncludeMissingOpt = New instat.ucrCheck()
         Me.tbMore = New System.Windows.Forms.TabPage()
-        Me.grpPosition = New System.Windows.Forms.GroupBox()
-        Me.ucrInputN = New instat.ucrInputTextBox()
-        Me.lblInputN = New System.Windows.Forms.Label()
-        Me.ucrChkFirst = New instat.ucrCheck()
-        Me.ucrChkLast = New instat.ucrCheck()
-        Me.ucrChknth = New instat.ucrCheck()
         Me.grpProportionsPercentiles = New System.Windows.Forms.GroupBox()
         Me.ucrInputCountValue = New instat.ucrInputTextBox()
         Me.ucrInputComboCountTest = New instat.ucrInputComboBox()
@@ -107,12 +101,22 @@ Partial Class sdgSummaries
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.ucrSelectorSecondVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSecondVariable = New instat.ucrReceiverSingle()
+        Me.tbPosition = New System.Windows.Forms.TabPage()
+        Me.ucrChkOrderBy = New instat.ucrCheck()
+        Me.lblOrderBy = New System.Windows.Forms.Label()
+        Me.ucrSelectorOrderBy = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverOrderBy = New instat.ucrReceiverSingle()
+        Me.grpPosition = New System.Windows.Forms.GroupBox()
+        Me.ucrInputN = New instat.ucrInputTextBox()
+        Me.lblInputN = New System.Windows.Forms.Label()
+        Me.ucrChkFirst = New instat.ucrCheck()
+        Me.ucrChkLast = New instat.ucrCheck()
+        Me.ucrChknth = New instat.ucrCheck()
         Me.tbModel = New System.Windows.Forms.TabPage()
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
-        Me.grpPosition.SuspendLayout()
         Me.grpProportionsPercentiles.SuspendLayout()
         Me.grpLocation.SuspendLayout()
         Me.grpScale.SuspendLayout()
@@ -126,13 +130,15 @@ Partial Class sdgSummaries
         Me.tbSummaries.SuspendLayout()
         Me.tbTwoVariables.SuspendLayout()
         Me.grpRelationships.SuspendLayout()
+        Me.tbPosition.SuspendLayout()
+        Me.grpPosition.SuspendLayout()
         Me.tbModel.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbMissingOptions
         '
-        Me.tbMissingOptions.Controls.Add(Me.ucrNudPercentage)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudNumber)
+        Me.tbMissingOptions.Controls.Add(Me.ucrNudPercentage)
         Me.tbMissingOptions.Controls.Add(Me.lblPercentage)
         Me.tbMissingOptions.Controls.Add(Me.lblNumber)
         Me.tbMissingOptions.Controls.Add(Me.rdoPercentage)
@@ -143,16 +149,6 @@ Partial Class sdgSummaries
         Me.tbMissingOptions.Name = "tbMissingOptions"
         Me.tbMissingOptions.UseVisualStyleBackColor = True
         '
-        'ucrNudPercentage
-        '
-        Me.ucrNudPercentage.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPercentage.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudPercentage, "ucrNudPercentage")
-        Me.ucrNudPercentage.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPercentage.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPercentage.Name = "ucrNudPercentage"
-        Me.ucrNudPercentage.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrNudNumber
         '
         Me.ucrNudNumber.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -162,6 +158,16 @@ Partial Class sdgSummaries
         Me.ucrNudNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumber.Name = "ucrNudNumber"
         Me.ucrNudNumber.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudPercentage
+        '
+        Me.ucrNudPercentage.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPercentage.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudPercentage, "ucrNudPercentage")
+        Me.ucrNudPercentage.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPercentage.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPercentage.Name = "ucrNudPercentage"
+        Me.ucrNudPercentage.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblPercentage
         '
@@ -182,9 +188,7 @@ Partial Class sdgSummaries
         'rdoNumber
         '
         resources.ApplyResources(Me.rdoNumber, "rdoNumber")
-        Me.rdoNumber.Checked = True
         Me.rdoNumber.Name = "rdoNumber"
-        Me.rdoNumber.TabStop = True
         Me.rdoNumber.UseVisualStyleBackColor = True
         '
         'ucrPnlMissingOptions
@@ -200,7 +204,6 @@ Partial Class sdgSummaries
         '
         'tbMore
         '
-        Me.tbMore.Controls.Add(Me.grpPosition)
         Me.tbMore.Controls.Add(Me.grpProportionsPercentiles)
         Me.tbMore.Controls.Add(Me.grpLocation)
         Me.tbMore.Controls.Add(Me.grpScale)
@@ -209,48 +212,6 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.tbMore, "tbMore")
         Me.tbMore.Name = "tbMore"
         Me.tbMore.UseVisualStyleBackColor = True
-        '
-        'grpPosition
-        '
-        Me.grpPosition.Controls.Add(Me.ucrInputN)
-        Me.grpPosition.Controls.Add(Me.lblInputN)
-        Me.grpPosition.Controls.Add(Me.ucrChkFirst)
-        Me.grpPosition.Controls.Add(Me.ucrChkLast)
-        Me.grpPosition.Controls.Add(Me.ucrChknth)
-        resources.ApplyResources(Me.grpPosition, "grpPosition")
-        Me.grpPosition.Name = "grpPosition"
-        Me.grpPosition.TabStop = False
-        '
-        'ucrInputN
-        '
-        Me.ucrInputN.AddQuotesIfUnrecognised = True
-        Me.ucrInputN.IsMultiline = False
-        Me.ucrInputN.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputN, "ucrInputN")
-        Me.ucrInputN.Name = "ucrInputN"
-        '
-        'lblInputN
-        '
-        resources.ApplyResources(Me.lblInputN, "lblInputN")
-        Me.lblInputN.Name = "lblInputN"
-        '
-        'ucrChkFirst
-        '
-        Me.ucrChkFirst.Checked = False
-        resources.ApplyResources(Me.ucrChkFirst, "ucrChkFirst")
-        Me.ucrChkFirst.Name = "ucrChkFirst"
-        '
-        'ucrChkLast
-        '
-        Me.ucrChkLast.Checked = False
-        resources.ApplyResources(Me.ucrChkLast, "ucrChkLast")
-        Me.ucrChkLast.Name = "ucrChkLast"
-        '
-        'ucrChknth
-        '
-        Me.ucrChknth.Checked = False
-        resources.ApplyResources(Me.ucrChknth, "ucrChknth")
-        Me.ucrChknth.Name = "ucrChknth"
         '
         'grpProportionsPercentiles
         '
@@ -574,6 +535,7 @@ Partial Class sdgSummaries
         Me.tbSummaries.Controls.Add(Me.tbsum)
         Me.tbSummaries.Controls.Add(Me.tbMore)
         Me.tbSummaries.Controls.Add(Me.tbTwoVariables)
+        Me.tbSummaries.Controls.Add(Me.tbPosition)
         Me.tbSummaries.Controls.Add(Me.tbModel)
         Me.tbSummaries.Controls.Add(Me.tbMissingOptions)
         resources.ApplyResources(Me.tbSummaries, "tbSummaries")
@@ -632,6 +594,87 @@ Partial Class sdgSummaries
         Me.ucrReceiverSecondVariable.strNcFilePath = ""
         Me.ucrReceiverSecondVariable.ucrSelector = Nothing
         '
+        'tbPosition
+        '
+        Me.tbPosition.Controls.Add(Me.ucrChkOrderBy)
+        Me.tbPosition.Controls.Add(Me.lblOrderBy)
+        Me.tbPosition.Controls.Add(Me.ucrSelectorOrderBy)
+        Me.tbPosition.Controls.Add(Me.ucrReceiverOrderBy)
+        Me.tbPosition.Controls.Add(Me.grpPosition)
+        resources.ApplyResources(Me.tbPosition, "tbPosition")
+        Me.tbPosition.Name = "tbPosition"
+        Me.tbPosition.UseVisualStyleBackColor = True
+        '
+        'ucrChkOrderBy
+        '
+        Me.ucrChkOrderBy.Checked = False
+        resources.ApplyResources(Me.ucrChkOrderBy, "ucrChkOrderBy")
+        Me.ucrChkOrderBy.Name = "ucrChkOrderBy"
+        '
+        'lblOrderBy
+        '
+        resources.ApplyResources(Me.lblOrderBy, "lblOrderBy")
+        Me.lblOrderBy.Name = "lblOrderBy"
+        '
+        'ucrSelectorOrderBy
+        '
+        Me.ucrSelectorOrderBy.bDropUnusedFilterLevels = False
+        Me.ucrSelectorOrderBy.bShowHiddenColumns = False
+        Me.ucrSelectorOrderBy.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorOrderBy, "ucrSelectorOrderBy")
+        Me.ucrSelectorOrderBy.Name = "ucrSelectorOrderBy"
+        '
+        'ucrReceiverOrderBy
+        '
+        Me.ucrReceiverOrderBy.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverOrderBy, "ucrReceiverOrderBy")
+        Me.ucrReceiverOrderBy.Name = "ucrReceiverOrderBy"
+        Me.ucrReceiverOrderBy.Selector = Nothing
+        Me.ucrReceiverOrderBy.strNcFilePath = ""
+        Me.ucrReceiverOrderBy.ucrSelector = Nothing
+        '
+        'grpPosition
+        '
+        Me.grpPosition.Controls.Add(Me.ucrInputN)
+        Me.grpPosition.Controls.Add(Me.lblInputN)
+        Me.grpPosition.Controls.Add(Me.ucrChkFirst)
+        Me.grpPosition.Controls.Add(Me.ucrChkLast)
+        Me.grpPosition.Controls.Add(Me.ucrChknth)
+        resources.ApplyResources(Me.grpPosition, "grpPosition")
+        Me.grpPosition.Name = "grpPosition"
+        Me.grpPosition.TabStop = False
+        '
+        'ucrInputN
+        '
+        Me.ucrInputN.AddQuotesIfUnrecognised = True
+        Me.ucrInputN.IsMultiline = False
+        Me.ucrInputN.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputN, "ucrInputN")
+        Me.ucrInputN.Name = "ucrInputN"
+        '
+        'lblInputN
+        '
+        resources.ApplyResources(Me.lblInputN, "lblInputN")
+        Me.lblInputN.Name = "lblInputN"
+        '
+        'ucrChkFirst
+        '
+        Me.ucrChkFirst.Checked = False
+        resources.ApplyResources(Me.ucrChkFirst, "ucrChkFirst")
+        Me.ucrChkFirst.Name = "ucrChkFirst"
+        '
+        'ucrChkLast
+        '
+        Me.ucrChkLast.Checked = False
+        resources.ApplyResources(Me.ucrChkLast, "ucrChkLast")
+        Me.ucrChkLast.Name = "ucrChkLast"
+        '
+        'ucrChknth
+        '
+        Me.ucrChknth.Checked = False
+        resources.ApplyResources(Me.ucrChknth, "ucrChknth")
+        Me.ucrChknth.Name = "ucrChknth"
+        '
         'tbModel
         '
         Me.tbModel.Controls.Add(Me.ucrChkStandardErrorOfMean)
@@ -664,8 +707,6 @@ Partial Class sdgSummaries
         Me.tbMissingOptions.ResumeLayout(False)
         Me.tbMissingOptions.PerformLayout()
         Me.tbMore.ResumeLayout(False)
-        Me.grpPosition.ResumeLayout(False)
-        Me.grpPosition.PerformLayout()
         Me.grpProportionsPercentiles.ResumeLayout(False)
         Me.grpLocation.ResumeLayout(False)
         Me.grpLocation.PerformLayout()
@@ -681,6 +722,10 @@ Partial Class sdgSummaries
         Me.tbTwoVariables.ResumeLayout(False)
         Me.tbTwoVariables.PerformLayout()
         Me.grpRelationships.ResumeLayout(False)
+        Me.tbPosition.ResumeLayout(False)
+        Me.tbPosition.PerformLayout()
+        Me.grpPosition.ResumeLayout(False)
+        Me.grpPosition.PerformLayout()
         Me.tbModel.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -738,23 +783,28 @@ Partial Class sdgSummaries
     Friend WithEvents ucrInputComboPropTest As ucrInputComboBox
     Friend WithEvents ucrInputPercentile As ucrInputTextBox
     Friend WithEvents ucrChkPercentile As ucrCheck
-    Friend WithEvents grpPosition As GroupBox
-    Friend WithEvents ucrInputN As ucrInputTextBox
-    Friend WithEvents lblInputN As Label
-    Friend WithEvents ucrChkFirst As ucrCheck
-    Friend WithEvents ucrChkLast As ucrCheck
-    Friend WithEvents ucrChknth As ucrCheck
     Friend WithEvents ucrChkn_distinct As ucrCheck
     Friend WithEvents ucrChkIncludeMissingOpt As ucrCheck
     Friend WithEvents rdoPercentage As RadioButton
     Friend WithEvents rdoNumber As RadioButton
     Friend WithEvents ucrPnlMissingOptions As UcrPanel
-    Friend WithEvents ucrNudPercentage As ucrNud
-    Friend WithEvents ucrNudNumber As ucrNud
     Friend WithEvents lblPercentage As Label
     Friend WithEvents lblNumber As Label
     Friend WithEvents ucrInputCountValue As ucrInputTextBox
     Friend WithEvents ucrInputComboCountTest As ucrInputComboBox
     Friend WithEvents tbModel As TabPage
     Friend WithEvents ucrChkStandardErrorOfMean As ucrCheck
+    Friend WithEvents ucrNudNumber As ucrNud
+    Friend WithEvents ucrNudPercentage As ucrNud
+    Friend WithEvents tbPosition As TabPage
+    Friend WithEvents grpPosition As GroupBox
+    Friend WithEvents ucrInputN As ucrInputTextBox
+    Friend WithEvents lblInputN As Label
+    Friend WithEvents ucrChkFirst As ucrCheck
+    Friend WithEvents ucrChkLast As ucrCheck
+    Friend WithEvents ucrChknth As ucrCheck
+    Friend WithEvents lblOrderBy As Label
+    Friend WithEvents ucrSelectorOrderBy As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverOrderBy As ucrReceiverSingle
+    Friend WithEvents ucrChkOrderBy As ucrCheck
 End Class
