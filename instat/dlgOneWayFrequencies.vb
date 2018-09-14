@@ -79,12 +79,11 @@ Public Class dlgOneWayFrequencies
         ucrPnlOutput.SetParameter(New RParameter("out", 7))
         ucrPnlOutput.AddRadioButton(rdoAsText, Chr(34) & "txt" & Chr(34))
         ucrPnlOutput.AddRadioButton(rdoAsHtml, Chr(34) & "viewer" & Chr(34))
-        ucrPnlOutput.AddRadioButton(rdoOnBrowser, Chr(34) & "browser" & Chr(34))
 
         ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencies.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencies.AddToLinkedControls(ucrPnlOutput, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOutput.SetLinkedDisplayControl(grpOutputOptions)
+        ucrPnlOutput.SetLinkedDisplayControl(grpOutput)
 
         ucrNudGroups.SetParameter(New RParameter("auto.grp", 9))
         ucrNudGroups.SetMinMax(2, 100)
