@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
@@ -131,7 +130,7 @@ Public Class dlgTransformClimatic
         dctInputPosition.Add("Left", Chr(39) & "left" & Chr(39))
         ucrInputPosition.SetItems(dctInputPosition)
         ucrInputPosition.SetDropDownStyleAsNonEditable()
-        ucrInputPosition.SetLinkedDisplayControl(lblPosition)
+        'ucrInputPosition.SetLinkedDisplayControl(lblPosition)
         ucrInputPosition.bAllowNonConditionValues = True
 
         ucrInputCircularPosition.SetParameter(New RParameter("type", 4))
@@ -140,7 +139,7 @@ Public Class dlgTransformClimatic
         dctInputCircularPosition.Add("Left", Chr(39) & "from" & Chr(39))
         ucrInputCircularPosition.SetItems(dctInputCircularPosition)
         ucrInputCircularPosition.SetDropDownStyleAsNonEditable()
-        ucrInputCircularPosition.SetLinkedDisplayControl(lblPosition)
+        'ucrInputCircularPosition.SetLinkedDisplayControl(lblPosition)
         ucrInputCircularPosition.bAllowNonConditionValues = True
 
         ucrNudSumOver.SetParameter(New RParameter("width", 1))
@@ -151,6 +150,7 @@ Public Class dlgTransformClimatic
         ucrChkCircular.SetParameter(New RParameter("circular", 2))
         ucrChkCircular.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkCircular.SetText("Circular")
+        ucrChkCircular.SetLinkedDisplayControl(lblPosition)
 
         ' Count
         ucrNudCountOver.SetParameter(New RParameter("width", 1))
@@ -197,6 +197,8 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls(ucrInputSum, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Sum")
         ucrPnlTransform.AddToLinkedControls(ucrNudSumOver, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=3)
         ucrPnlTransform.AddToLinkedControls(ucrInputPosition, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Right")
+        ucrPnlTransform.AddToLinkedControls(ucrInputCircularPosition, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Right")
+        ucrPnlTransform.AddToLinkedControls(ucrChkCircular, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"<=", "Between", ">=", "Outer"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
         ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between", "Outer"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
@@ -371,7 +373,7 @@ Public Class dlgTransformClimatic
         ucrInputSpellUpper.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrNudSumOver.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("n", 0, False), iAdditionalPairNo:=1)
-        ucrInputSum.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("fun", 0, False), iAdditionalPairNo:=1)
+        ucrInputSum.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("fun", 0), iAdditionalPairNo:=1)
 
         ucrPnlTransform.SetRCode(clsTransformCheck, bReset)
         ucrChkGroupByYear.SetRCode(clsTransformManipulationsFunc, bReset)
@@ -449,13 +451,14 @@ Public Class dlgTransformClimatic
             clsRTransform.RemoveParameterByName("calculated_from")
             clsTransformCheck = clsRTransform
         ElseIf rdoMoving.Checked Then
-            If Not ucrChkCircular.Checked Then
-                clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
-                clsRTransform.RemoveParameterByName("raster")
-            ElseIf ucrChkCircular.Checked Then
-                clsRTransform.AddParameter("raster", clsRFunctionParameter:=clsRasterFuction, iPosition:=1)
-                clsRTransform.RemoveParameterByName("function_exp")
-            End If
+            'If Not ucrChkCircular.Checked Then
+            '    clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
+            '    clsRTransform.RemoveParameterByName("raster")
+            'ElseIf ucrChkCircular.Checked Then
+            '    clsRTransform.AddParameter("raster", clsRFunctionParameter:=clsRasterFuction, iPosition:=1)
+            '    clsRTransform.RemoveParameterByName("function_exp")
+            'End If
+            RasterFunction()
             clsRTransform.RemoveParameterByName("sub_calculations")
             clsTransformCheck = clsRTransform
         ElseIf rdoSpell.Checked Then
@@ -473,6 +476,7 @@ Public Class dlgTransformClimatic
             clsRTransform.RemoveParameterByName("sub_calculations")
             clsTransformCheck = clsRTransform
         End If
+        RasterPosition()
     End Sub
 
     Private Sub SetAssignName()
@@ -595,20 +599,34 @@ Public Class dlgTransformClimatic
         Evaporation()
         TestOkEnabled()
     End Sub
-
-    Private Sub RasterPosition()
-        If ucrChkCircular.Checked Then
-            ucrInputCircularPosition.Show()
-        Else
-            ucrInputCircularPosition.Hide()
+    Private Sub RasterFunction()
+        If Not ucrChkCircular.Checked Then
+            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
+            clsRTransform.RemoveParameterByName("raster")
+        ElseIf ucrChkCircular.Checked Then
+            clsRTransform.AddParameter("raster", clsRFunctionParameter:=clsRasterFuction, iPosition:=1)
+            clsRTransform.RemoveParameterByName("function_exp")
         End If
     End Sub
 
-    Private Sub ucrInputCircularPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCircularPosition.ControlValueChanged
+    Private Sub RasterPosition()
+        If rdoMoving.Checked Then
+            If ucrChkCircular.Checked Then
+                ucrInputCircularPosition.Show()
+                ucrInputPosition.Hide()
+            Else
+                ucrInputCircularPosition.Hide()
+                ucrInputPosition.Show()
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrInputCircularPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCircularPosition.ControlValueChanged, ucrInputPosition.ControlValueChanged
         RasterPosition()
     End Sub
 
     Private Sub ucrChkCircular_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCircular.ControlValueChanged
-
+        RasterPosition()
+        RasterFunction()
     End Sub
 End Class
