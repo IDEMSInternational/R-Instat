@@ -59,10 +59,10 @@ Public Class sdgMapOption
         clsXlimFunction = clsXlim
         clsYlimFunction = clsylim
 
-        ucrInputLongMin.SetRCode(clsXlimFunction, bReset)
-        ucrInputLongMax.SetRCode(clsXlimFunction, bReset)
-        ucrInputLatMin.SetRCode(clsYlimFunction, bReset)
-        ucrInputLatMax.SetRCode(clsYlimFunction, bReset)
+        ucrInputLongMin.SetRCode(clsXlimFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLongMax.SetRCode(clsXlimFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLatMin.SetRCode(clsYlimFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLatMax.SetRCode(clsYlimFunction, bReset, bCloneIfNeeded:=True)
     End Sub
 
     Private Sub CheckMinMaxValues()
