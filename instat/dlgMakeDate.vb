@@ -23,6 +23,7 @@ Public Class dlgMakeDate
     Private strSelectedColumn As String = ""
     Private strSelectedDataFrame As String = ""
     Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsGregorianDefault As New RFunction
+    Private clsDivisionOperator, clsMultiplicationOperator As New ROperator
 
     Private Sub dlgMakeDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -262,6 +263,8 @@ Public Class dlgMakeDate
         clsDateFunction = New RFunction
         clsMakeYearDay = New RFunction
         clsMakeYearMonthDay = New RFunction
+        clsDivisionOperator = New ROperator
+        clsMultiplicationOperator = New ROperator
 
         ucrSaveDate.Reset()
         ucrSelectorMakeDate.Reset()
@@ -278,6 +281,12 @@ Public Class dlgMakeDate
         clsDateFunction.SetRCommand("as.Date")
         clsDateFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
         clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate)
+
+        clsDivisionOperator.SetOperation("/")
+
+        clsMultiplicationOperator.SetOperation("*")
+        clsMultiplicationOperator.AddParameter("x", 24, iPosition:=0)
+        clsMultiplicationOperator.AddParameter("y", 60, iPosition:=1)
 
         clsDateFunction.SetAssignTo(ucrSaveDate.GetText, strTempDataframe:=ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveDate.GetText)
         clsMakeYearMonthDay.SetAssignTo(ucrSaveDate.GetText, strTempDataframe:=ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveDate.GetText)
@@ -296,7 +305,7 @@ Public Class dlgMakeDate
 
         ucrSaveDate.SetRCode(clsDateFunction, bReset)
 
-        ucrReceiverForDate.SetRCode(clsDateFunction, bReset)
+        ucrReceiverForDate.SetRCode(clsDivisionOperator, bReset)
         ucrInputFormat.SetRCode(clsDateFunction, bReset)
         ucrInputOrigin.SetRCode(clsDateFunction, bReset)
         ucrDtpSpecifyOrigin.SetRCode(clsDateFunction, bReset)
@@ -466,10 +475,6 @@ Public Class dlgMakeDate
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged, ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged, ucrReceiverYearThree.ControlContentsChanged, ucrReceiverMonthThree.ControlContentsChanged, ucrReceiverDayThree.ControlContentsChanged, ucrInputDayThree.ControlContentsChanged, ucrInputMonthThree.ControlContentsChanged, ucrInputYearThree.ControlContentsChanged, ucrPnlYearType.ControlContentsChanged, ucrPnlMonthType.ControlContentsChanged, ucrPnlDayType.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrSelectorMakeDate_DataFrameChanged() Handles ucrSelectorMakeDate.DataFrameChanged
         DataFrameParameter()
     End Sub
@@ -505,5 +510,34 @@ Public Class dlgMakeDate
                 ucrReceiverYearThree.SetMeAsReceiver()
             End If
         End If
+    End Sub
+
+    Private Sub ucrInputUnits_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputUnits.ControlValueChanged
+        Select Case ucrInputUnits.GetText()
+
+            Case "Days"
+                clsDivisionOperator.RemoveParameterByName("y")
+                clsDivisionOperator.RemoveParameterByName("z")
+                clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
+            Case "Hours"
+                clsDivisionOperator.RemoveParameterByName("z")
+                clsDivisionOperator.AddParameter("y", 24, iPosition:=1)
+                clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
+            Case "Minutes"
+                clsDivisionOperator.RemoveParameterByName("y")
+                clsMultiplicationOperator.RemoveParameterByName("x3")
+                clsDivisionOperator.AddParameter("z", clsROperatorParameter:=clsMultiplicationOperator, iPosition:=1)
+                clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
+            Case "Seconds"
+                clsDivisionOperator.RemoveParameterByName("y")
+                clsMultiplicationOperator.AddParameter("x3", 60, iPosition:=2)
+                clsDivisionOperator.AddParameter("z", clsROperatorParameter:=clsMultiplicationOperator, iPosition:=1)
+                clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
+        End Select
+
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged, ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged, ucrReceiverYearThree.ControlContentsChanged, ucrReceiverMonthThree.ControlContentsChanged, ucrReceiverDayThree.ControlContentsChanged, ucrInputDayThree.ControlContentsChanged, ucrInputMonthThree.ControlContentsChanged, ucrInputYearThree.ControlContentsChanged, ucrPnlYearType.ControlContentsChanged, ucrPnlMonthType.ControlContentsChanged, ucrPnlDayType.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
