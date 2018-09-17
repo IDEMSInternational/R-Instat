@@ -345,8 +345,38 @@
   <data name="&gt;&gt;grpTwoColumns.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="lblUnits.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblUnits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>115, 144</value>
+  </data>
+  <data name="lblUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 13</value>
+  </data>
+  <data name="lblUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="lblUnits.Text" xml:space="preserve">
+    <value>Units</value>
+  </data>
+  <data name="&gt;&gt;lblUnits.Name" xml:space="preserve">
+    <value>lblUnits</value>
+  </data>
+  <data name="&gt;&gt;lblUnits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblUnits.Parent" xml:space="preserve">
+    <value>grpSingleColumn</value>
+  </data>
+  <data name="&gt;&gt;lblUnits.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrDtpSpecifyOrigin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 122</value>
+    <value>114, 110</value>
   </data>
   <data name="ucrDtpSpecifyOrigin.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 21</value>
@@ -364,7 +394,28 @@
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrDtpSpecifyOrigin.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
+  </data>
+  <data name="ucrInputUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 140</value>
+  </data>
+  <data name="ucrInputUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 21</value>
+  </data>
+  <data name="ucrInputUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrInputUnits.Name" xml:space="preserve">
+    <value>ucrInputUnits</value>
+  </data>
+  <data name="&gt;&gt;ucrInputUnits.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputUnits.Parent" xml:space="preserve">
+    <value>grpSingleColumn</value>
+  </data>
+  <data name="&gt;&gt;ucrInputUnits.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -571,7 +622,7 @@
     <value>7</value>
   </data>
   <data name="grpFormatField.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 153</value>
+    <value>8, 172</value>
   </data>
   <data name="grpFormatField.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 124</value>
@@ -592,7 +643,7 @@
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;grpFormatField.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="rdoSpecifyFormat.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -601,7 +652,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoSpecifyFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 122</value>
+    <value>15, 110</value>
   </data>
   <data name="rdoSpecifyFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 17</value>
@@ -622,7 +673,7 @@
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;rdoSpecifyFormat.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="rdoOrigin.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -631,7 +682,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoOrigin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 93</value>
+    <value>15, 81</value>
   </data>
   <data name="rdoOrigin.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 17</value>
@@ -652,7 +703,7 @@
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;rdoOrigin.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="rdoDefaultFormat.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -661,7 +712,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoDefaultFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 64</value>
+    <value>15, 52</value>
   </data>
   <data name="rdoDefaultFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 17</value>
@@ -682,10 +733,10 @@
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;rdoDefaultFormat.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="ucrPnlFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 59</value>
+    <value>8, 47</value>
   </data>
   <data name="ucrPnlFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 88</value>
@@ -703,10 +754,10 @@
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrPnlFormat.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="ucrReceiverForDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 34</value>
+    <value>6, 25</value>
   </data>
   <data name="ucrReceiverForDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -727,10 +778,10 @@
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrReceiverForDate.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="ucrInputFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 122</value>
+    <value>128, 110</value>
   </data>
   <data name="ucrInputFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 21</value>
@@ -748,10 +799,10 @@
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrInputFormat.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="ucrInputOrigin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 92</value>
+    <value>114, 80</value>
   </data>
   <data name="ucrInputOrigin.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 21</value>
@@ -769,7 +820,7 @@
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrInputOrigin.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="grpSingleColumn.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 51</value>
@@ -1577,7 +1628,7 @@ Examples:
     <value>0</value>
   </data>
   <data name="grpFormats.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 197</value>
+    <value>263, 215</value>
   </data>
   <data name="grpFormats.Size" type="System.Drawing.Size, System.Drawing">
     <value>307, 168</value>
@@ -1604,7 +1655,7 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 377</value>
+    <value>426, 386</value>
   </data>
   <data name="cmdHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 22</value>
