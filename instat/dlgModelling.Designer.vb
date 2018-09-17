@@ -362,8 +362,8 @@ Partial Class dlgModelling
         '
         'ucrReceiverMultiple
         '
-        Me.ucrReceiverMultiple.frmParent = Me
         resources.ApplyResources(Me.ucrReceiverMultiple, "ucrReceiverMultiple")
+        Me.ucrReceiverMultiple.frmParent = Me
         Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
         Me.ucrReceiverMultiple.Selector = Nothing
         Me.ucrReceiverMultiple.strNcFilePath = ""
@@ -415,10 +415,8 @@ Partial Class dlgModelling
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grplme4)
-        Me.Controls.Add(Me.grpextRemes)
         Me.Controls.Add(Me.grpStats)
-        Me.Controls.Add(Me.grpMASS)
+        Me.Controls.Add(Me.grpextRemes)
         Me.Controls.Add(Me.ucrChkIncludeArguments)
         Me.Controls.Add(Me.lblRpackage)
         Me.Controls.Add(Me.cmdHelp)
@@ -434,6 +432,8 @@ Partial Class dlgModelling
         Me.Controls.Add(Me.ucrReceiverForTestColumn)
         Me.Controls.Add(Me.ucrSelectorModelling)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.grpMASS)
+        Me.Controls.Add(Me.grplme4)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
