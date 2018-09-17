@@ -23,11 +23,7 @@ Partial Class dlgModelling
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgModelling))
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorModelling = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
         Me.lblTest = New System.Windows.Forms.Label()
-        Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.cmdspline = New System.Windows.Forms.Button()
         Me.cmdarima = New System.Windows.Forms.Button()
         Me.cmdloglin = New System.Windows.Forms.Button()
@@ -47,11 +43,9 @@ Partial Class dlgModelling
         Me.cmdDiv = New System.Windows.Forms.Button()
         Me.cmdDoubleBracket = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
-        Me.cmdZero = New System.Windows.Forms.Button()
+        Me.cmdSquareBrackets = New System.Windows.Forms.Button()
         Me.cmdMinus = New System.Windows.Forms.Button()
         Me.grpFirstCalc = New System.Windows.Forms.GroupBox()
-        Me.ucrSaveResult = New instat.ucrSave()
-        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.cmdTry = New System.Windows.Forms.Button()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.cmdPredict = New System.Windows.Forms.Button()
@@ -68,10 +62,16 @@ Partial Class dlgModelling
         Me.cmdglmnb = New System.Windows.Forms.Button()
         Me.cmdrlm = New System.Windows.Forms.Button()
         Me.grpMASS = New System.Windows.Forms.GroupBox()
-        Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.lblRpackage = New System.Windows.Forms.Label()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
+        Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
+        Me.ucrSaveResult = New instat.ucrSave()
+        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
+        Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
+        Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
+        Me.ucrSelectorModelling = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpStats.SuspendLayout()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpextRemes.SuspendLayout()
@@ -79,40 +79,11 @@ Partial Class dlgModelling
         Me.grpMASS.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrSelectorModelling
-        '
-        Me.ucrSelectorModelling.bDropUnusedFilterLevels = False
-        Me.ucrSelectorModelling.bShowHiddenColumns = False
-        Me.ucrSelectorModelling.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorModelling, "ucrSelectorModelling")
-        Me.ucrSelectorModelling.Name = "ucrSelectorModelling"
-        '
-        'ucrInputComboRPackage
-        '
-        Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboRPackage.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboRPackage, "ucrInputComboRPackage")
-        Me.ucrInputComboRPackage.Name = "ucrInputComboRPackage"
-        '
         'lblTest
         '
         resources.ApplyResources(Me.lblTest, "lblTest")
         Me.lblTest.Name = "lblTest"
         Me.lblTest.Tag = "Test"
-        '
-        'ucrReceiverForTestColumn
-        '
-        Me.ucrReceiverForTestColumn.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverForTestColumn, "ucrReceiverForTestColumn")
-        Me.ucrReceiverForTestColumn.Name = "ucrReceiverForTestColumn"
-        Me.ucrReceiverForTestColumn.Selector = Nothing
-        Me.ucrReceiverForTestColumn.strNcFilePath = ""
-        Me.ucrReceiverForTestColumn.ucrSelector = Nothing
         '
         'cmdspline
         '
@@ -176,9 +147,9 @@ Partial Class dlgModelling
         Me.grpStats.Controls.Add(Me.cmdloess)
         Me.grpStats.Controls.Add(Me.cmdlowess)
         Me.grpStats.Controls.Add(Me.cmdglm)
-        Me.grpStats.Controls.Add(Me.cmdar)
-        Me.grpStats.Controls.Add(Me.cmdaov)
         Me.grpStats.Controls.Add(Me.cmdlm)
+        Me.grpStats.Controls.Add(Me.cmdaov)
+        Me.grpStats.Controls.Add(Me.cmdar)
         resources.ApplyResources(Me.grpStats, "grpStats")
         Me.grpStats.Name = "grpStats"
         Me.grpStats.TabStop = False
@@ -237,11 +208,11 @@ Partial Class dlgModelling
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
-        'cmdZero
+        'cmdSquareBrackets
         '
-        resources.ApplyResources(Me.cmdZero, "cmdZero")
-        Me.cmdZero.Name = "cmdZero"
-        Me.cmdZero.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdSquareBrackets, "cmdSquareBrackets")
+        Me.cmdSquareBrackets.Name = "cmdSquareBrackets"
+        Me.cmdSquareBrackets.UseVisualStyleBackColor = True
         '
         'cmdMinus
         '
@@ -260,24 +231,11 @@ Partial Class dlgModelling
         Me.grpFirstCalc.Controls.Add(Me.cmdDiv)
         Me.grpFirstCalc.Controls.Add(Me.cmdDoubleBracket)
         Me.grpFirstCalc.Controls.Add(Me.cmdClear)
-        Me.grpFirstCalc.Controls.Add(Me.cmdZero)
+        Me.grpFirstCalc.Controls.Add(Me.cmdSquareBrackets)
         Me.grpFirstCalc.Controls.Add(Me.cmdMinus)
         resources.ApplyResources(Me.grpFirstCalc, "grpFirstCalc")
         Me.grpFirstCalc.Name = "grpFirstCalc"
         Me.grpFirstCalc.TabStop = False
-        '
-        'ucrSaveResult
-        '
-        resources.ApplyResources(Me.ucrSaveResult, "ucrSaveResult")
-        Me.ucrSaveResult.Name = "ucrSaveResult"
-        '
-        'ucrInputTryMessage
-        '
-        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
-        Me.ucrInputTryMessage.IsMultiline = False
-        Me.ucrInputTryMessage.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputTryMessage, "ucrInputTryMessage")
-        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
         '
         'cmdTry
         '
@@ -337,7 +295,6 @@ Partial Class dlgModelling
         '
         'grplme4
         '
-        Me.grplme4.Controls.Add(Me.grpextRemes)
         Me.grplme4.Controls.Add(Me.cmdlmer)
         Me.grplme4.Controls.Add(Me.cmdglmer)
         Me.grplme4.Controls.Add(Me.cmdnlmer)
@@ -377,7 +334,6 @@ Partial Class dlgModelling
         '
         'grpMASS
         '
-        Me.grpMASS.Controls.Add(Me.grplme4)
         Me.grpMASS.Controls.Add(Me.cmdpolr)
         Me.grpMASS.Controls.Add(Me.cmdglmmPQL)
         Me.grpMASS.Controls.Add(Me.cmdglmnb)
@@ -386,15 +342,6 @@ Partial Class dlgModelling
         resources.ApplyResources(Me.grpMASS, "grpMASS")
         Me.grpMASS.Name = "grpMASS"
         Me.grpMASS.TabStop = False
-        '
-        'ucrReceiverMultiple
-        '
-        Me.ucrReceiverMultiple.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultiple, "ucrReceiverMultiple")
-        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
-        Me.ucrReceiverMultiple.Selector = Nothing
-        Me.ucrReceiverMultiple.strNcFilePath = ""
-        Me.ucrReceiverMultiple.ucrSelector = Nothing
         '
         'cmdHelp
         '
@@ -413,16 +360,69 @@ Partial Class dlgModelling
         resources.ApplyResources(Me.ucrChkIncludeArguments, "ucrChkIncludeArguments")
         Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
         '
+        'ucrReceiverMultiple
+        '
+        Me.ucrReceiverMultiple.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultiple, "ucrReceiverMultiple")
+        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
+        Me.ucrReceiverMultiple.Selector = Nothing
+        Me.ucrReceiverMultiple.strNcFilePath = ""
+        Me.ucrReceiverMultiple.ucrSelector = Nothing
+        '
+        'ucrSaveResult
+        '
+        resources.ApplyResources(Me.ucrSaveResult, "ucrSaveResult")
+        Me.ucrSaveResult.Name = "ucrSaveResult"
+        '
+        'ucrInputTryMessage
+        '
+        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
+        Me.ucrInputTryMessage.IsMultiline = False
+        Me.ucrInputTryMessage.IsReadOnly = True
+        resources.ApplyResources(Me.ucrInputTryMessage, "ucrInputTryMessage")
+        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
+        '
+        'ucrInputComboRPackage
+        '
+        Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboRPackage.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboRPackage, "ucrInputComboRPackage")
+        Me.ucrInputComboRPackage.Name = "ucrInputComboRPackage"
+        '
+        'ucrReceiverForTestColumn
+        '
+        Me.ucrReceiverForTestColumn.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverForTestColumn, "ucrReceiverForTestColumn")
+        Me.ucrReceiverForTestColumn.Name = "ucrReceiverForTestColumn"
+        Me.ucrReceiverForTestColumn.Selector = Nothing
+        Me.ucrReceiverForTestColumn.strNcFilePath = ""
+        Me.ucrReceiverForTestColumn.ucrSelector = Nothing
+        '
+        'ucrSelectorModelling
+        '
+        Me.ucrSelectorModelling.bDropUnusedFilterLevels = False
+        Me.ucrSelectorModelling.bShowHiddenColumns = False
+        Me.ucrSelectorModelling.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorModelling, "ucrSelectorModelling")
+        Me.ucrSelectorModelling.Name = "ucrSelectorModelling"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
         'dlgModelling
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grplme4)
+        Me.Controls.Add(Me.grpextRemes)
+        Me.Controls.Add(Me.grpStats)
+        Me.Controls.Add(Me.grpMASS)
         Me.Controls.Add(Me.ucrChkIncludeArguments)
         Me.Controls.Add(Me.lblRpackage)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.ucrReceiverMultiple)
-        Me.Controls.Add(Me.grpStats)
-        Me.Controls.Add(Me.grpMASS)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.cmdPredict)
         Me.Controls.Add(Me.ucrSaveResult)
@@ -473,7 +473,7 @@ Partial Class dlgModelling
     Friend WithEvents cmdDiv As Button
     Friend WithEvents cmdDoubleBracket As Button
     Friend WithEvents cmdClear As Button
-    Friend WithEvents cmdZero As Button
+    Friend WithEvents cmdSquareBrackets As Button
     Friend WithEvents cmdMinus As Button
     Friend WithEvents ucrSaveResult As ucrSave
     Friend WithEvents ucrInputTryMessage As ucrInputTextBox
