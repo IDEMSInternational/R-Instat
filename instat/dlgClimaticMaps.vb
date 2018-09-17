@@ -108,6 +108,8 @@ Public Class dlgClimaticMaps
         clsGeomPointAesFunction = New RFunction
 
         clsGGplotOperator = New ROperator
+        clsXlimFunction = New RFunction
+        clsYlimFunction = New RFunction
 
         ucrSelectorOutline.Reset()
         ucrReceiverFill.SetMeAsReceiver()
