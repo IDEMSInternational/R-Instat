@@ -34,28 +34,28 @@ Partial Class dlgConversions
         Me.rdoColumn = New System.Windows.Forms.RadioButton()
         Me.rdoSingleValue = New System.Windows.Forms.RadioButton()
         Me.grpLatitude = New System.Windows.Forms.GroupBox()
-        Me.grpElements = New System.Windows.Forms.GroupBox()
         Me.ucrInputLatitude = New instat.ucrInputTextBox()
         Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
         Me.ucrPnlLatitude = New instat.UcrPanel()
+        Me.grpElements = New System.Windows.Forms.GroupBox()
+        Me.rdoWindSpeed = New System.Windows.Forms.RadioButton()
         Me.ucrInputFromTemperature = New instat.ucrInputComboBox()
+        Me.rdoRain = New System.Windows.Forms.RadioButton()
         Me.ucrInputToWindSpeed = New instat.ucrInputComboBox()
+        Me.rdoTemperature = New System.Windows.Forms.RadioButton()
         Me.ucrInputToTemperature = New instat.ucrInputComboBox()
+        Me.ucrNudDecimal = New instat.ucrNud()
+        Me.ucrPnlElements = New instat.UcrPanel()
         Me.ucrInputFromWindSpeed = New instat.ucrInputComboBox()
+        Me.ucrInputFromPrecipitation = New instat.ucrInputComboBox()
+        Me.ucrInputToPrecipitation = New instat.ucrInputComboBox()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.ucrNudDecimal = New instat.ucrNud()
         Me.ucrSaveConversions = New instat.ucrSave()
-        Me.ucrInputToPrecipitation = New instat.ucrInputComboBox()
-        Me.ucrInputFromPrecipitation = New instat.ucrInputComboBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrPnlConversions = New instat.UcrPanel()
         Me.ucrSelectorConversions = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPnlElements = New instat.UcrPanel()
-        Me.rdoWindSpeed = New System.Windows.Forms.RadioButton()
-        Me.rdoRain = New System.Windows.Forms.RadioButton()
-        Me.rdoTemperature = New System.Windows.Forms.RadioButton()
         Me.grpLatitude.SuspendLayout()
         Me.grpElements.SuspendLayout()
         Me.SuspendLayout()
@@ -136,6 +136,28 @@ Partial Class dlgConversions
         Me.grpLatitude.Name = "grpLatitude"
         Me.grpLatitude.TabStop = False
         '
+        'ucrInputLatitude
+        '
+        Me.ucrInputLatitude.AddQuotesIfUnrecognised = True
+        Me.ucrInputLatitude.IsMultiline = False
+        Me.ucrInputLatitude.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLatitude, "ucrInputLatitude")
+        Me.ucrInputLatitude.Name = "ucrInputLatitude"
+        '
+        'ucrReceiverLatitude
+        '
+        Me.ucrReceiverLatitude.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverLatitude, "ucrReceiverLatitude")
+        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
+        Me.ucrReceiverLatitude.Selector = Nothing
+        Me.ucrReceiverLatitude.strNcFilePath = ""
+        Me.ucrReceiverLatitude.ucrSelector = Nothing
+        '
+        'ucrPnlLatitude
+        '
+        resources.ApplyResources(Me.ucrPnlLatitude, "ucrPnlLatitude")
+        Me.ucrPnlLatitude.Name = "ucrPnlLatitude"
+        '
         'grpElements
         '
         Me.grpElements.Controls.Add(Me.rdoWindSpeed)
@@ -156,27 +178,16 @@ Partial Class dlgConversions
         Me.grpElements.Name = "grpElements"
         Me.grpElements.TabStop = False
         '
-        'ucrInputLatitude
+        'rdoWindSpeed
         '
-        Me.ucrInputLatitude.AddQuotesIfUnrecognised = True
-        Me.ucrInputLatitude.IsMultiline = False
-        Me.ucrInputLatitude.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLatitude, "ucrInputLatitude")
-        Me.ucrInputLatitude.Name = "ucrInputLatitude"
-        '
-        'ucrReceiverLatitude
-        '
-        Me.ucrReceiverLatitude.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverLatitude, "ucrReceiverLatitude")
-        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
-        Me.ucrReceiverLatitude.Selector = Nothing
-        Me.ucrReceiverLatitude.strNcFilePath = ""
-        Me.ucrReceiverLatitude.ucrSelector = Nothing
-        '
-        'ucrPnlLatitude
-        '
-        resources.ApplyResources(Me.ucrPnlLatitude, "ucrPnlLatitude")
-        Me.ucrPnlLatitude.Name = "ucrPnlLatitude"
+        resources.ApplyResources(Me.rdoWindSpeed, "rdoWindSpeed")
+        Me.rdoWindSpeed.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoWindSpeed.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoWindSpeed.FlatAppearance.BorderSize = 2
+        Me.rdoWindSpeed.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoWindSpeed.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoWindSpeed.Name = "rdoWindSpeed"
+        Me.rdoWindSpeed.UseVisualStyleBackColor = True
         '
         'ucrInputFromTemperature
         '
@@ -185,12 +196,34 @@ Partial Class dlgConversions
         resources.ApplyResources(Me.ucrInputFromTemperature, "ucrInputFromTemperature")
         Me.ucrInputFromTemperature.Name = "ucrInputFromTemperature"
         '
+        'rdoRain
+        '
+        resources.ApplyResources(Me.rdoRain, "rdoRain")
+        Me.rdoRain.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoRain.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRain.FlatAppearance.BorderSize = 2
+        Me.rdoRain.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRain.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoRain.Name = "rdoRain"
+        Me.rdoRain.UseVisualStyleBackColor = True
+        '
         'ucrInputToWindSpeed
         '
         Me.ucrInputToWindSpeed.AddQuotesIfUnrecognised = True
         Me.ucrInputToWindSpeed.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputToWindSpeed, "ucrInputToWindSpeed")
         Me.ucrInputToWindSpeed.Name = "ucrInputToWindSpeed"
+        '
+        'rdoTemperature
+        '
+        resources.ApplyResources(Me.rdoTemperature, "rdoTemperature")
+        Me.rdoTemperature.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoTemperature.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTemperature.FlatAppearance.BorderSize = 2
+        Me.rdoTemperature.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTemperature.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoTemperature.Name = "rdoTemperature"
+        Me.rdoTemperature.UseVisualStyleBackColor = True
         '
         'ucrInputToTemperature
         '
@@ -199,12 +232,41 @@ Partial Class dlgConversions
         resources.ApplyResources(Me.ucrInputToTemperature, "ucrInputToTemperature")
         Me.ucrInputToTemperature.Name = "ucrInputToTemperature"
         '
+        'ucrNudDecimal
+        '
+        Me.ucrNudDecimal.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDecimal.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudDecimal, "ucrNudDecimal")
+        Me.ucrNudDecimal.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDecimal.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDecimal.Name = "ucrNudDecimal"
+        Me.ucrNudDecimal.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlElements
+        '
+        resources.ApplyResources(Me.ucrPnlElements, "ucrPnlElements")
+        Me.ucrPnlElements.Name = "ucrPnlElements"
+        '
         'ucrInputFromWindSpeed
         '
         Me.ucrInputFromWindSpeed.AddQuotesIfUnrecognised = True
         Me.ucrInputFromWindSpeed.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputFromWindSpeed, "ucrInputFromWindSpeed")
         Me.ucrInputFromWindSpeed.Name = "ucrInputFromWindSpeed"
+        '
+        'ucrInputFromPrecipitation
+        '
+        Me.ucrInputFromPrecipitation.AddQuotesIfUnrecognised = True
+        Me.ucrInputFromPrecipitation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFromPrecipitation, "ucrInputFromPrecipitation")
+        Me.ucrInputFromPrecipitation.Name = "ucrInputFromPrecipitation"
+        '
+        'ucrInputToPrecipitation
+        '
+        Me.ucrInputToPrecipitation.AddQuotesIfUnrecognised = True
+        Me.ucrInputToPrecipitation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputToPrecipitation, "ucrInputToPrecipitation")
+        Me.ucrInputToPrecipitation.Name = "ucrInputToPrecipitation"
         '
         'ucrReceiverDate
         '
@@ -224,34 +286,10 @@ Partial Class dlgConversions
         Me.ucrReceiverStation.strNcFilePath = ""
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
-        'ucrNudDecimal
-        '
-        Me.ucrNudDecimal.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimal.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudDecimal, "ucrNudDecimal")
-        Me.ucrNudDecimal.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDecimal.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimal.Name = "ucrNudDecimal"
-        Me.ucrNudDecimal.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrSaveConversions
         '
         resources.ApplyResources(Me.ucrSaveConversions, "ucrSaveConversions")
         Me.ucrSaveConversions.Name = "ucrSaveConversions"
-        '
-        'ucrInputToPrecipitation
-        '
-        Me.ucrInputToPrecipitation.AddQuotesIfUnrecognised = True
-        Me.ucrInputToPrecipitation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputToPrecipitation, "ucrInputToPrecipitation")
-        Me.ucrInputToPrecipitation.Name = "ucrInputToPrecipitation"
-        '
-        'ucrInputFromPrecipitation
-        '
-        Me.ucrInputFromPrecipitation.AddQuotesIfUnrecognised = True
-        Me.ucrInputFromPrecipitation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFromPrecipitation, "ucrInputFromPrecipitation")
-        Me.ucrInputFromPrecipitation.Name = "ucrInputFromPrecipitation"
         '
         'ucrReceiverElement
         '
@@ -279,44 +317,6 @@ Partial Class dlgConversions
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrPnlElements
-        '
-        resources.ApplyResources(Me.ucrPnlElements, "ucrPnlElements")
-        Me.ucrPnlElements.Name = "ucrPnlElements"
-        '
-        'rdoWindSpeed
-        '
-        resources.ApplyResources(Me.rdoWindSpeed, "rdoWindSpeed")
-        Me.rdoWindSpeed.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoWindSpeed.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoWindSpeed.FlatAppearance.BorderSize = 2
-        Me.rdoWindSpeed.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoWindSpeed.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoWindSpeed.Name = "rdoWindSpeed"
-        Me.rdoWindSpeed.UseVisualStyleBackColor = True
-        '
-        'rdoRain
-        '
-        resources.ApplyResources(Me.rdoRain, "rdoRain")
-        Me.rdoRain.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoRain.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoRain.FlatAppearance.BorderSize = 2
-        Me.rdoRain.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoRain.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoRain.Name = "rdoRain"
-        Me.rdoRain.UseVisualStyleBackColor = True
-        '
-        'rdoTemperature
-        '
-        resources.ApplyResources(Me.rdoTemperature, "rdoTemperature")
-        Me.rdoTemperature.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoTemperature.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTemperature.FlatAppearance.BorderSize = 2
-        Me.rdoTemperature.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTemperature.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoTemperature.Name = "rdoTemperature"
-        Me.rdoTemperature.UseVisualStyleBackColor = True
         '
         'dlgConversions
         '

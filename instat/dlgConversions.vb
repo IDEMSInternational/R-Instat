@@ -75,12 +75,12 @@ Public Class dlgConversions
         ucrReceiverDate.SetParameterIsRFunction()
         ucrReceiverDate.Selector = ucrSelectorConversions
 
-        ucrReceiverLatitude.SetParameter(New RParameter("lat", 0, False))
+        ucrReceiverLatitude.SetParameter(New RParameter("lat", 0))
         ucrReceiverLatitude.bWithQuotes = False
         ucrReceiverLatitude.SetParameterIsRFunction()
         ucrReceiverLatitude.Selector = ucrSelectorConversions
 
-        ucrInputLatitude.SetParameter(New RParameter("lat", 0, False))
+        ucrInputLatitude.SetParameter(New RParameter("lat", 0))
         ucrInputLatitude.SetValidationTypeAsNumeric(dcmMin:=-90, dcmMax:=90)
         ucrInputLatitude.AddQuotesIfUnrecognised = False
 
@@ -98,9 +98,9 @@ Public Class dlgConversions
         ucrInputToPrecipitation.bAllowNonConditionValues = True
 
         ucrInputFromTemperature.SetParameter(New RParameter("old_metric", 1))
-        dctTemperatureUnits.Add("celsius", Chr(34) & "celsius" & Chr(34))
-        dctTemperatureUnits.Add("fahrenheit", Chr(34) & "fahrenheit" & Chr(34))
-        dctTemperatureUnits.Add("kelvin", Chr(34) & "kelvin" & Chr(34))
+        dctTemperatureUnits.Add("Celsius", Chr(34) & "celsius" & Chr(34))
+        dctTemperatureUnits.Add("Fahrenheit", Chr(34) & "fahrenheit" & Chr(34))
+        dctTemperatureUnits.Add("Kelvin", Chr(34) & "kelvin" & Chr(34))
         ucrInputFromTemperature.SetItems(dctTemperatureUnits)
         ucrInputFromTemperature.SetDropDownStyleAsNonEditable()
 
@@ -109,11 +109,11 @@ Public Class dlgConversions
         ucrInputToTemperature.SetDropDownStyleAsNonEditable()
 
         ucrInputFromWindSpeed.SetParameter(New RParameter("old_metric", 1))
-        dctWindSpeedUnits.Add("knots: Knots", Chr(34) & "knots" & Chr(34))
-        dctWindSpeedUnits.Add("mph: Miles per hour", Chr(34) & "mph" & Chr(34))
-        dctWindSpeedUnits.Add("mps: Meters per second", Chr(34) & "mps" & Chr(34))
-        dctWindSpeedUnits.Add("ftps: Feet per second", Chr(34) & "ftps" & Chr(34))
-        dctWindSpeedUnits.Add("kmph: Kilometers per hour", Chr(34) & "kmph" & Chr(34))
+        dctWindSpeedUnits.Add("Knots", Chr(34) & "knots" & Chr(34))
+        dctWindSpeedUnits.Add("Miles per hour (mph)", Chr(34) & "mph" & Chr(34))
+        dctWindSpeedUnits.Add("Meters per second (mps)", Chr(34) & "mps" & Chr(34))
+        dctWindSpeedUnits.Add("Feet per second (ftps)", Chr(34) & "ftps" & Chr(34))
+        dctWindSpeedUnits.Add("Kilometers per hour (kmph)", Chr(34) & "kmph" & Chr(34))
         ucrInputFromWindSpeed.SetItems(dctWindSpeedUnits)
         ucrInputFromWindSpeed.SetDropDownStyleAsNonEditable()
 
@@ -137,10 +137,10 @@ Public Class dlgConversions
 
         ucrPnlElements.AddToLinkedControls(ucrInputFromPrecipitation, {rdoRain}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlElements.AddToLinkedControls(ucrInputToPrecipitation, {rdoRain}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlElements.AddToLinkedControls(ucrInputFromTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="celsius")
-        ucrPnlElements.AddToLinkedControls(ucrInputToTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="celsius")
-        ucrPnlElements.AddToLinkedControls(ucrInputFromWindSpeed, {rdoWindSpeed}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="knots: Knots")
-        ucrPnlElements.AddToLinkedControls(ucrInputToWindSpeed, {rdoWindSpeed}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="knots: Knots")
+        ucrPnlElements.AddToLinkedControls(ucrInputFromTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Kelvin")
+        ucrPnlElements.AddToLinkedControls(ucrInputToTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Celsius")
+        ucrPnlElements.AddToLinkedControls(ucrInputFromWindSpeed, {rdoWindSpeed}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Knots")
+        ucrPnlElements.AddToLinkedControls(ucrInputToWindSpeed, {rdoWindSpeed}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Meters per second (mps)")
 
         ucrReceiverElement.SetLinkedDisplayControl(lblElement)
         ucrNudDecimal.SetLinkedDisplayControl(lstLabels)
@@ -168,9 +168,9 @@ Public Class dlgConversions
 
         clsPrecipitationFunction.SetPackageName("weathermetrics")
         clsPrecipitationFunction.SetRCommand("convert_precip")
-        clsPrecipitationFunction.AddParameter("round", 1, iPosition:=3)
+        clsPrecipitationFunction.AddParameter("round", 2, iPosition:=3)
         clsPrecipitationFunction.AddParameter("old_metric", Chr(34) & "inches" & Chr(34), iPosition:=1)
-        clsPrecipitationFunction.AddParameter("new_metric", Chr(34) & "inches" & Chr(34), iPosition:=1)
+        clsPrecipitationFunction.AddParameter("new_metric", Chr(34) & "mm" & Chr(34), iPosition:=2)
 
         clsTemperatureFunction.SetPackageName("weathermetrics")
         clsTemperatureFunction.SetRCommand("convert_temperature")
@@ -251,9 +251,11 @@ Public Class dlgConversions
         If rdoDayLength.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDayLengthFunction)
             ucrReceiverDate.SetMeAsReceiver()
+            ucrSaveConversions.SetPrefix("day_length")
         ElseIf rdoUnits.Checked Then
             SetBaseFunction()
             ucrReceiverElement.SetMeAsReceiver()
+            ucrSaveConversions.SetPrefix("Conversion")
         End If
     End Sub
 
