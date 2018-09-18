@@ -26,6 +26,9 @@ Public Class dlgTwoVariableFitModel
     Public clsFormulaOperator, clsPowerOperator As ROperator
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
 
+    'Saving Operators/Functions
+    Private clsResDolarOperator, clsFittedValOperator As New ROperator
+
     'Display options codes
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
 
@@ -162,6 +165,8 @@ Public Class dlgTwoVariableFitModel
         clsRgeom_point = New RFunction
         clsVisReg = New RFunction
         clsTransformFunction = New RFunction
+        clsResDolarOperator = New ROperator
+        clsFittedValOperator = New ROperator
 
         ucrSaveModels.Reset()
         ucrSelectorSimpleReg.Reset()
@@ -271,9 +276,20 @@ Public Class dlgTwoVariableFitModel
 
         clsTFunc.SetRCommand("c")
 
-        clsLM.SetAssignTo(ucrSaveModels.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
-        clsGLM.SetAssignTo(ucrSaveModels.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
+        clsLM.SetAssignTo(strTemp:=ucrSaveModels.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
+        clsGLM.SetAssignTo(strTemp:=ucrSaveModels.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
         clsLMOrGLM = clsLM
+
+        clsResDolarOperator.SetOperation("$")
+        clsResDolarOperator.bSpaceAroundOperation = False
+        clsResDolarOperator.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+        clsResDolarOperator.AddParameter("residuals", "residuals", iPosition:=1)
+
+        clsFittedValOperator.SetOperation("$")
+        clsFittedValOperator.bSpaceAroundOperation = False
+        clsFittedValOperator.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+        clsFittedValOperator.AddParameter("fitted.values", "fitted.values", iPosition:=1)
+
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
@@ -350,7 +366,7 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetOptionsSubDialog)
+        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, clsNewResDolarOperator:=clsResDolarOperator, clsNewFittedValOperator:=clsFittedValOperator, ucrNewAvailableDatafrane:=ucrSelectorSimpleReg.ucrAvailableDataFrames, bReset:=bResetOptionsSubDialog)
         sdgSimpleRegOptions.ShowDialog()
         GraphAssignTo()
         bResetOptionsSubDialog = False
