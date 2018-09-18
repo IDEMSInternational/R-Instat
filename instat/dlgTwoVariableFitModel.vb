@@ -27,6 +27,7 @@ Public Class dlgTwoVariableFitModel
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
 
     'Saving Operators/Functions
+    Private clsRstandardFunction, clsHatvaluesFunction As New RFunction
     Private clsResDolarOperator, clsFittedValOperator As New ROperator
 
     'Display options codes
@@ -165,6 +166,8 @@ Public Class dlgTwoVariableFitModel
         clsRgeom_point = New RFunction
         clsVisReg = New RFunction
         clsTransformFunction = New RFunction
+        clsRstandardFunction = New RFunction
+        clsHatvaluesFunction = New RFunction
         clsResDolarOperator = New ROperator
         clsFittedValOperator = New ROperator
 
@@ -290,6 +293,11 @@ Public Class dlgTwoVariableFitModel
         clsFittedValOperator.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
         clsFittedValOperator.AddParameter("fitted.values", "fitted.values", iPosition:=1)
 
+        clsRstandardFunction.SetRCommand("rstandard")
+        clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM)
+
+        clsHatvaluesFunction.SetRCommand("hatvalues")
+        clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
@@ -366,7 +374,7 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, clsNewResDolarOperator:=clsResDolarOperator, clsNewFittedValOperator:=clsFittedValOperator, ucrNewAvailableDatafrane:=ucrSelectorSimpleReg.ucrAvailableDataFrames, bReset:=bResetOptionsSubDialog)
+        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, clsNewResDolarOperator:=clsResDolarOperator, clsNewFittedValOperator:=clsFittedValOperator, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorSimpleReg.ucrAvailableDataFrames, bReset:=bResetOptionsSubDialog)
         sdgSimpleRegOptions.ShowDialog()
         GraphAssignTo()
         bResetOptionsSubDialog = False
