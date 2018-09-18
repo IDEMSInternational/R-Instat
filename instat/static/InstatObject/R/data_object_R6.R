@@ -1,5 +1,4 @@
-
-data_object <- R6::R6Class("data_object",
+DataSheet <- R6::R6Class("DataSheet",
                          public = list(
                            initialize = function(data = data.frame(), data_name = "", 
                                                  variables_metadata = data.frame(), metadata = list(), 
@@ -104,7 +103,7 @@ data_object <- R6::R6Class("data_object",
                           )
 )
 
-data_object$set("public", "set_data", function(new_data, messages=TRUE, check_names = TRUE) {
+DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_names = TRUE) {
   if(is.matrix(new_data)) new_data <- as.data.frame(new_data)
   #This case could happen when removing rows
   #as.data.frame preserves column and data frame attributes so no issue with this
@@ -143,7 +142,7 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE, check_na
 }
 )
 
-data_object$set("public", "set_meta", function(new_meta) {
+DataSheet$set("public", "set_meta", function(new_meta) {
   meta_data_copy <- new_meta
   self$clear_metadata()
   if(!is.list(meta_data_copy)) stop("new_meta must be of type: list")
@@ -156,7 +155,7 @@ data_object$set("public", "set_meta", function(new_meta) {
 )
 
 #Dangerous to call directly as could remove properties needed by InstatObject
-data_object$set("public", "clear_metadata", function() {
+DataSheet$set("public", "clear_metadata", function() {
   for(name in names(attributes(private$data))) {
     if(!name %in% c(data_type_label, data_name_label, "row.names", "names")) attr(private$data, name) <- NULL
   }
@@ -167,7 +166,7 @@ data_object$set("public", "clear_metadata", function() {
 )
 
 #Removed until can be fixed with attributes
-# data_object$set("public", "set_variables_metadata", function(new_meta) {
+# DataSheet$set("public", "set_variables_metadata", function(new_meta) {
 #   if(!is.data.frame(new_meta)) stop("variable metadata must be of type: data.frame")
 #   
 #   private$variables_metadata <- new_meta
@@ -175,14 +174,14 @@ data_object$set("public", "clear_metadata", function() {
 # }
 # )
 
-data_object$set("public", "set_changes", function(new_changes) {
+DataSheet$set("public", "set_changes", function(new_changes) {
   if(!is.list(new_changes)) stop("Changes must be of type: list")
   private$changes <- new_changes
   self$append_to_changes(list(Set_property, "changes"))  
 }
 )
 
-data_object$set("public", "set_filters", function(new_filters) {
+DataSheet$set("public", "set_filters", function(new_filters) {
   if(!is.list(new_filters)) stop("Filters must be of type: list")
   self$append_to_changes(list(Set_property, "filters"))  
   private$filters <- new_filters
@@ -192,35 +191,35 @@ data_object$set("public", "set_filters", function(new_filters) {
 }
 )
 
-data_object$set("public", "set_objects", function(new_objects) {
+DataSheet$set("public", "set_objects", function(new_objects) {
   if(!is.list(new_objects)) stop("new_objects must be of type: list")
   self$append_to_changes(list(Set_property, "objects"))  
   private$objects <- new_objects
 }
 )
 
-data_object$set("public", "set_calculations", function(new_calculations) {
+DataSheet$set("public", "set_calculations", function(new_calculations) {
   if(!is.list(new_calculations)) stop("new_calculations must be of type: list")
   self$append_to_changes(list(Set_property, "calculations"))  
   private$calculations <- new_calculations
 }
 )
 
-data_object$set("public", "set_keys", function(new_keys) {
+DataSheet$set("public", "set_keys", function(new_keys) {
   if(!is.list(new_keys)) stop("new_keys must be of type: list")
   self$append_to_changes(list(Set_property, "keys"))  
   private$keys <- new_keys
 }
 )
 
-data_object$set("public", "set_comments", function(new_comments) {
+DataSheet$set("public", "set_comments", function(new_comments) {
   if(!is.list(new_comments)) stop("new_comments must be of type: list")
   self$append_to_changes(list(Set_property, "comments"))  
   private$comments <- new_comments
 }
 )
 
-# data_object$set("public", "update_variables_metadata", function() {
+# DataSheet$set("public", "update_variables_metadata", function() {
 #   #Not needed now using attributes
 #   #if(ncol(private$data) !=  nrow(private$variables_metadata) || !all(colnames(private$data)==rownames(private$variables_metadata))) {
 #   #  if(all(colnames(private$data) %in% rownames(private$variables_metadata))) {
@@ -237,22 +236,22 @@ data_object$set("public", "set_comments", function(new_comments) {
 # }
 # )
 
-data_object$set("public", "set_data_changed", function(new_val) {
+DataSheet$set("public", "set_data_changed", function(new_val) {
   self$data_changed <- new_val
 }
 )
 
-data_object$set("public", "set_variables_metadata_changed", function(new_val) {
+DataSheet$set("public", "set_variables_metadata_changed", function(new_val) {
   self$variables_metadata_changed <- new_val
 }
 )
 
-data_object$set("public", "set_metadata_changed", function(new_val) {
+DataSheet$set("public", "set_metadata_changed", function(new_val) {
   self$metadata_changed <- new_val
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, ...) {
+DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, ...) {
   if(!stack_data) {
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
@@ -324,7 +323,7 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
 )
 
 # As a temp fix to rlink crashing here we access private$data directly
-data_object$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE) {
+DataSheet$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE) {
   #if(update) self$update_variables_metadata()
   if(direct_from_attributes) {
     #if(missing(property)) return(attributes(self$get_columns_from_data(column, use_current_filter = FALSE)))
@@ -419,19 +418,19 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
 }
 )
 
-data_object$set("public", "get_column_data_types", function(columns) {
+DataSheet$set("public", "get_column_data_types", function(columns) {
   if(missing(columns)) return(as.vector(sapply(private$data, function(x) paste(class(x), collapse = ","))))
   else return(as.vector(sapply(private$data[columns], function(x) paste(class(x), collapse = ","), USE.NAMES = FALSE)))
 }
 )
 
-data_object$set("public", "get_column_labels", function(columns) {
+DataSheet$set("public", "get_column_labels", function(columns) {
   if(missing(columns)) return(as.vector(sapply(private$data, function(x) paste(attr(x, "label"), collapse = ","))))
   else return(as.vector(sapply(private$data[columns], function(x) paste(attr(x, "label"), collapse = ","), USE.NAMES = FALSE)))
 }
 )
 
-data_object$set("public", "clear_variables_metadata", function() {
+DataSheet$set("public", "clear_variables_metadata", function() {
   for(column in self$get_data_frame(use_current_filter = FALSE)) {
     for(name in names(attributes(column))) {
       if(!name  %in% c(data_type_label, data_name_label)) attr(self, name) <- NULL
@@ -441,7 +440,7 @@ data_object$set("public", "clear_variables_metadata", function() {
 }
 )
 
-data_object$set("public", "get_metadata", function(label, include_calculated = TRUE, excluded_not_for_display = TRUE) {
+DataSheet$set("public", "get_metadata", function(label, include_calculated = TRUE, excluded_not_for_display = TRUE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   if(missing(label)) {
     if(include_calculated) {
@@ -465,22 +464,22 @@ data_object$set("public", "get_metadata", function(label, include_calculated = T
 }
 )
 
-data_object$set("public", "get_changes", function() {
+DataSheet$set("public", "get_changes", function() {
   return(private$changes)
 }
 )
 
-data_object$set("public", "get_calculations", function() {
+DataSheet$set("public", "get_calculations", function() {
   return(private$calculations)
 }
 )
 
-data_object$set("public", "get_calculation_names", function() {
+DataSheet$set("public", "get_calculation_names", function() {
   return(names(private$calculations))
 }
 )
 
-data_object$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols, require_correct_length = TRUE) {
+DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols, require_correct_length = TRUE) {
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(missing(num_cols)) {
@@ -564,7 +563,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
 )
 
 #A bug in sjPlot requires removing labels when a factor column already has labels, using remove_labels for this if needed.
-data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = TRUE, remove_labels = FALSE, drop_unused_filter_levels = FALSE) {
+DataSheet$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = TRUE, remove_labels = FALSE, drop_unused_filter_levels = FALSE) {
   if(missing(col_names)) stop("no col_names to return")
   #if(!all(col_names %in% self$get_column_names())) stop("Not all column names were found in data")
   if(!all(col_names %in% names(private$data))) stop("Not all column names were found in data")
@@ -597,7 +596,7 @@ data_object$set("public", "get_columns_from_data", function(col_names, force_as_
 }
 )
 
-data_object$set("public", "frequency_tables", function(x_col_names, y_col_name, addmargins = FALSE,  proportions = FALSE, percentages = FALSE,  transpose = FALSE) {
+DataSheet$set("public", "frequency_tables", function(x_col_names, y_col_name, addmargins = FALSE,  proportions = FALSE, percentages = FALSE,  transpose = FALSE) {
   if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_name are required")
   multiply_by = 1
   for (i in 1:length(x_col_names)){
@@ -613,7 +612,7 @@ data_object$set("public", "frequency_tables", function(x_col_names, y_col_name, 
 }
 )
 
-data_object$set("public", "anova_tables", function(x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
+DataSheet$set("public", "anova_tables", function(x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
   if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
   if(sign_level || signif.stars)warning("This is nolonger descriptive")
   if(sign_level)(end_col = 5)else(end_col = 4)
@@ -625,7 +624,7 @@ data_object$set("public", "anova_tables", function(x_col_names, y_col_name, sign
 }
 )
 
-data_object$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "") {
+DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "") {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   # Column name must be character
   if(new_col_name != curr_col_name) {
@@ -665,7 +664,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
 }
 )
 
-data_object$set("public", "remove_columns_in_data", function(cols=c(), allow_delete_all = FALSE) {
+DataSheet$set("public", "remove_columns_in_data", function(cols=c(), allow_delete_all = FALSE) {
   if(length(cols) == self$get_column_count()) {
     if(allow_delete_all) {
       warning("You are deleting all columns in the data frame.")
@@ -690,7 +689,7 @@ data_object$set("public", "remove_columns_in_data", function(cols=c(), allow_del
 }
 )
 
-data_object$set("public", "replace_value_in_data", function(col_names, rows, old_value, old_is_missing = FALSE, start_value = NA, end_value = NA, new_value, new_is_missing = FALSE, closed_start_value = TRUE, closed_end_value = TRUE, locf = FALSE, from_last = FALSE) {
+DataSheet$set("public", "replace_value_in_data", function(col_names, rows, old_value, old_is_missing = FALSE, start_value = NA, end_value = NA, new_value, new_is_missing = FALSE, closed_start_value = TRUE, closed_end_value = TRUE, locf = FALSE, from_last = FALSE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   # Column name must be character
   if(!all(is.character(col_names))) stop("Column name must be of type: character")
@@ -832,7 +831,7 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
 }
 )
 
-data_object$set("public", "append_to_metadata", function(property, new_value = "") {
+DataSheet$set("public", "append_to_metadata", function(property, new_value = "") {
   if(missing(property)) stop("property must be specified.")
   
   if (!is.character(property)) stop("property must be of type: character")
@@ -846,7 +845,7 @@ data_object$set("public", "append_to_metadata", function(property, new_value = "
 }
 )
 
-data_object$set("public", "append_to_variables_metadata", function(col_names, property, new_val = "") {
+DataSheet$set("public", "append_to_variables_metadata", function(col_names, property, new_val = "") {
   if(missing(property)) stop("property must be specified.")
   if(!is.character(property)) stop("property must be a character")
   if(!missing(col_names)) {
@@ -868,7 +867,7 @@ data_object$set("public", "append_to_variables_metadata", function(col_names, pr
 }
 )
 
-data_object$set("public", "append_to_changes", function(value) {
+DataSheet$set("public", "append_to_changes", function(value) {
   
   if(missing(value)) {
     stop("value arguements must be specified.")
@@ -879,12 +878,12 @@ data_object$set("public", "append_to_changes", function(value) {
 }
 )
 
-data_object$set("public", "is_metadata", function(str) {
+DataSheet$set("public", "is_metadata", function(str) {
   return(str %in% names(attributes(private$data)))
 }
 )
 
-data_object$set("public", "is_variables_metadata", function(str, col, return_vector = FALSE) {
+DataSheet$set("public", "is_variables_metadata", function(str, col, return_vector = FALSE) {
   if(str == data_type_label) return(TRUE)
   if(missing(col)) {
     dat <- self$get_data_frame(use_current_filter = FALSE)
@@ -898,14 +897,14 @@ data_object$set("public", "is_variables_metadata", function(str, col, return_vec
 }
 )
 
-data_object$set("public", "add_defaults_meta", function() {
+DataSheet$set("public", "add_defaults_meta", function() {
   if(!self$is_metadata(is_calculated_label)) self$append_to_metadata(is_calculated_label, FALSE)
   if(!self$is_metadata(is_hidden_label)) self$append_to_metadata(is_hidden_label, FALSE)
   if(!self$is_metadata(label_label)) self$append_to_metadata(label_label, "")
 }
 )
 
-data_object$set("public", "add_defaults_variables_metadata", function(column_names) {
+DataSheet$set("public", "add_defaults_variables_metadata", function(column_names) {
   for(column in column_names) {
     self$append_to_variables_metadata(column, name_label, column)
     if(!self$is_variables_metadata(is_hidden_label, column)) {
@@ -939,7 +938,7 @@ data_object$set("public", "add_defaults_variables_metadata", function(column_nam
 }
 )
 
-data_object$set("public", "remove_rows_in_data", function(row_names) {
+DataSheet$set("public", "remove_rows_in_data", function(row_names) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   if(!all(row_names %in% rownames(curr_data))) stop("Some of the row_names not found in data")
   rows_to_remove <- which(rownames(curr_data) %in% row_names)
@@ -953,12 +952,12 @@ data_object$set("public", "remove_rows_in_data", function(row_names) {
 }
 )
 
-data_object$set("public", "get_next_default_column_name", function(prefix) {
+DataSheet$set("public", "get_next_default_column_name", function(prefix) {
   return(next_default_item(prefix = prefix, existing_names = self$get_column_names()))
 }
 )
 
-data_object$set("public", "reorder_columns_in_data", function(col_order) {
+DataSheet$set("public", "reorder_columns_in_data", function(col_order) {
   if (ncol(self$get_data_frame(use_current_filter = FALSE)) != length(col_order)) stop("Columns to order should be same as columns in the data.")
   
   if(is.numeric(col_order)) {
@@ -981,7 +980,7 @@ data_object$set("public", "reorder_columns_in_data", function(col_order) {
 }
 )
 
-data_object$set("public", "insert_row_in_data", function(start_row, row_data = c(), number_rows = 1, before = FALSE) {
+DataSheet$set("public", "insert_row_in_data", function(start_row, row_data = c(), number_rows = 1, before = FALSE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   curr_row_names <- rownames(curr_data)
   if (!start_row %in% curr_row_names) {
@@ -1029,12 +1028,12 @@ data_object$set("public", "insert_row_in_data", function(start_row, row_data = c
 }
 )
 
-data_object$set("public", "get_data_frame_length", function(use_current_filter = FALSE) {
+DataSheet$set("public", "get_data_frame_length", function(use_current_filter = FALSE) {
   return(nrow(self$get_data_frame(use_current_filter = use_current_filter)))
 }
 )
 
-data_object$set("public", "get_factor_data_frame", function(col_name = "", include_levels = TRUE, include_NA_level = FALSE) {
+DataSheet$set("public", "get_factor_data_frame", function(col_name = "", include_levels = TRUE, include_NA_level = FALSE) {
   if(!(col_name %in% self$get_column_names())) stop(col_name, " is not a column name,")
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!(is.factor(col_data))) stop(col_name, " is not a factor column")
@@ -1065,7 +1064,7 @@ data_object$set("public", "get_factor_data_frame", function(col_name = "", inclu
 }
 )
 
-data_object$set("public", "get_column_factor_levels", function(col_name = "") {
+DataSheet$set("public", "get_column_factor_levels", function(col_name = "") {
   if(!(col_name %in% self$get_column_names())) {
     stop(col_name, " is not a column in", get_metadata(data_name_label))
   }
@@ -1078,7 +1077,7 @@ data_object$set("public", "get_column_factor_levels", function(col_name = "") {
 }
 )
 
-data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing = FALSE, na.last = TRUE, by_row_names = FALSE, row_names_as_numeric = TRUE) {
+DataSheet$set("public", "sort_dataframe", function(col_names = c(), decreasing = FALSE, na.last = TRUE, by_row_names = FALSE, row_names_as_numeric = TRUE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   string <- list()
   if(missing(col_names) || length(col_names) == 0) {
@@ -1108,7 +1107,7 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
 }
 )
 
-data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE, keep.labels = TRUE) {
+DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE, keep.labels = TRUE) {
   if(!all(col_names %in% self$get_column_names())) stop("Some column names not found in the data")
   
   if(length(to_type) !=1 ) {
@@ -1204,7 +1203,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
 }
 )
 
-data_object$set("public", "copy_columns", function(col_names = "") {
+DataSheet$set("public", "copy_columns", function(col_names = "") {
   for(col_name in col_names){
     if(!(col_name %in% self$get_column_names())) {
       stop(col_name, " is not a column in ", get_metadata(data_name_label))
@@ -1221,7 +1220,7 @@ data_object$set("public", "copy_columns", function(col_names = "") {
 }
 )
 
-data_object$set("public", "drop_unused_factor_levels", function(col_name) {
+DataSheet$set("public", "drop_unused_factor_levels", function(col_name) {
   if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.factor(col_data)) stop(col_name, " is not a factor.")
@@ -1240,7 +1239,7 @@ data_object$set("public", "drop_unused_factor_levels", function(col_name) {
 } 
 )
 
-data_object$set("public", "set_factor_levels", function(col_name, new_labels, new_levels, set_new_labels = TRUE) {
+DataSheet$set("public", "set_factor_levels", function(col_name, new_labels, new_levels, set_new_labels = TRUE) {
   if(!col_name %in% self$get_column_names()) stop(col_name, " not found in data.")
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.factor(col_data)) stop(col_name, " is not a factor.")
@@ -1270,7 +1269,7 @@ data_object$set("public", "set_factor_levels", function(col_name, new_labels, ne
 } 
 )
 
-data_object$set("public", "edit_factor_level", function(col_name, old_level, new_level) {
+DataSheet$set("public", "edit_factor_level", function(col_name, old_level, new_level) {
   if(!col_name %in% self$get_column_names()) stop(col_name, " not found in data.")
   if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(col_name, " is not a factor.")
   self$add_columns_to_data(col_name, plyr::mapvalues(x = self$get_columns_from_data(col_name, use_current_filter = FALSE), from = old_level, to = new_level))
@@ -1280,7 +1279,7 @@ data_object$set("public", "edit_factor_level", function(col_name, old_level, new
 )
 
 
-data_object$set("public", "set_factor_reference_level", function(col_name, new_ref_level) {
+DataSheet$set("public", "set_factor_reference_level", function(col_name, new_ref_level) {
   if(!col_name %in% self$get_column_names()) stop(col_name, " not found in data.")
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.factor(col_data)) stop(col_name, " is not a factor.")
@@ -1291,7 +1290,7 @@ data_object$set("public", "set_factor_reference_level", function(col_name, new_r
 } 
 )
 
-data_object$set("public", "reorder_factor_levels", function(col_name, new_level_names) {
+DataSheet$set("public", "reorder_factor_levels", function(col_name, new_level_names) {
   if(!col_name %in% self$get_column_names()) stop(col_name, " not found in data.")
   curr_column <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.factor(curr_column)) stop(col_name, " is not a factor.")
@@ -1309,12 +1308,12 @@ data_object$set("public", "reorder_factor_levels", function(col_name, new_level_
 }
 )
 
-data_object$set("public", "get_column_count", function(col_name, new_level_names) {
+DataSheet$set("public", "get_column_count", function(col_name, new_level_names) {
   return(ncol(private$data))
 }
 )
 
-data_object$set("public", "get_column_names", function(as_list = FALSE, include = list(), exclude = list(), excluded_items = c(), max_no) {
+DataSheet$set("public", "get_column_names", function(as_list = FALSE, include = list(), exclude = list(), excluded_items = c(), max_no) {
   if(length(include) == 0 && length(exclude) == 0) out <- names(private$data)
   else {
     if(data_type_label %in% names(include) && "numeric" %in% include[[data_type_label]]) {
@@ -1358,7 +1357,7 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
 )
 
 #TODO: Are there other types needed here?
-data_object$set("public", "get_data_type", function(col_name = "") {
+DataSheet$set("public", "get_data_type", function(col_name = "") {
   if(!(col_name %in% self$get_column_names())) {
     stop(paste(col_name, "is not a column in", self$get_metadata(data_name_label)))
   }
@@ -1395,7 +1394,7 @@ data_object$set("public", "get_data_type", function(col_name = "") {
 }
 )
 
-data_object$set("public", "set_hidden_columns", function(col_names = c()) {
+DataSheet$set("public", "set_hidden_columns", function(col_names = c()) {
   if(length(col_names) == 0) self$unhide_all_columns()
   else {
     if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
@@ -1407,12 +1406,12 @@ data_object$set("public", "set_hidden_columns", function(col_names = c()) {
 }
 )
 
-data_object$set("public", "unhide_all_columns", function() {
+DataSheet$set("public", "unhide_all_columns", function() {
   self$append_to_variables_metadata(self$get_column_names(), is_hidden_label, FALSE)
 }
 )
 
-data_object$set("public", "set_row_names", function(row_names) {
+DataSheet$set("public", "set_row_names", function(row_names) {
   if(missing(row_names)) row_names = 1:nrow(self$get_data_frame(use_current_filter = FALSE))
   if(length(row_names) != nrow(self$get_data_frame(use_current_filter = FALSE))) stop("row_names must be a vector of same length as the data")
   if(anyDuplicated(row_names) != 0) stop("row_names must be unique")
@@ -1421,7 +1420,7 @@ data_object$set("public", "set_row_names", function(row_names) {
 }
 )
 
-data_object$set("public", "set_col_names", function(col_names) {
+DataSheet$set("public", "set_col_names", function(col_names) {
   if(missing(col_names)) col_names = 1:ncol(self$get_data_frame(use_current_filter = FALSE))
   if(length(col_names) != ncol(self$get_data_frame(use_current_filter = FALSE))) stop("col_names must be a vector of same length as the data")
   if(anyDuplicated(col_names) != 0) stop("col_names must be unique")
@@ -1430,17 +1429,17 @@ data_object$set("public", "set_col_names", function(col_names) {
 }
 )
 
-data_object$set("public", "get_row_names", function() {
+DataSheet$set("public", "get_row_names", function() {
   return(rownames(private$data))
 }
 )
 
-data_object$set("public", "get_dim_dataframe", function() {
+DataSheet$set("public", "get_dim_dataframe", function() {
   return(dim(self$get_data_frame(use_current_filter = FALSE)))
 }
 )
 
-data_object$set("public", "set_protected_columns", function(col_names) {
+DataSheet$set("public", "set_protected_columns", function(col_names) {
   if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
   
   self$append_to_variables_metadata(col_names, is_protected_label, TRUE)
@@ -1449,7 +1448,7 @@ data_object$set("public", "set_protected_columns", function(col_names) {
 }
 )
 
-data_object$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE, is_no_filter = FALSE) {
+DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE, is_no_filter = FALSE) {
   if(missing(filter)) stop("filter is required")
   if(filter_name == "") filter_name = next_default_item("Filter", names(private$filters))
   
@@ -1475,18 +1474,18 @@ data_object$set("public", "add_filter", function(filter, filter_name = "", repla
 }
 )
 
-data_object$set("public", "get_current_filter", function() {
+DataSheet$set("public", "get_current_filter", function() {
   return(private$.current_filter)
 }
 )
 
-data_object$set("public", "set_current_filter", function(filter_name = "") {
+DataSheet$set("public", "set_current_filter", function(filter_name = "") {
   if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
   self$current_filter <- private$filters[[filter_name]]
 }
 )
 
-data_object$set("public", "get_filter_names", function(as_list = FALSE, include = list(), exclude = list(), excluded_items = c()) {
+DataSheet$set("public", "get_filter_names", function(as_list = FALSE, include = list(), exclude = list(), excluded_items = c()) {
   out = names(private$filters)
   if(length(excluded_items) > 0) {
     ex_ind = which(out %in% excluded_items)
@@ -1502,14 +1501,14 @@ data_object$set("public", "get_filter_names", function(as_list = FALSE, include 
 }
 )
 
-data_object$set("public", "get_filter", function(filter_name) {
+DataSheet$set("public", "get_filter", function(filter_name) {
   if(missing(filter_name)) return(private$filters)
   if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
   return(private$filters[[filter_name]])
 }
 )
 
-data_object$set("public", "get_filter_as_logical", function(filter_name) {
+DataSheet$set("public", "get_filter_as_logical", function(filter_name) {
   curr_filter <- self$get_filter(filter_name)
   i = 1
   if(length(curr_filter$filter_conditions) ==  0) out <- rep(TRUE, nrow(self$get_data_frame(use_current_filter = FALSE)))
@@ -1535,7 +1534,7 @@ data_object$set("public", "get_filter_as_logical", function(filter_name) {
 }
 )
 
-data_object$set("public", "get_filter_column_names", function(filter_name) {
+DataSheet$set("public", "get_filter_column_names", function(filter_name) {
   curr_filter <- self$get_filter(filter_name)
   column_names <- c()
   for(i in seq_along(curr_filter$filter_conditions)) {
@@ -1545,24 +1544,24 @@ data_object$set("public", "get_filter_column_names", function(filter_name) {
 }
 )
 
-data_object$set("public", "get_current_filter_column_names", function() {
+DataSheet$set("public", "get_current_filter_column_names", function() {
   return(self$get_filter_column_names(private$.current_filter$name))
 }
 )
 
 
 
-data_object$set("public", "filter_applied", function() {
+DataSheet$set("public", "filter_applied", function() {
   return(!private$.current_filter$parameters[["is_no_filter"]])
 }
 )
 
-data_object$set("public", "remove_current_filter", function() {
+DataSheet$set("public", "remove_current_filter", function() {
   self$set_current_filter("no_filter")
 }
 )
 
-data_object$set("public", "filter_string", function(filter_name) {
+DataSheet$set("public", "filter_string", function(filter_name) {
   if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
   curr_filter <- self$get_filter(filter_name)
   out = "("
@@ -1580,7 +1579,7 @@ data_object$set("public", "filter_string", function(filter_name) {
 }
 )
 
-data_object$set("public", "get_filter_as_instat_calculation", function(filter_name) {
+DataSheet$set("public", "get_filter_as_instat_calculation", function(filter_name) {
   if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
   curr_filter <- self$get_filter(filter_name)
   filter_string <- self$filter_string(filter_name)
@@ -1594,7 +1593,7 @@ data_object$set("public", "get_filter_as_instat_calculation", function(filter_na
 }
 )
 
-data_object$set("public", "get_variables_metadata_fields", function(as_list = FALSE, include = c(), exclude = c(), excluded_items = c()) {
+DataSheet$set("public", "get_variables_metadata_fields", function(as_list = FALSE, include = c(), exclude = c(), excluded_items = c()) {
   out = names(self$get_variables_metadata())
   if(length(excluded_items) > 0){
     ex_ind = which(out %in% excluded_items)
@@ -1610,7 +1609,7 @@ data_object$set("public", "get_variables_metadata_fields", function(as_list = FA
 }
 )
 
-data_object$set("public", "add_object", function(object, object_name) {
+DataSheet$set("public", "add_object", function(object, object_name) {
   if(missing(object_name)) object_name = next_default_item("object", names(private$objects))
   if(object_name %in% names(private$objects)) message("An object called ", object_name, " already exists. It will be replaced.")
   private$objects[[object_name]] <- object
@@ -1621,7 +1620,7 @@ data_object$set("public", "add_object", function(object, object_name) {
 }
 )
 
-data_object$set("public", "get_objects", function(object_name, type = "", force_as_list = FALSE) {
+DataSheet$set("public", "get_objects", function(object_name, type = "", force_as_list = FALSE) {
   curr_objects = private$objects[self$get_object_names(type = type)]
   if(length(curr_objects) == 0) return(curr_objects)
   if(missing(object_name)) return(curr_objects)
@@ -1635,7 +1634,7 @@ data_object$set("public", "get_objects", function(object_name, type = "", force_
 }
 )
 
-data_object$set("public", "get_object_names", function(type = "", as_list = FALSE, excluded_items = c()) {
+DataSheet$set("public", "get_object_names", function(type = "", as_list = FALSE, excluded_items = c()) {
   if(type == "") out = names(private$objects)
   else {
     if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
@@ -1658,26 +1657,26 @@ data_object$set("public", "get_object_names", function(type = "", as_list = FALS
 }
 )
 
-data_object$set("public", "get_last_graph_name", function() {
+DataSheet$set("public", "get_last_graph_name", function() {
   return(private$.last_graph)
 }
 )
 
-data_object$set("public", "get_last_graph", function() {
+DataSheet$set("public", "get_last_graph", function() {
   if(!is.null(private$.last_graph)) {
     self$get_objects(object_name = private$.last_graph, type = graph_label)
   }
 }
 )
 
-data_object$set("public", "rename_object", function(object_name, new_name) {
+DataSheet$set("public", "rename_object", function(object_name, new_name) {
   if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
   if(new_name %in% names(private$objects)) stop(new_name, " is already an object name. Cannot rename ", object_name, " to ", new_name)
   names(private$objects)[names(private$objects) == object_name] <- new_name
 }
 )
 
-data_object$set("public", "delete_objects", function(object_names) {
+DataSheet$set("public", "delete_objects", function(object_names) {
   if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in objects list")
   private$objects[names(private$objects) == object_names] <- NULL
   if(!is.null(private$.last_graph) && private$.last_graph %in% object_names) {
@@ -1686,14 +1685,14 @@ data_object$set("public", "delete_objects", function(object_names) {
 }
 )
 
-data_object$set("public", "reorder_objects", function(new_order) {
+DataSheet$set("public", "reorder_objects", function(new_order) {
   if(length(new_order) != length(private$objects) || !setequal(new_order, names(private$objects))) stop("new_order must be a permutation of the current object names.")
   self$set_objects(private$objects[new_order])
 }
 )
 
 # Any data_clone method must have ... argument to ensure that when arguments are added in future this is still compatible with older versions of this code
-data_object$set("public", "data_clone", function(include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE, ...) {
+DataSheet$set("public", "data_clone", function(include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE, ...) {
   if(include_objects) new_objects <- private$objects
   else new_objects <- list()
   if(include_filters) new_filters <- lapply(private$filters, function(x) x$data_clone())
@@ -1703,7 +1702,7 @@ data_object$set("public", "data_clone", function(include_objects = TRUE, include
   if(include_comments) new_comments <- lapply(private$comments, function(x) x$data_clone())
   else new_comments <- list()
   
-  ret <- data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), filters = new_filters, objects = new_objects, calculations = new_calculations, keys = private$keys, comments = new_comments, keep_attributes = include_metadata)
+  ret <- DataSheet$new(data = private$data, data_name = self$get_metadata(data_name_label), filters = new_filters, objects = new_objects, calculations = new_calculations, keys = private$keys, comments = new_comments, keep_attributes = include_metadata)
   if(include_logs) ret$set_changes(private$changes)
   else ret$set_changes(list())
   if(include_filters) ret$current_filter <- self$get_current_filter()
@@ -1721,20 +1720,20 @@ data_object$set("public", "data_clone", function(include_objects = TRUE, include
 }
 )
 
-data_object$set("public", "freeze_columns", function(column) {
+DataSheet$set("public", "freeze_columns", function(column) {
   self$unfreeze_columns()
   self$append_to_variables_metadata(column, is_frozen_label, TRUE)
 }
 )
 
-data_object$set("public", "unfreeze_columns", function() {
+DataSheet$set("public", "unfreeze_columns", function() {
   self$append_to_variables_metadata(self$get_column_names(), is_frozen_label, FALSE)
 }
 )
 
 #TODO maybe get ride of this method as that you can't create a key without
 #     the instat object also creating a self link
-data_object$set("public", "add_key", function(col_names, key_name) {
+DataSheet$set("public", "add_key", function(col_names, key_name) {
   cols <- self$get_columns_from_data(col_names, use_current_filter = FALSE)
   if(anyDuplicated(cols) > 0) {
     stop("key columns must have unique combinations")
@@ -1754,17 +1753,17 @@ data_object$set("public", "add_key", function(col_names, key_name) {
 }
 )
 
-data_object$set("public", "is_key", function(col_names) {
+DataSheet$set("public", "is_key", function(col_names) {
   return(any(sapply(private$keys, function(x) setequal(col_names,x))))
 }
 )
 
-data_object$set("public", "has_key", function() {
+DataSheet$set("public", "has_key", function() {
   return(length(private$keys) > 0)
 }
 )
 
-data_object$set("public", "get_keys", function(key_name) {
+DataSheet$set("public", "get_keys", function(key_name) {
   if(!missing(key_name)) {
     if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
     return(private$keys[[key_name]])
@@ -1773,13 +1772,13 @@ data_object$set("public", "get_keys", function(key_name) {
 }
 )
 
-data_object$set("public", "remove_key", function(key_name) {
+DataSheet$set("public", "remove_key", function(key_name) {
   if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
   private$keys[[key_name]] <- NULL
 }
 )
 
-data_object$set("public", "get_comments", function(comment_id) {
+DataSheet$set("public", "get_comments", function(comment_id) {
   if(!missing(comment_id)) {
     if(!comment_id %in% self$get_comment_ids()) stop("Could not find comment with id: ", comment_id)
     return(private$comments[[comment_id]])
@@ -1788,13 +1787,13 @@ data_object$set("public", "get_comments", function(comment_id) {
 }
 )
 
-data_object$set("public", "remove_comment", function(key_name) {
+DataSheet$set("public", "remove_comment", function(key_name) {
   if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
   private$keys[[key_name]] <- NULL
 }
 )
 
-data_object$set("public", "set_structure_columns", function(struc_type_1, struc_type_2, struc_type_3) {
+DataSheet$set("public", "set_structure_columns", function(struc_type_1, struc_type_2, struc_type_3) {
   if(!all(c(struc_type_1,struc_type_2,struc_type_3) %in% self$get_column_names())) stop("Some column names not recognised.")
   if(length(intersect(struc_type_1,struc_type_2)) > 0 || length(intersect(struc_type_1,struc_type_3)) > 0 || length(intersect(struc_type_2,struc_type_3)) > 0) {
     stop("Each column can only be assign one structure type.")
@@ -1808,7 +1807,7 @@ data_object$set("public", "set_structure_columns", function(struc_type_1, struc_
 }
 )
 
-data_object$set("public", "add_dependent_columns", function(columns, dependent_cols) {
+DataSheet$set("public", "add_dependent_columns", function(columns, dependent_cols) {
   for(col in columns) {
     if(self$is_variables_metadata(dependent_columns_label, col)) {
       curr_dependents <- self$get_variables_metadata(property = dependent_columns_label, column = col, direct_from_attributes = TRUE)
@@ -1827,7 +1826,7 @@ data_object$set("public", "add_dependent_columns", function(columns, dependent_c
 }
 )
 
-data_object$set("public", "set_column_colours", function(columns, colours) {
+DataSheet$set("public", "set_column_colours", function(columns, colours) {
   if(missing(columns)) columns <- self$get_column_names()
   if(length(columns) != length(colours)) stop("columns must be the same length as colours")
   
@@ -1839,12 +1838,12 @@ data_object$set("public", "set_column_colours", function(columns, colours) {
 }
 )
 
-data_object$set("public", "has_colours", function(columns) {
+DataSheet$set("public", "has_colours", function(columns) {
   return(self$is_variables_metadata(str = colour_label))
 }
 )
 
-data_object$set("public", "set_column_colours_by_metadata", function(columns, property) {
+DataSheet$set("public", "set_column_colours_by_metadata", function(columns, property) {
   if(missing(columns)) property_values <- self$get_variables_metadata(property = property)
   else property_values <- self$get_variables_metadata(property = property, column = columns)
   
@@ -1855,14 +1854,14 @@ data_object$set("public", "set_column_colours_by_metadata", function(columns, pr
 }
 )
 
-data_object$set("public", "remove_column_colours", function() {
+DataSheet$set("public", "remove_column_colours", function() {
   if(self$is_variables_metadata(str = colour_label)) {
     self$append_to_variables_metadata(property = colour_label, new_val = -1)
   }
 }
 )
 
-data_object$set("public", "graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, coord_flip = FALSE, ...) {
+DataSheet$set("public", "graph_one_variable", function(columns, numeric = "geom_boxplot", categorical = "geom_bar", output = "facets", free_scale_axis = FALSE, ncol = NULL, coord_flip = FALSE, ...) {
   if(!all(columns %in% self$get_column_names())) {
     stop("Not all columns found in the data")
   }
@@ -2002,7 +2001,7 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
 }
 )
 
-data_object$set("public","make_date_yearmonthday", function(year, month, day, f_year, f_month, f_day, year_format = "%Y", month_format = "%m") {
+DataSheet$set("public","make_date_yearmonthday", function(year, month, day, f_year, f_month, f_day, year_format = "%Y", month_format = "%m") {
   if(!missing(year)) year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
   else if(!missing(f_year)) year_col <- f_year
   else stop("One of year or f_year must be specified.")
@@ -2034,7 +2033,7 @@ data_object$set("public","make_date_yearmonthday", function(year, month, day, f_
 )
 
 # Not sure if doy_format should be a parameter? There seems to only be one format for it.
-data_object$set("public","make_date_yeardoy", function(year, doy, year_format = "%Y", doy_format = "%j", doy_typical_length = "366") {
+DataSheet$set("public","make_date_yeardoy", function(year, doy, year_format = "%Y", doy_format = "%j", doy_typical_length = "366") {
   year_col <- self$get_columns_from_data(year, use_current_filter = FALSE)
   doy_col <- self$get_columns_from_data(doy, use_current_filter = FALSE)
   
@@ -2060,7 +2059,7 @@ data_object$set("public","make_date_yeardoy", function(year, doy, year_format = 
 }
 )
 
-data_object$set("public","set_contrasts_of_factor", function(col_name, new_contrasts, defined_contr_matrix) {
+DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contrasts, defined_contr_matrix) {
   if(!col_name %in% self$get_column_names()) stop(col_name, " not found in the data")
   if(!is.factor(self$get_columns_from_data(col_name))) stop(factor, " is not a factor column.")
   factor_col <- self$get_columns_from_data(col_name)
@@ -2082,7 +2081,7 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
 )
 
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
-data_object$set("public","split_date", function(col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE,  weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE,  dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1) {
+DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE,  weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE,  dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!lubridate::is.Date(col_data)) stop("This column must be a date or time!")
   
@@ -2194,8 +2193,9 @@ data_object$set("public","split_date", function(col_name = "", year_val = FALSE,
     self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
   }
   if(day_in_year) {
-    day_in_year_vector <- (lubridate::yday(col_data) + (367 - s_start_month)) %% 366
-	  day_in_year_vector <- ifelse(day_in_year_vector == 0, 365, day_in_year_vector)
+    day_in_year_vector <- lubridate::yday(col_data) - s_start_day + 1 + (!lubridate::leap_year(col_data) & s_start_day > 59)
+    day_in_year_vector <- dplyr::if_else(lubridate::leap_year(col_data), day_in_year_vector %% 366, day_in_year_vector %% 365)
+	  day_in_year_vector <- dplyr::if_else(day_in_year_vector == 0, dplyr::if_else(lubridate::leap_year(col_data), 366, 365), day_in_year_vector)
     col_name <- next_default_item(prefix = "doy_365", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_year_vector)
     if(is_climatic) self$set_climatic_types(types = c(doy = col_name))
@@ -2319,7 +2319,7 @@ climatic_type_label = "Climatic_Type"
 # Data frame metadata
 is_climatic_label = "Is_Climatic"
 
-instat_object$set("public","define_as_climatic", function(data_name, types, key_col_names, key_name) {
+DataBook$set("public","define_as_climatic", function(data_name, types, key_col_names, key_name) {
   self$add_key(data_name = data_name, col_names = key_col_names, key_name = key_name)
   self$append_to_dataframe_metadata(data_name, is_climatic_label, TRUE)
 
@@ -2332,7 +2332,7 @@ instat_object$set("public","define_as_climatic", function(data_name, types, key_
 }
 )
 
-data_object$set("public","set_climatic_types", function(types) {
+DataSheet$set("public","set_climatic_types", function(types) {
   if(!all(names(types) %in% all_climatic_column_types)) stop("Cannot recognise the following climatic types: ", paste(names(types)[!names(types) %in% all_climatic_column_types], collapse = ", "))
   invisible(sapply(names(types), function(name) self$append_to_variables_metadata(types[name], climatic_type_label, name)))
 }
@@ -2340,7 +2340,7 @@ data_object$set("public","set_climatic_types", function(types) {
 
 #Method for creating inventory plot
 
-data_object$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot", key_colours = c("red", "grey"), display_rain_days = FALSE, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), key_colours = c("tan3", "blue"))) {
+DataSheet$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot", key_colours = c("red", "grey"), display_rain_days = FALSE, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), key_colours = c("tan3", "blue"))) {
   if(!self$is_climatic_data()) stop("Data is not defined as climatic.")
   if(missing(date_col)) stop("Date columns must be specified.")
   if(missing(element_cols)) stop("Element column(s) must be specified.")
@@ -2475,7 +2475,7 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
 }
 )
 
-data_object$set("public","infill_missing_dates", function(date_name, factors, resort = TRUE) {
+DataSheet$set("public","infill_missing_dates", function(date_name, factors, resort = TRUE) {
   date_col <- self$get_columns_from_data(date_name)
   if(!lubridate::is.Date(date_col)) stop(date_name, " is not a Date column.")
   if(anyNA(date_col)) stop("Cannot do infilling as date column has missing values")
@@ -2531,7 +2531,7 @@ data_object$set("public","infill_missing_dates", function(date_name, factors, re
 }
 )
 
-data_object$set("public","get_key_names", function(include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+DataSheet$set("public","get_key_names", function(include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   key_names <- names(private$keys)
   if(as_list) {
     out <- list()
@@ -2679,12 +2679,12 @@ corruption_contract_level_label = "Contract_Level"
 corruption_country_level_label = "Country_Level"
 
 
-instat_object$set("public","define_corruption_outputs", function(data_name, output_columns = c()) {
+DataBook$set("public","define_corruption_outputs", function(data_name, output_columns = c()) {
   self$get_data_objects(data_name)$define_corruption_outputs(output_columns)
 }
 )
 
-data_object$set("public","define_corruption_outputs", function(output_columns = c()) {
+DataSheet$set("public","define_corruption_outputs", function(output_columns = c()) {
   all_cols <- self$get_column_names()
   if(!self$is_metadata(corruption_data_label)) {
     stop("Cannot define corruption outputs when data frame is not defined as corruption data.")
@@ -2696,12 +2696,12 @@ data_object$set("public","define_corruption_outputs", function(output_columns = 
 }
 )
 
-instat_object$set("public","define_red_flags", function(data_name, red_flags = c()) {
+DataBook$set("public","define_red_flags", function(data_name, red_flags = c()) {
   self$get_data_objects(data_name)$define_red_flags(red_flags)
 }
 )
 
-data_object$set("public","define_red_flags", function(red_flags = c()) {
+DataSheet$set("public","define_red_flags", function(red_flags = c()) {
   if(!self$is_metadata(corruption_data_label)) {
     stop("Cannot define red flags when data frame is not defined as procurement data.")
   }
@@ -2712,7 +2712,7 @@ data_object$set("public","define_red_flags", function(red_flags = c()) {
 }
 )
 
-instat_object$set("public","define_as_procurement", function(data_name, primary_types = c(), calculated_types = c(), country_data_name, country_types, auto_generate = TRUE) {
+DataBook$set("public","define_as_procurement", function(data_name, primary_types = c(), calculated_types = c(), country_data_name, country_types, auto_generate = TRUE) {
   self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_contract_level_label)
   self$get_data_objects(data_name)$set_procurement_types(primary_types, calculated_types, auto_generate)
   if(!missing(country_data_name)) {
@@ -2721,7 +2721,7 @@ instat_object$set("public","define_as_procurement", function(data_name, primary_
 }
 )
 
-instat_object$set("public","define_as_procurement_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
+DataBook$set("public","define_as_procurement_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
   self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_country_level_label)
   self$get_data_objects(data_name)$define_as_procurement_country_level_data(types, auto_generate)
   contract_level_country_name <- self$get_corruption_column_name(contract_level_data_name, corruption_country_label)
@@ -2733,59 +2733,59 @@ instat_object$set("public","define_as_procurement_country_level_data", function(
 }
 )
 
-data_object$set("public","define_as_procurement_country_level_data", function(types = c(), auto_generate = TRUE) {
+DataSheet$set("public","define_as_procurement_country_level_data", function(types = c(), auto_generate = TRUE) {
   invisible(sapply(names(types), function(x) self$append_to_variables_metadata(types[[x]], corruption_type_label, x)))
 }
 )
 
-data_object$set("public","is_corruption_type_present", function(type) {
+DataSheet$set("public","is_corruption_type_present", function(type) {
   return(self$is_metadata(corruption_data_label) && !is.na(self$get_metadata(corruption_data_label)) && self$is_variables_metadata(corruption_type_label) && (type %in% self$get_variables_metadata(property = corruption_type_label)))
 }
 )
 
-instat_object$set("public","get_CRI_component_column_names", function(data_name) {
+DataBook$set("public","get_CRI_component_column_names", function(data_name) {
   self$get_data_objects(data_name)$get_CRI_component_column_names()
 }
 )
 
-data_object$set("public","get_CRI_component_column_names", function() {
+DataSheet$set("public","get_CRI_component_column_names", function() {
   include <- list(TRUE)
   names(include) <- corruption_index_label
   return(self$get_column_names(include = include))
 }
 )
 
-instat_object$set("public","get_red_flag_column_names", function(data_name) {
+DataBook$set("public","get_red_flag_column_names", function(data_name) {
   self$get_data_objects(data_name)$get_red_flag_column_names()
 }
 )
 
-data_object$set("public","get_red_flag_column_names", function() {
+DataSheet$set("public","get_red_flag_column_names", function() {
   include <- list(TRUE)
   names(include) <- corruption_red_flag_label
   return(self$get_column_names(include = include))
 }
 )
 
-instat_object$set("public","get_CRI_column_names", function(data_name) {
+DataBook$set("public","get_CRI_column_names", function(data_name) {
   self$get_data_objects(data_name)$get_CRI_column_names()
 }
 )
 
 # Temporary since metadata not added to CRI columns when calculated
-data_object$set("public","get_CRI_column_names", function() {
+DataSheet$set("public","get_CRI_column_names", function() {
   col_names <- self$get_column_names()
   CRI_cols <- col_names[startsWith(col_names, "CRI")]
   return(CRI_cols)
 }
 )
 
-instat_object$set("public","get_corruption_column_name", function(data_name, type) {
+DataBook$set("public","get_corruption_column_name", function(data_name, type) {
   self$get_data_objects(data_name)$get_corruption_column_name(type)
 }
 )
 
-data_object$set("public","get_corruption_column_name", function(type) {
+DataSheet$set("public","get_corruption_column_name", function(type) {
   if(self$is_corruption_type_present(type)) {
     var_metadata <- self$get_variables_metadata()
     col_name <- var_metadata[!is.na(var_metadata[[corruption_type_label]]) & var_metadata[[corruption_type_label]] == type, name_label]
@@ -2796,7 +2796,7 @@ data_object$set("public","get_corruption_column_name", function(type) {
 }
 )
 
-data_object$set("public","set_procurement_types", function(primary_types = c(), calculated_types = c(), auto_generate = TRUE) {
+DataSheet$set("public","set_procurement_types", function(primary_types = c(), calculated_types = c(), auto_generate = TRUE) {
   if(!all(names(primary_types) %in% all_primary_corruption_column_types)) stop("Cannot recognise the following primary corruption data types: ", paste(names(primary_types)[!names(primary_types) %in% all_primary_corruption_column_types], collapse = ", "))
   if(!all(names(calculated_types) %in% all_calculated_corruption_column_types)) stop("Cannot recognise the following calculated corruption data types: ", paste(names(calculated_types)[!names(calculated_types) %in% all_calculated_corruption_column_types], collapse = ", "))
   if(!all(c(primary_types, calculated_types) %in% self$get_column_names())) stop("The following columns do not exist in the data:", paste(c(primary_types, calculated_types)[!(c(primary_types, calculated_types) %in% self$get_column_names())], collapse = ", "))
@@ -2829,7 +2829,7 @@ data_object$set("public","set_procurement_types", function(primary_types = c(), 
 }
 )
 
-data_object$set("public","generate_award_year", function() {
+DataSheet$set("public","generate_award_year", function() {
   if(!self$is_corruption_type_present(corruption_award_year_label)) {
     if(!self$is_corruption_type_present(corruption_award_date_label)) message("Cannot auto generate ", corruption_award_year_label, " because ", corruption_award_date_label, " column is not present.")
     else {
@@ -2846,7 +2846,7 @@ data_object$set("public","generate_award_year", function() {
 }
 )
 
-data_object$set("public","generate_procedure_type", function() {
+DataSheet$set("public","generate_procedure_type", function() {
   if(!self$is_corruption_type_present(corruption_procedure_type_label)) {
     if(!self$is_corruption_type_present(corruption_method_type_label)) message("Cannot auto generate ", corruption_procedure_type_label, " because ", corruption_method_type_label, " is not defined.")
     else {
@@ -2864,7 +2864,7 @@ data_object$set("public","generate_procedure_type", function() {
 }
 )
 
-data_object$set("public","generate_procuring_authority_id", function() {
+DataSheet$set("public","generate_procuring_authority_id", function() {
   if(!self$is_corruption_type_present(corruption_procuring_authority_id_label)) {
     if(!self$is_corruption_type_present(corruption_procuring_authority_label) | !self$is_corruption_type_present(corruption_country_label)) message("Cannot auto generate ", corruption_procuring_authority_id_label, " because ", corruption_procuring_authority_label, "or ", corruption_award_year_label, " is not defined.")
     else {
@@ -2879,7 +2879,7 @@ data_object$set("public","generate_procuring_authority_id", function() {
 }
 )
 
-data_object$set("public","generate_winner_id", function() {
+DataSheet$set("public","generate_winner_id", function() {
   if(!self$is_corruption_type_present(corruption_winner_id_label)) {
     if(!self$is_corruption_type_present(corruption_winner_name_label)) message("Cannot auto generate ", corruption_winner_id_label, " because ", corruption_winner_name_label, " is not defined.")
     else {
@@ -2894,7 +2894,7 @@ data_object$set("public","generate_winner_id", function() {
 }
 )
 
-data_object$set("public","generate_foreign_winner", function() {
+DataSheet$set("public","generate_foreign_winner", function() {
   if(!self$is_corruption_type_present(corruption_foreign_winner_label)) {
     if(!self$is_corruption_type_present(corruption_country_label) || !self$is_corruption_type_present(corruption_winner_country_label)) message("Cannot auto generate ", corruption_foreign_winner_label, " because ", corruption_country_label, " or ", corruption_winner_country_label, " are not defined.")
     else {
@@ -2909,7 +2909,7 @@ data_object$set("public","generate_foreign_winner", function() {
 }
 )
 
-data_object$set("public","generate_procurement_type_categories", function() {
+DataSheet$set("public","generate_procurement_type_categories", function() {
   if(!self$is_corruption_type_present(corruption_procurement_type_cats_label)) {
     if(!self$is_corruption_type_present(corruption_procedure_type_label)) message("Cannot auto generate ", corruption_procurement_type_cats_label, " because ", corruption_procedure_type_label, " are not defined.")
     else {
@@ -2932,7 +2932,7 @@ data_object$set("public","generate_procurement_type_categories", function() {
 }
 )
 
-data_object$set("public","generate_procurement_type_2", function() {
+DataSheet$set("public","generate_procurement_type_2", function() {
   if(!self$is_corruption_type_present(corruption_procurement_type_2_label)) {
     if(!self$is_corruption_type_present(corruption_procurement_type_cats_label)) message("Cannot auto generate ", corruption_procurement_type_2_label, " because ", corruption_procurement_type_cats_label, " are not defined.")
     else {
@@ -2950,7 +2950,7 @@ data_object$set("public","generate_procurement_type_2", function() {
 }
 )
 
-data_object$set("public","generate_procurement_type_3", function() {
+DataSheet$set("public","generate_procurement_type_3", function() {
   if(!self$is_corruption_type_present(corruption_procurement_type_3_label)) {
     if(!self$is_corruption_type_present(corruption_procurement_type_cats_label)) message("Cannot auto generate ", corruption_procurement_type_3_label, " because ", corruption_procurement_type_cats_label, " are not defined.")
     else {
@@ -2970,7 +2970,7 @@ data_object$set("public","generate_procurement_type_3", function() {
 }
 )
 
-data_object$set("public","generate_signature_period", function() {
+DataSheet$set("public","generate_signature_period", function() {
   if(!self$is_corruption_type_present(corruption_signature_period_label)) {
     if(!self$is_corruption_type_present(corruption_award_date_label) || !self$is_corruption_type_present(corruption_signature_date_label)) message("Cannot auto generate ", corruption_signature_period_label, " because ", corruption_award_date_label, "or", corruption_signature_date_label, " are not defined.")
     award_date <- self$get_columns_from_data(self$get_corruption_column_name(corruption_award_date_label))
@@ -2987,7 +2987,7 @@ data_object$set("public","generate_signature_period", function() {
 }
 )
 
-data_object$set("public","generate_signature_period_corrected", function() {
+DataSheet$set("public","generate_signature_period_corrected", function() {
   if(!self$is_corruption_type_present(corruption_signature_period_corrected_label)) {
     self$generate_signature_period()
     if(!self$is_corruption_type_present(corruption_signature_period_label)) message("Cannot auto generate ", corruption_signature_period_corrected_label, " because ", corruption_signature_period_label, " is not defined.")
@@ -3004,7 +3004,7 @@ data_object$set("public","generate_signature_period_corrected", function() {
 }
 )
 
-data_object$set("public","generate_signature_period_5Q", function() {
+DataSheet$set("public","generate_signature_period_5Q", function() {
   if(!self$is_corruption_type_present(corruption_signature_period_5Q_label)) {
     self$generate_signature_period()
     if(!self$is_corruption_type_present(corruption_signature_period_label)) message("Cannot auto generate ", corruption_signature_period_5Q_label, " because ", corruption_signature_period_label, " is not defined.")
@@ -3019,7 +3019,7 @@ data_object$set("public","generate_signature_period_5Q", function() {
 }
 )
 
-data_object$set("public","generate_signature_period_25Q", function() {
+DataSheet$set("public","generate_signature_period_25Q", function() {
   if(!self$is_corruption_type_present(corruption_signature_period_25Q_label)) {
     self$generate_signature_period()
     if(!self$is_corruption_type_present(corruption_signature_period_label)) message("Cannot auto generate ", corruption_signature_period_25Q_label, " because ", corruption_signature_period_label, " is not defined.")
@@ -3034,7 +3034,7 @@ data_object$set("public","generate_signature_period_25Q", function() {
 }
 )
 
-data_object$set("public","generate_rolling_contract_no_winners", function() {
+DataSheet$set("public","generate_rolling_contract_no_winners", function() {
   if(!self$is_corruption_type_present(corruption_roll_num_winner_label)) {
     self$generate_procuring_authority_id()
     self$generate_winner_id()
@@ -3059,7 +3059,7 @@ data_object$set("public","generate_rolling_contract_no_winners", function() {
 }
 )
 
-data_object$set("public","generate_rolling_contract_no_issuer", function() {
+DataSheet$set("public","generate_rolling_contract_no_issuer", function() {
   if(!self$is_corruption_type_present(corruption_roll_num_issuer_label)) {
     self$generate_procuring_authority_id()
     if(!self$is_corruption_type_present(corruption_procuring_authority_id_label) | !self$is_corruption_type_present(corruption_award_date_label)) {
@@ -3082,7 +3082,7 @@ data_object$set("public","generate_rolling_contract_no_issuer", function() {
 }
 )
 
-data_object$set("public","generate_rolling_contract_value_sum_issuer", function() {
+DataSheet$set("public","generate_rolling_contract_value_sum_issuer", function() {
   if(!self$is_corruption_type_present(corruption_roll_sum_issuer_label)) {
     self$generate_procuring_authority_id()
     # Need better checks than just for original contract value
@@ -3115,7 +3115,7 @@ data_object$set("public","generate_rolling_contract_value_sum_issuer", function(
 }
 )
 
-data_object$set("public","generate_rolling_contract_value_sum_winner", function() {
+DataSheet$set("public","generate_rolling_contract_value_sum_winner", function() {
   if(!self$is_corruption_type_present(corruption_roll_sum_winner_label)) {
     self$generate_procuring_authority_id()
     self$generate_winner_id()
@@ -3150,7 +3150,7 @@ data_object$set("public","generate_rolling_contract_value_sum_winner", function(
 }
 )
 
-data_object$set("public","generate_rolling_contract_value_share_winner", function() {
+DataSheet$set("public","generate_rolling_contract_value_share_winner", function() {
   if(!self$is_corruption_type_present(corruption_roll_share_winner_label)) {
     self$generate_rolling_contract_value_sum_issuer()
     self$generate_rolling_contract_value_sum_winner()
@@ -3168,7 +3168,7 @@ data_object$set("public","generate_rolling_contract_value_share_winner", functio
 }
 )
 
-data_object$set("public","generate_single_bidder", function() {
+DataSheet$set("public","generate_single_bidder", function() {
   if(!self$is_corruption_type_present(corruption_single_bidder_label)) {
     self$generate_all_bids_trimmed()
     if(!self$is_corruption_type_present(corruption_all_bids_trimmed_label)) {
@@ -3185,7 +3185,7 @@ data_object$set("public","generate_single_bidder", function() {
 }
 )
 
-data_object$set("public","generate_contract_value_share_over_threshold", function() {
+DataSheet$set("public","generate_contract_value_share_over_threshold", function() {
   if(!self$is_corruption_type_present(corruption_contract_value_share_over_threshold_label)) {
     self$generate_rolling_contract_value_share_winner()
     self$generate_rolling_contract_no_issuer()
@@ -3206,7 +3206,7 @@ data_object$set("public","generate_contract_value_share_over_threshold", functio
 }
 )
 
-data_object$set("public","generate_all_bids", function() {
+DataSheet$set("public","generate_all_bids", function() {
   if(!self$is_corruption_type_present(corruption_all_bids_label)) {
     if(!self$is_corruption_type_present(corruption_no_bids_considered_label)) {
       message("Cannot auto generate ", corruption_all_bids_label, " because ", corruption_no_bids_considered_label, " is not defined.")
@@ -3226,7 +3226,7 @@ data_object$set("public","generate_all_bids", function() {
 }
 )
 
-data_object$set("public","generate_all_bids_trimmed", function() {
+DataSheet$set("public","generate_all_bids_trimmed", function() {
   if(!self$is_corruption_type_present(corruption_all_bids_trimmed_label)) {
     self$generate_all_bids()
     if(!self$is_corruption_type_present(corruption_all_bids_label)) {
@@ -3280,12 +3280,12 @@ standardise_country_names <- function(country) {
   return(country_names)
 }
 
-instat_object$set("public","standardise_country_names", function(data_name, country_columns = c()) {
+DataBook$set("public","standardise_country_names", function(data_name, country_columns = c()) {
   self$get_data_objects(data_name)$standardise_country_names(country_columns)
 }
 )
 
-data_object$set("public","standardise_country_names", function(country_columns = c()) {
+DataSheet$set("public","standardise_country_names", function(country_columns = c()) {
   for(col_name in country_columns) {
     corrected_col <- standardise_country_names(self$get_columns_from_data(col_name))
     new_col_name <- next_default_item(paste(col_name, "standardised", sep = "_"), self$get_column_names(), include_index = FALSE)
@@ -3307,7 +3307,7 @@ data_object$set("public","standardise_country_names", function(country_columns =
 }
 )
 
-data_object$set("public", "get_climatic_column_name", function(col_name) {
+DataSheet$set("public", "get_climatic_column_name", function(col_name) {
   if(!self$get_metadata(is_climatic_label))stop("Define data as climatic.")
   if(col_name %in% self$get_variables_metadata()$Climatic_Type){
     new_data = subset(self$get_variables_metadata(), Climatic_Type==col_name, select = Name)
@@ -3320,13 +3320,13 @@ data_object$set("public", "get_climatic_column_name", function(col_name) {
 }
 )
 
-data_object$set("public", "is_climatic_data", function() {
+DataSheet$set("public", "is_climatic_data", function() {
   return(self$is_metadata(is_climatic_label) &&  self$get_metadata(is_climatic_label))
 }
 )
 
 # TODO merge this with append_to_column_metadata
-data_object$set("public", "append_column_attributes", function(col_name, new_attr) {
+DataSheet$set("public", "append_column_attributes", function(col_name, new_attr) {
   tmp_names <- names(new_attr)
   for(i in seq_along(new_attr)) {
     self$append_to_variables_metadata(property = tmp_names[i], col_names = col_name, new_val = new_attr[[i]])
@@ -3335,7 +3335,7 @@ data_object$set("public", "append_column_attributes", function(col_name, new_att
 )
 
 #Creating display daily climatic elements graphs
-data_object$set("public","display_daily_graph", function(data_name, date_col = NULL, station_col = NULL, year_col = NULL, doy_col = NULL, climatic_element = NULL, rug_colour = "red", bar_colour = "blue", upper_limit = 100) {
+DataSheet$set("public","display_daily_graph", function(data_name, date_col = NULL, station_col = NULL, year_col = NULL, doy_col = NULL, climatic_element = NULL, rug_colour = "red", bar_colour = "blue", upper_limit = 100) {
   if(!self$is_climatic_data()) stop("Data is not defined as climatic.")
   if(missing(date_col)) stop("Date columns must be specified.")
   if(missing(climatic_element)) stop("Element column(s) must be specified.")
@@ -3384,14 +3384,14 @@ data_object$set("public","display_daily_graph", function(data_name, date_col = N
 }
 )
 
-data_object$set("public", "get_variables_metadata_names", function(columns) {
+DataSheet$set("public", "get_variables_metadata_names", function(columns) {
   if(missing(columns)) columns <- self$get_column_names()
   cols <- self$get_columns_from_data(columns, force_as_data_frame = TRUE)
   return(unique(as.character(unlist(sapply(cols, function(x) names(attributes(x)))))))
 }
 )
 
-data_object$set("public", "create_variable_set", function(set_name, columns) {
+DataSheet$set("public", "create_variable_set", function(set_name, columns) {
   adjusted_set_name <- paste0(set_prefix, set_name)
   if(adjusted_set_name %in% self$get_variables_metadata_names()) warning("A set named ", set_name, " already exists and will be replaced.")
   self$append_to_variables_metadata(col_names = setdiff(self$get_column_names(), columns), property = adjusted_set_name, new_val = FALSE)
@@ -3399,7 +3399,7 @@ data_object$set("public", "create_variable_set", function(set_name, columns) {
 }
 )
 
-data_object$set("public", "update_variable_set", function(set_name, columns, new_set_name) {
+DataSheet$set("public", "update_variable_set", function(set_name, columns, new_set_name) {
   if(!missing(new_set_name) && new_set_name != set_name) {
     self$delete_variable_sets(set_names = set_name)
   }
@@ -3407,7 +3407,7 @@ data_object$set("public", "update_variable_set", function(set_name, columns, new
 }
 )
 
-data_object$set("public", "delete_variable_sets", function(set_names) {
+DataSheet$set("public", "delete_variable_sets", function(set_names) {
   adjusted_set_names <- paste0(set_prefix, set_names)
   if(!all(adjusted_set_names %in% self$get_variables_metadata_names())) {
     warning("Some of the variable set names were not found. Sets will not be deleted.")
@@ -3418,7 +3418,7 @@ data_object$set("public", "delete_variable_sets", function(set_names) {
 }
 )
 
-data_object$set("public", "get_variable_sets_names", function(include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+DataSheet$set("public", "get_variable_sets_names", function(include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   metadata_names <- self$get_variables_metadata_names()
   set_names <- stringr::str_sub(metadata_names[startsWith(metadata_names, set_prefix)], start = nchar(set_prefix) + 1)
   if(as_list) {
@@ -3430,7 +3430,7 @@ data_object$set("public", "get_variable_sets_names", function(include_overall = 
 }
 )
 
-data_object$set("public", "get_variable_sets", function(set_names, force_as_list) {
+DataSheet$set("public", "get_variable_sets", function(set_names, force_as_list) {
   curr_set_names <- self$get_variable_sets_names()
   if(!missing(set_names) && !all(set_names %in% curr_set_names)) stop("Not all of: ", paste(set_name, collapse = ", "), "exist as variable sets.")
   include_lists <- rep(list(TRUE), length(set_names))
