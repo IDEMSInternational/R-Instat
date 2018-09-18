@@ -187,7 +187,6 @@ Partial Class frmMain
         Me.mnuClimaticFileCliData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ShapsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticTidyandExamine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineTidyDailyData = New System.Windows.Forms.ToolStripMenuItem()
@@ -302,7 +301,6 @@ Partial Class frmMain
         Me.mnuClimateMethodsAdditionalSeasonalSummaryRain = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsAdditionalWaterBalance = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsCreateClimateObject = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MapsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSaveAs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSaveAsDataAs = New System.Windows.Forms.ToolStripMenuItem()
@@ -552,12 +550,12 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
+        Me.splLogScript = New System.Windows.Forms.SplitContainer()
+        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
-        Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.ucrLogWindow = New instat.ucrLog()
         Me.ucrScriptWindow = New instat.ucrScript()
-        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
         Me.stsStrip.SuspendLayout()
@@ -1375,14 +1373,14 @@ Partial Class frmMain
         '
         'mnuClimatic
         '
-        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticTidyandExamine, Me.mnuClimaticDates, Me.mnuClimaticDefineClimaticData, Me.mnuClimaticCheckData, Me.mnuClimaticPrepare, Me.mnuClimdex, Me.ToolStripSeparator30, Me.mnuClimaticDescribe, Me.mnuClimaticSPI, Me.mnuClimaticPICSA, Me.mnuCMSAF, Me.ToolStripSeparator16, Me.mnuClimaticModels, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimateMethods, Me.MapsToolStripMenuItem})
+        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticTidyandExamine, Me.mnuClimaticDates, Me.mnuClimaticDefineClimaticData, Me.mnuClimaticCheckData, Me.mnuClimaticPrepare, Me.mnuClimdex, Me.ToolStripSeparator30, Me.mnuClimaticDescribe, Me.mnuClimaticSPI, Me.mnuClimaticPICSA, Me.mnuCMSAF, Me.ToolStripSeparator16, Me.mnuClimaticModels, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimateMethods})
         Me.mnuClimatic.Name = "mnuClimatic"
         resources.ApplyResources(Me.mnuClimatic, "mnuClimatic")
         Me.mnuClimatic.Tag = "Climatic"
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportGriddedData, Me.OpenNetCDFToolStripMenuItem, Me.mnuClimaticFileImportShapeFile, Me.mnuClimateFileClimSoft, Me.mnuClimaticFileCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT, Me.ShapsToolStripMenuItem})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportGriddedData, Me.OpenNetCDFToolStripMenuItem, Me.mnuClimaticFileImportShapeFile, Me.mnuClimateFileClimSoft, Me.mnuClimaticFileCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         resources.ApplyResources(Me.mnuClimaticFile, "mnuClimaticFile")
         '
@@ -1426,11 +1424,6 @@ Partial Class frmMain
         Me.mnuClimaticFileExportToCPT.Name = "mnuClimaticFileExportToCPT"
         resources.ApplyResources(Me.mnuClimaticFileExportToCPT, "mnuClimaticFileExportToCPT")
         Me.mnuClimaticFileExportToCPT.Tag = "Export_to_CPT"
-        '
-        'ShapsToolStripMenuItem
-        '
-        Me.ShapsToolStripMenuItem.Name = "ShapsToolStripMenuItem"
-        resources.ApplyResources(Me.ShapsToolStripMenuItem, "ShapsToolStripMenuItem")
         '
         'ToolStripSeparator18
         '
@@ -2064,11 +2057,6 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuClimateMethodsCreateClimateObject, "mnuClimateMethodsCreateClimateObject")
         Me.mnuClimateMethodsCreateClimateObject.Name = "mnuClimateMethodsCreateClimateObject"
         Me.mnuClimateMethodsCreateClimateObject.Tag = "Create_Climate_Object"
-        '
-        'MapsToolStripMenuItem
-        '
-        Me.MapsToolStripMenuItem.Name = "MapsToolStripMenuItem"
-        resources.ApplyResources(Me.MapsToolStripMenuItem, "MapsToolStripMenuItem")
         '
         'mnuFileSave
         '
@@ -3526,18 +3514,6 @@ Partial Class frmMain
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
         '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -3554,19 +3530,6 @@ Partial Class frmMain
         Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
         '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Tag = "Script_Window"
-        '
         'splDataOutput
         '
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
@@ -3582,6 +3545,31 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
+        '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'ucrDataViewer
         '
@@ -4158,8 +4146,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticTidyandExamineMerge As ToolStripMenuItem
     Friend WithEvents mnuTbLastGraph As ToolStripButton
     Friend WithEvents mnuClimaticCMSAFExporttoCMSAFRToolbox As ToolStripMenuItem
-    Friend WithEvents MapsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ShapsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckDataMaps As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator51 As ToolStripSeparator
 End Class
