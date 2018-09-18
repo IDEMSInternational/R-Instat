@@ -21,7 +21,7 @@ obyc_type_label = "O_by_C_Type"
 # Data frame metadata
 is_obyc_label = "Is_O_by_C"
 
-instat_object$set("public","define_as_options_by_context", function(data_name, obyc_types = NULL, key_columns = NULL) {
+DataBook$set("public","define_as_options_by_context", function(data_name, obyc_types = NULL, key_columns = NULL) {
   self$append_to_dataframe_metadata(data_name, is_obyc_label, TRUE)
   for(curr_data_name in self$get_data_names()) {
     if(!self$get_data_objects(data_name)$is_metadata(is_obyc_label)) {
@@ -32,7 +32,7 @@ instat_object$set("public","define_as_options_by_context", function(data_name, o
 }
 )
 
-data_object$set("public","set_options_by_context_types", function(obyc_types = NULL, key_columns = NULL) {
+DataSheet$set("public","set_options_by_context_types", function(obyc_types = NULL, key_columns = NULL) {
   if(!all(names(obyc_types) %in% obyc_all_types)) stop("Cannot recognise the following types: ", paste(names(obyc_types)[!names(obyc_types) %in% obyc_all_types], collapse = ", "))
   invisible(sapply(names(obyc_types), function(name) self$append_to_variables_metadata(obyc_types[[name]], obyc_type_label, name)))
   other_cols <- dplyr::setdiff(x = self$get_column_names(), y = unlist(obyc_types))
