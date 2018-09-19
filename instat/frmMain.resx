@@ -1182,7 +1182,7 @@
     <value>244, 30</value>
   </data>
   <data name="mnuClimaticCheckDataMaps.Text" xml:space="preserve">
-    <value>Maps...</value>
+    <value>Station Maps...</value>
   </data>
   <data name="ToolStripSeparator51.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 6</value>
@@ -3567,33 +3567,6 @@
   <data name="splMetadata.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
-  <data name="ucrColumnMeta.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="ucrColumnMeta.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="ucrColumnMeta.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="ucrColumnMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 280</value>
-  </data>
-  <data name="ucrColumnMeta.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrColumnMeta.Name" xml:space="preserve">
-    <value>ucrColumnMeta</value>
-  </data>
-  <data name="&gt;&gt;ucrColumnMeta.Type" xml:space="preserve">
-    <value>instat.ucrColumnMetadata, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrColumnMeta.Parent" xml:space="preserve">
-    <value>splMetadata.Panel1</value>
-  </data>
-  <data name="&gt;&gt;ucrColumnMeta.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;splMetadata.Panel1.Name" xml:space="preserve">
     <value>splMetadata.Panel1</value>
   </data>
@@ -3604,33 +3577,6 @@
     <value>splMetadata</value>
   </data>
   <data name="&gt;&gt;splMetadata.Panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrDataFrameMeta.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="ucrDataFrameMeta.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="ucrDataFrameMeta.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="ucrDataFrameMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>265, 280</value>
-  </data>
-  <data name="ucrDataFrameMeta.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrDataFrameMeta.Name" xml:space="preserve">
-    <value>ucrDataFrameMeta</value>
-  </data>
-  <data name="&gt;&gt;ucrDataFrameMeta.Type" xml:space="preserve">
-    <value>instat.ucrDataFrameMetadata, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDataFrameMeta.Parent" xml:space="preserve">
-    <value>splMetadata.Panel2</value>
-  </data>
-  <data name="&gt;&gt;ucrDataFrameMeta.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;splMetadata.Panel2.Name" xml:space="preserve">
@@ -3690,33 +3636,6 @@
   <data name="splLogScript.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
-  <data name="ucrLogWindow.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="ucrLogWindow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="ucrLogWindow.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="ucrLogWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 280</value>
-  </data>
-  <data name="ucrLogWindow.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrLogWindow.Name" xml:space="preserve">
-    <value>ucrLogWindow</value>
-  </data>
-  <data name="&gt;&gt;ucrLogWindow.Type" xml:space="preserve">
-    <value>instat.ucrLog, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrLogWindow.Parent" xml:space="preserve">
-    <value>splLogScript.Panel1</value>
-  </data>
-  <data name="&gt;&gt;ucrLogWindow.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;splLogScript.Panel1.Name" xml:space="preserve">
     <value>splLogScript.Panel1</value>
   </data>
@@ -3727,33 +3646,6 @@
     <value>splLogScript</value>
   </data>
   <data name="&gt;&gt;splLogScript.Panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrScriptWindow.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="ucrScriptWindow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="ucrScriptWindow.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="ucrScriptWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>583, 280</value>
-  </data>
-  <data name="ucrScriptWindow.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrScriptWindow.Name" xml:space="preserve">
-    <value>ucrScriptWindow</value>
-  </data>
-  <data name="&gt;&gt;ucrScriptWindow.Type" xml:space="preserve">
-    <value>instat.ucrScript, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrScriptWindow.Parent" xml:space="preserve">
-    <value>splLogScript.Panel2</value>
-  </data>
-  <data name="&gt;&gt;ucrScriptWindow.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;splLogScript.Panel2.Name" xml:space="preserve">
@@ -3849,33 +3741,6 @@
   <data name="splDataOutput.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
-  <data name="ucrDataViewer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="ucrDataViewer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="ucrDataViewer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="ucrDataViewer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>576, 352</value>
-  </data>
-  <data name="ucrDataViewer.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrDataViewer.Name" xml:space="preserve">
-    <value>ucrDataViewer</value>
-  </data>
-  <data name="&gt;&gt;ucrDataViewer.Type" xml:space="preserve">
-    <value>instat.ucrDataView, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDataViewer.Parent" xml:space="preserve">
-    <value>splDataOutput.Panel1</value>
-  </data>
-  <data name="&gt;&gt;ucrDataViewer.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;splDataOutput.Panel1.Name" xml:space="preserve">
     <value>splDataOutput.Panel1</value>
   </data>
@@ -3886,33 +3751,6 @@
     <value>splDataOutput</value>
   </data>
   <data name="&gt;&gt;splDataOutput.Panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrOutput.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="ucrOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="ucrOutput.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="ucrOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>667, 352</value>
-  </data>
-  <data name="ucrOutput.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrOutput.Name" xml:space="preserve">
-    <value>ucrOutput</value>
-  </data>
-  <data name="&gt;&gt;ucrOutput.Type" xml:space="preserve">
-    <value>instat.ucrOutputWindow, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrOutput.Parent" xml:space="preserve">
-    <value>splDataOutput.Panel2</value>
-  </data>
-  <data name="&gt;&gt;ucrOutput.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;splDataOutput.Panel2.Name" xml:space="preserve">
@@ -5726,9 +5564,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>

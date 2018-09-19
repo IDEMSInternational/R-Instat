@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgClimaticMaps
+Partial Class dlgClimaticStationMaps
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -216,7 +216,7 @@ Partial Class dlgClimaticMaps
         Me.ucrSelectorOutline.Size = New System.Drawing.Size(317, 277)
         Me.ucrSelectorOutline.TabIndex = 0
         '
-        'dlgClimaticMaps
+        'dlgClimaticStationMaps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -242,9 +242,9 @@ Partial Class dlgClimaticMaps
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgClimaticMaps"
+        Me.Name = "dlgClimaticStationMaps"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Climatic Maps"
+        Me.Text = "Climatic Station Maps"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

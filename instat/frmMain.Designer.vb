@@ -552,12 +552,6 @@ Partial Class frmMain
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
         Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
-        Me.ucrColumnMeta = New instat.ucrColumnMetadata()
-        Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
-        Me.ucrLogWindow = New instat.ucrLog()
-        Me.ucrScriptWindow = New instat.ucrScript()
-        Me.ucrDataViewer = New instat.ucrDataView()
-        Me.ucrOutput = New instat.ucrOutputWindow()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -570,16 +564,10 @@ Partial Class frmMain
         Me.splExtraWindows.Panel2.SuspendLayout()
         Me.splExtraWindows.SuspendLayout()
         CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.splMetadata.Panel1.SuspendLayout()
-        Me.splMetadata.Panel2.SuspendLayout()
         Me.splMetadata.SuspendLayout()
         CType(Me.splLogScript, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.splLogScript.Panel1.SuspendLayout()
-        Me.splLogScript.Panel2.SuspendLayout()
         Me.splLogScript.SuspendLayout()
         CType(Me.splDataOutput, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.splDataOutput.Panel1.SuspendLayout()
-        Me.splDataOutput.Panel2.SuspendLayout()
         Me.splDataOutput.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -3505,14 +3493,9 @@ Partial Class frmMain
         resources.ApplyResources(Me.splMetadata, "splMetadata")
         Me.splMetadata.Name = "splMetadata"
         '
-        'splMetadata.Panel1
-        '
-        Me.splMetadata.Panel1.Controls.Add(Me.ucrColumnMeta)
-        '
         'splMetadata.Panel2
         '
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
-        Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
         '
         'splLogScript
         '
@@ -3523,12 +3506,10 @@ Partial Class frmMain
         'splLogScript.Panel1
         '
         Me.splLogScript.Panel1.BackColor = System.Drawing.SystemColors.Control
-        Me.splLogScript.Panel1.Controls.Add(Me.ucrLogWindow)
         '
         'splLogScript.Panel2
         '
         Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
-        Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
         '
         'splDataOutput
         '
@@ -3539,51 +3520,10 @@ Partial Class frmMain
         'splDataOutput.Panel1
         '
         Me.splDataOutput.Panel1.BackColor = System.Drawing.SystemColors.Control
-        Me.splDataOutput.Panel1.Controls.Add(Me.ucrDataViewer)
         '
         'splDataOutput.Panel2
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
-        Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
-        '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Tag = "Script_Window"
-        '
-        'ucrDataViewer
-        '
-        Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
-        Me.ucrDataViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataViewer, "ucrDataViewer")
-        Me.ucrDataViewer.Name = "ucrDataViewer"
-        Me.ucrDataViewer.Tag = "Data_View"
-        '
-        'ucrOutput
-        '
-        Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrOutput, "ucrOutput")
-        Me.ucrOutput.Name = "ucrOutput"
         '
         'frmMain
         '
@@ -3611,16 +3551,10 @@ Partial Class frmMain
         Me.splExtraWindows.Panel2.ResumeLayout(False)
         CType(Me.splExtraWindows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splExtraWindows.ResumeLayout(False)
-        Me.splMetadata.Panel1.ResumeLayout(False)
-        Me.splMetadata.Panel2.ResumeLayout(False)
         CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splMetadata.ResumeLayout(False)
-        Me.splLogScript.Panel1.ResumeLayout(False)
-        Me.splLogScript.Panel2.ResumeLayout(False)
         CType(Me.splLogScript, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splLogScript.ResumeLayout(False)
-        Me.splDataOutput.Panel1.ResumeLayout(False)
-        Me.splDataOutput.Panel2.ResumeLayout(False)
         CType(Me.splDataOutput, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splDataOutput.ResumeLayout(False)
         Me.ResumeLayout(False)
