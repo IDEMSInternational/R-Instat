@@ -326,6 +326,11 @@ Public Class sdgSimpleRegOptions
         If bReset Then
             tbpRegOptions.SelectedIndex = 0
             tcGraphics.SelectedIndex = 0
+            'TODO:This are temporary fixes to enable this save controls to reset properly!
+            ucrSaveResidualsColumnName.ucrChkSave.Checked = False
+            ucrSaveFittedColumnName.ucrChkSave.Checked = False
+            ucrSaveStdResidualsColumnName.ucrChkSave.Checked = False
+            ucrSaveLeverageColumnName.ucrChkSave.Checked = False
             ucrSaveResidualsColumnName.Reset()
             ucrSaveFittedColumnName.Reset()
             ucrSaveStdResidualsColumnName.Reset()
