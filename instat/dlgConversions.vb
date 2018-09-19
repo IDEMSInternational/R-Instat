@@ -69,7 +69,7 @@ Public Class dlgConversions
         ucrReceiverDate.SetParameterIsRFunction()
         ucrReceiverDate.Selector = ucrSelectorConversions
 
-        ucrReceiverLatitude.SetParameter(New RParameter("lat", 0))
+        ucrReceiverLatitude.SetParameter(New RParameter("latitude", 0, False))
         ucrReceiverLatitude.bWithQuotes = False
         ucrReceiverLatitude.SetParameterIsRFunction()
         ucrReceiverLatitude.Selector = ucrSelectorConversions
@@ -205,7 +205,15 @@ Public Class dlgConversions
 
     Private Sub TestOkEnabled()
         If rdoUnits.Checked AndAlso Not ucrReceiverElement.IsEmpty AndAlso ucrNudDecimal.GetText <> "" AndAlso ucrSaveConversions.IsComplete Then
-            ucrBase.OKEnabled(True)
+            If rdoRain.Checked AndAlso ucrInputFromPrecipitation.GetText <> ucrInputToPrecipitation.GetText Then
+                ucrBase.OKEnabled(True)
+            ElseIf rdoTemperature.Checked AndAlso ucrInputFromTemperature.GetText <> ucrInputToTemperature.GetText Then
+                ucrBase.OKEnabled(True)
+            ElseIf rdowindspeed.Checked AndAlso ucrInputFromWindSpeed.GetText <> ucrInputToWindSpeed.GetText Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         ElseIf rdoDayLength.Checked AndAlso Not ucrReceiverDate.IsEmpty AndAlso ((rdoSingleValue.Checked AndAlso Not ucrInputLatitude.IsEmpty) OrElse (rdoColumn.Checked AndAlso Not ucrReceiverLatitude.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         Else
@@ -251,7 +259,7 @@ Public Class dlgConversions
         End If
     End Sub
 
-    Private Sub ucrPnlConversions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlConversions.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrSaveConversions.ControlContentsChanged, ucrNudDecimal.ControlContentsChanged, ucrPnlLatitude.ControlContentsChanged, ucrInputLatitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged
+    Private Sub ucrPnlConversions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlConversions.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrSaveConversions.ControlContentsChanged, ucrNudDecimal.ControlContentsChanged, ucrPnlLatitude.ControlContentsChanged, ucrInputLatitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrInputFromPrecipitation.ControlContentsChanged, ucrInputToPrecipitation.ControlContentsChanged, ucrInputFromTemperature.ControlContentsChanged, ucrInputToTemperature.ControlContentsChanged, ucrInputFromWindSpeed.ControlContentsChanged, ucrInputToWindSpeed.ControlContentsChanged, ucrPnlElements.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
