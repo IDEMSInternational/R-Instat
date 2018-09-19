@@ -279,16 +279,11 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorOptionalReceiver.ControlValueChanged
-        'We have to check this incase we have more than one station because we want the colours to be different colours for the stations
-        clsFactorLevels.AddParameter("col_name", ucrFactorOptionalReceiver.GetVariableNames)
-        FactorLevel = frmMain.clsRLink.RunInternalScriptGetValue(clsFactorLevels.ToScript(), bSilent:=True).AsInteger
-        'If Not ucrFactorOptionalReceiver.IsEmpty Then
-        '    If FactorLevel > 1 Then
-        '        clsRgeomlineplotFunction.RemoveParameterByName("colour")
-        '    End If
-
-        ' Else
-        clsRgeomlineplotFunction.AddParameter("colour", Chr(34) & "blue" & Chr(34))
-        ' End If
+        'TODO this should run when levels of factor >1
+        If Not ucrFactorOptionalReceiver.IsEmpty Then
+            clsRgeomlineplotFunction.RemoveParameterByName("colour")
+        Else
+            clsRgeomlineplotFunction.AddParameter("colour", Chr(34) & "blue" & Chr(34))
+        End If
     End Sub
 End Class
