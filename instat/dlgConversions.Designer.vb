@@ -28,32 +28,32 @@ Partial Class dlgConversions
         Me.lblElement = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
-        Me.lblDecimal = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.rdoColumn = New System.Windows.Forms.RadioButton()
         Me.rdoSingleValue = New System.Windows.Forms.RadioButton()
         Me.grpLatitude = New System.Windows.Forms.GroupBox()
+        Me.grpElements = New System.Windows.Forms.GroupBox()
+        Me.rdoWindSpeed = New System.Windows.Forms.RadioButton()
+        Me.rdoRain = New System.Windows.Forms.RadioButton()
+        Me.rdoTemperature = New System.Windows.Forms.RadioButton()
         Me.ucrInputLatitude = New instat.ucrInputTextBox()
         Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
         Me.ucrPnlLatitude = New instat.UcrPanel()
-        Me.grpElements = New System.Windows.Forms.GroupBox()
-        Me.rdoWindSpeed = New System.Windows.Forms.RadioButton()
-        Me.ucrInputFromTemperature = New instat.ucrInputComboBox()
-        Me.rdoRain = New System.Windows.Forms.RadioButton()
-        Me.ucrInputToWindSpeed = New instat.ucrInputComboBox()
-        Me.rdoTemperature = New System.Windows.Forms.RadioButton()
-        Me.ucrInputToTemperature = New instat.ucrInputComboBox()
-        Me.ucrNudDecimal = New instat.ucrNud()
-        Me.ucrPnlElements = New instat.UcrPanel()
-        Me.ucrInputFromWindSpeed = New instat.ucrInputComboBox()
-        Me.ucrInputFromPrecipitation = New instat.ucrInputComboBox()
-        Me.ucrInputToPrecipitation = New instat.ucrInputComboBox()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrSaveConversions = New instat.ucrSave()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrPnlConversions = New instat.UcrPanel()
         Me.ucrSelectorConversions = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputFromTemperature = New instat.ucrInputComboBox()
+        Me.ucrInputToWindSpeed = New instat.ucrInputComboBox()
+        Me.ucrInputToTemperature = New instat.ucrInputComboBox()
+        Me.ucrPnlElements = New instat.UcrPanel()
+        Me.ucrInputFromWindSpeed = New instat.ucrInputComboBox()
+        Me.ucrInputFromPrecipitation = New instat.ucrInputComboBox()
+        Me.ucrInputToPrecipitation = New instat.ucrInputComboBox()
+        Me.ucrNudDecimal = New instat.ucrNud()
+        Me.lblDecimal = New System.Windows.Forms.Label()
         Me.grpLatitude.SuspendLayout()
         Me.grpElements.SuspendLayout()
         Me.SuspendLayout()
@@ -94,11 +94,6 @@ Partial Class dlgConversions
         resources.ApplyResources(Me.lblTo, "lblTo")
         Me.lblTo.Name = "lblTo"
         '
-        'lblDecimal
-        '
-        resources.ApplyResources(Me.lblDecimal, "lblDecimal")
-        Me.lblDecimal.Name = "lblDecimal"
-        '
         'lblDate
         '
         resources.ApplyResources(Me.lblDate, "lblDate")
@@ -129,38 +124,16 @@ Partial Class dlgConversions
         Me.grpLatitude.Name = "grpLatitude"
         Me.grpLatitude.TabStop = False
         '
-        'ucrInputLatitude
-        '
-        Me.ucrInputLatitude.AddQuotesIfUnrecognised = True
-        Me.ucrInputLatitude.IsMultiline = False
-        Me.ucrInputLatitude.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLatitude, "ucrInputLatitude")
-        Me.ucrInputLatitude.Name = "ucrInputLatitude"
-        '
-        'ucrReceiverLatitude
-        '
-        Me.ucrReceiverLatitude.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverLatitude, "ucrReceiverLatitude")
-        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
-        Me.ucrReceiverLatitude.Selector = Nothing
-        Me.ucrReceiverLatitude.strNcFilePath = ""
-        Me.ucrReceiverLatitude.ucrSelector = Nothing
-        '
-        'ucrPnlLatitude
-        '
-        resources.ApplyResources(Me.ucrPnlLatitude, "ucrPnlLatitude")
-        Me.ucrPnlLatitude.Name = "ucrPnlLatitude"
-        '
         'grpElements
         '
+        Me.grpElements.Controls.Add(Me.lblDecimal)
+        Me.grpElements.Controls.Add(Me.ucrNudDecimal)
         Me.grpElements.Controls.Add(Me.rdoWindSpeed)
         Me.grpElements.Controls.Add(Me.ucrInputFromTemperature)
         Me.grpElements.Controls.Add(Me.rdoRain)
         Me.grpElements.Controls.Add(Me.ucrInputToWindSpeed)
         Me.grpElements.Controls.Add(Me.rdoTemperature)
-        Me.grpElements.Controls.Add(Me.lblDecimal)
         Me.grpElements.Controls.Add(Me.ucrInputToTemperature)
-        Me.grpElements.Controls.Add(Me.ucrNudDecimal)
         Me.grpElements.Controls.Add(Me.ucrPnlElements)
         Me.grpElements.Controls.Add(Me.ucrInputFromWindSpeed)
         Me.grpElements.Controls.Add(Me.lblFrom)
@@ -182,13 +155,6 @@ Partial Class dlgConversions
         Me.rdoWindSpeed.Name = "rdoWindSpeed"
         Me.rdoWindSpeed.UseVisualStyleBackColor = True
         '
-        'ucrInputFromTemperature
-        '
-        Me.ucrInputFromTemperature.AddQuotesIfUnrecognised = True
-        Me.ucrInputFromTemperature.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFromTemperature, "ucrInputFromTemperature")
-        Me.ucrInputFromTemperature.Name = "ucrInputFromTemperature"
-        '
         'rdoRain
         '
         resources.ApplyResources(Me.rdoRain, "rdoRain")
@@ -199,13 +165,6 @@ Partial Class dlgConversions
         Me.rdoRain.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoRain.Name = "rdoRain"
         Me.rdoRain.UseVisualStyleBackColor = True
-        '
-        'ucrInputToWindSpeed
-        '
-        Me.ucrInputToWindSpeed.AddQuotesIfUnrecognised = True
-        Me.ucrInputToWindSpeed.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputToWindSpeed, "ucrInputToWindSpeed")
-        Me.ucrInputToWindSpeed.Name = "ucrInputToWindSpeed"
         '
         'rdoTemperature
         '
@@ -218,48 +177,27 @@ Partial Class dlgConversions
         Me.rdoTemperature.Name = "rdoTemperature"
         Me.rdoTemperature.UseVisualStyleBackColor = True
         '
-        'ucrInputToTemperature
+        'ucrInputLatitude
         '
-        Me.ucrInputToTemperature.AddQuotesIfUnrecognised = True
-        Me.ucrInputToTemperature.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputToTemperature, "ucrInputToTemperature")
-        Me.ucrInputToTemperature.Name = "ucrInputToTemperature"
+        Me.ucrInputLatitude.AddQuotesIfUnrecognised = True
+        Me.ucrInputLatitude.IsMultiline = False
+        Me.ucrInputLatitude.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLatitude, "ucrInputLatitude")
+        Me.ucrInputLatitude.Name = "ucrInputLatitude"
         '
-        'ucrNudDecimal
+        'ucrReceiverLatitude
         '
-        Me.ucrNudDecimal.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimal.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudDecimal, "ucrNudDecimal")
-        Me.ucrNudDecimal.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDecimal.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimal.Name = "ucrNudDecimal"
-        Me.ucrNudDecimal.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrReceiverLatitude.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverLatitude, "ucrReceiverLatitude")
+        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
+        Me.ucrReceiverLatitude.Selector = Nothing
+        Me.ucrReceiverLatitude.strNcFilePath = ""
+        Me.ucrReceiverLatitude.ucrSelector = Nothing
         '
-        'ucrPnlElements
+        'ucrPnlLatitude
         '
-        resources.ApplyResources(Me.ucrPnlElements, "ucrPnlElements")
-        Me.ucrPnlElements.Name = "ucrPnlElements"
-        '
-        'ucrInputFromWindSpeed
-        '
-        Me.ucrInputFromWindSpeed.AddQuotesIfUnrecognised = True
-        Me.ucrInputFromWindSpeed.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFromWindSpeed, "ucrInputFromWindSpeed")
-        Me.ucrInputFromWindSpeed.Name = "ucrInputFromWindSpeed"
-        '
-        'ucrInputFromPrecipitation
-        '
-        Me.ucrInputFromPrecipitation.AddQuotesIfUnrecognised = True
-        Me.ucrInputFromPrecipitation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFromPrecipitation, "ucrInputFromPrecipitation")
-        Me.ucrInputFromPrecipitation.Name = "ucrInputFromPrecipitation"
-        '
-        'ucrInputToPrecipitation
-        '
-        Me.ucrInputToPrecipitation.AddQuotesIfUnrecognised = True
-        Me.ucrInputToPrecipitation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputToPrecipitation, "ucrInputToPrecipitation")
-        Me.ucrInputToPrecipitation.Name = "ucrInputToPrecipitation"
+        resources.ApplyResources(Me.ucrPnlLatitude, "ucrPnlLatitude")
+        Me.ucrPnlLatitude.Name = "ucrPnlLatitude"
         '
         'ucrReceiverDate
         '
@@ -302,6 +240,68 @@ Partial Class dlgConversions
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrInputFromTemperature
+        '
+        Me.ucrInputFromTemperature.AddQuotesIfUnrecognised = True
+        Me.ucrInputFromTemperature.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFromTemperature, "ucrInputFromTemperature")
+        Me.ucrInputFromTemperature.Name = "ucrInputFromTemperature"
+        '
+        'ucrInputToWindSpeed
+        '
+        Me.ucrInputToWindSpeed.AddQuotesIfUnrecognised = True
+        Me.ucrInputToWindSpeed.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputToWindSpeed, "ucrInputToWindSpeed")
+        Me.ucrInputToWindSpeed.Name = "ucrInputToWindSpeed"
+        '
+        'ucrInputToTemperature
+        '
+        Me.ucrInputToTemperature.AddQuotesIfUnrecognised = True
+        Me.ucrInputToTemperature.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputToTemperature, "ucrInputToTemperature")
+        Me.ucrInputToTemperature.Name = "ucrInputToTemperature"
+        '
+        'ucrPnlElements
+        '
+        resources.ApplyResources(Me.ucrPnlElements, "ucrPnlElements")
+        Me.ucrPnlElements.Name = "ucrPnlElements"
+        '
+        'ucrInputFromWindSpeed
+        '
+        Me.ucrInputFromWindSpeed.AddQuotesIfUnrecognised = True
+        Me.ucrInputFromWindSpeed.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFromWindSpeed, "ucrInputFromWindSpeed")
+        Me.ucrInputFromWindSpeed.Name = "ucrInputFromWindSpeed"
+        '
+        'ucrInputFromPrecipitation
+        '
+        Me.ucrInputFromPrecipitation.AddQuotesIfUnrecognised = True
+        Me.ucrInputFromPrecipitation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFromPrecipitation, "ucrInputFromPrecipitation")
+        Me.ucrInputFromPrecipitation.Name = "ucrInputFromPrecipitation"
+        '
+        'ucrInputToPrecipitation
+        '
+        Me.ucrInputToPrecipitation.AddQuotesIfUnrecognised = True
+        Me.ucrInputToPrecipitation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputToPrecipitation, "ucrInputToPrecipitation")
+        Me.ucrInputToPrecipitation.Name = "ucrInputToPrecipitation"
+        '
+        'ucrNudDecimal
+        '
+        Me.ucrNudDecimal.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDecimal.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudDecimal, "ucrNudDecimal")
+        Me.ucrNudDecimal.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDecimal.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDecimal.Name = "ucrNudDecimal"
+        Me.ucrNudDecimal.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'lblDecimal
+        '
+        resources.ApplyResources(Me.lblDecimal, "lblDecimal")
+        Me.lblDecimal.Name = "lblDecimal"
+        '
         'dlgConversions
         '
         resources.ApplyResources(Me, "$this")
@@ -342,8 +342,6 @@ Partial Class dlgConversions
     Friend WithEvents lblFrom As Label
     Friend WithEvents ucrInputToPrecipitation As ucrInputComboBox
     Friend WithEvents ucrInputFromPrecipitation As ucrInputComboBox
-    Friend WithEvents lblDecimal As Label
-    Friend WithEvents ucrNudDecimal As ucrNud
     Friend WithEvents ucrSaveConversions As ucrSave
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
@@ -362,4 +360,6 @@ Partial Class dlgConversions
     Friend WithEvents rdoWindSpeed As RadioButton
     Friend WithEvents rdoRain As RadioButton
     Friend WithEvents rdoTemperature As RadioButton
+    Friend WithEvents lblDecimal As Label
+    Friend WithEvents ucrNudDecimal As ucrNud
 End Class
