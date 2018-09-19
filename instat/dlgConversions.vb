@@ -85,9 +85,9 @@ Public Class dlgConversions
         ucrInputLatitude.AddQuotesIfUnrecognised = False
 
         ucrInputFromPrecipitation.SetParameter(New RParameter("old_metric", 1))
+        dctPrecipitationUnits.Add("cm", Chr(34) & "cm" & Chr(34))
         dctPrecipitationUnits.Add("inches", Chr(34) & "inches" & Chr(34))
         dctPrecipitationUnits.Add("mm", Chr(34) & "mm" & Chr(34))
-        dctPrecipitationUnits.Add("cm", Chr(34) & "cm" & Chr(34))
         ucrInputFromPrecipitation.SetItems(dctPrecipitationUnits)
         ucrInputFromPrecipitation.SetDropDownStyleAsNonEditable()
         ucrInputFromPrecipitation.bAllowNonConditionValues = True
@@ -109,11 +109,11 @@ Public Class dlgConversions
         ucrInputToTemperature.SetDropDownStyleAsNonEditable()
 
         ucrInputFromWindSpeed.SetParameter(New RParameter("old_metric", 1))
-        dctWindSpeedUnits.Add("Knots", Chr(34) & "knots" & Chr(34))
-        dctWindSpeedUnits.Add("Miles per hour (mph)", Chr(34) & "mph" & Chr(34))
-        dctWindSpeedUnits.Add("Metres per second (mps)", Chr(34) & "mps" & Chr(34))
         dctWindSpeedUnits.Add("Feet per second (ftps)", Chr(34) & "ftps" & Chr(34))
         dctWindSpeedUnits.Add("Kilometres per hour (kmph)", Chr(34) & "kmph" & Chr(34))
+        dctWindSpeedUnits.Add("Knots", Chr(34) & "knots" & Chr(34))
+        dctWindSpeedUnits.Add("Metres per second (mps)", Chr(34) & "mps" & Chr(34))
+        dctWindSpeedUnits.Add("Miles per hour (mph)", Chr(34) & "mph" & Chr(34))
         ucrInputFromWindSpeed.SetItems(dctWindSpeedUnits)
         ucrInputFromWindSpeed.SetDropDownStyleAsNonEditable()
 
