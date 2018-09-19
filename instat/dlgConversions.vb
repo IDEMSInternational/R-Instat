@@ -65,12 +65,6 @@ Public Class dlgConversions
         ucrReceiverElement.SetParameterIsRFunction()
         ucrReceiverElement.Selector = ucrSelectorConversions
 
-        ucrReceiverStation.SetParameterIsString()
-        ucrReceiverStation.SetClimaticType("station")
-        ucrReceiverStation.bAutoFill = True
-        ucrReceiverStation.strSelectorHeading = "Station Variables"
-        ucrReceiverStation.Selector = ucrSelectorConversions
-
         ucrReceiverDate.SetParameter(New RParameter("doy", 1))
         ucrReceiverDate.SetParameterIsRFunction()
         ucrReceiverDate.Selector = ucrSelectorConversions
@@ -122,13 +116,12 @@ Public Class dlgConversions
         ucrInputToWindSpeed.SetDropDownStyleAsNonEditable()
 
         ucrNudDecimal.SetParameter(New RParameter("round", 3))
-        ucrNudDecimal.SetMinMax(0, 3)
+        ucrNudDecimal.SetMinMax(0, 5)
 
         ucrPnlConversions.AddToLinkedControls(ucrReceiverElement, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrNudDecimal, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrPnlElements, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoRain)
 
-        ucrPnlConversions.AddToLinkedControls(ucrReceiverStation, {rdoDayLength}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrReceiverDate, {rdoDayLength}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrPnlLatitude, {rdoDayLength}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoSingleValue)
 
@@ -144,7 +137,6 @@ Public Class dlgConversions
 
         ucrReceiverElement.SetLinkedDisplayControl(lblElement)
         ucrNudDecimal.SetLinkedDisplayControl(lstLabels)
-        ucrReceiverStation.SetLinkedDisplayControl(lblStation)
         ucrReceiverDate.SetLinkedDisplayControl(lblDate)
         ucrPnlLatitude.SetLinkedDisplayControl(grpLatitude)
         ucrPnlElements.SetLinkedDisplayControl(grpElements)
@@ -168,7 +160,7 @@ Public Class dlgConversions
 
         clsPrecipitationFunction.SetPackageName("weathermetrics")
         clsPrecipitationFunction.SetRCommand("convert_precip")
-        clsPrecipitationFunction.AddParameter("round", 2, iPosition:=3)
+        clsPrecipitationFunction.AddParameter("round", 1, iPosition:=3)
         clsPrecipitationFunction.AddParameter("old_metric", Chr(34) & "inches" & Chr(34), iPosition:=1)
         clsPrecipitationFunction.AddParameter("new_metric", Chr(34) & "mm" & Chr(34), iPosition:=2)
 
