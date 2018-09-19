@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class sdgPICSARainfallGraph
     Private bControlsInitialised As Boolean = False
@@ -473,6 +472,7 @@ Public Class sdgPICSARainfallGraph
 
         ucrPnlXAxisTitle.SetRCode(clsXLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputXAxisTitle.SetRCode(clsXLabsFunction, bReset, bCloneIfNeeded:=True)
+
         UcrPnlYAxisTitle.SetRCode(clsYLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputYAxisTitle.SetRCode(clsYLabsFunction, bReset, bCloneIfNeeded:=True)
 
@@ -731,6 +731,10 @@ Public Class sdgPICSARainfallGraph
 
     Private Sub UcrChkYAxisTitleSzie_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrChkYAxisTitleSzie.ControlValueChanged
         AddRemoveYAxisTitleSize()
+    End Sub
+
+    Private Sub ucrInputGraphTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphcCaption.ControlValueChanged
+
     End Sub
 
     Private Sub ucrChkXAxisLabelSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXAxisLabelSize.ControlValueChanged, ucrChkXAxisAngle.ControlValueChanged

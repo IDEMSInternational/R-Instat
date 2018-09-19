@@ -457,7 +457,7 @@
     <value>6, 15</value>
   </data>
   <data name="UcrPnlYAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 57</value>
+    <value>204, 57</value>
   </data>
   <data name="UcrPnlYAxisTitle.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -498,6 +498,24 @@
   <data name="&gt;&gt;grpyAxisTitle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="rdoAutoXAxis.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoAutoXAxis.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoAutoXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 21</value>
+  </data>
+  <data name="rdoAutoXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 17</value>
+  </data>
+  <data name="rdoAutoXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="rdoAutoXAxis.Text" xml:space="preserve">
+    <value>Auto </value>
+  </data>
   <data name="&gt;&gt;rdoAutoXAxis.Name" xml:space="preserve">
     <value>rdoAutoXAxis</value>
   </data>
@@ -510,6 +528,15 @@
   <data name="&gt;&gt;rdoAutoXAxis.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrInputXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 44</value>
+  </data>
+  <data name="ucrInputXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 21</value>
+  </data>
+  <data name="ucrInputXAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
   <data name="&gt;&gt;ucrInputXAxisTitle.Name" xml:space="preserve">
     <value>ucrInputXAxisTitle</value>
   </data>
@@ -521,495 +548,6 @@
   </data>
   <data name="&gt;&gt;ucrInputXAxisTitle.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;rdoRemoveXAxisTitle.Name" xml:space="preserve">
-    <value>rdoRemoveXAxisTitle</value>
-  </data>
-  <data name="&gt;&gt;rdoRemoveXAxisTitle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoRemoveXAxisTitle.Parent" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;rdoRemoveXAxisTitle.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;rdoChangeXAxisTitle.Name" xml:space="preserve">
-    <value>rdoChangeXAxisTitle</value>
-  </data>
-  <data name="&gt;&gt;rdoChangeXAxisTitle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoChangeXAxisTitle.Parent" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;rdoChangeXAxisTitle.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlXAxisTitle.Name" xml:space="preserve">
-    <value>ucrPnlXAxisTitle</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlXAxisTitle.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlXAxisTitle.Parent" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlXAxisTitle.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;UcrNudXAxisTitleSzie.Name" xml:space="preserve">
-    <value>UcrNudXAxisTitleSzie</value>
-  </data>
-  <data name="&gt;&gt;UcrNudXAxisTitleSzie.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrNudXAxisTitleSzie.Parent" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;UcrNudXAxisTitleSzie.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;UcrChkXAxisTitleSzie.Name" xml:space="preserve">
-    <value>UcrChkXAxisTitleSzie</value>
-  </data>
-  <data name="&gt;&gt;UcrChkXAxisTitleSzie.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkXAxisTitleSzie.Parent" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;UcrChkXAxisTitleSzie.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="grpAxes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 129</value>
-  </data>
-  <data name="grpAxes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 105</value>
-  </data>
-  <data name="grpAxes.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="grpAxes.Text" xml:space="preserve">
-    <value>X-Axis Title</value>
-  </data>
-  <data name="&gt;&gt;grpAxes.Name" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;grpAxes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpAxes.Parent" xml:space="preserve">
-    <value>TabPage1</value>
-  </data>
-  <data name="&gt;&gt;grpAxes.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;UcrChkCaption.Name" xml:space="preserve">
-    <value>UcrChkCaption</value>
-  </data>
-  <data name="&gt;&gt;UcrChkCaption.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkCaption.Parent" xml:space="preserve">
-    <value>grpGraphTitles</value>
-  </data>
-  <data name="&gt;&gt;UcrChkCaption.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;UcrChkSubTitle.Name" xml:space="preserve">
-    <value>UcrChkSubTitle</value>
-  </data>
-  <data name="&gt;&gt;UcrChkSubTitle.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkSubTitle.Parent" xml:space="preserve">
-    <value>grpGraphTitles</value>
-  </data>
-  <data name="&gt;&gt;UcrChkSubTitle.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;UcrChkTitle.Name" xml:space="preserve">
-    <value>UcrChkTitle</value>
-  </data>
-  <data name="&gt;&gt;UcrChkTitle.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkTitle.Parent" xml:space="preserve">
-    <value>grpGraphTitles</value>
-  </data>
-  <data name="&gt;&gt;UcrChkTitle.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;UcrNudCaptionSize.Name" xml:space="preserve">
-    <value>UcrNudCaptionSize</value>
-  </data>
-  <data name="&gt;&gt;UcrNudCaptionSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrNudCaptionSize.Parent" xml:space="preserve">
-    <value>grpGraphTitles</value>
-  </data>
-  <data name="&gt;&gt;UcrNudCaptionSize.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;UcrNudSubTitleSize.Name" xml:space="preserve">
-    <value>UcrNudSubTitleSize</value>
-  </data>
-  <data name="&gt;&gt;UcrNudSubTitleSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrNudSubTitleSize.Parent" xml:space="preserve">
-    <value>grpGraphTitles</value>
-  </data>
-  <data name="&gt;&gt;UcrNudSubTitleSize.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;UcrNudTitleSize.Name" xml:space="preserve">
-    <value>UcrNudTitleSize</value>
-  </data>
-  <data name="&gt;&gt;UcrNudTitleSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrNudTitleSize.Parent" xml:space="preserve">
-    <value>grpGraphTitles</value>
-  </data>
-  <data name="&gt;&gt;UcrNudTitleSize.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCaptionSize.Name" xml:space="preserve">
-    <value>ucrChkCaptionSize</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCaptionSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCaptionSize.Parent" xml:space="preserve">
-    <value>grpGraphTitles</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCaptionSize.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;UcrChkSubTitleSize.Name" xml:space="preserve">
-    <value>UcrChkSubTitleSize</value>
-  </data>
-  <data name="&gt;&gt;UcrChkSubTitleSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkSubTitleSize.Parent" xml:space="preserve">
-    <value>grpGraphTitles</value>
-  </data>
-  <data name="&gt;&gt;UcrChkSubTitleSize.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;UcrChkTitleSize.Name" xml:space="preserve">
-    <value>UcrChkTitleSize</value>
-  </data>
-  <data name="&gt;&gt;UcrChkTitleSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkTitleSize.Parent" xml:space="preserve">
-    <value>grpGraphTitles</value>
-  </data>
-  <data name="&gt;&gt;UcrChkTitleSize.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphcCaption.Name" xml:space="preserve">
-    <value>ucrInputGraphcCaption</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphcCaption.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphcCaption.Parent" xml:space="preserve">
-    <value>grpGraphTitles</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphcCaption.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphTitle.Name" xml:space="preserve">
-    <value>ucrInputGraphTitle</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphTitle.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphTitle.Parent" xml:space="preserve">
-    <value>grpGraphTitles</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphTitle.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphSubTitle.Name" xml:space="preserve">
-    <value>ucrInputGraphSubTitle</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphSubTitle.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphSubTitle.Parent" xml:space="preserve">
-    <value>grpGraphTitles</value>
-  </data>
-  <data name="&gt;&gt;ucrInputGraphSubTitle.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="grpGraphTitles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 10</value>
-  </data>
-  <data name="grpGraphTitles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 110</value>
-  </data>
-  <data name="grpGraphTitles.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="grpGraphTitles.Text" xml:space="preserve">
-    <value>Graph</value>
-  </data>
-  <data name="&gt;&gt;grpGraphTitles.Name" xml:space="preserve">
-    <value>grpGraphTitles</value>
-  </data>
-  <data name="&gt;&gt;grpGraphTitles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpGraphTitles.Parent" xml:space="preserve">
-    <value>TabPage1</value>
-  </data>
-  <data name="&gt;&gt;grpGraphTitles.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>567, 309</value>
-  </data>
-  <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="TabPage1.Text" xml:space="preserve">
-    <value>Titles </value>
-  </data>
-  <data name="&gt;&gt;TabPage1.Name" xml:space="preserve">
-    <value>TabPage1</value>
-  </data>
-  <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPage1.Parent" xml:space="preserve">
-    <value>tbPICSA</value>
-  </data>
-  <data name="&gt;&gt;TabPage1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;grpXAxisLabels.Name" xml:space="preserve">
-    <value>grpXAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;grpXAxisLabels.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpXAxisLabels.Parent" xml:space="preserve">
-    <value>TabPage2</value>
-  </data>
-  <data name="&gt;&gt;grpXAxisLabels.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;grpYAxisLabels.Name" xml:space="preserve">
-    <value>grpYAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;grpYAxisLabels.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpYAxisLabels.Parent" xml:space="preserve">
-    <value>TabPage2</value>
-  </data>
-  <data name="&gt;&gt;grpYAxisLabels.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="TabPage2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>567, 309</value>
-  </data>
-  <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="TabPage2.Text" xml:space="preserve">
-    <value>Labels </value>
-  </data>
-  <data name="&gt;&gt;TabPage2.Name" xml:space="preserve">
-    <value>TabPage2</value>
-  </data>
-  <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
-    <value>tbPICSA</value>
-  </data>
-  <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddMean.Name" xml:space="preserve">
-    <value>ucrChkAddMean</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddMean.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddMean.Parent" xml:space="preserve">
-    <value>TabPage3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddMean.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddMedian.Name" xml:space="preserve">
-    <value>ucrChkAddMedian</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddMedian.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddMedian.Parent" xml:space="preserve">
-    <value>TabPage3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddMedian.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddTerciles.Name" xml:space="preserve">
-    <value>ucrChkAddTerciles</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddTerciles.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddTerciles.Parent" xml:space="preserve">
-    <value>TabPage3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddTerciles.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>567, 309</value>
-  </data>
-  <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="TabPage3.Text" xml:space="preserve">
-    <value>Lines</value>
-  </data>
-  <data name="&gt;&gt;TabPage3.Name" xml:space="preserve">
-    <value>TabPage3</value>
-  </data>
-  <data name="&gt;&gt;TabPage3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPage3.Parent" xml:space="preserve">
-    <value>tbPICSA</value>
-  </data>
-  <data name="&gt;&gt;TabPage3.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;grpMinorGridLine.Name" xml:space="preserve">
-    <value>grpMinorGridLine</value>
-  </data>
-  <data name="&gt;&gt;grpMinorGridLine.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpMinorGridLine.Parent" xml:space="preserve">
-    <value>TabPage4</value>
-  </data>
-  <data name="&gt;&gt;grpMinorGridLine.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
-    <value>TabPage4</value>
-  </data>
-  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;grpMajorGridLines.Name" xml:space="preserve">
-    <value>grpMajorGridLines</value>
-  </data>
-  <data name="&gt;&gt;grpMajorGridLines.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpMajorGridLines.Parent" xml:space="preserve">
-    <value>TabPage4</value>
-  </data>
-  <data name="&gt;&gt;grpMajorGridLines.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;grpPnlBackground.Name" xml:space="preserve">
-    <value>grpPnlBackground</value>
-  </data>
-  <data name="&gt;&gt;grpPnlBackground.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpPnlBackground.Parent" xml:space="preserve">
-    <value>TabPage4</value>
-  </data>
-  <data name="&gt;&gt;grpPnlBackground.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="TabPage4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>567, 309</value>
-  </data>
-  <data name="TabPage4.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="TabPage4.Text" xml:space="preserve">
-    <value>Panel</value>
-  </data>
-  <data name="&gt;&gt;TabPage4.Name" xml:space="preserve">
-    <value>TabPage4</value>
-  </data>
-  <data name="&gt;&gt;TabPage4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPage4.Parent" xml:space="preserve">
-    <value>tbPICSA</value>
-  </data>
-  <data name="&gt;&gt;TabPage4.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tbPICSA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 4</value>
-  </data>
-  <data name="tbPICSA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 335</value>
-  </data>
-  <data name="tbPICSA.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="&gt;&gt;tbPICSA.Name" xml:space="preserve">
-    <value>tbPICSA</value>
-  </data>
-  <data name="&gt;&gt;tbPICSA.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbPICSA.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tbPICSA.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="rdoRemoveXAxisTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1071,704 +609,11 @@
   <data name="&gt;&gt;rdoChangeXAxisTitle.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;ucrChkXAxisLabelSize.Name" xml:space="preserve">
-    <value>ucrChkXAxisLabelSize</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXAxisLabelSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXAxisLabelSize.Parent" xml:space="preserve">
-    <value>grpXAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXAxisLabelSize.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXAxisAngle.Name" xml:space="preserve">
-    <value>ucrChkXAxisAngle</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXAxisAngle.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXAxisAngle.Parent" xml:space="preserve">
-    <value>grpXAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrChkXAxisAngle.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyXAxisTickMarks.Name" xml:space="preserve">
-    <value>ucrChkSpecifyXAxisTickMarks</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyXAxisTickMarks.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyXAxisTickMarks.Parent" xml:space="preserve">
-    <value>grpXAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyXAxisTickMarks.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXFrom.Name" xml:space="preserve">
-    <value>ucrInputXFrom</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXFrom.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXFrom.Parent" xml:space="preserve">
-    <value>grpXAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXFrom.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXInStepsOf.Name" xml:space="preserve">
-    <value>ucrInputXInStepsOf</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXInStepsOf.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXInStepsOf.Parent" xml:space="preserve">
-    <value>grpXAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXInStepsOf.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrNudXaxisLabelSize.Name" xml:space="preserve">
-    <value>ucrNudXaxisLabelSize</value>
-  </data>
-  <data name="&gt;&gt;ucrNudXaxisLabelSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudXaxisLabelSize.Parent" xml:space="preserve">
-    <value>grpXAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrNudXaxisLabelSize.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXTo.Name" xml:space="preserve">
-    <value>ucrInputXTo</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXTo.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXTo.Parent" xml:space="preserve">
-    <value>grpXAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXTo.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;ucrNudXAxisAngle.Name" xml:space="preserve">
-    <value>ucrNudXAxisAngle</value>
-  </data>
-  <data name="&gt;&gt;ucrNudXAxisAngle.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudXAxisAngle.Parent" xml:space="preserve">
-    <value>grpXAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrNudXAxisAngle.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="grpXAxisLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 8</value>
-  </data>
-  <data name="grpXAxisLabels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 93</value>
-  </data>
-  <data name="grpXAxisLabels.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="grpXAxisLabels.Text" xml:space="preserve">
-    <value>X-Axis</value>
-  </data>
-  <data name="&gt;&gt;grpXAxisLabels.Name" xml:space="preserve">
-    <value>grpXAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;grpXAxisLabels.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpXAxisLabels.Parent" xml:space="preserve">
-    <value>TabPage2</value>
-  </data>
-  <data name="&gt;&gt;grpXAxisLabels.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLabelForDays.Name" xml:space="preserve">
-    <value>ucrInputLabelForDays</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLabelForDays.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLabelForDays.Parent" xml:space="preserve">
-    <value>grpYAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLabelForDays.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisAngle.Name" xml:space="preserve">
-    <value>ucrNudYAxisAngle</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisAngle.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisAngle.Parent" xml:space="preserve">
-    <value>grpYAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisAngle.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLabelForDays.Name" xml:space="preserve">
-    <value>ucrChkLabelForDays</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLabelForDays.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLabelForDays.Parent" xml:space="preserve">
-    <value>grpYAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLabelForDays.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisAngle.Name" xml:space="preserve">
-    <value>ucrChkYAxisAngle</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisAngle.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisAngle.Parent" xml:space="preserve">
-    <value>grpYAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisAngle.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisLabelSize.Name" xml:space="preserve">
-    <value>ucrChkYAxisLabelSize</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisLabelSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisLabelSize.Parent" xml:space="preserve">
-    <value>grpYAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisLabelSize.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyYAxisTickMarks.Name" xml:space="preserve">
-    <value>ucrChkSpecifyYAxisTickMarks</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyYAxisTickMarks.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyYAxisTickMarks.Parent" xml:space="preserve">
-    <value>grpYAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyYAxisTickMarks.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYFrom.Name" xml:space="preserve">
-    <value>ucrInputYFrom</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYFrom.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYFrom.Parent" xml:space="preserve">
-    <value>grpYAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYFrom.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisLabelSize.Name" xml:space="preserve">
-    <value>ucrNudYAxisLabelSize</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisLabelSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisLabelSize.Parent" xml:space="preserve">
-    <value>grpYAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisLabelSize.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYTo.Name" xml:space="preserve">
-    <value>ucrInputYTo</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYTo.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYTo.Parent" xml:space="preserve">
-    <value>grpYAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYTo.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYInStepsOf.Name" xml:space="preserve">
-    <value>ucrInputYInStepsOf</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYInStepsOf.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYInStepsOf.Parent" xml:space="preserve">
-    <value>grpYAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYInStepsOf.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="grpYAxisLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 120</value>
-  </data>
-  <data name="grpYAxisLabels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 118</value>
-  </data>
-  <data name="grpYAxisLabels.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="grpYAxisLabels.Text" xml:space="preserve">
-    <value>Y-Axis</value>
-  </data>
-  <data name="&gt;&gt;grpYAxisLabels.Name" xml:space="preserve">
-    <value>grpYAxisLabels</value>
-  </data>
-  <data name="&gt;&gt;grpYAxisLabels.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpYAxisLabels.Parent" xml:space="preserve">
-    <value>TabPage2</value>
-  </data>
-  <data name="&gt;&gt;grpYAxisLabels.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;UcrNudMinorGridLineSize.Name" xml:space="preserve">
-    <value>UcrNudMinorGridLineSize</value>
-  </data>
-  <data name="&gt;&gt;UcrNudMinorGridLineSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrNudMinorGridLineSize.Parent" xml:space="preserve">
-    <value>grpMinorGridLine</value>
-  </data>
-  <data name="&gt;&gt;UcrNudMinorGridLineSize.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMinorGridLineSize.Name" xml:space="preserve">
-    <value>UcrChkMinorGridLineSize</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMinorGridLineSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMinorGridLineSize.Parent" xml:space="preserve">
-    <value>grpMinorGridLine</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMinorGridLineSize.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMinorGridLineTpe.Name" xml:space="preserve">
-    <value>UcrInputMinorGridLineTpe</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMinorGridLineTpe.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMinorGridLineTpe.Parent" xml:space="preserve">
-    <value>grpMinorGridLine</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMinorGridLineTpe.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMinorGridLineColour.Name" xml:space="preserve">
-    <value>UcrInputMinorGridLineColour</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMinorGridLineColour.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMinorGridLineColour.Parent" xml:space="preserve">
-    <value>grpMinorGridLine</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMinorGridLineColour.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMinorGridLineType.Name" xml:space="preserve">
-    <value>UcrChkMinorGridLineType</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMinorGridLineType.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMinorGridLineType.Parent" xml:space="preserve">
-    <value>grpMinorGridLine</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMinorGridLineType.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMinorGridLineColour.Name" xml:space="preserve">
-    <value>UcrChkMinorGridLineColour</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMinorGridLineColour.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMinorGridLineColour.Parent" xml:space="preserve">
-    <value>grpMinorGridLine</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMinorGridLineColour.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="grpMinorGridLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 183</value>
-  </data>
-  <data name="grpMinorGridLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 111</value>
-  </data>
-  <data name="grpMinorGridLine.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="grpMinorGridLine.Text" xml:space="preserve">
-    <value>Minor Grid Lines</value>
-  </data>
-  <data name="&gt;&gt;grpMinorGridLine.Name" xml:space="preserve">
-    <value>grpMinorGridLine</value>
-  </data>
-  <data name="&gt;&gt;grpMinorGridLine.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpMinorGridLine.Parent" xml:space="preserve">
-    <value>TabPage4</value>
-  </data>
-  <data name="&gt;&gt;grpMinorGridLine.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;UcrNudBorderSize.Name" xml:space="preserve">
-    <value>UcrNudBorderSize</value>
-  </data>
-  <data name="&gt;&gt;UcrNudBorderSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrNudBorderSize.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;UcrNudBorderSize.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;UcrChkBorderSize.Name" xml:space="preserve">
-    <value>UcrChkBorderSize</value>
-  </data>
-  <data name="&gt;&gt;UcrChkBorderSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkBorderSize.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;UcrChkBorderSize.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;UcrInputBorderLinetype.Name" xml:space="preserve">
-    <value>UcrInputBorderLinetype</value>
-  </data>
-  <data name="&gt;&gt;UcrInputBorderLinetype.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrInputBorderLinetype.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;UcrInputBorderLinetype.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;UcrInputBorderColour.Name" xml:space="preserve">
-    <value>UcrInputBorderColour</value>
-  </data>
-  <data name="&gt;&gt;UcrInputBorderColour.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrInputBorderColour.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;UcrInputBorderColour.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkBorderLineType.Name" xml:space="preserve">
-    <value>ucrChkBorderLineType</value>
-  </data>
-  <data name="&gt;&gt;ucrChkBorderLineType.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkBorderLineType.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkBorderLineType.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrChkBorderColour.Name" xml:space="preserve">
-    <value>ucrChkBorderColour</value>
-  </data>
-  <data name="&gt;&gt;ucrChkBorderColour.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkBorderColour.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkBorderColour.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 9</value>
-  </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 117</value>
-  </data>
-  <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Border</value>
-  </data>
-  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
-    <value>TabPage4</value>
-  </data>
-  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;UcrNudMajorGridLineSize.Name" xml:space="preserve">
-    <value>UcrNudMajorGridLineSize</value>
-  </data>
-  <data name="&gt;&gt;UcrNudMajorGridLineSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrNudMajorGridLineSize.Parent" xml:space="preserve">
-    <value>grpMajorGridLines</value>
-  </data>
-  <data name="&gt;&gt;UcrNudMajorGridLineSize.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMajorGridLineSize.Name" xml:space="preserve">
-    <value>UcrChkMajorGridLineSize</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMajorGridLineSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMajorGridLineSize.Parent" xml:space="preserve">
-    <value>grpMajorGridLines</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMajorGridLineSize.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMajorGridLineLinetype.Name" xml:space="preserve">
-    <value>UcrInputMajorGridLineLinetype</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMajorGridLineLinetype.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMajorGridLineLinetype.Parent" xml:space="preserve">
-    <value>grpMajorGridLines</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMajorGridLineLinetype.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMajorGridLineColour.Name" xml:space="preserve">
-    <value>UcrInputMajorGridLineColour</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMajorGridLineColour.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMajorGridLineColour.Parent" xml:space="preserve">
-    <value>grpMajorGridLines</value>
-  </data>
-  <data name="&gt;&gt;UcrInputMajorGridLineColour.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMajorGridLinetype.Name" xml:space="preserve">
-    <value>UcrChkMajorGridLinetype</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMajorGridLinetype.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMajorGridLinetype.Parent" xml:space="preserve">
-    <value>grpMajorGridLines</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMajorGridLinetype.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMajorGridLineColour.Name" xml:space="preserve">
-    <value>UcrChkMajorGridLineColour</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMajorGridLineColour.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMajorGridLineColour.Parent" xml:space="preserve">
-    <value>grpMajorGridLines</value>
-  </data>
-  <data name="&gt;&gt;UcrChkMajorGridLineColour.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="grpMajorGridLines.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 183</value>
-  </data>
-  <data name="grpMajorGridLines.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 111</value>
-  </data>
-  <data name="grpMajorGridLines.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="grpMajorGridLines.Text" xml:space="preserve">
-    <value>Major Grid Lines</value>
-  </data>
-  <data name="&gt;&gt;grpMajorGridLines.Name" xml:space="preserve">
-    <value>grpMajorGridLines</value>
-  </data>
-  <data name="&gt;&gt;grpMajorGridLines.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpMajorGridLines.Parent" xml:space="preserve">
-    <value>TabPage4</value>
-  </data>
-  <data name="&gt;&gt;grpMajorGridLines.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrNudPnlBackgroundSize.Name" xml:space="preserve">
-    <value>ucrNudPnlBackgroundSize</value>
-  </data>
-  <data name="&gt;&gt;ucrNudPnlBackgroundSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudPnlBackgroundSize.Parent" xml:space="preserve">
-    <value>grpPnlBackground</value>
-  </data>
-  <data name="&gt;&gt;ucrNudPnlBackgroundSize.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;UcrInputPnlBackgroundFill.Name" xml:space="preserve">
-    <value>UcrInputPnlBackgroundFill</value>
-  </data>
-  <data name="&gt;&gt;UcrInputPnlBackgroundFill.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrInputPnlBackgroundFill.Parent" xml:space="preserve">
-    <value>grpPnlBackground</value>
-  </data>
-  <data name="&gt;&gt;UcrInputPnlBackgroundFill.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;UcrInputPnlBackgroundLinetype.Name" xml:space="preserve">
-    <value>UcrInputPnlBackgroundLinetype</value>
-  </data>
-  <data name="&gt;&gt;UcrInputPnlBackgroundLinetype.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrInputPnlBackgroundLinetype.Parent" xml:space="preserve">
-    <value>grpPnlBackground</value>
-  </data>
-  <data name="&gt;&gt;UcrInputPnlBackgroundLinetype.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;UcrInputPnlBackgroundColour.Name" xml:space="preserve">
-    <value>UcrInputPnlBackgroundColour</value>
-  </data>
-  <data name="&gt;&gt;UcrInputPnlBackgroundColour.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrInputPnlBackgroundColour.Parent" xml:space="preserve">
-    <value>grpPnlBackground</value>
-  </data>
-  <data name="&gt;&gt;UcrInputPnlBackgroundColour.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;UcrChkPnlBackgroundSize.Name" xml:space="preserve">
-    <value>UcrChkPnlBackgroundSize</value>
-  </data>
-  <data name="&gt;&gt;UcrChkPnlBackgroundSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkPnlBackgroundSize.Parent" xml:space="preserve">
-    <value>grpPnlBackground</value>
-  </data>
-  <data name="&gt;&gt;UcrChkPnlBackgroundSize.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;UcrChkPnlBackgroundLineType.Name" xml:space="preserve">
-    <value>UcrChkPnlBackgroundLineType</value>
-  </data>
-  <data name="&gt;&gt;UcrChkPnlBackgroundLineType.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkPnlBackgroundLineType.Parent" xml:space="preserve">
-    <value>grpPnlBackground</value>
-  </data>
-  <data name="&gt;&gt;UcrChkPnlBackgroundLineType.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;UcrChkPnlBackgroundFill.Name" xml:space="preserve">
-    <value>UcrChkPnlBackgroundFill</value>
-  </data>
-  <data name="&gt;&gt;UcrChkPnlBackgroundFill.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkPnlBackgroundFill.Parent" xml:space="preserve">
-    <value>grpPnlBackground</value>
-  </data>
-  <data name="&gt;&gt;UcrChkPnlBackgroundFill.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPnlBackgroundColour.Name" xml:space="preserve">
-    <value>ucrChkPnlBackgroundColour</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPnlBackgroundColour.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPnlBackgroundColour.Parent" xml:space="preserve">
-    <value>grpPnlBackground</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPnlBackgroundColour.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="grpPnlBackground.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 9</value>
-  </data>
-  <data name="grpPnlBackground.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 154</value>
-  </data>
-  <data name="grpPnlBackground.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="grpPnlBackground.Text" xml:space="preserve">
-    <value>Background</value>
-  </data>
-  <data name="&gt;&gt;grpPnlBackground.Name" xml:space="preserve">
-    <value>grpPnlBackground</value>
-  </data>
-  <data name="&gt;&gt;grpPnlBackground.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpPnlBackground.Parent" xml:space="preserve">
-    <value>TabPage4</value>
-  </data>
-  <data name="&gt;&gt;grpPnlBackground.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrInputXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 44</value>
-  </data>
-  <data name="ucrInputXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 21</value>
-  </data>
-  <data name="ucrInputXAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXAxisTitle.Name" xml:space="preserve">
-    <value>ucrInputXAxisTitle</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXAxisTitle.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXAxisTitle.Parent" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXAxisTitle.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="ucrPnlXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 15</value>
   </data>
   <data name="ucrPnlXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 57</value>
+    <value>204, 57</value>
   </data>
   <data name="ucrPnlXAxisTitle.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -1826,6 +671,30 @@
   </data>
   <data name="&gt;&gt;UcrChkXAxisTitleSzie.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="grpAxes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 129</value>
+  </data>
+  <data name="grpAxes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 105</value>
+  </data>
+  <data name="grpAxes.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="grpAxes.Text" xml:space="preserve">
+    <value>X-Axis Title</value>
+  </data>
+  <data name="&gt;&gt;grpAxes.Name" xml:space="preserve">
+    <value>grpAxes</value>
+  </data>
+  <data name="&gt;&gt;grpAxes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpAxes.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;grpAxes.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="UcrChkCaption.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 79</value>
@@ -2079,6 +948,57 @@
   <data name="&gt;&gt;ucrInputGraphSubTitle.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="grpGraphTitles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 10</value>
+  </data>
+  <data name="grpGraphTitles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>525, 110</value>
+  </data>
+  <data name="grpGraphTitles.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="grpGraphTitles.Text" xml:space="preserve">
+    <value>Graph</value>
+  </data>
+  <data name="&gt;&gt;grpGraphTitles.Name" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;grpGraphTitles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpGraphTitles.Parent" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;grpGraphTitles.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>567, 309</value>
+  </data>
+  <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Titles </value>
+  </data>
+  <data name="&gt;&gt;TabPage1.Name" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage1.Parent" xml:space="preserve">
+    <value>tbPICSA</value>
+  </data>
+  <data name="&gt;&gt;TabPage1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkXAxisLabelSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>251, 57</value>
   </data>
@@ -2246,6 +1166,30 @@
   </data>
   <data name="&gt;&gt;ucrNudXAxisAngle.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="grpXAxisLabels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 8</value>
+  </data>
+  <data name="grpXAxisLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>504, 93</value>
+  </data>
+  <data name="grpXAxisLabels.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="grpXAxisLabels.Text" xml:space="preserve">
+    <value>X-Axis</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisLabels.Name" xml:space="preserve">
+    <value>grpXAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisLabels.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisLabels.Parent" xml:space="preserve">
+    <value>TabPage2</value>
+  </data>
+  <data name="&gt;&gt;grpXAxisLabels.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrInputLabelForDays.Location" type="System.Drawing.Point, System.Drawing">
     <value>126, 89</value>
@@ -2457,6 +1401,57 @@
   <data name="&gt;&gt;ucrInputYInStepsOf.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="grpYAxisLabels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 120</value>
+  </data>
+  <data name="grpYAxisLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>504, 118</value>
+  </data>
+  <data name="grpYAxisLabels.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="grpYAxisLabels.Text" xml:space="preserve">
+    <value>Y-Axis</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisLabels.Name" xml:space="preserve">
+    <value>grpYAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisLabels.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisLabels.Parent" xml:space="preserve">
+    <value>TabPage2</value>
+  </data>
+  <data name="&gt;&gt;grpYAxisLabels.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="TabPage2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>567, 309</value>
+  </data>
+  <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="TabPage2.Text" xml:space="preserve">
+    <value>Labels </value>
+  </data>
+  <data name="&gt;&gt;TabPage2.Name" xml:space="preserve">
+    <value>TabPage2</value>
+  </data>
+  <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
+    <value>tbPICSA</value>
+  </data>
+  <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrChkAddMean.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 16</value>
   </data>
@@ -2518,6 +1513,33 @@
     <value>TabPage3</value>
   </data>
   <data name="&gt;&gt;ucrChkAddTerciles.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>567, 309</value>
+  </data>
+  <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="TabPage3.Text" xml:space="preserve">
+    <value>Lines</value>
+  </data>
+  <data name="&gt;&gt;TabPage3.Name" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;TabPage3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage3.Parent" xml:space="preserve">
+    <value>tbPICSA</value>
+  </data>
+  <data name="&gt;&gt;TabPage3.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="UcrNudMinorGridLineSize.Location" type="System.Drawing.Point, System.Drawing">
@@ -2646,6 +1668,30 @@
   <data name="&gt;&gt;UcrChkMinorGridLineColour.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="grpMinorGridLine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 183</value>
+  </data>
+  <data name="grpMinorGridLine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 111</value>
+  </data>
+  <data name="grpMinorGridLine.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="grpMinorGridLine.Text" xml:space="preserve">
+    <value>Minor Grid Lines</value>
+  </data>
+  <data name="&gt;&gt;grpMinorGridLine.Name" xml:space="preserve">
+    <value>grpMinorGridLine</value>
+  </data>
+  <data name="&gt;&gt;grpMinorGridLine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpMinorGridLine.Parent" xml:space="preserve">
+    <value>TabPage4</value>
+  </data>
+  <data name="&gt;&gt;grpMinorGridLine.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="UcrNudBorderSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>95, 86</value>
   </data>
@@ -2772,6 +1818,30 @@
   <data name="&gt;&gt;ucrChkBorderColour.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 9</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 117</value>
+  </data>
+  <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Border</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
+    <value>TabPage4</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="UcrNudMajorGridLineSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>95, 85</value>
   </data>
@@ -2897,6 +1967,30 @@
   </data>
   <data name="&gt;&gt;UcrChkMajorGridLineColour.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="grpMajorGridLines.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 183</value>
+  </data>
+  <data name="grpMajorGridLines.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 111</value>
+  </data>
+  <data name="grpMajorGridLines.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpMajorGridLines.Text" xml:space="preserve">
+    <value>Major Grid Lines</value>
+  </data>
+  <data name="&gt;&gt;grpMajorGridLines.Name" xml:space="preserve">
+    <value>grpMajorGridLines</value>
+  </data>
+  <data name="&gt;&gt;grpMajorGridLines.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpMajorGridLines.Parent" xml:space="preserve">
+    <value>TabPage4</value>
+  </data>
+  <data name="&gt;&gt;grpMajorGridLines.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="ucrNudPnlBackgroundSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>94, 120</value>
@@ -3066,6 +2160,78 @@
   <data name="&gt;&gt;ucrChkPnlBackgroundColour.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="grpPnlBackground.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 9</value>
+  </data>
+  <data name="grpPnlBackground.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 154</value>
+  </data>
+  <data name="grpPnlBackground.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpPnlBackground.Text" xml:space="preserve">
+    <value>Background</value>
+  </data>
+  <data name="&gt;&gt;grpPnlBackground.Name" xml:space="preserve">
+    <value>grpPnlBackground</value>
+  </data>
+  <data name="&gt;&gt;grpPnlBackground.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpPnlBackground.Parent" xml:space="preserve">
+    <value>TabPage4</value>
+  </data>
+  <data name="&gt;&gt;grpPnlBackground.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="TabPage4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>567, 309</value>
+  </data>
+  <data name="TabPage4.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>Panel</value>
+  </data>
+  <data name="&gt;&gt;TabPage4.Name" xml:space="preserve">
+    <value>TabPage4</value>
+  </data>
+  <data name="&gt;&gt;TabPage4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage4.Parent" xml:space="preserve">
+    <value>tbPICSA</value>
+  </data>
+  <data name="&gt;&gt;TabPage4.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tbPICSA.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 4</value>
+  </data>
+  <data name="tbPICSA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>575, 335</value>
+  </data>
+  <data name="tbPICSA.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;tbPICSA.Name" xml:space="preserve">
+    <value>tbPICSA</value>
+  </data>
+  <data name="&gt;&gt;tbPICSA.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbPICSA.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbPICSA.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrSdgPICSARainfalbuttons.Location" type="System.Drawing.Point, System.Drawing">
     <value>217, 338</value>
   </data>
@@ -3086,36 +2252,6 @@
   </data>
   <data name="&gt;&gt;ucrSdgPICSARainfalbuttons.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="rdoAutoXAxis.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoAutoXAxis.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoAutoXAxis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 21</value>
-  </data>
-  <data name="rdoAutoXAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 17</value>
-  </data>
-  <data name="rdoAutoXAxis.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
-  </data>
-  <data name="rdoAutoXAxis.Text" xml:space="preserve">
-    <value>Auto </value>
-  </data>
-  <data name="&gt;&gt;rdoAutoXAxis.Name" xml:space="preserve">
-    <value>rdoAutoXAxis</value>
-  </data>
-  <data name="&gt;&gt;rdoAutoXAxis.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoAutoXAxis.Parent" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;rdoAutoXAxis.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
