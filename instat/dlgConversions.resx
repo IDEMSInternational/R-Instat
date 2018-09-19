@@ -378,6 +378,15 @@
   <data name="&gt;&gt;rdoSingleValue.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="ucrInputLatitude.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 34</value>
+  </data>
+  <data name="ucrInputLatitude.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 21</value>
+  </data>
+  <data name="ucrInputLatitude.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
   <data name="&gt;&gt;ucrInputLatitude.Name" xml:space="preserve">
     <value>ucrInputLatitude</value>
   </data>
@@ -390,6 +399,18 @@
   <data name="&gt;&gt;ucrInputLatitude.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrReceiverLatitude.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 61</value>
+  </data>
+  <data name="ucrReceiverLatitude.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverLatitude.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="ucrReceiverLatitude.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
   <data name="&gt;&gt;ucrReceiverLatitude.Name" xml:space="preserve">
     <value>ucrReceiverLatitude</value>
   </data>
@@ -401,6 +422,15 @@
   </data>
   <data name="&gt;&gt;ucrReceiverLatitude.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="ucrPnlLatitude.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 34</value>
+  </data>
+  <data name="ucrPnlLatitude.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 48</value>
+  </data>
+  <data name="ucrPnlLatitude.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
   </data>
   <data name="&gt;&gt;ucrPnlLatitude.Name" xml:space="preserve">
     <value>ucrPnlLatitude</value>
@@ -440,6 +470,9 @@
   </data>
   <data name="lblDecimal.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblDecimal.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblDecimal.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 78</value>
@@ -782,72 +815,6 @@
   </data>
   <data name="&gt;&gt;grpElements.ZOrder" xml:space="preserve">
     <value>11</value>
-  </data>
-  <data name="ucrInputLatitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 34</value>
-  </data>
-  <data name="ucrInputLatitude.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 21</value>
-  </data>
-  <data name="ucrInputLatitude.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLatitude.Name" xml:space="preserve">
-    <value>ucrInputLatitude</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLatitude.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLatitude.Parent" xml:space="preserve">
-    <value>grpLatitude</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLatitude.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrReceiverLatitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 61</value>
-  </data>
-  <data name="ucrReceiverLatitude.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverLatitude.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 20</value>
-  </data>
-  <data name="ucrReceiverLatitude.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverLatitude.Name" xml:space="preserve">
-    <value>ucrReceiverLatitude</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverLatitude.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverLatitude.Parent" xml:space="preserve">
-    <value>grpLatitude</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverLatitude.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrPnlLatitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 34</value>
-  </data>
-  <data name="ucrPnlLatitude.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 48</value>
-  </data>
-  <data name="ucrPnlLatitude.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlLatitude.Name" xml:space="preserve">
-    <value>ucrPnlLatitude</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlLatitude.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlLatitude.Parent" xml:space="preserve">
-    <value>grpLatitude</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlLatitude.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
