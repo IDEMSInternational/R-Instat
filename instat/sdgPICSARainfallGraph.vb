@@ -152,15 +152,33 @@ Public Class sdgPICSARainfallGraph
 
         ucrChkSpecifyXAxisTickMarks.SetText("Specify Tick Marks")
         ucrChkSpecifyXAxisTickMarks.SetParameter(New RParameter("breaks"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrInputXFrom.SetParameter(New RParameter("from"))
+        ucrInputXFrom.SetValidationTypeAsNumeric()
+        ucrInputXFrom.AddQuotesIfUnrecognised = False
+
         ucrInputXTo.SetParameter(New RParameter("to"))
-        ucrInputXInStepsOf.SetParameter(New RParameter("step"))
+        ucrInputXTo.SetValidationTypeAsNumeric()
+        ucrInputXTo.AddQuotesIfUnrecognised = False
+
+        ucrInputXInStepsOf.SetParameter(New RParameter("by"))
+        ucrInputXInStepsOf.SetValidationTypeAsNumeric()
+        ucrInputXInStepsOf.AddQuotesIfUnrecognised = False
 
         ucrChkSpecifyYAxisTickMarks.SetText("Specify Tick Marks")
         ucrChkSpecifyYAxisTickMarks.SetParameter(New RParameter("breaks"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrInputYFrom.SetParameter(New RParameter("from"))
+        ucrInputYFrom.SetValidationTypeAsNumeric()
+        ucrInputYFrom.AddQuotesIfUnrecognised = False
+
         ucrInputYTo.SetParameter(New RParameter("to"))
-        ucrInputYInStepsOf.SetParameter(New RParameter("step"))
+        ucrInputYTo.SetValidationTypeAsNumeric()
+        ucrInputYTo.AddQuotesIfUnrecognised = False
+
+        ucrInputYInStepsOf.SetParameter(New RParameter("by"))
+        ucrInputYInStepsOf.SetValidationTypeAsNumeric()
+        ucrInputYInStepsOf.AddQuotesIfUnrecognised = False
 
         ucrChkLabelForDays.SetText("Labels for Days in Year")
         ucrChkLabelForDays.SetParameter(New RParameter("date_labels"))
@@ -741,23 +759,14 @@ Public Class sdgPICSARainfallGraph
         AddRemoveAngleSizeXAxis()
     End Sub
 
+    Private Sub ucrInputXFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputXFrom.ControlContentsChanged, ucrInputXFrom.ControlContentsChanged, ucrInputXInStepsOf.ControlContentsChanged, ucrChkSpecifyXAxisTickMarks.ControlValueChanged
+        AddRemoveSpecifyXAxisTickMarks()
+    End Sub
     Private Sub ucrChkYAxisLabelSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYAxisLabelSize.ControlValueChanged, ucrChkYAxisAngle.ControlValueChanged
         AddRemoveAngleSizeYAxis()
     End Sub
 
-    Private Sub ucrChkRemoveXAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyXAxisTickMarks.ControlValueChanged
-        AddRemoveSpecifyXAxisTickMarks()
-    End Sub
-
-    Private Sub ucrChkRemoveYAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyYAxisTickMarks.ControlValueChanged
-        AddRemoveSpecifyYAxisTickMarks()
-    End Sub
-
-    Private Sub ucrInputXFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputXFrom.ControlContentsChanged, ucrInputXFrom.ControlContentsChanged, ucrInputXInStepsOf.ControlContentsChanged
-        AddRemoveSpecifyXAxisTickMarks()
-    End Sub
-
-    Private Sub ucrInputYFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputYFrom.ControlContentsChanged, ucrInputYFrom.ControlContentsChanged, ucrInputYInStepsOf.ControlContentsChanged
+    Private Sub ucrInputYFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputYFrom.ControlContentsChanged, ucrInputYFrom.ControlContentsChanged, ucrInputYInStepsOf.ControlContentsChanged, ucrChkSpecifyYAxisTickMarks.ControlValueChanged
         AddRemoveSpecifyYAxisTickMarks()
     End Sub
 
