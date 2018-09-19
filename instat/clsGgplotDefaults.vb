@@ -156,6 +156,8 @@ Public Class GgplotDefaults
             dctTemp.Add("rect", clsElementRect.Clone())
             dctTemp.Add("text", clsElementText.Clone())
             dctTemp.Add("title", clsElementText.Clone())
+            dctTemp.Add("sub.title", clsElementText.Clone())
+            dctTemp.Add("caption", clsElementText.Clone())
             'dctTemp.Add("aspect.ratio", clsElementText.Clone())
             dctTemp.Add("axis.title", clsElementText.Clone())
             dctTemp.Add("axis.title.x", clsElementText.Clone())

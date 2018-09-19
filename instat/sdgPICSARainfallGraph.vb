@@ -52,11 +52,15 @@ Public Class sdgPICSARainfallGraph
         ucrPnlXAxisTitle.AddRadioButton(rdoAutoXAxis)
         ucrPnlXAxisTitle.AddRadioButton(rdoRemoveXAxisTitle)
         ucrPnlXAxisTitle.AddRadioButton(rdoChangeXAxisTitle)
+
         ucrPnlXAxisTitle.AddParameterPresentCondition(rdoAutoXAxis, "label", False)
+
         ucrPnlXAxisTitle.AddParameterPresentCondition(rdoRemoveXAxisTitle, "label", True)
         ucrPnlXAxisTitle.AddParameterValuesCondition(rdoRemoveXAxisTitle, "label", Chr(34) & Chr(34), True)
+
         ucrPnlXAxisTitle.AddParameterPresentCondition(rdoChangeXAxisTitle, "label", True)
         ucrPnlXAxisTitle.AddParameterValuesCondition(rdoChangeXAxisTitle, "label", Chr(34) & Chr(34), False)
+
         ucrPnlXAxisTitle.AddToLinkedControls(ucrInputXAxisTitle, {rdoChangeXAxisTitle}, bNewLinkedHideIfParameterMissing:=True)
 
         UcrPnlYAxisTitle.AddRadioButton(rdoAutoYAxis)
@@ -298,8 +302,8 @@ Public Class sdgPICSARainfallGraph
         End If
 
         'themes function
-
         clsThemeFunction = clsNewThemeFunction
+
         ' The position MUST be larger than the position of the theme_* argument
         ' Otherwise the choice of theme will overwrite the options selected here.
         ' Currently set to large value as no reason this cannot be at the end currently
@@ -600,27 +604,27 @@ Public Class sdgPICSARainfallGraph
 
     Private Sub AddRemoveGraphTitleSize()
         If (UcrChkTitleSize.Checked AndAlso UcrNudTitleSize.GetText <> "") Then
-            clsThemeFunction.AddParameter("title", clsRFunctionParameter:=clsPlotElementTitle)
+            clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementTitle)
         Else
-            clsThemeFunction.RemoveParameterByName("title")
+            clsThemeFunction.RemoveParameterByName("plot.title")
         End If
         AddRemoveTheme()
     End Sub
 
     Private Sub AddRemoveGraphSubTitleSize()
         If (UcrChkSubTitleSize.Checked AndAlso UcrNudSubTitleSize.GetText <> "") Then
-            clsThemeFunction.AddParameter("sub.title", clsRFunctionParameter:=clsPlotElementSubTitle)
+            clsThemeFunction.AddParameter("plot.subtitle", clsRFunctionParameter:=clsPlotElementSubTitle)
         Else
-            clsThemeFunction.RemoveParameterByName("sub.title")
+            clsThemeFunction.RemoveParameterByName("plot.subtitle")
         End If
         AddRemoveTheme()
     End Sub
 
     Private Sub AddRemoveGraphCaptionSize()
         If (ucrChkCaptionSize.Checked AndAlso UcrNudCaptionSize.GetText <> "") Then
-            clsThemeFunction.AddParameter("caption", clsRFunctionParameter:=clsPlotElementCaption)
+            clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaption)
         Else
-            clsThemeFunction.RemoveParameterByName("caption")
+            clsThemeFunction.RemoveParameterByName("plot.caption")
         End If
         AddRemoveTheme()
     End Sub
@@ -736,12 +740,6 @@ Public Class sdgPICSARainfallGraph
     Private Sub ucrChkYAxisLabelSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYAxisLabelSize.ControlValueChanged, ucrChkYAxisAngle.ControlValueChanged
         AddRemoveAngleSizeYAxis()
     End Sub
-
-    Private Sub ucrInputGraphTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputYAxisTitle.ControlValueChanged, ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphcCaption.ControlValueChanged, ucrInputXAxisTitle.ControlValueChanged
-
-    End Sub
-
-
 
     Private Sub ucrChkRemoveXAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyXAxisTickMarks.ControlValueChanged
         AddRemoveSpecifyXAxisTickMarks()
