@@ -18,7 +18,6 @@ Imports instat.Translations
 
 Public Class sdgSimpleRegOptions
     Public clsRModelFunction As RFunction
-    Public clsRDataFrame As ucrDataFrame
     Public clsRYVariable, clsRXVariable As String
     Public clsRLmOrGLM As RFunction
     Public clsRGraphics As New RSyntax
@@ -430,10 +429,6 @@ Public Class sdgSimpleRegOptions
             End If
             SetWhichParameter()
         End If
-    End Sub
-
-    Public Sub SetRDataFrame(clsRDataFr As ucrDataFrame)
-        clsRDataFrame = clsRDataFr
     End Sub
 
     Private Sub ucrchkRugs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRugs.ControlValueChanged
