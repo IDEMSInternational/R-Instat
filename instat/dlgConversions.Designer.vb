@@ -33,6 +33,7 @@ Partial Class dlgConversions
         Me.rdoSingleValue = New System.Windows.Forms.RadioButton()
         Me.grpLatitude = New System.Windows.Forms.GroupBox()
         Me.grpElements = New System.Windows.Forms.GroupBox()
+        Me.lblDecimal = New System.Windows.Forms.Label()
         Me.rdoWindSpeed = New System.Windows.Forms.RadioButton()
         Me.rdoRain = New System.Windows.Forms.RadioButton()
         Me.rdoTemperature = New System.Windows.Forms.RadioButton()
@@ -45,6 +46,7 @@ Partial Class dlgConversions
         Me.ucrPnlConversions = New instat.UcrPanel()
         Me.ucrSelectorConversions = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrNudDecimal = New instat.ucrNud()
         Me.ucrInputFromTemperature = New instat.ucrInputComboBox()
         Me.ucrInputToWindSpeed = New instat.ucrInputComboBox()
         Me.ucrInputToTemperature = New instat.ucrInputComboBox()
@@ -52,8 +54,6 @@ Partial Class dlgConversions
         Me.ucrInputFromWindSpeed = New instat.ucrInputComboBox()
         Me.ucrInputFromPrecipitation = New instat.ucrInputComboBox()
         Me.ucrInputToPrecipitation = New instat.ucrInputComboBox()
-        Me.ucrNudDecimal = New instat.ucrNud()
-        Me.lblDecimal = New System.Windows.Forms.Label()
         Me.grpLatitude.SuspendLayout()
         Me.grpElements.SuspendLayout()
         Me.SuspendLayout()
@@ -143,6 +143,11 @@ Partial Class dlgConversions
         resources.ApplyResources(Me.grpElements, "grpElements")
         Me.grpElements.Name = "grpElements"
         Me.grpElements.TabStop = False
+        '
+        'lblDecimal
+        '
+        resources.ApplyResources(Me.lblDecimal, "lblDecimal")
+        Me.lblDecimal.Name = "lblDecimal"
         '
         'rdoWindSpeed
         '
@@ -240,6 +245,16 @@ Partial Class dlgConversions
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrNudDecimal
+        '
+        Me.ucrNudDecimal.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDecimal.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudDecimal, "ucrNudDecimal")
+        Me.ucrNudDecimal.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDecimal.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDecimal.Name = "ucrNudDecimal"
+        Me.ucrNudDecimal.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrInputFromTemperature
         '
         Me.ucrInputFromTemperature.AddQuotesIfUnrecognised = True
@@ -286,21 +301,6 @@ Partial Class dlgConversions
         Me.ucrInputToPrecipitation.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputToPrecipitation, "ucrInputToPrecipitation")
         Me.ucrInputToPrecipitation.Name = "ucrInputToPrecipitation"
-        '
-        'ucrNudDecimal
-        '
-        Me.ucrNudDecimal.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimal.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudDecimal, "ucrNudDecimal")
-        Me.ucrNudDecimal.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDecimal.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimal.Name = "ucrNudDecimal"
-        Me.ucrNudDecimal.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'lblDecimal
-        '
-        resources.ApplyResources(Me.lblDecimal, "lblDecimal")
-        Me.lblDecimal.Name = "lblDecimal"
         '
         'dlgConversions
         '

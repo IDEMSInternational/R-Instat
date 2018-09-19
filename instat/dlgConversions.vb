@@ -119,10 +119,9 @@ Public Class dlgConversions
 
         ucrNudDecimal.SetParameter(New RParameter("round", 3))
         ucrNudDecimal.SetMinMax(0, 5)
-        ucrNudDecimal.SetText(1)
 
         ucrPnlConversions.AddToLinkedControls(ucrReceiverElement, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlConversions.AddToLinkedControls(ucrNudDecimal, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConversions.AddToLinkedControls(ucrNudDecimal, {rdoUnits}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrPnlElements, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoRain)
 
         ucrPnlConversions.AddToLinkedControls(ucrReceiverDate, {rdoDayLength}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -131,8 +130,8 @@ Public Class dlgConversions
         ucrPnlLatitude.AddToLinkedControls(ucrInputLatitude, {rdoSingleValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlLatitude.AddToLinkedControls(ucrReceiverLatitude, {rdoColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrPnlElements.AddToLinkedControls(ucrInputFromPrecipitation, {rdoRain}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlElements.AddToLinkedControls(ucrInputToPrecipitation, {rdoRain}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlElements.AddToLinkedControls(ucrInputFromPrecipitation, {rdoRain}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="inches")
+        ucrPnlElements.AddToLinkedControls(ucrInputToPrecipitation, {rdoRain}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mm")
         ucrPnlElements.AddToLinkedControls(ucrInputFromTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Kelvin")
         ucrPnlElements.AddToLinkedControls(ucrInputToTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Celsius")
         ucrPnlElements.AddToLinkedControls(ucrInputFromWindSpeed, {rdoWindSpeed}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Knots")
