@@ -30,7 +30,6 @@ Partial Class dlgConversions
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblDecimal = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
-        Me.lblStation = New System.Windows.Forms.Label()
         Me.rdoColumn = New System.Windows.Forms.RadioButton()
         Me.rdoSingleValue = New System.Windows.Forms.RadioButton()
         Me.grpLatitude = New System.Windows.Forms.GroupBox()
@@ -50,7 +49,6 @@ Partial Class dlgConversions
         Me.ucrInputFromPrecipitation = New instat.ucrInputComboBox()
         Me.ucrInputToPrecipitation = New instat.ucrInputComboBox()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSaveConversions = New instat.ucrSave()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrPnlConversions = New instat.UcrPanel()
@@ -105,11 +103,6 @@ Partial Class dlgConversions
         '
         resources.ApplyResources(Me.lblDate, "lblDate")
         Me.lblDate.Name = "lblDate"
-        '
-        'lblStation
-        '
-        resources.ApplyResources(Me.lblStation, "lblStation")
-        Me.lblStation.Name = "lblStation"
         '
         'rdoColumn
         '
@@ -277,15 +270,6 @@ Partial Class dlgConversions
         Me.ucrReceiverDate.strNcFilePath = ""
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
-        'ucrReceiverStation
-        '
-        Me.ucrReceiverStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.ucrSelector = Nothing
-        '
         'ucrSaveConversions
         '
         resources.ApplyResources(Me.ucrSaveConversions, "ucrSaveConversions")
@@ -324,9 +308,7 @@ Partial Class dlgConversions
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpLatitude)
         Me.Controls.Add(Me.lblDate)
-        Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverDate)
-        Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrSaveConversions)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.ucrReceiverElement)
@@ -364,9 +346,7 @@ Partial Class dlgConversions
     Friend WithEvents ucrNudDecimal As ucrNud
     Friend WithEvents ucrSaveConversions As ucrSave
     Friend WithEvents lblDate As Label
-    Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
-    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents rdoColumn As RadioButton
     Friend WithEvents rdoSingleValue As RadioButton
     Friend WithEvents ucrReceiverLatitude As ucrReceiverSingle
