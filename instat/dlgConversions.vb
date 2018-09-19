@@ -84,11 +84,13 @@ Public Class dlgConversions
         dctPrecipitationUnits.Add("mm", Chr(34) & "mm" & Chr(34))
         ucrInputFromPrecipitation.SetItems(dctPrecipitationUnits)
         ucrInputFromPrecipitation.SetDropDownStyleAsNonEditable()
+        ucrInputFromPrecipitation.SetName("inches")
         ucrInputFromPrecipitation.bAllowNonConditionValues = True
 
         ucrInputToPrecipitation.SetParameter(New RParameter("new_metric", 2))
         ucrInputToPrecipitation.SetItems(dctPrecipitationUnits)
         ucrInputToPrecipitation.SetDropDownStyleAsNonEditable()
+        ucrInputToPrecipitation.SetName("mm")
         ucrInputToPrecipitation.bAllowNonConditionValues = True
 
         ucrInputFromTemperature.SetParameter(New RParameter("old_metric", 1))
@@ -117,9 +119,10 @@ Public Class dlgConversions
 
         ucrNudDecimal.SetParameter(New RParameter("round", 3))
         ucrNudDecimal.SetMinMax(0, 5)
+        ucrNudDecimal.SetRDefault(1)
 
         ucrPnlConversions.AddToLinkedControls(ucrReceiverElement, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlConversions.AddToLinkedControls(ucrNudDecimal, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrPnlConversions.AddToLinkedControls(ucrNudDecimal, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrPnlElements, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoRain)
 
         ucrPnlConversions.AddToLinkedControls(ucrReceiverDate, {rdoDayLength}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -160,6 +163,7 @@ Public Class dlgConversions
 
         clsPrecipitationFunction.SetPackageName("weathermetrics")
         clsPrecipitationFunction.SetRCommand("convert_precip")
+        clsPrecipitationFunction.AddParameter("round", 1, iPosition:=3)
         clsPrecipitationFunction.AddParameter("old_metric", Chr(34) & "inches" & Chr(34), iPosition:=1)
         clsPrecipitationFunction.AddParameter("new_metric", Chr(34) & "mm" & Chr(34), iPosition:=2)
 
@@ -208,7 +212,7 @@ Public Class dlgConversions
                 ucrBase.OKEnabled(True)
             ElseIf rdoTemperature.Checked AndAlso ucrInputFromTemperature.GetText <> ucrInputToTemperature.GetText Then
                 ucrBase.OKEnabled(True)
-            ElseIf rdowindspeed.Checked AndAlso ucrInputFromWindSpeed.GetText <> ucrInputToWindSpeed.GetText Then
+            ElseIf rdoWindSpeed.Checked AndAlso ucrInputFromWindSpeed.GetText <> ucrInputToWindSpeed.GetText Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
