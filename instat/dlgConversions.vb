@@ -84,13 +84,13 @@ Public Class dlgConversions
         dctPrecipitationUnits.Add("mm", Chr(34) & "mm" & Chr(34))
         ucrInputFromPrecipitation.SetItems(dctPrecipitationUnits)
         ucrInputFromPrecipitation.SetDropDownStyleAsNonEditable()
-        ucrInputFromPrecipitation.SetRDefault("inches")
+        ucrInputFromPrecipitation.SetName("inches")
         ucrInputFromPrecipitation.bAllowNonConditionValues = True
 
         ucrInputToPrecipitation.SetParameter(New RParameter("new_metric", 2))
         ucrInputToPrecipitation.SetItems(dctPrecipitationUnits)
         ucrInputToPrecipitation.SetDropDownStyleAsNonEditable()
-        ucrInputToPrecipitation.SetRDefault("mm")
+        ucrInputToPrecipitation.SetName("mm")
         ucrInputToPrecipitation.bAllowNonConditionValues = True
 
         ucrInputFromTemperature.SetParameter(New RParameter("old_metric", 1))
@@ -119,7 +119,7 @@ Public Class dlgConversions
 
         ucrNudDecimal.SetParameter(New RParameter("round", 3))
         ucrNudDecimal.SetMinMax(0, 5)
-        ucrNudDecimal.SetRDefault(1)
+        ucrNudDecimal.SetText(1)
 
         ucrPnlConversions.AddToLinkedControls(ucrReceiverElement, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlConversions.AddToLinkedControls(ucrNudDecimal, {rdoUnits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
