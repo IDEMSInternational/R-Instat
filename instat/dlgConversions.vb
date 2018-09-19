@@ -84,13 +84,13 @@ Public Class dlgConversions
         dctPrecipitationUnits.Add("mm", Chr(34) & "mm" & Chr(34))
         ucrInputFromPrecipitation.SetItems(dctPrecipitationUnits)
         ucrInputFromPrecipitation.SetDropDownStyleAsNonEditable()
-        ucrInputFromPrecipitation.SetName("inches")
+        ucrInputFromPrecipitation.SetRDefault("inches")
         ucrInputFromPrecipitation.bAllowNonConditionValues = True
 
         ucrInputToPrecipitation.SetParameter(New RParameter("new_metric", 2))
         ucrInputToPrecipitation.SetItems(dctPrecipitationUnits)
         ucrInputToPrecipitation.SetDropDownStyleAsNonEditable()
-        ucrInputToPrecipitation.SetName("mm")
+        ucrInputToPrecipitation.SetRDefault("mm")
         ucrInputToPrecipitation.bAllowNonConditionValues = True
 
         ucrInputFromTemperature.SetParameter(New RParameter("old_metric", 1))
