@@ -2020,7 +2020,7 @@ Public Class frmMain
         dlgExportToCMSAF.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticCheckDataStationMaps_Click_1(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataStationMaps.Click
+    Private Sub mnuClimaticCheckDataStationMaps_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataStationMaps.Click
         dlgClimaticStationMaps.ShowDialog()
     End Sub
 End Class
