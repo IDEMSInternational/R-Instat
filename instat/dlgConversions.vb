@@ -259,6 +259,7 @@ Public Class dlgConversions
             ucrReceiverElement.SetMeAsReceiver()
             ucrSaveConversions.SetPrefix("Conversion")
         End If
+        ChangeLatParameter()
     End Sub
 
     Private Sub ucrPnlConversions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlConversions.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrSaveConversions.ControlContentsChanged, ucrNudDecimal.ControlContentsChanged, ucrPnlLatitude.ControlContentsChanged, ucrInputLatitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrInputFromPrecipitation.ControlContentsChanged, ucrInputToPrecipitation.ControlContentsChanged, ucrInputFromTemperature.ControlContentsChanged, ucrInputToTemperature.ControlContentsChanged, ucrInputFromWindSpeed.ControlContentsChanged, ucrInputToWindSpeed.ControlContentsChanged, ucrPnlElements.ControlContentsChanged
@@ -274,11 +275,12 @@ Public Class dlgConversions
             clsDayLengthFunction.AddParameter("lat", ucrInputLatitude.GetText, iPosition:=0)
         ElseIf Not rdoSingleValue.Checked AndAlso ucrInputLatitude.IsEmpty Then
             'This is done since the "lat" parameter is being given by two controls (ucrReceiverLatitude and ucrInputLatitude)
+            'TO DO: Come up with a better way to do this (setting up parameters given by more than one control)
             clsDayLengthFunction.RemoveParameterByPosition(0)
         End If
     End Sub
 
-    Private Sub ucrInputLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLatitude.ControlValueChanged, ucrPnlLatitude.ControlValueChanged, ucrPnlConversions.ControlValueChanged
+    Private Sub ucrInputLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLatitude.ControlValueChanged, ucrPnlLatitude.ControlValueChanged
         ChangeLatParameter()
     End Sub
 End Class
