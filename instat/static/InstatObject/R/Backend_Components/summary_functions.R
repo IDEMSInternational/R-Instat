@@ -569,11 +569,12 @@ summary_skewness_mc <- function(x, na.rm = FALSE, na_type = "", ...) {
 # skewness outlier limit function
 summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc = FALSE, skewnessweight = 4, na.rm = TRUE, na_type = "", omit = FALSE, value = 0, ...){ 
   if(omit){
-    if(value!=0){
-      x <- x[x>=value]
-    }else{
+    #This is needed when we need rainy days is defined(Rain>=0.85)
+    #if(value!=0){
+     # x <- x[x>=value]
+    #}else{
       x <- x[x>value]
-      }
+      #}
   }
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
