@@ -42,6 +42,13 @@ Public Class dlgPICSARainfall
     Private clsFactorLevels As New RFunction
     Private FactorLevel As RDotNet.SymbolicExpression
 
+    Private clsMeanFunction As New RFunction
+    Private clsMedianFunction As New RFunction
+    Private clsTercilesFunction As New RFunction
+    Private clsGeomHline As New RFunction
+    Private clsGeomHlineAes As New RFunction
+    Private strCalcColumn As String
+
     Private Sub dlgPCSARainfall_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -142,6 +149,17 @@ Public Class dlgPICSARainfall
         clsRgeomlineplotFunction.AddParameter("size", "0.8")
         clsBaseOperator.AddParameter(clsPointsParam)
 
+        clsMeanFunction = New RFunction
+        clsMeanFunction.SetRCommand("mean")
+
+
+        clsGeomHline = New RFunction
+        clsGeomHlineAes = New RFunction
+        clsGeomHline.SetPackageName("ggplot2")
+        clsGeomHline.SetRCommand("geom_hline")
+        clsGeomHlineAes.SetPackageName("ggplot2")
+        clsGeomHlineAes.SetRCommand("aes")
+
         clsXLabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYLabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
@@ -152,6 +170,7 @@ Public Class dlgPICSARainfall
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+
         If dctThemeFunctions.TryGetValue("panel.background", clsPanelBackgroundElementRect) Then
             clsPanelBackgroundElementRect.AddParameter("colour", Chr(34) & "white" & Chr(34))
             clsPanelBackgroundElementRect.AddParameter("fill", Chr(34) & "white" & Chr(34))
@@ -231,7 +250,7 @@ Public Class dlgPICSARainfall
 
     'add more functions 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
-        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, bReset:=bResetSubdialog)
+        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsnewGeomhline:=clsGeomHline, clsNewGeomHlineAes:=clsGeomHlineAes, clsNewMeanFunc:=clsMeanFunction, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -276,6 +295,11 @@ Public Class dlgPICSARainfall
 
     Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrVariablesAsFactorForPicsa_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlContentsChanged
+        strCalcColumn = ucrVariablesAsFactorForPicsa.GetVariableNames(bWithQuotes:=False)
+        sdgPICSARainfallGraph.SetComputationValue(strCalcColumn)
     End Sub
 
     Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorOptionalReceiver.ControlValueChanged

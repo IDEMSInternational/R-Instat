@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class sdgPICSARainfallGraph
     Private bControlsInitialised As Boolean = False
@@ -40,6 +41,16 @@ Public Class sdgPICSARainfallGraph
     Private clsPanelBackgroundElementRect As New RFunction
     Private clsPanelBorderElementRect As New RFunction
     Private dctLabelForDays As New Dictionary(Of String, RFunction)
+
+    Private clsMeanFunction As New RFunction
+    Private clsMedianFunction As New RFunction
+    Private clsTercilesFunction As New RFunction
+    Private clsGeomHline As New RFunction
+    Private clsGeomHlineAes As New RFunction
+    Private strColumn As String
+
+    'geom_hline(mean(rain)
+
 
     Private Sub sdgPICSARainfallGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -301,17 +312,26 @@ Public Class sdgPICSARainfallGraph
         ucrChkBorderLineType.AddToLinkedControls(UcrInputBorderLinetype, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         UcrChkBorderSize.AddToLinkedControls(UcrNudBorderSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+
         ' Line tab 
         ucrChkAddMean.SetText("Add Mean")
         ucrChkAddMean.SetParameter(New RParameter("x"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
+        Dim clsMeanFunc As New RFunction
+        Dim clsMeanpParam As New RParameter
         ucrChkAddMedian.SetText("Add Median")
+
+        clsMeanFunc.SetRCommand("mean")
+        clsMeanpParam.SetArgumentName("mean")
+        clsMeanpParam.SetArgument(clsMeanFunc)
+        ucrChkAddMedian.SetParameter(clsMeanpParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrChkAddTerciles.SetText("Add Terciles")
 
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsnewGeomhline As RFunction = Nothing, Optional clsNewGeomHlineAes As RFunction = Nothing, Optional clsNewMeanFunc As RFunction = Nothing, Optional bReset As Boolean = False)
         clsBaseOperator = clsNewOperator
 
         If Not bControlsInitialised Then
@@ -320,7 +340,9 @@ Public Class sdgPICSARainfallGraph
 
         'themes function
         clsThemeFunction = clsNewThemeFunction
-
+        clsGeomHline = clsnewGeomhline
+        clsMeanFunction = clsNewMeanFunc
+        clsGeomHlineAes = clsNewGeomHlineAes
         ' The position MUST be larger than the position of the theme_* argument
         ' Otherwise the choice of theme will overwrite the options selected here.
         ' Currently set to large value as no reason this cannot be at the end currently
@@ -507,6 +529,8 @@ Public Class sdgPICSARainfallGraph
         ucrChkLabelForDays.SetRCode(clsYScaleDateFunction, bCloneIfNeeded:=True)
         ucrInputLabelForDays.SetRCode(clsYScaleDateFunction, bCloneIfNeeded:=True)
 
+        ucrChkAddMedian.SetRCode(clsGeomHline, bReset, bCloneIfNeeded:=True)
+
         bRCodeSet = True
         AddRemoveTheme()
         AddRemoveLabs()
@@ -514,6 +538,27 @@ Public Class sdgPICSARainfallGraph
         AddRemoveYLabs()
         AddRemoveSpecifyXAxisTickMarks()
         AddRemoveSpecifyYAxisTickMarks()
+        AddRemoveHline()
+    End Sub
+
+
+    Private Sub AddRemoveHline()
+        If ucrChkAddMean.Checked Then
+            clsBaseOperator.AddParameter("hline", clsRFunctionParameter:=clsGeomHline)
+            clsGeomHline.AddParameter("aes", clsRFunctionParameter:=clsGeomHlineAes, bIncludeArgumentName:=False)
+            clsGeomHlineAes.AddParameter("yintercept", clsRFunctionParameter:=clsMeanFunction)
+            clsMeanFunction.AddParameter("column", strColumn, bIncludeArgumentName:=False)
+        Else
+            clsBaseOperator.RemoveParameterByName("hline")
+        End If
+    End Sub
+
+    Public Sub SetComputationValue(strNewColumn As String)
+        strColumn = strNewColumn
+    End Sub
+
+    Private Sub ucrChkAddMean_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddMean.ControlValueChanged
+        AddRemoveHline()
     End Sub
 
     Private Sub AddRemoveTheme()
@@ -751,10 +796,6 @@ Public Class sdgPICSARainfallGraph
         AddRemoveYAxisTitleSize()
     End Sub
 
-    Private Sub ucrInputGraphTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphcCaption.ControlValueChanged
-
-    End Sub
-
     Private Sub ucrChkXAxisLabelSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXAxisLabelSize.ControlValueChanged, ucrChkXAxisAngle.ControlValueChanged
         AddRemoveAngleSizeXAxis()
     End Sub
@@ -773,4 +814,6 @@ Public Class sdgPICSARainfallGraph
     Private Sub ucrChkBorderColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBorderColour.ControlValueChanged, ucrChkBorderLineType.ControlValueChanged, UcrChkBorderSize.ControlValueChanged
         AddRemovePanelBorder()
     End Sub
+
+
 End Class
