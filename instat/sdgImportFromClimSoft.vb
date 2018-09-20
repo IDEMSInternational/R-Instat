@@ -128,6 +128,21 @@ Public Class sdgImportFromClimSoft
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        dlgOptions.ShowDialog()
+        Dim msgSetDefaults = MsgBox("Are you sure you want to update Climsoft defaults?", MessageBoxButtons.YesNo, "Factory Reset")
+
+        If msgSetDefaults = DialogResult.Yes Then
+            If Not ucrInputDatabaseName.IsEmpty() Then
+                frmMain.clsInstatOptions.SetClimsoftDatabaseName(ucrInputDatabaseName.GetText())
+            End If
+            If Not ucrInputHost.IsEmpty() Then
+                frmMain.clsInstatOptions.SetClimsoftHost(ucrInputHost.GetText())
+            End If
+            If Not ucrInputPort.IsEmpty() Then
+                frmMain.clsInstatOptions.SetClimsoftPort(ucrInputPort.GetText())
+            End If
+            If Not ucrInputUserName.IsEmpty() Then
+                frmMain.clsInstatOptions.SetClimsoftUsername(ucrInputUserName.GetText())
+            End If
+        End If
     End Sub
 End Class
