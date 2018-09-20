@@ -285,8 +285,6 @@ Public Class dlgMakeDate
         clsDivisionOperator.SetOperation("/")
 
         clsMultiplicationOperator.SetOperation("*")
-        clsMultiplicationOperator.AddParameter("x", 24, iPosition:=0)
-        clsMultiplicationOperator.AddParameter("y", 60, iPosition:=1)
 
         clsDateFunction.SetAssignTo(ucrSaveDate.GetText, strTempDataframe:=ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveDate.GetText)
         clsMakeYearMonthDay.SetAssignTo(ucrSaveDate.GetText, strTempDataframe:=ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveDate.GetText)
@@ -525,12 +523,14 @@ Public Class dlgMakeDate
                 clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
             Case "Minutes"
                 clsDivisionOperator.RemoveParameterByName("y")
-                clsMultiplicationOperator.RemoveParameterByName("x3")
+                clsMultiplicationOperator.RemoveParameterByName("x2")
+                clsMultiplicationOperator.AddParameter("x1", 1440, iPosition:=1)
                 clsDivisionOperator.AddParameter("z", clsROperatorParameter:=clsMultiplicationOperator, iPosition:=1)
                 clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
             Case "Seconds"
                 clsDivisionOperator.RemoveParameterByName("y")
-                clsMultiplicationOperator.AddParameter("x3", 60, iPosition:=2)
+                clsMultiplicationOperator.RemoveParameterByName("x1")
+                clsMultiplicationOperator.AddParameter("x2", 86400, iPosition:=1)
                 clsDivisionOperator.AddParameter("z", clsROperatorParameter:=clsMultiplicationOperator, iPosition:=1)
                 clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
         End Select
