@@ -133,7 +133,7 @@ Public Class dlgTransformClimatic
         'ucrInputPosition.SetLinkedDisplayControl(lblPosition)
         ucrInputPosition.bAllowNonConditionValues = True
 
-        ucrInputCircularPosition.SetParameter(New RParameter("type", 4))
+        ucrInputCircularPosition.SetParameter(New RParameter("type", 3))
         dctInputCircularPosition.Add("Right", Chr(39) & "to" & Chr(39))
         dctInputCircularPosition.Add("Centred", Chr(39) & "around" & Chr(39))
         dctInputCircularPosition.Add("Left", Chr(39) & "from" & Chr(39))
@@ -147,7 +147,7 @@ Public Class dlgTransformClimatic
         ucrNudSumOver.Increment = 1
         ucrNudSumOver.SetLinkedDisplayControl(lblSumRows)
 
-        ucrChkCircular.SetParameter(New RParameter("circular", 2))
+        ucrChkCircular.SetParameter(New RParameter("circular", 4))
         ucrChkCircular.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkCircular.SetText("Circular")
         ucrChkCircular.SetLinkedDisplayControl(lblPosition)
@@ -304,7 +304,7 @@ Public Class dlgTransformClimatic
         clsRasterFuction.bToScriptAsRString = True
         clsRasterFuction.SetPackageName("raster")
         clsRasterFuction.SetRCommand("movingFun")
-        clsRasterFuction.AddParameter("na.rm", "TRUE")
+        clsRasterFuction.AddParameter("na.rm", "TRUE", iPosition:=5)
 
         ' Water Balance
         clsRWaterBalanceFunction.bToScriptAsRString = True
@@ -372,8 +372,8 @@ Public Class dlgTransformClimatic
         ucrReceiverData.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=8)
         ucrInputSpellUpper.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
-        ucrNudSumOver.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("n", 0, False), iAdditionalPairNo:=1)
-        ucrInputSum.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("fun", 0), iAdditionalPairNo:=1)
+        ucrNudSumOver.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("n", 1, False), iAdditionalPairNo:=1)
+        ucrInputSum.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("fun", 2), iAdditionalPairNo:=1)
 
         ucrPnlTransform.SetRCode(clsTransformCheck, bReset)
         ucrChkGroupByYear.SetRCode(clsTransformManipulationsFunc, bReset)
