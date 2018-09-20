@@ -66,6 +66,7 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "function_exp", "rollapply")
         ucrPnlTransform.AddParameterPresentCondition(rdoCount, "sub_calculations", True)
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "function_exp", "rollapply")
+        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "function_exp", "raster")
         ucrPnlTransform.AddParameterPresentCondition(rdoMoving, "sub_calculations", False)
         ucrPnlTransform.AddParameterIsStringCondition(rdoSpell, "function_exp")
         ucrPnlTransform.AddFunctionNamesCondition(rdoMultSpells, "rollapply")
@@ -343,7 +344,7 @@ Public Class dlgTransformClimatic
         clsRTransform.SetRCommand("instat_calculation$new")
         clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1) ' changes depending on the rdo
-        clsRTransform.AddParameter("raster", clsRFunctionParameter:=clsRasterFuction, iPosition:=1)
+        clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRasterFuction, iPosition:=1)
         clsRTransform.AddParameter("result_name", Chr(34) & "moving_sum" & Chr(34), iPosition:=2)
         clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=5)
         clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
@@ -602,10 +603,8 @@ Public Class dlgTransformClimatic
     Private Sub RasterFunction()
         If Not ucrChkCircular.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
-            clsRTransform.RemoveParameterByName("raster")
         ElseIf ucrChkCircular.Checked Then
-            clsRTransform.AddParameter("raster", clsRFunctionParameter:=clsRasterFuction, iPosition:=1)
-            clsRTransform.RemoveParameterByName("function_exp")
+            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRasterFuction, iPosition:=1)
         End If
     End Sub
 
