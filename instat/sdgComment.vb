@@ -15,34 +15,19 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgClimaticMaps
-    Private bFirstLoad As Boolean = True
-    Private bReset As Boolean = True
 
-    Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
-            InitialiseDialog()
-            bFirstLoad = False
-        End If
+Public Class sdgComment
 
-        If bReset Then
-            SetDefaults()
-        End If
-        SetRCodeForControls(bReset)
-        bReset = False
+    Private Sub sdgComment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        TestOkEnabled()
     End Sub
-    Private Sub InitialiseDialog()
 
+    Public Sub setComment(strNewComment As String)
+        txtComment.Text = strNewComment
     End Sub
-    Private Sub SetDefaults()
 
-    End Sub
-    Private Sub SetRCodeForControls(bReset As Boolean)
+    Public Function getComment() As String
+        Return txtComment.Text
+    End Function
 
-    End Sub
-    Private Sub TestOkEnabled()
-
-    End Sub
 End Class

@@ -41,6 +41,8 @@ Public Class dlgImportShapeFiles
     End Sub
 
     Private Sub InitialiseDialog()
+        'TODO:Disabled temporarily
+        cmdLibrary.Enabled = False
 
         ucrInputFilePath.IsReadOnly = True
         ucrSaveDataframeName.SetSaveTypeAsDataFrame()
