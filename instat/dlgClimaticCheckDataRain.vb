@@ -131,9 +131,13 @@ Public Class dlgClimaticCheckDataRain
         ucrNudSkewnessWeight.Increment = 0.1
         ucrNudSkewnessWeight.SetRDefault("4")
 
-        ucrChkOmitZero.SetParameter(New RParameter("ignore_zero", 7))
+        ucrChkOmitZero.SetParameter(New RParameter("omit", 7))
         ucrChkOmitZero.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitZero.SetText("Omit Zero")
+
+        ucrInputThresholdValue.SetParameter(New RParameter("value", 8))
+        ucrInputThresholdValue.AddQuotesIfUnrecognised = False
+        ucrInputThresholdValue.SetValidationTypeAsNumeric()
 
         'Linking of controls
         ucrChkLarge.AddToLinkedControls(ucrNudLarge, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=200)
@@ -143,7 +147,9 @@ Public Class dlgClimaticCheckDataRain
         ucrChkOutlier.AddToLinkedControls(ucrChkOmitZero, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkOutlier.AddToLinkedControls(ucrNudCoeff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1.5)
         ucrChkOutlier.AddToLinkedControls(ucrNudSkewnessWeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=4)
+        ucrChkOmitZero.AddToLinkedControls(ucrInputThresholdValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
+        ucrInputThresholdValue.SetLinkedDisplayControl(lblThreshold)
         ucrNudLarge.SetLinkedDisplayControl(lblmm)
         ucrNudSame.SetLinkedDisplayControl(lblDays)
         ucrNudWetDays.SetLinkedDisplayControl(lblRainDays)
@@ -342,7 +348,7 @@ Public Class dlgClimaticCheckDataRain
         clsUpperOutlierLimitFunc.SetRCommand("summary_outlier_limit")
         clsUpperOutlierLimitFunc.bToScriptAsRString = True
         clsUpperOutlierLimitFunc.AddParameter("bskewedcalc", "TRUE", iPosition:=4)
-        clsUpperOutlierLimitFunc.AddParameter("ignore_zero", "TRUE", iPosition:=7)
+        clsUpperOutlierLimitFunc.AddParameter("omit", "TRUE", iPosition:=7)
 
         'Outlier Operator 
         clsUpperOutlierOperator.SetOperation(">")
@@ -437,6 +443,7 @@ Public Class dlgClimaticCheckDataRain
         ucrChkSame.SetRCode(clsOrOperator, bReset)
         ucrChkWetDays.SetRCode(clsOrOperator, bReset)
         ucrChkOmitZero.SetRCode(clsUpperOutlierLimitFunc, bReset)
+        ucrInputThresholdValue.SetRCode(clsUpperOutlierLimitFunc, bReset)
         ucrNudCoeff.SetRCode(clsUpperOutlierLimitFunc, bReset)
 
         ucrChkOutlier.SetRCode(clsOrOperator, bReset)
@@ -450,6 +457,9 @@ Public Class dlgClimaticCheckDataRain
         If Not ucrReceiverElement.IsEmpty AndAlso ((ucrChkLarge.Checked AndAlso ucrNudLarge.GetText <> "") OrElse (ucrChkSame.Checked AndAlso ucrNudSame.GetText <> "") OrElse (ucrChkWetDays.Checked AndAlso ucrNudWetDays.GetText <> "") OrElse (ucrChkOutlier.Checked AndAlso ucrNudSkewnessWeight.GetText <> "" AndAlso ucrNudCoeff.GetText <> "")) Then
             ucrBase.OKEnabled(True)
         Else
+            ucrBase.OKEnabled(False)
+        End If
+        If ucrChkOutlier.Checked AndAlso ucrChkOmitZero.Checked AndAlso ucrInputThresholdValue.IsEmpty Then
             ucrBase.OKEnabled(False)
         End If
     End Sub
@@ -531,7 +541,7 @@ Public Class dlgClimaticCheckDataRain
         End If
     End Sub
 
-    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrChkLarge.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkWetDays.ControlContentsChanged, ucrNudLarge.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudWetDays.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged
+    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrChkLarge.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkWetDays.ControlContentsChanged, ucrNudLarge.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudWetDays.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged, ucrChkOmitZero.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
