@@ -33,21 +33,30 @@ Partial Class sdgPICSARainfallGraph
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.grpyAxisTitle = New System.Windows.Forms.GroupBox()
         Me.rdoAutoYAxis = New System.Windows.Forms.RadioButton()
-        Me.ucrInputYAxisTitle = New instat.ucrInputTextBox()
-        Me.UcrChkYAxisTitleSzie = New instat.ucrCheck()
         Me.rdoRemoveYAxisTitle = New System.Windows.Forms.RadioButton()
-        Me.UcrNudYAxisTitleSzie = New instat.ucrNud()
         Me.rdoChangeYAxisTitle = New System.Windows.Forms.RadioButton()
-        Me.UcrPnlYAxisTitle = New instat.UcrPanel()
         Me.grpAxes = New System.Windows.Forms.GroupBox()
         Me.rdoAutoXAxis = New System.Windows.Forms.RadioButton()
-        Me.ucrInputXAxisTitle = New instat.ucrInputTextBox()
         Me.rdoRemoveXAxisTitle = New System.Windows.Forms.RadioButton()
         Me.rdoChangeXAxisTitle = New System.Windows.Forms.RadioButton()
+        Me.grpGraphTitles = New System.Windows.Forms.GroupBox()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.grpXAxisLabels = New System.Windows.Forms.GroupBox()
+        Me.grpYAxisLabels = New System.Windows.Forms.GroupBox()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.grpMinorGridLine = New System.Windows.Forms.GroupBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.grpMajorGridLines = New System.Windows.Forms.GroupBox()
+        Me.grpPnlBackground = New System.Windows.Forms.GroupBox()
+        Me.ucrInputYAxisTitle = New instat.ucrInputTextBox()
+        Me.UcrChkYAxisTitleSzie = New instat.ucrCheck()
+        Me.UcrNudYAxisTitleSzie = New instat.ucrNud()
+        Me.UcrPnlYAxisTitle = New instat.UcrPanel()
+        Me.ucrInputXAxisTitle = New instat.ucrInputTextBox()
         Me.ucrPnlXAxisTitle = New instat.UcrPanel()
         Me.UcrNudXAxisTitleSzie = New instat.ucrNud()
         Me.UcrChkXAxisTitleSzie = New instat.ucrCheck()
-        Me.grpGraphTitles = New System.Windows.Forms.GroupBox()
         Me.UcrChkCaption = New instat.ucrCheck()
         Me.UcrChkSubTitle = New instat.ucrCheck()
         Me.UcrChkTitle = New instat.ucrCheck()
@@ -60,8 +69,6 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputGraphcCaption = New instat.ucrInputTextBox()
         Me.ucrInputGraphTitle = New instat.ucrInputTextBox()
         Me.ucrInputGraphSubTitle = New instat.ucrInputTextBox()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.grpXAxisLabels = New System.Windows.Forms.GroupBox()
         Me.ucrChkXAxisLabelSize = New instat.ucrCheck()
         Me.ucrChkXAxisAngle = New instat.ucrCheck()
         Me.ucrChkSpecifyXAxisTickMarks = New instat.ucrCheck()
@@ -70,7 +77,6 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrNudXaxisLabelSize = New instat.ucrNud()
         Me.ucrInputXTo = New instat.ucrInputTextBox()
         Me.ucrNudXAxisAngle = New instat.ucrNud()
-        Me.grpYAxisLabels = New System.Windows.Forms.GroupBox()
         Me.ucrInputLabelForDays = New instat.ucrInputComboBox()
         Me.ucrNudYAxisAngle = New instat.ucrNud()
         Me.ucrChkLabelForDays = New instat.ucrCheck()
@@ -81,33 +87,27 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrNudYAxisLabelSize = New instat.ucrNud()
         Me.ucrInputYTo = New instat.ucrInputTextBox()
         Me.ucrInputYInStepsOf = New instat.ucrInputTextBox()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.ucrChkAddMean = New instat.ucrCheck()
         Me.ucrChkAddMedian = New instat.ucrCheck()
         Me.ucrChkAddTerciles = New instat.ucrCheck()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.grpMinorGridLine = New System.Windows.Forms.GroupBox()
         Me.UcrNudMinorGridLineSize = New instat.ucrNud()
         Me.UcrChkMinorGridLineSize = New instat.ucrCheck()
         Me.UcrInputMinorGridLineTpe = New instat.ucrInputComboBox()
         Me.UcrInputMinorGridLineColour = New instat.ucrInputComboBox()
         Me.UcrChkMinorGridLineType = New instat.ucrCheck()
         Me.UcrChkMinorGridLineColour = New instat.ucrCheck()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.UcrNudBorderSize = New instat.ucrNud()
         Me.UcrChkBorderSize = New instat.ucrCheck()
         Me.UcrInputBorderLinetype = New instat.ucrInputComboBox()
         Me.UcrInputBorderColour = New instat.ucrInputComboBox()
         Me.ucrChkBorderLineType = New instat.ucrCheck()
         Me.ucrChkBorderColour = New instat.ucrCheck()
-        Me.grpMajorGridLines = New System.Windows.Forms.GroupBox()
         Me.UcrNudMajorGridLineSize = New instat.ucrNud()
         Me.UcrChkMajorGridLineSize = New instat.ucrCheck()
         Me.UcrInputMajorGridLineLinetype = New instat.ucrInputComboBox()
         Me.UcrInputMajorGridLineColour = New instat.ucrInputComboBox()
         Me.UcrChkMajorGridLinetype = New instat.ucrCheck()
         Me.UcrChkMajorGridLineColour = New instat.ucrCheck()
-        Me.grpPnlBackground = New System.Windows.Forms.GroupBox()
         Me.ucrNudPnlBackgroundSize = New instat.ucrNud()
         Me.UcrInputPnlBackgroundFill = New instat.ucrInputComboBox()
         Me.UcrInputPnlBackgroundLinetype = New instat.ucrInputComboBox()
@@ -117,6 +117,9 @@ Partial Class sdgPICSARainfallGraph
         Me.UcrChkPnlBackgroundFill = New instat.ucrCheck()
         Me.ucrChkPnlBackgroundColour = New instat.ucrCheck()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkAddMeanLabel = New instat.ucrCheck()
+        Me.ucrChkAddMedianLabel = New instat.ucrCheck()
+        Me.ucrAddTercilesLabel = New instat.ucrCheck()
         Me.tbPICSA.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.grpyAxisTitle.SuspendLayout()
@@ -202,20 +205,6 @@ Partial Class sdgPICSARainfallGraph
         Me.rdoAutoYAxis.TabStop = True
         Me.rdoAutoYAxis.UseVisualStyleBackColor = True
         '
-        'ucrInputYAxisTitle
-        '
-        Me.ucrInputYAxisTitle.AddQuotesIfUnrecognised = True
-        Me.ucrInputYAxisTitle.IsMultiline = False
-        Me.ucrInputYAxisTitle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYAxisTitle, "ucrInputYAxisTitle")
-        Me.ucrInputYAxisTitle.Name = "ucrInputYAxisTitle"
-        '
-        'UcrChkYAxisTitleSzie
-        '
-        Me.UcrChkYAxisTitleSzie.Checked = False
-        resources.ApplyResources(Me.UcrChkYAxisTitleSzie, "UcrChkYAxisTitleSzie")
-        Me.UcrChkYAxisTitleSzie.Name = "UcrChkYAxisTitleSzie"
-        '
         'rdoRemoveYAxisTitle
         '
         resources.ApplyResources(Me.rdoRemoveYAxisTitle, "rdoRemoveYAxisTitle")
@@ -223,27 +212,12 @@ Partial Class sdgPICSARainfallGraph
         Me.rdoRemoveYAxisTitle.TabStop = True
         Me.rdoRemoveYAxisTitle.UseVisualStyleBackColor = True
         '
-        'UcrNudYAxisTitleSzie
-        '
-        Me.UcrNudYAxisTitleSzie.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudYAxisTitleSzie.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.UcrNudYAxisTitleSzie, "UcrNudYAxisTitleSzie")
-        Me.UcrNudYAxisTitleSzie.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudYAxisTitleSzie.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudYAxisTitleSzie.Name = "UcrNudYAxisTitleSzie"
-        Me.UcrNudYAxisTitleSzie.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'rdoChangeYAxisTitle
         '
         resources.ApplyResources(Me.rdoChangeYAxisTitle, "rdoChangeYAxisTitle")
         Me.rdoChangeYAxisTitle.Name = "rdoChangeYAxisTitle"
         Me.rdoChangeYAxisTitle.TabStop = True
         Me.rdoChangeYAxisTitle.UseVisualStyleBackColor = True
-        '
-        'UcrPnlYAxisTitle
-        '
-        resources.ApplyResources(Me.UcrPnlYAxisTitle, "UcrPnlYAxisTitle")
-        Me.UcrPnlYAxisTitle.Name = "UcrPnlYAxisTitle"
         '
         'grpAxes
         '
@@ -265,14 +239,6 @@ Partial Class sdgPICSARainfallGraph
         Me.rdoAutoXAxis.TabStop = True
         Me.rdoAutoXAxis.UseVisualStyleBackColor = True
         '
-        'ucrInputXAxisTitle
-        '
-        Me.ucrInputXAxisTitle.AddQuotesIfUnrecognised = True
-        Me.ucrInputXAxisTitle.IsMultiline = False
-        Me.ucrInputXAxisTitle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputXAxisTitle, "ucrInputXAxisTitle")
-        Me.ucrInputXAxisTitle.Name = "ucrInputXAxisTitle"
-        '
         'rdoRemoveXAxisTitle
         '
         resources.ApplyResources(Me.rdoRemoveXAxisTitle, "rdoRemoveXAxisTitle")
@@ -286,6 +252,177 @@ Partial Class sdgPICSARainfallGraph
         Me.rdoChangeXAxisTitle.Name = "rdoChangeXAxisTitle"
         Me.rdoChangeXAxisTitle.TabStop = True
         Me.rdoChangeXAxisTitle.UseVisualStyleBackColor = True
+        '
+        'grpGraphTitles
+        '
+        Me.grpGraphTitles.Controls.Add(Me.UcrChkCaption)
+        Me.grpGraphTitles.Controls.Add(Me.UcrChkSubTitle)
+        Me.grpGraphTitles.Controls.Add(Me.UcrChkTitle)
+        Me.grpGraphTitles.Controls.Add(Me.UcrNudCaptionSize)
+        Me.grpGraphTitles.Controls.Add(Me.UcrNudSubTitleSize)
+        Me.grpGraphTitles.Controls.Add(Me.UcrNudTitleSize)
+        Me.grpGraphTitles.Controls.Add(Me.ucrChkCaptionSize)
+        Me.grpGraphTitles.Controls.Add(Me.UcrChkSubTitleSize)
+        Me.grpGraphTitles.Controls.Add(Me.UcrChkTitleSize)
+        Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphcCaption)
+        Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphTitle)
+        Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphSubTitle)
+        resources.ApplyResources(Me.grpGraphTitles, "grpGraphTitles")
+        Me.grpGraphTitles.Name = "grpGraphTitles"
+        Me.grpGraphTitles.TabStop = False
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.grpXAxisLabels)
+        Me.TabPage2.Controls.Add(Me.grpYAxisLabels)
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'grpXAxisLabels
+        '
+        Me.grpXAxisLabels.Controls.Add(Me.ucrChkXAxisLabelSize)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrChkXAxisAngle)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrChkSpecifyXAxisTickMarks)
+        Me.grpXAxisLabels.Controls.Add(Me.lblXFrom)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrInputXFrom)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrInputXInStepsOf)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrNudXaxisLabelSize)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrInputXTo)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrNudXAxisAngle)
+        Me.grpXAxisLabels.Controls.Add(Me.lblXInStepsOf)
+        Me.grpXAxisLabels.Controls.Add(Me.lblXTo)
+        resources.ApplyResources(Me.grpXAxisLabels, "grpXAxisLabels")
+        Me.grpXAxisLabels.Name = "grpXAxisLabels"
+        Me.grpXAxisLabels.TabStop = False
+        '
+        'grpYAxisLabels
+        '
+        Me.grpYAxisLabels.Controls.Add(Me.ucrInputLabelForDays)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrNudYAxisAngle)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrChkLabelForDays)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrChkYAxisAngle)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrChkYAxisLabelSize)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrChkSpecifyYAxisTickMarks)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrInputYFrom)
+        Me.grpYAxisLabels.Controls.Add(Me.lblYFrom)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrNudYAxisLabelSize)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrInputYTo)
+        Me.grpYAxisLabels.Controls.Add(Me.lblYTo)
+        Me.grpYAxisLabels.Controls.Add(Me.lblYInStepsOf)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrInputYInStepsOf)
+        resources.ApplyResources(Me.grpYAxisLabels, "grpYAxisLabels")
+        Me.grpYAxisLabels.Name = "grpYAxisLabels"
+        Me.grpYAxisLabels.TabStop = False
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.ucrAddTercilesLabel)
+        Me.TabPage3.Controls.Add(Me.ucrChkAddMedianLabel)
+        Me.TabPage3.Controls.Add(Me.ucrChkAddMeanLabel)
+        Me.TabPage3.Controls.Add(Me.ucrChkAddMean)
+        Me.TabPage3.Controls.Add(Me.ucrChkAddMedian)
+        Me.TabPage3.Controls.Add(Me.ucrChkAddTerciles)
+        resources.ApplyResources(Me.TabPage3, "TabPage3")
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.grpMinorGridLine)
+        Me.TabPage4.Controls.Add(Me.GroupBox1)
+        Me.TabPage4.Controls.Add(Me.grpMajorGridLines)
+        Me.TabPage4.Controls.Add(Me.grpPnlBackground)
+        resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'grpMinorGridLine
+        '
+        Me.grpMinorGridLine.Controls.Add(Me.UcrNudMinorGridLineSize)
+        Me.grpMinorGridLine.Controls.Add(Me.UcrChkMinorGridLineSize)
+        Me.grpMinorGridLine.Controls.Add(Me.UcrInputMinorGridLineTpe)
+        Me.grpMinorGridLine.Controls.Add(Me.UcrInputMinorGridLineColour)
+        Me.grpMinorGridLine.Controls.Add(Me.UcrChkMinorGridLineType)
+        Me.grpMinorGridLine.Controls.Add(Me.UcrChkMinorGridLineColour)
+        resources.ApplyResources(Me.grpMinorGridLine, "grpMinorGridLine")
+        Me.grpMinorGridLine.Name = "grpMinorGridLine"
+        Me.grpMinorGridLine.TabStop = False
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.UcrNudBorderSize)
+        Me.GroupBox1.Controls.Add(Me.UcrChkBorderSize)
+        Me.GroupBox1.Controls.Add(Me.UcrInputBorderLinetype)
+        Me.GroupBox1.Controls.Add(Me.UcrInputBorderColour)
+        Me.GroupBox1.Controls.Add(Me.ucrChkBorderLineType)
+        Me.GroupBox1.Controls.Add(Me.ucrChkBorderColour)
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.TabStop = False
+        '
+        'grpMajorGridLines
+        '
+        Me.grpMajorGridLines.Controls.Add(Me.UcrNudMajorGridLineSize)
+        Me.grpMajorGridLines.Controls.Add(Me.UcrChkMajorGridLineSize)
+        Me.grpMajorGridLines.Controls.Add(Me.UcrInputMajorGridLineLinetype)
+        Me.grpMajorGridLines.Controls.Add(Me.UcrInputMajorGridLineColour)
+        Me.grpMajorGridLines.Controls.Add(Me.UcrChkMajorGridLinetype)
+        Me.grpMajorGridLines.Controls.Add(Me.UcrChkMajorGridLineColour)
+        resources.ApplyResources(Me.grpMajorGridLines, "grpMajorGridLines")
+        Me.grpMajorGridLines.Name = "grpMajorGridLines"
+        Me.grpMajorGridLines.TabStop = False
+        '
+        'grpPnlBackground
+        '
+        Me.grpPnlBackground.Controls.Add(Me.ucrNudPnlBackgroundSize)
+        Me.grpPnlBackground.Controls.Add(Me.UcrInputPnlBackgroundFill)
+        Me.grpPnlBackground.Controls.Add(Me.UcrInputPnlBackgroundLinetype)
+        Me.grpPnlBackground.Controls.Add(Me.UcrInputPnlBackgroundColour)
+        Me.grpPnlBackground.Controls.Add(Me.UcrChkPnlBackgroundSize)
+        Me.grpPnlBackground.Controls.Add(Me.UcrChkPnlBackgroundLineType)
+        Me.grpPnlBackground.Controls.Add(Me.UcrChkPnlBackgroundFill)
+        Me.grpPnlBackground.Controls.Add(Me.ucrChkPnlBackgroundColour)
+        resources.ApplyResources(Me.grpPnlBackground, "grpPnlBackground")
+        Me.grpPnlBackground.Name = "grpPnlBackground"
+        Me.grpPnlBackground.TabStop = False
+        '
+        'ucrInputYAxisTitle
+        '
+        Me.ucrInputYAxisTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputYAxisTitle.IsMultiline = False
+        Me.ucrInputYAxisTitle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYAxisTitle, "ucrInputYAxisTitle")
+        Me.ucrInputYAxisTitle.Name = "ucrInputYAxisTitle"
+        '
+        'UcrChkYAxisTitleSzie
+        '
+        Me.UcrChkYAxisTitleSzie.Checked = False
+        resources.ApplyResources(Me.UcrChkYAxisTitleSzie, "UcrChkYAxisTitleSzie")
+        Me.UcrChkYAxisTitleSzie.Name = "UcrChkYAxisTitleSzie"
+        '
+        'UcrNudYAxisTitleSzie
+        '
+        Me.UcrNudYAxisTitleSzie.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UcrNudYAxisTitleSzie.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.UcrNudYAxisTitleSzie, "UcrNudYAxisTitleSzie")
+        Me.UcrNudYAxisTitleSzie.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.UcrNudYAxisTitleSzie.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UcrNudYAxisTitleSzie.Name = "UcrNudYAxisTitleSzie"
+        Me.UcrNudYAxisTitleSzie.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'UcrPnlYAxisTitle
+        '
+        resources.ApplyResources(Me.UcrPnlYAxisTitle, "UcrPnlYAxisTitle")
+        Me.UcrPnlYAxisTitle.Name = "UcrPnlYAxisTitle"
+        '
+        'ucrInputXAxisTitle
+        '
+        Me.ucrInputXAxisTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputXAxisTitle.IsMultiline = False
+        Me.ucrInputXAxisTitle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXAxisTitle, "ucrInputXAxisTitle")
+        Me.ucrInputXAxisTitle.Name = "ucrInputXAxisTitle"
         '
         'ucrPnlXAxisTitle
         '
@@ -307,24 +444,6 @@ Partial Class sdgPICSARainfallGraph
         Me.UcrChkXAxisTitleSzie.Checked = False
         resources.ApplyResources(Me.UcrChkXAxisTitleSzie, "UcrChkXAxisTitleSzie")
         Me.UcrChkXAxisTitleSzie.Name = "UcrChkXAxisTitleSzie"
-        '
-        'grpGraphTitles
-        '
-        Me.grpGraphTitles.Controls.Add(Me.UcrChkCaption)
-        Me.grpGraphTitles.Controls.Add(Me.UcrChkSubTitle)
-        Me.grpGraphTitles.Controls.Add(Me.UcrChkTitle)
-        Me.grpGraphTitles.Controls.Add(Me.UcrNudCaptionSize)
-        Me.grpGraphTitles.Controls.Add(Me.UcrNudSubTitleSize)
-        Me.grpGraphTitles.Controls.Add(Me.UcrNudTitleSize)
-        Me.grpGraphTitles.Controls.Add(Me.ucrChkCaptionSize)
-        Me.grpGraphTitles.Controls.Add(Me.UcrChkSubTitleSize)
-        Me.grpGraphTitles.Controls.Add(Me.UcrChkTitleSize)
-        Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphcCaption)
-        Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphTitle)
-        Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphSubTitle)
-        resources.ApplyResources(Me.grpGraphTitles, "grpGraphTitles")
-        Me.grpGraphTitles.Name = "grpGraphTitles"
-        Me.grpGraphTitles.TabStop = False
         '
         'UcrChkCaption
         '
@@ -416,31 +535,6 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrInputGraphSubTitle, "ucrInputGraphSubTitle")
         Me.ucrInputGraphSubTitle.Name = "ucrInputGraphSubTitle"
         '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.grpXAxisLabels)
-        Me.TabPage2.Controls.Add(Me.grpYAxisLabels)
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'grpXAxisLabels
-        '
-        Me.grpXAxisLabels.Controls.Add(Me.ucrChkXAxisLabelSize)
-        Me.grpXAxisLabels.Controls.Add(Me.ucrChkXAxisAngle)
-        Me.grpXAxisLabels.Controls.Add(Me.ucrChkSpecifyXAxisTickMarks)
-        Me.grpXAxisLabels.Controls.Add(Me.lblXFrom)
-        Me.grpXAxisLabels.Controls.Add(Me.ucrInputXFrom)
-        Me.grpXAxisLabels.Controls.Add(Me.ucrInputXInStepsOf)
-        Me.grpXAxisLabels.Controls.Add(Me.ucrNudXaxisLabelSize)
-        Me.grpXAxisLabels.Controls.Add(Me.ucrInputXTo)
-        Me.grpXAxisLabels.Controls.Add(Me.ucrNudXAxisAngle)
-        Me.grpXAxisLabels.Controls.Add(Me.lblXInStepsOf)
-        Me.grpXAxisLabels.Controls.Add(Me.lblXTo)
-        resources.ApplyResources(Me.grpXAxisLabels, "grpXAxisLabels")
-        Me.grpXAxisLabels.Name = "grpXAxisLabels"
-        Me.grpXAxisLabels.TabStop = False
-        '
         'ucrChkXAxisLabelSize
         '
         Me.ucrChkXAxisLabelSize.Checked = False
@@ -502,25 +596,6 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrNudXAxisAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudXAxisAngle.Name = "ucrNudXAxisAngle"
         Me.ucrNudXAxisAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'grpYAxisLabels
-        '
-        Me.grpYAxisLabels.Controls.Add(Me.ucrInputLabelForDays)
-        Me.grpYAxisLabels.Controls.Add(Me.ucrNudYAxisAngle)
-        Me.grpYAxisLabels.Controls.Add(Me.ucrChkLabelForDays)
-        Me.grpYAxisLabels.Controls.Add(Me.ucrChkYAxisAngle)
-        Me.grpYAxisLabels.Controls.Add(Me.ucrChkYAxisLabelSize)
-        Me.grpYAxisLabels.Controls.Add(Me.ucrChkSpecifyYAxisTickMarks)
-        Me.grpYAxisLabels.Controls.Add(Me.ucrInputYFrom)
-        Me.grpYAxisLabels.Controls.Add(Me.lblYFrom)
-        Me.grpYAxisLabels.Controls.Add(Me.ucrNudYAxisLabelSize)
-        Me.grpYAxisLabels.Controls.Add(Me.ucrInputYTo)
-        Me.grpYAxisLabels.Controls.Add(Me.lblYTo)
-        Me.grpYAxisLabels.Controls.Add(Me.lblYInStepsOf)
-        Me.grpYAxisLabels.Controls.Add(Me.ucrInputYInStepsOf)
-        resources.ApplyResources(Me.grpYAxisLabels, "grpYAxisLabels")
-        Me.grpYAxisLabels.Name = "grpYAxisLabels"
-        Me.grpYAxisLabels.TabStop = False
         '
         'ucrInputLabelForDays
         '
@@ -597,15 +672,6 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrInputYInStepsOf, "ucrInputYInStepsOf")
         Me.ucrInputYInStepsOf.Name = "ucrInputYInStepsOf"
         '
-        'TabPage3
-        '
-        Me.TabPage3.Controls.Add(Me.ucrChkAddMean)
-        Me.TabPage3.Controls.Add(Me.ucrChkAddMedian)
-        Me.TabPage3.Controls.Add(Me.ucrChkAddTerciles)
-        resources.ApplyResources(Me.TabPage3, "TabPage3")
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.UseVisualStyleBackColor = True
-        '
         'ucrChkAddMean
         '
         Me.ucrChkAddMean.Checked = False
@@ -623,28 +689,6 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrChkAddTerciles.Checked = False
         resources.ApplyResources(Me.ucrChkAddTerciles, "ucrChkAddTerciles")
         Me.ucrChkAddTerciles.Name = "ucrChkAddTerciles"
-        '
-        'TabPage4
-        '
-        Me.TabPage4.Controls.Add(Me.grpMinorGridLine)
-        Me.TabPage4.Controls.Add(Me.GroupBox1)
-        Me.TabPage4.Controls.Add(Me.grpMajorGridLines)
-        Me.TabPage4.Controls.Add(Me.grpPnlBackground)
-        resources.ApplyResources(Me.TabPage4, "TabPage4")
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.UseVisualStyleBackColor = True
-        '
-        'grpMinorGridLine
-        '
-        Me.grpMinorGridLine.Controls.Add(Me.UcrNudMinorGridLineSize)
-        Me.grpMinorGridLine.Controls.Add(Me.UcrChkMinorGridLineSize)
-        Me.grpMinorGridLine.Controls.Add(Me.UcrInputMinorGridLineTpe)
-        Me.grpMinorGridLine.Controls.Add(Me.UcrInputMinorGridLineColour)
-        Me.grpMinorGridLine.Controls.Add(Me.UcrChkMinorGridLineType)
-        Me.grpMinorGridLine.Controls.Add(Me.UcrChkMinorGridLineColour)
-        resources.ApplyResources(Me.grpMinorGridLine, "grpMinorGridLine")
-        Me.grpMinorGridLine.Name = "grpMinorGridLine"
-        Me.grpMinorGridLine.TabStop = False
         '
         'UcrNudMinorGridLineSize
         '
@@ -688,18 +732,6 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.UcrChkMinorGridLineColour, "UcrChkMinorGridLineColour")
         Me.UcrChkMinorGridLineColour.Name = "UcrChkMinorGridLineColour"
         '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.UcrNudBorderSize)
-        Me.GroupBox1.Controls.Add(Me.UcrChkBorderSize)
-        Me.GroupBox1.Controls.Add(Me.UcrInputBorderLinetype)
-        Me.GroupBox1.Controls.Add(Me.UcrInputBorderColour)
-        Me.GroupBox1.Controls.Add(Me.ucrChkBorderLineType)
-        Me.GroupBox1.Controls.Add(Me.ucrChkBorderColour)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        '
         'UcrNudBorderSize
         '
         Me.UcrNudBorderSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -742,18 +774,6 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrChkBorderColour, "ucrChkBorderColour")
         Me.ucrChkBorderColour.Name = "ucrChkBorderColour"
         '
-        'grpMajorGridLines
-        '
-        Me.grpMajorGridLines.Controls.Add(Me.UcrNudMajorGridLineSize)
-        Me.grpMajorGridLines.Controls.Add(Me.UcrChkMajorGridLineSize)
-        Me.grpMajorGridLines.Controls.Add(Me.UcrInputMajorGridLineLinetype)
-        Me.grpMajorGridLines.Controls.Add(Me.UcrInputMajorGridLineColour)
-        Me.grpMajorGridLines.Controls.Add(Me.UcrChkMajorGridLinetype)
-        Me.grpMajorGridLines.Controls.Add(Me.UcrChkMajorGridLineColour)
-        resources.ApplyResources(Me.grpMajorGridLines, "grpMajorGridLines")
-        Me.grpMajorGridLines.Name = "grpMajorGridLines"
-        Me.grpMajorGridLines.TabStop = False
-        '
         'UcrNudMajorGridLineSize
         '
         Me.UcrNudMajorGridLineSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -795,20 +815,6 @@ Partial Class sdgPICSARainfallGraph
         Me.UcrChkMajorGridLineColour.Checked = False
         resources.ApplyResources(Me.UcrChkMajorGridLineColour, "UcrChkMajorGridLineColour")
         Me.UcrChkMajorGridLineColour.Name = "UcrChkMajorGridLineColour"
-        '
-        'grpPnlBackground
-        '
-        Me.grpPnlBackground.Controls.Add(Me.ucrNudPnlBackgroundSize)
-        Me.grpPnlBackground.Controls.Add(Me.UcrInputPnlBackgroundFill)
-        Me.grpPnlBackground.Controls.Add(Me.UcrInputPnlBackgroundLinetype)
-        Me.grpPnlBackground.Controls.Add(Me.UcrInputPnlBackgroundColour)
-        Me.grpPnlBackground.Controls.Add(Me.UcrChkPnlBackgroundSize)
-        Me.grpPnlBackground.Controls.Add(Me.UcrChkPnlBackgroundLineType)
-        Me.grpPnlBackground.Controls.Add(Me.UcrChkPnlBackgroundFill)
-        Me.grpPnlBackground.Controls.Add(Me.ucrChkPnlBackgroundColour)
-        resources.ApplyResources(Me.grpPnlBackground, "grpPnlBackground")
-        Me.grpPnlBackground.Name = "grpPnlBackground"
-        Me.grpPnlBackground.TabStop = False
         '
         'ucrNudPnlBackgroundSize
         '
@@ -869,6 +875,24 @@ Partial Class sdgPICSARainfallGraph
         '
         resources.ApplyResources(Me.ucrSdgPICSARainfalbuttons, "ucrSdgPICSARainfalbuttons")
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
+        '
+        'ucrChkAddMeanLabel
+        '
+        Me.ucrChkAddMeanLabel.Checked = False
+        resources.ApplyResources(Me.ucrChkAddMeanLabel, "ucrChkAddMeanLabel")
+        Me.ucrChkAddMeanLabel.Name = "ucrChkAddMeanLabel"
+        '
+        'ucrChkAddMedianLabel
+        '
+        Me.ucrChkAddMedianLabel.Checked = False
+        resources.ApplyResources(Me.ucrChkAddMedianLabel, "ucrChkAddMedianLabel")
+        Me.ucrChkAddMedianLabel.Name = "ucrChkAddMedianLabel"
+        '
+        'ucrAddTercilesLabel
+        '
+        Me.ucrAddTercilesLabel.Checked = False
+        resources.ApplyResources(Me.ucrAddTercilesLabel, "ucrAddTercilesLabel")
+        Me.ucrAddTercilesLabel.Name = "ucrAddTercilesLabel"
         '
         'sdgPICSARainfallGraph
         '
@@ -996,4 +1020,7 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents UcrChkXAxisTitleSzie As ucrCheck
     Friend WithEvents rdoAutoYAxis As RadioButton
     Friend WithEvents rdoAutoXAxis As RadioButton
+    Friend WithEvents ucrAddTercilesLabel As ucrCheck
+    Friend WithEvents ucrChkAddMedianLabel As ucrCheck
+    Friend WithEvents ucrChkAddMeanLabel As ucrCheck
 End Class
