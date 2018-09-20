@@ -332,6 +332,9 @@ Public Class sdgPICSARainfallGraph
         ucrChkAddMedian.SetParameter(clsMeanpParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkAddTerciles.SetText("Add Terciles")
+        ucrChkAddMeanLabel.SetText("Add Mean Label")
+        ucrChkAddMedianLabel.SetText("Add Median Label")
+        ucrAddTercilesLabel.SetText("Add Terciles Label")
 
         bControlsInitialised = True
     End Sub
