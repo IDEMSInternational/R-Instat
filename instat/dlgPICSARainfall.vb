@@ -45,8 +45,15 @@ Public Class dlgPICSARainfall
     Private clsMeanFunction As New RFunction
     Private clsMedianFunction As New RFunction
     Private clsTercilesFunction As New RFunction
-    Private clsGeomHline As New RFunction
-    Private clsGeomHlineAes As New RFunction
+
+    Private clsGeomHlineMean As New RFunction
+    Private clsGeomHlineMedian As New RFunction
+    Private clsGeomHlineTerciles As New RFunction
+
+    Private clsGeomHlineAesMean As New RFunction
+    Private clsGeomHlineAesMedian As New RFunction
+    Private clsGeomHlineAesTerciles As New RFunction
+
     Private strCalcColumn As String
 
     Private Sub dlgPCSARainfall_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -152,13 +159,35 @@ Public Class dlgPICSARainfall
         clsMeanFunction = New RFunction
         clsMeanFunction.SetRCommand("mean")
 
+        clsMedianFunction = New RFunction
+        clsMedianFunction.SetRCommand("median")
 
-        clsGeomHline = New RFunction
-        clsGeomHlineAes = New RFunction
-        clsGeomHline.SetPackageName("ggplot2")
-        clsGeomHline.SetRCommand("geom_hline")
-        clsGeomHlineAes.SetPackageName("ggplot2")
-        clsGeomHlineAes.SetRCommand("aes")
+        clsTercilesFunction = New RFunction
+        clsTercilesFunction.SetRCommand("")
+
+        clsGeomHlineMean = New RFunction
+        clsGeomHlineMean.SetPackageName("ggplot2")
+        clsGeomHlineMean.SetRCommand("geom_hline")
+
+        clsGeomHlineAesMean = New RFunction
+        clsGeomHlineAesMean.SetPackageName("ggplot2")
+        clsGeomHlineAesMean.SetRCommand("aes")
+
+        clsGeomHlineMedian = New RFunction
+        clsGeomHlineMedian.SetPackageName("ggplot2")
+        clsGeomHlineMedian.SetRCommand("geom_hline")
+
+        clsGeomHlineAesMedian = New RFunction
+        clsGeomHlineAesMedian.SetPackageName("ggplot2")
+        clsGeomHlineAesMedian.SetRCommand("aes")
+
+        clsGeomHlineTerciles = New RFunction
+        clsGeomHlineTerciles.SetPackageName("ggplot2")
+        clsGeomHlineTerciles.SetRCommand("geom_hline")
+
+        clsGeomHlineAesTerciles = New RFunction
+        clsGeomHlineAesTerciles.SetPackageName("ggplot2")
+        clsGeomHlineAesTerciles.SetRCommand("aes")
 
         clsXLabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYLabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -250,7 +279,7 @@ Public Class dlgPICSARainfall
 
     'add more functions 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
-        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsnewGeomhline:=clsGeomHline, clsNewGeomHlineAes:=clsGeomHlineAes, clsNewMeanFunc:=clsMeanFunction, bReset:=bResetSubdialog)
+        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsnewGeomhlineMean:=clsGeomHlineMean, clsnewGeomhlineMedian:=clsGeomHlineMedian, clsnewGeomhlineTerciles:=clsGeomHlineTerciles, clsNewGeomHlineAesMean:=clsGeomHlineAesMean, clsNewGeomHlineAesMedian:=clsGeomHlineAesMedian, clsNewGeomHlineAesTerciles:=clsGeomHlineAesTerciles, clsNewMeanFunc:=clsMeanFunction, clsNewMedianFunc:=clsMedianFunction, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.ShowDialog()
         bResetSubdialog = False
     End Sub

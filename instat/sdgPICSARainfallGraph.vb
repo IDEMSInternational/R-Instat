@@ -45,8 +45,13 @@ Public Class sdgPICSARainfallGraph
     Private clsMeanFunction As New RFunction
     Private clsMedianFunction As New RFunction
     Private clsTercilesFunction As New RFunction
-    Private clsGeomHline As New RFunction
-    Private clsGeomHlineAes As New RFunction
+    Private clsGeomHlineMean As New RFunction
+    Private clsGeomHlineMedian As New RFunction
+    Private clsGeomHlineTerciles As New RFunction
+
+    Private clsGeomHlineAesMean As New RFunction
+    Private clsGeomHlineAesMedian As New RFunction
+    Private clsGeomHlineAesTerciles As New RFunction
     Private strColumn As String
 
     'geom_hline(mean(rain)
@@ -331,7 +336,7 @@ Public Class sdgPICSARainfallGraph
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsnewGeomhline As RFunction = Nothing, Optional clsNewGeomHlineAes As RFunction = Nothing, Optional clsNewMeanFunc As RFunction = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsnewGeomhlineMean As RFunction = Nothing, Optional clsnewGeomhlineMedian As RFunction = Nothing, Optional clsnewGeomhlineTerciles As RFunction = Nothing, Optional clsNewGeomHlineAesMean As RFunction = Nothing, Optional clsNewGeomHlineAesMedian As RFunction = Nothing, Optional clsNewGeomHlineAesTerciles As RFunction = Nothing, Optional clsNewMeanFunc As RFunction = Nothing, Optional clsNewMedianFunc As RFunction = Nothing, Optional clsNewTercilesFunc As RFunction = Nothing, Optional bReset As Boolean = False)
         clsBaseOperator = clsNewOperator
 
         If Not bControlsInitialised Then
@@ -340,9 +345,19 @@ Public Class sdgPICSARainfallGraph
 
         'themes function
         clsThemeFunction = clsNewThemeFunction
-        clsGeomHline = clsnewGeomhline
+
+        clsGeomHlineMean = clsnewGeomhlineMean
+        clsGeomHlineMedian = clsnewGeomhlineMedian
+        clsGeomHlineTerciles = clsGeomHlineTerciles
+
         clsMeanFunction = clsNewMeanFunc
-        clsGeomHlineAes = clsNewGeomHlineAes
+        clsMedianFunction = clsNewMedianFunc
+        clsTercilesFunction = clsNewTercilesFunc
+
+        clsGeomHlineAesMean = clsNewGeomHlineAesMean
+        clsGeomHlineAesMedian = clsNewGeomHlineAesMedian
+        clsGeomHlineAesTerciles = clsNewGeomHlineAesTerciles
+
         ' The position MUST be larger than the position of the theme_* argument
         ' Otherwise the choice of theme will overwrite the options selected here.
         ' Currently set to large value as no reason this cannot be at the end currently
@@ -529,7 +544,7 @@ Public Class sdgPICSARainfallGraph
         ucrChkLabelForDays.SetRCode(clsYScaleDateFunction, bCloneIfNeeded:=True)
         ucrInputLabelForDays.SetRCode(clsYScaleDateFunction, bCloneIfNeeded:=True)
 
-        ucrChkAddMedian.SetRCode(clsGeomHline, bReset, bCloneIfNeeded:=True)
+        ucrChkAddMedian.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
 
         bRCodeSet = True
         AddRemoveTheme()
@@ -544,12 +559,31 @@ Public Class sdgPICSARainfallGraph
 
     Private Sub AddRemoveHline()
         If ucrChkAddMean.Checked Then
-            clsBaseOperator.AddParameter("hline", clsRFunctionParameter:=clsGeomHline)
-            clsGeomHline.AddParameter("aes", clsRFunctionParameter:=clsGeomHlineAes, bIncludeArgumentName:=False)
-            clsGeomHlineAes.AddParameter("yintercept", clsRFunctionParameter:=clsMeanFunction)
+            clsBaseOperator.AddParameter("hlinemean", clsRFunctionParameter:=clsGeomHlineMean, iPosition:=20)
+            clsGeomHlineMean.AddParameter("aes", clsRFunctionParameter:=clsGeomHlineAesMean, bIncludeArgumentName:=False)
+            clsGeomHlineAesMean.AddParameter("yintercept", clsRFunctionParameter:=clsMeanFunction)
+            clsGeomHlineAesMean.AddParameter("size", "1.5")
             clsMeanFunction.AddParameter("column", strColumn, bIncludeArgumentName:=False)
         Else
-            clsBaseOperator.RemoveParameterByName("hline")
+            clsBaseOperator.RemoveParameterByName("hlinemean")
+        End If
+
+        If ucrChkAddMedian.Checked Then
+            clsBaseOperator.AddParameter("hlinemedian", clsRFunctionParameter:=clsGeomHlineMedian, iPosition:=21)
+            clsGeomHlineMedian.AddParameter("aes", clsRFunctionParameter:=clsGeomHlineAesMedian, bIncludeArgumentName:=False)
+            clsGeomHlineAesMedian.AddParameter("yintercept", clsRFunctionParameter:=clsMedianFunction)
+            clsMedianFunction.AddParameter("column", strColumn, bIncludeArgumentName:=False)
+        Else
+            clsBaseOperator.RemoveParameterByName("hlinemedian")
+        End If
+
+        If ucrChkAddTerciles.Checked Then
+            clsBaseOperator.AddParameter("hlineterciles", clsRFunctionParameter:=clsGeomHlineTerciles, iPosition:=22)
+            clsGeomHlineTerciles.AddParameter("aes", clsRFunctionParameter:=clsGeomHlineAesTerciles, bIncludeArgumentName:=False)
+            clsGeomHlineAesTerciles.AddParameter("yintercept", clsRFunctionParameter:=clsTercilesFunction)
+            clsTercilesFunction.AddParameter("column", strColumn, bIncludeArgumentName:=False)
+        Else
+            clsBaseOperator.RemoveParameterByName("hlineterciles")
         End If
     End Sub
 
@@ -557,7 +591,7 @@ Public Class sdgPICSARainfallGraph
         strColumn = strNewColumn
     End Sub
 
-    Private Sub ucrChkAddMean_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddMean.ControlValueChanged
+    Private Sub ucrChkAddMean_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddMean.ControlValueChanged, ucrChkAddTerciles.ControlValueChanged, ucrChkAddMedian.ControlValueChanged
         AddRemoveHline()
     End Sub
 
