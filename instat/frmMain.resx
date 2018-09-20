@@ -1178,11 +1178,11 @@
   <data name="mnuClimaticDefineClimaticData.Text" xml:space="preserve">
     <value>Define Climatic Data...</value>
   </data>
-  <data name="mnuClimaticCheckDataMaps.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuClimaticCheckDataStationMaps.Size" type="System.Drawing.Size, System.Drawing">
     <value>244, 30</value>
   </data>
-  <data name="mnuClimaticCheckDataMaps.Text" xml:space="preserve">
-    <value>Maps...</value>
+  <data name="mnuClimaticCheckDataStationMaps.Text" xml:space="preserve">
+    <value>Station Maps...</value>
   </data>
   <data name="ToolStripSeparator51.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 6</value>
@@ -6726,10 +6726,10 @@
   <data name="&gt;&gt;mnuClimaticCheckData.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticCheckDataMaps.Name" xml:space="preserve">
-    <value>mnuClimaticCheckDataMaps</value>
+  <data name="&gt;&gt;mnuClimaticCheckDataStationMaps.Name" xml:space="preserve">
+    <value>mnuClimaticCheckDataStationMaps</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticCheckDataMaps.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimaticCheckDataStationMaps.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator51.Name" xml:space="preserve">

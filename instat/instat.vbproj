@@ -233,10 +233,10 @@
     <Compile Include="dlgClimaticLengthOfSeason.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgClimaticMaps.Designer.vb">
-      <DependentUpon>dlgClimaticMaps.vb</DependentUpon>
+    <Compile Include="dlgClimaticStationMaps.Designer.vb">
+      <DependentUpon>dlgClimaticStationMaps.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgClimaticMaps.vb">
+    <Compile Include="dlgClimaticStationMaps.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgClimaticSummary.Designer.vb">
@@ -976,6 +976,12 @@
       <DependentUpon>sdgSaveColumnPosition.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgSaveColumnPosition.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgSelectMonth.Designer.vb">
+      <DependentUpon>sdgSelectMonth.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSelectMonth.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgThemes.Designer.vb">
@@ -2464,8 +2470,8 @@
     <EmbeddedResource Include="dlgClimaticLengthOfSeason.resx">
       <DependentUpon>dlgClimaticLengthOfSeason.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgClimaticMaps.resx">
-      <DependentUpon>dlgClimaticMaps.vb</DependentUpon>
+    <EmbeddedResource Include="dlgClimaticStationMaps.resx">
+      <DependentUpon>dlgClimaticStationMaps.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticSummary.resx">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
@@ -3497,6 +3503,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSaveColumnPosition.resx">
       <DependentUpon>sdgSaveColumnPosition.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSelectMonth.resx">
+      <DependentUpon>sdgSelectMonth.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>
