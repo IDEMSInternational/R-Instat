@@ -230,6 +230,18 @@ Public Class dlgMakeDate
         ucrPnlDate.AddToLinkedControls(ucrInputComboBoxMonthTwo, {rdoTwoColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="366")
 
         ucrInputUnits.SetItems({"Days", "Hours", "Minutes", "Seconds"})
+        ucrInputUnits.AddParameterPresentCondition("Days", "hours", bNewIsPositive:=False)
+        ucrInputUnits.AddParameterPresentCondition("Days", "minutes", bNewIsPositive:=False)
+        ucrInputUnits.AddParameterPresentCondition("Days", "seconds", bNewIsPositive:=False)
+        ucrInputUnits.AddParameterPresentCondition("Hours", "hours")
+        ucrInputUnits.AddParameterPresentCondition("Hours", "minutes", bNewIsPositive:=False)
+        ucrInputUnits.AddParameterPresentCondition("Hours", "seconds", bNewIsPositive:=False)
+        ucrInputUnits.AddParameterPresentCondition("Minutes", "hours")
+        ucrInputUnits.AddParameterPresentCondition("Minutes", "minutes")
+        ucrInputUnits.AddParameterPresentCondition("Minutes", "seconds", bNewIsPositive:=False)
+        ucrInputUnits.AddParameterPresentCondition("Seconds", "hours")
+        ucrInputUnits.AddParameterPresentCondition("Seconds", "minutes")
+        ucrInputUnits.AddParameterPresentCondition("Seconds", "seconds")
         ucrInputUnits.SetDropDownStyleAsNonEditable()
 
         'when rdoThreeColumn is checked
@@ -279,10 +291,11 @@ Public Class dlgMakeDate
         clsMakeYearMonthDay.AddParameter("month_format", Chr(34) & "%m" & Chr(34))
 
         clsDateFunction.SetRCommand("as.Date")
-        clsDateFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
-        clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate)
+        clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
+        clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate, iPosition:=1)
 
         clsDivisionOperator.SetOperation("/")
+        clsDivisionOperator.bAllBrackets = True
 
         clsMultiplicationOperator.SetOperation("*")
 
@@ -303,6 +316,7 @@ Public Class dlgMakeDate
 
         ucrSaveDate.SetRCode(clsDateFunction, bReset)
 
+        ucrInputUnits.SetRCode(clsMultiplicationOperator, bReset)
         ucrReceiverForDate.SetRCode(clsDivisionOperator, bReset)
         ucrInputFormat.SetRCode(clsDateFunction, bReset)
         ucrInputOrigin.SetRCode(clsDateFunction, bReset)
@@ -511,30 +525,25 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub ucrInputUnits_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputUnits.ControlValueChanged
-        Select Case ucrInputUnits.GetText()
-
-            Case "Days"
-                clsDivisionOperator.RemoveParameterByName("y")
-                clsDivisionOperator.RemoveParameterByName("z")
-                clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
-            Case "Hours"
-                clsDivisionOperator.RemoveParameterByName("z")
-                clsDivisionOperator.AddParameter("y", 24, iPosition:=1)
-                clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
-            Case "Minutes"
-                clsDivisionOperator.RemoveParameterByName("y")
-                clsMultiplicationOperator.RemoveParameterByName("x2")
-                clsMultiplicationOperator.AddParameter("x1", 1440, iPosition:=1)
-                clsDivisionOperator.AddParameter("z", clsROperatorParameter:=clsMultiplicationOperator, iPosition:=1)
-                clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
-            Case "Seconds"
-                clsDivisionOperator.RemoveParameterByName("y")
-                clsMultiplicationOperator.RemoveParameterByName("x1")
-                clsMultiplicationOperator.AddParameter("x2", 86400, iPosition:=1)
-                clsDivisionOperator.AddParameter("z", clsROperatorParameter:=clsMultiplicationOperator, iPosition:=1)
-                clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
-        End Select
-
+        If ucrInputUnits.GetText() = "Days" Then
+            clsDivisionOperator.RemoveParameterByName("division")
+        Else
+            clsDivisionOperator.AddParameter("division", clsROperatorParameter:=clsMultiplicationOperator, iPosition:=1)
+            clsMultiplicationOperator.RemoveParameterByName("hours")
+            clsMultiplicationOperator.RemoveParameterByName("minutes")
+            clsMultiplicationOperator.RemoveParameterByName("seconds")
+            Select Case ucrInputUnits.GetText()
+                Case "Hours"
+                    clsMultiplicationOperator.AddParameter("hours", 24, iPosition:=0)
+                Case "Minutes"
+                    clsMultiplicationOperator.AddParameter("hours", 24, iPosition:=0)
+                    clsMultiplicationOperator.AddParameter("minutes", 60, iPosition:=1)
+                Case "Seconds"
+                    clsMultiplicationOperator.AddParameter("hours", 24, iPosition:=0)
+                    clsMultiplicationOperator.AddParameter("minutes", 60, iPosition:=1)
+                    clsMultiplicationOperator.AddParameter("seconds", 60, iPosition:=2)
+            End Select
+        End If
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged, ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged, ucrReceiverYearThree.ControlContentsChanged, ucrReceiverMonthThree.ControlContentsChanged, ucrReceiverDayThree.ControlContentsChanged, ucrInputDayThree.ControlContentsChanged, ucrInputMonthThree.ControlContentsChanged, ucrInputYearThree.ControlContentsChanged, ucrPnlYearType.ControlContentsChanged, ucrPnlMonthType.ControlContentsChanged, ucrPnlDayType.ControlContentsChanged
