@@ -58,12 +58,12 @@ Partial Class dlgNewDataFrame
         Me.mnuItemUndo = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblCommand = New System.Windows.Forms.Label()
+        Me.btnExample = New System.Windows.Forms.Button()
         Me.ucrPnlDataFrame = New instat.UcrPanel()
         Me.ucrNewDFName = New instat.ucrSave()
         Me.ucrNudCols = New instat.ucrNud()
         Me.ucrNudRows = New instat.ucrNud()
         Me.ucrBase = New instat.ucrButtons()
-        Me.btnExample = New System.Windows.Forms.Button()
         CType(Me.dataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuStripCommand.SuspendLayout()
         Me.SuspendLayout()
@@ -120,6 +120,7 @@ Partial Class dlgNewDataFrame
         '
         'dataGridView
         '
+        Me.dataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colRowNum, Me.colName, Me.colExpression})
         resources.ApplyResources(Me.dataGridView, "dataGridView")
@@ -186,6 +187,12 @@ Partial Class dlgNewDataFrame
         resources.ApplyResources(Me.lblCommand, "lblCommand")
         Me.lblCommand.Name = "lblCommand"
         '
+        'btnExample
+        '
+        resources.ApplyResources(Me.btnExample, "btnExample")
+        Me.btnExample.Name = "btnExample"
+        Me.btnExample.UseVisualStyleBackColor = True
+        '
         'ucrPnlDataFrame
         '
         resources.ApplyResources(Me.ucrPnlDataFrame, "ucrPnlDataFrame")
@@ -221,12 +228,6 @@ Partial Class dlgNewDataFrame
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'btnExample
-        '
-        resources.ApplyResources(Me.btnExample, "btnExample")
-        Me.btnExample.Name = "btnExample"
-        Me.btnExample.UseVisualStyleBackColor = True
-        '
         'dlgNewDataFrame
         '
         resources.ApplyResources(Me, "$this")
@@ -246,7 +247,7 @@ Partial Class dlgNewDataFrame
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.lblRows)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgNewDataFrame"
@@ -277,8 +278,8 @@ Partial Class dlgNewDataFrame
     Friend WithEvents mnuItemPaste As ToolStripMenuItem
     Friend WithEvents mnuItemUndo As ToolStripMenuItem
     Friend WithEvents SelectAllToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents btnExample As Button
     Friend WithEvents colRowNum As DataGridViewTextBoxColumn
     Friend WithEvents colName As DataGridViewTextBoxColumn
     Friend WithEvents colExpression As DataGridViewTextBoxColumn
-    Friend WithEvents btnExample As Button
 End Class
