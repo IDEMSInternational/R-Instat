@@ -20,6 +20,10 @@ Public Class dlgTransformClimatic
     Private bReset As Boolean = True
     Private clsRTransform, clsOverallTransformFunction, clsTransformManipulationsFunc, clsGroupByYear, clsGroupByStation, clsReplaceNAasElement, clsRTransformCountSpellSub As New RFunction
     Private clsTransformCheck As New RFunction
+
+    'Conversion
+    Private clsPrecipitationFunction, clsTemperatureFunction, clsWindSpeedFunction As New RFunction
+
     'Moving
     Private clsRMovingFunction As New RFunction
     Private clsRasterFuction As New RFunction
@@ -36,8 +40,13 @@ Public Class dlgTransformClimatic
     Private strCurrDataName As String = ""
     Private strRainDay As String = "rain_day"
 
+    Private iReceiverMaxY As Integer
+    Private iReceiverLabelMaxY As Integer
+
     Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
+            iReceiverMaxY = ucrReceiverData.Location.Y
+            iReceiverLabelMaxY = lblData.Location.Y
             InitialiseDialog()
             bFirstload = False
         End If
@@ -54,15 +63,29 @@ Public Class dlgTransformClimatic
         Dim dctInputSumPairs As New Dictionary(Of String, String)
         Dim dctInputPosition As New Dictionary(Of String, String)
         Dim dctInputCircularPosition As New Dictionary(Of String, String)
+
+        Dim dctPrecipitationUnits As New Dictionary(Of String, String)
+        Dim dctTemperatureUnits As New Dictionary(Of String, String)
+        Dim dctWindSpeedUnits As New Dictionary(Of String, String)
+
+        Dim lstLabels As New List(Of Control)
+        lstLabels.AddRange({lblFrom, lblTo, lblDecimal})
+
         ucrBase.iHelpTopicID = 358
 
         'Overall Panel
+        ucrPnlTransform.AddRadioButton(rdoConversion)
         ucrPnlTransform.AddRadioButton(rdoCount)
         ucrPnlTransform.AddRadioButton(rdoMoving)
         ucrPnlTransform.AddRadioButton(rdoSpell)
         ucrPnlTransform.AddRadioButton(rdoMultSpells)
         ucrPnlTransform.AddRadioButton(rdoWaterBalance)
 
+        ucrPnlElements.AddRadioButton(rdoRain)
+        ucrPnlElements.AddRadioButton(rdoTemperature)
+        ucrPnlElements.AddRadioButton(rdoWindSpeed)
+
+        ucrPnlTransform.AddFunctionNamesCondition(rdoConversion, {"convert_precip", "convert_temperature", "convert_wind_speed"})
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "function_exp", "rollapply")
         ucrPnlTransform.AddParameterPresentCondition(rdoCount, "sub_calculations", True)
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "function_exp", "rollapply")
@@ -71,6 +94,10 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddParameterIsStringCondition(rdoSpell, "function_exp")
         ucrPnlTransform.AddFunctionNamesCondition(rdoMultSpells, "rollapply")
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoWaterBalance, "function_exp", "Reduce")
+
+        ucrPnlElements.AddFunctionNamesCondition(rdoRain, "convert_precip")
+        ucrPnlElements.AddFunctionNamesCondition(rdoTemperature, "convert_temperature")
+        ucrPnlElements.AddFunctionNamesCondition(rdoWindSpeed, "convert_wind_speed")
 
         'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "sub1", "instat_calculation$new", False) ' clsRRainday
         'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "sub1", "instat_calculation$new")
@@ -131,7 +158,6 @@ Public Class dlgTransformClimatic
         dctInputPosition.Add("Left", Chr(39) & "left" & Chr(39))
         ucrInputPosition.SetItems(dctInputPosition)
         ucrInputPosition.SetDropDownStyleAsNonEditable()
-        'ucrInputPosition.SetLinkedDisplayControl(lblPosition)
         ucrInputPosition.bAllowNonConditionValues = True
 
         ucrInputCircularPosition.SetParameter(New RParameter("type", 3))
@@ -140,8 +166,49 @@ Public Class dlgTransformClimatic
         dctInputCircularPosition.Add("Left", Chr(39) & "from" & Chr(39))
         ucrInputCircularPosition.SetItems(dctInputCircularPosition)
         ucrInputCircularPosition.SetDropDownStyleAsNonEditable()
-        'ucrInputCircularPosition.SetLinkedDisplayControl(lblPosition)
         ucrInputCircularPosition.bAllowNonConditionValues = True
+
+        ucrInputFromPrecipitation.SetParameter(New RParameter("old_metric", 1))
+        dctPrecipitationUnits.Add("inches", Chr(34) & "inches" & Chr(34))
+        dctPrecipitationUnits.Add("mm", Chr(34) & "mm" & Chr(34))
+        dctPrecipitationUnits.Add("cm", Chr(34) & "cm" & Chr(34))
+        ucrInputFromPrecipitation.SetItems(dctPrecipitationUnits)
+        ucrInputFromPrecipitation.SetName("inches")
+        ucrInputFromPrecipitation.SetDropDownStyleAsNonEditable()
+        ucrInputFromPrecipitation.bAllowNonConditionValues = True
+
+        ucrInputToPrecipitation.SetParameter(New RParameter("new_metric", 2))
+        ucrInputToPrecipitation.SetItems(dctPrecipitationUnits)
+        ucrInputToPrecipitation.SetName("mm")
+        ucrInputToPrecipitation.SetDropDownStyleAsNonEditable()
+        ucrInputToPrecipitation.bAllowNonConditionValues = True
+
+        ucrInputFromTemperature.SetParameter(New RParameter("old_metric", 1))
+        dctTemperatureUnits.Add("celsius", Chr(34) & "celsius" & Chr(34))
+        dctTemperatureUnits.Add("fahrenheit", Chr(34) & "fahrenheit" & Chr(34))
+        dctTemperatureUnits.Add("kelvin", Chr(34) & "kelvin" & Chr(34))
+        ucrInputFromTemperature.SetItems(dctTemperatureUnits)
+        ucrInputFromTemperature.SetDropDownStyleAsNonEditable()
+
+        ucrInputToTemperature.SetParameter(New RParameter("new_metric", 2))
+        ucrInputToTemperature.SetItems(dctTemperatureUnits)
+        ucrInputToTemperature.SetDropDownStyleAsNonEditable()
+
+        ucrInputFromWindSpeed.SetParameter(New RParameter("old_metric", 1))
+        dctWindSpeedUnits.Add("knots: Knots", Chr(34) & "knots" & Chr(34))
+        dctWindSpeedUnits.Add("mph: Miles per hour", Chr(34) & "mph" & Chr(34))
+        dctWindSpeedUnits.Add("mps: Meters per second", Chr(34) & "mps" & Chr(34))
+        dctWindSpeedUnits.Add("ftps: Feet per second", Chr(34) & "ftps" & Chr(34))
+        dctWindSpeedUnits.Add("kmph: Kilometers per hour", Chr(34) & "kmph" & Chr(34))
+        ucrInputFromWindSpeed.SetItems(dctWindSpeedUnits)
+        ucrInputFromWindSpeed.SetDropDownStyleAsNonEditable()
+
+        ucrInputToWindSpeed.SetParameter(New RParameter("new_metric", 2))
+        ucrInputToWindSpeed.SetItems(dctWindSpeedUnits)
+        ucrInputToWindSpeed.SetDropDownStyleAsNonEditable()
+
+        ucrNudDecimal.SetParameter(New RParameter("round", 3))
+        ucrNudDecimal.SetMinMax(0, 3)
 
         ucrNudSumOver.SetParameter(New RParameter("width", 1))
         ucrNudSumOver.SetMinMax(1, 366)
@@ -201,6 +268,15 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls(ucrInputCircularPosition, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Right")
         ucrPnlTransform.AddToLinkedControls(ucrChkCircular, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrPnlTransform.AddToLinkedControls(ucrPnlElements, {rdoConversion}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoRain)
+
+        ucrPnlElements.AddToLinkedControls(ucrInputFromPrecipitation, {rdoRain}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlElements.AddToLinkedControls(ucrInputToPrecipitation, {rdoRain}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlElements.AddToLinkedControls(ucrInputFromTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="celsius")
+        ucrPnlElements.AddToLinkedControls(ucrInputToTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="celsius")
+        ucrPnlElements.AddToLinkedControls(ucrInputFromWindSpeed, {rdoWindSpeed}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="knots: Knots")
+        ucrPnlElements.AddToLinkedControls(ucrInputToWindSpeed, {rdoWindSpeed}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="knots: Knots")
+
         ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"<=", "Between", ">=", "Outer"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
         ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between", "Outer"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
@@ -214,6 +290,10 @@ Public Class dlgTransformClimatic
         ucrPnlEvap.AddToLinkedControls(ucrInputEvaporation, {rdoEvapValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
         ucrPnlEvap.AddToLinkedControls(ucrReceiverEvap, {rdoEvapVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
         ucrPnlEvap.SetLinkedDisplayControl(lblWBEvaporation)
+        ucrPnlElements.SetLinkedDisplayControl(grpElements)
+        ucrNudDecimal.SetLinkedDisplayControl(lstLabels)
+        ucrReceiverYear.SetLinkedDisplayControl(grpTransform)
+
 
     End Sub
 
@@ -222,6 +302,10 @@ Public Class dlgTransformClimatic
         clsOverallTransformFunction = New RFunction
         clsTransformManipulationsFunc = New RFunction
         clsRTransformCountSpellSub = New RFunction
+
+        clsPrecipitationFunction = New RFunction
+        clsTemperatureFunction = New RFunction
+        clsWindSpeedFunction = New RFunction
 
         clsRMovingFunction = New RFunction
         clsRasterFuction = New RFunction
@@ -246,6 +330,19 @@ Public Class dlgTransformClimatic
 
         ucrSelectorTransform.Reset()
         ucrReceiverData.SetMeAsReceiver()
+
+        'Conversion
+        clsPrecipitationFunction.SetPackageName("weathermetrics")
+        clsPrecipitationFunction.SetRCommand("convert_precip")
+        clsPrecipitationFunction.AddParameter("round", 1, iPosition:=3)
+        clsPrecipitationFunction.AddParameter("old_metric", Chr(34) & "inches" & Chr(34), iPosition:=1)
+        clsPrecipitationFunction.AddParameter("new_metric", Chr(34) & "inches" & Chr(34), iPosition:=1)
+
+        clsTemperatureFunction.SetPackageName("weathermetrics")
+        clsTemperatureFunction.SetRCommand("convert_temperature")
+
+        clsWindSpeedFunction.SetPackageName("weathermetrics")
+        clsWindSpeedFunction.SetRCommand("convert_wind_speed")
 
         ' Count and Spells: Rainday
         clsRRaindayMatch.bToScriptAsRString = True
@@ -343,8 +440,7 @@ Public Class dlgTransformClimatic
 
         clsRTransform.SetRCommand("instat_calculation$new")
         clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1) ' changes depending on the rdo
-        clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRasterFuction, iPosition:=1)
+        clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsPrecipitationFunction, iPosition:=1) ' changes depending on the rdo
         clsRTransform.AddParameter("result_name", Chr(34) & "moving_sum" & Chr(34), iPosition:=2)
         clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=5)
         clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
@@ -375,9 +471,20 @@ Public Class dlgTransformClimatic
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrNudSumOver.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("n", 1, False), iAdditionalPairNo:=1)
         ucrInputSum.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("fun", 2), iAdditionalPairNo:=1)
+        ucrNudDecimal.AddAdditionalCodeParameterPair(clsTemperatureFunction, (New RParameter("round", 3)), iAdditionalPairNo:=1)
+        ucrNudDecimal.AddAdditionalCodeParameterPair(clsWindSpeedFunction, (New RParameter("round", 3)), iAdditionalPairNo:=2)
 
         ucrPnlTransform.SetRCode(clsTransformCheck, bReset)
         ucrChkGroupByYear.SetRCode(clsTransformManipulationsFunc, bReset)
+
+        'Conversion
+        ucrInputFromPrecipitation.SetRCode(clsPrecipitationFunction, bReset)
+        ucrInputToPrecipitation.SetRCode(clsPrecipitationFunction, bReset)
+        ucrInputFromTemperature.SetRCode(clsTemperatureFunction, bReset)
+        ucrInputToTemperature.SetRCode(clsTemperatureFunction, bReset)
+        ucrInputFromWindSpeed.SetRCode(clsWindSpeedFunction, bReset)
+        ucrInputToWindSpeed.SetRCode(clsWindSpeedFunction, bReset)
+        ucrNudDecimal.SetRCode(clsPrecipitationFunction, bReset)
 
         ' Moving
         ucrNudSumOver.SetRCode(clsRMovingFunction, bReset)
@@ -446,19 +553,14 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub ucrPnlTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlValueChanged
-        If rdoCount.Checked Then
+        If rdoConversion.Checked Then
+            Conversion()
+        ElseIf rdoCount.Checked Then
             clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
             clsRTransform.RemoveParameterByName("calculated_from")
             clsTransformCheck = clsRTransform
         ElseIf rdoMoving.Checked Then
-            'If Not ucrChkCircular.Checked Then
-            '    clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
-            '    clsRTransform.RemoveParameterByName("raster")
-            'ElseIf ucrChkCircular.Checked Then
-            '    clsRTransform.AddParameter("raster", clsRFunctionParameter:=clsRasterFuction, iPosition:=1)
-            '    clsRTransform.RemoveParameterByName("function_exp")
-            'End If
             RasterFunction()
             clsRTransform.RemoveParameterByName("sub_calculations")
             clsTransformCheck = clsRTransform
@@ -478,6 +580,7 @@ Public Class dlgTransformClimatic
             clsTransformCheck = clsRTransform
         End If
         RasterPosition()
+        ReceiverLocation()
     End Sub
 
     Private Sub SetAssignName()
@@ -564,6 +667,7 @@ Public Class dlgTransformClimatic
         RainDays()
         Evaporation()
         TestOkEnabled()
+        ReceiverLocation()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
@@ -572,6 +676,7 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged
         GroupByYear()
+        ReceiverLocation()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverData.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged, ucrNudCountOver.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrInputColName.ControlContentsChanged, ucrNudWBCapacity.ControlContentsChanged
@@ -620,6 +725,18 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
+    Private Sub Conversion()
+        If rdoConversion.Checked Then
+            If rdoRain.Checked Then
+                clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsPrecipitationFunction, iPosition:=1)
+            ElseIf rdoTemperature.Checked Then
+                clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsTemperatureFunction, iPosition:=1)
+            ElseIf rdoWindSpeed.Checked Then
+                clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsWindSpeedFunction, iPosition:=1)
+            End If
+        End If
+    End Sub
+
     Private Sub ucrInputCircularPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCircularPosition.ControlValueChanged, ucrInputPosition.ControlValueChanged
         RasterPosition()
     End Sub
@@ -627,5 +744,23 @@ Public Class dlgTransformClimatic
     Private Sub ucrChkCircular_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCircular.ControlValueChanged
         RasterPosition()
         RasterFunction()
+    End Sub
+
+    Private Sub ucrPnlElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlElements.ControlValueChanged
+        Conversion()
+    End Sub
+
+    Private Sub ReceiverLocation()
+        If rdoConversion.Checked Then
+            lblData.Location = New Point(lblData.Location.X, iReceiverLabelMaxY / 1.3)
+            ucrReceiverData.Location = New Point(ucrReceiverData.Location.X, iReceiverMaxY / 1.27)
+            lblYear.Visible = False
+            ucrReceiverYear.Visible = False
+        Else
+            lblData.Location = New Point(lblData.Location.X, iReceiverLabelMaxY)
+            ucrReceiverData.Location = New Point(ucrReceiverData.Location.X, iReceiverMaxY)
+            lblYear.Visible = True
+            ucrReceiverYear.Visible = True
+        End If
     End Sub
 End Class
