@@ -70,7 +70,6 @@ Public Class dlgNewDataFrame
         'Empty option functions
         clsEmptyOverallFunction = New RFunction
         clsEmptyMatrixFunction = New RFunction
-
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
         clsEmptyOverallFunction.SetRCommand("data.frame")
         'matrix(data = NA,nrow = 10, ncol = 2)
@@ -84,25 +83,24 @@ Public Class dlgNewDataFrame
 
         'Construct option function
         clsConstructFunction = New RFunction
-
         clsConstructFunction.SetRCommand("data.frame")
 
+        'reset the controls
         ucrNewDFName.Reset()
         txtCommand.Text = "data.frame(data=matrix(data=NA, nrow=10, ncol=2))"
-        'empty and create 3 deafult rows
+        'empty and create 5 default rows
         dataGridView.Rows.Clear()
-        For i As Integer = 1 To 3
+        For i As Integer = 1 To 4
             dataGridView.Rows.Add()
-            'dataGridView.Rows.Item(i - 1).Cells(0).Value = i
         Next
 
         rdoCommand.Checked = True
         rdoRandom.Enabled = False 'TODO remove this later
-
     End Sub
 
     Private Sub TestOKEnabled()
         If rdoConstruct.Checked Then
+            'TODO validate the rows
             'if any of the datagrid rows has contents then enable ok
             ucrBase.OKEnabled(False)
             For Each row As DataGridViewRow In dataGridView.Rows
@@ -188,7 +186,7 @@ Public Class dlgNewDataFrame
 
     Private Sub dataGridView_Leave(sender As Object, e As EventArgs) Handles dataGridView.Leave
         Dim iPosition As Integer = 0
-        'clear the previous parameters which acted as the columns 
+        'clear the previous parameters which acted as the columns then add the new ones
         clsConstructFunction.ClearParameters()
         For Each row As DataGridViewRow In dataGridView.Rows
             If row.Cells("colName").Value <> "" AndAlso row.Cells("colExpression").Value <> "" Then
@@ -208,19 +206,10 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub dataGridView_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dataGridView.RowsAdded
-
-        Dim k0 = dataGridView.Rows.Item(dataGridView.Rows.Count - 1)
-        Dim k1 = dataGridView.Rows.Item(dataGridView.Rows.Count - 1).Cells(0)
-        'Dim p = dataGridView.Rows.Item(dataGridView.Rows.Count - 1).Cells("colName")
-
-        'Dim k2 = dataGridView.Rows.Item(dataGridView.Rows.Count - 1).Cells("colRowNum")
-        'Dim k3 = dataGridView.Rows.Item(dataGridView.Rows.Count - 1).Cells("colRowNum").Value
-
-        dataGridView.Rows.Item(dataGridView.Rows.Count - 1).Cells(0).Value = dataGridView.Rows.Count
-    End Sub
-
-    Private Sub dataGridView_UserAddedRow(sender As Object, e As DataGridViewRowEventArgs) Handles dataGridView.UserAddedRow
-        'TODO
+        'used column index instead of column name because of argument exception
+        For i As Integer = 0 To dataGridView.Rows.Count - 1
+            dataGridView.Rows.Item(i).Cells(0).Value = i + 1
+        Next
     End Sub
 
     Private Sub mnuItemCut_Click(sender As Object, e As EventArgs) Handles mnuItemCut.Click
@@ -249,5 +238,8 @@ Public Class dlgNewDataFrame
         txtCommand.SelectAll()
     End Sub
 
+    Private Sub btnExample_Click(sender As Object, e As EventArgs) Handles btnExample.Click
+
+    End Sub
 
 End Class

@@ -47,6 +47,9 @@ Partial Class dlgNewDataFrame
         Me.rdoEmpty = New System.Windows.Forms.RadioButton()
         Me.rdoConstruct = New System.Windows.Forms.RadioButton()
         Me.dataGridView = New System.Windows.Forms.DataGridView()
+        Me.colRowNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtCommand = New System.Windows.Forms.TextBox()
         Me.mnuStripCommand = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuItemCut = New System.Windows.Forms.ToolStripMenuItem()
@@ -60,9 +63,7 @@ Partial Class dlgNewDataFrame
         Me.ucrNudCols = New instat.ucrNud()
         Me.ucrNudRows = New instat.ucrNud()
         Me.ucrBase = New instat.ucrButtons()
-        Me.colRowNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnExample = New System.Windows.Forms.Button()
         CType(Me.dataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuStripCommand.SuspendLayout()
         Me.SuspendLayout()
@@ -125,6 +126,22 @@ Partial Class dlgNewDataFrame
         Me.dataGridView.Name = "dataGridView"
         Me.dataGridView.RowHeadersVisible = False
         Me.dataGridView.RowTemplate.Height = 28
+        '
+        'colRowNum
+        '
+        resources.ApplyResources(Me.colRowNum, "colRowNum")
+        Me.colRowNum.Name = "colRowNum"
+        '
+        'colName
+        '
+        resources.ApplyResources(Me.colName, "colName")
+        Me.colName.Name = "colName"
+        '
+        'colExpression
+        '
+        Me.colExpression.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        resources.ApplyResources(Me.colExpression, "colExpression")
+        Me.colExpression.Name = "colExpression"
         '
         'txtCommand
         '
@@ -204,26 +221,17 @@ Partial Class dlgNewDataFrame
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'colRowNum
+        'btnExample
         '
-        resources.ApplyResources(Me.colRowNum, "colRowNum")
-        Me.colRowNum.Name = "colRowNum"
-        '
-        'colName
-        '
-        resources.ApplyResources(Me.colName, "colName")
-        Me.colName.Name = "colName"
-        '
-        'colExpression
-        '
-        Me.colExpression.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        resources.ApplyResources(Me.colExpression, "colExpression")
-        Me.colExpression.Name = "colExpression"
+        resources.ApplyResources(Me.btnExample, "btnExample")
+        Me.btnExample.Name = "btnExample"
+        Me.btnExample.UseVisualStyleBackColor = True
         '
         'dlgNewDataFrame
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.btnExample)
         Me.Controls.Add(Me.lblCommand)
         Me.Controls.Add(Me.txtCommand)
         Me.Controls.Add(Me.dataGridView)
@@ -272,4 +280,5 @@ Partial Class dlgNewDataFrame
     Friend WithEvents colRowNum As DataGridViewTextBoxColumn
     Friend WithEvents colName As DataGridViewTextBoxColumn
     Friend WithEvents colExpression As DataGridViewTextBoxColumn
+    Friend WithEvents btnExample As Button
 End Class
