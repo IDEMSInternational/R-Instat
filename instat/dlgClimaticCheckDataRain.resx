@@ -400,7 +400,7 @@
     <value>96, 13</value>
   </data>
   <data name="lblSkewnessWeight.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+    <value>30</value>
   </data>
   <data name="lblSkewnessWeight.Text" xml:space="preserve">
     <value>Skewness Weight:</value>
@@ -424,7 +424,7 @@
     <value>185, 20</value>
   </data>
   <data name="ucrChkLogicalColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrChkLogicalColumns.Name" xml:space="preserve">
     <value>ucrChkLogicalColumns</value>
@@ -445,7 +445,7 @@
     <value>163, 20</value>
   </data>
   <data name="ucrChkCalculatedColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrChkCalculatedColumns.Name" xml:space="preserve">
     <value>ucrChkCalculatedColumns</value>
@@ -496,7 +496,7 @@
     <value>35, 13</value>
   </data>
   <data name="lblCoeff.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
+    <value>32</value>
   </data>
   <data name="lblCoeff.Text" xml:space="preserve">
     <value>Coeff:</value>
@@ -553,7 +553,7 @@
     <value>57, 13</value>
   </data>
   <data name="lblThreshold.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
+    <value>28</value>
   </data>
   <data name="lblThreshold.Text" xml:space="preserve">
     <value>Threshold:</value>
@@ -598,7 +598,7 @@
     <value>54, 21</value>
   </data>
   <data name="ucrInputThresholdValue.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
+    <value>29</value>
   </data>
   <data name="&gt;&gt;ucrInputThresholdValue.Name" xml:space="preserve">
     <value>ucrInputThresholdValue</value>
@@ -619,7 +619,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudCoeff.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
+    <value>33</value>
   </data>
   <data name="&gt;&gt;ucrNudCoeff.Name" xml:space="preserve">
     <value>ucrNudCoeff</value>
@@ -661,7 +661,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudSkewnessWeight.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
+    <value>31</value>
   </data>
   <data name="&gt;&gt;ucrNudSkewnessWeight.Name" xml:space="preserve">
     <value>ucrNudSkewnessWeight</value>
