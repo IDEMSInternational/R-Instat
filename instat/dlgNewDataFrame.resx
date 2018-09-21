@@ -151,7 +151,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblRows.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="lblColumns.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -184,7 +184,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblColumns.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="rdoCommand.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -223,7 +223,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoCommand.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="rdoRandom.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -262,7 +262,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoRandom.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="rdoEmpty.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -301,7 +301,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoEmpty.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="rdoConstruct.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -340,7 +340,37 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoConstruct.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
+  </data>
+  <metadata name="colRowNum.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="colName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="colExpression.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 190</value>
+  </data>
+  <data name="dataGridView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>598, 106</value>
+  </data>
+  <data name="dataGridView.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;dataGridView.Name" xml:space="preserve">
+    <value>dataGridView</value>
+  </data>
+  <data name="&gt;&gt;dataGridView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridView.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dataGridView.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <metadata name="colRowNum.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -366,30 +396,48 @@
   <data name="colExpression.HeaderText" xml:space="preserve">
     <value>Expression</value>
   </data>
-  <data name="dataGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 190</value>
-  </data>
-  <data name="dataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>598, 106</value>
-  </data>
-  <data name="dataGridView.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;dataGridView.Name" xml:space="preserve">
-    <value>dataGridView</value>
-  </data>
-  <data name="&gt;&gt;dataGridView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridView.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;dataGridView.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <metadata name="mnuStripCommand.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="mnuStripCommand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 154</value>
+  </data>
+  <data name="&gt;&gt;mnuStripCommand.Name" xml:space="preserve">
+    <value>mnuStripCommand</value>
+  </data>
+  <data name="&gt;&gt;mnuStripCommand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtCommand.Location" type="System.Drawing.Point, System.Drawing">
+    <value>22, 190</value>
+  </data>
+  <data name="txtCommand.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtCommand.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Both</value>
+  </data>
+  <data name="txtCommand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>591, 106</value>
+  </data>
+  <data name="txtCommand.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="txtCommand.WordWrap" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;txtCommand.Name" xml:space="preserve">
+    <value>txtCommand</value>
+  </data>
+  <data name="&gt;&gt;txtCommand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtCommand.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtCommand.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="mnuItemCut.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+X</value>
   </data>
@@ -435,45 +483,6 @@
   <data name="SelectAllToolStripMenuItem.Text" xml:space="preserve">
     <value>Select All</value>
   </data>
-  <data name="mnuStripCommand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 154</value>
-  </data>
-  <data name="&gt;&gt;mnuStripCommand.Name" xml:space="preserve">
-    <value>mnuStripCommand</value>
-  </data>
-  <data name="&gt;&gt;mnuStripCommand.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="txtCommand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 190</value>
-  </data>
-  <data name="txtCommand.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="txtCommand.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Both</value>
-  </data>
-  <data name="txtCommand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>591, 106</value>
-  </data>
-  <data name="txtCommand.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="txtCommand.WordWrap" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;txtCommand.Name" xml:space="preserve">
-    <value>txtCommand</value>
-  </data>
-  <data name="&gt;&gt;txtCommand.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtCommand.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;txtCommand.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="lblCommand.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -505,7 +514,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCommand.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrPnlDataFrame.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 10</value>
@@ -529,7 +538,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlDataFrame.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="ucrNewDFName.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 387</value>
@@ -553,7 +562,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNewDFName.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrNudCols.Location" type="System.Drawing.Point, System.Drawing">
     <value>335, 110</value>
@@ -577,7 +586,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudCols.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="ucrNudRows.Location" type="System.Drawing.Point, System.Drawing">
     <value>132, 109</value>
@@ -601,7 +610,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudRows.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 449</value>
@@ -625,7 +634,31 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="btnExample.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 161</value>
+  </data>
+  <data name="btnExample.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 25</value>
+  </data>
+  <data name="btnExample.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
+  </data>
+  <data name="btnExample.Text" xml:space="preserve">
+    <value>Examples</value>
+  </data>
+  <data name="&gt;&gt;btnExample.Name" xml:space="preserve">
+    <value>btnExample</value>
+  </data>
+  <data name="&gt;&gt;btnExample.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnExample.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnExample.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -644,6 +677,24 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>New Data Frame</value>
+  </data>
+  <data name="&gt;&gt;colRowNum.Name" xml:space="preserve">
+    <value>colRowNum</value>
+  </data>
+  <data name="&gt;&gt;colRowNum.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colName.Name" xml:space="preserve">
+    <value>colName</value>
+  </data>
+  <data name="&gt;&gt;colName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colExpression.Name" xml:space="preserve">
+    <value>colExpression</value>
+  </data>
+  <data name="&gt;&gt;colExpression.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuItemCut.Name" xml:space="preserve">
     <value>mnuItemCut</value>
@@ -674,24 +725,6 @@
   </data>
   <data name="&gt;&gt;SelectAllToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colRowNum.Name" xml:space="preserve">
-    <value>colRowNum</value>
-  </data>
-  <data name="&gt;&gt;colRowNum.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colName.Name" xml:space="preserve">
-    <value>colName</value>
-  </data>
-  <data name="&gt;&gt;colName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colExpression.Name" xml:space="preserve">
-    <value>colExpression</value>
-  </data>
-  <data name="&gt;&gt;colExpression.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgNewDataFrame</value>
