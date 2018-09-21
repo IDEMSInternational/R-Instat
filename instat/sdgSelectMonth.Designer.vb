@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgSelectMonth
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,23 +20,49 @@ Partial Class sdgSelectMonth
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrBaseSdg = New instat.ucrButtonsSubdialogue()
+        Me.ucrMonthAsFactor = New instat.ucrFactor()
+        Me.lblSelectMonth = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBaseSdg
         '
-        Me.ucrBaseSdg.Location = New System.Drawing.Point(49, 188)
+        Me.ucrBaseSdg.Location = New System.Drawing.Point(48, 274)
         Me.ucrBaseSdg.Name = "ucrBaseSdg"
         Me.ucrBaseSdg.Size = New System.Drawing.Size(142, 30)
         Me.ucrBaseSdg.TabIndex = 0
+        '
+        'ucrMonthAsFactor
+        '
+        Me.ucrMonthAsFactor.AutoSize = True
+        Me.ucrMonthAsFactor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrMonthAsFactor.clsReceiver = Nothing
+        Me.ucrMonthAsFactor.Location = New System.Drawing.Point(8, 30)
+        Me.ucrMonthAsFactor.Name = "ucrMonthAsFactor"
+        Me.ucrMonthAsFactor.shtCurrSheet = Nothing
+        Me.ucrMonthAsFactor.Size = New System.Drawing.Size(226, 233)
+        Me.ucrMonthAsFactor.TabIndex = 3
+        Me.ucrMonthAsFactor.ucrChkLevels = Nothing
+        '
+        'lblSelectMonth
+        '
+        Me.lblSelectMonth.AutoSize = True
+        Me.lblSelectMonth.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSelectMonth.Location = New System.Drawing.Point(11, 13)
+        Me.lblSelectMonth.Name = "lblSelectMonth"
+        Me.lblSelectMonth.Size = New System.Drawing.Size(85, 13)
+        Me.lblSelectMonth.TabIndex = 14
+        Me.lblSelectMonth.Text = "Month to Select:"
         '
         'sdgSelectMonth
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(241, 230)
+        Me.ClientSize = New System.Drawing.Size(241, 309)
+        Me.Controls.Add(Me.lblSelectMonth)
+        Me.Controls.Add(Me.ucrMonthAsFactor)
         Me.Controls.Add(Me.ucrBaseSdg)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -45,8 +71,11 @@ Partial Class sdgSelectMonth
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Select Month"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBaseSdg As ucrButtonsSubdialogue
+    Friend WithEvents ucrMonthAsFactor As ucrFactor
+    Friend WithEvents lblSelectMonth As Label
 End Class

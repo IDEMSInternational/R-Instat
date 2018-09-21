@@ -17,6 +17,18 @@
 Imports instat.Translations
 Public Class sdgSelectMonth
     Private Sub sdgSelectMonth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+        InitialiseControls()
+    End Sub
+
+    Private Sub InitialiseControls()
+        ucrMonthAsFactor.SetAsMultipleSelector()
+        ucrMonthAsFactor.SetReceiver(dlgClimaticCheckDataRain.ucrReceiverMonth)
+        ucrMonthAsFactor.SetIncludeLevels(False)
+        ucrMonthAsFactor.bIncludeNA = True
+    End Sub
+
+    Public Sub SetRCode()
 
     End Sub
 End Class
