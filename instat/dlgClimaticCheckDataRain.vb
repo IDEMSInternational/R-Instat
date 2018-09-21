@@ -40,6 +40,9 @@ Public Class dlgClimaticCheckDataRain
     Private clsCumulativeList As New RFunction
     Private strCumulativeCalc As String = "Wet_days"
     Private strCumulativeTestCalc As String = "wet_days"
+    'Dry Month
+    Private clsGroupByMonthYearFunction, clsDryMonthCalculationFunc, clsListCalcFunction, clsSumFuction As New RFunction
+
     'Combined Filters
     Private clsOrOperator As New ROperator
     Private clsListSubCalc As New RFunction
@@ -47,7 +50,6 @@ Public Class dlgClimaticCheckDataRain
     Private clsListForOutlierManipulations, clsRainyDaysFunc, clsUpperOutlierLimitFunc, clsUpperOutlierLimitValueCalcFunc, clsUpperOutlierlimitTestFunc, clsUpperListOutlier As New RFunction
     Private clsUpperOutlierOperator As New ROperator
     Private strUpperOutlierTest As String = "upper_outlier"
-
     Private clsLowerOutlierLimitValueCalcFunc, clsLowerOutlierlimitTestFunc, clsLowerListOutlier, clsLowerOutlierLimitFunc As New RFunction
     Private clsLowerOutlierOperator As New ROperator
     Private strLowerOutlierTest As String = "lower_outlier"
@@ -71,13 +73,6 @@ Public Class dlgClimaticCheckDataRain
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-
-        'temp disabled untill implemented
-        ucrChkDryMonth.SetText("Dry Month")
-        ucrChkDryMonth.Enabled = False
-
         ucrReceiverStation.Selector = ucrSelectorRain
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
@@ -323,6 +318,11 @@ Public Class dlgClimaticCheckDataRain
         clsGroupByMonth.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByMonth.SetAssignTo("grouping_month")
 
+        clsGroupByMonthYearFunction.SetRCommand("instat_calculation$new")
+        clsGroupByMonthYearFunction.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
+        clsGroupByMonthYearFunction.SetAssignTo("grouping_month_year")
+
+
         clsListForOutlierManipulations.SetRCommand("list")
         clsListForOutlierManipulations.AddParameter("sub1", clsRFunctionParameter:=clsGroupByMonth, bIncludeArgumentName:=False, iPosition:=0)
         'clsListForOutlierManipulations.AddParameter("sub2", clsRFunctionParameter:=clsRainyDaysFunc, bIncludeArgumentName:=False, iPosition:=1)
@@ -403,6 +403,19 @@ Public Class dlgClimaticCheckDataRain
         clsOrOperator.SetOperation("|")
         clsOrOperator.bBrackets = True
         clsOrOperator.bToScriptAsRString = True
+
+        'Dry Month Calculations
+        clsDryMonthCalculationFunc.SetRCommand("instat_calculation$new")
+        clsDryMonthCalculationFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsDryMonthCalculationFunc.AddParameter("function_exp", clsRFunctionParameter:=clsSumFuction, iPosition:=1)
+        clsDryMonthCalculationFunc.AddParameter("manipulations", clsRFunctionParameter:=clsListCalcFunction, iPosition:=3)
+        clsDryMonthCalculationFunc.AddParameter("result_name", Chr(34) & "dry_month_calc" & Chr(34), iPosition:=4)
+        clsDryMonthCalculationFunc.SetAssignTo("dry_month_calculation")
+
+        clsListCalcFunction.SetRCommand("list")
+        clsListCalcFunction.AddParameter("group", clsRFunctionParameter:=clsGroupByMonthYearFunction, bIncludeArgumentName:=False)
+
+        clsSumFuction.SetRCommand("sum")
 
         ' Run Calc funct
         clsRunCalcFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
@@ -492,10 +505,18 @@ Public Class dlgClimaticCheckDataRain
             clsUpperOutlierLimitValueCalcFunc.RemoveParameterByName("manipulations")
             clsLowerOutlierLimitValueCalcFunc.RemoveParameterByName("manipulations")
         End If
+        If Not ucrReceiverMonth.IsEmpty AndAlso ucrReceiverYear.IsEmpty Then
+            clsGroupByMonthYearFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverMonth.GetVariableNames & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")", iPosition:=1)
+        End If
+    End Sub
+
+    Private Sub cmdOmitMonths_Click(sender As Object, e As EventArgs) Handles cmdOmitMonths.Click
+        sdgSelectMonth.ShowDialog()
     End Sub
 
     Private Sub RainyDays()
         clsRainyDaysFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
+        clsDryMonthCalculationFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
     End Sub
 
     Private Sub OutlierLimitCalc()
