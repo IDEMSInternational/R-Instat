@@ -127,13 +127,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>37, 114</value>
-  </data>
-  <data name="lblRows.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>10, 61</value>
   </data>
   <data name="lblRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 20</value>
+    <value>37, 13</value>
   </data>
   <data name="lblRows.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -160,13 +157,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 114</value>
-  </data>
-  <data name="lblColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>110, 61</value>
   </data>
   <data name="lblColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 20</value>
+    <value>50, 13</value>
   </data>
   <data name="lblColumns.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -196,13 +190,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoCommand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 23</value>
-  </data>
-  <data name="rdoCommand.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>153, 15</value>
   </data>
   <data name="rdoCommand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 42</value>
+    <value>67, 27</value>
   </data>
   <data name="rdoCommand.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -235,13 +226,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoRandom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 23</value>
-  </data>
-  <data name="rdoRandom.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>218, 15</value>
   </data>
   <data name="rdoRandom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 42</value>
+    <value>67, 27</value>
   </data>
   <data name="rdoRandom.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -274,13 +262,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoEmpty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>393, 23</value>
-  </data>
-  <data name="rdoEmpty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>283, 15</value>
   </data>
   <data name="rdoEmpty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 42</value>
+    <value>67, 27</value>
   </data>
   <data name="rdoEmpty.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -313,13 +298,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoConstruct.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 23</value>
-  </data>
-  <data name="rdoConstruct.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>88, 15</value>
   </data>
   <data name="rdoConstruct.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 42</value>
+    <value>67, 27</value>
   </data>
   <data name="rdoConstruct.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -345,17 +327,35 @@
   <metadata name="colRowNum.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="colRowNum.HeaderText" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="colRowNum.Width" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
   <metadata name="colName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="colName.HeaderText" xml:space="preserve">
+    <value>Column Name</value>
+  </data>
+  <data name="colName.Width" type="System.Int32, mscorlib">
+    <value>130</value>
+  </data>
   <metadata name="colExpression.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="colExpression.HeaderText" xml:space="preserve">
+    <value>Expression</value>
+  </data>
   <data name="dataGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 190</value>
+    <value>10, 81</value>
+  </data>
+  <data name="dataGridView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="dataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>598, 106</value>
+    <value>417, 159</value>
   </data>
   <data name="dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -372,35 +372,56 @@
   <data name="&gt;&gt;dataGridView.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <metadata name="colRowNum.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colRowNum.HeaderText" xml:space="preserve">
-    <value>No.</value>
-  </data>
-  <data name="colRowNum.Width" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <metadata name="colName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colName.HeaderText" xml:space="preserve">
-    <value>Column Name</value>
-  </data>
-  <data name="colName.Width" type="System.Int32, mscorlib">
-    <value>200</value>
-  </data>
-  <metadata name="colExpression.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colExpression.HeaderText" xml:space="preserve">
-    <value>Expression</value>
-  </data>
   <metadata name="mnuStripCommand.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="mnuItemCut.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+X</value>
+  </data>
+  <data name="mnuItemCut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 22</value>
+  </data>
+  <data name="mnuItemCut.Text" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="mnuItemCopy.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+C</value>
+  </data>
+  <data name="mnuItemCopy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 22</value>
+  </data>
+  <data name="mnuItemCopy.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="mnuItemPaste.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+V</value>
+  </data>
+  <data name="mnuItemPaste.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 22</value>
+  </data>
+  <data name="mnuItemPaste.Text" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="mnuItemUndo.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+Z</value>
+  </data>
+  <data name="mnuItemUndo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 22</value>
+  </data>
+  <data name="mnuItemUndo.Text" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="SelectAllToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+A</value>
+  </data>
+  <data name="SelectAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 22</value>
+  </data>
+  <data name="SelectAllToolStripMenuItem.Text" xml:space="preserve">
+    <value>Select All</value>
+  </data>
   <data name="mnuStripCommand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 154</value>
+    <value>165, 114</value>
   </data>
   <data name="&gt;&gt;mnuStripCommand.Name" xml:space="preserve">
     <value>mnuStripCommand</value>
@@ -409,7 +430,10 @@
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="txtCommand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 190</value>
+    <value>10, 81</value>
+  </data>
+  <data name="txtCommand.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="txtCommand.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -418,7 +442,7 @@
     <value>Both</value>
   </data>
   <data name="txtCommand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>591, 106</value>
+    <value>417, 159</value>
   </data>
   <data name="txtCommand.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -438,51 +462,6 @@
   <data name="&gt;&gt;txtCommand.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="mnuItemCut.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+X</value>
-  </data>
-  <data name="mnuItemCut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 30</value>
-  </data>
-  <data name="mnuItemCut.Text" xml:space="preserve">
-    <value>Cut</value>
-  </data>
-  <data name="mnuItemCopy.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+C</value>
-  </data>
-  <data name="mnuItemCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 30</value>
-  </data>
-  <data name="mnuItemCopy.Text" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="mnuItemPaste.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+V</value>
-  </data>
-  <data name="mnuItemPaste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 30</value>
-  </data>
-  <data name="mnuItemPaste.Text" xml:space="preserve">
-    <value>Paste</value>
-  </data>
-  <data name="mnuItemUndo.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+Z</value>
-  </data>
-  <data name="mnuItemUndo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 30</value>
-  </data>
-  <data name="mnuItemUndo.Text" xml:space="preserve">
-    <value>Undo</value>
-  </data>
-  <data name="SelectAllToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+A</value>
-  </data>
-  <data name="SelectAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 30</value>
-  </data>
-  <data name="SelectAllToolStripMenuItem.Text" xml:space="preserve">
-    <value>Select All</value>
-  </data>
   <data name="lblCommand.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -490,13 +469,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblCommand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 167</value>
-  </data>
-  <data name="lblCommand.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>10, 61</value>
   </data>
   <data name="lblCommand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 20</value>
+    <value>57, 13</value>
   </data>
   <data name="lblCommand.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -516,131 +492,17 @@
   <data name="&gt;&gt;lblCommand.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="ucrPnlDataFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 10</value>
-  </data>
-  <data name="ucrPnlDataFrame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrPnlDataFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>608, 66</value>
-  </data>
-  <data name="ucrPnlDataFrame.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDataFrame.Name" xml:space="preserve">
-    <value>ucrPnlDataFrame</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDataFrame.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDataFrame.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDataFrame.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="ucrNewDFName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 387</value>
-  </data>
-  <data name="ucrNewDFName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="ucrNewDFName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 37</value>
-  </data>
-  <data name="ucrNewDFName.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrNewDFName.Name" xml:space="preserve">
-    <value>ucrNewDFName</value>
-  </data>
-  <data name="&gt;&gt;ucrNewDFName.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNewDFName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNewDFName.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="ucrNudCols.Location" type="System.Drawing.Point, System.Drawing">
-    <value>335, 110</value>
-  </data>
-  <data name="ucrNudCols.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="ucrNudCols.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 31</value>
-  </data>
-  <data name="ucrNudCols.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrNudCols.Name" xml:space="preserve">
-    <value>ucrNudCols</value>
-  </data>
-  <data name="&gt;&gt;ucrNudCols.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudCols.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudCols.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="ucrNudRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 109</value>
-  </data>
-  <data name="ucrNudRows.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="ucrNudRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 31</value>
-  </data>
-  <data name="ucrNudRows.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRows.Name" xml:space="preserve">
-    <value>ucrNudRows</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRows.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRows.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRows.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 449</value>
-  </data>
-  <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>598, 74</value>
-  </data>
-  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
-    <value>ucrBase</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
-    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="btnExample.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="btnExample.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 161</value>
+    <value>68, 57</value>
+  </data>
+  <data name="btnExample.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="btnExample.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 25</value>
+    <value>63, 22</value>
   </data>
   <data name="btnExample.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -658,19 +520,139 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnExample.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
+  </data>
+  <data name="ucrPnlDataFrame.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 6</value>
+  </data>
+  <data name="ucrPnlDataFrame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 8, 6, 8</value>
+  </data>
+  <data name="ucrPnlDataFrame.Size" type="System.Drawing.Size, System.Drawing">
+    <value>405, 43</value>
+  </data>
+  <data name="ucrPnlDataFrame.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDataFrame.Name" xml:space="preserve">
+    <value>ucrPnlDataFrame</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDataFrame.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDataFrame.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDataFrame.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ucrNewDFName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 255</value>
+  </data>
+  <data name="ucrNewDFName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrNewDFName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 24</value>
+  </data>
+  <data name="ucrNewDFName.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDFName.Name" xml:space="preserve">
+    <value>ucrNewDFName</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDFName.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDFName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNewDFName.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="ucrNudCols.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 58</value>
+  </data>
+  <data name="ucrNudCols.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrNudCols.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudCols.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrNudCols.Name" xml:space="preserve">
+    <value>ucrNudCols</value>
+  </data>
+  <data name="&gt;&gt;ucrNudCols.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudCols.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudCols.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="ucrNudRows.Location" type="System.Drawing.Point, System.Drawing">
+    <value>46, 58</value>
+  </data>
+  <data name="ucrNudRows.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrNudRows.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudRows.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrNudRows.Name" xml:space="preserve">
+    <value>ucrNudRows</value>
+  </data>
+  <data name="&gt;&gt;ucrNudRows.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudRows.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudRows.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 290</value>
+  </data>
+  <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>399, 48</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>15</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>9, 20</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>668, 532</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>439, 343</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
