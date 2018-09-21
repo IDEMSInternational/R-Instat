@@ -141,6 +141,7 @@ Public Class RCodeStructure
         End If
 
         If bToBeAssigned Then
+            'TODO. SPlit strTemp and get the last line then set assign
             strScript = strScript & strAssignTo & " <- " & strTemp & Environment.NewLine
             If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
