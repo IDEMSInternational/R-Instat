@@ -141,8 +141,8 @@ Public Class RCodeStructure
         End If
 
         If bToBeAssigned Then
-            'TODO. SPlit strTemp and get the last line then set assign
-            strScript = strScript & strAssignTo & " <- " & strTemp & Environment.NewLine
+            strScript = strScript & ConstructAssignTo(strAssignTo, strTemp) & Environment.NewLine
+            'strScript = strScript & strAssignTo & " <- " & strTemp & Environment.NewLine
             If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
                 clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
@@ -245,6 +245,26 @@ Public Class RCodeStructure
             Return strTemp
         End If
     End Function
+
+    'sets assign to , to the last line of strTemp
+    Private Function ConstructAssignTo(strAssignTo As String, strTemp As String) As String
+        'Split strTemp and get the last line then set assign to it then merge the wole string
+        Dim strReconstructed As String = ""
+        Dim strParts As String()
+        If Not String.IsNullOrEmpty(strTemp) Then
+            strParts = strTemp.Split(ControlChars.CrLf.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+            If strParts.Length > 1 Then
+                For i As Integer = 0 To strParts.Length - 2
+                    strReconstructed = strReconstructed & strParts(i) & Environment.NewLine
+                Next
+                strReconstructed = strReconstructed & strAssignTo & " <- " & strParts.Last
+            Else
+                strReconstructed = strAssignTo & " <- " & strTemp
+            End If
+        End If
+        Return strReconstructed
+    End Function
+
 
     Public Overridable Function GetParameter(strName As String) As RParameter
         Return New RParameter
