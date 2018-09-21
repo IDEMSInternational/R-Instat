@@ -978,6 +978,12 @@
     <Compile Include="sdgSaveColumnPosition.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgSelectMonth.Designer.vb">
+      <DependentUpon>sdgSelectMonth.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSelectMonth.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgThemes.Designer.vb">
       <DependentUpon>sdgThemes.vb</DependentUpon>
     </Compile>
@@ -3497,6 +3503,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSaveColumnPosition.resx">
       <DependentUpon>sdgSaveColumnPosition.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSelectMonth.resx">
+      <DependentUpon>sdgSelectMonth.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>

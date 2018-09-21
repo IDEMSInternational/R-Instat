@@ -48,4 +48,8 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTbShowWaitDialog As Boolean = True
     Public Shared ReadOnly DEFAULTiWaitTimeDelaySeconds As Integer = 2
     Public Shared ReadOnly DEFAULTiToolbarHeight As Integer = 30
+    Public Shared ReadOnly DEFAULTstrClimsoftDatabaseName As String = ""
+    Public Shared ReadOnly DEFAULTstrClimsoftHost As String = ""
+    Public Shared ReadOnly DEFAULTstrClimsoftPort As String = ""
+    Public Shared ReadOnly DEFAULTstrClimsoftUsername As String = ""
 End Class
