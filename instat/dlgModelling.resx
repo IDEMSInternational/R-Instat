@@ -151,7 +151,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTest.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="cmdspline.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -451,7 +451,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpStats.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>18</value>
   </data>
   <data name="cmdMultiply.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -802,7 +802,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpFirstCalc.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="cmdTry.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -832,7 +832,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdTry.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="cmdDisplayOptions.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -862,7 +862,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdDisplayOptions.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="cmdPredict.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -892,7 +892,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdPredict.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="cmdfevd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1096,7 +1096,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grplme4.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>2</value>
   </data>
   <data name="cmdloglm.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1276,7 +1276,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpMASS.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>0</value>
   </data>
   <data name="cmdHelp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1303,7 +1303,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdHelp.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblRpackage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1333,7 +1333,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblRpackage.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrChkIncludeArguments.Location" type="System.Drawing.Point, System.Drawing">
     <value>442, 13</value>
@@ -1354,7 +1354,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkIncludeArguments.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrReceiverMultiple.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1387,7 +1387,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveResult.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="ucrInputTryMessage.Location" type="System.Drawing.Point, System.Drawing">
     <value>88, 314</value>
@@ -1411,7 +1411,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputTryMessage.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrInputComboRPackage.Location" type="System.Drawing.Point, System.Drawing">
     <value>311, 39</value>
@@ -1432,7 +1432,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputComboRPackage.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="ucrReceiverForTestColumn.Location" type="System.Drawing.Point, System.Drawing">
     <value>41, 13</value>
@@ -1456,7 +1456,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverForTestColumn.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="ucrSelectorModelling.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 66</value>
@@ -1480,7 +1480,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorModelling.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 371</value>
@@ -1501,7 +1501,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -1537,6 +1537,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverMultiple.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
 </root>
