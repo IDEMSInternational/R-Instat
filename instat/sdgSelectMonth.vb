@@ -25,11 +25,11 @@ Public Class sdgSelectMonth
     End Sub
 
     Private Sub InitialiseControls()
+        ucrMonthAsFactor.strSelectorColumnName = "Omit Level"
         ucrMonthAsFactor.SetAsMultipleSelector()
         ucrMonthAsFactor.SetReceiver(ucrReceiverMonth)
         ucrMonthAsFactor.SetIncludeLevels(False)
         ucrMonthAsFactor.bIncludeNA = False
-        ucrMonthAsFactor.strSelectorColumnName = "Omit Level"
     End Sub
 
     Public Sub SetRCode(Optional clsNewNotEqualToOperator As ROperator = Nothing, Optional clsNewAndFilterOperator As ROperator = Nothing, Optional ucrNewReceiverMonth As ucrReceiverSingle = Nothing, Optional bReset As Boolean = False)
