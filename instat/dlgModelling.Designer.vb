@@ -415,9 +415,9 @@ Partial Class dlgModelling
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grplme4)
         Me.Controls.Add(Me.grpMASS)
         Me.Controls.Add(Me.grpextRemes)
-        Me.Controls.Add(Me.grplme4)
         Me.Controls.Add(Me.ucrChkIncludeArguments)
         Me.Controls.Add(Me.lblRpackage)
         Me.Controls.Add(Me.cmdHelp)
