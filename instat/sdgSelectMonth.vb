@@ -16,6 +16,9 @@
 
 Imports instat.Translations
 Public Class sdgSelectMonth
+    Private ucrReceiverMonth As ucrReceiverSingle
+    Private clsNotEqualToOperator, clsAndFilterOperator As New ROperator
+
     Private Sub sdgSelectMonth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         InitialiseControls()
@@ -23,12 +26,36 @@ Public Class sdgSelectMonth
 
     Private Sub InitialiseControls()
         ucrMonthAsFactor.SetAsMultipleSelector()
-        ucrMonthAsFactor.SetReceiver(dlgClimaticCheckDataRain.ucrReceiverMonth)
+        ucrMonthAsFactor.SetReceiver(ucrReceiverMonth)
         ucrMonthAsFactor.SetIncludeLevels(False)
-        ucrMonthAsFactor.bIncludeNA = True
+        ucrMonthAsFactor.bIncludeNA = False
+        ucrMonthAsFactor.strSelectorColumnName = "Omit Level"
     End Sub
 
-    Public Sub SetRCode()
+    Public Sub SetRCode(Optional clsNewNotEqualToOperator As ROperator = Nothing, Optional clsNewAndFilterOperator As ROperator = Nothing, Optional ucrNewReceiverMonth As ucrReceiverSingle = Nothing, Optional bReset As Boolean = False)
+        ucrReceiverMonth = ucrNewReceiverMonth
+        clsNotEqualToOperator = clsNewNotEqualToOperator
+        clsAndFilterOperator = clsNewAndFilterOperator
+    End Sub
 
+    Private Sub ucrMonthAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrMonthAsFactor.ControlValueChanged
+        'Dim strSelectedMonth As String
+        Dim iNumLevels As Integer
+        Dim iNewPosition As Integer = 1
+        'Dim iRow As Integer
+
+        clsNotEqualToOperator.AddParameter("index", Chr(39) & ucrMonthAsFactor.shtCurrSheet(5, 1) & Chr(39), iPosition:=1)
+
+        clsAndFilterOperator.AddParameter("i", clsROperatorParameter:=clsNotEqualToOperator, iPosition:=0)
+
+        iNumLevels = ucrMonthAsFactor.shtCurrSheet.Rows
+
+        'iRow = ucrMonthAsFactor.grdFactorData.CurrentWorksheet.SelectionRange.Row
+
+        'For i = 1 To iNumLevels
+        '    strSelectedMonth = ucrReceiverMonth.GetVariableNames(False) & "!=" & Chr(39) & ucrMonthAsFactor.shtCurrSheet(iRow, 1) & Chr(39)
+        '    clsAndFilterOperator.AddParameter("index1", strSelectedMonth, iPosition:=iNewPosition)
+        '    iNewPosition += 1
+        'Next
     End Sub
 End Class
