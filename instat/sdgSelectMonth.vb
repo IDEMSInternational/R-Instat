@@ -39,23 +39,21 @@ Public Class sdgSelectMonth
     End Sub
 
     Private Sub ucrMonthAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrMonthAsFactor.ControlValueChanged
-        'Dim strSelectedMonth As String
-        Dim iNumLevels As Integer
-        Dim iNewPosition As Integer = 1
+        Dim strSelectedMonth As String
+        Dim iNumLevels As New List(Of Integer)
+        Dim iNewPosition As Integer = 0
         'Dim iRow As Integer
 
         clsNotEqualToOperator.AddParameter("index", Chr(39) & ucrMonthAsFactor.shtCurrSheet(5, 1) & Chr(39), iPosition:=1)
 
         clsAndFilterOperator.AddParameter("i", clsROperatorParameter:=clsNotEqualToOperator, iPosition:=0)
 
-        iNumLevels = ucrMonthAsFactor.shtCurrSheet.Rows
+        'iNumLevels = ucrMonthAsFactor.grdFactorData.CurrentWorksheet.
 
-        'iRow = ucrMonthAsFactor.grdFactorData.CurrentWorksheet.SelectionRange.Row
-
-        'For i = 1 To iNumLevels
-        '    strSelectedMonth = ucrReceiverMonth.GetVariableNames(False) & "!=" & Chr(39) & ucrMonthAsFactor.shtCurrSheet(iRow, 1) & Chr(39)
-        '    clsAndFilterOperator.AddParameter("index1", strSelectedMonth, iPosition:=iNewPosition)
-        '    iNewPosition += 1
-        'Next
+        For Each i In iNumLevels
+            strSelectedMonth = ucrReceiverMonth.GetVariableNames(False) & "!=" & Chr(39) & ucrMonthAsFactor.shtCurrSheet(i, 1) & Chr(39)
+            clsAndFilterOperator.AddParameter("selected_month", strSelectedMonth, iPosition:=iNewPosition)
+            iNewPosition += 1
+        Next
     End Sub
 End Class
