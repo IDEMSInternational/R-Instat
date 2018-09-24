@@ -170,6 +170,9 @@ Public Class ucrReceiverMultiple
                 Case "graph"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                     clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
+                Case "surv"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_surv")
+                    clsGetVariablesFunc.AddParameter("surv_name", GetVariableNames())
                 Case "model"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                     clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
@@ -435,11 +438,11 @@ Public Class ucrReceiverMultiple
                     Clear()
                 ElseIf strVariableTypes.Count > 0 Then
                     If strVariableTypes(0) = "integer" Then
-                        SetDataType("numeric")
+                        SetDataType("numeric", bStrict:=True)
                     ElseIf strVariableTypes(0) = "ordered,factor" Then
-                        SetDataType("factor")
+                        SetDataType("factor", bStrict:=True)
                     Else
-                        SetDataType(strVariableTypes(0))
+                        SetDataType(strVariableTypes(0), bStrict:=True)
                     End If
                 Else
                     RemoveIncludedMetadataProperty(strProperty:="class")
