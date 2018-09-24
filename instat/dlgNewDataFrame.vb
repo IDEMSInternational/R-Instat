@@ -25,7 +25,7 @@ Public Class dlgNewDataFrame
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            btnExample.Enabled = False 'TODO. Remove this later
+            'btnExample.Enabled = False 'TODO. Remove this later
             InitialiseDialog()
             bFirstLoad = False
         End If
