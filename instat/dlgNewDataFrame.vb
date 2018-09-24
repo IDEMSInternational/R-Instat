@@ -25,7 +25,7 @@ Public Class dlgNewDataFrame
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            'btnExample.Enabled = False 'TODO. Remove this later
+            btnExample.Enabled = False 'TODO. Remove this later
             InitialiseDialog()
             bFirstLoad = False
         End If
@@ -88,9 +88,9 @@ Public Class dlgNewDataFrame
         'reset the controls
         ucrNewDFName.Reset()
         txtCommand.Text = "data.frame(data=matrix(data=NA, nrow=10, ncol=2))"
-        'empty and create 7 default rows
+        'empty and create 5 default rows
         dataGridView.Rows.Clear()
-        For i As Integer = 1 To 6
+        For i As Integer = 1 To 4
             dataGridView.Rows.Add()
         Next
 
@@ -118,7 +118,7 @@ Public Class dlgNewDataFrame
                     'if both the column name and expression exist then enable
                     If Not String.IsNullOrEmpty(row.Cells("colName").Value) AndAlso Not String.IsNullOrEmpty(row.Cells("colExpression").Value) Then
                         ucrBase.OKEnabled(True)
-                        'Exit For
+                        Exit For
                     End If
                 Next
             End If
@@ -162,7 +162,7 @@ Public Class dlgNewDataFrame
             txtCommand.Visible = False
             dataGridView.Visible = True
             lblCommand.Visible = True
-            btnExample.Visible = False
+            btnExample.Visible = True
             ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
         ElseIf rdoCommand.Checked Then
             ucrNudCols.Visible = False
@@ -253,6 +253,8 @@ Public Class dlgNewDataFrame
         txtCommand.SelectAll()
     End Sub
 
+    Private Sub btnExample_Click(sender As Object, e As EventArgs) Handles btnExample.Click
 
+    End Sub
 
 End Class
