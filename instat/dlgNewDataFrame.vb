@@ -253,8 +253,4 @@ Public Class dlgNewDataFrame
         txtCommand.SelectAll()
     End Sub
 
-    Private Sub btnExample_Click(sender As Object, e As EventArgs) Handles btnExample.Click
-
-    End Sub
-
 End Class
