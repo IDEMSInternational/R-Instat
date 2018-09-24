@@ -88,13 +88,13 @@ Public Class dlgNewDataFrame
         'reset the controls
         ucrNewDFName.Reset()
         txtCommand.Text = "data.frame(data=matrix(data=NA, nrow=10, ncol=2))"
-        'empty and create 5 default rows
+        'empty and create 6 default rows
         dataGridView.Rows.Clear()
-        For i As Integer = 1 To 4
+        For i As Integer = 1 To 6
             dataGridView.Rows.Add()
         Next
 
-        rdoCommand.Checked = True
+        rdoConstruct.Checked = True
         rdoRandom.Enabled = False 'TODO remove this later
     End Sub
 
@@ -162,7 +162,8 @@ Public Class dlgNewDataFrame
             txtCommand.Visible = False
             dataGridView.Visible = True
             lblCommand.Visible = True
-            'btnExample.Visible = True
+            btnExample.Visible = False
+            lblCommand.Text = "Construct:"
             ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
         ElseIf rdoCommand.Checked Then
             ucrNudCols.Visible = False
@@ -170,7 +171,8 @@ Public Class dlgNewDataFrame
             txtCommand.Visible = True
             dataGridView.Visible = False
             lblCommand.Visible = True
-            'btnExample.Visible = True
+            btnExample.Visible = True
+            lblCommand.Text = "Command:"
             ucrBase.clsRsyntax.SetCommandString(txtCommand.Text)
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
         ElseIf rdoRandom.Checked Then
@@ -181,7 +183,7 @@ Public Class dlgNewDataFrame
             txtCommand.Visible = False
             dataGridView.Visible = False
             lblCommand.Visible = False
-            'btnExample.Visible = False
+            btnExample.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
         End If
         TestOKEnabled()
@@ -246,4 +248,8 @@ Public Class dlgNewDataFrame
         txtCommand.SelectAll()
     End Sub
 
+    Private Sub btnExample_Click(sender As Object, e As EventArgs) Handles btnExample.Click
+        'TODO
+        'show a popup that displays the example commands
+    End Sub
 End Class
