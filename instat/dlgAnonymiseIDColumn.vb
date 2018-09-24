@@ -35,6 +35,7 @@ Public Class dlgAnonymiseIDColumn
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 552
         Dim dctAlgorithm As New Dictionary(Of String, String)
         ucrReceiverIDColumn.Selector = ucrSelectorAnonymiseIDColumn
         ucrSelectorAnonymiseIDColumn.bUseCurrentFilter = False
