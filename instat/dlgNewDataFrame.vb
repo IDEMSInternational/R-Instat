@@ -118,7 +118,7 @@ Public Class dlgNewDataFrame
                     'if both the column name and expression exist then enable
                     If Not String.IsNullOrEmpty(row.Cells("colName").Value) AndAlso Not String.IsNullOrEmpty(row.Cells("colExpression").Value) Then
                         ucrBase.OKEnabled(True)
-                        Exit For
+                        'Exit For
                     End If
                 Next
             End If
@@ -193,7 +193,7 @@ Public Class dlgNewDataFrame
         End If
     End Sub
 
-    Private Sub txtCommandDataGridView_ValueChanged(sender As Object, e As EventArgs) Handles txtCommand.TextChanged, dataGridView.CellValueChanged
+    Private Sub txtCommandAndDataGridView_ValueChanged(sender As Object, e As EventArgs) Handles txtCommand.TextChanged, dataGridView.CellValueChanged
         TestOKEnabled()
     End Sub
 
@@ -201,16 +201,7 @@ Public Class dlgNewDataFrame
         ucrBase.clsRsyntax.SetCommandString(txtCommand.Text)
     End Sub
 
-    Private Sub dataGridView_Leave(sender As Object, e As EventArgs) Handles dataGridView.Leave
-
-    End Sub
-
     Private Sub dataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridView.CellEndEdit
-        'Validate the input column Name to fit the R column
-        'If dataGridView.CurrentCell.OwningColumn.Name = "colName" Then
-        'TestOKEnabled()
-        'End If
-
         Dim iPosition As Integer = 0
         'clear the previous parameters which acted as the columns then add the new ones
         clsConstructFunction.ClearParameters()
@@ -220,7 +211,6 @@ Public Class dlgNewDataFrame
                 iPosition = iPosition + 1
             End If
         Next
-
     End Sub
 
     Private Sub dataGridView_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dataGridView.RowsAdded
