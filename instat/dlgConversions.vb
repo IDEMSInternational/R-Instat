@@ -83,12 +83,10 @@ Public Class dlgConversions
         dctPrecipitationUnits.Add("mm", Chr(34) & "mm" & Chr(34))
         ucrInputFromPrecipitation.SetItems(dctPrecipitationUnits)
         ucrInputFromPrecipitation.SetDropDownStyleAsNonEditable()
-        ucrInputFromPrecipitation.bAllowNonConditionValues = True
 
         ucrInputToPrecipitation.SetParameter(New RParameter("new_metric", 2))
         ucrInputToPrecipitation.SetItems(dctPrecipitationUnits)
         ucrInputToPrecipitation.SetDropDownStyleAsNonEditable()
-        ucrInputToPrecipitation.bAllowNonConditionValues = True
 
         ucrInputFromTemperature.SetParameter(New RParameter("old_metric", 1))
         dctTemperatureUnits.Add("Celsius", Chr(34) & "celsius" & Chr(34))
@@ -127,8 +125,8 @@ Public Class dlgConversions
         ucrPnlLatitude.AddToLinkedControls(ucrInputLatitude, {rdoSingleValue}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlLatitude.AddToLinkedControls(ucrReceiverLatitude, {rdoColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrPnlElements.AddToLinkedControls(ucrInputFromPrecipitation, {rdoRain}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="inches")
-        ucrPnlElements.AddToLinkedControls(ucrInputToPrecipitation, {rdoRain}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mm")
+        ucrPnlElements.AddToLinkedControls(ucrInputFromPrecipitation, {rdoRain}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlElements.AddToLinkedControls(ucrInputToPrecipitation, {rdoRain}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlElements.AddToLinkedControls(ucrInputFromTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Kelvin")
         ucrPnlElements.AddToLinkedControls(ucrInputToTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Celsius")
         ucrPnlElements.AddToLinkedControls(ucrInputFromWindSpeed, {rdoWindSpeed}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Knots")
@@ -156,8 +154,6 @@ Public Class dlgConversions
         ucrSelectorConversions.Reset()
         ucrSaveConversions.Reset()
         ucrInputLatitude.SetName("")
-        ucrInputFromPrecipitation.SetName("inches")
-        ucrInputToPrecipitation.SetName("mm")
         ucrReceiverElement.SetMeAsReceiver()
 
         clsPrecipitationFunction.SetPackageName("weathermetrics")
@@ -262,25 +258,25 @@ Public Class dlgConversions
         ChangeLatParameter()
     End Sub
 
-    Private Sub ucrPnlConversions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlConversions.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrSaveConversions.ControlContentsChanged, ucrNudDecimal.ControlContentsChanged, ucrPnlLatitude.ControlContentsChanged, ucrInputLatitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrInputFromPrecipitation.ControlContentsChanged, ucrInputToPrecipitation.ControlContentsChanged, ucrInputFromTemperature.ControlContentsChanged, ucrInputToTemperature.ControlContentsChanged, ucrInputFromWindSpeed.ControlContentsChanged, ucrInputToWindSpeed.ControlContentsChanged, ucrPnlElements.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrPnlElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlElements.ControlValueChanged
         SetBaseFunction()
     End Sub
 
     Private Sub ChangeLatParameter()
+        'This is done since the "lat" parameter is being given by two controls (ucrReceiverLatitude and ucrInputLatitude)
+        'TODO: There should be a better way to do this (setting same parameter by more than one control)
         If rdoSingleValue.Checked AndAlso ucrInputLatitude.GetText <> "" Then
             clsDayLengthFunction.AddParameter("lat", ucrInputLatitude.GetText, iPosition:=0)
         ElseIf Not rdoSingleValue.Checked AndAlso ucrInputLatitude.IsEmpty Then
-            'This is done since the "lat" parameter is being given by two controls (ucrReceiverLatitude and ucrInputLatitude)
-            'TO DO: Come up with a better way to do this (setting up parameters given by more than one control)
             clsDayLengthFunction.RemoveParameterByPosition(0)
         End If
     End Sub
 
     Private Sub ucrInputLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLatitude.ControlValueChanged, ucrPnlLatitude.ControlValueChanged
         ChangeLatParameter()
+    End Sub
+
+    Private Sub ucrPnlConversions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlConversions.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrSaveConversions.ControlContentsChanged, ucrNudDecimal.ControlContentsChanged, ucrPnlLatitude.ControlContentsChanged, ucrInputLatitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrInputFromPrecipitation.ControlContentsChanged, ucrInputToPrecipitation.ControlContentsChanged, ucrInputFromTemperature.ControlContentsChanged, ucrInputToTemperature.ControlContentsChanged, ucrInputFromWindSpeed.ControlContentsChanged, ucrInputToWindSpeed.ControlContentsChanged, ucrPnlElements.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
