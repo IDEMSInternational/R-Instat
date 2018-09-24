@@ -332,7 +332,7 @@ Public Class dlgStartofRains
         clsTRRollingSum.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsTRRollingSum.AddParameter("function_exp", clsRFunctionParameter:=clsTRRollingSumFunction, iPosition:=1)
         clsTRRollingSum.AddParameter("result_name", Chr(34) & strRollSumRain & Chr(34), iPosition:=2)
-        clsTRRollingSum.AddParameter("save", 2, iPosition:=5)
+        clsTRRollingSum.AddParameter("save", 0, iPosition:=5)
         clsTRRollingSum.SetAssignTo("total_rainfall_rolling_day")
 
         clsTRRollingSumFunction.SetPackageName("RcppRoll")
@@ -540,7 +540,7 @@ Public Class dlgStartofRains
         clsRDCombineOperator.AddParameter("rd_min", 1, iPosition:=1)
 
         ' run if chkDS is checked
-        clsDSCombineOperator.SetOperation("<")
+        clsDSCombineOperator.SetOperation("<=")
         clsDSCombineOperator.AddParameter("ds_left", strDrySpell, iPosition:=0)
         clsDSCombineOperator.AddParameter("ds_max", 9, iPosition:=1)
 

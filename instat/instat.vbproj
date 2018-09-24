@@ -233,10 +233,10 @@
     <Compile Include="dlgClimaticLengthOfSeason.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgClimaticMaps.Designer.vb">
-      <DependentUpon>dlgClimaticMaps.vb</DependentUpon>
+    <Compile Include="dlgClimaticStationMaps.Designer.vb">
+      <DependentUpon>dlgClimaticStationMaps.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgClimaticMaps.vb">
+    <Compile Include="dlgClimaticStationMaps.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgClimaticSummary.Designer.vb">
@@ -279,6 +279,12 @@
       <DependentUpon>dlgCompareTreatmentLines.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCompareTreatmentLines.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgConversions.Designer.vb">
+      <DependentUpon>dlgConversions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgConversions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCopyDataFrame.Designer.vb">
@@ -369,6 +375,18 @@
       <DependentUpon>dlgExportToCMSAF.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgExportToCMSAF.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgComment.Designer.vb">
+      <DependentUpon>sdgComment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgComment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgMapOption.Designer.vb">
+      <DependentUpon>sdgMapOption.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgMapOption.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgMergeAdditionalData.Designer.vb">
@@ -958,6 +976,12 @@
       <DependentUpon>sdgSaveColumnPosition.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgSaveColumnPosition.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgSelectMonth.Designer.vb">
+      <DependentUpon>sdgSelectMonth.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSelectMonth.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgThemes.Designer.vb">
@@ -2446,8 +2470,8 @@
     <EmbeddedResource Include="dlgClimaticLengthOfSeason.resx">
       <DependentUpon>dlgClimaticLengthOfSeason.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgClimaticMaps.resx">
-      <DependentUpon>dlgClimaticMaps.vb</DependentUpon>
+    <EmbeddedResource Include="dlgClimaticStationMaps.resx">
+      <DependentUpon>dlgClimaticStationMaps.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticSummary.resx">
       <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
@@ -2517,6 +2541,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgContrasts.sw-KE.resx">
       <DependentUpon>dlgContrasts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgConversions.resx">
+      <DependentUpon>dlgConversions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCopyDataFrame.resx">
       <DependentUpon>dlgCopyDataFrame.vb</DependentUpon>
@@ -2663,6 +2690,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMakeDate.sw-KE.resx">
       <DependentUpon>dlgMakeDate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgComment.resx">
+      <DependentUpon>sdgComment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMapOption.resx">
+      <DependentUpon>sdgMapOption.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMerge.sw-KE.resx">
       <DependentUpon>dlgMerge.vb</DependentUpon>
@@ -3470,6 +3503,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSaveColumnPosition.resx">
       <DependentUpon>sdgSaveColumnPosition.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSelectMonth.resx">
+      <DependentUpon>sdgSelectMonth.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>
