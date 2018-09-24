@@ -75,6 +75,8 @@ Public Class dlgDeleteRowsOrColums
         clsOperatorRowNames = New ROperator
 
         ucrSelectorForDeleteColumns.Reset()
+        ucrNudFrom.SetText(1)
+        ucrNudTo.SetText(1)
 
         clsDeleteRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
         clsDeleteColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
