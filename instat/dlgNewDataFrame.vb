@@ -25,6 +25,7 @@ Public Class dlgNewDataFrame
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
+            'btnExample.Enabled = False 'TODO. Remove this later
             InitialiseDialog()
             bFirstLoad = False
         End If
@@ -99,18 +100,32 @@ Public Class dlgNewDataFrame
 
     Private Sub TestOKEnabled()
         If rdoConstruct.Checked Then
-            'TODO validate the rows
-            'if any of the datagrid rows has contents then enable ok
+            'validate the datagrid rows 
             ucrBase.OKEnabled(False)
-            For Each row As DataGridViewRow In dataGridView.Rows
-                If row.Cells(1).Value <> "" AndAlso row.Cells(2).Value <> "" Then
-                    ucrBase.OKEnabled(True)
-                    Exit For
-                End If
-            Next
+            If ucrNewDFName.IsComplete Then
+                Dim inputValidation As New ucrInput 'temporarily use validation functions for ucrInput
+                inputValidation.SetValidationTypeAsRVariable()
+                For Each row As DataGridViewRow In dataGridView.Rows
+                    'if column has a value then validate first
+                    If Not String.IsNullOrEmpty(row.Cells("colName").Value) Then
+                        If Not inputValidation.ValidateText(row.Cells("colName").Value) Then
+                            row.Selected = True
+                            ucrBase.OKEnabled(False)
+                            Exit For ' if not valid text then exit for
+                        End If
+                    End If
+
+                    'if both the column name and expression exist then enable
+                    If Not String.IsNullOrEmpty(row.Cells("colName").Value) AndAlso Not String.IsNullOrEmpty(row.Cells("colExpression").Value) Then
+                        ucrBase.OKEnabled(True)
+                        Exit For
+                    End If
+                Next
+            End If
+
         ElseIf rdoCommand.Checked Then
             'enable if there is text in the input textbox
-            ucrBase.OKEnabled(txtCommand.TextLength > 0)
+            ucrBase.OKEnabled(ucrNewDFName.IsComplete AndAlso txtCommand.TextLength > 0)
         ElseIf rdoRandom.Checked Then
             'TODO
             ucrBase.OKEnabled(False)
@@ -136,7 +151,7 @@ Public Class dlgNewDataFrame
         SetRCode(True)
     End Sub
 
-    Private Sub controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlContentsChanged, ucrNudCols.ControlContentsChanged, ucrNewDFName.ControlContentsChanged
+    Private Sub controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlValueChanged, ucrNudCols.ControlValueChanged, ucrNewDFName.ControlValueChanged
         TestOKEnabled()
     End Sub
 
@@ -147,6 +162,7 @@ Public Class dlgNewDataFrame
             txtCommand.Visible = False
             dataGridView.Visible = True
             lblCommand.Visible = True
+            'btnExample.Visible = True
             ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
         ElseIf rdoCommand.Checked Then
             ucrNudCols.Visible = False
@@ -154,6 +170,7 @@ Public Class dlgNewDataFrame
             txtCommand.Visible = True
             dataGridView.Visible = False
             lblCommand.Visible = True
+            'btnExample.Visible = True
             ucrBase.clsRsyntax.SetCommandString(txtCommand.Text)
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
         ElseIf rdoRandom.Checked Then
@@ -164,18 +181,19 @@ Public Class dlgNewDataFrame
             txtCommand.Visible = False
             dataGridView.Visible = False
             lblCommand.Visible = False
+            'btnExample.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
         End If
         TestOKEnabled()
     End Sub
 
     Private Sub ucrNewDFName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlValueChanged
-        If rdoConstruct.Checked OrElse rdoCommand.Checked Then
+        If rdoCommand.Checked Then
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
         End If
     End Sub
 
-    Private Sub txtCommandAnddataGridView_ValueChanged(sender As Object, e As EventArgs) Handles txtCommand.TextChanged, dataGridView.CellValueChanged
+    Private Sub txtCommandDataGridView_ValueChanged(sender As Object, e As EventArgs) Handles txtCommand.TextChanged, dataGridView.CellValueChanged
         TestOKEnabled()
     End Sub
 
@@ -184,6 +202,15 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub dataGridView_Leave(sender As Object, e As EventArgs) Handles dataGridView.Leave
+
+    End Sub
+
+    Private Sub dataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridView.CellEndEdit
+        'Validate the input column Name to fit the R column
+        'If dataGridView.CurrentCell.OwningColumn.Name = "colName" Then
+        'TestOKEnabled()
+        'End If
+
         Dim iPosition As Integer = 0
         'clear the previous parameters which acted as the columns then add the new ones
         clsConstructFunction.ClearParameters()
@@ -193,15 +220,7 @@ Public Class dlgNewDataFrame
                 iPosition = iPosition + 1
             End If
         Next
-    End Sub
 
-    Private Sub dataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridView.CellEndEdit
-
-        Dim cellValue As String
-        If dataGridView.CurrentCell.OwningColumn.Name = "colName" Then
-            cellValue = dataGridView.CurrentCell.Value
-            'TODO. Validate the input column Name
-        End If
     End Sub
 
     Private Sub dataGridView_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dataGridView.RowsAdded
@@ -235,10 +254,6 @@ Public Class dlgNewDataFrame
 
     Private Sub SelectAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectAllToolStripMenuItem.Click
         txtCommand.SelectAll()
-    End Sub
-
-    Private Sub btnExample_Click(sender As Object, e As EventArgs) Handles btnExample.Click
-
     End Sub
 
 End Class
