@@ -148,6 +148,27 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblColumn.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkShowSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 226</value>
+  </data>
+  <data name="ucrChkShowSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 20</value>
+  </data>
+  <data name="ucrChkShowSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShowSummary.Name" xml:space="preserve">
+    <value>ucrChkShowSummary</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShowSummary.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShowSummary.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShowSummary.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ucrSaveLogicalColumn.Location" type="System.Drawing.Point, System.Drawing">
@@ -169,16 +190,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveLogicalColumn.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>431, 362</value>
+    <value>2</value>
   </data>
   <data name="ucrSelectorShowNonNumericValues.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 28</value>
@@ -202,7 +214,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorShowNonNumericValues.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 295</value>
@@ -223,7 +235,40 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>431, 362</value>
+  </data>
+  <data name="ucrChkFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>204, 226</value>
+  </data>
+  <data name="ucrChkFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 20</value>
+  </data>
+  <data name="ucrChkFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFilter.Name" xml:space="preserve">
+    <value>ucrChkFilter</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFilter.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFilter.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFilter.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -232,7 +277,7 @@
     <value>Find non numeric values</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgShowNonnumericValues</value>
+    <value>dlgFindNonnumericValues</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -259,6 +304,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverColumn.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
 </root>

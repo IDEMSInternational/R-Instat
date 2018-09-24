@@ -19,8 +19,8 @@ Imports instat.Translations
 Public Class dlgFindNonnumericValues
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
-    Private clsIsNaFunction, clsIsNaNumericFunction, clsAsNumericFunction As New RFunction
+    ' Private clsRSyntax As RSyntax
+    Private clsIsNaFunction, clsIsNaNumericFunction, clsAsNumericFunction, clsSummaryFunction As New RFunction
     Private clsNotEqualToOperator As New ROperator
 
     Private Sub dlgShowNonnumericValues_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -50,11 +50,18 @@ Public Class dlgFindNonnumericValues
         ucrSaveLogicalColumn.SetDataFrameSelector(ucrSelectorShowNonNumericValues.ucrAvailableDataFrames)
         ucrSaveLogicalColumn.SetIsTextBox()
         ucrSaveLogicalColumn.SetLabelText("Logical column:")
+
+        ucrChkShowSummary.SetText("Display summary")
+        ucrChkShowSummary.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"})
+        ucrChkShowSummary.AddRSyntaxContainsFunctionNamesCondition(False, {"summary"}, False)
+
+        ucrChkFilter.SetText("Filter to non-numeric cases")
     End Sub
 
     Private Sub SetDefaults()
         clsIsNaFunction = New RFunction
         clsIsNaNumericFunction = New RFunction
+        clsSummaryFunction = New RFunction
         clsNotEqualToOperator = New ROperator
 
         ucrReceiverColumn.SetMeAsReceiver()
@@ -73,13 +80,19 @@ Public Class dlgFindNonnumericValues
 
         clsAsNumericFunction.SetRCommand("as.numeric")
 
+        clsSummaryFunction.SetRCommand("summary")
+        clsSummaryFunction.iCallType = 2
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseROperator(clsNotEqualToOperator)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=0)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverColumn.AddAdditionalCodeParameterPair(clsAsNumericFunction, New RParameter("x", 1), iAdditionalPairNo:=1)
+        ucrReceiverColumn.AddAdditionalCodeParameterPair(clsSummaryFunction, New RParameter("object", 1), iAdditionalPairNo:=1)
+        ucrReceiverColumn.AddAdditionalCodeParameterPair(clsAsNumericFunction, New RParameter("x", 1), iAdditionalPairNo:=2)
         ucrReceiverColumn.SetRCode(clsIsNaFunction, bReset)
         ucrSaveLogicalColumn.SetRCode(clsNotEqualToOperator, bReset)
+        ucrChkShowSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -96,7 +109,15 @@ Public Class dlgFindNonnumericValues
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumn.ControlContentsChanged, ucrSaveLogicalColumn.ControlContentsChanged
+    Private Sub ucrChkShowSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowSummary.ControlValueChanged
+        If ucrChkShowSummary.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveLogicalColumn.ControlContentsChanged, ucrReceiverColumn.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
