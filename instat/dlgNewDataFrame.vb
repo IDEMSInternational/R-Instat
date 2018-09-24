@@ -162,7 +162,7 @@ Public Class dlgNewDataFrame
             txtCommand.Visible = False
             dataGridView.Visible = True
             lblCommand.Visible = True
-            btnExample.Visible = True
+            'btnExample.Visible = True
             ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
         ElseIf rdoCommand.Checked Then
             ucrNudCols.Visible = False
@@ -170,7 +170,7 @@ Public Class dlgNewDataFrame
             txtCommand.Visible = True
             dataGridView.Visible = False
             lblCommand.Visible = True
-            btnExample.Visible = True
+            'btnExample.Visible = True
             ucrBase.clsRsyntax.SetCommandString(txtCommand.Text)
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
         ElseIf rdoRandom.Checked Then
@@ -181,7 +181,7 @@ Public Class dlgNewDataFrame
             txtCommand.Visible = False
             dataGridView.Visible = False
             lblCommand.Visible = False
-            btnExample.Visible = False
+            'btnExample.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
         End If
         TestOKEnabled()
@@ -202,6 +202,15 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub dataGridView_Leave(sender As Object, e As EventArgs) Handles dataGridView.Leave
+
+    End Sub
+
+    Private Sub dataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridView.CellEndEdit
+        'Validate the input column Name to fit the R column
+        'If dataGridView.CurrentCell.OwningColumn.Name = "colName" Then
+        'TestOKEnabled()
+        'End If
+
         Dim iPosition As Integer = 0
         'clear the previous parameters which acted as the columns then add the new ones
         clsConstructFunction.ClearParameters()
@@ -211,13 +220,7 @@ Public Class dlgNewDataFrame
                 iPosition = iPosition + 1
             End If
         Next
-    End Sub
 
-    Private Sub dataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridView.CellEndEdit
-        'Validate the input column Name to fit the R column
-        'If dataGridView.CurrentCell.OwningColumn.Name = "colName" Then
-        'TestOKEnabled()
-        'End If
     End Sub
 
     Private Sub dataGridView_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dataGridView.RowsAdded
