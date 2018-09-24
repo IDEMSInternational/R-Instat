@@ -172,13 +172,11 @@ Public Class dlgTransformClimatic
         dctPrecipitationUnits.Add("inches", Chr(34) & "inches" & Chr(34))
         dctPrecipitationUnits.Add("mm", Chr(34) & "mm" & Chr(34))
         ucrInputFromPrecipitation.SetItems(dctPrecipitationUnits)
-        ucrInputFromPrecipitation.SetName("inches")
         ucrInputFromPrecipitation.SetDropDownStyleAsNonEditable()
         ucrInputFromPrecipitation.bAllowNonConditionValues = True
 
         ucrInputToPrecipitation.SetParameter(New RParameter("new_metric", 2))
         ucrInputToPrecipitation.SetItems(dctPrecipitationUnits)
-        ucrInputToPrecipitation.SetName("mm")
         ucrInputToPrecipitation.SetDropDownStyleAsNonEditable()
         ucrInputToPrecipitation.bAllowNonConditionValues = True
 
@@ -329,6 +327,8 @@ Public Class dlgTransformClimatic
 
         ucrSelectorTransform.Reset()
         ucrReceiverData.SetMeAsReceiver()
+        ucrInputFromPrecipitation.SetName("inches")
+        ucrInputToPrecipitation.SetName("mm")
 
         'Conversion
         clsPrecipitationFunction.bToScriptAsRString = True
@@ -404,9 +404,10 @@ Public Class dlgTransformClimatic
         clsRasterFuction.SetPackageName("raster")
         clsRasterFuction.SetRCommand("movingFun")
         clsRasterFuction.AddParameter("n", 3, iPosition:=1)
-        clsRasterFuction.AddParameter("fun", "sum", iPosition:=2)
-        clsRasterFuction.AddParameter("type", Chr(39) & "to" & Chr(39), iPosition:=3)
-        clsRasterFuction.AddParameter("na.rm", "TRUE", iPosition:=4)
+        clsRasterFuction.AddParameter("circular", "FALSE", iPosition:=2)
+        clsRasterFuction.AddParameter("fun", "sum", iPosition:=3)
+        clsRasterFuction.AddParameter("type", Chr(39) & "to" & Chr(39), iPosition:=4)
+        clsRasterFuction.AddParameter("na.rm", "TRUE", iPosition:=5)
 
         ' Water Balance
         clsRWaterBalanceFunction.bToScriptAsRString = True
@@ -727,10 +728,12 @@ Public Class dlgTransformClimatic
         TestOkEnabled()
     End Sub
     Private Sub RasterFunction()
-        If Not ucrChkCircular.Checked Then
-            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
-        ElseIf ucrChkCircular.Checked Then
-            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRasterFuction, iPosition:=1)
+        If rdoMoving.Checked Then
+            If ucrChkCircular.Checked Then
+                clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRasterFuction, iPosition:=1)
+            ElseIf Not ucrChkCircular.Checked Then
+                clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRMovingFunction, iPosition:=1)
+            End If
         End If
     End Sub
 
