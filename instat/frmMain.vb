@@ -2019,4 +2019,8 @@ Public Class frmMain
     Private Sub mnuClimaticCMSAFExporttoCMSAFRToolbox_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFExporttoCMSAFRToolbox.Click
         dlgExportToCMSAF.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticCheckDataStationMaps_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataStationMaps.Click
+        dlgClimaticStationMaps.ShowDialog()
+    End Sub
 End Class
