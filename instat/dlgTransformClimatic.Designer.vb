@@ -52,45 +52,31 @@ Partial Class dlgTransformClimatic
         Me.lblNewColName = New System.Windows.Forms.Label()
         Me.lblCountOver = New System.Windows.Forms.Label()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
-        Me.ucrInputCircularPosition = New instat.ucrInputComboBox()
         Me.lblPosition = New System.Windows.Forms.Label()
+        Me.rdoEvapVariable = New System.Windows.Forms.RadioButton()
+        Me.rdoEvapValue = New System.Windows.Forms.RadioButton()
+        Me.lblRowsMultSpells = New System.Windows.Forms.Label()
+        Me.lblCondition = New System.Windows.Forms.Label()
+        Me.lblWBEvaporation = New System.Windows.Forms.Label()
+        Me.lblWBCapacity = New System.Windows.Forms.Label()
+        Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
+        Me.rdoCumulative = New System.Windows.Forms.RadioButton()
+        Me.ucrInputCumulative = New instat.ucrInputComboBox()
+        Me.ucrChkGroupByYear = New instat.ucrCheck()
+        Me.ucrInputCircularPosition = New instat.ucrInputComboBox()
         Me.ucrReceiverEvap = New instat.ucrReceiverSingle()
         Me.ucrInputPosition = New instat.ucrInputComboBox()
         Me.ucrChkCircular = New instat.ucrCheck()
-        Me.rdoEvapVariable = New System.Windows.Forms.RadioButton()
-        Me.rdoEvapValue = New System.Windows.Forms.RadioButton()
         Me.ucrNudMultSpells = New instat.ucrNud()
         Me.ucrInputEvaporation = New instat.ucrInputTextBox()
-        Me.lblRowsMultSpells = New System.Windows.Forms.Label()
         Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.ucrInputCondition = New instat.ucrInputComboBox()
-        Me.lblCondition = New System.Windows.Forms.Label()
-        Me.lblWBEvaporation = New System.Windows.Forms.Label()
         Me.ucrInputSpellLower = New instat.ucrInputTextBox()
         Me.ucrPnlEvap = New instat.UcrPanel()
         Me.ucrNudSumOver = New instat.ucrNud()
-        Me.lblWBCapacity = New System.Windows.Forms.Label()
         Me.ucrNudWBCapacity = New instat.ucrNud()
         Me.ucrInputSum = New instat.ucrInputComboBox()
         Me.ucrNudCountOver = New instat.ucrNud()
-        Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
-        Me.lblDecimal = New System.Windows.Forms.Label()
-        Me.rdoWindSpeed = New System.Windows.Forms.RadioButton()
-        Me.rdoRain = New System.Windows.Forms.RadioButton()
-        Me.rdoTemperature = New System.Windows.Forms.RadioButton()
-        Me.lblTo = New System.Windows.Forms.Label()
-        Me.grpElements = New System.Windows.Forms.GroupBox()
-        Me.ucrNudDecimal = New instat.ucrNud()
-        Me.ucrInputFromTemperature = New instat.ucrInputComboBox()
-        Me.ucrInputToWindSpeed = New instat.ucrInputComboBox()
-        Me.ucrInputToTemperature = New instat.ucrInputComboBox()
-        Me.ucrPnlElements = New instat.UcrPanel()
-        Me.ucrInputFromWindSpeed = New instat.ucrInputComboBox()
-        Me.lblFrom = New System.Windows.Forms.Label()
-        Me.ucrInputFromPrecipitation = New instat.ucrInputComboBox()
-        Me.ucrInputToPrecipitation = New instat.ucrInputComboBox()
-        Me.rdoConversion = New System.Windows.Forms.RadioButton()
-        Me.ucrChkGroupByYear = New instat.ucrCheck()
         Me.ucrInputColName = New instat.ucrInputTextBox()
         Me.ucrPnlTransform = New instat.UcrPanel()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -100,7 +86,6 @@ Partial Class dlgTransformClimatic
         Me.ucrSelectorTransform = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpTransform.SuspendLayout()
-        Me.grpElements.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblYear
@@ -190,6 +175,7 @@ Partial Class dlgTransformClimatic
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.ucrInputCumulative)
         Me.grpTransform.Controls.Add(Me.ucrInputCircularPosition)
         Me.grpTransform.Controls.Add(Me.lblPosition)
         Me.grpTransform.Controls.Add(Me.ucrReceiverEvap)
@@ -218,6 +204,82 @@ Partial Class dlgTransformClimatic
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.TabStop = False
         '
+        'lblPosition
+        '
+        resources.ApplyResources(Me.lblPosition, "lblPosition")
+        Me.lblPosition.Name = "lblPosition"
+        '
+        'rdoEvapVariable
+        '
+        resources.ApplyResources(Me.rdoEvapVariable, "rdoEvapVariable")
+        Me.rdoEvapVariable.Name = "rdoEvapVariable"
+        Me.rdoEvapVariable.TabStop = True
+        Me.rdoEvapVariable.UseVisualStyleBackColor = True
+        '
+        'rdoEvapValue
+        '
+        resources.ApplyResources(Me.rdoEvapValue, "rdoEvapValue")
+        Me.rdoEvapValue.Name = "rdoEvapValue"
+        Me.rdoEvapValue.TabStop = True
+        Me.rdoEvapValue.UseVisualStyleBackColor = True
+        '
+        'lblRowsMultSpells
+        '
+        resources.ApplyResources(Me.lblRowsMultSpells, "lblRowsMultSpells")
+        Me.lblRowsMultSpells.Name = "lblRowsMultSpells"
+        Me.lblRowsMultSpells.Tag = "Rows_to_Take_Over:"
+        '
+        'lblCondition
+        '
+        resources.ApplyResources(Me.lblCondition, "lblCondition")
+        Me.lblCondition.Name = "lblCondition"
+        Me.lblCondition.Tag = "Condition:"
+        '
+        'lblWBEvaporation
+        '
+        resources.ApplyResources(Me.lblWBEvaporation, "lblWBEvaporation")
+        Me.lblWBEvaporation.Name = "lblWBEvaporation"
+        Me.lblWBEvaporation.Tag = "Evaporation"
+        '
+        'lblWBCapacity
+        '
+        resources.ApplyResources(Me.lblWBCapacity, "lblWBCapacity")
+        Me.lblWBCapacity.Name = "lblWBCapacity"
+        Me.lblWBCapacity.Tag = "Capacity"
+        '
+        'rdoMultSpells
+        '
+        resources.ApplyResources(Me.rdoMultSpells, "rdoMultSpells")
+        Me.rdoMultSpells.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultSpells.FlatAppearance.BorderSize = 2
+        Me.rdoMultSpells.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultSpells.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoMultSpells.Name = "rdoMultSpells"
+        Me.rdoMultSpells.UseVisualStyleBackColor = True
+        '
+        'rdoCumulative
+        '
+        resources.ApplyResources(Me.rdoCumulative, "rdoCumulative")
+        Me.rdoCumulative.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCumulative.FlatAppearance.BorderSize = 2
+        Me.rdoCumulative.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCumulative.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoCumulative.Name = "rdoCumulative"
+        Me.rdoCumulative.UseVisualStyleBackColor = True
+        '
+        'ucrInputCumulative
+        '
+        Me.ucrInputCumulative.AddQuotesIfUnrecognised = True
+        Me.ucrInputCumulative.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCumulative, "ucrInputCumulative")
+        Me.ucrInputCumulative.Name = "ucrInputCumulative"
+        '
+        'ucrChkGroupByYear
+        '
+        Me.ucrChkGroupByYear.Checked = False
+        resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
+        Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
+        '
         'ucrInputCircularPosition
         '
         Me.ucrInputCircularPosition.AddQuotesIfUnrecognised = True
@@ -225,14 +287,9 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrInputCircularPosition, "ucrInputCircularPosition")
         Me.ucrInputCircularPosition.Name = "ucrInputCircularPosition"
         '
-        'lblPosition
-        '
-        resources.ApplyResources(Me.lblPosition, "lblPosition")
-        Me.lblPosition.Name = "lblPosition"
-        '
         'ucrReceiverEvap
         '
-        Me.ucrReceiverEvap.frmParent = Me
+        Me.ucrReceiverEvap.frmParent = Nothing
         resources.ApplyResources(Me.ucrReceiverEvap, "ucrReceiverEvap")
         Me.ucrReceiverEvap.Name = "ucrReceiverEvap"
         Me.ucrReceiverEvap.Selector = Nothing
@@ -252,20 +309,6 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrChkCircular, "ucrChkCircular")
         Me.ucrChkCircular.Name = "ucrChkCircular"
         '
-        'rdoEvapVariable
-        '
-        resources.ApplyResources(Me.rdoEvapVariable, "rdoEvapVariable")
-        Me.rdoEvapVariable.Name = "rdoEvapVariable"
-        Me.rdoEvapVariable.TabStop = True
-        Me.rdoEvapVariable.UseVisualStyleBackColor = True
-        '
-        'rdoEvapValue
-        '
-        resources.ApplyResources(Me.rdoEvapValue, "rdoEvapValue")
-        Me.rdoEvapValue.Name = "rdoEvapValue"
-        Me.rdoEvapValue.TabStop = True
-        Me.rdoEvapValue.UseVisualStyleBackColor = True
-        '
         'ucrNudMultSpells
         '
         Me.ucrNudMultSpells.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -284,12 +327,6 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrInputEvaporation, "ucrInputEvaporation")
         Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
         '
-        'lblRowsMultSpells
-        '
-        resources.ApplyResources(Me.lblRowsMultSpells, "lblRowsMultSpells")
-        Me.lblRowsMultSpells.Name = "lblRowsMultSpells"
-        Me.lblRowsMultSpells.Tag = "Rows_to_Take_Over:"
-        '
         'ucrInputSpellUpper
         '
         Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
@@ -304,18 +341,6 @@ Partial Class dlgTransformClimatic
         Me.ucrInputCondition.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCondition, "ucrInputCondition")
         Me.ucrInputCondition.Name = "ucrInputCondition"
-        '
-        'lblCondition
-        '
-        resources.ApplyResources(Me.lblCondition, "lblCondition")
-        Me.lblCondition.Name = "lblCondition"
-        Me.lblCondition.Tag = "Condition:"
-        '
-        'lblWBEvaporation
-        '
-        resources.ApplyResources(Me.lblWBEvaporation, "lblWBEvaporation")
-        Me.lblWBEvaporation.Name = "lblWBEvaporation"
-        Me.lblWBEvaporation.Tag = "Evaporation"
         '
         'ucrInputSpellLower
         '
@@ -339,12 +364,6 @@ Partial Class dlgTransformClimatic
         Me.ucrNudSumOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSumOver.Name = "ucrNudSumOver"
         Me.ucrNudSumOver.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblWBCapacity
-        '
-        resources.ApplyResources(Me.lblWBCapacity, "lblWBCapacity")
-        Me.lblWBCapacity.Name = "lblWBCapacity"
-        Me.lblWBCapacity.Tag = "Capacity"
         '
         'ucrNudWBCapacity
         '
@@ -372,157 +391,6 @@ Partial Class dlgTransformClimatic
         Me.ucrNudCountOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCountOver.Name = "ucrNudCountOver"
         Me.ucrNudCountOver.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'rdoMultSpells
-        '
-        resources.ApplyResources(Me.rdoMultSpells, "rdoMultSpells")
-        Me.rdoMultSpells.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMultSpells.FlatAppearance.BorderSize = 2
-        Me.rdoMultSpells.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMultSpells.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoMultSpells.Name = "rdoMultSpells"
-        Me.rdoMultSpells.UseVisualStyleBackColor = True
-        '
-        'lblDecimal
-        '
-        resources.ApplyResources(Me.lblDecimal, "lblDecimal")
-        Me.lblDecimal.Name = "lblDecimal"
-        '
-        'rdoWindSpeed
-        '
-        resources.ApplyResources(Me.rdoWindSpeed, "rdoWindSpeed")
-        Me.rdoWindSpeed.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoWindSpeed.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoWindSpeed.FlatAppearance.BorderSize = 2
-        Me.rdoWindSpeed.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoWindSpeed.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoWindSpeed.Name = "rdoWindSpeed"
-        Me.rdoWindSpeed.UseVisualStyleBackColor = True
-        '
-        'rdoRain
-        '
-        resources.ApplyResources(Me.rdoRain, "rdoRain")
-        Me.rdoRain.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoRain.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoRain.FlatAppearance.BorderSize = 2
-        Me.rdoRain.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoRain.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoRain.Name = "rdoRain"
-        Me.rdoRain.UseVisualStyleBackColor = True
-        '
-        'rdoTemperature
-        '
-        resources.ApplyResources(Me.rdoTemperature, "rdoTemperature")
-        Me.rdoTemperature.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoTemperature.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTemperature.FlatAppearance.BorderSize = 2
-        Me.rdoTemperature.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTemperature.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoTemperature.Name = "rdoTemperature"
-        Me.rdoTemperature.UseVisualStyleBackColor = True
-        '
-        'lblTo
-        '
-        resources.ApplyResources(Me.lblTo, "lblTo")
-        Me.lblTo.Name = "lblTo"
-        '
-        'grpElements
-        '
-        Me.grpElements.Controls.Add(Me.lblDecimal)
-        Me.grpElements.Controls.Add(Me.ucrNudDecimal)
-        Me.grpElements.Controls.Add(Me.rdoWindSpeed)
-        Me.grpElements.Controls.Add(Me.ucrInputFromTemperature)
-        Me.grpElements.Controls.Add(Me.rdoRain)
-        Me.grpElements.Controls.Add(Me.ucrInputToWindSpeed)
-        Me.grpElements.Controls.Add(Me.rdoTemperature)
-        Me.grpElements.Controls.Add(Me.ucrInputToTemperature)
-        Me.grpElements.Controls.Add(Me.ucrPnlElements)
-        Me.grpElements.Controls.Add(Me.ucrInputFromWindSpeed)
-        Me.grpElements.Controls.Add(Me.lblFrom)
-        Me.grpElements.Controls.Add(Me.ucrInputFromPrecipitation)
-        Me.grpElements.Controls.Add(Me.ucrInputToPrecipitation)
-        Me.grpElements.Controls.Add(Me.lblTo)
-        resources.ApplyResources(Me.grpElements, "grpElements")
-        Me.grpElements.Name = "grpElements"
-        Me.grpElements.TabStop = False
-        '
-        'ucrNudDecimal
-        '
-        Me.ucrNudDecimal.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimal.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudDecimal, "ucrNudDecimal")
-        Me.ucrNudDecimal.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDecimal.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimal.Name = "ucrNudDecimal"
-        Me.ucrNudDecimal.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputFromTemperature
-        '
-        Me.ucrInputFromTemperature.AddQuotesIfUnrecognised = True
-        Me.ucrInputFromTemperature.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFromTemperature, "ucrInputFromTemperature")
-        Me.ucrInputFromTemperature.Name = "ucrInputFromTemperature"
-        '
-        'ucrInputToWindSpeed
-        '
-        Me.ucrInputToWindSpeed.AddQuotesIfUnrecognised = True
-        Me.ucrInputToWindSpeed.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputToWindSpeed, "ucrInputToWindSpeed")
-        Me.ucrInputToWindSpeed.Name = "ucrInputToWindSpeed"
-        '
-        'ucrInputToTemperature
-        '
-        Me.ucrInputToTemperature.AddQuotesIfUnrecognised = True
-        Me.ucrInputToTemperature.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputToTemperature, "ucrInputToTemperature")
-        Me.ucrInputToTemperature.Name = "ucrInputToTemperature"
-        '
-        'ucrPnlElements
-        '
-        resources.ApplyResources(Me.ucrPnlElements, "ucrPnlElements")
-        Me.ucrPnlElements.Name = "ucrPnlElements"
-        '
-        'ucrInputFromWindSpeed
-        '
-        Me.ucrInputFromWindSpeed.AddQuotesIfUnrecognised = True
-        Me.ucrInputFromWindSpeed.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFromWindSpeed, "ucrInputFromWindSpeed")
-        Me.ucrInputFromWindSpeed.Name = "ucrInputFromWindSpeed"
-        '
-        'lblFrom
-        '
-        resources.ApplyResources(Me.lblFrom, "lblFrom")
-        Me.lblFrom.Name = "lblFrom"
-        '
-        'ucrInputFromPrecipitation
-        '
-        Me.ucrInputFromPrecipitation.AddQuotesIfUnrecognised = True
-        Me.ucrInputFromPrecipitation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFromPrecipitation, "ucrInputFromPrecipitation")
-        Me.ucrInputFromPrecipitation.Name = "ucrInputFromPrecipitation"
-        '
-        'ucrInputToPrecipitation
-        '
-        Me.ucrInputToPrecipitation.AddQuotesIfUnrecognised = True
-        Me.ucrInputToPrecipitation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputToPrecipitation, "ucrInputToPrecipitation")
-        Me.ucrInputToPrecipitation.Name = "ucrInputToPrecipitation"
-        '
-        'rdoConversion
-        '
-        resources.ApplyResources(Me.rdoConversion, "rdoConversion")
-        Me.rdoConversion.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoConversion.FlatAppearance.BorderSize = 2
-        Me.rdoConversion.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoConversion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoConversion.Name = "rdoConversion"
-        Me.rdoConversion.UseVisualStyleBackColor = True
-        '
-        'ucrChkGroupByYear
-        '
-        Me.ucrChkGroupByYear.Checked = False
-        resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
-        Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
         '
         'ucrInputColName
         '
@@ -590,8 +458,7 @@ Partial Class dlgTransformClimatic
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.rdoConversion)
-        Me.Controls.Add(Me.grpElements)
+        Me.Controls.Add(Me.rdoCumulative)
         Me.Controls.Add(Me.rdoMultSpells)
         Me.Controls.Add(Me.ucrChkGroupByYear)
         Me.Controls.Add(Me.grpTransform)
@@ -618,8 +485,6 @@ Partial Class dlgTransformClimatic
         Me.Name = "dlgTransformClimatic"
         Me.grpTransform.ResumeLayout(False)
         Me.grpTransform.PerformLayout()
-        Me.grpElements.ResumeLayout(False)
-        Me.grpElements.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -669,20 +534,6 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrInputPosition As ucrInputComboBox
     Friend WithEvents ucrChkCircular As ucrCheck
     Friend WithEvents ucrInputCircularPosition As ucrInputComboBox
-    Friend WithEvents grpElements As GroupBox
-    Friend WithEvents lblDecimal As Label
-    Friend WithEvents ucrNudDecimal As ucrNud
-    Friend WithEvents rdoWindSpeed As RadioButton
-    Friend WithEvents ucrInputFromTemperature As ucrInputComboBox
-    Friend WithEvents rdoRain As RadioButton
-    Friend WithEvents ucrInputToWindSpeed As ucrInputComboBox
-    Friend WithEvents rdoTemperature As RadioButton
-    Friend WithEvents ucrInputToTemperature As ucrInputComboBox
-    Friend WithEvents ucrPnlElements As UcrPanel
-    Friend WithEvents ucrInputFromWindSpeed As ucrInputComboBox
-    Friend WithEvents lblFrom As Label
-    Friend WithEvents ucrInputFromPrecipitation As ucrInputComboBox
-    Friend WithEvents ucrInputToPrecipitation As ucrInputComboBox
-    Friend WithEvents lblTo As Label
-    Friend WithEvents rdoConversion As RadioButton
+    Friend WithEvents rdoCumulative As RadioButton
+    Friend WithEvents ucrInputCumulative As ucrInputComboBox
 End Class
