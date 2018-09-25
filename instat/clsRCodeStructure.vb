@@ -38,6 +38,7 @@ Public Class RCodeStructure
     Public bAssignToIsPrefix As Boolean = False
     Public bAssignToColumnWithoutNames As Boolean = False
     Public bInsertColumnBefore As Boolean = False
+    Public strAdjacentColumn As String = ""
     Public bRequireCorrectLength As Boolean = True
     Public clsParameters As New List(Of RParameter)
     Protected iNumberOfAddedParameters As Integer = 0 'This might be temporary, it enables to have a default name for parameters...
@@ -156,11 +157,24 @@ Public Class RCodeStructure
                         clsAddColumns.AddParameter("use_col_name_as_prefix", "FALSE")
                     End If
                 End If
-                If bInsertColumnBefore Then
-                    clsAddColumns.AddParameter("before", "TRUE")
+                'If bInsertColumnBefore Then
+                '    clsAddColumns.AddParameter("before", "TRUE")
+                'Else
+                '    If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                '        clsAddColumns.AddParameter("before", "FALSE")
+                '    End If
+                'End If
+                If Not String.IsNullOrEmpty(strAdjacentColumn) Then
+                    clsAddColumns.AddParameter("before", If(bInsertColumnBefore, "TRUE", "FALSE"))
+                    clsAddColumns.AddParameter("adjacent_column", strAdjacentColumn)
+                    'clsAddColumns.AddParameter("adjacent_column", Chr(34) & strAdjacentColumn & Chr(34))
                 Else
-                    If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                        clsAddColumns.AddParameter("before", "FALSE")
+                    If bInsertColumnBefore Then
+                        clsAddColumns.AddParameter("before", "TRUE")
+                    Else
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsAddColumns.AddParameter("before", "FALSE")
+                        End If
                     End If
                 End If
                 If Not bRequireCorrectLength Then
