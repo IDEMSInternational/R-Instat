@@ -159,7 +159,6 @@ Public Class dlgTransformClimatic
         ucrInputCircularPosition.SetDropDownStyleAsNonEditable()
         ucrInputCircularPosition.bAllowNonConditionValues = True
 
-
         ucrNudSumOver.SetParameter(New RParameter("width", 1))
         ucrNudSumOver.SetMinMax(1, 366)
         ucrNudSumOver.Increment = 1
@@ -215,7 +214,7 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls({ucrInputCondition}, {rdoCount, rdoSpell, rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Between")
 
         ucrPnlTransform.AddToLinkedControls(ucrInputSum, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Sum")
-        ucrPnlTransform.AddToLinkedControls(ucrNudSumOver, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=3)
+        ucrPnlTransform.AddToLinkedControls(ucrNudSumOver, {rdoMoving}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=3)
         ucrPnlTransform.AddToLinkedControls(ucrInputPosition, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Right")
         ucrPnlTransform.AddToLinkedControls(ucrInputCircularPosition, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Right")
         ucrPnlTransform.AddToLinkedControls(ucrChkCircular, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -345,7 +344,7 @@ Public Class dlgTransformClimatic
         clsRasterFuction.bToScriptAsRString = True
         clsRasterFuction.SetPackageName("raster")
         clsRasterFuction.SetRCommand("movingFun")
-        clsRasterFuction.AddParameter("n", 3, iPosition:=1)
+        clsRasterFuction.AddParameter("n", 3, bIncludeArgumentName:=False, iPosition:=1)
         clsRasterFuction.AddParameter("circular", "FALSE", iPosition:=2)
         clsRasterFuction.AddParameter("fun", "sum", iPosition:=3)
         clsRasterFuction.AddParameter("type", Chr(39) & "to" & Chr(39), iPosition:=4)
