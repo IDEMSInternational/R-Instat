@@ -109,9 +109,18 @@ Partial Class dlgOptions
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphDisplay = New instat.UcrPanel()
         Me.tbpTailoredMenus = New System.Windows.Forms.TabPage()
+        Me.ucrChkViewOptionsByContextMenu = New instat.ucrCheck()
         Me.ucrChkViewProcurementMenu = New instat.ucrCheck()
         Me.ucrChkViewClimaticMenu = New instat.ucrCheck()
-        Me.ucrChkViewOptionsByContextMenu = New instat.ucrCheck()
+        Me.tbpClimsoft = New System.Windows.Forms.TabPage()
+        Me.ucrInputUserName = New instat.ucrInputTextBox()
+        Me.ucrInputPort = New instat.ucrInputTextBox()
+        Me.ucrInputHost = New instat.ucrInputTextBox()
+        Me.ucrInputDatabaseName = New instat.ucrInputTextBox()
+        Me.lblUserName = New System.Windows.Forms.Label()
+        Me.lblPort = New System.Windows.Forms.Label()
+        Me.lblHost = New System.Windows.Forms.Label()
+        Me.lblDatabaseName = New System.Windows.Forms.Label()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -134,6 +143,7 @@ Partial Class dlgOptions
         Me.tbpWorkingDirectory.SuspendLayout()
         Me.tbpGraphDisplay.SuspendLayout()
         Me.tbpTailoredMenus.SuspendLayout()
+        Me.tbpClimsoft.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdApply
@@ -203,6 +213,7 @@ Partial Class dlgOptions
         Me.tbcOptions.Controls.Add(Me.tbpWorkingDirectory)
         Me.tbcOptions.Controls.Add(Me.tbpGraphDisplay)
         Me.tbcOptions.Controls.Add(Me.tbpTailoredMenus)
+        Me.tbcOptions.Controls.Add(Me.tbpClimsoft)
         resources.ApplyResources(Me.tbcOptions, "tbcOptions")
         Me.tbcOptions.Name = "tbcOptions"
         Me.tbcOptions.SelectedIndex = 0
@@ -651,6 +662,12 @@ Partial Class dlgOptions
         Me.tbpTailoredMenus.Name = "tbpTailoredMenus"
         Me.tbpTailoredMenus.UseVisualStyleBackColor = True
         '
+        'ucrChkViewOptionsByContextMenu
+        '
+        Me.ucrChkViewOptionsByContextMenu.Checked = False
+        resources.ApplyResources(Me.ucrChkViewOptionsByContextMenu, "ucrChkViewOptionsByContextMenu")
+        Me.ucrChkViewOptionsByContextMenu.Name = "ucrChkViewOptionsByContextMenu"
+        '
         'ucrChkViewProcurementMenu
         '
         Me.ucrChkViewProcurementMenu.Checked = False
@@ -663,11 +680,71 @@ Partial Class dlgOptions
         resources.ApplyResources(Me.ucrChkViewClimaticMenu, "ucrChkViewClimaticMenu")
         Me.ucrChkViewClimaticMenu.Name = "ucrChkViewClimaticMenu"
         '
-        'ucrChkViewOptionsByContextMenu
+        'tbpClimsoft
         '
-        Me.ucrChkViewOptionsByContextMenu.Checked = False
-        resources.ApplyResources(Me.ucrChkViewOptionsByContextMenu, "ucrChkViewOptionsByContextMenu")
-        Me.ucrChkViewOptionsByContextMenu.Name = "ucrChkViewOptionsByContextMenu"
+        Me.tbpClimsoft.Controls.Add(Me.lblUserName)
+        Me.tbpClimsoft.Controls.Add(Me.lblPort)
+        Me.tbpClimsoft.Controls.Add(Me.lblHost)
+        Me.tbpClimsoft.Controls.Add(Me.lblDatabaseName)
+        Me.tbpClimsoft.Controls.Add(Me.ucrInputUserName)
+        Me.tbpClimsoft.Controls.Add(Me.ucrInputPort)
+        Me.tbpClimsoft.Controls.Add(Me.ucrInputHost)
+        Me.tbpClimsoft.Controls.Add(Me.ucrInputDatabaseName)
+        resources.ApplyResources(Me.tbpClimsoft, "tbpClimsoft")
+        Me.tbpClimsoft.Name = "tbpClimsoft"
+        Me.tbpClimsoft.UseVisualStyleBackColor = True
+        '
+        'ucrInputUserName
+        '
+        Me.ucrInputUserName.AddQuotesIfUnrecognised = True
+        Me.ucrInputUserName.IsMultiline = False
+        Me.ucrInputUserName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputUserName, "ucrInputUserName")
+        Me.ucrInputUserName.Name = "ucrInputUserName"
+        '
+        'ucrInputPort
+        '
+        Me.ucrInputPort.AddQuotesIfUnrecognised = True
+        Me.ucrInputPort.IsMultiline = False
+        Me.ucrInputPort.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPort, "ucrInputPort")
+        Me.ucrInputPort.Name = "ucrInputPort"
+        '
+        'ucrInputHost
+        '
+        Me.ucrInputHost.AddQuotesIfUnrecognised = True
+        Me.ucrInputHost.IsMultiline = False
+        Me.ucrInputHost.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputHost, "ucrInputHost")
+        Me.ucrInputHost.Name = "ucrInputHost"
+        '
+        'ucrInputDatabaseName
+        '
+        Me.ucrInputDatabaseName.AddQuotesIfUnrecognised = True
+        Me.ucrInputDatabaseName.IsMultiline = False
+        Me.ucrInputDatabaseName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDatabaseName, "ucrInputDatabaseName")
+        Me.ucrInputDatabaseName.Name = "ucrInputDatabaseName"
+        '
+        'lblUserName
+        '
+        resources.ApplyResources(Me.lblUserName, "lblUserName")
+        Me.lblUserName.Name = "lblUserName"
+        '
+        'lblPort
+        '
+        resources.ApplyResources(Me.lblPort, "lblPort")
+        Me.lblPort.Name = "lblPort"
+        '
+        'lblHost
+        '
+        resources.ApplyResources(Me.lblHost, "lblHost")
+        Me.lblHost.Name = "lblHost"
+        '
+        'lblDatabaseName
+        '
+        resources.ApplyResources(Me.lblDatabaseName, "lblDatabaseName")
+        Me.lblDatabaseName.Name = "lblDatabaseName"
         '
         'dlgOptions
         '
@@ -719,6 +796,8 @@ Partial Class dlgOptions
         Me.tbpGraphDisplay.ResumeLayout(False)
         Me.tbpGraphDisplay.PerformLayout()
         Me.tbpTailoredMenus.ResumeLayout(False)
+        Me.tbpClimsoft.ResumeLayout(False)
+        Me.tbpClimsoft.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -795,4 +874,13 @@ Partial Class dlgOptions
     Friend WithEvents ucrChkViewProcurementMenu As ucrCheck
     Friend WithEvents ucrChkViewClimaticMenu As ucrCheck
     Friend WithEvents ucrChkViewOptionsByContextMenu As ucrCheck
+    Friend WithEvents tbpClimsoft As TabPage
+    Friend WithEvents ucrInputUserName As ucrInputTextBox
+    Friend WithEvents ucrInputPort As ucrInputTextBox
+    Friend WithEvents ucrInputHost As ucrInputTextBox
+    Friend WithEvents ucrInputDatabaseName As ucrInputTextBox
+    Friend WithEvents lblUserName As Label
+    Friend WithEvents lblPort As Label
+    Friend WithEvents lblHost As Label
+    Friend WithEvents lblDatabaseName As Label
 End Class
