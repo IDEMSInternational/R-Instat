@@ -44,15 +44,18 @@ Public Class dlgPICSARainfall
 
     Private clsMeanFunction As New RFunction
     Private clsMedianFunction As New RFunction
-    Private clsTercilesFunction As New RFunction
+    Private clsLowerTercileFunction As New RFunction
+    Private clsUpperTercileFunction As New RFunction
 
     Private clsGeomHlineMean As New RFunction
     Private clsGeomHlineMedian As New RFunction
-    Private clsGeomHlineTerciles As New RFunction
+    Private clsGeomHlineLowerTercile As New RFunction
+    Private clsGeomHlineUpperTercile As New RFunction
 
     Private clsGeomHlineAesMean As New RFunction
     Private clsGeomHlineAesMedian As New RFunction
-    Private clsGeomHlineAesTerciles As New RFunction
+    Private clsGeomHlineAesLowerTercile As New RFunction
+    Private clsGeomHlineAesUpperTercile As New RFunction
 
     Private strCalcColumn As String
 
@@ -120,17 +123,33 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsPanelBackgroundElementRect As New RFunction
+        Dim clsXElementLabels As New RFunction
+        Dim clsPanelGridMajorElementLine As New RFunction
+        Dim clsPanelGridMinorElementLine As New RFunction
+        Dim clsPanelBorderElementRect As New RFunction
+        Dim clsPlotElementTitle As New RFunction
+        Dim clsPlotElementSubTitle As New RFunction
+        Dim clsPlotElementCaption As New RFunction
+
         clsRggplotFunction = New RFunction
         clsRgeomlineplotFunction = New RFunction
         clsRaesFunction = New RFunction
         clsBaseOperator = New ROperator
         clsFactorLevels = New RFunction
 
-        Dim clsPanelBackgroundElementRect As New RFunction
-        Dim clsXElementLabels As New RFunction
-        Dim clsPanelGridMajorElementLine As New RFunction
-        Dim clsPanelGridMinorElementLine As New RFunction
-        Dim clsPanelBorderElementRect As New RFunction
+        clsGeomHlineMean = New RFunction
+        clsGeomHlineAesMean = New RFunction
+        clsMeanFunction = New RFunction
+        clsGeomHlineMedian = New RFunction
+        clsGeomHlineAesMedian = New RFunction
+        clsMedianFunction = New RFunction
+        clsGeomHlineLowerTercile = New RFunction
+        clsGeomHlineAesLowerTercile = New RFunction
+        clsLowerTercileFunction = New RFunction
+        clsGeomHlineUpperTercile = New RFunction
+        clsGeomHlineAesUpperTercile = New RFunction
+        clsUpperTercileFunction = New RFunction
 
         ucrPICSARainfallSelector.Reset()
         ucrPICSARainfallSelector.SetGgplotFunction(clsBaseOperator)
@@ -156,38 +175,55 @@ Public Class dlgPICSARainfall
         clsRgeomlineplotFunction.AddParameter("size", "0.8")
         clsBaseOperator.AddParameter(clsPointsParam)
 
-        clsMeanFunction = New RFunction
-        clsMeanFunction.SetRCommand("mean")
-
-        clsMedianFunction = New RFunction
-        clsMedianFunction.SetRCommand("median")
-
-        clsTercilesFunction = New RFunction
-        clsTercilesFunction.SetRCommand("")
-
-        clsGeomHlineMean = New RFunction
+        'Mean Line
         clsGeomHlineMean.SetPackageName("ggplot2")
         clsGeomHlineMean.SetRCommand("geom_hline")
+        clsGeomHlineMean.AddParameter("mapping", clsRFunctionParameter:=clsGeomHlineAesMean, iPosition:=0)
+        clsGeomHlineMean.AddParameter("size", "1.5", iPosition:=1)
 
-        clsGeomHlineAesMean = New RFunction
         clsGeomHlineAesMean.SetPackageName("ggplot2")
         clsGeomHlineAesMean.SetRCommand("aes")
+        clsGeomHlineAesMean.AddParameter("yintercept", clsRFunctionParameter:=clsMeanFunction)
 
-        clsGeomHlineMedian = New RFunction
+        clsMeanFunction.SetRCommand("mean")
+
+        'Median Line
         clsGeomHlineMedian.SetPackageName("ggplot2")
         clsGeomHlineMedian.SetRCommand("geom_hline")
+        clsGeomHlineMedian.AddParameter("mapping", clsRFunctionParameter:=clsGeomHlineAesMedian, iPosition:=0)
+        clsGeomHlineMedian.AddParameter("size", "1.5", iPosition:=1)
 
-        clsGeomHlineAesMedian = New RFunction
         clsGeomHlineAesMedian.SetPackageName("ggplot2")
         clsGeomHlineAesMedian.SetRCommand("aes")
+        clsGeomHlineAesMedian.AddParameter("yintercept", clsRFunctionParameter:=clsMedianFunction)
 
-        clsGeomHlineTerciles = New RFunction
-        clsGeomHlineTerciles.SetPackageName("ggplot2")
-        clsGeomHlineTerciles.SetRCommand("geom_hline")
+        clsMedianFunction.SetRCommand("median")
 
-        clsGeomHlineAesTerciles = New RFunction
-        clsGeomHlineAesTerciles.SetPackageName("ggplot2")
-        clsGeomHlineAesTerciles.SetRCommand("aes")
+        'Lower Tercile Line
+        clsGeomHlineLowerTercile.SetPackageName("ggplot2")
+        clsGeomHlineLowerTercile.SetRCommand("geom_hline")
+        clsGeomHlineLowerTercile.AddParameter("mapping", clsRFunctionParameter:=clsGeomHlineAesLowerTercile, iPosition:=0)
+        clsGeomHlineLowerTercile.AddParameter("size", "1.5", iPosition:=1)
+
+        clsGeomHlineAesLowerTercile.SetPackageName("ggplot2")
+        clsGeomHlineAesLowerTercile.SetRCommand("aes")
+        clsGeomHlineAesLowerTercile.AddParameter("yintercept", clsRFunctionParameter:=clsLowerTercileFunction)
+
+        clsLowerTercileFunction.SetRCommand("quantile")
+        clsLowerTercileFunction.AddParameter("probs", "1/3")
+
+        'Upper Tercile Line
+        clsGeomHlineUpperTercile.SetPackageName("ggplot2")
+        clsGeomHlineUpperTercile.SetRCommand("geom_hline")
+        clsGeomHlineUpperTercile.AddParameter("mapping", clsRFunctionParameter:=clsGeomHlineAesUpperTercile, iPosition:=0)
+        clsGeomHlineUpperTercile.AddParameter("size", "1.5", iPosition:=1)
+
+        clsGeomHlineAesUpperTercile.SetPackageName("ggplot2")
+        clsGeomHlineAesUpperTercile.SetRCommand("aes")
+        clsGeomHlineAesUpperTercile.AddParameter("yintercept", clsRFunctionParameter:=clsUpperTercileFunction)
+
+        clsUpperTercileFunction.SetRCommand("quantile")
+        clsUpperTercileFunction.AddParameter("probs", "2/3")
 
         clsXLabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYLabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -229,6 +265,21 @@ Public Class dlgPICSARainfall
         If dctThemeFunctions.TryGetValue("axis.text.x", clsXElementLabels) Then
             clsXElementLabels.AddParameter("angle", "90")
             clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsXElementLabels)
+        End If
+
+        If dctThemeFunctions.TryGetValue("title", clsPlotElementTitle) Then
+            clsPlotElementTitle.AddParameter("size", 20)
+            clsThemeFunction.AddParameter("title", clsRFunctionParameter:=clsPlotElementTitle)
+        End If
+
+        If dctThemeFunctions.TryGetValue("sub.title", clsPlotElementSubTitle) Then
+            clsPlotElementSubTitle.AddParameter("size", 15)
+            clsThemeFunction.AddParameter("sub.title", clsRFunctionParameter:=clsPlotElementSubTitle)
+        End If
+
+        If dctThemeFunctions.TryGetValue("caption", clsPlotElementCaption) Then
+            clsPlotElementCaption.AddParameter("size", 8)
+            clsThemeFunction.AddParameter("caption", clsRFunctionParameter:=clsPlotElementCaption)
         End If
 
         clsFactorLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
@@ -279,7 +330,7 @@ Public Class dlgPICSARainfall
 
     'add more functions 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
-        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsnewGeomhlineMean:=clsGeomHlineMean, clsnewGeomhlineMedian:=clsGeomHlineMedian, clsnewGeomhlineTerciles:=clsGeomHlineTerciles, clsNewGeomHlineAesMean:=clsGeomHlineAesMean, clsNewGeomHlineAesMedian:=clsGeomHlineAesMedian, clsNewGeomHlineAesTerciles:=clsGeomHlineAesTerciles, clsNewMeanFunc:=clsMeanFunction, clsNewMedianFunc:=clsMedianFunction, bReset:=bResetSubdialog)
+        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -327,8 +378,12 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub ucrVariablesAsFactorForPicsa_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlContentsChanged
+        'TODO should be done automatically though linking
         strCalcColumn = ucrVariablesAsFactorForPicsa.GetVariableNames(bWithQuotes:=False)
-        sdgPICSARainfallGraph.SetComputationValue(strCalcColumn)
+        clsMeanFunction.AddParameter("x", strCalcColumn, iPosition:=0)
+        clsMedianFunction.AddParameter("x", strCalcColumn, iPosition:=0)
+        clsLowerTercileFunction.AddParameter("x", strCalcColumn, iPosition:=0)
+        clsUpperTercileFunction.AddParameter("x", strCalcColumn, iPosition:=0)
     End Sub
 
     Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorOptionalReceiver.ControlValueChanged
