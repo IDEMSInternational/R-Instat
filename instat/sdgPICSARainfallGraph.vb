@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class sdgPICSARainfallGraph
     Private bControlsInitialised As Boolean = False
@@ -42,20 +41,10 @@ Public Class sdgPICSARainfallGraph
     Private clsPanelBorderElementRect As New RFunction
     Private dctLabelForDays As New Dictionary(Of String, RFunction)
 
-    Private clsMeanFunction As New RFunction
-    Private clsMedianFunction As New RFunction
-    Private clsTercilesFunction As New RFunction
     Private clsGeomHlineMean As New RFunction
     Private clsGeomHlineMedian As New RFunction
-    Private clsGeomHlineTerciles As New RFunction
-
-    Private clsGeomHlineAesMean As New RFunction
-    Private clsGeomHlineAesMedian As New RFunction
-    Private clsGeomHlineAesTerciles As New RFunction
-    Private strColumn As String
-
-    'geom_hline(mean(rain)
-
+    Private clsGeomHlineLowerTercile As New RFunction
+    Private clsGeomHlineUpperTercile As New RFunction
 
     Private Sub sdgPICSARainfallGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -91,39 +80,23 @@ Public Class sdgPICSARainfallGraph
         ucrInputXAxisTitle.SetParameter(New RParameter("label"))
         ucrInputYAxisTitle.SetParameter(New RParameter("label"))
 
-        UcrChkTitle.SetText("Add Graph Title")
-        UcrChkTitle.SetParameter(New RParameter("title"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrInputGraphTitle.SetParameter(New RParameter("title"))
 
-        UcrChkSubTitle.SetText("Add Sub Title")
-        UcrChkSubTitle.SetParameter(New RParameter("subtitle"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrInputGraphSubTitle.SetParameter(New RParameter("subtitle"))
 
-        UcrChkCaption.SetText("Add Caption")
-        UcrChkCaption.SetParameter(New RParameter("caption"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrInputGraphcCaption.SetParameter(New RParameter("caption"))
 
-        UcrChkTitle.AddToLinkedControls(ucrInputGraphTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        UcrChkSubTitle.AddToLinkedControls(ucrInputGraphSubTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        UcrChkCaption.AddToLinkedControls(ucrInputGraphcCaption, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudTitleSize.SetParameter(New RParameter("size"))
+        ucrNudTitleSize.Increment = 0.1
+        ucrNudTitleSize.Minimum = 0
 
-        UcrChkTitleSize.SetText("Size")
-        UcrChkTitleSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrNudTitleSize.SetParameter(New RParameter("size"))
-        UcrNudTitleSize.Increment = 0.1
-        UcrNudTitleSize.Minimum = 0
+        ucrNudSubTitleSize.SetParameter(New RParameter("size"))
+        ucrNudSubTitleSize.Increment = 0.1
+        ucrNudSubTitleSize.Minimum = 0
 
-        UcrChkSubTitleSize.SetText("Size")
-        UcrChkSubTitleSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrNudSubTitleSize.SetParameter(New RParameter("size"))
-        UcrNudSubTitleSize.Increment = 0.1
-        UcrNudSubTitleSize.Minimum = 0
-
-        ucrChkCaptionSize.SetText("Size")
-        ucrChkCaptionSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrNudCaptionSize.SetParameter(New RParameter("size"))
-        UcrNudCaptionSize.Increment = 0.1
-        UcrNudCaptionSize.Minimum = 0
+        ucrNudCaptionSize.SetParameter(New RParameter("size"))
+        ucrNudCaptionSize.Increment = 0.1
+        ucrNudCaptionSize.Minimum = 0
 
         UcrChkXAxisTitleSzie.SetText("Size")
         UcrChkXAxisTitleSzie.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
@@ -137,9 +110,6 @@ Public Class sdgPICSARainfallGraph
         UcrNudYAxisTitleSzie.Increment = 0.1
         UcrNudYAxisTitleSzie.Minimum = 0
 
-        UcrChkTitleSize.AddToLinkedControls(UcrNudTitleSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        UcrChkSubTitleSize.AddToLinkedControls(UcrNudSubTitleSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkCaptionSize.AddToLinkedControls(UcrNudCaptionSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         UcrChkXAxisTitleSzie.AddToLinkedControls(UcrNudXAxisTitleSzie, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         UcrChkYAxisTitleSzie.AddToLinkedControls(UcrNudYAxisTitleSzie, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -318,28 +288,35 @@ Public Class sdgPICSARainfallGraph
         UcrChkBorderSize.AddToLinkedControls(UcrNudBorderSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
 
-        ' Line tab 
-        ucrChkAddMean.SetText("Add Mean")
-        ucrChkAddMean.SetParameter(New RParameter("x"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ' Line tab
+        ' Mean Line
+        ucrChkAddMean.SetText("Add Mean Line")
+        ucrChkAddMean.AddParameterPresentCondition(True, "hlinemean", True)
+        ucrChkAddMean.AddParameterPresentCondition(False, "hlinemean", False)
+        ucrChkAddMean.AddToLinkedControls(ucrChkAddMeanLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        Dim clsMeanFunc As New RFunction
-        Dim clsMeanpParam As New RParameter
-        ucrChkAddMedian.SetText("Add Median")
+        ucrChkAddMeanLabel.SetText("Include Label")
 
-        clsMeanFunc.SetRCommand("mean")
-        clsMeanpParam.SetArgumentName("mean")
-        clsMeanpParam.SetArgument(clsMeanFunc)
-        ucrChkAddMedian.SetParameter(clsMeanpParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ' Median Line
+        ucrChkAddMedian.SetText("Add Median Line")
+        ucrChkAddMedian.AddParameterPresentCondition(True, "hlinemedian", True)
+        ucrChkAddMedian.AddParameterPresentCondition(False, "hlinemedian", False)
+        ucrChkAddMedian.AddToLinkedControls(ucrChkAddMedianLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrChkAddMedianLabel.SetText("Include Label")
+
+        ' Tercile Lines
         ucrChkAddTerciles.SetText("Add Terciles")
-        ucrChkAddMeanLabel.SetText("Add Mean Label")
-        ucrChkAddMedianLabel.SetText("Add Median Label")
-        ucrAddTercilesLabel.SetText("Add Terciles Label")
+        ucrChkAddTerciles.AddParameterPresentCondition(True, "hlinelowertercile", True)
+        ucrChkAddTerciles.AddParameterPresentCondition(False, "hlinelowertercile", False)
+        ucrChkAddTerciles.AddToLinkedControls(ucrAddTercilesLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrAddTercilesLabel.SetText("Include Labels")
 
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsnewGeomhlineMean As RFunction = Nothing, Optional clsnewGeomhlineMedian As RFunction = Nothing, Optional clsnewGeomhlineTerciles As RFunction = Nothing, Optional clsNewGeomHlineAesMean As RFunction = Nothing, Optional clsNewGeomHlineAesMedian As RFunction = Nothing, Optional clsNewGeomHlineAesTerciles As RFunction = Nothing, Optional clsNewMeanFunc As RFunction = Nothing, Optional clsNewMedianFunc As RFunction = Nothing, Optional clsNewTercilesFunc As RFunction = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional bReset As Boolean = False)
         clsBaseOperator = clsNewOperator
 
         If Not bControlsInitialised Then
@@ -349,17 +326,10 @@ Public Class sdgPICSARainfallGraph
         'themes function
         clsThemeFunction = clsNewThemeFunction
 
-        clsGeomHlineMean = clsnewGeomhlineMean
-        clsGeomHlineMedian = clsnewGeomhlineMedian
-        clsGeomHlineTerciles = clsGeomHlineTerciles
-
-        clsMeanFunction = clsNewMeanFunc
-        clsMedianFunction = clsNewMedianFunc
-        clsTercilesFunction = clsNewTercilesFunc
-
-        clsGeomHlineAesMean = clsNewGeomHlineAesMean
-        clsGeomHlineAesMedian = clsNewGeomHlineAesMedian
-        clsGeomHlineAesTerciles = clsNewGeomHlineAesTerciles
+        clsGeomHlineMean = clsNewGeomhlineMean
+        clsGeomHlineMedian = clsNewGeomhlineMedian
+        clsGeomHlineLowerTercile = clsNewGeomhlineLowerTercile
+        clsGeomHlineUpperTercile = clsNewGeomhlineUpperTercile
 
         ' The position MUST be larger than the position of the theme_* argument
         ' Otherwise the choice of theme will overwrite the options selected here.
@@ -382,14 +352,13 @@ Public Class sdgPICSARainfallGraph
         dctThemeFunctions.TryGetValue("panel.border", clsPanelBorderElementRect)
 
         'Labels
-        UcrNudTitleSize.SetRCode(clsPlotElementTitle, bCloneIfNeeded:=True)
-        UcrNudSubTitleSize.SetRCode(clsPlotElementSubTitle, bCloneIfNeeded:=True)
-        UcrNudCaptionSize.SetRCode(clsPlotElementCaption, bCloneIfNeeded:=True)
+
+        ucrNudTitleSize.SetRCode(clsPlotElementTitle, bCloneIfNeeded:=True)
+        ucrNudSubTitleSize.SetRCode(clsPlotElementSubTitle, bCloneIfNeeded:=True)
+        ucrNudCaptionSize.SetRCode(clsPlotElementCaption, bCloneIfNeeded:=True)
+
         UcrNudXAxisTitleSzie.SetRCode(clsXElementTitle, bCloneIfNeeded:=True)
         UcrNudYAxisTitleSzie.SetRCode(clsYElementTitle, bCloneIfNeeded:=True)
-        UcrChkTitleSize.SetRCode(clsPlotElementTitle, bCloneIfNeeded:=True)
-        UcrChkSubTitleSize.SetRCode(clsPlotElementSubTitle, bCloneIfNeeded:=True)
-        ucrChkCaptionSize.SetRCode(clsPlotElementCaption, bCloneIfNeeded:=True)
         UcrChkXAxisTitleSzie.SetRCode(clsXElementTitle, bCloneIfNeeded:=True)
         UcrChkYAxisTitleSzie.SetRCode(clsYElementTitle, bCloneIfNeeded:=True)
 
@@ -524,10 +493,6 @@ Public Class sdgPICSARainfallGraph
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputGraphcCaption.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
 
-        UcrChkTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
-        UcrChkSubTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
-        UcrChkCaption.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
-
         ucrPnlXAxisTitle.SetRCode(clsXLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputXAxisTitle.SetRCode(clsXLabsFunction, bReset, bCloneIfNeeded:=True)
 
@@ -547,7 +512,9 @@ Public Class sdgPICSARainfallGraph
         ucrChkLabelForDays.SetRCode(clsYScaleDateFunction, bCloneIfNeeded:=True)
         ucrInputLabelForDays.SetRCode(clsYScaleDateFunction, bCloneIfNeeded:=True)
 
-        ucrChkAddMedian.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
+        ucrChkAddMean.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkAddMedian.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkAddTerciles.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         bRCodeSet = True
         AddRemoveTheme()
@@ -563,35 +530,23 @@ Public Class sdgPICSARainfallGraph
     Private Sub AddRemoveHline()
         If ucrChkAddMean.Checked Then
             clsBaseOperator.AddParameter("hlinemean", clsRFunctionParameter:=clsGeomHlineMean, iPosition:=20)
-            clsGeomHlineMean.AddParameter("aes", clsRFunctionParameter:=clsGeomHlineAesMean, bIncludeArgumentName:=False)
-            clsGeomHlineAesMean.AddParameter("yintercept", clsRFunctionParameter:=clsMeanFunction)
-            clsGeomHlineAesMean.AddParameter("size", "1.5")
-            clsMeanFunction.AddParameter("column", strColumn, bIncludeArgumentName:=False)
         Else
             clsBaseOperator.RemoveParameterByName("hlinemean")
         End If
 
         If ucrChkAddMedian.Checked Then
             clsBaseOperator.AddParameter("hlinemedian", clsRFunctionParameter:=clsGeomHlineMedian, iPosition:=21)
-            clsGeomHlineMedian.AddParameter("aes", clsRFunctionParameter:=clsGeomHlineAesMedian, bIncludeArgumentName:=False)
-            clsGeomHlineAesMedian.AddParameter("yintercept", clsRFunctionParameter:=clsMedianFunction)
-            clsMedianFunction.AddParameter("column", strColumn, bIncludeArgumentName:=False)
         Else
             clsBaseOperator.RemoveParameterByName("hlinemedian")
         End If
 
         If ucrChkAddTerciles.Checked Then
-            clsBaseOperator.AddParameter("hlineterciles", clsRFunctionParameter:=clsGeomHlineTerciles, iPosition:=22)
-            clsGeomHlineTerciles.AddParameter("aes", clsRFunctionParameter:=clsGeomHlineAesTerciles, bIncludeArgumentName:=False)
-            clsGeomHlineAesTerciles.AddParameter("yintercept", clsRFunctionParameter:=clsTercilesFunction)
-            clsTercilesFunction.AddParameter("column", strColumn, bIncludeArgumentName:=False)
+            clsBaseOperator.AddParameter("hlinelowertercile", clsRFunctionParameter:=clsGeomHlineLowerTercile, iPosition:=22)
+            clsBaseOperator.AddParameter("hlineuppertercile", clsRFunctionParameter:=clsGeomHlineUpperTercile, iPosition:=23)
         Else
-            clsBaseOperator.RemoveParameterByName("hlineterciles")
+            clsBaseOperator.RemoveParameterByName("hlinelowertercile")
+            clsBaseOperator.RemoveParameterByName("hlineuppertercile")
         End If
-    End Sub
-
-    Public Sub SetComputationValue(strNewColumn As String)
-        strColumn = strNewColumn
     End Sub
 
     Private Sub ucrChkAddMean_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddMean.ControlValueChanged, ucrChkAddTerciles.ControlValueChanged, ucrChkAddMedian.ControlValueChanged
@@ -703,7 +658,7 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemoveGraphTitleSize()
-        If (UcrChkTitleSize.Checked AndAlso UcrNudTitleSize.GetText <> "") Then
+        If ucrNudTitleSize.GetText <> "" Then
             clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementTitle)
         Else
             clsThemeFunction.RemoveParameterByName("plot.title")
@@ -712,7 +667,7 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemoveGraphSubTitleSize()
-        If (UcrChkSubTitleSize.Checked AndAlso UcrNudSubTitleSize.GetText <> "") Then
+        If ucrNudSubTitleSize.GetText <> "" Then
             clsThemeFunction.AddParameter("plot.subtitle", clsRFunctionParameter:=clsPlotElementSubTitle)
         Else
             clsThemeFunction.RemoveParameterByName("plot.subtitle")
@@ -721,7 +676,7 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemoveGraphCaptionSize()
-        If (ucrChkCaptionSize.Checked AndAlso UcrNudCaptionSize.GetText <> "") Then
+        If ucrNudCaptionSize.GetText <> "" Then
             clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaption)
         Else
             clsThemeFunction.RemoveParameterByName("plot.caption")
@@ -813,15 +768,15 @@ Public Class sdgPICSARainfallGraph
         AddRemovePanelGridMinor()
     End Sub
 
-    Private Sub UcrChkTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrChkTitleSize.ControlValueChanged
+    Private Sub UcrChkTitleSize_ControlValueChanged(ucrChangedControl As ucrCore)
         AddRemoveGraphTitleSize()
     End Sub
 
-    Private Sub UcrChkSubTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrChkSubTitleSize.ControlValueChanged
+    Private Sub UcrChkSubTitleSize_ControlValueChanged(ucrChangedControl As ucrCore)
         AddRemoveGraphSubTitleSize()
     End Sub
 
-    Private Sub UcrChkCaptionSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCaptionSize.ControlValueChanged
+    Private Sub UcrChkCaptionSize_ControlValueChanged(ucrChangedControl As ucrCore)
         AddRemoveGraphCaptionSize()
     End Sub
 

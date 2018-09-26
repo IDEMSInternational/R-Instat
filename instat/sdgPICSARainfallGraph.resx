@@ -696,193 +696,247 @@
   <data name="&gt;&gt;grpAxes.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="UcrChkCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 79</value>
+  <data name="lblCaptionSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="UcrChkCaption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="lblCaptionSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="UcrChkCaption.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
+  <data name="lblCaptionSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>360, 83</value>
   </data>
-  <data name="&gt;&gt;UcrChkCaption.Name" xml:space="preserve">
-    <value>UcrChkCaption</value>
+  <data name="lblCaptionSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 13</value>
   </data>
-  <data name="&gt;&gt;UcrChkCaption.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="lblCaptionSize.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
   </data>
-  <data name="&gt;&gt;UcrChkCaption.Parent" xml:space="preserve">
+  <data name="lblCaptionSize.Text" xml:space="preserve">
+    <value>Caption Size:</value>
+  </data>
+  <data name="&gt;&gt;lblCaptionSize.Name" xml:space="preserve">
+    <value>lblCaptionSize</value>
+  </data>
+  <data name="&gt;&gt;lblCaptionSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCaptionSize.Parent" xml:space="preserve">
     <value>grpGraphTitles</value>
   </data>
-  <data name="&gt;&gt;UcrChkCaption.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblCaptionSize.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="UcrChkSubTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 48</value>
+  <data name="lblSubTitleSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="UcrChkSubTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="lblSubTitleSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="UcrChkSubTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+  <data name="lblSubTitleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>360, 53</value>
   </data>
-  <data name="&gt;&gt;UcrChkSubTitle.Name" xml:space="preserve">
-    <value>UcrChkSubTitle</value>
+  <data name="lblSubTitleSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
   </data>
-  <data name="&gt;&gt;UcrChkSubTitle.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="lblSubTitleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
   </data>
-  <data name="&gt;&gt;UcrChkSubTitle.Parent" xml:space="preserve">
+  <data name="lblSubTitleSize.Text" xml:space="preserve">
+    <value>Sub Title Size:</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitleSize.Name" xml:space="preserve">
+    <value>lblSubTitleSize</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitleSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitleSize.Parent" xml:space="preserve">
     <value>grpGraphTitles</value>
   </data>
-  <data name="&gt;&gt;UcrChkSubTitle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblSubTitleSize.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="UcrChkTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
+  <data name="lblTitleSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="UcrChkTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="lblTitleSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="UcrChkTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
+  <data name="lblTitleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>361, 23</value>
   </data>
-  <data name="&gt;&gt;UcrChkTitle.Name" xml:space="preserve">
-    <value>UcrChkTitle</value>
+  <data name="lblTitleSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
   </data>
-  <data name="&gt;&gt;UcrChkTitle.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="lblTitleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
   </data>
-  <data name="&gt;&gt;UcrChkTitle.Parent" xml:space="preserve">
+  <data name="lblTitleSize.Text" xml:space="preserve">
+    <value>Title Size:</value>
+  </data>
+  <data name="&gt;&gt;lblTitleSize.Name" xml:space="preserve">
+    <value>lblTitleSize</value>
+  </data>
+  <data name="&gt;&gt;lblTitleSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTitleSize.Parent" xml:space="preserve">
     <value>grpGraphTitles</value>
   </data>
-  <data name="&gt;&gt;UcrChkTitle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblTitleSize.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="UcrNudCaptionSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>448, 79</value>
+  <data name="lblCaption.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="UcrNudCaptionSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+  <data name="lblCaption.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="UcrNudCaptionSize.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+  <data name="lblCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 83</value>
   </data>
-  <data name="&gt;&gt;UcrNudCaptionSize.Name" xml:space="preserve">
-    <value>UcrNudCaptionSize</value>
+  <data name="lblCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 13</value>
   </data>
-  <data name="&gt;&gt;UcrNudCaptionSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="lblCaption.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
   </data>
-  <data name="&gt;&gt;UcrNudCaptionSize.Parent" xml:space="preserve">
+  <data name="lblCaption.Text" xml:space="preserve">
+    <value>Graph Caption:</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.Name" xml:space="preserve">
+    <value>lblCaption</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.Parent" xml:space="preserve">
     <value>grpGraphTitles</value>
   </data>
-  <data name="&gt;&gt;UcrNudCaptionSize.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblCaption.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="UcrNudSubTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>448, 48</value>
+  <data name="lblSubTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="UcrNudSubTitleSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+  <data name="lblSubTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="UcrNudSubTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+  <data name="lblSubTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 53</value>
   </data>
-  <data name="&gt;&gt;UcrNudSubTitleSize.Name" xml:space="preserve">
-    <value>UcrNudSubTitleSize</value>
+  <data name="lblSubTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 13</value>
   </data>
-  <data name="&gt;&gt;UcrNudSubTitleSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="lblSubTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
   </data>
-  <data name="&gt;&gt;UcrNudSubTitleSize.Parent" xml:space="preserve">
+  <data name="lblSubTitle.Text" xml:space="preserve">
+    <value>Graph Sub Title:</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.Name" xml:space="preserve">
+    <value>lblSubTitle</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.Parent" xml:space="preserve">
     <value>grpGraphTitles</value>
   </data>
-  <data name="&gt;&gt;UcrNudSubTitleSize.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblSubTitle.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="UcrNudTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>448, 19</value>
+  <data name="lblTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="UcrNudTitleSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+  <data name="lblTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="UcrNudTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+  <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 23</value>
   </data>
-  <data name="&gt;&gt;UcrNudTitleSize.Name" xml:space="preserve">
-    <value>UcrNudTitleSize</value>
+  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
   </data>
-  <data name="&gt;&gt;UcrNudTitleSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
   </data>
-  <data name="&gt;&gt;UcrNudTitleSize.Parent" xml:space="preserve">
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>Graph Title:</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
+    <value>lblTitle</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Parent" xml:space="preserve">
     <value>grpGraphTitles</value>
   </data>
-  <data name="&gt;&gt;UcrNudTitleSize.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="ucrChkCaptionSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 79</value>
+  <data name="ucrNudCaptionSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>448, 78</value>
   </data>
-  <data name="ucrChkCaptionSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="ucrNudCaptionSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
   </data>
-  <data name="ucrChkCaptionSize.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+  <data name="ucrNudCaptionSize.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
   </data>
-  <data name="&gt;&gt;ucrChkCaptionSize.Name" xml:space="preserve">
-    <value>ucrChkCaptionSize</value>
+  <data name="&gt;&gt;ucrNudCaptionSize.Name" xml:space="preserve">
+    <value>ucrNudCaptionSize</value>
   </data>
-  <data name="&gt;&gt;ucrChkCaptionSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrNudCaptionSize.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkCaptionSize.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudCaptionSize.Parent" xml:space="preserve">
     <value>grpGraphTitles</value>
   </data>
-  <data name="&gt;&gt;ucrChkCaptionSize.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudCaptionSize.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="UcrChkSubTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 48</value>
+  <data name="ucrNudSubTitleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>448, 48</value>
   </data>
-  <data name="UcrChkSubTitleSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="ucrNudSubTitleSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
   </data>
-  <data name="UcrChkSubTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+  <data name="ucrNudSubTitleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
   </data>
-  <data name="&gt;&gt;UcrChkSubTitleSize.Name" xml:space="preserve">
-    <value>UcrChkSubTitleSize</value>
+  <data name="&gt;&gt;ucrNudSubTitleSize.Name" xml:space="preserve">
+    <value>ucrNudSubTitleSize</value>
   </data>
-  <data name="&gt;&gt;UcrChkSubTitleSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrNudSubTitleSize.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrChkSubTitleSize.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudSubTitleSize.Parent" xml:space="preserve">
     <value>grpGraphTitles</value>
   </data>
-  <data name="&gt;&gt;UcrChkSubTitleSize.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudSubTitleSize.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="UcrChkTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 19</value>
+  <data name="ucrNudTitleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>448, 18</value>
   </data>
-  <data name="UcrChkTitleSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="ucrNudTitleSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
   </data>
-  <data name="UcrChkTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+  <data name="ucrNudTitleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
-  <data name="&gt;&gt;UcrChkTitleSize.Name" xml:space="preserve">
-    <value>UcrChkTitleSize</value>
+  <data name="&gt;&gt;ucrNudTitleSize.Name" xml:space="preserve">
+    <value>ucrNudTitleSize</value>
   </data>
-  <data name="&gt;&gt;UcrChkTitleSize.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrNudTitleSize.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrChkTitleSize.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudTitleSize.Parent" xml:space="preserve">
     <value>grpGraphTitles</value>
   </data>
-  <data name="&gt;&gt;UcrChkTitleSize.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudTitleSize.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="ucrInputGraphcCaption.Location" type="System.Drawing.Point, System.Drawing">
@@ -928,7 +982,7 @@
     <value>10</value>
   </data>
   <data name="ucrInputGraphSubTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 47</value>
+    <value>119, 48</value>
   </data>
   <data name="ucrInputGraphSubTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 21</value>
@@ -1453,7 +1507,7 @@
     <value>1</value>
   </data>
   <data name="ucrAddTercilesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 68</value>
+    <value>203, 67</value>
   </data>
   <data name="ucrAddTercilesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -1474,7 +1528,7 @@
     <value>0</value>
   </data>
   <data name="ucrChkAddMedianLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 42</value>
+    <value>203, 41</value>
   </data>
   <data name="ucrChkAddMedianLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -1516,7 +1570,7 @@
     <value>2</value>
   </data>
   <data name="ucrChkAddMean.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 16</value>
+    <value>15, 15</value>
   </data>
   <data name="ucrChkAddMean.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -1537,7 +1591,7 @@
     <value>3</value>
   </data>
   <data name="ucrChkAddMedian.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 68</value>
+    <value>15, 41</value>
   </data>
   <data name="ucrChkAddMedian.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -1558,7 +1612,7 @@
     <value>4</value>
   </data>
   <data name="ucrChkAddTerciles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 42</value>
+    <value>15, 67</value>
   </data>
   <data name="ucrChkAddTerciles.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -2324,9 +2378,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>589, 367</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
