@@ -303,55 +303,109 @@ Public Class ucrButtons
 
     Private Sub AddButtonInCommentTextbox()
         Dim btnMoreComment As New Button
-        'add it first
+        'add the button to the comment textbox first
         txtComment.Controls.Clear()
         txtComment.Controls.Add(btnMoreComment)
 
         'then set the  button properties
-        btnMoreComment.Text = ":::" 'temp. This will be shown as centered ... An image is preferred
+        btnMoreComment.Text = ":::" 'temp. This will be shown as centered ... An image as below commended code is preferred
         'btn.Image = Image.FromFile("C:\patowhiz\3dots.png")
         btnMoreComment.Size = New Size(25, txtComment.ClientSize.Height + 2)
         btnMoreComment.TextAlign = ContentAlignment.TopCenter
         btnMoreComment.FlatStyle = FlatStyle.Standard
         btnMoreComment.FlatAppearance.BorderSize = 0
         btnMoreComment.Cursor = Cursors.Default
-        'btn.Margin = New Padding(btn.Margin.Left, 0, 0, 0)
-        'btn.Location = New Point(txtComment.ClientSize.Width - btn.Width - 1, -1)
         btnMoreComment.Dock = DockStyle.Right
         btnMoreComment.BackColor = cmdOk.BackColor
         btnMoreComment.UseVisualStyleBackColor = True
 
-        'set the event handler
+        'set the btn event handler
         AddHandler btnMoreComment.Click, Sub()
-                                             AddHandler sdgComment.evtLostFocus, Sub()
-                                                                                     txtComment.Text = sdgComment.getComment
-                                                                                     txtComment.Focus()
+                                             'shows a popup that displays the example commands
+                                             Dim frmPopup As New Form
+                                             Dim txtPopupComment As New TextBox
+                                             frmPopup.ShowInTaskbar = False
+                                             frmPopup.FormBorderStyle = FormBorderStyle.None
+                                             frmPopup.Size = New Size(txtComment.Width, 120)
+                                             frmPopup.Controls.Add(txtPopupComment)
+                                             'Set the listview properties
+                                             txtPopupComment.Dock = DockStyle.Fill
+                                             txtPopupComment.Multiline = True
+                                             txtPopupComment.ScrollBars = ScrollBars.Vertical
+                                             txtPopupComment.WordWrap = False
+
+                                             txtPopupComment.Text = txtComment.Text
+
+                                             AddHandler txtPopupComment.LostFocus, Sub()
+                                                                                       txtComment.Text = txtPopupComment.Text
+                                                                                       frmPopup.Close()
+                                                                                   End Sub
+                                             AddHandler txtPopupComment.KeyDown, Sub(sender As Object, e As KeyEventArgs)
+                                                                                     If e.Control AndAlso e.KeyCode = Keys.Enter Then
+                                                                                         txtComment.Text = txtPopupComment.Text
+                                                                                         frmPopup.Close()
+                                                                                     End If
                                                                                  End Sub
 
-                                             If sdgComment.Visible Then
-                                                 sdgComment.Close()
-                                             Else
-                                                 sdgComment.setComment(txtComment.Text)
-                                                 Dim ctlpos As Point = txtComment.PointToScreen(New Point(0, 0)) 'Point.Empty is not function so use Point(0, 0)
-                                                 sdgComment.StartPosition = FormStartPosition.Manual 'set it to manual
-                                                 'if user wanted below the control. Left here for future reference
-                                                 'sdgComment.Location = New Point(ctlpos.X - 2, ctlpos.Y + txtComment.Height - 2) 'then locate its position
-                                                 sdgComment.Location = New Point(ctlpos.X - 2, ctlpos.Y - sdgComment.Height - 2) 'then locate its position
-                                                 sdgComment.Show()
-                                             End If
+                                             Dim ctlpos As Point = txtComment.PointToScreen(New Point(0, 0)) 'Point.Empty is not function so use Point(0, 0)
+                                             frmPopup.StartPosition = FormStartPosition.Manual 'set it to manual
+                                             'if user wanted below the control. Left here for future reference
+                                             'sdgComment.Location = New Point(ctlpos.X - 2, ctlpos.Y + txtComment.Height - 2) 'then locate its position
+                                             frmPopup.Location = New Point(ctlpos.X - 2, ctlpos.Y - frmPopup.Height - 2) 'set location to show the form just above the examples button
+                                             frmPopup.Show()
 
-                                         End Sub
-
-
-        AddHandler txtComment.LostFocus, Sub()
-                                             'if the internal button is not the one with focus always try to close the subdialog
-                                             If Not btnMoreComment.Focused Then
-                                                 sdgComment.Close()
-                                             End If
                                          End Sub
 
     End Sub
 
+    'TODO. This can be removed once the above method is agreed to be a better implementation. 
+    'Private Sub AddButtonInCommentTextbox()
+    '    Dim btnMoreComment As New Button
+    '    'add it first
+    '    txtComment.Controls.Clear()
+    '    txtComment.Controls.Add(btnMoreComment)
 
+    '    'then set the  button properties
+    '    btnMoreComment.Text = ":::" 'temp. This will be shown as centered ... An image as below commended code is preferred
+    '    'btn.Image = Image.FromFile("C:\patowhiz\3dots.png")
+    '    btnMoreComment.Size = New Size(25, txtComment.ClientSize.Height + 2)
+    '    btnMoreComment.TextAlign = ContentAlignment.TopCenter
+    '    btnMoreComment.FlatStyle = FlatStyle.Standard
+    '    btnMoreComment.FlatAppearance.BorderSize = 0
+    '    btnMoreComment.Cursor = Cursors.Default
+    '    btnMoreComment.Dock = DockStyle.Right
+    '    btnMoreComment.BackColor = cmdOk.BackColor
+    '    btnMoreComment.UseVisualStyleBackColor = True
+
+    '    'set the event handler
+    '    AddHandler btnMoreComment.Click, Sub()
+    '                                         AddHandler sdgComment.evtLostFocus, Sub()
+    '                                                                                 txtComment.Text = sdgComment.getComment
+    '                                                                                 txtComment.Focus()
+    '                                                                             End Sub
+
+    '                                         If sdgComment.Visible Then
+    '                                             sdgComment.Close()
+    '                                         Else
+    '                                             sdgComment.setComment(txtComment.Text)
+    '                                             Dim ctlpos As Point = txtComment.PointToScreen(New Point(0, 0)) 'Point.Empty is not function so use Point(0, 0)
+    '                                             sdgComment.StartPosition = FormStartPosition.Manual 'set it to manual
+    '                                             'if user wanted below the control. Left here for future reference
+    '                                             'sdgComment.Location = New Point(ctlpos.X - 2, ctlpos.Y + txtComment.Height - 2) 'then locate its position
+    '                                             sdgComment.Location = New Point(ctlpos.X - 2, ctlpos.Y - sdgComment.Height - 2) 'then locate its position
+    '                                             sdgComment.Show()
+    '                                         End If
+
+    '                                     End Sub
+
+
+    '    AddHandler txtComment.LostFocus, Sub()
+    '                                         'if the internal button is not the one with focus always try to close the subdialog
+    '                                         If Not btnMoreComment.Focused Then
+    '                                             sdgComment.Close()
+    '                                         End If
+    '                                     End Sub
+
+    'End Sub
 
 End Class
