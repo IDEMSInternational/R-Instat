@@ -269,6 +269,7 @@ Public Class dlgNewDataFrame
         lstView.Items.Add(New ListViewItem({"data.frame(x=1:30, y=rnorm(30,mean = 100, sd = 15), z = runif(30, min = 10, max = 30))", " "}))
         lstView.Items.Add(New ListViewItem({"data.frame( block = gl(4,3), treat = c(""C"",""A"",""B"",""B"",""C"",""A"",""A"",""B"",""C"",""A"",""C"",""B""), yield = c(74, 68, 50,62,68,57,70,56,83, 67, 67,59))", " "}))
         'lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 100, data_theme = ""the_works"")", " "}))
+        'lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 30, id, race, age, sex, hour, iq, height, died, Scoring = rnorm, Smoker = valid)", " "}))
 
         'set respective handlers
         AddHandler lstView.LostFocus, Sub()
