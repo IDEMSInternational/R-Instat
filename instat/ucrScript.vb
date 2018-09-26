@@ -33,7 +33,15 @@ Public Class ucrScript
     End Sub
 
     Private Sub cmdRun_Click(sender As Object, e As EventArgs) Handles cmdRun.Click
-        RunText(txtScript.Text)
+        RunAllText()
+    End Sub
+
+    Private Sub RunAllText()
+        If txtScript.TextLength > 0 Then
+            If MsgBox("Are you sure you want to run the entire contents of the script window?", MessageBoxButtons.YesNo, "Run All") = MsgBoxResult.Yes Then
+                RunText(txtScript.Text)
+            End If
+        End If
     End Sub
 
     Public Sub AppendText(strText As String)
@@ -203,9 +211,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuRunAllText_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click
-        If txtScript.TextLength > 0 Then
-            RunText(txtScript.Text)
-        End If
+        RunAllText()
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
