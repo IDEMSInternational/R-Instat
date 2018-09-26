@@ -61,14 +61,14 @@ Partial Class dlgTransformClimatic
         Me.lblWBCapacity = New System.Windows.Forms.Label()
         Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
         Me.rdoCumulative = New System.Windows.Forms.RadioButton()
-        Me.ucrInputCumulative = New instat.ucrInputComboBox()
         Me.ucrChkGroupByYear = New instat.ucrCheck()
+        Me.ucrInputEvaporation = New instat.ucrInputTextBox()
+        Me.ucrInputCumulative = New instat.ucrInputComboBox()
         Me.ucrInputCircularPosition = New instat.ucrInputComboBox()
         Me.ucrReceiverEvap = New instat.ucrReceiverSingle()
         Me.ucrInputPosition = New instat.ucrInputComboBox()
         Me.ucrChkCircular = New instat.ucrCheck()
         Me.ucrNudMultSpells = New instat.ucrNud()
-        Me.ucrInputEvaporation = New instat.ucrInputTextBox()
         Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.ucrInputCondition = New instat.ucrInputComboBox()
         Me.ucrInputSpellLower = New instat.ucrInputTextBox()
@@ -175,16 +175,16 @@ Partial Class dlgTransformClimatic
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.ucrReceiverEvap)
+        Me.grpTransform.Controls.Add(Me.ucrInputEvaporation)
         Me.grpTransform.Controls.Add(Me.ucrInputCumulative)
         Me.grpTransform.Controls.Add(Me.ucrInputCircularPosition)
         Me.grpTransform.Controls.Add(Me.lblPosition)
-        Me.grpTransform.Controls.Add(Me.ucrReceiverEvap)
         Me.grpTransform.Controls.Add(Me.ucrInputPosition)
         Me.grpTransform.Controls.Add(Me.ucrChkCircular)
         Me.grpTransform.Controls.Add(Me.rdoEvapVariable)
         Me.grpTransform.Controls.Add(Me.rdoEvapValue)
         Me.grpTransform.Controls.Add(Me.ucrNudMultSpells)
-        Me.grpTransform.Controls.Add(Me.ucrInputEvaporation)
         Me.grpTransform.Controls.Add(Me.lblRowsMultSpells)
         Me.grpTransform.Controls.Add(Me.ucrInputSpellUpper)
         Me.grpTransform.Controls.Add(Me.lblSumRows)
@@ -267,18 +267,26 @@ Partial Class dlgTransformClimatic
         Me.rdoCumulative.Name = "rdoCumulative"
         Me.rdoCumulative.UseVisualStyleBackColor = True
         '
+        'ucrChkGroupByYear
+        '
+        Me.ucrChkGroupByYear.Checked = False
+        resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
+        Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
+        '
+        'ucrInputEvaporation
+        '
+        Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
+        Me.ucrInputEvaporation.IsMultiline = False
+        Me.ucrInputEvaporation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputEvaporation, "ucrInputEvaporation")
+        Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
+        '
         'ucrInputCumulative
         '
         Me.ucrInputCumulative.AddQuotesIfUnrecognised = True
         Me.ucrInputCumulative.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCumulative, "ucrInputCumulative")
         Me.ucrInputCumulative.Name = "ucrInputCumulative"
-        '
-        'ucrChkGroupByYear
-        '
-        Me.ucrChkGroupByYear.Checked = False
-        resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
-        Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
         '
         'ucrInputCircularPosition
         '
@@ -318,14 +326,6 @@ Partial Class dlgTransformClimatic
         Me.ucrNudMultSpells.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMultSpells.Name = "ucrNudMultSpells"
         Me.ucrNudMultSpells.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputEvaporation
-        '
-        Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
-        Me.ucrInputEvaporation.IsMultiline = False
-        Me.ucrInputEvaporation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputEvaporation, "ucrInputEvaporation")
-        Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
         '
         'ucrInputSpellUpper
         '
