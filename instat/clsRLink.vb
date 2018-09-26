@@ -448,7 +448,7 @@ Public Class RLink
         strOutput = ""
 
         If strComment <> "" Then
-            strComment = "# " & strComment
+            strComment = GetFormattedComment(strComment)
             strScriptWithComment = strComment & Environment.NewLine & strScript
         Else
             strScriptWithComment = strScript
@@ -1445,4 +1445,21 @@ Public Class RLink
         clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
         RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bSeparateThread:=False)
     End Sub
+
+    'construct and format the comment
+    Public Function GetFormattedComment(strComment As String) As String
+        Dim strReconstructedComment As String = ""
+        Dim arrCommentParts As String()
+        If strComment.Length > 0 Then
+            arrCommentParts = strComment.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+            For Each strPart As String In arrCommentParts
+                If strReconstructedComment = "" Then
+                    strReconstructedComment = "# " & strPart
+                Else
+                    strReconstructedComment = strReconstructedComment & Environment.NewLine & "# " & strPart
+                End If
+            Next
+        End If
+        Return strReconstructedComment
+    End Function
 End Class
