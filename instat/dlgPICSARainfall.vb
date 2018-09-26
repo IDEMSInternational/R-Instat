@@ -126,6 +126,8 @@ Public Class dlgPICSARainfall
     Private Sub SetDefaults()
         Dim clsPanelBackgroundElementRect As New RFunction
         Dim clsXElementLabels As New RFunction
+        Dim clsXElementTitle As New RFunction
+        Dim clsYElementTitle As New RFunction
         Dim clsPanelGridMajorElementLine As New RFunction
         Dim clsPanelGridMinorElementLine As New RFunction
         Dim clsPanelBorderElementRect As New RFunction
@@ -266,6 +268,16 @@ Public Class dlgPICSARainfall
         If dctThemeFunctions.TryGetValue("axis.text.x", clsXElementLabels) Then
             clsXElementLabels.AddParameter("angle", "90")
             clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsXElementLabels)
+        End If
+
+        If dctThemeFunctions.TryGetValue("axis.title.x", clsXElementTitle) Then
+            clsXElementTitle.AddParameter("size", 14)
+            clsThemeFunction.AddParameter("axis.title.x", clsRFunctionParameter:=clsXElementTitle)
+        End If
+
+        If dctThemeFunctions.TryGetValue("axis.title.y", clsYElementTitle) Then
+            clsYElementTitle.AddParameter("size", 14)
+            clsThemeFunction.AddParameter("axis.title.y", clsRFunctionParameter:=clsYElementTitle)
         End If
 
         If dctThemeFunctions.TryGetValue("title", clsPlotElementTitle) Then

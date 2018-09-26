@@ -300,23 +300,17 @@
   <data name="&gt;&gt;lblXInStepsOf.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="rdoAutoYAxis.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
   </data>
-  <data name="rdoAutoYAxis.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="rdoAutoYAxis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 21</value>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>grpyAxisTitle</value>
   </data>
-  <data name="rdoAutoYAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 17</value>
-  </data>
-  <data name="rdoAutoYAxis.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
-  </data>
-  <data name="rdoAutoYAxis.Text" xml:space="preserve">
-    <value>Auto </value>
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;rdoAutoYAxis.Name" xml:space="preserve">
     <value>rdoAutoYAxis</value>
@@ -328,16 +322,7 @@
     <value>grpyAxisTitle</value>
   </data>
   <data name="&gt;&gt;rdoAutoYAxis.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrInputYAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 44</value>
-  </data>
-  <data name="ucrInputYAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 21</value>
-  </data>
-  <data name="ucrInputYAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrInputYAxisTitle.Name" xml:space="preserve">
     <value>ucrInputYAxisTitle</value>
@@ -349,46 +334,7 @@
     <value>grpyAxisTitle</value>
   </data>
   <data name="&gt;&gt;ucrInputYAxisTitle.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="UcrChkYAxisTitleSzie.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 78</value>
-  </data>
-  <data name="UcrChkYAxisTitleSzie.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 20</value>
-  </data>
-  <data name="UcrChkYAxisTitleSzie.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;UcrChkYAxisTitleSzie.Name" xml:space="preserve">
-    <value>UcrChkYAxisTitleSzie</value>
-  </data>
-  <data name="&gt;&gt;UcrChkYAxisTitleSzie.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkYAxisTitleSzie.Parent" xml:space="preserve">
-    <value>grpyAxisTitle</value>
-  </data>
-  <data name="&gt;&gt;UcrChkYAxisTitleSzie.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="rdoNoYAxisTitle.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoNoYAxisTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoNoYAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 21</value>
-  </data>
-  <data name="rdoNoYAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 17</value>
-  </data>
-  <data name="rdoNoYAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
-  </data>
-  <data name="rdoNoYAxisTitle.Text" xml:space="preserve">
-    <value>No Title</value>
   </data>
   <data name="&gt;&gt;rdoNoYAxisTitle.Name" xml:space="preserve">
     <value>rdoNoYAxisTitle</value>
@@ -402,44 +348,17 @@
   <data name="&gt;&gt;rdoNoYAxisTitle.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="UcrNudYAxisTitleSzie.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 78</value>
+  <data name="&gt;&gt;ucrNudYAxisTitleSize.Name" xml:space="preserve">
+    <value>ucrNudYAxisTitleSize</value>
   </data>
-  <data name="UcrNudYAxisTitleSzie.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="UcrNudYAxisTitleSzie.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;UcrNudYAxisTitleSzie.Name" xml:space="preserve">
-    <value>UcrNudYAxisTitleSzie</value>
-  </data>
-  <data name="&gt;&gt;UcrNudYAxisTitleSzie.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudYAxisTitleSize.Type" xml:space="preserve">
     <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrNudYAxisTitleSzie.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudYAxisTitleSize.Parent" xml:space="preserve">
     <value>grpyAxisTitle</value>
   </data>
-  <data name="&gt;&gt;UcrNudYAxisTitleSzie.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudYAxisTitleSize.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="rdoSpecifyYAxisTitle.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoSpecifyYAxisTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoSpecifyYAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 21</value>
-  </data>
-  <data name="rdoSpecifyYAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 17</value>
-  </data>
-  <data name="rdoSpecifyYAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
-  </data>
-  <data name="rdoSpecifyYAxisTitle.Text" xml:space="preserve">
-    <value>Specify</value>
   </data>
   <data name="&gt;&gt;rdoSpecifyYAxisTitle.Name" xml:space="preserve">
     <value>rdoSpecifyYAxisTitle</value>
@@ -452,15 +371,6 @@
   </data>
   <data name="&gt;&gt;rdoSpecifyYAxisTitle.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="UcrPnlYAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 15</value>
-  </data>
-  <data name="UcrPnlYAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 57</value>
-  </data>
-  <data name="UcrPnlYAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
   </data>
   <data name="&gt;&gt;UcrPnlYAxisTitle.Name" xml:space="preserve">
     <value>UcrPnlYAxisTitle</value>
@@ -498,6 +408,54 @@
   <data name="&gt;&gt;grpyAxisTitle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lblXAxisTitleSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXAxisTitleSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblXAxisTitleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 82</value>
+  </data>
+  <data name="lblXAxisTitleSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblXAxisTitleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="lblXAxisTitleSize.Text" xml:space="preserve">
+    <value>Size:</value>
+  </data>
+  <data name="&gt;&gt;lblXAxisTitleSize.Name" xml:space="preserve">
+    <value>lblXAxisTitleSize</value>
+  </data>
+  <data name="&gt;&gt;lblXAxisTitleSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblXAxisTitleSize.Parent" xml:space="preserve">
+    <value>grpAxes</value>
+  </data>
+  <data name="&gt;&gt;lblXAxisTitleSize.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoAutoXAxis.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoAutoXAxis.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoAutoXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 21</value>
+  </data>
+  <data name="rdoAutoXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 17</value>
+  </data>
+  <data name="rdoAutoXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="rdoAutoXAxis.Text" xml:space="preserve">
+    <value>Auto </value>
+  </data>
   <data name="&gt;&gt;rdoAutoXAxis.Name" xml:space="preserve">
     <value>rdoAutoXAxis</value>
   </data>
@@ -508,7 +466,16 @@
     <value>grpAxes</value>
   </data>
   <data name="&gt;&gt;rdoAutoXAxis.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
+  </data>
+  <data name="ucrInputXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 44</value>
+  </data>
+  <data name="ucrInputXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 21</value>
+  </data>
+  <data name="ucrInputXAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
   </data>
   <data name="&gt;&gt;ucrInputXAxisTitle.Name" xml:space="preserve">
     <value>ucrInputXAxisTitle</value>
@@ -520,7 +487,25 @@
     <value>grpAxes</value>
   </data>
   <data name="&gt;&gt;ucrInputXAxisTitle.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="rdoNoTitleXAxisTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoNoTitleXAxisTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoNoTitleXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>142, 21</value>
+  </data>
+  <data name="rdoNoTitleXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 17</value>
+  </data>
+  <data name="rdoNoTitleXAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="rdoNoTitleXAxisTitle.Text" xml:space="preserve">
+    <value>No Title</value>
   </data>
   <data name="&gt;&gt;rdoNoTitleXAxisTitle.Name" xml:space="preserve">
     <value>rdoNoTitleXAxisTitle</value>
@@ -532,7 +517,25 @@
     <value>grpAxes</value>
   </data>
   <data name="&gt;&gt;rdoNoTitleXAxisTitle.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
+  </data>
+  <data name="rdoSpecifyXAxisTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoSpecifyXAxisTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoSpecifyXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>67, 21</value>
+  </data>
+  <data name="rdoSpecifyXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 17</value>
+  </data>
+  <data name="rdoSpecifyXAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="rdoSpecifyXAxisTitle.Text" xml:space="preserve">
+    <value>Specifiy</value>
   </data>
   <data name="&gt;&gt;rdoSpecifyXAxisTitle.Name" xml:space="preserve">
     <value>rdoSpecifyXAxisTitle</value>
@@ -544,7 +547,16 @@
     <value>grpAxes</value>
   </data>
   <data name="&gt;&gt;rdoSpecifyXAxisTitle.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
+  </data>
+  <data name="ucrPnlXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 15</value>
+  </data>
+  <data name="ucrPnlXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 57</value>
+  </data>
+  <data name="ucrPnlXAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
   </data>
   <data name="&gt;&gt;ucrPnlXAxisTitle.Name" xml:space="preserve">
     <value>ucrPnlXAxisTitle</value>
@@ -556,30 +568,27 @@
     <value>grpAxes</value>
   </data>
   <data name="&gt;&gt;ucrPnlXAxisTitle.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;UcrNudXAxisTitleSzie.Name" xml:space="preserve">
-    <value>UcrNudXAxisTitleSzie</value>
-  </data>
-  <data name="&gt;&gt;UcrNudXAxisTitleSzie.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrNudXAxisTitleSzie.Parent" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;UcrNudXAxisTitleSzie.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;UcrChkXAxisTitleSzie.Name" xml:space="preserve">
-    <value>UcrChkXAxisTitleSzie</value>
+  <data name="ucrNudXAxisTitleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>43, 79</value>
   </data>
-  <data name="&gt;&gt;UcrChkXAxisTitleSzie.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="ucrNudXAxisTitleSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
   </data>
-  <data name="&gt;&gt;UcrChkXAxisTitleSzie.Parent" xml:space="preserve">
+  <data name="ucrNudXAxisTitleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;ucrNudXAxisTitleSize.Name" xml:space="preserve">
+    <value>ucrNudXAxisTitleSize</value>
+  </data>
+  <data name="&gt;&gt;ucrNudXAxisTitleSize.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudXAxisTitleSize.Parent" xml:space="preserve">
     <value>grpAxes</value>
   </data>
-  <data name="&gt;&gt;UcrChkXAxisTitleSzie.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudXAxisTitleSize.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="grpAxes.Location" type="System.Drawing.Point, System.Drawing">
@@ -1047,178 +1056,157 @@
   <data name="&gt;&gt;tbPICSA.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdoAutoXAxis.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoAutoYAxis.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdoAutoXAxis.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoAutoYAxis.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdoAutoXAxis.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdoAutoYAxis.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 21</value>
   </data>
-  <data name="rdoAutoXAxis.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdoAutoYAxis.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 17</value>
   </data>
-  <data name="rdoAutoXAxis.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
+  <data name="rdoAutoYAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
   </data>
-  <data name="rdoAutoXAxis.Text" xml:space="preserve">
+  <data name="rdoAutoYAxis.Text" xml:space="preserve">
     <value>Auto </value>
   </data>
-  <data name="&gt;&gt;rdoAutoXAxis.Name" xml:space="preserve">
-    <value>rdoAutoXAxis</value>
+  <data name="&gt;&gt;rdoAutoYAxis.Name" xml:space="preserve">
+    <value>rdoAutoYAxis</value>
   </data>
-  <data name="&gt;&gt;rdoAutoXAxis.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoAutoYAxis.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoAutoXAxis.Parent" xml:space="preserve">
-    <value>grpAxes</value>
+  <data name="&gt;&gt;rdoAutoYAxis.Parent" xml:space="preserve">
+    <value>grpyAxisTitle</value>
   </data>
-  <data name="&gt;&gt;rdoAutoXAxis.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrInputXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 44</value>
-  </data>
-  <data name="ucrInputXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 21</value>
-  </data>
-  <data name="ucrInputXAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXAxisTitle.Name" xml:space="preserve">
-    <value>ucrInputXAxisTitle</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXAxisTitle.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXAxisTitle.Parent" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;ucrInputXAxisTitle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoAutoYAxis.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="rdoNoTitleXAxisTitle.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ucrInputYAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 44</value>
   </data>
-  <data name="rdoNoTitleXAxisTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="ucrInputYAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 21</value>
   </data>
-  <data name="rdoNoTitleXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 21</value>
+  <data name="ucrInputYAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
   </data>
-  <data name="rdoNoTitleXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 17</value>
+  <data name="&gt;&gt;ucrInputYAxisTitle.Name" xml:space="preserve">
+    <value>ucrInputYAxisTitle</value>
   </data>
-  <data name="rdoNoTitleXAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
+  <data name="&gt;&gt;ucrInputYAxisTitle.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="rdoNoTitleXAxisTitle.Text" xml:space="preserve">
-    <value>No Title</value>
+  <data name="&gt;&gt;ucrInputYAxisTitle.Parent" xml:space="preserve">
+    <value>grpyAxisTitle</value>
   </data>
-  <data name="&gt;&gt;rdoNoTitleXAxisTitle.Name" xml:space="preserve">
-    <value>rdoNoTitleXAxisTitle</value>
-  </data>
-  <data name="&gt;&gt;rdoNoTitleXAxisTitle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoNoTitleXAxisTitle.Parent" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;rdoNoTitleXAxisTitle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputYAxisTitle.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="rdoSpecifyXAxisTitle.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoNoYAxisTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdoSpecifyXAxisTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoNoYAxisTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdoSpecifyXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 21</value>
+  <data name="rdoNoYAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>142, 21</value>
   </data>
-  <data name="rdoSpecifyXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdoNoYAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 17</value>
   </data>
-  <data name="rdoSpecifyXAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
+  <data name="rdoNoYAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
   </data>
-  <data name="rdoSpecifyXAxisTitle.Text" xml:space="preserve">
-    <value>Specifiy</value>
+  <data name="rdoNoYAxisTitle.Text" xml:space="preserve">
+    <value>No Title</value>
   </data>
-  <data name="&gt;&gt;rdoSpecifyXAxisTitle.Name" xml:space="preserve">
-    <value>rdoSpecifyXAxisTitle</value>
+  <data name="&gt;&gt;rdoNoYAxisTitle.Name" xml:space="preserve">
+    <value>rdoNoYAxisTitle</value>
   </data>
-  <data name="&gt;&gt;rdoSpecifyXAxisTitle.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoNoYAxisTitle.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoSpecifyXAxisTitle.Parent" xml:space="preserve">
-    <value>grpAxes</value>
+  <data name="&gt;&gt;rdoNoYAxisTitle.Parent" xml:space="preserve">
+    <value>grpyAxisTitle</value>
   </data>
-  <data name="&gt;&gt;rdoSpecifyXAxisTitle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoNoYAxisTitle.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrPnlXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 15</value>
+  <data name="ucrNudYAxisTitleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>43, 79</value>
   </data>
-  <data name="ucrPnlXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 57</value>
-  </data>
-  <data name="ucrPnlXAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlXAxisTitle.Name" xml:space="preserve">
-    <value>ucrPnlXAxisTitle</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlXAxisTitle.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlXAxisTitle.Parent" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlXAxisTitle.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="UcrNudXAxisTitleSzie.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 78</value>
-  </data>
-  <data name="UcrNudXAxisTitleSzie.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrNudYAxisTitleSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
   </data>
-  <data name="UcrNudXAxisTitleSzie.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
+  <data name="ucrNudYAxisTitleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
   </data>
-  <data name="&gt;&gt;UcrNudXAxisTitleSzie.Name" xml:space="preserve">
-    <value>UcrNudXAxisTitleSzie</value>
+  <data name="&gt;&gt;ucrNudYAxisTitleSize.Name" xml:space="preserve">
+    <value>ucrNudYAxisTitleSize</value>
   </data>
-  <data name="&gt;&gt;UcrNudXAxisTitleSzie.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudYAxisTitleSize.Type" xml:space="preserve">
     <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrNudXAxisTitleSzie.Parent" xml:space="preserve">
-    <value>grpAxes</value>
+  <data name="&gt;&gt;ucrNudYAxisTitleSize.Parent" xml:space="preserve">
+    <value>grpyAxisTitle</value>
   </data>
-  <data name="&gt;&gt;UcrNudXAxisTitleSzie.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudYAxisTitleSize.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rdoSpecifyYAxisTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoSpecifyYAxisTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoSpecifyYAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>67, 21</value>
+  </data>
+  <data name="rdoSpecifyYAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="rdoSpecifyYAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="rdoSpecifyYAxisTitle.Text" xml:space="preserve">
+    <value>Specify</value>
+  </data>
+  <data name="&gt;&gt;rdoSpecifyYAxisTitle.Name" xml:space="preserve">
+    <value>rdoSpecifyYAxisTitle</value>
+  </data>
+  <data name="&gt;&gt;rdoSpecifyYAxisTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSpecifyYAxisTitle.Parent" xml:space="preserve">
+    <value>grpyAxisTitle</value>
+  </data>
+  <data name="&gt;&gt;rdoSpecifyYAxisTitle.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="UcrChkXAxisTitleSzie.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 78</value>
+  <data name="UcrPnlYAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 15</value>
   </data>
-  <data name="UcrChkXAxisTitleSzie.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="UcrPnlYAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 57</value>
   </data>
-  <data name="UcrChkXAxisTitleSzie.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+  <data name="UcrPnlYAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
   </data>
-  <data name="&gt;&gt;UcrChkXAxisTitleSzie.Name" xml:space="preserve">
-    <value>UcrChkXAxisTitleSzie</value>
+  <data name="&gt;&gt;UcrPnlYAxisTitle.Name" xml:space="preserve">
+    <value>UcrPnlYAxisTitle</value>
   </data>
-  <data name="&gt;&gt;UcrChkXAxisTitleSzie.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;UcrPnlYAxisTitle.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrChkXAxisTitleSzie.Parent" xml:space="preserve">
-    <value>grpAxes</value>
+  <data name="&gt;&gt;UcrPnlYAxisTitle.Parent" xml:space="preserve">
+    <value>grpyAxisTitle</value>
   </data>
-  <data name="&gt;&gt;UcrChkXAxisTitleSzie.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;UcrPnlYAxisTitle.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="ucrNudCaptionSize.Location" type="System.Drawing.Point, System.Drawing">
@@ -3269,6 +3257,36 @@
   </data>
   <data name="&gt;&gt;lblTitleSize.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 82</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Size:</value>
+  </data>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
+  </data>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>grpyAxisTitle</value>
+  </data>
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
