@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgPICSARainfall
     Public bFirstLoad As Boolean = True
     Private clsRggplotFunction As New RFunction
@@ -22,11 +23,9 @@ Public Class dlgPICSARainfall
     Private clsRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private bReset As Boolean = True
-    Private clsLabsFunction As New RFunction
-    Private clsXlabsFunction As New RFunction
-    Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
+    Private clsYScaleDateFunction As New RFunction
     Private clsRFacetFunction As New RFunction
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
@@ -36,6 +35,26 @@ Public Class dlgPICSARainfall
     Private clsGeomPoint As New RFunction
     Private clsPointsFunc As New RFunction
     Private clsPointsParam As New RParameter
+    Private clsYLabFunction, clsXLabFunction, clsLabsFunction As RFunction
+    Private clsXAxisLabels, clsYAxisLabels As New RFunction
+    Private clsMeanLine, clsMedianLine, clsTretile As New RFunction
+    Private clsPnlBackgroundFunction, clsPnlGridLinesFunction As RFunction
+    Private clsFactorLevels As New RFunction
+    Private FactorLevel As RDotNet.SymbolicExpression
+
+    Private clsMeanFunction As New RFunction
+    Private clsMedianFunction As New RFunction
+    Private clsTercilesFunction As New RFunction
+
+    Private clsGeomHlineMean As New RFunction
+    Private clsGeomHlineMedian As New RFunction
+    Private clsGeomHlineTerciles As New RFunction
+
+    Private clsGeomHlineAesMean As New RFunction
+    Private clsGeomHlineAesMedian As New RFunction
+    Private clsGeomHlineAesTerciles As New RFunction
+
+    Private strCalcColumn As String
 
     Private Sub dlgPCSARainfall_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -105,6 +124,13 @@ Public Class dlgPICSARainfall
         clsRgeomlineplotFunction = New RFunction
         clsRaesFunction = New RFunction
         clsBaseOperator = New ROperator
+        clsFactorLevels = New RFunction
+
+        Dim clsPanelBackgroundElementRect As New RFunction
+        Dim clsXElementLabels As New RFunction
+        Dim clsPanelGridMajorElementLine As New RFunction
+        Dim clsPanelGridMinorElementLine As New RFunction
+        Dim clsPanelBorderElementRect As New RFunction
 
         ucrPICSARainfallSelector.Reset()
         ucrPICSARainfallSelector.SetGgplotFunction(clsBaseOperator)
@@ -126,18 +152,88 @@ Public Class dlgPICSARainfall
 
         clsRgeomlineplotFunction.SetPackageName("ggplot2")
         clsRgeomlineplotFunction.SetRCommand("geom_line")
+        clsRgeomlineplotFunction.AddParameter("colour", Chr(34) & "blue" & Chr(34))
+        clsRgeomlineplotFunction.AddParameter("size", "0.8")
         clsBaseOperator.AddParameter(clsPointsParam)
 
-        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
-        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
-        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
+        clsMeanFunction = New RFunction
+        clsMeanFunction.SetRCommand("mean")
+
+        clsMedianFunction = New RFunction
+        clsMedianFunction.SetRCommand("median")
+
+        clsTercilesFunction = New RFunction
+        clsTercilesFunction.SetRCommand("")
+
+        clsGeomHlineMean = New RFunction
+        clsGeomHlineMean.SetPackageName("ggplot2")
+        clsGeomHlineMean.SetRCommand("geom_hline")
+
+        clsGeomHlineAesMean = New RFunction
+        clsGeomHlineAesMean.SetPackageName("ggplot2")
+        clsGeomHlineAesMean.SetRCommand("aes")
+
+        clsGeomHlineMedian = New RFunction
+        clsGeomHlineMedian.SetPackageName("ggplot2")
+        clsGeomHlineMedian.SetRCommand("geom_hline")
+
+        clsGeomHlineAesMedian = New RFunction
+        clsGeomHlineAesMedian.SetPackageName("ggplot2")
+        clsGeomHlineAesMedian.SetRCommand("aes")
+
+        clsGeomHlineTerciles = New RFunction
+        clsGeomHlineTerciles.SetPackageName("ggplot2")
+        clsGeomHlineTerciles.SetRCommand("geom_hline")
+
+        clsGeomHlineAesTerciles = New RFunction
+        clsGeomHlineAesTerciles.SetPackageName("ggplot2")
+        clsGeomHlineAesTerciles.SetRCommand("aes")
+
+        clsXLabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsYLabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
-        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
-        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
+
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+
+        If dctThemeFunctions.TryGetValue("panel.background", clsPanelBackgroundElementRect) Then
+            clsPanelBackgroundElementRect.AddParameter("colour", Chr(34) & "white" & Chr(34))
+            clsPanelBackgroundElementRect.AddParameter("fill", Chr(34) & "white" & Chr(34))
+            clsPanelBackgroundElementRect.AddParameter("size", "0.5")
+            clsPanelBackgroundElementRect.AddParameter("linetype", Chr(34) & "solid" & Chr(34))
+            clsThemeFunction.AddParameter("panel.background", clsRFunctionParameter:=clsPanelBackgroundElementRect)
+        End If
+
+        If dctThemeFunctions.TryGetValue("panel.grid.major", clsPanelGridMajorElementLine) Then
+            clsPanelGridMajorElementLine.AddParameter("colour", Chr(34) & "lightblue" & Chr(34))
+            clsPanelGridMajorElementLine.AddParameter("linetype", Chr(34) & "longdash" & Chr(34))
+            clsThemeFunction.AddParameter("panel.grid.major", clsRFunctionParameter:=clsPanelGridMajorElementLine)
+        End If
+
+        If dctThemeFunctions.TryGetValue("panel.grid.minor", clsPanelGridMinorElementLine) Then
+            clsPanelGridMinorElementLine.AddParameter("colour", Chr(34) & "lightblue" & Chr(34))
+            clsPanelGridMinorElementLine.AddParameter("linetype", Chr(34) & "longdash" & Chr(34))
+            clsThemeFunction.AddParameter("panel.grid.minor", clsRFunctionParameter:=clsPanelGridMinorElementLine)
+        End If
+
+        If dctThemeFunctions.TryGetValue("panel.border", clsPanelBorderElementRect) Then
+            clsPanelBorderElementRect.AddParameter("colour", Chr(34) & "black" & Chr(34))
+            clsPanelBorderElementRect.AddParameter("fill", Chr(34) & "NA" & Chr(34))
+            clsThemeFunction.AddParameter("panel.border", clsRFunctionParameter:=clsPanelBorderElementRect)
+        End If
+
+        If dctThemeFunctions.TryGetValue("axis.text.x", clsXElementLabels) Then
+            clsXElementLabels.AddParameter("angle", "90")
+            clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsXElementLabels)
+        End If
+
+        clsFactorLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
+
+        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrPICSARainfallSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TempOptionsDisabledInMultipleVariablesCase()
@@ -168,7 +264,7 @@ Public Class dlgPICSARainfall
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
         If ucrVariablesAsFactorForPicsa.bSingleVariable Then
             'Added this because this sub is called on sed defaults and  it over writes the enabled property 
-            cmdPICSAOptions.Enabled = False
+            cmdPICSAOptions.Enabled = True
             cmdLineOptions.Enabled = True
             cmdOptions.Enabled = True
         Else
@@ -181,16 +277,20 @@ Public Class dlgPICSARainfall
         TempOptionsDisabledInMultipleVariablesCase()
     End Sub
 
+    'add more functions 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
-        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYLabTitleFunction:=clsYlabFunction, bReset:=bResetSubdialog)
+        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsnewGeomhlineMean:=clsGeomHlineMean, clsnewGeomhlineMedian:=clsGeomHlineMedian, clsnewGeomhlineTerciles:=clsGeomHlineTerciles, clsNewGeomHlineAesMean:=clsGeomHlineAesMean, clsNewGeomHlineAesMedian:=clsGeomHlineAesMedian, clsNewGeomHlineAesTerciles:=clsGeomHlineAesTerciles, clsNewMeanFunc:=clsMeanFunction, clsNewMedianFunc:=clsMedianFunction, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.ShowDialog()
         bResetSubdialog = False
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrPICSARainfallSelector, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabFunction, clsNewYLabTitleFunction:=clsYLabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrPICSARainfallSelector, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
+
+        ucrVariablesAsFactorForPicsa.SetParameter(New RParameter("x"))
+
     End Sub
 
     Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
@@ -224,5 +324,19 @@ Public Class dlgPICSARainfall
 
     Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrVariablesAsFactorForPicsa_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlContentsChanged
+        strCalcColumn = ucrVariablesAsFactorForPicsa.GetVariableNames(bWithQuotes:=False)
+        sdgPICSARainfallGraph.SetComputationValue(strCalcColumn)
+    End Sub
+
+    Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorOptionalReceiver.ControlValueChanged
+        'TODO this should run when levels of factor >1
+        If Not ucrFactorOptionalReceiver.IsEmpty Then
+            clsRgeomlineplotFunction.RemoveParameterByName("colour")
+        Else
+            clsRgeomlineplotFunction.AddParameter("colour", Chr(34) & "blue" & Chr(34))
+        End If
     End Sub
 End Class
