@@ -32,7 +32,6 @@ Public Class ucrSave
     Private strGlobalDataName As String = ""
     Private ucrLinkedReceiver As ucrReceiver
     Private clsColPosFunction As New RFunction
-    Private bUserSelectedColumn As Boolean = False
 
     Private Sub ucrSave_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -429,7 +428,6 @@ Public Class ucrSave
         sdgSaveColumnPosition.SetUp(clsColPosFunction, strDataName)
         sdgSaveColumnPosition.ShowDialog()
         UpdateColumnPositionVariables()
-        bUserSelectedColumn = sdgSaveColumnPosition.bUserSelected 'set if user selection happened
     End Sub
 
     Public Sub setLinkedReceiver(ucrLinkedReceiver As ucrReceiver)
@@ -439,7 +437,7 @@ Public Class ucrSave
 
     Private Sub LinkedReceiverControlValueChanged()
         'if the user has not explictly set the column position then set it to after the specified column by default
-        If Not bUserSelectedColumn Then
+        If Not sdgSaveColumnPosition.bUserSelected Then
             clsColPosFunction.AddParameter(strParameterName:="before", strParameterValue:="FALSE")
             If Not ucrLinkedReceiver.IsEmpty Then
                 clsColPosFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrLinkedReceiver.GetVariableNames())
@@ -458,9 +456,9 @@ Public Class ucrSave
         End If
 
         If bReset Then
+            sdgSaveColumnPosition.Reset()
             clsColPosFunction.AddParameter(strParameterName:="before", strParameterValue:="FALSE")
             clsColPosFunction.RemoveParameterByName("adjacent_column")
-            bUserSelectedColumn = False
         End If
 
         For i As Integer = 0 To lstAllRCodes.Count - 1

@@ -30,15 +30,15 @@
 Imports instat.Translations
 Public Class sdgSaveColumnPosition
     Private clsDefaultFunction As RFunction
-    Public bControlsInitialised As Boolean = True
+    Public bControlsNotInitialised As Boolean = True
     Public bUserSelected As Boolean = False
     Public bRcodeFlag As Boolean = False
 
     Private Sub sdgSaveColumnPosition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        If bControlsInitialised Then
+        If bControlsNotInitialised Then
             InitialiseControl()
-            bControlsInitialised = False
+            bControlsNotInitialised = False
         End If
     End Sub
 
@@ -69,27 +69,39 @@ Public Class sdgSaveColumnPosition
     End Sub
 
     Public Sub SetUp(clsColPosFunction As RFunction, strDataFrameName As String)
-        If bControlsInitialised Then
+        If bControlsNotInitialised Then
             InitialiseControl()
-            bControlsInitialised = False
+            bControlsNotInitialised = False
         End If
 
         clsDefaultFunction = clsColPosFunction
 
-        ucrSelectorColumns.SetDataframe(strDataFrameName, False)
-
         bRcodeFlag = True
+        ucrSelectorColumns.Enabled = True
+        ucrReceiverColumn.Enabled = True 'the receiver won't read from the RCode if its not Enabled
+        ucrSelectorColumns.SetDataframe(strDataFrameName, False)
         ucrPnlColumnPosition.SetRCode(clsDefaultFunction, True)
         ucrReceiverColumn.SetRCode(clsDefaultFunction, True)
         bRcodeFlag = False
         SetColumnControlsAndParameterState()
+    End Sub
 
+    Public Sub Reset()
+        If bControlsNotInitialised Then
+            InitialiseControl()
+            bControlsNotInitialised = False
+        End If
+        ucrSelectorColumns.Enabled = True
+        ucrReceiverColumn.Enabled = True
+        ucrSelectorColumns.Reset()
+        bUserSelected = False
     End Sub
 
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnPosition.ControlValueChanged, ucrReceiverColumn.ControlValueChanged
         If Not bRcodeFlag Then
+            'in future this should be moved to UserValueChanged event
+            bUserSelected = True
             SetColumnControlsAndParameterState()
-            bUserSelected = True 'in future this should be moved to UserValueChanged event
         End If
     End Sub
 
