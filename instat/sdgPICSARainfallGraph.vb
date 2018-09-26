@@ -102,20 +102,13 @@ Public Class sdgPICSARainfallGraph
         ucrNudCaptionSize.Increment = 0.1
         ucrNudCaptionSize.Minimum = 0
 
-        UcrChkXAxisTitleSzie.SetText("Size")
-        UcrChkXAxisTitleSzie.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrNudXAxisTitleSzie.SetParameter(New RParameter("size"))
-        UcrNudXAxisTitleSzie.Increment = 0.1
-        UcrNudXAxisTitleSzie.Minimum = 0
+        ucrNudXAxisTitleSize.SetParameter(New RParameter("size"))
+        ucrNudXAxisTitleSize.Increment = 0.1
+        ucrNudXAxisTitleSize.Minimum = 0
 
-        UcrChkYAxisTitleSzie.SetText("Size")
-        UcrChkYAxisTitleSzie.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrNudYAxisTitleSzie.SetParameter(New RParameter("size"))
-        UcrNudYAxisTitleSzie.Increment = 0.1
-        UcrNudYAxisTitleSzie.Minimum = 0
-
-        UcrChkXAxisTitleSzie.AddToLinkedControls(UcrNudXAxisTitleSzie, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        UcrChkYAxisTitleSzie.AddToLinkedControls(UcrNudYAxisTitleSzie, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudYAxisTitleSize.SetParameter(New RParameter("size"))
+        ucrNudYAxisTitleSize.Increment = 0.1
+        ucrNudYAxisTitleSize.Minimum = 0
 
         ' Labels 
         ucrChkXAxisLabelSize.SetText("Size")
@@ -212,7 +205,7 @@ Public Class sdgPICSARainfallGraph
 
         UcrChkPnlBackgroundSize.SetText("Size")
         UcrChkPnlBackgroundSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrNudYAxisTitleSzie.SetParameter(New RParameter("size"))
+        ucrNudYAxisTitleSize.SetParameter(New RParameter("size"))
         ucrNudPnlBackgroundSize.Increment = 0.1
         ucrNudPnlBackgroundSize.DecimalPlaces = 1
         ucrNudPnlBackgroundSize.Minimum = 0
@@ -362,10 +355,8 @@ Public Class sdgPICSARainfallGraph
         ucrNudSubTitleSize.SetRCode(clsPlotElementSubTitle, bCloneIfNeeded:=True)
         ucrNudCaptionSize.SetRCode(clsPlotElementCaption, bCloneIfNeeded:=True)
 
-        UcrNudXAxisTitleSzie.SetRCode(clsXElementTitle, bCloneIfNeeded:=True)
-        UcrNudYAxisTitleSzie.SetRCode(clsYElementTitle, bCloneIfNeeded:=True)
-        UcrChkXAxisTitleSzie.SetRCode(clsXElementTitle, bCloneIfNeeded:=True)
-        UcrChkYAxisTitleSzie.SetRCode(clsYElementTitle, bCloneIfNeeded:=True)
+        ucrNudXAxisTitleSize.SetRCode(clsXElementTitle, bCloneIfNeeded:=True)
+        ucrNudYAxisTitleSize.SetRCode(clsYElementTitle, bCloneIfNeeded:=True)
 
         ucrNudXAxisAngle.SetRCode(clsXElementLabels, bCloneIfNeeded:=True)
         ucrNudXaxisLabelSize.SetRCode(clsXElementLabels, bCloneIfNeeded:=True)
@@ -684,7 +675,7 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemoveXAxisTitleSize()
-        If UcrChkXAxisTitleSzie.Checked AndAlso UcrNudXAxisTitleSzie.GetText <> "" Then
+        If ucrNudXAxisTitleSize.GetText <> "" Then
             clsThemeFunction.AddParameter("axis.title.x", clsRFunctionParameter:=clsXElementTitle)
         Else
             clsThemeFunction.RemoveParameterByName("axis.title.x")
@@ -693,7 +684,7 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemoveYAxisTitleSize()
-        If UcrChkYAxisTitleSzie.Checked AndAlso UcrNudYAxisTitleSzie.GetText <> "" Then
+        If ucrNudYAxisTitleSize.GetText <> "" Then
             clsThemeFunction.AddParameter("axis.title.y", clsRFunctionParameter:=clsYElementTitle)
         Else
             clsThemeFunction.RemoveParameterByName("axis.title.y")
@@ -779,11 +770,11 @@ Public Class sdgPICSARainfallGraph
         AddRemoveGraphCaptionSize()
     End Sub
 
-    Private Sub UcrChkXAxisTitleSzie_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrChkXAxisTitleSzie.ControlValueChanged
+    Private Sub UcrChkXAxisTitleSzie_ControlValueChanged(ucrChangedControl As ucrCore)
         AddRemoveXAxisTitleSize()
     End Sub
 
-    Private Sub UcrChkYAxisTitleSzie_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrChkYAxisTitleSzie.ControlValueChanged
+    Private Sub UcrChkYAxisTitleSzie_ControlValueChanged(ucrChangedControl As ucrCore)
         AddRemoveYAxisTitleSize()
     End Sub
 

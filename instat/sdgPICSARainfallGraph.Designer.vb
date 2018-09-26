@@ -34,9 +34,8 @@ Partial Class sdgPICSARainfallGraph
         Me.grpyAxisTitle = New System.Windows.Forms.GroupBox()
         Me.rdoAutoYAxis = New System.Windows.Forms.RadioButton()
         Me.ucrInputYAxisTitle = New instat.ucrInputTextBox()
-        Me.UcrChkYAxisTitleSzie = New instat.ucrCheck()
         Me.rdoNoYAxisTitle = New System.Windows.Forms.RadioButton()
-        Me.UcrNudYAxisTitleSzie = New instat.ucrNud()
+        Me.ucrNudYAxisTitleSize = New instat.ucrNud()
         Me.rdoSpecifyYAxisTitle = New System.Windows.Forms.RadioButton()
         Me.UcrPnlYAxisTitle = New instat.UcrPanel()
         Me.grpAxes = New System.Windows.Forms.GroupBox()
@@ -45,8 +44,7 @@ Partial Class sdgPICSARainfallGraph
         Me.rdoNoTitleXAxisTitle = New System.Windows.Forms.RadioButton()
         Me.rdoSpecifyXAxisTitle = New System.Windows.Forms.RadioButton()
         Me.ucrPnlXAxisTitle = New instat.UcrPanel()
-        Me.UcrNudXAxisTitleSzie = New instat.ucrNud()
-        Me.UcrChkXAxisTitleSzie = New instat.ucrCheck()
+        Me.ucrNudXAxisTitleSize = New instat.ucrNud()
         Me.grpGraphTitles = New System.Windows.Forms.GroupBox()
         Me.ucrNudCaptionSize = New instat.ucrNud()
         Me.ucrNudSubTitleSize = New instat.ucrNud()
@@ -120,6 +118,8 @@ Partial Class sdgPICSARainfallGraph
         Me.lblCaptionSize = New System.Windows.Forms.Label()
         Me.lblSubTitleSize = New System.Windows.Forms.Label()
         Me.lblTitleSize = New System.Windows.Forms.Label()
+        Me.lblXAxisTitleSize = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.tbPICSA.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.grpyAxisTitle.SuspendLayout()
@@ -187,11 +187,11 @@ Partial Class sdgPICSARainfallGraph
         '
         'grpyAxisTitle
         '
+        Me.grpyAxisTitle.Controls.Add(Me.Label1)
         Me.grpyAxisTitle.Controls.Add(Me.rdoAutoYAxis)
         Me.grpyAxisTitle.Controls.Add(Me.ucrInputYAxisTitle)
-        Me.grpyAxisTitle.Controls.Add(Me.UcrChkYAxisTitleSzie)
         Me.grpyAxisTitle.Controls.Add(Me.rdoNoYAxisTitle)
-        Me.grpyAxisTitle.Controls.Add(Me.UcrNudYAxisTitleSzie)
+        Me.grpyAxisTitle.Controls.Add(Me.ucrNudYAxisTitleSize)
         Me.grpyAxisTitle.Controls.Add(Me.rdoSpecifyYAxisTitle)
         Me.grpyAxisTitle.Controls.Add(Me.UcrPnlYAxisTitle)
         resources.ApplyResources(Me.grpyAxisTitle, "grpyAxisTitle")
@@ -213,12 +213,6 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrInputYAxisTitle, "ucrInputYAxisTitle")
         Me.ucrInputYAxisTitle.Name = "ucrInputYAxisTitle"
         '
-        'UcrChkYAxisTitleSzie
-        '
-        Me.UcrChkYAxisTitleSzie.Checked = False
-        resources.ApplyResources(Me.UcrChkYAxisTitleSzie, "UcrChkYAxisTitleSzie")
-        Me.UcrChkYAxisTitleSzie.Name = "UcrChkYAxisTitleSzie"
-        '
         'rdoNoYAxisTitle
         '
         resources.ApplyResources(Me.rdoNoYAxisTitle, "rdoNoYAxisTitle")
@@ -226,15 +220,15 @@ Partial Class sdgPICSARainfallGraph
         Me.rdoNoYAxisTitle.TabStop = True
         Me.rdoNoYAxisTitle.UseVisualStyleBackColor = True
         '
-        'UcrNudYAxisTitleSzie
+        'ucrNudYAxisTitleSize
         '
-        Me.UcrNudYAxisTitleSzie.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudYAxisTitleSzie.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.UcrNudYAxisTitleSzie, "UcrNudYAxisTitleSzie")
-        Me.UcrNudYAxisTitleSzie.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudYAxisTitleSzie.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudYAxisTitleSzie.Name = "UcrNudYAxisTitleSzie"
-        Me.UcrNudYAxisTitleSzie.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudYAxisTitleSize, "ucrNudYAxisTitleSize")
+        Me.ucrNudYAxisTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudYAxisTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisTitleSize.Name = "ucrNudYAxisTitleSize"
+        Me.ucrNudYAxisTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'rdoSpecifyYAxisTitle
         '
@@ -250,13 +244,13 @@ Partial Class sdgPICSARainfallGraph
         '
         'grpAxes
         '
+        Me.grpAxes.Controls.Add(Me.lblXAxisTitleSize)
         Me.grpAxes.Controls.Add(Me.rdoAutoXAxis)
         Me.grpAxes.Controls.Add(Me.ucrInputXAxisTitle)
         Me.grpAxes.Controls.Add(Me.rdoNoTitleXAxisTitle)
         Me.grpAxes.Controls.Add(Me.rdoSpecifyXAxisTitle)
         Me.grpAxes.Controls.Add(Me.ucrPnlXAxisTitle)
-        Me.grpAxes.Controls.Add(Me.UcrNudXAxisTitleSzie)
-        Me.grpAxes.Controls.Add(Me.UcrChkXAxisTitleSzie)
+        Me.grpAxes.Controls.Add(Me.ucrNudXAxisTitleSize)
         resources.ApplyResources(Me.grpAxes, "grpAxes")
         Me.grpAxes.Name = "grpAxes"
         Me.grpAxes.TabStop = False
@@ -295,21 +289,15 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrPnlXAxisTitle, "ucrPnlXAxisTitle")
         Me.ucrPnlXAxisTitle.Name = "ucrPnlXAxisTitle"
         '
-        'UcrNudXAxisTitleSzie
+        'ucrNudXAxisTitleSize
         '
-        Me.UcrNudXAxisTitleSzie.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudXAxisTitleSzie.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.UcrNudXAxisTitleSzie, "UcrNudXAxisTitleSzie")
-        Me.UcrNudXAxisTitleSzie.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNudXAxisTitleSzie.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNudXAxisTitleSzie.Name = "UcrNudXAxisTitleSzie"
-        Me.UcrNudXAxisTitleSzie.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'UcrChkXAxisTitleSzie
-        '
-        Me.UcrChkXAxisTitleSzie.Checked = False
-        resources.ApplyResources(Me.UcrChkXAxisTitleSzie, "UcrChkXAxisTitleSzie")
-        Me.UcrChkXAxisTitleSzie.Name = "UcrChkXAxisTitleSzie"
+        Me.ucrNudXAxisTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXAxisTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudXAxisTitleSize, "ucrNudXAxisTitleSize")
+        Me.ucrNudXAxisTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudXAxisTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXAxisTitleSize.Name = "ucrNudXAxisTitleSize"
+        Me.ucrNudXAxisTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'grpGraphTitles
         '
@@ -888,6 +876,16 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.lblTitleSize, "lblTitleSize")
         Me.lblTitleSize.Name = "lblTitleSize"
         '
+        'lblXAxisTitleSize
+        '
+        resources.ApplyResources(Me.lblXAxisTitleSize, "lblXAxisTitleSize")
+        Me.lblXAxisTitleSize.Name = "lblXAxisTitleSize"
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        '
         'sdgPICSARainfallGraph
         '
         resources.ApplyResources(Me, "$this")
@@ -975,8 +973,7 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents UcrInputPnlBackgroundFill As ucrInputComboBox
     Friend WithEvents UcrInputPnlBackgroundLinetype As ucrInputComboBox
     Friend WithEvents UcrInputPnlBackgroundColour As ucrInputComboBox
-    Friend WithEvents UcrNudYAxisTitleSzie As ucrNud
-    Friend WithEvents UcrChkYAxisTitleSzie As ucrCheck
+    Friend WithEvents ucrNudYAxisTitleSize As ucrNud
     Friend WithEvents ucrNudCaptionSize As ucrNud
     Friend WithEvents ucrNudSubTitleSize As ucrNud
     Friend WithEvents ucrNudTitleSize As ucrNud
@@ -1005,8 +1002,7 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents rdoNoTitleXAxisTitle As RadioButton
     Friend WithEvents rdoSpecifyXAxisTitle As RadioButton
     Friend WithEvents ucrPnlXAxisTitle As UcrPanel
-    Friend WithEvents UcrNudXAxisTitleSzie As ucrNud
-    Friend WithEvents UcrChkXAxisTitleSzie As ucrCheck
+    Friend WithEvents ucrNudXAxisTitleSize As ucrNud
     Friend WithEvents rdoAutoYAxis As RadioButton
     Friend WithEvents rdoAutoXAxis As RadioButton
     Friend WithEvents ucrAddTercilesLabel As ucrCheck
@@ -1018,4 +1014,6 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents lblCaptionSize As Label
     Friend WithEvents lblSubTitleSize As Label
     Friend WithEvents lblTitleSize As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lblXAxisTitleSize As Label
 End Class
