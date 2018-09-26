@@ -54,28 +54,32 @@ Public Class sdgPICSARainfallGraph
 
         ' Titles 
         ucrPnlXAxisTitle.AddRadioButton(rdoAutoXAxis)
-        ucrPnlXAxisTitle.AddRadioButton(rdoRemoveXAxisTitle)
-        ucrPnlXAxisTitle.AddRadioButton(rdoChangeXAxisTitle)
+        ucrPnlXAxisTitle.AddRadioButton(rdoNoTitleXAxisTitle)
+        ucrPnlXAxisTitle.AddRadioButton(rdoSpecifyXAxisTitle)
 
         ucrPnlXAxisTitle.AddParameterPresentCondition(rdoAutoXAxis, "label", False)
 
-        ucrPnlXAxisTitle.AddParameterPresentCondition(rdoRemoveXAxisTitle, "label", True)
-        ucrPnlXAxisTitle.AddParameterValuesCondition(rdoRemoveXAxisTitle, "label", Chr(34) & Chr(34), True)
+        ucrPnlXAxisTitle.AddParameterPresentCondition(rdoNoTitleXAxisTitle, "label", True)
+        ucrPnlXAxisTitle.AddParameterValuesCondition(rdoNoTitleXAxisTitle, "label", Chr(34) & Chr(34), True)
 
-        ucrPnlXAxisTitle.AddParameterPresentCondition(rdoChangeXAxisTitle, "label", True)
-        ucrPnlXAxisTitle.AddParameterValuesCondition(rdoChangeXAxisTitle, "label", Chr(34) & Chr(34), False)
+        ucrPnlXAxisTitle.AddParameterPresentCondition(rdoSpecifyXAxisTitle, "label", True)
+        ucrPnlXAxisTitle.AddParameterValuesCondition(rdoSpecifyXAxisTitle, "label", Chr(34) & Chr(34), False)
 
-        ucrPnlXAxisTitle.AddToLinkedControls(ucrInputXAxisTitle, {rdoChangeXAxisTitle}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlXAxisTitle.AddToLinkedControls(ucrInputXAxisTitle, {rdoSpecifyXAxisTitle}, bNewLinkedHideIfParameterMissing:=True)
 
         UcrPnlYAxisTitle.AddRadioButton(rdoAutoYAxis)
-        UcrPnlYAxisTitle.AddRadioButton(rdoRemoveYAxisTitle)
-        UcrPnlYAxisTitle.AddRadioButton(rdoChangeYAxisTitle)
+        UcrPnlYAxisTitle.AddRadioButton(rdoNoYAxisTitle)
+        UcrPnlYAxisTitle.AddRadioButton(rdoSpecifyYAxisTitle)
+
         UcrPnlYAxisTitle.AddParameterPresentCondition(rdoAutoYAxis, "label", False)
-        UcrPnlYAxisTitle.AddParameterPresentCondition(rdoRemoveYAxisTitle, "label", True)
-        UcrPnlYAxisTitle.AddParameterValuesCondition(rdoRemoveYAxisTitle, "label", Chr(34) & Chr(34), True)
-        UcrPnlYAxisTitle.AddParameterPresentCondition(rdoChangeYAxisTitle, "label", True)
-        UcrPnlYAxisTitle.AddParameterValuesCondition(rdoChangeYAxisTitle, "label", Chr(34) & Chr(34), False)
-        UcrPnlYAxisTitle.AddToLinkedControls(ucrInputYAxisTitle, {rdoChangeYAxisTitle}, bNewLinkedHideIfParameterMissing:=True)
+
+        UcrPnlYAxisTitle.AddParameterPresentCondition(rdoNoYAxisTitle, "label", True)
+        UcrPnlYAxisTitle.AddParameterValuesCondition(rdoNoYAxisTitle, "label", Chr(34) & Chr(34), True)
+
+        UcrPnlYAxisTitle.AddParameterPresentCondition(rdoSpecifyYAxisTitle, "label", True)
+        UcrPnlYAxisTitle.AddParameterValuesCondition(rdoSpecifyYAxisTitle, "label", Chr(34) & Chr(34), False)
+
+        UcrPnlYAxisTitle.AddToLinkedControls(ucrInputYAxisTitle, {rdoSpecifyYAxisTitle}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputXAxisTitle.SetParameter(New RParameter("label"))
         ucrInputYAxisTitle.SetParameter(New RParameter("label"))
@@ -317,6 +321,7 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional bReset As Boolean = False)
+        bRCodeSet = False
         clsBaseOperator = clsNewOperator
 
         If Not bControlsInitialised Then
@@ -406,13 +411,7 @@ Public Class sdgPICSARainfallGraph
 
         ' other functions 
 
-        clsLabsFunction = clsNewLabsFunction
-        clsXLabsFunction = clsNewXLabsFunction
-        clsYLabsFunction = clsNewYLabsFunction
-        clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
-        clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
         clsYScaleDateFunction = clsNewYScaleDateFunction
-
 
         ' Breaks for x-axis 
         If clsNewXScalecontinuousFunction IsNot Nothing Then
@@ -576,20 +575,20 @@ Public Class sdgPICSARainfallGraph
 
     Private Sub AddRemoveXLabs()
         If bRCodeSet Then
-            If rdoRemoveXAxisTitle.Checked OrElse (rdoChangeXAxisTitle.Checked AndAlso Not ucrInputXAxisTitle.IsEmpty()) Then
-                clsBaseOperator.AddParameter("lab", clsRFunctionParameter:=clsXLabsFunction)
+            If rdoNoTitleXAxisTitle.Checked OrElse (rdoSpecifyXAxisTitle.Checked AndAlso Not ucrInputXAxisTitle.IsEmpty()) Then
+                clsBaseOperator.AddParameter("xlab", clsRFunctionParameter:=clsXLabsFunction)
             Else
-                clsBaseOperator.RemoveParameterByName("lab")
+                clsBaseOperator.RemoveParameterByName("xlab")
             End If
         End If
     End Sub
 
     Private Sub AddRemoveYLabs()
         If bRCodeSet Then
-            If Not rdoRemoveYAxisTitle.Checked OrElse (rdoChangeYAxisTitle.Checked AndAlso Not ucrInputYAxisTitle.IsEmpty()) Then
-                clsBaseOperator.AddParameter("lab", clsRFunctionParameter:=clsYLabsFunction)
+            If rdoNoYAxisTitle.Checked OrElse (rdoSpecifyYAxisTitle.Checked AndAlso Not ucrInputYAxisTitle.IsEmpty()) Then
+                clsBaseOperator.AddParameter("ylab", clsRFunctionParameter:=clsYLabsFunction)
             Else
-                clsBaseOperator.RemoveParameterByName("lab")
+                clsBaseOperator.RemoveParameterByName("ylab")
             End If
         End If
     End Sub
@@ -598,7 +597,7 @@ Public Class sdgPICSARainfallGraph
         If bRCodeSet Then
             If rdoAutoXAxis.Checked Then
                 clsXLabsFunction.RemoveParameterByName("label")
-            ElseIf rdoRemoveXAxisTitle.Checked Then
+            ElseIf rdoNoTitleXAxisTitle.Checked Then
                 clsXLabsFunction.AddParameter("label", Chr(34) & Chr(34))
             Else
                 clsXLabsFunction.AddParameter("label", Chr(34) & ucrInputXAxisTitle.GetText() & Chr(34))
@@ -611,7 +610,7 @@ Public Class sdgPICSARainfallGraph
         If bRCodeSet Then
             If rdoAutoYAxis.Checked Then
                 clsYLabsFunction.RemoveParameterByName("label")
-            ElseIf rdoRemoveYAxisTitle.Checked Then
+            ElseIf rdoNoYAxisTitle.Checked Then
                 clsYLabsFunction.AddParameter("label", Chr(34) & Chr(34))
             Else
                 clsYLabsFunction.AddParameter("label", Chr(34) & ucrInputYAxisTitle.GetText() & Chr(34))

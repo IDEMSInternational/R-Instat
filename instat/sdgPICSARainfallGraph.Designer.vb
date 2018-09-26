@@ -35,15 +35,15 @@ Partial Class sdgPICSARainfallGraph
         Me.rdoAutoYAxis = New System.Windows.Forms.RadioButton()
         Me.ucrInputYAxisTitle = New instat.ucrInputTextBox()
         Me.UcrChkYAxisTitleSzie = New instat.ucrCheck()
-        Me.rdoRemoveYAxisTitle = New System.Windows.Forms.RadioButton()
+        Me.rdoNoYAxisTitle = New System.Windows.Forms.RadioButton()
         Me.UcrNudYAxisTitleSzie = New instat.ucrNud()
-        Me.rdoChangeYAxisTitle = New System.Windows.Forms.RadioButton()
+        Me.rdoSpecifyYAxisTitle = New System.Windows.Forms.RadioButton()
         Me.UcrPnlYAxisTitle = New instat.UcrPanel()
         Me.grpAxes = New System.Windows.Forms.GroupBox()
         Me.rdoAutoXAxis = New System.Windows.Forms.RadioButton()
         Me.ucrInputXAxisTitle = New instat.ucrInputTextBox()
-        Me.rdoRemoveXAxisTitle = New System.Windows.Forms.RadioButton()
-        Me.rdoChangeXAxisTitle = New System.Windows.Forms.RadioButton()
+        Me.rdoNoTitleXAxisTitle = New System.Windows.Forms.RadioButton()
+        Me.rdoSpecifyXAxisTitle = New System.Windows.Forms.RadioButton()
         Me.ucrPnlXAxisTitle = New instat.UcrPanel()
         Me.UcrNudXAxisTitleSzie = New instat.ucrNud()
         Me.UcrChkXAxisTitleSzie = New instat.ucrCheck()
@@ -190,9 +190,9 @@ Partial Class sdgPICSARainfallGraph
         Me.grpyAxisTitle.Controls.Add(Me.rdoAutoYAxis)
         Me.grpyAxisTitle.Controls.Add(Me.ucrInputYAxisTitle)
         Me.grpyAxisTitle.Controls.Add(Me.UcrChkYAxisTitleSzie)
-        Me.grpyAxisTitle.Controls.Add(Me.rdoRemoveYAxisTitle)
+        Me.grpyAxisTitle.Controls.Add(Me.rdoNoYAxisTitle)
         Me.grpyAxisTitle.Controls.Add(Me.UcrNudYAxisTitleSzie)
-        Me.grpyAxisTitle.Controls.Add(Me.rdoChangeYAxisTitle)
+        Me.grpyAxisTitle.Controls.Add(Me.rdoSpecifyYAxisTitle)
         Me.grpyAxisTitle.Controls.Add(Me.UcrPnlYAxisTitle)
         resources.ApplyResources(Me.grpyAxisTitle, "grpyAxisTitle")
         Me.grpyAxisTitle.Name = "grpyAxisTitle"
@@ -219,12 +219,12 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.UcrChkYAxisTitleSzie, "UcrChkYAxisTitleSzie")
         Me.UcrChkYAxisTitleSzie.Name = "UcrChkYAxisTitleSzie"
         '
-        'rdoRemoveYAxisTitle
+        'rdoNoYAxisTitle
         '
-        resources.ApplyResources(Me.rdoRemoveYAxisTitle, "rdoRemoveYAxisTitle")
-        Me.rdoRemoveYAxisTitle.Name = "rdoRemoveYAxisTitle"
-        Me.rdoRemoveYAxisTitle.TabStop = True
-        Me.rdoRemoveYAxisTitle.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoNoYAxisTitle, "rdoNoYAxisTitle")
+        Me.rdoNoYAxisTitle.Name = "rdoNoYAxisTitle"
+        Me.rdoNoYAxisTitle.TabStop = True
+        Me.rdoNoYAxisTitle.UseVisualStyleBackColor = True
         '
         'UcrNudYAxisTitleSzie
         '
@@ -236,12 +236,12 @@ Partial Class sdgPICSARainfallGraph
         Me.UcrNudYAxisTitleSzie.Name = "UcrNudYAxisTitleSzie"
         Me.UcrNudYAxisTitleSzie.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'rdoChangeYAxisTitle
+        'rdoSpecifyYAxisTitle
         '
-        resources.ApplyResources(Me.rdoChangeYAxisTitle, "rdoChangeYAxisTitle")
-        Me.rdoChangeYAxisTitle.Name = "rdoChangeYAxisTitle"
-        Me.rdoChangeYAxisTitle.TabStop = True
-        Me.rdoChangeYAxisTitle.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoSpecifyYAxisTitle, "rdoSpecifyYAxisTitle")
+        Me.rdoSpecifyYAxisTitle.Name = "rdoSpecifyYAxisTitle"
+        Me.rdoSpecifyYAxisTitle.TabStop = True
+        Me.rdoSpecifyYAxisTitle.UseVisualStyleBackColor = True
         '
         'UcrPnlYAxisTitle
         '
@@ -252,8 +252,8 @@ Partial Class sdgPICSARainfallGraph
         '
         Me.grpAxes.Controls.Add(Me.rdoAutoXAxis)
         Me.grpAxes.Controls.Add(Me.ucrInputXAxisTitle)
-        Me.grpAxes.Controls.Add(Me.rdoRemoveXAxisTitle)
-        Me.grpAxes.Controls.Add(Me.rdoChangeXAxisTitle)
+        Me.grpAxes.Controls.Add(Me.rdoNoTitleXAxisTitle)
+        Me.grpAxes.Controls.Add(Me.rdoSpecifyXAxisTitle)
         Me.grpAxes.Controls.Add(Me.ucrPnlXAxisTitle)
         Me.grpAxes.Controls.Add(Me.UcrNudXAxisTitleSzie)
         Me.grpAxes.Controls.Add(Me.UcrChkXAxisTitleSzie)
@@ -276,19 +276,19 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrInputXAxisTitle, "ucrInputXAxisTitle")
         Me.ucrInputXAxisTitle.Name = "ucrInputXAxisTitle"
         '
-        'rdoRemoveXAxisTitle
+        'rdoNoTitleXAxisTitle
         '
-        resources.ApplyResources(Me.rdoRemoveXAxisTitle, "rdoRemoveXAxisTitle")
-        Me.rdoRemoveXAxisTitle.Name = "rdoRemoveXAxisTitle"
-        Me.rdoRemoveXAxisTitle.TabStop = True
-        Me.rdoRemoveXAxisTitle.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoNoTitleXAxisTitle, "rdoNoTitleXAxisTitle")
+        Me.rdoNoTitleXAxisTitle.Name = "rdoNoTitleXAxisTitle"
+        Me.rdoNoTitleXAxisTitle.TabStop = True
+        Me.rdoNoTitleXAxisTitle.UseVisualStyleBackColor = True
         '
-        'rdoChangeXAxisTitle
+        'rdoSpecifyXAxisTitle
         '
-        resources.ApplyResources(Me.rdoChangeXAxisTitle, "rdoChangeXAxisTitle")
-        Me.rdoChangeXAxisTitle.Name = "rdoChangeXAxisTitle"
-        Me.rdoChangeXAxisTitle.TabStop = True
-        Me.rdoChangeXAxisTitle.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoSpecifyXAxisTitle, "rdoSpecifyXAxisTitle")
+        Me.rdoSpecifyXAxisTitle.Name = "rdoSpecifyXAxisTitle"
+        Me.rdoSpecifyXAxisTitle.TabStop = True
+        Me.rdoSpecifyXAxisTitle.UseVisualStyleBackColor = True
         '
         'ucrPnlXAxisTitle
         '
@@ -998,12 +998,12 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents UcrNudMinorGridLineSize As ucrNud
     Friend WithEvents UcrChkMinorGridLineSize As ucrCheck
     Friend WithEvents UcrPnlYAxisTitle As UcrPanel
-    Friend WithEvents rdoRemoveYAxisTitle As RadioButton
-    Friend WithEvents rdoChangeYAxisTitle As RadioButton
+    Friend WithEvents rdoNoYAxisTitle As RadioButton
+    Friend WithEvents rdoSpecifyYAxisTitle As RadioButton
     Friend WithEvents grpAxes As GroupBox
     Friend WithEvents ucrInputXAxisTitle As ucrInputTextBox
-    Friend WithEvents rdoRemoveXAxisTitle As RadioButton
-    Friend WithEvents rdoChangeXAxisTitle As RadioButton
+    Friend WithEvents rdoNoTitleXAxisTitle As RadioButton
+    Friend WithEvents rdoSpecifyXAxisTitle As RadioButton
     Friend WithEvents ucrPnlXAxisTitle As UcrPanel
     Friend WithEvents UcrNudXAxisTitleSzie As ucrNud
     Friend WithEvents UcrChkXAxisTitleSzie As ucrCheck

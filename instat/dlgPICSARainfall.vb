@@ -16,6 +16,7 @@
 
 Imports instat.Translations
 Imports RDotNet
+
 Public Class dlgPICSARainfall
     Public bFirstLoad As Boolean = True
     Private clsRggplotFunction As New RFunction
@@ -35,7 +36,7 @@ Public Class dlgPICSARainfall
     Private clsGeomPoint As New RFunction
     Private clsPointsFunc As New RFunction
     Private clsPointsParam As New RParameter
-    Private clsYLabFunction, clsXLabFunction, clsLabsFunction As RFunction
+    Private clsYLabsFunction, clsXLabsFunction, clsLabsFunction As RFunction
     Private clsXAxisLabels, clsYAxisLabels As New RFunction
     Private clsMeanLine, clsMedianLine, clsTretile As New RFunction
     Private clsPnlBackgroundFunction, clsPnlGridLinesFunction As RFunction
@@ -151,6 +152,17 @@ Public Class dlgPICSARainfall
         clsGeomHlineAesUpperTercile = New RFunction
         clsUpperTercileFunction = New RFunction
 
+        clsXLabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsYLabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
+
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
+        clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+
         ucrPICSARainfallSelector.Reset()
         ucrPICSARainfallSelector.SetGgplotFunction(clsBaseOperator)
         ucrSave.Reset()
@@ -225,17 +237,6 @@ Public Class dlgPICSARainfall
         clsUpperTercileFunction.SetRCommand("quantile")
         clsUpperTercileFunction.AddParameter("probs", "2/3")
 
-        clsXLabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
-        clsYLabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
-        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
-        clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
-        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
-        clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
-
-        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
-        clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
-        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
-
         If dctThemeFunctions.TryGetValue("panel.background", clsPanelBackgroundElementRect) Then
             clsPanelBackgroundElementRect.AddParameter("colour", Chr(34) & "white" & Chr(34))
             clsPanelBackgroundElementRect.AddParameter("fill", Chr(34) & "white" & Chr(34))
@@ -284,6 +285,9 @@ Public Class dlgPICSARainfall
 
         clsFactorLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
 
+        clsBaseOperator.AddParameter("xlab", clsRFunctionParameter:=clsXLabsFunction)
+        clsXLabsFunction.AddParameter("label", Chr(34) & Chr(34))
+
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrPICSARainfallSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -330,13 +334,13 @@ Public Class dlgPICSARainfall
 
     'add more functions 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
-        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, bReset:=bResetSubdialog)
+        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.ShowDialog()
         bResetSubdialog = False
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabFunction, clsNewYLabTitleFunction:=clsYLabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrPICSARainfallSelector, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrPICSARainfallSelector, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
 
