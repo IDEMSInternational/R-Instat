@@ -274,12 +274,12 @@ Public Class dlgPICSARainfall
 
         If dctThemeFunctions.TryGetValue("sub.title", clsPlotElementSubTitle) Then
             clsPlotElementSubTitle.AddParameter("size", 15)
-            clsThemeFunction.AddParameter("sub.title", clsRFunctionParameter:=clsPlotElementSubTitle)
+            clsThemeFunction.AddParameter("plot.subtitle", clsRFunctionParameter:=clsPlotElementSubTitle)
         End If
 
         If dctThemeFunctions.TryGetValue("caption", clsPlotElementCaption) Then
             clsPlotElementCaption.AddParameter("size", 8)
-            clsThemeFunction.AddParameter("caption", clsRFunctionParameter:=clsPlotElementCaption)
+            clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaption)
         End If
 
         clsFactorLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
