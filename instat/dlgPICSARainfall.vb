@@ -58,6 +58,10 @@ Public Class dlgPICSARainfall
     Private clsGeomHlineAesLowerTercile As New RFunction
     Private clsGeomHlineAesUpperTercile As New RFunction
 
+    Private clsAsDate As New RFunction
+    Private clsAsNumeric As New RFunction
+    Private clsAsNumericX As New RFunction
+
     Private strCalcColumn As String
 
     Private Sub dlgPCSARainfall_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -97,7 +101,7 @@ Public Class dlgPICSARainfall
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.SetParameterIsString()
 
-        ucrVariablesAsFactorForPicsa.SetParameter(New RParameter("y", 1))
+        ucrVariablesAsFactorForPicsa.SetParameter(New RParameter("x", 0))
         ucrVariablesAsFactorForPicsa.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForPicsa.Selector = ucrPICSARainfallSelector
         ucrVariablesAsFactorForPicsa.strSelectorHeading = "Varibles"
@@ -153,6 +157,10 @@ Public Class dlgPICSARainfall
         clsGeomHlineUpperTercile = New RFunction
         clsGeomHlineAesUpperTercile = New RFunction
         clsUpperTercileFunction = New RFunction
+
+        clsAsDate = New RFunction
+        clsAsNumeric = New RFunction
+        clsAsNumericX = New RFunction
 
         clsXLabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYLabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -300,6 +308,15 @@ Public Class dlgPICSARainfall
         clsBaseOperator.AddParameter("xlab", clsRFunctionParameter:=clsXLabsFunction)
         clsXLabsFunction.AddParameter("label", Chr(34) & Chr(34))
 
+        clsAsDate.SetRCommand("as.Date")
+        clsAsDate.AddParameter("origin", Chr(34) & "2015-12-31" & Chr(34), iPosition:=1)
+
+        clsAsNumeric.SetRCommand("as.numeric")
+        clsAsNumericX.SetRCommand("as.numeric")
+
+        clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumericX, iPosition:=0)
+        clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
+
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrPICSARainfallSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -308,12 +325,14 @@ Public Class dlgPICSARainfall
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsAsDate, New RParameter("x", 0), iAdditionalPairNo:=1)
+
         ucrPICSARainfallSelector.SetRCode(clsRggplotFunction, bReset)
-        ucrReceiverX.SetRCode(clsRaesFunction, bReset)
+        ucrReceiverX.SetRCode(clsAsNumericX, bReset)
         ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
-        ucrVariablesAsFactorForPicsa.SetRCode(clsRaesFunction, bReset)
+        ucrVariablesAsFactorForPicsa.SetRCode(clsAsNumeric, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -346,7 +365,7 @@ Public Class dlgPICSARainfall
 
     'add more functions 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
-        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, bReset:=bResetSubdialog)
+        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -357,7 +376,6 @@ Public Class dlgPICSARainfall
         bResetSubdialog = False
 
         ucrVariablesAsFactorForPicsa.SetParameter(New RParameter("x"))
-
     End Sub
 
     Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
