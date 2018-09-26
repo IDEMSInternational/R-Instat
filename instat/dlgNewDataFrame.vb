@@ -199,7 +199,7 @@ Public Class dlgNewDataFrame
         TestOKEnabled()
     End Sub
 
-    Private Sub txtCommand_Leave(sender As Object, e As EventArgs) Handles txtCommand.Leave
+    Private Sub txtCommand_Leave(sender As Object, e As EventArgs) Handles txtCommand.TextChanged
         ucrBase.clsRsyntax.SetCommandString(txtCommand.Text)
     End Sub
 
@@ -249,7 +249,44 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub btnExample_Click(sender As Object, e As EventArgs) Handles btnExample.Click
-        'TODO
-        'show a popup that displays the example commands
+        'shows a popup that displays the example commands
+        Dim frm As New Form
+        Dim lstView As New ListView
+        frm.ShowInTaskbar = False
+        frm.FormBorderStyle = FormBorderStyle.None
+        frm.Size = New Size(txtCommand.Width, txtCommand.Height)
+        frm.Controls.Add(lstView)
+
+        'Set the listview properties
+        lstView.Dock = DockStyle.Fill
+        lstView.Scrollable = True
+        lstView.View = View.Details
+        lstView.FullRowSelect = True
+
+        'add columns
+        lstView.Columns.Add("Command", 250)
+        lstView.Columns.Add("Comment", 200)
+
+        lstView.Items.Add(New ListViewItem({"data.frame()", "Empty data frame"}))
+        lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data = NA, nrow = 10, ncol = 2)", "10 rows and 2 columns filled with missing values"}))
+        lstView.Items.Add(New ListViewItem({"data.frame(x=1:30, y=rnorm(30,mean = 100, sd = 15), z = runif(30, min = 10, max = 30))", " "}))
+        lstView.Items.Add(New ListViewItem({"data.frame( block = gl(4,3), treat = c(""C"",""A"",""B"",""B"",""C"",""A"",""A"",""B"",""C"",""A"",""C"",""B""), yield = c(74, 68, 50,62,68,57,70,56,83, 67, 67,59))", " "}))
+        'lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 100, data_theme = ""the_works"")", " "}))
+
+        'set respective handlers
+        AddHandler lstView.LostFocus, Sub()
+                                          frm.Close()
+                                      End Sub
+        AddHandler lstView.Click, Sub()
+                                      If lstView.SelectedItems.Count > 0 Then
+                                          txtCommand.Text = lstView.SelectedItems.Item(0).SubItems(0).Text
+                                          frm.Close()
+                                      End If
+                                  End Sub
+
+        Dim ctlpos As Point = btnExample.PointToScreen(New Point(0, 0)) 'Point.Empty is not function so use Point(0, 0)
+        frm.StartPosition = FormStartPosition.Manual 'set it to manual
+        frm.Location = New Point(ctlpos.X - 2, ctlpos.Y - frm.Height - 2) 'set location to show the form just above the examples button
+        frm.Show()
     End Sub
 End Class
