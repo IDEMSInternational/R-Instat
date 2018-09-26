@@ -90,9 +90,6 @@ Public Class sdgSaveColumnPosition
             InitialiseControl()
             bControlsNotInitialised = False
         End If
-        ucrSelectorColumns.Visible = True
-        ucrReceiverColumn.Visible = True
-        lblColumns.Visible = True
         ucrSelectorColumns.Reset()
         bUserSelected = False
     End Sub
