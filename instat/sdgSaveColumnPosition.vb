@@ -52,6 +52,7 @@ Public Class sdgSaveColumnPosition
         ucrReceiverColumn.Selector = ucrSelectorColumns
         ucrReceiverColumn.SetMeAsReceiver()
         ucrReceiverColumn.bUseFilteredData = False
+        ucrReceiverColumn.SetLinkedDisplayControl(lblColumns)
 
         'Panel and radio buttons
         ucrPnlColumnPosition.SetParameter(New RParameter("before"))
@@ -77,8 +78,6 @@ Public Class sdgSaveColumnPosition
         clsDefaultFunction = clsColPosFunction
 
         bRcodeFlag = True
-        ucrSelectorColumns.Enabled = True
-        ucrReceiverColumn.Enabled = True 'the receiver won't read from the RCode if its not Enabled
         ucrSelectorColumns.SetDataframe(strDataFrameName, False)
         ucrPnlColumnPosition.SetRCode(clsDefaultFunction, True)
         ucrReceiverColumn.SetRCode(clsDefaultFunction, True)
@@ -91,8 +90,9 @@ Public Class sdgSaveColumnPosition
             InitialiseControl()
             bControlsNotInitialised = False
         End If
-        ucrSelectorColumns.Enabled = True
-        ucrReceiverColumn.Enabled = True
+        ucrSelectorColumns.Visible = True
+        ucrReceiverColumn.Visible = True
+        lblColumns.Visible = True
         ucrSelectorColumns.Reset()
         bUserSelected = False
     End Sub
@@ -108,15 +108,15 @@ Public Class sdgSaveColumnPosition
     Private Sub SetColumnControlsAndParameterState()
         If rdoStart.Checked Then
             clsDefaultFunction.RemoveParameterByName("adjacent_column")
-            ucrSelectorColumns.Enabled = False
-            ucrReceiverColumn.Enabled = False
-            lblColumns.Enabled = False
+            ucrSelectorColumns.Visible = False
+            ucrReceiverColumn.Visible = False
+            lblColumns.Visible = False
             grpColumnPosition.Text = "New column will be at the: "
         ElseIf rdoEnd.Checked Then
             clsDefaultFunction.RemoveParameterByName("adjacent_column")
-            ucrSelectorColumns.Enabled = False
-            ucrReceiverColumn.Enabled = False
-            lblColumns.Enabled = False
+            ucrSelectorColumns.Visible = False
+            ucrReceiverColumn.Visible = False
+            lblColumns.Visible = False
             grpColumnPosition.Text = "New column will be at the: "
         ElseIf rdoBefore.Checked Then
             If Not ucrReceiverColumn.IsEmpty Then
@@ -124,9 +124,9 @@ Public Class sdgSaveColumnPosition
             Else
                 clsDefaultFunction.RemoveParameterByName("adjacent_column")
             End If
-            ucrSelectorColumns.Enabled = True
-            ucrReceiverColumn.Enabled = True
-            lblColumns.Enabled = True
+            ucrSelectorColumns.Visible = True
+            ucrReceiverColumn.Visible = True
+            lblColumns.Visible = True
             grpColumnPosition.Text = "New column will be: "
         ElseIf rdoAfter.Checked Then
             If Not ucrReceiverColumn.IsEmpty Then
@@ -134,9 +134,9 @@ Public Class sdgSaveColumnPosition
             Else
                 clsDefaultFunction.RemoveParameterByName("adjacent_column")
             End If
-            ucrSelectorColumns.Enabled = True
-            ucrReceiverColumn.Enabled = True
-            lblColumns.Enabled = True
+            ucrSelectorColumns.Visible = True
+            ucrReceiverColumn.Visible = True
+            lblColumns.Visible = True
             grpColumnPosition.Text = "New column will be: "
         End If
     End Sub
