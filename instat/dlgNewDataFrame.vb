@@ -78,7 +78,6 @@ Public Class dlgNewDataFrame
         clsEmptyMatrixFunction.AddParameter("ncol", 2, iPosition:=2)
 
         clsEmptyOverallFunction.AddParameter("data", clsRFunctionParameter:=clsEmptyMatrixFunction, iPosition:=0)
-        'ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
 
         'Construct option function
         clsConstructFunction = New RFunction
@@ -117,7 +116,6 @@ Public Class dlgNewDataFrame
                     'if both the column name and expression exist then enable
                     If Not String.IsNullOrEmpty(row.Cells("colName").Value) AndAlso Not String.IsNullOrEmpty(row.Cells("colExpression").Value) Then
                         ucrBase.OKEnabled(True)
-                        'Exit For
                     End If
                 Next
             End If
