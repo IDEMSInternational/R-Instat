@@ -280,27 +280,6 @@ Public Class ucrButtons
         End If
     End Sub
 
-    'construct and format the comment
-    Private Function GetFormattedComment1(strComment As String, Optional bAppendFirstLineWithHash As Boolean = True) As String
-        Dim strReconstructedComment As String = ""
-        Dim arrCommentParts As String()
-        If strComment.Length > 0 Then
-            arrCommentParts = strComment.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-            For Each strPart As String In arrCommentParts
-                If strReconstructedComment = "" Then
-                    If bAppendFirstLineWithHash Then
-                        strReconstructedComment = "# " & strPart
-                    Else
-                        strReconstructedComment = strPart
-                    End If
-                Else
-                    strReconstructedComment = strReconstructedComment & Environment.NewLine & "# " & strPart
-                End If
-            Next
-        End If
-        Return strReconstructedComment
-    End Function
-
     Private Sub AddButtonInCommentTextbox()
         Dim btnMoreComment As New Button
         'add the button to the comment textbox first
