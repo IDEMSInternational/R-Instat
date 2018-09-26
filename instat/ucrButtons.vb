@@ -104,7 +104,7 @@ Public Class ucrButtons
             strComments = ""
         End If
         If Not bRun AndAlso strComments <> "" Then
-            frmMain.AddToScriptWindow(getFormattedComment(strComments) & Environment.NewLine)
+            frmMain.AddToScriptWindow(frmMain.clsRLink.GetFormattedComment(strComments) & Environment.NewLine)
         End If
 
         'Get this list before doing ToScript then no need for global variable name
@@ -115,7 +115,7 @@ Public Class ucrButtons
         lstBeforeCodes = clsRsyntax.GetBeforeCodes()
         For i As Integer = 0 To clsRsyntax.lstBeforeCodes.Count - 1
             If bFirstCode Then
-                strComment = getFormattedComment(strComments, bAppendFirstLineWithHash:=False)
+                strComment = strComments
                 bFirstCode = False
             Else
                 strComment = ""
@@ -130,7 +130,7 @@ Public Class ucrButtons
         'Run base code from RSyntax
         If bRun Then
             If bFirstCode Then
-                strComment = getFormattedComment(strComments, bAppendFirstLineWithHash:=False)
+                strComment = strComments
                 bFirstCode = False
             Else
                 strComment = ""
@@ -150,7 +150,7 @@ Public Class ucrButtons
         For i As Integer = 0 To lstAfterCodes.Count - 1
             If bRun Then
                 If bFirstCode Then
-                    strComment =  getFormattedComment(strComments, bAppendFirstLineWithHash:=False)
+                    strComment = strComments
                     bFirstCode = False
                 Else
                     strComment = ""
@@ -281,20 +281,20 @@ Public Class ucrButtons
     End Sub
 
     'construct and format the comment
-    Private Function getFormattedComment(strComment As String, Optional bAppendFirstLineWithHash As Boolean = True) As String
+    Private Function GetFormattedComment1(strComment As String, Optional bAppendFirstLineWithHash As Boolean = True) As String
         Dim strReconstructedComment As String = ""
-        Dim strCommentParts As String()
+        Dim arrCommentParts As String()
         If strComment.Length > 0 Then
-            strCommentParts = strComment.Split(ControlChars.CrLf.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-            For Each part As String In strCommentParts
+            arrCommentParts = strComment.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+            For Each strPart As String In arrCommentParts
                 If strReconstructedComment = "" Then
                     If bAppendFirstLineWithHash Then
-                        strReconstructedComment = "# " & part
+                        strReconstructedComment = "# " & strPart
                     Else
-                        strReconstructedComment = part
+                        strReconstructedComment = strPart
                     End If
                 Else
-                    strReconstructedComment = strReconstructedComment & Environment.NewLine & "# " & part
+                    strReconstructedComment = strReconstructedComment & Environment.NewLine & "# " & strPart
                 End If
             Next
         End If
