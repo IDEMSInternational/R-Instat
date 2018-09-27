@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class sdgSelectMonth
     Private ucrReceiverMonth As ucrReceiverSingle
-    Private clsNotEqualToOperator, clsAndFilterOperator As New ROperator
+    Private clsInOperator As New ROperator
 
     Private Sub sdgSelectMonth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -32,28 +32,12 @@ Public Class sdgSelectMonth
         ucrMonthAsFactor.bIncludeNA = False
     End Sub
 
-    Public Sub SetRCode(Optional clsNewNotEqualToOperator As ROperator = Nothing, Optional clsNewAndFilterOperator As ROperator = Nothing, Optional ucrNewReceiverMonth As ucrReceiverSingle = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(Optional clsNewInOperator As ROperator = Nothing, Optional ucrNewReceiverMonth As ucrReceiverSingle = Nothing, Optional bReset As Boolean = False)
         ucrReceiverMonth = ucrNewReceiverMonth
-        clsNotEqualToOperator = clsNewNotEqualToOperator
-        clsAndFilterOperator = clsNewAndFilterOperator
+        clsInOperator = clsNewInOperator
     End Sub
 
     Private Sub ucrMonthAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrMonthAsFactor.ControlValueChanged
-        Dim strSelectedMonth As String
-        Dim iNumLevels As New List(Of Integer)
-        Dim iNewPosition As Integer = 0
-        'Dim iRow As Integer
-
-        clsNotEqualToOperator.AddParameter("index", Chr(39) & ucrMonthAsFactor.shtCurrSheet(5, 1) & Chr(39), iPosition:=1)
-
-        clsAndFilterOperator.AddParameter("i", clsROperatorParameter:=clsNotEqualToOperator, iPosition:=0)
-
-        'iNumLevels = ucrMonthAsFactor.grdFactorData.CurrentWorksheet.
-
-        For Each i In iNumLevels
-            strSelectedMonth = ucrReceiverMonth.GetVariableNames(False) & "!=" & Chr(39) & ucrMonthAsFactor.shtCurrSheet(i, 1) & Chr(39)
-            clsAndFilterOperator.AddParameter("selected_month", strSelectedMonth, iPosition:=iNewPosition)
-            iNewPosition += 1
-        Next
+        clsInOperator.AddParameter("months", ucrMonthAsFactor.GetSelectedLevels(), iPosition:=1)
     End Sub
 End Class
