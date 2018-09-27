@@ -312,6 +312,9 @@ Public Class dlgPICSARainfall
         clsBaseOperator.AddParameter("xlab", clsRFunctionParameter:=clsXLabsFunction)
         clsXLabsFunction.AddParameter("label", Chr(34) & Chr(34))
 
+        clsBaseOperator.AddParameter("ylab", clsRFunctionParameter:=clsYLabsFunction)
+        clsYLabsFunction.AddParameter("label", Chr(34) & Chr(34))
+
         clsAsDate.SetRCommand("as.Date")
         clsAsDate.AddParameter("origin", Chr(34) & "2015-12-31" & Chr(34), iPosition:=1)
 

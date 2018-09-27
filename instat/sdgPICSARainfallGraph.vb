@@ -57,6 +57,11 @@ Public Class sdgPICSARainfallGraph
 
     Public Sub InitialiseControls()
 
+        ' Temp disabled until implemented
+        ucrChkAddMeanLabel.Enabled = False
+        ucrChkAddMedianLabel.Enabled = False
+        ucrChkAddTercilesLabel.Enabled = False
+
         ' Titles 
         ucrPnlXAxisTitle.AddRadioButton(rdoAutoXAxis)
         ucrPnlXAxisTitle.AddRadioButton(rdoNoTitleXAxisTitle)
@@ -310,12 +315,12 @@ Public Class sdgPICSARainfallGraph
         ucrChkAddMedianLabel.SetText("Include Label")
 
         ' Tercile Lines
-        ucrChkAddTerciles.SetText("Add Terciles")
+        ucrChkAddTerciles.SetText("Add Tercile Lines")
         ucrChkAddTerciles.AddParameterPresentCondition(True, "hlinelowertercile", True)
         ucrChkAddTerciles.AddParameterPresentCondition(False, "hlinelowertercile", False)
-        ucrChkAddTerciles.AddToLinkedControls(ucrAddTercilesLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddTerciles.AddToLinkedControls(ucrChkAddTercilesLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrAddTercilesLabel.SetText("Include Labels")
+        ucrChkAddTercilesLabel.SetText("Include Labels")
 
         bControlsInitialised = True
     End Sub
@@ -527,26 +532,27 @@ Public Class sdgPICSARainfallGraph
         AddRemoveHline()
     End Sub
 
-
     Private Sub AddRemoveHline()
-        If ucrChkAddMean.Checked Then
-            clsBaseOperator.AddParameter("hlinemean", clsRFunctionParameter:=clsGeomHlineMean, iPosition:=20)
-        Else
-            clsBaseOperator.RemoveParameterByName("hlinemean")
-        End If
+        If bRCodeSet Then
+            If ucrChkAddMean.Checked Then
+                clsBaseOperator.AddParameter("hlinemean", clsRFunctionParameter:=clsGeomHlineMean, iPosition:=20)
+            Else
+                clsBaseOperator.RemoveParameterByName("hlinemean")
+            End If
 
-        If ucrChkAddMedian.Checked Then
-            clsBaseOperator.AddParameter("hlinemedian", clsRFunctionParameter:=clsGeomHlineMedian, iPosition:=21)
-        Else
-            clsBaseOperator.RemoveParameterByName("hlinemedian")
-        End If
+            If ucrChkAddMedian.Checked Then
+                clsBaseOperator.AddParameter("hlinemedian", clsRFunctionParameter:=clsGeomHlineMedian, iPosition:=21)
+            Else
+                clsBaseOperator.RemoveParameterByName("hlinemedian")
+            End If
 
-        If ucrChkAddTerciles.Checked Then
-            clsBaseOperator.AddParameter("hlinelowertercile", clsRFunctionParameter:=clsGeomHlineLowerTercile, iPosition:=22)
-            clsBaseOperator.AddParameter("hlineuppertercile", clsRFunctionParameter:=clsGeomHlineUpperTercile, iPosition:=23)
-        Else
-            clsBaseOperator.RemoveParameterByName("hlinelowertercile")
-            clsBaseOperator.RemoveParameterByName("hlineuppertercile")
+            If ucrChkAddTerciles.Checked Then
+                clsBaseOperator.AddParameter("hlinelowertercile", clsRFunctionParameter:=clsGeomHlineLowerTercile, iPosition:=22)
+                clsBaseOperator.AddParameter("hlineuppertercile", clsRFunctionParameter:=clsGeomHlineUpperTercile, iPosition:=23)
+            Else
+                clsBaseOperator.RemoveParameterByName("hlinelowertercile")
+                clsBaseOperator.RemoveParameterByName("hlineuppertercile")
+            End If
         End If
     End Sub
 
