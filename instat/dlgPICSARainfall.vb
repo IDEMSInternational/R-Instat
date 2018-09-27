@@ -43,6 +43,8 @@ Public Class dlgPICSARainfall
     Private clsFactorLevels As New RFunction
     Private FactorLevel As RDotNet.SymbolicExpression
 
+    Private clsDatePeriodOperator As New ROperator
+
     Private clsMeanFunction As New RFunction
     Private clsMedianFunction As New RFunction
     Private clsLowerTercileFunction As New RFunction
@@ -157,6 +159,8 @@ Public Class dlgPICSARainfall
         clsGeomHlineUpperTercile = New RFunction
         clsGeomHlineAesUpperTercile = New RFunction
         clsUpperTercileFunction = New RFunction
+
+        clsDatePeriodOperator = New ROperator
 
         clsAsDate = New RFunction
         clsAsNumeric = New RFunction
@@ -318,6 +322,10 @@ Public Class dlgPICSARainfall
         clsAsDate.SetRCommand("as.Date")
         clsAsDate.AddParameter("origin", Chr(34) & "2015-12-31" & Chr(34), iPosition:=1)
 
+        clsDatePeriodOperator.SetOperation(" ")
+        clsDatePeriodOperator.bSpaceAroundOperation = False
+        clsDatePeriodOperator.bToScriptAsRString = True
+
         clsAsNumeric.SetRCommand("as.numeric")
         clsAsNumericX.SetRCommand("as.numeric")
 
@@ -372,7 +380,7 @@ Public Class dlgPICSARainfall
 
     'add more functions 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
-        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
+        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewDatePeriodOperator:=clsDatePeriodOperator, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.ShowDialog()
         bResetSubdialog = False
     End Sub

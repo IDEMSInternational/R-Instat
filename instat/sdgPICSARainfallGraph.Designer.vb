@@ -71,6 +71,9 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputXTo = New instat.ucrInputTextBox()
         Me.ucrNudXAxisAngle = New instat.ucrNud()
         Me.grpYAxisLabels = New System.Windows.Forms.GroupBox()
+        Me.ucrNudDateBreakNumber = New instat.ucrNud()
+        Me.ucrInputDateBreakTime = New instat.ucrInputComboBox()
+        Me.ucrChkSpecifyDateBreaks = New instat.ucrCheck()
         Me.ucrInputLabelForDays = New instat.ucrInputComboBox()
         Me.ucrNudYAxisAngle = New instat.ucrNud()
         Me.ucrChkLabelForDays = New instat.ucrCheck()
@@ -500,6 +503,9 @@ Partial Class sdgPICSARainfallGraph
         '
         'grpYAxisLabels
         '
+        Me.grpYAxisLabels.Controls.Add(Me.ucrNudDateBreakNumber)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrInputDateBreakTime)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrChkSpecifyDateBreaks)
         Me.grpYAxisLabels.Controls.Add(Me.ucrInputLabelForDays)
         Me.grpYAxisLabels.Controls.Add(Me.ucrNudYAxisAngle)
         Me.grpYAxisLabels.Controls.Add(Me.ucrChkLabelForDays)
@@ -516,6 +522,29 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.grpYAxisLabels, "grpYAxisLabels")
         Me.grpYAxisLabels.Name = "grpYAxisLabels"
         Me.grpYAxisLabels.TabStop = False
+        '
+        'ucrNudDateBreakNumber
+        '
+        Me.ucrNudDateBreakNumber.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDateBreakNumber.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudDateBreakNumber, "ucrNudDateBreakNumber")
+        Me.ucrNudDateBreakNumber.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDateBreakNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDateBreakNumber.Name = "ucrNudDateBreakNumber"
+        Me.ucrNudDateBreakNumber.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputDateBreakTime
+        '
+        Me.ucrInputDateBreakTime.AddQuotesIfUnrecognised = True
+        Me.ucrInputDateBreakTime.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDateBreakTime, "ucrInputDateBreakTime")
+        Me.ucrInputDateBreakTime.Name = "ucrInputDateBreakTime"
+        '
+        'ucrChkSpecifyDateBreaks
+        '
+        Me.ucrChkSpecifyDateBreaks.Checked = False
+        resources.ApplyResources(Me.ucrChkSpecifyDateBreaks, "ucrChkSpecifyDateBreaks")
+        Me.ucrChkSpecifyDateBreaks.Name = "ucrChkSpecifyDateBreaks"
         '
         'ucrInputLabelForDays
         '
@@ -1016,4 +1045,7 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents Label1 As Label
     Friend WithEvents lblXAxisTitleSize As Label
     Friend WithEvents ucrChkXAxisAngle As ucrCheck
+    Friend WithEvents ucrChkSpecifyDateBreaks As ucrCheck
+    Friend WithEvents ucrNudDateBreakNumber As ucrNud
+    Friend WithEvents ucrInputDateBreakTime As ucrInputComboBox
 End Class

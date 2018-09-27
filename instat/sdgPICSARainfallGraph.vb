@@ -41,6 +41,9 @@ Public Class sdgPICSARainfallGraph
     Private clsPanelBackgroundElementRect As New RFunction
     Private clsPanelBorderElementRect As New RFunction
     Private dctLabelForDays As New Dictionary(Of String, String)
+    Private dctDateTimePeriods As New Dictionary(Of String, String)
+
+    Private clsDatePeriodOperator As New ROperator
 
     Private clsGeomHlineMean As New RFunction
     Private clsGeomHlineMedian As New RFunction
@@ -143,7 +146,7 @@ Public Class sdgPICSARainfallGraph
         ucrChkYAxisAngle.SetParameter(New RParameter("angle"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrNudYAxisAngle.SetMinMax(0, 360)
 
-        ucrChkSpecifyXAxisTickMarks.SetText("Specify Tick Marks")
+        ucrChkSpecifyXAxisTickMarks.SetText("Specify Breaks")
         ucrChkSpecifyXAxisTickMarks.SetParameter(New RParameter("scale_x_continuous"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrInputXFrom.SetParameter(New RParameter("from"))
@@ -158,7 +161,7 @@ Public Class sdgPICSARainfallGraph
         ucrInputXInStepsOf.SetValidationTypeAsNumeric()
         ucrInputXInStepsOf.AddQuotesIfUnrecognised = False
 
-        ucrChkSpecifyYAxisTickMarks.SetText("Specify Tick Marks")
+        ucrChkSpecifyYAxisTickMarks.SetText("Numeric Breaks")
         ucrChkSpecifyYAxisTickMarks.SetParameter(New RParameter("scale_y_continuous"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrInputYFrom.SetParameter(New RParameter("from"))
@@ -173,14 +176,35 @@ Public Class sdgPICSARainfallGraph
         ucrInputYInStepsOf.SetValidationTypeAsNumeric()
         ucrInputYInStepsOf.AddQuotesIfUnrecognised = False
 
-        ucrChkLabelForDays.SetText("Labels for Days in Year")
+        ucrChkLabelForDays.SetText("Format as Date")
         ucrChkLabelForDays.SetParameter(New RParameter("scale_y_date"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkLabelForDays.AddToLinkedControls(ucrInputLabelForDays, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Day Month (1 Jan)")
+        ucrChkLabelForDays.AddToLinkedControls(ucrChkSpecifyDateBreaks, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputLabelForDays.SetParameter(New RParameter("date_label", 0))
         dctLabelForDays.Add("Day Number (1-366)", Chr(34) & "%j" & Chr(34))
         dctLabelForDays.Add("Day Month (1 Jan)", Chr(34) & "%d %b" & Chr(34))
         dctLabelForDays.Add("Day Month Full (1 January)", Chr(34) & "%d %B" & Chr(34))
         ucrInputLabelForDays.SetItems(dctLabelForDays)
+        ucrInputLabelForDays.SetDropDownStyleAsNonEditable()
+
+        ucrChkSpecifyDateBreaks.SetText("Specify Breaks")
+        ucrChkSpecifyDateBreaks.SetParameter(New RParameter("date_breaks"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkSpecifyDateBreaks.AddToLinkedControls(ucrInputDateBreakTime, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Months")
+        ucrChkSpecifyDateBreaks.AddToLinkedControls(ucrNudDateBreakNumber, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+
+        dctDateTimePeriods.Add("Days", "days")
+        dctDateTimePeriods.Add("Weeks", "weeks")
+        dctDateTimePeriods.Add("Months", "months")
+        dctDateTimePeriods.Add("Years", "years")
+
+        ucrInputDateBreakTime.SetParameter(New RParameter("right", 1))
+        ucrInputDateBreakTime.SetDropDownStyleAsNonEditable()
+        ucrInputDateBreakTime.SetItems(dctDateTimePeriods)
+
+        ucrNudDateBreakNumber.Minimum = 1
+        ucrNudDateBreakNumber.Increment = 1
+        ucrNudDateBreakNumber.SetParameter(New RParameter("left", 0))
 
         ucrChkYAxisAngle.AddToLinkedControls(ucrNudYAxisAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkYAxisLabelSize.AddToLinkedControls(ucrNudYAxisLabelSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -191,7 +215,6 @@ Public Class sdgPICSARainfallGraph
 
         ucrChkXAxisAngle.AddToLinkedControls(ucrNudXAxisAngle, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkXAxisLabelSize.AddToLinkedControls(ucrNudXaxisLabelSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLabelForDays.AddToLinkedControls(ucrInputLabelForDays, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Day Month (1 Jan)")
 
         ucrChkSpecifyXAxisTickMarks.AddToLinkedControls({ucrInputXFrom, ucrInputXTo, ucrInputXInStepsOf}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputXFrom.SetLinkedDisplayControl(lblXFrom)
@@ -327,7 +350,7 @@ Public Class sdgPICSARainfallGraph
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing, Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsNumeric As RFunction = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing, Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsNumeric As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing, Optional bReset As Boolean = False)
         bRCodeSet = False
         clsBaseOperator = clsNewOperator
 
@@ -418,6 +441,8 @@ Public Class sdgPICSARainfallGraph
 
         clsAsDate = clsNewAsDate
         clsAsNumeric = clsNewAsNumeric
+
+        clsDatePeriodOperator = clsNewDatePeriodOperator
 
         clsYScaleDateFunction = clsNewYScaleDateFunction
 
@@ -520,6 +545,10 @@ Public Class sdgPICSARainfallGraph
         ucrChkLabelForDays.SetRCode(clsBaseOperator, bCloneIfNeeded:=True)
         ucrInputLabelForDays.SetRCode(clsYScaleDateFunction, bCloneIfNeeded:=True)
 
+        ucrChkSpecifyDateBreaks.SetRCode(clsYScaleDateFunction, bCloneIfNeeded:=True)
+        ucrInputDateBreakTime.SetRCode(clsDatePeriodOperator, bCloneIfNeeded:=True)
+        ucrNudDateBreakNumber.SetRCode(clsDatePeriodOperator, bCloneIfNeeded:=True)
+
         ucrChkAddMean.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddMedian.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddTerciles.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
@@ -533,6 +562,7 @@ Public Class sdgPICSARainfallGraph
         AddRemoveSpecifyYAxisTickMarks()
         AddRemoveHline()
         AddRemovePanelBorder()
+        AddRemoveDateBreaks()
     End Sub
 
     Private Sub AddRemoveHline()
@@ -832,6 +862,20 @@ Public Class sdgPICSARainfallGraph
             ucrChkLabelForDays.Checked = False
         ElseIf ucrChangedControl.Equals(ucrChkLabelForDays) AndAlso ucrChkLabelForDays.Checked Then
             ucrChkSpecifyYAxisTickMarks.Checked = False
+        End If
+    End Sub
+
+    Private Sub ucrChkSpecifyDateBreaks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyDateBreaks.ControlValueChanged, ucrInputDateBreakTime.ControlValueChanged, ucrNudDateBreakNumber.ControlValueChanged
+        AddRemoveDateBreaks()
+    End Sub
+
+    Private Sub AddRemoveDateBreaks()
+        If bRCodeSet Then
+            If ucrChkSpecifyDateBreaks.Checked AndAlso ucrNudDateBreakNumber.GetText <> "" AndAlso ucrInputDateBreakTime.GetText <> "" Then
+                clsYScaleDateFunction.AddParameter("date_breaks", clsROperatorParameter:=clsDatePeriodOperator)
+            Else
+                clsYScaleDateFunction.RemoveParameterByName("date_breaks")
+            End If
         End If
     End Sub
 End Class
