@@ -208,6 +208,7 @@ Public Class dlgPICSARainfall
         clsGeomHlineAesMean.AddParameter("yintercept", clsRFunctionParameter:=clsMeanFunction)
 
         clsMeanFunction.SetRCommand("mean")
+        clsMeanFunction.AddParameter("na.rm", "TRUE")
 
         'Median Line
         clsGeomHlineMedian.SetPackageName("ggplot2")
@@ -220,6 +221,7 @@ Public Class dlgPICSARainfall
         clsGeomHlineAesMedian.AddParameter("yintercept", clsRFunctionParameter:=clsMedianFunction)
 
         clsMedianFunction.SetRCommand("median")
+        clsMedianFunction.AddParameter("na.rm", "TRUE")
 
         'Lower Tercile Line
         clsGeomHlineLowerTercile.SetPackageName("ggplot2")
@@ -233,6 +235,7 @@ Public Class dlgPICSARainfall
 
         clsLowerTercileFunction.SetRCommand("quantile")
         clsLowerTercileFunction.AddParameter("probs", "1/3")
+        clsLowerTercileFunction.AddParameter("na.rm", "TRUE")
 
         'Upper Tercile Line
         clsGeomHlineUpperTercile.SetPackageName("ggplot2")
@@ -246,6 +249,7 @@ Public Class dlgPICSARainfall
 
         clsUpperTercileFunction.SetRCommand("quantile")
         clsUpperTercileFunction.AddParameter("probs", "2/3")
+        clsUpperTercileFunction.AddParameter("na.rm", "TRUE")
 
         If dctThemeFunctions.TryGetValue("panel.background", clsPanelBackgroundElementRect) Then
             clsPanelBackgroundElementRect.AddParameter("colour", Chr(34) & "white" & Chr(34))
