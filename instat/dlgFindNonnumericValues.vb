@@ -38,6 +38,7 @@ Public Class dlgFindNonnumericValues
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 545
         ucrReceiverColumn.Selector = ucrSelectorShowNonNumericValues
         ucrSelectorShowNonNumericValues.bUseCurrentFilter = False
 
