@@ -117,7 +117,7 @@ Public Class dlgClimaticCheckDataRain
         ucrChkWetDays.SetParameter(New RParameter("wet_days", strCumulativeTestCalc, 1, False), bNewChangeParameterValue:=False)
         ucrChkWetDays.SetText("Consecutive")
 
-        ucrChkDryMonth.SetParameter(New RParameter("dry_month", strDryMonthTestCalc, 1, False), bNewChangeParameterValue:=False)
+        ucrChkDryMonth.SetParameter(New RParameter("dry_month", strDryMonthCalc, 1, False), bNewChangeParameterValue:=False)
         ucrChkDryMonth.SetText("Dry Month")
 
         ucrNudSame.SetParameter(New RParameter("right", 1, bNewIncludeArgumentName:=False))
@@ -188,6 +188,8 @@ Public Class dlgClimaticCheckDataRain
         clsEqualOperator = New ROperator
         clsLargeOperator = New ROperator
         clsLargeLessOperator = New ROperator
+        clsInOperator = New ROperator
+        clsNotOperator = New ROperator
 
         clsRainyDaysOperator.Clear()
         clsUpperOutlierOperator.Clear()
@@ -203,6 +205,22 @@ Public Class dlgClimaticCheckDataRain
         clsCumulativeCalcFunc.Clear()
         clsUpperOutlierlimitTestFunc.Clear()
         clsListForOutlierManipulations.Clear()
+        clsDryMonthCalculationFunc.Clear()
+        clsGroupByMonthYearFunction.Clear()
+        clsListCalcFunction.Clear()
+        clsSumFuction.Clear()
+        clsDryMonthTestCalculationFunc.Clear()
+        clsListTestFunction.Clear()
+        clsNotIsNaFunction.Clear()
+        clsDrySumFuction.Clear()
+        clsFilterMonthFunction.Clear()
+        clsGroupByListFunc.Clear()
+        clsDryMonthEqualOperator.Clear()
+        clsDryMonthAndOperator.Clear()
+        clsLessOperator.Clear()
+        clsDryTestAndOperator.Clear()
+        clsInOperator.Clear()
+        clsNotOperator.Clear()
 
         ucrSelectorRain.Reset()
         ucrReceiverElement.SetMeAsReceiver()
@@ -429,7 +447,6 @@ Public Class dlgClimaticCheckDataRain
         clsFilterMonthFunction.AddParameter("manipulations", clsRFunctionParameter:=clsGroupByListFunc, iPosition:=3)
         clsFilterMonthFunction.SetAssignTo("filter_months")
 
-
         clsInOperator.SetOperation("%in%")
         clsInOperator.AddParameter("not_month", clsROperatorParameter:=clsNotOperator, iPosition:=0)
         clsInOperator.bBrackets = False
@@ -443,7 +460,7 @@ Public Class dlgClimaticCheckDataRain
         clsDryMonthCalculationFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsDryMonthCalculationFunc.AddParameter("function_exp", clsROperatorParameter:=clsDryMonthAndOperator, iPosition:=1)
         clsDryMonthCalculationFunc.AddParameter("manipulations", clsRFunctionParameter:=clsListCalcFunction, iPosition:=3)
-        clsDryMonthCalculationFunc.AddParameter("result_name", Chr(34) & strDryMonthTestCalc & Chr(34), iPosition:=4)
+        clsDryMonthCalculationFunc.AddParameter("result_name", Chr(34) & strDryMonthCalc & Chr(34), iPosition:=4)
         clsDryMonthCalculationFunc.SetAssignTo("dry_month_calculation")
 
         clsListCalcFunction.SetRCommand("list")
@@ -508,7 +525,7 @@ Public Class dlgClimaticCheckDataRain
         ucrChkSame.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("same", strParamValue:=clsSameTestFunc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrChkWetDays.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("wet_days", strParamValue:=clsCumulativeTestFunc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrChkOutlier.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("outlier", clsOutliersOperator, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrChkDryMonth.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("dry_month", clsDryMonthTestCalculationFunc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrChkDryMonth.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("dry_month", clsDryMonthCalculationFunc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
 
         'ucrChkCalculatedColumns.AddAdditionalCodeParameterPair(, New RParameter("save"), iAdditionalPairNo:=1)
         ucrChkCalculatedColumns.AddAdditionalCodeParameterPair(clsUpperOutlierLimitValueCalcFunc, New RParameter("save"), iAdditionalPairNo:=1)
@@ -518,6 +535,7 @@ Public Class dlgClimaticCheckDataRain
         ucrChkLogicalColumns.AddAdditionalCodeParameterPair(clsCumulativeTestFunc, New RParameter("save"), iAdditionalPairNo:=2)
         ucrChkLogicalColumns.AddAdditionalCodeParameterPair(clsUpperOutlierlimitTestFunc, New RParameter("save"), iAdditionalPairNo:=3)
         ucrChkLogicalColumns.AddAdditionalCodeParameterPair(clsLowerOutlierlimitTestFunc, New RParameter("save"), iAdditionalPairNo:=4)
+        'ucrChkLogicalColumns.AddAdditionalCodeParameterPair(clsDryMonthCalculationFunc, New RParameter("save"), iAdditionalPairNo:=5)
 
         ucrReceiverElement.SetRCode(clsLargeOperator, bReset)
         ucrNudLarge.SetRCode(clsLargeOperator, bReset)
