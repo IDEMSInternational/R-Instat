@@ -196,7 +196,7 @@ Public Class dlgNewDataFrame
         TestOKEnabled()
     End Sub
 
-    Private Sub txtCommand_Leave(sender As Object, e As EventArgs) Handles txtCommand.TextChanged
+    Private Sub txtCommand_TextChanged(sender As Object, e As EventArgs) Handles txtCommand.TextChanged
         ucrBase.clsRsyntax.SetCommandString(txtCommand.Text)
     End Sub
 
