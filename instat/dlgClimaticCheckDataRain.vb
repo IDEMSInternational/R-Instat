@@ -44,7 +44,7 @@ Public Class dlgClimaticCheckDataRain
     Private strDryMonthTestCalc As String = "dry_month_calc"
     'Dry Month
     Private clsGroupByMonthYearFunction, clsDryMonthCalculationFunc, clsListCalcFunction, clsSumFuction, clsDryMonthTestCalculationFunc, clsListTestFunction, clsNotIsNaFunction, clsDrySumFuction, clsFilterMonthFunction, clsGroupByListFunc As New RFunction
-    Private clsDryMonthEqualOperator, clsDryMonthAndOperator, clsLessOperator, clsDryTestAndOperator, clsNotEqualToOperator, clsAndFilterOperator As New ROperator
+    Private clsDryMonthEqualOperator, clsDryMonthAndOperator, clsLessOperator, clsDryTestAndOperator, clsInOperator, clsNotOperator As New ROperator
 
     'Combined Filters
     Private clsOrOperator As New ROperator
@@ -57,7 +57,7 @@ Public Class dlgClimaticCheckDataRain
     Private clsLowerOutlierOperator As New ROperator
     Private strLowerOutlierTest As String = "lower_outlier"
     Private clsOutliersOperator As New ROperator
-    Private bResetSubdialog As Boolean= False
+    Private bResetSubdialog As Boolean = False
 
     Private Sub dlgRain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -425,18 +425,19 @@ Public Class dlgClimaticCheckDataRain
         'Dry Month Calculations
         clsFilterMonthFunction.SetRCommand("instat_calculation$new")
         clsFilterMonthFunction.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
-        clsFilterMonthFunction.AddParameter("function_exp", clsROperatorParameter:=clsAndFilterOperator, iPosition:=1)
+        clsFilterMonthFunction.AddParameter("function_exp", clsROperatorParameter:=clsInOperator, iPosition:=1)
         clsFilterMonthFunction.AddParameter("manipulations", clsRFunctionParameter:=clsGroupByListFunc, iPosition:=3)
         clsFilterMonthFunction.SetAssignTo("filter_months")
 
-        clsNotEqualToOperator.SetOperation("!=")
-        'clsNotEqualToOperator.AddParameter("month", Chr(39) & "Jun" & Chr(39), iPosition:=1)
-        'clsNotEqualToOperator.bToScriptAsRString = True
 
-        clsAndFilterOperator.SetOperation("&")
-        clsAndFilterOperator.bBrackets = False
-        clsAndFilterOperator.bToScriptAsRString = True
+        clsInOperator.SetOperation("%in%")
+        clsInOperator.AddParameter("not_month", clsROperatorParameter:=clsNotOperator, iPosition:=0)
+        clsInOperator.bBrackets = False
+        clsInOperator.bToScriptAsRString = True
 
+        clsNotOperator.SetOperation("!")
+        clsNotOperator.bSpaceAroundOperation = False
+        clsNotOperator.AddParameter("space", "", iPosition:=0)
 
         clsDryMonthCalculationFunc.SetRCommand("instat_calculation$new")
         clsDryMonthCalculationFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
@@ -585,7 +586,7 @@ Public Class dlgClimaticCheckDataRain
     End Sub
 
     Private Sub cmdOmitMonths_Click(sender As Object, e As EventArgs) Handles cmdOmitMonths.Click
-        sdgSelectMonth.SetRCode(clsNewNotEqualToOperator:=clsNotEqualToOperator, clsNewAndFilterOperator:=clsAndFilterOperator, ucrNewReceiverMonth:=ucrReceiverMonth, bReset:=bResetSubdialog)
+        sdgSelectMonth.SetRCode(clsNewInOperator:=clsInOperator, ucrNewReceiverMonth:=ucrReceiverMonth, bReset:=bResetSubdialog)
         sdgSelectMonth.ShowDialog()
         bResetSubdialog = True
     End Sub
@@ -610,7 +611,7 @@ Public Class dlgClimaticCheckDataRain
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverMonth.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverElement.ControlValueChanged
-        clsNotEqualToOperator.AddParameter("Month", ucrReceiverMonth.GetVariableNames(False), iPosition:=0)
+        clsNotOperator.AddParameter("Month", ucrReceiverMonth.GetVariableNames(False), iPosition:=1)
         GroupByOptions()
         GroupByMonth()
         DryMonths()
