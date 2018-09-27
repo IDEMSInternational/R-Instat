@@ -135,7 +135,6 @@ Public Class dlgTwoVariableFitModel
         clsPoissonOperation = New ROperator
         clsRGraphicsOperator = New ROperator
         clsPowerOperator = New ROperator
-        ucrBase.clsRsyntax.ClearCodes()
         clsLM = New RFunction
         clsGLM = New RFunction
         clsAsNumeric = New RFunction
@@ -170,6 +169,8 @@ Public Class dlgTwoVariableFitModel
         clsHatvaluesFunction = New RFunction
         clsResDolarOperator = New ROperator
         clsFittedValOperator = New ROperator
+
+        ucrBase.clsRsyntax.ClearCodes()
 
         ucrSaveModels.Reset()
         ucrSelectorSimpleReg.Reset()

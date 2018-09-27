@@ -481,7 +481,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrSaveResidualsColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResidualsColumnName.ControlValueChanged
         If ucrSaveResidualsColumnName.ucrChkSave.Checked Then
-            clsRSyntax.AddToAfterCodes(clsResDolarOperator, iPosition:=5)
+            clsRSyntax.AddToAfterCodes(clsResDolarOperator, iPosition:=6)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsResDolarOperator)
         End If
@@ -489,7 +489,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrSaveFittedColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveFittedColumnName.ControlValueChanged
         If ucrSaveFittedColumnName.ucrChkSave.Checked Then
-            clsRSyntax.AddToAfterCodes(clsFittedValOperator, iPosition:=6)
+            clsRSyntax.AddToAfterCodes(clsFittedValOperator, iPosition:=7)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsFittedValOperator)
         End If
@@ -497,7 +497,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrSaveStdResidualsColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveStdResidualsColumnName.ControlValueChanged
         If ucrSaveStdResidualsColumnName.ucrChkSave.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRstandardFunction, iPosition:=7)
+            clsRSyntax.AddToAfterCodes(clsRstandardFunction, iPosition:=8)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRstandardFunction)
         End If
@@ -505,7 +505,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrSaveLeverageColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveLeverageColumnName.ControlValueChanged
         If ucrSaveLeverageColumnName.ucrChkSave.Checked Then
-            clsRSyntax.AddToAfterCodes(clsHatvaluesFunction, iPosition:=8)
+            clsRSyntax.AddToAfterCodes(clsHatvaluesFunction, iPosition:=9)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsHatvaluesFunction)
         End If
