@@ -340,7 +340,7 @@ Public Class dlgTransformClimatic
         clsRasterFuction.bToScriptAsRString = True
         clsRasterFuction.SetPackageName("raster")
         clsRasterFuction.SetRCommand("movingFun")
-        clsRasterFuction.AddParameter("n", 3, bIncludeArgumentName:=False, iPosition:=1)
+        clsRasterFuction.AddParameter("n", 3, iPosition:=1)
         clsRasterFuction.AddParameter("fun", "sum", iPosition:=2)
         clsRasterFuction.AddParameter("type", Chr(39) & "to" & Chr(39), iPosition:=3)
         clsRasterFuction.AddParameter("circular", "FALSE", iPosition:=4)
@@ -414,7 +414,7 @@ Public Class dlgTransformClimatic
         ucrReceiverData.AddAdditionalCodeParameterPair(clsCumulativeMinimum, New RParameter("x", 0, False), iAdditionalPairNo:=12)
         ucrInputSpellUpper.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
-        ucrNudSumOver.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("n", 1, False), iAdditionalPairNo:=1)
+        ucrNudSumOver.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("n", 1), iAdditionalPairNo:=1)
         ucrInputSum.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("fun", 2), iAdditionalPairNo:=1)
 
         ucrPnlTransform.SetRCode(clsTransformCheck, bReset)
