@@ -135,7 +135,9 @@ Public Class sdgPICSARainfallGraph
 
         ucrChkXAxisAngle.SetText("Angle")
         ucrChkXAxisAngle.SetParameter(New RParameter("angle"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
         ucrNudXAxisAngle.SetMinMax(0, 360)
+        ucrNudXAxisAngle.SetParameter(New RParameter("angle"))
 
         ucrChkYAxisAngle.SetText("Angle")
         ucrChkYAxisAngle.SetParameter(New RParameter("angle"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
@@ -370,10 +372,10 @@ Public Class sdgPICSARainfallGraph
         ucrNudXAxisTitleSize.SetRCode(clsXElementTitle, bCloneIfNeeded:=True)
         ucrNudYAxisTitleSize.SetRCode(clsYElementTitle, bCloneIfNeeded:=True)
 
-        ucrNudXAxisAngle.SetRCode(clsXElementLabels, bCloneIfNeeded:=True)
-        ucrNudXaxisLabelSize.SetRCode(clsXElementLabels, bCloneIfNeeded:=True)
         ucrChkXAxisAngle.SetRCode(clsXElementLabels, bCloneIfNeeded:=True)
         ucrChkXAxisLabelSize.SetRCode(clsXElementLabels, bCloneIfNeeded:=True)
+        ucrNudXAxisAngle.SetRCode(clsXElementLabels, bCloneIfNeeded:=True)
+        ucrNudXaxisLabelSize.SetRCode(clsXElementLabels, bCloneIfNeeded:=True)
 
         ucrNudYAxisAngle.SetRCode(clsYElementLabels, bCloneIfNeeded:=True)
         ucrNudYAxisLabelSize.SetRCode(clsYElementLabels, bCloneIfNeeded:=True)
@@ -405,7 +407,7 @@ Public Class sdgPICSARainfallGraph
         UcrNudMinorGridLineSize.SetRCode(clsElementPanelGridMinor, bCloneIfNeeded:=True)
 
         ucrChkBorderColour.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
-        ucrChkBorderColour.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
+        ucrInputBorderColour.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
         ucrChkBorderLineType.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
         ucrInputBorderLinetype.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
         UcrChkBorderSize.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
@@ -530,6 +532,7 @@ Public Class sdgPICSARainfallGraph
         AddRemoveSpecifyXAxisTickMarks()
         AddRemoveSpecifyYAxisTickMarks()
         AddRemoveHline()
+        AddRemovePanelBorder()
     End Sub
 
     Private Sub AddRemoveHline()
@@ -716,12 +719,14 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemoveAngleSizeXAxis()
-        If (ucrChkXAxisAngle.Checked AndAlso ucrNudXAxisAngle.GetText <> "") OrElse (ucrChkXAxisLabelSize.Checked AndAlso ucrNudXaxisLabelSize.GetText <> "") Then
-            clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsXElementLabels)
-        Else
-            clsThemeFunction.RemoveParameterByName("axis.text.x")
+        If bRCodeSet Then
+            If (ucrChkXAxisAngle.Checked AndAlso ucrNudXAxisAngle.GetText <> "") OrElse (ucrChkXAxisLabelSize.Checked AndAlso ucrNudXaxisLabelSize.GetText <> "") Then
+                clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsXElementLabels)
+            Else
+                clsThemeFunction.RemoveParameterByName("axis.text.x")
+            End If
+            AddRemoveTheme()
         End If
-        AddRemoveTheme()
     End Sub
 
     Private Sub AddRemoveAngleSizeYAxis()
@@ -761,12 +766,14 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemovePanelBorder()
-        If (ucrChkBorderColour.Checked AndAlso Not ucrInputBorderColour.IsEmpty()) OrElse (ucrChkBorderLineType.Checked AndAlso Not ucrInputBorderLinetype.IsEmpty()) OrElse (UcrChkBorderSize.Checked AndAlso ucrNudBorderSize.GetText <> "") Then
-            clsThemeFunction.AddParameter("panel.border", clsRFunctionParameter:=clsPanelBorderElementRect)
-        Else
-            clsThemeFunction.RemoveParameterByName("panel.border")
+        If bRCodeSet Then
+            If (ucrChkBorderColour.Checked AndAlso Not ucrInputBorderColour.IsEmpty()) OrElse (ucrChkBorderLineType.Checked AndAlso Not ucrInputBorderLinetype.IsEmpty()) OrElse (UcrChkBorderSize.Checked AndAlso ucrNudBorderSize.GetText <> "") Then
+                clsThemeFunction.AddParameter("panel.border", clsRFunctionParameter:=clsPanelBorderElementRect)
+            Else
+                clsThemeFunction.RemoveParameterByName("panel.border")
+            End If
+            AddRemoveTheme()
         End If
-        AddRemoveTheme()
     End Sub
 
     Private Sub ucrChkPnlBackgroundColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPnlBackgroundColour.ControlValueChanged, UcrChkPnlBackgroundFill.ControlValueChanged, UcrChkPnlBackgroundLineType.ControlValueChanged, UcrChkPnlBackgroundSize.ControlValueChanged
@@ -791,10 +798,6 @@ Public Class sdgPICSARainfallGraph
 
     Private Sub UcrChkCaptionSize_ControlValueChanged(ucrChangedControl As ucrCore)
         AddRemoveGraphCaptionSize()
-    End Sub
-
-    Private Sub ucrInputGraphTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphcCaption.ControlValueChanged
-
     End Sub
 
     Private Sub UcrChkXAxisTitleSzie_ControlValueChanged(ucrChangedControl As ucrCore)
