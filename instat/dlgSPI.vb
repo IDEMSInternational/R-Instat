@@ -102,10 +102,12 @@ Public Class dlgSPI
         clsSpeiFunction = New RFunction
         clsSpiFunction = New RFunction
         clsListFunction = New RFunction
-        clsSummaryFunction = New RFunction
         clsAsVectorFunction = New RFunction
+        clsSummaryFunction = New RFunction
 
         clsDolarOperator = New ROperator
+
+        ucrBase.clsRsyntax.ClearCodes()
 
         ucrSelectorVariable.Reset()
         ucrSaveIndex.Reset()
@@ -133,14 +135,12 @@ Public Class dlgSPI
         clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSpiFunction)
 
         clsAsVectorFunction.SetRCommand("as.vector")
-        clsAsVectorFunction.SetAssignTo(ucrSaveIndex.GetText, strTempDataframe:=ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveIndex.GetText, bAssignToIsPrefix:=True)
         clsAsVectorFunction.AddParameter("x", clsROperatorParameter:=clsDolarOperator)
 
         clsDolarOperator.SetOperation("$")
         clsDolarOperator.AddParameter("model", clsRFunctionParameter:=clsSpiFunction, iPosition:=0)
         clsDolarOperator.AddParameter("fitted", "fitted", iPosition:=1)
 
-        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAsVectorFunction, iPosition:=0)
     End Sub
@@ -160,10 +160,10 @@ Public Class dlgSPI
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverData.IsEmpty Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not ucrReceiverData.IsEmpty AndAlso ucrSaveIndex.IsComplete Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -175,17 +175,17 @@ Public Class dlgSPI
 
     Private Sub ucrPnlIndex_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlIndex.ControlContentsChanged
         If rdoSPI.Checked Then
-            ucrSaveIndex.SetPrefix("spi")
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSpiFunction)
             clsDolarOperator.AddParameter("model", clsRFunctionParameter:=clsSpiFunction, iPosition:=0)
+            ucrSaveIndex.SetPrefix("spi")
         ElseIf rdoSPEI.Checked Then
-            ucrSaveIndex.SetPrefix("spei")
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSpeiFunction)
             clsDolarOperator.AddParameter("model", clsRFunctionParameter:=clsSpeiFunction, iPosition:=0)
+            ucrSaveIndex.SetPrefix("spei")
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrSaveIndex.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
