@@ -24,7 +24,7 @@ Partial Class dlgFindNonnumericValues
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgFindNonnumericValues))
         Me.lblColumn = New System.Windows.Forms.Label()
-        Me.ucrChkFilter = New instat.ucrCheck()
+        Me.ucrChkFilterNonumerics = New instat.ucrCheck()
         Me.ucrChkShowSummary = New instat.ucrCheck()
         Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorShowNonNumericValues = New instat.ucrSelectorByDataFrameAddRemove()
@@ -38,11 +38,11 @@ Partial Class dlgFindNonnumericValues
         resources.ApplyResources(Me.lblColumn, "lblColumn")
         Me.lblColumn.Name = "lblColumn"
         '
-        'ucrChkFilter
+        'ucrChkFilterNonumerics
         '
-        Me.ucrChkFilter.Checked = False
-        resources.ApplyResources(Me.ucrChkFilter, "ucrChkFilter")
-        Me.ucrChkFilter.Name = "ucrChkFilter"
+        Me.ucrChkFilterNonumerics.Checked = False
+        resources.ApplyResources(Me.ucrChkFilterNonumerics, "ucrChkFilterNonumerics")
+        Me.ucrChkFilterNonumerics.Name = "ucrChkFilterNonumerics"
         '
         'ucrChkShowSummary
         '
@@ -91,7 +91,7 @@ Partial Class dlgFindNonnumericValues
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.lblColumnName)
         Me.Controls.Add(Me.ucrInputColumnName)
-        Me.Controls.Add(Me.ucrChkFilter)
+        Me.Controls.Add(Me.ucrChkFilterNonumerics)
         Me.Controls.Add(Me.ucrChkShowSummary)
         Me.Controls.Add(Me.lblColumn)
         Me.Controls.Add(Me.ucrReceiverColumn)
@@ -110,7 +110,7 @@ Partial Class dlgFindNonnumericValues
     Friend WithEvents lblColumn As Label
     Friend WithEvents ucrChkShowSummary As ucrCheck
     Friend WithEvents ucrReceiverColumn As ucrReceiverSingle
-    Friend WithEvents ucrChkFilter As ucrCheck
+    Friend WithEvents ucrChkFilterNonumerics As ucrCheck
     Friend WithEvents ucrInputColumnName As ucrInputTextBox
     Friend WithEvents lblColumnName As Label
 End Class

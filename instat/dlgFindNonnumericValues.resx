@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 47</value>
+    <value>263, 48</value>
   </data>
   <data name="lblColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 13</value>
@@ -150,25 +150,25 @@
   <data name="&gt;&gt;lblColumn.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="ucrChkFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 226</value>
+  <data name="ucrChkFilterNonumerics.Location" type="System.Drawing.Point, System.Drawing">
+    <value>234, 226</value>
   </data>
-  <data name="ucrChkFilter.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrChkFilterNonumerics.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 20</value>
   </data>
-  <data name="ucrChkFilter.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="ucrChkFilterNonumerics.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;ucrChkFilter.Name" xml:space="preserve">
-    <value>ucrChkFilter</value>
+  <data name="&gt;&gt;ucrChkFilterNonumerics.Name" xml:space="preserve">
+    <value>ucrChkFilterNonumerics</value>
   </data>
-  <data name="&gt;&gt;ucrChkFilter.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkFilterNonumerics.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkFilter.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkFilterNonumerics.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrChkFilter.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkFilterNonumerics.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="ucrChkShowSummary.Location" type="System.Drawing.Point, System.Drawing">
@@ -178,7 +178,7 @@
     <value>125, 20</value>
   </data>
   <data name="ucrChkShowSummary.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrChkShowSummary.Name" xml:space="preserve">
     <value>ucrChkShowSummary</value>
@@ -199,19 +199,19 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>431, 362</value>
+    <value>431, 352</value>
   </data>
   <data name="lblColumnName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 265</value>
+    <value>10, 262</value>
   </data>
   <data name="lblColumnName.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
   </data>
   <data name="lblColumnName.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>5</value>
   </data>
   <data name="lblColumnName.Text" xml:space="preserve">
     <value>Logical column:</value>
@@ -229,13 +229,13 @@
     <value>0</value>
   </data>
   <data name="ucrInputColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 262</value>
+    <value>95, 259</value>
   </data>
   <data name="ucrInputColumnName.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
   </data>
   <data name="ucrInputColumnName.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrInputColumnName.Name" xml:space="preserve">
     <value>ucrInputColumnName</value>
@@ -274,13 +274,13 @@
     <value>6</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 295</value>
+    <value>10, 292</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
