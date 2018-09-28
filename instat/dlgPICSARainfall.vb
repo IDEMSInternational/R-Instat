@@ -43,6 +43,8 @@ Public Class dlgPICSARainfall
     Private clsFactorLevels As New RFunction
     Private FactorLevel As RDotNet.SymbolicExpression
 
+    Private clsDatePeriodOperator As New ROperator
+
     Private clsMeanFunction As New RFunction
     Private clsMedianFunction As New RFunction
     Private clsLowerTercileFunction As New RFunction
@@ -158,6 +160,8 @@ Public Class dlgPICSARainfall
         clsGeomHlineAesUpperTercile = New RFunction
         clsUpperTercileFunction = New RFunction
 
+        clsDatePeriodOperator = New ROperator
+
         clsAsDate = New RFunction
         clsAsNumeric = New RFunction
         clsAsNumericX = New RFunction
@@ -208,6 +212,7 @@ Public Class dlgPICSARainfall
         clsGeomHlineAesMean.AddParameter("yintercept", clsRFunctionParameter:=clsMeanFunction)
 
         clsMeanFunction.SetRCommand("mean")
+        clsMeanFunction.AddParameter("na.rm", "TRUE")
 
         'Median Line
         clsGeomHlineMedian.SetPackageName("ggplot2")
@@ -220,6 +225,7 @@ Public Class dlgPICSARainfall
         clsGeomHlineAesMedian.AddParameter("yintercept", clsRFunctionParameter:=clsMedianFunction)
 
         clsMedianFunction.SetRCommand("median")
+        clsMedianFunction.AddParameter("na.rm", "TRUE")
 
         'Lower Tercile Line
         clsGeomHlineLowerTercile.SetPackageName("ggplot2")
@@ -233,6 +239,7 @@ Public Class dlgPICSARainfall
 
         clsLowerTercileFunction.SetRCommand("quantile")
         clsLowerTercileFunction.AddParameter("probs", "1/3")
+        clsLowerTercileFunction.AddParameter("na.rm", "TRUE")
 
         'Upper Tercile Line
         clsGeomHlineUpperTercile.SetPackageName("ggplot2")
@@ -246,6 +253,7 @@ Public Class dlgPICSARainfall
 
         clsUpperTercileFunction.SetRCommand("quantile")
         clsUpperTercileFunction.AddParameter("probs", "2/3")
+        clsUpperTercileFunction.AddParameter("na.rm", "TRUE")
 
         If dctThemeFunctions.TryGetValue("panel.background", clsPanelBackgroundElementRect) Then
             clsPanelBackgroundElementRect.AddParameter("colour", Chr(34) & "white" & Chr(34))
@@ -308,8 +316,15 @@ Public Class dlgPICSARainfall
         clsBaseOperator.AddParameter("xlab", clsRFunctionParameter:=clsXLabsFunction)
         clsXLabsFunction.AddParameter("label", Chr(34) & Chr(34))
 
+        clsBaseOperator.AddParameter("ylab", clsRFunctionParameter:=clsYLabsFunction)
+        clsYLabsFunction.AddParameter("label", Chr(34) & Chr(34))
+
         clsAsDate.SetRCommand("as.Date")
         clsAsDate.AddParameter("origin", Chr(34) & "2015-12-31" & Chr(34), iPosition:=1)
+
+        clsDatePeriodOperator.SetOperation(" ")
+        clsDatePeriodOperator.bSpaceAroundOperation = False
+        clsDatePeriodOperator.bToScriptAsRString = True
 
         clsAsNumeric.SetRCommand("as.numeric")
         clsAsNumericX.SetRCommand("as.numeric")
@@ -365,7 +380,7 @@ Public Class dlgPICSARainfall
 
     'add more functions 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
-        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
+        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewDatePeriodOperator:=clsDatePeriodOperator, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.ShowDialog()
         bResetSubdialog = False
     End Sub
