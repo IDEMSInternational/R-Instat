@@ -48,7 +48,7 @@ Public Class dlgFindNonnumericValues
         ucrReceiverColumn.SetParameter(New RParameter("x", 1))
         ucrReceiverColumn.SetParameterIsString()
         ucrReceiverColumn.bWithQuotes = False
-        ucrReceiverColumn.SetExcludedDataTypes({"numeric"})
+        ucrReceiverColumn.SetIncludedDataTypes({"character"})
 
         ucrInputColumnName.SetParameter(New RParameter("result_name", 3))
         ucrInputColumnName.SetDataFrameSelector(ucrSelectorShowNonNumericValues.ucrAvailableDataFrames)
