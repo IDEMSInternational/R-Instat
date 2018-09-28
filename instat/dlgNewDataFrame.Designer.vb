@@ -47,10 +47,6 @@ Partial Class dlgNewDataFrame
         Me.rdoEmpty = New System.Windows.Forms.RadioButton()
         Me.rdoConstruct = New System.Windows.Forms.RadioButton()
         Me.dataGridView = New System.Windows.Forms.DataGridView()
-        Me.colRowNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.txtCommand = New System.Windows.Forms.TextBox()
         Me.mnuStripCommand = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuItemCut = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuItemCopy = New System.Windows.Forms.ToolStripMenuItem()
@@ -64,6 +60,10 @@ Partial Class dlgNewDataFrame
         Me.ucrNudCols = New instat.ucrNud()
         Me.ucrNudRows = New instat.ucrNud()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputCommand = New instat.ucrInputTextBox()
+        Me.colRowNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuStripCommand.SuspendLayout()
         Me.SuspendLayout()
@@ -127,28 +127,6 @@ Partial Class dlgNewDataFrame
         Me.dataGridView.Name = "dataGridView"
         Me.dataGridView.RowHeadersVisible = False
         Me.dataGridView.RowTemplate.Height = 28
-        '
-        'colRowNum
-        '
-        resources.ApplyResources(Me.colRowNum, "colRowNum")
-        Me.colRowNum.Name = "colRowNum"
-        '
-        'colName
-        '
-        resources.ApplyResources(Me.colName, "colName")
-        Me.colName.Name = "colName"
-        '
-        'colExpression
-        '
-        Me.colExpression.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        resources.ApplyResources(Me.colExpression, "colExpression")
-        Me.colExpression.Name = "colExpression"
-        '
-        'txtCommand
-        '
-        Me.txtCommand.ContextMenuStrip = Me.mnuStripCommand
-        resources.ApplyResources(Me.txtCommand, "txtCommand")
-        Me.txtCommand.Name = "txtCommand"
         '
         'mnuStripCommand
         '
@@ -228,13 +206,38 @@ Partial Class dlgNewDataFrame
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrInputCommand
+        '
+        Me.ucrInputCommand.AddQuotesIfUnrecognised = True
+        Me.ucrInputCommand.IsMultiline = True
+        Me.ucrInputCommand.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCommand, "ucrInputCommand")
+        Me.ucrInputCommand.Name = "ucrInputCommand"
+        '
+        'colRowNum
+        '
+        resources.ApplyResources(Me.colRowNum, "colRowNum")
+        Me.colRowNum.Name = "colRowNum"
+        Me.colRowNum.ReadOnly = True
+        '
+        'colName
+        '
+        resources.ApplyResources(Me.colName, "colName")
+        Me.colName.Name = "colName"
+        '
+        'colExpression
+        '
+        Me.colExpression.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        resources.ApplyResources(Me.colExpression, "colExpression")
+        Me.colExpression.Name = "colExpression"
+        '
         'dlgNewDataFrame
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputCommand)
         Me.Controls.Add(Me.btnExample)
         Me.Controls.Add(Me.lblCommand)
-        Me.Controls.Add(Me.txtCommand)
         Me.Controls.Add(Me.dataGridView)
         Me.Controls.Add(Me.rdoCommand)
         Me.Controls.Add(Me.rdoRandom)
@@ -270,7 +273,6 @@ Partial Class dlgNewDataFrame
     Friend WithEvents rdoEmpty As RadioButton
     Friend WithEvents rdoConstruct As RadioButton
     Friend WithEvents dataGridView As DataGridView
-    Friend WithEvents txtCommand As TextBox
     Friend WithEvents lblCommand As Label
     Friend WithEvents mnuStripCommand As ContextMenuStrip
     Friend WithEvents mnuItemCut As ToolStripMenuItem
@@ -279,6 +281,7 @@ Partial Class dlgNewDataFrame
     Friend WithEvents mnuItemUndo As ToolStripMenuItem
     Friend WithEvents SelectAllToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents btnExample As Button
+    Friend WithEvents ucrInputCommand As ucrInputTextBox
     Friend WithEvents colRowNum As DataGridViewTextBoxColumn
     Friend WithEvents colName As DataGridViewTextBoxColumn
     Friend WithEvents colExpression As DataGridViewTextBoxColumn
