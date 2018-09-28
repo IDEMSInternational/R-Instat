@@ -57,9 +57,9 @@ Public Class dlgFindNonnumericValues
         ucrChkShowSummary.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"})
         ucrChkShowSummary.AddRSyntaxContainsFunctionNamesCondition(False, {"summary"}, False)
 
-        ucrChkFilter.SetText("Filter to non-numeric cases")
-        ucrChkFilter.AddParameterValuesCondition(True, "type", Chr(34) & "filter" & Chr(34))
-        ucrChkFilter.AddParameterValuesCondition(False, "type", Chr(34) & "filter" & Chr(34), False)
+        ucrChkFilterNonumerics.SetText("Filter to non-numeric cases")
+        ucrChkFilterNonumerics.AddParameterValuesCondition(True, "type", Chr(34) & "filter" & Chr(34))
+        ucrChkFilterNonumerics.AddParameterValuesCondition(False, "type", Chr(34) & "filter" & Chr(34), False)
     End Sub
 
     Private Sub SetDefaults()
@@ -131,7 +131,7 @@ Public Class dlgFindNonnumericValues
         ucrReceiverColumn.SetRCode(clsIsNaFunction, bReset)
         ucrInputColumnName.SetRCode(clsNonNumericCalcFunc, bReset)
         ucrChkShowSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
-        ucrChkFilter.SetRCode(clsCurrRunCalc, bReset)
+        ucrChkFilterNonumerics.SetRCode(clsCurrRunCalc, bReset)
         ucrSelectorShowNonNumericValues.SetRCode(clsGetColumnsFunction, bReset)
     End Sub
 
@@ -165,8 +165,8 @@ Public Class dlgFindNonnumericValues
         strCurrDataName = Chr(34) & ucrSelectorShowNonNumericValues.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34)
     End Sub
 
-    Private Sub ucrChkFilter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFilter.ControlValueChanged
-        If ucrChkFilter.Checked Then
+    Private Sub ucrChkFilter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFilterNonumerics.ControlValueChanged
+        If ucrChkFilterNonumerics.Checked Then
             clsCurrRunCalc = clsNonNumericFilterFunc
         Else
             clsCurrRunCalc = clsNonNumericCalcFunc
