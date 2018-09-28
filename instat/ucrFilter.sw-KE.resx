@@ -12,4 +12,193 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblSelectLevels.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSelectLevels.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>413, 42</value>
+  </data>
+  <data name="lblSelectLevels.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>74, 13</value>
+  </data>
+  <data name="lblSelectLevels.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="cmdAddCondition.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>278, 64</value>
+  </data>
+  <data name="cmdAddCondition.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>93, 23</value>
+  </data>
+  <data name="cmdAddCondition.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="cmdToggleSelectAll.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>674, 363</value>
+  </data>
+  <data name="cmdToggleSelectAll.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>93, 23</value>
+  </data>
+  <data name="cmdToggleSelectAll.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lstFilters.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 195</value>
+  </data>
+  <data name="lstFilters.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>268, 132</value>
+  </data>
+  <data name="lstFilters.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblFilterPreview.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFilterPreview.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>5, 339</value>
+  </data>
+  <data name="lblFilterPreview.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="lblFilterPreview.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblFilterBy.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFilterBy.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>278, 27</value>
+  </data>
+  <data name="lblFilterBy.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="lblFilterBy.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="cmdClearConditions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>278, 304</value>
+  </data>
+  <data name="cmdClearConditions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>94, 23</value>
+  </data>
+  <data name="cmdClearConditions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="mcdEditCondition.Enabled" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mcdEditCondition.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>278, 216</value>
+  </data>
+  <data name="mcdEditCondition.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>93, 36</value>
+  </data>
+  <data name="mcdEditCondition.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="cmdRemoveCondition.Enabled" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cmdRemoveCondition.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>278, 260</value>
+  </data>
+  <data name="cmdRemoveCondition.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>93, 36</value>
+  </data>
+  <data name="cmdRemoveCondition.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblNewFilterName.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNewFilterName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>5, 366</value>
+  </data>
+  <data name="lblNewFilterName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
+  </data>
+  <data name="lblNewFilterName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="ucrInputFilterName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>96, 364</value>
+  </data>
+  <data name="ucrInputFilterName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>176, 21</value>
+  </data>
+  <data name="ucrInputFilterName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="ucrValueForFilter.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>490, 40</value>
+  </data>
+  <data name="ucrValueForFilter.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 21</value>
+  </data>
+  <data name="ucrValueForFilter.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="ucrFilterPreview.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>96, 337</value>
+  </data>
+  <data name="ucrFilterPreview.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrFilterPreview.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="ucrFilterOperation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>420, 40</value>
+  </data>
+  <data name="ucrFilterOperation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>44, 21</value>
+  </data>
+  <data name="ucrFilterOperation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="ucrFactorLevels.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucrFactorLevels.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>413, 61</value>
+  </data>
+  <data name="ucrFactorLevels.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>354, 297</value>
+  </data>
+  <data name="ucrFactorLevels.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrFilterByReceiver.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>278, 42</value>
+  </data>
+  <data name="ucrFilterByReceiver.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrFilterByReceiver.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrFilterByReceiver.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrSelectorForFitler.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 4</value>
+  </data>
+  <data name="ucrSelectorForFitler.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorForFitler.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorForFitler.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>770, 395</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="lblMaxS.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMaxS.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>296, 258</value>
+  </data>
+  <data name="lblMaxS.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblMaxS.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="lblMaxS.Text" xml:space="preserve">
+    <value>Idadi ya juu</value>
+  </data>
+  <data name="lblMinS.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMinS.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>120, 257</value>
+  </data>
+  <data name="lblMinS.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>27, 13</value>
+  </data>
+  <data name="lblMinS.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="lblMinS.Text" xml:space="preserve">
+    <value>Idadi ya chini</value>
+  </data>
+  <data name="lblS.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblS.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 258</value>
+  </data>
+  <data name="lblS.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>17, 13</value>
+  </data>
+  <data name="lblS.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblS.Text" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="lblZ.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblZ.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 231</value>
+  </data>
+  <data name="lblZ.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>17, 13</value>
+  </data>
+  <data name="lblZ.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblZ.Text" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="lblY.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblY.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 204</value>
+  </data>
+  <data name="lblY.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>17, 13</value>
+  </data>
+  <data name="lblY.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblY.Text" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="lblMinX.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMinX.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>120, 177</value>
+  </data>
+  <data name="lblMinX.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>27, 13</value>
+  </data>
+  <data name="lblMinX.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblMinX.Text" xml:space="preserve">
+    <value>Idadi ya chini</value>
+  </data>
+  <data name="dtpMinT.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>149, 282</value>
+  </data>
+  <data name="dtpMinT.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>133, 20</value>
+  </data>
+  <data name="dtpMinT.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="dtpMaxT.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>328, 282</value>
+  </data>
+  <data name="dtpMaxT.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>133, 20</value>
+  </data>
+  <data name="dtpMaxT.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="lblMaxT.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMaxT.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>296, 285</value>
+  </data>
+  <data name="lblMaxT.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblMaxT.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="lblMaxT.Text" xml:space="preserve">
+    <value>Idadi ya juu</value>
+  </data>
+  <data name="ucrInputFileDetails.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 9</value>
+  </data>
+  <data name="ucrInputFileDetails.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>450, 159</value>
+  </data>
+  <data name="ucrInputFileDetails.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblMinT.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMinT.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>120, 285</value>
+  </data>
+  <data name="lblMinT.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>27, 13</value>
+  </data>
+  <data name="lblMinT.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="lblMinT.Text" xml:space="preserve">
+    <value>Idadi ya chini</value>
+  </data>
+  <data name="ucrInputMaxS.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>328, 255</value>
+  </data>
+  <data name="ucrInputMaxS.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMaxS.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="lblMaxZ.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMaxZ.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>296, 231</value>
+  </data>
+  <data name="lblMaxZ.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblMaxZ.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="lblMaxZ.Text" xml:space="preserve">
+    <value>Idadi ya juu</value>
+  </data>
+  <data name="ucrInputMaxZ.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>328, 228</value>
+  </data>
+  <data name="ucrInputMaxZ.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMaxZ.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="lblMaxY.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMaxY.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>296, 204</value>
+  </data>
+  <data name="lblMaxY.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblMaxY.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblMaxY.Text" xml:space="preserve">
+    <value>Idadi ya juu</value>
+  </data>
+  <data name="ucrInputMaxY.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>328, 201</value>
+  </data>
+  <data name="ucrInputMaxY.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMaxY.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblMaxX.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMaxX.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>296, 177</value>
+  </data>
+  <data name="lblMaxX.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblMaxX.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblMaxX.Text" xml:space="preserve">
+    <value>Idadi ya juu</value>
+  </data>
+  <data name="ucrInputMaxX.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>328, 174</value>
+  </data>
+  <data name="ucrInputMaxX.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMaxX.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblT.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblT.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 285</value>
+  </data>
+  <data name="lblT.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>17, 13</value>
+  </data>
+  <data name="lblT.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="lblT.Text" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="ucrInputMinS.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>149, 255</value>
+  </data>
+  <data name="ucrInputMinS.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMinS.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="lblMinZ.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMinZ.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>120, 231</value>
+  </data>
+  <data name="lblMinZ.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>27, 13</value>
+  </data>
+  <data name="lblMinZ.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblMinZ.Text" xml:space="preserve">
+    <value>Idadi ya chini</value>
+  </data>
+  <data name="ucrInputMinZ.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>149, 228</value>
+  </data>
+  <data name="ucrInputMinZ.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMinZ.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="lblMinY.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMinY.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>120, 204</value>
+  </data>
+  <data name="lblMinY.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>27, 13</value>
+  </data>
+  <data name="lblMinY.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblMinY.Text" xml:space="preserve">
+    <value>Idadi ya chini</value>
+  </data>
+  <data name="ucrInputMinY.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>149, 201</value>
+  </data>
+  <data name="ucrInputMinY.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMinY.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblX.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblX.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 177</value>
+  </data>
+  <data name="lblX.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>17, 13</value>
+  </data>
+  <data name="lblX.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblX.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="ucrInputMinX.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>149, 174</value>
+  </data>
+  <data name="ucrInputMinX.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>90, 21</value>
+  </data>
+  <data name="ucrInputMinX.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tbSubset.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbSubset.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbSubset.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>475, 397</value>
+  </data>
+  <data name="tbSubset.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrChkOnlyDataVariables.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 18</value>
+  </data>
+  <data name="ucrChkOnlyDataVariables.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>162, 20</value>
+  </data>
+  <data name="ucrChkOnlyDataVariables.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrChkKeepRawTime.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 44</value>
+  </data>
+  <data name="ucrChkKeepRawTime.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>162, 20</value>
+  </data>
+  <data name="ucrChkKeepRawTime.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrChkIncludeMetadata.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 70</value>
+  </data>
+  <data name="ucrChkIncludeMetadata.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>162, 20</value>
+  </data>
+  <data name="ucrChkIncludeMetadata.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tbOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbOptions.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>475, 397</value>
+  </data>
+  <data name="tbOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbOptions.Text" xml:space="preserve">
+    <value>chaguo</value>
+  </data>
+  <data name="tbNetCDF.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="tbNetCDF.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>483, 423</value>
+  </data>
+  <data name="tbNetCDF.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>176, 433</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>494, 468</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+</root>

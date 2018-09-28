@@ -1,6 +1,6 @@
-﻿' Instat-R
-' Copyright (C) 2015
-
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
 ' the Free Software Foundation, either version 3 of the License, or
@@ -10,6 +10,9 @@
 ' but WITHOUT ANY WARRANTY; without even the implied warranty of
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
@@ -20,7 +23,10 @@ Public Class dlgSort
     'Define a boolean to check if the dialog is loading for the first time
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
+    Private clsSortFunction As New RFunction
+    Public strSelectedDataFrame As String = ""
+    Private bUseSelectedColumn As Boolean = False
+    Private strSelectedColumn As String = ""
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -32,21 +38,65 @@ Public Class dlgSort
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        If bUseSelectedColumn Then
+            SetDefaultColumn()
+        End If
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 339
+        grpMissingValues.Enabled = False ' temporary
+
+        'Add dataframe paramater
+        ucrSelectForSort.SetParameter(New RParameter("data_name", 0))
+        ucrSelectForSort.SetParameterIsString()
+
+        'Setting Parameters
+        ucrReceiverSort.SetParameter(New RParameter("col_names", 1))
+        ucrReceiverSort.Selector = ucrSelectForSort
+        ucrReceiverSort.SetMeAsReceiver()
+        ucrReceiverSort.SetParameterIsString()
+
+        'Set rdo parameters
+        ucrPnlOrder.SetParameter(New RParameter("decreasing", 2))
+        ucrPnlOrder.AddRadioButton(rdoAscending, "FALSE")
+        ucrPnlOrder.AddRadioButton(rdoDescending, "TRUE")
+        ucrPnlOrder.SetRDefault("FALSE")
+
+        ''Currently Disabled
+        'ucrPnlMissingValues.SetParameter(New RParameter("na.last", 3))
+        'ucrPnlMissingValues.AddRadioButton(rdoFirst, "FALSE")
+        'ucrPnlMissingValues.AddRadioButton(rdoLast, "TRUE")
+        'ucrPnlMissingValues.SetRDefault("TRUE")
+        ucrPnlMissingValues.bAllowNonConditionValues = True
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
-        'Setting default Rfunction as the base function
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
+        clsSortFunction = New RFunction
 
         'Reset
         ucrSelectForSort.Reset()
 
+        'Setting default Rfunction as the base function
+        clsSortFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
+
         ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSortFunction)
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
+        strSelectedColumn = strColumn
+        strSelectedDataFrame = strDataFrame
+        bUseSelectedColumn = True
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        ucrSelectForSort.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+        ucrReceiverSort.Add(strSelectedColumn, strSelectedDataFrame)
+        bUseSelectedColumn = False
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -59,34 +109,6 @@ Public Class dlgSort
         End If
     End Sub
 
-    Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 339
-        grpMissingValues.Enabled = False
-
-        'Setting Parameters
-        ucrReceiverSort.Selector = ucrSelectForSort
-        ucrReceiverSort.SetMeAsReceiver()
-        ucrReceiverSort.SetParameter(New RParameter("col_names", 1))
-        ucrReceiverSort.SetParameterIsString()
-
-        'Add dataframe paramater
-        ucrSelectForSort.SetParameter(New RParameter("data_name", 0))
-        ucrSelectForSort.SetParameterIsString()
-
-        'Set radiobutton parameters
-        ucrPnlOrder.SetParameter(New RParameter("decreasing", 2))
-        ucrPnlOrder.AddRadioButton(rdoAscending, "FALSE")
-        ucrPnlOrder.AddRadioButton(rdoDescending, "TRUE")
-        ucrPnlOrder.SetRDefault("FALSE")
-
-        'Currently Disabled
-        'ucrPanelMissingValues.SetParameter(New RParameter("na.last", 3))
-        'ucrPanelMissingValues.AddRadioButton(rdoFirst, "FALSE")
-        'ucrPanelMissingValues.AddRadioButton(rdoLast, "TRUE")
-        'ucrPanelMissingValues.SetRDefault("TRUE")
-        ucrPnlMissingValues.bAllowNonConditionValues = True
-    End Sub
-
     'Setting Defaults on Reset 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -94,7 +116,7 @@ Public Class dlgSort
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSort.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSort.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

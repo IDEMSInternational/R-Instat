@@ -12,4 +12,340 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblStartPos.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblStartPos.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 105</value>
+  </data>
+  <data name="lblStartPos.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
+  </data>
+  <data name="lblStartPos.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblNumberOfRowsToInsert.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNumberOfRowsToInsert.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 135</value>
+  </data>
+  <data name="lblNumberOfRowsToInsert.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>130, 13</value>
+  </data>
+  <data name="lblNumberOfRowsToInsert.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblColumn.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblColumn.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>152, 73</value>
+  </data>
+  <data name="lblColumn.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
+  </data>
+  <data name="lblColumn.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblColumn.Text" xml:space="preserve">
+    <value>Safuwima</value>
+  </data>
+  <data name="ucrInputBeforeAfter.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>51, 87</value>
+  </data>
+  <data name="ucrInputBeforeAfter.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>93, 21</value>
+  </data>
+  <data name="ucrInputBeforeAfter.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>526, 369</value>
+  </data>
+  <data name="lblInputColumnPrefix.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblInputColumnPrefix.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 289</value>
+  </data>
+  <data name="lblInputColumnPrefix.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>144, 13</value>
+  </data>
+  <data name="lblInputColumnPrefix.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="ucrInputPrefixForNewColumn.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>159, 286</value>
+  </data>
+  <data name="ucrInputPrefixForNewColumn.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>163, 21</value>
+  </data>
+  <data name="ucrInputPrefixForNewColumn.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrNudNumberOfColumns.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>159, 233</value>
+  </data>
+  <data name="ucrNudNumberOfColumns.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudNumberOfColumns.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="rdoInsertRows.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoInsertRows.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoInsertRows.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>267, 12</value>
+  </data>
+  <data name="rdoInsertRows.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 28</value>
+  </data>
+  <data name="rdoInsertRows.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoInsertRows.Text" xml:space="preserve">
+    <value>&amp;Chomeka Safumlalo</value>
+  </data>
+  <data name="rdoInsertRows.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="rdoInsertColumns.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoInsertColumns.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoInsertColumns.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>169, 12</value>
+  </data>
+  <data name="rdoInsertColumns.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 28</value>
+  </data>
+  <data name="rdoInsertColumns.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoInsertColumns.Text" xml:space="preserve">
+    <value>Chomeka Safuwima</value>
+  </data>
+  <data name="rdoInsertColumns.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="ucrPnlColumnsOrRows.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>161, 12</value>
+  </data>
+  <data name="ucrPnlColumnsOrRows.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>214, 37</value>
+  </data>
+  <data name="ucrPnlColumnsOrRows.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoAfter.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoAfter.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 41</value>
+  </data>
+  <data name="rdoAfter.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>47, 17</value>
+  </data>
+  <data name="rdoAfter.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoAfter.Text" xml:space="preserve">
+    <value>Baada ya</value>
+  </data>
+  <data name="rdoBefore.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoBefore.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 18</value>
+  </data>
+  <data name="rdoBefore.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>56, 17</value>
+  </data>
+  <data name="rdoBefore.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoBefore.Text" xml:space="preserve">
+    <value>Kabla ya</value>
+  </data>
+  <data name="ucrPnlBeforeAfter.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="ucrPnlBeforeAfter.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>86, 49</value>
+  </data>
+  <data name="ucrPnlBeforeAfter.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>235, 85</value>
+  </data>
+  <data name="grpOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>106, 71</value>
+  </data>
+  <data name="grpOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="grpOptions.Text" xml:space="preserve">
+    <value>chaguo</value>
+  </data>
+  <data name="ucrInputDefaultValue.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>159, 259</value>
+  </data>
+  <data name="ucrInputDefaultValue.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>49, 21</value>
+  </data>
+  <data name="ucrInputDefaultValue.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="lblDefaultValue.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDefaultValue.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 263</value>
+  </data>
+  <data name="lblDefaultValue.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>74, 13</value>
+  </data>
+  <data name="lblDefaultValue.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="lblDefaultValue.Text" xml:space="preserve">
+    <value>Thamani Chaguo-msingi</value>
+  </data>
+  <data name="lblNumberOfColumnsToInsert.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNumberOfColumnsToInsert.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 236</value>
+  </data>
+  <data name="lblNumberOfColumnsToInsert.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>143, 13</value>
+  </data>
+  <data name="lblNumberOfColumnsToInsert.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 313</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>410, 53</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrNudNumberOfRows.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>143, 132</value>
+  </data>
+  <data name="ucrNudNumberOfRows.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudNumberOfRows.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="ucrNudStartRow.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>105, 103</value>
+  </data>
+  <data name="ucrNudStartRow.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudStartRow.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="ucrSelectorInsertColumns.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 50</value>
+  </data>
+  <data name="ucrSelectorInsertColumns.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorInsertColumns.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorInsertColumns.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="ucrReceiverColumnsToInsert.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>151, 88</value>
+  </data>
+  <data name="ucrReceiverColumnsToInsert.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverColumnsToInsert.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>116, 20</value>
+  </data>
+  <data name="ucrReceiverColumnsToInsert.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoBeforeAfter.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoBeforeAfter.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 64</value>
+  </data>
+  <data name="rdoBeforeAfter.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>131, 17</value>
+  </data>
+  <data name="rdoBeforeAfter.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoAtStart.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoAtStart.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 18</value>
+  </data>
+  <data name="rdoAtStart.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="rdoAtStart.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoAtEnd.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoAtEnd.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 41</value>
+  </data>
+  <data name="rdoAtEnd.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>57, 17</value>
+  </data>
+  <data name="rdoAtEnd.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrPnlInsertColumns.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 17</value>
+  </data>
+  <data name="ucrPnlInsertColumns.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>277, 101</value>
+  </data>
+  <data name="ucrPnlInsertColumns.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="grpInsert.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>235, 85</value>
+  </data>
+  <data name="grpInsert.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>286, 122</value>
+  </data>
+  <data name="grpInsert.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="grpInsert.Text" xml:space="preserve">
+    <value>Chomeka</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

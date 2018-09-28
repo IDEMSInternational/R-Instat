@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgMerge
     Inherits System.Windows.Forms.Form
 
@@ -24,106 +40,40 @@ Partial Class sdgMerge
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgMerge))
-        Me.grpJoinType = New System.Windows.Forms.GroupBox()
-        Me.rdoAntiJoin = New System.Windows.Forms.RadioButton()
-        Me.rdoSemiJoin = New System.Windows.Forms.RadioButton()
-        Me.rdoRightJoin = New System.Windows.Forms.RadioButton()
-        Me.rdoLeftJoin = New System.Windows.Forms.RadioButton()
-        Me.rdoFullJoin = New System.Windows.Forms.RadioButton()
-        Me.rdoInnerJoin = New System.Windows.Forms.RadioButton()
         Me.ttJoinDetails = New System.Windows.Forms.ToolTip(Me.components)
+        Me.grpKeys = New System.Windows.Forms.GroupBox()
+        Me.cmdAddPair = New System.Windows.Forms.Button()
+        Me.lblFirstKeyMatch = New System.Windows.Forms.Label()
+        Me.ucrReceiverSecondDF = New instat.ucrReceiverSingle()
+        Me.ucrReceiverFirstDF = New instat.ucrReceiverSingle()
+        Me.pnlKeyColumns = New System.Windows.Forms.Panel()
+        Me.cmdRemoveAll = New System.Windows.Forms.Button()
+        Me.lstKeyColumns = New System.Windows.Forms.ListView()
+        Me.lblKeyColumns = New System.Windows.Forms.Label()
+        Me.cmdRemoveSelectedPair = New System.Windows.Forms.Button()
+        Me.tbcMergeOptions = New System.Windows.Forms.TabControl()
+        Me.tpJoinByOptions = New System.Windows.Forms.TabPage()
+        Me.rdoChooseColumns = New System.Windows.Forms.RadioButton()
+        Me.rdoByAllMatching = New System.Windows.Forms.RadioButton()
+        Me.ucrSelectorSecondDF = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorFirstDF = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrPnlMergeByOptions = New instat.UcrPanel()
+        Me.tpIncludeColumns = New System.Windows.Forms.TabPage()
+        Me.ucrChkMergeWithSubsetSecond = New instat.ucrCheck()
+        Me.ucrChkMergeWithSubsetFirst = New instat.ucrCheck()
+        Me.lblVariablesToIncludeSecond = New System.Windows.Forms.Label()
+        Me.lblVariablesToIncludeFirst = New System.Windows.Forms.Label()
+        Me.ucrReceiverSecondSelected = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverFirstSelected = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorColumnsToIncludeSecond = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorColumnsToIncludeFirst = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSubBase = New instat.ucrButtonsSubdialogue()
-        Me.grpJoinType.SuspendLayout()
+        Me.grpKeys.SuspendLayout()
+        Me.pnlKeyColumns.SuspendLayout()
+        Me.tbcMergeOptions.SuspendLayout()
+        Me.tpJoinByOptions.SuspendLayout()
+        Me.tpIncludeColumns.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'grpJoinType
-        '
-        Me.grpJoinType.Controls.Add(Me.rdoAntiJoin)
-        Me.grpJoinType.Controls.Add(Me.rdoSemiJoin)
-        Me.grpJoinType.Controls.Add(Me.rdoRightJoin)
-        Me.grpJoinType.Controls.Add(Me.rdoLeftJoin)
-        Me.grpJoinType.Controls.Add(Me.rdoFullJoin)
-        Me.grpJoinType.Controls.Add(Me.rdoInnerJoin)
-        Me.grpJoinType.Location = New System.Drawing.Point(12, 21)
-        Me.grpJoinType.Name = "grpJoinType"
-        Me.grpJoinType.Size = New System.Drawing.Size(106, 166)
-        Me.grpJoinType.TabIndex = 26
-        Me.grpJoinType.TabStop = False
-        Me.grpJoinType.Text = "Join Type"
-        '
-        'rdoAntiJoin
-        '
-        Me.rdoAntiJoin.AutoSize = True
-        Me.rdoAntiJoin.Location = New System.Drawing.Point(6, 140)
-        Me.rdoAntiJoin.Name = "rdoAntiJoin"
-        Me.rdoAntiJoin.Size = New System.Drawing.Size(65, 17)
-        Me.rdoAntiJoin.TabIndex = 29
-        Me.rdoAntiJoin.TabStop = True
-        Me.rdoAntiJoin.Text = "Anti Join"
-        Me.ttJoinDetails.SetToolTip(Me.rdoAntiJoin, "Include all rows from the 1st data frame where there are not matching values in t" &
-        "he second data frame, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "keeping just columns from the first data frame.")
-        Me.rdoAntiJoin.UseVisualStyleBackColor = True
-        '
-        'rdoSemiJoin
-        '
-        Me.rdoSemiJoin.AutoSize = True
-        Me.rdoSemiJoin.Location = New System.Drawing.Point(6, 116)
-        Me.rdoSemiJoin.Name = "rdoSemiJoin"
-        Me.rdoSemiJoin.Size = New System.Drawing.Size(70, 17)
-        Me.rdoSemiJoin.TabIndex = 28
-        Me.rdoSemiJoin.TabStop = True
-        Me.rdoSemiJoin.Text = "Semi Join"
-        Me.ttJoinDetails.SetToolTip(Me.rdoSemiJoin, resources.GetString("rdoSemiJoin.ToolTip"))
-        Me.rdoSemiJoin.UseVisualStyleBackColor = True
-        '
-        'rdoRightJoin
-        '
-        Me.rdoRightJoin.AutoSize = True
-        Me.rdoRightJoin.Location = New System.Drawing.Point(6, 92)
-        Me.rdoRightJoin.Name = "rdoRightJoin"
-        Me.rdoRightJoin.Size = New System.Drawing.Size(72, 17)
-        Me.rdoRightJoin.TabIndex = 27
-        Me.rdoRightJoin.TabStop = True
-        Me.rdoRightJoin.Text = "Right Join"
-        Me.ttJoinDetails.SetToolTip(Me.rdoRightJoin, resources.GetString("rdoRightJoin.ToolTip"))
-        Me.rdoRightJoin.UseVisualStyleBackColor = True
-        '
-        'rdoLeftJoin
-        '
-        Me.rdoLeftJoin.AutoSize = True
-        Me.rdoLeftJoin.Location = New System.Drawing.Point(6, 20)
-        Me.rdoLeftJoin.Name = "rdoLeftJoin"
-        Me.rdoLeftJoin.Size = New System.Drawing.Size(65, 17)
-        Me.rdoLeftJoin.TabIndex = 16
-        Me.rdoLeftJoin.TabStop = True
-        Me.rdoLeftJoin.Text = "Left Join"
-        Me.ttJoinDetails.SetToolTip(Me.rdoLeftJoin, resources.GetString("rdoLeftJoin.ToolTip"))
-        Me.rdoLeftJoin.UseVisualStyleBackColor = True
-        '
-        'rdoFullJoin
-        '
-        Me.rdoFullJoin.AutoSize = True
-        Me.rdoFullJoin.Location = New System.Drawing.Point(6, 44)
-        Me.rdoFullJoin.Name = "rdoFullJoin"
-        Me.rdoFullJoin.Size = New System.Drawing.Size(63, 17)
-        Me.rdoFullJoin.TabIndex = 14
-        Me.rdoFullJoin.TabStop = True
-        Me.rdoFullJoin.Text = "Full Join"
-        Me.ttJoinDetails.SetToolTip(Me.rdoFullJoin, "Include all rows and all columns from both data frames." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Where there are not matc" &
-        "hing values, NAs are used for the one missing.")
-        Me.rdoFullJoin.UseVisualStyleBackColor = True
-        '
-        'rdoInnerJoin
-        '
-        Me.rdoInnerJoin.AutoSize = True
-        Me.rdoInnerJoin.Location = New System.Drawing.Point(6, 68)
-        Me.rdoInnerJoin.Name = "rdoInnerJoin"
-        Me.rdoInnerJoin.Size = New System.Drawing.Size(71, 17)
-        Me.rdoInnerJoin.TabIndex = 12
-        Me.rdoInnerJoin.TabStop = True
-        Me.rdoInnerJoin.Text = "Inner Join"
-        Me.ttJoinDetails.SetToolTip(Me.rdoInnerJoin, resources.GetString("rdoInnerJoin.ToolTip"))
-        Me.rdoInnerJoin.UseVisualStyleBackColor = True
         '
         'ttJoinDetails
         '
@@ -131,39 +81,258 @@ Partial Class sdgMerge
         Me.ttJoinDetails.InitialDelay = 500
         Me.ttJoinDetails.ReshowDelay = 100
         '
+        'grpKeys
+        '
+        Me.grpKeys.Controls.Add(Me.cmdAddPair)
+        Me.grpKeys.Controls.Add(Me.lblFirstKeyMatch)
+        Me.grpKeys.Controls.Add(Me.ucrReceiverSecondDF)
+        Me.grpKeys.Controls.Add(Me.ucrReceiverFirstDF)
+        resources.ApplyResources(Me.grpKeys, "grpKeys")
+        Me.grpKeys.Name = "grpKeys"
+        Me.grpKeys.TabStop = False
+        '
+        'cmdAddPair
+        '
+        resources.ApplyResources(Me.cmdAddPair, "cmdAddPair")
+        Me.cmdAddPair.Name = "cmdAddPair"
+        Me.cmdAddPair.UseVisualStyleBackColor = True
+        '
+        'lblFirstKeyMatch
+        '
+        resources.ApplyResources(Me.lblFirstKeyMatch, "lblFirstKeyMatch")
+        Me.lblFirstKeyMatch.Name = "lblFirstKeyMatch"
+        '
+        'ucrReceiverSecondDF
+        '
+        Me.ucrReceiverSecondDF.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverSecondDF, "ucrReceiverSecondDF")
+        Me.ucrReceiverSecondDF.Name = "ucrReceiverSecondDF"
+        Me.ucrReceiverSecondDF.Selector = Nothing
+        Me.ucrReceiverSecondDF.strNcFilePath = ""
+        Me.ucrReceiverSecondDF.ucrSelector = Nothing
+        '
+        'ucrReceiverFirstDF
+        '
+        Me.ucrReceiverFirstDF.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverFirstDF, "ucrReceiverFirstDF")
+        Me.ucrReceiverFirstDF.Name = "ucrReceiverFirstDF"
+        Me.ucrReceiverFirstDF.Selector = Nothing
+        Me.ucrReceiverFirstDF.strNcFilePath = ""
+        Me.ucrReceiverFirstDF.ucrSelector = Nothing
+        '
+        'pnlKeyColumns
+        '
+        Me.pnlKeyColumns.Controls.Add(Me.cmdRemoveAll)
+        Me.pnlKeyColumns.Controls.Add(Me.lstKeyColumns)
+        Me.pnlKeyColumns.Controls.Add(Me.lblKeyColumns)
+        Me.pnlKeyColumns.Controls.Add(Me.cmdRemoveSelectedPair)
+        resources.ApplyResources(Me.pnlKeyColumns, "pnlKeyColumns")
+        Me.pnlKeyColumns.Name = "pnlKeyColumns"
+        '
+        'cmdRemoveAll
+        '
+        resources.ApplyResources(Me.cmdRemoveAll, "cmdRemoveAll")
+        Me.cmdRemoveAll.Name = "cmdRemoveAll"
+        Me.cmdRemoveAll.UseVisualStyleBackColor = True
+        '
+        'lstKeyColumns
+        '
+        Me.lstKeyColumns.FullRowSelect = True
+        resources.ApplyResources(Me.lstKeyColumns, "lstKeyColumns")
+        Me.lstKeyColumns.Name = "lstKeyColumns"
+        Me.lstKeyColumns.UseCompatibleStateImageBehavior = False
+        Me.lstKeyColumns.View = System.Windows.Forms.View.Details
+        '
+        'lblKeyColumns
+        '
+        resources.ApplyResources(Me.lblKeyColumns, "lblKeyColumns")
+        Me.lblKeyColumns.Name = "lblKeyColumns"
+        '
+        'cmdRemoveSelectedPair
+        '
+        resources.ApplyResources(Me.cmdRemoveSelectedPair, "cmdRemoveSelectedPair")
+        Me.cmdRemoveSelectedPair.Name = "cmdRemoveSelectedPair"
+        Me.cmdRemoveSelectedPair.UseVisualStyleBackColor = True
+        '
+        'tbcMergeOptions
+        '
+        Me.tbcMergeOptions.Controls.Add(Me.tpJoinByOptions)
+        Me.tbcMergeOptions.Controls.Add(Me.tpIncludeColumns)
+        resources.ApplyResources(Me.tbcMergeOptions, "tbcMergeOptions")
+        Me.tbcMergeOptions.Name = "tbcMergeOptions"
+        Me.tbcMergeOptions.SelectedIndex = 0
+        '
+        'tpJoinByOptions
+        '
+        Me.tpJoinByOptions.Controls.Add(Me.rdoChooseColumns)
+        Me.tpJoinByOptions.Controls.Add(Me.rdoByAllMatching)
+        Me.tpJoinByOptions.Controls.Add(Me.ucrSelectorSecondDF)
+        Me.tpJoinByOptions.Controls.Add(Me.ucrSelectorFirstDF)
+        Me.tpJoinByOptions.Controls.Add(Me.pnlKeyColumns)
+        Me.tpJoinByOptions.Controls.Add(Me.grpKeys)
+        Me.tpJoinByOptions.Controls.Add(Me.ucrPnlMergeByOptions)
+        resources.ApplyResources(Me.tpJoinByOptions, "tpJoinByOptions")
+        Me.tpJoinByOptions.Name = "tpJoinByOptions"
+        Me.tpJoinByOptions.UseVisualStyleBackColor = True
+        '
+        'rdoChooseColumns
+        '
+        resources.ApplyResources(Me.rdoChooseColumns, "rdoChooseColumns")
+        Me.rdoChooseColumns.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoChooseColumns.FlatAppearance.BorderSize = 2
+        Me.rdoChooseColumns.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoChooseColumns.Name = "rdoChooseColumns"
+        Me.rdoChooseColumns.UseVisualStyleBackColor = True
+        '
+        'rdoByAllMatching
+        '
+        resources.ApplyResources(Me.rdoByAllMatching, "rdoByAllMatching")
+        Me.rdoByAllMatching.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoByAllMatching.FlatAppearance.BorderSize = 2
+        Me.rdoByAllMatching.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoByAllMatching.Name = "rdoByAllMatching"
+        Me.rdoByAllMatching.UseVisualStyleBackColor = True
+        '
+        'ucrSelectorSecondDF
+        '
+        Me.ucrSelectorSecondDF.bShowHiddenColumns = False
+        Me.ucrSelectorSecondDF.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorSecondDF, "ucrSelectorSecondDF")
+        Me.ucrSelectorSecondDF.Name = "ucrSelectorSecondDF"
+        '
+        'ucrSelectorFirstDF
+        '
+        Me.ucrSelectorFirstDF.bShowHiddenColumns = False
+        Me.ucrSelectorFirstDF.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorFirstDF, "ucrSelectorFirstDF")
+        Me.ucrSelectorFirstDF.Name = "ucrSelectorFirstDF"
+        '
+        'ucrPnlMergeByOptions
+        '
+        resources.ApplyResources(Me.ucrPnlMergeByOptions, "ucrPnlMergeByOptions")
+        Me.ucrPnlMergeByOptions.Name = "ucrPnlMergeByOptions"
+        '
+        'tpIncludeColumns
+        '
+        Me.tpIncludeColumns.Controls.Add(Me.ucrChkMergeWithSubsetSecond)
+        Me.tpIncludeColumns.Controls.Add(Me.ucrChkMergeWithSubsetFirst)
+        Me.tpIncludeColumns.Controls.Add(Me.lblVariablesToIncludeSecond)
+        Me.tpIncludeColumns.Controls.Add(Me.lblVariablesToIncludeFirst)
+        Me.tpIncludeColumns.Controls.Add(Me.ucrReceiverSecondSelected)
+        Me.tpIncludeColumns.Controls.Add(Me.ucrReceiverFirstSelected)
+        Me.tpIncludeColumns.Controls.Add(Me.ucrSelectorColumnsToIncludeSecond)
+        Me.tpIncludeColumns.Controls.Add(Me.ucrSelectorColumnsToIncludeFirst)
+        resources.ApplyResources(Me.tpIncludeColumns, "tpIncludeColumns")
+        Me.tpIncludeColumns.Name = "tpIncludeColumns"
+        Me.tpIncludeColumns.UseVisualStyleBackColor = True
+        '
+        'ucrChkMergeWithSubsetSecond
+        '
+        Me.ucrChkMergeWithSubsetSecond.Checked = False
+        resources.ApplyResources(Me.ucrChkMergeWithSubsetSecond, "ucrChkMergeWithSubsetSecond")
+        Me.ucrChkMergeWithSubsetSecond.Name = "ucrChkMergeWithSubsetSecond"
+        '
+        'ucrChkMergeWithSubsetFirst
+        '
+        Me.ucrChkMergeWithSubsetFirst.Checked = False
+        resources.ApplyResources(Me.ucrChkMergeWithSubsetFirst, "ucrChkMergeWithSubsetFirst")
+        Me.ucrChkMergeWithSubsetFirst.Name = "ucrChkMergeWithSubsetFirst"
+        '
+        'lblVariablesToIncludeSecond
+        '
+        resources.ApplyResources(Me.lblVariablesToIncludeSecond, "lblVariablesToIncludeSecond")
+        Me.lblVariablesToIncludeSecond.Name = "lblVariablesToIncludeSecond"
+        '
+        'lblVariablesToIncludeFirst
+        '
+        resources.ApplyResources(Me.lblVariablesToIncludeFirst, "lblVariablesToIncludeFirst")
+        Me.lblVariablesToIncludeFirst.Name = "lblVariablesToIncludeFirst"
+        '
+        'ucrReceiverSecondSelected
+        '
+        Me.ucrReceiverSecondSelected.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverSecondSelected, "ucrReceiverSecondSelected")
+        Me.ucrReceiverSecondSelected.Name = "ucrReceiverSecondSelected"
+        Me.ucrReceiverSecondSelected.Selector = Nothing
+        Me.ucrReceiverSecondSelected.strNcFilePath = ""
+        Me.ucrReceiverSecondSelected.ucrSelector = Nothing
+        '
+        'ucrReceiverFirstSelected
+        '
+        Me.ucrReceiverFirstSelected.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverFirstSelected, "ucrReceiverFirstSelected")
+        Me.ucrReceiverFirstSelected.Name = "ucrReceiverFirstSelected"
+        Me.ucrReceiverFirstSelected.Selector = Nothing
+        Me.ucrReceiverFirstSelected.strNcFilePath = ""
+        Me.ucrReceiverFirstSelected.ucrSelector = Nothing
+        '
+        'ucrSelectorColumnsToIncludeSecond
+        '
+        Me.ucrSelectorColumnsToIncludeSecond.bShowHiddenColumns = False
+        Me.ucrSelectorColumnsToIncludeSecond.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorColumnsToIncludeSecond, "ucrSelectorColumnsToIncludeSecond")
+        Me.ucrSelectorColumnsToIncludeSecond.Name = "ucrSelectorColumnsToIncludeSecond"
+        '
+        'ucrSelectorColumnsToIncludeFirst
+        '
+        Me.ucrSelectorColumnsToIncludeFirst.bShowHiddenColumns = False
+        Me.ucrSelectorColumnsToIncludeFirst.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorColumnsToIncludeFirst, "ucrSelectorColumnsToIncludeFirst")
+        Me.ucrSelectorColumnsToIncludeFirst.Name = "ucrSelectorColumnsToIncludeFirst"
+        '
         'ucrSubBase
         '
-        Me.ucrSubBase.Location = New System.Drawing.Point(12, 212)
+        resources.ApplyResources(Me.ucrSubBase, "ucrSubBase")
         Me.ucrSubBase.Name = "ucrSubBase"
-        Me.ucrSubBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrSubBase.TabIndex = 0
         '
         'sdgMerge
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(171, 244)
-        Me.Controls.Add(Me.grpJoinType)
+        Me.Controls.Add(Me.tbcMergeOptions)
         Me.Controls.Add(Me.ucrSubBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgMerge"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "sdgMerge"
-        Me.grpJoinType.ResumeLayout(False)
-        Me.grpJoinType.PerformLayout()
+        Me.grpKeys.ResumeLayout(False)
+        Me.grpKeys.PerformLayout()
+        Me.pnlKeyColumns.ResumeLayout(False)
+        Me.pnlKeyColumns.PerformLayout()
+        Me.tbcMergeOptions.ResumeLayout(False)
+        Me.tpJoinByOptions.ResumeLayout(False)
+        Me.tpIncludeColumns.ResumeLayout(False)
+        Me.tpIncludeColumns.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents ucrSubBase As ucrButtonsSubdialogue
-    Friend WithEvents grpJoinType As GroupBox
-    Friend WithEvents rdoFullJoin As RadioButton
-    Friend WithEvents rdoInnerJoin As RadioButton
-    Friend WithEvents rdoAntiJoin As RadioButton
     Friend WithEvents ttJoinDetails As ToolTip
-    Friend WithEvents rdoSemiJoin As RadioButton
-    Friend WithEvents rdoRightJoin As RadioButton
-    Friend WithEvents rdoLeftJoin As RadioButton
+    Friend WithEvents ucrSelectorSecondDF As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorFirstDF As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents grpKeys As GroupBox
+    Friend WithEvents cmdAddPair As Button
+    Friend WithEvents lblFirstKeyMatch As Label
+    Friend WithEvents ucrReceiverSecondDF As ucrReceiverSingle
+    Friend WithEvents tbcMergeOptions As TabControl
+    Friend WithEvents tpJoinByOptions As TabPage
+    Friend WithEvents pnlKeyColumns As Panel
+    Friend WithEvents cmdRemoveAll As Button
+    Friend WithEvents lstKeyColumns As ListView
+    Friend WithEvents lblKeyColumns As Label
+    Friend WithEvents cmdRemoveSelectedPair As Button
+    Friend WithEvents tpIncludeColumns As TabPage
+    Friend WithEvents ucrReceiverFirstDF As ucrReceiverSingle
+    Friend WithEvents ucrPnlMergeByOptions As UcrPanel
+    Friend WithEvents lblVariablesToIncludeSecond As Label
+    Friend WithEvents lblVariablesToIncludeFirst As Label
+    Friend WithEvents ucrReceiverSecondSelected As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverFirstSelected As ucrReceiverMultiple
+    Friend WithEvents ucrSelectorColumnsToIncludeSecond As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorColumnsToIncludeFirst As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents rdoChooseColumns As RadioButton
+    Friend WithEvents rdoByAllMatching As RadioButton
+    Friend WithEvents ucrChkMergeWithSubsetSecond As ucrCheck
+    Friend WithEvents ucrChkMergeWithSubsetFirst As ucrCheck
 End Class

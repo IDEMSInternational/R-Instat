@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrCheck
     Inherits instat.ucrCore
 
@@ -22,27 +38,22 @@ Partial Class ucrCheck
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrCheck))
         Me.chkCheck = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'chkCheck
         '
-        Me.chkCheck.CheckAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.chkCheck.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.chkCheck.Location = New System.Drawing.Point(0, 0)
+        resources.ApplyResources(Me.chkCheck, "chkCheck")
         Me.chkCheck.Name = "chkCheck"
-        Me.chkCheck.Size = New System.Drawing.Size(100, 20)
-        Me.chkCheck.TabIndex = 0
-        Me.chkCheck.Text = "CheckBox1"
         Me.chkCheck.UseVisualStyleBackColor = True
         '
         'ucrCheck
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.chkCheck)
         Me.Name = "ucrCheck"
-        Me.Size = New System.Drawing.Size(100, 20)
         Me.ResumeLayout(False)
 
     End Sub

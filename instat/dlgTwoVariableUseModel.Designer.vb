@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgTwoVariableUseModel
     Inherits System.Windows.Forms.Form
 
@@ -77,6 +93,8 @@ Partial Class dlgTwoVariableUseModel
         '
         'ucrModel
         '
+        Me.ucrModel.AddQuotesIfUnrecognised = True
+        Me.ucrModel.IsMultiline = False
         Me.ucrModel.IsReadOnly = False
         Me.ucrModel.Location = New System.Drawing.Point(97, 199)
         Me.ucrModel.Name = "ucrModel"
@@ -85,12 +103,15 @@ Partial Class dlgTwoVariableUseModel
         '
         'ucrReceiverUseModel
         '
+        Me.ucrReceiverUseModel.frmParent = Me
         Me.ucrReceiverUseModel.Location = New System.Drawing.Point(256, 52)
         Me.ucrReceiverUseModel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverUseModel.Name = "ucrReceiverUseModel"
         Me.ucrReceiverUseModel.Selector = Nothing
         Me.ucrReceiverUseModel.Size = New System.Drawing.Size(120, 22)
+        Me.ucrReceiverUseModel.strNcFilePath = ""
         Me.ucrReceiverUseModel.TabIndex = 2
+        Me.ucrReceiverUseModel.ucrSelector = Nothing
         '
         'ucrSelectorUseModel
         '
@@ -122,7 +143,7 @@ Partial Class dlgTwoVariableUseModel
         Me.Controls.Add(Me.ucrReceiverUseModel)
         Me.Controls.Add(Me.ucrSelectorUseModel)
         Me.Controls.Add(Me.ucrBaseUseModel)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgTwoVariableUseModel"

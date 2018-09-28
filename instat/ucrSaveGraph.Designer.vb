@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrSaveGraph
     Inherits System.Windows.Forms.UserControl
 
@@ -22,36 +38,32 @@ Partial Class ucrSaveGraph
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrSaveGraph))
         Me.ucrInputGraphName = New instat.ucrInputComboBox()
         Me.chkSaveGraph = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'ucrInputGraphName
         '
-        Me.ucrInputGraphName.Location = New System.Drawing.Point(86, 0)
+        Me.ucrInputGraphName.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputGraphName, "ucrInputGraphName")
         Me.ucrInputGraphName.Name = "ucrInputGraphName"
-        Me.ucrInputGraphName.Size = New System.Drawing.Size(180, 20)
-        Me.ucrInputGraphName.TabIndex = 0
         '
         'chkSaveGraph
         '
-        Me.chkSaveGraph.AutoSize = True
-        Me.chkSaveGraph.Location = New System.Drawing.Point(0, 3)
+        resources.ApplyResources(Me.chkSaveGraph, "chkSaveGraph")
         Me.chkSaveGraph.Name = "chkSaveGraph"
-        Me.chkSaveGraph.Size = New System.Drawing.Size(83, 17)
-        Me.chkSaveGraph.TabIndex = 1
         Me.chkSaveGraph.Tag = "Save_Graph"
-        Me.chkSaveGraph.Text = "Save Graph"
         Me.chkSaveGraph.UseVisualStyleBackColor = True
         '
         'ucrSaveGraph
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.chkSaveGraph)
         Me.Controls.Add(Me.ucrInputGraphName)
         Me.Name = "ucrSaveGraph"
-        Me.Size = New System.Drawing.Size(265, 20)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
