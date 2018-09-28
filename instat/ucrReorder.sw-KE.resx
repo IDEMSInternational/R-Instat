@@ -12,4 +12,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="cmdTop.AutoSizeMode" xml:space="preserve" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="cmdTop.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>164, 47</value>
+  </data>
+  <data name="cmdTop.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>32, 22</value>
+  </data>
+  <data name="cmdTop.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cmdUp.AutoSizeMode" xml:space="preserve" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="cmdUp.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>164, 73</value>
+  </data>
+  <data name="cmdUp.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>32, 22</value>
+  </data>
+  <data name="cmdUp.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="cmdDown.AutoSizeMode" xml:space="preserve" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="cmdDown.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>164, 99</value>
+  </data>
+  <data name="cmdDown.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>32, 22</value>
+  </data>
+  <data name="cmdDown.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="cmdBottom.AutoSizeMode" xml:space="preserve" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="cmdBottom.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>164, 125</value>
+  </data>
+  <data name="cmdBottom.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>32, 22</value>
+  </data>
+  <data name="cmdBottom.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lstAvailableData.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="lstAvailableData.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lstAvailableData.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>154, 195</value>
+  </data>
+  <data name="lstAvailableData.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>209, 195</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

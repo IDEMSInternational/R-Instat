@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgWindrose
     Inherits System.Windows.Forms.Form
 
@@ -66,11 +82,11 @@ Partial Class dlgWindrose
         'lblNoOfColumns
         '
         Me.lblNoOfColumns.AutoSize = True
-        Me.lblNoOfColumns.Location = New System.Drawing.Point(260, 194)
+        Me.lblNoOfColumns.Location = New System.Drawing.Point(258, 191)
         Me.lblNoOfColumns.Name = "lblNoOfColumns"
-        Me.lblNoOfColumns.Size = New System.Drawing.Size(79, 13)
+        Me.lblNoOfColumns.Size = New System.Drawing.Size(102, 13)
         Me.lblNoOfColumns.TabIndex = 7
-        Me.lblNoOfColumns.Text = "No of Columns:"
+        Me.lblNoOfColumns.Text = "Number of Columns:"
         '
         'ucrReceiverFacet
         '
@@ -80,24 +96,26 @@ Partial Class dlgWindrose
         Me.ucrReceiverFacet.Name = "ucrReceiverFacet"
         Me.ucrReceiverFacet.Selector = Nothing
         Me.ucrReceiverFacet.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFacet.strNcFilePath = ""
         Me.ucrReceiverFacet.TabIndex = 6
+        Me.ucrReceiverFacet.ucrSelector = Nothing
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 218)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 221)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(251, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(254, 24)
         Me.ucrSaveGraph.TabIndex = 9
         '
         'ucrNudNoOfColumns
         '
         Me.ucrNudNoOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoOfColumns.Location = New System.Drawing.Point(345, 191)
+        Me.ucrNudNoOfColumns.Location = New System.Drawing.Point(361, 189)
         Me.ucrNudNoOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfColumns.Name = "ucrNudNoOfColumns"
-        Me.ucrNudNoOfColumns.Size = New System.Drawing.Size(35, 20)
+        Me.ucrNudNoOfColumns.Size = New System.Drawing.Size(46, 20)
         Me.ucrNudNoOfColumns.TabIndex = 8
         Me.ucrNudNoOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -109,7 +127,9 @@ Partial Class dlgWindrose
         Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
         Me.ucrReceiverWindDirection.Selector = Nothing
         Me.ucrReceiverWindDirection.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWindDirection.strNcFilePath = ""
         Me.ucrReceiverWindDirection.TabIndex = 4
+        Me.ucrReceiverWindDirection.ucrSelector = Nothing
         '
         'ucrReceiverWindSpeed
         '
@@ -119,7 +139,9 @@ Partial Class dlgWindrose
         Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
         Me.ucrReceiverWindSpeed.Selector = Nothing
         Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWindSpeed.strNcFilePath = ""
         Me.ucrReceiverWindSpeed.TabIndex = 2
+        Me.ucrReceiverWindSpeed.ucrSelector = Nothing
         '
         'ucrWindRoseSelector
         '
@@ -140,9 +162,9 @@ Partial Class dlgWindrose
         '
         'cmdWindroseOptions
         '
-        Me.cmdWindroseOptions.Location = New System.Drawing.Point(10, 192)
+        Me.cmdWindroseOptions.Location = New System.Drawing.Point(320, 219)
         Me.cmdWindroseOptions.Name = "cmdWindroseOptions"
-        Me.cmdWindroseOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdWindroseOptions.Size = New System.Drawing.Size(88, 23)
         Me.cmdWindroseOptions.TabIndex = 11
         Me.cmdWindroseOptions.Text = "Options"
         Me.cmdWindroseOptions.UseVisualStyleBackColor = True
@@ -151,7 +173,7 @@ Partial Class dlgWindrose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 307)
+        Me.ClientSize = New System.Drawing.Size(416, 305)
         Me.Controls.Add(Me.cmdWindroseOptions)
         Me.Controls.Add(Me.ucrReceiverFacet)
         Me.Controls.Add(Me.ucrSaveGraph)

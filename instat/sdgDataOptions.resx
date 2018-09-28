@@ -117,4 +117,379 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrInputFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 209</value>
+  </data>
+  <data name="ucrInputFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 21</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrInputFilterPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFilterPreview.Name" xml:space="preserve">
+    <value>ucrInputFilterPreview</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFilterPreview.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFilterPreview.Parent" xml:space="preserve">
+    <value>tbRows</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFilterPreview.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblFilterPreview.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 211</value>
+  </data>
+  <data name="lblFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 13</value>
+  </data>
+  <data name="lblFilterPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblFilterPreview.Text" xml:space="preserve">
+    <value>Selected Filter Preview</value>
+  </data>
+  <data name="&gt;&gt;lblFilterPreview.Name" xml:space="preserve">
+    <value>lblFilterPreview</value>
+  </data>
+  <data name="&gt;&gt;lblFilterPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFilterPreview.Parent" xml:space="preserve">
+    <value>tbRows</value>
+  </data>
+  <data name="&gt;&gt;lblFilterPreview.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoForDialog.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoForDialog.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="rdoForDialog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 19</value>
+  </data>
+  <data name="rdoForDialog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 17</value>
+  </data>
+  <data name="rdoForDialog.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="rdoForDialog.Text" xml:space="preserve">
+    <value>For This Dialog Only</value>
+  </data>
+  <data name="&gt;&gt;rdoForDialog.Name" xml:space="preserve">
+    <value>rdoForDialog</value>
+  </data>
+  <data name="&gt;&gt;rdoForDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoForDialog.Parent" xml:space="preserve">
+    <value>grpApplyOptions</value>
+  </data>
+  <data name="&gt;&gt;rdoForDialog.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoAllDialogs.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoAllDialogs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 19</value>
+  </data>
+  <data name="rdoAllDialogs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 17</value>
+  </data>
+  <data name="rdoAllDialogs.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rdoAllDialogs.Text" xml:space="preserve">
+    <value>For All Dialogs</value>
+  </data>
+  <data name="&gt;&gt;rdoAllDialogs.Name" xml:space="preserve">
+    <value>rdoAllDialogs</value>
+  </data>
+  <data name="&gt;&gt;rdoAllDialogs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoAllDialogs.Parent" xml:space="preserve">
+    <value>grpApplyOptions</value>
+  </data>
+  <data name="&gt;&gt;rdoAllDialogs.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpApplyOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 236</value>
+  </data>
+  <data name="grpApplyOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 49</value>
+  </data>
+  <data name="grpApplyOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpApplyOptions.Text" xml:space="preserve">
+    <value>Apply Options</value>
+  </data>
+  <data name="&gt;&gt;grpApplyOptions.Name" xml:space="preserve">
+    <value>grpApplyOptions</value>
+  </data>
+  <data name="&gt;&gt;grpApplyOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpApplyOptions.Parent" xml:space="preserve">
+    <value>tbRows</value>
+  </data>
+  <data name="&gt;&gt;grpApplyOptions.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cmdDefineNewFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>175, 93</value>
+  </data>
+  <data name="cmdDefineNewFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 23</value>
+  </data>
+  <data name="cmdDefineNewFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="cmdDefineNewFilter.Text" xml:space="preserve">
+    <value>Define New Filter</value>
+  </data>
+  <data name="&gt;&gt;cmdDefineNewFilter.Name" xml:space="preserve">
+    <value>cmdDefineNewFilter</value>
+  </data>
+  <data name="&gt;&gt;cmdDefineNewFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdDefineNewFilter.Parent" xml:space="preserve">
+    <value>tbRows</value>
+  </data>
+  <data name="&gt;&gt;cmdDefineNewFilter.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblFilter.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>172, 21</value>
+  </data>
+  <data name="lblFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
+  </data>
+  <data name="lblFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblFilter.Text" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="&gt;&gt;lblFilter.Name" xml:space="preserve">
+    <value>lblFilter</value>
+  </data>
+  <data name="&gt;&gt;lblFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFilter.Parent" xml:space="preserve">
+    <value>tbRows</value>
+  </data>
+  <data name="&gt;&gt;lblFilter.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrReceiverFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>175, 34</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrReceiverFilter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFilter.Name" xml:space="preserve">
+    <value>ucrReceiverFilter</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFilter.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFilter.Parent" xml:space="preserve">
+    <value>tbRows</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverFilter.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrSelectorFilters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="ucrSelectorFilters.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorFilters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 180</value>
+  </data>
+  <data name="ucrSelectorFilters.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFilters.Name" xml:space="preserve">
+    <value>ucrSelectorFilters</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFilters.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrame, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFilters.Parent" xml:space="preserve">
+    <value>tbRows</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFilters.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="tbRows.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbRows.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbRows.Size" type="System.Drawing.Size, System.Drawing">
+    <value>307, 291</value>
+  </data>
+  <data name="tbRows.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbRows.Text" xml:space="preserve">
+    <value>Rows</value>
+  </data>
+  <data name="&gt;&gt;tbRows.Name" xml:space="preserve">
+    <value>tbRows</value>
+  </data>
+  <data name="&gt;&gt;tbRows.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbRows.Parent" xml:space="preserve">
+    <value>tbcDataOptions</value>
+  </data>
+  <data name="&gt;&gt;tbRows.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkShowHiddenColumns.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkShowHiddenColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 39</value>
+  </data>
+  <data name="chkShowHiddenColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 17</value>
+  </data>
+  <data name="chkShowHiddenColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="chkShowHiddenColumns.Text" xml:space="preserve">
+    <value>Show Hidden Columns in Selector</value>
+  </data>
+  <data name="&gt;&gt;chkShowHiddenColumns.Name" xml:space="preserve">
+    <value>chkShowHiddenColumns</value>
+  </data>
+  <data name="&gt;&gt;chkShowHiddenColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkShowHiddenColumns.Parent" xml:space="preserve">
+    <value>tbColumns</value>
+  </data>
+  <data name="&gt;&gt;chkShowHiddenColumns.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbColumns.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>307, 291</value>
+  </data>
+  <data name="tbColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbColumns.Text" xml:space="preserve">
+    <value>Columns</value>
+  </data>
+  <data name="&gt;&gt;tbColumns.Name" xml:space="preserve">
+    <value>tbColumns</value>
+  </data>
+  <data name="&gt;&gt;tbColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbColumns.Parent" xml:space="preserve">
+    <value>tbcDataOptions</value>
+  </data>
+  <data name="&gt;&gt;tbColumns.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbcDataOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tbcDataOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 317</value>
+  </data>
+  <data name="tbcDataOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbcDataOptions.Name" xml:space="preserve">
+    <value>tbcDataOptions</value>
+  </data>
+  <data name="&gt;&gt;tbcDataOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbcDataOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbcDataOptions.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrSubDialogueBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 323</value>
+  </data>
+  <data name="ucrSubDialogueBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrSubDialogueBase.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrSubDialogueBase.Name" xml:space="preserve">
+    <value>ucrSubDialogueBase</value>
+  </data>
+  <data name="&gt;&gt;ucrSubDialogueBase.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSubDialogueBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSubDialogueBase.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>313, 351</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Data Options</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgDataOptions</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

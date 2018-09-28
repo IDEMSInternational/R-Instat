@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrVariableName
     Inherits System.Windows.Forms.UserControl
 
@@ -22,23 +38,21 @@ Partial Class ucrVariableName
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrVariableName))
         Me.txtValidation = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'txtValidation
         '
-        Me.txtValidation.Location = New System.Drawing.Point(3, 3)
+        resources.ApplyResources(Me.txtValidation, "txtValidation")
         Me.txtValidation.Name = "txtValidation"
-        Me.txtValidation.Size = New System.Drawing.Size(141, 20)
-        Me.txtValidation.TabIndex = 0
         '
         'ucrVariableName
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.txtValidation)
         Me.Name = "ucrVariableName"
-        Me.Size = New System.Drawing.Size(149, 23)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

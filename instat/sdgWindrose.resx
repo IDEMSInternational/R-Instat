@@ -117,4 +117,289 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblNoofDirections.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblNoofDirections.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 18</value>
+  </data>
+  <data name="lblNoofDirections.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 13</value>
+  </data>
+  <data name="lblNoofDirections.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblNoofDirections.Text" xml:space="preserve">
+    <value>No. of Directions:</value>
+  </data>
+  <data name="&gt;&gt;lblNoofDirections.Name" xml:space="preserve">
+    <value>lblNoofDirections</value>
+  </data>
+  <data name="&gt;&gt;lblNoofDirections.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNoofDirections.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblNoofDirections.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblNoOfSpeeds.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNoOfSpeeds.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 71</value>
+  </data>
+  <data name="lblNoOfSpeeds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 13</value>
+  </data>
+  <data name="lblNoOfSpeeds.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblNoOfSpeeds.Text" xml:space="preserve">
+    <value>No. of Speeds:</value>
+  </data>
+  <data name="&gt;&gt;lblNoOfSpeeds.Name" xml:space="preserve">
+    <value>lblNoOfSpeeds</value>
+  </data>
+  <data name="&gt;&gt;lblNoOfSpeeds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNoOfSpeeds.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblNoOfSpeeds.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblCalmWind.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCalmWind.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 45</value>
+  </data>
+  <data name="lblCalmWind.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 13</value>
+  </data>
+  <data name="lblCalmWind.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblCalmWind.Text" xml:space="preserve">
+    <value>Calm Wind:</value>
+  </data>
+  <data name="&gt;&gt;lblCalmWind.Name" xml:space="preserve">
+    <value>lblCalmWind</value>
+  </data>
+  <data name="&gt;&gt;lblCalmWind.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCalmWind.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblCalmWind.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblSpeedCuts.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSpeedCuts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 98</value>
+  </data>
+  <data name="lblSpeedCuts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 13</value>
+  </data>
+  <data name="lblSpeedCuts.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblSpeedCuts.Text" xml:space="preserve">
+    <value>Speed Cuts:</value>
+  </data>
+  <data name="&gt;&gt;lblSpeedCuts.Name" xml:space="preserve">
+    <value>lblSpeedCuts</value>
+  </data>
+  <data name="&gt;&gt;lblSpeedCuts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSpeedCuts.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSpeedCuts.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrInputSpeedCuts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 94</value>
+  </data>
+  <data name="ucrInputSpeedCuts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 21</value>
+  </data>
+  <data name="ucrInputSpeedCuts.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSpeedCuts.Name" xml:space="preserve">
+    <value>ucrInputSpeedCuts</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSpeedCuts.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSpeedCuts.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputSpeedCuts.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrNudCalmWind.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 42</value>
+  </data>
+  <data name="ucrNudCalmWind.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudCalmWind.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrNudCalmWind.Name" xml:space="preserve">
+    <value>ucrNudCalmWind</value>
+  </data>
+  <data name="&gt;&gt;ucrNudCalmWind.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudCalmWind.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudCalmWind.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrNudNoOfSpeeds.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 68</value>
+  </data>
+  <data name="ucrNudNoOfSpeeds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudNoOfSpeeds.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNoOfSpeeds.Name" xml:space="preserve">
+    <value>ucrNudNoOfSpeeds</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNoOfSpeeds.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNoOfSpeeds.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNoOfSpeeds.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrNudNoOfDirections.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 16</value>
+  </data>
+  <data name="ucrNudNoOfDirections.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudNoOfDirections.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNoOfDirections.Name" xml:space="preserve">
+    <value>ucrNudNoOfDirections</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNoOfDirections.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNoOfDirections.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNoOfDirections.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ucrButtonsSdgWindrose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>36, 155</value>
+  </data>
+  <data name="ucrButtonsSdgWindrose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrButtonsSdgWindrose.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSdgWindrose.Name" xml:space="preserve">
+    <value>ucrButtonsSdgWindrose</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSdgWindrose.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSdgWindrose.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSdgWindrose.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lblTheme.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTheme.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 124</value>
+  </data>
+  <data name="lblTheme.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="lblTheme.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblTheme.Text" xml:space="preserve">
+    <value>Theme:</value>
+  </data>
+  <data name="&gt;&gt;lblTheme.Name" xml:space="preserve">
+    <value>lblTheme</value>
+  </data>
+  <data name="&gt;&gt;lblTheme.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTheme.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblTheme.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrInputTheme.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 121</value>
+  </data>
+  <data name="ucrInputTheme.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 21</value>
+  </data>
+  <data name="ucrInputTheme.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTheme.Name" xml:space="preserve">
+    <value>ucrInputTheme</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTheme.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTheme.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTheme.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>230, 190</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Wind Rose</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgWindrose</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

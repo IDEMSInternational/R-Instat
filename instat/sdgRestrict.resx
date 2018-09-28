@@ -117,4 +117,400 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrSubDialogBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 259</value>
+  </data>
+  <data name="ucrSubDialogBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 30</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrSubDialogBase.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrSubDialogBase.Name" xml:space="preserve">
+    <value>ucrSubDialogBase</value>
+  </data>
+  <data name="&gt;&gt;ucrSubDialogBase.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSubDialogBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSubDialogBase.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbpFactor_Level.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tbpFactor_Level.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpFactor_Level.Size" type="System.Drawing.Size, System.Drawing">
+    <value>345, 213</value>
+  </data>
+  <data name="tbpFactor_Level.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbpFactor_Level.Text" xml:space="preserve">
+    <value>Factor Level</value>
+  </data>
+  <data name="&gt;&gt;tbpFactor_Level.Name" xml:space="preserve">
+    <value>tbpFactor_Level</value>
+  </data>
+  <data name="&gt;&gt;tbpFactor_Level.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpFactor_Level.Parent" xml:space="preserve">
+    <value>tbcOptions</value>
+  </data>
+  <data name="&gt;&gt;tbpFactor_Level.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoExclude.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoExclude.Location" type="System.Drawing.Point, System.Drawing">
+    <value>279, 75</value>
+  </data>
+  <data name="rdoExclude.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 17</value>
+  </data>
+  <data name="rdoExclude.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="rdoExclude.Text" xml:space="preserve">
+    <value>Exclude</value>
+  </data>
+  <data name="rdoExclude.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoExclude.Name" xml:space="preserve">
+    <value>rdoExclude</value>
+  </data>
+  <data name="&gt;&gt;rdoExclude.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoExclude.Parent" xml:space="preserve">
+    <value>tbpCondition</value>
+  </data>
+  <data name="&gt;&gt;rdoExclude.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoInclude.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoInclude.Location" type="System.Drawing.Point, System.Drawing">
+    <value>222, 75</value>
+  </data>
+  <data name="rdoInclude.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="rdoInclude.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="rdoInclude.Text" xml:space="preserve">
+    <value>Include</value>
+  </data>
+  <data name="&gt;&gt;rdoInclude.Name" xml:space="preserve">
+    <value>rdoInclude</value>
+  </data>
+  <data name="&gt;&gt;rdoInclude.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoInclude.Parent" xml:space="preserve">
+    <value>tbpCondition</value>
+  </data>
+  <data name="&gt;&gt;rdoInclude.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblSelectedColumn.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSelectedColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>233, 12</value>
+  </data>
+  <data name="lblSelectedColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 13</value>
+  </data>
+  <data name="lblSelectedColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblSelectedColumn.Text" xml:space="preserve">
+    <value>Selected Column</value>
+  </data>
+  <data name="&gt;&gt;lblSelectedColumn.Name" xml:space="preserve">
+    <value>lblSelectedColumn</value>
+  </data>
+  <data name="&gt;&gt;lblSelectedColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSelectedColumn.Parent" xml:space="preserve">
+    <value>tbpCondition</value>
+  </data>
+  <data name="&gt;&gt;lblSelectedColumn.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrReceiver.Location" type="System.Drawing.Point, System.Drawing">
+    <value>233, 31</value>
+  </data>
+  <data name="ucrReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiver.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 26</value>
+  </data>
+  <data name="ucrReceiver.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiver.Name" xml:space="preserve">
+    <value>ucrReceiver</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiver.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiver.Parent" xml:space="preserve">
+    <value>tbpCondition</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiver.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrSelector.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 5</value>
+  </data>
+  <data name="ucrSelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelector.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 127</value>
+  </data>
+  <data name="ucrSelector.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrSelector.Name" xml:space="preserve">
+    <value>ucrSelector</value>
+  </data>
+  <data name="&gt;&gt;ucrSelector.Type" xml:space="preserve">
+    <value>instat.ucrSelectorAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelector.Parent" xml:space="preserve">
+    <value>tbpCondition</value>
+  </data>
+  <data name="&gt;&gt;ucrSelector.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="txtGreaterThan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>290, 183</value>
+  </data>
+  <data name="txtGreaterThan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 20</value>
+  </data>
+  <data name="txtGreaterThan.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txtGreaterThan.Name" xml:space="preserve">
+    <value>txtGreaterThan</value>
+  </data>
+  <data name="&gt;&gt;txtGreaterThan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtGreaterThan.Parent" xml:space="preserve">
+    <value>tbpCondition</value>
+  </data>
+  <data name="&gt;&gt;txtGreaterThan.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="txtEqualTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>290, 159</value>
+  </data>
+  <data name="txtEqualTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 20</value>
+  </data>
+  <data name="txtEqualTo.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txtEqualTo.Name" xml:space="preserve">
+    <value>txtEqualTo</value>
+  </data>
+  <data name="&gt;&gt;txtEqualTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtEqualTo.Parent" xml:space="preserve">
+    <value>tbpCondition</value>
+  </data>
+  <data name="&gt;&gt;txtEqualTo.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="txtLessThan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>290, 136</value>
+  </data>
+  <data name="txtLessThan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 20</value>
+  </data>
+  <data name="txtLessThan.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txtLessThan.Name" xml:space="preserve">
+    <value>txtLessThan</value>
+  </data>
+  <data name="&gt;&gt;txtLessThan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtLessThan.Parent" xml:space="preserve">
+    <value>tbpCondition</value>
+  </data>
+  <data name="&gt;&gt;txtLessThan.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="rdoGreaterThan.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoGreaterThan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>194, 182</value>
+  </data>
+  <data name="rdoGreaterThan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 17</value>
+  </data>
+  <data name="rdoGreaterThan.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoGreaterThan.Text" xml:space="preserve">
+    <value>Greater Than</value>
+  </data>
+  <data name="&gt;&gt;rdoGreaterThan.Name" xml:space="preserve">
+    <value>rdoGreaterThan</value>
+  </data>
+  <data name="&gt;&gt;rdoGreaterThan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoGreaterThan.Parent" xml:space="preserve">
+    <value>tbpCondition</value>
+  </data>
+  <data name="&gt;&gt;rdoGreaterThan.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="rdoEqualTo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoEqualTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>194, 159</value>
+  </data>
+  <data name="rdoEqualTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
+  </data>
+  <data name="rdoEqualTo.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoEqualTo.Text" xml:space="preserve">
+    <value>Equal To</value>
+  </data>
+  <data name="&gt;&gt;rdoEqualTo.Name" xml:space="preserve">
+    <value>rdoEqualTo</value>
+  </data>
+  <data name="&gt;&gt;rdoEqualTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoEqualTo.Parent" xml:space="preserve">
+    <value>tbpCondition</value>
+  </data>
+  <data name="&gt;&gt;rdoEqualTo.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="rdoLessThan.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoLessThan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>194, 136</value>
+  </data>
+  <data name="rdoLessThan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 17</value>
+  </data>
+  <data name="rdoLessThan.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoLessThan.Text" xml:space="preserve">
+    <value>Less Than</value>
+  </data>
+  <data name="&gt;&gt;rdoLessThan.Name" xml:space="preserve">
+    <value>rdoLessThan</value>
+  </data>
+  <data name="&gt;&gt;rdoLessThan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoLessThan.Parent" xml:space="preserve">
+    <value>tbpCondition</value>
+  </data>
+  <data name="&gt;&gt;rdoLessThan.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="tbpCondition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbpCondition.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpCondition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>345, 213</value>
+  </data>
+  <data name="tbpCondition.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbpCondition.Text" xml:space="preserve">
+    <value>Condition</value>
+  </data>
+  <data name="&gt;&gt;tbpCondition.Name" xml:space="preserve">
+    <value>tbpCondition</value>
+  </data>
+  <data name="&gt;&gt;tbpCondition.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpCondition.Parent" xml:space="preserve">
+    <value>tbcOptions</value>
+  </data>
+  <data name="&gt;&gt;tbpCondition.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbcOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 13</value>
+  </data>
+  <data name="tbcOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>353, 239</value>
+  </data>
+  <data name="tbcOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tbcOptions.Name" xml:space="preserve">
+    <value>tbcOptions</value>
+  </data>
+  <data name="&gt;&gt;tbcOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbcOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbcOptions.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>369, 291</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Control Options</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgRestrict</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

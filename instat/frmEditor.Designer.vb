@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmEditor
     Inherits System.Windows.Forms.Form
 
@@ -64,7 +80,7 @@ Partial Class frmEditor
         Me.mnuRemoveCurrentFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.insertSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.deleteSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.deleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopySheet = New System.Windows.Forms.ToolStripMenuItem()
@@ -96,6 +112,7 @@ Partial Class frmEditor
         Me.grdData.SheetTabNewButtonVisible = False
         Me.grdData.SheetTabVisible = True
         Me.grdData.SheetTabWidth = 200
+        Me.grdData.ShowScrollEndSpacing = True
         Me.grdData.Size = New System.Drawing.Size(441, 261)
         Me.grdData.TabIndex = 0
         '
@@ -328,7 +345,7 @@ Partial Class frmEditor
         '
         'statusColumnMenu
         '
-        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteSheet, Me.renameSheet, Me.reorderSheet, Me.CopySheet, Me.HideSheet, Me.unhideSheet, Me.ViewSheet})
+        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteDataFrame, Me.renameSheet, Me.reorderSheet, Me.CopySheet, Me.HideSheet, Me.unhideSheet, Me.ViewSheet})
         Me.statusColumnMenu.Name = "statusColumnMenu"
         Me.statusColumnMenu.Size = New System.Drawing.Size(163, 180)
         '
@@ -338,11 +355,11 @@ Partial Class frmEditor
         Me.insertSheet.Size = New System.Drawing.Size(162, 22)
         Me.insertSheet.Text = "Insert..."
         '
-        'deleteSheet
+        'deleteDataFrame
         '
-        Me.deleteSheet.Name = "deleteSheet"
-        Me.deleteSheet.Size = New System.Drawing.Size(162, 22)
-        Me.deleteSheet.Text = "Delete"
+        Me.deleteDataFrame.Name = "deleteDataFrame"
+        Me.deleteDataFrame.Size = New System.Drawing.Size(162, 22)
+        Me.deleteDataFrame.Text = "Delete"
         '
         'renameSheet
         '
@@ -446,7 +463,7 @@ Partial Class frmEditor
     Private WithEvents mnuDeleteRows As ToolStripMenuItem
     Friend WithEvents statusColumnMenu As ContextMenuStrip
     Friend WithEvents insertSheet As ToolStripMenuItem
-    Friend WithEvents deleteSheet As ToolStripMenuItem
+    Friend WithEvents deleteDataFrame As ToolStripMenuItem
     Friend WithEvents renameSheet As ToolStripMenuItem
     Friend WithEvents mnuColumnRename As ToolStripMenuItem
     Friend WithEvents mnuConvertText As ToolStripMenuItem

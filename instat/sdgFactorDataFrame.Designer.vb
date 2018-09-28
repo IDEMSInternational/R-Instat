@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgFactorDataFrame
     Inherits System.Windows.Forms.Form
 
@@ -22,6 +38,7 @@ Partial Class sdgFactorDataFrame
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgFactorDataFrame))
         Me.ucrBaseFactorSubdlg = New instat.ucrButtonsSubdialogue()
         Me.ucrSelectorSubDlgFactorDatafrme = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverLabels = New instat.ucrReceiverSingle()
@@ -32,62 +49,48 @@ Partial Class sdgFactorDataFrame
         '
         'ucrBaseFactorSubdlg
         '
-        Me.ucrBaseFactorSubdlg.Location = New System.Drawing.Point(12, 219)
+        resources.ApplyResources(Me.ucrBaseFactorSubdlg, "ucrBaseFactorSubdlg")
         Me.ucrBaseFactorSubdlg.Name = "ucrBaseFactorSubdlg"
-        Me.ucrBaseFactorSubdlg.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBaseFactorSubdlg.TabIndex = 0
         '
         'ucrSelectorSubDlgFactorDatafrme
         '
         Me.ucrSelectorSubDlgFactorDatafrme.bShowHiddenColumns = False
         Me.ucrSelectorSubDlgFactorDatafrme.bUseCurrentFilter = True
-        Me.ucrSelectorSubDlgFactorDatafrme.Location = New System.Drawing.Point(9, 9)
-        Me.ucrSelectorSubDlgFactorDatafrme.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorSubDlgFactorDatafrme, "ucrSelectorSubDlgFactorDatafrme")
         Me.ucrSelectorSubDlgFactorDatafrme.Name = "ucrSelectorSubDlgFactorDatafrme"
-        Me.ucrSelectorSubDlgFactorDatafrme.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorSubDlgFactorDatafrme.TabIndex = 1
         '
         'ucrReceiverLabels
         '
-        Me.ucrReceiverLabels.Location = New System.Drawing.Point(252, 110)
-        Me.ucrReceiverLabels.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLabels.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverLabels, "ucrReceiverLabels")
         Me.ucrReceiverLabels.Name = "ucrReceiverLabels"
         Me.ucrReceiverLabels.Selector = Nothing
-        Me.ucrReceiverLabels.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverLabels.TabIndex = 2
+        Me.ucrReceiverLabels.strNcFilePath = ""
+        Me.ucrReceiverLabels.ucrSelector = Nothing
         '
         'ucrReceiverMatchColumn
         '
-        Me.ucrReceiverMatchColumn.Location = New System.Drawing.Point(252, 51)
-        Me.ucrReceiverMatchColumn.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMatchColumn.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMatchColumn, "ucrReceiverMatchColumn")
         Me.ucrReceiverMatchColumn.Name = "ucrReceiverMatchColumn"
         Me.ucrReceiverMatchColumn.Selector = Nothing
-        Me.ucrReceiverMatchColumn.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverMatchColumn.TabIndex = 2
+        Me.ucrReceiverMatchColumn.strNcFilePath = ""
+        Me.ucrReceiverMatchColumn.ucrSelector = Nothing
         '
         'lblMatchingColumn
         '
-        Me.lblMatchingColumn.AutoSize = True
-        Me.lblMatchingColumn.Location = New System.Drawing.Point(249, 36)
+        resources.ApplyResources(Me.lblMatchingColumn, "lblMatchingColumn")
         Me.lblMatchingColumn.Name = "lblMatchingColumn"
-        Me.lblMatchingColumn.Size = New System.Drawing.Size(137, 13)
-        Me.lblMatchingColumn.TabIndex = 3
-        Me.lblMatchingColumn.Text = "Matching Column (Optional)"
         '
         'lbllabel
         '
-        Me.lbllabel.AutoSize = True
-        Me.lbllabel.Location = New System.Drawing.Point(249, 95)
+        resources.ApplyResources(Me.lbllabel, "lbllabel")
         Me.lbllabel.Name = "lbllabel"
-        Me.lbllabel.Size = New System.Drawing.Size(122, 13)
-        Me.lbllabel.TabIndex = 3
-        Me.lbllabel.Text = "Levels/Labels (Optional)"
         '
         'sdgFactorDataFrame
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(399, 261)
         Me.Controls.Add(Me.lbllabel)
         Me.Controls.Add(Me.lblMatchingColumn)
         Me.Controls.Add(Me.ucrReceiverMatchColumn)
@@ -98,8 +101,6 @@ Partial Class sdgFactorDataFrame
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgFactorDataFrame"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Use Factor Sheet"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

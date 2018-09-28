@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgStack
     Inherits System.Windows.Forms.Form
 
@@ -22,9 +38,13 @@ Partial Class dlgStack
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgStack))
         Me.lblColumnsTostack = New System.Windows.Forms.Label()
         Me.lblStackDataInto = New System.Windows.Forms.Label()
         Me.lblFactorInto = New System.Windows.Forms.Label()
+        Me.ucrNudNoSets = New instat.ucrNud()
+        Me.ucrChkStackMultipleSets = New instat.ucrCheck()
+        Me.ucrSaveNewDataName = New instat.ucrSave()
         Me.ucrChkCarryColumns = New instat.ucrCheck()
         Me.ucrStackDataInto = New instat.ucrInputTextBox()
         Me.ucrFactorInto = New instat.ucrInputTextBox()
@@ -32,120 +52,112 @@ Partial Class dlgStack
         Me.ucrSelectorStack = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverColumnsToBeStack = New instat.ucrReceiverMultiple()
-        Me.ucrSaveNewDataName = New instat.ucrSave()
+        Me.lblSets = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblColumnsTostack
         '
-        Me.lblColumnsTostack.AutoSize = True
-        Me.lblColumnsTostack.Location = New System.Drawing.Point(285, 26)
+        resources.ApplyResources(Me.lblColumnsTostack, "lblColumnsTostack")
         Me.lblColumnsTostack.Name = "lblColumnsTostack"
-        Me.lblColumnsTostack.Size = New System.Drawing.Size(93, 13)
-        Me.lblColumnsTostack.TabIndex = 1
         Me.lblColumnsTostack.Tag = "Columns_to_Stack:"
-        Me.lblColumnsTostack.Text = "Columns to Stack:"
         '
         'lblStackDataInto
         '
-        Me.lblStackDataInto.AutoSize = True
-        Me.lblStackDataInto.Location = New System.Drawing.Point(10, 263)
+        resources.ApplyResources(Me.lblStackDataInto, "lblStackDataInto")
         Me.lblStackDataInto.Name = "lblStackDataInto"
-        Me.lblStackDataInto.Size = New System.Drawing.Size(85, 13)
-        Me.lblStackDataInto.TabIndex = 8
         Me.lblStackDataInto.Tag = "Stack_Data_Into"
-        Me.lblStackDataInto.Text = "Stack Data Into:"
         '
         'lblFactorInto
         '
-        Me.lblFactorInto.AutoSize = True
-        Me.lblFactorInto.Location = New System.Drawing.Point(10, 234)
+        resources.ApplyResources(Me.lblFactorInto, "lblFactorInto")
         Me.lblFactorInto.Name = "lblFactorInto"
-        Me.lblFactorInto.Size = New System.Drawing.Size(61, 13)
-        Me.lblFactorInto.TabIndex = 6
         Me.lblFactorInto.Tag = "Factor_Into"
-        Me.lblFactorInto.Text = "Factor Into:"
+        '
+        'ucrNudNoSets
+        '
+        Me.ucrNudNoSets.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNoSets.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNoSets, "ucrNudNoSets")
+        Me.ucrNudNoSets.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNoSets.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNoSets.Name = "ucrNudNoSets"
+        Me.ucrNudNoSets.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkStackMultipleSets
+        '
+        Me.ucrChkStackMultipleSets.Checked = False
+        resources.ApplyResources(Me.ucrChkStackMultipleSets, "ucrChkStackMultipleSets")
+        Me.ucrChkStackMultipleSets.Name = "ucrChkStackMultipleSets"
+        '
+        'ucrSaveNewDataName
+        '
+        resources.ApplyResources(Me.ucrSaveNewDataName, "ucrSaveNewDataName")
+        Me.ucrSaveNewDataName.Name = "ucrSaveNewDataName"
         '
         'ucrChkCarryColumns
         '
         Me.ucrChkCarryColumns.Checked = False
-        Me.ucrChkCarryColumns.Location = New System.Drawing.Point(285, 147)
-        Me.ucrChkCarryColumns.Margin = New System.Windows.Forms.Padding(4)
+        resources.ApplyResources(Me.ucrChkCarryColumns, "ucrChkCarryColumns")
         Me.ucrChkCarryColumns.Name = "ucrChkCarryColumns"
-        Me.ucrChkCarryColumns.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkCarryColumns.TabIndex = 3
         '
         'ucrStackDataInto
         '
         Me.ucrStackDataInto.AddQuotesIfUnrecognised = True
         Me.ucrStackDataInto.IsMultiline = False
         Me.ucrStackDataInto.IsReadOnly = False
-        Me.ucrStackDataInto.Location = New System.Drawing.Point(131, 259)
-        Me.ucrStackDataInto.Margin = New System.Windows.Forms.Padding(5)
+        resources.ApplyResources(Me.ucrStackDataInto, "ucrStackDataInto")
         Me.ucrStackDataInto.Name = "ucrStackDataInto"
-        Me.ucrStackDataInto.Size = New System.Drawing.Size(145, 21)
-        Me.ucrStackDataInto.TabIndex = 9
         '
         'ucrFactorInto
         '
         Me.ucrFactorInto.AddQuotesIfUnrecognised = True
         Me.ucrFactorInto.IsMultiline = False
         Me.ucrFactorInto.IsReadOnly = False
-        Me.ucrFactorInto.Location = New System.Drawing.Point(131, 230)
-        Me.ucrFactorInto.Margin = New System.Windows.Forms.Padding(5)
+        resources.ApplyResources(Me.ucrFactorInto, "ucrFactorInto")
         Me.ucrFactorInto.Name = "ucrFactorInto"
-        Me.ucrFactorInto.Size = New System.Drawing.Size(145, 21)
-        Me.ucrFactorInto.TabIndex = 7
         '
         'ucrColumnsToCarryReceiver
         '
         Me.ucrColumnsToCarryReceiver.frmParent = Me
-        Me.ucrColumnsToCarryReceiver.Location = New System.Drawing.Point(285, 173)
-        Me.ucrColumnsToCarryReceiver.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrColumnsToCarryReceiver, "ucrColumnsToCarryReceiver")
         Me.ucrColumnsToCarryReceiver.Name = "ucrColumnsToCarryReceiver"
         Me.ucrColumnsToCarryReceiver.Selector = Nothing
-        Me.ucrColumnsToCarryReceiver.Size = New System.Drawing.Size(120, 107)
-        Me.ucrColumnsToCarryReceiver.TabIndex = 4
+        Me.ucrColumnsToCarryReceiver.strNcFilePath = ""
+        Me.ucrColumnsToCarryReceiver.ucrSelector = Nothing
         '
         'ucrSelectorStack
         '
         Me.ucrSelectorStack.bShowHiddenColumns = False
         Me.ucrSelectorStack.bUseCurrentFilter = True
-        Me.ucrSelectorStack.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorStack.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorStack, "ucrSelectorStack")
         Me.ucrSelectorStack.Name = "ucrSelectorStack"
-        Me.ucrSelectorStack.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorStack.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 286)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
         '
         'ucrReceiverColumnsToBeStack
         '
         Me.ucrReceiverColumnsToBeStack.frmParent = Me
-        Me.ucrReceiverColumnsToBeStack.Location = New System.Drawing.Point(285, 41)
-        Me.ucrReceiverColumnsToBeStack.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverColumnsToBeStack, "ucrReceiverColumnsToBeStack")
         Me.ucrReceiverColumnsToBeStack.Name = "ucrReceiverColumnsToBeStack"
         Me.ucrReceiverColumnsToBeStack.Selector = Nothing
-        Me.ucrReceiverColumnsToBeStack.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverColumnsToBeStack.TabIndex = 2
+        Me.ucrReceiverColumnsToBeStack.strNcFilePath = ""
+        Me.ucrReceiverColumnsToBeStack.ucrSelector = Nothing
         '
-        'ucrSaveNewDataName
+        'lblSets
         '
-        Me.ucrSaveNewDataName.Location = New System.Drawing.Point(10, 200)
-        Me.ucrSaveNewDataName.Name = "ucrSaveNewDataName"
-        Me.ucrSaveNewDataName.Size = New System.Drawing.Size(266, 20)
-        Me.ucrSaveNewDataName.TabIndex = 5
+        resources.ApplyResources(Me.lblSets, "lblSets")
+        Me.lblSets.Name = "lblSets"
         '
         'dlgStack
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 349)
+        Me.Controls.Add(Me.lblSets)
+        Me.Controls.Add(Me.ucrNudNoSets)
+        Me.Controls.Add(Me.ucrChkStackMultipleSets)
         Me.Controls.Add(Me.ucrSaveNewDataName)
         Me.Controls.Add(Me.ucrChkCarryColumns)
         Me.Controls.Add(Me.ucrStackDataInto)
@@ -161,9 +173,7 @@ Partial Class dlgStack
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgStack"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Stack_join_columns"
-        Me.Text = "Stack (melt) Columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -179,4 +189,7 @@ Partial Class dlgStack
     Friend WithEvents ucrStackDataInto As ucrInputTextBox
     Friend WithEvents ucrChkCarryColumns As ucrCheck
     Friend WithEvents ucrSaveNewDataName As ucrSave
+    Friend WithEvents ucrNudNoSets As ucrNud
+    Friend WithEvents ucrChkStackMultipleSets As ucrCheck
+    Friend WithEvents lblSets As Label
 End Class

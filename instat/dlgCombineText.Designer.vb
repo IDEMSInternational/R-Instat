@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgCombineText
     Inherits System.Windows.Forms.Form
 
@@ -22,6 +38,7 @@ Partial Class dlgCombineText
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCombineText))
         Me.lblSeparator = New System.Windows.Forms.Label()
         Me.lblColumnsToCobine = New System.Windows.Forms.Label()
         Me.ucrSaveColumn = New instat.ucrSave()
@@ -33,70 +50,52 @@ Partial Class dlgCombineText
         '
         'lblSeparator
         '
-        Me.lblSeparator.AutoSize = True
-        Me.lblSeparator.Location = New System.Drawing.Point(248, 167)
+        resources.ApplyResources(Me.lblSeparator, "lblSeparator")
         Me.lblSeparator.Name = "lblSeparator"
-        Me.lblSeparator.Size = New System.Drawing.Size(56, 13)
-        Me.lblSeparator.TabIndex = 3
-        Me.lblSeparator.Text = "Separator:"
         '
         'lblColumnsToCobine
         '
-        Me.lblColumnsToCobine.AutoSize = True
-        Me.lblColumnsToCobine.Location = New System.Drawing.Point(248, 46)
+        resources.ApplyResources(Me.lblColumnsToCobine, "lblColumnsToCobine")
         Me.lblColumnsToCobine.Name = "lblColumnsToCobine"
-        Me.lblColumnsToCobine.Size = New System.Drawing.Size(106, 13)
-        Me.lblColumnsToCobine.TabIndex = 1
         Me.lblColumnsToCobine.Tag = "Columns_to_Combine:"
-        Me.lblColumnsToCobine.Text = "Columns to Combine:"
         '
         'ucrSaveColumn
         '
-        Me.ucrSaveColumn.Location = New System.Drawing.Point(10, 209)
+        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
         Me.ucrSaveColumn.Name = "ucrSaveColumn"
-        Me.ucrSaveColumn.Size = New System.Drawing.Size(305, 24)
-        Me.ucrSaveColumn.TabIndex = 5
         '
         'ucrInputSeparator
         '
+        Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
         Me.ucrInputSeparator.IsReadOnly = False
-        Me.ucrInputSeparator.Location = New System.Drawing.Point(247, 182)
+        resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
         Me.ucrInputSeparator.Name = "ucrInputSeparator"
-        Me.ucrInputSeparator.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputSeparator.TabIndex = 4
         '
         'ucrReceiverCombineText
         '
         Me.ucrReceiverCombineText.frmParent = Me
-        Me.ucrReceiverCombineText.Location = New System.Drawing.Point(247, 61)
-        Me.ucrReceiverCombineText.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverCombineText, "ucrReceiverCombineText")
         Me.ucrReceiverCombineText.Name = "ucrReceiverCombineText"
         Me.ucrReceiverCombineText.Selector = Nothing
-        Me.ucrReceiverCombineText.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverCombineText.TabIndex = 2
+        Me.ucrReceiverCombineText.strNcFilePath = ""
+        Me.ucrReceiverCombineText.ucrSelector = Nothing
         '
         'ucrSelectorForCombineText
         '
         Me.ucrSelectorForCombineText.bShowHiddenColumns = False
         Me.ucrSelectorForCombineText.bUseCurrentFilter = True
-        Me.ucrSelectorForCombineText.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForCombineText.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorForCombineText, "ucrSelectorForCombineText")
         Me.ucrSelectorForCombineText.Name = "ucrSelectorForCombineText"
-        Me.ucrSelectorForCombineText.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForCombineText.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 236)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 6
         '
         'dlgCombineText
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 297)
         Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.ucrInputSeparator)
         Me.Controls.Add(Me.lblColumnsToCobine)
@@ -108,9 +107,7 @@ Partial Class dlgCombineText
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCombineText"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Combine_Text_Columns"
-        Me.Text = "Combine Text Columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

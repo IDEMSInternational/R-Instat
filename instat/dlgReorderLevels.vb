@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -35,27 +35,27 @@ Public Class dlgReorderLevels
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 36
-        'Set Receivers and column parameter
-        ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
-        ucrReceiverFactor.SetMeAsReceiver()
-        ucrReceiverFactor.SetIncludedDataTypes({"factor"})
-        ucrReceiverFactor.SetParameter(New RParameter("col_name", 1))
-        ucrReceiverFactor.SetParameterIsString()
-
-        'Set reorder scroll list view & datatype accepted
-        ucrReorderFactor.setReceiver(ucrReceiverFactor)
-        ucrReorderFactor.setDataType("factor")
 
         'Set data frame paramater
         ucrSelectorFactorLevelsToReorder.SetParameter(New RParameter("data_name", 0))
         ucrSelectorFactorLevelsToReorder.SetParameterIsString()
 
-        'Set column Parameter
-        ucrReorderFactor.SetParameter(New RParameter("new_level_names", 2))
+        'Set Receivers and column parameter
+        ucrReceiverFactor.SetParameter(New RParameter("col_name", 1))
+        ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
+        ucrReceiverFactor.SetMeAsReceiver()
+        ucrReceiverFactor.SetIncludedDataTypes({"factor"}, bStrict:=True)
+        ucrReceiverFactor.strSelectorHeading = "Factors"
+        ucrReceiverFactor.SetParameterIsString()
 
+        'Set reorder scroll list view & datatype accepted
+        ucrReorderFactor.SetParameter(New RParameter("new_level_names", 2))
+        ucrReorderFactor.setReceiver(ucrReceiverFactor)
+        ucrReorderFactor.setDataType("factor")
     End Sub
 
     Private Sub SetDefaults()
+        clsReorder = New RFunction
         'reset
         ucrSelectorFactorLevelsToReorder.Reset()
         ' Set default function

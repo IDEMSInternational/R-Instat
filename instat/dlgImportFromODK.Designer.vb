@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgImportFromODK
     Inherits System.Windows.Forms.Form
 
@@ -22,133 +38,96 @@ Partial Class dlgImportFromODK
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgImportFromODK))
         Me.lblUsername = New System.Windows.Forms.Label()
         Me.lblChooseForm = New System.Windows.Forms.Label()
         Me.cmdFindForms = New System.Windows.Forms.Button()
-        Me.grpPlatform = New System.Windows.Forms.GroupBox()
-        Me.rdoOna = New System.Windows.Forms.RadioButton()
-        Me.rdoKobo = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlPlatform = New instat.UcrPanel()
         Me.ucrInputChooseForm = New instat.ucrInputComboBox()
         Me.ucrInputUsername = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpPlatform.SuspendLayout()
+        Me.ucrPnlPlatform = New instat.UcrPanel()
+        Me.rdoKobo = New System.Windows.Forms.RadioButton()
+        Me.rdoOna = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblUsername
         '
-        Me.lblUsername.AutoSize = True
-        Me.lblUsername.Location = New System.Drawing.Point(12, 74)
+        resources.ApplyResources(Me.lblUsername, "lblUsername")
         Me.lblUsername.Name = "lblUsername"
-        Me.lblUsername.Size = New System.Drawing.Size(58, 13)
-        Me.lblUsername.TabIndex = 1
-        Me.lblUsername.Text = "Username:"
         '
         'lblChooseForm
         '
-        Me.lblChooseForm.AutoSize = True
-        Me.lblChooseForm.Location = New System.Drawing.Point(12, 134)
+        resources.ApplyResources(Me.lblChooseForm, "lblChooseForm")
         Me.lblChooseForm.Name = "lblChooseForm"
-        Me.lblChooseForm.Size = New System.Drawing.Size(72, 13)
-        Me.lblChooseForm.TabIndex = 4
-        Me.lblChooseForm.Text = "Choose Form:"
         '
         'cmdFindForms
         '
-        Me.cmdFindForms.Location = New System.Drawing.Point(12, 102)
+        resources.ApplyResources(Me.cmdFindForms, "cmdFindForms")
         Me.cmdFindForms.Name = "cmdFindForms"
-        Me.cmdFindForms.Size = New System.Drawing.Size(102, 23)
-        Me.cmdFindForms.TabIndex = 3
-        Me.cmdFindForms.Text = "Find Forms"
         Me.cmdFindForms.UseVisualStyleBackColor = True
-        '
-        'grpPlatform
-        '
-        Me.grpPlatform.Controls.Add(Me.rdoOna)
-        Me.grpPlatform.Controls.Add(Me.rdoKobo)
-        Me.grpPlatform.Controls.Add(Me.ucrPnlPlatform)
-        Me.grpPlatform.Location = New System.Drawing.Point(12, 10)
-        Me.grpPlatform.Name = "grpPlatform"
-        Me.grpPlatform.Size = New System.Drawing.Size(406, 46)
-        Me.grpPlatform.TabIndex = 0
-        Me.grpPlatform.TabStop = False
-        Me.grpPlatform.Text = "Choose Platform"
-        '
-        'rdoOna
-        '
-        Me.rdoOna.AutoSize = True
-        Me.rdoOna.Location = New System.Drawing.Point(152, 17)
-        Me.rdoOna.Name = "rdoOna"
-        Me.rdoOna.Size = New System.Drawing.Size(45, 17)
-        Me.rdoOna.TabIndex = 1
-        Me.rdoOna.TabStop = True
-        Me.rdoOna.Text = "Ona"
-        Me.rdoOna.UseVisualStyleBackColor = True
-        '
-        'rdoKobo
-        '
-        Me.rdoKobo.AutoSize = True
-        Me.rdoKobo.Location = New System.Drawing.Point(10, 17)
-        Me.rdoKobo.Name = "rdoKobo"
-        Me.rdoKobo.Size = New System.Drawing.Size(50, 17)
-        Me.rdoKobo.TabIndex = 0
-        Me.rdoKobo.TabStop = True
-        Me.rdoKobo.Text = "Kobo"
-        Me.rdoKobo.UseVisualStyleBackColor = True
-        '
-        'ucrPnlPlatform
-        '
-        Me.ucrPnlPlatform.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlPlatform.Name = "ucrPnlPlatform"
-        Me.ucrPnlPlatform.Size = New System.Drawing.Size(300, 24)
-        Me.ucrPnlPlatform.TabIndex = 0
         '
         'ucrInputChooseForm
         '
         Me.ucrInputChooseForm.AddQuotesIfUnrecognised = True
         Me.ucrInputChooseForm.IsReadOnly = False
-        Me.ucrInputChooseForm.Location = New System.Drawing.Point(92, 134)
+        resources.ApplyResources(Me.ucrInputChooseForm, "ucrInputChooseForm")
         Me.ucrInputChooseForm.Name = "ucrInputChooseForm"
-        Me.ucrInputChooseForm.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputChooseForm.TabIndex = 5
         '
         'ucrInputUsername
         '
         Me.ucrInputUsername.AddQuotesIfUnrecognised = True
         Me.ucrInputUsername.IsMultiline = False
         Me.ucrInputUsername.IsReadOnly = False
-        Me.ucrInputUsername.Location = New System.Drawing.Point(92, 74)
+        resources.ApplyResources(Me.ucrInputUsername, "ucrInputUsername")
         Me.ucrInputUsername.Name = "ucrInputUsername"
-        Me.ucrInputUsername.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputUsername.TabIndex = 2
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 164)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(420, 52)
-        Me.ucrBase.TabIndex = 6
+        '
+        'ucrPnlPlatform
+        '
+        resources.ApplyResources(Me.ucrPnlPlatform, "ucrPnlPlatform")
+        Me.ucrPnlPlatform.Name = "ucrPnlPlatform"
+        '
+        'rdoKobo
+        '
+        resources.ApplyResources(Me.rdoKobo, "rdoKobo")
+        Me.rdoKobo.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoKobo.FlatAppearance.BorderSize = 2
+        Me.rdoKobo.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoKobo.Name = "rdoKobo"
+        Me.rdoKobo.TabStop = True
+        Me.rdoKobo.UseVisualStyleBackColor = True
+        '
+        'rdoOna
+        '
+        resources.ApplyResources(Me.rdoOna, "rdoOna")
+        Me.rdoOna.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoOna.FlatAppearance.BorderSize = 2
+        Me.rdoOna.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoOna.Name = "rdoOna"
+        Me.rdoOna.TabStop = True
+        Me.rdoOna.UseVisualStyleBackColor = True
         '
         'dlgImportFromODK
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(445, 229)
-        Me.Controls.Add(Me.grpPlatform)
+        Me.Controls.Add(Me.rdoOna)
+        Me.Controls.Add(Me.rdoKobo)
+        Me.Controls.Add(Me.ucrPnlPlatform)
         Me.Controls.Add(Me.cmdFindForms)
         Me.Controls.Add(Me.ucrInputChooseForm)
         Me.Controls.Add(Me.ucrInputUsername)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblChooseForm)
         Me.Controls.Add(Me.lblUsername)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgImportFromODK"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Import from ODK"
-        Me.grpPlatform.ResumeLayout(False)
-        Me.grpPlatform.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -159,8 +138,7 @@ Partial Class dlgImportFromODK
     Friend WithEvents ucrInputUsername As ucrInputTextBox
     Friend WithEvents ucrInputChooseForm As ucrInputComboBox
     Friend WithEvents cmdFindForms As Button
-    Friend WithEvents grpPlatform As GroupBox
-    Friend WithEvents rdoOna As RadioButton
-    Friend WithEvents rdoKobo As RadioButton
     Friend WithEvents ucrPnlPlatform As UcrPanel
+    Friend WithEvents rdoKobo As RadioButton
+    Friend WithEvents rdoOna As RadioButton
 End Class

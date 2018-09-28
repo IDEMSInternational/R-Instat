@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="lblXVariable.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXVariable.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>257, 207</value>
+  </data>
+  <data name="lblXVariable.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblXVariable.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="rdoDataThenYear.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoDataThenYear.Enabled" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="rdoDataThenYear.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
+  </data>
+  <data name="rdoDataThenYear.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>101, 17</value>
+  </data>
+  <data name="rdoDataThenYear.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoYearThenData.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoYearThenData.Enabled" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="rdoYearThenData.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="rdoYearThenData.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>101, 17</value>
+  </data>
+  <data name="rdoYearThenData.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrPnlLayoutOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 18</value>
+  </data>
+  <data name="ucrPnlLayoutOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>108, 39</value>
+  </data>
+  <data name="ucrPnlLayoutOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="grpLayout.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 303</value>
+  </data>
+  <data name="grpLayout.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 61</value>
+  </data>
+  <data name="grpLayout.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="grpLayout.Text" xml:space="preserve">
+    <value>Mpangilio</value>
+  </data>
+  <data name="cmdBoxPlotOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 241</value>
+  </data>
+  <data name="cmdBoxPlotOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 25</value>
+  </data>
+  <data name="cmdBoxPlotOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="cmdOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 272</value>
+  </data>
+  <data name="cmdOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 25</value>
+  </data>
+  <data name="cmdOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="rdoViolin.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoViolin.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoViolin.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>257, 12</value>
+  </data>
+  <data name="rdoViolin.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>98, 27</value>
+  </data>
+  <data name="rdoViolin.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoViolin.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="rdoJitter.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoJitter.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoJitter.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>161, 12</value>
+  </data>
+  <data name="rdoJitter.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>98, 27</value>
+  </data>
+  <data name="rdoJitter.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoJitter.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="rdoBoxplot.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoBoxplot.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoBoxplot.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>65, 12</value>
+  </data>
+  <data name="rdoBoxplot.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>98, 27</value>
+  </data>
+  <data name="rdoBoxplot.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoBoxplot.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>420, 530</value>
+  </data>
+  <data name="ucrChkVerticalXTickMarkers.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 422</value>
+  </data>
+  <data name="ucrChkVerticalXTickMarkers.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>210, 20</value>
+  </data>
+  <data name="ucrChkVerticalXTickMarkers.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="ucrVariablesAsFactorForClimaticBoxplot.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>257, 76</value>
+  </data>
+  <data name="ucrVariablesAsFactorForClimaticBoxplot.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 130</value>
+  </data>
+  <data name="ucrVariablesAsFactorForClimaticBoxplot.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="ucrPnlPlots.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>50, 8</value>
+  </data>
+  <data name="ucrPnlPlots.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>322, 35</value>
+  </data>
+  <data name="ucrPnlPlots.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrReceiverXVariable.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>257, 222</value>
+  </data>
+  <data name="ucrReceiverXVariable.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverXVariable.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverXVariable.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 474</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>405, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="ucrSavePlot.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 448</value>
+  </data>
+  <data name="ucrSavePlot.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>255, 24</value>
+  </data>
+  <data name="ucrSavePlot.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="ucrChkHorizontalBoxplot.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 396</value>
+  </data>
+  <data name="ucrChkHorizontalBoxplot.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>210, 20</value>
+  </data>
+  <data name="ucrChkHorizontalBoxplot.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="ucrChkVarWidth.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 370</value>
+  </data>
+  <data name="ucrChkVarWidth.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>210, 20</value>
+  </data>
+  <data name="ucrChkVarWidth.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="ucrSelectorClimaticBoxPlot.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 56</value>
+  </data>
+  <data name="ucrSelectorClimaticBoxPlot.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorClimaticBoxPlot.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorClimaticBoxPlot.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="ucrReceiver2ndFacet.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>13, 81</value>
+  </data>
+  <data name="ucrReceiver2ndFacet.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiver2ndFacet.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiver2ndFacet.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="ucrReceiverFacetBy.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>13, 36</value>
+  </data>
+  <data name="ucrReceiverFacetBy.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverFacetBy.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverFacetBy.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrChkMargins.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>13, 112</value>
+  </data>
+  <data name="ucrChkMargins.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>130, 20</value>
+  </data>
+  <data name="ucrChkMargins.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblSecondFacet.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSecondFacet.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>13, 66</value>
+  </data>
+  <data name="lblSecondFacet.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>77, 13</value>
+  </data>
+  <data name="lblSecondFacet.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblFacetBy.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFacetBy.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>13, 21</value>
+  </data>
+  <data name="lblFacetBy.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="lblFacetBy.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpFacets.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>245, 252</value>
+  </data>
+  <data name="grpFacets.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>149, 138</value>
+  </data>
+  <data name="grpFacets.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+</root>
