@@ -57,6 +57,7 @@ Public Class dlgClimaticCheckDataTemperature
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 559
         'TODO: Not yet implemented.
         rdoMultiple.Enabled = False
         rdoSatelite.Enabled = False
