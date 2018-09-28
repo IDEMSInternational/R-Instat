@@ -16,7 +16,28 @@
 
 Imports instat.Translations
 Public Class sdgSelectMonth
-    Private Sub sdgSelectMonth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private ucrReceiverMonth As ucrReceiverSingle
+    Private clsInOperator As New ROperator
 
+    Private Sub sdgSelectMonth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+        InitialiseControls()
+    End Sub
+
+    Private Sub InitialiseControls()
+        ucrMonthAsFactor.strSelectorColumnName = "Omit Level"
+        ucrMonthAsFactor.SetAsMultipleSelector()
+        ucrMonthAsFactor.SetReceiver(ucrReceiverMonth)
+        ucrMonthAsFactor.SetIncludeLevels(False)
+        ucrMonthAsFactor.bIncludeNA = False
+    End Sub
+
+    Public Sub SetRCode(Optional clsNewInOperator As ROperator = Nothing, Optional ucrNewReceiverMonth As ucrReceiverSingle = Nothing, Optional bReset As Boolean = False)
+        ucrReceiverMonth = ucrNewReceiverMonth
+        clsInOperator = clsNewInOperator
+    End Sub
+
+    Private Sub ucrMonthAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrMonthAsFactor.ControlValueChanged
+        clsInOperator.AddParameter("months", ucrMonthAsFactor.GetSelectedLevels(), iPosition:=1)
     End Sub
 End Class
