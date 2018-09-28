@@ -81,7 +81,7 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub InitialiseDialog()
-        'ucrBase.iHelpTopicID = 
+        ucrBase.iHelpTopicID = 393
 
         ucrInputFilePath.IsReadOnly = True
 
