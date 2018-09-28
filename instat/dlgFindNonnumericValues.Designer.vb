@@ -24,12 +24,13 @@ Partial Class dlgFindNonnumericValues
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgFindNonnumericValues))
         Me.lblColumn = New System.Windows.Forms.Label()
+        Me.ucrChkFilter = New instat.ucrCheck()
         Me.ucrChkShowSummary = New instat.ucrCheck()
-        Me.ucrSaveLogicalColumn = New instat.ucrSave()
+        Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorShowNonNumericValues = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
-        Me.ucrChkFilter = New instat.ucrCheck()
+        Me.ucrInputColumnName = New instat.ucrInputTextBox()
+        Me.lblColumnName = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblColumn
@@ -37,16 +38,26 @@ Partial Class dlgFindNonnumericValues
         resources.ApplyResources(Me.lblColumn, "lblColumn")
         Me.lblColumn.Name = "lblColumn"
         '
+        'ucrChkFilter
+        '
+        Me.ucrChkFilter.Checked = False
+        resources.ApplyResources(Me.ucrChkFilter, "ucrChkFilter")
+        Me.ucrChkFilter.Name = "ucrChkFilter"
+        '
         'ucrChkShowSummary
         '
         Me.ucrChkShowSummary.Checked = False
         resources.ApplyResources(Me.ucrChkShowSummary, "ucrChkShowSummary")
         Me.ucrChkShowSummary.Name = "ucrChkShowSummary"
         '
-        'ucrSaveLogicalColumn
+        'ucrReceiverColumn
         '
-        resources.ApplyResources(Me.ucrSaveLogicalColumn, "ucrSaveLogicalColumn")
-        Me.ucrSaveLogicalColumn.Name = "ucrSaveLogicalColumn"
+        Me.ucrReceiverColumn.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverColumn, "ucrReceiverColumn")
+        Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
+        Me.ucrReceiverColumn.Selector = Nothing
+        Me.ucrReceiverColumn.strNcFilePath = ""
+        Me.ucrReceiverColumn.ucrSelector = Nothing
         '
         'ucrSelectorShowNonNumericValues
         '
@@ -61,28 +72,27 @@ Partial Class dlgFindNonnumericValues
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrReceiverColumn
+        'ucrInputColumnName
         '
-        Me.ucrReceiverColumn.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverColumn, "ucrReceiverColumn")
-        Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
-        Me.ucrReceiverColumn.Selector = Nothing
-        Me.ucrReceiverColumn.strNcFilePath = ""
-        Me.ucrReceiverColumn.ucrSelector = Nothing
+        Me.ucrInputColumnName.AddQuotesIfUnrecognised = True
+        Me.ucrInputColumnName.IsMultiline = False
+        Me.ucrInputColumnName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputColumnName, "ucrInputColumnName")
+        Me.ucrInputColumnName.Name = "ucrInputColumnName"
         '
-        'ucrChkFilter
+        'lblColumnName
         '
-        Me.ucrChkFilter.Checked = False
-        resources.ApplyResources(Me.ucrChkFilter, "ucrChkFilter")
-        Me.ucrChkFilter.Name = "ucrChkFilter"
+        resources.ApplyResources(Me.lblColumnName, "lblColumnName")
+        Me.lblColumnName.Name = "lblColumnName"
         '
         'dlgFindNonnumericValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblColumnName)
+        Me.Controls.Add(Me.ucrInputColumnName)
         Me.Controls.Add(Me.ucrChkFilter)
         Me.Controls.Add(Me.ucrChkShowSummary)
-        Me.Controls.Add(Me.ucrSaveLogicalColumn)
         Me.Controls.Add(Me.lblColumn)
         Me.Controls.Add(Me.ucrReceiverColumn)
         Me.Controls.Add(Me.ucrSelectorShowNonNumericValues)
@@ -98,8 +108,9 @@ Partial Class dlgFindNonnumericValues
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorShowNonNumericValues As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblColumn As Label
-    Friend WithEvents ucrSaveLogicalColumn As ucrSave
     Friend WithEvents ucrChkShowSummary As ucrCheck
     Friend WithEvents ucrReceiverColumn As ucrReceiverSingle
     Friend WithEvents ucrChkFilter As ucrCheck
+    Friend WithEvents ucrInputColumnName As ucrInputTextBox
+    Friend WithEvents lblColumnName As Label
 End Class

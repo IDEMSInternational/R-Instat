@@ -15,13 +15,14 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-
 Public Class dlgFindNonnumericValues
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    ' Private clsRSyntax As RSyntax
     Private clsIsNaFunction, clsIsNaNumericFunction, clsAsNumericFunction, clsSummaryFunction As New RFunction
+    Private clsNonNumericCalcFunc, clsNonNumericFilterFunc, clsRunCalcFunction, clslSubCalcListFunc, clsGetColumnsFunction As New RFunction
+    Private clsCurrRunCalc As RFunction
     Private clsNotEqualToOperator As New ROperator
+    Private strCurrDataName As String
 
     Private Sub dlgShowNonnumericValues_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -38,65 +39,104 @@ Public Class dlgFindNonnumericValues
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrSelectorShowNonNumericValues.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorShowNonNumericValues.SetParameterIsString()
+
         ucrReceiverColumn.Selector = ucrSelectorShowNonNumericValues
         ucrSelectorShowNonNumericValues.bUseCurrentFilter = False
 
         ucrReceiverColumn.SetParameter(New RParameter("x", 1))
-        ucrReceiverColumn.SetParameterIsRFunction()
+        ucrReceiverColumn.SetParameterIsString()
+        ucrReceiverColumn.bWithQuotes = False
         ucrReceiverColumn.SetExcludedDataTypes({"numeric"})
 
-        ucrSaveLogicalColumn.SetPrefix("nonnum")
-        ucrSaveLogicalColumn.SetSaveTypeAsColumn()
-        ucrSaveLogicalColumn.SetDataFrameSelector(ucrSelectorShowNonNumericValues.ucrAvailableDataFrames)
-        ucrSaveLogicalColumn.SetIsTextBox()
-        ucrSaveLogicalColumn.SetLabelText("Logical column:")
+        ucrInputColumnName.SetParameter(New RParameter("result_name", 3))
+        ucrInputColumnName.SetDataFrameSelector(ucrSelectorShowNonNumericValues.ucrAvailableDataFrames)
 
         ucrChkShowSummary.SetText("Display summary")
         ucrChkShowSummary.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"})
         ucrChkShowSummary.AddRSyntaxContainsFunctionNamesCondition(False, {"summary"}, False)
 
         ucrChkFilter.SetText("Filter to non-numeric cases")
+        ucrChkFilter.AddParameterValuesCondition(True, "type", Chr(34) & "filter" & Chr(34))
+        ucrChkFilter.AddParameterValuesCondition(False, "type", Chr(34) & "filter" & Chr(34), False)
     End Sub
 
     Private Sub SetDefaults()
+        Dim strLogicalColumn As String = "nonum"
         clsIsNaFunction = New RFunction
         clsIsNaNumericFunction = New RFunction
         clsSummaryFunction = New RFunction
         clsNotEqualToOperator = New ROperator
 
-        ucrReceiverColumn.SetMeAsReceiver()
-        ucrSaveLogicalColumn.Reset()
+        clsNonNumericCalcFunc.Clear()
+        clsNonNumericFilterFunc.Clear()
+        clslSubCalcListFunc.Clear()
+        clsRunCalcFunction.Clear()
 
+        ucrReceiverColumn.SetMeAsReceiver()
         ucrSelectorShowNonNumericValues.Reset()
+        ucrBase.clsRsyntax.ClearCodes()
 
         clsIsNaFunction.SetRCommand("is.na")
 
         clsNotEqualToOperator.SetOperation("!=")
-        clsNotEqualToOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsIsNaFunction, iPosition:=0)
-        clsNotEqualToOperator.AddParameter("right", bIncludeArgumentName:=False, clsRFunctionParameter:=clsIsNaNumericFunction, iPosition:=1)
+        clsNotEqualToOperator.AddParameter("left", clsRFunctionParameter:=clsIsNaFunction, iPosition:=0)
+        clsNotEqualToOperator.AddParameter("right", clsRFunctionParameter:=clsIsNaNumericFunction, iPosition:=1)
+        clsNotEqualToOperator.bToScriptAsRString = True
 
         clsIsNaNumericFunction.SetRCommand("is.na")
         clsIsNaNumericFunction.AddParameter("numeric", bIncludeArgumentName:=False, clsRFunctionParameter:=clsAsNumericFunction)
 
         clsAsNumericFunction.SetRCommand("as.numeric")
 
+        clsNonNumericCalcFunc.SetRCommand("instat_calculation$new")
+        clsNonNumericCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsNonNumericCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsNotEqualToOperator, iPosition:=1)
+        clsNonNumericCalcFunc.AddParameter("result_name", Chr(34) & strLogicalColumn & Chr(34), iPosition:=3)
+        clsNonNumericCalcFunc.AddParameter("save", 2, iPosition:=4)
+        clsNonNumericCalcFunc.SetAssignTo("non_numerics_calculation")
+
+        clsNonNumericFilterFunc.SetRCommand("instat_calculation$new")
+        clsNonNumericFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
+        clsNonNumericFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clslSubCalcListFunc, iPosition:=2)
+        clsNonNumericFilterFunc.AddParameter("result_data_frame", Chr(34) & "Filter" & Chr(34), iPosition:=3)
+        clsNonNumericFilterFunc.AddParameter("save", 2, iPosition:=4)
+        clsNonNumericFilterFunc.SetAssignTo("non_numerics_filter")
+
+        clslSubCalcListFunc.SetRCommand("list")
+        clslSubCalcListFunc.AddParameter("sub1", clsRFunctionParameter:=clsNonNumericCalcFunc, bIncludeArgumentName:=False)
+
+        clsGetColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+
         clsSummaryFunction.SetRCommand("summary")
-        clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsNotEqualToOperator)
+        clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsGetColumnsFunction)
         clsSummaryFunction.iCallType = 2
-        ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.SetBaseROperator(clsNotEqualToOperator)
+
+        clsCurrRunCalc = clsNonNumericCalcFunc
+
+        clsRunCalcFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsNonNumericCalcFunc)
+        clsRunCalcFunction.AddParameter("display", "FALSE")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=0)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverColumn.AddAdditionalCodeParameterPair(clsAsNumericFunction, New RParameter("x", 1), iAdditionalPairNo:=1)
+        ucrInputColumnName.AddAdditionalCodeParameterPair(clsGetColumnsFunction, New RParameter("col_names", 1), iAdditionalPairNo:=1)
+        ucrInputColumnName.AddAdditionalCodeParameterPair(clsNonNumericFilterFunc, New RParameter("function_exp", 1), iAdditionalPairNo:=2)
+
         ucrReceiverColumn.SetRCode(clsIsNaFunction, bReset)
-        ucrSaveLogicalColumn.SetRCode(clsNotEqualToOperator, bReset)
+        ucrInputColumnName.SetRCode(clsNonNumericCalcFunc, bReset)
         ucrChkShowSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
+        ucrChkFilter.SetRCode(clsCurrRunCalc, bReset)
+        ucrSelectorShowNonNumericValues.SetRCode(clsGetColumnsFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverColumn.IsEmpty AndAlso ucrSaveLogicalColumn.IsComplete Then
+        If Not ucrReceiverColumn.IsEmpty AndAlso Not ucrInputColumnName.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -117,7 +157,24 @@ Public Class dlgFindNonnumericValues
         End If
     End Sub
 
-    Private Sub ucrReceiverColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveLogicalColumn.ControlContentsChanged, ucrReceiverColumn.ControlContentsChanged
+    Private Sub ucrReceiverColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumn.ControlValueChanged
+        clsNonNumericCalcFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverColumn.GetVariableNames & ")", iPosition:=2)
+    End Sub
+
+    Private Sub ucrSelectorShowNonNumericValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorShowNonNumericValues.ControlValueChanged
+        strCurrDataName = Chr(34) & ucrSelectorShowNonNumericValues.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34)
+    End Sub
+
+    Private Sub ucrChkFilter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFilter.ControlValueChanged
+        If ucrChkFilter.Checked Then
+            clsCurrRunCalc = clsNonNumericFilterFunc
+        Else
+            clsCurrRunCalc = clsNonNumericCalcFunc
+        End If
+        clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsCurrRunCalc)
+    End Sub
+
+    Private Sub ucrReceiverColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumn.ControlContentsChanged, ucrInputColumnName.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
