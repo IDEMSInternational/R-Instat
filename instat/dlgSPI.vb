@@ -36,7 +36,7 @@ Public Class dlgSPI
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.iHelpTopicID = 510
+        ucrBase.iHelpTopicID = 566
 
         ucrSelectorVariable.SetParameterIsString()
 
