@@ -77,6 +77,7 @@ Public Class dlgClimaticCheckDataRain
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 511
         Dim lstControls As New List(Of Control)
         lstControls.AddRange({lblMissingThreshold, cmdOmitMonths, lblThresholdmm})
 
