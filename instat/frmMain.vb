@@ -2023,4 +2023,12 @@ Public Class frmMain
     Private Sub mnuClimaticCheckDataStationMaps_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataStationMaps.Click
         dlgClimaticStationMaps.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticPrepareConversions_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareConversions.Click
+        dlgConversions.ShowDialog()
+    End Sub
+
+    Private Sub mnuOptionsByContextGeneralFitModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextGeneralFitModel.Click
+        dlgFitModel.ShowDialog()
+    End Sub
 End Class
