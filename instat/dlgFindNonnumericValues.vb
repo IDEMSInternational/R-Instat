@@ -39,9 +39,10 @@ Public Class dlgFindNonnumericValues
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 545
         ucrSelectorShowNonNumericValues.SetParameter(New RParameter("data_name", 0))
         ucrSelectorShowNonNumericValues.SetParameterIsString()
-
+       
         ucrReceiverColumn.Selector = ucrSelectorShowNonNumericValues
         ucrSelectorShowNonNumericValues.bUseCurrentFilter = False
 

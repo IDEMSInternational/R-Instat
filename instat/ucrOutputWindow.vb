@@ -21,6 +21,7 @@ Public Class ucrOutputWindow
     'TEST temporary
     Private Sub ucrOutputWindow_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
+
     End Sub
 
     'Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
@@ -67,6 +68,12 @@ Public Class ucrOutputWindow
             deleteRTB.Enabled = True
         End If
 
+        If frmMain.clsInstatOptions.bCommandsinOutput Then
+            mnuHideCommands.Text = "Hide (future) commands"
+        Else
+            mnuHideCommands.Text = "Show commands"
+        End If
+
     End Sub
 
     'Private Function RtfToImage(ByVal strRtf As String) As Image
@@ -106,4 +113,9 @@ Public Class ucrOutputWindow
     Private Sub deleteRTB_Click(sender As Object, e As EventArgs) Handles deleteRTB.Click
         ucrRichTextBox.rtbOutput.Selection.Text = ""
     End Sub
+
+    Private Sub mnuHideCommands_Click(sender As Object, e As EventArgs) Handles mnuHideCommands.Click
+        frmMain.clsInstatOptions.SetCommandInOutpt(Not frmMain.clsInstatOptions.bCommandsinOutput)
+    End Sub
+
 End Class
