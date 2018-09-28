@@ -42,16 +42,16 @@ Public Class dlgNewDataFrame
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 6
+        Dim lstLinkedControls As New List(Of Control)
+        lstLinkedControls.AddRange({lblCommand, btnExample})
 
         'nudRows
         ucrNudRows.SetParameter(New RParameter("nrow", iNewPosition:=1))
         ucrNudRows.SetMinMax(1, Integer.MaxValue)
-        ucrNudRows.SetLinkedDisplayControl(lblRows)
 
         'nudCols
         ucrNudCols.SetParameter(New RParameter("ncol", iNewPosition:=2))
         ucrNudCols.SetMinMax(1, Integer.MaxValue)
-        ucrNudCols.SetLinkedDisplayControl(lblColumns)
 
         ' ucrNewSheetName
         ucrNewDFName.SetIsTextBox()
@@ -65,6 +65,12 @@ Public Class dlgNewDataFrame
         ucrPnlDataFrame.AddRadioButton(rdoRandom)
         ucrPnlDataFrame.AddRadioButton(rdoEmpty)
 
+        ucrPnlDataFrame.AddToLinkedControls(ucrNudCols, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDataFrame.AddToLinkedControls(ucrNudRows, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudRows.SetLinkedDisplayControl(lblRows)
+        ucrNudCols.SetLinkedDisplayControl(lblColumns)
+        ucrInputCommand.SetLinkedDisplayControl(lstLinkedControls)
     End Sub
 
     Private Sub SetDefaults()
@@ -174,33 +180,16 @@ Public Class dlgNewDataFrame
 
     Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged
         If rdoConstruct.Checked Then
-            ucrNudCols.Visible = False
-            ucrNudRows.Visible = False
-            ucrInputCommand.Visible = False
             dataGridView.Visible = True
-            lblCommand.Visible = True
-            btnExample.Visible = False
-            lblCommand.Text = "Construct:"
             ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
         ElseIf rdoCommand.Checked Then
-            ucrNudCols.Visible = False
-            ucrNudRows.Visible = False
-            ucrInputCommand.Visible = True
             dataGridView.Visible = False
-            lblCommand.Visible = True
-            btnExample.Visible = True
-            lblCommand.Text = "Command:"
             ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
         ElseIf rdoRandom.Checked Then
             'TODO 
         ElseIf rdoEmpty.Checked Then
-            ucrNudCols.Visible = True
-            ucrNudRows.Visible = True
-            ucrInputCommand.Visible = False
             dataGridView.Visible = False
-            lblCommand.Visible = False
-            btnExample.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
         End If
         TestOKEnabled()
