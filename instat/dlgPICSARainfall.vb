@@ -80,10 +80,9 @@ Public Class dlgPICSARainfall
         TestOkEnabled()
     End Sub
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 118
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
-
-        'ucrBase.iHelpTopicID= 
 
         ucrPICSARainfallSelector.SetParameter(New RParameter("data", 0))
         ucrPICSARainfallSelector.SetParameterIsrfunction()
