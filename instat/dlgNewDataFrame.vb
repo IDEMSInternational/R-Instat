@@ -17,20 +17,24 @@
 Imports instat.Translations
 
 Public Class dlgNewDataFrame
-    Private clsOverallFunction, clsMatrixFunction As New RFunction
+    Private clsEmptyOverallFunction, clsEmptyMatrixFunction As New RFunction
+    Private clsConstructFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
+            ucrInputCommand.txtInput.WordWrap = False
+            ucrInputCommand.txtInput.ScrollBars = ScrollBars.Both
+            'ucrInputCommand.txtInput.Multiline = True
             InitialiseDialog()
             bFirstLoad = False
         End If
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeforControls(bReset)
+        SetRCode(bReset)
         bReset = False
         'temporary fix for autoTranslate(Me) which overwrites the label text to Label1
         ucrNewDFName.SetLabelText("New Data Frame Name:")
@@ -42,64 +46,240 @@ Public Class dlgNewDataFrame
         'nudRows
         ucrNudRows.SetParameter(New RParameter("nrow", iNewPosition:=1))
         ucrNudRows.SetMinMax(1, Integer.MaxValue)
+        ucrNudRows.SetLinkedDisplayControl(lblRows)
 
         'nudCols
         ucrNudCols.SetParameter(New RParameter("ncol", iNewPosition:=2))
         ucrNudCols.SetMinMax(1, Integer.MaxValue)
+        ucrNudCols.SetLinkedDisplayControl(lblColumns)
 
         ' ucrNewSheetName
         ucrNewDFName.SetIsTextBox()
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetLabelText("New Data Frame Name:")
         ucrNewDFName.SetPrefix("data")
-    End Sub
 
-    ' updating controls doesn't update the function
-    ' Sheet name is not on the dialog.
+        'ucrRdoOptions
+        ucrPnlDataFrame.AddRadioButton(rdoConstruct)
+        ucrPnlDataFrame.AddRadioButton(rdoCommand)
+        ucrPnlDataFrame.AddRadioButton(rdoRandom)
+        ucrPnlDataFrame.AddRadioButton(rdoEmpty)
 
-    Private Sub ReopenDialog()
     End Sub
 
     Private Sub SetDefaults()
-        clsOverallFunction = New RFunction
-        clsMatrixFunction = New RFunction
 
-        ucrNewDFName.Reset()
-
+        'Empty option functions
+        clsEmptyOverallFunction = New RFunction
+        clsEmptyMatrixFunction = New RFunction
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
-        clsOverallFunction.SetRCommand("data.frame")
-
+        clsEmptyOverallFunction.SetRCommand("data.frame")
         'matrix(data = NA,nrow = 10, ncol = 2)
-        clsMatrixFunction.SetRCommand("matrix")
-        clsMatrixFunction.AddParameter("data", "NA", iPosition:=0)
-        clsMatrixFunction.AddParameter("nrow", 10, iPosition:=1)
-        clsMatrixFunction.AddParameter("ncol", 2, iPosition:=2)
+        clsEmptyMatrixFunction.SetRCommand("matrix")
+        clsEmptyMatrixFunction.AddParameter("data", "NA", iPosition:=0)
+        clsEmptyMatrixFunction.AddParameter("nrow", 10, iPosition:=1)
+        clsEmptyMatrixFunction.AddParameter("ncol", 2, iPosition:=2)
 
-        clsOverallFunction.AddParameter("data", clsRFunctionParameter:=clsMatrixFunction, iPosition:=0)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
+        clsEmptyOverallFunction.AddParameter("data", clsRFunctionParameter:=clsEmptyMatrixFunction, iPosition:=0)
+
+        'Construct option function
+        clsConstructFunction = New RFunction
+        clsConstructFunction.SetRCommand("data.frame")
+
+        'reset the controls
+        ucrNewDFName.Reset()
+        ucrInputCommand.SetText("data.frame(data=matrix(data=NA, nrow=10, ncol=2))")
+        'empty and create 6 (+ 1) default rows
+        dataGridView.Rows.Clear()
+        dataGridView.Rows.Add(6)
+
+
+        rdoConstruct.Checked = True
+        rdoRandom.Enabled = False 'TODO remove this later
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrNewDFName.IsComplete AndAlso ucrNudCols.GetText <> "" AndAlso ucrNudRows.GetText <> "" Then
-            ucrBase.OKEnabled(True)
-        Else
+        If rdoConstruct.Checked Then
+            'validate the datagrid rows 
             ucrBase.OKEnabled(False)
+            If ucrNewDFName.IsComplete Then
+                Dim bDuplicate As Boolean
+                Dim inputValidation As New ucrInput 'temporarily use validation functions for ucrInput
+                inputValidation.SetValidationTypeAsRVariable()
+                For Each row As DataGridViewRow In dataGridView.Rows
+                    'if column has a value then validate first
+                    If Not String.IsNullOrEmpty(row.Cells("colName").Value) Then
+                        If Not inputValidation.ValidateText(row.Cells("colName").Value) Then
+                            row.Selected = True
+                            ucrBase.OKEnabled(False)
+                            Exit For ' if not valid text then exit for
+                        End If
+
+                        'check for duplicates
+                        bDuplicate = False
+                        For i As Integer = dataGridView.Rows.IndexOf(row) - 1 To 0 Step -1
+                            If dataGridView.Rows(i).Cells("colName").Value = row.Cells("colName").Value Then
+                                bDuplicate = True
+                                MessageBox.Show(Me, "Duplicate column names are not allowed", "Construct", MessageBoxButtons.OK)
+                                Exit For
+                            End If
+                        Next
+
+                        If bDuplicate Then
+                            row.Selected = True
+                            ucrBase.OKEnabled(False)
+                            Exit For
+                        End If
+
+                    End If
+
+                    'if both the column name and expression exist then enable
+                    If Not String.IsNullOrEmpty(row.Cells("colName").Value) AndAlso Not String.IsNullOrEmpty(row.Cells("colExpression").Value) Then
+                        ucrBase.OKEnabled(True)
+                    End If
+                Next
+            End If
+
+        ElseIf rdoCommand.Checked Then
+            'enable if there is text in the input textbox
+            ucrBase.OKEnabled(ucrNewDFName.IsComplete AndAlso Not ucrInputCommand.IsEmpty)
+        ElseIf rdoRandom.Checked Then
+            'TODO
+            ucrBase.OKEnabled(False)
+        ElseIf rdoEmpty.Checked Then
+            If ucrNewDFName.IsComplete AndAlso ucrNudCols.GetText <> "" AndAlso ucrNudRows.GetText <> "" Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrNudCols.SetRCode(clsMatrixFunction, bReset)
-        ucrNudRows.SetRCode(clsMatrixFunction, bReset)
-        ucrNewDFName.SetRCode(clsOverallFunction, bReset)
+    Private Sub SetRCode(bReset As Boolean)
+        ucrNudCols.SetRCode(clsEmptyMatrixFunction, bReset)
+        ucrNudRows.SetRCode(clsEmptyMatrixFunction, bReset)
+
+        ucrNewDFName.AddAdditionalRCode(clsConstructFunction, iAdditionalPairNo:=1)
+        ucrNewDFName.SetRCode(clsEmptyOverallFunction, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeforControls(True)
+        SetRCode(True)
+    End Sub
+
+    Private Sub controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlValueChanged, ucrNudCols.ControlValueChanged, ucrNewDFName.ControlValueChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlContentsChanged, ucrNudCols.ControlContentsChanged, ucrNewDFName.ControlContentsChanged
+    Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged
+        If rdoConstruct.Checked Then
+            ucrNudCols.Visible = False
+            ucrNudRows.Visible = False
+            ucrInputCommand.Visible = False
+            dataGridView.Visible = True
+            lblCommand.Visible = True
+            btnExample.Visible = False
+            lblCommand.Text = "Construct:"
+            ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
+        ElseIf rdoCommand.Checked Then
+            ucrNudCols.Visible = False
+            ucrNudRows.Visible = False
+            ucrInputCommand.Visible = True
+            dataGridView.Visible = False
+            lblCommand.Visible = True
+            btnExample.Visible = True
+            lblCommand.Text = "Command:"
+            ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
+            ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
+        ElseIf rdoRandom.Checked Then
+            'TODO 
+        ElseIf rdoEmpty.Checked Then
+            ucrNudCols.Visible = True
+            ucrNudRows.Visible = True
+            ucrInputCommand.Visible = False
+            dataGridView.Visible = False
+            lblCommand.Visible = False
+            btnExample.Visible = False
+            ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
+        End If
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrNewDFName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlValueChanged
+        If rdoCommand.Checked Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
+        End If
+    End Sub
+
+    Private Sub ucrInputCommand_ContentsChanged() Handles ucrInputCommand.ContentsChanged
+        ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
+        TestOKEnabled()
+    End Sub
+
+    Private Sub dataGridView_ValueChanged(sender As Object, e As EventArgs) Handles dataGridView.CellValueChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub dataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridView.CellEndEdit
+        Dim iPosition As Integer = 0
+        'clear the previous parameters which acted as the columns then add the new ones
+        clsConstructFunction.ClearParameters()
+        For Each row As DataGridViewRow In dataGridView.Rows
+            If row.Cells("colName").Value <> "" AndAlso row.Cells("colExpression").Value <> "" Then
+                clsConstructFunction.AddParameter(row.Cells("colName").Value, row.Cells("colExpression").Value, iPosition:=iPosition)
+                iPosition = iPosition + 1
+            End If
+        Next
+    End Sub
+
+    Private Sub dataGridView_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dataGridView.RowsAdded
+        'used column index instead of column name because of argument exception
+        For i As Integer = 0 To dataGridView.Rows.Count - 1
+            dataGridView.Rows.Item(i).Cells(0).Value = i + 1
+        Next
+    End Sub
+
+    Private Sub btnExample_Click(sender As Object, e As EventArgs) Handles btnExample.Click
+        'shows a popup that displays the example commands
+        Dim frm As New Form
+        Dim lstView As New ListView
+        frm.ShowInTaskbar = False
+        frm.FormBorderStyle = FormBorderStyle.None
+        frm.Size = New Size(ucrInputCommand.Width, ucrInputCommand.Height)
+        frm.Controls.Add(lstView)
+
+        'Set the listview properties
+        lstView.Dock = DockStyle.Fill
+        lstView.Scrollable = True
+        lstView.View = View.Details
+        lstView.FullRowSelect = True
+
+        'add columns
+        lstView.Columns.Add("Command", 250)
+        lstView.Columns.Add("Comment", 200)
+
+        lstView.Items.Add(New ListViewItem({"data.frame()", "Empty data frame"}))
+        lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data = NA, nrow = 10, ncol = 2))", "10 rows and 2 columns filled with missing values"}))
+        lstView.Items.Add(New ListViewItem({"data.frame(x=1:30, y=rnorm(30,mean = 100, sd = 15), z = runif(30, min = 10, max = 30))", " "}))
+        lstView.Items.Add(New ListViewItem({"data.frame( block = gl(4,3), treat = c(""C"",""A"",""B"",""B"",""C"",""A"",""A"",""B"",""C"",""A"",""C"",""B""), yield = c(74, 68, 50,62,68,57,70,56,83, 67, 67,59))", " "}))
+        'lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 100, data_theme = ""the_works"")", " "}))
+        'lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 30, id, race, age, sex, hour, iq, height, died, Scoring = rnorm, Smoker = valid)", " "}))
+
+        'set respective handlers
+        AddHandler lstView.LostFocus, Sub()
+                                          frm.Close()
+                                      End Sub
+        AddHandler lstView.DoubleClick, Sub()
+                                            If lstView.SelectedItems.Count > 0 Then
+                                                ucrInputCommand.SetText(lstView.SelectedItems.Item(0).SubItems(0).Text)
+                                                frm.Close()
+                                            End If
+                                        End Sub
+
+        Dim ctlpos As Point = btnExample.PointToScreen(New Point(0, 0)) 'Point.Empty is not function so use Point(0, 0)
+        frm.StartPosition = FormStartPosition.Manual 'set it to manual
+        frm.Location = New Point(ctlpos.X - 2, ctlpos.Y - frm.Height - 2) 'set location to show the form just above the examples button
+        frm.Show()
     End Sub
 End Class
