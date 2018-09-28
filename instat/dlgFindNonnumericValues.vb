@@ -81,6 +81,7 @@ Public Class dlgFindNonnumericValues
         clsAsNumericFunction.SetRCommand("as.numeric")
 
         clsSummaryFunction.SetRCommand("summary")
+        clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsNotEqualToOperator)
         clsSummaryFunction.iCallType = 2
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseROperator(clsNotEqualToOperator)
@@ -88,8 +89,7 @@ Public Class dlgFindNonnumericValues
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverColumn.AddAdditionalCodeParameterPair(clsSummaryFunction, New RParameter("object", 1), iAdditionalPairNo:=1)
-        ucrReceiverColumn.AddAdditionalCodeParameterPair(clsAsNumericFunction, New RParameter("x", 1), iAdditionalPairNo:=2)
+        ucrReceiverColumn.AddAdditionalCodeParameterPair(clsAsNumericFunction, New RParameter("x", 1), iAdditionalPairNo:=1)
         ucrReceiverColumn.SetRCode(clsIsNaFunction, bReset)
         ucrSaveLogicalColumn.SetRCode(clsNotEqualToOperator, bReset)
         ucrChkShowSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
