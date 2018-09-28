@@ -1013,6 +1013,12 @@
   <data name="mnuHelpLicence.Text" xml:space="preserve">
     <value>Licence...</value>
   </data>
+  <data name="mnuHelpAcknowledgments.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 22</value>
+  </data>
+  <data name="mnuHelpAcknowledgments.Text" xml:space="preserve">
+    <value>Acknowlegments</value>
+  </data>
   <data name="mnuHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
   </data>
@@ -6756,6 +6762,12 @@
   <data name="&gt;&gt;mnuCimaticPrepareTransform.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuClimaticPrepareConversions.Name" xml:space="preserve">
+    <value>mnuClimaticPrepareConversions</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticPrepareConversions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuClimaticPrepareCompare.Name" xml:space="preserve">
     <value>mnuClimaticPrepareCompare</value>
   </data>
@@ -8742,10 +8754,10 @@
   <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticPrepareConversions.Name" xml:space="preserve">
-    <value>mnuClimaticPrepareConversions</value>
+  <data name="&gt;&gt;mnuHelpAcknowledgments.Name" xml:space="preserve">
+    <value>mnuHelpAcknowledgments</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticPrepareConversions.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuHelpAcknowledgments.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
