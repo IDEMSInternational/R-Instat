@@ -25,25 +25,26 @@ Public Class dlgNewDataFrame
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            ucrInputCommand.txtInput.WordWrap = False
-            ucrInputCommand.txtInput.ScrollBars = ScrollBars.Both
-            'ucrInputCommand.txtInput.Multiline = True
             InitialiseDialog()
             bFirstLoad = False
         End If
         If bReset Then
             SetDefaults()
         End If
-        SetRCode(bReset)
+        SetRCodeforControls(bReset)
         bReset = False
-        'temporary fix for autoTranslate(Me) which overwrites the label text to Label1
-        ucrNewDFName.SetLabelText("New Data Frame Name:")
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 6
         Dim lstLinkedControls As New List(Of Control)
         lstLinkedControls.AddRange({lblCommand, btnExample})
+
+        ucrInputCommand.txtInput.WordWrap = False
+        ucrInputCommand.txtInput.ScrollBars = ScrollBars.Both
+        'ucrInputCommand.txtInput.Multiline = True
+
+        rdoRandom.Enabled = False 'TODO remove this later
 
         'nudRows
         ucrNudRows.SetParameter(New RParameter("nrow", iNewPosition:=1))
@@ -65,8 +66,14 @@ Public Class dlgNewDataFrame
         ucrPnlDataFrame.AddRadioButton(rdoRandom)
         ucrPnlDataFrame.AddRadioButton(rdoEmpty)
 
-        ucrPnlDataFrame.AddToLinkedControls(ucrNudCols, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDataFrame.AddToLinkedControls(ucrNudRows, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'TODO:Providing conditions here may not be easy, find a way to do this properly!
+        ucrPnlDataFrame.AddFunctionNamesCondition(rdoConstruct, "data.frame")
+        ucrPnlDataFrame.AddFunctionNamesCondition(rdoCommand, ucrInputCommand.GetText())
+        'ucrPnlDataFrame.AddFunctionNamesCondition(rdoRandom, "")
+        'ucrPnlDataFrame.AddFunctionNamesCondition(rdoEmpty, "")
+
+        ucrPnlDataFrame.AddToLinkedControls(ucrNudCols, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrPnlDataFrame.AddToLinkedControls(ucrNudRows, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
         ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
@@ -74,34 +81,33 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub SetDefaults()
-
+        clsConstructFunction = New RFunction
         'Empty option functions
         clsEmptyOverallFunction = New RFunction
         clsEmptyMatrixFunction = New RFunction
+
+        'reset the controls
+        ucrNewDFName.Reset()
+
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
         clsEmptyOverallFunction.SetRCommand("data.frame")
+        clsEmptyOverallFunction.AddParameter("data", clsRFunctionParameter:=clsEmptyMatrixFunction, iPosition:=0)
+
         'matrix(data = NA,nrow = 10, ncol = 2)
         clsEmptyMatrixFunction.SetRCommand("matrix")
         clsEmptyMatrixFunction.AddParameter("data", "NA", iPosition:=0)
         clsEmptyMatrixFunction.AddParameter("nrow", 10, iPosition:=1)
         clsEmptyMatrixFunction.AddParameter("ncol", 2, iPosition:=2)
 
-        clsEmptyOverallFunction.AddParameter("data", clsRFunctionParameter:=clsEmptyMatrixFunction, iPosition:=0)
-
         'Construct option function
-        clsConstructFunction = New RFunction
         clsConstructFunction.SetRCommand("data.frame")
 
-        'reset the controls
-        ucrNewDFName.Reset()
         ucrInputCommand.SetText("data.frame(data=matrix(data=NA, nrow=10, ncol=2))")
         'empty and create 6 (+ 1) default rows
         dataGridView.Rows.Clear()
         dataGridView.Rows.Add(6)
 
-
-        rdoConstruct.Checked = True
-        rdoRandom.Enabled = False 'TODO remove this later
+        ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -161,20 +167,25 @@ Public Class dlgNewDataFrame
         End If
     End Sub
 
-    Private Sub SetRCode(bReset As Boolean)
+    Private Sub SetRCodeforControls(bReset As Boolean)
         ucrNudCols.SetRCode(clsEmptyMatrixFunction, bReset)
         ucrNudRows.SetRCode(clsEmptyMatrixFunction, bReset)
 
         ucrNewDFName.AddAdditionalRCode(clsConstructFunction, iAdditionalPairNo:=1)
         ucrNewDFName.SetRCode(clsEmptyOverallFunction, bReset)
+
+        If bReset Then
+            ucrPnlDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCode(True)
+        SetRCodeforControls(True)
+        TestOKEnabled()
     End Sub
 
-    Private Sub controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlValueChanged, ucrNudCols.ControlValueChanged, ucrNewDFName.ControlValueChanged
+    Private Sub controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlContentsChanged, ucrNudCols.ControlContentsChanged, ucrNewDFName.ControlContentsChanged, ucrPnlDataFrame.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -192,7 +203,6 @@ Public Class dlgNewDataFrame
             dataGridView.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
         End If
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrNewDFName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlValueChanged
