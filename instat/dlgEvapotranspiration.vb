@@ -46,8 +46,9 @@ Public Class dlgEvapotranspiration
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 565
         ucrBase.clsRsyntax.iCallType = 2
-        'ucrBase.iHelpTopicID = 510
+
         Dim dctInputCrops As New Dictionary(Of String, String)
         Dim dctInputTimeStep As New Dictionary(Of String, String)
         Dim dctInputSolar As New Dictionary(Of String, String)

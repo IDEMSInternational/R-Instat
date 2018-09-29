@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgClimaticMaps
+Partial Class dlgClimaticStationMaps
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -63,7 +63,6 @@ Partial Class dlgClimaticMaps
         '
         'cmdMapOptions
         '
-        Me.cmdMapOptions.Enabled = False
         Me.cmdMapOptions.Location = New System.Drawing.Point(14, 430)
         Me.cmdMapOptions.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmdMapOptions.Name = "cmdMapOptions"
