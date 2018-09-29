@@ -438,11 +438,11 @@ Public Class ucrReceiverMultiple
                     Clear()
                 ElseIf strVariableTypes.Count > 0 Then
                     If strVariableTypes(0) = "integer" Then
-                        SetDataType("numeric")
+                        SetDataType("numeric", bStrict:=True)
                     ElseIf strVariableTypes(0) = "ordered,factor" Then
-                        SetDataType("factor")
+                        SetDataType("factor", bStrict:=True)
                     Else
-                        SetDataType(strVariableTypes(0))
+                        SetDataType(strVariableTypes(0), bStrict:=True)
                     End If
                 Else
                     RemoveIncludedMetadataProperty(strProperty:="class")

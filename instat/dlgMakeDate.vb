@@ -23,6 +23,7 @@ Public Class dlgMakeDate
     Private strSelectedColumn As String = ""
     Private strSelectedDataFrame As String = ""
     Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsGregorianDefault As New RFunction
+    Private clsDivisionOperator, clsMultiplicationOperator As New ROperator
 
     Private Sub dlgMakeDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -228,10 +229,27 @@ Public Class dlgMakeDate
         'when rdoTwoColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrInputComboBoxMonthTwo, {rdoTwoColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="366")
 
+        ucrInputUnits.SetItems({"Days", "Hours", "Minutes", "Seconds"})
+        ucrInputUnits.AddParameterPresentCondition("Days", "hours", bNewIsPositive:=False)
+        ucrInputUnits.AddParameterPresentCondition("Days", "minutes", bNewIsPositive:=False)
+        ucrInputUnits.AddParameterPresentCondition("Days", "seconds", bNewIsPositive:=False)
+        ucrInputUnits.AddParameterPresentCondition("Hours", "hours")
+        ucrInputUnits.AddParameterPresentCondition("Hours", "minutes", bNewIsPositive:=False)
+        ucrInputUnits.AddParameterPresentCondition("Hours", "seconds", bNewIsPositive:=False)
+        ucrInputUnits.AddParameterPresentCondition("Minutes", "hours")
+        ucrInputUnits.AddParameterPresentCondition("Minutes", "minutes")
+        ucrInputUnits.AddParameterPresentCondition("Minutes", "seconds", bNewIsPositive:=False)
+        ucrInputUnits.AddParameterPresentCondition("Seconds", "hours")
+        ucrInputUnits.AddParameterPresentCondition("Seconds", "minutes")
+        ucrInputUnits.AddParameterPresentCondition("Seconds", "seconds")
+        ucrInputUnits.SetDropDownStyleAsNonEditable()
+
         'when rdoThreeColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrPnlYearType, {rdoThreeColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoYearColumn)
         ucrPnlDate.AddToLinkedControls(ucrPnlMonthType, {rdoThreeColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoMonthColumn)
         ucrPnlDate.AddToLinkedControls(ucrPnlDayType, {rdoThreeColumns}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDayColumn)
+        ucrInputOrigin.AddToLinkedControls(ucrInputUnits, {"Specify"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Days")
+        ucrInputUnits.SetLinkedDisplayControl(lblUnits)
 
         'TODO - Add ucrinputFomat to construct format
         'ucrInputSeparator.SetItems({"/", "-", "_", ".", ",", ";", ":"})
@@ -257,6 +275,8 @@ Public Class dlgMakeDate
         clsDateFunction = New RFunction
         clsMakeYearDay = New RFunction
         clsMakeYearMonthDay = New RFunction
+        clsDivisionOperator = New ROperator
+        clsMultiplicationOperator = New ROperator
 
         ucrSaveDate.Reset()
         ucrSelectorMakeDate.Reset()
@@ -271,8 +291,13 @@ Public Class dlgMakeDate
         clsMakeYearMonthDay.AddParameter("month_format", Chr(34) & "%m" & Chr(34))
 
         clsDateFunction.SetRCommand("as.Date")
-        clsDateFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
-        clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate)
+        clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
+        clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate, iPosition:=1)
+
+        clsDivisionOperator.SetOperation("/")
+        clsDivisionOperator.bAllBrackets = True
+
+        clsMultiplicationOperator.SetOperation("*")
 
         clsDateFunction.SetAssignTo(ucrSaveDate.GetText, strTempDataframe:=ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveDate.GetText)
         clsMakeYearMonthDay.SetAssignTo(ucrSaveDate.GetText, strTempDataframe:=ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveDate.GetText)
@@ -291,7 +316,8 @@ Public Class dlgMakeDate
 
         ucrSaveDate.SetRCode(clsDateFunction, bReset)
 
-        ucrReceiverForDate.SetRCode(clsDateFunction, bReset)
+        ucrInputUnits.SetRCode(clsMultiplicationOperator, bReset)
+        ucrReceiverForDate.SetRCode(clsDivisionOperator, bReset)
         ucrInputFormat.SetRCode(clsDateFunction, bReset)
         ucrInputOrigin.SetRCode(clsDateFunction, bReset)
         ucrDtpSpecifyOrigin.SetRCode(clsDateFunction, bReset)
@@ -461,10 +487,6 @@ Public Class dlgMakeDate
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged, ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged, ucrReceiverYearThree.ControlContentsChanged, ucrReceiverMonthThree.ControlContentsChanged, ucrReceiverDayThree.ControlContentsChanged, ucrInputDayThree.ControlContentsChanged, ucrInputMonthThree.ControlContentsChanged, ucrInputYearThree.ControlContentsChanged, ucrPnlYearType.ControlContentsChanged, ucrPnlMonthType.ControlContentsChanged, ucrPnlDayType.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrSelectorMakeDate_DataFrameChanged() Handles ucrSelectorMakeDate.DataFrameChanged
         DataFrameParameter()
     End Sub
@@ -500,5 +522,31 @@ Public Class dlgMakeDate
                 ucrReceiverYearThree.SetMeAsReceiver()
             End If
         End If
+    End Sub
+
+    Private Sub ucrInputUnits_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputUnits.ControlValueChanged
+        If ucrInputUnits.GetText() = "Days" Then
+            clsDivisionOperator.RemoveParameterByName("division")
+        Else
+            clsDivisionOperator.AddParameter("division", clsROperatorParameter:=clsMultiplicationOperator, iPosition:=1)
+            clsMultiplicationOperator.RemoveParameterByName("hours")
+            clsMultiplicationOperator.RemoveParameterByName("minutes")
+            clsMultiplicationOperator.RemoveParameterByName("seconds")
+            Select Case ucrInputUnits.GetText()
+                Case "Hours"
+                    clsMultiplicationOperator.AddParameter("hours", 24, iPosition:=0)
+                Case "Minutes"
+                    clsMultiplicationOperator.AddParameter("hours", 24, iPosition:=0)
+                    clsMultiplicationOperator.AddParameter("minutes", 60, iPosition:=1)
+                Case "Seconds"
+                    clsMultiplicationOperator.AddParameter("hours", 24, iPosition:=0)
+                    clsMultiplicationOperator.AddParameter("minutes", 60, iPosition:=1)
+                    clsMultiplicationOperator.AddParameter("seconds", 60, iPosition:=2)
+            End Select
+        End If
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged, ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged, ucrReceiverYearThree.ControlContentsChanged, ucrReceiverMonthThree.ControlContentsChanged, ucrReceiverDayThree.ControlContentsChanged, ucrInputDayThree.ControlContentsChanged, ucrInputMonthThree.ControlContentsChanged, ucrInputYearThree.ControlContentsChanged, ucrPnlYearType.ControlContentsChanged, ucrPnlMonthType.ControlContentsChanged, ucrPnlDayType.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

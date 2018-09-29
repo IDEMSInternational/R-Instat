@@ -36,6 +36,7 @@ Public Class dlgDuplicates
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 547
         Dim dctConditions As New Dictionary(Of String, String)
         Dim dctType As New Dictionary(Of String, String)
 

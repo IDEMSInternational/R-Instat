@@ -69,7 +69,7 @@ Public Class dlgExportToOpenRefine
 
         clsDefaultRefine.SetPackageName("rrefine")
         clsDefaultRefine.SetRCommand("refine_upload")
-        clsDefaultRefine.AddParameter("project.name", ucrDataFrameOpenRefine.cboAvailableDataFrames.SelectedItem & "_clean_up")
+        clsDefaultRefine.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34))
         clsDefaultRefine.AddParameter("open.browser", "FALSE")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRefine)

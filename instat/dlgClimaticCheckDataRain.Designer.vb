@@ -37,6 +37,12 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrChkLogicalColumns = New instat.ucrCheck()
         Me.ucrChkCalculatedColumns = New instat.ucrCheck()
         Me.lblCoeff = New System.Windows.Forms.Label()
+        Me.cmdOmitMonths = New System.Windows.Forms.Button()
+        Me.lblThreshold = New System.Windows.Forms.Label()
+        Me.lblMissingThreshold = New System.Windows.Forms.Label()
+        Me.lblThresholdmm = New System.Windows.Forms.Label()
+        Me.ucrInputThreshold = New instat.ucrInputTextBox()
+        Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
         Me.ucrNudCoeff = New instat.ucrNud()
         Me.ucrChkOmitZero = New instat.ucrCheck()
         Me.ucrNudSkewnessWeight = New instat.ucrNud()
@@ -56,7 +62,6 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorRain = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdOmitMonths = New System.Windows.Forms.Button()
         Me.grpLogicalCalculatedColumns.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -134,6 +139,43 @@ Partial Class dlgClimaticCheckDataRain
         '
         resources.ApplyResources(Me.lblCoeff, "lblCoeff")
         Me.lblCoeff.Name = "lblCoeff"
+        '
+        'cmdOmitMonths
+        '
+        resources.ApplyResources(Me.cmdOmitMonths, "cmdOmitMonths")
+        Me.cmdOmitMonths.Name = "cmdOmitMonths"
+        Me.cmdOmitMonths.UseVisualStyleBackColor = True
+        '
+        'lblThreshold
+        '
+        resources.ApplyResources(Me.lblThreshold, "lblThreshold")
+        Me.lblThreshold.Name = "lblThreshold"
+        '
+        'lblMissingThreshold
+        '
+        resources.ApplyResources(Me.lblMissingThreshold, "lblMissingThreshold")
+        Me.lblMissingThreshold.Name = "lblMissingThreshold"
+        '
+        'lblThresholdmm
+        '
+        resources.ApplyResources(Me.lblThresholdmm, "lblThresholdmm")
+        Me.lblThresholdmm.Name = "lblThresholdmm"
+        '
+        'ucrInputThreshold
+        '
+        Me.ucrInputThreshold.AddQuotesIfUnrecognised = True
+        Me.ucrInputThreshold.IsMultiline = False
+        Me.ucrInputThreshold.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputThreshold, "ucrInputThreshold")
+        Me.ucrInputThreshold.Name = "ucrInputThreshold"
+        '
+        'ucrInputThresholdValue
+        '
+        Me.ucrInputThresholdValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputThresholdValue.IsMultiline = False
+        Me.ucrInputThresholdValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputThresholdValue, "ucrInputThresholdValue")
+        Me.ucrInputThresholdValue.Name = "ucrInputThresholdValue"
         '
         'ucrNudCoeff
         '
@@ -288,16 +330,15 @@ Partial Class dlgClimaticCheckDataRain
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'cmdOmitMonths
-        '
-        resources.ApplyResources(Me.cmdOmitMonths, "cmdOmitMonths")
-        Me.cmdOmitMonths.Name = "cmdOmitMonths"
-        Me.cmdOmitMonths.UseVisualStyleBackColor = True
-        '
         'dlgClimaticCheckDataRain
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblThresholdmm)
+        Me.Controls.Add(Me.ucrInputThreshold)
+        Me.Controls.Add(Me.lblMissingThreshold)
+        Me.Controls.Add(Me.lblThreshold)
+        Me.Controls.Add(Me.ucrInputThresholdValue)
         Me.Controls.Add(Me.cmdOmitMonths)
         Me.Controls.Add(Me.lblCoeff)
         Me.Controls.Add(Me.ucrNudCoeff)
@@ -374,4 +415,9 @@ Partial Class dlgClimaticCheckDataRain
     Friend WithEvents lblCoeff As Label
     Friend WithEvents ucrNudCoeff As ucrNud
     Friend WithEvents cmdOmitMonths As Button
+    Friend WithEvents ucrInputThresholdValue As ucrInputTextBox
+    Friend WithEvents lblThreshold As Label
+    Friend WithEvents lblMissingThreshold As Label
+    Friend WithEvents ucrInputThreshold As ucrInputTextBox
+    Friend WithEvents lblThresholdmm As Label
 End Class
