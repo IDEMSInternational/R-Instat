@@ -94,18 +94,18 @@ Public Class dlgTransformClimatic
 
         ' Setting receivers
         ucrReceiverStation.Selector = ucrSelectorTransform
-        ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
+        ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.strSelectorHeading = "Station Variables"
 
         ucrReceiverYear.Selector = ucrSelectorTransform
-        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ' What is this used for? I don't think this requires a key.
         ucrReceiverDate.Selector = ucrSelectorTransform
-        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
+        ucrReceiverDate.SetClimaticType("date" )
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.strSelectorHeading = "Date Variables"
 
@@ -209,8 +209,8 @@ Public Class dlgTransformClimatic
         ucrInputColName.SetParameter(New RParameter("result_name", 2))
         ucrInputColName.SetName("moving_sum")
 
-        ucrPnlEvap.AddToLinkedControls(ucrInputEvaporation, {rdoEvapValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
-        ucrPnlEvap.AddToLinkedControls(ucrReceiverEvap, {rdoEvapVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlEvap.AddToLinkedControls(ucrInputEvaporation, {rdoEvapValue}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlEvap.AddToLinkedControls(ucrReceiverEvap, {rdoEvapVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlEvap.SetLinkedDisplayControl(lblWBEvaporation)
 
         ucrPnlTransform.AddToLinkedControls({ucrInputCumulative}, {rdoCumulative}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Sum")
@@ -268,7 +268,7 @@ Public Class dlgTransformClimatic
         ucrReceiverData.SetMeAsReceiver()
 
         ' Count and Spells: Rainday
-        clsRRaindayMatch.bToScriptAsRString = True
+
         clsRRainday.SetRCommand("instat_calculation$new")
         clsRRainday.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsRRainday.AddParameter("function_exp", clsRFunctionParameter:=clsRRaindayMatch, iPosition:=1)
@@ -277,15 +277,15 @@ Public Class dlgTransformClimatic
 
         clsRRaindayMatch.SetRCommand("match")
         clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator)
+        clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
+        clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
+        clsRRaindayMatch.bToScriptAsRString = True
+
         clsRRaindayAndOperator.SetOperation("&")
         clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
         clsRRaindayLowerOperator.SetOperation("<=")
-        clsRRaindayLowerOperator.AddParameter("min", 0, iPosition:=1)
         clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
         clsRRaindayUpperOperator.SetOperation(">=")
-        clsRRaindayUpperOperator.AddParameter("max", 0.85, iPosition:=1)
-        clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
-        clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
 
         clsGreaterThanOperator.SetOperation(">")
         clsLessThanOperator.SetOperation("<")
@@ -355,7 +355,7 @@ Public Class dlgTransformClimatic
         clsPMaxFunctionMax.AddParameter("calculation", clsROperatorParameter:=clsPMaxOperatorMax, iPosition:=0, bIncludeArgumentName:=False)
         clsPMaxOperatorMax.SetOperation("-")
         clsPMaxOperatorMax.AddParameter("first", "x + y", iPosition:=0)
-        clsPMaxOperatorMax.AddParameter("evaporation.value", 5, iPosition:=1, bIncludeArgumentName:=False)
+        clsPMaxOperatorMax.AddParameter("evaporation.value", 5, iPosition:=1)
         clsPMaxFunctionMax.AddParameter("0", 0, iPosition:=1, bIncludeArgumentName:=False)
         clsPMinFunctionMax.AddParameter("capacity", 60, iPosition:=1, bIncludeArgumentName:=False)
         clsRWaterBalanceFunction.AddParameter("replace_na", iPosition:=1, bIncludeArgumentName:=False)
