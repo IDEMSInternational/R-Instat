@@ -37,12 +37,9 @@ Public Class dlgNewDataFrame
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 6
-        Dim lstLinkedControls As New List(Of Control)
-        lstLinkedControls.AddRange({lblCommand, btnExample})
 
         ucrInputCommand.txtInput.WordWrap = False
         ucrInputCommand.txtInput.ScrollBars = ScrollBars.Both
-        'ucrInputCommand.txtInput.Multiline = True
 
         rdoRandom.Enabled = False 'TODO remove this later
 
@@ -68,7 +65,7 @@ Public Class dlgNewDataFrame
 
         'TODO:Providing conditions here may not be easy, find a way to do this properly!
         ucrPnlDataFrame.AddFunctionNamesCondition(rdoConstruct, "data.frame")
-        ucrPnlDataFrame.AddFunctionNamesCondition(rdoCommand, ucrInputCommand.GetText())
+        'ucrPnlDataFrame.AddFunctionNamesCondition(rdoCommand, ucrInputCommand.GetText())
         'ucrPnlDataFrame.AddFunctionNamesCondition(rdoRandom, "")
         'ucrPnlDataFrame.AddFunctionNamesCondition(rdoEmpty, "")
 
@@ -77,7 +74,7 @@ Public Class dlgNewDataFrame
         ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
-        ucrInputCommand.SetLinkedDisplayControl(lstLinkedControls)
+        ucrInputCommand.SetLinkedDisplayControl(New List(Of Control)({lblCommand, btnExample}))
     End Sub
 
     Private Sub SetDefaults()
