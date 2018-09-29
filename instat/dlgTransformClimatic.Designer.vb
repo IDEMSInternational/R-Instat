@@ -52,31 +52,31 @@ Partial Class dlgTransformClimatic
         Me.lblNewColName = New System.Windows.Forms.Label()
         Me.lblCountOver = New System.Windows.Forms.Label()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
-        Me.lblPosition = New System.Windows.Forms.Label()
-        Me.rdoEvapVariable = New System.Windows.Forms.RadioButton()
-        Me.rdoEvapValue = New System.Windows.Forms.RadioButton()
-        Me.lblRowsMultSpells = New System.Windows.Forms.Label()
-        Me.lblCondition = New System.Windows.Forms.Label()
-        Me.lblWBEvaporation = New System.Windows.Forms.Label()
-        Me.lblWBCapacity = New System.Windows.Forms.Label()
-        Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
-        Me.rdoCumulative = New System.Windows.Forms.RadioButton()
-        Me.ucrChkGroupByYear = New instat.ucrCheck()
         Me.ucrReceiverEvap = New instat.ucrReceiverSingle()
         Me.ucrInputEvaporation = New instat.ucrInputTextBox()
+        Me.rdoEvapVariable = New System.Windows.Forms.RadioButton()
+        Me.rdoEvapValue = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlEvap = New instat.UcrPanel()
         Me.ucrInputCumulative = New instat.ucrInputComboBox()
         Me.ucrInputCircularPosition = New instat.ucrInputComboBox()
+        Me.lblPosition = New System.Windows.Forms.Label()
         Me.ucrInputPosition = New instat.ucrInputComboBox()
         Me.ucrChkCircular = New instat.ucrCheck()
         Me.ucrNudMultSpells = New instat.ucrNud()
+        Me.lblRowsMultSpells = New System.Windows.Forms.Label()
         Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.ucrInputCondition = New instat.ucrInputComboBox()
+        Me.lblCondition = New System.Windows.Forms.Label()
+        Me.lblWBEvaporation = New System.Windows.Forms.Label()
         Me.ucrInputSpellLower = New instat.ucrInputTextBox()
-        Me.ucrPnlEvap = New instat.UcrPanel()
         Me.ucrNudSumOver = New instat.ucrNud()
+        Me.lblWBCapacity = New System.Windows.Forms.Label()
         Me.ucrNudWBCapacity = New instat.ucrNud()
         Me.ucrInputSum = New instat.ucrInputComboBox()
         Me.ucrNudCountOver = New instat.ucrNud()
+        Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
+        Me.rdoCumulative = New System.Windows.Forms.RadioButton()
+        Me.ucrChkGroupByYear = New instat.ucrCheck()
         Me.ucrInputColName = New instat.ucrInputTextBox()
         Me.ucrPnlTransform = New instat.UcrPanel()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -204,10 +204,22 @@ Partial Class dlgTransformClimatic
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.TabStop = False
         '
-        'lblPosition
+        'ucrReceiverEvap
         '
-        resources.ApplyResources(Me.lblPosition, "lblPosition")
-        Me.lblPosition.Name = "lblPosition"
+        Me.ucrReceiverEvap.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverEvap, "ucrReceiverEvap")
+        Me.ucrReceiverEvap.Name = "ucrReceiverEvap"
+        Me.ucrReceiverEvap.Selector = Nothing
+        Me.ucrReceiverEvap.strNcFilePath = ""
+        Me.ucrReceiverEvap.ucrSelector = Nothing
+        '
+        'ucrInputEvaporation
+        '
+        Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
+        Me.ucrInputEvaporation.IsMultiline = False
+        Me.ucrInputEvaporation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputEvaporation, "ucrInputEvaporation")
+        Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
         '
         'rdoEvapVariable
         '
@@ -223,72 +235,10 @@ Partial Class dlgTransformClimatic
         Me.rdoEvapValue.TabStop = True
         Me.rdoEvapValue.UseVisualStyleBackColor = True
         '
-        'lblRowsMultSpells
+        'ucrPnlEvap
         '
-        resources.ApplyResources(Me.lblRowsMultSpells, "lblRowsMultSpells")
-        Me.lblRowsMultSpells.Name = "lblRowsMultSpells"
-        Me.lblRowsMultSpells.Tag = "Rows_to_Take_Over:"
-        '
-        'lblCondition
-        '
-        resources.ApplyResources(Me.lblCondition, "lblCondition")
-        Me.lblCondition.Name = "lblCondition"
-        Me.lblCondition.Tag = "Condition:"
-        '
-        'lblWBEvaporation
-        '
-        resources.ApplyResources(Me.lblWBEvaporation, "lblWBEvaporation")
-        Me.lblWBEvaporation.Name = "lblWBEvaporation"
-        Me.lblWBEvaporation.Tag = "Evaporation"
-        '
-        'lblWBCapacity
-        '
-        resources.ApplyResources(Me.lblWBCapacity, "lblWBCapacity")
-        Me.lblWBCapacity.Name = "lblWBCapacity"
-        Me.lblWBCapacity.Tag = "Capacity"
-        '
-        'rdoMultSpells
-        '
-        resources.ApplyResources(Me.rdoMultSpells, "rdoMultSpells")
-        Me.rdoMultSpells.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMultSpells.FlatAppearance.BorderSize = 2
-        Me.rdoMultSpells.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMultSpells.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoMultSpells.Name = "rdoMultSpells"
-        Me.rdoMultSpells.UseVisualStyleBackColor = True
-        '
-        'rdoCumulative
-        '
-        resources.ApplyResources(Me.rdoCumulative, "rdoCumulative")
-        Me.rdoCumulative.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoCumulative.FlatAppearance.BorderSize = 2
-        Me.rdoCumulative.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoCumulative.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoCumulative.Name = "rdoCumulative"
-        Me.rdoCumulative.UseVisualStyleBackColor = True
-        '
-        'ucrChkGroupByYear
-        '
-        Me.ucrChkGroupByYear.Checked = False
-        resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
-        Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
-        '
-        'ucrReceiverEvap
-        '
-        Me.ucrReceiverEvap.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverEvap, "ucrReceiverEvap")
-        Me.ucrReceiverEvap.Name = "ucrReceiverEvap"
-        Me.ucrReceiverEvap.Selector = Nothing
-        Me.ucrReceiverEvap.strNcFilePath = ""
-        Me.ucrReceiverEvap.ucrSelector = Nothing
-        '
-        'ucrInputEvaporation
-        '
-        Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
-        Me.ucrInputEvaporation.IsMultiline = False
-        Me.ucrInputEvaporation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputEvaporation, "ucrInputEvaporation")
-        Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
+        resources.ApplyResources(Me.ucrPnlEvap, "ucrPnlEvap")
+        Me.ucrPnlEvap.Name = "ucrPnlEvap"
         '
         'ucrInputCumulative
         '
@@ -303,6 +253,11 @@ Partial Class dlgTransformClimatic
         Me.ucrInputCircularPosition.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCircularPosition, "ucrInputCircularPosition")
         Me.ucrInputCircularPosition.Name = "ucrInputCircularPosition"
+        '
+        'lblPosition
+        '
+        resources.ApplyResources(Me.lblPosition, "lblPosition")
+        Me.lblPosition.Name = "lblPosition"
         '
         'ucrInputPosition
         '
@@ -327,6 +282,12 @@ Partial Class dlgTransformClimatic
         Me.ucrNudMultSpells.Name = "ucrNudMultSpells"
         Me.ucrNudMultSpells.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'lblRowsMultSpells
+        '
+        resources.ApplyResources(Me.lblRowsMultSpells, "lblRowsMultSpells")
+        Me.lblRowsMultSpells.Name = "lblRowsMultSpells"
+        Me.lblRowsMultSpells.Tag = "Rows_to_Take_Over:"
+        '
         'ucrInputSpellUpper
         '
         Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
@@ -342,6 +303,18 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrInputCondition, "ucrInputCondition")
         Me.ucrInputCondition.Name = "ucrInputCondition"
         '
+        'lblCondition
+        '
+        resources.ApplyResources(Me.lblCondition, "lblCondition")
+        Me.lblCondition.Name = "lblCondition"
+        Me.lblCondition.Tag = "Condition:"
+        '
+        'lblWBEvaporation
+        '
+        resources.ApplyResources(Me.lblWBEvaporation, "lblWBEvaporation")
+        Me.lblWBEvaporation.Name = "lblWBEvaporation"
+        Me.lblWBEvaporation.Tag = "Evaporation"
+        '
         'ucrInputSpellLower
         '
         Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
@@ -349,11 +322,6 @@ Partial Class dlgTransformClimatic
         Me.ucrInputSpellLower.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSpellLower, "ucrInputSpellLower")
         Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
-        '
-        'ucrPnlEvap
-        '
-        resources.ApplyResources(Me.ucrPnlEvap, "ucrPnlEvap")
-        Me.ucrPnlEvap.Name = "ucrPnlEvap"
         '
         'ucrNudSumOver
         '
@@ -364,6 +332,12 @@ Partial Class dlgTransformClimatic
         Me.ucrNudSumOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSumOver.Name = "ucrNudSumOver"
         Me.ucrNudSumOver.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblWBCapacity
+        '
+        resources.ApplyResources(Me.lblWBCapacity, "lblWBCapacity")
+        Me.lblWBCapacity.Name = "lblWBCapacity"
+        Me.lblWBCapacity.Tag = "Capacity"
         '
         'ucrNudWBCapacity
         '
@@ -391,6 +365,32 @@ Partial Class dlgTransformClimatic
         Me.ucrNudCountOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCountOver.Name = "ucrNudCountOver"
         Me.ucrNudCountOver.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'rdoMultSpells
+        '
+        resources.ApplyResources(Me.rdoMultSpells, "rdoMultSpells")
+        Me.rdoMultSpells.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultSpells.FlatAppearance.BorderSize = 2
+        Me.rdoMultSpells.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultSpells.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoMultSpells.Name = "rdoMultSpells"
+        Me.rdoMultSpells.UseVisualStyleBackColor = True
+        '
+        'rdoCumulative
+        '
+        resources.ApplyResources(Me.rdoCumulative, "rdoCumulative")
+        Me.rdoCumulative.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCumulative.FlatAppearance.BorderSize = 2
+        Me.rdoCumulative.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCumulative.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoCumulative.Name = "rdoCumulative"
+        Me.rdoCumulative.UseVisualStyleBackColor = True
+        '
+        'ucrChkGroupByYear
+        '
+        Me.ucrChkGroupByYear.Checked = False
+        resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
+        Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
         '
         'ucrInputColName
         '
