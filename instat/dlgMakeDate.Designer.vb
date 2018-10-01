@@ -72,11 +72,13 @@ Partial Class dlgMakeDate
         Me.txtTextDateFormats = New System.Windows.Forms.RichTextBox()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.ttMakeDate = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblUnits = New System.Windows.Forms.Label()
         Me.ucrDtpSpecifyOrigin = New instat.ucrDateTimePicker()
         Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
         Me.UcrInputComboBox2 = New instat.ucrInputComboBox()
         Me.UcrInputComboBox3 = New instat.ucrInputComboBox()
         Me.UcrInputComboBox4 = New instat.ucrInputComboBox()
+        Me.ucrInputUnits = New instat.ucrInputComboBox()
         Me.ucrPnlFormat = New instat.UcrPanel()
         Me.ucrReceiverForDate = New instat.ucrReceiverSingle()
         Me.ucrInputFormat = New instat.ucrInputComboBox()
@@ -139,7 +141,9 @@ Partial Class dlgMakeDate
         '
         'grpSingleColumn
         '
+        Me.grpSingleColumn.Controls.Add(Me.lblUnits)
         Me.grpSingleColumn.Controls.Add(Me.ucrDtpSpecifyOrigin)
+        Me.grpSingleColumn.Controls.Add(Me.ucrInputUnits)
         Me.grpSingleColumn.Controls.Add(Me.grpFormatField)
         Me.grpSingleColumn.Controls.Add(Me.rdoSpecifyFormat)
         Me.grpSingleColumn.Controls.Add(Me.rdoOrigin)
@@ -365,6 +369,11 @@ Partial Class dlgMakeDate
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
+        'lblUnits
+        '
+        resources.ApplyResources(Me.lblUnits, "lblUnits")
+        Me.lblUnits.Name = "lblUnits"
+        '
         'ucrDtpSpecifyOrigin
         '
         resources.ApplyResources(Me.ucrDtpSpecifyOrigin, "ucrDtpSpecifyOrigin")
@@ -399,6 +408,13 @@ Partial Class dlgMakeDate
         Me.UcrInputComboBox4.IsReadOnly = False
         resources.ApplyResources(Me.UcrInputComboBox4, "UcrInputComboBox4")
         Me.UcrInputComboBox4.Name = "UcrInputComboBox4"
+        '
+        'ucrInputUnits
+        '
+        Me.ucrInputUnits.AddQuotesIfUnrecognised = True
+        Me.ucrInputUnits.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputUnits, "ucrInputUnits")
+        Me.ucrInputUnits.Name = "ucrInputUnits"
         '
         'ucrPnlFormat
         '
@@ -666,4 +682,6 @@ Partial Class dlgMakeDate
     Friend WithEvents rdoDayValue As RadioButton
     Friend WithEvents rdoDayColumn As RadioButton
     Friend WithEvents ucrPnlDayType As UcrPanel
+    Friend WithEvents lblUnits As Label
+    Friend WithEvents ucrInputUnits As ucrInputComboBox
 End Class
