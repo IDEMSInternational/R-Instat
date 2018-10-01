@@ -100,9 +100,9 @@ Public Class dlgNewDataFrame
         clsConstructFunction.SetRCommand("data.frame")
 
         ucrInputCommand.SetText("data.frame(data=matrix(data=NA, nrow=10, ncol=2))")
-        'empty and create 6 (+ 1) default rows
+        'empty and create 5 (+1) default rows
         dataGridView.Rows.Clear()
-        dataGridView.Rows.Add(6)
+        dataGridView.Rows.Add(5)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
     End Sub
