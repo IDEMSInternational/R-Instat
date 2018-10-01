@@ -619,13 +619,13 @@
     <value>2</value>
   </data>
   <data name="ucrSaveModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 399</value>
+    <value>10, 391</value>
   </data>
   <data name="ucrSaveModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 24</value>
   </data>
   <data name="ucrSaveModel.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrSaveModel.Name" xml:space="preserve">
     <value>ucrSaveModel</value>
@@ -640,7 +640,7 @@
     <value>0</value>
   </data>
   <data name="ucrSaveIndex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 364</value>
+    <value>10, 363</value>
   </data>
   <data name="ucrSaveIndex.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 24</value>
@@ -703,13 +703,13 @@
     <value>4</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 439</value>
+    <value>10, 422</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 57</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -733,7 +733,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>430, 502</value>
+    <value>430, 486</value>
   </data>
   <data name="ucrReceiverMonth.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 148</value>
