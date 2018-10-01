@@ -1908,10 +1908,6 @@ Public Class frmMain
         dlgEvapotranspiration.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticSPI_Click(sender As Object, e As EventArgs)
-        dlgSPI.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareCheckDataCompareColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataCompareColumns.Click
         dlgCompareColumns.ShowDialog()
     End Sub
@@ -2037,6 +2033,6 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticModelSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelSPI.Click
-        dlgSPI.ShowDialog
+        dlgSPI.ShowDialog()
     End Sub
 End Class
