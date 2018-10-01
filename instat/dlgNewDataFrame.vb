@@ -103,7 +103,7 @@ Public Class dlgNewDataFrame
             'validate the datagrid rows 
             ucrBase.OKEnabled(False)
             If ucrNewDFName.IsComplete Then
-                Dim bDuplicate As Boolean
+                Dim lstUserColumnNames As New List(Of String)
                 Dim inputValidation As New ucrInput 'temporarily use validation functions for ucrInput
                 inputValidation.SetValidationTypeAsRVariable()
                 For Each row As DataGridViewRow In dataGridView.Rows
@@ -116,21 +116,14 @@ Public Class dlgNewDataFrame
                         End If
 
                         'check for duplicates
-                        bDuplicate = False
-                        For i As Integer = dataGridView.Rows.IndexOf(row) - 1 To 0 Step -1
-                            If dataGridView.Rows(i).Cells("colName").Value = row.Cells("colName").Value Then
-                                bDuplicate = True
-                                MessageBox.Show(Me, "Duplicate column names are not allowed", "Construct", MessageBoxButtons.OK)
-                                Exit For
-                            End If
-                        Next
-
-                        If bDuplicate Then
+                        If lstUserColumnNames.Contains(row.Cells("colName").Value) Then
                             row.Selected = True
                             ucrBase.OKEnabled(False)
+                            MessageBox.Show(Me, "Duplicate column names are not allowed", "Construct", MessageBoxButtons.OK)
                             Exit For
+                        Else
+                            lstUserColumnNames.Add(row.Cells("colName").Value)
                         End If
-
                     End If
 
                     'if both the column name and expression exist then enable
