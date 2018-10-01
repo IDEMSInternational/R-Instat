@@ -44,6 +44,8 @@ Public Class dlgTidyDailyData
     End Sub
 
     Private Sub InitialiseDialog()
+
+        ucrBase.iHelpTopicID = 561
         ucrBase.clsRsyntax.iCallType = 2
 
         ucrPnlReshapeClimaticData.AddRadioButton(rdoYear)

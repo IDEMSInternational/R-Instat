@@ -41,6 +41,8 @@ Public Class dlgDisplayDailyData
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 361
+
         Dim dctBarColour As New Dictionary(Of String, String)
         Dim dctRugColour As New Dictionary(Of String, String)
         Dim dctSummary As New Dictionary(Of String, String)
