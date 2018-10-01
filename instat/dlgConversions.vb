@@ -36,6 +36,7 @@ Public Class dlgConversions
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 563
         Dim dctPrecipitationUnits As New Dictionary(Of String, String)
         Dim dctTemperatureUnits As New Dictionary(Of String, String)
         Dim dctWindSpeedUnits As New Dictionary(Of String, String)

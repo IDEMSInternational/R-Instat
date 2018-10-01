@@ -48,6 +48,7 @@ Public Class dlgCompare
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 562
         ucrPnlCompare.AddRadioButton(rdoDifferences)
         ucrPnlCompare.AddRadioButton(rdoAnomalies)
         ucrPnlCompare.AddParameterPresentCondition(rdoDifferences, "manipulations", False)
