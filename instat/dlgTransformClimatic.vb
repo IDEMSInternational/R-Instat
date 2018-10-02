@@ -137,7 +137,7 @@ Public Class dlgTransformClimatic
         dctInputSumPairs.Add("Sum", "sum")
         dctInputSumPairs.Add("Maximum", "max")
         dctInputSumPairs.Add("Minimum", "min")
-        dctInputSumPairs.Add("Mean", "(mean)")
+        dctInputSumPairs.Add("Mean", "mean")
         dctInputSumPairs.Add("Median", "median")
         ucrInputSum.SetItems(dctInputSumPairs)
         ucrInputSum.SetDropDownStyleAsNonEditable()
