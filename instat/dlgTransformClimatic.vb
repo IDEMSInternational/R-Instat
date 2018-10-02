@@ -39,13 +39,14 @@ Public Class dlgTransformClimatic
     Private strCurrDataName As String = ""
     Private strRainDay As String = "rain_day"
 
-    Private iReceiverMaxY As Integer
-    Private iReceiverLabelMaxY As Integer
+    'TODO:This will be useful when we want to resize dialog at different instances!
+    'Private iReceiverMaxY As Integer
+    'Private iReceiverLabelMaxY As Integer
 
     Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
-            iReceiverMaxY = ucrReceiverData.Location.Y
-            iReceiverLabelMaxY = lblData.Location.Y
+            'iReceiverMaxY = ucrReceiverData.Location.Y
+            'iReceiverLabelMaxY = lblData.Location.Y
             InitialiseDialog()
             bFirstload = False
         End If
@@ -141,8 +142,6 @@ Public Class dlgTransformClimatic
         ucrInputSum.SetItems(dctInputSumPairs)
         ucrInputSum.SetDropDownStyleAsNonEditable()
         ucrInputSum.SetLinkedDisplayControl(lblSumOver)
-        ucrInputSum.bAllowNonConditionValues = True
-
 
         ucrInputPosition.SetParameter(New RParameter("align", 4))
         dctInputPosition.Add("Right", Chr(39) & "right" & Chr(39))
@@ -150,7 +149,6 @@ Public Class dlgTransformClimatic
         dctInputPosition.Add("Left", Chr(39) & "left" & Chr(39))
         ucrInputPosition.SetItems(dctInputPosition)
         ucrInputPosition.SetDropDownStyleAsNonEditable()
-        ucrInputPosition.bAllowNonConditionValues = True
 
         ucrInputCircularPosition.SetParameter(New RParameter("type", 3))
         dctInputCircularPosition.Add("Right", Chr(39) & "to" & Chr(39))
@@ -158,7 +156,6 @@ Public Class dlgTransformClimatic
         dctInputCircularPosition.Add("Left", Chr(39) & "from" & Chr(39))
         ucrInputCircularPosition.SetItems(dctInputCircularPosition)
         ucrInputCircularPosition.SetDropDownStyleAsNonEditable()
-        ucrInputCircularPosition.bAllowNonConditionValues = True
 
         ucrNudSumOver.SetParameter(New RParameter("width", 1))
         ucrNudSumOver.SetMinMax(1, 366)
@@ -216,16 +213,15 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls({ucrInputCumulative}, {rdoCumulative}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Sum")
         ucrPnlTransform.AddToLinkedControls({ucrNudCountOver}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrPnlTransform.AddToLinkedControls({ucrInputCondition}, {rdoCount, rdoSpell, rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=">=")
-        ucrPnlTransform.AddToLinkedControls(ucrInputSum, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Sum")
+        ucrPnlTransform.AddToLinkedControls(ucrInputSum, {rdoMoving}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls(ucrNudSumOver, {rdoMoving}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTransform.AddToLinkedControls(ucrInputPosition, {rdoMoving}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Right")
-        ucrPnlTransform.AddToLinkedControls(ucrInputCircularPosition, {rdoMoving}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Right")
         ucrPnlTransform.AddToLinkedControls(ucrChkCircular, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls(ucrNudMultSpells, {rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=21)
         ucrPnlTransform.AddToLinkedControls(ucrPnlEvap, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls(ucrNudWBCapacity, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
 
-        ucrChkCircular.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCircular.AddToLinkedControls(ucrInputCircularPosition, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCircular.AddToLinkedControls(ucrInputPosition, {False}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"<=", "Between", ">=", "Outer"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
         ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between", "Outer"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
@@ -245,7 +241,6 @@ Public Class dlgTransformClimatic
 
         clsRMovingFunction = New RFunction
         clsRasterFuction = New RFunction
-        clsGroupByYear.Clear()
         clsReplaceNAasElement = New RFunction
         clsRCountFunction = New RFunction
         clsRWaterBalanceFunction = New RFunction
@@ -260,6 +255,7 @@ Public Class dlgTransformClimatic
         clsPMinFunctionMax = New RFunction
         clsPMaxFunctionMax = New RFunction
         clsPMaxOperatorMax = New ROperator
+        clsGroupByYear.Clear()
         clsReduceOpEvapValue.Clear()
         clsGreaterThanOperator.Clear()
         clsLessThanOperator.Clear()
@@ -328,22 +324,21 @@ Public Class dlgTransformClimatic
         clsRollConsecutiveSumFunction.AddParameter("data", strRainDay)
 
         ' Moving
-        clsRMovingFunction.bToScriptAsRString = True
         clsRMovingFunction.SetPackageName("zoo")
         clsRMovingFunction.SetRCommand("rollapply")
         clsRMovingFunction.AddParameter("width", 3, iPosition:=1)
         clsRMovingFunction.AddParameter("FUN", "sum", iPosition:=2)
         clsRMovingFunction.AddParameter("fill", "NA", iPosition:=3)
         clsRMovingFunction.AddParameter("align", Chr(39) & "right" & Chr(39), iPosition:=4)
+        clsRMovingFunction.bToScriptAsRString = True
 
-        clsRasterFuction.bToScriptAsRString = True
         clsRasterFuction.SetPackageName("raster")
         clsRasterFuction.SetRCommand("movingFun")
         clsRasterFuction.AddParameter("n", 3, iPosition:=1)
-        clsRasterFuction.AddParameter("fun", "sum", iPosition:=2)
         clsRasterFuction.AddParameter("type", Chr(39) & "to" & Chr(39), iPosition:=3)
         clsRasterFuction.AddParameter("circular", "FALSE", iPosition:=4)
         clsRasterFuction.AddParameter("na.rm", "TRUE", iPosition:=5)
+        clsRasterFuction.bToScriptAsRString = True
 
         ' Water Balance
         clsRWaterBalanceFunction.bToScriptAsRString = True
