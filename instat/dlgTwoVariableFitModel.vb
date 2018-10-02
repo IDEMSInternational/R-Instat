@@ -182,6 +182,7 @@ Public Class dlgTwoVariableFitModel
 
         clsLM = clsRegressionDefaults.clsDefaultLmFunction.Clone
         clsLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsLM.AddParameter("na.action", "na.exclude", iPosition:=4)
 
         clsGLM = clsRegressionDefaults.clsDefaultGlmFunction.Clone
         clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
