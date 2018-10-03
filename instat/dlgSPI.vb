@@ -96,6 +96,12 @@ Public Class dlgSPI
         ucrSaveIndex.SetLabelText("Save Index into:")
         ucrSaveIndex.SetIsTextBox()
         ucrSaveIndex.SetPrefix("spi")
+
+        ucrSaveModel.SetSaveTypeAsModel()
+        ucrSaveModel.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
+        ucrSaveModel.SetCheckBoxText("Save Model:")
+        ucrSaveModel.SetIsComboBox()
+        ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
     End Sub
 
     Private Sub SetDefaults()
@@ -111,6 +117,7 @@ Public Class dlgSPI
 
         ucrSelectorVariable.Reset()
         ucrSaveIndex.Reset()
+        ucrSaveModel.Reset()
         ucrReceiverData.SetMeAsReceiver()
 
         clsListFunction.SetRCommand("list")
@@ -157,6 +164,8 @@ Public Class dlgSPI
         ucrNudKernelShift.SetRCode(clsListFunction, bReset)
         ucrPnlIndex.SetRCode(clsSummaryFunction, bReset)
         ucrSaveIndex.SetRCode(clsAsVectorFunction, bReset)
+        ucrSaveModel.AddAdditionalRCode(clsSpiFunction, bReset)
+        ucrSaveModel.SetRCode(clsSpeiFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -178,10 +187,12 @@ Public Class dlgSPI
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSpiFunction)
             clsDolarOperator.AddParameter("model", clsRFunctionParameter:=clsSpiFunction, iPosition:=0)
             ucrSaveIndex.SetPrefix("spi")
+            ucrSaveModel.SetPrefix("spi_mod")
         ElseIf rdoSPEI.Checked Then
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSpeiFunction)
             clsDolarOperator.AddParameter("model", clsRFunctionParameter:=clsSpeiFunction, iPosition:=0)
             ucrSaveIndex.SetPrefix("spei")
+            ucrSaveModel.SetPrefix("spei_mod")
         End If
     End Sub
 
