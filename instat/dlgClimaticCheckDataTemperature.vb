@@ -289,7 +289,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsOrOperator.bBrackets = False
         clsOrOperator.bToScriptAsRString = True
 
-        clsRunCalcFunc.SetRCommand("InstatDataObject$run_instat_calculation")
+        clsRunCalcFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "run_instat_calculation")
         clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsFilterFunc, iPosition:=0)
         clsRunCalcFunc.AddParameter("display", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunc)
