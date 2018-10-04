@@ -57,6 +57,7 @@ Public Class dlgTransformClimatic
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
+        SetAssignName()
     End Sub
 
     Private Sub InitialiseDialog()
