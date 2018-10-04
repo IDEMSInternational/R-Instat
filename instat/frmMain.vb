@@ -1908,10 +1908,6 @@ Public Class frmMain
         dlgEvapotranspiration.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticSPI.Click
-        dlgSPI.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareCheckDataCompareColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataCompareColumns.Click
         dlgCompareColumns.ShowDialog()
     End Sub
@@ -2022,5 +2018,21 @@ Public Class frmMain
 
     Private Sub mnuClimaticCheckDataStationMaps_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataStationMaps.Click
         dlgClimaticStationMaps.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareConversions_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareConversions.Click
+        dlgConversions.ShowDialog()
+    End Sub
+
+    Private Sub mnuOptionsByContextGeneralFitModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextGeneralFitModel.Click
+        dlgFitModel.ShowDialog()
+    End Sub
+
+    Private Sub mnuHelpAcknowledgments_Click(sender As Object, e As EventArgs) Handles mnuHelpAcknowledgments.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "151")
+    End Sub
+
+    Private Sub mnuClimaticModelSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelSPI.Click
+        dlgSPI.ShowDialog()
     End Sub
 End Class
