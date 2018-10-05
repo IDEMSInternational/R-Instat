@@ -38,7 +38,7 @@ Public Class dlgClimaticLengthOfSeason
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 564
         ucrReceiverStartofRains.SetParameter(New RParameter("start_doy", 1, bNewIncludeArgumentName:=False))
         ucrReceiverStartofRains.SetParameterIsString()
         ucrReceiverStartofRains.bWithQuotes = False
