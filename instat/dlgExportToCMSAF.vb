@@ -37,6 +37,7 @@ Public Class dlgExportToCMSAF
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 569
         ucrReceiverStation.Selector = ucrSelectorImportToCMSAF
         ucrReceiverDate.Selector = ucrSelectorImportToCMSAF
         ucrReceiverLongitude.Selector = ucrSelectorImportToCMSAF
