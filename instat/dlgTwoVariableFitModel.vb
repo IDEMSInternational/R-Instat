@@ -186,6 +186,7 @@ Public Class dlgTwoVariableFitModel
 
         clsGLM = clsRegressionDefaults.clsDefaultGlmFunction.Clone
         clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsGLM.AddParameter("na.action", "na.exclude", iPosition:=4)
 
         clsPowerOperator.SetOperation("^")
         clsPowerOperator.AddParameter("power", 2, iPosition:=1)
@@ -285,16 +286,12 @@ Public Class dlgTwoVariableFitModel
         clsLMOrGLM = clsLM
 
         clsResidualFunction.SetRCommand("residuals")
-        clsResidualFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
 
         clsFittedValuesFunction.SetRCommand("fitted.values")
-        clsFittedValuesFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
 
         clsRstandardFunction.SetRCommand("rstandard")
-        clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM)
 
         clsHatvaluesFunction.SetRCommand("hatvalues")
-        clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
@@ -594,6 +591,10 @@ Public Class dlgTwoVariableFitModel
             clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
             clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM)
             clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            clsResidualFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            clsFittedValuesFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM)
+            clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM)
         ElseIf rdoTwoSample.Checked Then
             If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Then
                 If rdoCompareMeans.Checked Then
