@@ -39,6 +39,7 @@ Partial Class dlgSPI
         Me.rdoGaussian = New System.Windows.Forms.RadioButton()
         Me.rdoCircular = New System.Windows.Forms.RadioButton()
         Me.rdoTriangular = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveModel = New instat.ucrSave()
         Me.ucrSaveIndex = New instat.ucrSave()
         Me.ucrPnlKernelType = New instat.UcrPanel()
         Me.ucrNudKernelShift = New instat.ucrNud()
@@ -157,6 +158,11 @@ Partial Class dlgSPI
         Me.rdoTriangular.TabStop = True
         Me.rdoTriangular.UseVisualStyleBackColor = True
         '
+        'ucrSaveModel
+        '
+        resources.ApplyResources(Me.ucrSaveModel, "ucrSaveModel")
+        Me.ucrSaveModel.Name = "ucrSaveModel"
+        '
         'ucrSaveIndex
         '
         resources.ApplyResources(Me.ucrSaveIndex, "ucrSaveIndex")
@@ -251,6 +257,7 @@ Partial Class dlgSPI
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.ucrSaveIndex)
         Me.Controls.Add(Me.grpKernel)
         Me.Controls.Add(Me.ucrNudTimeScale)
@@ -309,4 +316,5 @@ Partial Class dlgSPI
     Friend WithEvents ucrPnlIndex As UcrPanel
     Friend WithEvents ucrSaveIndex As ucrSave
     Friend WithEvents grpKernelType As GroupBox
+    Friend WithEvents ucrSaveModel As ucrSave
 End Class
