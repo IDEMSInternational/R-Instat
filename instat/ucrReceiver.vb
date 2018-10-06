@@ -63,7 +63,7 @@ Public Class ucrReceiver
     ' When calling GetVariableNames() this is the R package & function name the variables will be inside
     ' Only currently used in Multiple receiver but defined here as needed in general method SetControlValue()
     ' for ExtractItemsFromRList()
-    Protected strVariablesListPackageName As String = "base"
+    Protected strVariablesListPackageName As String = ""
     Protected strVariablesListFunctionName As String = "c"
 
     Public Sub New()
