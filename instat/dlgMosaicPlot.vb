@@ -100,8 +100,8 @@ Public Class dlgMosaicPlot
         ucrReceiverWeights.SetParameterIsString()
         ucrReceiverWeights.bWithQuotes = False
 
-        dctPartitionOptions.Add("Alternate Spines (Horizontal first)", "ggmosaic::mosaic(" & Chr(34) & "h” & Chr(34) & ")")
-        dctPartitionOptions.Add("Alternate Spines (Vertical first)", "ggmosaic::mosaic(" & Chr(34) & "v” & Chr(34) & ")")
+        dctPartitionOptions.Add("Alternate (Horizontal first)", "ggmosaic::mosaic(" & Chr(34) & "h” & Chr(34) & ")")
+        dctPartitionOptions.Add("Alternate (Vertical first)", "ggmosaic::mosaic(" & Chr(34) & "v” & Chr(34) & ")")
         dctPartitionOptions.Add("Double Decker", "ggmosaic::ddecker()")
 
         ucrInputPartitioning.SetParameter(New RParameter("divider", 5))
@@ -174,9 +174,8 @@ Public Class dlgMosaicPlot
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
 
-        If dctThemeFunctions.TryGetValue("axis.text.x", clsXElementLabels) Then
-            clsXElementLabels.AddParameter("angle", "90")
-            clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsXElementLabels)
+        If Not dctThemeFunctions.TryGetValue("axis.text.x", clsXElementLabels) Then
+            clsXElementLabels = New RFunction
         End If
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorMosaicPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -194,15 +193,17 @@ Public Class dlgMosaicPlot
 
         ucrInputPartitioning.SetRCode(clsMosaicGeomFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsMosaicGeomFunction, bReset)
-        'ucrChkXAxisLabelAngle.SetRCode(, bReset)
+        ucrChkXAxisLabelAngle.SetRCode(clsXElementLabels, bReset)
+        ucrNudXAxisLabelsAngle.SetRCode(clsXElementLabels, bReset)
 
         ucrSaveMosaicPlot.SetRCode(clsBaseOperator, bReset)
 
+        AddRemoveXAxisTextParameters()
         bRCodeSet = True
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverX.IsEmpty AndAlso ucrSaveMosaicPlot.IsComplete Then
+        If Not ucrReceiverX.IsEmpty AndAlso ucrSaveMosaicPlot.IsComplete AndAlso ((ucrChkXAxisLabelAngle.Checked AndAlso ucrNudXAxisLabelsAngle.GetText() <> "") OrElse Not ucrChkXAxisLabelAngle.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -219,6 +220,8 @@ Public Class dlgMosaicPlot
         sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsAesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorMosaicPlot, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
+        SetRCodeForControls(False)
+        AddRemoveXAxisTextParameters()
     End Sub
 
     Private Sub cmdMosaicPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdMosaicPlotOptions.Click
@@ -228,7 +231,7 @@ Public Class dlgMosaicPlot
         SetRCodeForControls(False)
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveMosaicPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveMosaicPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrChkXAxisLabelAngle.ControlContentsChanged, ucrNudXAxisLabelsAngle.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -243,8 +246,13 @@ Public Class dlgMosaicPlot
         iXVarCount = ucrReceiverX.GetCount()
     End Sub
 
-    Private Sub AddRemoveXAxisText()
+    Private Sub AddRemoveXAxisTextParameters()
         If bRCodeSet Then
+            If ucrChkXAxisLabelAngle.Checked AndAlso ucrNudXAxisLabelsAngle.Value <> 0 Then
+                clsXElementLabels.AddParameter("hjust", 1)
+            Else
+                clsXElementLabels.RemoveParameterByName("hjust")
+            End If
             If clsXElementLabels.clsParameters.Count > 0 Then
                 clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsXElementLabels)
             Else
@@ -263,5 +271,9 @@ Public Class dlgMosaicPlot
         Else
             clsBaseOperator.RemoveParameterByName("theme")
         End If
+    End Sub
+
+    Private Sub XAxisLabelAngleControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXAxisLabelAngle.ControlValueChanged, ucrNudXAxisLabelsAngle.ControlValueChanged
+        AddRemoveXAxisTextParameters()
     End Sub
 End Class
