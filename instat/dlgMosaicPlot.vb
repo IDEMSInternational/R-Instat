@@ -37,6 +37,8 @@ Public Class dlgMosaicPlot
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
+    Private iXVarCount As Integer = 0
+
     Private Sub dlgMosaicPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -65,6 +67,7 @@ Public Class dlgMosaicPlot
         ucrReceiverX.SetParameter(New RParameter("x", 0))
         ucrReceiverX.SetVariablesListPackageName("ggmosaic")
         ucrReceiverX.SetVariablesListFunctionName("product")
+        ucrReceiverX.bForceVariablesAsList = True
         ucrReceiverX.Selector = ucrSelectorMosaicPlot
         ucrReceiverX.SetIncludedDataTypes({"factor"})
         ucrReceiverX.strSelectorHeading = "Factors"
@@ -81,6 +84,7 @@ Public Class dlgMosaicPlot
         ucrReceiverConditions.SetParameter(New RParameter("conds", 2))
         ucrReceiverConditions.SetVariablesListPackageName("ggmosaic")
         ucrReceiverConditions.SetVariablesListFunctionName("product")
+        ucrReceiverConditions.bForceVariablesAsList = True
         ucrReceiverConditions.Selector = ucrSelectorMosaicPlot
         ucrReceiverConditions.SetIncludedDataTypes({"factor"})
         ucrReceiverConditions.strSelectorHeading = "Factors"
@@ -209,12 +213,13 @@ Public Class dlgMosaicPlot
     End Sub
 
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
-        If ucrReceiverX.lstSelectedVariables.Items.Count >= 1 AndAlso ucrReceiverFill.IsEmpty() Then
+        If iXVarCount = 0 AndAlso ucrReceiverX.lstSelectedVariables.Items.Count >= 1 AndAlso ucrReceiverFill.IsEmpty() Then
             ucrReceiverFill.Add(ucrReceiverX.lstSelectedVariables.Items(0).Text)
             ucrReceiverX.SetMeAsReceiver()
         ElseIf ucrReceiverX.IsEmpty Then
             ucrReceiverFill.Clear()
             ucrReceiverX.SetMeAsReceiver()
         End If
+        iXVarCount = ucrReceiverX.GetCount()
     End Sub
 End Class
