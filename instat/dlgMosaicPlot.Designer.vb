@@ -40,6 +40,7 @@ Partial Class dlgMosaicPlot
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.lblPartitioningType = New System.Windows.Forms.Label()
         Me.ucrInputPartitioning = New instat.ucrInputComboBox()
+        Me.ucrNudXAxisLabelsAngle = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'ucrSaveMosaicPlot
@@ -154,10 +155,21 @@ Partial Class dlgMosaicPlot
         resources.ApplyResources(Me.ucrInputPartitioning, "ucrInputPartitioning")
         Me.ucrInputPartitioning.Name = "ucrInputPartitioning"
         '
+        'ucrNudXAxisLabelsAngle
+        '
+        Me.ucrNudXAxisLabelsAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXAxisLabelsAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudXAxisLabelsAngle, "ucrNudXAxisLabelsAngle")
+        Me.ucrNudXAxisLabelsAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudXAxisLabelsAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXAxisLabelsAngle.Name = "ucrNudXAxisLabelsAngle"
+        Me.ucrNudXAxisLabelsAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgMosaicPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrNudXAxisLabelsAngle)
         Me.Controls.Add(Me.ucrInputPartitioning)
         Me.Controls.Add(Me.lblPartitioningType)
         Me.Controls.Add(Me.ucrChkOmitMissing)
@@ -202,4 +214,5 @@ Partial Class dlgMosaicPlot
     Friend WithEvents ucrChkOmitMissing As ucrCheck
     Friend WithEvents lblPartitioningType As Label
     Friend WithEvents ucrInputPartitioning As ucrInputComboBox
+    Friend WithEvents ucrNudXAxisLabelsAngle As ucrNud
 End Class

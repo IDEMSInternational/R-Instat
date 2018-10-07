@@ -138,7 +138,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveMosaicPlot.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="ucrChkXAxisLabelAngle.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 344</value>
@@ -159,7 +159,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkXAxisLabelAngle.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdMosaicPlotOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -187,7 +187,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdMosaicPlotOptions.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="ucrSelectorMosaicPlot.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -211,7 +211,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorMosaicPlot.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -238,7 +238,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 411</value>
@@ -259,7 +259,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -269,6 +269,27 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>426, 478</value>
+  </data>
+  <data name="ucrNudXAxisLabelsAngle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>165, 344</value>
+  </data>
+  <data name="ucrNudXAxisLabelsAngle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudXAxisLabelsAngle.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;ucrNudXAxisLabelsAngle.Name" xml:space="preserve">
+    <value>ucrNudXAxisLabelsAngle</value>
+  </data>
+  <data name="&gt;&gt;ucrNudXAxisLabelsAngle.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudXAxisLabelsAngle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudXAxisLabelsAngle.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrInputPartitioning.Location" type="System.Drawing.Point, System.Drawing">
     <value>78, 280</value>
@@ -289,7 +310,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputPartitioning.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="lblPartitioningType.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -316,7 +337,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblPartitioningType.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrChkOmitMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 312</value>
@@ -337,7 +358,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkOmitMissing.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lblWeights.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -367,7 +388,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblWeights.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrReceiverWeights.Location" type="System.Drawing.Point, System.Drawing">
     <value>285, 352</value>
@@ -391,7 +412,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverWeights.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblConditionFactors.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -421,7 +442,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblConditionFactors.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrReceiverConditions.Location" type="System.Drawing.Point, System.Drawing">
     <value>285, 225</value>
@@ -445,7 +466,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverConditions.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblFillColour.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -475,7 +496,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFillColour.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="ucrReceiverFill.Location" type="System.Drawing.Point, System.Drawing">
     <value>285, 176</value>
@@ -499,7 +520,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFill.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="lblFactors.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -526,7 +547,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactors.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -562,6 +583,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverX.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
 </root>

@@ -28,6 +28,7 @@ Public Class dlgMosaicPlot
     Private clsYlabFunction As New RFunction
     Private clsXScaleContinuousFunction As New RFunction
     Private clsYScaleContinuousFunction As New RFunction
+    Private clsXElementLabels As New RFunction
     Private clsRFacetFunction As New RFunction
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
@@ -36,6 +37,7 @@ Public Class dlgMosaicPlot
 
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bRCodeSet As Boolean = True
 
     Private iXVarCount As Integer = 0
 
@@ -112,6 +114,13 @@ Public Class dlgMosaicPlot
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
 
+        ucrChkXAxisLabelAngle.SetParameter(New RParameter("angle"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkXAxisLabelAngle.SetText("X axis labels angle:")
+        ucrChkXAxisLabelAngle.AddToLinkedControls(ucrNudXAxisLabelsAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=90)
+
+        ucrNudXAxisLabelsAngle.SetParameter(New RParameter("angle"))
+        ucrNudXAxisLabelsAngle.SetMinMax(0, 360)
+
         ucrSaveMosaicPlot.SetPrefix("mosaic")
         ucrSaveMosaicPlot.SetIsComboBox()
         ucrSaveMosaicPlot.SetCheckBoxText("Save Graph")
@@ -126,6 +135,8 @@ Public Class dlgMosaicPlot
         clsMosaicGeomFunction = New RFunction
         clsAesFunction = New RFunction
         clsLocalAesFunction = New RFunction
+
+        clsXElementLabels = New RFunction
 
         ucrSelectorMosaicPlot.Reset()
         ucrSelectorMosaicPlot.SetGgplotFunction(clsBaseOperator)
@@ -163,11 +174,18 @@ Public Class dlgMosaicPlot
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
 
+        If dctThemeFunctions.TryGetValue("axis.text.x", clsXElementLabels) Then
+            clsXElementLabels.AddParameter("angle", "90")
+            clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsXElementLabels)
+        End If
+
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorMosaicPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        bRCodeSet = False
+
         ucrSelectorMosaicPlot.SetRCode(clsGgplotFunction, bReset)
         ucrReceiverX.SetRCode(clsLocalAesFunction, bReset)
         ucrReceiverFill.SetRCode(clsLocalAesFunction, bReset)
@@ -179,6 +197,8 @@ Public Class dlgMosaicPlot
         'ucrChkXAxisLabelAngle.SetRCode(, bReset)
 
         ucrSaveMosaicPlot.SetRCode(clsBaseOperator, bReset)
+
+        bRCodeSet = True
     End Sub
 
     Private Sub TestOkEnabled()
@@ -221,5 +241,27 @@ Public Class dlgMosaicPlot
             ucrReceiverX.SetMeAsReceiver()
         End If
         iXVarCount = ucrReceiverX.GetCount()
+    End Sub
+
+    Private Sub AddRemoveXAxisText()
+        If bRCodeSet Then
+            If clsXElementLabels.clsParameters.Count > 0 Then
+                clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsXElementLabels)
+            Else
+                clsThemeFunction.RemoveParameterByName("axis.text.x")
+            End If
+            AddRemoveTheme()
+        End If
+    End Sub
+
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            ' The position MUST be larger than the position of the theme_* argument
+            ' Otherwise the choice of theme will overwrite the options selected here.
+            ' Currently set to large value as no reason this cannot be at the end currently
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme")
+        End If
     End Sub
 End Class
