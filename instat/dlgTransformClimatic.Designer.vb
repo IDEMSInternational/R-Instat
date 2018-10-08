@@ -54,6 +54,7 @@ Partial Class dlgTransformClimatic
         Me.grpTransform = New System.Windows.Forms.GroupBox()
         Me.ucrReceiverEvap = New instat.ucrReceiverSingle()
         Me.ucrInputEvaporation = New instat.ucrInputTextBox()
+        Me.ucrChkGroupByYear = New instat.ucrCheck()
         Me.rdoEvapVariable = New System.Windows.Forms.RadioButton()
         Me.rdoEvapValue = New System.Windows.Forms.RadioButton()
         Me.ucrPnlEvap = New instat.UcrPanel()
@@ -76,7 +77,6 @@ Partial Class dlgTransformClimatic
         Me.ucrNudCountOver = New instat.ucrNud()
         Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
         Me.rdoCumulative = New System.Windows.Forms.RadioButton()
-        Me.ucrChkGroupByYear = New instat.ucrCheck()
         Me.ucrInputColName = New instat.ucrInputTextBox()
         Me.ucrPnlTransform = New instat.UcrPanel()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -221,6 +221,12 @@ Partial Class dlgTransformClimatic
         Me.ucrInputEvaporation.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputEvaporation, "ucrInputEvaporation")
         Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
+        '
+        'ucrChkGroupByYear
+        '
+        Me.ucrChkGroupByYear.Checked = False
+        resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
+        Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
         '
         'rdoEvapVariable
         '
@@ -386,12 +392,6 @@ Partial Class dlgTransformClimatic
         Me.rdoCumulative.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoCumulative.Name = "rdoCumulative"
         Me.rdoCumulative.UseVisualStyleBackColor = True
-        '
-        'ucrChkGroupByYear
-        '
-        Me.ucrChkGroupByYear.Checked = False
-        resources.ApplyResources(Me.ucrChkGroupByYear, "ucrChkGroupByYear")
-        Me.ucrChkGroupByYear.Name = "ucrChkGroupByYear"
         '
         'ucrInputColName
         '

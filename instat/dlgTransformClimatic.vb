@@ -58,6 +58,7 @@ Public Class dlgTransformClimatic
         autoTranslate(Me)
         TestOkEnabled()
         SetAssignName()
+        CheckGroupByYearEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -549,7 +550,7 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub GroupByYear()
-        If ucrChkGroupByYear.Checked() Then
+        If ucrChkGroupByYear.Enabled = True AndAlso ucrChkGroupByYear.Checked() Then
             clsGroupByYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")", iPosition:=3)
         Else
             clsGroupByYear.RemoveParameterByName("calculated_from")
@@ -559,8 +560,10 @@ Public Class dlgTransformClimatic
     Private Sub CheckGroupByYearEnabled()
         If Not ucrReceiverYear.IsEmpty Then
             ucrChkGroupByYear.Enabled = True
+            ucrChkGroupByYear.Checked = True
         Else
             ucrChkGroupByYear.Enabled = False
+            ucrChkGroupByYear.Checked = False
         End If
 
     End Sub
