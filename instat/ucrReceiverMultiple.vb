@@ -230,7 +230,10 @@ Public Class ucrReceiverMultiple
                 strTemp = lstSelectedVariables.Items(0).Text
             End If
         ElseIf lstSelectedVariables.Items.Count > 1 Then
-            strTemp = "c" & "("
+            If strVariablesListPackageName <> "" Then
+                strTemp = strVariablesListPackageName & "::"
+            End If
+            strTemp = strTemp & strVariablesListFunctionName & "("
             For i = 0 To lstSelectedVariables.Items.Count - 1
                 If i > 0 Then
                     strTemp = strTemp & ","
