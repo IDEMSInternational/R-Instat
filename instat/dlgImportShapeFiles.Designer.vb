@@ -22,6 +22,7 @@ Partial Class dlgImportShapeFiles
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgImportShapeFiles))
         Me.lblFile = New System.Windows.Forms.Label()
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.cmdLibrary = New System.Windows.Forms.Button()
@@ -32,66 +33,43 @@ Partial Class dlgImportShapeFiles
         '
         'lblFile
         '
-        Me.lblFile.AutoSize = True
-        Me.lblFile.Location = New System.Drawing.Point(37, 32)
-        Me.lblFile.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        resources.ApplyResources(Me.lblFile, "lblFile")
         Me.lblFile.Name = "lblFile"
-        Me.lblFile.Size = New System.Drawing.Size(38, 20)
-        Me.lblFile.TabIndex = 0
-        Me.lblFile.Text = "File:"
         '
         'cmdBrowse
         '
-        Me.cmdBrowse.Location = New System.Drawing.Point(494, 28)
-        Me.cmdBrowse.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        resources.ApplyResources(Me.cmdBrowse, "cmdBrowse")
         Me.cmdBrowse.Name = "cmdBrowse"
-        Me.cmdBrowse.Size = New System.Drawing.Size(112, 35)
-        Me.cmdBrowse.TabIndex = 2
-        Me.cmdBrowse.Text = "Browse"
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
         'cmdLibrary
         '
-        Me.cmdLibrary.Location = New System.Drawing.Point(494, 92)
-        Me.cmdLibrary.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        resources.ApplyResources(Me.cmdLibrary, "cmdLibrary")
         Me.cmdLibrary.Name = "cmdLibrary"
-        Me.cmdLibrary.Size = New System.Drawing.Size(112, 35)
-        Me.cmdLibrary.TabIndex = 3
-        Me.cmdLibrary.Text = "From Library"
         Me.cmdLibrary.UseVisualStyleBackColor = True
         '
         'ucrSaveDataframeName
         '
-        Me.ucrSaveDataframeName.Location = New System.Drawing.Point(37, 92)
-        Me.ucrSaveDataframeName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        resources.ApplyResources(Me.ucrSaveDataframeName, "ucrSaveDataframeName")
         Me.ucrSaveDataframeName.Name = "ucrSaveDataframeName"
-        Me.ucrSaveDataframeName.Size = New System.Drawing.Size(405, 37)
-        Me.ucrSaveDataframeName.TabIndex = 4
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(22, 154)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(596, 80)
-        Me.ucrBase.TabIndex = 5
         '
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(81, 28)
-        Me.ucrInputFilePath.Margin = New System.Windows.Forms.Padding(14, 18, 14, 18)
+        resources.ApplyResources(Me.ucrInputFilePath, "ucrInputFilePath")
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(395, 35)
-        Me.ucrInputFilePath.TabIndex = 1
         '
         'dlgImportShapeFiles
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(634, 254)
         Me.Controls.Add(Me.ucrSaveDataframeName)
         Me.Controls.Add(Me.cmdLibrary)
         Me.Controls.Add(Me.ucrBase)
@@ -99,12 +77,9 @@ Partial Class dlgImportShapeFiles
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.lblFile)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgImportShapeFiles"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Import Shapefiles"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
