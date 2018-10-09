@@ -71,7 +71,7 @@ Partial Class dlgImportShapeFiles
         Me.ucrChkSplitGeometry.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrChkSplitGeometry.Name = "ucrChkSplitGeometry"
         Me.ucrChkSplitGeometry.Size = New System.Drawing.Size(150, 31)
-        Me.ucrChkSplitGeometry.TabIndex = 6
+        Me.ucrChkSplitGeometry.TabIndex = 5
         '
         'ucrSaveDataframeName
         '
@@ -87,7 +87,7 @@ Partial Class dlgImportShapeFiles
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(596, 80)
-        Me.ucrBase.TabIndex = 5
+        Me.ucrBase.TabIndex = 6
         '
         'ucrInputFilePath
         '
