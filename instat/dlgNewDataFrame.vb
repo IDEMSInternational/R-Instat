@@ -116,17 +116,21 @@ Public Class dlgNewDataFrame
                 Dim inputValidation As New ucrInput 'temporarily use validation functions for ucrInput
                 inputValidation.SetValidationTypeAsRVariable()
                 For Each row As DataGridViewRow In dataGridView.Rows
+
+                    row.Cells("colName").Style.BackColor = Color.White
+                    row.Cells("colExpression").Style.BackColor = Color.White
+
                     'if column has a value then validate first
                     If Not String.IsNullOrEmpty(row.Cells("colName").Value) Then
                         If Not inputValidation.ValidateText(row.Cells("colName").Value) Then
-                            row.Cells("colName").Selected = True
+                            row.Cells("colName").Style.BackColor = Color.Red
                             ucrBase.OKEnabled(False)
                             Exit For ' if not valid text then exit for
                         End If
 
                         'check for duplicates
                         If lstUserColumnNames.Contains(row.Cells("colName").Value) Then
-                            row.Cells("colName").Selected = True
+                            row.Cells("colName").Style.BackColor = Color.Red
                             ucrBase.OKEnabled(False)
                             MessageBox.Show(Me, "Duplicate column names are not allowed", "Construct", MessageBoxButtons.OK)
                             Exit For
@@ -137,12 +141,14 @@ Public Class dlgNewDataFrame
 
                     'disable if column name is there but expression is not 
                     If Not String.IsNullOrEmpty(row.Cells("colName").Value) AndAlso String.IsNullOrEmpty(row.Cells("colExpression").Value) Then
+                        row.Cells("colExpression").Style.BackColor = Color.Yellow
                         ucrBase.OKEnabled(False)
                         Exit For
                     End If
 
                     'disable if expression is there but column name is not 
                     If String.IsNullOrEmpty(row.Cells("colName").Value) AndAlso Not String.IsNullOrEmpty(row.Cells("colExpression").Value) Then
+                        row.Cells("colName").Style.BackColor = Color.Yellow
                         ucrBase.OKEnabled(False)
                         Exit For
                     End If
@@ -153,7 +159,6 @@ Public Class dlgNewDataFrame
                     End If
                 Next
             End If
-
         ElseIf rdoCommand.Checked Then
             'enable if there is text in the input textbox
             ucrBase.OKEnabled(ucrNewDFName.IsComplete AndAlso Not ucrInputCommand.IsEmpty)
