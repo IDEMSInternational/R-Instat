@@ -313,7 +313,7 @@ Public Class ucrButtons
                                              txtPopupComment.ScrollBars = ScrollBars.Vertical
                                              txtPopupComment.WordWrap = False
 
-                                             txtPopupComment.Text = txtComment.Text
+
 
                                              AddHandler txtPopupComment.LostFocus, Sub()
                                                                                        txtComment.Text = txtPopupComment.Text
@@ -332,7 +332,8 @@ Public Class ucrButtons
                                              'sdgComment.Location = New Point(ctlpos.X - 2, ctlpos.Y + txtComment.Height - 2) 'then locate its position
                                              frmPopup.Location = New Point(ctlpos.X - 2, ctlpos.Y - frmPopup.Height - 2) 'set location to show the form just above the examples button
                                              frmPopup.Show()
-
+                                             txtPopupComment.Text = txtComment.Text
+                                             txtPopupComment.SelectionStart = txtPopupComment.TextLength
                                          End Sub
 
     End Sub
