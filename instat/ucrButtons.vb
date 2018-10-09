@@ -280,12 +280,14 @@ Public Class ucrButtons
         End If
     End Sub
 
+    Private iMyCode As Integer = 0
+
     Private Sub AddButtonInCommentTextbox()
         Dim btnMoreComment As New Button
         'add the button to the comment textbox first
         txtComment.Controls.Clear()
         txtComment.Controls.Add(btnMoreComment)
-
+        
         'then set the  button properties
         btnMoreComment.Text = ":::" 'temp. This will be shown as centered ... An image as below commended code is preferred
         'btn.Image = Image.FromFile("C:\patowhiz\3dots.png")
@@ -300,20 +302,18 @@ Public Class ucrButtons
 
         'set the btn event handler
         AddHandler btnMoreComment.Click, Sub()
-                                             'shows a popup that displays the example commands
+                                             'shows a popup that displays the additional comments
                                              Dim frmPopup As New Form
                                              Dim txtPopupComment As New TextBox
                                              frmPopup.ShowInTaskbar = False
                                              frmPopup.FormBorderStyle = FormBorderStyle.None
                                              frmPopup.Size = New Size(txtComment.Width, 120)
                                              frmPopup.Controls.Add(txtPopupComment)
-                                             'Set the listview properties
+                                             'Set the text properties
                                              txtPopupComment.Dock = DockStyle.Fill
                                              txtPopupComment.Multiline = True
                                              txtPopupComment.ScrollBars = ScrollBars.Vertical
                                              txtPopupComment.WordWrap = False
-
-
 
                                              AddHandler txtPopupComment.LostFocus, Sub()
                                                                                        txtComment.Text = txtPopupComment.Text
