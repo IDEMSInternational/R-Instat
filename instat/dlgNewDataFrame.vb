@@ -130,7 +130,7 @@ Public Class dlgNewDataFrame
 
                         'check for duplicates
                         If lstUserColumnNames.Contains(row.Cells("colName").Value) Then
-                            row.Cells("colName").Style.BackColor = Color.Red
+                            row.Cells("colName").Style.BackColor = Color.Yellow
                             ucrBase.OKEnabled(False)
                             MessageBox.Show(Me, "Duplicate column names are not allowed", "Construct", MessageBoxButtons.OK)
                             Exit For
