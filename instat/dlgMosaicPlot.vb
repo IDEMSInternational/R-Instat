@@ -225,7 +225,7 @@ Public Class dlgMosaicPlot
     End Sub
 
     Private Sub cmdMosaicPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdMosaicPlotOptions.Click
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsMosaicGeomFunction, clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalAesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsMosaicGeomFunction, clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalAesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot, bApplyAesGlobally:=False, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetBoxLayerSubdialog = False
         SetRCodeForControls(False)

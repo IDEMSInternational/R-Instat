@@ -965,14 +965,23 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_path)
 
 
-        'this is just a start.. needs lots of further work
-        'clsgeom_mosaic.strGeomName = "geom_mosaic"
-        ''mandatory
-        'clsgeom_mosaic.AddAesParameter("weight ", bIsMandatory:=TRUE)
-        'clsgeom_mosaic.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_mosaic.AddAesParameter("fill", bIsMandatory:=TRUE)
-        'clsgeom_mosaic.AddAesParameter("conds", bIsMandatory:=TRUE)
-        'lstAllGeoms.Add(clsgeom_mosaic)
+        clsgeom_mosaic.strGeomName = "geom_mosaic"
+        'mandatory
+        clsgeom_mosaic.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic.AddAesParameter("fill", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic.AddAesParameter("conds", strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic.AddAesParameter("weight")
+
+        'adding layerParameters
+        clsgeom_mosaic.AddLayerParameter("divider", "list", Chr(34) & "vspine" & Chr(34), lstParameterStrings:={Chr(34) & "vspine" & Chr(34), Chr(34) & "hspine" & Chr(34), Chr(34) & "vbar" & Chr(34), Chr(34) & "hbar" & Chr(34)})
+        clsgeom_mosaic.AddLayerParameter("offset", "numeric", "0.01", lstParameterStrings:={2, 0, 1}) 'not sure if it goes beyond 1
+        clsgeom_mosaic.AddLayerParameter("stat", "editablelist", Chr(34) & "mosaic" & Chr(34), lstParameterStrings:={Chr(34) & "mosaic" & Chr(34)}) ' Made this editable because am not sure what other stats go here
+        clsgeom_mosaic.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)}) ' Made this editable because am not sure what other positions go here
+        clsgeom_mosaic.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_abline.AddLayerParameter("size", "numeric", "1", lstParameterStrings:={1, 10}) 'not certain if the size goues up to this much
+        clsgeom_mosaic.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_mosaic.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_mosaic)
 
 
         clsgeom_point.SetGeomName("geom_point")
