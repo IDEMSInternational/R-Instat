@@ -226,6 +226,8 @@ Public Class dlgMosaicPlot
 
     Private Sub cmdMosaicPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdMosaicPlotOptions.Click
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsMosaicGeomFunction, clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalAesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot, bApplyAesGlobally:=False, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.tbcLayers.SelectedTab = sdgLayerOptions.tbpGeomParameters
+        sdgLayerOptions.tbpAesthetics.Enabled = False
         sdgLayerOptions.ShowDialog()
         bResetBoxLayerSubdialog = False
         SetRCodeForControls(True)
