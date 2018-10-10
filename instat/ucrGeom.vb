@@ -964,7 +964,7 @@ Public Class ucrGeom
         'clsgeom_path.AddLayerParameter("linemitre", "numeric", "1")
         'lstAllGeoms.Add(clsgeom_path)
 
-
+        clsgeom_mosaic.SetGeomPackage("ggmosaic")
         clsgeom_mosaic.strGeomName = "geom_mosaic"
         'mandatory
         'clsgeom_mosaic.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
