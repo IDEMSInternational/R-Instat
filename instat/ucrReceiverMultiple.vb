@@ -223,14 +223,17 @@ Public Class ucrReceiverMultiple
     Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
         Dim i As Integer
-        If lstSelectedVariables.Items.Count = 1 Then
+        If lstSelectedVariables.Items.Count = 1 AndAlso Not bForceVariablesAsList Then
             If bWithQuotes Then
                 strTemp = Chr(34) & lstSelectedVariables.Items(0).Text & Chr(34)
             Else
                 strTemp = lstSelectedVariables.Items(0).Text
             End If
-        ElseIf lstSelectedVariables.Items.Count > 1 Then
-            strTemp = "c" & "("
+        ElseIf lstSelectedVariables.Items.Count > 1 OrElse bForceVariablesAsList Then
+            If strVariablesListPackageName <> "" Then
+                strTemp = strVariablesListPackageName & "::"
+            End If
+            strTemp = strTemp & strVariablesListFunctionName & "("
             For i = 0 To lstSelectedVariables.Items.Count - 1
                 If i > 0 Then
                     strTemp = strTemp & ","

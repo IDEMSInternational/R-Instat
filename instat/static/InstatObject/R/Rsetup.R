@@ -101,7 +101,8 @@ load_R_Instat_packages <- function() {
   # ggplot2 loaded for convenience
   # svglite and ggofrtify needed for View Graph dialog
   # PCICt needed to access PCICt class when importing NET cdf files
-  packs_to_load <- c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp")
+  # ggmosaic because geom_mosaic aes only work when ggmosaic is loaded
+  packs_to_load <- c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp", "ggmosaic")
   for(pack in packs_to_load) {
     try(library(pack, character.only = TRUE))
   }
