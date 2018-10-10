@@ -251,6 +251,7 @@ Partial Class frmMain
         Me.mnuClimaticCMSAFPlotRegion = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCMSAFExporttoCMSAFRToolbox = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticModelSPI = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModelsExtremes = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModelsCircular = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModelsMarkovModelling = New System.Windows.Forms.ToolStripMenuItem()
@@ -559,7 +560,6 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuClimaticModelSPI = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -766,8 +766,8 @@ Partial Class frmMain
         '
         'mnuDescribeSpecificMosaic
         '
-        resources.ApplyResources(Me.mnuDescribeSpecificMosaic, "mnuDescribeSpecificMosaic")
         Me.mnuDescribeSpecificMosaic.Name = "mnuDescribeSpecificMosaic"
+        resources.ApplyResources(Me.mnuDescribeSpecificMosaic, "mnuDescribeSpecificMosaic")
         '
         'mnuDescribeGeneral
         '
@@ -1763,6 +1763,11 @@ Partial Class frmMain
         Me.mnuClimaticModels.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticModelSPI, Me.mnuClimaticModelsExtremes, Me.mnuClimaticModelsCircular, Me.mnuClimaticModelsMarkovModelling})
         Me.mnuClimaticModels.Name = "mnuClimaticModels"
         resources.ApplyResources(Me.mnuClimaticModels, "mnuClimaticModels")
+        '
+        'mnuClimaticModelSPI
+        '
+        Me.mnuClimaticModelSPI.Name = "mnuClimaticModelSPI"
+        resources.ApplyResources(Me.mnuClimaticModelSPI, "mnuClimaticModelSPI")
         '
         'mnuClimaticModelsExtremes
         '
@@ -3591,11 +3596,6 @@ Partial Class frmMain
         Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
-        '
-        'mnuClimaticModelSPI
-        '
-        Me.mnuClimaticModelSPI.Name = "mnuClimaticModelSPI"
-        resources.ApplyResources(Me.mnuClimaticModelSPI, "mnuClimaticModelSPI")
         '
         'frmMain
         '
