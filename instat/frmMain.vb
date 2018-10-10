@@ -1603,7 +1603,7 @@ Public Class frmMain
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub mnuProcurementDescribeOneVar_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeOneVar.Click
+    Private Sub mnuProcurementDescribeCategoricalOneVarFreq_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeCategoricalOneVarFreq.Click
         Dim lstDataNames As List(Of String)
         Dim lstColumns As New List(Of String)
 
@@ -1625,7 +1625,7 @@ Public Class frmMain
         dlgOneWayFrequencies.ShowDialog()
     End Sub
 
-    Private Sub mnuProcurementDescribeTwoVar_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeTwoVar.Click
+    Private Sub mnuProcurementDescribeCategoricalTwoVarFreq_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeCategoricalTwoVarFreq.Click
         Dim lstDataNames As List(Of String)
 
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
@@ -1844,7 +1844,7 @@ Public Class frmMain
         dlgOneVariableGraph.ShowDialog()
     End Sub
 
-    Private Sub CorrelationsRedFlagsOrOthersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationsRedFlagsOrOthersToolStripMenuItem.Click
+    Private Sub CorrelationsRedFlagsOrOthersToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles CorrelationsRedFlagsOrOthersToolStripMenuItem.Click
         Dim lstDataNames As List(Of String)
         Dim strComponentColumnNames() As String
 
@@ -2038,5 +2038,21 @@ Public Class frmMain
 
     Private Sub mnuDescribeSpecificMosaic_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificMosaic.Click
         dlgMosaicPlot.ShowDialog()
+    End Sub
+
+    Private Sub BarChartsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BarChartsToolStripMenuItem.Click
+        dlgBarAndPieChart.ShowDialog()
+    End Sub
+
+    Private Sub MosaicPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MosaicPlotToolStripMenuItem.Click
+        dlgMosaicPlot.ShowDialog()
+    End Sub
+
+    Private Sub BoxplotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BoxplotToolStripMenuItem.Click
+        dlgBoxplot.ShowDialog()
+    End Sub
+
+    Private Sub HistogramToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HistogramToolStripMenuItem.Click
+        dlgHistogram.ShowDialog()
     End Sub
 End Class
