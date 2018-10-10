@@ -366,7 +366,7 @@ Public Class ucrGeomListWithParameters
 
         'Done after because aes may be added in from above
         If Not ucrChkApplyOnAllLayers.Checked AndAlso clsLocalAesFunction.iParameterCount > 0 Then
-            clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsLocalAesFunction.Clone(), iPosition:=0)
+            clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsLocalAesFunction, iPosition:=0)
         Else
             clsGeomFunction.RemoveParameterByName("mapping")
         End If
