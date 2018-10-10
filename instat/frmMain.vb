@@ -2035,4 +2035,8 @@ Public Class frmMain
     Private Sub mnuClimaticModelSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelSPI.Click
         dlgSPI.ShowDialog()
     End Sub
+
+    Private Sub mnuDescribeSpecificMosaic_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificMosaic.Click
+        dlgMosaicPlot.ShowDialog()
+    End Sub
 End Class
