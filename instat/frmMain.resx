@@ -293,9 +293,6 @@
   <data name="mnuDescribeSpecificParallelCoordinatePlot.Text" xml:space="preserve">
     <value>Parallel Coordinate Plot...</value>
   </data>
-  <data name="mnuDescribeSpecificMosaic.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuDescribeSpecificMosaic.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 22</value>
   </data>
@@ -1455,7 +1452,7 @@
     <value>Describe</value>
   </data>
   <data name="mnuClimaticPICSARainfall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>157, 22</value>
   </data>
   <data name="mnuClimaticPICSARainfall.Text" xml:space="preserve">
     <value>Rainfall Graph...</value>
@@ -1464,13 +1461,13 @@
     <value>False</value>
   </data>
   <data name="mnuClimaticPICSATemperature.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>157, 22</value>
   </data>
   <data name="mnuClimaticPICSATemperature.Text" xml:space="preserve">
     <value>Temperature...</value>
   </data>
   <data name="mnuClimaticPICSACrops.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>157, 22</value>
   </data>
   <data name="mnuClimaticPICSACrops.Text" xml:space="preserve">
     <value>Crops...</value>
@@ -6990,6 +6987,12 @@
   <data name="&gt;&gt;mnuClimaticModels.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuClimaticModelSPI.Name" xml:space="preserve">
+    <value>mnuClimaticModelSPI</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticModelSPI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuClimaticModelsExtremes.Name" xml:space="preserve">
     <value>mnuClimaticModelsExtremes</value>
   </data>
@@ -8752,12 +8755,6 @@
     <value>ExportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticModelSPI.Name" xml:space="preserve">
-    <value>mnuClimaticModelSPI</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticModelSPI.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
