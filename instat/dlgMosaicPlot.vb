@@ -39,7 +39,7 @@ Public Class dlgMosaicPlot
     Private bReset As Boolean = True
     Private bRCodeSet As Boolean = True
 
-    Private iXVarCount As Integer = 0
+    Private lstPreviousXVars As New List(Of String)
 
     Private Sub dlgMosaicPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -103,15 +103,12 @@ Public Class dlgMosaicPlot
         dctPartitionOptions.Add("Alternate (Horizontal first)", "ggmosaic::mosaic(" & Chr(34) & "h” & Chr(34) & ")")
         dctPartitionOptions.Add("Alternate (Vertical first)", "ggmosaic::mosaic(" & Chr(34) & "v” & Chr(34) & ")")
         dctPartitionOptions.Add("Double Decker", "ggmosaic::ddecker()")
-        dctPartitionOptions.Add("Vspine", Chr(34) & "vspine" & Chr(34))
-        dctPartitionOptions.Add("Hspine", Chr(34) & "hspine" & Chr(34))
-        dctPartitionOptions.Add("Hbar", Chr(34) & "hbar" & Chr(34))
-
 
         ucrInputPartitioning.SetParameter(New RParameter("divider", 5))
         ucrInputPartitioning.SetItems(dctPartitionOptions)
         ucrInputPartitioning.SetDropDownStyleAsNonEditable()
         ucrInputPartitioning.SetRDefault("ggmosaic::mosaic(" & Chr(34) & "h” & Chr(34) & ")")
+        ucrInputPartitioning.bAllowNonConditionValues = True
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 4))
         ucrChkOmitMissing.SetText("Omit Missing Values")
@@ -233,6 +230,7 @@ Public Class dlgMosaicPlot
         sdgLayerOptions.tbcLayers.SelectedTab = sdgLayerOptions.tbpGeomParameters
         sdgLayerOptions.tbpAesthetics.Enabled = False
         sdgLayerOptions.ShowDialog()
+        sdgLayerOptions.tbpAesthetics.Enabled = True
         bResetBoxLayerSubdialog = False
         SetRCodeForControls(False)
     End Sub
@@ -242,14 +240,24 @@ Public Class dlgMosaicPlot
     End Sub
 
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
-        If iXVarCount = 0 AndAlso ucrReceiverX.lstSelectedVariables.Items.Count >= 1 AndAlso ucrReceiverFill.IsEmpty() Then
-            ucrReceiverFill.Add(ucrReceiverX.lstSelectedVariables.Items(0).Text)
-            ucrReceiverX.SetMeAsReceiver()
-        ElseIf ucrReceiverX.IsEmpty Then
-            ucrReceiverFill.Clear()
-            ucrReceiverX.SetMeAsReceiver()
+        Dim iXVarCount As Integer
+
+
+        iXVarCount = lstPreviousXVars.Count
+        If bRCodeSet Then
+            If lstPreviousXVars.Contains(ucrReceiverFill.GetVariableNames(False)) AndAlso Not ucrReceiverX.GetVariableNamesAsList().Contains(ucrReceiverFill.GetVariableNames(False)) Then
+                ucrReceiverFill.Clear()
+                ucrReceiverX.SetMeAsReceiver()
+            End If
+            If iXVarCount = 0 AndAlso ucrReceiverX.lstSelectedVariables.Items.Count >= 1 AndAlso ucrReceiverFill.IsEmpty() Then
+                ucrReceiverFill.Add(ucrReceiverX.lstSelectedVariables.Items(0).Text)
+                ucrReceiverX.SetMeAsReceiver()
+            ElseIf ucrReceiverX.IsEmpty Then
+                ucrReceiverFill.Clear()
+                ucrReceiverX.SetMeAsReceiver()
+            End If
+            lstPreviousXVars = ucrReceiverX.GetVariableNamesAsList()
         End If
-        iXVarCount = ucrReceiverX.GetCount()
     End Sub
 
     Private Sub AddRemoveXAxisTextParameters()
