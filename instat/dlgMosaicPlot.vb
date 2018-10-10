@@ -103,6 +103,10 @@ Public Class dlgMosaicPlot
         dctPartitionOptions.Add("Alternate (Horizontal first)", "ggmosaic::mosaic(" & Chr(34) & "h” & Chr(34) & ")")
         dctPartitionOptions.Add("Alternate (Vertical first)", "ggmosaic::mosaic(" & Chr(34) & "v” & Chr(34) & ")")
         dctPartitionOptions.Add("Double Decker", "ggmosaic::ddecker()")
+        dctPartitionOptions.Add("Vspine", Chr(34) & "vspine" & Chr(34))
+        dctPartitionOptions.Add("Hspine", Chr(34) & "hspine" & Chr(34))
+        dctPartitionOptions.Add("Hbar", Chr(34) & "hbar" & Chr(34))
+
 
         ucrInputPartitioning.SetParameter(New RParameter("divider", 5))
         ucrInputPartitioning.SetItems(dctPartitionOptions)
