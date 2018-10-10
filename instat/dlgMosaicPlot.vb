@@ -228,7 +228,7 @@ Public Class dlgMosaicPlot
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsMosaicGeomFunction, clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalAesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot, bApplyAesGlobally:=False, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetBoxLayerSubdialog = False
-        SetRCodeForControls(False)
+        SetRCodeForControls(True)
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveMosaicPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrChkXAxisLabelAngle.ControlContentsChanged, ucrNudXAxisLabelsAngle.ControlContentsChanged
