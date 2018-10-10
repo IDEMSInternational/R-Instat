@@ -121,7 +121,7 @@ Public Class dlgTwoWayFrequencies
         ucrChkFlip.SetRDefault("FALSE")
 
         ucrChkFacetGrid.SetParameter(New RParameter("facet.grid", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkFacetGrid.SetText("Include Facets")
+        ucrChkFacetGrid.SetText("Facet by Column Factor")
 
         'Setting ucrPnlFreqDisplay
         ucrPnlFreqDisplay.AddRadioButton(rdoTable)
