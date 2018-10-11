@@ -506,7 +506,15 @@ Partial Class frmMain
         Me.ToolStripSeparator44 = New System.Windows.Forms.ToolStripSeparator()
         Me.CategoricalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeCategoricalOneVarFreq = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeCategoricalTwoVarFreq = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator52 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BarChartsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MosaicPlotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NumericToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BoxplotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HistogramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator53 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CorrelationsRedFlagsOrOthersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MappingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MapCountryValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementModel = New System.Windows.Forms.ToolStripMenuItem()
@@ -560,14 +568,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuProcurementDescribeCategoricalTwoVarFreq = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CorrelationsRedFlagsOrOthersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BarChartsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MosaicPlotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BoxplotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator52 = New System.Windows.Forms.ToolStripSeparator()
-        Me.HistogramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator53 = New System.Windows.Forms.ToolStripSeparator()
+        Me.OpenFromLibraryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3160,7 +3161,7 @@ Partial Class frmMain
         '
         'mnuProcurement
         '
-        Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDefineData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.MappingToolStripMenuItem, Me.mnuProcurementModel, Me.ToolStripSeparator45, Me.mnuProcurementDefineRedFlags, Me.mnuProcurementUseCRI})
+        Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenFromLibraryToolStripMenuItem, Me.mnuProcurementDefineData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.MappingToolStripMenuItem, Me.mnuProcurementModel, Me.ToolStripSeparator45, Me.mnuProcurementDefineRedFlags, Me.mnuProcurementUseCRI})
         Me.mnuProcurement.Name = "mnuProcurement"
         resources.ApplyResources(Me.mnuProcurement, "mnuProcurement")
         '
@@ -3257,11 +3258,51 @@ Partial Class frmMain
         Me.mnuProcurementDescribeCategoricalOneVarFreq.Name = "mnuProcurementDescribeCategoricalOneVarFreq"
         resources.ApplyResources(Me.mnuProcurementDescribeCategoricalOneVarFreq, "mnuProcurementDescribeCategoricalOneVarFreq")
         '
+        'mnuProcurementDescribeCategoricalTwoVarFreq
+        '
+        Me.mnuProcurementDescribeCategoricalTwoVarFreq.Name = "mnuProcurementDescribeCategoricalTwoVarFreq"
+        resources.ApplyResources(Me.mnuProcurementDescribeCategoricalTwoVarFreq, "mnuProcurementDescribeCategoricalTwoVarFreq")
+        '
+        'ToolStripSeparator52
+        '
+        Me.ToolStripSeparator52.Name = "ToolStripSeparator52"
+        resources.ApplyResources(Me.ToolStripSeparator52, "ToolStripSeparator52")
+        '
+        'BarChartsToolStripMenuItem
+        '
+        Me.BarChartsToolStripMenuItem.Name = "BarChartsToolStripMenuItem"
+        resources.ApplyResources(Me.BarChartsToolStripMenuItem, "BarChartsToolStripMenuItem")
+        '
+        'MosaicPlotToolStripMenuItem
+        '
+        Me.MosaicPlotToolStripMenuItem.Name = "MosaicPlotToolStripMenuItem"
+        resources.ApplyResources(Me.MosaicPlotToolStripMenuItem, "MosaicPlotToolStripMenuItem")
+        '
         'NumericToolStripMenuItem
         '
         Me.NumericToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BoxplotToolStripMenuItem, Me.HistogramToolStripMenuItem, Me.ToolStripSeparator53, Me.CorrelationsRedFlagsOrOthersToolStripMenuItem})
         Me.NumericToolStripMenuItem.Name = "NumericToolStripMenuItem"
         resources.ApplyResources(Me.NumericToolStripMenuItem, "NumericToolStripMenuItem")
+        '
+        'BoxplotToolStripMenuItem
+        '
+        Me.BoxplotToolStripMenuItem.Name = "BoxplotToolStripMenuItem"
+        resources.ApplyResources(Me.BoxplotToolStripMenuItem, "BoxplotToolStripMenuItem")
+        '
+        'HistogramToolStripMenuItem
+        '
+        Me.HistogramToolStripMenuItem.Name = "HistogramToolStripMenuItem"
+        resources.ApplyResources(Me.HistogramToolStripMenuItem, "HistogramToolStripMenuItem")
+        '
+        'ToolStripSeparator53
+        '
+        Me.ToolStripSeparator53.Name = "ToolStripSeparator53"
+        resources.ApplyResources(Me.ToolStripSeparator53, "ToolStripSeparator53")
+        '
+        'CorrelationsRedFlagsOrOthersToolStripMenuItem
+        '
+        Me.CorrelationsRedFlagsOrOthersToolStripMenuItem.Name = "CorrelationsRedFlagsOrOthersToolStripMenuItem"
+        resources.ApplyResources(Me.CorrelationsRedFlagsOrOthersToolStripMenuItem, "CorrelationsRedFlagsOrOthersToolStripMenuItem")
         '
         'MappingToolStripMenuItem
         '
@@ -3607,45 +3648,10 @@ Partial Class frmMain
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
         '
-        'mnuProcurementDescribeCategoricalTwoVarFreq
+        'OpenFromLibraryToolStripMenuItem
         '
-        Me.mnuProcurementDescribeCategoricalTwoVarFreq.Name = "mnuProcurementDescribeCategoricalTwoVarFreq"
-        resources.ApplyResources(Me.mnuProcurementDescribeCategoricalTwoVarFreq, "mnuProcurementDescribeCategoricalTwoVarFreq")
-        '
-        'CorrelationsRedFlagsOrOthersToolStripMenuItem
-        '
-        Me.CorrelationsRedFlagsOrOthersToolStripMenuItem.Name = "CorrelationsRedFlagsOrOthersToolStripMenuItem"
-        resources.ApplyResources(Me.CorrelationsRedFlagsOrOthersToolStripMenuItem, "CorrelationsRedFlagsOrOthersToolStripMenuItem")
-        '
-        'BarChartsToolStripMenuItem
-        '
-        Me.BarChartsToolStripMenuItem.Name = "BarChartsToolStripMenuItem"
-        resources.ApplyResources(Me.BarChartsToolStripMenuItem, "BarChartsToolStripMenuItem")
-        '
-        'MosaicPlotToolStripMenuItem
-        '
-        Me.MosaicPlotToolStripMenuItem.Name = "MosaicPlotToolStripMenuItem"
-        resources.ApplyResources(Me.MosaicPlotToolStripMenuItem, "MosaicPlotToolStripMenuItem")
-        '
-        'BoxplotToolStripMenuItem
-        '
-        Me.BoxplotToolStripMenuItem.Name = "BoxplotToolStripMenuItem"
-        resources.ApplyResources(Me.BoxplotToolStripMenuItem, "BoxplotToolStripMenuItem")
-        '
-        'ToolStripSeparator52
-        '
-        Me.ToolStripSeparator52.Name = "ToolStripSeparator52"
-        resources.ApplyResources(Me.ToolStripSeparator52, "ToolStripSeparator52")
-        '
-        'HistogramToolStripMenuItem
-        '
-        Me.HistogramToolStripMenuItem.Name = "HistogramToolStripMenuItem"
-        resources.ApplyResources(Me.HistogramToolStripMenuItem, "HistogramToolStripMenuItem")
-        '
-        'ToolStripSeparator53
-        '
-        Me.ToolStripSeparator53.Name = "ToolStripSeparator53"
-        resources.ApplyResources(Me.ToolStripSeparator53, "ToolStripSeparator53")
+        Me.OpenFromLibraryToolStripMenuItem.Name = "OpenFromLibraryToolStripMenuItem"
+        resources.ApplyResources(Me.OpenFromLibraryToolStripMenuItem, "OpenFromLibraryToolStripMenuItem")
         '
         'frmMain
         '
@@ -4220,4 +4226,5 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator52 As ToolStripSeparator
     Friend WithEvents HistogramToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator53 As ToolStripSeparator
+    Friend WithEvents OpenFromLibraryToolStripMenuItem As ToolStripMenuItem
 End Class
