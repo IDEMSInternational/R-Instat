@@ -502,7 +502,7 @@ Public Class dlgEndOfRainsSeason
         clsWaterBalanceList.AddParameter("sub1", clsRFunctionParameter:=clsWBFirstWaterBalanceMin, iPosition:=0, bIncludeArgumentName:=False)
         clsWaterBalanceList.AddParameter("sub2", clsRFunctionParameter:=clsDifference, iPosition:=1, bIncludeArgumentName:=False)
         clsWaterBalance.AddParameter("save", "2", iPosition:=6)
-        clsWaterBalance.SetAssignTo("water_balance")
+        clsWaterBalance.SetAssignTo("water_balance_calculation")
 
         ' End of Rains
         clsRollingSumFunction.bToScriptAsRString = True
