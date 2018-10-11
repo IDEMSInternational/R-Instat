@@ -2055,4 +2055,11 @@ Public Class frmMain
     Private Sub HistogramToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HistogramToolStripMenuItem.Click
         dlgHistogram.ShowDialog()
     End Sub
+
+    Private Sub OpenFromLibraryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenFromLibraryToolStripMenuItem.Click
+        dlgImportDataset.strFileToOpenOn = ""
+        dlgImportDataset.bStartOpenDialog = True
+        dlgImportDataset.bFromLibrary = True
+        dlgImportDataset.ShowDialog()
+    End Sub
 End Class
