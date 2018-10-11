@@ -65,6 +65,10 @@ Public Class ucrReceiver
     ' for ExtractItemsFromRList()
     Protected strVariablesListPackageName As String = ""
     Protected strVariablesListFunctionName As String = "c"
+    ' Set to True if GetVariableNames() should always return an R list (using function above)
+    ' Even when only one variable.
+    ' Currently only implemented for multiple receiver.
+    Public bForceVariablesAsList As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
