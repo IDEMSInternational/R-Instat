@@ -127,7 +127,6 @@ Public Class dlgTransformClimatic
         ucrReceiverEvap.strSelectorHeading = "Numerics"
         ucrReceiverEvap.SetIncludedDataTypes({"numeric"})
 
-        ucrChkGroupByYear.SetParameter(New RParameter("group_by_year", strParamValue:=clsGroupByYear, bNewIncludeArgumentName:=False), False)
         ucrChkGroupByYear.SetText("Calculate by Year")
 
         'Cumulative
@@ -221,6 +220,7 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls(ucrNudMultSpells, {rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=21)
         ucrPnlTransform.AddToLinkedControls(ucrPnlEvap, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls(ucrNudWBCapacity, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
+        ucrPnlTransform.AddToLinkedControls(ucrChkGroupByYear, {rdoCount, rdoMoving, rdoSpell, rdoMultSpells, rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkCircular.AddToLinkedControls(ucrInputCircularPosition, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkCircular.AddToLinkedControls(ucrInputPosition, {False}, bNewLinkedHideIfParameterMissing:=True)
@@ -374,7 +374,7 @@ Public Class dlgTransformClimatic
         clsRTransformCountSpellSub.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False, iPosition:=0)
 
         clsTransformManipulationsFunc.SetRCommand("list")
-        'clsTransformManipulationsFunc.AddParameter("group_by_year", clsRFunctionParameter:=clsGroupByYear, bIncludeArgumentName:=False, iPosition:=0)
+        clsTransformManipulationsFunc.AddParameter("group_by_year", clsRFunctionParameter:=clsGroupByYear, bIncludeArgumentName:=False, iPosition:=0)
 
         clsRTransform.SetRCommand("instat_calculation$new")
         clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
@@ -411,7 +411,6 @@ Public Class dlgTransformClimatic
         ucrInputSum.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("fun", 2), iAdditionalPairNo:=1)
 
         ucrPnlTransform.SetRCode(clsTransformCheck, bReset)
-        ucrChkGroupByYear.SetRCode(clsTransformManipulationsFunc, bReset)
 
         ' Moving
         ucrNudSumOver.SetRCode(clsRMovingFunction, bReset)
@@ -514,6 +513,7 @@ Public Class dlgTransformClimatic
         Evaporation()
         AddCalculate()
         SetAssignName()
+        GroupByYear()
     End Sub
 
     Private Sub SetAssignName()
@@ -550,17 +550,28 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub GroupByYear()
-        If ucrChkGroupByYear.Enabled = True AndAlso ucrChkGroupByYear.Checked() Then
-            clsGroupByYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")", iPosition:=3)
+        If (rdoCount.Checked OrElse rdoMoving.Checked OrElse rdoSpell.Checked OrElse rdoMultSpells.Checked OrElse rdoWaterBalance.Checked) AndAlso Not ucrReceiverYear.IsEmpty Then
+            If ucrChkGroupByYear.Enabled = True AndAlso ucrChkGroupByYear.Checked() Then
+                clsGroupByYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")", iPosition:=3)
+                clsTransformManipulationsFunc.AddParameter("group_by_year", clsRFunctionParameter:=clsGroupByYear, bIncludeArgumentName:=False, iPosition:=0)
+            Else
+                clsGroupByYear.RemoveParameterByName("calculated_from")
+                clsTransformManipulationsFunc.RemoveParameterByName("group_by_year")
+            End If
         Else
-            clsGroupByYear.RemoveParameterByName("calculated_from")
+            If rdoCumulative.Checked AndAlso Not ucrReceiverYear.IsEmpty Then
+                clsGroupByYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")", iPosition:=3)
+                clsTransformManipulationsFunc.AddParameter("group_by_year", clsRFunctionParameter:=clsGroupByYear, bIncludeArgumentName:=False, iPosition:=0)
+            Else
+                clsGroupByYear.RemoveParameterByName("calculated_from")
+                clsTransformManipulationsFunc.RemoveParameterByName("group_by_year")
+            End If
         End If
     End Sub
 
     Private Sub CheckGroupByYearEnabled()
         If Not ucrReceiverYear.IsEmpty Then
             ucrChkGroupByYear.Enabled = True
-            ucrChkGroupByYear.Checked = True
         Else
             ucrChkGroupByYear.Enabled = False
             ucrChkGroupByYear.Checked = False
