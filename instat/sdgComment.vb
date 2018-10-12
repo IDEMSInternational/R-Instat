@@ -14,12 +14,18 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat.Translations
 
 Public Class sdgComment
+    Public Event evtLostFocus()
 
     Private Sub sdgComment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
+        txtComment.Focus()
+    End Sub
+
+    Private Sub txtComment_KeyDown(sender As Object, e As KeyEventArgs) Handles txtComment.KeyDown
+        If e.Control AndAlso e.KeyCode = Keys.Enter Then
+            Me.Close()
+        End If
     End Sub
 
     Public Sub setComment(strNewComment As String)
@@ -30,4 +36,7 @@ Public Class sdgComment
         Return txtComment.Text
     End Function
 
+    Private Sub txtComment_LostFocus(sender As Object, e As EventArgs) Handles txtComment.LostFocus
+        RaiseEvent evtLostFocus()
+    End Sub
 End Class
