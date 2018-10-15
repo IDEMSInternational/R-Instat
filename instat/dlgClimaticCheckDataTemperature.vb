@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 Imports instat.Translations
 Public Class dlgClimaticCheckDataTemperature
     Private bFirstload As Boolean = True
@@ -54,6 +55,7 @@ Public Class dlgClimaticCheckDataTemperature
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
+        DifferenceEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -604,6 +606,15 @@ Public Class dlgClimaticCheckDataTemperature
         End If
     End Sub
 
+    Private Sub DifferenceEnabled()
+        If Not ucrReceiverElement1.IsEmpty AndAlso Not ucrReceiverElement2.IsEmpty Then
+            ucrChkDifference.Enabled = True
+        Else
+            ucrChkDifference.Enabled = False
+            ucrChkDifference.Checked = False
+        End If
+    End Sub
+
     Private Sub ucrReceiverMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMonth.ControlValueChanged, ucrReceiverElement1.ControlValueChanged, ucrReceiverElement2.ControlValueChanged
         GroupByMonth()
     End Sub
@@ -618,9 +629,14 @@ Public Class dlgClimaticCheckDataTemperature
 
     Private Sub ucrReceiverElement1_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlValueChanged, ucrReceiverElement2.ControlValueChanged
         FilterFunc()
+        DifferenceEnabled()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlContentsChanged, ucrReceiverElement2.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudRangeElement1Min.ControlContentsChanged, ucrNudRangeElement1Max.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudJump.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudDifference.ControlContentsChanged, ucrChkRangeElement1.ControlContentsChanged, ucrChkRangeElement2.ControlContentsChanged, ucrChkJump.ControlContentsChanged, ucrChkDifference.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkDifference_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDifference.ControlValueChanged
+        DifferenceEnabled()
     End Sub
 End Class
