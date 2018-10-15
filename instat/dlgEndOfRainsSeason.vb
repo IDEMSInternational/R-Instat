@@ -478,7 +478,7 @@ Public Class dlgEndOfRainsSeason
         clsDifference.AddParameter("function_exp", clsROperatorParameter:=clsDifferenceOperation, iPosition:=1)
         clsDifference.AddParameter("result_name", Chr(34) & strDifference & Chr(34), iPosition:=2)
         clsDifference.AddParameter("sub_calculations", clsRFunctionParameter:=clsDifferenceList, iPosition:=4)
-        clsDifference.SetAssignTo(strDifference)
+        clsDifference.SetAssignTo("difference_calculation")
 
         clsDifferenceOperation.SetOperation("-")
         clsDifferenceOperation.AddParameter("left", strFirstWaterBalanceMin, iPosition:=0)
@@ -901,7 +901,6 @@ Public Class dlgEndOfRainsSeason
         clsDayFilterCalcFromList.ClearParameters()
     End Sub
 
-
     Private Sub ucrPnlEvaporation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvaporation.ControlValueChanged, ucrReceiverEvaporation.ControlValueChanged, ucrInputEvaporation.ControlValueChanged, ucrInputReplaceNA.ControlValueChanged
         Evaporation()
     End Sub
@@ -986,7 +985,7 @@ Public Class dlgEndOfRainsSeason
 
     Private Sub ucrChkEndofSeasonOccurence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofSeasonOccurence.ControlValueChanged, ucrChkEndOfSeason.ControlValueChanged
         If ucrChkEndOfSeason.Checked Then
-            clsListManipulations.AddParameter("manip3", clsRFunctionParameter:=clsEndOfSeasonFilter, bIncludeArgumentName:=False, iPosition:=2)
+            'clsListManipulations.AddParameter("manip3", clsRFunctionParameter:=clsEndOfSeasonFilter, bIncludeArgumentName:=False, iPosition:=2)
             clsSubCalcList.AddParameter("sub3", clsRFunctionParameter:=clsEOSEndFunction, bIncludeArgumentName:=False, iPosition:=2)
             If ucrChkEndofSeasonOccurence.Checked Then
                 clsSubCalcList.AddParameter("sub4", clsRFunctionParameter:=clsEOSStatusFunction, bIncludeArgumentName:=False, iPosition:=3)
