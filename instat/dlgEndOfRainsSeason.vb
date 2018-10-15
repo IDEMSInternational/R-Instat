@@ -768,24 +768,33 @@ Public Class dlgEndOfRainsSeason
     Private Sub TestOKEnabled()
         Dim bOkEnabled As Boolean
         If ucrChkEndOfRains.Checked Then
-            If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudAmount.GetText <> "" AndAlso ucrNudTotalOverDays.GetText <> "" AndAlso ucrChkEndofRainsDoy.Checked OrElse ucrChkEndofRainsDate.Checked OrElse ucrChkEndofRainsOccurence.Checked Then
+            If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudAmount.GetText <> "" AndAlso ucrNudTotalOverDays.GetText <> "" AndAlso ucrChkEndofRainsDoy.Checked Then
                 bOkEnabled = True
             Else
                 bOkEnabled = False
+                ucrBase.OKEnabled(bOkEnabled)
+                Exit Sub
             End If
             If ucrChkEndofRainsDoy.Checked AndAlso ucrInputEndRainDoy.IsEmpty Then
                 bOkEnabled = False
+                ucrBase.OKEnabled(bOkEnabled)
+                Exit Sub
             ElseIf ucrChkEndofRainsDate.Checked AndAlso ucrInputEndofRainsDate.IsEmpty Then
                 bOkEnabled = False
+                ucrBase.OKEnabled(bOkEnabled)
+                Exit Sub
             ElseIf ucrChkEndofRainsOccurence.Checked AndAlso ucrInputEndofRainsOccurence.IsEmpty Then
                 bOkEnabled = False
+                ucrBase.OKEnabled(bOkEnabled)
+                Exit Sub
             End If
-        ElseIf ucrChkEndOfSeason.Checked Then
-            If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudCapacity.GetText <> "" AndAlso ucrNudWBLessThan.GetText <> "" AndAlso ucrChkEndofSeasonDoy.Checked Then
-                bOkEnabled = True
-            Else
-                bOkEnabled = False
-            End If
+        End If
+        If ucrChkEndOfSeason.Checked Then
+                If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudCapacity.GetText <> "" AndAlso ucrNudWBLessThan.GetText <> "" AndAlso ucrChkEndofSeasonDoy.Checked Then
+                    bOkEnabled = True
+                Else
+                    bOkEnabled = False
+                End If
             If ucrChkEndofSeasonDoy.Checked AndAlso ucrInputSeasonDoy.IsEmpty Then
                 bOkEnabled = False
             ElseIf rdoValueEvaporation.Checked AndAlso ucrInputEvaporation.IsEmpty Then
@@ -793,8 +802,6 @@ Public Class dlgEndOfRainsSeason
             ElseIf rdoVariableEvaporation.Checked AndAlso ucrReceiverEvaporation.IsEmpty OrElse ucrInputReplaceNA.IsEmpty Then
                 bOkEnabled = False
             End If
-        Else
-            bOkEnabled = False
         End If
         ucrBase.OKEnabled(bOkEnabled)
     End Sub
