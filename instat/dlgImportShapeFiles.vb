@@ -25,6 +25,7 @@ Public Class dlgImportShapeFiles
     Private clsPipeOperator As New ROperator
     Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath, "Library", "Climatic", "Shapefiles/")
     Private clsReadShapeFiles As New RFunction
+    Private clsDummyRcode As New RCodeStructure
     Private clsMutateFunction, clsMapdblFunction, clsMapdbl2Function, clsStCentroidFunction As New RFunction
 
     Private Sub dlgImportShapeFiles_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -51,6 +52,10 @@ Public Class dlgImportShapeFiles
         ucrSaveDataframeName.SetIsTextBox()
         ucrSaveDataframeName.SetLabelText("Dataframe Name:")
 
+        ucrChkSplitGeometry.SetText("Split Geometry")
+        ucrChkSplitGeometry.AddParameterPresentCondition(True, "mutate")
+        ucrChkSplitGeometry.AddParameterPresentCondition(False, "mutate", False)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -62,8 +67,7 @@ Public Class dlgImportShapeFiles
         clsPipeOperator = New ROperator
 
         ucrSaveDataframeName.SetName("")
-
-
+        ucrInputFilePath.SetName("")
 
         clsReadShapeFiles.SetPackageName("sf")
         clsReadShapeFiles.SetRCommand("st_read")
@@ -91,7 +95,7 @@ Public Class dlgImportShapeFiles
         clsPipeOperator.AddParameter("st_read", clsRFunctionParameter:=clsReadShapeFiles, bIncludeArgumentName:=False, iPosition:=0)
         clsPipeOperator.AddParameter("mutate", clsRFunctionParameter:=clsMutateFunction, bIncludeArgumentName:=False, iPosition:=1)
 
-
+        clsDummyRcode = clsPipeOperator
         ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
     End Sub
 
@@ -129,7 +133,8 @@ Public Class dlgImportShapeFiles
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSaveDataframeName.SetRCode(clsPipeOperator, bReset)
+        ucrSaveDataframeName.SetRCode(clsDummyRcode, bReset)
+        ucrChkSplitGeometry.SetRCode(clsDummyRcode, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -159,5 +164,18 @@ Public Class dlgImportShapeFiles
 
     Private Sub ucrInputFilePath_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged, ucrSaveDataframeName.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkSplitGeometry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSplitGeometry.ControlValueChanged
+        If ucrChkSplitGeometry.Checked Then
+            clsDummyRcode = clsPipeOperator
+            ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
+            clsReadShapeFiles.RemoveAssignTo()
+        Else
+            clsDummyRcode = clsReadShapeFiles
+            ucrBase.clsRsyntax.SetBaseRFunction(clsReadShapeFiles)
+            clsPipeOperator.RemoveAssignTo()
+        End If
+        ucrSaveDataframeName.SetRCode(clsDummyRcode)
     End Sub
 End Class
