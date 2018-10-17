@@ -72,20 +72,20 @@ Public Class dlgExportToCPT
         ucrReceiverLatitude.SetParameter(New RParameter("latitude"))
         ucrReceiverLatitude.SetParameterIsString()
         ucrReceiverLatitude.SetLinkedDisplayControl(lblLatitude)
-        ucrReceiverLatitude.SetClimaticType("latitude")
+        ' ucrReceiverLatitude.SetClimaticType("latitude")
         ucrReceiverLatitude.bAutoFill = True
 
         ucrReceiverLongitude.SetParameter(New RParameter("longitude"))
         ucrReceiverLongitude.SetParameterIsString()
         ucrReceiverLongitude.SetLinkedDisplayControl(lblLongitude)
-        ucrReceiverLongitude.SetClimaticType("longitude")
+        ' ucrReceiverLongitude.SetClimaticType("longitude")
         ucrReceiverLongitude.bAutoFill = True
 
         ucrReceiverStationTwoDF.Selector = ucrSelectorTwoDF
         ucrReceiverStationTwoDF.SetParameter(New RParameter("station_latlondata"))
         ucrReceiverStationTwoDF.SetParameterIsString()
         ucrReceiverStationTwoDF.strSelectorHeading = "Numerics"
-        ucrReceiverStationTwoDF.SetClimaticType("station")
+        'ucrReceiverStationTwoDF.SetClimaticType("station")
         ucrReceiverStationTwoDF.bAutoFill = True
 
         ucrInputFilePath.SetParameter(New RParameter("file", 0))
