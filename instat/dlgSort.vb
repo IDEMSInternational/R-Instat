@@ -38,7 +38,6 @@ Public Class dlgSort
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        Reopen()
         If bUseSelectedColumn Then
             SetDefaultColumn()
         End If
@@ -92,6 +91,7 @@ Public Class dlgSort
     End Sub
 
     Private Sub SetDefaultColumn()
+        ClearReceiver
         ucrSelectForSort.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
         ucrReceiverSort.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
@@ -121,7 +121,7 @@ Public Class dlgSort
         TestOKEnabled()
     End Sub
 
-    Private Sub Reopen()
+    Private Sub ClearReceiver()
         ucrReceiverSort.Clear()
     End Sub
 
