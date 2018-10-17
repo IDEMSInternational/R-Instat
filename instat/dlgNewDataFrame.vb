@@ -112,6 +112,7 @@ Public Class dlgNewDataFrame
             'validate the datagrid rows 
             ucrBase.OKEnabled(False)
             If ucrNewDFName.IsComplete Then
+                Dim bValid As Boolean = True
                 Dim lstUserColumnNames As New List(Of String)
                 Dim inputValidation As New ucrInput 'temporarily use validation functions for ucrInput
                 inputValidation.SetValidationTypeAsRVariable()
@@ -125,7 +126,8 @@ Public Class dlgNewDataFrame
                         If Not inputValidation.ValidateText(row.Cells("colName").Value) Then
                             row.Cells("colName").Style.BackColor = Color.Red
                             ucrBase.OKEnabled(False)
-                            Exit For ' if not valid text then exit for
+                            'Exit For ' if not valid text then exit for
+                            bValid = False
                         End If
 
                         'check for duplicates
@@ -133,7 +135,8 @@ Public Class dlgNewDataFrame
                             row.Cells("colName").Style.BackColor = Color.Yellow
                             ucrBase.OKEnabled(False)
                             MessageBox.Show(Me, "Duplicate column names are not allowed", "Construct", MessageBoxButtons.OK)
-                            Exit For
+                            'Exit For
+                            bValid = False
                         Else
                             lstUserColumnNames.Add(row.Cells("colName").Value)
                         End If
@@ -143,20 +146,25 @@ Public Class dlgNewDataFrame
                     If Not String.IsNullOrEmpty(row.Cells("colName").Value) AndAlso String.IsNullOrEmpty(row.Cells("colExpression").Value) Then
                         row.Cells("colExpression").Style.BackColor = Color.Yellow
                         ucrBase.OKEnabled(False)
-                        Exit For
+                        'Exit For
+                        bValid = False
                     End If
 
                     'disable if expression is there but column name is not 
                     If String.IsNullOrEmpty(row.Cells("colName").Value) AndAlso Not String.IsNullOrEmpty(row.Cells("colExpression").Value) Then
                         row.Cells("colName").Style.BackColor = Color.Yellow
                         ucrBase.OKEnabled(False)
-                        Exit For
+                        'Exit For
+                        bValid = False
                     End If
 
-                    'if both the column name and expression exist then enable
-                    If Not String.IsNullOrEmpty(row.Cells("colName").Value) AndAlso Not String.IsNullOrEmpty(row.Cells("colExpression").Value) Then
-                        ucrBase.OKEnabled(True)
+                    If bValid Then
+                        'if both the column name and expression exist then enable
+                        If Not String.IsNullOrEmpty(row.Cells("colName").Value) AndAlso Not String.IsNullOrEmpty(row.Cells("colExpression").Value) Then
+                            ucrBase.OKEnabled(True)
+                        End If
                     End If
+
                 Next
             End If
         ElseIf rdoCommand.Checked Then
