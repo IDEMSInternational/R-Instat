@@ -38,6 +38,7 @@ Public Class dlgSort
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        Reopen()
         If bUseSelectedColumn Then
             SetDefaultColumn()
         End If
@@ -119,4 +120,9 @@ Public Class dlgSort
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSort.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Private Sub Reopen()
+        ucrReceiverSort.Clear()
+    End Sub
+
 End Class
