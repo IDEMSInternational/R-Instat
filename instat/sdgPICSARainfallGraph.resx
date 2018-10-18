@@ -148,7 +148,7 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;lblYInStepsOf.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="lblYFrom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -178,7 +178,7 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;lblYFrom.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="lblYTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -208,7 +208,7 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;lblYTo.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="lblXTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -300,34 +300,34 @@
   <data name="&gt;&gt;lblXInStepsOf.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblYAxisTitleSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblYAxisTitleSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblYAxisTitleSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 82</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblYAxisTitleSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
   </data>
-  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblYAxisTitleSize.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
+  <data name="lblYAxisTitleSize.Text" xml:space="preserve">
     <value>Size:</value>
   </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
+  <data name="&gt;&gt;lblYAxisTitleSize.Name" xml:space="preserve">
+    <value>lblYAxisTitleSize</value>
   </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblYAxisTitleSize.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblYAxisTitleSize.Parent" xml:space="preserve">
     <value>grpyAxisTitle</value>
   </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblYAxisTitleSize.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="rdoAutoYAxis.AutoSize" type="System.Boolean, mscorlib">
@@ -1072,10 +1072,10 @@
     <value>0</value>
   </data>
   <data name="ucrChkXAxisLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 57</value>
+    <value>162, 57</value>
   </data>
   <data name="ucrChkXAxisLabelSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>75, 20</value>
   </data>
   <data name="ucrChkXAxisLabelSize.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -1096,7 +1096,7 @@
     <value>6, 57</value>
   </data>
   <data name="ucrChkXAxisAngle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>75, 20</value>
   </data>
   <data name="ucrChkXAxisAngle.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -1177,7 +1177,7 @@
     <value>5</value>
   </data>
   <data name="ucrNudXaxisLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>357, 57</value>
+    <value>241, 57</value>
   </data>
   <data name="ucrNudXaxisLabelSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1219,7 +1219,7 @@
     <value>7</value>
   </data>
   <data name="ucrNudXAxisAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 57</value>
+    <value>86, 57</value>
   </data>
   <data name="ucrNudXAxisAngle.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1263,11 +1263,62 @@
   <data name="&gt;&gt;grpXAxisLabels.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrInputStartMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>194, 55</value>
+  </data>
+  <data name="ucrInputStartMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 21</value>
+  </data>
+  <data name="ucrInputStartMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStartMonth.Name" xml:space="preserve">
+    <value>ucrInputStartMonth</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStartMonth.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStartMonth.Parent" xml:space="preserve">
+    <value>grpYAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrInputStartMonth.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblStartMonth.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblStartMonth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblStartMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 58</value>
+  </data>
+  <data name="lblStartMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 13</value>
+  </data>
+  <data name="lblStartMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="lblStartMonth.Text" xml:space="preserve">
+    <value>Start Month:</value>
+  </data>
+  <data name="&gt;&gt;lblStartMonth.Name" xml:space="preserve">
+    <value>lblStartMonth</value>
+  </data>
+  <data name="&gt;&gt;lblStartMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStartMonth.Parent" xml:space="preserve">
+    <value>grpYAxisLabels</value>
+  </data>
+  <data name="&gt;&gt;lblStartMonth.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrNudDateBreakNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>357, 56</value>
+    <value>375, 86</value>
   </data>
   <data name="ucrNudDateBreakNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>45, 20</value>
   </data>
   <data name="ucrNudDateBreakNumber.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -1282,10 +1333,10 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrNudDateBreakNumber.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="ucrInputDateBreakTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 55</value>
+    <value>427, 85</value>
   </data>
   <data name="ucrInputDateBreakTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 21</value>
@@ -1303,10 +1354,10 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrInputDateBreakTime.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrChkSpecifyDateBreaks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 55</value>
+    <value>273, 87</value>
   </data>
   <data name="ucrChkSpecifyDateBreaks.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -1324,13 +1375,13 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrChkSpecifyDateBreaks.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="ucrInputLabelForDays.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 55</value>
+    <value>126, 85</value>
   </data>
   <data name="ucrInputLabelForDays.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 21</value>
+    <value>141, 21</value>
   </data>
   <data name="ucrInputLabelForDays.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -1345,10 +1396,10 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrInputLabelForDays.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="ucrNudYAxisAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 89</value>
+    <value>86, 123</value>
   </data>
   <data name="ucrNudYAxisAngle.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1366,7 +1417,7 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrNudYAxisAngle.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="ucrChkLabelForDays.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 55</value>
@@ -1387,13 +1438,13 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrChkLabelForDays.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="ucrChkYAxisAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 89</value>
+    <value>6, 123</value>
   </data>
   <data name="ucrChkYAxisAngle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 20</value>
+    <value>75, 20</value>
   </data>
   <data name="ucrChkYAxisAngle.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -1408,13 +1459,13 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrChkYAxisAngle.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="ucrChkYAxisLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 89</value>
+    <value>162, 123</value>
   </data>
   <data name="ucrChkYAxisLabelSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>75, 20</value>
   </data>
   <data name="ucrChkYAxisLabelSize.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -1429,7 +1480,7 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrChkYAxisLabelSize.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="ucrChkSpecifyYAxisTickMarks.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 21</value>
@@ -1450,7 +1501,7 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrChkSpecifyYAxisTickMarks.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="ucrInputYFrom.Location" type="System.Drawing.Point, System.Drawing">
     <value>160, 21</value>
@@ -1471,10 +1522,10 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrInputYFrom.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="ucrNudYAxisLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>357, 89</value>
+    <value>241, 123</value>
   </data>
   <data name="ucrNudYAxisLabelSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1492,7 +1543,7 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrNudYAxisLabelSize.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="ucrInputYTo.Location" type="System.Drawing.Point, System.Drawing">
     <value>275, 21</value>
@@ -1513,7 +1564,7 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrInputYTo.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="ucrInputYInStepsOf.Location" type="System.Drawing.Point, System.Drawing">
     <value>434, 21</value>
@@ -1534,13 +1585,13 @@
     <value>grpYAxisLabels</value>
   </data>
   <data name="&gt;&gt;ucrInputYInStepsOf.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="grpYAxisLabels.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 120</value>
   </data>
   <data name="grpYAxisLabels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 118</value>
+    <value>504, 159</value>
   </data>
   <data name="grpYAxisLabels.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -1587,8 +1638,527 @@
   <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrInputTercilesLineLabelTextUpper.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 201</value>
+  </data>
+  <data name="ucrInputTercilesLineLabelTextUpper.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputTercilesLineLabelTextUpper.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTercilesLineLabelTextUpper.Name" xml:space="preserve">
+    <value>ucrInputTercilesLineLabelTextUpper</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTercilesLineLabelTextUpper.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTercilesLineLabelTextUpper.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTercilesLineLabelTextUpper.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblTercilesLineLabelTextUpper.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTercilesLineLabelTextUpper.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblTercilesLineLabelTextUpper.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 205</value>
+  </data>
+  <data name="lblTercilesLineLabelTextUpper.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="lblTercilesLineLabelTextUpper.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="lblTercilesLineLabelTextUpper.Text" xml:space="preserve">
+    <value>Label Text (Upper):</value>
+  </data>
+  <data name="&gt;&gt;lblTercilesLineLabelTextUpper.Name" xml:space="preserve">
+    <value>lblTercilesLineLabelTextUpper</value>
+  </data>
+  <data name="&gt;&gt;lblTercilesLineLabelTextUpper.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTercilesLineLabelTextUpper.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;lblTercilesLineLabelTextUpper.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="UcrNud1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 50</value>
+  </data>
+  <data name="UcrNud1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="UcrNud1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;UcrNud1.Name" xml:space="preserve">
+    <value>UcrNud1</value>
+  </data>
+  <data name="&gt;&gt;UcrNud1.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrNud1.Parent" xml:space="preserve">
+    <value>grpLinesFormat</value>
+  </data>
+  <data name="&gt;&gt;UcrNud1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="UcrCheck1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 50</value>
+  </data>
+  <data name="UcrCheck1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 20</value>
+  </data>
+  <data name="UcrCheck1.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck1.Name" xml:space="preserve">
+    <value>UcrCheck1</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck1.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck1.Parent" xml:space="preserve">
+    <value>grpLinesFormat</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="UcrInputComboBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>312, 23</value>
+  </data>
+  <data name="UcrInputComboBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 21</value>
+  </data>
+  <data name="UcrInputComboBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;UcrInputComboBox1.Name" xml:space="preserve">
+    <value>UcrInputComboBox1</value>
+  </data>
+  <data name="&gt;&gt;UcrInputComboBox1.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrInputComboBox1.Parent" xml:space="preserve">
+    <value>grpLinesFormat</value>
+  </data>
+  <data name="&gt;&gt;UcrInputComboBox1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="UcrInputComboBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 23</value>
+  </data>
+  <data name="UcrInputComboBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 21</value>
+  </data>
+  <data name="UcrInputComboBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;UcrInputComboBox2.Name" xml:space="preserve">
+    <value>UcrInputComboBox2</value>
+  </data>
+  <data name="&gt;&gt;UcrInputComboBox2.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrInputComboBox2.Parent" xml:space="preserve">
+    <value>grpLinesFormat</value>
+  </data>
+  <data name="&gt;&gt;UcrInputComboBox2.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="UcrCheck2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 23</value>
+  </data>
+  <data name="UcrCheck2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="UcrCheck2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.Name" xml:space="preserve">
+    <value>UcrCheck2</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.Parent" xml:space="preserve">
+    <value>grpLinesFormat</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="UcrCheck3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 23</value>
+  </data>
+  <data name="UcrCheck3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="UcrCheck3.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.Name" xml:space="preserve">
+    <value>UcrCheck3</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.Parent" xml:space="preserve">
+    <value>grpLinesFormat</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="grpLinesFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 230</value>
+  </data>
+  <data name="grpLinesFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>487, 122</value>
+  </data>
+  <data name="grpLinesFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="grpLinesFormat.Text" xml:space="preserve">
+    <value>Line Format</value>
+  </data>
+  <data name="&gt;&gt;grpLinesFormat.Name" xml:space="preserve">
+    <value>grpLinesFormat</value>
+  </data>
+  <data name="&gt;&gt;grpLinesFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpLinesFormat.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;grpLinesFormat.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkTercilesLineLabelIncludeValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>407, 188</value>
+  </data>
+  <data name="ucrChkTercilesLineLabelIncludeValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 20</value>
+  </data>
+  <data name="ucrChkTercilesLineLabelIncludeValue.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTercilesLineLabelIncludeValue.Name" xml:space="preserve">
+    <value>ucrChkTercilesLineLabelIncludeValue</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTercilesLineLabelIncludeValue.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTercilesLineLabelIncludeValue.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkTercilesLineLabelIncludeValue.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkMedianLineLabelIncludeValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>407, 106</value>
+  </data>
+  <data name="ucrChkMedianLineLabelIncludeValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 20</value>
+  </data>
+  <data name="ucrChkMedianLineLabelIncludeValue.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMedianLineLabelIncludeValue.Name" xml:space="preserve">
+    <value>ucrChkMedianLineLabelIncludeValue</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMedianLineLabelIncludeValue.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMedianLineLabelIncludeValue.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMedianLineLabelIncludeValue.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrChkMeanLineLabelIncludeValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>407, 41</value>
+  </data>
+  <data name="ucrChkMeanLineLabelIncludeValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 20</value>
+  </data>
+  <data name="ucrChkMeanLineLabelIncludeValue.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMeanLineLabelIncludeValue.Name" xml:space="preserve">
+    <value>ucrChkMeanLineLabelIncludeValue</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMeanLineLabelIncludeValue.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMeanLineLabelIncludeValue.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMeanLineLabelIncludeValue.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrInputTercilesLineLabelTextLower.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 174</value>
+  </data>
+  <data name="ucrInputTercilesLineLabelTextLower.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputTercilesLineLabelTextLower.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTercilesLineLabelTextLower.Name" xml:space="preserve">
+    <value>ucrInputTercilesLineLabelTextLower</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTercilesLineLabelTextLower.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTercilesLineLabelTextLower.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTercilesLineLabelTextLower.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblTercilesLineLabelTextLower.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTercilesLineLabelTextLower.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblTercilesLineLabelTextLower.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 176</value>
+  </data>
+  <data name="lblTercilesLineLabelTextLower.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="lblTercilesLineLabelTextLower.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="lblTercilesLineLabelTextLower.Text" xml:space="preserve">
+    <value>Label Text (Lower):</value>
+  </data>
+  <data name="&gt;&gt;lblTercilesLineLabelTextLower.Name" xml:space="preserve">
+    <value>lblTercilesLineLabelTextLower</value>
+  </data>
+  <data name="&gt;&gt;lblTercilesLineLabelTextLower.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTercilesLineLabelTextLower.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;lblTercilesLineLabelTextLower.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblTercilesLineType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTercilesLineType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblTercilesLineType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 148</value>
+  </data>
+  <data name="lblTercilesLineType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="lblTercilesLineType.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="lblTercilesLineType.Text" xml:space="preserve">
+    <value>Label Type:</value>
+  </data>
+  <data name="&gt;&gt;lblTercilesLineType.Name" xml:space="preserve">
+    <value>lblTercilesLineType</value>
+  </data>
+  <data name="&gt;&gt;lblTercilesLineType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTercilesLineType.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;lblTercilesLineType.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrInputTercilesLineType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>365, 144</value>
+  </data>
+  <data name="ucrInputTercilesLineType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 21</value>
+  </data>
+  <data name="ucrInputTercilesLineType.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTercilesLineType.Name" xml:space="preserve">
+    <value>ucrInputTercilesLineType</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTercilesLineType.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTercilesLineType.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTercilesLineType.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ucrInputMedianLineLabelText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 105</value>
+  </data>
+  <data name="ucrInputMedianLineLabelText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputMedianLineLabelText.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMedianLineLabelText.Name" xml:space="preserve">
+    <value>ucrInputMedianLineLabelText</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMedianLineLabelText.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMedianLineLabelText.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMedianLineLabelText.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lblMedianLineLabelText.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMedianLineLabelText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMedianLineLabelText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 107</value>
+  </data>
+  <data name="lblMedianLineLabelText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="lblMedianLineLabelText.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblMedianLineLabelText.Text" xml:space="preserve">
+    <value>Label Text:</value>
+  </data>
+  <data name="&gt;&gt;lblMedianLineLabelText.Name" xml:space="preserve">
+    <value>lblMedianLineLabelText</value>
+  </data>
+  <data name="&gt;&gt;lblMedianLineLabelText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMedianLineLabelText.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;lblMedianLineLabelText.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="lblMedianLineType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMedianLineType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMedianLineType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 78</value>
+  </data>
+  <data name="lblMedianLineType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="lblMedianLineType.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblMedianLineType.Text" xml:space="preserve">
+    <value>Label Type:</value>
+  </data>
+  <data name="&gt;&gt;lblMedianLineType.Name" xml:space="preserve">
+    <value>lblMedianLineType</value>
+  </data>
+  <data name="&gt;&gt;lblMedianLineType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMedianLineType.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;lblMedianLineType.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="ucrInputMedianLineType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>365, 74</value>
+  </data>
+  <data name="ucrInputMedianLineType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 21</value>
+  </data>
+  <data name="ucrInputMedianLineType.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMedianLineType.Name" xml:space="preserve">
+    <value>ucrInputMedianLineType</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMedianLineType.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMedianLineType.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMedianLineType.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="ucrInputMeanLineLabelText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 40</value>
+  </data>
+  <data name="ucrInputMeanLineLabelText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputMeanLineLabelText.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMeanLineLabelText.Name" xml:space="preserve">
+    <value>ucrInputMeanLineLabelText</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMeanLineLabelText.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMeanLineLabelText.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMeanLineLabelText.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="lblMeanLineLabelText.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMeanLineLabelText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMeanLineLabelText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 42</value>
+  </data>
+  <data name="lblMeanLineLabelText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="lblMeanLineLabelText.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblMeanLineLabelText.Text" xml:space="preserve">
+    <value>Label Text:</value>
+  </data>
+  <data name="&gt;&gt;lblMeanLineLabelText.Name" xml:space="preserve">
+    <value>lblMeanLineLabelText</value>
+  </data>
+  <data name="&gt;&gt;lblMeanLineLabelText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMeanLineLabelText.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;lblMeanLineLabelText.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
   <data name="ucrChkAddTercilesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 67</value>
+    <value>160, 144</value>
   </data>
   <data name="ucrChkAddTercilesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -1606,10 +2176,37 @@
     <value>TabPage3</value>
   </data>
   <data name="&gt;&gt;ucrChkAddTercilesLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>16</value>
+  </data>
+  <data name="lblMeanLineType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMeanLineType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 13</value>
+  </data>
+  <data name="lblMeanLineType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="lblMeanLineType.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblMeanLineType.Text" xml:space="preserve">
+    <value>Label Type:</value>
+  </data>
+  <data name="&gt;&gt;lblMeanLineType.Name" xml:space="preserve">
+    <value>lblMeanLineType</value>
+  </data>
+  <data name="&gt;&gt;lblMeanLineType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMeanLineType.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;lblMeanLineType.ZOrder" xml:space="preserve">
+    <value>17</value>
   </data>
   <data name="ucrChkAddMedianLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 41</value>
+    <value>160, 75</value>
   </data>
   <data name="ucrChkAddMedianLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -1627,31 +2224,31 @@
     <value>TabPage3</value>
   </data>
   <data name="&gt;&gt;ucrChkAddMedianLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>18</value>
   </data>
-  <data name="ucrChkAddMeanLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 15</value>
+  <data name="ucrInputMeanLineType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>365, 9</value>
   </data>
-  <data name="ucrChkAddMeanLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="ucrInputMeanLineType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 21</value>
   </data>
-  <data name="ucrChkAddMeanLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="ucrInputMeanLineType.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;ucrChkAddMeanLabel.Name" xml:space="preserve">
-    <value>ucrChkAddMeanLabel</value>
+  <data name="&gt;&gt;ucrInputMeanLineType.Name" xml:space="preserve">
+    <value>ucrInputMeanLineType</value>
   </data>
-  <data name="&gt;&gt;ucrChkAddMeanLabel.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrInputMeanLineType.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkAddMeanLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputMeanLineType.Parent" xml:space="preserve">
     <value>TabPage3</value>
   </data>
-  <data name="&gt;&gt;ucrChkAddMeanLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;ucrInputMeanLineType.ZOrder" xml:space="preserve">
+    <value>19</value>
   </data>
   <data name="ucrChkAddMean.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 15</value>
+    <value>25, 10</value>
   </data>
   <data name="ucrChkAddMean.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 20</value>
@@ -1669,10 +2266,31 @@
     <value>TabPage3</value>
   </data>
   <data name="&gt;&gt;ucrChkAddMean.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>20</value>
+  </data>
+  <data name="ucrChkAddMeanLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 10</value>
+  </data>
+  <data name="ucrChkAddMeanLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkAddMeanLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddMeanLabel.Name" xml:space="preserve">
+    <value>ucrChkAddMeanLabel</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddMeanLabel.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddMeanLabel.Parent" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddMeanLabel.ZOrder" xml:space="preserve">
+    <value>21</value>
   </data>
   <data name="ucrChkAddMedian.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 41</value>
+    <value>25, 77</value>
   </data>
   <data name="ucrChkAddMedian.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 20</value>
@@ -1690,10 +2308,10 @@
     <value>TabPage3</value>
   </data>
   <data name="&gt;&gt;ucrChkAddMedian.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>22</value>
   </data>
   <data name="ucrChkAddTerciles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 67</value>
+    <value>25, 144</value>
   </data>
   <data name="ucrChkAddTerciles.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 20</value>
@@ -1711,7 +2329,7 @@
     <value>TabPage3</value>
   </data>
   <data name="&gt;&gt;ucrChkAddTerciles.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>23</value>
   </data>
   <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
