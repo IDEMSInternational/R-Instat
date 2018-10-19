@@ -214,7 +214,7 @@ Public Class dlgClimaticStationMaps
         ElseIf ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty Then
             bOkEnabled = False
         ElseIf Not ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso ucrSaveMap.IsComplete Then
-            'bOkEnabled = True
+            bOkEnabled = True
         End If
         ucrBase.OKEnabled(bOkEnabled)
     End Sub
