@@ -613,7 +613,15 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub AutoFacetStation()
+        Dim ucrCurrentReceiver As ucrReceiver = Nothing
+
+        If ucrSelectorPICSARainfall.CurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver = ucrSelectorPICSARainfall.CurrentReceiver
+        End If
         ucrReceiverFacetBy.AddItemsWithMetadataProperty(ucrSelectorPICSARainfall.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
+        End If
     End Sub
 
     Private Sub ucrSelectorPICSARainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPICSARainfall.ControlValueChanged
