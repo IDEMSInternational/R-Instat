@@ -23,7 +23,6 @@ Public Class sdgPICSARainfallGraph
     Public clsXScaleContinuousFunction, clsYScaleContinuousFunction As New RFunction
     Public clsXScalecontinuousSeqFunction, clsYScaleContinuousSeqFunction As New RFunction
     Public clsYScaleDateFunction As New RFunction
-    Public clsGemoHLineMean As New RFunction
     Public clsMeanLine, clsMedianLine, clsTretile As New RFunction
     Public clsThemeFunction As RFunction
     Public dctThemeFunctions As New Dictionary(Of String, RFunction)
@@ -53,19 +52,15 @@ Public Class sdgPICSARainfallGraph
     Private clsGeomHlineUpperTercile As New RFunction
 
     Private clsAnnotateMeanLine As New RFunction
-    Private clsMeanYAnnotate As New RFunction
     Private clsRoundMeanY As New RFunction
     Private clsPasteMeanY As New RFunction
     Private clsAnnotateMedianLine As New RFunction
-    Private clsMedianYAnnotate As New RFunction
     Private clsRoundMedianY As New RFunction
     Private clsPasteMedianY As New RFunction
     Private clsAnnotateLowerTercileLine As New RFunction
-    Private clsLowerTercileYAnnotate As New RFunction
     Private clsRoundLowerTercileY As New RFunction
     Private clsPasteLowerTercileY As New RFunction
     Private clsAnnotateUpperTercileLine As New RFunction
-    Private clsUpperTercileYAnnotate As New RFunction
     Private clsRoundUpperTercileY As New RFunction
     Private clsPasteUpperTercileY As New RFunction
 
@@ -78,9 +73,6 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Public Sub InitialiseControls()
-
-        ' Temp disabled until implemented
-        grpLinesFormat.Enabled = False
 
         ' Titles 
         ucrPnlXAxisTitle.AddRadioButton(rdoAutoXAxis)
@@ -428,10 +420,33 @@ Public Class sdgPICSARainfallGraph
         ucrChkTercilesLineLabelIncludeValue.AddParameterPresentCondition(True, "1", True)
         ucrChkTercilesLineLabelIncludeValue.AddParameterPresentCondition(False, "1", False)
 
+        'H Line Format
+        ucrChkHLineColour.SetText("Colour")
+        ucrChkHLineColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkHLineColour.AddToLinkedControls(ucrInputHLineColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
+        ucrInputHLineColour.SetParameter(New RParameter("colour"))
+        ucrInputHLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
+        ucrInputHLineColour.SetDropDownStyleAsNonEditable()
+
+        ucrChkHLineType.SetText("Line Type")
+        ucrChkHLineType.SetParameter(New RParameter("linetype"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkHLineType.AddToLinkedControls(ucrInputHLineType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Solid")
+        ucrInputHLineType.SetParameter(New RParameter("linetype"))
+        ucrInputHLineType.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
+        ucrInputHLineType.SetDropDownStyleAsNonEditable()
+
+        ucrChkHLineSize.SetText("Size")
+        ucrChkHLineSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkHLineSize.AddToLinkedControls(ucrNudHLineSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudHLineSize.SetParameter(New RParameter("size"))
+        ucrNudHLineSize.Increment = 0.1
+        ucrNudHLineSize.DecimalPlaces = 1
+        ucrNudHLineSize.Minimum = 0
+
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing, Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsNumeric As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing, Optional clsNewAnnotateMeanLine As RFunction = Nothing, Optional clsNewMeanYAnnotate As RFunction = Nothing, Optional clsNewRoundMeanY As RFunction = Nothing, Optional clsNewPasteMeanY As RFunction = Nothing, Optional clsNewAnnotateMedianLine As RFunction = Nothing, Optional clsNewMedianYAnnotate As RFunction = Nothing, Optional clsNewRoundMedianY As RFunction = Nothing, Optional clsNewPasteMedianY As RFunction = Nothing, Optional clsNewAnnotateLowerTercileLine As RFunction = Nothing, Optional clsNewLowerTercileYAnnotate As RFunction = Nothing, Optional clsNewRoundLowerTercileY As RFunction = Nothing, Optional clsNewPasteLowerTercileY As RFunction = Nothing, Optional clsNewUpperTercileYAnnotate As RFunction = Nothing, Optional clsNewAnnotateUpperTercileLine As RFunction = Nothing, Optional clsNewRoundUpperTercileY As RFunction = Nothing, Optional clsNewPasteUpperTercileY As RFunction = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing, Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsNumeric As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing, Optional clsNewAnnotateMeanLine As RFunction = Nothing, Optional clsNewRoundMeanY As RFunction = Nothing, Optional clsNewPasteMeanY As RFunction = Nothing, Optional clsNewAnnotateMedianLine As RFunction = Nothing, Optional clsNewRoundMedianY As RFunction = Nothing, Optional clsNewPasteMedianY As RFunction = Nothing, Optional clsNewAnnotateLowerTercileLine As RFunction = Nothing, Optional clsNewRoundLowerTercileY As RFunction = Nothing, Optional clsNewPasteLowerTercileY As RFunction = Nothing, Optional clsNewAnnotateUpperTercileLine As RFunction = Nothing, Optional clsNewRoundUpperTercileY As RFunction = Nothing, Optional clsNewPasteUpperTercileY As RFunction = Nothing, Optional bReset As Boolean = False)
         bRCodeSet = False
         clsBaseOperator = clsNewOperator
 
@@ -448,19 +463,15 @@ Public Class sdgPICSARainfallGraph
         clsGeomHlineUpperTercile = clsNewGeomhlineUpperTercile
 
         clsAnnotateMeanLine = clsNewAnnotateMeanLine
-        clsMeanYAnnotate = clsNewMeanYAnnotate
         clsRoundMeanY = clsNewRoundMeanY
         clsPasteMeanY = clsNewPasteMeanY
         clsAnnotateMedianLine = clsNewAnnotateMedianLine
-        clsMedianYAnnotate = clsNewMedianYAnnotate
         clsRoundMedianY = clsNewRoundMedianY
         clsPasteMedianY = clsNewPasteMedianY
         clsAnnotateLowerTercileLine = clsNewAnnotateLowerTercileLine
-        clsLowerTercileYAnnotate = clsNewLowerTercileYAnnotate
         clsRoundLowerTercileY = clsNewRoundLowerTercileY
         clsPasteLowerTercileY = clsNewPasteLowerTercileY
         clsAnnotateUpperTercileLine = clsNewAnnotateUpperTercileLine
-        clsUpperTercileYAnnotate = clsNewUpperTercileYAnnotate
         clsRoundUpperTercileY = clsNewRoundUpperTercileY
         clsPasteUpperTercileY = clsNewPasteUpperTercileY
 
@@ -668,6 +679,34 @@ Public Class sdgPICSARainfallGraph
         ucrChkMeanLineLabelIncludeValue.SetRCode(clsPasteMeanY, bReset, bCloneIfNeeded:=True)
         ucrChkMedianLineLabelIncludeValue.SetRCode(clsPasteMedianY, bReset, bCloneIfNeeded:=True)
         ucrChkTercilesLineLabelIncludeValue.SetRCode(clsPasteUpperTercileY, bReset, bCloneIfNeeded:=True)
+
+        ucrChkHLineColour.AddAdditionalCodeParameterPair(clsGeomHlineMedian, ucrChkHLineColour.GetParameter(), iAdditionalPairNo:=1)
+        ucrInputHLineColour.AddAdditionalCodeParameterPair(clsGeomHlineMedian, ucrInputHLineColour.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkHLineType.AddAdditionalCodeParameterPair(clsGeomHlineMedian, ucrChkHLineType.GetParameter(), iAdditionalPairNo:=1)
+        ucrInputHLineType.AddAdditionalCodeParameterPair(clsGeomHlineMedian, ucrInputHLineType.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkHLineSize.AddAdditionalCodeParameterPair(clsGeomHlineMedian, ucrChkHLineSize.GetParameter(), iAdditionalPairNo:=1)
+        ucrNudHLineSize.AddAdditionalCodeParameterPair(clsGeomHlineMedian, ucrNudHLineSize.GetParameter(), iAdditionalPairNo:=1)
+
+        ucrChkHLineColour.AddAdditionalCodeParameterPair(clsGeomHlineLowerTercile, ucrChkHLineColour.GetParameter(), iAdditionalPairNo:=2)
+        ucrInputHLineColour.AddAdditionalCodeParameterPair(clsGeomHlineLowerTercile, ucrInputHLineColour.GetParameter(), iAdditionalPairNo:=2)
+        ucrChkHLineType.AddAdditionalCodeParameterPair(clsGeomHlineLowerTercile, ucrChkHLineType.GetParameter(), iAdditionalPairNo:=2)
+        ucrInputHLineType.AddAdditionalCodeParameterPair(clsGeomHlineLowerTercile, ucrInputHLineType.GetParameter(), iAdditionalPairNo:=2)
+        ucrChkHLineSize.AddAdditionalCodeParameterPair(clsGeomHlineLowerTercile, ucrChkHLineSize.GetParameter(), iAdditionalPairNo:=2)
+        ucrNudHLineSize.AddAdditionalCodeParameterPair(clsGeomHlineLowerTercile, ucrNudHLineSize.GetParameter(), iAdditionalPairNo:=2)
+
+        ucrChkHLineColour.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrChkHLineColour.GetParameter(), iAdditionalPairNo:=3)
+        ucrInputHLineColour.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrInputHLineColour.GetParameter(), iAdditionalPairNo:=3)
+        ucrChkHLineType.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrChkHLineType.GetParameter(), iAdditionalPairNo:=3)
+        ucrInputHLineType.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrInputHLineType.GetParameter(), iAdditionalPairNo:=3)
+        ucrChkHLineSize.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrChkHLineSize.GetParameter(), iAdditionalPairNo:=3)
+        ucrNudHLineSize.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrNudHLineSize.GetParameter(), iAdditionalPairNo:=3)
+
+        ucrChkHLineColour.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
+        ucrInputHLineColour.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
+        ucrChkHLineType.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
+        ucrInputHLineType.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
+        ucrChkHLineSize.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
+        ucrNudHLineSize.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
 
         bRCodeSet = True
         AddRemoveTheme()
