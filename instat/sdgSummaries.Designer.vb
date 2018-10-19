@@ -160,7 +160,7 @@ Partial Class sdgSummaries
         Me.ucrNudNumberNotMissing.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberNotMissing.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         resources.ApplyResources(Me.ucrNudNumberNotMissing, "ucrNudNumberNotMissing")
-        Me.ucrNudNumberNotMissing.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberNotMissing.Maximum = New Decimal(New Integer() {340, 0, 0, 0})
         Me.ucrNudNumberNotMissing.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberNotMissing.Name = "ucrNudNumberNotMissing"
         Me.ucrNudNumberNotMissing.Value = New Decimal(New Integer() {0, 0, 0, 0})
