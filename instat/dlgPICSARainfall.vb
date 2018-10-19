@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Imports RDotNet
 
 Public Class dlgPICSARainfall
     Public bFirstLoad As Boolean = True
@@ -27,7 +26,8 @@ Public Class dlgPICSARainfall
     Private clsXScalecontinuousFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
     Private clsYScaleDateFunction As New RFunction
-    Private clsRFacetFunction As New RFunction
+    Private clsFacetFunction As New RFunction
+    Private clsFacetOperator As New ROperator
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
@@ -41,7 +41,6 @@ Public Class dlgPICSARainfall
     Private clsMeanLine, clsMedianLine, clsTretile As New RFunction
     Private clsPnlBackgroundFunction, clsPnlGridLinesFunction As RFunction
     Private clsFactorLevels As New RFunction
-    Private FactorLevel As RDotNet.SymbolicExpression
 
     Private clsDatePeriodOperator As New ROperator
 
@@ -97,30 +96,38 @@ Public Class dlgPICSARainfall
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
-        ucrPICSARainfallSelector.SetParameter(New RParameter("data", 0))
-        ucrPICSARainfallSelector.SetParameterIsrfunction()
+        ucrSelectorPICSARainfall.SetParameter(New RParameter("data", 0))
+        ucrSelectorPICSARainfall.SetParameterIsrfunction()
+
+        ucrVariablesAsFactorForPicsa.SetParameter(New RParameter("x", 0))
+        ucrVariablesAsFactorForPicsa.SetFactorReceiver(ucrReceiverColourBy)
+        ucrVariablesAsFactorForPicsa.Selector = ucrSelectorPICSARainfall
+        ucrVariablesAsFactorForPicsa.strSelectorHeading = "Varibles"
+        ucrVariablesAsFactorForPicsa.SetParameterIsString()
+        ucrVariablesAsFactorForPicsa.bWithQuotes = False
 
         ucrReceiverX.SetParameter(New RParameter("x", 0))
         ucrReceiverX.SetParameterIsString()
-        ucrReceiverX.Selector = ucrPICSARainfallSelector
+        ucrReceiverX.Selector = ucrSelectorPICSARainfall
         ucrReceiverX.SetClimaticType("year")
         ucrReceiverX.strSelectorHeading = "Year Variables"
         ucrReceiverX.bAutoFill = True
         ucrReceiverX.bWithQuotes = False
 
-        ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
-        ucrFactorOptionalReceiver.Selector = ucrPICSARainfallSelector
-        ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor"})
-        ucrFactorOptionalReceiver.strSelectorHeading = "Factors"
-        ucrFactorOptionalReceiver.bWithQuotes = False
-        ucrFactorOptionalReceiver.SetParameterIsString()
+        ucrReceiverColourBy.SetParameter(New RParameter("colour", 2))
+        ucrReceiverColourBy.Selector = ucrSelectorPICSARainfall
+        ucrReceiverColourBy.SetIncludedDataTypes({"factor"})
+        ucrReceiverColourBy.strSelectorHeading = "Factors"
+        ucrReceiverColourBy.bWithQuotes = False
+        ucrReceiverColourBy.SetParameterIsString()
 
-        ucrVariablesAsFactorForPicsa.SetParameter(New RParameter("x", 0))
-        ucrVariablesAsFactorForPicsa.SetFactorReceiver(ucrFactorOptionalReceiver)
-        ucrVariablesAsFactorForPicsa.Selector = ucrPICSARainfallSelector
-        ucrVariablesAsFactorForPicsa.strSelectorHeading = "Varibles"
-        ucrVariablesAsFactorForPicsa.SetParameterIsString()
-        ucrVariablesAsFactorForPicsa.bWithQuotes = False
+        ucrReceiverFacetBy.SetParameter(New RParameter("var1", 1))
+        ucrReceiverFacetBy.Selector = ucrSelectorPICSARainfall
+        ucrReceiverFacetBy.SetIncludedDataTypes({"factor"})
+        ucrReceiverFacetBy.strSelectorHeading = "Factors"
+        ucrReceiverFacetBy.bWithQuotes = False
+        ucrReceiverFacetBy.SetParameterIsString()
+        ucrReceiverFacetBy.SetValuesToIgnore({"."})
 
         ucrChkPoints.SetText("Add Points")
         ucrChkPoints.AddParameterPresentCondition(True, "points")
@@ -138,7 +145,7 @@ Public Class dlgPICSARainfall
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
         ucrSave.SetCheckBoxText("Save Graph")
-        ucrSave.SetDataFrameSelector(ucrPICSARainfallSelector.ucrAvailableDataFrames)
+        ucrSave.SetDataFrameSelector(ucrSelectorPICSARainfall.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
@@ -160,6 +167,9 @@ Public Class dlgPICSARainfall
         clsRaesFunction = New RFunction
         clsBaseOperator = New ROperator
         clsFactorLevels = New RFunction
+
+        clsFacetFunction = New RFunction
+        clsFacetOperator = New ROperator
 
         clsGeomHlineMean = New RFunction
         clsGeomHlineAesMean = New RFunction
@@ -204,8 +214,8 @@ Public Class dlgPICSARainfall
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
 
-        ucrPICSARainfallSelector.Reset()
-        ucrPICSARainfallSelector.SetGgplotFunction(clsBaseOperator)
+        ucrSelectorPICSARainfall.Reset()
+        ucrSelectorPICSARainfall.SetGgplotFunction(clsBaseOperator)
         ucrSave.Reset()
         ucrVariablesAsFactorForPicsa.SetMeAsReceiver()
         bResetSubdialog = True
@@ -227,6 +237,12 @@ Public Class dlgPICSARainfall
         clsGeomLine.AddParameter("colour", Chr(34) & "blue" & Chr(34))
         clsGeomLine.AddParameter("size", "0.8")
         clsBaseOperator.AddParameter(clsPointsParam)
+
+        clsFacetFunction.SetPackageName("ggplot2")
+        clsFacetFunction.SetRCommand("facet_wrap")
+        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
+
+        clsFacetOperator.SetOperation("~")
 
         'Mean Line
         clsGeomHlineMean.SetPackageName("ggplot2")
@@ -441,7 +457,7 @@ Public Class dlgPICSARainfall
         clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
 
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
-        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrPICSARainfallSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
@@ -450,12 +466,17 @@ Public Class dlgPICSARainfall
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsAsDate, New RParameter("x", 0), iAdditionalPairNo:=1)
 
-        ucrPICSARainfallSelector.SetRCode(clsRggplotFunction, bReset)
+        ucrSelectorPICSARainfall.SetRCode(clsRggplotFunction, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
-        ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
+        ucrReceiverFacetBy.SetRCode(clsFacetOperator, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
         ucrVariablesAsFactorForPicsa.SetRCode(clsAsNumeric, bReset)
+
+        If bReset Then
+            AutoFacetStation()
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -509,15 +530,14 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrPICSARainfallSelector, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
-
-        ucrVariablesAsFactorForPicsa.SetParameter(New RParameter("x"))
+        ucrReceiverFacetBy.SetRCode(clsFacetOperator)
     End Sub
 
     Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomLine, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrPICSARainfallSelector, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomLine, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetLineLayerSubdialog = False
         'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
@@ -539,7 +559,7 @@ Public Class dlgPICSARainfall
                 Else ucrVariablesAsFactorForPicsa.Add(clsParam.strArgumentValue)
                 End If
             ElseIf clsParam.strArgumentName = "colour" Then
-                ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
+                ucrReceiverColourBy.Add(clsParam.strArgumentValue)
             End If
         Next
         TestOkEnabled()
@@ -549,9 +569,9 @@ Public Class dlgPICSARainfall
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorOptionalReceiver.ControlValueChanged
+    Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColourBy.ControlValueChanged
         'TODO this should run when levels of factor >1
-        If Not ucrFactorOptionalReceiver.IsEmpty Then
+        If Not ucrReceiverColourBy.IsEmpty Then
             clsGeomLine.RemoveParameterByName("colour")
         Else
             clsGeomLine.AddParameter("colour", Chr(34) & "blue" & Chr(34))
@@ -564,5 +584,22 @@ Public Class dlgPICSARainfall
         Else
             clsGeomLine.RemoveParameterByName("group")
         End If
+    End Sub
+
+    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged
+        If ucrReceiverFacetBy.IsEmpty Then
+            clsBaseOperator.RemoveParameterByName("facets")
+        Else
+            clsFacetOperator.AddParameter("var2", ".", iPosition:=0)
+            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, iPosition:=30)
+        End If
+    End Sub
+
+    Private Sub AutoFacetStation()
+        ucrReceiverFacetBy.AddItemsWithMetadataProperty(ucrSelectorPICSARainfall.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+    End Sub
+
+    Private Sub ucrSelectorPICSARainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPICSARainfall.ControlValueChanged
+        AutoFacetStation()
     End Sub
 End Class
