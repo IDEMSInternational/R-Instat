@@ -25,7 +25,9 @@ Public Class dlgPICSARainfall
     Private bReset As Boolean = True
     Private clsXScalecontinuousFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
+    Private clsCLimitsYContinuous As New RFunction
     Private clsYScaleDateFunction As New RFunction
+    Private clsCLimitsYDate As New RFunction
     Private clsFacetFunction As New RFunction
     Private clsFacetOperator As New ROperator
     Private clsThemeFunction As New RFunction
@@ -168,6 +170,9 @@ Public Class dlgPICSARainfall
         clsBaseOperator = New ROperator
         clsFactorLevels = New RFunction
 
+        clsCLimitsYContinuous = New RFunction
+        clsCLimitsYDate = New RFunction
+
         clsFacetFunction = New RFunction
         clsFacetOperator = New ROperator
 
@@ -207,8 +212,18 @@ Public Class dlgPICSARainfall
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsYScalecontinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsCLimitsYContinuous, iPosition:=3)
+        clsCLimitsYContinuous.SetRCommand("c")
+        clsCLimitsYContinuous.AddParameter("min", "0", bIncludeArgumentName:=False, iPosition:=0)
+        clsCLimitsYContinuous.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
+
         clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
         clsYScaleDateFunction.AddParameter("date_labels", Chr(34) & "%d %b" & Chr(34), iPosition:=0)
+        'TODO Not yet implemented so do not add
+        'clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsCLimitsYDate, iPosition:=8)
+        clsCLimitsYDate.SetRCommand("c")
+        clsCLimitsYDate.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
+        clsCLimitsYDate.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
 
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
@@ -449,6 +464,8 @@ Public Class dlgPICSARainfall
         clsAsDate.AddParameter("origin", Chr(34) & "2015-12-31" & Chr(34), iPosition:=1)
 
         clsDatePeriodOperator.SetOperation(" ")
+        clsDatePeriodOperator.AddParameter("left", "1", iPosition:=0)
+        clsDatePeriodOperator.AddParameter("right", "months", iPosition:=1)
         clsDatePeriodOperator.bSpaceAroundOperation = False
         clsDatePeriodOperator.bToScriptAsRString = True
 
