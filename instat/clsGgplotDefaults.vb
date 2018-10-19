@@ -380,7 +380,7 @@ Public Class GgplotDefaults
         End Get
     End Property
 
-    Public Shared ReadOnly Property dctStartMonthDates As Dictionary(Of String, String)
+    Public Shared ReadOnly Property dctStartMonthOriginDates As Dictionary(Of String, String)
         Get
             Dim dctDateStartMonths As New Dictionary(Of String, String)
 
