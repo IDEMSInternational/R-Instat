@@ -14,12 +14,13 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgClimaticStationMaps
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsSfAesFunction, clsGeomPointAesFunction As RFunction
-    Private clsGGplotOperator As New ROperator
+    Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsSfAesFunction, clsGeomPointAesFunction, clsFacetFunction As RFunction
+    Private clsGGplotOperator, clsFacetOp As New ROperator
 
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
@@ -33,10 +34,6 @@ Public Class dlgClimaticStationMaps
     Private clsLocalRaesFunction As New RFunction
     Private bResetSubdialog As Boolean = True
     Private bResetSFLayerSubdialog As Boolean = True
-
-
-
-
     Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -92,6 +89,11 @@ Public Class dlgClimaticStationMaps
         ucrReceiverColor.SetParameterIsString()
         ucrReceiverColor.bWithQuotes = False
 
+        ucrReceiverFacet.SetParameter(New RParameter("wrap", bNewIncludeArgumentName:=False))
+        ucrReceiverFacet.Selector = ucrSelectorStation
+        ucrReceiverFacet.SetParameterIsString()
+        ucrReceiverFacet.bWithQuotes = False
+
         ucrSaveMap.SetPrefix("Map")
         ucrSaveMap.SetSaveTypeAsGraph()
         ucrSaveMap.SetIsComboBox()
@@ -107,15 +109,18 @@ Public Class dlgClimaticStationMaps
         clsSfAesFunction = New RFunction
         clsGeomPointFunction = New RFunction
         clsGeomPointAesFunction = New RFunction
+        clsFacetFunction = New RFunction
 
         clsGGplotOperator = New ROperator
         clsXlimFunction = New RFunction
         clsYlimFunction = New RFunction
+        clsFacetOp = New ROperator
 
         ucrSelectorOutline.Reset()
         ucrReceiverFill.SetMeAsReceiver()
         ucrSelectorStation.Reset()
         ucrReceiverLongitude.SetMeAsReceiver()
+        ucrReceiverFacet.SetMeAsReceiver()
         ucrSaveMap.Reset()
         bResetSubdialog = True
         bResetSFLayerSubdialog = True
@@ -136,6 +141,14 @@ Public Class dlgClimaticStationMaps
 
         clsGeomPointAesFunction.SetPackageName("ggplot2")
         clsGeomPointAesFunction.SetRCommand("aes")
+
+        clsFacetOp.SetOperation("~")
+        clsFacetOp.bForceIncludeOperation = True
+        clsFacetOp.bBrackets = False
+
+        clsFacetFunction.SetPackageName("ggplot2")
+        clsFacetFunction.SetRCommand("facet_wrap")
+        clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsFacetOp, bIncludeArgumentName:=False)
 
         clsGGplotOperator.SetOperation("+")
         clsGGplotOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, bIncludeArgumentName:=False, iPosition:=0)
@@ -174,6 +187,7 @@ Public Class dlgClimaticStationMaps
         ucrReceiverLatitude.SetRCode(clsGeomPointAesFunction, bReset)
         ucrReceiverShape.SetRCode(clsGeomPointAesFunction, bReset)
         ucrReceiverColor.SetRCode(clsGeomPointAesFunction, bReset)
+        ucrReceiverFacet.SetRCode(clsFacetOp, bReset)
     End Sub
 
     Private Sub cmdSFOptions_Click(sender As Object, e As EventArgs) Handles cmdSFOptions.Click
@@ -195,17 +209,12 @@ Public Class dlgClimaticStationMaps
 
     Private Sub TestOkEnabled()
         Dim bOkEnabled As Boolean
-        If Not ucrReceiverFill.IsEmpty AndAlso ucrSaveMap.IsComplete Then
-            bOkEnabled = True
-            If Not ucrReceiverLongitude.IsEmpty AndAlso ucrReceiverLatitude.IsEmpty Then
-                bOkEnabled = False
-            ElseIf ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty Then
-                bOkEnabled = False
-            Else
-                bOkEnabled = True
-            End If
-        Else
+        If Not ucrReceiverLongitude.IsEmpty AndAlso ucrReceiverLatitude.IsEmpty Then
             bOkEnabled = False
+        ElseIf ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty Then
+            bOkEnabled = False
+        ElseIf Not ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso ucrSaveMap.IsComplete Then
+            'bOkEnabled = True
         End If
         ucrBase.OKEnabled(bOkEnabled)
     End Sub
@@ -226,5 +235,13 @@ Public Class dlgClimaticStationMaps
 
     Private Sub ucrReceiverFill_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFill.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrSaveMap.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverFacet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacet.ControlValueChanged
+        If Not ucrReceiverFacet.IsEmpty Then
+            clsGGplotOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, bIncludeArgumentName:=False, iPosition:=2)
+        Else
+            clsGGplotOperator.RemoveParameterByName("facets")
+        End If
     End Sub
 End Class
