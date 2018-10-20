@@ -90,6 +90,7 @@ Public Class dlgPICSARainfall
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        XAxisDataTypeCheck()
         TestOkEnabled()
     End Sub
 
@@ -541,7 +542,7 @@ Public Class dlgPICSARainfall
 
     'add more functions 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
-        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewDatePeriodOperator:=clsDatePeriodOperator, clsNewAnnotateMeanLine:=clsAnnotateMeanLine, clsNewRoundMeanY:=clsRoundMeanY, clsNewPasteMeanY:=clsPasteMeanY, clsNewAnnotateMedianLine:=clsAnnotateMedianLine, clsNewRoundMedianY:=clsRoundMedianY, clsNewPasteMedianY:=clsPasteMedianY, clsNewAnnotateLowerTercileLine:=clsAnnotateLowerTercileLine, clsNewRoundLowerTercileY:=clsRoundLowerTercileY, clsNewPasteLowerTercileY:=clsPasteLowerTercileY, clsNewAnnotateUpperTercileLine:=clsAnnotateUpperTercileLine, clsNewRoundUpperTercileY:=clsRoundUpperTercileY, clsNewPasteUpperTercileY:=clsPasteUpperTercileY, bReset:=bResetSubdialog)
+        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewDatePeriodOperator:=clsDatePeriodOperator, clsNewAnnotateMeanLine:=clsAnnotateMeanLine, clsNewRoundMeanY:=clsRoundMeanY, clsNewPasteMeanY:=clsPasteMeanY, clsNewAnnotateMedianLine:=clsAnnotateMedianLine, clsNewRoundMedianY:=clsRoundMedianY, clsNewPasteMedianY:=clsPasteMedianY, clsNewAnnotateLowerTercileLine:=clsAnnotateLowerTercileLine, clsNewRoundLowerTercileY:=clsRoundLowerTercileY, clsNewPasteLowerTercileY:=clsPasteLowerTercileY, clsNewAnnotateUpperTercileLine:=clsAnnotateUpperTercileLine, clsNewRoundUpperTercileY:=clsRoundUpperTercileY, clsNewPasteUpperTercileY:=clsPasteUpperTercileY, strXAxisType:=ucrReceiverX.strCurrDataType, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -596,8 +597,13 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
+        XAxisDataTypeCheck()
+    End Sub
+
+    Private Sub XAxisDataTypeCheck()
         If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor") Then
             clsGeomLine.AddParameter("group", 1)
+            clsBaseOperator.RemoveParameterByName("scale_x_continuous")
         Else
             clsGeomLine.RemoveParameterByName("group")
         End If
