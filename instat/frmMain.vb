@@ -1603,7 +1603,7 @@ Public Class frmMain
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub mnuProcurementDescribeOneVar_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeOneVar.Click
+    Private Sub mnuProcurementDescribeCategoricalOneVarFreq_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeCategoricalOneVarFreq.Click
         Dim lstDataNames As List(Of String)
         Dim lstColumns As New List(Of String)
 
@@ -1625,7 +1625,7 @@ Public Class frmMain
         dlgOneWayFrequencies.ShowDialog()
     End Sub
 
-    Private Sub mnuProcurementDescribeTwoVar_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeTwoVar.Click
+    Private Sub mnuProcurementDescribeCategoricalTwoVarFreq_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeCategoricalTwoVarFreq.Click
         Dim lstDataNames As List(Of String)
 
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
@@ -1844,7 +1844,7 @@ Public Class frmMain
         dlgOneVariableGraph.ShowDialog()
     End Sub
 
-    Private Sub CorrelationsRedFlagsOrOthersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationsRedFlagsOrOthersToolStripMenuItem.Click
+    Private Sub CorrelationsRedFlagsOrOthersToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles CorrelationsRedFlagsOrOthersToolStripMenuItem.Click
         Dim lstDataNames As List(Of String)
         Dim strComponentColumnNames() As String
 
@@ -1906,10 +1906,6 @@ Public Class frmMain
 
     Private Sub mnuClimaticPrepareEvapotranspiration_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEvapotranspiration.Click
         dlgEvapotranspiration.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticSPI.Click
-        dlgSPI.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareCheckDataCompareColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataCompareColumns.Click
@@ -2018,5 +2014,52 @@ Public Class frmMain
 
     Private Sub mnuClimaticCMSAFExporttoCMSAFRToolbox_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFExporttoCMSAFRToolbox.Click
         dlgExportToCMSAF.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCheckDataStationMaps_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataStationMaps.Click
+        dlgClimaticStationMaps.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareConversions_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareConversions.Click
+        dlgConversions.ShowDialog()
+    End Sub
+
+    Private Sub mnuOptionsByContextGeneralFitModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextGeneralFitModel.Click
+        dlgFitModel.ShowDialog()
+    End Sub
+
+    Private Sub mnuHelpAcknowledgments_Click(sender As Object, e As EventArgs) Handles mnuHelpAcknowledgments.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "151")
+    End Sub
+
+    Private Sub mnuClimaticModelSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelSPI.Click
+        dlgSPI.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeSpecificMosaic_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificMosaic.Click
+        dlgMosaicPlot.ShowDialog()
+    End Sub
+
+    Private Sub BarChartsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BarChartsToolStripMenuItem.Click
+        dlgBarAndPieChart.ShowDialog()
+    End Sub
+
+    Private Sub MosaicPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MosaicPlotToolStripMenuItem.Click
+        dlgMosaicPlot.ShowDialog()
+    End Sub
+
+    Private Sub BoxplotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BoxplotToolStripMenuItem.Click
+        dlgBoxplot.ShowDialog()
+    End Sub
+
+    Private Sub HistogramToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HistogramToolStripMenuItem.Click
+        dlgHistogram.ShowDialog()
+    End Sub
+
+    Private Sub OpenFromLibraryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenFromLibraryToolStripMenuItem.Click
+        dlgImportDataset.strFileToOpenOn = ""
+        dlgImportDataset.bStartOpenDialog = True
+        dlgImportDataset.bFromLibrary = True
+        dlgImportDataset.ShowDialog()
     End Sub
 End Class

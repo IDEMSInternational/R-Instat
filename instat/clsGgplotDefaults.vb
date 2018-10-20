@@ -94,6 +94,17 @@ Public Class GgplotDefaults
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsYScaleDateFunction As RFunction
+        Get
+            Dim clsYlabScalesDateTempFunc As New RFunction
+
+            clsYlabScalesDateTempFunc.SetPackageName("ggplot2")
+            clsYlabScalesDateTempFunc.SetRCommand("scale_y_date")
+
+            Return clsYlabScalesDateTempFunc
+        End Get
+    End Property
+
     Public Shared ReadOnly Property clsFacetFunction As RFunction
         Get
             Dim clsFacetTempFunc As New RFunction
@@ -145,6 +156,8 @@ Public Class GgplotDefaults
             dctTemp.Add("rect", clsElementRect.Clone())
             dctTemp.Add("text", clsElementText.Clone())
             dctTemp.Add("title", clsElementText.Clone())
+            dctTemp.Add("sub.title", clsElementText.Clone())
+            dctTemp.Add("caption", clsElementText.Clone())
             'dctTemp.Add("aspect.ratio", clsElementText.Clone())
             dctTemp.Add("axis.title", clsElementText.Clone())
             dctTemp.Add("axis.title.x", clsElementText.Clone())
@@ -250,9 +263,11 @@ Public Class GgplotDefaults
     Public Shared ReadOnly Property dctColour As Dictionary(Of String, String)
         Get
             Dim dctTempColour As New Dictionary(Of String, String)
+            dctTempColour.Add("White", Chr(34) & "white" & Chr(34))
             dctTempColour.Add("Black", Chr(34) & "black" & Chr(34))
             dctTempColour.Add("Red", Chr(34) & "red" & Chr(34))
             dctTempColour.Add("Blue", Chr(34) & "blue" & Chr(34))
+            dctTempColour.Add("Light-Blue", Chr(34) & "lightblue" & Chr(34))
             dctTempColour.Add("Grey", Chr(34) & "grey" & Chr(34))
             dctTempColour.Add("Yellow", Chr(34) & "yellow" & Chr(34))
             dctTempColour.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
@@ -362,6 +377,27 @@ Public Class GgplotDefaults
             dctTempYPosition.Add("Left", Chr(34) & "left" & Chr(34))
             dctTempYPosition.Add("Right", Chr(34) & "right" & Chr(34))
             Return dctTempYPosition
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property dctStartMonthOriginDates As Dictionary(Of String, String)
+        Get
+            Dim dctDateStartMonths As New Dictionary(Of String, String)
+
+            dctDateStartMonths.Add("January", Chr(34) & "2015-12-31" & Chr(34))
+            dctDateStartMonths.Add("February", Chr(34) & "2016-01-31" & Chr(34))
+            dctDateStartMonths.Add("March", Chr(34) & "2015-02-28" & Chr(34))
+            dctDateStartMonths.Add("April", Chr(34) & "2015-03-31" & Chr(34))
+            dctDateStartMonths.Add("May", Chr(34) & "2015-04-30" & Chr(34))
+            dctDateStartMonths.Add("June", Chr(34) & "2015-05-31" & Chr(34))
+            dctDateStartMonths.Add("July", Chr(34) & "2015-06-30" & Chr(34))
+            dctDateStartMonths.Add("August", Chr(34) & "2015-07-31" & Chr(34))
+            dctDateStartMonths.Add("September", Chr(34) & "2015-08-31" & Chr(34))
+            dctDateStartMonths.Add("October", Chr(34) & "2015-09-30" & Chr(34))
+            dctDateStartMonths.Add("November", Chr(34) & "2015-10-31" & Chr(34))
+            dctDateStartMonths.Add("December", Chr(34) & "2015-11-30" & Chr(34))
+
+            Return dctDateStartMonths
         End Get
     End Property
 End Class

@@ -324,7 +324,8 @@ Public Class ucrReceiverSingle
 
     Private Sub ParentForm_Shown()
         If bFirstShown Then
-            CheckAutoFill()
+            'This is not needed probably
+            'CheckAutoFill()
             bFirstShown = False
         End If
     End Sub

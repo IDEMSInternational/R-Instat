@@ -1,5 +1,5 @@
 #Methods temporarily here to avoid conflicts
-data_object$set("public", "merge_data", function(new_data, by = NULL, type = "left", match = "all") {
+DataSheet$set("public", "merge_data", function(new_data, by = NULL, type = "left", match = "all") {
   #TODO how to use match argument with dplyr join functions
   old_metadata <- attributes(private$data)
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
@@ -42,7 +42,7 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
 }
 )
 
-instat_object$set("public", "append_summaries_to_data_object", function(out, data_name, columns_to_summarise, summaries, factors = c(), summary_name, calc, calc_name = "") {
+DataBook$set("public", "append_summaries_to_data_object", function(out, data_name, columns_to_summarise, summaries, factors = c(), summary_name, calc, calc_name = "") {
   if(!is.character(data_name)) stop("data_name must be of type character")
   
   exists = FALSE
@@ -95,7 +95,7 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, return_output = FALSE, summary_name = NA, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, silent = FALSE, additional_filter, original_level = FALSE, ...) {
+DataBook$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, return_output = FALSE, summary_name = NA, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, silent = FALSE, additional_filter, original_level = FALSE, ...) {
   if(original_level) type <- "calculation"
   else type <- "summary"
   include_columns_to_summarise <- TRUE
@@ -237,7 +237,7 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
 }
 )
 
-instat_object$set("public", "summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = FALSE, drop = FALSE, return_output = FALSE, summary_name = NA, add_cols = c(), filter_names = c(), ...) {
+DataBook$set("public", "summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = FALSE, drop = FALSE, return_output = FALSE, summary_name = NA, add_cols = c(), filter_names = c(), ...) {
   calculated_from = list()
   calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
   #TODO Change this to store sub_calculations for each column
@@ -300,7 +300,7 @@ instat_object$set("public", "summary", function(data_name, columns_to_summarise,
 }
 )
 
-data_object$set("public", "calculate_summary", function(calc, ...) {
+DataSheet$set("public", "calculate_summary", function(calc, ...) {
   columns_to_summarise = calc[["parameters"]][["columns_to_summarise"]]
   summaries = calc[["parameters"]][["summaries"]]
   factors = calc[["parameters"]][["factors"]]
@@ -567,23 +567,31 @@ summary_skewness_mc <- function(x, na.rm = FALSE, na_type = "", ...) {
 }
 
 # skewness outlier limit function
-summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc = FALSE, skewnessweight = 4, na.rm = TRUE, na_type = "", ...){ 
+summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc = FALSE, skewnessweight = 4, na.rm = TRUE, na_type = "", omit = FALSE, value = 0, ...){ 
+  if(omit){
+    #This is needed when we need rainy days defined(Rain>=0.85)
+    #if(value!=0){
+     # x <- x[x>=value]
+    #}else{
+      x <- x[x>value]
+      #}
+  }
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-      else{
-      quart <- quantile(x, na.rm = na.rm)
-      Q1 <- quart[[2]]
-      Q3 <- quart[[4]]
-      IQR <- Q3 - Q1
-      MC <- 0
-      if(bskewedcalc){
-        MC <- robustbase::mc(x, na.rm = na.rm)
-      }
-      if(bupperlimit){
-        Q3 + coef*exp(skewnessweight*MC)*IQR
-      } else {
-        Q1 - coef*exp(-skewnessweight*MC)*IQR
-      }
-      }
+  else{
+    quart <- quantile(x, na.rm = na.rm)
+    Q1 <- quart[[2]]
+    Q3 <- quart[[4]]
+    IQR <- Q3 - Q1
+    MC <- 0
+    if(bskewedcalc){
+      MC <- robustbase::mc(x, na.rm = na.rm)
+    }
+    if(bupperlimit){
+      Q3 + coef*exp(skewnessweight*MC)*IQR
+    } else {
+      Q1 - coef*exp(-skewnessweight*MC)*IQR
+    }
+  }
 }
 
 # kurtosis function
@@ -650,18 +658,18 @@ summary_cov <- function(x, y, na.rm = FALSE, na_type = "", method = c("pearson",
 }
 }
 # first function
-summary_first <- function(x, order_by = NULL, default = default_missing(x), ...) {
-    return(dplyr::first(x = x, order_by = order_by, default = default))
+summary_first <- function(x, order_by = NULL, ...) {
+    return(dplyr::first(x = x, order_by = order_by))
 }
 
 # last function
-summary_last <- function(x, order_by = NULL, default = default_missing(x), ...) {
-     return(dplyr::last(x = x, order_by = order_by, default = default))
+summary_last <- function(x, order_by = NULL, ...) {
+     return(dplyr::last(x = x, order_by = order_by))
 }
 
 # nth function
-summary_nth <- function(x, nth_value, order_by = NULL, default = default_missing(x), ...) {
-    return(dplyr::nth(x = x, n = nth_value, order_by = order_by, default = default_missing(x)))
+summary_nth <- function(x, nth_value, order_by = NULL, ...) {
+    return(dplyr::nth(x = x, n = nth_value, order_by = order_by))
 }
 
 # n_distinct function
@@ -727,7 +735,7 @@ standard_error_mean <- function(x, na.rm = FALSE, na_type = "", ...){
 }
 
 
-instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
+DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   if(n_column_factors == 1 && length(factors) == 0) n_column_factors <- 0
   if(n_column_factors > length(factors)) stop("n_column_factors must be <= number of factors specified.")
   if(na_level_display == "") stop("na_level_display must be a non empty string")
