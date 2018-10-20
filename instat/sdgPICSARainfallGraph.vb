@@ -815,6 +815,7 @@ Public Class sdgPICSARainfallGraph
         AddRemoveYLimits()
         AddRemoveAxisTextY()
         AddRemoveXAxisScalesContinuous()
+        AddRemoveXAxisScalesContinuous()
         AddRemoveYAxisScales()
         AddRemoveHline()
         AddRemovePanelBorder()
@@ -976,9 +977,9 @@ Public Class sdgPICSARainfallGraph
     Private Sub AddRemoveXAxisScalesContinuous()
         If bRCodeSet Then
             If clsXScaleContinuousFunction.clsParameters.Count > 0 Then
-                clsBaseOperator.AddParameter("scale_y_continuous", clsRFunctionParameter:=clsYScaleContinuousFunction)
+                clsBaseOperator.AddParameter("scale_x_continuous", clsRFunctionParameter:=clsXScaleContinuousFunction)
             Else
-                clsBaseOperator.RemoveParameterByName("scale_y_continuous")
+                clsBaseOperator.RemoveParameterByName("scale_x_continuous")
             End If
         End If
     End Sub
