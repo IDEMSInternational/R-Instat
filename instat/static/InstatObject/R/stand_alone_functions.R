@@ -1123,6 +1123,27 @@ compare_columns <- function(x, y, use_unique = TRUE, sort_values = TRUE, firstno
   }
 }
 
+
+consecutive_sum <- function(x, initial_value = NA){
+  out = x
+  for(i in 1:length(x)){
+    if(!is.na(x[i])){
+    if(x[i] != 0){
+      if(i > 1){
+        out[i]=x[i] + out[i-1]
+    } else{
+        out[i] = x[i] + initial_value
+      }
+    } 
+    }
+  }
+  return(out)
+}
+
+max_consecutive_sum <- function(x){
+  max(consecutive_sum(x, initial_value = 0))
+}
+
 hashed_id <- function(x, salt, algo = "crc32") {
   if (missing(salt)){
       y <- x

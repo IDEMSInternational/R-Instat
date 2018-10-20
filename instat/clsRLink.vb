@@ -23,7 +23,8 @@ Public Class RLink
     Dim strClimateObjectPath As String = "/ClimateObject/R" 'new climateobject path
     Public strClimateObject As String = "ClimateObject"
     Dim strInstatObjectPath As String = "/InstatObject/R" 'path to the Instat object
-    Public strInstatDataObject As String = "InstatDataObject"
+    Public strInstatDataObject As String = "data_book"
+    Public strDataBookClassName As String = "DataBook"
 
     Private bFirstRCode As Boolean = True
     Private bDebugLogExists As Boolean = False
@@ -448,7 +449,7 @@ Public Class RLink
         strOutput = ""
 
         If strComment <> "" Then
-            strComment = "# " & strComment
+            strComment = GetFormattedComment(strComment)
             strScriptWithComment = strComment & Environment.NewLine & strScript
         Else
             strScriptWithComment = strScript
@@ -818,7 +819,7 @@ Public Class RLink
         clsSource.AddParameter("file", Chr(34) & "Rsetup.R" & Chr(34))
         clsCreateIO.SetOperation("<-")
         clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
-        clsCreateIO.AddParameter("right", "instat_object$new()", iPosition:=1)
+        clsCreateIO.AddParameter("right", strDataBookClassName & "$new()", iPosition:=1)
 
         strScript = ""
         strScript = strScript & clsSetWd.ToScript() & Environment.NewLine
@@ -829,7 +830,7 @@ Public Class RLink
     End Function
 
     Public Sub CreateNewInstatObject()
-        RunScript(strInstatDataObject & " <- instat_object$new()", strComment:="Defining new Instat Object")
+        RunScript(strInstatDataObject & " <- " & strDataBookClassName & "$new()", strComment:="Defining new Instat Object")
         bInstatObjectExists = True
     End Sub
 
@@ -1431,7 +1432,7 @@ Public Class RLink
 
         clsCreateIO.SetOperation("<-")
         clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
-        clsCreateIO.AddParameter("right", "instat_object$new()", iPosition:=1)
+        clsCreateIO.AddParameter("right", strDataBookClassName & "$new()", iPosition:=1)
 
         bInstatObjectExists = False
         RunScript(clsRm.ToScript(), strComment:="Closing data")
@@ -1445,4 +1446,21 @@ Public Class RLink
         clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
         RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bSeparateThread:=False)
     End Sub
+
+    'construct and format the comment
+    Public Function GetFormattedComment(strComment As String) As String
+        Dim strReconstructedComment As String = ""
+        Dim arrCommentParts As String()
+        If strComment.Length > 0 Then
+            arrCommentParts = strComment.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+            For Each strPart As String In arrCommentParts
+                If strReconstructedComment = "" Then
+                    strReconstructedComment = "# " & strPart
+                Else
+                    strReconstructedComment = strReconstructedComment & Environment.NewLine & "# " & strPart
+                End If
+            Next
+        End If
+        Return strReconstructedComment
+    End Function
 End Class
