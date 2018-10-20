@@ -16,15 +16,27 @@
 
 Imports instat
 Imports instat.Translations
+
 Public Class sdgPICSARainfallGraph
     Private bControlsInitialised As Boolean = False
+
+    Private clsMutateFunction As New RFunction
+    Private clsMeanFunction As New RFunction
+    Private clsMedianFunction As New RFunction
+    Private clsLowerTercileFunction As New RFunction
+    Private clsUpperTercileFunction As New RFunction
+
+    Private strMeanName As String = ".mean_y"
+    Private strMedianName As String = ".median_y"
+    Private strLowerTercileName As String = ".lower_ter_y"
+    Private strUpperTercileName As String = ".upper_ter_y"
+
     Public clsBaseOperator As ROperator
     Public clsLabsFunction, clsXLabsFunction, clsYLabsFunction As RFunction
     Public clsXScaleContinuousFunction, clsYScaleContinuousFunction As New RFunction
     Public clsCLimitsYContinuous, clsCLimitsYDate As New RFunction
     Public clsXScalecontinuousSeqFunction, clsYScaleContinuousSeqFunction As New RFunction
     Public clsYScaleDateFunction As New RFunction
-    Public clsMeanLine, clsMedianLine, clsTretile As New RFunction
     Public clsThemeFunction As RFunction
     Public dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bRCodeSet As Boolean = False
@@ -43,7 +55,6 @@ Public Class sdgPICSARainfallGraph
     Private dctLabelForDays As New Dictionary(Of String, String)
     Private dctDateTimePeriods As New Dictionary(Of String, String)
     Private dctDateStartMonths As New Dictionary(Of String, String)
-    Private dctLabelTypes As New Dictionary(Of String, String)
 
     Private clsDatePeriodOperator As New ROperator
 
@@ -52,16 +63,16 @@ Public Class sdgPICSARainfallGraph
     Private clsGeomHlineLowerTercile As New RFunction
     Private clsGeomHlineUpperTercile As New RFunction
 
-    Private clsAnnotateMeanLine As New RFunction
+    Private clsGeomTextLabelMeanLine As New RFunction
     Private clsRoundMeanY As New RFunction
     Private clsPasteMeanY As New RFunction
-    Private clsAnnotateMedianLine As New RFunction
+    Private clsGeomTextLabelMedianLine As New RFunction
     Private clsRoundMedianY As New RFunction
     Private clsPasteMedianY As New RFunction
-    Private clsAnnotateLowerTercileLine As New RFunction
+    Private clsGeomTextLabelLowerTercileLine As New RFunction
     Private clsRoundLowerTercileY As New RFunction
     Private clsPasteLowerTercileY As New RFunction
-    Private clsAnnotateUpperTercileLine As New RFunction
+    Private clsGeomTextLabelUpperTercileLine As New RFunction
     Private clsRoundUpperTercileY As New RFunction
     Private clsPasteUpperTercileY As New RFunction
 
@@ -384,17 +395,15 @@ Public Class sdgPICSARainfallGraph
         ucrChkAddMeanLabel.SetText("Add Label")
         ucrChkAddMeanLabel.AddParameterPresentCondition(True, "annotate_mean", True)
         ucrChkAddMeanLabel.AddParameterPresentCondition(False, "annotate_mean", False)
-        ucrChkAddMeanLabel.AddToLinkedControls(ucrInputMeanLineType, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddMeanLabel.AddToLinkedControls(ucrInputMeanLabelType, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAddMeanLabel.AddToLinkedControls(ucrInputMeanLineLabelText, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAddMeanLabel.AddToLinkedControls(ucrChkMeanLineLabelIncludeValue, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        dctLabelTypes.Add("Text", Chr(34) & "text" & Chr(34))
-        dctLabelTypes.Add("Textbox", Chr(34) & "label" & Chr(34))
-
-        ucrInputMeanLineType.SetLinkedDisplayControl(lblMeanLineType)
-        ucrInputMeanLineType.SetParameter(New RParameter("geom", iNewPosition:=0))
-        ucrInputMeanLineType.SetItems(dctLabelTypes)
-        ucrInputMeanLineType.SetDropDownStyleAsNonEditable()
+        ucrInputMeanLabelType.SetLinkedDisplayControl(lblMeanLineType)
+        ucrInputMeanLabelType.SetItems({"Text", "Textbox"})
+        ucrInputMeanLabelType.SetDropDownStyleAsNonEditable()
+        ucrInputMeanLabelType.AddFunctionNamesCondition("Text", "geom_text")
+        ucrInputMeanLabelType.AddFunctionNamesCondition("Textbox", "geom_label")
 
         ucrInputMeanLineLabelText.SetLinkedDisplayControl(lblMeanLineLabelText)
         ucrInputMeanLineLabelText.SetParameter(New RParameter("0", 0, bNewIncludeArgumentName:=False))
@@ -412,14 +421,15 @@ Public Class sdgPICSARainfallGraph
         ucrChkAddMedianLabel.SetText("Add Label")
         ucrChkAddMedianLabel.AddParameterPresentCondition(True, "annotate_median", True)
         ucrChkAddMedianLabel.AddParameterPresentCondition(False, "annotate_median", False)
-        ucrChkAddMedianLabel.AddToLinkedControls(ucrInputMedianLineType, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddMedianLabel.AddToLinkedControls(ucrInputMedianLabelType, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAddMedianLabel.AddToLinkedControls(ucrInputMedianLineLabelText, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAddMedianLabel.AddToLinkedControls(ucrChkMedianLineLabelIncludeValue, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrInputMedianLineType.SetLinkedDisplayControl(lblMedianLineType)
-        ucrInputMedianLineType.SetParameter(New RParameter("geom", iNewPosition:=0))
-        ucrInputMedianLineType.SetItems(dctLabelTypes)
-        ucrInputMedianLineType.SetDropDownStyleAsNonEditable()
+        ucrInputMedianLabelType.SetLinkedDisplayControl(lblMedianLineType)
+        ucrInputMedianLabelType.SetItems({"Text", "Textbox"})
+        ucrInputMedianLabelType.SetDropDownStyleAsNonEditable()
+        ucrInputMedianLabelType.AddFunctionNamesCondition("Text", "geom_text")
+        ucrInputMedianLabelType.AddFunctionNamesCondition("Textbox", "geom_label")
 
         ucrInputMedianLineLabelText.SetLinkedDisplayControl(lblMedianLineLabelText)
         ucrInputMedianLineLabelText.SetParameter(New RParameter("0", 0, bNewIncludeArgumentName:=False))
@@ -437,15 +447,16 @@ Public Class sdgPICSARainfallGraph
         ucrChkAddTercilesLabel.SetText("Add Labels")
         ucrChkAddTercilesLabel.AddParameterPresentCondition(True, "annotate_lower_tercile", True)
         ucrChkAddTercilesLabel.AddParameterPresentCondition(False, "annotate_lower_tercile", False)
-        ucrChkAddTercilesLabel.AddToLinkedControls(ucrInputTercilesLineType, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddTercilesLabel.AddToLinkedControls(ucrInputTercilesLabelType, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAddTercilesLabel.AddToLinkedControls(ucrInputTercilesLineLabelTextLower, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAddTercilesLabel.AddToLinkedControls(ucrInputTercilesLineLabelTextUpper, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAddTercilesLabel.AddToLinkedControls(ucrChkTercilesLineLabelIncludeValue, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrInputTercilesLineType.SetLinkedDisplayControl(lblTercilesLineType)
-        ucrInputTercilesLineType.SetParameter(New RParameter("geom", iNewPosition:=0))
-        ucrInputTercilesLineType.SetItems(dctLabelTypes)
-        ucrInputTercilesLineType.SetDropDownStyleAsNonEditable()
+        ucrInputTercilesLabelType.SetLinkedDisplayControl(lblTercilesLineType)
+        ucrInputTercilesLabelType.SetItems({"Text", "Textbox"})
+        ucrInputTercilesLabelType.SetDropDownStyleAsNonEditable()
+        ucrInputTercilesLabelType.AddFunctionNamesCondition("Text", "geom_text")
+        ucrInputTercilesLabelType.AddFunctionNamesCondition("Textbox", "geom_label")
 
         ucrInputTercilesLineLabelTextLower.SetLinkedDisplayControl(lblTercilesLineLabelTextLower)
         ucrInputTercilesLineLabelTextLower.SetParameter(New RParameter("0", 0, bNewIncludeArgumentName:=False))
@@ -483,7 +494,7 @@ Public Class sdgPICSARainfallGraph
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing, Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsNumeric As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing, Optional clsNewAnnotateMeanLine As RFunction = Nothing, Optional clsNewRoundMeanY As RFunction = Nothing, Optional clsNewPasteMeanY As RFunction = Nothing, Optional clsNewAnnotateMedianLine As RFunction = Nothing, Optional clsNewRoundMedianY As RFunction = Nothing, Optional clsNewPasteMedianY As RFunction = Nothing, Optional clsNewAnnotateLowerTercileLine As RFunction = Nothing, Optional clsNewRoundLowerTercileY As RFunction = Nothing, Optional clsNewPasteLowerTercileY As RFunction = Nothing, Optional clsNewAnnotateUpperTercileLine As RFunction = Nothing, Optional clsNewRoundUpperTercileY As RFunction = Nothing, Optional clsNewPasteUpperTercileY As RFunction = Nothing, Optional strXAxisType As String = "", Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing, Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsNumeric As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing, Optional clsNewGeomTextLabelMeanLine As RFunction = Nothing, Optional clsNewRoundMeanY As RFunction = Nothing, Optional clsNewPasteMeanY As RFunction = Nothing, Optional clsNewGeomTextLabelMedianLine As RFunction = Nothing, Optional clsNewRoundMedianY As RFunction = Nothing, Optional clsNewPasteMedianY As RFunction = Nothing, Optional clsNewGeomTextLabelLowerTercileLine As RFunction = Nothing, Optional clsNewRoundLowerTercileY As RFunction = Nothing, Optional clsNewPasteLowerTercileY As RFunction = Nothing, Optional clsNewGeomTextLabelUpperTercileLine As RFunction = Nothing, Optional clsNewRoundUpperTercileY As RFunction = Nothing, Optional clsNewPasteUpperTercileY As RFunction = Nothing, Optional strXAxisType As String = "", Optional clsNewMutateFunction As RFunction = Nothing, Optional clsNewMeanFunction As RFunction = Nothing, Optional clsNewMedianFunction As RFunction = Nothing, Optional clsNewLowerTercileFunction As RFunction = Nothing, Optional clsNewUpperTercileFunction As RFunction = Nothing, Optional bReset As Boolean = False)
         bRCodeSet = False
         clsBaseOperator = clsNewOperator
 
@@ -494,21 +505,27 @@ Public Class sdgPICSARainfallGraph
         'themes function
         clsThemeFunction = clsNewThemeFunction
 
+        clsMutateFunction = clsNewMutateFunction
+        clsMeanFunction = clsNewMeanFunction
+        clsMedianFunction = clsNewMedianFunction
+        clsLowerTercileFunction = clsNewLowerTercileFunction
+        clsUpperTercileFunction = clsNewUpperTercileFunction
+
         clsGeomHlineMean = clsNewGeomhlineMean
         clsGeomHlineMedian = clsNewGeomhlineMedian
         clsGeomHlineLowerTercile = clsNewGeomhlineLowerTercile
         clsGeomHlineUpperTercile = clsNewGeomhlineUpperTercile
 
-        clsAnnotateMeanLine = clsNewAnnotateMeanLine
+        clsGeomTextLabelMeanLine = clsNewGeomTextLabelMeanLine
         clsRoundMeanY = clsNewRoundMeanY
         clsPasteMeanY = clsNewPasteMeanY
-        clsAnnotateMedianLine = clsNewAnnotateMedianLine
+        clsGeomTextLabelMedianLine = clsNewGeomTextLabelMedianLine
         clsRoundMedianY = clsNewRoundMedianY
         clsPasteMedianY = clsNewPasteMedianY
-        clsAnnotateLowerTercileLine = clsNewAnnotateLowerTercileLine
+        clsGeomTextLabelLowerTercileLine = clsNewGeomTextLabelLowerTercileLine
         clsRoundLowerTercileY = clsNewRoundLowerTercileY
         clsPasteLowerTercileY = clsNewPasteLowerTercileY
-        clsAnnotateUpperTercileLine = clsNewAnnotateUpperTercileLine
+        clsGeomTextLabelUpperTercileLine = clsNewGeomTextLabelUpperTercileLine
         clsRoundUpperTercileY = clsNewRoundUpperTercileY
         clsPasteUpperTercileY = clsNewPasteUpperTercileY
 
@@ -770,10 +787,10 @@ Public Class sdgPICSARainfallGraph
         ucrChkAddMedianLabel.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddTercilesLabel.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
-        ucrInputMeanLineType.SetRCode(clsAnnotateMeanLine, bReset, bCloneIfNeeded:=True)
-        ucrInputMedianLineType.SetRCode(clsAnnotateMedianLine, bReset, bCloneIfNeeded:=True)
-        ucrInputTercilesLineType.AddAdditionalCodeParameterPair(clsAnnotateLowerTercileLine, New RParameter("geom", 0), iAdditionalPairNo:=1)
-        ucrInputTercilesLineType.SetRCode(clsAnnotateLowerTercileLine, bReset, bCloneIfNeeded:=True)
+        ucrInputMeanLabelType.SetRCode(clsGeomTextLabelMeanLine, bReset, bCloneIfNeeded:=True)
+        ucrInputMedianLabelType.SetRCode(clsGeomTextLabelMedianLine, bReset, bCloneIfNeeded:=True)
+        ucrInputTercilesLabelType.AddAdditionalCodeParameterPair(clsGeomTextLabelLowerTercileLine, New RParameter("geom", 0), iAdditionalPairNo:=1)
+        ucrInputTercilesLabelType.SetRCode(clsGeomTextLabelLowerTercileLine, bReset, bCloneIfNeeded:=True)
 
         ucrInputMeanLineLabelText.SetRCode(clsPasteMeanY, bReset, bCloneIfNeeded:=True)
         ucrInputMedianLineLabelText.SetRCode(clsPasteMedianY, bReset, bCloneIfNeeded:=True)
@@ -825,6 +842,9 @@ Public Class sdgPICSARainfallGraph
         AddRemoveXAxisScalesContinuous()
         AddRemoveYAxisScales()
         AddRemoveHline()
+        SetMeanLabelType()
+        SetMedianLabelType()
+        SetTercilesLabelType()
         AddRemovePanelBorder()
         AddRemoveDateBreaks()
     End Sub
@@ -833,8 +853,9 @@ Public Class sdgPICSARainfallGraph
         If bRCodeSet Then
             If ucrChkAddMean.Checked Then
                 clsBaseOperator.AddParameter("hlinemean", clsRFunctionParameter:=clsGeomHlineMean, iPosition:=20)
+                clsMutateFunction.AddParameter(strMeanName, clsRFunctionParameter:=clsMeanFunction, iPosition:=0)
                 If ucrChkAddMeanLabel.Checked Then
-                    clsBaseOperator.AddParameter("annotate_mean", clsRFunctionParameter:=clsAnnotateMeanLine, iPosition:=24)
+                    clsBaseOperator.AddParameter("annotate_mean", clsRFunctionParameter:=clsGeomTextLabelMeanLine, iPosition:=24)
                     If ucrChkMeanLineLabelIncludeValue.Checked Then
                         clsPasteMeanY.AddParameter("1", clsRFunctionParameter:=clsRoundMeanY, bIncludeArgumentName:=False, iPosition:=1)
                     Else
@@ -846,12 +867,14 @@ Public Class sdgPICSARainfallGraph
             Else
                 clsBaseOperator.RemoveParameterByName("hlinemean")
                 clsBaseOperator.RemoveParameterByName("annotate_mean")
+                clsMutateFunction.RemoveParameterByName(strMeanName)
             End If
 
             If ucrChkAddMedian.Checked Then
                 clsBaseOperator.AddParameter("hlinemedian", clsRFunctionParameter:=clsGeomHlineMedian, iPosition:=21)
+                clsMutateFunction.AddParameter(strMedianName, clsRFunctionParameter:=clsMedianFunction, iPosition:=1)
                 If ucrChkAddMedianLabel.Checked Then
-                    clsBaseOperator.AddParameter("annotate_median", clsRFunctionParameter:=clsAnnotateMedianLine, iPosition:=25)
+                    clsBaseOperator.AddParameter("annotate_median", clsRFunctionParameter:=clsGeomTextLabelMedianLine, iPosition:=25)
                     If ucrChkMedianLineLabelIncludeValue.Checked Then
                         clsPasteMedianY.AddParameter("1", clsRFunctionParameter:=clsRoundMedianY, bIncludeArgumentName:=False, iPosition:=1)
                     Else
@@ -863,14 +886,17 @@ Public Class sdgPICSARainfallGraph
             Else
                 clsBaseOperator.RemoveParameterByName("hlinemedian")
                 clsBaseOperator.RemoveParameterByName("annotate_median")
+                clsMutateFunction.RemoveParameterByName(strMedianName)
             End If
 
             If ucrChkAddTerciles.Checked Then
                 clsBaseOperator.AddParameter("hlinelowertercile", clsRFunctionParameter:=clsGeomHlineLowerTercile, iPosition:=22)
                 clsBaseOperator.AddParameter("hlineuppertercile", clsRFunctionParameter:=clsGeomHlineUpperTercile, iPosition:=23)
+                clsMutateFunction.AddParameter(strLowerTercileName, clsRFunctionParameter:=clsLowerTercileFunction, iPosition:=2)
+                clsMutateFunction.AddParameter(strUpperTercileName, clsRFunctionParameter:=clsUpperTercileFunction, iPosition:=3)
                 If ucrChkAddTercilesLabel.Checked Then
-                    clsBaseOperator.AddParameter("annotate_lower_tercile", clsRFunctionParameter:=clsAnnotateLowerTercileLine, iPosition:=26)
-                    clsBaseOperator.AddParameter("annotate_upper_tercile", clsRFunctionParameter:=clsAnnotateUpperTercileLine, iPosition:=27)
+                    clsBaseOperator.AddParameter("annotate_lower_tercile", clsRFunctionParameter:=clsGeomTextLabelLowerTercileLine, iPosition:=26)
+                    clsBaseOperator.AddParameter("annotate_upper_tercile", clsRFunctionParameter:=clsGeomTextLabelUpperTercileLine, iPosition:=27)
                     If ucrChkTercilesLineLabelIncludeValue.Checked Then
                         clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
                         clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
@@ -887,6 +913,8 @@ Public Class sdgPICSARainfallGraph
                 clsBaseOperator.RemoveParameterByName("hlineuppertercile")
                 clsBaseOperator.RemoveParameterByName("annotate_lower_tercile")
                 clsBaseOperator.RemoveParameterByName("annotate_upper_tercile")
+                clsMutateFunction.RemoveParameterByName(strLowerTercileName)
+                clsMutateFunction.RemoveParameterByName(strUpperTercileName)
             End If
         End If
     End Sub
@@ -1257,5 +1285,49 @@ Public Class sdgPICSARainfallGraph
 
     Private Sub ucrPnlYAxisType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlYAxisType.ControlValueChanged
         AddRemoveYAxisScales()
+    End Sub
+
+    Private Sub ucrInputMeanLineType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMeanLabelType.ControlValueChanged
+        SetMeanLabelType()
+    End Sub
+
+    Private Sub SetMeanLabelType()
+        If bRCodeSet Then
+            If ucrInputMeanLabelType.GetText() = "Text" Then
+                clsGeomTextLabelMeanLine.SetRCommand("geom_text")
+            ElseIf ucrInputMeanLabelType.GetText() = "Textbox" Then
+                clsGeomTextLabelMeanLine.SetRCommand("geom_label")
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrInputMedianLabelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMedianLabelType.ControlValueChanged
+        SetMedianLabelType()
+    End Sub
+
+    Private Sub SetMedianLabelType()
+        If bRCodeSet Then
+            If ucrInputMedianLabelType.GetText() = "Text" Then
+                clsGeomTextLabelMedianLine.SetRCommand("geom_text")
+            ElseIf ucrInputMedianLabelType.GetText() = "Textbox" Then
+                clsGeomTextLabelMedianLine.SetRCommand("geom_label")
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrInputTercilesLabelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTercilesLabelType.ControlValueChanged
+        SetTercilesLabelType()
+    End Sub
+
+    Private Sub SetTercilesLabelType()
+        If bRCodeSet Then
+            If ucrInputTercilesLabelType.GetText() = "Text" Then
+                clsGeomTextLabelLowerTercileLine.SetRCommand("geom_text")
+                clsGeomTextLabelUpperTercileLine.SetRCommand("geom_text")
+            ElseIf ucrInputTercilesLabelType.GetText() = "Textbox" Then
+                clsGeomTextLabelLowerTercileLine.SetRCommand("geom_label")
+                clsGeomTextLabelUpperTercileLine.SetRCommand("geom_label")
+            End If
+        End If
     End Sub
 End Class
