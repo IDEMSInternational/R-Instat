@@ -68,6 +68,7 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputXTo = New instat.ucrInputTextBox()
         Me.ucrNudXAxisAngle = New instat.ucrNud()
         Me.tpYAxis = New System.Windows.Forms.TabPage()
+        Me.lblDateDisplayFormat = New System.Windows.Forms.Label()
         Me.ucrInputYSpecifyUpperLimitDate = New instat.ucrInputComboBox()
         Me.ucrInputYSpecifyUpperLimitNumeric = New instat.ucrInputTextBox()
         Me.ucrChkYSpecifyUpperLimit = New instat.ucrCheck()
@@ -114,13 +115,13 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrChkMedianLineLabelIncludeValue = New instat.ucrCheck()
         Me.ucrChkMeanLineLabelIncludeValue = New instat.ucrCheck()
         Me.ucrInputTercilesLineLabelTextLower = New instat.ucrInputTextBox()
-        Me.ucrInputTercilesLineType = New instat.ucrInputComboBox()
+        Me.ucrInputTercilesLabelType = New instat.ucrInputComboBox()
         Me.ucrInputMedianLineLabelText = New instat.ucrInputTextBox()
-        Me.ucrInputMedianLineType = New instat.ucrInputComboBox()
+        Me.ucrInputMedianLabelType = New instat.ucrInputComboBox()
         Me.ucrInputMeanLineLabelText = New instat.ucrInputTextBox()
         Me.ucrChkAddTercilesLabel = New instat.ucrCheck()
         Me.ucrChkAddMedianLabel = New instat.ucrCheck()
-        Me.ucrInputMeanLineType = New instat.ucrInputComboBox()
+        Me.ucrInputMeanLabelType = New instat.ucrInputComboBox()
         Me.ucrChkAddMean = New instat.ucrCheck()
         Me.ucrChkAddMeanLabel = New instat.ucrCheck()
         Me.ucrChkAddMedian = New instat.ucrCheck()
@@ -157,7 +158,6 @@ Partial Class sdgPICSARainfallGraph
         Me.UcrChkPnlBackgroundFill = New instat.ucrCheck()
         Me.ucrChkPnlBackgroundColour = New instat.ucrCheck()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
-        Me.lblDateDisplayFormat = New System.Windows.Forms.Label()
         Me.tbPICSA.SuspendLayout()
         Me.tpTitles.SuspendLayout()
         Me.grpyAxisTitle.SuspendLayout()
@@ -555,6 +555,11 @@ Partial Class sdgPICSARainfallGraph
         Me.tpYAxis.Name = "tpYAxis"
         Me.tpYAxis.UseVisualStyleBackColor = True
         '
+        'lblDateDisplayFormat
+        '
+        resources.ApplyResources(Me.lblDateDisplayFormat, "lblDateDisplayFormat")
+        Me.lblDateDisplayFormat.Name = "lblDateDisplayFormat"
+        '
         'ucrInputYSpecifyUpperLimitDate
         '
         Me.ucrInputYSpecifyUpperLimitDate.AddQuotesIfUnrecognised = True
@@ -756,13 +761,13 @@ Partial Class sdgPICSARainfallGraph
         Me.tpLines.Controls.Add(Me.ucrChkMedianLineLabelIncludeValue)
         Me.tpLines.Controls.Add(Me.ucrChkMeanLineLabelIncludeValue)
         Me.tpLines.Controls.Add(Me.ucrInputTercilesLineLabelTextLower)
-        Me.tpLines.Controls.Add(Me.ucrInputTercilesLineType)
+        Me.tpLines.Controls.Add(Me.ucrInputTercilesLabelType)
         Me.tpLines.Controls.Add(Me.ucrInputMedianLineLabelText)
-        Me.tpLines.Controls.Add(Me.ucrInputMedianLineType)
+        Me.tpLines.Controls.Add(Me.ucrInputMedianLabelType)
         Me.tpLines.Controls.Add(Me.ucrInputMeanLineLabelText)
         Me.tpLines.Controls.Add(Me.ucrChkAddTercilesLabel)
         Me.tpLines.Controls.Add(Me.ucrChkAddMedianLabel)
-        Me.tpLines.Controls.Add(Me.ucrInputMeanLineType)
+        Me.tpLines.Controls.Add(Me.ucrInputMeanLabelType)
         Me.tpLines.Controls.Add(Me.ucrChkAddMean)
         Me.tpLines.Controls.Add(Me.ucrChkAddMeanLabel)
         Me.tpLines.Controls.Add(Me.ucrChkAddMedian)
@@ -894,12 +899,12 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrInputTercilesLineLabelTextLower, "ucrInputTercilesLineLabelTextLower")
         Me.ucrInputTercilesLineLabelTextLower.Name = "ucrInputTercilesLineLabelTextLower"
         '
-        'ucrInputTercilesLineType
+        'ucrInputTercilesLabelType
         '
-        Me.ucrInputTercilesLineType.AddQuotesIfUnrecognised = True
-        Me.ucrInputTercilesLineType.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTercilesLineType, "ucrInputTercilesLineType")
-        Me.ucrInputTercilesLineType.Name = "ucrInputTercilesLineType"
+        Me.ucrInputTercilesLabelType.AddQuotesIfUnrecognised = True
+        Me.ucrInputTercilesLabelType.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTercilesLabelType, "ucrInputTercilesLabelType")
+        Me.ucrInputTercilesLabelType.Name = "ucrInputTercilesLabelType"
         '
         'ucrInputMedianLineLabelText
         '
@@ -909,12 +914,12 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrInputMedianLineLabelText, "ucrInputMedianLineLabelText")
         Me.ucrInputMedianLineLabelText.Name = "ucrInputMedianLineLabelText"
         '
-        'ucrInputMedianLineType
+        'ucrInputMedianLabelType
         '
-        Me.ucrInputMedianLineType.AddQuotesIfUnrecognised = True
-        Me.ucrInputMedianLineType.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMedianLineType, "ucrInputMedianLineType")
-        Me.ucrInputMedianLineType.Name = "ucrInputMedianLineType"
+        Me.ucrInputMedianLabelType.AddQuotesIfUnrecognised = True
+        Me.ucrInputMedianLabelType.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMedianLabelType, "ucrInputMedianLabelType")
+        Me.ucrInputMedianLabelType.Name = "ucrInputMedianLabelType"
         '
         'ucrInputMeanLineLabelText
         '
@@ -936,12 +941,12 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrChkAddMedianLabel, "ucrChkAddMedianLabel")
         Me.ucrChkAddMedianLabel.Name = "ucrChkAddMedianLabel"
         '
-        'ucrInputMeanLineType
+        'ucrInputMeanLabelType
         '
-        Me.ucrInputMeanLineType.AddQuotesIfUnrecognised = True
-        Me.ucrInputMeanLineType.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMeanLineType, "ucrInputMeanLineType")
-        Me.ucrInputMeanLineType.Name = "ucrInputMeanLineType"
+        Me.ucrInputMeanLabelType.AddQuotesIfUnrecognised = True
+        Me.ucrInputMeanLabelType.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMeanLabelType, "ucrInputMeanLabelType")
+        Me.ucrInputMeanLabelType.Name = "ucrInputMeanLabelType"
         '
         'ucrChkAddMean
         '
@@ -1213,11 +1218,6 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrSdgPICSARainfalbuttons, "ucrSdgPICSARainfalbuttons")
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
         '
-        'lblDateDisplayFormat
-        '
-        resources.ApplyResources(Me.lblDateDisplayFormat, "lblDateDisplayFormat")
-        Me.lblDateDisplayFormat.Name = "lblDateDisplayFormat"
-        '
         'sdgPICSARainfallGraph
         '
         resources.ApplyResources(Me, "$this")
@@ -1342,15 +1342,15 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents ucrInputTercilesLineLabelTextLower As ucrInputTextBox
     Friend WithEvents lblTercilesLineLabelTextLower As Label
     Friend WithEvents lblTercilesLineType As Label
-    Friend WithEvents ucrInputTercilesLineType As ucrInputComboBox
+    Friend WithEvents ucrInputTercilesLabelType As ucrInputComboBox
     Friend WithEvents ucrInputMedianLineLabelText As ucrInputTextBox
     Friend WithEvents lblMedianLineLabelText As Label
     Friend WithEvents lblMedianLineType As Label
-    Friend WithEvents ucrInputMedianLineType As ucrInputComboBox
+    Friend WithEvents ucrInputMedianLabelType As ucrInputComboBox
     Friend WithEvents ucrInputMeanLineLabelText As ucrInputTextBox
     Friend WithEvents lblMeanLineLabelText As Label
     Friend WithEvents lblMeanLineType As Label
-    Friend WithEvents ucrInputMeanLineType As ucrInputComboBox
+    Friend WithEvents ucrInputMeanLabelType As ucrInputComboBox
     Friend WithEvents grpLinesFormat As GroupBox
     Friend WithEvents ucrNudHLineSize As ucrNud
     Friend WithEvents ucrChkHLineSize As ucrCheck
