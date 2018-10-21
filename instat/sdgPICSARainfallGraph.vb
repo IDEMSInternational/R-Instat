@@ -319,43 +319,55 @@ Public Class sdgPICSARainfallGraph
         ucrNudPnlBackgroundSize.DecimalPlaces = 1
         ucrNudPnlBackgroundSize.Minimum = 0
 
-        UcrChkMajorGridLineColour.SetText("Colour")
-        UcrChkMajorGridLineColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrInputMajorGridLineColour.SetParameter(New RParameter("colour"))
-        UcrInputMajorGridLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
-        UcrInputMajorGridLineColour.SetDropDownStyleAsNonEditable()
+        ucrChkMajorGridLineColour.SetText("Colour")
+        ucrChkMajorGridLineColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkMajorGridLineColour.AddToLinkedControls(ucrInputMajorGridLineColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
 
-        UcrChkMajorGridLinetype.SetText("Line Type")
-        UcrChkMajorGridLinetype.SetParameter(New RParameter("linetype"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrInputMajorGridLineLinetype.SetParameter(New RParameter("linetype"))
-        UcrInputMajorGridLineLinetype.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
-        UcrInputMajorGridLineLinetype.SetDropDownStyleAsNonEditable()
+        ucrInputMajorGridLineColour.SetParameter(New RParameter("colour"))
+        ucrInputMajorGridLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
+        ucrInputMajorGridLineColour.SetDropDownStyleAsNonEditable()
 
-        UcrChkMajorGridLineSize.SetText("Size")
-        UcrChkMajorGridLineSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrNudMajorGridLineSize.SetParameter(New RParameter("size"))
-        UcrNudMajorGridLineSize.Increment = 0.1
-        UcrNudMajorGridLineSize.DecimalPlaces = 1
-        UcrNudMajorGridLineSize.Minimum = 0
+        ucrChkMajorGridLineLinetype.SetText("Line Type")
+        ucrChkMajorGridLineLinetype.SetParameter(New RParameter("linetype"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkMajorGridLineLinetype.AddToLinkedControls(ucrInputMajorGridLineLinetype, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Long-dash")
 
-        UcrChkMinorGridLineColour.SetText("Colour")
-        UcrChkMinorGridLineColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrInputMinorGridLineColour.SetParameter(New RParameter("colour"))
-        UcrInputMinorGridLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
-        UcrInputMinorGridLineColour.SetDropDownStyleAsNonEditable()
+        ucrInputMajorGridLineLinetype.SetParameter(New RParameter("linetype"))
+        ucrInputMajorGridLineLinetype.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
+        ucrInputMajorGridLineLinetype.SetDropDownStyleAsNonEditable()
 
-        UcrChkMinorGridLineType.SetText("Line Type")
-        UcrChkMinorGridLineType.SetParameter(New RParameter("linetype"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrInputMinorGridLineTpe.SetParameter(New RParameter("linetype"))
-        UcrInputMinorGridLineTpe.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
-        UcrInputMinorGridLineTpe.SetDropDownStyleAsNonEditable()
+        ucrChkMajorGridLineSize.SetText("Size")
+        ucrChkMajorGridLineSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkMajorGridLineSize.AddToLinkedControls(ucrNudMajorGridLineSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        UcrChkMinorGridLineSize.SetText("Size")
-        UcrChkMinorGridLineSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrNudMinorGridLineSize.SetParameter(New RParameter("size"))
-        UcrNudMinorGridLineSize.Increment = 0.1
-        UcrNudMinorGridLineSize.DecimalPlaces = 1
-        UcrNudMinorGridLineSize.Minimum = 0
+        ucrNudMajorGridLineSize.SetParameter(New RParameter("size"))
+        ucrNudMajorGridLineSize.Increment = 0.1
+        ucrNudMajorGridLineSize.DecimalPlaces = 1
+        ucrNudMajorGridLineSize.Minimum = 0
+
+        ucrChkMinorGridLineColour.SetText("Colour")
+        ucrChkMinorGridLineColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkMinorGridLineColour.AddToLinkedControls(ucrInputMinorGridLineColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Light-Blue")
+
+        ucrInputMinorGridLineColour.SetParameter(New RParameter("colour"))
+        ucrInputMinorGridLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
+        ucrInputMinorGridLineColour.SetDropDownStyleAsNonEditable()
+
+        ucrChkMinorGridLineLinetype.SetText("Line Type")
+        ucrChkMinorGridLineLinetype.SetParameter(New RParameter("linetype"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkMinorGridLineLinetype.AddToLinkedControls(ucrInputMinorGridLineLinetype, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Long-dash")
+
+        ucrInputMinorGridLineLinetype.SetParameter(New RParameter("linetype"))
+        ucrInputMinorGridLineLinetype.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
+        ucrInputMinorGridLineLinetype.SetDropDownStyleAsNonEditable()
+
+        ucrChkMinorGridLineSize.SetText("Size")
+        ucrChkMinorGridLineSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkMinorGridLineSize.AddToLinkedControls(ucrNudMinorGridLineSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudMinorGridLineSize.SetParameter(New RParameter("size"))
+        ucrNudMinorGridLineSize.Increment = 0.1
+        ucrNudMinorGridLineSize.DecimalPlaces = 1
+        ucrNudMinorGridLineSize.Minimum = 0
 
         ucrChkBorderColour.SetText("Colour")
         ucrChkBorderColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
@@ -380,14 +392,6 @@ Public Class sdgPICSARainfallGraph
         UcrChkPnlBackgroundFill.AddToLinkedControls(UcrInputPnlBackgroundFill, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         UcrChkPnlBackgroundLineType.AddToLinkedControls(UcrInputPnlBackgroundLinetype, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         UcrChkPnlBackgroundSize.AddToLinkedControls(ucrNudPnlBackgroundSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        UcrChkMajorGridLineColour.AddToLinkedControls(UcrInputMajorGridLineColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        UcrChkMajorGridLinetype.AddToLinkedControls(UcrInputMajorGridLineLinetype, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        UcrChkMajorGridLineSize.AddToLinkedControls(UcrNudMajorGridLineSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        UcrChkMinorGridLineColour.AddToLinkedControls(UcrInputMinorGridLineColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        UcrChkMinorGridLineType.AddToLinkedControls(UcrInputMinorGridLineTpe, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        UcrChkMinorGridLineSize.AddToLinkedControls(UcrNudMinorGridLineSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkBorderColour.AddToLinkedControls(ucrInputBorderColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkBorderLineType.AddToLinkedControls(ucrInputBorderLinetype, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Solid")
@@ -500,6 +504,13 @@ Public Class sdgPICSARainfallGraph
         ucrNudHLineSize.DecimalPlaces = 1
         ucrNudHLineSize.Minimum = 0
 
+        ucrNudLabelTransparency.SetParameter(New RParameter("alpha", 4))
+        ucrNudLabelTransparency.SetRDefault(1)
+        ucrNudLabelTransparency.Increment = 0.01
+        ucrNudLabelTransparency.DecimalPlaces = 2
+        ucrNudLabelTransparency.Minimum = 0
+        ucrNudLabelTransparency.Maximum = 1
+
         bControlsInitialised = True
     End Sub
 
@@ -596,19 +607,19 @@ Public Class sdgPICSARainfallGraph
         UcrChkPnlBackgroundSize.SetRCode(clsPanelBackgroundElementRect, bReset, bCloneIfNeeded:=True)
         ucrNudPnlBackgroundSize.SetRCode(clsPanelBackgroundElementRect, bReset, bCloneIfNeeded:=True)
 
-        UcrChkMajorGridLineColour.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
-        UcrInputMajorGridLineColour.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
-        UcrChkMajorGridLinetype.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
-        UcrInputMajorGridLineLinetype.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
-        UcrChkMajorGridLineSize.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
-        UcrNudMajorGridLineSize.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
+        ucrChkMajorGridLineColour.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
+        ucrInputMajorGridLineColour.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
+        ucrChkMajorGridLineLinetype.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
+        ucrInputMajorGridLineLinetype.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
+        ucrChkMajorGridLineSize.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
+        ucrNudMajorGridLineSize.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
 
-        UcrChkMinorGridLineColour.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
-        UcrInputMinorGridLineColour.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
-        UcrChkMinorGridLineType.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
-        UcrInputMinorGridLineTpe.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
-        UcrChkMinorGridLineSize.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
-        UcrNudMinorGridLineSize.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
+        ucrChkMinorGridLineColour.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
+        ucrInputMinorGridLineColour.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
+        ucrChkMinorGridLineLinetype.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
+        ucrInputMinorGridLineLinetype.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
+        ucrChkMinorGridLineSize.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
+        ucrNudMinorGridLineSize.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
 
         ucrChkBorderColour.SetRCode(clsPanelBorderElementRect, bReset, bCloneIfNeeded:=True)
         ucrInputBorderColour.SetRCode(clsPanelBorderElementRect, bReset, bCloneIfNeeded:=True)
@@ -857,6 +868,11 @@ Public Class sdgPICSARainfallGraph
         ucrInputHLineType.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
         ucrChkHLineSize.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
         ucrNudHLineSize.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
+
+        ucrNudLabelTransparency.AddAdditionalCodeParameterPair(clsGeomTextLabelMedianLine, New RParameter("alpha", 4), iAdditionalPairNo:=1)
+        ucrNudLabelTransparency.AddAdditionalCodeParameterPair(clsGeomTextLabelLowerTercileLine, New RParameter("alpha", 4), iAdditionalPairNo:=2)
+        ucrNudLabelTransparency.AddAdditionalCodeParameterPair(clsGeomTextLabelUpperTercileLine, New RParameter("alpha", 4), iAdditionalPairNo:=3)
+        ucrNudLabelTransparency.SetRCode(clsGeomTextLabelMeanLine, bReset, bCloneIfNeeded:=True)
 
         bRCodeSet = True
         AddRemoveTheme()
@@ -1191,7 +1207,7 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemovePanelGridMajor()
-        If (UcrChkMajorGridLineColour.Checked AndAlso Not UcrInputMajorGridLineColour.IsEmpty()) OrElse (UcrChkMajorGridLinetype.Checked AndAlso Not UcrInputMajorGridLineLinetype.IsEmpty()) OrElse (UcrChkMajorGridLineSize.Checked AndAlso UcrNudMajorGridLineSize.GetText <> "") Then
+        If (ucrChkMajorGridLineColour.Checked AndAlso Not ucrInputMajorGridLineColour.IsEmpty()) OrElse (ucrChkMajorGridLineLinetype.Checked AndAlso Not ucrInputMajorGridLineLinetype.IsEmpty()) OrElse (ucrChkMajorGridLineSize.Checked AndAlso ucrNudMajorGridLineSize.GetText <> "") Then
             clsThemeFunction.AddParameter("panel.grid.major", clsRFunctionParameter:=clsElementPanelGridMajor)
         Else
             clsThemeFunction.RemoveParameterByName("panel.grid.major")
@@ -1200,7 +1216,7 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemovePanelGridMinor()
-        If (UcrChkMinorGridLineColour.Checked AndAlso Not UcrInputMinorGridLineColour.IsEmpty()) OrElse (UcrChkMinorGridLineType.Checked AndAlso Not UcrInputMinorGridLineTpe.IsEmpty()) OrElse (UcrChkMinorGridLineSize.Checked AndAlso UcrNudMinorGridLineSize.GetText <> "") Then
+        If (ucrChkMinorGridLineColour.Checked AndAlso Not ucrInputMinorGridLineColour.IsEmpty()) OrElse (ucrChkMinorGridLineLinetype.Checked AndAlso Not ucrInputMinorGridLineLinetype.IsEmpty()) OrElse (ucrChkMinorGridLineSize.Checked AndAlso ucrNudMinorGridLineSize.GetText <> "") Then
             clsThemeFunction.AddParameter("panel.grid.minor", clsRFunctionParameter:=clsElementPanelGridMinor)
         Else
             clsThemeFunction.RemoveParameterByName("panel.grid.minor")
@@ -1223,11 +1239,11 @@ Public Class sdgPICSARainfallGraph
         AddRemovePanelBackground()
     End Sub
 
-    Private Sub UcrChkMajorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrChkMajorGridLineColour.ControlValueChanged, UcrChkMajorGridLinetype.ControlValueChanged, UcrChkMajorGridLineSize.ControlValueChanged
+    Private Sub UcrChkMajorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMajorGridLineColour.ControlValueChanged, ucrChkMajorGridLineLinetype.ControlValueChanged, ucrChkMajorGridLineSize.ControlValueChanged
         AddRemovePanelGridMajor()
     End Sub
 
-    Private Sub UcrChkMinorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrChkMinorGridLineColour.ControlValueChanged, UcrChkMinorGridLineType.ControlValueChanged, UcrChkMinorGridLineSize.ControlValueChanged
+    Private Sub UcrChkMinorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMinorGridLineColour.ControlValueChanged, ucrChkMinorGridLineLinetype.ControlValueChanged, ucrChkMinorGridLineSize.ControlValueChanged
         AddRemovePanelGridMinor()
     End Sub
 
