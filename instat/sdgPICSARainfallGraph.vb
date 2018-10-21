@@ -891,7 +891,7 @@ Public Class sdgPICSARainfallGraph
                     clsBaseOperator.AddParameter("annotate_mean", clsRFunctionParameter:=clsGeomTextLabelMeanLine, iPosition:=24)
                     If ucrChkMeanLineLabelIncludeValue.Checked Then
                         If rdoYNumeric.Checked Then
-                            clsPasteMeanY.AddParameter("1", strMeanName, bIncludeArgumentName:=False, iPosition:=1)
+                            clsPasteMeanY.AddParameter("1", clsRFunctionParameter:=clsRoundMeanY, bIncludeArgumentName:=False, iPosition:=1)
                         ElseIf rdoYDate.Checked Then
                             clsPasteMeanY.AddParameter("1", clsRFunctionParameter:=clsFormatMeanY, bIncludeArgumentName:=False, iPosition:=1)
                         End If
@@ -918,7 +918,7 @@ Public Class sdgPICSARainfallGraph
                     clsBaseOperator.AddParameter("annotate_median", clsRFunctionParameter:=clsGeomTextLabelMedianLine, iPosition:=25)
                     If ucrChkMedianLineLabelIncludeValue.Checked Then
                         If rdoYNumeric.Checked Then
-                            clsPasteMedianY.AddParameter("1", strMedianName, bIncludeArgumentName:=False, iPosition:=1)
+                            clsPasteMedianY.AddParameter("1", clsRFunctionParameter:=clsRoundMedianY, bIncludeArgumentName:=False, iPosition:=1)
                         ElseIf rdoYDate.Checked Then
                             clsPasteMedianY.AddParameter("1", clsRFunctionParameter:=clsFormatMedianY, bIncludeArgumentName:=False, iPosition:=1)
                         End If
@@ -949,11 +949,9 @@ Public Class sdgPICSARainfallGraph
                     clsBaseOperator.AddParameter("annotate_lower_tercile", clsRFunctionParameter:=clsGeomTextLabelLowerTercileLine, iPosition:=26)
                     clsBaseOperator.AddParameter("annotate_upper_tercile", clsRFunctionParameter:=clsGeomTextLabelUpperTercileLine, iPosition:=27)
                     If ucrChkTercilesLineLabelIncludeValue.Checked Then
-                        clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
-                        clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
                         If rdoYNumeric.Checked Then
-                            clsPasteLowerTercileY.AddParameter("1", strLowerTercileName, bIncludeArgumentName:=False, iPosition:=1)
-                            clsPasteUpperTercileY.AddParameter("1", strUpperTercileName, bIncludeArgumentName:=False, iPosition:=1)
+                            clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
+                            clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
                         ElseIf rdoYDate.Checked Then
                             clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsFormatLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
                             clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsFormatUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)

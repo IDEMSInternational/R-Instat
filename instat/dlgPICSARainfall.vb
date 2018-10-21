@@ -450,7 +450,7 @@ Public Class dlgPICSARainfall
         'Upper Tercile Line Label
         clsGeomTextLabelUpperTercileLine.SetPackageName("ggplot2")
         clsGeomTextLabelUpperTercileLine.SetRCommand("geom_label")
-        clsGeomTextLabelUpperTercileLine.AddParameter("mapping", clsRFunctionParameter:=clsGeomTextLabelUpperTercileLine, iPosition:=0)
+        clsGeomTextLabelUpperTercileLine.AddParameter("mapping", clsRFunctionParameter:=clsAesGeomTextLabelUpperTercileLine, iPosition:=0)
         clsGeomTextLabelUpperTercileLine.AddParameter("hjust", "0", iPosition:=9)
         clsGeomTextLabelUpperTercileLine.AddParameter("vjust", "-0.3", iPosition:=10)
 
