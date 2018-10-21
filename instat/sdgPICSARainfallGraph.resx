@@ -2334,25 +2334,25 @@
   <data name="&gt;&gt;ucrInputTercilesLineLabelTextLower.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="ucrInputTercilesLineType.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrInputTercilesLabelType.Location" type="System.Drawing.Point, System.Drawing">
     <value>365, 144</value>
   </data>
-  <data name="ucrInputTercilesLineType.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrInputTercilesLabelType.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 21</value>
   </data>
-  <data name="ucrInputTercilesLineType.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrInputTercilesLabelType.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;ucrInputTercilesLineType.Name" xml:space="preserve">
-    <value>ucrInputTercilesLineType</value>
+  <data name="&gt;&gt;ucrInputTercilesLabelType.Name" xml:space="preserve">
+    <value>ucrInputTercilesLabelType</value>
   </data>
-  <data name="&gt;&gt;ucrInputTercilesLineType.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputTercilesLabelType.Type" xml:space="preserve">
     <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputTercilesLineType.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputTercilesLabelType.Parent" xml:space="preserve">
     <value>tpLines</value>
   </data>
-  <data name="&gt;&gt;ucrInputTercilesLineType.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputTercilesLabelType.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="ucrInputMedianLineLabelText.Location" type="System.Drawing.Point, System.Drawing">
@@ -2376,25 +2376,25 @@
   <data name="&gt;&gt;ucrInputMedianLineLabelText.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="ucrInputMedianLineType.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrInputMedianLabelType.Location" type="System.Drawing.Point, System.Drawing">
     <value>365, 74</value>
   </data>
-  <data name="ucrInputMedianLineType.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrInputMedianLabelType.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 21</value>
   </data>
-  <data name="ucrInputMedianLineType.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrInputMedianLabelType.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;ucrInputMedianLineType.Name" xml:space="preserve">
-    <value>ucrInputMedianLineType</value>
+  <data name="&gt;&gt;ucrInputMedianLabelType.Name" xml:space="preserve">
+    <value>ucrInputMedianLabelType</value>
   </data>
-  <data name="&gt;&gt;ucrInputMedianLineType.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputMedianLabelType.Type" xml:space="preserve">
     <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputMedianLineType.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputMedianLabelType.Parent" xml:space="preserve">
     <value>tpLines</value>
   </data>
-  <data name="&gt;&gt;ucrInputMedianLineType.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputMedianLabelType.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="ucrInputMeanLineLabelText.Location" type="System.Drawing.Point, System.Drawing">
@@ -2460,25 +2460,25 @@
   <data name="&gt;&gt;ucrChkAddMedianLabel.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="ucrInputMeanLineType.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrInputMeanLabelType.Location" type="System.Drawing.Point, System.Drawing">
     <value>365, 9</value>
   </data>
-  <data name="ucrInputMeanLineType.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrInputMeanLabelType.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 21</value>
   </data>
-  <data name="ucrInputMeanLineType.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrInputMeanLabelType.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;ucrInputMeanLineType.Name" xml:space="preserve">
-    <value>ucrInputMeanLineType</value>
+  <data name="&gt;&gt;ucrInputMeanLabelType.Name" xml:space="preserve">
+    <value>ucrInputMeanLabelType</value>
   </data>
-  <data name="&gt;&gt;ucrInputMeanLineType.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputMeanLabelType.Type" xml:space="preserve">
     <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputMeanLineType.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputMeanLabelType.Parent" xml:space="preserve">
     <value>tpLines</value>
   </data>
-  <data name="&gt;&gt;ucrInputMeanLineType.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputMeanLabelType.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
   <data name="ucrChkAddMean.Location" type="System.Drawing.Point, System.Drawing">
