@@ -16,15 +16,27 @@
 
 Imports instat
 Imports instat.Translations
+
 Public Class sdgPICSARainfallGraph
     Private bControlsInitialised As Boolean = False
+
+    Private clsMutateFunction As New RFunction
+    Private clsMeanFunction As New RFunction
+    Private clsMedianFunction As New RFunction
+    Private clsLowerTercileFunction As New RFunction
+    Private clsUpperTercileFunction As New RFunction
+
+    Private strMeanName As String = ".mean_y"
+    Private strMedianName As String = ".median_y"
+    Private strLowerTercileName As String = ".lower_ter_y"
+    Private strUpperTercileName As String = ".upper_ter_y"
+
     Public clsBaseOperator As ROperator
     Public clsLabsFunction, clsXLabsFunction, clsYLabsFunction As RFunction
     Public clsXScaleContinuousFunction, clsYScaleContinuousFunction As New RFunction
+    Public clsCLimitsYContinuous, clsCLimitsYDate As New RFunction
     Public clsXScalecontinuousSeqFunction, clsYScaleContinuousSeqFunction As New RFunction
     Public clsYScaleDateFunction As New RFunction
-    Public clsGemoHLineMean As New RFunction
-    Public clsMeanLine, clsMedianLine, clsTretile As New RFunction
     Public clsThemeFunction As RFunction
     Public dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bRCodeSet As Boolean = False
@@ -42,6 +54,7 @@ Public Class sdgPICSARainfallGraph
     Private clsPanelBorderElementRect As New RFunction
     Private dctLabelForDays As New Dictionary(Of String, String)
     Private dctDateTimePeriods As New Dictionary(Of String, String)
+    Private dctDateStartMonths As New Dictionary(Of String, String)
 
     Private clsDatePeriodOperator As New ROperator
 
@@ -49,6 +62,28 @@ Public Class sdgPICSARainfallGraph
     Private clsGeomHlineMedian As New RFunction
     Private clsGeomHlineLowerTercile As New RFunction
     Private clsGeomHlineUpperTercile As New RFunction
+
+    Private clsAsDateMeanY As New RFunction
+    Private clsAsDateMedianY As New RFunction
+    Private clsAsDateLowerTercileY As New RFunction
+    Private clsAsDateUpperTercileY As New RFunction
+
+    Private clsGeomTextLabelMeanLine As New RFunction
+    Private clsRoundMeanY As New RFunction
+    Private clsPasteMeanY As New RFunction
+    Private clsFormatMeanY As New RFunction
+    Private clsGeomTextLabelMedianLine As New RFunction
+    Private clsRoundMedianY As New RFunction
+    Private clsPasteMedianY As New RFunction
+    Private clsFormatMedianY As New RFunction
+    Private clsGeomTextLabelLowerTercileLine As New RFunction
+    Private clsRoundLowerTercileY As New RFunction
+    Private clsPasteLowerTercileY As New RFunction
+    Private clsFormatLowerTercileY As New RFunction
+    Private clsGeomTextLabelUpperTercileLine As New RFunction
+    Private clsRoundUpperTercileY As New RFunction
+    Private clsPasteUpperTercileY As New RFunction
+    Private clsFormatUpperTercileY As New RFunction
 
     Private clsRaesFunction As New RFunction
     Private clsAsDate As New RFunction
@@ -59,11 +94,6 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Public Sub InitialiseControls()
-
-        ' Temp disabled until implemented
-        ucrChkAddMeanLabel.Enabled = False
-        ucrChkAddMedianLabel.Enabled = False
-        ucrChkAddTercilesLabel.Enabled = False
 
         ' Titles 
         ucrPnlXAxisTitle.AddRadioButton(rdoAutoXAxis)
@@ -123,7 +153,7 @@ Public Class sdgPICSARainfallGraph
         ucrNudYAxisTitleSize.Increment = 0.1
         ucrNudYAxisTitleSize.Minimum = 0
 
-        ' Labels 
+        ' X-Axis 
         ucrChkXAxisLabelSize.SetText("Size")
         ucrChkXAxisLabelSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrNudXaxisLabelSize.SetParameter(New RParameter("size"))
@@ -147,7 +177,7 @@ Public Class sdgPICSARainfallGraph
         ucrNudYAxisAngle.SetMinMax(0, 360)
 
         ucrChkSpecifyXAxisTickMarks.SetText("Specify Breaks")
-        ucrChkSpecifyXAxisTickMarks.SetParameter(New RParameter("scale_x_continuous"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkSpecifyXAxisTickMarks.SetParameter(New RParameter("breaks"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrInputXFrom.SetParameter(New RParameter("from"))
         ucrInputXFrom.SetValidationTypeAsNumeric()
@@ -161,8 +191,50 @@ Public Class sdgPICSARainfallGraph
         ucrInputXInStepsOf.SetValidationTypeAsNumeric()
         ucrInputXInStepsOf.AddQuotesIfUnrecognised = False
 
-        ucrChkSpecifyYAxisTickMarks.SetText("Numeric Breaks")
-        ucrChkSpecifyYAxisTickMarks.SetParameter(New RParameter("scale_y_continuous"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ' Y-Axis
+        ucrPnlYAxisType.AddRadioButton(rdoYNumeric)
+        ucrPnlYAxisType.AddRadioButton(rdoYDate)
+        ucrPnlYAxisType.AddParameterValueFunctionNamesCondition(rdoYNumeric, "y", "as.Date", False)
+        ucrPnlYAxisType.AddParameterValueFunctionNamesCondition(rdoYDate, "y", "as.Date", True)
+
+        'TODO not yet implemented need to ensure correct date will be used (2015/16 depending on origin date)
+        ucrInputYSpecifyLowerLimitDate.Visible = False
+        ucrInputYSpecifyUpperLimitDate.Visible = False
+
+        ucrPnlYAxisType.AddToLinkedControls(ucrChkSpecifyYAxisTickMarks, {rdoYNumeric}, bNewLinkedHideIfParameterMissing:=True)
+        'TODO these two will not be only for numeric once limits for dates implemented
+        ucrPnlYAxisType.AddToLinkedControls(ucrChkYSpecifyLowerLimit, {rdoYNumeric}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlYAxisType.AddToLinkedControls(ucrChkYSpecifyUpperLimit, {rdoYNumeric}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlYAxisType.AddToLinkedControls(ucrInputDateDisplayFormat, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Day Month (1 Jan)")
+        ucrPnlYAxisType.AddToLinkedControls(ucrChkSpecifyDateBreaks, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlYAxisType.AddToLinkedControls(ucrInputStartMonth, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
+        'TODO controls not yet implemented
+        'ucrPnlYAxisType.AddToLinkedControls(ucrInputYSpecifyLowerLimitDate, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlYAxisType.AddToLinkedControls(ucrInputYSpecifyUpperLimitDate, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkYSpecifyLowerLimit.SetText("Specify Lower Limit")
+        ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(True, "min", "NA", False)
+        ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(False, "min", "NA", True)
+        ucrChkYSpecifyLowerLimit.AddToLinkedControls(ucrInputYSpecifyLowerLimitNumeric, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputYSpecifyLowerLimitNumeric.SetParameter(New RParameter("min", 0))
+        ucrInputYSpecifyLowerLimitNumeric.SetValidationTypeAsNumeric()
+        ucrInputYSpecifyLowerLimitNumeric.SetValuesToIgnore({"NA"})
+        ucrInputYSpecifyLowerLimitNumeric.AddQuotesIfUnrecognised = False
+
+        ucrChkYSpecifyUpperLimit.SetText("Specify Upper Limit")
+        ucrChkYSpecifyUpperLimit.AddParameterValuesCondition(True, "max", "NA", False)
+        ucrChkYSpecifyUpperLimit.AddParameterValuesCondition(False, "max", "NA", True)
+        ucrChkYSpecifyUpperLimit.AddToLinkedControls(ucrInputYSpecifyUpperLimitNumeric, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputYSpecifyUpperLimitNumeric.SetParameter(New RParameter("max", 1))
+        ucrInputYSpecifyUpperLimitNumeric.SetValidationTypeAsNumeric()
+        ucrInputYSpecifyUpperLimitNumeric.SetValuesToIgnore({"NA"})
+        ucrInputYSpecifyUpperLimitNumeric.AddQuotesIfUnrecognised = False
+
+        ucrChkSpecifyYAxisTickMarks.SetText("Specify Breaks")
+        ucrChkSpecifyYAxisTickMarks.SetParameter(New RParameter("breaks", 1), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkSpecifyYAxisTickMarks.AddToLinkedControls({ucrInputYFrom, ucrInputYTo, ucrInputYInStepsOf}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputYFrom.SetParameter(New RParameter("from"))
         ucrInputYFrom.SetValidationTypeAsNumeric()
@@ -176,17 +248,13 @@ Public Class sdgPICSARainfallGraph
         ucrInputYInStepsOf.SetValidationTypeAsNumeric()
         ucrInputYInStepsOf.AddQuotesIfUnrecognised = False
 
-        ucrChkLabelForDays.SetText("Format as Date")
-        ucrChkLabelForDays.SetParameter(New RParameter("scale_y_date"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkLabelForDays.AddToLinkedControls(ucrInputLabelForDays, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Day Month (1 Jan)")
-        ucrChkLabelForDays.AddToLinkedControls(ucrChkSpecifyDateBreaks, {True}, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrInputLabelForDays.SetParameter(New RParameter("date_label", 0))
+        ucrInputDateDisplayFormat.SetParameter(New RParameter("date_labels", 0))
         dctLabelForDays.Add("Day Number (1-366)", Chr(34) & "%j" & Chr(34))
         dctLabelForDays.Add("Day Month (1 Jan)", Chr(34) & "%d %b" & Chr(34))
         dctLabelForDays.Add("Day Month Full (1 January)", Chr(34) & "%d %B" & Chr(34))
-        ucrInputLabelForDays.SetItems(dctLabelForDays)
-        ucrInputLabelForDays.SetDropDownStyleAsNonEditable()
+        ucrInputDateDisplayFormat.SetItems(dctLabelForDays)
+        ucrInputDateDisplayFormat.SetDropDownStyleAsNonEditable()
+        ucrInputDateDisplayFormat.SetLinkedDisplayControl(lblDateDisplayFormat)
 
         ucrChkSpecifyDateBreaks.SetText("Specify Breaks")
         ucrChkSpecifyDateBreaks.SetParameter(New RParameter("date_breaks"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
@@ -206,9 +274,13 @@ Public Class sdgPICSARainfallGraph
         ucrNudDateBreakNumber.Increment = 1
         ucrNudDateBreakNumber.SetParameter(New RParameter("left", 0))
 
+        ucrInputStartMonth.SetParameter(New RParameter("origin", 1))
+        ucrInputStartMonth.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctStartMonthOriginDates))
+        ucrInputStartMonth.SetDropDownStyleAsNonEditable()
+        ucrInputStartMonth.SetLinkedDisplayControl(lblStartMonth)
+
         ucrChkYAxisAngle.AddToLinkedControls(ucrNudYAxisAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkYAxisLabelSize.AddToLinkedControls(ucrNudYAxisLabelSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkSpecifyYAxisTickMarks.AddToLinkedControls({ucrInputYFrom, ucrInputYTo, ucrInputYInStepsOf}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputYFrom.SetLinkedDisplayControl(lblYFrom)
         ucrInputYTo.SetLinkedDisplayControl(lblYTo)
         ucrInputYInStepsOf.SetLinkedDisplayControl(lblYInStepsOf)
@@ -247,43 +319,55 @@ Public Class sdgPICSARainfallGraph
         ucrNudPnlBackgroundSize.DecimalPlaces = 1
         ucrNudPnlBackgroundSize.Minimum = 0
 
-        UcrChkMajorGridLineColour.SetText("Colour")
-        UcrChkMajorGridLineColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrInputMajorGridLineColour.SetParameter(New RParameter("colour"))
-        UcrInputMajorGridLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
-        UcrInputMajorGridLineColour.SetDropDownStyleAsNonEditable()
+        ucrChkMajorGridLineColour.SetText("Colour")
+        ucrChkMajorGridLineColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkMajorGridLineColour.AddToLinkedControls(ucrInputMajorGridLineColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
 
-        UcrChkMajorGridLinetype.SetText("Line Type")
-        UcrChkMajorGridLinetype.SetParameter(New RParameter("linetype"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrInputMajorGridLineLinetype.SetParameter(New RParameter("linetype"))
-        UcrInputMajorGridLineLinetype.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
-        UcrInputMajorGridLineLinetype.SetDropDownStyleAsNonEditable()
+        ucrInputMajorGridLineColour.SetParameter(New RParameter("colour"))
+        ucrInputMajorGridLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
+        ucrInputMajorGridLineColour.SetDropDownStyleAsNonEditable()
 
-        UcrChkMajorGridLineSize.SetText("Size")
-        UcrChkMajorGridLineSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrNudMajorGridLineSize.SetParameter(New RParameter("size"))
-        UcrNudMajorGridLineSize.Increment = 0.1
-        UcrNudMajorGridLineSize.DecimalPlaces = 1
-        UcrNudMajorGridLineSize.Minimum = 0
+        ucrChkMajorGridLineLinetype.SetText("Line Type")
+        ucrChkMajorGridLineLinetype.SetParameter(New RParameter("linetype"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkMajorGridLineLinetype.AddToLinkedControls(ucrInputMajorGridLineLinetype, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Long-dash")
 
-        UcrChkMinorGridLineColour.SetText("Colour")
-        UcrChkMinorGridLineColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrInputMinorGridLineColour.SetParameter(New RParameter("colour"))
-        UcrInputMinorGridLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
-        UcrInputMinorGridLineColour.SetDropDownStyleAsNonEditable()
+        ucrInputMajorGridLineLinetype.SetParameter(New RParameter("linetype"))
+        ucrInputMajorGridLineLinetype.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
+        ucrInputMajorGridLineLinetype.SetDropDownStyleAsNonEditable()
 
-        UcrChkMinorGridLineType.SetText("Line Type")
-        UcrChkMinorGridLineType.SetParameter(New RParameter("linetype"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrInputMinorGridLineTpe.SetParameter(New RParameter("linetype"))
-        UcrInputMinorGridLineTpe.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
-        UcrInputMinorGridLineTpe.SetDropDownStyleAsNonEditable()
+        ucrChkMajorGridLineSize.SetText("Size")
+        ucrChkMajorGridLineSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkMajorGridLineSize.AddToLinkedControls(ucrNudMajorGridLineSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        UcrChkMinorGridLineSize.SetText("Size")
-        UcrChkMinorGridLineSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrNudMinorGridLineSize.SetParameter(New RParameter("size"))
-        UcrNudMinorGridLineSize.Increment = 0.1
-        UcrNudMinorGridLineSize.DecimalPlaces = 1
-        UcrNudMinorGridLineSize.Minimum = 0
+        ucrNudMajorGridLineSize.SetParameter(New RParameter("size"))
+        ucrNudMajorGridLineSize.Increment = 0.1
+        ucrNudMajorGridLineSize.DecimalPlaces = 1
+        ucrNudMajorGridLineSize.Minimum = 0
+
+        ucrChkMinorGridLineColour.SetText("Colour")
+        ucrChkMinorGridLineColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkMinorGridLineColour.AddToLinkedControls(ucrInputMinorGridLineColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Light-Blue")
+
+        ucrInputMinorGridLineColour.SetParameter(New RParameter("colour"))
+        ucrInputMinorGridLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
+        ucrInputMinorGridLineColour.SetDropDownStyleAsNonEditable()
+
+        ucrChkMinorGridLineLinetype.SetText("Line Type")
+        ucrChkMinorGridLineLinetype.SetParameter(New RParameter("linetype"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkMinorGridLineLinetype.AddToLinkedControls(ucrInputMinorGridLineLinetype, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Long-dash")
+
+        ucrInputMinorGridLineLinetype.SetParameter(New RParameter("linetype"))
+        ucrInputMinorGridLineLinetype.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
+        ucrInputMinorGridLineLinetype.SetDropDownStyleAsNonEditable()
+
+        ucrChkMinorGridLineSize.SetText("Size")
+        ucrChkMinorGridLineSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkMinorGridLineSize.AddToLinkedControls(ucrNudMinorGridLineSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudMinorGridLineSize.SetParameter(New RParameter("size"))
+        ucrNudMinorGridLineSize.Increment = 0.1
+        ucrNudMinorGridLineSize.DecimalPlaces = 1
+        ucrNudMinorGridLineSize.Minimum = 0
 
         ucrChkBorderColour.SetText("Colour")
         ucrChkBorderColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
@@ -309,14 +393,6 @@ Public Class sdgPICSARainfallGraph
         UcrChkPnlBackgroundLineType.AddToLinkedControls(UcrInputPnlBackgroundLinetype, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         UcrChkPnlBackgroundSize.AddToLinkedControls(ucrNudPnlBackgroundSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        UcrChkMajorGridLineColour.AddToLinkedControls(UcrInputMajorGridLineColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        UcrChkMajorGridLinetype.AddToLinkedControls(UcrInputMajorGridLineLinetype, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        UcrChkMajorGridLineSize.AddToLinkedControls(UcrNudMajorGridLineSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        UcrChkMinorGridLineColour.AddToLinkedControls(UcrInputMinorGridLineColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        UcrChkMinorGridLineType.AddToLinkedControls(UcrInputMinorGridLineTpe, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        UcrChkMinorGridLineSize.AddToLinkedControls(UcrNudMinorGridLineSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
         ucrChkBorderColour.AddToLinkedControls(ucrInputBorderColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkBorderLineType.AddToLinkedControls(ucrInputBorderLinetype, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Solid")
         UcrChkBorderSize.AddToLinkedControls(ucrNudBorderSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -329,7 +405,25 @@ Public Class sdgPICSARainfallGraph
         ucrChkAddMean.AddParameterPresentCondition(False, "hlinemean", False)
         ucrChkAddMean.AddToLinkedControls(ucrChkAddMeanLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkAddMeanLabel.SetText("Include Label")
+        ucrChkAddMeanLabel.SetText("Add Label")
+        ucrChkAddMeanLabel.AddParameterPresentCondition(True, "annotate_mean", True)
+        ucrChkAddMeanLabel.AddParameterPresentCondition(False, "annotate_mean", False)
+        ucrChkAddMeanLabel.AddToLinkedControls(ucrInputMeanLabelType, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddMeanLabel.AddToLinkedControls(ucrInputMeanLineLabelText, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddMeanLabel.AddToLinkedControls(ucrChkMeanLineLabelIncludeValue, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputMeanLabelType.SetLinkedDisplayControl(lblMeanLineType)
+        ucrInputMeanLabelType.SetItems({"Text", "Textbox"})
+        ucrInputMeanLabelType.SetDropDownStyleAsNonEditable()
+        ucrInputMeanLabelType.AddFunctionNamesCondition("Text", "geom_text")
+        ucrInputMeanLabelType.AddFunctionNamesCondition("Textbox", "geom_label")
+
+        ucrInputMeanLineLabelText.SetLinkedDisplayControl(lblMeanLineLabelText)
+        ucrInputMeanLineLabelText.SetParameter(New RParameter("0", 0, bNewIncludeArgumentName:=False))
+
+        ucrChkMeanLineLabelIncludeValue.SetText("Include value after label")
+        ucrChkMeanLineLabelIncludeValue.AddParameterPresentCondition(True, "1", True)
+        ucrChkMeanLineLabelIncludeValue.AddParameterPresentCondition(False, "1", False)
 
         ' Median Line
         ucrChkAddMedian.SetText("Add Median Line")
@@ -337,7 +431,25 @@ Public Class sdgPICSARainfallGraph
         ucrChkAddMedian.AddParameterPresentCondition(False, "hlinemedian", False)
         ucrChkAddMedian.AddToLinkedControls(ucrChkAddMedianLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkAddMedianLabel.SetText("Include Label")
+        ucrChkAddMedianLabel.SetText("Add Label")
+        ucrChkAddMedianLabel.AddParameterPresentCondition(True, "annotate_median", True)
+        ucrChkAddMedianLabel.AddParameterPresentCondition(False, "annotate_median", False)
+        ucrChkAddMedianLabel.AddToLinkedControls(ucrInputMedianLabelType, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddMedianLabel.AddToLinkedControls(ucrInputMedianLineLabelText, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddMedianLabel.AddToLinkedControls(ucrChkMedianLineLabelIncludeValue, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputMedianLabelType.SetLinkedDisplayControl(lblMedianLineType)
+        ucrInputMedianLabelType.SetItems({"Text", "Textbox"})
+        ucrInputMedianLabelType.SetDropDownStyleAsNonEditable()
+        ucrInputMedianLabelType.AddFunctionNamesCondition("Text", "geom_text")
+        ucrInputMedianLabelType.AddFunctionNamesCondition("Textbox", "geom_label")
+
+        ucrInputMedianLineLabelText.SetLinkedDisplayControl(lblMedianLineLabelText)
+        ucrInputMedianLineLabelText.SetParameter(New RParameter("0", 0, bNewIncludeArgumentName:=False))
+
+        ucrChkMedianLineLabelIncludeValue.SetText("Include value after label")
+        ucrChkMedianLineLabelIncludeValue.AddParameterPresentCondition(True, "1", True)
+        ucrChkMedianLineLabelIncludeValue.AddParameterPresentCondition(False, "1", False)
 
         ' Tercile Lines
         ucrChkAddTerciles.SetText("Add Tercile Lines")
@@ -345,12 +457,64 @@ Public Class sdgPICSARainfallGraph
         ucrChkAddTerciles.AddParameterPresentCondition(False, "hlinelowertercile", False)
         ucrChkAddTerciles.AddToLinkedControls(ucrChkAddTercilesLabel, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkAddTercilesLabel.SetText("Include Labels")
+        ucrChkAddTercilesLabel.SetText("Add Labels")
+        ucrChkAddTercilesLabel.AddParameterPresentCondition(True, "annotate_lower_tercile", True)
+        ucrChkAddTercilesLabel.AddParameterPresentCondition(False, "annotate_lower_tercile", False)
+        ucrChkAddTercilesLabel.AddToLinkedControls(ucrInputTercilesLabelType, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddTercilesLabel.AddToLinkedControls(ucrInputTercilesLineLabelTextLower, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddTercilesLabel.AddToLinkedControls(ucrInputTercilesLineLabelTextUpper, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddTercilesLabel.AddToLinkedControls(ucrChkTercilesLineLabelIncludeValue, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputTercilesLabelType.SetLinkedDisplayControl(lblTercilesLineType)
+        ucrInputTercilesLabelType.SetItems({"Text", "Textbox"})
+        ucrInputTercilesLabelType.SetDropDownStyleAsNonEditable()
+        ucrInputTercilesLabelType.AddFunctionNamesCondition("Text", "geom_text")
+        ucrInputTercilesLabelType.AddFunctionNamesCondition("Textbox", "geom_label")
+
+        ucrInputTercilesLineLabelTextLower.SetLinkedDisplayControl(lblTercilesLineLabelTextLower)
+        ucrInputTercilesLineLabelTextLower.SetParameter(New RParameter("0", 0, bNewIncludeArgumentName:=False))
+
+        ucrInputTercilesLineLabelTextUpper.SetLinkedDisplayControl(lblTercilesLineLabelTextUpper)
+        ucrInputTercilesLineLabelTextUpper.SetParameter(New RParameter("0", 0, bNewIncludeArgumentName:=False))
+
+        ucrChkTercilesLineLabelIncludeValue.SetText("Include value after label")
+        ucrChkTercilesLineLabelIncludeValue.AddParameterPresentCondition(True, "1", True)
+        ucrChkTercilesLineLabelIncludeValue.AddParameterPresentCondition(False, "1", False)
+
+        'H Line Format
+        ucrChkHLineColour.SetText("Colour")
+        ucrChkHLineColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkHLineColour.AddToLinkedControls(ucrInputHLineColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
+        ucrInputHLineColour.SetParameter(New RParameter("colour"))
+        ucrInputHLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
+        ucrInputHLineColour.SetDropDownStyleAsNonEditable()
+
+        ucrChkHLineType.SetText("Line Type")
+        ucrChkHLineType.SetParameter(New RParameter("linetype"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkHLineType.AddToLinkedControls(ucrInputHLineType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Solid")
+        ucrInputHLineType.SetParameter(New RParameter("linetype"))
+        ucrInputHLineType.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
+        ucrInputHLineType.SetDropDownStyleAsNonEditable()
+
+        ucrChkHLineSize.SetText("Size")
+        ucrChkHLineSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkHLineSize.AddToLinkedControls(ucrNudHLineSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudHLineSize.SetParameter(New RParameter("size"))
+        ucrNudHLineSize.Increment = 0.1
+        ucrNudHLineSize.DecimalPlaces = 1
+        ucrNudHLineSize.Minimum = 0
+
+        ucrNudLabelTransparency.SetParameter(New RParameter("alpha", 4))
+        ucrNudLabelTransparency.SetRDefault(1)
+        ucrNudLabelTransparency.Increment = 0.01
+        ucrNudLabelTransparency.DecimalPlaces = 2
+        ucrNudLabelTransparency.Minimum = 0
+        ucrNudLabelTransparency.Maximum = 1
 
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing, Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsNumeric As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing, Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsNumeric As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing, Optional clsNewGeomTextLabelMeanLine As RFunction = Nothing, Optional clsNewRoundMeanY As RFunction = Nothing, Optional clsNewPasteMeanY As RFunction = Nothing, Optional clsNewGeomTextLabelMedianLine As RFunction = Nothing, Optional clsNewRoundMedianY As RFunction = Nothing, Optional clsNewPasteMedianY As RFunction = Nothing, Optional clsNewGeomTextLabelLowerTercileLine As RFunction = Nothing, Optional clsNewRoundLowerTercileY As RFunction = Nothing, Optional clsNewPasteLowerTercileY As RFunction = Nothing, Optional clsNewGeomTextLabelUpperTercileLine As RFunction = Nothing, Optional clsNewRoundUpperTercileY As RFunction = Nothing, Optional clsNewPasteUpperTercileY As RFunction = Nothing, Optional strXAxisType As String = "", Optional clsNewMutateFunction As RFunction = Nothing, Optional clsNewMeanFunction As RFunction = Nothing, Optional clsNewMedianFunction As RFunction = Nothing, Optional clsNewLowerTercileFunction As RFunction = Nothing, Optional clsNewUpperTercileFunction As RFunction = Nothing, Optional clsNewAsDateMeanY As RFunction = Nothing, Optional clsNewAsDateMedianY As RFunction = Nothing, Optional clsNewAsDateLowerTercileY As RFunction = Nothing, Optional clsNewAsDateUpperTercileY As RFunction = Nothing, Optional clsNewFormatMeanY As RFunction = Nothing, Optional clsNewFormatMedianY As RFunction = Nothing, Optional clsNewFormatLowerTercileY As RFunction = Nothing, Optional clsNewFormatUpperTercileY As RFunction = Nothing, Optional bReset As Boolean = False)
         bRCodeSet = False
         clsBaseOperator = clsNewOperator
 
@@ -361,10 +525,38 @@ Public Class sdgPICSARainfallGraph
         'themes function
         clsThemeFunction = clsNewThemeFunction
 
+        clsMutateFunction = clsNewMutateFunction
+        clsMeanFunction = clsNewMeanFunction
+        clsMedianFunction = clsNewMedianFunction
+        clsLowerTercileFunction = clsNewLowerTercileFunction
+        clsUpperTercileFunction = clsNewUpperTercileFunction
+
         clsGeomHlineMean = clsNewGeomhlineMean
         clsGeomHlineMedian = clsNewGeomhlineMedian
         clsGeomHlineLowerTercile = clsNewGeomhlineLowerTercile
         clsGeomHlineUpperTercile = clsNewGeomhlineUpperTercile
+
+        clsAsDateMeanY = clsNewAsDateMeanY
+        clsAsDateMedianY = clsNewAsDateMedianY
+        clsAsDateLowerTercileY = clsNewAsDateLowerTercileY
+        clsAsDateUpperTercileY = clsNewAsDateUpperTercileY
+
+        clsGeomTextLabelMeanLine = clsNewGeomTextLabelMeanLine
+        clsRoundMeanY = clsNewRoundMeanY
+        clsPasteMeanY = clsNewPasteMeanY
+        clsFormatMeanY = clsNewFormatMeanY
+        clsGeomTextLabelMedianLine = clsNewGeomTextLabelMedianLine
+        clsRoundMedianY = clsNewRoundMedianY
+        clsPasteMedianY = clsNewPasteMedianY
+        clsFormatMedianY = clsNewFormatMedianY
+        clsGeomTextLabelLowerTercileLine = clsNewGeomTextLabelLowerTercileLine
+        clsRoundLowerTercileY = clsNewRoundLowerTercileY
+        clsPasteLowerTercileY = clsNewPasteLowerTercileY
+        clsFormatLowerTercileY = clsNewFormatLowerTercileY
+        clsGeomTextLabelUpperTercileLine = clsNewGeomTextLabelUpperTercileLine
+        clsRoundUpperTercileY = clsNewRoundUpperTercileY
+        clsPasteUpperTercileY = clsNewPasteUpperTercileY
+        clsFormatUpperTercileY = clsNewFormatUpperTercileY
 
         ' The position MUST be larger than the position of the theme_* argument
         ' Otherwise the choice of theme will overwrite the options selected here.
@@ -388,53 +580,53 @@ Public Class sdgPICSARainfallGraph
 
         'Labels
 
-        ucrNudTitleSize.SetRCode(clsPlotElementTitle, bCloneIfNeeded:=True)
-        ucrNudSubTitleSize.SetRCode(clsPlotElementSubTitle, bCloneIfNeeded:=True)
-        ucrNudCaptionSize.SetRCode(clsPlotElementCaption, bCloneIfNeeded:=True)
+        ucrNudTitleSize.SetRCode(clsPlotElementTitle, bReset, bCloneIfNeeded:=True)
+        ucrNudSubTitleSize.SetRCode(clsPlotElementSubTitle, bReset, bCloneIfNeeded:=True)
+        ucrNudCaptionSize.SetRCode(clsPlotElementCaption, bReset, bCloneIfNeeded:=True)
 
-        ucrNudXAxisTitleSize.SetRCode(clsXElementTitle, bCloneIfNeeded:=True)
-        ucrNudYAxisTitleSize.SetRCode(clsYElementTitle, bCloneIfNeeded:=True)
+        ucrNudXAxisTitleSize.SetRCode(clsXElementTitle, bReset, bCloneIfNeeded:=True)
+        ucrNudYAxisTitleSize.SetRCode(clsYElementTitle, bReset, bCloneIfNeeded:=True)
 
-        ucrChkXAxisAngle.SetRCode(clsXElementLabels, bCloneIfNeeded:=True)
-        ucrChkXAxisLabelSize.SetRCode(clsXElementLabels, bCloneIfNeeded:=True)
-        ucrNudXAxisAngle.SetRCode(clsXElementLabels, bCloneIfNeeded:=True)
-        ucrNudXaxisLabelSize.SetRCode(clsXElementLabels, bCloneIfNeeded:=True)
+        ucrChkXAxisAngle.SetRCode(clsXElementLabels, bReset, bCloneIfNeeded:=True)
+        ucrChkXAxisLabelSize.SetRCode(clsXElementLabels, bReset, bCloneIfNeeded:=True)
+        ucrNudXAxisAngle.SetRCode(clsXElementLabels, bReset, bCloneIfNeeded:=True)
+        ucrNudXaxisLabelSize.SetRCode(clsXElementLabels, bReset, bCloneIfNeeded:=True)
 
-        ucrNudYAxisAngle.SetRCode(clsYElementLabels, bCloneIfNeeded:=True)
-        ucrNudYAxisLabelSize.SetRCode(clsYElementLabels, bCloneIfNeeded:=True)
-        ucrChkYAxisAngle.SetRCode(clsYElementLabels, bCloneIfNeeded:=True)
-        ucrChkYAxisLabelSize.SetRCode(clsYElementLabels, bCloneIfNeeded:=True)
+        ucrNudYAxisAngle.SetRCode(clsYElementLabels, bReset, bCloneIfNeeded:=True)
+        ucrNudYAxisLabelSize.SetRCode(clsYElementLabels, bReset, bCloneIfNeeded:=True)
+        ucrChkYAxisAngle.SetRCode(clsYElementLabels, bReset, bCloneIfNeeded:=True)
+        ucrChkYAxisLabelSize.SetRCode(clsYElementLabels, bReset, bCloneIfNeeded:=True)
 
         'Background
-        ucrChkPnlBackgroundColour.SetRCode(clsPanelBackgroundElementRect, bCloneIfNeeded:=True)
-        UcrInputPnlBackgroundColour.SetRCode(clsPanelBackgroundElementRect, bCloneIfNeeded:=True)
-        UcrChkPnlBackgroundFill.SetRCode(clsPanelBackgroundElementRect, bCloneIfNeeded:=True)
-        UcrInputPnlBackgroundFill.SetRCode(clsPanelBackgroundElementRect, bCloneIfNeeded:=True)
-        UcrChkPnlBackgroundLineType.SetRCode(clsPanelBackgroundElementRect, bCloneIfNeeded:=True)
-        UcrInputPnlBackgroundLinetype.SetRCode(clsPanelBackgroundElementRect, bCloneIfNeeded:=True)
-        UcrChkPnlBackgroundSize.SetRCode(clsPanelBackgroundElementRect, bCloneIfNeeded:=True)
-        ucrNudPnlBackgroundSize.SetRCode(clsPanelBackgroundElementRect, bCloneIfNeeded:=True)
+        ucrChkPnlBackgroundColour.SetRCode(clsPanelBackgroundElementRect, bReset, bCloneIfNeeded:=True)
+        UcrInputPnlBackgroundColour.SetRCode(clsPanelBackgroundElementRect, bReset, bCloneIfNeeded:=True)
+        UcrChkPnlBackgroundFill.SetRCode(clsPanelBackgroundElementRect, bReset, bCloneIfNeeded:=True)
+        UcrInputPnlBackgroundFill.SetRCode(clsPanelBackgroundElementRect, bReset, bCloneIfNeeded:=True)
+        UcrChkPnlBackgroundLineType.SetRCode(clsPanelBackgroundElementRect, bReset, bCloneIfNeeded:=True)
+        UcrInputPnlBackgroundLinetype.SetRCode(clsPanelBackgroundElementRect, bReset, bCloneIfNeeded:=True)
+        UcrChkPnlBackgroundSize.SetRCode(clsPanelBackgroundElementRect, bReset, bCloneIfNeeded:=True)
+        ucrNudPnlBackgroundSize.SetRCode(clsPanelBackgroundElementRect, bReset, bCloneIfNeeded:=True)
 
-        UcrChkMajorGridLineColour.SetRCode(clsElementPanelGridMajor, bCloneIfNeeded:=True)
-        UcrInputMajorGridLineColour.SetRCode(clsElementPanelGridMajor, bCloneIfNeeded:=True)
-        UcrChkMajorGridLinetype.SetRCode(clsElementPanelGridMajor, bCloneIfNeeded:=True)
-        UcrInputMajorGridLineLinetype.SetRCode(clsElementPanelGridMajor, bCloneIfNeeded:=True)
-        UcrChkMajorGridLineSize.SetRCode(clsElementPanelGridMajor, bCloneIfNeeded:=True)
-        UcrNudMajorGridLineSize.SetRCode(clsElementPanelGridMajor, bCloneIfNeeded:=True)
+        ucrChkMajorGridLineColour.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
+        ucrInputMajorGridLineColour.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
+        ucrChkMajorGridLineLinetype.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
+        ucrInputMajorGridLineLinetype.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
+        ucrChkMajorGridLineSize.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
+        ucrNudMajorGridLineSize.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
 
-        UcrChkMinorGridLineColour.SetRCode(clsElementPanelGridMinor, bCloneIfNeeded:=True)
-        UcrInputMinorGridLineColour.SetRCode(clsElementPanelGridMinor, bCloneIfNeeded:=True)
-        UcrChkMinorGridLineType.SetRCode(clsElementPanelGridMinor, bCloneIfNeeded:=True)
-        UcrInputMinorGridLineTpe.SetRCode(clsElementPanelGridMinor, bCloneIfNeeded:=True)
-        UcrChkMinorGridLineSize.SetRCode(clsElementPanelGridMinor, bCloneIfNeeded:=True)
-        UcrNudMinorGridLineSize.SetRCode(clsElementPanelGridMinor, bCloneIfNeeded:=True)
+        ucrChkMinorGridLineColour.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
+        ucrInputMinorGridLineColour.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
+        ucrChkMinorGridLineLinetype.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
+        ucrInputMinorGridLineLinetype.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
+        ucrChkMinorGridLineSize.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
+        ucrNudMinorGridLineSize.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
 
-        ucrChkBorderColour.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
-        ucrInputBorderColour.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
-        ucrChkBorderLineType.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
-        ucrInputBorderLinetype.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
-        UcrChkBorderSize.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
-        ucrNudBorderSize.SetRCode(clsPanelBorderElementRect, bCloneIfNeeded:=True)
+        ucrChkBorderColour.SetRCode(clsPanelBorderElementRect, bReset, bCloneIfNeeded:=True)
+        ucrInputBorderColour.SetRCode(clsPanelBorderElementRect, bReset, bCloneIfNeeded:=True)
+        ucrChkBorderLineType.SetRCode(clsPanelBorderElementRect, bReset, bCloneIfNeeded:=True)
+        ucrInputBorderLinetype.SetRCode(clsPanelBorderElementRect, bReset, bCloneIfNeeded:=True)
+        UcrChkBorderSize.SetRCode(clsPanelBorderElementRect, bReset, bCloneIfNeeded:=True)
+        ucrNudBorderSize.SetRCode(clsPanelBorderElementRect, bReset, bCloneIfNeeded:=True)
 
         ' other functions 
         clsRaesFunction = clsNewRaesFunction
@@ -460,8 +652,29 @@ Public Class sdgPICSARainfallGraph
             clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
         End If
 
-        ucrChkSpecifyXAxisTickMarks.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
-        ucrChkSpecifyYAxisTickMarks.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        Dim clsTempParam As RParameter
+        If clsYScaleContinuousFunction.ContainsParameter("limits") Then
+            clsTempParam = clsYScaleContinuousFunction.GetParameter("limits")
+            If clsTempParam.bIsFunction AndAlso clsTempParam.clsArgumentCodeStructure IsNot Nothing Then
+                clsCLimitsYContinuous = clsTempParam.clsArgumentCodeStructure
+            Else
+                clsCLimitsYContinuous = New RFunction
+                clsCLimitsYContinuous.SetRCommand("c")
+            End If
+        Else
+            clsCLimitsYContinuous = New RFunction
+            clsCLimitsYContinuous.SetRCommand("c")
+        End If
+
+        ucrPnlYAxisType.SetRCode(clsRaesFunction, bReset, bCloneIfNeeded:=True)
+
+        ucrChkYSpecifyLowerLimit.SetRCode(clsCLimitsYContinuous, bReset, bCloneIfNeeded:=True)
+        ucrInputYSpecifyLowerLimitNumeric.SetRCode(clsCLimitsYContinuous, bReset, bCloneIfNeeded:=True)
+        ucrChkYSpecifyUpperLimit.SetRCode(clsCLimitsYContinuous, bReset, bCloneIfNeeded:=True)
+        ucrInputYSpecifyUpperLimitNumeric.SetRCode(clsCLimitsYContinuous, bReset, bCloneIfNeeded:=True)
+
+        ucrChkSpecifyXAxisTickMarks.SetRCode(clsXScaleContinuousFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkSpecifyYAxisTickMarks.SetRCode(clsYScaleContinuousFunction, bReset, bCloneIfNeeded:=True)
 
         ' Seq function for Scales 
         Dim clsTempXBreaksParam As RParameter
@@ -479,9 +692,56 @@ Public Class sdgPICSARainfallGraph
             clsXScalecontinuousSeqFunction.SetRCommand("seq")
         End If
 
+        ' Limits c() function for y continuous scales
+        Dim clsTempYLimitsContinuousParam As RParameter
+        If clsYScaleContinuousFunction.ContainsParameter("limits") Then
+            clsTempYLimitsContinuousParam = clsYScaleContinuousFunction.GetParameter("limits")
+            If clsTempYLimitsContinuousParam.clsArgumentCodeStructure IsNot Nothing Then
+                clsCLimitsYContinuous = clsTempYLimitsContinuousParam.clsArgumentCodeStructure
+            Else
+                'TODO move to ggplot defaults
+                clsCLimitsYContinuous = New RFunction
+                clsCLimitsYContinuous.SetRCommand("c")
+                clsCLimitsYContinuous.AddParameter("min", "0", bIncludeArgumentName:=False, iPosition:=0)
+                clsCLimitsYContinuous.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
+            End If
+        Else
+            clsCLimitsYContinuous = New RFunction
+            clsCLimitsYContinuous.SetRCommand("c")
+            clsCLimitsYContinuous.AddParameter("min", "0", bIncludeArgumentName:=False, iPosition:=0)
+            clsCLimitsYContinuous.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
+        End If
+
+        ' Limits c() function for y date scales
+        Dim clsTempYLimitsDateParam As RParameter
+        If clsYScaleDateFunction.ContainsParameter("limits") Then
+            clsTempYLimitsDateParam = clsYScaleDateFunction.GetParameter("limits")
+            If clsTempYLimitsDateParam.clsArgumentCodeStructure IsNot Nothing Then
+                clsCLimitsYDate = clsTempYLimitsDateParam.clsArgumentCodeStructure
+            Else
+                'TODO move to ggplot defaults
+                clsCLimitsYDate = New RFunction
+                clsCLimitsYDate.SetRCommand("c")
+                clsCLimitsYDate.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
+                clsCLimitsYDate.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
+            End If
+        Else
+            clsCLimitsYContinuous = New RFunction
+            clsCLimitsYContinuous.SetRCommand("c")
+            clsCLimitsYContinuous.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
+            clsCLimitsYContinuous.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
+        End If
+
         ucrInputXFrom.SetRCode(clsXScalecontinuousSeqFunction, bReset, bCloneIfNeeded:=True)
         ucrInputXTo.SetRCode(clsXScalecontinuousSeqFunction, bReset, bCloneIfNeeded:=True)
         ucrInputXInStepsOf.SetRCode(clsXScalecontinuousSeqFunction, bReset, bCloneIfNeeded:=True)
+
+        If strXAxisType = "" OrElse strXAxisType.Contains("factor") Then
+            ucrChkSpecifyXAxisTickMarks.Checked = False
+            ucrChkSpecifyXAxisTickMarks.Enabled = False
+        Else
+            ucrChkSpecifyXAxisTickMarks.Enabled = True
+        End If
 
         Dim clsTempYBreaksParam As RParameter
         If clsYScaleContinuousFunction.ContainsParameter("breaks") Then
@@ -538,29 +798,98 @@ Public Class sdgPICSARainfallGraph
             clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
         End If
 
-        ' scale_y_date function is used for the days lables - this function has been included in GGplot defaults 
+        ' scale_y_date function is used for the days lables
         ' scale_y_date(date_label = %d %b) - for day/month option
-        ' scale_y_date(date_label = %j) - for day option - however this gives the day number like so 01-366, which isn't great 
-        ' so maybe when day option is selected we could remove the code instead 
-        ucrChkLabelForDays.SetRCode(clsBaseOperator, bCloneIfNeeded:=True)
-        ucrInputLabelForDays.SetRCode(clsYScaleDateFunction, bCloneIfNeeded:=True)
+        ' scale_y_date(date_label = %j) - for day option
+        ucrInputDateDisplayFormat.AddAdditionalCodeParameterPair(clsFormatMeanY, New RParameter("format", 1), iAdditionalPairNo:=1)
+        ucrInputDateDisplayFormat.AddAdditionalCodeParameterPair(clsFormatMedianY, New RParameter("format", 1), iAdditionalPairNo:=2)
+        ucrInputDateDisplayFormat.AddAdditionalCodeParameterPair(clsFormatLowerTercileY, New RParameter("format", 1), iAdditionalPairNo:=3)
+        ucrInputDateDisplayFormat.AddAdditionalCodeParameterPair(clsFormatUpperTercileY, New RParameter("format", 1), iAdditionalPairNo:=4)
 
-        ucrChkSpecifyDateBreaks.SetRCode(clsYScaleDateFunction, bCloneIfNeeded:=True)
-        ucrInputDateBreakTime.SetRCode(clsDatePeriodOperator, bCloneIfNeeded:=True)
-        ucrNudDateBreakNumber.SetRCode(clsDatePeriodOperator, bCloneIfNeeded:=True)
+        ucrInputDateDisplayFormat.SetRCode(clsYScaleDateFunction, bReset, bCloneIfNeeded:=True)
+
+        ucrInputStartMonth.AddAdditionalCodeParameterPair(clsAsDateMeanY, New RParameter("origin", 1), iAdditionalPairNo:=1)
+        ucrInputStartMonth.AddAdditionalCodeParameterPair(clsAsDateMedianY, New RParameter("origin", 1), iAdditionalPairNo:=2)
+        ucrInputStartMonth.AddAdditionalCodeParameterPair(clsAsDateLowerTercileY, New RParameter("origin", 1), iAdditionalPairNo:=3)
+        ucrInputStartMonth.AddAdditionalCodeParameterPair(clsAsDateUpperTercileY, New RParameter("origin", 1), iAdditionalPairNo:=4)
+
+        ucrInputStartMonth.SetRCode(clsAsDate, bReset, bCloneIfNeeded:=True)
+
+        ucrChkSpecifyDateBreaks.SetRCode(clsYScaleDateFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputDateBreakTime.SetRCode(clsDatePeriodOperator, bReset, bCloneIfNeeded:=True)
+        ucrNudDateBreakNumber.SetRCode(clsDatePeriodOperator, bReset, bCloneIfNeeded:=True)
 
         ucrChkAddMean.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddMedian.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddTerciles.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+
+        ucrChkAddMeanLabel.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkAddMedianLabel.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkAddTercilesLabel.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+
+        ucrInputMeanLabelType.SetRCode(clsGeomTextLabelMeanLine, bReset, bCloneIfNeeded:=True)
+        ucrInputMedianLabelType.SetRCode(clsGeomTextLabelMedianLine, bReset, bCloneIfNeeded:=True)
+        ucrInputTercilesLabelType.AddAdditionalCodeParameterPair(clsGeomTextLabelLowerTercileLine, New RParameter("geom", 0), iAdditionalPairNo:=1)
+        ucrInputTercilesLabelType.SetRCode(clsGeomTextLabelLowerTercileLine, bReset, bCloneIfNeeded:=True)
+
+        ucrInputMeanLineLabelText.SetRCode(clsPasteMeanY, bReset, bCloneIfNeeded:=True)
+        ucrInputMedianLineLabelText.SetRCode(clsPasteMedianY, bReset, bCloneIfNeeded:=True)
+        ucrInputTercilesLineLabelTextLower.SetRCode(clsPasteLowerTercileY, bReset, bCloneIfNeeded:=True)
+        ucrInputTercilesLineLabelTextUpper.SetRCode(clsPasteUpperTercileY, bReset, bCloneIfNeeded:=True)
+
+        ucrChkMeanLineLabelIncludeValue.SetRCode(clsPasteMeanY, bReset, bCloneIfNeeded:=True)
+        ucrChkMedianLineLabelIncludeValue.SetRCode(clsPasteMedianY, bReset, bCloneIfNeeded:=True)
+        ucrChkTercilesLineLabelIncludeValue.SetRCode(clsPasteUpperTercileY, bReset, bCloneIfNeeded:=True)
+
+        ucrChkHLineColour.AddAdditionalCodeParameterPair(clsGeomHlineMedian, ucrChkHLineColour.GetParameter(), iAdditionalPairNo:=1)
+        ucrInputHLineColour.AddAdditionalCodeParameterPair(clsGeomHlineMedian, ucrInputHLineColour.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkHLineType.AddAdditionalCodeParameterPair(clsGeomHlineMedian, ucrChkHLineType.GetParameter(), iAdditionalPairNo:=1)
+        ucrInputHLineType.AddAdditionalCodeParameterPair(clsGeomHlineMedian, ucrInputHLineType.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkHLineSize.AddAdditionalCodeParameterPair(clsGeomHlineMedian, ucrChkHLineSize.GetParameter(), iAdditionalPairNo:=1)
+        ucrNudHLineSize.AddAdditionalCodeParameterPair(clsGeomHlineMedian, ucrNudHLineSize.GetParameter(), iAdditionalPairNo:=1)
+
+        ucrChkHLineColour.AddAdditionalCodeParameterPair(clsGeomHlineLowerTercile, ucrChkHLineColour.GetParameter(), iAdditionalPairNo:=2)
+        ucrInputHLineColour.AddAdditionalCodeParameterPair(clsGeomHlineLowerTercile, ucrInputHLineColour.GetParameter(), iAdditionalPairNo:=2)
+        ucrChkHLineType.AddAdditionalCodeParameterPair(clsGeomHlineLowerTercile, ucrChkHLineType.GetParameter(), iAdditionalPairNo:=2)
+        ucrInputHLineType.AddAdditionalCodeParameterPair(clsGeomHlineLowerTercile, ucrInputHLineType.GetParameter(), iAdditionalPairNo:=2)
+        ucrChkHLineSize.AddAdditionalCodeParameterPair(clsGeomHlineLowerTercile, ucrChkHLineSize.GetParameter(), iAdditionalPairNo:=2)
+        ucrNudHLineSize.AddAdditionalCodeParameterPair(clsGeomHlineLowerTercile, ucrNudHLineSize.GetParameter(), iAdditionalPairNo:=2)
+
+        ucrChkHLineColour.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrChkHLineColour.GetParameter(), iAdditionalPairNo:=3)
+        ucrInputHLineColour.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrInputHLineColour.GetParameter(), iAdditionalPairNo:=3)
+        ucrChkHLineType.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrChkHLineType.GetParameter(), iAdditionalPairNo:=3)
+        ucrInputHLineType.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrInputHLineType.GetParameter(), iAdditionalPairNo:=3)
+        ucrChkHLineSize.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrChkHLineSize.GetParameter(), iAdditionalPairNo:=3)
+        ucrNudHLineSize.AddAdditionalCodeParameterPair(clsGeomHlineUpperTercile, ucrNudHLineSize.GetParameter(), iAdditionalPairNo:=3)
+
+        ucrChkHLineColour.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
+        ucrInputHLineColour.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
+        ucrChkHLineType.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
+        ucrInputHLineType.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
+        ucrChkHLineSize.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
+        ucrNudHLineSize.SetRCode(clsGeomHlineMean, bReset, bCloneIfNeeded:=True)
+
+        ucrNudLabelTransparency.AddAdditionalCodeParameterPair(clsGeomTextLabelMedianLine, New RParameter("alpha", 4), iAdditionalPairNo:=1)
+        ucrNudLabelTransparency.AddAdditionalCodeParameterPair(clsGeomTextLabelLowerTercileLine, New RParameter("alpha", 4), iAdditionalPairNo:=2)
+        ucrNudLabelTransparency.AddAdditionalCodeParameterPair(clsGeomTextLabelUpperTercileLine, New RParameter("alpha", 4), iAdditionalPairNo:=3)
+        ucrNudLabelTransparency.SetRCode(clsGeomTextLabelMeanLine, bReset, bCloneIfNeeded:=True)
 
         bRCodeSet = True
         AddRemoveTheme()
         AddRemoveLabs()
         AddRemoveXLabs()
         AddRemoveYLabs()
-        AddRemoveSpecifyXAxisTickMarks()
-        AddRemoveSpecifyYAxisTickMarks()
+        AddRemoveXAxisBreaks()
+        AddRemoveYAxisBreaks()
+        AddRemoveYLimits()
+        AddRemoveAxisTextY()
+        AddRemoveXAxisScalesContinuous()
+        AddRemoveXAxisScalesContinuous()
+        AddRemoveYAxisScales()
         AddRemoveHline()
+        SetMeanLabelType()
+        SetMedianLabelType()
+        SetTercilesLabelType()
         AddRemovePanelBorder()
         AddRemoveDateBreaks()
     End Sub
@@ -569,27 +898,100 @@ Public Class sdgPICSARainfallGraph
         If bRCodeSet Then
             If ucrChkAddMean.Checked Then
                 clsBaseOperator.AddParameter("hlinemean", clsRFunctionParameter:=clsGeomHlineMean, iPosition:=20)
+                If rdoYNumeric.Checked Then
+                    clsMutateFunction.AddParameter(strMeanName, clsRFunctionParameter:=clsMeanFunction, iPosition:=0)
+                ElseIf rdoYDate.Checked Then
+                    clsMutateFunction.AddParameter(strMeanName, clsRFunctionParameter:=clsAsDateMeanY, iPosition:=0)
+                End If
+                If ucrChkAddMeanLabel.Checked Then
+                    clsBaseOperator.AddParameter("annotate_mean", clsRFunctionParameter:=clsGeomTextLabelMeanLine, iPosition:=24)
+                    If ucrChkMeanLineLabelIncludeValue.Checked Then
+                        If rdoYNumeric.Checked Then
+                            clsPasteMeanY.AddParameter("1", clsRFunctionParameter:=clsRoundMeanY, bIncludeArgumentName:=False, iPosition:=1)
+                        ElseIf rdoYDate.Checked Then
+                            clsPasteMeanY.AddParameter("1", clsRFunctionParameter:=clsFormatMeanY, bIncludeArgumentName:=False, iPosition:=1)
+                        End If
+                    Else
+                        clsPasteMeanY.RemoveParameterByName("1")
+                    End If
+                Else
+                    clsBaseOperator.RemoveParameterByName("annotate_mean")
+                End If
             Else
                 clsBaseOperator.RemoveParameterByName("hlinemean")
+                clsBaseOperator.RemoveParameterByName("annotate_mean")
+                clsMutateFunction.RemoveParameterByName(strMeanName)
             End If
 
             If ucrChkAddMedian.Checked Then
                 clsBaseOperator.AddParameter("hlinemedian", clsRFunctionParameter:=clsGeomHlineMedian, iPosition:=21)
+                If rdoYNumeric.Checked Then
+                    clsMutateFunction.AddParameter(strMedianName, clsRFunctionParameter:=clsMedianFunction, iPosition:=1)
+                ElseIf rdoYDate.Checked Then
+                    clsMutateFunction.AddParameter(strMedianName, clsRFunctionParameter:=clsAsDateMedianY, iPosition:=1)
+                End If
+                If ucrChkAddMedianLabel.Checked Then
+                    clsBaseOperator.AddParameter("annotate_median", clsRFunctionParameter:=clsGeomTextLabelMedianLine, iPosition:=25)
+                    If ucrChkMedianLineLabelIncludeValue.Checked Then
+                        If rdoYNumeric.Checked Then
+                            clsPasteMedianY.AddParameter("1", clsRFunctionParameter:=clsRoundMedianY, bIncludeArgumentName:=False, iPosition:=1)
+                        ElseIf rdoYDate.Checked Then
+                            clsPasteMedianY.AddParameter("1", clsRFunctionParameter:=clsFormatMedianY, bIncludeArgumentName:=False, iPosition:=1)
+                        End If
+                    Else
+                        clsPasteMedianY.RemoveParameterByName("1")
+                    End If
+                Else
+                    clsBaseOperator.RemoveParameterByName("annotate_median")
+                End If
             Else
                 clsBaseOperator.RemoveParameterByName("hlinemedian")
+                clsBaseOperator.RemoveParameterByName("annotate_median")
+                clsMutateFunction.RemoveParameterByName(strMedianName)
             End If
 
             If ucrChkAddTerciles.Checked Then
                 clsBaseOperator.AddParameter("hlinelowertercile", clsRFunctionParameter:=clsGeomHlineLowerTercile, iPosition:=22)
                 clsBaseOperator.AddParameter("hlineuppertercile", clsRFunctionParameter:=clsGeomHlineUpperTercile, iPosition:=23)
+                If rdoYNumeric.Checked Then
+                    clsMutateFunction.AddParameter(strLowerTercileName, clsRFunctionParameter:=clsLowerTercileFunction, iPosition:=2)
+                    clsMutateFunction.AddParameter(strUpperTercileName, clsRFunctionParameter:=clsUpperTercileFunction, iPosition:=3)
+                ElseIf rdoYDate.Checked Then
+                    clsMutateFunction.AddParameter(strLowerTercileName, clsRFunctionParameter:=clsAsDateLowerTercileY, iPosition:=2)
+                    clsMutateFunction.AddParameter(strUpperTercileName, clsRFunctionParameter:=clsAsDateUpperTercileY, iPosition:=3)
+                End If
+
+                If ucrChkAddTercilesLabel.Checked Then
+                    clsBaseOperator.AddParameter("annotate_lower_tercile", clsRFunctionParameter:=clsGeomTextLabelLowerTercileLine, iPosition:=26)
+                    clsBaseOperator.AddParameter("annotate_upper_tercile", clsRFunctionParameter:=clsGeomTextLabelUpperTercileLine, iPosition:=27)
+                    If ucrChkTercilesLineLabelIncludeValue.Checked Then
+                        If rdoYNumeric.Checked Then
+                            clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
+                            clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
+                        ElseIf rdoYDate.Checked Then
+                            clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsFormatLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
+                            clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsFormatUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
+                        End If
+                    Else
+                        clsPasteLowerTercileY.RemoveParameterByName("1")
+                        clsPasteUpperTercileY.RemoveParameterByName("1")
+                    End If
+                Else
+                    clsBaseOperator.RemoveParameterByName("annotate_lower_tercile")
+                    clsBaseOperator.RemoveParameterByName("annotate_upper_tercile")
+                End If
             Else
                 clsBaseOperator.RemoveParameterByName("hlinelowertercile")
                 clsBaseOperator.RemoveParameterByName("hlineuppertercile")
+                clsBaseOperator.RemoveParameterByName("annotate_lower_tercile")
+                clsBaseOperator.RemoveParameterByName("annotate_upper_tercile")
+                clsMutateFunction.RemoveParameterByName(strLowerTercileName)
+                clsMutateFunction.RemoveParameterByName(strUpperTercileName)
             End If
         End If
     End Sub
 
-    Private Sub ucrChkAddMean_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddMean.ControlValueChanged, ucrChkAddTerciles.ControlValueChanged, ucrChkAddMedian.ControlValueChanged
+    Private Sub ucrLineControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddMean.ControlValueChanged, ucrChkAddTerciles.ControlValueChanged, ucrChkAddMedian.ControlValueChanged, ucrChkAddMeanLabel.ControlValueChanged, ucrChkAddMedianLabel.ControlValueChanged, ucrChkAddTercilesLabel.ControlValueChanged, ucrChkMeanLineLabelIncludeValue.ControlValueChanged, ucrChkMedianLineLabelIncludeValue.ControlValueChanged, ucrChkTercilesLineLabelIncludeValue.ControlValueChanged
         AddRemoveHline()
     End Sub
 
@@ -668,29 +1070,56 @@ Public Class sdgPICSARainfallGraph
         SetYLabel()
     End Sub
 
-    Private Sub AddRemoveSpecifyXAxisTickMarks()
+    Private Sub AddRemoveXAxisBreaks()
         If bRCodeSet Then
             If ucrChkSpecifyXAxisTickMarks.Checked AndAlso Not ucrInputXTo.IsEmpty AndAlso Not ucrInputXFrom.IsEmpty AndAlso Not ucrInputXInStepsOf.IsEmpty Then
-                clsBaseOperator.AddParameter("scale_x_continuous", clsRFunctionParameter:=clsXScaleContinuousFunction)
                 clsXScaleContinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsXScalecontinuousSeqFunction)
-
             Else
                 clsXScaleContinuousFunction.RemoveParameterByName("breaks")
+            End If
+            AddRemoveXAxisScalesContinuous()
+        End If
+    End Sub
+
+    Private Sub AddRemoveXAxisScalesContinuous()
+        If bRCodeSet Then
+            If clsXScaleContinuousFunction.clsParameters.Count > 0 Then
+                clsBaseOperator.AddParameter("scale_x_continuous", clsRFunctionParameter:=clsXScaleContinuousFunction)
+            Else
                 clsBaseOperator.RemoveParameterByName("scale_x_continuous")
             End If
         End If
     End Sub
 
-    Private Sub AddRemoveSpecifyYAxisTickMarks()
+    Private Sub AddRemoveYAxisBreaks()
         If bRCodeSet Then
             If ucrChkSpecifyYAxisTickMarks.Checked AndAlso Not ucrInputYTo.IsEmpty AndAlso Not ucrInputYFrom.IsEmpty AndAlso Not ucrInputYInStepsOf.IsEmpty Then
+                clsYScaleContinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsYScaleContinuousSeqFunction)
+            Else
+                clsYScaleContinuousFunction.RemoveParameterByName("breaks")
+            End If
+            AddRemoveYAxisScales()
+        End If
+    End Sub
+
+    Private Sub AddRemoveYAxisScales()
+        If bRCodeSet Then
+            If rdoYNumeric.Checked Then
                 clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
-                clsBaseOperator.AddParameter("scale_y_continuous", clsRFunctionParameter:=clsYScaleContinuousFunction)
+                If clsYScaleContinuousFunction.iParameterCount > 0 Then
+                    clsBaseOperator.AddParameter("scale_y_continuous", clsRFunctionParameter:=clsYScaleContinuousFunction)
+                Else
+                    clsBaseOperator.RemoveParameterByName("scale_y_continuous")
+                End If
                 clsBaseOperator.RemoveParameterByName("scale_y_date")
-            ElseIf ucrChkLabelForDays.Checked Then
+            ElseIf rdoYDate.Checked Then
                 clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsDate, iPosition:=1)
+                If clsYScaleDateFunction.iParameterCount > 0 Then
+                    clsBaseOperator.AddParameter("scale_y_date", clsRFunctionParameter:=clsYScaleDateFunction)
+                Else
+                    clsBaseOperator.RemoveParameterByName("scale_y_date")
+                End If
                 clsBaseOperator.RemoveParameterByName("scale_y_continuous")
-                clsBaseOperator.AddParameter("scale_y_date", clsRFunctionParameter:=clsYScaleDateFunction)
             Else
                 clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
                 clsBaseOperator.RemoveParameterByName("scale_y_continuous")
@@ -759,7 +1188,7 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub AddRemoveAngleSizeYAxis()
+    Private Sub AddRemoveAxisTextY()
         If (ucrChkYAxisAngle.Checked AndAlso ucrNudYAxisAngle.GetText <> "") OrElse (ucrChkYAxisLabelSize.Checked AndAlso ucrNudYAxisLabelSize.GetText <> "") Then
             clsThemeFunction.AddParameter("axis.text.y", clsRFunctionParameter:=clsYElementLabels)
         Else
@@ -778,7 +1207,7 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemovePanelGridMajor()
-        If (UcrChkMajorGridLineColour.Checked AndAlso Not UcrInputMajorGridLineColour.IsEmpty()) OrElse (UcrChkMajorGridLinetype.Checked AndAlso Not UcrInputMajorGridLineLinetype.IsEmpty()) OrElse (UcrChkMajorGridLineSize.Checked AndAlso UcrNudMajorGridLineSize.GetText <> "") Then
+        If (ucrChkMajorGridLineColour.Checked AndAlso Not ucrInputMajorGridLineColour.IsEmpty()) OrElse (ucrChkMajorGridLineLinetype.Checked AndAlso Not ucrInputMajorGridLineLinetype.IsEmpty()) OrElse (ucrChkMajorGridLineSize.Checked AndAlso ucrNudMajorGridLineSize.GetText <> "") Then
             clsThemeFunction.AddParameter("panel.grid.major", clsRFunctionParameter:=clsElementPanelGridMajor)
         Else
             clsThemeFunction.RemoveParameterByName("panel.grid.major")
@@ -787,7 +1216,7 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemovePanelGridMinor()
-        If (UcrChkMinorGridLineColour.Checked AndAlso Not UcrInputMinorGridLineColour.IsEmpty()) OrElse (UcrChkMinorGridLineType.Checked AndAlso Not UcrInputMinorGridLineTpe.IsEmpty()) OrElse (UcrChkMinorGridLineSize.Checked AndAlso UcrNudMinorGridLineSize.GetText <> "") Then
+        If (ucrChkMinorGridLineColour.Checked AndAlso Not ucrInputMinorGridLineColour.IsEmpty()) OrElse (ucrChkMinorGridLineLinetype.Checked AndAlso Not ucrInputMinorGridLineLinetype.IsEmpty()) OrElse (ucrChkMinorGridLineSize.Checked AndAlso ucrNudMinorGridLineSize.GetText <> "") Then
             clsThemeFunction.AddParameter("panel.grid.minor", clsRFunctionParameter:=clsElementPanelGridMinor)
         Else
             clsThemeFunction.RemoveParameterByName("panel.grid.minor")
@@ -810,11 +1239,11 @@ Public Class sdgPICSARainfallGraph
         AddRemovePanelBackground()
     End Sub
 
-    Private Sub UcrChkMajorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrChkMajorGridLineColour.ControlValueChanged, UcrChkMajorGridLinetype.ControlValueChanged, UcrChkMajorGridLineSize.ControlValueChanged
+    Private Sub UcrChkMajorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMajorGridLineColour.ControlValueChanged, ucrChkMajorGridLineLinetype.ControlValueChanged, ucrChkMajorGridLineSize.ControlValueChanged
         AddRemovePanelGridMajor()
     End Sub
 
-    Private Sub UcrChkMinorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrChkMinorGridLineColour.ControlValueChanged, UcrChkMinorGridLineType.ControlValueChanged, UcrChkMinorGridLineSize.ControlValueChanged
+    Private Sub UcrChkMinorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMinorGridLineColour.ControlValueChanged, ucrChkMinorGridLineLinetype.ControlValueChanged, ucrChkMinorGridLineSize.ControlValueChanged
         AddRemovePanelGridMinor()
     End Sub
 
@@ -839,33 +1268,44 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub ucrChkXAxisLabelSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXAxisLabelSize.ControlValueChanged, ucrChkXAxisAngle.ControlValueChanged
+        XAxisAngleJust()
         AddRemoveAngleSizeXAxis()
     End Sub
 
-    Private Sub ucrInputXFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputXFrom.ControlContentsChanged, ucrInputXFrom.ControlContentsChanged, ucrInputXInStepsOf.ControlContentsChanged, ucrChkSpecifyXAxisTickMarks.ControlValueChanged
-        AddRemoveSpecifyXAxisTickMarks()
-    End Sub
-    Private Sub ucrChkYAxisLabelSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYAxisLabelSize.ControlValueChanged, ucrChkYAxisAngle.ControlValueChanged
-        AddRemoveAngleSizeYAxis()
+    Private Sub ucrNudXAxisAngle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudXAxisAngle.ControlValueChanged
+        XAxisAngleJust()
     End Sub
 
-    Private Sub ucrInputYFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputYFrom.ControlContentsChanged, ucrInputYFrom.ControlContentsChanged, ucrInputYInStepsOf.ControlContentsChanged, ucrChkSpecifyYAxisTickMarks.ControlValueChanged, ucrChkLabelForDays.ControlValueChanged
-        AddRemoveSpecifyYAxisTickMarks()
+    Private Sub XAxisAngleJust()
+        If Not ucrChkXAxisAngle.Checked OrElse ucrNudXAxisAngle.Value = 0 Then
+            clsXElementLabels.RemoveParameterByName("vjust")
+            clsXElementLabels.RemoveParameterByName("hjust")
+        ElseIf ucrNudXAxisAngle.Value = 90 Then
+            clsXElementLabels.RemoveParameterByName("hjust")
+            clsXElementLabels.AddParameter("vjust", "0.4")
+        Else
+            clsXElementLabels.RemoveParameterByName("vjust")
+            clsXElementLabels.AddParameter("hjust", "1")
+        End If
+    End Sub
+
+    Private Sub ucrXBreaksControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputXFrom.ControlValueChanged, ucrInputXTo.ControlValueChanged, ucrInputXInStepsOf.ControlValueChanged, ucrChkSpecifyXAxisTickMarks.ControlValueChanged
+        AddRemoveXAxisBreaks()
+    End Sub
+
+    Private Sub ucrYBreaksControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputYFrom.ControlValueChanged, ucrInputYTo.ControlValueChanged, ucrInputYInStepsOf.ControlValueChanged, ucrChkSpecifyYAxisTickMarks.ControlValueChanged
+        AddRemoveYAxisBreaks()
+    End Sub
+
+    Private Sub ucrAxisTextYControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYAxisAngle.ControlValueChanged, ucrNudYAxisAngle.ControlValueChanged, ucrChkYAxisLabelSize.ControlValueChanged, ucrNudYAxisLabelSize.ControlValueChanged
+        AddRemoveAxisTextY()
     End Sub
 
     Private Sub ucrChkBorderColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBorderColour.ControlValueChanged, ucrChkBorderLineType.ControlValueChanged, UcrChkBorderSize.ControlValueChanged
         AddRemovePanelBorder()
     End Sub
 
-    Private Sub ucrChkLabelForDays_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelForDays.ControlValueChanged, ucrChkSpecifyYAxisTickMarks.ControlValueChanged
-        If ucrChangedControl.Equals(ucrChkSpecifyYAxisTickMarks) AndAlso ucrChkSpecifyYAxisTickMarks.Checked Then
-            ucrChkLabelForDays.Checked = False
-        ElseIf ucrChangedControl.Equals(ucrChkLabelForDays) AndAlso ucrChkLabelForDays.Checked Then
-            ucrChkSpecifyYAxisTickMarks.Checked = False
-        End If
-    End Sub
-
-    Private Sub ucrChkSpecifyDateBreaks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyDateBreaks.ControlValueChanged, ucrInputDateBreakTime.ControlValueChanged, ucrNudDateBreakNumber.ControlValueChanged
+    Private Sub ucrDateBreakControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyDateBreaks.ControlValueChanged, ucrNudDateBreakNumber.ControlValueChanged, ucrInputDateBreakTime.ControlValueChanged
         AddRemoveDateBreaks()
     End Sub
 
@@ -875,6 +1315,91 @@ Public Class sdgPICSARainfallGraph
                 clsYScaleDateFunction.AddParameter("date_breaks", clsROperatorParameter:=clsDatePeriodOperator)
             Else
                 clsYScaleDateFunction.RemoveParameterByName("date_breaks")
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrYLimitControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYSpecifyLowerLimit.ControlValueChanged, ucrChkYSpecifyUpperLimit.ControlValueChanged, ucrInputYSpecifyLowerLimitNumeric.ControlValueChanged, ucrInputYSpecifyUpperLimitNumeric.ControlValueChanged
+        If Not ucrChkYSpecifyLowerLimit.Checked Then
+            clsCLimitsYContinuous.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
+        End If
+        If Not ucrChkYSpecifyUpperLimit.Checked Then
+            clsCLimitsYContinuous.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
+        End If
+        AddRemoveYLimits()
+    End Sub
+
+    Private Sub AddRemoveYLimits()
+        Dim strExpand As String
+        If bRCodeSet Then
+            If (ucrChkYSpecifyLowerLimit.Checked AndAlso Not ucrInputYSpecifyLowerLimitNumeric.IsEmpty()) OrElse (ucrChkYSpecifyUpperLimit.Checked AndAlso Not ucrInputYSpecifyUpperLimitNumeric.IsEmpty()) Then
+                clsYScaleContinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsCLimitsYContinuous, iPosition:=4)
+                strExpand = "ggplot2::expand_scale(mult = c("
+                If ucrChkYSpecifyLowerLimit.Checked Then
+                    strExpand = strExpand & "0, "
+                Else
+                    strExpand = strExpand & "0.05, "
+                End If
+                If ucrChkYSpecifyUpperLimit.Checked Then
+                    strExpand = strExpand & "0"
+                Else
+                    strExpand = strExpand & "0.05"
+                End If
+                strExpand = strExpand & "))"
+                clsYScaleContinuousFunction.AddParameter("expand", strExpand, iPosition:=5)
+            Else
+                clsYScaleContinuousFunction.RemoveParameterByName("limits")
+                clsYScaleContinuousFunction.RemoveParameterByName("expand")
+            End If
+            AddRemoveYAxisScales()
+        End If
+    End Sub
+
+    Private Sub ucrPnlYAxisType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlYAxisType.ControlValueChanged
+        AddRemoveYAxisScales()
+        AddRemoveHline()
+    End Sub
+
+    Private Sub ucrInputMeanLineType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMeanLabelType.ControlValueChanged
+        SetMeanLabelType()
+    End Sub
+
+    Private Sub SetMeanLabelType()
+        If bRCodeSet Then
+            If ucrInputMeanLabelType.GetText() = "Text" Then
+                clsGeomTextLabelMeanLine.SetRCommand("geom_text")
+            ElseIf ucrInputMeanLabelType.GetText() = "Textbox" Then
+                clsGeomTextLabelMeanLine.SetRCommand("geom_label")
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrInputMedianLabelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMedianLabelType.ControlValueChanged
+        SetMedianLabelType()
+    End Sub
+
+    Private Sub SetMedianLabelType()
+        If bRCodeSet Then
+            If ucrInputMedianLabelType.GetText() = "Text" Then
+                clsGeomTextLabelMedianLine.SetRCommand("geom_text")
+            ElseIf ucrInputMedianLabelType.GetText() = "Textbox" Then
+                clsGeomTextLabelMedianLine.SetRCommand("geom_label")
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrInputTercilesLabelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTercilesLabelType.ControlValueChanged
+        SetTercilesLabelType()
+    End Sub
+
+    Private Sub SetTercilesLabelType()
+        If bRCodeSet Then
+            If ucrInputTercilesLabelType.GetText() = "Text" Then
+                clsGeomTextLabelLowerTercileLine.SetRCommand("geom_text")
+                clsGeomTextLabelUpperTercileLine.SetRCommand("geom_text")
+            ElseIf ucrInputTercilesLabelType.GetText() = "Textbox" Then
+                clsGeomTextLabelLowerTercileLine.SetRCommand("geom_label")
+                clsGeomTextLabelUpperTercileLine.SetRCommand("geom_label")
             End If
         End If
     End Sub
