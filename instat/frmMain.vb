@@ -1141,10 +1141,6 @@ Public Class frmMain
         dlgMakeDate.ShowDialog()
     End Sub
 
-    Private Sub mnuClimdex_Click(sender As Object, e As EventArgs) Handles mnuClimdex.Click
-        dlgClimdexIndices.ShowDialog()
-    End Sub
-
     Private Sub mnuDescribeOtherGraphicsDialogsWindRose_Click(sender As Object, e As EventArgs)
         dlgWindrose.ShowDialog()
     End Sub
@@ -2016,9 +2012,7 @@ Public Class frmMain
         dlgExportToCMSAF.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticCheckDataStationMaps_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataStationMaps.Click
-        dlgClimaticStationMaps.ShowDialog()
-    End Sub
+
 
     Private Sub mnuClimaticPrepareConversions_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareConversions.Click
         dlgConversions.ShowDialog()
@@ -2032,9 +2026,7 @@ Public Class frmMain
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "151")
     End Sub
 
-    Private Sub mnuClimaticModelSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelSPI.Click
-        dlgSPI.ShowDialog()
-    End Sub
+
 
     Private Sub mnuDescribeSpecificMosaic_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificMosaic.Click
         dlgMosaicPlot.ShowDialog()
@@ -2061,5 +2053,30 @@ Public Class frmMain
         dlgImportDataset.bStartOpenDialog = True
         dlgImportDataset.bFromLibrary = True
         dlgImportDataset.ShowDialog()
+    End Sub
+
+    Private Sub MnuClimaticTidyandExamineUnstack_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineUnstack.Click
+        dlgUnstack.ShowDialog()
+
+    End Sub
+
+    Private Sub mnuClimaticTidyandExamineStack_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineStack.Click
+        dlgStack.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticTidyandExamineAppend_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineAppend.Click
+        dlgAppend.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeClimaticStaionMaps_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeClimaticStaionMaps.Click
+        dlgClimaticStationMaps.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareClimdex_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimdex.Click
+        dlgClimdexIndices.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareSPI.Click
+        dlgSPI.ShowDialog()
     End Sub
 End Class
