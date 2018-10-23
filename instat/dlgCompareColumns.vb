@@ -39,7 +39,6 @@ Public Class dlgCompareColumns
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 546
         ucrReceiverFirst.SetParameter(New RParameter("x", 0))
         ucrReceiverFirst.Selector = ucrSelectorCompareColumns
         ucrReceiverFirst.SetParameterIsRFunction()

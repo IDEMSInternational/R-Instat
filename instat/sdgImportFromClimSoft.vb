@@ -31,7 +31,6 @@ Public Class sdgImportFromClimSoft
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        CheckConnection()
     End Sub
 
     Private Sub InitialiseControls()
@@ -62,10 +61,10 @@ Public Class sdgImportFromClimSoft
         Dim expTemp As SymbolicExpression
         cmdEnterPassword.Enabled = False
         If bConnected Then
-            frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
+            frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.")
             bConnected = False
         Else
-            frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
+            frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.")
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsHasConnection.ToScript())
             If Not expTemp.Type = Internals.SymbolicExpressionType.Null Then
                 bConnected = expTemp.AsLogical(0)
@@ -73,11 +72,6 @@ Public Class sdgImportFromClimSoft
                 bConnected = False
             End If
         End If
-        CheckConnection()
-        cmdEnterPassword.Enabled = True
-    End Sub
-
-    Private Sub CheckConnection()
         If bConnected Then
             lblConnection.Text = strConnected
             cmdEnterPassword.Text = "Disconnnect"
@@ -85,6 +79,7 @@ Public Class sdgImportFromClimSoft
             lblConnection.Text = strNoConnection
             cmdEnterPassword.Text = "Enter Password"
         End If
+        cmdEnterPassword.Enabled = True
     End Sub
 
     Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDatabaseName.ControlContentsChanged, ucrInputHost.ControlContentsChanged, ucrInputPort.ControlContentsChanged, ucrInputUserName.ControlContentsChanged
@@ -125,16 +120,5 @@ Public Class sdgImportFromClimSoft
             lblConnection.Text = strNoConnection
             cmdEnterPassword.Text = "Enter Password"
         End If
-    End Sub
-
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-
-        frmMain.clsInstatOptions.SetClimsoftDatabaseName(ucrInputDatabaseName.GetText())
-        frmMain.clsInstatOptions.SetClimsoftHost(ucrInputHost.GetText())
-        frmMain.clsInstatOptions.SetClimsoftPort(ucrInputPort.GetText())
-        frmMain.clsInstatOptions.SetClimsoftUsername(ucrInputUserName.GetText())
-
-        Dim msgSetDefaults = MsgBox("Climsoft defaults updated", MessageBoxButtons.OK, "Climsoft defaults")
-
     End Sub
 End Class

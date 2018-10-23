@@ -18,8 +18,7 @@ Imports instat.Translations
 Public Class dlgSPI
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsSpiFunction, clsSpeiFunction, clsListFunction, clsSummaryFunction, clsAsVectorFunction As New RFunction
-    Private clsDolarOperator As New ROperator
+    Private clsSpiFunction, clsSpeiFunction, clsListFunction As New RFunction
 
     Private Sub dlgSPI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -36,11 +35,12 @@ Public Class dlgSPI
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.iHelpTopicID = 566
+        ucrBase.iHelpTopicID = 510
 
         ucrSelectorVariable.SetParameterIsString()
 
-        'receivers
+        'receivers:
+        ' by receivers
         ucrReceiverData.SetParameterIsRFunction()
         ucrReceiverData.SetParameter(New RParameter("data", 0))
         ucrReceiverData.Selector = ucrSelectorVariable
@@ -69,10 +69,11 @@ Public Class dlgSPI
         ucrNudTimeScale.SetParameter(New RParameter("scale", 1))
         ucrNudTimeScale.SetMinMax(1, 24)
 
-        'others
+        ' others
         ucrChkOmitMissingValues.SetParameter(New RParameter("na.rm", 5))
         ucrChkOmitMissingValues.SetText("Omit Missing Values")
         ucrChkOmitMissingValues.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOmitMissingValues.SetRDefault("FALSE")
 
         'panel
         ucrPnlKernelType.SetParameter(New RParameter("type", 0))
@@ -88,36 +89,22 @@ Public Class dlgSPI
         'ucrpnlInd
         ucrPnlIndex.AddRadioButton(rdoSPI)
         ucrPnlIndex.AddRadioButton(rdoSPEI)
-        ucrPnlIndex.AddParameterValueFunctionNamesCondition(rdoSPI, "object", "spi")
-        ucrPnlIndex.AddParameterValueFunctionNamesCondition(rdoSPEI, "object", "spei")
+        ucrPnlIndex.AddFunctionNamesCondition(rdoSPI, "spi")
+        ucrPnlIndex.AddFunctionNamesCondition(rdoSPEI, "spei")
 
         ucrSaveIndex.SetSaveTypeAsColumn()
         ucrSaveIndex.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
         ucrSaveIndex.SetLabelText("Save Index into:")
         ucrSaveIndex.SetIsTextBox()
-        ucrSaveIndex.SetPrefix("spi")
-
-        ucrSaveModel.SetSaveTypeAsModel()
-        ucrSaveModel.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
-        ucrSaveModel.SetCheckBoxText("Save Model:")
-        ucrSaveModel.SetIsComboBox()
-        ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
+        ucrSaveIndex.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
     End Sub
 
     Private Sub SetDefaults()
         clsSpeiFunction = New RFunction
         clsSpiFunction = New RFunction
         clsListFunction = New RFunction
-        clsAsVectorFunction = New RFunction
-        clsSummaryFunction = New RFunction
-
-        clsDolarOperator = New ROperator
-
-        ucrBase.clsRsyntax.ClearCodes()
 
         ucrSelectorVariable.Reset()
-        ucrSaveIndex.Reset()
-        ucrSaveModel.Reset()
         ucrReceiverData.SetMeAsReceiver()
 
         clsListFunction.SetRCommand("list")
@@ -127,29 +114,14 @@ Public Class dlgSPI
         clsSpiFunction.SetPackageName("SPEI")
         clsSpiFunction.SetRCommand("spi")
         clsSpiFunction.AddParameter("scale", 1, iPosition:=1)
-        clsSpiFunction.AddParameter("na.rm", "TRUE", iPosition:=5)
         clsSpiFunction.AddParameter("kernel", clsRFunctionParameter:=clsListFunction, iPosition:=2)
-        clsSpiFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
 
         clsSpeiFunction.SetPackageName("SPEI")
         clsSpeiFunction.SetRCommand("spei")
         clsSpeiFunction.AddParameter("scale", 1, iPosition:=1)
-        clsSpeiFunction.AddParameter("na.rm", "TRUE", iPosition:=5)
         clsSpeiFunction.AddParameter("kernel", clsRFunctionParameter:=clsListFunction, iPosition:=2)
-        clsSpeiFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
 
-        clsSummaryFunction.SetRCommand("summary")
-        clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSpiFunction)
-
-        clsAsVectorFunction.SetRCommand("as.vector")
-        clsAsVectorFunction.AddParameter("x", clsROperatorParameter:=clsDolarOperator)
-
-        clsDolarOperator.SetOperation("$")
-        clsDolarOperator.AddParameter("model", clsRFunctionParameter:=clsSpiFunction, iPosition:=0)
-        clsDolarOperator.AddParameter("fitted", "fitted", iPosition:=1)
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsAsVectorFunction, iPosition:=0)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSpiFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -162,17 +134,16 @@ Public Class dlgSPI
         ucrNudTimeScale.SetRCode(clsSpiFunction, bReset)
         ucrPnlKernelType.SetRCode(clsListFunction, bReset)
         ucrNudKernelShift.SetRCode(clsListFunction, bReset)
-        ucrPnlIndex.SetRCode(clsSummaryFunction, bReset)
-        ucrSaveIndex.SetRCode(clsAsVectorFunction, bReset)
-        ucrSaveModel.AddAdditionalRCode(clsSpiFunction, bReset)
-        ucrSaveModel.SetRCode(clsSpeiFunction, bReset)
+        ucrPnlIndex.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'ucrSaveIndex.AddAdditionalRCode(clsSpeiFunction, iAdditionalPairNo:=1)
+        'ucrSaveIndex.SetRCode(clsSpiFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverData.IsEmpty AndAlso ucrSaveIndex.IsComplete Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrReceiverData.IsEmpty Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -184,19 +155,17 @@ Public Class dlgSPI
 
     Private Sub ucrPnlIndex_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlIndex.ControlContentsChanged
         If rdoSPI.Checked Then
-            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSpiFunction)
-            clsDolarOperator.AddParameter("model", clsRFunctionParameter:=clsSpiFunction, iPosition:=0)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSpiFunction)
+            'clsSpiFunction.SetAssignTo("spi", strTempDataframe:=ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="spi", bAssignToIsPrefix:=True)
             ucrSaveIndex.SetPrefix("spi")
-            ucrSaveModel.SetPrefix("spi_mod")
         ElseIf rdoSPEI.Checked Then
-            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSpeiFunction)
-            clsDolarOperator.AddParameter("model", clsRFunctionParameter:=clsSpeiFunction, iPosition:=0)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSpeiFunction)
+            'clsSpeiFunction.SetAssignTo("spei", strTempDataframe:=ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="spei", bAssignToIsPrefix:=True)
             ucrSaveIndex.SetPrefix("spei")
-            ucrSaveModel.SetPrefix("spei_mod")
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrSaveIndex.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

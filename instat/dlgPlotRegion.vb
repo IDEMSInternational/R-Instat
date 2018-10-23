@@ -38,7 +38,6 @@ Public Class dlgPlotRegion
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 568
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrReceiverLongitude.SetParameter(New RParameter("lon", 1))
