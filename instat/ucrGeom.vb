@@ -1504,8 +1504,4 @@ Public Class ucrGeom
     Public Function GetGeomName() As String
         Return ucrInputGeoms.GetText()
     End Function
-
-    Private Sub lblTypeofLayer_Click(sender As Object, e As EventArgs) Handles lblTypeofLayer.Click
-
-    End Sub
 End Class
