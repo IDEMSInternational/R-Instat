@@ -36,6 +36,11 @@ Public Class ucrColumnMetadata
     Public strPreviousCellText As String
     Private lstNonEditableColumns As New List(Of String)
 
+    Private strSignifFiguresLabel As String = "Signif_Figures"
+    Private strNameLabel As String = "Name"
+    Private strDataTypeLabel As String = "DataType"
+    Private strLabelsLabel As String = "labels"
+
     Private Sub frmVariables_Load(sender As Object, e As EventArgs) Handles Me.Load
         loadForm()
         SetRFunctions()
@@ -101,9 +106,6 @@ Public Class ucrColumnMetadata
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
         Dim strScript As String = ""
         Dim strComment As String = ""
-        Dim strSignifFiguresLabel As String = "Signif_Figures"
-        Dim strNameLabel As String = "Name"
-        Dim strDataTypeLabel As String = "DataType"
         Dim strProperty As String = grdCurrSheet.ColumnHeaders(e.Cell.Column).Text
         Dim strColumn As String
         Dim iTemp As Integer
@@ -431,5 +433,21 @@ Public Class ucrColumnMetadata
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
         dlgReorderColumns.ShowDialog()
+    End Sub
+
+    Private Sub propertiesContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles propertiesContextMenuStrip.Opening
+        If grdCurrSheet.ColumnHeaders(grdCurrSheet.FocusPos.Col).Text <> strLabelsLabel Then
+            e.Cancel = True
+        End If
+    End Sub
+
+    Private Sub mnuDeleteLabels_Click(sender As Object, e As EventArgs) Handles mnuDeleteLabels.Click
+        clsAppendVariablesMetaData.AddParameter("col_names", GetSelectedVariableNames())
+        clsAppendVariablesMetaData.AddParameter("property", "labels_label")
+        clsAppendVariablesMetaData.AddParameter("new_val", "NULL")
+        RunScriptFromColumnMetadata(clsAppendVariablesMetaData.ToScript(), strComment:="Removed value labels")
+        clsAppendVariablesMetaData.RemoveParameterByName("col_names")
+        clsAppendVariablesMetaData.RemoveParameterByName("property")
+        clsAppendVariablesMetaData.RemoveParameterByName("new_val")
     End Sub
 End Class

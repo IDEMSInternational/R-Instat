@@ -40,6 +40,8 @@ Partial Class ucrColumnMetadata
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.grdVariables = New unvell.ReoGrid.ReoGridControl()
+        Me.propertiesContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuDeleteLabels = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuColumnRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
@@ -64,6 +66,7 @@ Partial Class ucrColumnMetadata
         Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.propertiesContextMenuStrip.SuspendLayout()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -72,6 +75,7 @@ Partial Class ucrColumnMetadata
         '
         Me.grdVariables.BackColor = System.Drawing.Color.White
         Me.grdVariables.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdVariables.ContextMenuStrip = Me.propertiesContextMenuStrip
         Me.grdVariables.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdVariables.LeadHeaderContextMenuStrip = Nothing
         Me.grdVariables.Location = New System.Drawing.Point(3, 23)
@@ -87,11 +91,23 @@ Partial Class ucrColumnMetadata
         Me.grdVariables.TabIndex = 2
         Me.grdVariables.Text = "Variables"
         '
+        'propertiesContextMenuStrip
+        '
+        Me.propertiesContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDeleteLabels})
+        Me.propertiesContextMenuStrip.Name = "columnContextMenuStrip"
+        Me.propertiesContextMenuStrip.Size = New System.Drawing.Size(144, 26)
+        '
+        'mnuDeleteLabels
+        '
+        Me.mnuDeleteLabels.Name = "mnuDeleteLabels"
+        Me.mnuDeleteLabels.Size = New System.Drawing.Size(143, 22)
+        Me.mnuDeleteLabels.Text = "Delete Labels"
+        '
         'columnContextMenuStrip
         '
         Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuFreezeToHere, Me.mnuUnfreeze, Me.ToolStripSeparator3, Me.mnuSort, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 424)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 402)
         '
         'mnuColumnRename
         '
@@ -251,6 +267,7 @@ Partial Class ucrColumnMetadata
         Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrColumnMetadata"
         Me.Size = New System.Drawing.Size(344, 138)
+        Me.propertiesContextMenuStrip.ResumeLayout(False)
         Me.columnContextMenuStrip.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -282,4 +299,6 @@ Partial Class ucrColumnMetadata
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents mnuReorderColumns As ToolStripMenuItem
+    Private WithEvents propertiesContextMenuStrip As ContextMenuStrip
+    Friend WithEvents mnuDeleteLabels As ToolStripMenuItem
 End Class

@@ -81,7 +81,7 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub InitialiseDialog()
-        'ucrBase.iHelpTopicID = 
+        ucrBase.iHelpTopicID = 393
 
         ucrInputFilePath.IsReadOnly = True
 
@@ -102,6 +102,9 @@ Public Class dlgOpenNetCDF
         strMedium = ""
         strLong = ""
         rdoShort.Checked = True
+
+        ucrInputFilePath.SetName("")
+        ucrInputFileDetails.SetName("")
 
         clsImportNetcdfFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
         clsImportNetcdfFunction.AddParameter("nc", clsRFunctionParameter:=clsNcOpenFunction, iPosition:=0)

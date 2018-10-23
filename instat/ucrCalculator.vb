@@ -64,6 +64,8 @@ Public Class ucrCalculator
         cmdIsTrue.Enabled = False
         cmdIsFalse.Enabled = False
         bControlsInitialised = True
+        ttCalculator.SetToolTip(cmdRound, "round(x) to round to whole numbers, round(x,2) to round to 2 decimal places, round(x,-2) to round to the nearest 100")
+        ttCalculator.SetToolTip(cmdSiginf, "signif(x,3) to round to 3 significant figures")
     End Sub
 
     Public Sub Reset()
@@ -142,7 +144,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdGreater_Click(sender As Object, e As EventArgs) Handles cmdGreater.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(">")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" > ")
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
@@ -150,7 +152,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdLesser_Click(sender As Object, e As EventArgs) Handles cmdLesser.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("<")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" < ")
     End Sub
 
     Private Sub cmdComma_Click(sender As Object, e As EventArgs) Handles cmdComma.Click
@@ -396,11 +398,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdEquivalent_Click(sender As Object, e As EventArgs) Handles cmdEquivalent.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("==")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" == ")
     End Sub
 
     Private Sub cmdNotEqualsTo_Click(sender As Object, e As EventArgs) Handles cmdNotEqualsTo.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("!=")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" != ")
     End Sub
 
     Private Sub cmdNot_Click(sender As Object, e As EventArgs) Handles cmdNot.Click
@@ -408,27 +410,27 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdOr_Click(sender As Object, e As EventArgs) Handles cmdOr.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("|")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" | ")
     End Sub
 
     Private Sub cmdLesserOrEqualsTo_Click(sender As Object, e As EventArgs) Handles cmdLesserOrEqualsTo.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("<=")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" <= ")
     End Sub
 
     Private Sub cmdGreaterOrEqualsTo_Click(sender As Object, e As EventArgs) Handles cmdGreaterOrEqualsTo.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(">=")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" >= ")
     End Sub
 
     Private Sub cmdModulas_Click(sender As Object, e As EventArgs) Handles cmdModulas.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%%")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" %% ")
     End Sub
 
     Private Sub cmdIntegerDivision_Click(sender As Object, e As EventArgs) Handles cmdIntegerDivision.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%/%")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" %/% ")
     End Sub
 
     Private Sub cmdAnd_Click(sender As Object, e As EventArgs) Handles cmdAnd.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("&")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" & ")
     End Sub
 
     Private Sub cmdLength_Click(sender As Object, e As EventArgs) Handles cmdLength.Click
@@ -901,7 +903,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdColon_Click(sender As Object, e As EventArgs) Handles cmdColon.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(":")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" : ")
     End Sub
 
     Private Sub cmdLag_Click(sender As Object, e As EventArgs) Handles cmdLag.Click
@@ -1204,5 +1206,29 @@ Public Class ucrCalculator
 
     Private Sub cmdNA_Click(sender As Object, e As EventArgs) Handles cmdNA.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("NA")
+    End Sub
+
+    Private Sub cmdWhich_Click(sender As Object, e As EventArgs) Handles cmdWhich.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("which(x= , arr.ind = FALSE, useNames = TRUE)", 35)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("which()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdIn_Click(sender As Object, e As EventArgs) Handles cmdIn.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" %in% ")
+    End Sub
+
+    Private Sub cmdDoubleSqrBrackets_Click(sender As Object, e As EventArgs) Handles cmdDoubleSqrBrackets.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[[]]", 2)
+    End Sub
+
+    Private Sub cmdTrue_Click(sender As Object, e As EventArgs) Handles cmdTrue.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("TRUE")
+    End Sub
+
+    Private Sub cmdFalse_Click(sender As Object, e As EventArgs) Handles cmdFalse.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("FALSE")
     End Sub
 End Class

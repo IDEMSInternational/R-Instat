@@ -41,50 +41,51 @@ Partial Class sdgPlots
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgPlots))
         Me.tbpPlotsOptions = New System.Windows.Forms.TabControl()
         Me.tbpFacet = New System.Windows.Forms.TabPage()
-        Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
-        Me.rdoVertical = New System.Windows.Forms.RadioButton()
-        Me.lblFactor2 = New System.Windows.Forms.Label()
-        Me.lblFactor1 = New System.Windows.Forms.Label()
-        Me.tbpLayers = New System.Windows.Forms.TabPage()
-        Me.tbpTitles = New System.Windows.Forms.TabPage()
-        Me.lblCaption = New System.Windows.Forms.Label()
-        Me.lblSubTitle = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.grpLegendTitle = New System.Windows.Forms.GroupBox()
-        Me.rdoLegendTitleCustom = New System.Windows.Forms.RadioButton()
-        Me.rdoLegendTitleAuto = New System.Windows.Forms.RadioButton()
-        Me.tbpXAxis = New System.Windows.Forms.TabPage()
-        Me.tbpYAxis = New System.Windows.Forms.TabPage()
-        Me.tbpTheme = New System.Windows.Forms.TabPage()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lblFont = New System.Windows.Forms.Label()
-        Me.cmdAllOptions = New System.Windows.Forms.Button()
-        Me.tbpCoordinates = New System.Windows.Forms.TabPage()
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.ucrNudNumberofRows = New instat.ucrNud()
         Me.ucrChkNoOfRowsOrColumns = New instat.ucrCheck()
         Me.ucrChkIncludeFacets = New instat.ucrCheck()
+        Me.ucrChkLabeler = New instat.ucrCheck()
         Me.ucrChkFreeSpace = New instat.ucrCheck()
         Me.ucrChkFreeScalesY = New instat.ucrCheck()
         Me.ucrChkFreeScalesX = New instat.ucrCheck()
         Me.ucrChkMargin = New instat.ucrCheck()
         Me.ucrFacetSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
+        Me.rdoVertical = New System.Windows.Forms.RadioButton()
+        Me.lblFactor2 = New System.Windows.Forms.Label()
+        Me.lblFactor1 = New System.Windows.Forms.Label()
         Me.ucr2ndFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrPnlHorizonatalVertical = New instat.UcrPanel()
+        Me.tbpLayers = New System.Windows.Forms.TabPage()
         Me.ucrPlotsAdditionalLayers = New instat.ucrAdditionalLayers()
+        Me.tbpTitles = New System.Windows.Forms.TabPage()
+        Me.lblCaption = New System.Windows.Forms.Label()
+        Me.lblSubTitle = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.grpLegendTitle = New System.Windows.Forms.GroupBox()
         Me.ucrChkOverwriteLegendTitle = New instat.ucrCheck()
         Me.ucrChkDisplayLegendTitle = New instat.ucrCheck()
         Me.ucrInputLegend = New instat.ucrInputTextBox()
+        Me.rdoLegendTitleCustom = New System.Windows.Forms.RadioButton()
+        Me.rdoLegendTitleAuto = New System.Windows.Forms.RadioButton()
         Me.ucrPnlLegendTitle = New instat.UcrPanel()
         Me.ucrInputGraphCaption = New instat.ucrInputTextBox()
         Me.ucrInputGraphSubTitle = New instat.ucrInputTextBox()
         Me.ucrInputGraphTitle = New instat.ucrInputTextBox()
+        Me.tbpXAxis = New System.Windows.Forms.TabPage()
         Me.ucrXAxis = New instat.ucrAxes()
+        Me.tbpYAxis = New System.Windows.Forms.TabPage()
         Me.ucrYAxis = New instat.ucrAxes()
+        Me.tbpTheme = New System.Windows.Forms.TabPage()
         Me.urChkSelectTheme = New instat.ucrCheck()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblFont = New System.Windows.Forms.Label()
+        Me.cmdAllOptions = New System.Windows.Forms.Button()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
+        Me.tbpCoordinates = New System.Windows.Forms.TabPage()
         Me.ucrChkHorizontalplot = New instat.ucrCheck()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -114,6 +115,7 @@ Partial Class sdgPlots
         Me.tbpFacet.Controls.Add(Me.ucrNudNumberofRows)
         Me.tbpFacet.Controls.Add(Me.ucrChkNoOfRowsOrColumns)
         Me.tbpFacet.Controls.Add(Me.ucrChkIncludeFacets)
+        Me.tbpFacet.Controls.Add(Me.ucrChkLabeler)
         Me.tbpFacet.Controls.Add(Me.ucrChkFreeSpace)
         Me.tbpFacet.Controls.Add(Me.ucrChkFreeScalesY)
         Me.tbpFacet.Controls.Add(Me.ucrChkFreeScalesX)
@@ -130,6 +132,66 @@ Partial Class sdgPlots
         Me.tbpFacet.Name = "tbpFacet"
         Me.tbpFacet.Tag = "Facet"
         Me.tbpFacet.UseVisualStyleBackColor = True
+        '
+        'ucrNudNumberofRows
+        '
+        Me.ucrNudNumberofRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberofRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNumberofRows, "ucrNudNumberofRows")
+        Me.ucrNudNumberofRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberofRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberofRows.Name = "ucrNudNumberofRows"
+        Me.ucrNudNumberofRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkNoOfRowsOrColumns
+        '
+        Me.ucrChkNoOfRowsOrColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkNoOfRowsOrColumns, "ucrChkNoOfRowsOrColumns")
+        Me.ucrChkNoOfRowsOrColumns.Name = "ucrChkNoOfRowsOrColumns"
+        '
+        'ucrChkIncludeFacets
+        '
+        Me.ucrChkIncludeFacets.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeFacets, "ucrChkIncludeFacets")
+        Me.ucrChkIncludeFacets.Name = "ucrChkIncludeFacets"
+        '
+        'ucrChkLabeler
+        '
+        Me.ucrChkLabeler.Checked = False
+        resources.ApplyResources(Me.ucrChkLabeler, "ucrChkLabeler")
+        Me.ucrChkLabeler.Name = "ucrChkLabeler"
+        '
+        'ucrChkFreeSpace
+        '
+        Me.ucrChkFreeSpace.Checked = False
+        resources.ApplyResources(Me.ucrChkFreeSpace, "ucrChkFreeSpace")
+        Me.ucrChkFreeSpace.Name = "ucrChkFreeSpace"
+        '
+        'ucrChkFreeScalesY
+        '
+        Me.ucrChkFreeScalesY.Checked = False
+        resources.ApplyResources(Me.ucrChkFreeScalesY, "ucrChkFreeScalesY")
+        Me.ucrChkFreeScalesY.Name = "ucrChkFreeScalesY"
+        '
+        'ucrChkFreeScalesX
+        '
+        Me.ucrChkFreeScalesX.Checked = False
+        resources.ApplyResources(Me.ucrChkFreeScalesX, "ucrChkFreeScalesX")
+        Me.ucrChkFreeScalesX.Name = "ucrChkFreeScalesX"
+        '
+        'ucrChkMargin
+        '
+        Me.ucrChkMargin.Checked = False
+        resources.ApplyResources(Me.ucrChkMargin, "ucrChkMargin")
+        Me.ucrChkMargin.Name = "ucrChkMargin"
+        '
+        'ucrFacetSelector
+        '
+        Me.ucrFacetSelector.bDropUnusedFilterLevels = False
+        Me.ucrFacetSelector.bShowHiddenColumns = False
+        Me.ucrFacetSelector.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrFacetSelector, "ucrFacetSelector")
+        Me.ucrFacetSelector.Name = "ucrFacetSelector"
         '
         'rdoHorizontal
         '
@@ -158,6 +220,29 @@ Partial Class sdgPlots
         Me.lblFactor1.Name = "lblFactor1"
         Me.lblFactor1.Tag = ""
         '
+        'ucr2ndFactorReceiver
+        '
+        Me.ucr2ndFactorReceiver.frmParent = Nothing
+        resources.ApplyResources(Me.ucr2ndFactorReceiver, "ucr2ndFactorReceiver")
+        Me.ucr2ndFactorReceiver.Name = "ucr2ndFactorReceiver"
+        Me.ucr2ndFactorReceiver.Selector = Nothing
+        Me.ucr2ndFactorReceiver.strNcFilePath = ""
+        Me.ucr2ndFactorReceiver.ucrSelector = Nothing
+        '
+        'ucr1stFactorReceiver
+        '
+        Me.ucr1stFactorReceiver.frmParent = Nothing
+        resources.ApplyResources(Me.ucr1stFactorReceiver, "ucr1stFactorReceiver")
+        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
+        Me.ucr1stFactorReceiver.Selector = Nothing
+        Me.ucr1stFactorReceiver.strNcFilePath = ""
+        Me.ucr1stFactorReceiver.ucrSelector = Nothing
+        '
+        'ucrPnlHorizonatalVertical
+        '
+        resources.ApplyResources(Me.ucrPnlHorizonatalVertical, "ucrPnlHorizonatalVertical")
+        Me.ucrPnlHorizonatalVertical.Name = "ucrPnlHorizonatalVertical"
+        '
         'tbpLayers
         '
         Me.tbpLayers.Controls.Add(Me.ucrPlotsAdditionalLayers)
@@ -165,6 +250,11 @@ Partial Class sdgPlots
         Me.tbpLayers.Name = "tbpLayers"
         Me.tbpLayers.Tag = "Layers"
         Me.tbpLayers.UseVisualStyleBackColor = True
+        '
+        'ucrPlotsAdditionalLayers
+        '
+        resources.ApplyResources(Me.ucrPlotsAdditionalLayers, "ucrPlotsAdditionalLayers")
+        Me.ucrPlotsAdditionalLayers.Name = "ucrPlotsAdditionalLayers"
         '
         'tbpTitles
         '
@@ -207,156 +297,6 @@ Partial Class sdgPlots
         Me.grpLegendTitle.Name = "grpLegendTitle"
         Me.grpLegendTitle.TabStop = False
         '
-        'rdoLegendTitleCustom
-        '
-        resources.ApplyResources(Me.rdoLegendTitleCustom, "rdoLegendTitleCustom")
-        Me.rdoLegendTitleCustom.Name = "rdoLegendTitleCustom"
-        Me.rdoLegendTitleCustom.TabStop = True
-        Me.rdoLegendTitleCustom.UseVisualStyleBackColor = True
-        '
-        'rdoLegendTitleAuto
-        '
-        resources.ApplyResources(Me.rdoLegendTitleAuto, "rdoLegendTitleAuto")
-        Me.rdoLegendTitleAuto.Name = "rdoLegendTitleAuto"
-        Me.rdoLegendTitleAuto.TabStop = True
-        Me.rdoLegendTitleAuto.UseVisualStyleBackColor = True
-        '
-        'tbpXAxis
-        '
-        Me.tbpXAxis.Controls.Add(Me.ucrXAxis)
-        resources.ApplyResources(Me.tbpXAxis, "tbpXAxis")
-        Me.tbpXAxis.Name = "tbpXAxis"
-        Me.tbpXAxis.UseVisualStyleBackColor = True
-        '
-        'tbpYAxis
-        '
-        Me.tbpYAxis.Controls.Add(Me.ucrYAxis)
-        resources.ApplyResources(Me.tbpYAxis, "tbpYAxis")
-        Me.tbpYAxis.Name = "tbpYAxis"
-        Me.tbpYAxis.UseVisualStyleBackColor = True
-        '
-        'tbpTheme
-        '
-        Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
-        Me.tbpTheme.Controls.Add(Me.GroupBox1)
-        Me.tbpTheme.Controls.Add(Me.lblFont)
-        Me.tbpTheme.Controls.Add(Me.cmdAllOptions)
-        Me.tbpTheme.Controls.Add(Me.ucrInputThemes)
-        resources.ApplyResources(Me.tbpTheme, "tbpTheme")
-        Me.tbpTheme.Name = "tbpTheme"
-        Me.tbpTheme.Tag = "Theme"
-        Me.tbpTheme.UseVisualStyleBackColor = True
-        '
-        'GroupBox1
-        '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        '
-        'lblFont
-        '
-        resources.ApplyResources(Me.lblFont, "lblFont")
-        Me.lblFont.Name = "lblFont"
-        '
-        'cmdAllOptions
-        '
-        resources.ApplyResources(Me.cmdAllOptions, "cmdAllOptions")
-        Me.cmdAllOptions.Name = "cmdAllOptions"
-        Me.cmdAllOptions.UseVisualStyleBackColor = True
-        '
-        'tbpCoordinates
-        '
-        Me.tbpCoordinates.Controls.Add(Me.ucrChkHorizontalplot)
-        resources.ApplyResources(Me.tbpCoordinates, "tbpCoordinates")
-        Me.tbpCoordinates.Name = "tbpCoordinates"
-        Me.tbpCoordinates.UseVisualStyleBackColor = True
-        '
-        'ucrBaseSubdialog
-        '
-        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        '
-        'ucrNudNumberofRows
-        '
-        Me.ucrNudNumberofRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberofRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudNumberofRows, "ucrNudNumberofRows")
-        Me.ucrNudNumberofRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNumberofRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberofRows.Name = "ucrNudNumberofRows"
-        Me.ucrNudNumberofRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkNoOfRowsOrColumns
-        '
-        Me.ucrChkNoOfRowsOrColumns.Checked = False
-        resources.ApplyResources(Me.ucrChkNoOfRowsOrColumns, "ucrChkNoOfRowsOrColumns")
-        Me.ucrChkNoOfRowsOrColumns.Name = "ucrChkNoOfRowsOrColumns"
-        '
-        'ucrChkIncludeFacets
-        '
-        Me.ucrChkIncludeFacets.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeFacets, "ucrChkIncludeFacets")
-        Me.ucrChkIncludeFacets.Name = "ucrChkIncludeFacets"
-        '
-        'ucrChkFreeSpace
-        '
-        Me.ucrChkFreeSpace.Checked = False
-        resources.ApplyResources(Me.ucrChkFreeSpace, "ucrChkFreeSpace")
-        Me.ucrChkFreeSpace.Name = "ucrChkFreeSpace"
-        '
-        'ucrChkFreeScalesY
-        '
-        Me.ucrChkFreeScalesY.Checked = False
-        resources.ApplyResources(Me.ucrChkFreeScalesY, "ucrChkFreeScalesY")
-        Me.ucrChkFreeScalesY.Name = "ucrChkFreeScalesY"
-        '
-        'ucrChkFreeScalesX
-        '
-        Me.ucrChkFreeScalesX.Checked = False
-        resources.ApplyResources(Me.ucrChkFreeScalesX, "ucrChkFreeScalesX")
-        Me.ucrChkFreeScalesX.Name = "ucrChkFreeScalesX"
-        '
-        'ucrChkMargin
-        '
-        Me.ucrChkMargin.Checked = False
-        resources.ApplyResources(Me.ucrChkMargin, "ucrChkMargin")
-        Me.ucrChkMargin.Name = "ucrChkMargin"
-        '
-        'ucrFacetSelector
-        '
-        Me.ucrFacetSelector.bShowHiddenColumns = False
-        Me.ucrFacetSelector.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrFacetSelector, "ucrFacetSelector")
-        Me.ucrFacetSelector.Name = "ucrFacetSelector"
-        '
-        'ucr2ndFactorReceiver
-        '
-        Me.ucr2ndFactorReceiver.frmParent = Nothing
-        resources.ApplyResources(Me.ucr2ndFactorReceiver, "ucr2ndFactorReceiver")
-        Me.ucr2ndFactorReceiver.Name = "ucr2ndFactorReceiver"
-        Me.ucr2ndFactorReceiver.Selector = Nothing
-        Me.ucr2ndFactorReceiver.strNcFilePath = ""
-        Me.ucr2ndFactorReceiver.ucrSelector = Nothing
-        '
-        'ucr1stFactorReceiver
-        '
-        Me.ucr1stFactorReceiver.frmParent = Nothing
-        resources.ApplyResources(Me.ucr1stFactorReceiver, "ucr1stFactorReceiver")
-        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
-        Me.ucr1stFactorReceiver.Selector = Nothing
-        Me.ucr1stFactorReceiver.strNcFilePath = ""
-        Me.ucr1stFactorReceiver.ucrSelector = Nothing
-        '
-        'ucrPnlHorizonatalVertical
-        '
-        resources.ApplyResources(Me.ucrPnlHorizonatalVertical, "ucrPnlHorizonatalVertical")
-        Me.ucrPnlHorizonatalVertical.Name = "ucrPnlHorizonatalVertical"
-        '
-        'ucrPlotsAdditionalLayers
-        '
-        resources.ApplyResources(Me.ucrPlotsAdditionalLayers, "ucrPlotsAdditionalLayers")
-        Me.ucrPlotsAdditionalLayers.Name = "ucrPlotsAdditionalLayers"
-        '
         'ucrChkOverwriteLegendTitle
         '
         Me.ucrChkOverwriteLegendTitle.Checked = False
@@ -376,6 +316,20 @@ Partial Class sdgPlots
         Me.ucrInputLegend.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLegend, "ucrInputLegend")
         Me.ucrInputLegend.Name = "ucrInputLegend"
+        '
+        'rdoLegendTitleCustom
+        '
+        resources.ApplyResources(Me.rdoLegendTitleCustom, "rdoLegendTitleCustom")
+        Me.rdoLegendTitleCustom.Name = "rdoLegendTitleCustom"
+        Me.rdoLegendTitleCustom.TabStop = True
+        Me.rdoLegendTitleCustom.UseVisualStyleBackColor = True
+        '
+        'rdoLegendTitleAuto
+        '
+        resources.ApplyResources(Me.rdoLegendTitleAuto, "rdoLegendTitleAuto")
+        Me.rdoLegendTitleAuto.Name = "rdoLegendTitleAuto"
+        Me.rdoLegendTitleAuto.TabStop = True
+        Me.rdoLegendTitleAuto.UseVisualStyleBackColor = True
         '
         'ucrPnlLegendTitle
         '
@@ -406,21 +360,64 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrInputGraphTitle, "ucrInputGraphTitle")
         Me.ucrInputGraphTitle.Name = "ucrInputGraphTitle"
         '
+        'tbpXAxis
+        '
+        Me.tbpXAxis.Controls.Add(Me.ucrXAxis)
+        resources.ApplyResources(Me.tbpXAxis, "tbpXAxis")
+        Me.tbpXAxis.Name = "tbpXAxis"
+        Me.tbpXAxis.UseVisualStyleBackColor = True
+        '
         'ucrXAxis
         '
         resources.ApplyResources(Me.ucrXAxis, "ucrXAxis")
         Me.ucrXAxis.Name = "ucrXAxis"
+        '
+        'tbpYAxis
+        '
+        Me.tbpYAxis.Controls.Add(Me.ucrYAxis)
+        resources.ApplyResources(Me.tbpYAxis, "tbpYAxis")
+        Me.tbpYAxis.Name = "tbpYAxis"
+        Me.tbpYAxis.UseVisualStyleBackColor = True
         '
         'ucrYAxis
         '
         resources.ApplyResources(Me.ucrYAxis, "ucrYAxis")
         Me.ucrYAxis.Name = "ucrYAxis"
         '
+        'tbpTheme
+        '
+        Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
+        Me.tbpTheme.Controls.Add(Me.GroupBox1)
+        Me.tbpTheme.Controls.Add(Me.lblFont)
+        Me.tbpTheme.Controls.Add(Me.cmdAllOptions)
+        Me.tbpTheme.Controls.Add(Me.ucrInputThemes)
+        resources.ApplyResources(Me.tbpTheme, "tbpTheme")
+        Me.tbpTheme.Name = "tbpTheme"
+        Me.tbpTheme.Tag = "Theme"
+        Me.tbpTheme.UseVisualStyleBackColor = True
+        '
         'urChkSelectTheme
         '
         Me.urChkSelectTheme.Checked = False
         resources.ApplyResources(Me.urChkSelectTheme, "urChkSelectTheme")
         Me.urChkSelectTheme.Name = "urChkSelectTheme"
+        '
+        'GroupBox1
+        '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.TabStop = False
+        '
+        'lblFont
+        '
+        resources.ApplyResources(Me.lblFont, "lblFont")
+        Me.lblFont.Name = "lblFont"
+        '
+        'cmdAllOptions
+        '
+        resources.ApplyResources(Me.cmdAllOptions, "cmdAllOptions")
+        Me.cmdAllOptions.Name = "cmdAllOptions"
+        Me.cmdAllOptions.UseVisualStyleBackColor = True
         '
         'ucrInputThemes
         '
@@ -429,11 +426,23 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrInputThemes, "ucrInputThemes")
         Me.ucrInputThemes.Name = "ucrInputThemes"
         '
+        'tbpCoordinates
+        '
+        Me.tbpCoordinates.Controls.Add(Me.ucrChkHorizontalplot)
+        resources.ApplyResources(Me.tbpCoordinates, "tbpCoordinates")
+        Me.tbpCoordinates.Name = "tbpCoordinates"
+        Me.tbpCoordinates.UseVisualStyleBackColor = True
+        '
         'ucrChkHorizontalplot
         '
         Me.ucrChkHorizontalplot.Checked = False
         resources.ApplyResources(Me.ucrChkHorizontalplot, "ucrChkHorizontalplot")
         Me.ucrChkHorizontalplot.Name = "ucrChkHorizontalplot"
+        '
+        'ucrBaseSubdialog
+        '
+        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
         'sdgPlots
         '
@@ -509,6 +518,7 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputGraphSubTitle As ucrInputTextBox
     Friend WithEvents urChkSelectTheme As ucrCheck
     Friend WithEvents ucrChkHorizontalplot As ucrCheck
+    Friend WithEvents ucrChkLabeler As ucrCheck
 End Class
 
 

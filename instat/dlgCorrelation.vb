@@ -140,7 +140,6 @@ Public Class dlgCorrelation
         clsWrapFunction.SetRCommand("wrap")
         clsWrapFunction.AddParameter("points", Chr(39) & "points" & Chr(39), bIncludeArgumentName:=False, iPosition:=0)
         clsListFunction.AddParameter("continuous", clsRFunctionParameter:=clsWrapFunction)
-        clsRGraphicsFuction.AddParameter("upper", clsRFunctionParameter:=clsListFunction, iPosition:=2)
 
         clsRGGscatMatrixFunction.SetPackageName("GGally")
         clsRGGscatMatrixFunction.SetRCommand("ggscatmat")
