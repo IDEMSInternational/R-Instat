@@ -144,12 +144,16 @@ Public Class ucrFilter
         If Not ucrFilterByReceiver.IsEmpty() Then
             If ucrFilterByReceiver.strCurrDataType.Contains("factor") AndAlso ucrFactorLevels.GetSelectedLevels() <> "" Then
                 cmdAddCondition.Enabled = True
-            ElseIf (Not ucrFilterOperation.IsEmpty) AndAlso (Not ucrValueForFilter.IsEmpty) Then
-                cmdAddCondition.Enabled = True
+            ElseIf (Not ucrFilterOperation.IsEmpty) Then
+                If ucrFilterOperation.GetText = "== NA" OrElse ucrFilterOperation.GetText = "!= NA" Then
+                    cmdAddCondition.Enabled = True
+                ElseIf Not ucrValueForFilter.IsEmpty Then
+                    cmdAddCondition.Enabled = True
+                End If
             ElseIf (Not ucrFilterOperation.IsEmpty) AndAlso ucrFilterDateTimePicker.Visible = True Then
-                cmdAddCondition.Enabled = True
-            Else
-                cmdAddCondition.Enabled = False
+                    cmdAddCondition.Enabled = True
+                Else
+                    cmdAddCondition.Enabled = False
             End If
         Else
             cmdAddCondition.Enabled = False
@@ -181,13 +185,33 @@ Public Class ucrFilter
         Else
             clsCurrentConditionView.SetOperation(ucrFilterOperation.GetText())
             clsCurrentConditionList.AddParameter("operation", Chr(34) & ucrFilterOperation.GetText() & Chr(34))
-            If ucrFilterByReceiver.strCurrDataType = "character" AndAlso ucrValueForFilter.GetText() <> "NA" Then
-                strCondition = Chr(34) & ucrValueForFilter.GetText() & Chr(34)
+            If ucrFilterByReceiver.strCurrDataType = "character" Then
+                If ucrValueForFilter.GetText() <> "NA" Then
+                    strCondition = Chr(34) & ucrValueForFilter.GetText() & Chr(34)
+                ElseIf ucrValueForFilter.Visible = False Then
+                    If ucrFilterOperation.GetText = "== NA" Then
+                        clsCurrentConditionView.SetOperation("==")
+                        strCondition = Chr(34) & "NA" & Chr(34)
+                    ElseIf ucrFilterOperation.GetText = "!= NA" Then
+                        clsCurrentConditionView.SetOperation("!=")
+                        strCondition = Chr(34) & "NA" & Chr(34)
+                    End If
+                End If
             ElseIf ucrFilterByReceiver.strCurrDataType = "Date" Then
-                'TODO; this might need to be done in the control i.e ucrDateTimePicker
-                strCondition = Chr(34) & ucrFilterDateTimePicker.dtpDateTime.Value.Year & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Month & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Day & Chr(34)
+                If ucrFilterDateTimePicker.Visible = True Then
+                    'TODO; this might need to be done in the control i.e ucrDateTimePicker
+                    strCondition = Chr(34) & ucrFilterDateTimePicker.dtpDateTime.Value.Year & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Month & "/" & ucrFilterDateTimePicker.dtpDateTime.Value.Day & Chr(34)
+                Else
+                    If ucrFilterOperation.GetText = "== NA" Then
+                        clsCurrentConditionView.SetOperation("==")
+                        strCondition = Chr(34) & "NA" & Chr(34)
+                    ElseIf ucrFilterOperation.GetText = "!= NA" Then
+                        clsCurrentConditionView.SetOperation("!=")
+                        strCondition = Chr(34) & "NA" & Chr(34)
+                    End If
+                End If
             Else
-                strCondition = ucrValueForFilter.GetText()
+                    strCondition = ucrValueForFilter.GetText()
             End If
         End If
 
@@ -225,10 +249,12 @@ Public Class ucrFilter
 
     Private Sub ucrFilterOperation_NameChanged() Handles ucrFilterOperation.NameChanged
         CheckAddEnabled()
+        Nas()
     End Sub
 
     Private Sub ucrValueForFilter_NameChanged() Handles ucrValueForFilter.NameChanged
         CheckAddEnabled()
+        Nas()
     End Sub
 
     Private Sub ucrFactorLevels_SelectedLevelChanged() Handles ucrFactorLevels.SelectedLevelChanged
@@ -290,5 +316,15 @@ Public Class ucrFilter
 
     Public Sub SetDefaultDataFrame(strDataFrame As String)
         strDefaultDataFrame = strDataFrame
+    End Sub
+
+    Private Sub Nas()
+        If ucrFilterOperation.GetText = "== NA" OrElse ucrFilterOperation.GetText = "!= NA" Then
+            ucrValueForFilter.Visible = False
+            ucrFilterDateTimePicker.Visible = False
+        Else
+            ucrValueForFilter.Visible = True
+            ucrFilterDateTimePicker.Visible = True
+        End If
     End Sub
 End Class
