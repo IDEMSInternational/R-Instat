@@ -125,7 +125,6 @@ Partial Class dlgSort
         '
         'ucrSelectForSort
         '
-        Me.ucrSelectForSort.bDropUnusedFilterLevels = False
         Me.ucrSelectForSort.bShowHiddenColumns = False
         Me.ucrSelectForSort.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectForSort, "ucrSelectForSort")

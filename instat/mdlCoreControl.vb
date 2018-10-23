@@ -96,16 +96,10 @@ Module mdlCoreControl
     End Function
 
     'TODO This fails when items in the list contain "," as it splits values inside
-    Public Function ExtractItemsFromRList(strTemp As String, Optional strPackageName As String = "", Optional strFunctionName As String = "c") As String()
+    Public Function ExtractItemsFromRList(strTemp As String) As String()
         Dim lstVariables As String()
-        Dim strPackageFunction As String = ""
-
-        If strPackageName <> "" Then
-            strPackageFunction = strPackageName & "::"
-        End If
-        strPackageFunction = strPackageFunction & strFunctionName & "("
-        If strTemp.StartsWith(strPackageFunction) Then
-            strTemp = strTemp.Substring(strPackageFunction.Length)
+        If strTemp.StartsWith("c(") Then
+            strTemp = strTemp.Substring(2)
         End If
         lstVariables = strTemp.Split(",")
         For i As Integer = 0 To lstVariables.Count - 1

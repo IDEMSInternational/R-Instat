@@ -49,7 +49,6 @@ Public Class dlgCalculateTreatmentDifferences
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 581
         ucrChkCalculateDiffCategories.SetText("Calculate Difference Categories")
         ucrChkCalculateDiffCategories.AddToLinkedControls(ucrInputBreakPoints, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkCalculateDiffCategories.AddToLinkedControls(ucrInputLabels, {True}, bNewLinkedHideIfParameterMissing:=True)

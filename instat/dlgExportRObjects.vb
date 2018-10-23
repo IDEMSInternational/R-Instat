@@ -36,7 +36,7 @@ Public Class dlgExportRObjects
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 554
+        ucrBase.iHelpTopicID = 538
 
         ucrSelectorObjects.SetParameter(New RParameter("data_name", 1))
         ucrSelectorObjects.ucrAvailableDataFrames.SetParameterIsString()

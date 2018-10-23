@@ -59,7 +59,7 @@ calculation$set("public", "data_clone", function() {
 # }
 # )
 
-DataBook$set("public", "apply_calculation", function(calc) {
+instat_object$set("public", "apply_calculation", function(calc) {
   if(calc$type == "summary") {
     out <- self$get_data_objects(calc[["parameters"]][["data_name"]])$calculate_summary(calc = calc, ... = calc[["parameters"]][["..."]])
     if(calc[["parameters"]][["store_results"]]) self$append_summaries_to_data_object(out, calc[["parameters"]][["data_name"]], calc[["parameters"]][["columns_to_summarise"]], calc[["parameters"]][["summaries"]], calc[["parameters"]][["factors"]], calc[["parameters"]][["summary_name"]], calc)
@@ -69,12 +69,12 @@ DataBook$set("public", "apply_calculation", function(calc) {
 }
 )
 
-DataBook$set("public", "save_calculation", function(end_data_frame, calc) {
+instat_object$set("public", "save_calculation", function(end_data_frame, calc) {
   self$get_data_objects(end_data_frame)$save_calculation(calc)
 }
 )
 
-DataSheet$set("public", "save_calculation", function(calc) {
+data_object$set("public", "save_calculation", function(calc) {
   if(calc$name == "") calc$name <- next_default_item("calc", names(private$calculations))
   if(calc$name %in% names(private$calculations)) warning("There is already a calculation called ", calc$name, ". It will be replaced.")
   private$calculations[[calc$name]] <- calc
@@ -171,7 +171,7 @@ c_has_filter_label <- "has_filter"
 
 # This method is called recursively, and it would not be called by a user, another function would always handle the output and display
 # results to the user (usually only the $data part of the list)
-DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list, previous_manipulations = list()) {
+instat_object$set("public", "apply_instat_calculation", function(calc, curr_data_list, previous_manipulations = list()) {
 
   # apply each manipulation first, and recursively store the output and pass to the next manipulation
   # because of this, manipulations are dependant on each other
@@ -505,7 +505,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
 )
 
 # Call this to run a calculation and display the data
-DataBook$set("public", "run_instat_calculation", function(calc, display = TRUE) {
+instat_object$set("public", "run_instat_calculation", function(calc, display = TRUE) {
   out <- self$apply_instat_calculation(calc)
   if(display) return(out$data)
 }
@@ -513,7 +513,7 @@ DataBook$set("public", "run_instat_calculation", function(calc, display = TRUE) 
 
 # given a set of columns in one data frame, this will return named list with corresponding columns in second data frame, where a link exists
 # TODO: Needs to update to not just look at direct links
-DataBook$set("public", "get_corresponding_link_columns", function(first_data_frame_name, first_data_frame_columns, second_data_frame_name) {
+instat_object$set("public", "get_corresponding_link_columns", function(first_data_frame_name, first_data_frame_columns, second_data_frame_name) {
   by <- c()
   if(self$link_exists_between(first_data_frame_name, second_data_frame_name)) {
     existing_link <- self$get_link_between(first_data_frame_name, second_data_frame_name)
@@ -544,7 +544,7 @@ DataBook$set("public", "get_corresponding_link_columns", function(first_data_fra
 
 # finds a link between two data frames and returns named list used for by
 # also checks link columns still are in both data frames
-DataBook$set("public", "get_link_columns_from_data_frames", function(first_data_frame_name, first_data_frame_columns, second_data_frame_name, second_data_frame_columns) {
+instat_object$set("public", "get_link_columns_from_data_frames", function(first_data_frame_name, first_data_frame_columns, second_data_frame_name, second_data_frame_columns) {
   by = c()
   if(self$link_exists_between(first_data_frame_name, second_data_frame_name)) {
     existing_link <- self$get_link_between(first_data_frame_name, second_data_frame_name)
@@ -570,7 +570,7 @@ DataBook$set("public", "get_link_columns_from_data_frames", function(first_data_
 )
 
 # Called from apply_instat_calculation if calc$save_calc == TRUE
-DataBook$set("public", "save_calc_output", function(calc, curr_data_list, previous_manipulations) {
+instat_object$set("public", "save_calc_output", function(calc, curr_data_list, previous_manipulations) {
 
   # Add previous manipulations to calc so that it can be rerun on its own (it may have been a sub calculation)
   calc$manipulations <- c(previous_manipulations, calc$manipulations)

@@ -51,9 +51,8 @@ Public Class dlgCompareTreatmentLines
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 585
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-
+        'ucrBase.iHelpTopicID = 
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrSelectorPlot.SetParameter(New RParameter("data", 0))

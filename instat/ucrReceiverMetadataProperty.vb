@@ -26,6 +26,7 @@ Public Class ucrReceiverMetadataProperty
         clsLayerParam = clsNewLayerParam
         'This sub adapts the ucrReceiverMetadataProperty to the type of layer parameter, it's default value, the available values etc, stored within clsLayerParam.
         ClearCodeAndParameters()
+        ucrInputCboParamValue.SetDropDownStyleAsNonEditable()
         If clsLayerParam IsNot Nothing Then
             If clsLayerParam.strLayerParameterDataType = "numeric" Then
                 If clsLayerParam.lstParameterStrings.Count >= 1 Then
@@ -51,10 +52,6 @@ Public Class ucrReceiverMetadataProperty
                 ctrActive = ucrColor
             ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
                 ctrActive = ucrInputCboParamValue
-                ucrInputCboParamValue.SetDropDownStyleAsNonEditable()
-            ElseIf clsLayerParam.strLayerParameterDataType = "editablelist" Then
-                ctrActive = ucrInputCboParamValue
-                ucrInputCboParamValue.SetDropDownStyleAsEditable(True)
             ElseIf clsLayerParam.strLayerParameterDataType = "text" Then
                 ctrActive = ucrInputTextValue
             Else
@@ -76,7 +73,7 @@ Public Class ucrReceiverMetadataProperty
             If ctrActive.Equals(ucrInputCboParamValue) Then
                 If clsLayerParam.strLayerParameterDataType = "boolean" Then
                     ucrInputCboParamValue.SetItems({"TRUE", "FALSE"}, bAddConditions:=True, bAddQuotes:=False)
-                ElseIf clsLayerParam.strLayerParameterDataType = "list" OrElse clsLayerParam.strLayerParameterDataType = "editablelist" Then
+                ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
                     If clsLayerParam.lstParameterStrings IsNot Nothing AndAlso clsLayerParam.lstParameterStrings.Count > 0 Then
                         ucrInputCboParamValue.SetItems(clsLayerParam.lstParameterStrings, bAddConditions:=True, bAddQuotes:=False)
                     Else

@@ -43,16 +43,9 @@ Partial Class ucrLog
         Me.mnuContextLogFile = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuOpenLogFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuRunCurrentLine = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuRunSelectedText = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuSaveLogFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
-        Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuRunAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRunSelectedText = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextLogFile.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -61,56 +54,32 @@ Partial Class ucrLog
         '
         Me.txtLog.ContextMenuStrip = Me.mnuContextLogFile
         Me.txtLog.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtLog.Location = New System.Drawing.Point(4, 36)
-        Me.txtLog.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txtLog.Location = New System.Drawing.Point(3, 23)
         Me.txtLog.Multiline = True
         Me.txtLog.Name = "txtLog"
         Me.txtLog.ReadOnly = True
         Me.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtLog.Size = New System.Drawing.Size(788, 597)
+        Me.txtLog.Size = New System.Drawing.Size(525, 389)
         Me.txtLog.TabIndex = 0
         Me.txtLog.TabStop = False
-        Me.txtLog.WordWrap = False
         '
         'mnuContextLogFile
         '
-        Me.mnuContextLogFile.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCopy, Me.ToolStripSeparator3, Me.mnuRunCurrentLine, Me.mnuRunSelectedText, Me.mnuRunAll, Me.ToolStripSeparator2, Me.mnuSaveLogFile, Me.mnuOpenLogFile, Me.ToolStripSeparator1, Me.mnuHelp})
+        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOpenLogFile, Me.mnuCopy, Me.mnuRunSelectedText})
         Me.mnuContextLogFile.Name = "mnuContextLogFile"
-        Me.mnuContextLogFile.Size = New System.Drawing.Size(316, 265)
+        Me.mnuContextLogFile.Size = New System.Drawing.Size(167, 70)
         '
         'mnuOpenLogFile
         '
         Me.mnuOpenLogFile.Name = "mnuOpenLogFile"
-        Me.mnuOpenLogFile.Size = New System.Drawing.Size(315, 30)
+        Me.mnuOpenLogFile.Size = New System.Drawing.Size(166, 22)
         Me.mnuOpenLogFile.Text = "Open Log File"
         '
         'mnuCopy
         '
         Me.mnuCopy.Name = "mnuCopy"
-        Me.mnuCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.mnuCopy.Size = New System.Drawing.Size(315, 30)
+        Me.mnuCopy.Size = New System.Drawing.Size(166, 22)
         Me.mnuCopy.Text = "Copy"
-        '
-        'mnuRunCurrentLine
-        '
-        Me.mnuRunCurrentLine.Name = "mnuRunCurrentLine"
-        Me.mnuRunCurrentLine.Size = New System.Drawing.Size(315, 30)
-        Me.mnuRunCurrentLine.Text = "Run Current Line"
-        '
-        'mnuRunSelectedText
-        '
-        Me.mnuRunSelectedText.Name = "mnuRunSelectedText"
-        Me.mnuRunSelectedText.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.mnuRunSelectedText.Size = New System.Drawing.Size(315, 30)
-        Me.mnuRunSelectedText.Text = "Run Selected Text"
-        '
-        'mnuSaveLogFile
-        '
-        Me.mnuSaveLogFile.Name = "mnuSaveLogFile"
-        Me.mnuSaveLogFile.Size = New System.Drawing.Size(315, 30)
-        Me.mnuSaveLogFile.Text = "Save Log File..."
         '
         'lblHeader
         '
@@ -118,10 +87,9 @@ Partial Class ucrLog
         Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblHeader.Location = New System.Drawing.Point(4, 0)
-        Me.lblHeader.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblHeader.Location = New System.Drawing.Point(3, 0)
         Me.lblHeader.Name = "lblHeader"
-        Me.lblHeader.Size = New System.Drawing.Size(788, 31)
+        Me.lblHeader.Size = New System.Drawing.Size(525, 20)
         Me.lblHeader.TabIndex = 8
         Me.lblHeader.Text = "Log"
         Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -134,51 +102,26 @@ Partial Class ucrLog
         Me.tlpTableContainer.Controls.Add(Me.txtLog, 0, 1)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
-        Me.tlpTableContainer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tlpTableContainer.Name = "tlpTableContainer"
         Me.tlpTableContainer.RowCount = 2
-        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlpTableContainer.Size = New System.Drawing.Size(796, 638)
+        Me.tlpTableContainer.Size = New System.Drawing.Size(531, 415)
         Me.tlpTableContainer.TabIndex = 9
         '
-        'mnuHelp
+        'mnuRunSelectedText
         '
-        Me.mnuHelp.Name = "mnuHelp"
-        Me.mnuHelp.Size = New System.Drawing.Size(315, 30)
-        Me.mnuHelp.Text = "Help"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(312, 6)
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(312, 6)
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(312, 6)
-        '
-        'mnuRunAll
-        '
-        Me.mnuRunAll.Name = "mnuRunAll"
-        Me.mnuRunAll.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-        Me.mnuRunAll.Size = New System.Drawing.Size(315, 30)
-        Me.mnuRunAll.Text = "Run All"
+        Me.mnuRunSelectedText.Name = "mnuRunSelectedText"
+        Me.mnuRunSelectedText.Size = New System.Drawing.Size(166, 22)
+        Me.mnuRunSelectedText.Text = "Run Selected Text"
         '
         'ucrLog
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.tlpTableContainer)
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrLog"
-        Me.Size = New System.Drawing.Size(796, 638)
+        Me.Size = New System.Drawing.Size(531, 415)
         Me.mnuContextLogFile.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
         Me.tlpTableContainer.PerformLayout()
@@ -193,11 +136,4 @@ Partial Class ucrLog
     Friend WithEvents mnuCopy As ToolStripMenuItem
     Friend WithEvents tlpTableContainer As TableLayoutPanel
     Friend WithEvents mnuRunSelectedText As ToolStripMenuItem
-    Friend WithEvents mnuRunCurrentLine As ToolStripMenuItem
-    Friend WithEvents mnuSaveLogFile As ToolStripMenuItem
-    Friend WithEvents mnuHelp As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
-    Friend WithEvents mnuRunAll As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
-    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
 End Class
