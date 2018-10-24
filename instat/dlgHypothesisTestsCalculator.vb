@@ -74,7 +74,8 @@ Public Class dlgHypothesisTestsCalculator
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("unload", "TRUE")
-
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
@@ -94,22 +95,6 @@ Public Class dlgHypothesisTestsCalculator
         Else
             ucrBase.OKEnabled(False)
         End If
-    End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        Dim strScript As String = ""
-        Dim strFunc As String
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
-        strFunc = clsAttach.ToScript(strScript)
-        frmMain.clsRLink.RunScript(strScript & strFunc)
-        ucrBase.clsRsyntax.SetAssignTo(ucrSaveResult.GetText(), strTempModel:=ucrSaveResult.GetText(), strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
-    End Sub
-
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        Dim strScript As String = ""
-        Dim strFunc As String
-        strFunc = clsDetach.ToScript(strScript)
-        frmMain.clsRLink.RunScript(strScript & strFunc)
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
@@ -665,5 +650,13 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverForTestColumn.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
+        If ucrSaveResult.ucrChkSave.Checked Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveResult.GetText(), strTempModel:=ucrSaveResult.GetText(), strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("Last_Test", strTempModel:="Last_Test", strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        End If
     End Sub
 End Class
