@@ -130,7 +130,11 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrChkAddTerciles = New instat.ucrCheck()
         Me.tpPanel = New System.Windows.Forms.TabPage()
         Me.grpMinorGridLine = New System.Windows.Forms.GroupBox()
+        Me.lblMinorGridLineSize = New System.Windows.Forms.Label()
+        Me.ucrChkIncludeMinorGridLines = New instat.ucrCheck()
+        Me.lblMinorGridLineLinetype = New System.Windows.Forms.Label()
         Me.ucrNudMinorGridLineSize = New instat.ucrNud()
+        Me.lblMinorGridLineColour = New System.Windows.Forms.Label()
         Me.ucrInputMinorGridLineLinetype = New instat.ucrInputComboBox()
         Me.ucrInputMinorGridLineColour = New instat.ucrInputComboBox()
         Me.grpPnlBorder = New System.Windows.Forms.GroupBox()
@@ -141,6 +145,10 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrChkBorderLineType = New instat.ucrCheck()
         Me.ucrChkBorderColour = New instat.ucrCheck()
         Me.grpMajorGridLines = New System.Windows.Forms.GroupBox()
+        Me.lblMajorGridLineSize = New System.Windows.Forms.Label()
+        Me.lblMajorGridLineLinetype = New System.Windows.Forms.Label()
+        Me.lblMajorGridLineColour = New System.Windows.Forms.Label()
+        Me.ucrChkIncludeMajorGridLines = New instat.ucrCheck()
         Me.ucrNudMajorGridLineSize = New instat.ucrNud()
         Me.ucrInputMajorGridLineLinetype = New instat.ucrInputComboBox()
         Me.ucrInputMajorGridLineColour = New instat.ucrInputComboBox()
@@ -154,14 +162,6 @@ Partial Class sdgPICSARainfallGraph
         Me.UcrChkPnlBackgroundFill = New instat.ucrCheck()
         Me.ucrChkPnlBackgroundColour = New instat.ucrCheck()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkIncludeMajorGridLines = New instat.ucrCheck()
-        Me.ucrChkIncludeMinorGridLines = New instat.ucrCheck()
-        Me.lblMajorGridLineColour = New System.Windows.Forms.Label()
-        Me.lblMajorGridLineLinetype = New System.Windows.Forms.Label()
-        Me.lblMajorGridLineSize = New System.Windows.Forms.Label()
-        Me.lblMinorGridLineSize = New System.Windows.Forms.Label()
-        Me.lblMinorGridLineLinetype = New System.Windows.Forms.Label()
-        Me.lblMinorGridLineColour = New System.Windows.Forms.Label()
         Me.tbPICSA.SuspendLayout()
         Me.tpTitles.SuspendLayout()
         Me.grpyAxisTitle.SuspendLayout()
@@ -1016,6 +1016,22 @@ Partial Class sdgPICSARainfallGraph
         Me.grpMinorGridLine.Name = "grpMinorGridLine"
         Me.grpMinorGridLine.TabStop = False
         '
+        'lblMinorGridLineSize
+        '
+        resources.ApplyResources(Me.lblMinorGridLineSize, "lblMinorGridLineSize")
+        Me.lblMinorGridLineSize.Name = "lblMinorGridLineSize"
+        '
+        'ucrChkIncludeMinorGridLines
+        '
+        Me.ucrChkIncludeMinorGridLines.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeMinorGridLines, "ucrChkIncludeMinorGridLines")
+        Me.ucrChkIncludeMinorGridLines.Name = "ucrChkIncludeMinorGridLines"
+        '
+        'lblMinorGridLineLinetype
+        '
+        resources.ApplyResources(Me.lblMinorGridLineLinetype, "lblMinorGridLineLinetype")
+        Me.lblMinorGridLineLinetype.Name = "lblMinorGridLineLinetype"
+        '
         'ucrNudMinorGridLineSize
         '
         Me.ucrNudMinorGridLineSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -1025,6 +1041,11 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrNudMinorGridLineSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinorGridLineSize.Name = "ucrNudMinorGridLineSize"
         Me.ucrNudMinorGridLineSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblMinorGridLineColour
+        '
+        resources.ApplyResources(Me.lblMinorGridLineColour, "lblMinorGridLineColour")
+        Me.lblMinorGridLineColour.Name = "lblMinorGridLineColour"
         '
         'ucrInputMinorGridLineLinetype
         '
@@ -1106,6 +1127,27 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.grpMajorGridLines, "grpMajorGridLines")
         Me.grpMajorGridLines.Name = "grpMajorGridLines"
         Me.grpMajorGridLines.TabStop = False
+        '
+        'lblMajorGridLineSize
+        '
+        resources.ApplyResources(Me.lblMajorGridLineSize, "lblMajorGridLineSize")
+        Me.lblMajorGridLineSize.Name = "lblMajorGridLineSize"
+        '
+        'lblMajorGridLineLinetype
+        '
+        resources.ApplyResources(Me.lblMajorGridLineLinetype, "lblMajorGridLineLinetype")
+        Me.lblMajorGridLineLinetype.Name = "lblMajorGridLineLinetype"
+        '
+        'lblMajorGridLineColour
+        '
+        resources.ApplyResources(Me.lblMajorGridLineColour, "lblMajorGridLineColour")
+        Me.lblMajorGridLineColour.Name = "lblMajorGridLineColour"
+        '
+        'ucrChkIncludeMajorGridLines
+        '
+        Me.ucrChkIncludeMajorGridLines.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeMajorGridLines, "ucrChkIncludeMajorGridLines")
+        Me.ucrChkIncludeMajorGridLines.Name = "ucrChkIncludeMajorGridLines"
         '
         'ucrNudMajorGridLineSize
         '
@@ -1204,48 +1246,6 @@ Partial Class sdgPICSARainfallGraph
         '
         resources.ApplyResources(Me.ucrSdgPICSARainfalbuttons, "ucrSdgPICSARainfalbuttons")
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
-        '
-        'ucrChkIncludeMajorGridLines
-        '
-        Me.ucrChkIncludeMajorGridLines.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeMajorGridLines, "ucrChkIncludeMajorGridLines")
-        Me.ucrChkIncludeMajorGridLines.Name = "ucrChkIncludeMajorGridLines"
-        '
-        'ucrChkIncludeMinorGridLines
-        '
-        Me.ucrChkIncludeMinorGridLines.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeMinorGridLines, "ucrChkIncludeMinorGridLines")
-        Me.ucrChkIncludeMinorGridLines.Name = "ucrChkIncludeMinorGridLines"
-        '
-        'lblMajorGridLineColour
-        '
-        resources.ApplyResources(Me.lblMajorGridLineColour, "lblMajorGridLineColour")
-        Me.lblMajorGridLineColour.Name = "lblMajorGridLineColour"
-        '
-        'lblMajorGridLineLinetype
-        '
-        resources.ApplyResources(Me.lblMajorGridLineLinetype, "lblMajorGridLineLinetype")
-        Me.lblMajorGridLineLinetype.Name = "lblMajorGridLineLinetype"
-        '
-        'lblMajorGridLineSize
-        '
-        resources.ApplyResources(Me.lblMajorGridLineSize, "lblMajorGridLineSize")
-        Me.lblMajorGridLineSize.Name = "lblMajorGridLineSize"
-        '
-        'lblMinorGridLineSize
-        '
-        resources.ApplyResources(Me.lblMinorGridLineSize, "lblMinorGridLineSize")
-        Me.lblMinorGridLineSize.Name = "lblMinorGridLineSize"
-        '
-        'lblMinorGridLineLinetype
-        '
-        resources.ApplyResources(Me.lblMinorGridLineLinetype, "lblMinorGridLineLinetype")
-        Me.lblMinorGridLineLinetype.Name = "lblMinorGridLineLinetype"
-        '
-        'lblMinorGridLineColour
-        '
-        resources.ApplyResources(Me.lblMinorGridLineColour, "lblMinorGridLineColour")
-        Me.lblMinorGridLineColour.Name = "lblMinorGridLineColour"
         '
         'sdgPICSARainfallGraph
         '
