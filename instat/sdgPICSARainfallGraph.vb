@@ -52,6 +52,7 @@ Public Class sdgPICSARainfallGraph
     'Private clsPnlBackgroundElementRect As New RFunction
     Private clsPanelBackgroundElementRect As New RFunction
     Private clsPanelBorderElementRect As New RFunction
+    Private clsElementBlank As New RFunction
     Private dctLabelForDays As New Dictionary(Of String, String)
     Private dctDateTimePeriods As New Dictionary(Of String, String)
     Private dctDateStartMonths As New Dictionary(Of String, String)
@@ -94,6 +95,10 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Public Sub InitialiseControls()
+
+        clsElementBlank = New RFunction
+        clsElementBlank.SetPackageName("ggplot2")
+        clsElementBlank.SetRCommand("element_blank")
 
         ' Titles 
         ucrPnlXAxisTitle.AddRadioButton(rdoAutoXAxis)
@@ -319,55 +324,53 @@ Public Class sdgPICSARainfallGraph
         ucrNudPnlBackgroundSize.DecimalPlaces = 1
         ucrNudPnlBackgroundSize.Minimum = 0
 
-        ucrChkMajorGridLineColour.SetText("Colour")
-        ucrChkMajorGridLineColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkMajorGridLineColour.AddToLinkedControls(ucrInputMajorGridLineColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
+        ' Major grid lines
+        ucrChkIncludeMajorGridLines.SetText("Include Major Grid Lines")
+        ucrChkIncludeMajorGridLines.AddParameterValueFunctionNamesCondition(True, "panel.grid.major", "element_blank", bNewIsPositive:=False)
+        ucrChkIncludeMajorGridLines.AddParameterValueFunctionNamesCondition(False, "panel.grid.major", "element_blank", bNewIsPositive:=True)
+        ucrChkIncludeMajorGridLines.AddToLinkedControls(ucrInputMajorGridLineColour, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Light-Blue")
+        ucrChkIncludeMajorGridLines.AddToLinkedControls(ucrInputMajorGridLineLinetype, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Solid")
+        ucrChkIncludeMajorGridLines.AddToLinkedControls(ucrNudMajorGridLineSize, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
         ucrInputMajorGridLineColour.SetParameter(New RParameter("colour"))
         ucrInputMajorGridLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrInputMajorGridLineColour.SetDropDownStyleAsNonEditable()
-
-        ucrChkMajorGridLineLinetype.SetText("Line Type")
-        ucrChkMajorGridLineLinetype.SetParameter(New RParameter("linetype"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkMajorGridLineLinetype.AddToLinkedControls(ucrInputMajorGridLineLinetype, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Long-dash")
+        ucrInputMajorGridLineColour.SetLinkedDisplayControl(lblMajorGridLineColour)
 
         ucrInputMajorGridLineLinetype.SetParameter(New RParameter("linetype"))
         ucrInputMajorGridLineLinetype.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
         ucrInputMajorGridLineLinetype.SetDropDownStyleAsNonEditable()
-
-        ucrChkMajorGridLineSize.SetText("Size")
-        ucrChkMajorGridLineSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkMajorGridLineSize.AddToLinkedControls(ucrNudMajorGridLineSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputMajorGridLineLinetype.SetLinkedDisplayControl(lblMajorGridLineLinetype)
 
         ucrNudMajorGridLineSize.SetParameter(New RParameter("size"))
         ucrNudMajorGridLineSize.Increment = 0.1
         ucrNudMajorGridLineSize.DecimalPlaces = 1
         ucrNudMajorGridLineSize.Minimum = 0
+        ucrNudMajorGridLineSize.SetLinkedDisplayControl(lblMajorGridLineSize)
 
-        ucrChkMinorGridLineColour.SetText("Colour")
-        ucrChkMinorGridLineColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkMinorGridLineColour.AddToLinkedControls(ucrInputMinorGridLineColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Light-Blue")
+        ' Minor grid lines
+        ucrChkIncludeMinorGridLines.SetText("Include Minor Grid Lines")
+        ucrChkIncludeMinorGridLines.AddParameterValueFunctionNamesCondition(True, "panel.grid.minor", "element_blank", bNewIsPositive:=False)
+        ucrChkIncludeMinorGridLines.AddParameterValueFunctionNamesCondition(False, "panel.grid.minor", "element_blank", bNewIsPositive:=True)
+        ucrChkIncludeMinorGridLines.AddToLinkedControls(ucrInputMinorGridLineColour, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Light-Blue")
+        ucrChkIncludeMinorGridLines.AddToLinkedControls(ucrInputMinorGridLineLinetype, {True}, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:="Solid")
+        ucrChkIncludeMinorGridLines.AddToLinkedControls(ucrNudMinorGridLineSize, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
         ucrInputMinorGridLineColour.SetParameter(New RParameter("colour"))
         ucrInputMinorGridLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrInputMinorGridLineColour.SetDropDownStyleAsNonEditable()
-
-        ucrChkMinorGridLineLinetype.SetText("Line Type")
-        ucrChkMinorGridLineLinetype.SetParameter(New RParameter("linetype"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkMinorGridLineLinetype.AddToLinkedControls(ucrInputMinorGridLineLinetype, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Long-dash")
+        ucrInputMinorGridLineColour.SetLinkedDisplayControl(lblMinorGridLineColour)
 
         ucrInputMinorGridLineLinetype.SetParameter(New RParameter("linetype"))
         ucrInputMinorGridLineLinetype.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
         ucrInputMinorGridLineLinetype.SetDropDownStyleAsNonEditable()
-
-        ucrChkMinorGridLineSize.SetText("Size")
-        ucrChkMinorGridLineSize.SetParameter(New RParameter("size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkMinorGridLineSize.AddToLinkedControls(ucrNudMinorGridLineSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputMinorGridLineLinetype.SetLinkedDisplayControl(lblMinorGridLineLinetype)
 
         ucrNudMinorGridLineSize.SetParameter(New RParameter("size"))
         ucrNudMinorGridLineSize.Increment = 0.1
         ucrNudMinorGridLineSize.DecimalPlaces = 1
         ucrNudMinorGridLineSize.Minimum = 0
+        ucrNudMinorGridLineSize.SetLinkedDisplayControl(lblMinorGridLineSize)
 
         ucrChkBorderColour.SetText("Colour")
         ucrChkBorderColour.SetParameter(New RParameter("colour"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
@@ -607,18 +610,14 @@ Public Class sdgPICSARainfallGraph
         UcrChkPnlBackgroundSize.SetRCode(clsPanelBackgroundElementRect, bReset, bCloneIfNeeded:=True)
         ucrNudPnlBackgroundSize.SetRCode(clsPanelBackgroundElementRect, bReset, bCloneIfNeeded:=True)
 
-        ucrChkMajorGridLineColour.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
+        ucrChkIncludeMajorGridLines.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputMajorGridLineColour.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
-        ucrChkMajorGridLineLinetype.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
         ucrInputMajorGridLineLinetype.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
-        ucrChkMajorGridLineSize.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
         ucrNudMajorGridLineSize.SetRCode(clsElementPanelGridMajor, bReset, bCloneIfNeeded:=True)
 
-        ucrChkMinorGridLineColour.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
+        ucrChkIncludeMinorGridLines.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputMinorGridLineColour.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
-        ucrChkMinorGridLineLinetype.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
         ucrInputMinorGridLineLinetype.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
-        ucrChkMinorGridLineSize.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
         ucrNudMinorGridLineSize.SetRCode(clsElementPanelGridMinor, bReset, bCloneIfNeeded:=True)
 
         ucrChkBorderColour.SetRCode(clsPanelBorderElementRect, bReset, bCloneIfNeeded:=True)
@@ -726,10 +725,10 @@ Public Class sdgPICSARainfallGraph
                 clsCLimitsYDate.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
             End If
         Else
-            clsCLimitsYContinuous = New RFunction
-            clsCLimitsYContinuous.SetRCommand("c")
-            clsCLimitsYContinuous.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
-            clsCLimitsYContinuous.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
+            clsCLimitsYDate = New RFunction
+            clsCLimitsYDate.SetRCommand("c")
+            clsCLimitsYDate.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
+            clsCLimitsYDate.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
         End If
 
         ucrInputXFrom.SetRCode(clsXScalecontinuousSeqFunction, bReset, bCloneIfNeeded:=True)
@@ -890,6 +889,8 @@ Public Class sdgPICSARainfallGraph
         SetMeanLabelType()
         SetMedianLabelType()
         SetTercilesLabelType()
+        AddRemoveMajorGridLines()
+        AddRemoveMinorGridLines()
         AddRemovePanelBorder()
         AddRemoveDateBreaks()
     End Sub
@@ -991,7 +992,7 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrLineControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddMean.ControlValueChanged, ucrChkAddTerciles.ControlValueChanged, ucrChkAddMedian.ControlValueChanged, ucrChkAddMeanLabel.ControlValueChanged, ucrChkAddMedianLabel.ControlValueChanged, ucrChkAddTercilesLabel.ControlValueChanged, ucrChkMeanLineLabelIncludeValue.ControlValueChanged, ucrChkMedianLineLabelIncludeValue.ControlValueChanged, ucrChkTercilesLineLabelIncludeValue.ControlValueChanged
+    Private Sub ucrLineControls_ControlValueChanged(ucrChangedControl As ucrCore) 
         AddRemoveHline()
     End Sub
 
@@ -1062,11 +1063,11 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrPnlXAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlXAxisTitle.ControlValueChanged, ucrInputXAxisTitle.ControlValueChanged
+    Private Sub ucrPnlXAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) 
         SetXLabel()
     End Sub
 
-    Private Sub ucrPnlYAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrPnlYAxisTitle.ControlValueChanged, ucrInputYAxisTitle.ControlValueChanged
+    Private Sub ucrPnlYAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) 
         SetYLabel()
     End Sub
 
@@ -1207,20 +1208,20 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemovePanelGridMajor()
-        If (ucrChkMajorGridLineColour.Checked AndAlso Not ucrInputMajorGridLineColour.IsEmpty()) OrElse (ucrChkMajorGridLineLinetype.Checked AndAlso Not ucrInputMajorGridLineLinetype.IsEmpty()) OrElse (ucrChkMajorGridLineSize.Checked AndAlso ucrNudMajorGridLineSize.GetText <> "") Then
-            clsThemeFunction.AddParameter("panel.grid.major", clsRFunctionParameter:=clsElementPanelGridMajor)
-        Else
-            clsThemeFunction.RemoveParameterByName("panel.grid.major")
-        End If
+        'If (ucrChkMajorGridLineColour.Checked AndAlso Not ucrInputMajorGridLineColour.IsEmpty()) OrElse (ucrChkMajorGridLineLinetype.Checked AndAlso Not ucrInputMajorGridLineLinetype.IsEmpty()) OrElse (ucrChkMajorGridLineSize.Checked AndAlso ucrNudMajorGridLineSize.GetText <> "") Then
+        '    clsThemeFunction.AddParameter("panel.grid.major", clsRFunctionParameter:=clsElementPanelGridMajor)
+        'Else
+        '    clsThemeFunction.RemoveParameterByName("panel.grid.major")
+        'End If
         AddRemoveTheme()
     End Sub
 
     Private Sub AddRemovePanelGridMinor()
-        If (ucrChkMinorGridLineColour.Checked AndAlso Not ucrInputMinorGridLineColour.IsEmpty()) OrElse (ucrChkMinorGridLineLinetype.Checked AndAlso Not ucrInputMinorGridLineLinetype.IsEmpty()) OrElse (ucrChkMinorGridLineSize.Checked AndAlso ucrNudMinorGridLineSize.GetText <> "") Then
-            clsThemeFunction.AddParameter("panel.grid.minor", clsRFunctionParameter:=clsElementPanelGridMinor)
-        Else
-            clsThemeFunction.RemoveParameterByName("panel.grid.minor")
-        End If
+        'If (ucrChkMinorGridLineColour.Checked AndAlso Not ucrInputMinorGridLineColour.IsEmpty()) OrElse (ucrChkMinorGridLineLinetype.Checked AndAlso Not ucrInputMinorGridLineLinetype.IsEmpty()) OrElse (ucrChkMinorGridLineSize.Checked AndAlso ucrNudMinorGridLineSize.GetText <> "") Then
+        '    clsThemeFunction.AddParameter("panel.grid.minor", clsRFunctionParameter:=clsElementPanelGridMinor)
+        'Else
+        '    clsThemeFunction.RemoveParameterByName("panel.grid.minor")
+        'End If
         AddRemoveTheme()
     End Sub
 
@@ -1235,15 +1236,15 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrChkPnlBackgroundColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPnlBackgroundColour.ControlValueChanged, UcrChkPnlBackgroundFill.ControlValueChanged, UcrChkPnlBackgroundLineType.ControlValueChanged, UcrChkPnlBackgroundSize.ControlValueChanged
+    Private Sub ucrChkPnlBackgroundColour_ControlValueChanged(ucrChangedControl As ucrCore) 
         AddRemovePanelBackground()
     End Sub
 
-    Private Sub UcrChkMajorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMajorGridLineColour.ControlValueChanged, ucrChkMajorGridLineLinetype.ControlValueChanged, ucrChkMajorGridLineSize.ControlValueChanged
+    Private Sub UcrChkMajorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore)
         AddRemovePanelGridMajor()
     End Sub
 
-    Private Sub UcrChkMinorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMinorGridLineColour.ControlValueChanged, ucrChkMinorGridLineLinetype.ControlValueChanged, ucrChkMinorGridLineSize.ControlValueChanged
+    Private Sub UcrChkMinorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore)
         AddRemovePanelGridMinor()
     End Sub
 
@@ -1267,12 +1268,12 @@ Public Class sdgPICSARainfallGraph
         AddRemoveYAxisTitleSize()
     End Sub
 
-    Private Sub ucrChkXAxisLabelSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXAxisLabelSize.ControlValueChanged, ucrChkXAxisAngle.ControlValueChanged
+    Private Sub ucrChkXAxisLabelSize_ControlValueChanged(ucrChangedControl As ucrCore) 
         XAxisAngleJust()
         AddRemoveAngleSizeXAxis()
     End Sub
 
-    Private Sub ucrNudXAxisAngle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudXAxisAngle.ControlValueChanged
+    Private Sub ucrNudXAxisAngle_ControlValueChanged(ucrChangedControl As ucrCore) 
         XAxisAngleJust()
     End Sub
 
@@ -1289,23 +1290,23 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrXBreaksControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputXFrom.ControlValueChanged, ucrInputXTo.ControlValueChanged, ucrInputXInStepsOf.ControlValueChanged, ucrChkSpecifyXAxisTickMarks.ControlValueChanged
+    Private Sub ucrXBreaksControls_ControlValueChanged(ucrChangedControl As ucrCore) 
         AddRemoveXAxisBreaks()
     End Sub
 
-    Private Sub ucrYBreaksControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputYFrom.ControlValueChanged, ucrInputYTo.ControlValueChanged, ucrInputYInStepsOf.ControlValueChanged, ucrChkSpecifyYAxisTickMarks.ControlValueChanged
+    Private Sub ucrYBreaksControls_ControlValueChanged(ucrChangedControl As ucrCore) 
         AddRemoveYAxisBreaks()
     End Sub
 
-    Private Sub ucrAxisTextYControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYAxisAngle.ControlValueChanged, ucrNudYAxisAngle.ControlValueChanged, ucrChkYAxisLabelSize.ControlValueChanged, ucrNudYAxisLabelSize.ControlValueChanged
+    Private Sub ucrAxisTextYControls_ControlValueChanged(ucrChangedControl As ucrCore) 
         AddRemoveAxisTextY()
     End Sub
 
-    Private Sub ucrChkBorderColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBorderColour.ControlValueChanged, ucrChkBorderLineType.ControlValueChanged, UcrChkBorderSize.ControlValueChanged
+    Private Sub ucrChkBorderColour_ControlValueChanged(ucrChangedControl As ucrCore) 
         AddRemovePanelBorder()
     End Sub
 
-    Private Sub ucrDateBreakControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyDateBreaks.ControlValueChanged, ucrNudDateBreakNumber.ControlValueChanged, ucrInputDateBreakTime.ControlValueChanged
+    Private Sub ucrDateBreakControls_ControlValueChanged(ucrChangedControl As ucrCore) 
         AddRemoveDateBreaks()
     End Sub
 
@@ -1319,14 +1320,16 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrYLimitControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYSpecifyLowerLimit.ControlValueChanged, ucrChkYSpecifyUpperLimit.ControlValueChanged, ucrInputYSpecifyLowerLimitNumeric.ControlValueChanged, ucrInputYSpecifyUpperLimitNumeric.ControlValueChanged
-        If Not ucrChkYSpecifyLowerLimit.Checked Then
-            clsCLimitsYContinuous.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
+    Private Sub ucrYLimitControls_ControlValueChanged(ucrChangedControl As ucrCore) 
+        If bRCodeSet Then
+            If Not ucrChkYSpecifyLowerLimit.Checked Then
+                clsCLimitsYContinuous.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
+            End If
+            If Not ucrChkYSpecifyUpperLimit.Checked Then
+                clsCLimitsYContinuous.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
+            End If
+            AddRemoveYLimits()
         End If
-        If Not ucrChkYSpecifyUpperLimit.Checked Then
-            clsCLimitsYContinuous.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
-        End If
-        AddRemoveYLimits()
     End Sub
 
     Private Sub AddRemoveYLimits()
@@ -1355,12 +1358,12 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrPnlYAxisType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlYAxisType.ControlValueChanged
+    Private Sub ucrPnlYAxisType_ControlValueChanged(ucrChangedControl As ucrCore) 
         AddRemoveYAxisScales()
         AddRemoveHline()
     End Sub
 
-    Private Sub ucrInputMeanLineType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMeanLabelType.ControlValueChanged
+    Private Sub ucrInputMeanLineType_ControlValueChanged(ucrChangedControl As ucrCore) 
         SetMeanLabelType()
     End Sub
 
@@ -1374,7 +1377,7 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrInputMedianLabelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMedianLabelType.ControlValueChanged
+    Private Sub ucrInputMedianLabelType_ControlValueChanged(ucrChangedControl As ucrCore) 
         SetMedianLabelType()
     End Sub
 
@@ -1388,7 +1391,7 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrInputTercilesLabelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTercilesLabelType.ControlValueChanged
+    Private Sub ucrInputTercilesLabelType_ControlValueChanged(ucrChangedControl As ucrCore) 
         SetTercilesLabelType()
     End Sub
 
@@ -1400,6 +1403,34 @@ Public Class sdgPICSARainfallGraph
             ElseIf ucrInputTercilesLabelType.GetText() = "Textbox" Then
                 clsGeomTextLabelLowerTercileLine.SetRCommand("geom_label")
                 clsGeomTextLabelUpperTercileLine.SetRCommand("geom_label")
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrChkIncludeMajorGridLines_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeMajorGridLines.ControlValueChanged
+        AddRemoveMajorGridLines()
+    End Sub
+
+    Private Sub AddRemoveMajorGridLines()
+        If bRCodeSet Then
+            If ucrChkIncludeMajorGridLines.Checked Then
+                clsThemeFunction.AddParameter("panel.grid.major", clsRFunctionParameter:=clsElementPanelGridMajor)
+            Else
+                clsThemeFunction.AddParameter("panel.grid.major", clsRFunctionParameter:=clsElementBlank)
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrChkIncludeMinorGridLines_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeMinorGridLines.ControlValueChanged
+        AddRemoveMinorGridLines()
+    End Sub
+
+    Private Sub AddRemoveMinorGridLines()
+        If bRCodeSet Then
+            If ucrChkIncludeMinorGridLines.Checked Then
+                clsThemeFunction.AddParameter("panel.grid.minor", clsRFunctionParameter:=clsElementPanelGridMinor)
+            Else
+                clsThemeFunction.AddParameter("panel.grid.minor", clsRFunctionParameter:=clsElementBlank)
             End If
         End If
     End Sub
