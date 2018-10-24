@@ -328,9 +328,9 @@ Public Class sdgPICSARainfallGraph
         ucrChkIncludeMajorGridLines.SetText("Include Major Grid Lines")
         ucrChkIncludeMajorGridLines.AddParameterValueFunctionNamesCondition(True, "panel.grid.major", "element_blank", bNewIsPositive:=False)
         ucrChkIncludeMajorGridLines.AddParameterValueFunctionNamesCondition(False, "panel.grid.major", "element_blank", bNewIsPositive:=True)
-        ucrChkIncludeMajorGridLines.AddToLinkedControls(ucrInputMajorGridLineColour, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Light-Blue")
-        ucrChkIncludeMajorGridLines.AddToLinkedControls(ucrInputMajorGridLineLinetype, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Solid")
-        ucrChkIncludeMajorGridLines.AddToLinkedControls(ucrNudMajorGridLineSize, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkIncludeMajorGridLines.AddToLinkedControls(ucrInputMajorGridLineColour, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeMajorGridLines.AddToLinkedControls(ucrInputMajorGridLineLinetype, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeMajorGridLines.AddToLinkedControls(ucrNudMajorGridLineSize, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputMajorGridLineColour.SetParameter(New RParameter("colour"))
         ucrInputMajorGridLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
@@ -352,9 +352,9 @@ Public Class sdgPICSARainfallGraph
         ucrChkIncludeMinorGridLines.SetText("Include Minor Grid Lines")
         ucrChkIncludeMinorGridLines.AddParameterValueFunctionNamesCondition(True, "panel.grid.minor", "element_blank", bNewIsPositive:=False)
         ucrChkIncludeMinorGridLines.AddParameterValueFunctionNamesCondition(False, "panel.grid.minor", "element_blank", bNewIsPositive:=True)
-        ucrChkIncludeMinorGridLines.AddToLinkedControls(ucrInputMinorGridLineColour, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Light-Blue")
-        ucrChkIncludeMinorGridLines.AddToLinkedControls(ucrInputMinorGridLineLinetype, {True}, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:="Solid")
-        ucrChkIncludeMinorGridLines.AddToLinkedControls(ucrNudMinorGridLineSize, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkIncludeMinorGridLines.AddToLinkedControls(ucrInputMinorGridLineColour, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeMinorGridLines.AddToLinkedControls(ucrInputMinorGridLineLinetype, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeMinorGridLines.AddToLinkedControls(ucrNudMinorGridLineSize, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputMinorGridLineColour.SetParameter(New RParameter("colour"))
         ucrInputMinorGridLineColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
@@ -1391,7 +1391,11 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrInputTercilesLabelType_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrInputGraphTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphcCaption.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrInputTercilesLabelType_ControlValueChanged(ucrChangedControl As ucrCore)
         SetTercilesLabelType()
     End Sub
 
