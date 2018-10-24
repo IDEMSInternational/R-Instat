@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgClimaticStationMaps
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsSfAesFunction, clsGeomPointAesFunction, clsFacetFunction As RFunction
+    Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsSfAesFunction, clsGeomPointAesFunction, clsFacetFunction, clsScaleShapeFunction As RFunction
     Private clsGGplotOperator, clsFacetOp As New ROperator
 
     Private clsLabsFunction As New RFunction
@@ -110,6 +110,7 @@ Public Class dlgClimaticStationMaps
         clsGeomPointFunction = New RFunction
         clsGeomPointAesFunction = New RFunction
         clsFacetFunction = New RFunction
+        clsScaleShapeFunction = New RFunction
 
         clsGGplotOperator = New ROperator
         clsXlimFunction = New RFunction
@@ -141,6 +142,10 @@ Public Class dlgClimaticStationMaps
 
         clsGeomPointAesFunction.SetPackageName("ggplot2")
         clsGeomPointAesFunction.SetRCommand("aes")
+
+        clsScaleShapeFunction.SetPackageName("ggplot2")
+        clsScaleShapeFunction.SetRCommand("scale_shape_manual")
+        clsScaleShapeFunction.AddParameter("values", strParameterValue:="c(3,4,7,8,11,13,15,16,17,18,21,22,3,42)", bIncludeArgumentName:=True, iPosition:=0)
 
         clsFacetOp.SetOperation("~")
         clsFacetOp.bForceIncludeOperation = True
@@ -230,6 +235,13 @@ Public Class dlgClimaticStationMaps
             clsGGplotOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointFunction, bIncludeArgumentName:=False, iPosition:=2)
         Else
             clsGGplotOperator.RemoveParameterByName("geom_point")
+        End If
+    End Sub
+    Private Sub ucrReceiverShape_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverShape.ControlValueChanged
+        If Not ucrReceiverShape.IsEmpty Then
+            clsGGplotOperator.AddParameter("scale_shape_manual", clsRFunctionParameter:=clsScaleShapeFunction, bIncludeArgumentName:=False, iPosition:=2)
+        Else
+            clsGGplotOperator.RemoveParameterByName("scale_shape_manual")
         End If
     End Sub
 
