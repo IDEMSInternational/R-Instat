@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgClimaticStationMaps
     Private bFirstLoad As Boolean = True
@@ -118,10 +117,8 @@ Public Class dlgClimaticStationMaps
         clsFacetOp = New ROperator
 
         ucrSelectorOutline.Reset()
-        ucrReceiverFill.SetMeAsReceiver()
         ucrSelectorStation.Reset()
         ucrReceiverLongitude.SetMeAsReceiver()
-        ucrReceiverFacet.SetMeAsReceiver()
         ucrSaveMap.Reset()
         bResetSubdialog = True
         bResetSFLayerSubdialog = True
@@ -145,7 +142,7 @@ Public Class dlgClimaticStationMaps
 
         clsScaleShapeFunction.SetPackageName("ggplot2")
         clsScaleShapeFunction.SetRCommand("scale_shape_manual")
-        clsScaleShapeFunction.AddParameter("values", strParameterValue:="c(3,4,7,8,11,13,15,16,17,18,21,22,3,42)", bIncludeArgumentName:=True, iPosition:=0)
+        clsScaleShapeFunction.AddParameter("values", strParameterValue:="c(3,4,7,8,11,13,15,16,17,18,21,22,42)", bIncludeArgumentName:=True, iPosition:=0)
 
         clsFacetOp.SetOperation("~")
         clsFacetOp.bForceIncludeOperation = True
@@ -214,14 +211,12 @@ Public Class dlgClimaticStationMaps
 
     Private Sub TestOkEnabled()
         Dim bOkEnabled As Boolean
-        If Not ucrReceiverLongitude.IsEmpty AndAlso ucrReceiverLatitude.IsEmpty Then
-            bOkEnabled = False
-        ElseIf ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty Then
-            bOkEnabled = False
-        ElseIf Not ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso ucrSaveMap.IsComplete Then
+        If Not ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso ucrSaveMap.IsComplete Then
             bOkEnabled = True
+        Else
+            bOkEnabled = False
         End If
-        ucrBase.OKEnabled(bOkEnabled)
+            ucrBase.OKEnabled(bOkEnabled)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
