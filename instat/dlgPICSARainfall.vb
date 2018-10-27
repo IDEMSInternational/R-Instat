@@ -18,10 +18,14 @@ Imports instat.Translations
 
 Public Class dlgPICSARainfall
     Public bFirstLoad As Boolean = True
+    Private clsBaseOperator As New ROperator
+    Private clsGroupByFunction As New RFunction
+    Private clsMutateFunction As New RFunction
+
     Private clsRggplotFunction As New RFunction
     Private clsGeomLine As New RFunction
     Private clsRaesFunction As New RFunction
-    Private clsBaseOperator As New ROperator
+    Private clsPipeOperator As New ROperator
     Private bReset As Boolean = True
     Private clsXScalecontinuousFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
@@ -40,16 +44,28 @@ Public Class dlgPICSARainfall
     Private clsPointsParam As New RParameter
     Private clsYLabsFunction, clsXLabsFunction, clsLabsFunction As RFunction
     Private clsXAxisLabels, clsYAxisLabels As New RFunction
-    Private clsMeanLine, clsMedianLine, clsTretile As New RFunction
     Private clsPnlBackgroundFunction, clsPnlGridLinesFunction As RFunction
     Private clsFactorLevels As New RFunction
 
     Private clsDatePeriodOperator As New ROperator
 
     Private clsMeanFunction As New RFunction
+    Private clsRoundMeanY As New RFunction
+    Private clsAsDateMeanY As New RFunction
     Private clsMedianFunction As New RFunction
+    Private clsRoundMedianY As New RFunction
+    Private clsAsDateMedianY As New RFunction
     Private clsLowerTercileFunction As New RFunction
+    Private clsRoundLowerTercileY As New RFunction
+    Private clsAsDateLowerTercileY As New RFunction
     Private clsUpperTercileFunction As New RFunction
+    Private clsRoundUpperTercileY As New RFunction
+    Private clsAsDateUpperTercileY As New RFunction
+
+    Private strMeanName As String = ".mean_y"
+    Private strMedianName As String = ".median_y"
+    Private strLowerTercileName As String = ".lower_ter_y"
+    Private strUpperTercileName As String = ".upper_ter_y"
 
     Private clsGeomHlineMean As New RFunction
     Private clsGeomHlineMedian As New RFunction
@@ -61,18 +77,22 @@ Public Class dlgPICSARainfall
     Private clsGeomHlineAesLowerTercile As New RFunction
     Private clsGeomHlineAesUpperTercile As New RFunction
 
-    Private clsAnnotateMeanLine As New RFunction
-    Private clsRoundMeanY As New RFunction
+    Private clsGeomTextLabelMeanLine As New RFunction
+    Private clsAesGeomTextLabelMeanLine As New RFunction
     Private clsPasteMeanY As New RFunction
-    Private clsAnnotateMedianLine As New RFunction
-    Private clsRoundMedianY As New RFunction
+    Private clsFormatMeanY As New RFunction
+    Private clsGeomTextLabelMedianLine As New RFunction
+    Private clsAesGeomTextLabelMedianLine As New RFunction
     Private clsPasteMedianY As New RFunction
-    Private clsAnnotateLowerTercileLine As New RFunction
-    Private clsRoundLowerTercileY As New RFunction
+    Private clsFormatMedianY As New RFunction
+    Private clsGeomTextLabelLowerTercileLine As New RFunction
+    Private clsAesGeomTextLabelLowerTercileLine As New RFunction
     Private clsPasteLowerTercileY As New RFunction
-    Private clsAnnotateUpperTercileLine As New RFunction
-    Private clsRoundUpperTercileY As New RFunction
+    Private clsFormatLowerTercileY As New RFunction
+    Private clsGeomTextLabelUpperTercileLine As New RFunction
+    Private clsAesGeomTextLabelUpperTercileLine As New RFunction
     Private clsPasteUpperTercileY As New RFunction
+    Private clsFormatUpperTercileY As New RFunction
 
     Private clsAsDate As New RFunction
     Private clsAsNumeric As New RFunction
@@ -90,6 +110,7 @@ Public Class dlgPICSARainfall
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        XAxisDataTypeCheck()
         TestOkEnabled()
     End Sub
 
@@ -164,10 +185,14 @@ Public Class dlgPICSARainfall
         Dim clsPlotElementSubTitle As New RFunction
         Dim clsPlotElementCaption As New RFunction
 
+        clsBaseOperator = New ROperator
+        clsGroupByFunction = New RFunction
+        clsMutateFunction = New RFunction
+
         clsRggplotFunction = New RFunction
         clsGeomLine = New RFunction
         clsRaesFunction = New RFunction
-        clsBaseOperator = New ROperator
+        clsPipeOperator = New ROperator
         clsFactorLevels = New RFunction
 
         clsCLimitsYContinuous = New RFunction
@@ -179,28 +204,36 @@ Public Class dlgPICSARainfall
         clsGeomHlineMean = New RFunction
         clsGeomHlineAesMean = New RFunction
         clsMeanFunction = New RFunction
+        clsRoundMeanY = New RFunction
+        clsAsDateMeanY = New RFunction
         clsGeomHlineMedian = New RFunction
         clsGeomHlineAesMedian = New RFunction
         clsMedianFunction = New RFunction
+        clsRoundMedianY = New RFunction
+        clsAsDateMedianY = New RFunction
         clsGeomHlineLowerTercile = New RFunction
         clsGeomHlineAesLowerTercile = New RFunction
         clsLowerTercileFunction = New RFunction
+        clsRoundLowerTercileY = New RFunction
+        clsAsDateLowerTercileY = New RFunction
         clsGeomHlineUpperTercile = New RFunction
         clsGeomHlineAesUpperTercile = New RFunction
         clsUpperTercileFunction = New RFunction
-
-        clsAnnotateMeanLine = New RFunction
-        clsRoundMeanY = New RFunction
-        clsPasteMeanY = New RFunction
-        clsAnnotateMedianLine = New RFunction
-        clsRoundMedianY = New RFunction
-        clsPasteMedianY = New RFunction
-        clsAnnotateLowerTercileLine = New RFunction
-        clsRoundLowerTercileY = New RFunction
-        clsPasteLowerTercileY = New RFunction
-        clsAnnotateUpperTercileLine = New RFunction
         clsRoundUpperTercileY = New RFunction
+        clsAsDateUpperTercileY = New RFunction
+
+        clsGeomTextLabelMeanLine = New RFunction
+        clsPasteMeanY = New RFunction
+        clsFormatMeanY = New RFunction
+        clsGeomTextLabelMedianLine = New RFunction
+        clsPasteMedianY = New RFunction
+        clsFormatMedianY = New RFunction
+        clsGeomTextLabelLowerTercileLine = New RFunction
+        clsPasteLowerTercileY = New RFunction
+        clsFormatLowerTercileY = New RFunction
+        clsGeomTextLabelUpperTercileLine = New RFunction
         clsPasteUpperTercileY = New RFunction
+        clsFormatUpperTercileY = New RFunction
 
         clsDatePeriodOperator = New ROperator
 
@@ -236,12 +269,22 @@ Public Class dlgPICSARainfall
         bResetSubdialog = True
         bResetLineLayerSubdialog = True
 
+        clsPipeOperator.SetOperation("%>%")
+        SetPipeAssignTo()
+
+        clsGroupByFunction.SetPackageName("dplyr")
+        clsGroupByFunction.SetRCommand("group_by")
+
+        clsMutateFunction.SetPackageName("dplyr")
+        clsMutateFunction.SetRCommand("mutate")
+
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("lineplot", clsRFunctionParameter:=clsGeomLine, iPosition:=2)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
+        clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
 
         clsRaesFunction.SetPackageName("ggplot2")
@@ -262,132 +305,168 @@ Public Class dlgPICSARainfall
         'Mean Line
         clsGeomHlineMean.SetPackageName("ggplot2")
         clsGeomHlineMean.SetRCommand("geom_hline")
-        'No parameters currently so don't add
-        'clsGeomHlineMean.AddParameter("mapping", clsRFunctionParameter:=clsGeomHlineAesMean, iPosition:=0)
+        clsGeomHlineMean.AddParameter("mapping", clsRFunctionParameter:=clsGeomHlineAesMean, iPosition:=0)
         clsGeomHlineMean.AddParameter("size", "1.5", iPosition:=2)
-        clsGeomHlineMean.AddParameter("yintercept", clsRFunctionParameter:=clsMeanFunction, iPosition:=3)
 
         clsGeomHlineAesMean.SetPackageName("ggplot2")
         clsGeomHlineAesMean.SetRCommand("aes")
+        clsGeomHlineAesMean.AddParameter("yintercept", strMeanName, iPosition:=3)
 
         clsMeanFunction.SetRCommand("mean")
         clsMeanFunction.AddParameter("na.rm", "TRUE")
-        clsMeanFunction.SetAssignTo("mean_y")
-
-        ' Mean Line Label
-        clsAnnotateMeanLine.SetPackageName("ggplot2")
-        clsAnnotateMeanLine.SetRCommand("annotate")
-        clsAnnotateMeanLine.AddParameter("geom", Chr(34) & "label" & Chr(34), iPosition:=0)
-        clsAnnotateMeanLine.AddParameter("x", "-Inf", iPosition:=1)
-        clsAnnotateMeanLine.AddParameter("y", clsRFunctionParameter:=clsMeanFunction, iPosition:=2)
-        clsAnnotateMeanLine.AddParameter("label", clsRFunctionParameter:=clsPasteMeanY, iPosition:=3)
-        clsAnnotateMeanLine.AddParameter("hjust", "0", iPosition:=9)
-        clsAnnotateMeanLine.AddParameter("vjust", "-0.3", iPosition:=10)
 
         clsRoundMeanY.SetRCommand("round")
         clsRoundMeanY.AddParameter("x", clsRFunctionParameter:=clsMeanFunction, iPosition:=0)
+
+        clsAsDateMeanY.SetRCommand("as.Date")
+        clsAsDateMeanY.AddParameter("x", clsRFunctionParameter:=clsRoundMeanY, iPosition:=0)
+        clsAsDateMeanY.AddParameter("origin", Chr(34) & "2015-12-31" & Chr(34), iPosition:=1)
+
+        ' Mean Line Label
+        clsGeomTextLabelMeanLine.SetPackageName("ggplot2")
+        clsGeomTextLabelMeanLine.SetRCommand("geom_label")
+        clsGeomTextLabelMeanLine.AddParameter("mapping", clsRFunctionParameter:=clsAesGeomTextLabelMeanLine, iPosition:=0)
+        clsGeomTextLabelMeanLine.AddParameter("hjust", "0", iPosition:=9)
+        clsGeomTextLabelMeanLine.AddParameter("vjust", "-0.3", iPosition:=10)
+
+        clsAesGeomTextLabelMeanLine.SetPackageName("ggplot2")
+        clsAesGeomTextLabelMeanLine.SetRCommand("aes")
+        clsAesGeomTextLabelMeanLine.AddParameter("x", "-Inf", iPosition:=1)
+        clsAesGeomTextLabelMeanLine.AddParameter("y", strMeanName, iPosition:=2)
+        clsAesGeomTextLabelMeanLine.AddParameter("label", clsRFunctionParameter:=clsPasteMeanY, iPosition:=3)
 
         clsPasteMeanY.SetRCommand("paste")
         clsPasteMeanY.AddParameter("0", Chr(34) & "Mean:" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
         clsPasteMeanY.AddParameter("1", clsRFunctionParameter:=clsRoundMeanY, bIncludeArgumentName:=False, iPosition:=1)
 
+        clsFormatMeanY.SetRCommand("format")
+        clsFormatMeanY.AddParameter("x", strMeanName, iPosition:=0)
+        clsFormatMeanY.AddParameter("format", Chr(34) & "%d %b" & Chr(34), iPosition:=1)
+
         'Median Line
         clsGeomHlineMedian.SetPackageName("ggplot2")
         clsGeomHlineMedian.SetRCommand("geom_hline")
-        ' No parameters currently so don't add
-        'clsGeomHlineMedian.AddParameter("mapping", clsRFunctionParameter:=clsGeomHlineAesMedian, iPosition:=0)
+        clsGeomHlineMedian.AddParameter("mapping", clsRFunctionParameter:=clsGeomHlineAesMedian, iPosition:=0)
         clsGeomHlineMedian.AddParameter("size", "1.5", iPosition:=2)
-        clsGeomHlineMedian.AddParameter("yintercept", clsRFunctionParameter:=clsMedianFunction, iPosition:=3)
 
         clsGeomHlineAesMedian.SetPackageName("ggplot2")
         clsGeomHlineAesMedian.SetRCommand("aes")
+        clsGeomHlineAesMedian.AddParameter("yintercept", strMedianName, iPosition:=3)
 
         clsMedianFunction.SetRCommand("median")
         clsMedianFunction.AddParameter("na.rm", "TRUE")
-        clsMedianFunction.SetAssignTo("median_y")
-
-        ' Median Line Label
-        clsAnnotateMedianLine.SetPackageName("ggplot2")
-        clsAnnotateMedianLine.SetRCommand("annotate")
-        clsAnnotateMedianLine.AddParameter("geom", Chr(34) & "label" & Chr(34), iPosition:=0)
-        clsAnnotateMedianLine.AddParameter("x", "-Inf", iPosition:=1)
-        clsAnnotateMedianLine.AddParameter("y", clsRFunctionParameter:=clsMedianFunction, iPosition:=2)
-        clsAnnotateMedianLine.AddParameter("label", clsRFunctionParameter:=clsPasteMedianY, iPosition:=3)
-        clsAnnotateMedianLine.AddParameter("hjust", "0", iPosition:=9)
-        clsAnnotateMedianLine.AddParameter("vjust", "-0.3", iPosition:=10)
 
         clsRoundMedianY.SetRCommand("round")
         clsRoundMedianY.AddParameter("x", clsRFunctionParameter:=clsMedianFunction, iPosition:=0)
+
+        clsAsDateMedianY.SetRCommand("as.Date")
+        clsAsDateMedianY.AddParameter("x", clsRFunctionParameter:=clsRoundMedianY, iPosition:=0)
+        clsAsDateMedianY.AddParameter("origin", Chr(34) & "2015-12-31" & Chr(34), iPosition:=1)
+
+        ' Median Line Label
+        clsGeomTextLabelMedianLine.SetPackageName("ggplot2")
+        clsGeomTextLabelMedianLine.SetRCommand("geom_label")
+        clsGeomTextLabelMedianLine.AddParameter("mapping", clsRFunctionParameter:=clsAesGeomTextLabelMeanLine, iPosition:=0)
+        clsGeomTextLabelMedianLine.AddParameter("hjust", "0", iPosition:=9)
+        clsGeomTextLabelMedianLine.AddParameter("vjust", "-0.3", iPosition:=10)
+
+        clsAesGeomTextLabelMedianLine.SetPackageName("ggplot2")
+        clsAesGeomTextLabelMedianLine.SetRCommand("aes")
+        clsAesGeomTextLabelMedianLine.AddParameter("x", "-Inf", iPosition:=1)
+        clsAesGeomTextLabelMedianLine.AddParameter("y", strMedianName, iPosition:=2)
+        clsAesGeomTextLabelMedianLine.AddParameter("label", clsRFunctionParameter:=clsPasteMedianY, iPosition:=3)
 
         clsPasteMedianY.SetRCommand("paste")
         clsPasteMedianY.AddParameter("0", Chr(34) & "Median:" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
         clsPasteMedianY.AddParameter("1", clsRFunctionParameter:=clsRoundMedianY, bIncludeArgumentName:=False, iPosition:=1)
 
+        clsFormatMedianY.SetRCommand("format")
+        clsFormatMedianY.AddParameter("x", strMedianName, iPosition:=0)
+        clsFormatMedianY.AddParameter("format", Chr(34) & "%d %b" & Chr(34), iPosition:=1)
+
         'Lower Tercile Line
         clsGeomHlineLowerTercile.SetPackageName("ggplot2")
         clsGeomHlineLowerTercile.SetRCommand("geom_hline")
-        ' No parameters currently so don't add
-        'clsGeomHlineLowerTercile.AddParameter("mapping", clsRFunctionParameter:=clsGeomHlineAesLowerTercile, iPosition:=0)
+        clsGeomHlineLowerTercile.AddParameter("mapping", clsRFunctionParameter:=clsGeomHlineAesLowerTercile, iPosition:=0)
         clsGeomHlineLowerTercile.AddParameter("size", "1.5", iPosition:=2)
-        clsGeomHlineLowerTercile.AddParameter("yintercept", clsRFunctionParameter:=clsLowerTercileFunction, iPosition:=3)
 
         clsGeomHlineAesLowerTercile.SetPackageName("ggplot2")
         clsGeomHlineAesLowerTercile.SetRCommand("aes")
+        clsGeomHlineAesLowerTercile.AddParameter("yintercept", strLowerTercileName, iPosition:=3)
 
         clsLowerTercileFunction.SetRCommand("quantile")
         clsLowerTercileFunction.AddParameter("probs", "1/3", iPosition:=1)
         clsLowerTercileFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
-        clsLowerTercileFunction.SetAssignTo("lower_ter")
-
-        ' Lower Tercile Line Label
-        clsAnnotateLowerTercileLine.SetPackageName("ggplot2")
-        clsAnnotateLowerTercileLine.SetRCommand("annotate")
-        clsAnnotateLowerTercileLine.AddParameter("geom", Chr(34) & "label" & Chr(34), iPosition:=0)
-        clsAnnotateLowerTercileLine.AddParameter("x", "-Inf", iPosition:=1)
-        clsAnnotateLowerTercileLine.AddParameter("y", clsRFunctionParameter:=clsLowerTercileFunction, iPosition:=2)
-        clsAnnotateLowerTercileLine.AddParameter("label", clsRFunctionParameter:=clsPasteLowerTercileY, iPosition:=3)
-        clsAnnotateLowerTercileLine.AddParameter("hjust", "0", iPosition:=9)
-        clsAnnotateLowerTercileLine.AddParameter("vjust", "-0.3", iPosition:=10)
 
         clsRoundLowerTercileY.SetRCommand("round")
         clsRoundLowerTercileY.AddParameter("x", clsRFunctionParameter:=clsLowerTercileFunction, iPosition:=0)
+
+        clsAsDateLowerTercileY.SetRCommand("as.Date")
+        clsAsDateLowerTercileY.AddParameter("x", clsRFunctionParameter:=clsRoundLowerTercileY, iPosition:=0)
+        clsAsDateLowerTercileY.AddParameter("origin", Chr(34) & "2015-12-31" & Chr(34), iPosition:=1)
+
+        ' Lower Tercile Line Label
+        clsGeomTextLabelLowerTercileLine.SetPackageName("ggplot2")
+        clsGeomTextLabelLowerTercileLine.SetRCommand("geom_label")
+        clsGeomTextLabelLowerTercileLine.AddParameter("mapping", clsRFunctionParameter:=clsAesGeomTextLabelLowerTercileLine, iPosition:=0)
+        clsGeomTextLabelLowerTercileLine.AddParameter("hjust", "0", iPosition:=9)
+        clsGeomTextLabelLowerTercileLine.AddParameter("vjust", "-0.3", iPosition:=10)
+
+        clsAesGeomTextLabelLowerTercileLine.SetPackageName("ggplot2")
+        clsAesGeomTextLabelLowerTercileLine.SetRCommand("aes")
+        clsAesGeomTextLabelLowerTercileLine.AddParameter("x", "-Inf", iPosition:=1)
+        clsAesGeomTextLabelLowerTercileLine.AddParameter("y", strLowerTercileName, iPosition:=2)
+        clsAesGeomTextLabelLowerTercileLine.AddParameter("label", clsRFunctionParameter:=clsPasteLowerTercileY, iPosition:=3)
 
         clsPasteLowerTercileY.SetRCommand("paste")
         clsPasteLowerTercileY.AddParameter("0", Chr(34) & "33%:" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
         clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
 
+        clsFormatLowerTercileY.SetRCommand("format")
+        clsFormatLowerTercileY.AddParameter("x", strLowerTercileName, iPosition:=0)
+        clsFormatLowerTercileY.AddParameter("format", Chr(34) & "%d %b" & Chr(34), iPosition:=1)
+
         'Upper Tercile Line
         clsGeomHlineUpperTercile.SetPackageName("ggplot2")
         clsGeomHlineUpperTercile.SetRCommand("geom_hline")
-        ' No parameters currently so don't add
-        'clsGeomHlineUpperTercile.AddParameter("mapping", clsRFunctionParameter:=clsGeomHlineAesUpperTercile, iPosition:=0)
+        clsGeomHlineUpperTercile.AddParameter("mapping", clsRFunctionParameter:=clsGeomHlineAesUpperTercile, iPosition:=0)
         clsGeomHlineUpperTercile.AddParameter("size", "1.5", iPosition:=2)
-        clsGeomHlineUpperTercile.AddParameter("yintercept", clsRFunctionParameter:=clsUpperTercileFunction, iPosition:=3)
 
         clsGeomHlineAesUpperTercile.SetPackageName("ggplot2")
         clsGeomHlineAesUpperTercile.SetRCommand("aes")
+        clsGeomHlineAesUpperTercile.AddParameter("yintercept", strUpperTercileName, iPosition:=3)
 
         clsUpperTercileFunction.SetRCommand("quantile")
         clsUpperTercileFunction.AddParameter("probs", "2/3", iPosition:=1)
         clsUpperTercileFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
-        clsUpperTercileFunction.SetAssignTo("upper_ter")
-
-        'Upper Tercile Line Label
-        clsAnnotateUpperTercileLine.SetPackageName("ggplot2")
-        clsAnnotateUpperTercileLine.SetRCommand("annotate")
-        clsAnnotateUpperTercileLine.AddParameter("geom", Chr(34) & "label" & Chr(34), iPosition:=0)
-        clsAnnotateUpperTercileLine.AddParameter("x", "-Inf", iPosition:=1)
-        clsAnnotateUpperTercileLine.AddParameter("y", clsRFunctionParameter:=clsUpperTercileFunction, iPosition:=2)
-        clsAnnotateUpperTercileLine.AddParameter("label", clsRFunctionParameter:=clsPasteUpperTercileY, iPosition:=3)
-        clsAnnotateUpperTercileLine.AddParameter("hjust", "0", iPosition:=9)
-        clsAnnotateUpperTercileLine.AddParameter("vjust", "-0.3", iPosition:=10)
 
         clsRoundUpperTercileY.SetRCommand("round")
         clsRoundUpperTercileY.AddParameter("x", clsRFunctionParameter:=clsUpperTercileFunction, iPosition:=0)
 
+        clsAsDateUpperTercileY.SetRCommand("as.Date")
+        clsAsDateUpperTercileY.AddParameter("x", clsRFunctionParameter:=clsRoundUpperTercileY, iPosition:=0)
+        clsAsDateUpperTercileY.AddParameter("origin", Chr(34) & "2015-12-31" & Chr(34), iPosition:=1)
+
+        'Upper Tercile Line Label
+        clsGeomTextLabelUpperTercileLine.SetPackageName("ggplot2")
+        clsGeomTextLabelUpperTercileLine.SetRCommand("geom_label")
+        clsGeomTextLabelUpperTercileLine.AddParameter("mapping", clsRFunctionParameter:=clsAesGeomTextLabelUpperTercileLine, iPosition:=0)
+        clsGeomTextLabelUpperTercileLine.AddParameter("hjust", "0", iPosition:=9)
+        clsGeomTextLabelUpperTercileLine.AddParameter("vjust", "-0.3", iPosition:=10)
+
+        clsAesGeomTextLabelUpperTercileLine.SetPackageName("ggplot2")
+        clsAesGeomTextLabelUpperTercileLine.SetRCommand("aes")
+        clsAesGeomTextLabelUpperTercileLine.AddParameter("x", "-Inf", iPosition:=1)
+        clsAesGeomTextLabelUpperTercileLine.AddParameter("y", strUpperTercileName, iPosition:=2)
+        clsAesGeomTextLabelUpperTercileLine.AddParameter("label", clsRFunctionParameter:=clsPasteUpperTercileY, iPosition:=3)
+
         clsPasteUpperTercileY.SetRCommand("paste")
         clsPasteUpperTercileY.AddParameter("0", Chr(34) & "67%:" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
         clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
+
+        clsFormatUpperTercileY.SetRCommand("format")
+        clsFormatUpperTercileY.AddParameter("x", strUpperTercileName, iPosition:=0)
+        clsFormatUpperTercileY.AddParameter("format", Chr(34) & "%d %b" & Chr(34), iPosition:=1)
 
         If dctThemeFunctions.TryGetValue("panel.background", clsPanelBackgroundElementRect) Then
             clsPanelBackgroundElementRect.AddParameter("colour", Chr(34) & "white" & Chr(34))
@@ -400,12 +479,14 @@ Public Class dlgPICSARainfall
         If dctThemeFunctions.TryGetValue("panel.grid.major", clsPanelGridMajorElementLine) Then
             clsPanelGridMajorElementLine.AddParameter("colour", Chr(34) & "lightblue" & Chr(34))
             clsPanelGridMajorElementLine.AddParameter("linetype", Chr(34) & "longdash" & Chr(34))
+            clsPanelGridMajorElementLine.AddParameter("size", 1)
             clsThemeFunction.AddParameter("panel.grid.major", clsRFunctionParameter:=clsPanelGridMajorElementLine)
         End If
 
         If dctThemeFunctions.TryGetValue("panel.grid.minor", clsPanelGridMinorElementLine) Then
             clsPanelGridMinorElementLine.AddParameter("colour", Chr(34) & "lightblue" & Chr(34))
             clsPanelGridMinorElementLine.AddParameter("linetype", Chr(34) & "longdash" & Chr(34))
+            clsPanelGridMinorElementLine.AddParameter("size", 1)
             clsThemeFunction.AddParameter("panel.grid.minor", clsRFunctionParameter:=clsPanelGridMinorElementLine)
         End If
 
@@ -482,8 +563,12 @@ Public Class dlgPICSARainfall
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsAsDate, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsMeanFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsMedianFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
+        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsLowerTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
+        ucrVariablesAsFactorForPicsa.AddAdditionalCodeParameterPair(clsUpperTercileFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
 
-        ucrSelectorPICSARainfall.SetRCode(clsRggplotFunction, bReset)
+        ucrSelectorPICSARainfall.SetRCode(clsPipeOperator, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
         ucrReceiverFacetBy.SetRCode(clsFacetOperator, bReset)
@@ -522,27 +607,14 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged() Handles ucrVariablesAsFactorForPicsa.ControlValueChanged
-        Dim clsYVar As RFunction
-
         TempOptionsDisabledInMultipleVariablesCase()
-        If Not ucrVariablesAsFactorForPicsa.IsEmpty AndAlso ucrVariablesAsFactorForPicsa.bSingleVariable Then
-            clsYVar = ucrVariablesAsFactorForPicsa.GetVariables()
-            clsMeanFunction.AddParameter("x", clsRFunctionParameter:=clsYVar, iPosition:=0)
-            clsMedianFunction.AddParameter("x", clsRFunctionParameter:=clsYVar, iPosition:=0)
-            clsLowerTercileFunction.AddParameter("x", clsRFunctionParameter:=clsYVar, iPosition:=0)
-            clsUpperTercileFunction.AddParameter("x", clsRFunctionParameter:=clsYVar, iPosition:=0)
-        Else
-            clsMeanFunction.RemoveParameterByName("x")
-            clsMedianFunction.RemoveParameterByName("x")
-            clsLowerTercileFunction.RemoveParameterByName("x")
-            clsUpperTercileFunction.RemoveParameterByName("x")
-        End If
     End Sub
 
     'add more functions 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
-        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewDatePeriodOperator:=clsDatePeriodOperator, clsNewAnnotateMeanLine:=clsAnnotateMeanLine, clsNewRoundMeanY:=clsRoundMeanY, clsNewPasteMeanY:=clsPasteMeanY, clsNewAnnotateMedianLine:=clsAnnotateMedianLine, clsNewRoundMedianY:=clsRoundMedianY, clsNewPasteMedianY:=clsPasteMedianY, clsNewAnnotateLowerTercileLine:=clsAnnotateLowerTercileLine, clsNewRoundLowerTercileY:=clsRoundLowerTercileY, clsNewPasteLowerTercileY:=clsPasteLowerTercileY, clsNewAnnotateUpperTercileLine:=clsAnnotateUpperTercileLine, clsNewRoundUpperTercileY:=clsRoundUpperTercileY, clsNewPasteUpperTercileY:=clsPasteUpperTercileY, bReset:=bResetSubdialog)
+        sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewDatePeriodOperator:=clsDatePeriodOperator, clsNewGeomTextLabelMeanLine:=clsGeomTextLabelMeanLine, clsNewRoundMeanY:=clsRoundMeanY, clsNewPasteMeanY:=clsPasteMeanY, clsNewGeomTextLabelMedianLine:=clsGeomTextLabelMedianLine, clsNewRoundMedianY:=clsRoundMedianY, clsNewPasteMedianY:=clsPasteMedianY, clsNewGeomTextLabelLowerTercileLine:=clsGeomTextLabelLowerTercileLine, clsNewRoundLowerTercileY:=clsRoundLowerTercileY, clsNewPasteLowerTercileY:=clsPasteLowerTercileY, clsNewGeomTextLabelUpperTercileLine:=clsGeomTextLabelUpperTercileLine, clsNewRoundUpperTercileY:=clsRoundUpperTercileY, clsNewPasteUpperTercileY:=clsPasteUpperTercileY, strXAxisType:=ucrReceiverX.strCurrDataType, clsNewMutateFunction:=clsMutateFunction, clsNewMeanFunction:=clsMeanFunction, clsNewMedianFunction:=clsMedianFunction, clsNewLowerTercileFunction:=clsLowerTercileFunction, clsNewUpperTercileFunction:=clsUpperTercileFunction, clsNewAsDateMeanY:=clsAsDateMeanY, clsNewAsDateMedianY:=clsAsDateMedianY, clsNewAsDateLowerTercileY:=clsAsDateLowerTercileY, clsNewAsDateUpperTercileY:=clsAsDateUpperTercileY, clsNewFormatMeanY:=clsFormatMeanY, clsNewFormatMedianY:=clsFormatMedianY, clsNewFormatLowerTercileY:=clsFormatLowerTercileY, clsNewFormatUpperTercileY:=clsFormatUpperTercileY, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.ShowDialog()
+        AddRemoveHLineCalculations()
         bResetSubdialog = False
     End Sub
 
@@ -551,6 +623,7 @@ Public Class dlgPICSARainfall
         sdgPlots.ShowDialog()
         bResetSubdialog = False
         ucrReceiverFacetBy.SetRCode(clsFacetOperator)
+        AddRemoveGroupBy()
     End Sub
 
     Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
@@ -596,8 +669,13 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
+        XAxisDataTypeCheck()
+    End Sub
+
+    Private Sub XAxisDataTypeCheck()
         If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor") Then
             clsGeomLine.AddParameter("group", 1)
+            clsBaseOperator.RemoveParameterByName("scale_x_continuous")
         Else
             clsGeomLine.RemoveParameterByName("group")
         End If
@@ -610,6 +688,7 @@ Public Class dlgPICSARainfall
             clsFacetOperator.AddParameter("var2", ".", iPosition:=0)
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, iPosition:=30)
         End If
+        AddRemoveGroupBy()
     End Sub
 
     Private Sub AutoFacetStation()
@@ -622,9 +701,49 @@ Public Class dlgPICSARainfall
         If ucrCurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
+        AddRemoveGroupBy()
     End Sub
 
     Private Sub ucrSelectorPICSARainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPICSARainfall.ControlValueChanged
         AutoFacetStation()
+        SetPipeAssignTo()
+    End Sub
+
+    Private Sub AddRemoveGroupBy()
+        Dim i As Integer = 0
+
+        clsGroupByFunction.ClearParameters()
+        If clsBaseOperator.ContainsParameter("facets") Then
+            For Each clsTempParam As RParameter In clsFacetOperator.clsParameters
+                If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
+                    clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
+                End If
+                i = i + 1
+            Next
+        End If
+        AddRemoveHLineCalculations()
+    End Sub
+
+    Private Sub AddRemoveHLineCalculations()
+        If clsBaseOperator.ContainsParameter("hlinemean") OrElse clsBaseOperator.ContainsParameter("hlinemedian") OrElse clsBaseOperator.ContainsParameter("hlinelowertercile") OrElse clsBaseOperator.ContainsParameter("hlineuppertercile") Then
+            If clsGroupByFunction.iParameterCount > 0 Then
+                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+            Else
+                clsPipeOperator.RemoveParameterByName("group_by")
+            End If
+            clsPipeOperator.AddParameter("mutate", clsRFunctionParameter:=clsMutateFunction, iPosition:=2)
+        Else
+            clsPipeOperator.RemoveParameterByName("group_by")
+            clsPipeOperator.RemoveParameterByName("mutate")
+        End If
+        SetPipeAssignTo()
+    End Sub
+
+    Private Sub SetPipeAssignTo()
+        If ucrSelectorPICSARainfall.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso clsPipeOperator.clsParameters.Count > 1 Then
+            clsPipeOperator.SetAssignTo(ucrSelectorPICSARainfall.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        Else
+            clsPipeOperator.RemoveAssignTo()
+        End If
     End Sub
 End Class
