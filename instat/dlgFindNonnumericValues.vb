@@ -59,7 +59,7 @@ Public Class dlgFindNonnumericValues
         ucrChkShowSummary.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"})
         ucrChkShowSummary.AddRSyntaxContainsFunctionNamesCondition(False, {"summary"}, False)
 
-        ucrChkFilterNonumerics.SetText("Filter to non-numeric cases")
+        ucrChkFilterNonumerics.SetText("Create subset of non-numeric cases")
         ucrChkFilterNonumerics.AddParameterValuesCondition(True, "type", Chr(34) & "filter" & Chr(34))
         ucrChkFilterNonumerics.AddParameterValuesCondition(False, "type", Chr(34) & "filter" & Chr(34), False)
     End Sub
