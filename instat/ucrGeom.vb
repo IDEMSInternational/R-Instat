@@ -378,8 +378,8 @@ Public Class ucrGeom
 
         clsgeom_col.SetGeomName("geom_col")
         'Mandatory Aesthetics
-        clsgeom_col.AddAesParameter("x", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
-        clsgeom_col.AddAesParameter("y", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
+        clsgeom_col.AddAesParameter("x", strIncludedDataTypes:=({"factor", "numeric"}), bIsMandatory:=True)
+        clsgeom_col.AddAesParameter("y", strIncludedDataTypes:=({"factor", "numeric"}), bIsMandatory:=True)
         'Optional aesthetics
         clsgeom_col.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_col.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
