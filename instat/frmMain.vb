@@ -2068,7 +2068,7 @@ Public Class frmMain
         dlgAppend.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticDescribeClimaticStaionMaps_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeClimaticStaionMaps.Click
+    Private Sub mnuClimaticDescribeClimaticStaionMaps_Click(sender As Object, e As EventArgs)
         dlgClimaticStationMaps.ShowDialog()
     End Sub
 
@@ -2078,5 +2078,9 @@ Public Class frmMain
 
     Private Sub mnuClimaticPrepareSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareSPI.Click
         dlgSPI.ShowDialog()
+    End Sub
+
+    Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles mnuClimaticMapping.Click
+        dlgClimaticStationMaps.ShowDialog()
     End Sub
 End Class
