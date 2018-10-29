@@ -65,6 +65,8 @@ Partial Class dlgExportToCPT
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneDF = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblMissingValues = New System.Windows.Forms.Label()
+        Me.ucrInputCodeMissingValues = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblSaveDataTo
@@ -250,10 +252,25 @@ Partial Class dlgExportToCPT
         resources.ApplyResources(Me.ucrSelectorOneDF, "ucrSelectorOneDF")
         Me.ucrSelectorOneDF.Name = "ucrSelectorOneDF"
         '
+        'lblMissingValues
+        '
+        resources.ApplyResources(Me.lblMissingValues, "lblMissingValues")
+        Me.lblMissingValues.Name = "lblMissingValues"
+        '
+        'ucrInputCodeMissingValues
+        '
+        Me.ucrInputCodeMissingValues.AddQuotesIfUnrecognised = True
+        Me.ucrInputCodeMissingValues.IsMultiline = False
+        Me.ucrInputCodeMissingValues.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCodeMissingValues, "ucrInputCodeMissingValues")
+        Me.ucrInputCodeMissingValues.Name = "ucrInputCodeMissingValues"
+        '
         'dlgExportToCPT
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblMissingValues)
+        Me.Controls.Add(Me.ucrInputCodeMissingValues)
         Me.Controls.Add(Me.lblSaveFile)
         Me.Controls.Add(Me.lblLine)
         Me.Controls.Add(Me.rdoTwoDFWide)
@@ -318,4 +335,6 @@ Partial Class dlgExportToCPT
     Friend WithEvents rdoTwoDFLong As RadioButton
     Friend WithEvents lblLine As Label
     Friend WithEvents lblSaveFile As Label
+    Friend WithEvents lblMissingValues As Label
+    Friend WithEvents ucrInputCodeMissingValues As ucrInputTextBox
 End Class
