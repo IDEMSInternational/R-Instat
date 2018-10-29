@@ -134,9 +134,12 @@ Public Class ucrDataFrame
     End Sub
 
     Public Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True)
-        Dim Index As Integer
+        Dim Index As Integer = -1
+
         FillComboBox(False)
-        Index = cboAvailableDataFrames.Items.IndexOf(strDataframe)
+        If strDataframe IsNot Nothing Then
+            Index = cboAvailableDataFrames.Items.IndexOf(strDataframe)
+        End If
         If Index >= 0 Then
             cboAvailableDataFrames.SelectedIndex = Index
         End If
