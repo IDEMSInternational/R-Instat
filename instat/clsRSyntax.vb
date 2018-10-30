@@ -200,6 +200,7 @@ Public Class RSyntax
         Dim lstScripts As New List(Of String)
 
         For Each clsTempCode In lstCodes
+            strScript = ""
             strTemp = clsTempCode.ToScript(strScript)
             'Sometimes the output of the R-command we deal with should not be part of the script... That's only the case when this output has already been assigned.
             If clsTempCode.bExcludeAssignedFunctionOutput AndAlso clsTempCode.bIsAssigned Then
