@@ -173,7 +173,7 @@ lat_lon_dataframe <- function(datafile){
   return(cbind(lat_lon,station))
 }
 
-output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitude, station, year, element, long.data = TRUE, na_code = "-999") {
+output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitude, station, year, element, long.data = TRUE, na_code = -999) {
   
   if(missing(data)) stop("data should be provided")
   if(missing(station)) stop("station must be provided")
