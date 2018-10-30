@@ -119,6 +119,7 @@ Public Class ucrGeom
         Dim clsgeom_boxplot As New Geoms
         Dim clsgeom_contour As New Geoms
         Dim clsgeom_count As New Geoms
+        Dim clsgeom_col As New Geoms
         Dim clsgeom_crossbar As New Geoms
         Dim clsgeom_curve As New Geoms
         Dim clsgeom_density As New Geoms
@@ -158,7 +159,6 @@ Public Class ucrGeom
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
 
-        'Am additng this here for easy working and can be moved later to an alphabetically correct postion
 
         Dim clsgeom_statsummary As New Geoms
 
@@ -375,6 +375,32 @@ Public Class ucrGeom
         clsgeom_boxplot.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
 
         lstAllGeoms.Add(clsgeom_boxplot)
+
+        clsgeom_col.SetGeomName("geom_col")
+        'Mandatory Aesthetics
+        clsgeom_col.AddAesParameter("x", strIncludedDataTypes:=({"factor", "numeric"}), bIsMandatory:=True)
+        clsgeom_col.AddAesParameter("y", strIncludedDataTypes:=({"factor", "numeric"}), bIsMandatory:=True)
+        'Optional aesthetics
+        clsgeom_col.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_col.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_col.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_col.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Warning: This distinguishes bars by varying the outline, however, the distinguished bars only visibly look different if the colour and the fill aesthetics take different values.
+        clsgeom_col.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"}))
+        'Geom_col layer parameters
+        clsgeom_col.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
+        'Global Layer parameters
+        clsgeom_col.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_col.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_col.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        'See global comments about position.
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_col.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_col.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_col.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_col.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
+        clsgeom_col.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
+
+        lstAllGeoms.Add(clsgeom_col)
 
         'clsgeom_contour.SetGeomName("geom_contour")
         ''Mandatory
@@ -1240,6 +1266,7 @@ Public Class ucrGeom
         'formula has to be an input and we dont have that currently. its passed in like this formula= y ~ x or  formula= y ~ poly(x, 2) or formula= y ~ log(x) so the user has to type in stuff
         'clsgeom_smooth.AddLayerParameter("formula",)
         clsgeom_smooth.AddLayerParameter("se", "boolean", "TRUE")
+        clsgeom_smooth.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_smooth.AddLayerParameter("na.rm", "boolean", "FALSE")
         clsgeom_smooth.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_smooth.AddLayerParameter("inherit.aes", "boolean", "FALSE")
@@ -1438,6 +1465,7 @@ Public Class ucrGeom
         clsgeom_vline.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
 
         lstAllGeoms.Add(clsgeom_vline)
+
     End Sub
 
     Public Event GeomChanged()
