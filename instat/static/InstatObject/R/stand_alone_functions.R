@@ -229,7 +229,6 @@ output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitu
     }
   }
   
-  View(data)
   unstacked_data <- data %>% dplyr::select(station, year, element) %>% tidyr::spread(key = station, value = element)
   names(unstacked_data)[1] <- station_label
   unstacked_data <- unstacked_data %>% mutate_all(funs(replace(., is.na(.), na_code)))
