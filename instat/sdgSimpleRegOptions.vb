@@ -30,8 +30,7 @@ Public Class sdgSimpleRegOptions
 
     'Display tab functions
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
-    Private clsRstandardFunction, clsHatvaluesFunction As New RFunction
-    Private clsResDolarOperator, clsFittedValOperator As New ROperator
+    Private clsFittedValuesFunction, clsResidualFunction, clsRstandardFunction, clsHatvaluesFunction As New RFunction
 
     Public bControlsInitialised As Boolean = False
 
@@ -235,7 +234,7 @@ Public Class sdgSimpleRegOptions
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, Optional clsNewFormulaFunction As RFunction = Nothing, Optional clsNewAnovaFunction As RFunction = Nothing, Optional clsNewRSummaryFunction As RFunction = Nothing, Optional clsNewConfint As RFunction = Nothing, Optional clsNewVisReg As RFunction = Nothing, Optional clsNewRaovpvalFunction As RFunction = Nothing, Optional clsNewRgeom_point As RFunction = Nothing, Optional clsNewRWriteResiduals As RFunction = Nothing, Optional clsNewAutoplot As RFunction = Nothing, Optional clsNewRestpvalFunction As RFunction = Nothing, Optional clsNewRWriteLeverage As RFunction = Nothing, Optional clsNewRWriteStdResiduals As RFunction = Nothing, Optional clsNewRLmOrGLM As RFunction = Nothing, Optional clsNewRModelFunction As RFunction = Nothing, Optional clsNewRXVariable As String = Nothing, Optional clsNewRYVariable As String = Nothing, Optional clsNewRWriteFitted As RFunction = Nothing, Optional clsNewRFittedValues As RFunction = Nothing, Optional clsNewResDolarOperator As ROperator = Nothing, Optional clsNewFittedValOperator As ROperator = Nothing, Optional clsNewRstandardFunction As RFunction = Nothing, Optional clsNewHatvaluesFunction As RFunction = Nothing, Optional ucrNewAvailableDatafrane As ucrDataFrame = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, Optional clsNewFormulaFunction As RFunction = Nothing, Optional clsNewAnovaFunction As RFunction = Nothing, Optional clsNewRSummaryFunction As RFunction = Nothing, Optional clsNewConfint As RFunction = Nothing, Optional clsNewVisReg As RFunction = Nothing, Optional clsNewRaovpvalFunction As RFunction = Nothing, Optional clsNewRgeom_point As RFunction = Nothing, Optional clsNewRWriteResiduals As RFunction = Nothing, Optional clsNewAutoplot As RFunction = Nothing, Optional clsNewRestpvalFunction As RFunction = Nothing, Optional clsNewRWriteLeverage As RFunction = Nothing, Optional clsNewRWriteStdResiduals As RFunction = Nothing, Optional clsNewRLmOrGLM As RFunction = Nothing, Optional clsNewRModelFunction As RFunction = Nothing, Optional clsNewRXVariable As String = Nothing, Optional clsNewRYVariable As String = Nothing, Optional clsNewRWriteFitted As RFunction = Nothing, Optional clsNewRFittedValues As RFunction = Nothing, Optional clsNewResidualFunction As RFunction = Nothing, Optional clsNewFittedValuesRfunction As RFunction = Nothing, Optional clsNewRstandardFunction As RFunction = Nothing, Optional clsNewHatvaluesFunction As RFunction = Nothing, Optional ucrNewAvailableDatafrane As ucrDataFrame = Nothing, Optional bReset As Boolean = False)
         bRCodeSet = False
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -247,8 +246,8 @@ Public Class sdgSimpleRegOptions
         clsFormulaFunction = clsNewFormulaFunction
         clsSummaryFunction = clsNewRSummaryFunction
         clsConfint = clsNewConfint
-        clsResDolarOperator = clsNewResDolarOperator
-        clsFittedValOperator = clsNewFittedValOperator
+        clsResidualFunction = clsNewResidualFunction
+        clsFittedValuesFunction = clsNewFittedValuesRfunction
         clsRstandardFunction = clsNewRstandardFunction
         clsHatvaluesFunction = clsNewHatvaluesFunction
 
@@ -317,8 +316,8 @@ Public Class sdgSimpleRegOptions
         IndividualPlotsSetRCode(bReset)
 
         'Saving options
-        ucrSaveFittedColumnName.SetRCode(clsFittedValOperator, bReset, bCloneIfNeeded:=True)
-        ucrSaveResidualsColumnName.SetRCode(clsResDolarOperator, bReset, bCloneIfNeeded:=True)
+        ucrSaveFittedColumnName.SetRCode(clsFittedValuesFunction, bReset, bCloneIfNeeded:=True)
+        ucrSaveResidualsColumnName.SetRCode(clsResidualFunction, bReset, bCloneIfNeeded:=True)
         ucrSaveStdResidualsColumnName.SetRCode(clsRstandardFunction, bReset, bCloneIfNeeded:=True)
         ucrSaveLeverageColumnName.SetRCode(clsHatvaluesFunction, bReset, bCloneIfNeeded:=True)
 
@@ -481,17 +480,17 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrSaveResidualsColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResidualsColumnName.ControlValueChanged
         If ucrSaveResidualsColumnName.ucrChkSave.Checked Then
-            clsRSyntax.AddToAfterCodes(clsResDolarOperator, iPosition:=6)
+            clsRSyntax.AddToAfterCodes(clsResidualFunction, iPosition:=6)
         Else
-            clsRSyntax.RemoveFromAfterCodes(clsResDolarOperator)
+            clsRSyntax.RemoveFromAfterCodes(clsResidualFunction)
         End If
     End Sub
 
     Private Sub ucrSaveFittedColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveFittedColumnName.ControlValueChanged
         If ucrSaveFittedColumnName.ucrChkSave.Checked Then
-            clsRSyntax.AddToAfterCodes(clsFittedValOperator, iPosition:=7)
+            clsRSyntax.AddToAfterCodes(clsFittedValuesFunction, iPosition:=7)
         Else
-            clsRSyntax.RemoveFromAfterCodes(clsFittedValOperator)
+            clsRSyntax.RemoveFromAfterCodes(clsFittedValuesFunction)
         End If
     End Sub
 

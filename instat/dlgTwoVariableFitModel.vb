@@ -27,8 +27,7 @@ Public Class dlgTwoVariableFitModel
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
 
     'Saving Operators/Functions
-    Private clsRstandardFunction, clsHatvaluesFunction As New RFunction
-    Private clsResDolarOperator, clsFittedValOperator As New ROperator
+    Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
 
     'Display options codes
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
@@ -167,8 +166,8 @@ Public Class dlgTwoVariableFitModel
         clsTransformFunction = New RFunction
         clsRstandardFunction = New RFunction
         clsHatvaluesFunction = New RFunction
-        clsResDolarOperator = New ROperator
-        clsFittedValOperator = New ROperator
+        clsResidualFunction = New RFunction
+        clsFittedValuesFunction = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -183,9 +182,11 @@ Public Class dlgTwoVariableFitModel
 
         clsLM = clsRegressionDefaults.clsDefaultLmFunction.Clone
         clsLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsLM.AddParameter("na.action", "na.exclude", iPosition:=4)
 
         clsGLM = clsRegressionDefaults.clsDefaultGlmFunction.Clone
         clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsGLM.AddParameter("na.action", "na.exclude", iPosition:=4)
 
         clsPowerOperator.SetOperation("^")
         clsPowerOperator.AddParameter("power", 2, iPosition:=1)
@@ -284,21 +285,13 @@ Public Class dlgTwoVariableFitModel
         clsGLM.SetAssignTo(strTemp:=ucrSaveModels.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
         clsLMOrGLM = clsLM
 
-        clsResDolarOperator.SetOperation("$")
-        clsResDolarOperator.bSpaceAroundOperation = False
-        clsResDolarOperator.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
-        clsResDolarOperator.AddParameter("residuals", "residuals", iPosition:=1)
+        clsResidualFunction.SetRCommand("residuals")
 
-        clsFittedValOperator.SetOperation("$")
-        clsFittedValOperator.bSpaceAroundOperation = False
-        clsFittedValOperator.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
-        clsFittedValOperator.AddParameter("fitted.values", "fitted.values", iPosition:=1)
+        clsFittedValuesFunction.SetRCommand("fitted.values")
 
         clsRstandardFunction.SetRCommand("rstandard")
-        clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM)
 
         clsHatvaluesFunction.SetRCommand("hatvalues")
-        clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
@@ -375,7 +368,7 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, clsNewResDolarOperator:=clsResDolarOperator, clsNewFittedValOperator:=clsFittedValOperator, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorSimpleReg.ucrAvailableDataFrames, bReset:=bResetOptionsSubDialog)
+        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesRfunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorSimpleReg.ucrAvailableDataFrames, bReset:=bResetOptionsSubDialog)
         sdgSimpleRegOptions.ShowDialog()
         GraphAssignTo()
         bResetOptionsSubDialog = False
@@ -598,6 +591,10 @@ Public Class dlgTwoVariableFitModel
             clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
             clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM)
             clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            clsResidualFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            clsFittedValuesFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM)
+            clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM)
         ElseIf rdoTwoSample.Checked Then
             If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Then
                 If rdoCompareMeans.Checked Then

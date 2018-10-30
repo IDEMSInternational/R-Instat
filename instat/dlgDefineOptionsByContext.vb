@@ -38,6 +38,7 @@ Public Class dlgDefineOptionsByContext
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 572
         'TODO not yet implemented
         lblKeyColumns.Hide()
         ucrInputKeyCheck.Hide()
