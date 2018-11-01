@@ -26,6 +26,10 @@ Public Class dlgFitModel
     Public bResetModelOptions As Boolean = False
     Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
+
+    'Saving Operators/Functions
+    Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
+
     Public bResetSubDialog As Boolean = False
     Public bResetOptionsSubDialog As Boolean = False
 
@@ -90,6 +94,11 @@ Public Class dlgFitModel
         clsVisReg = New RFunction
         clsFamilyFunction = New RFunction
 
+        clsRstandardFunction = New RFunction
+        clsHatvaluesFunction = New RFunction
+        clsResidualFunction = New RFunction
+        clsFittedValuesFunction = New RFunction
+
         ucrSelectorByDataFrameAddRemoveForFitModel.Reset()
         ucrReceiverResponseVar.SetMeAsReceiver()
         ucrSelectorByDataFrameAddRemoveForFitModel.Focus()
@@ -149,6 +158,11 @@ Public Class dlgFitModel
 
         bResetSubDialog = True
         bResetOptionsSubDialog = True
+
+        clsResidualFunction.SetRCommand("residuals")
+        clsFittedValuesFunction.SetRCommand("fitted.values")
+        clsRstandardFunction.SetRCommand("rstandard")
+        clsHatvaluesFunction.SetRCommand("hatvalues")
 
         clsLM.SetAssignTo(ucrModelName.GetText, strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
 
@@ -273,7 +287,7 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewAutoplot:=clsAutoPlot, clsNewVisReg:=clsVisReg, clsNewConfint:=clsConfint, bReset:=bResetOptionsSubDialog)
+        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesFunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames, bReset:=bResetOptionsSubDialog)
         sdgSimpleRegOptions.ShowDialog()
         GraphAssignTo()
         bResetOptionsSubDialog = False
@@ -342,6 +356,10 @@ Public Class dlgFitModel
             clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsResidualFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsFittedValuesFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsLMOrGLM)
         End If
     End Sub
