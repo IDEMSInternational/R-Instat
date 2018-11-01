@@ -215,7 +215,7 @@ Public Class sdgSummaries
 
         ucrNudNumber.SetParameter(New RParameter("na_max_n", 11))
 
-        ucrNudNumberNotMissing.SetParameter(New RParameter("min_non_miss", 12))
+        ucrNudNumberNotMissing.SetParameter(New RParameter("na_min_n", 12))
 
         ucrChkStandardErrorOfMean.SetParameter(New RParameter("standard_error_mean", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "standard_error_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkStandardErrorOfMean.SetText("Standard Error of the Mean")
