@@ -17,13 +17,10 @@
 Imports instat.Translations
 
 Public Class sdgSimpleRegOptions
-    Public clsRModelFunction As RFunction
-    Public clsRYVariable, clsRXVariable As String
-    Public clsRLmOrGLM As RFunction
     Public clsRGraphics As New RSyntax
     Private clsRSyntax As New RSyntax
     Private ucrAvailableDataframe As ucrDataFrame
-    Public clsRAovFunction, clsRAovPValFunction, clsREstPValFunction, clsAutoplot, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
+    Public clsRAovFunction, clsAutoplot, clsRPredFunction, clsRDFFunction, clsRResiduals, clsRLeverage As New RFunction
     Public clsVisReg, clsRaesFunction, clsRStat_smooth, clsR_ribbon, clsRaes_ribbon As New RFunction
     Public clsWhichFunction As RFunction
     Public bRCodeSet As Boolean = True
@@ -234,7 +231,7 @@ Public Class sdgSimpleRegOptions
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, Optional clsNewFormulaFunction As RFunction = Nothing, Optional clsNewAnovaFunction As RFunction = Nothing, Optional clsNewRSummaryFunction As RFunction = Nothing, Optional clsNewConfint As RFunction = Nothing, Optional clsNewVisReg As RFunction = Nothing, Optional clsNewRaovpvalFunction As RFunction = Nothing, Optional clsNewRgeom_point As RFunction = Nothing, Optional clsNewRWriteResiduals As RFunction = Nothing, Optional clsNewAutoplot As RFunction = Nothing, Optional clsNewRestpvalFunction As RFunction = Nothing, Optional clsNewRWriteLeverage As RFunction = Nothing, Optional clsNewRWriteStdResiduals As RFunction = Nothing, Optional clsNewRLmOrGLM As RFunction = Nothing, Optional clsNewRModelFunction As RFunction = Nothing, Optional clsNewRXVariable As String = Nothing, Optional clsNewRYVariable As String = Nothing, Optional clsNewRWriteFitted As RFunction = Nothing, Optional clsNewRFittedValues As RFunction = Nothing, Optional clsNewResidualFunction As RFunction = Nothing, Optional clsNewFittedValuesRfunction As RFunction = Nothing, Optional clsNewRstandardFunction As RFunction = Nothing, Optional clsNewHatvaluesFunction As RFunction = Nothing, Optional ucrNewAvailableDatafrane As ucrDataFrame = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewFormulaFunction As RFunction, clsNewAnovaFunction As RFunction, clsNewRSummaryFunction As RFunction, clsNewConfint As RFunction, clsNewVisReg As RFunction, clsNewAutoplot As RFunction, clsNewResidualFunction As RFunction, clsNewFittedValuesFunction As RFunction, clsNewRstandardFunction As RFunction, clsNewHatvaluesFunction As RFunction, ucrNewAvailableDatafrane As ucrDataFrame, Optional bReset As Boolean = False)
         bRCodeSet = False
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -247,26 +244,14 @@ Public Class sdgSimpleRegOptions
         clsSummaryFunction = clsNewRSummaryFunction
         clsConfint = clsNewConfint
         clsResidualFunction = clsNewResidualFunction
-        clsFittedValuesFunction = clsNewFittedValuesRfunction
+        clsFittedValuesFunction = clsNewFittedValuesFunction
         clsRstandardFunction = clsNewRstandardFunction
         clsHatvaluesFunction = clsNewHatvaluesFunction
 
         'Graph functions
         clsVisReg = clsNewVisReg
 
-        clsRLmOrGLM = clsNewRLmOrGLM
-        clsREstPValFunction = clsNewRestpvalFunction
-        clsRModelFunction = clsNewRModelFunction
-        clsRXVariable = clsNewRXVariable
-        clsRYVariable = clsNewRYVariable
-        clsRWriteFitted = clsNewRWriteFitted
-        clsRFittedValues = clsNewRFittedValues
-        clsRAovPValFunction = clsNewRaovpvalFunction
-        clsRgeom_point = clsNewRgeom_point
         clsAutoplot = clsNewAutoplot
-        clsRWriteResiduals = clsNewRWriteResiduals
-        clsRWriteStdResiduals = clsNewRWriteStdResiduals
-        clsRWriteLeverage = clsNewRWriteLeverage
 
         ucrAvailableDataframe = ucrNewAvailableDatafrane
 
