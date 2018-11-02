@@ -228,6 +228,7 @@ Partial Class frmMain
         Me.ToolStripSeparator46 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticPrepareClimdex = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareSPI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator51 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticPrepareEvapotranspiration = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareNewWorksheet = New System.Windows.Forms.ToolStripMenuItem()
@@ -246,7 +247,6 @@ Partial Class frmMain
         Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator31 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuClimaticDescribeClimaticStaionMaps = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSA = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSARainfall = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSATemperature = New System.Windows.Forms.ToolStripMenuItem()
@@ -572,7 +572,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.ToolStripSeparator51 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticMapping = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1393,7 +1393,7 @@ Partial Class frmMain
         '
         'mnuClimatic
         '
-        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticTidyandExamine, Me.mnuClimaticDates, Me.mnuClimaticDefineClimaticData, Me.mnuClimaticCheckData, Me.mnuClimaticPrepare, Me.ToolStripSeparator30, Me.mnuClimaticDescribe, Me.mnuClimaticPICSA, Me.mnuCMSAF, Me.ToolStripSeparator16, Me.mnuClimaticModels, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimateMethods})
+        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticTidyandExamine, Me.mnuClimaticDates, Me.mnuClimaticDefineClimaticData, Me.mnuClimaticCheckData, Me.mnuClimaticPrepare, Me.ToolStripSeparator30, Me.mnuClimaticDescribe, Me.mnuClimaticPICSA, Me.mnuCMSAF, Me.mnuClimaticMapping, Me.ToolStripSeparator16, Me.mnuClimaticModels, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimateMethods})
         Me.mnuClimatic.Name = "mnuClimatic"
         resources.ApplyResources(Me.mnuClimatic, "mnuClimatic")
         Me.mnuClimatic.Tag = "Climatic"
@@ -1650,6 +1650,11 @@ Partial Class frmMain
         Me.mnuClimaticPrepareSPI.Name = "mnuClimaticPrepareSPI"
         resources.ApplyResources(Me.mnuClimaticPrepareSPI, "mnuClimaticPrepareSPI")
         '
+        'ToolStripSeparator51
+        '
+        Me.ToolStripSeparator51.Name = "ToolStripSeparator51"
+        resources.ApplyResources(Me.ToolStripSeparator51, "ToolStripSeparator51")
+        '
         'mnuClimaticPrepareEvapotranspiration
         '
         Me.mnuClimaticPrepareEvapotranspiration.Name = "mnuClimaticPrepareEvapotranspiration"
@@ -1703,7 +1708,7 @@ Partial Class frmMain
         '
         'mnuClimaticDescribe
         '
-        Me.mnuClimaticDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDescribeRainfall, Me.mnuClimaticDescribeTemperatures, Me.mnuClimaticDescribeWindSpeedDirection, Me.mnuClimaticDescribeSunshineRadiation, Me.ToolStripSeparator17, Me.mnuClimaticDescribeGeneral, Me.ToolStripSeparator31, Me.mnuClimaticDescribeClimaticStaionMaps})
+        Me.mnuClimaticDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDescribeRainfall, Me.mnuClimaticDescribeTemperatures, Me.mnuClimaticDescribeWindSpeedDirection, Me.mnuClimaticDescribeSunshineRadiation, Me.ToolStripSeparator17, Me.mnuClimaticDescribeGeneral, Me.ToolStripSeparator31})
         Me.mnuClimaticDescribe.Name = "mnuClimaticDescribe"
         resources.ApplyResources(Me.mnuClimaticDescribe, "mnuClimaticDescribe")
         '
@@ -1747,11 +1752,6 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator31.Name = "ToolStripSeparator31"
         resources.ApplyResources(Me.ToolStripSeparator31, "ToolStripSeparator31")
-        '
-        'mnuClimaticDescribeClimaticStaionMaps
-        '
-        Me.mnuClimaticDescribeClimaticStaionMaps.Name = "mnuClimaticDescribeClimaticStaionMaps"
-        resources.ApplyResources(Me.mnuClimaticDescribeClimaticStaionMaps, "mnuClimaticDescribeClimaticStaionMaps")
         '
         'mnuClimaticPICSA
         '
@@ -3671,10 +3671,10 @@ Partial Class frmMain
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
         '
-        'ToolStripSeparator51
+        'mnuClimaticMapping
         '
-        Me.ToolStripSeparator51.Name = "ToolStripSeparator51"
-        resources.ApplyResources(Me.ToolStripSeparator51, "ToolStripSeparator51")
+        Me.mnuClimaticMapping.Name = "mnuClimaticMapping"
+        resources.ApplyResources(Me.mnuClimaticMapping, "mnuClimaticMapping")
         '
         'frmMain
         '
@@ -4250,8 +4250,8 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticTidyandExamineStack As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineAppend As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator54 As ToolStripSeparator
-    Friend WithEvents mnuClimaticDescribeClimaticStaionMaps As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareClimdex As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareSPI As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator51 As ToolStripSeparator
+    Friend WithEvents mnuClimaticMapping As ToolStripMenuItem
 End Class
