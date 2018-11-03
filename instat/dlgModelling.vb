@@ -21,6 +21,26 @@ Public Class dlgModelling
     Private bReset As Boolean = True
     Private strPackageName As String
     Private clsAttach, clsDetach As New RFunction
+
+    Public clsRModelFunction As RFunction
+    Public clsRYVariable, clsRXVariable As String
+    Public clsRLmOrGLM As RFunction
+    Public clsRGraphics As New RSyntax
+    Private clsRSyntax As New RSyntax
+    Private ucrAvailableDataframe As ucrDataFrame
+    Public clsRAovFunction, clsRAovPValFunction, clsREstPValFunction, clsAutoplot, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
+    Public clsVisReg, clsRaesFunction, clsRStat_smooth, clsR_ribbon, clsRaes_ribbon As New RFunction
+    Public clsWhichFunction As RFunction
+    Public bRCodeSet As Boolean = True
+
+    'Display tab functions
+    Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
+    Private clsFittedValuesFunction, clsResidualFunction, clsRstandardFunction, clsHatvaluesFunction As New RFunction
+
+    Public clsGLM, clsLM, clsLMOrGLM As RFunction
+
+    Private bResetDisplayOptions = False
+
     Private Sub dlgModelling_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -28,7 +48,7 @@ Public Class dlgModelling
             bFirstLoad = False
         End If
         TestOkEnabled()
-        SetRCodeForControls(bReset)
+        SetRcodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -57,6 +77,33 @@ Public Class dlgModelling
     End Sub
 
     Private Sub SetDefaults()
+        clsFormulaFunction = New RFunction
+        clsRModelFunction = New RFunction
+        clsRAovFunction = New RFunction
+        clsRAovPValFunction = New RFunction
+        clsConfint = New RFunction
+        clsREstPValFunction = New RFunction
+        clsRFittedValues = New RFunction
+        clsRResiduals = New RFunction
+        clsRStdResiduals = New RFunction
+        clsRWriteResiduals = New RFunction
+        clsRWriteLeverage = New RFunction
+        clsRLeverage = New RFunction
+        clsRWriteStdResiduals = New RFunction
+        clsRWriteFitted = New RFunction
+        clsSummaryFunction = New RFunction
+        clsAnovaFunction = New RFunction
+        clsAutoplot = New RFunction
+        clsRgeom_point = New RFunction
+        clsVisReg = New RFunction
+        clsRstandardFunction = New RFunction
+        clsHatvaluesFunction = New RFunction
+        clsResidualFunction = New RFunction
+        clsFittedValuesFunction = New RFunction
+
+        ucrBase.clsRsyntax.ClearCodes()
+
+
         ucrSelectorModelling.Reset()
         ucrReceiverForTestColumn.SetMeAsReceiver()
         ucrSaveResult.Reset()
@@ -66,6 +113,91 @@ Public Class dlgModelling
         ucrBase.clsRsyntax.iCallType = 2
         ucrChkIncludeArguments.Checked = False
         ucrInputComboRPackage.SetName("stats")
+
+        'Residual Plots
+        clsAutoplot = clsRegressionDefaults.clsDefaultAutoplot.Clone
+        clsAutoplot.bExcludeAssignedFunctionOutput = False
+
+        clsRgeom_point = clsRegressionDefaults.clsDefaultRgeom_pointFunction.Clone
+
+        clsRAovFunction.SetPackageName("stats")
+        clsRAovFunction.SetRCommand("anova")
+        clsRAovFunction.iCallType = 2
+
+        'FitModel
+        clsVisReg.SetPackageName("visreg")
+        clsVisReg.SetRCommand("visreg")
+        clsVisReg.AddParameter("type", Chr(34) & "conditional" & Chr(34))
+        clsVisReg.AddParameter("gg", "TRUE")
+        clsVisReg.iCallType = 3
+        clsVisReg.bExcludeAssignedFunctionOutput = False
+
+        'Model
+        clsFormulaFunction = clsRegressionDefaults.clsDefaultFormulaFunction.Clone
+        clsFormulaFunction.iCallType = 2
+
+        'Summary
+        clsSummaryFunction = clsRegressionDefaults.clsDefaultSummary.Clone
+        clsSummaryFunction.iCallType = 2
+
+        'ANOVA
+        clsAnovaFunction = clsRegressionDefaults.clsDefaultAnovaFunction.Clone
+        clsAnovaFunction.iCallType = 2
+
+        'Confidence Interval
+        clsConfint = clsRegressionDefaults.clsDefaultConfint.Clone
+        clsConfint.iCallType = 2
+
+        'Anova +Pvalue
+        clsREstPValFunction = clsRegressionDefaults.clsDefaultRaovPValueFunction.Clone
+        clsREstPValFunction.AddParameter("", clsRFunctionParameter:=clsLMOrGLM)
+        '  clsRaovpvalFunction.AddParameter("", clsRFunctionParameter:=clsRLmOrGLM)
+        clsREstPValFunction.iCallType = 2
+
+        'ucrSave (sdgSimpleRegOptions) Fitted Values
+        clsRWriteFitted = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
+        clsRWriteFitted.SetAssignTo(sdgSimpleRegOptions.ucrSaveFittedColumnName.GetText, strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveFittedColumnName.GetText, bAssignToIsPrefix:=True)
+        ' clsRWriteFitted.iCallType = 3
+
+        'ucrSave (sdgSimpleRegOptions) Residuals
+        clsRWriteResiduals = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
+        clsRWriteResiduals.SetAssignTo(sdgSimpleRegOptions.ucrSaveResidualsColumnName.GetText, strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveResidualsColumnName.GetText, bAssignToIsPrefix:=True)
+        ' clsRWriteResiduals.iCallType = 3
+
+        'ucrSave (sdgSimpleRegOptions) StdResiduals
+        clsRWriteStdResiduals = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
+        clsRWriteStdResiduals.SetAssignTo(sdgSimpleRegOptions.ucrSaveStdResidualsColumnName.GetText, strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveStdResidualsColumnName.GetText, bAssignToIsPrefix:=True)
+        ' clsRWriteStdResiduals.iCallType = 3
+
+        'ucrSave (sdgSimpleRegOptions) Leverage
+        clsRWriteLeverage = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
+        clsRWriteLeverage.SetAssignTo(sdgSimpleRegOptions.ucrSaveLeverageColumnName.GetText, strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveLeverageColumnName.GetText, bAssignToIsPrefix:=True)
+        'clsRWriteLeverage.iCallType = 3
+
+
+        clsResidualFunction.SetRCommand("residuals")
+
+        clsFittedValuesFunction.SetRCommand("fitted.values")
+
+        clsRstandardFunction.SetRCommand("rstandard")
+
+        clsHatvaluesFunction.SetRCommand("hatvalues")
+
+        clsFormulaFunction.AddParameter("x", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+        clsAnovaFunction.AddParameter("object", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+        clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+        clsConfint.AddParameter("object", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+        clsVisReg.AddParameter("fit", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+        clsAutoplot.AddParameter("object", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+        clsResidualFunction.AddParameter("object", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+        clsFittedValuesFunction.AddParameter("object", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+        clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+        clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+
+        ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
+
+        bResetDisplayOptions = True
     End Sub
 
     Private Sub TestOkEnabled()
@@ -78,7 +210,7 @@ Public Class dlgModelling
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeForControls(True)
+        SetRcodeForControls(True)
         TestOkEnabled()
     End Sub
 
@@ -298,6 +430,13 @@ Public Class dlgModelling
         ucrReceiverForTestColumn.Clear()
     End Sub
 
+    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoplot, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesRfunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorModelling.ucrAvailableDataFrames, bReset:=bResetDisplayOptions)
+        sdgSimpleRegOptions.ShowDialog()
+        GraphAssignTo()
+        bResetDisplayOptions = False
+    End Sub
+
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
         TryScript()
     End Sub
@@ -432,6 +571,10 @@ Public Class dlgModelling
 
     End Sub
 
+    Private Sub GraphAssignTo()
+        clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
+        clsAutoplot.SetAssignTo("last_autoplot", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_autoplot")
+    End Sub
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverForTestColumn.ControlContentsChanged
         TestOkEnabled()
     End Sub
