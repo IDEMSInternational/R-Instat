@@ -211,14 +211,19 @@ Public Class dlgClimaticStationMaps
 
     Private Sub TestOkEnabled()
         Dim bOkEnabled As Boolean
-        If Not ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso ucrSaveMap.IsComplete Then
+        If ucrSaveMap.IsComplete Then
             bOkEnabled = True
-        Else
-            bOkEnabled = False
         End If
-            ucrBase.OKEnabled(bOkEnabled)
-    End Sub
+        If Not ucrReceiverLongitude.IsEmpty AndAlso ucrReceiverLatitude.IsEmpty Then
+            bOkEnabled = False
+        ElseIf ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty Then
+            bOkEnabled = False
+        Else
+            bOkEnabled = True
+        End If
 
+        ucrBase.OKEnabled(bOkEnabled)
+    End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
