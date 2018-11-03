@@ -457,7 +457,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdMultiply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 10</value>
+    <value>59, 10</value>
   </data>
   <data name="cmdMultiply.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -487,7 +487,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdColon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 10</value>
+    <value>31, 10</value>
   </data>
   <data name="cmdColon.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -517,7 +517,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdPlus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 10</value>
+    <value>3, 10</value>
   </data>
   <data name="cmdPlus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -547,7 +547,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdPower.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 39</value>
+    <value>87, 39</value>
   </data>
   <data name="cmdPower.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -577,7 +577,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdClosingBracket.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 39</value>
+    <value>59, 39</value>
   </data>
   <data name="cmdClosingBracket.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -607,7 +607,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdOpeningBracket.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 39</value>
+    <value>31, 39</value>
   </data>
   <data name="cmdOpeningBracket.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -637,7 +637,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDiv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 10</value>
+    <value>87, 10</value>
   </data>
   <data name="cmdDiv.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -667,7 +667,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDoubleBracket.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 39</value>
+    <value>3, 39</value>
   </data>
   <data name="cmdDoubleBracket.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -697,7 +697,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 70</value>
+    <value>59, 70</value>
   </data>
   <data name="cmdClear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -727,7 +727,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdSquareBrackets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 70</value>
+    <value>31, 70</value>
   </data>
   <data name="cmdSquareBrackets.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -757,7 +757,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdMinus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 70</value>
+    <value>3, 70</value>
   </data>
   <data name="cmdMinus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -784,10 +784,10 @@
     <value>10</value>
   </data>
   <data name="grpFirstCalc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>416, 205</value>
+    <value>412, 205</value>
   </data>
   <data name="grpFirstCalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 105</value>
+    <value>119, 103</value>
   </data>
   <data name="grpFirstCalc.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -833,9 +833,6 @@
   </data>
   <data name="&gt;&gt;cmdTry.ZOrder" xml:space="preserve">
     <value>11</value>
-  </data>
-  <data name="cmdDisplayOptions.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="cmdDisplayOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -893,6 +890,54 @@
   </data>
   <data name="&gt;&gt;cmdPredict.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="&gt;&gt;cmdfevd.Name" xml:space="preserve">
+    <value>cmdfevd</value>
+  </data>
+  <data name="&gt;&gt;cmdfevd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdfevd.Parent" xml:space="preserve">
+    <value>grpextRemes</value>
+  </data>
+  <data name="&gt;&gt;cmdfevd.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cmdlevd.Name" xml:space="preserve">
+    <value>cmdlevd</value>
+  </data>
+  <data name="&gt;&gt;cmdlevd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdlevd.Parent" xml:space="preserve">
+    <value>grpextRemes</value>
+  </data>
+  <data name="&gt;&gt;cmdlevd.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpextRemes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>292, 68</value>
+  </data>
+  <data name="grpextRemes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 53</value>
+  </data>
+  <data name="grpextRemes.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="grpextRemes.Text" xml:space="preserve">
+    <value>extRemes</value>
+  </data>
+  <data name="&gt;&gt;grpextRemes.Name" xml:space="preserve">
+    <value>grpextRemes</value>
+  </data>
+  <data name="&gt;&gt;grpextRemes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpextRemes.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpextRemes.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="cmdfevd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -953,30 +998,6 @@
   </data>
   <data name="&gt;&gt;cmdlevd.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="grpextRemes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 68</value>
-  </data>
-  <data name="grpextRemes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 53</value>
-  </data>
-  <data name="grpextRemes.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="grpextRemes.Text" xml:space="preserve">
-    <value>extRemes</value>
-  </data>
-  <data name="&gt;&gt;grpextRemes.Name" xml:space="preserve">
-    <value>grpextRemes</value>
-  </data>
-  <data name="&gt;&gt;grpextRemes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpextRemes.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpextRemes.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="cmdnlmer.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1516,7 +1537,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverMultiple.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 210</value>
+    <value>289, 210</value>
   </data>
   <data name="ucrReceiverMultiple.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
