@@ -50,14 +50,14 @@ Public Class dlgModelling
 
     Private Sub InitialiseDialog()
         bUpdating = True
-        cmdPredict.Enabled = False
+        cmdPredict.Visible = False
+
+        cmdTry.Visible = False
+        ucrInputTryMessage.Visible = False
 
         ucrReceiverForTestColumn.Selector = ucrSelectorModelling
-        ucrReceiverForTestColumn.SetMeAsReceiver()
 
         ucrChkIncludeArguments.SetText("Include Arguments")
-
-        ucrBase.clsRsyntax.SetCommandString("")
 
         ucrSaveResult.SetPrefix("model")
         ucrSaveResult.SetIsComboBox()
@@ -69,16 +69,13 @@ Public Class dlgModelling
         ucrInputComboRPackage.SetItems({"stats", "extRemes", "lme4", "MASS"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
 
-        clsAttach.SetRCommand("attach")
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorModelling.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-
-        clsDetach.SetRCommand("detach")
-        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorModelling.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        clsDetach.AddParameter("unload", "TRUE", iPosition:=1)
         bUpdating = False
     End Sub
 
     Private Sub SetDefaults()
+        clsAttach = New RFunction
+        clsDetach = New RFunction
+
         clsFormulaFunction = New RFunction
         clsRModelFunction = New RFunction
         clsRAovFunction = New RFunction
@@ -108,9 +105,16 @@ Public Class dlgModelling
         bUpdating = True
 
         ucrSelectorModelling.Reset()
+
         ucrReceiverForTestColumn.SetMeAsReceiver()
+
+        ucrBase.clsRsyntax.SetCommandString("")
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm()", 1)
+
         ucrSaveResult.Reset()
         ucrSaveResult.ucrChkSave.Checked = False
+
+        ucrSaveResult.Enabled = False
 
         ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -118,6 +122,13 @@ Public Class dlgModelling
 
         ucrChkIncludeArguments.Checked = False
         ucrInputComboRPackage.SetName("stats")
+
+        clsAttach.SetRCommand("attach")
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorModelling.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+
+        clsDetach.SetRCommand("detach")
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorModelling.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsDetach.AddParameter("unload", "TRUE", iPosition:=1)
 
         'Residual Plots
         clsAutoplot = clsRegressionDefaults.clsDefaultAutoplot.Clone
@@ -187,6 +198,8 @@ Public Class dlgModelling
 
         clsHatvaluesFunction.SetRCommand("hatvalues")
 
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach, 1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach, 1000)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
 
         bResetDisplayOptions = True
@@ -292,90 +305,94 @@ Public Class dlgModelling
     Private Sub cmdfevd_Click(sender As Object, e As EventArgs) Handles cmdfevd.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("fevd(x = , data, threshold = NULL, threshold.fun = ~1, location.fun = ~1, scale.fun = ~1, shape.fun = ~1, use.phi = FALSE, type = c(""GEV"", ""GP"", ""PP"", ""Gumbel"", ""Exponential""), method = c(""MLE"", ""GMLE"", ""Bayesian"", ""Lmoments""), initial = NULL, span, units = NULL, time.units = ""days"", period.basis = ""year"", na.action = na.fail, optim.args = NULL, priorFun = NULL, priorParams = NULL, proposalFun = NULL, proposalParams = NULL, iter = 9999, weights = 1, blocks = NULL, verbose = FALSE)", 476)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::fevd(x = , data, threshold = NULL, threshold.fun = ~1, location.fun = ~1, scale.fun = ~1, shape.fun = ~1, use.phi = FALSE, type = c(""GEV"", ""GP"", ""PP"", ""Gumbel"", ""Exponential""), method = c(""MLE"", ""GMLE"", ""Bayesian"", ""Lmoments""), initial = NULL, span, units = NULL, time.units = ""days"", period.basis = ""year"", na.action = na.fail, optim.args = NULL, priorFun = NULL, priorParams = NULL, proposalFun = NULL, proposalParams = NULL, iter = 9999, weights = 1, blocks = NULL, verbose = FALSE)", 476)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("fevd()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::fevd()", 1)
         End If
     End Sub
 
     Private Sub cmdlevd_Click(sender As Object, e As EventArgs) Handles cmdlevd.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("levd(x = , threshold, location, scale, shape, type = c(""GEV"", ""GP"", ""PP"", ""Gumbel"", ""Weibull"", ""Frechet"",""Exponential"", ""Beta"", ""Pareto""), log = TRUE, negative = TRUE, span, npy = 365.25, infval = Inf, weights = 1, blocks = NULL)", 220)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::levd(x = , threshold, location, scale, shape, type = c(""GEV"", ""GP"", ""PP"", ""Gumbel"", ""Weibull"", ""Frechet"",""Exponential"", ""Beta"", ""Pareto""), log = TRUE, negative = TRUE, span, npy = 365.25, infval = Inf, weights = 1, blocks = NULL)", 220)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("levd()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::levd()", 1)
         End If
     End Sub
 
     Private Sub cmdglmer_Click(sender As Object, e As EventArgs) Handles cmdglmer.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("glmer(formula = , data = NULL, family = gaussian, control = glmerControl(), start = NULL, verbose = 0L, nAGQ = 1L, subset, weights, na.action, offset, contrasts = NULL, mustart, etastart, devFunOnly = FALSE)", 192)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lme4::glmer(formula = , data = NULL, family = gaussian, control = glmerControl(), start = NULL, verbose = 0L, nAGQ = 1L, subset, weights, na.action, offset, contrasts = NULL, mustart, etastart, devFunOnly = FALSE)", 192)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("glmer()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lme4::glmer()", 1)
         End If
     End Sub
 
     Private Sub cmdlmer_Click(sender As Object, e As EventArgs) Handles cmdlmer.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lmer(formula = , data = NULL, REML = TRUE, control = lmerControl(), start = NULL, verbose = 0L, subset, weights, na.action, offset, contrasts = NULL, devFunOnly = FALSE)", 154)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lme4::lmer(formula = , data = NULL, REML = TRUE, control = lmerControl(), start = NULL, verbose = 0L, subset, weights, na.action, offset, contrasts = NULL, devFunOnly = FALSE)", 154)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lmer()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lme4::lmer()", 1)
         End If
     End Sub
 
     Private Sub cmdnlmer_Click(sender As Object, e As EventArgs) Handles cmdnlmer.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("nlmer(formula = , data = NULL, control = nlmerControl(), start = NULL, verbose = 0L, nAGQ = 1L, subset, weights, na.action, offset, contrasts = NULL, devFunOnly = FALSE)", 153)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lme4::nlmer(formula = , data = NULL, control = nlmerControl(), start = NULL, verbose = 0L, nAGQ = 1L, subset, weights, na.action, offset, contrasts = NULL, devFunOnly = FALSE)", 153)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("nlmer()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lme4::nlmer()", 1)
         End If
     End Sub
 
     Private Sub cmdglmmPQL_Click(sender As Object, e As EventArgs) Handles cmdglmmPQL.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("glmmPQL(fixed = , random, family, data, correlation, weights,control, niter = 10, verbose = TRUE)", 82)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::glmmPQL(fixed = , random, family, data, correlation, weights,control, niter = 10, verbose = TRUE)", 82)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("glmmPQL()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::glmmPQL()", 1)
         End If
     End Sub
 
     Private Sub cmdglmnb_Click(sender As Object, e As EventArgs) Handles cmdglmnb.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("glm.nb(formula = , data, weights, subset, na.action,start = NULL, etastart, mustart,control = glm.control(...), method = ""glm.fit"",model = TRUE, x = FALSE, y = TRUE, contrasts = NULL, ...,init.theta, link = log)", 194)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::glm.nb(formula = , data, weights, subset, na.action,start = NULL, etastart, mustart,control = glm.control(...), method = ""glm.fit"",model = TRUE, x = FALSE, y = TRUE, contrasts = NULL, ...,init.theta, link = log)", 194)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("glm.nb()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::glm.nb()", 1)
         End If
     End Sub
 
     Private Sub cmdloglm_Click(sender As Object, e As EventArgs) Handles cmdloglm.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("loglm(formula = , data, subset, na.action)", 27)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::loglm(formula = , data, subset, na.action)", 27)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("loglm()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::loglm()", 1)
         End If
     End Sub
 
     Private Sub cmdpolr_Click(sender As Object, e As EventArgs) Handles cmdpolr.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("polr(formula = , data, weights, start, ..., subset, na.action,contrasts = NULL, Hess = FALSE, model = TRUE, method = c(""logistic"", ""probit"", ""loglog"", ""cloglog"", ""cauchit""))", 158)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::polr(formula = , data, weights, start, ..., subset, na.action,contrasts = NULL, Hess = FALSE, model = TRUE, method = c(""logistic"", ""probit"", ""loglog"", ""cloglog"", ""cauchit""))", 158)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("polr()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::polr()", 1)
         End If
+    End Sub
+
+    Private Sub cmdTilda_Click(sender As Object, e As EventArgs) Handles cmdTilda.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("~")
     End Sub
 
     Private Sub cmdrlm_Click(sender As Object, e As EventArgs) Handles cmdrlm.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rlm(formula = , data, weights, ..., subset, na.action, method = c(""M"", ""MM"", ""model.frame""), wt.method = c(""inv.var"", ""case""), model = TRUE, x.ret = TRUE, y.ret = FALSE, contrasts = NULL)", 173)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::rlm(formula = , data, weights, ..., subset, na.action, method = c(""M"", ""MM"", ""model.frame""), wt.method = c(""inv.var"", ""case""), model = TRUE, x.ret = TRUE, y.ret = FALSE, contrasts = NULL)", 173)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rlm()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::rlm()", 1)
         End If
     End Sub
 
@@ -454,6 +471,7 @@ Public Class dlgModelling
         bUpdating = True
         ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         bUpdating = False
+        SetObjectInFunctions()
     End Sub
 
     Private Sub TryScript()
@@ -517,26 +535,6 @@ Public Class dlgModelling
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        Dim strScript As String = ""
-        Dim strFunc As String
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorModelling.ucrAvailableDataFrames.clsCurrDataFrame)
-        strFunc = clsAttach.ToScript(strScript)
-        frmMain.clsRLink.RunScript(strScript & strFunc)
-        ucrBase.clsRsyntax.SetAssignTo(ucrSaveResult.GetText(), strTempModel:=ucrSaveResult.GetText(), strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
-    End Sub
-
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        Dim strScript As String = ""
-        Dim strFunc As String
-        strFunc = clsDetach.ToScript(strScript)
-        frmMain.clsRLink.RunScript(strScript & strFunc)
-    End Sub
-
-    Private Sub ucrSelectorModelling_Load(sender As Object, e As EventArgs) Handles ucrSelectorModelling.Load
-
-    End Sub
-
     Private Sub GraphAssignTo()
         clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
         clsAutoplot.SetAssignTo("last_autoplot", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_autoplot")
@@ -547,21 +545,26 @@ Public Class dlgModelling
     End Sub
 
     Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
+        If Not bUpdating Then
+            SetObjectInFunctions()
+        End If
+    End Sub
+
+    Private Sub SetObjectInFunctions()
         Dim strAssginTo As String
 
-        If Not bUpdating Then
-            strAssginTo = ucrBase.clsRsyntax.GetstrAssignTo()
-            clsFormulaFunction.AddParameter("x", ucrBase.clsRsyntax.GetstrAssignTo())
-            clsAnovaFunction.AddParameter("object", strAssginTo)
-            clsSummaryFunction.AddParameter("object", strAssginTo)
-            clsConfint.AddParameter("object", strAssginTo)
-            clsVisReg.AddParameter("fit", strAssginTo)
-            clsAutoplot.AddParameter("object", strAssginTo)
-            clsResidualFunction.AddParameter("object", strAssginTo)
-            clsFittedValuesFunction.AddParameter("object", strAssginTo)
-            clsRstandardFunction.AddParameter("model", strAssginTo)
-            clsHatvaluesFunction.AddParameter("model", strAssginTo)
-        End If
+        strAssginTo = ucrBase.clsRsyntax.GetstrAssignTo()
+
+        clsFormulaFunction.AddParameter("x", strAssginTo)
+        clsAnovaFunction.AddParameter("object", strAssginTo)
+        clsSummaryFunction.AddParameter("object", strAssginTo)
+        clsConfint.AddParameter("object", strAssginTo)
+        clsVisReg.AddParameter("fit", strAssginTo)
+        clsAutoplot.AddParameter("object", strAssginTo)
+        clsResidualFunction.AddParameter("object", strAssginTo)
+        clsFittedValuesFunction.AddParameter("object", strAssginTo)
+        clsRstandardFunction.AddParameter("model", strAssginTo)
+        clsHatvaluesFunction.AddParameter("model", strAssginTo)
     End Sub
 
     Private Sub ucrInputComboRPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboRPackage.ControlValueChanged
@@ -571,19 +574,16 @@ Public Class dlgModelling
                 grpextRemes.Visible = False
                 grplme4.Visible = False
                 grpMASS.Visible = False
-
             Case "extRemes"
                 grpStats.Visible = False
                 grpextRemes.Visible = True
                 grplme4.Visible = False
                 grpMASS.Visible = False
-
             Case "lme4"
                 grpStats.Visible = False
                 grpextRemes.Visible = False
                 grplme4.Visible = True
                 grpMASS.Visible = False
-
             Case "MASS"
                 grpStats.Visible = False
                 grpextRemes.Visible = False

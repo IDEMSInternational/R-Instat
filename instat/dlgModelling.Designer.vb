@@ -23,7 +23,7 @@ Partial Class dlgModelling
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgModelling))
-        Me.lblTest = New System.Windows.Forms.Label()
+        Me.lblModel = New System.Windows.Forms.Label()
         Me.cmdspline = New System.Windows.Forms.Button()
         Me.cmdarima = New System.Windows.Forms.Button()
         Me.cmdloglin = New System.Windows.Forms.Button()
@@ -46,6 +46,7 @@ Partial Class dlgModelling
         Me.cmdSquareBrackets = New System.Windows.Forms.Button()
         Me.cmdMinus = New System.Windows.Forms.Button()
         Me.grpFirstCalc = New System.Windows.Forms.GroupBox()
+        Me.cmdTilda = New System.Windows.Forms.Button()
         Me.cmdTry = New System.Windows.Forms.Button()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.cmdPredict = New System.Windows.Forms.Button()
@@ -78,11 +79,11 @@ Partial Class dlgModelling
         Me.grpMASS.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblTest
+        'lblModel
         '
-        resources.ApplyResources(Me.lblTest, "lblTest")
-        Me.lblTest.Name = "lblTest"
-        Me.lblTest.Tag = "Test"
+        resources.ApplyResources(Me.lblModel, "lblModel")
+        Me.lblModel.Name = "lblModel"
+        Me.lblModel.Tag = "Test"
         '
         'cmdspline
         '
@@ -221,6 +222,7 @@ Partial Class dlgModelling
         '
         'grpFirstCalc
         '
+        Me.grpFirstCalc.Controls.Add(Me.cmdTilda)
         Me.grpFirstCalc.Controls.Add(Me.cmdMultiply)
         Me.grpFirstCalc.Controls.Add(Me.cmdColon)
         Me.grpFirstCalc.Controls.Add(Me.cmdPlus)
@@ -229,12 +231,17 @@ Partial Class dlgModelling
         Me.grpFirstCalc.Controls.Add(Me.cmdOpeningBracket)
         Me.grpFirstCalc.Controls.Add(Me.cmdDiv)
         Me.grpFirstCalc.Controls.Add(Me.cmdDoubleBracket)
-        Me.grpFirstCalc.Controls.Add(Me.cmdClear)
         Me.grpFirstCalc.Controls.Add(Me.cmdSquareBrackets)
         Me.grpFirstCalc.Controls.Add(Me.cmdMinus)
         resources.ApplyResources(Me.grpFirstCalc, "grpFirstCalc")
         Me.grpFirstCalc.Name = "grpFirstCalc"
         Me.grpFirstCalc.TabStop = False
+        '
+        'cmdTilda
+        '
+        resources.ApplyResources(Me.cmdTilda, "cmdTilda")
+        Me.cmdTilda.Name = "cmdTilda"
+        Me.cmdTilda.UseVisualStyleBackColor = True
         '
         'cmdTry
         '
@@ -413,12 +420,13 @@ Partial Class dlgModelling
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.cmdPredict)
+        Me.Controls.Add(Me.cmdClear)
         Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.ucrInputTryMessage)
         Me.Controls.Add(Me.cmdTry)
         Me.Controls.Add(Me.grpFirstCalc)
         Me.Controls.Add(Me.ucrInputComboRPackage)
-        Me.Controls.Add(Me.lblTest)
+        Me.Controls.Add(Me.lblModel)
         Me.Controls.Add(Me.ucrReceiverForTestColumn)
         Me.Controls.Add(Me.ucrSelectorModelling)
         Me.Controls.Add(Me.ucrBase)
@@ -440,7 +448,7 @@ Partial Class dlgModelling
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorModelling As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrInputComboRPackage As ucrInputComboBox
-    Friend WithEvents lblTest As Label
+    Friend WithEvents lblModel As Label
     Friend WithEvents ucrReceiverForTestColumn As ucrReceiverExpression
     Friend WithEvents grpStats As GroupBox
     Friend WithEvents cmdspline As Button
@@ -485,4 +493,5 @@ Partial Class dlgModelling
     Friend WithEvents cmdHelp As Button
     Friend WithEvents lblRpackage As Label
     Friend WithEvents ucrChkIncludeArguments As ucrCheck
+    Friend WithEvents cmdTilda As Button
 End Class
