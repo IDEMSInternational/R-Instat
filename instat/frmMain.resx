@@ -486,7 +486,7 @@
     <value>Two Variables</value>
   </data>
   <data name="mnuModelThreeVariablesFitModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelThreeVariablesFitModel.Text" xml:space="preserve">
     <value>Fit Model...</value>
@@ -495,7 +495,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelThreeVariablesChooseModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelThreeVariablesChooseModel.Text" xml:space="preserve">
     <value>Choose Model...</value>
@@ -504,7 +504,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelThreeVariablesUseModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelThreeVariablesUseModel.Text" xml:space="preserve">
     <value>Use Model...</value>
@@ -516,7 +516,7 @@
     <value>Three Variables</value>
   </data>
   <data name="mnuModelFourVariablesFitModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelFourVariablesFitModel.Text" xml:space="preserve">
     <value>Fit Model...</value>
@@ -525,7 +525,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelFourVariablesChooseModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelFourVariablesChooseModel.Text" xml:space="preserve">
     <value>Choose Model...</value>
@@ -534,7 +534,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelFourVariablesUseModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelFourVariablesUseModel.Text" xml:space="preserve">
     <value>Use Model...</value>
@@ -546,7 +546,7 @@
     <value>Four Variables</value>
   </data>
   <data name="mnuModelGeneralFitModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelGeneralFitModel.Text" xml:space="preserve">
     <value>Fit Model...</value>
@@ -555,7 +555,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelGeneralChooseModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelGeneralChooseModel.Text" xml:space="preserve">
     <value>Choose Model...</value>
@@ -564,7 +564,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelGeneralUseModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelGeneralUseModel.Text" xml:space="preserve">
     <value>Use Model...</value>
@@ -583,6 +583,12 @@
   </data>
   <data name="mnuModelHypothesisTests.Text" xml:space="preserve">
     <value>Hypothesis Tests...</value>
+  </data>
+  <data name="mnuModelModel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 22</value>
+  </data>
+  <data name="mnuModelModel.Text" xml:space="preserve">
+    <value>Model...</value>
   </data>
   <data name="mnuModelOtherOneVariableExactResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 22</value>
@@ -5781,6 +5787,9 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>
   </data>
@@ -7072,6 +7081,12 @@
     <value>mnuClimaticCMSAFExporttoCMSAFRToolbox</value>
   </data>
   <data name="&gt;&gt;mnuClimaticCMSAFExporttoCMSAFRToolbox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticMapping.Name" xml:space="preserve">
+    <value>mnuClimaticMapping</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticMapping.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticModels.Name" xml:space="preserve">
@@ -8898,10 +8913,10 @@
   <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticMapping.Name" xml:space="preserve">
-    <value>mnuClimaticMapping</value>
+  <data name="&gt;&gt;mnuModelModel.Name" xml:space="preserve">
+    <value>mnuModelModel</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticMapping.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuModelModel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
