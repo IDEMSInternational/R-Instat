@@ -65,7 +65,6 @@ Partial Class dlgModelling
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.lblRpackage = New System.Windows.Forms.Label()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
-        Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
         Me.ucrSaveResult = New instat.ucrSave()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
@@ -360,15 +359,6 @@ Partial Class dlgModelling
         resources.ApplyResources(Me.ucrChkIncludeArguments, "ucrChkIncludeArguments")
         Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
         '
-        'ucrReceiverMultiple
-        '
-        resources.ApplyResources(Me.ucrReceiverMultiple, "ucrReceiverMultiple")
-        Me.ucrReceiverMultiple.frmParent = Me
-        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
-        Me.ucrReceiverMultiple.Selector = Nothing
-        Me.ucrReceiverMultiple.strNcFilePath = ""
-        Me.ucrReceiverMultiple.ucrSelector = Nothing
-        '
         'ucrSaveResult
         '
         resources.ApplyResources(Me.ucrSaveResult, "ucrSaveResult")
@@ -421,7 +411,6 @@ Partial Class dlgModelling
         Me.Controls.Add(Me.ucrChkIncludeArguments)
         Me.Controls.Add(Me.lblRpackage)
         Me.Controls.Add(Me.cmdHelp)
-        Me.Controls.Add(Me.ucrReceiverMultiple)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.cmdPredict)
         Me.Controls.Add(Me.ucrSaveResult)
@@ -493,7 +482,6 @@ Partial Class dlgModelling
     Friend WithEvents cmdglmmPQL As Button
     Friend WithEvents cmdglmnb As Button
     Friend WithEvents cmdrlm As Button
-    Friend WithEvents ucrReceiverMultiple As ucrReceiverMultiple
     Friend WithEvents cmdHelp As Button
     Friend WithEvents lblRpackage As Label
     Friend WithEvents ucrChkIncludeArguments As ucrCheck
