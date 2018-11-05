@@ -467,9 +467,9 @@ Public Class RSyntax
     Public Sub ClearCodes()
         lstBeforeCodes = New List(Of RCodeStructure)
         lstAfterCodes = New List(Of RCodeStructure)
-        clsBaseFunction = Nothing
-        clsBaseOperator = Nothing
-        clsBaseCommandString = Nothing
+        clsBaseFunction = New RFunction
+        clsBaseOperator = New ROperator
+        clsBaseCommandString = New RCodeStructure
         strCommandString = ""
         bUseBaseFunction = False
         bUseBaseOperator = False
