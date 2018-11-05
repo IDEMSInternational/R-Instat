@@ -2075,4 +2075,8 @@ Public Class frmMain
     Private Sub mnuClimaticMapping_Click(sender As Object, e As EventArgs) Handles mnuClimaticMapping.Click
         dlgClimaticStationMaps.ShowDialog()
     End Sub
+
+    Private Sub mnuModelModel_Click(sender As Object, e As EventArgs) Handles mnuModelModel.Click
+        dlgModelling.ShowDialog()
+    End Sub
 End Class
