@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.IO
-Imports instat
 Imports instat.Translations
 Public Class dlgExportToCPT
     Dim bFirstLoad As Boolean = True
@@ -85,8 +84,11 @@ Public Class dlgExportToCPT
         ucrReceiverStationTwoDF.SetParameter(New RParameter("station_latlondata"))
         ucrReceiverStationTwoDF.SetParameterIsString()
         ucrReceiverStationTwoDF.strSelectorHeading = "Numerics"
-        'ucrReceiverStationTwoDF.SetClimaticType("station")
         ucrReceiverStationTwoDF.bAutoFill = True
+
+        ucrInputCodeMissingValues.SetParameter(New RParameter("na_code"))
+        ucrInputCodeMissingValues.SetRDefault("-999")
+        ucrInputCodeMissingValues.AddQuotesIfUnrecognised = False
 
         ucrInputFilePath.SetParameter(New RParameter("file", 0))
         ucrInputFilePath.IsReadOnly = True
@@ -146,24 +148,25 @@ Public Class dlgExportToCPT
         ucrReceiverLongitude.SetRCode(clsOutputCPT, bReset)
         ucrReceiverStationTwoDF.SetRCode(clsOutputCPT, bReset)
         ucrPnlNoOfDF.SetRCode(clsOutputCPT, bReset)
+        ucrInputCodeMissingValues.SetRCode(clsOutputCPT, bReset)
         ucrInputFilePath.SetRCode(clsExportCPT)
     End Sub
 
     Private Sub TestOkEnabled()
         If rdoTwoDFLong.Checked Then
-            If Not ucrReceiverStationTwoDF.IsEmpty AndAlso Not ucrReceiverStationOneDF.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongitude.IsEmpty Then
+            If Not ucrReceiverStationTwoDF.IsEmpty AndAlso Not ucrReceiverStationOneDF.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongitude.IsEmpty AndAlso Not ucrInputFilePath.IsEmpty AndAlso Not ucrInputCodeMissingValues.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoOneDF.Checked Then
-            If Not ucrReceiverStationOneDF.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongitude.IsEmpty Then
+            If Not ucrReceiverStationOneDF.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongitude.IsEmpty AndAlso Not ucrInputFilePath.IsEmpty AndAlso Not ucrInputCodeMissingValues.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoTwoDFWide.Checked Then
-            If Not ucrReceiverStationTwoDF.IsEmpty AndAlso Not ucrReceiverMultipleStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongitude.IsEmpty Then
+            If Not ucrReceiverStationTwoDF.IsEmpty AndAlso Not ucrReceiverMultipleStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongitude.IsEmpty AndAlso Not ucrInputFilePath.IsEmpty AndAlso Not ucrInputCodeMissingValues.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -173,7 +176,7 @@ Public Class dlgExportToCPT
         End If
     End Sub
 
-    Private Sub ucrSaveExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverStationOneDF.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged
+    Private Sub ucrSaveExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverStationOneDF.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputCodeMissingValues.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -251,5 +254,4 @@ Public Class dlgExportToCPT
             ucrReceiverLongitude.Selector = ucrSelectorTwoDF
         End If
     End Sub
-
 End Class
