@@ -30,6 +30,9 @@ Public Class dlgThreeVariableModelling
     Public clsFormulaOperator As ROperator
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
 
+    'Saving Operators/Functions
+    Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
+
     Private clsExplanatoryOperator As New ROperator
     Private clsFirstTransformFunction As RFunction
     Private clsFirstPowerOperator As ROperator
@@ -119,6 +122,11 @@ Public Class dlgThreeVariableModelling
         clsFormulaOperator = New ROperator
         clsExplanatoryOperator = New ROperator
 
+        clsRstandardFunction = New RFunction
+        clsHatvaluesFunction = New RFunction
+        clsResidualFunction = New RFunction
+        clsFittedValuesFunction = New RFunction
+
         ucrSelectorThreeVariableModelling.Reset()
         ucrReceiverResponse.SetMeAsReceiver()
 
@@ -181,6 +189,11 @@ Public Class dlgThreeVariableModelling
         clsVisReg.AddParameter("gg", "FALSE")
         clsVisReg.iCallType = 3
         clsVisReg.bExcludeAssignedFunctionOutput = False
+
+        clsResidualFunction.SetRCommand("residuals")
+        clsFittedValuesFunction.SetRCommand("fitted.values")
+        clsRstandardFunction.SetRCommand("rstandard")
+        clsHatvaluesFunction.SetRCommand("hatvalues")
 
         clsLM.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText, bAssignToIsPrefix:=True)
         clsGLM.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText, bAssignToIsPrefix:=True)
@@ -288,7 +301,7 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetDisplayOptions)
+        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesFunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames, bReset:=bResetDisplayOptions)
         sdgSimpleRegOptions.ShowDialog()
         GraphAssignTo()
         bResetDisplayOptions = False
@@ -314,6 +327,10 @@ Public Class dlgThreeVariableModelling
             clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsResidualFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsFittedValuesFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsLMOrGLM)
         End If
     End Sub
