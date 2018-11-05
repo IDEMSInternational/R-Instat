@@ -144,7 +144,6 @@ Public Class dlgDeleteRowsOrColums
 
     Private Sub SetMaxMin()
         If ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrSelectorForDeleteColumns.Reset()
             ucrNudFrom.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
             ucrNudTo.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
         End If
