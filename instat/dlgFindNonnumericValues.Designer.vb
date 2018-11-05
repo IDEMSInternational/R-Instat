@@ -24,10 +24,13 @@ Partial Class dlgFindNonnumericValues
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgFindNonnumericValues))
         Me.lblColumn = New System.Windows.Forms.Label()
-        Me.ucrSaveLogicalColumn = New instat.ucrSave()
+        Me.ucrChkFilterNonumerics = New instat.ucrCheck()
+        Me.ucrChkShowSummary = New instat.ucrCheck()
         Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorShowNonNumericValues = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputColumnName = New instat.ucrInputTextBox()
+        Me.lblColumnName = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblColumn
@@ -35,10 +38,17 @@ Partial Class dlgFindNonnumericValues
         resources.ApplyResources(Me.lblColumn, "lblColumn")
         Me.lblColumn.Name = "lblColumn"
         '
-        'ucrSaveLogicalColumn
+        'ucrChkFilterNonumerics
         '
-        resources.ApplyResources(Me.ucrSaveLogicalColumn, "ucrSaveLogicalColumn")
-        Me.ucrSaveLogicalColumn.Name = "ucrSaveLogicalColumn"
+        Me.ucrChkFilterNonumerics.Checked = False
+        resources.ApplyResources(Me.ucrChkFilterNonumerics, "ucrChkFilterNonumerics")
+        Me.ucrChkFilterNonumerics.Name = "ucrChkFilterNonumerics"
+        '
+        'ucrChkShowSummary
+        '
+        Me.ucrChkShowSummary.Checked = False
+        resources.ApplyResources(Me.ucrChkShowSummary, "ucrChkShowSummary")
+        Me.ucrChkShowSummary.Name = "ucrChkShowSummary"
         '
         'ucrReceiverColumn
         '
@@ -62,18 +72,34 @@ Partial Class dlgFindNonnumericValues
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'dlgShowNonnumericValues
+        'ucrInputColumnName
+        '
+        Me.ucrInputColumnName.AddQuotesIfUnrecognised = True
+        Me.ucrInputColumnName.IsMultiline = False
+        Me.ucrInputColumnName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputColumnName, "ucrInputColumnName")
+        Me.ucrInputColumnName.Name = "ucrInputColumnName"
+        '
+        'lblColumnName
+        '
+        resources.ApplyResources(Me.lblColumnName, "lblColumnName")
+        Me.lblColumnName.Name = "lblColumnName"
+        '
+        'dlgFindNonnumericValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrSaveLogicalColumn)
+        Me.Controls.Add(Me.lblColumnName)
+        Me.Controls.Add(Me.ucrInputColumnName)
+        Me.Controls.Add(Me.ucrChkFilterNonumerics)
+        Me.Controls.Add(Me.ucrChkShowSummary)
         Me.Controls.Add(Me.lblColumn)
         Me.Controls.Add(Me.ucrReceiverColumn)
         Me.Controls.Add(Me.ucrSelectorShowNonNumericValues)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MinimizeBox = False
-        Me.Name = "dlgShowNonnumericValues"
+        Me.Name = "dlgFindNonnumericValues"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -81,7 +107,10 @@ Partial Class dlgFindNonnumericValues
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorShowNonNumericValues As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverColumn As ucrReceiverSingle
     Friend WithEvents lblColumn As Label
-    Friend WithEvents ucrSaveLogicalColumn As ucrSave
+    Friend WithEvents ucrChkShowSummary As ucrCheck
+    Friend WithEvents ucrReceiverColumn As ucrReceiverSingle
+    Friend WithEvents ucrChkFilterNonumerics As ucrCheck
+    Friend WithEvents ucrInputColumnName As ucrInputTextBox
+    Friend WithEvents lblColumnName As Label
 End Class

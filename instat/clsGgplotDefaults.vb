@@ -379,4 +379,25 @@ Public Class GgplotDefaults
             Return dctTempYPosition
         End Get
     End Property
+
+    Public Shared ReadOnly Property dctStartMonthOriginDates As Dictionary(Of String, String)
+        Get
+            Dim dctDateStartMonths As New Dictionary(Of String, String)
+
+            dctDateStartMonths.Add("January", Chr(34) & "2015-12-31" & Chr(34))
+            dctDateStartMonths.Add("February", Chr(34) & "2016-01-31" & Chr(34))
+            dctDateStartMonths.Add("March", Chr(34) & "2015-02-28" & Chr(34))
+            dctDateStartMonths.Add("April", Chr(34) & "2015-03-31" & Chr(34))
+            dctDateStartMonths.Add("May", Chr(34) & "2015-04-30" & Chr(34))
+            dctDateStartMonths.Add("June", Chr(34) & "2015-05-31" & Chr(34))
+            dctDateStartMonths.Add("July", Chr(34) & "2015-06-30" & Chr(34))
+            dctDateStartMonths.Add("August", Chr(34) & "2015-07-31" & Chr(34))
+            dctDateStartMonths.Add("September", Chr(34) & "2015-08-31" & Chr(34))
+            dctDateStartMonths.Add("October", Chr(34) & "2015-09-30" & Chr(34))
+            dctDateStartMonths.Add("November", Chr(34) & "2015-10-31" & Chr(34))
+            dctDateStartMonths.Add("December", Chr(34) & "2015-11-30" & Chr(34))
+
+            Return dctDateStartMonths
+        End Get
+    End Property
 End Class

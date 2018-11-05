@@ -46,11 +46,13 @@ Partial Class dlgPICSARainfall
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrChkPoints = New instat.ucrCheck()
         Me.ucrSave = New instat.ucrSave()
-        Me.ucrPICSARainfallSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorPICSARainfall = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
+        Me.ucrReceiverColourBy = New instat.ucrReceiverSingle()
         Me.ucrVariablesAsFactorForPicsa = New instat.ucrVariablesAsFactor()
         Me.cmdPICSAOptions = New System.Windows.Forms.Button()
+        Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
+        Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblFactorOptional
@@ -59,10 +61,10 @@ Partial Class dlgPICSARainfall
         Me.lblFactorOptional.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblFactorOptional.Location = New System.Drawing.Point(248, 232)
         Me.lblFactorOptional.Name = "lblFactorOptional"
-        Me.lblFactorOptional.Size = New System.Drawing.Size(88, 13)
+        Me.lblFactorOptional.Size = New System.Drawing.Size(103, 13)
         Me.lblFactorOptional.TabIndex = 18
         Me.lblFactorOptional.Tag = "Factor_Optional:"
-        Me.lblFactorOptional.Text = "Factor (Optional):"
+        Me.lblFactorOptional.Text = "Colour By (Optional):"
         '
         'lblXVariable
         '
@@ -133,16 +135,16 @@ Partial Class dlgPICSARainfall
         Me.ucrSave.Size = New System.Drawing.Size(254, 24)
         Me.ucrSave.TabIndex = 25
         '
-        'ucrPICSARainfallSelector
+        'ucrSelectorPICSARainfall
         '
-        Me.ucrPICSARainfallSelector.bDropUnusedFilterLevels = False
-        Me.ucrPICSARainfallSelector.bShowHiddenColumns = False
-        Me.ucrPICSARainfallSelector.bUseCurrentFilter = True
-        Me.ucrPICSARainfallSelector.Location = New System.Drawing.Point(9, 9)
-        Me.ucrPICSARainfallSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrPICSARainfallSelector.Name = "ucrPICSARainfallSelector"
-        Me.ucrPICSARainfallSelector.Size = New System.Drawing.Size(221, 189)
-        Me.ucrPICSARainfallSelector.TabIndex = 13
+        Me.ucrSelectorPICSARainfall.bDropUnusedFilterLevels = False
+        Me.ucrSelectorPICSARainfall.bShowHiddenColumns = False
+        Me.ucrSelectorPICSARainfall.bUseCurrentFilter = True
+        Me.ucrSelectorPICSARainfall.Location = New System.Drawing.Point(9, 9)
+        Me.ucrSelectorPICSARainfall.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorPICSARainfall.Name = "ucrSelectorPICSARainfall"
+        Me.ucrSelectorPICSARainfall.Size = New System.Drawing.Size(221, 189)
+        Me.ucrSelectorPICSARainfall.TabIndex = 13
         '
         'ucrBase
         '
@@ -151,17 +153,17 @@ Partial Class dlgPICSARainfall
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 26
         '
-        'ucrFactorOptionalReceiver
+        'ucrReceiverColourBy
         '
-        Me.ucrFactorOptionalReceiver.frmParent = Me
-        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(248, 247)
-        Me.ucrFactorOptionalReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
-        Me.ucrFactorOptionalReceiver.Selector = Nothing
-        Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(125, 26)
-        Me.ucrFactorOptionalReceiver.strNcFilePath = ""
-        Me.ucrFactorOptionalReceiver.TabIndex = 19
-        Me.ucrFactorOptionalReceiver.ucrSelector = Nothing
+        Me.ucrReceiverColourBy.frmParent = Me
+        Me.ucrReceiverColourBy.Location = New System.Drawing.Point(248, 247)
+        Me.ucrReceiverColourBy.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColourBy.Name = "ucrReceiverColourBy"
+        Me.ucrReceiverColourBy.Selector = Nothing
+        Me.ucrReceiverColourBy.Size = New System.Drawing.Size(125, 26)
+        Me.ucrReceiverColourBy.strNcFilePath = ""
+        Me.ucrReceiverColourBy.TabIndex = 19
+        Me.ucrReceiverColourBy.ucrSelector = Nothing
         '
         'ucrVariablesAsFactorForPicsa
         '
@@ -177,6 +179,7 @@ Partial Class dlgPICSARainfall
         '
         'cmdPICSAOptions
         '
+        Me.cmdPICSAOptions.Enabled = False
         Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 260)
         Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
@@ -185,22 +188,46 @@ Partial Class dlgPICSARainfall
         Me.cmdPICSAOptions.Tag = ""
         Me.cmdPICSAOptions.Text = "PICSA Options"
         Me.cmdPICSAOptions.UseVisualStyleBackColor = True
-        Me.cmdPICSAOptions.Enabled = False
+        '
+        'ucrReceiverFacetBy
+        '
+        Me.ucrReceiverFacetBy.frmParent = Me
+        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(248, 293)
+        Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
+        Me.ucrReceiverFacetBy.Selector = Nothing
+        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(125, 26)
+        Me.ucrReceiverFacetBy.strNcFilePath = ""
+        Me.ucrReceiverFacetBy.TabIndex = 32
+        Me.ucrReceiverFacetBy.ucrSelector = Nothing
+        '
+        'lblFacetBy
+        '
+        Me.lblFacetBy.AutoSize = True
+        Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFacetBy.Location = New System.Drawing.Point(248, 278)
+        Me.lblFacetBy.Name = "lblFacetBy"
+        Me.lblFacetBy.Size = New System.Drawing.Size(100, 13)
+        Me.lblFacetBy.TabIndex = 31
+        Me.lblFacetBy.Tag = ""
+        Me.lblFacetBy.Text = "Facet By (Optional):"
         '
         'dlgPICSARainfall
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(429, 407)
+        Me.Controls.Add(Me.ucrReceiverFacetBy)
+        Me.Controls.Add(Me.lblFacetBy)
         Me.Controls.Add(Me.cmdLineOptions)
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkPoints)
         Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.cmdPICSAOptions)
-        Me.Controls.Add(Me.ucrPICSARainfallSelector)
+        Me.Controls.Add(Me.ucrSelectorPICSARainfall)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrFactorOptionalReceiver)
+        Me.Controls.Add(Me.ucrReceiverColourBy)
         Me.Controls.Add(Me.lblFactorOptional)
         Me.Controls.Add(Me.lblXVariable)
         Me.Controls.Add(Me.lblAvailable)
@@ -218,9 +245,9 @@ Partial Class dlgPICSARainfall
 
     Friend WithEvents ucrChkPoints As ucrCheck
     Friend WithEvents ucrSave As ucrSave
-    Friend WithEvents ucrPICSARainfallSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorPICSARainfall As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
+    Friend WithEvents ucrReceiverColourBy As ucrReceiverSingle
     Friend WithEvents lblFactorOptional As Label
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents lblXVariable As Label
@@ -229,4 +256,6 @@ Partial Class dlgPICSARainfall
     Friend WithEvents cmdLineOptions As Button
     Friend WithEvents ucrVariablesAsFactorForPicsa As ucrVariablesAsFactor
     Friend WithEvents cmdPICSAOptions As Button
+    Friend WithEvents ucrReceiverFacetBy As ucrReceiverSingle
+    Friend WithEvents lblFacetBy As Label
 End Class
