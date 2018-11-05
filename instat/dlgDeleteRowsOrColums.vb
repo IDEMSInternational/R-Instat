@@ -134,7 +134,7 @@ Public Class dlgDeleteRowsOrColums
         End If
     End Sub
 
-    Private Sub ucrSelectorForDeleteColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForDeleteColumns.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged
+    Private Sub ucrSelectorForDeleteColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForDeleteColumns.ControlValueChanged
         SetMaxMin()
     End Sub
 
@@ -148,4 +148,5 @@ Public Class dlgDeleteRowsOrColums
             ucrNudTo.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
         End If
     End Sub
+
 End Class
