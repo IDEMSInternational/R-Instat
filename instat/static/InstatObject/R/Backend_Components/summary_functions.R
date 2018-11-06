@@ -435,7 +435,7 @@ na_check <- function(x, na_type = "n", na_max_n = NULL, na_max_prop = NULL, na_m
     return(summary_count_missing(x)/summary_count(x) <= na_max_prop)
   }
    else if(na_type == "n_non_miss") {
-    return(summary_count_non_missing(x) >= na_min_n)
+    return(summary_count_non_missing(x) < na_min_n)
   }
   else if(na_type == "FUN") {
     return(na_FUN(x, ...))
