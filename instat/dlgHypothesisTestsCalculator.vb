@@ -79,7 +79,7 @@ Public Class dlgHypothesisTestsCalculator
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString, bReset)
     End Sub
 
     Private Sub ucrReceiverForTestColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForTestColumn.SelectionChanged
@@ -652,11 +652,4 @@ Public Class dlgHypothesisTestsCalculator
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
-        If ucrSaveResult.ucrChkSave.Checked Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveResult.GetText(), strTempModel:=ucrSaveResult.GetText(), strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
-        Else
-            ucrBase.clsRsyntax.SetAssignTo("Last_Test", strTempModel:="Last_Test", strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
-        End If
-    End Sub
 End Class
