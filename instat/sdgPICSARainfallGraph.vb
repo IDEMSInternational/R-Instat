@@ -992,7 +992,7 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrLineControls_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrLineControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddMean.ControlValueChanged, ucrChkAddTerciles.ControlValueChanged, ucrChkAddMedian.ControlValueChanged, ucrChkAddMeanLabel.ControlValueChanged, ucrChkAddMedianLabel.ControlValueChanged, ucrChkAddTercilesLabel.ControlValueChanged, ucrChkMeanLineLabelIncludeValue.ControlValueChanged, ucrChkMedianLineLabelIncludeValue.ControlValueChanged, ucrChkTercilesLineLabelIncludeValue.ControlValueChanged
         AddRemoveHline()
     End Sub
 
@@ -1063,11 +1063,11 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrPnlXAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrPnlXAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlXAxisTitle.ControlValueChanged, ucrInputXAxisTitle.ControlValueChanged
         SetXLabel()
     End Sub
 
-    Private Sub ucrPnlYAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrPnlYAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrPnlYAxisTitle.ControlValueChanged, ucrInputYAxisTitle.ControlValueChanged
         SetYLabel()
     End Sub
 
@@ -1133,51 +1133,6 @@ Public Class sdgPICSARainfallGraph
         AddRemoveLabs()
     End Sub
 
-    Private Sub AddRemoveGraphTitleSize()
-        If ucrNudTitleSize.GetText <> "" Then
-            clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementTitle)
-        Else
-            clsThemeFunction.RemoveParameterByName("plot.title")
-        End If
-        AddRemoveTheme()
-    End Sub
-
-    Private Sub AddRemoveGraphSubTitleSize()
-        If ucrNudSubTitleSize.GetText <> "" Then
-            clsThemeFunction.AddParameter("plot.subtitle", clsRFunctionParameter:=clsPlotElementSubTitle)
-        Else
-            clsThemeFunction.RemoveParameterByName("plot.subtitle")
-        End If
-        AddRemoveTheme()
-    End Sub
-
-    Private Sub AddRemoveGraphCaptionSize()
-        If ucrNudCaptionSize.GetText <> "" Then
-            clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaption)
-        Else
-            clsThemeFunction.RemoveParameterByName("plot.caption")
-        End If
-        AddRemoveTheme()
-    End Sub
-
-    Private Sub AddRemoveXAxisTitleSize()
-        If ucrNudXAxisTitleSize.GetText <> "" Then
-            clsThemeFunction.AddParameter("axis.title.x", clsRFunctionParameter:=clsXElementTitle)
-        Else
-            clsThemeFunction.RemoveParameterByName("axis.title.x")
-        End If
-        AddRemoveTheme()
-    End Sub
-
-    Private Sub AddRemoveYAxisTitleSize()
-        If ucrNudYAxisTitleSize.GetText <> "" Then
-            clsThemeFunction.AddParameter("axis.title.y", clsRFunctionParameter:=clsYElementTitle)
-        Else
-            clsThemeFunction.RemoveParameterByName("axis.title.y")
-        End If
-        AddRemoveTheme()
-    End Sub
-
     Private Sub AddRemoveAngleSizeXAxis()
         If bRCodeSet Then
             If (ucrChkXAxisAngle.Checked AndAlso ucrNudXAxisAngle.GetText <> "") OrElse (ucrChkXAxisLabelSize.Checked AndAlso ucrNudXaxisLabelSize.GetText <> "") Then
@@ -1207,24 +1162,6 @@ Public Class sdgPICSARainfallGraph
         AddRemoveTheme()
     End Sub
 
-    Private Sub AddRemovePanelGridMajor()
-        'If (ucrChkMajorGridLineColour.Checked AndAlso Not ucrInputMajorGridLineColour.IsEmpty()) OrElse (ucrChkMajorGridLineLinetype.Checked AndAlso Not ucrInputMajorGridLineLinetype.IsEmpty()) OrElse (ucrChkMajorGridLineSize.Checked AndAlso ucrNudMajorGridLineSize.GetText <> "") Then
-        '    clsThemeFunction.AddParameter("panel.grid.major", clsRFunctionParameter:=clsElementPanelGridMajor)
-        'Else
-        '    clsThemeFunction.RemoveParameterByName("panel.grid.major")
-        'End If
-        AddRemoveTheme()
-    End Sub
-
-    Private Sub AddRemovePanelGridMinor()
-        'If (ucrChkMinorGridLineColour.Checked AndAlso Not ucrInputMinorGridLineColour.IsEmpty()) OrElse (ucrChkMinorGridLineLinetype.Checked AndAlso Not ucrInputMinorGridLineLinetype.IsEmpty()) OrElse (ucrChkMinorGridLineSize.Checked AndAlso ucrNudMinorGridLineSize.GetText <> "") Then
-        '    clsThemeFunction.AddParameter("panel.grid.minor", clsRFunctionParameter:=clsElementPanelGridMinor)
-        'Else
-        '    clsThemeFunction.RemoveParameterByName("panel.grid.minor")
-        'End If
-        AddRemoveTheme()
-    End Sub
-
     Private Sub AddRemovePanelBorder()
         If bRCodeSet Then
             If (ucrChkBorderColour.Checked AndAlso Not ucrInputBorderColour.IsEmpty()) OrElse (ucrChkBorderLineType.Checked AndAlso Not ucrInputBorderLinetype.IsEmpty()) OrElse (UcrChkBorderSize.Checked AndAlso ucrNudBorderSize.GetText <> "") Then
@@ -1236,44 +1173,16 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrChkPnlBackgroundColour_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrChkPnlBackgroundColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPnlBackgroundColour.ControlValueChanged, UcrChkPnlBackgroundFill.ControlValueChanged, UcrChkPnlBackgroundLineType.ControlValueChanged, UcrChkPnlBackgroundSize.ControlValueChanged
         AddRemovePanelBackground()
     End Sub
 
-    Private Sub UcrChkMajorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore)
-        AddRemovePanelGridMajor()
-    End Sub
-
-    Private Sub UcrChkMinorGridLineColour_ControlValueChanged(ucrChangedControl As ucrCore)
-        AddRemovePanelGridMinor()
-    End Sub
-
-    Private Sub UcrChkTitleSize_ControlValueChanged(ucrChangedControl As ucrCore)
-        AddRemoveGraphTitleSize()
-    End Sub
-
-    Private Sub UcrChkSubTitleSize_ControlValueChanged(ucrChangedControl As ucrCore)
-        AddRemoveGraphSubTitleSize()
-    End Sub
-
-    Private Sub UcrChkCaptionSize_ControlValueChanged(ucrChangedControl As ucrCore)
-        AddRemoveGraphCaptionSize()
-    End Sub
-
-    Private Sub UcrChkXAxisTitleSzie_ControlValueChanged(ucrChangedControl As ucrCore)
-        AddRemoveXAxisTitleSize()
-    End Sub
-
-    Private Sub UcrChkYAxisTitleSzie_ControlValueChanged(ucrChangedControl As ucrCore)
-        AddRemoveYAxisTitleSize()
-    End Sub
-
-    Private Sub ucrChkXAxisLabelSize_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrChkXAxisLabelSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXAxisLabelSize.ControlValueChanged, ucrChkXAxisAngle.ControlValueChanged
         XAxisAngleJust()
         AddRemoveAngleSizeXAxis()
     End Sub
 
-    Private Sub ucrNudXAxisAngle_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrNudXAxisAngle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudXAxisAngle.ControlValueChanged
         XAxisAngleJust()
     End Sub
 
@@ -1290,23 +1199,23 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrXBreaksControls_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrXBreaksControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputXFrom.ControlValueChanged, ucrInputXTo.ControlValueChanged, ucrInputXInStepsOf.ControlValueChanged, ucrChkSpecifyXAxisTickMarks.ControlValueChanged
         AddRemoveXAxisBreaks()
     End Sub
 
-    Private Sub ucrYBreaksControls_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrYBreaksControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputYFrom.ControlValueChanged, ucrInputYTo.ControlValueChanged, ucrInputYInStepsOf.ControlValueChanged, ucrChkSpecifyYAxisTickMarks.ControlValueChanged
         AddRemoveYAxisBreaks()
     End Sub
 
-    Private Sub ucrAxisTextYControls_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrAxisTextYControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYAxisAngle.ControlValueChanged, ucrNudYAxisAngle.ControlValueChanged, ucrChkYAxisLabelSize.ControlValueChanged, ucrNudYAxisLabelSize.ControlValueChanged
         AddRemoveAxisTextY()
     End Sub
 
-    Private Sub ucrChkBorderColour_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrChkBorderColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBorderColour.ControlValueChanged, ucrChkBorderLineType.ControlValueChanged, UcrChkBorderSize.ControlValueChanged
         AddRemovePanelBorder()
     End Sub
 
-    Private Sub ucrDateBreakControls_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrDateBreakControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyDateBreaks.ControlValueChanged, ucrNudDateBreakNumber.ControlValueChanged, ucrInputDateBreakTime.ControlValueChanged
         AddRemoveDateBreaks()
     End Sub
 
@@ -1320,7 +1229,7 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrYLimitControls_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrYLimitControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYSpecifyLowerLimit.ControlValueChanged, ucrChkYSpecifyUpperLimit.ControlValueChanged, ucrInputYSpecifyLowerLimitNumeric.ControlValueChanged, ucrInputYSpecifyUpperLimitNumeric.ControlValueChanged
         If bRCodeSet Then
             If Not ucrChkYSpecifyLowerLimit.Checked Then
                 clsCLimitsYContinuous.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
@@ -1358,12 +1267,12 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrPnlYAxisType_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrPnlYAxisType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlYAxisType.ControlValueChanged
         AddRemoveYAxisScales()
         AddRemoveHline()
     End Sub
 
-    Private Sub ucrInputMeanLineType_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrInputMeanLineType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMeanLabelType.ControlValueChanged
         SetMeanLabelType()
     End Sub
 
@@ -1377,7 +1286,7 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrInputMedianLabelType_ControlValueChanged(ucrChangedControl As ucrCore) 
+    Private Sub ucrInputMedianLabelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMedianLabelType.ControlValueChanged
         SetMedianLabelType()
     End Sub
 
@@ -1391,11 +1300,7 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrInputGraphTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphcCaption.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrInputTercilesLabelType_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrInputTercilesLabelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTercilesLabelType.ControlValueChanged
         SetTercilesLabelType()
     End Sub
 
