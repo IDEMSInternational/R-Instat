@@ -164,8 +164,8 @@ Public Class dlgBoxplot
 
         clsJitterplotFunc.SetPackageName("ggplot2")
         clsJitterplotFunc.SetRCommand("geom_jitter")
-        clsJitterplotFunc.AddParameter("Height", 0.2, iPosition:=1)
-        clsJitterplotFunc.AddParameter("width", 0.0, iPosition:=2)
+        clsJitterplotFunc.AddParameter("height", 0, iPosition:=1)
+        clsJitterplotFunc.AddParameter("width", 0.2, iPosition:=2)
 
         'Setting operation and adding parameters to baseoperator
         clsBaseOperator.SetOperation("+")
