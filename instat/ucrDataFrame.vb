@@ -199,7 +199,9 @@ Public Class ucrDataFrame
 
     Private Sub mnuRightClickCopy_Click(sender As Object, e As EventArgs) Handles mnuRightClickCopy.Click
         'TODO Combo box should be replaced by ucrInput so that context menu done automatically
-        Clipboard.SetText(cboAvailableDataFrames.SelectedText)
+        If cboAvailableDataFrames.Text <> "" Then
+            Clipboard.SetText(cboAvailableDataFrames.Text)
+        End If
     End Sub
 
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
