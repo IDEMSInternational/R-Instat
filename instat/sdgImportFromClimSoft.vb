@@ -80,9 +80,11 @@ Public Class sdgImportFromClimSoft
     Private Sub CheckConnection()
         If bConnected Then
             lblConnection.Text = strConnected
+            lblConnection.ForeColor = Color.Green
             cmdEnterPassword.Text = "Disconnnect"
         Else
             lblConnection.Text = strNoConnection
+            lblConnection.ForeColor = Color.Red
             cmdEnterPassword.Text = "Enter Password"
         End If
     End Sub

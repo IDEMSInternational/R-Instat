@@ -2012,8 +2012,6 @@ Public Class frmMain
         dlgExportToCMSAF.ShowDialog()
     End Sub
 
-
-
     Private Sub mnuClimaticPrepareConversions_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareConversions.Click
         dlgConversions.ShowDialog()
     End Sub
@@ -2025,8 +2023,6 @@ Public Class frmMain
     Private Sub mnuHelpAcknowledgments_Click(sender As Object, e As EventArgs) Handles mnuHelpAcknowledgments.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "151")
     End Sub
-
-
 
     Private Sub mnuDescribeSpecificMosaic_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificMosaic.Click
         dlgMosaicPlot.ShowDialog()
@@ -2068,15 +2064,19 @@ Public Class frmMain
         dlgAppend.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticDescribeClimaticStaionMaps_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeClimaticStaionMaps.Click
-        dlgClimaticStationMaps.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticPrepareClimdex_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimdex.Click
         dlgClimdexIndices.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPrepareSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareSPI.Click
         dlgSPI.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticMapping_Click(sender As Object, e As EventArgs) Handles mnuClimaticMapping.Click
+        dlgClimaticStationMaps.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelModel_Click(sender As Object, e As EventArgs) Handles mnuModelModel.Click
+        dlgModelling.ShowDialog()
     End Sub
 End Class
