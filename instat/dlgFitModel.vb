@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgFitModel
     Public bFirstLoad As Boolean = True
@@ -65,6 +64,7 @@ Public Class dlgFitModel
         ucrReceiverExpressionFitModel.SetParameter(New RParameter("y", 1))
         ucrReceiverExpressionFitModel.SetParameterIsString()
         ucrReceiverExpressionFitModel.bWithQuotes = False
+        ucrReceiverExpressionFitModel.AddtoCombobox("1")
 
         ucrFamily.SetGLMDistributions()
         ucrFamily.SetFunctionIsDistFunction()
@@ -107,7 +107,6 @@ Public Class dlgFitModel
 
         clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator.Clone
 
-        ucrReceiverExpressionFitModel.AddToReceiverAtCursorPosition("(1)")
         ucrReceiverExpressionFitModel.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.SetMeAsReceiver()
