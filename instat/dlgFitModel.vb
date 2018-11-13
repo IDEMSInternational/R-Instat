@@ -107,7 +107,7 @@ Public Class dlgFitModel
 
         clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator.Clone
 
-        ucrReceiverExpressionFitModel.AddToReceiverAtCursorPosition("1")
+        ucrReceiverExpressionFitModel.AddToReceiverAtCursorPosition("(1)")
         ucrReceiverExpressionFitModel.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.SetMeAsReceiver()
