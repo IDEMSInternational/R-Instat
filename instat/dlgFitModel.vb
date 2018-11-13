@@ -107,7 +107,7 @@ Public Class dlgFitModel
 
         clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator.Clone
 
-        ucrReceiverExpressionFitModel.Clear()
+        ucrReceiverExpressionFitModel.AddToReceiverAtCursorPosition("1")
         ucrReceiverExpressionFitModel.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.SetMeAsReceiver()
@@ -397,5 +397,9 @@ Public Class dlgFitModel
         'temp fix for graph display problem with RDotNet
         clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
         clsAutoPlot.SetAssignTo("last_autoplot", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_autoplot")
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        ucrReceiverExpressionFitModel.AddtoCombobox(ucrReceiverExpressionFitModel.GetText)
     End Sub
 End Class
