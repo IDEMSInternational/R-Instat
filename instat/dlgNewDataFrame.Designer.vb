@@ -47,6 +47,9 @@ Partial Class dlgNewDataFrame
         Me.rdoEmpty = New System.Windows.Forms.RadioButton()
         Me.rdoConstruct = New System.Windows.Forms.RadioButton()
         Me.dataGridView = New System.Windows.Forms.DataGridView()
+        Me.colRowNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.mnuStripCommand = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuItemCut = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuItemCopy = New System.Windows.Forms.ToolStripMenuItem()
@@ -61,9 +64,8 @@ Partial Class dlgNewDataFrame
         Me.ucrNudRows = New instat.ucrNud()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputCommand = New instat.ucrInputTextBox()
-        Me.colRowNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
+        Me.cmdTry = New System.Windows.Forms.Button()
         CType(Me.dataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuStripCommand.SuspendLayout()
         Me.SuspendLayout()
@@ -127,6 +129,23 @@ Partial Class dlgNewDataFrame
         Me.dataGridView.Name = "dataGridView"
         Me.dataGridView.RowHeadersVisible = False
         Me.dataGridView.RowTemplate.Height = 28
+        '
+        'colRowNum
+        '
+        resources.ApplyResources(Me.colRowNum, "colRowNum")
+        Me.colRowNum.Name = "colRowNum"
+        Me.colRowNum.ReadOnly = True
+        '
+        'colName
+        '
+        resources.ApplyResources(Me.colName, "colName")
+        Me.colName.Name = "colName"
+        '
+        'colExpression
+        '
+        Me.colExpression.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        resources.ApplyResources(Me.colExpression, "colExpression")
+        Me.colExpression.Name = "colExpression"
         '
         'mnuStripCommand
         '
@@ -214,27 +233,26 @@ Partial Class dlgNewDataFrame
         resources.ApplyResources(Me.ucrInputCommand, "ucrInputCommand")
         Me.ucrInputCommand.Name = "ucrInputCommand"
         '
-        'colRowNum
+        'ucrInputTryMessage
         '
-        resources.ApplyResources(Me.colRowNum, "colRowNum")
-        Me.colRowNum.Name = "colRowNum"
-        Me.colRowNum.ReadOnly = True
+        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
+        Me.ucrInputTryMessage.IsMultiline = False
+        Me.ucrInputTryMessage.IsReadOnly = True
+        resources.ApplyResources(Me.ucrInputTryMessage, "ucrInputTryMessage")
+        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
         '
-        'colName
+        'cmdTry
         '
-        resources.ApplyResources(Me.colName, "colName")
-        Me.colName.Name = "colName"
-        '
-        'colExpression
-        '
-        Me.colExpression.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        resources.ApplyResources(Me.colExpression, "colExpression")
-        Me.colExpression.Name = "colExpression"
+        resources.ApplyResources(Me.cmdTry, "cmdTry")
+        Me.cmdTry.Name = "cmdTry"
+        Me.cmdTry.UseVisualStyleBackColor = True
         '
         'dlgNewDataFrame
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputTryMessage)
+        Me.Controls.Add(Me.cmdTry)
         Me.Controls.Add(Me.ucrInputCommand)
         Me.Controls.Add(Me.btnExample)
         Me.Controls.Add(Me.lblCommand)
@@ -285,4 +303,6 @@ Partial Class dlgNewDataFrame
     Friend WithEvents colRowNum As DataGridViewTextBoxColumn
     Friend WithEvents colName As DataGridViewTextBoxColumn
     Friend WithEvents colExpression As DataGridViewTextBoxColumn
+    Friend WithEvents ucrInputTryMessage As ucrInputTextBox
+    Friend WithEvents cmdTry As Button
 End Class
