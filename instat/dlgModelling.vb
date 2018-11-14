@@ -52,9 +52,6 @@ Public Class dlgModelling
         bUpdating = True
         cmdPredict.Visible = False
 
-        cmdTry.Visible = False
-        ucrInputTryMessage.Visible = False
-
         ucrReceiverForTestColumn.Selector = ucrSelectorModelling
 
         ucrChkIncludeArguments.SetText("Include Arguments")
