@@ -118,4 +118,7 @@ Public Class ucrOutputWindow
         frmMain.clsInstatOptions.SetCommandInOutpt(Not frmMain.clsInstatOptions.bCommandsinOutput)
     End Sub
 
+    Private Sub HelpRTB_Click(sender As Object, e As EventArgs) Handles HelpRTB.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "540")
+    End Sub
 End Class
