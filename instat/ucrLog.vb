@@ -98,7 +98,6 @@ Public Class ucrLog
     End Sub
 
     Private Sub ucrLog_Load(sender As Object, e As EventArgs) Handles Me.Load
-        mnuHelp.Enabled = False 'TODO. Remove this line once the help document is ready
         mnuRunCurrentLine.ShortcutKeys = Keys.Enter Or Keys.Control
         txtLog.WordWrap = False 'For the run current line to work well
     End Sub
@@ -125,7 +124,7 @@ Public Class ucrLog
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
-        'TODO
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "541")
     End Sub
 
 End Class
