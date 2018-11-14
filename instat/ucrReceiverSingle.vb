@@ -248,7 +248,7 @@ Public Class ucrReceiverSingle
         Return strTemp
     End Function
 
-    Public Overrides Function GetVariableNameslist(Optional bWithQuotes As Boolean = True) As String()
+    Public Overrides Function GetVariableNameslist(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
         Dim arrTemp As String() = Nothing
         arrTemp = {GetVariableNames()}
         Return arrTemp
