@@ -57,7 +57,7 @@ Partial Class dlgVisualizeData
         '
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 258)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(81, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(264, 24)
         Me.ucrSaveGraph.TabIndex = 2
         '
         'ucrPnlVisualizeData
