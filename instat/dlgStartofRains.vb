@@ -17,7 +17,7 @@
 Imports instat.Translations
 
 Public Class dlgStartofRains
-    Private clsCalcRainDay, clsCalcStartDOY, clsCalcStartDate, clsCombinationCalc, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipStartDOYList, clsManipulationFirstDOYPerYear, clsConditionsFilter, clsCombinedList As New RFunction
+    Private clsCalcRainDay, clsCalcStartDOY, clsCalcStartDate, clsCombinationCalc, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipulationFirstDOYPerYear, clsConditionsFilter, clsCombinedList As New RFunction
     Private clsDayFromAndTo, clsGroupByStation, clsGroupByYear, clsListToTalRain, clsApplyInstatFunction, clsFirstDOY, clsFirstDate As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsRainDayOperator, clsRainDayConditionOperator, clsConditionsAndOperator, clsTRCombineOperator, clsRollingSumRainDayOperator, clsDSCombineOperator, clsDPCombineOperator As New ROperator
     Private clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
@@ -31,7 +31,7 @@ Public Class dlgStartofRains
     Private clsCalcRainRollingSum, clsRainRollingSumFunction, clsTRWetSpell, clsTRWetSpellList, clsTRWetSpellFunction As New RFunction
     Private clsSORFilter, clsSORFilterIfelse, clsSORFilterIsNA As New RFunction
     Private clsLessFilterOperator As New ROperator
-    Private clsSORStatus, clsIfelseStartDOY, clsIfelseStartDate, clsSORIsNA As New RFunction
+    Private clsCalcStatus, clsIfelseStartDOY, clsIfelseStartDate, clsSORIsNA As New RFunction
     Private clsSORStartSummary As New clsRains
     Private clsSORStatusSummary As New clsRains
 
@@ -239,8 +239,8 @@ Public Class dlgStartofRains
         ucrChkAsDate.AddParameterPresentCondition(False, "sub2", False)
         ucrChkAsDate.SetText("Date")
 
-        ucrChkStatus.AddParameterPresentCondition(True, "sub2", True)
-        ucrChkStatus.AddParameterPresentCondition(False, "sub2", False)
+        ucrChkStatus.AddParameterPresentCondition(True, "sub3", True)
+        ucrChkStatus.AddParameterPresentCondition(False, "sub3", False)
         ucrChkStatus.SetText("Occurrence")
     End Sub
 
@@ -459,16 +459,6 @@ Public Class dlgStartofRains
         clsSORStatusSummary.SetDefaults()
         clsSORStatusSummary.clsIsNaIfelse.bToScriptAsRString = True
 
-        clsSORStatus.SetRCommand("instat_calculation$new")
-        clsSORStatus.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
-        clsSORStatus.AddParameter("function_exp", clsRFunctionParameter:=clsSORStatusSummary.clsIsNaIfelse, iPosition:=1)
-        clsSORStatus.AddParameter("result_name", Chr(34) & strStartStatus & Chr(34), iPosition:=3)
-        clsSORStatus.AddParameter("save", 2, iPosition:=4)
-        clsSORStatus.SetAssignTo("start_of_rains_status")
-
-        clsSORIsNA.SetRCommand("is.na")
-        clsSORIsNA.AddParameter("ifelse", clsRFunctionParameter:=clsSORStartSummary.clsIsNaIfelse, bIncludeArgumentName:=False)
-
         ' Quantile checked:
         ' this function is associated with that rdo.
         clsTRWetSpellFunction.bToScriptAsRString = True
@@ -640,14 +630,8 @@ Public Class dlgStartofRains
         clsCalcStartDOY.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsCalcStartDOY.AddParameter("function_exp", clsRFunctionParameter:=clsIfelseStartDOY, iPosition:=1)
         clsCalcStartDOY.AddParameter("result_name", Chr(34) & strStartDoy & Chr(34), iPosition:=2)
-        clsCalcStartDOY.AddParameter("manipulations", clsRFunctionParameter:=clsManipStartDOYList, iPosition:=7)
         clsCalcStartDOY.AddParameter("save", 2, iPosition:=6)
         clsCalcStartDOY.SetAssignTo("start_of_rains_doy")
-
-        clsManipStartDOYList.SetRCommand("list")
-        clsManipStartDOYList.AddParameter("manp1", clsRFunctionParameter:=clsConditionsFilter, bIncludeArgumentName:=False, iPosition:=0)
-        clsManipStartDOYList.AddParameter("manp2", clsRFunctionParameter:=clsGroupByYear, bIncludeArgumentName:=False, iPosition:=2)
-        clsManipStartDOYList.AddParameter("manp3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=2)
 
         clsIfelseStartDOY.SetRCommand("ifelse")
         clsIfelseStartDOY.bToScriptAsRString = True
@@ -673,7 +657,6 @@ Public Class dlgStartofRains
         clsCalcStartDate.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsCalcStartDate.AddParameter("function_exp", clsRFunctionParameter:=clsIfelseStartDate, iPosition:=1)
         clsCalcStartDate.AddParameter("result_name", Chr(34) & strStartDate & Chr(34), iPosition:=2)
-        clsCalcStartDate.AddParameter("manipulations", clsRFunctionParameter:=clsManipStartDOYList, iPosition:=7)
         clsCalcStartDate.AddParameter("save", 2, iPosition:=6)
         clsCalcStartDate.SetAssignTo(strStartDate)
 
@@ -688,14 +671,25 @@ Public Class dlgStartofRains
         clsFirstDate.SetRCommand("first")
         clsFirstDate.AddParameter("default", "NA", iPosition:=1)
 
+        ' Status
+        clsCalcStatus.SetRCommand("instat_calculation$new")
+        clsCalcStatus.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
+        clsCalcStatus.AddParameter("function_exp", Chr(34) & "n() > 0" & Chr(34), iPosition:=1)
+        clsCalcStatus.AddParameter("result_name", Chr(34) & strStartStatus & Chr(34), iPosition:=3)
+        clsCalcStatus.AddParameter("save", 2, iPosition:=4)
+        clsCalcStatus.SetAssignTo("start_of_rains_status")
+
         'Combination
         clsCombinationCalc.SetRCommand("instat_calculation$new")
         clsCombinationCalc.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
+        clsCombinationCalc.AddParameter("manipulations", clsRFunctionParameter:=clsCombinationManipList, iPosition:=1)
         clsCombinationCalc.AddParameter("sub_calculation", clsRFunctionParameter:=clsCombinationSubCalcList, iPosition:=2)
         clsCombinationCalc.SetAssignTo("start_of_rains_combined")
 
         clsCombinationManipList.SetRCommand("list")
-        clsCombinationManipList.AddParameter("manip1", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False, iPosition:=0)
+        clsCombinationManipList.AddParameter("manip2", clsRFunctionParameter:=clsConditionsFilter, bIncludeArgumentName:=False, iPosition:=1)
+        clsCombinationManipList.AddParameter("manip3", clsRFunctionParameter:=clsGroupByYear, bIncludeArgumentName:=False, iPosition:=2)
+        clsCombinationManipList.AddParameter("manip4", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=3)
 
         clsCombinationSubCalcList.SetRCommand("list")
         clsCombinationSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsCalcStartDOY, bIncludeArgumentName:=False, iPosition:=0)
@@ -739,7 +733,7 @@ Public Class dlgStartofRains
         ucrReceiverDate.SetRCode(clsFirstDate, bReset)
         ucrInputNewDoyColumnName.SetRCode(clsCalcStartDOY, bReset)
         ucrInputNewDateColumnName.SetRCode(clsCalcStartDate, bReset)
-        ucrInputNewStatusColumnName.SetRCode(clsSORStatus, bReset)
+        ucrInputNewStatusColumnName.SetRCode(clsCalcStatus, bReset)
 
         'Total Rainfall
         ucrChkTotalRainfall.SetRCode(clsCombinedList, bReset)
@@ -834,12 +828,12 @@ Public Class dlgStartofRains
 
     Private Sub GroupByStationOptions()
         If Not ucrReceiverStation.IsEmpty Then
-            clsCombinationCalc.AddParameter("manipulations", clsRFunctionParameter:=clsCombinationManipList, iPosition:=1)
+            clsCombinationManipList.AddParameter("manip1", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False, iPosition:=0)
             clsListToTalRain.AddParameter("manip1", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False)
             clsCalcRainRollingSum.AddParameter("manipulations", clsRFunctionParameter:=clsListToTalRain, iPosition:=4)
             clsGroupByStation.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=3)
         Else
-            clsCombinationCalc.RemoveParameterByName("manipulations")
+            clsCombinationManipList.RemoveParameterByName("manip1")
             clsListToTalRain.RemoveParameterByName("manip1")
             clsCalcRainRollingSum.RemoveParameterByName("manipulations")
             clsGroupByStation.RemoveParameterByName("calculated_from")
@@ -864,7 +858,6 @@ Public Class dlgStartofRains
 
     Private Sub TotalRainfallCalcFrom()
         clsCalcRainRollingSum.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")", iPosition:=3)
-        clsSORStatus.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")", iPosition:=2)
     End Sub
 
     Private Sub DryPeriod()
@@ -958,9 +951,9 @@ Public Class dlgStartofRains
 
     Private Sub ucrChkStatus_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStatus.ControlValueChanged
         If ucrChkStatus.Checked Then
-            'clsCombinationSubCalcList.AddParameter("sub2", clsRFunctionParameter:=clsSORStatus, bIncludeArgumentName:=False, iPosition:=1)
+            clsCombinationSubCalcList.AddParameter("sub3", clsRFunctionParameter:=clsCalcStatus, bIncludeArgumentName:=False, iPosition:=2)
         Else
-            'clsCombinationSubCalcList.RemoveParameterByName("sub2")
+            clsCombinationSubCalcList.RemoveParameterByName("sub3")
         End If
     End Sub
 
