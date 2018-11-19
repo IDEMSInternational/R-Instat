@@ -19,7 +19,11 @@ Imports instat.Translations
 Public Class dlgVisualizeData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsVisDatFunction, clsVisMissFunction, clsVisGuessFunction As New RFunction
+    Private clsVisDatFunction As New RFunction
+    Private clsVisMissFunction As New RFunction
+    Private clsVisGuessFunction As New RFunction
+    Private clsCurrBaseFunction As New RFunction
+
     Private Sub dlgVisualizeData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -33,6 +37,7 @@ Public Class dlgVisualizeData
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 3
 
@@ -41,8 +46,8 @@ Public Class dlgVisualizeData
         ucrPnlVisualizeData.AddRadioButton(rdoVisGuess)
 
         ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisDat, "vis_dat")
-        ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisDat, "vis_miss")
-        ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisDat, "vis_guess")
+        ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisMiss, "vis_miss")
+        ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisGuess, "vis_guess")
 
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
         ucrPnlSelectData.AddRadioButton(rdoSelectedColumn)
@@ -53,10 +58,10 @@ Public Class dlgVisualizeData
         ucrSelectorVisualizeData.SetParameter(New RParameter("data", 0, False))
         ucrSelectorVisualizeData.SetParameterIsrfunction()
 
-        ucrReceiverVisualizeData.SetParameter(New RParameter("x", 0))
+        ucrReceiverVisualizeData.SetParameter(New RParameter("x", 0, False))
         ucrReceiverVisualizeData.SetParameterIsRFunction()
         ucrReceiverVisualizeData.Selector = ucrSelectorVisualizeData
-        ucrReceiverVisualizeData.SetMeAsReceiver()
+        ucrReceiverVisualizeData.bForceAsDataFrame = True
 
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverVisualizeData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -67,12 +72,16 @@ Public Class dlgVisualizeData
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorVisualizeData.ucrAvailableDataFrames)
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
+
     Private Sub SetDefaults()
         clsVisDatFunction = New RFunction
         clsVisMissFunction = New RFunction
         clsVisGuessFunction = New RFunction
 
         ucrSelectorVisualizeData.Reset()
+        ucrSaveGraph.Reset()
+
+        clsCurrBaseFunction = clsVisDatFunction
 
         clsVisDatFunction.SetPackageName("visdat")
         clsVisDatFunction.SetRCommand("vis_dat")
@@ -94,20 +103,23 @@ Public Class dlgVisualizeData
         clsVisGuessFunction.SetRCommand("vis_guess")
         clsVisGuessFunction.AddParameter("palette", Chr(34) & "default" & Chr(34), iPosition:=1)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsVisDatFunction)
+        clsCurrBaseFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsCurrBaseFunction)
     End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("data", 0, False), 1)
         ucrSelectorVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("data", 0, False), 2)
-        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0), 1)
-        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0), 2)
-        ucrSaveGraph.AddAdditionalRCode(clsVisMissFunction, 1)
-        ucrSaveGraph.AddAdditionalRCode(clsVisGuessFunction, 2)
+        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0, False), 1)
+        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0, False), 2)
 
+        'ucrPnlSelectData.SetRCode(clsCurrBaseFunction, bReset)
+        ucrPnlVisualizeData.SetRCode(clsCurrBaseFunction, bReset)
         ucrReceiverVisualizeData.SetRCode(clsVisDatFunction, bReset)
-        ucrSaveGraph.SetRCode(clsVisDatFunction, bReset)
+        ucrSaveGraph.SetRCode(clsCurrBaseFunction, bReset)
         ucrSelectorVisualizeData.SetRCode(clsVisDatFunction, bReset)
     End Sub
+
     Private Sub TestOkEnabled()
         If rdoWholeDataFrame.Checked AndAlso ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrBase.OKEnabled(True)
@@ -117,16 +129,54 @@ Public Class dlgVisualizeData
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
     Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVisualizeData.ControlContentsChanged, ucrSelectorVisualizeData.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged
         TestOkEnabled()
     End Sub
-    Private Sub ucrPnlVisualizeData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlVisualizeData.ControlContentsChanged
+
+    Private Sub ucrPnlVisualizeData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlVisualizeData.ControlValueChanged
         If rdoVisDat.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsVisDatFunction)
+            ucrSaveGraph.SetPrefix("vis_dat")
+            clsCurrBaseFunction = clsVisDatFunction
         ElseIf rdoVisMiss.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsVisMissFunction)
+            ucrSaveGraph.SetPrefix("vis_miss")
+            clsCurrBaseFunction = clsVisMissFunction
         ElseIf rdoVisGuess.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsVisGuessFunction)
+            ucrSaveGraph.SetPrefix("vis_guess")
+            clsCurrBaseFunction = clsVisGuessFunction
         End If
+        ucrBase.clsRsyntax.SetBaseRFunction(clsCurrBaseFunction)
+    End Sub
+
+    Private Sub SelectData()
+        clsCurrBaseFunction.RemoveParameterByName("x")
+        clsCurrBaseFunction.RemoveParameterByName("data")
+
+        If rdoWholeDataFrame.Checked Then
+            ucrSelectorVisualizeData.lstAvailableVariable.Visible = False
+            ucrSelectorVisualizeData.btnAdd.Visible = False
+            ucrSelectorVisualizeData.btnDataOptions.Visible = False
+            clsCurrBaseFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+        Else
+            ucrSelectorVisualizeData.lstAvailableVariable.Visible = True
+            ucrSelectorVisualizeData.btnAdd.Visible = True
+            ucrSelectorVisualizeData.btnDataOptions.Visible = True
+            ucrReceiverVisualizeData.SetMeAsReceiver()
+            clsCurrBaseFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVisualizeData.GetVariables(True), bIncludeArgumentName:=False, iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub ucrPnlSelectData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged
+        SelectData()
+    End Sub
+
+    Private Sub ucrSelectorVisualizeData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorVisualizeData.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged
+        SelectData()
     End Sub
 End Class
