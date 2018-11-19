@@ -285,6 +285,7 @@ Public Class dlgStartofRains
         clsIsNaRollSumRain.Clear()
         clsIsNaRollSumRainDay.Clear()
         clsIsNaDrySpell.Clear()
+        clsIsNaDryPeriod.Clear()
 
         clsFirstRollSumRain.Clear()
         clsIsNaFirstRollSumRain.Clear()
@@ -614,13 +615,16 @@ Public Class dlgStartofRains
         clsIsNaDrySpell.SetRCommand("is.na")
         clsIsNaDrySpell.AddParameter("x", strRollMaxDrySpell, iPosition:=0)
 
+        clsIsNaDryPeriod.SetRCommand("is.na")
+        clsIsNaDryPeriod.AddParameter("x", strRollSumNumberDryPeriod, iPosition:=0)
+
         ' run if chkTR is checked
         clsTRCombineOperator.SetOperation(">")
         clsTRCombineOperator.AddParameter("tr_left", strRollSumRain, iPosition:=0)
 
         ' run if chkDS is checked
         clsDSCombineOperator.SetOperation("<=")
-        clsDSCombineOperator.AddParameter("ds_left", strDrySpell, iPosition:=0)
+        clsDSCombineOperator.AddParameter("ds_left", strRollMaxDrySpell, iPosition:=0)
         clsDSCombineOperator.AddParameter("ds_max", 9, iPosition:=1)
 
         ' run if chkDP is checked
