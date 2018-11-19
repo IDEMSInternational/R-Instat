@@ -486,7 +486,7 @@ Public Class dlgStartofRains
         clsDrySpellSubCalcList.SetRCommand("list")
         clsDrySpellSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsCalcRainDay, bIncludeArgumentName:=False)
 
-        clsSpellsFunction.SetRCommand("spells")
+        clsSpellsFunction.SetRCommand(".spells")
         clsSpellsFunction.AddParameter("x", clsROperatorParameter:=clsRainDaySpellsOperator, iPosition:=0)
         clsSpellsFunction.bToScriptAsRString = True
 
