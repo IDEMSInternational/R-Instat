@@ -182,24 +182,27 @@ Public Class dlgSpells
 
         clsSpellOrGroupList.SetRCommand("list")
         clsSpellOrGroupList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
+        clsSpellOrGroupList.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
 
         ' rain_day
-        clsRRaindayMatch.bToScriptAsRString = True
+        'TODO remove this function
+        'clsRRaindayMatch.bToScriptAsRString = True
         clsRRainday.SetRCommand("instat_calculation$new")
         clsRRainday.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsRRainday.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
         clsRRainday.AddParameter("save", "0", iPosition:=6)
-        clsRRainday.AddParameter("function_exp", clsRFunctionParameter:=clsRRaindayMatch, iPosition:=1)
+        clsRRainday.AddParameter("function_exp", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=1)
 
-        clsRRaindayMatch.SetRCommand("match")
-        clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator)
+        'clsRRaindayMatch.SetRCommand("match")
+        'clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator)
+        clsRRaindayAndOperator.bToScriptAsRString = True
         clsRRaindayAndOperator.SetOperation("&")
         clsRRaindayLowerOperator.SetOperation(">=")
         clsRRaindayLowerOperator.AddParameter("min", 0, iPosition:=1)
         clsRRaindayUpperOperator.SetOperation("<=")
         clsRRaindayUpperOperator.AddParameter("max", 0.85, iPosition:=1)
-        clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
-        clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
+        'clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
+        'clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
         clsGreaterThanOperator.SetOperation(">")
         clsLessThanOperator.SetOperation("<")
 
@@ -239,14 +242,13 @@ Public Class dlgSpells
         clsMaxValue.AddParameter("save", 2, iPosition:=6)
         clsMaxValue.AddParameter("result_name", Chr(34) & ucrInputNewColumnName.GetText() & Chr(34), iPosition:=3)
         clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation, iPosition:=5)
-        clsMaxValueManipulation.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
         clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
 
         clsMaxValue.AddParameter("sub_calculation", clsRFunctionParameter:=clsSpellOrGroupList, iPosition:=5)
         clsMaxValue.SetAssignTo("spells")
 
         clsConsecutiveSum.bToScriptAsRString = True
-        clsConsecutiveSum.SetRCommand("consecutive_sum")
+        clsConsecutiveSum.SetRCommand(".spells")
         clsConsecutiveSum.AddParameter("x", strRainDay)
 
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")

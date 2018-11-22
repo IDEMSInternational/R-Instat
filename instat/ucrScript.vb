@@ -163,7 +163,6 @@ Public Class ucrScript
     End Sub
 
     Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
-        mnuHelp.Enabled = False 'TODO. Remove this after help is developed
         mnuRunCurrentLine.ShortcutKeys = Keys.Enter Or Keys.Control
         txtScript.WordWrap = False
         cmdRun.Enabled = (txtScript.TextLength > 0)
@@ -215,6 +214,6 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
-        'TODO
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
     End Sub
 End Class
