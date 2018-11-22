@@ -381,6 +381,12 @@
     <Compile Include="dlgMosaicPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgVisualizeData.Designer.vb">
+      <DependentUpon>dlgVisualizeData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgVisualizeData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgComment.Designer.vb">
       <DependentUpon>sdgComment.vb</DependentUpon>
     </Compile>
@@ -2697,6 +2703,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMosaicPlot.resx">
       <DependentUpon>dlgMosaicPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgVisualizeData.resx">
+      <DependentUpon>dlgVisualizeData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgComment.resx">
       <DependentUpon>sdgComment.vb</DependentUpon>

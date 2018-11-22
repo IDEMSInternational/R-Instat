@@ -105,6 +105,7 @@ Public Class clsRegressionDefaults
             Dim clsAutoplot As New RFunction
             Dim clsWhichFuntion As New RFunction
 
+            clsAutoplot.SetPackageName("ggplot2")
             clsAutoplot.SetRCommand("autoplot")
             clsAutoplot.iCallType = 3
             clsWhichFuntion.SetRCommand("c")
