@@ -115,6 +115,7 @@ Partial Class frmMain
         Me.mnuModelGeneralUseModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuModelHypothesisTests = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuModelModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelOtherOneVariable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelOtherOneVariableExactResults = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelOtherOneVariableSampleSummaryData = New System.Windows.Forms.ToolStripMenuItem()
@@ -160,9 +161,10 @@ Partial Class frmMain
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpHelpIntroduction = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpHistFAQ = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpSpreadsheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpGetingStarted = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator28 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuHelpWindows = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpDataViewSpreadsheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpMenus = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpR = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpRPackagesCommands = New System.Windows.Forms.ToolStripMenuItem()
@@ -573,7 +575,6 @@ Partial Class frmMain
         Me.ucrScriptWindow = New instat.ucrScript()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuModelModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1040,6 +1041,11 @@ Partial Class frmMain
         Me.mnuModelHypothesisTests.Name = "mnuModelHypothesisTests"
         resources.ApplyResources(Me.mnuModelHypothesisTests, "mnuModelHypothesisTests")
         '
+        'mnuModelModel
+        '
+        Me.mnuModelModel.Name = "mnuModelModel"
+        resources.ApplyResources(Me.mnuModelModel, "mnuModelModel")
+        '
         'mnuModelOtherOneVariable
         '
         Me.mnuModelOtherOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelOtherOneVariableExactResults, Me.mnuModelOtherOneVariableSampleSummaryData, Me.mnuModelOtherOneVariableNonParametric, Me.mnuModelOtherOneVariableGoodnessofFit})
@@ -1294,7 +1300,7 @@ Partial Class frmMain
         '
         'mnuHelp
         '
-        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpHelpIntroduction, Me.mnuHelpHistFAQ, Me.mnuHelpSpreadsheet, Me.mnuHelpGetingStarted, Me.ToolStripSeparator28, Me.mnuHelpMenus, Me.mnuHelpR, Me.mnuHelpRPackagesCommands, Me.mnuHelpDataset, Me.ToolStripSeparator29, Me.mnuHelpGuide, Me.mnuHelpAboutRInstat, Me.mnuHelpLicence, Me.mnuHelpAcknowledgments})
+        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpHelpIntroduction, Me.mnuHelpHistFAQ, Me.mnuHelpGetingStarted, Me.ToolStripSeparator28, Me.mnuHelpWindows, Me.mnuHelpDataViewSpreadsheet, Me.mnuHelpMenus, Me.mnuHelpR, Me.mnuHelpRPackagesCommands, Me.mnuHelpDataset, Me.ToolStripSeparator29, Me.mnuHelpGuide, Me.mnuHelpAboutRInstat, Me.mnuHelpLicence, Me.mnuHelpAcknowledgments})
         Me.mnuHelp.Name = "mnuHelp"
         resources.ApplyResources(Me.mnuHelp, "mnuHelp")
         Me.mnuHelp.Tag = "Help"
@@ -1309,11 +1315,6 @@ Partial Class frmMain
         Me.mnuHelpHistFAQ.Name = "mnuHelpHistFAQ"
         resources.ApplyResources(Me.mnuHelpHistFAQ, "mnuHelpHistFAQ")
         '
-        'mnuHelpSpreadsheet
-        '
-        Me.mnuHelpSpreadsheet.Name = "mnuHelpSpreadsheet"
-        resources.ApplyResources(Me.mnuHelpSpreadsheet, "mnuHelpSpreadsheet")
-        '
         'mnuHelpGetingStarted
         '
         Me.mnuHelpGetingStarted.Name = "mnuHelpGetingStarted"
@@ -1323,6 +1324,16 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator28.Name = "ToolStripSeparator28"
         resources.ApplyResources(Me.ToolStripSeparator28, "ToolStripSeparator28")
+        '
+        'mnuHelpWindows
+        '
+        Me.mnuHelpWindows.Name = "mnuHelpWindows"
+        resources.ApplyResources(Me.mnuHelpWindows, "mnuHelpWindows")
+        '
+        'mnuHelpDataViewSpreadsheet
+        '
+        Me.mnuHelpDataViewSpreadsheet.Name = "mnuHelpDataViewSpreadsheet"
+        resources.ApplyResources(Me.mnuHelpDataViewSpreadsheet, "mnuHelpDataViewSpreadsheet")
         '
         'mnuHelpMenus
         '
@@ -3677,11 +3688,6 @@ Partial Class frmMain
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
         '
-        'mnuModelModel
-        '
-        Me.mnuModelModel.Name = "mnuModelModel"
-        resources.ApplyResources(Me.mnuModelModel, "mnuModelModel")
-        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4033,7 +4039,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
     Friend WithEvents mnuHelpHelpIntroduction As ToolStripMenuItem
     Friend WithEvents mnuHelpHistFAQ As ToolStripMenuItem
-    Friend WithEvents mnuHelpSpreadsheet As ToolStripMenuItem
     Friend WithEvents mnuHelpGetingStarted As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator28 As ToolStripSeparator
     Friend WithEvents mnuHelpMenus As ToolStripMenuItem
@@ -4261,4 +4266,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator51 As ToolStripSeparator
     Friend WithEvents mnuClimaticMapping As ToolStripMenuItem
     Friend WithEvents mnuModelModel As ToolStripMenuItem
+    Friend WithEvents mnuHelpWindows As ToolStripMenuItem
+    Friend WithEvents mnuHelpDataViewSpreadsheet As ToolStripMenuItem
 End Class
