@@ -463,7 +463,7 @@ Public Class dlgModelling
 
     Private Sub SetRcodeForControls(bReset As Boolean)
         bUpdating = True
-        ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString, bReset)
         bUpdating = False
         SetObjectInFunctions()
     End Sub
