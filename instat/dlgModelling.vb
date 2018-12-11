@@ -109,9 +109,6 @@ Public Class dlgModelling
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm()", 1)
 
         ucrSaveResult.Reset()
-        ucrSaveResult.ucrChkSave.Checked = False
-
-        ucrSaveResult.Enabled = False
 
         ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
