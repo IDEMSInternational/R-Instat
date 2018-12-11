@@ -33,6 +33,7 @@ Public Class dlgClimaticStationMaps
     Private clsLocalRaesFunction As New RFunction
     Private bResetSubdialog As Boolean = True
     Private bResetSFLayerSubdialog As Boolean = True
+
     Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -119,6 +120,7 @@ Public Class dlgClimaticStationMaps
         ucrSelectorOutline.Reset()
         ucrSelectorStation.Reset()
         ucrReceiverLongitude.SetMeAsReceiver()
+        ucrReceiverFill.SetMeAsReceiver()
         ucrSaveMap.Reset()
         bResetSubdialog = True
         bResetSFLayerSubdialog = True
