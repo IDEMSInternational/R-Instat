@@ -45,6 +45,7 @@ Partial Class dlgMakeDate
         Me.lblYearTwo = New System.Windows.Forms.Label()
         Me.lblDayofYear = New System.Windows.Forms.Label()
         Me.grpSingleColumn = New System.Windows.Forms.GroupBox()
+        Me.lblUnits = New System.Windows.Forms.Label()
         Me.grpFormatField = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -72,13 +73,12 @@ Partial Class dlgMakeDate
         Me.txtTextDateFormats = New System.Windows.Forms.RichTextBox()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.ttMakeDate = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lblUnits = New System.Windows.Forms.Label()
         Me.ucrDtpSpecifyOrigin = New instat.ucrDateTimePicker()
+        Me.ucrInputUnits = New instat.ucrInputComboBox()
         Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
         Me.UcrInputComboBox2 = New instat.ucrInputComboBox()
         Me.UcrInputComboBox3 = New instat.ucrInputComboBox()
         Me.UcrInputComboBox4 = New instat.ucrInputComboBox()
-        Me.ucrInputUnits = New instat.ucrInputComboBox()
         Me.ucrPnlFormat = New instat.UcrPanel()
         Me.ucrReceiverForDate = New instat.ucrReceiverSingle()
         Me.ucrInputFormat = New instat.ucrInputComboBox()
@@ -155,6 +155,11 @@ Partial Class dlgMakeDate
         resources.ApplyResources(Me.grpSingleColumn, "grpSingleColumn")
         Me.grpSingleColumn.Name = "grpSingleColumn"
         Me.grpSingleColumn.TabStop = False
+        '
+        'lblUnits
+        '
+        resources.ApplyResources(Me.lblUnits, "lblUnits")
+        Me.lblUnits.Name = "lblUnits"
         '
         'grpFormatField
         '
@@ -369,17 +374,19 @@ Partial Class dlgMakeDate
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
-        'lblUnits
-        '
-        resources.ApplyResources(Me.lblUnits, "lblUnits")
-        Me.lblUnits.Name = "lblUnits"
-        '
         'ucrDtpSpecifyOrigin
         '
         resources.ApplyResources(Me.ucrDtpSpecifyOrigin, "ucrDtpSpecifyOrigin")
         Me.ucrDtpSpecifyOrigin.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDtpSpecifyOrigin.MinDate = New Date(1753, 2, 1, 0, 0, 0, 0)
         Me.ucrDtpSpecifyOrigin.Name = "ucrDtpSpecifyOrigin"
+        '
+        'ucrInputUnits
+        '
+        Me.ucrInputUnits.AddQuotesIfUnrecognised = True
+        Me.ucrInputUnits.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputUnits, "ucrInputUnits")
+        Me.ucrInputUnits.Name = "ucrInputUnits"
         '
         'UcrInputComboBox1
         '
@@ -408,13 +415,6 @@ Partial Class dlgMakeDate
         Me.UcrInputComboBox4.IsReadOnly = False
         resources.ApplyResources(Me.UcrInputComboBox4, "UcrInputComboBox4")
         Me.UcrInputComboBox4.Name = "UcrInputComboBox4"
-        '
-        'ucrInputUnits
-        '
-        Me.ucrInputUnits.AddQuotesIfUnrecognised = True
-        Me.ucrInputUnits.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputUnits, "ucrInputUnits")
-        Me.ucrInputUnits.Name = "ucrInputUnits"
         '
         'ucrPnlFormat
         '
