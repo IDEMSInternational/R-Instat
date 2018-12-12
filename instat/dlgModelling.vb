@@ -585,4 +585,8 @@ Public Class dlgModelling
                 grpMASS.Visible = True
         End Select
     End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        ucrReceiverForTestColumn.AddtoCombobox(ucrReceiverForTestColumn.GetText)
+    End Sub
 End Class
