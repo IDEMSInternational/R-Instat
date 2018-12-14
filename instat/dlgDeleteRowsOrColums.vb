@@ -20,7 +20,7 @@ Public Class dlgDeleteRowsOrColums
     Private bReset As Boolean = True
     Private clsOperatorRowNames As New ROperator
     Private clsDeleteRows, clsDeleteColumns As RFunction
-    Private Sub dlgDeleteRows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgDeleteRows_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -145,7 +145,8 @@ Public Class dlgDeleteRowsOrColums
     Private Sub SetMaxMin()
         If ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrNudFrom.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
-            ucrNudTo.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
+            ' Should use ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength but doesn't update before dialog loads
+            ucrNudTo.SetMinMax(1, frmMain.clsRLink.GetDataFrameLength(ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text))
         End If
     End Sub
 
