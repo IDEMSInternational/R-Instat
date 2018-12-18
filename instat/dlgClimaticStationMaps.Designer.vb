@@ -39,6 +39,8 @@ Partial Class dlgClimaticStationMaps
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverFill = New instat.ucrReceiverSingle()
         Me.ucrSelectorOutline = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverFacet = New instat.ucrReceiverSingle()
+        Me.LabelFacet = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblFill
@@ -216,11 +218,34 @@ Partial Class dlgClimaticStationMaps
         Me.ucrSelectorOutline.Size = New System.Drawing.Size(317, 277)
         Me.ucrSelectorOutline.TabIndex = 0
         '
-        'dlgClimaticMaps
+        'ucrReceiverFacet
+        '
+        Me.ucrReceiverFacet.frmParent = Me
+        Me.ucrReceiverFacet.Location = New System.Drawing.Point(898, 342)
+        Me.ucrReceiverFacet.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacet.Name = "ucrReceiverFacet"
+        Me.ucrReceiverFacet.Selector = Nothing
+        Me.ucrReceiverFacet.Size = New System.Drawing.Size(180, 31)
+        Me.ucrReceiverFacet.strNcFilePath = ""
+        Me.ucrReceiverFacet.TabIndex = 17
+        Me.ucrReceiverFacet.ucrSelector = Nothing
+        '
+        'LabelFacet
+        '
+        Me.LabelFacet.AutoSize = True
+        Me.LabelFacet.Location = New System.Drawing.Point(897, 319)
+        Me.LabelFacet.Name = "LabelFacet"
+        Me.LabelFacet.Size = New System.Drawing.Size(58, 20)
+        Me.LabelFacet.TabIndex = 18
+        Me.LabelFacet.Text = "Facets"
+        '
+        'dlgClimaticStationMaps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1102, 626)
+        Me.Controls.Add(Me.LabelFacet)
+        Me.Controls.Add(Me.ucrReceiverFacet)
         Me.Controls.Add(Me.ucrSelectorStation)
         Me.Controls.Add(Me.LabelColor)
         Me.Controls.Add(Me.labelShape)
@@ -242,7 +267,7 @@ Partial Class dlgClimaticStationMaps
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgClimaticMaps"
+        Me.Name = "dlgClimaticStationMaps"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Climatic Maps"
         Me.ResumeLayout(False)
@@ -267,4 +292,6 @@ Partial Class dlgClimaticStationMaps
     Friend WithEvents labelShape As Label
     Friend WithEvents lbllatitude As Label
     Friend WithEvents ucrSelectorStation As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents LabelFacet As Label
+    Friend WithEvents ucrReceiverFacet As ucrReceiverSingle
 End Class
