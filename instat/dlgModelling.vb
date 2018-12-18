@@ -107,6 +107,7 @@ Public Class dlgModelling
 
         ucrBase.clsRsyntax.SetCommandString("")
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm()", 1)
+        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
 
         ucrSaveResult.Reset()
 
@@ -490,16 +491,17 @@ Public Class dlgModelling
                 strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript & strOutPut, bSilent:=True)
                 If strVecOutput IsNot Nothing Then
                     If strVecOutput.Length > 1 Then
-                        ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5) & "...")
-                    Else
-                        ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5))
+                        ucrInputTryMessage.SetName("Model is working properly")
+                        ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
                     End If
                 Else
                     ucrInputTryMessage.SetName("Command produced an error or no output to display.")
+                    ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
                 End If
             End If
         Catch ex As Exception
             ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
+            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
         Finally
             strTempScript = ""
             strDetach = clsDetach.Clone().ToScript(strTempScript)
@@ -511,6 +513,7 @@ Public Class dlgModelling
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForTestColumn.GetVariableNames(False))
         ucrInputTryMessage.SetName("")
         cmdTry.Enabled = Not ucrReceiverForTestColumn.IsEmpty()
+        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
         TestOkEnabled()
     End Sub
 
