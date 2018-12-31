@@ -29,7 +29,7 @@ Public Class dlgTransformClimatic
 
     'Count and Spells
     Private clsRRainday, clsRRaindayMatch, clsRCountFunction, clsRollConsecutiveSumFunction As New RFunction
-    Private clsRRaindayAndOperator, clsRRaindayUpperOperator, clsRRaindayLowerOperator, clsRCountOperator As New ROperator
+    Private clsRRaindayAndOperator, clsRRaindayOrOperator, clsRRaindayUpperOperator, clsRRaindayLowerOperator, clsRCountOperator As New ROperator
     Private clsGreaterThanOperator, clsLessThanOperator As New ROperator
 
     ' Water Balance
@@ -249,6 +249,7 @@ Public Class dlgTransformClimatic
         clsRRaindayMatch = New RFunction
         clsRCountFunction = New RFunction
         clsRRaindayAndOperator = New ROperator
+        clsRRaindayOrOperator = New ROperator
         clsRRaindayUpperOperator = New ROperator
         clsRRaindayLowerOperator = New ROperator
         clsRCountOperator = New ROperator
@@ -284,7 +285,10 @@ Public Class dlgTransformClimatic
         clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=1)
         clsRRaindayLowerOperator.SetOperation(">=")
 
+        clsRRaindayOrOperator.SetOperation("|")
+        clsRRaindayOrOperator.AddParameter("upper", clsROperatorParameter:=clsGreaterThanOperator, iPosition:=0)
         clsGreaterThanOperator.SetOperation(">")
+        clsRRaindayOrOperator.AddParameter("lower", clsROperatorParameter:=clsLessThanOperator, iPosition:=1)
         clsLessThanOperator.SetOperation("<")
 
         'Cumulative
@@ -404,6 +408,8 @@ Public Class dlgTransformClimatic
         ucrReceiverData.AddAdditionalCodeParameterPair(clsCumulativeMinimum, New RParameter("x", 0, False), iAdditionalPairNo:=11)
         ucrNudSumOver.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("n", 1), iAdditionalPairNo:=1)
         ucrInputSum.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("fun", 2), iAdditionalPairNo:=1)
+        ucrInputSpellUpper.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("max", 1), iAdditionalPairNo:=1)
+        ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("min", 1), iAdditionalPairNo:=1)
 
         ucrPnlTransform.SetRCode(clsTransformCheck, bReset)
 
@@ -454,25 +460,29 @@ Public Class dlgTransformClimatic
                 clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
                 clsRRaindayUpperOperator.AddParameter("max", ucrInputSpellUpper.GetText, iPosition:=1)
                 clsRCountOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
+                clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=0)
             Case "Between" ' match(Rain>=LEFT & Rain<=RIGHT, 1, nomatch = 0)
                 clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
                 clsRRaindayUpperOperator.AddParameter("max", ucrInputSpellUpper.GetText, iPosition:=1)
                 clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=1)
                 clsRRaindayLowerOperator.AddParameter("min", ucrInputSpellLower.GetText, iPosition:=1)
                 clsRCountOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=0)
+                clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=0)
             Case "Outer"
-                clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsGreaterThanOperator, iPosition:=0)
-                clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsLessThanOperator, iPosition:=1)
-                clsRCountOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=2)
+                clsRRaindayOrOperator.AddParameter("upper", clsROperatorParameter:=clsGreaterThanOperator, iPosition:=0)
+                clsRRaindayOrOperator.AddParameter("lower", clsROperatorParameter:=clsLessThanOperator, iPosition:=1)
+                clsRCountOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayOrOperator, iPosition:=0)
                 'These are a temporary fix so that "min" and "max" parameters can be updated from the controls properly
                 clsLessThanOperator.AddParameter("min", ucrInputSpellLower.GetText, iPosition:=1)
                 clsGreaterThanOperator.AddParameter("max", ucrInputSpellUpper.GetText, iPosition:=1)
+                clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayOrOperator, iPosition:=0)
             Case ">="
                 clsRRaindayAndOperator.RemoveParameterByName("upper")
                 clsRRaindayUpperOperator.RemoveParameterByName("max")
                 clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
                 clsRRaindayLowerOperator.AddParameter("min", ucrInputSpellLower.GetText, iPosition:=1)
                 clsRCountOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
+                clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=0)
         End Select
     End Sub
 
