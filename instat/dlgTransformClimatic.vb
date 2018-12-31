@@ -22,7 +22,7 @@ Public Class dlgTransformClimatic
     Private clsTransformCheck As New RFunction
 
     'Cumulative
-    Private clsCumulativeSum, clsCumulativeProduct, clsCumulativeMaximum, clsCumulativeMinimum As New RFunction
+    Private clsCumulativeSum, clsCumulativeMaximum, clsCumulativeMinimum As New RFunction
 
     'Moving
     Private clsRMovingFunction, clsRasterFuction As New RFunction
@@ -76,7 +76,7 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddRadioButton(rdoMultSpells)
         ucrPnlTransform.AddRadioButton(rdoWaterBalance)
 
-        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCumulative, "function_exp", {"cumsum", "cumprod", "cummin", "cummax"})
+        ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCumulative, "function_exp", {"cumsum", "cummin", "cummax"})
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "function_exp", "rollapply")
         ucrPnlTransform.AddParameterPresentCondition(rdoCount, "sub_calculations", True)
         ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "function_exp", {"rollapply", "movingFun"})
@@ -130,7 +130,7 @@ Public Class dlgTransformClimatic
         ucrChkGroupByYear.SetText("Calculate by Year")
 
         'Cumulative
-        ucrInputCumulative.AddItems({"Sum", "Product", "Maximum", "Minimum"})
+        ucrInputCumulative.AddItems({"Sum", "Maximum", "Minimum"})
         ucrInputCumulative.SetDropDownStyleAsNonEditable()
 
         ' Moving
@@ -237,7 +237,6 @@ Public Class dlgTransformClimatic
         clsRTransformCountSpellSub = New RFunction
 
         clsCumulativeSum = New RFunction
-        clsCumulativeProduct = New RFunction
         clsCumulativeMaximum = New RFunction
         clsCumulativeMinimum = New RFunction
 
@@ -291,9 +290,6 @@ Public Class dlgTransformClimatic
         'Cumulative
         clsCumulativeSum.bToScriptAsRString = True
         clsCumulativeSum.SetRCommand("cumsum")
-
-        clsCumulativeProduct.bToScriptAsRString = True
-        clsCumulativeProduct.SetRCommand("cumprod")
 
         clsCumulativeMaximum.bToScriptAsRString = True
         clsCumulativeMaximum.SetRCommand("cummax")
@@ -404,7 +400,6 @@ Public Class dlgTransformClimatic
         ucrReceiverData.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=7)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=8)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsCumulativeSum, New RParameter("x", 0, False), iAdditionalPairNo:=9)
-        ucrReceiverData.AddAdditionalCodeParameterPair(clsCumulativeProduct, New RParameter("x", 0, False), iAdditionalPairNo:=10)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsCumulativeMaximum, New RParameter("x", 0, False), iAdditionalPairNo:=11)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsCumulativeMinimum, New RParameter("x", 0, False), iAdditionalPairNo:=12)
         ucrNudSumOver.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("n", 1), iAdditionalPairNo:=1)
@@ -669,8 +664,6 @@ Public Class dlgTransformClimatic
         Select Case ucrInputCumulative.GetText
             Case "Sum"
                 clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsCumulativeSum, iPosition:=1)
-            Case "Product"
-                clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsCumulativeProduct, iPosition:=1)
             Case "Maximum"
                 clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsCumulativeMaximum, iPosition:=1)
             Case "Minimum"
@@ -682,8 +675,6 @@ Public Class dlgTransformClimatic
         Select Case ucrInputCumulative.GetText
             Case "Sum"
                 ucrInputColName.SetName("cumsum")
-            Case "Product"
-                ucrInputColName.SetName("cumprod")
             Case "Maximum"
                 ucrInputColName.SetName("cummax")
             Case "Minimum"
