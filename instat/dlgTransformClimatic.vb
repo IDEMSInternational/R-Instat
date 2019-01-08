@@ -266,7 +266,6 @@ Public Class dlgTransformClimatic
         ucrReceiverData.SetMeAsReceiver()
 
         ' Count and Spells: Rainday
-
         clsRRainday.SetRCommand("instat_calculation$new")
         clsRRainday.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsRRainday.AddParameter("function_exp", clsRFunctionParameter:=clsRRaindayMatch, iPosition:=1)
