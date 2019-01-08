@@ -134,9 +134,12 @@ Public Class ucrDataFrame
     End Sub
 
     Public Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True)
-        Dim Index As Integer
+        Dim Index As Integer = -1
+
         FillComboBox(False)
-        Index = cboAvailableDataFrames.Items.IndexOf(strDataframe)
+        If strDataframe IsNot Nothing Then
+            Index = cboAvailableDataFrames.Items.IndexOf(strDataframe)
+        End If
         If Index >= 0 Then
             cboAvailableDataFrames.SelectedIndex = Index
         End If
@@ -196,7 +199,9 @@ Public Class ucrDataFrame
 
     Private Sub mnuRightClickCopy_Click(sender As Object, e As EventArgs) Handles mnuRightClickCopy.Click
         'TODO Combo box should be replaced by ucrInput so that context menu done automatically
-        Clipboard.SetText(cboAvailableDataFrames.SelectedText)
+        If cboAvailableDataFrames.Text <> "" Then
+            Clipboard.SetText(cboAvailableDataFrames.Text)
+        End If
     End Sub
 
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
