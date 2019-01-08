@@ -1517,7 +1517,7 @@ DataBook$set("public", "import_from_climsoft", function(stations = c(), elements
   #need to perform checks here
   con = self$get_database_connection()
   if(!is.null(stations)){
-    my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
+    my_stations = paste0("(", paste(paste0("'", stations, "'"), collapse=", "), ")")
     station_info <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
   }
   date_bounds=""
@@ -1754,7 +1754,7 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
   
   if(!format %in% c("days", "months", "years")) stop("format must be either 'days', 'months' or 'years'")
   if(!all(stack_cols %in% names(x))) stop("Some of the stack_cols were not found in x.")
-  if(!all(sapply(x[, stack_cols], is.numeric))) stop("All stack_cols must be numeric\nThe following stack_cols are not numeric: ", paste(stack_cols[!sapply(x[, stack_cols], is.numeric)], collapse = ","))
+  if(!all(sapply(x[, stack_cols], function(col) is.numeric(col) || (is.logical(col) && all(is.na(col)))))) stop("All stack_cols must be numeric\nThe following stack_cols are not numeric: ", paste(stack_cols[!sapply(x[, stack_cols], is.numeric)], collapse = ","))
   if(!missing(day) && !day %in% names(x)) stop("day column not found in x.")
   if(!missing(month) && !month %in% names(x)) stop("month column not found in x.")
   if(!missing(year) && !year %in% names(x)) stop("year column not found in x.")

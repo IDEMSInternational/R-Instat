@@ -60,6 +60,16 @@ Public Class ucrReceiver
     ' If not attached to primary data frame, should only data frames linked to the primary data frame be shown.
     Public bOnlyLinkedToPrimaryDataFrames As Boolean = True
 
+    ' When calling GetVariableNames() this is the R package & function name the variables will be inside
+    ' Only currently used in Multiple receiver but defined here as needed in general method SetControlValue()
+    ' for ExtractItemsFromRList()
+    Protected strVariablesListPackageName As String = ""
+    Protected strVariablesListFunctionName As String = "c"
+    ' Set to True if GetVariableNames() should always return an R list (using function above)
+    ' Even when only one variable.
+    ' Currently only implemented for multiple receiver.
+    Public bForceVariablesAsList As Boolean = False
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -131,7 +141,7 @@ Public Class ucrReceiver
         Return strVarNames
     End Function
 
-    Public Overridable Function GetVariableNamesList(Optional bWithQuotes As Boolean = True) As String()
+    Public Overridable Function GetVariableNamesList(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
         Dim strVarNames As String() = Nothing
         Return strVarNames
     End Function
@@ -423,13 +433,13 @@ Public Class ucrReceiver
             If bChangeParameterValue Then
                 If bParameterIsString AndAlso clsTempParameter.bIsString Then
                     If strValuesToIgnore Is Nothing OrElse (Not strValuesToIgnore.Contains(clsTempParameter.strArgumentValue)) Then
-                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue)
+                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue, strPackageName:=strVariablesListPackageName, strFunctionName:=strVariablesListFunctionName)
                     End If
                     'TODO how to recover the data frame name in this case
                 ElseIf bParameterIsRFunction AndAlso clsTempParameter.bIsFunction Then
                     clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
-                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue)
+                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue, strPackageName:="", strFunctionName:="c")
                     End If
                     'TODO Should this the same for other item types?
                     If strType = "column" Then
@@ -556,5 +566,13 @@ Public Class ucrReceiver
             SetMeAsReceiver()
             frmMain.clsRLink.SelectColumnsWithMetadataProperty(Me, strCurrentDataFrame, strProperty, strValues)
         End If
+    End Sub
+
+    Public Sub SetVariablesListPackageName(strNewVariablesListPackageName As String)
+        strVariablesListPackageName = strNewVariablesListPackageName
+    End Sub
+
+    Public Sub SetVariablesListFunctionName(strNewVariablesListFunctionName As String)
+        strVariablesListFunctionName = strNewVariablesListFunctionName
     End Sub
 End Class

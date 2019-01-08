@@ -223,14 +223,17 @@ Public Class ucrReceiverMultiple
     Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
         Dim i As Integer
-        If lstSelectedVariables.Items.Count = 1 Then
+        If lstSelectedVariables.Items.Count = 1 AndAlso Not bForceVariablesAsList Then
             If bWithQuotes Then
                 strTemp = Chr(34) & lstSelectedVariables.Items(0).Text & Chr(34)
             Else
                 strTemp = lstSelectedVariables.Items(0).Text
             End If
-        ElseIf lstSelectedVariables.Items.Count > 1 Then
-            strTemp = "c" & "("
+        ElseIf lstSelectedVariables.Items.Count > 1 OrElse bForceVariablesAsList Then
+            If strVariablesListPackageName <> "" Then
+                strTemp = strVariablesListPackageName & "::"
+            End If
+            strTemp = strTemp & strVariablesListFunctionName & "("
             For i = 0 To lstSelectedVariables.Items.Count - 1
                 If i > 0 Then
                     strTemp = strTemp & ","
@@ -249,13 +252,13 @@ Public Class ucrReceiverMultiple
         Return strTemp
     End Function
 
-    Public Overrides Function GetVariableNamesList(Optional bWithQuotes As Boolean = True) As String()
+    Public Overrides Function GetVariableNamesList(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
         Dim lstItems As String()
 
         ReDim lstItems(0 To lstSelectedVariables.Items.Count - 1)
         For i = 0 To lstSelectedVariables.Items.Count - 1
             If bWithQuotes Then
-                lstItems(i) = Chr(34) & lstSelectedVariables.Items(i).Text & Chr(34)
+                lstItems(i) = strQuotes & lstSelectedVariables.Items(i).Text & strQuotes
             Else
                 lstItems(i) = lstSelectedVariables.Items(i).Text
             End If
