@@ -486,7 +486,7 @@
     <value>Two Variables</value>
   </data>
   <data name="mnuModelThreeVariablesFitModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="mnuModelThreeVariablesFitModel.Text" xml:space="preserve">
     <value>Fit Model...</value>
@@ -495,7 +495,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelThreeVariablesChooseModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="mnuModelThreeVariablesChooseModel.Text" xml:space="preserve">
     <value>Choose Model...</value>
@@ -504,7 +504,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelThreeVariablesUseModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="mnuModelThreeVariablesUseModel.Text" xml:space="preserve">
     <value>Use Model...</value>
@@ -516,7 +516,7 @@
     <value>Three Variables</value>
   </data>
   <data name="mnuModelFourVariablesFitModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="mnuModelFourVariablesFitModel.Text" xml:space="preserve">
     <value>Fit Model...</value>
@@ -525,7 +525,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelFourVariablesChooseModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="mnuModelFourVariablesChooseModel.Text" xml:space="preserve">
     <value>Choose Model...</value>
@@ -534,7 +534,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelFourVariablesUseModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="mnuModelFourVariablesUseModel.Text" xml:space="preserve">
     <value>Use Model...</value>
@@ -546,7 +546,7 @@
     <value>Four Variables</value>
   </data>
   <data name="mnuModelGeneralFitModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="mnuModelGeneralFitModel.Text" xml:space="preserve">
     <value>Fit Model...</value>
@@ -555,7 +555,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelGeneralChooseModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="mnuModelGeneralChooseModel.Text" xml:space="preserve">
     <value>Choose Model...</value>
@@ -564,7 +564,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelGeneralUseModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="mnuModelGeneralUseModel.Text" xml:space="preserve">
     <value>Use Model...</value>
@@ -932,12 +932,6 @@
   <data name="mnuHelpHistFAQ.Text" xml:space="preserve">
     <value>History and FAQ</value>
   </data>
-  <data name="mnuHelpSpreadsheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 22</value>
-  </data>
-  <data name="mnuHelpSpreadsheet.Text" xml:space="preserve">
-    <value>Spreadsheet</value>
-  </data>
   <data name="mnuHelpGetingStarted.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 22</value>
   </data>
@@ -946,6 +940,18 @@
   </data>
   <data name="ToolStripSeparator28.Size" type="System.Drawing.Size, System.Drawing">
     <value>218, 6</value>
+  </data>
+  <data name="mnuHelpWindows.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 22</value>
+  </data>
+  <data name="mnuHelpWindows.Text" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="mnuHelpDataViewSpreadsheet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 22</value>
+  </data>
+  <data name="mnuHelpDataViewSpreadsheet.Text" xml:space="preserve">
+    <value>Data View (Spreadsheet)</value>
   </data>
   <data name="mnuHelpMenus.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 22</value>
@@ -6249,6 +6255,12 @@
   <data name="&gt;&gt;mnuModelHypothesisTests.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuModelModel.Name" xml:space="preserve">
+    <value>mnuModelModel</value>
+  </data>
+  <data name="&gt;&gt;mnuModelModel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuModelOtherOneVariable.Name" xml:space="preserve">
     <value>mnuModelOtherOneVariable</value>
   </data>
@@ -6519,12 +6531,6 @@
   <data name="&gt;&gt;mnuHelpHistFAQ.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuHelpSpreadsheet.Name" xml:space="preserve">
-    <value>mnuHelpSpreadsheet</value>
-  </data>
-  <data name="&gt;&gt;mnuHelpSpreadsheet.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;mnuHelpGetingStarted.Name" xml:space="preserve">
     <value>mnuHelpGetingStarted</value>
   </data>
@@ -6536,6 +6542,18 @@
   </data>
   <data name="&gt;&gt;ToolStripSeparator28.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuHelpWindows.Name" xml:space="preserve">
+    <value>mnuHelpWindows</value>
+  </data>
+  <data name="&gt;&gt;mnuHelpWindows.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuHelpDataViewSpreadsheet.Name" xml:space="preserve">
+    <value>mnuHelpDataViewSpreadsheet</value>
+  </data>
+  <data name="&gt;&gt;mnuHelpDataViewSpreadsheet.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuHelpMenus.Name" xml:space="preserve">
     <value>mnuHelpMenus</value>
@@ -8911,12 +8929,6 @@
     <value>ExportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuModelModel.Name" xml:space="preserve">
-    <value>mnuModelModel</value>
-  </data>
-  <data name="&gt;&gt;mnuModelModel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
