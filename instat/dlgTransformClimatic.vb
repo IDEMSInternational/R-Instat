@@ -217,15 +217,17 @@ Public Class dlgTransformClimatic
         ucrReceiverData.SetMeAsReceiver()
 
         ' Count and Spells: Rainday
-        clsRRaindayMatch.bToScriptAsRString = True
+        ' TODO remove this function
+        'clsRRaindayMatch.bToScriptAsRString = True
         clsRRainday.SetRCommand("instat_calculation$new")
         clsRRainday.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsRRainday.AddParameter("function_exp", clsRFunctionParameter:=clsRRaindayMatch, iPosition:=1)
+        clsRRainday.AddParameter("function_exp", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=1)
         clsRRainday.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
         clsRRainday.SetAssignTo("rain_day")
 
-        clsRRaindayMatch.SetRCommand("match")
-        clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator)
+        clsRRaindayAndOperator.bToScriptAsRString = True
+        'clsRRaindayMatch.SetRCommand("match")
+        'clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator)
         clsRRaindayAndOperator.SetOperation("&")
         clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
         clsRRaindayLowerOperator.SetOperation("<=")
@@ -233,8 +235,8 @@ Public Class dlgTransformClimatic
         clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
         clsRRaindayUpperOperator.SetOperation(">=")
         clsRRaindayUpperOperator.AddParameter("max", 0.85, iPosition:=1)
-        clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
-        clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
+        'clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
+        'clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
 
         clsGreaterThanOperator.SetOperation(">")
         clsLessThanOperator.SetOperation("<")
@@ -414,7 +416,7 @@ Public Class dlgTransformClimatic
             clsRTransform.RemoveParameterByName("sub_calculations")
             clsTransformCheck = clsRTransform
         ElseIf rdoSpell.Checked Then
-            clsRTransform.AddParameter("function_exp", Chr(34) & "consecutive_sum(x = " & strRainDay & ", initial_value = NA)" & Chr(34), iPosition:=1)
+            clsRTransform.AddParameter("function_exp", Chr(34) & ".spells(x = " & strRainDay & ")" & Chr(34), iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
             clsRTransform.RemoveParameterByName("calculated_from")
             clsTransformCheck = clsRTransform
