@@ -31,6 +31,7 @@ Public Class dlgInsertColumn
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        ReopenDialog()
         TestOKEnabled()
     End Sub
 
@@ -180,12 +181,17 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub ucrSelectorInsertColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorInsertColumns.ControlValueChanged
-        ucrNudStartRow.SetMinMax(1, ucrSelectorInsertColumns.ucrAvailableDataFrames.iDataFrameLength)
-        ucrNudStartRow.Value = ucrSelectorInsertColumns.ucrAvailableDataFrames.iDataFrameLength
+        ReopenDialog()
     End Sub
 
-    Private Sub ucrReceiverColumnsToInsert_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToInsert.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged, ucrPnlBeforeAfter.ControlContentsChanged, ucrPnlInsertColumns.ControlContentsChanged, ucrInputPrefixForNewColumn.ControlContentsChanged, ucrInputDefaultValue.ControlContentsChanged, ucrInputBeforeAfter.ControlContentsChanged, ucrNudNumberOfRows.ControlContentsChanged, ucrNudStartRow.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged
+    Private Sub ucrReceiverColumnsToInsert_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToInsert.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged, ucrPnlBeforeAfter.ControlContentsChanged, ucrPnlInsertColumns.ControlContentsChanged, ucrInputPrefixForNewColumn.ControlContentsChanged, ucrInputDefaultValue.ControlContentsChanged, ucrInputBeforeAfter.ControlContentsChanged, ucrNudNumberOfRows.ControlContentsChanged, ucrNudStartRow.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged, ucrSelectorInsertColumns.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ReopenDialog()
+
+        ucrNudStartRow.SetMinMax(1, frmMain.clsRLink.GetDataFrameLength(ucrSelectorInsertColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text))
+        ucrNudStartRow.Value = frmMain.clsRLink.GetDataFrameLength(ucrSelectorInsertColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
     End Sub
 
     Private Sub ucrPnlColumnsOrRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnsOrRows.ControlValueChanged, ucrPnlInsertColumns.ControlValueChanged
