@@ -94,7 +94,7 @@ Public Class dlgInsertColumn
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrPnlInsertColumns, {rdoInsertColumns}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudNumberOfColumns, {rdoInsertColumns}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrInputDefaultValue, {rdoInsertColumns}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumnsOrRows.AddToLinkedControls(ucrInputPrefixForNewColumn, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrInputPrefixForNewColumn, {rdoInsertColumns}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrPnlBeforeAfter, {rdoInsertRows}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudNumberOfRows, {rdoInsertRows}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudStartRow, {rdoInsertRows}, bNewLinkedHideIfParameterMissing:=True)
@@ -189,7 +189,7 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub ReopenDialog()
-
+        ' Should use ucrSelectorInsertColumns.ucrAvailableDataFrames.iDataFrameLength but doesn't update before dialog loads
         ucrNudStartRow.SetMinMax(1, frmMain.clsRLink.GetDataFrameLength(ucrSelectorInsertColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text))
         ucrNudStartRow.Value = frmMain.clsRLink.GetDataFrameLength(ucrSelectorInsertColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
     End Sub
@@ -199,7 +199,7 @@ Public Class dlgInsertColumn
             ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
             If rdoAtEnd.Checked OrElse rdoAtStart.Checked Then
                 ucrSelectorInsertColumns.SetVariablesVisible(False)
-            ElseIf rdoBeforeAfter.Checked
+            ElseIf rdoBeforeAfter.Checked Then
                 ucrSelectorInsertColumns.SetVariablesVisible(True)
             End If
         Else
