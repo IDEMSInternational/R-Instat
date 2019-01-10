@@ -31,7 +31,6 @@ Public Class dlgInsertColumn
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
-        ReopenDialog()
         TestOKEnabled()
     End Sub
 
@@ -104,6 +103,7 @@ Public Class dlgInsertColumn
         ucrInputDefaultValue.SetLinkedDisplayControl(lblDefaultValue)
 
         ucrInputPrefixForNewColumn.SetParameter(New RParameter("col_name", 6))
+        ucrInputPrefixForNewColumn.SetPrefix("X")
         ucrInputPrefixForNewColumn.SetLinkedDisplayControl(lblInputColumnPrefix)
 
         ucrPnlBeforeAfter.SetLinkedDisplayControl(grpOptions)
@@ -132,19 +132,6 @@ Public Class dlgInsertColumn
         clsInsertRowFunction.AddParameter("start_row", ucrSelectorInsertColumns.ucrAvailableDataFrames.iDataFrameLength)
         ucrNudStartRow.SetMinMax(1, ucrSelectorInsertColumns.ucrAvailableDataFrames.iDataFrameLength)
         ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
-    End Sub
-
-    Private Sub ReopenDialog()
-        If rdoInsertColumns.Checked Then
-            grpInsert.Visible = True
-        ElseIf rdoInsertRows.Checked Then
-            grpOptions.Visible = True
-        End If
-        ucrSelectorInsertColumns.Reset()
-        ucrNudStartRow.SetMinMax(1, ucrSelectorInsertColumns.ucrAvailableDataFrames.iDataFrameLength)
-        If ucrSelectorInsertColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrNudStartRow.Value = ucrSelectorInsertColumns.ucrAvailableDataFrames.iDataFrameLength
-        End If
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -190,14 +177,6 @@ Public Class dlgInsertColumn
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If rdoInsertColumns.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
-        ElseIf rdoInsertRows.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsInsertRowFunction)
-        End If
     End Sub
 
     Private Sub ucrSelectorInsertColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorInsertColumns.ControlValueChanged
