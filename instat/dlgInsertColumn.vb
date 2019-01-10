@@ -164,20 +164,25 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub TestOKEnabled()
-        If rdoInsertColumns.Checked Then
-            If (rdoBeforeAfter.Checked AndAlso Not ucrInputBeforeAfter.IsEmpty AndAlso Not ucrReceiverColumnsToInsert.IsEmpty AndAlso Not ucrInputPrefixForNewColumn.IsEmpty AndAlso ucrNudNumberOfColumns.GetText <> "" AndAlso Not ucrInputDefaultValue.IsEmpty) Then
-                ucrBase.OKEnabled(True)
-            ElseIf ((rdoAtEnd.Checked OrElse rdoAtStart.Checked) AndAlso ucrNudNumberOfColumns.GetText <> "" AndAlso Not ucrInputDefaultValue.IsEmpty AndAlso Not ucrInputPrefixForNewColumn.IsEmpty) Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
+        If ucrSelectorInsertColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            If rdoInsertColumns.Checked Then
+                If (rdoBeforeAfter.Checked AndAlso Not ucrInputBeforeAfter.IsEmpty AndAlso Not ucrReceiverColumnsToInsert.IsEmpty AndAlso Not ucrInputPrefixForNewColumn.IsEmpty AndAlso ucrNudNumberOfColumns.GetText <> "" AndAlso Not ucrInputDefaultValue.IsEmpty) Then
+                    ucrBase.OKEnabled(True)
+                ElseIf ((rdoAtEnd.Checked OrElse rdoAtStart.Checked) AndAlso ucrNudNumberOfColumns.GetText <> "" AndAlso Not ucrInputDefaultValue.IsEmpty AndAlso Not ucrInputPrefixForNewColumn.IsEmpty) Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            ElseIf rdoInsertRows.Checked Then
+                If (ucrNudNumberOfRows.GetText <> "" AndAlso ucrNudStartRow.GetText <> "") Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
             End If
-        ElseIf rdoInsertRows.Checked Then
-            If (ucrNudNumberOfRows.GetText <> "" AndAlso ucrNudStartRow.GetText <> "") Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
