@@ -39,6 +39,7 @@ Public Class dlgVisualizeData
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrPnlVisualizeData.AddRadioButton(rdoVisDat)
@@ -85,6 +86,7 @@ Public Class dlgVisualizeData
 
         clsVisDatFunction.SetPackageName("visdat")
         clsVisDatFunction.SetRCommand("vis_dat")
+        clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
         clsVisDatFunction.AddParameter("sort_type", "TRUE", iPosition:=1)
         clsVisDatFunction.AddParameter("palette", Chr(34) & "default" & Chr(34), iPosition:=2)
         clsVisDatFunction.AddParameter("warn_large_data", "TRUE", iPosition:=3)
@@ -92,6 +94,7 @@ Public Class dlgVisualizeData
 
         clsVisMissFunction.SetPackageName("visdat")
         clsVisMissFunction.SetRCommand("vis_miss")
+        clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
         clsVisMissFunction.AddParameter("cluster", "TRUE", iPosition:=1)
         clsVisMissFunction.AddParameter("sort_miss", "FALSE", iPosition:=2)
         clsVisMissFunction.AddParameter("show_perc", "TRUE", iPosition:=3)
@@ -101,6 +104,7 @@ Public Class dlgVisualizeData
 
         clsVisGuessFunction.SetPackageName("visdat")
         clsVisGuessFunction.SetRCommand("vis_guess")
+        clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
         clsVisGuessFunction.AddParameter("palette", Chr(34) & "default" & Chr(34), iPosition:=1)
 
         clsCurrBaseFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -113,7 +117,7 @@ Public Class dlgVisualizeData
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0, False), 1)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0, False), 2)
 
-        'ucrPnlSelectData.SetRCode(clsCurrBaseFunction, bReset)
+        ucrPnlSelectData.SetRCode(clsCurrBaseFunction, bReset)
         ucrPnlVisualizeData.SetRCode(clsCurrBaseFunction, bReset)
         ucrReceiverVisualizeData.SetRCode(clsVisDatFunction, bReset)
         ucrSaveGraph.SetRCode(clsCurrBaseFunction, bReset)
@@ -152,6 +156,7 @@ Public Class dlgVisualizeData
             clsCurrBaseFunction = clsVisGuessFunction
         End If
         ucrBase.clsRsyntax.SetBaseRFunction(clsCurrBaseFunction)
+        SelectData()
     End Sub
 
     Private Sub SelectData()
@@ -163,7 +168,7 @@ Public Class dlgVisualizeData
             ucrSelectorVisualizeData.btnAdd.Visible = False
             ucrSelectorVisualizeData.btnDataOptions.Visible = False
             clsCurrBaseFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-        Else
+        ElseIf rdoSelectedColumn.Checked Then
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = True
             ucrSelectorVisualizeData.btnAdd.Visible = True
             ucrSelectorVisualizeData.btnDataOptions.Visible = True
