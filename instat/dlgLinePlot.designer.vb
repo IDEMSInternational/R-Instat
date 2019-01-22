@@ -53,6 +53,8 @@ Partial Class dlgLinePlot
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
+        Me.ucrChkPeak = New instat.ucrCheck()
+        Me.ucrChkValley = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -121,6 +123,7 @@ Partial Class dlgLinePlot
         '
         'ucrLinePlotSelector
         '
+        Me.ucrLinePlotSelector.bDropUnusedFilterLevels = False
         Me.ucrLinePlotSelector.bShowHiddenColumns = False
         Me.ucrLinePlotSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrLinePlotSelector, "ucrLinePlotSelector")
@@ -149,10 +152,24 @@ Partial Class dlgLinePlot
         Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.ucrSelector = Nothing
         '
+        'ucrChkPeak
+        '
+        Me.ucrChkPeak.Checked = False
+        resources.ApplyResources(Me.ucrChkPeak, "ucrChkPeak")
+        Me.ucrChkPeak.Name = "ucrChkPeak"
+        '
+        'ucrChkValley
+        '
+        Me.ucrChkValley.Checked = False
+        resources.ApplyResources(Me.ucrChkValley, "ucrChkValley")
+        Me.ucrChkValley.Name = "ucrChkValley"
+        '
         'dlgLinePlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkValley)
+        Me.Controls.Add(Me.ucrChkPeak)
         Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrChkPoints)
@@ -190,4 +207,6 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrSave As ucrSave
     Friend WithEvents ucrChkLineofBestFit As ucrCheck
     Friend WithEvents ucrChkWithSE As ucrCheck
+    Friend WithEvents ucrChkValley As ucrCheck
+    Friend WithEvents ucrChkPeak As ucrCheck
 End Class
