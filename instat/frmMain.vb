@@ -2084,15 +2084,15 @@ Public Class frmMain
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "134")
     End Sub
 
-    Private Sub mnuClimaticTidyandExamineDuplicates_Click(sender As Object, e As EventArgs)
-        dlgDuplicates.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticTidyandExamineOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineOneVariableGraph.Click
         dlgOneVariableGraph.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticTidyandExamineOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineOneVariableFrequencies.Click
         dlgOneWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticTidyandExamineDuplicates_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineDuplicates.Click
+        dlgDuplicates.ShowDialog()
     End Sub
 End Class
