@@ -48,7 +48,7 @@ Public Class dlgClimSoft
         ucrReceiverMultipleStations.Selector = ucrSelectorForClimSoft
         ucrReceiverMultipleStations.SetItemType("database_variables")
         ucrReceiverMultipleStations.strDatabaseQuery = "SELECT stationId FROM station;"
-        ucrReceiverMultipleStations.bWithQuotes = False
+        ucrReceiverMultipleStations.strSelectorHeading = "Stations"
 
         ucrReceiverMultipleElements.SetParameter(New RParameter("elements", 1))
         ucrReceiverMultipleElements.SetParameterIsString()
@@ -56,6 +56,7 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.SetItemType("database_variables")
         ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy GROUP BY observationfinal.describedBy;"
         ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
+        ucrReceiverMultipleElements.strSelectorHeading = "Elements"
 
         ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 2))
         ucrChkObservationData.SetText("Observation Data")
@@ -100,7 +101,7 @@ Public Class dlgClimSoft
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -127,6 +128,9 @@ Public Class dlgClimSoft
 
     Private Sub SetConnectionActiveStatus(bCurrentStatus As Boolean)
         bConnectionActive = bCurrentStatus
+        If Not bConnectionActive Then
+            ucrReceiverMultipleStations.Clear()
+        End If
     End Sub
 
     Private Sub ucrReceiverMultipleStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlValueChanged
@@ -134,12 +138,20 @@ Public Class dlgClimSoft
             ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy GROUP BY observationfinal.describedBy;"
         Else
             ucrReceiverMultipleElements.Clear()
-            ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN (" & String.Join(",", ucrReceiverMultipleStations.GetVariableNamesList(bWithQuotes:=False)) & ") GROUP BY observationfinal.describedBy;"
+            ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN (" & String.Join(",", ucrReceiverMultipleStations.GetVariableNamesList(strQuotes:=Chr(39))) & ") GROUP BY observationfinal.describedBy;"
         End If
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrControlsContents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleElements.ControlValueChanged, ucrChkObservationData.ControlContentsChanged
+    Private Sub ucrControlsContents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleElements.ControlContentsChanged, ucrChkObservationData.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkObservationData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkObservationData.ControlValueChanged
+        If ucrChkObservationData.Checked Then
+            ucrReceiverMultipleElements.SetMeAsReceiver()
+        Else
+            ucrReceiverMultipleStations.SetMeAsReceiver()
+        End If
     End Sub
 End Class
