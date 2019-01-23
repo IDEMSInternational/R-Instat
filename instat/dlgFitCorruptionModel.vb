@@ -29,6 +29,9 @@ Public Class dlgFitCorruptionModel
     'Function for display sub dialog
     Public clsVisReg, clsAutoPlot, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
 
+    'Saving Operators/Functions
+    Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
+
     Private Sub dlgFitCorruptionModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -92,6 +95,11 @@ Public Class dlgFitCorruptionModel
         clsExplanatoryVariables = New ROperator
         clsFormula = New ROperator
 
+        clsRstandardFunction = New RFunction
+        clsHatvaluesFunction = New RFunction
+        clsResidualFunction = New RFunction
+        clsFittedValuesFunction = New RFunction
+
         clsBinomialModel.SetRCommand("binomial")
         clsBinomialModel.AddParameter("link", Chr(34) & "logit" & Chr(34))
 
@@ -143,6 +151,19 @@ Public Class dlgFitCorruptionModel
         clsVisReg.iCallType = 3
         clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsCorruptionModel, iPosition:=0)
         clsVisReg.bExcludeAssignedFunctionOutput = False
+
+        clsResidualFunction.SetRCommand("residuals")
+        clsResidualFunction.AddParameter("object", clsRFunctionParameter:=clsCorruptionModel, iPosition:=0)
+
+        clsFittedValuesFunction.SetRCommand("fitted.values")
+        clsFittedValuesFunction.AddParameter("object", clsRFunctionParameter:=clsCorruptionModel, iPosition:=0)
+
+        clsRstandardFunction.SetRCommand("rstandard")
+        clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsCorruptionModel, iPosition:=0)
+
+        clsHatvaluesFunction.SetRCommand("hatvalues")
+        clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=clsCorruptionModel, iPosition:=0)
+
 
         clsCorruptionModel.SetRCommand("glm")
         clsCorruptionModel.AddParameter("formula", clsROperatorParameter:=clsFormula)
@@ -233,7 +254,7 @@ Public Class dlgFitCorruptionModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetDisplayOptions)
+        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesFunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorFitModel.ucrAvailableDataFrames, bReset:=bResetDisplayOptions)
         sdgSimpleRegOptions.ShowDialog()
         GraphAssignTo()
         bResetDisplayOptions = False

@@ -173,7 +173,7 @@ lat_lon_dataframe <- function(datafile){
   return(cbind(lat_lon,station))
 }
 
-output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitude, station, year, element, long.data = TRUE) {
+output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitude, station, year, element, long.data = TRUE, na_code = -999) {
   
   if(missing(data)) stop("data should be provided")
   if(missing(station)) stop("station must be provided")
@@ -229,10 +229,12 @@ output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitu
     }
   }
   
-  unstacked_data <- data %>% dplyr::select(station, year, element) %>% tidyr::spread(key = station, element)
+  unstacked_data <- data %>% dplyr::select(station, year, element) %>% tidyr::spread(key = station, value = element)
   names(unstacked_data)[1] <- station_label
+  unstacked_data <- unstacked_data %>% mutate_all(funs(replace(., is.na(.), na_code)))
   
-  lat_lon_data <- data %>% dplyr::group_by(station) %>% dplyr::summarise(latitude = min(latitude), longitude = min(longitude))
+  lat_lon_data <- data %>% dplyr::group_by(station) %>% dplyr::summarise(latitude = min(latitude, na.rm = TRUE), longitude = min(longitude, na.rm = TRUE))
+  if(anyNA(data$latitude) || anyNA(data$longitude)) warning("Missing values in latitude or longitude.")
   t_lat_lon_data <- t(lat_lon_data)
   station.names <- as.vector(t_lat_lon_data[1, ])
   t_lat_lon_data <- data.frame(t_lat_lon_data, stringsAsFactors = FALSE)
@@ -1153,4 +1155,22 @@ hashed_id <- function(x, salt, algo = "crc32") {
   y <- sapply(y, function(X) digest::digest(X, algo = algo))
   as.character(y)
 
+}
+
+# Possible alternative but is slower:
+# spells <- function(z) {
+#   Reduce(function(x,y) {y = dplyr::if_else(y == 0, 0, x + 1)}, z[-1], 
+#          init = dplyr::if_else(z[1] == 0, 0, NA_real_), accumulate = TRUE)
+# }
+.spells <- function(x) {
+  y <- mat.or.vec(length(x), 1)
+  if(length(x) > 0) {
+    y[1] <- dplyr::if_else(x[1] == 0, 0, NA_real_)
+    if(length(x) > 1) {
+      for(i in 2:length(x)) {
+        y[i] <- dplyr::if_else(x[i] == 0, 0, y[i-1] + 1)
+      }
+    }
+  }
+  return(y)
 }

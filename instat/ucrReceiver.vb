@@ -141,7 +141,7 @@ Public Class ucrReceiver
         Return strVarNames
     End Function
 
-    Public Overridable Function GetVariableNamesList(Optional bWithQuotes As Boolean = True) As String()
+    Public Overridable Function GetVariableNamesList(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
         Dim strVarNames As String() = Nothing
         Return strVarNames
     End Function
