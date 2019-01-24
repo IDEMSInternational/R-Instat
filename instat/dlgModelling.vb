@@ -491,7 +491,7 @@ Public Class dlgModelling
                 strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript & strOutPut, bSilent:=True)
                 If strVecOutput IsNot Nothing Then
                     If strVecOutput.Length > 1 Then
-                        ucrInputTryMessage.SetName("Model is working properly")
+                        ucrInputTryMessage.SetName("Model runs without error")
                         ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
                     End If
                 Else
