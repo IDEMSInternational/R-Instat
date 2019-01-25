@@ -852,7 +852,7 @@ Public Class ucrGeom
         'Adding layer parameters
         'Geom_jitter Parameters
         'Amount of vertical and horizontal jitter. The jitter is added in both positive and negative directions, so the total spread is twice the value specified here. If omitted, defaults to 40% of the resolution of the data: this means the jitter values will occupy 80% of the implied bins. Categorical data is aligned on the integers, so a width or height of 0.5 will spread the data so it's not possible to see the distinction between the categories.
-        clsgeom_jitter.AddLayerParameter("height", "numeric", "0", lstParameterStrings:={1})
+        clsgeom_jitter.AddLayerParameter("height", "numeric", "0", lstParameterStrings:={2, 0, 1})
         clsgeom_jitter.AddLayerParameter("width", "numeric", "0", lstParameterStrings:={1})
         'Global Layer parameters
         'clsgeom_jitter.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_jitterdodge()"})
