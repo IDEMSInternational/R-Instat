@@ -52,9 +52,6 @@ Public Class dlgModelling
         bUpdating = True
         cmdPredict.Visible = False
 
-        cmdTry.Visible = False
-        ucrInputTryMessage.Visible = False
-
         ucrReceiverForTestColumn.Selector = ucrSelectorModelling
 
         ucrChkIncludeArguments.SetText("Include Arguments")
@@ -110,11 +107,9 @@ Public Class dlgModelling
 
         ucrBase.clsRsyntax.SetCommandString("")
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm()", 1)
+        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
 
         ucrSaveResult.Reset()
-        ucrSaveResult.ucrChkSave.Checked = False
-
-        ucrSaveResult.Enabled = False
 
         ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -469,7 +464,7 @@ Public Class dlgModelling
 
     Private Sub SetRcodeForControls(bReset As Boolean)
         bUpdating = True
-        ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString, bReset)
         bUpdating = False
         SetObjectInFunctions()
     End Sub
@@ -480,51 +475,37 @@ Public Class dlgModelling
         Dim strDetach As String
         Dim strTempScript As String = ""
         Dim strVecOutput As CharacterVector
-        Dim bIsAssigned As Boolean
-        Dim bToBeAssigned As Boolean
-        Dim strAssignTo As String
-        Dim strAssignToColumn As String
-        Dim strAssignToDataFrame As String
-
-        bIsAssigned = ucrBase.clsRsyntax.GetbIsAssigned()
-        bToBeAssigned = ucrBase.clsRsyntax.GetbToBeAssigned()
-        strAssignTo = ucrBase.clsRsyntax.GetstrAssignTo()
-
-        strAssignToColumn = ucrBase.clsRsyntax.GetstrAssignToColumn()
-        strAssignToDataFrame = ucrBase.clsRsyntax.GetstrAssignToDataFrame()
+        Dim clsCommandString As RCodeStructure
 
         Try
             If ucrReceiverForTestColumn.IsEmpty Then
                 ucrInputTryMessage.SetName("")
             Else
                 'get strScript here
-                strAttach = clsAttach.ToScript(strTempScript)
+                strAttach = clsAttach.Clone().ToScript(strTempScript)
                 frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
-                ucrBase.clsRsyntax.RemoveAssignTo()
-                strOutPut = ucrBase.clsRsyntax.GetScript
-                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strOutPut, bSilent:=True)
+                strTempScript = ""
+                clsCommandString = ucrBase.clsRsyntax.clsBaseCommandString.Clone()
+                clsCommandString.RemoveAssignTo()
+                strOutPut = clsCommandString.ToScript(strTempScript, ucrBase.clsRsyntax.strCommandString)
+                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript & strOutPut, bSilent:=True)
                 If strVecOutput IsNot Nothing Then
                     If strVecOutput.Length > 1 Then
-                        ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5) & "...")
-                    Else
-                        ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5))
+                        ucrInputTryMessage.SetName("Model runs without error")
+                        ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
                     End If
                 Else
                     ucrInputTryMessage.SetName("Command produced an error or no output to display.")
+                    ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
                 End If
             End If
         Catch ex As Exception
             ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
+            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
         Finally
             strTempScript = ""
-            strDetach = clsDetach.ToScript(strTempScript)
+            strDetach = clsDetach.Clone().ToScript(strTempScript)
             frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
-            ucrBase.clsRsyntax.SetbIsAssigned(bIsAssigned)
-            ucrBase.clsRsyntax.SetbToBeAssigned(bToBeAssigned)
-            ucrBase.clsRsyntax.SetstrAssignTo(strAssignTo)
-
-            ucrBase.clsRsyntax.SetstrAssignToColumn(strAssignToColumn)
-            ucrBase.clsRsyntax.SetstrAssignToDataFrame(strAssignToDataFrame)
         End Try
     End Sub
 
@@ -532,6 +513,7 @@ Public Class dlgModelling
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForTestColumn.GetVariableNames(False))
         ucrInputTryMessage.SetName("")
         cmdTry.Enabled = Not ucrReceiverForTestColumn.IsEmpty()
+        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
         TestOkEnabled()
     End Sub
 
@@ -590,5 +572,9 @@ Public Class dlgModelling
                 grplme4.Visible = False
                 grpMASS.Visible = True
         End Select
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        ucrReceiverForTestColumn.AddtoCombobox(ucrReceiverForTestColumn.GetText)
     End Sub
 End Class
