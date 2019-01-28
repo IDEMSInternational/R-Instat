@@ -52,17 +52,17 @@ Partial Class dlgClimaticSummary
         Me.cmdDoyRange = New System.Windows.Forms.Button()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
-        Me.ucrChkOmitMissingValues = New instat.ucrCheck()
+        Me.ucrChkAddDateColumn = New instat.ucrCheck()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
         Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlAnnualWithin = New instat.UcrPanel()
         Me.grpOptions.SuspendLayout()
@@ -132,7 +132,7 @@ Partial Class dlgClimaticSummary
         '
         'grpOptions
         '
-        Me.grpOptions.Controls.Add(Me.ucrChkOmitMissingValues)
+        Me.grpOptions.Controls.Add(Me.ucrChkAddDateColumn)
         Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
         Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
         Me.grpOptions.Controls.Add(Me.ucrChkDropUnusedLevels)
@@ -160,11 +160,11 @@ Partial Class dlgClimaticSummary
         resources.ApplyResources(Me.ucrInputFilterPreview, "ucrInputFilterPreview")
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
         '
-        'ucrChkOmitMissingValues
+        'ucrChkAddDateColumn
         '
-        Me.ucrChkOmitMissingValues.Checked = False
-        resources.ApplyResources(Me.ucrChkOmitMissingValues, "ucrChkOmitMissingValues")
-        Me.ucrChkOmitMissingValues.Name = "ucrChkOmitMissingValues"
+        Me.ucrChkAddDateColumn.Checked = False
+        resources.ApplyResources(Me.ucrChkAddDateColumn, "ucrChkAddDateColumn")
+        Me.ucrChkAddDateColumn.Name = "ucrChkAddDateColumn"
         '
         'ucrChkStoreResults
         '
@@ -186,19 +186,11 @@ Partial Class dlgClimaticSummary
         '
         'ucrSelectorVariable
         '
+        Me.ucrSelectorVariable.bDropUnusedFilterLevels = False
         Me.ucrSelectorVariable.bShowHiddenColumns = False
         Me.ucrSelectorVariable.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorVariable, "ucrSelectorVariable")
         Me.ucrSelectorVariable.Name = "ucrSelectorVariable"
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrReceiverWithinYear
         '
@@ -244,6 +236,15 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.strNcFilePath = ""
         Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrBase
         '
@@ -312,9 +313,9 @@ Partial Class dlgClimaticSummary
     Friend WithEvents ucrChkStoreResults As ucrCheck
     Friend WithEvents ucrChkPrintOutput As ucrCheck
     Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
-    Friend WithEvents ucrChkOmitMissingValues As ucrCheck
     Friend WithEvents cmdDoyRange As Button
     Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
     Friend WithEvents lblYear As Label
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
+    Friend WithEvents ucrChkAddDateColumn As ucrCheck
 End Class
