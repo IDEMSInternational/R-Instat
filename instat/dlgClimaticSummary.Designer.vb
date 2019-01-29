@@ -49,13 +49,13 @@ Partial Class dlgClimaticSummary
         Me.cmdSummary = New System.Windows.Forms.Button()
         Me.lblWithinYear = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.cmdDoyRange = New System.Windows.Forms.Button()
-        Me.lblYear = New System.Windows.Forms.Label()
-        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.ucrChkAddDateColumn = New instat.ucrCheck()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
+        Me.cmdDoyRange = New System.Windows.Forms.Button()
+        Me.lblYear = New System.Windows.Forms.Label()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
@@ -140,26 +140,6 @@ Partial Class dlgClimaticSummary
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
         '
-        'cmdDoyRange
-        '
-        resources.ApplyResources(Me.cmdDoyRange, "cmdDoyRange")
-        Me.cmdDoyRange.Name = "cmdDoyRange"
-        Me.cmdDoyRange.Tag = ""
-        Me.cmdDoyRange.UseVisualStyleBackColor = True
-        '
-        'lblYear
-        '
-        resources.ApplyResources(Me.lblYear, "lblYear")
-        Me.lblYear.Name = "lblYear"
-        '
-        'ucrInputFilterPreview
-        '
-        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilterPreview.IsMultiline = False
-        Me.ucrInputFilterPreview.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputFilterPreview, "ucrInputFilterPreview")
-        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
-        '
         'ucrChkAddDateColumn
         '
         Me.ucrChkAddDateColumn.Checked = False
@@ -183,6 +163,26 @@ Partial Class dlgClimaticSummary
         Me.ucrChkDropUnusedLevels.Checked = False
         resources.ApplyResources(Me.ucrChkDropUnusedLevels, "ucrChkDropUnusedLevels")
         Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
+        '
+        'cmdDoyRange
+        '
+        resources.ApplyResources(Me.cmdDoyRange, "cmdDoyRange")
+        Me.cmdDoyRange.Name = "cmdDoyRange"
+        Me.cmdDoyRange.Tag = ""
+        Me.cmdDoyRange.UseVisualStyleBackColor = True
+        '
+        'lblYear
+        '
+        resources.ApplyResources(Me.lblYear, "lblYear")
+        Me.lblYear.Name = "lblYear"
+        '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.IsMultiline = False
+        Me.ucrInputFilterPreview.IsReadOnly = True
+        resources.ApplyResources(Me.ucrInputFilterPreview, "ucrInputFilterPreview")
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
         '
         'ucrSelectorVariable
         '
