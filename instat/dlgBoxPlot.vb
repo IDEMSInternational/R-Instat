@@ -31,10 +31,12 @@ Public Class dlgBoxplot
     Private clsXScaleContinuousFunction As New RFunction
     Private clsYScaleContinuousFunction As New RFunction
     Private clsRFacetFunction As New RFunction
+    Private clsXElementLabels As New RFunction
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     Private bResetBoxLayerSubdialog As Boolean = True
+    Private bRCodeSet As Boolean = True
 
     'Adding new function s
     Private clsBoxplotFunc As New RFunction
@@ -104,6 +106,16 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.SetParameterIsString()
         ucrSecondFactorReceiver.bWithQuotes = False
 
+        ucrChkXAxisLabelAngle.SetParameter(New RParameter("angle"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkXAxisLabelAngle.SetText("X axis labels angle:")
+        ucrChkXAxisLabelAngle.AddToLinkedControls(ucrNudXAxisLabelsAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=90)
+
+        ucrNudXAxisLabelsAngle.SetParameter(New RParameter("angle"))
+        ucrNudXAxisLabelsAngle.SetMinMax(0, 360)
+        ucrChkXAxisLabelAngle.SetRCode(clsXElementLabels, bReset)
+        ucrNudXAxisLabelsAngle.SetRCode(clsXElementLabels, bReset)
+
+
         ucrChkVarWidth.SetParameter(New RParameter("varwidth", 0))
         ucrChkVarWidth.SetText("Variable Width")
         ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -134,6 +146,7 @@ Public Class dlgBoxplot
         clsRgeomPlotFunction = New RFunction
         clsRaesFunction = New RFunction
         clsLocalRaesFunction = New RFunction
+        clsXElementLabels = New RFunction
 
         'Setting up new functions
         clsBoxplotFunc = New RFunction
@@ -190,6 +203,11 @@ Public Class dlgBoxplot
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+
+        If Not dctThemeFunctions.TryGetValue("axis.text.x", clsXElementLabels) Then
+            clsXElementLabels = New RFunction
+        End If
+
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TempOptionsDisabledInMultipleVariablesCase()
@@ -197,6 +215,8 @@ Public Class dlgBoxplot
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        bRCodeSet = False
+
         ucrSaveBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrSelectorBoxPlot.SetRCode(clsRggplotFunction, bReset)
 
@@ -208,6 +228,13 @@ Public Class dlgBoxplot
         ucrByFactorsReceiver.SetRCode(clsRaesFunction, bReset)
         ucrSecondFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrPnlPlots.SetRCode(clsCurrGeomFunc, bReset)
+
+        ucrChkXAxisLabelAngle.SetRCode(clsXElementLabels, bReset)
+        ucrNudXAxisLabelsAngle.SetRCode(clsXElementLabels, bReset)
+
+        AddRemoveXAxisTextParameters()
+
+        bRCodeSet = True
     End Sub
 
     Private Sub TestOkEnabled()
@@ -325,6 +352,44 @@ Public Class dlgBoxplot
 
     Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub AddRemoveXAxisTextParameters()
+        If bRCodeSet Then
+            If ucrChkXAxisLabelAngle.Checked AndAlso ucrNudXAxisLabelsAngle.Value <> 0 Then
+                clsXElementLabels.AddParameter("hjust", 1)
+            Else
+                clsXElementLabels.RemoveParameterByName("hjust")
+            End If
+            If clsXElementLabels.clsParameters.Count > 0 Then
+                clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsXElementLabels)
+            Else
+                clsThemeFunction.RemoveParameterByName("axis.text.x")
+            End If
+            AddRemoveTheme()
+        End If
+    End Sub
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            ' The position MUST be larger than the position of the theme_* argument
+            ' Otherwise the choice of theme will overwrite the options selected here.
+            ' Currently set to large value as no reason this cannot be at the end currently
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub XAxisLabelAngleControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXAxisLabelAngle.ControlValueChanged, ucrNudXAxisLabelsAngle.ControlValueChanged
+        AddRemoveXAxisTextParameters()
+    End Sub
+
+    Private Sub ucrVariablesAsFactorForBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBoxplot.ControlContentsChanged
+
+    End Sub
+
+    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
+
     End Sub
 
     'this code is commented out but will work once we get the feature of linking controls with the contents of a receiver

@@ -56,6 +56,8 @@ Partial Class dlgBoxplot
         Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
         Me.ucrSaveBoxplot = New instat.ucrSave()
         Me.ucrChkSwapParameters = New instat.ucrCheck()
+        Me.ucrChkXAxisLabelAngle = New instat.ucrCheck()
+        Me.ucrNudXAxisLabelsAngle = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -105,6 +107,7 @@ Partial Class dlgBoxplot
         '
         'ucrSelectorBoxPlot
         '
+        Me.ucrSelectorBoxPlot.bDropUnusedFilterLevels = False
         Me.ucrSelectorBoxPlot.bShowHiddenColumns = False
         Me.ucrSelectorBoxPlot.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorBoxPlot, "ucrSelectorBoxPlot")
@@ -182,10 +185,28 @@ Partial Class dlgBoxplot
         resources.ApplyResources(Me.ucrChkSwapParameters, "ucrChkSwapParameters")
         Me.ucrChkSwapParameters.Name = "ucrChkSwapParameters"
         '
+        'ucrChkXAxisLabelAngle
+        '
+        Me.ucrChkXAxisLabelAngle.Checked = False
+        resources.ApplyResources(Me.ucrChkXAxisLabelAngle, "ucrChkXAxisLabelAngle")
+        Me.ucrChkXAxisLabelAngle.Name = "ucrChkXAxisLabelAngle"
+        '
+        'ucrNudXAxisLabelsAngle
+        '
+        Me.ucrNudXAxisLabelsAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXAxisLabelsAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudXAxisLabelsAngle, "ucrNudXAxisLabelsAngle")
+        Me.ucrNudXAxisLabelsAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudXAxisLabelsAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXAxisLabelsAngle.Name = "ucrNudXAxisLabelsAngle"
+        Me.ucrNudXAxisLabelsAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgBoxplot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrNudXAxisLabelsAngle)
+        Me.Controls.Add(Me.ucrChkXAxisLabelAngle)
         Me.Controls.Add(Me.ucrChkSwapParameters)
         Me.Controls.Add(Me.ucrSaveBoxplot)
         Me.Controls.Add(Me.ucrChkHorizontalBoxplot)
@@ -231,4 +252,6 @@ Partial Class dlgBoxplot
     Friend WithEvents ucrChkVarWidth As ucrCheck
     Friend WithEvents ucrPnlPlots As UcrPanel
     Friend WithEvents ucrChkSwapParameters As ucrCheck
+    Friend WithEvents ucrChkXAxisLabelAngle As ucrCheck
+    Friend WithEvents ucrNudXAxisLabelsAngle As ucrNud
 End Class
