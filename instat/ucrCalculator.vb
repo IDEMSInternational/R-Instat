@@ -1448,11 +1448,42 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdPet_Click(sender As Object, e As EventArgs) Handles cmdPet.Click
+    Private Sub cmdLanguage_Click(sender As Object, e As EventArgs) Handles cmdLanguage.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::pet()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::language()", 1)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::pet()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::language()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdLevel_Click(sender As Object, e As EventArgs) Handles cmdLevel.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::level()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::level()", 1)
+        End If
+    End Sub
+    Private Sub cmdMath_Click(sender As Object, e As EventArgs) Handles cmdMath.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::math()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::math()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdEla_Click(sender As Object, e As EventArgs) Handles cmdEla.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::ela()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::ela()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdGpa_Click(sender As Object, e As EventArgs) Handles cmdGpa.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::gpa()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::gpa()", 1)
         End If
     End Sub
 
