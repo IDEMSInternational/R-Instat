@@ -1622,4 +1622,44 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::speed()", 1)
         End If
     End Sub
+
+    Private Sub cmdState_Click(sender As Object, e As EventArgs) Handles cmdState.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::state()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::state()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdString_Click(sender As Object, e As EventArgs) Handles cmdString.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::string()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::string()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdWakefield_Upper_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Upper.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_upper()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_upper()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdValid_Click(sender As Object, e As EventArgs) Handles cmdValid.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::Valid()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::Valid()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdWakefield_Year_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Year.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_year()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_year()", 1)
+        End If
+    End Sub
 End Class
