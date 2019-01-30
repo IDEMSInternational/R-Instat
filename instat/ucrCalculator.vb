@@ -1575,5 +1575,51 @@ Public Class ucrCalculator
         End If
     End Sub
 
+    Private Sub cmdSentence_Click(sender As Object, e As EventArgs) Handles cmdSentence.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sentence()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sentence()", 1)
+        End If
+    End Sub
 
+    Private Sub cmdGender_Click(sender As Object, e As EventArgs) Handles cmdGender.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::gender()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::gender()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSex_Inclusive_Click(sender As Object, e As EventArgs) Handles cmdSex_Inclusive.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex_inclusive()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex_inclusive()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSex_Click(sender As Object, e As EventArgs) Handles cmdSex.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSmokes_Click(sender As Object, e As EventArgs) Handles cmdSmokes.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::smokes()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::smokes()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSpeed_Click(sender As Object, e As EventArgs) Handles cmdSpeed.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::speed()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::speed()", 1)
+        End If
+    End Sub
 End Class
