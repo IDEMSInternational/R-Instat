@@ -1487,4 +1487,93 @@ Public Class ucrCalculator
         End If
     End Sub
 
+    Private Sub cmdPetLikert_Click(sender As Object, e As EventArgs) Handles cmdLikert.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdLorem_Ipsum_Click(sender As Object, e As EventArgs) Handles cmdLorem_ipsum.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::lorem_ipsum()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::lorem_ipsum()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMarital_Click(sender As Object, e As EventArgs) Handles cmdMarital.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::marital()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::marital()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMilitary_Click(sender As Object, e As EventArgs) Handles cmdMilitary.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::military()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::military()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdWakefield_Month_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Month.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_month()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_month()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdName_Click(sender As Object, e As EventArgs) Handles cmdName.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::name()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::name()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdNormal_Click(sender As Object, e As EventArgs) Handles cmdNormal.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::normal()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::normal()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPolitical_Click(sender As Object, e As EventArgs) Handles cmdPolitical.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::political()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::political()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdRace_Click(sender As Object, e As EventArgs) Handles cmdRace.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::race()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::race()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdReligion_Click(sender As Object, e As EventArgs) Handles cmdReligion.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::religion()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::religion()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSat_Click(sender As Object, e As EventArgs) Handles cmdSat.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sat()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sat()", 1)
+        End If
+    End Sub
+
+
 End Class
