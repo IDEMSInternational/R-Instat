@@ -251,11 +251,6 @@ Partial Class ucrCalculator
         Me.cmdLanguage = New System.Windows.Forms.Button()
         Me.cmdIq = New System.Windows.Forms.Button()
         Me.cmdInternet_Browser = New System.Windows.Forms.Button()
-        Me.cmdIncome = New System.Windows.Forms.Button()
-        Me.cmdHeight = New System.Windows.Forms.Button()
-        Me.cmdHair = New System.Windows.Forms.Button()
-        Me.cmdGroup = New System.Windows.Forms.Button()
-        Me.cmdGrade = New System.Windows.Forms.Button()
         Me.cmdGrade_Level = New System.Windows.Forms.Button()
         Me.cmdEye = New System.Windows.Forms.Button()
         Me.cmdEmployment = New System.Windows.Forms.Button()
@@ -276,6 +271,11 @@ Partial Class ucrCalculator
         Me.cmdPet = New System.Windows.Forms.Button()
         Me.cmdAnimal = New System.Windows.Forms.Button()
         Me.cmdAge = New System.Windows.Forms.Button()
+        Me.cmdIncome = New System.Windows.Forms.Button()
+        Me.cmdHeight = New System.Windows.Forms.Button()
+        Me.cmdHair = New System.Windows.Forms.Button()
+        Me.cmdGroup = New System.Windows.Forms.Button()
+        Me.cmdGrade = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1778,36 +1778,6 @@ Partial Class ucrCalculator
         Me.cmdInternet_Browser.Name = "cmdInternet_Browser"
         Me.cmdInternet_Browser.UseVisualStyleBackColor = True
         '
-        'cmdIncome
-        '
-        resources.ApplyResources(Me.cmdIncome, "cmdIncome")
-        Me.cmdIncome.Name = "cmdIncome"
-        Me.cmdIncome.UseVisualStyleBackColor = True
-        '
-        'cmdHeight
-        '
-        resources.ApplyResources(Me.cmdHeight, "cmdHeight")
-        Me.cmdHeight.Name = "cmdHeight"
-        Me.cmdHeight.UseVisualStyleBackColor = True
-        '
-        'cmdHair
-        '
-        resources.ApplyResources(Me.cmdHair, "cmdHair")
-        Me.cmdHair.Name = "cmdHair"
-        Me.cmdHair.UseVisualStyleBackColor = True
-        '
-        'cmdGroup
-        '
-        resources.ApplyResources(Me.cmdGroup, "cmdGroup")
-        Me.cmdGroup.Name = "cmdGroup"
-        Me.cmdGroup.UseVisualStyleBackColor = True
-        '
-        'cmdGrade
-        '
-        resources.ApplyResources(Me.cmdGrade, "cmdGrade")
-        Me.cmdGrade.Name = "cmdGrade"
-        Me.cmdGrade.UseVisualStyleBackColor = True
-        '
         'cmdGrade_Level
         '
         resources.ApplyResources(Me.cmdGrade_Level, "cmdGrade_Level")
@@ -1927,6 +1897,36 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.cmdAge, "cmdAge")
         Me.cmdAge.Name = "cmdAge"
         Me.cmdAge.UseVisualStyleBackColor = True
+        '
+        'cmdIncome
+        '
+        resources.ApplyResources(Me.cmdIncome, "cmdIncome")
+        Me.cmdIncome.Name = "cmdIncome"
+        Me.cmdIncome.UseVisualStyleBackColor = True
+        '
+        'cmdHeight
+        '
+        resources.ApplyResources(Me.cmdHeight, "cmdHeight")
+        Me.cmdHeight.Name = "cmdHeight"
+        Me.cmdHeight.UseVisualStyleBackColor = True
+        '
+        'cmdHair
+        '
+        resources.ApplyResources(Me.cmdHair, "cmdHair")
+        Me.cmdHair.Name = "cmdHair"
+        Me.cmdHair.UseVisualStyleBackColor = True
+        '
+        'cmdGroup
+        '
+        resources.ApplyResources(Me.cmdGroup, "cmdGroup")
+        Me.cmdGroup.Name = "cmdGroup"
+        Me.cmdGroup.UseVisualStyleBackColor = True
+        '
+        'cmdGrade
+        '
+        resources.ApplyResources(Me.cmdGrade, "cmdGrade")
+        Me.cmdGrade.Name = "cmdGrade"
+        Me.cmdGrade.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '

@@ -1232,4 +1232,228 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("FALSE")
     End Sub
 
+    Private Sub cmdAge_Click(sender As Object, e As EventArgs) Handles cmdAge.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::age()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::age()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAnimal_Click(sender As Object, e As EventArgs) Handles cmdAnimal.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::animal()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::animal()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPet_Click(sender As Object, e As EventArgs) Handles cmdPet.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::pet()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::pet()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAnswer_Click(sender As Object, e As EventArgs) Handles cmdAnswer.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::answer()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::answer()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCar_Click(sender As Object, e As EventArgs) Handles cmdCar.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::car()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::car()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdChildren_Click(sender As Object, e As EventArgs) Handles cmdChildren.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::children()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::children()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCoin_Click(sender As Object, e As EventArgs) Handles cmdCoin.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::coin()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::coin()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdColor_Click(sender As Object, e As EventArgs) Handles cmdColor.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::color()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::color()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPrimary_Click(sender As Object, e As EventArgs) Handles cmdPrimary.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::primary()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::primary()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDate_Stamp_Click(sender As Object, e As EventArgs) Handles cmdDate_Stamp.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::date_stamp()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::date_stamp()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDeath_Click(sender As Object, e As EventArgs) Handles cmdDeath.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::death()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::death()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDied_Click(sender As Object, e As EventArgs) Handles cmdDied.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::died()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::died()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDice_Click(sender As Object, e As EventArgs) Handles cmdDice.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::dice()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::dice()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDna_Click(sender As Object, e As EventArgs) Handles cmdDna.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::dna()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::dna()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDob_Click(sender As Object, e As EventArgs) Handles cmdDob.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::dob()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::dob()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDummy_Click(sender As Object, e As EventArgs) Handles cmdDummy.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::dummy()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::dummy()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdEducation_Click(sender As Object, e As EventArgs) Handles cmdEducation.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::education()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::education()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdEmployment_Click(sender As Object, e As EventArgs) Handles cmdEmployment.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::employment()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::employment()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdEye_Click(sender As Object, e As EventArgs) Handles cmdEye.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::eye()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::eye()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdGrade_Level_Click(sender As Object, e As EventArgs) Handles cmdGrade_Level.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::grade_level()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::grade_level()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdGrade_Click(sender As Object, e As EventArgs) Handles cmdGrade.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::grade()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::grade()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdGroup_Click(sender As Object, e As EventArgs) Handles cmdGroup.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::group()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::group()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdHair_Click(sender As Object, e As EventArgs) Handles cmdHair.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::hair()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::hair()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdHeight_Click(sender As Object, e As EventArgs) Handles cmdHeight.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::height()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::height()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdIncome_Click(sender As Object, e As EventArgs) Handles cmdIncome.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::income()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::income()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdInternet_Browser_Click(sender As Object, e As EventArgs) Handles cmdInternet_Browser.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::internet_browser()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::internet_browser()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdIq_Click(sender As Object, e As EventArgs) Handles cmdIq.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::iq()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::iq()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPet_Click(sender As Object, e As EventArgs) Handles cmdPet.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::pet()", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::pet()", 1)
+        End If
+    End Sub
+
 End Class
