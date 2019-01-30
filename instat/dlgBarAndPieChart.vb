@@ -30,12 +30,14 @@ Public Class dlgBarAndPieChart
     Private clsXScalecontinuousFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
     Private clsRFacetFunction As New RFunction
-    Private clsThemeFuction As New RFunction
+    Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private bResetSubdialog As Boolean = True
     Private bResetBarLayerSubdialog As Boolean = True
+    Private clsXElementLabels As New RFunction
+    Private bRCodeSet As Boolean = True
 
     Private Sub cmdOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -71,9 +73,17 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddToLinkedControls(ucrChkFlipCoordinates, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverByFactor, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
+        'link the angle only when box is selected
+        ucrPnlOptions.AddToLinkedControls(ucrNudXAxisLabelsAngle, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=90)
 
         ucrBarChartSelector.SetParameter(New RParameter("data", 0))
         ucrBarChartSelector.SetParameterIsrfunction()
+
+        ucrChkXAxisLabelAngle.SetParameter(New RParameter("angle"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkXAxisLabelAngle.SetText("X axis labels angle:")
+
+        ucrNudXAxisLabelsAngle.SetParameter(New RParameter("angle"))
+        ucrNudXAxisLabelsAngle.SetMinMax(0, 360)
 
         ucrReceiverFirst.Selector = ucrBarChartSelector
         ucrReceiverFirst.strSelectorHeading = "Variables"
@@ -160,15 +170,18 @@ Public Class dlgBarAndPieChart
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
-        clsThemeFuction = GgplotDefaults.clsDefaultThemeFunction.Clone
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
-
+        If Not dctThemeFunctions.TryGetValue("axis.text.x", clsXElementLabels) Then
+            clsXElementLabels = New RFunction
+        End If
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        bRCodeSet = False
         ucrReceiverFirst.SetRCode(clsBarAesFunction, bReset)
         ucrReceiverFirst.AddAdditionalCodeParameterPair(clsPieAesFunction, New RParameter("fill", 0), iAdditionalPairNo:=1)
 
@@ -178,14 +191,21 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.SetRCode(clsRggplotFunction, bReset)
         ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
+
+        ucrChkXAxisLabelAngle.SetRCode(clsXElementLabels, bReset)
+        ucrNudXAxisLabelsAngle.SetRCode(clsXElementLabels, bReset)
+
         ucrInputBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
+
+        AddRemoveXAxisTextParameters()
+        bRCodeSet = True
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverFirst.IsEmpty OrElse Not ucrSaveBar.IsComplete Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not ucrReceiverFirst.IsEmpty AndAlso ucrSaveBar.IsComplete AndAlso ((ucrChkXAxisLabelAngle.Checked AndAlso ucrNudXAxisLabelsAngle.GetText() <> "") OrElse Not ucrChkXAxisLabelAngle.Checked) Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -197,16 +217,16 @@ Public Class dlgBarAndPieChart
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         If rdoBarChart.Checked Then
-            sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewGlobalAesFunction:=clsBarAesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrBarChartSelector, bReset:=bResetSubdialog)
+            sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewGlobalAesFunction:=clsBarAesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrBarChartSelector, bReset:=bResetSubdialog)
         Else
-            sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewGlobalAesFunction:=clsPieAesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrBarChartSelector, bReset:=bResetSubdialog)
+            sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewGlobalAesFunction:=clsPieAesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrBarChartSelector, bReset:=bResetSubdialog)
         End If
         sdgPlots.ShowDialog()
         bResetSubdialog = False
         'Warning, when coordinate flip is added to coordinates tab on sdgPLots, then link with ucrChkFlipCoordinates...
-
         'this syncs the coordflip in sdgplots and this main dlg
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
+        AddRemoveXAxisTextParameters()
     End Sub
 
     Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
@@ -226,6 +246,7 @@ Public Class dlgBarAndPieChart
         End If
         'Allows for sync with the layer parameters
         ucrInputBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
+
         TestOkEnabled()
     End Sub
 
@@ -275,11 +296,42 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
+    Private Sub AddRemoveXAxisTextParameters()
+        If bRCodeSet Then
+            If ucrChkXAxisLabelAngle.Checked AndAlso ucrNudXAxisLabelsAngle.Value <> 0 Then
+                clsXElementLabels.AddParameter("hjust", 1)
+            Else
+                clsXElementLabels.RemoveParameterByName("hjust")
+            End If
+            If clsXElementLabels.clsParameters.Count > 0 Then
+                clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsXElementLabels)
+            Else
+                clsThemeFunction.RemoveParameterByName("axis.text.x")
+            End If
+            AddRemoveTheme()
+        End If
+    End Sub
+
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            ' The position MUST be larger than the position of the theme_* argument
+            ' Otherwise the choice of theme will overwrite the options selected here.
+            ' Currently set to large value as no reason this cannot be at the end currently
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
         SetDialogOptions()
     End Sub
 
     Private Sub CoreControls_ContentsChanged() Handles ucrReceiverFirst.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkXAxisLabelAngle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXAxisLabelAngle.ControlValueChanged, ucrNudXAxisLabelsAngle.ControlValueChanged
+        AddRemoveXAxisTextParameters()
     End Sub
 End Class

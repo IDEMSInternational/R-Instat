@@ -55,6 +55,8 @@ Partial Class dlgBarAndPieChart
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.lblPosition = New System.Windows.Forms.Label()
+        Me.ucrChkXAxisLabelAngle = New instat.ucrCheck()
+        Me.ucrNudXAxisLabelsAngle = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'lblVariable
@@ -173,10 +175,28 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.lblPosition, "lblPosition")
         Me.lblPosition.Name = "lblPosition"
         '
+        'ucrChkXAxisLabelAngle
+        '
+        Me.ucrChkXAxisLabelAngle.Checked = False
+        resources.ApplyResources(Me.ucrChkXAxisLabelAngle, "ucrChkXAxisLabelAngle")
+        Me.ucrChkXAxisLabelAngle.Name = "ucrChkXAxisLabelAngle"
+        '
+        'ucrNudXAxisLabelsAngle
+        '
+        Me.ucrNudXAxisLabelsAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXAxisLabelsAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudXAxisLabelsAngle, "ucrNudXAxisLabelsAngle")
+        Me.ucrNudXAxisLabelsAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudXAxisLabelsAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXAxisLabelsAngle.Name = "ucrNudXAxisLabelsAngle"
+        Me.ucrNudXAxisLabelsAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrNudXAxisLabelsAngle)
+        Me.Controls.Add(Me.ucrChkXAxisLabelAngle)
         Me.Controls.Add(Me.lblPosition)
         Me.Controls.Add(Me.ucrInputBarChartPosition)
         Me.Controls.Add(Me.ucrSaveBar)
@@ -219,4 +239,6 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents cmdBarChartOptions As Button
     Friend WithEvents ucrInputBarChartPosition As ucrInputComboBox
     Friend WithEvents lblPosition As Label
+    Friend WithEvents ucrChkXAxisLabelAngle As ucrCheck
+    Friend WithEvents ucrNudXAxisLabelsAngle As ucrNud
 End Class
