@@ -1255,7 +1255,7 @@ Public Class ucrCalculator
 
     Private Sub cmdAge_Click(sender As Object, e As EventArgs) Handles cmdAge.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::age()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::age((n, x = , prob = NULL, name = ""Age""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::age()", 1)
         End If
@@ -1263,7 +1263,9 @@ Public Class ucrCalculator
 
     Private Sub cmdAnimal_Click(sender As Object, e As EventArgs) Handles cmdAnimal.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::animal()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::animal(l(n, k = , x = wakefield::animal_list, prob = NULL,
+name = ""Animal"")
+p)", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::animal()", 1)
         End If
@@ -1311,7 +1313,7 @@ Public Class ucrCalculator
 
     Private Sub cmdColor_Click(sender As Object, e As EventArgs) Handles cmdColor.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::color()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::color(n, k = , x = , prob = NULL, name = ""Color"")", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::color()", 1)
         End If
