@@ -1281,7 +1281,7 @@ p)", 1)
 
     Private Sub cmdAnswer_Click(sender As Object, e As EventArgs) Handles cmdAnswer.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::answer()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::answer((n, x = c(""No"", ""Yes""), prob = NULL, name = ""Answer""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::answer()", 1)
         End If
@@ -1289,7 +1289,7 @@ p)", 1)
 
     Private Sub cmdCar_Click(sender As Object, e As EventArgs) Handles cmdCar.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::car()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::car((n, x = rownames(datasets::mtcars), prob = NULL, name = ""Car""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::car()", 1)
         End If
