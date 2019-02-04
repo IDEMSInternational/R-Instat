@@ -1297,7 +1297,8 @@ p)", 1)
 
     Private Sub cmdChildren_Click(sender As Object, e As EventArgs) Handles cmdChildren.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::children()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::children((n, x = 0:10, prob = c(0.25, 0.25, 0.15, 0.15, 0.1, 0.02, 0.02,
+0.02, 0.02, 0.01, 0.01), name = ""Children""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::children()", 1)
         End If
@@ -1305,7 +1306,7 @@ p)", 1)
 
     Private Sub cmdCoin_Click(sender As Object, e As EventArgs) Handles cmdCoin.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::coin()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::coin((n, x = c(""Tails"", ""Heads""), prob = NULL, name = ""Coin""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::coin()", 1)
         End If
@@ -1329,7 +1330,8 @@ p)", 1)
 
     Private Sub cmdDate_Stamp_Click(sender As Object, e As EventArgs) Handles cmdDate_Stamp.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::date_stamp()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::date_stamp((n, random = FALSE, x = NULL, start = Sys.Date(), k = 12,
+by = "" - 1 months"", prob = NULL, name = ""Date""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::date_stamp()", 1)
         End If
@@ -1337,7 +1339,7 @@ p)", 1)
 
     Private Sub cmdDeath_Click(sender As Object, e As EventArgs) Handles cmdDeath.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::death()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::death((n, prob = NULL, name = ""Death""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::death()", 1)
         End If
@@ -1345,7 +1347,7 @@ p)", 1)
 
     Private Sub cmdDied_Click(sender As Object, e As EventArgs) Handles cmdDied.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::died()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::died((n, prob = NULL, name = |""Died""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::died()", 1)
         End If
