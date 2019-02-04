@@ -452,7 +452,7 @@ Public Class clsGridLink
                         fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (D)"
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
                     ElseIf vecColumnDataTypes(k).Contains("logical") Then
-                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (l)"
+                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (L)"
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
                     Else
                         fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader

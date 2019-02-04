@@ -22,6 +22,7 @@ Public Class RCodeStructure
     Public strAssignToColumn As String
     Public strAssignToModel As String
     Public strAssignToGraph As String
+    Public strAssignToSurv As String
     Public strAssignToTable As String
     'These AssingTo's are only relevant in the string case, as RFunction and ROperator have internal equivalents.
     'If they are empty, the output Of the command Is Not linked To an R-instat object.
@@ -77,7 +78,7 @@ Public Class RCodeStructure
     End Sub
 
     'Most methods from RFunction/ROperator have been moved here
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True)
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempSurv As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True)
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -90,6 +91,9 @@ Public Class RCodeStructure
         End If
         If Not strTempGraph = "" Then
             strAssignToGraph = strTempGraph
+        End If
+        If Not strTempSurv = "" Then
+            strAssignToSurv = strTempSurv
         End If
         If Not strTempTable = "" Then
             strAssignToTable = strTempTable
@@ -108,6 +112,7 @@ Public Class RCodeStructure
         strAssignToColumn = ""
         strAssignToModel = ""
         strAssignToGraph = ""
+        strAssignToSurv = ""
         strAssignToTable = ""
         bToBeAssigned = False
         bIsAssigned = False
@@ -125,6 +130,8 @@ Public Class RCodeStructure
         Dim clsGetModels As New RFunction
         Dim clsAddGraphs As New RFunction
         Dim clsGetGraphs As New RFunction
+        Dim clsAddSurv As New RFunction
+        Dim clsGetSurv As New RFunction
         Dim clsAddTables As New RFunction
         Dim clsGetTables As New RFunction
         Dim clsDataList As New RFunction
@@ -134,7 +141,8 @@ Public Class RCodeStructure
         End If
 
         If bToBeAssigned Then
-            strScript = strScript & strAssignTo & " <- " & strTemp & Environment.NewLine
+            strScript = strScript & ConstructAssignTo(strAssignTo, strTemp) & Environment.NewLine
+            'strScript = strScript & strAssignTo & " <- " & strTemp & Environment.NewLine
             If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
                 clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
@@ -192,6 +200,20 @@ Public Class RCodeStructure
                 clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                 clsGetGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
                 strAssignTo = clsGetGraphs.ToScript()
+            ElseIf Not strAssignToSurv = "" Then
+                clsAddSurv.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_surv")
+                clsAddSurv.AddParameter("surv_name", Chr(34) & strAssignToSurv & Chr(34))
+                clsAddSurv.AddParameter("surv", strAssignTo)
+                If Not strAssignToDataFrame = "" Then
+                    clsAddSurv.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    clsGetSurv.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                End If
+                strScript = strScript & clsAddSurv.ToScript() & Environment.NewLine
+
+                clsGetSurv.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_surv")
+                clsGetSurv.AddParameter("surv_name", Chr(34) & strAssignToSurv & Chr(34))
+                strAssignTo = clsGetSurv.ToScript()
+
             ElseIf Not strAssignToTable = "" Then
                 clsAddTables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_table")
                 clsAddTables.AddParameter("table_name", Chr(34) & strAssignToTable & Chr(34))
@@ -223,6 +245,26 @@ Public Class RCodeStructure
             Return strTemp
         End If
     End Function
+
+    'sets assign to , to the last line of strTemp
+    Private Function ConstructAssignTo(strAssignTo As String, strTemp As String) As String
+        'Split strTemp and get the last line then set assign to it then merge the wole string
+        Dim strReconstructed As String = ""
+        Dim strParts As String()
+        If Not String.IsNullOrEmpty(strTemp) Then
+            strParts = strTemp.Split(ControlChars.CrLf.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+            If strParts.Length > 1 Then
+                For i As Integer = 0 To strParts.Length - 2
+                    strReconstructed = strReconstructed & strParts(i) & Environment.NewLine
+                Next
+                strReconstructed = strReconstructed & strAssignTo & " <- " & strParts.Last
+            Else
+                strReconstructed = strAssignTo & " <- " & strTemp
+            End If
+        End If
+        Return strReconstructed
+    End Function
+
 
     Public Overridable Function GetParameter(strName As String) As RParameter
         Return New RParameter
@@ -416,6 +458,7 @@ Public Class RCodeStructure
         clsTempCode.strAssignToColumn = strAssignToColumn
         clsTempCode.strAssignToModel = strAssignToModel
         clsTempCode.strAssignToGraph = strAssignToGraph
+        clsTempCode.strAssignToSurv = strAssignToSurv
         clsTempCode.strAssignToTable = strAssignToTable
         clsTempCode.bToBeAssigned = bToBeAssigned
         clsTempCode.bIsAssigned = bIsAssigned

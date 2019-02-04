@@ -152,6 +152,15 @@ Public Class ucrReceiverMultiple
                     Else
                         clsGetVariablesFunc.AddParameter("use_current_filter", "FALSE")
                     End If
+                    If bDropUnusedFilterLevels Then
+                        clsGetVariablesFunc.AddParameter("drop_unused_filter_levels", "TRUE")
+                    Else
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsGetVariablesFunc.AddParameter("drop_unused_filter_levels", "FALSE")
+                        Else
+                            clsGetVariablesFunc.RemoveParameterByName("drop_unused_filter_levels")
+                        End If
+                    End If
                 Case "filter"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
                     clsGetVariablesFunc.AddParameter("filter_name", GetVariableNames())
@@ -161,6 +170,9 @@ Public Class ucrReceiverMultiple
                 Case "graph"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                     clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
+                Case "surv"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_surv")
+                    clsGetVariablesFunc.AddParameter("surv_name", GetVariableNames())
                 Case "model"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                     clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
@@ -211,14 +223,17 @@ Public Class ucrReceiverMultiple
     Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
         Dim i As Integer
-        If lstSelectedVariables.Items.Count = 1 Then
+        If lstSelectedVariables.Items.Count = 1 AndAlso Not bForceVariablesAsList Then
             If bWithQuotes Then
                 strTemp = Chr(34) & lstSelectedVariables.Items(0).Text & Chr(34)
             Else
                 strTemp = lstSelectedVariables.Items(0).Text
             End If
-        ElseIf lstSelectedVariables.Items.Count > 1 Then
-            strTemp = "c" & "("
+        ElseIf lstSelectedVariables.Items.Count > 1 OrElse bForceVariablesAsList Then
+            If strVariablesListPackageName <> "" Then
+                strTemp = strVariablesListPackageName & "::"
+            End If
+            strTemp = strTemp & strVariablesListFunctionName & "("
             For i = 0 To lstSelectedVariables.Items.Count - 1
                 If i > 0 Then
                     strTemp = strTemp & ","
@@ -237,13 +252,13 @@ Public Class ucrReceiverMultiple
         Return strTemp
     End Function
 
-    Public Overrides Function GetVariableNamesList(Optional bWithQuotes As Boolean = True) As String()
+    Public Overrides Function GetVariableNamesList(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
         Dim lstItems As String()
 
         ReDim lstItems(0 To lstSelectedVariables.Items.Count - 1)
         For i = 0 To lstSelectedVariables.Items.Count - 1
             If bWithQuotes Then
-                lstItems(i) = Chr(34) & lstSelectedVariables.Items(i).Text & Chr(34)
+                lstItems(i) = strQuotes & lstSelectedVariables.Items(i).Text & strQuotes
             Else
                 lstItems(i) = lstSelectedVariables.Items(i).Text
             End If
@@ -344,13 +359,6 @@ Public Class ucrReceiverMultiple
         lstSelectedVariables.Enabled = Not bFixreceiver
     End Sub
 
-    Public Sub AddItemsWithMetadataProperty(strCurrentDataFrame As String, strProperty As String, strValues As String())
-        If Selector IsNot Nothing Then
-            SetMeAsReceiver()
-            frmMain.clsRLink.SelectColumnsWithMetadataProperty(Me, strCurrentDataFrame, strProperty, strValues)
-        End If
-    End Sub
-
     Public Function GetCurrentItemTypes(Optional bUnique As Boolean = False) As List(Of String)
         Dim clsGetDataType As New RFunction
         Dim strDataTypes As New List(Of String)
@@ -433,11 +441,11 @@ Public Class ucrReceiverMultiple
                     Clear()
                 ElseIf strVariableTypes.Count > 0 Then
                     If strVariableTypes(0) = "integer" Then
-                        SetDataType("numeric")
+                        SetDataType("numeric", bStrict:=True)
                     ElseIf strVariableTypes(0) = "ordered,factor" Then
-                        SetDataType("factor")
+                        SetDataType("factor", bStrict:=True)
                     Else
-                        SetDataType(strVariableTypes(0))
+                        SetDataType(strVariableTypes(0), bStrict:=True)
                     End If
                 Else
                     RemoveIncludedMetadataProperty(strProperty:="class")

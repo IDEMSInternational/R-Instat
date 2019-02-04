@@ -101,6 +101,11 @@ Public Class ucrInput
         SetDefaultName()
     End Sub
 
+    Public Sub SetDefaultTypeAsSurv()
+        strDefaultType = "Surv"
+        SetDefaultName()
+    End Sub
+
     Public Sub SetDefaultTypeAsTable()
         strDefaultType = "Table"
         SetDefaultName()
@@ -330,7 +335,7 @@ Public Class ucrInput
         Dim dcmText As Decimal
         Dim iType As Integer = 0
 
-        If strText <> "" Then
+        If strText <> "" AndAlso strValuesToIgnore IsNot Nothing AndAlso Not strValuesToIgnore.Contains(strText) Then
             If Not IsNumeric(strText) Then
                 iType = 1
             Else

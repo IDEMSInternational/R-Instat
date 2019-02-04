@@ -173,41 +173,78 @@ lat_lon_dataframe <- function(datafile){
   return(cbind(lat_lon,station))
 }
 
-output_for_CPT = function(data_name, lat_lon_data, long = TRUE, year_col, sst_cols, station_col = ""){
-  if(missing(data_name) || missing(data_name)) stop("data_name and lat_lon_data should be provided.")
-  if(missing(year_col) || missing(sst_cols)) stop("year_col and sst_cols must be provided.")
-  if(!is.character(year_col) || !is.character(sst_cols)) stop("year_col and sst_cols must be of type character.")
-  if(!all(c(year_col, sst_cols) %in% names(data_name))) stop("Some column(s) are missing in data")
-  my_lat_lon_data <- lat_lon_data
-  row.names(my_lat_lon_data) <- lat_lon_data$station
-  if (long){
-    if(length(sst_cols) != 1) stop("Only one SST column should be provided for long data format.")
-    if(missing(station_col)) stop("station_col must be provided for long data format.")
-    if(!is.character(station_col)) stop("station must be of type character.")
-    if(!all(station_col %in% names(data_name))) stop(station_col,  " is missing in data.")
-    row.names(data_name) = NULL
-    data_name <- droplevels(data_name)
-    ssT_col_names = as.character(levels(data_name[,station_col]))
-    Year = c("LAT","LON")
-    selected_lat_lon = t(my_lat_lon_data[ssT_col_names, c("lat", "lon")])
-    selected_lat_lon = cbind(Year, selected_lat_lon)
-    my_data <- as.matrix(reshape2::dcast(data = data_name, formula = as.formula(paste(year_col, "~station",sep = "")), value.var = sst_cols))
-    my_data = as.data.frame(rbind(selected_lat_lon, my_data))
-  }
-  else{
-    ssT_col_names = sst_cols
-    selected_lat_lon = t(my_lat_lon_data[ssT_col_names, c("lat", "lon")])
-    my_data = data_name[,c(ssT_col_names)]
-    if(length(ssT_col_names)==1){
-      my_data = as.data.frame(my_data)
-      names(my_data) = ssT_col_names
+output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitude, station, year, element, long.data = TRUE, na_code = -999) {
+  
+  if(missing(data)) stop("data should be provided")
+  if(missing(station)) stop("station must be provided")
+  if(missing(year) ||  missing(latitude) || missing(longitude)) stop("year, latitude and longiude must be provided")
+  
+  station_label <- "STN"
+  lat_lon_labels <- c("LAT", "LON")
+  
+  if(missing(lat_lon_data)) {
+    if(long.data) {
+      data <- data %>% dplyr::select(!!! quos(station, year, element, latitude, longitude))
+      names(data)[1] <- "station"
+      names(data)[2] <- "year"
+      names(data)[3] <- "element"
+      names(data)[4] <- "latitude"
+      names(data)[5] <- "longitude"
+      
+      data <- data %>% dplyr::filter(!is.na(station))
     }
-    my_data = rbind(selected_lat_lon, my_data)
-    Year = c("LAT","LON", as.vector(data_name[,c(year_col)]))
-    my_data = as.data.frame(cbind(Year, my_data))
+    else stop("If all data is in one data frame then must have long.data = TRUE")
   }
-  data.table::setnames(my_data, "Year", "STN")
-  return(my_data)
+  else {
+    if(missing(station_latlondata)) stop("station must be provided for lat_lon_data")
+    
+    if(long.data) {
+      yearly_data <- data %>% dplyr::select(!!! quos(station, year, element))
+      names(yearly_data)[1] <-  "station"
+      names(yearly_data)[2] <-  "year"
+      names(yearly_data)[3] <-  "element"
+      
+      lat_lon_data <- lat_lon_data %>% dplyr::select(!!! quos(station_latlondata, latitude, longitude))
+      names(lat_lon_data)[1] <- "station"
+      names(lat_lon_data)[2] <- "latitude"
+      names(lat_lon_data)[3] <- "longitude"
+      
+      data <- merge(yearly_data, lat_lon_data, by =  "station")
+    }
+    else {
+      stations <- data.frame(data[station])
+      year <- data_unstacked %>% dplyr::select(!!! quos(year))
+      data <- data.frame(year, stations)
+      stacked_data <- reshape2::melt(data, id.vars=c("year"))
+      names(stacked_data)[2] <-  "station"
+      names(stacked_data)[3] <- "element"
+      
+      lat_lon_data <- lat_lon_data %>% dplyr::select(!!! quos(station_latlondata, latitude, longitude))
+      names(lat_lon_data)[1] <- "station"
+      names(lat_lon_data)[2] <- "latitude"
+      names(lat_lon_data)[3] <- "longitude"
+      
+      data <- merge(stacked_data, lat_lon_data, by = "station")
+      
+    }
+  }
+  
+  unstacked_data <- data %>% dplyr::select(station, year, element) %>% tidyr::spread(key = station, value = element)
+  names(unstacked_data)[1] <- station_label
+  unstacked_data <- unstacked_data %>% mutate_all(funs(replace(., is.na(.), na_code)))
+  
+  lat_lon_data <- data %>% dplyr::group_by(station) %>% dplyr::summarise(latitude = min(latitude, na.rm = TRUE), longitude = min(longitude, na.rm = TRUE))
+  if(anyNA(data$latitude) || anyNA(data$longitude)) warning("Missing values in latitude or longitude.")
+  t_lat_lon_data <- t(lat_lon_data)
+  station.names <- as.vector(t_lat_lon_data[1, ])
+  t_lat_lon_data <- data.frame(t_lat_lon_data, stringsAsFactors = FALSE)
+  t_lat_lon_data <- t_lat_lon_data %>% dplyr::slice(-1)
+  names(t_lat_lon_data) <- station.names
+  row.names(t_lat_lon_data) <- lat_lon_labels
+  t_lat_lon_data <- tibble::rownames_to_column(t_lat_lon_data, station_label)
+  
+  cpt_data <- rbind(t_lat_lon_data, unstacked_data)
+  return(cpt_data)
 }
 
 yday_366 <- function(date) {
@@ -222,11 +259,10 @@ dekade <- function(date) {
   return(temp_dekade)
 }
 
-pentad <- function(date) {
-  m <- lubridate::month(date)
-  temp_pentad <- 6 * (m) - 5 + (m > 5) + (m > 10) + (m > 15) + (m > 20) + (m > 25)
-  return(temp_pentad)
-}
+pentad <- function(date){
+	temp_pentad <- 6*(lubridate::month(date)) - 5 + (lubridate::mday(date) > 5) + (lubridate::mday(date) > 10) + (lubridate::mday(date) > 15) + (lubridate::mday(date) > 20) + (lubridate::mday(date) > 25)
+	return(temp_pentad)	
+ }	 
 
 nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
   if(!dimension %in% names(nc$dim)) stop(dimension, " not found in file.")
@@ -247,17 +283,23 @@ nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
   return(bounds)
 }
 
-nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL) {
+nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = TRUE) {
+  if(sum(is.null(lon_points), is.null(lat_points)) == 1) stop("You must specificy both lon_points and lat_points")
+  has_points <- (sum(is.null(lon_points), is.null(lat_points)) == 0)
+  if(has_points && length(lon_points) != length(lat_points)) stop("lon_points and lat_points have unequal lengths.")
+  if(has_points && !is.null(id_points) && length(id_points) != length(lat_points)) stop("id_points (if specified) must have the same length as lon_points and lat_points.")
   dim_names <- ncdf4.helpers::nc.get.dim.names(nc, vars[1])
   dim_values <- list()
+  requested_points_added <- FALSE
   for(dim_name in dim_names) {
     #why no wrapper for this in ncdf4.helper?
-    dim_values[[dim_name]] <- nc$dim[[dim_name]]$vals
+    #(as.numeric ensures vectors no not have array class)
+    dim_values[[dim_name]] <- as.numeric(nc$dim[[dim_name]]$vals)
     #This is not recommended but appears in tutorials
     #ncdf4::ncvar_get(nc, dim_name)
   }
+  dim_axes <- ncdf4.helpers::nc.get.dim.axes(nc, vars[1])
   if(!is.null(boundary)) {
-    dim_axes <- ncdf4.helpers::nc.get.dim.axes(nc, vars[1])
     if(!all(names(boundary) %in% dim_names)) stop("boundary contains dimensions not associated with", vars[1])
     if(anyNA(dim_axes)) {
       warning("Cannot subset data when some dimension axes cannot be identified.")
@@ -271,7 +313,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
         if(dim %in% dim_axes) {
           dim_var <- names(dim_axes)[which(dim_axes == dim)]
           curr_dim_values <- dim_values[[dim_var]]
-          if(dim_var %in% names(boundary)) {
+          if(dim_var %in% names(boundary) && !(has_points && dim %in% c("X", "Y"))) {
             if(dim == "T") {
               ind <- integer(0)
               try({
@@ -282,10 +324,10 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
               })
             }
             else ind <- which(curr_dim_values >= boundary[[dim_var]][1] & curr_dim_values <= boundary[[dim_var]][2])
+            # TODO This is temporary solution for when there is only one value for a dimension and there are rounding difference
+            if(length(ind) == 0 && length(curr_dim_values) == 1 && round(curr_dim_values, 3) == round(boundary[[dim_var]][1], 3) && round(curr_dim_values, 3) == round(boundary[[dim_var]][2], 3)) ind <- 1
             if(length(ind) == 0) {
-              warning("No values within the range specified for", dim_var, "All values will be included.")
-              start <- c(start, 1)
-              count <- c(count, length(curr_dim_values))
+              stop("No values within the range specified for ", dim_var, ".")
             }
             else {
               start <- c(start, min(ind))
@@ -300,56 +342,102 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
         }
       }
       if(length(start) == 0) {
-        start <- NA
-        count <- NA
+        start <- rep(1, length(dim_axes))
+        count <- rep(-1, length(dim_axes))
       }
     }
   }
   else {
-    start <- NA
-    count <- NA
+    start <- rep(1, length(dim_axes))
+    count <- rep(-1, length(dim_axes))
   }
-  var_data <- expand.grid(dim_values, KEEP.OUT.ATTRS = FALSE)
-  for(i in seq_along(var_data)) {
-    attr(var_data[[i]], "dim") <- NULL
-  }
-  names(var_data) <- dim_names
-  included_vars <- dim_names
-  for(var in vars) {
-    curr_dim_names <- ncdf4.helpers::nc.get.dim.names(nc, var)
-    if(!setequal(curr_dim_names, dim_names)) {
-      warning("The dimensions of", var, "do not match the other variables.", var, "will be dropped.")
+  start_list <- list()
+  count_list <- list()
+  dim_values_list <- list()
+  if(has_points) {
+    dim_axes <- ncdf4.helpers::nc.get.dim.axes(nc, vars[1])
+    x_var <- names(dim_axes)[which(dim_axes == "X")]
+    y_var <- names(dim_axes)[which(dim_axes == "Y")]
+    if(length(x_var) == 0 || length(y_var) == 0) stop("Cannot select points because dimensions are not labelled correctly in the nc file. Modify the nc file or remove the points to import all data.")
+    xs <- dim_values[[x_var]]
+    ys <- dim_values[[y_var]]
+    for(i in seq_along(lon_points)) {
+      curr_start <- start
+      curr_count <- count
+      curr_dim_values <- dim_values
+      xy_possible <- expand.grid(xs, ys)
+      point_ind <- which.min(sp::spDistsN1(pts = as.matrix(xy_possible), pt = c(lon_points[i], lat_points[i]), longlat = great_circle_dist))
+      x_ind <- which(xs == xy_possible[point_ind, 1])[1]
+      curr_start[1] <- x_ind
+      curr_count[1]  <- 1
+      curr_dim_values[[x_var]] <- curr_dim_values[[x_var]][x_ind]
+      y_ind <- which(ys == xy_possible[point_ind, 2])[1]
+      curr_start[2] <- y_ind
+      curr_count[2]  <- 1
+      curr_dim_values[[y_var]] <- curr_dim_values[[y_var]][y_ind]
+      if(show_requested_points) {
+        curr_dim_values[[paste0("requested_", x_var)]] <- lon_points[i]
+        curr_dim_values[[paste0("requested_", y_var)]] <- lat_points[i]
+        if(!is.null(id_points)) curr_dim_values[["requested_id"]] <- id_points[i]
+        requested_points_added <- TRUE
+      }
+      
+      start_list[[i]] <- curr_start
+      count_list[[i]] <- curr_count
+      dim_values_list[[i]] <- curr_dim_values
     }
-    else {
-      included_vars <- c(included_vars, var)
-      var_data[[var]] <- as.vector(ncdf4::ncvar_get(nc, var, start = start, count = count))
-    }
   }
-  
+  else {
+    start_list[[1]] <- start
+    count_list[[1]] <- count
+    dim_values_list[[1]] <- dim_values
+  }
+
   dim_axes <- ncdf4.helpers::nc.get.dim.axes(nc)
   time_dims <- names(dim_axes[which(dim_axes == "T" & names(dim_axes) %in% dim_names)])
-  if(length(time_dims) == 1) {
-    time_var <- time_dims
-    raw_time_full <- nc$dim[[time_var]]$vals
-    raw_time <- dim_values[[time_var]]
-    attr(raw_time, "dim") <- NULL
-    df_names <- time_var
-    time_df <- data.frame(raw_time)
-    names(time_df) <- time_var
-    try({
-      # need to subset this if time var has been subsetted
-      time_ind <- which(raw_time_full %in% raw_time)
-      pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
-      pcict_time <- pcict_time[time_ind]
-      posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
-      time_df[[paste0(time_var, "_full")]] <- posixct_time
-      time_df[[paste0(time_var, "_date")]] <- as.Date(posixct_time)
-    })
-    if(ncol(time_df) > 1) var_data <- dplyr::full_join(var_data, time_df, by = time_var)
-    if(!keep_raw_time) {
-      var_data[[time_var]] <- NULL
-      included_vars <- included_vars[-which(included_vars == time_var)]
+  var_data_list <- list()
+  for(i in seq_along(start_list)) {
+    curr_dim_values <- dim_values_list[[i]]
+    curr_var_data <- expand.grid(curr_dim_values, KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE)
+    for(j in seq_along(curr_var_data)) {
+      attr(curr_var_data[[j]], "dim") <- NULL
     }
+    names(curr_var_data) <- names(curr_dim_values)
+    included_vars <- dim_names
+    for(var in vars) {
+      curr_dim_names <- ncdf4.helpers::nc.get.dim.names(nc, var)
+      if(!setequal(curr_dim_names, dim_names)) {
+        warning("The dimensions of", var, "do not match the other variables.", var, "will be dropped.")
+      }
+      else {
+        included_vars <- c(included_vars, var)
+        curr_var_data[[var]] <- as.vector(ncdf4::ncvar_get(nc, var, start = start_list[[i]], count = count_list[[i]]))
+      }
+    }
+    if(length(time_dims) == 1) {
+      time_var <- time_dims
+      raw_time_full <- nc$dim[[time_var]]$vals
+      raw_time <- curr_dim_values[[time_var]]
+      attr(raw_time, "dim") <- NULL
+      df_names <- time_var
+      time_df <- data.frame(raw_time)
+      names(time_df) <- time_var
+      try({
+        # need to subset this if time var has been subsetted
+        time_ind <- which(raw_time_full %in% raw_time)
+        pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
+        pcict_time <- pcict_time[time_ind]
+        posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
+        time_df[[paste0(time_var, "_full")]] <- posixct_time
+        time_df[[paste0(time_var, "_date")]] <- as.Date(posixct_time)
+      })
+      if(ncol(time_df) > 1) curr_var_data <- dplyr::full_join(curr_var_data, time_df, by = time_var)
+      if(!keep_raw_time) {
+        var_data[[time_var]] <- NULL
+        included_vars <- included_vars[-which(included_vars == time_var)]
+      }
+    }
+    var_data_list[[i]] <- curr_var_data
   }
   # # Following conventions in http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html
   # if(replace_missing) {
@@ -393,6 +481,11 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
   #     if(missing_value[[1]]) var_data[[inc_var]][var_data[[inc_var]] %in% missing_value[[2]]] <- NA
   #   }
   # }
+  if(length(var_data_list) > 1) {
+    var_data <- dplyr::bind_rows(var_data_list)
+  }
+  else if(length(var_data_list) == 1) var_data <- var_data_list[[1]]
+  else var_data_list <- data.frame()
   
   if(include_metadata) {
     for(col_name in included_vars) {
@@ -982,4 +1075,102 @@ get_installed_packages_with_data <- function() {
   pack_data <- data(package = .packages(all.available = TRUE))
   pack_data <- pack_data[["results"]]
   return(unique(pack_data[,1]))
+}
+
+drop_unused_levels <- function(dat, columns) {
+  for(i in seq_along(columns)) {
+    if(is.factor(dat[[columns[i]]])) dat[[columns[i]]] <- droplevels(dat[[columns[i]]])
+  }
+  return(dat)
+}
+
+compare_columns <- function(x, y, use_unique = TRUE, sort_values = TRUE, firstnotsecond = TRUE, secondnotfirst = TRUE, display_intersection = FALSE, display_union = FALSE, display_values = TRUE) {
+  x_name <- deparse(substitute(x))
+  y_name <- deparse(substitute(y))
+  if(use_unique) {
+    x <- unique(x)
+    y <- unique(y)
+  }
+  if(sort_values) {
+    x <- sort(x)
+    y <- sort(y)
+  }
+  equal <- setequal(x, y)
+  cat(paste0("Columns contain all the same values: ", equal, "\n \n"))
+  if(equal) {
+    if(display_values) cat(paste0("Values: ", paste0("'", x, "'", collapse = ", "), "\n \n"))
+  }
+  if(!equal) {
+    cat("First column:", x_name, "\n \n")
+    cat("Second column:", y_name, "\n \n")
+    if(firstnotsecond) {
+      cat("Values in first not in second: ")
+      setd <- dplyr::setdiff(x, y)
+      if(length(setd) != 0) cat(paste0("'", setd, "'", collapse = ", "))
+      cat("\n \n")
+    }
+    if(secondnotfirst) {
+      cat("Values in second not in first: ")
+      setd <- dplyr::setdiff(y, x)
+      if(length(setd) != 0) cat(paste0("'", setd, "'", collapse = ", "))
+      cat("\n \n")
+    }
+    if(display_intersection) {
+      cat("Intersection (Values that appear in both columns):")
+      inter <- dplyr::intersect(x, y)
+      if(length(inter) != 0) cat(paste0("'", inter, "'", collapse = ", "))
+      cat("\n \n")
+    }
+    if(display_union) cat(paste0("Union (Values that appear in either column): ", paste0("'", dplyr::union(x, y), "'", collapse = ", ")))
+  }
+}
+
+
+consecutive_sum <- function(x, initial_value = NA){
+  out = x
+  for(i in 1:length(x)){
+    if(!is.na(x[i])){
+    if(x[i] != 0){
+      if(i > 1){
+        out[i]=x[i] + out[i-1]
+    } else{
+        out[i] = x[i] + initial_value
+      }
+    } 
+    }
+  }
+  return(out)
+}
+
+max_consecutive_sum <- function(x){
+  max(consecutive_sum(x, initial_value = 0))
+}
+
+hashed_id <- function(x, salt, algo = "crc32") {
+  if (missing(salt)){
+      y <- x
+    }else{
+      y <- paste(x, salt)
+    }
+  y <- sapply(y, function(X) digest::digest(X, algo = algo))
+  as.character(y)
+
+}
+
+# Possible alternative but is slower:
+# spells <- function(z) {
+#   Reduce(function(x,y) {y = dplyr::if_else(y == 0, 0, x + 1)}, z[-1], 
+#          init = dplyr::if_else(z[1] == 0, 0, NA_real_), accumulate = TRUE)
+# }
+.spells <- function(x) {
+  y <- mat.or.vec(length(x), 1)
+  if(length(x) > 0) {
+    y[1] <- dplyr::if_else(x[1] == 0, 0, NA_real_)
+    if(length(x) > 1) {
+      for(i in 2:length(x)) {
+        y[i] <- dplyr::if_else(x[i] == 0, 0, y[i-1] + 1)
+      }
+    }
+  }
+  return(y)
 }

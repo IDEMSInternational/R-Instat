@@ -31,11 +31,12 @@ Public Class dlgDuplicates
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        'autoTranslate(Me)
+        autoTranslate(Me)
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 547
         Dim dctConditions As New Dictionary(Of String, String)
         Dim dctType As New Dictionary(Of String, String)
 
@@ -67,11 +68,13 @@ Public Class dlgDuplicates
         ' for rdoSuccessiveVariables this is ran as a string, it isn't run for rdoSelectedVariables.For rdodataframe this is ran as an r-function so we are doing this manually but passing the parameter in the additional code pair
         ucrSelectorDuplicateswithVariables.SetParameter(New RParameter("x", 0))
         ucrSelectorDuplicateswithVariables.SetParameterIsString()
+        ucrSelectorDuplicateswithVariables.bUseCurrentFilter = False
 
         ucrReceiverForSelectedVariables.SetParameter(New RParameter("x", 0))
         ucrReceiverForSelectedVariables.SetParameterIsRFunction()
         ucrReceiverForSelectedVariables.Selector = ucrSelectorDuplicateswithVariables
         ucrReceiverForSelectedVariables.SetLinkedDisplayControl(lblVariablesToDuplicate)
+        ucrReceiverForSelectedVariables.bUseFilteredData = False
 
         ttDuplicates.SetToolTip(rdoAllDuplicateCases, "All cases are given as being duplicate rows")
         ttDuplicates.SetToolTip(rdoDuplicatesOnly, "The first occurrence is not indicated, but further instances are considered duplicates")
@@ -82,6 +85,7 @@ Public Class dlgDuplicates
         ucrReceiverForSuccessiveValues.SetParameterIsRFunction()
         ucrReceiverForSuccessiveValues.Selector = ucrSelectorDuplicateswithVariables
         ucrReceiverForSuccessiveValues.SetLinkedDisplayControl(lblSelectedVariable)
+        ucrReceiverForSuccessiveValues.bUseFilteredData = False
 
         ucrChkOmitValues.SetText("Omit Value(s)")
         ucrChkOmitValues.AddParameterValuesCondition(False, "ignore", "NULL", True)
@@ -109,7 +113,7 @@ Public Class dlgDuplicates
         ucrInputConditions.SetItems(dctConditions)
         ucrInputConditions.SetDropDownStyleAsNonEditable()
 
-        ucrInputComboType.SetParameter(New RParameter("type", 1))
+        ucrInputComboType.SetParameter(New RParameter("type"))
         dctType.Add("Count", Chr(34) & "count" & Chr(34))
         dctType.Add("Index", Chr(34) & "index" & Chr(34))
         ucrInputComboType.SetRDefault(Chr(34) & "count" & Chr(34))
@@ -154,6 +158,7 @@ Public Class dlgDuplicates
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverForSelectedVariables.AddAdditionalCodeParameterPair(clsDuplicated2, New RParameter("x", 1), iAdditionalPairNo:=1)
+        ucrReceiverForSelectedVariables.AddAdditionalCodeParameterPair(clsdupCountIndex, New RParameter("x", 1), iAdditionalPairNo:=2)
         ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicated2, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsdupCountIndex, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrNewColumnName.AddAdditionalRCode(clsDuplicated2, iAdditionalPairNo:=1)

@@ -44,6 +44,7 @@ Partial Class sdgPlots
         Me.ucrNudNumberofRows = New instat.ucrNud()
         Me.ucrChkNoOfRowsOrColumns = New instat.ucrCheck()
         Me.ucrChkIncludeFacets = New instat.ucrCheck()
+        Me.ucrChkLabeler = New instat.ucrCheck()
         Me.ucrChkFreeSpace = New instat.ucrCheck()
         Me.ucrChkFreeScalesY = New instat.ucrCheck()
         Me.ucrChkFreeScalesX = New instat.ucrCheck()
@@ -78,6 +79,7 @@ Partial Class sdgPlots
         Me.ucrYAxis = New instat.ucrAxes()
         Me.tbpTheme = New System.Windows.Forms.TabPage()
         Me.urChkSelectTheme = New instat.ucrCheck()
+
         Me.grpCommonOptions = New System.Windows.Forms.GroupBox()
         Me.ucrNudYaxisMarkSize = New instat.ucrNud()
         Me.ucrNudXaxisMarkSize = New instat.ucrNud()
@@ -91,6 +93,7 @@ Partial Class sdgPlots
         Me.ucrChkXaxisSize = New instat.ucrCheck()
         Me.ucrChkXaxisAngle = New instat.ucrCheck()
         Me.ucrChkLegendPosition = New instat.ucrCheck()
+
         Me.lblFont = New System.Windows.Forms.Label()
         Me.cmdAllOptions = New System.Windows.Forms.Button()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
@@ -127,6 +130,7 @@ Partial Class sdgPlots
         Me.tbpFacet.Controls.Add(Me.ucrNudNumberofRows)
         Me.tbpFacet.Controls.Add(Me.ucrChkNoOfRowsOrColumns)
         Me.tbpFacet.Controls.Add(Me.ucrChkIncludeFacets)
+        Me.tbpFacet.Controls.Add(Me.ucrChkLabeler)
         Me.tbpFacet.Controls.Add(Me.ucrChkFreeSpace)
         Me.tbpFacet.Controls.Add(Me.ucrChkFreeScalesY)
         Me.tbpFacet.Controls.Add(Me.ucrChkFreeScalesX)
@@ -166,6 +170,12 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrChkIncludeFacets, "ucrChkIncludeFacets")
         Me.ucrChkIncludeFacets.Name = "ucrChkIncludeFacets"
         '
+        'ucrChkLabeler
+        '
+        Me.ucrChkLabeler.Checked = False
+        resources.ApplyResources(Me.ucrChkLabeler, "ucrChkLabeler")
+        Me.ucrChkLabeler.Name = "ucrChkLabeler"
+        '
         'ucrChkFreeSpace
         '
         Me.ucrChkFreeSpace.Checked = False
@@ -192,6 +202,7 @@ Partial Class sdgPlots
         '
         'ucrFacetSelector
         '
+        Me.ucrFacetSelector.bDropUnusedFilterLevels = False
         Me.ucrFacetSelector.bShowHiddenColumns = False
         Me.ucrFacetSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrFacetSelector, "ucrFacetSelector")
@@ -391,7 +402,9 @@ Partial Class sdgPlots
         'tbpTheme
         '
         Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
+
         Me.tbpTheme.Controls.Add(Me.grpCommonOptions)
+
         Me.tbpTheme.Controls.Add(Me.lblFont)
         Me.tbpTheme.Controls.Add(Me.cmdAllOptions)
         Me.tbpTheme.Controls.Add(Me.ucrInputThemes)
@@ -406,6 +419,7 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.urChkSelectTheme, "urChkSelectTheme")
         Me.urChkSelectTheme.Name = "urChkSelectTheme"
         '
+
         'grpCommonOptions
         '
         Me.grpCommonOptions.Controls.Add(Me.ucrNudYaxisMarkSize)
@@ -516,6 +530,7 @@ Partial Class sdgPlots
         Me.ucrChkLegendPosition.Checked = False
         resources.ApplyResources(Me.ucrChkLegendPosition, "ucrChkLegendPosition")
         Me.ucrChkLegendPosition.Name = "ucrChkLegendPosition"
+
         '
         'lblFont
         '
@@ -564,7 +579,6 @@ Partial Class sdgPlots
         Me.MinimizeBox = False
         Me.Name = "sdgPlots"
         Me.Tag = "Plot_Options"
-        Me.TopMost = True
         Me.tbpPlotsOptions.ResumeLayout(False)
         Me.tbpFacet.ResumeLayout(False)
         Me.tbpFacet.PerformLayout()
@@ -629,6 +643,7 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputGraphSubTitle As ucrInputTextBox
     Friend WithEvents urChkSelectTheme As ucrCheck
     Friend WithEvents ucrChkHorizontalplot As ucrCheck
+
     Friend WithEvents ucrChkYaxisMarkLabelSize As ucrCheck
     Friend WithEvents ucrChkXaxisMarkLabelSize As ucrCheck
     Friend WithEvents ucrChkYaxisSize As ucrCheck
@@ -641,6 +656,9 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrNudYaxisMarkSize As ucrNud
     Friend WithEvents ucrNudXaxisMarkSize As ucrNud
+
+    Friend WithEvents ucrChkLabeler As ucrCheck
+
 End Class
 
 
