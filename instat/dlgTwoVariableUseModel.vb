@@ -39,6 +39,10 @@ Public Class dlgTwoVariableUseModel
         ucrSelectorUseModel.Reset()
         ucrModel.SetName("")
         cmdPredict.Enabled = False
+
+        'TODO: This is disabled as it is not properly linked!
+        'ToDO: This dialog code needs to be re-written first.
+        cmdDisplayOptions.Enabled = False
         TestOkEnabled()
     End Sub
 
@@ -55,7 +59,6 @@ Public Class dlgTwoVariableUseModel
         ucrBaseUseModel.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRCommand)
         ucrModel.IsReadOnly = True
         ' sdgSimpleRegOptions.SetRModelFunction(clsRCommand)
-        sdgSimpleRegOptions.SetRDataFrame(ucrSelectorUseModel.ucrAvailableDataFrames)
         ucrReceiverUseModel.strSelectorHeading = "Models"
     End Sub
 

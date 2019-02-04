@@ -29,7 +29,7 @@ Public Class dlgRegularSequence
     Public bNumericIsDefault As Boolean
 
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'autoTranslate(Me)
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False

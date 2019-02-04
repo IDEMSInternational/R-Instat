@@ -177,7 +177,6 @@ Partial Class sdgDataOptions
         Me.MinimizeBox = False
         Me.Name = "sdgDataOptions"
         Me.Tag = "Data_Options"
-        Me.TopMost = True
         Me.tbcDataOptions.ResumeLayout(False)
         Me.tbRows.ResumeLayout(False)
         Me.tbRows.PerformLayout()

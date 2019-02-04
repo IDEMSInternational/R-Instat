@@ -103,7 +103,7 @@ Public Class dlgInventoryPlot
 
         ucrInventoryPlotSelector.Reset()
         ucrSaveGraph.Reset()
-        ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverElements.SetMeAsReceiver()
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsDefaultRFunction.AddParameter("coord_flip", "FALSE")

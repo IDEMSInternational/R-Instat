@@ -23,7 +23,8 @@ Public Class RLink
     Dim strClimateObjectPath As String = "/ClimateObject/R" 'new climateobject path
     Public strClimateObject As String = "ClimateObject"
     Dim strInstatObjectPath As String = "/InstatObject/R" 'path to the Instat object
-    Public strInstatDataObject As String = "InstatDataObject"
+    Public strInstatDataObject As String = "data_book"
+    Public strDataBookClassName As String = "DataBook"
 
     Private bFirstRCode As Boolean = True
     Private bDebugLogExists As Boolean = False
@@ -80,7 +81,8 @@ Public Class RLink
             clsEngine = REngine.GetInstance()
             clsEngine.Initialize()
         Catch ex As Exception
-            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 or later." & vbNewLine & "Rerun the installation to install R or download the latest version from https://cran.r-project.org/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
+            ' Modified message since currently not working for R 3.5.0
+            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4 of R." & vbNewLine & "Note that R-Instat does not currently work with R 3.5.0 or above. Try reruning the installation to install R 3.4.4 or download R 3.4.4 from https://cran.r-project.org/bin/windows/base/old/3.4.4/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
             Application.Exit()
             Environment.Exit(0)
         End Try
@@ -97,12 +99,12 @@ Public Class RLink
             ' Once R 3.5.1 is released this can be removed. Error message should also be updated.
             If strMinor.Count >= 3 AndAlso Integer.TryParse(strMinor(2), iMinor2) Then
                 If Not (strMajor = strRVersionMajorRequired AndAlso strMinor.Count > 0 AndAlso strMinor(0) = strRVersionMinorRequired AndAlso iMinor2 >= 4) Then
-                    MsgBox("Your current version of R is outdated. You are currently running R version: " & strMajor & "." & strMinor & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4 or later." & vbNewLine & "Rerun the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version outdated.")
+                    MsgBox("Your current version of R is outdated or you have R 3.5.0 and above which is currently not supported by R-Instat. You are currently running R version: " & strMajor & "." & strMinor & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4." & vbNewLine & "Try reruning the installation to install R 3.4.4 or download R 3.4.4 from https://cran.r-project.org/bin/windows/base/old/3.4.4/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version not supported.")
                     Application.Exit()
                     Environment.Exit(0)
                 End If
             Else
-                MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4 or later." & vbNewLine & "Rerun the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version error.")
+                MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4." & vbNewLine & "Try uninstalling any versions of R and rerun the installation to install R 3.4.4 or download R 3.4.4 from https://cran.r-project.org/bin/windows/base/old/3.4.4/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version error.")
                 Application.Exit()
                 Environment.Exit(0)
             End If
@@ -447,7 +449,7 @@ Public Class RLink
         strOutput = ""
 
         If strComment <> "" Then
-            strComment = "# " & strComment
+            strComment = GetFormattedComment(strComment)
             strScriptWithComment = strComment & Environment.NewLine & strScript
         Else
             strScriptWithComment = strScript
@@ -595,6 +597,7 @@ Public Class RLink
         Dim strCommand As String
 
         expTemp = Nothing
+        'TODO Bug here if strScript is multiple lines. Wrong value will be returned
         strCommand = strVariableName & "<-" & strScript
         If clsEngine IsNot Nothing Then
             Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
@@ -816,7 +819,7 @@ Public Class RLink
         clsSource.AddParameter("file", Chr(34) & "Rsetup.R" & Chr(34))
         clsCreateIO.SetOperation("<-")
         clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
-        clsCreateIO.AddParameter("right", "instat_object$new()", iPosition:=1)
+        clsCreateIO.AddParameter("right", strDataBookClassName & "$new()", iPosition:=1)
 
         strScript = ""
         strScript = strScript & clsSetWd.ToScript() & Environment.NewLine
@@ -827,7 +830,7 @@ Public Class RLink
     End Function
 
     Public Sub CreateNewInstatObject()
-        RunScript(strInstatDataObject & " <- instat_object$new()", strComment:="Defining new Instat Object")
+        RunScript(strInstatDataObject & " <- " & strDataBookClassName & "$new()", strComment:="Defining new Instat Object")
         bInstatObjectExists = True
     End Sub
 
@@ -865,6 +868,8 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_model_names")
                 Case "graph"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_graph_names")
+                Case "surv"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_surv_names")
                 Case "dataframe"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_data_names")
                 Case "link"
@@ -976,7 +981,7 @@ Public Class RLink
         End If
     End Sub
 
-    Public Sub SelectColumnsWithMetadataProperty(ucrCurrentReceiver As ucrReceiverMultiple, strDataFrameName As String, strProperty As String, strValues As String())
+    Public Sub SelectColumnsWithMetadataProperty(ucrCurrentReceiver As ucrReceiver, strDataFrameName As String, strProperty As String, strValues As String())
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
@@ -985,6 +990,7 @@ Public Class RLink
         Dim kvpInclude As KeyValuePair(Of String, String())
         Dim lstItems As New List(Of KeyValuePair(Of String, String))
         Dim expColumns As SymbolicExpression
+        Dim ucrReceiverTempMultiple As ucrReceiverMultiple
 
         kvpInclude = New KeyValuePair(Of String, String())(strProperty, strValues)
         ucrCurrentReceiver.Selector.LoadList()
@@ -1013,8 +1019,15 @@ Public Class RLink
                     For Each strColumn As String In chrCurrColumns
                         lstItems.Add(New KeyValuePair(Of String, String)(strDataFrameName, strColumn))
                     Next
-                    ucrCurrentReceiver.AddMultiple(lstItems.ToArray())
                 Next
+                If TypeOf ucrCurrentReceiver Is ucrReceiverSingle Then
+                    If lstItems.Count > 0 Then
+                        ucrCurrentReceiver.Add(lstItems(0).Value, lstItems(0).Key)
+                    End If
+                ElseIf TypeOf ucrCurrentReceiver Is ucrReceiverMultiple Then
+                    ucrReceiverTempMultiple = DirectCast(ucrCurrentReceiver, ucrReceiverMultiple)
+                    ucrReceiverTempMultiple.AddMultiple(lstItems.ToArray())
+                End If
             End If
         End If
         ucrCurrentReceiver.Selector.LoadList()
@@ -1180,6 +1193,26 @@ Public Class RLink
             End If
         End If
         Return lstGraphNames
+    End Function
+
+    Public Function GetSurvNames(Optional strDataFrameName As String = "") As List(Of String)
+        Dim chrSurvNames As CharacterVector
+        Dim lstSurvNames As New List(Of String)
+        Dim clsGetSurvNames As New RFunction
+        Dim expSurvNames As SymbolicExpression
+
+        clsGetSurvNames.SetRCommand(strInstatDataObject & "$get_graph_names")
+        If strDataFrameName <> "" Then
+            clsGetSurvNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        expSurvNames = RunInternalScriptGetValue(clsGetSurvNames.ToScript(), bSilent:=True)
+        If expSurvNames IsNot Nothing AndAlso Not expSurvNames.Type = Internals.SymbolicExpressionType.Null Then
+            chrSurvNames = expSurvNames.AsCharacter()
+            If chrSurvNames.Length > 0 Then
+                lstSurvNames.AddRange(chrSurvNames)
+            End If
+        End If
+        Return lstSurvNames
     End Function
 
     Public Function GetDataType(strDataFrameName As String, strColumnName As String) As String
@@ -1399,11 +1432,35 @@ Public Class RLink
 
         clsCreateIO.SetOperation("<-")
         clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
-        clsCreateIO.AddParameter("right", "instat_object$new()", iPosition:=1)
+        clsCreateIO.AddParameter("right", strDataBookClassName & "$new()", iPosition:=1)
 
         bInstatObjectExists = False
         RunScript(clsRm.ToScript(), strComment:="Closing data")
         bInstatObjectExists = True
         RunScript(clsCreateIO.ToScript(), strComment:="Creating New Instat Object")
     End Sub
+
+    Public Sub ViewLastGraph()
+        Dim clsLastGraph As New RFunction
+
+        clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
+        RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bSeparateThread:=False)
+    End Sub
+
+    'construct and format the comment
+    Public Function GetFormattedComment(strComment As String) As String
+        Dim strReconstructedComment As String = ""
+        Dim arrCommentParts As String()
+        If strComment.Length > 0 Then
+            arrCommentParts = strComment.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+            For Each strPart As String In arrCommentParts
+                If strReconstructedComment = "" Then
+                    strReconstructedComment = "# " & strPart
+                Else
+                    strReconstructedComment = strReconstructedComment & Environment.NewLine & "# " & strPart
+                End If
+            Next
+        End If
+        Return strReconstructedComment
+    End Function
 End Class

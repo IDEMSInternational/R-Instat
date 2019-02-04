@@ -38,6 +38,7 @@ Partial Class ucrCalculator
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrCalculator))
         Me.lblExpression = New System.Windows.Forms.Label()
         Me.chkSaveResultInto = New System.Windows.Forms.CheckBox()
@@ -46,7 +47,7 @@ Partial Class ucrCalculator
         Me.chkShowArguments = New System.Windows.Forms.CheckBox()
         Me.grpBasic = New System.Windows.Forms.GroupBox()
         Me.cmdClear = New System.Windows.Forms.Button()
-        Me.cmdDelete = New System.Windows.Forms.Button()
+        Me.cmdComma = New System.Windows.Forms.Button()
         Me.cmdBrackets = New System.Windows.Forms.Button()
         Me.cmdPower = New System.Windows.Forms.Button()
         Me.cmdDivide = New System.Windows.Forms.Button()
@@ -98,6 +99,7 @@ Partial Class ucrCalculator
         Me.cmdLead = New System.Windows.Forms.Button()
         Me.cmdLag = New System.Windows.Forms.Button()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.cmdMode = New System.Windows.Forms.Button()
         Me.cmdFirst = New System.Windows.Forms.Button()
         Me.cmdLast = New System.Windows.Forms.Button()
         Me.cmdnth = New System.Windows.Forms.Button()
@@ -139,6 +141,10 @@ Partial Class ucrCalculator
         Me.cmdCountstrings = New System.Windows.Forms.Button()
         Me.cmdLocate = New System.Windows.Forms.Button()
         Me.grpLogical = New System.Windows.Forms.GroupBox()
+        Me.cmdDoubleSqrBrackets = New System.Windows.Forms.Button()
+        Me.cmdIn = New System.Windows.Forms.Button()
+        Me.cmdWhich = New System.Windows.Forms.Button()
+        Me.cmdNA = New System.Windows.Forms.Button()
         Me.cmdNear = New System.Windows.Forms.Button()
         Me.cmdBetween = New System.Windows.Forms.Button()
         Me.cmdIsFalse = New System.Windows.Forms.Button()
@@ -207,7 +213,9 @@ Partial Class ucrCalculator
         Me.cmdAcos = New System.Windows.Forms.Button()
         Me.cmdCos = New System.Windows.Forms.Button()
         Me.cmdSqrt = New System.Windows.Forms.Button()
-        Me.cmdMode = New System.Windows.Forms.Button()
+        Me.cmdTrue = New System.Windows.Forms.Button()
+        Me.cmdFalse = New System.Windows.Forms.Button()
+        Me.ttCalculator = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
@@ -256,7 +264,7 @@ Partial Class ucrCalculator
         'grpBasic
         '
         Me.grpBasic.Controls.Add(Me.cmdClear)
-        Me.grpBasic.Controls.Add(Me.cmdDelete)
+        Me.grpBasic.Controls.Add(Me.cmdComma)
         Me.grpBasic.Controls.Add(Me.cmdBrackets)
         Me.grpBasic.Controls.Add(Me.cmdPower)
         Me.grpBasic.Controls.Add(Me.cmdDivide)
@@ -284,11 +292,11 @@ Partial Class ucrCalculator
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
-        'cmdDelete
+        'cmdComma
         '
-        resources.ApplyResources(Me.cmdDelete, "cmdDelete")
-        Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdComma, "cmdComma")
+        Me.cmdComma.Name = "cmdComma"
+        Me.cmdComma.UseVisualStyleBackColor = True
         '
         'cmdBrackets
         '
@@ -654,6 +662,12 @@ Partial Class ucrCalculator
         Me.grpSummary.Name = "grpSummary"
         Me.grpSummary.TabStop = False
         '
+        'cmdMode
+        '
+        resources.ApplyResources(Me.cmdMode, "cmdMode")
+        Me.cmdMode.Name = "cmdMode"
+        Me.cmdMode.UseVisualStyleBackColor = True
+        '
         'cmdFirst
         '
         resources.ApplyResources(Me.cmdFirst, "cmdFirst")
@@ -912,6 +926,12 @@ Partial Class ucrCalculator
         '
         'grpLogical
         '
+        Me.grpLogical.Controls.Add(Me.cmdFalse)
+        Me.grpLogical.Controls.Add(Me.cmdTrue)
+        Me.grpLogical.Controls.Add(Me.cmdDoubleSqrBrackets)
+        Me.grpLogical.Controls.Add(Me.cmdIn)
+        Me.grpLogical.Controls.Add(Me.cmdWhich)
+        Me.grpLogical.Controls.Add(Me.cmdNA)
         Me.grpLogical.Controls.Add(Me.cmdNear)
         Me.grpLogical.Controls.Add(Me.cmdBetween)
         Me.grpLogical.Controls.Add(Me.cmdIsFalse)
@@ -943,6 +963,30 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpLogical, "grpLogical")
         Me.grpLogical.Name = "grpLogical"
         Me.grpLogical.TabStop = False
+        '
+        'cmdDoubleSqrBrackets
+        '
+        resources.ApplyResources(Me.cmdDoubleSqrBrackets, "cmdDoubleSqrBrackets")
+        Me.cmdDoubleSqrBrackets.Name = "cmdDoubleSqrBrackets"
+        Me.cmdDoubleSqrBrackets.UseVisualStyleBackColor = True
+        '
+        'cmdIn
+        '
+        resources.ApplyResources(Me.cmdIn, "cmdIn")
+        Me.cmdIn.Name = "cmdIn"
+        Me.cmdIn.UseVisualStyleBackColor = True
+        '
+        'cmdWhich
+        '
+        resources.ApplyResources(Me.cmdWhich, "cmdWhich")
+        Me.cmdWhich.Name = "cmdWhich"
+        Me.cmdWhich.UseVisualStyleBackColor = True
+        '
+        'cmdNA
+        '
+        resources.ApplyResources(Me.cmdNA, "cmdNA")
+        Me.cmdNA.Name = "cmdNA"
+        Me.cmdNA.UseVisualStyleBackColor = True
         '
         'cmdNear
         '
@@ -1393,11 +1437,17 @@ Partial Class ucrCalculator
         Me.cmdSqrt.Name = "cmdSqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
         '
-        'cmdMode
+        'cmdTrue
         '
-        resources.ApplyResources(Me.cmdMode, "cmdMode")
-        Me.cmdMode.Name = "cmdMode"
-        Me.cmdMode.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdTrue, "cmdTrue")
+        Me.cmdTrue.Name = "cmdTrue"
+        Me.cmdTrue.UseVisualStyleBackColor = True
+        '
+        'cmdFalse
+        '
+        resources.ApplyResources(Me.cmdFalse, "cmdFalse")
+        Me.cmdFalse.Name = "cmdFalse"
+        Me.cmdFalse.UseVisualStyleBackColor = True
         '
         'ucrInputCalOptions
         '
@@ -1423,6 +1473,7 @@ Partial Class ucrCalculator
         '
         'ucrSelectorForCalculations
         '
+        Me.ucrSelectorForCalculations.bDropUnusedFilterLevels = False
         Me.ucrSelectorForCalculations.bShowHiddenColumns = False
         Me.ucrSelectorForCalculations.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForCalculations, "ucrSelectorForCalculations")
@@ -1441,11 +1492,11 @@ Partial Class ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpSummary)
-        Me.Controls.Add(Me.grpProbabilty)
-        Me.Controls.Add(Me.grpMaths)
-        Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpLogical)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpMaths)
+        Me.Controls.Add(Me.grpProbabilty)
+        Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.cmdHelp)
@@ -1606,7 +1657,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdSum As Button
     Friend WithEvents cmdMiss As Button
     Friend WithEvents cmdLength As Button
-    Friend WithEvents cmdDelete As Button
+    Friend WithEvents cmdComma As Button
     Friend WithEvents cmdClear As Button
     Friend WithEvents cmdMultiply As Button
     Friend WithEvents cmdpercentrank As Button
@@ -1647,4 +1698,12 @@ Partial Class ucrCalculator
     Friend WithEvents cmdLast As Button
     Friend WithEvents cmdnth As Button
     Friend WithEvents cmdMode As Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents cmdNA As Button
+    Friend WithEvents cmdIn As Button
+    Friend WithEvents cmdWhich As Button
+    Friend WithEvents cmdDoubleSqrBrackets As Button
+    Friend WithEvents cmdFalse As Button
+    Friend WithEvents cmdTrue As Button
+    Friend WithEvents ttCalculator As ToolTip
 End Class
