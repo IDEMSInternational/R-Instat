@@ -402,6 +402,7 @@ upper_quart_label="upper_quartile"
 skewness_label="summary_skewness"
 summary_skewness_mc_label="summary_skewness_mc"
 summary_outlier_limit_label = "summary_outlier_limit"
+
 kurtosis_label="summary_kurtosis"
 summary_coef_var_label="summary_coef_var"
 summary_median_absolute_deviation_label="summary_median_absolute_deviation"
@@ -591,6 +592,24 @@ summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc
     } else {
       Q1 - coef*exp(-skewnessweight*MC)*IQR
     }
+  }
+}
+
+# skewness outlier limit function
+summary_outlier_limit <- function(x, coef = 1.5, bupperlimit=TRUE, bskewedcalc=FALSE, skewnessweight = 4,na.rm = TRUE, ...){ 
+  
+  quart <- quantile(x, na.rm = na.rm)
+  Q1 <- quart[[2]]
+  Q3 <- quart[[4]]
+  IQR <- Q1 - Q3
+  MC <- 0
+  if(bskewedcalc){
+    MC <- robustbase::mc(x, na.rm = na.rm)
+  }
+  if(bupperlimit){
+    Q3 + coef*exp(skewnessweight*MC)*IQR
+  } else {
+    Q1 - coef*exp(-skewnessweight*MC)*IQR
   }
 }
 
