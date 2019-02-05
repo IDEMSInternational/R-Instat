@@ -152,7 +152,17 @@
     <Compile Include="clsQualityControl.vb" />
     <Compile Include="clsRCodeStructure.vb" />
     <Compile Include="clsRegressionDefaults.vb" />
+
+    <Compile Include="clsThemeSubFunctions.vb" />
+    <Compile Include="sdgThemesSub.Designer.vb">
+      <DependentUpon>sdgThemesSub.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgThemesSub.vb">
+      <SubType>Form</SubType>
+    </Compile>
+
     <Compile Include="clsRains.vb" />
+
     <Compile Include="dlgAddComment.Designer.vb">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
     </Compile>
@@ -793,6 +803,12 @@
       <DependentUpon>dlgViewGraph.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgViewGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmGraphDisplay.Designer.vb">
@@ -2351,6 +2367,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+
+    <EmbeddedResource Include="sdgThemesSub.resx">
+      <DependentUpon>sdgThemesSub.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAddComment.fr-FR.resx">
+      <DependentUpon>dlgAddComment.vb</DependentUpon>
+    </EmbeddedResource>
+
     <EmbeddedResource Include="dlgAddComment.resx">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
     </EmbeddedResource>
@@ -3309,6 +3333,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnStructures.sw-KE.resx">
       <DependentUpon>dlgColumnStructures.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGraphDisplay.fr-FR.resx">
+      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGraphDisplay.resx">
       <DependentUpon>frmGraphDisplay.vb</DependentUpon>
@@ -4407,8 +4437,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
     <Content Include="LICENCE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
