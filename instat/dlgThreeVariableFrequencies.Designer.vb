@@ -275,6 +275,7 @@ Partial Class dlgThreeVariableFrequencies
         '
         'ucrSelectorThreeVariableFrequencies
         '
+        Me.ucrSelectorThreeVariableFrequencies.bDropUnusedFilterLevels = False
         Me.ucrSelectorThreeVariableFrequencies.bShowHiddenColumns = False
         Me.ucrSelectorThreeVariableFrequencies.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorThreeVariableFrequencies, "ucrSelectorThreeVariableFrequencies")
