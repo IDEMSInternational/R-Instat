@@ -370,7 +370,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>416, 370</value>
+    <value>471, 370</value>
   </data>
   <data name="ucrReceiverColumnToUnstack.Location" type="System.Drawing.Point, System.Drawing">
     <value>268, 125</value>

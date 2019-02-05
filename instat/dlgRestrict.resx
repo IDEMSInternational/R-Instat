@@ -250,7 +250,7 @@
     <value>True</value>
   </data>
   <data name="rdoApplyAsSubset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 22</value>
+    <value>159, 22</value>
   </data>
   <data name="rdoApplyAsSubset.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 17</value>
@@ -304,7 +304,7 @@
     <value>10, 197</value>
   </data>
   <data name="grpApplyOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 53</value>
+    <value>291, 53</value>
   </data>
   <data name="grpApplyOptions.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

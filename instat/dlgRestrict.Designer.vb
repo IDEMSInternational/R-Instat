@@ -62,6 +62,7 @@ Partial Class dlgRestrict
         '
         'ucrSelectorFilter
         '
+        Me.ucrSelectorFilter.bDropUnusedFilterLevels = False
         Me.ucrSelectorFilter.bShowHiddenColumns = False
         Me.ucrSelectorFilter.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorFilter, "ucrSelectorFilter")
