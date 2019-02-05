@@ -177,9 +177,6 @@
   <data name="&gt;&gt;lblData.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="chkSaveEnterResultInto.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="chkSaveEnterResultInto.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 252</value>
   </data>
@@ -187,7 +184,7 @@
     <value>2, 3, 2, 3</value>
   </data>
   <data name="chkSaveEnterResultInto.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 17</value>
+    <value>174, 17</value>
   </data>
   <data name="chkSaveEnterResultInto.TabIndex" type="System.Int32, mscorlib">
     <value>157</value>
@@ -1114,7 +1111,7 @@
     <value>0</value>
   </data>
   <data name="ucrSaveEnterResultInto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 247</value>
+    <value>195, 247</value>
   </data>
   <data name="ucrSaveEnterResultInto.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
