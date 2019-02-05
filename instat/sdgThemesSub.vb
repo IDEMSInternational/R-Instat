@@ -131,16 +131,16 @@ Imports instat
         dctThemeFunctions.TryGetValue("axis.ticks.y", clsYAxisTickMarks)
         dctThemeFunctions.TryGetValue("axis.ticks.length", clsUnitAxisTickLength)
 
-        dctThemeFunctions.TryGetValue("axis.line", clsElementLineAxes)
-        dctThemeFunctions.TryGetValue("axis.line.x", clsElementLineXAxis)
-        dctThemeFunctions.TryGetValue("axis.line.y", clsElementLineYAxis)
+        'dctThemeFunctions.TryGetValue("axis.line", clsElementLineAxes)
+        'dctThemeFunctions.TryGetValue("axis.line.x", clsElementLineXAxis)
+        'dctThemeFunctions.TryGetValue("axis.line.y", clsElementLineYAxis)
 
-        dctThemeFunctions.TryGetValue("panel.grid", clsElementPanelGrid)
-        dctThemeFunctions.TryGetValue("panel.grid.major", clsElementPanelGridMajor)
-        dctThemeFunctions.TryGetValue("panel.grid.minor", clsElementPanelGridMinor)
+        'dctThemeFunctions.TryGetValue("panel.grid", clsElementPanelGrid)
+        'dctThemeFunctions.TryGetValue("panel.grid.major", clsElementPanelGridMajor)
+        'dctThemeFunctions.TryGetValue("panel.grid.minor", clsElementPanelGridMinor)
 
-        ucrPanelBackground.SetRCodeForControl("panel.background", clsElementPanelBackGround, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPlotBackground.SetRCodeForControl("plot.background", clsElementPlotBackground, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        'ucrPanelBackground.SetRCodeForControl("panel.background", clsElementPanelBackGround, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        'ucrPlotBackground.SetRCodeForControl("plot.background", clsElementPlotBackground, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
     End Sub
 

@@ -19,10 +19,8 @@ Imports instat.Translations
 Public Class sdgThemes
     Public bControlsInitialised As Boolean = False
     Private clsElementLine, clsElementRect, clsElementXAxisTextTop, clsElementXAxisLine, clsElementYAxisLine, clsElementText, clsElementYAxisTextRight, clsElementXAxisLineTop, clsThemeFunction As New RFunction
-
     Private clsBaseOperator As New ROperator
-
-    Private clsThemeSubFunctions As clsThemeSubFunctions
+    Private clsThemeSubFunctions As New clsThemeSubFunctions
 
     Private Sub sdgThemes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
