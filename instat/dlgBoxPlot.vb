@@ -41,6 +41,8 @@ Public Class dlgBoxplot
     Private clsJitterplotFunc As New RFunction
     Private clsViolinplotFunc As New RFunction
     Private clsCurrGeomFunc As New RFunction
+    ' Jitter function that can be added to the boxplot/violin base layer
+    Private clsAddedJitterFunc As New RFunction
 
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -63,6 +65,7 @@ Public Class dlgBoxplot
     Private Sub InitialiseDialog()
         Dim clsCoordFlipFunc As New RFunction
         Dim clsCoordFlipParam As New RParameter
+        Dim clsAddedJitterParam As New RParameter
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 436
@@ -76,6 +79,7 @@ Public Class dlgBoxplot
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
         ucrPnlPlots.AddToLinkedControls(ucrChkVarWidth, {rdoBoxplot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPlots.AddToLinkedControls(ucrChkAddPoints, {rdoBoxplot, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorBoxPlot.SetParameter(New RParameter("data", 0))
         ucrSelectorBoxPlot.SetParameterIsrfunction()
@@ -113,8 +117,29 @@ Public Class dlgBoxplot
         clsCoordFlipFunc.SetRCommand("coord_flip")
         clsCoordFlipParam.SetArgumentName("coord_flip")
         clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
+
         ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
         ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        clsAddedJitterParam.SetArgumentName("add_jitter")
+        clsAddedJitterParam.SetArgument(clsAddedJitterFunc)
+
+        ucrChkAddPoints.SetParameter(clsAddedJitterParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkAddPoints.SetText("Add Points")
+        ucrChkAddPoints.AddToLinkedControls({ucrNudJitter, ucrNudTransparency}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudJitter.SetParameter(New RParameter("width", 2))
+        ucrNudJitter.Minimum = 0
+        ucrNudJitter.DecimalPlaces = 2
+        ucrNudJitter.Increment = 0.01
+        ucrNudJitter.SetLinkedDisplayControl(lblJitter)
+
+        ucrNudTransparency.SetParameter(New RParameter("alpha", 2))
+        ucrNudTransparency.SetMinMax(0, 1)
+        ucrNudTransparency.DecimalPlaces = 2
+        ucrNudTransparency.Increment = 0.01
+        ucrNudTransparency.SetLinkedDisplayControl(lblTransparency)
+        ucrNudTransparency.SetRDefault(1)
 
         ucrSaveBoxplot.SetPrefix("boxplot")
         ucrSaveBoxplot.SetIsComboBox()
@@ -139,7 +164,8 @@ Public Class dlgBoxplot
         clsBoxplotFunc = New RFunction
         clsJitterplotFunc = New RFunction
         clsViolinplotFunc = New RFunction
-        'clsCurrGeomFunc = New RFunction
+
+        clsAddedJitterFunc.Clear()
 
         ucrSelectorBoxPlot.Reset()
         ucrSelectorBoxPlot.SetGgplotFunction(clsBaseOperator)
@@ -166,6 +192,11 @@ Public Class dlgBoxplot
         clsJitterplotFunc.SetRCommand("geom_jitter")
         clsJitterplotFunc.AddParameter("height", 0, iPosition:=1)
         clsJitterplotFunc.AddParameter("width", 0.2, iPosition:=2)
+
+        clsAddedJitterFunc.SetPackageName("ggplot2")
+        clsAddedJitterFunc.SetRCommand("geom_jitter")
+        clsAddedJitterFunc.AddParameter("height", 0, iPosition:=1)
+        clsAddedJitterFunc.AddParameter("width", 0.2, iPosition:=2)
 
         'Setting operation and adding parameters to baseoperator
         clsBaseOperator.SetOperation("+")
@@ -207,6 +238,11 @@ Public Class dlgBoxplot
         ucrVariablesAsFactorForBoxplot.SetRCode(clsRaesFunction, bReset)
         ucrByFactorsReceiver.SetRCode(clsRaesFunction, bReset)
         ucrSecondFactorReceiver.SetRCode(clsRaesFunction, bReset)
+
+        ucrChkAddPoints.SetRCode(clsBaseOperator, bReset)
+        ucrNudJitter.SetRCode(clsAddedJitterFunc, bReset)
+        ucrNudTransparency.SetRCode(clsAddedJitterFunc, bReset)
+
         ucrPnlPlots.SetRCode(clsCurrGeomFunc, bReset)
     End Sub
 
@@ -282,7 +318,6 @@ Public Class dlgBoxplot
             ucrSaveBoxplot.SetPrefix("jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
             clsCurrGeomFunc = clsJitterplotFunc
-
         Else
             ucrSaveBoxplot.SetPrefix("violin")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
