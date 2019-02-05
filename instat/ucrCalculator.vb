@@ -1474,7 +1474,9 @@ name = ""Height""))", 1)
 
     Private Sub cmdInternet_Browser_Click(sender As Object, e As EventArgs) Handles cmdInternet_Browser.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::internet_browser()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::internet_browser((n, x = c(""Chrome"", ""IE"", ""Firefox"", ""Safari"", ""Opera"",
+""Android""), prob = c(0.5027, 0.175, 0.1689, 0.0994, 0.017, 0.0132),
+name = ""Browser""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::internet_browser()", 1)
         End If
@@ -1482,7 +1484,8 @@ name = ""Height""))", 1)
 
     Private Sub cmdIq_Click(sender As Object, e As EventArgs) Handles cmdIq.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::iq()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::iq((n, mean = 100, sd = 10, min = 0, max = NULL, digits = 0,
+name = ""IQ""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::iq()", 1)
         End If
@@ -1490,7 +1493,8 @@ name = ""Height""))", 1)
 
     Private Sub cmdLanguage_Click(sender As Object, e As EventArgs) Handles cmdLanguage.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::language()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::language((n, x = wakefield::languages[[""Language""]],
+prob = wakefield::languages[[""Proportion""]], name = ""Language""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::language()", 1)
         End If
@@ -1498,14 +1502,15 @@ name = ""Height""))", 1)
 
     Private Sub cmdLevel_Click(sender As Object, e As EventArgs) Handles cmdLevel.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::level()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::level((n, x = 1:4, prob = NULL, name = ""Level""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::level()", 1)
         End If
     End Sub
     Private Sub cmdMath_Click(sender As Object, e As EventArgs) Handles cmdMath.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::math()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::math((n, x = 1:4, prob = c(0.29829, 0.33332, 0.22797, 0.14042),
+name = ""Math""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::math()", 1)
         End If
@@ -1513,7 +1518,7 @@ name = ""Height""))", 1)
 
     Private Sub cmdEla_Click(sender As Object, e As EventArgs) Handles cmdEla.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::ela()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::ela((n, x = 1:4, prob = c(0.3161, 0.37257, 0.2233, 0.08803), name = ""ELA""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::ela()", 1)
         End If
