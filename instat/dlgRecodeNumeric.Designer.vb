@@ -121,6 +121,7 @@ Partial Class dlgRecodeNumeric
         '
         'ucrSelectorForRecode
         '
+        Me.ucrSelectorForRecode.bDropUnusedFilterLevels = False
         Me.ucrSelectorForRecode.bShowHiddenColumns = False
         Me.ucrSelectorForRecode.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForRecode, "ucrSelectorForRecode")
