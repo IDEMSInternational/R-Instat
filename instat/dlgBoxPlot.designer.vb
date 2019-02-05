@@ -105,6 +105,7 @@ Partial Class dlgBoxplot
         '
         'ucrSelectorBoxPlot
         '
+        Me.ucrSelectorBoxPlot.bDropUnusedFilterLevels = False
         Me.ucrSelectorBoxPlot.bShowHiddenColumns = False
         Me.ucrSelectorBoxPlot.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorBoxPlot, "ucrSelectorBoxPlot")

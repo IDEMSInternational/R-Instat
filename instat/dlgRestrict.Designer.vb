@@ -146,7 +146,6 @@ Partial Class dlgRestrict
         Me.Name = "dlgRestrict"
         Me.Tag = "Filter"
         Me.grpApplyOptions.ResumeLayout(False)
-        Me.grpApplyOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
