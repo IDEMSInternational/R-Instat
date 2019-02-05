@@ -248,6 +248,9 @@
   <data name="&gt;&gt;lblExplanatoryModel.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="cmdDiv.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
   <data name="cmdDiv.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 10</value>
   </data>
@@ -276,6 +279,9 @@
   <data name="&gt;&gt;cmdDiv.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="cmdMultiply.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
   <data name="cmdMultiply.Location" type="System.Drawing.Point, System.Drawing">
     <value>67, 10</value>
   </data>
@@ -302,6 +308,9 @@
   </data>
   <data name="&gt;&gt;cmdMultiply.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="cmdColon.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
   </data>
   <data name="cmdColon.Location" type="System.Drawing.Point, System.Drawing">
     <value>37, 10</value>
@@ -330,6 +339,9 @@
   <data name="&gt;&gt;cmdColon.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="cmdPlus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
   <data name="cmdPlus.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 10</value>
   </data>
@@ -356,6 +368,9 @@
   </data>
   <data name="&gt;&gt;cmdPlus.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="cmdPower.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
   </data>
   <data name="cmdPower.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 41</value>
@@ -384,6 +399,9 @@
   <data name="&gt;&gt;cmdPower.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="cmdClosingBracket.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
   <data name="cmdClosingBracket.Location" type="System.Drawing.Point, System.Drawing">
     <value>67, 41</value>
   </data>
@@ -411,6 +429,9 @@
   <data name="&gt;&gt;cmdClosingBracket.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="cmdOpeningBracket.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
   <data name="cmdOpeningBracket.Location" type="System.Drawing.Point, System.Drawing">
     <value>37, 41</value>
   </data>
@@ -437,6 +458,9 @@
   </data>
   <data name="&gt;&gt;cmdOpeningBracket.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="cmdDoubleBracket.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="cmdDoubleBracket.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 41</value>
@@ -492,6 +516,9 @@
   <data name="&gt;&gt;cmdClear.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="cmdZero.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.75pt</value>
+  </data>
   <data name="cmdZero.Location" type="System.Drawing.Point, System.Drawing">
     <value>37, 74</value>
   </data>
@@ -518,6 +545,9 @@
   </data>
   <data name="&gt;&gt;cmdZero.ZOrder" xml:space="preserve">
     <value>9</value>
+  </data>
+  <data name="cmdMinus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
   </data>
   <data name="cmdMinus.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 74</value>

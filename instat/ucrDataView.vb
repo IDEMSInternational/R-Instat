@@ -781,4 +781,8 @@ Public Class ucrDataView
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
         dlgReorderColumns.ShowDialog()
     End Sub
+
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
+    End Sub
 End Class
