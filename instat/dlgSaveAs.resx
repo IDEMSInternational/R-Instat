@@ -172,7 +172,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputFilePath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 17</value>
+    <value>93, 17</value>
   </data>
   <data name="ucrInputFilePath.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -196,7 +196,7 @@
     <value>1</value>
   </data>
   <data name="cmdChooseFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>409, 17</value>
+    <value>411, 17</value>
   </data>
   <data name="cmdChooseFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 21</value>
