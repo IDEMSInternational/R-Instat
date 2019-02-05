@@ -1170,46 +1170,46 @@
   <data name="&gt;&gt;ucrInputLegendPosition.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="ucrChkYaxisMarkLabelSize.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrChkYaxisTickMarkLabelSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 208</value>
   </data>
-  <data name="ucrChkYaxisMarkLabelSize.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrChkYaxisTickMarkLabelSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 20</value>
   </data>
-  <data name="ucrChkYaxisMarkLabelSize.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrChkYaxisTickMarkLabelSize.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;ucrChkYaxisMarkLabelSize.Name" xml:space="preserve">
-    <value>ucrChkYaxisMarkLabelSize</value>
+  <data name="&gt;&gt;ucrChkYaxisTickMarkLabelSize.Name" xml:space="preserve">
+    <value>ucrChkYaxisTickMarkLabelSize</value>
   </data>
-  <data name="&gt;&gt;ucrChkYaxisMarkLabelSize.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkYaxisTickMarkLabelSize.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkYaxisMarkLabelSize.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkYaxisTickMarkLabelSize.Parent" xml:space="preserve">
     <value>grpCommonOptions</value>
   </data>
-  <data name="&gt;&gt;ucrChkYaxisMarkLabelSize.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkYaxisTickMarkLabelSize.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="ucrChkXaxisMarkLabelSize.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrChkXaxisTickMarkLabelSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 172</value>
   </data>
-  <data name="ucrChkXaxisMarkLabelSize.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrChkXaxisTickMarkLabelSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 20</value>
   </data>
-  <data name="ucrChkXaxisMarkLabelSize.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrChkXaxisTickMarkLabelSize.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;ucrChkXaxisMarkLabelSize.Name" xml:space="preserve">
-    <value>ucrChkXaxisMarkLabelSize</value>
+  <data name="&gt;&gt;ucrChkXaxisTickMarkLabelSize.Name" xml:space="preserve">
+    <value>ucrChkXaxisTickMarkLabelSize</value>
   </data>
-  <data name="&gt;&gt;ucrChkXaxisMarkLabelSize.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkXaxisTickMarkLabelSize.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkXaxisMarkLabelSize.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkXaxisTickMarkLabelSize.Parent" xml:space="preserve">
     <value>grpCommonOptions</value>
   </data>
-  <data name="&gt;&gt;ucrChkXaxisMarkLabelSize.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkXaxisTickMarkLabelSize.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="ucrChkYaxisSize.Location" type="System.Drawing.Point, System.Drawing">

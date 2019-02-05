@@ -79,7 +79,6 @@ Partial Class sdgPlots
         Me.ucrYAxis = New instat.ucrAxes()
         Me.tbpTheme = New System.Windows.Forms.TabPage()
         Me.urChkSelectTheme = New instat.ucrCheck()
-
         Me.grpCommonOptions = New System.Windows.Forms.GroupBox()
         Me.ucrNudYaxisMarkSize = New instat.ucrNud()
         Me.ucrNudXaxisMarkSize = New instat.ucrNud()
@@ -87,13 +86,12 @@ Partial Class sdgPlots
         Me.ucrNudXSize = New instat.ucrNud()
         Me.ucrNudXAngle = New instat.ucrNud()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
-        Me.ucrChkYaxisMarkLabelSize = New instat.ucrCheck()
-        Me.ucrChkXaxisMarkLabelSize = New instat.ucrCheck()
+        Me.ucrChkYaxisTickMarkLabelSize = New instat.ucrCheck()
+        Me.ucrChkXaxisTickMarkLabelSize = New instat.ucrCheck()
         Me.ucrChkYaxisSize = New instat.ucrCheck()
         Me.ucrChkXaxisSize = New instat.ucrCheck()
         Me.ucrChkXaxisAngle = New instat.ucrCheck()
         Me.ucrChkLegendPosition = New instat.ucrCheck()
-
         Me.lblFont = New System.Windows.Forms.Label()
         Me.cmdAllOptions = New System.Windows.Forms.Button()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
@@ -402,9 +400,7 @@ Partial Class sdgPlots
         'tbpTheme
         '
         Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
-
         Me.tbpTheme.Controls.Add(Me.grpCommonOptions)
-
         Me.tbpTheme.Controls.Add(Me.lblFont)
         Me.tbpTheme.Controls.Add(Me.cmdAllOptions)
         Me.tbpTheme.Controls.Add(Me.ucrInputThemes)
@@ -419,7 +415,6 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.urChkSelectTheme, "urChkSelectTheme")
         Me.urChkSelectTheme.Name = "urChkSelectTheme"
         '
-
         'grpCommonOptions
         '
         Me.grpCommonOptions.Controls.Add(Me.ucrNudYaxisMarkSize)
@@ -428,8 +423,8 @@ Partial Class sdgPlots
         Me.grpCommonOptions.Controls.Add(Me.ucrNudXSize)
         Me.grpCommonOptions.Controls.Add(Me.ucrNudXAngle)
         Me.grpCommonOptions.Controls.Add(Me.ucrInputLegendPosition)
-        Me.grpCommonOptions.Controls.Add(Me.ucrChkYaxisMarkLabelSize)
-        Me.grpCommonOptions.Controls.Add(Me.ucrChkXaxisMarkLabelSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkYaxisTickMarkLabelSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkXaxisTickMarkLabelSize)
         Me.grpCommonOptions.Controls.Add(Me.ucrChkYaxisSize)
         Me.grpCommonOptions.Controls.Add(Me.ucrChkXaxisSize)
         Me.grpCommonOptions.Controls.Add(Me.ucrChkXaxisAngle)
@@ -495,17 +490,17 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrInputLegendPosition, "ucrInputLegendPosition")
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         '
-        'ucrChkYaxisMarkLabelSize
+        'ucrChkYaxisTickMarkLabelSize
         '
-        Me.ucrChkYaxisMarkLabelSize.Checked = False
-        resources.ApplyResources(Me.ucrChkYaxisMarkLabelSize, "ucrChkYaxisMarkLabelSize")
-        Me.ucrChkYaxisMarkLabelSize.Name = "ucrChkYaxisMarkLabelSize"
+        Me.ucrChkYaxisTickMarkLabelSize.Checked = False
+        resources.ApplyResources(Me.ucrChkYaxisTickMarkLabelSize, "ucrChkYaxisTickMarkLabelSize")
+        Me.ucrChkYaxisTickMarkLabelSize.Name = "ucrChkYaxisTickMarkLabelSize"
         '
-        'ucrChkXaxisMarkLabelSize
+        'ucrChkXaxisTickMarkLabelSize
         '
-        Me.ucrChkXaxisMarkLabelSize.Checked = False
-        resources.ApplyResources(Me.ucrChkXaxisMarkLabelSize, "ucrChkXaxisMarkLabelSize")
-        Me.ucrChkXaxisMarkLabelSize.Name = "ucrChkXaxisMarkLabelSize"
+        Me.ucrChkXaxisTickMarkLabelSize.Checked = False
+        resources.ApplyResources(Me.ucrChkXaxisTickMarkLabelSize, "ucrChkXaxisTickMarkLabelSize")
+        Me.ucrChkXaxisTickMarkLabelSize.Name = "ucrChkXaxisTickMarkLabelSize"
         '
         'ucrChkYaxisSize
         '
@@ -530,7 +525,6 @@ Partial Class sdgPlots
         Me.ucrChkLegendPosition.Checked = False
         resources.ApplyResources(Me.ucrChkLegendPosition, "ucrChkLegendPosition")
         Me.ucrChkLegendPosition.Name = "ucrChkLegendPosition"
-
         '
         'lblFont
         '
@@ -644,8 +638,8 @@ Partial Class sdgPlots
     Friend WithEvents urChkSelectTheme As ucrCheck
     Friend WithEvents ucrChkHorizontalplot As ucrCheck
 
-    Friend WithEvents ucrChkYaxisMarkLabelSize As ucrCheck
-    Friend WithEvents ucrChkXaxisMarkLabelSize As ucrCheck
+    Friend WithEvents ucrChkYaxisTickMarkLabelSize As ucrCheck
+    Friend WithEvents ucrChkXaxisTickMarkLabelSize As ucrCheck
     Friend WithEvents ucrChkYaxisSize As ucrCheck
     Friend WithEvents ucrChkXaxisSize As ucrCheck
     Friend WithEvents ucrChkXaxisAngle As ucrCheck
