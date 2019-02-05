@@ -1414,7 +1414,8 @@ birth(n, random = TRUE, x = NULL, start = Sys.Date() - 365 * 15, k = 365
 
     Private Sub cmdEye_Click(sender As Object, e As EventArgs) Handles cmdEye.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::eye()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::eye((n, x = c(""Brown"", ""Blue"", ""Green"", ""Hazel"", ""Gray""), prob = c(0.44, 0.3,
+0.13, 0.09, 0.04), name = ""Eye""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::eye()", 1)
         End If
@@ -1422,7 +1423,8 @@ birth(n, random = TRUE, x = NULL, start = Sys.Date() - 365 * 15, k = 365
 
     Private Sub cmdGrade_Level_Click(sender As Object, e As EventArgs) Handles cmdGrade_Level.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::grade_level()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::grade_level((n, x = c(""K"", ""1"", ""2"", ""3"", ""4"", ""5"", ""6"", ""7"", ""8"", ""9"", ""10"",
+""11"", ""12""), prob = NULL, name = ""Grade_Level""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::grade_level()", 1)
         End If
@@ -1430,7 +1432,7 @@ birth(n, random = TRUE, x = NULL, start = Sys.Date() - 365 * 15, k = 365
 
     Private Sub cmdGrade_Click(sender As Object, e As EventArgs) Handles cmdGrade.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::grade()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::grade((n, mean = 88, sd = 4, name = ""Grade"", digits = 1))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::grade()", 1)
         End If
@@ -1438,7 +1440,7 @@ birth(n, random = TRUE, x = NULL, start = Sys.Date() - 365 * 15, k = 365
 
     Private Sub cmdGroup_Click(sender As Object, e As EventArgs) Handles cmdGroup.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::group()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::group((n, x = c(""Control"", ""Treatment""), prob = NULL, name = ""Group""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::group()", 1)
         End If
@@ -1446,7 +1448,8 @@ birth(n, random = TRUE, x = NULL, start = Sys.Date() - 365 * 15, k = 365
 
     Private Sub cmdHair_Click(sender As Object, e As EventArgs) Handles cmdHair.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::hair()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::hair((n, x = c(""Brown"", ""Black"", ""Blonde"", ""Red""), prob = c(0.35, 0.28, 0.26,
+0.11), name = ""hair""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::hair()", 1)
         End If
@@ -1454,7 +1457,8 @@ birth(n, random = TRUE, x = NULL, start = Sys.Date() - 365 * 15, k = 365
 
     Private Sub cmdHeight_Click(sender As Object, e As EventArgs) Handles cmdHeight.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::height()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::height((n, mean = 69, sd = 3.75, min = 1, max = NULL, digits = 0,
+name = ""Height""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::height()", 1)
         End If
@@ -1462,7 +1466,7 @@ birth(n, random = TRUE, x = NULL, start = Sys.Date() - 365 * 15, k = 365
 
     Private Sub cmdIncome_Click(sender As Object, e As EventArgs) Handles cmdIncome.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::income()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::income((n, digits = 2, name = ""Income""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::income()", 1)
         End If
