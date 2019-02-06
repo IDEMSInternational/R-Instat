@@ -377,6 +377,13 @@ Public Class dlgRegularSequence
     Private Sub ucrInputComboDatesBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboDatesBy.ControlValueChanged
         ResetNumberFromToByParameters()
     End Sub
+    Private Sub lblPreview_Click(sender As Object, e As EventArgs) Handles lblPreview.Click
+
+    End Sub
+
+    Private Sub lblMessage_Click(sender As Object, e As EventArgs) Handles lblMessage.Click
+
+    End Sub
 
     Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrInputComboDatesBy.ControlContentsChanged
         TestOKEnabled()

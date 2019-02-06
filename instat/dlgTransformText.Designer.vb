@@ -306,6 +306,7 @@ Partial Class dlgTransformText
         '
         'ucrSelectorForTransformText
         '
+        Me.ucrSelectorForTransformText.bDropUnusedFilterLevels = False
         Me.ucrSelectorForTransformText.bShowHiddenColumns = False
         Me.ucrSelectorForTransformText.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForTransformText, "ucrSelectorForTransformText")
