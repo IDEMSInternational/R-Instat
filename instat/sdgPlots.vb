@@ -57,7 +57,7 @@ Public Class sdgPlots
 
     'See bLayersDefaultIsGolobal below.
 
-    Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub sdgPlots_Load(sender As Object, e As EventArgs)
         autoTranslate(Me)
     End Sub
 
@@ -244,31 +244,31 @@ Public Class sdgPlots
         ucrChkLegendPosition.AddParameterPresentCondition(False, "legend.position", False)
 
         ucrChkXaxisAngle.SetText("X axis Tick Labels Angle")
-        ucrChkXaxisAngle.AddToLinkedControls(ucrNudXAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
+        ucrChkXaxisAngle.AddToLinkedControls(ucrNudXAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
         ucrNudXAngle.SetParameter(New RParameter("angle"))
         ucrChkXaxisAngle.AddParameterPresentCondition(True, "angle")
         ucrChkXaxisAngle.AddParameterPresentCondition(False, "angle", False)
 
         ucrChkXaxisSize.SetText("X axis Label Size")
-        ucrChkXaxisSize.AddToLinkedControls(ucrNudXSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
+        ucrChkXaxisSize.AddToLinkedControls(ucrNudXSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
         ucrNudXSize.SetParameter(New RParameter("size"))
         ucrChkXaxisSize.AddParameterPresentCondition(True, "size")
         ucrChkXaxisSize.AddParameterPresentCondition(False, "size", False)
 
         ucrChkYaxisSize.SetText("Y axis Label Size")
-        ucrChkYaxisSize.AddToLinkedControls(ucrNudYSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
+        ucrChkYaxisSize.AddToLinkedControls(ucrNudYSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
         ucrNudYSize.SetParameter(New RParameter("size"))
         ucrChkYaxisSize.AddParameterPresentCondition(True, "size")
         ucrChkYaxisSize.AddParameterPresentCondition(False, "size", False)
 
         ucrChkXaxisTickMarkLabelSize.SetText("X axis Tick Mark Label Size")
-        ucrChkXaxisTickMarkLabelSize.AddToLinkedControls(ucrNudXaxisMarkSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
+        ucrChkXaxisTickMarkLabelSize.AddToLinkedControls(ucrNudXaxisMarkSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
         ucrNudXaxisMarkSize.SetParameter(New RParameter("size"))
         ucrChkXaxisTickMarkLabelSize.AddParameterPresentCondition(True, "size")
         ucrChkXaxisTickMarkLabelSize.AddParameterPresentCondition(False, "size", False)
 
         ucrChkYaxisTickMarkLabelSize.SetText("Y axis Tick Mark Label Size")
-        ucrChkYaxisTickMarkLabelSize.AddToLinkedControls(ucrNudYaxisMarkSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
+        ucrChkYaxisTickMarkLabelSize.AddToLinkedControls(ucrNudYaxisMarkSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
         ucrNudYaxisMarkSize.SetParameter(New RParameter("size"))
         ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(True, "size")
         ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(False, "size", False)
@@ -278,6 +278,7 @@ Public Class sdgPlots
         Dim clsTempParam As RParameter
 
         bRCodeSet = False
+
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -349,24 +350,7 @@ Public Class sdgPlots
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
 
         'Themes tab
-        ucrChkLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
-
-        ucrChkXaxisAngle.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
-        ucrNudXAngle.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
-
-        ucrChkXaxisSize.SetRCode(clsXElementTitle, bReset, bCloneIfNeeded:=True)
-        ucrNudXSize.SetRCode(clsXElementTitle, bReset, bCloneIfNeeded:=True)
-
-        ucrChkYaxisTickMarkLabelSize.SetRCode(clsYElemetText, bReset, bCloneIfNeeded:=True)
-        ucrNudYaxisMarkSize.SetRCode(clsYElemetText, bReset, bCloneIfNeeded:=True)
-
-        ucrChkYaxisSize.SetRCode(clsYElemetTitle, bReset, bCloneIfNeeded:=True)
-        ucrNudYSize.SetRCode(clsYElemetTitle, bReset, bCloneIfNeeded:=True)
-
-        ucrNudXaxisMarkSize.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
-        ucrChkXaxisTickMarkLabelSize.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
-
+        SetRcodeForCommonThemesControls(bReset)
         'coordinates tab
         ucrChkHorizontalplot.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
@@ -619,6 +603,7 @@ Public Class sdgPlots
         Me.SendToBack()
         sdgThemes.ShowDialog()
         bResetThemes = False
+        SetRcodeForCommonThemesControls(False)
     End Sub
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
     'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
@@ -694,4 +679,25 @@ Public Class sdgPlots
     Private Sub ucrChkLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegendPosition.ControlValueChanged
         AddRemoveTheme()
     End Sub
+
+    Private Sub SetRcodeForCommonThemesControls(bReset As Boolean)
+        ucrChkLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+
+        ucrChkXaxisAngle.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
+        ucrNudXAngle.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
+
+        ucrChkXaxisSize.SetRCode(clsXElementTitle, bReset, bCloneIfNeeded:=True)
+        ucrNudXSize.SetRCode(clsXElementTitle, bReset, bCloneIfNeeded:=True)
+
+        ucrChkYaxisTickMarkLabelSize.SetRCode(clsYElemetText, bReset, bCloneIfNeeded:=True)
+        ucrNudYaxisMarkSize.SetRCode(clsYElemetText, bReset, bCloneIfNeeded:=True)
+
+        ucrChkYaxisSize.SetRCode(clsYElemetTitle, bReset, bCloneIfNeeded:=True)
+        ucrNudYSize.SetRCode(clsYElemetTitle, bReset, bCloneIfNeeded:=True)
+
+        ucrNudXaxisMarkSize.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
+        ucrChkXaxisTickMarkLabelSize.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
+    End Sub
+
 End Class
