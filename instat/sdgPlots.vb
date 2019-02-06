@@ -233,6 +233,7 @@ Public Class sdgPlots
         'Theme Tab Checkboxes under grpCommonOptions
         ucrChkLegendPosition.SetText("Legend Position")
         ucrChkLegendPosition.AddToLinkedControls(ucrInputLegendPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
         ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
         dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
         dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
@@ -245,6 +246,7 @@ Public Class sdgPlots
 
         ucrChkXaxisAngle.SetText("X axis Tick Labels Angle")
         ucrChkXaxisAngle.AddToLinkedControls(ucrNudXAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
+        ucrNudXAngle.DecimalPlaces = 1
         ucrNudXAngle.SetParameter(New RParameter("angle"))
         ucrChkXaxisAngle.AddParameterPresentCondition(True, "angle")
         ucrChkXaxisAngle.AddParameterPresentCondition(False, "angle", False)
@@ -252,24 +254,28 @@ Public Class sdgPlots
         ucrChkXaxisSize.SetText("X axis Label Size")
         ucrChkXaxisSize.AddToLinkedControls(ucrNudXSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
         ucrNudXSize.SetParameter(New RParameter("size"))
+        ucrNudXSize.DecimalPlaces = 1
         ucrChkXaxisSize.AddParameterPresentCondition(True, "size")
         ucrChkXaxisSize.AddParameterPresentCondition(False, "size", False)
 
         ucrChkYaxisSize.SetText("Y axis Label Size")
         ucrChkYaxisSize.AddToLinkedControls(ucrNudYSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
         ucrNudYSize.SetParameter(New RParameter("size"))
+        ucrNudYSize.DecimalPlaces = 1
         ucrChkYaxisSize.AddParameterPresentCondition(True, "size")
         ucrChkYaxisSize.AddParameterPresentCondition(False, "size", False)
 
         ucrChkXaxisTickMarkLabelSize.SetText("X axis Tick Mark Label Size")
         ucrChkXaxisTickMarkLabelSize.AddToLinkedControls(ucrNudXaxisMarkSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
         ucrNudXaxisMarkSize.SetParameter(New RParameter("size"))
+        ucrNudXaxisMarkSize.DecimalPlaces = 1
         ucrChkXaxisTickMarkLabelSize.AddParameterPresentCondition(True, "size")
         ucrChkXaxisTickMarkLabelSize.AddParameterPresentCondition(False, "size", False)
 
         ucrChkYaxisTickMarkLabelSize.SetText("Y axis Tick Mark Label Size")
         ucrChkYaxisTickMarkLabelSize.AddToLinkedControls(ucrNudYaxisMarkSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
         ucrNudYaxisMarkSize.SetParameter(New RParameter("size"))
+        ucrNudYaxisMarkSize.DecimalPlaces = 1
         ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(True, "size")
         ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(False, "size", False)
     End Sub
