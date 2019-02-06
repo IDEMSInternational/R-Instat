@@ -56,6 +56,11 @@ Partial Class dlgBoxplot
         Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
         Me.ucrSaveBoxplot = New instat.ucrSave()
         Me.ucrChkSwapParameters = New instat.ucrCheck()
+        Me.ucrChkAddPoints = New instat.ucrCheck()
+        Me.lblJitter = New System.Windows.Forms.Label()
+        Me.ucrNudJitter = New instat.ucrNud()
+        Me.ucrNudTransparency = New instat.ucrNud()
+        Me.lblTransparency = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -105,6 +110,7 @@ Partial Class dlgBoxplot
         '
         'ucrSelectorBoxPlot
         '
+        Me.ucrSelectorBoxPlot.bDropUnusedFilterLevels = False
         Me.ucrSelectorBoxPlot.bShowHiddenColumns = False
         Me.ucrSelectorBoxPlot.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorBoxPlot, "ucrSelectorBoxPlot")
@@ -182,10 +188,53 @@ Partial Class dlgBoxplot
         resources.ApplyResources(Me.ucrChkSwapParameters, "ucrChkSwapParameters")
         Me.ucrChkSwapParameters.Name = "ucrChkSwapParameters"
         '
+        'ucrChkAddPoints
+        '
+        Me.ucrChkAddPoints.Checked = False
+        resources.ApplyResources(Me.ucrChkAddPoints, "ucrChkAddPoints")
+        Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
+        '
+        'lblJitter
+        '
+        resources.ApplyResources(Me.lblJitter, "lblJitter")
+        Me.lblJitter.Name = "lblJitter"
+        Me.lblJitter.Tag = "By_Factor:"
+        '
+        'ucrNudJitter
+        '
+        Me.ucrNudJitter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJitter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudJitter, "ucrNudJitter")
+        Me.ucrNudJitter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudJitter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJitter.Name = "ucrNudJitter"
+        Me.ucrNudJitter.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudTransparency
+        '
+        Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudTransparency, "ucrNudTransparency")
+        Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTransparency.Name = "ucrNudTransparency"
+        Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblTransparency
+        '
+        resources.ApplyResources(Me.lblTransparency, "lblTransparency")
+        Me.lblTransparency.Name = "lblTransparency"
+        Me.lblTransparency.Tag = "By_Factor:"
+        '
         'dlgBoxplot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrNudTransparency)
+        Me.Controls.Add(Me.lblTransparency)
+        Me.Controls.Add(Me.ucrNudJitter)
+        Me.Controls.Add(Me.lblJitter)
+        Me.Controls.Add(Me.ucrChkAddPoints)
         Me.Controls.Add(Me.ucrChkSwapParameters)
         Me.Controls.Add(Me.ucrSaveBoxplot)
         Me.Controls.Add(Me.ucrChkHorizontalBoxplot)
@@ -231,4 +280,9 @@ Partial Class dlgBoxplot
     Friend WithEvents ucrChkVarWidth As ucrCheck
     Friend WithEvents ucrPnlPlots As UcrPanel
     Friend WithEvents ucrChkSwapParameters As ucrCheck
+    Friend WithEvents ucrNudTransparency As ucrNud
+    Friend WithEvents lblTransparency As Label
+    Friend WithEvents ucrNudJitter As ucrNud
+    Friend WithEvents lblJitter As Label
+    Friend WithEvents ucrChkAddPoints As ucrCheck
 End Class
