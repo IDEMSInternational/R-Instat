@@ -448,10 +448,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoViolin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 13</value>
+    <value>278, 13</value>
   </data>
   <data name="rdoViolin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 27</value>
+    <value>135, 27</value>
   </data>
   <data name="rdoViolin.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -481,10 +481,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoJitter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 13</value>
+    <value>145, 13</value>
   </data>
   <data name="rdoJitter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 27</value>
+    <value>135, 27</value>
   </data>
   <data name="rdoJitter.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -514,10 +514,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoBoxplot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 13</value>
+    <value>12, 13</value>
   </data>
   <data name="rdoBoxplot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 27</value>
+    <value>135, 27</value>
   </data>
   <data name="rdoBoxplot.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -634,10 +634,10 @@
     <value>20</value>
   </data>
   <data name="ucrPnlPlots.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 12</value>
+    <value>7, 12</value>
   </data>
   <data name="ucrPnlPlots.Size" type="System.Drawing.Size, System.Drawing">
-    <value>374, 35</value>
+    <value>410, 35</value>
   </data>
   <data name="ucrPnlPlots.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

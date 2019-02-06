@@ -342,6 +342,7 @@ Partial Class dlgEnter
         '
         'ucrDataFrameEnter
         '
+        Me.ucrDataFrameEnter.bDropUnusedFilterLevels = False
         Me.ucrDataFrameEnter.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrDataFrameEnter, "ucrDataFrameEnter")
         Me.ucrDataFrameEnter.Name = "ucrDataFrameEnter"
