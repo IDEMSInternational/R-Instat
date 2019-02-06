@@ -184,10 +184,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoCommand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 15</value>
+    <value>125, 15</value>
   </data>
   <data name="rdoCommand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 27</value>
+    <value>95, 27</value>
   </data>
   <data name="rdoCommand.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -223,7 +223,7 @@
     <value>218, 15</value>
   </data>
   <data name="rdoRandom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 27</value>
+    <value>95, 27</value>
   </data>
   <data name="rdoRandom.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -256,10 +256,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoEmpty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 15</value>
+    <value>311, 15</value>
   </data>
   <data name="rdoEmpty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 27</value>
+    <value>95, 27</value>
   </data>
   <data name="rdoEmpty.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -292,10 +292,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoConstruct.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 15</value>
+    <value>32, 15</value>
   </data>
   <data name="rdoConstruct.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 27</value>
+    <value>95, 27</value>
   </data>
   <data name="rdoConstruct.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -505,7 +505,7 @@
     <value>1</value>
   </data>
   <data name="ucrPnlDataFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
+    <value>17, 10</value>
   </data>
   <data name="ucrPnlDataFrame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -635,9 +635,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>439, 343</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
