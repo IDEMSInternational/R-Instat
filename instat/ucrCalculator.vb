@@ -1255,7 +1255,7 @@ Public Class ucrCalculator
 
     Private Sub cmdAge_Click(sender As Object, e As EventArgs) Handles cmdAge.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::age((n, x = , prob = NULL, name = ""Age""))", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::age((n, x =20:35 , prob = NULL, name = ""Age""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::age()", 1)
         End If
@@ -1263,7 +1263,7 @@ Public Class ucrCalculator
 
     Private Sub cmdAnimal_Click(sender As Object, e As EventArgs) Handles cmdAnimal.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::animal(l(n, k = , x = wakefield::animal_list, prob = NULL,
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::animal(l(n, k =10 , x = wakefield::animal_list, prob = NULL,
 name = ""Animal"")
 p)", 1)
         Else
@@ -1273,7 +1273,8 @@ p)", 1)
 
     Private Sub cmdPet_Click(sender As Object, e As EventArgs) Handles cmdPet.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::pet()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::pet(n, x = c(""Dog"", ""Cat"", ""None"", ""Bird"", ""Horse""), prob = c(0.365, 0.304,
+  0.258, 0.031, 0.015), name = ""Pet""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::pet()", 1)
         End If
@@ -1322,7 +1323,8 @@ p)", 1)
 
     Private Sub cmdPrimary_Click(sender As Object, e As EventArgs) Handles cmdPrimary.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::primary()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::primary((n, x = c(""Red"", ""Green"", ""Blue"", ""Yellow"", ""Black"", ""White""),
+  prob = NULL, name = ""Color""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::primary()", 1)
         End If
@@ -1526,7 +1528,7 @@ name = ""Math""))", 1)
 
     Private Sub cmdGpa_Click(sender As Object, e As EventArgs) Handles cmdGpa.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::gpa()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::gpa((n, mean = 88, sd = 4, name = ""GPA""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::gpa()", 1)
         End If
@@ -1534,7 +1536,8 @@ name = ""Math""))", 1)
 
     Private Sub cmdPetLikert_Click(sender As Object, e As EventArgs) Handles cmdLikert.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert((n, x = c(""Strongly Agree"", ""Agree"", ""Neutral"", ""Disagree"",
+""Strongly Disagree""), prob = NULL, name = ""Likert""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert()", 1)
         End If
@@ -1542,7 +1545,7 @@ name = ""Math""))", 1)
 
     Private Sub cmdLorem_Ipsum_Click(sender As Object, e As EventArgs) Handles cmdLorem_ipsum.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::lorem_ipsum()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::lorem_ipsum((n, ..., name = ""Lorem_Ipsum""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::lorem_ipsum()", 1)
         End If
@@ -1550,7 +1553,8 @@ name = ""Math""))", 1)
 
     Private Sub cmdMarital_Click(sender As Object, e As EventArgs) Handles cmdMarital.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::marital()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::marital((n, x = c(""Married"", ""Divorced"", ""Widowed"", ""Separated"",
+""Never Married""), prob = NULL, name = ""Marital""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::marital()", 1)
         End If
@@ -1558,7 +1562,8 @@ name = ""Math""))", 1)
 
     Private Sub cmdMilitary_Click(sender As Object, e As EventArgs) Handles cmdMilitary.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::military()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::military((n, x = c(""Army"", ""Air Force"", ""Navy"", ""Marine Corps"", ""Coast Guard""),
+prob = c(0.3785, 0.2334, 0.2218, 0.1366, 0.0296), name = ""Military""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::military()", 1)
         End If
@@ -1566,7 +1571,7 @@ name = ""Math""))", 1)
 
     Private Sub cmdWakefield_Month_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Month.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_month()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_month((n, x = month.name, prob = NULL, name = ""Month""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_month()", 1)
         End If
@@ -1574,7 +1579,8 @@ name = ""Math""))", 1)
 
     Private Sub cmdName_Click(sender As Object, e As EventArgs) Handles cmdName.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::name()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::name((n, x = wakefield::name_neutral, prob = NULL, replace = FALSE,
+name = ""Name""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::name()", 1)
         End If
@@ -1582,7 +1588,7 @@ name = ""Math""))", 1)
 
     Private Sub cmdNormal_Click(sender As Object, e As EventArgs) Handles cmdNormal.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::normal()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::normal((n, mean = 0, sd = 1, min = NULL, max = NULL, name = ""Normal""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::normal()", 1)
         End If
@@ -1590,7 +1596,10 @@ name = ""Math""))", 1)
 
     Private Sub cmdPolitical_Click(sender As Object, e As EventArgs) Handles cmdPolitical.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::political()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::political((n, x = c(""Democrat"", ""Republican"", ""Constitution"", ""Libertarian"",
+""Green""), prob = c(0.577269133302094, 0.410800432748879,
+0.00491084954793489, 0.00372590303330866, 0.0032936813677832),
+name = ""Political""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::political()", 1)
         End If
@@ -1598,7 +1607,9 @@ name = ""Math""))", 1)
 
     Private Sub cmdRace_Click(sender As Object, e As EventArgs) Handles cmdRace.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::race()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::race((n, x = c(""White"", ""Hispanic"", ""Black"", ""Asian"", ""Bi-Racial"", ""Native"",
+""Other"", ""Hawaiian""), prob = c(0.637, 0.163, 0.122, 0.047, 0.019, 0.007,
+0.002, 0.0015), name = ""Race""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::race()", 1)
         End If
@@ -1606,7 +1617,9 @@ name = ""Math""))", 1)
 
     Private Sub cmdReligion_Click(sender As Object, e As EventArgs) Handles cmdReligion.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::religion()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::religion((n, x = c(""Christian"", ""Muslim"", ""None"", ""Hindu"", ""Buddhist"", ""Folk"",
+""Other"", ""Jewish""), prob = c(0.31477, 0.23163, 0.16323, 0.14985, 0.07083,
+0.05882, 0.00859, 0.00227), name = ""Religion""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::religion()", 1)
         End If
@@ -1614,7 +1627,8 @@ name = ""Math""))", 1)
 
     Private Sub cmdSat_Click(sender As Object, e As EventArgs) Handles cmdSat.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sat()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sat((n, mean = 1500, sd = 100, min = 0, max = 2400, digits = 0,
+name = ""SAT""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sat()", 1)
         End If
@@ -1622,7 +1636,8 @@ name = ""Math""))", 1)
 
     Private Sub cmdSentence_Click(sender As Object, e As EventArgs) Handles cmdSentence.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sentence()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sentence((n, x = wakefield::presidential_debates_2012, prob = NULL,
+name = ""Sentence""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sentence()", 1)
         End If
@@ -1630,7 +1645,8 @@ name = ""Math""))", 1)
 
     Private Sub cmdGender_Click(sender As Object, e As EventArgs) Handles cmdGender.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::gender()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::gender((n, x = c(""Male"", ""Female""), prob = c(0.51219512195122,
+0.48780487804878), name = ""Gender""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::gender()", 1)
         End If
@@ -1638,7 +1654,8 @@ name = ""Math""))", 1)
 
     Private Sub cmdSex_Inclusive_Click(sender As Object, e As EventArgs) Handles cmdSex_Inclusive.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex_inclusive()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex_inclusive((n, x = c(""Male"", ""Female"", ""Intersex""), prob = NULL,
+name = ""Sex""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex_inclusive()", 1)
         End If
@@ -1646,7 +1663,8 @@ name = ""Math""))", 1)
 
     Private Sub cmdSex_Click(sender As Object, e As EventArgs) Handles cmdSex.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex((n, x = c(""Male"", ""Female""), prob = c(0.51219512195122,
+0.48780487804878), name = ""Sex""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex()", 1)
         End If
@@ -1654,7 +1672,7 @@ name = ""Math""))", 1)
 
     Private Sub cmdSmokes_Click(sender As Object, e As EventArgs) Handles cmdSmokes.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::smokes()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::smokes((n, prob = c(0.822, 0.178), name = ""Smokes""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::smokes()", 1)
         End If
@@ -1662,7 +1680,8 @@ name = ""Math""))", 1)
 
     Private Sub cmdSpeed_Click(sender As Object, e As EventArgs) Handles cmdSpeed.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::speed()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::speed((n, mean = 55, sd = 10, min = 0, max = NULL, digits = 0,
+name = ""Speed""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::speed()", 1)
         End If
@@ -1670,7 +1689,8 @@ name = ""Math""))", 1)
 
     Private Sub cmdState_Click(sender As Object, e As EventArgs) Handles cmdState.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::state()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::state((n, x = datasets::state.name,
+prob = wakefield::state_populations[[""Proportion""]], name = ""State""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::state()", 1)
         End If
@@ -1678,7 +1698,7 @@ name = ""Math""))", 1)
 
     Private Sub cmdString_Click(sender As Object, e As EventArgs) Handles cmdString.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::string()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::string((n, x = ""[A-Za-z0-9]"", length = 10, name = ""String""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::string()", 1)
         End If
@@ -1686,7 +1706,7 @@ name = ""Math""))", 1)
 
     Private Sub cmdWakefield_Upper_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Upper.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_upper()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_upper((n, k = 5, x = LETTERS, prob = NULL, name = ""Upper""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_upper()", 1)
         End If
@@ -1694,7 +1714,7 @@ name = ""Math""))", 1)
 
     Private Sub cmdValid_Click(sender As Object, e As EventArgs) Handles cmdValid.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::Valid()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::Valid((n, prob = NULL, name = ""Valid""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::Valid()", 1)
         End If
@@ -1702,9 +1722,11 @@ name = ""Math""))", 1)
 
     Private Sub cmdWakefield_Year_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Year.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_year()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_year((n, x = 1996:as.numeric(format(Sys.Date(), ""%Y"")), prob = NULL,
+name = ""Year""))", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_year()", 1)
         End If
     End Sub
+
 End Class
