@@ -195,7 +195,9 @@
     <value>5, 14</value>
   </data>
   <data name="ucrPnlSort.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 69</value>
+
+    <value>174, 69</value>
+
   </data>
   <data name="ucrPnlSort.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

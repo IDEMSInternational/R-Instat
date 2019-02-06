@@ -268,7 +268,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>426, 478</value>
+    <value>452, 478</value>
   </data>
   <data name="ucrNudXAxisLabelsAngle.Location" type="System.Drawing.Point, System.Drawing">
     <value>135, 344</value>
@@ -292,7 +292,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputPartitioning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 280</value>
+    <value>97, 282</value>
   </data>
   <data name="ucrInputPartitioning.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
