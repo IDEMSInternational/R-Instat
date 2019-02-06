@@ -241,10 +241,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoReplace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>277, 12</value>
+    <value>358, 12</value>
   </data>
   <data name="rdoReplace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 27</value>
+    <value>88, 27</value>
   </data>
   <data name="rdoReplace.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -274,10 +274,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoLocate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 12</value>
+    <value>272, 12</value>
   </data>
   <data name="rdoLocate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 27</value>
+    <value>88, 27</value>
   </data>
   <data name="rdoLocate.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -307,10 +307,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoExtract.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 12</value>
+    <value>186, 12</value>
   </data>
   <data name="rdoExtract.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 27</value>
+    <value>88, 27</value>
   </data>
   <data name="rdoExtract.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -343,7 +343,7 @@
     <value>100, 12</value>
   </data>
   <data name="rdoDetect.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 27</value>
+    <value>88, 27</value>
   </data>
   <data name="rdoDetect.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -373,10 +373,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoReplaceAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>335, 12</value>
+    <value>444, 12</value>
   </data>
   <data name="rdoReplaceAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 27</value>
+    <value>88, 27</value>
   </data>
   <data name="rdoReplaceAll.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>

@@ -117,17 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblStartPos.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblStartPos.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 105</value>
   </data>
   <data name="lblStartPos.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
+    <value>153, 13</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblStartPos.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
@@ -146,14 +143,11 @@
   <data name="&gt;&gt;lblStartPos.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="lblNumberOfRowsToInsert.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="lblNumberOfRowsToInsert.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 135</value>
   </data>
   <data name="lblNumberOfRowsToInsert.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 13</value>
+    <value>153, 13</value>
   </data>
   <data name="lblNumberOfRowsToInsert.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -230,14 +224,11 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>526, 369</value>
   </data>
-  <data name="lblInputColumnPrefix.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="lblInputColumnPrefix.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 289</value>
   </data>
   <data name="lblInputColumnPrefix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 13</value>
+    <value>203, 13</value>
   </data>
   <data name="lblInputColumnPrefix.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -258,7 +249,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputPrefixForNewColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 286</value>
+    <value>220, 286</value>
   </data>
   <data name="ucrInputPrefixForNewColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 21</value>
@@ -279,7 +270,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudNumberOfColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 233</value>
+    <value>220, 233</value>
   </data>
   <data name="ucrNudNumberOfColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -487,7 +478,7 @@
     <value>6</value>
   </data>
   <data name="ucrInputDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 259</value>
+    <value>220, 259</value>
   </data>
   <data name="ucrInputDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 21</value>
@@ -507,14 +498,11 @@
   <data name="&gt;&gt;ucrInputDefaultValue.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="lblDefaultValue.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="lblDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 263</value>
   </data>
   <data name="lblDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 13</value>
+    <value>202, 13</value>
   </data>
   <data name="lblDefaultValue.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -534,14 +522,11 @@
   <data name="&gt;&gt;lblDefaultValue.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="lblNumberOfColumnsToInsert.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="lblNumberOfColumnsToInsert.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 236</value>
   </data>
   <data name="lblNumberOfColumnsToInsert.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 13</value>
+    <value>202, 13</value>
   </data>
   <data name="lblNumberOfColumnsToInsert.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -583,7 +568,7 @@
     <value>12</value>
   </data>
   <data name="ucrNudNumberOfRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 132</value>
+    <value>169, 132</value>
   </data>
   <data name="ucrNudNumberOfRows.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -604,7 +589,7 @@
     <value>13</value>
   </data>
   <data name="ucrNudStartRow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 103</value>
+    <value>170, 103</value>
   </data>
   <data name="ucrNudStartRow.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
