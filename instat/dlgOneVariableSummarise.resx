@@ -201,7 +201,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudMaxSum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 207</value>
+    <value>186, 210</value>
   </data>
   <data name="ucrNudMaxSum.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
