@@ -1,5 +1,4 @@
-﻿
-' R- Instat
+﻿' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -15,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgGraphsGUI
@@ -83,9 +81,5 @@ Public Class dlgGraphsGUI
 
     Private Sub ucrReceiverGraphs_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverGraphs.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrSelectorDataFramesToDelete_Load(sender As Object, e As EventArgs)
-
     End Sub
 End Class
