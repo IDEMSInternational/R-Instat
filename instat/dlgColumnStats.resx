@@ -349,7 +349,7 @@
     <value>7</value>
   </data>
   <data name="cmdProportionsPercentages.Text" xml:space="preserve">
-    <value>Proportions/Percentages...</value>
+    <value>Prop and Percentages...</value>
   </data>
   <data name="&gt;&gt;cmdProportionsPercentages.Name" xml:space="preserve">
     <value>cmdProportionsPercentages</value>
