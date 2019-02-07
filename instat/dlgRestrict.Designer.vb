@@ -95,7 +95,7 @@ Partial Class dlgRestrict
         'ucrInputFilterPreview
         '
         Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilterPreview.IsMultiline = False
+        Me.ucrInputFilterPreview.IsMultiline = True
         Me.ucrInputFilterPreview.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputFilterPreview, "ucrInputFilterPreview")
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
