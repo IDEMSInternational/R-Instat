@@ -170,9 +170,6 @@
   <data name="&gt;&gt;cmdGraphOptions.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="rdoSingleGraphs.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="rdoSingleGraphs.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -180,7 +177,7 @@
     <value>10, 65</value>
   </data>
   <data name="rdoSingleGraphs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 17</value>
+    <value>130, 17</value>
   </data>
   <data name="rdoSingleGraphs.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -200,14 +197,11 @@
   <data name="&gt;&gt;rdoSingleGraphs.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdoCombine.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="rdoCombine.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 43</value>
   </data>
   <data name="rdoCombine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 17</value>
+    <value>130, 17</value>
   </data>
   <data name="rdoCombine.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -227,14 +221,11 @@
   <data name="&gt;&gt;rdoCombine.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="rdoFacets.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="rdoFacets.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 21</value>
   </data>
   <data name="rdoFacets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 17</value>
+    <value>130, 17</value>
   </data>
   <data name="rdoFacets.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -258,7 +249,9 @@
     <value>3, 16</value>
   </data>
   <data name="ucrPnlOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 69</value>
+
+    <value>137, 69</value>
+
   </data>
   <data name="ucrPnlOutput.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -279,7 +272,7 @@
     <value>259, 172</value>
   </data>
   <data name="grpOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 91</value>
+    <value>146, 91</value>
   </data>
   <data name="grpOutput.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

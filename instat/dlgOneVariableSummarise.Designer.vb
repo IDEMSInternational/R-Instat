@@ -73,6 +73,7 @@ Partial Class dlgOneVariableSummarise
         '
         'ucrSelectorOneVarSummarise
         '
+        Me.ucrSelectorOneVarSummarise.bDropUnusedFilterLevels = False
         Me.ucrSelectorOneVarSummarise.bShowHiddenColumns = False
         Me.ucrSelectorOneVarSummarise.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorOneVarSummarise, "ucrSelectorOneVarSummarise")

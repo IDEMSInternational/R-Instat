@@ -396,6 +396,7 @@ Partial Class dlgStringHandling
         '
         'ucrSelectorStringHandling
         '
+        Me.ucrSelectorStringHandling.bDropUnusedFilterLevels = False
         Me.ucrSelectorStringHandling.bShowHiddenColumns = False
         Me.ucrSelectorStringHandling.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorStringHandling, "ucrSelectorStringHandling")
