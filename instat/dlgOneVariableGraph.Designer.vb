@@ -151,7 +151,6 @@ Partial Class dlgOneVariableGraph
         Me.MinimizeBox = False
         Me.Name = "dlgOneVariableGraph"
         Me.grpOutput.ResumeLayout(False)
-        Me.grpOutput.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>327, 251</value>
+    <value>357, 251</value>
   </data>
   <data name="cmdBrowse.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 23</value>
@@ -143,17 +143,14 @@
   <data name="&gt;&gt;cmdBrowse.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="lblExport.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="lblExport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 255</value>
+    <value>3, 255</value>
   </data>
   <data name="lblExport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
+    <value>100, 13</value>
   </data>
   <data name="lblExport.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="lblExport.Text" xml:space="preserve">
     <value>Export File:</value>
@@ -250,13 +247,13 @@
     <value>10</value>
   </data>
   <data name="ucrInputExportFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 252</value>
+    <value>112, 252</value>
   </data>
   <data name="ucrInputExportFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
   </data>
   <data name="ucrInputExportFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 23</value>
+    <value>244, 23</value>
   </data>
   <data name="ucrInputExportFile.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -351,8 +348,11 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>413, 338</value>
+    <value>440, 338</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 281</value>

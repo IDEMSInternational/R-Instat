@@ -169,6 +169,7 @@ Partial Class ucrFilter
         '
         'ucrSelectorForFitler
         '
+        Me.ucrSelectorForFitler.bDropUnusedFilterLevels = False
         Me.ucrSelectorForFitler.bShowHiddenColumns = False
         Me.ucrSelectorForFitler.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForFitler, "ucrSelectorForFitler")
