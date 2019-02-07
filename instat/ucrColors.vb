@@ -47,12 +47,12 @@ Public Class ucrColors
     End Sub
 
     Public Sub SetColours()
-        SetItems(dctColours)
+        'SetItems(dctColours)
     End Sub
 
     Private Sub ucrColors_Load(sender As Object, e As EventArgs) Handles Me.Load
         If dctConditions Is Nothing OrElse dctConditions.Count = 0 Then
-            SetColours()
+            'SetColours()
         End If
     End Sub
 
