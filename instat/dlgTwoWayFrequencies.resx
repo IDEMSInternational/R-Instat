@@ -328,7 +328,7 @@
     <value>3</value>
   </data>
   <data name="grpFreqTypeTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 166</value>
+    <value>248, 166</value>
   </data>
   <data name="grpFreqTypeTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 116</value>
@@ -541,7 +541,7 @@
     <value>4</value>
   </data>
   <data name="grpFreqTypeGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>358, 166</value>
+    <value>368, 166</value>
   </data>
   <data name="grpFreqTypeGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 116</value>
@@ -679,7 +679,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>479, 439</value>
+    <value>489, 439</value>
   </data>
   <data name="ucrChkFacetGrid.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 315</value>
