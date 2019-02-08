@@ -246,8 +246,6 @@ Public Class sdgPlots
 
         ucrChkXaxisAngle.SetText("X axis Tick Labels Angle")
         ucrChkXaxisAngle.AddToLinkedControls(ucrNudXAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
-        ucrNudXAngle.DecimalPlaces = 1
-        ucrNudXAngle.Increment = 0.1
         ucrNudXAngle.SetParameter(New RParameter("angle"))
         ucrChkXaxisAngle.AddParameterPresentCondition(True, "angle")
         ucrChkXaxisAngle.AddParameterPresentCondition(False, "angle", False)
@@ -711,9 +709,10 @@ Public Class sdgPlots
         ucrChkXaxisTickMarkLabelSize.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub cmdSimpleOptions_Click(sender As Object, e As EventArgs) Handles cmdSimpleOptions.Click
         sdgThemesSub.SetRCode(clsBaseOperator, clsNewThemesFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, bReset:=bResetThemes)
         Me.SendToBack()
         sdgThemesSub.ShowDialog()
+        SetRcodeForCommonThemesControls(False)
     End Sub
 End Class

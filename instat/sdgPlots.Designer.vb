@@ -78,6 +78,7 @@ Partial Class sdgPlots
         Me.tbpYAxis = New System.Windows.Forms.TabPage()
         Me.ucrYAxis = New instat.ucrAxes()
         Me.tbpTheme = New System.Windows.Forms.TabPage()
+        Me.cmdSimpleOptions = New System.Windows.Forms.Button()
         Me.urChkSelectTheme = New instat.ucrCheck()
         Me.grpCommonOptions = New System.Windows.Forms.GroupBox()
         Me.ucrNudYaxisMarkSize = New instat.ucrNud()
@@ -98,7 +99,6 @@ Partial Class sdgPlots
         Me.tbpCoordinates = New System.Windows.Forms.TabPage()
         Me.ucrChkHorizontalplot = New instat.ucrCheck()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -400,7 +400,7 @@ Partial Class sdgPlots
         '
         'tbpTheme
         '
-        Me.tbpTheme.Controls.Add(Me.Button1)
+        Me.tbpTheme.Controls.Add(Me.cmdSimpleOptions)
         Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
         Me.tbpTheme.Controls.Add(Me.grpCommonOptions)
         Me.tbpTheme.Controls.Add(Me.lblFont)
@@ -410,6 +410,12 @@ Partial Class sdgPlots
         Me.tbpTheme.Name = "tbpTheme"
         Me.tbpTheme.Tag = "Theme"
         Me.tbpTheme.UseVisualStyleBackColor = True
+        '
+        'cmdSimpleOptions
+        '
+        resources.ApplyResources(Me.cmdSimpleOptions, "cmdSimpleOptions")
+        Me.cmdSimpleOptions.Name = "cmdSimpleOptions"
+        Me.cmdSimpleOptions.UseVisualStyleBackColor = True
         '
         'urChkSelectTheme
         '
@@ -564,12 +570,6 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
-        'Button1
-        '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'sdgPlots
         '
         resources.ApplyResources(Me, "$this")
@@ -660,7 +660,7 @@ Partial Class sdgPlots
     Friend WithEvents ucrNudXaxisMarkSize As ucrNud
 
     Friend WithEvents ucrChkLabeler As ucrCheck
-    Friend WithEvents Button1 As Button
+    Friend WithEvents cmdSimpleOptions As Button
 End Class
 
 

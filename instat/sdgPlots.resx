@@ -1023,35 +1023,35 @@
   <data name="&gt;&gt;tbpYAxis.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="Button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdSimpleOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>405, 16</value>
+  <data name="cmdSimpleOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 48</value>
   </data>
-  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 23</value>
+  <data name="cmdSimpleOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 23</value>
   </data>
-  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdSimpleOptions.TabIndex" type="System.Int32, mscorlib">
     <value>107</value>
   </data>
-  <data name="Button1.Text" xml:space="preserve">
-    <value>Common Options</value>
+  <data name="cmdSimpleOptions.Text" xml:space="preserve">
+    <value>Simple Options</value>
   </data>
-  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
-    <value>Button1</value>
+  <data name="&gt;&gt;cmdSimpleOptions.Name" xml:space="preserve">
+    <value>cmdSimpleOptions</value>
   </data>
-  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdSimpleOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdSimpleOptions.Parent" xml:space="preserve">
     <value>tbpTheme</value>
   </data>
-  <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdSimpleOptions.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="urChkSelectTheme.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
+    <value>10, 14</value>
   </data>
   <data name="urChkSelectTheme.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 20</value>
@@ -1072,7 +1072,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudYaxisMarkSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 208</value>
+    <value>246, 205</value>
   </data>
   <data name="ucrNudYaxisMarkSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1093,7 +1093,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudXaxisMarkSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 172</value>
+    <value>246, 169</value>
   </data>
   <data name="ucrNudXaxisMarkSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1114,7 +1114,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudYSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 136</value>
+    <value>246, 133</value>
   </data>
   <data name="ucrNudYSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1135,7 +1135,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudXSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 100</value>
+    <value>246, 97</value>
   </data>
   <data name="ucrNudXSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1156,7 +1156,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudXAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 64</value>
+    <value>246, 61</value>
   </data>
   <data name="ucrNudXAngle.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1177,7 +1177,7 @@
     <value>4</value>
   </data>
   <data name="ucrInputLegendPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 24</value>
+    <value>246, 25</value>
   </data>
   <data name="ucrInputLegendPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -1198,7 +1198,7 @@
     <value>5</value>
   </data>
   <data name="ucrChkYaxisTickMarkLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 208</value>
+    <value>6, 205</value>
   </data>
   <data name="ucrChkYaxisTickMarkLabelSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 20</value>
@@ -1219,7 +1219,7 @@
     <value>6</value>
   </data>
   <data name="ucrChkXaxisTickMarkLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 172</value>
+    <value>6, 169</value>
   </data>
   <data name="ucrChkXaxisTickMarkLabelSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 20</value>
@@ -1240,7 +1240,7 @@
     <value>7</value>
   </data>
   <data name="ucrChkYaxisSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 136</value>
+    <value>6, 133</value>
   </data>
   <data name="ucrChkYaxisSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 20</value>
@@ -1261,7 +1261,7 @@
     <value>8</value>
   </data>
   <data name="ucrChkXaxisSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 100</value>
+    <value>6, 97</value>
   </data>
   <data name="ucrChkXaxisSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 20</value>
@@ -1282,7 +1282,7 @@
     <value>9</value>
   </data>
   <data name="ucrChkXaxisAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 64</value>
+    <value>6, 61</value>
   </data>
   <data name="ucrChkXaxisAngle.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 20</value>
@@ -1324,7 +1324,7 @@
     <value>11</value>
   </data>
   <data name="grpCommonOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 65</value>
+    <value>7, 81</value>
   </data>
   <data name="grpCommonOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>455, 243</value>
@@ -1378,10 +1378,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdAllOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>297, 18</value>
+    <value>10, 48</value>
   </data>
   <data name="cmdAllOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 23</value>
+    <value>92, 23</value>
   </data>
   <data name="cmdAllOptions.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1402,7 +1402,7 @@
     <value>4</value>
   </data>
   <data name="ucrInputThemes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 19</value>
+    <value>113, 14</value>
   </data>
   <data name="ucrInputThemes.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 21</value>
