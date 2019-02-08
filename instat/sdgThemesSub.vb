@@ -29,6 +29,7 @@ Public Class sdgThemesSub
         autoTranslate(Me)
         'temp hidden as not yet implemented
         tbLegend.Visible = False
+        tbLegend.Enabled = False
     End Sub
 
     Public Sub InitialiseControls()
