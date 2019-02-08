@@ -199,7 +199,7 @@ Public Class ucrInputComboBox
             cboInput.Items.Add(kvpTemp.Key)
             dctDisplayParameterValues.Add(kvpTemp.Key, kvpTemp.Value)
             If bSetCondtions Then
-                'AddParameterValuesCondition(kvpTemp.Key, GetParameter().strArgumentName, kvpTemp.Value)
+                AddParameterValuesCondition(kvpTemp.Key, GetParameter().strArgumentName, kvpTemp.Value)
             End If
         Next
         AdjustComboBoxWidth(cboInput)
