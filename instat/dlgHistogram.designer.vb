@@ -132,6 +132,7 @@ Partial Class dlgHistogram
         '
         'ucrHistogramSelector
         '
+        Me.ucrHistogramSelector.bDropUnusedFilterLevels = False
         Me.ucrHistogramSelector.bShowHiddenColumns = False
         Me.ucrHistogramSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrHistogramSelector, "ucrHistogramSelector")
