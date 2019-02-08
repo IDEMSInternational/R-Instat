@@ -15,37 +15,39 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
-    Imports instat.Translations
+Imports instat.Translations
 
-    Public Class sdgThemesSub
+Public Class sdgThemesSub
     Public bControlsInitialised As Boolean = False
-    Private clsThemesFunction, clsElementPlotTitle, clsAxesTitles, clsXElementTitle, clsYElementTitle, clsAllLabels, clsXAxisLables, clsYAxisLabels, clsAllTickMarks, clsXAxisTickMarks, clsYAxisTickMarks, clsUnitAxisTickLength, clsAllAxisLines, clsXAxisLine, clsYAxisLine As New RFunction
+    Private clsThemesFunction, clsElementPlotTitle, clsAxesTitles, clsElementPanelGridMinor, clsElementPanelGridMajor, clsXElementTitle, clsYElementTitle, clsAllLabels, clsXAxisLables, clsYAxisLabels, clsAllTickMarks, clsXAxisTickMarks, clsYAxisTickMarks, clsUnitAxisTickLength, clsAllAxisLines, clsXAxisLine, clsYAxisLine, clsElementLineXAxis, clsElementLineYAxis As New RFunction
     Private clsAllPanelGrid, clsPanelGridMajor, clsPanelGridMinor, clsPanelBackground, clsPanelBorder As New RFunction
     Private clsBaseOperator As New ROperator
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
+    Private clsThemesSubFunctions As New clsThemeSubFunctions
 
     Private Sub sdgThemesSub_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        'temp hidden as not yet implemented
+        tbLegend.Visible = False
     End Sub
 
     Public Sub InitialiseControls()
         ucrPlotTitle.SetLabel("Plot Title")
         ucrThemeTitleXAxis.SetLabel("X-Axis Title")
         ucrThemeTitleYAxis.SetLabel("Y-Axis Title")
-        ucrChkAllLabels.SetText("All Labels")
+
         ucrThemeAxesTickLabels.SetLabel("X and Y-Axis Labels")
         ucrThemeBottomXAxis.SetLabel("X-Axis Labels")
         ucrThemeLeftYAxis.SetLabel("Y-Axis Labels")
-        ucrChkAllTickMarkers.SetText("All Tick Markers")
+
         ucrTickMarksAxes.SetLabel("X and Y-Axis Tick Markers")
         ucrTickMarksXAxis.SetLabel("X-Axis Tick Markers")
         ucrTickMarksYAxis.SetLabel("Y-Axis Tick Markers")
-        ucrChkAllLines.SetText("X and Y-Axis Lines")
+
         ucrThemeAxesLines.SetLabel("Axis Lines")
         ucrXAxisLines.SetLabel("X-Axis Line")
         ucrYAxisLines.SetLabel("Y-Axis Line")
-        ucrChkAllGridLines.SetText("All Grid Lines")
+
         ucrPanelGridMajor.SetLabel("Major Grid Lines")
         ucrPanelGridMinor.SetLabel("Major Grid Lines")
         ucrPanelBorder.SetLabel("Panel Border")
@@ -54,48 +56,7 @@ Imports instat
         ucRdoCoordinated.SetText("Coordinates")
         ucrrdoSpecific.SetText("Specific")
 
-        'Need to link all check boxes to ucrTextThemes
-        'ucrChkAllLabels.AddToLinkedControls(ucrThemeAxesTickLabels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
-    End Sub
-
-    Public Sub SetRCode()
-        'Theme command 
-        clsThemesFunction = New RFunction
-        'Titles
-        clsElementPlotTitle = New RFunction
-        clsAxesTitles = New RFunction
-        clsXElementTitle = New RFunction
-        clsYElementTitle = New RFunction
-        'Labels 
-        clsAllLabels = New RFunction
-        clsXAxisLables = New RFunction
-        clsYAxisLabels = New RFunction
-        'Tick Markers 
-        clsAllTickMarks = New RFunction
-        clsXAxisTickMarks = New RFunction
-        clsYAxisTickMarks = New RFunction
-        clsUnitAxisTickLength = New RFunction
-        'Lines 
-        clsAllAxisLines = New RFunction
-        clsXAxisLine = New RFunction
-        clsYAxisLine = New RFunction
-        'Panel
-        clsAllPanelGrid = New RFunction
-        clsPanelGridMajor = New RFunction
-        clsPanelGridMinor = New RFunction
-        'Background 
-        clsPanelBackground = New RFunction
-        clsPanelBorder = New RFunction
-
-        Dim clsElementLegendText As New RFunction
-        Dim clsElementLegendTitle As New RFunction
-        Dim clsElementLegendBackground As New RFunction
-        Dim clsElementLegendBoxBackground As New RFunction
-        Dim clsElementLegendtKey As New RFunction
-
-        Dim clsElementBorder As New RFunction
-        Dim clsElementPanelBackGround As New RFunction
-        Dim clsElementPlotBackground As New RFunction
+        bControlsInitialised = True
     End Sub
 
     Public Sub SetRCode(clsBaseOperator As ROperator, clsNewThemesFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), Optional bReset As Boolean = False)
@@ -115,36 +76,43 @@ Imports instat
         Dim clsElementLegendTitle As New RFunction
 
         dctThemeFunctions.TryGetValue("plot.title", clsElementPlotTitle)
-        dctThemeFunctions.TryGetValue("axis.title", clsAxesTitles)
-        dctThemeFunctions.TryGetValue("axis.title.x", clsXElementTitle)
-        dctThemeFunctions.TryGetValue("axis.title.y", clsYElementTitle)
+        ucrPlotTitle.SetRCodeForControl("plot.title", clsElementPlotTitle, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        dctThemeFunctions.TryGetValue("axis.text", clsAllLabels)
+        dctThemeFunctions.TryGetValue("axis.title.x", clsXElementTitle)
+        ucrThemeTitleXAxis.SetRCodeForControl("axis.title.x", clsXElementTitle, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
+        dctThemeFunctions.TryGetValue("axis.title.y", clsYElementTitle)
+        ucrThemeTitleYAxis.SetRCodeForControl("axis.title.y", clsYElementTitle, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
         dctThemeFunctions.TryGetValue("axis.text.x", clsXAxisLables)
+        ucrThemeBottomXAxis.SetRCodeForControl("axis.text.x", clsXAxisLables, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
         dctThemeFunctions.TryGetValue("axis.text.y", clsYAxisLabels)
+        ucrThemeLeftYAxis.SetRCodeForControl("axis.text.y", clsYAxisLabels, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
+        dctThemeFunctions.TryGetValue("axis.ticks.x", clsXAxisTickMarks)
+        ucrTickMarksXAxis.SetRCodeForControl("axis.ticks.x", clsXAxisTickMarks, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
+        dctThemeFunctions.TryGetValue("axis.ticks.y", clsYAxisTickMarks)
+        ucrTickMarksYAxis.SetRCodeForControl("axis.ticks.y", clsYAxisTickMarks, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
+        dctThemeFunctions.TryGetValue("panel.grid.major", clsElementPanelGridMajor)
+        ucrPanelGridMajor.SetRCodeForControl("panel.grid.major", clsElementPanelGridMajor, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
+        dctThemeFunctions.TryGetValue("panel.grid.minor", clsElementPanelGridMinor)
+        ucrPanelGridMinor.SetRCodeForControl("panel.grid.minor", clsElementPanelGridMinor, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         dctThemeFunctions.TryGetValue("legend.text", clsElementLegendText)
         dctThemeFunctions.TryGetValue("legend.title", clsElementLegendTitle)
 
-        dctThemeFunctions.TryGetValue("axis.ticks", clsAllTickMarks)
-        dctThemeFunctions.TryGetValue("axis.ticks.x", clsXAxisTickMarks)
-        dctThemeFunctions.TryGetValue("axis.ticks.y", clsYAxisTickMarks)
-        dctThemeFunctions.TryGetValue("axis.ticks.length", clsUnitAxisTickLength)
+        dctThemeFunctions.TryGetValue("axis.line.x", clsElementLineXAxis)
+        ucrXAxisLines.SetRCodeForControl("axis.line.x", clsElementLineXAxis, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        'dctThemeFunctions.TryGetValue("axis.line", clsElementLineAxes)
-        'dctThemeFunctions.TryGetValue("axis.line.x", clsElementLineXAxis)
-        'dctThemeFunctions.TryGetValue("axis.line.y", clsElementLineYAxis)
+        dctThemeFunctions.TryGetValue("axis.line.y", clsElementLineYAxis)
+        ucrYAxisLines.SetRCodeForControl("axis.line.y", clsElementLineYAxis, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        'dctThemeFunctions.TryGetValue("panel.grid", clsElementPanelGrid)
-        'dctThemeFunctions.TryGetValue("panel.grid.major", clsElementPanelGridMajor)
-        'dctThemeFunctions.TryGetValue("panel.grid.minor", clsElementPanelGridMinor)
-
-        'ucrPanelBackground.SetRCodeForControl("panel.background", clsElementPanelBackGround, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        'ucrPlotBackground.SetRCodeForControl("plot.background", clsElementPlotBackground, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-
+        ucrPanelBorder.SetRCodeForControl("panel.border", clsThemesSubFunctions.clsElementBorder, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelBackground.SetRCodeForControl("panel.background", clsThemesSubFunctions.clsElementPanelBackGround, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
     End Sub
-
-
-
 End Class
 
