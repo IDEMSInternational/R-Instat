@@ -45,7 +45,6 @@ Partial Class dlgPICSACrops
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.lblPlantingDays = New System.Windows.Forms.Label()
         Me.lblPlantingLengthDays = New System.Windows.Forms.Label()
         Me.lblWaterAmounts = New System.Windows.Forms.Label()
         Me.grpSeasonReceivers = New System.Windows.Forms.GroupBox()
@@ -63,6 +62,7 @@ Partial Class dlgPICSACrops
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorForCrops = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrCheckPlantingDays = New instat.ucrCheck()
         Me.grpSeasonReceivers.SuspendLayout()
         Me.grpCropDefinitions.SuspendLayout()
         Me.SuspendLayout()
@@ -138,15 +138,6 @@ Partial Class dlgPICSACrops
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'lblPlantingDays
-        '
-        Me.lblPlantingDays.AutoSize = True
-        Me.lblPlantingDays.Location = New System.Drawing.Point(11, 28)
-        Me.lblPlantingDays.Name = "lblPlantingDays"
-        Me.lblPlantingDays.Size = New System.Drawing.Size(81, 13)
-        Me.lblPlantingDays.TabIndex = 34
-        Me.lblPlantingDays.Text = "Planting Day(s):"
-        '
         'lblPlantingLengthDays
         '
         Me.lblPlantingLengthDays.AutoSize = True
@@ -204,12 +195,12 @@ Partial Class dlgPICSACrops
         '
         'grpCropDefinitions
         '
+        Me.grpCropDefinitions.Controls.Add(Me.ucrCheckPlantingDays)
         Me.grpCropDefinitions.Controls.Add(Me.lblPlantingLengthDays)
         Me.grpCropDefinitions.Controls.Add(Me.ucrInputPlantingLengths)
         Me.grpCropDefinitions.Controls.Add(Me.lblWaterAmounts)
         Me.grpCropDefinitions.Controls.Add(Me.ucrInputWaterAmounts)
         Me.grpCropDefinitions.Controls.Add(Me.ucrInputPlantingDates)
-        Me.grpCropDefinitions.Controls.Add(Me.lblPlantingDays)
         Me.grpCropDefinitions.Location = New System.Drawing.Point(6, 194)
         Me.grpCropDefinitions.Name = "grpCropDefinitions"
         Me.grpCropDefinitions.Size = New System.Drawing.Size(292, 137)
@@ -239,7 +230,7 @@ Partial Class dlgPICSACrops
         '
         Me.ucrInputPlantingDates.AddQuotesIfUnrecognised = True
         Me.ucrInputPlantingDates.IsReadOnly = False
-        Me.ucrInputPlantingDates.Location = New System.Drawing.Point(134, 26)
+        Me.ucrInputPlantingDates.Location = New System.Drawing.Point(134, 25)
         Me.ucrInputPlantingDates.Name = "ucrInputPlantingDates"
         Me.ucrInputPlantingDates.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPlantingDates.TabIndex = 38
@@ -310,6 +301,7 @@ Partial Class dlgPICSACrops
         '
         'ucrSelectorForCrops
         '
+        Me.ucrSelectorForCrops.bDropUnusedFilterLevels = False
         Me.ucrSelectorForCrops.bShowHiddenColumns = False
         Me.ucrSelectorForCrops.bUseCurrentFilter = True
         Me.ucrSelectorForCrops.Location = New System.Drawing.Point(6, 5)
@@ -324,6 +316,14 @@ Partial Class dlgPICSACrops
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrCheckPlantingDays
+        '
+        Me.ucrCheckPlantingDays.Checked = False
+        Me.ucrCheckPlantingDays.Location = New System.Drawing.Point(14, 26)
+        Me.ucrCheckPlantingDays.Name = "ucrCheckPlantingDays"
+        Me.ucrCheckPlantingDays.Size = New System.Drawing.Size(100, 20)
+        Me.ucrCheckPlantingDays.TabIndex = 39
         '
         'dlgPICSACrops
         '
@@ -377,7 +377,6 @@ Partial Class dlgPICSACrops
     Friend WithEvents cmdOptions As Button
     Friend WithEvents lblWaterAmounts As Label
     Friend WithEvents lblPlantingLengthDays As Label
-    Friend WithEvents lblPlantingDays As Label
     Friend WithEvents ucrChkPrintDataProp As ucrCheck
     Friend WithEvents ucrChkDataProp As ucrCheck
     Friend WithEvents ucrInputPlantingDates As ucrInputComboBox
@@ -385,4 +384,5 @@ Partial Class dlgPICSACrops
     Friend WithEvents ucrInputPlantingLengths As ucrInputComboBox
     Friend WithEvents grpSeasonReceivers As GroupBox
     Friend WithEvents grpCropDefinitions As GroupBox
+    Friend WithEvents ucrCheckPlantingDays As ucrCheck
 End Class
