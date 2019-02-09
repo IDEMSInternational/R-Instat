@@ -31,25 +31,23 @@ Partial Class sdgThemesSub
         Me.ucrThemeLeftYAxis = New instat.ucrELementTextControl()
         Me.ucrThemeBottomXAxis = New instat.ucrELementTextControl()
         Me.ucrThemeAxesTickLabels = New instat.ucrELementTextControl()
-        Me.ucrChkAllLabels = New instat.ucrCheck()
         Me.tbAxes = New System.Windows.Forms.TabPage()
         Me.ucrYAxisLines = New instat.ucrElementLineControl()
         Me.ucrTickMarksYAxis = New instat.ucrElementLineControl()
         Me.ucrXAxisLines = New instat.ucrElementLineControl()
         Me.ucrTickMarksXAxis = New instat.ucrElementLineControl()
         Me.ucrThemeAxesLines = New instat.ucrElementLineControl()
-        Me.ucrChkAllLines = New instat.ucrCheck()
-        Me.ucrChkAllTickMarkers = New instat.ucrCheck()
         Me.ucrTickMarksAxes = New instat.ucrElementLineControl()
         Me.tbPanel = New System.Windows.Forms.TabPage()
         Me.ucrPanelGridMinor = New instat.ucrElementLineControl()
         Me.ucrPanelGridMajor = New instat.ucrElementLineControl()
         Me.ucrPanelGrid = New instat.ucrElementLineControl()
-        Me.ucrChkAllGridLines = New instat.ucrCheck()
         Me.tbBackground = New System.Windows.Forms.TabPage()
         Me.ucrPanelBackground = New instat.ucrElementRectControl()
         Me.ucrPanelBorder = New instat.ucrElementRectControl()
         Me.tbLegend = New System.Windows.Forms.TabPage()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ucrChkLegTitleTextSize = New instat.ucrCheck()
         Me.grpLegendPosition = New System.Windows.Forms.GroupBox()
         Me.lblYCoord = New System.Windows.Forms.Label()
         Me.lblXCoord = New System.Windows.Forms.Label()
@@ -60,8 +58,7 @@ Partial Class sdgThemesSub
         Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
         Me.lblLegendPosition = New System.Windows.Forms.Label()
         Me.ucrChkRemoveLegend = New instat.ucrCheck()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ucrChkLegTitleTextSize = New instat.ucrCheck()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.TabThemes.SuspendLayout()
         Me.tbTitles.SuspendLayout()
         Me.tbLabels.SuspendLayout()
@@ -69,8 +66,8 @@ Partial Class sdgThemesSub
         Me.tbPanel.SuspendLayout()
         Me.tbBackground.SuspendLayout()
         Me.tbLegend.SuspendLayout()
-        Me.grpLegendPosition.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.grpLegendPosition.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabThemes
@@ -126,7 +123,6 @@ Partial Class sdgThemesSub
         Me.tbLabels.Controls.Add(Me.ucrThemeLeftYAxis)
         Me.tbLabels.Controls.Add(Me.ucrThemeBottomXAxis)
         Me.tbLabels.Controls.Add(Me.ucrThemeAxesTickLabels)
-        Me.tbLabels.Controls.Add(Me.ucrChkAllLabels)
         Me.tbLabels.Location = New System.Drawing.Point(4, 22)
         Me.tbLabels.Name = "tbLabels"
         Me.tbLabels.Padding = New System.Windows.Forms.Padding(3)
@@ -156,14 +152,6 @@ Partial Class sdgThemesSub
         Me.ucrThemeAxesTickLabels.Size = New System.Drawing.Size(255, 228)
         Me.ucrThemeAxesTickLabels.TabIndex = 2
         '
-        'ucrChkAllLabels
-        '
-        Me.ucrChkAllLabels.Checked = False
-        Me.ucrChkAllLabels.Location = New System.Drawing.Point(6, 6)
-        Me.ucrChkAllLabels.Name = "ucrChkAllLabels"
-        Me.ucrChkAllLabels.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkAllLabels.TabIndex = 0
-        '
         'tbAxes
         '
         Me.tbAxes.Controls.Add(Me.ucrYAxisLines)
@@ -171,8 +159,6 @@ Partial Class sdgThemesSub
         Me.tbAxes.Controls.Add(Me.ucrXAxisLines)
         Me.tbAxes.Controls.Add(Me.ucrTickMarksXAxis)
         Me.tbAxes.Controls.Add(Me.ucrThemeAxesLines)
-        Me.tbAxes.Controls.Add(Me.ucrChkAllLines)
-        Me.tbAxes.Controls.Add(Me.ucrChkAllTickMarkers)
         Me.tbAxes.Controls.Add(Me.ucrTickMarksAxes)
         Me.tbAxes.Location = New System.Drawing.Point(4, 22)
         Me.tbAxes.Name = "tbAxes"
@@ -216,22 +202,6 @@ Partial Class sdgThemesSub
         Me.ucrThemeAxesLines.Size = New System.Drawing.Size(253, 122)
         Me.ucrThemeAxesLines.TabIndex = 8
         '
-        'ucrChkAllLines
-        '
-        Me.ucrChkAllLines.Checked = False
-        Me.ucrChkAllLines.Location = New System.Drawing.Point(3, 171)
-        Me.ucrChkAllLines.Name = "ucrChkAllLines"
-        Me.ucrChkAllLines.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkAllLines.TabIndex = 7
-        '
-        'ucrChkAllTickMarkers
-        '
-        Me.ucrChkAllTickMarkers.Checked = False
-        Me.ucrChkAllTickMarkers.Location = New System.Drawing.Point(3, 6)
-        Me.ucrChkAllTickMarkers.Name = "ucrChkAllTickMarkers"
-        Me.ucrChkAllTickMarkers.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkAllTickMarkers.TabIndex = 6
-        '
         'ucrTickMarksAxes
         '
         Me.ucrTickMarksAxes.Location = New System.Drawing.Point(3, 32)
@@ -244,7 +214,6 @@ Partial Class sdgThemesSub
         Me.tbPanel.Controls.Add(Me.ucrPanelGridMinor)
         Me.tbPanel.Controls.Add(Me.ucrPanelGridMajor)
         Me.tbPanel.Controls.Add(Me.ucrPanelGrid)
-        Me.tbPanel.Controls.Add(Me.ucrChkAllGridLines)
         Me.tbPanel.Location = New System.Drawing.Point(4, 22)
         Me.tbPanel.Name = "tbPanel"
         Me.tbPanel.Size = New System.Drawing.Size(519, 461)
@@ -272,14 +241,6 @@ Partial Class sdgThemesSub
         Me.ucrPanelGrid.Name = "ucrPanelGrid"
         Me.ucrPanelGrid.Size = New System.Drawing.Size(254, 124)
         Me.ucrPanelGrid.TabIndex = 2
-        '
-        'ucrChkAllGridLines
-        '
-        Me.ucrChkAllGridLines.Checked = False
-        Me.ucrChkAllGridLines.Location = New System.Drawing.Point(3, 5)
-        Me.ucrChkAllGridLines.Name = "ucrChkAllGridLines"
-        Me.ucrChkAllGridLines.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkAllGridLines.TabIndex = 1
         '
         'tbBackground
         '
@@ -317,6 +278,24 @@ Partial Class sdgThemesSub
         Me.tbLegend.TabIndex = 5
         Me.tbLegend.Text = "Legend"
         Me.tbLegend.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.ucrChkLegTitleTextSize)
+        Me.GroupBox1.Location = New System.Drawing.Point(6, 126)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(413, 100)
+        Me.GroupBox1.TabIndex = 4
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "GroupBox1"
+        '
+        'ucrChkLegTitleTextSize
+        '
+        Me.ucrChkLegTitleTextSize.Checked = False
+        Me.ucrChkLegTitleTextSize.Location = New System.Drawing.Point(3, 19)
+        Me.ucrChkLegTitleTextSize.Name = "ucrChkLegTitleTextSize"
+        Me.ucrChkLegTitleTextSize.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkLegTitleTextSize.TabIndex = 5
         '
         'grpLegendPosition
         '
@@ -417,31 +396,21 @@ Partial Class sdgThemesSub
         Me.ucrChkRemoveLegend.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkRemoveLegend.TabIndex = 2
         '
-        'GroupBox1
+        'ucrBaseSubdialog
         '
-        Me.GroupBox1.Controls.Add(Me.ucrChkLegTitleTextSize)
-        Me.GroupBox1.Location = New System.Drawing.Point(6, 126)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(413, 100)
-        Me.GroupBox1.TabIndex = 4
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "GroupBox1"
-        '
-        'ucrChkLegTitleTextSize
-        '
-        Me.ucrChkLegTitleTextSize.Checked = False
-        Me.ucrChkLegTitleTextSize.Location = New System.Drawing.Point(3, 19)
-        Me.ucrChkLegTitleTextSize.Name = "ucrChkLegTitleTextSize"
-        Me.ucrChkLegTitleTextSize.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkLegTitleTextSize.TabIndex = 5
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(182, 494)
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(148, 30)
+        Me.ucrBaseSubdialog.TabIndex = 2
         '
         'sdgThemesSub
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(531, 493)
+        Me.ClientSize = New System.Drawing.Size(531, 529)
+        Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.TabThemes)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgThemesSub"
@@ -455,9 +424,9 @@ Partial Class sdgThemesSub
         Me.tbPanel.ResumeLayout(False)
         Me.tbBackground.ResumeLayout(False)
         Me.tbLegend.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
         Me.grpLegendPosition.ResumeLayout(False)
         Me.grpLegendPosition.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -472,19 +441,15 @@ Partial Class sdgThemesSub
     Friend WithEvents ucrPlotTitle As ucrELementTextControl
     Friend WithEvents ucrThemeTitleXAxis As ucrELementTextControl
     Friend WithEvents ucrThemeTitleYAxis As ucrELementTextControl
-    Friend WithEvents ucrChkAllLabels As ucrCheck
     Friend WithEvents ucrThemeAxesTickLabels As ucrELementTextControl
     Friend WithEvents ucrThemeBottomXAxis As ucrELementTextControl
     Friend WithEvents ucrThemeLeftYAxis As ucrELementTextControl
-    Friend WithEvents ucrChkAllLines As ucrCheck
-    Friend WithEvents ucrChkAllTickMarkers As ucrCheck
     Friend WithEvents ucrTickMarksAxes As ucrElementLineControl
     Friend WithEvents ucrThemeAxesLines As ucrElementLineControl
     Friend WithEvents ucrXAxisLines As ucrElementLineControl
     Friend WithEvents ucrTickMarksXAxis As ucrElementLineControl
     Friend WithEvents ucrYAxisLines As ucrElementLineControl
     Friend WithEvents ucrTickMarksYAxis As ucrElementLineControl
-    Friend WithEvents ucrChkAllGridLines As ucrCheck
     Friend WithEvents ucrPanelGrid As ucrElementLineControl
     Friend WithEvents ucrPanelGridMajor As ucrElementLineControl
     Friend WithEvents ucrPanelGridMinor As ucrElementLineControl
@@ -502,4 +467,5 @@ Partial Class sdgThemesSub
     Friend WithEvents ucrChkRemoveLegend As ucrCheck
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents ucrChkLegTitleTextSize As ucrCheck
+    Friend WithEvents ucrBaseSubdialog As ucrButtonsSubdialogue
 End Class
