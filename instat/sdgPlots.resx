@@ -1479,18 +1479,6 @@
   <data name="urChkSelectTheme.TabIndex" type="System.Int32, mscorlib">
     <value>106</value>
   </data>
-  <data name="&gt;&gt;urChkSelectTheme.Name" xml:space="preserve">
-    <value>urChkSelectTheme</value>
-  </data>
-  <data name="&gt;&gt;urChkSelectTheme.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;urChkSelectTheme.Parent" xml:space="preserve">
-    <value>tbpTheme</value>
-  </data>
-  <data name="&gt;&gt;urChkSelectTheme.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;ucrNudYaxisMarkSize.Name" xml:space="preserve">
     <value>ucrNudYaxisMarkSize</value>
   </data>
@@ -1662,29 +1650,11 @@
   <data name="&gt;&gt;cmdSimpleOptions.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="urChkSelectTheme.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 14</value>
-  </data>
   <data name="grpCommonOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>455, 243</value>
   </data>
-  <data name="grpCommonOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
   <data name="grpCommonOptions.Text" xml:space="preserve">
     <value>Common Options</value>
-  </data>
-  <data name="&gt;&gt;grpCommonOptions.Name" xml:space="preserve">
-    <value>grpCommonOptions</value>
-  </data>
-  <data name="&gt;&gt;grpCommonOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpCommonOptions.Parent" xml:space="preserve">
-    <value>tbpTheme</value>
-  </data>
-  <data name="&gt;&gt;urChkSelectTheme.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="ucrNudYaxisMarkSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>246, 205</value>
@@ -1941,26 +1911,8 @@
   <data name="grpCommonOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 81</value>
   </data>
-  <data name="grpCommonOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>455, 243</value>
-  </data>
   <data name="grpCommonOptions.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
-  </data>
-  <data name="grpCommonOptions.Text" xml:space="preserve">
-    <value>Common Options</value>
-  </data>
-  <data name="&gt;&gt;grpCommonOptions.Name" xml:space="preserve">
-    <value>grpCommonOptions</value>
-  </data>
-  <data name="&gt;&gt;grpCommonOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpCommonOptions.Parent" xml:space="preserve">
-    <value>tbpTheme</value>
-  </data>
-  <data name="&gt;&gt;grpCommonOptions.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="lblFont.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
