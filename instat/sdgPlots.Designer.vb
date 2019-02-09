@@ -78,6 +78,7 @@ Partial Class sdgPlots
         Me.tbpYAxis = New System.Windows.Forms.TabPage()
         Me.ucrYAxis = New instat.ucrAxes()
         Me.tbpTheme = New System.Windows.Forms.TabPage()
+        Me.cmdSimpleOptions = New System.Windows.Forms.Button()
         Me.urChkSelectTheme = New instat.ucrCheck()
         Me.grpCommonOptions = New System.Windows.Forms.GroupBox()
         Me.ucrNudYaxisMarkSize = New instat.ucrNud()
@@ -399,6 +400,7 @@ Partial Class sdgPlots
         '
         'tbpTheme
         '
+        Me.tbpTheme.Controls.Add(Me.cmdSimpleOptions)
         Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
         Me.tbpTheme.Controls.Add(Me.grpCommonOptions)
         Me.tbpTheme.Controls.Add(Me.lblFont)
@@ -408,6 +410,12 @@ Partial Class sdgPlots
         Me.tbpTheme.Name = "tbpTheme"
         Me.tbpTheme.Tag = "Theme"
         Me.tbpTheme.UseVisualStyleBackColor = True
+        '
+        'cmdSimpleOptions
+        '
+        resources.ApplyResources(Me.cmdSimpleOptions, "cmdSimpleOptions")
+        Me.cmdSimpleOptions.Name = "cmdSimpleOptions"
+        Me.cmdSimpleOptions.UseVisualStyleBackColor = True
         '
         'urChkSelectTheme
         '
@@ -652,7 +660,7 @@ Partial Class sdgPlots
     Friend WithEvents ucrNudXaxisMarkSize As ucrNud
 
     Friend WithEvents ucrChkLabeler As ucrCheck
-
+    Friend WithEvents cmdSimpleOptions As Button
 End Class
 
 
