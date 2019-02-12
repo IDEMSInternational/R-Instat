@@ -170,6 +170,8 @@ Public Class dlgPICSACrops
         ucrChkPrintDataProp.SetParameter(New RParameter("print_table", 9), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkPrintDataProp.SetRDefault("TRUE")
 
+        ucrCheckPlantingDays.AddParameterPresentCondition(True, "planting_days", True)
+        ucrCheckPlantingDays.AddParameterPresentCondition(False, "planting_days", False)
         ucrCheckPlantingDays.SetText("Planting Day(s)")
 
         'Linking of controls
@@ -222,6 +224,7 @@ Public Class dlgPICSACrops
         'ucrInputPlantingLengths.SetRCode(clsCropsFunction, bReset)
         'ucrInputWaterAmounts.SetRCode(clsCropsFunction, bReset)
 
+        ucrCheckPlantingDays.SetRCode(clsCropsFunction, bReset)
         ucrChkDataProp.SetRCode(clsCropsFunction, bReset)
         ucrChkPrintDataProp.SetRCode(clsCropsFunction, bReset)
     End Sub
