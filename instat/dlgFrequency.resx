@@ -267,10 +267,10 @@
     <value>1</value>
   </data>
   <data name="ucrInputNA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 150</value>
+    <value>100, 150</value>
   </data>
   <data name="ucrInputNA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 21</value>
+    <value>79, 21</value>
   </data>
   <data name="ucrInputNA.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -336,10 +336,10 @@
     <value>5</value>
   </data>
   <data name="ucrInputPageBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 71</value>
+    <value>100, 71</value>
   </data>
   <data name="ucrInputPageBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 21</value>
+    <value>80, 21</value>
   </data>
   <data name="ucrInputPageBy.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -462,7 +462,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>576, 478</value>
+    <value>616, 478</value>
   </data>
   <data name="ucrSaveTable.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 391</value>
@@ -721,7 +721,7 @@
     <value>3</value>
   </data>
   <data name="grpDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 194</value>
+    <value>438, 194</value>
   </data>
   <data name="grpDisplay.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 192</value>

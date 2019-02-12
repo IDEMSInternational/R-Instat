@@ -78,8 +78,21 @@ Partial Class sdgPlots
         Me.tbpYAxis = New System.Windows.Forms.TabPage()
         Me.ucrYAxis = New instat.ucrAxes()
         Me.tbpTheme = New System.Windows.Forms.TabPage()
+        Me.cmdSimpleOptions = New System.Windows.Forms.Button()
         Me.urChkSelectTheme = New instat.ucrCheck()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.grpCommonOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrNudYaxisMarkSize = New instat.ucrNud()
+        Me.ucrNudXaxisMarkSize = New instat.ucrNud()
+        Me.ucrNudYSize = New instat.ucrNud()
+        Me.ucrNudXSize = New instat.ucrNud()
+        Me.ucrNudXAngle = New instat.ucrNud()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrChkYaxisTickMarkLabelSize = New instat.ucrCheck()
+        Me.ucrChkXaxisTickMarkLabelSize = New instat.ucrCheck()
+        Me.ucrChkYaxisSize = New instat.ucrCheck()
+        Me.ucrChkXaxisSize = New instat.ucrCheck()
+        Me.ucrChkXaxisAngle = New instat.ucrCheck()
+        Me.ucrChkLegendPosition = New instat.ucrCheck()
         Me.lblFont = New System.Windows.Forms.Label()
         Me.cmdAllOptions = New System.Windows.Forms.Button()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
@@ -94,6 +107,7 @@ Partial Class sdgPlots
         Me.tbpXAxis.SuspendLayout()
         Me.tbpYAxis.SuspendLayout()
         Me.tbpTheme.SuspendLayout()
+        Me.grpCommonOptions.SuspendLayout()
         Me.tbpCoordinates.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -386,8 +400,9 @@ Partial Class sdgPlots
         '
         'tbpTheme
         '
+        Me.tbpTheme.Controls.Add(Me.cmdSimpleOptions)
         Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
-        Me.tbpTheme.Controls.Add(Me.GroupBox1)
+        Me.tbpTheme.Controls.Add(Me.grpCommonOptions)
         Me.tbpTheme.Controls.Add(Me.lblFont)
         Me.tbpTheme.Controls.Add(Me.cmdAllOptions)
         Me.tbpTheme.Controls.Add(Me.ucrInputThemes)
@@ -396,17 +411,128 @@ Partial Class sdgPlots
         Me.tbpTheme.Tag = "Theme"
         Me.tbpTheme.UseVisualStyleBackColor = True
         '
+        'cmdSimpleOptions
+        '
+        resources.ApplyResources(Me.cmdSimpleOptions, "cmdSimpleOptions")
+        Me.cmdSimpleOptions.Name = "cmdSimpleOptions"
+        Me.cmdSimpleOptions.UseVisualStyleBackColor = True
+        '
         'urChkSelectTheme
         '
         Me.urChkSelectTheme.Checked = False
         resources.ApplyResources(Me.urChkSelectTheme, "urChkSelectTheme")
         Me.urChkSelectTheme.Name = "urChkSelectTheme"
         '
-        'GroupBox1
+        'grpCommonOptions
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
+        Me.grpCommonOptions.Controls.Add(Me.ucrNudYaxisMarkSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrNudXaxisMarkSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrNudYSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrNudXSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrNudXAngle)
+        Me.grpCommonOptions.Controls.Add(Me.ucrInputLegendPosition)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkYaxisTickMarkLabelSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkXaxisTickMarkLabelSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkYaxisSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkXaxisSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkXaxisAngle)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkLegendPosition)
+        resources.ApplyResources(Me.grpCommonOptions, "grpCommonOptions")
+        Me.grpCommonOptions.Name = "grpCommonOptions"
+        Me.grpCommonOptions.TabStop = False
+        '
+        'ucrNudYaxisMarkSize
+        '
+        Me.ucrNudYaxisMarkSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYaxisMarkSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudYaxisMarkSize, "ucrNudYaxisMarkSize")
+        Me.ucrNudYaxisMarkSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudYaxisMarkSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYaxisMarkSize.Name = "ucrNudYaxisMarkSize"
+        Me.ucrNudYaxisMarkSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudXaxisMarkSize
+        '
+        Me.ucrNudXaxisMarkSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXaxisMarkSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudXaxisMarkSize, "ucrNudXaxisMarkSize")
+        Me.ucrNudXaxisMarkSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudXaxisMarkSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXaxisMarkSize.Name = "ucrNudXaxisMarkSize"
+        Me.ucrNudXaxisMarkSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudYSize
+        '
+        Me.ucrNudYSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudYSize, "ucrNudYSize")
+        Me.ucrNudYSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudYSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYSize.Name = "ucrNudYSize"
+        Me.ucrNudYSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudXSize
+        '
+        Me.ucrNudXSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudXSize, "ucrNudXSize")
+        Me.ucrNudXSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudXSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXSize.Name = "ucrNudXSize"
+        Me.ucrNudXSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudXAngle
+        '
+        Me.ucrNudXAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudXAngle, "ucrNudXAngle")
+        Me.ucrNudXAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudXAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXAngle.Name = "ucrNudXAngle"
+        Me.ucrNudXAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLegendPosition, "ucrInputLegendPosition")
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        '
+        'ucrChkYaxisTickMarkLabelSize
+        '
+        Me.ucrChkYaxisTickMarkLabelSize.Checked = False
+        resources.ApplyResources(Me.ucrChkYaxisTickMarkLabelSize, "ucrChkYaxisTickMarkLabelSize")
+        Me.ucrChkYaxisTickMarkLabelSize.Name = "ucrChkYaxisTickMarkLabelSize"
+        '
+        'ucrChkXaxisTickMarkLabelSize
+        '
+        Me.ucrChkXaxisTickMarkLabelSize.Checked = False
+        resources.ApplyResources(Me.ucrChkXaxisTickMarkLabelSize, "ucrChkXaxisTickMarkLabelSize")
+        Me.ucrChkXaxisTickMarkLabelSize.Name = "ucrChkXaxisTickMarkLabelSize"
+        '
+        'ucrChkYaxisSize
+        '
+        Me.ucrChkYaxisSize.Checked = False
+        resources.ApplyResources(Me.ucrChkYaxisSize, "ucrChkYaxisSize")
+        Me.ucrChkYaxisSize.Name = "ucrChkYaxisSize"
+        '
+        'ucrChkXaxisSize
+        '
+        Me.ucrChkXaxisSize.Checked = False
+        resources.ApplyResources(Me.ucrChkXaxisSize, "ucrChkXaxisSize")
+        Me.ucrChkXaxisSize.Name = "ucrChkXaxisSize"
+        '
+        'ucrChkXaxisAngle
+        '
+        Me.ucrChkXaxisAngle.Checked = False
+        resources.ApplyResources(Me.ucrChkXaxisAngle, "ucrChkXaxisAngle")
+        Me.ucrChkXaxisAngle.Name = "ucrChkXaxisAngle"
+        '
+        'ucrChkLegendPosition
+        '
+        Me.ucrChkLegendPosition.Checked = False
+        resources.ApplyResources(Me.ucrChkLegendPosition, "ucrChkLegendPosition")
+        Me.ucrChkLegendPosition.Name = "ucrChkLegendPosition"
         '
         'lblFont
         '
@@ -467,6 +593,7 @@ Partial Class sdgPlots
         Me.tbpYAxis.ResumeLayout(False)
         Me.tbpTheme.ResumeLayout(False)
         Me.tbpTheme.PerformLayout()
+        Me.grpCommonOptions.ResumeLayout(False)
         Me.tbpCoordinates.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -490,7 +617,7 @@ Partial Class sdgPlots
     Friend WithEvents cmdAllOptions As Button
     Friend WithEvents lblFont As Label
     Friend WithEvents ucrPlotsAdditionalLayers As ucrAdditionalLayers
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents grpCommonOptions As GroupBox
     Friend WithEvents ucrFacetSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents grpLegendTitle As GroupBox
     Friend WithEvents rdoLegendTitleCustom As RadioButton
@@ -518,7 +645,22 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputGraphSubTitle As ucrInputTextBox
     Friend WithEvents urChkSelectTheme As ucrCheck
     Friend WithEvents ucrChkHorizontalplot As ucrCheck
+
+    Friend WithEvents ucrChkYaxisTickMarkLabelSize As ucrCheck
+    Friend WithEvents ucrChkXaxisTickMarkLabelSize As ucrCheck
+    Friend WithEvents ucrChkYaxisSize As ucrCheck
+    Friend WithEvents ucrChkXaxisSize As ucrCheck
+    Friend WithEvents ucrChkXaxisAngle As ucrCheck
+    Friend WithEvents ucrChkLegendPosition As ucrCheck
+    Friend WithEvents ucrNudYSize As ucrNud
+    Friend WithEvents ucrNudXSize As ucrNud
+    Friend WithEvents ucrNudXAngle As ucrNud
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrNudYaxisMarkSize As ucrNud
+    Friend WithEvents ucrNudXaxisMarkSize As ucrNud
+
     Friend WithEvents ucrChkLabeler As ucrCheck
+    Friend WithEvents cmdSimpleOptions As Button
 End Class
 
 

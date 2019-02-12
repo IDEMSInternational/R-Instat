@@ -224,4 +224,5 @@ Public Class dlgMerge
         bMergeColumnsExist = (dctJoinColumns.Count > 0)
         TestOKEnabled()
     End Sub
+
 End Class
