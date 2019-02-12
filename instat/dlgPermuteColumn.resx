@@ -195,7 +195,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudSetSeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 88</value>
+    <value>363, 88</value>
   </data>
   <data name="ucrNudSetSeed.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -216,7 +216,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudNumberofColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 117</value>
+    <value>363, 117</value>
   </data>
   <data name="ucrNudNumberofColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
