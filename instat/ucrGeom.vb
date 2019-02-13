@@ -359,7 +359,7 @@ Public Class ucrGeom
         clsgeom_boxplot.AddLayerParameter("outlier.shape", "numeric", "19", lstParameterStrings:={0, 0, 25}) 'Warning: there are other symbols that we can add here 
         clsgeom_boxplot.AddLayerParameter("outlier.colour", "colour", "NULL")
         clsgeom_boxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Outlier.stroke parameter gives the size of the outliers. It cannot be negative, this would trigger an error in R.
-
+        clsgeom_boxplot.AddLayerParameter("fatten", "numeric", "2", lstParameterStrings:={0, 1, 5})
         'Global Layer parameters
         clsgeom_boxplot.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Warning: when x is continuous, position_dodge requires non-overlapping x intervals (would still work if not respected but sends a warning message).

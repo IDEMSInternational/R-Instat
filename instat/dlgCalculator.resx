@@ -144,7 +144,7 @@
     <value>12, 5</value>
   </data>
   <data name="ucrCalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 352</value>
+    <value>493, 322</value>
   </data>
   <data name="ucrCalc.TabIndex" type="System.Int32, mscorlib">
     <value>174</value>
@@ -168,7 +168,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>499, 422</value>
+    <value>498, 396</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">

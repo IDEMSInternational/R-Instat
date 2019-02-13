@@ -173,14 +173,11 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>415, 345</value>
   </data>
-  <data name="lblMaxSum.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="lblMaxSum.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 210</value>
   </data>
   <data name="lblMaxSum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 13</value>
+    <value>187, 13</value>
   </data>
   <data name="lblMaxSum.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -201,7 +198,9 @@
     <value>0</value>
   </data>
   <data name="ucrNudMaxSum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 207</value>
+
+    <value>200, 207</value>
+
   </data>
   <data name="ucrNudMaxSum.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
