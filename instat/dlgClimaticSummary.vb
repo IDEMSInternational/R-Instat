@@ -162,7 +162,7 @@ Public Class dlgClimaticSummary
         bResetSubdialog = True
         ucrSelectorVariable.Reset()
         ucrReceiverElement.SetMeAsReceiver()
-
+        ucrChkAddDateColumn.Enabled = False
         'TODO: this changes to from >= receiver and to <= receiver if annual-variable is checekd.
         clsFromAndToConditionOperator.bToScriptAsRString = True
         clsDayFilterCalc.SetRCommand("instat_calculation$new")
