@@ -170,13 +170,23 @@ Public Class dlgPICSACrops
         ucrChkPrintDataProp.SetParameter(New RParameter("print_table", 9), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkPrintDataProp.SetRDefault("TRUE")
 
-        ucrCheckPlantingDays.AddParameterPresentCondition(True, "planting_days", True)
-        ucrCheckPlantingDays.AddParameterPresentCondition(False, "planting_days", False)
+        ucrCheckPlantingDays.AddParameterPresentCondition(True, "plant_days", True)
+        ucrCheckPlantingDays.AddParameterPresentCondition(False, "plant_days", False)
         ucrCheckPlantingDays.SetText("Planting Day(s)")
+
+        ucrChkWaterAmounts.AddParameterPresentCondition(True, "rain_totals", True)
+        ucrChkWaterAmounts.AddParameterPresentCondition(False, "rain_totals", False)
+        ucrChkWaterAmounts.SetText("Water Amounts(s)")
+
+        ucrChkPlantingLengthDays.AddParameterPresentCondition(True, "plant_lengths", True)
+        ucrChkPlantingLengthDays.AddParameterPresentCondition(False, "plant_lengths", False)
+        ucrChkPlantingLengthDays.SetText("Planting Length Day(s)")
 
         'Linking of controls
         ucrChkDataProp.AddToLinkedControls(ucrChkPrintDataProp, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrCheckPlantingDays.AddToLinkedControls(ucrInputPlantingDates, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkWaterAmounts.AddToLinkedControls(ucrInputWaterAmounts, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkPlantingLengthDays.AddToLinkedControls(ucrInputPlantingLengths, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -225,6 +235,8 @@ Public Class dlgPICSACrops
         'ucrInputWaterAmounts.SetRCode(clsCropsFunction, bReset)
 
         ucrCheckPlantingDays.SetRCode(clsCropsFunction, bReset)
+        ucrChkWaterAmounts.SetRCode(clsCropsFunction, bReset)
+        ucrChkPlantingLengthDays.SetRCode(clsCropsFunction, bReset)
         ucrChkDataProp.SetRCode(clsCropsFunction, bReset)
         ucrChkPrintDataProp.SetRCode(clsCropsFunction, bReset)
     End Sub
@@ -248,27 +260,15 @@ Public Class dlgPICSACrops
     End Sub
 
     Private Sub ucrInputPlantingDates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPlantingDates.ControlValueChanged
-        If ucrInputPlantingDates.IsEmpty Then
-            clsCropsFunction.RemoveParameterByName("plant_days")
-        Else
-            clsCropsFunction.AddParameter("plant_days", "c(" & ucrInputPlantingDates.GetText() & ")", iPosition:=6)
-        End If
+        PlantingDaysParam()
     End Sub
 
     Private Sub ucrInputPlantingLengths_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPlantingLengths.ControlValueChanged
-        If ucrInputPlantingLengths.IsEmpty Then
-            clsCropsFunction.RemoveParameterByName("plant_lengths")
-        Else
-            clsCropsFunction.AddParameter("plant_lengths", "c(" & ucrInputPlantingLengths.GetText() & ")", iPosition:=7)
-        End If
+        PlantingLengthsParam()
     End Sub
 
     Private Sub ucrInputWaterAmounts_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputWaterAmounts.ControlValueChanged
-        If ucrInputWaterAmounts.IsEmpty Then
-            clsCropsFunction.RemoveParameterByName("rain_totals")
-        Else
-            clsCropsFunction.AddParameter("rain_totals", "c(" & ucrInputWaterAmounts.GetText() & ")", iPosition:=8)
-        End If
+        WaterAmountsParam()
     End Sub
 
     Private Sub ucrSelectorForCrops_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForCrops.ControlValueChanged
@@ -276,6 +276,42 @@ Public Class dlgPICSACrops
             clsCropsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForCrops.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         Else
             clsCropsFunction.AddParameter("season_data_name", Chr(34) & ucrSelectorForCrops.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=8)
+        End If
+    End Sub
+
+    Private Sub ucrCheckPlantingDays_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCheckPlantingDays.ControlValueChanged
+        PlantingDaysParam()
+    End Sub
+
+    Private Sub ucrChkWaterAmounts_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWaterAmounts.ControlValueChanged
+        WaterAmountsParam()
+    End Sub
+
+    Private Sub ucrChkPlantingLengthDays_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPlantingLengthDays.ControlValueChanged
+        PlantingLengthsParam()
+    End Sub
+
+    Private Sub PlantingLengthsParam()
+        If ucrChkPlantingLengthDays.Checked AndAlso ucrInputPlantingLengths.Visible Then
+            clsCropsFunction.AddParameter("plant_lengths", "c(" & ucrInputPlantingLengths.GetText() & ")", iPosition:=7)
+        Else
+            clsCropsFunction.RemoveParameterByName("plant_lengths")
+        End If
+    End Sub
+
+    Private Sub PlantingDaysParam()
+        If ucrCheckPlantingDays.Checked AndAlso ucrInputPlantingDates.Visible Then
+            clsCropsFunction.AddParameter("plant_days", "c(" & ucrInputPlantingDates.GetText() & ")", iPosition:=6)
+        Else
+            clsCropsFunction.RemoveParameterByName("plant_days")
+        End If
+    End Sub
+
+    Private Sub WaterAmountsParam()
+        If ucrChkWaterAmounts.Checked AndAlso ucrInputWaterAmounts.Visible Then
+            clsCropsFunction.AddParameter("rain_totals", "c(" & ucrInputWaterAmounts.GetText() & ")", iPosition:=8)
+        Else
+            clsCropsFunction.RemoveParameterByName("rain_totals")
         End If
     End Sub
 End Class
