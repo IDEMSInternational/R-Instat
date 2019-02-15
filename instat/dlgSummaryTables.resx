@@ -333,10 +333,10 @@
     <value>415, 560</value>
   </data>
   <data name="ucrInputNA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 138</value>
+    <value>138, 138</value>
   </data>
   <data name="ucrInputNA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 21</value>
+    <value>77, 21</value>
   </data>
   <data name="ucrInputNA.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -381,7 +381,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudColumnFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 114</value>
+    <value>165, 114</value>
   </data>
   <data name="ucrNudColumnFactors.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -498,10 +498,10 @@
     <value>6</value>
   </data>
   <data name="ucrInputPageBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 66</value>
+    <value>138, 66</value>
   </data>
   <data name="ucrInputPageBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 21</value>
+    <value>78, 21</value>
   </data>
   <data name="ucrInputPageBy.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -519,7 +519,7 @@
     <value>7</value>
   </data>
   <data name="ucrNudSigFigs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 90</value>
+    <value>165, 90</value>
   </data>
   <data name="ucrNudSigFigs.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -567,10 +567,10 @@
     <value>9</value>
   </data>
   <data name="grpDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 297</value>
+    <value>183, 297</value>
   </data>
   <data name="grpDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 169</value>
+    <value>224, 169</value>
   </data>
   <data name="grpDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>

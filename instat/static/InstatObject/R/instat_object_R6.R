@@ -1517,7 +1517,7 @@ DataBook$set("public", "import_from_climsoft", function(stations = c(), elements
   #need to perform checks here
   con = self$get_database_connection()
   if(!is.null(stations)){
-    my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
+    my_stations = paste0("(", paste(paste0("'", stations, "'"), collapse=", "), ")")
     station_info <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
   }
   date_bounds=""
