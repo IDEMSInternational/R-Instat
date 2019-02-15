@@ -43,6 +43,14 @@ Public Class dlgImportDataset
     Private iDataFrameCount As Integer
     Private bMultiFiles As Boolean
 
+    Private strFileName As String
+
+    Private bSupressCheckAllSheets As Boolean = False
+    Private bSupressSheetChange As Boolean = False
+
+    Dim lstSelectedExcelSheetNumbers As New List(Of Integer)
+    Dim lstSelectedExcelSheetNames As New List(Of String)
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -269,6 +277,8 @@ Public Class dlgImportDataset
         ucrNudMaxRowsExcel.Minimum = 0
         ucrNudMaxRowsExcel.Maximum = Decimal.MaxValue
 
+        ucrChkSheetsCheckAll.SetText("Select All")
+
         'hide since no longer using openxlsx package
         ucrInputNamedRegions.Hide()
         lblNamedRegion.Hide()
@@ -395,7 +405,15 @@ Public Class dlgImportDataset
 
     Private Sub TestOkEnabled()
         If (ucrSaveFile.IsComplete OrElse strFileType = "RDS") AndAlso bCanImport Then
-            ucrBase.OKEnabled(True)
+            If strFileType = "XLSX" OrElse strFileType = "XLS" Then
+                If clbSheets.CheckedItems.Count > 0 Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            Else
+                ucrBase.OKEnabled(True)
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -532,9 +550,8 @@ Public Class dlgImportDataset
 
     Public Sub SetControlsFromFile(strFilePath As String)
         Dim strFileExt As String
-        Dim strFileName As String
-        Dim strValidName As String
 
+        strFileName = ""
         If strFilePath <> "" Then
             strFileName = Path.GetFileNameWithoutExtension(strFilePath)
             strFileExt = Path.GetExtension(strFilePath).ToLower()
@@ -595,8 +612,7 @@ Public Class dlgImportDataset
         End If
         If strFileType <> "" AndAlso strFileType <> "RDS" Then
             ucrSaveFile.Visible = True
-            strValidName = frmMain.clsRLink.MakeValidText(strFileName)
-            ucrSaveFile.SetName(strValidName, bSilent:=True)
+            ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
         Else
             ucrSaveFile.Visible = False
         End If
@@ -651,6 +667,8 @@ Public Class dlgImportDataset
             grdDataPreview.Worksheets.Clear()
             grdDataPreview.Enabled = False
             lblCannotImport.Hide()
+            lblImportingSheets.Hide()
+            lblImportingSheets.Text = ""
             bValid = False
             If {"TXT", "CSV", "XLSX", "XLS"}.Contains(strFileType) AndAlso Not ucrInputFilePath.IsEmpty() Then
                 If strFileType = "TXT" Then
@@ -670,6 +688,32 @@ Public Class dlgImportDataset
                     strRowMaxParamName = "nrows"
                     clsTempImport.AddParameter("na.strings", Chr(34) & ucrInputMissingValueStringCSV.GetText & Chr(34))
                 ElseIf strFileType = "XLSX" OrElse strFileType = "XLS" Then
+                    If lstSelectedExcelSheetNames.Count = 0 Then
+                        bCanImport = False
+                        lblCannotImport.Hide()
+                        lblNoPreview.Show()
+                        lblImportingSheets.Show()
+                        lblImportingSheets.Text = "No sheet selected."
+                        GridPreviewVisible(False)
+                        LinesToPreviewVisible(False)
+                        cmdRefreshPreview.Enabled = False
+                        Cursor = Cursors.Default
+                        TestOkEnabled()
+                        Exit Sub
+                        ' TODO temp until multi sheet preview implemented
+                    ElseIf lstSelectedExcelSheetNames.Count > 1 Then
+                        bCanImport = True
+                        lblCannotImport.Hide()
+                        lblNoPreview.Show()
+                        lblImportingSheets.Show()
+                        lblImportingSheets.Text = "Importing the following sheets:" & Environment.NewLine & String.Join(", ", lstSelectedExcelSheetNames)
+                        GridPreviewVisible(False)
+                        LinesToPreviewVisible(False)
+                        cmdRefreshPreview.Enabled = False
+                        Cursor = Cursors.Default
+                        TestOkEnabled()
+                        Exit Sub
+                    End If
                     clsTempImport = clsImportExcel.Clone()
                     strRowMaxParamName = "n_max"
                     clsTempImport.AddParameter("na", Chr(34) & ucrInputMissingValueStringExcel.GetText & Chr(34))
@@ -832,28 +876,67 @@ Public Class dlgImportDataset
 
     Private Sub clbSheets_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles clbSheets.ItemCheck
         Dim strSheetNumbers As String
-        Dim lstSheetNumbers As New List(Of Integer)
 
-        If strFileType = "XLS" OrElse strFileType = "XLSX" Then
-            For Each i As Integer In clbSheets.CheckedIndices
-                lstSheetNumbers.Add(i + 1)
+        If Not bSupressSheetChange Then
+            lstSelectedExcelSheetNumbers.Clear()
+            lstSelectedExcelSheetNames.Clear()
+            If strFileType = "XLS" OrElse strFileType = "XLSX" Then
+                For Each i As Integer In clbSheets.CheckedIndices
+                    lstSelectedExcelSheetNumbers.Add(i + 1)
+                    lstSelectedExcelSheetNames.Add(clbSheets.Items.Item(i).ToString())
+                Next
+                If e.NewValue = CheckState.Checked Then
+                    lstSelectedExcelSheetNumbers.Add(e.Index + 1)
+                    lstSelectedExcelSheetNames.Add(clbSheets.Items.Item(e.Index).ToString())
+                Else
+                    lstSelectedExcelSheetNumbers.Remove(e.Index + 1)
+                    lstSelectedExcelSheetNames.Remove(clbSheets.Items.Item(e.Index).ToString())
+                End If
+                If lstSelectedExcelSheetNumbers.Count = 0 Then
+                    clsImportExcel.RemoveParameterByName("which")
+                    clsImportExcelMulti.RemoveParameterByName("which")
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
+                    ucrSaveFile.Show()
+                ElseIf lstSelectedExcelSheetNumbers.Count = 1 Then
+                    strSheetNumbers = lstSelectedExcelSheetNumbers(0)
+                    clsImportExcel.AddParameter("which", strSheetNumbers)
+                    ucrSaveFile.SetName(clbSheets.Items.Item(lstSelectedExcelSheetNumbers(0) - 1).ToString(), bSilent:=True)
+                    ucrSaveFile.Focus()
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
+                    ucrSaveFile.Show()
+                Else
+                    strSheetNumbers = "c(" & String.Join(",", lstSelectedExcelSheetNumbers) & ")"
+                    clsImportExcelMulti.AddParameter("which", strSheetNumbers)
+                    ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcelMulti)
+                    ucrSaveFile.Hide()
+                End If
+                bSupressCheckAllSheets = True
+                If lstSelectedExcelSheetNumbers.Count = clbSheets.Items.Count Then
+                    ucrChkSheetsCheckAll.Checked = True
+                Else
+                    ucrChkSheetsCheckAll.Checked = False
+                End If
+                bSupressCheckAllSheets = False
+                ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=(lstSelectedExcelSheetNumbers.Count > 1))
+                RefreshFrameView()
+                TestOkEnabled()
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrChkSheetsCheckAll_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSheetsCheckAll.ControlValueChanged
+        Dim bCheckAll As Boolean
+
+        If Not bSupressCheckAllSheets Then
+            bCheckAll = ucrChkSheetsCheckAll.Checked
+            bSupressSheetChange = True
+            For i As Integer = 0 To clbSheets.Items.Count - 1
+                If i = clbSheets.Items.Count - 1 Then
+                    bSupressSheetChange = False
+                End If
+                clbSheets.SetItemChecked(i, bCheckAll)
             Next
-            If e.NewValue = CheckState.Checked Then
-                lstSheetNumbers.Add(e.Index + 1)
-            Else
-                lstSheetNumbers.Remove(e.Index + 1)
-            End If
-            If lstSheetNumbers.Count = 1 Then
-                strSheetNumbers = lstSheetNumbers(0)
-                clsImportExcel.AddParameter("which", strSheetNumbers)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
-            Else
-                strSheetNumbers = "c(" & String.Join(",", lstSheetNumbers) & ")"
-                clsImportExcelMulti.AddParameter("which", strSheetNumbers)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcelMulti)
-            End If
-            ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=(lstSheetNumbers.Count > 1))
-            RefreshFrameView()
         End If
     End Sub
 End Class
