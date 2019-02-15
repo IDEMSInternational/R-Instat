@@ -28,6 +28,8 @@ Public Class ucrSave
     Private bAssignToIsPrefix As Boolean = False
     Private bAssignToColumnWithoutNames As Boolean = False
     Private bInsertColumnBefore As Boolean = False
+    ' If true then a list of data frames is being assigned, otherwise a single data frame
+    Public bDataFrameList As Boolean = False
     Private strAssignToIfUnchecked As String = ""
     Private strGlobalDataName As String = ""
 
@@ -117,10 +119,11 @@ Public Class ucrSave
         UpdateRCode()
     End Sub
 
-    Public Sub SetAssignToBooleans(Optional bTempAssignToIsPrefix As Boolean = False, Optional bTempAssignToColumnWithoutNames As Boolean = False, Optional bTempInsertColumnBefore As Boolean = False)
+    Public Sub SetAssignToBooleans(Optional bTempAssignToIsPrefix As Boolean = False, Optional bTempAssignToColumnWithoutNames As Boolean = False, Optional bTempInsertColumnBefore As Boolean = False, Optional bTempDataFrameList As Boolean = False)
         bAssignToIsPrefix = bTempAssignToIsPrefix
         bAssignToColumnWithoutNames = bTempAssignToColumnWithoutNames
         bInsertColumnBefore = bTempInsertColumnBefore
+        bDataFrameList = bTempDataFrameList
         UpdateRCode()
     End Sub
 
@@ -293,7 +296,7 @@ Public Class ucrSave
                             Case "column"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
                             Case "dataframe"
-                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bDataFrameList:=bDataFrameList)
                             Case "graph"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                             Case "model"
