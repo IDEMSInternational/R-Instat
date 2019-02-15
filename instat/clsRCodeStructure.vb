@@ -24,6 +24,8 @@ Public Class RCodeStructure
     Public strAssignToGraph As String
     Public strAssignToSurv As String
     Public strAssignToTable As String
+    ' If true then a list of data frames is being assigned, otherwise a single data frame
+    Public bDataFrameList As Boolean = False
     'These AssingTo's are only relevant in the string case, as RFunction and ROperator have internal equivalents.
     'If they are empty, the output Of the command Is Not linked To an R-instat object.
     'If they are non-empty, that gives the name of the R-instat Object fields it needs to be linked with.
@@ -78,7 +80,7 @@ Public Class RCodeStructure
     End Sub
 
     'Most methods from RFunction/ROperator have been moved here
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempSurv As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True)
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempSurv As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True, Optional bDataFrameList As Boolean = False)
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -104,6 +106,7 @@ Public Class RCodeStructure
         Me.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
         Me.bInsertColumnBefore = bInsertColumnBefore
         Me.bRequireCorrectLength = bRequireCorrectLength
+        Me.bDataFrameList = bDataFrameList
     End Sub
 
     Public Sub RemoveAssignTo()
@@ -229,9 +232,13 @@ Public Class RCodeStructure
                 strAssignTo = clsGetTables.ToScript()
             ElseIf Not strAssignToDataFrame = "" Then
                 clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
-                clsDataList.SetRCommand("list")
-                clsDataList.AddParameter(strAssignToDataFrame, strAssignTo)
-                clsAddData.AddParameter("data_tables", clsRFunctionParameter:=clsDataList)
+                If bDataFrameList Then
+                    clsAddData.AddParameter("data_tables", strAssignTo)
+                Else
+                    clsDataList.SetRCommand("list")
+                    clsDataList.AddParameter(strAssignToDataFrame, strAssignTo)
+                    clsAddData.AddParameter("data_tables", clsRFunctionParameter:=clsDataList)
+                End If
                 strScript = strScript & clsAddData.ToScript() & Environment.NewLine
 
                 clsGetData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
@@ -460,6 +467,7 @@ Public Class RCodeStructure
         clsTempCode.strAssignToGraph = strAssignToGraph
         clsTempCode.strAssignToSurv = strAssignToSurv
         clsTempCode.strAssignToTable = strAssignToTable
+        clsTempCode.bDataFrameList = bDataFrameList
         clsTempCode.bToBeAssigned = bToBeAssigned
         clsTempCode.bIsAssigned = bIsAssigned
         clsTempCode.bAssignToIsPrefix = bAssignToIsPrefix
