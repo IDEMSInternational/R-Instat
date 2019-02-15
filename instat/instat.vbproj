@@ -159,6 +159,36 @@
     <Compile Include="dlgGraphsGUI.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSurvivalDefine.Designer.vb">
+      <DependentUpon>dlgSurvivalDefine.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSurvivalDefine.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSurvivalDescribe.Designer.vb">
+      <DependentUpon>dlgSurvivalDescribe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSurvivalDescribe.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSurvivalModel.Designer.vb">
+      <DependentUpon>dlgSurvivalModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSurvivalModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSurvivalObject.Designer.vb">
+      <DependentUpon>dlgSurvivalObject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSurvivalObject.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSurvivalRates.Designer.vb">
+      <DependentUpon>dlgSurvivalRates.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSurvivalRates.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgThemesSub.Designer.vb">
       <DependentUpon>sdgThemesSub.vb</DependentUpon>
     </Compile>
@@ -2366,6 +2396,21 @@
   <ItemGroup>
     <EmbeddedResource Include="dlgGraphsGUI.resx">
       <DependentUpon>dlgGraphsGUI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSurvivalDefine.resx">
+      <DependentUpon>dlgSurvivalDefine.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSurvivalDescribe.resx">
+      <DependentUpon>dlgSurvivalDescribe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSurvivalModel.resx">
+      <DependentUpon>dlgSurvivalModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSurvivalObject.resx">
+      <DependentUpon>dlgSurvivalObject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSurvivalRates.resx">
+      <DependentUpon>dlgSurvivalRates.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgThemesSub.resx">
       <DependentUpon>sdgThemesSub.vb</DependentUpon>
