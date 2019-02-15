@@ -154,7 +154,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSeparator.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 188</value>
+    <value>266, 188</value>
   </data>
   <data name="lblSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -199,7 +199,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputSeparator.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 184</value>
+    <value>359, 180</value>
   </data>
   <data name="ucrInputSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 21</value>
@@ -289,7 +289,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>438, 333</value>
+    <value>452, 333</value>
   </data>
   <data name="ucrSelectorCombineFactors.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>

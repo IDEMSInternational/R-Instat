@@ -205,6 +205,7 @@ Partial Class dlgInsertColumn
         '
         'ucrSelectorInsertColumns
         '
+        Me.ucrSelectorInsertColumns.bDropUnusedFilterLevels = False
         Me.ucrSelectorInsertColumns.bShowHiddenColumns = False
         Me.ucrSelectorInsertColumns.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorInsertColumns, "ucrSelectorInsertColumns")
@@ -296,7 +297,6 @@ Partial Class dlgInsertColumn
         Me.grpOptions.ResumeLayout(False)
         Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents lblStartPos As Label
