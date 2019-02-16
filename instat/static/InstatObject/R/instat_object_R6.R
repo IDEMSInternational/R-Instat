@@ -49,6 +49,7 @@ DataBook$set("public", "import_data", function(data_tables = list(), data_tables
                                                     data_tables_metadata = rep(list(list()),length(data_tables)),
                                                     data_tables_filters = rep(list(list()),length(data_tables)),
                                                     imported_from = as.list(rep("",length(data_tables))), 
+                                                    data_names = NULL,
                                                     messages=TRUE, convert=TRUE, create=TRUE)
 {
   if (missing(data_tables) || length(data_tables) == 0) {
@@ -77,11 +78,17 @@ DataBook$set("public", "import_data", function(data_tables = list(), data_tables
       stop("imported_from must be a list of the same length as data_tables")
     }
     
+    if(!is.null(data_names) && length(data_names) != length(data_names)) {
+      stop("If data_names is specified it must be a list of the same length as data_tables")
+    }
+    
     # loop through the data_tables list and create a data object for each
     # data.frame given
     new_data_objects = list()
     for ( i in (1:length(data_tables)) ) {
-      new_data = DataSheet$new(data=data_tables[[i]], data_name = names(data_tables)[[i]],
+      curr_name <- names(data_tables)[[i]]
+      if(is.null(curr_name) && !is.null(data_names)) curr_name <- data_names[i]
+      new_data = DataSheet$new(data=data_tables[[i]], data_name = curr_name,
                                  variables_metadata = data_tables_variables_metadata[[i]],
                                  metadata = data_tables_metadata[[i]], 
                                  imported_from = imported_from[[i]], 
