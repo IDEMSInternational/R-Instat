@@ -380,6 +380,9 @@ Public Class dlgImportDataset
         grpCSV.Hide()
         grpRDS.Hide()
         grpExcel.Hide()
+        clbSheets.Hide()
+        lblSelectSheets.Hide()
+        ucrChkSheetsCheckAll.Hide()
         TextPreviewVisible(False)
         lblNoPreview.Hide()
         lblCannotImport.Hide()
@@ -406,7 +409,7 @@ Public Class dlgImportDataset
     Private Sub TestOkEnabled()
         If (ucrSaveFile.IsComplete OrElse strFileType = "RDS") AndAlso bCanImport Then
             If strFileType = "XLSX" OrElse strFileType = "XLS" Then
-                If clbSheets.CheckedItems.Count > 0 Then
+                If lstSelectedExcelSheetNumbers.Count > 0 Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
@@ -459,6 +462,9 @@ Public Class dlgImportDataset
                     grpText.Hide()
                     grpCSV.Hide()
                     grpExcel.Hide()
+                    clbSheets.Hide()
+                    lblSelectSheets.Hide()
+                    ucrChkSheetsCheckAll.Hide()
                     grpRDS.Hide()
                     grdDataPreview.Hide()
                     lblDataFrame.Hide()
@@ -485,7 +491,7 @@ Public Class dlgImportDataset
         ucrSaveFile.AddAdditionalRCode(clsImportCSV, iAdditionalPairNo:=2)
         ucrSaveFile.AddAdditionalRCode(clsImportDAT, iAdditionalPairNo:=3)
         ucrSaveFile.AddAdditionalRCode(clsImportExcel, iAdditionalPairNo:=4)
-        ucrSaveFile.AddAdditionalRCode(clsImportExcelMulti, iAdditionalPairNo:=4)
+        ucrSaveFile.AddAdditionalRCode(clsImportExcelMulti, iAdditionalPairNo:=5)
         ucrSaveFile.SetRCode(clsImport, bReset)
 
         'Used by both text and csv functions
@@ -571,6 +577,9 @@ Public Class dlgImportDataset
         ucrPanelFixedWidthText.Hide()
         grpRDS.Hide()
         grpExcel.Hide()
+        clbSheets.Hide()
+        lblSelectSheets.Hide()
+        ucrChkSheetsCheckAll.Hide()
         grpCSV.Hide()
         'TODO This needs to be different when RDS is a data frame
         'need to be able to detect RDS as data.frame/Instat Object
@@ -603,6 +612,9 @@ Public Class dlgImportDataset
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
             End If
             grpExcel.Show()
+            clbSheets.Show()
+            lblSelectSheets.Show()
+            ucrChkSheetsCheckAll.Show()
             FillExcelSheets(strFilePath)
         ElseIf strFileExt <> "" Then
             strFileType = strFileExt.Substring(1).ToUpper()
@@ -611,10 +623,10 @@ Public Class dlgImportDataset
             strFileType = ""
         End If
         If strFileType <> "" AndAlso strFileType <> "RDS" Then
-            ucrSaveFile.Visible = True
+            ucrSaveFile.Show()
             ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
         Else
-            ucrSaveFile.Visible = False
+            ucrSaveFile.Hide()
         End If
         RefreshFilePreview()
         RefreshFrameView()
@@ -897,6 +909,7 @@ Public Class dlgImportDataset
                     clsImportExcelMulti.RemoveParameterByName("which")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
                     ucrSaveFile.Show()
+                    ucrSaveFile.SetDataFrameNames("")
                 ElseIf lstSelectedExcelSheetNumbers.Count = 1 Then
                     strSheetNumbers = lstSelectedExcelSheetNumbers(0)
                     clsImportExcel.AddParameter("which", strSheetNumbers)
@@ -904,12 +917,14 @@ Public Class dlgImportDataset
                     ucrSaveFile.Focus()
                     ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
                     ucrSaveFile.Show()
+                    ucrSaveFile.SetDataFrameNames("")
                 Else
                     strSheetNumbers = "c(" & String.Join(",", lstSelectedExcelSheetNumbers) & ")"
                     clsImportExcelMulti.AddParameter("which", strSheetNumbers)
                     ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcelMulti)
                     ucrSaveFile.Hide()
+                    ucrSaveFile.SetDataFrameNames(lstSelectedExcelSheetNames)
                 End If
                 bSupressCheckAllSheets = True
                 If lstSelectedExcelSheetNumbers.Count = clbSheets.Items.Count Then

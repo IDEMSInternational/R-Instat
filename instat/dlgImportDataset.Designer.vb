@@ -96,7 +96,7 @@ Partial Class dlgImportDataset
         Me.rdoFixedWidthText = New System.Windows.Forms.RadioButton()
         Me.rdoFixedWidthWhiteSpacesText = New System.Windows.Forms.RadioButton()
         Me.clbSheets = New System.Windows.Forms.CheckedListBox()
-        Me.lblSheets = New System.Windows.Forms.Label()
+        Me.lblSelectSheets = New System.Windows.Forms.Label()
         Me.ucrNudPreviewLines = New instat.ucrNud()
         Me.ucrPanelFixedWidthText = New instat.UcrPanel()
         Me.ucrSaveFile = New instat.ucrSave()
@@ -538,11 +538,11 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.clbSheets, "clbSheets")
         Me.clbSheets.Name = "clbSheets"
         '
-        'lblSheets
+        'lblSelectSheets
         '
-        resources.ApplyResources(Me.lblSheets, "lblSheets")
-        Me.lblSheets.Name = "lblSheets"
-        Me.lblSheets.Tag = ""
+        resources.ApplyResources(Me.lblSelectSheets, "lblSelectSheets")
+        Me.lblSelectSheets.Name = "lblSelectSheets"
+        Me.lblSelectSheets.Tag = ""
         '
         'ucrNudPreviewLines
         '
@@ -594,7 +594,7 @@ Partial Class dlgImportDataset
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.lblImportingSheets)
         Me.Controls.Add(Me.ucrChkSheetsCheckAll)
-        Me.Controls.Add(Me.lblSheets)
+        Me.Controls.Add(Me.lblSelectSheets)
         Me.Controls.Add(Me.clbSheets)
         Me.Controls.Add(Me.rdoFixedWidthWhiteSpacesText)
         Me.Controls.Add(Me.rdoSeparatortext)
@@ -697,7 +697,7 @@ Partial Class dlgImportDataset
     Friend WithEvents rdoFixedWidthText As RadioButton
     Friend WithEvents rdoFixedWidthWhiteSpacesText As RadioButton
     Friend WithEvents clbSheets As CheckedListBox
-    Friend WithEvents lblSheets As Label
+    Friend WithEvents lblSelectSheets As Label
     Friend WithEvents ucrChkSheetsCheckAll As ucrCheck
     Friend WithEvents lblImportingSheets As Label
 End Class
