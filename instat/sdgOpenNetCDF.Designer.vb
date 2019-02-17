@@ -65,11 +65,11 @@ Partial Class sdgOpenNetCDF
         Me.ucrInputMaxZ = New instat.ucrInputTextBox()
         Me.ucrInputMinS = New instat.ucrInputTextBox()
         Me.ucrInputMinZ = New instat.ucrInputTextBox()
+        Me.ucrChkGreatCircleDist = New instat.ucrCheck()
         Me.ucrChkIncludeRequestedPoints = New instat.ucrCheck()
         Me.ucrChkOnlyDataVariables = New instat.ucrCheck()
         Me.ucrChkKeepRawTime = New instat.ucrCheck()
         Me.ucrChkIncludeMetadata = New instat.ucrCheck()
-        Me.ucrChkGreatCircleDist = New instat.ucrCheck()
         Me.tbNetCDF.SuspendLayout()
         Me.tbSubset.SuspendLayout()
         Me.grpLocation.SuspendLayout()
@@ -401,6 +401,12 @@ Partial Class sdgOpenNetCDF
         resources.ApplyResources(Me.ucrInputMinZ, "ucrInputMinZ")
         Me.ucrInputMinZ.Name = "ucrInputMinZ"
         '
+        'ucrChkGreatCircleDist
+        '
+        Me.ucrChkGreatCircleDist.Checked = False
+        resources.ApplyResources(Me.ucrChkGreatCircleDist, "ucrChkGreatCircleDist")
+        Me.ucrChkGreatCircleDist.Name = "ucrChkGreatCircleDist"
+        '
         'ucrChkIncludeRequestedPoints
         '
         Me.ucrChkIncludeRequestedPoints.Checked = False
@@ -424,12 +430,6 @@ Partial Class sdgOpenNetCDF
         Me.ucrChkIncludeMetadata.Checked = False
         resources.ApplyResources(Me.ucrChkIncludeMetadata, "ucrChkIncludeMetadata")
         Me.ucrChkIncludeMetadata.Name = "ucrChkIncludeMetadata"
-        '
-        'ucrChkGreatCircleDist
-        '
-        Me.ucrChkGreatCircleDist.Checked = False
-        resources.ApplyResources(Me.ucrChkGreatCircleDist, "ucrChkGreatCircleDist")
-        Me.ucrChkGreatCircleDist.Name = "ucrChkGreatCircleDist"
         '
         'sdgOpenNetCDF
         '
