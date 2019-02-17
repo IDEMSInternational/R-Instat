@@ -4815,9 +4815,6 @@
     <Content Include="static\InstatObject\R\Backend_Components\calculations.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\ggfortify_0.1.0.tar.gz">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="static\Help\Case_Study_Guide_June_2016.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -4917,13 +4914,16 @@
     <Content Include="static\InstatObject\R\Backend_Components\options_by_context.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\Library\Procurement\Uganda15-18.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\abind_1.4-5.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\acepack_1.4.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\agricolae_1.2-8.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\agricolae_1.3-0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\agridat_1.16.zip">
@@ -4932,10 +4932,13 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\AlgDesign_1.1-7.3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\askpass_1.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\assertthat_0.2.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\backports_1.1.2.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\backports_1.1.3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\base64enc_0.1-3.zip">
@@ -4944,13 +4947,7 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\bayesplot_1.6.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\BH_1.66.0-1.zip">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\bindrcpp_0.2.2.zip">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\bindr_0.1.1.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\BH_1.69.0-1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\bitops_1.0-6.zip">
@@ -4959,7 +4956,10 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\boot_1.3-20.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\broom_0.5.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\broom_0.5.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\callr_3.1.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\candisc_0.8-0.zip">
@@ -4977,13 +4977,13 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\cellranger_1.1.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\checkmate_1.8.5.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\checkmate_1.9.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\chron_2.3-53.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\circlize_0.4.4.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\circlize_0.4.5.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\CircStats_0.2-6.zip">
@@ -4992,16 +4992,22 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\circular_0.4-93.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\classInt_0.2-3.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\classInt_0.3-1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\class_7.3-14.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\class_7.3-15.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\clifro_3.2-0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\clifro_3.2-1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\climdex.pcic_1.1-9.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\climdex.pcic_1.1-9.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\clipr_0.5.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\clisymbols_1.2.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\cli_1.0.1.zip">
@@ -5010,13 +5016,13 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\cluster_2.0.7-1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\cmsaf_1.9.4.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\cmsaf_1.9.5.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\coda_0.19-1.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\coda_0.19-2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\codetools_0.2-15.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\codetools_0.2-16.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\coin_1.2-2.zip">
@@ -5025,13 +5031,13 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\colorRamps_2.3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\colorspace_1.3-2.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\colorspace_1.4-0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\combinat_0.0-8.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\cowplot_0.9.3.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\cowplot_0.9.4.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\crayon_1.3.4.zip">
@@ -5040,34 +5046,37 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\crosstalk_1.0.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\curl_3.2.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\curl_3.3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\DAAG_1.22.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\dae_3.0-12.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\dae_3.0-23.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\data.table_1.11.8.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\data.table_1.12.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\DBI_1.0.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\deldir_0.1-15.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\deldir_0.1-16.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\dendextend_1.8.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\dendextend_1.9.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\DEoptimR_1.0-8.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\devtools_1.13.6.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\desc_1.2.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\digest_0.6.17.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\devtools_2.0.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\digest_0.6.18.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\diptest_0.75-7.zip">
@@ -5079,22 +5088,19 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\dotCall64_1.0-0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\dplyr_0.7.6.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\dplyr_0.8.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\dummies_1.5.6.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\e1071_1.7-0.zip">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\effects_4.0-2.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\e1071_1.7-0.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ellipse_0.4.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\emmeans_1.2.4.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\emmeans_1.3.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\EnvStats_2.3.1.zip">
@@ -5103,7 +5109,7 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\estimability_1.3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\evaluate_0.11.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\evaluate_0.13.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\Evapotranspiration_1.12.zip">
@@ -5130,7 +5136,7 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\fields_9.6.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\fitdistrplus_1.0-11.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\fitdistrplus_1.0-14.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\flashClust_1.01-2.zip">
@@ -5154,6 +5160,9 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\fpc_2.1-11.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\fs_1.2.6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\gapminder_0.3.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -5161,6 +5170,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\gdtools_0.1.7.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\generics_0.0.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\geosphere_1.5-7.zip">
@@ -5175,10 +5187,10 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ggdendro_0.1-20.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ggeffects_0.5.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ggeffects_0.8.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ggformula_0.9.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ggformula_0.9.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ggfortify_0.4.5.zip">
@@ -5187,10 +5199,10 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ggmosaic_0.2.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ggplot2_3.0.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ggplot2_3.1.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ggpubr_0.1.8.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ggpubr_0.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ggrepel_0.8.0.zip">
@@ -5211,10 +5223,13 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ggthemes_4.0.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\git2r_0.23.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\gh_1.0.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\glmmTMB_0.2.2.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\git2r_0.24.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\glmmTMB_0.2.3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\GlobalOptions_0.1.0.zip">
@@ -5229,7 +5244,7 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\goftest_1.1-1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\gplots_3.0.1.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\gplots_3.0.1.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\gridExtra_2.3.zip">
@@ -5241,7 +5256,7 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\gtools_3.8.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\haven_1.1.2.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\haven_2.0.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\heplots_1.3-5.zip">
@@ -5253,13 +5268,13 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\highr_0.7.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\Hmisc_4.1-1.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\Hmisc_4.2-0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\hms_0.4.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\htmlTable_1.12.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\htmlTable_1.13.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\htmltools_0.3.6.zip">
@@ -5268,10 +5283,13 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\htmlwidgets_1.3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\httpuv_1.4.5.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\httpuv_1.4.5.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\httr_1.3.1.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\httr_1.4.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ini_0.3.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\iterators_1.0.10.zip">
@@ -5280,7 +5298,7 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\JBTools_0.7.2.9.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\jsonlite_1.5.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\jsonlite_1.6.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\kernlab_0.9-27.zip">
@@ -5292,28 +5310,31 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\klaR_0.6-14.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\knitr_1.20.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\knitr_1.21.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\labeling_0.3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\labelled_1.1.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\labelled_2.0.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\Lahman_6.0-0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\later_0.7.5.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\later_0.8.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\latticeExtra_0.6-28.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\lattice_0.20-35.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\lattice_0.20-38.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\lazyeval_0.2.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\leaflet_2.0.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\leaps_3.0.zip">
@@ -5322,7 +5343,7 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\LearnBayes_2.15.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\lme4_1.1-18-1.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\lme4_1.1-20.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\lmomco_2.3.2.zip">
@@ -5352,25 +5373,25 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\maptools_0.9-4.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\markdown_0.8.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\markdown_0.9.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\MASS_7.3-50.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\MASS_7.3-51.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\MatrixModels_0.4-1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\Matrix_1.2-14.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\Matrix_1.2-15.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\mclust_5.4.1.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\mclust_5.4.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\memoise_1.1.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\mgcv_1.8-24.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\mgcv_1.8-27.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\mime_0.6.zip">
@@ -5385,7 +5406,7 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\mnormt_1.5-5.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\modelr_0.1.2.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\modelr_0.1.3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\modeltools_0.2-22.zip">
@@ -5397,7 +5418,7 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\mosaicData_0.17.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\mosaic_1.4.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\mosaic_1.5.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\multcomp_1.4-8.zip">
@@ -5436,10 +5457,10 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\nycflights13_1.0.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\openair_2.5-0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\openair_2.6-1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\openssl_1.0.2.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\openssl_1.2.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\openxlsx_4.1.0.zip">
@@ -5460,10 +5481,16 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\PCICt_0.5-4.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\pillar_1.3.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\pillar_1.3.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\pkgbuild_1.0.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\pkgconfig_2.0.2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\pkgload_1.0.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\plogr_0.2.0.zip">
@@ -5478,16 +5505,22 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\plyr_1.8.4.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\png_0.1-7.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\polynom_1.3-9.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\prabclus_2.2-6.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\prabclus_2.2-7.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\prediction_0.3.6.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\prediction_0.3.6.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\prettyunits_1.0.2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\processx_3.2.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\productplots_0.1.1.zip">
@@ -5499,19 +5532,22 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\promises_1.0.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\psych_1.8.4.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\psych_1.8.12.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\purrr_0.2.5.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\ps_1.3.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\purrr_0.3.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\pwr_1.2-2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\quantreg_5.36.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\quantreg_5.38.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\questionr_0.6.3.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\questionr_0.7.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\R.methodsS3_1.7.1.zip">
@@ -5520,55 +5556,64 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\R.oo_1.22.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\R6_2.3.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\R6_2.4.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\raster_2.6-7.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\raster_2.8-19.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rcmdcheck_1.3.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\RColorBrewer_1.1-2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\RcppEigen_0.3.3.4.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\RcppEigen_0.3.3.5.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\RcppRoll_0.3.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\Rcpp_0.12.19.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\Rcpp_1.0.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\RCurl_1.95-4.11.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\readr_1.1.1.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\readODS_1.6.7.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\readxl_1.1.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\readr_1.3.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\readxl_1.2.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rematch_1.0.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\remotes_2.0.2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\reshape2_1.4.3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\reshape_0.8.7.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\reshape_0.8.8.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rio_0.5.10.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rio_0.5.16.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rje_1.9.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rlang_0.2.2.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rlang_0.3.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rlist_0.4.6.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\RMySQL_0.10.15.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\RMySQL_0.10.16.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\RNetCDF_1.9-1.zip">
@@ -5580,10 +5625,13 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rpart_4.1-13.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rprojroot_1.3-2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rrefine_1.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rstudioapi_0.8.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rstudioapi_0.9.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rtf_0.4-13.zip">
@@ -5604,28 +5652,31 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\scatterplot3d_0.3-41.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\sf_0.6-3.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\sessioninfo_1.1.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\sf_0.7-2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\shape_1.4.4.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\shiny_1.1.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\shiny_1.2.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\signmedian.test_1.5.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\sjlabelled_1.0.14.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\sjlabelled_1.0.16.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\sjmisc_2.7.5.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\sjmisc_2.7.7.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\sjPlot_2.6.0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\sjPlot_2.6.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\sjstats_0.17.1.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\sjstats_0.17.3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\snakecase_0.9.2.zip">
@@ -5634,16 +5685,16 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\sourcetools_0.1.7.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\spam_2.2-0.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\spam_2.2-1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\SparseM_1.77.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\spData_0.2.9.4.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\spData_0.3.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\spdep_0.7-9.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\spdep_1.0-2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\SPEI_1.7.zip">
@@ -5655,40 +5706,43 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\stringdist_0.9.5.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\stringi_1.1.7.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\stringi_1.3.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\stringr_1.3.1.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\stringr_1.4.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\survey_3.33-2.zip">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\survival_2.42-6.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\survival_2.43-3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\svglite_1.2.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\TH.data_1.0-9.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\sys_2.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\tibble_1.4.2.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\TH.data_1.0-10.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\tidyr_0.8.1.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\tibble_2.0.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\tidyselect_0.2.4.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\tidyr_0.8.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\TMB_1.7.14.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\tidyselect_0.2.5.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\TMB_1.7.15.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\trimcluster_0.1-2.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\units_0.6-1.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\units_0.6-2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\usethis_1.4.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\utf8_1.1.4.zip">
@@ -5715,10 +5769,16 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\withr_2.1.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\xfun_0.4.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\xml2_1.2.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\XML_3.98-1.16.zip">
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\XML_3.98-1.17.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\xopen_1.0.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\xtable_1.8-3.zip">
@@ -5731,9 +5791,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\zoo_1.8-4.zip">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\Uganda15-18.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
