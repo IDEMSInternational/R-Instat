@@ -437,6 +437,7 @@ Public Class dlgImportDataset
 
             If dlgOpen.ShowDialog() = DialogResult.OK Then
                 ucrSaveFile.Reset()
+                'TODO This is in place for when we allow multiple files selected.
                 bMultiFiles = (dlgOpen.FileNames.Count > 1)
                 If NumberOfFileTypes(dlgOpen.FileNames) > 1 Then
                     MsgBox("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
