@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgModelling
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgModelling
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgModelling))
         Me.lblModel = New System.Windows.Forms.Label()
@@ -34,6 +34,9 @@ Partial Class dlgModelling
         Me.cmdaov = New System.Windows.Forms.Button()
         Me.cmdlm = New System.Windows.Forms.Button()
         Me.grpStats = New System.Windows.Forms.GroupBox()
+        Me.cmdprincomp = New System.Windows.Forms.Button()
+        Me.cmdppr = New System.Windows.Forms.Button()
+        Me.cmdnls = New System.Windows.Forms.Button()
         Me.cmdMultiply = New System.Windows.Forms.Button()
         Me.cmdColon = New System.Windows.Forms.Button()
         Me.cmdPlus = New System.Windows.Forms.Button()
@@ -63,6 +66,10 @@ Partial Class dlgModelling
         Me.cmdglmnb = New System.Windows.Forms.Button()
         Me.cmdrlm = New System.Windows.Forms.Button()
         Me.grpMASS = New System.Windows.Forms.GroupBox()
+        Me.cmdqda = New System.Windows.Forms.Button()
+        Me.cmdmca = New System.Windows.Forms.Button()
+        Me.cmdlqs = New System.Windows.Forms.Button()
+        Me.cmdlda = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.lblRpackage = New System.Windows.Forms.Label()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
@@ -141,6 +148,9 @@ Partial Class dlgModelling
         '
         'grpStats
         '
+        Me.grpStats.Controls.Add(Me.cmdprincomp)
+        Me.grpStats.Controls.Add(Me.cmdppr)
+        Me.grpStats.Controls.Add(Me.cmdnls)
         Me.grpStats.Controls.Add(Me.cmdspline)
         Me.grpStats.Controls.Add(Me.cmdarima)
         Me.grpStats.Controls.Add(Me.cmdloglin)
@@ -153,6 +163,24 @@ Partial Class dlgModelling
         resources.ApplyResources(Me.grpStats, "grpStats")
         Me.grpStats.Name = "grpStats"
         Me.grpStats.TabStop = False
+        '
+        'cmdprincomp
+        '
+        resources.ApplyResources(Me.cmdprincomp, "cmdprincomp")
+        Me.cmdprincomp.Name = "cmdprincomp"
+        Me.cmdprincomp.UseVisualStyleBackColor = True
+        '
+        'cmdppr
+        '
+        resources.ApplyResources(Me.cmdppr, "cmdppr")
+        Me.cmdppr.Name = "cmdppr"
+        Me.cmdppr.UseVisualStyleBackColor = True
+        '
+        'cmdnls
+        '
+        resources.ApplyResources(Me.cmdnls, "cmdnls")
+        Me.cmdnls.Name = "cmdnls"
+        Me.cmdnls.UseVisualStyleBackColor = True
         '
         'cmdMultiply
         '
@@ -340,6 +368,10 @@ Partial Class dlgModelling
         '
         'grpMASS
         '
+        Me.grpMASS.Controls.Add(Me.cmdqda)
+        Me.grpMASS.Controls.Add(Me.cmdmca)
+        Me.grpMASS.Controls.Add(Me.cmdlqs)
+        Me.grpMASS.Controls.Add(Me.cmdlda)
         Me.grpMASS.Controls.Add(Me.cmdpolr)
         Me.grpMASS.Controls.Add(Me.cmdglmmPQL)
         Me.grpMASS.Controls.Add(Me.cmdglmnb)
@@ -348,6 +380,30 @@ Partial Class dlgModelling
         resources.ApplyResources(Me.grpMASS, "grpMASS")
         Me.grpMASS.Name = "grpMASS"
         Me.grpMASS.TabStop = False
+        '
+        'cmdqda
+        '
+        resources.ApplyResources(Me.cmdqda, "cmdqda")
+        Me.cmdqda.Name = "cmdqda"
+        Me.cmdqda.UseVisualStyleBackColor = True
+        '
+        'cmdmca
+        '
+        resources.ApplyResources(Me.cmdmca, "cmdmca")
+        Me.cmdmca.Name = "cmdmca"
+        Me.cmdmca.UseVisualStyleBackColor = True
+        '
+        'cmdlqs
+        '
+        resources.ApplyResources(Me.cmdlqs, "cmdlqs")
+        Me.cmdlqs.Name = "cmdlqs"
+        Me.cmdlqs.UseVisualStyleBackColor = True
+        '
+        'cmdlda
+        '
+        resources.ApplyResources(Me.cmdlda, "cmdlda")
+        Me.cmdlda.Name = "cmdlda"
+        Me.cmdlda.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
@@ -494,4 +550,11 @@ Partial Class dlgModelling
     Friend WithEvents lblRpackage As Label
     Friend WithEvents ucrChkIncludeArguments As ucrCheck
     Friend WithEvents cmdTilda As Button
+    Friend WithEvents cmdppr As Button
+    Friend WithEvents cmdnls As Button
+    Friend WithEvents cmdprincomp As Button
+    Friend WithEvents cmdlda As Button
+    Friend WithEvents cmdlqs As Button
+    Friend WithEvents cmdmca As Button
+    Friend WithEvents cmdqda As Button
 End Class

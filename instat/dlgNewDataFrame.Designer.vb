@@ -47,6 +47,9 @@ Partial Class dlgNewDataFrame
         Me.rdoEmpty = New System.Windows.Forms.RadioButton()
         Me.rdoConstruct = New System.Windows.Forms.RadioButton()
         Me.dataGridView = New System.Windows.Forms.DataGridView()
+        Me.colRowNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.mnuStripCommand = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuItemCut = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuItemCopy = New System.Windows.Forms.ToolStripMenuItem()
@@ -55,15 +58,12 @@ Partial Class dlgNewDataFrame
         Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblCommand = New System.Windows.Forms.Label()
         Me.btnExample = New System.Windows.Forms.Button()
+        Me.ucrInputCommand = New instat.ucrInputTextBox()
         Me.ucrPnlDataFrame = New instat.UcrPanel()
         Me.ucrNewDFName = New instat.ucrSave()
         Me.ucrNudCols = New instat.ucrNud()
         Me.ucrNudRows = New instat.ucrNud()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputCommand = New instat.ucrInputTextBox()
-        Me.colRowNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuStripCommand.SuspendLayout()
         Me.SuspendLayout()
@@ -128,6 +128,23 @@ Partial Class dlgNewDataFrame
         Me.dataGridView.RowHeadersVisible = False
         Me.dataGridView.RowTemplate.Height = 28
         '
+        'colRowNum
+        '
+        resources.ApplyResources(Me.colRowNum, "colRowNum")
+        Me.colRowNum.Name = "colRowNum"
+        Me.colRowNum.ReadOnly = True
+        '
+        'colName
+        '
+        resources.ApplyResources(Me.colName, "colName")
+        Me.colName.Name = "colName"
+        '
+        'colExpression
+        '
+        Me.colExpression.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        resources.ApplyResources(Me.colExpression, "colExpression")
+        Me.colExpression.Name = "colExpression"
+        '
         'mnuStripCommand
         '
         Me.mnuStripCommand.ImageScalingSize = New System.Drawing.Size(24, 24)
@@ -171,6 +188,14 @@ Partial Class dlgNewDataFrame
         Me.btnExample.Name = "btnExample"
         Me.btnExample.UseVisualStyleBackColor = True
         '
+        'ucrInputCommand
+        '
+        Me.ucrInputCommand.AddQuotesIfUnrecognised = True
+        Me.ucrInputCommand.IsMultiline = True
+        Me.ucrInputCommand.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCommand, "ucrInputCommand")
+        Me.ucrInputCommand.Name = "ucrInputCommand"
+        '
         'ucrPnlDataFrame
         '
         resources.ApplyResources(Me.ucrPnlDataFrame, "ucrPnlDataFrame")
@@ -205,31 +230,6 @@ Partial Class dlgNewDataFrame
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrInputCommand
-        '
-        Me.ucrInputCommand.AddQuotesIfUnrecognised = True
-        Me.ucrInputCommand.IsMultiline = True
-        Me.ucrInputCommand.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputCommand, "ucrInputCommand")
-        Me.ucrInputCommand.Name = "ucrInputCommand"
-        '
-        'colRowNum
-        '
-        resources.ApplyResources(Me.colRowNum, "colRowNum")
-        Me.colRowNum.Name = "colRowNum"
-        Me.colRowNum.ReadOnly = True
-        '
-        'colName
-        '
-        resources.ApplyResources(Me.colName, "colName")
-        Me.colName.Name = "colName"
-        '
-        'colExpression
-        '
-        Me.colExpression.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        resources.ApplyResources(Me.colExpression, "colExpression")
-        Me.colExpression.Name = "colExpression"
         '
         'dlgNewDataFrame
         '

@@ -340,16 +340,13 @@
     <value>grdDataPreview</value>
   </data>
   <data name="&gt;&gt;grdDataPreview.Type" xml:space="preserve">
-    <value>unvell.ReoGrid.ReoGridControl, unvell.ReoGrid, Version=2.0.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>unvell.ReoGrid.ReoGridControl, unvell.ReoGrid, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grdDataPreview.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grdDataPreview.ZOrder" xml:space="preserve">
     <value>17</value>
-  </data>
-  <data name="lblFileOpenPath.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="lblFileOpenPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -358,7 +355,7 @@
     <value>10, 26</value>
   </data>
   <data name="lblFileOpenPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 13</value>
+    <value>62, 13</value>
   </data>
   <data name="lblFileOpenPath.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -412,7 +409,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>165, 22</value>
+    <value>198, 22</value>
   </data>
   <data name="cmdBrowse.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 23</value>
@@ -1655,7 +1652,7 @@ Modify options or select a different file.</value>
     <value>10</value>
   </data>
   <data name="ucrInputFilePath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>40, 23</value>
+    <value>75, 23</value>
   </data>
   <data name="ucrInputFilePath.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>

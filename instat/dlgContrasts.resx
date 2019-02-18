@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 48</value>
+    <value>246, 48</value>
   </data>
   <data name="lblFactorReceiver.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -150,7 +150,7 @@
     <value>True</value>
   </data>
   <data name="lblSelectContrastName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 99</value>
+    <value>246, 99</value>
   </data>
   <data name="lblSelectContrastName.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 13</value>
@@ -213,7 +213,7 @@
     <value>grdLayoutForContrasts</value>
   </data>
   <data name="&gt;&gt;grdLayoutForContrasts.Type" xml:space="preserve">
-    <value>unvell.ReoGrid.ReoGridControl, unvell.ReoGrid, Version=2.0.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>unvell.ReoGrid.ReoGridControl, unvell.ReoGrid, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grdLayoutForContrasts.Parent" xml:space="preserve">
     <value>$this</value>
@@ -222,7 +222,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputContrastName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 114</value>
+    <value>246, 114</value>
   </data>
   <data name="ucrInputContrastName.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 21</value>
@@ -310,7 +310,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverForContrasts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 63</value>
+    <value>246, 63</value>
   </data>
   <data name="ucrReceiverForContrasts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
