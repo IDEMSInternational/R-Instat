@@ -280,10 +280,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoBarChart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 10</value>
+    <value>49, 10</value>
   </data>
   <data name="rdoBarChart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 27</value>
+    <value>110, 27</value>
   </data>
   <data name="rdoBarChart.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -313,10 +313,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoPieChart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>165, 10</value>
+    <value>157, 10</value>
   </data>
   <data name="rdoPieChart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 27</value>
+    <value>110, 27</value>
   </data>
   <data name="rdoPieChart.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -349,10 +349,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 10</value>
+    <value>265, 10</value>
   </data>
   <data name="rdoTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 27</value>
+    <value>110, 27</value>
   </data>
   <data name="rdoTable.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -499,10 +499,10 @@
     <value>14</value>
   </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, 3</value>
+    <value>38, 3</value>
   </data>
   <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 35</value>
+    <value>349, 35</value>
   </data>
   <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

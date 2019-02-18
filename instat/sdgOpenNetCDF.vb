@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
 Imports instat
 Imports instat.Translations
 Imports RDotNet
@@ -29,10 +30,12 @@ Public Class sdgOpenNetCDF
     Private lstMinLabels As List(Of Label)
     Private lstMaxLabels As List(Of Label)
     Private lstDims As List(Of String)
+    Private lstAxesDetected As List(Of Boolean)
     Private lstFunctions As List(Of RFunction)
     Private strFilePath As String
     Private dctAxesNames As New Dictionary(Of String, String)
     Private bUpdating As Boolean = False
+    Public bOKEnabled As Boolean = True
 
     Private Sub sdgOpenNetCDF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -124,19 +127,8 @@ Public Class sdgOpenNetCDF
         ucrPnlLocation.AddParameterPresentCondition(rdoSinglePoint, "lon_points", True)
         ucrPnlLocation.AddParameterIsRFunctionCondition(rdoSinglePoint, "lon_points", False)
 
-        ucrPnlLocation.AddToLinkedControls(ucrInputMinX, {rdoRange}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlLocation.AddToLinkedControls(ucrInputMaxX, {rdoRange}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlLocation.AddToLinkedControls(ucrInputMinY, {rdoRange}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlLocation.AddToLinkedControls(ucrInputMaxY, {rdoRange}, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrPnlLocation.AddToLinkedControls(ucrReceiverPointsX, {rdoPoints}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlLocation.AddToLinkedControls(ucrReceiverPointsY, {rdoPoints}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlLocation.AddToLinkedControls(ucrReceiverPointsID, {rdoPoints}, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrPnlLocation.AddToLinkedControls(ucrInputPointX, {rdoSinglePoint}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlLocation.AddToLinkedControls(ucrInputPointY, {rdoSinglePoint}, bNewLinkedHideIfParameterMissing:=True)
-
         lstDims = New List(Of String)(New String() {"X", "Y", "Z", "S", "T"})
+        lstAxesDetected = New List(Of Boolean)(New Boolean() {False, False, False, False, False})
         lstMinTextBoxes = New List(Of ucrInputTextBox)(New ucrInputTextBox() {ucrInputMinX, ucrInputMinY, ucrInputMinZ, ucrInputMinS})
         lstMaxTextBoxes = New List(Of ucrInputTextBox)(New ucrInputTextBox() {ucrInputMaxX, ucrInputMaxY, ucrInputMaxZ, ucrInputMaxS})
         lstAxesLabels = New List(Of Label)(New Label() {lblX, lblY, lblZ, lblS, lblT})
@@ -252,17 +244,21 @@ Public Class sdgOpenNetCDF
                                 Catch ex As Exception
                                     bShowDimension = False
                                     lstAxesLabels(i).Text = "Could not read time dimension dates from file."
+                                    lstAxesDetected(i) = False
                                 End Try
                                 If bShowDimension Then
                                     lstAxesLabels(i).Text = strDimNames(iIndex) & ":"
+                                    lstAxesDetected(i) = True
                                 End If
                             Else
                                 bShowDimension = False
                                 lstAxesLabels(i).Text = "No " & lstDims(i) & " dimension."
+                                lstAxesDetected(i) = False
                             End If
                         Else
                             bShowDimension = False
                             lstAxesLabels(i).Text = "No " & lstDims(i) & " dimension."
+                            lstAxesDetected(i) = False
                         End If
                         If bShowDimension Then
                             dtpMinT.Visible = True
@@ -287,13 +283,21 @@ Public Class sdgOpenNetCDF
                             lstFunctions(i).AddParameter("min", dcmMin, bIncludeArgumentName:=False)
                             lstFunctions(i).AddParameter("max", dcmMax, bIncludeArgumentName:=False)
                             clsBoundaryListFunction.AddParameter(strDimNames(iIndex), clsRFunctionParameter:=lstFunctions(i))
-                            lstAxesLabels(i).Text = strDimNames(iIndex) & ":"
+                            If strDimNames(iIndex).ToLower = "x" Then
+                                lstAxesLabels(i).Text = strDimNames(iIndex) & " (lon) " & ":"
+                            ElseIf strDimNames(iIndex).ToLower = "y" Then
+                                lstAxesLabels(i).Text = strDimNames(iIndex) & " (lat) " & ":"
+                            Else
+                                lstAxesLabels(i).Text = strDimNames(iIndex) & ":"
+                            End If
+                            lstAxesDetected(i) = True
                         Else
                             lstMinTextBoxes(i).Visible = False
                             lstMaxTextBoxes(i).Visible = False
                             lstMinLabels(i).Visible = False
                             lstMaxLabels(i).Visible = False
                             lstAxesLabels(i).Text = "No " & lstDims(i) & " dimension detected."
+                            lstAxesDetected(i) = False
                         End If
                     End If
                 Next
@@ -353,15 +357,34 @@ Public Class sdgOpenNetCDF
         If Not bUpdating Then
             clsImportNetcdfFunction.RemoveParameterByName("id_points")
             If rdoRange.Checked Then
-                If dctAxesNames.ContainsKey("X") Then
+                ucrReceiverPointsX.Visible = False
+                ucrReceiverPointsY.Visible = False
+                ucrReceiverPointsID.Visible = False
+                ucrInputPointX.Visible = False
+                ucrInputPointY.Visible = False
+                If dctAxesNames.ContainsKey("X") AndAlso lstAxesDetected(0) Then
+                    ucrInputMinX.Visible = True
+                    ucrInputMaxX.Visible = True
                     clsBoundaryListFunction.AddParameter(dctAxesNames("X"), clsRFunctionParameter:=clsXLimitsFunction)
+                Else
+                    ucrInputMinX.Visible = False
+                    ucrInputMaxX.Visible = False
                 End If
-                If dctAxesNames.ContainsKey("Y") Then
+                If dctAxesNames.ContainsKey("Y") AndAlso lstAxesDetected(1) Then
+                    ucrInputMinY.Visible = True
+                    ucrInputMaxY.Visible = True
                     clsBoundaryListFunction.AddParameter(dctAxesNames("Y"), clsRFunctionParameter:=clsYLimitsFunction)
+                Else
+                    ucrInputMinY.Visible = False
+                    ucrInputMaxY.Visible = False
                 End If
                 clsImportNetcdfFunction.RemoveParameterByName("lon_points")
                 clsImportNetcdfFunction.RemoveParameterByName("lat_points")
             ElseIf rdoPoints.Checked OrElse rdoSinglePoint.Checked Then
+                ucrInputMinX.Visible = False
+                ucrInputMaxX.Visible = False
+                ucrInputMinY.Visible = False
+                ucrInputMaxY.Visible = False
                 If dctAxesNames.ContainsKey("X") Then
                     clsBoundaryListFunction.RemoveParameterByName(dctAxesNames("X"))
                 End If
@@ -369,15 +392,80 @@ Public Class sdgOpenNetCDF
                     clsBoundaryListFunction.RemoveParameterByName(dctAxesNames("Y"))
                 End If
                 If rdoPoints.Checked Then
-                    clsImportNetcdfFunction.AddParameter("lon_points", clsRFunctionParameter:=ucrReceiverPointsX.GetVariables())
-                    clsImportNetcdfFunction.AddParameter("lat_points", clsRFunctionParameter:=ucrReceiverPointsY.GetVariables())
-                    clsImportNetcdfFunction.AddParameter("id_points", clsRFunctionParameter:=ucrReceiverPointsID.GetVariables())
+                    ucrReceiverPointsX.Visible = lstAxesDetected(0)
+                    ucrReceiverPointsY.Visible = lstAxesDetected(1)
+                    ucrReceiverPointsID.Visible = lstAxesDetected(0) OrElse lstAxesDetected(1)
+                    ucrInputPointX.Visible = False
+                    ucrInputPointY.Visible = False
+                    If lstAxesDetected(0) Then
+                        clsImportNetcdfFunction.AddParameter("lon_points", clsRFunctionParameter:=ucrReceiverPointsX.GetVariables())
+                    End If
+                    If lstAxesDetected(1) Then
+                        clsImportNetcdfFunction.AddParameter("lat_points", clsRFunctionParameter:=ucrReceiverPointsY.GetVariables())
+                    End If
+                    If (lstAxesDetected(0) OrElse lstAxesDetected(1)) AndAlso Not ucrReceiverPointsID.IsEmpty Then
+                        clsImportNetcdfFunction.AddParameter("id_points", clsRFunctionParameter:=ucrReceiverPointsID.GetVariables())
+                    End If
                 Else
-                    clsImportNetcdfFunction.AddParameter("lon_points", ucrInputPointX.GetText())
-                    clsImportNetcdfFunction.AddParameter("lat_points", ucrInputPointY.GetText())
+                    ucrReceiverPointsX.Visible = False
+                    ucrReceiverPointsY.Visible = False
+                    ucrReceiverPointsID.Visible = False
+                    ucrInputPointX.Visible = lstAxesDetected(0)
+                    ucrInputPointY.Visible = lstAxesDetected(1)
+                    If lstAxesDetected(0) Then
+                        clsImportNetcdfFunction.AddParameter("lon_points", ucrInputPointX.GetText())
+                    End If
+                    If lstAxesDetected(1) Then
+                        clsImportNetcdfFunction.AddParameter("lat_points", ucrInputPointY.GetText())
+                    End If
                 End If
             End If
             ucrSelectorPoints.Visible = (rdoPoints.Checked)
         End If
+    End Sub
+
+    Private Sub sdgOpenNetCDF_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Dim strMessage As String = ""
+        Dim bWarning As Boolean = False
+        Dim result As MsgBoxResult
+
+        For i As Integer = 0 To lstMinTextBoxes.Count - 1
+            If lstAxesDetected(i) AndAlso lstMinTextBoxes(i).Visible AndAlso lstMinTextBoxes(i).IsEmpty() Then
+                strMessage = strMessage & Environment.NewLine & "Min " & lstAxesLabels(i).Text & " is missing."
+                bWarning = True
+            End If
+        Next
+        For i As Integer = 0 To lstMaxTextBoxes.Count - 1
+            If lstAxesDetected(i) AndAlso lstMaxTextBoxes(i).Visible AndAlso lstMaxTextBoxes(i).IsEmpty() Then
+                strMessage = strMessage & Environment.NewLine & "Max " & lstAxesLabels(i).Text & " is missing."
+                bWarning = True
+            End If
+        Next
+        If rdoPoints.Checked Then
+            If lstAxesDetected(0) AndAlso ucrReceiverPointsX.IsEmpty() Then
+                strMessage = strMessage & Environment.NewLine & "X (lon) points is missing."
+                bWarning = True
+            End If
+            If lstAxesDetected(1) AndAlso ucrReceiverPointsY.IsEmpty() Then
+                strMessage = strMessage & Environment.NewLine & "Y (lat) points is missing."
+                bWarning = True
+            End If
+        ElseIf rdoSinglePoint.Checked Then
+            If lstAxesDetected(0) AndAlso ucrInputPointX.IsEmpty() Then
+                strMessage = strMessage & Environment.NewLine & "X (lon) point is missing."
+                bWarning = True
+            End If
+            If lstAxesDetected(1) AndAlso ucrInputPointY.IsEmpty() Then
+                strMessage = strMessage & Environment.NewLine & "Y (lat) point is missing."
+                bWarning = True
+            End If
+        End If
+        If bWarning Then
+            result = MessageBox.Show(text:="Information missing. See details below. OK will not be enabled on the main dialog untill resolved." & Environment.NewLine & "Are you sure you want to return to the main dialog?" & Environment.NewLine & strMessage, caption:="Missing information", buttons:=MessageBoxButtons.YesNo, icon:=MessageBoxIcon.Information)
+            If result = MsgBoxResult.No Then
+                e.Cancel = True
+            End If
+        End If
+        bOKEnabled = Not bWarning
     End Sub
 End Class
