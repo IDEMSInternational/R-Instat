@@ -42,6 +42,13 @@ Partial Class dlgWindrose
         Me.lblYVariable = New System.Windows.Forms.Label()
         Me.lblFacet = New System.Windows.Forms.Label()
         Me.lblNoOfColumns = New System.Windows.Forms.Label()
+        Me.cmdWindroseOptions = New System.Windows.Forms.Button()
+        Me.lblGraphTitle = New System.Windows.Forms.Label()
+        Me.lblGraphSubtitle = New System.Windows.Forms.Label()
+        Me.lblGraphCaption = New System.Windows.Forms.Label()
+        Me.ucrInputCaption = New instat.ucrInputTextBox()
+        Me.ucrInputSubTitle = New instat.ucrInputTextBox()
+        Me.ucrInputTitle = New instat.ucrInputTextBox()
         Me.ucrReceiverFacet = New instat.ucrReceiverSingle()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrNudNoOfColumns = New instat.ucrNud()
@@ -49,13 +56,6 @@ Partial Class dlgWindrose
         Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.ucrWindRoseSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdWindroseOptions = New System.Windows.Forms.Button()
-        Me.ucrInputTitle = New instat.ucrInputTextBox()
-        Me.ucrInputSubTitle = New instat.ucrInputTextBox()
-        Me.ucrInputCaption = New instat.ucrInputTextBox()
-        Me.lblGraphTitle = New System.Windows.Forms.Label()
-        Me.lblGraphSubtitle = New System.Windows.Forms.Label()
-        Me.lblGraphCaption = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -94,6 +94,72 @@ Partial Class dlgWindrose
         Me.lblNoOfColumns.TabIndex = 7
         Me.lblNoOfColumns.Text = "Number of Columns:"
         '
+        'cmdWindroseOptions
+        '
+        Me.cmdWindroseOptions.Location = New System.Drawing.Point(321, 208)
+        Me.cmdWindroseOptions.Name = "cmdWindroseOptions"
+        Me.cmdWindroseOptions.Size = New System.Drawing.Size(88, 23)
+        Me.cmdWindroseOptions.TabIndex = 11
+        Me.cmdWindroseOptions.Text = "Options"
+        Me.cmdWindroseOptions.UseVisualStyleBackColor = True
+        '
+        'lblGraphTitle
+        '
+        Me.lblGraphTitle.AutoSize = True
+        Me.lblGraphTitle.Location = New System.Drawing.Point(7, 234)
+        Me.lblGraphTitle.Name = "lblGraphTitle"
+        Me.lblGraphTitle.Size = New System.Drawing.Size(59, 13)
+        Me.lblGraphTitle.TabIndex = 18
+        Me.lblGraphTitle.Text = "Graph Title"
+        '
+        'lblGraphSubtitle
+        '
+        Me.lblGraphSubtitle.AutoSize = True
+        Me.lblGraphSubtitle.Location = New System.Drawing.Point(7, 261)
+        Me.lblGraphSubtitle.Name = "lblGraphSubtitle"
+        Me.lblGraphSubtitle.Size = New System.Drawing.Size(81, 13)
+        Me.lblGraphSubtitle.TabIndex = 18
+        Me.lblGraphSubtitle.Text = "Graph Sub Title"
+        '
+        'lblGraphCaption
+        '
+        Me.lblGraphCaption.AutoSize = True
+        Me.lblGraphCaption.Location = New System.Drawing.Point(7, 288)
+        Me.lblGraphCaption.Name = "lblGraphCaption"
+        Me.lblGraphCaption.Size = New System.Drawing.Size(75, 13)
+        Me.lblGraphCaption.TabIndex = 18
+        Me.lblGraphCaption.Text = "Graph Caption"
+        '
+        'ucrInputCaption
+        '
+        Me.ucrInputCaption.AddQuotesIfUnrecognised = True
+        Me.ucrInputCaption.IsMultiline = False
+        Me.ucrInputCaption.IsReadOnly = False
+        Me.ucrInputCaption.Location = New System.Drawing.Point(99, 287)
+        Me.ucrInputCaption.Name = "ucrInputCaption"
+        Me.ucrInputCaption.Size = New System.Drawing.Size(215, 21)
+        Me.ucrInputCaption.TabIndex = 17
+        '
+        'ucrInputSubTitle
+        '
+        Me.ucrInputSubTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputSubTitle.IsMultiline = False
+        Me.ucrInputSubTitle.IsReadOnly = False
+        Me.ucrInputSubTitle.Location = New System.Drawing.Point(99, 260)
+        Me.ucrInputSubTitle.Name = "ucrInputSubTitle"
+        Me.ucrInputSubTitle.Size = New System.Drawing.Size(215, 21)
+        Me.ucrInputSubTitle.TabIndex = 16
+        '
+        'ucrInputTitle
+        '
+        Me.ucrInputTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputTitle.IsMultiline = False
+        Me.ucrInputTitle.IsReadOnly = False
+        Me.ucrInputTitle.Location = New System.Drawing.Point(99, 230)
+        Me.ucrInputTitle.Name = "ucrInputTitle"
+        Me.ucrInputTitle.Size = New System.Drawing.Size(215, 21)
+        Me.ucrInputTitle.TabIndex = 15
+        '
         'ucrReceiverFacet
         '
         Me.ucrReceiverFacet.frmParent = Me
@@ -108,9 +174,9 @@ Partial Class dlgWindrose
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 318)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 319)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(260, 24)
         Me.ucrSaveGraph.TabIndex = 9
         '
         'ucrNudNoOfColumns
@@ -166,72 +232,6 @@ Partial Class dlgWindrose
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
-        '
-        'cmdWindroseOptions
-        '
-        Me.cmdWindroseOptions.Location = New System.Drawing.Point(321, 208)
-        Me.cmdWindroseOptions.Name = "cmdWindroseOptions"
-        Me.cmdWindroseOptions.Size = New System.Drawing.Size(88, 23)
-        Me.cmdWindroseOptions.TabIndex = 11
-        Me.cmdWindroseOptions.Text = "Options"
-        Me.cmdWindroseOptions.UseVisualStyleBackColor = True
-        '
-        'ucrInputTitle
-        '
-        Me.ucrInputTitle.AddQuotesIfUnrecognised = True
-        Me.ucrInputTitle.IsMultiline = False
-        Me.ucrInputTitle.IsReadOnly = False
-        Me.ucrInputTitle.Location = New System.Drawing.Point(99, 234)
-        Me.ucrInputTitle.Name = "ucrInputTitle"
-        Me.ucrInputTitle.Size = New System.Drawing.Size(215, 21)
-        Me.ucrInputTitle.TabIndex = 15
-        '
-        'ucrInputSubTitle
-        '
-        Me.ucrInputSubTitle.AddQuotesIfUnrecognised = True
-        Me.ucrInputSubTitle.IsMultiline = False
-        Me.ucrInputSubTitle.IsReadOnly = False
-        Me.ucrInputSubTitle.Location = New System.Drawing.Point(99, 261)
-        Me.ucrInputSubTitle.Name = "ucrInputSubTitle"
-        Me.ucrInputSubTitle.Size = New System.Drawing.Size(215, 21)
-        Me.ucrInputSubTitle.TabIndex = 16
-        '
-        'ucrInputCaption
-        '
-        Me.ucrInputCaption.AddQuotesIfUnrecognised = True
-        Me.ucrInputCaption.IsMultiline = False
-        Me.ucrInputCaption.IsReadOnly = False
-        Me.ucrInputCaption.Location = New System.Drawing.Point(99, 288)
-        Me.ucrInputCaption.Name = "ucrInputCaption"
-        Me.ucrInputCaption.Size = New System.Drawing.Size(215, 21)
-        Me.ucrInputCaption.TabIndex = 17
-        '
-        'lblGraphTitle
-        '
-        Me.lblGraphTitle.AutoSize = True
-        Me.lblGraphTitle.Location = New System.Drawing.Point(26, 234)
-        Me.lblGraphTitle.Name = "lblGraphTitle"
-        Me.lblGraphTitle.Size = New System.Drawing.Size(59, 13)
-        Me.lblGraphTitle.TabIndex = 18
-        Me.lblGraphTitle.Text = "Graph Title"
-        '
-        'lblGraphSubtitle
-        '
-        Me.lblGraphSubtitle.AutoSize = True
-        Me.lblGraphSubtitle.Location = New System.Drawing.Point(26, 261)
-        Me.lblGraphSubtitle.Name = "lblGraphSubtitle"
-        Me.lblGraphSubtitle.Size = New System.Drawing.Size(81, 13)
-        Me.lblGraphSubtitle.TabIndex = 18
-        Me.lblGraphSubtitle.Text = "Graph Sub Title"
-        '
-        'lblGraphCaption
-        '
-        Me.lblGraphCaption.AutoSize = True
-        Me.lblGraphCaption.Location = New System.Drawing.Point(26, 288)
-        Me.lblGraphCaption.Name = "lblGraphCaption"
-        Me.lblGraphCaption.Size = New System.Drawing.Size(75, 13)
-        Me.lblGraphCaption.TabIndex = 18
-        Me.lblGraphCaption.Text = "Graph Caption"
         '
         'dlgWindrose
         '
