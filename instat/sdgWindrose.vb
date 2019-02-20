@@ -27,7 +27,7 @@ Public Class sdgWindrose
         Dim dctThemePairs As New Dictionary(Of String, String)
         Dim dctSequatailPairs As New Dictionary(Of String, String)
         Dim dctDivergingPairs As New Dictionary(Of String, String)
-
+        Dim dctQualititivePairs As New Dictionary(Of String, String)
 
         ucrNudNoOfDirections.SetParameter(New RParameter("n_directions", 3))
         ucrNudNoOfDirections.SetRDefault(12)
@@ -84,6 +84,15 @@ Public Class sdgWindrose
         dctDivergingPairs.Add("RdYlGn", Chr(34) & "RdYlGn" & Chr(34))
         ucrInputDiverging.SetItems(dctDivergingPairs)
 
+        dctQualititivePairs.Add("Spectral", Chr(34) & "Spectral" & Chr(34))
+        dctQualititivePairs.Add("Accent", Chr(34) & "Accent" & Chr(34))
+        dctQualititivePairs.Add("Dark2", Chr(34) & "Dark2" & Chr(34))
+        dctQualititivePairs.Add("Pastel1", Chr(34) & "Pastel1" & Chr(34))
+        dctQualititivePairs.Add("Pastel2", Chr(34) & "Pastel2" & Chr(34))
+        dctQualititivePairs.Add("Set1", Chr(34) & "Set1" & Chr(34))
+        dctQualititivePairs.Add("Set2", Chr(34) & "Set2" & Chr(34))
+        dctQualititivePairs.Add("Set3", Chr(34) & "Set3" & Chr(34))
+        ucrInputQualitative.SetItems(dctQualititivePairs)
         bControlsInitialised = True
     End Sub
 
