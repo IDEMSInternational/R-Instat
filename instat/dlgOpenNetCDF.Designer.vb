@@ -228,7 +228,7 @@ Partial Class dlgOpenNetCDF
         Me.MinimizeBox = False
         Me.Name = "dlgOpenNetCDF"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Open NetCDF"
+        Me.Text = "Import and Tidy NetCDF File"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
