@@ -288,6 +288,33 @@ Public Class dlgModelling
         End If
     End Sub
 
+    Private Sub cmdnls_Click(sender As Object, e As EventArgs) Handles cmdnls.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("nls(formula = , data, start, control, algorithm, trace, subset, weights, na.action, model, lower, upper, ...)", 97)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("nls()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdppr_Click(sender As Object, e As EventArgs) Handles cmdppr.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("ppr(formula =, data, weights, subset, na.action, contrasts = NULL, ..., model=FALSE)", 77)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("ppr()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdprincomp_Click(sender As Object, e As EventArgs) Handles cmdprincomp.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("princomp(formula =, data=NULL, subset, na.action, ...)", 52)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("princomp()", 1)
+        End If
+    End Sub
+
     Private Sub cmdspline_Click(sender As Object, e As EventArgs) Handles cmdspline.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
@@ -296,7 +323,6 @@ Public Class dlgModelling
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("spline()", 1)
         End If
     End Sub
-
     Private Sub cmdfevd_Click(sender As Object, e As EventArgs) Handles cmdfevd.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
@@ -388,6 +414,42 @@ Public Class dlgModelling
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::rlm(formula = , data, weights, ..., subset, na.action, method = c(""M"", ""MM"", ""model.frame""), wt.method = c(""inv.var"", ""case""), model = TRUE, x.ret = TRUE, y.ret = FALSE, contrasts = NULL)", 173)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::rlm()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdlda_Click(sender As Object, e As EventArgs) Handles cmdlda.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::lda(formula = , data, ..., subset, na.action)", 48)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::lda()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdmca_Click(sender As Object, e As EventArgs) Handles cmdmca.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::mca(df, nf = 2, abbrev = FALSE)", 34)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::mca()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdlqs_Click(sender As Object, e As EventArgs) Handles cmdlqs.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::lqs(formula = , data, method = c(""lts"", ""lqs"",""lms"",""S"",""model.frame""),subset,na.action, model = TRUE, x.ret = FALSE, y.ret = FALSE, contrasts = NULL)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::lqs()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdqda_Click(sender As Object, e As EventArgs) Handles cmdqda.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::qda(formula = , data, weights, ..., subset, na.action)", 56)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::qda()", 1)
         End If
     End Sub
 
