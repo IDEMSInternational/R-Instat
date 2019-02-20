@@ -75,12 +75,15 @@ Public Class dlgBarAndPieChart
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
         'link the angle only when box is selected
         ucrPnlOptions.AddToLinkedControls(ucrNudXAxisLabelsAngle, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=90)
+        ucrPnlOptions.AddToLinkedControls(ucrChkXAxisLabelAngle, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrBarChartSelector.SetParameter(New RParameter("data", 0))
         ucrBarChartSelector.SetParameterIsrfunction()
 
         ucrChkXAxisLabelAngle.SetParameter(New RParameter("angle"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkXAxisLabelAngle.SetText("X axis labels angle:")
+        ucrChkXAxisLabelAngle.AddToLinkedControls(ucrNudXAxisLabelsAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=90)
+
 
         ucrNudXAxisLabelsAngle.SetParameter(New RParameter("angle"))
         ucrNudXAxisLabelsAngle.SetMinMax(0, 360)
@@ -226,6 +229,7 @@ Public Class dlgBarAndPieChart
         'Warning, when coordinate flip is added to coordinates tab on sdgPLots, then link with ucrChkFlipCoordinates...
         'this syncs the coordflip in sdgplots and this main dlg
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
+        SetRCodeForControls(False)
         AddRemoveXAxisTextParameters()
     End Sub
 
@@ -333,5 +337,9 @@ Public Class dlgBarAndPieChart
 
     Private Sub ucrChkXAxisLabelAngle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXAxisLabelAngle.ControlValueChanged, ucrNudXAxisLabelsAngle.ControlValueChanged
         AddRemoveXAxisTextParameters()
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+
     End Sub
 End Class
