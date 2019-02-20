@@ -50,12 +50,12 @@ Partial Class dlgWindrose
         Me.ucrWindRoseSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.cmdWindroseOptions = New System.Windows.Forms.Button()
-        Me.ucrChkTitle = New instat.ucrCheck()
-        Me.ucrChkSubTitle = New instat.ucrCheck()
-        Me.ucrChkCaption = New instat.ucrCheck()
         Me.ucrInputTitle = New instat.ucrInputTextBox()
         Me.ucrInputSubTitle = New instat.ucrInputTextBox()
         Me.ucrInputCaption = New instat.ucrInputTextBox()
+        Me.lblGraphTitle = New System.Windows.Forms.Label()
+        Me.lblGraphSubtitle = New System.Windows.Forms.Label()
+        Me.lblGraphCaption = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -176,30 +176,6 @@ Partial Class dlgWindrose
         Me.cmdWindroseOptions.Text = "Options"
         Me.cmdWindroseOptions.UseVisualStyleBackColor = True
         '
-        'ucrChkTitle
-        '
-        Me.ucrChkTitle.Checked = False
-        Me.ucrChkTitle.Location = New System.Drawing.Point(10, 236)
-        Me.ucrChkTitle.Name = "ucrChkTitle"
-        Me.ucrChkTitle.Size = New System.Drawing.Size(125, 20)
-        Me.ucrChkTitle.TabIndex = 12
-        '
-        'ucrChkSubTitle
-        '
-        Me.ucrChkSubTitle.Checked = False
-        Me.ucrChkSubTitle.Location = New System.Drawing.Point(10, 263)
-        Me.ucrChkSubTitle.Name = "ucrChkSubTitle"
-        Me.ucrChkSubTitle.Size = New System.Drawing.Size(125, 20)
-        Me.ucrChkSubTitle.TabIndex = 13
-        '
-        'ucrChkCaption
-        '
-        Me.ucrChkCaption.Checked = False
-        Me.ucrChkCaption.Location = New System.Drawing.Point(10, 290)
-        Me.ucrChkCaption.Name = "ucrChkCaption"
-        Me.ucrChkCaption.Size = New System.Drawing.Size(125, 20)
-        Me.ucrChkCaption.TabIndex = 14
-        '
         'ucrInputTitle
         '
         Me.ucrInputTitle.AddQuotesIfUnrecognised = True
@@ -230,17 +206,44 @@ Partial Class dlgWindrose
         Me.ucrInputCaption.Size = New System.Drawing.Size(215, 21)
         Me.ucrInputCaption.TabIndex = 17
         '
+        'lblGraphTitle
+        '
+        Me.lblGraphTitle.AutoSize = True
+        Me.lblGraphTitle.Location = New System.Drawing.Point(26, 234)
+        Me.lblGraphTitle.Name = "lblGraphTitle"
+        Me.lblGraphTitle.Size = New System.Drawing.Size(59, 13)
+        Me.lblGraphTitle.TabIndex = 18
+        Me.lblGraphTitle.Text = "Graph Title"
+        '
+        'lblGraphSubtitle
+        '
+        Me.lblGraphSubtitle.AutoSize = True
+        Me.lblGraphSubtitle.Location = New System.Drawing.Point(26, 261)
+        Me.lblGraphSubtitle.Name = "lblGraphSubtitle"
+        Me.lblGraphSubtitle.Size = New System.Drawing.Size(81, 13)
+        Me.lblGraphSubtitle.TabIndex = 18
+        Me.lblGraphSubtitle.Text = "Graph Sub Title"
+        '
+        'lblGraphCaption
+        '
+        Me.lblGraphCaption.AutoSize = True
+        Me.lblGraphCaption.Location = New System.Drawing.Point(26, 288)
+        Me.lblGraphCaption.Name = "lblGraphCaption"
+        Me.lblGraphCaption.Size = New System.Drawing.Size(75, 13)
+        Me.lblGraphCaption.TabIndex = 18
+        Me.lblGraphCaption.Text = "Graph Caption"
+        '
         'dlgWindrose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 413)
+        Me.Controls.Add(Me.lblGraphCaption)
+        Me.Controls.Add(Me.lblGraphSubtitle)
+        Me.Controls.Add(Me.lblGraphTitle)
         Me.Controls.Add(Me.ucrInputCaption)
         Me.Controls.Add(Me.ucrInputSubTitle)
         Me.Controls.Add(Me.ucrInputTitle)
-        Me.Controls.Add(Me.ucrChkCaption)
-        Me.Controls.Add(Me.ucrChkSubTitle)
-        Me.Controls.Add(Me.ucrChkTitle)
         Me.Controls.Add(Me.cmdWindroseOptions)
         Me.Controls.Add(Me.ucrReceiverFacet)
         Me.Controls.Add(Me.ucrSaveGraph)
@@ -279,7 +282,7 @@ Partial Class dlgWindrose
     Friend WithEvents ucrInputCaption As ucrInputTextBox
     Friend WithEvents ucrInputSubTitle As ucrInputTextBox
     Friend WithEvents ucrInputTitle As ucrInputTextBox
-    Friend WithEvents ucrChkCaption As ucrCheck
-    Friend WithEvents ucrChkSubTitle As ucrCheck
-    Friend WithEvents ucrChkTitle As ucrCheck
+    Friend WithEvents lblGraphCaption As Label
+    Friend WithEvents lblGraphSubtitle As Label
+    Friend WithEvents lblGraphTitle As Label
 End Class
