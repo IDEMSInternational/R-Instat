@@ -52,9 +52,6 @@ Public Class dlgModelling
         bUpdating = True
         cmdPredict.Visible = False
 
-        cmdTry.Visible = False
-        ucrInputTryMessage.Visible = False
-
         ucrReceiverForTestColumn.Selector = ucrSelectorModelling
 
         ucrChkIncludeArguments.SetText("Include Arguments")
@@ -110,11 +107,9 @@ Public Class dlgModelling
 
         ucrBase.clsRsyntax.SetCommandString("")
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm()", 1)
+        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
 
         ucrSaveResult.Reset()
-        ucrSaveResult.ucrChkSave.Checked = False
-
-        ucrSaveResult.Enabled = False
 
         ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -293,6 +288,33 @@ Public Class dlgModelling
         End If
     End Sub
 
+    Private Sub cmdnls_Click(sender As Object, e As EventArgs) Handles cmdnls.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("nls(formula = , data, start, control, algorithm, trace, subset, weights, na.action, model, lower, upper, ...)", 97)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("nls()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdppr_Click(sender As Object, e As EventArgs) Handles cmdppr.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("ppr(formula =, data, weights, subset, na.action, contrasts = NULL, ..., model=FALSE)", 77)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("ppr()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdprincomp_Click(sender As Object, e As EventArgs) Handles cmdprincomp.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("princomp(formula =, data=NULL, subset, na.action, ...)", 52)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("princomp()", 1)
+        End If
+    End Sub
+
     Private Sub cmdspline_Click(sender As Object, e As EventArgs) Handles cmdspline.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
@@ -301,7 +323,6 @@ Public Class dlgModelling
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("spline()", 1)
         End If
     End Sub
-
     Private Sub cmdfevd_Click(sender As Object, e As EventArgs) Handles cmdfevd.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
@@ -396,6 +417,42 @@ Public Class dlgModelling
         End If
     End Sub
 
+    Private Sub cmdlda_Click(sender As Object, e As EventArgs) Handles cmdlda.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::lda(formula = , data, ..., subset, na.action)", 48)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::lda()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdmca_Click(sender As Object, e As EventArgs) Handles cmdmca.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::mca(df, nf = 2, abbrev = FALSE)", 34)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::mca()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdlqs_Click(sender As Object, e As EventArgs) Handles cmdlqs.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::lqs(formula = , data, method = c(""lts"", ""lqs"",""lms"",""S"",""model.frame""),subset,na.action, model = TRUE, x.ret = FALSE, y.ret = FALSE, contrasts = NULL)", 150)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::lqs()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdqda_Click(sender As Object, e As EventArgs) Handles cmdqda.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::qda(formula = , data, weights, ..., subset, na.action)", 56)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::qda()", 1)
+        End If
+    End Sub
+
     Private Sub cmdMinus_Click(sender As Object, e As EventArgs) Handles cmdMinus.Click
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("-")
     End Sub
@@ -469,7 +526,7 @@ Public Class dlgModelling
 
     Private Sub SetRcodeForControls(bReset As Boolean)
         bUpdating = True
-        ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString, bReset)
         bUpdating = False
         SetObjectInFunctions()
     End Sub
@@ -480,51 +537,37 @@ Public Class dlgModelling
         Dim strDetach As String
         Dim strTempScript As String = ""
         Dim strVecOutput As CharacterVector
-        Dim bIsAssigned As Boolean
-        Dim bToBeAssigned As Boolean
-        Dim strAssignTo As String
-        Dim strAssignToColumn As String
-        Dim strAssignToDataFrame As String
-
-        bIsAssigned = ucrBase.clsRsyntax.GetbIsAssigned()
-        bToBeAssigned = ucrBase.clsRsyntax.GetbToBeAssigned()
-        strAssignTo = ucrBase.clsRsyntax.GetstrAssignTo()
-
-        strAssignToColumn = ucrBase.clsRsyntax.GetstrAssignToColumn()
-        strAssignToDataFrame = ucrBase.clsRsyntax.GetstrAssignToDataFrame()
+        Dim clsCommandString As RCodeStructure
 
         Try
             If ucrReceiverForTestColumn.IsEmpty Then
                 ucrInputTryMessage.SetName("")
             Else
                 'get strScript here
-                strAttach = clsAttach.ToScript(strTempScript)
+                strAttach = clsAttach.Clone().ToScript(strTempScript)
                 frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
-                ucrBase.clsRsyntax.RemoveAssignTo()
-                strOutPut = ucrBase.clsRsyntax.GetScript
-                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strOutPut, bSilent:=True)
+                strTempScript = ""
+                clsCommandString = ucrBase.clsRsyntax.clsBaseCommandString.Clone()
+                clsCommandString.RemoveAssignTo()
+                strOutPut = clsCommandString.ToScript(strTempScript, ucrBase.clsRsyntax.strCommandString)
+                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript & strOutPut, bSilent:=True)
                 If strVecOutput IsNot Nothing Then
                     If strVecOutput.Length > 1 Then
-                        ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5) & "...")
-                    Else
-                        ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5))
+                        ucrInputTryMessage.SetName("Model runs without error")
+                        ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
                     End If
                 Else
                     ucrInputTryMessage.SetName("Command produced an error or no output to display.")
+                    ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
                 End If
             End If
         Catch ex As Exception
             ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
+            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
         Finally
             strTempScript = ""
-            strDetach = clsDetach.ToScript(strTempScript)
+            strDetach = clsDetach.Clone().ToScript(strTempScript)
             frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
-            ucrBase.clsRsyntax.SetbIsAssigned(bIsAssigned)
-            ucrBase.clsRsyntax.SetbToBeAssigned(bToBeAssigned)
-            ucrBase.clsRsyntax.SetstrAssignTo(strAssignTo)
-
-            ucrBase.clsRsyntax.SetstrAssignToColumn(strAssignToColumn)
-            ucrBase.clsRsyntax.SetstrAssignToDataFrame(strAssignToDataFrame)
         End Try
     End Sub
 
@@ -532,6 +575,7 @@ Public Class dlgModelling
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForTestColumn.GetVariableNames(False))
         ucrInputTryMessage.SetName("")
         cmdTry.Enabled = Not ucrReceiverForTestColumn.IsEmpty()
+        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
         TestOkEnabled()
     End Sub
 
@@ -590,5 +634,9 @@ Public Class dlgModelling
                 grplme4.Visible = False
                 grpMASS.Visible = True
         End Select
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        ucrReceiverForTestColumn.AddtoCombobox(ucrReceiverForTestColumn.GetText)
     End Sub
 End Class
