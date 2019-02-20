@@ -50,6 +50,12 @@ Partial Class dlgWindrose
         Me.ucrWindRoseSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.cmdWindroseOptions = New System.Windows.Forms.Button()
+        Me.ucrChkTitle = New instat.ucrCheck()
+        Me.ucrChkSubTitle = New instat.ucrCheck()
+        Me.ucrChkCaption = New instat.ucrCheck()
+        Me.ucrInputTitle = New instat.ucrInputTextBox()
+        Me.ucrInputSubTitle = New instat.ucrInputTextBox()
+        Me.ucrInputCaption = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -82,7 +88,7 @@ Partial Class dlgWindrose
         'lblNoOfColumns
         '
         Me.lblNoOfColumns.AutoSize = True
-        Me.lblNoOfColumns.Location = New System.Drawing.Point(258, 191)
+        Me.lblNoOfColumns.Location = New System.Drawing.Point(259, 180)
         Me.lblNoOfColumns.Name = "lblNoOfColumns"
         Me.lblNoOfColumns.Size = New System.Drawing.Size(102, 13)
         Me.lblNoOfColumns.TabIndex = 7
@@ -102,7 +108,7 @@ Partial Class dlgWindrose
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 221)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 318)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(254, 24)
         Me.ucrSaveGraph.TabIndex = 9
@@ -111,7 +117,7 @@ Partial Class dlgWindrose
         '
         Me.ucrNudNoOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoOfColumns.Location = New System.Drawing.Point(361, 189)
+        Me.ucrNudNoOfColumns.Location = New System.Drawing.Point(362, 178)
         Me.ucrNudNoOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfColumns.Name = "ucrNudNoOfColumns"
@@ -145,6 +151,7 @@ Partial Class dlgWindrose
         '
         'ucrWindRoseSelector
         '
+        Me.ucrWindRoseSelector.bDropUnusedFilterLevels = False
         Me.ucrWindRoseSelector.bShowHiddenColumns = False
         Me.ucrWindRoseSelector.bUseCurrentFilter = True
         Me.ucrWindRoseSelector.Location = New System.Drawing.Point(10, 10)
@@ -155,25 +162,85 @@ Partial Class dlgWindrose
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 248)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 349)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
         '
         'cmdWindroseOptions
         '
-        Me.cmdWindroseOptions.Location = New System.Drawing.Point(320, 219)
+        Me.cmdWindroseOptions.Location = New System.Drawing.Point(321, 208)
         Me.cmdWindroseOptions.Name = "cmdWindroseOptions"
         Me.cmdWindroseOptions.Size = New System.Drawing.Size(88, 23)
         Me.cmdWindroseOptions.TabIndex = 11
         Me.cmdWindroseOptions.Text = "Options"
         Me.cmdWindroseOptions.UseVisualStyleBackColor = True
         '
+        'ucrChkTitle
+        '
+        Me.ucrChkTitle.Checked = False
+        Me.ucrChkTitle.Location = New System.Drawing.Point(10, 236)
+        Me.ucrChkTitle.Name = "ucrChkTitle"
+        Me.ucrChkTitle.Size = New System.Drawing.Size(125, 20)
+        Me.ucrChkTitle.TabIndex = 12
+        '
+        'ucrChkSubTitle
+        '
+        Me.ucrChkSubTitle.Checked = False
+        Me.ucrChkSubTitle.Location = New System.Drawing.Point(10, 263)
+        Me.ucrChkSubTitle.Name = "ucrChkSubTitle"
+        Me.ucrChkSubTitle.Size = New System.Drawing.Size(125, 20)
+        Me.ucrChkSubTitle.TabIndex = 13
+        '
+        'ucrChkCaption
+        '
+        Me.ucrChkCaption.Checked = False
+        Me.ucrChkCaption.Location = New System.Drawing.Point(10, 290)
+        Me.ucrChkCaption.Name = "ucrChkCaption"
+        Me.ucrChkCaption.Size = New System.Drawing.Size(125, 20)
+        Me.ucrChkCaption.TabIndex = 14
+        '
+        'ucrInputTitle
+        '
+        Me.ucrInputTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputTitle.IsMultiline = False
+        Me.ucrInputTitle.IsReadOnly = False
+        Me.ucrInputTitle.Location = New System.Drawing.Point(99, 234)
+        Me.ucrInputTitle.Name = "ucrInputTitle"
+        Me.ucrInputTitle.Size = New System.Drawing.Size(215, 21)
+        Me.ucrInputTitle.TabIndex = 15
+        '
+        'ucrInputSubTitle
+        '
+        Me.ucrInputSubTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputSubTitle.IsMultiline = False
+        Me.ucrInputSubTitle.IsReadOnly = False
+        Me.ucrInputSubTitle.Location = New System.Drawing.Point(99, 261)
+        Me.ucrInputSubTitle.Name = "ucrInputSubTitle"
+        Me.ucrInputSubTitle.Size = New System.Drawing.Size(215, 21)
+        Me.ucrInputSubTitle.TabIndex = 16
+        '
+        'ucrInputCaption
+        '
+        Me.ucrInputCaption.AddQuotesIfUnrecognised = True
+        Me.ucrInputCaption.IsMultiline = False
+        Me.ucrInputCaption.IsReadOnly = False
+        Me.ucrInputCaption.Location = New System.Drawing.Point(99, 288)
+        Me.ucrInputCaption.Name = "ucrInputCaption"
+        Me.ucrInputCaption.Size = New System.Drawing.Size(215, 21)
+        Me.ucrInputCaption.TabIndex = 17
+        '
         'dlgWindrose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 305)
+        Me.ClientSize = New System.Drawing.Size(420, 413)
+        Me.Controls.Add(Me.ucrInputCaption)
+        Me.Controls.Add(Me.ucrInputSubTitle)
+        Me.Controls.Add(Me.ucrInputTitle)
+        Me.Controls.Add(Me.ucrChkCaption)
+        Me.Controls.Add(Me.ucrChkSubTitle)
+        Me.Controls.Add(Me.ucrChkTitle)
         Me.Controls.Add(Me.cmdWindroseOptions)
         Me.Controls.Add(Me.ucrReceiverFacet)
         Me.Controls.Add(Me.ucrSaveGraph)
@@ -209,4 +276,10 @@ Partial Class dlgWindrose
     Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrReceiverFacet As ucrReceiverSingle
     Friend WithEvents cmdWindroseOptions As Button
+    Friend WithEvents ucrInputCaption As ucrInputTextBox
+    Friend WithEvents ucrInputSubTitle As ucrInputTextBox
+    Friend WithEvents ucrInputTitle As ucrInputTextBox
+    Friend WithEvents ucrChkCaption As ucrCheck
+    Friend WithEvents ucrChkSubTitle As ucrCheck
+    Friend WithEvents ucrChkTitle As ucrCheck
 End Class
