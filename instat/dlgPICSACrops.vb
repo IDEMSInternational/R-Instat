@@ -225,6 +225,7 @@ Public Class dlgPICSACrops
         'ucrInputWaterAmounts.SetRCode(clsCropsFunction, bReset)
 
         ucrChkRequirePlantingDays.SetRCode(clsCropsFunction, bReset)
+        ucrChkDataProp.SetRCode(clsCropsFunction, bReset)
         ucrChkPrintDataProp.SetRCode(clsCropsFunction, bReset)
     End Sub
 
