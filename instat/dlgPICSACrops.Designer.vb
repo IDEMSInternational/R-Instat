@@ -46,15 +46,15 @@ Partial Class dlgPICSACrops
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.grpSeasonReceivers = New System.Windows.Forms.GroupBox()
+        Me.ucrReceiverStart = New instat.ucrReceiverSingle()
+        Me.ucrReceiverEnd = New instat.ucrReceiverSingle()
         Me.grpCropDefinitions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkPlantingLengthDays = New instat.ucrCheck()
-        Me.ucrChkWaterAmounts = New instat.ucrCheck()
-        Me.ucrCheckPlantingDays = New instat.ucrCheck()
+        Me.lblPlantingLengthDays = New System.Windows.Forms.Label()
+        Me.lblWaterAmounts = New System.Windows.Forms.Label()
+        Me.ucrChkRequirePlantingDays = New instat.ucrCheck()
         Me.ucrInputPlantingLengths = New instat.ucrInputComboBox()
         Me.ucrInputWaterAmounts = New instat.ucrInputComboBox()
         Me.ucrInputPlantingDates = New instat.ucrInputComboBox()
-        Me.ucrReceiverStart = New instat.ucrReceiverSingle()
-        Me.ucrReceiverEnd = New instat.ucrReceiverSingle()
         Me.ucrChkDataProp = New instat.ucrCheck()
         Me.ucrChkPrintDataProp = New instat.ucrCheck()
         Me.ucrReceiverRainfall = New instat.ucrReceiverSingle()
@@ -151,11 +151,35 @@ Partial Class dlgPICSACrops
         Me.grpSeasonReceivers.TabStop = False
         Me.grpSeasonReceivers.Text = "Season Dates"
         '
+        'ucrReceiverStart
+        '
+        Me.ucrReceiverStart.frmParent = Me
+        Me.ucrReceiverStart.Location = New System.Drawing.Point(10, 34)
+        Me.ucrReceiverStart.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStart.Name = "ucrReceiverStart"
+        Me.ucrReceiverStart.Selector = Nothing
+        Me.ucrReceiverStart.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStart.strNcFilePath = ""
+        Me.ucrReceiverStart.TabIndex = 19
+        Me.ucrReceiverStart.ucrSelector = Nothing
+        '
+        'ucrReceiverEnd
+        '
+        Me.ucrReceiverEnd.frmParent = Me
+        Me.ucrReceiverEnd.Location = New System.Drawing.Point(166, 34)
+        Me.ucrReceiverEnd.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverEnd.Name = "ucrReceiverEnd"
+        Me.ucrReceiverEnd.Selector = Nothing
+        Me.ucrReceiverEnd.Size = New System.Drawing.Size(120, 22)
+        Me.ucrReceiverEnd.strNcFilePath = ""
+        Me.ucrReceiverEnd.TabIndex = 26
+        Me.ucrReceiverEnd.ucrSelector = Nothing
+        '
         'grpCropDefinitions
         '
-        Me.grpCropDefinitions.Controls.Add(Me.ucrChkPlantingLengthDays)
-        Me.grpCropDefinitions.Controls.Add(Me.ucrChkWaterAmounts)
-        Me.grpCropDefinitions.Controls.Add(Me.ucrCheckPlantingDays)
+        Me.grpCropDefinitions.Controls.Add(Me.lblPlantingLengthDays)
+        Me.grpCropDefinitions.Controls.Add(Me.lblWaterAmounts)
+        Me.grpCropDefinitions.Controls.Add(Me.ucrChkRequirePlantingDays)
         Me.grpCropDefinitions.Controls.Add(Me.ucrInputPlantingLengths)
         Me.grpCropDefinitions.Controls.Add(Me.ucrInputWaterAmounts)
         Me.grpCropDefinitions.Controls.Add(Me.ucrInputPlantingDates)
@@ -166,29 +190,31 @@ Partial Class dlgPICSACrops
         Me.grpCropDefinitions.TabStop = False
         Me.grpCropDefinitions.Text = "Crop Definitions"
         '
-        'ucrChkPlantingLengthDays
+        'lblPlantingLengthDays
         '
-        Me.ucrChkPlantingLengthDays.Checked = False
-        Me.ucrChkPlantingLengthDays.Location = New System.Drawing.Point(14, 100)
-        Me.ucrChkPlantingLengthDays.Name = "ucrChkPlantingLengthDays"
-        Me.ucrChkPlantingLengthDays.Size = New System.Drawing.Size(114, 20)
-        Me.ucrChkPlantingLengthDays.TabIndex = 41
+        Me.lblPlantingLengthDays.AutoSize = True
+        Me.lblPlantingLengthDays.Location = New System.Drawing.Point(11, 103)
+        Me.lblPlantingLengthDays.Name = "lblPlantingLengthDays"
+        Me.lblPlantingLengthDays.Size = New System.Drawing.Size(117, 13)
+        Me.lblPlantingLengthDays.TabIndex = 41
+        Me.lblPlantingLengthDays.Text = "Planting Length Day(s):"
         '
-        'ucrChkWaterAmounts
+        'lblWaterAmounts
         '
-        Me.ucrChkWaterAmounts.Checked = False
-        Me.ucrChkWaterAmounts.Location = New System.Drawing.Point(14, 64)
-        Me.ucrChkWaterAmounts.Name = "ucrChkWaterAmounts"
-        Me.ucrChkWaterAmounts.Size = New System.Drawing.Size(114, 20)
-        Me.ucrChkWaterAmounts.TabIndex = 40
+        Me.lblWaterAmounts.AutoSize = True
+        Me.lblWaterAmounts.Location = New System.Drawing.Point(11, 66)
+        Me.lblWaterAmounts.Name = "lblWaterAmounts"
+        Me.lblWaterAmounts.Size = New System.Drawing.Size(89, 13)
+        Me.lblWaterAmounts.TabIndex = 40
+        Me.lblWaterAmounts.Text = "Water Amount(s):"
         '
-        'ucrCheckPlantingDays
+        'ucrChkRequirePlantingDays
         '
-        Me.ucrCheckPlantingDays.Checked = False
-        Me.ucrCheckPlantingDays.Location = New System.Drawing.Point(14, 26)
-        Me.ucrCheckPlantingDays.Name = "ucrCheckPlantingDays"
-        Me.ucrCheckPlantingDays.Size = New System.Drawing.Size(114, 20)
-        Me.ucrCheckPlantingDays.TabIndex = 39
+        Me.ucrChkRequirePlantingDays.Checked = False
+        Me.ucrChkRequirePlantingDays.Location = New System.Drawing.Point(14, 26)
+        Me.ucrChkRequirePlantingDays.Name = "ucrChkRequirePlantingDays"
+        Me.ucrChkRequirePlantingDays.Size = New System.Drawing.Size(114, 20)
+        Me.ucrChkRequirePlantingDays.TabIndex = 39
         '
         'ucrInputPlantingLengths
         '
@@ -216,30 +242,6 @@ Partial Class dlgPICSACrops
         Me.ucrInputPlantingDates.Name = "ucrInputPlantingDates"
         Me.ucrInputPlantingDates.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPlantingDates.TabIndex = 38
-        '
-        'ucrReceiverStart
-        '
-        Me.ucrReceiverStart.frmParent = Nothing
-        Me.ucrReceiverStart.Location = New System.Drawing.Point(10, 34)
-        Me.ucrReceiverStart.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStart.Name = "ucrReceiverStart"
-        Me.ucrReceiverStart.Selector = Nothing
-        Me.ucrReceiverStart.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStart.strNcFilePath = ""
-        Me.ucrReceiverStart.TabIndex = 19
-        Me.ucrReceiverStart.ucrSelector = Nothing
-        '
-        'ucrReceiverEnd
-        '
-        Me.ucrReceiverEnd.frmParent = Nothing
-        Me.ucrReceiverEnd.Location = New System.Drawing.Point(166, 34)
-        Me.ucrReceiverEnd.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverEnd.Name = "ucrReceiverEnd"
-        Me.ucrReceiverEnd.Selector = Nothing
-        Me.ucrReceiverEnd.Size = New System.Drawing.Size(120, 22)
-        Me.ucrReceiverEnd.strNcFilePath = ""
-        Me.ucrReceiverEnd.TabIndex = 26
-        Me.ucrReceiverEnd.ucrSelector = Nothing
         '
         'ucrChkDataProp
         '
@@ -352,6 +354,7 @@ Partial Class dlgPICSACrops
         Me.grpSeasonReceivers.ResumeLayout(False)
         Me.grpSeasonReceivers.PerformLayout()
         Me.grpCropDefinitions.ResumeLayout(False)
+        Me.grpCropDefinitions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -379,7 +382,7 @@ Partial Class dlgPICSACrops
     Friend WithEvents ucrInputPlantingLengths As ucrInputComboBox
     Friend WithEvents grpSeasonReceivers As GroupBox
     Friend WithEvents grpCropDefinitions As GroupBox
-    Friend WithEvents ucrCheckPlantingDays As ucrCheck
-    Friend WithEvents ucrChkPlantingLengthDays As ucrCheck
-    Friend WithEvents ucrChkWaterAmounts As ucrCheck
+    Friend WithEvents ucrChkRequirePlantingDays As ucrCheck
+    Friend WithEvents lblPlantingLengthDays As Label
+    Friend WithEvents lblWaterAmounts As Label
 End Class
