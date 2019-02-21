@@ -448,7 +448,7 @@ Partial Class dlgEndOfRainsSeason
         'ucrChkEndOfSeason
         '
         Me.ucrChkEndOfSeason.Checked = False
-        Me.ucrChkEndOfSeason.Location = New System.Drawing.Point(10, 378)
+        Me.ucrChkEndOfSeason.Location = New System.Drawing.Point(10, 380)
         Me.ucrChkEndOfSeason.Name = "ucrChkEndOfSeason"
         Me.ucrChkEndOfSeason.Size = New System.Drawing.Size(105, 20)
         Me.ucrChkEndOfSeason.TabIndex = 19
