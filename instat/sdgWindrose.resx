@@ -570,29 +570,29 @@
   <data name="&gt;&gt;rdoDiverging.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="ucrPnlElements.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrPnlColourPalette.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 24</value>
   </data>
-  <data name="ucrPnlElements.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrPnlColourPalette.Size" type="System.Drawing.Size, System.Drawing">
     <value>269, 29</value>
   </data>
-  <data name="ucrPnlElements.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrPnlColourPalette.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name="&gt;&gt;ucrPnlElements.Name" xml:space="preserve">
-    <value>ucrPnlElements</value>
+  <data name="&gt;&gt;ucrPnlColourPalette.Name" xml:space="preserve">
+    <value>ucrPnlColourPalette</value>
   </data>
-  <data name="&gt;&gt;ucrPnlElements.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrPnlColourPalette.Type" xml:space="preserve">
     <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrPnlElements.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrPnlColourPalette.Parent" xml:space="preserve">
     <value>grpColours</value>
   </data>
-  <data name="&gt;&gt;ucrPnlElements.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrPnlColourPalette.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="grpColours.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 53</value>
+    <value>3, 6</value>
   </data>
   <data name="grpColours.Size" type="System.Drawing.Size, System.Drawing">
     <value>302, 92</value>
@@ -614,48 +614,6 @@
   </data>
   <data name="&gt;&gt;grpColours.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="ucrPnlColourPalette.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 72</value>
-  </data>
-  <data name="ucrPnlColourPalette.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 35</value>
-  </data>
-  <data name="ucrPnlColourPalette.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlColourPalette.Name" xml:space="preserve">
-    <value>ucrPnlColourPalette</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlColourPalette.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlColourPalette.Parent" xml:space="preserve">
-    <value>tbpColours</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlColourPalette.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrChkColourPalette.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 17</value>
-  </data>
-  <data name="ucrChkColourPalette.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkColourPalette.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColourPalette.Name" xml:space="preserve">
-    <value>ucrChkColourPalette</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColourPalette.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColourPalette.Parent" xml:space="preserve">
-    <value>tbpColours</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColourPalette.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="tbpColours.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
