@@ -247,7 +247,6 @@ Public Class dlgTransformClimatic
         clsRWaterBalanceFunction = New RFunction
 
         clsRRaindayMatch = New RFunction
-        clsRCountFunction = New RFunction
         clsRRaindayAndOperator = New ROperator
         clsRRaindayOrOperator = New ROperator
         clsRRaindayUpperOperator = New ROperator
