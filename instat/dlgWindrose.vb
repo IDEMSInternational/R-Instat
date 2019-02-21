@@ -91,6 +91,9 @@ Public Class dlgWindrose
         ucrWindRoseSelector.Reset()
         ucrSaveGraph.Reset()
         ucrReceiverWindSpeed.SetMeAsReceiver()
+        ucrInputCaption.Reset()
+        ucrInputTitle.Reset()
+        ucrInputSubTitle.Reset()
 
         clsDefaultRFunction.SetPackageName("clifro")
         clsDefaultRFunction.SetRCommand("windrose")
