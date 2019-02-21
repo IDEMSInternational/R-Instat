@@ -48,7 +48,6 @@ Public Class sdgWindrose
         ucrNudCalmWind.SetParameter(New RParameter("calm_wind", 9))
         ucrNudCalmWind.SetRDefault(0)
 
-        ucrInputTheme.SetParameter(New RParameter("col_pal"))
         ucrInputTheme.SetParameter(New RParameter("ggtheme", 7))
         dctThemePairs.Add("grey", Chr(34) & "grey" & Chr(34))
         dctThemePairs.Add("gray", Chr(34) & "gray" & Chr(34))
@@ -62,6 +61,7 @@ Public Class sdgWindrose
         ucrInputSpeedCuts.AddToLinkedControls(ucrNudNoOfSpeeds, {"NA"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
         ucrInputSequential.SetParameter(New RParameter("col_pal"))
+        ucrInputSequential.bAllowNonConditionValues = True
         dctSequatailPairs.Add("Blues", Chr(34) & "Blues" & Chr(34))
         dctSequatailPairs.Add("Greens", Chr(34) & "Greens" & Chr(34))
         dctSequatailPairs.Add("Greys", Chr(34) & "Greys" & Chr(34))
@@ -84,6 +84,7 @@ Public Class sdgWindrose
         ucrInputSequential.SetDropDownStyleAsNonEditable()
 
         ucrInputDiverging.SetParameter(New RParameter("col_pal"))
+        ucrInputDiverging.bAllowNonConditionValues = True
         dctDivergingPairs.Add("Spectral", Chr(34) & "Spectral" & Chr(34))
         dctDivergingPairs.Add("BrBG", Chr(34) & "BrBG" & Chr(34))
         dctDivergingPairs.Add("PiYG", Chr(34) & "PiYG" & Chr(34))
@@ -97,6 +98,7 @@ Public Class sdgWindrose
         ucrInputDiverging.SetDropDownStyleAsNonEditable()
 
         ucrInputQualitative.SetParameter(New RParameter("col_pal"))
+        ucrInputQualitative.bAllowNonConditionValues = True
         dctQualititivePairs.Add("Accent", Chr(34) & "Accent" & Chr(34))
         dctQualititivePairs.Add("Dark2", Chr(34) & "Dark2" & Chr(34))
         dctQualititivePairs.Add("Pastel1", Chr(34) & "Pastel1" & Chr(34))

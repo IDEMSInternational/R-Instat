@@ -60,11 +60,11 @@ Partial Class sdgWindrose
         Me.rdoSequential = New System.Windows.Forms.RadioButton()
         Me.rdoDiverging = New System.Windows.Forms.RadioButton()
         Me.ucrPnlColourPalette = New instat.UcrPanel()
-        Me.tbpTitles = New System.Windows.Forms.TabPage()
+        Me.tbpOptions = New System.Windows.Forms.TabPage()
         Me.tbpWindRoseOptions.SuspendLayout()
         Me.tbpColours.SuspendLayout()
         Me.grpColours.SuspendLayout()
-        Me.tbpTitles.SuspendLayout()
+        Me.tbpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblNoofDirections
@@ -145,7 +145,7 @@ Partial Class sdgWindrose
         'tbpWindRoseOptions
         '
         Me.tbpWindRoseOptions.Controls.Add(Me.tbpColours)
-        Me.tbpWindRoseOptions.Controls.Add(Me.tbpTitles)
+        Me.tbpWindRoseOptions.Controls.Add(Me.tbpOptions)
         resources.ApplyResources(Me.tbpWindRoseOptions, "tbpWindRoseOptions")
         Me.tbpWindRoseOptions.Name = "tbpWindRoseOptions"
         Me.tbpWindRoseOptions.SelectedIndex = 0
@@ -229,21 +229,21 @@ Partial Class sdgWindrose
         resources.ApplyResources(Me.ucrPnlColourPalette, "ucrPnlColourPalette")
         Me.ucrPnlColourPalette.Name = "ucrPnlColourPalette"
         '
-        'tbpTitles
+        'tbpOptions
         '
-        Me.tbpTitles.Controls.Add(Me.ucrInputSpeedCuts)
-        Me.tbpTitles.Controls.Add(Me.ucrInputTheme)
-        Me.tbpTitles.Controls.Add(Me.ucrNudNoOfDirections)
-        Me.tbpTitles.Controls.Add(Me.lblTheme)
-        Me.tbpTitles.Controls.Add(Me.ucrNudNoOfSpeeds)
-        Me.tbpTitles.Controls.Add(Me.lblSpeedCuts)
-        Me.tbpTitles.Controls.Add(Me.ucrNudCalmWind)
-        Me.tbpTitles.Controls.Add(Me.lblCalmWind)
-        Me.tbpTitles.Controls.Add(Me.lblNoofDirections)
-        Me.tbpTitles.Controls.Add(Me.lblNoOfSpeeds)
-        resources.ApplyResources(Me.tbpTitles, "tbpTitles")
-        Me.tbpTitles.Name = "tbpTitles"
-        Me.tbpTitles.UseVisualStyleBackColor = True
+        Me.tbpOptions.Controls.Add(Me.ucrInputSpeedCuts)
+        Me.tbpOptions.Controls.Add(Me.ucrInputTheme)
+        Me.tbpOptions.Controls.Add(Me.ucrNudNoOfDirections)
+        Me.tbpOptions.Controls.Add(Me.lblTheme)
+        Me.tbpOptions.Controls.Add(Me.ucrNudNoOfSpeeds)
+        Me.tbpOptions.Controls.Add(Me.lblSpeedCuts)
+        Me.tbpOptions.Controls.Add(Me.ucrNudCalmWind)
+        Me.tbpOptions.Controls.Add(Me.lblCalmWind)
+        Me.tbpOptions.Controls.Add(Me.lblNoofDirections)
+        Me.tbpOptions.Controls.Add(Me.lblNoOfSpeeds)
+        resources.ApplyResources(Me.tbpOptions, "tbpOptions")
+        Me.tbpOptions.Name = "tbpOptions"
+        Me.tbpOptions.UseVisualStyleBackColor = True
         '
         'sdgWindrose
         '
@@ -258,8 +258,8 @@ Partial Class sdgWindrose
         Me.tbpWindRoseOptions.ResumeLayout(False)
         Me.tbpColours.ResumeLayout(False)
         Me.grpColours.ResumeLayout(False)
-        Me.tbpTitles.ResumeLayout(False)
-        Me.tbpTitles.PerformLayout()
+        Me.tbpOptions.ResumeLayout(False)
+        Me.tbpOptions.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -277,7 +277,7 @@ Partial Class sdgWindrose
     Friend WithEvents ucrInputTheme As ucrInputComboBox
     Friend WithEvents tbpWindRoseOptions As TabControl
     Friend WithEvents tbpColours As TabPage
-    Friend WithEvents tbpTitles As TabPage
+    Friend WithEvents tbpOptions As TabPage
     Friend WithEvents grpColours As GroupBox
     Friend WithEvents ucrInputQualitative As ucrInputComboBox
     Friend WithEvents ucrInputDiverging As ucrInputComboBox
