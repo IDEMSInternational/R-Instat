@@ -267,12 +267,4 @@ Public Class dlgLinePlot
             clsRaesFunction.RemoveParameterByName("group")
         End If
     End Sub
-
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
-
-    End Sub
-
-    Private Sub UcrVariablesAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
-
-    End Sub
 End Class
