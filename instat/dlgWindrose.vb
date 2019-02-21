@@ -97,6 +97,7 @@ Public Class dlgWindrose
 
         clsDefaultRFunction.SetPackageName("clifro")
         clsDefaultRFunction.SetRCommand("windrose")
+        clsDefaultRFunction.AddParameter("col_pal", Chr(34) & "Blues" & Chr(34))
 
         clsLabs.SetPackageName("ggplot2")
         clsLabs.SetRCommand("labs")
