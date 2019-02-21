@@ -53,14 +53,13 @@ Partial Class sdgWindrose
         Me.tbpWindRoseOptions = New System.Windows.Forms.TabControl()
         Me.tbpColours = New System.Windows.Forms.TabPage()
         Me.grpColours = New System.Windows.Forms.GroupBox()
-        Me.ucrInputQualitative = New instat.ucrInputComboBox()
-        Me.ucrInputDiverging = New instat.ucrInputComboBox()
-        Me.ucrInputSequential = New instat.ucrInputComboBox()
+        Me.ucrInputPalettes = New instat.ucrInputComboBox()
         Me.rdoQualitative = New System.Windows.Forms.RadioButton()
         Me.rdoSequential = New System.Windows.Forms.RadioButton()
         Me.rdoDiverging = New System.Windows.Forms.RadioButton()
         Me.ucrPnlColourPalette = New instat.UcrPanel()
         Me.tbpOptions = New System.Windows.Forms.TabPage()
+        Me.lblPalette = New System.Windows.Forms.Label()
         Me.tbpWindRoseOptions.SuspendLayout()
         Me.tbpColours.SuspendLayout()
         Me.grpColours.SuspendLayout()
@@ -159,9 +158,8 @@ Partial Class sdgWindrose
         '
         'grpColours
         '
-        Me.grpColours.Controls.Add(Me.ucrInputQualitative)
-        Me.grpColours.Controls.Add(Me.ucrInputDiverging)
-        Me.grpColours.Controls.Add(Me.ucrInputSequential)
+        Me.grpColours.Controls.Add(Me.lblPalette)
+        Me.grpColours.Controls.Add(Me.ucrInputPalettes)
         Me.grpColours.Controls.Add(Me.rdoQualitative)
         Me.grpColours.Controls.Add(Me.rdoSequential)
         Me.grpColours.Controls.Add(Me.rdoDiverging)
@@ -170,26 +168,12 @@ Partial Class sdgWindrose
         Me.grpColours.Name = "grpColours"
         Me.grpColours.TabStop = False
         '
-        'ucrInputQualitative
+        'ucrInputPalettes
         '
-        Me.ucrInputQualitative.AddQuotesIfUnrecognised = True
-        Me.ucrInputQualitative.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputQualitative, "ucrInputQualitative")
-        Me.ucrInputQualitative.Name = "ucrInputQualitative"
-        '
-        'ucrInputDiverging
-        '
-        Me.ucrInputDiverging.AddQuotesIfUnrecognised = True
-        Me.ucrInputDiverging.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDiverging, "ucrInputDiverging")
-        Me.ucrInputDiverging.Name = "ucrInputDiverging"
-        '
-        'ucrInputSequential
-        '
-        Me.ucrInputSequential.AddQuotesIfUnrecognised = True
-        Me.ucrInputSequential.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSequential, "ucrInputSequential")
-        Me.ucrInputSequential.Name = "ucrInputSequential"
+        Me.ucrInputPalettes.AddQuotesIfUnrecognised = True
+        Me.ucrInputPalettes.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPalettes, "ucrInputPalettes")
+        Me.ucrInputPalettes.Name = "ucrInputPalettes"
         '
         'rdoQualitative
         '
@@ -245,6 +229,11 @@ Partial Class sdgWindrose
         Me.tbpOptions.Name = "tbpOptions"
         Me.tbpOptions.UseVisualStyleBackColor = True
         '
+        'lblPalette
+        '
+        resources.ApplyResources(Me.lblPalette, "lblPalette")
+        Me.lblPalette.Name = "lblPalette"
+        '
         'sdgWindrose
         '
         resources.ApplyResources(Me, "$this")
@@ -258,6 +247,7 @@ Partial Class sdgWindrose
         Me.tbpWindRoseOptions.ResumeLayout(False)
         Me.tbpColours.ResumeLayout(False)
         Me.grpColours.ResumeLayout(False)
+        Me.grpColours.PerformLayout()
         Me.tbpOptions.ResumeLayout(False)
         Me.tbpOptions.PerformLayout()
         Me.ResumeLayout(False)
@@ -279,11 +269,10 @@ Partial Class sdgWindrose
     Friend WithEvents tbpColours As TabPage
     Friend WithEvents tbpOptions As TabPage
     Friend WithEvents grpColours As GroupBox
-    Friend WithEvents ucrInputQualitative As ucrInputComboBox
-    Friend WithEvents ucrInputDiverging As ucrInputComboBox
-    Friend WithEvents ucrInputSequential As ucrInputComboBox
+    Friend WithEvents ucrInputPalettes As ucrInputComboBox
     Friend WithEvents rdoQualitative As RadioButton
     Friend WithEvents rdoSequential As RadioButton
     Friend WithEvents rdoDiverging As RadioButton
     Friend WithEvents ucrPnlColourPalette As UcrPanel
+    Friend WithEvents lblPalette As Label
 End Class
