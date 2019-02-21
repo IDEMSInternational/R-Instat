@@ -88,7 +88,7 @@ Public Class dlgPICSACrops
         ucrReceiverEnd.bAttachedToPrimaryDataFrame = False
 
         'Planting date 
-        ucrChkRequirePlantingDays.SetText("Require start day before planting day:")
+        ucrChkRequirePlantingDays.SetText("Require start day before planting day")
         ucrChkRequirePlantingDays.SetParameter(New RParameter("start_check", 10), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkRequirePlantingDays.SetRDefault("TRUE")
 
@@ -176,7 +176,6 @@ Public Class dlgPICSACrops
 
         'Linking of controls
         ucrChkDataProp.AddToLinkedControls(ucrChkPrintDataProp, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrChkRequirePlantingDays.AddToLinkedControls(ucrInputPlantingDates, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -259,15 +258,11 @@ Public Class dlgPICSACrops
         End If
     End Sub
 
-    Private Sub ucrCheckPlantingDays_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRequirePlantingDays.ControlValueChanged
-        PlantingDaysParam()
-    End Sub
-
     Private Sub PlantingDaysParam()
-        If ucrChkRequirePlantingDays.Checked Then
-            clsCropsFunction.AddParameter("plant_days", "c(" & ucrInputPlantingDates.GetText() & ")", iPosition:=5)
-        Else
+        If ucrInputPlantingDates.IsEmpty Then
             clsCropsFunction.RemoveParameterByName("plant_days")
+        Else
+            clsCropsFunction.AddParameter("plant_days", "c(" & ucrInputPlantingDates.GetText() & ")", iPosition:=5)
         End If
     End Sub
 
