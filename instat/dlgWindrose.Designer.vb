@@ -98,7 +98,7 @@ Partial Class dlgWindrose
         '
         Me.cmdWindroseOptions.Location = New System.Drawing.Point(10, 201)
         Me.cmdWindroseOptions.Name = "cmdWindroseOptions"
-        Me.cmdWindroseOptions.Size = New System.Drawing.Size(88, 23)
+        Me.cmdWindroseOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdWindroseOptions.TabIndex = 11
         Me.cmdWindroseOptions.Text = "Windrose Options"
         Me.cmdWindroseOptions.UseVisualStyleBackColor = True
