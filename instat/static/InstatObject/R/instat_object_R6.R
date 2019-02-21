@@ -210,7 +210,7 @@ DataBook$set("public", "clone_data_object", function(curr_data_object, include_o
   else new_objects <- list()
   if(include_filters && "get_filter" %in% curr_names) new_filters <- lapply(curr_data_object$get_filter(), function(x) x$data_clone())
   else new_filters <- list()
-  if(include_calculations && "get_calculations" %in% curr_names) new_calculations <- lapply(curr_data_object$get_calculations(), function(x) x$data_clone())
+  if(include_calculations && "get_calculations" %in% curr_names) new_calculations <- lapply(curr_data_object$get_calculations(), function(x) self$clone_instat_calculation(x))
   else new_calculations <- list()
   if(include_comments && "get_comments" %in% curr_names) new_comments <- lapply(curr_data_object$get_comments(), function(x) x$data_clone())
   else new_comments <- list()
@@ -233,6 +233,22 @@ DataBook$set("public", "clone_data_object", function(curr_data_object, include_o
   new_data_object$metadata_changed <- TRUE
   new_data_object$variables_metadata_changed <- TRUE
   return(new_data_object)
+}
+)
+
+DataBook$set("public", "clone_instat_calculation", function(curr_instat_calculation, ...) {
+  
+  new_manips <- lapply(curr_instat_calculation$manipulations, function(x) self$clone_instat_calculation(x))
+  new_subs <- lapply(curr_instat_calculation$sub_calculations, function(x) self$clone_instat_calculation(x))
+  new_instat_calculation <- instat_calculation$new(function_exp = curr_instat_calculation$function_exp, 
+                                                   type = curr_instat_calculation$type,
+                                                   name = curr_instat_calculation$name, 
+                                                   result_name = curr_instat_calculation$result_name, 
+                                                   manipulations = new_manips,
+                                                   sub_calculations = new_subs,
+                                                   calculated_from = curr_instat_calculation$calculated_from, 
+                                                   save = curr_instat_calculation$save)
+  return(new_instat_calculation)
 }
 )
 
