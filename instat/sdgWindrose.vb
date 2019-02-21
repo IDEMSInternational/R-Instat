@@ -36,7 +36,6 @@ Public Class sdgWindrose
         ucrPnlColourPalette.AddToLinkedControls(ucrInputSequential, {rdoSequential}, bNewLinkedAddRemoveParameter:=False, bNewLinkedChangeParameterValue:=True)
         ucrPnlColourPalette.AddToLinkedControls(ucrInputSequential, {rdoDiverging}, bNewLinkedAddRemoveParameter:=False, bNewLinkedChangeParameterValue:=True)
         ucrPnlColourPalette.AddToLinkedControls(ucrInputSequential, {rdoQualitative}, bNewLinkedAddRemoveParameter:=False, bNewLinkedChangeParameterValue:=True)
-        ucrPnlColourPalette.SetParameter(New RParameter("col_pal"))
 
         ucrNudNoOfDirections.SetParameter(New RParameter("n_directions", 3))
         ucrNudNoOfDirections.SetRDefault(12)
@@ -83,7 +82,7 @@ Public Class sdgWindrose
         dctSequatailPairs.Add("YlOrBr", Chr(34) & "YlOrBr" & Chr(34))
         dctSequatailPairs.Add("YlOrRd", Chr(34) & "YlOrRd" & Chr(34))
         ucrInputSequential.SetItems(dctSequatailPairs)
-
+        ucrInputSequential.SetDropDownStyleAsNonEditable()
 
         dctDivergingPairs.Add("Spectral", Chr(34) & "Spectral" & Chr(34))
         dctDivergingPairs.Add("BrBG", Chr(34) & "BrBG" & Chr(34))
@@ -95,8 +94,7 @@ Public Class sdgWindrose
         dctDivergingPairs.Add("RdYlBu", Chr(34) & "RdYlBu" & Chr(34))
         dctDivergingPairs.Add("RdYlGn", Chr(34) & "RdYlGn" & Chr(34))
         ucrInputDiverging.SetItems(dctDivergingPairs)
-
-
+        ucrInputDiverging.SetDropDownStyleAsNonEditable()
 
         dctQualititivePairs.Add("Spectral", Chr(34) & "Spectral" & Chr(34))
         dctQualititivePairs.Add("Accent", Chr(34) & "Accent" & Chr(34))
@@ -107,6 +105,7 @@ Public Class sdgWindrose
         dctQualititivePairs.Add("Set2", Chr(34) & "Set2" & Chr(34))
         dctQualititivePairs.Add("Set3", Chr(34) & "Set3" & Chr(34))
         ucrInputQualitative.SetItems(dctQualititivePairs)
+        ucrInputQualitative.SetDropDownStyleAsNonEditable()
         bControlsInitialised = True
     End Sub
 
