@@ -29,13 +29,20 @@ Public Class sdgWindrose
         Dim dctDivergingPairs As New Dictionary(Of String, String)
         Dim dctQualititivePairs As New Dictionary(Of String, String)
 
+
         ucrPnlColourPalette.AddRadioButton(rdoDiverging)
         ucrPnlColourPalette.AddRadioButton(rdoSequential)
         ucrPnlColourPalette.AddRadioButton(rdoQualitative)
+        ucrPnlColourPalette.SetParameter(New RParameter("col_pal"))
 
         ucrPnlColourPalette.AddToLinkedControls(ucrInputSequential, {rdoSequential}, bNewLinkedAddRemoveParameter:=False, bNewLinkedChangeParameterValue:=True)
+        ucrPnlColourPalette.AddParameterValuesCondition(rdoSequential, "col_pal", {Chr(34) & "Blues" & Chr(34), Chr(34) & "Blues" & Chr(34), Chr(34) & "Greens" & Chr(34), Chr(34) & "Greys" & Chr(34), Chr(34) & "Oranges" & Chr(34), Chr(34) & "Purples" & Chr(34), Chr(34) & "Reds" & Chr(34), Chr(34) & "BuGn" & Chr(34), Chr(34) & "BuPu" & Chr(34), Chr(34) & "GnBu" & Chr(34), Chr(34) & "OrRd" & Chr(34), Chr(34) & "PuBu" & Chr(34), Chr(34) & "PuBuGn" & Chr(34), Chr(34) & "PuRd" & Chr(34), Chr(34) & "RdPu" & Chr(34), Chr(34) & "YlGn" & Chr(34), Chr(34) & "YlGnBu" & Chr(34), Chr(34) & "YlOrBr" & Chr(34), Chr(34) & "YlOrRd" & Chr(34)}, True)
+
         ucrPnlColourPalette.AddToLinkedControls(ucrInputSequential, {rdoDiverging}, bNewLinkedAddRemoveParameter:=False, bNewLinkedChangeParameterValue:=True)
+        ucrPnlColourPalette.AddParameterValuesCondition(rdoDiverging, "col_pal", {Chr(34) & "Spectral" & Chr(34), Chr(34) & "BrBG" & Chr(34), Chr(34) & "PiYG" & Chr(34), Chr(34) & "PRGn" & Chr(34), Chr(34) & "PuOr" & Chr(34), Chr(34) & "RdBu" & Chr(34), Chr(34) & "RdGy" & Chr(34), Chr(34) & "RdYlBu" & Chr(34), Chr(34) & "RdYlGn" & Chr(34)}, True)
+
         ucrPnlColourPalette.AddToLinkedControls(ucrInputSequential, {rdoQualitative}, bNewLinkedAddRemoveParameter:=False, bNewLinkedChangeParameterValue:=True)
+        ucrPnlColourPalette.AddParameterValuesCondition(rdoQualitative, "col_pal", {Chr(34) & "Accent" & Chr(34), Chr(34) & "Dark2" & Chr(34), Chr(34) & "Pastel1" & Chr(34), Chr(34) & "Pastel2" & Chr(34), Chr(34) & "Set1" & Chr(34), Chr(34) & "Set2" & Chr(34), Chr(34) & "Set3" & Chr(34)}, True)
 
         ucrNudNoOfDirections.SetParameter(New RParameter("n_directions", 3))
         ucrNudNoOfDirections.SetRDefault(12)
@@ -60,8 +67,6 @@ Public Class sdgWindrose
         ucrInputTheme.SetItems(dctThemePairs)
         ucrInputTheme.SetDropDownStyleAsNonEditable()
         ucrInputSpeedCuts.AddToLinkedControls(ucrNudNoOfSpeeds, {"NA"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-
-
 
         dctSequatailPairs.Add("Blues", Chr(34) & "Blues" & Chr(34))
         dctSequatailPairs.Add("Greens", Chr(34) & "Greens" & Chr(34))
@@ -96,7 +101,6 @@ Public Class sdgWindrose
         ucrInputDiverging.SetItems(dctDivergingPairs)
         ucrInputDiverging.SetDropDownStyleAsNonEditable()
 
-        dctQualititivePairs.Add("Spectral", Chr(34) & "Spectral" & Chr(34))
         dctQualititivePairs.Add("Accent", Chr(34) & "Accent" & Chr(34))
         dctQualititivePairs.Add("Dark2", Chr(34) & "Dark2" & Chr(34))
         dctQualititivePairs.Add("Pastel1", Chr(34) & "Pastel1" & Chr(34))
