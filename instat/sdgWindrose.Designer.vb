@@ -59,9 +59,7 @@ Partial Class sdgWindrose
         Me.rdoQualitative = New System.Windows.Forms.RadioButton()
         Me.rdoSequential = New System.Windows.Forms.RadioButton()
         Me.rdoDiverging = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlElements = New instat.UcrPanel()
         Me.ucrPnlColourPalette = New instat.UcrPanel()
-        Me.ucrChkColourPalette = New instat.ucrCheck()
         Me.tbpTitles = New System.Windows.Forms.TabPage()
         Me.tbpWindRoseOptions.SuspendLayout()
         Me.tbpColours.SuspendLayout()
@@ -155,8 +153,6 @@ Partial Class sdgWindrose
         'tbpColours
         '
         Me.tbpColours.Controls.Add(Me.grpColours)
-        Me.tbpColours.Controls.Add(Me.ucrPnlColourPalette)
-        Me.tbpColours.Controls.Add(Me.ucrChkColourPalette)
         resources.ApplyResources(Me.tbpColours, "tbpColours")
         Me.tbpColours.Name = "tbpColours"
         Me.tbpColours.UseVisualStyleBackColor = True
@@ -169,7 +165,7 @@ Partial Class sdgWindrose
         Me.grpColours.Controls.Add(Me.rdoQualitative)
         Me.grpColours.Controls.Add(Me.rdoSequential)
         Me.grpColours.Controls.Add(Me.rdoDiverging)
-        Me.grpColours.Controls.Add(Me.ucrPnlElements)
+        Me.grpColours.Controls.Add(Me.ucrPnlColourPalette)
         resources.ApplyResources(Me.grpColours, "grpColours")
         Me.grpColours.Name = "grpColours"
         Me.grpColours.TabStop = False
@@ -228,21 +224,10 @@ Partial Class sdgWindrose
         Me.rdoDiverging.Name = "rdoDiverging"
         Me.rdoDiverging.UseVisualStyleBackColor = True
         '
-        'ucrPnlElements
-        '
-        resources.ApplyResources(Me.ucrPnlElements, "ucrPnlElements")
-        Me.ucrPnlElements.Name = "ucrPnlElements"
-        '
         'ucrPnlColourPalette
         '
         resources.ApplyResources(Me.ucrPnlColourPalette, "ucrPnlColourPalette")
         Me.ucrPnlColourPalette.Name = "ucrPnlColourPalette"
-        '
-        'ucrChkColourPalette
-        '
-        Me.ucrChkColourPalette.Checked = False
-        resources.ApplyResources(Me.ucrChkColourPalette, "ucrChkColourPalette")
-        Me.ucrChkColourPalette.Name = "ucrChkColourPalette"
         '
         'tbpTitles
         '
@@ -292,7 +277,6 @@ Partial Class sdgWindrose
     Friend WithEvents ucrInputTheme As ucrInputComboBox
     Friend WithEvents tbpWindRoseOptions As TabControl
     Friend WithEvents tbpColours As TabPage
-    Friend WithEvents ucrChkColourPalette As ucrCheck
     Friend WithEvents tbpTitles As TabPage
     Friend WithEvents grpColours As GroupBox
     Friend WithEvents ucrInputQualitative As ucrInputComboBox
@@ -301,6 +285,5 @@ Partial Class sdgWindrose
     Friend WithEvents rdoQualitative As RadioButton
     Friend WithEvents rdoSequential As RadioButton
     Friend WithEvents rdoDiverging As RadioButton
-    Friend WithEvents ucrPnlElements As UcrPanel
     Friend WithEvents ucrPnlColourPalette As UcrPanel
 End Class

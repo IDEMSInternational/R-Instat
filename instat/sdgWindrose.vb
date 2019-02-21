@@ -29,6 +29,15 @@ Public Class sdgWindrose
         Dim dctDivergingPairs As New Dictionary(Of String, String)
         Dim dctQualititivePairs As New Dictionary(Of String, String)
 
+        ucrPnlColourPalette.AddRadioButton(rdoDiverging)
+        ucrPnlColourPalette.AddRadioButton(rdoSequential)
+        ucrPnlColourPalette.AddRadioButton(rdoQualitative)
+
+        ucrPnlColourPalette.AddToLinkedControls(ucrInputSequential, {rdoSequential}, bNewLinkedAddRemoveParameter:=False, bNewLinkedChangeParameterValue:=True)
+        ucrPnlColourPalette.AddToLinkedControls(ucrInputSequential, {rdoDiverging}, bNewLinkedAddRemoveParameter:=False, bNewLinkedChangeParameterValue:=True)
+        ucrPnlColourPalette.AddToLinkedControls(ucrInputSequential, {rdoQualitative}, bNewLinkedAddRemoveParameter:=False, bNewLinkedChangeParameterValue:=True)
+        ucrPnlColourPalette.SetParameter(New RParameter("col_pal"))
+
         ucrNudNoOfDirections.SetParameter(New RParameter("n_directions", 3))
         ucrNudNoOfDirections.SetRDefault(12)
 
@@ -53,6 +62,8 @@ Public Class sdgWindrose
         ucrInputTheme.SetDropDownStyleAsNonEditable()
         ucrInputSpeedCuts.AddToLinkedControls(ucrNudNoOfSpeeds, {"NA"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
+
+
         dctSequatailPairs.Add("Blues", Chr(34) & "Blues" & Chr(34))
         dctSequatailPairs.Add("Greens", Chr(34) & "Greens" & Chr(34))
         dctSequatailPairs.Add("Greys", Chr(34) & "Greys" & Chr(34))
@@ -73,6 +84,7 @@ Public Class sdgWindrose
         dctSequatailPairs.Add("YlOrRd", Chr(34) & "YlOrRd" & Chr(34))
         ucrInputSequential.SetItems(dctSequatailPairs)
 
+
         dctDivergingPairs.Add("Spectral", Chr(34) & "Spectral" & Chr(34))
         dctDivergingPairs.Add("BrBG", Chr(34) & "BrBG" & Chr(34))
         dctDivergingPairs.Add("PiYG", Chr(34) & "PiYG" & Chr(34))
@@ -83,6 +95,8 @@ Public Class sdgWindrose
         dctDivergingPairs.Add("RdYlBu", Chr(34) & "RdYlBu" & Chr(34))
         dctDivergingPairs.Add("RdYlGn", Chr(34) & "RdYlGn" & Chr(34))
         ucrInputDiverging.SetItems(dctDivergingPairs)
+
+
 
         dctQualititivePairs.Add("Spectral", Chr(34) & "Spectral" & Chr(34))
         dctQualititivePairs.Add("Accent", Chr(34) & "Accent" & Chr(34))

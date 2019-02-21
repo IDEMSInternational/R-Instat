@@ -135,7 +135,7 @@ Public Class dlgWindrose
     End Sub
 
     Private Sub cmdWindroseOptions_Click(sender As Object, e As EventArgs) Handles cmdWindroseOptions.Click
-        sdgWindrose.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubDialog)
+        sdgWindrose.SetRFunction(clsDefaultRFunction, bResetSubDialog)
         bResetSubDialog = False
         sdgWindrose.ShowDialog()
     End Sub
