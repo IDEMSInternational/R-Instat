@@ -128,11 +128,6 @@ Public Class dlgClimaticSummary
 
         ucrChkAddDateColumn.SetText("Add Date Column")
 
-        'ucrChkOmitMissingValues.SetParameter(New RParameter("na.rm", 6))
-        'ucrChkOmitMissingValues.SetText("Omit Missing Values")
-        'ucrChkOmitMissingValues.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        'ucrChkOmitMissingValues.SetRDefault("FALSE")
-
         'linking controls
         ucrPnlAnnualWithin.AddToLinkedControls({ucrReceiverYear}, {rdoAnnual, rdoAnnualWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlAnnualWithin.AddToLinkedControls({ucrReceiverWithinYear}, {rdoAnnualWithinYear, rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
