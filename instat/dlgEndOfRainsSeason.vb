@@ -109,6 +109,10 @@ Public Class dlgEndOfRainsSeason
     End Sub
 
     Private Sub InitialiseDialog()
+
+        'TODO temp disabled until reworked to deal with missing values
+        ucrChkEndOfSeason.Enabled = False
+
         ucrSelectorForWaterBalance.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForWaterBalance.SetParameterIsString()
 
