@@ -277,6 +277,7 @@ Public Class dlgTransformClimatic
         clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
         clsRRaindayMatch.bToScriptAsRString = True
 
+        clsRRaindayAndOperator.bToScriptAsRString = True
         clsRRaindayAndOperator.SetOperation("&")
         clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
         clsRRaindayUpperOperator.SetOperation("<=")
