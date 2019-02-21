@@ -163,6 +163,10 @@ Public Class sdgCorrPlot
     End Sub
 
     Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
-        clsRGGscatmatrixFunction.AddParameter("color", ucrReceiverFactor.GetVariableNames(), iPosition:=2)
+        If Not ucrReceiverFactor.IsEmpty Then
+            clsRGGscatmatrixFunction.AddParameter("color", ucrReceiverFactor.GetVariableNames(), iPosition:=2)
+        Else
+            clsRGGscatmatrixFunction.RemoveParameterByName("color")
+        End If
     End Sub
 End Class
