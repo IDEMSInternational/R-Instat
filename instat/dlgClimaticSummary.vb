@@ -126,14 +126,12 @@ Public Class dlgClimaticSummary
         ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkDropUnusedLevels.SetRDefault("FALSE")
 
-        ucrChkOmitMissingValues.SetParameter(New RParameter("na.rm", 6))
-        ucrChkOmitMissingValues.SetText("Omit Missing Values")
-        ucrChkOmitMissingValues.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkOmitMissingValues.SetRDefault("FALSE")
+        ucrChkAddDateColumn.SetText("Add Date Column")
 
         'linking controls
         ucrPnlAnnualWithin.AddToLinkedControls({ucrReceiverYear}, {rdoAnnual, rdoAnnualWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlAnnualWithin.AddToLinkedControls({ucrReceiverWithinYear}, {rdoAnnualWithinYear, rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlAnnualWithin.AddToLinkedControls({ucrChkAddDateColumn}, {rdoAnnualWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverYear.SetLinkedDisplayControl(lblYear)
         ucrReceiverWithinYear.SetLinkedDisplayControl(lblWithinYear)
 
@@ -159,7 +157,7 @@ Public Class dlgClimaticSummary
         bResetSubdialog = True
         ucrSelectorVariable.Reset()
         ucrReceiverElement.SetMeAsReceiver()
-
+        ucrChkAddDateColumn.Enabled = False
         'TODO: this changes to from >= receiver and to <= receiver if annual-variable is checekd.
         clsFromAndToConditionOperator.bToScriptAsRString = True
         clsDayFilterCalc.SetRCommand("instat_calculation$new")
@@ -203,7 +201,6 @@ Public Class dlgClimaticSummary
         ucrSelectorVariable.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverElement.SetRCode(clsDefaultFunction, bReset)
         ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
-        ucrChkOmitMissingValues.SetRCode(clsDefaultFunction, bReset)
         ucrChkPrintOutput.SetRCode(clsDefaultFunction, bReset)
 
         ucrPnlAnnualWithin.SetRCode(clsDefaultFactors, bReset)
