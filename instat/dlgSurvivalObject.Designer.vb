@@ -32,6 +32,7 @@ Partial Class dlgSurvivalObject
         Me.rdoCounting = New System.Windows.Forms.RadioButton()
         Me.rdoMstate = New System.Windows.Forms.RadioButton()
         Me.rdoInterval2 = New System.Windows.Forms.RadioButton()
+        Me.ucrInputOrigin = New instat.ucrInputTextBox()
         Me.ucrPnlType = New instat.UcrPanel()
         Me.ucrSaveObject = New instat.ucrSave()
         Me.ucrReceiverEvent = New instat.ucrReceiverSingle()
@@ -39,7 +40,10 @@ Partial Class dlgSurvivalObject
         Me.ucrReceiverTime1 = New instat.ucrReceiverSingle()
         Me.ucrSelectorFitObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputOrigin = New instat.ucrInputTextBox()
+        Me.ucrChkModifyEvent = New instat.ucrCheck()
+        Me.ucrModifyEventNumeric = New instat.ucrInputTextBox()
+        Me.lblSelectLevels = New System.Windows.Forms.Label()
+        Me.ucrModifyEventFactor = New instat.ucrFactor()
         Me.SuspendLayout()
         '
         'lblEntryTime
@@ -68,7 +72,7 @@ Partial Class dlgSurvivalObject
         '
         'lblOrigin
         '
-        Me.lblOrigin.Location = New System.Drawing.Point(281, 201)
+        Me.lblOrigin.Location = New System.Drawing.Point(281, 213)
         Me.lblOrigin.Name = "lblOrigin"
         Me.lblOrigin.Size = New System.Drawing.Size(83, 15)
         Me.lblOrigin.TabIndex = 9
@@ -176,6 +180,16 @@ Partial Class dlgSurvivalObject
         Me.rdoInterval2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.rdoInterval2.UseVisualStyleBackColor = True
         '
+        'ucrInputOrigin
+        '
+        Me.ucrInputOrigin.AddQuotesIfUnrecognised = True
+        Me.ucrInputOrigin.IsMultiline = False
+        Me.ucrInputOrigin.IsReadOnly = False
+        Me.ucrInputOrigin.Location = New System.Drawing.Point(281, 231)
+        Me.ucrInputOrigin.Name = "ucrInputOrigin"
+        Me.ucrInputOrigin.Size = New System.Drawing.Size(73, 21)
+        Me.ucrInputOrigin.TabIndex = 21
+        '
         'ucrPnlType
         '
         Me.ucrPnlType.Location = New System.Drawing.Point(0, 10)
@@ -244,21 +258,55 @@ Partial Class dlgSurvivalObject
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 12
         '
-        'ucrInputOrigin
+        'ucrChkModifyEvent
         '
-        Me.ucrInputOrigin.AddQuotesIfUnrecognised = True
-        Me.ucrInputOrigin.IsMultiline = False
-        Me.ucrInputOrigin.IsReadOnly = False
-        Me.ucrInputOrigin.Location = New System.Drawing.Point(281, 219)
-        Me.ucrInputOrigin.Name = "ucrInputOrigin"
-        Me.ucrInputOrigin.Size = New System.Drawing.Size(73, 21)
-        Me.ucrInputOrigin.TabIndex = 21
+        Me.ucrChkModifyEvent.Checked = False
+        Me.ucrChkModifyEvent.Location = New System.Drawing.Point(319, 193)
+        Me.ucrChkModifyEvent.Name = "ucrChkModifyEvent"
+        Me.ucrChkModifyEvent.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkModifyEvent.TabIndex = 22
+        '
+        'ucrModifyEventNumeric
+        '
+        Me.ucrModifyEventNumeric.AddQuotesIfUnrecognised = True
+        Me.ucrModifyEventNumeric.IsMultiline = False
+        Me.ucrModifyEventNumeric.IsReadOnly = False
+        Me.ucrModifyEventNumeric.Location = New System.Drawing.Point(440, 213)
+        Me.ucrModifyEventNumeric.Name = "ucrModifyEventNumeric"
+        Me.ucrModifyEventNumeric.Size = New System.Drawing.Size(120, 26)
+        Me.ucrModifyEventNumeric.TabIndex = 25
+        '
+        'lblSelectLevels
+        '
+        Me.lblSelectLevels.AutoSize = True
+        Me.lblSelectLevels.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSelectLevels.Location = New System.Drawing.Point(439, 197)
+        Me.lblSelectLevels.Name = "lblSelectLevels"
+        Me.lblSelectLevels.Size = New System.Drawing.Size(176, 13)
+        Me.lblSelectLevels.TabIndex = 24
+        Me.lblSelectLevels.Text = "Event occurs when variable equals:"
+        '
+        'ucrModifyEventFactor
+        '
+        Me.ucrModifyEventFactor.AutoSize = True
+        Me.ucrModifyEventFactor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrModifyEventFactor.clsReceiver = Nothing
+        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(440, 213)
+        Me.ucrModifyEventFactor.Name = "ucrModifyEventFactor"
+        Me.ucrModifyEventFactor.shtCurrSheet = Nothing
+        Me.ucrModifyEventFactor.Size = New System.Drawing.Size(197, 116)
+        Me.ucrModifyEventFactor.TabIndex = 23
+        Me.ucrModifyEventFactor.ucrChkLevels = Nothing
         '
         'dlgSurvivalObject
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(431, 334)
+        Me.ClientSize = New System.Drawing.Size(646, 339)
+        Me.Controls.Add(Me.ucrModifyEventNumeric)
+        Me.Controls.Add(Me.lblSelectLevels)
+        Me.Controls.Add(Me.ucrModifyEventFactor)
+        Me.Controls.Add(Me.ucrChkModifyEvent)
         Me.Controls.Add(Me.ucrInputOrigin)
         Me.Controls.Add(Me.rdoMstate)
         Me.Controls.Add(Me.rdoInterval2)
@@ -284,6 +332,7 @@ Partial Class dlgSurvivalObject
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Create Survival Object"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrReceiverTime2 As ucrReceiverSingle
@@ -304,4 +353,8 @@ Partial Class dlgSurvivalObject
     Friend WithEvents rdoRight As RadioButton
     Friend WithEvents ucrPnlType As UcrPanel
     Friend WithEvents ucrInputOrigin As ucrInputTextBox
+    Friend WithEvents ucrChkModifyEvent As ucrCheck
+    Friend WithEvents ucrModifyEventNumeric As ucrInputTextBox
+    Friend WithEvents lblSelectLevels As Label
+    Friend WithEvents ucrModifyEventFactor As ucrFactor
 End Class
