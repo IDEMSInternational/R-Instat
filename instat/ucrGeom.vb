@@ -268,7 +268,7 @@ Public Class ucrGeom
         'Aesthetics as layer parameters  
         'clsgeom_area.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
         'clsgeom_area.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        'clsgeom_area.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        'clsgeom_area.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         'clsgeom_area.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
         'clsgeom_area.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0})
 
