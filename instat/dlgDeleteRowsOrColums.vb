@@ -20,7 +20,7 @@ Public Class dlgDeleteRowsOrColums
     Private bReset As Boolean = True
     Private clsOperatorRowNames As New ROperator
     Private clsDeleteRows, clsDeleteColumns As RFunction
-    Private Sub dlgDeleteRows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgDeleteRows_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -44,8 +44,8 @@ Public Class dlgDeleteRowsOrColums
         ucrPnlColumnsOrRows.AddFunctionNamesCondition(rdoRows, frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
 
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrReceiverForColumnsToDelete, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudFrom, {rdoRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudTo, {rdoRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudFrom, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudTo, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrDataFrameLengthForDeleteRows, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorForDeleteColumns.SetParameter(New RParameter("data_name", 0))
@@ -58,11 +58,9 @@ Public Class dlgDeleteRowsOrColums
         ucrReceiverForColumnsToDelete.SetLinkedDisplayControl(lblColumnsToDelete)
 
         ucrNudFrom.SetParameter(New RParameter("From", 0))
-        ucrNudFrom.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
 
-        ucrNudTo.SetParameter(New RParameter("To", 2))
-        ucrNudTo.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
+        ucrNudTo.SetParameter(New RParameter("To", 1))
         ucrNudTo.SetLinkedDisplayControl(lblTo)
 
         ucrDataFrameLengthForDeleteRows.SetLinkedDisplayControl(lblNumberofRows)
@@ -117,6 +115,7 @@ Public Class dlgDeleteRowsOrColums
     Private Sub ReopenDialog()
         'temp fix to receiver containing deleted column on reopen
         ucrReceiverForColumnsToDelete.Clear()
+        SetMaxMin()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -136,11 +135,19 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub ucrSelectorForDeleteColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForDeleteColumns.ControlValueChanged
-        ucrNudFrom.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
-        ucrNudTo.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
+        SetMaxMin()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForColumnsToDelete.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged, ucrNudFrom.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Private Sub SetMaxMin()
+        If ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrNudFrom.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
+            ' Should use ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength but doesn't update before dialog loads
+            ucrNudTo.SetMinMax(1, frmMain.clsRLink.GetDataFrameLength(ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text))
+        End If
+    End Sub
+
 End Class
