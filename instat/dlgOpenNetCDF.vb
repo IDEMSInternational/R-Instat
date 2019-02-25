@@ -38,6 +38,7 @@ Public Class dlgOpenNetCDF
     Private iExpandedWidth As Integer
     Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath, "Library", "Climatic", "Satellite/")
     Private bFromLibrary As Boolean = False
+    Private bSubDialogOKEnabled As Boolean = True
 
     Public Sub New()
         ' This call is required by the designer.
@@ -130,6 +131,7 @@ Public Class dlgOpenNetCDF
         ucrBase.clsRsyntax.SetBaseRFunction(clsImportNetcdfFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsNcCloseFunction, iPosition:=0)
         bResetSubdialog = True
+        bSubDialogOKEnabled = True
 
         bShowDetails = False
         SetDialogSize()
@@ -140,7 +142,7 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrInputDataName.Text <> "" AndAlso ucrInputFilePath.Text <> "" Then
+        If ucrInputDataName.Text <> "" AndAlso ucrInputFilePath.Text <> "" AndAlso bSubDialogOKEnabled Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -199,6 +201,7 @@ Public Class dlgOpenNetCDF
         sdgOpenNetCDF.SetRFunction(clsNewImportNetcdfFunction:=clsImportNetcdfFunction, clsNewNcOpenFunction:=clsNcOpenFunction, strNewFilePath:=strFilePath, clsNewBoundaryListFunction:=clsBoundaryListFunction, clsNewXLimitsFunction:=clsXLimtsFunction, clsNewYLimitsFunction:=clsYLimitsFunction, clsNewZLimitsFunction:=clsZLimtsFunction, clsNewSLimitsFunction:=clsSLimtsFunction, clsNewTLimitsFunction:=clsTLimitsFunction, strNewShortDescription:=strShort, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgOpenNetCDF.ShowDialog()
+        bSubDialogOKEnabled = sdgOpenNetCDF.bOKEnabled
         TestOkEnabled()
     End Sub
 
