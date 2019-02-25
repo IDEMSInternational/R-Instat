@@ -217,7 +217,7 @@
     <value>10, 55</value>
   </data>
   <data name="ucrDistWithParameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 156</value>
+    <value>248, 156</value>
   </data>
   <data name="ucrDistWithParameters.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -346,7 +346,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>540, 300</value>
+    <value>479, 300</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
