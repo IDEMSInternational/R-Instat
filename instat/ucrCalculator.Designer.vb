@@ -1228,8 +1228,6 @@ Partial Class ucrCalculator
         '
         'grpWakefield
         '
-        Me.grpWakefield.Controls.Add(Me.cmdWakefield_Month)
-        Me.grpWakefield.Controls.Add(Me.cmdInternet_Browser)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
         Me.grpWakefield.Controls.Add(Me.cmdValid)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
@@ -1247,6 +1245,7 @@ Partial Class ucrCalculator
         Me.grpWakefield.Controls.Add(Me.cmdPolitical)
         Me.grpWakefield.Controls.Add(Me.cmdNormal)
         Me.grpWakefield.Controls.Add(Me.cmdName)
+        Me.grpWakefield.Controls.Add(Me.cmdWakefield_Month)
         Me.grpWakefield.Controls.Add(Me.cmdMilitary)
         Me.grpWakefield.Controls.Add(Me.cmdMarital)
         Me.grpWakefield.Controls.Add(Me.cmdLorem_ipsum)
@@ -1257,6 +1256,7 @@ Partial Class ucrCalculator
         Me.grpWakefield.Controls.Add(Me.cmdLevel)
         Me.grpWakefield.Controls.Add(Me.cmdLanguage)
         Me.grpWakefield.Controls.Add(Me.cmdIq)
+        Me.grpWakefield.Controls.Add(Me.cmdInternet_Browser)
         Me.grpWakefield.Controls.Add(Me.cmdGrade_Level)
         Me.grpWakefield.Controls.Add(Me.cmdEye)
         Me.grpWakefield.Controls.Add(Me.cmdEmployment)

@@ -1382,7 +1382,7 @@ Public Class frmMain
         dlgImportFromDatabases.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticFileImportandTidyNetCDF_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportandTidyNetCDF.Click
+    Private Sub OpenNetCDFToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenNetCDFToolStripMenuItem.Click
         dlgOpenNetCDF.ShowDialog()
     End Sub
 
@@ -1858,7 +1858,7 @@ Public Class frmMain
         dlgCountryColouredMap.ShowDialog()
     End Sub
 
-    Private Sub mnuFileImportandTidyNetCDFFile_Click(sender As Object, e As EventArgs) Handles mnuFileImportandTidyNetCDFFile.Click
+    Private Sub OpenNETcdfFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenNETcdfFileToolStripMenuItem.Click
         dlgOpenNetCDF.ShowDialog()
     End Sub
 
@@ -1988,7 +1988,7 @@ Public Class frmMain
         dlgAnonymiseIDColumn.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticFileImportandTidyShapefiles_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportandTidyShapefiles.Click
+    Private Sub mnuClimaticFileImportShapeFile_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportShapeFile.Click
         dlgImportShapeFiles.ShowDialog()
     End Sub
 
