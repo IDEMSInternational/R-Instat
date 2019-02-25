@@ -16,7 +16,6 @@
 
 Imports RDotNet
 Imports instat.Translations
-
 Public Class dlgWindrose
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -24,8 +23,6 @@ Public Class dlgWindrose
     Private clsDefaultRFunction As New RFunction
     Private clsFactorColumn As New RFunction
     Private clsLevelofFactor As New RFunction
-    Private clsBaseOperator As New ROperator
-    Private clsLabs As New RFunction
 
     Private Sub dlgWindrose_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -53,7 +50,6 @@ Public Class dlgWindrose
         ucrReceiverWindSpeed.strSelectorHeading = "Numerics"
         ucrReceiverWindSpeed.SetParameterIsRFunction()
 
-
         ucrReceiverWindDirection.SetParameter(New RParameter("direction", 1))
         ucrReceiverWindDirection.Selector = ucrWindRoseSelector
         ucrReceiverWindDirection.SetIncludedDataTypes({"numeric"})
@@ -71,10 +67,6 @@ Public Class dlgWindrose
         ucrNudNoOfColumns.SetRDefault(1)
         ucrNudNoOfColumns.Minimum = 1
 
-        ucrInputTitle.SetParameter(New RParameter("title"))
-        ucrInputSubTitle.SetParameter(New RParameter("subtitle"))
-        ucrInputCaption.SetParameter(New RParameter("caption"))
-
         ucrSaveGraph.SetPrefix("windrose")
         ucrSaveGraph.SetDataFrameSelector(ucrWindRoseSelector.ucrAvailableDataFrames)
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -85,43 +77,21 @@ Public Class dlgWindrose
 
     Private Sub SetDefaults()
         clsDefaultRFunction = New RFunction
-        clsBaseOperator = New ROperator
-        clsLabs = New RFunction
 
         ucrWindRoseSelector.Reset()
         ucrSaveGraph.Reset()
         ucrReceiverWindSpeed.SetMeAsReceiver()
-        ucrInputCaption.Reset()
-        ucrInputTitle.Reset()
-        ucrInputSubTitle.Reset()
 
         clsDefaultRFunction.SetPackageName("clifro")
         clsDefaultRFunction.SetRCommand("windrose")
-        clsDefaultRFunction.AddParameter("col_pal", Chr(34) & "Blues" & Chr(34))
-
-        clsLabs.SetPackageName("ggplot2")
-        clsLabs.SetRCommand("labs")
-        clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabs, iPosition:=1)
-
         clsDefaultRFunction.AddParameter("ggtheme", Chr(34) & "minimal" & Chr(34))
-        clsBaseOperator.SetOperation("+")
-        clsBaseOperator.AddParameter("windrose", clsRFunctionParameter:=clsDefaultRFunction, iPosition:=0)
-        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrWindRoseSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrWindRoseSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
         bResetSubDialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
-        ucrReceiverWindSpeed.SetRCode(clsDefaultRFunction, bReset)
-        ucrReceiverWindDirection.SetRCode(clsDefaultRFunction, bReset)
-        ucrReceiverFacet.SetRCode(clsDefaultRFunction, bReset)
-        ucrNudNoOfColumns.SetRCode(clsDefaultRFunction, bReset)
-
-        ucrInputTitle.SetRCode(clsLabs, bReset)
-        ucrInputCaption.SetRCode(clsLabs, bReset)
-        ucrInputSubTitle.SetRCode(clsLabs, bReset)
-
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -139,7 +109,7 @@ Public Class dlgWindrose
     End Sub
 
     Private Sub cmdWindroseOptions_Click(sender As Object, e As EventArgs) Handles cmdWindroseOptions.Click
-        sdgWindrose.SetRFunction(clsDefaultRFunction, bResetSubDialog)
+        sdgWindrose.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubDialog)
         bResetSubDialog = False
         sdgWindrose.ShowDialog()
     End Sub
