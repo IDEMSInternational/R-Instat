@@ -4173,14 +4173,17 @@
   <data name="&gt;&gt;grpLogical.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="cmdWakefield_Year.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdWakefield_Year.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdWakefield_Year.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 310</value>
+    <value>260, 310</value>
   </data>
   <data name="cmdWakefield_Year.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdWakefield_Year.TabIndex" type="System.Int32, mscorlib">
     <value>53</value>
@@ -4200,14 +4203,17 @@
   <data name="&gt;&gt;cmdWakefield_Year.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="cmdValid.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdValid.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdValid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 310</value>
+    <value>175, 310</value>
   </data>
   <data name="cmdValid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdValid.TabIndex" type="System.Int32, mscorlib">
     <value>52</value>
@@ -4227,14 +4233,17 @@
   <data name="&gt;&gt;cmdValid.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="cmdWakefield_Upper.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdWakefield_Upper.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdWakefield_Upper.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 310</value>
+    <value>90, 310</value>
   </data>
   <data name="cmdWakefield_Upper.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdWakefield_Upper.TabIndex" type="System.Int32, mscorlib">
     <value>51</value>
@@ -4254,6 +4263,9 @@
   <data name="&gt;&gt;cmdWakefield_Upper.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="cmdString.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdString.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -4261,7 +4273,7 @@
     <value>5, 310</value>
   </data>
   <data name="cmdString.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdString.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
@@ -4281,14 +4293,17 @@
   <data name="&gt;&gt;cmdString.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="cmdState.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdState.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdState.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 281</value>
+    <value>345, 281</value>
   </data>
   <data name="cmdState.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdState.TabIndex" type="System.Int32, mscorlib">
     <value>49</value>
@@ -4308,14 +4323,17 @@
   <data name="&gt;&gt;cmdState.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="cmdSpeed.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdSpeed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 281</value>
+    <value>260, 281</value>
   </data>
   <data name="cmdSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdSpeed.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
@@ -4335,14 +4353,17 @@
   <data name="&gt;&gt;cmdSpeed.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="cmdSmokes.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdSmokes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdSmokes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 281</value>
+    <value>175, 281</value>
   </data>
   <data name="cmdSmokes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdSmokes.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
@@ -4362,14 +4383,17 @@
   <data name="&gt;&gt;cmdSmokes.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="cmdSex.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdSex.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdSex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 281</value>
+    <value>90, 281</value>
   </data>
   <data name="cmdSex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdSex.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
@@ -4389,6 +4413,9 @@
   <data name="&gt;&gt;cmdSex.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="cmdSex_Inclusive.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdSex_Inclusive.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -4396,7 +4423,7 @@
     <value>5, 281</value>
   </data>
   <data name="cmdSex_Inclusive.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdSex_Inclusive.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -4416,14 +4443,17 @@
   <data name="&gt;&gt;cmdSex_Inclusive.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="cmdGender.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdGender.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdGender.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 252</value>
+    <value>345, 252</value>
   </data>
   <data name="cmdGender.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdGender.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -4443,14 +4473,17 @@
   <data name="&gt;&gt;cmdGender.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="cmdSentence.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdSentence.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdSentence.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 252</value>
+    <value>260, 252</value>
   </data>
   <data name="cmdSentence.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdSentence.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
@@ -4470,14 +4503,17 @@
   <data name="&gt;&gt;cmdSentence.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="cmdSat.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdSat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdSat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 252</value>
+    <value>175, 252</value>
   </data>
   <data name="cmdSat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdSat.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
@@ -4497,14 +4533,17 @@
   <data name="&gt;&gt;cmdSat.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="cmdReligion.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdReligion.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdReligion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 252</value>
+    <value>90, 252</value>
   </data>
   <data name="cmdReligion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdReligion.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
@@ -4524,6 +4563,9 @@
   <data name="&gt;&gt;cmdReligion.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="cmdRace.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdRace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -4531,7 +4573,7 @@
     <value>5, 252</value>
   </data>
   <data name="cmdRace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdRace.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
@@ -4551,14 +4593,17 @@
   <data name="&gt;&gt;cmdRace.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="cmdPolitical.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdPolitical.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdPolitical.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 223</value>
+    <value>345, 223</value>
   </data>
   <data name="cmdPolitical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdPolitical.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
@@ -4578,14 +4623,17 @@
   <data name="&gt;&gt;cmdPolitical.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
+  <data name="cmdNormal.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdNormal.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdNormal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 223</value>
+    <value>260, 223</value>
   </data>
   <data name="cmdNormal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdNormal.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -4605,14 +4653,17 @@
   <data name="&gt;&gt;cmdNormal.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
+  <data name="cmdName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 223</value>
+    <value>175, 223</value>
   </data>
   <data name="cmdName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdName.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -4632,14 +4683,17 @@
   <data name="&gt;&gt;cmdName.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
+  <data name="cmdWakefield_Month.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdWakefield_Month.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdWakefield_Month.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 223</value>
+    <value>90, 223</value>
   </data>
   <data name="cmdWakefield_Month.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdWakefield_Month.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -4659,6 +4713,9 @@
   <data name="&gt;&gt;cmdWakefield_Month.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
+  <data name="cmdMilitary.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdMilitary.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -4666,7 +4723,7 @@
     <value>5, 223</value>
   </data>
   <data name="cmdMilitary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdMilitary.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -4686,14 +4743,17 @@
   <data name="&gt;&gt;cmdMilitary.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
+  <data name="cmdMarital.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdMarital.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdMarital.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 194</value>
+    <value>345, 194</value>
   </data>
   <data name="cmdMarital.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdMarital.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -4713,14 +4773,17 @@
   <data name="&gt;&gt;cmdMarital.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
+  <data name="cmdLorem_ipsum.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdLorem_ipsum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdLorem_ipsum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 194</value>
+    <value>260, 194</value>
   </data>
   <data name="cmdLorem_ipsum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdLorem_ipsum.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -4740,14 +4803,17 @@
   <data name="&gt;&gt;cmdLorem_ipsum.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
+  <data name="cmdLikert.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdLikert.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdLikert.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 194</value>
+    <value>175, 194</value>
   </data>
   <data name="cmdLikert.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdLikert.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -4767,14 +4833,17 @@
   <data name="&gt;&gt;cmdLikert.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
+  <data name="cmdGpa.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdGpa.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdGpa.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 194</value>
+    <value>90, 194</value>
   </data>
   <data name="cmdGpa.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdGpa.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -4794,6 +4863,9 @@
   <data name="&gt;&gt;cmdGpa.ZOrder" xml:space="preserve">
     <value>22</value>
   </data>
+  <data name="cmdEla.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdEla.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -4801,7 +4873,7 @@
     <value>5, 194</value>
   </data>
   <data name="cmdEla.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdEla.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -4821,14 +4893,17 @@
   <data name="&gt;&gt;cmdEla.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
+  <data name="cmdMath.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdMath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdMath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 165</value>
+    <value>345, 165</value>
   </data>
   <data name="cmdMath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdMath.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -4848,14 +4923,17 @@
   <data name="&gt;&gt;cmdMath.ZOrder" xml:space="preserve">
     <value>24</value>
   </data>
+  <data name="cmdLevel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdLevel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdLevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 165</value>
+    <value>260, 165</value>
   </data>
   <data name="cmdLevel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdLevel.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -4875,14 +4953,17 @@
   <data name="&gt;&gt;cmdLevel.ZOrder" xml:space="preserve">
     <value>25</value>
   </data>
+  <data name="cmdLanguage.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdLanguage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 165</value>
+    <value>175, 165</value>
   </data>
   <data name="cmdLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdLanguage.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -4902,14 +4983,17 @@
   <data name="&gt;&gt;cmdLanguage.ZOrder" xml:space="preserve">
     <value>26</value>
   </data>
+  <data name="cmdIq.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdIq.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdIq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 165</value>
+    <value>90, 165</value>
   </data>
   <data name="cmdIq.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdIq.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -4929,6 +5013,9 @@
   <data name="&gt;&gt;cmdIq.ZOrder" xml:space="preserve">
     <value>27</value>
   </data>
+  <data name="cmdInternet_Browser.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdInternet_Browser.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -4936,7 +5023,7 @@
     <value>5, 165</value>
   </data>
   <data name="cmdInternet_Browser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdInternet_Browser.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -4956,14 +5043,17 @@
   <data name="&gt;&gt;cmdInternet_Browser.ZOrder" xml:space="preserve">
     <value>28</value>
   </data>
+  <data name="cmdGrade_Level.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdGrade_Level.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdGrade_Level.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 107</value>
+    <value>345, 107</value>
   </data>
   <data name="cmdGrade_Level.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdGrade_Level.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -4983,14 +5073,17 @@
   <data name="&gt;&gt;cmdGrade_Level.ZOrder" xml:space="preserve">
     <value>29</value>
   </data>
+  <data name="cmdEye.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdEye.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdEye.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 107</value>
+    <value>260, 107</value>
   </data>
   <data name="cmdEye.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdEye.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -5010,14 +5103,17 @@
   <data name="&gt;&gt;cmdEye.ZOrder" xml:space="preserve">
     <value>30</value>
   </data>
+  <data name="cmdEmployment.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdEmployment.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdEmployment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 107</value>
+    <value>175, 107</value>
   </data>
   <data name="cmdEmployment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdEmployment.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -5037,14 +5133,17 @@
   <data name="&gt;&gt;cmdEmployment.ZOrder" xml:space="preserve">
     <value>31</value>
   </data>
+  <data name="cmdEducation.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdEducation.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdEducation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 107</value>
+    <value>90, 107</value>
   </data>
   <data name="cmdEducation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdEducation.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -5064,6 +5163,9 @@
   <data name="&gt;&gt;cmdEducation.ZOrder" xml:space="preserve">
     <value>32</value>
   </data>
+  <data name="cmdDummy.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdDummy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -5071,7 +5173,7 @@
     <value>5, 107</value>
   </data>
   <data name="cmdDummy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdDummy.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -5091,14 +5193,17 @@
   <data name="&gt;&gt;cmdDummy.ZOrder" xml:space="preserve">
     <value>33</value>
   </data>
+  <data name="cmdDob.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdDob.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdDob.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 78</value>
+    <value>345, 78</value>
   </data>
   <data name="cmdDob.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdDob.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -5118,14 +5223,17 @@
   <data name="&gt;&gt;cmdDob.ZOrder" xml:space="preserve">
     <value>34</value>
   </data>
+  <data name="cmdDna.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdDna.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdDna.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 78</value>
+    <value>260, 78</value>
   </data>
   <data name="cmdDna.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdDna.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -5145,14 +5253,17 @@
   <data name="&gt;&gt;cmdDna.ZOrder" xml:space="preserve">
     <value>35</value>
   </data>
+  <data name="cmdDice.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdDice.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdDice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 78</value>
+    <value>175, 78</value>
   </data>
   <data name="cmdDice.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdDice.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -5172,14 +5283,17 @@
   <data name="&gt;&gt;cmdDice.ZOrder" xml:space="preserve">
     <value>36</value>
   </data>
+  <data name="cmdDied.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdDied.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdDied.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 78</value>
+    <value>90, 78</value>
   </data>
   <data name="cmdDied.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdDied.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -5199,6 +5313,9 @@
   <data name="&gt;&gt;cmdDied.ZOrder" xml:space="preserve">
     <value>37</value>
   </data>
+  <data name="cmdDeath.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdDeath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -5206,7 +5323,7 @@
     <value>5, 78</value>
   </data>
   <data name="cmdDeath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdDeath.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -5226,14 +5343,17 @@
   <data name="&gt;&gt;cmdDeath.ZOrder" xml:space="preserve">
     <value>38</value>
   </data>
+  <data name="cmdDate_Stamp.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdDate_Stamp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdDate_Stamp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 49</value>
+    <value>345, 49</value>
   </data>
   <data name="cmdDate_Stamp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdDate_Stamp.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -5253,14 +5373,17 @@
   <data name="&gt;&gt;cmdDate_Stamp.ZOrder" xml:space="preserve">
     <value>39</value>
   </data>
+  <data name="cmdPrimary.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdPrimary.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdPrimary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 49</value>
+    <value>260, 49</value>
   </data>
   <data name="cmdPrimary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdPrimary.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -5280,14 +5403,17 @@
   <data name="&gt;&gt;cmdPrimary.ZOrder" xml:space="preserve">
     <value>40</value>
   </data>
+  <data name="cmdColor.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 49</value>
+    <value>175, 49</value>
   </data>
   <data name="cmdColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdColor.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -5307,14 +5433,17 @@
   <data name="&gt;&gt;cmdColor.ZOrder" xml:space="preserve">
     <value>41</value>
   </data>
+  <data name="cmdCoin.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdCoin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdCoin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 49</value>
+    <value>90, 49</value>
   </data>
   <data name="cmdCoin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdCoin.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -5334,6 +5463,9 @@
   <data name="&gt;&gt;cmdCoin.ZOrder" xml:space="preserve">
     <value>42</value>
   </data>
+  <data name="cmdChildren.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdChildren.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -5341,7 +5473,7 @@
     <value>5, 49</value>
   </data>
   <data name="cmdChildren.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdChildren.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -5361,14 +5493,17 @@
   <data name="&gt;&gt;cmdChildren.ZOrder" xml:space="preserve">
     <value>43</value>
   </data>
+  <data name="cmdCar.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdCar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdCar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 20</value>
+    <value>345, 20</value>
   </data>
   <data name="cmdCar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdCar.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -5388,14 +5523,17 @@
   <data name="&gt;&gt;cmdCar.ZOrder" xml:space="preserve">
     <value>44</value>
   </data>
+  <data name="cmdAnswer.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdAnswer.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdAnswer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 20</value>
+    <value>260, 20</value>
   </data>
   <data name="cmdAnswer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdAnswer.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -5415,14 +5553,17 @@
   <data name="&gt;&gt;cmdAnswer.ZOrder" xml:space="preserve">
     <value>45</value>
   </data>
+  <data name="cmdPet.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdPet.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdPet.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 20</value>
+    <value>175, 20</value>
   </data>
   <data name="cmdPet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdPet.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -5442,14 +5583,17 @@
   <data name="&gt;&gt;cmdPet.ZOrder" xml:space="preserve">
     <value>46</value>
   </data>
+  <data name="cmdAnimal.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdAnimal.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdAnimal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 20</value>
+    <value>90, 20</value>
   </data>
   <data name="cmdAnimal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdAnimal.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -5469,6 +5613,9 @@
   <data name="&gt;&gt;cmdAnimal.ZOrder" xml:space="preserve">
     <value>47</value>
   </data>
+  <data name="cmdAge.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdAge.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -5476,7 +5623,7 @@
     <value>5, 20</value>
   </data>
   <data name="cmdAge.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdAge.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -5496,14 +5643,17 @@
   <data name="&gt;&gt;cmdAge.ZOrder" xml:space="preserve">
     <value>48</value>
   </data>
+  <data name="cmdIncome.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdIncome.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdIncome.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 136</value>
+    <value>345, 136</value>
   </data>
   <data name="cmdIncome.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdIncome.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -5523,14 +5673,17 @@
   <data name="&gt;&gt;cmdIncome.ZOrder" xml:space="preserve">
     <value>49</value>
   </data>
+  <data name="cmdHeight.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdHeight.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdHeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 136</value>
+    <value>260, 136</value>
   </data>
   <data name="cmdHeight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdHeight.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -5550,14 +5703,17 @@
   <data name="&gt;&gt;cmdHeight.ZOrder" xml:space="preserve">
     <value>50</value>
   </data>
+  <data name="cmdHair.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdHair.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdHair.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 136</value>
+    <value>175, 136</value>
   </data>
   <data name="cmdHair.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdHair.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -5577,14 +5733,17 @@
   <data name="&gt;&gt;cmdHair.ZOrder" xml:space="preserve">
     <value>51</value>
   </data>
+  <data name="cmdGroup.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdGroup.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 136</value>
+    <value>90, 136</value>
   </data>
   <data name="cmdGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdGroup.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -5604,6 +5763,9 @@
   <data name="&gt;&gt;cmdGroup.ZOrder" xml:space="preserve">
     <value>52</value>
   </data>
+  <data name="cmdGrade.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
   <data name="cmdGrade.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -5611,7 +5773,7 @@
     <value>5, 136</value>
   </data>
   <data name="cmdGrade.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>85, 30</value>
   </data>
   <data name="cmdGrade.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -5635,7 +5797,7 @@
     <value>434, 60</value>
   </data>
   <data name="grpWakefield.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 344</value>
+    <value>434, 344</value>
   </data>
   <data name="grpWakefield.TabIndex" type="System.Int32, mscorlib">
     <value>190</value>
@@ -7054,7 +7216,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>836, 412</value>
+    <value>876, 412</value>
   </data>
   <data name="&gt;&gt;ttCalculator.Name" xml:space="preserve">
     <value>ttCalculator</value>
