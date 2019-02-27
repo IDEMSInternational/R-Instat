@@ -154,7 +154,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoAnnual.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="rdoWithinYear.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -190,7 +190,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoWithinYear.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="rdoAnnualWithinYear.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -226,7 +226,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoAnnualWithinYear.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="lblStation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -405,25 +405,25 @@
   <data name="&gt;&gt;lblWithinYear.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="ucrChkOmitMissingValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 93</value>
+  <data name="ucrChkAddDateColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 92</value>
   </data>
-  <data name="ucrChkOmitMissingValues.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrChkAddDateColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 20</value>
   </data>
-  <data name="ucrChkOmitMissingValues.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="ucrChkAddDateColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;ucrChkOmitMissingValues.Name" xml:space="preserve">
-    <value>ucrChkOmitMissingValues</value>
+  <data name="&gt;&gt;ucrChkAddDateColumn.Name" xml:space="preserve">
+    <value>ucrChkAddDateColumn</value>
   </data>
-  <data name="&gt;&gt;ucrChkOmitMissingValues.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkAddDateColumn.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkOmitMissingValues.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkAddDateColumn.Parent" xml:space="preserve">
     <value>grpOptions</value>
   </data>
-  <data name="&gt;&gt;ucrChkOmitMissingValues.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkAddDateColumn.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ucrChkStoreResults.Location" type="System.Drawing.Point, System.Drawing">
@@ -624,30 +624,6 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>415, 450</value>
   </data>
-  <data name="ucrReceiverElement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 166</value>
-  </data>
-  <data name="ucrReceiverElement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverElement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
-  </data>
-  <data name="ucrReceiverElement.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverElement.Name" xml:space="preserve">
-    <value>ucrReceiverElement</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverElement.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverElement.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverElement.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
   <data name="ucrReceiverDOY.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 207</value>
   </data>
@@ -670,7 +646,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverDOY.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="ucrReceiverYear.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 248</value>
@@ -694,7 +670,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverYear.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="ucrReceiverDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 125</value>
@@ -718,7 +694,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverDate.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>14</value>
   </data>
   <data name="ucrReceiverStation.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 84</value>
@@ -742,6 +718,30 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverStation.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="ucrReceiverElement.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 166</value>
+  </data>
+  <data name="ucrReceiverElement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverElement.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverElement.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverElement.Name" xml:space="preserve">
+    <value>ucrReceiverElement</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverElement.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverElement.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverElement.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
@@ -763,7 +763,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>17</value>
   </data>
   <data name="ucrPnlAnnualWithin.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 10</value>
@@ -785,9 +785,6 @@
   </data>
   <data name="&gt;&gt;ucrPnlAnnualWithin.ZOrder" xml:space="preserve">
     <value>21</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
