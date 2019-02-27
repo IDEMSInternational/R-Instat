@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 
 Public Class dlgNewDataFrame
     Private clsEmptyOverallFunction, clsEmptyMatrixFunction As New RFunction
@@ -74,7 +75,7 @@ Public Class dlgNewDataFrame
         ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
-        ucrInputCommand.SetLinkedDisplayControl(New List(Of Control)({lblCommand, btnExample}))
+        ucrInputCommand.SetLinkedDisplayControl(New List(Of Control)({lblCommand, btnExample, btnTry, ucrInputTryMessage}))
     End Sub
 
     Private Sub SetDefaults()
@@ -277,8 +278,8 @@ Public Class dlgNewDataFrame
         lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data = NA, nrow = 10, ncol = 2))", "10 rows and 2 columns filled with missing values"}))
         lstView.Items.Add(New ListViewItem({"data.frame(x = 1:30, y = rnorm(30, mean = 100, sd = 15), z = runif(30, min = 10, max = 30))", " "}))
         lstView.Items.Add(New ListViewItem({"data.frame(block = gl(4, 3), treat = c(""C"", ""A"", ""B"", ""B"", ""C"", ""A"", ""A"", ""B"", ""C"", ""A"", ""C"", ""B""), yield = c(74, 68,  50, 62, 68, 57, 70, 56, 83, 67, 67, 59))", " "}))
-        'lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 100, data_theme = ""the_works"")", " "}))
-        'lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 30, id, race, age, sex, hour, iq, height, died, Scoring = rnorm, Smoker = valid)", " "}))
+        lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 100, data_theme = ""the_works"")", " "}))
+        lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 30, id, race, age, sex, hour, iq, height, died, Scoring = rnorm, Smoker = valid)", " "}))
 
         'set respective handlers
         AddHandler lstView.LostFocus, Sub()
@@ -296,4 +297,31 @@ Public Class dlgNewDataFrame
         frm.Location = New Point(ctlpos.X - 2, ctlpos.Y - frm.Height - 2) 'set location to show the form just above the examples button
         frm.Show()
     End Sub
+
+    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles btnTry.Click
+        Dim strVecOutput As CharacterVector
+        Try
+            If ucrInputCommand.IsEmpty Then
+                ucrInputTryMessage.SetText("")
+                ucrInputTryMessage.txtInput.BackColor = Color.White
+            Else
+                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(ucrInputCommand.GetText, bSilent:=True)
+                If strVecOutput IsNot Nothing Then
+                    'If strVecOutput.Length > 0 Then
+                    'End If
+                    ucrInputTryMessage.SetText("Command Ok.")
+                    ucrInputTryMessage.txtInput.BackColor = Color.White
+                Else
+                    ucrInputTryMessage.SetText("Command produced an error or no output to display.")
+                    ucrInputTryMessage.txtInput.BackColor = Color.Red
+                End If
+
+            End If
+
+        Catch ex As Exception
+            ucrInputTryMessage.SetText("Command produced an error.")
+            ucrInputTryMessage.txtInput.BackColor = Color.Red
+        End Try
+    End Sub
+
 End Class
