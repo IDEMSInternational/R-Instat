@@ -142,7 +142,7 @@ Public Class sdgSummaries
         ucrChkIncludeMissingOpt.AddToLinkedControls(ucrPnlMissingOptions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoNumber)
         ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrPnlMissingOptions.AddToLinkedControls({ucrNudPercentage}, {rdoPercentage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumberNotMissing}, {rdoNumberNotMissing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=340)
+        ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumberNotMissing}, {rdoNumberNotMissing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=366)
 
         ucrInputN.SetLinkedDisplayControl(lblInputN)
         ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
