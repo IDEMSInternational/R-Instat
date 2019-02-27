@@ -49,6 +49,7 @@ DataBook$set("public", "import_data", function(data_tables = list(), data_tables
                                                     data_tables_metadata = rep(list(list()),length(data_tables)),
                                                     data_tables_filters = rep(list(list()),length(data_tables)),
                                                     imported_from = as.list(rep("",length(data_tables))), 
+                                                    data_names = NULL,
                                                     messages=TRUE, convert=TRUE, create=TRUE)
 {
   if (missing(data_tables) || length(data_tables) == 0) {
@@ -77,11 +78,17 @@ DataBook$set("public", "import_data", function(data_tables = list(), data_tables
       stop("imported_from must be a list of the same length as data_tables")
     }
     
+    if(!is.null(data_names) && length(data_names) != length(data_names)) {
+      stop("If data_names is specified it must be a list of the same length as data_tables")
+    }
+    
     # loop through the data_tables list and create a data object for each
     # data.frame given
     new_data_objects = list()
     for ( i in (1:length(data_tables)) ) {
-      new_data = DataSheet$new(data=data_tables[[i]], data_name = names(data_tables)[[i]],
+      curr_name <- names(data_tables)[[i]]
+      if(is.null(curr_name) && !is.null(data_names)) curr_name <- data_names[i]
+      new_data = DataSheet$new(data=data_tables[[i]], data_name = curr_name,
                                  variables_metadata = data_tables_variables_metadata[[i]],
                                  metadata = data_tables_metadata[[i]], 
                                  imported_from = imported_from[[i]], 
@@ -203,7 +210,7 @@ DataBook$set("public", "clone_data_object", function(curr_data_object, include_o
   else new_objects <- list()
   if(include_filters && "get_filter" %in% curr_names) new_filters <- lapply(curr_data_object$get_filter(), function(x) x$data_clone())
   else new_filters <- list()
-  if(include_calculations && "get_calculations" %in% curr_names) new_calculations <- lapply(curr_data_object$get_calculations(), function(x) x$data_clone())
+  if(include_calculations && "get_calculations" %in% curr_names) new_calculations <- lapply(curr_data_object$get_calculations(), function(x) self$clone_instat_calculation(x))
   else new_calculations <- list()
   if(include_comments && "get_comments" %in% curr_names) new_comments <- lapply(curr_data_object$get_comments(), function(x) x$data_clone())
   else new_comments <- list()
@@ -226,6 +233,22 @@ DataBook$set("public", "clone_data_object", function(curr_data_object, include_o
   new_data_object$metadata_changed <- TRUE
   new_data_object$variables_metadata_changed <- TRUE
   return(new_data_object)
+}
+)
+
+DataBook$set("public", "clone_instat_calculation", function(curr_instat_calculation, ...) {
+  
+  new_manips <- lapply(curr_instat_calculation$manipulations, function(x) self$clone_instat_calculation(x))
+  new_subs <- lapply(curr_instat_calculation$sub_calculations, function(x) self$clone_instat_calculation(x))
+  new_instat_calculation <- instat_calculation$new(function_exp = curr_instat_calculation$function_exp, 
+                                                   type = curr_instat_calculation$type,
+                                                   name = curr_instat_calculation$name, 
+                                                   result_name = curr_instat_calculation$result_name, 
+                                                   manipulations = new_manips,
+                                                   sub_calculations = new_subs,
+                                                   calculated_from = curr_instat_calculation$calculated_from, 
+                                                   save = curr_instat_calculation$save)
+  return(new_instat_calculation)
 }
 )
 
@@ -1641,26 +1664,41 @@ DataBook$set("public","get_variable_sets", function(data_name, set_names, force_
 }
 )
 
-DataBook$set("public", "crops_definitions", function(data_name, year, station, rain, day, rain_totals, plant_days, plant_lengths, season_data_name, start_day, end_day, definition_props = TRUE, print_table = TRUE) {
+DataBook$set("public", "crops_definitions", function(data_name, year, station, rain, day, rain_totals, plant_days, plant_lengths, start_check = TRUE, season_data_name, start_day, end_day, definition_props = TRUE, print_table = TRUE) {
   plant_day_name <- "plant_day"
   plant_length_name <- "plant_length"
   rain_total_name <- "rain_total"
   
-  if(missing(year)) stop("Year column mustbe specified.")
+  if(missing(year)) stop("Year column must be specified.")
   if(missing(station)) by <- year
   else by <- c(year, station)
   season_by <- self$get_equivalent_columns(from_data_name = data_name, columns = by, to_data_name = season_data_name)
   if(is.null(season_by)) stop("The data frames specified must be linked by the year/station columns.")
   year_col <- self$get_columns_from_data(data_name, year)
   unique_year <- na.omit(unique(year_col))
+  
+  expand_list <- list()
+  names_list <- c()
+  
+  expand_list[[length(expand_list) + 1]] <- rain_totals
+  names_list[length(names_list) + 1] <- rain_total_name
+  
+  expand_list[[length(expand_list) + 1]] <- plant_lengths
+  names_list[length(names_list) + 1] <- plant_length_name
+  
+  expand_list[[length(expand_list) + 1]] <- plant_days
+  names_list[length(names_list) + 1] <- plant_day_name
+  
+  expand_list[[length(expand_list) + 1]] <- unique_year
+  names_list[length(names_list) + 1] <- year
+  
   if(!missing(station)) {
     station_col <- self$get_columns_from_data(data_name, station)
     unique_station <- na.omit(unique(station_col))
-    df <- setNames(expand.grid(rain_totals, plant_lengths, plant_days, unique_year, unique_station), c(rain_total_name, plant_length_name, plant_day_name, year, station))
+    expand_list[[length(expand_list) + 1]] <- unique_station
+    names_list[length(names_list) + 1] <- station_col
   }
-  else {
-    df <- setNames(expand.grid(rain_totals, plant_lengths, plant_days, unique_year), c(rain_total_name, plant_length_name, plant_day_name, year))
-  }
+  df <- setNames(expand.grid(expand_list), names_list)
   join_by <- by
   names(join_by) <- season_by
   daily_data <- self$get_data_frame(data_name)
@@ -1676,19 +1714,21 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   df <- dplyr::left_join(df, season_data, by = join_by)
   
   # Plant day condition
-  df$plant_day_cond <- (df[[start_day]] <= df[[plant_day_name]])
+  if(start_check) {
+    df$plant_day_cond <- (df[[start_day]] <= df[[plant_day_name]])
+  }
   
   # Plant length condition
   df$length_cond <- (df[[plant_day_name]] + df[[plant_length_name]] <= df[[end_day]])
-  
+
   # Rain total condition
   df[["rain_total_actual"]] <- sapply(1:nrow(df), 
                                       function(x) sum(daily_data[[rain]][daily_data[[year]] == df[[year]][x]][seq(df[[plant_day_name]][x], length = df[[plant_length_name]][x])], na.rm = TRUE))
   df$rain_cond <- (df[[rain_total_name]] <= df[["rain_total_actual"]])
-  
+
   # All three conditions met
-  df$overall_cond <- (df$plant_day_cond & df$length_cond & df$rain_cond)
-  
+  df$overall_cond <- (ifelse(start_check, df$plant_day_cond, TRUE) & df$length_cond & df$rain_cond)
+
   crops_name <- "crop_def"
   crops_name <- next_default_item(prefix = crops_name, existing_names = self$get_data_names(), include_index = FALSE)
   data_tables <- list(df)
@@ -1698,8 +1738,11 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   names(crops_by) <- by
   self$add_link(crops_name, season_data_name, crops_by, keyed_link_label)
   if(definition_props) {
-    calc_from <- list(plant_day_name, plant_length_name, rain_total_name)
-    names(calc_from) <- rep(crops_name, 3)
+    calc_from <- list()
+    calc_from[[length(calc_from) + 1]] <- plant_day_name
+    calc_from[[length(calc_from) + 1]] <- plant_length_name
+    calc_from[[length(calc_from) + 1]] <- rain_total_name
+    names(calc_from) <- rep(crops_name, length(calc_from))
     grouping <- instat_calculation$new(type = "by", calculated_from = calc_from)
     prop_calc_from <- list("overall_cond")
     names(prop_calc_from) <- crops_name
