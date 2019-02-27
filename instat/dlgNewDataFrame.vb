@@ -208,6 +208,8 @@ Public Class dlgNewDataFrame
     Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged
         If rdoConstruct.Checked Then
             dataGridView.Visible = True
+            btnTry.Visible = True
+            ucrInputTryMessage.Visible = True
             ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
         ElseIf rdoCommand.Checked Then
             dataGridView.Visible = False
@@ -216,6 +218,8 @@ Public Class dlgNewDataFrame
         ElseIf rdoRandom.Checked Then
             'TODO 
         ElseIf rdoEmpty.Checked Then
+            btnTry.Visible = False
+            ucrInputTryMessage.Visible = False
             dataGridView.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
         End If
@@ -299,24 +303,32 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles btnTry.Click
-        Dim strVecOutput As CharacterVector
+        Dim vecOutput As CharacterVector
+        Dim strScript As String = ""
         Try
-            If ucrInputCommand.IsEmpty Then
-                ucrInputTryMessage.SetText("")
+
+            If rdoConstruct.Checked Then
+                strScript = clsConstructFunction.ToScript
+            ElseIf rdoCommand.Checked Then
+                If ucrInputCommand.IsEmpty Then
+                    ucrInputTryMessage.SetText("")
+                    ucrInputTryMessage.txtInput.BackColor = Color.White
+                    Return
+                End If
+                strScript = ucrInputCommand.GetText
+            End If
+
+            vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strScript, bSilent:=True)
+            If vecOutput IsNot Nothing Then
+                'If strVecOutput.Length > 0 Then
+                'End If
+                ucrInputTryMessage.SetText("Command Ok.")
                 ucrInputTryMessage.txtInput.BackColor = Color.White
             Else
-                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(ucrInputCommand.GetText, bSilent:=True)
-                If strVecOutput IsNot Nothing Then
-                    'If strVecOutput.Length > 0 Then
-                    'End If
-                    ucrInputTryMessage.SetText("Command Ok.")
-                    ucrInputTryMessage.txtInput.BackColor = Color.White
-                Else
-                    ucrInputTryMessage.SetText("Command produced an error or no output to display.")
-                    ucrInputTryMessage.txtInput.BackColor = Color.Red
-                End If
-
+                ucrInputTryMessage.SetText("Command produced an error or no output to display.")
+                ucrInputTryMessage.txtInput.BackColor = Color.Red
             End If
+
 
         Catch ex As Exception
             ucrInputTryMessage.SetText("Command produced an error.")
