@@ -44,6 +44,8 @@ Partial Class dlgLinePlot
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
+        Me.lblGroup = New System.Windows.Forms.Label()
+        Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
         Me.ucrChkWithSE = New instat.ucrCheck()
         Me.ucrChkLineofBestFit = New instat.ucrCheck()
         Me.ucrChkPoints = New instat.ucrCheck()
@@ -86,6 +88,20 @@ Partial Class dlgLinePlot
         Me.lblFactorOptional.Name = "lblFactorOptional"
         Me.lblFactorOptional.Tag = "Factor_Optional:"
         '
+        'lblGroup
+        '
+        resources.ApplyResources(Me.lblGroup, "lblGroup")
+        Me.lblGroup.Name = "lblGroup"
+        '
+        'ucrReceiverGroup
+        '
+        Me.ucrReceiverGroup.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverGroup, "ucrReceiverGroup")
+        Me.ucrReceiverGroup.Name = "ucrReceiverGroup"
+        Me.ucrReceiverGroup.Selector = Nothing
+        Me.ucrReceiverGroup.strNcFilePath = ""
+        Me.ucrReceiverGroup.ucrSelector = Nothing
+        '
         'ucrChkWithSE
         '
         Me.ucrChkWithSE.Checked = False
@@ -121,6 +137,7 @@ Partial Class dlgLinePlot
         '
         'ucrLinePlotSelector
         '
+        Me.ucrLinePlotSelector.bDropUnusedFilterLevels = False
         Me.ucrLinePlotSelector.bShowHiddenColumns = False
         Me.ucrLinePlotSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrLinePlotSelector, "ucrLinePlotSelector")
@@ -153,6 +170,8 @@ Partial Class dlgLinePlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverGroup)
+        Me.Controls.Add(Me.lblGroup)
         Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrChkPoints)
@@ -190,4 +209,6 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrSave As ucrSave
     Friend WithEvents ucrChkLineofBestFit As ucrCheck
     Friend WithEvents ucrChkWithSE As ucrCheck
+    Friend WithEvents ucrReceiverGroup As ucrReceiverSingle
+    Friend WithEvents lblGroup As Label
 End Class
