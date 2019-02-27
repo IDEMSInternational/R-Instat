@@ -75,7 +75,7 @@ Public Class dlgNewDataFrame
         ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
-        ucrInputCommand.SetLinkedDisplayControl(New List(Of Control)({lblCommand, btnExample, btnTry, ucrInputTryMessage}))
+        ucrInputCommand.SetLinkedDisplayControl(New List(Of Control)({lblCommand, btnExample}))
     End Sub
 
     Private Sub SetDefaults()
@@ -210,9 +210,15 @@ Public Class dlgNewDataFrame
             dataGridView.Visible = True
             btnTry.Visible = True
             ucrInputTryMessage.Visible = True
+            ucrInputTryMessage.SetText("")
+            ucrInputTryMessage.txtInput.BackColor = Color.White
             ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
         ElseIf rdoCommand.Checked Then
             dataGridView.Visible = False
+            btnTry.Visible = True
+            ucrInputTryMessage.Visible = True
+            ucrInputTryMessage.SetText("")
+            ucrInputTryMessage.txtInput.BackColor = Color.White
             ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
         ElseIf rdoRandom.Checked Then
@@ -232,11 +238,14 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub ucrInputCommand_ContentsChanged() Handles ucrInputCommand.ContentsChanged
+        ucrInputTryMessage.SetText("")
         ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
         TestOKEnabled()
     End Sub
 
     Private Sub dataGridView_ValueChanged(sender As Object, e As EventArgs) Handles dataGridView.CellValueChanged
+        ucrInputTryMessage.SetText("")
+        ucrInputTryMessage.txtInput.BackColor = Color.White
         TestOKEnabled()
     End Sub
 
