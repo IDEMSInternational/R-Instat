@@ -32,6 +32,7 @@ Public Class ucrGeom
     Protected ucrBaseSelector As ucrSelectorByDataFrame
     Private iCurrentGeomIndex As Integer = -1
     Public bPauseChanges As Boolean = False
+    Dim strLineType As String() = {Chr(34) & "blank" & Chr(34), Chr(34) & "solid" & Chr(34), Chr(34) & "dashed" & Chr(34), Chr(34) & "dotted" & Chr(34), Chr(34) & "dotdash" & Chr(34), Chr(34) & "longdash" & Chr(34), Chr(34) & "twodash" & Chr(34)}
 
     Public Sub New()
 
@@ -234,7 +235,7 @@ Public Class ucrGeom
         clsgeom_abline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_abline.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        clsgeom_abline.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_abline.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_abline.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         clsgeom_abline.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
 
@@ -267,7 +268,7 @@ Public Class ucrGeom
         'Aesthetics as layer parameters  
         'clsgeom_area.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
         'clsgeom_area.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        'clsgeom_area.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        'clsgeom_area.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         'clsgeom_area.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
         'clsgeom_area.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0})
 
@@ -303,7 +304,7 @@ Public Class ucrGeom
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_bar.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
         clsgeom_bar.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        clsgeom_bar.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_bar.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_bar.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
         clsgeom_bar.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
 
@@ -370,7 +371,7 @@ Public Class ucrGeom
         'Aesthetics as layer parameters... Used fo fix colour, transparence, ... of the geom on that Layer.
         clsgeom_boxplot.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
         clsgeom_boxplot.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        clsgeom_boxplot.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_boxplot.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_boxplot.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         clsgeom_boxplot.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
 
@@ -512,7 +513,7 @@ Public Class ucrGeom
 
         'Aesthetics as layer parameters 
         clsgeom_curve.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
-        clsgeom_curve.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_curve.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_curve.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_curve.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
 
@@ -553,7 +554,7 @@ Public Class ucrGeom
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_density.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
         clsgeom_density.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        clsgeom_density.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_density.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_density.AddLayerParameter("alpha", "numeric", "0", lstParameterStrings:={2, 0, 1}) 'Varies transparence of fill.
         clsgeom_density.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
 
@@ -686,7 +687,7 @@ Public Class ucrGeom
         clsgeom_encircle.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_encircle.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'alpha changes the transparaty of line. When fill parameter is used alpha changes the transparaty of the fill
         clsgeom_encircle.AddLayerParameter("size", "numeric", "1", lstParameterStrings:={1, 0})
-        clsgeom_encircle.AddLayerParameter("linetype", "list", Chr(34) & "solid" & Chr(34), lstParameterStrings:={Chr(34) & "blank" & Chr(34), Chr(34) & "solid" & Chr(34), Chr(34) & "dashed" & Chr(34), Chr(34) & "dotted" & Chr(34), Chr(34) & "dotdash" & Chr(34), Chr(34) & "longdash" & Chr(34), Chr(34) & "twodash" & Chr(34)})
+        clsgeom_encircle.AddLayerParameter("linetype", "list", Chr(34) & "solid" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_encircle.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34)) 'Note: only a small minaority of shapes can be filled.
 
         lstAllGeoms.Add(clsgeom_encircle)
@@ -751,7 +752,7 @@ Public Class ucrGeom
         clsgeom_freqpoly.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         clsgeom_freqpoly.AddLayerParameter("stat", "list", Chr(34) & "bin" & Chr(34), lstParameterStrings:={Chr(34) & "bin" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "count" & Chr(34)}) 'Note, count and identity simply give the same results as with geom_line.
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
-        clsgeom_density.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_density.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_freqpoly.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_freqpoly.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
         clsgeom_freqpoly.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
@@ -794,7 +795,7 @@ Public Class ucrGeom
         clsgeom_hline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_hline.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        clsgeom_hline.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_hline.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_hline.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         clsgeom_hline.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
 
@@ -830,7 +831,7 @@ Public Class ucrGeom
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_histogram.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
         clsgeom_histogram.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        clsgeom_histogram.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_histogram.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_histogram.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
         clsgeom_histogram.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
 
@@ -935,7 +936,7 @@ Public Class ucrGeom
         clsgeom_line.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_line.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
-        clsgeom_line.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_line.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_line.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_line.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
 
@@ -1176,7 +1177,7 @@ Public Class ucrGeom
         clsgeom_rug.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_rug.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
-        clsgeom_rug.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_rug.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_rug.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_rug.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         lstAllGeoms.Add(clsgeom_rug)
@@ -1216,7 +1217,7 @@ Public Class ucrGeom
 
         'Aesthetics as layer parameters 
         clsgeom_segment.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
-        clsgeom_segment.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_segment.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_segment.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_segment.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
 
@@ -1391,7 +1392,7 @@ Public Class ucrGeom
         clsgeom_tile.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         clsgeom_tile.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_tile.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
-        clsgeom_tile.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_tile.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_tile.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0})
         'clsgeom_tile.AddLayerParameter("group")
 
@@ -1433,7 +1434,7 @@ Public Class ucrGeom
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_violin.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
         clsgeom_violin.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        clsgeom_violin.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_violin.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_violin.AddLayerParameter("alpha", "numeric", "0", lstParameterStrings:={2, 0, 1}) 'Varies transparence of fill.
         clsgeom_violin.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
 
@@ -1460,7 +1461,7 @@ Public Class ucrGeom
         clsgeom_vline.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_vline.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        clsgeom_vline.AddLayerParameter("linetype", "numeric", "1", lstParameterStrings:={0, 0, 6})
+        clsgeom_vline.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
         clsgeom_vline.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         clsgeom_vline.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
 
