@@ -141,15 +141,10 @@ Public Class dlgSplitText
 
     Private Sub ucrPnlSplitText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlSplitText.ControlContentsChanged
         If rdoBinaryColumns.Checked Then
-            'rdoMaximumNumberOfComponents.Hide()
-            'rdoFixedNumberOfComponents.Hide()
+
             ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
             clsBinaryColumns.SetAssignTo("Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
         ElseIf rdoTextComponents.Checked Then
-            'rdoMaximumNumberOfComponents.Show()
-            'rdoFixedNumberOfComponents.Show()
-            ' ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponents)
-            '  clsTextComponents.SetAssignTo("Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
             SplitTextOptions()
             ucrSaveColumn.SetName("Split")
         Else
