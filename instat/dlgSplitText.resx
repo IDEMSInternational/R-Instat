@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSelectedFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 107</value>
+    <value>251, 63</value>
   </data>
   <data name="lblSelectedFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSplitBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 153</value>
+    <value>251, 109</value>
   </data>
   <data name="lblSplitBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNumberofPiecesToReturn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 211</value>
+    <value>251, 223</value>
   </data>
   <data name="lblNumberofPiecesToReturn.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 13</value>
@@ -289,7 +289,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoMaximumNumberOfComponents.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 259</value>
+    <value>244, 164</value>
   </data>
   <data name="rdoMaximumNumberOfComponents.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 17</value>
@@ -319,7 +319,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoFixedNumberOfComponents.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 284</value>
+    <value>244, 189</value>
   </data>
   <data name="rdoFixedNumberOfComponents.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 17</value>
@@ -364,10 +364,10 @@
     <value>4</value>
   </data>
   <data name="ucrSaveColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 334</value>
+    <value>9, 280</value>
   </data>
   <data name="ucrSaveColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 24</value>
+    <value>321, 33</value>
   </data>
   <data name="ucrSaveColumn.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -385,7 +385,7 @@
     <value>5</value>
   </data>
   <data name="ucrNudPieces.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 229</value>
+    <value>251, 241</value>
   </data>
   <data name="ucrNudPieces.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -406,7 +406,7 @@
     <value>6</value>
   </data>
   <data name="ucrInputPattern.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 168</value>
+    <value>251, 124</value>
   </data>
   <data name="ucrInputPattern.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -433,7 +433,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>433, 421</value>
+    <value>435, 374</value>
   </data>
   <data name="ucrSelectorSplitTextColumn.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 52</value>
@@ -460,7 +460,7 @@
     <value>12</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 364</value>
+    <value>10, 319</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -481,7 +481,7 @@
     <value>13</value>
   </data>
   <data name="ucrPnlTextComponents.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 246</value>
+    <value>236, 151</value>
   </data>
   <data name="ucrPnlTextComponents.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 63</value>
@@ -517,7 +517,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverSplitTextColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 122</value>
+    <value>251, 78</value>
   </data>
   <data name="ucrReceiverSplitTextColumn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
