@@ -70,7 +70,6 @@ Public Class dlgClimSoft
         ucrDtpStartdate.SetParameter(New RParameter("start_date", 3))
         ucrDtpStartdate.SetLinkedDisplayControl(lblStartDate)
 
-
         UcrDtpEndDate.SetParameter(New RParameter("end_date", 4))
         UcrDtpEndDate.SetLinkedDisplayControl(lblEndDate)
 
@@ -156,10 +155,5 @@ Public Class dlgClimSoft
             ucrReceiverMultipleStations.SetMeAsReceiver()
         End If
     End Sub
-
-    Private Sub UcrDateTimePickerEndDate_Load(sender As Object, e As EventArgs) Handles UcrDtpEndDate.Load
-
-    End Sub
-
 
 End Class
