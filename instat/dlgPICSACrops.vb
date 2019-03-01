@@ -183,8 +183,8 @@ Public Class dlgPICSACrops
 
         'Currently this must come before reset to ensure autofilling is done correctly
         'Once autofilling is being triggered correctly this can go after Reset.
-        ucrReceiverStation.SetMeAsReceiver()
         ucrSelectorForCrops.Reset()
+        ucrReceiverRainfall.SetMeAsReceiver()
 
         'Crops Function
         clsCropsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$crops_definitions")
@@ -205,7 +205,7 @@ Public Class dlgPICSACrops
     Public Sub SetRCodeForControls(bReset As Boolean)
         'TODO This should be done further done.
         ' This ensures the correct data frame is set before attempting to fill the receiver
-        ucrReceiverYear.SetMeAsReceiver()
+        'ucrReceiverYear.SetMeAsReceiver()
         ucrSelectorForCrops.SetDataframe(ucrReceiverYear.GetDataName())
         'Disabled as selector cannot yet auto set when multiple data frame are selected.
         'ucrSelectorForCrops.SetRCode(clsCropsFunction, bReset)
@@ -213,7 +213,7 @@ Public Class dlgPICSACrops
         ucrReceiverStation.SetRCode(clsCropsFunction, bReset)
         ucrReceiverRainfall.SetRCode(clsCropsFunction, bReset)
         ucrReceiverDay.SetRCode(clsCropsFunction, bReset)
-        ucrReceiverStart.SetMeAsReceiver()
+        'ucrReceiverStart.SetMeAsReceiver()
         ucrSelectorForCrops.SetDataframe(ucrReceiverStart.GetDataName())
         ucrReceiverStart.SetRCode(clsCropsFunction, bReset)
         ucrReceiverEnd.SetRCode(clsCropsFunction, bReset)
