@@ -10,16 +10,14 @@
 ' but WITHOUT ANY WARRANTY; without even the implied warranty of
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
-'
-' You should have received a copy of the GNU General Public License 
-' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
+
+
 Imports instat.Translations
 Public Class dlgSplitText
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsTextComponents, clsTextComponents2 As New RFunction
+    Private clsTextComponentsFixed, clsTextComponentsMaximum As New RFunction
     Private clsBinaryColumns As New RFunction
 
     Private Sub dlgSplitText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -88,8 +86,8 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub SetDefaults()
-        clsTextComponents = New RFunction
-        clsTextComponents2 = New RFunction
+        clsTextComponentsFixed = New RFunction
+        clsTextComponentsMaximum = New RFunction
         clsBinaryColumns = New RFunction
 
         ucrSelectorSplitTextColumn.Reset()
@@ -97,32 +95,32 @@ Public Class dlgSplitText
         clsBinaryColumns.SetPackageName("questionr")
         clsBinaryColumns.SetRCommand("multi.split")
 
-        clsTextComponents.SetPackageName("stringr")
-        clsTextComponents.SetRCommand("str_split_fixed")
-        clsTextComponents.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
-        clsTextComponents.AddParameter("n", strParameterValue:=2, iPosition:=2)
+        clsTextComponentsFixed.SetPackageName("stringr")
+        clsTextComponentsFixed.SetRCommand("str_split_fixed")
+        clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+        clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
 
-        clsTextComponents2.SetPackageName("stringr")
-        clsTextComponents2.SetRCommand("str_split")
-        clsTextComponents2.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
-        clsTextComponents2.AddParameter("n", "Inf", iPosition:=2)
-        clsTextComponents2.AddParameter("simplify", "TRUE", iPosition:=3)
+        clsTextComponentsMaximum.SetPackageName("stringr")
+        clsTextComponentsMaximum.SetRCommand("str_split")
+        clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+        clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
+        clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
 
-        clsTextComponents.SetAssignTo(strTemp:="Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponents)
+        clsTextComponentsFixed.SetAssignTo(strTemp:="Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsTextComponents2, New RParameter("string", 0), iAdditionalPairNo:=1)
+        ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("string", 0), iAdditionalPairNo:=1)
         ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("var", 0), iAdditionalPairNo:=2)
-        ucrInputPattern.AddAdditionalCodeParameterPair(clsTextComponents2, New RParameter("pattern", 1), iAdditionalPairNo:=1)
+        ucrInputPattern.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("pattern", 1), iAdditionalPairNo:=1)
         ucrInputPattern.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("split.char", 1), iAdditionalPairNo:=2)
-        ucrReceiverSplitTextColumn.SetRCode(clsTextComponents, bReset)
-        ucrInputPattern.SetRCode(clsTextComponents, bReset)
-        ucrNudPieces.SetRCode(clsTextComponents, bReset)
+        ucrReceiverSplitTextColumn.SetRCode(clsTextComponentsFixed, bReset)
+        ucrInputPattern.SetRCode(clsTextComponentsFixed, bReset)
+        ucrNudPieces.SetRCode(clsTextComponentsFixed, bReset)
         ucrPnlSplitText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlTextComponents.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrSaveColumn.SetRCode(clsTextComponents, bReset)
+        ucrSaveColumn.SetRCode(clsTextComponentsFixed, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -155,13 +153,13 @@ Public Class dlgSplitText
         TestOKEnabled()
     End Sub
 
-    Private Sub rdoFixedNumberOfComponents_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFixedNumberOfComponents.CheckedChanged
-        ucrNudPieces.Show()
-    End Sub
+    'Private Sub rdoFixedNumberOfComponents_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFixedNumberOfComponents.CheckedChanged
+    'ucrNudPieces.Show()
+    'End Sub
 
-    Private Sub rdoMaximumNumberOfComponents_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMaximumNumberOfComponents.CheckedChanged
-        ucrNudPieces.Hide()
-    End Sub
+    'Private Sub rdoMaximumNumberOfComponents_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMaximumNumberOfComponents.CheckedChanged
+    ' ucrNudPieces.Hide()
+    ' End Sub
 
     Private Sub ucrPnlTextComponents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTextComponents.ControlValueChanged
         SplitTextOptions()
@@ -169,11 +167,11 @@ Public Class dlgSplitText
 
     Private Sub SplitTextOptions()
         If rdoFixedNumberOfComponents.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponents)
-            clsTextComponents.SetAssignTo("Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
+            clsTextComponentsFixed.SetAssignTo("Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
         ElseIf rdoMaximumNumberOfComponents.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponents2)
-            clsTextComponents2.SetAssignTo("Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsMaximum)
+            clsTextComponentsMaximum.SetAssignTo("Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
         End If
     End Sub
 End Class
