@@ -69,6 +69,9 @@ Public Class sdgPlots
         Dim clsCoordFlipFunc As New RFunction
         Dim clsCoordFlipParam As New RParameter
 
+        Dim clsCoordEqualFunc As New RFunction
+        Dim clsCoordEqualParam As New RParameter
+
         ucrBaseSubdialog.iHelpTopicID = 136
         'facets tab 
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
@@ -213,13 +216,23 @@ Public Class sdgPlots
         ucrInputThemes.SetDropDownStyleAsNonEditable()
 
         'coordiantes tab
-        ucrChkHorizontalplot.SetText("Horizontal Plot (coord-flip)")
+        ucrChkHorizontalPlot.SetText("Horizontal Plot (coord-flip)")
         clsCoordFlipFunc.SetPackageName("ggplot2")
         clsCoordFlipFunc.SetRCommand("coord_flip")
         clsCoordFlipParam.SetArgumentName("coord_flip")
         clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
-        ucrChkHorizontalplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkHorizontalplot.AddParameterPresentCondition(True, "coord_flip", True)
+        ucrChkHorizontalPlot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkHorizontalPlot.AddParameterPresentCondition(True, "coord_flip", True)
+
+
+        UcrChkSameScale.SetText("Same Scale (coord-equal)")
+        clsCoordEqualFunc.SetPackageName("ggplot2")
+        clsCoordEqualFunc.SetRCommand("coord_equal")
+        clsCoordEqualParam.SetArgumentName("coord_equal")
+        clsCoordEqualFunc.AddParameter("ratio", "1", iPosition:=1)
+        clsCoordEqualParam.SetArgument(clsCoordEqualFunc)
+        UcrChkSameScale.SetParameter(clsCoordEqualParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        UcrChkSameScale.AddParameterPresentCondition(True, "coord_equal", True)
         InitialiseTabs()
 
         'temporary disabled until implemented
@@ -361,7 +374,8 @@ Public Class sdgPlots
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
         'coordinates tab
-        ucrChkHorizontalplot.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkHorizontalPlot.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        UcrChkSameScale.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, bReset:=bReset)
         bRCodeSet = True
