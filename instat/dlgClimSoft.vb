@@ -68,9 +68,11 @@ Public Class dlgClimSoft
         ucrChkObservationData.SetRDefault("FALSE")
 
         ucrDtpStartdate.SetParameter(New RParameter("start_date", 3))
+        ucrDtpStartdate.SetParameterIsRDate()
         ucrDtpStartdate.SetLinkedDisplayControl(lblStartDate)
 
         UcrDtpEndDate.SetParameter(New RParameter("end_date", 4))
+        UcrDtpEndDate.SetParameterIsRDate()
         UcrDtpEndDate.SetLinkedDisplayControl(lblEndDate)
 
 
