@@ -22,7 +22,7 @@ Public Class dlgMakeDate
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
     Private strSelectedDataFrame As String = ""
-    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsGregorianDefault, clsJulianDateDefault As New RFunction
+    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsGregorianDefault, clsJulianDateDefault, clsAsCharacterFunction As New RFunction
     Private clsDivisionOperator, clsMultiplicationOperator As New ROperator
 
     Private Sub dlgMakeDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -228,6 +228,9 @@ Public Class dlgMakeDate
         clsJulianDateDefault.AddParameter("x", "-2440588", bIncludeArgumentName:=False)
         clsJulianDateDefault.AddParameter("class", Chr(34) & "Date" & Chr(34))
 
+        clsAsCharacterFunction = New RFunction
+        clsAsCharacterFunction.SetRCommand("as.character")
+
         ''when rdoSingleColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDefaultFormat)
 
@@ -312,6 +315,8 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverForDate.AddAdditionalCodeParameterPair(clsAsCharacterFunction, New RParameter("x", 0, False), iAdditionalPairNo:=1)
+
         ucrPnlDate.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrSaveDate.AddAdditionalRCode(clsMakeYearDay, iAdditionalPairNo:=1)
@@ -429,6 +434,8 @@ Public Class dlgMakeDate
 
     Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged, ucrInputFormat.ControlValueChanged, ucrInputOrigin.ControlValueChanged
         ucrReceiverForDate.RemoveIncludedMetadataProperty("class")
+        clsDateFunction.RemoveParameterByName("yearmoda")
+        clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
         If rdoDefaultFormat.Checked Then
             cmdHelp.Visible = False
             ucrReceiverForDate.SetExcludedDataTypes({"numeric"})
@@ -441,12 +448,14 @@ Public Class dlgMakeDate
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate)
             ElseIf ucrInputOrigin.GetText = "Gregorian" Then
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsGregorianDefault)
-            ElseIf ucrInputOrigin.GetText = "Julian Day Number"
+            ElseIf ucrInputOrigin.GetText = "Julian Day Number" Then
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsJulianDateDefault)
             End If
         ElseIf rdoSpecifyFormat.Checked Then
             ucrReceiverForDate.SetExcludedDataTypes({"numeric"})
+            clsDateFunction.AddParameter("yearmoda", clsRFunctionParameter:=clsAsCharacterFunction, bIncludeArgumentName:=False, iPosition:=0)
             cmdHelp.Visible = True
+            clsDateFunction.RemoveParameterByName("x")
             clsDateFunction.RemoveParameterByName("origin")
         End If
         grpFormats.Visible = (rdoSpecifyFormat.Checked)
