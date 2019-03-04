@@ -1536,7 +1536,7 @@ DataBook$set("public", "database_disconnect", function() {
 }
 )
 
-DataBook$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date = "", end_date = "") {
+DataBook$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date = NULL, end_date = NULL) {
   #need to perform checks here
   con = self$get_database_connection()
   if(!is.null(stations)){
@@ -1544,21 +1544,15 @@ DataBook$set("public", "import_from_climsoft", function(stations = c(), elements
     station_info <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
   }
   date_bounds=""
-  if(start_date!=""){
-    if(try(!is.na(as.Date( start_date, format= "%Y-%m-%d")))){
-      date_bounds = paste0(date_bounds, " AND obsDatetime >",sQuote(start_date))
-    }
-    else{
-      stop("start_date format should be yyyy-mm-yy.")
-    }
+  if(!is.null(start_date)) {
+    if(!lubridate::is.Date(start_date)) stop("start_date must be of type Date.")
+    start_date <- format(start_date, format = "%Y-%m-%d")
+    date_bounds = paste0(date_bounds, " AND obsDatetime >",sQuote(start_date))
   }
-  if(end_date!=""){
-    if(try(!is.na(as.Date(end_date, format= "%Y-%m-%d")))){
-      date_bounds = paste0(date_bounds, " AND obsDatetime <",sQuote(end_date))
-    }
-    else{
-      stop("end_date format should be yyyy-mm-yy.")
-    }
+  if(!is.null(end_date)) {
+    if(!lubridate::is.Date(end_date)) stop("end_date must be of type Date.")
+    end_date <- format(end_date, format = "%Y-%m-%d")
+    date_bounds = paste0(date_bounds, " AND obsDatetime >",sQuote(end_date))
   }
   
   if (length(elements) > 0){
