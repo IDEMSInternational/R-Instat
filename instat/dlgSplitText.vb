@@ -153,14 +153,6 @@ Public Class dlgSplitText
         TestOKEnabled()
     End Sub
 
-    'Private Sub rdoFixedNumberOfComponents_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFixedNumberOfComponents.CheckedChanged
-    'ucrNudPieces.Show()
-    'End Sub
-
-    'Private Sub rdoMaximumNumberOfComponents_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMaximumNumberOfComponents.CheckedChanged
-    ' ucrNudPieces.Hide()
-    ' End Sub
-
     Private Sub ucrPnlTextComponents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTextComponents.ControlValueChanged
         SplitTextOptions()
     End Sub
