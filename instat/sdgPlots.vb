@@ -225,14 +225,14 @@ Public Class sdgPlots
         ucrChkHorizontalPlot.AddParameterPresentCondition(True, "coord_flip", True)
 
 
-        UcrChkSameScale.SetText("Same Scale (coord-equal)")
+        ucrChkSameScale.SetText("Same Scale (coord-equal)")
         clsCoordEqualFunc.SetPackageName("ggplot2")
         clsCoordEqualFunc.SetRCommand("coord_equal")
         clsCoordEqualParam.SetArgumentName("coord_equal")
         clsCoordEqualFunc.AddParameter("ratio", "1", iPosition:=1)
         clsCoordEqualParam.SetArgument(clsCoordEqualFunc)
-        UcrChkSameScale.SetParameter(clsCoordEqualParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        UcrChkSameScale.AddParameterPresentCondition(True, "coord_equal", True)
+        ucrChkSameScale.SetParameter(clsCoordEqualParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkSameScale.AddParameterPresentCondition(True, "coord_equal", True)
         InitialiseTabs()
 
         'temporary disabled until implemented
@@ -375,7 +375,7 @@ Public Class sdgPlots
         SetRcodeForCommonThemesControls(bReset)
         'coordinates tab
         ucrChkHorizontalPlot.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
-        UcrChkSameScale.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkSameScale.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, bReset:=bReset)
         bRCodeSet = True
