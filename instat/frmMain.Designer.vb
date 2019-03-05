@@ -183,11 +183,11 @@ Partial Class frmMain
         Me.mnuClimatic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileOpensst = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticFileImportGriddedData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileOpenGriddedData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileImportandTidyNetCDF = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticFileImportandTidyShapefiles = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimateFileClimSoft = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticFileCliData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileOpenandTidyShapefile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateFileImportFromClimSoft = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileImportFromCliData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
@@ -361,9 +361,9 @@ Partial Class frmMain
         Me.mnuFileOpenFromFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator35 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ImportFromCSPROToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ImportFromToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileOpenFromODK = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileOpenFromCSPRO = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileImportFromDatabases = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportandTidyNetCDFFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator27 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
@@ -1415,7 +1415,7 @@ Partial Class frmMain
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportGriddedData, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileImportandTidyShapefiles, Me.mnuClimateFileClimSoft, Me.mnuClimaticFileCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileOpenGriddedData, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileOpenandTidyShapefile, Me.mnuClimateFileImportFromClimSoft, Me.mnuClimaticFileImportFromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         resources.ApplyResources(Me.mnuClimaticFile, "mnuClimaticFile")
         '
@@ -1424,30 +1424,30 @@ Partial Class frmMain
         Me.mnuClimaticFileOpensst.Name = "mnuClimaticFileOpensst"
         resources.ApplyResources(Me.mnuClimaticFileOpensst, "mnuClimaticFileOpensst")
         '
-        'mnuClimaticFileImportGriddedData
+        'mnuClimaticFileOpenGriddedData
         '
-        Me.mnuClimaticFileImportGriddedData.Name = "mnuClimaticFileImportGriddedData"
-        resources.ApplyResources(Me.mnuClimaticFileImportGriddedData, "mnuClimaticFileImportGriddedData")
+        Me.mnuClimaticFileOpenGriddedData.Name = "mnuClimaticFileOpenGriddedData"
+        resources.ApplyResources(Me.mnuClimaticFileOpenGriddedData, "mnuClimaticFileOpenGriddedData")
         '
         'mnuClimaticFileImportandTidyNetCDF
         '
         Me.mnuClimaticFileImportandTidyNetCDF.Name = "mnuClimaticFileImportandTidyNetCDF"
         resources.ApplyResources(Me.mnuClimaticFileImportandTidyNetCDF, "mnuClimaticFileImportandTidyNetCDF")
         '
-        'mnuClimaticFileImportandTidyShapefiles
+        'mnuClimaticFileOpenandTidyShapefile
         '
-        Me.mnuClimaticFileImportandTidyShapefiles.Name = "mnuClimaticFileImportandTidyShapefiles"
-        resources.ApplyResources(Me.mnuClimaticFileImportandTidyShapefiles, "mnuClimaticFileImportandTidyShapefiles")
+        Me.mnuClimaticFileOpenandTidyShapefile.Name = "mnuClimaticFileOpenandTidyShapefile"
+        resources.ApplyResources(Me.mnuClimaticFileOpenandTidyShapefile, "mnuClimaticFileOpenandTidyShapefile")
         '
-        'mnuClimateFileClimSoft
+        'mnuClimateFileImportFromClimSoft
         '
-        Me.mnuClimateFileClimSoft.Name = "mnuClimateFileClimSoft"
-        resources.ApplyResources(Me.mnuClimateFileClimSoft, "mnuClimateFileClimSoft")
+        Me.mnuClimateFileImportFromClimSoft.Name = "mnuClimateFileImportFromClimSoft"
+        resources.ApplyResources(Me.mnuClimateFileImportFromClimSoft, "mnuClimateFileImportFromClimSoft")
         '
-        'mnuClimaticFileCliData
+        'mnuClimaticFileImportFromCliData
         '
-        resources.ApplyResources(Me.mnuClimaticFileCliData, "mnuClimaticFileCliData")
-        Me.mnuClimaticFileCliData.Name = "mnuClimaticFileCliData"
+        resources.ApplyResources(Me.mnuClimaticFileImportFromCliData, "mnuClimaticFileImportFromCliData")
+        Me.mnuClimaticFileImportFromCliData.Name = "mnuClimaticFileImportFromCliData"
         '
         'ToolStripSeparator15
         '
@@ -2425,7 +2425,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.ToolStripSeparator35, Me.mnuImportFromODK, Me.ImportFromCSPROToolStripMenuItem, Me.ImportFromToolStripMenuItem, Me.mnuFileImportandTidyNetCDFFile, Me.ToolStripSeparator27, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.ToolStripSeparator35, Me.mnuFileOpenFromODK, Me.mnuFileOpenFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportandTidyNetCDFFile, Me.ToolStripSeparator27, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         resources.ApplyResources(Me.mnuFile, "mnuFile")
         Me.mnuFile.Tag = "File"
@@ -2453,20 +2453,20 @@ Partial Class frmMain
         Me.ToolStripSeparator35.Name = "ToolStripSeparator35"
         resources.ApplyResources(Me.ToolStripSeparator35, "ToolStripSeparator35")
         '
-        'mnuImportFromODK
+        'mnuFileOpenFromODK
         '
-        Me.mnuImportFromODK.Name = "mnuImportFromODK"
-        resources.ApplyResources(Me.mnuImportFromODK, "mnuImportFromODK")
+        Me.mnuFileOpenFromODK.Name = "mnuFileOpenFromODK"
+        resources.ApplyResources(Me.mnuFileOpenFromODK, "mnuFileOpenFromODK")
         '
-        'ImportFromCSPROToolStripMenuItem
+        'mnuFileOpenFromCSPRO
         '
-        resources.ApplyResources(Me.ImportFromCSPROToolStripMenuItem, "ImportFromCSPROToolStripMenuItem")
-        Me.ImportFromCSPROToolStripMenuItem.Name = "ImportFromCSPROToolStripMenuItem"
+        resources.ApplyResources(Me.mnuFileOpenFromCSPRO, "mnuFileOpenFromCSPRO")
+        Me.mnuFileOpenFromCSPRO.Name = "mnuFileOpenFromCSPRO"
         '
-        'ImportFromToolStripMenuItem
+        'mnuFileImportFromDatabases
         '
-        resources.ApplyResources(Me.ImportFromToolStripMenuItem, "ImportFromToolStripMenuItem")
-        Me.ImportFromToolStripMenuItem.Name = "ImportFromToolStripMenuItem"
+        resources.ApplyResources(Me.mnuFileImportFromDatabases, "mnuFileImportFromDatabases")
+        Me.mnuFileImportFromDatabases.Name = "mnuFileImportFromDatabases"
         '
         'mnuFileImportandTidyNetCDFFile
         '
@@ -4023,7 +4023,7 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticFile As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileOpensst As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGenerateEnter As ToolStripMenuItem
-    Friend WithEvents mnuImportFromODK As ToolStripMenuItem
+    Friend WithEvents mnuFileOpenFromODK As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGenerateCountInFactor As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator25 As ToolStripSeparator
     Friend WithEvents mnuPrepareColumnDate As ToolStripMenuItem
@@ -4069,8 +4069,8 @@ Partial Class frmMain
     Friend WithEvents mnuHelpGuideGlosary As ToolStripMenuItem
     Friend WithEvents mnuhelpGuidesMore As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileExportToCPT As ToolStripMenuItem
-    Friend WithEvents mnuClimateFileClimSoft As ToolStripMenuItem
-    Friend WithEvents mnuClimaticFileCliData As ToolStripMenuItem
+    Friend WithEvents mnuClimateFileImportFromClimSoft As ToolStripMenuItem
+    Friend WithEvents mnuClimaticFileImportFromCliData As ToolStripMenuItem
     Friend WithEvents mnuCimaticPrepareTransform As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckData As ToolStripMenuItem
     Friend WithEvents mnuClimaticDescribeRainfall As ToolStripMenuItem
@@ -4130,8 +4130,8 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator34 As ToolStripSeparator
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoVariablesFrequencies As ToolStripMenuItem
-    Friend WithEvents ImportFromCSPROToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ImportFromToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuFileOpenFromCSPRO As ToolStripMenuItem
+    Friend WithEvents mnuFileImportFromDatabases As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileImportandTidyNetCDF As ToolStripMenuItem
     Friend WithEvents mnuProcurementPrepareRecodeNumericIntoQuantiles As ToolStripMenuItem
     Friend WithEvents mnuDescribeThreeVariable As ToolStripMenuItem
@@ -4152,7 +4152,7 @@ Partial Class frmMain
     Friend WithEvents ucrDataFrameMeta As ucrDataFrameMetadata
     Friend WithEvents ucrLogWindow As ucrLog
     Friend WithEvents ucrScriptWindow As ucrScript
-    Friend WithEvents mnuClimaticFileImportGriddedData As ToolStripMenuItem
+    Friend WithEvents mnuClimaticFileOpenGriddedData As ToolStripMenuItem
     Friend WithEvents RatingDataToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuPrepareFactorViewLabels As ToolStripMenuItem
     Friend WithEvents mnuDescribeViewGraph As ToolStripMenuItem
@@ -4257,7 +4257,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator50 As ToolStripSeparator
     Friend WithEvents mnuClimaticPrepareLengthOfSeason As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareCompare As ToolStripMenuItem
-    Friend WithEvents mnuClimaticFileImportandTidyShapefiles As ToolStripMenuItem
+    Friend WithEvents mnuClimaticFileOpenandTidyShapefile As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineMerge As ToolStripMenuItem
     Friend WithEvents mnuTbLastGraph As ToolStripButton
     Friend WithEvents mnuClimaticCMSAFExporttoCMSAFRToolbox As ToolStripMenuItem
