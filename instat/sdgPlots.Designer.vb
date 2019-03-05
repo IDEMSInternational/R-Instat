@@ -97,7 +97,8 @@ Partial Class sdgPlots
         Me.cmdAllOptions = New System.Windows.Forms.Button()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.tbpCoordinates = New System.Windows.Forms.TabPage()
-        Me.ucrChkHorizontalplot = New instat.ucrCheck()
+        Me.ucrChkSameScale = New instat.ucrCheck()
+        Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
@@ -554,16 +555,23 @@ Partial Class sdgPlots
         '
         'tbpCoordinates
         '
-        Me.tbpCoordinates.Controls.Add(Me.ucrChkHorizontalplot)
+        Me.tbpCoordinates.Controls.Add(Me.ucrChkSameScale)
+        Me.tbpCoordinates.Controls.Add(Me.ucrChkHorizontalPlot)
         resources.ApplyResources(Me.tbpCoordinates, "tbpCoordinates")
         Me.tbpCoordinates.Name = "tbpCoordinates"
         Me.tbpCoordinates.UseVisualStyleBackColor = True
         '
-        'ucrChkHorizontalplot
+        'ucrChkSameScale
         '
-        Me.ucrChkHorizontalplot.Checked = False
-        resources.ApplyResources(Me.ucrChkHorizontalplot, "ucrChkHorizontalplot")
-        Me.ucrChkHorizontalplot.Name = "ucrChkHorizontalplot"
+        Me.ucrChkSameScale.Checked = False
+        resources.ApplyResources(Me.ucrChkSameScale, "ucrChkSameScale")
+        Me.ucrChkSameScale.Name = "ucrChkSameScale"
+        '
+        'ucrChkHorizontalPlot
+        '
+        Me.ucrChkHorizontalPlot.Checked = False
+        resources.ApplyResources(Me.ucrChkHorizontalPlot, "ucrChkHorizontalPlot")
+        Me.ucrChkHorizontalPlot.Name = "ucrChkHorizontalPlot"
         '
         'ucrBaseSubdialog
         '
@@ -644,7 +652,7 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputGraphCaption As ucrInputTextBox
     Friend WithEvents ucrInputGraphSubTitle As ucrInputTextBox
     Friend WithEvents urChkSelectTheme As ucrCheck
-    Friend WithEvents ucrChkHorizontalplot As ucrCheck
+    Friend WithEvents ucrChkHorizontalPlot As ucrCheck
 
     Friend WithEvents ucrChkYaxisTickMarkLabelSize As ucrCheck
     Friend WithEvents ucrChkXaxisTickMarkLabelSize As ucrCheck
@@ -661,6 +669,7 @@ Partial Class sdgPlots
 
     Friend WithEvents ucrChkLabeler As ucrCheck
     Friend WithEvents cmdSimpleOptions As Button
+    Friend WithEvents ucrChkSameScale As ucrCheck
 End Class
 
 
