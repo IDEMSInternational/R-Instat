@@ -2174,12 +2174,12 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     self$add_columns_to_data(col_name = col_name, col_data = day_vector)
   }
   if(day_in_month) {
-    day_in_month_vector <- as.integer(lubridate::mday(col_data))
+    day_in_month_vector <- as.numeric(lubridate::mday(col_data))
     col_name <- next_default_item(prefix = "day_in_month", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_month_vector)
   }
   if(days_in_month) {
-    days_in_month_vector <- as.integer(lubridate::days_in_month(col_data))
+    days_in_month_vector <- as.numeric(lubridate::days_in_month(col_data))
     col_name <- next_default_item(prefix = "days_in_month", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = days_in_month_vector)
   }
