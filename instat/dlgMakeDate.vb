@@ -452,7 +452,7 @@ Public Class dlgMakeDate
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsJulianDateDefault)
             End If
         ElseIf rdoSpecifyFormat.Checked Then
-            ucrReceiverForDate.SetExcludedDataTypes({"numeric"})
+            ucrReceiverForDate.SetIncludedDataTypes({"character", "numeric", "factor"})
             clsDateFunction.AddParameter("yearmoda", clsRFunctionParameter:=clsAsCharacterFunction, bIncludeArgumentName:=False, iPosition:=0)
             cmdHelp.Visible = True
             clsDateFunction.RemoveParameterByName("x")
