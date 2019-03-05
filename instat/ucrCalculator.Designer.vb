@@ -141,6 +141,8 @@ Partial Class ucrCalculator
         Me.cmdCountstrings = New System.Windows.Forms.Button()
         Me.cmdLocate = New System.Windows.Forms.Button()
         Me.grpLogical = New System.Windows.Forms.GroupBox()
+        Me.cmdFalse = New System.Windows.Forms.Button()
+        Me.cmdTrue = New System.Windows.Forms.Button()
         Me.cmdDoubleSqrBrackets = New System.Windows.Forms.Button()
         Me.cmdIn = New System.Windows.Forms.Button()
         Me.cmdWhich = New System.Windows.Forms.Button()
@@ -213,14 +215,67 @@ Partial Class ucrCalculator
         Me.cmdAcos = New System.Windows.Forms.Button()
         Me.cmdCos = New System.Windows.Forms.Button()
         Me.cmdSqrt = New System.Windows.Forms.Button()
-        Me.cmdTrue = New System.Windows.Forms.Button()
-        Me.cmdFalse = New System.Windows.Forms.Button()
         Me.ttCalculator = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.cmdWakefield_Year = New System.Windows.Forms.Button()
+        Me.cmdValid = New System.Windows.Forms.Button()
+        Me.cmdWakefield_Upper = New System.Windows.Forms.Button()
+        Me.cmdString = New System.Windows.Forms.Button()
+        Me.cmdState = New System.Windows.Forms.Button()
+        Me.cmdSpeed = New System.Windows.Forms.Button()
+        Me.cmdSmokes = New System.Windows.Forms.Button()
+        Me.cmdSex = New System.Windows.Forms.Button()
+        Me.cmdSex_Inclusive = New System.Windows.Forms.Button()
+        Me.cmdGender = New System.Windows.Forms.Button()
+        Me.cmdSentence = New System.Windows.Forms.Button()
+        Me.cmdSat = New System.Windows.Forms.Button()
+        Me.cmdReligion = New System.Windows.Forms.Button()
+        Me.cmdRace = New System.Windows.Forms.Button()
+        Me.cmdPolitical = New System.Windows.Forms.Button()
+        Me.cmdNormal = New System.Windows.Forms.Button()
+        Me.cmdName = New System.Windows.Forms.Button()
+        Me.cmdWakefield_Month = New System.Windows.Forms.Button()
+        Me.cmdMilitary = New System.Windows.Forms.Button()
+        Me.cmdMarital = New System.Windows.Forms.Button()
+        Me.cmdLorem_ipsum = New System.Windows.Forms.Button()
+        Me.cmdGpa = New System.Windows.Forms.Button()
+        Me.cmdEla = New System.Windows.Forms.Button()
+        Me.cmdMath = New System.Windows.Forms.Button()
+        Me.cmdLevel = New System.Windows.Forms.Button()
+        Me.cmdLanguage = New System.Windows.Forms.Button()
+        Me.cmdIq = New System.Windows.Forms.Button()
+        Me.cmdInternet_Browser = New System.Windows.Forms.Button()
+        Me.cmdGrade_Level = New System.Windows.Forms.Button()
+        Me.cmdEye = New System.Windows.Forms.Button()
+        Me.cmdEmployment = New System.Windows.Forms.Button()
+        Me.cmdEducation = New System.Windows.Forms.Button()
+        Me.cmdDummy = New System.Windows.Forms.Button()
+        Me.cmdDob = New System.Windows.Forms.Button()
+        Me.cmdDna = New System.Windows.Forms.Button()
+        Me.cmdDice = New System.Windows.Forms.Button()
+        Me.cmdDied = New System.Windows.Forms.Button()
+        Me.cmdDeath = New System.Windows.Forms.Button()
+        Me.cmdDate_Stamp = New System.Windows.Forms.Button()
+        Me.cmdPrimary = New System.Windows.Forms.Button()
+        Me.cmdColor = New System.Windows.Forms.Button()
+        Me.cmdCoin = New System.Windows.Forms.Button()
+        Me.cmdChildren = New System.Windows.Forms.Button()
+        Me.cmdHeight = New System.Windows.Forms.Button()
+        Me.grpWakefield = New System.Windows.Forms.GroupBox()
+        Me.cmdLikert = New System.Windows.Forms.Button()
+        Me.cmdCar = New System.Windows.Forms.Button()
+        Me.cmdAnswer = New System.Windows.Forms.Button()
+        Me.cmdPet = New System.Windows.Forms.Button()
+        Me.cmdAnimal = New System.Windows.Forms.Button()
+        Me.cmdAge = New System.Windows.Forms.Button()
+        Me.cmdIncome = New System.Windows.Forms.Button()
+        Me.cmdHair = New System.Windows.Forms.Button()
+        Me.cmdGroup = New System.Windows.Forms.Button()
+        Me.cmdGrade = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -229,6 +284,7 @@ Partial Class ucrCalculator
         Me.grpLogical.SuspendLayout()
         Me.grpProbabilty.SuspendLayout()
         Me.grpMaths.SuspendLayout()
+        Me.grpWakefield.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -964,6 +1020,18 @@ Partial Class ucrCalculator
         Me.grpLogical.Name = "grpLogical"
         Me.grpLogical.TabStop = False
         '
+        'cmdFalse
+        '
+        resources.ApplyResources(Me.cmdFalse, "cmdFalse")
+        Me.cmdFalse.Name = "cmdFalse"
+        Me.cmdFalse.UseVisualStyleBackColor = True
+        '
+        'cmdTrue
+        '
+        resources.ApplyResources(Me.cmdTrue, "cmdTrue")
+        Me.cmdTrue.Name = "cmdTrue"
+        Me.cmdTrue.UseVisualStyleBackColor = True
+        '
         'cmdDoubleSqrBrackets
         '
         resources.ApplyResources(Me.cmdDoubleSqrBrackets, "cmdDoubleSqrBrackets")
@@ -1437,18 +1505,6 @@ Partial Class ucrCalculator
         Me.cmdSqrt.Name = "cmdSqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
         '
-        'cmdTrue
-        '
-        resources.ApplyResources(Me.cmdTrue, "cmdTrue")
-        Me.cmdTrue.Name = "cmdTrue"
-        Me.cmdTrue.UseVisualStyleBackColor = True
-        '
-        'cmdFalse
-        '
-        resources.ApplyResources(Me.cmdFalse, "cmdFalse")
-        Me.cmdFalse.Name = "cmdFalse"
-        Me.cmdFalse.UseVisualStyleBackColor = True
-        '
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
@@ -1488,10 +1544,395 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'cmdWakefield_Year
+        '
+        resources.ApplyResources(Me.cmdWakefield_Year, "cmdWakefield_Year")
+        Me.cmdWakefield_Year.Name = "cmdWakefield_Year"
+        Me.cmdWakefield_Year.UseVisualStyleBackColor = True
+        '
+        'cmdValid
+        '
+        resources.ApplyResources(Me.cmdValid, "cmdValid")
+        Me.cmdValid.Name = "cmdValid"
+        Me.cmdValid.UseVisualStyleBackColor = True
+        '
+        'cmdWakefield_Upper
+        '
+        resources.ApplyResources(Me.cmdWakefield_Upper, "cmdWakefield_Upper")
+        Me.cmdWakefield_Upper.Name = "cmdWakefield_Upper"
+        Me.cmdWakefield_Upper.UseVisualStyleBackColor = True
+        '
+        'cmdString
+        '
+        resources.ApplyResources(Me.cmdString, "cmdString")
+        Me.cmdString.Name = "cmdString"
+        Me.cmdString.UseVisualStyleBackColor = True
+        '
+        'cmdState
+        '
+        resources.ApplyResources(Me.cmdState, "cmdState")
+        Me.cmdState.Name = "cmdState"
+        Me.cmdState.UseVisualStyleBackColor = True
+        '
+        'cmdSpeed
+        '
+        resources.ApplyResources(Me.cmdSpeed, "cmdSpeed")
+        Me.cmdSpeed.Name = "cmdSpeed"
+        Me.cmdSpeed.UseVisualStyleBackColor = True
+        '
+        'cmdSmokes
+        '
+        resources.ApplyResources(Me.cmdSmokes, "cmdSmokes")
+        Me.cmdSmokes.Name = "cmdSmokes"
+        Me.cmdSmokes.UseVisualStyleBackColor = True
+        '
+        'cmdSex
+        '
+        resources.ApplyResources(Me.cmdSex, "cmdSex")
+        Me.cmdSex.Name = "cmdSex"
+        Me.cmdSex.UseVisualStyleBackColor = True
+        '
+        'cmdSex_Inclusive
+        '
+        resources.ApplyResources(Me.cmdSex_Inclusive, "cmdSex_Inclusive")
+        Me.cmdSex_Inclusive.Name = "cmdSex_Inclusive"
+        Me.cmdSex_Inclusive.UseVisualStyleBackColor = True
+        '
+        'cmdGender
+        '
+        resources.ApplyResources(Me.cmdGender, "cmdGender")
+        Me.cmdGender.Name = "cmdGender"
+        Me.cmdGender.UseVisualStyleBackColor = True
+        '
+        'cmdSentence
+        '
+        resources.ApplyResources(Me.cmdSentence, "cmdSentence")
+        Me.cmdSentence.Name = "cmdSentence"
+        Me.cmdSentence.UseVisualStyleBackColor = True
+        '
+        'cmdSat
+        '
+        resources.ApplyResources(Me.cmdSat, "cmdSat")
+        Me.cmdSat.Name = "cmdSat"
+        Me.cmdSat.UseVisualStyleBackColor = True
+        '
+        'cmdReligion
+        '
+        resources.ApplyResources(Me.cmdReligion, "cmdReligion")
+        Me.cmdReligion.Name = "cmdReligion"
+        Me.cmdReligion.UseVisualStyleBackColor = True
+        '
+        'cmdRace
+        '
+        resources.ApplyResources(Me.cmdRace, "cmdRace")
+        Me.cmdRace.Name = "cmdRace"
+        Me.cmdRace.UseVisualStyleBackColor = True
+        '
+        'cmdPolitical
+        '
+        resources.ApplyResources(Me.cmdPolitical, "cmdPolitical")
+        Me.cmdPolitical.Name = "cmdPolitical"
+        Me.cmdPolitical.UseVisualStyleBackColor = True
+        '
+        'cmdNormal
+        '
+        resources.ApplyResources(Me.cmdNormal, "cmdNormal")
+        Me.cmdNormal.Name = "cmdNormal"
+        Me.cmdNormal.UseVisualStyleBackColor = True
+        '
+        'cmdName
+        '
+        resources.ApplyResources(Me.cmdName, "cmdName")
+        Me.cmdName.Name = "cmdName"
+        Me.cmdName.UseVisualStyleBackColor = True
+        '
+        'cmdWakefield_Month
+        '
+        resources.ApplyResources(Me.cmdWakefield_Month, "cmdWakefield_Month")
+        Me.cmdWakefield_Month.Name = "cmdWakefield_Month"
+        Me.cmdWakefield_Month.UseVisualStyleBackColor = True
+        '
+        'cmdMilitary
+        '
+        resources.ApplyResources(Me.cmdMilitary, "cmdMilitary")
+        Me.cmdMilitary.Name = "cmdMilitary"
+        Me.cmdMilitary.UseVisualStyleBackColor = True
+        '
+        'cmdMarital
+        '
+        resources.ApplyResources(Me.cmdMarital, "cmdMarital")
+        Me.cmdMarital.Name = "cmdMarital"
+        Me.cmdMarital.UseVisualStyleBackColor = True
+        '
+        'cmdLorem_ipsum
+        '
+        resources.ApplyResources(Me.cmdLorem_ipsum, "cmdLorem_ipsum")
+        Me.cmdLorem_ipsum.Name = "cmdLorem_ipsum"
+        Me.cmdLorem_ipsum.UseVisualStyleBackColor = True
+        '
+        'cmdGpa
+        '
+        resources.ApplyResources(Me.cmdGpa, "cmdGpa")
+        Me.cmdGpa.Name = "cmdGpa"
+        Me.cmdGpa.UseVisualStyleBackColor = True
+        '
+        'cmdEla
+        '
+        resources.ApplyResources(Me.cmdEla, "cmdEla")
+        Me.cmdEla.Name = "cmdEla"
+        Me.cmdEla.UseVisualStyleBackColor = True
+        '
+        'cmdMath
+        '
+        resources.ApplyResources(Me.cmdMath, "cmdMath")
+        Me.cmdMath.Name = "cmdMath"
+        Me.cmdMath.UseVisualStyleBackColor = True
+        '
+        'cmdLevel
+        '
+        resources.ApplyResources(Me.cmdLevel, "cmdLevel")
+        Me.cmdLevel.Name = "cmdLevel"
+        Me.cmdLevel.UseVisualStyleBackColor = True
+        '
+        'cmdLanguage
+        '
+        resources.ApplyResources(Me.cmdLanguage, "cmdLanguage")
+        Me.cmdLanguage.Name = "cmdLanguage"
+        Me.cmdLanguage.UseVisualStyleBackColor = True
+        '
+        'cmdIq
+        '
+        resources.ApplyResources(Me.cmdIq, "cmdIq")
+        Me.cmdIq.Name = "cmdIq"
+        Me.cmdIq.UseVisualStyleBackColor = True
+        '
+        'cmdInternet_Browser
+        '
+        resources.ApplyResources(Me.cmdInternet_Browser, "cmdInternet_Browser")
+        Me.cmdInternet_Browser.Name = "cmdInternet_Browser"
+        Me.cmdInternet_Browser.UseVisualStyleBackColor = True
+        '
+        'cmdGrade_Level
+        '
+        resources.ApplyResources(Me.cmdGrade_Level, "cmdGrade_Level")
+        Me.cmdGrade_Level.Name = "cmdGrade_Level"
+        Me.cmdGrade_Level.UseVisualStyleBackColor = True
+        '
+        'cmdEye
+        '
+        resources.ApplyResources(Me.cmdEye, "cmdEye")
+        Me.cmdEye.Name = "cmdEye"
+        Me.cmdEye.UseVisualStyleBackColor = True
+        '
+        'cmdEmployment
+        '
+        resources.ApplyResources(Me.cmdEmployment, "cmdEmployment")
+        Me.cmdEmployment.Name = "cmdEmployment"
+        Me.cmdEmployment.UseVisualStyleBackColor = True
+        '
+        'cmdEducation
+        '
+        resources.ApplyResources(Me.cmdEducation, "cmdEducation")
+        Me.cmdEducation.Name = "cmdEducation"
+        Me.cmdEducation.UseVisualStyleBackColor = True
+        '
+        'cmdDummy
+        '
+        resources.ApplyResources(Me.cmdDummy, "cmdDummy")
+        Me.cmdDummy.Name = "cmdDummy"
+        Me.cmdDummy.UseVisualStyleBackColor = True
+        '
+        'cmdDob
+        '
+        resources.ApplyResources(Me.cmdDob, "cmdDob")
+        Me.cmdDob.Name = "cmdDob"
+        Me.cmdDob.UseVisualStyleBackColor = True
+        '
+        'cmdDna
+        '
+        resources.ApplyResources(Me.cmdDna, "cmdDna")
+        Me.cmdDna.Name = "cmdDna"
+        Me.cmdDna.UseVisualStyleBackColor = True
+        '
+        'cmdDice
+        '
+        resources.ApplyResources(Me.cmdDice, "cmdDice")
+        Me.cmdDice.Name = "cmdDice"
+        Me.cmdDice.UseVisualStyleBackColor = True
+        '
+        'cmdDied
+        '
+        resources.ApplyResources(Me.cmdDied, "cmdDied")
+        Me.cmdDied.Name = "cmdDied"
+        Me.cmdDied.UseVisualStyleBackColor = True
+        '
+        'cmdDeath
+        '
+        resources.ApplyResources(Me.cmdDeath, "cmdDeath")
+        Me.cmdDeath.Name = "cmdDeath"
+        Me.cmdDeath.UseVisualStyleBackColor = True
+        '
+        'cmdDate_Stamp
+        '
+        resources.ApplyResources(Me.cmdDate_Stamp, "cmdDate_Stamp")
+        Me.cmdDate_Stamp.Name = "cmdDate_Stamp"
+        Me.cmdDate_Stamp.UseVisualStyleBackColor = True
+        '
+        'cmdPrimary
+        '
+        resources.ApplyResources(Me.cmdPrimary, "cmdPrimary")
+        Me.cmdPrimary.Name = "cmdPrimary"
+        Me.cmdPrimary.UseVisualStyleBackColor = True
+        '
+        'cmdColor
+        '
+        resources.ApplyResources(Me.cmdColor, "cmdColor")
+        Me.cmdColor.Name = "cmdColor"
+        Me.cmdColor.UseVisualStyleBackColor = True
+        '
+        'cmdCoin
+        '
+        resources.ApplyResources(Me.cmdCoin, "cmdCoin")
+        Me.cmdCoin.Name = "cmdCoin"
+        Me.cmdCoin.UseVisualStyleBackColor = True
+        '
+        'cmdChildren
+        '
+        resources.ApplyResources(Me.cmdChildren, "cmdChildren")
+        Me.cmdChildren.Name = "cmdChildren"
+        Me.cmdChildren.UseVisualStyleBackColor = True
+        '
+        'cmdHeight
+        '
+        resources.ApplyResources(Me.cmdHeight, "cmdHeight")
+        Me.cmdHeight.Name = "cmdHeight"
+        Me.cmdHeight.UseVisualStyleBackColor = True
+        '
+        'grpWakefield
+        '
+        Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
+        Me.grpWakefield.Controls.Add(Me.cmdValid)
+        Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
+        Me.grpWakefield.Controls.Add(Me.cmdString)
+        Me.grpWakefield.Controls.Add(Me.cmdState)
+        Me.grpWakefield.Controls.Add(Me.cmdSpeed)
+        Me.grpWakefield.Controls.Add(Me.cmdSmokes)
+        Me.grpWakefield.Controls.Add(Me.cmdSex)
+        Me.grpWakefield.Controls.Add(Me.cmdSex_Inclusive)
+        Me.grpWakefield.Controls.Add(Me.cmdGender)
+        Me.grpWakefield.Controls.Add(Me.cmdSentence)
+        Me.grpWakefield.Controls.Add(Me.cmdSat)
+        Me.grpWakefield.Controls.Add(Me.cmdReligion)
+        Me.grpWakefield.Controls.Add(Me.cmdRace)
+        Me.grpWakefield.Controls.Add(Me.cmdPolitical)
+        Me.grpWakefield.Controls.Add(Me.cmdNormal)
+        Me.grpWakefield.Controls.Add(Me.cmdName)
+        Me.grpWakefield.Controls.Add(Me.cmdWakefield_Month)
+        Me.grpWakefield.Controls.Add(Me.cmdMilitary)
+        Me.grpWakefield.Controls.Add(Me.cmdMarital)
+        Me.grpWakefield.Controls.Add(Me.cmdLorem_ipsum)
+        Me.grpWakefield.Controls.Add(Me.cmdLikert)
+        Me.grpWakefield.Controls.Add(Me.cmdGpa)
+        Me.grpWakefield.Controls.Add(Me.cmdEla)
+        Me.grpWakefield.Controls.Add(Me.cmdMath)
+        Me.grpWakefield.Controls.Add(Me.cmdLevel)
+        Me.grpWakefield.Controls.Add(Me.cmdLanguage)
+        Me.grpWakefield.Controls.Add(Me.cmdIq)
+        Me.grpWakefield.Controls.Add(Me.cmdInternet_Browser)
+        Me.grpWakefield.Controls.Add(Me.cmdGrade_Level)
+        Me.grpWakefield.Controls.Add(Me.cmdEye)
+        Me.grpWakefield.Controls.Add(Me.cmdEmployment)
+        Me.grpWakefield.Controls.Add(Me.cmdEducation)
+        Me.grpWakefield.Controls.Add(Me.cmdDummy)
+        Me.grpWakefield.Controls.Add(Me.cmdDob)
+        Me.grpWakefield.Controls.Add(Me.cmdDna)
+        Me.grpWakefield.Controls.Add(Me.cmdDice)
+        Me.grpWakefield.Controls.Add(Me.cmdDied)
+        Me.grpWakefield.Controls.Add(Me.cmdDeath)
+        Me.grpWakefield.Controls.Add(Me.cmdDate_Stamp)
+        Me.grpWakefield.Controls.Add(Me.cmdPrimary)
+        Me.grpWakefield.Controls.Add(Me.cmdColor)
+        Me.grpWakefield.Controls.Add(Me.cmdCoin)
+        Me.grpWakefield.Controls.Add(Me.cmdChildren)
+        Me.grpWakefield.Controls.Add(Me.cmdCar)
+        Me.grpWakefield.Controls.Add(Me.cmdAnswer)
+        Me.grpWakefield.Controls.Add(Me.cmdPet)
+        Me.grpWakefield.Controls.Add(Me.cmdAnimal)
+        Me.grpWakefield.Controls.Add(Me.cmdAge)
+        Me.grpWakefield.Controls.Add(Me.cmdIncome)
+        Me.grpWakefield.Controls.Add(Me.cmdHeight)
+        Me.grpWakefield.Controls.Add(Me.cmdHair)
+        Me.grpWakefield.Controls.Add(Me.cmdGroup)
+        Me.grpWakefield.Controls.Add(Me.cmdGrade)
+        resources.ApplyResources(Me.grpWakefield, "grpWakefield")
+        Me.grpWakefield.Name = "grpWakefield"
+        Me.grpWakefield.TabStop = False
+        '
+        'cmdLikert
+        '
+        resources.ApplyResources(Me.cmdLikert, "cmdLikert")
+        Me.cmdLikert.Name = "cmdLikert"
+        Me.cmdLikert.UseVisualStyleBackColor = True
+        '
+        'cmdCar
+        '
+        resources.ApplyResources(Me.cmdCar, "cmdCar")
+        Me.cmdCar.Name = "cmdCar"
+        Me.cmdCar.UseVisualStyleBackColor = True
+        '
+        'cmdAnswer
+        '
+        resources.ApplyResources(Me.cmdAnswer, "cmdAnswer")
+        Me.cmdAnswer.Name = "cmdAnswer"
+        Me.cmdAnswer.UseVisualStyleBackColor = True
+        '
+        'cmdPet
+        '
+        resources.ApplyResources(Me.cmdPet, "cmdPet")
+        Me.cmdPet.Name = "cmdPet"
+        Me.cmdPet.UseVisualStyleBackColor = True
+        '
+        'cmdAnimal
+        '
+        resources.ApplyResources(Me.cmdAnimal, "cmdAnimal")
+        Me.cmdAnimal.Name = "cmdAnimal"
+        Me.cmdAnimal.UseVisualStyleBackColor = True
+        '
+        'cmdAge
+        '
+        resources.ApplyResources(Me.cmdAge, "cmdAge")
+        Me.cmdAge.Name = "cmdAge"
+        Me.cmdAge.UseVisualStyleBackColor = True
+        '
+        'cmdIncome
+        '
+        resources.ApplyResources(Me.cmdIncome, "cmdIncome")
+        Me.cmdIncome.Name = "cmdIncome"
+        Me.cmdIncome.UseVisualStyleBackColor = True
+        '
+        'cmdHair
+        '
+        resources.ApplyResources(Me.cmdHair, "cmdHair")
+        Me.cmdHair.Name = "cmdHair"
+        Me.cmdHair.UseVisualStyleBackColor = True
+        '
+        'cmdGroup
+        '
+        resources.ApplyResources(Me.cmdGroup, "cmdGroup")
+        Me.cmdGroup.Name = "cmdGroup"
+        Me.cmdGroup.UseVisualStyleBackColor = True
+        '
+        'cmdGrade
+        '
+        resources.ApplyResources(Me.cmdGrade, "cmdGrade")
+        Me.cmdGrade.Name = "cmdGrade"
+        Me.cmdGrade.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpMaths)
@@ -1519,6 +1960,7 @@ Partial Class ucrCalculator
         Me.grpLogical.ResumeLayout(False)
         Me.grpProbabilty.ResumeLayout(False)
         Me.grpMaths.ResumeLayout(False)
+        Me.grpWakefield.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1706,4 +2148,59 @@ Partial Class ucrCalculator
     Friend WithEvents cmdFalse As Button
     Friend WithEvents cmdTrue As Button
     Friend WithEvents ttCalculator As ToolTip
+    Friend WithEvents cmdWakefield_Year As Button
+    Friend WithEvents cmdValid As Button
+    Friend WithEvents cmdWakefield_Upper As Button
+    Friend WithEvents cmdString As Button
+    Friend WithEvents cmdState As Button
+    Friend WithEvents cmdSpeed As Button
+    Friend WithEvents cmdSmokes As Button
+    Friend WithEvents cmdSex As Button
+    Friend WithEvents cmdSex_Inclusive As Button
+    Friend WithEvents cmdGender As Button
+    Friend WithEvents cmdSentence As Button
+    Friend WithEvents cmdSat As Button
+    Friend WithEvents cmdReligion As Button
+    Friend WithEvents cmdRace As Button
+    Friend WithEvents cmdPolitical As Button
+    Friend WithEvents cmdNormal As Button
+    Friend WithEvents cmdName As Button
+    Friend WithEvents cmdWakefield_Month As Button
+    Friend WithEvents cmdMilitary As Button
+    Friend WithEvents cmdMarital As Button
+    Friend WithEvents cmdLorem_ipsum As Button
+    Friend WithEvents cmdGpa As Button
+    Friend WithEvents cmdEla As Button
+    Friend WithEvents cmdMath As Button
+    Friend WithEvents cmdLevel As Button
+    Friend WithEvents cmdLanguage As Button
+    Friend WithEvents cmdIq As Button
+    Friend WithEvents cmdInternet_Browser As Button
+    Friend WithEvents cmdGrade_Level As Button
+    Friend WithEvents cmdEye As Button
+    Friend WithEvents cmdEmployment As Button
+    Friend WithEvents cmdEducation As Button
+    Friend WithEvents cmdDummy As Button
+    Friend WithEvents cmdDob As Button
+    Friend WithEvents cmdDna As Button
+    Friend WithEvents cmdDice As Button
+    Friend WithEvents cmdDied As Button
+    Friend WithEvents cmdDeath As Button
+    Friend WithEvents cmdDate_Stamp As Button
+    Friend WithEvents cmdPrimary As Button
+    Friend WithEvents cmdColor As Button
+    Friend WithEvents cmdCoin As Button
+    Friend WithEvents cmdChildren As Button
+    Friend WithEvents cmdHeight As Button
+    Friend WithEvents grpWakefield As GroupBox
+    Friend WithEvents cmdLikert As Button
+    Friend WithEvents cmdCar As Button
+    Friend WithEvents cmdAnswer As Button
+    Friend WithEvents cmdPet As Button
+    Friend WithEvents cmdAnimal As Button
+    Friend WithEvents cmdAge As Button
+    Friend WithEvents cmdIncome As Button
+    Friend WithEvents cmdHair As Button
+    Friend WithEvents cmdGroup As Button
+    Friend WithEvents cmdGrade As Button
 End Class
