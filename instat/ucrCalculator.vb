@@ -254,6 +254,17 @@ Public Class ucrCalculator
                 grpStrings.Visible = False
                 grpTransform.Visible = True
                 Me.Size = New Size(iBasicWidth * 1.33, Me.Height)
+            Case "Wakefield"
+                grpDates.Visible = False
+                grpProbabilty.Visible = False
+                grpSummary.Visible = False
+                grpBasic.Visible = True
+                grpLogical.Visible = False
+                grpMaths.Visible = False
+                grpStrings.Visible = False
+                grpTransform.Visible = False
+                grpWakefield.Visible = True
+                Me.Size = New Size(iBasicWidth * 1.7, Me.Height)
             Case Else
                 grpDates.Visible = False
                 Me.Size = New Size(iBasicWidth, Me.Height)
