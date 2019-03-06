@@ -411,10 +411,12 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub SelectorHeader()
-        If rdoOrigin.Checked Then
+        If rdoDefaultFormat.Checked Then
+            ucrReceiverForDate.strSelectorHeading = "Non Numerics"
+        ElseIf rdoOrigin.Checked Then
             ucrReceiverForDate.strSelectorHeading = "Numerics"
         Else
-            ucrReceiverForDate.strSelectorHeading = "Non Numeric"
+            ucrReceiverForDate.strSelectorHeading = "Date Variables"
         End If
     End Sub
 
@@ -452,9 +454,9 @@ Public Class dlgMakeDate
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsJulianDateDefault)
             End If
         ElseIf rdoSpecifyFormat.Checked Then
-            ucrReceiverForDate.SetIncludedDataTypes({"character", "numeric", "factor"})
-            clsDateFunction.AddParameter("yearmoda", clsRFunctionParameter:=clsAsCharacterFunction, bIncludeArgumentName:=False, iPosition:=0)
             cmdHelp.Visible = True
+            ucrReceiverForDate.RemoveExcludedMetadataProperty("class")
+            clsDateFunction.AddParameter("yearmoda", clsRFunctionParameter:=clsAsCharacterFunction, bIncludeArgumentName:=False, iPosition:=0)
             clsDateFunction.RemoveParameterByName("x")
             clsDateFunction.RemoveParameterByName("origin")
         End If
