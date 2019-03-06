@@ -416,7 +416,7 @@ Public Class dlgMakeDate
         ElseIf rdoOrigin.Checked Then
             ucrReceiverForDate.strSelectorHeading = "Numerics"
         Else
-            ucrReceiverForDate.strSelectorHeading = "Date Variables"
+            ucrReceiverForDate.strSelectorHeading = "Variables"
         End If
     End Sub
 
