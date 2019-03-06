@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class sdgPlots
     'Question to be discussed (later: need to explore first)/Exploration Task: In order to uniformise the code, could create a PlotOptionsSetup where all the necessary links between specific plots and plot options are made ? For the moment all these are scattered around. Might be necessary to have this flexibility though... 
@@ -68,6 +67,9 @@ Public Class sdgPlots
 
         Dim clsCoordFlipFunc As New RFunction
         Dim clsCoordFlipParam As New RParameter
+
+        Dim clsCoordEqualFunc As New RFunction
+        Dim clsCoordEqualParam As New RParameter
 
         ucrBaseSubdialog.iHelpTopicID = 136
         'facets tab 
@@ -213,13 +215,22 @@ Public Class sdgPlots
         ucrInputThemes.SetDropDownStyleAsNonEditable()
 
         'coordiantes tab
-        ucrChkHorizontalplot.SetText("Horizontal Plot (coord-flip)")
+        ucrChkHorizontalPlot.SetText("Horizontal Plot (coord-flip)")
         clsCoordFlipFunc.SetPackageName("ggplot2")
         clsCoordFlipFunc.SetRCommand("coord_flip")
         clsCoordFlipParam.SetArgumentName("coord_flip")
         clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
-        ucrChkHorizontalplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkHorizontalplot.AddParameterPresentCondition(True, "coord_flip", True)
+        ucrChkHorizontalPlot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkHorizontalPlot.AddParameterPresentCondition(True, "coord_flip", True)
+
+
+        ucrChkSameScale.SetText("Same Scale (coord-equal)")
+        clsCoordEqualFunc.SetPackageName("ggplot2")
+        clsCoordEqualFunc.SetRCommand("coord_equal")
+        clsCoordEqualParam.SetArgumentName("coord_equal")
+        clsCoordEqualParam.SetArgument(clsCoordEqualFunc)
+        ucrChkSameScale.SetParameter(clsCoordEqualParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkSameScale.AddParameterPresentCondition(True, "coord_equal", True)
         InitialiseTabs()
 
         'temporary disabled until implemented
@@ -361,7 +372,8 @@ Public Class sdgPlots
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
         'coordinates tab
-        ucrChkHorizontalplot.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkHorizontalPlot.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkSameScale.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, bReset:=bReset)
         bRCodeSet = True
