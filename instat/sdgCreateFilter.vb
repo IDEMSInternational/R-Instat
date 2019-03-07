@@ -36,4 +36,10 @@ Public Class sdgCreateFilter
     Private Sub sdgCreateFilter_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
     End Sub
+
+    Private Sub sdgCreateFilter_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        If Not ucrCreateFilter.ucrFilterByReceiver.IsEmpty Then
+            MessageBox.Show(text:="Warning. See details below." & Environment.NewLine & "Are you sure you want to return to the main dialog?" & Environment.NewLine & "Condition is not yet added", caption:="Missing information", buttons:=MessageBoxButtons.YesNo, icon:=MessageBoxIcon.Information)
+        End If
+    End Sub
 End Class
