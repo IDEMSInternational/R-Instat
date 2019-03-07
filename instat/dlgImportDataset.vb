@@ -600,6 +600,14 @@ Public Class dlgImportDataset
             strFileType = "DAT"
             clsImportDAT.AddParameter("file", Chr(34) & strFilePathR & Chr(34))
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportDAT)
+        ElseIf strFileExt = ".nc" Then
+
+            dlgOpenNetCDF.strFilePath = ucrInputFilePath.GetText()
+            dlgOpenNetCDF.bRefered = True
+            dlgOpenNetCDF.ShowDialog()
+            SetDefaults()
+            Me.Close()
+
         ElseIf strFileExt = ".xlsx" OrElse strFileExt = ".xls" Then
             strFileType = If(strFileExt = ".xlsx", "XLSX", "XLS")
             If clbSheets.CheckedItems.Count > 1 Then

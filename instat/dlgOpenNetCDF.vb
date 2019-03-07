@@ -27,9 +27,10 @@ Public Class dlgOpenNetCDF
     Dim strFileType As String
     Dim bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
+    Public bRefered As Boolean = False
     Private bResetSubdialog As Boolean = False
     Private bShowDetails As Boolean
-    Private strFilePath As String = ""
+    Public strFilePath As String = ""
     Private strShort As String
     Private strMedium As String
     Private strLong As String
@@ -63,11 +64,27 @@ Public Class dlgOpenNetCDF
         If bStartOpenDialog Then
             GetFileFromOpenDialog()
             bStartOpenDialog = False
+        ElseIf bRefered Then
+            Dim strTemp As String = ""
+            'CheckCloseFile()
+            bCloseFile = True
+            ucrInputFilePath.SetName(strFilePath)
+            ucrInputDataName.SetName(frmMain.clsRLink.MakeValidText(Path.GetFileNameWithoutExtension(strFilePath)))
+            bCloseFile = True
+            clsNcOpenFunction.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
+            clsNcOpenFunction.ToScript(strTemp)
+            frmMain.clsRLink.RunScript(strTemp, strComment:="Opening netCDF file", bUpdateGrids:=False)
+            clsRFileDetails.AddParameter("infile", Chr(34) & strFilePath & Chr(34), iPosition:=1)
+            FileDetails()
+            clsImportNetcdfFunction.RemoveParameterByName("boundary")
+            strFileType = "nc"
+
         Else
             OpenFile()
         End If
         bReset = False
         TestOkEnabled()
+        checkOkChange()
     End Sub
 
     Private Sub OpenFile()
@@ -302,4 +319,13 @@ Public Class dlgOpenNetCDF
             clsNcOpenFunction.SetAssignTo(strFileAssignName)
         End If
     End Sub
+    Public Sub checkOkChange()
+        If bRefered And ucrBase_ClickOk() Then
+            SetDefaults()
+        End If
+    End Sub
+
+    Private Function ucrBase_ClickOk() As Boolean
+
+    End Function
 End Class
