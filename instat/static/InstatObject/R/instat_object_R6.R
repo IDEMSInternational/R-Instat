@@ -1554,6 +1554,7 @@ DataBook$set("public", "import_from_climsoft", function(stations = c(), elements
     end_date <- format(end_date, format = "%Y-%m-%d")
     date_bounds = paste0(date_bounds, " AND obsDatetime <",sQuote(end_date))
   }
+
   if (length(elements) > 0){
     my_elements = paste0("(", paste0(sprintf("'%s'", elements), collapse = ", "), ")")
     element_ids = DBI::dbGetQuery(con, paste0("SELECT elementID FROM obselement WHERE elementName in", my_elements,";"))
