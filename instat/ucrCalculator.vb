@@ -1132,7 +1132,7 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::plogis(q, Location = 0, Scale() = 1, lower.tail = True, Log.p = False))", 50)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::logistic()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::plogis()", 1)
         End If
     End Sub
 
