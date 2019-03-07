@@ -22,6 +22,7 @@ Public Class dlgRenameDataFrame
     Private clsRename As New RFunction
     Private Sub dlgRenameDataFrame_Load(sender As Object, e As EventArgs) Handles Me.Load
         SetDefaults()
+
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
