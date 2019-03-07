@@ -1552,7 +1552,7 @@ DataBook$set("public", "import_from_climsoft", function(stations = c(), elements
   if(!is.null(end_date)) {
     if(!lubridate::is.Date(end_date)) stop("end_date must be of type Date.")
     end_date <- format(end_date, format = "%Y-%m-%d")
-    date_bounds = paste0(date_bounds, " AND obsDatetime >",sQuote(end_date))
+    date_bounds = paste0(date_bounds, " AND obsDatetime <",sQuote(end_date))
   }
   
   if (length(elements) > 0){
