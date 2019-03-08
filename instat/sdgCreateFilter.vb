@@ -42,7 +42,7 @@ Public Class sdgCreateFilter
         Dim result As MsgBoxResult
 
         If Not ucrCreateFilter.ucrFilterByReceiver.IsEmpty Then
-            result = MessageBox.Show("Are you sure you want to return to the main dialog?" & Environment.NewLine & "The condition for " & ucrCreateFilter.ucrFilterByReceiver.GetVariableNames(False) & " has not been added." & Environment.NewLine & "Click the " & Chr(34) & "Add Condition" & Chr(34) & " button if you want to add it.", caption:="Missing information", buttons:=MessageBoxButtons.YesNo, icon:=MessageBoxIcon.Information)
+            result = MessageBox.Show(text:="Are you sure you want to return to the main dialog?" & Environment.NewLine & "The condition for " & ucrCreateFilter.ucrFilterByReceiver.GetVariableNames(False) & " has not been added." & Environment.NewLine & "Click the " & Chr(34) & "Add Condition" & Chr(34) & " button if you want to add it.", caption:="Return to main dialog?", buttons:=MessageBoxButtons.YesNo, icon:=MessageBoxIcon.Information)
             If result = MsgBoxResult.No Then
                 e.Cancel = True
             End If
