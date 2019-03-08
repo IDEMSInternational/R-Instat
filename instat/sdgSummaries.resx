@@ -118,13 +118,88 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrNudNumberNotMissing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>321, 150</value>
+  </data>
+  <data name="ucrNudNumberNotMissing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrNudNumberNotMissing.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNumberNotMissing.Name" xml:space="preserve">
+    <value>ucrNudNumberNotMissing</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNumberNotMissing.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNumberNotMissing.Parent" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrNudNumberNotMissing.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblNumberNotMissing.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNumberNotMissing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 151</value>
+  </data>
+  <data name="lblNumberNotMissing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>296, 13</value>
+  </data>
+  <data name="lblNumberNotMissing.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblNumberNotMissing.Text" xml:space="preserve">
+    <value>Summary set to missing if less than this value are non missing:</value>
+  </data>
+  <data name="&gt;&gt;lblNumberNotMissing.Name" xml:space="preserve">
+    <value>lblNumberNotMissing</value>
+  </data>
+  <data name="&gt;&gt;lblNumberNotMissing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNumberNotMissing.Parent" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;lblNumberNotMissing.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoNumberNotMissing.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoNumberNotMissing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 99</value>
+  </data>
+  <data name="rdoNumberNotMissing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 17</value>
+  </data>
+  <data name="rdoNumberNotMissing.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoNumberNotMissing.Text" xml:space="preserve">
+    <value>Non Missing</value>
+  </data>
+  <data name="&gt;&gt;rdoNumberNotMissing.Name" xml:space="preserve">
+    <value>rdoNumberNotMissing</value>
+  </data>
+  <data name="&gt;&gt;rdoNumberNotMissing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoNumberNotMissing.Parent" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;rdoNumberNotMissing.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="ucrNudNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 107</value>
+    <value>321, 150</value>
   </data>
   <data name="ucrNudNumber.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrNudNumber.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
@@ -138,10 +213,10 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;ucrNudNumber.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="ucrNudPercentage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 107</value>
+    <value>321, 150</value>
   </data>
   <data name="ucrNudPercentage.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -159,7 +234,7 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;ucrNudPercentage.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="lblPercentage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -169,7 +244,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPercentage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 108</value>
+    <value>7, 151</value>
   </data>
   <data name="lblPercentage.Size" type="System.Drawing.Size, System.Drawing">
     <value>308, 13</value>
@@ -190,7 +265,7 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;lblPercentage.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="lblNumber.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -199,7 +274,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 108</value>
+    <value>8, 151</value>
   </data>
   <data name="lblNumber.Size" type="System.Drawing.Size, System.Drawing">
     <value>280, 13</value>
@@ -220,7 +295,7 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;lblNumber.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="rdoPercentage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -250,7 +325,7 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;rdoPercentage.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="rdoNumber.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -280,13 +355,13 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;rdoNumber.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="ucrPnlMissingOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 46</value>
   </data>
   <data name="ucrPnlMissingOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 59</value>
+    <value>121, 75</value>
   </data>
   <data name="ucrPnlMissingOptions.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -301,7 +376,7 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;ucrPnlMissingOptions.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="ucrChkIncludeMissingOpt.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 20</value>
@@ -322,7 +397,7 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkIncludeMissingOpt.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="tbMissingOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
