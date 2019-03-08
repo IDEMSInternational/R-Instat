@@ -40,6 +40,9 @@ Partial Class sdgSummaries
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgSummaries))
         Me.tbMissingOptions = New System.Windows.Forms.TabPage()
+        Me.ucrNudNumberNotMissing = New instat.ucrNud()
+        Me.lblNumberNotMissing = New System.Windows.Forms.Label()
+        Me.rdoNumberNotMissing = New System.Windows.Forms.RadioButton()
         Me.ucrNudNumber = New instat.ucrNud()
         Me.ucrNudPercentage = New instat.ucrNud()
         Me.lblPercentage = New System.Windows.Forms.Label()
@@ -137,6 +140,9 @@ Partial Class sdgSummaries
         '
         'tbMissingOptions
         '
+        Me.tbMissingOptions.Controls.Add(Me.ucrNudNumberNotMissing)
+        Me.tbMissingOptions.Controls.Add(Me.lblNumberNotMissing)
+        Me.tbMissingOptions.Controls.Add(Me.rdoNumberNotMissing)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudNumber)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudPercentage)
         Me.tbMissingOptions.Controls.Add(Me.lblPercentage)
@@ -148,6 +154,28 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.tbMissingOptions, "tbMissingOptions")
         Me.tbMissingOptions.Name = "tbMissingOptions"
         Me.tbMissingOptions.UseVisualStyleBackColor = True
+        '
+        'ucrNudNumberNotMissing
+        '
+        Me.ucrNudNumberNotMissing.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberNotMissing.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNumberNotMissing, "ucrNudNumberNotMissing")
+        Me.ucrNudNumberNotMissing.Maximum = New Decimal(New Integer() {340, 0, 0, 0})
+        Me.ucrNudNumberNotMissing.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberNotMissing.Name = "ucrNudNumberNotMissing"
+        Me.ucrNudNumberNotMissing.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblNumberNotMissing
+        '
+        resources.ApplyResources(Me.lblNumberNotMissing, "lblNumberNotMissing")
+        Me.lblNumberNotMissing.Name = "lblNumberNotMissing"
+        '
+        'rdoNumberNotMissing
+        '
+        resources.ApplyResources(Me.rdoNumberNotMissing, "rdoNumberNotMissing")
+        Me.rdoNumberNotMissing.Name = "rdoNumberNotMissing"
+        Me.rdoNumberNotMissing.TabStop = True
+        Me.rdoNumberNotMissing.UseVisualStyleBackColor = True
         '
         'ucrNudNumber
         '
@@ -807,4 +835,7 @@ Partial Class sdgSummaries
     Friend WithEvents ucrSelectorOrderBy As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverOrderBy As ucrReceiverSingle
     Friend WithEvents ucrChkOrderBy As ucrCheck
+    Friend WithEvents rdoNumberNotMissing As RadioButton
+    Friend WithEvents lblNumberNotMissing As Label
+    Friend WithEvents ucrNudNumberNotMissing As ucrNud
 End Class
