@@ -65,12 +65,13 @@ Public Class dlgOpenNetCDF
             GetFileFromOpenDialog()
             bStartOpenDialog = False
         ElseIf bRefered Then
+            dlgImportDataset.Close()
+
             Dim strTemp As String = ""
-            'CheckCloseFile()
+            CheckCloseFile()
             bCloseFile = True
             ucrInputFilePath.SetName(strFilePath)
             ucrInputDataName.SetName(frmMain.clsRLink.MakeValidText(Path.GetFileNameWithoutExtension(strFilePath)))
-            bCloseFile = True
             clsNcOpenFunction.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
             clsNcOpenFunction.ToScript(strTemp)
             frmMain.clsRLink.RunScript(strTemp, strComment:="Opening netCDF file", bUpdateGrids:=False)
