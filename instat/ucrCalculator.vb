@@ -154,7 +154,6 @@ Public Class ucrCalculator
     Private Sub cmdLesser_Click(sender As Object, e As EventArgs) Handles cmdLesser.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" < ")
     End Sub
-
     Private Sub cmdComma_Click(sender As Object, e As EventArgs) Handles cmdComma.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(",")
     End Sub
@@ -1120,6 +1119,20 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::near(x= , y= )", 6)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::near()", 1)
+        End If
+    End Sub
+    Private Sub cmdLogit_Click(sender As Object, e As EventArgs) Handles cmdLogit.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("car::logit(p, percents = Range.p[2] > 1, adjust)", 24)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("car::logit()", 1)
+        End If
+    End Sub
+    Private Sub cmdLogistic_Click(sender As Object, e As EventArgs) Handles cmdLogistic.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::plogis(q, Location = 0, Scale() = 1, lower.tail = True, Log.p = False))", 50)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::plogis()", 1)
         End If
     End Sub
 
