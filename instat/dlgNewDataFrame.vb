@@ -187,8 +187,8 @@ Public Class dlgNewDataFrame
         ucrNudCols.SetRCode(clsEmptyMatrixFunction, bReset)
         ucrNudRows.SetRCode(clsEmptyMatrixFunction, bReset)
 
-        ucrNewDFName.AddAdditionalRCode(clsConstructFunction, iAdditionalPairNo:=1)
-        ucrNewDFName.SetRCode(clsEmptyOverallFunction, bReset)
+        ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
+        ucrNewDFName.SetRCode(clsConstructFunction, bReset)
 
         If bReset Then
             ucrPnlDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
