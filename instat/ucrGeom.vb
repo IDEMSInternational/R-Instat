@@ -33,6 +33,7 @@ Public Class ucrGeom
     Private iCurrentGeomIndex As Integer = -1
     Public bPauseChanges As Boolean = False
     Dim strLineType As String() = {Chr(34) & "blank" & Chr(34), Chr(34) & "solid" & Chr(34), Chr(34) & "dashed" & Chr(34), Chr(34) & "dotted" & Chr(34), Chr(34) & "dotdash" & Chr(34), Chr(34) & "longdash" & Chr(34), Chr(34) & "twodash" & Chr(34)}
+    Dim strShapePoint As String() = {Chr(34) & "circle" & Chr(34), Chr(34) & "circle open" & Chr(34), Chr(34) & "circle filled" & Chr(34), Chr(34) & "circle cross" & Chr(34), Chr(34) & "circle plus" & Chr(34), Chr(34) & "circle small" & Chr(34), Chr(34) & "bullet" & Chr(34), Chr(34) & "square" & Chr(34), Chr(34) & "square open" & Chr(34), Chr(34) & "square filled" & Chr(34), Chr(34) & "square cross" & Chr(34), Chr(34) & "square plus" & Chr(34), Chr(34) & "square triangle" & Chr(34), Chr(34) & "diamond" & Chr(34), Chr(34) & "diamond open" & Chr(34), Chr(34) & "diamond filled" & Chr(34), Chr(34) & "diamond plus" & Chr(34), Chr(34) & "triangle" & Chr(34), Chr(34) & "triangle open" & Chr(34), Chr(34) & "triangle filled" & Chr(34), Chr(34) & "triangle square" & Chr(34), Chr(34) & "triangle down open" & Chr(34), Chr(34) & "triangle down filled" & Chr(34), Chr(34) & "plus" & Chr(34), Chr(34) & "cross" & Chr(34), Chr(34) & "asterisk" & Chr(34)}
 
     Public Sub New()
 
@@ -178,7 +179,7 @@ Public Class ucrGeom
         clsgeom_statsummary.AddLayerParameter("fun.ymax", "editablelist", Chr(34) & "max" & Chr(34), lstParameterStrings:={Chr(34) & "max" & Chr(34)})
         clsgeom_statsummary.AddLayerParameter("geom", "list", Chr(34) & "area" & Chr(34), lstParameterStrings:={Chr(34) & "area" & Chr(34), Chr(34) & "bar" & Chr(34), Chr(34) & "blank" & Chr(34), Chr(34) & "col" & Chr(34), Chr(34) & "contour" & Chr(34), Chr(34) & "crossbar" & Chr(34), Chr(34) & "density" & Chr(34), Chr(34) & "density_2d" & Chr(34), Chr(34) & "density2d" & Chr(34), Chr(34) & "errorbar" & Chr(34), Chr(34) & "hex" & Chr(34), Chr(34) & "line" & Chr(34), Chr(34) & "linerange" & Chr(34), Chr(34) & "path" & Chr(34), Chr(34) & "point" & Chr(34), Chr(34) & "pointrange" & Chr(34), Chr(34) & "polygon" & Chr(34), Chr(34) & "quantile" & Chr(34), Chr(34) & "raster" & Chr(34), Chr(34) & "ribbon" & Chr(34), Chr(34) & "rug" & Chr(34), Chr(34) & "smooth" & Chr(34), Chr(34) & "step" & Chr(34), Chr(34) & "tile" & Chr(34)})
         'TO DO what other positons can go here?
-        clsgeom_statsummary.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_statsummary.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         clsgeom_statsummary.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_statsummary.AddLayerParameter("size", "numeric", "1.5", lstParameterStrings:={1, 0})
         clsgeom_statsummary.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
@@ -257,7 +258,7 @@ Public Class ucrGeom
         'clsgeom_area.AddAesParameter("group", strIncludedDataTypes:={"factor"})
 
         'Global Layer Parameters 
-        'clsgeom_area.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_dodge()"})
+        'clsgeom_area.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34),Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_dodge()"})
         'we can use position adjustment functions here as well. For "dodge" option, R gives a warning: Width Not defined. Set with `position_dodge(width = ?). So we need to be able to set the width within position_dodge option here
         'clsgeom_area.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'clsgeom_area.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
@@ -299,7 +300,7 @@ Public Class ucrGeom
         'Global Layer parameters
         clsgeom_bar.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
         clsgeom_bar.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_bar.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_bar.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         'See global comments about position.
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_bar.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
@@ -357,14 +358,14 @@ Public Class ucrGeom
         clsgeom_boxplot.AddLayerParameter("notchwidth", "numeric", "0.5", lstParameterStrings:={1}) 'Question to be discussed: this sets the width of the notch as a proportion of the boxplot width. Values can be anything in ggplot but negative ones just give a silly looking thing (I ve left it in for now, but would suggest we exclude ?), and I don't know if values above 1 make sense ? The notch would then be larger than the boxplot.
         clsgeom_boxplot.AddLayerParameter("varwidth", "boolean", "TRUE")
         clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5", lstParameterStrings:={1}) 'Question to be discussed: This parameter is setting the length of the whiskers as a multiple of the IQR. When giving a negative value, the whiskers are simply of length 0. Also the window showing the graph doesn't adapt to the whiskers' length, which means they are simply cut when too long.
-        clsgeom_boxplot.AddLayerParameter("outlier.shape", "numeric", "19", lstParameterStrings:={0, 0, 25}) 'Warning: there are other symbols that we can add here 
+        clsgeom_boxplot.AddLayerParameter("outlier.shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strShapePoint) 'Warning: there are other symbols that we can add here 
         clsgeom_boxplot.AddLayerParameter("outlier.colour", "colour", "NULL")
         clsgeom_boxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Outlier.stroke parameter gives the size of the outliers. It cannot be negative, this would trigger an error in R.
         clsgeom_boxplot.AddLayerParameter("fatten", "numeric", "2", lstParameterStrings:={0, 1, 5})
         'Global Layer parameters
         clsgeom_boxplot.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Warning: when x is continuous, position_dodge requires non-overlapping x intervals (would still work if not respected but sends a warning message).
-        clsgeom_boxplot.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_boxplot.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)})
         'clsgeom_boxplot.AddLayerParameter("stat", "list", Chr(34) & "boxplot" & Chr(34), lstParameterStrings:={Chr(34) & "boxplot" & Chr(34), Chr(34) & "identity" & Chr(34)})
         'The stat is usually not changed in boxplot as it comes together with stat_boxplot. However identity can be taken as value for instance, but then all the aesthetics ymin, ymax, ... need to be filled.
 
@@ -392,7 +393,7 @@ Public Class ucrGeom
         'Global Layer parameters
         clsgeom_col.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
         clsgeom_col.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_col.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_col.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         'See global comments about position.
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_col.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
@@ -440,7 +441,7 @@ Public Class ucrGeom
         clsgeom_count.AddAesParameter("stroke", strIncludedDataTypes:={"factor", "numeric"})
 
         'Global layer parameters
-        clsgeom_count.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_dodge()"})
+        clsgeom_count.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_dodge()"})
         'we can use position adjustment functions here as well. For "dodge" option, R gives a warning: Width Not defined. Set with `position_dodge(width = ?). So we need to be able to set the width within position_dodge option here
         clsgeom_count.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_count.AddLayerParameter("stat", "list", Chr(34) & "sum" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
@@ -449,7 +450,7 @@ Public Class ucrGeom
         clsgeom_count.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
 
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
-        clsgeom_count.AddLayerParameter("shape", "numeric", "19", lstParameterStrings:={0, 0, 25}) 'Note: 16 and 19 seem to have exact same behaviour.
+        clsgeom_count.AddLayerParameter("shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strShapePoint)
         clsgeom_count.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_count.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
         'clsgeom_count.AddLayerParameter("size", "list", Chr(34) & "..n.." & Chr(34), lstParameterStrings:={Chr(34) & "..n.." & Chr(34), Chr(34) & "..prop.." & Chr(34)}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
@@ -505,7 +506,7 @@ Public Class ucrGeom
         clsgeom_curve.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
         'sum and summary only work when x and y parameters are set within aes(). Summary option defaults to `mean_se() since no summary function supplied
         'think it's okay to have this greyed out for now because we only tend to use stat = "identity"
-        clsgeom_curve.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_curve.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         'other options for position are ignored when using geom curve on a scatter plot (geom_point) - R gives the following warnign: "Ignoring unknown parameters: identity"
         clsgeom_curve.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_curve.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
@@ -546,7 +547,7 @@ Public Class ucrGeom
         'Global Layer parameters
         'clsgeom_density.AddLayerParameter("stat", "list", Chr(34) & "density" & Chr(34), lstParameterStrings:={Chr(34) & "density" & Chr(34), Chr(34) & "identity" & Chr(34)}) 'Warning: commented out as when set to "identity", all the parameters bw, n, etc are unknown as they belong to stat_density. Think it's easier for now to not allow "identity" instead of introducing dependent exclusion of parameters.
         clsgeom_density.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_density.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "dodge" & Chr(34)})
+        clsgeom_density.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34)})
         'Warning: "Stacked density plots: if you want to create a stacked density plot, you probably want To 'count' (density * n) variable instead of the default density."
         'Question to be discussed: when changing parameter position to stack, should automatically add x="..count.." in the aesthetics parameters ? Carefull to not copy count into variable receivers, add methods like for "" in the boxplt case.
         'See global comments about position.
@@ -644,7 +645,7 @@ Public Class ucrGeom
         'Global Layer parameters
         'Warning: stat is not a parameter of geom_dotplot. Anyway the stat that is used is "bindot".
         clsgeom_dotplot.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_dotplot.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_dotplot.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
 
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_dotplot.AddLayerParameter("fill", "colour", Chr(34) & "black" & Chr(34))
@@ -677,7 +678,7 @@ Public Class ucrGeom
 
         'Global Layer Parameters 
         clsgeom_encircle.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
-        clsgeom_encircle.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_dodge()"})
+        clsgeom_encircle.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_dodge()"})
         'we can use position adjustment functions here as well. For "dodge" option, R gives a warning: Width Not defined. Set with `position_dodge(width = ?). So we need to be able to set the width within position_dodge option here
         clsgeom_encircle.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_encircle.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
@@ -749,7 +750,7 @@ Public Class ucrGeom
         clsgeom_freqpoly.AddLayerParameter("pad", "boolean", "FALSE") 'If TRUE Then, adds empty bins at either End Of x. This ensures frequency polygons touch 0. Defaults To FALSE.
         'Global Layer parameters
         clsgeom_freqpoly.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_freqpoly.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_freqpoly.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         clsgeom_freqpoly.AddLayerParameter("stat", "list", Chr(34) & "bin" & Chr(34), lstParameterStrings:={Chr(34) & "bin" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "count" & Chr(34)}) 'Note, count and identity simply give the same results as with geom_line.
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_density.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
@@ -826,7 +827,7 @@ Public Class ucrGeom
 
         'Global Layer parameters
         clsgeom_histogram.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_histogram.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_histogram.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
 
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_histogram.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
@@ -856,11 +857,11 @@ Public Class ucrGeom
         clsgeom_jitter.AddLayerParameter("height", "numeric", "0", lstParameterStrings:={2, 0, 1})
         clsgeom_jitter.AddLayerParameter("width", "numeric", "0", lstParameterStrings:={1})
         'Global Layer parameters
-        'clsgeom_jitter.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_jitterdodge()"})
+        'clsgeom_jitter.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34),Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_jitterdodge()"})
         clsgeom_jitter.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "desnity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
         clsgeom_jitter.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
-        clsgeom_jitter.AddLayerParameter("shape", "numeric", "19", lstParameterStrings:={0, 0, 25}) 'Note: 16 and 19 seem to have exact same behaviour.
+        clsgeom_jitter.AddLayerParameter("shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strShapePoint)
         clsgeom_jitter.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_jitter.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
         clsgeom_jitter.AddLayerParameter("size", "numeric", "1.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
@@ -899,7 +900,7 @@ Public Class ucrGeom
         clsgeom_label.AddLayerParameter("parse", "boolean", "FALSE") 'If TRUE, the labels will be parsed into expressions and displayed as described in ?plotmath
         'Global Layer parameters
         clsgeom_label.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_label.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), "position_jitterdodge()", Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
+        clsgeom_label.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), "position_jitterdodge()", Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
         'Warning: cnnot use both position and nudge_x;nudge_y !!! Doesn't crash the software...
         clsgeom_label.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "density" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning: stat count cannot be used with y aesthetic !!! 'Warning: summary and ecdf is source of errors.
         'Aesthetics as layer parameters.
@@ -931,7 +932,7 @@ Public Class ucrGeom
         'Geom_line Parameters
 
         'Global Layer parameters
-        clsgeom_line.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_line.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         clsgeom_line.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "desnity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "unique" & Chr(34)})
         clsgeom_line.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
@@ -1026,11 +1027,11 @@ Public Class ucrGeom
         'Geom_poitn Parameters
 
         'Global Layer parameters
-        clsgeom_point.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_jitterdodge()"})
+        clsgeom_point.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34), "position_jitterdodge()"})
         clsgeom_point.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "desnity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
         clsgeom_point.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
-        clsgeom_point.AddLayerParameter("shape", "numeric", "19", lstParameterStrings:={0, 0, 25}) 'Note: 16 and 19 seem to have exact same behaviour.
+        clsgeom_point.AddLayerParameter("shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strShapePoint)
         clsgeom_point.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_point.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
         clsgeom_point.AddLayerParameter("size", "numeric", "1.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning, sometimesgive errors...
@@ -1172,7 +1173,7 @@ Public Class ucrGeom
         'Geom_line Parameters
         clsgeom_rug.AddLayerParameter("sides", "list", Chr(34) & "bl" & Chr(34), lstParameterStrings:={Chr(34) & "trbl" & Chr(34), Chr(34) & "trb" & Chr(34), Chr(34) & "trl" & Chr(34), Chr(34) & "tbl" & Chr(34), Chr(34) & "rbl" & Chr(34), Chr(34) & "tr" & Chr(34), Chr(34) & "tb" & Chr(34), Chr(34) & "tl" & Chr(34), Chr(34) & "rb" & Chr(34), Chr(34) & "rl" & Chr(34), Chr(34) & "bl" & Chr(34), Chr(34) & "t" & Chr(34), Chr(34) & "r" & Chr(34), Chr(34) & "b" & Chr(34), Chr(34) & "l" & Chr(34)})
         'Global Layer parameters
-        clsgeom_rug.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_rug.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         clsgeom_rug.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning, stat count cannot be used with y aesthetic !!!
         clsgeom_rug.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
@@ -1209,7 +1210,7 @@ Public Class ucrGeom
         clsgeom_segment.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "summary" & Chr(34), Chr(34) & "unique" & Chr(34)})
         'sum and summary only work when x and y parameters are set within aes(). Summary option defaults to `mean_se() since no summary function supplied
         'think it's okay to have this greyed out for now because we only tend to use stat = "identity"
-        clsgeom_segment.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_segment.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
         'other options for position are ignored when using geom segement on a scatter plot (geom_point) - R gives the following warnign: "Ignoring unknown parameters: identity"
         clsgeom_segment.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_segment.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
@@ -1231,7 +1232,7 @@ Public Class ucrGeom
         clsgeom_sf.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
         'Adding layer parameters
         clsgeom_sf.AddLayerParameter("geom", "list", Chr(34) & "area" & Chr(34), lstParameterStrings:={Chr(34) & "area" & Chr(34), Chr(34) & "bar" & Chr(34), Chr(34) & "blank" & Chr(34), Chr(34) & "col" & Chr(34), Chr(34) & "contour" & Chr(34), Chr(34) & "crossbar" & Chr(34), Chr(34) & "density" & Chr(34), Chr(34) & "density_2d" & Chr(34), Chr(34) & "density2d" & Chr(34), Chr(34) & "errorbar" & Chr(34), Chr(34) & "hex" & Chr(34), Chr(34) & "line" & Chr(34), Chr(34) & "linerange" & Chr(34), Chr(34) & "path" & Chr(34), Chr(34) & "point" & Chr(34), Chr(34) & "pointrange" & Chr(34), Chr(34) & "polygon" & Chr(34), Chr(34) & "quantile" & Chr(34), Chr(34) & "raster" & Chr(34), Chr(34) & "ribbon" & Chr(34), Chr(34) & "rug" & Chr(34), Chr(34) & "smooth" & Chr(34), Chr(34) & "step" & Chr(34), Chr(34) & "tile" & Chr(34)})
-        clsgeom_sf.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_sf.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)})
         clsgeom_sf.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_sf.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         clsgeom_sf.AddLayerParameter("size", "numeric", "3", lstParameterStrings:={1, 1})
@@ -1346,7 +1347,7 @@ Public Class ucrGeom
         clsgeom_text.AddLayerParameter("parse", "boolean", "FALSE") 'If TRUE, the labels will be parsed into expressions and displayed as described in ?plotmath
         'Global Layer parameters
         clsgeom_text.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_text.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), "position_jitterdodge()", Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
+        clsgeom_text.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), "position_jitterdodge()", Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
         'Warning: cnnot use both position and nudge_x;nudge_y !!! Doesn't crash the software...
         clsgeom_text.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "desnity" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning: stat count cannot be used with y aesthetic !!! 'Warning: summary and ecdf is source of errors.
         'Aesthetics as layer parameters.
@@ -1426,7 +1427,7 @@ Public Class ucrGeom
         'Global Layer parameters
         'clsgeom_violin.AddLayerParameter("stat", "list", Chr(34) & "density" & Chr(34), lstParameterStrings:={Chr(34) & "density" & Chr(34), Chr(34) & "identity" & Chr(34)}) 'Warning: commented out as when set to "identity", all the parameters bw, n, etc are unknown as they belong to stat_density. Think it's easier for now to not allow "identity" instead of introducing dependent exclusion of parameters.
         clsgeom_violin.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_violin.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "dodge" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "jitter" & Chr(34)})
+        clsgeom_violin.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "jitter" & Chr(34)})
         ''Warning: "Stacked density plots: If you want to create a stacked density plot, you probably want To 'count' (density * n) variable instead of the default density."
         ''Question to be discussed: when changing parameter position to stack, should automatically add x="..count.." in the aesthetics parameters ? Carefull to not copy count into variable receivers, add methods like for "" in the boxplt case.
         ''See global comments about position.
