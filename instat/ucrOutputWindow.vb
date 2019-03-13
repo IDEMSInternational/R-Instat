@@ -33,7 +33,6 @@ Public Class ucrOutputWindow
         End If
     End Sub
 
-
     'Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
     '    MyBase.OnFormClosing(e)
     '    If Not e.Cancel AndAlso e.CloseReason = CloseReason.UserClosing Then
@@ -131,6 +130,5 @@ Public Class ucrOutputWindow
     Private Sub HelpRTB_Click(sender As Object, e As EventArgs) Handles HelpRTB.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "540")
     End Sub
-
 
 End Class
