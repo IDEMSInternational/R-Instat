@@ -21,7 +21,6 @@ Public Class dlgRenameDataFrame
     Private bReset As Boolean = True
     Private clsRename As New RFunction
     Private Sub dlgRenameDataFrame_Load(sender As Object, e As EventArgs) Handles Me.Load
-        SetDefaults()
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -82,9 +81,9 @@ Public Class dlgRenameDataFrame
     End Sub
 
     Private Sub CheckAutoName()
-        If Not ucrInputNewName.bUserTyped Then
-            ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
-        End If
+        'If Not ucrInputNewName.bUserTyped Then
+        ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
+        'End If
     End Sub
 
     Public Sub SetCurrentDataframe(strDataFrame As String)
