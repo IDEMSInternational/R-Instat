@@ -81,9 +81,7 @@ Public Class dlgRenameDataFrame
     End Sub
 
     Private Sub CheckAutoName()
-        'If Not ucrInputNewName.bUserTyped Then
         ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
-        'End If
     End Sub
 
     Public Sub SetCurrentDataframe(strDataFrame As String)
