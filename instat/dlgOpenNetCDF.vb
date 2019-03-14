@@ -65,8 +65,6 @@ Public Class dlgOpenNetCDF
             GetFileFromOpenDialog()
             bStartOpenDialog = False
         ElseIf bRefered Then
-            dlgImportDataset.Close()
-
             Dim strTemp As String = ""
             CheckCloseFile()
             bCloseFile = True
@@ -325,7 +323,6 @@ Public Class dlgOpenNetCDF
             SetDefaults()
         End If
     End Sub
-
     Private Function ucrBase_ClickOk() As Boolean
 
     End Function
