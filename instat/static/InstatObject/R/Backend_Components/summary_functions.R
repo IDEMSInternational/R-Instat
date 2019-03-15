@@ -427,12 +427,15 @@ summary_mode <- function(x,...) {
   else return(out)
 }
 
-na_check <- function(x, na_type = "n", na_max_n = NULL, na_max_prop = NULL, na_FUN = NULL, ...) {
+na_check <- function(x, na_type = "n", na_max_n = NULL, na_max_prop = NULL, na_min_n = NULL,na_FUN = NULL, ...) {
   if(na_type == "n") {
     return(summary_count_missing(x) <= na_max_n)
   }
   else if(na_type == "prop") {
     return(summary_count_missing(x)/summary_count(x) <= na_max_prop)
+  }
+  if(na_type == "n_non_miss") {
+    return(summary_count_non_missing(x) >= na_min_n)
   }
   else if(na_type == "FUN") {
     return(na_FUN(x, ...))
