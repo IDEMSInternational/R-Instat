@@ -195,6 +195,8 @@ Partial Class ucrCalculator
         Me.cmdBeta = New System.Windows.Forms.Button()
         Me.cmdDigamma = New System.Windows.Forms.Button()
         Me.grpMaths = New System.Windows.Forms.GroupBox()
+        Me.cmdLogistic = New System.Windows.Forms.Button()
+        Me.cmdLogit = New System.Windows.Forms.Button()
         Me.cmdSign = New System.Windows.Forms.Button()
         Me.cmdRound = New System.Windows.Forms.Button()
         Me.cmdSiginf = New System.Windows.Forms.Button()
@@ -1361,6 +1363,8 @@ Partial Class ucrCalculator
         '
         'grpMaths
         '
+        Me.grpMaths.Controls.Add(Me.cmdLogistic)
+        Me.grpMaths.Controls.Add(Me.cmdLogit)
         Me.grpMaths.Controls.Add(Me.cmdSign)
         Me.grpMaths.Controls.Add(Me.cmdRound)
         Me.grpMaths.Controls.Add(Me.cmdSiginf)
@@ -1384,6 +1388,18 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpMaths, "grpMaths")
         Me.grpMaths.Name = "grpMaths"
         Me.grpMaths.TabStop = False
+        '
+        'cmdLogistic
+        '
+        resources.ApplyResources(Me.cmdLogistic, "cmdLogistic")
+        Me.cmdLogistic.Name = "cmdLogistic"
+        Me.cmdLogistic.UseVisualStyleBackColor = True
+        '
+        'cmdLogit
+        '
+        resources.ApplyResources(Me.cmdLogit, "cmdLogit")
+        Me.cmdLogit.Name = "cmdLogit"
+        Me.cmdLogit.UseVisualStyleBackColor = True
         '
         'cmdSign
         '
@@ -2203,4 +2219,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdHair As Button
     Friend WithEvents cmdGroup As Button
     Friend WithEvents cmdGrade As Button
+    Friend WithEvents cmdLogistic As Button
+    Friend WithEvents cmdLogit As Button
 End Class
