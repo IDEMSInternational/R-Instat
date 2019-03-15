@@ -4782,12 +4782,6 @@
     <Content Include="static\ClimateObject\R\SourcingScript.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\ExperimentalSurveyData.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Samaru56.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="static\InstatObject\R\labels_and_defaults.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -4803,15 +4797,6 @@
     <Content Include="static\InstatObject\R\instat_object_R6.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Climatic\RainGalle.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Introductory_guide_datasets.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Climatic_guide_datasets.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="static\InstatObject\R\Backend_Components\calculations.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -4822,99 +4807,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="static\Help\LICENSE" />
-    <Content Include="static\Library\Procurement\wb_ppp_1990-2014_long.dta">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="static\Help\LICENSE" />
-    <Content Include="static\Library\Procurement\wb_ppp_1990-2014_long.dta">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="static\Help\R-Instat.pdf" />
-    <Content Include="static\Library\Climatic\WKenyaRain.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\WKenya_StationInfo.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\CAST\CASTDATA.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\GMetData2.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\IRLI\CS01.rds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\IRLI\CS12.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\IRLI\CS03.rds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\IRLI\CS04.rds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\IRLI\CS07.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\idb.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\EuropeAid.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\WorldBank.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Satellite\CMSAF_CFC_DailyMean_1991-2015_Dodoma.nc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Satellite\CMSAF_SDU_DailySums_1983-2015_Dodoma.nc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Satellite\CMSAF_SISc_DailyMean_1983-2015_Dodoma.nc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Satellite\CMSAF_SIS_DailyMean_1983-2015_Dodoma.nc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\country.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\country.year.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Dodoma.rds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\WesternKenya.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="static\InstatObject\R\Backend_Components\DisplayDaily.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="static\InstatObject\R\Backend_Components\instat_comment.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="static\Library\Procurement\WorldBank97-14.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Guinea\Guinea2.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Guinea\Guinea2.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Guinea\Kankan.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Guinea\Koundara.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="static\InstatObject\R\Backend_Components\options_by_context.R">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\Uganda15-18.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\abind_1.4-5.zip">
@@ -5862,7 +5763,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
+    <Folder Include="static\Library\CAST\" />
+    <Folder Include="static\Library\Climatic\Guinea\" />
+    <Folder Include="static\Library\Climatic\Satellite\" />
+    <Folder Include="static\Library\IRLI\" />
     <Folder Include="static\Library\Options by Context\" />
+    <Folder Include="static\Library\Procurement\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
