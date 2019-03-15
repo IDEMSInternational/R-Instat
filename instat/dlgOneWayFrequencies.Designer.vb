@@ -262,7 +262,6 @@ Partial Class dlgOneWayFrequencies
         Me.MinimizeBox = False
         Me.Name = "dlgOneWayFrequencies"
         Me.grpSort.ResumeLayout(False)
-        Me.grpSort.PerformLayout()
         Me.grpOutput.ResumeLayout(False)
         Me.grpOutput.PerformLayout()
         Me.ResumeLayout(False)
