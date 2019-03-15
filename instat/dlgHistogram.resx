@@ -175,10 +175,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoHistogram.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 12</value>
+    <value>24, 12</value>
   </data>
   <data name="rdoHistogram.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 28</value>
+    <value>125, 28</value>
   </data>
   <data name="rdoHistogram.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -208,10 +208,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoDensity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>154, 12</value>
+    <value>147, 12</value>
   </data>
   <data name="rdoDensity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 28</value>
+    <value>125, 28</value>
   </data>
   <data name="rdoDensity.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -241,10 +241,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoFrequencyPolygon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 12</value>
+    <value>270, 12</value>
   </data>
   <data name="rdoFrequencyPolygon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 28</value>
+    <value>125, 28</value>
   </data>
   <data name="rdoFrequencyPolygon.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -394,7 +394,7 @@
     <value>10</value>
   </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 5</value>
+    <value>10, 5</value>
   </data>
   <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>398, 42</value>

@@ -66,16 +66,19 @@ Partial Class ucrColumnMetadata
         Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.propertiesContextMenuStrip.SuspendLayout()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
+        Me.cellContextMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'grdVariables
         '
         Me.grdVariables.BackColor = System.Drawing.Color.White
         Me.grdVariables.ColumnHeaderContextMenuStrip = Nothing
-        Me.grdVariables.ContextMenuStrip = Me.propertiesContextMenuStrip
+        Me.grdVariables.ContextMenuStrip = Me.cellContextMenuStrip
         Me.grdVariables.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdVariables.LeadHeaderContextMenuStrip = Nothing
         Me.grdVariables.Location = New System.Drawing.Point(3, 23)
@@ -87,7 +90,7 @@ Partial Class ucrColumnMetadata
         Me.grdVariables.SheetTabVisible = True
         Me.grdVariables.SheetTabWidth = 154
         Me.grdVariables.ShowScrollEndSpacing = True
-        Me.grdVariables.Size = New System.Drawing.Size(338, 112)
+        Me.grdVariables.Size = New System.Drawing.Size(338, 92)
         Me.grdVariables.TabIndex = 2
         Me.grdVariables.Text = "Variables"
         '
@@ -254,11 +257,24 @@ Partial Class ucrColumnMetadata
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
-        Me.tlpTableContainer.RowCount = 2
+        Me.tlpTableContainer.RowCount = 3
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.Size = New System.Drawing.Size(344, 138)
         Me.tlpTableContainer.TabIndex = 7
+        '
+        'cellContextMenuStrip
+        '
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelp})
+        Me.cellContextMenuStrip.Name = "ContextMenuStrip1"
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(100, 26)
+        '
+        'mnuHelp
+        '
+        Me.mnuHelp.Name = "mnuHelp"
+        Me.mnuHelp.Size = New System.Drawing.Size(152, 22)
+        Me.mnuHelp.Text = "Help"
         '
         'ucrColumnMetadata
         '
@@ -270,6 +286,7 @@ Partial Class ucrColumnMetadata
         Me.propertiesContextMenuStrip.ResumeLayout(False)
         Me.columnContextMenuStrip.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
+        Me.cellContextMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -301,4 +318,6 @@ Partial Class ucrColumnMetadata
     Friend WithEvents mnuReorderColumns As ToolStripMenuItem
     Private WithEvents propertiesContextMenuStrip As ContextMenuStrip
     Friend WithEvents mnuDeleteLabels As ToolStripMenuItem
+    Friend WithEvents cellContextMenuStrip As ContextMenuStrip
+    Friend WithEvents mnuHelp As ToolStripMenuItem
 End Class

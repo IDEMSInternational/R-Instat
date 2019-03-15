@@ -117,17 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rdoDescendingFrequencies.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdoDescendingFrequencies.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 65</value>
   </data>
   <data name="rdoDescendingFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 17</value>
+    <value>169, 17</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoDescendingFrequencies.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -146,14 +143,11 @@
   <data name="&gt;&gt;rdoDescendingFrequencies.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdoAscendingFrequencies.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="rdoAscendingFrequencies.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 43</value>
   </data>
   <data name="rdoAscendingFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 17</value>
+    <value>169, 17</value>
   </data>
   <data name="rdoAscendingFrequencies.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -173,14 +167,11 @@
   <data name="&gt;&gt;rdoAscendingFrequencies.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="rdoNone.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="rdoNone.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 21</value>
   </data>
   <data name="rdoNone.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 17</value>
+    <value>167, 17</value>
   </data>
   <data name="rdoNone.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -201,10 +192,12 @@
     <value>2</value>
   </data>
   <data name="ucrPnlSort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
+    <value>5, 14</value>
   </data>
   <data name="ucrPnlSort.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 69</value>
+
+    <value>174, 69</value>
+
   </data>
   <data name="ucrPnlSort.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -225,7 +218,7 @@
     <value>258, 201</value>
   </data>
   <data name="grpSort.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 88</value>
+    <value>185, 88</value>
   </data>
   <data name="grpSort.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>

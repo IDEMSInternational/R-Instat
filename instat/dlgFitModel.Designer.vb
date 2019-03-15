@@ -277,6 +277,7 @@ Partial Class dlgFitModel
         '
         'ucrSelectorByDataFrameAddRemoveForFitModel
         '
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.bDropUnusedFilterLevels = False
         Me.ucrSelectorByDataFrameAddRemoveForFitModel.bShowHiddenColumns = False
         Me.ucrSelectorByDataFrameAddRemoveForFitModel.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorByDataFrameAddRemoveForFitModel, "ucrSelectorByDataFrameAddRemoveForFitModel")

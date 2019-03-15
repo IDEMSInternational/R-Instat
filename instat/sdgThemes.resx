@@ -141,10 +141,10 @@
     <value>1</value>
   </data>
   <data name="ucrStripsSpaceWrap.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 21</value>
+    <value>265, 21</value>
   </data>
   <data name="ucrStripsSpaceWrap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 125</value>
+    <value>261, 125</value>
   </data>
   <data name="ucrStripsSpaceWrap.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -162,7 +162,7 @@
     <value>0</value>
   </data>
   <data name="ucrStripsSpaceGrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 21</value>
+    <value>6, 21</value>
   </data>
   <data name="ucrStripsSpaceGrid.Size" type="System.Drawing.Size, System.Drawing">
     <value>258, 119</value>
@@ -183,7 +183,7 @@
     <value>1</value>
   </data>
   <data name="grpSpaceBetweenStripsAxes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 255</value>
+    <value>5, 268</value>
   </data>
   <data name="grpSpaceBetweenStripsAxes.Size" type="System.Drawing.Size, System.Drawing">
     <value>531, 150</value>
@@ -228,7 +228,7 @@
     <value>0</value>
   </data>
   <data name="grpFacetBackground.Location" type="System.Drawing.Point, System.Drawing">
-    <value>541, 269</value>
+    <value>541, 268</value>
   </data>
   <data name="grpFacetBackground.Size" type="System.Drawing.Size, System.Drawing">
     <value>263, 148</value>
@@ -363,10 +363,10 @@
     <value>8</value>
   </data>
   <data name="ucrPanelSpacingYAxis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>536, 21</value>
+    <value>530, 21</value>
   </data>
   <data name="ucrPanelSpacingYAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 119</value>
+    <value>261, 119</value>
   </data>
   <data name="ucrPanelSpacingYAxis.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -384,10 +384,10 @@
     <value>0</value>
   </data>
   <data name="ucrPanelSpacingXAxis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 21</value>
+    <value>268, 21</value>
   </data>
   <data name="ucrPanelSpacingXAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 119</value>
+    <value>262, 119</value>
   </data>
   <data name="ucrPanelSpacingXAxis.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -405,7 +405,7 @@
     <value>1</value>
   </data>
   <data name="ucrPanelSpacing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 21</value>
+    <value>7, 21</value>
   </data>
   <data name="ucrPanelSpacing.Size" type="System.Drawing.Size, System.Drawing">
     <value>258, 119</value>
@@ -516,10 +516,10 @@
     <value>1</value>
   </data>
   <data name="ucrPanelGridMinor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>536, 21</value>
+    <value>527, 15</value>
   </data>
   <data name="ucrPanelGridMinor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 124</value>
+    <value>254, 118</value>
   </data>
   <data name="ucrPanelGridMinor.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -537,10 +537,10 @@
     <value>0</value>
   </data>
   <data name="ucrPanelGridMajor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 21</value>
+    <value>269, 15</value>
   </data>
   <data name="ucrPanelGridMajor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 124</value>
+    <value>254, 118</value>
   </data>
   <data name="ucrPanelGridMajor.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -558,10 +558,10 @@
     <value>1</value>
   </data>
   <data name="ucrPanelGrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 21</value>
+    <value>10, 15</value>
   </data>
   <data name="ucrPanelGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 124</value>
+    <value>254, 118</value>
   </data>
   <data name="ucrPanelGrid.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -627,10 +627,10 @@
     <value>6</value>
   </data>
   <data name="ucrLegendKeyWidth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>536, 21</value>
+    <value>531, 21</value>
   </data>
   <data name="ucrLegendKeyWidth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 119</value>
+    <value>261, 119</value>
   </data>
   <data name="ucrLegendKeyWidth.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -648,10 +648,10 @@
     <value>0</value>
   </data>
   <data name="ucrLegendKeyHeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 21</value>
+    <value>269, 21</value>
   </data>
   <data name="ucrLegendKeyHeight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 119</value>
+    <value>263, 119</value>
   </data>
   <data name="ucrLegendKeyHeight.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -669,7 +669,7 @@
     <value>1</value>
   </data>
   <data name="ucrLegendKeySize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 21</value>
+    <value>9, 21</value>
   </data>
   <data name="ucrLegendKeySize.Size" type="System.Drawing.Size, System.Drawing">
     <value>258, 119</value>
@@ -1594,10 +1594,10 @@
     <value>2</value>
   </data>
   <data name="ucrTickLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 15</value>
+    <value>6, 10</value>
   </data>
   <data name="ucrTickLength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 114</value>
+    <value>258, 122</value>
   </data>
   <data name="ucrTickLength.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1615,10 +1615,10 @@
     <value>0</value>
   </data>
   <data name="grpTickLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>542, 27</value>
+    <value>538, 27</value>
   </data>
   <data name="grpTickLength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 137</value>
+    <value>272, 137</value>
   </data>
   <data name="grpTickLength.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1747,7 +1747,7 @@
     <value>1</value>
   </data>
   <data name="ucrPlotMargin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 24</value>
+    <value>5, 23</value>
   </data>
   <data name="ucrPlotMargin.Size" type="System.Drawing.Size, System.Drawing">
     <value>257, 123</value>
@@ -1771,7 +1771,7 @@
     <value>285, 269</value>
   </data>
   <data name="grpPlotMargin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 153</value>
+    <value>271, 153</value>
   </data>
   <data name="grpPlotMargin.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1951,10 +1951,10 @@
     <value>0</value>
   </data>
   <data name="ucrLegendBoxSpacing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 21</value>
+    <value>4, 21</value>
   </data>
   <data name="ucrLegendBoxSpacing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 127</value>
+    <value>262, 127</value>
   </data>
   <data name="ucrLegendBoxSpacing.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1996,10 +1996,10 @@
     <value>0</value>
   </data>
   <data name="ucrLegendSpacingYAxis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>534, 21</value>
+    <value>532, 21</value>
   </data>
   <data name="ucrLegendSpacingYAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 119</value>
+    <value>260, 119</value>
   </data>
   <data name="ucrLegendSpacingYAxis.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2017,10 +2017,10 @@
     <value>0</value>
   </data>
   <data name="ucrLegendSpacingXAxis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 21</value>
+    <value>268, 21</value>
   </data>
   <data name="ucrLegendSpacingXAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 119</value>
+    <value>261, 119</value>
   </data>
   <data name="ucrLegendSpacingXAxis.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2038,7 +2038,7 @@
     <value>1</value>
   </data>
   <data name="ucrLegendSpacing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 21</value>
+    <value>6, 21</value>
   </data>
   <data name="ucrLegendSpacing.Size" type="System.Drawing.Size, System.Drawing">
     <value>258, 119</value>
