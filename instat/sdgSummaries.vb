@@ -142,15 +142,18 @@ Public Class sdgSummaries
         ucrChkIncludeMissingOpt.AddToLinkedControls(ucrPnlMissingOptions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoNumber)
         ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrPnlMissingOptions.AddToLinkedControls({ucrNudPercentage}, {rdoPercentage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumberNotMissing}, {rdoNumberNotMissing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=340)
 
         ucrInputN.SetLinkedDisplayControl(lblInputN)
         ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
         ucrNudNumber.SetLinkedDisplayControl(lblNumber)
         ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
+        ucrNudNumberNotMissing.SetLinkedDisplayControl(lblNumberNotMissing)
 
         ucrPnlMissingOptions.SetParameter(New RParameter("na_type", 9))
         ucrPnlMissingOptions.AddRadioButton(rdoNumber, Chr(34) & "'n'" & Chr(34))
         ucrPnlMissingOptions.AddRadioButton(rdoPercentage, Chr(34) & "'prop'" & Chr(34))
+        ucrPnlMissingOptions.AddRadioButton(rdoNumberNotMissing, Chr(34) & "'n_non_miss'" & Chr(34))
 
         ucrChkTrimmedMean.SetParameter(New RParameter("summary_trimmed_mean", 27), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_trimmed_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkTrimmedMean.SetText("Trimmed Mean")
@@ -212,6 +215,9 @@ Public Class sdgSummaries
 
         ucrNudNumber.SetParameter(New RParameter("na_max_n", 11))
 
+        ucrNudNumberNotMissing.SetParameter(New RParameter("na_min_n", 12))
+        ucrNudNumberNotMissing.SetMinMax(0, iNewMax:=Integer.MaxValue)
+
         ucrChkStandardErrorOfMean.SetParameter(New RParameter("standard_error_mean", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "standard_error_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkStandardErrorOfMean.SetText("Standard Error of the Mean")
 
@@ -244,6 +250,7 @@ Public Class sdgSummaries
 
         ucrNudPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudNumber.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudNumberNotMissing.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrChkIncludeMissingOpt.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlMissingOptions.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
 
