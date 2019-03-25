@@ -58,20 +58,25 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
         ucrReceiverMultipleElements.strSelectorHeading = "Elements"
 
+
+        ucrChkUnstackData.SetText("Unstack Data")
+        ucrChkUnstackData.Enabled = False
+
         ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 2))
         ucrChkObservationData.SetText("Observation Data")
         ucrChkObservationData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkObservationData.SetRDefault("FALSE")
 
-        ucrInputStartDate.SetParameter(New RParameter("start_date", 3))
-        ucrInputStartDate.SetLinkedDisplayControl(lblStartDate)
-        ttClimsoft.SetToolTip(ucrInputStartDate.txtInput, "yyyy-mm-dd")
+        ucrDtpStartdate.SetParameter(New RParameter("start_date", 3))
+        ucrDtpStartdate.SetParameterIsRDate()
+        ucrDtpStartdate.SetLinkedDisplayControl(lblStartDate)
 
-        ucrInputEndDate.SetParameter(New RParameter("end_date", 4))
-        ucrInputEndDate.SetLinkedDisplayControl(lblEndDate)
-        ttClimsoft.SetToolTip(ucrInputEndDate.txtInput, "yyyy-mm-dd")
+        UcrDtpEndDate.SetParameter(New RParameter("end_date", 4))
+        UcrDtpEndDate.SetParameterIsRDate()
+        UcrDtpEndDate.SetLinkedDisplayControl(lblEndDate)
 
-        ucrChkObservationData.AddToLinkedControls({ucrInputStartDate, ucrInputEndDate, ucrReceiverMultipleElements}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkObservationData.AddToLinkedControls({ucrDtpStartdate, UcrDtpEndDate, ucrReceiverMultipleElements}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -80,8 +85,6 @@ Public Class dlgClimSoft
         clsHasConnection = New RFunction
         clsRDatabaseDisconnect = New RFunction
         ucrReceiverMultipleStations.SetMeAsReceiver()
-        ucrInputStartDate.SetName("")
-        ucrInputEndDate.SetName("")
 
         clsRDatabaseConnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_connect")
         clsRDatabaseConnect.AddParameter("dbname", frmMain.clsInstatOptions.strClimsoftDatabaseName, iPosition:=0)
@@ -154,4 +157,5 @@ Public Class dlgClimSoft
             ucrReceiverMultipleStations.SetMeAsReceiver()
         End If
     End Sub
+
 End Class

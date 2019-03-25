@@ -1233,8 +1233,8 @@ DataBook$set("public","create_factor_data_frame", function(data_name, factor, fa
 }
 )
 
-DataBook$set("public","split_date", function(data_name, col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE, dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1) {
-  self$get_data_objects(data_name)$split_date(col_name = col_name , year_val = year_val, year_name = year_name, leap_year =  leap_year, month_val = month_val, month_abbr = month_abbr, month_name = month_name, week_val = week_val, week_abbr = week_abbr, week_name = week_name,  weekday_val = weekday_val, weekday_abbr = weekday_abbr,  weekday_name =  weekday_name, day = day,  day_in_month = day_in_month, day_in_year = day_in_year,   day_in_year_366 = day_in_year_366, pentad_val = pentad_val, pentad_abbr = pentad_abbr, dekad_val = dekad_val, dekad_abbr = dekad_abbr, quarter_val = quarter_val,  quarter_abbr = quarter_abbr, with_year = with_year, s_start_month = s_start_month, s_start_day_in_month = s_start_day_in_month)
+DataBook$set("public","split_date", function(data_name, col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE, dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1, days_in_month = FALSE) {
+  self$get_data_objects(data_name)$split_date(col_name = col_name , year_val = year_val, year_name = year_name, leap_year =  leap_year, month_val = month_val, month_abbr = month_abbr, month_name = month_name, week_val = week_val, week_abbr = week_abbr, week_name = week_name,  weekday_val = weekday_val, weekday_abbr = weekday_abbr,  weekday_name =  weekday_name, day = day,  day_in_month = day_in_month, day_in_year = day_in_year,   day_in_year_366 = day_in_year_366, pentad_val = pentad_val, pentad_abbr = pentad_abbr, dekad_val = dekad_val, dekad_abbr = dekad_abbr, quarter_val = quarter_val,  quarter_abbr = quarter_abbr, with_year = with_year, s_start_month = s_start_month, s_start_day_in_month = s_start_day_in_month, days_in_month = days_in_month)
 }
 )
 
@@ -1536,7 +1536,7 @@ DataBook$set("public", "database_disconnect", function() {
 }
 )
 
-DataBook$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date = "", end_date = "") {
+DataBook$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date = NULL, end_date = NULL) {
   #need to perform checks here
   con = self$get_database_connection()
   if(!is.null(stations)){
@@ -1544,23 +1544,17 @@ DataBook$set("public", "import_from_climsoft", function(stations = c(), elements
     station_info <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
   }
   date_bounds=""
-  if(start_date!=""){
-    if(try(!is.na(as.Date( start_date, format= "%Y-%m-%d")))){
-      date_bounds = paste0(date_bounds, " AND obsDatetime >",sQuote(start_date))
-    }
-    else{
-      stop("start_date format should be yyyy-mm-yy.")
-    }
+  if(!is.null(start_date)) {
+    if(!lubridate::is.Date(start_date)) stop("start_date must be of type Date.")
+    start_date <- format(start_date, format = "%Y-%m-%d")
+    date_bounds = paste0(date_bounds, " AND obsDatetime >",sQuote(start_date))
   }
-  if(end_date!=""){
-    if(try(!is.na(as.Date(end_date, format= "%Y-%m-%d")))){
-      date_bounds = paste0(date_bounds, " AND obsDatetime <",sQuote(end_date))
-    }
-    else{
-      stop("end_date format should be yyyy-mm-yy.")
-    }
+  if(!is.null(end_date)) {
+    if(!lubridate::is.Date(end_date)) stop("end_date must be of type Date.")
+    end_date <- format(end_date, format = "%Y-%m-%d")
+    date_bounds = paste0(date_bounds, " AND obsDatetime <",sQuote(end_date))
   }
-  
+
   if (length(elements) > 0){
     my_elements = paste0("(", paste0(sprintf("'%s'", elements), collapse = ", "), ")")
     element_ids = DBI::dbGetQuery(con, paste0("SELECT elementID FROM obselement WHERE elementName in", my_elements,";"))
@@ -1668,12 +1662,15 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   plant_day_name <- "plant_day"
   plant_length_name <- "plant_length"
   rain_total_name <- "rain_total"
-  
+
   if(missing(year)) stop("Year column must be specified.")
   if(missing(station)) by <- year
   else by <- c(year, station)
-  season_by <- self$get_equivalent_columns(from_data_name = data_name, columns = by, to_data_name = season_data_name)
-  if(is.null(season_by)) stop("The data frames specified must be linked by the year/station columns.")
+  if(missing(season_data_name)) season_data_name <- data_name
+  if(season_data_name != data_name) {
+    season_by <- self$get_equivalent_columns(from_data_name = data_name, columns = by, to_data_name = season_data_name)
+    if(is.null(season_by)) stop("The data frames specified must be linked by the year/station columns.")
+  }
   year_col <- self$get_columns_from_data(data_name, year)
   unique_year <- na.omit(unique(year_col))
   
@@ -1699,20 +1696,25 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     names_list[length(names_list) + 1] <- station_col
   }
   df <- setNames(expand.grid(expand_list), names_list)
-  join_by <- by
-  names(join_by) <- season_by
   daily_data <- self$get_data_frame(data_name)
-  season_data <- self$get_data_frame(season_data_name)
-  vars <- c(season_by, start_day, end_day)
-  col_names_exp <- c()
-  i <- 1
-  for(col_name in vars) {
-    col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
-    i <- i + 1
+  if(season_data_name != data_name) {
+    join_by <- by
+    names(join_by) <- season_by
+    season_data <- self$get_data_frame(season_data_name)
+    vars <- c(season_by, start_day, end_day)
+    season_data <- season_data %>% dplyr::select(!!! rlang::syms(vars))
+    df <- dplyr::left_join(df, season_data, by = join_by)
   }
-  season_data <- season_data %>% dplyr::select_(.dots = col_names_exp)
-  df <- dplyr::left_join(df, season_data, by = join_by)
-  
+  else {
+    col_names <- c(by, start_day, end_day)
+    season_data <- daily_data %>% 
+      dplyr::select(!!! rlang::syms(col_names)) %>%
+      dplyr::group_by(!!! rlang::syms(by)) %>%
+      dplyr::summarise(!! rlang::sym(start_day) := dplyr::first(!! rlang::sym(start_day)),
+                       !! rlang::sym(end_day) := dplyr::first(!! rlang::sym(end_day)))
+    df <- dplyr::left_join(df, season_data, by = by)
+  }
+
   # Plant day condition
   if(start_check) {
     df$plant_day_cond <- (df[[start_day]] <= df[[plant_day_name]])
@@ -1734,9 +1736,11 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   data_tables <- list(df)
   names(data_tables) <- crops_name
   self$import_data(data_tables = data_tables)
-  crops_by <- season_by
-  names(crops_by) <- by
-  self$add_link(crops_name, season_data_name, crops_by, keyed_link_label)
+  if(season_data_name != data_name) {
+    crops_by <- season_by
+    names(crops_by) <- by
+    self$add_link(crops_name, season_data_name, crops_by, keyed_link_label)
+  }
   if(definition_props) {
     calc_from <- list()
     calc_from[[length(calc_from) + 1]] <- plant_day_name
