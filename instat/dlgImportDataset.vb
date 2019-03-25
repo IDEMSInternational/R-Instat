@@ -48,6 +48,7 @@ Public Class dlgImportDataset
     Private bSupressCheckAllSheets As Boolean = False
     Private bSupressSheetChange As Boolean = False
 
+
     Dim dctSelectedExcelSheets As New Dictionary(Of Integer, String)
 
     Public Sub New()
@@ -137,6 +138,7 @@ Public Class dlgImportDataset
 
         ucrInputFilePath.SetParameter(New RParameter("file"))
         ucrInputFilePath.IsReadOnly = True
+
 
         ucrSaveFile.SetLabelText("New Data Frame Name:")
         ucrSaveFile.SetIsTextBox()
@@ -454,6 +456,7 @@ Public Class dlgImportDataset
                     'bFromLibrary = False
                     'Me.Close()
                 End If
+
                 If ucrInputFilePath.GetText() = "" Then
                     grpText.Hide()
                     grpCSV.Hide()
@@ -568,6 +571,7 @@ Public Class dlgImportDataset
         End If
 
         ucrInputFilePath.SetName(strFilePathR)
+
 
         grpText.Hide()
         ucrPanelFixedWidthText.Hide()
