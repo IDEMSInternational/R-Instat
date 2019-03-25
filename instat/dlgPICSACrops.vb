@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgPICSACrops
@@ -89,6 +88,10 @@ Public Class dlgPICSACrops
         ucrReceiverEnd.bAttachedToPrimaryDataFrame = False
 
         'Planting date 
+        ucrChkRequirePlantingDays.SetText("Require start day before planting day")
+        ucrChkRequirePlantingDays.SetParameter(New RParameter("start_check", 10), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkRequirePlantingDays.SetRDefault("TRUE")
+
         ucrInputPlantingDates.SetParameter(New RParameter("plant_days", 5))
         ucrInputPlantingDates.SetValidationTypeAsNumericList()
         ucrInputPlantingDates.SetItems({"120", "80, 90, 100, 110, 120", "92, 122, 153"})
@@ -103,7 +106,7 @@ Public Class dlgPICSACrops
         ucrInputPlantingLengths.bAllowNonConditionValues = True
 
         'Water amount 
-        ucrInputWaterAmounts.SetParameter(New RParameter("rain_totals", 4))
+        ucrInputWaterAmounts.SetParameter(New RParameter("rain_totals", 7))
         ucrInputWaterAmounts.SetValidationTypeAsNumericList()
         ucrInputWaterAmounts.SetItems({"600", "300, 400, 500, 600, 700", "300, 500, 700"})
         ucrInputWaterAmounts.AddQuotesIfUnrecognised = False
@@ -180,8 +183,8 @@ Public Class dlgPICSACrops
 
         'Currently this must come before reset to ensure autofilling is done correctly
         'Once autofilling is being triggered correctly this can go after Reset.
-        ucrReceiverStation.SetMeAsReceiver()
         ucrSelectorForCrops.Reset()
+        ucrReceiverRainfall.SetMeAsReceiver()
 
         'Crops Function
         clsCropsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$crops_definitions")
@@ -202,7 +205,7 @@ Public Class dlgPICSACrops
     Public Sub SetRCodeForControls(bReset As Boolean)
         'TODO This should be done further done.
         ' This ensures the correct data frame is set before attempting to fill the receiver
-        ucrReceiverYear.SetMeAsReceiver()
+        'ucrReceiverYear.SetMeAsReceiver()
         ucrSelectorForCrops.SetDataframe(ucrReceiverYear.GetDataName())
         'Disabled as selector cannot yet auto set when multiple data frame are selected.
         'ucrSelectorForCrops.SetRCode(clsCropsFunction, bReset)
@@ -210,7 +213,7 @@ Public Class dlgPICSACrops
         ucrReceiverStation.SetRCode(clsCropsFunction, bReset)
         ucrReceiverRainfall.SetRCode(clsCropsFunction, bReset)
         ucrReceiverDay.SetRCode(clsCropsFunction, bReset)
-        ucrReceiverStart.SetMeAsReceiver()
+        'ucrReceiverStart.SetMeAsReceiver()
         ucrSelectorForCrops.SetDataframe(ucrReceiverStart.GetDataName())
         ucrReceiverStart.SetRCode(clsCropsFunction, bReset)
         ucrReceiverEnd.SetRCode(clsCropsFunction, bReset)
@@ -220,6 +223,7 @@ Public Class dlgPICSACrops
         'ucrInputPlantingLengths.SetRCode(clsCropsFunction, bReset)
         'ucrInputWaterAmounts.SetRCode(clsCropsFunction, bReset)
 
+        ucrChkRequirePlantingDays.SetRCode(clsCropsFunction, bReset)
         ucrChkDataProp.SetRCode(clsCropsFunction, bReset)
         ucrChkPrintDataProp.SetRCode(clsCropsFunction, bReset)
     End Sub
@@ -243,27 +247,7 @@ Public Class dlgPICSACrops
     End Sub
 
     Private Sub ucrInputPlantingDates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPlantingDates.ControlValueChanged
-        If ucrInputPlantingDates.IsEmpty Then
-            clsCropsFunction.RemoveParameterByName("plant_days")
-        Else
-            clsCropsFunction.AddParameter("plant_days", "c(" & ucrInputPlantingDates.GetText() & ")", iPosition:=6)
-        End If
-    End Sub
-
-    Private Sub ucrInputPlantingLengths_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPlantingLengths.ControlValueChanged
-        If ucrInputPlantingLengths.IsEmpty Then
-            clsCropsFunction.RemoveParameterByName("plant_lengths")
-        Else
-            clsCropsFunction.AddParameter("plant_lengths", "c(" & ucrInputPlantingLengths.GetText() & ")", iPosition:=7)
-        End If
-    End Sub
-
-    Private Sub ucrInputWaterAmounts_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputWaterAmounts.ControlValueChanged
-        If ucrInputWaterAmounts.IsEmpty Then
-            clsCropsFunction.RemoveParameterByName("rain_totals")
-        Else
-            clsCropsFunction.AddParameter("rain_totals", "c(" & ucrInputWaterAmounts.GetText() & ")", iPosition:=8)
-        End If
+        PlantingDaysParam()
     End Sub
 
     Private Sub ucrSelectorForCrops_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForCrops.ControlValueChanged
@@ -271,6 +255,30 @@ Public Class dlgPICSACrops
             clsCropsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForCrops.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         Else
             clsCropsFunction.AddParameter("season_data_name", Chr(34) & ucrSelectorForCrops.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=8)
+        End If
+    End Sub
+
+    Private Sub PlantingDaysParam()
+        If ucrInputPlantingDates.IsEmpty Then
+            clsCropsFunction.RemoveParameterByName("plant_days")
+        Else
+            clsCropsFunction.AddParameter("plant_days", "c(" & ucrInputPlantingDates.GetText() & ")", iPosition:=5)
+        End If
+    End Sub
+
+    Private Sub ucrInputPlantingLengths_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPlantingLengths.ControlValueChanged
+        If ucrInputPlantingLengths.IsEmpty Then
+            clsCropsFunction.RemoveParameterByName("plant_lengths")
+        Else
+            clsCropsFunction.AddParameter("plant_lengths", "c(" & ucrInputPlantingLengths.GetText() & ")", iPosition:=6)
+        End If
+    End Sub
+
+    Private Sub ucrInputWaterAmounts_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputWaterAmounts.ControlValueChanged
+        If ucrInputWaterAmounts.IsEmpty Then
+            clsCropsFunction.RemoveParameterByName("rain_totals")
+        Else
+            clsCropsFunction.AddParameter("rain_totals", "c(" & ucrInputWaterAmounts.GetText() & ")", iPosition:=7)
         End If
     End Sub
 End Class
