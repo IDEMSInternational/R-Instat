@@ -18,8 +18,11 @@ Imports instat.Translations
 Public Class dlgEndOfRainsSeason
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private strReplaceNAMin As String = "rain_NA_as_0"
-    Private strReplaceNAMax As String = "rain_NA_as_60"
+    Private strRainMin As String = "rain_min"
+    Private strRainMax As String = "rain_max"
+    Private strWBMin As String = "wb_min"
+    Private strWBMax As String = "wb_max"
+    Private strWB As String = "wb"
     Private strEvapReplaceNA As String = "evap_NA_as_value"
     Private strCurrDataName As String = ""
 
@@ -73,26 +76,85 @@ Public Class dlgEndOfRainsSeason
     Private clsEndRainsCombinationSubCalcList As New RFunction
 #End Region
 
-    Private clsWaterBalanceOperator, clsDifferenceOperation As New ROperator
-    '60
-    Private clsWBReplaceNAMax, clsWBReplaceNAMaxFunction, clsWBReplaceNAMaxFunctionList, clsWBWaterBalanceMax, clsWBWaterFilterMax, clsWBWaterFilterMaxList, clsWBFirstWaterBalanceMax, clsWBFirstWaterBalanceManipulationMax, clsWaterBalanceMaxList, clsReduceFunctionMax, clsPMinFunctionMax, clsPMaxFunctionMax As New RFunction
-    Private clsWBWaterFilterMaxOperator, clsPMaxOperatorMax As New ROperator
-    Private clsFirstWBMAx As New RFunction
-    '0
-    Private clsWBReplaceNAMin, clsWBReplaceNAMinFunction, clsWBReplaceNAMinFunctionList, clsWBWaterBalanceMin, clsWBWaterFilterMin, clsWBWaterFilterMinList, clsWBFirstWaterBalanceMin, clsWBFirstWaterBalanceMinList, clsWBWaterBalanceMinList, clsReduceFunctionMin, clsPMinFunctionMin, clsPMaxFunctionMin As New RFunction
-    Private clsEvaporationReplaceNAFunc, clsEvaporationReplaceNA, clsEvaporationReplaceNAFuncList As New RFunction
-    Private clsReduceOpEvapMin, clsReduceOpEvapMax As New ROperator
+#Region "end_of_season_code_structures"
 
-    Private clsWBWaterFilterMinOperator, clsPMaxOperatorMin As New ROperator
-    Private clsFirstWBMin As New RFunction
+    Private clsEndSeasonIsNaRain As New RFunction
 
-    Private clsCombinationBase, clsWaterBalanceList, clsWaterBalanceFunction, clsWaterBalance As New RFunction
-    Private clsDifference, clsDifferenceList As New RFunction
-    Private clsEndOfSeasonFilter, clsEOSFilterList, clsEOSIfElseFunc, clsEOSIsNA, clsEOSEndFunction, clsEOSStatusFunction As New RFunction
-    Private clsLessEOSEqualOperator, clsSquareEOSBracketOpertor As New ROperator
-    Private clsIfEOSIfelsefunc, clsEORIsNAFunc As New RFunction
-    Private clsEOSEndSummary As New clsRains
-    Private clsEOSStatusSummary As New clsRains
+    ' Rain min
+    Private clsEndSeasonRainMinCalc As New RFunction
+    Private clsIfElseRainMinFunction As New RFunction
+
+    ' Rain max
+    Private clsEndSeasonRainMaxCalc As New RFunction
+    Private clsIfElseRainMaxFunction As New RFunction
+
+    'Pmax
+    Private clsPMaxFunction As New RFunction
+    Private clsPMaxOperator As New ROperator
+
+    ' Water Balance min
+    Private clsEndSeasonWBMinCalc As New RFunction
+    Private clsReduceWBMinFunction As New RFunction
+    Private clsPMinWBMinFunction As New RFunction
+
+    ' Water Balance max
+    Private clsEndSeasonWBMaxCalc As New RFunction
+    Private clsReduceWBMaxFunction As New RFunction
+    Private clsPMinWBMaxFunction As New RFunction
+
+    ' Water Balance
+    Private clsEndSeasonWBCalc As New RFunction
+    Private clsIfElseWBFunction As New RFunction
+    Private clsWBOperator As New ROperator
+    Private clsWBMinMaxOperator As New ROperator
+
+    ' Conditions filter
+    Private clsEndSeasonConditionsFilterCalc As New RFunction
+    Private clsEndSeasonConditionsFilterSubCalcsList As New RFunction
+    Private clsEndSeasonConditionsOperator As New ROperator
+    Private clsEndSeasonWBConditionOperator As New ROperator
+
+    ' Doy summary
+    Private clsEndSeasonFirstDoySummaryCalc As New RFunction
+    Private clsIfElseFirstDoyFunction As New RFunction
+    Private clsIsNaFirstWB As New RFunction
+    Private clsFirstDoyFunction As New RFunction
+    Private clsFirstWBFunction As New RFunction
+
+    ' Date summary
+    Private clsEndSeaonFirstDateSummaryCalc As New RFunction
+    Private clsIfElseFirstDateFunction As New RFunction
+    Private clsFirstDateFunction As New RFunction
+
+    ' Status summary
+    Private clsEndSeasonStatusSummaryCalc As New RFunction
+
+    ' Combination
+    Private clsEndSeasonCombinationCalc As New RFunction
+    Private clsEndSeasonCombinationManipulationList As New RFunction
+    Private clsEndSeasonCombinationSubCalcList As New RFunction
+#End Region
+
+    'Private clsWaterBalanceOperator, clsDifferenceOperation As New ROperator
+    ''60
+    'Private clsWBReplaceNAMax, clsWBReplaceNAMaxFunction, clsWBReplaceNAMaxFunctionList, clsWBWaterBalanceMax, clsWBWaterFilterMax, clsWBWaterFilterMaxList, clsWBFirstWaterBalanceMax, clsWBFirstWaterBalanceManipulationMax, clsWaterBalanceMaxList, clsReduceFunctionMax, clsPMinFunctionMax, clsPMaxFunctionMax As New RFunction
+    'Private clsWBWaterFilterMaxOperator, clsPMaxOperatorMax As New ROperator
+    'Private clsFirstWBMAx As New RFunction
+    ''0
+    'Private clsWBReplaceNAMin, clsWBReplaceNAMinFunction, clsWBReplaceNAMinFunctionList, clsWBWaterBalanceMin, clsWBWaterFilterMin, clsWBWaterFilterMinList, clsWBFirstWaterBalanceMin, clsWBFirstWaterBalanceMinList, clsWBWaterBalanceMinList, clsReduceFunctionMin, clsPMinFunctionMin, clsPMaxFunctionMin As New RFunction
+    'Private clsEvaporationReplaceNAFunc, clsEvaporationReplaceNA, clsEvaporationReplaceNAFuncList As New RFunction
+    'Private clsReduceOpEvapMin, clsReduceOpEvapMax As New ROperator
+
+    'Private clsWBWaterFilterMinOperator, clsPMaxOperatorMin As New ROperator
+    'Private clsFirstWBMin As New RFunction
+
+    'Private clsCombinationBase, clsWaterBalanceList, clsWaterBalanceFunction, clsWaterBalance As New RFunction
+    'Private clsDifference, clsDifferenceList As New RFunction
+    'Private clsEndOfSeasonFilter, clsEOSFilterList, clsEOSIfElseFunc, clsEOSIsNA, clsEOSEndFunction, clsEOSStatusFunction As New RFunction
+    'Private clsLessEOSEqualOperator, clsSquareEOSBracketOpertor As New ROperator
+    'Private clsIfEOSIfelsefunc, clsEORIsNAFunc As New RFunction
+    'Private clsEOSEndSummary As New clsRains
+    'Private clsEOSStatusSummary As New clsRains
 
     Private Sub dlgWaterBalance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -159,7 +221,7 @@ Public Class dlgEndOfRainsSeason
         ucrReceiverEvaporation.bWithQuotes = False
 
         'WATER BALANCE
-        ucrChkEndOfSeason.SetParameter(New RParameter("sub_water_balance", clsWaterBalance, 0, bNewIncludeArgumentName:=False), False)
+        'TODO Set conditions for end of rains vs end of season
         ucrChkEndOfSeason.SetText("End of Season")
 
         ucrPnlEvaporation.AddRadioButton(rdoValueEvaporation)
@@ -364,7 +426,99 @@ Public Class dlgEndOfRainsSeason
         clsDayToOperator.SetOperation("<=")
         clsDayToOperator.AddParameter("to", 366, iPosition:=1)
 
-        ' Water Balance / End of Season:
+#Region "end_of_season"
+        clsEndSeasonIsNaRain.SetRCommand("is.na")
+
+        'Rain min
+        clsEndSeasonRainMinCalc.SetRCommand("instat_calculation$new")
+        clsEndSeasonRainMinCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsEndSeasonRainMinCalc.AddParameter("result_name", Chr(34) & strRainMin & Chr(34), iPosition:=2)
+        clsEndSeasonRainMinCalc.SetAssignTo(strRainMin)
+
+        clsIfElseRainMinFunction.bToScriptAsRString = True
+        clsIfElseRainMinFunction.SetRCommand("ifelse")
+        clsIfElseRainMinFunction.AddParameter("test", clsRFunctionParameter:=clsEndSeasonIsNaRain, iPosition:=0)
+        clsIfElseRainMinFunction.AddParameter("yes", "0", iPosition:=1)
+
+        'Rain max
+        clsEndSeasonRainMaxCalc.SetRCommand("instat_calculation$new")
+        clsEndSeasonRainMaxCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsEndSeasonRainMaxCalc.AddParameter("result_name", Chr(34) & strRainMax & Chr(34), iPosition:=2)
+        clsEndSeasonRainMaxCalc.SetAssignTo(strRainMax)
+
+        clsIfElseRainMaxFunction.bToScriptAsRString = True
+        clsIfElseRainMaxFunction.SetRCommand("ifelse")
+        clsIfElseRainMaxFunction.AddParameter("test", clsRFunctionParameter:=clsEndSeasonIsNaRain, iPosition:=0)
+
+        'Pmax
+        clsPMaxFunction.SetRCommand("pmax")
+        clsPMaxFunction.AddParameter("0", clsROperatorParameter:=clsPMaxOperator, iPosition:=0)
+        clsPMaxFunction.AddParameter("1", "0", bIncludeArgumentName:=False)
+
+        clsPMaxOperator.SetOperation("-")
+        clsPMaxOperator.AddParameter("0", "x + y", iPosition:=0)
+
+        ' Water Balance min
+        clsEndSeasonWBMinCalc.SetRCommand("instat_calculation$new")
+        clsEndSeasonWBMinCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsEndSeasonWBMinCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMinFunction, iPosition:=1)
+        clsEndSeasonWBMinCalc.AddParameter("result_name", Chr(34) & strWBMin & Chr(34), iPosition:=2)
+        clsEndSeasonWBMinCalc.AddParameter("sub_calculations", "list(" & strRainMin & ")", iPosition:=3)
+        clsEndSeasonWBMinCalc.SetAssignTo(strWBMin)
+
+        clsReduceWBMinFunction.bToScriptAsRString = True
+        clsReduceWBMinFunction.SetRCommand("Reduce")
+        clsReduceWBMinFunction.AddParameter("f", clsRFunctionParameter:=clsPMinWBMinFunction, iPosition:=0)
+        clsReduceWBMinFunction.AddParameter("x", strRainMin, iPosition:=1)
+        clsReduceWBMinFunction.AddParameter("accumulate", "TRUE", iPosition:=2)
+
+        clsPMinWBMinFunction.SetRCommand("function(x, y) pmin")
+        clsPMinWBMinFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0)
+        clsPMinWBMinFunction.AddParameter("1", "60", iPosition:=1)
+
+        ' Water Balance max
+        clsEndSeasonWBMaxCalc.SetRCommand("instat_calculation$new")
+        clsEndSeasonWBMaxCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsEndSeasonWBMaxCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMaxFunction, iPosition:=1)
+        clsEndSeasonWBMaxCalc.AddParameter("result_name", Chr(34) & strWBMax & Chr(34), iPosition:=2)
+        clsEndSeasonWBMaxCalc.AddParameter("sub_calculations", "list(" & strRainMax & ")", iPosition:=3)
+        clsEndSeasonWBMaxCalc.SetAssignTo(strWBMax)
+
+        clsReduceWBMaxFunction.bToScriptAsRString = True
+        clsReduceWBMaxFunction.SetRCommand("Reduce")
+        clsReduceWBMaxFunction.AddParameter("f", clsRFunctionParameter:=clsPMinWBMaxFunction, iPosition:=0)
+        clsReduceWBMaxFunction.AddParameter("x", strRainMax, iPosition:=1)
+        clsReduceWBMaxFunction.AddParameter("accumulate", "TRUE", iPosition:=2)
+
+        clsPMinWBMaxFunction.SetRCommand("function(x, y) pmin")
+        clsPMinWBMaxFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0)
+        clsPMinWBMaxFunction.AddParameter("1", "60", iPosition:=1)
+
+        ' Water Balance
+        clsEndSeasonWBCalc.SetRCommand("instat_calculation$new")
+        clsEndSeasonWBCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsEndSeasonWBCalc.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseWBFunction, iPosition:=1)
+        clsEndSeasonWBCalc.AddParameter("result_name", Chr(34) & strWB & Chr(34), iPosition:=2)
+        clsEndSeasonWBCalc.AddParameter("sub_calculations", "list(" & strWBMin & ", " & strWBMax & ")", iPosition:=3)
+        clsEndSeasonWBCalc.SetAssignTo(strWB)
+
+        clsIfElseWBFunction.bToScriptAsRString = True
+        clsIfElseWBFunction.SetRCommand("ifelse")
+        clsIfElseWBFunction.AddParameter("test", clsROperatorParameter:=clsWBOperator, iPosition:=0)
+        clsIfElseWBFunction.AddParameter("yes", "NA", iPosition:=1)
+        clsIfElseWBFunction.AddParameter("no", strWBMin, iPosition:=2)
+
+        clsWBOperator.SetOperation("|")
+        clsWBOperator.AddParameter("0", clsROperatorParameter:=clsWBMinMaxOperator, iPosition:=0)
+        clsWBOperator.AddParameter("1", clsRFunctionParameter:=clsEndSeasonIsNaRain, iPosition:=1)
+
+        clsWBMinMaxOperator.SetOperation("!=")
+        clsWBMinMaxOperator.AddParameter("0", strWBMin, iPosition:=0)
+        clsWBMinMaxOperator.AddParameter("1", strWBMax, iPosition:=1)
+
+#End Region
+
+        ' End of Season:
 
         ' For Maximum Capacity:
         clsWBReplaceNAMaxFunction.bToScriptAsRString = True
@@ -376,8 +530,8 @@ Public Class dlgEndOfRainsSeason
         clsWBReplaceNAMaxFunctionList.SetRCommand("is.na")
         clsWBReplaceNAMaxFunction.AddParameter("values", 60, iPosition:=2)
         'Chr(34) & "replace(" & ucrReceiverRainfall.GetVariableNames(False) & ", is.na( " & ucrReceiverRainfall.GetVariableNames(False) & "), 60)" & Chr(34))
-        clsWBReplaceNAMax.AddParameter("result_name", Chr(34) & strReplaceNAMax & Chr(34), iPosition:=2)
-        clsWBReplaceNAMax.SetAssignTo(strReplaceNAMax)
+        clsWBReplaceNAMax.AddParameter("result_name", Chr(34) & strRainMax & Chr(34), iPosition:=2)
+        clsWBReplaceNAMax.SetAssignTo(strRainMax)
 
         clsReduceFunctionMax.bToScriptAsRString = True
         clsWaterBalanceMaxList.SetRCommand("list")
@@ -397,7 +551,7 @@ Public Class dlgEndOfRainsSeason
         'clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
         clsPMaxFunctionMax.AddParameter("0", 0, iPosition:=1, bIncludeArgumentName:=False)
         clsPMinFunctionMax.AddParameter("values", 60, iPosition:=1)
-        clsReduceFunctionMax.AddParameter("replace_na", strReplaceNAMax, iPosition:=1, bIncludeArgumentName:=False)
+        clsReduceFunctionMax.AddParameter("replace_na", strRainMax, iPosition:=1, bIncludeArgumentName:=False)
         clsReduceFunctionMax.AddParameter("accumulate", "TRUE", iPosition:=2)
         ''"Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText & ", 0), " & ucrNudCapacity.Value & "), Replace_NA_Max, accumulate=TRUE)" & Chr(34))
         clsWBWaterBalanceMax.AddParameter("result_name", Chr(34) & strWaterBalanceMax & Chr(34), iPosition:=2)
@@ -441,8 +595,8 @@ Public Class dlgEndOfRainsSeason
         clsWBReplaceNAMinFunction.AddParameter("list", clsRFunctionParameter:=clsWBReplaceNAMinFunctionList, iPosition:=1)
         clsWBReplaceNAMinFunctionList.SetRCommand("is.na")
         clsWBReplaceNAMinFunction.AddParameter("values", 0, iPosition:=2)
-        clsWBReplaceNAMin.AddParameter("result_name", Chr(34) & strReplaceNAMin & Chr(34), iPosition:=2)
-        clsWBReplaceNAMin.SetAssignTo(strReplaceNAMin)
+        clsWBReplaceNAMin.AddParameter("result_name", Chr(34) & strRainMin & Chr(34), iPosition:=2)
+        clsWBReplaceNAMin.SetAssignTo(strRainMin)
 
         clsReduceFunctionMin.bToScriptAsRString = True
         clsWBWaterBalanceMinList.SetRCommand("list")
@@ -460,7 +614,7 @@ Public Class dlgEndOfRainsSeason
         'clsPMaxOperatorMin.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
         clsPMaxFunctionMin.AddParameter("0", 0, iPosition:=1, bIncludeArgumentName:=False)
         clsPMinFunctionMin.AddParameter("values", 60, iPosition:=1)
-        clsReduceFunctionMin.AddParameter("replace_na", strReplaceNAMin, iPosition:=1, bIncludeArgumentName:=False)
+        clsReduceFunctionMin.AddParameter("replace_na", strRainMin, iPosition:=1, bIncludeArgumentName:=False)
         clsReduceFunctionMin.AddParameter("accumulate", "TRUE", iPosition:=2)
         clsWBWaterBalanceMin.AddParameter("result_name", Chr(34) & strWaterBalanceMin & Chr(34), iPosition:=2)
         clsWBWaterBalanceMin.AddParameter("sub_calculations", clsRFunctionParameter:=clsWBWaterBalanceMinList, iPosition:=4)
@@ -712,18 +866,20 @@ Public Class dlgEndOfRainsSeason
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsFirstWBMin, New RParameter("doy", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsLastDoyFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsLessEOSEqualOperator, New RParameter("day", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=5)
-        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsWBReplaceNAMaxFunctionList, New RParameter("x", 0, False), iAdditionalPairNo:=1)
-        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsWBReplaceNAMinFunctionList, New RParameter("x", 0, False), iAdditionalPairNo:=2)
-        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsWBReplaceNAMinFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
-        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRollSumRainFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
+        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRollSumRainFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsEndSeasonIsNaRain, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsIfElseRainMinFunction, New RParameter("no", 2), iAdditionalPairNo:=3)
+        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsIfElseRainMaxFunction, New RParameter("no", 2), iAdditionalPairNo:=4)
+
+        ucrNudCapacity.AddAdditionalCodeParameterPair(clsIfElseRainMaxFunction, New RParameter("yes", 1), iAdditionalPairNo:=1)
+        ucrNudCapacity.AddAdditionalCodeParameterPair(clsPMinWBMinFunction, New RParameter("1", 1), iAdditionalPairNo:=2)
+        ucrNudCapacity.AddAdditionalCodeParameterPair(clsPMinWBMaxFunction, New RParameter("1", 1), iAdditionalPairNo:=3)
 
         'clsEOSEndSummary.SetControlParameters(ucrReceiverRainfall, iAdditionalPairNo:=5)
         'clsEOSStatusSummary.SetControlParameters(ucrReceiverRainfall, iAdditionalPairNo:=6)
 
         ucrNudWBLessThan.AddAdditionalCodeParameterPair(clsWBWaterFilterMinOperator, ucrNudWBLessThan.GetParameter(), iAdditionalPairNo:=1)
         ucrInputEvaporation.AddAdditionalCodeParameterPair(clsPMaxOperatorMax, New RParameter("evaporation", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrNudCapacity.AddAdditionalCodeParameterPair(clsWBReplaceNAMaxFunction, ucrNudCapacity.GetParameter(), iAdditionalPairNo:=1)
-        ucrNudCapacity.AddAdditionalCodeParameterPair(clsPMinFunctionMin, ucrNudCapacity.GetParameter(), iAdditionalPairNo:=2)
         ucrReceiverEvaporation.AddAdditionalCodeParameterPair(clsEvaporationReplaceNAFuncList, New RParameter("x", 0, False), iAdditionalPairNo:=1)
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
 
@@ -843,11 +999,11 @@ Public Class dlgEndOfRainsSeason
     End Sub
 
     Private Sub RainfallChange()
-        clsWBReplaceNAMin.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=3)
-        clsWBReplaceNAMax.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=3)
         clsEOSEndFunction.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=3)
         clsEOSStatusFunction.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=3)
         clsEndRainsRollingSumCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")", iPosition:=3)
+        clsEndSeasonRainMinCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")", iPosition:=3)
+        clsEndSeasonRainMaxCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")", iPosition:=3)
     End Sub
 
     Private Sub ucrReceiverStationYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverStation.ControlValueChanged
@@ -880,14 +1036,16 @@ Public Class dlgEndOfRainsSeason
 
     Private Sub Evaporation()
         If rdoValueEvaporation.Checked Then
-            clsPMaxOperatorMin.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
-            clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
-            clsReduceFunctionMin.AddParameter("replace_na", strReplaceNAMin, iPosition:=1, bIncludeArgumentName:=False)
-            clsReduceFunctionMax.AddParameter("replace_na", strReplaceNAMax, iPosition:=1, bIncludeArgumentName:=False)
+            clsPMaxOperator.AddParameter("1", ucrInputEvaporation.GetText(), iPosition:=1)
+            clsReduceFunctionMin.AddParameter("replace_na", strRainMin, iPosition:=1, bIncludeArgumentName:=False)
+            clsReduceFunctionMax.AddParameter("replace_na", strRainMax, iPosition:=1, bIncludeArgumentName:=False)
             clsWBWaterBalanceMinList.RemoveParameterByName("sub2")
             clsWaterBalanceMaxList.RemoveParameterByName("sub2")
         ElseIf rdoVariableEvaporation.Checked Then
             ucrReceiverEvaporation.SetMeAsReceiver()
+            'TODO
+            'clsPMaxOperator.AddParameter("1", ...)
+
             clsEvaporationReplaceNAFunc.bToScriptAsRString = True
             clsEvaporationReplaceNA.SetRCommand("instat_calculation$new")
             clsEvaporationReplaceNA.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
@@ -900,19 +1058,16 @@ Public Class dlgEndOfRainsSeason
             clsEvaporationReplaceNA.SetAssignTo(strEvapReplaceNA)
 
             clsReduceOpEvapMin.SetOperation("-")
-            clsReduceOpEvapMin.AddParameter("first", strReplaceNAMin, iPosition:=0)
+            clsReduceOpEvapMin.AddParameter("first", strRainMin, iPosition:=0)
             clsReduceOpEvapMin.AddParameter("second", strEvapReplaceNA, iPosition:=1)
             clsReduceFunctionMin.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvapMin, iPosition:=1, bIncludeArgumentName:=False)
             clsWBWaterBalanceMinList.AddParameter("sub2", clsRFunctionParameter:=clsEvaporationReplaceNA, bIncludeArgumentName:=False)
 
             clsReduceOpEvapMax.SetOperation("-")
-            clsReduceOpEvapMax.AddParameter("first", strReplaceNAMax, iPosition:=0)
+            clsReduceOpEvapMax.AddParameter("first", strRainMax, iPosition:=0)
             clsReduceOpEvapMax.AddParameter("second", strEvapReplaceNA, iPosition:=1)
             clsReduceFunctionMax.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvapMax, iPosition:=1, bIncludeArgumentName:=False)
             clsWaterBalanceMaxList.AddParameter("sub2", clsRFunctionParameter:=clsEvaporationReplaceNA, bIncludeArgumentName:=False)
-
-            clsPMaxOperatorMax.RemoveParameterByName("evaporation")
-            clsPMaxOperatorMin.RemoveParameterByName("evaporation")
         End If
     End Sub
 
