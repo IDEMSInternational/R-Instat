@@ -193,7 +193,7 @@ Partial Class ucrScript
         Me.lblHeader.Name = "lblHeader"
         Me.lblHeader.Size = New System.Drawing.Size(405, 20)
         Me.lblHeader.TabIndex = 8
-        Me.lblHeader.Text = "Script Windows"
+        Me.lblHeader.Text = "Script Window"
         Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tlpTableContainer
