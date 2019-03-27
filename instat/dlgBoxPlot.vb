@@ -66,7 +66,7 @@ Public Class dlgBoxplot
         Dim clsCoordFlipFunc As New RFunction
         Dim clsCoordFlipParam As New RParameter
         Dim clsAddedJitterParam As New RParameter
-
+        Dim dctSummaries As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 436
         ucrBase.clsRsyntax.iCallType = 3
@@ -148,6 +148,15 @@ Public Class dlgBoxplot
         ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
         ucrSaveBoxplot.SetAssignToIfUncheckedValue("last_graph")
 
+        ucrInputSummaries.SetParameter(New RParameter("fun.y", 2))
+        dctSummaries.Add("mean", Chr(34) & "mean" & Chr(34))
+        dctSummaries.Add("median", Chr(34) & "median" & Chr(34))
+        dctSummaries.Add("lower quartile", Chr(34) & "lower quartile" & Chr(34))
+        dctSummaries.Add("upper quartile", Chr(34) & "upper quartile" & Chr(34))
+        ucrInputSummaries.SetItems(dctSummaries)
+        ucrInputSummaries.SetDropDownStyleAsNonEditable()
+
+    
         'this control exists but diabled for now
         ucrChkSwapParameters.SetText("swap Parameters")
         'ucrSecondFactorReceiver.AddToLinkedControls(ucrChkSwapParameters, {ucrSecondFactorReceiver.IsEmpty = False}, bNewLinkedHideIfParameterMissing:=True)
