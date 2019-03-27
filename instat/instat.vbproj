@@ -1055,10 +1055,10 @@
     <Compile Include="sdgWindrose.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="static\InstatObject\R\dlgUseModel.Designer.vb">
+    <Compile Include="dlgUseModel.Designer.vb">
       <DependentUpon>dlgUseModel.vb</DependentUpon>
     </Compile>
-    <Compile Include="static\InstatObject\R\dlgUseModel.vb">
+    <Compile Include="dlgUseModel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ucrAxes.Designer.vb">
@@ -4150,7 +4150,7 @@
     <EmbeddedResource Include="sdgWindrose.sw-KE.resx">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="static\InstatObject\R\dlgUseModel.resx">
+    <EmbeddedResource Include="dlgUseModel.resx">
       <DependentUpon>dlgUseModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrAdditionalLayers.resx">
