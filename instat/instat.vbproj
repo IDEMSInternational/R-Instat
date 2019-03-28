@@ -5733,7 +5733,7 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\zoo_1.8-4.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\CAST\cast_data.rds">
+    <Content Include="static\Library\CAST\cast.rds">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\Library\Climatic\Ghana\ghana_two_stations.RDS">
@@ -5823,7 +5823,19 @@
     <Content Include="static\Library\Procurement\worldbank97-14.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Climatic\Rwanda\rwanda_workshop_data.RDS">
+    <Content Include="static\Library\Climatic\Rwanda\rwanda.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Climatic\Nigeria\samaru_56.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Climatic\Kenya\western_kenya.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Climatic\Zambia\moorings.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Climatic\Lesotho\thaba_tseka.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
