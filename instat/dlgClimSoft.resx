@@ -141,7 +141,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdEstablishConnection.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="lblElements.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -168,7 +168,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblElements.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="lblStations.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -198,7 +198,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblStations.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="lblStartDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -225,7 +225,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblStartDate.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="lblEndDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -252,55 +252,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblEndDate.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <metadata name="ttClimsoft.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="ucrInputEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 296</value>
-  </data>
-  <data name="ucrInputEndDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
-  </data>
-  <data name="ucrInputEndDate.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;ucrInputEndDate.Name" xml:space="preserve">
-    <value>ucrInputEndDate</value>
-  </data>
-  <data name="&gt;&gt;ucrInputEndDate.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputEndDate.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputEndDate.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrInputStartDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 247</value>
-  </data>
-  <data name="ucrInputStartDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
-  </data>
-  <data name="ucrInputStartDate.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStartDate.Name" xml:space="preserve">
-    <value>ucrInputStartDate</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStartDate.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStartDate.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputStartDate.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="ucrChkObservationData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 203</value>
+    <value>10, 210</value>
   </data>
   <data name="ucrChkObservationData.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 20</value>
@@ -318,7 +276,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkObservationData.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrSelectorForClimSoft.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 57</value>
@@ -343,7 +301,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorForClimSoft.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -353,6 +311,69 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>415, 382</value>
+  </data>
+  <data name="ucrChkUnstackData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 189</value>
+  </data>
+  <data name="ucrChkUnstackData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkUnstackData.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkUnstackData.Name" xml:space="preserve">
+    <value>ucrChkUnstackData</value>
+  </data>
+  <data name="&gt;&gt;ucrChkUnstackData.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkUnstackData.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkUnstackData.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="UcrDtpEndDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 299</value>
+  </data>
+  <data name="UcrDtpEndDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 20</value>
+  </data>
+  <data name="UcrDtpEndDate.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;UcrDtpEndDate.Name" xml:space="preserve">
+    <value>UcrDtpEndDate</value>
+  </data>
+  <data name="&gt;&gt;UcrDtpEndDate.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrDtpEndDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;UcrDtpEndDate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrDtpStartdate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 258</value>
+  </data>
+  <data name="ucrDtpStartdate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 20</value>
+  </data>
+  <data name="ucrDtpStartdate.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartdate.Name" xml:space="preserve">
+    <value>ucrDtpStartdate</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartdate.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartdate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartdate.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="ucrReceiverMultipleStations.Location" type="System.Drawing.Point, System.Drawing">
     <value>260, 57</value>
@@ -376,7 +397,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverMultipleStations.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 325</value>
@@ -397,7 +418,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -439,6 +460,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverMultipleElements.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
 </root>
