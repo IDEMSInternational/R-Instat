@@ -5814,6 +5814,9 @@
     <Content Include="static\Library\Procurement\worldbank97-14.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\Library\Climatic\Rwanda\rwanda_workshop_data.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Carlosjj-Microsoft-Office-2013-Excel.ico" />
