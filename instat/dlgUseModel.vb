@@ -45,6 +45,10 @@ Public Class dlgUseModel
         ucrInputComboRPackage.SetItems({"General", "Prediction", "extRemes"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
 
+        ucrInputTryMessage.Hide()
+
+        cmdTry.Hide()
+
         ucrInputModels.IsReadOnly = True
 
         bUpdating = False
@@ -190,5 +194,39 @@ Public Class dlgUseModel
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("car::Anova()", 1)
+    End Sub
+
+    Private Sub cmdCi_Click(sender As Object, e As EventArgs) Handles cmdCi.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::ci.fevd()", 1)
+
+    End Sub
+
+    Private Sub cmdDistill_Click(sender As Object, e As EventArgs) Handles cmdDistill.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::distill.fevd()", 1)
+
+    End Sub
+
+    Private Sub cmdErlevd_Click(sender As Object, e As EventArgs) Handles cmdErlevd.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::erlevd()", 1)
+
+    End Sub
+
+    Private Sub cmdFindpars_Click(sender As Object, e As EventArgs) Handles cmdFindpars.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::findpars()", 1)
+
+    End Sub
+
+    Private Sub cmdIsFixedfevd_Click(sender As Object, e As EventArgs) Handles cmdIsFixedfevd.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::is.fixedfevd()", 1)
+
+    End Sub
+
+    Private Sub cmdLrTest_Click(sender As Object, e As EventArgs) Handles cmdLrTest.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::lr.test()", 1)
+
+    End Sub
+
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+        ucrReceiverForTestColumn.Clear()
     End Sub
 End Class

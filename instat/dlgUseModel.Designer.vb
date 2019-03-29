@@ -28,17 +28,17 @@ Partial Class dlgUseModel
         Me.cmdanova = New System.Windows.Forms.Button()
         Me.cmdresiduals = New System.Windows.Forms.Button()
         Me.grpGeneral = New System.Windows.Forms.GroupBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.cmdDurbinWatsonTest = New System.Windows.Forms.Button()
+        Me.cmdNcvTest = New System.Windows.Forms.Button()
+        Me.cmdOutlierTest = New System.Windows.Forms.Button()
+        Me.cmdBIC = New System.Windows.Forms.Button()
+        Me.cmdAIC = New System.Windows.Forms.Button()
+        Me.cmdCoefficient = New System.Windows.Forms.Button()
+        Me.cmdPrint = New System.Windows.Forms.Button()
         Me.grpPrediction = New System.Windows.Forms.GroupBox()
         Me.cmdPredict = New System.Windows.Forms.Button()
         Me.lblModels = New System.Windows.Forms.Label()
-        Me.cmdPrint = New System.Windows.Forms.Button()
-        Me.cmdCoefficient = New System.Windows.Forms.Button()
-        Me.cmdAIC = New System.Windows.Forms.Button()
-        Me.cmdBIC = New System.Windows.Forms.Button()
-        Me.cmdOutlierTest = New System.Windows.Forms.Button()
-        Me.cmdNcvTest = New System.Windows.Forms.Button()
-        Me.cmdDurbinWatsonTest = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.grpExtrRemes = New System.Windows.Forms.GroupBox()
         Me.cmdLrTest = New System.Windows.Forms.Button()
         Me.cmdIsFixedfevd = New System.Windows.Forms.Button()
@@ -52,6 +52,7 @@ Partial Class dlgUseModel
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
+        Me.cmdClear = New System.Windows.Forms.Button()
         Me.grpGeneral.SuspendLayout()
         Me.grpPrediction.SuspendLayout()
         Me.grpExtrRemes.SuspendLayout()
@@ -135,6 +136,94 @@ Partial Class dlgUseModel
         Me.grpGeneral.TabStop = False
         Me.grpGeneral.Text = "General"
         '
+        'Button2
+        '
+        Me.Button2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Button2.Location = New System.Drawing.Point(140, 100)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(69, 30)
+        Me.Button2.TabIndex = 161
+        Me.Button2.Text = "Anova"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'cmdDurbinWatsonTest
+        '
+        Me.cmdDurbinWatsonTest.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDurbinWatsonTest.Location = New System.Drawing.Point(3, 100)
+        Me.cmdDurbinWatsonTest.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdDurbinWatsonTest.Name = "cmdDurbinWatsonTest"
+        Me.cmdDurbinWatsonTest.Size = New System.Drawing.Size(138, 30)
+        Me.cmdDurbinWatsonTest.TabIndex = 160
+        Me.cmdDurbinWatsonTest.Text = "durbinWatsonTest"
+        Me.cmdDurbinWatsonTest.UseVisualStyleBackColor = True
+        '
+        'cmdNcvTest
+        '
+        Me.cmdNcvTest.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdNcvTest.Location = New System.Drawing.Point(140, 70)
+        Me.cmdNcvTest.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdNcvTest.Name = "cmdNcvTest"
+        Me.cmdNcvTest.Size = New System.Drawing.Size(69, 30)
+        Me.cmdNcvTest.TabIndex = 159
+        Me.cmdNcvTest.Text = "ncvTest"
+        Me.cmdNcvTest.UseVisualStyleBackColor = True
+        '
+        'cmdOutlierTest
+        '
+        Me.cmdOutlierTest.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdOutlierTest.Location = New System.Drawing.Point(72, 70)
+        Me.cmdOutlierTest.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdOutlierTest.Name = "cmdOutlierTest"
+        Me.cmdOutlierTest.Size = New System.Drawing.Size(69, 30)
+        Me.cmdOutlierTest.TabIndex = 158
+        Me.cmdOutlierTest.Text = "outlierTest"
+        Me.cmdOutlierTest.UseVisualStyleBackColor = True
+        '
+        'cmdBIC
+        '
+        Me.cmdBIC.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdBIC.Location = New System.Drawing.Point(3, 70)
+        Me.cmdBIC.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdBIC.Name = "cmdBIC"
+        Me.cmdBIC.Size = New System.Drawing.Size(69, 30)
+        Me.cmdBIC.TabIndex = 157
+        Me.cmdBIC.Text = "BIC"
+        Me.cmdBIC.UseVisualStyleBackColor = True
+        '
+        'cmdAIC
+        '
+        Me.cmdAIC.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAIC.Location = New System.Drawing.Point(140, 41)
+        Me.cmdAIC.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdAIC.Name = "cmdAIC"
+        Me.cmdAIC.Size = New System.Drawing.Size(69, 30)
+        Me.cmdAIC.TabIndex = 156
+        Me.cmdAIC.Text = "AIC"
+        Me.cmdAIC.UseVisualStyleBackColor = True
+        '
+        'cmdCoefficient
+        '
+        Me.cmdCoefficient.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCoefficient.Location = New System.Drawing.Point(72, 41)
+        Me.cmdCoefficient.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdCoefficient.Name = "cmdCoefficient"
+        Me.cmdCoefficient.Size = New System.Drawing.Size(69, 30)
+        Me.cmdCoefficient.TabIndex = 155
+        Me.cmdCoefficient.Text = "coefficient"
+        Me.cmdCoefficient.UseVisualStyleBackColor = True
+        '
+        'cmdPrint
+        '
+        Me.cmdPrint.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPrint.Location = New System.Drawing.Point(3, 41)
+        Me.cmdPrint.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPrint.Name = "cmdPrint"
+        Me.cmdPrint.Size = New System.Drawing.Size(69, 30)
+        Me.cmdPrint.TabIndex = 154
+        Me.cmdPrint.Text = "print"
+        Me.cmdPrint.UseVisualStyleBackColor = True
+        '
         'grpPrediction
         '
         Me.grpPrediction.Controls.Add(Me.cmdPredict)
@@ -166,94 +255,6 @@ Partial Class dlgUseModel
         Me.lblModels.Size = New System.Drawing.Size(44, 13)
         Me.lblModels.TabIndex = 28
         Me.lblModels.Text = "Models:"
-        '
-        'cmdPrint
-        '
-        Me.cmdPrint.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPrint.Location = New System.Drawing.Point(3, 41)
-        Me.cmdPrint.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdPrint.Name = "cmdPrint"
-        Me.cmdPrint.Size = New System.Drawing.Size(69, 30)
-        Me.cmdPrint.TabIndex = 154
-        Me.cmdPrint.Text = "print"
-        Me.cmdPrint.UseVisualStyleBackColor = True
-        '
-        'cmdCoefficient
-        '
-        Me.cmdCoefficient.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoefficient.Location = New System.Drawing.Point(72, 41)
-        Me.cmdCoefficient.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdCoefficient.Name = "cmdCoefficient"
-        Me.cmdCoefficient.Size = New System.Drawing.Size(69, 30)
-        Me.cmdCoefficient.TabIndex = 155
-        Me.cmdCoefficient.Text = "coefficient"
-        Me.cmdCoefficient.UseVisualStyleBackColor = True
-        '
-        'cmdAIC
-        '
-        Me.cmdAIC.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAIC.Location = New System.Drawing.Point(140, 41)
-        Me.cmdAIC.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdAIC.Name = "cmdAIC"
-        Me.cmdAIC.Size = New System.Drawing.Size(69, 30)
-        Me.cmdAIC.TabIndex = 156
-        Me.cmdAIC.Text = "AIC"
-        Me.cmdAIC.UseVisualStyleBackColor = True
-        '
-        'cmdBIC
-        '
-        Me.cmdBIC.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBIC.Location = New System.Drawing.Point(3, 70)
-        Me.cmdBIC.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdBIC.Name = "cmdBIC"
-        Me.cmdBIC.Size = New System.Drawing.Size(69, 30)
-        Me.cmdBIC.TabIndex = 157
-        Me.cmdBIC.Text = "BIC"
-        Me.cmdBIC.UseVisualStyleBackColor = True
-        '
-        'cmdOutlierTest
-        '
-        Me.cmdOutlierTest.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOutlierTest.Location = New System.Drawing.Point(72, 70)
-        Me.cmdOutlierTest.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdOutlierTest.Name = "cmdOutlierTest"
-        Me.cmdOutlierTest.Size = New System.Drawing.Size(69, 30)
-        Me.cmdOutlierTest.TabIndex = 158
-        Me.cmdOutlierTest.Text = "outlierTest"
-        Me.cmdOutlierTest.UseVisualStyleBackColor = True
-        '
-        'cmdNcvTest
-        '
-        Me.cmdNcvTest.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdNcvTest.Location = New System.Drawing.Point(140, 70)
-        Me.cmdNcvTest.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdNcvTest.Name = "cmdNcvTest"
-        Me.cmdNcvTest.Size = New System.Drawing.Size(69, 30)
-        Me.cmdNcvTest.TabIndex = 159
-        Me.cmdNcvTest.Text = "ncv Test"
-        Me.cmdNcvTest.UseVisualStyleBackColor = True
-        '
-        'cmdDurbinWatsonTest
-        '
-        Me.cmdDurbinWatsonTest.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDurbinWatsonTest.Location = New System.Drawing.Point(3, 100)
-        Me.cmdDurbinWatsonTest.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdDurbinWatsonTest.Name = "cmdDurbinWatsonTest"
-        Me.cmdDurbinWatsonTest.Size = New System.Drawing.Size(138, 30)
-        Me.cmdDurbinWatsonTest.TabIndex = 160
-        Me.cmdDurbinWatsonTest.Text = "durbinWatson Test"
-        Me.cmdDurbinWatsonTest.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button2.Location = New System.Drawing.Point(140, 100)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(69, 30)
-        Me.Button2.TabIndex = 161
-        Me.Button2.Text = "Anova"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'grpExtrRemes
         '
@@ -393,16 +394,28 @@ Partial Class dlgUseModel
         '
         Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
         Me.ucrInputComboRPackage.IsReadOnly = False
-        Me.ucrInputComboRPackage.Location = New System.Drawing.Point(287, 77)
+        Me.ucrInputComboRPackage.Location = New System.Drawing.Point(262, 79)
         Me.ucrInputComboRPackage.Name = "ucrInputComboRPackage"
-        Me.ucrInputComboRPackage.Size = New System.Drawing.Size(188, 21)
+        Me.ucrInputComboRPackage.Size = New System.Drawing.Size(141, 21)
         Me.ucrInputComboRPackage.TabIndex = 5
+        '
+        'cmdClear
+        '
+        Me.cmdClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdClear.Location = New System.Drawing.Point(397, 254)
+        Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.Size = New System.Drawing.Size(74, 23)
+        Me.cmdClear.TabIndex = 31
+        Me.cmdClear.Text = "Clear"
+        Me.cmdClear.UseVisualStyleBackColor = True
         '
         'dlgUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(502, 381)
+        Me.Controls.Add(Me.cmdClear)
         Me.Controls.Add(Me.grpGeneral)
         Me.Controls.Add(Me.grpExtrRemes)
         Me.Controls.Add(Me.ucrInputModels)
@@ -458,4 +471,5 @@ Partial Class dlgUseModel
     Friend WithEvents cmdDistill As Button
     Friend WithEvents cmdCi As Button
     Friend WithEvents cmdErlevd As Button
+    Friend WithEvents cmdClear As Button
 End Class
