@@ -27,6 +27,7 @@ Public Class ucrGeom
     Public clsGlobalAesFunction As New RFunction
     Public clsLocalAesFunction As RFunction
     Public clsGgplotFunction As New RFunction
+    Public clsGgthemesFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Public strGlobalDataFrame As String = ""
     Protected ucrBaseSelector As ucrSelectorByDataFrame
@@ -79,7 +80,7 @@ Public Class ucrGeom
         clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsGlobalAesFunction)
     End Sub
 
-    Public Overridable Sub Setup(clsNewGgplotFunction As RFunction, clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, clsNewLocalAes As RFunction, Optional bFixGeom As Boolean = False, Optional ucrNewBaseSelector As ucrSelectorByDataFrame = Nothing, Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional bReset As Boolean = False, Optional strDataFrame As String = "")
+    Public Overridable Sub Setup(clsNewGgplotFunction As RFunction, clsNewGgthemesFunction As RFunction, clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, clsNewLocalAes As RFunction, Optional bFixGeom As Boolean = False, Optional ucrNewBaseSelector As ucrSelectorByDataFrame = Nothing, Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional bReset As Boolean = False, Optional strDataFrame As String = "")
         'Setup is used to setup the parameters of ucrGeom as well as ucrGeomListWithAes and ucrLayerParameters as they override Setup from ucrGeom. The Setup function is also used within sdgLayerOptions.SetupLayer which plays the same role for the whole sdlLayerOption.
         'These functions are called all together in the ucrAddLayers when a Layer is added or editted, as well as in specific plots dialogs such as dlgBoxPlot when the plot options sdgPlots (dealing with layers) is opened.
         Dim GeomCount As New Geoms
@@ -99,6 +100,7 @@ Public Class ucrGeom
         clsGlobalAesFunction = clsNewGlobalAesFunc
         clsLocalAesFunction = clsNewLocalAes
         clsGgplotFunction = clsNewGgplotFunction
+        clsGgthemesFunction = clsNewGgthemesFunction
         ucrBaseSelector = ucrNewBaseSelector
         If ucrBaseSelector IsNot Nothing Then
             strGlobalDataFrame = ucrBaseSelector.strCurrentDataFrame
@@ -158,6 +160,7 @@ Public Class ucrGeom
         Dim clsgeom_step As New Geoms
         Dim clsgeom_text As New Geoms
         Dim clsgeom_tile As New Geoms
+        Dim clsgeom_tufteboxplot As New Geoms
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
 
@@ -1398,6 +1401,38 @@ Public Class ucrGeom
         'clsgeom_tile.AddLayerParameter("group")
 
         lstAllGeoms.Add(clsgeom_tile)
+
+        clsgeom_tufteboxplot.SetGeomName("geom_tufteboxplot")
+        'Mandatory Aesthetics
+        clsgeom_tufteboxplot.AddAesParameter("x", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_tufteboxplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        'Optional Aesthetics
+        clsgeom_tufteboxplot.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_tufteboxplot.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_tufteboxplot.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_tufteboxplot.AddAesParameter("shape", strIncludedDataTypes:={"factor"})
+        clsgeom_tufteboxplot.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_tufteboxplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+
+        'Layer parameters
+        clsgeom_tufteboxplot.AddLayerParameter("stat", "list", Chr(34) & "fivenumber" & Chr(34), lstParameterStrings:={Chr(34) & "fivenumber" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "count" & Chr(34)}) 'inquire on the statistical transformation
+        clsgeom_tufteboxplot.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "identity" & Chr(34)}) 'inquire on the position adjustments
+        clsgeom_tufteboxplot.AddLayerParameter("outlier.colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_tufteboxplot.AddLayerParameter("outlier.shape", "numeric", 19)
+        clsgeom_tufteboxplot.AddLayerParameter("outlier.size", "numeric", 1.5)
+        clsgeom_tufteboxplot.AddLayerParameter("outlier.stroke", "numeric", 0.5)
+        clsgeom_tufteboxplot.AddLayerParameter("voffset", "numeric", 0.01)
+        clsgeom_tufteboxplot.AddLayerParameter("hoffset", "numeric", 0.005)
+        'clsgeom_tufteboxplot.AddLayerParameter("median.type", "point")
+        'clsgeom_tufteboxplot.AddLayerParameter("whisker.type, "line")
+        clsgeom_tufteboxplot.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_tufteboxplot.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_tufteboxplot.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
+        clsgeom_tufteboxplot.AddLayerParameter("shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strShapePoint)
+        clsgeom_tufteboxplot.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_tufteboxplot.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+
+        lstAllGeoms.Add(clsgeom_tufteboxplot)
 
         clsgeom_violin.strGeomName = "geom_violin"
         'Mandatory Aesthetics
