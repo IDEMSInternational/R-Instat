@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgEndOfRainsSeason
     Private bFirstload As Boolean = True
@@ -39,6 +40,8 @@ Public Class dlgEndOfRainsSeason
     Private clsFirstWBMin As New RFunction
 
     Private clsCombinationBase, clsEndRainBase, clsWaterBalanceList, clsWaterBalanceFunction, clsWaterBalance As New RFunction
+
+
     Private clsDifference, clsDifferenceList As New RFunction
     Private clsEndOfSeasonFilter, clsEOSFilterList, clsEOSIfElseFunc, clsEOSIsNA, clsEOSEndFunction, clsEOSStatusFunction As New RFunction
     Private clsLessEOSEqualOperator, clsSquareEOSBracketOpertor As New ROperator
@@ -117,9 +120,13 @@ Public Class dlgEndOfRainsSeason
         ucrReceiverEvaporation.SetParameterIsString()
         ucrReceiverEvaporation.bWithQuotes = False
 
-        'WATER BALANCE
-        ucrChkEndOfSeason.SetParameter(New RParameter("sub_water_balance", clsWaterBalance, 0, bNewIncludeArgumentName:=False), False)
-        ucrChkEndOfSeason.SetText("End of Season")
+        ucrPnlEndOfRains.AddRadioButton(rdoEndOfRains)
+        ucrPnlEndOfRains.AddRadioButton(rdoEndOfSeason)
+        ucrPnlEndOfRains.AddParameterPresentCondition(rdoEndOfRains, "sub_end_rain")
+        ucrPnlEndOfRains.AddParameterPresentCondition(rdoEndOfSeason, "sub_water_balance")
+
+        ucrPnlEndOfRains.AddToLinkedControls({ucrChkEndofRainsDoy, ucrNudAmount, ucrNudTotalOverDays, ucrChkEndofRainsDate, ucrInputEndofRainsDate, ucrChkEndofRainsOccurence, ucrInputEndofRainsOccurence}, {rdoEndOfRains}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlEndOfRains.AddToLinkedControls({ucrNudCapacity, ucrNudWBLessThan, ucrInputEvaporation, ucrPnlEvaporation, ucrReceiverEvaporation, ucrInputEvaporation, ucrInputReplaceNA, ucrChkEndofSeasonDoy, ucrInputSeasonDoy, ucrChkEndofSeasonDate, ucrInputEndofSeasonDate, ucrChkEndofSeasonOccurence, ucrInputEndofSeasonOccurence}, {rdoEndOfSeason}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlEvaporation.AddRadioButton(rdoValueEvaporation)
         ucrPnlEvaporation.AddRadioButton(rdoVariableEvaporation)
@@ -127,13 +134,13 @@ Public Class dlgEndOfRainsSeason
         ucrPnlEvaporation.AddToLinkedControls(ucrReceiverEvaporation, {rdoVariableEvaporation}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
         ucrPnlEvaporation.AddToLinkedControls(ucrInputReplaceNA, {rdoVariableEvaporation}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
 
-        ucrChkEndOfSeason.AddToLinkedControls(ucrNudCapacity, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
-        ucrChkEndOfSeason.AddToLinkedControls(ucrNudWBLessThan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
-        ucrChkEndOfSeason.AddToLinkedControls(ucrPnlEvaporation, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoValueEvaporation)
-        ucrChkEndOfSeason.AddToLinkedControls(ucrChkEndofSeasonDoy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
+        ucrPnlEndOfRains.AddToLinkedControls(ucrNudCapacity, {rdoEndOfSeason}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
+        ucrPnlEndOfRains.AddToLinkedControls(ucrNudWBLessThan, {rdoEndOfSeason}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
+        ucrPnlEndOfRains.AddToLinkedControls(ucrPnlEvaporation, {rdoEndOfSeason}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoValueEvaporation)
+        ucrPnlEndOfRains.AddToLinkedControls(ucrChkEndofSeasonDoy, {rdoEndOfSeason}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
+        ucrPnlEndOfRains.AddToLinkedControls(ucrNudWBLessThan, {rdoEndOfSeason}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
         ucrChkEndofSeasonDoy.SetLinkedDisplayControl(grpEndofSeason)
 
-        ucrChkEndOfSeason.AddToLinkedControls(ucrNudWBLessThan, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
         ucrPnlEvaporation.SetLinkedDisplayControl(lblEvaporation)
         ucrInputReplaceNA.SetLinkedDisplayControl(lblReplaceNA)
 
@@ -161,13 +168,9 @@ Public Class dlgEndOfRainsSeason
         ucrInputSeasonDoy.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
         ucrInputSeasonDoy.SetValidationTypeAsRVariable()
 
-        ' End of Rains
-        ucrChkEndOfRains.SetParameter(New RParameter("sub_end_rain", clsEndRainLastInstance, 1, bNewIncludeArgumentName:=False), False)
-        ucrChkEndOfRains.SetText("End of Rains")
-
-        ucrChkEndOfRains.AddToLinkedControls(ucrNudAmount, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
-        ucrChkEndOfRains.AddToLinkedControls(ucrNudTotalOverDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrChkEndOfRains.AddToLinkedControls(ucrChkEndofRainsDoy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
+        ucrPnlEndOfRains.AddToLinkedControls(ucrNudAmount, {rdoEndOfRains}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
+        ucrPnlEndOfRains.AddToLinkedControls(ucrNudTotalOverDays, {rdoEndOfRains}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrPnlEndOfRains.AddToLinkedControls(ucrChkEndofRainsDoy, {rdoEndOfRains}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
         ucrChkEndofRainsDoy.SetLinkedDisplayControl(grpEndofRains)
 
         ucrNudAmount.SetParameter(New RParameter("threshold", 1, False))
@@ -760,7 +763,6 @@ Public Class dlgEndOfRainsSeason
         ucrInputReplaceNA.SetRCode(clsEvaporationReplaceNAFunc, bReset)
 
         ' Water Balance:
-        ucrChkEndOfSeason.SetRCode(clsSubCalcList, bReset)
         ucrReceiverRainfall.SetRCode(clsWBReplaceNAMaxFunction, bReset)
         ucrChkEndofSeasonOccurence.SetRCode(clsSubCalcList, bReset)
 
@@ -770,7 +772,7 @@ Public Class dlgEndOfRainsSeason
         ucrNudCapacity.SetRCode(clsPMinFunctionMax, bReset)
 
         'EoR
-        ucrChkEndOfRains.SetRCode(clsSubCalcList, bReset)
+        ucrPnlEndOfRains.SetRCode(clsSubCalcList, bReset)
         ucrNudAmount.SetRCode(clsEndRainFilterOperator, bReset)
         ucrNudTotalOverDays.SetRCode(clsRollingSumFunction, bReset)
         ucrChkEndofRainsDoy.SetRCode(clsEORFilterList, bReset)
@@ -780,7 +782,8 @@ Public Class dlgEndOfRainsSeason
 
     Private Sub TestOKEnabled()
         Dim bOkEnabled As Boolean
-        If ucrChkEndOfRains.Checked Then
+        If rdoEndOfRains.Checked Then
+
             If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudAmount.GetText <> "" AndAlso ucrNudTotalOverDays.GetText <> "" AndAlso ucrChkEndofRainsDoy.Checked Then
                 bOkEnabled = True
             Else
@@ -802,12 +805,12 @@ Public Class dlgEndOfRainsSeason
                 Exit Sub
             End If
         End If
-        If ucrChkEndOfSeason.Checked Then
-                If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudCapacity.GetText <> "" AndAlso ucrNudWBLessThan.GetText <> "" AndAlso ucrChkEndofSeasonDoy.Checked Then
-                    bOkEnabled = True
-                Else
-                    bOkEnabled = False
-                End If
+        If rdoEndOfSeason.Checked Then
+            If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudCapacity.GetText <> "" AndAlso ucrNudWBLessThan.GetText <> "" AndAlso ucrChkEndofSeasonDoy.Checked Then
+                bOkEnabled = True
+            Else
+                bOkEnabled = False
+            End If
             If ucrChkEndofSeasonDoy.Checked AndAlso ucrInputSeasonDoy.IsEmpty Then
                 bOkEnabled = False
             ElseIf rdoValueEvaporation.Checked AndAlso ucrInputEvaporation.IsEmpty Then
@@ -943,48 +946,28 @@ Public Class dlgEndOfRainsSeason
         End If
     End Sub
 
-    Private Sub ucrChkEndofRainsDoy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofRainsDoy.ControlValueChanged, ucrChkEndOfRains.ControlValueChanged
-        If ucrChkEndOfRains.Checked Then
-            If ucrChkEndofRainsDoy.Checked Then
-                clsEORFilterList.AddParameter("sub1", clsRFunctionParameter:=clsEndRainLastInstance, bIncludeArgumentName:=False, iPosition:=0)
-            Else
-                clsEORFilterList.RemoveParameterByName("sub1")
-            End If
-        Else
-            clsEORFilterList.RemoveParameterByName("sub1")
-        End If
+    Private Sub ucrChkEndofRainsDoy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofRainsDoy.ControlValueChanged
+        LastInstance()
     End Sub
 
-    Private Sub ucrChkEndofRainsDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofRainsDate.ControlValueChanged, ucrChkEndOfRains.ControlValueChanged
-        If ucrChkEndOfRains.Checked Then
-            clsListManipulations.AddParameter("manip2", clsRFunctionParameter:=clsEndOfRainsFilter, bIncludeArgumentName:=False, iPosition:=1)
-            If ucrChkEndofRainsDate.Checked Then
-                clsEORFilterList.AddParameter("sub2", clsRFunctionParameter:=clsEndOfRainsDateFunction, bIncludeArgumentName:=False, iPosition:=1)
-            Else
-                clsEORFilterList.RemoveParameterByName("sub2")
-            End If
-        Else
-            clsListManipulations.RemoveParameterByName("manip2")
-            clsEORFilterList.RemoveParameterByName("sub2")
-        End If
+    Private Sub ucrChkEndofRainsDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofRainsDate.ControlValueChanged
+        EndofRainsFilter()
     End Sub
 
-    Private Sub ucrChkEndofRainsOccurence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofRainsOccurence.ControlValueChanged, ucrChkEndOfRains.ControlValueChanged
-        If ucrChkEndOfRains.Checked Then
-            clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsEOREndFunction, bIncludeArgumentName:=False, iPosition:=0)
-            If ucrChkEndofRainsOccurence.Checked Then
-                clsSubCalcList.AddParameter("sub2", clsRFunctionParameter:=clsEORStatusFunction, bIncludeArgumentName:=False, iPosition:=1)
-            Else
-                clsSubCalcList.RemoveParameterByName("sub2")
-            End If
-        Else
-            clsSubCalcList.RemoveParameterByName("sub1")
-            clsSubCalcList.RemoveParameterByName("sub2")
-        End If
+    Private Sub ucrChkEndofRainsOccurence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofRainsOccurence.ControlValueChanged
+        EndofRainsFunction()
     End Sub
 
-    Private Sub ucrChkEndofSeasonOccurence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofSeasonOccurence.ControlValueChanged, ucrChkEndOfSeason.ControlValueChanged
-        If ucrChkEndOfSeason.Checked Then
+    Private Sub ucrChkEndofSeasonOccurence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofSeasonOccurence.ControlValueChanged
+        EndofSeasonFunction()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEndOfRains.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged, ucrInputSeasonDoy.ControlContentsChanged, ucrNudTotalOverDays.ControlContentsChanged, ucrNudAmount.ControlContentsChanged, ucrChkEndofRainsDoy.ControlContentsChanged, ucrInputEndRainDoy.ControlContentsChanged, ucrChkEndofRainsDate.ControlContentsChanged, ucrInputEndofRainsDate.ControlContentsChanged, ucrChkEndofRainsOccurence.ControlContentsChanged, ucrInputEndofRainsOccurence.ControlContentsChanged, ucrChkEndofSeasonDoy.ControlContentsChanged, ucrPnlEvaporation.ControlContentsChanged, ucrReceiverEvaporation.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrInputReplaceNA.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub EndofSeasonFunction()
+        If rdoEndOfSeason.Checked Then
             'clsListManipulations.AddParameter("manip3", clsRFunctionParameter:=clsEndOfSeasonFilter, bIncludeArgumentName:=False, iPosition:=2)
             clsSubCalcList.AddParameter("sub3", clsRFunctionParameter:=clsEOSEndFunction, bIncludeArgumentName:=False, iPosition:=2)
             If ucrChkEndofSeasonOccurence.Checked Then
@@ -999,7 +982,51 @@ Public Class dlgEndOfRainsSeason
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkEndOfRains.ControlContentsChanged, ucrChkEndOfSeason.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged, ucrInputSeasonDoy.ControlContentsChanged, ucrNudTotalOverDays.ControlContentsChanged, ucrNudAmount.ControlContentsChanged, ucrChkEndofRainsDoy.ControlContentsChanged, ucrInputEndRainDoy.ControlContentsChanged, ucrChkEndofRainsDate.ControlContentsChanged, ucrInputEndofRainsDate.ControlContentsChanged, ucrChkEndofRainsOccurence.ControlContentsChanged, ucrInputEndofRainsOccurence.ControlContentsChanged, ucrChkEndofSeasonDoy.ControlContentsChanged, ucrPnlEvaporation.ControlContentsChanged, ucrReceiverEvaporation.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrInputReplaceNA.ControlContentsChanged
-        TestOKEnabled()
+
+    Private Sub EndofRainsFilter()
+        If rdoEndOfRains.Checked Then
+            clsListManipulations.AddParameter("manip2", clsRFunctionParameter:=clsEndOfRainsFilter, bIncludeArgumentName:=False, iPosition:=1)
+            If ucrChkEndofRainsDate.Checked Then
+                clsEORFilterList.AddParameter("sub2", clsRFunctionParameter:=clsEndOfRainsDateFunction, bIncludeArgumentName:=False, iPosition:=1)
+            Else
+                clsEORFilterList.RemoveParameterByName("sub2")
+            End If
+        Else
+            clsListManipulations.RemoveParameterByName("manip2")
+            clsEORFilterList.RemoveParameterByName("sub2")
+        End If
+    End Sub
+
+    Private Sub EndofRainsFunction()
+        If rdoEndOfRains.Checked Then
+            clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsEOREndFunction, bIncludeArgumentName:=False, iPosition:=0)
+            If ucrChkEndofRainsOccurence.Checked Then
+                clsSubCalcList.AddParameter("sub2", clsRFunctionParameter:=clsEORStatusFunction, bIncludeArgumentName:=False, iPosition:=1)
+            Else
+                clsSubCalcList.RemoveParameterByName("sub2")
+            End If
+        Else
+            clsSubCalcList.RemoveParameterByName("sub1")
+            clsSubCalcList.RemoveParameterByName("sub2")
+        End If
+    End Sub
+
+    Private Sub LastInstance()
+        If rdoEndOfRains.Checked Then
+            If ucrChkEndofRainsDoy.Checked Then
+                clsEORFilterList.AddParameter("sub1", clsRFunctionParameter:=clsEndRainLastInstance, bIncludeArgumentName:=False, iPosition:=0)
+            Else
+                clsEORFilterList.RemoveParameterByName("sub1")
+            End If
+        Else
+            clsEORFilterList.RemoveParameterByName("sub1")
+        End If
+    End Sub
+
+    Private Sub ucrPnlEndOfRains_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEndOfRains.ControlValueChanged
+        LastInstance()
+        EndofRainsFilter()
+        EndofRainsFunction()
+        EndofSeasonFunction()
     End Sub
 End Class
