@@ -263,7 +263,7 @@ Public Class dlgCorrelation
         ElseIf rdoMultipleColumns.Checked Then
             ucrReceiverMultipleColumns.SetMeAsReceiver()
         End If
-        ReceiverColumns
+        ReceiverColumns()
     End Sub
 
     Private Sub ucrReceiverMultipleColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleColumns.ControlValueChanged, ucrReceiverFirstColumn.ControlValueChanged, ucrReceiverSecondColumn.ControlValueChanged
