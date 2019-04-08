@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgClimaticStationMaps
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsSfAesFunction, clsGeomPointAesFunction, clsFacetFunction, clsScaleShapeFunction As RFunction
+    Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsSfAesFunction, clsGeomPointAesFunction, clsFacetFunction, clsScaleShapeFunction, clsLabelRepelFunction As RFunction
     Private clsGGplotOperator, clsFacetOp As New ROperator
 
     Private clsLabsFunction As New RFunction
@@ -94,6 +94,11 @@ Public Class dlgClimaticStationMaps
         ucrReceiverFacet.SetParameterIsString()
         ucrReceiverFacet.bWithQuotes = False
 
+        ucrReceiverStation.SetParameter(New RParameter("data", bNewIncludeArgumentName:=False))
+        ucrReceiverStation.Selector = ucrSelectorStation
+        ucrReceiverStation.SetParameterIsString()
+        ucrReceiverStation.bWithQuotes = False
+
         ucrSaveMap.SetPrefix("Map")
         ucrSaveMap.SetSaveTypeAsGraph()
         ucrSaveMap.SetIsComboBox()
@@ -111,6 +116,7 @@ Public Class dlgClimaticStationMaps
         clsGeomPointAesFunction = New RFunction
         clsFacetFunction = New RFunction
         clsScaleShapeFunction = New RFunction
+        clsLabelRepelFunction = New RFunction
 
         clsGGplotOperator = New ROperator
         clsXlimFunction = New RFunction
@@ -154,6 +160,10 @@ Public Class dlgClimaticStationMaps
         clsFacetFunction.SetRCommand("facet_wrap")
         clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsFacetOp, bIncludeArgumentName:=False)
 
+        clsLabelRepelFunction.SetPackageName("ggrepel")
+        clsLabelRepelFunction.SetRCommand("geom_label_repel")
+        clsLabelRepelFunction.AddParameter("label", clsROperatorParameter:=clsFacetOp, bIncludeArgumentName:=False)
+
         clsGGplotOperator.SetOperation("+")
         clsGGplotOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, bIncludeArgumentName:=False, iPosition:=0)
         clsGGplotOperator.AddParameter("geom_sf", clsRFunctionParameter:=clsGeomSfFunction, bIncludeArgumentName:=False, iPosition:=1)
@@ -192,6 +202,7 @@ Public Class dlgClimaticStationMaps
         ucrReceiverShape.SetRCode(clsGeomPointAesFunction, bReset)
         ucrReceiverColor.SetRCode(clsGeomPointAesFunction, bReset)
         ucrReceiverFacet.SetRCode(clsFacetOp, bReset)
+        ucrReceiverStation.SetRCode(clsLabelRepelFunction, bReset)
     End Sub
 
     Private Sub cmdSFOptions_Click(sender As Object, e As EventArgs) Handles cmdSFOptions.Click
@@ -256,6 +267,14 @@ Public Class dlgClimaticStationMaps
             clsGGplotOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, bIncludeArgumentName:=False, iPosition:=2)
         Else
             clsGGplotOperator.RemoveParameterByName("facets")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
+        If Not ucrReceiverStation.IsEmpty Then
+            clsGGplotOperator.AddParameter("labels", clsRFunctionParameter:=clsLabelRepelFunction, bIncludeArgumentName:=False, iPosition:=2)
+        Else
+            clsGGplotOperator.RemoveParameterByName("labels")
         End If
     End Sub
 End Class
