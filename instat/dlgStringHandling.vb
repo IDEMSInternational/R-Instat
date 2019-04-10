@@ -90,6 +90,8 @@ Public Class dlgStringHandling
 
         'temporary disabling
         grpRegex.Enabled = False
+        'hiding the Regex group box 
+        grpRegex.Hide()
         ucrChkIncludeRegularExpressions.Enabled = False
         'cmdDBackSlah.Visible = False
         'cmdWBackSlash.Visible = False
