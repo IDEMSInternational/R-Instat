@@ -27,7 +27,7 @@ Partial Class dlgClimaticStationMaps
         Me.cmdSFOptions = New System.Windows.Forms.Button()
         Me.ucrSaveMap = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpStation = New System.Windows.Forms.GroupBox()
+        Me.grpPoints = New System.Windows.Forms.GroupBox()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.lblFacet = New System.Windows.Forms.Label()
@@ -45,7 +45,7 @@ Partial Class dlgClimaticStationMaps
         Me.lblFill = New System.Windows.Forms.Label()
         Me.ucrReceiverFill = New instat.ucrReceiverSingle()
         Me.ucrSelectorOutline = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.grpStation.SuspendLayout()
+        Me.grpPoints.SuspendLayout()
         Me.grpMapOutline.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -93,27 +93,27 @@ Partial Class dlgClimaticStationMaps
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 16
         '
-        'grpStation
+        'grpPoints
         '
-        Me.grpStation.Controls.Add(Me.lblStation)
-        Me.grpStation.Controls.Add(Me.ucrReceiverStation)
-        Me.grpStation.Controls.Add(Me.lblFacet)
-        Me.grpStation.Controls.Add(Me.ucrReceiverFacet)
-        Me.grpStation.Controls.Add(Me.ucrSelectorStation)
-        Me.grpStation.Controls.Add(Me.lblColor)
-        Me.grpStation.Controls.Add(Me.lblShape)
-        Me.grpStation.Controls.Add(Me.lbllatitude)
-        Me.grpStation.Controls.Add(Me.ucrReceiverColor)
-        Me.grpStation.Controls.Add(Me.lblLongitude)
-        Me.grpStation.Controls.Add(Me.ucrReceiverShape)
-        Me.grpStation.Controls.Add(Me.ucrReceiverLatitude)
-        Me.grpStation.Controls.Add(Me.ucrReceiverLongitude)
-        Me.grpStation.Location = New System.Drawing.Point(373, 8)
-        Me.grpStation.Name = "grpStation"
-        Me.grpStation.Size = New System.Drawing.Size(371, 292)
-        Me.grpStation.TabIndex = 21
-        Me.grpStation.TabStop = False
-        Me.grpStation.Text = "Station"
+        Me.grpPoints.Controls.Add(Me.lblStation)
+        Me.grpPoints.Controls.Add(Me.ucrReceiverStation)
+        Me.grpPoints.Controls.Add(Me.lblFacet)
+        Me.grpPoints.Controls.Add(Me.ucrReceiverFacet)
+        Me.grpPoints.Controls.Add(Me.ucrSelectorStation)
+        Me.grpPoints.Controls.Add(Me.lblColor)
+        Me.grpPoints.Controls.Add(Me.lblShape)
+        Me.grpPoints.Controls.Add(Me.lbllatitude)
+        Me.grpPoints.Controls.Add(Me.ucrReceiverColor)
+        Me.grpPoints.Controls.Add(Me.lblLongitude)
+        Me.grpPoints.Controls.Add(Me.ucrReceiverShape)
+        Me.grpPoints.Controls.Add(Me.ucrReceiverLatitude)
+        Me.grpPoints.Controls.Add(Me.ucrReceiverLongitude)
+        Me.grpPoints.Location = New System.Drawing.Point(373, 8)
+        Me.grpPoints.Name = "grpPoints"
+        Me.grpPoints.Size = New System.Drawing.Size(371, 292)
+        Me.grpPoints.TabIndex = 21
+        Me.grpPoints.TabStop = False
+        Me.grpPoints.Text = "Points"
         '
         'lblStation
         '
@@ -307,7 +307,7 @@ Partial Class dlgClimaticStationMaps
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(756, 456)
         Me.Controls.Add(Me.grpMapOutline)
-        Me.Controls.Add(Me.grpStation)
+        Me.Controls.Add(Me.grpPoints)
         Me.Controls.Add(Me.cmdSFOptions)
         Me.Controls.Add(Me.cmdMapOptions)
         Me.Controls.Add(Me.cmdPlotOptions)
@@ -319,8 +319,8 @@ Partial Class dlgClimaticStationMaps
         Me.Name = "dlgClimaticStationMaps"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Climatic Maps"
-        Me.grpStation.ResumeLayout(False)
-        Me.grpStation.PerformLayout()
+        Me.grpPoints.ResumeLayout(False)
+        Me.grpPoints.PerformLayout()
         Me.grpMapOutline.ResumeLayout(False)
         Me.grpMapOutline.PerformLayout()
         Me.ResumeLayout(False)
@@ -331,7 +331,7 @@ Partial Class dlgClimaticStationMaps
     Friend WithEvents ucrSaveMap As ucrSave
     Friend WithEvents cmdSFOptions As Button
     Friend WithEvents cmdMapOptions As Button
-    Friend WithEvents grpStation As GroupBox
+    Friend WithEvents grpPoints As GroupBox
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents grpMapOutline As GroupBox
