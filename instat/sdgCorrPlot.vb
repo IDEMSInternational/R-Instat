@@ -143,10 +143,26 @@ Public Class sdgCorrPlot
 
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged
         Visibility()
+        BeforeAndAfterCodes()
+    End Sub
+
+    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
+        If Not ucrReceiverFactor.IsEmpty Then
+            clsRGGscatmatrixFunction.AddParameter("color", ucrReceiverFactor.GetVariableNames(), iPosition:=2)
+        Else
+            clsRGGscatmatrixFunction.RemoveParameterByName("color")
+        End If
+    End Sub
+
+    Public Sub BeforeAndAfterCodes()
         If rdoCorrelationPlot.Checked Then
-            clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=1)
-            clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
-            clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
+            If Not rdoCorrelationPlot.Enabled Then
+                clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
+            Else
+                clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=1)
+                clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
+                clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
+            End If
         ElseIf rdoPairwisePlot.Checked Then
             clsRsyntax.AddToAfterCodes(clsRGraphicsFuction, iPosition:=2)
             clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
@@ -162,11 +178,4 @@ Public Class sdgCorrPlot
         End If
     End Sub
 
-    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
-        If Not ucrReceiverFactor.IsEmpty Then
-            clsRGGscatmatrixFunction.AddParameter("color", ucrReceiverFactor.GetVariableNames(), iPosition:=2)
-        Else
-            clsRGGscatmatrixFunction.RemoveParameterByName("color")
-        End If
-    End Sub
 End Class
