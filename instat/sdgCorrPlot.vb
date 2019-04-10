@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class sdgCorrPlot
-    Public clsRGGscatmatrixFunction, clsRGGcorrGraphicsFunction, clsCorrelationFunction, clsRGraphicsFuction, clsRTempFunction As New RFunction
+    Public clsRGGscatmatrixFunction, clsRGGcorrGraphicsFunction, clsCorrelationTestFunction, clsCorrelationFunction, clsRGraphicsFuction, clsRTempFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Private clsRsyntax As RSyntax
@@ -91,7 +91,7 @@ Public Class sdgCorrPlot
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, strColFunction As String, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewcorrelationTestFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, strColFunction As String, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -104,6 +104,7 @@ Public Class sdgCorrPlot
         End If
 
         clsRsyntax = clsNewRSyntax
+        clsCorrelationTestFunction = clsNewcorrelationTestFunction
         clsCorrelationFunction = clsNewcorrelationFunction
         clsRGGcorrGraphicsFunction = clsNewRGGcorrGraphicsFunction
         clsRGraphicsFuction = clsNewRGraphicsFuction

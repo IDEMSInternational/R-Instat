@@ -208,7 +208,6 @@ Public Class dlgCorrelation
 
     Public Sub TestOKEnabled()
         If rdoTwoColumns.Checked Then
-            ucrBase.clsRsyntax.RemoveAssignTo()
             If (Not ucrReceiverFirstColumn.IsEmpty()) AndAlso (Not ucrReceiverSecondColumn.IsEmpty()) AndAlso (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
                 ucrBase.OKEnabled(True)
             Else
@@ -235,7 +234,7 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatMatrixFunction, clsColFunction, ucrSelectorCorrelation, bReset:=bResetSubdialog)
+        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatMatrixFunction, clsColFunction, ucrSelectorCorrelation, bReset:=bResetSubdialog)
         sdgCorrPlot.ShowDialog()
         bResetSubdialog = False
     End Sub
