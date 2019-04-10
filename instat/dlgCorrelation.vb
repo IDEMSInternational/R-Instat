@@ -246,6 +246,7 @@ Public Class dlgCorrelation
         ElseIf rdoMultipleColumns.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
         End If
+        sdgCorrPlot.BeforeAndAfterCodes()
     End Sub
 
     ' This is here because otherwise the panel cannot be set up correctly if you reopen the dialog when on the 2-variable rdo button
@@ -264,6 +265,7 @@ Public Class dlgCorrelation
             ucrReceiverMultipleColumns.SetMeAsReceiver()
         End If
         ReceiverColumns()
+        CorrelationsEnable()
     End Sub
 
     Private Sub ucrReceiverMultipleColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleColumns.ControlValueChanged, ucrReceiverFirstColumn.ControlValueChanged, ucrReceiverSecondColumn.ControlValueChanged
@@ -289,6 +291,14 @@ Public Class dlgCorrelation
         ElseIf rdoMultipleColumns.Checked Then
             clsRGraphicsFuction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames(), iPosition:=1)
             clsRGGscatMatrixFunction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames(), iPosition:=1)
+        End If
+    End Sub
+
+    Private Sub CorrelationsEnable()
+        If rdoTwoColumns.Checked Then
+            sdgCorrPlot.rdoCorrelationPlot.Enabled = False
+        Else
+            sdgCorrPlot.rdoCorrelationPlot.Enabled = True
         End If
     End Sub
 End Class
