@@ -144,8 +144,8 @@ Public Class dlgName
                 If strArr.Length = 1 Then
                     strColLabel = strArr(0)
                 ElseIf strArr.Length > 1
-                    MessageBox.Show(Me, "Developer error: retrieved column label should be one.", "Developer Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    strColLabel = strArr(strArr.Length - 1)
+                    'MessageBox.Show(Me, "Developer error: retrieved column label should be one.", "Developer Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    'strColLabel = strArr(strArr.Length - 1)
                 End If
             End If
         End If
