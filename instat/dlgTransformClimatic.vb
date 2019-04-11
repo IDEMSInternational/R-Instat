@@ -305,7 +305,7 @@ Public Class dlgTransformClimatic
         clsRCountFunction.SetPackageName("zoo")
         clsRCountFunction.SetRCommand("rollapply")
         clsRCountFunction.AddParameter("data", strRainDay, iPosition:=0)
-        clsRCountFunction.AddParameter("width", 2, iPosition:=1)
+        clsRCountFunction.AddParameter("width", 1, iPosition:=1)
         clsRCountFunction.AddParameter("FUN", "sum", iPosition:=2)
         clsRCountFunction.AddParameter("align", Chr(39) & "right" & Chr(39), iPosition:=4)
         clsRCountFunction.AddParameter("fill", "NA", iPosition:=5)
