@@ -378,7 +378,6 @@ Partial Class dlgEndOfRainsSeason
         'rdoEndOfRains
         '
         Me.rdoEndOfRains.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoEndOfRains.Checked = True
         Me.rdoEndOfRains.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoEndOfRains.FlatAppearance.BorderSize = 2
         Me.rdoEndOfRains.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
@@ -388,7 +387,6 @@ Partial Class dlgEndOfRainsSeason
         Me.rdoEndOfRains.Name = "rdoEndOfRains"
         Me.rdoEndOfRains.Size = New System.Drawing.Size(130, 27)
         Me.rdoEndOfRains.TabIndex = 35
-        Me.rdoEndOfRains.TabStop = True
         Me.rdoEndOfRains.Text = "End of Rains"
         Me.rdoEndOfRains.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoEndOfRains.UseVisualStyleBackColor = True
@@ -434,9 +432,9 @@ Partial Class dlgEndOfRainsSeason
         '
         'ucrPnlEvaporation
         '
-        Me.ucrPnlEvaporation.Location = New System.Drawing.Point(100, 452)
+        Me.ucrPnlEvaporation.Location = New System.Drawing.Point(107, 452)
         Me.ucrPnlEvaporation.Name = "ucrPnlEvaporation"
-        Me.ucrPnlEvaporation.Size = New System.Drawing.Size(67, 67)
+        Me.ucrPnlEvaporation.Size = New System.Drawing.Size(67, 62)
         Me.ucrPnlEvaporation.TabIndex = 25
         '
         'ucrInputFilterPreview
@@ -653,7 +651,6 @@ Partial Class dlgEndOfRainsSeason
     Friend WithEvents lblWaterBalanceLessThan As Label
     Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
     Friend WithEvents cmdDoyRange As Button
-    Friend WithEvents ucrInputEvaporation As ucrInputTextBox
     Friend WithEvents ucrReceiverEvaporation As ucrReceiverSingle
     Friend WithEvents rdoVariableEvaporation As RadioButton
     Friend WithEvents rdoValueEvaporation As RadioButton
@@ -676,4 +673,5 @@ Partial Class dlgEndOfRainsSeason
     Friend WithEvents rdoEndOfSeasons As RadioButton
     Friend WithEvents rdoEndOfRains As RadioButton
     Friend WithEvents ucrPnlEndOfRainsAndSeasons As UcrPanel
+    Friend WithEvents ucrInputEvaporation As ucrInputTextBox
 End Class
