@@ -117,6 +117,7 @@ Public Class sdgDoyRange
             If clsToParam.bIsString AndAlso clsToParam.strArgumentValue IsNot Nothing Then
                 If Integer.TryParse(clsToParam.strArgumentValue, iTo) Then
                     rdoToFixed.Checked = True
+                    ucrDoyTo.EndDateModifier()
                     ucrDoyTo.SetValue(iTo)
                 Else
                     clsFindDfFunc.AddParameter("column", strParameterValue:=clsToParam.strArgumentValue, iPosition:=1)
