@@ -36,6 +36,7 @@ Public Class ucrDayOfYear
     Private str30Days(29) As String
     Private str28Days(27) As String
     Private str29Days(28) As String
+    Private bDateTo As Boolean = False
 
     Public Sub New()
 
@@ -128,11 +129,19 @@ Public Class ucrDayOfYear
         If ucrInputMonth.GetValue() IsNot Nothing AndAlso ucrInputDay.GetValue() IsNot Nothing Then
             Try
                 If Integer.TryParse(ucrInputMonth.GetValue(), iMonth) AndAlso Integer.TryParse(ucrInputDay.GetValue(), iDay) Then
-                    dtTemp = New Date(year:=iYear, month:=ucrInputMonth.GetValue() + 1, day:=ucrInputDay.GetValue())
+                    If bDateTo Then
+                        dtTemp = New Date(year:=iYear, month:=11 + 1, day:=ucrInputDay.GetValue())
+                    Else
+                        dtTemp = New Date(year:=iYear, month:=ucrInputMonth.GetValue() + 1, day:=ucrInputDay.GetValue())
+                    End If
+
                     iDoy = dtTemp.DayOfYear
                     iDoy = ModPos(iDoy - iStartDay + 1, If(b366DayOfYear, 366, 365))
                     Return iDoy
                 End If
+                iDoy = dtTemp.DayOfYear
+                    iDoy = ModPos(iDoy - iStartDay + 1, If(b366DayOfYear, 366, 365))
+                Return iDoy
             Catch ex As Exception
                 MsgBox("Developer error: Invalid month and/or day value. For control: " & Name & ".")
             End Try
@@ -302,4 +311,9 @@ Public Class ucrDayOfYear
         End If
         Return y
     End Function
+
+    Public Sub EndDateModifier()
+        bDateTo = True
+    End Sub
+
 End Class
