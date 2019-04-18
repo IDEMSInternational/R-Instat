@@ -2095,4 +2095,8 @@ Public Class frmMain
     Private Sub mnuClimaticTidyandExamineDuplicates_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineDuplicates.Click
         dlgDuplicates.ShowDialog()
     End Sub
+
+    Private Sub UseModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseModelToolStripMenuItem.Click
+        dlgUseModel.ShowDialog()
+    End Sub
 End Class
