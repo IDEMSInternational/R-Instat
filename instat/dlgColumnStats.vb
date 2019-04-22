@@ -56,8 +56,8 @@ Public Class dlgColumnStats
 
         ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
         ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
-        ucrReceiverByFactor.SetIncludedDataTypes({"factor", "Date", "character", "logical"}, bStrict:=True)
-        ucrReceiverByFactor.strSelectorHeading = "Factors"
+        ucrReceiverByFactor.SetExcludedDataTypes({"numeric"})
+        ucrReceiverByFactor.strSelectorHeading = "Non_numeric"
         ucrReceiverByFactor.SetParameterIsString()
 
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
