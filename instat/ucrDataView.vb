@@ -50,7 +50,7 @@ Public Class ucrDataView
         grdData.Visible = False
         mnuInsertColsBefore.Visible = False
         mnuInsertColsAfter.Visible = False
-        'autoTranslate(Me)
+        autoTranslate(Me)
         'Disable Autoformat cell
         'This needs to be added at the part when we are writing data to the grid, not here
         'Needs discussion, with this the grid can show NA's
@@ -780,5 +780,9 @@ Public Class ucrDataView
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
         dlgReorderColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
     End Sub
 End Class

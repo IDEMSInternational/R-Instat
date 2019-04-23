@@ -82,6 +82,7 @@ Partial Class dlgDuplicateColumns
         '
         'ucrSelectorForDuplicateColumn
         '
+        Me.ucrSelectorForDuplicateColumn.bDropUnusedFilterLevels = False
         Me.ucrSelectorForDuplicateColumn.bShowHiddenColumns = False
         Me.ucrSelectorForDuplicateColumn.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForDuplicateColumn, "ucrSelectorForDuplicateColumn")

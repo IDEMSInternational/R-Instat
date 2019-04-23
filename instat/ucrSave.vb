@@ -28,7 +28,12 @@ Public Class ucrSave
     Private bAssignToIsPrefix As Boolean = False
     Private bAssignToColumnWithoutNames As Boolean = False
     Private bInsertColumnBefore As Boolean = False
+    ' If true then a list of data frames is being assigned, otherwise a single data frame
+    Public bDataFrameList As Boolean = False
+    ' Optional R character vector to give names of new data frames if data frame list is not named
+    Public strDataFrameNames As String
     Private strAssignToIfUnchecked As String = ""
+    Private strGlobalDataName As String = ""
 
     Private Sub ucrSave_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -73,10 +78,16 @@ Public Class ucrSave
     End Sub
 
     Public Sub SetCheckBoxText(strText As String)
+        Dim g As Graphics = ucrChkSave.chkCheck.CreateGraphics
+        Dim s As SizeF
+
         ucrChkSave.SetText(strText)
         bShowLabel = False
         bShowCheckBox = True
         LabelOrCheckboxSettings()
+        ' "[box]" allows for a sufficient amount of space for the box of the checkbox
+        s = g.MeasureString(ucrChkSave.chkCheck.Text & "[box]", ucrChkSave.chkCheck.Font)
+        ucrChkSave.Width = Math.Max(100, s.Width)
     End Sub
 
     Public Sub SetIsComboBox()
@@ -110,11 +121,33 @@ Public Class ucrSave
         UpdateRCode()
     End Sub
 
-    Public Sub SetAssignToBooleans(Optional bTempAssignToIsPrefix As Boolean = False, Optional bTempAssignToColumnWithoutNames As Boolean = False, Optional bTempInsertColumnBefore As Boolean = False)
+    Public Sub SetAssignToBooleans(Optional bTempAssignToIsPrefix As Boolean = False, Optional bTempAssignToColumnWithoutNames As Boolean = False, Optional bTempInsertColumnBefore As Boolean = False, Optional bTempDataFrameList As Boolean = False)
         bAssignToIsPrefix = bTempAssignToIsPrefix
         bAssignToColumnWithoutNames = bTempAssignToColumnWithoutNames
         bInsertColumnBefore = bTempInsertColumnBefore
+        bDataFrameList = bTempDataFrameList
         UpdateRCode()
+    End Sub
+
+    ' Use this if you already have a valid R character vector
+    ' strTempDataFrameNames should be a valid R character vector
+    ' e.g. "data" or c("data1", "data2")
+    Public Sub SetDataFrameNames(strTempDataFrameNames As String)
+        strDataFrameNames = strTempDataFrameNames
+        UpdateRCode()
+    End Sub
+
+    ' Use this if you just have a list of string
+    ' This will be convered into a valid R character vector
+    Public Sub SetDataFrameNames(lstTempDataFrameNames As List(Of String))
+        If lstTempDataFrameNames.Count = 1 Then
+            SetDataFrameNames(lstTempDataFrameNames(0))
+        Else
+            For i As Integer = 0 To lstTempDataFrameNames.Count - 1
+                lstTempDataFrameNames(i) = Chr(34) & frmMain.clsRLink.MakeValidText(lstTempDataFrameNames(i)) & Chr(34)
+            Next
+            SetDataFrameNames("c(" & String.Join(", ", lstTempDataFrameNames) & ")")
+        End If
     End Sub
 
     Private Sub LabelOrCheckboxSettings()
@@ -159,6 +192,10 @@ Public Class ucrSave
                 ucrInputComboSave.SetDefaultTypeAsModel()
                 ucrInputComboSave.SetItemsTypeAsModels()
                 ucrInputTextSave.SetDefaultTypeAsModel()
+            Case "surv"
+                ucrInputComboSave.SetDefaultTypeAsSurv()
+                ucrInputComboSave.SetItemsTypeAsSurv()
+                ucrInputTextSave.SetDefaultTypeAsSurv()
             Case "table"
                 ucrInputComboSave.SetDefaultTypeAsTable()
                 ucrInputComboSave.SetItemsTypeAsTables()
@@ -182,6 +219,10 @@ Public Class ucrSave
 
     Public Sub SetSaveTypeAsModel()
         SetSaveType("model")
+    End Sub
+
+    Public Sub SetSaveTypeAsSurv()
+        SetSaveType("surv")
     End Sub
 
     Public Sub SetSaveTypeAsTable()
@@ -265,6 +306,8 @@ Public Class ucrSave
                 Else
                     If ucrDataFrameSelector IsNot Nothing Then
                         strDataName = ucrDataFrameSelector.cboAvailableDataFrames.Text
+                    Else
+                        strDataName = strGlobalDataName
                     End If
                     If bShowCheckBox AndAlso Not ucrChkSave.Checked Then
                         strSaveName = strAssignToIfUnchecked
@@ -276,7 +319,7 @@ Public Class ucrSave
                             Case "column"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
                             Case "dataframe"
-                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bDataFrameList:=bDataFrameList, strDataFrameNames:=strDataFrameNames)
                             Case "graph"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                             Case "model"
@@ -377,4 +420,9 @@ Public Class ucrSave
             Return ucrInputTextSave.bUserTyped
         End If
     End Function
+
+    Public Sub SetGlobalDataName(strNewGlobalDataName As String)
+        strGlobalDataName = strNewGlobalDataName
+        UpdateAssignTo()
+    End Sub
 End Class

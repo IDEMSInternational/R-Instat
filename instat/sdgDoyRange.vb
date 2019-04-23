@@ -41,9 +41,12 @@ Public Class sdgDoyRange
         Dim strDataFrameName As String = ""
         Dim expTemp As SymbolicExpression
         Dim chrTemp As CharacterVector
+        Dim numTemp As NumericVector
         Dim clsFindDfFunc As New RFunction
         Dim clsFixedDiffOp As ROperator
         Dim clsDiffParam As RParameter
+        Dim clsGetStartDay As New RFunction
+        Dim iNewStartDay As Integer
 
         If Not bControlsInitialised Then
             bUpdate = False
@@ -61,6 +64,32 @@ Public Class sdgDoyRange
 
         clsFindDfFunc.SetRCommand("find_df_from_calc_from")
         clsFindDfFunc.AddParameter("x", clsRFunctionParameter:=clsCalcFromList, iPosition:=0)
+
+        clsGetStartDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+        clsGetStartDay.AddParameter("data_name", Chr(34) & strMainDataFrame & Chr(34), iPosition:=0)
+        clsGetStartDay.AddParameter("column", Chr(34) & strDoyColumn & Chr(34), iPosition:=1)
+        clsGetStartDay.AddParameter("property", "doy_start_label", iPosition:=2)
+        clsGetStartDay.AddParameter("error_if_no_property", "FALSE", iPosition:=3)
+
+        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetStartDay.ToScript(), bSilent:=True, bShowWaitDialogOverride:=False)
+        If expTemp IsNot Nothing AndAlso expTemp.Type = Internals.SymbolicExpressionType.NumericVector Then
+            numTemp = expTemp.AsNumeric()
+            If numTemp.Count > 0 Then
+                If Integer.TryParse(numTemp(0), iNewStartDay) Then
+                    ucrDoyFrom.SetStartDay(iNewStartDay)
+                    ucrDoyTo.SetStartDay(iNewStartDay)
+                Else
+                    ucrDoyFrom.SetStartDay(1)
+                    ucrDoyTo.SetStartDay(1)
+                End If
+            Else
+                ucrDoyFrom.SetStartDay(1)
+                ucrDoyTo.SetStartDay(1)
+            End If
+        Else
+            ucrDoyFrom.SetStartDay(1)
+            ucrDoyTo.SetStartDay(1)
+        End If
 
         clsFromParam = clsDayFromOperator.GetParameter("from")
         If clsFromParam IsNot Nothing Then

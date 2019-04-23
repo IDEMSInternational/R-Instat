@@ -41,6 +41,8 @@ Public Class dlgDisplayDailyData
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 361
+
         Dim dctBarColour As New Dictionary(Of String, String)
         Dim dctRugColour As New Dictionary(Of String, String)
         Dim dctSummary As New Dictionary(Of String, String)
@@ -59,7 +61,6 @@ Public Class dlgDisplayDailyData
         ucrReceiverStations.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverStations.SetClimaticType("station")
         ucrReceiverStations.bAutoFill = True
-        ucrReceiverStations.SetMeAsReceiver()
 
         ucrReceiverYear.SetParameter(New RParameter("year_col", 3))
         ucrReceiverYear.SetParameterIsString()
@@ -131,7 +132,7 @@ Public Class dlgDisplayDailyData
         ucrChkSumMissing.SetParameter(New RParameter("summary_count_missing", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_missing" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkSumMissing.SetText("N Missing")
 
-        lstCheckboxes.AddRange({ucrChkSum, ucrChkMax, ucrChkMin, ucrChkMean, ucrChkMedian, ucrChkIQR})
+        lstCheckboxes.AddRange({ucrChkSum, ucrChkMax, ucrChkMin, ucrChkMean, ucrChkMedian, ucrChkIQR, ucrChkSumMissing})
 
         ucrChkMissing.SetParameter(ucrInputComboMissing.GetParameter)
         ucrChkMissing.AddParameterPresentCondition(True, "Misscode")
@@ -195,7 +196,7 @@ Public Class dlgDisplayDailyData
         clsConcFunction = New RFunction
 
         ucrSelectorDisplayDailyClimaticData.Reset()
-        ucrReceiverStations.SetMeAsReceiver()
+        ucrReceiverElement.SetMeAsReceiver()
 
         clsConcFunction.SetRCommand("c")
         clsConcFunction.AddParameter("sum", Chr(34) & "sum" & Chr(34), iPosition:=0)
@@ -252,7 +253,7 @@ Public Class dlgDisplayDailyData
     Private Sub TestOkEnabled()
         If rdoGraph.Checked AndAlso (Not ucrReceiverDate.IsEmpty OrElse Not ucrReceiverDayOfYear.IsEmpty OrElse Not ucrReceiverStations.IsEmpty) AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMultipleElements.IsEmpty AndAlso ucrNudUpperYaxis.GetText <> "" AndAlso Not ucrInputRugColour.IsEmpty AndAlso Not ucrInputBarColour.IsEmpty Then
             ucrBase.OKEnabled(True)
-        ElseIf rdoTable.Checked AndAlso Not ucrReceiverElement.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso (ucrChkSum.Checked OrElse ucrChkMin.Checked OrElse ucrChkMax.Checked OrElse ucrChkMean.Checked OrElse ucrChkMedian.Checked OrElse ucrChkIQR.Checked) OrElse ucrChkSumMissing.Checked Then
+        ElseIf rdoTable.Checked AndAlso Not ucrReceiverElement.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso (ucrChkSum.Checked OrElse ucrChkMin.Checked OrElse ucrChkMax.Checked OrElse ucrChkMean.Checked OrElse ucrChkMedian.Checked OrElse ucrChkIQR.Checked OrElse ucrChkSumMissing.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -278,9 +279,11 @@ Public Class dlgDisplayDailyData
     Private Sub ucrPnlFrequencyDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencyDisplay.ControlValueChanged
         DialogSize()
         If rdoGraph.Checked Then
+            ucrReceiverMultipleElements.SetMeAsReceiver()
             ucrBase.clsRsyntax.iCallType = 3
             ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyGraphFunction)
         Else
+            ucrReceiverElement.SetMeAsReceiver()
             ucrBase.clsRsyntax.iCallType = 2
             ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyTable)
         End If

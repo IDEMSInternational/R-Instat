@@ -1,9 +1,9 @@
-instat_object$set("public", "display_daily_table", function(data_name, climatic_element, date_col, year_col, station_col, Misscode, Tracecode, Zerocode, monstats = c("min", "mean", "median", "max", "IQR", "sum")) {
+DataBook$set("public", "display_daily_table", function(data_name, climatic_element, date_col, year_col, station_col, Misscode, Tracecode, Zerocode, monstats = c("min", "mean", "median", "max", "IQR", "sum")) {
   self$get_data_objects(data_name)$display_daily_table(data_name = data_name, climatic_element = climatic_element, date_col = date_col, year_col =year_col, station_col = station_col, Misscode = Misscode, Tracecode = Tracecode, Zerocode = Zerocode, monstats = monstats)
 }
 )
 
-data_object$set("public", "display_daily_table", function(data_name, climatic_element, date_col = date_col, year_col = year_col, station_col = station_col, Misscode, Tracecode, Zerocode, monstats = c("min", "mean", "median", "max", "IQR", "sum")) {
+DataSheet$set("public", "display_daily_table", function(data_name, climatic_element, date_col = date_col, year_col = year_col, station_col = station_col, Misscode, Tracecode, Zerocode, monstats = c("min", "mean", "median", "max", "IQR", "sum")) {
   curr_data <- self$get_data_frame()
   if(missing(station_col)) curr_data[["Station"]] <- self$get_metadata(data_name_label)
   else names(curr_data)[names(curr_data) == station_col] <- "Station"
@@ -150,6 +150,8 @@ DisplayDaily <- function(Datain,Stations,Variables,option=1,Years,Misscode,Trace
       
       newdatain <- data.frame(Date =  seq(from=startday,to= endday,by="d"))
       new <- merge(newdatain,tmp,by="Date",all.x=TRUE,all.y=TRUE)
+      # removes NA rows
+      new <- new[!is.na(new$TEMPDate2), ]
       loc <- which(names(new)== Variables[v])
       
       # newdates <- seq(startday,endday,1)
@@ -219,10 +221,12 @@ DisplayDaily <- function(Datain,Stations,Variables,option=1,Years,Misscode,Trace
               outstats[st,(m+1)] <- gsub("\\s+","",outstats[st,(m+1)]) 
             }
           }
-          # If all the data is NA, set the stats to NA.
+          # If all the data is NA, set the stats to NA (except summary_count_missing)
           if(length(dat[,loc])==length(which(is.na(dat[,loc]==TRUE)))){
-            outstats[,(m+1)] <- "NA"
+            outstats[which(monstats != "summary_count_missing"),(m+1)] <- "NA"
           }
+		  # If there's no data, set all the stats to NA
+          if(length(dat[,loc]) == 0) outstats[,(m+1)] <- "NA"
           #-------------------------------------------------------#
           # Set to 2 d.p.                                         #
           #-------------------------------------------------------#	
@@ -274,7 +278,7 @@ DisplayDaily <- function(Datain,Stations,Variables,option=1,Years,Misscode,Trace
         out[dim(out)[1]+1,] <- "____"
         out[dim(out)[1],1] <- "STATS"
         # temp fix to shorten display name of summary function
-        outstats[,1][outstats[,1] == "summary_count_missing"] <- "n_missing"
+        outstats[,1][outstats[,1] == "summary_count_missing"] <- "n_miss"
         out <- rbind(out,outstats)
         
         #----------------------------------------------------------#

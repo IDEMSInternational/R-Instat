@@ -64,12 +64,16 @@ Public Class dlgOptions
         rtbCommentPreview.Text = strPreviewText
         rtbOutputPreview.Text = strPreviewText
         SetView()
+
         'temp disabled as not functioning yet
         rdoSpanish.Enabled = False
+        rdoKiswahili.Enabled = False
+
         ucrNudDigits.SetMinMax(0, 22)
         ucrChkIncludeCommentsbyDefault.SetText("Include Comments by Default")
         ucrChkViewClimaticMenu.SetText("Show Climatic Menu")
         ucrChkViewProcurementMenu.SetText("Show Procurement Menu")
+        ucrChkViewOptionsByContextMenu.SetText("Show Options By Context Menu")
         ucrChkShowRCommandsinOutputWindow.SetText(" Show R Commands in Output Window")
         ucrChkShowSignifStars.SetText("Show stars on summary tables for coefficients")
         ucrChkShowDataonGrid.SetText("Display dialog's selected data frame in grid")
@@ -101,6 +105,7 @@ Public Class dlgOptions
         ucrInputComment.SetName(frmMain.clsInstatOptions.strComment)
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
         ucrChkIncludeCommentsbyDefault.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
+        ucrChkViewOptionsByContextMenu.Checked = frmMain.clsInstatOptions.bShowOptionsByContextMenu
         ucrChkViewProcurementMenu.Checked = frmMain.clsInstatOptions.bShowProcurementMenu
         ucrChkViewClimaticMenu.Checked = frmMain.clsInstatOptions.bShowClimaticMenu
         ucrChkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
@@ -109,6 +114,10 @@ Public Class dlgOptions
         ucrChkShowDataonGrid.Checked = frmMain.clsInstatOptions.bChangeDataFrame
         ucrChkShowWaitDialog.Checked = frmMain.clsInstatOptions.bShowWaitDialog
         ucrNudWaitSeconds.Value = frmMain.clsInstatOptions.iWaitTimeDelaySeconds
+        ucrInputDatabaseName.SetName(frmMain.clsInstatOptions.strClimsoftDatabaseName)
+        ucrInputHost.SetName(frmMain.clsInstatOptions.strClimsoftHost)
+        ucrInputPort.SetName(frmMain.clsInstatOptions.strClimsoftPort)
+        ucrInputUserName.SetName(frmMain.clsInstatOptions.strClimsoftUsername)
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 rdoEnglish.Checked = True
@@ -149,6 +158,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
         frmMain.clsInstatOptions.bIncludeCommentDefault = ucrChkIncludeCommentsbyDefault.Checked
+        frmMain.clsInstatOptions.SetShowOptionsByContextMenu(ucrChkViewOptionsByContextMenu.Checked)
         frmMain.clsInstatOptions.SetShowProcurementMenu(ucrChkViewProcurementMenu.Checked)
         frmMain.clsInstatOptions.SetShowClimaticMenu(ucrChkViewClimaticMenu.Checked)
         frmMain.clsInstatOptions.SetCommandInOutpt(ucrChkShowRCommandsinOutputWindow.Checked)
@@ -157,6 +167,10 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetChangeDataFrame(ucrChkShowDataonGrid.Checked)
         frmMain.clsInstatOptions.SetShowWaitDialog(ucrChkShowWaitDialog.Checked)
         frmMain.clsInstatOptions.SetWaitTimeDelaySeconds(ucrNudWaitSeconds.Value)
+        frmMain.clsInstatOptions.SetClimsoftDatabaseName(ucrInputDatabaseName.GetText())
+        frmMain.clsInstatOptions.SetClimsoftHost(ucrInputHost.GetText())
+        frmMain.clsInstatOptions.SetClimsoftPort(ucrInputPort.GetText())
+        frmMain.clsInstatOptions.SetClimsoftUsername(ucrInputUserName.GetText())
     End Sub
 
     Private Sub SetView()
@@ -225,8 +239,7 @@ Public Class dlgOptions
         autoTranslate(Me)
 
         If frmMain.Visible AndAlso strCurrLanguageCulture <> strPrevLanguageCulture Then
-            autoTranslate(frmMain)
-            'TODO translation containers within frmMain here
+            frmMain.TranslateFrmMainMenu()
         End If
         strPrevLanguageCulture = strCurrLanguageCulture
         'disables the command after running it
@@ -305,7 +318,7 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged
         ApplyEnabled(True)
     End Sub
 

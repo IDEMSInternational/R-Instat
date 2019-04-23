@@ -138,6 +138,46 @@ Public Class clsGridLink
                     lstDataNames = Nothing
                 End If
                 If lstDataNames IsNot Nothing Then
+                    'delete old sheets
+                    'TODO look at this code to improve it (simplify)
+                    If bGrdDataExists Then
+                        k = 0
+                        For i = 0 To grdData.Worksheets.Count - 1
+                            ' look up convert genericvector to string list to avoid this loop
+                            bFoundName = False
+                            For j = 0 To lstDataNames.Length - 1
+                                strDataName = lstDataNames.AsCharacter(j)
+                                If strDataName = grdData.Worksheets(i - k).Name Then
+                                    bFoundName = True
+                                    Exit For
+                                End If
+                            Next
+                            If Not bFoundName Then
+                                shtTemp = grdData.Worksheets(i - k)
+                                grdData.Worksheets.Remove(shtTemp)
+                                k = k + 1
+                            End If
+                        Next
+                    End If
+                    If bGrdVariablesMetadataExists Then
+                        k = 0
+                        For i = 0 To grdVariablesMetadata.Worksheets.Count - 1
+                            ' look up convert genericvector to string list to avoid this loop
+                            bFoundName = False
+                            For j = 0 To lstDataNames.Length - 1
+                                strDataName = lstDataNames.AsCharacter(j)
+                                If strDataName = grdVariablesMetadata.Worksheets(i - k).Name Then
+                                    bFoundName = True
+                                    Exit For
+                                End If
+                            Next
+                            If Not bFoundName Then
+                                shtTemp = grdVariablesMetadata.Worksheets(i - k)
+                                grdVariablesMetadata.Worksheets.Remove(shtTemp)
+                                k = k + 1
+                            End If
+                        Next
+                    End If
                     For i = 0 To lstDataNames.Length - 1
                         strDataName = lstDataNames.AsCharacter(i)
                         clsDataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
@@ -212,48 +252,6 @@ Public Class clsGridLink
                             End If
                         End If
                     Next
-
-                    'delete old sheets
-                    'TODO look at this code to improve it (simplify)
-                    If bGrdDataExists Then
-                        k = 0
-                        For i = 0 To grdData.Worksheets.Count - 1
-                            ' look up convert genericvector to string list to avoid this loop
-                            bFoundName = False
-                            For j = 0 To lstDataNames.Length - 1
-                                strDataName = lstDataNames.AsCharacter(j)
-                                If strDataName = grdData.Worksheets(i - k).Name Then
-                                    bFoundName = True
-                                    Exit For
-                                End If
-                            Next
-                            If Not bFoundName Then
-                                shtTemp = grdData.Worksheets(i - k)
-                                grdData.Worksheets.Remove(shtTemp)
-                                k = k + 1
-                            End If
-                        Next
-                    End If
-
-                    If bGrdVariablesMetadataExists Then
-                        k = 0
-                        For i = 0 To grdVariablesMetadata.Worksheets.Count - 1
-                            ' look up convert genericvector to string list to avoid this loop
-                            bFoundName = False
-                            For j = 0 To lstDataNames.Length - 1
-                                strDataName = lstDataNames.AsCharacter(j)
-                                If strDataName = grdVariablesMetadata.Worksheets(i - k).Name Then
-                                    bFoundName = True
-                                    Exit For
-                                End If
-                            Next
-                            If Not bFoundName Then
-                                shtTemp = grdVariablesMetadata.Worksheets(i - k)
-                                grdVariablesMetadata.Worksheets.Remove(shtTemp)
-                                k = k + 1
-                            End If
-                        Next
-                    End If
                 End If
 
                 If bGrdMetadataExists AndAlso (bGrdMetadataChanged OrElse bRMetadataChanged) Then
@@ -452,7 +450,7 @@ Public Class clsGridLink
                         fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (D)"
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
                     ElseIf vecColumnDataTypes(k).Contains("logical") Then
-                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (l)"
+                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (L)"
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
                     Else
                         fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader

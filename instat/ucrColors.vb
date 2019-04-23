@@ -42,12 +42,17 @@ Public Class ucrColors
             dctColours.Add("Pink", Chr(34) & "pink" & Chr(34))
         End If
         bAllowNonConditionValues = True
-        SetDropDownStyleAsNonEditable()
+        ' This has been removed because when selecting a Hex colour the text does not set if the combo box is not editable. Text can only be from dropdown when non editable
+        ' SetDropDownStyleAsNonEditable()
+    End Sub
+
+    Public Sub SetColours()
+        SetItems(dctColours)
     End Sub
 
     Private Sub ucrColors_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If GetParameter() IsNot Nothing Then
-            SetItems(dctColours)
+        If (dctConditions Is Nothing OrElse dctConditions.Count = 0) AndAlso GetParameter() IsNot Nothing Then
+            SetColours()
         End If
     End Sub
 

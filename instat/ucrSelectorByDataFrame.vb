@@ -74,6 +74,15 @@ Public Class ucrSelectorByDataFrame
         End Set
     End Property
 
+    Public Property bDropUnusedFilterLevels As Boolean
+        Get
+            Return ucrAvailableDataFrames.bDropUnusedFilterLevels
+        End Get
+        Set(bValue As Boolean)
+            ucrAvailableDataFrames.bDropUnusedFilterLevels = bValue
+        End Set
+    End Property
+
     Public Sub SetParameterIsString()
         ucrAvailableDataFrames.SetParameterIsString()
     End Sub

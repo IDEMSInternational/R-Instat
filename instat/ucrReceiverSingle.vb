@@ -21,6 +21,11 @@ Public Class ucrReceiverSingle
     Public strCurrDataType As String
     Public Event WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle)
     Public bAutoFill As Boolean = False
+    'We have not added this to multiple receiver because we have no case yet that we want not to print graph
+    Public bPrintGraph As Boolean = True
+    'If True variable will be assigned to e.g. DF.x instead of x (where DF is strDataFrameName and x is receiver value)
+    'This is useful e.g. to ensure uniqueness when a dialog uses multiple data frames
+    Public bIncludeDataFrameInAssignment As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -184,6 +189,15 @@ Public Class ucrReceiverSingle
                     Else
                         clsGetVariablesFunc.AddParameter("use_current_filter", "FALSE")
                     End If
+                    If bDropUnusedFilterLevels Then
+                        clsGetVariablesFunc.AddParameter("drop_unused_filter_levels", "TRUE")
+                    Else
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsGetVariablesFunc.AddParameter("drop_unused_filter_levels", "FALSE")
+                        Else
+                            clsGetVariablesFunc.RemoveParameterByName("drop_unused_filter_levels")
+                        End If
+                    End If
                 Case "filter"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
                     clsGetVariablesFunc.AddParameter("filter_name", GetVariableNames())
@@ -193,6 +207,9 @@ Public Class ucrReceiverSingle
                 Case "graph"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                     clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
+                    If Not bPrintGraph Then
+                        clsGetVariablesFunc.AddParameter("print_graph", "FALSE")
+                    End If
                 Case "model"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                     clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
@@ -208,7 +225,11 @@ Public Class ucrReceiverSingle
             End Select
 
             'TODO make this an option set in Options menu
-            clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
+            If bIncludeDataFrameInAssignment AndAlso strDataFrameName <> "" Then
+                clsGetVariablesFunc.SetAssignTo(strDataFrameName & "." & txtReceiverSingle.Text)
+            Else
+                clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
+            End If
             Return clsGetVariablesFunc
         Else
             Return clsGetVariablesFunc
@@ -227,7 +248,7 @@ Public Class ucrReceiverSingle
         Return strTemp
     End Function
 
-    Public Overrides Function GetVariableNameslist(Optional bWithQuotes As Boolean = True) As String()
+    Public Overrides Function GetVariableNameslist(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
         Dim arrTemp As String() = Nothing
         arrTemp = {GetVariableNames()}
         Return arrTemp
@@ -288,6 +309,7 @@ Public Class ucrReceiverSingle
     End Sub
 
     Public Sub CheckAutoFill()
+
         'TODO When there are receivers with bAttachedToPrimaryDataFrame = False
         '     don't always want to autofill when dataframe is changed.
         '     Something like AndAlso Selector.CurrentReceiver.bAttachedToPrimaryDataFrame
@@ -302,7 +324,8 @@ Public Class ucrReceiverSingle
 
     Private Sub ParentForm_Shown()
         If bFirstShown Then
-            CheckAutoFill()
+            'This is not needed probably
+            'CheckAutoFill()
             bFirstShown = False
         End If
     End Sub

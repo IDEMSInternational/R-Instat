@@ -34,7 +34,6 @@ Public Class dlgLinePlot
     Private bResetSubdialog As Boolean = True
     Private clsLocalRaesFunction As New RFunction
     Private bResetLineLayerSubdialog As Boolean = True
-
     Private clsGeomSmoothFunc As New RFunction
     Private clsGeomSmoothParameter As New RParameter
 
@@ -77,6 +76,11 @@ Public Class dlgLinePlot
         ucrFactorOptionalReceiver.strSelectorHeading = "Factors"
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.SetParameterIsString()
+
+        ucrReceiverGroup.SetParameter(New RParameter("group", 2))
+        ucrReceiverGroup.Selector = ucrLinePlotSelector
+        ucrReceiverGroup.bWithQuotes = False
+        ucrReceiverGroup.SetParameterIsString()
 
         ucrVariablesAsFactorForLinePlot.SetParameter(New RParameter("y", 1))
         ucrVariablesAsFactorForLinePlot.SetFactorReceiver(ucrFactorOptionalReceiver)
@@ -170,6 +174,7 @@ Public Class dlgLinePlot
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrVariablesAsFactorForLinePlot.SetRCode(clsRaesFunction, bReset)
         ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrReceiverGroup.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
@@ -230,6 +235,8 @@ Public Class dlgLinePlot
                 End If
             ElseIf clsParam.strArgumentName = "colour" Then
                 ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "group" Then
+                ucrReceiverGroup.Add(clsParam.strArgumentValue)
             End If
         Next
         TestOkEnabled()
@@ -243,9 +250,19 @@ Public Class dlgLinePlot
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
-        If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor") Then
+    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged
+        SetGroupParam()
+    End Sub
+
+    Private Sub SetGroupParam()
+        If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("group", "1", iPosition:=3)
+            ucrReceiverGroup.Enabled = False
+
+        ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
+            ucrReceiverGroup.Enabled = True
+            ucrReceiverGroup.SetText(ucrFactorOptionalReceiver.GetVariableNames(False))
+            clsRaesFunction.AddParameter("group", ucrReceiverGroup.GetVariableNames(False), iPosition:=3)
         Else
             clsRaesFunction.RemoveParameterByName("group")
         End If

@@ -164,6 +164,10 @@
   <data name="lblCutOffTwo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblCutOffTwo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblCutOffTwo.Location" type="System.Drawing.Point, System.Drawing">
     <value>127, 57</value>
   </data>
@@ -212,6 +216,9 @@
   <data name="lblYearTwo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblYearTwo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblYearTwo.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 19</value>
   </data>
@@ -239,41 +246,20 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>27</value>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>521, 466</value>
-  </data>
-  <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 377</value>
-  </data>
-  <data name="cmdHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 22</value>
-  </data>
-  <data name="cmdHelp.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="cmdHelp.Text" xml:space="preserve">
-    <value>Help...</value>
-  </data>
-  <data name="&gt;&gt;cmdHelp.Name" xml:space="preserve">
-    <value>cmdHelp</value>
-  </data>
-  <data name="&gt;&gt;cmdHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdHelp.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdHelp.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>597, 477</value>
   </data>
   <data name="txtTextDateFormats.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 17</value>
   </data>
   <data name="txtTextDateFormats.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 144</value>
+    <value>296, 144</value>
   </data>
   <data name="txtTextDateFormats.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -313,13 +299,13 @@ Examples:
     <value>0</value>
   </data>
   <data name="grpFormats.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 197</value>
+    <value>263, 215</value>
   </data>
   <data name="grpFormats.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 174</value>
+    <value>307, 168</value>
   </data>
   <data name="grpFormats.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>6</value>
   </data>
   <data name="grpFormats.Text" xml:space="preserve">
     <value>Format Description</value>
@@ -334,152 +320,85 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpFormats.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rdoThreeColumns.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoThreeColumns.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoThreeColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>315, 11</value>
-  </data>
-  <data name="rdoThreeColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 28</value>
-  </data>
-  <data name="rdoThreeColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="rdoThreeColumns.Text" xml:space="preserve">
-    <value>Year - Month - Day</value>
-  </data>
-  <data name="rdoThreeColumns.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoThreeColumns.Name" xml:space="preserve">
-    <value>rdoThreeColumns</value>
-  </data>
-  <data name="&gt;&gt;rdoThreeColumns.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoThreeColumns.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoThreeColumns.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="rdoTwoColumns.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoTwoColumns.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoTwoColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 11</value>
-  </data>
-  <data name="rdoTwoColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 28</value>
-  </data>
-  <data name="rdoTwoColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="rdoTwoColumns.Text" xml:space="preserve">
-    <value>Year and Day of Year</value>
-  </data>
-  <data name="rdoTwoColumns.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoTwoColumns.Name" xml:space="preserve">
-    <value>rdoTwoColumns</value>
-  </data>
-  <data name="&gt;&gt;rdoTwoColumns.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoTwoColumns.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoTwoColumns.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="rdoSingleColumn.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoSingleColumn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoSingleColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 11</value>
-  </data>
-  <data name="rdoSingleColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 28</value>
-  </data>
-  <data name="rdoSingleColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="rdoSingleColumn.Text" xml:space="preserve">
-    <value>Single Column</value>
-  </data>
-  <data name="rdoSingleColumn.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoSingleColumn.Name" xml:space="preserve">
-    <value>rdoSingleColumn</value>
-  </data>
-  <data name="&gt;&gt;rdoSingleColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoSingleColumn.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoSingleColumn.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrPnlDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 7</value>
-  </data>
-  <data name="ucrPnlDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 35</value>
-  </data>
-  <data name="ucrPnlDate.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;ucrPnlDate.Name" xml:space="preserve">
-    <value>ucrPnlDate</value>
+  <data name="lblUnits.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;ucrPnlDate.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="lblUnits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;ucrPnlDate.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="lblUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>115, 144</value>
   </data>
-  <data name="&gt;&gt;ucrPnlDate.ZOrder" xml:space="preserve">
+  <data name="lblUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 13</value>
+  </data>
+  <data name="lblUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblUnits.Text" xml:space="preserve">
+    <value>Units</value>
+  </data>
+  <data name="&gt;&gt;lblUnits.Name" xml:space="preserve">
+    <value>lblUnits</value>
+  </data>
+  <data name="&gt;&gt;lblUnits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblUnits.Parent" xml:space="preserve">
+    <value>grpSingleColumn</value>
+  </data>
+  <data name="&gt;&gt;lblUnits.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrDtpSpecifyOrigin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>114, 110</value>
+  </data>
+  <data name="ucrDtpSpecifyOrigin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 21</value>
+  </data>
+  <data name="ucrDtpSpecifyOrigin.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="ucrSaveDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 377</value>
+  <data name="&gt;&gt;ucrDtpSpecifyOrigin.Name" xml:space="preserve">
+    <value>ucrDtpSpecifyOrigin</value>
   </data>
-  <data name="ucrSaveDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 24</value>
+  <data name="&gt;&gt;ucrDtpSpecifyOrigin.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="ucrSaveDate.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;ucrDtpSpecifyOrigin.Parent" xml:space="preserve">
+    <value>grpSingleColumn</value>
   </data>
-  <data name="&gt;&gt;ucrSaveDate.Name" xml:space="preserve">
-    <value>ucrSaveDate</value>
+  <data name="&gt;&gt;ucrDtpSpecifyOrigin.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;ucrSaveDate.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="ucrInputUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 140</value>
   </data>
-  <data name="&gt;&gt;ucrSaveDate.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="ucrInputUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 21</value>
   </data>
-  <data name="&gt;&gt;ucrSaveDate.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="ucrInputUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrInputUnits.Name" xml:space="preserve">
+    <value>ucrInputUnits</value>
+  </data>
+  <data name="&gt;&gt;ucrInputUnits.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputUnits.Parent" xml:space="preserve">
+    <value>grpSingleColumn</value>
+  </data>
+  <data name="&gt;&gt;ucrInputUnits.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 99</value>
@@ -508,6 +427,9 @@ Examples:
   <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 73</value>
   </data>
@@ -535,6 +457,9 @@ Examples:
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 47</value>
   </data>
@@ -561,6 +486,9 @@ Examples:
   </data>
   <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 21</value>
@@ -671,13 +599,13 @@ Examples:
     <value>7</value>
   </data>
   <data name="grpFormatField.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 153</value>
+    <value>8, 172</value>
   </data>
   <data name="grpFormatField.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 124</value>
   </data>
   <data name="grpFormatField.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="grpFormatField.Text" xml:space="preserve">
     <value>Format Field</value>
@@ -692,19 +620,22 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;grpFormatField.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="rdoSpecifyFormat.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoSpecifyFormat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoSpecifyFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 122</value>
+    <value>15, 110</value>
   </data>
   <data name="rdoSpecifyFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 17</value>
   </data>
   <data name="rdoSpecifyFormat.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="rdoSpecifyFormat.Text" xml:space="preserve">
     <value>Specify Format</value>
@@ -719,46 +650,52 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;rdoSpecifyFormat.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
-  <data name="rdoSpecifyOrigin.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoOrigin.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdoSpecifyOrigin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 93</value>
+  <data name="rdoOrigin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="rdoSpecifyOrigin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 17</value>
+  <data name="rdoOrigin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 81</value>
   </data>
-  <data name="rdoSpecifyOrigin.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="rdoOrigin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 17</value>
   </data>
-  <data name="rdoSpecifyOrigin.Text" xml:space="preserve">
-    <value>Specify Origin</value>
+  <data name="rdoOrigin.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;rdoSpecifyOrigin.Name" xml:space="preserve">
-    <value>rdoSpecifyOrigin</value>
+  <data name="rdoOrigin.Text" xml:space="preserve">
+    <value>Origin</value>
   </data>
-  <data name="&gt;&gt;rdoSpecifyOrigin.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoOrigin.Name" xml:space="preserve">
+    <value>rdoOrigin</value>
+  </data>
+  <data name="&gt;&gt;rdoOrigin.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoSpecifyOrigin.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoOrigin.Parent" xml:space="preserve">
     <value>grpSingleColumn</value>
   </data>
-  <data name="&gt;&gt;rdoSpecifyOrigin.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;rdoOrigin.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="rdoDefaultFormat.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoDefaultFormat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoDefaultFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 64</value>
+    <value>15, 52</value>
   </data>
   <data name="rdoDefaultFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 17</value>
   </data>
   <data name="rdoDefaultFormat.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="rdoDefaultFormat.Text" xml:space="preserve">
     <value>Default Format</value>
@@ -773,16 +710,16 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;rdoDefaultFormat.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="ucrPnlFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 59</value>
+    <value>8, 47</value>
   </data>
   <data name="ucrPnlFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 88</value>
+    <value>99, 88</value>
   </data>
   <data name="ucrPnlFormat.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrPnlFormat.Name" xml:space="preserve">
     <value>ucrPnlFormat</value>
@@ -794,10 +731,10 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrPnlFormat.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="ucrReceiverForDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 34</value>
+    <value>6, 25</value>
   </data>
   <data name="ucrReceiverForDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -818,10 +755,10 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrReceiverForDate.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="ucrInputFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 122</value>
+    <value>128, 110</value>
   </data>
   <data name="ucrInputFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 21</value>
@@ -839,10 +776,10 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrInputFormat.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="ucrInputOrigin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 92</value>
+    <value>114, 80</value>
   </data>
   <data name="ucrInputOrigin.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 21</value>
@@ -860,13 +797,13 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrInputOrigin.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="grpSingleColumn.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 51</value>
   </data>
   <data name="grpSingleColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 320</value>
+    <value>318, 336</value>
   </data>
   <data name="grpSingleColumn.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -884,70 +821,376 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpSingleColumn.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="lblYearOption.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblYearOption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 17</value>
-  </data>
-  <data name="lblYearOption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
-  </data>
-  <data name="lblYearOption.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="lblYearOption.Text" xml:space="preserve">
-    <value>Year Option:</value>
-  </data>
-  <data name="&gt;&gt;lblYearOption.Name" xml:space="preserve">
-    <value>lblYearOption</value>
-  </data>
-  <data name="&gt;&gt;lblYearOption.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblYearOption.Parent" xml:space="preserve">
-    <value>grpThreeColumns</value>
-  </data>
-  <data name="&gt;&gt;lblYearOption.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblMonthOption.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblMonthOption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 59</value>
-  </data>
-  <data name="lblMonthOption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 13</value>
-  </data>
-  <data name="lblMonthOption.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="lblMonthOption.Text" xml:space="preserve">
-    <value>Month Option:</value>
-  </data>
-  <data name="&gt;&gt;lblMonthOption.Name" xml:space="preserve">
-    <value>lblMonthOption</value>
-  </data>
-  <data name="&gt;&gt;lblMonthOption.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonthOption.Parent" xml:space="preserve">
-    <value>grpThreeColumns</value>
-  </data>
-  <data name="&gt;&gt;lblMonthOption.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrInputDayThree.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 247</value>
+  </data>
+  <data name="ucrInputDayThree.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 21</value>
+  </data>
+  <data name="ucrInputDayThree.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDayThree.Name" xml:space="preserve">
+    <value>ucrInputDayThree</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDayThree.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDayThree.Parent" xml:space="preserve">
+    <value>grpThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDayThree.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoDayValue.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoDayValue.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoDayValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoDayValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>58, 213</value>
+  </data>
+  <data name="rdoDayValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 23</value>
+  </data>
+  <data name="rdoDayValue.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="rdoDayValue.Text" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="rdoDayValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoDayValue.Name" xml:space="preserve">
+    <value>rdoDayValue</value>
+  </data>
+  <data name="&gt;&gt;rdoDayValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDayValue.Parent" xml:space="preserve">
+    <value>grpThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;rdoDayValue.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoDayColumn.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoDayColumn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoDayColumn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoDayColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 213</value>
+  </data>
+  <data name="rdoDayColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 23</value>
+  </data>
+  <data name="rdoDayColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="rdoDayColumn.Text" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="rdoDayColumn.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoDayColumn.Name" xml:space="preserve">
+    <value>rdoDayColumn</value>
+  </data>
+  <data name="&gt;&gt;rdoDayColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDayColumn.Parent" xml:space="preserve">
+    <value>grpThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;rdoDayColumn.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrPnlDayType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 207</value>
+  </data>
+  <data name="ucrPnlDayType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 34</value>
+  </data>
+  <data name="ucrPnlDayType.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDayType.Name" xml:space="preserve">
+    <value>ucrPnlDayType</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDayType.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDayType.Parent" xml:space="preserve">
+    <value>grpThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDayType.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrInputYearThree.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 68</value>
+  </data>
+  <data name="ucrInputYearThree.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 21</value>
+  </data>
+  <data name="ucrInputYearThree.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYearThree.Name" xml:space="preserve">
+    <value>ucrInputYearThree</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYearThree.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYearThree.Parent" xml:space="preserve">
+    <value>grpThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYearThree.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rdoYearValue.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoYearValue.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoYearValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoYearValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 38</value>
+  </data>
+  <data name="rdoYearValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 23</value>
+  </data>
+  <data name="rdoYearValue.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoYearValue.Text" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="rdoYearValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoYearValue.Name" xml:space="preserve">
+    <value>rdoYearValue</value>
+  </data>
+  <data name="&gt;&gt;rdoYearValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoYearValue.Parent" xml:space="preserve">
+    <value>grpThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;rdoYearValue.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rdoYearColumn.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoYearColumn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoYearColumn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoYearColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 38</value>
+  </data>
+  <data name="rdoYearColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 23</value>
+  </data>
+  <data name="rdoYearColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoYearColumn.Text" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="rdoYearColumn.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoYearColumn.Name" xml:space="preserve">
+    <value>rdoYearColumn</value>
+  </data>
+  <data name="&gt;&gt;rdoYearColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoYearColumn.Parent" xml:space="preserve">
+    <value>grpThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;rdoYearColumn.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="rdoMonthValue.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoMonthValue.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoMonthValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoMonthValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>58, 128</value>
+  </data>
+  <data name="rdoMonthValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 23</value>
+  </data>
+  <data name="rdoMonthValue.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="rdoMonthValue.Text" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="rdoMonthValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoMonthValue.Name" xml:space="preserve">
+    <value>rdoMonthValue</value>
+  </data>
+  <data name="&gt;&gt;rdoMonthValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoMonthValue.Parent" xml:space="preserve">
+    <value>grpThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;rdoMonthValue.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="rdoMonthColumn.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoMonthColumn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoMonthColumn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoMonthColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 128</value>
+  </data>
+  <data name="rdoMonthColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 23</value>
+  </data>
+  <data name="rdoMonthColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="rdoMonthColumn.Text" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="rdoMonthColumn.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoMonthColumn.Name" xml:space="preserve">
+    <value>rdoMonthColumn</value>
+  </data>
+  <data name="&gt;&gt;rdoMonthColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoMonthColumn.Parent" xml:space="preserve">
+    <value>grpThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;rdoMonthColumn.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrInputMonthThree.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 159</value>
+  </data>
+  <data name="ucrInputMonthThree.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 21</value>
+  </data>
+  <data name="ucrInputMonthThree.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMonthThree.Name" xml:space="preserve">
+    <value>ucrInputMonthThree</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMonthThree.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMonthThree.Parent" xml:space="preserve">
+    <value>grpThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMonthThree.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblYearFormat.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblYearFormat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblYearFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 50</value>
+  </data>
+  <data name="lblYearFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
+  </data>
+  <data name="lblYearFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblYearFormat.Text" xml:space="preserve">
+    <value>Format:</value>
+  </data>
+  <data name="&gt;&gt;lblYearFormat.Name" xml:space="preserve">
+    <value>lblYearFormat</value>
+  </data>
+  <data name="&gt;&gt;lblYearFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblYearFormat.Parent" xml:space="preserve">
+    <value>grpThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;lblYearFormat.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lblMonthFormat.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMonthFormat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMonthFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 141</value>
+  </data>
+  <data name="lblMonthFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
+  </data>
+  <data name="lblMonthFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblMonthFormat.Text" xml:space="preserve">
+    <value>Format:</value>
+  </data>
+  <data name="&gt;&gt;lblMonthFormat.Name" xml:space="preserve">
+    <value>lblMonthFormat</value>
+  </data>
+  <data name="&gt;&gt;lblMonthFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMonthFormat.Parent" xml:space="preserve">
+    <value>grpThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;lblMonthFormat.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
   <data name="ucrInputMonthOption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 74</value>
+    <value>151, 158</value>
   </data>
   <data name="ucrInputMonthOption.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 21</value>
   </data>
   <data name="ucrInputMonthOption.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrInputMonthOption.Name" xml:space="preserve">
     <value>ucrInputMonthOption</value>
@@ -959,16 +1202,16 @@ Examples:
     <value>grpThreeColumns</value>
   </data>
   <data name="&gt;&gt;ucrInputMonthOption.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>12</value>
   </data>
   <data name="ucrInputYearOption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 32</value>
+    <value>151, 67</value>
   </data>
   <data name="ucrInputYearOption.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 21</value>
   </data>
   <data name="ucrInputYearOption.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrInputYearOption.Name" xml:space="preserve">
     <value>ucrInputYearOption</value>
@@ -980,19 +1223,22 @@ Examples:
     <value>grpThreeColumns</value>
   </data>
   <data name="&gt;&gt;ucrInputYearOption.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>13</value>
   </data>
   <data name="lblDayofMonth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblDayofMonth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblDayofMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 103</value>
+    <value>7, 194</value>
   </data>
   <data name="lblDayofMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 13</value>
   </data>
   <data name="lblDayofMonth.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>12</value>
   </data>
   <data name="lblDayofMonth.Text" xml:space="preserve">
     <value>Day of Month:</value>
@@ -1007,19 +1253,22 @@ Examples:
     <value>grpThreeColumns</value>
   </data>
   <data name="&gt;&gt;lblDayofMonth.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>14</value>
   </data>
   <data name="lblMonthThree.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblMonthThree.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblMonthThree.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 60</value>
+    <value>7, 110</value>
   </data>
   <data name="lblMonthThree.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
   </data>
   <data name="lblMonthThree.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="lblMonthThree.Text" xml:space="preserve">
     <value>Month:</value>
@@ -1034,10 +1283,13 @@ Examples:
     <value>grpThreeColumns</value>
   </data>
   <data name="&gt;&gt;lblMonthThree.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>15</value>
   </data>
   <data name="lblYearThree.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblYearThree.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblYearThree.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 19</value>
@@ -1061,16 +1313,16 @@ Examples:
     <value>grpThreeColumns</value>
   </data>
   <data name="&gt;&gt;lblYearThree.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>16</value>
   </data>
   <data name="ucrReceiverYearThree.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 34</value>
+    <value>8, 68</value>
   </data>
   <data name="ucrReceiverYearThree.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverYearThree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 20</value>
+    <value>106, 20</value>
   </data>
   <data name="ucrReceiverYearThree.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1085,16 +1337,16 @@ Examples:
     <value>grpThreeColumns</value>
   </data>
   <data name="&gt;&gt;ucrReceiverYearThree.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>17</value>
   </data>
   <data name="ucrReceiverDayThree.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 117</value>
+    <value>8, 247</value>
   </data>
   <data name="ucrReceiverDayThree.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverDayThree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 20</value>
+    <value>106, 20</value>
   </data>
   <data name="ucrReceiverDayThree.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1109,16 +1361,16 @@ Examples:
     <value>grpThreeColumns</value>
   </data>
   <data name="&gt;&gt;ucrReceiverDayThree.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>18</value>
   </data>
   <data name="ucrReceiverMonthThree.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 74</value>
+    <value>8, 159</value>
   </data>
   <data name="ucrReceiverMonthThree.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverMonthThree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 20</value>
+    <value>106, 20</value>
   </data>
   <data name="ucrReceiverMonthThree.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1133,19 +1385,61 @@ Examples:
     <value>grpThreeColumns</value>
   </data>
   <data name="&gt;&gt;ucrReceiverMonthThree.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>19</value>
+  </data>
+  <data name="ucrPnlYearType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 32</value>
+  </data>
+  <data name="ucrPnlYearType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 34</value>
+  </data>
+  <data name="ucrPnlYearType.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlYearType.Name" xml:space="preserve">
+    <value>ucrPnlYearType</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlYearType.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlYearType.Parent" xml:space="preserve">
+    <value>grpThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlYearType.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="ucrPnlMonthType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 122</value>
+  </data>
+  <data name="ucrPnlMonthType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 34</value>
+  </data>
+  <data name="ucrPnlMonthType.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMonthType.Name" xml:space="preserve">
+    <value>ucrPnlMonthType</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMonthType.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMonthType.Parent" xml:space="preserve">
+    <value>grpThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMonthType.ZOrder" xml:space="preserve">
+    <value>21</value>
   </data>
   <data name="grpThreeColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 51</value>
   </data>
   <data name="grpThreeColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 157</value>
+    <value>267, 292</value>
   </data>
   <data name="grpThreeColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="grpThreeColumns.Text" xml:space="preserve">
-    <value>Three Columns</value>
+    <value>Year Month Day</value>
   </data>
   <data name="&gt;&gt;grpThreeColumns.Name" xml:space="preserve">
     <value>grpThreeColumns</value>
@@ -1157,16 +1451,193 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpThreeColumns.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cmdHelp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>426, 389</value>
+  </data>
+  <data name="cmdHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 22</value>
+  </data>
+  <data name="cmdHelp.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
+  <data name="cmdHelp.Text" xml:space="preserve">
+    <value>Help...</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.Name" xml:space="preserve">
+    <value>cmdHelp</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="rdoThreeColumns.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoThreeColumns.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoThreeColumns.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoThreeColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>349, 11</value>
+  </data>
+  <data name="rdoThreeColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 28</value>
+  </data>
+  <data name="rdoThreeColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoThreeColumns.Text" xml:space="preserve">
+    <value>Year - Month - Day</value>
+  </data>
+  <data name="rdoThreeColumns.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoThreeColumns.Name" xml:space="preserve">
+    <value>rdoThreeColumns</value>
+  </data>
+  <data name="&gt;&gt;rdoThreeColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoThreeColumns.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoThreeColumns.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rdoTwoColumns.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoTwoColumns.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoTwoColumns.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoTwoColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>214, 11</value>
+  </data>
+  <data name="rdoTwoColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 28</value>
+  </data>
+  <data name="rdoTwoColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoTwoColumns.Text" xml:space="preserve">
+    <value>Year and Day of Year</value>
+  </data>
+  <data name="rdoTwoColumns.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoTwoColumns.Name" xml:space="preserve">
+    <value>rdoTwoColumns</value>
+  </data>
+  <data name="&gt;&gt;rdoTwoColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoTwoColumns.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoTwoColumns.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rdoSingleColumn.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoSingleColumn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoSingleColumn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoSingleColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 11</value>
+  </data>
+  <data name="rdoSingleColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 28</value>
+  </data>
+  <data name="rdoSingleColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoSingleColumn.Text" xml:space="preserve">
+    <value>Single Column</value>
+  </data>
+  <data name="rdoSingleColumn.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoSingleColumn.Name" xml:space="preserve">
+    <value>rdoSingleColumn</value>
+  </data>
+  <data name="&gt;&gt;rdoSingleColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSingleColumn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoSingleColumn.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrPnlDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>67, 7</value>
+  </data>
+  <data name="ucrPnlDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>450, 35</value>
+  </data>
+  <data name="ucrPnlDate.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDate.Name" xml:space="preserve">
+    <value>ucrPnlDate</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDate.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDate.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrSaveDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 394</value>
+  </data>
+  <data name="ucrSaveDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 24</value>
+  </data>
+  <data name="ucrSaveDate.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveDate.Name" xml:space="preserve">
+    <value>ucrSaveDate</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveDate.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveDate.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 407</value>
+    <value>10, 422</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>417, 54</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -1190,7 +1661,7 @@ Examples:
     <value>210, 180</value>
   </data>
   <data name="ucrSelectorMakeDate.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrSelectorMakeDate.Name" xml:space="preserve">
     <value>ucrSelectorMakeDate</value>
@@ -1249,6 +1720,9 @@ Examples:
   <data name="lblDayofYear.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblDayofYear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblDayofYear.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 86</value>
   </data>
@@ -1304,7 +1778,7 @@ Examples:
     <value>252, 139</value>
   </data>
   <data name="grpTwoColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="grpTwoColumns.Text" xml:space="preserve">
     <value>Two Columns</value>
@@ -1319,7 +1793,7 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpTwoColumns.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <metadata name="ttMakeDate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

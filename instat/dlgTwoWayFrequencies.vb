@@ -73,6 +73,7 @@ Public Class dlgTwoWayFrequencies
         'setting selector
         ucrSelectorTwoWayFrequencies.SetParameter(New RParameter("data", 0))
         ucrSelectorTwoWayFrequencies.SetParameterIsrfunction()
+        ucrSelectorTwoWayFrequencies.bDropUnusedFilterLevels = True
 
         'ucrReceiverWeights
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 3))
@@ -119,6 +120,9 @@ Public Class dlgTwoWayFrequencies
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetRDefault("FALSE")
 
+        ucrChkFacetGrid.SetParameter(New RParameter("facet.grid", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkFacetGrid.SetText("Facet by Column Factor")
+
         'Setting ucrPnlFreqDisplay
         ucrPnlFreqDisplay.AddRadioButton(rdoTable)
         ucrPnlFreqDisplay.AddRadioButton(rdoGraph)
@@ -135,6 +139,7 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrPnlFreqType, {rdoGraph, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoCount)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFreqDisplay.AddToLinkedControls(ucrChkFacetGrid, {rdoGraph, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
         ucrPnlFreqType.SetLinkedDisplayControl(grpFreqTypeGraph)
 
         ucrSaveGraph.SetPrefix("two_way_freq")
@@ -172,6 +177,7 @@ Public Class dlgTwoWayFrequencies
         clsSjPlot.AddParameter("show.prc", "TRUE")
         clsSjPlot.AddParameter("show.n", "TRUE")
         clsSjPlot.AddParameter("title", Chr(34) & "" & Chr(34))
+        clsSjPlot.AddParameter("facet.grid", "TRUE")
         clsSjPlot.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
         bResetSubdialog = True
@@ -208,6 +214,7 @@ Public Class dlgTwoWayFrequencies
         ucrChkColumn.SetRCode(clsSjTab, bReset)
         ucrChkRow.SetRCode(clsSjTab, bReset)
         ucrChkCount.SetRCode(clsSjTab, bReset)
+        ucrChkFacetGrid.SetRCode(clsSjPlot)
         ucrSaveGraph.SetRCode(clsSjPlot, bReset)
         SetLocations()
     End Sub
@@ -328,6 +335,19 @@ Public Class dlgTwoWayFrequencies
         Else
             clsSjPlot.RemoveParameterByName("margin")
         End If
+        AddRemoveFacets()
+    End Sub
+
+    Private Sub AddRemoveFacets()
+        If rdoCount.Checked Then
+            ucrChkFacetGrid.Enabled = True
+            If ucrChkFacetGrid.Checked Then
+                clsSjPlot.AddParameter("facet.grid", "TRUE")
+            End If
+        Else
+                clsSjPlot.RemoveParameterByName("facet.grid")
+            ucrChkFacetGrid.Enabled = False
+        End If
     End Sub
 
     Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged
@@ -352,5 +372,9 @@ Public Class dlgTwoWayFrequencies
             ' ucrBase.clsRsyntax.bHTMLOutput = False
             ucrBase.clsRsyntax.iCallType = 3
         End If
+    End Sub
+
+    Private Sub ucrChkFacetGrid_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFacetGrid.ControlValueChanged
+        AddRemoveFacets()
     End Sub
 End Class

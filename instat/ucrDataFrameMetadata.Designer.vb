@@ -38,16 +38,21 @@ Partial Class ucrDataFrameMetadata
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.grdMetaData = New unvell.ReoGrid.ReoGridControl()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlpTableContainer.SuspendLayout()
+        Me.cellContextMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'grdMetaData
         '
         Me.grdMetaData.BackColor = System.Drawing.Color.White
         Me.grdMetaData.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdMetaData.ContextMenuStrip = Me.cellContextMenuStrip
         Me.grdMetaData.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdMetaData.LeadHeaderContextMenuStrip = Nothing
         Me.grdMetaData.Location = New System.Drawing.Point(3, 23)
@@ -91,6 +96,18 @@ Partial Class ucrDataFrameMetadata
         Me.tlpTableContainer.Size = New System.Drawing.Size(477, 317)
         Me.tlpTableContainer.TabIndex = 8
         '
+        'cellContextMenuStrip
+        '
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelp})
+        Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(100, 26)
+        '
+        'mnuHelp
+        '
+        Me.mnuHelp.Name = "mnuHelp"
+        Me.mnuHelp.Size = New System.Drawing.Size(152, 22)
+        Me.mnuHelp.Text = "Help"
+        '
         'ucrDataFrameMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -99,6 +116,7 @@ Partial Class ucrDataFrameMetadata
         Me.Name = "ucrDataFrameMetadata"
         Me.Size = New System.Drawing.Size(477, 317)
         Me.tlpTableContainer.ResumeLayout(False)
+        Me.cellContextMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -106,4 +124,6 @@ Partial Class ucrDataFrameMetadata
     Friend WithEvents grdMetaData As unvell.ReoGrid.ReoGridControl
     Friend WithEvents lblHeader As Label
     Friend WithEvents tlpTableContainer As TableLayoutPanel
+    Friend WithEvents cellContextMenuStrip As ContextMenuStrip
+    Friend WithEvents mnuHelp As ToolStripMenuItem
 End Class

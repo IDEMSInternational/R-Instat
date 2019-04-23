@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblTextFilePreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 9</value>
+    <value>293, 9</value>
   </data>
   <data name="lblTextFilePreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 13</value>
@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTextFilePreview.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>25</value>
   </data>
   <data name="lblDataFrame.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDataFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 239</value>
+    <value>293, 239</value>
   </data>
   <data name="lblDataFrame.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 13</value>
@@ -178,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblDataFrame.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>24</value>
   </data>
   <data name="lblEncodingCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblEncodingCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 29</value>
+    <value>7, 17</value>
   </data>
   <data name="lblEncodingCSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
@@ -208,7 +208,7 @@
     <value>grpCSV</value>
   </data>
   <data name="&gt;&gt;lblEncodingCSV.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="lblHeadersCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -217,16 +217,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblHeadersCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 63</value>
+    <value>5, 62</value>
   </data>
   <data name="lblHeadersCSV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 13</value>
+    <value>143, 13</value>
   </data>
   <data name="lblHeadersCSV.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="lblHeadersCSV.Text" xml:space="preserve">
-    <value>First Row is Column Headers:</value>
+    <value>First Line is Column Headers:</value>
   </data>
   <data name="&gt;&gt;lblHeadersCSV.Name" xml:space="preserve">
     <value>lblHeadersCSV</value>
@@ -238,37 +238,7 @@
     <value>grpCSV</value>
   </data>
   <data name="&gt;&gt;lblHeadersCSV.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="lblRowNamesCSV.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblRowNamesCSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblRowNamesCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 111</value>
-  </data>
-  <data name="lblRowNamesCSV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 13</value>
-  </data>
-  <data name="lblRowNamesCSV.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="lblRowNamesCSV.Text" xml:space="preserve">
-    <value>First Column is Row Names:</value>
-  </data>
-  <data name="&gt;&gt;lblRowNamesCSV.Name" xml:space="preserve">
-    <value>lblRowNamesCSV</value>
-  </data>
-  <data name="&gt;&gt;lblRowNamesCSV.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblRowNamesCSV.Parent" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;lblRowNamesCSV.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="lblSeparatorCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -277,7 +247,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSeparatorCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 158</value>
+    <value>7, 106</value>
   </data>
   <data name="lblSeparatorCSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -298,7 +268,7 @@
     <value>grpCSV</value>
   </data>
   <data name="&gt;&gt;lblSeparatorCSV.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>12</value>
   </data>
   <data name="lblDecimalCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -307,7 +277,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDecimalCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 185</value>
+    <value>7, 151</value>
   </data>
   <data name="lblDecimalCSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 13</value>
@@ -328,10 +298,10 @@
     <value>grpCSV</value>
   </data>
   <data name="&gt;&gt;lblDecimalCSV.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>14</value>
   </data>
   <data name="txtTextFilePreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 25</value>
+    <value>296, 25</value>
   </data>
   <data name="txtTextFilePreview.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -355,10 +325,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtTextFilePreview.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>23</value>
   </data>
   <data name="grdDataPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 263</value>
+    <value>296, 263</value>
   </data>
   <data name="grdDataPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>422, 174</value>
@@ -370,25 +340,22 @@
     <value>grdDataPreview</value>
   </data>
   <data name="&gt;&gt;grdDataPreview.Type" xml:space="preserve">
-    <value>unvell.ReoGrid.ReoGridControl, unvell.ReoGrid, Version=2.0.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>unvell.ReoGrid.ReoGridControl, unvell.ReoGrid, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grdDataPreview.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grdDataPreview.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="lblFileOpenPath.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>21</value>
   </data>
   <data name="lblFileOpenPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblFileOpenPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 26</value>
+    <value>10, 26</value>
   </data>
   <data name="lblFileOpenPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 13</value>
+    <value>62, 13</value>
   </data>
   <data name="lblFileOpenPath.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -406,7 +373,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFileOpenPath.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>20</value>
   </data>
   <data name="lblLinesToSkipCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -415,7 +382,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLinesToSkipCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 239</value>
+    <value>7, 275</value>
   </data>
   <data name="lblLinesToSkipCSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 13</value>
@@ -436,13 +403,13 @@
     <value>grpCSV</value>
   </data>
   <data name="&gt;&gt;lblLinesToSkipCSV.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>13</value>
   </data>
   <data name="cmdBrowse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 22</value>
+    <value>198, 22</value>
   </data>
   <data name="cmdBrowse.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 23</value>
@@ -463,13 +430,55 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdBrowse.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>19</value>
   </data>
-  <data name="grpCSV.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ucrNudMaxRowsCSV.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 346</value>
   </data>
-  <data name="grpCSV.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
+  <data name="ucrNudMaxRowsCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrNudMaxRowsCSV.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="ucrNudMaxRowsCSV.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMaxRowsCSV.Name" xml:space="preserve">
+    <value>ucrNudMaxRowsCSV</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMaxRowsCSV.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMaxRowsCSV.Parent" xml:space="preserve">
+    <value>grpCSV</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMaxRowsCSV.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkMaxRowsCSV.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 322</value>
+  </data>
+  <data name="ucrChkMaxRowsCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrChkMaxRowsCSV.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 20</value>
+  </data>
+  <data name="ucrChkMaxRowsCSV.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMaxRowsCSV.Name" xml:space="preserve">
+    <value>ucrChkMaxRowsCSV</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMaxRowsCSV.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMaxRowsCSV.Parent" xml:space="preserve">
+    <value>grpCSV</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMaxRowsCSV.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="lblNAStringsCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -478,7 +487,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNAStringsCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 213</value>
+    <value>7, 197</value>
   </data>
   <data name="lblNAStringsCSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 13</value>
@@ -499,10 +508,10 @@
     <value>grpCSV</value>
   </data>
   <data name="&gt;&gt;lblNAStringsCSV.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="ucrChkStringsAsFactorsCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 261</value>
+    <value>10, 245</value>
   </data>
   <data name="ucrChkStringsAsFactorsCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -523,118 +532,34 @@
     <value>grpCSV</value>
   </data>
   <data name="&gt;&gt;ucrChkStringsAsFactorsCSV.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrNudLinesToSkipCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 235</value>
-  </data>
-  <data name="ucrNudLinesToSkipCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ucrNudLinesToSkipCSV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 20</value>
-  </data>
-  <data name="ucrNudLinesToSkipCSV.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;ucrNudLinesToSkipCSV.Name" xml:space="preserve">
-    <value>ucrNudLinesToSkipCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrNudLinesToSkipCSV.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudLinesToSkipCSV.Parent" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrNudLinesToSkipCSV.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="rdoRowNamesNoCSV.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoRowNamesNoCSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoRowNamesNoCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 130</value>
-  </data>
-  <data name="rdoRowNamesNoCSV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 17</value>
-  </data>
-  <data name="rdoRowNamesNoCSV.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="rdoRowNamesNoCSV.Text" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="&gt;&gt;rdoRowNamesNoCSV.Name" xml:space="preserve">
-    <value>rdoRowNamesNoCSV</value>
-  </data>
-  <data name="&gt;&gt;rdoRowNamesNoCSV.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoRowNamesNoCSV.Parent" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;rdoRowNamesNoCSV.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="rdoRowNamesYesCSV.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ucrNudRowsToSkipCSV.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 292</value>
   </data>
-  <data name="rdoRowNamesYesCSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoRowNamesYesCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 131</value>
-  </data>
-  <data name="rdoRowNamesYesCSV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 17</value>
-  </data>
-  <data name="rdoRowNamesYesCSV.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="rdoRowNamesYesCSV.Text" xml:space="preserve">
-    <value>Yes</value>
-  </data>
-  <data name="&gt;&gt;rdoRowNamesYesCSV.Name" xml:space="preserve">
-    <value>rdoRowNamesYesCSV</value>
-  </data>
-  <data name="&gt;&gt;rdoRowNamesYesCSV.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoRowNamesYesCSV.Parent" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;rdoRowNamesYesCSV.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrPnlRowNamesCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 124</value>
-  </data>
-  <data name="ucrPnlRowNamesCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrNudRowsToSkipCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
-  <data name="ucrPnlRowNamesCSV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 24</value>
+  <data name="ucrNudRowsToSkipCSV.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 20</value>
   </data>
-  <data name="ucrPnlRowNamesCSV.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="ucrNudRowsToSkipCSV.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
-  <data name="&gt;&gt;ucrPnlRowNamesCSV.Name" xml:space="preserve">
-    <value>ucrPnlRowNamesCSV</value>
+  <data name="&gt;&gt;ucrNudRowsToSkipCSV.Name" xml:space="preserve">
+    <value>ucrNudRowsToSkipCSV</value>
   </data>
-  <data name="&gt;&gt;ucrPnlRowNamesCSV.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrNudRowsToSkipCSV.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrPnlRowNamesCSV.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudRowsToSkipCSV.Parent" xml:space="preserve">
     <value>grpCSV</value>
   </data>
-  <data name="&gt;&gt;ucrPnlRowNamesCSV.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;ucrNudRowsToSkipCSV.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="ucrInputHeadersCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 78</value>
+    <value>7, 77</value>
   </data>
   <data name="ucrInputHeadersCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -655,34 +580,34 @@
     <value>grpCSV</value>
   </data>
   <data name="&gt;&gt;ucrInputHeadersCSV.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
-  <data name="ucrInputNAStringsCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 208</value>
+  <data name="ucrInputMissingValueStringCSV.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 213</value>
   </data>
-  <data name="ucrInputNAStringsCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrInputMissingValueStringCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
   </data>
-  <data name="ucrInputNAStringsCSV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 21</value>
+  <data name="ucrInputMissingValueStringCSV.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 21</value>
   </data>
-  <data name="ucrInputNAStringsCSV.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrInputMissingValueStringCSV.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;ucrInputNAStringsCSV.Name" xml:space="preserve">
-    <value>ucrInputNAStringsCSV</value>
+  <data name="&gt;&gt;ucrInputMissingValueStringCSV.Name" xml:space="preserve">
+    <value>ucrInputMissingValueStringCSV</value>
   </data>
-  <data name="&gt;&gt;ucrInputNAStringsCSV.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputMissingValueStringCSV.Type" xml:space="preserve">
     <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputNAStringsCSV.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputMissingValueStringCSV.Parent" xml:space="preserve">
     <value>grpCSV</value>
   </data>
-  <data name="&gt;&gt;ucrInputNAStringsCSV.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;ucrInputMissingValueStringCSV.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="ucrInputDecimalCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 181</value>
+    <value>9, 168</value>
   </data>
   <data name="ucrInputDecimalCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -703,10 +628,10 @@
     <value>grpCSV</value>
   </data>
   <data name="&gt;&gt;ucrInputDecimalCSV.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="ucrInputSeparatorCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 154</value>
+    <value>8, 122</value>
   </data>
   <data name="ucrInputSeparatorCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -727,10 +652,10 @@
     <value>grpCSV</value>
   </data>
   <data name="&gt;&gt;ucrInputSeparatorCSV.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="ucrInputEncodingCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 25</value>
+    <value>7, 32</value>
   </data>
   <data name="ucrInputEncodingCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -751,13 +676,13 @@
     <value>grpCSV</value>
   </data>
   <data name="&gt;&gt;ucrInputEncodingCSV.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="grpCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 91</value>
+    <value>10, 130</value>
   </data>
   <data name="grpCSV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 302</value>
+    <value>227, 372</value>
   </data>
   <data name="grpCSV.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -778,10 +703,58 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpCSV.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>16</value>
+  </data>
+  <data name="ucrNudMaxRowsExcel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 218</value>
+  </data>
+  <data name="ucrNudMaxRowsExcel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrNudMaxRowsExcel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="ucrNudMaxRowsExcel.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMaxRowsExcel.Name" xml:space="preserve">
+    <value>ucrNudMaxRowsExcel</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMaxRowsExcel.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMaxRowsExcel.Parent" xml:space="preserve">
+    <value>grpExcel</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMaxRowsExcel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkColumnNamesExcel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 72</value>
+  </data>
+  <data name="ucrChkColumnNamesExcel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrChkColumnNamesExcel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 20</value>
+  </data>
+  <data name="ucrChkColumnNamesExcel.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrChkColumnNamesExcel.Name" xml:space="preserve">
+    <value>ucrChkColumnNamesExcel</value>
+  </data>
+  <data name="&gt;&gt;ucrChkColumnNamesExcel.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkColumnNamesExcel.Parent" xml:space="preserve">
+    <value>grpExcel</value>
+  </data>
+  <data name="&gt;&gt;ucrChkColumnNamesExcel.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrChkMaxRowsExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 169</value>
+    <value>7, 194</value>
   </data>
   <data name="ucrChkMaxRowsExcel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -802,10 +775,10 @@
     <value>grpExcel</value>
   </data>
   <data name="&gt;&gt;ucrChkMaxRowsExcel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="ucrChkTrimWSExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 118</value>
+    <value>7, 104</value>
   </data>
   <data name="ucrChkTrimWSExcel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -826,10 +799,10 @@
     <value>grpExcel</value>
   </data>
   <data name="&gt;&gt;ucrChkTrimWSExcel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrNudRowsToSkipExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 140</value>
+    <value>7, 156</value>
   </data>
   <data name="ucrNudRowsToSkipExcel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -850,31 +823,7 @@
     <value>grpExcel</value>
   </data>
   <data name="&gt;&gt;ucrNudRowsToSkipExcel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrInputMaxRowsExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 195</value>
-  </data>
-  <data name="ucrInputMaxRowsExcel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="ucrInputMaxRowsExcel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
-  </data>
-  <data name="ucrInputMaxRowsExcel.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxRowsExcel.Name" xml:space="preserve">
-    <value>ucrInputMaxRowsExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxRowsExcel.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxRowsExcel.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxRowsExcel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="lblMissingValueStringExcel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -883,7 +832,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMissingValueStringExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 75</value>
+    <value>7, 27</value>
   </data>
   <data name="lblMissingValueStringExcel.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 13</value>
@@ -904,10 +853,10 @@
     <value>grpExcel</value>
   </data>
   <data name="&gt;&gt;lblMissingValueStringExcel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrInputMissingValueStringExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 91</value>
+    <value>7, 43</value>
   </data>
   <data name="ucrInputMissingValueStringExcel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -928,10 +877,10 @@
     <value>grpExcel</value>
   </data>
   <data name="&gt;&gt;ucrInputMissingValueStringExcel.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrInputNamedRegions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 91</value>
+    <value>7, 43</value>
   </data>
   <data name="ucrInputNamedRegions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -952,7 +901,7 @@
     <value>grpExcel</value>
   </data>
   <data name="&gt;&gt;ucrInputNamedRegions.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblNamedRegion.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -961,7 +910,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNamedRegion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 74</value>
+    <value>7, 29</value>
   </data>
   <data name="lblNamedRegion.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -982,30 +931,6 @@
     <value>grpExcel</value>
   </data>
   <data name="&gt;&gt;lblNamedRegion.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="ucrInputSelectSheetExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 44</value>
-  </data>
-  <data name="ucrInputSelectSheetExcel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="ucrInputSelectSheetExcel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 21</value>
-  </data>
-  <data name="ucrInputSelectSheetExcel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSelectSheetExcel.Name" xml:space="preserve">
-    <value>ucrInputSelectSheetExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSelectSheetExcel.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSelectSheetExcel.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSelectSheetExcel.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="lblRowToSkipExcel.AutoSize" type="System.Boolean, mscorlib">
@@ -1015,7 +940,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblRowToSkipExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 144</value>
+    <value>4, 140</value>
   </data>
   <data name="lblRowToSkipExcel.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 13</value>
@@ -1038,41 +963,11 @@
   <data name="&gt;&gt;lblRowToSkipExcel.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="lblSelectSheetExcel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSelectSheetExcel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSelectSheetExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 29</value>
-  </data>
-  <data name="lblSelectSheetExcel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 13</value>
-  </data>
-  <data name="lblSelectSheetExcel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblSelectSheetExcel.Text" xml:space="preserve">
-    <value>Select Sheet:</value>
-  </data>
-  <data name="&gt;&gt;lblSelectSheetExcel.Name" xml:space="preserve">
-    <value>lblSelectSheetExcel</value>
-  </data>
-  <data name="&gt;&gt;lblSelectSheetExcel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSelectSheetExcel.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;lblSelectSheetExcel.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
   <data name="grpExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 91</value>
+    <value>10, 130</value>
   </data>
   <data name="grpExcel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 300</value>
+    <value>227, 255</value>
   </data>
   <data name="grpExcel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1093,7 +988,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpExcel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>12</value>
   </data>
   <data name="ucrChkOverwriteRDS.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 185</value>
@@ -1264,10 +1159,10 @@
     <value>6</value>
   </data>
   <data name="grpRDS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 91</value>
+    <value>10, 130</value>
   </data>
   <data name="grpRDS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 214</value>
+    <value>227, 218</value>
   </data>
   <data name="grpRDS.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1288,7 +1183,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpRDS.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>13</value>
   </data>
   <data name="lblCannotImport.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1300,7 +1195,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCannotImport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 316</value>
+    <value>315, 316</value>
   </data>
   <data name="lblCannotImport.Size" type="System.Drawing.Size, System.Drawing">
     <value>389, 40</value>
@@ -1328,7 +1223,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCannotImport.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>18</value>
   </data>
   <data name="lblNoPreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1340,7 +1235,7 @@ Modify options or select a different file.</value>
     <value>NoControl</value>
   </data>
   <data name="lblNoPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 318</value>
+    <value>351, 318</value>
   </data>
   <data name="lblNoPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>302, 18</value>
@@ -1367,7 +1262,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblNoPreview.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>15</value>
   </data>
   <data name="lblLinesToPreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1376,7 +1271,7 @@ Modify options or select a different file.</value>
     <value>NoControl</value>
   </data>
   <data name="lblLinesToPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>519, 239</value>
+    <value>574, 239</value>
   </data>
   <data name="lblLinesToPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
@@ -1397,13 +1292,13 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLinesToPreview.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>9</value>
   </data>
   <data name="cmdRefreshPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdRefreshPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>569, 443</value>
+    <value>624, 443</value>
   </data>
   <data name="cmdRefreshPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 23</value>
@@ -1424,10 +1319,380 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdRefreshPreview.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrNudMaxRowsText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 168</value>
+  </data>
+  <data name="ucrNudMaxRowsText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrNudMaxRowsText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="ucrNudMaxRowsText.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMaxRowsText.Name" xml:space="preserve">
+    <value>ucrNudMaxRowsText</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMaxRowsText.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMaxRowsText.Parent" xml:space="preserve">
+    <value>grpText</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMaxRowsText.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrChkMaxRowsText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 144</value>
+  </data>
+  <data name="ucrChkMaxRowsText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrChkMaxRowsText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 20</value>
+  </data>
+  <data name="ucrChkMaxRowsText.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMaxRowsText.Name" xml:space="preserve">
+    <value>ucrChkMaxRowsText</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMaxRowsText.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMaxRowsText.Parent" xml:space="preserve">
+    <value>grpText</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMaxRowsText.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkColumnNamesText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 25</value>
+  </data>
+  <data name="ucrChkColumnNamesText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrChkColumnNamesText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 20</value>
+  </data>
+  <data name="ucrChkColumnNamesText.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrChkColumnNamesText.Name" xml:space="preserve">
+    <value>ucrChkColumnNamesText</value>
+  </data>
+  <data name="&gt;&gt;ucrChkColumnNamesText.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkColumnNamesText.Parent" xml:space="preserve">
+    <value>grpText</value>
+  </data>
+  <data name="&gt;&gt;ucrChkColumnNamesText.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblMissingValueStringText.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMissingValueStringText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMissingValueStringText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 52</value>
+  </data>
+  <data name="lblMissingValueStringText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 13</value>
+  </data>
+  <data name="lblMissingValueStringText.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblMissingValueStringText.Text" xml:space="preserve">
+    <value>Missing Value String:</value>
+  </data>
+  <data name="&gt;&gt;lblMissingValueStringText.Name" xml:space="preserve">
+    <value>lblMissingValueStringText</value>
+  </data>
+  <data name="&gt;&gt;lblMissingValueStringText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMissingValueStringText.Parent" xml:space="preserve">
+    <value>grpText</value>
+  </data>
+  <data name="&gt;&gt;lblMissingValueStringText.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrNudRowsToSkipText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 114</value>
+  </data>
+  <data name="ucrNudRowsToSkipText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrNudRowsToSkipText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 20</value>
+  </data>
+  <data name="ucrNudRowsToSkipText.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ucrNudRowsToSkipText.Name" xml:space="preserve">
+    <value>ucrNudRowsToSkipText</value>
+  </data>
+  <data name="&gt;&gt;ucrNudRowsToSkipText.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudRowsToSkipText.Parent" xml:space="preserve">
+    <value>grpText</value>
+  </data>
+  <data name="&gt;&gt;ucrNudRowsToSkipText.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrInputMissingValueStringText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 71</value>
+  </data>
+  <data name="ucrInputMissingValueStringText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 8, 6, 8</value>
+  </data>
+  <data name="ucrInputMissingValueStringText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 21</value>
+  </data>
+  <data name="ucrInputMissingValueStringText.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMissingValueStringText.Name" xml:space="preserve">
+    <value>ucrInputMissingValueStringText</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMissingValueStringText.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMissingValueStringText.Parent" xml:space="preserve">
+    <value>grpText</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMissingValueStringText.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblLinesToSkipText.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLinesToSkipText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblLinesToSkipText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 97</value>
+  </data>
+  <data name="lblLinesToSkipText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
+  </data>
+  <data name="lblLinesToSkipText.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="lblLinesToSkipText.Text" xml:space="preserve">
+    <value>Lines To Skip:</value>
+  </data>
+  <data name="&gt;&gt;lblLinesToSkipText.Name" xml:space="preserve">
+    <value>lblLinesToSkipText</value>
+  </data>
+  <data name="&gt;&gt;lblLinesToSkipText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLinesToSkipText.Parent" xml:space="preserve">
+    <value>grpText</value>
+  </data>
+  <data name="&gt;&gt;lblLinesToSkipText.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="grpText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 130</value>
+  </data>
+  <data name="grpText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 204</value>
+  </data>
+  <data name="grpText.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="grpText.Text" xml:space="preserve">
+    <value>Import Text Options</value>
+  </data>
+  <data name="grpText.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;grpText.Name" xml:space="preserve">
+    <value>grpText</value>
+  </data>
+  <data name="&gt;&gt;grpText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpText.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="rdoSeparatortext.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoSeparatortext.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoSeparatortext.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoSeparatortext.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 83</value>
+  </data>
+  <data name="rdoSeparatortext.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 40</value>
+  </data>
+  <data name="rdoSeparatortext.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="rdoSeparatortext.Text" xml:space="preserve">
+    <value>Separator</value>
+  </data>
+  <data name="rdoSeparatortext.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoSeparatortext.Name" xml:space="preserve">
+    <value>rdoSeparatortext</value>
+  </data>
+  <data name="&gt;&gt;rdoSeparatortext.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSeparatortext.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoSeparatortext.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rdoFixedWidthText.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoFixedWidthText.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoFixedWidthText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoFixedWidthText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>102, 83</value>
+  </data>
+  <data name="rdoFixedWidthText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 40</value>
+  </data>
+  <data name="rdoFixedWidthText.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="rdoFixedWidthText.Text" xml:space="preserve">
+    <value>Fixed width</value>
+  </data>
+  <data name="rdoFixedWidthText.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoFixedWidthText.Name" xml:space="preserve">
+    <value>rdoFixedWidthText</value>
+  </data>
+  <data name="&gt;&gt;rdoFixedWidthText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoFixedWidthText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoFixedWidthText.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="rdoFixedWidthWhiteSpacesText.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoFixedWidthWhiteSpacesText.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoFixedWidthWhiteSpacesText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoFixedWidthWhiteSpacesText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>191, 83</value>
+  </data>
+  <data name="rdoFixedWidthWhiteSpacesText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 40</value>
+  </data>
+  <data name="rdoFixedWidthWhiteSpacesText.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="rdoFixedWidthWhiteSpacesText.Text" xml:space="preserve">
+    <value>Fixed width
+white spaces</value>
+  </data>
+  <data name="rdoFixedWidthWhiteSpacesText.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoFixedWidthWhiteSpacesText.Name" xml:space="preserve">
+    <value>rdoFixedWidthWhiteSpacesText</value>
+  </data>
+  <data name="&gt;&gt;rdoFixedWidthWhiteSpacesText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoFixedWidthWhiteSpacesText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoFixedWidthWhiteSpacesText.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="clbSheets.HorizontalScrollbar" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="clbSheets.Location" type="System.Drawing.Point, System.Drawing">
+    <value>296, 64</value>
+  </data>
+  <data name="clbSheets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 169</value>
+  </data>
+  <data name="clbSheets.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;clbSheets.Name" xml:space="preserve">
+    <value>clbSheets</value>
+  </data>
+  <data name="&gt;&gt;clbSheets.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;clbSheets.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;clbSheets.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblSelectSheets.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSelectSheets.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSelectSheets.Location" type="System.Drawing.Point, System.Drawing">
+    <value>293, 25</value>
+  </data>
+  <data name="lblSelectSheets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 13</value>
+  </data>
+  <data name="lblSelectSheets.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="lblSelectSheets.Text" xml:space="preserve">
+    <value>Select Sheets:</value>
+  </data>
+  <data name="&gt;&gt;lblSelectSheets.Name" xml:space="preserve">
+    <value>lblSelectSheets</value>
+  </data>
+  <data name="&gt;&gt;lblSelectSheets.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSelectSheets.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSelectSheets.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="ucrNudPreviewLines.Location" type="System.Drawing.Point, System.Drawing">
-    <value>613, 236</value>
+    <value>668, 236</value>
   </data>
   <data name="ucrNudPreviewLines.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1448,7 +1713,28 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudPreviewLines.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>10</value>
+  </data>
+  <data name="ucrPanelFixedWidthText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 80</value>
+  </data>
+  <data name="ucrPanelFixedWidthText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 45</value>
+  </data>
+  <data name="ucrPanelFixedWidthText.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelFixedWidthText.Name" xml:space="preserve">
+    <value>ucrPanelFixedWidthText</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelFixedWidthText.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelFixedWidthText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelFixedWidthText.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="ucrSaveFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 52</value>
@@ -1472,10 +1758,10 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveFile.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>14</value>
   </data>
   <data name="ucrInputFilePath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>39, 23</value>
+    <value>75, 23</value>
   </data>
   <data name="ucrInputFilePath.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1496,10 +1782,10 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputFilePath.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>17</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 443</value>
+    <value>7, 508</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1520,7 +1806,64 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>22</value>
+  </data>
+  <data name="ucrChkSheetsCheckAll.Location" type="System.Drawing.Point, System.Drawing">
+    <value>299, 42</value>
+  </data>
+  <data name="ucrChkSheetsCheckAll.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrChkSheetsCheckAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 20</value>
+  </data>
+  <data name="ucrChkSheetsCheckAll.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSheetsCheckAll.Name" xml:space="preserve">
+    <value>ucrChkSheetsCheckAll</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSheetsCheckAll.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSheetsCheckAll.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSheetsCheckAll.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblImportingSheets.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11.25pt</value>
+  </data>
+  <data name="lblImportingSheets.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblImportingSheets.Location" type="System.Drawing.Point, System.Drawing">
+    <value>296, 281</value>
+  </data>
+  <data name="lblImportingSheets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>388, 114</value>
+  </data>
+  <data name="lblImportingSheets.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="lblImportingSheets.Text" xml:space="preserve">
+    <value>Importing the following sheets:</value>
+  </data>
+  <data name="lblImportingSheets.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblImportingSheets.Name" xml:space="preserve">
+    <value>lblImportingSheets</value>
+  </data>
+  <data name="&gt;&gt;lblImportingSheets.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblImportingSheets.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblImportingSheets.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1529,10 +1872,7 @@ Modify options or select a different file.</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>676, 500</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>730, 569</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

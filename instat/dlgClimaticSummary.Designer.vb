@@ -40,31 +40,31 @@ Partial Class dlgClimaticSummary
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgClimaticSummary))
         Me.rdoAnnual = New System.Windows.Forms.RadioButton()
-        Me.rdoAnnualVariable = New System.Windows.Forms.RadioButton()
         Me.rdoWithinYear = New System.Windows.Forms.RadioButton()
+        Me.rdoAnnualWithinYear = New System.Windows.Forms.RadioButton()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
-        Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDay = New System.Windows.Forms.Label()
         Me.lblElement = New System.Windows.Forms.Label()
         Me.cmdSummary = New System.Windows.Forms.Button()
         Me.lblWithinYear = New System.Windows.Forms.Label()
-        Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
-        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPnlAnnualWithin = New instat.UcrPanel()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkOmitMissingValues = New instat.ucrCheck()
+        Me.ucrChkAddDateColumn = New instat.ucrCheck()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
         Me.cmdDoyRange = New System.Windows.Forms.Button()
+        Me.lblYear = New System.Windows.Forms.Label()
         Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
+        Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlAnnualWithin = New instat.UcrPanel()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -78,16 +78,6 @@ Partial Class dlgClimaticSummary
         Me.rdoAnnual.TabStop = True
         Me.rdoAnnual.UseVisualStyleBackColor = True
         '
-        'rdoAnnualVariable
-        '
-        resources.ApplyResources(Me.rdoAnnualVariable, "rdoAnnualVariable")
-        Me.rdoAnnualVariable.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoAnnualVariable.FlatAppearance.BorderSize = 2
-        Me.rdoAnnualVariable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoAnnualVariable.Name = "rdoAnnualVariable"
-        Me.rdoAnnualVariable.TabStop = True
-        Me.rdoAnnualVariable.UseVisualStyleBackColor = True
-        '
         'rdoWithinYear
         '
         resources.ApplyResources(Me.rdoWithinYear, "rdoWithinYear")
@@ -98,6 +88,16 @@ Partial Class dlgClimaticSummary
         Me.rdoWithinYear.TabStop = True
         Me.rdoWithinYear.UseVisualStyleBackColor = True
         '
+        'rdoAnnualWithinYear
+        '
+        resources.ApplyResources(Me.rdoAnnualWithinYear, "rdoAnnualWithinYear")
+        Me.rdoAnnualWithinYear.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoAnnualWithinYear.FlatAppearance.BorderSize = 2
+        Me.rdoAnnualWithinYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoAnnualWithinYear.Name = "rdoAnnualWithinYear"
+        Me.rdoAnnualWithinYear.TabStop = True
+        Me.rdoAnnualWithinYear.UseVisualStyleBackColor = True
+        '
         'lblStation
         '
         resources.ApplyResources(Me.lblStation, "lblStation")
@@ -107,11 +107,6 @@ Partial Class dlgClimaticSummary
         '
         resources.ApplyResources(Me.lblDate, "lblDate")
         Me.lblDate.Name = "lblDate"
-        '
-        'lblYear
-        '
-        resources.ApplyResources(Me.lblYear, "lblYear")
-        Me.lblYear.Name = "lblYear"
         '
         'lblDay
         '
@@ -135,8 +130,63 @@ Partial Class dlgClimaticSummary
         resources.ApplyResources(Me.lblWithinYear, "lblWithinYear")
         Me.lblWithinYear.Name = "lblWithinYear"
         '
+        'grpOptions
+        '
+        Me.grpOptions.Controls.Add(Me.ucrChkAddDateColumn)
+        Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
+        Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
+        Me.grpOptions.Controls.Add(Me.ucrChkDropUnusedLevels)
+        resources.ApplyResources(Me.grpOptions, "grpOptions")
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.TabStop = False
+        '
+        'ucrChkAddDateColumn
+        '
+        Me.ucrChkAddDateColumn.Checked = False
+        resources.ApplyResources(Me.ucrChkAddDateColumn, "ucrChkAddDateColumn")
+        Me.ucrChkAddDateColumn.Name = "ucrChkAddDateColumn"
+        '
+        'ucrChkStoreResults
+        '
+        Me.ucrChkStoreResults.Checked = False
+        resources.ApplyResources(Me.ucrChkStoreResults, "ucrChkStoreResults")
+        Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
+        '
+        'ucrChkPrintOutput
+        '
+        Me.ucrChkPrintOutput.Checked = False
+        resources.ApplyResources(Me.ucrChkPrintOutput, "ucrChkPrintOutput")
+        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
+        '
+        'ucrChkDropUnusedLevels
+        '
+        Me.ucrChkDropUnusedLevels.Checked = False
+        resources.ApplyResources(Me.ucrChkDropUnusedLevels, "ucrChkDropUnusedLevels")
+        Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
+        '
+        'cmdDoyRange
+        '
+        resources.ApplyResources(Me.cmdDoyRange, "cmdDoyRange")
+        Me.cmdDoyRange.Name = "cmdDoyRange"
+        Me.cmdDoyRange.Tag = ""
+        Me.cmdDoyRange.UseVisualStyleBackColor = True
+        '
+        'lblYear
+        '
+        resources.ApplyResources(Me.lblYear, "lblYear")
+        Me.lblYear.Name = "lblYear"
+        '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.IsMultiline = False
+        Me.ucrInputFilterPreview.IsReadOnly = True
+        resources.ApplyResources(Me.ucrInputFilterPreview, "ucrInputFilterPreview")
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
+        '
         'ucrSelectorVariable
         '
+        Me.ucrSelectorVariable.bDropUnusedFilterLevels = False
         Me.ucrSelectorVariable.bShowHiddenColumns = False
         Me.ucrSelectorVariable.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorVariable, "ucrSelectorVariable")
@@ -150,15 +200,6 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverWithinYear.Selector = Nothing
         Me.ucrReceiverWithinYear.strNcFilePath = ""
         Me.ucrReceiverWithinYear.ucrSelector = Nothing
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrReceiverDOY
         '
@@ -196,6 +237,15 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverStation.strNcFilePath = ""
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
+        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
@@ -205,55 +255,6 @@ Partial Class dlgClimaticSummary
         '
         resources.ApplyResources(Me.ucrPnlAnnualWithin, "ucrPnlAnnualWithin")
         Me.ucrPnlAnnualWithin.Name = "ucrPnlAnnualWithin"
-        '
-        'grpOptions
-        '
-        Me.grpOptions.Controls.Add(Me.ucrChkOmitMissingValues)
-        Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
-        Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
-        Me.grpOptions.Controls.Add(Me.ucrChkDropUnusedLevels)
-        resources.ApplyResources(Me.grpOptions, "grpOptions")
-        Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.TabStop = False
-        '
-        'ucrChkOmitMissingValues
-        '
-        Me.ucrChkOmitMissingValues.Checked = False
-        resources.ApplyResources(Me.ucrChkOmitMissingValues, "ucrChkOmitMissingValues")
-        Me.ucrChkOmitMissingValues.Name = "ucrChkOmitMissingValues"
-        '
-        'ucrChkStoreResults
-        '
-        Me.ucrChkStoreResults.Checked = False
-        resources.ApplyResources(Me.ucrChkStoreResults, "ucrChkStoreResults")
-        Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
-        '
-        'ucrChkPrintOutput
-        '
-        Me.ucrChkPrintOutput.Checked = False
-        resources.ApplyResources(Me.ucrChkPrintOutput, "ucrChkPrintOutput")
-        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
-        '
-        'ucrChkDropUnusedLevels
-        '
-        Me.ucrChkDropUnusedLevels.Checked = False
-        resources.ApplyResources(Me.ucrChkDropUnusedLevels, "ucrChkDropUnusedLevels")
-        Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
-        '
-        'cmdDoyRange
-        '
-        resources.ApplyResources(Me.cmdDoyRange, "cmdDoyRange")
-        Me.cmdDoyRange.Name = "cmdDoyRange"
-        Me.cmdDoyRange.Tag = ""
-        Me.cmdDoyRange.UseVisualStyleBackColor = True
-        '
-        'ucrInputFilterPreview
-        '
-        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilterPreview.IsMultiline = False
-        Me.ucrInputFilterPreview.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputFilterPreview, "ucrInputFilterPreview")
-        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
         '
         'dlgClimaticSummary
         '
@@ -271,15 +272,15 @@ Partial Class dlgClimaticSummary
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.lblStation)
-        Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrReceiverDOY)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrReceiverStation)
-        Me.Controls.Add(Me.rdoWithinYear)
-        Me.Controls.Add(Me.rdoAnnualVariable)
-        Me.Controls.Add(Me.rdoAnnual)
+        Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.rdoAnnualWithinYear)
+        Me.Controls.Add(Me.rdoWithinYear)
+        Me.Controls.Add(Me.rdoAnnual)
         Me.Controls.Add(Me.ucrPnlAnnualWithin)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -293,18 +294,16 @@ Partial Class dlgClimaticSummary
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents rdoAnnual As RadioButton
-    Friend WithEvents rdoAnnualVariable As RadioButton
     Friend WithEvents rdoWithinYear As RadioButton
+    Friend WithEvents rdoAnnualWithinYear As RadioButton
     Friend WithEvents ucrPnlAnnualWithin As UcrPanel
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
     Friend WithEvents ucrReceiverDOY As ucrReceiverSingle
-    Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents lblStation As Label
     Friend WithEvents lblElement As Label
     Friend WithEvents lblDay As Label
-    Friend WithEvents lblYear As Label
     Friend WithEvents lblDate As Label
     Friend WithEvents cmdSummary As Button
     Friend WithEvents lblWithinYear As Label
@@ -314,7 +313,9 @@ Partial Class dlgClimaticSummary
     Friend WithEvents ucrChkStoreResults As ucrCheck
     Friend WithEvents ucrChkPrintOutput As ucrCheck
     Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
-    Friend WithEvents ucrChkOmitMissingValues As ucrCheck
     Friend WithEvents cmdDoyRange As Button
     Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
+    Friend WithEvents lblYear As Label
+    Friend WithEvents ucrReceiverYear As ucrReceiverSingle
+    Friend WithEvents ucrChkAddDateColumn As ucrCheck
 End Class

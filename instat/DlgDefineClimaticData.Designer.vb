@@ -72,6 +72,8 @@ Partial Class DlgDefineClimaticData
         Me.ucrBase = New instat.ucrButtons()
         Me.grpDateTime = New System.Windows.Forms.GroupBox()
         Me.grpStation = New System.Windows.Forms.GroupBox()
+        Me.ucrInputCheckInput = New instat.ucrInputTextBox()
+        Me.cmdCheckUnique = New System.Windows.Forms.Button()
         Me.grpElements.SuspendLayout()
         Me.grpDateTime.SuspendLayout()
         Me.grpStation.SuspendLayout()
@@ -297,6 +299,7 @@ Partial Class DlgDefineClimaticData
         '
         'ucrSelectorDefineClimaticData
         '
+        Me.ucrSelectorDefineClimaticData.bDropUnusedFilterLevels = False
         Me.ucrSelectorDefineClimaticData.bShowHiddenColumns = False
         Me.ucrSelectorDefineClimaticData.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorDefineClimaticData, "ucrSelectorDefineClimaticData")
@@ -333,10 +336,26 @@ Partial Class DlgDefineClimaticData
         Me.grpStation.TabStop = False
         Me.grpStation.Tag = ""
         '
+        'ucrInputCheckInput
+        '
+        Me.ucrInputCheckInput.AddQuotesIfUnrecognised = True
+        Me.ucrInputCheckInput.IsMultiline = False
+        Me.ucrInputCheckInput.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCheckInput, "ucrInputCheckInput")
+        Me.ucrInputCheckInput.Name = "ucrInputCheckInput"
+        '
+        'cmdCheckUnique
+        '
+        resources.ApplyResources(Me.cmdCheckUnique, "cmdCheckUnique")
+        Me.cmdCheckUnique.Name = "cmdCheckUnique"
+        Me.cmdCheckUnique.UseVisualStyleBackColor = True
+        '
         'DlgDefineClimaticData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputCheckInput)
+        Me.Controls.Add(Me.cmdCheckUnique)
         Me.Controls.Add(Me.grpStation)
         Me.Controls.Add(Me.grpDateTime)
         Me.Controls.Add(Me.grpElements)
@@ -389,4 +408,6 @@ Partial Class DlgDefineClimaticData
     Friend WithEvents ucrReceiverDOY As ucrReceiverSingle
     Friend WithEvents grpDateTime As GroupBox
     Friend WithEvents grpStation As GroupBox
+    Friend WithEvents ucrInputCheckInput As ucrInputTextBox
+    Friend WithEvents cmdCheckUnique As Button
 End Class

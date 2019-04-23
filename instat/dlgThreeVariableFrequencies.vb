@@ -52,6 +52,7 @@ Public Class dlgThreeVariableFrequencies
 
         ucrSelectorThreeVariableFrequencies.SetParameter(New RParameter("data", 0))
         ucrSelectorThreeVariableFrequencies.SetParameterIsrfunction()
+        ucrSelectorThreeVariableFrequencies.bDropUnusedFilterLevels = True
 
         ucrReceiverRowFactor.SetParameter(New RParameter("var.row", 1))
         ucrReceiverRowFactor.Selector = ucrSelectorThreeVariableFrequencies

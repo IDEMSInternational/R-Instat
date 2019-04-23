@@ -63,7 +63,6 @@ Partial Class sdgCreateFilter
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgCreateFilter"
-        Me.TopMost = True
         Me.ResumeLayout(False)
 
     End Sub

@@ -32,7 +32,7 @@ Public Class dlgStringHandling
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        'autoTranslate(Me)
+        autoTranslate(Me)
         TestOkEnabled()
     End Sub
 
@@ -43,6 +43,7 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.SetParameter(New RParameter("string", 0))
         ucrReceiverStringHandling.SetParameterIsRFunction()
         ucrReceiverStringHandling.Selector = ucrSelectorStringHandling
+        ucrReceiverStringHandling.bUseFilteredData = False
         ucrReceiverStringHandling.SetMeAsReceiver()
 
         'ucrRdoOptions
@@ -190,7 +191,6 @@ Public Class dlgStringHandling
 
         ucrReceiverStringHandling.SetRCode(clsCountFunction, bReset)
         ucrInputPattern.SetRCode(clsCountFunction, bReset)
-        ucrInputReplaceBy.SetRCode(clsReplaceFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
         'ucrPnlStringHandling.SetRCode(clsCountFunction, bReset)
         ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
@@ -412,7 +412,7 @@ Public Class dlgStringHandling
         ChangeSize()
     End Sub
 
-    Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrReceiverForRegexExpression.ControlContentsChanged, ucrPnlFixedRegex.ControlContentsChanged, ucrChkIncludeRegularExpressions.ControlContentsChanged
+    Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrReceiverForRegexExpression.ControlContentsChanged, ucrPnlFixedRegex.ControlContentsChanged, ucrChkIncludeRegularExpressions.ControlContentsChanged, ucrSaveStringHandling.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
