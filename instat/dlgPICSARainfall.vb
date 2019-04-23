@@ -366,7 +366,7 @@ Public Class dlgPICSARainfall
         ' Median Line Label
         clsGeomTextLabelMedianLine.SetPackageName("ggplot2")
         clsGeomTextLabelMedianLine.SetRCommand("geom_label")
-        clsGeomTextLabelMedianLine.AddParameter("mapping", clsRFunctionParameter:=clsAesGeomTextLabelMeanLine, iPosition:=0)
+        clsGeomTextLabelMedianLine.AddParameter("mapping", clsRFunctionParameter:=clsAesGeomTextLabelMedianLine, iPosition:=0)
         clsGeomTextLabelMedianLine.AddParameter("hjust", "0", iPosition:=9)
         clsGeomTextLabelMedianLine.AddParameter("vjust", "-0.3", iPosition:=10)
 
