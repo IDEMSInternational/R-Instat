@@ -39,15 +39,21 @@ Partial Class dlgUnstack
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgUnstack))
         Me.lblFactorToUnstackBy = New System.Windows.Forms.Label()
-        Me.lblColumnToUnstack = New System.Windows.Forms.Label()
-        Me.lblIDColumns = New System.Windows.Forms.Label()
-        Me.ucrIDColumns = New instat.ucrReceiverMultiple()
-        Me.ucrColumnToUnstackReceiver = New instat.ucrReceiverSingle()
-        Me.ucrFactorToUnstackReceiver = New instat.ucrReceiverSingle()
-        Me.ucrBase = New instat.ucrButtons()
+        Me.lblCarryColumns = New System.Windows.Forms.Label()
+        Me.rdoSingle = New System.Windows.Forms.RadioButton()
+        Me.rdoMultiple = New System.Windows.Forms.RadioButton()
+        Me.rdoRestoreHierarchy = New System.Windows.Forms.RadioButton()
+        Me.lblMultipleColumns = New System.Windows.Forms.Label()
         Me.ucrNewDFName = New instat.ucrSave()
         Me.ucrChkDropMissingCombinations = New instat.ucrCheck()
+        Me.ucrReceiverCarryColumns = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverFactorToUnstackby = New instat.ucrReceiverSingle()
         Me.ucrSelectorForUnstack = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlUnstackCol = New instat.UcrPanel()
+        Me.ucrMultipleColumnsReceiver = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverColumnToUnstack = New instat.ucrReceiverSingle()
+        Me.lblColumnToUnstack = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblFactorToUnstackBy
@@ -56,49 +62,48 @@ Partial Class dlgUnstack
         Me.lblFactorToUnstackBy.Name = "lblFactorToUnstackBy"
         Me.lblFactorToUnstackBy.Tag = "Factor_to_Unstack_By"
         '
-        'lblColumnToUnstack
+        'lblCarryColumns
         '
-        resources.ApplyResources(Me.lblColumnToUnstack, "lblColumnToUnstack")
-        Me.lblColumnToUnstack.Name = "lblColumnToUnstack"
-        Me.lblColumnToUnstack.Tag = "Column_to_Unstack:"
+        resources.ApplyResources(Me.lblCarryColumns, "lblCarryColumns")
+        Me.lblCarryColumns.Name = "lblCarryColumns"
+        Me.lblCarryColumns.Tag = "ID_Columns"
         '
-        'lblIDColumns
+        'rdoSingle
         '
-        resources.ApplyResources(Me.lblIDColumns, "lblIDColumns")
-        Me.lblIDColumns.Name = "lblIDColumns"
-        Me.lblIDColumns.Tag = "ID_Columns"
+        resources.ApplyResources(Me.rdoSingle, "rdoSingle")
+        Me.rdoSingle.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoSingle.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSingle.FlatAppearance.BorderSize = 2
+        Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSingle.Name = "rdoSingle"
+        Me.rdoSingle.TabStop = True
+        Me.rdoSingle.UseVisualStyleBackColor = False
         '
-        'ucrIDColumns
+        'rdoMultiple
         '
-        Me.ucrIDColumns.frmParent = Me
-        resources.ApplyResources(Me.ucrIDColumns, "ucrIDColumns")
-        Me.ucrIDColumns.Name = "ucrIDColumns"
-        Me.ucrIDColumns.Selector = Nothing
-        Me.ucrIDColumns.strNcFilePath = ""
-        Me.ucrIDColumns.ucrSelector = Nothing
+        resources.ApplyResources(Me.rdoMultiple, "rdoMultiple")
+        Me.rdoMultiple.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoMultiple.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultiple.FlatAppearance.BorderSize = 2
+        Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultiple.Name = "rdoMultiple"
+        Me.rdoMultiple.TabStop = True
+        Me.rdoMultiple.UseVisualStyleBackColor = False
         '
-        'ucrColumnToUnstackReceiver
+        'rdoRestoreHierarchy
         '
-        Me.ucrColumnToUnstackReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrColumnToUnstackReceiver, "ucrColumnToUnstackReceiver")
-        Me.ucrColumnToUnstackReceiver.Name = "ucrColumnToUnstackReceiver"
-        Me.ucrColumnToUnstackReceiver.Selector = Nothing
-        Me.ucrColumnToUnstackReceiver.strNcFilePath = ""
-        Me.ucrColumnToUnstackReceiver.ucrSelector = Nothing
+        resources.ApplyResources(Me.rdoRestoreHierarchy, "rdoRestoreHierarchy")
+        Me.rdoRestoreHierarchy.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRestoreHierarchy.FlatAppearance.BorderSize = 2
+        Me.rdoRestoreHierarchy.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRestoreHierarchy.Name = "rdoRestoreHierarchy"
+        Me.rdoRestoreHierarchy.TabStop = True
+        Me.rdoRestoreHierarchy.UseVisualStyleBackColor = True
         '
-        'ucrFactorToUnstackReceiver
+        'lblMultipleColumns
         '
-        Me.ucrFactorToUnstackReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrFactorToUnstackReceiver, "ucrFactorToUnstackReceiver")
-        Me.ucrFactorToUnstackReceiver.Name = "ucrFactorToUnstackReceiver"
-        Me.ucrFactorToUnstackReceiver.Selector = Nothing
-        Me.ucrFactorToUnstackReceiver.strNcFilePath = ""
-        Me.ucrFactorToUnstackReceiver.ucrSelector = Nothing
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
+        resources.ApplyResources(Me.lblMultipleColumns, "lblMultipleColumns")
+        Me.lblMultipleColumns.Name = "lblMultipleColumns"
         '
         'ucrNewDFName
         '
@@ -111,27 +116,86 @@ Partial Class dlgUnstack
         resources.ApplyResources(Me.ucrChkDropMissingCombinations, "ucrChkDropMissingCombinations")
         Me.ucrChkDropMissingCombinations.Name = "ucrChkDropMissingCombinations"
         '
+        'ucrReceiverCarryColumns
+        '
+        Me.ucrReceiverCarryColumns.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverCarryColumns, "ucrReceiverCarryColumns")
+        Me.ucrReceiverCarryColumns.Name = "ucrReceiverCarryColumns"
+        Me.ucrReceiverCarryColumns.Selector = Nothing
+        Me.ucrReceiverCarryColumns.strNcFilePath = ""
+        Me.ucrReceiverCarryColumns.ucrSelector = Nothing
+        '
+        'ucrReceiverFactorToUnstackby
+        '
+        Me.ucrReceiverFactorToUnstackby.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFactorToUnstackby, "ucrReceiverFactorToUnstackby")
+        Me.ucrReceiverFactorToUnstackby.Name = "ucrReceiverFactorToUnstackby"
+        Me.ucrReceiverFactorToUnstackby.Selector = Nothing
+        Me.ucrReceiverFactorToUnstackby.strNcFilePath = ""
+        Me.ucrReceiverFactorToUnstackby.ucrSelector = Nothing
+        '
         'ucrSelectorForUnstack
         '
+        Me.ucrSelectorForUnstack.bDropUnusedFilterLevels = False
         Me.ucrSelectorForUnstack.bShowHiddenColumns = False
         Me.ucrSelectorForUnstack.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForUnstack, "ucrSelectorForUnstack")
         Me.ucrSelectorForUnstack.Name = "ucrSelectorForUnstack"
         '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrPnlUnstackCol
+        '
+        resources.ApplyResources(Me.ucrPnlUnstackCol, "ucrPnlUnstackCol")
+        Me.ucrPnlUnstackCol.Name = "ucrPnlUnstackCol"
+        '
+        'ucrMultipleColumnsReceiver
+        '
+        Me.ucrMultipleColumnsReceiver.frmParent = Me
+        resources.ApplyResources(Me.ucrMultipleColumnsReceiver, "ucrMultipleColumnsReceiver")
+        Me.ucrMultipleColumnsReceiver.Name = "ucrMultipleColumnsReceiver"
+        Me.ucrMultipleColumnsReceiver.Selector = Nothing
+        Me.ucrMultipleColumnsReceiver.strNcFilePath = ""
+        Me.ucrMultipleColumnsReceiver.ucrSelector = Nothing
+        '
+        'ucrReceiverColumnToUnstack
+        '
+        Me.ucrReceiverColumnToUnstack.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverColumnToUnstack, "ucrReceiverColumnToUnstack")
+        Me.ucrReceiverColumnToUnstack.Name = "ucrReceiverColumnToUnstack"
+        Me.ucrReceiverColumnToUnstack.Selector = Nothing
+        Me.ucrReceiverColumnToUnstack.strNcFilePath = ""
+        Me.ucrReceiverColumnToUnstack.ucrSelector = Nothing
+        '
+        'lblColumnToUnstack
+        '
+        resources.ApplyResources(Me.lblColumnToUnstack, "lblColumnToUnstack")
+        Me.lblColumnToUnstack.Name = "lblColumnToUnstack"
+        Me.lblColumnToUnstack.Tag = "Column_to_Unstack:"
+        '
         'dlgUnstack
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverColumnToUnstack)
+        Me.Controls.Add(Me.lblColumnToUnstack)
+        Me.Controls.Add(Me.rdoRestoreHierarchy)
+        Me.Controls.Add(Me.rdoMultiple)
+        Me.Controls.Add(Me.rdoSingle)
         Me.Controls.Add(Me.ucrNewDFName)
         Me.Controls.Add(Me.ucrChkDropMissingCombinations)
-        Me.Controls.Add(Me.ucrIDColumns)
-        Me.Controls.Add(Me.ucrColumnToUnstackReceiver)
-        Me.Controls.Add(Me.ucrFactorToUnstackReceiver)
-        Me.Controls.Add(Me.lblColumnToUnstack)
+        Me.Controls.Add(Me.ucrReceiverCarryColumns)
+        Me.Controls.Add(Me.ucrReceiverFactorToUnstackby)
         Me.Controls.Add(Me.lblFactorToUnstackBy)
         Me.Controls.Add(Me.ucrSelectorForUnstack)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.lblIDColumns)
+        Me.Controls.Add(Me.lblCarryColumns)
+        Me.Controls.Add(Me.ucrPnlUnstackCol)
+        Me.Controls.Add(Me.lblMultipleColumns)
+        Me.Controls.Add(Me.ucrMultipleColumnsReceiver)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -144,11 +208,17 @@ Partial Class dlgUnstack
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorForUnstack As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblFactorToUnstackBy As Label
-    Friend WithEvents lblColumnToUnstack As Label
-    Friend WithEvents ucrFactorToUnstackReceiver As ucrReceiverSingle
-    Friend WithEvents ucrColumnToUnstackReceiver As ucrReceiverSingle
-    Friend WithEvents ucrIDColumns As ucrReceiverMultiple
-    Friend WithEvents lblIDColumns As Label
+    Friend WithEvents ucrReceiverFactorToUnstackby As ucrReceiverSingle
+    Friend WithEvents ucrReceiverCarryColumns As ucrReceiverMultiple
+    Friend WithEvents lblCarryColumns As Label
     Friend WithEvents ucrNewDFName As ucrSave
     Friend WithEvents ucrChkDropMissingCombinations As ucrCheck
+    Friend WithEvents rdoRestoreHierarchy As RadioButton
+    Friend WithEvents rdoMultiple As RadioButton
+    Friend WithEvents rdoSingle As RadioButton
+    Friend WithEvents lblMultipleColumns As Label
+    Friend WithEvents ucrMultipleColumnsReceiver As ucrReceiverMultiple
+    Friend WithEvents ucrPnlUnstackCol As UcrPanel
+    Friend WithEvents ucrReceiverColumnToUnstack As ucrReceiverSingle
+    Friend WithEvents lblColumnToUnstack As Label
 End Class

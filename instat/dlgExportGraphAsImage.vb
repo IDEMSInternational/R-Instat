@@ -35,12 +35,13 @@ Public Class dlgExportGraphAsImage
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 524
+        ucrBase.iHelpTopicID = 556
         ucrInputFile.SetParameter(New RParameter("filename", 0))
 
         ucrSelectedGraphReceiver.SetParameter(New RParameter("plot", 1))
         ucrSelectedGraphReceiver.SetParameterIsRFunction()
         ucrSelectedGraphReceiver.SetItemType("graph")
+        ucrSelectedGraphReceiver.bPrintGraph = False
         ucrSelectedGraphReceiver.strSelectorHeading = "Graphs"
         ucrSelectedGraphReceiver.Selector = ucrSelectorGraphAsImage
         ucrSelectedGraphReceiver.SetMeAsReceiver()

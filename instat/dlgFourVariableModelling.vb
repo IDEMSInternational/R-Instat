@@ -32,6 +32,9 @@ Public Class dlgFourVariableModelling
     Private clsAnovaFunction, clsLMOrGLM, clsLmer, clsGlmer As RFunction
     Private clsFirstTransformFunction, clsSecondTransformFunction, clsThirdTransformFunction As RFunction
 
+    'Saving Operators/Functions
+    Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
+
     Private Sub dlgFourVariableModelling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -113,6 +116,11 @@ Public Class dlgFourVariableModelling
         clsLmer = New RFunction
         clsLMOrGLM = New RFunction
         clsGlmer = New RFunction
+
+        clsRstandardFunction = New RFunction
+        clsHatvaluesFunction = New RFunction
+        clsResidualFunction = New RFunction
+        clsFittedValuesFunction = New RFunction
 
         clsFirstPowerOperator = New ROperator
         clsSecondPowerOperator = New ROperator
@@ -205,6 +213,11 @@ Public Class dlgFourVariableModelling
         clsGLM.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText, bAssignToIsPrefix:=True)
         clsLmer.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText, bAssignToIsPrefix:=True)
         clsGlmer.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText, bAssignToIsPrefix:=True)
+
+        clsResidualFunction.SetRCommand("residuals")
+        clsFittedValuesFunction.SetRCommand("fitted.values")
+        clsRstandardFunction.SetRCommand("rstandard")
+        clsHatvaluesFunction.SetRCommand("hatvalues")
 
         ucrBaseFourVariableModelling.clsRsyntax.SetBaseRFunction(clsLmer)
 
@@ -369,12 +382,16 @@ Public Class dlgFourVariableModelling
             clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsResidualFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsFittedValuesFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             ucrBaseFourVariableModelling.clsRsyntax.SetBaseRFunction(clsLMOrGLM)
         End If
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(ucrBaseFourVariableModelling.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetDisplayOptions)
+        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBaseFourVariableModelling.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesFunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorFourVariableModelling.ucrAvailableDataFrames, bReset:=bResetDisplayOptions)
         sdgSimpleRegOptions.ShowDialog()
         GraphAssignTo()
         bResetDisplayOptions = False

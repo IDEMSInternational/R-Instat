@@ -38,41 +38,60 @@ Partial Class dlgUseDate
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgUseDate))
         Me.lblDateVariable = New System.Windows.Forms.Label()
-        Me.grpShifted = New System.Windows.Forms.GroupBox()
-        Me.lblMonth = New System.Windows.Forms.Label()
-        Me.ucrInputComboBoxMonth = New instat.ucrInputComboBox()
-        Me.lblDay = New System.Windows.Forms.Label()
-        Me.ucrChkShiftYear = New instat.ucrCheck()
-        Me.ucrNudShiftStartDay = New instat.ucrNud()
-        Me.ucrChkShiftDay = New instat.ucrCheck()
-        Me.grpOthers = New System.Windows.Forms.GroupBox()
-        Me.ucrChkLeapYear = New instat.ucrCheck()
-        Me.ucrChkDekad = New instat.ucrCheck()
-        Me.ucrChkPentad = New instat.ucrCheck()
-        Me.grpFullName = New System.Windows.Forms.GroupBox()
-        Me.ucrChkFullWeekday = New instat.ucrCheck()
-        Me.ucrChkFullMonth = New instat.ucrCheck()
-        Me.grpAbbreviation = New System.Windows.Forms.GroupBox()
-        Me.ucrChkAbbrMonth = New instat.ucrCheck()
-        Me.ucrChkAbbrWeekday = New instat.ucrCheck()
-        Me.grpValues = New System.Windows.Forms.GroupBox()
-        Me.ucrChkDayYear366 = New instat.ucrCheck()
-        Me.ucrChkYear = New instat.ucrCheck()
-        Me.ucrChkDayInYear = New instat.ucrCheck()
-        Me.ucrChkMonth = New instat.ucrCheck()
-        Me.ucrChkDay = New instat.ucrCheck()
-        Me.ucrChkWeekday = New instat.ucrCheck()
-        Me.ucrChkWeek = New instat.ucrCheck()
+        Me.lblShiftStartingMonth = New System.Windows.Forms.Label()
+        Me.lblDayInMonth = New System.Windows.Forms.Label()
+        Me.lblLeapYear = New System.Windows.Forms.Label()
+        Me.lblAbbr = New System.Windows.Forms.Label()
+        Me.lblName = New System.Windows.Forms.Label()
+        Me.lblWeekDay = New System.Windows.Forms.Label()
+        Me.lblWeek = New System.Windows.Forms.Label()
+        Me.lblNumeric = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ucrChkShiftYearName = New instat.ucrCheck()
+        Me.lblShifted = New System.Windows.Forms.Label()
+        Me.lblDayinYear366 = New System.Windows.Forms.Label()
+        Me.ucrChkShiftPentadAbbr = New instat.ucrCheck()
+        Me.ucrInputComboBoxStartingMonth = New instat.ucrInputComboBox()
+        Me.lblShiftYear = New System.Windows.Forms.Label()
+        Me.ucrChkShiftYearNum = New instat.ucrCheck()
+        Me.lblShiftMonth = New System.Windows.Forms.Label()
+        Me.ucrChkShiftDekadAbbr = New instat.ucrCheck()
+        Me.lblShiftPentad = New System.Windows.Forms.Label()
+        Me.lblDayInYear = New System.Windows.Forms.Label()
+        Me.ucrChkShiftMonthAbbr = New instat.ucrCheck()
+        Me.lblShiftNumeric = New System.Windows.Forms.Label()
+        Me.lblShiftQuarter = New System.Windows.Forms.Label()
+        Me.ucrChkShiftMonthName = New instat.ucrCheck()
+        Me.ucrChkShiftQuarterAbbr = New instat.ucrCheck()
+        Me.lblShiftAbbr = New System.Windows.Forms.Label()
+        Me.lblShiftDekad = New System.Windows.Forms.Label()
+        Me.ucrChkShiftDekadNum = New instat.ucrCheck()
+        Me.ucrChkShiftQuarterNum = New instat.ucrCheck()
+        Me.ucrChkDayInYearNum = New instat.ucrCheck()
+        Me.ucrChkShiftMonthNum = New instat.ucrCheck()
+        Me.lblShift = New System.Windows.Forms.Label()
+        Me.ucrChkShiftDayInYearNum366 = New instat.ucrCheck()
+        Me.ucrChkShiftPentadNum = New instat.ucrCheck()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.ucrChkDaysInMonthNum = New instat.ucrCheck()
+        Me.lblDaysInMonth = New System.Windows.Forms.Label()
+        Me.ucrChkWeekName = New instat.ucrCheck()
+        Me.ucrChkDayInMonthNum = New instat.ucrCheck()
+        Me.ucrChkWeekAbbr = New instat.ucrCheck()
+        Me.ucrChkWeekdayName = New instat.ucrCheck()
+        Me.ucrChkWeekdayAbbr = New instat.ucrCheck()
+        Me.ucrChkWeekNum = New instat.ucrCheck()
+        Me.ucrChkWeekdayNum = New instat.ucrCheck()
+        Me.ucrChkLeapYearNum = New instat.ucrCheck()
+        Me.ttYearNumeric = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrReceiverUseDate = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorUseDate = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.grpShifted.SuspendLayout()
-        Me.grpOthers.SuspendLayout()
-        Me.grpFullName.SuspendLayout()
-        Me.grpAbbreviation.SuspendLayout()
-        Me.grpValues.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblDateVariable
@@ -80,178 +99,299 @@ Partial Class dlgUseDate
         resources.ApplyResources(Me.lblDateVariable, "lblDateVariable")
         Me.lblDateVariable.Name = "lblDateVariable"
         '
-        'grpShifted
+        'lblShiftStartingMonth
         '
-        Me.grpShifted.Controls.Add(Me.lblMonth)
-        Me.grpShifted.Controls.Add(Me.ucrInputComboBoxMonth)
-        Me.grpShifted.Controls.Add(Me.lblDay)
-        Me.grpShifted.Controls.Add(Me.ucrChkShiftYear)
-        Me.grpShifted.Controls.Add(Me.ucrNudShiftStartDay)
-        Me.grpShifted.Controls.Add(Me.ucrChkShiftDay)
-        resources.ApplyResources(Me.grpShifted, "grpShifted")
-        Me.grpShifted.Name = "grpShifted"
-        Me.grpShifted.TabStop = False
+        resources.ApplyResources(Me.lblShiftStartingMonth, "lblShiftStartingMonth")
+        Me.lblShiftStartingMonth.Name = "lblShiftStartingMonth"
         '
-        'lblMonth
+        'lblDayInMonth
         '
-        resources.ApplyResources(Me.lblMonth, "lblMonth")
-        Me.lblMonth.Name = "lblMonth"
+        resources.ApplyResources(Me.lblDayInMonth, "lblDayInMonth")
+        Me.lblDayInMonth.Name = "lblDayInMonth"
         '
-        'ucrInputComboBoxMonth
+        'lblLeapYear
         '
-        Me.ucrInputComboBoxMonth.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboBoxMonth.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboBoxMonth, "ucrInputComboBoxMonth")
-        Me.ucrInputComboBoxMonth.Name = "ucrInputComboBoxMonth"
+        resources.ApplyResources(Me.lblLeapYear, "lblLeapYear")
+        Me.lblLeapYear.Name = "lblLeapYear"
         '
-        'lblDay
+        'lblAbbr
         '
-        resources.ApplyResources(Me.lblDay, "lblDay")
-        Me.lblDay.Name = "lblDay"
+        resources.ApplyResources(Me.lblAbbr, "lblAbbr")
+        Me.lblAbbr.Name = "lblAbbr"
         '
-        'ucrChkShiftYear
+        'lblName
         '
-        Me.ucrChkShiftYear.Checked = False
-        resources.ApplyResources(Me.ucrChkShiftYear, "ucrChkShiftYear")
-        Me.ucrChkShiftYear.Name = "ucrChkShiftYear"
+        resources.ApplyResources(Me.lblName, "lblName")
+        Me.lblName.Name = "lblName"
         '
-        'ucrNudShiftStartDay
+        'lblWeekDay
         '
-        Me.ucrNudShiftStartDay.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShiftStartDay.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudShiftStartDay, "ucrNudShiftStartDay")
-        Me.ucrNudShiftStartDay.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudShiftStartDay.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShiftStartDay.Name = "ucrNudShiftStartDay"
-        Me.ucrNudShiftStartDay.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        resources.ApplyResources(Me.lblWeekDay, "lblWeekDay")
+        Me.lblWeekDay.Name = "lblWeekDay"
         '
-        'ucrChkShiftDay
+        'lblWeek
         '
-        Me.ucrChkShiftDay.Checked = False
-        resources.ApplyResources(Me.ucrChkShiftDay, "ucrChkShiftDay")
-        Me.ucrChkShiftDay.Name = "ucrChkShiftDay"
+        resources.ApplyResources(Me.lblWeek, "lblWeek")
+        Me.lblWeek.Name = "lblWeek"
         '
-        'grpOthers
+        'lblNumeric
         '
-        Me.grpOthers.Controls.Add(Me.ucrChkLeapYear)
-        Me.grpOthers.Controls.Add(Me.ucrChkDekad)
-        Me.grpOthers.Controls.Add(Me.ucrChkPentad)
-        resources.ApplyResources(Me.grpOthers, "grpOthers")
-        Me.grpOthers.Name = "grpOthers"
-        Me.grpOthers.TabStop = False
+        resources.ApplyResources(Me.lblNumeric, "lblNumeric")
+        Me.lblNumeric.Name = "lblNumeric"
         '
-        'ucrChkLeapYear
+        'GroupBox1
         '
-        Me.ucrChkLeapYear.Checked = False
-        resources.ApplyResources(Me.ucrChkLeapYear, "ucrChkLeapYear")
-        Me.ucrChkLeapYear.Name = "ucrChkLeapYear"
+        Me.GroupBox1.Controls.Add(Me.ucrChkShiftYearName)
+        Me.GroupBox1.Controls.Add(Me.lblShifted)
+        Me.GroupBox1.Controls.Add(Me.lblDayinYear366)
+        Me.GroupBox1.Controls.Add(Me.ucrChkShiftPentadAbbr)
+        Me.GroupBox1.Controls.Add(Me.ucrInputComboBoxStartingMonth)
+        Me.GroupBox1.Controls.Add(Me.lblShiftYear)
+        Me.GroupBox1.Controls.Add(Me.lblShiftStartingMonth)
+        Me.GroupBox1.Controls.Add(Me.ucrChkShiftYearNum)
+        Me.GroupBox1.Controls.Add(Me.lblShiftMonth)
+        Me.GroupBox1.Controls.Add(Me.ucrChkShiftDekadAbbr)
+        Me.GroupBox1.Controls.Add(Me.lblShiftPentad)
+        Me.GroupBox1.Controls.Add(Me.lblDayInYear)
+        Me.GroupBox1.Controls.Add(Me.ucrChkShiftMonthAbbr)
+        Me.GroupBox1.Controls.Add(Me.lblShiftNumeric)
+        Me.GroupBox1.Controls.Add(Me.lblShiftQuarter)
+        Me.GroupBox1.Controls.Add(Me.ucrChkShiftMonthName)
+        Me.GroupBox1.Controls.Add(Me.ucrChkShiftQuarterAbbr)
+        Me.GroupBox1.Controls.Add(Me.lblShiftAbbr)
+        Me.GroupBox1.Controls.Add(Me.lblShiftDekad)
+        Me.GroupBox1.Controls.Add(Me.ucrChkShiftDekadNum)
+        Me.GroupBox1.Controls.Add(Me.ucrChkShiftQuarterNum)
+        Me.GroupBox1.Controls.Add(Me.ucrChkDayInYearNum)
+        Me.GroupBox1.Controls.Add(Me.ucrChkShiftMonthNum)
+        Me.GroupBox1.Controls.Add(Me.lblShift)
+        Me.GroupBox1.Controls.Add(Me.ucrChkShiftDayInYearNum366)
+        Me.GroupBox1.Controls.Add(Me.ucrChkShiftPentadNum)
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.TabStop = False
         '
-        'ucrChkDekad
+        'ucrChkShiftYearName
         '
-        Me.ucrChkDekad.Checked = False
-        resources.ApplyResources(Me.ucrChkDekad, "ucrChkDekad")
-        Me.ucrChkDekad.Name = "ucrChkDekad"
+        resources.ApplyResources(Me.ucrChkShiftYearName, "ucrChkShiftYearName")
+        Me.ucrChkShiftYearName.Checked = False
+        Me.ucrChkShiftYearName.Name = "ucrChkShiftYearName"
         '
-        'ucrChkPentad
+        'lblShifted
         '
-        Me.ucrChkPentad.Checked = False
-        resources.ApplyResources(Me.ucrChkPentad, "ucrChkPentad")
-        Me.ucrChkPentad.Name = "ucrChkPentad"
+        resources.ApplyResources(Me.lblShifted, "lblShifted")
+        Me.lblShifted.Name = "lblShifted"
         '
-        'grpFullName
+        'lblDayinYear366
         '
-        Me.grpFullName.Controls.Add(Me.ucrChkFullWeekday)
-        Me.grpFullName.Controls.Add(Me.ucrChkFullMonth)
-        resources.ApplyResources(Me.grpFullName, "grpFullName")
-        Me.grpFullName.Name = "grpFullName"
-        Me.grpFullName.TabStop = False
+        resources.ApplyResources(Me.lblDayinYear366, "lblDayinYear366")
+        Me.lblDayinYear366.Name = "lblDayinYear366"
         '
-        'ucrChkFullWeekday
+        'ucrChkShiftPentadAbbr
         '
-        Me.ucrChkFullWeekday.Checked = False
-        resources.ApplyResources(Me.ucrChkFullWeekday, "ucrChkFullWeekday")
-        Me.ucrChkFullWeekday.Name = "ucrChkFullWeekday"
+        resources.ApplyResources(Me.ucrChkShiftPentadAbbr, "ucrChkShiftPentadAbbr")
+        Me.ucrChkShiftPentadAbbr.Checked = False
+        Me.ucrChkShiftPentadAbbr.Name = "ucrChkShiftPentadAbbr"
         '
-        'ucrChkFullMonth
+        'ucrInputComboBoxStartingMonth
         '
-        Me.ucrChkFullMonth.Checked = False
-        resources.ApplyResources(Me.ucrChkFullMonth, "ucrChkFullMonth")
-        Me.ucrChkFullMonth.Name = "ucrChkFullMonth"
+        Me.ucrInputComboBoxStartingMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboBoxStartingMonth.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboBoxStartingMonth, "ucrInputComboBoxStartingMonth")
+        Me.ucrInputComboBoxStartingMonth.Name = "ucrInputComboBoxStartingMonth"
         '
-        'grpAbbreviation
+        'lblShiftYear
         '
-        Me.grpAbbreviation.Controls.Add(Me.ucrChkAbbrMonth)
-        Me.grpAbbreviation.Controls.Add(Me.ucrChkAbbrWeekday)
-        resources.ApplyResources(Me.grpAbbreviation, "grpAbbreviation")
-        Me.grpAbbreviation.Name = "grpAbbreviation"
-        Me.grpAbbreviation.TabStop = False
+        resources.ApplyResources(Me.lblShiftYear, "lblShiftYear")
+        Me.lblShiftYear.Name = "lblShiftYear"
         '
-        'ucrChkAbbrMonth
+        'ucrChkShiftYearNum
         '
-        Me.ucrChkAbbrMonth.Checked = False
-        resources.ApplyResources(Me.ucrChkAbbrMonth, "ucrChkAbbrMonth")
-        Me.ucrChkAbbrMonth.Name = "ucrChkAbbrMonth"
+        resources.ApplyResources(Me.ucrChkShiftYearNum, "ucrChkShiftYearNum")
+        Me.ucrChkShiftYearNum.Checked = False
+        Me.ucrChkShiftYearNum.Name = "ucrChkShiftYearNum"
         '
-        'ucrChkAbbrWeekday
+        'lblShiftMonth
         '
-        Me.ucrChkAbbrWeekday.Checked = False
-        resources.ApplyResources(Me.ucrChkAbbrWeekday, "ucrChkAbbrWeekday")
-        Me.ucrChkAbbrWeekday.Name = "ucrChkAbbrWeekday"
+        resources.ApplyResources(Me.lblShiftMonth, "lblShiftMonth")
+        Me.lblShiftMonth.Name = "lblShiftMonth"
         '
-        'grpValues
+        'ucrChkShiftDekadAbbr
         '
-        Me.grpValues.Controls.Add(Me.ucrChkDayYear366)
-        Me.grpValues.Controls.Add(Me.ucrChkYear)
-        Me.grpValues.Controls.Add(Me.ucrChkDayInYear)
-        Me.grpValues.Controls.Add(Me.ucrChkMonth)
-        Me.grpValues.Controls.Add(Me.ucrChkDay)
-        Me.grpValues.Controls.Add(Me.ucrChkWeekday)
-        Me.grpValues.Controls.Add(Me.ucrChkWeek)
-        resources.ApplyResources(Me.grpValues, "grpValues")
-        Me.grpValues.Name = "grpValues"
-        Me.grpValues.TabStop = False
+        resources.ApplyResources(Me.ucrChkShiftDekadAbbr, "ucrChkShiftDekadAbbr")
+        Me.ucrChkShiftDekadAbbr.Checked = False
+        Me.ucrChkShiftDekadAbbr.Name = "ucrChkShiftDekadAbbr"
         '
-        'ucrChkDayYear366
+        'lblShiftPentad
         '
-        Me.ucrChkDayYear366.Checked = False
-        resources.ApplyResources(Me.ucrChkDayYear366, "ucrChkDayYear366")
-        Me.ucrChkDayYear366.Name = "ucrChkDayYear366"
+        resources.ApplyResources(Me.lblShiftPentad, "lblShiftPentad")
+        Me.lblShiftPentad.Name = "lblShiftPentad"
         '
-        'ucrChkYear
+        'lblDayInYear
         '
-        Me.ucrChkYear.Checked = False
-        resources.ApplyResources(Me.ucrChkYear, "ucrChkYear")
-        Me.ucrChkYear.Name = "ucrChkYear"
+        resources.ApplyResources(Me.lblDayInYear, "lblDayInYear")
+        Me.lblDayInYear.Name = "lblDayInYear"
         '
-        'ucrChkDayInYear
+        'ucrChkShiftMonthAbbr
         '
-        Me.ucrChkDayInYear.Checked = False
-        resources.ApplyResources(Me.ucrChkDayInYear, "ucrChkDayInYear")
-        Me.ucrChkDayInYear.Name = "ucrChkDayInYear"
+        resources.ApplyResources(Me.ucrChkShiftMonthAbbr, "ucrChkShiftMonthAbbr")
+        Me.ucrChkShiftMonthAbbr.Checked = False
+        Me.ucrChkShiftMonthAbbr.Name = "ucrChkShiftMonthAbbr"
         '
-        'ucrChkMonth
+        'lblShiftNumeric
         '
-        Me.ucrChkMonth.Checked = False
-        resources.ApplyResources(Me.ucrChkMonth, "ucrChkMonth")
-        Me.ucrChkMonth.Name = "ucrChkMonth"
+        resources.ApplyResources(Me.lblShiftNumeric, "lblShiftNumeric")
+        Me.lblShiftNumeric.Name = "lblShiftNumeric"
         '
-        'ucrChkDay
+        'lblShiftQuarter
         '
-        Me.ucrChkDay.Checked = False
-        resources.ApplyResources(Me.ucrChkDay, "ucrChkDay")
-        Me.ucrChkDay.Name = "ucrChkDay"
+        resources.ApplyResources(Me.lblShiftQuarter, "lblShiftQuarter")
+        Me.lblShiftQuarter.Name = "lblShiftQuarter"
         '
-        'ucrChkWeekday
+        'ucrChkShiftMonthName
         '
-        Me.ucrChkWeekday.Checked = False
-        resources.ApplyResources(Me.ucrChkWeekday, "ucrChkWeekday")
-        Me.ucrChkWeekday.Name = "ucrChkWeekday"
+        resources.ApplyResources(Me.ucrChkShiftMonthName, "ucrChkShiftMonthName")
+        Me.ucrChkShiftMonthName.Checked = False
+        Me.ucrChkShiftMonthName.Name = "ucrChkShiftMonthName"
         '
-        'ucrChkWeek
+        'ucrChkShiftQuarterAbbr
         '
-        Me.ucrChkWeek.Checked = False
-        resources.ApplyResources(Me.ucrChkWeek, "ucrChkWeek")
-        Me.ucrChkWeek.Name = "ucrChkWeek"
+        resources.ApplyResources(Me.ucrChkShiftQuarterAbbr, "ucrChkShiftQuarterAbbr")
+        Me.ucrChkShiftQuarterAbbr.Checked = False
+        Me.ucrChkShiftQuarterAbbr.Name = "ucrChkShiftQuarterAbbr"
+        '
+        'lblShiftAbbr
+        '
+        resources.ApplyResources(Me.lblShiftAbbr, "lblShiftAbbr")
+        Me.lblShiftAbbr.Name = "lblShiftAbbr"
+        '
+        'lblShiftDekad
+        '
+        resources.ApplyResources(Me.lblShiftDekad, "lblShiftDekad")
+        Me.lblShiftDekad.Name = "lblShiftDekad"
+        '
+        'ucrChkShiftDekadNum
+        '
+        resources.ApplyResources(Me.ucrChkShiftDekadNum, "ucrChkShiftDekadNum")
+        Me.ucrChkShiftDekadNum.Checked = False
+        Me.ucrChkShiftDekadNum.Name = "ucrChkShiftDekadNum"
+        '
+        'ucrChkShiftQuarterNum
+        '
+        resources.ApplyResources(Me.ucrChkShiftQuarterNum, "ucrChkShiftQuarterNum")
+        Me.ucrChkShiftQuarterNum.Checked = False
+        Me.ucrChkShiftQuarterNum.Name = "ucrChkShiftQuarterNum"
+        '
+        'ucrChkDayInYearNum
+        '
+        resources.ApplyResources(Me.ucrChkDayInYearNum, "ucrChkDayInYearNum")
+        Me.ucrChkDayInYearNum.Checked = False
+        Me.ucrChkDayInYearNum.Name = "ucrChkDayInYearNum"
+        '
+        'ucrChkShiftMonthNum
+        '
+        resources.ApplyResources(Me.ucrChkShiftMonthNum, "ucrChkShiftMonthNum")
+        Me.ucrChkShiftMonthNum.Checked = False
+        Me.ucrChkShiftMonthNum.Name = "ucrChkShiftMonthNum"
+        '
+        'lblShift
+        '
+        resources.ApplyResources(Me.lblShift, "lblShift")
+        Me.lblShift.Name = "lblShift"
+        '
+        'ucrChkShiftDayInYearNum366
+        '
+        resources.ApplyResources(Me.ucrChkShiftDayInYearNum366, "ucrChkShiftDayInYearNum366")
+        Me.ucrChkShiftDayInYearNum366.Checked = False
+        Me.ucrChkShiftDayInYearNum366.Name = "ucrChkShiftDayInYearNum366"
+        '
+        'ucrChkShiftPentadNum
+        '
+        resources.ApplyResources(Me.ucrChkShiftPentadNum, "ucrChkShiftPentadNum")
+        Me.ucrChkShiftPentadNum.Checked = False
+        Me.ucrChkShiftPentadNum.Name = "ucrChkShiftPentadNum"
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.ucrChkDaysInMonthNum)
+        Me.GroupBox2.Controls.Add(Me.lblDaysInMonth)
+        Me.GroupBox2.Controls.Add(Me.ucrChkWeekName)
+        Me.GroupBox2.Controls.Add(Me.lblDayInMonth)
+        Me.GroupBox2.Controls.Add(Me.ucrChkDayInMonthNum)
+        Me.GroupBox2.Controls.Add(Me.lblNumeric)
+        Me.GroupBox2.Controls.Add(Me.ucrChkWeekAbbr)
+        Me.GroupBox2.Controls.Add(Me.lblWeek)
+        Me.GroupBox2.Controls.Add(Me.ucrChkWeekdayName)
+        Me.GroupBox2.Controls.Add(Me.lblWeekDay)
+        Me.GroupBox2.Controls.Add(Me.ucrChkWeekdayAbbr)
+        Me.GroupBox2.Controls.Add(Me.lblName)
+        Me.GroupBox2.Controls.Add(Me.ucrChkWeekNum)
+        Me.GroupBox2.Controls.Add(Me.lblLeapYear)
+        Me.GroupBox2.Controls.Add(Me.ucrChkWeekdayNum)
+        Me.GroupBox2.Controls.Add(Me.ucrChkLeapYearNum)
+        Me.GroupBox2.Controls.Add(Me.lblAbbr)
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.TabStop = False
+        '
+        'ucrChkDaysInMonthNum
+        '
+        Me.ucrChkDaysInMonthNum.Checked = False
+        resources.ApplyResources(Me.ucrChkDaysInMonthNum, "ucrChkDaysInMonthNum")
+        Me.ucrChkDaysInMonthNum.Name = "ucrChkDaysInMonthNum"
+        '
+        'lblDaysInMonth
+        '
+        resources.ApplyResources(Me.lblDaysInMonth, "lblDaysInMonth")
+        Me.lblDaysInMonth.Name = "lblDaysInMonth"
+        '
+        'ucrChkWeekName
+        '
+        resources.ApplyResources(Me.ucrChkWeekName, "ucrChkWeekName")
+        Me.ucrChkWeekName.Checked = False
+        Me.ucrChkWeekName.Name = "ucrChkWeekName"
+        '
+        'ucrChkDayInMonthNum
+        '
+        resources.ApplyResources(Me.ucrChkDayInMonthNum, "ucrChkDayInMonthNum")
+        Me.ucrChkDayInMonthNum.Checked = False
+        Me.ucrChkDayInMonthNum.Name = "ucrChkDayInMonthNum"
+        '
+        'ucrChkWeekAbbr
+        '
+        resources.ApplyResources(Me.ucrChkWeekAbbr, "ucrChkWeekAbbr")
+        Me.ucrChkWeekAbbr.Checked = False
+        Me.ucrChkWeekAbbr.Name = "ucrChkWeekAbbr"
+        '
+        'ucrChkWeekdayName
+        '
+        resources.ApplyResources(Me.ucrChkWeekdayName, "ucrChkWeekdayName")
+        Me.ucrChkWeekdayName.Checked = False
+        Me.ucrChkWeekdayName.Name = "ucrChkWeekdayName"
+        '
+        'ucrChkWeekdayAbbr
+        '
+        resources.ApplyResources(Me.ucrChkWeekdayAbbr, "ucrChkWeekdayAbbr")
+        Me.ucrChkWeekdayAbbr.Checked = False
+        Me.ucrChkWeekdayAbbr.Name = "ucrChkWeekdayAbbr"
+        '
+        'ucrChkWeekNum
+        '
+        resources.ApplyResources(Me.ucrChkWeekNum, "ucrChkWeekNum")
+        Me.ucrChkWeekNum.Checked = False
+        Me.ucrChkWeekNum.Name = "ucrChkWeekNum"
+        '
+        'ucrChkWeekdayNum
+        '
+        resources.ApplyResources(Me.ucrChkWeekdayNum, "ucrChkWeekdayNum")
+        Me.ucrChkWeekdayNum.Checked = False
+        Me.ucrChkWeekdayNum.Name = "ucrChkWeekdayNum"
+        '
+        'ucrChkLeapYearNum
+        '
+        resources.ApplyResources(Me.ucrChkLeapYearNum, "ucrChkLeapYearNum")
+        Me.ucrChkLeapYearNum.Checked = False
+        Me.ucrChkLeapYearNum.Name = "ucrChkLeapYearNum"
         '
         'ucrReceiverUseDate
         '
@@ -269,6 +409,7 @@ Partial Class dlgUseDate
         '
         'ucrSelectorUseDate
         '
+        Me.ucrSelectorUseDate.bDropUnusedFilterLevels = False
         Me.ucrSelectorUseDate.bShowHiddenColumns = False
         Me.ucrSelectorUseDate.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorUseDate, "ucrSelectorUseDate")
@@ -278,25 +419,20 @@ Partial Class dlgUseDate
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpOthers)
-        Me.Controls.Add(Me.grpShifted)
+        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ucrReceiverUseDate)
-        Me.Controls.Add(Me.grpFullName)
         Me.Controls.Add(Me.lblDateVariable)
-        Me.Controls.Add(Me.grpAbbreviation)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.grpValues)
         Me.Controls.Add(Me.ucrSelectorUseDate)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgUseDate"
-        Me.grpShifted.ResumeLayout(False)
-        Me.grpShifted.PerformLayout()
-        Me.grpOthers.ResumeLayout(False)
-        Me.grpFullName.ResumeLayout(False)
-        Me.grpAbbreviation.ResumeLayout(False)
-        Me.grpValues.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -306,29 +442,50 @@ Partial Class dlgUseDate
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblDateVariable As Label
     Friend WithEvents ucrReceiverUseDate As ucrReceiverSingle
-    Friend WithEvents grpOthers As GroupBox
-    Friend WithEvents grpFullName As GroupBox
-    Friend WithEvents grpAbbreviation As GroupBox
-    Friend WithEvents grpValues As GroupBox
-    Friend WithEvents ucrChkDayYear366 As ucrCheck
-    Friend WithEvents ucrChkDayInYear As ucrCheck
-    Friend WithEvents ucrChkWeekday As ucrCheck
-    Friend WithEvents ucrChkWeek As ucrCheck
-    Friend WithEvents ucrChkDay As ucrCheck
-    Friend WithEvents ucrChkMonth As ucrCheck
-    Friend WithEvents ucrChkYear As ucrCheck
-    Friend WithEvents ucrChkFullWeekday As ucrCheck
-    Friend WithEvents ucrChkFullMonth As ucrCheck
-    Friend WithEvents ucrChkAbbrMonth As ucrCheck
-    Friend WithEvents ucrChkAbbrWeekday As ucrCheck
-    Friend WithEvents ucrChkLeapYear As ucrCheck
-    Friend WithEvents ucrChkDekad As ucrCheck
-    Friend WithEvents ucrChkPentad As ucrCheck
-    Friend WithEvents ucrNudShiftStartDay As ucrNud
-    Friend WithEvents ucrChkShiftDay As ucrCheck
-    Friend WithEvents lblDay As Label
-    Friend WithEvents ucrChkShiftYear As ucrCheck
-    Friend WithEvents grpShifted As GroupBox
-    Friend WithEvents lblMonth As Label
-    Friend WithEvents ucrInputComboBoxMonth As ucrInputComboBox
+    Friend WithEvents ucrChkWeekdayNum As ucrCheck
+    Friend WithEvents ucrChkWeekNum As ucrCheck
+    Friend WithEvents ucrChkWeekName As ucrCheck
+    Friend WithEvents ucrChkWeekdayName As ucrCheck
+    Friend WithEvents ucrChkWeekdayAbbr As ucrCheck
+    Friend WithEvents ucrChkLeapYearNum As ucrCheck
+    Friend WithEvents lblShiftStartingMonth As Label
+    Friend WithEvents ucrInputComboBoxStartingMonth As ucrInputComboBox
+    Friend WithEvents ucrChkWeekAbbr As ucrCheck
+    Friend WithEvents ucrChkDayInMonthNum As ucrCheck
+    Friend WithEvents lblLeapYear As Label
+    Friend WithEvents lblAbbr As Label
+    Friend WithEvents lblName As Label
+    Friend WithEvents lblWeekDay As Label
+    Friend WithEvents lblWeek As Label
+    Friend WithEvents lblNumeric As Label
+    Friend WithEvents lblDayInMonth As Label
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents ucrChkShiftPentadAbbr As ucrCheck
+    Friend WithEvents lblShiftYear As Label
+    Friend WithEvents ucrChkShiftYearNum As ucrCheck
+    Friend WithEvents ucrChkShiftDekadAbbr As ucrCheck
+    Friend WithEvents ucrChkShiftMonthAbbr As ucrCheck
+    Friend WithEvents ucrChkShiftMonthName As ucrCheck
+    Friend WithEvents lblShiftAbbr As Label
+    Friend WithEvents ucrChkShiftDekadNum As ucrCheck
+    Friend WithEvents ucrChkShiftMonthNum As ucrCheck
+    Friend WithEvents ucrChkShiftPentadNum As ucrCheck
+    Friend WithEvents ucrChkShiftDayInYearNum366 As ucrCheck
+    Friend WithEvents lblShift As Label
+    Friend WithEvents ucrChkDayInYearNum As ucrCheck
+    Friend WithEvents ucrChkShiftQuarterNum As ucrCheck
+    Friend WithEvents lblShiftDekad As Label
+    Friend WithEvents ucrChkShiftQuarterAbbr As ucrCheck
+    Friend WithEvents lblShiftQuarter As Label
+    Friend WithEvents lblShiftNumeric As Label
+    Friend WithEvents lblDayInYear As Label
+    Friend WithEvents lblShiftMonth As Label
+    Friend WithEvents lblShiftPentad As Label
+    Friend WithEvents lblDayinYear366 As Label
+    Friend WithEvents lblShifted As Label
+    Friend WithEvents ucrChkShiftYearName As ucrCheck
+    Friend WithEvents ttYearNumeric As ToolTip
+    Friend WithEvents ucrChkDaysInMonthNum As ucrCheck
+    Friend WithEvents lblDaysInMonth As Label
 End Class

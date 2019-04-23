@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgExtremesClimatic
     Private bFirstload As Boolean = True
@@ -47,7 +46,6 @@ Public Class dlgExtremesClimatic
     Private clsFilterExtremeExp As New ROperator
 
     Private Sub dlgExtremesClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstload Then
             InitialiseDialog()
             bFirstload = False
@@ -77,7 +75,6 @@ Public Class dlgExtremesClimatic
         '' What is Date used for in this?
         ucrReceiverDate.SetParameter(New RParameter("x", 0))
         ucrReceiverDate.SetClimaticType("date")
-        ucrReceiverDate.SetMeAsReceiver()
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.bWithQuotes = False
         ucrReceiverDate.Selector = ucrSelectorClimaticExtremes
@@ -96,8 +93,9 @@ Public Class dlgExtremesClimatic
         ucrReceiverElement.Selector = ucrSelectorClimaticExtremes
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
+        ucrReceiverElement.bAutoFill = True
         ucrReceiverElement.strSelectorHeading = "Numerics"
-        ucrReceiverElement.SetDataType("numeric")
+        ucrReceiverElement.SetIncludedDataTypes({"numeric"})
 
         ' Panel Options
         ucrPnlExtremesType.AddRadioButton(rdoMinMax)
@@ -189,6 +187,7 @@ Public Class dlgExtremesClimatic
         clsFilterExtremeExp.Clear()
 
         ucrSelectorClimaticExtremes.Reset()
+        ucrReceiverElement.SetMeAsReceiver()
         SetCalculationValues()
 
         clsDayFilterCalcFromConvert = New RFunction
@@ -203,6 +202,7 @@ Public Class dlgExtremesClimatic
         clsDayFromAndTo.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsDayFromAndTo.AddParameter("function_exp", clsROperatorParameter:=clsDayFromAndToOperator, iPosition:=1)
         clsDayFromAndToOperator.SetOperation("&")
+        clsDayFromAndToOperator.bBrackets = False
         clsDayFromAndToOperator.AddParameter("from_operator", clsROperatorParameter:=clsDayFromOperator, iPosition:=0)
         clsDayFromOperator.SetOperation(">=")
         clsDayFromOperator.AddParameter("from", 1, iPosition:=1)

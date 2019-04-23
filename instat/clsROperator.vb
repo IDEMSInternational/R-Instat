@@ -19,6 +19,8 @@ Public Class ROperator
     Public bForceIncludeOperation As Boolean = False
     Public strOperation As String
     Public bBrackets As Boolean = True
+    ' This could be replaced by bBrackets once tested
+    Public bAllBrackets As Boolean = False
     Public bSpaceAroundOperation As Boolean = True
 
     Public Sub New(Optional strOp As String = "", Optional bBracketsTemp As Boolean = True)
@@ -64,7 +66,11 @@ Public Class ROperator
             For Each clsParam In clsParameters.GetRange(1, clsParameters.Count - 1)
                 'If bIncludeOperation Then
                 strTemp = strTemp & strAdjustedOperation
-                strTemp = strTemp & clsParam.ToScript(strScript)
+                If bAllBrackets AndAlso (clsParam.bIsFunction OrElse clsParam.bIsOperator) Then
+                    strTemp = strTemp & "(" & clsParam.ToScript(strScript) & ")"
+                Else
+                    strTemp = strTemp & clsParam.ToScript(strScript)
+                End If
             Next
             If bToScriptAsRString Then
                 'TODO should also check assignment of parameters
@@ -145,6 +151,7 @@ Public Class ROperator
         clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
         clsTempROperator.strOperation = strOperation
         clsTempROperator.bBrackets = bBrackets
+        clsTempROperator.bAllBrackets = bAllBrackets
         clsTempROperator.bSpaceAroundOperation = bSpaceAroundOperation
 
         Return clsTempROperator

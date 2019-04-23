@@ -24,6 +24,7 @@ Public Class ucrReceiver
     Public bFirstShown As Boolean
     Public strSelectorHeading As String
     Public bUseFilteredData As Boolean = True
+    Public bDropUnusedFilterLevels As Boolean = False
     Public bTypeSet As Boolean
     Protected strType As String
     Public bExcludeFromSelector As Boolean = False
@@ -40,8 +41,11 @@ Public Class ucrReceiver
     Protected bParameterIsString As Boolean = False
     'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_columns_from_data()
     Protected bParameterIsRFunction As Boolean = False
-    'The name of the data parameter in the get columns instat object method (should always be the same)
+    'The name of the parameter which contains the items in the get instat object method (depends on the type of items in the receiver)
     Protected strItemsParameterNameInRFunction As String = "col_names"
+
+    'Name of the data name parameter in the get instat object method (depends on the type of items in the receiver)
+    Protected strDataFrameParameterNameInRFunction As String = "data_name"
 
     'Should quotes be used when bParameterIsString = False
     Public bWithQuotes As Boolean = True
@@ -52,6 +56,19 @@ Public Class ucrReceiver
     ' If True then this receiver can only contain a column from the selector's primary data frame
     ' and this receiver can set the selector's primary data frame (when current receiver), resetting all other receivers
     Public bAttachedToPrimaryDataFrame As Boolean = True
+
+    ' If not attached to primary data frame, should only data frames linked to the primary data frame be shown.
+    Public bOnlyLinkedToPrimaryDataFrames As Boolean = True
+
+    ' When calling GetVariableNames() this is the R package & function name the variables will be inside
+    ' Only currently used in Multiple receiver but defined here as needed in general method SetControlValue()
+    ' for ExtractItemsFromRList()
+    Protected strVariablesListPackageName As String = ""
+    Protected strVariablesListFunctionName As String = "c"
+    ' Set to True if GetVariableNames() should always return an R list (using function above)
+    ' Even when only one variable.
+    ' Currently only implemented for multiple receiver.
+    Public bForceVariablesAsList As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -124,7 +141,7 @@ Public Class ucrReceiver
         Return strVarNames
     End Function
 
-    Public Overridable Function GetVariableNamesList(Optional bWithQuotes As Boolean = True) As String()
+    Public Overridable Function GetVariableNamesList(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
         Dim strVarNames As String() = Nothing
         Return strVarNames
     End Function
@@ -368,6 +385,8 @@ Public Class ucrReceiver
                 strItemsParameterNameInRFunction = "graph_name"
             Case "model"
                 strItemsParameterNameInRFunction = "model_name"
+            Case "surv"
+                strItemsParameterNameInRFunction = "surv_name"
             Case "table"
                 strItemsParameterNameInRFunction = "table_name"
             Case "filter"
@@ -407,27 +426,39 @@ Public Class ucrReceiver
         Dim clsTempDataParameter As RParameter
         Dim lstCurrentVariables As String() = Nothing
         Dim clsTempParameter As RParameter
+        Dim strTempDataName As String = ""
 
         clsTempParameter = GetParameter()
         If clsTempParameter IsNot Nothing Then
             If bChangeParameterValue Then
                 If bParameterIsString AndAlso clsTempParameter.bIsString Then
                     If strValuesToIgnore Is Nothing OrElse (Not strValuesToIgnore.Contains(clsTempParameter.strArgumentValue)) Then
-                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue)
+                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue, strPackageName:=strVariablesListPackageName, strFunctionName:=strVariablesListFunctionName)
                     End If
+                    'TODO how to recover the data frame name in this case
                 ElseIf bParameterIsRFunction AndAlso clsTempParameter.bIsFunction Then
                     clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
-                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue)
+                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue, strPackageName:="", strFunctionName:="c")
+                    End If
+                    'TODO Should this the same for other item types?
+                    If strType = "column" Then
+                        clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strDataFrameParameterNameInRFunction)
+                        If clsTempDataParameter IsNot Nothing Then
+                            strTempDataName = clsTempParameter.clsArgumentCodeStructure.GetParameter(strDataFrameParameterNameInRFunction).strArgumentValue.Trim(Chr(34))
+                        End If
                     End If
                 End If
                 Clear()
                 If lstCurrentVariables IsNot Nothing Then
                     For Each strTemp As String In lstCurrentVariables
-                        'TODO This only works if the selector is updated before receivers!
+                        'TODO This only works if the selector is updated before receivers and dialog only uses one data frame!
                         '     Needs to change eventually.
                         If Selector IsNot Nothing AndAlso strTemp <> "" Then
-                            Add(strTemp, Selector.strCurrentDataFrame)
+                            If strTempDataName = "" Then
+                                strTempDataName = Selector.strCurrentDataFrame
+                            End If
+                            Add(strTemp, strTempDataName)
                         End If
                     Next
                 End If
@@ -477,6 +508,38 @@ Public Class ucrReceiver
         AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & strTemp & Chr(34)})
     End Sub
 
+    Public Sub SetOptionsByContextType(strSingleType As String, Optional strQuotes As String = Chr(34))
+        AddIncludedMetadataProperty("O_by_C_Type", {strQuotes & strSingleType & strQuotes})
+    End Sub
+
+    Public Sub SetOptionsByContextTypes(strTemp() As String)
+        AddIncludedMetadataProperty("O_by_C_Type", strTemp)
+    End Sub
+
+    Public Sub SetOptionsByContextTypesAllMeasurements()
+        AddIncludedMetadataProperty("O_by_C_Type", {Chr(34) & "measurement_1" & Chr(34), Chr(34) & "measurement_other" & Chr(34)})
+    End Sub
+
+    Public Sub SetOptionsByContextTypesAllIDs()
+        AddIncludedMetadataProperty("O_by_C_Type", {Chr(34) & "id_1" & Chr(34), Chr(34) & "id_other" & Chr(34)})
+    End Sub
+
+    Public Sub SetOptionsByContextTypesAllContexts()
+        AddIncludedMetadataProperty("O_by_C_Type", {Chr(34) & "context_1" & Chr(34), Chr(34) & "context_2" & Chr(34), Chr(34) & "context_3" & Chr(34), Chr(34) & "context_4" & Chr(34), Chr(34) & "context_other" & Chr(34)})
+    End Sub
+
+    Public Sub SetOptionsByContextTypesAllOptions()
+        AddIncludedMetadataProperty("O_by_C_Type", {Chr(34) & "option_1" & Chr(34), Chr(34) & "option_other" & Chr(34)})
+    End Sub
+
+    Public Sub SetOptionsByContextTypesAllBlockings()
+        AddIncludedMetadataProperty("O_by_C_Type", {Chr(34) & "blocking_1" & Chr(34), Chr(34) & "blocking_other" & Chr(34)})
+    End Sub
+
+    Public Sub SetOptionsByContextTypesAllOptionsContextsBlockings()
+        AddIncludedMetadataProperty("O_by_C_Type", {Chr(34) & "option_1" & Chr(34), Chr(34) & "option_other" & Chr(34), Chr(34) & "context_1" & Chr(34), Chr(34) & "context_2" & Chr(34), Chr(34) & "context_3" & Chr(34), Chr(34) & "context_4" & Chr(34), Chr(34) & "context_other" & Chr(34), Chr(34) & "blocking_1" & Chr(34), Chr(34) & "blocking_other" & Chr(34)})
+    End Sub
+
     Public Overridable Property Selector As ucrSelector
         Get
             Return ucrSelector
@@ -497,4 +560,19 @@ Public Class ucrReceiver
     Public Overridable Function GetItemsDataFrames() As List(Of String)
         Return New List(Of String)
     End Function
+
+    Public Sub AddItemsWithMetadataProperty(strCurrentDataFrame As String, strProperty As String, strValues As String())
+        If Selector IsNot Nothing Then
+            SetMeAsReceiver()
+            frmMain.clsRLink.SelectColumnsWithMetadataProperty(Me, strCurrentDataFrame, strProperty, strValues)
+        End If
+    End Sub
+
+    Public Sub SetVariablesListPackageName(strNewVariablesListPackageName As String)
+        strVariablesListPackageName = strNewVariablesListPackageName
+    End Sub
+
+    Public Sub SetVariablesListFunctionName(strNewVariablesListFunctionName As String)
+        strVariablesListFunctionName = strNewVariablesListFunctionName
+    End Sub
 End Class

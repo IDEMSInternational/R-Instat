@@ -43,7 +43,7 @@ Public Class frmVariables
         'grdVariables.ColumnHeaderContextMenuStrip = context.grdData.ColumnHeaderContextMenuStrip
         'grdVariables.RowHeaderContextMenuStrip = context.grdData.RowHeaderContextMenuStrip
         'grdVariables.ContextMenuStrip = context.grdData.ContextMenuStrip
-        'autoTranslate(Me)
+        autoTranslate(Me)
     End Sub
 
     Private Sub grdVariables_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdVariables.CurrentWorksheetChanged, Me.Load, grdVariables.WorksheetInserted

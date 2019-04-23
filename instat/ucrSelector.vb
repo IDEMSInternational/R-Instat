@@ -73,10 +73,16 @@ Public Class ucrSelector
     End Sub
 
     Protected Sub OnDataFrameChanged()
+        Dim ucrPreviousCurrentReceiver As ucrReceiver
+
         If bSilentDataFrameChange Then
             bSilentDataFrameChange = False
         Else
+            ucrPreviousCurrentReceiver = CurrentReceiver
             RaiseEvent DataFrameChanged()
+            If ucrPreviousCurrentReceiver IsNot Nothing Then
+                ucrPreviousCurrentReceiver.SetMeAsReceiver()
+            End If
             If CurrentReceiver IsNot Nothing AndAlso CurrentReceiver.bAttachedToPrimaryDataFrame Then
                 ClearGgplotOptions()
             End If
@@ -146,7 +152,7 @@ Public Class ucrSelector
         If conReceiver IsNot Nothing Then
             CurrentReceiver = conReceiver
             CurrentReceiver.SetColor()
-            SetPrimaryDataFrameOptions(strPrimaryDataFrame, Not CurrentReceiver.bAttachedToPrimaryDataFrame)
+            SetPrimaryDataFrameOptions(strPrimaryDataFrame, Not CurrentReceiver.bAttachedToPrimaryDataFrame AndAlso CurrentReceiver.bOnlyLinkedToPrimaryDataFrames)
             If Not CurrentReceiver.IsEmpty Then
                 lstReceiverDataFrames = CurrentReceiver.GetItemsDataFrames()
                 If lstReceiverDataFrames.Count = 1 AndAlso lstReceiverDataFrames(0) <> "" AndAlso lstReceiverDataFrames(0) <> strCurrentDataFrame Then

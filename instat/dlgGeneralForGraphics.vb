@@ -45,8 +45,6 @@ Public Class dlgGeneralForGraphics
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         autoTranslate(Me)
         TestOKEnabled()
@@ -68,6 +66,7 @@ Public Class dlgGeneralForGraphics
         iLayerIndex = 0
         lstLayerComplete.Clear()
         strGlobalDataFrame = ""
+        ucrSaveGraph.Reset()
         bDataFrameSet = False
         bResetOptionsSubdialog = True
 
@@ -83,12 +82,8 @@ Public Class dlgGeneralForGraphics
         clsGlobalAesFunction.SetRCommand("aes")
 
         clsBaseOperator.AddParameter("ggplot2", clsRFunctionParameter:=clsGgplotFunction, iPosition:=0)
-        clsBaseOperator.SetAssignTo("last_graph", strTempGraph:="last_graph")
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsBaseOperator.bExcludeAssignedFunctionOutput = False
-
-        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-
-        ucrAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsGgplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strGlobalDataFrame, bReset:=True)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -100,6 +95,9 @@ Public Class dlgGeneralForGraphics
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
 
+        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        ucrAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsGgplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strGlobalDataFrame, bReset:=True)
+
         If ucrBase.clsRsyntax.clsBaseOperator IsNot Nothing Then
             ucrBase.clsRsyntax.clsBaseOperator.RemoveAllAdditionalParameters()
         End If
@@ -108,9 +106,6 @@ Public Class dlgGeneralForGraphics
         TestOKEnabled()
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -124,15 +119,6 @@ Public Class dlgGeneralForGraphics
             End If
         Next
         ucrBase.OKEnabled(bTemp)
-    End Sub
-
-    Private Sub ucrSaveGraph_GraphNameChanged() Handles ucrSaveGraph.GraphNameChanged, ucrSaveGraph.SaveGraphCheckedChanged
-        'Warning/Task: this method seems weird to me, why do we get the dataframe from sdgLayerOptions ???!
-        If ucrSaveGraph.bSaveGraph Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveGraph.strGraphName, strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveGraph.strGraphName)
-        Else
-            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        End If
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click

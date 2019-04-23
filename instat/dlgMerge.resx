@@ -117,9 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cmdJoinOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdJoinOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 121</value>
+    <value>8, 184</value>
   </data>
   <data name="cmdJoinOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 23</value>
@@ -141,10 +145,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdJoinOptions.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="lnlJoinType.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lnlJoinType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lnlJoinType.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 88</value>
@@ -168,10 +175,61 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lnlJoinType.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblMergeBy.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMergeBy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMergeBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 128</value>
+  </data>
+  <data name="lblMergeBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="lblMergeBy.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblMergeBy.Text" xml:space="preserve">
+    <value>Merging By:</value>
+  </data>
+  <data name="&gt;&gt;lblMergeBy.Name" xml:space="preserve">
+    <value>lblMergeBy</value>
+  </data>
+  <data name="&gt;&gt;lblMergeBy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMergeBy.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblMergeBy.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrInputMergingBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 125</value>
+  </data>
+  <data name="ucrInputMergingBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 53</value>
+  </data>
+  <data name="ucrInputMergingBy.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMergingBy.Name" xml:space="preserve">
+    <value>ucrInputMergingBy</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMergingBy.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMergingBy.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMergingBy.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrSaveMerge.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 155</value>
+    <value>9, 219</value>
   </data>
   <data name="ucrSaveMerge.Size" type="System.Drawing.Size, System.Drawing">
     <value>301, 24</value>
@@ -189,10 +247,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveMerge.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="ucrInputJoinType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 85</value>
+    <value>116, 85</value>
   </data>
   <data name="ucrInputJoinType.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -210,12 +268,11 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputJoinType.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="ucrSecondDataFrame.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 22</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSecondDataFrame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
@@ -235,7 +292,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSecondDataFrame.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="ucrFirstDataFrame.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 22</value>
@@ -259,10 +316,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFirstDataFrame.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 185</value>
+    <value>8, 251</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 53</value>
@@ -280,7 +337,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -289,7 +346,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>418, 239</value>
+    <value>418, 306</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

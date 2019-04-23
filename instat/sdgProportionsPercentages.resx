@@ -126,7 +126,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdoByFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>34, 40</value>
+    <value>49, 40</value>
   </data>
   <data name="rdoByFactors.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 27</value>
@@ -160,7 +160,7 @@
     <value>Flat</value>
   </data>
   <data name="rdoByFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 40</value>
+    <value>149, 40</value>
   </data>
   <data name="rdoByFilter.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 27</value>
@@ -193,7 +193,7 @@
     <value>Flat</value>
   </data>
   <data name="rdoByColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 40</value>
+    <value>250, 40</value>
   </data>
   <data name="rdoByColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 27</value>
@@ -223,7 +223,7 @@
     <value>True</value>
   </data>
   <data name="lblByFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 114</value>
+    <value>238, 115</value>
   </data>
   <data name="lblByFactors.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 13</value>
@@ -250,7 +250,7 @@
     <value>True</value>
   </data>
   <data name="lblColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 114</value>
+    <value>238, 115</value>
   </data>
   <data name="lblColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
@@ -274,7 +274,7 @@
     <value>3</value>
   </data>
   <data name="ucrChkDisplayAsDecimal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 27</value>
+    <value>7, 21</value>
   </data>
   <data name="ucrChkDisplayAsDecimal.Size" type="System.Drawing.Size, System.Drawing">
     <value>214, 20</value>
@@ -295,10 +295,10 @@
     <value>0</value>
   </data>
   <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 271</value>
+    <value>9, 265</value>
   </data>
   <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 95</value>
+    <value>210, 88</value>
   </data>
   <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -322,7 +322,7 @@
     <value>True</value>
   </data>
   <data name="lblFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 114</value>
+    <value>239, 115</value>
   </data>
   <data name="lblFilter.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -352,10 +352,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>410, 418</value>
+    <value>410, 397</value>
   </data>
   <data name="ucrReceiverColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 129</value>
+    <value>239, 130</value>
   </data>
   <data name="ucrReceiverColumn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -379,7 +379,7 @@
     <value>4</value>
   </data>
   <data name="ucrButtonsProportionsPercentiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 381</value>
+    <value>134, 361</value>
   </data>
   <data name="ucrButtonsProportionsPercentiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 30</value>
@@ -400,7 +400,7 @@
     <value>5</value>
   </data>
   <data name="ucrReceiverByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 129</value>
+    <value>239, 130</value>
   </data>
   <data name="ucrReceiverByFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -424,7 +424,7 @@
     <value>6</value>
   </data>
   <data name="ucrSelectorProportionsPercentiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 79</value>
+    <value>9, 79</value>
   </data>
   <data name="ucrSelectorProportionsPercentiles.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -448,7 +448,7 @@
     <value>8</value>
   </data>
   <data name="ucrPnlBY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 32</value>
+    <value>37, 32</value>
   </data>
   <data name="ucrPnlBY.Size" type="System.Drawing.Size, System.Drawing">
     <value>336, 44</value>
@@ -469,7 +469,7 @@
     <value>12</value>
   </data>
   <data name="ucrChkProportionsPercentages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 14</value>
+    <value>10, 14</value>
   </data>
   <data name="ucrChkProportionsPercentages.Size" type="System.Drawing.Size, System.Drawing">
     <value>214, 20</value>
@@ -493,7 +493,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Proportions Or Percentages</value>
+    <value>Proportions or Percentages</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>sdgProportionsPercentages</value>
@@ -502,7 +502,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 129</value>
+    <value>239, 130</value>
   </data>
   <data name="ucrReceiverFilter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

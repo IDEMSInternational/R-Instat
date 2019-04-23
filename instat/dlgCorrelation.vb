@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgCorrelation
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRGGscatMatrixFunction, clsCorrelationFunction, clsRTempFunction, clsTempFunc As New RFunction
+    Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGGscatMatrixFunction, clsCorrelationFunction, clsRTempFunction, clsTempFunc As New RFunction
+    Private clsRGraphicsFuction, clsListFunction, clsWrapFunction As New RFunction
     Private clsColFunction As String
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
@@ -35,7 +36,6 @@ Public Class dlgCorrelation
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
-        ReopenDialog()
         SetDefaultColumn()
         TestOKEnabled()
     End Sub
@@ -66,8 +66,6 @@ Public Class dlgCorrelation
         ucrReceiverMultipleColumns.SetIncludedDataTypes({"numeric", "logical"})
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        'TODO: Fix bugs produced when rdoScatterplotMatrix is checked. Disabled for now
-        sdgCorrPlot.rdoScatterPlotMatrix.Enabled = False
 
         ucrNudConfidenceInterval.SetParameter(New RParameter("conf.level", 3))
         ucrNudConfidenceInterval.SetMinMax(0, 1)
@@ -84,7 +82,6 @@ Public Class dlgCorrelation
         ucrPnlMethod.AddRadioButton(rdoPearson, Chr(34) & "pearson" & Chr(34))
         ucrPnlMethod.AddRadioButton(rdoKendall, Chr(34) & "kendall" & Chr(34))
         ucrPnlMethod.AddRadioButton(rdoSpearman, Chr(34) & "spearman" & Chr(34))
-        ucrPnlMethod.SetRDefault(Chr(34) & "pearson" & Chr(34))
 
         ucrPnlCompletePairwise.SetParameter(New RParameter("use", 5))
         ucrPnlCompletePairwise.AddRadioButton(rdoCompleteRowsOnly, Chr(34) & "complete.obs" & Chr(34))
@@ -119,6 +116,8 @@ Public Class dlgCorrelation
         clsCorrelationFunction = New RFunction
         clsRGGcorrGraphicsFunction = New RFunction
         clsRGraphicsFuction = New RFunction
+        clsListFunction = New RFunction
+        clsWrapFunction = New RFunction
         clsRGGscatMatrixFunction = New RFunction
         clsTempFunc = New RFunction
         bResetSubdialog = True
@@ -134,13 +133,19 @@ Public Class dlgCorrelation
         clsRGraphicsFuction.SetRCommand("ggpairs")
         clsRGraphicsFuction.iCallType = 3
         clsRGraphicsFuction.bExcludeAssignedFunctionOutput = False
-        clsRGraphicsFuction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
+        clsRGraphicsFuction.AddParameter("data", clsRFunctionParameter:=clsTempFunc, iPosition:=0)
+        clsRGraphicsFuction.AddParameter("lower", clsRFunctionParameter:=clsListFunction, iPosition:=3)
+        clsListFunction.SetRCommand("list")
+        clsWrapFunction.SetPackageName("GGally")
+        clsWrapFunction.SetRCommand("wrap")
+        clsWrapFunction.AddParameter("points", Chr(39) & "points" & Chr(39), bIncludeArgumentName:=False, iPosition:=0)
+        clsListFunction.AddParameter("continuous", clsRFunctionParameter:=clsWrapFunction)
 
         clsRGGscatMatrixFunction.SetPackageName("GGally")
         clsRGGscatMatrixFunction.SetRCommand("ggscatmat")
         clsRGGscatMatrixFunction.iCallType = 3
         clsRGGscatMatrixFunction.bExcludeAssignedFunctionOutput = False
-        clsRGGscatMatrixFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
+        clsRGGscatMatrixFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc, iPosition:=0)
 
         clsCorrelationTestFunction.SetRCommand("cor.test")
         clsCorrelationTestFunction.iCallType = 2
@@ -170,12 +175,17 @@ Public Class dlgCorrelation
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlMethod.AddAdditionalCodeParameterPair(clsCorrelationFunction, New RParameter("method", 4), iAdditionalPairNo:=1)
+        ucrPnlMethod.AddAdditionalCodeParameterPair(clsWrapFunction, New RParameter("method", 2), iAdditionalPairNo:=2)
+        ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGcorrGraphicsFunction, New RParameter("method", 2), iAdditionalPairNo:=3)
+        ucrPnlMethod.AddAdditionalCodeParameterPair(clsRGGscatMatrixFunction, New RParameter("corMethod", 4), iAdditionalPairNo:=4)
         '        ucrReceiverMultipleColumns.AddAdditionalCodeParameterPair(clsRGraphicsFuction, New RParameter("columns", 1), iAdditionalPairNo:=1) ' this has to be done manually for now as it needs to be a string for this function but r function for another
         ucrReceiverMultipleColumns.SetRCode(clsCorrelationFunction, bReset)
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverFirstColumn.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverSecondColumn.SetRCode(clsCorrelationTestFunction, bReset)
-        ucrPnlColumns.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        If bReset Then
+            ucrPnlColumns.SetRCode(clsCorrelationTestFunction, bReset)
+        End If
         ucrPnlMethod.SetRCode(clsCorrelationTestFunction, bReset)
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
         ucrSaveModel.AddAdditionalRCode(clsCorrelationTestFunction, 1)
@@ -225,18 +235,9 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatMatrixFunction, clsColFunction, bReset:=bResetSubdialog)
+        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatMatrixFunction, clsColFunction, ucrSelectorCorrelation, bReset:=bResetSubdialog)
         sdgCorrPlot.ShowDialog()
         bResetSubdialog = False
-    End Sub
-
-    Private Sub ReopenDialog()
-        ucrPnlCompletePairwise.bAllowNonConditionValues = True ' temp fix. Otherwise developer error if you close and reopen on the "Two Columns" radio button since this won't be visible
-        If rdoMultipleColumns.Checked Then
-            grpMissing.Visible = True
-        Else
-            grpMissing.Visible = False
-        End If
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
@@ -267,7 +268,8 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub ucrReceiverMultipleColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleColumns.ControlValueChanged
-        clsRGraphicsFuction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames())
+        clsRGraphicsFuction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames(), iPosition:=1)
+        clsRGGscatMatrixFunction.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames(), iPosition:=1)
     End Sub
 
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged

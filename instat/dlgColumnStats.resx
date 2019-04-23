@@ -180,6 +180,90 @@
   <data name="&gt;&gt;lblByFactors.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="&gt;&gt;ucrChkOriginalLevel.Name" xml:space="preserve">
+    <value>ucrChkOriginalLevel</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOriginalLevel.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOriginalLevel.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOriginalLevel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkStoreResults.Name" xml:space="preserve">
+    <value>ucrChkStoreResults</value>
+  </data>
+  <data name="&gt;&gt;ucrChkStoreResults.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkStoreResults.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkStoreResults.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissing.Name" xml:space="preserve">
+    <value>ucrChkOmitMissing</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissing.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissing.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissing.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPrintOutput.Name" xml:space="preserve">
+    <value>ucrChkPrintOutput</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPrintOutput.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPrintOutput.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkPrintOutput.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropUnusedLevels.Name" xml:space="preserve">
+    <value>ucrChkDropUnusedLevels</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropUnusedLevels.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropUnusedLevels.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDropUnusedLevels.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 196</value>
+  </data>
+  <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 145</value>
+  </data>
+  <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="grpOptions.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Name" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="ucrChkOriginalLevel.Location" type="System.Drawing.Point, System.Drawing">
     <value>25, 42</value>
   </data>
@@ -223,7 +307,7 @@
     <value>1</value>
   </data>
   <data name="ucrChkOmitMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 119</value>
+    <value>6, 117</value>
   </data>
   <data name="ucrChkOmitMissing.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 20</value>
@@ -244,7 +328,7 @@
     <value>2</value>
   </data>
   <data name="ucrChkPrintOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 69</value>
+    <value>6, 67</value>
   </data>
   <data name="ucrChkPrintOutput.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 20</value>
@@ -265,7 +349,7 @@
     <value>3</value>
   </data>
   <data name="ucrChkDropUnusedLevels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 94</value>
+    <value>6, 92</value>
   </data>
   <data name="ucrChkDropUnusedLevels.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 20</value>
@@ -285,35 +369,11 @@
   <data name="&gt;&gt;ucrChkDropUnusedLevels.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 196</value>
-  </data>
-  <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 145</value>
-  </data>
-  <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="grpOptions.Text" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="&gt;&gt;grpOptions.Name" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;grpOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpOptions.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="cmdSummaries.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 289</value>
+    <value>265, 289</value>
   </data>
   <data name="cmdSummaries.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 23</value>
@@ -340,7 +400,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdProportionsPercentages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 318</value>
+    <value>265, 318</value>
   </data>
   <data name="cmdProportionsPercentages.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 23</value>
@@ -349,7 +409,7 @@
     <value>7</value>
   </data>
   <data name="cmdProportionsPercentages.Text" xml:space="preserve">
-    <value>Proportions/Percentages...</value>
+    <value>Prop. and Percentages...</value>
   </data>
   <data name="&gt;&gt;cmdProportionsPercentages.Name" xml:space="preserve">
     <value>cmdProportionsPercentages</value>
@@ -421,7 +481,7 @@
     <value>7</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 349</value>
+    <value>10, 347</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>402, 53</value>
@@ -440,9 +500,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
