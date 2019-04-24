@@ -203,19 +203,22 @@ Public Class sdgPICSARainfallGraph
         ucrPnlYAxisType.AddParameterValueFunctionNamesCondition(rdoYDate, "y", "as.Date", True)
 
         'TODO not yet implemented need to ensure correct date will be used (2015/16 depending on origin date)
-        ucrInputYSpecifyLowerLimitDate.Visible = False
-        ucrInputYSpecifyUpperLimitDate.Visible = False
+        'ucrInputYSpecifyLowerLimitDate.Visible = False
+        'ucrInputYSpecifyUpperLimitDate.Visible = False
 
         ucrPnlYAxisType.AddToLinkedControls(ucrChkSpecifyYAxisTickMarks, {rdoYNumeric}, bNewLinkedHideIfParameterMissing:=True)
         'TODO these two will not be only for numeric once limits for dates implemented
-        ucrPnlYAxisType.AddToLinkedControls(ucrChkYSpecifyLowerLimit, {rdoYNumeric}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlYAxisType.AddToLinkedControls(ucrChkYSpecifyUpperLimit, {rdoYNumeric}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlYAxisType.AddToLinkedControls(ucrChkYSpecifyLowerLimit, {rdoYNumeric}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlYAxisType.AddToLinkedControls(ucrChkYSpecifyUpperLimit, {rdoYNumeric}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlYAxisType.AddToLinkedControls(ucrChkYSpecifyLowerLimit, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlYAxisType.AddToLinkedControls(ucrChkYSpecifyUpperLimit, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrPnlYAxisType.AddToLinkedControls(ucrInputDateDisplayFormat, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Day Month (1 Jan)")
         ucrPnlYAxisType.AddToLinkedControls(ucrChkSpecifyDateBreaks, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlYAxisType.AddToLinkedControls(ucrInputStartMonth, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
         'TODO controls not yet implemented
-        'ucrPnlYAxisType.AddToLinkedControls(ucrInputYSpecifyLowerLimitDate, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlYAxisType.AddToLinkedControls(ucrInputYSpecifyUpperLimitDate, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlYAxisType.AddToLinkedControls(ucrInputYSpecifyLowerLimitDate, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlYAxisType.AddToLinkedControls(ucrInputYSpecifyUpperLimitDate, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkYSpecifyLowerLimit.SetText("Specify Lower Limit")
         ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(True, "min", "0", False)
@@ -226,6 +229,12 @@ Public Class sdgPICSARainfallGraph
         ucrInputYSpecifyLowerLimitNumeric.SetValidationTypeAsNumeric()
         ucrInputYSpecifyLowerLimitNumeric.SetValuesToIgnore({"NA"})
         ucrInputYSpecifyLowerLimitNumeric.AddQuotesIfUnrecognised = False
+
+
+        'ucrInputYSpecifyLowerLimitDate.SetParameter(New RParameter("min", 0))
+
+        'ucrInputYSpecifyUpperLimitDate.SetParameter(New RParameter("max", 1))
+
 
         ucrChkYSpecifyUpperLimit.SetText("Specify Upper Limit")
         ucrChkYSpecifyUpperLimit.AddParameterValuesCondition(True, "max", "NA", False)
@@ -908,12 +917,15 @@ Public Class sdgPICSARainfallGraph
                     clsBaseOperator.AddParameter("annotate_mean", clsRFunctionParameter:=clsGeomTextLabelMeanLine, iPosition:=24)
                     If ucrChkMeanLineLabelIncludeValue.Checked Then
                         If rdoYNumeric.Checked Then
+                            'a vector of mean, 'strMeanName' should be povided for faceting
                             clsPasteMeanY.AddParameter("1", clsRFunctionParameter:=clsRoundMeanY, bIncludeArgumentName:=False, iPosition:=1)
+                            clsRoundMeanY.AddParameter("x", strMeanName, iPosition:=0)
                         ElseIf rdoYDate.Checked Then
                             clsPasteMeanY.AddParameter("1", clsRFunctionParameter:=clsFormatMeanY, bIncludeArgumentName:=False, iPosition:=1)
                         End If
                     Else
                         clsPasteMeanY.RemoveParameterByName("1")
+                        clsRoundMeanY.RemoveParameterByName("x")
                     End If
                 Else
                     clsBaseOperator.RemoveParameterByName("annotate_mean")
@@ -934,13 +946,16 @@ Public Class sdgPICSARainfallGraph
                 If ucrChkAddMedianLabel.Checked Then
                     clsBaseOperator.AddParameter("annotate_median", clsRFunctionParameter:=clsGeomTextLabelMedianLine, iPosition:=25)
                     If ucrChkMedianLineLabelIncludeValue.Checked Then
+                        'similarly to the case of mean
                         If rdoYNumeric.Checked Then
                             clsPasteMedianY.AddParameter("1", clsRFunctionParameter:=clsRoundMedianY, bIncludeArgumentName:=False, iPosition:=1)
+                            clsRoundMedianY.AddParameter("x", strMedianName, iPosition:=0)
                         ElseIf rdoYDate.Checked Then
                             clsPasteMedianY.AddParameter("1", clsRFunctionParameter:=clsFormatMedianY, bIncludeArgumentName:=False, iPosition:=1)
                         End If
                     Else
                         clsPasteMedianY.RemoveParameterByName("1")
+                        clsRoundMedianY.RemoveParameterByName("x")
                     End If
                 Else
                     clsBaseOperator.RemoveParameterByName("annotate_median")
@@ -966,9 +981,13 @@ Public Class sdgPICSARainfallGraph
                     clsBaseOperator.AddParameter("annotate_lower_tercile", clsRFunctionParameter:=clsGeomTextLabelLowerTercileLine, iPosition:=26)
                     clsBaseOperator.AddParameter("annotate_upper_tercile", clsRFunctionParameter:=clsGeomTextLabelUpperTercileLine, iPosition:=27)
                     If ucrChkTercilesLineLabelIncludeValue.Checked Then
+                        'similarly to the case of mean
                         If rdoYNumeric.Checked Then
                             clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
                             clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
+                            clsRoundLowerTercileY.AddParameter("x", strLowerTercileName, iPosition:=0)
+                            clsRoundUpperTercileY.AddParameter("x", strUpperTercileName, iPosition:=0)
+
                         ElseIf rdoYDate.Checked Then
                             clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsFormatLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
                             clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsFormatUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
@@ -976,6 +995,8 @@ Public Class sdgPICSARainfallGraph
                     Else
                         clsPasteLowerTercileY.RemoveParameterByName("1")
                         clsPasteUpperTercileY.RemoveParameterByName("1")
+                        clsRoundLowerTercileY.RemoveParameterByName("x")
+                        clsRoundUpperTercileY.RemoveParameterByName("x")
                     End If
                 Else
                     clsBaseOperator.RemoveParameterByName("annotate_lower_tercile")
