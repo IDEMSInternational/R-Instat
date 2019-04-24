@@ -36,7 +36,7 @@ Public Class ucrDayOfYear
     Private str30Days(29) As String
     Private str28Days(27) As String
     Private str29Days(28) As String
-    Private bDateTo As Boolean = False
+
 
     Public Sub New()
 
@@ -129,12 +129,7 @@ Public Class ucrDayOfYear
         If ucrInputMonth.GetValue() IsNot Nothing AndAlso ucrInputDay.GetValue() IsNot Nothing Then
             Try
                 If Integer.TryParse(ucrInputMonth.GetValue(), iMonth) AndAlso Integer.TryParse(ucrInputDay.GetValue(), iDay) Then
-                    If bDateTo Then
-                        dtTemp = New Date(year:=iYear, month:=11 + 1, day:=ucrInputDay.GetValue())
-                    Else
-                        dtTemp = New Date(year:=iYear, month:=ucrInputMonth.GetValue() + 1, day:=ucrInputDay.GetValue())
-                    End If
-
+                    dtTemp = New Date(year:=iYear, month:=ucrInputMonth.GetValue() + 1, day:=ucrInputDay.GetValue())
                     iDoy = dtTemp.DayOfYear
                     iDoy = ModPos(iDoy - iStartDay + 1, If(b366DayOfYear, 366, 365))
                     Return iDoy
@@ -283,9 +278,9 @@ Public Class ucrDayOfYear
                 iDoy = ModPos(iDoy + iStartDay - 1, If(b366DayOfYear, 366, 365))
                 dtTemp = New Date(year:=iYear, month:=1, day:=1).AddDays(iDoy - 1)
                 bUpdate = False
-                ucrInputDay.SetName(dtTemp.Day)
                 'TODO this should be done through a method in ucrInputMonth
                 ucrInputMonth.cboInput.SelectedIndex = dtTemp.Month - 1
+                ucrInputDay.SetName(dtTemp.Day)
                 bUpdate = True
                 UpdateAllParameters()
             Catch ex As Exception
@@ -312,8 +307,5 @@ Public Class ucrDayOfYear
         Return y
     End Function
 
-    Public Sub EndDateModifier()
-        bDateTo = True
-    End Sub
 
 End Class
