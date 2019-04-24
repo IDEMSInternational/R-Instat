@@ -28,7 +28,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrSaveMap = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpPoints = New System.Windows.Forms.GroupBox()
-        Me.lblStation = New System.Windows.Forms.Label()
+        Me.lblStationNames = New System.Windows.Forms.Label()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.lblFacet = New System.Windows.Forms.Label()
         Me.ucrReceiverFacet = New instat.ucrReceiverSingle()
@@ -95,7 +95,7 @@ Partial Class dlgClimaticStationMaps
         '
         'grpPoints
         '
-        Me.grpPoints.Controls.Add(Me.lblStation)
+        Me.grpPoints.Controls.Add(Me.lblStationNames)
         Me.grpPoints.Controls.Add(Me.ucrReceiverStation)
         Me.grpPoints.Controls.Add(Me.lblFacet)
         Me.grpPoints.Controls.Add(Me.ucrReceiverFacet)
@@ -115,14 +115,14 @@ Partial Class dlgClimaticStationMaps
         Me.grpPoints.TabStop = False
         Me.grpPoints.Text = "Points"
         '
-        'lblStation
+        'lblStationNames
         '
-        Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(243, 17)
-        Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 33
-        Me.lblStation.Text = "Station "
+        Me.lblStationNames.AutoSize = True
+        Me.lblStationNames.Location = New System.Drawing.Point(243, 17)
+        Me.lblStationNames.Name = "lblStationNames"
+        Me.lblStationNames.Size = New System.Drawing.Size(79, 13)
+        Me.lblStationNames.TabIndex = 33
+        Me.lblStationNames.Text = "Station Names:"
         '
         'ucrReceiverStation
         '
@@ -332,7 +332,7 @@ Partial Class dlgClimaticStationMaps
     Friend WithEvents cmdSFOptions As Button
     Friend WithEvents cmdMapOptions As Button
     Friend WithEvents grpPoints As GroupBox
-    Friend WithEvents lblStation As Label
+    Friend WithEvents lblStationNames As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents grpMapOutline As GroupBox
     Friend WithEvents lblFill As Label
