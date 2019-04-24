@@ -316,7 +316,6 @@ Public Class dlgPICSARainfall
         clsMeanFunction.AddParameter("na.rm", "TRUE")
 
         clsRoundMeanY.SetRCommand("round")
-        clsRoundMeanY.AddParameter("x", clsRFunctionParameter:=clsMeanFunction, iPosition:=0)
 
         clsAsDateMeanY.SetRCommand("as.Date")
         clsAsDateMeanY.AddParameter("x", clsRFunctionParameter:=clsRoundMeanY, iPosition:=0)
@@ -357,7 +356,6 @@ Public Class dlgPICSARainfall
         clsMedianFunction.AddParameter("na.rm", "TRUE")
 
         clsRoundMedianY.SetRCommand("round")
-        clsRoundMedianY.AddParameter("x", clsRFunctionParameter:=clsMedianFunction, iPosition:=0)
 
         clsAsDateMedianY.SetRCommand("as.Date")
         clsAsDateMedianY.AddParameter("x", clsRFunctionParameter:=clsRoundMedianY, iPosition:=0)
@@ -399,7 +397,6 @@ Public Class dlgPICSARainfall
         clsLowerTercileFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
 
         clsRoundLowerTercileY.SetRCommand("round")
-        clsRoundLowerTercileY.AddParameter("x", clsRFunctionParameter:=clsLowerTercileFunction, iPosition:=0)
 
         clsAsDateLowerTercileY.SetRCommand("as.Date")
         clsAsDateLowerTercileY.AddParameter("x", clsRFunctionParameter:=clsRoundLowerTercileY, iPosition:=0)
@@ -441,7 +438,6 @@ Public Class dlgPICSARainfall
         clsUpperTercileFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
 
         clsRoundUpperTercileY.SetRCommand("round")
-        clsRoundUpperTercileY.AddParameter("x", clsRFunctionParameter:=clsUpperTercileFunction, iPosition:=0)
 
         clsAsDateUpperTercileY.SetRCommand("as.Date")
         clsAsDateUpperTercileY.AddParameter("x", clsRFunctionParameter:=clsRoundUpperTercileY, iPosition:=0)
