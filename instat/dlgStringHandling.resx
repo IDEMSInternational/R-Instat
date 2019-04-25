@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 129</value>
+    <value>255, 70</value>
   </data>
   <data name="lblColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblReplaceBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 218</value>
+    <value>254, 155</value>
   </data>
   <data name="lblReplaceBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPattern.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 170</value>
+    <value>254, 112</value>
   </data>
   <data name="lblPattern.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
@@ -1123,7 +1123,7 @@
     <value>22</value>
   </data>
   <data name="grpRegex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>428, 144</value>
+    <value>423, 81</value>
   </data>
   <data name="grpRegex.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1152,36 +1152,6 @@
   <data name="&gt;&gt;grpRegex.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="rdoFixed.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoFixed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoFixed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 96</value>
-  </data>
-  <data name="rdoFixed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 17</value>
-  </data>
-  <data name="rdoFixed.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="rdoFixed.Text" xml:space="preserve">
-    <value>Fixed</value>
-  </data>
-  <data name="&gt;&gt;rdoFixed.Name" xml:space="preserve">
-    <value>rdoFixed</value>
-  </data>
-  <data name="&gt;&gt;rdoFixed.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoFixed.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoFixed.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="rdoRegex.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1189,13 +1159,13 @@
     <value>NoControl</value>
   </data>
   <data name="rdoRegex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 96</value>
+    <value>324, 215</value>
   </data>
   <data name="rdoRegex.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 17</value>
   </data>
   <data name="rdoRegex.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>183</value>
   </data>
   <data name="rdoRegex.Text" xml:space="preserve">
     <value>Regex</value>
@@ -1210,10 +1180,61 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoRegex.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoFixed.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoFixed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoFixed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>268, 215</value>
+  </data>
+  <data name="rdoFixed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 17</value>
+  </data>
+  <data name="rdoFixed.TabIndex" type="System.Int32, mscorlib">
+    <value>182</value>
+  </data>
+  <data name="rdoFixed.Text" xml:space="preserve">
+    <value>Fixed</value>
+  </data>
+  <data name="&gt;&gt;rdoFixed.Name" xml:space="preserve">
+    <value>rdoFixed</value>
+  </data>
+  <data name="&gt;&gt;rdoFixed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoFixed.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoFixed.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrPnlFixedRegex.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 211</value>
+  </data>
+  <data name="ucrPnlFixedRegex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 25</value>
+  </data>
+  <data name="ucrPnlFixedRegex.TabIndex" type="System.Int32, mscorlib">
+    <value>181</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlFixedRegex.Name" xml:space="preserve">
+    <value>ucrPnlFixedRegex</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlFixedRegex.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlFixedRegex.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlFixedRegex.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="ucrSaveStringHandling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 271</value>
+    <value>10, 260</value>
   </data>
   <data name="ucrSaveStringHandling.Size" type="System.Drawing.Size, System.Drawing">
     <value>293, 24</value>
@@ -1231,7 +1252,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveStringHandling.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1240,31 +1261,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>678, 357</value>
-  </data>
-  <data name="ucrPnlFixedRegex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 87</value>
-  </data>
-  <data name="ucrPnlFixedRegex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 32</value>
-  </data>
-  <data name="ucrPnlFixedRegex.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlFixedRegex.Name" xml:space="preserve">
-    <value>ucrPnlFixedRegex</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlFixedRegex.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlFixedRegex.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlFixedRegex.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>665, 342</value>
   </data>
   <data name="ucrChkIncludeRegularExpressions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 242</value>
+    <value>9, 231</value>
   </data>
   <data name="ucrChkIncludeRegularExpressions.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 20</value>
@@ -1285,13 +1285,13 @@
     <value>6</value>
   </data>
   <data name="ucrReceiverStringHandling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 144</value>
+    <value>250, 89</value>
   </data>
   <data name="ucrReceiverStringHandling.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverStringHandling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
+    <value>158, 20</value>
   </data>
   <data name="ucrReceiverStringHandling.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1309,10 +1309,10 @@
     <value>13</value>
   </data>
   <data name="ucrInputReplaceBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 234</value>
+    <value>250, 171</value>
   </data>
   <data name="ucrInputReplaceBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
+    <value>158, 20</value>
   </data>
   <data name="ucrInputReplaceBy.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1330,10 +1330,10 @@
     <value>17</value>
   </data>
   <data name="ucrInputPattern.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 186</value>
+    <value>250, 129</value>
   </data>
   <data name="ucrInputPattern.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 20</value>
+    <value>158, 20</value>
   </data>
   <data name="ucrInputPattern.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1351,7 +1351,7 @@
     <value>18</value>
   </data>
   <data name="ucrSelectorStringHandling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 55</value>
+    <value>9, 45</value>
   </data>
   <data name="ucrSelectorStringHandling.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1375,7 +1375,7 @@
     <value>19</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 301</value>
+    <value>9, 290</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>406, 52</value>
@@ -1396,10 +1396,10 @@
     <value>20</value>
   </data>
   <data name="ucrPnlStringHandling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 1</value>
+    <value>60, 3</value>
   </data>
   <data name="ucrPnlStringHandling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>569, 51</value>
+    <value>560, 39</value>
   </data>
   <data name="ucrPnlStringHandling.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1432,13 +1432,13 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverForRegexExpression.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 186</value>
+    <value>250, 127</value>
   </data>
   <data name="ucrReceiverForRegexExpression.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="ucrReceiverForRegexExpression.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 28</value>
+    <value>158, 28</value>
   </data>
   <data name="ucrReceiverForRegexExpression.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1453,6 +1453,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverForRegexExpression.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
 </root>
