@@ -709,7 +709,6 @@ Public Class dlgPICSARainfall
         Dim i As Integer = 0
 
         clsGroupByFunction.ClearParameters()
-        clsGroupByFunction.ClearParameters()
         If clsBaseOperator.ContainsParameter("facets") Then
             For Each clsTempParam As RParameter In clsFacetOperator.clsParameters
                 If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
