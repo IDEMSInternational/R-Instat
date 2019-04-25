@@ -618,7 +618,7 @@ Public Class dlgPICSARainfall
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
-        ucrReceiverFacetBy.SetRCode(clsFacetOperator)
+        'ucrReceiverFacetBy.SetRCode(clsFacetOperator)
         AddRemoveGroupBy()
     End Sub
 
@@ -708,6 +708,7 @@ Public Class dlgPICSARainfall
     Private Sub AddRemoveGroupBy()
         Dim i As Integer = 0
 
+        clsGroupByFunction.ClearParameters()
         clsGroupByFunction.ClearParameters()
         If clsBaseOperator.ContainsParameter("facets") Then
             For Each clsTempParam As RParameter In clsFacetOperator.clsParameters
