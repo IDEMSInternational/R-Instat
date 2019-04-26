@@ -242,6 +242,8 @@ Public Class dlgClimaticStationMaps
             bOkEnabled = False
         ElseIf ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty Then
             bOkEnabled = False
+        ElseIf Not ucrReceiverStation.IsEmpty AndAlso ucrReceiverLongitude.IsEmpty AndAlso ucrReceiverLatitude.IsEmpty Then
+            bOkEnabled = False
         Else
             bOkEnabled = True
         End If
@@ -269,7 +271,7 @@ Public Class dlgClimaticStationMaps
         End If
     End Sub
 
-    Private Sub ucrReceiverFill_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFill.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrSaveMap.ControlContentsChanged
+    Private Sub ucrReceiverFill_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFill.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrSaveMap.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
