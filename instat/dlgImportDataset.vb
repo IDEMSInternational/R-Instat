@@ -600,7 +600,7 @@ Public Class dlgImportDataset
             strFileType = "DAT"
             clsImportDAT.AddParameter("file", Chr(34) & strFilePathR & Chr(34))
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportDAT)
-        ElseIf strFileExt = ".nc" Then3
+        ElseIf strFileExt = ".nc" Then
             dlgOpenNetCDF.strFilePath = ucrInputFilePath.GetText()
             dlgOpenNetCDF.bRefered = True
             dlgOpenNetCDF.ShowDialog()
