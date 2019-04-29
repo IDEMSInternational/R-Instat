@@ -1256,17 +1256,17 @@
   <data name="mnuClimaticCheckDataBoxplot.Text" xml:space="preserve">
     <value>Boxplot...</value>
   </data>
-  <data name="mnuClimaticCheckDataQCRainfall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="mnuClimaticCheckDataQCRainfall.Text" xml:space="preserve">
-    <value>QC Rainfall...</value>
-  </data>
   <data name="mnuClimaticCheckDataQCTemperatures.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
   <data name="mnuClimaticCheckDataQCTemperatures.Text" xml:space="preserve">
     <value>QC Temperatures...</value>
+  </data>
+  <data name="mnuClimaticCheckDataQCRainfall.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="mnuClimaticCheckDataQCRainfall.Text" xml:space="preserve">
+    <value>QC Rainfall...</value>
   </data>
   <data name="mnuClimaticCheckData.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
@@ -1509,22 +1509,28 @@
     <value>Describe</value>
   </data>
   <data name="mnuClimaticPICSARainfall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="mnuClimaticPICSARainfall.Text" xml:space="preserve">
     <value>Rainfall Graph...</value>
+  </data>
+  <data name="mnuCumExeedenceGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuCumExeedenceGraph.Text" xml:space="preserve">
+    <value>Cumulative/Exceedance Graph...</value>
   </data>
   <data name="mnuClimaticPICSATemperature.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="mnuClimaticPICSATemperature.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="mnuClimaticPICSATemperature.Text" xml:space="preserve">
     <value>Temperature...</value>
   </data>
   <data name="mnuClimaticPICSACrops.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="mnuClimaticPICSACrops.Text" xml:space="preserve">
     <value>Crops...</value>
@@ -1590,43 +1596,43 @@
     <value>209, 6</value>
   </data>
   <data name="mnuClimaticSCFSupportOpenSST.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="mnuClimaticSCFSupportOpenSST.Text" xml:space="preserve">
     <value>Open SST...</value>
   </data>
   <data name="mnuClimaticSCFSupportExporttoCPT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="mnuClimaticSCFSupportExporttoCPT.Text" xml:space="preserve">
     <value>Export to CPT...</value>
   </data>
   <data name="ToolStripSeparator32.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 6</value>
+    <value>242, 6</value>
   </data>
   <data name="mnuClimaticSCFSupportCorrelations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="mnuClimaticSCFSupportCorrelations.Text" xml:space="preserve">
     <value>Correlations...</value>
   </data>
   <data name="mnuClimaticSCFSupportPrincipalComponents.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="mnuClimaticSCFSupportPrincipalComponents.Text" xml:space="preserve">
     <value>Principal Components...</value>
   </data>
   <data name="mnuClimaticSCFSupportCanonicalCorrelations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="mnuClimaticSCFSupportCanonicalCorrelations.Text" xml:space="preserve">
     <value>Canonical Correlations...</value>
   </data>
-  <data name="mnuClimaticSCFSupportCumulativeExceedanceGraphs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 22</value>
+  <data name="mnuClimaticSCFSupportCumulativeExceedanceGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
   </data>
-  <data name="mnuClimaticSCFSupportCumulativeExceedanceGraphs.Text" xml:space="preserve">
-    <value>Cumulative/Exceedance Graphs...</value>
+  <data name="mnuClimaticSCFSupportCumulativeExceedanceGraph.Text" xml:space="preserve">
+    <value>Cumulative/Exceedance Graph...</value>
   </data>
   <data name="mnuClimaticSCF.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
@@ -6282,6 +6288,12 @@
   <data name="&gt;&gt;mnuModelModel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;UseModelToolStripMenuItem.Name" xml:space="preserve">
+    <value>UseModelToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;UseModelToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuModelOtherOneVariable.Name" xml:space="preserve">
     <value>mnuModelOtherOneVariable</value>
   </data>
@@ -6894,12 +6906,6 @@
   <data name="&gt;&gt;mnuClimaticCheckDataQCRainfall.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticCheckDataQCTemperatures.Name" xml:space="preserve">
-    <value>mnuClimaticCheckDataQCTemperatures</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticCheckDataQCTemperatures.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;mnuClimaticPrepare.Name" xml:space="preserve">
     <value>mnuClimaticPrepare</value>
   </data>
@@ -7110,6 +7116,12 @@
   <data name="&gt;&gt;mnuClimaticPICSARainfall.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuCumExeedenceGraph.Name" xml:space="preserve">
+    <value>mnuCumExeedenceGraph</value>
+  </data>
+  <data name="&gt;&gt;mnuCumExeedenceGraph.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuClimaticPICSATemperature.Name" xml:space="preserve">
     <value>mnuClimaticPICSATemperature</value>
   </data>
@@ -7218,10 +7230,10 @@
   <data name="&gt;&gt;mnuClimaticSCFSupportCanonicalCorrelations.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticSCFSupportCumulativeExceedanceGraphs.Name" xml:space="preserve">
-    <value>mnuClimaticSCFSupportCumulativeExceedanceGraphs</value>
+  <data name="&gt;&gt;mnuClimaticSCFSupportCumulativeExceedanceGraph.Name" xml:space="preserve">
+    <value>mnuClimaticSCFSupportCumulativeExceedanceGraph</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticSCFSupportCumulativeExceedanceGraphs.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimaticSCFSupportCumulativeExceedanceGraph.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimateMethods.Name" xml:space="preserve">
@@ -8970,10 +8982,10 @@
   <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;UseModelToolStripMenuItem.Name" xml:space="preserve">
-    <value>UseModelToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuClimaticCheckDataQCTemperatures.Name" xml:space="preserve">
+    <value>mnuClimaticCheckDataQCTemperatures</value>
   </data>
-  <data name="&gt;&gt;UseModelToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimaticCheckDataQCTemperatures.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
