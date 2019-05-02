@@ -724,7 +724,11 @@ Public Class dlgPICSARainfall
     Private Sub AddRemoveHLineCalculations()
         If clsBaseOperator.ContainsParameter("hlinemean") OrElse clsBaseOperator.ContainsParameter("hlinemedian") OrElse clsBaseOperator.ContainsParameter("hlinelowertercile") OrElse clsBaseOperator.ContainsParameter("hlineuppertercile") Then
             clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
-            clsGroupByFunction.AddParameter("x", "variable", bIncludeArgumentName:=False)
+            If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
+                clsGroupByFunction.AddParameter("x", "variable", bIncludeArgumentName:=False)
+            Else
+                clsGroupByFunction.RemoveParameterByName("x")
+            End If
             clsPipeOperator.AddParameter("mutate", clsRFunctionParameter:=clsMutateFunction, iPosition:=2)
         Else
             clsPipeOperator.RemoveParameterByName("group_by")
