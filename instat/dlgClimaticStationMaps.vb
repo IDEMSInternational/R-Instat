@@ -167,6 +167,9 @@ Public Class dlgClimaticStationMaps
 
         clsLabelRepelAesFunction.SetPackageName("ggplot2")
         clsLabelRepelAesFunction.SetRCommand("aes")
+        clsLabelRepelAesFunction.AddParameter("force", 10, iPosition:=2)
+        clsLabelRepelAesFunction.AddParameter("size", 4, iPosition:=3)
+        clsLabelRepelAesFunction.AddParameter("direction", Chr(34) & "both" & Chr(34), iPosition:=4)
         clsLabelRepelFunction.AddParameter("aes", clsRFunctionParameter:=clsLabelRepelAesFunction, bIncludeArgumentName:=False)
 
 
