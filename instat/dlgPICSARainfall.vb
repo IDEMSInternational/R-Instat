@@ -596,7 +596,7 @@ Public Class dlgPICSARainfall
             cmdLineOptions.Enabled = True
             cmdOptions.Enabled = True
         Else
-            cmdPICSAOptions.Enabled = False
+            'cmdPICSAOptions.Enabled = False
             cmdLineOptions.Enabled = False
             cmdOptions.Enabled = False
         End If
@@ -716,17 +716,15 @@ Public Class dlgPICSARainfall
                 End If
                 i = i + 1
             Next
+        Else
         End If
         AddRemoveHLineCalculations()
     End Sub
 
     Private Sub AddRemoveHLineCalculations()
         If clsBaseOperator.ContainsParameter("hlinemean") OrElse clsBaseOperator.ContainsParameter("hlinemedian") OrElse clsBaseOperator.ContainsParameter("hlinelowertercile") OrElse clsBaseOperator.ContainsParameter("hlineuppertercile") Then
-            If clsGroupByFunction.iParameterCount > 0 Then
-                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
-            Else
-                clsPipeOperator.RemoveParameterByName("group_by")
-            End If
+            clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+            clsGroupByFunction.AddParameter("x", "variable", bIncludeArgumentName:=False)
             clsPipeOperator.AddParameter("mutate", clsRFunctionParameter:=clsMutateFunction, iPosition:=2)
         Else
             clsPipeOperator.RemoveParameterByName("group_by")
