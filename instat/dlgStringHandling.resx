@@ -121,9 +121,13 @@
   <data name="lblColumn.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblColumn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 129</value>
+    <value>255, 70</value>
   </data>
   <data name="lblColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
@@ -149,8 +153,11 @@
   <data name="lblReplaceBy.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblReplaceBy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblReplaceBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 218</value>
+    <value>254, 155</value>
   </data>
   <data name="lblReplaceBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -176,8 +183,11 @@
   <data name="lblPattern.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblPattern.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblPattern.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 170</value>
+    <value>254, 112</value>
   </data>
   <data name="lblPattern.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
@@ -200,15 +210,17 @@
   <data name="&gt;&gt;lblPattern.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoCount.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
   <data name="rdoCount.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoCount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 12</value>
+    <value>60, 12</value>
   </data>
   <data name="rdoCount.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 27</value>
@@ -240,8 +252,11 @@
   <data name="rdoReplace.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoReplace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoReplace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>386, 12</value>
+    <value>432, 12</value>
   </data>
   <data name="rdoReplace.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 27</value>
@@ -273,8 +288,11 @@
   <data name="rdoLocate.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoLocate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoLocate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 12</value>
+    <value>339, 12</value>
   </data>
   <data name="rdoLocate.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 27</value>
@@ -306,8 +324,11 @@
   <data name="rdoExtract.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoExtract.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoExtract.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 12</value>
+    <value>246, 12</value>
   </data>
   <data name="rdoExtract.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 27</value>
@@ -339,8 +360,11 @@
   <data name="rdoDetect.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoDetect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoDetect.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 12</value>
+    <value>153, 12</value>
   </data>
   <data name="rdoDetect.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 27</value>
@@ -372,8 +396,11 @@
   <data name="rdoReplaceAll.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoReplaceAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoReplaceAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>479, 12</value>
+    <value>525, 12</value>
   </data>
   <data name="rdoReplaceAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 27</value>
@@ -402,6 +429,9 @@
   <data name="cmdClear.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.75pt</value>
   </data>
+  <data name="cmdClear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdClear.Location" type="System.Drawing.Point, System.Drawing">
     <value>198, 75</value>
   </data>
@@ -428,6 +458,9 @@
   </data>
   <data name="&gt;&gt;cmdClear.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="cmdBackSlash.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdBackSlash.Location" type="System.Drawing.Point, System.Drawing">
     <value>159, 105</value>
@@ -456,6 +489,9 @@
   <data name="&gt;&gt;cmdBackSlash.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="cmdWBackSlash.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdWBackSlash.Location" type="System.Drawing.Point, System.Drawing">
     <value>159, 75</value>
   </data>
@@ -482,6 +518,9 @@
   </data>
   <data name="&gt;&gt;cmdWBackSlash.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="cmdDollarSign.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdDollarSign.Location" type="System.Drawing.Point, System.Drawing">
     <value>198, 45</value>
@@ -510,6 +549,9 @@
   <data name="&gt;&gt;cmdDollarSign.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="cmdOpenCloseParenthesis.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdOpenCloseParenthesis.Location" type="System.Drawing.Point, System.Drawing">
     <value>198, 15</value>
   </data>
@@ -536,6 +578,9 @@
   </data>
   <data name="&gt;&gt;cmdOpenCloseParenthesis.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="cmdBackSlashd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdBackSlashd.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 105</value>
@@ -567,6 +612,9 @@
   <data name="cmdBackSlashs.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6pt</value>
   </data>
+  <data name="cmdBackSlashs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdBackSlashs.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 105</value>
   </data>
@@ -593,6 +641,9 @@
   </data>
   <data name="&gt;&gt;cmdBackSlashs.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="cmdPower.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdPower.Location" type="System.Drawing.Point, System.Drawing">
     <value>159, 45</value>
@@ -621,6 +672,9 @@
   <data name="&gt;&gt;cmdPower.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="cmdOpenBracketCaretClosedBracket.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdOpenBracketCaretClosedBracket.Location" type="System.Drawing.Point, System.Drawing">
     <value>120, 15</value>
   </data>
@@ -647,6 +701,9 @@
   </data>
   <data name="&gt;&gt;cmdOpenBracketCaretClosedBracket.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="cmdPlus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdPlus.Location" type="System.Drawing.Point, System.Drawing">
     <value>42, 45</value>
@@ -675,6 +732,9 @@
   <data name="&gt;&gt;cmdPlus.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="cmdBackSlashw.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdBackSlashw.Location" type="System.Drawing.Point, System.Drawing">
     <value>120, 75</value>
   </data>
@@ -701,6 +761,9 @@
   </data>
   <data name="&gt;&gt;cmdBackSlashw.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="cmdMultiply.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdMultiply.Location" type="System.Drawing.Point, System.Drawing">
     <value>120, 45</value>
@@ -729,6 +792,9 @@
   <data name="&gt;&gt;cmdMultiply.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="cmdOpenCloseBrace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdOpenCloseBrace.Location" type="System.Drawing.Point, System.Drawing">
     <value>159, 15</value>
   </data>
@@ -755,6 +821,9 @@
   </data>
   <data name="&gt;&gt;cmdOpenCloseBrace.ZOrder" xml:space="preserve">
     <value>12</value>
+  </data>
+  <data name="cmdOpenClosedBracket.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdOpenClosedBracket.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 15</value>
@@ -783,6 +852,9 @@
   <data name="&gt;&gt;cmdOpenClosedBracket.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="cmdSingleQuote.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdSingleQuote.Location" type="System.Drawing.Point, System.Drawing">
     <value>42, 15</value>
   </data>
@@ -809,6 +881,9 @@
   </data>
   <data name="&gt;&gt;cmdSingleQuote.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="cmdQuote.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdQuote.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 15</value>
@@ -837,6 +912,9 @@
   <data name="&gt;&gt;cmdQuote.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
+  <data name="cmdQuestionMark.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdQuestionMark.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 45</value>
   </data>
@@ -863,6 +941,9 @@
   </data>
   <data name="&gt;&gt;cmdQuestionMark.ZOrder" xml:space="preserve">
     <value>16</value>
+  </data>
+  <data name="cmdDBackSlah.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdDBackSlah.Location" type="System.Drawing.Point, System.Drawing">
     <value>120, 105</value>
@@ -891,6 +972,9 @@
   <data name="&gt;&gt;cmdDBackSlah.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
+  <data name="cmdStar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdStar.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 45</value>
   </data>
@@ -917,6 +1001,9 @@
   </data>
   <data name="&gt;&gt;cmdStar.ZOrder" xml:space="preserve">
     <value>18</value>
+  </data>
+  <data name="cmdBbackSlash.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdBbackSlash.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 75</value>
@@ -945,6 +1032,9 @@
   <data name="&gt;&gt;cmdBbackSlash.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
+  <data name="cmdBackSlashb.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdBackSlashb.Location" type="System.Drawing.Point, System.Drawing">
     <value>42, 75</value>
   </data>
@@ -972,6 +1062,9 @@
   <data name="&gt;&gt;cmdBackSlashb.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
+  <data name="cmdSbackSlash.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdSbackSlash.Location" type="System.Drawing.Point, System.Drawing">
     <value>42, 105</value>
   </data>
@@ -998,6 +1091,9 @@
   </data>
   <data name="&gt;&gt;cmdSbackSlash.ZOrder" xml:space="preserve">
     <value>21</value>
+  </data>
+  <data name="cmdOr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdOr.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 75</value>
@@ -1027,7 +1123,7 @@
     <value>22</value>
   </data>
   <data name="grpRegex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>420, 144</value>
+    <value>423, 81</value>
   </data>
   <data name="grpRegex.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1056,44 +1152,20 @@
   <data name="&gt;&gt;grpRegex.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="rdoFixed.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoFixed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 96</value>
-  </data>
-  <data name="rdoFixed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 17</value>
-  </data>
-  <data name="rdoFixed.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="rdoFixed.Text" xml:space="preserve">
-    <value>Fixed</value>
-  </data>
-  <data name="&gt;&gt;rdoFixed.Name" xml:space="preserve">
-    <value>rdoFixed</value>
-  </data>
-  <data name="&gt;&gt;rdoFixed.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoFixed.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoFixed.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="rdoRegex.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoRegex.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoRegex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 96</value>
+    <value>324, 215</value>
   </data>
   <data name="rdoRegex.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 17</value>
   </data>
   <data name="rdoRegex.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>183</value>
   </data>
   <data name="rdoRegex.Text" xml:space="preserve">
     <value>Regex</value>
@@ -1108,10 +1180,61 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoRegex.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoFixed.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoFixed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoFixed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>268, 215</value>
+  </data>
+  <data name="rdoFixed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 17</value>
+  </data>
+  <data name="rdoFixed.TabIndex" type="System.Int32, mscorlib">
+    <value>182</value>
+  </data>
+  <data name="rdoFixed.Text" xml:space="preserve">
+    <value>Fixed</value>
+  </data>
+  <data name="&gt;&gt;rdoFixed.Name" xml:space="preserve">
+    <value>rdoFixed</value>
+  </data>
+  <data name="&gt;&gt;rdoFixed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoFixed.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoFixed.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrPnlFixedRegex.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 211</value>
+  </data>
+  <data name="ucrPnlFixedRegex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 25</value>
+  </data>
+  <data name="ucrPnlFixedRegex.TabIndex" type="System.Int32, mscorlib">
+    <value>181</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlFixedRegex.Name" xml:space="preserve">
+    <value>ucrPnlFixedRegex</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlFixedRegex.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlFixedRegex.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlFixedRegex.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="ucrSaveStringHandling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 271</value>
+    <value>10, 260</value>
   </data>
   <data name="ucrSaveStringHandling.Size" type="System.Drawing.Size, System.Drawing">
     <value>293, 24</value>
@@ -1129,7 +1252,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveStringHandling.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1138,31 +1261,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>669, 368</value>
-  </data>
-  <data name="ucrPnlFixedRegex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 87</value>
-  </data>
-  <data name="ucrPnlFixedRegex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 32</value>
-  </data>
-  <data name="ucrPnlFixedRegex.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlFixedRegex.Name" xml:space="preserve">
-    <value>ucrPnlFixedRegex</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlFixedRegex.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlFixedRegex.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlFixedRegex.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>665, 342</value>
   </data>
   <data name="ucrChkIncludeRegularExpressions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 242</value>
+    <value>9, 231</value>
   </data>
   <data name="ucrChkIncludeRegularExpressions.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 20</value>
@@ -1183,13 +1285,13 @@
     <value>6</value>
   </data>
   <data name="ucrReceiverStringHandling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 144</value>
+    <value>250, 89</value>
   </data>
   <data name="ucrReceiverStringHandling.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverStringHandling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 20</value>
+    <value>158, 20</value>
   </data>
   <data name="ucrReceiverStringHandling.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1207,10 +1309,10 @@
     <value>13</value>
   </data>
   <data name="ucrInputReplaceBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 233</value>
+    <value>250, 171</value>
   </data>
   <data name="ucrInputReplaceBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 20</value>
+    <value>158, 20</value>
   </data>
   <data name="ucrInputReplaceBy.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1228,10 +1330,10 @@
     <value>17</value>
   </data>
   <data name="ucrInputPattern.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 186</value>
+    <value>250, 129</value>
   </data>
   <data name="ucrInputPattern.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 20</value>
+    <value>158, 20</value>
   </data>
   <data name="ucrInputPattern.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1249,7 +1351,7 @@
     <value>18</value>
   </data>
   <data name="ucrSelectorStringHandling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 55</value>
+    <value>9, 45</value>
   </data>
   <data name="ucrSelectorStringHandling.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1273,7 +1375,7 @@
     <value>19</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 301</value>
+    <value>9, 290</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>406, 52</value>
@@ -1294,10 +1396,10 @@
     <value>20</value>
   </data>
   <data name="ucrPnlStringHandling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 1</value>
+    <value>60, 3</value>
   </data>
   <data name="ucrPnlStringHandling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 51</value>
+    <value>560, 39</value>
   </data>
   <data name="ucrPnlStringHandling.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1314,6 +1416,9 @@
   <data name="&gt;&gt;ucrPnlStringHandling.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -1327,13 +1432,13 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverForRegexExpression.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 185</value>
+    <value>250, 127</value>
   </data>
   <data name="ucrReceiverForRegexExpression.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="ucrReceiverForRegexExpression.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 28</value>
+    <value>158, 28</value>
   </data>
   <data name="ucrReceiverForRegexExpression.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1348,6 +1453,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverForRegexExpression.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
 </root>
