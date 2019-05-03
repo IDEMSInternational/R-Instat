@@ -700,6 +700,10 @@ Public Class dlgPICSARainfall
         AddRemoveGroupBy()
     End Sub
 
+    Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlValueChanged
+        AddRemoveHLineCalculations()
+    End Sub
+
     Private Sub ucrSelectorPICSARainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPICSARainfall.ControlValueChanged
         AutoFacetStation()
         SetPipeAssignTo()
@@ -724,7 +728,7 @@ Public Class dlgPICSARainfall
     Private Sub AddRemoveHLineCalculations()
         If clsBaseOperator.ContainsParameter("hlinemean") OrElse clsBaseOperator.ContainsParameter("hlinemedian") OrElse clsBaseOperator.ContainsParameter("hlinelowertercile") OrElse clsBaseOperator.ContainsParameter("hlineuppertercile") Then
             clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
-            If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
+            If ucrVariablesAsFactorForPicsa.bSingleVariable Then
                 clsGroupByFunction.AddParameter("x", "variable", bIncludeArgumentName:=False)
             Else
                 clsGroupByFunction.RemoveParameterByName("x")
