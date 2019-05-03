@@ -727,11 +727,17 @@ Public Class dlgPICSARainfall
 
     Private Sub AddRemoveHLineCalculations()
         If clsBaseOperator.ContainsParameter("hlinemean") OrElse clsBaseOperator.ContainsParameter("hlinemedian") OrElse clsBaseOperator.ContainsParameter("hlinelowertercile") OrElse clsBaseOperator.ContainsParameter("hlineuppertercile") Then
-            clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
-            If ucrVariablesAsFactorForPicsa.bSingleVariable Then
+            If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
+                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
                 clsGroupByFunction.AddParameter("x", "variable", bIncludeArgumentName:=False)
             Else
-                clsGroupByFunction.RemoveParameterByName("x")
+                If Not ucrReceiverColourBy.IsEmpty OrElse Not ucrReceiverFacetBy.IsEmpty OrElse (Not ucrReceiverColourBy.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty) Then
+                    clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+                    clsGroupByFunction.AddParameter("x", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
+                Else
+                    clsGroupByFunction.RemoveParameterByName("x")
+                    clsPipeOperator.RemoveParameterByName("group_by")
+                End If
             End If
             clsPipeOperator.AddParameter("mutate", clsRFunctionParameter:=clsMutateFunction, iPosition:=2)
         Else
