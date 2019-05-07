@@ -731,9 +731,12 @@ Public Class dlgPICSARainfall
                 clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
                 clsGroupByFunction.AddParameter("x", "variable", bIncludeArgumentName:=False)
             Else
-                If Not ucrReceiverColourBy.IsEmpty OrElse Not ucrReceiverFacetBy.IsEmpty OrElse (Not ucrReceiverColourBy.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty) Then
+                If Not ucrReceiverColourBy.IsEmpty OrElse Not ucrReceiverFacetBy.IsEmpty Then
                     clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
                     clsGroupByFunction.AddParameter("x", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
+
+                ElseIf (Not ucrReceiverColourBy.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty) Then
+                    clsGroupByFunction.AddParameter("x", "variable", bIncludeArgumentName:=False)
                 Else
                     clsGroupByFunction.RemoveParameterByName("x")
                     clsPipeOperator.RemoveParameterByName("group_by")
