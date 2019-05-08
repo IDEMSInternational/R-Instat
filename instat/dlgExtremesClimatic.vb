@@ -225,7 +225,7 @@ Public Class dlgExtremesClimatic
         clsMinMaxSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMinMaxFuncExp, iPosition:=1)
         clsMinMaxFuncExp.SetRCommand("max")
         clsMinMaxFuncExp.AddParameter("x", iPosition:=0)
-        clsMinMaxFuncExp.AddParameter("na.rm", "TRUE", iPosition:=1)
+        clsMinMaxFuncExp.AddParameter("na.rm", "FALSE", iPosition:=1)
         clsMinMaxSummariseFunction.AddParameter("result_name", "max", iPosition:=2)
         clsMinMaxSummariseFunction.AddParameter("manipulations", clsRFunctionParameter:=clsMinMaxManipulationsFunction, iPosition:=3)
         clsMinMaxManipulationsFunction.AddParameter("sub1", clsRFunctionParameter:=clsGroupByFunction, bIncludeArgumentName:=False, iPosition:=0)
