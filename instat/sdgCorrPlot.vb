@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class sdgCorrPlot
-    Public clsRGGscatmatrixFunction, clsRGGcorrGraphicsFunction, clsCorrelationFunction, clsRGraphicsFuction, clsRTempFunction As New RFunction
+    Public clsRGGscatmatrixFunction, clsRGGcorrGraphicsFunction, clsCorrelationTestFunction, clsCorrelationFunction, clsRGraphicsFuction, clsRTempFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Private clsRsyntax As RSyntax
@@ -91,7 +91,7 @@ Public Class sdgCorrPlot
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, strColFunction As String, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewcorrelationTestFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, strColFunction As String, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -104,6 +104,7 @@ Public Class sdgCorrPlot
         End If
 
         clsRsyntax = clsNewRSyntax
+        clsCorrelationTestFunction = clsNewcorrelationTestFunction
         clsCorrelationFunction = clsNewcorrelationFunction
         clsRGGcorrGraphicsFunction = clsNewRGGcorrGraphicsFunction
         clsRGraphicsFuction = clsNewRGraphicsFuction
@@ -143,10 +144,26 @@ Public Class sdgCorrPlot
 
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged
         Visibility()
+        BeforeAndAfterCodes()
+    End Sub
+
+    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
+        If Not ucrReceiverFactor.IsEmpty Then
+            clsRGGscatmatrixFunction.AddParameter("color", ucrReceiverFactor.GetVariableNames(), iPosition:=2)
+        Else
+            clsRGGscatmatrixFunction.RemoveParameterByName("color")
+        End If
+    End Sub
+
+    Public Sub BeforeAndAfterCodes()
         If rdoCorrelationPlot.Checked Then
-            clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=1)
-            clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
-            clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
+            If Not rdoCorrelationPlot.Enabled Then
+                clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
+            Else
+                clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=1)
+                clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
+                clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
+            End If
         ElseIf rdoPairwisePlot.Checked Then
             clsRsyntax.AddToAfterCodes(clsRGraphicsFuction, iPosition:=2)
             clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
@@ -162,11 +179,4 @@ Public Class sdgCorrPlot
         End If
     End Sub
 
-    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
-        If Not ucrReceiverFactor.IsEmpty Then
-            clsRGGscatmatrixFunction.AddParameter("color", ucrReceiverFactor.GetVariableNames(), iPosition:=2)
-        Else
-            clsRGGscatmatrixFunction.RemoveParameterByName("color")
-        End If
-    End Sub
 End Class
