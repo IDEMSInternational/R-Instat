@@ -296,8 +296,11 @@ Public Class dlgCorrelation
     Private Sub CorrelationsEnable()
         If rdoTwoColumns.Checked Then
             sdgCorrPlot.rdoCorrelationPlot.Enabled = False
+            If sdgCorrPlot.rdoCorrelationPlot.Checked Then
+                sdgCorrPlot.rdoNone.Checked = True
+            End If
         Else
-            sdgCorrPlot.rdoCorrelationPlot.Enabled = True
+                sdgCorrPlot.rdoCorrelationPlot.Enabled = True
         End If
     End Sub
 End Class

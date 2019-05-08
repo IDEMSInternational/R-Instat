@@ -145,6 +145,14 @@ Public Class sdgCorrPlot
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged
         Visibility()
         BeforeAndAfterCodes()
+
+        If rdoNone.Checked OrElse rdoPairwisePlot.Checked Then
+            grpOptions.Hide()
+        Else
+            grpOptions.Show()
+
+        End If
+
     End Sub
 
     Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
