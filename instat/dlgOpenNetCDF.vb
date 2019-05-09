@@ -40,6 +40,7 @@ Public Class dlgOpenNetCDF
     Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath, "Library", "Climatic", "Satellite/")
     Private bFromLibrary As Boolean = False
     Private bSubDialogOKEnabled As Boolean = True
+    Private bOkClicked As Boolean
 
     Public Sub New()
         ' This call is required by the designer.
@@ -307,6 +308,7 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        bOkClicked = True
         bCloseFile = False
         clsNcOpenFunction.SetAssignTo(strFileAssignName)
     End Sub
@@ -319,11 +321,9 @@ Public Class dlgOpenNetCDF
         End If
     End Sub
     Public Sub checkOkChange()
-        If bRefered And ucrBase_ClickOk() Then
+        If bRefered And bOkClicked Then
             SetDefaults()
         End If
     End Sub
-    Private Function ucrBase_ClickOk() As Boolean
 
-    End Function
 End Class
