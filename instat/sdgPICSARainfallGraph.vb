@@ -221,8 +221,8 @@ Public Class sdgPICSARainfallGraph
         ucrPnlYAxisType.AddToLinkedControls(ucrInputYSpecifyUpperLimitDate, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkYSpecifyLowerLimit.SetText("Specify Lower Limit")
-        ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(True, "min", "0", False)
-        ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(False, "min", "0", True)
+        ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(True, "min", "NA", False)
+        ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(False, "min", "NA", True)
         ucrChkYSpecifyLowerLimit.AddToLinkedControls(ucrInputYSpecifyLowerLimitNumeric, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputYSpecifyLowerLimitNumeric.SetParameter(New RParameter("min", 0))
@@ -710,13 +710,13 @@ Public Class sdgPICSARainfallGraph
                 'TODO move to ggplot defaults
                 clsCLimitsYContinuous = New RFunction
                 clsCLimitsYContinuous.SetRCommand("c")
-                clsCLimitsYContinuous.AddParameter("min", "0", bIncludeArgumentName:=False, iPosition:=0)
+                clsCLimitsYContinuous.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
                 clsCLimitsYContinuous.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
             End If
         Else
             clsCLimitsYContinuous = New RFunction
             clsCLimitsYContinuous.SetRCommand("c")
-            clsCLimitsYContinuous.AddParameter("min", "0", bIncludeArgumentName:=False, iPosition:=0)
+            clsCLimitsYContinuous.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
             clsCLimitsYContinuous.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
         End If
 
@@ -1253,7 +1253,7 @@ Public Class sdgPICSARainfallGraph
     Private Sub ucrYLimitControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYSpecifyLowerLimit.ControlValueChanged, ucrChkYSpecifyUpperLimit.ControlValueChanged, ucrInputYSpecifyLowerLimitNumeric.ControlValueChanged, ucrInputYSpecifyUpperLimitNumeric.ControlValueChanged
         If bRCodeSet Then
             If Not ucrChkYSpecifyLowerLimit.Checked Then
-                clsCLimitsYContinuous.AddParameter("min", "0", bIncludeArgumentName:=False, iPosition:=0)
+                clsCLimitsYContinuous.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
             End If
             If Not ucrChkYSpecifyUpperLimit.Checked Then
                 clsCLimitsYContinuous.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
