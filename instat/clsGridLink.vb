@@ -58,7 +58,7 @@ Public Class clsGridLink
         Dim i As Integer
         Dim j As Integer
         Dim k As Integer
-        Dim dfTemp As DataFrame
+        Dim dfTemp As CharacterMatrix
         Dim strDataName As String
         Dim shtTemp As Worksheet
         Dim clsDataChanged As New RFunction
@@ -195,7 +195,7 @@ Public Class clsGridLink
                             clsGetDataFrame.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript(), bSilent:=True)
                             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                                dfTemp = expTemp.AsDataFrame
+                                dfTemp = expTemp.AsCharacterMatrix
                                 clsFilterApplied.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                                 expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsFilterApplied.ToScript(), bSilent:=True)
                                 If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
@@ -238,7 +238,7 @@ Public Class clsGridLink
                             clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript(), bSilent:=True)
                             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                                dfTemp = expTemp.AsDataFrame()
+                                dfTemp = expTemp.AsCharacterMatrix()
                                 'TODO test if column limit is needed for stability in metadata grids
                                 FillSheet(dfTemp, strDataName, grdVariablesMetadata, iColMax:=iMaxCols)
                                 clsSetVariablesMetadataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
@@ -258,7 +258,7 @@ Public Class clsGridLink
                     clsGetCombinedMetadata.AddParameter("convert_to_character", "TRUE")
                     expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCombinedMetadata.ToScript(), bSilent:=True)
                     If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                        dfTemp = expTemp.AsDataFrame()
+                        dfTemp = expTemp.AsCharacterMatrix()
                         'TODO test if column limit is needed for stability in metadata grids
                         FillSheet(dfTemp, "metadata", grdMetadata, iColMax:=iMaxCols)
                         clsSetMetadataChanged.AddParameter("new_val", "TRUE")
@@ -330,7 +330,7 @@ Public Class clsGridLink
         UpdateGrids()
     End Sub
 
-    Public Sub FillSheet(dfTemp As DataFrame, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False, Optional iNewPosition As Integer = -1, Optional bFilterApplied As Boolean = False, Optional bCheckFreezeColumns As Boolean = False, Optional iRowMax As Integer = -1, Optional iColMax As Integer = -1)
+    Public Sub FillSheet(dfTemp As CharacterMatrix, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False, Optional iNewPosition As Integer = -1, Optional bFilterApplied As Boolean = False, Optional bCheckFreezeColumns As Boolean = False, Optional iRowMax As Integer = -1, Optional iColMax As Integer = -1)
         Dim bFoundWorksheet As Boolean = False
         Dim tempWorkSheet As Worksheet
         Dim fillWorkSheet As Worksheet
