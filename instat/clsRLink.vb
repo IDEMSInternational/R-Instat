@@ -279,7 +279,7 @@ Public Class RLink
         Return lstDataFrameNames
     End Function
 
-    Public Function GetColumnNames(strDataFrameName As String) As List(Of String)
+    Public Function GetColumnNames(strDataFrameName As String, Optional bIncludeHiddenColumns As Boolean = True) As List(Of String)
         Dim chrCurrColumns As CharacterVector = Nothing
         Dim lstCurrColumns As New List(Of String)
         Dim clsGetColumnNames As New RFunction
@@ -288,6 +288,9 @@ Public Class RLink
         If strDataFrameName <> "" AndAlso DataFrameExists(strDataFrameName) Then
             clsGetColumnNames.SetRCommand(strInstatDataObject & "$get_column_names")
             clsGetColumnNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+            If Not bIncludeHiddenColumns Then
+                clsGetColumnNames.AddParameter("exclude", "list(Is_Hidden = TRUE)")
+            End If
             expNames = RunInternalScriptGetValue(clsGetColumnNames.ToScript(), bSilent:=True)
             If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
                 chrCurrColumns = expNames.AsCharacter
