@@ -212,7 +212,12 @@ Public Class clsGridLink
                                 Else
                                     FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bFilterApplied:=False, bCheckFreezeColumns:=True)
                                 End If
-                                ucrDataViewer.SetColumnNames(strDataName, dfTemp.ColumnNames())
+                                If dfTemp.RowCount = 0 Then
+                                    'TODO This line to get column names is duplicated in FillSheet, better if this was only done in one place
+                                    ucrDataViewer.SetColumnNames(strDataName, frmMain.clsRLink.GetColumnNames(strDataName, bIncludeHiddenColumns:=False).ToArray)
+                                Else
+                                    ucrDataViewer.SetColumnNames(strDataName, dfTemp.ColumnNames())
+                                End If
                                 clsSetDataFramesChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                                 clsSetDataFramesChanged.AddParameter("new_val", "FALSE")
                                 frmMain.clsRLink.RunInternalScript(clsSetDataFramesChanged.ToScript(), bSilent:=True)
@@ -381,6 +386,10 @@ Public Class clsGridLink
         End If
         strColumnNames = dfTemp.ColumnNames
         If dfTemp.RowCount = 0 Then
+            If bInstatObjectDataFrame Then
+                ' Need because of bug in R.NET - matrix does not contain column names when there are 0 rows
+                strColumnNames = frmMain.clsRLink.GetColumnNames(strName, bIncludeHiddenColumns:=False).ToArray
+            End If
             fillWorkSheet.Rows = 1
             For j = 0 To fillWorkSheet.Columns - 1
                 fillWorkSheet(row:=0, col:=j) = ""
@@ -419,7 +428,7 @@ Public Class clsGridLink
             FormatDataView(fillWorkSheet)
         End If
         Try
-            lstColumnNames = dfTemp.ColumnNames.ToList
+            lstColumnNames = strColumnNames.ToList
             strCurrColNames = frmMain.clsRLink.GetListAsRString(lstColumnNames)
 
             If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists AndAlso bIncludeDataTypes Then
