@@ -658,7 +658,7 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub RefreshFrameView()
-        Dim dfTemp As DataFrame
+        Dim dfTemp As CharacterMatrix
         Dim expTemp As SymbolicExpression
         Dim strTempDataFrameName As String
         Dim bValid As Boolean
@@ -739,7 +739,7 @@ Public Class dlgImportDataset
                 clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=clsTempImport)
                 expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunc.ToScript(), bSilent:=True)
                 If expTemp IsNot Nothing Then
-                    dfTemp = expTemp.AsDataFrame
+                    dfTemp = expTemp.AsCharacterMatrix
                     If dfTemp IsNot Nothing Then
                         Try
                             frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
