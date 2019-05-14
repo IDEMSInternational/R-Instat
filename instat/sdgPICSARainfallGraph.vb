@@ -217,13 +217,13 @@ Public Class sdgPICSARainfallGraph
         ucrPnlYAxisType.AddToLinkedControls(ucrChkSpecifyDateBreaks, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlYAxisType.AddToLinkedControls(ucrInputStartMonth, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
         'TODO controls not yet implemented
-        ucrPnlYAxisType.AddToLinkedControls(ucrInputYSpecifyLowerLimitDate, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlYAxisType.AddToLinkedControls(ucrInputYSpecifyUpperLimitDate, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlYAxisType.AddToLinkedControls(ucrInputYSpecifyLowerLimitDateMonth, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlYAxisType.AddToLinkedControls(ucrInputYSpecifyUpperLimitDateMonth, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkYSpecifyLowerLimit.SetText("Specify Lower Limit")
         ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(True, "min", "NA", False)
         ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(False, "min", "NA", True)
-        ucrChkYSpecifyLowerLimit.AddToLinkedControls(ucrInputYSpecifyLowerLimitNumeric, {True}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrChkYSpecifyLowerLimit.AddToLinkedControls(ucrInputYSpecifyLowerLimitNumeric, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputYSpecifyLowerLimitNumeric.SetParameter(New RParameter("min", 0))
         ucrInputYSpecifyLowerLimitNumeric.SetValidationTypeAsNumeric()
@@ -239,7 +239,7 @@ Public Class sdgPICSARainfallGraph
         ucrChkYSpecifyUpperLimit.SetText("Specify Upper Limit")
         ucrChkYSpecifyUpperLimit.AddParameterValuesCondition(True, "max", "NA", False)
         ucrChkYSpecifyUpperLimit.AddParameterValuesCondition(False, "max", "NA", True)
-        ucrChkYSpecifyUpperLimit.AddToLinkedControls(ucrInputYSpecifyUpperLimitNumeric, {True}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrChkYSpecifyUpperLimit.AddToLinkedControls(ucrInputYSpecifyUpperLimitNumeric, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputYSpecifyUpperLimitNumeric.SetParameter(New RParameter("max", 1))
         ucrInputYSpecifyUpperLimitNumeric.SetValidationTypeAsNumeric()
@@ -306,6 +306,46 @@ Public Class sdgPICSARainfallGraph
         ucrInputXFrom.SetLinkedDisplayControl(lblXFrom)
         ucrInputXTo.SetLinkedDisplayControl(lblXTo)
         ucrInputXInStepsOf.SetLinkedDisplayControl(lblXInStepsOf)
+
+        'Dates limits
+
+        Dim dctMonthLower As New Dictionary(Of String, String)
+        dctMonthLower.Add("January", 1)
+        dctMonthLower.Add("February", 2)
+        dctMonthLower.Add("March", 3)
+        dctMonthLower.Add("April", 4)
+        dctMonthLower.Add("May", 5)
+        dctMonthLower.Add("June", 6)
+        dctMonthLower.Add("July", 7)
+        dctMonthLower.Add("August", 8)
+        dctMonthLower.Add("September", 9)
+        dctMonthLower.Add("October", 10)
+        dctMonthLower.Add("November", 11)
+        dctMonthLower.Add("December", 12)
+        ucrInputYSpecifyLowerLimitDateMonth.SetParameter(New RParameter("min"))
+        ucrInputYSpecifyLowerLimitDateMonth.SetItems(dctMonthLower)
+        ucrInputYSpecifyLowerLimitDateMonth.SetRDefault(1)
+        ucrInputYSpecifyLowerLimitDateMonth.SetDropDownStyleAsNonEditable()
+
+        Dim dctMonthUpper As New Dictionary(Of String, String)
+        dctMonthUpper.Add("January", 1)
+        dctMonthUpper.Add("February", 2)
+        dctMonthUpper.Add("March", 3)
+        dctMonthUpper.Add("April", 4)
+        dctMonthUpper.Add("May", 5)
+        dctMonthUpper.Add("June", 6)
+        dctMonthUpper.Add("July", 7)
+        dctMonthUpper.Add("August", 8)
+        dctMonthUpper.Add("September", 9)
+        dctMonthUpper.Add("October", 10)
+        dctMonthUpper.Add("November", 11)
+        dctMonthUpper.Add("December", 12)
+        ucrInputYSpecifyUpperLimitDateMonth.SetParameter(New RParameter("max"))
+        ucrInputYSpecifyUpperLimitDateMonth.SetItems(dctMonthUpper)
+        ucrInputYSpecifyUpperLimitDateMonth.SetRDefault(1)
+        ucrInputYSpecifyUpperLimitDateMonth.SetDropDownStyleAsNonEditable()
+
+
 
         ' Background
         ucrChkPnlBackgroundColour.SetText("Colour")
