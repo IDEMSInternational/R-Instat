@@ -122,7 +122,6 @@ Public Class dlgLinePlot
         ucrChkPeak.SetText("Add Peaks")
         ucrChkPeak.SetParameter(clsPeaksParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-
         clsValleysFunction.SetPackageName("ggpmisc")
         clsValleysFunction.SetRCommand("stat_valleys")
         clsValleysParam.SetArgumentName("stat_valleys")
