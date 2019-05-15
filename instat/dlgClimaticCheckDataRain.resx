@@ -547,7 +547,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblThreshold.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 363</value>
+    <value>129, 363</value>
   </data>
   <data name="lblThreshold.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
@@ -568,37 +568,37 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblThreshold.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
-  <data name="lblMissingThreshold.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblThresholdDryMonth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblMissingThreshold.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblThresholdDryMonth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblMissingThreshold.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblThresholdDryMonth.Location" type="System.Drawing.Point, System.Drawing">
     <value>107, 304</value>
   </data>
-  <data name="lblMissingThreshold.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 13</value>
+  <data name="lblThresholdDryMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 13</value>
   </data>
-  <data name="lblMissingThreshold.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblThresholdDryMonth.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
-  <data name="lblMissingThreshold.Text" xml:space="preserve">
-    <value>Missing Values Threshold:</value>
+  <data name="lblThresholdDryMonth.Text" xml:space="preserve">
+    <value>Threshold Dry Month:</value>
   </data>
-  <data name="&gt;&gt;lblMissingThreshold.Name" xml:space="preserve">
-    <value>lblMissingThreshold</value>
+  <data name="&gt;&gt;lblThresholdDryMonth.Name" xml:space="preserve">
+    <value>lblThresholdDryMonth</value>
   </data>
-  <data name="&gt;&gt;lblMissingThreshold.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblThresholdDryMonth.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblMissingThreshold.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblThresholdDryMonth.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblMissingThreshold.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;lblThresholdDryMonth.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="lblThresholdmm.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -607,7 +607,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblThresholdmm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 305</value>
+    <value>291, 305</value>
   </data>
   <data name="lblThresholdmm.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 13</value>
@@ -628,10 +628,31 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblThresholdmm.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrNudThreshold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>197, 359</value>
+  </data>
+  <data name="ucrNudThreshold.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudThreshold.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="&gt;&gt;ucrNudThreshold.Name" xml:space="preserve">
+    <value>ucrNudThreshold</value>
+  </data>
+  <data name="&gt;&gt;ucrNudThreshold.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudThreshold.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudThreshold.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ucrInputThreshold.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 301</value>
+    <value>230, 301</value>
   </data>
   <data name="ucrInputThreshold.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 21</value>
@@ -649,28 +670,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputThreshold.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrInputThresholdValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 359</value>
-  </data>
-  <data name="ucrInputThresholdValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 21</value>
-  </data>
-  <data name="ucrInputThresholdValue.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="&gt;&gt;ucrInputThresholdValue.Name" xml:space="preserve">
-    <value>ucrInputThresholdValue</value>
-  </data>
-  <data name="&gt;&gt;ucrInputThresholdValue.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputThresholdValue.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputThresholdValue.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="ucrNudCoeff.Location" type="System.Drawing.Point, System.Drawing">
     <value>334, 358</value>

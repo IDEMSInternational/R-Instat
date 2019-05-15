@@ -39,10 +39,10 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblCoeff = New System.Windows.Forms.Label()
         Me.cmdOmitMonths = New System.Windows.Forms.Button()
         Me.lblThreshold = New System.Windows.Forms.Label()
-        Me.lblMissingThreshold = New System.Windows.Forms.Label()
+        Me.lblThresholdDryMonth = New System.Windows.Forms.Label()
         Me.lblThresholdmm = New System.Windows.Forms.Label()
+        Me.ucrNudThreshold = New instat.ucrNud()
         Me.ucrInputThreshold = New instat.ucrInputTextBox()
-        Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
         Me.ucrNudCoeff = New instat.ucrNud()
         Me.ucrChkOmitZero = New instat.ucrCheck()
         Me.ucrNudSkewnessWeight = New instat.ucrNud()
@@ -151,15 +151,25 @@ Partial Class dlgClimaticCheckDataRain
         resources.ApplyResources(Me.lblThreshold, "lblThreshold")
         Me.lblThreshold.Name = "lblThreshold"
         '
-        'lblMissingThreshold
+        'lblThresholdDryMonth
         '
-        resources.ApplyResources(Me.lblMissingThreshold, "lblMissingThreshold")
-        Me.lblMissingThreshold.Name = "lblMissingThreshold"
+        resources.ApplyResources(Me.lblThresholdDryMonth, "lblThresholdDryMonth")
+        Me.lblThresholdDryMonth.Name = "lblThresholdDryMonth"
         '
         'lblThresholdmm
         '
         resources.ApplyResources(Me.lblThresholdmm, "lblThresholdmm")
         Me.lblThresholdmm.Name = "lblThresholdmm"
+        '
+        'ucrNudThreshold
+        '
+        Me.ucrNudThreshold.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudThreshold, "ucrNudThreshold")
+        Me.ucrNudThreshold.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudThreshold.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThreshold.Name = "ucrNudThreshold"
+        Me.ucrNudThreshold.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputThreshold
         '
@@ -168,14 +178,6 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrInputThreshold.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputThreshold, "ucrInputThreshold")
         Me.ucrInputThreshold.Name = "ucrInputThreshold"
-        '
-        'ucrInputThresholdValue
-        '
-        Me.ucrInputThresholdValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputThresholdValue.IsMultiline = False
-        Me.ucrInputThresholdValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputThresholdValue, "ucrInputThresholdValue")
-        Me.ucrInputThresholdValue.Name = "ucrInputThresholdValue"
         '
         'ucrNudCoeff
         '
@@ -334,11 +336,11 @@ Partial Class dlgClimaticCheckDataRain
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrNudThreshold)
         Me.Controls.Add(Me.lblThresholdmm)
         Me.Controls.Add(Me.ucrInputThreshold)
-        Me.Controls.Add(Me.lblMissingThreshold)
+        Me.Controls.Add(Me.lblThresholdDryMonth)
         Me.Controls.Add(Me.lblThreshold)
-        Me.Controls.Add(Me.ucrInputThresholdValue)
         Me.Controls.Add(Me.cmdOmitMonths)
         Me.Controls.Add(Me.lblCoeff)
         Me.Controls.Add(Me.ucrNudCoeff)
@@ -415,9 +417,9 @@ Partial Class dlgClimaticCheckDataRain
     Friend WithEvents lblCoeff As Label
     Friend WithEvents ucrNudCoeff As ucrNud
     Friend WithEvents cmdOmitMonths As Button
-    Friend WithEvents ucrInputThresholdValue As ucrInputTextBox
     Friend WithEvents lblThreshold As Label
-    Friend WithEvents lblMissingThreshold As Label
+    Friend WithEvents lblThresholdDryMonth As Label
     Friend WithEvents ucrInputThreshold As ucrInputTextBox
     Friend WithEvents lblThresholdmm As Label
+    Friend WithEvents ucrNudThreshold As ucrNud
 End Class

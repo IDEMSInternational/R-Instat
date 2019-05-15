@@ -46,6 +46,10 @@ Public Class dlgClimaticCheckDataRain
     Private clsGroupByMonthYearFunction, clsDryMonthCalculationFunc, clsListCalcFunction, clsSumFuction, clsDryMonthTestCalculationFunc, clsListTestFunction, clsNotIsNaFunction, clsDrySumFuction, clsFilterMonthFunction, clsGroupByListFunc As New RFunction
     Private clsDryMonthEqualOperator, clsDryMonthAndOperator, clsLessOperator, clsDryTestAndOperator, clsInOperator, clsNotOperator As New ROperator
 
+    Private Sub lblThresholdmm_Click(sender As Object, e As EventArgs) Handles lblThresholdmm.Click
+
+    End Sub
+
     'Combined Filters
     Private clsOrOperator As New ROperator
     Private clsListSubCalc As New RFunction
@@ -79,7 +83,7 @@ Public Class dlgClimaticCheckDataRain
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 511
         Dim lstControls As New List(Of Control)
-        lstControls.AddRange({lblMissingThreshold, cmdOmitMonths, lblThresholdmm})
+        lstControls.AddRange({lblThresholdDryMonth, cmdOmitMonths, lblThresholdmm})
 
         ucrReceiverStation.Selector = ucrSelectorRain
         ucrReceiverStation.SetClimaticType("station")
@@ -145,9 +149,10 @@ Public Class dlgClimaticCheckDataRain
         ucrChkOmitZero.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitZero.SetText("Omit Zero")
 
-        ucrInputThresholdValue.SetParameter(New RParameter("value", 8))
-        ucrInputThresholdValue.AddQuotesIfUnrecognised = False
-        ucrInputThresholdValue.SetValidationTypeAsNumeric()
+        ucrNudThreshold.SetParameter(New RParameter("Threshold", 8))
+        ucrNudThreshold.DecimalPlaces = 1
+        ucrNudThreshold.Increment = 0.1
+        ucrNudThreshold.SetRDefault("0")
 
         'Linking of controls
         ucrChkLarge.AddToLinkedControls(ucrNudLarge, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=200)
@@ -157,10 +162,10 @@ Public Class dlgClimaticCheckDataRain
         ucrChkOutlier.AddToLinkedControls(ucrChkOmitZero, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkOutlier.AddToLinkedControls(ucrNudCoeff, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1.5)
         ucrChkOutlier.AddToLinkedControls(ucrNudSkewnessWeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=4)
-        ucrChkOmitZero.AddToLinkedControls(ucrInputThresholdValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkOmitZero.AddToLinkedControls(ucrNudThreshold, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
         ucrInputThreshold.SetLinkedDisplayControl(lstControls)
-        ucrInputThresholdValue.SetLinkedDisplayControl(lblThreshold)
+        ucrNudThreshold.SetLinkedDisplayControl(lblThreshold)
         ucrNudLarge.SetLinkedDisplayControl(lblmm)
         ucrNudSame.SetLinkedDisplayControl(lblDays)
         ucrNudWetDays.SetLinkedDisplayControl(lblRainDays)
@@ -542,6 +547,7 @@ Public Class dlgClimaticCheckDataRain
         ucrNudLarge.SetRCode(clsLargeOperator, bReset)
         ucrNudSame.SetRCode(clsGreaterSameOperator, bReset)
         ucrNudWetDays.SetRCode(clsGreatOperator, bReset)
+        ucrNudThreshold.SetRCode(clsGreaterOperator, bReset)
         'ucrReceiverMonth.SetRCode(clsNotEqualToOperator, bReset)
 
         ucrChkLarge.SetRCode(clsOrOperator, bReset)
@@ -549,7 +555,7 @@ Public Class dlgClimaticCheckDataRain
         ucrChkWetDays.SetRCode(clsOrOperator, bReset)
         ucrChkDryMonth.SetRCode(clsOrOperator, bReset)
         ucrChkOmitZero.SetRCode(clsUpperOutlierLimitFunc, bReset)
-        ucrInputThresholdValue.SetRCode(clsUpperOutlierLimitFunc, bReset)
+        ucrNudThreshold.SetRCode(clsUpperOutlierLimitFunc, bReset)
         ucrNudCoeff.SetRCode(clsUpperOutlierLimitFunc, bReset)
         ucrInputThreshold.SetRCode(clsLessOperator, bReset)
 
@@ -561,13 +567,16 @@ Public Class dlgClimaticCheckDataRain
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverElement.IsEmpty AndAlso ((ucrChkLarge.Checked AndAlso ucrNudLarge.GetText <> "") OrElse (ucrChkSame.Checked AndAlso ucrNudSame.GetText <> "") OrElse (ucrChkWetDays.Checked AndAlso ucrNudWetDays.GetText <> "") OrElse (ucrChkOutlier.Checked AndAlso ucrNudSkewnessWeight.GetText <> "" AndAlso ucrNudCoeff.GetText <> "") OrElse (ucrChkDryMonth.Checked AndAlso Not ucrInputThreshold.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty)) Then
+        If Not ucrReceiverElement.IsEmpty AndAlso ((ucrChkLarge.Checked AndAlso ucrNudLarge.GetText <> "") OrElse (ucrChkSame.Checked AndAlso ucrNudSame.GetText <> "") OrElse (ucrChkWetDays.Checked AndAlso ucrNudWetDays.GetText <> "") OrElse (ucrChkOutlier.Checked AndAlso ucrNudSkewnessWeight.GetText <> "" AndAlso ucrNudCoeff.GetText <> "" AndAlso ucrChkOmitZero.Checked) OrElse (ucrChkDryMonth.Checked AndAlso Not ucrInputThreshold.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty)) Then
             ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
+            If ucrNudLarge.GetText <> "" AndAlso ucrNudSame.GetText <> "" AndAlso ucrNudWetDays.GetText <> "" AndAlso ucrNudSkewnessWeight.GetText <> "" AndAlso ucrNudWetDays.GetText <> "" AndAlso ucrNudThreshold.GetText <> "" Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
-        If ucrChkOutlier.Checked AndAlso ucrChkOmitZero.Checked AndAlso ucrInputThresholdValue.IsEmpty Then
-            ucrBase.OKEnabled(False)
+        If ucrChkOutlier.Checked AndAlso ucrChkOmitZero.Checked Then
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -664,7 +673,7 @@ Public Class dlgClimaticCheckDataRain
         End If
     End Sub
 
-    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrChkLarge.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkWetDays.ControlContentsChanged, ucrNudLarge.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudWetDays.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged, ucrChkOmitZero.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged, ucrChkDryMonth.ControlContentsChanged, ucrInputThreshold.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged
+    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrChkLarge.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkWetDays.ControlContentsChanged, ucrNudLarge.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudWetDays.ControlContentsChanged, ucrNudThreshold.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged, ucrChkOmitZero.ControlContentsChanged, ucrChkDryMonth.ControlContentsChanged, ucrInputThreshold.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
