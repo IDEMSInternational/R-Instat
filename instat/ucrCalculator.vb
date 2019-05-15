@@ -1135,17 +1135,24 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::plogis()", 1)
         End If
     End Sub
+    Private Sub cmdAtan2_Click(sender As Object, e As EventArgs) Handles cmdAtan2.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan2(y, x)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan2()", 1)
+        End If
+    End Sub
 
     Private Sub cmdDuplicate_Click(sender As Object, e As EventArgs) Handles cmdDuplicate.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("duplicated()", 1)
     End Sub
 
     Private Sub cmdIsNa_Click(sender As Object, e As EventArgs) Handles cmdIsNa.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("is.na()", 1)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Is.na()", 1)
     End Sub
 
     Private Sub cmdNotIsNa_Click(sender As Object, e As EventArgs) Handles cmdNotIsNa.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("!is.na()", 1)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("!Is.na()", 1)
     End Sub
 
     Private Sub cmdCv_Click(sender As Object, e As EventArgs) Handles cmdCv.Click
@@ -1162,7 +1169,7 @@ Public Class ucrCalculator
 
     Private Sub cmdNonMiss_Click(sender As Object, e As EventArgs) Handles cmdNonMiss.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(!is.na(x= ))", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(!Is.na(x= ))", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(!is.na())", 2)
         End If
