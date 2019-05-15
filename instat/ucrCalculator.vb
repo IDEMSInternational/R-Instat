@@ -1137,7 +1137,7 @@ Public Class ucrCalculator
     End Sub
     Private Sub cmdAtan2_Click(sender As Object, e As EventArgs) Handles cmdAtan2.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan2(y, x)", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan2(y = , x = )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan2()", 1)
         End If
@@ -1169,7 +1169,7 @@ Public Class ucrCalculator
 
     Private Sub cmdNonMiss_Click(sender As Object, e As EventArgs) Handles cmdNonMiss.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(!Is.na(x= ))", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(!is.na(x= ))", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(!is.na())", 2)
         End If
