@@ -1152,7 +1152,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdNotIsNa_Click(sender As Object, e As EventArgs) Handles cmdNotIsNa.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("!Is.na()", 1)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("!is.na()", 1)
     End Sub
 
     Private Sub cmdCv_Click(sender As Object, e As EventArgs) Handles cmdCv.Click
