@@ -125,9 +125,8 @@ Public Class sdgWindrose
         ucrNudNoOfSpeeds.SetRCode(clsWindRoseFunc, bReset, bCloneIfNeeded:=True)
         ucrNudCalmWind.SetRCode(clsWindRoseFunc, bReset, bCloneIfNeeded:=True)
         ucrInputTheme.SetRCode(clsWindRoseFunc, bReset, bCloneIfNeeded:=True)
-        ucrInputPalettes.SetRCode(clsWindRoseFunc, bReset, bCloneIfNeeded:=True)
         ucrInputSpeedCuts.SetRCode(clsSpeedCuts, bReset, bCloneIfNeeded:=True)
-        SetComboBoxItems()
+        ucrInputPalettes.SetRCode(clsWindRoseFunc, bReset, bCloneIfNeeded:=True)
     End Sub
 
     Private Sub SetComboBoxItems()
