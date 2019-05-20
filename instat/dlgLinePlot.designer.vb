@@ -55,6 +55,8 @@ Partial Class dlgLinePlot
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
+        Me.ucrChkPeak = New instat.ucrCheck()
+        Me.ucrChkValley = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -166,10 +168,24 @@ Partial Class dlgLinePlot
         Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.ucrSelector = Nothing
         '
+        'ucrChkPeak
+        '
+        Me.ucrChkPeak.Checked = False
+        resources.ApplyResources(Me.ucrChkPeak, "ucrChkPeak")
+        Me.ucrChkPeak.Name = "ucrChkPeak"
+        '
+        'ucrChkValley
+        '
+        Me.ucrChkValley.Checked = False
+        resources.ApplyResources(Me.ucrChkValley, "ucrChkValley")
+        Me.ucrChkValley.Name = "ucrChkValley"
+        '
         'dlgLinePlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkValley)
+        Me.Controls.Add(Me.ucrChkPeak)
         Me.Controls.Add(Me.ucrReceiverGroup)
         Me.Controls.Add(Me.lblGroup)
         Me.Controls.Add(Me.ucrChkWithSE)
@@ -211,4 +227,6 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrChkWithSE As ucrCheck
     Friend WithEvents ucrReceiverGroup As ucrReceiverSingle
     Friend WithEvents lblGroup As Label
+    Friend WithEvents ucrChkValley As ucrCheck
+    Friend WithEvents ucrChkPeak As ucrCheck
 End Class
