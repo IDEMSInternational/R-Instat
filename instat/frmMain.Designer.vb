@@ -116,6 +116,7 @@ Partial Class frmMain
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuModelHypothesisTests = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelModel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UseModelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelOtherOneVariable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelOtherOneVariableExactResults = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelOtherOneVariableSampleSummaryData = New System.Windows.Forms.ToolStripMenuItem()
@@ -218,7 +219,6 @@ Partial Class frmMain
         Me.mnuClimaticCheckDataDisplayDaily = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCheckDataBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCheckDataQCRainfall = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticCheckDataQCTemperatures = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepare = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCimaticPrepareTransform = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareConversions = New System.Windows.Forms.ToolStripMenuItem()
@@ -254,6 +254,7 @@ Partial Class frmMain
         Me.ToolStripSeparator31 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticPICSA = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSARainfall = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCumExeedenceGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSATemperature = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSACrops = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCMSAF = New System.Windows.Forms.ToolStripMenuItem()
@@ -272,7 +273,7 @@ Partial Class frmMain
         Me.mnuClimaticSCFSupportCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticSCFSupportPrincipalComponents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticSCFSupportCanonicalCorrelations = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticSCFSupportCumulativeExceedanceGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethods = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsDataManipulation = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsDataManipulationStartOfRain = New System.Windows.Forms.ToolStripMenuItem()
@@ -578,7 +579,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.UseModelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCheckDataQCTemperatures = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1049,6 +1050,11 @@ Partial Class frmMain
         '
         Me.mnuModelModel.Name = "mnuModelModel"
         resources.ApplyResources(Me.mnuModelModel, "mnuModelModel")
+        '
+        'UseModelToolStripMenuItem
+        '
+        Me.UseModelToolStripMenuItem.Name = "UseModelToolStripMenuItem"
+        resources.ApplyResources(Me.UseModelToolStripMenuItem, "UseModelToolStripMenuItem")
         '
         'mnuModelOtherOneVariable
         '
@@ -1580,7 +1586,7 @@ Partial Class frmMain
         '
         'mnuClimaticCheckData
         '
-        Me.mnuClimaticCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCheckDataInventory, Me.mnuClimaticCheckDataDisplayDaily, Me.mnuClimaticCheckDataBoxplot, Me.mnuClimaticCheckDataQCRainfall, Me.mnuClimaticCheckDataQCTemperatures})
+        Me.mnuClimaticCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCheckDataInventory, Me.mnuClimaticCheckDataDisplayDaily, Me.mnuClimaticCheckDataBoxplot, Me.mnuClimaticCheckDataQCTemperatures, Me.mnuClimaticCheckDataQCRainfall})
         Me.mnuClimaticCheckData.Name = "mnuClimaticCheckData"
         resources.ApplyResources(Me.mnuClimaticCheckData, "mnuClimaticCheckData")
         '
@@ -1603,11 +1609,6 @@ Partial Class frmMain
         '
         Me.mnuClimaticCheckDataQCRainfall.Name = "mnuClimaticCheckDataQCRainfall"
         resources.ApplyResources(Me.mnuClimaticCheckDataQCRainfall, "mnuClimaticCheckDataQCRainfall")
-        '
-        'mnuClimaticCheckDataQCTemperatures
-        '
-        Me.mnuClimaticCheckDataQCTemperatures.Name = "mnuClimaticCheckDataQCTemperatures"
-        resources.ApplyResources(Me.mnuClimaticCheckDataQCTemperatures, "mnuClimaticCheckDataQCTemperatures")
         '
         'mnuClimaticPrepare
         '
@@ -1786,7 +1787,7 @@ Partial Class frmMain
         '
         'mnuClimaticPICSA
         '
-        Me.mnuClimaticPICSA.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticPICSARainfall, Me.mnuClimaticPICSATemperature, Me.mnuClimaticPICSACrops})
+        Me.mnuClimaticPICSA.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticPICSARainfall, Me.mnuCumExeedenceGraph, Me.mnuClimaticPICSATemperature, Me.mnuClimaticPICSACrops})
         Me.mnuClimaticPICSA.Name = "mnuClimaticPICSA"
         resources.ApplyResources(Me.mnuClimaticPICSA, "mnuClimaticPICSA")
         '
@@ -1794,6 +1795,11 @@ Partial Class frmMain
         '
         Me.mnuClimaticPICSARainfall.Name = "mnuClimaticPICSARainfall"
         resources.ApplyResources(Me.mnuClimaticPICSARainfall, "mnuClimaticPICSARainfall")
+        '
+        'mnuCumExeedenceGraph
+        '
+        Me.mnuCumExeedenceGraph.Name = "mnuCumExeedenceGraph"
+        resources.ApplyResources(Me.mnuCumExeedenceGraph, "mnuCumExeedenceGraph")
         '
         'mnuClimaticPICSATemperature
         '
@@ -1855,7 +1861,7 @@ Partial Class frmMain
         '
         'mnuClimaticSCF
         '
-        Me.mnuClimaticSCF.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticSCFSupportOpenSST, Me.mnuClimaticSCFSupportExporttoCPT, Me.ToolStripSeparator32, Me.mnuClimaticSCFSupportCorrelations, Me.mnuClimaticSCFSupportPrincipalComponents, Me.mnuClimaticSCFSupportCanonicalCorrelations, Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs})
+        Me.mnuClimaticSCF.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticSCFSupportOpenSST, Me.mnuClimaticSCFSupportExporttoCPT, Me.ToolStripSeparator32, Me.mnuClimaticSCFSupportCorrelations, Me.mnuClimaticSCFSupportPrincipalComponents, Me.mnuClimaticSCFSupportCanonicalCorrelations, Me.mnuClimaticSCFSupportCumulativeExceedanceGraph})
         Me.mnuClimaticSCF.Name = "mnuClimaticSCF"
         resources.ApplyResources(Me.mnuClimaticSCF, "mnuClimaticSCF")
         '
@@ -1890,10 +1896,10 @@ Partial Class frmMain
         Me.mnuClimaticSCFSupportCanonicalCorrelations.Name = "mnuClimaticSCFSupportCanonicalCorrelations"
         resources.ApplyResources(Me.mnuClimaticSCFSupportCanonicalCorrelations, "mnuClimaticSCFSupportCanonicalCorrelations")
         '
-        'mnuClimaticSCFSupportCumulativeExceedanceGraphs
+        'mnuClimaticSCFSupportCumulativeExceedanceGraph
         '
-        Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs.Name = "mnuClimaticSCFSupportCumulativeExceedanceGraphs"
-        resources.ApplyResources(Me.mnuClimaticSCFSupportCumulativeExceedanceGraphs, "mnuClimaticSCFSupportCumulativeExceedanceGraphs")
+        Me.mnuClimaticSCFSupportCumulativeExceedanceGraph.Name = "mnuClimaticSCFSupportCumulativeExceedanceGraph"
+        resources.ApplyResources(Me.mnuClimaticSCFSupportCumulativeExceedanceGraph, "mnuClimaticSCFSupportCumulativeExceedanceGraph")
         '
         'mnuClimateMethods
         '
@@ -3707,10 +3713,10 @@ Partial Class frmMain
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
         '
-        'UseModelToolStripMenuItem
+        'mnuClimaticCheckDataQCTemperatures
         '
-        Me.UseModelToolStripMenuItem.Name = "UseModelToolStripMenuItem"
-        resources.ApplyResources(Me.UseModelToolStripMenuItem, "UseModelToolStripMenuItem")
+        Me.mnuClimaticCheckDataQCTemperatures.Name = "mnuClimaticCheckDataQCTemperatures"
+        resources.ApplyResources(Me.mnuClimaticCheckDataQCTemperatures, "mnuClimaticCheckDataQCTemperatures")
         '
         'frmMain
         '
@@ -4122,7 +4128,7 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticCheckDataQCRainfall As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator18 As ToolStripSeparator
     Friend WithEvents mnuProcurementDefineData As ToolStripMenuItem
-    Friend WithEvents mnuClimaticSCFSupportCumulativeExceedanceGraphs As ToolStripMenuItem
+    Friend WithEvents mnuClimaticSCFSupportCumulativeExceedanceGraph As ToolStripMenuItem
     Friend WithEvents mnuProcurementPrepareMergeAdditionalData As ToolStripMenuItem
     Friend WithEvents mnuProcurementPrepareFilterByCountry As ToolStripMenuItem
     Friend WithEvents mnuProcurementPrepareUseAwardDate As ToolStripMenuItem
@@ -4206,7 +4212,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator40 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator41 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator30 As ToolStripSeparator
-    Friend WithEvents mnuClimaticCheckDataQCTemperatures As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator37 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator42 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator43 As ToolStripSeparator
@@ -4296,4 +4301,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticTidyandExamineOneVariableGraph As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineOneVariableFrequencies As ToolStripMenuItem
     Friend WithEvents UseModelToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuCumExeedenceGraph As ToolStripMenuItem
+    Friend WithEvents mnuClimaticCheckDataQCTemperatures As ToolStripMenuItem
 End Class
