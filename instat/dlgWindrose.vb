@@ -20,7 +20,7 @@ Imports instat.Translations
 Public Class dlgWindrose
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private bResetSubDialog As Boolean = False
+    Private bResetSubDialog As Boolean = True
     Private clsDefaultRFunction As New RFunction
     Private clsFactorColumn As New RFunction
     Private clsLevelofFactor As New RFunction
@@ -140,8 +140,9 @@ Public Class dlgWindrose
 
     Private Sub cmdWindroseOptions_Click(sender As Object, e As EventArgs) Handles cmdWindroseOptions.Click
         sdgWindrose.SetRFunction(clsDefaultRFunction, bResetSubDialog)
-        bResetSubDialog = False
         sdgWindrose.ShowDialog()
+        bResetSubDialog = False
+
     End Sub
 
     Private Sub GetMaxValue()
