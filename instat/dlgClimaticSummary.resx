@@ -405,25 +405,25 @@
   <data name="&gt;&gt;lblWithinYear.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="ucrChkOmitMissingValues.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrChkOmitMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 86</value>
   </data>
-  <data name="ucrChkOmitMissingValues.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrChkOmitMissing.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 20</value>
   </data>
-  <data name="ucrChkOmitMissingValues.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrChkOmitMissing.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;ucrChkOmitMissingValues.Name" xml:space="preserve">
-    <value>ucrChkOmitMissingValues</value>
+  <data name="&gt;&gt;ucrChkOmitMissing.Name" xml:space="preserve">
+    <value>ucrChkOmitMissing</value>
   </data>
-  <data name="&gt;&gt;ucrChkOmitMissingValues.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkOmitMissing.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkOmitMissingValues.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkOmitMissing.Parent" xml:space="preserve">
     <value>grpOptions</value>
   </data>
-  <data name="&gt;&gt;ucrChkOmitMissingValues.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkOmitMissing.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ucrChkAddDateColumn.Location" type="System.Drawing.Point, System.Drawing">
