@@ -126,6 +126,11 @@ Public Class dlgClimaticSummary
         ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkDropUnusedLevels.SetRDefault("FALSE")
 
+        ucrChkOmitMissingValues.SetParameter(New RParameter("na.rm", 6))
+        ucrChkOmitMissingValues.SetText("Omit Missing Values")
+        ucrChkOmitMissingValues.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOmitMissingValues.SetRDefault("FALSE")
+
         ucrChkAddDateColumn.SetText("Add Date Column")
 
         'linking controls
@@ -202,6 +207,7 @@ Public Class dlgClimaticSummary
         ucrReceiverElement.SetRCode(clsDefaultFunction, bReset)
         ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
         ucrChkPrintOutput.SetRCode(clsDefaultFunction, bReset)
+        ucrChkOmitMissingValues.SetRCode(clsDefaultFunction, bReset)
 
         ucrPnlAnnualWithin.SetRCode(clsDefaultFactors, bReset)
         ucrReceiverStation.SetRCode(clsDefaultFactors, bReset)
