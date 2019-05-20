@@ -65,6 +65,7 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlAnnualWithin = New instat.UcrPanel()
+        Me.ucrChkOmitMissingValues = New instat.ucrCheck()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -132,6 +133,7 @@ Partial Class dlgClimaticSummary
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.ucrChkOmitMissingValues)
         Me.grpOptions.Controls.Add(Me.ucrChkAddDateColumn)
         Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
         Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
@@ -256,6 +258,12 @@ Partial Class dlgClimaticSummary
         resources.ApplyResources(Me.ucrPnlAnnualWithin, "ucrPnlAnnualWithin")
         Me.ucrPnlAnnualWithin.Name = "ucrPnlAnnualWithin"
         '
+        'ucrChkOmitMissingValues
+        '
+        Me.ucrChkOmitMissingValues.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitMissingValues, "ucrChkOmitMissingValues")
+        Me.ucrChkOmitMissingValues.Name = "ucrChkOmitMissingValues"
+        '
         'dlgClimaticSummary
         '
         resources.ApplyResources(Me, "$this")
@@ -318,4 +326,5 @@ Partial Class dlgClimaticSummary
     Friend WithEvents lblYear As Label
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents ucrChkAddDateColumn As ucrCheck
+    Friend WithEvents ucrChkOmitMissingValues As ucrCheck
 End Class
