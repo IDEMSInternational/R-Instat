@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class sdgPlots
     'Question to be discussed (later: need to explore first)/Exploration Task: In order to uniformise the code, could create a PlotOptionsSetup where all the necessary links between specific plots and plot options are made ? For the moment all these are scattered around. Might be necessary to have this flexibility though... 
@@ -54,6 +55,10 @@ Public Class sdgPlots
     Private clsYElemetText As New RFunction
     Private clsYElemetTitle As New RFunction
 
+    'Polar Coordinates
+    Private clsCoordPolarFunc As New RFunction
+    Private clsCoordPolarParam As New RParameter
+
     'See bLayersDefaultIsGolobal below.
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs)
@@ -72,6 +77,28 @@ Public Class sdgPlots
         Dim clsCoordEqualParam As New RParameter
 
         ucrBaseSubdialog.iHelpTopicID = 136
+
+        'Use Polar Coordinates
+        ucrChkUsePolarCoordinates.SetText("Use Polar Coordinates")
+
+        ucrChkDirectionAnticlockwise.Hide()
+        ucrChkStartingAngle.Hide()
+        ucrtxtStartingAngle.Hide()
+        lblPi.Hide()
+
+        ucrChkDirectionAnticlockwise.SetText("Direction Anticlockwise")
+        ucrChkDirectionAnticlockwise.SetParameter(New RParameter("direction", 0))
+        ucrChkDirectionAnticlockwise.SetValueIfChecked("-1")
+
+        ucrChkStartingAngle.SetText("Starting Angle")
+        ucrtxtStartingAngle.SetParameter(New RParameter("start", 1))
+
+        lblPi.Text = "pi"
+
+        ucrChkUsePolarCoordinates.AddToLinkedControls({ucrChkDirectionAnticlockwise, ucrChkStartingAngle}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkStartingAngle.AddToLinkedControls({ucrtxtStartingAngle}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrtxtStartingAngle.SetLinkedDisplayControl(lblPi)
+
         'facets tab 
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
@@ -125,12 +152,6 @@ Public Class sdgPlots
         ucrChkFreeScalesY.AddParameterValuesCondition(False, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_y" & Chr(34)}, False)
         ucrChkFreeScalesY.bChangeParameterValue = False
         ucrChkFreeScalesY.bAddRemoveParameter = False
-
-
-        ucrChkUsePolarCoordinates.SetText("Use Polar Coordinates")
-        ucrChkDirectionAnticlockwise.SetText("Direction Anticlockwise")
-        ucrChkStartingAngle.SetText("Starting Angle")
-
 
         'TODO space can be either: "fixed", "free", "free_x", "free_y"
         '     currently only implemented "free" or "fixed"
@@ -313,6 +334,13 @@ Public Class sdgPlots
             strDataFrame = ucrBaseSelector.strCurrentDataFrame
             ucrFacetSelector.SetDataframe(strDataFrame, False)
         End If
+        'polar coordinates
+        clsCoordPolarFunc.SetPackageName("ggplot2")
+        clsCoordPolarFunc.SetRCommand("coord_polar")
+        clsCoordPolarParam.SetArgument(clsCoordPolarFunc)
+
+        ucrChkDirectionAnticlockwise.SetRCode(clsCoordPolarFunc, bReset:=True)
+
         ucrFacetSelector.SetLinkedSelector(ucrBaseSelector)
         clsBaseOperator = clsNewOperator
         clsGlobalAesFunction = clsNewGlobalAesFunction
@@ -734,23 +762,29 @@ Public Class sdgPlots
         SetRcodeForCommonThemesControls(False)
     End Sub
 
-    Private Sub ucrChkIncludeFacets_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeFacets.ControlValueChanged, ucr2ndFactorReceiver.ControlValueChanged, ucr1stFactorReceiver.ControlValueChanged
-
+    Private Sub ucrChkUsePolarCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUsePolarCoordinates.ControlValueChanged
+        If ucrChkUsePolarCoordinates.Checked And Not clsBaseOperator.ContainsParameter(clsCoordPolarParam) Then
+            clsBaseOperator.AddParameter(clsCoordPolarParam)
+        Else
+            clsBaseOperator.RemoveParameter(clsCoordPolarParam)
+        End If
     End Sub
 
-    Private Sub ucrChkFreeSpace_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeSpace.ControlValueChanged
-
+    Private Sub ucrChkDirectionAnticlockwise_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDirectionAnticlockwise.ControlValueChanged
+        If Not ucrChkDirectionAnticlockwise.Checked Then
+            clsCoordPolarFunc.RemoveParameterByName("direction")
+        End If
     End Sub
 
-    Private Sub chkScales_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScalesY.ControlValueChanged, ucrChkFreeScalesX.ControlValueChanged
-
+    Private Sub ucrTxtStartingAngle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrtxtStartingAngle.ControlValueChanged
+        If ucrChkStartingAngle.Checked Then
+            clsCoordPolarFunc.AddParameter("start", ucrtxtStartingAngle.GetText() & "*pi")
+        End If
     End Sub
 
-    Private Sub ucrPnlHorizonatalVertical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHorizonatalVertical.ControlValueChanged, ucrChkMargin.ControlValueChanged
-
-    End Sub
-
-    Private Sub LabsControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
-
+    Private Sub ucrChkStartingAngle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStartingAngle.ControlValueChanged
+        If Not ucrChkStartingAngle.Checked Then
+            clsCoordPolarFunc.RemoveParameterByName("start")
+        End If
     End Sub
 End Class

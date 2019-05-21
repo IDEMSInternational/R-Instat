@@ -97,15 +97,15 @@ Partial Class sdgPlots
         Me.cmdAllOptions = New System.Windows.Forms.Button()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.tbpCoordinates = New System.Windows.Forms.TabPage()
+        Me.grpPolarCoordinates = New System.Windows.Forms.GroupBox()
+        Me.lblPi = New System.Windows.Forms.Label()
+        Me.ucrtxtStartingAngle = New instat.ucrInputTextBox()
+        Me.ucrChkStartingAngle = New instat.ucrCheck()
+        Me.ucrChkDirectionAnticlockwise = New instat.ucrCheck()
+        Me.ucrChkUsePolarCoordinates = New instat.ucrCheck()
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.grpPolarCoordinates = New System.Windows.Forms.GroupBox()
-        Me.ucrChkUsePolarCoordinates = New instat.ucrCheck()
-        Me.ucrChkDirectionAnticlockwise = New instat.ucrCheck()
-        Me.ucrChkStartingAngle = New instat.ucrCheck()
-        Me.ucrtxtStartingAngle = New instat.ucrInputTextBox()
-        Me.lblPi = New System.Windows.Forms.Label()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -569,6 +569,48 @@ Partial Class sdgPlots
         Me.tbpCoordinates.Name = "tbpCoordinates"
         Me.tbpCoordinates.UseVisualStyleBackColor = True
         '
+        'grpPolarCoordinates
+        '
+        Me.grpPolarCoordinates.Controls.Add(Me.lblPi)
+        Me.grpPolarCoordinates.Controls.Add(Me.ucrtxtStartingAngle)
+        Me.grpPolarCoordinates.Controls.Add(Me.ucrChkStartingAngle)
+        Me.grpPolarCoordinates.Controls.Add(Me.ucrChkDirectionAnticlockwise)
+        Me.grpPolarCoordinates.Controls.Add(Me.ucrChkUsePolarCoordinates)
+        resources.ApplyResources(Me.grpPolarCoordinates, "grpPolarCoordinates")
+        Me.grpPolarCoordinates.Name = "grpPolarCoordinates"
+        Me.grpPolarCoordinates.TabStop = False
+        '
+        'lblPi
+        '
+        resources.ApplyResources(Me.lblPi, "lblPi")
+        Me.lblPi.Name = "lblPi"
+        '
+        'ucrtxtStartingAngle
+        '
+        Me.ucrtxtStartingAngle.AddQuotesIfUnrecognised = True
+        Me.ucrtxtStartingAngle.IsMultiline = False
+        Me.ucrtxtStartingAngle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrtxtStartingAngle, "ucrtxtStartingAngle")
+        Me.ucrtxtStartingAngle.Name = "ucrtxtStartingAngle"
+        '
+        'ucrChkStartingAngle
+        '
+        Me.ucrChkStartingAngle.Checked = False
+        resources.ApplyResources(Me.ucrChkStartingAngle, "ucrChkStartingAngle")
+        Me.ucrChkStartingAngle.Name = "ucrChkStartingAngle"
+        '
+        'ucrChkDirectionAnticlockwise
+        '
+        Me.ucrChkDirectionAnticlockwise.Checked = False
+        resources.ApplyResources(Me.ucrChkDirectionAnticlockwise, "ucrChkDirectionAnticlockwise")
+        Me.ucrChkDirectionAnticlockwise.Name = "ucrChkDirectionAnticlockwise"
+        '
+        'ucrChkUsePolarCoordinates
+        '
+        Me.ucrChkUsePolarCoordinates.Checked = False
+        resources.ApplyResources(Me.ucrChkUsePolarCoordinates, "ucrChkUsePolarCoordinates")
+        Me.ucrChkUsePolarCoordinates.Name = "ucrChkUsePolarCoordinates"
+        '
         'ucrChkSameScale
         '
         Me.ucrChkSameScale.Checked = False
@@ -585,48 +627,6 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        '
-        'grpPolarCoordinates
-        '
-        Me.grpPolarCoordinates.Controls.Add(Me.lblPi)
-        Me.grpPolarCoordinates.Controls.Add(Me.ucrtxtStartingAngle)
-        Me.grpPolarCoordinates.Controls.Add(Me.ucrChkStartingAngle)
-        Me.grpPolarCoordinates.Controls.Add(Me.ucrChkDirectionAnticlockwise)
-        Me.grpPolarCoordinates.Controls.Add(Me.ucrChkUsePolarCoordinates)
-        resources.ApplyResources(Me.grpPolarCoordinates, "grpPolarCoordinates")
-        Me.grpPolarCoordinates.Name = "grpPolarCoordinates"
-        Me.grpPolarCoordinates.TabStop = False
-        '
-        'ucrChkUsePolarCoordinates
-        '
-        Me.ucrChkUsePolarCoordinates.Checked = False
-        resources.ApplyResources(Me.ucrChkUsePolarCoordinates, "ucrChkUsePolarCoordinates")
-        Me.ucrChkUsePolarCoordinates.Name = "ucrChkUsePolarCoordinates"
-        '
-        'ucrChkDirectionAnticlockwise
-        '
-        Me.ucrChkDirectionAnticlockwise.Checked = False
-        resources.ApplyResources(Me.ucrChkDirectionAnticlockwise, "ucrChkDirectionAnticlockwise")
-        Me.ucrChkDirectionAnticlockwise.Name = "ucrChkDirectionAnticlockwise"
-        '
-        'ucrChkStartingAngle
-        '
-        Me.ucrChkStartingAngle.Checked = False
-        resources.ApplyResources(Me.ucrChkStartingAngle, "ucrChkStartingAngle")
-        Me.ucrChkStartingAngle.Name = "ucrChkStartingAngle"
-        '
-        'ucrtxtStartingAngle
-        '
-        Me.ucrtxtStartingAngle.AddQuotesIfUnrecognised = True
-        Me.ucrtxtStartingAngle.IsMultiline = False
-        Me.ucrtxtStartingAngle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrtxtStartingAngle, "ucrtxtStartingAngle")
-        Me.ucrtxtStartingAngle.Name = "ucrtxtStartingAngle"
-        '
-        'lblPi
-        '
-        resources.ApplyResources(Me.lblPi, "lblPi")
-        Me.lblPi.Name = "lblPi"
         '
         'sdgPlots
         '

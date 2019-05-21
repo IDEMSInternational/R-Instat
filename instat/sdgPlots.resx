@@ -1453,7 +1453,7 @@
     <value>True</value>
   </data>
   <data name="lblPi.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 78</value>
+    <value>158, 78</value>
   </data>
   <data name="lblPi.Size" type="System.Drawing.Size, System.Drawing">
     <value>15, 13</value>
@@ -1480,7 +1480,7 @@
     <value>103, 73</value>
   </data>
   <data name="ucrtxtStartingAngle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 21</value>
+    <value>52, 21</value>
   </data>
   <data name="ucrtxtStartingAngle.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1501,7 +1501,7 @@
     <value>0, 75</value>
   </data>
   <data name="ucrChkStartingAngle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 20</value>
+    <value>97, 20</value>
   </data>
   <data name="ucrChkStartingAngle.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
