@@ -894,6 +894,168 @@
   <data name="&gt;&gt;grpBasic.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="cmdQuarter.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdQuarter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 158</value>
+  </data>
+  <data name="cmdQuarter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 30</value>
+  </data>
+  <data name="cmdQuarter.TabIndex" type="System.Int32, mscorlib">
+    <value>157</value>
+  </data>
+  <data name="cmdQuarter.Text" xml:space="preserve">
+    <value>quarter</value>
+  </data>
+  <data name="&gt;&gt;cmdQuarter.Name" xml:space="preserve">
+    <value>cmdQuarter</value>
+  </data>
+  <data name="&gt;&gt;cmdQuarter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdQuarter.Parent" xml:space="preserve">
+    <value>grpDates</value>
+  </data>
+  <data name="&gt;&gt;cmdQuarter.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cmdD_In_M.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdD_In_M.Location" type="System.Drawing.Point, System.Drawing">
+    <value>63, 158</value>
+  </data>
+  <data name="cmdD_In_M.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 30</value>
+  </data>
+  <data name="cmdD_In_M.TabIndex" type="System.Int32, mscorlib">
+    <value>156</value>
+  </data>
+  <data name="cmdD_In_M.Text" xml:space="preserve">
+    <value>d_in_m</value>
+  </data>
+  <data name="&gt;&gt;cmdD_In_M.Name" xml:space="preserve">
+    <value>cmdD_In_M</value>
+  </data>
+  <data name="&gt;&gt;cmdD_In_M.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdD_In_M.Parent" xml:space="preserve">
+    <value>grpDates</value>
+  </data>
+  <data name="&gt;&gt;cmdD_In_M.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cmdAm.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdAm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 158</value>
+  </data>
+  <data name="cmdAm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 30</value>
+  </data>
+  <data name="cmdAm.TabIndex" type="System.Int32, mscorlib">
+    <value>155</value>
+  </data>
+  <data name="cmdAm.Text" xml:space="preserve">
+    <value>am</value>
+  </data>
+  <data name="&gt;&gt;cmdAm.Name" xml:space="preserve">
+    <value>cmdAm</value>
+  </data>
+  <data name="&gt;&gt;cmdAm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdAm.Parent" xml:space="preserve">
+    <value>grpDates</value>
+  </data>
+  <data name="&gt;&gt;cmdAm.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cmdSec.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdSec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 129</value>
+  </data>
+  <data name="cmdSec.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 30</value>
+  </data>
+  <data name="cmdSec.TabIndex" type="System.Int32, mscorlib">
+    <value>154</value>
+  </data>
+  <data name="cmdSec.Text" xml:space="preserve">
+    <value>sec</value>
+  </data>
+  <data name="&gt;&gt;cmdSec.Name" xml:space="preserve">
+    <value>cmdSec</value>
+  </data>
+  <data name="&gt;&gt;cmdSec.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdSec.Parent" xml:space="preserve">
+    <value>grpDates</value>
+  </data>
+  <data name="&gt;&gt;cmdSec.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cmdHour.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdHour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 129</value>
+  </data>
+  <data name="cmdHour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 30</value>
+  </data>
+  <data name="cmdHour.TabIndex" type="System.Int32, mscorlib">
+    <value>153</value>
+  </data>
+  <data name="cmdHour.Text" xml:space="preserve">
+    <value>hour</value>
+  </data>
+  <data name="&gt;&gt;cmdHour.Name" xml:space="preserve">
+    <value>cmdHour</value>
+  </data>
+  <data name="&gt;&gt;cmdHour.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdHour.Parent" xml:space="preserve">
+    <value>grpDates</value>
+  </data>
+  <data name="&gt;&gt;cmdHour.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cmdminutes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdminutes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>63, 129</value>
+  </data>
+  <data name="cmdminutes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 30</value>
+  </data>
+  <data name="cmdminutes.TabIndex" type="System.Int32, mscorlib">
+    <value>152</value>
+  </data>
+  <data name="cmdminutes.Text" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="&gt;&gt;cmdminutes.Name" xml:space="preserve">
+    <value>cmdminutes</value>
+  </data>
+  <data name="&gt;&gt;cmdminutes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdminutes.Parent" xml:space="preserve">
+    <value>grpDates</value>
+  </data>
+  <data name="&gt;&gt;cmdminutes.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="cmdDmy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -922,7 +1084,7 @@
     <value>grpDates</value>
   </data>
   <data name="&gt;&gt;cmdDmy.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>6</value>
   </data>
   <data name="cmdDek.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -952,7 +1114,7 @@
     <value>grpDates</value>
   </data>
   <data name="&gt;&gt;cmdDek.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>7</value>
   </data>
   <data name="cmdDay.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -982,7 +1144,7 @@
     <value>grpDates</value>
   </data>
   <data name="&gt;&gt;cmdDay.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>8</value>
   </data>
   <data name="cmdMonth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1012,7 +1174,7 @@
     <value>grpDates</value>
   </data>
   <data name="&gt;&gt;cmdMonth.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>9</value>
   </data>
   <data name="cmdYear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1042,7 +1204,7 @@
     <value>grpDates</value>
   </data>
   <data name="&gt;&gt;cmdYear.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>10</value>
   </data>
   <data name="cmdDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1072,7 +1234,7 @@
     <value>grpDates</value>
   </data>
   <data name="&gt;&gt;cmdDate.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>11</value>
   </data>
   <data name="cmdYday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1102,7 +1264,7 @@
     <value>grpDates</value>
   </data>
   <data name="&gt;&gt;cmdYday.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>12</value>
   </data>
   <data name="cmdWday.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1132,7 +1294,7 @@
     <value>grpDates</value>
   </data>
   <data name="&gt;&gt;cmdWday.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>13</value>
   </data>
   <data name="cmdMdy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1162,7 +1324,7 @@
     <value>grpDates</value>
   </data>
   <data name="&gt;&gt;cmdMdy.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>14</value>
   </data>
   <data name="cmdYmd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1192,7 +1354,7 @@
     <value>grpDates</value>
   </data>
   <data name="&gt;&gt;cmdYmd.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>15</value>
   </data>
   <data name="cmdDoy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1222,7 +1384,7 @@
     <value>grpDates</value>
   </data>
   <data name="&gt;&gt;cmdDoy.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>16</value>
   </data>
   <data name="cmdLeap.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1252,13 +1414,13 @@
     <value>grpDates</value>
   </data>
   <data name="&gt;&gt;cmdLeap.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>17</value>
   </data>
   <data name="grpDates.Location" type="System.Drawing.Point, System.Drawing">
     <value>434, 61</value>
   </data>
   <data name="grpDates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 136</value>
+    <value>188, 192</value>
   </data>
   <data name="grpDates.TabIndex" type="System.Int32, mscorlib">
     <value>188</value>
@@ -3133,7 +3295,7 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="grpStrings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>436, 63</value>
+    <value>434, 63</value>
   </data>
   <data name="grpStrings.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 136</value>
@@ -7144,7 +7306,7 @@
     <value>53</value>
   </data>
   <data name="grpWakefield.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 61</value>
+    <value>432, 63</value>
   </data>
   <data name="grpWakefield.Size" type="System.Drawing.Size, System.Drawing">
     <value>434, 344</value>

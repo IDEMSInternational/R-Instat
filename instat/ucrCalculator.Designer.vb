@@ -274,6 +274,12 @@ Partial Class ucrCalculator
         Me.cmdHair = New System.Windows.Forms.Button()
         Me.cmdGroup = New System.Windows.Forms.Button()
         Me.cmdGrade = New System.Windows.Forms.Button()
+        Me.cmdminutes = New System.Windows.Forms.Button()
+        Me.cmdHour = New System.Windows.Forms.Button()
+        Me.cmdSec = New System.Windows.Forms.Button()
+        Me.cmdAm = New System.Windows.Forms.Button()
+        Me.cmdD_In_M = New System.Windows.Forms.Button()
+        Me.cmdQuarter = New System.Windows.Forms.Button()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
@@ -461,6 +467,12 @@ Partial Class ucrCalculator
         '
         'grpDates
         '
+        Me.grpDates.Controls.Add(Me.cmdQuarter)
+        Me.grpDates.Controls.Add(Me.cmdD_In_M)
+        Me.grpDates.Controls.Add(Me.cmdAm)
+        Me.grpDates.Controls.Add(Me.cmdSec)
+        Me.grpDates.Controls.Add(Me.cmdHour)
+        Me.grpDates.Controls.Add(Me.cmdminutes)
         Me.grpDates.Controls.Add(Me.cmdDmy)
         Me.grpDates.Controls.Add(Me.cmdDek)
         Me.grpDates.Controls.Add(Me.cmdDay)
@@ -1913,6 +1925,42 @@ Partial Class ucrCalculator
         Me.cmdGrade.Name = "cmdGrade"
         Me.cmdGrade.UseVisualStyleBackColor = True
         '
+        'cmdminutes
+        '
+        resources.ApplyResources(Me.cmdminutes, "cmdminutes")
+        Me.cmdminutes.Name = "cmdminutes"
+        Me.cmdminutes.UseVisualStyleBackColor = True
+        '
+        'cmdHour
+        '
+        resources.ApplyResources(Me.cmdHour, "cmdHour")
+        Me.cmdHour.Name = "cmdHour"
+        Me.cmdHour.UseVisualStyleBackColor = True
+        '
+        'cmdSec
+        '
+        resources.ApplyResources(Me.cmdSec, "cmdSec")
+        Me.cmdSec.Name = "cmdSec"
+        Me.cmdSec.UseVisualStyleBackColor = True
+        '
+        'cmdAm
+        '
+        resources.ApplyResources(Me.cmdAm, "cmdAm")
+        Me.cmdAm.Name = "cmdAm"
+        Me.cmdAm.UseVisualStyleBackColor = True
+        '
+        'cmdD_In_M
+        '
+        resources.ApplyResources(Me.cmdD_In_M, "cmdD_In_M")
+        Me.cmdD_In_M.Name = "cmdD_In_M"
+        Me.cmdD_In_M.UseVisualStyleBackColor = True
+        '
+        'cmdQuarter
+        '
+        resources.ApplyResources(Me.cmdQuarter, "cmdQuarter")
+        Me.cmdQuarter.Name = "cmdQuarter"
+        Me.cmdQuarter.UseVisualStyleBackColor = True
+        '
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
@@ -2230,4 +2278,10 @@ Partial Class ucrCalculator
     Friend WithEvents cmdLogistic As Button
     Friend WithEvents cmdLogit As Button
     Friend WithEvents cmdAtan2 As Button
+    Friend WithEvents cmdQuarter As Button
+    Friend WithEvents cmdD_In_M As Button
+    Friend WithEvents cmdAm As Button
+    Friend WithEvents cmdSec As Button
+    Friend WithEvents cmdHour As Button
+    Friend WithEvents cmdminutes As Button
 End Class
