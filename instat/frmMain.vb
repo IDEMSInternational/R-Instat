@@ -1341,7 +1341,7 @@ Public Class frmMain
         dlgDefineCorruption.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticSCFSupportCumulativeExceedanceGraphs_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportCumulativeExceedanceGraphs.Click
+    Private Sub mnuClimaticSCFSupportCumulativeExceedanceGraphs_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportCumulativeExceedanceGraph.Click
         dlgCumulativeDistribution.ShowDialog()
     End Sub
 
@@ -1862,12 +1862,13 @@ Public Class frmMain
         dlgOpenNetCDF.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticCheckDataQCRainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataQCRainfall.Click
-        dlgClimaticCheckDataRain.ShowDialog()
-    End Sub
 
     Private Sub mnuClimaticCheckDataQCTemperatures_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataQCTemperatures.Click
         dlgClimaticCheckDataTemperature.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCheckDataQCRainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataQCRainfall.Click
+        dlgClimaticCheckDataRain.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeSpecificParallelCoordinatePlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificParallelCoordinatePlot.Click
@@ -2098,5 +2099,9 @@ Public Class frmMain
 
     Private Sub UseModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseModelToolStripMenuItem.Click
         dlgUseModel.ShowDialog()
+    End Sub
+
+    Private Sub mnuCumExeedenceGraph_Click(sender As Object, e As EventArgs) Handles mnuCumExeedenceGraph.Click
+        dlgCumulativeDistribution.ShowDialog()
     End Sub
 End Class
