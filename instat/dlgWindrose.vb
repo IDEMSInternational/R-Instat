@@ -26,6 +26,7 @@ Public Class dlgWindrose
     Private clsLevelofFactor As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsLabs As New RFunction
+    Private clsSpeedCuts As New RFunction
 
     Private Sub dlgWindrose_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -87,6 +88,7 @@ Public Class dlgWindrose
         clsDefaultRFunction = New RFunction
         clsBaseOperator = New ROperator
         clsLabs = New RFunction
+        clsSpeedCuts = New RFunction
 
         ucrWindRoseSelector.Reset()
         ucrSaveGraph.Reset()
@@ -95,6 +97,7 @@ Public Class dlgWindrose
         ucrInputTitle.Reset()
         ucrInputSubTitle.Reset()
 
+        clsSpeedCuts.SetRCommand("c")
         clsDefaultRFunction.SetPackageName("clifro")
         clsDefaultRFunction.SetRCommand("windrose")
         clsDefaultRFunction.AddParameter("col_pal", Chr(34) & "Blues" & Chr(34))
@@ -139,7 +142,7 @@ Public Class dlgWindrose
     End Sub
 
     Private Sub cmdWindroseOptions_Click(sender As Object, e As EventArgs) Handles cmdWindroseOptions.Click
-        sdgWindrose.SetRFunction(clsDefaultRFunction, bResetSubDialog)
+        sdgWindrose.SetRFunction(clsDefaultRFunction, clsSpeedCuts, bReset:=bResetSubDialog)
         sdgWindrose.ShowDialog()
         bResetSubDialog = False
 

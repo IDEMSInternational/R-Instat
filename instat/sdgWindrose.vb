@@ -19,11 +19,12 @@ Imports instat.Translations
 Public Class sdgWindrose
     Public bControlsInitialised As Boolean = False
     Public clsWindRoseFunc As New RFunction
+    Public clsSpeedCuts As New RFunction
     Private dctThemePairs As New Dictionary(Of String, String)
     Private dctSequatailPairs As New Dictionary(Of String, String)
     Private dctDivergingPairs As New Dictionary(Of String, String)
     Private dctQualititivePairs As New Dictionary(Of String, String)
-    Private clsSpeedCuts As New RFunction
+
 
     Private Sub sdgWindrose_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -110,23 +111,22 @@ Public Class sdgWindrose
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewSpeedCuts As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        If bReset Then
-            clsSpeedCuts = New RFunction
-        End If
+
+        clsSpeedCuts = clsNewSpeedCuts
         clsWindRoseFunc = clsNewRFunction
-        clsSpeedCuts.SetRCommand("c")
+
 
         ucrPnlColourPalette.SetRCode(clsWindRoseFunc, bReset, bCloneIfNeeded:=True)
         ucrNudNoOfDirections.SetRCode(clsWindRoseFunc, bReset, bCloneIfNeeded:=True)
         ucrNudNoOfSpeeds.SetRCode(clsWindRoseFunc, bReset, bCloneIfNeeded:=True)
         ucrNudCalmWind.SetRCode(clsWindRoseFunc, bReset, bCloneIfNeeded:=True)
         ucrInputTheme.SetRCode(clsWindRoseFunc, bReset, bCloneIfNeeded:=True)
-        ucrInputSpeedCuts.SetRCode(clsSpeedCuts, bReset, bCloneIfNeeded:=True)
         ucrInputPalettes.SetRCode(clsWindRoseFunc, bReset, bCloneIfNeeded:=True)
+        ucrInputSpeedCuts.SetRCode(clsSpeedCuts, bReset, bCloneIfNeeded:=True)
     End Sub
 
     Private Sub SetComboBoxItems()
