@@ -692,7 +692,7 @@ Public Class dlgPICSARainfall
         End If
     End Sub
 
-    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged
+    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged
         If ucrReceiverFacetBy.IsEmpty Then
             clsBaseOperator.RemoveParameterByName("facets")
         Else
@@ -747,12 +747,11 @@ Public Class dlgPICSARainfall
                 clsGroupByFunction.AddParameter("x", "variable", bIncludeArgumentName:=False, iPosition:=0)
             Else
                 If ucrReceiverColourBy.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty Then
-                    clsGroupByFunction.AddParameter("x", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+                    'clsGroupByFunction.AddParameter("x", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
                 ElseIf (Not ucrReceiverColourBy.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty) Then
-                    clsGroupByFunction.AddParameter("x", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
-                    clsGroupByFunction.AddParameter("x", "variable", bIncludeArgumentName:=False, iPosition:=0)
+                    clsGroupByFunction.AddParameter("x", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
                 ElseIf (Not ucrReceiverColourBy.IsEmpty AndAlso ucrReceiverFacetBy.IsEmpty) Then
-                    clsGroupByFunction.AddParameter("x", "variable", bIncludeArgumentName:=False, iPosition:=0)
+                    clsGroupByFunction.AddParameter("x", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
                 Else
                     clsGroupByFunction.RemoveParameterByName("x")
                     clsPipeOperator.RemoveParameterByName("group_by")
