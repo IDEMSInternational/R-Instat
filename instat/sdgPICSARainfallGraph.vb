@@ -928,9 +928,9 @@ Public Class sdgPICSARainfallGraph
                         If rdoYNumeric.Checked Then
                             'a vector of mean, 'strMeanName' should be povided for faceting
                             clsPasteMeanY.AddParameter("1", clsRFunctionParameter:=clsRoundMeanY, bIncludeArgumentName:=False, iPosition:=1)
-                            clsRoundMeanY.AddParameter("0", strMeanName, iPosition:=0)
+                            clsRoundMeanY.AddParameter("0", strMeanName, bIncludeArgumentName:=False, iPosition:=0)
                         ElseIf rdoYDate.Checked Then
-                            clsRoundMeanY.AddParameter("x", clsRFunctionParameter:=clsMeanFunction, iPosition:=0)
+                            clsRoundMeanY.AddParameter("0", clsRFunctionParameter:=clsMeanFunction, bIncludeArgumentName:=False, iPosition:=0)
                             clsPasteMeanY.AddParameter("0", clsRFunctionParameter:=clsFormatMeanY, bIncludeArgumentName:=False, iPosition:=1)
                         End If
                     Else
@@ -959,9 +959,9 @@ Public Class sdgPICSARainfallGraph
                         'similarly to the case of mean
                         If rdoYNumeric.Checked Then
                             clsPasteMedianY.AddParameter("1", clsRFunctionParameter:=clsRoundMedianY, bIncludeArgumentName:=False, iPosition:=1)
-                            clsRoundMedianY.AddParameter("0", strMedianName, iPosition:=0)
+                            clsRoundMedianY.AddParameter("0", strMedianName, bIncludeArgumentName:=False, iPosition:=0)
                         ElseIf rdoYDate.Checked Then
-                            clsRoundMedianY.AddParameter("0", clsRFunctionParameter:=clsMedianFunction, iPosition:=0)
+                            clsRoundMedianY.AddParameter("0", clsRFunctionParameter:=clsMedianFunction, bIncludeArgumentName:=False, iPosition:=0)
                             clsPasteMedianY.AddParameter("1", clsRFunctionParameter:=clsFormatMedianY, bIncludeArgumentName:=False, iPosition:=1)
                         End If
                     Else
@@ -996,12 +996,12 @@ Public Class sdgPICSARainfallGraph
                         If rdoYNumeric.Checked Then
                             clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
                             clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
-                            clsRoundLowerTercileY.AddParameter("0", strLowerTercileName, iPosition:=0)
-                            clsRoundUpperTercileY.AddParameter("0", strUpperTercileName, iPosition:=0)
+                            clsRoundLowerTercileY.AddParameter("0", strLowerTercileName, bIncludeArgumentName:=False, iPosition:=0)
+                            clsRoundUpperTercileY.AddParameter("0", strUpperTercileName, bIncludeArgumentName:=False, iPosition:=0)
 
                         ElseIf rdoYDate.Checked Then
-                            clsRoundLowerTercileY.AddParameter("0", clsRFunctionParameter:=clsLowerTercileFunction, iPosition:=0)
-                            clsRoundUpperTercileY.AddParameter("0", clsRFunctionParameter:=clsLowerTercileFunction, iPosition:=0)
+                            clsRoundLowerTercileY.AddParameter("0", clsRFunctionParameter:=clsLowerTercileFunction, bIncludeArgumentName:=False, iPosition:=0)
+                            clsRoundUpperTercileY.AddParameter("0", clsRFunctionParameter:=clsLowerTercileFunction, bIncludeArgumentName:=False, iPosition:=0)
                             clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsFormatLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
                             clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsFormatUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
                         End If
@@ -1026,7 +1026,7 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrLineControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddMean.ControlValueChanged, ucrChkAddTerciles.ControlValueChanged, ucrChkAddMedian.ControlValueChanged, ucrChkAddMeanLabel.ControlValueChanged, ucrChkAddMedianLabel.ControlValueChanged, ucrChkAddTercilesLabel.ControlValueChanged, ucrChkMeanLineLabelIncludeValue.ControlValueChanged, ucrChkMedianLineLabelIncludeValue.ControlValueChanged, ucrChkTercilesLineLabelIncludeValue.ControlValueChanged
+    Private Sub ucrLineControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddMean.ControlValueChanged, ucrChkAddTerciles.ControlValueChanged, ucrChkAddMedian.ControlValueChanged, ucrChkAddMeanLabel.ControlValueChanged, ucrChkAddMedianLabel.ControlValueChanged, ucrChkAddTercilesLabel.ControlValueChanged, ucrChkMeanLineLabelIncludeValue.ControlValueChanged, ucrChkMedianLineLabelIncludeValue.ControlValueChanged, ucrChkTercilesLineLabelIncludeValue.ControlValueChanged, ucrPnlYAxisType.ControlValueChanged
         AddRemoveHline()
     End Sub
 
