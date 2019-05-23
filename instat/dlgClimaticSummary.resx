@@ -405,8 +405,29 @@
   <data name="&gt;&gt;lblWithinYear.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="ucrChkOmitMissing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 86</value>
+  </data>
+  <data name="ucrChkOmitMissing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 20</value>
+  </data>
+  <data name="ucrChkOmitMissing.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissing.Name" xml:space="preserve">
+    <value>ucrChkOmitMissing</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissing.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissing.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissing.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkAddDateColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 92</value>
+    <value>6, 109</value>
   </data>
   <data name="ucrChkAddDateColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 20</value>
@@ -424,7 +445,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkAddDateColumn.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkStoreResults.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 17</value>
@@ -445,10 +466,10 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkStoreResults.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrChkPrintOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 42</value>
+    <value>6, 40</value>
   </data>
   <data name="ucrChkPrintOutput.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 20</value>
@@ -466,10 +487,10 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkPrintOutput.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrChkDropUnusedLevels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 67</value>
+    <value>6, 63</value>
   </data>
   <data name="ucrChkDropUnusedLevels.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 20</value>
@@ -487,13 +508,13 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkDropUnusedLevels.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 233</value>
   </data>
   <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 118</value>
+    <value>160, 136</value>
   </data>
   <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -517,7 +538,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDoyRange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 358</value>
+    <value>10, 386</value>
   </data>
   <data name="cmdDoyRange.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 26</value>
@@ -571,7 +592,7 @@
     <value>9</value>
   </data>
   <data name="ucrInputFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 362</value>
+    <value>128, 390</value>
   </data>
   <data name="ucrInputFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
@@ -622,7 +643,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 450</value>
+    <value>415, 480</value>
   </data>
   <data name="ucrReceiverDOY.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 207</value>
@@ -745,7 +766,7 @@
     <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 394</value>
+    <value>10, 422</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>399, 52</value>
