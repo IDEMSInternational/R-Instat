@@ -228,10 +228,6 @@ Public Class sdgPICSARainfallGraph
         ucrChkYSpecifyUpperLimit.AddParameterValuesCondition(True, "max", "NA", False)
         ucrChkYSpecifyUpperLimit.AddParameterValuesCondition(False, "max", "NA", True)
         ucrChkYSpecifyUpperLimit.AddToLinkedControls(ucrInputYSpecifyUpperLimitNumeric, {True}, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkYSpecifyUpperLimit.AddToLinkedControls(ucrInputYSpecifyUpperLimitDateMonth, {True}, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkYSpecifyLowerLimit.AddToLinkedControls(ucrInputYSpecifyLowerLimitDateMonth, {True}, bNewLinkedHideIfParameterMissing:=True)
-
-
 
         ucrInputYSpecifyUpperLimitNumeric.SetParameter(New RParameter("max", 1))
         ucrInputYSpecifyUpperLimitNumeric.SetValidationTypeAsNumeric()
@@ -932,14 +928,14 @@ Public Class sdgPICSARainfallGraph
                         If rdoYNumeric.Checked Then
                             'a vector of mean, 'strMeanName' should be povided for faceting
                             clsPasteMeanY.AddParameter("1", clsRFunctionParameter:=clsRoundMeanY, bIncludeArgumentName:=False, iPosition:=1)
-                            clsRoundMeanY.AddParameter("x", strMeanName, iPosition:=0)
+                            clsRoundMeanY.AddParameter("0", strMeanName, iPosition:=0)
                         ElseIf rdoYDate.Checked Then
                             clsRoundMeanY.AddParameter("x", clsRFunctionParameter:=clsMeanFunction, iPosition:=0)
-                            clsPasteMeanY.AddParameter("1", clsRFunctionParameter:=clsFormatMeanY, bIncludeArgumentName:=False, iPosition:=1)
+                            clsPasteMeanY.AddParameter("0", clsRFunctionParameter:=clsFormatMeanY, bIncludeArgumentName:=False, iPosition:=1)
                         End If
                     Else
                         clsPasteMeanY.RemoveParameterByName("1")
-                        clsRoundMeanY.RemoveParameterByName("x")
+                        clsRoundMeanY.RemoveParameterByName("0")
                     End If
                 Else
                     clsBaseOperator.RemoveParameterByName("annotate_mean")
@@ -963,14 +959,14 @@ Public Class sdgPICSARainfallGraph
                         'similarly to the case of mean
                         If rdoYNumeric.Checked Then
                             clsPasteMedianY.AddParameter("1", clsRFunctionParameter:=clsRoundMedianY, bIncludeArgumentName:=False, iPosition:=1)
-                            clsRoundMedianY.AddParameter("x", strMedianName, iPosition:=0)
+                            clsRoundMedianY.AddParameter("0", strMedianName, iPosition:=0)
                         ElseIf rdoYDate.Checked Then
-                            clsRoundMedianY.AddParameter("x", clsRFunctionParameter:=clsMedianFunction, iPosition:=0)
+                            clsRoundMedianY.AddParameter("0", clsRFunctionParameter:=clsMedianFunction, iPosition:=0)
                             clsPasteMedianY.AddParameter("1", clsRFunctionParameter:=clsFormatMedianY, bIncludeArgumentName:=False, iPosition:=1)
                         End If
                     Else
                         clsPasteMedianY.RemoveParameterByName("1")
-                        clsRoundMedianY.RemoveParameterByName("x")
+                        clsRoundMedianY.RemoveParameterByName("0")
                     End If
                 Else
                     clsBaseOperator.RemoveParameterByName("annotate_median")
@@ -1000,20 +996,20 @@ Public Class sdgPICSARainfallGraph
                         If rdoYNumeric.Checked Then
                             clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
                             clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
-                            clsRoundLowerTercileY.AddParameter("x", strLowerTercileName, iPosition:=0)
-                            clsRoundUpperTercileY.AddParameter("x", strUpperTercileName, iPosition:=0)
+                            clsRoundLowerTercileY.AddParameter("0", strLowerTercileName, iPosition:=0)
+                            clsRoundUpperTercileY.AddParameter("0", strUpperTercileName, iPosition:=0)
 
                         ElseIf rdoYDate.Checked Then
-                            clsRoundLowerTercileY.AddParameter("x", clsRFunctionParameter:=clsLowerTercileFunction, iPosition:=0)
-                            clsRoundUpperTercileY.AddParameter("x", clsRFunctionParameter:=clsLowerTercileFunction, iPosition:=0)
+                            clsRoundLowerTercileY.AddParameter("0", clsRFunctionParameter:=clsLowerTercileFunction, iPosition:=0)
+                            clsRoundUpperTercileY.AddParameter("0", clsRFunctionParameter:=clsLowerTercileFunction, iPosition:=0)
                             clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsFormatLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
                             clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsFormatUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
                         End If
                     Else
                         clsPasteLowerTercileY.RemoveParameterByName("1")
                         clsPasteUpperTercileY.RemoveParameterByName("1")
-                        clsRoundLowerTercileY.RemoveParameterByName("x")
-                        clsRoundUpperTercileY.RemoveParameterByName("x")
+                        clsRoundLowerTercileY.RemoveParameterByName("0")
+                        clsRoundUpperTercileY.RemoveParameterByName("0")
                     End If
                 Else
                     clsBaseOperator.RemoveParameterByName("annotate_lower_tercile")
