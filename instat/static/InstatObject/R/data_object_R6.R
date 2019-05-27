@@ -948,6 +948,7 @@ DataSheet$set("public", "remove_rows_in_data", function(row_names) {
   #since it removes column attributes
   self$set_data(dplyr::slice(curr_data, -rows_to_remove))
   self$append_to_changes(list(Removed_row, row_names))
+  self$add_defaults_variables_metadata(self$get_column_names())
   self$data_changed <- TRUE
 }
 )
