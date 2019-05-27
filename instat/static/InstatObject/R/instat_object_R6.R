@@ -1698,7 +1698,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     station_col <- self$get_columns_from_data(data_name, station)
     unique_station <- na.omit(unique(station_col))
     expand_list[[length(expand_list) + 1]] <- unique_station
-    names_list[length(names_list) + 1] <- station_col
+    names_list[length(names_list) + 1] <- station
   }
   df <- setNames(expand.grid(expand_list), names_list)
   daily_data <- self$get_data_frame(data_name)
