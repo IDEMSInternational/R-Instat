@@ -58,7 +58,7 @@ Public Class clsGridLink
         Dim i As Integer
         Dim j As Integer
         Dim k As Integer
-        Dim dfTemp As CharacterMatrix
+        Dim dfTemp As DataFrame
         Dim strDataName As String
         Dim shtTemp As Worksheet
         Dim clsDataChanged As New RFunction
@@ -195,7 +195,7 @@ Public Class clsGridLink
                             clsGetDataFrame.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript(), bSilent:=True)
                             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                                dfTemp = expTemp.AsCharacterMatrix
+                                dfTemp = expTemp.AsDataFrame
                                 clsFilterApplied.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                                 expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsFilterApplied.ToScript(), bSilent:=True)
                                 If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
@@ -212,12 +212,7 @@ Public Class clsGridLink
                                 Else
                                     FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bFilterApplied:=False, bCheckFreezeColumns:=True)
                                 End If
-                                If dfTemp.RowCount = 0 Then
-                                    'TODO This line to get column names is duplicated in FillSheet, better if this was only done in one place
-                                    ucrDataViewer.SetColumnNames(strDataName, frmMain.clsRLink.GetColumnNames(strDataName, bIncludeHiddenColumns:=False).ToArray)
-                                Else
-                                    ucrDataViewer.SetColumnNames(strDataName, dfTemp.ColumnNames())
-                                End If
+                                ucrDataViewer.SetColumnNames(strDataName, dfTemp.ColumnNames())
                                 clsSetDataFramesChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                                 clsSetDataFramesChanged.AddParameter("new_val", "FALSE")
                                 frmMain.clsRLink.RunInternalScript(clsSetDataFramesChanged.ToScript(), bSilent:=True)
@@ -243,7 +238,7 @@ Public Class clsGridLink
                             clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript(), bSilent:=True)
                             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                                dfTemp = expTemp.AsCharacterMatrix()
+                                dfTemp = expTemp.AsDataFrame()
                                 'TODO test if column limit is needed for stability in metadata grids
                                 FillSheet(dfTemp, strDataName, grdVariablesMetadata, iColMax:=iMaxCols)
                                 clsSetVariablesMetadataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
@@ -263,7 +258,7 @@ Public Class clsGridLink
                     clsGetCombinedMetadata.AddParameter("convert_to_character", "TRUE")
                     expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCombinedMetadata.ToScript(), bSilent:=True)
                     If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                        dfTemp = expTemp.AsCharacterMatrix()
+                        dfTemp = expTemp.AsDataFrame()
                         'TODO test if column limit is needed for stability in metadata grids
                         FillSheet(dfTemp, "metadata", grdMetadata, iColMax:=iMaxCols)
                         clsSetMetadataChanged.AddParameter("new_val", "TRUE")
@@ -335,7 +330,7 @@ Public Class clsGridLink
         UpdateGrids()
     End Sub
 
-    Public Sub FillSheet(dfTemp As CharacterMatrix, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False, Optional iNewPosition As Integer = -1, Optional bFilterApplied As Boolean = False, Optional bCheckFreezeColumns As Boolean = False, Optional iRowMax As Integer = -1, Optional iColMax As Integer = -1)
+    Public Sub FillSheet(dfTemp As DataFrame, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False, Optional iNewPosition As Integer = -1, Optional bFilterApplied As Boolean = False, Optional bCheckFreezeColumns As Boolean = False, Optional iRowMax As Integer = -1, Optional iColMax As Integer = -1)
         Dim bFoundWorksheet As Boolean = False
         Dim tempWorkSheet As Worksheet
         Dim fillWorkSheet As Worksheet
@@ -386,10 +381,6 @@ Public Class clsGridLink
         End If
         strColumnNames = dfTemp.ColumnNames
         If dfTemp.RowCount = 0 Then
-            If bInstatObjectDataFrame Then
-                ' Need because of bug in R.NET - matrix does not contain column names when there are 0 rows
-                strColumnNames = frmMain.clsRLink.GetColumnNames(strName, bIncludeHiddenColumns:=False).ToArray
-            End If
             fillWorkSheet.Rows = 1
             For j = 0 To fillWorkSheet.Columns - 1
                 fillWorkSheet(row:=0, col:=j) = ""
