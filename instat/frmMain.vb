@@ -63,6 +63,8 @@ Public Class frmMain
 
         Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
         Dim bClose As Boolean = False
+        ' Note: this must change when R version changes
+        Dim strRPackagesPath As String = Path.Combine(My.Computer.FileSystem.SpecialDirectories.MyDocuments, "R\win-library\3.6")
 
         mnuBar.Renderer = prdCustom
         Tool_strip.Renderer = prdCustom
@@ -86,6 +88,19 @@ Public Class frmMain
         SetToDefaultLayout()
         strStaticPath = Path.GetFullPath("static")
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
+
+        ' We need to create the likely R package installation directory before R.NET connection is initialised
+        ' because of a bug in R.NET 1.8.2 where pop ups to create directories do not appear.
+        ' This assumes that R packages will be installed in "Documents" folder and also that 
+        ' this is detected by "SpecialDirectories.MyDocuments".
+        ' If either of these fail then R packages will need to be installed from R/RStudio first.
+        Try
+            If Not Directory.Exists(strRPackagesPath) Then
+                System.IO.Directory.CreateDirectory(strRPackagesPath)
+            End If
+        Catch ex As Exception
+            ' This may fail for many reasons. We may want to inform users this may lead to packages not installing.
+        End Try
 
         bClose = AutoRecoverAndStartREngine()
         If bClose Then
