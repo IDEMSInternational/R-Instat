@@ -146,9 +146,13 @@ Public Class dlgThreeVariableModelling
 
         clsLM = clsRegressionDefaults.clsDefaultLmFunction.Clone()
         clsLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
+        clsLM.AddParameter("na.action", "na.exclude", iPosition:=4)
+
 
         clsGLM = clsRegressionDefaults.clsDefaultGlmFunction.Clone()
         clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
+        clsGLM.AddParameter("na.action", "na.exclude", iPosition:=4)
+
 
         clsFamilyFunction = ucrDistributionChoice.clsCurrRFunction
         clsGLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
