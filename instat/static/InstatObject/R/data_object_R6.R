@@ -107,7 +107,7 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
   if(is.matrix(new_data)) new_data <- as.data.frame(new_data)
   #This case could happen when removing rows
   #as.data.frame preserves column and data frame attributes so no issue with this
-  else if(tibble::is.tibble(new_data) || data.table::is.data.table(new_data)) new_data <- as.data.frame(new_data)
+  else if(tibble::is_tibble(new_data) || data.table::is.data.table(new_data)) new_data <- as.data.frame(new_data)
   #TODO convert ts objects correctly
   else if(is.ts(new_data)) {
     ind <- zoo::index(new_data)
