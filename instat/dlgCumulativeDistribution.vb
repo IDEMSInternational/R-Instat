@@ -133,8 +133,11 @@ Public Class dlgCumulativeDistribution
         clsRaesFunction.SetRCommand("aes")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
 
+
         clsRgeomCumDistFunction.SetPackageName("ggplot2")
         clsRgeomCumDistFunction.SetRCommand("stat_ecdf")
+        clsRgeomCumDistFunction.AddParameter("pad", Chr(34) & "FALSE" & Chr(34))
+
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
