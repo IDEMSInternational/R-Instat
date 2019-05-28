@@ -80,8 +80,9 @@ Public Class sdgPlots
         ucrChkUsePolarCoordinates.SetText("Use Polar Coordinates")
         ucrChkUsePolarCoordinates.AddToLinkedControls({ucrChkDirectionAnticlockwise, ucrChkStartingAngle}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkUsePolarCoordinates.AddParameterPresentCondition(True, "coord_polar", True)
-        ucrChkDirectionAnticlockwise.AddParameterPresentCondition(True, "coord_polar", True)
-        ucrChkStartingAngle.AddParameterPresentCondition(True, "coord_polar", True)
+        ucrChkDirectionAnticlockwise.AddParameterPresentCondition(True, "direction", True)
+        ucrChkStartingAngle.AddParameterPresentCondition(True, "start", True)
+        ucrtxtStartingAngle.AddParameterPresentCondition(True, "start", True)
         ucrChkDirectionAnticlockwise.SetText("Direction Anticlockwise")
         ucrChkStartingAngle.SetText("Starting Angle")
         lblPi.Text = "pi"
@@ -397,10 +398,14 @@ Public Class sdgPlots
 
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
+
         'coordinates tab
         ucrChkHorizontalPlot.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkSameScale.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkUsePolarCoordinates.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkDirectionAnticlockwise.SetRCode(clsCoordPolarFunc, bReset:=True, bCloneIfNeeded:=True)
+        ucrChkStartingAngle.SetRCode(clsCoordPolarFunc, bReset, bCloneIfNeeded:=True)
+        ucrtxtStartingAngle.SetRCode(clsCoordPolarFunc, bReset, bCloneIfNeeded:=True)
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, bReset:=bReset)
         bRCodeSet = True
