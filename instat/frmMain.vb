@@ -1309,6 +1309,10 @@ Public Class frmMain
         dlgPICSARainfall.ShowDialog()
     End Sub
 
+    Private Sub mnuClimaticPICSACumulative_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSACumulative.Click
+        dlgCumulativeDistribution.ShowDialog()
+    End Sub
+
     Private Sub mnuClimaticPICSATemperature_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSATemperature.Click
         dlgPICSATemperature.ShowDialog()
     End Sub
