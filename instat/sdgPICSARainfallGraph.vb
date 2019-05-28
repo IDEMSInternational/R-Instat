@@ -1275,28 +1275,27 @@ Public Class sdgPICSARainfallGraph
 
     Private Sub AddRemoveDateLimits()
 
-        If rdoYDate.Checked AndAlso ucrChkYSpecifyLowerLimit.Checked AndAlso ucrChkYSpecifyUpperLimit.Checked Then
-            clsYLimitsYDate.AddParameter("min", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyLowerLimitDateMonth.GetText & "/" & ucrInputYSpecifyLowerLimitNumeric.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-            clsYLimitsYDate.AddParameter("max", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyUpperLimitDateMonth.GetText & "/" & ucrInputYSpecifyUpperLimitNumeric.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
-            clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsYLimitsYDate)
-            clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
-
-        ElseIf rdoYDate.Checked AndAlso ucrChkYSpecifyLowerLimit.Checked AndAlso Not ucrChkYSpecifyUpperLimit.Checked Then
-            clsYLimitsYDate.AddParameter("min", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyLowerLimitDateMonth.GetText & "/" & ucrInputYSpecifyLowerLimitNumeric.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-            clsYLimitsYDate.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
-            clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsYLimitsYDate)
-            clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
-        ElseIf rdoYDate.Checked AndAlso Not ucrChkYSpecifyLowerLimit.Checked AndAlso ucrChkYSpecifyUpperLimit.Checked Then
-            clsYLimitsYDate.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
-            clsYLimitsYDate.AddParameter("max", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyUpperLimitDateMonth.GetText & "/" & ucrInputYSpecifyUpperLimitNumeric.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
-            clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsYLimitsYDate)
-            clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
-
-        Else
-
-            clsYScaleDateFunction.RemoveParameterByName("limits")
-            clsYLimitsYDate.RemoveParameterByName("min")
-            clsYLimitsYDate.RemoveParameterByName("max")
+        If rdoYDate.Checked Then
+            If ucrChkYSpecifyLowerLimit.Checked AndAlso ucrChkYSpecifyUpperLimit.Checked Then
+                clsYLimitsYDate.AddParameter("min", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyLowerLimitDateMonth.GetText & "/" & ucrInputYSpecifyLowerLimitNumeric.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+                clsYLimitsYDate.AddParameter("max", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyUpperLimitDateMonth.GetText & "/" & ucrInputYSpecifyUpperLimitNumeric.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+                clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsYLimitsYDate)
+                clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
+            ElseIf ucrChkYSpecifyLowerLimit.Checked AndAlso Not ucrChkYSpecifyUpperLimit.Checked Then
+                clsYLimitsYDate.AddParameter("min", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyLowerLimitDateMonth.GetText & "/" & ucrInputYSpecifyLowerLimitNumeric.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+                clsYLimitsYDate.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
+                clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsYLimitsYDate)
+                clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
+            ElseIf Not ucrChkYSpecifyLowerLimit.Checked AndAlso ucrChkYSpecifyUpperLimit.Checked Then
+                clsYLimitsYDate.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
+                clsYLimitsYDate.AddParameter("max", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyUpperLimitDateMonth.GetText & "/" & ucrInputYSpecifyUpperLimitNumeric.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+                clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsYLimitsYDate)
+                clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
+            Else
+                clsYScaleDateFunction.RemoveParameterByName("limits")
+                clsYLimitsYDate.RemoveParameterByName("min")
+                clsYLimitsYDate.RemoveParameterByName("max")
+            End If
         End If
 
     End Sub
