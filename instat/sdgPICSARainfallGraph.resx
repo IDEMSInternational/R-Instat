@@ -1222,7 +1222,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudLowerLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 126</value>
+    <value>183, 127</value>
   </data>
   <data name="ucrNudLowerLimit.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 20</value>
