@@ -924,6 +924,10 @@ Public Class sdgPICSARainfallGraph
         AddRemoveMinorGridLines()
         AddRemovePanelBorder()
         AddRemoveDateBreaks()
+        ucrNudLowerLimit.Value = 1
+        ucrNudUpperLimit.Value = 31
+        ucrInputYSpecifyLowerLimitDateMonth.SetName("January")
+        ucrInputYSpecifyUpperLimitDateMonth.SetName("December")
     End Sub
 
     Private Sub AddRemoveHline()
@@ -1283,7 +1287,10 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub SetDefault()
-        clsAsDateYLimit.AddParameter("x", 1)
+        clsYLimitsYDate.AddParameter("min", 1)
+        clsYLimitsYDate.AddParameter("max", 31)
+        clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsYLimitsYDate)
+        clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
     End Sub
 
     Private Sub AddRemoveDateLimits()
