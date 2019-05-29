@@ -51,6 +51,8 @@ Partial Class dlgScatterPlot
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkWithSE = New instat.ucrCheck()
+        Me.ucrReceiverLabel = New instat.ucrReceiverSingle()
+        Me.lblLabel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -92,6 +94,7 @@ Partial Class dlgScatterPlot
         '
         'ucrSelectorForScatter
         '
+        Me.ucrSelectorForScatter.bDropUnusedFilterLevels = False
         Me.ucrSelectorForScatter.bShowHiddenColumns = False
         Me.ucrSelectorForScatter.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForScatter, "ucrSelectorForScatter")
@@ -136,10 +139,26 @@ Partial Class dlgScatterPlot
         resources.ApplyResources(Me.ucrChkWithSE, "ucrChkWithSE")
         Me.ucrChkWithSE.Name = "ucrChkWithSE"
         '
+        'ucrReceiverLabel
+        '
+        Me.ucrReceiverLabel.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverLabel, "ucrReceiverLabel")
+        Me.ucrReceiverLabel.Name = "ucrReceiverLabel"
+        Me.ucrReceiverLabel.Selector = Nothing
+        Me.ucrReceiverLabel.strNcFilePath = ""
+        Me.ucrReceiverLabel.ucrSelector = Nothing
+        '
+        'lblLabel
+        '
+        resources.ApplyResources(Me.lblLabel, "lblLabel")
+        Me.lblLabel.Name = "lblLabel"
+        '
         'dlgScatterPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblLabel)
+        Me.Controls.Add(Me.ucrReceiverLabel)
         Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrSaveScatterPlot)
@@ -173,4 +192,6 @@ Partial Class dlgScatterPlot
     Friend WithEvents ucrSaveScatterPlot As ucrSave
     Friend WithEvents ucrChkLineofBestFit As ucrCheck
     Friend WithEvents ucrChkWithSE As ucrCheck
+    Friend WithEvents lblLabel As Label
+    Friend WithEvents ucrReceiverLabel As ucrReceiverSingle
 End Class

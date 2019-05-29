@@ -83,6 +83,13 @@ Public Class dlgScatterPlot
         ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverX.bAddParameterIfEmpty = True
 
+        ucrReceiverLabel.SetParameter(New RParameter("x", 0))
+        ucrReceiverLabel.SetParameterIsString()
+        ucrReceiverLabel.bWithQuotes = False
+        ucrReceiverLabel.Selector = ucrSelectorForScatter
+        ucrReceiverLabel.SetValuesToIgnore({Chr(34 & Chr(34))})
+        ucrReceiverLabel.bAddParameterIfEmpty = True
+
         ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
         ucrFactorOptionalReceiver.SetParameterIsString()
         ucrFactorOptionalReceiver.bWithQuotes = False
@@ -139,8 +146,10 @@ Public Class dlgScatterPlot
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
 
+
         clsRScatterGeomFunction.SetPackageName("ggplot2")
         clsRScatterGeomFunction.SetRCommand("geom_point")
+
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -243,5 +252,9 @@ Public Class dlgScatterPlot
 
     Private Sub ucrVariablesAsFactorForScatter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
         ' CheckIfNumeric()
+    End Sub
+
+    Private Sub ucrReceiverSingleLabel_Load(sender As Object, e As EventArgs) Handles ucrReceiverLabel.Load
+
     End Sub
 End Class
