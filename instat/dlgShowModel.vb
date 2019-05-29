@@ -98,11 +98,12 @@ Public Class dlgShowModel
         clsProbabilities.SetRCommand("pdist")
         clsQuantiles.SetRCommand("qdist")
 
+        clsLoadLibrary.SetRCommand("library")
+        clsLoadLibrary.AddParameter("package", "circular", bIncludeArgumentName:=False)
 
         clsQuantiles.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph", bAssignToIsPrefix:=True)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantiles)
-
 
     End Sub
 
@@ -193,8 +194,6 @@ Public Class dlgShowModel
     Private Sub ucrDistributionsFOrTablePlus_ParameterChanged() Handles ucrDistributionsFOrTablePlus.ControlValueChanged, ucrDistributionsFOrTablePlus.DistributionsIndexChanged
         receiverlabels()
         If ucrDistributionsFOrTablePlus.ucrInputDistributions.GetText = "von Mises" Then
-            clsLoadLibrary.SetRCommand("library")
-            clsLoadLibrary.AddParameter("circular", "circular", bIncludeArgumentName:=False)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsLoadLibrary, 1)
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
