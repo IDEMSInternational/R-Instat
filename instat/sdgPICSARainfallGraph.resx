@@ -1200,46 +1200,46 @@
   <data name="&gt;&gt;tpXAxis.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="UcrNud2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrNudUpperLimit.Location" type="System.Drawing.Point, System.Drawing">
     <value>183, 158</value>
   </data>
-  <data name="UcrNud2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrNudUpperLimit.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 20</value>
   </data>
-  <data name="UcrNud2.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrNudUpperLimit.TabIndex" type="System.Int32, mscorlib">
     <value>52</value>
   </data>
-  <data name="&gt;&gt;UcrNud2.Name" xml:space="preserve">
-    <value>UcrNud2</value>
+  <data name="&gt;&gt;ucrNudUpperLimit.Name" xml:space="preserve">
+    <value>ucrNudUpperLimit</value>
   </data>
-  <data name="&gt;&gt;UcrNud2.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudUpperLimit.Type" xml:space="preserve">
     <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrNud2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudUpperLimit.Parent" xml:space="preserve">
     <value>tpYAxis</value>
   </data>
-  <data name="&gt;&gt;UcrNud2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudUpperLimit.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="UcrNud1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrNudLowerLimit.Location" type="System.Drawing.Point, System.Drawing">
     <value>183, 126</value>
   </data>
-  <data name="UcrNud1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrNudLowerLimit.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 20</value>
   </data>
-  <data name="UcrNud1.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrNudLowerLimit.TabIndex" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
-  <data name="&gt;&gt;UcrNud1.Name" xml:space="preserve">
-    <value>UcrNud1</value>
+  <data name="&gt;&gt;ucrNudLowerLimit.Name" xml:space="preserve">
+    <value>ucrNudLowerLimit</value>
   </data>
-  <data name="&gt;&gt;UcrNud1.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudLowerLimit.Type" xml:space="preserve">
     <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrNud1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudLowerLimit.Parent" xml:space="preserve">
     <value>tpYAxis</value>
   </data>
-  <data name="&gt;&gt;UcrNud1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudLowerLimit.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="lblDateDisplayFormat.AutoSize" type="System.Boolean, mscorlib">
