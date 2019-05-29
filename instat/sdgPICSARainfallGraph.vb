@@ -831,10 +831,10 @@ Public Class sdgPICSARainfallGraph
         ' scale_y_date function is used for the days lables
         ' scale_y_date(date_label = %d %b) - for day/month option
         ' scale_y_date(date_label = %j) - for day option
-        ucrInputDateDisplayFormat.AddAdditionalCodeParameterPair(clsFormatMeanY, New RParameter("format", 1), iAdditionalPairNo:=1)
-        ucrInputDateDisplayFormat.AddAdditionalCodeParameterPair(clsFormatMedianY, New RParameter("format", 1), iAdditionalPairNo:=2)
-        ucrInputDateDisplayFormat.AddAdditionalCodeParameterPair(clsFormatLowerTercileY, New RParameter("format", 1), iAdditionalPairNo:=3)
-        ucrInputDateDisplayFormat.AddAdditionalCodeParameterPair(clsFormatUpperTercileY, New RParameter("format", 1), iAdditionalPairNo:=4)
+        ucrInputDateDisplayFormat.AddAdditionalCodeParameterPair(clsFormatMeanY, New RParameter("format", 3), iAdditionalPairNo:=1)
+        ucrInputDateDisplayFormat.AddAdditionalCodeParameterPair(clsFormatMedianY, New RParameter("format", 3), iAdditionalPairNo:=2)
+        ucrInputDateDisplayFormat.AddAdditionalCodeParameterPair(clsFormatLowerTercileY, New RParameter("format", 3), iAdditionalPairNo:=3)
+        ucrInputDateDisplayFormat.AddAdditionalCodeParameterPair(clsFormatUpperTercileY, New RParameter("format", 3), iAdditionalPairNo:=4)
 
         ucrInputDateDisplayFormat.SetRCode(clsYScaleDateFunction, bReset, bCloneIfNeeded:=True)
 
@@ -940,7 +940,6 @@ Public Class sdgPICSARainfallGraph
                     If ucrChkMeanLineLabelIncludeValue.Checked Then
                         If rdoYNumeric.Checked Then
                             'a vector of mean, 'strMeanName' should be povided for faceting
-                            'clsPasteMeanY.AddParameter("1", clsRFunctionParameter:=clsRoundMeanY, bIncludeArgumentName:=False, iPosition:=1)
                             clsPasteRoundMeanY.AddParameter("0", strMeanName, bIncludeArgumentName:=False, iPosition:=0)
                         ElseIf rdoYDate.Checked Then
                             clsPasteRoundMeanY.AddParameter("0", clsRFunctionParameter:=clsMeanFunction, bIncludeArgumentName:=False, iPosition:=0)
@@ -1283,6 +1282,9 @@ Public Class sdgPICSARainfallGraph
         AddRemoveDateLimits()
     End Sub
 
+    Private Sub SetDefault()
+        clsAsDateYLimit.AddParameter("x", 1)
+    End Sub
 
     Private Sub AddRemoveDateLimits()
 
