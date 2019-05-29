@@ -749,35 +749,29 @@ Public Class dlgPICSARainfall
             If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
                 clsGroupByFunction.AddParameter("0", "variable", bIncludeArgumentName:=False, iPosition:=0)
             Else
-                If (ucrReceiverColourBy.IsEmpty OrElse ucrReceiverFacetBy.IsEmpty) Then
-                    If Not ucrReceiverColourBy.IsEmpty Then
-                        clsGroupByFunction.AddParameter("1", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
-                    Else
-                        clsGroupByFunction.RemoveParameterByName("1")
-                    End If
 
-                    If Not ucrReceiverFacetBy.IsEmpty Then
-                        clsGroupByFunction.AddParameter("0", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-                    Else
-                        clsGroupByFunction.RemoveParameterByName("0")
-                    End If
-                ElseIf Not (ucrReceiverColourBy.IsEmpty OrElse ucrReceiverFacetBy.IsEmpty) Then
+                'if one of the receivers is non-empty (ucrReceiverColourBy or ucrReceiverFacetBy)
+                If (Not ucrReceiverColourBy.IsEmpty AndAlso ucrReceiverFacetBy.IsEmpty) Then
                     clsGroupByFunction.AddParameter("1", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
-                    clsGroupByFunction.AddParameter("0", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
                 Else
-                    clsPipeOperator.RemoveParameterByName("group_by")
+                    clsGroupByFunction.RemoveParameterByName("1")
                 End If
 
-                'If (ucrReceiverColourBy.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty) Then
-                '    clsGroupByFunction.AddParameter("0", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-                'ElseIf (Not ucrReceiverColourBy.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty) Then
-                '    clsGroupByFunction.AddParameter("0", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
-                'ElseIf (Not ucrReceiverColourBy.IsEmpty AndAlso ucrReceiverFacetBy.IsEmpty) Then
-                '    clsGroupByFunction.AddParameter("0", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-                'Else
-                '    clsGroupByFunction.RemoveParameterByName("0")
-                '    clsPipeOperator.RemoveParameterByName("group_by")
-                'End If
+                If (ucrReceiverColourBy.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty) Then
+                    clsGroupByFunction.AddParameter("0", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+                Else
+                    clsGroupByFunction.RemoveParameterByName("0")
+                End If
+
+                'if both receivers are non-empty
+                If Not ucrReceiverColourBy.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty Then
+                    clsGroupByFunction.AddParameter("1", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
+                    clsGroupByFunction.AddParameter("0", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+                ElseIf ucrReceiverColourBy.IsEmpty AndAlso ucrReceiverFacetBy.IsEmpty Then
+                    clsPipeOperator.RemoveParameterByName("group_by")
+                    clsGroupByFunction.RemoveParameterByName("0")
+                    clsGroupByFunction.RemoveParameterByName("1")
+                End If
             End If
                 clsPipeOperator.AddParameter("mutate", clsRFunctionParameter:=clsMutateFunction, iPosition:=2)
         Else
