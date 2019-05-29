@@ -162,8 +162,8 @@ Partial Class sdgPICSARainfallGraph
         Me.UcrChkPnlBackgroundFill = New instat.ucrCheck()
         Me.ucrChkPnlBackgroundColour = New instat.ucrCheck()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
-        Me.UcrNud1 = New instat.ucrNud()
-        Me.UcrNud2 = New instat.ucrNud()
+        Me.ucrNudLowerLimit = New instat.ucrNud()
+        Me.ucrNudUpperLimit = New instat.ucrNud()
         Me.tbPICSA.SuspendLayout()
         Me.tpTitles.SuspendLayout()
         Me.grpyAxisTitle.SuspendLayout()
@@ -530,8 +530,8 @@ Partial Class sdgPICSARainfallGraph
         '
         'tpYAxis
         '
-        Me.tpYAxis.Controls.Add(Me.UcrNud2)
-        Me.tpYAxis.Controls.Add(Me.UcrNud1)
+        Me.tpYAxis.Controls.Add(Me.ucrNudUpperLimit)
+        Me.tpYAxis.Controls.Add(Me.ucrNudLowerLimit)
         Me.tpYAxis.Controls.Add(Me.lblDateDisplayFormat)
         Me.tpYAxis.Controls.Add(Me.rdoYDate)
         Me.tpYAxis.Controls.Add(Me.rdoYNumeric)
@@ -1251,25 +1251,25 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrSdgPICSARainfalbuttons, "ucrSdgPICSARainfalbuttons")
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
         '
-        'UcrNud1
+        'ucrNudLowerLimit
         '
-        Me.UcrNud1.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud1.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.UcrNud1, "UcrNud1")
-        Me.UcrNud1.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud1.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud1.Name = "UcrNud1"
-        Me.UcrNud1.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLowerLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLowerLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLowerLimit, "ucrNudLowerLimit")
+        Me.ucrNudLowerLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLowerLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLowerLimit.Name = "ucrNudLowerLimit"
+        Me.ucrNudLowerLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNud2
+        'ucrNudUpperLimit
         '
-        Me.UcrNud2.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud2.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.UcrNud2, "UcrNud2")
-        Me.UcrNud2.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud2.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud2.Name = "UcrNud2"
-        Me.UcrNud2.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudUpperLimit, "ucrNudUpperLimit")
+        Me.ucrNudUpperLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudUpperLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperLimit.Name = "ucrNudUpperLimit"
+        Me.ucrNudUpperLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'sdgPICSARainfallGraph
         '
@@ -1448,6 +1448,6 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents lblMajorGridLineColour As Label
     Friend WithEvents ucrInputYSpecifyUpperLimitDateMonth As ucrInputComboBox
     Friend WithEvents ucrInputYSpecifyLowerLimitDateMonth As ucrInputComboBox
-    Friend WithEvents UcrNud2 As ucrNud
-    Friend WithEvents UcrNud1 As ucrNud
+    Friend WithEvents ucrNudUpperLimit As ucrNud
+    Friend WithEvents ucrNudLowerLimit As ucrNud
 End Class

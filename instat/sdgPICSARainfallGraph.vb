@@ -530,6 +530,17 @@ Public Class sdgPICSARainfallGraph
         ucrNudLabelTransparency.Minimum = 0
         ucrNudLabelTransparency.Maximum = 1
 
+        ucrNudLowerLimit.Increment = 1
+        ucrNudLowerLimit.Minimum = 1
+        ucrNudLowerLimit.Maximum = 31
+        ucrNudLowerLimit.Value = 1
+
+        ucrNudUpperLimit.Increment = 1
+        ucrNudUpperLimit.Minimum = 1
+        ucrNudUpperLimit.Maximum = 31
+        ucrNudUpperLimit.Value = 31
+
+
         bControlsInitialised = True
     End Sub
 
@@ -1277,18 +1288,18 @@ Public Class sdgPICSARainfallGraph
 
         If rdoYDate.Checked Then
             If ucrChkYSpecifyLowerLimit.Checked AndAlso ucrChkYSpecifyUpperLimit.Checked Then
-                clsYLimitsYDate.AddParameter("min", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyLowerLimitDateMonth.GetText & "/" & ucrInputYSpecifyLowerLimitNumeric.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-                clsYLimitsYDate.AddParameter("max", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyUpperLimitDateMonth.GetText & "/" & ucrInputYSpecifyUpperLimitNumeric.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+                clsYLimitsYDate.AddParameter("min", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyLowerLimitDateMonth.GetText & "/" & ucrNudLowerLimit.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+                clsYLimitsYDate.AddParameter("max", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyUpperLimitDateMonth.GetText & "/" & ucrNudUpperLimit.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
                 clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsYLimitsYDate)
                 clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
             ElseIf ucrChkYSpecifyLowerLimit.Checked AndAlso Not ucrChkYSpecifyUpperLimit.Checked Then
-                clsYLimitsYDate.AddParameter("min", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyLowerLimitDateMonth.GetText & "/" & ucrInputYSpecifyLowerLimitNumeric.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+                clsYLimitsYDate.AddParameter("min", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyLowerLimitDateMonth.GetText & "/" & ucrNudLowerLimit.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
                 clsYLimitsYDate.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
                 clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsYLimitsYDate)
                 clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
             ElseIf Not ucrChkYSpecifyLowerLimit.Checked AndAlso ucrChkYSpecifyUpperLimit.Checked Then
                 clsYLimitsYDate.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
-                clsYLimitsYDate.AddParameter("max", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyUpperLimitDateMonth.GetText & "/" & ucrInputYSpecifyUpperLimitNumeric.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+                clsYLimitsYDate.AddParameter("max", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyUpperLimitDateMonth.GetText & "/" & ucrNudUpperLimit.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
                 clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsYLimitsYDate)
                 clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
             Else
@@ -1305,16 +1316,34 @@ Public Class sdgPICSARainfallGraph
 
         If rdoYDate.Checked Then
             If ucrChkYSpecifyLowerLimit.Checked Then
+                ucrNudLowerLimit.Visible = True
                 ucrInputYSpecifyLowerLimitDateMonth.Visible = True
+                ucrInputYSpecifyLowerLimitNumeric.Visible = False
             Else
+                ucrNudLowerLimit.Visible = False
                 ucrInputYSpecifyLowerLimitDateMonth.Visible = False
             End If
 
             If ucrChkYSpecifyUpperLimit.Checked Then
+                ucrNudUpperLimit.Visible = True
                 ucrInputYSpecifyUpperLimitDateMonth.Visible = True
+                ucrInputYSpecifyUpperLimitNumeric.Visible = False
             Else
+                ucrNudUpperLimit.Visible = False
                 ucrInputYSpecifyUpperLimitDateMonth.Visible = False
             End If
+        Else
+            ucrNudLowerLimit.Visible = False
+            ucrNudUpperLimit.Visible = False
+            If ucrChkYSpecifyLowerLimit.Checked Then
+                ucrInputYSpecifyLowerLimitNumeric.Visible = True
+            End If
+            If ucrChkYSpecifyUpperLimit.Checked Then
+                ucrInputYSpecifyUpperLimitNumeric.Visible = True
+            End If
+
+
+
         End If
     End Sub
 
