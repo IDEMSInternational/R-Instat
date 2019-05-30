@@ -240,6 +240,7 @@ Public Class dlgCorrelation
         sdgCorrPlot.ShowDialog()
         bResetSubdialog = False
         bvisibility = False
+        EnableDisable()
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
@@ -266,13 +267,16 @@ Public Class dlgCorrelation
             ucrReceiverMultipleColumns.SetMeAsReceiver()
         End If
         ReceiverColumns()
+        EnableDisable()
+    End Sub
+
+    Private Sub EnableDisable()
         If rdoTwoColumns.Checked Then
             bvisibility = True
         Else
             bvisibility = False
         End If
     End Sub
-
     Private Sub ucrReceiverMultipleColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleColumns.ControlValueChanged, ucrReceiverFirstColumn.ControlValueChanged, ucrReceiverSecondColumn.ControlValueChanged
         ReceiverColumns()
     End Sub
