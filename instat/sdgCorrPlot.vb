@@ -154,12 +154,10 @@ Public Class sdgCorrPlot
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged
         Visibility()
         BeforeAndAfterCodes()
-
         If rdoNone.Checked OrElse rdoPairwisePlot.Checked Then
             grpOptions.Hide()
         Else
             grpOptions.Show()
-
         End If
 
     End Sub
@@ -178,20 +176,18 @@ Public Class sdgCorrPlot
                 clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
             Else
                 clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=1)
-                clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
-                clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
             End If
-        ElseIf rdoPairwisePlot.Checked Then
+        End If
+
+        If rdoPairwisePlot.Checked Then
             clsRsyntax.AddToAfterCodes(clsRGraphicsFuction, iPosition:=2)
-            clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
-        ElseIf rdoScatterPlotMatrix.Checked Then
+        Else
+            clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
+        End If
+
+        If rdoScatterPlotMatrix.Checked Then
             clsRsyntax.AddToAfterCodes(clsRGGscatmatrixFunction, iPosition:=3)
-            clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
-            clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
-        ElseIf rdoNone.Checked Then
-            clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
+        Else
             clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
         End If
     End Sub
