@@ -22,7 +22,6 @@ Public Class dlgCorrelation
     Private clsRGraphicsFuction, clsListFunction, clsWrapFunction As New RFunction
     Private clsColFunction As String
     Private bResetSubdialog As Boolean = False
-    Private bvisibility As Boolean = False
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
 
@@ -122,7 +121,6 @@ Public Class dlgCorrelation
         clsRGGscatMatrixFunction = New RFunction
         clsTempFunc = New RFunction
         bResetSubdialog = True
-        bvisibility = True
 
         ucrSelectorCorrelation.Reset()
         ucrSaveModel.Reset()
@@ -236,11 +234,9 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatMatrixFunction, clsColFunction, ucrSelectorCorrelation, bReset:=bResetSubdialog, bvisibility:=bvisibility)
+        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatMatrixFunction, clsColFunction, ucrSelectorCorrelation, bReset:=bResetSubdialog, bTwoColumns:=rdoTwoColumns.Checked)
         sdgCorrPlot.ShowDialog()
         bResetSubdialog = False
-        bvisibility = False
-        EnableDisable()
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
@@ -263,20 +259,13 @@ Public Class dlgCorrelation
     Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged
         If rdoTwoColumns.Checked Then
             ucrReceiverFirstColumn.SetMeAsReceiver()
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
         ElseIf rdoMultipleColumns.Checked Then
             ucrReceiverMultipleColumns.SetMeAsReceiver()
         End If
         ReceiverColumns()
-        EnableDisable()
     End Sub
 
-    Private Sub EnableDisable()
-        If rdoTwoColumns.Checked Then
-            bvisibility = True
-        Else
-            bvisibility = False
-        End If
-    End Sub
     Private Sub ucrReceiverMultipleColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleColumns.ControlValueChanged, ucrReceiverFirstColumn.ControlValueChanged, ucrReceiverSecondColumn.ControlValueChanged
         ReceiverColumns()
     End Sub
