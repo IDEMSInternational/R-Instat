@@ -91,7 +91,7 @@ Public Class sdgCorrPlot
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewcorrelationTestFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, strColFunction As String, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewcorrelationTestFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, strColFunction As String, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional bvisibility As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -121,6 +121,15 @@ Public Class sdgCorrPlot
         Visibility()
         If bReset Then
             ucrSelectorFactor.Reset()
+        End If
+
+        If bvisibility Then
+            rdoCorrelationPlot.Enabled = False
+            If rdoCorrelationPlot.Checked Then
+                rdoNone.Checked = True
+            End If
+        Else
+            rdoCorrelationPlot.Enabled = True
         End If
     End Sub
 
