@@ -95,7 +95,7 @@ Public Class dlgClimaticStationMaps
         ucrReceiverFacet.SetParameterIsString()
         ucrReceiverFacet.bWithQuotes = False
 
-        ucrReceiverStation.SetParameter(New RParameter("label", 2))
+        ucrReceiverStation.SetParameter(New RParameter("geom_label_repel", 2))
         ucrReceiverStation.Selector = ucrSelectorStation
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.bWithQuotes = False
@@ -138,14 +138,14 @@ Public Class dlgClimaticStationMaps
 
         clsGeomSfFunction.SetPackageName("ggplot2")
         clsGeomSfFunction.SetRCommand("geom_sf")
-        clsGeomSfFunction.AddParameter("aes", clsRFunctionParameter:=clsSfAesFunction, bIncludeArgumentName:=False, iPosition:=1)
+        clsGeomSfFunction.AddParameter("mapping", clsRFunctionParameter:=clsSfAesFunction, iPosition:=1)
 
         clsSfAesFunction.SetPackageName("ggplot2")
         clsSfAesFunction.SetRCommand("aes")
 
         clsGeomPointFunction.SetPackageName("ggplot2")
         clsGeomPointFunction.SetRCommand("geom_point")
-        clsGeomPointFunction.AddParameter("aes", clsRFunctionParameter:=clsGeomPointAesFunction, bIncludeArgumentName:=False, iPosition:=1)
+        clsGeomPointFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomPointAesFunction,iPosition:=1)
 
         clsGeomPointAesFunction.SetPackageName("ggplot2")
         clsGeomPointAesFunction.SetRCommand("aes")
@@ -167,7 +167,7 @@ Public Class dlgClimaticStationMaps
 
         clsLabelRepelAesFunction.SetPackageName("ggplot2")
         clsLabelRepelAesFunction.SetRCommand("aes")
-        clsLabelRepelFunction.AddParameter("aes", clsRFunctionParameter:=clsLabelRepelAesFunction, bIncludeArgumentName:=False)
+        clsLabelRepelFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelRepelAesFunction,iPosition:=1)
 
 
         clsGGplotOperator.SetOperation("+")
@@ -285,9 +285,9 @@ Public Class dlgClimaticStationMaps
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
         If Not ucrReceiverStation.IsEmpty Then
-            clsGGplotOperator.AddParameter("labels", clsRFunctionParameter:=clsLabelRepelFunction, bIncludeArgumentName:=False, iPosition:=2)
+            clsGGplotOperator.AddParameter("geom_label_repel", clsRFunctionParameter:=clsLabelRepelFunction, bIncludeArgumentName:=False, iPosition:=2)
         Else
-            clsGGplotOperator.RemoveParameterByName("labels")
+            clsGGplotOperator.RemoveParameterByName("geom_label_repel")
         End If
     End Sub
 End Class
