@@ -88,6 +88,11 @@ DataBook$set("public", "import_data", function(data_tables = list(), data_tables
     for ( i in (1:length(data_tables)) ) {
       curr_name <- names(data_tables)[[i]]
       if(is.null(curr_name) && !is.null(data_names)) curr_name <- data_names[i]
+      if(tolower(curr_name) %in% tolower(names(private$.data_sheets))) {
+        warning("Cannot have data frames with the same name only differing by case. Data frame will be renamed.")
+        curr_name <- next_default_item(tolower(curr_name), tolower(names(private$.data_sheets)))
+      }
+      
       new_data = DataSheet$new(data=data_tables[[i]], data_name = curr_name,
                                  variables_metadata = data_tables_variables_metadata[[i]],
                                  metadata = data_tables_metadata[[i]], 
@@ -894,7 +899,7 @@ DataBook$set("public", "sort_dataframe", function(data_name, col_names = c(), de
 DataBook$set("public", "rename_dataframe", function(data_name, new_value = "", label = "") {
   data_obj <- self$get_data_objects(data_name)
   if(data_name != new_value) {
-    if(new_value %in% names(private$.data_sheets)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
+    if(tolower(new_value) %in% tolower(names(private$.data_sheets)[-which(names(private$.data_sheets) == data_name)])) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
     names(private$.data_sheets)[names(private$.data_sheets) == data_name] <- new_value
     data_obj$append_to_metadata(data_name_label, new_value)
     self$update_links_rename_data_frame(data_name, new_value)
@@ -1693,7 +1698,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     station_col <- self$get_columns_from_data(data_name, station)
     unique_station <- na.omit(unique(station_col))
     expand_list[[length(expand_list) + 1]] <- unique_station
-    names_list[length(names_list) + 1] <- station_col
+    names_list[length(names_list) + 1] <- station
   }
   df <- setNames(expand.grid(expand_list), names_list)
   daily_data <- self$get_data_frame(data_name)
