@@ -91,7 +91,7 @@ Public Class sdgCorrPlot
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewcorrelationTestFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, strColFunction As String, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional bvisibility As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewcorrelationTestFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, strColFunction As String, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional bTwoColumns As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -123,7 +123,7 @@ Public Class sdgCorrPlot
             ucrSelectorFactor.Reset()
         End If
 
-        If bvisibility Then
+        If bTwoColumns Then
             rdoCorrelationPlot.Enabled = False
             If rdoCorrelationPlot.Checked Then
                 rdoNone.Checked = True
@@ -171,25 +171,17 @@ Public Class sdgCorrPlot
     End Sub
 
     Public Sub BeforeAndAfterCodes()
-        If rdoCorrelationPlot.Checked Then
-            If Not rdoCorrelationPlot.Enabled Then
-                clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
-            Else
-                clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=1)
-            End If
+        clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
+        clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
+        clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
+        If rdoCorrelationPlot.Checked AndAlso rdoCorrelationPlot.Enabled Then
+            clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=1)
         End If
-
         If rdoPairwisePlot.Checked Then
             clsRsyntax.AddToAfterCodes(clsRGraphicsFuction, iPosition:=2)
-        Else
-            clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
         End If
-
         If rdoScatterPlotMatrix.Checked Then
             clsRsyntax.AddToAfterCodes(clsRGGscatmatrixFunction, iPosition:=3)
-        Else
-            clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
         End If
     End Sub
-
 End Class
