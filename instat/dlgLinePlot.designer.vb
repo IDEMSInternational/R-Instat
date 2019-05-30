@@ -45,6 +45,9 @@ Partial Class dlgLinePlot
         Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblGroup = New System.Windows.Forms.Label()
+        Me.lblGroupLine = New System.Windows.Forms.Label()
+        Me.ucrChkValley = New instat.ucrCheck()
+        Me.ucrChkPeak = New instat.ucrCheck()
         Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
         Me.ucrChkWithSE = New instat.ucrCheck()
         Me.ucrChkLineofBestFit = New instat.ucrCheck()
@@ -55,8 +58,6 @@ Partial Class dlgLinePlot
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.ucrChkPeak = New instat.ucrCheck()
-        Me.ucrChkValley = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -94,6 +95,23 @@ Partial Class dlgLinePlot
         '
         resources.ApplyResources(Me.lblGroup, "lblGroup")
         Me.lblGroup.Name = "lblGroup"
+        '
+        'lblGroupLine
+        '
+        resources.ApplyResources(Me.lblGroupLine, "lblGroupLine")
+        Me.lblGroupLine.Name = "lblGroupLine"
+        '
+        'ucrChkValley
+        '
+        Me.ucrChkValley.Checked = False
+        resources.ApplyResources(Me.ucrChkValley, "ucrChkValley")
+        Me.ucrChkValley.Name = "ucrChkValley"
+        '
+        'ucrChkPeak
+        '
+        Me.ucrChkPeak.Checked = False
+        resources.ApplyResources(Me.ucrChkPeak, "ucrChkPeak")
+        Me.ucrChkPeak.Name = "ucrChkPeak"
         '
         'ucrReceiverGroup
         '
@@ -168,22 +186,11 @@ Partial Class dlgLinePlot
         Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.ucrSelector = Nothing
         '
-        'ucrChkPeak
-        '
-        Me.ucrChkPeak.Checked = False
-        resources.ApplyResources(Me.ucrChkPeak, "ucrChkPeak")
-        Me.ucrChkPeak.Name = "ucrChkPeak"
-        '
-        'ucrChkValley
-        '
-        Me.ucrChkValley.Checked = False
-        resources.ApplyResources(Me.ucrChkValley, "ucrChkValley")
-        Me.ucrChkValley.Name = "ucrChkValley"
-        '
         'dlgLinePlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblGroupLine)
         Me.Controls.Add(Me.ucrChkValley)
         Me.Controls.Add(Me.ucrChkPeak)
         Me.Controls.Add(Me.ucrReceiverGroup)
@@ -229,4 +236,5 @@ Partial Class dlgLinePlot
     Friend WithEvents lblGroup As Label
     Friend WithEvents ucrChkValley As ucrCheck
     Friend WithEvents ucrChkPeak As ucrCheck
+    Friend WithEvents lblGroupLine As Label
 End Class
