@@ -79,10 +79,10 @@ Public Class sdgPlots
         'Use Polar Coordinates
         ucrChkUsePolarCoordinates.SetText("Use Polar Coordinates")
         ucrChkUsePolarCoordinates.AddToLinkedControls({ucrChkDirectionAnticlockwise, ucrChkStartingAngle}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkUsePolarCoordinates.AddParameterPresentCondition(True, "coord_polar", True)
+        ucrChkUsePolarCoordinates.AddParameterPresentCondition(True, "coord_polars", True)
         ucrChkDirectionAnticlockwise.AddParameterPresentCondition(True, "direction", True)
         ucrChkStartingAngle.AddParameterPresentCondition(True, "start", True)
-        ucrtxtStartingAngle.AddParameterPresentCondition(True, "start", True)
+        ucrtxtStartingAngle.SetValidationTypeAsNumeric()
         ucrChkDirectionAnticlockwise.SetText("Direction Anticlockwise")
         ucrChkStartingAngle.SetText("Starting Angle")
         lblPi.Text = "pi"
@@ -767,9 +767,9 @@ Public Class sdgPlots
         clsCoordPolarFunc.SetRCommand("coord_polar")
 
         If ucrChkUsePolarCoordinates.Checked Then
-            clsBaseOperator.AddParameter("coord_polar", clsRFunctionParameter:=clsCoordPolarFunc, bIncludeArgumentName:=False)
+            clsBaseOperator.AddParameter("coord_polars", clsRFunctionParameter:=clsCoordPolarFunc, bIncludeArgumentName:=False)
         Else
-            clsBaseOperator.RemoveParameterByName("coord_polar")
+            clsBaseOperator.RemoveParameterByName("coord_polars")
         End If
 
     End Sub
