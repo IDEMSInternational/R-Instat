@@ -851,6 +851,7 @@ Public Class ucrGeom
         clsgeom_jitter.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_jitter.AddAesParameter("stroke", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_jitter.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_jitter.AddAesParameter("label", strIncludedDataTypes:={"factor", "numeric", "character", "Date"})
         'Adding layer parameters
         'Geom_jitter Parameters
         'Amount of vertical and horizontal jitter. The jitter is added in both positive and negative directions, so the total spread is twice the value specified here. If omitted, defaults to 40% of the resolution of the data: this means the jitter values will occupy 80% of the implied bins. Categorical data is aligned on the integers, so a width or height of 0.5 will spread the data so it's not possible to see the distinction between the categories.
