@@ -95,7 +95,7 @@ Public Class dlgClimaticStationMaps
         ucrReceiverFacet.SetParameterIsString()
         ucrReceiverFacet.bWithQuotes = False
 
-        ucrReceiverStation.SetParameter(New RParameter("geom_label_repel", 2))
+        ucrReceiverStation.SetParameter(New RParameter("label", 2))
         ucrReceiverStation.Selector = ucrSelectorStation
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.bWithQuotes = False
