@@ -1024,6 +1024,7 @@ Public Class ucrGeom
         clsgeom_point.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("stroke", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_point.AddAesParameter("label", strIncludedDataTypes:={"factor", "numeric", "character", "Date"})
         'Adding layer parameters
         'Geom_poitn Parameters
 
