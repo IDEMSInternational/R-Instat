@@ -718,7 +718,7 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged, ucrReceiverFacetBy.ControlValueChanged
-        AddRemoveGroupByAndHlines()
+          AddRemoveGroupByAndHlines()
     End Sub
 
     Private Sub ucrSelectorPICSARainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPICSARainfall.ControlValueChanged
@@ -747,16 +747,9 @@ Public Class dlgPICSARainfall
                     If Not ucrReceiverColourBy.IsEmpty Then
                         clsGroupByFunction.AddParameter("0", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
                     End If
-
-                    'If Not ucrReceiverFacetBy.IsEmpty Then
-                    'clsGroupByFunction.AddParameter("0", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-                    'End If
-
-                    'if both receivers are non-empty
-                    'If Not ucrReceiverColourBy.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty Then
-                    'clsGroupByFunction.AddParameter("1", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
-                    'clsGroupByFunction.AddParameter("0", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-                    'End If
+                    If ucrReceiverColourBy.IsEmpty AndAlso ucrReceiverFacetBy.IsEmpty Then
+                        clsPipeOperator.RemoveParameterByName("group_by")
+                    End If
                 End If
             Else
                 clsPipeOperator.RemoveParameterByName("group_by")
