@@ -14,12 +14,13 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
+
 Imports instat.Translations
 Public Class dlgShowModel
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private clsProbabilities, clsQuantiles As New RFunction
+    Private clsLoadLibrary As New RFunction
     Private Sub dlgTablePlus_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -86,6 +87,7 @@ Public Class dlgShowModel
 
         clsProbabilities.SetPackageName("mosaic")
         clsQuantiles.SetPackageName("mosaic")
+        clsLoadLibrary = New RFunction
 
         receiverlabels()
         SetItems()
@@ -95,6 +97,9 @@ Public Class dlgShowModel
 
         clsProbabilities.SetRCommand("pdist")
         clsQuantiles.SetRCommand("qdist")
+
+        clsLoadLibrary.SetRCommand("library")
+        clsLoadLibrary.AddParameter("package", "circular", bIncludeArgumentName:=False)
 
         clsQuantiles.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph", bAssignToIsPrefix:=True)
 
@@ -188,6 +193,12 @@ Public Class dlgShowModel
 
     Private Sub ucrDistributionsFOrTablePlus_ParameterChanged() Handles ucrDistributionsFOrTablePlus.ControlValueChanged, ucrDistributionsFOrTablePlus.DistributionsIndexChanged
         receiverlabels()
+        If ucrDistributionsFOrTablePlus.ucrInputDistributions.GetText = "von Mises" Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsLoadLibrary, 1)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
+        End If
+
         TestOKEnabled()
     End Sub
 
