@@ -316,7 +316,7 @@
     <value>0</value>
   </data>
   <data name="ucrChkValley.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 401</value>
+    <value>10, 374</value>
   </data>
   <data name="ucrChkValley.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -337,7 +337,7 @@
     <value>1</value>
   </data>
   <data name="ucrChkPeak.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 375</value>
+    <value>10, 348</value>
   </data>
   <data name="ucrChkPeak.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -430,7 +430,7 @@
     <value>7</value>
   </data>
   <data name="ucrSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 348</value>
+    <value>10, 400</value>
   </data>
   <data name="ucrSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 24</value>
