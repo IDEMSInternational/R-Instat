@@ -27,10 +27,9 @@ Public Class dlgOpenNetCDF
     Dim strFileType As String
     Dim bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
-    Public bRefered As Boolean = False
     Private bResetSubdialog As Boolean = False
     Private bShowDetails As Boolean
-    Public strFilePath As String = ""
+    Private strFilePath As String = ""
     Private strShort As String
     Private strMedium As String
     Private strLong As String
@@ -40,7 +39,8 @@ Public Class dlgOpenNetCDF
     Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath, "Library", "Climatic", "Satellite/")
     Private bFromLibrary As Boolean = False
     Private bSubDialogOKEnabled As Boolean = True
-    Private bOkClicked As Boolean
+    'bFromImportDatasets checks whether the dialogue is opened from dlgImportDatasets
+    Private bFromIMportDatasets As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -65,26 +65,35 @@ Public Class dlgOpenNetCDF
         If bStartOpenDialog Then
             GetFileFromOpenDialog()
             bStartOpenDialog = False
-        ElseIf bRefered Then
-            Dim strTemp As String = ""
-            CheckCloseFile()
-            bCloseFile = True
-            ucrInputFilePath.SetName(strFilePath)
-            ucrInputDataName.SetName(frmMain.clsRLink.MakeValidText(Path.GetFileNameWithoutExtension(strFilePath)))
-            clsNcOpenFunction.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
-            clsNcOpenFunction.ToScript(strTemp)
-            frmMain.clsRLink.RunScript(strTemp, strComment:="Opening netCDF file", bUpdateGrids:=False)
-            clsRFileDetails.AddParameter("infile", Chr(34) & strFilePath & Chr(34), iPosition:=1)
-            FileDetails()
-            clsImportNetcdfFunction.RemoveParameterByName("boundary")
-            strFileType = "nc"
-
         Else
             OpenFile()
         End If
+
+        'Finds out if the dialog is opened from dlgImportDataset and its file Path is not missing
+        If strFilePath <> "" And bFromIMportDatasets Then
+            Dim strFileName As String
+            Dim strTemp As String = ""
+
+            ucrInputFilePath.SetName(strFilePath)
+            strFileName = Path.GetFileNameWithoutExtension(strFilePath)
+            ucrInputDataName.SetName(frmMain.clsRLink.MakeValidText(strFileName))
+            clsNcOpenFunction.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
+            clsNcOpenFunction.ToScript(strTemp)
+            frmMain.clsRLink.RunScript(strTemp, strComment:="Opening netCDF file", bUpdateGrids:=False)
+            clsImportNetcdfFunction.RemoveParameterByName("boundary")
+            bFromIMportDatasets = False
+        End If
+
         bReset = False
         TestOkEnabled()
-        checkOkChange()
+    End Sub
+
+    'This function assigns the file path from dlgImportDataset to its own File Path
+    Public Sub FromImportDataSets(strFilePathFrmImportDataSets As String)
+        clsRFileDetails.AddParameter("infile", Chr(34) & strFilePath & Chr(34), iPosition:=1)
+        FileDetails()
+        strFilePath = strFilePathFrmImportDataSets
+        bFromIMportDatasets = True
     End Sub
 
     Private Sub OpenFile()
@@ -308,7 +317,6 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        bOkClicked = True
         bCloseFile = False
         clsNcOpenFunction.SetAssignTo(strFileAssignName)
     End Sub
@@ -320,10 +328,4 @@ Public Class dlgOpenNetCDF
             clsNcOpenFunction.SetAssignTo(strFileAssignName)
         End If
     End Sub
-    Public Sub checkOkChange()
-        If bRefered And bOkClicked Then
-            SetDefaults()
-        End If
-    End Sub
-
 End Class

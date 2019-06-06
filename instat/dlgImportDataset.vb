@@ -42,6 +42,8 @@ Public Class dlgImportDataset
     Private bDialogLoaded As Boolean
     Private iDataFrameCount As Integer
     Private bMultiFiles As Boolean
+    Private strFileExt As String
+
 
     Private strFileName As String
 
@@ -468,6 +470,12 @@ Public Class dlgImportDataset
                     lblTextFilePreview.Hide()
                 End If
             End If
+            'Checks if the file opened is a .nc .If so it passes the filepath to iport NetCDF and opens the dlgOpenNetCDF dialog
+            If strFileExt = ".nc" Then
+                dlgOpenNetCDF.FromImportDataSets(strFilePathR)
+                dlgOpenNetCDF.ShowDialog()
+                Me.Close()
+            End If
             TestOkEnabled()
         End Using
     End Sub
@@ -551,7 +559,6 @@ Public Class dlgImportDataset
     End Sub
 
     Public Sub SetControlsFromFile(strFilePath As String)
-        Dim strFileExt As String
 
         strFileName = ""
         If strFilePath <> "" Then
@@ -600,12 +607,6 @@ Public Class dlgImportDataset
             strFileType = "DAT"
             clsImportDAT.AddParameter("file", Chr(34) & strFilePathR & Chr(34))
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportDAT)
-        ElseIf strFileExt = ".nc" Then
-            dlgOpenNetCDF.strFilePath = ucrInputFilePath.GetText()
-            dlgOpenNetCDF.bRefered = True
-            dlgOpenNetCDF.ShowDialog()
-            SetDefaults()
-            Me.Close()
 
         ElseIf strFileExt = ".xlsx" OrElse strFileExt = ".xls" Then
             strFileType = If(strFileExt = ".xlsx", "XLSX", "XLS")
