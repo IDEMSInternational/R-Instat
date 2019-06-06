@@ -54,6 +54,11 @@ Public Class ucrFilter
             ucrFilterByReceiver.Add(strDefaultColumn)
             SetDefaultColumn("")
         End If
+
+        If ucrInputFilterName.bUserTyped Then
+            ucrInputFilterName.SetPrefix("filter")
+        End If
+
     End Sub
 
     Private Sub InitialiseControl()
