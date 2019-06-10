@@ -728,8 +728,10 @@ Public Class dlgPICSARainfall
 
     Private Sub AddRemoveGroupByAndHlines()
         Dim i As Integer = 0
-        If clsPipeOperator.ContainsParameter("mutate") Then
-            clsGroupByFunction.ClearParameters()
+
+        clsGroupByFunction.ClearParameters()
+
+        If clsBaseOperator.ContainsParameter("hlinemean") OrElse clsBaseOperator.ContainsParameter("hlinemedian") OrElse clsBaseOperator.ContainsParameter("hlinelowertercile") OrElse clsBaseOperator.ContainsParameter("hlineuppertercile") Then
             If clsBaseOperator.ContainsParameter("facets") Then
                 For Each clsTempParam As RParameter In clsFacetOperator.clsParameters
                     If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
@@ -737,25 +739,29 @@ Public Class dlgPICSARainfall
                     End If
                     i = i + 1
                 Next
-            Else
-            End If
-            If clsBaseOperator.ContainsParameter("hlinemean") OrElse clsBaseOperator.ContainsParameter("hlinemedian") OrElse clsBaseOperator.ContainsParameter("hlinelowertercile") OrElse clsBaseOperator.ContainsParameter("hlineuppertercile") Then
                 clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
-                If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
-                    clsGroupByFunction.AddParameter("0", "variable", bIncludeArgumentName:=False, iPosition:=0)
-                Else
-                    If Not ucrReceiverColourBy.IsEmpty Then
-                        clsGroupByFunction.AddParameter("0", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-                    End If
-                    If ucrReceiverColourBy.IsEmpty AndAlso ucrReceiverFacetBy.IsEmpty Then
-                        clsPipeOperator.RemoveParameterByName("group_by")
-                    End If
-                End If
-            Else
+                clsGroupByFunction.AddParameter("0", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+            End If
+        End If
+
+        If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
+            clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+            clsGroupByFunction.AddParameter("0", "variable", bIncludeArgumentName:=False, iPosition:=0)
+        Else
+            clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+            If Not ucrReceiverColourBy.IsEmpty Then
+                clsGroupByFunction.AddParameter("0", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+            End If
+
+            If Not ucrReceiverFacetBy.IsEmpty Then
+                clsGroupByFunction.AddParameter("1", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
+            End If
+
+            If ucrReceiverColourBy.IsEmpty AndAlso ucrReceiverFacetBy.IsEmpty Then
                 clsPipeOperator.RemoveParameterByName("group_by")
             End If
-        Else
         End If
+
         SetPipeAssignTo()
     End Sub
 
