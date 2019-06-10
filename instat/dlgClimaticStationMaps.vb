@@ -217,17 +217,17 @@ Public Class dlgClimaticStationMaps
     End Sub
 
     Private Sub cmdSFOptions_Click(sender As Object, e As EventArgs) Handles cmdSFOptions.Click
-        'sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsGeomSfFunction, clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=False, ucrNewBaseSelector:=ucrSelectorClimaticMaps, bApplyAesGlobally:=True, bReset:=bResetSFLayerSubdialog)
-        'sdgLayerOptions.ShowDialog()
-        'bResetSFLayerSubdialog = False
-        'For Each clsParam In clsAesFunction.clsParameters
-        '    If clsParam.strArgumentName = "fill" Then
-        '        ucrReceiverFill.Add(clsParam.strArgumentValue)
-        '    End If
-        'Next
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsGeomSfFunction, clsNewGlobalAesFunc:=clsSfAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=False, ucrNewBaseSelector:=ucrSelectorOutline, bApplyAesGlobally:=True, bReset:=bResetSFLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetSFLayerSubdialog = False
+        For Each clsParam In clsSfAesFunction.clsParameters
+            If clsParam.strArgumentName = "fill" Then
+                ucrReceiverFill.Add(clsParam.strArgumentValue)
+            End If
+        Next
     End Sub
 
-    Private Sub cmdMapOptions_Click_1(sender As Object, e As EventArgs) Handles cmdMapOptions.Click
+    Private Sub cmdMapOptions_Click(sender As Object, e As EventArgs) Handles cmdMapOptions.Click
         sdgMapOption.SetRCode(clsBaseOperator:=clsGGplotOperator, clsXlim:=clsXlimFunction, clsylim:=clsYlimFunction, bReset:=bResetSubdialog)
         sdgMapOption.ShowDialog()
         bResetSubdialog = False
