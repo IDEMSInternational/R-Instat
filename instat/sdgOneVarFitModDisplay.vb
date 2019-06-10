@@ -73,7 +73,7 @@ Public Class sdgOneVarFitModDisplay
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, Optional clsRNewOneVarFitModel As RFunction = Nothing, Optional clsNewRLogLikFunction As RFunction = Nothing, Optional clsNewRplotFunction As RFunction = Nothing, Optional clsNewRplotPPComp As RFunction = Nothing, Optional clsNewRplotCdfcomp As RFunction = Nothing, Optional clsNewRplotQqComp As RFunction = Nothing, Optional clsNewRplotDenscomp As RFunction = Nothing, Optional ucrNewDistribution As ucrDistributions = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, Optional clsRNewOneVarFitModel As RFunction = Nothing, Optional clsNewRLogLikFunction As RFunction = Nothing, Optional clsNewRplotFunction As RFunction = Nothing, Optional clsNewRplotPPComp As RFunction = Nothing, Optional clsNewRplotCdfcomp As RFunction = Nothing, Optional clsNewRplotQqComp As RFunction = Nothing, Optional clsNewRplotDenscomp As RFunction = Nothing, Optional ucrNewDistribution As ucrDistributions = Nothing, Optional bReset As Boolean = False, Optional bMleEstimation As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -99,46 +99,45 @@ Public Class sdgOneVarFitModDisplay
         If bReset Then
             tbcPlots.SelectedIndex = 0
         End If
+
+        If bMleEstimation Then
+            ucrChkPLotLogLik.Enabled = False
+        Else
+            ucrChkPLotLogLik.Enabled = True
+        End If
     End Sub
 
     Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
         If rdoPlotAll.Checked Then
             clsRSyntax.AddToAfterCodes(clsRplotFunction, iPosition:=1)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotPPComp)
-        ElseIf rdoPPPlot.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotPPComp, iPosition:=1)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotFunction)
-        ElseIf rdoCDFPlot.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotCdfcomp, iPosition:=1)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotPPComp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotFunction)
-        ElseIf rdoQQPlot.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotQqComp, iPosition:=1)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotPPComp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotFunction)
-        ElseIf rdoDensityPlot.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotDenscomp, iPosition:=1)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotPPComp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotFunction)
         Else
-            clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
-            clsRSyntax.RemoveFromAfterCodes(clsRplotPPComp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotFunction)
         End If
+
+        If rdoPPPlot.Checked Then
+            clsRSyntax.AddToAfterCodes(clsRplotPPComp, iPosition:=1)
+        Else
+            clsRSyntax.RemoveFromAfterCodes(clsRplotPPComp)
+        End If
+
+        If rdoCDFPlot.Checked Then
+            clsRSyntax.AddToAfterCodes(clsRplotCdfcomp, iPosition:=1)
+        Else
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
+        End If
+
+        If rdoQQPlot.Checked Then
+            clsRSyntax.AddToAfterCodes(clsRplotQqComp, iPosition:=1)
+        Else
+            clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
+        End If
+
+        If rdoDensityPlot.Checked Then
+            clsRSyntax.AddToAfterCodes(clsRplotDenscomp, iPosition:=1)
+        Else
+            clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
+        End If
+
     End Sub
 
     Private Sub ucrDistribution_cboDistributionsIndexChanged() Handles ucrDistribution.DistributionsIndexChanged

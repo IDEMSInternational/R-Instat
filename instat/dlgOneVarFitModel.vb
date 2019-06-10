@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class dlgOneVarFitModel
-    Public clsROneVarFitModel, clsFamilyFunction, clsRLogLikFunction, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric As New RFunction
+    Public clsROneVarFitModel, clsFamilyFunction, clsRLogLikFunction, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart, clsRConvertVector, clsNaExclude, clsRConvertInteger, clsRConvertNumeric As New RFunction
     Public clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As RFunction
     Public clsFunctionOperator, clsFactorOperator As New ROperator
     Private WithEvents ucrDistribution As ucrDistributions
@@ -54,8 +54,9 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.Selector = ucrSelectorOneVarFitMod
         ucrReceiverVariable.SetMeAsReceiver()
 
-        ucrReceiverVariable.SetParameter(New RParameter("x"))
+        ucrReceiverVariable.SetParameter(New RParameter("object"))
         ucrReceiverVariable.SetParameterIsRFunction()
+
 
         ucrChkConvertVariate.SetText("Convert to Numeric")
         ucrChkConvertVariate.AddParameterValueFunctionNamesCondition(True, "data", "as.numeric", True)
@@ -148,6 +149,7 @@ Public Class dlgOneVarFitModel
         clsRStartValues = New RFunction
         clsRBinomStart = New RFunction
         clsRConvertVector = New RFunction
+        clsNaExclude = New RFunction
         clsRConvertInteger = New RFunction
         clsRConvertNumeric = New RFunction
         clsRplotFunction = New RFunction
@@ -167,6 +169,8 @@ Public Class dlgOneVarFitModel
         clsROneVarFitModel.SetPackageName("fitdistrplus")
         clsROneVarFitModel.SetRCommand("fitdist")
         clsROneVarFitModel.AddParameter("method", Chr(34) & "mle" & Chr(34))
+        'clsROneVarFitModel.AddParameter("na.action", "na.exclude", iPosition:=4)
+
 
         clsRConvertNumeric.SetPackageName("base")
         clsRConvertNumeric.SetRCommand("as.numeric")
@@ -174,8 +178,12 @@ Public Class dlgOneVarFitModel
         clsRConvertInteger.SetPackageName("base")
         clsRConvertInteger.SetRCommand("as.integer")
 
+        clsNaExclude.SetPackageName("stats")
+        clsNaExclude.SetRCommand("na.exclude")
+
         clsRConvertVector.SetPackageName("base")
         clsRConvertVector.SetRCommand("as.vector")
+        clsRConvertVector.AddParameter("x", clsRFunctionParameter:=clsNaExclude, bIncludeArgumentName:=False)
 
         clsRStartValues.SetPackageName("base")
         clsRStartValues.SetRCommand("mean")
@@ -273,7 +281,7 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.SetRCode(clsROneVarFitModel, bReset)
         ucrPnlStats.SetRCode(clsRTTest, bReset)
         ucrPnlWilcoxVarTest.SetRCode(clsRWilcoxTest, bReset)
-        ucrReceiverVariable.SetRCode(clsRConvertVector, bReset)
+        ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
         ucrChkConvertVariate.SetRCode(clsROneVarFitModel, bReset)
         ucrNudHyp.SetRCode(clsRTTest, bReset)
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
@@ -528,7 +536,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgOneVarFitModDisplay.SetRCode(ucrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDenscomp, ucrNewDistribution:=ucrDistribution, bReset:=bResetFitModDisplay)
+        sdgOneVarFitModDisplay.SetRCode(ucrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDenscomp, ucrNewDistribution:=ucrDistribution, bReset:=bResetFitModDisplay, bMleEstimation:=sdgOneVarFitModel.rdoMge.Checked)
         bResetFitModDisplay = False
         sdgOneVarFitModDisplay.ShowDialog()
         Display()
