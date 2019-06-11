@@ -30,13 +30,13 @@ Public Class sdgOneVarFitModel
     Public Sub InitialiseControls()
         'TODO needs a probs argument
         rdoQme.Enabled = False
-        ucrPnlFitMethod.SetParameter(New RParameter("method"), 2)
+        ucrPnlFitMethod.SetParameter(New RParameter("method"))
         ucrPnlFitMethod.AddRadioButton(rdoMle, Chr(34) & "mle" & Chr(34))
         ucrPnlFitMethod.AddRadioButton(rdoMme, Chr(34) & "mme" & Chr(34))
         ucrPnlFitMethod.AddRadioButton(rdoQme, Chr(34) & "qme" & Chr(34))
         ucrPnlFitMethod.AddRadioButton(rdoMge, Chr(34) & "mge" & Chr(34))
 
-        ucrPnlOptimisation.SetParameter(New RParameter("optim.method"), 3)
+        ucrPnlOptimisation.SetParameter(New RParameter("optim.method"))
         ucrPnlOptimisation.AddRadioButton(rdoDefault, Chr(34) & "default" & Chr(34))
         ucrPnlOptimisation.AddRadioButton(rdoNelderMead, Chr(34) & "Nelder-Mead" & Chr(34))
         ucrPnlOptimisation.AddRadioButton(rdoBFGS, Chr(34) & "BFGS" & Chr(34))
