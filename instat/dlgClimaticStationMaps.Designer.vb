@@ -69,7 +69,6 @@ Partial Class dlgClimaticStationMaps
         '
         'cmdSFOptions
         '
-        Me.cmdSFOptions.Enabled = False
         Me.cmdSFOptions.Location = New System.Drawing.Point(10, 293)
         Me.cmdSFOptions.Name = "cmdSFOptions"
         Me.cmdSFOptions.Size = New System.Drawing.Size(103, 23)
