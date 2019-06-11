@@ -42,6 +42,8 @@ Public Class dlgOpenNetCDF
     'bFromImportDatasets checks whether the dialogue is opened from dlgImportDatasets
     Private bFromIMportDatasets As Boolean = False
 
+
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -70,28 +72,21 @@ Public Class dlgOpenNetCDF
         End If
 
         'Finds out if the dialog is opened from dlgImportDataset and its file Path is not missing
-        If strFilePath <> "" And bFromIMportDatasets Then
+        If strFilePath <> "" AndAlso bFromIMportDatasets Then
             Dim strFileName As String
             Dim strTemp As String = ""
-
+            CheckCloseFile()
             ucrInputFilePath.SetName(strFilePath)
             strFileName = Path.GetFileNameWithoutExtension(strFilePath)
-            ucrInputDataName.SetName(frmMain.clsRLink.MakeValidText(strFileName))
-            clsNcOpenFunction.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
-            clsNcOpenFunction.ToScript(strTemp)
-            frmMain.clsRLink.RunScript(strTemp, strComment:="Opening netCDF file", bUpdateGrids:=False)
-            clsImportNetcdfFunction.RemoveParameterByName("boundary")
+            AddFileParam(strFileName, strTemp)
             bFromIMportDatasets = False
         End If
-
         bReset = False
         TestOkEnabled()
     End Sub
 
     'This function assigns the file path from dlgImportDataset to its own File Path
     Public Sub FromImportDataSets(strFilePathFrmImportDataSets As String)
-        clsRFileDetails.AddParameter("infile", Chr(34) & strFilePath & Chr(34), iPosition:=1)
-        FileDetails()
         strFilePath = strFilePathFrmImportDataSets
         bFromIMportDatasets = True
     End Sub
@@ -183,10 +178,7 @@ Public Class dlgOpenNetCDF
 
     'Loads the open dialog on load and click
     Public Sub GetFileFromOpenDialog()
-        Dim strFileName As String = ""
         Dim strFileExt As String = ""
-        Dim strTemp As String = ""
-
         Using dlgOpen As New OpenFileDialog
             dlgOpen.Filter = "All Data files|*.nc|NetCDF files|*.nc"
             dlgOpen.Title = "Open Data from file"
@@ -199,6 +191,8 @@ Public Class dlgOpenNetCDF
             End If
 
             If dlgOpen.ShowDialog() = DialogResult.OK Then
+                Dim strFileName As String
+                Dim strTemp As String = ""
                 ucrInputDataName.SetName("")
                 'checks if the file name is not blank'
                 If dlgOpen.FileName <> "" Then
@@ -208,15 +202,8 @@ Public Class dlgOpenNetCDF
                     ucrInputFilePath.SetName(Replace(strFilePath, "\", "/"))
                     If strFileExt = ".nc" Then
                         CheckCloseFile()
-                        bCloseFile = True
-                        ucrInputDataName.SetName(frmMain.clsRLink.MakeValidText(strFileName))
-                        clsNcOpenFunction.AddParameter("filename", Chr(34) & Replace(strFilePath, "\", "/") & Chr(34))
-                        clsNcOpenFunction.ToScript(strTemp)
-                        frmMain.clsRLink.RunScript(strTemp, strComment:="Opening netCDF file", bUpdateGrids:=False)
+                        AddFileParam(strFileName, strTemp)
                         strFileType = "nc"
-                        clsRFileDetails.AddParameter("infile", Chr(34) & Replace(strFilePath, "\", "/") & Chr(34), iPosition:=1)
-                        FileDetails()
-                        clsImportNetcdfFunction.RemoveParameterByName("boundary")
                     End If
                 End If
             End If
@@ -328,4 +315,16 @@ Public Class dlgOpenNetCDF
             clsNcOpenFunction.SetAssignTo(strFileAssignName)
         End If
     End Sub
+
+    Private Sub AddFileParam(strFileName As String, strTemp As String)
+        ucrInputDataName.SetName(frmMain.clsRLink.MakeValidText(strFileName))
+        clsNcOpenFunction.AddParameter("filename", Chr(34) & Replace(strFilePath, "\", "/") & Chr(34))
+        clsNcOpenFunction.ToScript(strTemp)
+        frmMain.clsRLink.RunScript(strTemp, strComment:="Opening netCDF file", bUpdateGrids:=False)
+        clsRFileDetails.AddParameter("infile", Chr(34) & Replace(strFilePath, "\", "/") & Chr(34), iPosition:=1)
+        FileDetails()
+        clsImportNetcdfFunction.RemoveParameterByName("boundary")
+        bCloseFile = True
+    End Sub
+
 End Class

@@ -414,6 +414,9 @@ Public Class dlgImportDataset
             Else
                 ucrBase.OKEnabled(True)
             End If
+            If strFileExt = ".nc" Then
+                ucrBase.OKEnabled(False)
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -470,13 +473,13 @@ Public Class dlgImportDataset
                     lblTextFilePreview.Hide()
                 End If
             End If
+            TestOkEnabled()
             'Checks if the file opened is a .nc .If so it passes the filepath to iport NetCDF and opens the dlgOpenNetCDF dialog
             If strFileExt = ".nc" Then
+                Me.Close()
                 dlgOpenNetCDF.FromImportDataSets(strFilePathR)
                 dlgOpenNetCDF.ShowDialog()
-                Me.Close()
             End If
-            TestOkEnabled()
         End Using
     End Sub
 
@@ -954,4 +957,5 @@ Public Class dlgImportDataset
             Next
         End If
     End Sub
+
 End Class
