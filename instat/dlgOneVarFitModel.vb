@@ -57,7 +57,6 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.SetParameter(New RParameter("object"))
         ucrReceiverVariable.SetParameterIsRFunction()
 
-
         ucrChkConvertVariate.SetText("Convert to Numeric")
         ucrChkConvertVariate.AddParameterValueFunctionNamesCondition(True, "data", "as.numeric", True)
         ucrChkConvertVariate.AddParameterValueFunctionNamesCondition(False, "data", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data", True)
@@ -150,6 +149,7 @@ Public Class dlgOneVarFitModel
         clsRBinomStart = New RFunction
         clsRConvertVector = New RFunction
         clsNaExclude = New RFunction
+
         clsRConvertInteger = New RFunction
         clsRConvertNumeric = New RFunction
         clsRplotFunction = New RFunction
@@ -168,31 +168,19 @@ Public Class dlgOneVarFitModel
         'General Case
         clsROneVarFitModel.SetPackageName("fitdistrplus")
         clsROneVarFitModel.SetRCommand("fitdist")
-        clsROneVarFitModel.AddParameter("method", Chr(34) & "mle" & Chr(34))
-        'clsROneVarFitModel.AddParameter("na.action", "na.exclude", iPosition:=4)
+        clsROneVarFitModel.AddParameter("method", Chr(34) & "mle" & Chr(34), iPosition:=1)
 
-
-        clsRConvertNumeric.SetPackageName("base")
         clsRConvertNumeric.SetRCommand("as.numeric")
-
-        clsRConvertInteger.SetPackageName("base")
         clsRConvertInteger.SetRCommand("as.integer")
 
-        clsNaExclude.SetPackageName("stats")
-        clsNaExclude.SetRCommand("na.exclude")
-
-        clsRConvertVector.SetPackageName("base")
         clsRConvertVector.SetRCommand("as.vector")
-        clsRConvertVector.AddParameter("x", clsRFunctionParameter:=clsNaExclude, bIncludeArgumentName:=False)
-
-        clsRStartValues.SetPackageName("base")
         clsRStartValues.SetRCommand("mean")
 
         clsRfitdist.SetPackageName("fitdistrplus")
         clsRfitdist.SetRCommand("fitdist")
 
         clsFamilyFunction = ucrDistributionChoice.clsCurrRFunction
-        clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+        clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger, iPosition:=0)
 
         'Exact Case
 
@@ -217,10 +205,7 @@ Public Class dlgOneVarFitModel
         clsRPoissonTest.SetPackageName("stats")
         clsRPoissonTest.SetRCommand("poisson.test")
 
-        clsRLength.SetPackageName("base")
         clsRLength.SetRCommand("length")
-
-        clsRMean.SetPackageName("base")
         clsRMean.SetRCommand("mean")
 
         clsRBinomTest.SetPackageName("stats")
@@ -356,13 +341,13 @@ Public Class dlgOneVarFitModel
                 ucrChkConvertVariate.Visible = True
             End If
             If ucrChkConvertVariate.Checked Then
-                clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric)
+                clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
             Else
                 'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
                 If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Geometric" Then
-                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger, iPosition:=0)
                 Else
-                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
+                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
                 End If
                 If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Hypergeometric" Then
                     clsROneVarFitModel.AddParameter("start", clsRFunctionParameter:=clsRStartValues)
@@ -393,13 +378,13 @@ Public Class dlgOneVarFitModel
                     ucrChkConvertVariate.Visible = True
                 End If
                 If ucrChkConvertVariate.Checked Then
-                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric)
+                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
                 Else
                     'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
                     If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Geometric" Then
-                        clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+                        clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger, iPosition:=0)
                     Else
-                        clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
+                        clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
                     End If
                     If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Hypergeometric" Then
                         clsROneVarFitModel.AddParameter("start", clsRFunctionParameter:=clsRStartValues)
@@ -424,15 +409,15 @@ Public Class dlgOneVarFitModel
             ucrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
             clsROneVarFitModel.AddParameter("distr", Chr(34) & ucrDistributionChoice.clsCurrDistribution.strRName & Chr(34))
             SetDataParameter()
-            clsRplotPPComp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
-            clsRplotPPComp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel)
-            clsRplotCdfcomp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
-            clsRplotCdfcomp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel)
-            clsRplotQqComp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
-            clsRplotQqComp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel)
-            clsRplotDenscomp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
-            clsRplotDenscomp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel)
-            clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsROneVarFitModel)
+            clsRplotPPComp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34), iPosition:=0)
+            clsRplotPPComp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel, iPosition:=1)
+            clsRplotCdfcomp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34), iPosition:=0)
+            clsRplotCdfcomp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel, iPosition:=1)
+            clsRplotQqComp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34), iPosition:=0)
+            clsRplotQqComp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel, iPosition:=1)
+            clsRplotDenscomp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34), iPosition:=0)
+            clsRplotDenscomp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel, iPosition:=1)
+            clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsROneVarFitModel, iPosition:=0)
         ElseIf rdoExactCase.Checked Then
             If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
                 grpVarAndWilcoxSign.Hide()
@@ -524,10 +509,10 @@ Public Class dlgOneVarFitModel
         clsRfitdist.AddParameter("distr", Chr(34) & ucrDistributionChoice.clsCurrDistribution.strRName & Chr(34))
         If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
             clsRConvertInteger.SetRCommand("as.integer")
-            clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+            clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger, iPosition:=0)
         Else
             clsRConvertVector.SetRCommand("as.vector")
-            clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
+            clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
         End If
         If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
             clsRBinomStart.SetRCommand("mean")
@@ -536,7 +521,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgOneVarFitModDisplay.SetRCode(ucrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDenscomp, ucrNewDistribution:=ucrDistribution, bReset:=bResetFitModDisplay, bMleEstimation:=sdgOneVarFitModel.rdoMge.Checked OrElse sdgOneVarFitModel.rdoMme.Checked)
+        sdgOneVarFitModDisplay.SetRCode(ucrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDenscomp, ucrNewDistribution:=ucrDistribution, bReset:=bResetFitModDisplay)
         bResetFitModDisplay = False
         sdgOneVarFitModDisplay.ShowDialog()
         Display()
