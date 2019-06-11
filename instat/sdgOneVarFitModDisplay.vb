@@ -30,7 +30,7 @@ Public Class sdgOneVarFitModDisplay
     End Sub
 
     Public Sub InitialiseControls()
-        ucrPnlLikelihood.SetParameter(New RParameter("loglik"))
+        ucrPnlLikelihood.SetParameter(New RParameter("loglik"), 0)
         ucrPnlLikelihood.AddRadioButton(rdoLoglik, "TRUE")
         ucrPnlLikelihood.AddRadioButton(rdoLik, "FALSE")
         ucrPnlLikelihood.SetRDefault("TRUE")
