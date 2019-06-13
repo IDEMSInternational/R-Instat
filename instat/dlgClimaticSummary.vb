@@ -207,6 +207,8 @@ Public Class dlgClimaticSummary
         ucrReceiverStation.SetRCode(clsDefaultFactors, bReset)
         ucrReceiverYear.SetRCode(clsDefaultFactors, bReset)
         ucrReceiverWithinYear.SetRCode(clsDefaultFactors, bReset)
+
+        UpdateRCode()
     End Sub
 
     'TODO: run these things at the correct times
@@ -299,6 +301,13 @@ Public Class dlgClimaticSummary
             ucrInputFilterPreview.SetName("")
         Else
             ucrInputFilterPreview.SetName(clsFromAndToConditionOperator.ToScript())
+        End If
+    End Sub
+    Private Sub UpdateRCode()
+        If rdoAnnual.Checked Then
+            clsDefaultFactors.RemoveParameterByName("within_variable")
+        ElseIf rdoWithinYear.Checked Then
+            clsDefaultFactors.RemoveParameterByName("year")
         End If
     End Sub
 End Class
