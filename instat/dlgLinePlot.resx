@@ -316,7 +316,7 @@
     <value>0</value>
   </data>
   <data name="ucrChkValley.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 374</value>
+    <value>115, 340</value>
   </data>
   <data name="ucrChkValley.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -337,7 +337,7 @@
     <value>1</value>
   </data>
   <data name="ucrChkPeak.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 348</value>
+    <value>9, 340</value>
   </data>
   <data name="ucrChkPeak.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -364,10 +364,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>417, 483</value>
+    <value>417, 458</value>
   </data>
   <data name="ucrChkWithSE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 318</value>
+    <value>162, 314</value>
   </data>
   <data name="ucrChkWithSE.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 20</value>
@@ -388,7 +388,7 @@
     <value>5</value>
   </data>
   <data name="ucrChkLineofBestFit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 318</value>
+    <value>9, 314</value>
   </data>
   <data name="ucrChkLineofBestFit.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 24</value>
@@ -409,7 +409,7 @@
     <value>6</value>
   </data>
   <data name="ucrChkPoints.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 288</value>
+    <value>9, 288</value>
   </data>
   <data name="ucrChkPoints.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 24</value>
@@ -430,7 +430,7 @@
     <value>7</value>
   </data>
   <data name="ucrSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 400</value>
+    <value>9, 366</value>
   </data>
   <data name="ucrSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 24</value>
@@ -496,7 +496,7 @@
     <value>12</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 427</value>
+    <value>9, 396</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 53</value>
