@@ -1854,7 +1854,7 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
         else if(length(invalid_long) < 12) {
           stop("Some month values were not unrecognised.\nIf specifying full names the following are invalid: ", paste(invalid_long, collapse = ", "), "\nAlternatively use a numeric month column.")
         }
-        else stop("No values in the month column were recognised.\nUse either\n short names: ", paste(month.abb, collapse = ", "), "\nfukk names: ", paste(month.name, collapse = ", "), "\nor numbers 1 to 12.")
+        else stop("No values in the month column were recognised.\nUse either\n short names: ", paste(month.abb, collapse = ", "), "\nfull names: ", paste(month.name, collapse = ", "), "\nor numbers 1 to 12.")
       }
       # Put title case months into the data as this will be needed to make the date column
       x[[month]] <- month_data_title 
