@@ -46,6 +46,14 @@ Partial Class ucrAxes
         Me.rdoTitleAuto = New System.Windows.Forms.RadioButton()
         Me.ucrInputTitle = New instat.ucrInputTextBox()
         Me.ucrPnlAxisTitle = New instat.UcrPanel()
+        Me.grpDateBox = New System.Windows.Forms.GroupBox()
+        Me.ucrChkLimitDate = New instat.ucrCheck()
+        Me.ucrChKDateBreaks = New instat.ucrCheck()
+        Me.lblUpperDateBreaks = New System.Windows.Forms.Label()
+        Me.lblLowerDateBreaks = New System.Windows.Forms.Label()
+        Me.ucrInputUpperBreak = New instat.ucrInputTextBox()
+        Me.ucrInputLowerBreak = New instat.ucrInputTextBox()
+        Me.ucrInputDateBreaks = New instat.ucrInputTextBox()
         Me.grpMajorBreaks = New System.Windows.Forms.GroupBox()
         Me.ucrChkLabels = New instat.ucrCheck()
         Me.ucrInputMajorBreaksLabels = New instat.ucrInputTextBox()
@@ -91,7 +99,9 @@ Partial Class ucrAxes
         Me.grpMinorBreaks = New System.Windows.Forms.GroupBox()
         Me.lblMinorBreaksFrom = New System.Windows.Forms.Label()
         Me.rdoMinorBreaksNone = New System.Windows.Forms.RadioButton()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.grpAxisTitle.SuspendLayout()
+        Me.grpDateBox.SuspendLayout()
         Me.grpMajorBreaks.SuspendLayout()
         Me.grpScales.SuspendLayout()
         Me.grpMinorBreaks.SuspendLayout()
@@ -147,6 +157,65 @@ Partial Class ucrAxes
         '
         resources.ApplyResources(Me.ucrPnlAxisTitle, "ucrPnlAxisTitle")
         Me.ucrPnlAxisTitle.Name = "ucrPnlAxisTitle"
+        '
+        'grpDateBox
+        '
+        Me.grpDateBox.Controls.Add(Me.ucrChkLimitDate)
+        Me.grpDateBox.Controls.Add(Me.ucrChKDateBreaks)
+        Me.grpDateBox.Controls.Add(Me.lblUpperDateBreaks)
+        Me.grpDateBox.Controls.Add(Me.lblLowerDateBreaks)
+        Me.grpDateBox.Controls.Add(Me.ucrInputUpperBreak)
+        Me.grpDateBox.Controls.Add(Me.ucrInputLowerBreak)
+        Me.grpDateBox.Controls.Add(Me.ucrInputDateBreaks)
+        resources.ApplyResources(Me.grpDateBox, "grpDateBox")
+        Me.grpDateBox.Name = "grpDateBox"
+        Me.grpDateBox.TabStop = False
+        '
+        'ucrChkLimitDate
+        '
+        Me.ucrChkLimitDate.Checked = False
+        resources.ApplyResources(Me.ucrChkLimitDate, "ucrChkLimitDate")
+        Me.ucrChkLimitDate.Name = "ucrChkLimitDate"
+        '
+        'ucrChKDateBreaks
+        '
+        Me.ucrChKDateBreaks.Checked = False
+        resources.ApplyResources(Me.ucrChKDateBreaks, "ucrChKDateBreaks")
+        Me.ucrChKDateBreaks.Name = "ucrChKDateBreaks"
+        '
+        'lblUpperDateBreaks
+        '
+        resources.ApplyResources(Me.lblUpperDateBreaks, "lblUpperDateBreaks")
+        Me.lblUpperDateBreaks.Name = "lblUpperDateBreaks"
+        '
+        'lblLowerDateBreaks
+        '
+        resources.ApplyResources(Me.lblLowerDateBreaks, "lblLowerDateBreaks")
+        Me.lblLowerDateBreaks.Name = "lblLowerDateBreaks"
+        '
+        'ucrInputUpperBreak
+        '
+        Me.ucrInputUpperBreak.AddQuotesIfUnrecognised = True
+        Me.ucrInputUpperBreak.IsMultiline = False
+        Me.ucrInputUpperBreak.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputUpperBreak, "ucrInputUpperBreak")
+        Me.ucrInputUpperBreak.Name = "ucrInputUpperBreak"
+        '
+        'ucrInputLowerBreak
+        '
+        Me.ucrInputLowerBreak.AddQuotesIfUnrecognised = True
+        Me.ucrInputLowerBreak.IsMultiline = False
+        Me.ucrInputLowerBreak.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLowerBreak, "ucrInputLowerBreak")
+        Me.ucrInputLowerBreak.Name = "ucrInputLowerBreak"
+        '
+        'ucrInputDateBreaks
+        '
+        Me.ucrInputDateBreaks.AddQuotesIfUnrecognised = True
+        Me.ucrInputDateBreaks.IsMultiline = False
+        Me.ucrInputDateBreaks.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDateBreaks, "ucrInputDateBreaks")
+        Me.ucrInputDateBreaks.Name = "ucrInputDateBreaks"
         '
         'grpMajorBreaks
         '
@@ -492,6 +561,7 @@ Partial Class ucrAxes
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpMinorBreaks)
+        Me.Controls.Add(Me.grpDateBox)
         Me.Controls.Add(Me.ucrInputAxisType)
         Me.Controls.Add(Me.grpScales)
         Me.Controls.Add(Me.grpMajorBreaks)
@@ -499,6 +569,8 @@ Partial Class ucrAxes
         Me.Name = "ucrAxes"
         Me.grpAxisTitle.ResumeLayout(False)
         Me.grpAxisTitle.PerformLayout()
+        Me.grpDateBox.ResumeLayout(False)
+        Me.grpDateBox.PerformLayout()
         Me.grpMajorBreaks.ResumeLayout(False)
         Me.grpMajorBreaks.PerformLayout()
         Me.grpScales.ResumeLayout(False)
@@ -562,4 +634,13 @@ Partial Class ucrAxes
     Friend WithEvents ucrChkPosition As ucrCheck
     Friend WithEvents ucrChkExpand As ucrCheck
     Friend WithEvents ucrChkTransformation As ucrCheck
+    Friend WithEvents grpDateBox As GroupBox
+    Friend WithEvents ucrInputUpperBreak As ucrInputTextBox
+    Friend WithEvents ucrInputLowerBreak As ucrInputTextBox
+    Friend WithEvents ucrInputDateBreaks As ucrInputTextBox
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents lblUpperDateBreaks As Label
+    Friend WithEvents lblLowerDateBreaks As Label
+    Friend WithEvents ucrChKDateBreaks As ucrCheck
+    Friend WithEvents ucrChkLimitDate As ucrCheck
 End Class

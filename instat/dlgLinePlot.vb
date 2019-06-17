@@ -27,6 +27,7 @@ Public Class dlgLinePlot
     Private clsXlabsFunction As New RFunction
     Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
+    Private clsXScaleDateFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
     Private clsRFacetFunction As New RFunction
     Private clsThemeFunction As New RFunction
@@ -179,6 +180,7 @@ Public Class dlgLinePlot
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
@@ -232,7 +234,7 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub

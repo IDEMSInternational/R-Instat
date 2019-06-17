@@ -29,7 +29,10 @@ Public Class sdgPlots
     Public clsFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
     Public clsXScalecontinuousFunction As New RFunction
+    Public clsXScaleDateFunction As New RFunction
     Public clsYScalecontinuousFunction As New RFunction
+
+    'Public clsYScaleDateFunction As New RFunction
     Public clsYLabFunction As New RFunction
     Public clsBaseOperator As New ROperator
     Private bControlsInitialised As Boolean = False
@@ -294,7 +297,7 @@ Public Class sdgPlots
         ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(False, "size", False)
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
         Dim clsTempParam As RParameter
 
         bRCodeSet = False
@@ -314,6 +317,7 @@ Public Class sdgPlots
         clsYLabFunction = clsNewYLabTitleFunction
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
         clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
+        clsXScaleDateFunction = clsNewXScaleDateFunction
         clsFacetFunction = clsNewFacetFunction
         clsThemeFunction = clsNewThemeFunction
         dctThemeFunctions = dctNewThemeFunctions
@@ -366,7 +370,7 @@ Public Class sdgPlots
         ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         'axis controls
-        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
+        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
 
         'Themes tab
@@ -726,5 +730,25 @@ Public Class sdgPlots
         Me.SendToBack()
         sdgThemesSub.ShowDialog()
         SetRcodeForCommonThemesControls(False)
+    End Sub
+
+    Private Sub ucrChkIncludeFacets_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeFacets.ControlValueChanged, ucr2ndFactorReceiver.ControlValueChanged, ucr1stFactorReceiver.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrChkFreeSpace_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeSpace.ControlValueChanged
+
+    End Sub
+
+    Private Sub chkScales_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScalesY.ControlValueChanged, ucrChkFreeScalesX.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrPnlHorizonatalVertical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHorizonatalVertical.ControlValueChanged, ucrChkMargin.ControlValueChanged
+
+    End Sub
+
+    Private Sub LabsControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
+
     End Sub
 End Class
