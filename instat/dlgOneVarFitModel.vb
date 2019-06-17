@@ -414,46 +414,30 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub xxx()
-        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Negative_Binomial" Then
-            sdgOneVarFitModel.rdoMge.Enabled = False
-        Else
-            sdgOneVarFitModel.rdoMge.Enabled = True
-
-        End If
+    Private Sub StartParameterValues()
         If ucrDistributionChoice.clsCurrDistribution.strNameTag = "von_mises" Then
-            clsROneVarFitModel.AddParameter("start", "list(mu = 0.1, kappa = 0.2)")
+            clsROneVarFitModel.AddParameter("start", "list(mu = 0.1, kappa = 0.2)", iPosition:=1)
             clsLoadLibrary.SetRCommand("library")
             clsLoadLibrary.AddParameter("package", "circular", bIncludeArgumentName:=False)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsLoadLibrary, 1)
+        ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Then
+            clsROneVarFitModel.AddParameter("start", "list(df = 0.1)", iPosition:=1)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
+        ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Then
+            clsROneVarFitModel.AddParameter("start", "list(df1 = 0.1, df2 = 0.2)", iPosition:=1)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
+        ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Then
+            clsROneVarFitModel.AddParameter("start", "list(df1 = 0.1, df2 = 0.2)", iPosition:=1)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
+        ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
+            clsROneVarFitModel.AddParameter("start", "list(prob=0.5)", iPosition:=1)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
+        ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
+            clsROneVarFitModel.AddParameter("start", "list(size = 1 ,prob = 0.5)", iPosition:=1)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
         Else
             clsROneVarFitModel.RemoveParameterByName("start")
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
-        End If
-
-        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "t" Then
-            clsROneVarFitModel.AddParameter("start", "list(df = 0.1)")
-        Else
-            clsROneVarFitModel.RemoveParameterByName("start")
-        End If
-
-
-        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Then
-            clsROneVarFitModel.AddParameter("start", "list(df1 = 0.1, df2 = 0.2)")
-        Else
-            clsROneVarFitModel.RemoveParameterByName("start")
-        End If
-
-        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Then
-            clsROneVarFitModel.AddParameter("start", "list(df1 = 0.1, df2 = 0.2)")
-        Else
-            clsROneVarFitModel.RemoveParameterByName("start")
-        End If
-
-        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
-            clsROneVarFitModel.AddParameter("start", "list(prob=0.3)")
-        Else
-            clsROneVarFitModel.RemoveParameterByName("start")
 
         End If
 
@@ -675,8 +659,13 @@ Public Class dlgOneVarFitModel
         SetDataParameter()
         PlotResiduals()
         DataTypeAccepted()
+        StartParameterValues()
         TestOKEnabled()
-        xxx()
+        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Negative_Binomial" Then
+            sdgOneVarFitModel.rdoMge.Enabled = False
+        Else
+            sdgOneVarFitModel.rdoMge.Enabled = True
+        End If
     End Sub
 
 
