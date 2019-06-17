@@ -360,7 +360,7 @@ Public Class dlgOneVarFitModel
                     clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
                 End If
                 If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Hypergeometric" Then
-                   ' clsROneVarFitModel.AddParameter("start", clsRFunctionParameter:=clsRStartValues)
+                    ' clsROneVarFitModel.AddParameter("start", clsRFunctionParameter:=clsRStartValues)
                     ' TODO llplot() no longer works with starting values. However, the mle's will not plot without starting values for these variables
                 End If
             End If
@@ -422,11 +422,39 @@ Public Class dlgOneVarFitModel
 
         End If
         If ucrDistributionChoice.clsCurrDistribution.strNameTag = "von_mises" Then
+            clsROneVarFitModel.AddParameter("start", "list(mu = 0.1, kappa = 0.2)")
             clsLoadLibrary.SetRCommand("library")
             clsLoadLibrary.AddParameter("package", "circular", bIncludeArgumentName:=False)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsLoadLibrary, 1)
         Else
+            clsROneVarFitModel.RemoveParameterByName("start")
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
+        End If
+
+        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "t" Then
+            clsROneVarFitModel.AddParameter("start", "list(df = 0.1)")
+        Else
+            clsROneVarFitModel.RemoveParameterByName("start")
+        End If
+
+
+        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Then
+            clsROneVarFitModel.AddParameter("start", "list(df1 = 0.1, df2 = 0.2)")
+        Else
+            clsROneVarFitModel.RemoveParameterByName("start")
+        End If
+
+        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Then
+            clsROneVarFitModel.AddParameter("start", "list(df1 = 0.1, df2 = 0.2)")
+        Else
+            clsROneVarFitModel.RemoveParameterByName("start")
+        End If
+
+        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
+            clsROneVarFitModel.AddParameter("start", "list(prob=0.3)")
+        Else
+            clsROneVarFitModel.RemoveParameterByName("start")
+
         End If
 
     End Sub
@@ -540,10 +568,7 @@ Public Class dlgOneVarFitModel
             clsRConvertVector.SetRCommand("as.vector")
             clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
         End If
-        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
-            clsRBinomStart.SetRCommand("mean")
-            clsRfitdist.AddParameter("start", "list(prob=0.3)")
-        End If
+
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
