@@ -28,7 +28,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrSaveMap = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpPoints = New System.Windows.Forms.GroupBox()
-        Me.lblStationNames = New System.Windows.Forms.Label()
+        Me.lblLabels = New System.Windows.Forms.Label()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.lblFacet = New System.Windows.Forms.Label()
         Me.ucrReceiverFacet = New instat.ucrReceiverSingle()
@@ -97,7 +97,7 @@ Partial Class dlgClimaticStationMaps
         '
         'grpPoints
         '
-        Me.grpPoints.Controls.Add(Me.lblStationNames)
+        Me.grpPoints.Controls.Add(Me.lblLabels)
         Me.grpPoints.Controls.Add(Me.ucrReceiverStation)
         Me.grpPoints.Controls.Add(Me.lblFacet)
         Me.grpPoints.Controls.Add(Me.ucrReceiverFacet)
@@ -119,15 +119,15 @@ Partial Class dlgClimaticStationMaps
         Me.grpPoints.TabStop = False
         Me.grpPoints.Text = "Points"
         '
-        'lblStationNames
+        'lblLabels
         '
-        Me.lblStationNames.AutoSize = True
-        Me.lblStationNames.Location = New System.Drawing.Point(316, 124)
-        Me.lblStationNames.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblStationNames.Name = "lblStationNames"
-        Me.lblStationNames.Size = New System.Drawing.Size(104, 17)
-        Me.lblStationNames.TabIndex = 33
-        Me.lblStationNames.Text = "Station Names:"
+        Me.lblLabels.AutoSize = True
+        Me.lblLabels.Location = New System.Drawing.Point(316, 124)
+        Me.lblLabels.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblLabels.Name = "lblLabels"
+        Me.lblLabels.Size = New System.Drawing.Size(54, 17)
+        Me.lblLabels.TabIndex = 33
+        Me.lblLabels.Text = "Labels:"
         '
         'ucrReceiverStation
         '
@@ -146,9 +146,9 @@ Partial Class dlgClimaticStationMaps
         Me.lblFacet.AutoSize = True
         Me.lblFacet.Location = New System.Drawing.Point(320, 289)
         Me.lblFacet.Name = "lblFacet"
-        Me.lblFacet.Size = New System.Drawing.Size(50, 17)
+        Me.lblFacet.Size = New System.Drawing.Size(54, 17)
         Me.lblFacet.TabIndex = 31
-        Me.lblFacet.Text = "Facets"
+        Me.lblFacet.Text = "Facets:"
         '
         'ucrReceiverFacet
         '
@@ -178,18 +178,18 @@ Partial Class dlgClimaticStationMaps
         Me.lblColor.AutoSize = True
         Me.lblColor.Location = New System.Drawing.Point(317, 234)
         Me.lblColor.Name = "lblColor"
-        Me.lblColor.Size = New System.Drawing.Size(108, 17)
+        Me.lblColor.Size = New System.Drawing.Size(45, 17)
         Me.lblColor.TabIndex = 28
-        Me.lblColor.Text = "Color(Optional):"
+        Me.lblColor.Text = "Color:"
         '
         'lblShape
         '
         Me.lblShape.AutoSize = True
         Me.lblShape.Location = New System.Drawing.Point(316, 181)
         Me.lblShape.Name = "lblShape"
-        Me.lblShape.Size = New System.Drawing.Size(116, 17)
+        Me.lblShape.Size = New System.Drawing.Size(53, 17)
         Me.lblShape.TabIndex = 26
-        Me.lblShape.Text = "Shape(Optional):"
+        Me.lblShape.Text = "Shape:"
         '
         'lbllatitude
         '
@@ -336,7 +336,7 @@ Partial Class dlgClimaticStationMaps
     Friend WithEvents cmdSFOptions As Button
     Friend WithEvents cmdMapOptions As Button
     Friend WithEvents grpPoints As GroupBox
-    Friend WithEvents lblStationNames As Label
+    Friend WithEvents lblLabels As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents grpMapOutline As GroupBox
     Friend WithEvents lblFill As Label
