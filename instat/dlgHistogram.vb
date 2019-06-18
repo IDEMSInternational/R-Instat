@@ -88,6 +88,8 @@ Public Class dlgHistogram
         ucrInputStats.AddToLinkedControls(ucrChkPercentages, {"Fractions"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkPercentages.SetText("percentages")
+        ucrChkPercentages.AddParameterPresentCondition(True, "labels", True)
+        ucrChkPercentages.AddParameterPresentCondition(False, "labels", False)
 
 
         ucrVariablesAsFactorforHist.SetParameter(New RParameter("x", 0))
