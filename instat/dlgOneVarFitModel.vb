@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class dlgOneVarFitModel
-    Public clsLoadLibrary, clsROneVarFitModel, clsFamilyFunction, clsRLogLikFunction, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart, clsRConvertVector, clsNaExclude, clsRConvertInteger, clsRConvertNumeric As New RFunction
+    Public clsLoadLibrary, clsActuarLibrary, clsROneVarFitModel, clsFamilyFunction, clsRLogLikFunction, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart, clsRConvertVector, clsNaExclude, clsRConvertInteger, clsRConvertNumeric As New RFunction
     Public clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As RFunction
     Public clsFunctionOperator, clsFactorOperator As New ROperator
     Private WithEvents ucrDistribution As ucrDistributions
@@ -151,7 +151,7 @@ Public Class dlgOneVarFitModel
         clsNaExclude = New RFunction
 
         clsLoadLibrary = New RFunction
-
+        clsActuarLibrary = New RFunction
 
         clsRConvertInteger = New RFunction
         clsRConvertNumeric = New RFunction
@@ -280,8 +280,8 @@ Public Class dlgOneVarFitModel
         ucrChkConvertVariate.SetRCode(clsROneVarFitModel, bReset)
         ucrNudHyp.SetRCode(clsRTTest, bReset)
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsNaExclude, New RParameter("x"), iAdditionalPairNo:=1)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsNaExclude, New RParameter("x"), iAdditionalPairNo:=2)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsNaExclude, New RParameter("object"), iAdditionalPairNo:=1)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsNaExclude, New RParameter("object"), iAdditionalPairNo:=2)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("x"), iAdditionalPairNo:=3)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("x"), iAdditionalPairNo:=4)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRLength, New RParameter("x"), iAdditionalPairNo:=5)
@@ -432,11 +432,22 @@ Public Class dlgOneVarFitModel
         ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
             clsROneVarFitModel.AddParameter("start", "list(prob=0.5)", iPosition:=1)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
-        ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
+        ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Then
             clsROneVarFitModel.AddParameter("start", "list(size = 1 ,prob = 0.5)", iPosition:=1)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
+        ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Weibull" Then
+            clsROneVarFitModel.AddParameter("start", "list(shape = 1 ,scale = 2)", iPosition:=1)
+            'If clsROneVarFitModel.ContainsParameter("mme") Then
+            '    clsActuarLibrary.SetRCommand("library")
+            '    clsActuarLibrary.AddParameter("package", "actuar", bIncludeArgumentName:=False)
+            '    clsROneVarFitModel.AddParameter("order", "emm(, order = 1:2)")
+            '    ucrBase.clsRsyntax.AddToBeforeCodes(clsActuarLibrary, 1)
+            'Else
+            '    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsActuarLibrary)
+            'End If
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
         Else
-            clsROneVarFitModel.RemoveParameterByName("start")
+                clsROneVarFitModel.RemoveParameterByName("start")
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
 
         End If
