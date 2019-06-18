@@ -281,7 +281,7 @@ Public Class dlgHistogram
         SetDialogOptions()
     End Sub
 
-    Private Sub Adding_Percentages(ucrChangedControl As ucrCore) Handles ucrInputStats.ControlValueChanged
+    Private Sub Adding_Percentages(ucrChangedControl As ucrCore) Handles ucrInputStats.ControlValueChanged, ucrChkPercentages.ControlValueChanged
         If ucrInputStats.GetText() = "Fractions" Then
             ucrChkPercentages.Visible = True
             If ucrChkPercentages.Checked Then
