@@ -43,24 +43,26 @@ Partial Class dlgBoxplot
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblBySecondFactor = New System.Windows.Forms.Label()
         Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
+        Me.rdoBoxplot = New System.Windows.Forms.RadioButton()
+        Me.rdoJitter = New System.Windows.Forms.RadioButton()
+        Me.rdoViolin = New System.Windows.Forms.RadioButton()
+        Me.lblJitter = New System.Windows.Forms.Label()
+        Me.lblTransparency = New System.Windows.Forms.Label()
+        Me.ucrNudTransparency = New instat.ucrNud()
+        Me.ucrNudJitter = New instat.ucrNud()
+        Me.ucrChkAddPoints = New instat.ucrCheck()
+        Me.ucrChkSwapParameters = New instat.ucrCheck()
+        Me.ucrSaveBoxplot = New instat.ucrSave()
+        Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
+        Me.ucrChkVarWidth = New instat.ucrCheck()
         Me.ucrVariablesAsFactorForBoxplot = New instat.ucrVariablesAsFactor()
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoBoxplot = New System.Windows.Forms.RadioButton()
-        Me.rdoJitter = New System.Windows.Forms.RadioButton()
-        Me.rdoViolin = New System.Windows.Forms.RadioButton()
         Me.ucrPnlPlots = New instat.UcrPanel()
-        Me.ucrChkVarWidth = New instat.ucrCheck()
-        Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
-        Me.ucrSaveBoxplot = New instat.ucrSave()
-        Me.ucrChkSwapParameters = New instat.ucrCheck()
-        Me.ucrChkAddPoints = New instat.ucrCheck()
-        Me.lblJitter = New System.Windows.Forms.Label()
-        Me.ucrNudJitter = New instat.ucrNud()
-        Me.ucrNudTransparency = New instat.ucrNud()
-        Me.lblTransparency = New System.Windows.Forms.Label()
+        Me.ucrChkGrouptoConnect = New instat.ucrCheck()
+        Me.ucrInputSummaries = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -88,6 +90,97 @@ Partial Class dlgBoxplot
         Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
         Me.cmdBoxPlotOptions.Tag = "Boxplot_Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
+        '
+        'rdoBoxplot
+        '
+        resources.ApplyResources(Me.rdoBoxplot, "rdoBoxplot")
+        Me.rdoBoxplot.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBoxplot.FlatAppearance.BorderSize = 2
+        Me.rdoBoxplot.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBoxplot.Name = "rdoBoxplot"
+        Me.rdoBoxplot.TabStop = True
+        Me.rdoBoxplot.UseVisualStyleBackColor = True
+        '
+        'rdoJitter
+        '
+        resources.ApplyResources(Me.rdoJitter, "rdoJitter")
+        Me.rdoJitter.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoJitter.FlatAppearance.BorderSize = 2
+        Me.rdoJitter.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoJitter.Name = "rdoJitter"
+        Me.rdoJitter.TabStop = True
+        Me.rdoJitter.UseVisualStyleBackColor = True
+        '
+        'rdoViolin
+        '
+        resources.ApplyResources(Me.rdoViolin, "rdoViolin")
+        Me.rdoViolin.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViolin.FlatAppearance.BorderSize = 2
+        Me.rdoViolin.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViolin.Name = "rdoViolin"
+        Me.rdoViolin.TabStop = True
+        Me.rdoViolin.UseVisualStyleBackColor = True
+        '
+        'lblJitter
+        '
+        resources.ApplyResources(Me.lblJitter, "lblJitter")
+        Me.lblJitter.Name = "lblJitter"
+        Me.lblJitter.Tag = "By_Factor:"
+        '
+        'lblTransparency
+        '
+        resources.ApplyResources(Me.lblTransparency, "lblTransparency")
+        Me.lblTransparency.Name = "lblTransparency"
+        Me.lblTransparency.Tag = "By_Factor:"
+        '
+        'ucrNudTransparency
+        '
+        Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudTransparency, "ucrNudTransparency")
+        Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTransparency.Name = "ucrNudTransparency"
+        Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudJitter
+        '
+        Me.ucrNudJitter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJitter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudJitter, "ucrNudJitter")
+        Me.ucrNudJitter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudJitter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJitter.Name = "ucrNudJitter"
+        Me.ucrNudJitter.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkAddPoints
+        '
+        Me.ucrChkAddPoints.Checked = False
+        resources.ApplyResources(Me.ucrChkAddPoints, "ucrChkAddPoints")
+        Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
+        '
+        'ucrChkSwapParameters
+        '
+        Me.ucrChkSwapParameters.Checked = False
+        resources.ApplyResources(Me.ucrChkSwapParameters, "ucrChkSwapParameters")
+        Me.ucrChkSwapParameters.Name = "ucrChkSwapParameters"
+        '
+        'ucrSaveBoxplot
+        '
+        resources.ApplyResources(Me.ucrSaveBoxplot, "ucrSaveBoxplot")
+        Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
+        '
+        'ucrChkHorizontalBoxplot
+        '
+        Me.ucrChkHorizontalBoxplot.Checked = False
+        resources.ApplyResources(Me.ucrChkHorizontalBoxplot, "ucrChkHorizontalBoxplot")
+        Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
+        '
+        'ucrChkVarWidth
+        '
+        Me.ucrChkVarWidth.Checked = False
+        resources.ApplyResources(Me.ucrChkVarWidth, "ucrChkVarWidth")
+        Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
         '
         'ucrVariablesAsFactorForBoxplot
         '
@@ -130,106 +223,30 @@ Partial Class dlgBoxplot
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'rdoBoxplot
-        '
-        resources.ApplyResources(Me.rdoBoxplot, "rdoBoxplot")
-        Me.rdoBoxplot.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBoxplot.FlatAppearance.BorderSize = 2
-        Me.rdoBoxplot.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBoxplot.Name = "rdoBoxplot"
-        Me.rdoBoxplot.TabStop = True
-        Me.rdoBoxplot.UseVisualStyleBackColor = True
-        '
-        'rdoJitter
-        '
-        resources.ApplyResources(Me.rdoJitter, "rdoJitter")
-        Me.rdoJitter.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoJitter.FlatAppearance.BorderSize = 2
-        Me.rdoJitter.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoJitter.Name = "rdoJitter"
-        Me.rdoJitter.TabStop = True
-        Me.rdoJitter.UseVisualStyleBackColor = True
-        '
-        'rdoViolin
-        '
-        resources.ApplyResources(Me.rdoViolin, "rdoViolin")
-        Me.rdoViolin.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoViolin.FlatAppearance.BorderSize = 2
-        Me.rdoViolin.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoViolin.Name = "rdoViolin"
-        Me.rdoViolin.TabStop = True
-        Me.rdoViolin.UseVisualStyleBackColor = True
-        '
         'ucrPnlPlots
         '
         resources.ApplyResources(Me.ucrPnlPlots, "ucrPnlPlots")
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
         '
-        'ucrChkVarWidth
+        'ucrChkGrouptoConnect
         '
-        Me.ucrChkVarWidth.Checked = False
-        resources.ApplyResources(Me.ucrChkVarWidth, "ucrChkVarWidth")
-        Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
+        Me.ucrChkGrouptoConnect.Checked = False
+        resources.ApplyResources(Me.ucrChkGrouptoConnect, "ucrChkGrouptoConnect")
+        Me.ucrChkGrouptoConnect.Name = "ucrChkGrouptoConnect"
         '
-        'ucrChkHorizontalBoxplot
+        'ucrInputSummaries
         '
-        Me.ucrChkHorizontalBoxplot.Checked = False
-        resources.ApplyResources(Me.ucrChkHorizontalBoxplot, "ucrChkHorizontalBoxplot")
-        Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
-        '
-        'ucrSaveBoxplot
-        '
-        resources.ApplyResources(Me.ucrSaveBoxplot, "ucrSaveBoxplot")
-        Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
-        '
-        'ucrChkSwapParameters
-        '
-        Me.ucrChkSwapParameters.Checked = False
-        resources.ApplyResources(Me.ucrChkSwapParameters, "ucrChkSwapParameters")
-        Me.ucrChkSwapParameters.Name = "ucrChkSwapParameters"
-        '
-        'ucrChkAddPoints
-        '
-        Me.ucrChkAddPoints.Checked = False
-        resources.ApplyResources(Me.ucrChkAddPoints, "ucrChkAddPoints")
-        Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
-        '
-        'lblJitter
-        '
-        resources.ApplyResources(Me.lblJitter, "lblJitter")
-        Me.lblJitter.Name = "lblJitter"
-        Me.lblJitter.Tag = "By_Factor:"
-        '
-        'ucrNudJitter
-        '
-        Me.ucrNudJitter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudJitter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudJitter, "ucrNudJitter")
-        Me.ucrNudJitter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudJitter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudJitter.Name = "ucrNudJitter"
-        Me.ucrNudJitter.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudTransparency
-        '
-        Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTransparency, "ucrNudTransparency")
-        Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTransparency.Name = "ucrNudTransparency"
-        Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblTransparency
-        '
-        resources.ApplyResources(Me.lblTransparency, "lblTransparency")
-        Me.lblTransparency.Name = "lblTransparency"
-        Me.lblTransparency.Tag = "By_Factor:"
+        Me.ucrInputSummaries.AddQuotesIfUnrecognised = True
+        Me.ucrInputSummaries.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSummaries, "ucrInputSummaries")
+        Me.ucrInputSummaries.Name = "ucrInputSummaries"
         '
         'dlgBoxplot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputSummaries)
+        Me.Controls.Add(Me.ucrChkGrouptoConnect)
         Me.Controls.Add(Me.ucrNudTransparency)
         Me.Controls.Add(Me.lblTransparency)
         Me.Controls.Add(Me.ucrNudJitter)
@@ -285,4 +302,6 @@ Partial Class dlgBoxplot
     Friend WithEvents ucrNudJitter As ucrNud
     Friend WithEvents lblJitter As Label
     Friend WithEvents ucrChkAddPoints As ucrCheck
+    Friend WithEvents ucrInputSummaries As ucrInputComboBox
+    Friend WithEvents ucrChkGrouptoConnect As ucrCheck
 End Class

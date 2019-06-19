@@ -249,5 +249,6 @@ Public Class sdgDoyRange
 
     Private Sub FromControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDoyFrom.ControlValueChanged, ucrReceiverFrom.ControlValueChanged
         UpdateFromValues()
+        UpdateToValues()
     End Sub
 End Class
