@@ -65,7 +65,7 @@ Public Class RLink
     Private iWaitDelay As Integer = 2
 
     Private strRVersionMajorRequired As String = "3"
-    Private strRVersionMinorRequired As String = "5"
+    Private strRVersionMinorRequired As String = "6"
 
     Public Function StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True) As Boolean
         Dim strMissingPackages() As String
@@ -81,7 +81,7 @@ Public Class RLink
             clsEngine.Initialize()
         Catch ex As Exception
             ' Modified message since currently not working for R 3.5.0
-            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4 of R." & vbNewLine & "Note that R-Instat does not currently work with R 3.5.0 or above. Try reruning the installation to install R 3.4.4 or download R 3.4.4 from https://cran.r-project.org/bin/windows/base/old/3.4.4/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
+            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 of R." & vbNewLine & "Note that R-Instat does not currently work with R 3.5.0 or above. Try reruning the installation to install R 3.6.0 or download R 3.6.0 from https://cran.r-project.org/bin/windows/base/old/3.4.4/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
             Application.Exit()
             Environment.Exit(0)
         End Try
