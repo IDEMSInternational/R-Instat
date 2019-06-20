@@ -23,6 +23,7 @@ Public Class dlgOneVarFitModel
     Public bfirstload As Boolean = True
     Public bRCodeSet As Boolean = False
     Public bReset As Boolean = True
+    Public bMme As Boolean = True
     Private bResetFittingOptions As Boolean = False
     Private bResetFitModDisplay As Boolean = False
 
@@ -430,27 +431,29 @@ Public Class dlgOneVarFitModel
             clsROneVarFitModel.AddParameter("start", "list(df1 = 0.1, df2 = 0.2)", iPosition:=1)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
         ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
-            clsROneVarFitModel.AddParameter("start", "list(prob=0.5)", iPosition:=1)
+            clsROneVarFitModel.AddParameter("start", "list(size = 1,prob=0.5)", iPosition:=1)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
         ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Then
             clsROneVarFitModel.AddParameter("start", "list(size = 1 ,prob = 0.5)", iPosition:=1)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
         ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Weibull" Then
             clsROneVarFitModel.AddParameter("start", "list(shape = 1 ,scale = 2)", iPosition:=1)
-            'If clsROneVarFitModel.ContainsParameter("mme") Then
-            '    clsActuarLibrary.SetRCommand("library")
-            '    clsActuarLibrary.AddParameter("package", "actuar", bIncludeArgumentName:=False)
-            '    clsROneVarFitModel.AddParameter("order", "emm(, order = 1:2)")
-            '    ucrBase.clsRsyntax.AddToBeforeCodes(clsActuarLibrary, 1)
-            'Else
-            '    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsActuarLibrary)
-            'End If
+            If bMme Then
+                '' clsActuarLibrary.SetRCommand("library")
+                'clsActuarLibrary.AddParameter("package", "actuar", bIncludeArgumentName:=False)
+                'clsROneVarFitModel.AddParameter("order", "1:2")
+                'ucrBase.clsRsyntax.AddToBeforeCodes(clsActuarLibrary, 1)
+            Else
+                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsActuarLibrary)
+            End If
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
         Else
-                clsROneVarFitModel.RemoveParameterByName("start")
+            clsROneVarFitModel.RemoveParameterByName("start")
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
 
         End If
+
+
 
     End Sub
     Public Sub SetBaseFunction()
@@ -576,7 +579,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
-        sdgOneVarFitModel.SetRCode(ucrBase.clsRsyntax, clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, ucrNewDistribution:=ucrDistribution, bReset:=bResetFittingOptions)
+        sdgOneVarFitModel.SetRCode(ucrBase.clsRsyntax, clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, ucrNewDistribution:=ucrDistribution, bReset:=bResetFittingOptions, bMme:=sdgOneVarFitModel.rdoMme.Checked)
         bResetFittingOptions = False
         sdgOneVarFitModel.ShowDialog()
         EnableOptions()
@@ -672,8 +675,10 @@ Public Class dlgOneVarFitModel
         DataTypeAccepted()
         StartParameterValues()
         TestOKEnabled()
-        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Negative_Binomial" Then
+        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Negative_Binomial" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Geometric" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Then
             sdgOneVarFitModel.rdoMge.Enabled = False
+            sdgOneVarFitModel.rdoMle.Checked = True
+
         Else
             sdgOneVarFitModel.rdoMge.Enabled = True
         End If
