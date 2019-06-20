@@ -36,6 +36,8 @@ Public Class dlgLinePlot
     Private bResetLineLayerSubdialog As Boolean = True
     Private clsGeomSmoothFunc As New RFunction
     Private clsGeomSmoothParameter As New RParameter
+    Private clsPeaksFunction As New RFunction
+    Private clsValleysFunction As New RFunction
 
     Private Sub dlgPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -54,6 +56,8 @@ Public Class dlgLinePlot
     Private Sub InitialiseDialog()
         Dim clsGeomPointFunc As New RFunction
         Dim clsGeomPointParam As New RParameter
+        Dim clsPeaksParam As New RParameter
+        Dim clsValleysParam As New RParameter
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -108,6 +112,25 @@ Public Class dlgLinePlot
         ucrChkLineofBestFit.SetText("Add Line of Best Fit")
         ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        clsPeaksFunction.SetPackageName("ggpmisc")
+        clsPeaksFunction.SetRCommand("stat_peaks")
+        clsPeaksParam.SetArgumentName("stat_peaks")
+        clsPeaksParam.SetArgument(clsPeaksFunction)
+        clsPeaksFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
+        clsPeaksFunction.AddParameter("colour", Chr(34) & "red" & Chr(34))
+        ucrChkPeak.SetText("Add Peaks")
+        ucrChkPeak.SetParameter(clsPeaksParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        clsValleysFunction.SetPackageName("ggpmisc")
+        clsValleysFunction.SetRCommand("stat_valleys")
+        clsValleysParam.SetArgumentName("stat_valleys")
+        clsValleysParam.SetArgument(clsValleysFunction)
+        clsValleysFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
+        clsValleysFunction.AddParameter("colour", Chr(34) & "blue" & Chr(34))
+        ucrChkValley.SetText("Add Valleys")
+        ucrChkValley.SetParameter(clsValleysParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
 
         ucrChkWithSE.SetText("With Standard Error")
         ucrChkWithSE.SetParameter(New RParameter("se", 1))
@@ -179,6 +202,9 @@ Public Class dlgLinePlot
         ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
         ucrChkWithSE.SetRCode(clsGeomSmoothFunc, bReset)
+        'set Rcode for checkboxes
+        ucrChkPeak.SetRCode(clsBaseOperator, bReset)
+        ucrChkValley.SetRCode(clsBaseOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
