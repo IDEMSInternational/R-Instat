@@ -135,7 +135,7 @@ Public Class ucrDayOfYear
                     Return iDoy
                 End If
                 iDoy = dtTemp.DayOfYear
-                    iDoy = ModPos(iDoy - iStartDay + 1, If(b366DayOfYear, 366, 365))
+                iDoy = ModPos(iDoy - iStartDay + 1, If(b366DayOfYear, 366, 365))
                 Return iDoy
             Catch ex As Exception
                 MsgBox("Developer error: Invalid month and/or day value. For control: " & Name & ".")
