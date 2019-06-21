@@ -731,19 +731,18 @@ Public Class dlgPICSARainfall
 
         clsGroupByFunction.ClearParameters()
 
-        If clsBaseOperator.ContainsParameter("hlinemean") OrElse clsBaseOperator.ContainsParameter("hlinemedian") OrElse clsBaseOperator.ContainsParameter("hlinelowertercile") OrElse clsBaseOperator.ContainsParameter("hlineuppertercile") Then
-            If clsBaseOperator.ContainsParameter("facets") Then
-                For Each clsTempParam As RParameter In clsFacetOperator.clsParameters
-                    If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
-                        clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
-                    End If
-                    i = i + 1
-                Next
+        If clsBaseOperator.ContainsParameter("facets") Then
+            For Each clsTempParam As RParameter In clsFacetOperator.clsParameters
+                If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
+                    clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
+                End If
+                i = i + 1
+            Next
 
-                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
-                clsGroupByFunction.AddParameter("1", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-            Else
-                clsGroupByFunction.RemoveParameterByName("1")
+            clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+            clsGroupByFunction.AddParameter("1", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+        Else
+            clsGroupByFunction.RemoveParameterByName("1")
             End If
 
             If clsRaesFunction.ContainsParameter("colour") Then
@@ -754,14 +753,13 @@ Public Class dlgPICSARainfall
             End If
 
 
-            If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
-                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
-                clsGroupByFunction.AddParameter("0", "variable", bIncludeArgumentName:=False, iPosition:=0)
+        If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
+            clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+            clsGroupByFunction.AddParameter("0", "variable", bIncludeArgumentName:=False, iPosition:=0)
+        Else
+            If ucrReceiverFacetBy.IsEmpty AndAlso ucrReceiverColourBy.IsEmpty Then
+                clsPipeOperator.RemoveParameterByName("group_by")
             End If
-        End If
-
-        If ucrReceiverFacetBy.IsEmpty AndAlso ucrReceiverColourBy.IsEmpty Then
-            clsPipeOperator.RemoveParameterByName("group_by")
         End If
 
         SetPipeAssignTo()
