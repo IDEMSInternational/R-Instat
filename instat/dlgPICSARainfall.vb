@@ -745,7 +745,6 @@ Public Class dlgPICSARainfall
             Else
                 clsGroupByFunction.RemoveParameterByName("1")
             End If
-            'End If
 
             If clsRaesFunction.ContainsParameter("colour") Then
                 clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
