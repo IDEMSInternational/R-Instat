@@ -628,7 +628,7 @@ Public Class dlgPICSARainfall
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
         sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewPipeOperator:=clsPipeOperator, dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile, clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction, clsNewRaesFunction:=clsRaesFunction, clsNewAsDate:=clsAsDate, clsNewAsDateYLimit:=clsAsDateYLimit, clsNewAsNumeric:=clsAsNumeric, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewDatePeriodOperator:=clsDatePeriodOperator, clsNewGeomTextLabelMeanLine:=clsGeomTextLabelMeanLine, clsNewRoundMeanY:=clsRoundMeanY, clsNewPasteRoundMeanY:=clsPasteRoundMeanY, clsNewPasteMeanY:=clsPasteMeanY, clsNewGeomTextLabelMedianLine:=clsGeomTextLabelMedianLine, clsNewRoundMedianY:=clsRoundMedianY, clsNewPasteMedianY:=clsPasteMedianY, clsNewGeomTextLabelLowerTercileLine:=clsGeomTextLabelLowerTercileLine, clsNewRoundLowerTercileY:=clsRoundLowerTercileY, clsNewPasteLowerTercileY:=clsPasteLowerTercileY, clsNewGeomTextLabelUpperTercileLine:=clsGeomTextLabelUpperTercileLine, clsNewRoundUpperTercileY:=clsRoundUpperTercileY, clsNewPasteUpperTercileY:=clsPasteUpperTercileY, strXAxisType:=ucrReceiverX.strCurrDataType, clsNewMutateFunction:=clsMutateFunction, clsNewMeanFunction:=clsMeanFunction, clsNewMedianFunction:=clsMedianFunction, clsNewLowerTercileFunction:=clsLowerTercileFunction, clsNewUpperTercileFunction:=clsUpperTercileFunction, clsNewAsDateMeanY:=clsAsDateMeanY, clsNewAsDateMedianY:=clsAsDateMedianY, clsNewAsDateLowerTercileY:=clsAsDateLowerTercileY, clsNewAsDateUpperTercileY:=clsAsDateUpperTercileY, clsNewFormatMeanY:=clsFormatMeanY, clsNewFormatMedianY:=clsFormatMedianY, clsNewFormatLowerTercileY:=clsFormatLowerTercileY, clsNewFormatUpperTercileY:=clsFormatUpperTercileY, clsNewYLimitsYDate:=clsYLimitsYDate, bReset:=bResetSubdialog)
         sdgPICSARainfallGraph.ShowDialog()
-        AddRemoveGroupByAndHlines()
+        AddRemoveGroupBy()
         bResetSubdialog = False
     End Sub
 
@@ -701,7 +701,7 @@ Public Class dlgPICSARainfall
             clsFacetOperator.AddParameter("var2", ".", iPosition:=0)
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, iPosition:=30)
         End If
-        AddRemoveGroupByAndHlines()
+        AddRemoveGroupBy()
     End Sub
 
     Private Sub AutoFacetStation()
@@ -714,11 +714,11 @@ Public Class dlgPICSARainfall
         If ucrCurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
-        AddRemoveGroupByAndHlines()
+        AddRemoveGroupBy()
     End Sub
 
     Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged, ucrReceiverFacetBy.ControlValueChanged
-        AddRemoveGroupByAndHlines()
+        AddRemoveGroupBy()
     End Sub
 
     Private Sub ucrSelectorPICSARainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPICSARainfall.ControlValueChanged
@@ -726,42 +726,38 @@ Public Class dlgPICSARainfall
         SetPipeAssignTo()
     End Sub
 
-    Private Sub AddRemoveGroupByAndHlines()
+    Private Sub AddRemoveGroupBy()
         Dim i As Integer = 0
 
-        clsGroupByFunction.ClearParameters()
-
-        If clsBaseOperator.ContainsParameter("facets") Then
-            For Each clsTempParam As RParameter In clsFacetOperator.clsParameters
-                If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
-                    clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
-                End If
-                i = i + 1
-            Next
-
-            clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
-            clsGroupByFunction.AddParameter("1", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-        Else
-            clsGroupByFunction.RemoveParameterByName("1")
+        If clsPipeOperator.ContainsParameter("mutate") Then
+            clsGroupByFunction.ClearParameters()
+            If clsBaseOperator.ContainsParameter("facets") Then
+                For Each clsTempParam As RParameter In clsFacetOperator.clsParameters
+                    If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
+                        clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
+                        i = i + 1
+                    End If
+                Next
             End If
 
             If clsRaesFunction.ContainsParameter("colour") Then
-                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
-                clsGroupByFunction.AddParameter("0", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-            Else
-                clsGroupByFunction.RemoveParameterByName("0")
+                clsGroupByFunction.AddParameter(i, ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+                i = i + 1
             End If
 
+            If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
+                clsGroupByFunction.AddParameter(i, "variable", bIncludeArgumentName:=False, iPosition:=0)
+                i = i + 1
+            End If
 
-        If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
-            clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
-            clsGroupByFunction.AddParameter("0", "variable", bIncludeArgumentName:=False, iPosition:=0)
-        Else
-            If ucrReceiverFacetBy.IsEmpty AndAlso ucrReceiverColourBy.IsEmpty Then
+            If clsGroupByFunction.iParameterCount > 0 Then
+                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+            Else
                 clsPipeOperator.RemoveParameterByName("group_by")
             End If
+        Else
+            clsPipeOperator.RemoveParameterByName("group_by")
         End If
-
         SetPipeAssignTo()
     End Sub
 
