@@ -1734,7 +1734,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   df$rain_cond <- (df[[rain_total_name]] <= df[["rain_total_actual"]])
 
   # All three conditions met
-  df$overall_cond <- (ifelse(start_check, df$plant_day_cond, TRUE) & df$length_cond & df$rain_cond)
+  df$overall_cond <- ((if(start_check) df$plant_day_cond else TRUE) & df$length_cond & df$rain_cond)
 
   crops_name <- "crop_def"
   crops_name <- next_default_item(prefix = crops_name, existing_names = self$get_data_names(), include_index = FALSE)
