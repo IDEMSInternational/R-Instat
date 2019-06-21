@@ -191,7 +191,7 @@ Public Class ucrDistributions
         Dim clsNormalDist As New Distribution
         Dim clsExponentialDist As New Distribution
         Dim clsGeometricDist As New Distribution
-        Dim clsExtremeValueDist As New Distribution
+        'Dim clsExtremeValueDist As New Distribution
         Dim clsWeibullDist As New Distribution
         Dim clsUniformDist As New Distribution
         Dim clsBernouliDist As New Distribution
@@ -214,7 +214,7 @@ Public Class ucrDistributions
         Dim clsCauchyDist As New Distribution
         Dim clsChiSqDist As New Distribution
         Dim clsFDist As New Distribution
-        Dim clsHyperGeoDist As New Distribution
+        'Dim clsHyperGeoDist As New Distribution
         Dim clsLogNormDist As New Distribution
         Dim clsNoDist As New Distribution
 
@@ -258,18 +258,18 @@ Public Class ucrDistributions
         lstAllDistributions.Add(clsGeometricDist)
 
         ' Extreme Value Distribution
-        clsExtremeValueDist.strNameTag = "Extreme_Value"
-        clsExtremeValueDist.strRName = "evd"
-        clsExtremeValueDist.strPackagName = "extRemes"
-        clsExtremeValueDist.strRFunctionName = "revd"
-        clsExtremeValueDist.strPFunctionName = "pevd"
-        clsExtremeValueDist.strQFunctionName = "qqevd"
-        clsExtremeValueDist.strDFunctionName = "devd"
-        clsExtremeValueDist.bIsContinuous = True
-        clsExtremeValueDist.AddParameter("shape", "Shape", 0)
-        clsExtremeValueDist.AddParameter("scale", "Scale", 1)
-        clsExtremeValueDist.AddParameter("loc", "Location", 0)
-        lstAllDistributions.Add(clsExtremeValueDist)
+        'clsExtremeValueDist.strNameTag = "Extreme_Value"
+        'clsExtremeValueDist.strRName = "evd"
+        'clsExtremeValueDist.strPackagName = "extRemes"
+        'clsExtremeValueDist.strRFunctionName = "revd"
+        'clsExtremeValueDist.strPFunctionName = "pevd"
+        'clsExtremeValueDist.strQFunctionName = "qqevd"
+        'clsExtremeValueDist.strDFunctionName = "devd"
+        'clsExtremeValueDist.bIsContinuous = True
+        'clsExtremeValueDist.AddParameter("shape", "Shape", 0)
+        'clsExtremeValueDist.AddParameter("scale", "Scale", 1)
+        'clsExtremeValueDist.AddParameter("loc", "Location", 0)
+        'lstAllDistributions.Add(clsExtremeValueDist)
 
         ' Weibull Distribution
         clsWeibullDist.strNameTag = "Weibull"
@@ -422,17 +422,17 @@ Public Class ucrDistributions
 
         'Hypergeometric Distribution
         ' For rhyper, the parameters are nn = size, whereas for the other parameters this is n.
-        clsHyperGeoDist.strNameTag = "Hypergeometric"
-        clsHyperGeoDist.strRName = "hyper"
-        clsHyperGeoDist.strRFunctionName = "rhyper"
-        clsHyperGeoDist.strPFunctionName = "phyper"
-        clsHyperGeoDist.strQFunctionName = "qhyper"
-        clsHyperGeoDist.strDFunctionName = "dhyper"
-        clsHyperGeoDist.bIsContinuous = False
-        clsHyperGeoDist.AddParameter("m", "Population_Successes", 10)
-        clsHyperGeoDist.AddParameter("n", "Population_Failures", 10)
-        clsHyperGeoDist.AddParameter("k", "Sample_Size", 10)
-        lstAllDistributions.Add(clsHyperGeoDist)
+        'clsHyperGeoDist.strNameTag = "Hypergeometric"
+        'clsHyperGeoDist.strRName = "hyper"
+        'clsHyperGeoDist.strRFunctionName = "rhyper"
+        'clsHyperGeoDist.strPFunctionName = "phyper"
+        'clsHyperGeoDist.strQFunctionName = "qhyper"
+        'clsHyperGeoDist.strDFunctionName = "dhyper"
+        'clsHyperGeoDist.bIsContinuous = False
+        'clsHyperGeoDist.AddParameter("m", "Population_Successes", 10)
+        'clsHyperGeoDist.AddParameter("n", "Population_Failures", 10)
+        'clsHyperGeoDist.AddParameter("k", "Sample_Size", 10)
+        'lstAllDistributions.Add(clsHyperGeoDist)
 
         ' Lognormal Distribution
         clsLogNormDist.strNameTag = "Lognormal"
