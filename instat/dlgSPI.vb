@@ -67,7 +67,7 @@ Public Class dlgSPI
 
         'setting up Nuds
         ucrNudTimeScale.SetParameter(New RParameter("scale", 1))
-        ucrNudTimeScale.SetMinMax(1, 24)
+        ucrNudTimeScale.SetMinMax(1)
 
         'others
         ucrChkOmitMissingValues.SetParameter(New RParameter("na.rm", 5))
