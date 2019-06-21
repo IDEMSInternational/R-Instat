@@ -107,7 +107,7 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
   if(is.matrix(new_data)) new_data <- as.data.frame(new_data)
   #This case could happen when removing rows
   #as.data.frame preserves column and data frame attributes so no issue with this
-  else if(tibble::is.tibble(new_data) || data.table::is.data.table(new_data)) new_data <- as.data.frame(new_data)
+  else if(tibble::is_tibble(new_data) || data.table::is.data.table(new_data)) new_data <- as.data.frame(new_data)
   #TODO convert ts objects correctly
   else if(is.ts(new_data)) {
     ind <- zoo::index(new_data)
@@ -946,8 +946,12 @@ DataSheet$set("public", "remove_rows_in_data", function(row_names) {
   #tibbles remove row names e.g. for filtering
   #but cannot use standard curr_data[-rows_to_remove, ] 
   #since it removes column attributes
-  self$set_data(dplyr::slice(curr_data, -rows_to_remove))
+
+  self$set_data(dplyr::slice(curr_data, -rows_to_remove, .preserve = TRUE))
   self$append_to_changes(list(Removed_row, row_names))
+  #Added this line to fix the bug of having the variable names in the metadata changinng to NA
+  # This affects factor columns only  - we need to find out why and how to solve it best
+  self$add_defaults_variables_metadata(self$get_column_names())
   self$data_changed <- TRUE
 }
 )
@@ -1024,6 +1028,9 @@ DataSheet$set("public", "insert_row_in_data", function(start_row, row_data = c()
     }
   }
   self$append_to_changes(list(Inserted_row, number_rows))
+  #Added this line to fix the bug of having the variable names in the metadata changinng to NA
+  # This affects factor columns only  - we need to find out why and how to solve it best
+  self$add_defaults_variables_metadata(self$get_column_names())
   self$data_changed <- TRUE
 }
 )
@@ -2533,6 +2540,9 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, reso
     }
     else cat("No missing dates to infill")
   }
+  #Added this line to fix the bug of having the variable names in the metadata changinng to NA
+  # This affects factor columns only  - we need to find out why and how to solve it best
+  self$add_defaults_variables_metadata(self$get_column_names())
 }
 )
 
