@@ -119,9 +119,11 @@ Public Class dlgFitModel
 
         clsFamilyFunction = ucrFamily.clsCurrRFunction
         clsGLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
+        clsGLM.AddParameter("na.action", "na.exclude", iPosition:=4)
 
         clsLM = clsRegressionDefaults.clsDefaultLmFunction.Clone
         clsLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsLM.AddParameter("na.action", "na.exclude", iPosition:=4)
 
         'Residual Plots
         clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
