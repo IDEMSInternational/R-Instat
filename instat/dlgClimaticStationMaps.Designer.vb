@@ -178,18 +178,18 @@ Partial Class dlgClimaticStationMaps
         Me.lblColor.AutoSize = True
         Me.lblColor.Location = New System.Drawing.Point(317, 234)
         Me.lblColor.Name = "lblColor"
-        Me.lblColor.Size = New System.Drawing.Size(45, 17)
+        Me.lblColor.Size = New System.Drawing.Size(112, 17)
         Me.lblColor.TabIndex = 28
-        Me.lblColor.Text = "Color:"
+        Me.lblColor.Text = "Color (Optional):"
         '
         'lblShape
         '
         Me.lblShape.AutoSize = True
         Me.lblShape.Location = New System.Drawing.Point(316, 181)
         Me.lblShape.Name = "lblShape"
-        Me.lblShape.Size = New System.Drawing.Size(53, 17)
+        Me.lblShape.Size = New System.Drawing.Size(120, 17)
         Me.lblShape.TabIndex = 26
-        Me.lblShape.Text = "Shape:"
+        Me.lblShape.Text = "Shape (Optional):"
         '
         'lbllatitude
         '
@@ -277,9 +277,9 @@ Partial Class dlgClimaticStationMaps
         Me.lblFill.Location = New System.Drawing.Point(308, 9)
         Me.lblFill.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFill.Name = "lblFill"
-        Me.lblFill.Size = New System.Drawing.Size(29, 17)
+        Me.lblFill.Size = New System.Drawing.Size(96, 17)
         Me.lblFill.TabIndex = 4
-        Me.lblFill.Text = "Fill:"
+        Me.lblFill.Text = "Fill (Optional):"
         '
         'ucrReceiverFill
         '
