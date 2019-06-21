@@ -80,8 +80,8 @@ Public Class RLink
             clsEngine = REngine.GetInstance()
             clsEngine.Initialize()
         Catch ex As Exception
-            ' Modified message since currently not working for R 3.5.0 rather 3.6.0
-            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 of R." & vbNewLine & "Note that R-Instat does not currently work with R 3.5.0 or above. Try reruning the installation to install R 3.6.0 or download R 3.6.0 from https://cran.r-project.org/bin/windows/base/old/3.6.0/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
+            ' Modified message since currently we recommend use of R version 3.6.0
+            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 of R." & vbNewLine & "Note that R-Instat does not work with R below 3.5.0. We recommend using R 3.6.0.  Try reruning the installation to install R 3.6.0 or download R 3.6.0 from https://cran.r-project.org/bin/windows/base/old/3.6.0/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
             Application.Exit()
             Environment.Exit(0)
         End Try
