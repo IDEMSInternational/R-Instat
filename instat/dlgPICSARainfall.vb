@@ -732,7 +732,6 @@ Public Class dlgPICSARainfall
         clsGroupByFunction.ClearParameters()
 
         If clsBaseOperator.ContainsParameter("hlinemean") OrElse clsBaseOperator.ContainsParameter("hlinemedian") OrElse clsBaseOperator.ContainsParameter("hlinelowertercile") OrElse clsBaseOperator.ContainsParameter("hlineuppertercile") Then
-            'If clsPipeOperator.ContainsParameter("mutate") Then
             If clsBaseOperator.ContainsParameter("facets") Then
                 For Each clsTempParam As RParameter In clsFacetOperator.clsParameters
                     If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
@@ -760,9 +759,12 @@ Public Class dlgPICSARainfall
                 clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
                 clsGroupByFunction.AddParameter("0", "variable", bIncludeArgumentName:=False, iPosition:=0)
             End If
-        Else
+        End If
+
+        If ucrReceiverFacetBy.IsEmpty AndAlso ucrReceiverColourBy.IsEmpty Then
             clsPipeOperator.RemoveParameterByName("group_by")
         End If
+
         SetPipeAssignTo()
     End Sub
 
