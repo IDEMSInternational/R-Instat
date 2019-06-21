@@ -125,9 +125,9 @@ Partial Class dlgClimaticStationMaps
         Me.lblLabels.Location = New System.Drawing.Point(316, 124)
         Me.lblLabels.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLabels.Name = "lblLabels"
-        Me.lblLabels.Size = New System.Drawing.Size(54, 17)
+        Me.lblLabels.Size = New System.Drawing.Size(121, 17)
         Me.lblLabels.TabIndex = 33
-        Me.lblLabels.Text = "Labels:"
+        Me.lblLabels.Text = "Labels (Optional):"
         '
         'ucrReceiverStation
         '
