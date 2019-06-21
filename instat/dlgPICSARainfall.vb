@@ -732,6 +732,7 @@ Public Class dlgPICSARainfall
         clsGroupByFunction.ClearParameters()
 
         If clsBaseOperator.ContainsParameter("hlinemean") OrElse clsBaseOperator.ContainsParameter("hlinemedian") OrElse clsBaseOperator.ContainsParameter("hlinelowertercile") OrElse clsBaseOperator.ContainsParameter("hlineuppertercile") Then
+            'If clsPipeOperator.ContainsParameter("mutate") Then
             If clsBaseOperator.ContainsParameter("facets") Then
                 For Each clsTempParam As RParameter In clsFacetOperator.clsParameters
                     If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
@@ -739,26 +740,29 @@ Public Class dlgPICSARainfall
                     End If
                     i = i + 1
                 Next
+
                 clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
                 clsGroupByFunction.AddParameter("1", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
             Else
                 clsGroupByFunction.RemoveParameterByName("1")
             End If
-        End If
+            'End If
 
-        If clsRaesFunction.ContainsParameter("colour") Then
-            clsGroupByFunction.AddParameter("0", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+            If clsRaesFunction.ContainsParameter("colour") Then
+                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+                clsGroupByFunction.AddParameter("0", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+            Else
+                clsGroupByFunction.RemoveParameterByName("0")
+            End If
+
+
+            If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
+                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+                clsGroupByFunction.AddParameter("0", "variable", bIncludeArgumentName:=False, iPosition:=0)
+            End If
         Else
-            clsGroupByFunction.RemoveParameterByName("0")
+            clsPipeOperator.RemoveParameterByName("group_by")
         End If
-
-        If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
-            clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
-            clsGroupByFunction.AddParameter("0", "variable", bIncludeArgumentName:=False, iPosition:=0)
-            ' Else
-            'clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
-        End If
-
         SetPipeAssignTo()
     End Sub
 
