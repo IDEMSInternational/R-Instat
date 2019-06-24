@@ -68,6 +68,8 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputXTo = New instat.ucrInputTextBox()
         Me.ucrNudXAxisAngle = New instat.ucrNud()
         Me.tpYAxis = New System.Windows.Forms.TabPage()
+        Me.ucrNudUpperLimit = New instat.ucrNud()
+        Me.ucrNudLowerLimit = New instat.ucrNud()
         Me.lblDateDisplayFormat = New System.Windows.Forms.Label()
         Me.rdoYDate = New System.Windows.Forms.RadioButton()
         Me.rdoYNumeric = New System.Windows.Forms.RadioButton()
@@ -75,7 +77,9 @@ Partial Class sdgPICSARainfallGraph
         Me.lblYInStepsOf = New System.Windows.Forms.Label()
         Me.lblYTo = New System.Windows.Forms.Label()
         Me.lblYFrom = New System.Windows.Forms.Label()
+        Me.ucrInputYSpecifyUpperLimitDateMonth = New instat.ucrInputComboBox()
         Me.ucrInputYSpecifyUpperLimitNumeric = New instat.ucrInputTextBox()
+        Me.ucrInputYSpecifyLowerLimitDateMonth = New instat.ucrInputComboBox()
         Me.ucrChkYSpecifyUpperLimit = New instat.ucrCheck()
         Me.ucrInputYSpecifyLowerLimitNumeric = New instat.ucrInputTextBox()
         Me.ucrChkYSpecifyLowerLimit = New instat.ucrCheck()
@@ -160,8 +164,6 @@ Partial Class sdgPICSARainfallGraph
         Me.UcrChkPnlBackgroundFill = New instat.ucrCheck()
         Me.ucrChkPnlBackgroundColour = New instat.ucrCheck()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
-        Me.ucrInputYSpecifyLowerLimitDateMonth = New instat.ucrInputComboBox()
-        Me.ucrInputYSpecifyUpperLimitDateMonth = New instat.ucrInputComboBox()
         Me.tbPICSA.SuspendLayout()
         Me.tpTitles.SuspendLayout()
         Me.grpyAxisTitle.SuspendLayout()
@@ -528,6 +530,8 @@ Partial Class sdgPICSARainfallGraph
         '
         'tpYAxis
         '
+        Me.tpYAxis.Controls.Add(Me.ucrNudUpperLimit)
+        Me.tpYAxis.Controls.Add(Me.ucrNudLowerLimit)
         Me.tpYAxis.Controls.Add(Me.lblDateDisplayFormat)
         Me.tpYAxis.Controls.Add(Me.rdoYDate)
         Me.tpYAxis.Controls.Add(Me.rdoYNumeric)
@@ -558,6 +562,26 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.tpYAxis, "tpYAxis")
         Me.tpYAxis.Name = "tpYAxis"
         Me.tpYAxis.UseVisualStyleBackColor = True
+        '
+        'ucrNudUpperLimit
+        '
+        Me.ucrNudUpperLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudUpperLimit, "ucrNudUpperLimit")
+        Me.ucrNudUpperLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudUpperLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperLimit.Name = "ucrNudUpperLimit"
+        Me.ucrNudUpperLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudLowerLimit
+        '
+        Me.ucrNudLowerLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLowerLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLowerLimit, "ucrNudLowerLimit")
+        Me.ucrNudLowerLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLowerLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLowerLimit.Name = "ucrNudLowerLimit"
+        Me.ucrNudLowerLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblDateDisplayFormat
         '
@@ -604,6 +628,13 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.lblYFrom, "lblYFrom")
         Me.lblYFrom.Name = "lblYFrom"
         '
+        'ucrInputYSpecifyUpperLimitDateMonth
+        '
+        Me.ucrInputYSpecifyUpperLimitDateMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputYSpecifyUpperLimitDateMonth.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYSpecifyUpperLimitDateMonth, "ucrInputYSpecifyUpperLimitDateMonth")
+        Me.ucrInputYSpecifyUpperLimitDateMonth.Name = "ucrInputYSpecifyUpperLimitDateMonth"
+        '
         'ucrInputYSpecifyUpperLimitNumeric
         '
         Me.ucrInputYSpecifyUpperLimitNumeric.AddQuotesIfUnrecognised = True
@@ -611,6 +642,13 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputYSpecifyUpperLimitNumeric.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputYSpecifyUpperLimitNumeric, "ucrInputYSpecifyUpperLimitNumeric")
         Me.ucrInputYSpecifyUpperLimitNumeric.Name = "ucrInputYSpecifyUpperLimitNumeric"
+        '
+        'ucrInputYSpecifyLowerLimitDateMonth
+        '
+        Me.ucrInputYSpecifyLowerLimitDateMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputYSpecifyLowerLimitDateMonth.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYSpecifyLowerLimitDateMonth, "ucrInputYSpecifyLowerLimitDateMonth")
+        Me.ucrInputYSpecifyLowerLimitDateMonth.Name = "ucrInputYSpecifyLowerLimitDateMonth"
         '
         'ucrChkYSpecifyUpperLimit
         '
@@ -1233,20 +1271,6 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrSdgPICSARainfalbuttons, "ucrSdgPICSARainfalbuttons")
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
         '
-        'ucrInputYSpecifyLowerLimitDateMonth
-        '
-        Me.ucrInputYSpecifyLowerLimitDateMonth.AddQuotesIfUnrecognised = True
-        Me.ucrInputYSpecifyLowerLimitDateMonth.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYSpecifyLowerLimitDateMonth, "ucrInputYSpecifyLowerLimitDateMonth")
-        Me.ucrInputYSpecifyLowerLimitDateMonth.Name = "ucrInputYSpecifyLowerLimitDateMonth"
-        '
-        'ucrInputYSpecifyUpperLimitDateMonth
-        '
-        Me.ucrInputYSpecifyUpperLimitDateMonth.AddQuotesIfUnrecognised = True
-        Me.ucrInputYSpecifyUpperLimitDateMonth.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYSpecifyUpperLimitDateMonth, "ucrInputYSpecifyUpperLimitDateMonth")
-        Me.ucrInputYSpecifyUpperLimitDateMonth.Name = "ucrInputYSpecifyUpperLimitDateMonth"
-        '
         'sdgPICSARainfallGraph
         '
         resources.ApplyResources(Me, "$this")
@@ -1424,4 +1448,6 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents lblMajorGridLineColour As Label
     Friend WithEvents ucrInputYSpecifyUpperLimitDateMonth As ucrInputComboBox
     Friend WithEvents ucrInputYSpecifyLowerLimitDateMonth As ucrInputComboBox
+    Friend WithEvents ucrNudUpperLimit As ucrNud
+    Friend WithEvents ucrNudLowerLimit As ucrNud
 End Class
