@@ -173,7 +173,7 @@ Public Class clsQCDifferenceRCode
         clsDiffCalcFunction = New RFunction
         clsListFunc = New RFunction
         clsLessDiffOperator.Clear()
-        clsLessDiffOperator.SetOperation("<")
+        clsLessDiffOperator.SetOperation("<=")
         clsLessDiffOperator.bToScriptAsRString = True
         clsLessDiffOperator.AddParameter("left", bIncludeArgumentName:=False, strParameterValue:=strDiffCalc, iPosition:=0)
         clsDiffOperator.SetOperation("-")

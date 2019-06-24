@@ -63,6 +63,8 @@ Public Class frmMain
 
         Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
         Dim bClose As Boolean = False
+        ' Note: this must change when R version changes
+        Dim strRPackagesPath As String = Path.Combine(My.Computer.FileSystem.SpecialDirectories.MyDocuments, "R\win-library\3.6")
 
         mnuBar.Renderer = prdCustom
         Tool_strip.Renderer = prdCustom
@@ -86,6 +88,19 @@ Public Class frmMain
         SetToDefaultLayout()
         strStaticPath = Path.GetFullPath("static")
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
+
+        ' We need to create the likely R package installation directory before R.NET connection is initialised
+        ' because of a bug in R.NET 1.8.2 where pop ups to create directories do not appear.
+        ' This assumes that R packages will be installed in "Documents" folder and also that 
+        ' this is detected by "SpecialDirectories.MyDocuments".
+        ' If either of these fail then R packages will need to be installed from R/RStudio first.
+        Try
+            If Not Directory.Exists(strRPackagesPath) Then
+                System.IO.Directory.CreateDirectory(strRPackagesPath)
+            End If
+        Catch ex As Exception
+            ' This may fail for many reasons. We may want to inform users this may lead to packages not installing.
+        End Try
 
         bClose = AutoRecoverAndStartREngine()
         If bClose Then
@@ -1038,7 +1053,7 @@ Public Class frmMain
         dlgFitModel.ShowDialog()
     End Sub
 
-    Private Sub mnuImportFromOpenDataKit_Click(sender As Object, e As EventArgs) Handles mnuImportFromODK.Click
+    Private Sub mnuFileOpenFromODK_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromODK.Click
         dlgImportFromODK.ShowDialog()
     End Sub
 
@@ -1273,11 +1288,11 @@ Public Class frmMain
         dlgInventoryPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateFileClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileClimSoft.Click
+    Private Sub mnuClimateFileImportFromClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportFromClimSoft.Click
         dlgClimSoft.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticFileCliData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileCliData.Click
+    Private Sub mnuClimaticFileImportFromCliData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromCliData.Click
         dlgCliData.ShowDialog()
     End Sub
 
@@ -1341,7 +1356,7 @@ Public Class frmMain
         dlgDefineCorruption.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticSCFSupportCumulativeExceedanceGraphs_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportCumulativeExceedanceGraphs.Click
+    Private Sub mnuClimaticSCFSupportCumulativeExceedanceGraphs_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportCumulativeExceedanceGraph.Click
         dlgCumulativeDistribution.ShowDialog()
     End Sub
 
@@ -1374,15 +1389,15 @@ Public Class frmMain
         dlgTwoWayFrequencies.ShowDialog()
     End Sub
 
-    Private Sub ImportFromCSPROToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromCSPROToolStripMenuItem.Click
+    Private Sub mnuFileOpenFromCSPRO_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromCSPRO.Click
         dlgImportFromCSPRO.ShowDialog()
     End Sub
 
-    Private Sub ImportFromToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromToolStripMenuItem.Click
+    Private Sub mnuFileImportFromDatabases_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromDatabases.Click
         dlgImportFromDatabases.ShowDialog()
     End Sub
 
-    Private Sub OpenNetCDFToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenNetCDFToolStripMenuItem.Click
+    Private Sub mnuClimaticFileImportandTidyNetCDF_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportandTidyNetCDF.Click
         dlgOpenNetCDF.ShowDialog()
     End Sub
 
@@ -1486,7 +1501,7 @@ Public Class frmMain
         ctrActive = ucrDataFrameMeta
     End Sub
 
-    Private Sub mnuClimaticFileImportGriddedData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportGriddedData.Click
+    Private Sub mnuClimaticFileOpenGriddedData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileOpenGriddedData.Click
         dlgImportGriddedData.ShowDialog()
     End Sub
 
@@ -1858,16 +1873,17 @@ Public Class frmMain
         dlgCountryColouredMap.ShowDialog()
     End Sub
 
-    Private Sub OpenNETcdfFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenNETcdfFileToolStripMenuItem.Click
+    Private Sub mnuFileImportandTidyNetCDFFile_Click(sender As Object, e As EventArgs) Handles mnuFileImportandTidyNetCDFFile.Click
         dlgOpenNetCDF.ShowDialog()
+    End Sub
+
+
+    Private Sub mnuClimaticCheckDataQCTemperatures_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataQCTemperatures.Click
+        dlgClimaticCheckDataTemperature.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticCheckDataQCRainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataQCRainfall.Click
         dlgClimaticCheckDataRain.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticCheckDataQCTemperatures_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataQCTemperatures.Click
-        dlgClimaticCheckDataTemperature.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeSpecificParallelCoordinatePlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificParallelCoordinatePlot.Click
@@ -1988,7 +2004,7 @@ Public Class frmMain
         dlgAnonymiseIDColumn.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticFileImportShapeFile_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportShapeFile.Click
+    Private Sub mnuClimaticFileOpenandTidyShapefile_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileOpenandTidyShapefile.Click
         dlgImportShapeFiles.ShowDialog()
     End Sub
 
@@ -2094,5 +2110,13 @@ Public Class frmMain
 
     Private Sub mnuClimaticTidyandExamineDuplicates_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineDuplicates.Click
         dlgDuplicates.ShowDialog()
+    End Sub
+
+    Private Sub UseModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseModelToolStripMenuItem.Click
+        dlgUseModel.ShowDialog()
+    End Sub
+
+    Private Sub mnuCumExeedenceGraph_Click(sender As Object, e As EventArgs) Handles mnuCumExeedenceGraph.Click
+        dlgCumulativeDistribution.ShowDialog()
     End Sub
 End Class

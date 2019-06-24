@@ -202,9 +202,9 @@ Public Class DlgDefineClimaticData
 
     Private Sub MessageBox()
         If Not ucrReceiverStationName.IsEmpty Then
-            MsgBox("You have multiple rows with the same dates in one or more stations. Use the Climatic > Check Data > Duplicates dialog to investigate these issues", MsgBoxStyle.Information, Title:="Key")
+            MsgBox("You have multiple rows with the same dates in one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues", MsgBoxStyle.Information, Title:="Key")
         Else
-            MsgBox("You have multiple rows with the same dates. Did you forget to add the station column? Otherwise, use the Climatic > Check Data > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Key")
+            MsgBox("You have multiple rows with the same dates. Did you forget to add the station column? Otherwise, use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Key")
         End If
     End Sub
 
@@ -222,10 +222,10 @@ Public Class DlgDefineClimaticData
             ucrInputCheckInput.txtInput.BackColor = Color.Yellow
             bIsUnique = False
         ElseIf iAnyDuplicated > 0 Then
-            MessageBox()
             ucrInputCheckInput.SetName("Column(s) cannot define a key. Entries not unique.")
             ucrInputCheckInput.txtInput.BackColor = Color.LightCoral
             bIsUnique = False
+            MessageBox()
         Else
             ucrInputCheckInput.SetName("Column(s) can define a key.")
             ucrInputCheckInput.txtInput.BackColor = Color.LightGreen
