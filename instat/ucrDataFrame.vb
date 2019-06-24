@@ -41,6 +41,8 @@ Public Class ucrDataFrame
     Private bOnlyLinkedToPrimaryDataFrames As Boolean = False
     'If bOnlyLinkedToPrimaryDataFrames then should the primary data frame itself be displayed
     Private bIncludePrimaryDataFrameAsLinked As Boolean = True
+    ' To prevent circular refreshing of data frame list
+    Private bSuppressRefresh As Boolean = False
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FillComboBox()
@@ -92,14 +94,19 @@ Public Class ucrDataFrame
     Public Event DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String)
 
     Private Sub cboAvailableDataFrames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAvailableDataFrames.SelectedIndexChanged
-        If cboAvailableDataFrames.SelectedIndex = -1 Then
-            cboAvailableDataFrames.Text = ""
-        End If
-        If strCurrDataFrame <> cboAvailableDataFrames.Text Then
-            RaiseEvent DataFrameChanged(sender, e, strCurrDataFrame)
-            strCurrDataFrame = cboAvailableDataFrames.Text
-            SetDataFrameProperties()
-            OnControlValueChanged()
+        If Not bSuppressRefresh Then
+            If cboAvailableDataFrames.SelectedIndex = -1 Then
+                cboAvailableDataFrames.Text = ""
+            End If
+            If strCurrDataFrame <> cboAvailableDataFrames.Text Then
+                ' This prevents circular refreshing with receivers linked to primary data frame
+                bSuppressRefresh = True
+                RaiseEvent DataFrameChanged(sender, e, strCurrDataFrame)
+                bSuppressRefresh = False
+                strCurrDataFrame = cboAvailableDataFrames.Text
+                SetDataFrameProperties()
+                OnControlValueChanged()
+            End If
         End If
     End Sub
 
