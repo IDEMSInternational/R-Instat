@@ -107,7 +107,7 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
   if(is.matrix(new_data)) new_data <- as.data.frame(new_data)
   #This case could happen when removing rows
   #as.data.frame preserves column and data frame attributes so no issue with this
-  else if(tibble::is.tibble(new_data)) new_data <- as.data.frame(new_data)
+  else if(tibble::is_tibble(new_data) || data.table::is.data.table(new_data)) new_data <- as.data.frame(new_data)
   #TODO convert ts objects correctly
   else if(is.ts(new_data)) {
     ind <- zoo::index(new_data)
@@ -946,8 +946,12 @@ DataSheet$set("public", "remove_rows_in_data", function(row_names) {
   #tibbles remove row names e.g. for filtering
   #but cannot use standard curr_data[-rows_to_remove, ] 
   #since it removes column attributes
-  self$set_data(dplyr::slice(curr_data, -rows_to_remove))
+
+  self$set_data(dplyr::slice(curr_data, -rows_to_remove, .preserve = TRUE))
   self$append_to_changes(list(Removed_row, row_names))
+  #Added this line to fix the bug of having the variable names in the metadata changinng to NA
+  # This affects factor columns only  - we need to find out why and how to solve it best
+  self$add_defaults_variables_metadata(self$get_column_names())
   self$data_changed <- TRUE
 }
 )
@@ -1024,6 +1028,9 @@ DataSheet$set("public", "insert_row_in_data", function(start_row, row_data = c()
     }
   }
   self$append_to_changes(list(Inserted_row, number_rows))
+  #Added this line to fix the bug of having the variable names in the metadata changinng to NA
+  # This affects factor columns only  - we need to find out why and how to solve it best
+  self$add_defaults_variables_metadata(self$get_column_names())
   self$data_changed <- TRUE
 }
 )
@@ -2081,7 +2088,7 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
 )
 
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
-DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE,  weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE,  dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1) {
+DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE,  weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE,  dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1, days_in_month = FALSE) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!lubridate::is.Date(col_data)) stop("This column must be a date or time!")
   
@@ -2174,9 +2181,14 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     self$add_columns_to_data(col_name = col_name, col_data = day_vector)
   }
   if(day_in_month) {
-    day_in_month_vector <- as.integer(lubridate::mday(col_data))
+    day_in_month_vector <- as.numeric(lubridate::mday(col_data))
     col_name <- next_default_item(prefix = "day_in_month", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_month_vector)
+  }
+  if(days_in_month) {
+    days_in_month_vector <- as.numeric(lubridate::days_in_month(col_data))
+    col_name <- next_default_item(prefix = "days_in_month", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = days_in_month_vector)
   }
   if(day_in_year_366) {
     if(s_shift) {
@@ -2528,6 +2540,9 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, reso
     }
     else cat("No missing dates to infill")
   }
+  #Added this line to fix the bug of having the variable names in the metadata changinng to NA
+  # This affects factor columns only  - we need to find out why and how to solve it best
+  self$add_defaults_variables_metadata(self$get_column_names())
 }
 )
 

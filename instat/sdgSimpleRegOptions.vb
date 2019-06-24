@@ -101,6 +101,12 @@ Public Class sdgSimpleRegOptions
         ucrChkResidualPlots.AddRSyntaxContainsFunctionNamesCondition(False, {"autoplot"}, False)
         ucrChkResidualPlots.AddToLinkedControls(ucrPnlMutiplePlots, {True}, bNewLinkedHideIfParameterMissing:=True)
 
+        'Disable for now - temporarily as we find an alternative to autoplot bug when dealing with padded NAs
+
+        ucrChkResidualPlots.Enabled = False
+        grpMultiplePlots.Enabled = False
+        grpIndividualPlots.Enabled = False
+
         ucrPnlMutiplePlots.AddRadioButton(rdoSixPlots)
         ucrPnlMutiplePlots.AddRadioButton(rdoFourPlots)
         ucrPnlMutiplePlots.AddRadioButton(rdoChooseIndividual)
