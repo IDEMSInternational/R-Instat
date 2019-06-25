@@ -42,13 +42,9 @@ Public Class dlgImportDataset
     Private bDialogLoaded As Boolean
     Private iDataFrameCount As Integer
     Private bMultiFiles As Boolean
-
     Private strFileName As String
-
     Private bSupressCheckAllSheets As Boolean = False
     Private bSupressSheetChange As Boolean = False
-
-
     Dim dctSelectedExcelSheets As New Dictionary(Of Integer, String)
 
     Public Sub New()

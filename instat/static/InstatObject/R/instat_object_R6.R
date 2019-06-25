@@ -894,7 +894,7 @@ DataBook$set("public", "sort_dataframe", function(data_name, col_names = c(), de
 DataBook$set("public", "rename_dataframe", function(data_name, new_value = "", label = "") {
   data_obj <- self$get_data_objects(data_name)
   if(data_name != new_value) {
-   if(new_value == names(private$.data_sheets)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
+    if(tolower(new_value) %in% tolower(names(private$.data_sheets)[-which(names(private$.data_sheets) == data_name)])) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
     names(private$.data_sheets)[names(private$.data_sheets) == data_name] <- new_value
     data_obj$append_to_metadata(data_name_label, new_value)
     self$update_links_rename_data_frame(data_name, new_value)
