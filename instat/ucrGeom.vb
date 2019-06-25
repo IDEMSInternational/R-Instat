@@ -1506,6 +1506,10 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_vline)
 
+        For Each Geom In lstAllGeoms
+            Geom.AddLayerParameter("key_glyph", "list", "draw_key_point", lstParameterStrings:={"draw_key_point", "draw_key_abline", "draw_key_rect", "draw_key_polygon", "draw_key_blank", "draw_key_boxplot", "draw_key_crossbar", "draw_key_path", "draw_key_vpath", "draw_key_dotplot", "draw_key_pointrange", "draw_key_smooth", "draw_key_text", "draw_key_label", "draw_key_vline", "draw_key_timeseries"})
+        Next
+
     End Sub
 
     Public Event GeomChanged()
