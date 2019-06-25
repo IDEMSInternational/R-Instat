@@ -416,7 +416,7 @@ Public Class frmMain
         dlgSite.ShowDialog()
     End Sub
 
-    Private Sub mnuFIleExit_Click(sender As Object, e As EventArgs) Handles mnuFIleExit.Click
+    Private Sub mnuFIleExit_Click(sender As Object, e As EventArgs) Handles mnuFileExit.Click
         Me.Close()
     End Sub
 
@@ -617,7 +617,7 @@ Public Class frmMain
         dlgLabelsLevels.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareFactorViewLabels_Click(sender As Object, e As EventArgs) Handles mnuPrepareFactorViewLabels.Click
+    Private Sub mnuPrepareFactorViewLabels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorViewLabels.Click
         dlgViewFactorLabels.ShowDialog()
     End Sub
 
@@ -700,7 +700,7 @@ Public Class frmMain
     '    dlgGeneralRegression.ShowDialog()
     'End Sub
 
-    Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeGeneralGraphics.Click
+    Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralGraphics.Click
         dlgGeneralForGraphics.ShowDialog()
     End Sub
 
@@ -837,7 +837,7 @@ Public Class frmMain
         dlgRowNamesOrNumbers.ShowDialog()
     End Sub
 
-    Private Sub JitterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPreparePrepareToShareJitter.Click
+    Private Sub JitterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataPrepareToShareJitter.Click
         dlgJitter.ShowDialog()
     End Sub
 
@@ -855,7 +855,7 @@ Public Class frmMain
         mnuEditFind_Click(sender, e)
     End Sub
 
-    Private Sub ColourByPropertyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColourByPropertyToolStripMenuItem.Click
+    Private Sub ColourByPropertyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameColourByProperty.Click
         'TODO change this dialog
         '     dlgMetadata should be separate
         dlgColourbyProperty.ShowDialog()
@@ -986,7 +986,7 @@ Public Class frmMain
         dlgDescribeTwoVariable.ShowDialog()
     End Sub
 
-    Private Sub mnuAppendDataFrame_Click(sender As Object, e As EventArgs) Handles mnuPrepareAppendDataFrame.Click
+    Private Sub mnuAppendDataFrame_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeAppendDataFrame.Click
         dlgAppend.ShowDialog()
     End Sub
 
@@ -1152,7 +1152,7 @@ Public Class frmMain
         dlgBarAndPieChart.ShowDialog()
     End Sub
 
-    Private Sub mnuOrganiseColumnMakeDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnMakeDate.Click
+    Private Sub mnuOrganiseColumnMakeDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateMakeDate.Click
         dlgMakeDate.ShowDialog()
     End Sub
 
@@ -1180,7 +1180,7 @@ Public Class frmMain
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub mnuOrganiseColumnUseDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnUseDate.Click
+    Private Sub mnuOrganiseColumnUseDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateUseDate.Click
         dlgUseDate.ShowDialog()
     End Sub
 
@@ -1248,7 +1248,7 @@ Public Class frmMain
         dlgOpenSST.ShowDialog()
     End Sub
 
-    Private Sub mnuOrgCalculateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareCalculateDuplicateColumn.Click
+    Private Sub mnuOrgCalculateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateDuplicateColumn.Click
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
@@ -1377,11 +1377,11 @@ Public Class frmMain
         dlgRestrict.ShowDialog()
     End Sub
 
-    Private Sub mnuProcurementModelFitModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementModelFitModelToolStripMenuItem.Click
+    Private Sub mnuProcurementModelFitModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementModelFitModel.Click
         dlgFitCorruptionModel.ShowDialog()
     End Sub
 
-    Private Sub mnuProcurementDefineRedFlags_Click(sender As Object, e As EventArgs) Handles mnuProcurementDefineRedFlags.Click
+    Private Sub mnuProcurementDefineRedFlags_Click(sender As Object, e As EventArgs) Handles mnuProcurementDefineRedFlagsVariables.Click
         dlgDefineRedFlags.ShowDialog()
     End Sub
 
@@ -1505,7 +1505,7 @@ Public Class frmMain
         dlgImportGriddedData.ShowDialog()
     End Sub
 
-    Private Sub RatingDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RatingDataToolStripMenuItem.Click
+    Private Sub RatingDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableRatingData.Click
         dlgRatingScales.ShowDialog()
     End Sub
 
@@ -1541,23 +1541,23 @@ Public Class frmMain
         dlgExportRWorkspace.ShowDialog()
     End Sub
 
-    Private Sub ExportDataSetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportDataSetToolStripMenuItem.Click
+    Private Sub ExportDataSetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuExportDataSet.Click
         dlgExportDataset.ShowDialog()
     End Sub
 
-    Private Sub ExportRWorkspaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportRWorkspaceToolStripMenuItem.Click
+    Private Sub ExportRWorkspaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuExportRWorkspace.Click
         dlgExportRWorkspace.ShowDialog()
     End Sub
 
-    Private Sub ExportGraphAsImageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportGraphAsImageToolStripMenuItem.Click
+    Private Sub ExportGraphAsImageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuExportGraphAsImage.Click
         dlgExportGraphAsImage.ShowDialog()
     End Sub
 
-    Private Sub ExportRObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportRObjectsToolStripMenuItem.Click
+    Private Sub ExportRObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuExportRObjects.Click
         dlgExportRObjects.ShowDialog()
     End Sub
 
-    Private Sub FrequencyTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrequencyTablesToolStripMenuItem.Click
+    Private Sub FrequencyTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralUseSummaries.Click
         dlgSummaryBarOrPieChart.ShowDialog()
     End Sub
     Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click
@@ -1586,7 +1586,7 @@ Public Class frmMain
         dlgWindrose.ShowDialog()
     End Sub
 
-    Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CummulativeDistributionToolStripMenuItem.Click
+    Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificCummulativeDistribution.Click
         dlgCumulativeDistribution.ShowDialog()
     End Sub
 
@@ -1676,7 +1676,7 @@ Public Class frmMain
         dlgDisplayDailyData.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnInfillMissingDates.Click
+    Private Sub mnuPrepareColumnInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateInfillMissingDates.Click
         dlgInfill.ShowDialog()
     End Sub
 
@@ -1756,7 +1756,7 @@ Public Class frmMain
         dlgOneWayFrequencies.ShowDialog()
     End Sub
 
-    Private Sub SummariseRedFlagsByCountryorOtherToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummariseRedFlagsByCountryorOtherToolStripMenuItem.Click
+    Private Sub SummariseRedFlagsByCountryorOtherToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareSummariseRedFlagsByCountryorOther.Click
         Dim lstDataNames As List(Of String)
 
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
@@ -1772,15 +1772,15 @@ Public Class frmMain
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub mnuProcurementCalculateCRI_Click(sender As Object, e As EventArgs) Handles mnuProcurementCalculateCRI.Click
+    Private Sub mnuProcurementCalculateCRI_Click(sender As Object, e As EventArgs) Handles mnuProcurementCRICalculateCRI.Click
         dlgDefineCRI.ShowDialog()
     End Sub
 
-    Private Sub mnuProcurementDefineCorruption_Click_1(sender As Object, e As EventArgs) Handles mnuProcurementDefineCorruption.Click
+    Private Sub mnuProcurementDefineCorruption_Click_1(sender As Object, e As EventArgs) Handles mnuProcurementModelDefineCorruptionRiskOutputVariables.Click
         dlgDefineCorruptionOutputs.ShowDialog()
     End Sub
 
-    Private Sub SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem.Click
+    Private Sub SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther.Click
         Dim lstDataNames As List(Of String)
 
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
@@ -1796,7 +1796,7 @@ Public Class frmMain
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub OneVariableSummariseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneVariableSummariseToolStripMenuItem.Click
+    Private Sub OneVariableSummariseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnumnuProcurementDescribeOneVariableSummarise.Click
         Dim lstDataNames As List(Of String)
         Dim lstColumns As New List(Of String)
         Dim strRedFlags() As String
@@ -1824,7 +1824,7 @@ Public Class frmMain
         dlgOneVariableSummarise.ShowDialog()
     End Sub
 
-    Private Sub OneVariableGraphToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneVariableGraphToolStripMenuItem.Click
+    Private Sub OneVariableGraphToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeOneVariableGraph.Click
         Dim lstDataNames As List(Of String)
         Dim lstColumns As New List(Of String)
         Dim strRedFlags() As String
@@ -1851,7 +1851,7 @@ Public Class frmMain
         dlgOneVariableGraph.ShowDialog()
     End Sub
 
-    Private Sub CorrelationsRedFlagsOrOthersToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles CorrelationsRedFlagsOrOthersToolStripMenuItem.Click
+    Private Sub CorrelationsRedFlagsOrOthersToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers.Click
         Dim lstDataNames As List(Of String)
         Dim strComponentColumnNames() As String
 
@@ -1869,7 +1869,7 @@ Public Class frmMain
         dlgCorrelation.ShowDialog()
     End Sub
 
-    Private Sub MapCountryValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MapCountryValuesToolStripMenuItem.Click
+    Private Sub MapCountryValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementMappingMapCountryValues.Click
         dlgCountryColouredMap.ShowDialog()
     End Sub
 
@@ -1902,7 +1902,7 @@ Public Class frmMain
         dlgHypothesisTestsCalculator.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnGenerateDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateDate.Click
+    Private Sub mnuPrepareColumnGenerateDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateGenerateDate.Click
         dlgRegularSequence.bNumericIsDefault = False
         dlgRegularSequence.ShowDialog()
     End Sub
@@ -1924,7 +1924,7 @@ Public Class frmMain
         dlgDefineOptionsByContext.ShowDialog()
     End Sub
 
-    Private Sub MergeAdditionalDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextMergeAdditionalData.Click
+    Private Sub MergeAdditionalDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextPrepareMergeAdditionalData.Click
         dlgMergeAdditionalData.ShowDialog()
     End Sub
 
@@ -2028,7 +2028,7 @@ Public Class frmMain
         dlgConversions.ShowDialog()
     End Sub
 
-    Private Sub mnuOptionsByContextGeneralFitModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextGeneralFitModel.Click
+    Private Sub mnuOptionsByContextGeneralFitModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextModelGeneralFitModel.Click
         dlgFitModel.ShowDialog()
     End Sub
 
@@ -2040,23 +2040,23 @@ Public Class frmMain
         dlgMosaicPlot.ShowDialog()
     End Sub
 
-    Private Sub BarChartsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BarChartsToolStripMenuItem.Click
+    Private Sub BarChartsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeCategoricalBarCharts.Click
         dlgBarAndPieChart.ShowDialog()
     End Sub
 
-    Private Sub MosaicPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MosaicPlotToolStripMenuItem.Click
+    Private Sub MosaicPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeCategoricalMosaicPlot.Click
         dlgMosaicPlot.ShowDialog()
     End Sub
 
-    Private Sub BoxplotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BoxplotToolStripMenuItem.Click
+    Private Sub BoxplotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeNumericBoxplot.Click
         dlgBoxplot.ShowDialog()
     End Sub
 
-    Private Sub HistogramToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HistogramToolStripMenuItem.Click
+    Private Sub HistogramToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeNumericHistogram.Click
         dlgHistogram.ShowDialog()
     End Sub
 
-    Private Sub OpenFromLibraryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenFromLibraryToolStripMenuItem.Click
+    Private Sub OpenFromLibraryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementOpenFromLibrary.Click
         dlgImportDataset.strFileToOpenOn = ""
         dlgImportDataset.bStartOpenDialog = True
         dlgImportDataset.bFromLibrary = True
@@ -2112,7 +2112,7 @@ Public Class frmMain
         dlgDuplicates.ShowDialog()
     End Sub
 
-    Private Sub UseModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseModelToolStripMenuItem.Click
+    Private Sub UseModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelUseModel.Click
         dlgUseModel.ShowDialog()
     End Sub
 
