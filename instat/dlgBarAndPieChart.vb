@@ -114,6 +114,7 @@ Public Class dlgBarAndPieChart
         dctPositionPairs.Add("Identity", Chr(34) & "identity" & Chr(34))
         dctPositionPairs.Add("Jitter", Chr(34) & "jitter" & Chr(34))
         dctPositionPairs.Add("Fill", Chr(34) & "fill" & Chr(34))
+        dctPositionPairs.Add("Stack in reverse", "position_stack(reverse = TRUE)")
         ucrInputBarChartPosition.SetItems(dctPositionPairs)
         ucrInputBarChartPosition.SetDropDownStyleAsNonEditable()
         ucrInputBarChartPosition.SetRDefault(Chr(34) & "stack" & Chr(34))

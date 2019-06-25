@@ -111,7 +111,7 @@ Public Class dlgExportToCMSAF
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save Data File"
-            dlgSave.Filter = "RDS Data file (*.Rdata)|*.Rdata"
+            dlgSave.Filter = "RDS Data file (*.RData)|*.RData"
             If ucrInputExportFile.GetText() <> "" Then
                 dlgSave.InitialDirectory = ucrInputExportFile.GetText().Replace("/", "\")
             Else
