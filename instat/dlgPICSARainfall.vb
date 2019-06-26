@@ -744,14 +744,18 @@ Public Class dlgPICSARainfall
         If clsBaseOperator.ContainsParameter("hlinemean") OrElse clsBaseOperator.ContainsParameter("hlinemedian") OrElse clsBaseOperator.ContainsParameter("hlinelowertercile") OrElse clsBaseOperator.ContainsParameter("hlineuppertercile") Then
             clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
             If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
-                clsGroupByFunction.AddParameter("0", "variable", bIncludeArgumentName:=False, iPosition:=0)
+
+                clsGroupByFunction.AddParameter("x", "variable", bIncludeArgumentName:=False, iPosition:=0)
             Else
-                If (Not ucrReceiverColourBy.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty) Then
-                    clsGroupByFunction.AddParameter("0", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+                If ucrReceiverColourBy.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty Then
+                    'clsGroupByFunction.AddParameter("x", ucrReceiverFacetBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+                ElseIf (Not ucrReceiverColourBy.IsEmpty AndAlso Not ucrReceiverFacetBy.IsEmpty) Then
+                    clsGroupByFunction.AddParameter("x", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
                 ElseIf (Not ucrReceiverColourBy.IsEmpty AndAlso ucrReceiverFacetBy.IsEmpty) Then
-                    clsGroupByFunction.AddParameter("0", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+                    clsGroupByFunction.AddParameter("x", ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
                 Else
-                    clsGroupByFunction.RemoveParameterByName("0")
+                    clsGroupByFunction.RemoveParameterByName("x")
+
                     clsPipeOperator.RemoveParameterByName("group_by")
                 End If
             End If
