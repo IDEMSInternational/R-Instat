@@ -5,7 +5,8 @@ get_default_significant_figures <- function(data) {
 
 convert_to_character_matrix <- function(data, format_decimal_places = TRUE, decimal_places, return_data_frame = TRUE, na_display = NULL, check.names = TRUE) {
   if(nrow(data) == 0) {
-    out <- data
+    out <- matrix(nrow = 0, ncol = ncol(data))
+    colnames(out) <- colnames(data)
   }
   else {
     out = matrix(nrow = nrow(data), ncol = ncol(data))
