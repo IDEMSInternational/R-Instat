@@ -42,6 +42,8 @@ Public Class dlgPICSARainfall
     Private clsGeomPoint As New RFunction
     Private clsPointsFunc As New RFunction
     Private clsPointsParam As New RParameter
+    Private clsGeomRug As New RFunction
+    Private clsRugParam As New RParameter
     Private clsYLabsFunction, clsXLabsFunction, clsLabsFunction As RFunction
     Private clsXAxisLabels, clsYAxisLabels As New RFunction
     Private clsPnlBackgroundFunction, clsPnlGridLinesFunction As RFunction
@@ -165,6 +167,16 @@ Public Class dlgPICSARainfall
         clsPointsFunc.AddParameter("size", "3")
         clsPointsFunc.AddParameter("colour", Chr(34) & "red" & Chr(34))
         ucrChkPoints.SetParameter(clsPointsParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrChkRug.SetText("Add Rug Plot")
+        ucrChkRug.AddParameterPresentCondition(True, "rug")
+        ucrChkRug.AddParameterPresentCondition(False, "rug", False)
+        clsGeomRug.SetPackageName("ggplot2")
+        clsGeomRug.SetRCommand("geom_rug")
+        clsRugParam.SetArgumentName("rug")
+        clsRugParam.SetArgument(clsGeomRug)
+        ucrChkRug.SetParameter(clsRugParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
 
         ucrSave.SetPrefix("PICSA_Rainfall_Graph")
         ucrSave.SetIsComboBox()
@@ -302,6 +314,7 @@ Public Class dlgPICSARainfall
         clsGeomLine.AddParameter("colour", Chr(34) & "blue" & Chr(34))
         clsGeomLine.AddParameter("size", "0.8")
         clsBaseOperator.AddParameter(clsPointsParam)
+        clsBaseOperator.AddParameter(clsRugParam)
 
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetFunction.SetRCommand("facet_wrap")
@@ -588,6 +601,7 @@ Public Class dlgPICSARainfall
         ucrReceiverFacetBy.SetRCode(clsFacetOperator, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
+        ucrChkRug.SetRCode(clsBaseOperator, bReset)
         ucrVariablesAsFactorForPicsa.SetRCode(clsAsNumeric, bReset)
 
         If bReset Then
