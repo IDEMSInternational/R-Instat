@@ -53,6 +53,7 @@ Partial Class dlgPICSARainfall
         Me.cmdPICSAOptions = New System.Windows.Forms.Button()
         Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
         Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.ucrChkRug = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblFactorOptional
@@ -212,11 +213,20 @@ Partial Class dlgPICSARainfall
         Me.lblFacetBy.Tag = ""
         Me.lblFacetBy.Text = "Facet By (Optional):"
         '
+        'ucrChkRug
+        '
+        Me.ucrChkRug.Checked = False
+        Me.ucrChkRug.Location = New System.Drawing.Point(115, 291)
+        Me.ucrChkRug.Name = "ucrChkRug"
+        Me.ucrChkRug.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkRug.TabIndex = 33
+        '
         'dlgPICSARainfall
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(429, 407)
+        Me.Controls.Add(Me.ucrChkRug)
         Me.Controls.Add(Me.ucrReceiverFacetBy)
         Me.Controls.Add(Me.lblFacetBy)
         Me.Controls.Add(Me.cmdLineOptions)
@@ -258,4 +268,5 @@ Partial Class dlgPICSARainfall
     Friend WithEvents cmdPICSAOptions As Button
     Friend WithEvents ucrReceiverFacetBy As ucrReceiverSingle
     Friend WithEvents lblFacetBy As Label
+    Friend WithEvents ucrChkRug As ucrCheck
 End Class
