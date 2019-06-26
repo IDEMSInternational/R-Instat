@@ -370,11 +370,11 @@ Partial Class frmMain
         Me.ToolStripSeparator27 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuExportDataSet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuExportRObjects = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuExportRWorkspace = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuExportGraphAsImage = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileExport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileExportExportDataSet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileExportExportRObjects = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileExportExportRWorkspace = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileExportExportGraphAsImage = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileCloseData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepare = New System.Windows.Forms.ToolStripMenuItem()
@@ -2437,7 +2437,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.ToolStripSeparator35, Me.mnuFileOpenFromODK, Me.mnuFileOpenFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportandTidyNetCDFFile, Me.ToolStripSeparator27, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFileExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.ToolStripSeparator35, Me.mnuFileOpenFromODK, Me.mnuFileOpenFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportandTidyNetCDFFile, Me.ToolStripSeparator27, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFileExit})
         Me.mnuFile.Name = "mnuFile"
         resources.ApplyResources(Me.mnuFile, "mnuFile")
         Me.mnuFile.Tag = "File"
@@ -2500,31 +2500,31 @@ Partial Class frmMain
         Me.tlSeparatorFile.Name = "tlSeparatorFile"
         resources.ApplyResources(Me.tlSeparatorFile, "tlSeparatorFile")
         '
-        'mnuExport
+        'mnuFileExport
         '
-        Me.mnuExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuExportDataSet, Me.mnuExportRObjects, Me.mnuExportRWorkspace, Me.mnuExportGraphAsImage})
-        Me.mnuExport.Name = "mnuExport"
-        resources.ApplyResources(Me.mnuExport, "mnuExport")
+        Me.mnuFileExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileExportExportDataSet, Me.mnuFileExportExportRObjects, Me.mnuFileExportExportRWorkspace, Me.mnuFileExportExportGraphAsImage})
+        Me.mnuFileExport.Name = "mnuFileExport"
+        resources.ApplyResources(Me.mnuFileExport, "mnuFileExport")
         '
-        'mnuExportDataSet
+        'mnuFileExportExportDataSet
         '
-        Me.mnuExportDataSet.Name = "mnuExportDataSet"
-        resources.ApplyResources(Me.mnuExportDataSet, "mnuExportDataSet")
+        Me.mnuFileExportExportDataSet.Name = "mnuFileExportExportDataSet"
+        resources.ApplyResources(Me.mnuFileExportExportDataSet, "mnuFileExportExportDataSet")
         '
-        'mnuExportRObjects
+        'mnuFileExportExportRObjects
         '
-        Me.mnuExportRObjects.Name = "mnuExportRObjects"
-        resources.ApplyResources(Me.mnuExportRObjects, "mnuExportRObjects")
+        Me.mnuFileExportExportRObjects.Name = "mnuFileExportExportRObjects"
+        resources.ApplyResources(Me.mnuFileExportExportRObjects, "mnuFileExportExportRObjects")
         '
-        'mnuExportRWorkspace
+        'mnuFileExportExportRWorkspace
         '
-        Me.mnuExportRWorkspace.Name = "mnuExportRWorkspace"
-        resources.ApplyResources(Me.mnuExportRWorkspace, "mnuExportRWorkspace")
+        Me.mnuFileExportExportRWorkspace.Name = "mnuFileExportExportRWorkspace"
+        resources.ApplyResources(Me.mnuFileExportExportRWorkspace, "mnuFileExportExportRWorkspace")
         '
-        'mnuExportGraphAsImage
+        'mnuFileExportExportGraphAsImage
         '
-        Me.mnuExportGraphAsImage.Name = "mnuExportGraphAsImage"
-        resources.ApplyResources(Me.mnuExportGraphAsImage, "mnuExportGraphAsImage")
+        Me.mnuFileExportExportGraphAsImage.Name = "mnuFileExportExportGraphAsImage"
+        resources.ApplyResources(Me.mnuFileExportExportGraphAsImage, "mnuFileExportExportGraphAsImage")
         '
         'mnuFileCloseData
         '
@@ -3845,7 +3845,7 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareColumnGeneratePermuteRows As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnReshapeColumnSummaries As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnReshapeRandomSubset As ToolStripMenuItem
-    Friend WithEvents mnuExport As ToolStripMenuItem
+    Friend WithEvents mnuFileExport As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectDataFrameMetadata As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectCopyDataFrame As ToolStripMenuItem
     Friend WithEvents mnuTbLast10Dialogs As ToolStripDropDownButton
@@ -4180,10 +4180,10 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticPrepareExtremes As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareEndOfRains As ToolStripMenuItem
     Friend WithEvents ExportToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuExportDataSet As ToolStripMenuItem
-    Friend WithEvents mnuExportRWorkspace As ToolStripMenuItem
-    Friend WithEvents mnuExportGraphAsImage As ToolStripMenuItem
-    Friend WithEvents mnuExportRObjects As ToolStripMenuItem
+    Friend WithEvents mnuFileExportExportDataSet As ToolStripMenuItem
+    Friend WithEvents mnuFileExportExportRWorkspace As ToolStripMenuItem
+    Friend WithEvents mnuFileExportExportGraphAsImage As ToolStripMenuItem
+    Friend WithEvents mnuFileExportExportRObjects As ToolStripMenuItem
     Friend WithEvents mnuDescribeGeneralUseSummaries As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator38 As ToolStripSeparator
     Friend WithEvents mnuClimaticDescribeWindSpeedDirectionWindRose As ToolStripMenuItem
