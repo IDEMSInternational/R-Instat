@@ -37,7 +37,6 @@ Public Class ucrDayOfYear
     Private str28Days(27) As String
     Private str29Days(28) As String
 
-
     Public Sub New()
 
         ' This call is required by the designer.
@@ -134,9 +133,6 @@ Public Class ucrDayOfYear
                     iDoy = ModPos(iDoy - iStartDay + 1, If(b366DayOfYear, 366, 365))
                     Return iDoy
                 End If
-                iDoy = dtTemp.DayOfYear
-                iDoy = ModPos(iDoy - iStartDay + 1, If(b366DayOfYear, 366, 365))
-                Return iDoy
             Catch ex As Exception
                 MsgBox("Developer error: Invalid month and/or day value. For control: " & Name & ".")
             End Try
@@ -278,6 +274,7 @@ Public Class ucrDayOfYear
                 iDoy = ModPos(iDoy + iStartDay - 1, If(b366DayOfYear, 366, 365))
                 dtTemp = New Date(year:=iYear, month:=1, day:=1).AddDays(iDoy - 1)
                 bUpdate = False
+
                 'TODO this should be done through a method in ucrInputMonth
                 ucrInputMonth.cboInput.SelectedIndex = dtTemp.Month - 1
                 ucrInputDay.SetName(dtTemp.Day)
@@ -306,6 +303,4 @@ Public Class ucrDayOfYear
         End If
         Return y
     End Function
-
-
 End Class
