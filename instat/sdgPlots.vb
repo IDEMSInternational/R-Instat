@@ -405,7 +405,7 @@ Public Class sdgPlots
         ucrChkUsePolarCoordinates.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkDirectionAnticlockwise.SetRCode(clsCoordPolarFunc, bReset:=True, bCloneIfNeeded:=True)
         ucrChkStartingAngle.SetRCode(clsCoordPolarFunc, bReset, bCloneIfNeeded:=True)
-        ucrtxtStartingAngle.SetRCode(clsCoordPolarFunc, bReset, bCloneIfNeeded:=True)
+
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, bReset:=bReset)
         bRCodeSet = True
@@ -786,7 +786,7 @@ Public Class sdgPlots
         If ucrChkStartingAngle.Checked Then
             If ucrtxtStartingAngle.GetText = "" Then
                 clsCoordPolarFunc.AddParameter("start", "1")
-            ElseIf ucrtxtStartingAngle.GetText <> ""
+            ElseIf ucrtxtStartingAngle.GetText <> "" Then
                 clsCoordPolarFunc.AddParameter("start", ucrtxtStartingAngle.GetText() & "*pi")
             End If
         Else
