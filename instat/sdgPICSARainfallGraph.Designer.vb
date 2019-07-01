@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgPICSARainfallGraph
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class sdgPICSARainfallGraph
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgPICSARainfallGraph))
         Me.lblXTo = New System.Windows.Forms.Label()
@@ -68,6 +68,8 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputXTo = New instat.ucrInputTextBox()
         Me.ucrNudXAxisAngle = New instat.ucrNud()
         Me.tpYAxis = New System.Windows.Forms.TabPage()
+        Me.ucrNudUpperLimit = New instat.ucrNud()
+        Me.ucrNudLowerLimit = New instat.ucrNud()
         Me.lblDateDisplayFormat = New System.Windows.Forms.Label()
         Me.rdoYDate = New System.Windows.Forms.RadioButton()
         Me.rdoYNumeric = New System.Windows.Forms.RadioButton()
@@ -75,10 +77,10 @@ Partial Class sdgPICSARainfallGraph
         Me.lblYInStepsOf = New System.Windows.Forms.Label()
         Me.lblYTo = New System.Windows.Forms.Label()
         Me.lblYFrom = New System.Windows.Forms.Label()
-        Me.ucrInputYSpecifyUpperLimitDate = New instat.ucrInputComboBox()
+        Me.ucrInputYSpecifyUpperLimitDateMonth = New instat.ucrInputComboBox()
         Me.ucrInputYSpecifyUpperLimitNumeric = New instat.ucrInputTextBox()
+        Me.ucrInputYSpecifyLowerLimitDateMonth = New instat.ucrInputComboBox()
         Me.ucrChkYSpecifyUpperLimit = New instat.ucrCheck()
-        Me.ucrInputYSpecifyLowerLimitDate = New instat.ucrInputComboBox()
         Me.ucrInputYSpecifyLowerLimitNumeric = New instat.ucrInputTextBox()
         Me.ucrChkYSpecifyLowerLimit = New instat.ucrCheck()
         Me.ucrPnlYAxisType = New instat.UcrPanel()
@@ -528,6 +530,8 @@ Partial Class sdgPICSARainfallGraph
         '
         'tpYAxis
         '
+        Me.tpYAxis.Controls.Add(Me.ucrNudUpperLimit)
+        Me.tpYAxis.Controls.Add(Me.ucrNudLowerLimit)
         Me.tpYAxis.Controls.Add(Me.lblDateDisplayFormat)
         Me.tpYAxis.Controls.Add(Me.rdoYDate)
         Me.tpYAxis.Controls.Add(Me.rdoYNumeric)
@@ -535,10 +539,10 @@ Partial Class sdgPICSARainfallGraph
         Me.tpYAxis.Controls.Add(Me.lblYInStepsOf)
         Me.tpYAxis.Controls.Add(Me.lblYTo)
         Me.tpYAxis.Controls.Add(Me.lblYFrom)
-        Me.tpYAxis.Controls.Add(Me.ucrInputYSpecifyUpperLimitDate)
+        Me.tpYAxis.Controls.Add(Me.ucrInputYSpecifyUpperLimitDateMonth)
         Me.tpYAxis.Controls.Add(Me.ucrInputYSpecifyUpperLimitNumeric)
+        Me.tpYAxis.Controls.Add(Me.ucrInputYSpecifyLowerLimitDateMonth)
         Me.tpYAxis.Controls.Add(Me.ucrChkYSpecifyUpperLimit)
-        Me.tpYAxis.Controls.Add(Me.ucrInputYSpecifyLowerLimitDate)
         Me.tpYAxis.Controls.Add(Me.ucrInputYSpecifyLowerLimitNumeric)
         Me.tpYAxis.Controls.Add(Me.ucrChkYSpecifyLowerLimit)
         Me.tpYAxis.Controls.Add(Me.ucrPnlYAxisType)
@@ -558,6 +562,26 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.tpYAxis, "tpYAxis")
         Me.tpYAxis.Name = "tpYAxis"
         Me.tpYAxis.UseVisualStyleBackColor = True
+        '
+        'ucrNudUpperLimit
+        '
+        Me.ucrNudUpperLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudUpperLimit, "ucrNudUpperLimit")
+        Me.ucrNudUpperLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudUpperLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperLimit.Name = "ucrNudUpperLimit"
+        Me.ucrNudUpperLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudLowerLimit
+        '
+        Me.ucrNudLowerLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLowerLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLowerLimit, "ucrNudLowerLimit")
+        Me.ucrNudLowerLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLowerLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLowerLimit.Name = "ucrNudLowerLimit"
+        Me.ucrNudLowerLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblDateDisplayFormat
         '
@@ -604,12 +628,12 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.lblYFrom, "lblYFrom")
         Me.lblYFrom.Name = "lblYFrom"
         '
-        'ucrInputYSpecifyUpperLimitDate
+        'ucrInputYSpecifyUpperLimitDateMonth
         '
-        Me.ucrInputYSpecifyUpperLimitDate.AddQuotesIfUnrecognised = True
-        Me.ucrInputYSpecifyUpperLimitDate.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYSpecifyUpperLimitDate, "ucrInputYSpecifyUpperLimitDate")
-        Me.ucrInputYSpecifyUpperLimitDate.Name = "ucrInputYSpecifyUpperLimitDate"
+        Me.ucrInputYSpecifyUpperLimitDateMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputYSpecifyUpperLimitDateMonth.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYSpecifyUpperLimitDateMonth, "ucrInputYSpecifyUpperLimitDateMonth")
+        Me.ucrInputYSpecifyUpperLimitDateMonth.Name = "ucrInputYSpecifyUpperLimitDateMonth"
         '
         'ucrInputYSpecifyUpperLimitNumeric
         '
@@ -619,18 +643,18 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrInputYSpecifyUpperLimitNumeric, "ucrInputYSpecifyUpperLimitNumeric")
         Me.ucrInputYSpecifyUpperLimitNumeric.Name = "ucrInputYSpecifyUpperLimitNumeric"
         '
+        'ucrInputYSpecifyLowerLimitDateMonth
+        '
+        Me.ucrInputYSpecifyLowerLimitDateMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputYSpecifyLowerLimitDateMonth.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYSpecifyLowerLimitDateMonth, "ucrInputYSpecifyLowerLimitDateMonth")
+        Me.ucrInputYSpecifyLowerLimitDateMonth.Name = "ucrInputYSpecifyLowerLimitDateMonth"
+        '
         'ucrChkYSpecifyUpperLimit
         '
         Me.ucrChkYSpecifyUpperLimit.Checked = False
         resources.ApplyResources(Me.ucrChkYSpecifyUpperLimit, "ucrChkYSpecifyUpperLimit")
         Me.ucrChkYSpecifyUpperLimit.Name = "ucrChkYSpecifyUpperLimit"
-        '
-        'ucrInputYSpecifyLowerLimitDate
-        '
-        Me.ucrInputYSpecifyLowerLimitDate.AddQuotesIfUnrecognised = True
-        Me.ucrInputYSpecifyLowerLimitDate.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYSpecifyLowerLimitDate, "ucrInputYSpecifyLowerLimitDate")
-        Me.ucrInputYSpecifyLowerLimitDate.Name = "ucrInputYSpecifyLowerLimitDate"
         '
         'ucrInputYSpecifyLowerLimitNumeric
         '
@@ -1406,10 +1430,8 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents ucrChkYAxisLabelSize As ucrCheck
     Friend WithEvents rdoYDate As RadioButton
     Friend WithEvents rdoYNumeric As RadioButton
-    Friend WithEvents ucrInputYSpecifyUpperLimitDate As ucrInputComboBox
     Friend WithEvents ucrInputYSpecifyUpperLimitNumeric As ucrInputTextBox
     Friend WithEvents ucrChkYSpecifyUpperLimit As ucrCheck
-    Friend WithEvents ucrInputYSpecifyLowerLimitDate As ucrInputComboBox
     Friend WithEvents ucrInputYSpecifyLowerLimitNumeric As ucrInputTextBox
     Friend WithEvents ucrChkYSpecifyLowerLimit As ucrCheck
     Friend WithEvents lblDateDisplayFormat As Label
@@ -1424,4 +1446,8 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents lblMinorGridLineLinetype As Label
     Friend WithEvents lblMinorGridLineColour As Label
     Friend WithEvents lblMajorGridLineColour As Label
+    Friend WithEvents ucrInputYSpecifyUpperLimitDateMonth As ucrInputComboBox
+    Friend WithEvents ucrInputYSpecifyLowerLimitDateMonth As ucrInputComboBox
+    Friend WithEvents ucrNudUpperLimit As ucrNud
+    Friend WithEvents ucrNudLowerLimit As ucrNud
 End Class
