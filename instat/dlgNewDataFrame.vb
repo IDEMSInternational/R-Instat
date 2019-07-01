@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 
 Public Class dlgNewDataFrame
     Private clsEmptyOverallFunction, clsEmptyMatrixFunction As New RFunction
@@ -186,8 +187,8 @@ Public Class dlgNewDataFrame
         ucrNudCols.SetRCode(clsEmptyMatrixFunction, bReset)
         ucrNudRows.SetRCode(clsEmptyMatrixFunction, bReset)
 
-        ucrNewDFName.AddAdditionalRCode(clsConstructFunction, iAdditionalPairNo:=1)
-        ucrNewDFName.SetRCode(clsEmptyOverallFunction, bReset)
+        ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
+        ucrNewDFName.SetRCode(clsConstructFunction, bReset)
 
         If bReset Then
             ucrPnlDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -207,14 +208,24 @@ Public Class dlgNewDataFrame
     Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged
         If rdoConstruct.Checked Then
             dataGridView.Visible = True
+            btnTry.Visible = True
+            ucrInputTryMessage.Visible = True
+            ucrInputTryMessage.SetText("")
+            ucrInputTryMessage.txtInput.BackColor = Color.White
             ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
         ElseIf rdoCommand.Checked Then
             dataGridView.Visible = False
+            btnTry.Visible = True
+            ucrInputTryMessage.Visible = True
+            ucrInputTryMessage.SetText("")
+            ucrInputTryMessage.txtInput.BackColor = Color.White
             ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
         ElseIf rdoRandom.Checked Then
             'TODO 
         ElseIf rdoEmpty.Checked Then
+            btnTry.Visible = False
+            ucrInputTryMessage.Visible = False
             dataGridView.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
         End If
@@ -227,11 +238,14 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub ucrInputCommand_ContentsChanged() Handles ucrInputCommand.ContentsChanged
+        ucrInputTryMessage.SetText("")
         ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
         TestOKEnabled()
     End Sub
 
     Private Sub dataGridView_ValueChanged(sender As Object, e As EventArgs) Handles dataGridView.CellValueChanged
+        ucrInputTryMessage.SetText("")
+        ucrInputTryMessage.txtInput.BackColor = Color.White
         TestOKEnabled()
     End Sub
 
@@ -277,8 +291,8 @@ Public Class dlgNewDataFrame
         lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data = NA, nrow = 10, ncol = 2))", "10 rows and 2 columns filled with missing values"}))
         lstView.Items.Add(New ListViewItem({"data.frame(x = 1:30, y = rnorm(30, mean = 100, sd = 15), z = runif(30, min = 10, max = 30))", " "}))
         lstView.Items.Add(New ListViewItem({"data.frame(block = gl(4, 3), treat = c(""C"", ""A"", ""B"", ""B"", ""C"", ""A"", ""A"", ""B"", ""C"", ""A"", ""C"", ""B""), yield = c(74, 68,  50, 62, 68, 57, 70, 56, 83, 67, 67, 59))", " "}))
-        'lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 100, data_theme = ""the_works"")", " "}))
-        'lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 30, id, race, age, sex, hour, iq, height, died, Scoring = rnorm, Smoker = valid)", " "}))
+        lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 100, data_theme = ""the_works"")", " "}))
+        lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 30, id, race, age, sex, hour, iq, height, died, Scoring = rnorm, Smoker = valid)", " "}))
 
         'set respective handlers
         AddHandler lstView.LostFocus, Sub()
@@ -296,4 +310,39 @@ Public Class dlgNewDataFrame
         frm.Location = New Point(ctlpos.X - 2, ctlpos.Y - frm.Height - 2) 'set location to show the form just above the examples button
         frm.Show()
     End Sub
+
+    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles btnTry.Click
+        Dim vecOutput As CharacterVector
+        Dim strScript As String = ""
+        Try
+
+            If rdoConstruct.Checked Then
+                strScript = clsConstructFunction.ToScript
+            ElseIf rdoCommand.Checked Then
+                If ucrInputCommand.IsEmpty Then
+                    ucrInputTryMessage.SetText("")
+                    ucrInputTryMessage.txtInput.BackColor = Color.White
+                    Return
+                End If
+                strScript = ucrInputCommand.GetText
+            End If
+
+            vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strScript, bSilent:=True)
+            If vecOutput IsNot Nothing Then
+                'If strVecOutput.Length > 0 Then
+                'End If
+                ucrInputTryMessage.SetText("Command Ok.")
+                ucrInputTryMessage.txtInput.BackColor = Color.White
+            Else
+                ucrInputTryMessage.SetText("Command produced an error or no output to display.")
+                ucrInputTryMessage.txtInput.BackColor = Color.Red
+            End If
+
+
+        Catch ex As Exception
+            ucrInputTryMessage.SetText("Command produced an error.")
+            ucrInputTryMessage.txtInput.BackColor = Color.Red
+        End Try
+    End Sub
+
 End Class

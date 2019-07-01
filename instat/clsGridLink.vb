@@ -419,7 +419,7 @@ Public Class clsGridLink
             FormatDataView(fillWorkSheet)
         End If
         Try
-            lstColumnNames = dfTemp.ColumnNames.ToList
+            lstColumnNames = strColumnNames.ToList
             strCurrColNames = frmMain.clsRLink.GetListAsRString(lstColumnNames)
 
             If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists AndAlso bIncludeDataTypes Then
