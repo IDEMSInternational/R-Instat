@@ -1507,7 +1507,7 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_vline)
 
         For Each Geom In lstAllGeoms
-            Geom.AddLayerParameter("key_glyph", "list", "draw_key_point", lstParameterStrings:={"draw_key_point", "draw_key_abline", "draw_key_rect", "draw_key_polygon", "draw_key_blank", "draw_key_boxplot", "draw_key_crossbar", "draw_key_path", "draw_key_vpath", "draw_key_dotplot", "draw_key_pointrange", "draw_key_smooth", "draw_key_text", "draw_key_label", "draw_key_vline", "draw_key_timeseries"})
+            Geom.AddLayerParameter("key_glyph", "list", Chr(34) & "point" & Chr(34), lstParameterStrings:={Chr(34) & "point" & Chr(34), Chr(34) & "abline" & Chr(34), Chr(34) & "rect" & Chr(34), Chr(34) & "polygon" & Chr(34), Chr(34) & "blank" & Chr(34), Chr(34) & "boxplot" & Chr(34), Chr(34) & "crossbar" & Chr(34), Chr(34) & "path" & Chr(34), Chr(34) & "vpath" & Chr(34), Chr(34) & "dotplot" & Chr(34), Chr(34) & "pointrange" & Chr(34), Chr(34) & "smooth" & Chr(34), Chr(34) & "text" & Chr(34), Chr(34) & "label" & Chr(34), Chr(34) & "vline" & Chr(34), Chr(34) & "timeseries" & Chr(34)})
         Next
 
     End Sub
