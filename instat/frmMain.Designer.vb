@@ -149,7 +149,7 @@ Partial Class frmMain
         Me.mnuView = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDataView = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewOutputWindow = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuViewLogWindow = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewLog = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewScriptWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
@@ -1236,7 +1236,7 @@ Partial Class frmMain
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLogWindow, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout})
         Me.mnuView.Name = "mnuView"
         resources.ApplyResources(Me.mnuView, "mnuView")
         Me.mnuView.Tag = "View"
@@ -1252,11 +1252,11 @@ Partial Class frmMain
         Me.mnuViewOutputWindow.Name = "mnuViewOutputWindow"
         resources.ApplyResources(Me.mnuViewOutputWindow, "mnuViewOutputWindow")
         '
-        'mnuViewLogWindow
+        'mnuViewLog
         '
-        Me.mnuViewLogWindow.Name = "mnuViewLogWindow"
-        resources.ApplyResources(Me.mnuViewLogWindow, "mnuViewLogWindow")
-        Me.mnuViewLogWindow.Tag = "Log"
+        Me.mnuViewLog.Name = "mnuViewLog"
+        resources.ApplyResources(Me.mnuViewLog, "mnuViewLog")
+        Me.mnuViewLog.Tag = "Log"
         '
         'mnuViewScriptWindow
         '
@@ -3827,7 +3827,7 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareColumnReshapeMerge As ToolStripMenuItem
     Friend WithEvents mnuViewColumnMetadata As ToolStripMenuItem
     Friend WithEvents mnuViewDataFrameMetadata As ToolStripMenuItem
-    Friend WithEvents mnuViewLogWindow As ToolStripMenuItem
+    Friend WithEvents mnuViewLog As ToolStripMenuItem
     Friend WithEvents mnuViewScriptWindow As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObject As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectDeleteDataFrame As ToolStripMenuItem
