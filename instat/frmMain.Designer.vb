@@ -149,7 +149,7 @@ Partial Class frmMain
         Me.mnuView = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDataView = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewOutputWindow = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuViewLog = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewLogWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewScriptWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
@@ -167,7 +167,7 @@ Partial Class frmMain
         Me.mnuHelpWindows = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpDataViewSpreadsheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpMenus = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpR = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpAboutR = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpRPackagesCommands = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpDataset = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator29 = New System.Windows.Forms.ToolStripSeparator()
@@ -1236,7 +1236,7 @@ Partial Class frmMain
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLogWindow, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout})
         Me.mnuView.Name = "mnuView"
         resources.ApplyResources(Me.mnuView, "mnuView")
         Me.mnuView.Tag = "View"
@@ -1252,11 +1252,11 @@ Partial Class frmMain
         Me.mnuViewOutputWindow.Name = "mnuViewOutputWindow"
         resources.ApplyResources(Me.mnuViewOutputWindow, "mnuViewOutputWindow")
         '
-        'mnuViewLog
+        'mnuViewLogWindow
         '
-        Me.mnuViewLog.Name = "mnuViewLog"
-        resources.ApplyResources(Me.mnuViewLog, "mnuViewLog")
-        Me.mnuViewLog.Tag = "Log"
+        Me.mnuViewLogWindow.Name = "mnuViewLogWindow"
+        resources.ApplyResources(Me.mnuViewLogWindow, "mnuViewLogWindow")
+        Me.mnuViewLogWindow.Tag = "Log"
         '
         'mnuViewScriptWindow
         '
@@ -1310,7 +1310,7 @@ Partial Class frmMain
         '
         'mnuHelp
         '
-        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpHelpIntroduction, Me.mnuHelpHistFAQ, Me.mnuHelpGetingStarted, Me.ToolStripSeparator28, Me.mnuHelpWindows, Me.mnuHelpDataViewSpreadsheet, Me.mnuHelpMenus, Me.mnuHelpR, Me.mnuHelpRPackagesCommands, Me.mnuHelpDataset, Me.ToolStripSeparator29, Me.mnuHelpGuide, Me.mnuHelpAboutRInstat, Me.mnuHelpLicence, Me.mnuHelpAcknowledgments})
+        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpHelpIntroduction, Me.mnuHelpHistFAQ, Me.mnuHelpGetingStarted, Me.ToolStripSeparator28, Me.mnuHelpWindows, Me.mnuHelpDataViewSpreadsheet, Me.mnuHelpMenus, Me.mnuHelpAboutR, Me.mnuHelpRPackagesCommands, Me.mnuHelpDataset, Me.ToolStripSeparator29, Me.mnuHelpGuide, Me.mnuHelpAboutRInstat, Me.mnuHelpLicence, Me.mnuHelpAcknowledgments})
         Me.mnuHelp.Name = "mnuHelp"
         resources.ApplyResources(Me.mnuHelp, "mnuHelp")
         Me.mnuHelp.Tag = "Help"
@@ -1350,10 +1350,10 @@ Partial Class frmMain
         Me.mnuHelpMenus.Name = "mnuHelpMenus"
         resources.ApplyResources(Me.mnuHelpMenus, "mnuHelpMenus")
         '
-        'mnuHelpR
+        'mnuHelpAboutR
         '
-        Me.mnuHelpR.Name = "mnuHelpR"
-        resources.ApplyResources(Me.mnuHelpR, "mnuHelpR")
+        Me.mnuHelpAboutR.Name = "mnuHelpAboutR"
+        resources.ApplyResources(Me.mnuHelpAboutR, "mnuHelpAboutR")
         '
         'mnuHelpRPackagesCommands
         '
@@ -3827,7 +3827,7 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareColumnReshapeMerge As ToolStripMenuItem
     Friend WithEvents mnuViewColumnMetadata As ToolStripMenuItem
     Friend WithEvents mnuViewDataFrameMetadata As ToolStripMenuItem
-    Friend WithEvents mnuViewLog As ToolStripMenuItem
+    Friend WithEvents mnuViewLogWindow As ToolStripMenuItem
     Friend WithEvents mnuViewScriptWindow As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObject As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectDeleteDataFrame As ToolStripMenuItem
@@ -4072,7 +4072,7 @@ Partial Class frmMain
     Friend WithEvents mnuHelpGetingStarted As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator28 As ToolStripSeparator
     Friend WithEvents mnuHelpMenus As ToolStripMenuItem
-    Friend WithEvents mnuHelpR As ToolStripMenuItem
+    Friend WithEvents mnuHelpAboutR As ToolStripMenuItem
     Friend WithEvents mnuHelpRPackagesCommands As ToolStripMenuItem
     Friend WithEvents mnuHelpDataset As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator29 As ToolStripSeparator

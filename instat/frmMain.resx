@@ -866,10 +866,10 @@
   <data name="mnuViewOutputWindow.Text" xml:space="preserve">
     <value>Output Window</value>
   </data>
-  <data name="mnuViewLog.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuViewLogWindow.Size" type="System.Drawing.Size, System.Drawing">
     <value>252, 26</value>
   </data>
-  <data name="mnuViewLog.Text" xml:space="preserve">
+  <data name="mnuViewLogWindow.Text" xml:space="preserve">
     <value>Log Window</value>
   </data>
   <data name="mnuViewScriptWindow.Size" type="System.Drawing.Size, System.Drawing">
@@ -965,10 +965,10 @@
   <data name="mnuHelpMenus.Text" xml:space="preserve">
     <value>Menus and Dialogs</value>
   </data>
-  <data name="mnuHelpR.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuHelpAboutR.Size" type="System.Drawing.Size, System.Drawing">
     <value>265, 26</value>
   </data>
-  <data name="mnuHelpR.Text" xml:space="preserve">
+  <data name="mnuHelpAboutR.Text" xml:space="preserve">
     <value>About R</value>
   </data>
   <data name="mnuHelpRPackagesCommands.Size" type="System.Drawing.Size, System.Drawing">
@@ -987,13 +987,13 @@
     <value>262, 6</value>
   </data>
   <data name="mnuHelpGuidesCaseStudy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 26</value>
+    <value>216, 26</value>
   </data>
   <data name="mnuHelpGuidesCaseStudy.Text" xml:space="preserve">
     <value>Case Study Guide</value>
   </data>
   <data name="mnuHelpGuideGlosary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 26</value>
+    <value>216, 26</value>
   </data>
   <data name="mnuHelpGuideGlosary.Text" xml:space="preserve">
     <value>Glossary</value>
@@ -1002,7 +1002,7 @@
     <value>False</value>
   </data>
   <data name="mnuhelpGuidesMore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 26</value>
+    <value>216, 26</value>
   </data>
   <data name="mnuhelpGuidesMore.Text" xml:space="preserve">
     <value>More...</value>
@@ -3532,13 +3532,13 @@
     <value>Describe</value>
   </data>
   <data name="mnuOptionsByContextModelFitModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 26</value>
+    <value>216, 26</value>
   </data>
   <data name="mnuOptionsByContextModelFitModel.Text" xml:space="preserve">
     <value>Fit Model...</value>
   </data>
   <data name="mnuOptionsByContextGeneralFitModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 26</value>
+    <value>216, 26</value>
   </data>
   <data name="mnuOptionsByContextGeneralFitModel.Text" xml:space="preserve">
     <value>General Fit Model...</value>
@@ -6510,10 +6510,10 @@
   <data name="&gt;&gt;mnuViewOutputWindow.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuViewLog.Name" xml:space="preserve">
-    <value>mnuViewLog</value>
+  <data name="&gt;&gt;mnuViewLogWindow.Name" xml:space="preserve">
+    <value>mnuViewLogWindow</value>
   </data>
-  <data name="&gt;&gt;mnuViewLog.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuViewLogWindow.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuViewScriptWindow.Name" xml:space="preserve">
@@ -6618,10 +6618,10 @@
   <data name="&gt;&gt;mnuHelpMenus.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuHelpR.Name" xml:space="preserve">
-    <value>mnuHelpR</value>
+  <data name="&gt;&gt;mnuHelpAboutR.Name" xml:space="preserve">
+    <value>mnuHelpAboutR</value>
   </data>
-  <data name="&gt;&gt;mnuHelpR.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuHelpAboutR.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuHelpRPackagesCommands.Name" xml:space="preserve">
