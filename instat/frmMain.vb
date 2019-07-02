@@ -255,7 +255,7 @@ Public Class frmMain
 
         mnuViewDataView.Checked = True
         mnuViewOutputWindow.Checked = True
-        mnuViewLog.Checked = False
+        mnuViewLogWindow.Checked = False
         mnuViewDataFrameMetadata.Checked = False
         mnuViewColumnMetadata.Checked = False
         mnuViewScriptWindow.Checked = False
@@ -433,7 +433,7 @@ Public Class frmMain
     End Sub
 
     Private Sub UpdateLayout()
-        If Not mnuViewDataView.Checked AndAlso Not mnuViewOutputWindow.Checked AndAlso Not mnuViewColumnMetadata.Checked AndAlso Not mnuViewDataFrameMetadata.Checked AndAlso Not mnuViewLog.Checked AndAlso Not mnuViewScriptWindow.Checked Then
+        If Not mnuViewDataView.Checked AndAlso Not mnuViewOutputWindow.Checked AndAlso Not mnuViewColumnMetadata.Checked AndAlso Not mnuViewDataFrameMetadata.Checked AndAlso Not mnuViewLogWindow.Checked AndAlso Not mnuViewScriptWindow.Checked Then
             splOverall.Hide()
         Else
             splOverall.Show()
@@ -444,7 +444,7 @@ Public Class frmMain
             Else
                 splOverall.Panel2Collapsed = True
             End If
-            If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked OrElse mnuViewLog.Checked OrElse mnuViewScriptWindow.Checked Then
+            If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked OrElse mnuViewLogWindow.Checked OrElse mnuViewScriptWindow.Checked Then
                 splOverall.Panel1Collapsed = False
 
                 If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
@@ -455,9 +455,9 @@ Public Class frmMain
                     splExtraWindows.Panel1Collapsed = True
                 End If
 
-                If mnuViewLog.Checked OrElse mnuViewScriptWindow.Checked Then
+                If mnuViewLogWindow.Checked OrElse mnuViewScriptWindow.Checked Then
                     splExtraWindows.Panel2Collapsed = False
-                    splLogScript.Panel1Collapsed = Not mnuViewLog.Checked
+                    splLogScript.Panel1Collapsed = Not mnuViewLogWindow.Checked
                     splLogScript.Panel2Collapsed = Not mnuViewScriptWindow.Checked
                 Else
                     splExtraWindows.Panel2Collapsed = True
@@ -469,7 +469,7 @@ Public Class frmMain
         mnuTbDataView.Checked = mnuViewDataView.Checked
         mnuTbOutput.Checked = mnuViewOutputWindow.Checked
         mnuTbColumnMetadata.Checked = mnuViewColumnMetadata.Checked
-        mnuTbLog.Checked = mnuViewLog.Checked
+        mnuTbLog.Checked = mnuViewLogWindow.Checked
     End Sub
 
     Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
@@ -482,8 +482,8 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub LogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewLog.Click
-        mnuViewLog.Checked = Not mnuViewLog.Checked
+    Private Sub LogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewLogWindow.Click
+        mnuViewLogWindow.Checked = Not mnuViewLogWindow.Checked
         UpdateLayout()
     End Sub
 
@@ -1211,7 +1211,7 @@ Public Class frmMain
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "26")
     End Sub
 
-    Private Sub mnuHelpR_Click(sender As Object, e As EventArgs) Handles mnuHelpR.Click
+    Private Sub mnuHelpR_Click(sender As Object, e As EventArgs) Handles mnuHelpAboutR.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "133")
     End Sub
 
@@ -1696,7 +1696,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbLog_Click(sender As Object, e As EventArgs) Handles mnuTbLog.Click
-        mnuViewLog.Checked = Not mnuViewLog.Checked
+        mnuViewLogWindow.Checked = Not mnuViewLogWindow.Checked
         UpdateLayout()
     End Sub
 
