@@ -1276,7 +1276,7 @@ Public Class frmMain
         dlgAddComment.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticMarkovModelling_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelsMarkovModelling.Click
+    Private Sub mnuClimaticMarkovModelling_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelMarkovModelling.Click
         dlgNewMarkovChains.ShowDialog()
     End Sub
 
@@ -2112,11 +2112,11 @@ Public Class frmMain
         dlgDuplicates.ShowDialog()
     End Sub
 
-    Private Sub UseModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseModelToolStripMenuItem.Click
+    Private Sub UseModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelUseModel.Click
         dlgUseModel.ShowDialog()
     End Sub
 
-    Private Sub mnuCumExeedenceGraph_Click(sender As Object, e As EventArgs) Handles mnuCumExeedenceGraph.Click
+    Private Sub mnuCumExeedenceGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSACumExeedenceGraph.Click
         dlgCumulativeDistribution.ShowDialog()
     End Sub
 End Class
