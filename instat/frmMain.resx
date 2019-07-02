@@ -3210,10 +3210,10 @@
   <data name="mnuPrepare.Text" xml:space="preserve">
     <value>Prepare</value>
   </data>
-  <data name="OpenFromLibraryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementOpenFromLibrary.Size" type="System.Drawing.Size, System.Drawing">
     <value>263, 26</value>
   </data>
-  <data name="OpenFromLibraryToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuProcurementOpenFromLibrary.Text" xml:space="preserve">
     <value>Open From Library...</value>
   </data>
   <data name="mnuProcurementDefineData.Size" type="System.Drawing.Size, System.Drawing">
@@ -3258,16 +3258,16 @@
   <data name="ToolStripSeparator43.Size" type="System.Drawing.Size, System.Drawing">
     <value>434, 6</value>
   </data>
-  <data name="SummariseRedFlagsByCountryorOtherToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementPrepareSummariseRedFlagsByCountryorOther.Size" type="System.Drawing.Size, System.Drawing">
     <value>437, 26</value>
   </data>
-  <data name="SummariseRedFlagsByCountryorOtherToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuProcurementPrepareSummariseRedFlagsByCountryorOther.Text" xml:space="preserve">
     <value>Summarise Red Flags by Country (or other)...</value>
   </data>
-  <data name="SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther.Size" type="System.Drawing.Size, System.Drawing">
     <value>437, 26</value>
   </data>
-  <data name="SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther.Text" xml:space="preserve">
     <value>Summarise Red Flags by Country and Year (or other)...</value>
   </data>
   <data name="mnuProcurementPrepareMergeAdditionalData.Size" type="System.Drawing.Size, System.Drawing">
@@ -3282,16 +3282,16 @@
   <data name="mnuProcurementPrepare.Text" xml:space="preserve">
     <value>Prepare</value>
   </data>
-  <data name="OneVariableSummariseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementDescribeOneVariableSummarise.Size" type="System.Drawing.Size, System.Drawing">
     <value>255, 26</value>
   </data>
-  <data name="OneVariableSummariseToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuProcurementDescribeOneVariableSummarise.Text" xml:space="preserve">
     <value>One Variable Summarise...</value>
   </data>
-  <data name="OneVariableGraphToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementDescribeOneVariableGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>255, 26</value>
   </data>
-  <data name="OneVariableGraphToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuProcurementDescribeOneVariableGraph.Text" xml:space="preserve">
     <value>One Variable Graph...</value>
   </data>
   <data name="ToolStripSeparator44.Size" type="System.Drawing.Size, System.Drawing">
@@ -3312,28 +3312,28 @@
   <data name="ToolStripSeparator52.Size" type="System.Drawing.Size, System.Drawing">
     <value>390, 6</value>
   </data>
-  <data name="BarChartsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementDescribeCategoricalBarCharts.Size" type="System.Drawing.Size, System.Drawing">
     <value>393, 26</value>
   </data>
-  <data name="BarChartsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuProcurementDescribeCategoricalBarCharts.Text" xml:space="preserve">
     <value>Bar Chart...</value>
   </data>
-  <data name="MosaicPlotToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementDescribeCategoricalMosaic.Size" type="System.Drawing.Size, System.Drawing">
     <value>393, 26</value>
   </data>
-  <data name="MosaicPlotToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuProcurementDescribeCategoricalMosaic.Text" xml:space="preserve">
     <value>Mosaic Plot...</value>
   </data>
-  <data name="CategoricalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementDescribeCategorical.Size" type="System.Drawing.Size, System.Drawing">
     <value>255, 26</value>
   </data>
-  <data name="CategoricalToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuProcurementDescribeCategorical.Text" xml:space="preserve">
     <value>Categorical</value>
   </data>
-  <data name="BoxplotToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementDescribeNumericBoxplot.Size" type="System.Drawing.Size, System.Drawing">
     <value>314, 26</value>
   </data>
-  <data name="BoxplotToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuProcurementDescribeNumericBoxplot.Text" xml:space="preserve">
     <value>Boxplot...</value>
   </data>
   <data name="HistogramToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -3345,16 +3345,16 @@
   <data name="ToolStripSeparator53.Size" type="System.Drawing.Size, System.Drawing">
     <value>311, 6</value>
   </data>
-  <data name="CorrelationsRedFlagsOrOthersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers.Size" type="System.Drawing.Size, System.Drawing">
     <value>314, 26</value>
   </data>
-  <data name="CorrelationsRedFlagsOrOthersToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers.Text" xml:space="preserve">
     <value>Correlations (Red Flags or others)...</value>
   </data>
-  <data name="NumericToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementDescribeNumeric.Size" type="System.Drawing.Size, System.Drawing">
     <value>255, 26</value>
   </data>
-  <data name="NumericToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuProcurementDescribeNumeric.Text" xml:space="preserve">
     <value>Numeric</value>
   </data>
   <data name="mnuProcurementDescribe.Size" type="System.Drawing.Size, System.Drawing">
@@ -3363,22 +3363,22 @@
   <data name="mnuProcurementDescribe.Text" xml:space="preserve">
     <value>Describe</value>
   </data>
-  <data name="MapCountryValuesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementMappingMapCountryValues.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 26</value>
   </data>
-  <data name="MapCountryValuesToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuProcurementMappingMapCountryValues.Text" xml:space="preserve">
     <value>Map Country Values...</value>
   </data>
-  <data name="MappingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementMapping.Size" type="System.Drawing.Size, System.Drawing">
     <value>263, 26</value>
   </data>
-  <data name="MappingToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuProcurementMapping.Text" xml:space="preserve">
     <value>Mapping</value>
   </data>
-  <data name="mnuProcurementDefineCorruption.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementModelDefineCorruption.Size" type="System.Drawing.Size, System.Drawing">
     <value>356, 26</value>
   </data>
-  <data name="mnuProcurementDefineCorruption.Text" xml:space="preserve">
+  <data name="mnuProcurementModelDefineCorruption.Text" xml:space="preserve">
     <value>Define Corruption Risk Output Variables...</value>
   </data>
   <data name="mnuProcurementModelFitModelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -3402,10 +3402,10 @@
   <data name="mnuProcurementDefineRedFlags.Text" xml:space="preserve">
     <value>Define Red Flag Variables...</value>
   </data>
-  <data name="mnuProcurementCalculateCRI.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuProcurementCTFVCalculateCRI.Size" type="System.Drawing.Size, System.Drawing">
     <value>335, 26</value>
   </data>
-  <data name="mnuProcurementCalculateCRI.Text" xml:space="preserve">
+  <data name="mnuProcurementCTFVCalculateCRI.Text" xml:space="preserve">
     <value>Calculate Corruption Risk Index (CRI)...</value>
   </data>
   <data name="mnuProcurementUseCRISummariseCRIbyCountry.Size" type="System.Drawing.Size, System.Drawing">
@@ -8592,10 +8592,10 @@
   <data name="&gt;&gt;mnuProcurement.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;OpenFromLibraryToolStripMenuItem.Name" xml:space="preserve">
-    <value>OpenFromLibraryToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuProcurementOpenFromLibrary.Name" xml:space="preserve">
+    <value>mnuProcurementOpenFromLibrary</value>
   </data>
-  <data name="&gt;&gt;OpenFromLibraryToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementOpenFromLibrary.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuProcurementDefineData.Name" xml:space="preserve">
@@ -8652,16 +8652,16 @@
   <data name="&gt;&gt;ToolStripSeparator43.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SummariseRedFlagsByCountryorOtherToolStripMenuItem.Name" xml:space="preserve">
-    <value>SummariseRedFlagsByCountryorOtherToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuProcurementPrepareSummariseRedFlagsByCountryorOther.Name" xml:space="preserve">
+    <value>mnuProcurementPrepareSummariseRedFlagsByCountryorOther</value>
   </data>
-  <data name="&gt;&gt;SummariseRedFlagsByCountryorOtherToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementPrepareSummariseRedFlagsByCountryorOther.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem.Name" xml:space="preserve">
-    <value>SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther.Name" xml:space="preserve">
+    <value>mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther</value>
   </data>
-  <data name="&gt;&gt;SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuProcurementPrepareMergeAdditionalData.Name" xml:space="preserve">
@@ -8676,16 +8676,16 @@
   <data name="&gt;&gt;mnuProcurementDescribe.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;OneVariableSummariseToolStripMenuItem.Name" xml:space="preserve">
-    <value>OneVariableSummariseToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuProcurementDescribeOneVariableSummarise.Name" xml:space="preserve">
+    <value>mnuProcurementDescribeOneVariableSummarise</value>
   </data>
-  <data name="&gt;&gt;OneVariableSummariseToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementDescribeOneVariableSummarise.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;OneVariableGraphToolStripMenuItem.Name" xml:space="preserve">
-    <value>OneVariableGraphToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuProcurementDescribeOneVariableGraph.Name" xml:space="preserve">
+    <value>mnuProcurementDescribeOneVariableGraph</value>
   </data>
-  <data name="&gt;&gt;OneVariableGraphToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementDescribeOneVariableGraph.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator44.Name" xml:space="preserve">
@@ -8694,10 +8694,10 @@
   <data name="&gt;&gt;ToolStripSeparator44.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CategoricalToolStripMenuItem.Name" xml:space="preserve">
-    <value>CategoricalToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuProcurementDescribeCategorical.Name" xml:space="preserve">
+    <value>mnuProcurementDescribeCategorical</value>
   </data>
-  <data name="&gt;&gt;CategoricalToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementDescribeCategorical.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuProcurementDescribeCategoricalOneVarFreq.Name" xml:space="preserve">
@@ -8718,28 +8718,28 @@
   <data name="&gt;&gt;ToolStripSeparator52.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BarChartsToolStripMenuItem.Name" xml:space="preserve">
-    <value>BarChartsToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuProcurementDescribeCategoricalBarCharts.Name" xml:space="preserve">
+    <value>mnuProcurementDescribeCategoricalBarCharts</value>
   </data>
-  <data name="&gt;&gt;BarChartsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementDescribeCategoricalBarCharts.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MosaicPlotToolStripMenuItem.Name" xml:space="preserve">
-    <value>MosaicPlotToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuProcurementDescribeCategoricalMosaic.Name" xml:space="preserve">
+    <value>mnuProcurementDescribeCategoricalMosaic</value>
   </data>
-  <data name="&gt;&gt;MosaicPlotToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementDescribeCategoricalMosaic.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NumericToolStripMenuItem.Name" xml:space="preserve">
-    <value>NumericToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuProcurementDescribeNumeric.Name" xml:space="preserve">
+    <value>mnuProcurementDescribeNumeric</value>
   </data>
-  <data name="&gt;&gt;NumericToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementDescribeNumeric.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BoxplotToolStripMenuItem.Name" xml:space="preserve">
-    <value>BoxplotToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuProcurementDescribeNumericBoxplot.Name" xml:space="preserve">
+    <value>mnuProcurementDescribeNumericBoxplot</value>
   </data>
-  <data name="&gt;&gt;BoxplotToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementDescribeNumericBoxplot.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;HistogramToolStripMenuItem.Name" xml:space="preserve">
@@ -8754,22 +8754,22 @@
   <data name="&gt;&gt;ToolStripSeparator53.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CorrelationsRedFlagsOrOthersToolStripMenuItem.Name" xml:space="preserve">
-    <value>CorrelationsRedFlagsOrOthersToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers.Name" xml:space="preserve">
+    <value>mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers</value>
   </data>
-  <data name="&gt;&gt;CorrelationsRedFlagsOrOthersToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MappingToolStripMenuItem.Name" xml:space="preserve">
-    <value>MappingToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuProcurementMapping.Name" xml:space="preserve">
+    <value>mnuProcurementMapping</value>
   </data>
-  <data name="&gt;&gt;MappingToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementMapping.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MapCountryValuesToolStripMenuItem.Name" xml:space="preserve">
-    <value>MapCountryValuesToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuProcurementMappingMapCountryValues.Name" xml:space="preserve">
+    <value>mnuProcurementMappingMapCountryValues</value>
   </data>
-  <data name="&gt;&gt;MapCountryValuesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementMappingMapCountryValues.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuProcurementModel.Name" xml:space="preserve">
@@ -8778,10 +8778,10 @@
   <data name="&gt;&gt;mnuProcurementModel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuProcurementDefineCorruption.Name" xml:space="preserve">
-    <value>mnuProcurementDefineCorruption</value>
+  <data name="&gt;&gt;mnuProcurementModelDefineCorruption.Name" xml:space="preserve">
+    <value>mnuProcurementModelDefineCorruption</value>
   </data>
-  <data name="&gt;&gt;mnuProcurementDefineCorruption.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementModelDefineCorruption.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuProcurementModelFitModelToolStripMenuItem.Name" xml:space="preserve">
@@ -8808,10 +8808,10 @@
   <data name="&gt;&gt;mnuProcurementUseCRI.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuProcurementCalculateCRI.Name" xml:space="preserve">
-    <value>mnuProcurementCalculateCRI</value>
+  <data name="&gt;&gt;mnuProcurementCTFVCalculateCRI.Name" xml:space="preserve">
+    <value>mnuProcurementCTFVCalculateCRI</value>
   </data>
-  <data name="&gt;&gt;mnuProcurementCalculateCRI.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuProcurementCTFVCalculateCRI.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuProcurementUseCRISummariseCRIbyCountry.Name" xml:space="preserve">

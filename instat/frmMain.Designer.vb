@@ -499,7 +499,7 @@ Partial Class frmMain
         Me.mnuPrepareRObjectsReorder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareRObjectsDelete = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurement = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenFromLibraryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDefineData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementPrepare = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementPrepareFilterByCountry = New System.Windows.Forms.ToolStripMenuItem()
@@ -509,33 +509,33 @@ Partial Class frmMain
         Me.mnuProcurementPrepareSetFactorReferenceLevel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementPrepareUseAwardDate = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator43 = New System.Windows.Forms.ToolStripSeparator()
-        Me.SummariseRedFlagsByCountryorOtherToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementPrepareSummariseRedFlagsByCountryorOther = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementPrepareMergeAdditionalData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribe = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OneVariableSummariseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OneVariableGraphToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeOneVariableSummarise = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator44 = New System.Windows.Forms.ToolStripSeparator()
-        Me.CategoricalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeCategorical = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeCategoricalOneVarFreq = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeCategoricalTwoVarFreq = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator52 = New System.Windows.Forms.ToolStripSeparator()
-        Me.BarChartsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MosaicPlotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NumericToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BoxplotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeCategoricalBarCharts = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeCategoricalMosaic = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeNumeric = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeNumericBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.HistogramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator53 = New System.Windows.Forms.ToolStripSeparator()
-        Me.CorrelationsRedFlagsOrOthersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MappingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MapCountryValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementMapping = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementMappingMapCountryValues = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementModel = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuProcurementDefineCorruption = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementModelDefineCorruption = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementModelFitModelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator45 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuProcurementDefineRedFlags = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementUseCRI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuProcurementCalculateCRI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementCTFVCalculateCRI = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementUseCRISummariseCRIbyCountry = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContext = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextCheckData = New System.Windows.Forms.ToolStripMenuItem()
@@ -3226,14 +3226,14 @@ Partial Class frmMain
         '
         'mnuProcurement
         '
-        Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenFromLibraryToolStripMenuItem, Me.mnuProcurementDefineData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.MappingToolStripMenuItem, Me.mnuProcurementModel, Me.ToolStripSeparator45, Me.mnuProcurementDefineRedFlags, Me.mnuProcurementUseCRI})
+        Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementOpenFromLibrary, Me.mnuProcurementDefineData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.mnuProcurementMapping, Me.mnuProcurementModel, Me.ToolStripSeparator45, Me.mnuProcurementDefineRedFlags, Me.mnuProcurementUseCRI})
         Me.mnuProcurement.Name = "mnuProcurement"
         resources.ApplyResources(Me.mnuProcurement, "mnuProcurement")
         '
-        'OpenFromLibraryToolStripMenuItem
+        'mnuProcurementOpenFromLibrary
         '
-        Me.OpenFromLibraryToolStripMenuItem.Name = "OpenFromLibraryToolStripMenuItem"
-        resources.ApplyResources(Me.OpenFromLibraryToolStripMenuItem, "OpenFromLibraryToolStripMenuItem")
+        Me.mnuProcurementOpenFromLibrary.Name = "mnuProcurementOpenFromLibrary"
+        resources.ApplyResources(Me.mnuProcurementOpenFromLibrary, "mnuProcurementOpenFromLibrary")
         '
         'mnuProcurementDefineData
         '
@@ -3242,7 +3242,7 @@ Partial Class frmMain
         '
         'mnuProcurementPrepare
         '
-        Me.mnuProcurementPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementPrepareFilterByCountry, Me.ToolStripSeparator42, Me.mnuProcurementPrepareDefineContractValueCategories, Me.mnuProcurementPrepareRecodeNumericIntoQuantiles, Me.mnuProcurementPrepareSetFactorReferenceLevel, Me.mnuProcurementPrepareUseAwardDate, Me.ToolStripSeparator43, Me.SummariseRedFlagsByCountryorOtherToolStripMenuItem, Me.SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem, Me.mnuProcurementPrepareMergeAdditionalData})
+        Me.mnuProcurementPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementPrepareFilterByCountry, Me.ToolStripSeparator42, Me.mnuProcurementPrepareDefineContractValueCategories, Me.mnuProcurementPrepareRecodeNumericIntoQuantiles, Me.mnuProcurementPrepareSetFactorReferenceLevel, Me.mnuProcurementPrepareUseAwardDate, Me.ToolStripSeparator43, Me.mnuProcurementPrepareSummariseRedFlagsByCountryorOther, Me.mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther, Me.mnuProcurementPrepareMergeAdditionalData})
         Me.mnuProcurementPrepare.Name = "mnuProcurementPrepare"
         resources.ApplyResources(Me.mnuProcurementPrepare, "mnuProcurementPrepare")
         '
@@ -3281,15 +3281,15 @@ Partial Class frmMain
         Me.ToolStripSeparator43.Name = "ToolStripSeparator43"
         resources.ApplyResources(Me.ToolStripSeparator43, "ToolStripSeparator43")
         '
-        'SummariseRedFlagsByCountryorOtherToolStripMenuItem
+        'mnuProcurementPrepareSummariseRedFlagsByCountryorOther
         '
-        Me.SummariseRedFlagsByCountryorOtherToolStripMenuItem.Name = "SummariseRedFlagsByCountryorOtherToolStripMenuItem"
-        resources.ApplyResources(Me.SummariseRedFlagsByCountryorOtherToolStripMenuItem, "SummariseRedFlagsByCountryorOtherToolStripMenuItem")
+        Me.mnuProcurementPrepareSummariseRedFlagsByCountryorOther.Name = "mnuProcurementPrepareSummariseRedFlagsByCountryorOther"
+        resources.ApplyResources(Me.mnuProcurementPrepareSummariseRedFlagsByCountryorOther, "mnuProcurementPrepareSummariseRedFlagsByCountryorOther")
         '
-        'SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem
+        'mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther
         '
-        Me.SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem.Name = "SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem"
-        resources.ApplyResources(Me.SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem, "SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem")
+        Me.mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther.Name = "mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther"
+        resources.ApplyResources(Me.mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther, "mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther")
         '
         'mnuProcurementPrepareMergeAdditionalData
         '
@@ -3298,30 +3298,30 @@ Partial Class frmMain
         '
         'mnuProcurementDescribe
         '
-        Me.mnuProcurementDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OneVariableSummariseToolStripMenuItem, Me.OneVariableGraphToolStripMenuItem, Me.ToolStripSeparator44, Me.CategoricalToolStripMenuItem, Me.NumericToolStripMenuItem})
+        Me.mnuProcurementDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeOneVariableSummarise, Me.mnuProcurementDescribeOneVariableGraph, Me.ToolStripSeparator44, Me.mnuProcurementDescribeCategorical, Me.mnuProcurementDescribeNumeric})
         Me.mnuProcurementDescribe.Name = "mnuProcurementDescribe"
         resources.ApplyResources(Me.mnuProcurementDescribe, "mnuProcurementDescribe")
         '
-        'OneVariableSummariseToolStripMenuItem
+        'mnuProcurementDescribeOneVariableSummarise
         '
-        Me.OneVariableSummariseToolStripMenuItem.Name = "OneVariableSummariseToolStripMenuItem"
-        resources.ApplyResources(Me.OneVariableSummariseToolStripMenuItem, "OneVariableSummariseToolStripMenuItem")
+        Me.mnuProcurementDescribeOneVariableSummarise.Name = "mnuProcurementDescribeOneVariableSummarise"
+        resources.ApplyResources(Me.mnuProcurementDescribeOneVariableSummarise, "mnuProcurementDescribeOneVariableSummarise")
         '
-        'OneVariableGraphToolStripMenuItem
+        'mnuProcurementDescribeOneVariableGraph
         '
-        Me.OneVariableGraphToolStripMenuItem.Name = "OneVariableGraphToolStripMenuItem"
-        resources.ApplyResources(Me.OneVariableGraphToolStripMenuItem, "OneVariableGraphToolStripMenuItem")
+        Me.mnuProcurementDescribeOneVariableGraph.Name = "mnuProcurementDescribeOneVariableGraph"
+        resources.ApplyResources(Me.mnuProcurementDescribeOneVariableGraph, "mnuProcurementDescribeOneVariableGraph")
         '
         'ToolStripSeparator44
         '
         Me.ToolStripSeparator44.Name = "ToolStripSeparator44"
         resources.ApplyResources(Me.ToolStripSeparator44, "ToolStripSeparator44")
         '
-        'CategoricalToolStripMenuItem
+        'mnuProcurementDescribeCategorical
         '
-        Me.CategoricalToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeCategoricalOneVarFreq, Me.mnuProcurementDescribeCategoricalTwoVarFreq, Me.ToolStripSeparator52, Me.BarChartsToolStripMenuItem, Me.MosaicPlotToolStripMenuItem})
-        Me.CategoricalToolStripMenuItem.Name = "CategoricalToolStripMenuItem"
-        resources.ApplyResources(Me.CategoricalToolStripMenuItem, "CategoricalToolStripMenuItem")
+        Me.mnuProcurementDescribeCategorical.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeCategoricalOneVarFreq, Me.mnuProcurementDescribeCategoricalTwoVarFreq, Me.ToolStripSeparator52, Me.mnuProcurementDescribeCategoricalBarCharts, Me.mnuProcurementDescribeCategoricalMosaic})
+        Me.mnuProcurementDescribeCategorical.Name = "mnuProcurementDescribeCategorical"
+        resources.ApplyResources(Me.mnuProcurementDescribeCategorical, "mnuProcurementDescribeCategorical")
         '
         'mnuProcurementDescribeCategoricalOneVarFreq
         '
@@ -3338,26 +3338,26 @@ Partial Class frmMain
         Me.ToolStripSeparator52.Name = "ToolStripSeparator52"
         resources.ApplyResources(Me.ToolStripSeparator52, "ToolStripSeparator52")
         '
-        'BarChartsToolStripMenuItem
+        'mnuProcurementDescribeCategoricalBarCharts
         '
-        Me.BarChartsToolStripMenuItem.Name = "BarChartsToolStripMenuItem"
-        resources.ApplyResources(Me.BarChartsToolStripMenuItem, "BarChartsToolStripMenuItem")
+        Me.mnuProcurementDescribeCategoricalBarCharts.Name = "mnuProcurementDescribeCategoricalBarCharts"
+        resources.ApplyResources(Me.mnuProcurementDescribeCategoricalBarCharts, "mnuProcurementDescribeCategoricalBarCharts")
         '
-        'MosaicPlotToolStripMenuItem
+        'mnuProcurementDescribeCategoricalMosaic
         '
-        Me.MosaicPlotToolStripMenuItem.Name = "MosaicPlotToolStripMenuItem"
-        resources.ApplyResources(Me.MosaicPlotToolStripMenuItem, "MosaicPlotToolStripMenuItem")
+        Me.mnuProcurementDescribeCategoricalMosaic.Name = "mnuProcurementDescribeCategoricalMosaic"
+        resources.ApplyResources(Me.mnuProcurementDescribeCategoricalMosaic, "mnuProcurementDescribeCategoricalMosaic")
         '
-        'NumericToolStripMenuItem
+        'mnuProcurementDescribeNumeric
         '
-        Me.NumericToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BoxplotToolStripMenuItem, Me.HistogramToolStripMenuItem, Me.ToolStripSeparator53, Me.CorrelationsRedFlagsOrOthersToolStripMenuItem})
-        Me.NumericToolStripMenuItem.Name = "NumericToolStripMenuItem"
-        resources.ApplyResources(Me.NumericToolStripMenuItem, "NumericToolStripMenuItem")
+        Me.mnuProcurementDescribeNumeric.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeNumericBoxplot, Me.HistogramToolStripMenuItem, Me.ToolStripSeparator53, Me.mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers})
+        Me.mnuProcurementDescribeNumeric.Name = "mnuProcurementDescribeNumeric"
+        resources.ApplyResources(Me.mnuProcurementDescribeNumeric, "mnuProcurementDescribeNumeric")
         '
-        'BoxplotToolStripMenuItem
+        'mnuProcurementDescribeNumericBoxplot
         '
-        Me.BoxplotToolStripMenuItem.Name = "BoxplotToolStripMenuItem"
-        resources.ApplyResources(Me.BoxplotToolStripMenuItem, "BoxplotToolStripMenuItem")
+        Me.mnuProcurementDescribeNumericBoxplot.Name = "mnuProcurementDescribeNumericBoxplot"
+        resources.ApplyResources(Me.mnuProcurementDescribeNumericBoxplot, "mnuProcurementDescribeNumericBoxplot")
         '
         'HistogramToolStripMenuItem
         '
@@ -3369,32 +3369,32 @@ Partial Class frmMain
         Me.ToolStripSeparator53.Name = "ToolStripSeparator53"
         resources.ApplyResources(Me.ToolStripSeparator53, "ToolStripSeparator53")
         '
-        'CorrelationsRedFlagsOrOthersToolStripMenuItem
+        'mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers
         '
-        Me.CorrelationsRedFlagsOrOthersToolStripMenuItem.Name = "CorrelationsRedFlagsOrOthersToolStripMenuItem"
-        resources.ApplyResources(Me.CorrelationsRedFlagsOrOthersToolStripMenuItem, "CorrelationsRedFlagsOrOthersToolStripMenuItem")
+        Me.mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers.Name = "mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers"
+        resources.ApplyResources(Me.mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers, "mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers")
         '
-        'MappingToolStripMenuItem
+        'mnuProcurementMapping
         '
-        Me.MappingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MapCountryValuesToolStripMenuItem})
-        Me.MappingToolStripMenuItem.Name = "MappingToolStripMenuItem"
-        resources.ApplyResources(Me.MappingToolStripMenuItem, "MappingToolStripMenuItem")
+        Me.mnuProcurementMapping.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementMappingMapCountryValues})
+        Me.mnuProcurementMapping.Name = "mnuProcurementMapping"
+        resources.ApplyResources(Me.mnuProcurementMapping, "mnuProcurementMapping")
         '
-        'MapCountryValuesToolStripMenuItem
+        'mnuProcurementMappingMapCountryValues
         '
-        Me.MapCountryValuesToolStripMenuItem.Name = "MapCountryValuesToolStripMenuItem"
-        resources.ApplyResources(Me.MapCountryValuesToolStripMenuItem, "MapCountryValuesToolStripMenuItem")
+        Me.mnuProcurementMappingMapCountryValues.Name = "mnuProcurementMappingMapCountryValues"
+        resources.ApplyResources(Me.mnuProcurementMappingMapCountryValues, "mnuProcurementMappingMapCountryValues")
         '
         'mnuProcurementModel
         '
-        Me.mnuProcurementModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDefineCorruption, Me.mnuProcurementModelFitModelToolStripMenuItem})
+        Me.mnuProcurementModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementModelDefineCorruption, Me.mnuProcurementModelFitModelToolStripMenuItem})
         Me.mnuProcurementModel.Name = "mnuProcurementModel"
         resources.ApplyResources(Me.mnuProcurementModel, "mnuProcurementModel")
         '
-        'mnuProcurementDefineCorruption
+        'mnuProcurementModelDefineCorruption
         '
-        Me.mnuProcurementDefineCorruption.Name = "mnuProcurementDefineCorruption"
-        resources.ApplyResources(Me.mnuProcurementDefineCorruption, "mnuProcurementDefineCorruption")
+        Me.mnuProcurementModelDefineCorruption.Name = "mnuProcurementModelDefineCorruption"
+        resources.ApplyResources(Me.mnuProcurementModelDefineCorruption, "mnuProcurementModelDefineCorruption")
         '
         'mnuProcurementModelFitModelToolStripMenuItem
         '
@@ -3413,14 +3413,14 @@ Partial Class frmMain
         '
         'mnuProcurementUseCRI
         '
-        Me.mnuProcurementUseCRI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementCalculateCRI, Me.mnuProcurementUseCRISummariseCRIbyCountry})
+        Me.mnuProcurementUseCRI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementCTFVCalculateCRI, Me.mnuProcurementUseCRISummariseCRIbyCountry})
         Me.mnuProcurementUseCRI.Name = "mnuProcurementUseCRI"
         resources.ApplyResources(Me.mnuProcurementUseCRI, "mnuProcurementUseCRI")
         '
-        'mnuProcurementCalculateCRI
+        'mnuProcurementCTFVCalculateCRI
         '
-        Me.mnuProcurementCalculateCRI.Name = "mnuProcurementCalculateCRI"
-        resources.ApplyResources(Me.mnuProcurementCalculateCRI, "mnuProcurementCalculateCRI")
+        Me.mnuProcurementCTFVCalculateCRI.Name = "mnuProcurementCTFVCalculateCRI"
+        resources.ApplyResources(Me.mnuProcurementCTFVCalculateCRI, "mnuProcurementCTFVCalculateCRI")
         '
         'mnuProcurementUseCRISummariseCRIbyCountry
         '
@@ -4215,16 +4215,16 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator37 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator42 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator43 As ToolStripSeparator
-    Friend WithEvents SummariseRedFlagsByCountryorOtherToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OneVariableSummariseToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OneVariableGraphToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuProcurementPrepareSummariseRedFlagsByCountryorOther As ToolStripMenuItem
+    Friend WithEvents mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDescribeOneVariableSummarise As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDescribeOneVariableGraph As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator44 As ToolStripSeparator
-    Friend WithEvents MappingToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents MapCountryValuesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuProcurementDefineCorruption As ToolStripMenuItem
+    Friend WithEvents mnuProcurementMapping As ToolStripMenuItem
+    Friend WithEvents mnuProcurementMappingMapCountryValues As ToolStripMenuItem
+    Friend WithEvents mnuProcurementModelDefineCorruption As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator45 As ToolStripSeparator
-    Friend WithEvents mnuProcurementCalculateCRI As ToolStripMenuItem
+    Friend WithEvents mnuProcurementCTFVCalculateCRI As ToolStripMenuItem
     Friend WithEvents mnuFileImportandTidyNetCDFFile As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificMosaic As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificParallelCoordinatePlot As ToolStripMenuItem
@@ -4274,18 +4274,18 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticCMSAFExporttoCMSAFRToolbox As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareConversions As ToolStripMenuItem
     Friend WithEvents mnuHelpAcknowledgments As ToolStripMenuItem
-    Friend WithEvents CategoricalToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NumericToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDescribeCategorical As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDescribeNumeric As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribeCategoricalOneVarFreq As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribeCategoricalTwoVarFreq As ToolStripMenuItem
-    Friend WithEvents CorrelationsRedFlagsOrOthersToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents BarChartsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents MosaicPlotToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents BoxplotToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDescribeCategoricalBarCharts As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDescribeCategoricalMosaic As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDescribeNumericBoxplot As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator52 As ToolStripSeparator
     Friend WithEvents HistogramToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator53 As ToolStripSeparator
-    Friend WithEvents OpenFromLibraryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuProcurementOpenFromLibrary As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineUnstack As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineStack As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineAppend As ToolStripMenuItem
