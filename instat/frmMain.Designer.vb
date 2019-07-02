@@ -218,6 +218,7 @@ Partial Class frmMain
         Me.mnuClimaticCheckDataInventory = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCheckDataDisplayDaily = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCheckDataBoxplot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCheckDataQCTemperatures = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCheckDataQCRainfall = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepare = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCimaticPrepareTransform = New System.Windows.Forms.ToolStripMenuItem()
@@ -369,11 +370,11 @@ Partial Class frmMain
         Me.ToolStripSeparator27 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExportDataSetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExportRObjectsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExportRWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExportGraphAsImageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileExport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileExportExportDataSet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileExportExportRObjectsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileExportExportRWorkspace = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileExportExportGraphAsImage = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileCloseData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepare = New System.Windows.Forms.ToolStripMenuItem()
@@ -579,7 +580,6 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuClimaticCheckDataQCTemperatures = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1605,6 +1605,11 @@ Partial Class frmMain
         Me.mnuClimaticCheckDataBoxplot.Name = "mnuClimaticCheckDataBoxplot"
         resources.ApplyResources(Me.mnuClimaticCheckDataBoxplot, "mnuClimaticCheckDataBoxplot")
         '
+        'mnuClimaticCheckDataQCTemperatures
+        '
+        Me.mnuClimaticCheckDataQCTemperatures.Name = "mnuClimaticCheckDataQCTemperatures"
+        resources.ApplyResources(Me.mnuClimaticCheckDataQCTemperatures, "mnuClimaticCheckDataQCTemperatures")
+        '
         'mnuClimaticCheckDataQCRainfall
         '
         Me.mnuClimaticCheckDataQCRainfall.Name = "mnuClimaticCheckDataQCRainfall"
@@ -2432,7 +2437,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.ToolStripSeparator35, Me.mnuFileOpenFromODK, Me.mnuFileOpenFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportandTidyNetCDFFile, Me.ToolStripSeparator27, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.ToolStripSeparator35, Me.mnuFileOpenFromODK, Me.mnuFileOpenFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportandTidyNetCDFFile, Me.ToolStripSeparator27, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         resources.ApplyResources(Me.mnuFile, "mnuFile")
         Me.mnuFile.Tag = "File"
@@ -2495,31 +2500,31 @@ Partial Class frmMain
         Me.tlSeparatorFile.Name = "tlSeparatorFile"
         resources.ApplyResources(Me.tlSeparatorFile, "tlSeparatorFile")
         '
-        'mnuExport
+        'mnuFileExport
         '
-        Me.mnuExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExportDataSetToolStripMenuItem, Me.ExportRObjectsToolStripMenuItem, Me.ExportRWorkspaceToolStripMenuItem, Me.ExportGraphAsImageToolStripMenuItem})
-        Me.mnuExport.Name = "mnuExport"
-        resources.ApplyResources(Me.mnuExport, "mnuExport")
+        Me.mnuFileExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileExportExportDataSet, Me.mnuFileExportExportRObjectsToolStripMenuItem, Me.mnuFileExportExportRWorkspace, Me.mnuFileExportExportGraphAsImage})
+        Me.mnuFileExport.Name = "mnuFileExport"
+        resources.ApplyResources(Me.mnuFileExport, "mnuFileExport")
         '
-        'ExportDataSetToolStripMenuItem
+        'mnuFileExportExportDataSet
         '
-        Me.ExportDataSetToolStripMenuItem.Name = "ExportDataSetToolStripMenuItem"
-        resources.ApplyResources(Me.ExportDataSetToolStripMenuItem, "ExportDataSetToolStripMenuItem")
+        Me.mnuFileExportExportDataSet.Name = "mnuFileExportExportDataSet"
+        resources.ApplyResources(Me.mnuFileExportExportDataSet, "mnuFileExportExportDataSet")
         '
-        'ExportRObjectsToolStripMenuItem
+        'mnuFileExportExportRObjectsToolStripMenuItem
         '
-        Me.ExportRObjectsToolStripMenuItem.Name = "ExportRObjectsToolStripMenuItem"
-        resources.ApplyResources(Me.ExportRObjectsToolStripMenuItem, "ExportRObjectsToolStripMenuItem")
+        Me.mnuFileExportExportRObjectsToolStripMenuItem.Name = "mnuFileExportExportRObjectsToolStripMenuItem"
+        resources.ApplyResources(Me.mnuFileExportExportRObjectsToolStripMenuItem, "mnuFileExportExportRObjectsToolStripMenuItem")
         '
-        'ExportRWorkspaceToolStripMenuItem
+        'mnuFileExportExportRWorkspace
         '
-        Me.ExportRWorkspaceToolStripMenuItem.Name = "ExportRWorkspaceToolStripMenuItem"
-        resources.ApplyResources(Me.ExportRWorkspaceToolStripMenuItem, "ExportRWorkspaceToolStripMenuItem")
+        Me.mnuFileExportExportRWorkspace.Name = "mnuFileExportExportRWorkspace"
+        resources.ApplyResources(Me.mnuFileExportExportRWorkspace, "mnuFileExportExportRWorkspace")
         '
-        'ExportGraphAsImageToolStripMenuItem
+        'mnuFileExportExportGraphAsImage
         '
-        Me.ExportGraphAsImageToolStripMenuItem.Name = "ExportGraphAsImageToolStripMenuItem"
-        resources.ApplyResources(Me.ExportGraphAsImageToolStripMenuItem, "ExportGraphAsImageToolStripMenuItem")
+        Me.mnuFileExportExportGraphAsImage.Name = "mnuFileExportExportGraphAsImage"
+        resources.ApplyResources(Me.mnuFileExportExportGraphAsImage, "mnuFileExportExportGraphAsImage")
         '
         'mnuFileCloseData
         '
@@ -3713,11 +3718,6 @@ Partial Class frmMain
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
         '
-        'mnuClimaticCheckDataQCTemperatures
-        '
-        Me.mnuClimaticCheckDataQCTemperatures.Name = "mnuClimaticCheckDataQCTemperatures"
-        resources.ApplyResources(Me.mnuClimaticCheckDataQCTemperatures, "mnuClimaticCheckDataQCTemperatures")
-        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -3845,7 +3845,7 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareColumnGeneratePermuteRows As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnReshapeColumnSummaries As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnReshapeRandomSubset As ToolStripMenuItem
-    Friend WithEvents mnuExport As ToolStripMenuItem
+    Friend WithEvents mnuFileExport As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectDataFrameMetadata As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectCopyDataFrame As ToolStripMenuItem
     Friend WithEvents mnuTbLast10Dialogs As ToolStripDropDownButton
@@ -4180,10 +4180,10 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticPrepareExtremes As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareEndOfRains As ToolStripMenuItem
     Friend WithEvents ExportToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ExportDataSetToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ExportRWorkspaceToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ExportGraphAsImageToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ExportRObjectsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuFileExportExportDataSet As ToolStripMenuItem
+    Friend WithEvents mnuFileExportExportRWorkspace As ToolStripMenuItem
+    Friend WithEvents mnuFileExportExportGraphAsImage As ToolStripMenuItem
+    Friend WithEvents mnuFileExportExportRObjectsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FrequencyTablesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator38 As ToolStripSeparator
     Friend WithEvents mnuClimaticDescribeWindSpeedDirectionWindRose As ToolStripMenuItem

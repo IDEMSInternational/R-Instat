@@ -1541,19 +1541,19 @@ Public Class frmMain
         dlgExportRWorkspace.ShowDialog()
     End Sub
 
-    Private Sub ExportDataSetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportDataSetToolStripMenuItem.Click
+    Private Sub ExportDataSetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFileExportExportDataSet.Click
         dlgExportDataset.ShowDialog()
     End Sub
 
-    Private Sub ExportRWorkspaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportRWorkspaceToolStripMenuItem.Click
+    Private Sub ExportRWorkspaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFileExportExportRWorkspace.Click
         dlgExportRWorkspace.ShowDialog()
     End Sub
 
-    Private Sub ExportGraphAsImageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportGraphAsImageToolStripMenuItem.Click
+    Private Sub ExportGraphAsImageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFileExportExportGraphAsImage.Click
         dlgExportGraphAsImage.ShowDialog()
     End Sub
 
-    Private Sub ExportRObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportRObjectsToolStripMenuItem.Click
+    Private Sub ExportRObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFileExportExportRObjectsToolStripMenuItem.Click
         dlgExportRObjects.ShowDialog()
     End Sub
 
