@@ -700,7 +700,7 @@ Public Class frmMain
     '    dlgGeneralRegression.ShowDialog()
     'End Sub
 
-    Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeGeneralGraphics.Click
+    Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralGraphics.Click
         dlgGeneralForGraphics.ShowDialog()
     End Sub
 
@@ -855,7 +855,7 @@ Public Class frmMain
         mnuEditFind_Click(sender, e)
     End Sub
 
-    Private Sub ColourByPropertyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColourByPropertyToolStripMenuItem.Click
+    Private Sub ColourByPropertyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataframeColourByProperty.Click
         'TODO change this dialog
         '     dlgMetadata should be separate
         dlgColourbyProperty.ShowDialog()
@@ -1152,7 +1152,7 @@ Public Class frmMain
         dlgBarAndPieChart.ShowDialog()
     End Sub
 
-    Private Sub mnuOrganiseColumnMakeDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnMakeDate.Click
+    Private Sub mnuOrganiseColumnMakeDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateMakeDate.Click
         dlgMakeDate.ShowDialog()
     End Sub
 
@@ -1180,7 +1180,7 @@ Public Class frmMain
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub mnuOrganiseColumnUseDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnUseDate.Click
+    Private Sub mnuOrganiseColumnUseDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateUseDate.Click
         dlgUseDate.ShowDialog()
     End Sub
 
@@ -1248,7 +1248,7 @@ Public Class frmMain
         dlgOpenSST.ShowDialog()
     End Sub
 
-    Private Sub mnuOrgCalculateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareCalculateDuplicateColumn.Click
+    Private Sub mnuOrgCalculateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateDuplicateColumn.Click
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
@@ -1505,7 +1505,7 @@ Public Class frmMain
         dlgImportGriddedData.ShowDialog()
     End Sub
 
-    Private Sub RatingDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RatingDataToolStripMenuItem.Click
+    Private Sub RatingDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableRatingData.Click
         dlgRatingScales.ShowDialog()
     End Sub
 
@@ -1557,7 +1557,7 @@ Public Class frmMain
         dlgExportRObjects.ShowDialog()
     End Sub
 
-    Private Sub FrequencyTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrequencyTablesToolStripMenuItem.Click
+    Private Sub FrequencyTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralUseSummaries.Click
         dlgSummaryBarOrPieChart.ShowDialog()
     End Sub
     Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click
@@ -1586,7 +1586,7 @@ Public Class frmMain
         dlgWindrose.ShowDialog()
     End Sub
 
-    Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CummulativeDistributionToolStripMenuItem.Click
+    Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificCummulativeDistribution.Click
         dlgCumulativeDistribution.ShowDialog()
     End Sub
 
@@ -1676,7 +1676,7 @@ Public Class frmMain
         dlgDisplayDailyData.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnInfillMissingDates.Click
+    Private Sub mnuPrepareColumnInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateInfillMissingDates.Click
         dlgInfill.ShowDialog()
     End Sub
 
@@ -1902,7 +1902,7 @@ Public Class frmMain
         dlgHypothesisTestsCalculator.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnGenerateDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateDate.Click
+    Private Sub mnuPrepareColumnGenerateDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateGenerateDate.Click
         dlgRegularSequence.bNumericIsDefault = False
         dlgRegularSequence.ShowDialog()
     End Sub
