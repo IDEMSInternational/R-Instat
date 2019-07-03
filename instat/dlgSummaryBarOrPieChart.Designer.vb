@@ -55,6 +55,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrSummaryBarSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrChkLabel = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblYvariable
@@ -177,10 +178,17 @@ Partial Class dlgSummaryBarOrPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'ucrChkLabel
+        '
+        Me.ucrChkLabel.Checked = False
+        resources.ApplyResources(Me.ucrChkLabel, "ucrChkLabel")
+        Me.ucrChkLabel.Name = "ucrChkLabel"
+        '
         'dlgSummaryBarOrPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkLabel)
         Me.Controls.Add(Me.rdoTable)
         Me.Controls.Add(Me.rdoPieChart)
         Me.Controls.Add(Me.ucrSaveSummaryBar)
@@ -223,4 +231,5 @@ Partial Class dlgSummaryBarOrPieChart
     Friend WithEvents rdoBarChart As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents rdoTable As RadioButton
+    Friend WithEvents ucrChkLabel As ucrCheck
 End Class
