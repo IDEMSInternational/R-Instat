@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgCorruptionDefineCorruptionOutputs
+Partial Class dlgCorruptionDefineOutputs
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -38,7 +38,7 @@ Partial Class dlgCorruptionDefineCorruptionOutputs
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCorruptionDefineCorruptionOutputs))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCorruptionDefineOutputs))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverCorruptionOutputs = New instat.ucrReceiverMultiple()
         Me.ucrSelectorCorruptionOutputs = New instat.ucrSelectorByDataFrameAddRemove()
@@ -72,7 +72,7 @@ Partial Class dlgCorruptionDefineCorruptionOutputs
         resources.ApplyResources(Me.lblCorruptionOutputs, "lblCorruptionOutputs")
         Me.lblCorruptionOutputs.Name = "lblCorruptionOutputs"
         '
-        'dlgCorruptionDefineCorruptionOutputs
+        'dlgCorruptionDefineOutputs
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -83,7 +83,7 @@ Partial Class dlgCorruptionDefineCorruptionOutputs
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgCorruptionDefineCorruptionOutputs"
+        Me.Name = "dlgCorruptionDefineOutputs"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
