@@ -1378,7 +1378,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuProcurementModelFitModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementModelFitModelToolStripMenuItem.Click
-        dlgCorruptionFitCorruptionModel.ShowDialog()
+        dlgCorruptionFitModel.ShowDialog()
     End Sub
 
     Private Sub mnuProcurementDefineRedFlags_Click(sender As Object, e As EventArgs) Handles mnuProcurementDefineRedFlags.Click
