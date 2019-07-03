@@ -102,11 +102,11 @@ Public Class dlgSummaryBarOrPieChart
         clsRCoordPolarParam.SetArgumentName("coord_polar")
         clsRCoordPolarParam.SetArgument(clsRCoordPolarFunction)
 
-        ucrChkLabel.SetText("Label")
         ucrLabelReceiver.SetParameter(New RParameter("label", 3))
         ucrLabelReceiver.Selector = ucrSummaryBarSelector
         ucrLabelReceiver.bWithQuotes = False
         ucrLabelReceiver.SetParameterIsString()
+        ucrChkLabel.SetText("Label")
 
 
     End Sub
@@ -137,12 +137,13 @@ Public Class dlgSummaryBarOrPieChart
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
 
+
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
         clsRgeomBarFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
 
         clsLabelgeomFunction.SetPackageName("ggplot2")
-        clsLabelgeomFunction.SetPackageName("geom_label")
+        clsLabelgeomFunction.SetRCommand("geom_label")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -166,7 +167,6 @@ Public Class dlgSummaryBarOrPieChart
         ucrReceiverSecondFactor.SetRCode(clsRaesFunction, bReset)
         ucrSaveSummaryBar.SetRCode(clsBaseOperator, bReset)
         ucrSummaryBarSelector.SetRCode(clsRggplotFunction, bReset)
-        ucrLabelReceiver.SetRCode(clsLabelgeomFunction, bReset)
         ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
         SetDialogOptions()
     End Sub
