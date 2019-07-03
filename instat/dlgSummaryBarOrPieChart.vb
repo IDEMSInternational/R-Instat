@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgSummaryBarOrPieChart
     Private clsRggplotFunction As New RFunction
     Private clsRgeomBarFunction As New RFunction
+    Private clsLabelgeomFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsRCoordPolarParam As New RParameter
@@ -100,12 +101,21 @@ Public Class dlgSummaryBarOrPieChart
         clsRCoordPolarFunction.AddParameter("theta", Chr(34) & "y" & Chr(34))
         clsRCoordPolarParam.SetArgumentName("coord_polar")
         clsRCoordPolarParam.SetArgument(clsRCoordPolarFunction)
+
+        ucrChkLabel.SetText("Label")
+        ucrLabelReceiver.SetParameter(New RParameter("label", 3))
+        ucrLabelReceiver.Selector = ucrSummaryBarSelector
+        ucrLabelReceiver.bWithQuotes = False
+        ucrLabelReceiver.SetParameterIsString()
+
+
     End Sub
 
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
         clsRggplotFunction = New RFunction
         clsRgeomBarFunction = New RFunction
+        clsLabelgeomFunction = New RFunction
         clsRaesFunction = New RFunction
 
         ucrSummaryBarSelector.Reset()
@@ -119,6 +129,7 @@ Public Class dlgSummaryBarOrPieChart
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsRgeomBarFunction)
 
+
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
@@ -129,6 +140,9 @@ Public Class dlgSummaryBarOrPieChart
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
         clsRgeomBarFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
+
+        clsLabelgeomFunction.SetPackageName("ggplot2")
+        clsLabelgeomFunction.SetPackageName("geom_label")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -152,6 +166,7 @@ Public Class dlgSummaryBarOrPieChart
         ucrReceiverSecondFactor.SetRCode(clsRaesFunction, bReset)
         ucrSaveSummaryBar.SetRCode(clsBaseOperator, bReset)
         ucrSummaryBarSelector.SetRCode(clsRggplotFunction, bReset)
+        ucrLabelReceiver.SetRCode(clsLabelgeomFunction, bReset)
         ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
         SetDialogOptions()
     End Sub
