@@ -1402,7 +1402,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuProcurementDefineCorruption_Click(sender As Object, e As EventArgs)
-        dlgDefineCorruptionOutputs.ShowDialog()
+        dlgCorruptionDefineCorruptionOutputs.ShowDialog()
     End Sub
 
     Private Sub mnuProcurementPrepareSetFactorReferenceLevel_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareSetFactorReferenceLevel.Click
@@ -1777,7 +1777,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuProcurementDefineCorruption_Click_1(sender As Object, e As EventArgs) Handles mnuProcurementDefineCorruption.Click
-        dlgDefineCorruptionOutputs.ShowDialog()
+        dlgCorruptionDefineCorruptionOutputs.ShowDialog()
     End Sub
 
     Private Sub SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem.Click
