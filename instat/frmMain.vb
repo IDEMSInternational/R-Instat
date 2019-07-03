@@ -1773,7 +1773,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuProcurementCalculateCRI_Click(sender As Object, e As EventArgs) Handles mnuProcurementCalculateCRI.Click
-        dlgDefineCRI.ShowDialog()
+        dlgCorruptionDefineCRI.ShowDialog()
     End Sub
 
     Private Sub mnuProcurementDefineCorruption_Click_1(sender As Object, e As EventArgs) Handles mnuProcurementDefineCorruption.Click
