@@ -409,7 +409,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 288</value>
+    <value>216, 288</value>
   </data>
   <data name="lblLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 13</value>
@@ -430,22 +430,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>425, 399</value>
+    <value>1</value>
   </data>
   <data name="ucrChkLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 288</value>
+    <value>128, 288</value>
   </data>
   <data name="ucrChkLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>82, 20</value>
   </data>
   <data name="ucrChkLabel.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -466,7 +457,7 @@
     <value>10, 288</value>
   </data>
   <data name="ucrSaveSummaryBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 24</value>
+    <value>108, 24</value>
   </data>
   <data name="ucrSaveSummaryBar.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -483,29 +474,38 @@
   <data name="&gt;&gt;ucrSaveSummaryBar.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="ucrReceiverSecondFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 183</value>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
-  <data name="ucrReceiverSecondFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>425, 399</value>
+  </data>
+  <data name="ucrLabelReceiver.Location" type="System.Drawing.Point, System.Drawing">
+    <value>219, 305</value>
+  </data>
+  <data name="ucrLabelReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverSecondFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 26</value>
+  <data name="ucrLabelReceiver.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
   </data>
-  <data name="ucrReceiverSecondFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="ucrLabelReceiver.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSecondFactor.Name" xml:space="preserve">
-    <value>ucrReceiverSecondFactor</value>
+  <data name="&gt;&gt;ucrLabelReceiver.Name" xml:space="preserve">
+    <value>ucrLabelReceiver</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSecondFactor.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrLabelReceiver.Type" xml:space="preserve">
     <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSecondFactor.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrLabelReceiver.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSecondFactor.ZOrder" xml:space="preserve">
-    <value>12</value>
+  <data name="&gt;&gt;ucrLabelReceiver.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrReceiverFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>252, 136</value>
@@ -636,28 +636,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrLabelReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 302</value>
+  <data name="ucrReceiverSecondFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 183</value>
   </data>
-  <data name="ucrLabelReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverSecondFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrLabelReceiver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+  <data name="ucrReceiverSecondFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 26</value>
   </data>
-  <data name="ucrLabelReceiver.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="ucrReceiverSecondFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
-  <data name="&gt;&gt;ucrLabelReceiver.Name" xml:space="preserve">
-    <value>ucrLabelReceiver</value>
+  <data name="&gt;&gt;ucrReceiverSecondFactor.Name" xml:space="preserve">
+    <value>ucrReceiverSecondFactor</value>
   </data>
-  <data name="&gt;&gt;ucrLabelReceiver.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverSecondFactor.Type" xml:space="preserve">
     <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrLabelReceiver.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverSecondFactor.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrLabelReceiver.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;ucrReceiverSecondFactor.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
 </root>

@@ -49,7 +49,6 @@ Partial Class dlgSummaryBarOrPieChart
         Me.rdoPieChart = New System.Windows.Forms.RadioButton()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.lblLabel = New System.Windows.Forms.Label()
-        Me.ucrLabelReceiver = New instat.ucrReceiverSingle()
         Me.ucrChkLabel = New instat.ucrCheck()
         Me.ucrSaveSummaryBar = New instat.ucrSave()
         Me.ucrReceiverSecondFactor = New instat.ucrReceiverSingle()
@@ -58,6 +57,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrSummaryBarSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrLabelReceiver = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblYvariable
@@ -135,15 +135,6 @@ Partial Class dlgSummaryBarOrPieChart
         resources.ApplyResources(Me.lblLabel, "lblLabel")
         Me.lblLabel.Name = "lblLabel"
         '
-        'ucrLabelReceiver
-        '
-        Me.ucrLabelReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrLabelReceiver, "ucrLabelReceiver")
-        Me.ucrLabelReceiver.Name = "ucrLabelReceiver"
-        Me.ucrLabelReceiver.Selector = Nothing
-        Me.ucrLabelReceiver.strNcFilePath = ""
-        Me.ucrLabelReceiver.ucrSelector = Nothing
-        '
         'ucrChkLabel
         '
         Me.ucrChkLabel.Checked = False
@@ -200,12 +191,21 @@ Partial Class dlgSummaryBarOrPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'ucrLabelReceiver
+        '
+        Me.ucrLabelReceiver.frmParent = Me
+        resources.ApplyResources(Me.ucrLabelReceiver, "ucrLabelReceiver")
+        Me.ucrLabelReceiver.Name = "ucrLabelReceiver"
+        Me.ucrLabelReceiver.Selector = Nothing
+        Me.ucrLabelReceiver.strNcFilePath = ""
+        Me.ucrLabelReceiver.ucrSelector = Nothing
+        '
         'dlgSummaryBarOrPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblLabel)
         Me.Controls.Add(Me.ucrLabelReceiver)
+        Me.Controls.Add(Me.lblLabel)
         Me.Controls.Add(Me.ucrChkLabel)
         Me.Controls.Add(Me.rdoTable)
         Me.Controls.Add(Me.rdoPieChart)
