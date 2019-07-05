@@ -158,6 +158,7 @@ Public Class ucrGeom
         Dim clsgeom_step As New Geoms
         Dim clsgeom_text As New Geoms
         Dim clsgeom_tile As New Geoms
+        Dim clsgeom_tufteboxplot As New Geoms
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
 
@@ -404,26 +405,35 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_col)
 
-        'clsgeom_contour.SetGeomName("geom_contour")
+        clsgeom_contour.SetGeomName("geom_contour")
         ''Mandatory
-        'clsgeom_contour.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_contour.AddAesParameter("y", bIsMandatory:=TRUE)
+        clsgeom_contour.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_contour.AddAesParameter("y", bIsMandatory:=True)
+        clsgeom_contour.AddAesParameter("z", bIsMandatory:=True)
+
         ''optional
-        'clsgeom_contour.AddAesParameter("alpha")
-        'clsgeom_contour.AddAesParameter("colour")
-        'clsgeom_contour.AddAesParameter("linetype")
-        'clsgeom_contour.AddAesParameter("size")
-        'clsgeom_contour.AddAesParameter("weight")
+        clsgeom_contour.AddAesParameter("alpha")
+        clsgeom_contour.AddAesParameter("colour")
+        clsgeom_contour.AddAesParameter("group")
+        clsgeom_contour.AddAesParameter("linetype")
+        clsgeom_contour.AddAesParameter("size")
+        clsgeom_contour.AddAesParameter("weight")
 
         ''add layer parameters 
-        'clsgeom_contour.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34))
-        'clsgeom_contour.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_contour.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
-        'clsgeom_contour.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        clsgeom_contour.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34), lstParameterStrings:={Chr(34) & "contour" & Chr(34)})
+        clsgeom_contour.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_contour.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        clsgeom_contour.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
         ''linemitre should 1 or a number >1
-        'clsgeom_contour.AddLayerParameter("linemitre", "numeric", "1")
+        clsgeom_contour.AddLayerParameter("linemitre", "numeric", "10", lstParameterStrings:={1, 1})
+        clsgeom_contour.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_contour.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_contour.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+        clsgeom_contour.AddLayerParameter("bins", "numeric", "1", lstParameterStrings:={0, 1})
+        clsgeom_contour.AddLayerParameter("binwidth", "numeric", "0.01", lstParameterStrings:={3, 0})
+        clsgeom_contour.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         ''bin and binwidth could be added here as well. I am not sure if they are needed.... 
-        'lstAllGeoms.Add(clsgeom_contour)
+        lstAllGeoms.Add(clsgeom_contour)
 
         clsgeom_count.SetGeomName("geom_count")
         'Mandatory Aesthetics
@@ -1266,7 +1276,7 @@ Public Class ucrGeom
         'Can we have  stack, DoDragDrop, fill positions here)
         clsgeom_smooth.AddLayerParameter("method", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "lm" & Chr(34), Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
         'formula has to be an input and we dont have that currently. its passed in like this formula= y ~ x or  formula= y ~ poly(x, 2) or formula= y ~ log(x) so the user has to type in stuff
-        'clsgeom_smooth.AddLayerParameter("formula",)
+        clsgeom_smooth.AddLayerParameter("formula", "editablelist", Chr(34) & "y ~ x" & Chr(34), lstParameterStrings:={Chr(34) & "y ~ x" & Chr(34), Chr(34) & "y ~ poly(x, 2)" & Chr(34), Chr(34) & "y ~ log(x)" & Chr(34), Chr(34) & " y ~ splines::bs(x,3)" & Chr(34)})
         clsgeom_smooth.AddLayerParameter("se", "boolean", "TRUE")
         clsgeom_smooth.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_smooth.AddLayerParameter("na.rm", "boolean", "FALSE")
@@ -1379,8 +1389,8 @@ Public Class ucrGeom
         clsgeom_tile.AddAesParameter("height", strIncludedDataTypes:={"numeric"})
 
         'Global layer parameters
-        clsgeom_tile.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        clsgeom_tile.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_tile.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_tile.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
         clsgeom_tile.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_tile.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_tile.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
@@ -1398,6 +1408,43 @@ Public Class ucrGeom
         'clsgeom_tile.AddLayerParameter("group")
 
         lstAllGeoms.Add(clsgeom_tile)
+
+
+        clsgeom_tufteboxplot.SetGeomName("geom_tufteboxplot")
+        clsgeom_tufteboxplot.SetGeomPackage("ggthemes")
+
+        'Mandatory Aesthetics
+        clsgeom_tufteboxplot.AddAesParameter("x", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_tufteboxplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+
+        'Optional Aesthetics
+        clsgeom_tufteboxplot.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_tufteboxplot.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_tufteboxplot.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_tufteboxplot.AddAesParameter("shape", strIncludedDataTypes:={"factor"})
+        clsgeom_tufteboxplot.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_tufteboxplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+
+        'Layer parameters
+        clsgeom_tufteboxplot.AddLayerParameter("stat", "list", Chr(34) & "fivenumber" & Chr(34), lstParameterStrings:={Chr(34) & "fivenumber" & Chr(34)})
+        clsgeom_tufteboxplot.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "dodge" & Chr(34)})
+        clsgeom_tufteboxplot.AddLayerParameter("outlier.colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_tufteboxplot.AddLayerParameter("outlier.shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strShapePoint)
+        clsgeom_tufteboxplot.AddLayerParameter("outlier.size", "numeric", "1.5", lstParameterStrings:={1, 0})
+        clsgeom_tufteboxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_tufteboxplot.AddLayerParameter("voffset", "numeric", "0.01", lstParameterStrings:={2, 0})
+        clsgeom_tufteboxplot.AddLayerParameter("hoffset", "numeric", "0.005", lstParameterStrings:={3, 0})
+        clsgeom_tufteboxplot.AddLayerParameter("median.type", "list", Chr(34) & "point" & Chr(34), lstParameterStrings:={Chr(34) & "point" & Chr(34), Chr(34) & "line" & Chr(34)})
+        clsgeom_tufteboxplot.AddLayerParameter("whisker.type", "list", Chr(34) & "line" & Chr(34), lstParameterStrings:={Chr(34) & "line" & Chr(34), Chr(34) & "point" & Chr(34)})
+        clsgeom_tufteboxplot.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_tufteboxplot.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_tufteboxplot.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
+        clsgeom_tufteboxplot.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_tufteboxplot.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+
+        lstAllGeoms.Add(clsgeom_tufteboxplot)
+
+
 
         clsgeom_violin.strGeomName = "geom_violin"
         'Mandatory Aesthetics
