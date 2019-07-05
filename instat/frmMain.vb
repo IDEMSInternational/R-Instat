@@ -1353,7 +1353,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuProcurementDefineData_Click(sender As Object, e As EventArgs) Handles mnuProcurementDefineData.Click
-        dlgDefineCorruption.ShowDialog()
+        dlgCorruptionDefineProcurement.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticSCFSupportCumulativeExceedanceGraphs_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportCumulativeExceedanceGraph.Click
@@ -1378,7 +1378,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuProcurementModelFitModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementModelFitModelToolStripMenuItem.Click
-        dlgFitCorruptionModel.ShowDialog()
+        dlgCorruptionFitModel.ShowDialog()
     End Sub
 
     Private Sub mnuProcurementDefineRedFlags_Click(sender As Object, e As EventArgs) Handles mnuProcurementDefineRedFlags.Click
@@ -1402,7 +1402,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuProcurementDefineCorruption_Click(sender As Object, e As EventArgs)
-        dlgDefineCorruptionOutputs.ShowDialog()
+        dlgCorruptionDefineOutputs.ShowDialog()
     End Sub
 
     Private Sub mnuProcurementPrepareSetFactorReferenceLevel_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareSetFactorReferenceLevel.Click
@@ -1772,12 +1772,14 @@ Public Class frmMain
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub mnuProcurementCalculateCRI_Click(sender As Object, e As EventArgs) Handles mnuProcurementCTFVCalculateCRI.Click
-        dlgDefineCRI.ShowDialog()
+
+    Private Sub mnuProcurementCalculateCRI_Click(sender As Object, e As EventArgs) Handles mnuProcurementCalculateCRI.Click
+        dlgCorruptionDefineCRI.ShowDialog()
     End Sub
 
-    Private Sub mnuProcurementDefineCorruption_Click_1(sender As Object, e As EventArgs) Handles mnuProcurementModelDefineCorruption.Click
-        dlgDefineCorruptionOutputs.ShowDialog()
+    Private Sub mnuProcurementDefineCorruption_Click_1(sender As Object, e As EventArgs) Handles mnuProcurementDefineCorruption.Click
+        dlgCorruptionDefineOutputs.ShowDialog()
+
     End Sub
 
     Private Sub SummariseRedFlagsByCountryAndYearorOtherToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareSummariseRedFlagsByCountryAndYearorOther.Click

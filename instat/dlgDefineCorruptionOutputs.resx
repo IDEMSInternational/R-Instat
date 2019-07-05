@@ -119,10 +119,14 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 199</value>
+    <value>13, 245</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 52</value>
+    <value>547, 64</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
@@ -144,19 +148,22 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>422, 260</value>
+    <value>563, 320</value>
   </data>
   <data name="lblCorruptionOutputs.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblCorruptionOutputs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 45</value>
+    <value>361, 55</value>
+  </data>
+  <data name="lblCorruptionOutputs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblCorruptionOutputs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 13</value>
+    <value>132, 17</value>
   </data>
   <data name="lblCorruptionOutputs.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -177,14 +184,13 @@
     <value>0</value>
   </data>
   <data name="ucrSelectorCorruptionOutputs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
+    <value>13, 12</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSelectorCorruptionOutputs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrSelectorCorruptionOutputs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 180</value>
+    <value>280, 222</value>
   </data>
   <data name="ucrSelectorCorruptionOutputs.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -201,6 +207,9 @@
   <data name="&gt;&gt;ucrSelectorCorruptionOutputs.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -208,19 +217,19 @@
     <value>Define Corruption Outputs</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgDefineCorruptionOutputs</value>
+    <value>dlgCorruptionDefineOutputs</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverCorruptionOutputs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 60</value>
+    <value>361, 74</value>
   </data>
   <data name="ucrReceiverCorruptionOutputs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverCorruptionOutputs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 100</value>
+    <value>160, 123</value>
   </data>
   <data name="ucrReceiverCorruptionOutputs.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
