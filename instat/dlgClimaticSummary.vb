@@ -204,11 +204,6 @@ Public Class dlgClimaticSummary
         ucrChkPrintOutput.SetRCode(clsDefaultFunction, bReset)
 
         ucrPnlAnnualWithin.SetRCode(clsDefaultFactors, bReset)
-        ucrReceiverStation.SetRCode(clsDefaultFactors, bReset)
-        ucrReceiverYear.SetRCode(clsDefaultFactors, bReset)
-        ucrReceiverWithinYear.SetRCode(clsDefaultFactors, bReset)
-
-        UpdateRCode()
     End Sub
 
     'TODO: run these things at the correct times
@@ -278,6 +273,7 @@ Public Class dlgClimaticSummary
 
     Private Sub ucrPnlAnnualWithin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualWithin.ControlValueChanged
         WithinYearLabelReceiverLocation()
+        UpdateRCode()
     End Sub
 
     Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
@@ -305,9 +301,22 @@ Public Class dlgClimaticSummary
     End Sub
     Private Sub UpdateRCode()
         If rdoAnnual.Checked Then
-            clsDefaultFactors.RemoveParameterByName("within_variable")
+            If clsDefaultFactors.ContainsParameter("within_variable") Then
+                clsDefaultFactors.RemoveParameterByName("within_variable")
+            End If
+            clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
+        ElseIf rdoAnnualWithinYear.Checked Then
+            If Not clsDefaultFactors.ContainsParameter("within_variable") Then
+                clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
+            End If
+            If Not clsDefaultFactors.ContainsParameter("year") Then
+                clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
+            End If
         ElseIf rdoWithinYear.Checked Then
-            clsDefaultFactors.RemoveParameterByName("year")
+            If clsDefaultFactors.ContainsParameter("year") Then
+                clsDefaultFactors.RemoveParameterByName("year")
+            End If
+            clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
         End If
     End Sub
 End Class
