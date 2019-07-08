@@ -17,7 +17,7 @@
 Imports instat
 Imports instat.Translations
 
-Public Class dlgFitCorruptionModel
+Public Class dlgCorruptionFitModel
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetDisplayOptions As Boolean = True
