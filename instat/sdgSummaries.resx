@@ -1629,6 +1629,30 @@
   <data name="&gt;&gt;tbsum.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrChkCircMean.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 17</value>
+  </data>
+  <data name="ucrChkCircMean.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkCircMean.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 25</value>
+  </data>
+  <data name="ucrChkCircMean.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCircMean.Name" xml:space="preserve">
+    <value>ucrChkCircMean</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCircMean.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCircMean.Parent" xml:space="preserve">
+    <value>tbCircular</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCircMean.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="tbCircular.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
   </data>

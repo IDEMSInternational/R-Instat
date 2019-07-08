@@ -119,6 +119,7 @@ Partial Class sdgSummaries
         Me.tbModel = New System.Windows.Forms.TabPage()
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkCircMean = New instat.ucrCheck()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpProportionsPercentiles.SuspendLayout()
@@ -132,6 +133,7 @@ Partial Class sdgSummaries
         Me.grpNotOrderedFactor.SuspendLayout()
         Me.grpNumeric.SuspendLayout()
         Me.tbSummaries.SuspendLayout()
+        Me.tbCircular.SuspendLayout()
         Me.tbTwoVariables.SuspendLayout()
         Me.grpRelationships.SuspendLayout()
         Me.tbPosition.SuspendLayout()
@@ -574,6 +576,7 @@ Partial Class sdgSummaries
         '
         'tbCircular
         '
+        Me.tbCircular.Controls.Add(Me.ucrChkCircMean)
         resources.ApplyResources(Me.tbCircular, "tbCircular")
         Me.tbCircular.Name = "tbCircular"
         Me.tbCircular.UseVisualStyleBackColor = True
@@ -729,6 +732,12 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         '
+        'ucrChkCircMean
+        '
+        Me.ucrChkCircMean.Checked = False
+        resources.ApplyResources(Me.ucrChkCircMean, "ucrChkCircMean")
+        Me.ucrChkCircMean.Name = "ucrChkCircMean"
+        '
         'sdgSummaries
         '
         resources.ApplyResources(Me, "$this")
@@ -755,6 +764,7 @@ Partial Class sdgSummaries
         Me.grpNotOrderedFactor.ResumeLayout(False)
         Me.grpNumeric.ResumeLayout(False)
         Me.tbSummaries.ResumeLayout(False)
+        Me.tbCircular.ResumeLayout(False)
         Me.tbTwoVariables.ResumeLayout(False)
         Me.tbTwoVariables.PerformLayout()
         Me.grpRelationships.ResumeLayout(False)
@@ -847,4 +857,5 @@ Partial Class sdgSummaries
     Friend WithEvents lblNumberNotMissing As Label
     Friend WithEvents ucrNudNumberNotMissing As ucrNud
     Friend WithEvents tbCircular As TabPage
+    Friend WithEvents ucrChkCircMean As ucrCheck
 End Class
