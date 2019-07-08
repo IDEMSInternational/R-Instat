@@ -88,8 +88,6 @@ Public Class dlgScatterPlot
         ucrReceiverLabel.bWithQuotes = False
         ucrReceiverLabel.Selector = ucrSelectorForScatter
         ucrReceiverLabel.strSelectorHeading = "Variables"
-        ucrReceiverLabel.SetValuesToIgnore({Chr(34) & Chr(34)})
-        ucrReceiverLabel.bAddParameterIfEmpty = True
 
 
         ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
@@ -147,7 +145,6 @@ Public Class dlgScatterPlot
         clsRaesFunction.SetRCommand("aes")
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
-        clsRaesFunction.AddParameter("label", Chr(34) & Chr(34))
 
 
         clsRScatterGeomFunction.SetPackageName("ggplot2")
@@ -208,6 +205,7 @@ Public Class dlgScatterPlot
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRScatterGeomFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorForScatter, bApplyAesGlobally:=True, bReset:=bResetlayerSubdialog)
         'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
         sdgLayerOptions.ShowDialog()
+        ucrReceiverLabel.SetRCode(clsRaesFunction, bReset)
         bResetlayerSubdialog = False
         'The aesthetics parameters on the main dialog are repopulated as required. 
         For Each clsParam In clsRaesFunction.clsParameters
