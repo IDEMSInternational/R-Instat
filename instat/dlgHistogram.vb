@@ -29,10 +29,12 @@ Public Class dlgHistogram
     Private clsYScalecontinuousFunction As New RFunction
     Private clsRFacetFunction As New RFunction
     Private clsThemeFunction As New RFunction
+    Private clsHistAesFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     Private clsLocalRaesFunction As New RFunction
     Private bResetHistLayerSubdialog As Boolean = True
+    Private clsPercentage As New RFunction
 
     Private Sub dlgHistogram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -49,10 +51,11 @@ Public Class dlgHistogram
         autoTranslate(Me)
         TestOkEnabled()
 
-        SetOptionsButtonstext() 
+        SetOptionsButtonstext()
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctStats As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 435
@@ -76,6 +79,19 @@ Public Class dlgHistogram
         ucrFactorReceiver.bWithQuotes = False
         ucrFactorReceiver.SetParameterIsString()
 
+        ucrInputStats.SetParameter(New RParameter("y", 0))
+        dctStats.Add("Counts", "stat(count)")
+        dctStats.Add("Fractions", "stat(count/sum(count))")
+        dctStats.Add("Scaled Fractions", "stat(count/max(count))")
+        ucrInputStats.SetDropDownStyleAsNonEditable()
+        ucrInputStats.SetItems(dctStats)
+        ucrInputStats.AddToLinkedControls(ucrChkPercentages, {"Fractions"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkPercentages.SetText("percentages")
+        ucrChkPercentages.AddParameterPresentCondition(True, "labels", True)
+        ucrChkPercentages.AddParameterPresentCondition(False, "labels", False)
+
+
         ucrVariablesAsFactorforHist.SetParameter(New RParameter("x", 0))
         ucrVariablesAsFactorforHist.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorforHist.Selector = ucrHistogramSelector
@@ -97,6 +113,8 @@ Public Class dlgHistogram
         clsRggplotFunction = New RFunction
         clsRgeomPlotFunction = New RFunction
         clsRaesFunction = New RFunction
+        clsHistAesFunction = New RFunction
+        clsPercentage = New RFunction
 
         ucrHistogramSelector.Reset()
         ucrHistogramSelector.SetGgplotFunction(clsBaseOperator)
@@ -109,7 +127,6 @@ Public Class dlgHistogram
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("histogram", clsRFunctionParameter:=clsRgeomPlotFunction, iPosition:=2)
-
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
@@ -117,8 +134,17 @@ Public Class dlgHistogram
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
 
+        clsHistAesFunction.SetPackageName("ggplot2")
+        clsHistAesFunction.SetRCommand("aes")
+        clsHistAesFunction.AddParameter("y", "stat(count)", iPosition:=0)
+
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         clsRgeomPlotFunction.SetRCommand("geom_histogram")
+        clsRgeomPlotFunction.AddParameter("mapping", clsRFunctionParameter:=clsHistAesFunction)
+
+
+        clsPercentage.SetPackageName("scales")
+        clsPercentage.SetRCommand("percent_format")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -138,10 +164,13 @@ Public Class dlgHistogram
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrVariablesAsFactorforHist.SetRCode(clsRaesFunction, bReset)
+        ucrInputStats.SetRCode(clsHistAesFunction, bReset)
         ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrSaveHist.SetRCode(clsBaseOperator, bReset)
         ucrHistogramSelector.SetRCode(clsRggplotFunction, bReset)
         ucrPnlOptions.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrChkPercentages.SetRCode(clsYScalecontinuousFunction, bReset)
+
     End Sub
 
     Private Sub TestOkEnabled()
@@ -184,7 +213,7 @@ Public Class dlgHistogram
             clsRgeomPlotFunction.SetRCommand("geom_histogram")
             ucrFactorReceiver.ChangeParameterName("fill")
 
-   
+
             If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("histogram")
             End If
@@ -254,6 +283,18 @@ Public Class dlgHistogram
         SetDialogOptions()
     End Sub
 
+    Private Sub Adding_Percentages(ucrChangedControl As ucrCore) Handles ucrInputStats.ControlValueChanged, ucrChkPercentages.ControlValueChanged
+        If ucrInputStats.GetText() = "Fractions" Then
+            ucrChkPercentages.Visible = True
+            If ucrChkPercentages.Checked Then
+                clsYScalecontinuousFunction.AddParameter("labels", clsRFunctionParameter:=clsPercentage)
+                clsBaseOperator.AddParameter("scale", clsRFunctionParameter:=clsYScalecontinuousFunction)
+            Else
+                clsBaseOperator.RemoveParameterByName("scale")
+            End If
+        End If
+    End Sub
+
     Private Sub ucrVariablesAsFactorforHist_SelectionChanged() Handles ucrVariablesAsFactorforHist.SelectionChanged
         TempOptionsDisabledInMultipleVariablesCase()
     End Sub
@@ -279,5 +320,17 @@ Public Class dlgHistogram
 
     Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged
+
+    End Sub
+
+    Private Sub ucrVariablesAsFactorforHist_SelectionChanged(sender As Object, e As EventArgs) Handles ucrVariablesAsFactorforHist.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrPnlOptions_Control(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+
     End Sub
 End Class
