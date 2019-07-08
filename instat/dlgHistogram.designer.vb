@@ -45,6 +45,9 @@ Partial Class dlgHistogram
         Me.rdoDensity = New System.Windows.Forms.RadioButton()
         Me.rdoFrequencyPolygon = New System.Windows.Forms.RadioButton()
         Me.lblfactor = New System.Windows.Forms.Label()
+        Me.lblStats = New System.Windows.Forms.Label()
+        Me.ucrInputStats = New instat.ucrInputComboBox()
+        Me.ucrChkPercentages = New instat.ucrCheck()
         Me.ucrSaveHist = New instat.ucrSave()
         Me.ucrVariablesAsFactorforHist = New instat.ucrVariablesAsFactor()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
@@ -106,6 +109,24 @@ Partial Class dlgHistogram
         Me.lblfactor.Name = "lblfactor"
         Me.lblfactor.Tag = "Factor_Selected:"
         '
+        'lblStats
+        '
+        resources.ApplyResources(Me.lblStats, "lblStats")
+        Me.lblStats.Name = "lblStats"
+        '
+        'ucrInputStats
+        '
+        Me.ucrInputStats.AddQuotesIfUnrecognised = True
+        Me.ucrInputStats.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStats, "ucrInputStats")
+        Me.ucrInputStats.Name = "ucrInputStats"
+        '
+        'ucrChkPercentages
+        '
+        Me.ucrChkPercentages.Checked = False
+        resources.ApplyResources(Me.ucrChkPercentages, "ucrChkPercentages")
+        Me.ucrChkPercentages.Name = "ucrChkPercentages"
+        '
         'ucrSaveHist
         '
         resources.ApplyResources(Me.ucrSaveHist, "ucrSaveHist")
@@ -152,6 +173,9 @@ Partial Class dlgHistogram
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblStats)
+        Me.Controls.Add(Me.ucrInputStats)
+        Me.Controls.Add(Me.ucrChkPercentages)
         Me.Controls.Add(Me.ucrSaveHist)
         Me.Controls.Add(Me.ucrVariablesAsFactorforHist)
         Me.Controls.Add(Me.ucrFactorReceiver)
@@ -185,4 +209,7 @@ Partial Class dlgHistogram
     Friend WithEvents ucrVariablesAsFactorforHist As ucrVariablesAsFactor
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents ucrSaveHist As ucrSave
+    Friend WithEvents ucrInputStats As ucrInputComboBox
+    Friend WithEvents ucrChkPercentages As ucrCheck
+    Friend WithEvents lblStats As Label
 End Class
