@@ -119,14 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 329</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cmdOptions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>10, 267</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 31</value>
+    <value>120, 25</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
@@ -148,13 +144,10 @@
     <value>10</value>
   </data>
   <data name="cmdHistogramOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 290</value>
-  </data>
-  <data name="cmdHistogramOptions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>10, 236</value>
   </data>
   <data name="cmdHistogramOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 31</value>
+    <value>120, 25</value>
   </data>
   <data name="cmdHistogramOptions.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -174,6 +167,7 @@
   <data name="&gt;&gt;cmdHistogramOptions.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoHistogram.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
@@ -181,13 +175,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoHistogram.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 15</value>
-  </data>
-  <data name="rdoHistogram.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>24, 12</value>
   </data>
   <data name="rdoHistogram.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 34</value>
+    <value>125, 28</value>
   </data>
   <data name="rdoHistogram.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -217,13 +208,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoDensity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>196, 15</value>
-  </data>
-  <data name="rdoDensity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>147, 12</value>
   </data>
   <data name="rdoDensity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 34</value>
+    <value>125, 28</value>
   </data>
   <data name="rdoDensity.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -253,13 +241,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoFrequencyPolygon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 15</value>
-  </data>
-  <data name="rdoFrequencyPolygon.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>270, 12</value>
   </data>
   <data name="rdoFrequencyPolygon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 34</value>
+    <value>125, 28</value>
   </data>
   <data name="rdoFrequencyPolygon.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -286,13 +271,10 @@
     <value>True</value>
   </data>
   <data name="lblfactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 266</value>
-  </data>
-  <data name="lblfactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>247, 216</value>
   </data>
   <data name="lblfactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 17</value>
+    <value>85, 13</value>
   </data>
   <data name="lblfactor.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -313,13 +295,10 @@
     <value>12</value>
   </data>
   <data name="lblStats.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 379</value>
-  </data>
-  <data name="lblStats.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>10, 308</value>
   </data>
   <data name="lblStats.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 22</value>
+    <value>32, 18</value>
   </data>
   <data name="lblStats.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -340,13 +319,13 @@
     <value>0</value>
   </data>
   <data name="ucrInputStats.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 378</value>
+    <value>53, 300</value>
   </data>
   <data name="ucrInputStats.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrInputStats.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 26</value>
+    <value>137, 21</value>
   </data>
   <data name="ucrInputStats.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -364,13 +343,13 @@
     <value>1</value>
   </data>
   <data name="ucrChkPercentages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 377</value>
+    <value>199, 306</value>
   </data>
   <data name="ucrChkPercentages.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrChkPercentages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 25</value>
+    <value>100, 20</value>
   </data>
   <data name="ucrChkPercentages.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -388,13 +367,13 @@
     <value>2</value>
   </data>
   <data name="ucrSaveHist.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 421</value>
+    <value>10, 342</value>
   </data>
   <data name="ucrSaveHist.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrSaveHist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>340, 30</value>
+    <value>255, 24</value>
   </data>
   <data name="ucrSaveHist.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -415,19 +394,19 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>557, 536</value>
+    <value>418, 436</value>
   </data>
   <data name="ucrFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 284</value>
+    <value>247, 231</value>
   </data>
   <data name="ucrFactorReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrFactorReceiver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 25</value>
+    <value>125, 20</value>
   </data>
   <data name="ucrFactorReceiver.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -445,13 +424,13 @@
     <value>5</value>
   </data>
   <data name="ucrHistogramSelector.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 59</value>
+    <value>10, 48</value>
   </data>
   <data name="ucrHistogramSelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrHistogramSelector.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 222</value>
+    <value>214, 180</value>
   </data>
   <data name="ucrHistogramSelector.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -469,13 +448,13 @@
     <value>11</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 462</value>
+    <value>10, 375</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>547, 64</value>
+    <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -493,13 +472,13 @@
     <value>13</value>
   </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 6</value>
+    <value>23, 11</value>
   </data>
   <data name="ucrPnlOptions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>531, 52</value>
+    <value>373, 30</value>
   </data>
   <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -516,9 +495,6 @@
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -532,13 +508,13 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrVariablesAsFactorforHist.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 84</value>
+    <value>247, 68</value>
   </data>
   <data name="ucrVariablesAsFactorforHist.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
+    <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrVariablesAsFactorforHist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 119</value>
+    <value>125, 97</value>
   </data>
   <data name="ucrVariablesAsFactorforHist.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
