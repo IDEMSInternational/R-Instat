@@ -98,6 +98,7 @@ Partial Class sdgSummaries
         Me.ucrChkMean = New instat.ucrCheck()
         Me.tbSummaries = New System.Windows.Forms.TabControl()
         Me.tbCircular = New System.Windows.Forms.TabPage()
+        Me.ucrChkCircMean = New instat.ucrCheck()
         Me.tbTwoVariables = New System.Windows.Forms.TabPage()
         Me.grpRelationships = New System.Windows.Forms.GroupBox()
         Me.ucrChkCovariance = New instat.ucrCheck()
@@ -119,7 +120,8 @@ Partial Class sdgSummaries
         Me.tbModel = New System.Windows.Forms.TabPage()
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkCircMean = New instat.ucrCheck()
+        Me.ucrChkSinpart = New instat.ucrCheck()
+        Me.ucrChkCosine = New instat.ucrCheck()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpProportionsPercentiles.SuspendLayout()
@@ -576,10 +578,18 @@ Partial Class sdgSummaries
         '
         'tbCircular
         '
+        Me.tbCircular.Controls.Add(Me.ucrChkCosine)
+        Me.tbCircular.Controls.Add(Me.ucrChkSinpart)
         Me.tbCircular.Controls.Add(Me.ucrChkCircMean)
         resources.ApplyResources(Me.tbCircular, "tbCircular")
         Me.tbCircular.Name = "tbCircular"
         Me.tbCircular.UseVisualStyleBackColor = True
+        '
+        'ucrChkCircMean
+        '
+        Me.ucrChkCircMean.Checked = False
+        resources.ApplyResources(Me.ucrChkCircMean, "ucrChkCircMean")
+        Me.ucrChkCircMean.Name = "ucrChkCircMean"
         '
         'tbTwoVariables
         '
@@ -732,11 +742,17 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         '
-        'ucrChkCircMean
+        'ucrChkSinpart
         '
-        Me.ucrChkCircMean.Checked = False
-        resources.ApplyResources(Me.ucrChkCircMean, "ucrChkCircMean")
-        Me.ucrChkCircMean.Name = "ucrChkCircMean"
+        Me.ucrChkSinpart.Checked = False
+        resources.ApplyResources(Me.ucrChkSinpart, "ucrChkSinpart")
+        Me.ucrChkSinpart.Name = "ucrChkSinpart"
+        '
+        'ucrChkCosine
+        '
+        Me.ucrChkCosine.Checked = False
+        resources.ApplyResources(Me.ucrChkCosine, "ucrChkCosine")
+        Me.ucrChkCosine.Name = "ucrChkCosine"
         '
         'sdgSummaries
         '
@@ -858,4 +874,6 @@ Partial Class sdgSummaries
     Friend WithEvents ucrNudNumberNotMissing As ucrNud
     Friend WithEvents tbCircular As TabPage
     Friend WithEvents ucrChkCircMean As ucrCheck
+    Friend WithEvents ucrChkSinpart As ucrCheck
+    Friend WithEvents ucrChkCosine As ucrCheck
 End Class
