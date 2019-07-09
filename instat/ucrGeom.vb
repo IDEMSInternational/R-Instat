@@ -405,26 +405,35 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_col)
 
-        'clsgeom_contour.SetGeomName("geom_contour")
+        clsgeom_contour.SetGeomName("geom_contour")
         ''Mandatory
-        'clsgeom_contour.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_contour.AddAesParameter("y", bIsMandatory:=TRUE)
+        clsgeom_contour.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_contour.AddAesParameter("y", bIsMandatory:=True)
+        clsgeom_contour.AddAesParameter("z", bIsMandatory:=True)
+
         ''optional
-        'clsgeom_contour.AddAesParameter("alpha")
-        'clsgeom_contour.AddAesParameter("colour")
-        'clsgeom_contour.AddAesParameter("linetype")
-        'clsgeom_contour.AddAesParameter("size")
-        'clsgeom_contour.AddAesParameter("weight")
+        clsgeom_contour.AddAesParameter("alpha")
+        clsgeom_contour.AddAesParameter("colour")
+        clsgeom_contour.AddAesParameter("group")
+        clsgeom_contour.AddAesParameter("linetype")
+        clsgeom_contour.AddAesParameter("size")
+        clsgeom_contour.AddAesParameter("weight")
 
         ''add layer parameters 
-        'clsgeom_contour.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34))
-        'clsgeom_contour.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_contour.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
-        'clsgeom_contour.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
+        clsgeom_contour.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34), lstParameterStrings:={Chr(34) & "contour" & Chr(34)})
+        clsgeom_contour.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_contour.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
+        clsgeom_contour.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
         ''linemitre should 1 or a number >1
-        'clsgeom_contour.AddLayerParameter("linemitre", "numeric", "1")
+        clsgeom_contour.AddLayerParameter("linemitre", "numeric", "10", lstParameterStrings:={1, 1})
+        clsgeom_contour.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_contour.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_contour.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+        clsgeom_contour.AddLayerParameter("bins", "numeric", "1", lstParameterStrings:={0, 1})
+        clsgeom_contour.AddLayerParameter("binwidth", "numeric", "0.01", lstParameterStrings:={3, 0})
+        clsgeom_contour.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         ''bin and binwidth could be added here as well. I am not sure if they are needed.... 
-        'lstAllGeoms.Add(clsgeom_contour)
+        lstAllGeoms.Add(clsgeom_contour)
 
         clsgeom_count.SetGeomName("geom_count")
         'Mandatory Aesthetics
