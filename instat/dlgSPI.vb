@@ -149,7 +149,6 @@ Public Class dlgSPI
         clsDolarOperator.AddParameter("fitted", "fitted", iPosition:=1)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsAsVectorFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsAsVectorFunction, iPosition:=0)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
