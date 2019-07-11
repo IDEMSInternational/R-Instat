@@ -321,16 +321,4 @@ Public Class dlgHistogram
     Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged
-
-    End Sub
-
-    Private Sub ucrVariablesAsFactorforHist_SelectionChanged(sender As Object, e As EventArgs) Handles ucrVariablesAsFactorforHist.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrPnlOptions_Control(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
-
-    End Sub
 End Class
