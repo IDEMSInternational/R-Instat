@@ -148,7 +148,7 @@ Public Class dlgSPI
         clsDolarOperator.AddParameter("model", clsRFunctionParameter:=clsSpiFunction, iPosition:=0)
         clsDolarOperator.AddParameter("fitted", "fitted", iPosition:=1)
 
-
+        ucrBase.clsRsyntax.SetBaseRFunction(clsAsVectorFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAsVectorFunction, iPosition:=0)
     End Sub
 
