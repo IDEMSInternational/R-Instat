@@ -217,7 +217,7 @@ Public Class dlgStartofRains
         'save
         ucrInputNewDoyColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewDoyColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
-        ucrInputNewDoyColumnName.SetName("start_doy")
+        ucrInputNewDoyColumnName.SetName("start_rain")
 
         ucrInputNewDateColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewDateColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
@@ -254,7 +254,7 @@ Public Class dlgStartofRains
         Dim strRollSumRain As String = "roll_sum_rain"
         Dim strStartDate As String = "start_date"
         Dim strStartStatus As String = "start_status"
-        Dim strStartDoy As String = "start_doy"
+        Dim strStartDoy As String = "start_rain"
         Dim strRollSumRainDryPeriod As String = "roll_sum_rain_dry_period"
 
         clsDayFromAndTo.Clear()
