@@ -119,14 +119,14 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ucrDefineCorruptionSelector.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
+    <value>13, 12</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrDefineCorruptionSelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrDefineCorruptionSelector.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 180</value>
+    <value>280, 222</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrDefineCorruptionSelector.TabIndex" type="System.Int32, mscorlib">
@@ -145,10 +145,13 @@
     <value>11</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 377</value>
+    <value>13, 464</value>
+  </data>
+  <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 52</value>
+    <value>547, 64</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -169,10 +172,13 @@
     <value>True</value>
   </data>
   <data name="lblNoBidsReceived.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 27</value>
+    <value>552, 33</value>
+  </data>
+  <data name="lblNoBidsReceived.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblNoBidsReceived.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 13</value>
+    <value>128, 17</value>
   </data>
   <data name="lblNoBidsReceived.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -196,16 +202,19 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>553, 437</value>
+    <value>737, 538</value>
   </data>
   <data name="cmdCalculatedColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 233</value>
+    <value>13, 287</value>
+  </data>
+  <data name="cmdCalculatedColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="cmdCalculatedColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 23</value>
+    <value>159, 28</value>
   </data>
   <data name="cmdCalculatedColumns.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -226,10 +235,13 @@
     <value>0</value>
   </data>
   <data name="cmdCountryLevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 203</value>
+    <value>13, 250</value>
+  </data>
+  <data name="cmdCountryLevel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="cmdCountryLevel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 23</value>
+    <value>159, 28</value>
   </data>
   <data name="cmdCountryLevel.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -250,10 +262,13 @@
     <value>1</value>
   </data>
   <data name="ucrChkAutoGenerate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 265</value>
+    <value>13, 326</value>
+  </data>
+  <data name="ucrChkAutoGenerate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
   </data>
   <data name="ucrChkAutoGenerate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrChkAutoGenerate.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -274,10 +289,13 @@
     <value>True</value>
   </data>
   <data name="lblRegion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 70</value>
+    <value>335, 86</value>
+  </data>
+  <data name="lblRegion.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblRegion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 13</value>
+    <value>57, 17</value>
   </data>
   <data name="lblRegion.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -298,13 +316,13 @@
     <value>3</value>
   </data>
   <data name="ucrReceiverRegion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 85</value>
+    <value>335, 105</value>
   </data>
   <data name="ucrReceiverRegion.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverRegion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverRegion.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -325,10 +343,13 @@
     <value>True</value>
   </data>
   <data name="lblFiscalYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 285</value>
+    <value>552, 351</value>
+  </data>
+  <data name="lblFiscalYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblFiscalYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 13</value>
+    <value>82, 17</value>
   </data>
   <data name="lblFiscalYear.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -349,13 +370,13 @@
     <value>5</value>
   </data>
   <data name="ucrReceiverFiscalYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 300</value>
+    <value>552, 369</value>
   </data>
   <data name="ucrReceiverFiscalYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverFiscalYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverFiscalYear.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -373,13 +394,13 @@
     <value>6</value>
   </data>
   <data name="ucrReceiverContractValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 257</value>
+    <value>552, 316</value>
   </data>
   <data name="ucrReceiverContractValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverContractValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverContractValue.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -400,10 +421,13 @@
     <value>True</value>
   </data>
   <data name="lblContractValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 242</value>
+    <value>552, 298</value>
+  </data>
+  <data name="lblContractValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblContractValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
+    <value>105, 17</value>
   </data>
   <data name="lblContractValue.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -427,10 +451,13 @@
     <value>True</value>
   </data>
   <data name="lblCountry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 27</value>
+    <value>335, 33</value>
+  </data>
+  <data name="lblCountry.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblCountry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
+    <value>61, 17</value>
   </data>
   <data name="lblCountry.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -454,10 +481,13 @@
     <value>True</value>
   </data>
   <data name="lblSignatureDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 199</value>
+    <value>335, 245</value>
+  </data>
+  <data name="lblSignatureDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblSignatureDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 13</value>
+    <value>107, 17</value>
   </data>
   <data name="lblSignatureDate.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -478,13 +508,13 @@
     <value>14</value>
   </data>
   <data name="ucrReceiverProcedureType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 128</value>
+    <value>552, 158</value>
   </data>
   <data name="ucrReceiverProcedureType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverProcedureType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverProcedureType.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -505,10 +535,13 @@
     <value>True</value>
   </data>
   <data name="lblAwardDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 156</value>
+    <value>335, 192</value>
+  </data>
+  <data name="lblAwardDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblAwardDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
+    <value>85, 17</value>
   </data>
   <data name="lblAwardDate.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -532,10 +565,13 @@
     <value>True</value>
   </data>
   <data name="lblProcedureType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 113</value>
+    <value>552, 139</value>
+  </data>
+  <data name="lblProcedureType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblProcedureType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 13</value>
+    <value>114, 17</value>
   </data>
   <data name="lblProcedureType.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -556,13 +592,13 @@
     <value>17</value>
   </data>
   <data name="ucrReceiverContractTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 257</value>
+    <value>335, 316</value>
   </data>
   <data name="ucrReceiverContractTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverContractTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverContractTitle.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -580,13 +616,13 @@
     <value>18</value>
   </data>
   <data name="ucrReceiverAwardDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 171</value>
+    <value>335, 210</value>
   </data>
   <data name="ucrReceiverAwardDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverAwardDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverAwardDate.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -607,10 +643,13 @@
     <value>True</value>
   </data>
   <data name="lblContractTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 242</value>
+    <value>335, 298</value>
+  </data>
+  <data name="lblContractTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblContractTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
+    <value>96, 17</value>
   </data>
   <data name="lblContractTitle.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -631,13 +670,13 @@
     <value>20</value>
   </data>
   <data name="ucrReceiverSignatureDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 214</value>
+    <value>335, 263</value>
   </data>
   <data name="ucrReceiverSignatureDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverSignatureDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverSignatureDate.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -655,13 +694,13 @@
     <value>21</value>
   </data>
   <data name="ucrReceiverNoConsideredBids.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 85</value>
+    <value>552, 105</value>
   </data>
   <data name="ucrReceiverNoConsideredBids.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverNoConsideredBids.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverNoConsideredBids.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -682,10 +721,13 @@
     <value>True</value>
   </data>
   <data name="lblNoConsideredBids.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 70</value>
+    <value>552, 86</value>
+  </data>
+  <data name="lblNoConsideredBids.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblNoConsideredBids.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 13</value>
+    <value>141, 17</value>
   </data>
   <data name="lblNoConsideredBids.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -706,13 +748,13 @@
     <value>23</value>
   </data>
   <data name="ucrReceiverCountry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 42</value>
+    <value>335, 52</value>
   </data>
   <data name="ucrReceiverCountry.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverCountry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverCountry.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -730,13 +772,13 @@
     <value>24</value>
   </data>
   <data name="ucrReceiverWinnerCountry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 214</value>
+    <value>552, 263</value>
   </data>
   <data name="ucrReceiverWinnerCountry.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverWinnerCountry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverWinnerCountry.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -757,10 +799,13 @@
     <value>True</value>
   </data>
   <data name="lblProcuringAuthority.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 113</value>
+    <value>335, 139</value>
+  </data>
+  <data name="lblProcuringAuthority.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblProcuringAuthority.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 13</value>
+    <value>133, 17</value>
   </data>
   <data name="lblProcuringAuthority.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -781,13 +826,13 @@
     <value>26</value>
   </data>
   <data name="ucrReceiverProcuringAuthority.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 128</value>
+    <value>335, 158</value>
   </data>
   <data name="ucrReceiverProcuringAuthority.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverProcuringAuthority.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverProcuringAuthority.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -808,10 +853,13 @@
     <value>True</value>
   </data>
   <data name="lblWinnerCountry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 199</value>
+    <value>552, 245</value>
+  </data>
+  <data name="lblWinnerCountry.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblWinnerCountry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 13</value>
+    <value>110, 17</value>
   </data>
   <data name="lblWinnerCountry.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -835,10 +883,13 @@
     <value>True</value>
   </data>
   <data name="lblContractSector.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 285</value>
+    <value>335, 351</value>
+  </data>
+  <data name="lblContractSector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblContractSector.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 13</value>
+    <value>110, 17</value>
   </data>
   <data name="lblContractSector.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -859,13 +910,13 @@
     <value>29</value>
   </data>
   <data name="ucrReceiverContractSector.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 300</value>
+    <value>335, 369</value>
   </data>
   <data name="ucrReceiverContractSector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverContractSector.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverContractSector.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -886,10 +937,13 @@
     <value>True</value>
   </data>
   <data name="lblProcurementCategory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 331</value>
+    <value>335, 407</value>
+  </data>
+  <data name="lblProcurementCategory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblProcurementCategory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 13</value>
+    <value>154, 17</value>
   </data>
   <data name="lblProcurementCategory.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -910,13 +964,13 @@
     <value>31</value>
   </data>
   <data name="ucrReceiverProcurementCategory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 346</value>
+    <value>335, 426</value>
   </data>
   <data name="ucrReceiverProcurementCategory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverProcurementCategory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverProcurementCategory.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -937,10 +991,13 @@
     <value>True</value>
   </data>
   <data name="lblWinnerName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 156</value>
+    <value>552, 192</value>
+  </data>
+  <data name="lblWinnerName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblWinnerName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 13</value>
+    <value>98, 17</value>
   </data>
   <data name="lblWinnerName.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -961,13 +1018,13 @@
     <value>33</value>
   </data>
   <data name="ucrReceiverWinnerName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 171</value>
+    <value>552, 210</value>
   </data>
   <data name="ucrReceiverWinnerName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverWinnerName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverWinnerName.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -984,6 +1041,9 @@
   <data name="&gt;&gt;ucrReceiverWinnerName.ZOrder" xml:space="preserve">
     <value>34</value>
   </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -991,19 +1051,19 @@
     <value>Define Procurement Data</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgDefineCorruption</value>
+    <value>dlgCorruptionDefineProcurement</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverNoBids.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 42</value>
+    <value>552, 52</value>
   </data>
   <data name="ucrReceiverNoBids.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverNoBids.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>160, 25</value>
   </data>
   <data name="ucrReceiverNoBids.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>

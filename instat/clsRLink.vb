@@ -65,7 +65,7 @@ Public Class RLink
     Private iWaitDelay As Integer = 2
 
     Private strRVersionMajorRequired As String = "3"
-    Private strRVersionMinorRequired As String = "5"
+    Private strRVersionMinorRequired As String = "6"
 
     Public Function StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True) As Boolean
         Dim strMissingPackages() As String
@@ -80,8 +80,8 @@ Public Class RLink
             clsEngine = REngine.GetInstance()
             clsEngine.Initialize()
         Catch ex As Exception
-            ' Modified message since currently not working for R 3.5.0
-            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4 of R." & vbNewLine & "Note that R-Instat does not currently work with R 3.5.0 or above. Try reruning the installation to install R 3.4.4 or download R 3.4.4 from https://cran.r-project.org/bin/windows/base/old/3.4.4/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
+            ' Modified message since currently we recommend use of R version 3.6.0
+            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 of R." & vbNewLine & "Note that R-Instat does not work with R below 3.5.0. We recommend using R 3.6.0.  Try reruning the installation to install R 3.6.0 or download R 3.6.0 from https://cran.r-project.org/bin/windows/base/old/3.6.0/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
             Application.Exit()
             Environment.Exit(0)
         End Try
@@ -96,12 +96,12 @@ Public Class RLink
             End If
             If strMinor.Count >= 3 Then
                 If Not (strMajor = strRVersionMajorRequired AndAlso strMinor.Count > 0 AndAlso strMinor(0) >= strRVersionMinorRequired) Then
-                    MsgBox("Your current version of R is outdated. You are currently running R version: " & strMajor & "." & strMinor & vbNewLine & "R-Instat requires at least version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4 or greater." & vbNewLine & "Try reruning the installation to install an updated version of R or download R from https://cran.r-project.org/bin/windows/base/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version not supported.")
+                    MsgBox("Your current version of R is outdated. You are currently running R version: " & strMajor & "." & strMinor & vbNewLine & "R-Instat requires at least version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 or greater." & vbNewLine & "Try reruning the installation to install an updated version of R or download R from https://cran.r-project.org/bin/windows/base/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version not supported.")
                     Application.Exit()
                     Environment.Exit(0)
                 End If
             Else
-                MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4." & vbNewLine & "Try uninstalling any versions of R and rerun the installation to install R 3.4.4 or download R 3.4.4 from https://cran.r-project.org/bin/windows/base/old/3.4.4/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version error.")
+                MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0." & vbNewLine & "Try uninstalling any versions of R and rerun the installation to install R 3.6.0 or download R 3.6.0 from https://cran.r-project.org/bin/windows/base/old/3.6.0/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version error.")
                 Application.Exit()
                 Environment.Exit(0)
             End If
