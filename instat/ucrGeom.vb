@@ -943,7 +943,7 @@ Public Class ucrGeom
 
         'Global Layer parameters
         clsgeom_line.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
-        clsgeom_line.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "desnity" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "unique" & Chr(34)})
+        clsgeom_line.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "density" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "unique" & Chr(34)})
         clsgeom_line.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_line.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
@@ -1514,6 +1514,10 @@ Public Class ucrGeom
         clsgeom_vline.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
 
         lstAllGeoms.Add(clsgeom_vline)
+
+        For Each Geom In lstAllGeoms
+            Geom.AddLayerParameter("key_glyph", "list", Chr(34) & "point" & Chr(34), lstParameterStrings:={Chr(34) & "point" & Chr(34), Chr(34) & "abline" & Chr(34), Chr(34) & "rect" & Chr(34), Chr(34) & "polygon" & Chr(34), Chr(34) & "blank" & Chr(34), Chr(34) & "boxplot" & Chr(34), Chr(34) & "crossbar" & Chr(34), Chr(34) & "path" & Chr(34), Chr(34) & "vpath" & Chr(34), Chr(34) & "dotplot" & Chr(34), Chr(34) & "pointrange" & Chr(34), Chr(34) & "smooth" & Chr(34), Chr(34) & "text" & Chr(34), Chr(34) & "label" & Chr(34), Chr(34) & "vline" & Chr(34), Chr(34) & "timeseries" & Chr(34)})
+        Next
 
     End Sub
 
