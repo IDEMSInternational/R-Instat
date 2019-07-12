@@ -217,15 +217,15 @@ Public Class dlgStartofRains
         'save
         ucrInputNewDoyColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewDoyColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
-        ucrInputNewDoyColumnName.SetName("start_doy")
+        ucrInputNewDoyColumnName.SetName("start_rain")
 
         ucrInputNewDateColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewDateColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
-        ucrInputNewDateColumnName.SetName("start_date")
+        ucrInputNewDateColumnName.SetName("start_rain_date")
 
         ucrInputNewStatusColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewStatusColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
-        ucrInputNewStatusColumnName.SetName("start_status")
+        ucrInputNewStatusColumnName.SetName("start_rain_status")
 
         ucrChkAsDoy.AddToLinkedControls(ucrInputNewDoyColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAsDate.AddToLinkedControls(ucrInputNewDateColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -252,9 +252,9 @@ Public Class dlgStartofRains
         Dim strAboveThreshold As String = "above_threshold"
         Dim strRollSumNumberDryPeriod As String = "n_dry_period"
         Dim strRollSumRain As String = "roll_sum_rain"
-        Dim strStartDate As String = "start_date"
-        Dim strStartStatus As String = "start_status"
-        Dim strStartDoy As String = "start_doy"
+        Dim strStartDate As String = "start_rain_date"
+        Dim strStartStatus As String = "start_rain_status"
+        Dim strStartDoy As String = "start_rain"
         Dim strRollSumRainDryPeriod As String = "roll_sum_rain_dry_period"
 
         clsDayFromAndTo.Clear()
