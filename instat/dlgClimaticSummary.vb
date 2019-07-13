@@ -21,7 +21,7 @@ Public Class dlgClimaticSummary
     Private iReceiverMaxY As Integer
     Private iReceiverLabelMaxY As Integer
     Private bResetSubdialog As Boolean = False
-    Private clsDefaultFunction, clsSummariesList, clsDefaultFactors, clsDayFilterCalc, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
+    Private clsDefaultFunction, clsConcFunction, clsSummariesList, clsDefaultFactors, clsDayFilterCalc, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsFromAndToConditionOperator, clsFromConditionOperator, clsToConditionOperator As New ROperator
 
     Private Sub dlgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -147,6 +147,7 @@ Public Class dlgClimaticSummary
         clsDefaultFunction = New RFunction
         clsSummariesList = New RFunction
         clsDefaultFactors = New RFunction
+        clsConcFunction = New RFunction
 
         clsFromAndToConditionOperator = New ROperator
         clsDayFilterCalc = New RFunction
@@ -193,6 +194,7 @@ Public Class dlgClimaticSummary
         clsDefaultFunction.AddParameter("silent", "TRUE")
 
         clsDefaultFactors.SetRCommand("c")
+        clsConcFunction.SetRCommand("c")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
@@ -249,7 +251,7 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub cmdSummary_Click(sender As Object, e As EventArgs) Handles cmdSummary.Click
-        sdgSummaries.SetRFunction(clsSummariesList, clsDefaultFunction, ucrSelectorVariable, bResetSubdialog)
+        sdgSummaries.SetRFunction(clsSummariesList, clsDefaultFunction, clsConcFunction, ucrSelectorVariable, bResetSubdialog)
         bResetSubdialog = False
         sdgSummaries.ShowDialog()
         TestOKEnabled()
