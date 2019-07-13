@@ -137,6 +137,8 @@ Public Class dlgSummaryTables
         ucrSelectorSummaryTables.Reset()
         ucrSaveTable.Reset()
 
+        clsConcFunction.SetRCommand("c")
+
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
 

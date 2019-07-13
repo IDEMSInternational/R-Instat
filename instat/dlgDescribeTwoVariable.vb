@@ -79,6 +79,8 @@ Public Class dlgDescribeTwoVariable
         ucrSelectorDescribeTwoVar.Reset()
         ucrReceiverFirstVar.SetMeAsReceiver()
 
+        clsConcFunction.SetRCommand("c")
+
         clsRFreqTables.AddParameter("addmargins", "FALSE", iPosition:=2)
         clsRFreqTables.AddParameter("proportions", "FALSE", iPosition:=3)
         clsRFreqTables.AddParameter("percentages", "FALSE", iPosition:=4)
