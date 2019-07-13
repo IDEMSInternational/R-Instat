@@ -431,19 +431,21 @@ na_check <- function(x, na_type = c(), na_consecutive_n = NULL, na_max_n = NULL,
   res <- c()
   k <- 1
   for (i in na_type) {
-    if(i == "n") {
+    ##Added this to avoid error when "" is trancated. Not sure why "" is removed in some instances. 
+    ##Works differently with main summary function when you have a single case/multiple cases of na_type.
+    if(i == "'n'" || i == "n") {
       res[k] <- summary_count_missing(x) <= na_max_n
     }
-    else if(i == "prop") {
+    else if(i == "'prop'" || i == "prop") {
       res[k] <- (summary_count_missing(x)/summary_count(x)) <= na_max_prop/100
     }
-    else if(i == "n_non_miss") {
+    else if(i == "'n_non_miss'" || i == "n_non_miss") {
       res[k] <- summary_count_non_missing(x) >= na_min_n
     }
-    else if(i == "FUN") {
+    else if(i == "'FUN'" || i == "FUN") {
       res[k] <- na_FUN(x, ...)
     }
-    else if(i == "c") {
+    else if(i == "'con'" || i == "con") {
       is_na_rle <- rle(is.na(x))
       res[k] <- max(is_na_rle$lengths[is_na_rle$values]) <= na_consecutive_n
     }
