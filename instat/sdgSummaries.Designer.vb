@@ -48,7 +48,6 @@ Partial Class sdgSummaries
         Me.ucrChkMaxPercMissing = New instat.ucrCheck()
         Me.ucrNudNumber = New instat.ucrNud()
         Me.ucrNudPercentage = New instat.ucrNud()
-        Me.ucrChkIncludeMissingOpt = New instat.ucrCheck()
         Me.tbMore = New System.Windows.Forms.TabPage()
         Me.grpProportionsPercentiles = New System.Windows.Forms.GroupBox()
         Me.ucrInputCountValue = New instat.ucrInputTextBox()
@@ -146,7 +145,6 @@ Partial Class sdgSummaries
         Me.tbMissingOptions.Controls.Add(Me.ucrChkMaxPercMissing)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudNumber)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudPercentage)
-        Me.tbMissingOptions.Controls.Add(Me.ucrChkIncludeMissingOpt)
         resources.ApplyResources(Me.tbMissingOptions, "tbMissingOptions")
         Me.tbMissingOptions.Name = "tbMissingOptions"
         Me.tbMissingOptions.UseVisualStyleBackColor = True
@@ -214,12 +212,6 @@ Partial Class sdgSummaries
         Me.ucrNudPercentage.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPercentage.Name = "ucrNudPercentage"
         Me.ucrNudPercentage.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkIncludeMissingOpt
-        '
-        Me.ucrChkIncludeMissingOpt.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeMissingOpt, "ucrChkIncludeMissingOpt")
-        Me.ucrChkIncludeMissingOpt.Name = "ucrChkIncludeMissingOpt"
         '
         'tbMore
         '
@@ -802,7 +794,6 @@ Partial Class sdgSummaries
     Friend WithEvents ucrInputPercentile As ucrInputTextBox
     Friend WithEvents ucrChkPercentile As ucrCheck
     Friend WithEvents ucrChkn_distinct As ucrCheck
-    Friend WithEvents ucrChkIncludeMissingOpt As ucrCheck
     Friend WithEvents ucrInputCountValue As ucrInputTextBox
     Friend WithEvents ucrInputComboCountTest As ucrInputComboBox
     Friend WithEvents tbModel As TabPage
