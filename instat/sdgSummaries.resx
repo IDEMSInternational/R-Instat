@@ -119,10 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ucrChkMinNumNonMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 74</value>
+    <value>11, 42</value>
   </data>
   <data name="ucrChkMinNumNonMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>227, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrChkMinNumNonMissing.TabIndex" type="System.Int32, mscorlib">
@@ -141,7 +141,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudNumberNotMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 75</value>
+    <value>273, 42</value>
   </data>
   <data name="ucrNudNumberNotMissing.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -162,7 +162,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudConsecutive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 135</value>
+    <value>273, 100</value>
   </data>
   <data name="ucrNudConsecutive.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -183,10 +183,10 @@
     <value>2</value>
   </data>
   <data name="ucrChkConsecutiveMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 132</value>
+    <value>11, 100</value>
   </data>
   <data name="ucrChkConsecutiveMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>257, 20</value>
   </data>
   <data name="ucrChkConsecutiveMissing.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -204,10 +204,10 @@
     <value>3</value>
   </data>
   <data name="ucrChkMaxNumMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 45</value>
+    <value>11, 13</value>
   </data>
   <data name="ucrChkMaxNumMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>227, 20</value>
   </data>
   <data name="ucrChkMaxNumMissing.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -225,10 +225,10 @@
     <value>4</value>
   </data>
   <data name="ucrChkMaxPercMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 103</value>
+    <value>11, 71</value>
   </data>
   <data name="ucrChkMaxPercMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>227, 20</value>
   </data>
   <data name="ucrChkMaxPercMissing.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -246,7 +246,7 @@
     <value>5</value>
   </data>
   <data name="ucrNudNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 45</value>
+    <value>273, 13</value>
   </data>
   <data name="ucrNudNumber.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -267,7 +267,7 @@
     <value>6</value>
   </data>
   <data name="ucrNudPercentage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 105</value>
+    <value>273, 71</value>
   </data>
   <data name="ucrNudPercentage.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -287,27 +287,6 @@
   <data name="&gt;&gt;ucrNudPercentage.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="ucrChkIncludeMissingOpt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 20</value>
-  </data>
-  <data name="ucrChkIncludeMissingOpt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
-  </data>
-  <data name="ucrChkIncludeMissingOpt.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeMissingOpt.Name" xml:space="preserve">
-    <value>ucrChkIncludeMissingOpt</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeMissingOpt.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeMissingOpt.Parent" xml:space="preserve">
-    <value>tbMissingOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeMissingOpt.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
   <data name="tbMissingOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -316,7 +295,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbMissingOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 439</value>
+    <value>377, 390</value>
   </data>
   <data name="tbMissingOptions.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -877,7 +856,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbMore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 439</value>
+    <value>377, 390</value>
   </data>
   <data name="tbMore.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1315,7 +1294,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbsum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 439</value>
+    <value>377, 390</value>
   </data>
   <data name="tbsum.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1462,10 +1441,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>396, 502</value>
+    <value>396, 457</value>
   </data>
   <data name="ucrButtonsSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 470</value>
+    <value>127, 426</value>
   </data>
   <data name="ucrButtonsSummaries.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 30</value>
@@ -1528,7 +1507,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbTwoVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 439</value>
+    <value>377, 390</value>
   </data>
   <data name="tbTwoVariables.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1792,7 +1771,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 439</value>
+    <value>377, 390</value>
   </data>
   <data name="tbPosition.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1840,7 +1819,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 439</value>
+    <value>377, 390</value>
   </data>
   <data name="tbModel.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1864,7 +1843,7 @@
     <value>7, 7</value>
   </data>
   <data name="tbSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>385, 465</value>
+    <value>385, 416</value>
   </data>
   <data name="tbSummaries.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
