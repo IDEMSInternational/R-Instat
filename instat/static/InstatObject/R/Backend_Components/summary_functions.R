@@ -427,20 +427,31 @@ summary_mode <- function(x,...) {
   else return(out)
 }
 
-na_check <- function(x, na_type = "n", na_max_n = NULL, na_max_prop = NULL, na_min_n = NULL,na_FUN = NULL, ...) {
-  if(na_type == "n") {
-    return(summary_count_missing(x) <= na_max_n)
+na_check <- function(x, na_type = c(), na_consecutive_n = NULL, na_max_n = NULL, na_max_prop = NULL, na_min_n = NULL, na_FUN = NULL, ...) {
+  res <- c()
+  k <- 1
+  for (i in na_type) {
+    if(i == "n") {
+      res[k] <- summary_count_missing(x) <= na_max_n
+    }
+    else if(i == "prop") {
+      res[k] <- (summary_count_missing(x)/summary_count(x)) <= na_max_prop/100
+    }
+    else if(i == "n_non_miss") {
+      res[k] <- summary_count_non_missing(x) >= na_min_n
+    }
+    else if(i == "FUN") {
+      res[k] <- na_FUN(x, ...)
+    }
+    else if(i == "c") {
+      is_na_rle <- rle(is.na(x))
+      res[k] <- max(is_na_rle$lengths[is_na_rle$values]) <= na_consecutive_n
+    }
+    else stop("Invalid na_type specified for missing values check.")
+    if(!res[k]) return(FALSE)
+    k <-  k+1
   }
-  else if(na_type == "prop") {
-    return(summary_count_missing(x)/summary_count(x) <= na_max_prop)
-  }
-  if(na_type == "n_non_miss") {
-    return(summary_count_non_missing(x) >= na_min_n)
-  }
-  else if(na_type == "FUN") {
-    return(na_FUN(x, ...))
-  }
-  else stop("Invalid na_type specified for missing values check.")
+  return(all(res))
 }
 
 summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0, na_type = "", ...) {
