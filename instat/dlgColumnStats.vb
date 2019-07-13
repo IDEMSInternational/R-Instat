@@ -98,6 +98,8 @@ Public Class dlgColumnStats
         sdgProportionsPercentages.ucrSelectorProportionsPercentiles.Reset()
         ucrReceiverSelectedVariables.SetMeAsReceiver()
 
+        clsConcFunction.SetRCommand("c")
+
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
         clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
