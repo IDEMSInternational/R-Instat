@@ -895,42 +895,42 @@ Public Class ucrCalculator
 
     Private Sub cmdHour_Click(sender As Object, e As EventArgs) Handles cmdHour.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::hour(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::hour(x = )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::hour()", 1)
         End If
     End Sub
     Private Sub cmdMinutes_Click(sender As Object, e As EventArgs) Handles cmdminutes.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::min(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::min(x = )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::min()", 1)
         End If
     End Sub
     Private Sub cmdSec_Click(sender As Object, e As EventArgs) Handles cmdSec.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::sec(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::sec(x = )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::sec()", 1)
         End If
     End Sub
     Private Sub cmdAm_Click(sender As Object, e As EventArgs) Handles cmdAm.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::am(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::am(x = )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::am()", 1)
         End If
     End Sub
     Private Sub cmdD_In_M_Click(sender As Object, e As EventArgs) Handles cmdD_In_M.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::d_in_m(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::d_in_m(x = )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::d_in_m()", 1)
         End If
     End Sub
     Private Sub cmdQuarter_Click(sender As Object, e As EventArgs) Handles cmdQuarter.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::quarter(x=, with_year = FALSE, fiscal_start = 1 )", 39)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::quarter(x =, with_year = FALSE, fiscal_start = 1 )", 39)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::quarter()", 1)
         End If
