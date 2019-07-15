@@ -61,6 +61,37 @@ Public Class dlgInfill
         ucrChkResort.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkResort.SetRDefault("TRUE")
         ucrChkResort.SetText("Sort Data after Infilling")
+
+        ucrPnlDateOptions.AddRadioButton(rdoDataLimits)
+        ucrPnlDateOptions.AddRadioButton(rdoFixedLimits)
+
+        ucrChkCompleteYears.SetText("Complete years starting from")
+        ucrChkStartDate.SetText("Start date")
+        ucrChkEndDate.SetText("End date")
+
+        ucrInputComboMonth.SetParameter(New RParameter("", 22))
+        Dim dctMonth As New Dictionary(Of String, String)
+        dctMonth.Add("January", 1)
+        dctMonth.Add("February", 2)
+        dctMonth.Add("March", 3)
+        dctMonth.Add("April", 4)
+        dctMonth.Add("May", 5)
+        dctMonth.Add("June", 6)
+        dctMonth.Add("July", 7)
+        dctMonth.Add("August", 8)
+        dctMonth.Add("September", 9)
+        dctMonth.Add("October", 10)
+        dctMonth.Add("November", 11)
+        dctMonth.Add("December", 12)
+        ucrInputComboMonth.SetItems(dctMonth)
+        ucrInputComboMonth.SetRDefault(1)
+        ucrInputComboMonth.SetDropDownStyleAsNonEditable()
+
+        ucrPnlDateOptions.AddToLinkedControls(ucrChkCompleteYears, {rdoDataLimits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDateOptions.AddToLinkedControls({ucrChkStartDate, ucrChkEndDate}, {rdoFixedLimits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCompleteYears.AddToLinkedControls(ucrInputComboMonth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkStartDate.AddToLinkedControls(ucrDtpStartDate, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkEndDate.AddToLinkedControls(ucrDtpEndDate, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
