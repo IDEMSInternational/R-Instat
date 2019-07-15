@@ -430,7 +430,7 @@ Public Class ucrGeom
         clsgeom_contour.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_contour.AddLayerParameter("inherit.aes", "boolean", "TRUE")
         clsgeom_contour.AddLayerParameter("bins", "numeric", "1", lstParameterStrings:={0, 1})
-        clsgeom_contour.AddLayerParameter("binwidth", "numeric", "0.01", lstParameterStrings:={3, 0})
+        clsgeom_contour.AddLayerParameter("binwidth", "numeric", "0.01", lstParameterStrings:={3, 0.001})
         clsgeom_contour.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         ''bin and binwidth could be added here as well. I am not sure if they are needed.... 
         lstAllGeoms.Add(clsgeom_contour)
