@@ -168,8 +168,8 @@ Public Class ucrAdditionalLayers
             ParentForm.SendToBack() 'Otherwise sdgLayerOptions appears behind sdgPLotOptions
             sdgLayerOptions.ShowDialog()
             AddLayers(clsSelectedGeomFunction.strRCommand, lstLayers.SelectedItems(0))
-        Else
-            MsgBox("Feature not yet implemented" & Environment.NewLine & "Sorry, editing layers created on the main dialog is not currently possible in this version of R-Instat.", MsgBoxStyle.Information, "Feature not yet implemented")
+            'Else
+            ' MsgBox("Feature not yet implemented" & Environment.NewLine & "Sorry, editing layers created on the main dialog is not currently possible in this version of R-Instat.", MsgBoxStyle.Information, "Feature not yet implemented")
         End If
     End Sub
 
