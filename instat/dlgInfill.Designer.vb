@@ -19,7 +19,7 @@ Partial Class dlgInfill
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,16 +36,25 @@ Partial Class dlgInfill
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgInfill))
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblByFactors = New System.Windows.Forms.Label()
+        Me.rdoDataLimits = New System.Windows.Forms.RadioButton()
+        Me.rdoFixedLimits = New System.Windows.Forms.RadioButton()
+        Me.ucrChkEndDate = New instat.ucrCheck()
+        Me.ucrChkStartDate = New instat.ucrCheck()
+        Me.ucrChkCompleteYears = New instat.ucrCheck()
         Me.ucrChkResort = New instat.ucrCheck()
         Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrInfillSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlDateOptions = New instat.UcrPanel()
+        Me.ucrInputComboMonth = New instat.ucrInputComboBox()
+        Me.ucrDtpStartDate = New instat.ucrDateTimePicker()
+        Me.ucrDtpEndDate = New instat.ucrDateTimePicker()
         Me.SuspendLayout()
         '
         'lblDate
@@ -57,6 +66,46 @@ Partial Class dlgInfill
         '
         resources.ApplyResources(Me.lblByFactors, "lblByFactors")
         Me.lblByFactors.Name = "lblByFactors"
+        '
+        'rdoDataLimits
+        '
+        resources.ApplyResources(Me.rdoDataLimits, "rdoDataLimits")
+        Me.rdoDataLimits.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoDataLimits.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDataLimits.FlatAppearance.BorderSize = 2
+        Me.rdoDataLimits.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDataLimits.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoDataLimits.Name = "rdoDataLimits"
+        Me.rdoDataLimits.UseVisualStyleBackColor = True
+        '
+        'rdoFixedLimits
+        '
+        resources.ApplyResources(Me.rdoFixedLimits, "rdoFixedLimits")
+        Me.rdoFixedLimits.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoFixedLimits.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFixedLimits.FlatAppearance.BorderSize = 2
+        Me.rdoFixedLimits.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFixedLimits.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoFixedLimits.Name = "rdoFixedLimits"
+        Me.rdoFixedLimits.UseVisualStyleBackColor = True
+        '
+        'ucrChkEndDate
+        '
+        Me.ucrChkEndDate.Checked = False
+        resources.ApplyResources(Me.ucrChkEndDate, "ucrChkEndDate")
+        Me.ucrChkEndDate.Name = "ucrChkEndDate"
+        '
+        'ucrChkStartDate
+        '
+        Me.ucrChkStartDate.Checked = False
+        resources.ApplyResources(Me.ucrChkStartDate, "ucrChkStartDate")
+        Me.ucrChkStartDate.Name = "ucrChkStartDate"
+        '
+        'ucrChkCompleteYears
+        '
+        Me.ucrChkCompleteYears.Checked = False
+        resources.ApplyResources(Me.ucrChkCompleteYears, "ucrChkCompleteYears")
+        Me.ucrChkCompleteYears.Name = "ucrChkCompleteYears"
         '
         'ucrChkResort
         '
@@ -84,6 +133,7 @@ Partial Class dlgInfill
         '
         'ucrInfillSelector
         '
+        Me.ucrInfillSelector.bDropUnusedFilterLevels = False
         Me.ucrInfillSelector.bShowHiddenColumns = False
         Me.ucrInfillSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrInfillSelector, "ucrInfillSelector")
@@ -94,10 +144,42 @@ Partial Class dlgInfill
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrPnlDateOptions
+        '
+        resources.ApplyResources(Me.ucrPnlDateOptions, "ucrPnlDateOptions")
+        Me.ucrPnlDateOptions.Name = "ucrPnlDateOptions"
+        '
+        'ucrInputComboMonth
+        '
+        Me.ucrInputComboMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMonth.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboMonth, "ucrInputComboMonth")
+        Me.ucrInputComboMonth.Name = "ucrInputComboMonth"
+        '
+        'ucrDtpStartDate
+        '
+        resources.ApplyResources(Me.ucrDtpStartDate, "ucrDtpStartDate")
+        Me.ucrDtpStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpStartDate.Name = "ucrDtpStartDate"
+        '
+        'ucrDtpEndDate
+        '
+        resources.ApplyResources(Me.ucrDtpEndDate, "ucrDtpEndDate")
+        Me.ucrDtpEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpEndDate.Name = "ucrDtpEndDate"
+        '
         'dlgInfill
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrDtpEndDate)
+        Me.Controls.Add(Me.ucrChkEndDate)
+        Me.Controls.Add(Me.ucrChkStartDate)
+        Me.Controls.Add(Me.ucrChkCompleteYears)
+        Me.Controls.Add(Me.rdoDataLimits)
+        Me.Controls.Add(Me.rdoFixedLimits)
         Me.Controls.Add(Me.ucrChkResort)
         Me.Controls.Add(Me.lblByFactors)
         Me.Controls.Add(Me.lblDate)
@@ -105,6 +187,9 @@ Partial Class dlgInfill
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrInfillSelector)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrPnlDateOptions)
+        Me.Controls.Add(Me.ucrInputComboMonth)
+        Me.Controls.Add(Me.ucrDtpStartDate)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -122,4 +207,13 @@ Partial Class dlgInfill
     Friend WithEvents lblDate As Label
     Friend WithEvents lblByFactors As Label
     Friend WithEvents ucrChkResort As ucrCheck
+    Friend WithEvents rdoDataLimits As RadioButton
+    Friend WithEvents rdoFixedLimits As RadioButton
+    Friend WithEvents ucrPnlDateOptions As UcrPanel
+    Friend WithEvents ucrChkEndDate As ucrCheck
+    Friend WithEvents ucrChkStartDate As ucrCheck
+    Friend WithEvents ucrChkCompleteYears As ucrCheck
+    Friend WithEvents ucrInputComboMonth As ucrInputComboBox
+    Friend WithEvents ucrDtpEndDate As ucrDateTimePicker
+    Friend WithEvents ucrDtpStartDate As ucrDateTimePicker
 End Class
