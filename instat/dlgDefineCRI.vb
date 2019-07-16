@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgDefineCRI
+Public Class dlgCorruptionDefineCRI
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Dim bUseSelectedColumn As Boolean = False
