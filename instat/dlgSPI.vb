@@ -67,7 +67,7 @@ Public Class dlgSPI
 
         'setting up Nuds
         ucrNudTimeScale.SetParameter(New RParameter("scale", 1))
-        ucrNudTimeScale.SetMinMax(1, 24)
+        ucrNudTimeScale.SetMinMax(1)
 
         'others
         ucrChkOmitMissingValues.SetParameter(New RParameter("na.rm", 5))
@@ -148,8 +148,7 @@ Public Class dlgSPI
         clsDolarOperator.AddParameter("model", clsRFunctionParameter:=clsSpiFunction, iPosition:=0)
         clsDolarOperator.AddParameter("fitted", "fitted", iPosition:=1)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsAsVectorFunction, iPosition:=0)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsAsVectorFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)

@@ -72,11 +72,11 @@ Partial Class dlgStringHandling
         Me.cmdBackSlashb = New System.Windows.Forms.Button()
         Me.cmdSbackSlash = New System.Windows.Forms.Button()
         Me.cmdOr = New System.Windows.Forms.Button()
-        Me.rdoFixed = New System.Windows.Forms.RadioButton()
         Me.rdoRegex = New System.Windows.Forms.RadioButton()
+        Me.rdoFixed = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlFixedRegex = New instat.UcrPanel()
         Me.ucrSaveStringHandling = New instat.ucrSave()
         Me.ucrReceiverForRegexExpression = New instat.ucrReceiverExpression()
-        Me.ucrPnlFixedRegex = New instat.UcrPanel()
         Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
         Me.ucrReceiverStringHandling = New instat.ucrReceiverSingle()
         Me.ucrInputReplaceBy = New instat.ucrInputTextBox()
@@ -330,6 +330,13 @@ Partial Class dlgStringHandling
         Me.cmdOr.Name = "cmdOr"
         Me.cmdOr.UseVisualStyleBackColor = True
         '
+        'rdoRegex
+        '
+        resources.ApplyResources(Me.rdoRegex, "rdoRegex")
+        Me.rdoRegex.Name = "rdoRegex"
+        Me.rdoRegex.TabStop = True
+        Me.rdoRegex.UseVisualStyleBackColor = True
+        '
         'rdoFixed
         '
         resources.ApplyResources(Me.rdoFixed, "rdoFixed")
@@ -337,12 +344,10 @@ Partial Class dlgStringHandling
         Me.rdoFixed.TabStop = True
         Me.rdoFixed.UseVisualStyleBackColor = True
         '
-        'rdoRegex
+        'ucrPnlFixedRegex
         '
-        resources.ApplyResources(Me.rdoRegex, "rdoRegex")
-        Me.rdoRegex.Name = "rdoRegex"
-        Me.rdoRegex.TabStop = True
-        Me.rdoRegex.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ucrPnlFixedRegex, "ucrPnlFixedRegex")
+        Me.ucrPnlFixedRegex.Name = "ucrPnlFixedRegex"
         '
         'ucrSaveStringHandling
         '
@@ -357,11 +362,6 @@ Partial Class dlgStringHandling
         Me.ucrReceiverForRegexExpression.Selector = Nothing
         Me.ucrReceiverForRegexExpression.strNcFilePath = ""
         Me.ucrReceiverForRegexExpression.ucrSelector = Nothing
-        '
-        'ucrPnlFixedRegex
-        '
-        resources.ApplyResources(Me.ucrPnlFixedRegex, "ucrPnlFixedRegex")
-        Me.ucrPnlFixedRegex.Name = "ucrPnlFixedRegex"
         '
         'ucrChkIncludeRegularExpressions
         '
@@ -416,11 +416,11 @@ Partial Class dlgStringHandling
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrSaveStringHandling)
         Me.Controls.Add(Me.rdoRegex)
         Me.Controls.Add(Me.rdoFixed)
-        Me.Controls.Add(Me.ucrReceiverForRegexExpression)
         Me.Controls.Add(Me.ucrPnlFixedRegex)
+        Me.Controls.Add(Me.ucrSaveStringHandling)
+        Me.Controls.Add(Me.ucrReceiverForRegexExpression)
         Me.Controls.Add(Me.grpRegex)
         Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
         Me.Controls.Add(Me.rdoReplaceAll)
@@ -489,8 +489,8 @@ Partial Class dlgStringHandling
     Friend WithEvents cmdBackSlash As Button
     Friend WithEvents ucrReceiverForRegexExpression As ucrReceiverExpression
     Friend WithEvents cmdClear As Button
+    Friend WithEvents ucrSaveStringHandling As ucrSave
     Friend WithEvents rdoRegex As RadioButton
     Friend WithEvents rdoFixed As RadioButton
     Friend WithEvents ucrPnlFixedRegex As UcrPanel
-    Friend WithEvents ucrSaveStringHandling As ucrSave
 End Class
