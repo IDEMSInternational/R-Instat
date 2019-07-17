@@ -1630,13 +1630,13 @@
     <value>1</value>
   </data>
   <data name="ucrChkCosine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 89</value>
+    <value>8, 67</value>
   </data>
   <data name="ucrChkCosine.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrChkCosine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 25</value>
+    <value>203, 25</value>
   </data>
   <data name="ucrChkCosine.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1648,43 +1648,19 @@
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrChkCosine.Parent" xml:space="preserve">
-    <value>tbCircular</value>
+    <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkCosine.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrChkSinpart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 52</value>
-  </data>
-  <data name="ucrChkSinpart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="ucrChkSinpart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 25</value>
-  </data>
-  <data name="ucrChkSinpart.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSinpart.Name" xml:space="preserve">
-    <value>ucrChkSinpart</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSinpart.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSinpart.Parent" xml:space="preserve">
-    <value>tbCircular</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSinpart.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="ucrChkCircMean.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 17</value>
+    <value>8, 102</value>
   </data>
   <data name="ucrChkCircMean.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrChkCircMean.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 25</value>
+    <value>203, 25</value>
   </data>
   <data name="ucrChkCircMean.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1696,10 +1672,58 @@
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrChkCircMean.Parent" xml:space="preserve">
-    <value>tbCircular</value>
+    <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkCircMean.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkSinpart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 32</value>
+  </data>
+  <data name="ucrChkSinpart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkSinpart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 25</value>
+  </data>
+  <data name="ucrChkSinpart.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSinpart.Name" xml:space="preserve">
+    <value>ucrChkSinpart</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSinpart.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSinpart.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSinpart.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 139</value>
+  </data>
+  <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="grpOptions.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Name" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Parent" xml:space="preserve">
+    <value>tbCircular</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="tbCircular.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
@@ -1870,16 +1894,16 @@
     <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>667, 622</value>
+    <value>667, 632</value>
   </data>
   <data name="ucrButtonsSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 574</value>
+    <value>175, 589</value>
   </data>
   <data name="ucrButtonsSummaries.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrButtonsSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 37</value>
+    <value>330, 37</value>
   </data>
   <data name="ucrButtonsSummaries.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2314,7 +2338,7 @@
     <value>5</value>
   </data>
   <data name="tbSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 1</value>
+    <value>13, 10</value>
   </data>
   <data name="tbSummaries.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
