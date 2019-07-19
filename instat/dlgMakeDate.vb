@@ -22,7 +22,7 @@ Public Class dlgMakeDate
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
     Private strSelectedDataFrame As String = ""
-    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsRDefaultDate, clsGregorianDefault, clsRDDateDefault, clsJulianDateDefault, clsAsCharacterFunction As New RFunction
+    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsGregorianDefault, clsJulianDateDefault, clsAsCharacterFunction As New RFunction
     Private clsDivisionOperator, clsMultiplicationOperator As New ROperator
 
     Private Sub dlgMakeDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -103,7 +103,7 @@ Public Class dlgMakeDate
         ucrInputFormat.SetItems(dctDateFormat)
         ucrInputFormat.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
 
-        ucrInputOrigin.SetItems({"R", "Excel", "Gregorian", "Julian Day Number", "Specify"})
+        ucrInputOrigin.SetItems({"Excel", "Gregorian", "Julian Day Number", "Specify"})
         ucrInputOrigin.SetDropDownStyleAsNonEditable()
         ucrInputOrigin.AddToLinkedControls(ucrDtpSpecifyOrigin, {"Specify"}, bNewLinkedHideIfParameterMissing:=True)
 
@@ -138,7 +138,7 @@ Public Class dlgMakeDate
         ucrPnlFormat.AddRadioButton(rdoSpecifyFormat)
         ucrPnlFormat.AddRadioButton(rdoOrigin)
         ucrPnlFormat.AddToLinkedControls(ucrInputFormat, {rdoSpecifyFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Year(4-digit)-Month-Day")
-        ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="R")
+        ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Excel")
 
         ttMakeDate.SetToolTip(rdoDefaultFormat, "This will try 'Year(4-digit)-Month-Day %Y-%m-%d' then 'Year(4-digit)/Month/Day %Y/%m/%d' on the first non-NA element")
 
@@ -214,10 +214,6 @@ Public Class dlgMakeDate
 
         ucrDtpSpecifyOrigin.SetParameter(New RParameter("origin", 1))
         ucrDtpSpecifyOrigin.SetParameterIsRDate()
-
-        clsRDefaultDate = New RFunction
-        clsRDefaultDate.SetRCommand("as.Date")
-        clsRDefaultDate.AddParameter("x", Chr(34) & "1970/1/1" & Chr(34))
 
         clsDefaultDate = New RFunction
         clsDefaultDate.SetRCommand("as.Date")
