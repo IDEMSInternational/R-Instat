@@ -99,7 +99,7 @@ Public Class ucrAdditionalLayers
         If lviCurrentItem Is Nothing Then
             iLayerIndex = iLayerIndex + 1
             iParameterPosition = iParameterPosition + 1
-            strLayerName = iLayerIndex & "." & strGeomName
+            strLayerName = strGeomName
             lviLayer = New ListViewItem(text:=strLayerName)
             lstLayers.Items.Add(lviLayer)
             If bFromLayerSubDialog Then
