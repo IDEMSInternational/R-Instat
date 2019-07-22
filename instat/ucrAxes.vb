@@ -190,8 +190,26 @@ Public Class ucrAxes
         ucrChKDateBreaks.AddParameterPresentCondition(True, "breaks")
         ucrChKDateBreaks.AddParameterPresentCondition(False, "breaks", False)
         ucrChKDateBreaks.AddToLinkedControls(ucrInputDateBreaks, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-
         ucrInputDateBreaks.SetParameter(New RParameter("breaks"))
+
+        ucrInputUpperBreak.Hide()
+        ucrInputLowerBreak.Hide()
+
+        ucrChkLimitDate.SetText("Limits")
+        ucrChkLimitDate.AddParameterPresentCondition(True, "limits")
+        ucrChkLimitDate.AddParameterPresentCondition(False, "limits", False)
+        ucrChkLimitDate.AddToLinkedControls(ucrInputUpperBreak, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLimitDate.AddToLinkedControls(ucrInputLowerBreak, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputLowerBreak.SetParameter(New RParameter("lowerlimit", 0))
+        ucrInputLowerBreak.SetParameterIncludeArgumentName(False)
+        ucrInputLowerBreak.AddQuotesIfUnrecognised = False
+        ucrInputLowerBreak.SetLinkedDisplayControl(lblLowerDateBreaks)
+
+        ucrInputUpperBreak.SetParameter(New RParameter("upperlimit", 1))
+        ucrInputUpperBreak.SetParameterIncludeArgumentName(False)
+        ucrInputUpperBreak.AddQuotesIfUnrecognised = False
+        ucrInputUpperBreak.SetLinkedDisplayControl(lblUpperDateBreaks)
 
         bControlsInitialised = True
     End Sub
@@ -294,7 +312,6 @@ Public Class ucrAxes
         ucrChKDateBreaks.SetRCode(clsXYScaleDateFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrInputDateBreaks.SetRCode(clsXYScaleDateFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-
         'Temp disabled, not yet implemented
         ucrInputMajorBreaksInStepsOf.SetRCode(clsMajorBreaksSeqFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrInputMajorBreaksTo.SetRCode(clsMajorBreaksSeqFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
@@ -309,6 +326,7 @@ Public Class ucrAxes
         bRCodeSet = True
         SetLabel()
         AddRemoveContinuousXYScales()
+        AddRemoveXYDateScales()
     End Sub
 
     Private Sub AddRemoveLabs()
@@ -348,8 +366,14 @@ Public Class ucrAxes
                 clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & strAxisType)
             End If
 
-        ElseIf strAxisType = "Date" Then
+        End If
+    End Sub
+
+    Private Sub AddRemoveXYDateScales()
+        If strAxisType = "Date" Then
             clsBaseOperator.AddParameter("scale" & "_" & strAxis & "_" & strAxisType, clsRFunctionParameter:=clsXYScaleDateFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & strAxisType)
         End If
     End Sub
 
@@ -445,6 +469,6 @@ Public Class ucrAxes
     End Sub
 
     Private Sub ucrInputDateBreaks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDateBreaks.ControlValueChanged
-        AddRemoveContinuousXYScales()
+        AddRemoveXYDateScales()
     End Sub
 End Class
