@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgInfill
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
+    Private clsDefaultFunction As New RFunction
     Private Sub dlgInfill_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -49,7 +49,7 @@ Public Class dlgInfill
         ucrReceiverFactors.SetIncludedDataTypes({"factor"})
         ucrReceiverFactors.Selector = ucrInfillSelector
         ucrReceiverFactors.strSelectorHeading = "Factors"
-        ucrReceiverFactors.SetParameter(New RParameter("factors", 2))
+        ucrReceiverFactors.SetParameter(New RParameter("factors", 5))
         ucrReceiverFactors.SetParameterIsString()
         ucrReceiverFactors.strSelectorHeading = "Factors"
 
@@ -64,12 +64,14 @@ Public Class dlgInfill
 
         ucrPnlDateOptions.AddRadioButton(rdoDataLimits)
         ucrPnlDateOptions.AddRadioButton(rdoFixedLimits)
+        ucrPnlDateOptions.AddParameterPresentCondition(rdoDataLimits, "start_month")
+        ucrPnlDateOptions.AddParameterPresentCondition(rdoFixedLimits, "start_month", False)
 
         ucrChkCompleteYears.SetText("Complete years starting from")
         ucrChkStartDate.SetText("Start date")
         ucrChkEndDate.SetText("End date")
 
-        ucrInputComboMonth.SetParameter(New RParameter("", 22))
+        ucrInputComboMonth.SetParameter(New RParameter("start_month", 2))
         Dim dctMonth As New Dictionary(Of String, String)
         dctMonth.Add("January", 1)
         dctMonth.Add("February", 2)
@@ -87,19 +89,28 @@ Public Class dlgInfill
         ucrInputComboMonth.SetRDefault(1)
         ucrInputComboMonth.SetDropDownStyleAsNonEditable()
 
+        ucrDtpStartDate.SetParameter(New RParameter("start_date", 3))
+        ucrDtpStartDate.SetParameterIsRDate()
+
+        ucrDtpEndDate.SetParameter(New RParameter("end_date", 4))
+        ucrDtpEndDate.SetParameterIsRDate()
+
         ucrPnlDateOptions.AddToLinkedControls(ucrChkCompleteYears, {rdoDataLimits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDateOptions.AddToLinkedControls({ucrChkStartDate, ucrChkEndDate}, {rdoFixedLimits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkCompleteYears.AddToLinkedControls(ucrInputComboMonth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkStartDate.AddToLinkedControls(ucrDtpStartDate, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkEndDate.AddToLinkedControls(ucrDtpEndDate, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkStartDate.AddToLinkedControls(ucrDtpStartDate, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=Chr(34) & "2018/1/1" & Chr(34))
+        ucrChkEndDate.AddToLinkedControls(ucrDtpEndDate, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=Chr(34) & "2018/12/31" & Chr(34))
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
-        ' Set default RFunction as the base function
+        clsDefaultFunction = New RFunction
+
+        'Set default RFunction as the base function
         ucrInfillSelector.Reset()
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$infill_missing_dates")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        'clsDefaultFunction.AddParameter("start_date", iPosition:=3)
+        'clsDefaultFunction.AddParameter("end_date", Chr(34) & "2018/12/31" & Chr(34), iPosition:=4)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
 
     End Sub
 
