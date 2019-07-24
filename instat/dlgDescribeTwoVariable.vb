@@ -20,7 +20,7 @@ Public Class dlgDescribeTwoVariable
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Public strVarType, strSecondVarType As String
-    Public clsGetDataType, clsGetSecondDataType, clsRCorrelation, clsRCustomSummary, clsRAnova, clsRFreqTables As New RFunction
+    Public clsGetDataType, clsGetSecondDataType, clsRCorrelation, clsRCustomSummary, clsConcFunction, clsRAnova, clsRFreqTables As New RFunction
     Private clsSummariesList As New RFunction
     Private Sub dlgDescribeTwoVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -74,9 +74,12 @@ Public Class dlgDescribeTwoVariable
         clsRCorrelation = New RFunction
         clsSummariesList = New RFunction
         clsRCustomSummary = New RFunction
+        clsConcFunction = New RFunction
 
         ucrSelectorDescribeTwoVar.Reset()
         ucrReceiverFirstVar.SetMeAsReceiver()
+
+        clsConcFunction.SetRCommand("c")
 
         clsRFreqTables.AddParameter("addmargins", "FALSE", iPosition:=2)
         clsRFreqTables.AddParameter("proportions", "FALSE", iPosition:=3)
@@ -152,7 +155,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsSummariesList, clsRCustomSummary, ucrSelectorDescribeTwoVar, bResetSubdialog)
+        sdgSummaries.SetRFunction(clsSummariesList, clsRCustomSummary, clsConcFunction, ucrSelectorDescribeTwoVar, bResetSubdialog)
         bResetSubdialog = False
         sdgSummaries.ShowDialog()
         TestOKEnabled()
