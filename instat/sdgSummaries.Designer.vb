@@ -40,7 +40,6 @@ Partial Class sdgSummaries
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgSummaries))
         Me.tbMissingOptions = New System.Windows.Forms.TabPage()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.ucrChkMinNumNonMissing = New instat.ucrCheck()
         Me.ucrNudNumberNotMissing = New instat.ucrNud()
         Me.ucrNudConsecutive = New instat.ucrNud()
@@ -116,9 +115,6 @@ Partial Class sdgSummaries
         Me.tbModel = New System.Windows.Forms.TabPage()
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpProportionsPercentiles.SuspendLayout()
@@ -141,26 +137,17 @@ Partial Class sdgSummaries
         '
         'tbMissingOptions
         '
-        Me.tbMissingOptions.Controls.Add(Me.Label4)
-        Me.tbMissingOptions.Controls.Add(Me.Label3)
-        Me.tbMissingOptions.Controls.Add(Me.Label2)
-        Me.tbMissingOptions.Controls.Add(Me.Label1)
         Me.tbMissingOptions.Controls.Add(Me.ucrChkMinNumNonMissing)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudNumberNotMissing)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudConsecutive)
         Me.tbMissingOptions.Controls.Add(Me.ucrChkConsecutiveMissing)
+        Me.tbMissingOptions.Controls.Add(Me.ucrChkMaxNumMissing)
         Me.tbMissingOptions.Controls.Add(Me.ucrChkMaxPercMissing)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudNumber)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudPercentage)
-        Me.tbMissingOptions.Controls.Add(Me.ucrChkMaxNumMissing)
         resources.ApplyResources(Me.tbMissingOptions, "tbMissingOptions")
         Me.tbMissingOptions.Name = "tbMissingOptions"
         Me.tbMissingOptions.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
         '
         'ucrChkMinNumNonMissing
         '
@@ -717,21 +704,6 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
-        '
-        'Label3
-        '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.Name = "Label3"
-        '
-        'Label4
-        '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
-        '
         'sdgSummaries
         '
         resources.ApplyResources(Me, "$this")
@@ -744,7 +716,6 @@ Partial Class sdgSummaries
         Me.Name = "sdgSummaries"
         Me.Tag = "Summaries"
         Me.tbMissingOptions.ResumeLayout(False)
-        Me.tbMissingOptions.PerformLayout()
         Me.tbMore.ResumeLayout(False)
         Me.grpProportionsPercentiles.ResumeLayout(False)
         Me.grpLocation.ResumeLayout(False)
@@ -846,8 +817,4 @@ Partial Class sdgSummaries
     Friend WithEvents ucrNudConsecutive As ucrNud
     Friend WithEvents ucrChkMinNumNonMissing As ucrCheck
     Friend WithEvents ucrNudNumberNotMissing As ucrNud
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
 End Class
