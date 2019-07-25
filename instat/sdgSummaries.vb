@@ -200,16 +200,16 @@ Public Class sdgSummaries
         ucrChkCount.SetText("Count")
 
         ucrChkMaxNumMissing.SetParameter(New RParameter("n", 1, bNewIncludeArgumentName:=False), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'n'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkMaxNumMissing.SetText("Maximum number of missing allowed")
+        ucrChkMaxNumMissing.SetText("Maximum number of missing        allowed")
 
         ucrChkMinNumNonMissing.SetParameter(New RParameter("n_non_miss", 2, bNewIncludeArgumentName:=False), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'n_non_miss'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkMinNumNonMissing.SetText("Minimum number of non missing required")
+        ucrChkMinNumNonMissing.SetText("Minimum number of non missing         required")
 
         ucrChkMaxPercMissing.SetParameter(New RParameter("prop", 3, bNewIncludeArgumentName:=False), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'prop'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkMaxPercMissing.SetText("Maximum percentage of missing allowed")
+        ucrChkMaxPercMissing.SetText("Maximum percentage of missing         allowed")
 
         ucrChkConsecutiveMissing.SetParameter(New RParameter("con", 4, bNewIncludeArgumentName:=False), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'con'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkConsecutiveMissing.SetText("Maximum number of consecutive missing allowed")
+        ucrChkConsecutiveMissing.SetText("Maximum number of consecutive missing            allowed")
 
         ucrNudPercentage.SetParameter(New RParameter("na_max_prop", 10))
         ucrNudPercentage.SetMinMax(1, 100)
