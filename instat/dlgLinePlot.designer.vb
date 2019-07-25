@@ -44,7 +44,6 @@ Partial Class dlgLinePlot
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
-        Me.lblGroup = New System.Windows.Forms.Label()
         Me.lblGroupLine = New System.Windows.Forms.Label()
         Me.ucrChkValley = New instat.ucrCheck()
         Me.ucrChkPeak = New instat.ucrCheck()
@@ -90,11 +89,6 @@ Partial Class dlgLinePlot
         resources.ApplyResources(Me.lblFactorOptional, "lblFactorOptional")
         Me.lblFactorOptional.Name = "lblFactorOptional"
         Me.lblFactorOptional.Tag = "Factor_Optional:"
-        '
-        'lblGroup
-        '
-        resources.ApplyResources(Me.lblGroup, "lblGroup")
-        Me.lblGroup.Name = "lblGroup"
         '
         'lblGroupLine
         '
@@ -194,7 +188,6 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrChkValley)
         Me.Controls.Add(Me.ucrChkPeak)
         Me.Controls.Add(Me.ucrReceiverGroup)
-        Me.Controls.Add(Me.lblGroup)
         Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrChkPoints)
@@ -233,7 +226,6 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrChkLineofBestFit As ucrCheck
     Friend WithEvents ucrChkWithSE As ucrCheck
     Friend WithEvents ucrReceiverGroup As ucrReceiverSingle
-    Friend WithEvents lblGroup As Label
     Friend WithEvents ucrChkValley As ucrCheck
     Friend WithEvents ucrChkPeak As ucrCheck
     Friend WithEvents lblGroupLine As Label
