@@ -46,6 +46,12 @@ Public Class dlgBoxplot
     ' Jitter function that can be added to the boxplot/violin base layer
     Private clsAddedJitterFunc As New RFunction
 
+    'Parameter names for geoms
+    Private strFirstParameterName As String = "geomfunc"
+    Private strStatSummaryParameterName As String = "stat_summary"
+    Private strAdditionalPointsParameterName As String = "add_jitter"
+    Private strGeomParameterNames() As String = {strFirstParameterName, strStatSummaryParameterName, strAdditionalPointsParameterName}
+
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -123,8 +129,9 @@ Public Class dlgBoxplot
         ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
         ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        clsAddedJitterParam.SetArgumentName("add_jitter")
+        clsAddedJitterParam.SetArgumentName(strAdditionalPointsParameterName)
         clsAddedJitterParam.SetArgument(clsAddedJitterFunc)
+        clsAddedJitterParam.Position = 3
 
         ucrChkAddPoints.SetParameter(clsAddedJitterParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkAddPoints.SetText("Add Points")
@@ -159,8 +166,8 @@ Public Class dlgBoxplot
 
         ucrChkGrouptoConnect.SetText("Group to Connect")
         ucrChkGrouptoConnect.AddToLinkedControls(ucrInputSummaries, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
-        ucrChkGrouptoConnect.AddParameterPresentCondition(True, "stat_summary", True)
-        ucrChkGrouptoConnect.AddParameterPresentCondition(False, "stat_summary", False)
+        ucrChkGrouptoConnect.AddParameterPresentCondition(True, strStatSummaryParameterName, True)
+        ucrChkGrouptoConnect.AddParameterPresentCondition(False, strStatSummaryParameterName, False)
         'this control exists but diabled for now
         ucrChkSwapParameters.SetText("swap Parameters")
 
@@ -216,8 +223,8 @@ Public Class dlgBoxplot
         'Setting operation and adding parameters to baseoperator
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsBoxplotFunc, iPosition:=2)
-        'clsBaseOperator.AddParameter("stat_summary", clsRFunctionParameter:=clsStatSummary, iPosition:=3)
+        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsBoxplotFunc, iPosition:=2)
+        'clsBaseOperator.AddParameter(strStatSummaryParameterName, clsRFunctionParameter:=clsStatSummary, iPosition:=3)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -285,7 +292,7 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
 
@@ -350,7 +357,7 @@ Public Class dlgBoxplot
         'TODO Am not sure why the geomfunc parameter which carries clsCurrGeomFunc(current geom function) 
         'does Not Update() properly when readio buttons are changed
         'hence i have to force it to update properly after this if statement
-        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsCurrGeomFunc, iPosition:=2)
+        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsCurrGeomFunc, iPosition:=2)
         SetOptionsButtonstext()
     End Sub
 
@@ -388,9 +395,9 @@ Public Class dlgBoxplot
 
     Private Sub ucrChkGrouptoConnect_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkGrouptoConnect.ControlValueChanged
         If ucrChkGrouptoConnect.Checked Then
-            clsBaseOperator.AddParameter("stat_summary", clsRFunctionParameter:=clsStatSummary, iPosition:=3)
+            clsBaseOperator.AddParameter(strStatSummaryParameterName, clsRFunctionParameter:=clsStatSummary, iPosition:=4)
         Else
-            clsBaseOperator.RemoveParameterByName("stat_summary")
+            clsBaseOperator.RemoveParameterByName(strStatSummaryParameterName)
         End If
     End Sub
 
