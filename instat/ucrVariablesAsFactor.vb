@@ -35,10 +35,6 @@ Public Class ucrVariablesAsFactor
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
-        Else
-            'This resets the factor receiver on the dialog every time the dialog opens.
-            'We don't want this on reopen
-            'SetReceiverStatus()
         End If
     End Sub
 
