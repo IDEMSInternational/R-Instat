@@ -52,7 +52,6 @@ Public Class dlgView
 
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispOutputWindow, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
-        'ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoHTMLOutputWindow, "sjt.df")
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoHTMLOutputWindow, "tab_df")
 
 
@@ -115,12 +114,6 @@ Public Class dlgView
         ucrReceiverView.SetMeAsReceiver()
 
         clsOutputWindowFunction.SetPackageName("utils")
-
-        'clsHTMLFunction.SetPackageName("sjPlot")
-        'clsHTMLFunction.SetRCommand("sjt.df")
-        'clsHTMLFunction.AddParameter("describe", "FALSE", iPosition:=1)
-        'clsHTMLFunction.AddParameter("altr.row.col", "TRUE", iPosition:=2)
-        'clsHTMLFunction.AddParameter("hide.progress", "TRUE", iPosition:=4)
 
         clsHTMLFunction.SetPackageName("sjPlot")
         clsHTMLFunction.SetRCommand("tab_df")
