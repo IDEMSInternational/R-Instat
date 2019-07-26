@@ -7813,7 +7813,7 @@
     <value>3</value>
   </data>
   <data name="cmdCircRange.Text" xml:space="preserve">
-    <value>Range</value>
+    <value>range</value>
   </data>
   <data name="&gt;&gt;cmdCircRange.Name" xml:space="preserve">
     <value>cmdCircRange</value>
