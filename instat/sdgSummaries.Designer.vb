@@ -47,7 +47,6 @@ Partial Class sdgSummaries
         Me.ucrChkMaxNumMissing = New instat.ucrCheck()
         Me.ucrChkMaxPercMissing = New instat.ucrCheck()
         Me.ucrNudNumber = New instat.ucrNud()
-        Me.ucrNudPercentage = New instat.ucrNud()
         Me.tbMore = New System.Windows.Forms.TabPage()
         Me.grpProportionsPercentiles = New System.Windows.Forms.GroupBox()
         Me.ucrInputCountValue = New instat.ucrInputTextBox()
@@ -115,6 +114,7 @@ Partial Class sdgSummaries
         Me.tbModel = New System.Windows.Forms.TabPage()
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
+        Me.ucrInputPercentage = New instat.ucrInputTextBox()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpProportionsPercentiles.SuspendLayout()
@@ -137,6 +137,7 @@ Partial Class sdgSummaries
         '
         'tbMissingOptions
         '
+        Me.tbMissingOptions.Controls.Add(Me.ucrInputPercentage)
         Me.tbMissingOptions.Controls.Add(Me.ucrChkMinNumNonMissing)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudNumberNotMissing)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudConsecutive)
@@ -144,7 +145,6 @@ Partial Class sdgSummaries
         Me.tbMissingOptions.Controls.Add(Me.ucrChkMaxNumMissing)
         Me.tbMissingOptions.Controls.Add(Me.ucrChkMaxPercMissing)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudNumber)
-        Me.tbMissingOptions.Controls.Add(Me.ucrNudPercentage)
         resources.ApplyResources(Me.tbMissingOptions, "tbMissingOptions")
         Me.tbMissingOptions.Name = "tbMissingOptions"
         Me.tbMissingOptions.UseVisualStyleBackColor = True
@@ -202,16 +202,6 @@ Partial Class sdgSummaries
         Me.ucrNudNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumber.Name = "ucrNudNumber"
         Me.ucrNudNumber.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudPercentage
-        '
-        Me.ucrNudPercentage.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPercentage.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudPercentage, "ucrNudPercentage")
-        Me.ucrNudPercentage.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPercentage.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPercentage.Name = "ucrNudPercentage"
-        Me.ucrNudPercentage.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'tbMore
         '
@@ -704,6 +694,14 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         '
+        'ucrInputPercentage
+        '
+        Me.ucrInputPercentage.AddQuotesIfUnrecognised = True
+        Me.ucrInputPercentage.IsMultiline = False
+        Me.ucrInputPercentage.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPercentage, "ucrInputPercentage")
+        Me.ucrInputPercentage.Name = "ucrInputPercentage"
+        '
         'sdgSummaries
         '
         resources.ApplyResources(Me, "$this")
@@ -799,7 +797,6 @@ Partial Class sdgSummaries
     Friend WithEvents tbModel As TabPage
     Friend WithEvents ucrChkStandardErrorOfMean As ucrCheck
     Friend WithEvents ucrNudNumber As ucrNud
-    Friend WithEvents ucrNudPercentage As ucrNud
     Friend WithEvents tbPosition As TabPage
     Friend WithEvents grpPosition As GroupBox
     Friend WithEvents ucrInputN As ucrInputTextBox
@@ -817,4 +814,5 @@ Partial Class sdgSummaries
     Friend WithEvents ucrNudConsecutive As ucrNud
     Friend WithEvents ucrChkMinNumNonMissing As ucrCheck
     Friend WithEvents ucrNudNumberNotMissing As ucrNud
+    Friend WithEvents ucrInputPercentage As ucrInputTextBox
 End Class
