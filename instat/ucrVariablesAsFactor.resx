@@ -180,9 +180,6 @@
   <data name="cmdVariables.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="cmdVariables.Text" xml:space="preserve">
-    <value>Single Variable</value>
-  </data>
   <data name="&gt;&gt;cmdVariables.Name" xml:space="preserve">
     <value>cmdVariables</value>
   </data>
