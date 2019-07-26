@@ -66,7 +66,7 @@ Partial Class ucrVariablesAsFactor
         '
         resources.ApplyResources(Me.cmdVariables, "cmdVariables")
         Me.cmdVariables.Name = "cmdVariables"
-        Me.cmdVariables.Tag = "Single_Variable"
+        Me.cmdVariables.Tag = ""
         Me.cmdVariables.UseVisualStyleBackColor = True
         '
         'ucrVariablesAsFactor
