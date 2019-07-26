@@ -278,6 +278,20 @@ Partial Class ucrCalculator
         Me.cmdHair = New System.Windows.Forms.Button()
         Me.cmdGroup = New System.Windows.Forms.Button()
         Me.cmdGrade = New System.Windows.Forms.Button()
+        Me.grpCircular = New System.Windows.Forms.GroupBox()
+        Me.Button14 = New System.Windows.Forms.Button()
+        Me.Button13 = New System.Windows.Forms.Button()
+        Me.Button12 = New System.Windows.Forms.Button()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -287,6 +301,7 @@ Partial Class ucrCalculator
         Me.grpProbabilty.SuspendLayout()
         Me.grpMaths.SuspendLayout()
         Me.grpWakefield.SuspendLayout()
+        Me.grpCircular.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -1826,6 +1841,7 @@ Partial Class ucrCalculator
         '
         'grpWakefield
         '
+        Me.grpWakefield.Controls.Add(Me.grpCircular)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
         Me.grpWakefield.Controls.Add(Me.cmdValid)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
@@ -1944,6 +1960,103 @@ Partial Class ucrCalculator
         Me.cmdGrade.Name = "cmdGrade"
         Me.cmdGrade.UseVisualStyleBackColor = True
         '
+        'grpCircular
+        '
+        Me.grpCircular.Controls.Add(Me.Button14)
+        Me.grpCircular.Controls.Add(Me.Button13)
+        Me.grpCircular.Controls.Add(Me.Button12)
+        Me.grpCircular.Controls.Add(Me.Button11)
+        Me.grpCircular.Controls.Add(Me.Button10)
+        Me.grpCircular.Controls.Add(Me.Button9)
+        Me.grpCircular.Controls.Add(Me.Button8)
+        Me.grpCircular.Controls.Add(Me.Button7)
+        Me.grpCircular.Controls.Add(Me.Button6)
+        Me.grpCircular.Controls.Add(Me.Button5)
+        Me.grpCircular.Controls.Add(Me.Button4)
+        Me.grpCircular.Controls.Add(Me.Button3)
+        Me.grpCircular.Controls.Add(Me.Button2)
+        resources.ApplyResources(Me.grpCircular, "grpCircular")
+        Me.grpCircular.Name = "grpCircular"
+        Me.grpCircular.TabStop = False
+        '
+        'Button14
+        '
+        resources.ApplyResources(Me.Button14, "Button14")
+        Me.Button14.Name = "Button14"
+        Me.Button14.UseVisualStyleBackColor = True
+        '
+        'Button13
+        '
+        resources.ApplyResources(Me.Button13, "Button13")
+        Me.Button13.Name = "Button13"
+        Me.Button13.UseVisualStyleBackColor = True
+        '
+        'Button12
+        '
+        resources.ApplyResources(Me.Button12, "Button12")
+        Me.Button12.Name = "Button12"
+        Me.Button12.UseVisualStyleBackColor = True
+        '
+        'Button11
+        '
+        resources.ApplyResources(Me.Button11, "Button11")
+        Me.Button11.Name = "Button11"
+        Me.Button11.UseVisualStyleBackColor = True
+        '
+        'Button10
+        '
+        resources.ApplyResources(Me.Button10, "Button10")
+        Me.Button10.Name = "Button10"
+        Me.Button10.UseVisualStyleBackColor = True
+        '
+        'Button9
+        '
+        resources.ApplyResources(Me.Button9, "Button9")
+        Me.Button9.Name = "Button9"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
+        'Button8
+        '
+        resources.ApplyResources(Me.Button8, "Button8")
+        Me.Button8.Name = "Button8"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
+        'Button7
+        '
+        resources.ApplyResources(Me.Button7, "Button7")
+        Me.Button7.Name = "Button7"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        resources.ApplyResources(Me.Button6, "Button6")
+        Me.Button6.Name = "Button6"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        resources.ApplyResources(Me.Button5, "Button5")
+        Me.Button5.Name = "Button5"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        resources.ApplyResources(Me.Button4, "Button4")
+        Me.Button4.Name = "Button4"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.Name = "Button3"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Name = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
@@ -1977,6 +2090,7 @@ Partial Class ucrCalculator
         Me.grpProbabilty.ResumeLayout(False)
         Me.grpMaths.ResumeLayout(False)
         Me.grpWakefield.ResumeLayout(False)
+        Me.grpCircular.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2221,4 +2335,18 @@ Partial Class ucrCalculator
     Friend WithEvents cmdGrade As Button
     Friend WithEvents cmdLogistic As Button
     Friend WithEvents cmdLogit As Button
+    Friend WithEvents grpCircular As GroupBox
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button14 As Button
+    Friend WithEvents Button13 As Button
+    Friend WithEvents Button12 As Button
+    Friend WithEvents Button11 As Button
+    Friend WithEvents Button10 As Button
+    Friend WithEvents Button9 As Button
+    Friend WithEvents Button8 As Button
+    Friend WithEvents Button7 As Button
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Button4 As Button
 End Class
