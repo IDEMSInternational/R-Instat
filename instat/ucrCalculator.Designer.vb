@@ -279,19 +279,19 @@ Partial Class ucrCalculator
         Me.cmdGroup = New System.Windows.Forms.Button()
         Me.cmdGrade = New System.Windows.Forms.Button()
         Me.grpCircular = New System.Windows.Forms.GroupBox()
-        Me.Button14 = New System.Windows.Forms.Button()
-        Me.Button13 = New System.Windows.Forms.Button()
-        Me.Button12 = New System.Windows.Forms.Button()
-        Me.Button11 = New System.Windows.Forms.Button()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.cmdcircMax = New System.Windows.Forms.Button()
+        Me.cmdCircQ3 = New System.Windows.Forms.Button()
+        Me.cmdCircQ1 = New System.Windows.Forms.Button()
+        Me.cmdCircMin = New System.Windows.Forms.Button()
+        Me.cmdA1 = New System.Windows.Forms.Button()
+        Me.cmdAngDev = New System.Windows.Forms.Button()
+        Me.cmdAngVar = New System.Windows.Forms.Button()
+        Me.cmdCircVar = New System.Windows.Forms.Button()
+        Me.cmdCircSd = New System.Windows.Forms.Button()
+        Me.cmdCircRange = New System.Windows.Forms.Button()
+        Me.cmdMedianHL = New System.Windows.Forms.Button()
+        Me.cmdCircMedian = New System.Windows.Forms.Button()
+        Me.cmdCircMean = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1841,7 +1841,6 @@ Partial Class ucrCalculator
         '
         'grpWakefield
         '
-        Me.grpWakefield.Controls.Add(Me.grpCircular)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
         Me.grpWakefield.Controls.Add(Me.cmdValid)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
@@ -1962,105 +1961,106 @@ Partial Class ucrCalculator
         '
         'grpCircular
         '
-        Me.grpCircular.Controls.Add(Me.Button14)
-        Me.grpCircular.Controls.Add(Me.Button13)
-        Me.grpCircular.Controls.Add(Me.Button12)
-        Me.grpCircular.Controls.Add(Me.Button11)
-        Me.grpCircular.Controls.Add(Me.Button10)
-        Me.grpCircular.Controls.Add(Me.Button9)
-        Me.grpCircular.Controls.Add(Me.Button8)
-        Me.grpCircular.Controls.Add(Me.Button7)
-        Me.grpCircular.Controls.Add(Me.Button6)
-        Me.grpCircular.Controls.Add(Me.Button5)
-        Me.grpCircular.Controls.Add(Me.Button4)
-        Me.grpCircular.Controls.Add(Me.Button3)
-        Me.grpCircular.Controls.Add(Me.Button2)
+        Me.grpCircular.Controls.Add(Me.cmdcircMax)
+        Me.grpCircular.Controls.Add(Me.cmdCircQ3)
+        Me.grpCircular.Controls.Add(Me.cmdCircQ1)
+        Me.grpCircular.Controls.Add(Me.cmdCircMin)
+        Me.grpCircular.Controls.Add(Me.cmdA1)
+        Me.grpCircular.Controls.Add(Me.cmdAngDev)
+        Me.grpCircular.Controls.Add(Me.cmdAngVar)
+        Me.grpCircular.Controls.Add(Me.cmdCircVar)
+        Me.grpCircular.Controls.Add(Me.cmdCircSd)
+        Me.grpCircular.Controls.Add(Me.cmdCircRange)
+        Me.grpCircular.Controls.Add(Me.cmdMedianHL)
+        Me.grpCircular.Controls.Add(Me.cmdCircMedian)
+        Me.grpCircular.Controls.Add(Me.cmdCircMean)
         resources.ApplyResources(Me.grpCircular, "grpCircular")
         Me.grpCircular.Name = "grpCircular"
         Me.grpCircular.TabStop = False
         '
-        'Button14
+        'cmdcircMax
         '
-        resources.ApplyResources(Me.Button14, "Button14")
-        Me.Button14.Name = "Button14"
-        Me.Button14.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdcircMax, "cmdcircMax")
+        Me.cmdcircMax.Name = "cmdcircMax"
+        Me.cmdcircMax.UseVisualStyleBackColor = True
         '
-        'Button13
+        'cmdCircQ3
         '
-        resources.ApplyResources(Me.Button13, "Button13")
-        Me.Button13.Name = "Button13"
-        Me.Button13.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCircQ3, "cmdCircQ3")
+        Me.cmdCircQ3.Name = "cmdCircQ3"
+        Me.cmdCircQ3.UseVisualStyleBackColor = True
         '
-        'Button12
+        'cmdCircQ1
         '
-        resources.ApplyResources(Me.Button12, "Button12")
-        Me.Button12.Name = "Button12"
-        Me.Button12.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCircQ1, "cmdCircQ1")
+        Me.cmdCircQ1.Name = "cmdCircQ1"
+        Me.cmdCircQ1.UseVisualStyleBackColor = True
         '
-        'Button11
+        'cmdCircMin
         '
-        resources.ApplyResources(Me.Button11, "Button11")
-        Me.Button11.Name = "Button11"
-        Me.Button11.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCircMin, "cmdCircMin")
+        Me.cmdCircMin.Name = "cmdCircMin"
+        Me.cmdCircMin.UseVisualStyleBackColor = True
         '
-        'Button10
+        'cmdA1
         '
-        resources.ApplyResources(Me.Button10, "Button10")
-        Me.Button10.Name = "Button10"
-        Me.Button10.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdA1, "cmdA1")
+        Me.cmdA1.Name = "cmdA1"
+        Me.cmdA1.UseVisualStyleBackColor = True
         '
-        'Button9
+        'cmdAngDev
         '
-        resources.ApplyResources(Me.Button9, "Button9")
-        Me.Button9.Name = "Button9"
-        Me.Button9.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdAngDev, "cmdAngDev")
+        Me.cmdAngDev.Name = "cmdAngDev"
+        Me.cmdAngDev.UseVisualStyleBackColor = True
         '
-        'Button8
+        'cmdAngVar
         '
-        resources.ApplyResources(Me.Button8, "Button8")
-        Me.Button8.Name = "Button8"
-        Me.Button8.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdAngVar, "cmdAngVar")
+        Me.cmdAngVar.Name = "cmdAngVar"
+        Me.cmdAngVar.UseVisualStyleBackColor = True
         '
-        'Button7
+        'cmdCircVar
         '
-        resources.ApplyResources(Me.Button7, "Button7")
-        Me.Button7.Name = "Button7"
-        Me.Button7.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCircVar, "cmdCircVar")
+        Me.cmdCircVar.Name = "cmdCircVar"
+        Me.cmdCircVar.UseVisualStyleBackColor = True
         '
-        'Button6
+        'cmdCircSd
         '
-        resources.ApplyResources(Me.Button6, "Button6")
-        Me.Button6.Name = "Button6"
-        Me.Button6.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCircSd, "cmdCircSd")
+        Me.cmdCircSd.Name = "cmdCircSd"
+        Me.cmdCircSd.UseVisualStyleBackColor = True
         '
-        'Button5
+        'cmdCircRange
         '
-        resources.ApplyResources(Me.Button5, "Button5")
-        Me.Button5.Name = "Button5"
-        Me.Button5.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCircRange, "cmdCircRange")
+        Me.cmdCircRange.Name = "cmdCircRange"
+        Me.cmdCircRange.UseVisualStyleBackColor = True
         '
-        'Button4
+        'cmdMedianHL
         '
-        resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.Name = "Button4"
-        Me.Button4.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdMedianHL, "cmdMedianHL")
+        Me.cmdMedianHL.Name = "cmdMedianHL"
+        Me.cmdMedianHL.UseVisualStyleBackColor = True
         '
-        'Button3
+        'cmdCircMedian
         '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.Name = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCircMedian, "cmdCircMedian")
+        Me.cmdCircMedian.Name = "cmdCircMedian"
+        Me.cmdCircMedian.UseVisualStyleBackColor = True
         '
-        'Button2
+        'cmdCircMean
         '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Name = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCircMean, "cmdCircMean")
+        Me.cmdCircMean.Name = "cmdCircMean"
+        Me.cmdCircMean.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpSummary)
@@ -2336,17 +2336,17 @@ Partial Class ucrCalculator
     Friend WithEvents cmdLogistic As Button
     Friend WithEvents cmdLogit As Button
     Friend WithEvents grpCircular As GroupBox
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button14 As Button
-    Friend WithEvents Button13 As Button
-    Friend WithEvents Button12 As Button
-    Friend WithEvents Button11 As Button
-    Friend WithEvents Button10 As Button
-    Friend WithEvents Button9 As Button
-    Friend WithEvents Button8 As Button
-    Friend WithEvents Button7 As Button
-    Friend WithEvents Button6 As Button
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button4 As Button
+    Friend WithEvents cmdCircMedian As Button
+    Friend WithEvents cmdCircMean As Button
+    Friend WithEvents cmdcircMax As Button
+    Friend WithEvents cmdCircQ3 As Button
+    Friend WithEvents cmdCircQ1 As Button
+    Friend WithEvents cmdCircMin As Button
+    Friend WithEvents cmdA1 As Button
+    Friend WithEvents cmdAngDev As Button
+    Friend WithEvents cmdAngVar As Button
+    Friend WithEvents cmdCircVar As Button
+    Friend WithEvents cmdCircSd As Button
+    Friend WithEvents cmdCircRange As Button
+    Friend WithEvents cmdMedianHL As Button
 End Class
