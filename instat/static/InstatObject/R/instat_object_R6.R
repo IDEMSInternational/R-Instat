@@ -208,7 +208,7 @@ DataBook$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, ov
 
 DataBook$set("public", "clone_data_object", function(curr_data_object, include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE, ...) {
   curr_names <- names(curr_data_object)
-  if("get_data_frame" %in% curr_names) new_data <- curr_data_object$get_data_frame(use_current_filter = TRUE)
+  if("get_data_frame" %in% curr_names) new_data <- curr_data_object$get_data_frame(use_current_filter = FALSE)
   else stop("Cannot import data. No 'get_data_frame' method.")
   if("get_metadata" %in% curr_names) new_data_name <- curr_data_object$get_metadata(data_name_label)
   if(include_objects && "get_objects" %in% curr_names) new_objects <- curr_data_object$get_objects()
@@ -1734,7 +1734,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   df$rain_cond <- (df[[rain_total_name]] <= df[["rain_total_actual"]])
 
   # All three conditions met
-  df$overall_cond <- (ifelse(start_check, df$plant_day_cond, TRUE) & df$length_cond & df$rain_cond)
+  df$overall_cond <- ((if(start_check) df$plant_day_cond else TRUE) & df$length_cond & df$rain_cond)
 
   crops_name <- "crop_def"
   crops_name <- next_default_item(prefix = crops_name, existing_names = self$get_data_names(), include_index = FALSE)
@@ -1854,7 +1854,7 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
         else if(length(invalid_long) < 12) {
           stop("Some month values were not unrecognised.\nIf specifying full names the following are invalid: ", paste(invalid_long, collapse = ", "), "\nAlternatively use a numeric month column.")
         }
-        else stop("No values in the month column were recognised.\nUse either\n short names: ", paste(month.abb, collapse = ", "), "\nfukk names: ", paste(month.name, collapse = ", "), "\nor numbers 1 to 12.")
+        else stop("No values in the month column were recognised.\nUse either\n short names: ", paste(month.abb, collapse = ", "), "\nfull names: ", paste(month.name, collapse = ", "), "\nor numbers 1 to 12.")
       }
       # Put title case months into the data as this will be needed to make the date column
       x[[month]] <- month_data_title 
