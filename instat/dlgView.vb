@@ -223,7 +223,7 @@ Public Class dlgView
                 ucrBase.clsRsyntax.iCallType = 0
                 ucrBase.clsRsyntax.SetBaseRFunction(clsViewColumnsFunction)
             Else
-                ucrBase.clsRsyntax.iCallType = 0
+                ucrBase.clsRsyntax.iCallType = 2
                 ucrBase.clsRsyntax.SetBaseRFunction(clsHTMLFunction)
             End If
         Else
