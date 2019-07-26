@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class sdgSummaries
-    Public clsListFunction, clsDefaultFunction As New RFunction
+    Public clsListFunction, clsDefaultFunction, clsConcFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Private lstCheckboxes As New List(Of ucrCheck)
@@ -139,18 +139,13 @@ Public Class sdgSummaries
         ucrChkProportion.AddToLinkedControls(ucrChkPercentage, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkCount.AddToLinkedControls(ucrInputComboCountTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="==")
         ucrChkCount.AddToLinkedControls(ucrInputCountValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrChkIncludeMissingOpt.AddToLinkedControls(ucrPnlMissingOptions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoNumber)
-        ucrPnlMissingOptions.AddToLinkedControls({ucrNudNumber}, {rdoNumber}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrPnlMissingOptions.AddToLinkedControls({ucrNudPercentage}, {rdoPercentage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkMaxNumMissing.AddToLinkedControls({ucrNudNumber}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkMaxPercMissing.AddToLinkedControls({ucrNudPercentage}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkMinNumNonMissing.AddToLinkedControls({ucrNudNumberNotMissing}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=340)
+        ucrChkConsecutiveMissing.AddToLinkedControls({ucrNudConsecutive}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=4)
 
         ucrInputN.SetLinkedDisplayControl(lblInputN)
         ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
-        ucrNudNumber.SetLinkedDisplayControl(lblNumber)
-        ucrNudPercentage.SetLinkedDisplayControl(lblPercentage)
-
-        ucrPnlMissingOptions.SetParameter(New RParameter("na_type", 9))
-        ucrPnlMissingOptions.AddRadioButton(rdoNumber, Chr(34) & "'n'" & Chr(34))
-        ucrPnlMissingOptions.AddRadioButton(rdoPercentage, Chr(34) & "'prop'" & Chr(34))
 
         ucrChkTrimmedMean.SetParameter(New RParameter("summary_trimmed_mean", 27), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_trimmed_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkTrimmedMean.SetText("Trimmed Mean")
@@ -204,18 +199,32 @@ Public Class sdgSummaries
         ucrChkCount.SetParameter(New RParameter("count_calc", 29), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "count_calc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCount.SetText("Count")
 
-        ucrChkIncludeMissingOpt.SetText("Inlcude Missing Options")
-        ucrChkIncludeMissingOpt.AddParameterPresentCondition(True, "na_type")
-        ucrChkIncludeMissingOpt.AddParameterPresentCondition(False, "na_type", False)
+        ucrChkMaxNumMissing.SetParameter(New RParameter("n", 1, bNewIncludeArgumentName:=False), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'n'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMaxNumMissing.SetText("Maximum number of missing allowed")
+
+        ucrChkMinNumNonMissing.SetParameter(New RParameter("n_non_miss", 2, bNewIncludeArgumentName:=False), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'n_non_miss'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMinNumNonMissing.SetText("Minimum number of non missing required")
+
+        ucrChkMaxPercMissing.SetParameter(New RParameter("prop", 3, bNewIncludeArgumentName:=False), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'prop'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMaxPercMissing.SetText("Maximum percentage of missing allowed")
+
+        ucrChkConsecutiveMissing.SetParameter(New RParameter("con", 4, bNewIncludeArgumentName:=False), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'con'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkConsecutiveMissing.SetText("Maximum number of consecutive missing allowed")
 
         ucrNudPercentage.SetParameter(New RParameter("na_max_prop", 10))
+        ucrNudPercentage.SetMinMax(1, 100)
 
         ucrNudNumber.SetParameter(New RParameter("na_max_n", 11))
+
+        ucrNudNumberNotMissing.SetParameter(New RParameter("na_min_n", 12))
+        ucrNudNumberNotMissing.SetMinMax(0, iNewMax:=Integer.MaxValue)
+
+        ucrNudConsecutive.SetParameter(New RParameter("na_consecutive_n", 13))
 
         ucrChkStandardErrorOfMean.SetParameter(New RParameter("standard_error_mean", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "standard_error_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkStandardErrorOfMean.SetText("Standard Error of the Mean")
 
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean})
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean, ucrChkMaxNumMissing, ucrChkMinNumNonMissing, ucrChkMaxPercMissing, ucrChkConsecutiveMissing})
 
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
@@ -227,12 +236,13 @@ Public Class sdgSummaries
         OrderByCheckEnabled()
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewConcFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsListFunction = clsNewRFunction
         clsDefaultFunction = clsNewDefaultFunction
+        clsConcFunction = clsNewConcFunction
 
         'This is meant to force selector select the current dataframe as selected in the main dialog
         ucrBaseSelector = ucrNewBaseSelector
@@ -244,8 +254,12 @@ Public Class sdgSummaries
 
         ucrNudPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudNumber.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkIncludeMissingOpt.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
-        ucrPnlMissingOptions.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudNumberNotMissing.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudConsecutive.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMaxNumMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMaxPercMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkConsecutiveMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMinNumNonMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPropValue.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
@@ -380,5 +394,13 @@ Public Class sdgSummaries
     Private Sub ucrChkOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOrderBy.ControlValueChanged
         PositionOptions()
         OrderByCheckEnabled()
+    End Sub
+
+    Private Sub ucrChkConsecutiveMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConsecutiveMissing.ControlValueChanged, ucrChkMaxNumMissing.ControlValueChanged, ucrChkMaxPercMissing.ControlValueChanged, ucrChkMaxNumMissing.ControlValueChanged, ucrChkMinNumNonMissing.ControlValueChanged
+        If ucrChkConsecutiveMissing.Checked OrElse ucrChkMinNumNonMissing.Checked OrElse ucrChkMaxNumMissing.Checked OrElse ucrChkMaxPercMissing.Checked Then
+            clsDefaultFunction.AddParameter("na_type", clsRFunctionParameter:=clsConcFunction, iPosition:=9)
+        Else
+            clsDefaultFunction.RemoveParameterByName("na_type")
+        End If
     End Sub
 End Class
