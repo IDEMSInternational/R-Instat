@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgFitCorruptionModel
+Partial Class dlgCorruptionFitModel
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -38,7 +38,7 @@ Partial Class dlgFitCorruptionModel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgFitCorruptionModel))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCorruptionFitModel))
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.lblModelPreview = New System.Windows.Forms.Label()
         Me.lblControlVariables = New System.Windows.Forms.Label()
@@ -126,12 +126,13 @@ Partial Class dlgFitCorruptionModel
         '
         'ucrSelectorFitModel
         '
+        Me.ucrSelectorFitModel.bDropUnusedFilterLevels = False
         Me.ucrSelectorFitModel.bShowHiddenColumns = False
         Me.ucrSelectorFitModel.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorFitModel, "ucrSelectorFitModel")
         Me.ucrSelectorFitModel.Name = "ucrSelectorFitModel"
         '
-        'dlgFitCorruptionModel
+        'dlgCorruptionFitModel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -150,7 +151,7 @@ Partial Class dlgFitCorruptionModel
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgFitCorruptionModel"
+        Me.Name = "dlgCorruptionFitModel"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

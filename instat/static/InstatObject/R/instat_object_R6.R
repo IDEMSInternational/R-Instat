@@ -88,6 +88,11 @@ DataBook$set("public", "import_data", function(data_tables = list(), data_tables
     for ( i in (1:length(data_tables)) ) {
       curr_name <- names(data_tables)[[i]]
       if(is.null(curr_name) && !is.null(data_names)) curr_name <- data_names[i]
+      if(tolower(curr_name) %in% tolower(names(private$.data_sheets))) {
+        warning("Cannot have data frames with the same name only differing by case. Data frame will be renamed.")
+        curr_name <- next_default_item(tolower(curr_name), tolower(names(private$.data_sheets)))
+      }
+      
       new_data = DataSheet$new(data=data_tables[[i]], data_name = curr_name,
                                  variables_metadata = data_tables_variables_metadata[[i]],
                                  metadata = data_tables_metadata[[i]], 
@@ -203,7 +208,7 @@ DataBook$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, ov
 
 DataBook$set("public", "clone_data_object", function(curr_data_object, include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE, ...) {
   curr_names <- names(curr_data_object)
-  if("get_data_frame" %in% curr_names) new_data <- curr_data_object$get_data_frame(use_current_filter = TRUE)
+  if("get_data_frame" %in% curr_names) new_data <- curr_data_object$get_data_frame(use_current_filter = FALSE)
   else stop("Cannot import data. No 'get_data_frame' method.")
   if("get_metadata" %in% curr_names) new_data_name <- curr_data_object$get_metadata(data_name_label)
   if(include_objects && "get_objects" %in% curr_names) new_objects <- curr_data_object$get_objects()
@@ -894,7 +899,7 @@ DataBook$set("public", "sort_dataframe", function(data_name, col_names = c(), de
 DataBook$set("public", "rename_dataframe", function(data_name, new_value = "", label = "") {
   data_obj <- self$get_data_objects(data_name)
   if(data_name != new_value) {
-    if(new_value %in% names(private$.data_sheets)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
+    if(tolower(new_value) %in% tolower(names(private$.data_sheets)[-which(names(private$.data_sheets) == data_name)])) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
     names(private$.data_sheets)[names(private$.data_sheets) == data_name] <- new_value
     data_obj$append_to_metadata(data_name_label, new_value)
     self$update_links_rename_data_frame(data_name, new_value)
@@ -1693,7 +1698,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     station_col <- self$get_columns_from_data(data_name, station)
     unique_station <- na.omit(unique(station_col))
     expand_list[[length(expand_list) + 1]] <- unique_station
-    names_list[length(names_list) + 1] <- station_col
+    names_list[length(names_list) + 1] <- station
   }
   df <- setNames(expand.grid(expand_list), names_list)
   daily_data <- self$get_data_frame(data_name)
@@ -1729,7 +1734,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   df$rain_cond <- (df[[rain_total_name]] <= df[["rain_total_actual"]])
 
   # All three conditions met
-  df$overall_cond <- (ifelse(start_check, df$plant_day_cond, TRUE) & df$length_cond & df$rain_cond)
+  df$overall_cond <- ((if(start_check) df$plant_day_cond else TRUE) & df$length_cond & df$rain_cond)
 
   crops_name <- "crop_def"
   crops_name <- next_default_item(prefix = crops_name, existing_names = self$get_data_names(), include_index = FALSE)
@@ -1849,7 +1854,7 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
         else if(length(invalid_long) < 12) {
           stop("Some month values were not unrecognised.\nIf specifying full names the following are invalid: ", paste(invalid_long, collapse = ", "), "\nAlternatively use a numeric month column.")
         }
-        else stop("No values in the month column were recognised.\nUse either\n short names: ", paste(month.abb, collapse = ", "), "\nfukk names: ", paste(month.name, collapse = ", "), "\nor numbers 1 to 12.")
+        else stop("No values in the month column were recognised.\nUse either\n short names: ", paste(month.abb, collapse = ", "), "\nfull names: ", paste(month.name, collapse = ", "), "\nor numbers 1 to 12.")
       }
       # Put title case months into the data as this will be needed to make the date column
       x[[month]] <- month_data_title 
