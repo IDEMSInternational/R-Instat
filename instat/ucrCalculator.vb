@@ -1694,4 +1694,18 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_year()", 1)
         End If
     End Sub
+    Private Sub cmdCircMean_Click(sender As Object, e As EventArgs) Handles cmdCircMean.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular()", 1)
+        End If
+    End Sub
+    Private Sub cmdCircMedian_Click(sender As Object, e As EventArgs) Handles cmdCircMedian.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular()", 1)
+        End If
+    End Sub
 End Class
