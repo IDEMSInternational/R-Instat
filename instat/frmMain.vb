@@ -2019,7 +2019,9 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbLastGraph_Click(sender As Object, e As EventArgs) Handles mnuTbLastGraph.Click
+        Me.Enabled = False
         clsRLink.ViewLastGraph()
+        Me.Enabled = True
     End Sub
 
     Private Sub mnuClimaticCMSAFExporttoCMSAFRToolbox_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFExporttoCMSAFRToolbox.Click

@@ -319,6 +319,7 @@ Public Class dlgClimaticBoxPlot
         'this is a temporary fix because we have facets done on the main dialog
         sdgPlots.tbpFacet.Enabled = False
         sdgPlots.ShowDialog()
+        sdgPlots.tbpFacet.Enabled = True
         ucrChkVerticalXTickMarkers.SetRCode(clsBaseOperator, bReset)
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         bResetSubdialog = False
