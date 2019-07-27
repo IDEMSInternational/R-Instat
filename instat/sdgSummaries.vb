@@ -213,6 +213,7 @@ Public Class sdgSummaries
 
         ucrInputPercentage.SetParameter(New RParameter("na_max_prop", 10))
         ucrInputPercentage.SetValidationTypeAsNumeric(dcmMin:=0, dcmMax:=100)
+        ucrInputPercentage.SetLinkedDisplayControl(lblPercentage)
 
 
         ucrNudNumber.SetParameter(New RParameter("na_max_n", 11))
