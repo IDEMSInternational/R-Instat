@@ -420,8 +420,8 @@ Public Class ucrGeom
         clsgeom_contour.AddAesParameter("weight")
 
         ''add layer parameters 
-        clsgeom_contour.AddLayerParameter("stat", "list", Chr(34) & "contour" & Chr(34), lstParameterStrings:={Chr(34) & "contour" & Chr(34)})
-        clsgeom_contour.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_contour.AddLayerParameter("stat", "editablelist", Chr(34) & "contour" & Chr(34), lstParameterStrings:={Chr(34) & "contour" & Chr(34)})
+        clsgeom_contour.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
         clsgeom_contour.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
         clsgeom_contour.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
         ''linemitre should 1 or a number >1
@@ -585,8 +585,8 @@ Public Class ucrGeom
 
         ''Adding layer parameters
         'not sure of other stats and positons here
-        clsgeom_density2d.AddLayerParameter("stat", "list", Chr(34) & "density2d" & Chr(34), lstParameterStrings:={Chr(34) & "density2d" & Chr(34)})
-        clsgeom_density2d.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_density2d.AddLayerParameter("stat", "editablelist", Chr(34) & "density2d" & Chr(34), lstParameterStrings:={Chr(34) & "density2d" & Chr(34)})
+        clsgeom_density2d.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
         clsgeom_density2d.AddLayerParameter("lineend", "list", Chr(34) & "butt" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "square" & Chr(34)})
         clsgeom_density2d.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
         clsgeom_density2d.AddLayerParameter("na.rm", "boolean", "FALSE")
@@ -1077,8 +1077,8 @@ Public Class ucrGeom
         clsgeom_polygon.AddAesParameter("size")
 
         'add layer parameters 
-        clsgeom_polygon.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
-        clsgeom_polygon.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_polygon.AddLayerParameter("stat", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_polygon.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
         clsgeom_polygon.AddLayerParameter("lineed", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "butt" & Chr(34), Chr(34) & "squire" & Chr(34)})
         clsgeom_polygon.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
         clsgeom_polygon.AddLayerParameter("linemitre", "numeric", "0", lstParameterStrings:={1})
@@ -1390,8 +1390,8 @@ Public Class ucrGeom
         clsgeom_tile.AddAesParameter("height", strIncludedDataTypes:={"numeric"})
 
         'Global layer parameters
-        clsgeom_tile.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
-        clsgeom_tile.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_tile.AddLayerParameter("stat", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_tile.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
         clsgeom_tile.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_tile.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_tile.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
@@ -1427,8 +1427,8 @@ Public Class ucrGeom
         clsgeom_tufteboxplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
 
         'Layer parameters
-        clsgeom_tufteboxplot.AddLayerParameter("stat", "list", Chr(34) & "fivenumber" & Chr(34), lstParameterStrings:={Chr(34) & "fivenumber" & Chr(34)})
-        clsgeom_tufteboxplot.AddLayerParameter("position", "list", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "dodge" & Chr(34)})
+        clsgeom_tufteboxplot.AddLayerParameter("stat", "editablelist", Chr(34) & "fivenumber" & Chr(34), lstParameterStrings:={Chr(34) & "fivenumber" & Chr(34)})
+        clsgeom_tufteboxplot.AddLayerParameter("position", "editablelist", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "dodge" & Chr(34)})
         clsgeom_tufteboxplot.AddLayerParameter("outlier.colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_tufteboxplot.AddLayerParameter("outlier.shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strShapePoint)
         clsgeom_tufteboxplot.AddLayerParameter("outlier.size", "numeric", "1.5", lstParameterStrings:={1, 0})
