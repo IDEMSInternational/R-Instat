@@ -317,4 +317,10 @@ Public Class ucrVariablesAsFactor
         ucrSingleVariable.SetExcludedDataTypes(strExclude)
         ucrMultipleVariables.SetIncludedDataTypes(strExclude)
     End Sub
+
+    Public Overrides Sub SetSelectorHeading(strNewHeading As String)
+        MyBase.SetSelectorHeading(strNewHeading)
+        ucrSingleVariable.SetSelectorHeading(strNewHeading)
+        ucrMultipleVariables.SetSelectorHeading(strNewHeading)
+    End Sub
 End Class
