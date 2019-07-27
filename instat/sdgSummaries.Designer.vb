@@ -40,6 +40,7 @@ Partial Class sdgSummaries
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgSummaries))
         Me.tbMissingOptions = New System.Windows.Forms.TabPage()
+        Me.ucrInputPercentage = New instat.ucrInputTextBox()
         Me.ucrChkMinNumNonMissing = New instat.ucrCheck()
         Me.ucrNudNumberNotMissing = New instat.ucrNud()
         Me.ucrNudConsecutive = New instat.ucrNud()
@@ -114,7 +115,7 @@ Partial Class sdgSummaries
         Me.tbModel = New System.Windows.Forms.TabPage()
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
-        Me.ucrInputPercentage = New instat.ucrInputTextBox()
+        Me.lblPercentage = New System.Windows.Forms.Label()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpProportionsPercentiles.SuspendLayout()
@@ -137,6 +138,7 @@ Partial Class sdgSummaries
         '
         'tbMissingOptions
         '
+        Me.tbMissingOptions.Controls.Add(Me.lblPercentage)
         Me.tbMissingOptions.Controls.Add(Me.ucrInputPercentage)
         Me.tbMissingOptions.Controls.Add(Me.ucrChkMinNumNonMissing)
         Me.tbMissingOptions.Controls.Add(Me.ucrNudNumberNotMissing)
@@ -148,6 +150,14 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.tbMissingOptions, "tbMissingOptions")
         Me.tbMissingOptions.Name = "tbMissingOptions"
         Me.tbMissingOptions.UseVisualStyleBackColor = True
+        '
+        'ucrInputPercentage
+        '
+        Me.ucrInputPercentage.AddQuotesIfUnrecognised = True
+        Me.ucrInputPercentage.IsMultiline = False
+        Me.ucrInputPercentage.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPercentage, "ucrInputPercentage")
+        Me.ucrInputPercentage.Name = "ucrInputPercentage"
         '
         'ucrChkMinNumNonMissing
         '
@@ -694,13 +704,10 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         '
-        'ucrInputPercentage
+        'lblPercentage
         '
-        Me.ucrInputPercentage.AddQuotesIfUnrecognised = True
-        Me.ucrInputPercentage.IsMultiline = False
-        Me.ucrInputPercentage.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPercentage, "ucrInputPercentage")
-        Me.ucrInputPercentage.Name = "ucrInputPercentage"
+        resources.ApplyResources(Me.lblPercentage, "lblPercentage")
+        Me.lblPercentage.Name = "lblPercentage"
         '
         'sdgSummaries
         '
@@ -714,6 +721,7 @@ Partial Class sdgSummaries
         Me.Name = "sdgSummaries"
         Me.Tag = "Summaries"
         Me.tbMissingOptions.ResumeLayout(False)
+        Me.tbMissingOptions.PerformLayout()
         Me.tbMore.ResumeLayout(False)
         Me.grpProportionsPercentiles.ResumeLayout(False)
         Me.grpLocation.ResumeLayout(False)
@@ -815,4 +823,5 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkMinNumNonMissing As ucrCheck
     Friend WithEvents ucrNudNumberNotMissing As ucrNud
     Friend WithEvents ucrInputPercentage As ucrInputTextBox
+    Friend WithEvents lblPercentage As Label
 End Class
