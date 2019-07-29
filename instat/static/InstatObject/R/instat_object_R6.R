@@ -208,7 +208,7 @@ DataBook$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, ov
 
 DataBook$set("public", "clone_data_object", function(curr_data_object, include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE, ...) {
   curr_names <- names(curr_data_object)
-  if("get_data_frame" %in% curr_names) new_data <- curr_data_object$get_data_frame(use_current_filter = TRUE)
+  if("get_data_frame" %in% curr_names) new_data <- curr_data_object$get_data_frame(use_current_filter = FALSE)
   else stop("Cannot import data. No 'get_data_frame' method.")
   if("get_metadata" %in% curr_names) new_data_name <- curr_data_object$get_metadata(data_name_label)
   if(include_objects && "get_objects" %in% curr_names) new_objects <- curr_data_object$get_objects()
@@ -1730,9 +1730,17 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
 
   # Rain total condition
   df[["rain_total_actual"]] <- sapply(1:nrow(df), 
-                                      function(x) sum(daily_data[[rain]][daily_data[[year]] == df[[year]][x]][seq(df[[plant_day_name]][x], length = df[[plant_length_name]][x])], na.rm = TRUE))
-  df$rain_cond <- (df[[rain_total_name]] <= df[["rain_total_actual"]])
-
+                                      function(x) {
+                                        rain_values <- daily_data[[rain]][daily_data[[year]] == df[[year]][x] & daily_data[[day]] >= df[[plant_day_name]][x] & daily_data[[day]] < df[[plant_day_name]][x] + df[[plant_length_name]][x]]
+                                        sum_rain <- sum(rain_values, na.rm = TRUE)
+                                        # TODO + 1 is needed because of non leap years
+                                        # if period include 29 Feb then period is 1 less than required length
+                                        if(length(rain_values) + 1 < df[[plant_length_name]][x] || (anyNA(rain_values) && sum_rain < df[[rain_total_name]][x])) sum_rain <- NA
+                                        sum_rain
+                                      }
+  )
+  df$rain_cond <- df[[rain_total_name]] <= df[["rain_total_actual"]]
+  
   # All three conditions met
   df$overall_cond <- ((if(start_check) df$plant_day_cond else TRUE) & df$length_cond & df$rain_cond)
 
@@ -1755,7 +1763,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     grouping <- instat_calculation$new(type = "by", calculated_from = calc_from)
     prop_calc_from <- list("overall_cond")
     names(prop_calc_from) <- crops_name
-    propor_table <- instat_calculation$new(function_exp="length(x = overall_cond[overall_cond == TRUE])/length(x = overall_cond)",
+    propor_table <- instat_calculation$new(function_exp="sum(overall_cond, na.rm = TRUE)/length(na.omit(overall_cond))",
                                            save = 2, calculated_from = prop_calc_from,
                                            manipulations = list(grouping),
                                            type="summary", result_name = "prop_success", result_data_frame = "crop_prop")
