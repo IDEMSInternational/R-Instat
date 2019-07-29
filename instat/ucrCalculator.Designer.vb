@@ -278,6 +278,20 @@ Partial Class ucrCalculator
         Me.cmdHair = New System.Windows.Forms.Button()
         Me.cmdGroup = New System.Windows.Forms.Button()
         Me.cmdGrade = New System.Windows.Forms.Button()
+        Me.grpCircular = New System.Windows.Forms.GroupBox()
+        Me.cmdCircMean = New System.Windows.Forms.Button()
+        Me.cmdCircmedian = New System.Windows.Forms.Button()
+        Me.cmdMedianHL = New System.Windows.Forms.Button()
+        Me.cmdCircRange = New System.Windows.Forms.Button()
+        Me.cmdCircSd = New System.Windows.Forms.Button()
+        Me.cmdCircVar = New System.Windows.Forms.Button()
+        Me.cmdAngVar = New System.Windows.Forms.Button()
+        Me.cmdAngDev = New System.Windows.Forms.Button()
+        Me.cmdA1 = New System.Windows.Forms.Button()
+        Me.cmdCircMin = New System.Windows.Forms.Button()
+        Me.cmdCircMax = New System.Windows.Forms.Button()
+        Me.cmdCircQ1 = New System.Windows.Forms.Button()
+        Me.cmdCircQ3 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -287,6 +301,7 @@ Partial Class ucrCalculator
         Me.grpProbabilty.SuspendLayout()
         Me.grpMaths.SuspendLayout()
         Me.grpWakefield.SuspendLayout()
+        Me.grpCircular.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -1826,6 +1841,7 @@ Partial Class ucrCalculator
         '
         'grpWakefield
         '
+        Me.grpWakefield.Controls.Add(Me.grpCircular)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
         Me.grpWakefield.Controls.Add(Me.cmdValid)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
@@ -1944,6 +1960,103 @@ Partial Class ucrCalculator
         Me.cmdGrade.Name = "cmdGrade"
         Me.cmdGrade.UseVisualStyleBackColor = True
         '
+        'grpCircular
+        '
+        Me.grpCircular.Controls.Add(Me.cmdCircQ3)
+        Me.grpCircular.Controls.Add(Me.cmdCircQ1)
+        Me.grpCircular.Controls.Add(Me.cmdCircMax)
+        Me.grpCircular.Controls.Add(Me.cmdCircMin)
+        Me.grpCircular.Controls.Add(Me.cmdA1)
+        Me.grpCircular.Controls.Add(Me.cmdAngDev)
+        Me.grpCircular.Controls.Add(Me.cmdAngVar)
+        Me.grpCircular.Controls.Add(Me.cmdCircVar)
+        Me.grpCircular.Controls.Add(Me.cmdCircSd)
+        Me.grpCircular.Controls.Add(Me.cmdCircRange)
+        Me.grpCircular.Controls.Add(Me.cmdMedianHL)
+        Me.grpCircular.Controls.Add(Me.cmdCircmedian)
+        Me.grpCircular.Controls.Add(Me.cmdCircMean)
+        resources.ApplyResources(Me.grpCircular, "grpCircular")
+        Me.grpCircular.Name = "grpCircular"
+        Me.grpCircular.TabStop = False
+        '
+        'cmdCircMean
+        '
+        resources.ApplyResources(Me.cmdCircMean, "cmdCircMean")
+        Me.cmdCircMean.Name = "cmdCircMean"
+        Me.cmdCircMean.UseVisualStyleBackColor = True
+        '
+        'cmdCircmedian
+        '
+        resources.ApplyResources(Me.cmdCircmedian, "cmdCircmedian")
+        Me.cmdCircmedian.Name = "cmdCircmedian"
+        Me.cmdCircmedian.UseVisualStyleBackColor = True
+        '
+        'cmdMedianHL
+        '
+        resources.ApplyResources(Me.cmdMedianHL, "cmdMedianHL")
+        Me.cmdMedianHL.Name = "cmdMedianHL"
+        Me.cmdMedianHL.UseVisualStyleBackColor = True
+        '
+        'cmdCircRange
+        '
+        resources.ApplyResources(Me.cmdCircRange, "cmdCircRange")
+        Me.cmdCircRange.Name = "cmdCircRange"
+        Me.cmdCircRange.UseVisualStyleBackColor = True
+        '
+        'cmdCircSd
+        '
+        resources.ApplyResources(Me.cmdCircSd, "cmdCircSd")
+        Me.cmdCircSd.Name = "cmdCircSd"
+        Me.cmdCircSd.UseVisualStyleBackColor = True
+        '
+        'cmdCircVar
+        '
+        resources.ApplyResources(Me.cmdCircVar, "cmdCircVar")
+        Me.cmdCircVar.Name = "cmdCircVar"
+        Me.cmdCircVar.UseVisualStyleBackColor = True
+        '
+        'cmdAngVar
+        '
+        resources.ApplyResources(Me.cmdAngVar, "cmdAngVar")
+        Me.cmdAngVar.Name = "cmdAngVar"
+        Me.cmdAngVar.UseVisualStyleBackColor = True
+        '
+        'cmdAngDev
+        '
+        resources.ApplyResources(Me.cmdAngDev, "cmdAngDev")
+        Me.cmdAngDev.Name = "cmdAngDev"
+        Me.cmdAngDev.UseVisualStyleBackColor = True
+        '
+        'cmdA1
+        '
+        resources.ApplyResources(Me.cmdA1, "cmdA1")
+        Me.cmdA1.Name = "cmdA1"
+        Me.cmdA1.UseVisualStyleBackColor = True
+        '
+        'cmdCircMin
+        '
+        resources.ApplyResources(Me.cmdCircMin, "cmdCircMin")
+        Me.cmdCircMin.Name = "cmdCircMin"
+        Me.cmdCircMin.UseVisualStyleBackColor = True
+        '
+        'cmdCircMax
+        '
+        resources.ApplyResources(Me.cmdCircMax, "cmdCircMax")
+        Me.cmdCircMax.Name = "cmdCircMax"
+        Me.cmdCircMax.UseVisualStyleBackColor = True
+        '
+        'cmdCircQ1
+        '
+        resources.ApplyResources(Me.cmdCircQ1, "cmdCircQ1")
+        Me.cmdCircQ1.Name = "cmdCircQ1"
+        Me.cmdCircQ1.UseVisualStyleBackColor = True
+        '
+        'cmdCircQ3
+        '
+        resources.ApplyResources(Me.cmdCircQ3, "cmdCircQ3")
+        Me.cmdCircQ3.Name = "cmdCircQ3"
+        Me.cmdCircQ3.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
@@ -1977,6 +2090,7 @@ Partial Class ucrCalculator
         Me.grpProbabilty.ResumeLayout(False)
         Me.grpMaths.ResumeLayout(False)
         Me.grpWakefield.ResumeLayout(False)
+        Me.grpCircular.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2221,4 +2335,18 @@ Partial Class ucrCalculator
     Friend WithEvents cmdGrade As Button
     Friend WithEvents cmdLogistic As Button
     Friend WithEvents cmdLogit As Button
+    Friend WithEvents grpCircular As GroupBox
+    Friend WithEvents cmdCircQ3 As Button
+    Friend WithEvents cmdCircQ1 As Button
+    Friend WithEvents cmdCircMax As Button
+    Friend WithEvents cmdCircMin As Button
+    Friend WithEvents cmdA1 As Button
+    Friend WithEvents cmdAngDev As Button
+    Friend WithEvents cmdAngVar As Button
+    Friend WithEvents cmdCircVar As Button
+    Friend WithEvents cmdCircSd As Button
+    Friend WithEvents cmdCircRange As Button
+    Friend WithEvents cmdMedianHL As Button
+    Friend WithEvents cmdCircmedian As Button
+    Friend WithEvents cmdCircMean As Button
 End Class

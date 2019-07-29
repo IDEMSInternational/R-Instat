@@ -1694,4 +1694,47 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_year()", 1)
         End If
     End Sub
+    Private Sub cmdCircMean_Click(sender As Object, e As EventArgs) 
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular()", 1)
+        End If
+    End Sub
+    Private Sub cmdCircMedian_Click(sender As Object, e As EventArgs) 
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::median.circular(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::median.circular()", 1)
+        End If
+    End Sub
+    Private Sub cmdMedianHL_Click(sender As Object, e As EventArgs) 
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::MedianHL.circular()", 1)
+        End If
+    End Sub
+    Private Sub cmdCircVar_Click(sender As Object, e As EventArgs) 
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::var.circular(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::var.circular()", 1)
+        End If
+    End Sub
+    Private Sub cmdCircRange_Click(sender As Object, e As EventArgs) 
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::range.circular(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::range.circular()", 1)
+        End If
+    End Sub
+    Private Sub cmdCircSd_Click(sender As Object, e As EventArgs) 
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::sd.circular(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::sd.circular()", 1)
+        End If
+    End Sub
+
 End Class
