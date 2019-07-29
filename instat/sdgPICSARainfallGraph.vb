@@ -75,7 +75,6 @@ Public Class sdgPICSARainfallGraph
 
     Private clsGeomTextLabelMeanLine As New RFunction
     Private clsRoundMeanY As New RFunction
-    Private clsPasteRoundMeanY As New RFunction
     Private clsPasteMeanY As New RFunction
     Private clsFormatMeanY As New RFunction
     Private clsGeomTextLabelMedianLine As New RFunction
@@ -545,7 +544,7 @@ Public Class sdgPICSARainfallGraph
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, clsNewPipeOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing, Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsDateYLimit As RFunction = Nothing, Optional clsNewAsNumeric As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing, Optional clsNewGeomTextLabelMeanLine As RFunction = Nothing, Optional clsNewRoundMeanY As RFunction = Nothing, Optional clsNewPasteRoundMeanY As RFunction = Nothing, Optional clsNewPasteMeanY As RFunction = Nothing, Optional clsNewGeomTextLabelMedianLine As RFunction = Nothing, Optional clsNewRoundMedianY As RFunction = Nothing, Optional clsNewPasteMedianY As RFunction = Nothing, Optional clsNewGeomTextLabelLowerTercileLine As RFunction = Nothing, Optional clsNewRoundLowerTercileY As RFunction = Nothing, Optional clsNewPasteLowerTercileY As RFunction = Nothing, Optional clsNewGeomTextLabelUpperTercileLine As RFunction = Nothing, Optional clsNewRoundUpperTercileY As RFunction = Nothing, Optional clsNewPasteUpperTercileY As RFunction = Nothing, Optional strXAxisType As String = "", Optional clsNewMutateFunction As RFunction = Nothing, Optional clsNewMeanFunction As RFunction = Nothing, Optional clsNewMedianFunction As RFunction = Nothing, Optional clsNewLowerTercileFunction As RFunction = Nothing, Optional clsNewUpperTercileFunction As RFunction = Nothing, Optional clsNewAsDateMeanY As RFunction = Nothing, Optional clsNewAsDateMedianY As RFunction = Nothing, Optional clsNewAsDateLowerTercileY As RFunction = Nothing, Optional clsNewAsDateUpperTercileY As RFunction = Nothing, Optional clsNewFormatMeanY As RFunction = Nothing, Optional clsNewFormatMedianY As RFunction = Nothing, Optional clsNewFormatLowerTercileY As RFunction = Nothing, Optional clsNewFormatUpperTercileY As RFunction = Nothing, Optional clsNewYLimitsYDate As RFunction = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, clsNewPipeOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing, Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsDateYLimit As RFunction = Nothing, Optional clsNewAsNumeric As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing, Optional clsNewGeomTextLabelMeanLine As RFunction = Nothing, Optional clsNewRoundMeanY As RFunction = Nothing, Optional clsNewPasteMeanY As RFunction = Nothing, Optional clsNewGeomTextLabelMedianLine As RFunction = Nothing, Optional clsNewRoundMedianY As RFunction = Nothing, Optional clsNewPasteMedianY As RFunction = Nothing, Optional clsNewGeomTextLabelLowerTercileLine As RFunction = Nothing, Optional clsNewRoundLowerTercileY As RFunction = Nothing, Optional clsNewPasteLowerTercileY As RFunction = Nothing, Optional clsNewGeomTextLabelUpperTercileLine As RFunction = Nothing, Optional clsNewRoundUpperTercileY As RFunction = Nothing, Optional clsNewPasteUpperTercileY As RFunction = Nothing, Optional strXAxisType As String = "", Optional clsNewMutateFunction As RFunction = Nothing, Optional clsNewMeanFunction As RFunction = Nothing, Optional clsNewMedianFunction As RFunction = Nothing, Optional clsNewLowerTercileFunction As RFunction = Nothing, Optional clsNewUpperTercileFunction As RFunction = Nothing, Optional clsNewAsDateMeanY As RFunction = Nothing, Optional clsNewAsDateMedianY As RFunction = Nothing, Optional clsNewAsDateLowerTercileY As RFunction = Nothing, Optional clsNewAsDateUpperTercileY As RFunction = Nothing, Optional clsNewFormatMeanY As RFunction = Nothing, Optional clsNewFormatMedianY As RFunction = Nothing, Optional clsNewFormatLowerTercileY As RFunction = Nothing, Optional clsNewFormatUpperTercileY As RFunction = Nothing, Optional clsNewYLimitsYDate As RFunction = Nothing, Optional bReset As Boolean = False)
         bRCodeSet = False
         clsBaseOperator = clsNewOperator
         clsPipeOperator = clsNewPipeOperator
@@ -574,7 +573,6 @@ Public Class sdgPICSARainfallGraph
 
         clsGeomTextLabelMeanLine = clsNewGeomTextLabelMeanLine
         clsRoundMeanY = clsNewRoundMeanY
-        clsPasteRoundMeanY = clsNewPasteRoundMeanY
         clsPasteMeanY = clsNewPasteMeanY
         clsFormatMeanY = clsNewFormatMeanY
         clsGeomTextLabelMedianLine = clsNewGeomTextLabelMedianLine
@@ -953,15 +951,15 @@ Public Class sdgPICSARainfallGraph
                     clsBaseOperator.AddParameter("annotate_mean", clsRFunctionParameter:=clsGeomTextLabelMeanLine, iPosition:=24)
                     If ucrChkMeanLineLabelIncludeValue.Checked Then
                         If rdoYNumeric.Checked Then
-                            'a vector of mean, 'strMeanName' should be povided for faceting
-                            clsPasteRoundMeanY.AddParameter("0", strMeanName, bIncludeArgumentName:=False, iPosition:=0)
+                            clsPasteMeanY.AddParameter("1", clsRFunctionParameter:=clsRoundMeanY, bIncludeArgumentName:=False, iPosition:=1)
+                            clsRoundMeanY.AddParameter("0", strMeanName, bIncludeArgumentName:=False, iPosition:=0)
                         ElseIf rdoYDate.Checked Then
-                            clsPasteRoundMeanY.AddParameter("0", clsRFunctionParameter:=clsMeanFunction, bIncludeArgumentName:=False, iPosition:=0)
-                            clsPasteMeanY.AddParameter("0", clsRFunctionParameter:=clsFormatMeanY, bIncludeArgumentName:=False, iPosition:=1)
+                            clsRoundMeanY.AddParameter("0", clsRFunctionParameter:=clsMeanFunction, bIncludeArgumentName:=False, iPosition:=0)
+                            clsPasteMeanY.AddParameter("1", clsRFunctionParameter:=clsFormatMeanY, bIncludeArgumentName:=False, iPosition:=1)
                         End If
                     Else
                         clsPasteMeanY.RemoveParameterByName("1")
-                        clsPasteRoundMeanY.RemoveParameterByName("0")
+                        clsRoundMeanY.RemoveParameterByName("0")
                     End If
                 Else
                     clsBaseOperator.RemoveParameterByName("annotate_mean")
@@ -1020,14 +1018,13 @@ Public Class sdgPICSARainfallGraph
                     If ucrChkTercilesLineLabelIncludeValue.Checked Then
                         'similarly to the case of mean
                         If rdoYNumeric.Checked Then
-                            clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
-                            clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
                             clsRoundLowerTercileY.AddParameter("0", strLowerTercileName, bIncludeArgumentName:=False, iPosition:=0)
                             clsRoundUpperTercileY.AddParameter("0", strUpperTercileName, bIncludeArgumentName:=False, iPosition:=0)
-
+                            clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
+                            clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsRoundUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
                         ElseIf rdoYDate.Checked Then
                             clsRoundLowerTercileY.AddParameter("0", clsRFunctionParameter:=clsLowerTercileFunction, bIncludeArgumentName:=False, iPosition:=0)
-                            clsRoundUpperTercileY.AddParameter("0", clsRFunctionParameter:=clsLowerTercileFunction, bIncludeArgumentName:=False, iPosition:=0)
+                            clsRoundUpperTercileY.AddParameter("0", clsRFunctionParameter:=clsUpperTercileFunction, bIncludeArgumentName:=False, iPosition:=0)
                             clsPasteLowerTercileY.AddParameter("1", clsRFunctionParameter:=clsFormatLowerTercileY, bIncludeArgumentName:=False, iPosition:=1)
                             clsPasteUpperTercileY.AddParameter("1", clsRFunctionParameter:=clsFormatUpperTercileY, bIncludeArgumentName:=False, iPosition:=1)
                         End If

@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgOneVariableSummarise
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSummaryFunction, clsSummariesList, clsInstatSummaryFunction As New RFunction
+    Private clsSummaryFunction, clsSummariesList, clsInstatSummaryFunction, clsConcFunction As New RFunction
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
@@ -77,9 +77,13 @@ Public Class dlgOneVariableSummarise
         clsSummariesList = New RFunction
         clsSummaryFunction = New RFunction
         clsInstatSummaryFunction = New RFunction
+        clsConcFunction = New RFunction
+
         cmdSummaries.Enabled = False
 
         ucrSelectorOneVarSummarise.Reset()
+
+        clsConcFunction.SetRCommand("c")
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
@@ -123,7 +127,7 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsSummariesList, clsInstatSummaryFunction, ucrSelectorOneVarSummarise, bResetSubdialog)
+        sdgSummaries.SetRFunction(clsSummariesList, clsInstatSummaryFunction, clsConcFunction, ucrSelectorOneVarSummarise, bResetSubdialog)
         bResetSubdialog = False
         sdgSummaries.bEnable2VariableTab = False
         sdgSummaries.ShowDialog()
