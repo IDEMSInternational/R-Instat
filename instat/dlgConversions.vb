@@ -46,6 +46,7 @@ Public Class dlgConversions
 
         ucrPnlConversions.AddRadioButton(rdoUnits)
         ucrPnlConversions.AddRadioButton(rdoDayLength)
+        ucrPnlConversions.AddRadioButton(rdoCoordinates)
 
         ucrPnlConversions.AddFunctionNamesCondition(rdoUnits, {"convert_precip", "convert_temperature", "convert_wind_speed"})
         ucrPnlConversions.AddFunctionNamesCondition(rdoDayLength, "daylength")
@@ -74,6 +75,14 @@ Public Class dlgConversions
         ucrReceiverLatitude.bWithQuotes = False
         ucrReceiverLatitude.SetParameterIsRFunction()
         ucrReceiverLatitude.Selector = ucrSelectorConversions
+
+        ucrReceiverDegrees.Selector = ucrSelectorConversions
+
+        ucrReceiverMinutes.Selector = ucrSelectorConversions
+
+        ucrReceiverSeconds.Selector = ucrSelectorConversions
+
+        ucrReceiverLetters.Selector = ucrSelectorConversions
 
         ucrInputLatitude.SetValidationTypeAsNumeric(dcmMin:=-90, dcmMax:=90)
 
@@ -132,6 +141,14 @@ Public Class dlgConversions
         ucrPnlElements.AddToLinkedControls(ucrInputToTemperature, {rdoTemperature}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Celsius")
         ucrPnlElements.AddToLinkedControls(ucrInputFromWindSpeed, {rdoWindSpeed}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Knots")
         ucrPnlElements.AddToLinkedControls(ucrInputToWindSpeed, {rdoWindSpeed}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Metres per second (mps)")
+        ucrPnlConversions.AddToLinkedControls(ucrReceiverDegrees, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConversions.AddToLinkedControls(ucrReceiverMinutes, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConversions.AddToLinkedControls(ucrReceiverSeconds, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConversions.AddToLinkedControls(ucrReceiverLetters, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverDegrees.SetLinkedDisplayControl(lblDegrees)
+        ucrReceiverMinutes.SetLinkedDisplayControl(lblMinutes)
+        ucrReceiverSeconds.SetLinkedDisplayControl(lblSeconds)
+        ucrReceiverLetters.SetLinkedDisplayControl(lblLetters)
 
         ucrReceiverElement.SetLinkedDisplayControl(lblElement)
         ucrNudDecimal.SetLinkedDisplayControl(lstLabels)
