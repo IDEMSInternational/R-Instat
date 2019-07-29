@@ -1163,10 +1163,10 @@ hashed_id <- function(x, salt, algo = "crc32") {
 #   Reduce(function(x,y) {y = dplyr::if_else(y == 0, 0, x + 1)}, z[-1], 
 #          init = dplyr::if_else(z[1] == 0, 0, NA_real_), accumulate = TRUE)
 # }
-.spells <- function(x) {
+.spells <- function(x, initial_value = NA_real_) {
   y <- mat.or.vec(length(x), 1)
   if(length(x) > 0) {
-    y[1] <- dplyr::if_else(x[1] == 0, 0, NA_real_)
+    y[1] <- dplyr::if_else(x[1] == 0, 0, initial_value + 1)
     if(length(x) > 1) {
       for(i in 2:length(x)) {
         y[i] <- dplyr::if_else(x[i] == 0, 0, y[i-1] + 1)
