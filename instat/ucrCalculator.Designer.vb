@@ -270,6 +270,20 @@ Partial Class ucrCalculator
         Me.cmdChildren = New System.Windows.Forms.Button()
         Me.cmdHeight = New System.Windows.Forms.Button()
         Me.grpWakefield = New System.Windows.Forms.GroupBox()
+        Me.grpCircular = New System.Windows.Forms.GroupBox()
+        Me.cmdCircQ3 = New System.Windows.Forms.Button()
+        Me.cmdCircQ1 = New System.Windows.Forms.Button()
+        Me.cmdCircMax = New System.Windows.Forms.Button()
+        Me.cmdCircMin = New System.Windows.Forms.Button()
+        Me.cmdA1 = New System.Windows.Forms.Button()
+        Me.cmdAngDev = New System.Windows.Forms.Button()
+        Me.cmdAngVar = New System.Windows.Forms.Button()
+        Me.cmdCircVar = New System.Windows.Forms.Button()
+        Me.cmdCircSd = New System.Windows.Forms.Button()
+        Me.cmdCircRange = New System.Windows.Forms.Button()
+        Me.cmdMedianHL = New System.Windows.Forms.Button()
+        Me.cmdCircMedian = New System.Windows.Forms.Button()
+        Me.cmdCircMean = New System.Windows.Forms.Button()
         Me.cmdLikert = New System.Windows.Forms.Button()
         Me.cmdCar = New System.Windows.Forms.Button()
         Me.cmdAnswer = New System.Windows.Forms.Button()
@@ -285,20 +299,6 @@ Partial Class ucrCalculator
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.grpCircular = New System.Windows.Forms.GroupBox()
-        Me.cmdCircQ3 = New System.Windows.Forms.Button()
-        Me.cmdCircQ1 = New System.Windows.Forms.Button()
-        Me.cmdCircMax = New System.Windows.Forms.Button()
-        Me.cmdCircMin = New System.Windows.Forms.Button()
-        Me.cmdA1 = New System.Windows.Forms.Button()
-        Me.cmdAngDev = New System.Windows.Forms.Button()
-        Me.cmdAngVar = New System.Windows.Forms.Button()
-        Me.cmdCircVar = New System.Windows.Forms.Button()
-        Me.cmdCircSd = New System.Windows.Forms.Button()
-        Me.cmdCircRange = New System.Windows.Forms.Button()
-        Me.cmdMedianHL = New System.Windows.Forms.Button()
-        Me.cmdCircMedian = New System.Windows.Forms.Button()
-        Me.cmdCircMean = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1917,6 +1917,103 @@ Partial Class ucrCalculator
         Me.grpWakefield.Name = "grpWakefield"
         Me.grpWakefield.TabStop = False
         '
+        'grpCircular
+        '
+        Me.grpCircular.Controls.Add(Me.cmdCircQ3)
+        Me.grpCircular.Controls.Add(Me.cmdCircQ1)
+        Me.grpCircular.Controls.Add(Me.cmdCircMax)
+        Me.grpCircular.Controls.Add(Me.cmdCircMin)
+        Me.grpCircular.Controls.Add(Me.cmdA1)
+        Me.grpCircular.Controls.Add(Me.cmdAngDev)
+        Me.grpCircular.Controls.Add(Me.cmdAngVar)
+        Me.grpCircular.Controls.Add(Me.cmdCircVar)
+        Me.grpCircular.Controls.Add(Me.cmdCircSd)
+        Me.grpCircular.Controls.Add(Me.cmdCircRange)
+        Me.grpCircular.Controls.Add(Me.cmdMedianHL)
+        Me.grpCircular.Controls.Add(Me.cmdCircMedian)
+        Me.grpCircular.Controls.Add(Me.cmdCircMean)
+        resources.ApplyResources(Me.grpCircular, "grpCircular")
+        Me.grpCircular.Name = "grpCircular"
+        Me.grpCircular.TabStop = False
+        '
+        'cmdCircQ3
+        '
+        resources.ApplyResources(Me.cmdCircQ3, "cmdCircQ3")
+        Me.cmdCircQ3.Name = "cmdCircQ3"
+        Me.cmdCircQ3.UseVisualStyleBackColor = True
+        '
+        'cmdCircQ1
+        '
+        resources.ApplyResources(Me.cmdCircQ1, "cmdCircQ1")
+        Me.cmdCircQ1.Name = "cmdCircQ1"
+        Me.cmdCircQ1.UseVisualStyleBackColor = True
+        '
+        'cmdCircMax
+        '
+        resources.ApplyResources(Me.cmdCircMax, "cmdCircMax")
+        Me.cmdCircMax.Name = "cmdCircMax"
+        Me.cmdCircMax.UseVisualStyleBackColor = True
+        '
+        'cmdCircMin
+        '
+        resources.ApplyResources(Me.cmdCircMin, "cmdCircMin")
+        Me.cmdCircMin.Name = "cmdCircMin"
+        Me.cmdCircMin.UseVisualStyleBackColor = True
+        '
+        'cmdA1
+        '
+        resources.ApplyResources(Me.cmdA1, "cmdA1")
+        Me.cmdA1.Name = "cmdA1"
+        Me.cmdA1.UseVisualStyleBackColor = True
+        '
+        'cmdAngDev
+        '
+        resources.ApplyResources(Me.cmdAngDev, "cmdAngDev")
+        Me.cmdAngDev.Name = "cmdAngDev"
+        Me.cmdAngDev.UseVisualStyleBackColor = True
+        '
+        'cmdAngVar
+        '
+        resources.ApplyResources(Me.cmdAngVar, "cmdAngVar")
+        Me.cmdAngVar.Name = "cmdAngVar"
+        Me.cmdAngVar.UseVisualStyleBackColor = True
+        '
+        'cmdCircVar
+        '
+        resources.ApplyResources(Me.cmdCircVar, "cmdCircVar")
+        Me.cmdCircVar.Name = "cmdCircVar"
+        Me.cmdCircVar.UseVisualStyleBackColor = True
+        '
+        'cmdCircSd
+        '
+        resources.ApplyResources(Me.cmdCircSd, "cmdCircSd")
+        Me.cmdCircSd.Name = "cmdCircSd"
+        Me.cmdCircSd.UseVisualStyleBackColor = True
+        '
+        'cmdCircRange
+        '
+        resources.ApplyResources(Me.cmdCircRange, "cmdCircRange")
+        Me.cmdCircRange.Name = "cmdCircRange"
+        Me.cmdCircRange.UseVisualStyleBackColor = True
+        '
+        'cmdMedianHL
+        '
+        resources.ApplyResources(Me.cmdMedianHL, "cmdMedianHL")
+        Me.cmdMedianHL.Name = "cmdMedianHL"
+        Me.cmdMedianHL.UseVisualStyleBackColor = True
+        '
+        'cmdCircMedian
+        '
+        resources.ApplyResources(Me.cmdCircMedian, "cmdCircMedian")
+        Me.cmdCircMedian.Name = "cmdCircMedian"
+        Me.cmdCircMedian.UseVisualStyleBackColor = True
+        '
+        'cmdCircMean
+        '
+        resources.ApplyResources(Me.cmdCircMean, "cmdCircMean")
+        Me.cmdCircMean.Name = "cmdCircMean"
+        Me.cmdCircMean.UseVisualStyleBackColor = True
+        '
         'cmdLikert
         '
         resources.ApplyResources(Me.cmdLikert, "cmdLikert")
@@ -2015,103 +2112,6 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.Selector = Nothing
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
-        '
-        'grpCircular
-        '
-        Me.grpCircular.Controls.Add(Me.cmdCircQ3)
-        Me.grpCircular.Controls.Add(Me.cmdCircQ1)
-        Me.grpCircular.Controls.Add(Me.cmdCircMax)
-        Me.grpCircular.Controls.Add(Me.cmdCircMin)
-        Me.grpCircular.Controls.Add(Me.cmdA1)
-        Me.grpCircular.Controls.Add(Me.cmdAngDev)
-        Me.grpCircular.Controls.Add(Me.cmdAngVar)
-        Me.grpCircular.Controls.Add(Me.cmdCircVar)
-        Me.grpCircular.Controls.Add(Me.cmdCircSd)
-        Me.grpCircular.Controls.Add(Me.cmdCircRange)
-        Me.grpCircular.Controls.Add(Me.cmdMedianHL)
-        Me.grpCircular.Controls.Add(Me.cmdCircMedian)
-        Me.grpCircular.Controls.Add(Me.cmdCircMean)
-        resources.ApplyResources(Me.grpCircular, "grpCircular")
-        Me.grpCircular.Name = "grpCircular"
-        Me.grpCircular.TabStop = False
-        '
-        'cmdCircQ3
-        '
-        resources.ApplyResources(Me.cmdCircQ3, "cmdCircQ3")
-        Me.cmdCircQ3.Name = "cmdCircQ3"
-        Me.cmdCircQ3.UseVisualStyleBackColor = True
-        '
-        'cmdCircQ1
-        '
-        resources.ApplyResources(Me.cmdCircQ1, "cmdCircQ1")
-        Me.cmdCircQ1.Name = "cmdCircQ1"
-        Me.cmdCircQ1.UseVisualStyleBackColor = True
-        '
-        'cmdCircMax
-        '
-        resources.ApplyResources(Me.cmdCircMax, "cmdCircMax")
-        Me.cmdCircMax.Name = "cmdCircMax"
-        Me.cmdCircMax.UseVisualStyleBackColor = True
-        '
-        'cmdCircMin
-        '
-        resources.ApplyResources(Me.cmdCircMin, "cmdCircMin")
-        Me.cmdCircMin.Name = "cmdCircMin"
-        Me.cmdCircMin.UseVisualStyleBackColor = True
-        '
-        'cmdA1
-        '
-        resources.ApplyResources(Me.cmdA1, "cmdA1")
-        Me.cmdA1.Name = "cmdA1"
-        Me.cmdA1.UseVisualStyleBackColor = True
-        '
-        'cmdAngDev
-        '
-        resources.ApplyResources(Me.cmdAngDev, "cmdAngDev")
-        Me.cmdAngDev.Name = "cmdAngDev"
-        Me.cmdAngDev.UseVisualStyleBackColor = True
-        '
-        'cmdAngVar
-        '
-        resources.ApplyResources(Me.cmdAngVar, "cmdAngVar")
-        Me.cmdAngVar.Name = "cmdAngVar"
-        Me.cmdAngVar.UseVisualStyleBackColor = True
-        '
-        'cmdCircVar
-        '
-        resources.ApplyResources(Me.cmdCircVar, "cmdCircVar")
-        Me.cmdCircVar.Name = "cmdCircVar"
-        Me.cmdCircVar.UseVisualStyleBackColor = True
-        '
-        'cmdCircSd
-        '
-        resources.ApplyResources(Me.cmdCircSd, "cmdCircSd")
-        Me.cmdCircSd.Name = "cmdCircSd"
-        Me.cmdCircSd.UseVisualStyleBackColor = True
-        '
-        'cmdCircRange
-        '
-        resources.ApplyResources(Me.cmdCircRange, "cmdCircRange")
-        Me.cmdCircRange.Name = "cmdCircRange"
-        Me.cmdCircRange.UseVisualStyleBackColor = True
-        '
-        'cmdMedianHL
-        '
-        resources.ApplyResources(Me.cmdMedianHL, "cmdMedianHL")
-        Me.cmdMedianHL.Name = "cmdMedianHL"
-        Me.cmdMedianHL.UseVisualStyleBackColor = True
-        '
-        'cmdCircMedian
-        '
-        resources.ApplyResources(Me.cmdCircMedian, "cmdCircMedian")
-        Me.cmdCircMedian.Name = "cmdCircMedian"
-        Me.cmdCircMedian.UseVisualStyleBackColor = True
-        '
-        'cmdCircMean
-        '
-        resources.ApplyResources(Me.cmdCircMean, "cmdCircMean")
-        Me.cmdCircMean.Name = "cmdCircMean"
-        Me.cmdCircMean.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
