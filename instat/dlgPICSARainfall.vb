@@ -136,7 +136,6 @@ Public Class dlgPICSARainfall
         ucrReceiverX.SetParameterIsString()
         ucrReceiverX.Selector = ucrSelectorPICSARainfall
         ucrReceiverX.SetClimaticType("year")
-        ucrReceiverX.strSelectorHeading = "Year Variables"
         ucrReceiverX.bAutoFill = True
         ucrReceiverX.bWithQuotes = False
 
