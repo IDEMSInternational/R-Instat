@@ -39,25 +39,12 @@ Partial Class dlgExportDataset
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportDataset))
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputExportFile = New instat.ucrInputTextBox()
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.lblExport = New System.Windows.Forms.Label()
+        Me.ucrInputExportFile = New instat.ucrInputTextBox()
         Me.ucrAvailableSheets = New instat.ucrDataFrame()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrInputExportFile
-        '
-        Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
-        Me.ucrInputExportFile.IsMultiline = False
-        Me.ucrInputExportFile.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputExportFile, "ucrInputExportFile")
-        Me.ucrInputExportFile.Name = "ucrInputExportFile"
         '
         'cmdBrowse
         '
@@ -70,11 +57,25 @@ Partial Class dlgExportDataset
         resources.ApplyResources(Me.lblExport, "lblExport")
         Me.lblExport.Name = "lblExport"
         '
+        'ucrInputExportFile
+        '
+        Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
+        Me.ucrInputExportFile.IsMultiline = False
+        Me.ucrInputExportFile.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputExportFile, "ucrInputExportFile")
+        Me.ucrInputExportFile.Name = "ucrInputExportFile"
+        '
         'ucrAvailableSheets
         '
+        Me.ucrAvailableSheets.bDropUnusedFilterLevels = False
         Me.ucrAvailableSheets.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrAvailableSheets, "ucrAvailableSheets")
         Me.ucrAvailableSheets.Name = "ucrAvailableSheets"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgExportDataset
         '
@@ -91,7 +92,6 @@ Partial Class dlgExportDataset
         Me.Name = "dlgExportDataset"
         Me.ShowIcon = False
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 

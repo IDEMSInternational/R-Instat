@@ -450,4 +450,8 @@ Public Class ucrColumnMetadata
         clsAppendVariablesMetaData.RemoveParameterByName("property")
         clsAppendVariablesMetaData.RemoveParameterByName("new_val")
     End Sub
+
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "543")
+    End Sub
 End Class

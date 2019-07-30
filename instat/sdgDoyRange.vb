@@ -162,7 +162,13 @@ Public Class sdgDoyRange
         ucrPnlTo.AddToLinkedControls(ucrNudToDiff, {rdoLength}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverFrom.Selector = ucrSelectorDoy
+        'Strict because we only want numeric/integer, not Dates etc.
+        ucrReceiverFrom.SetIncludedDataTypes({"numeric"}, bStrict:=True)
+        ucrReceiverFrom.strSelectorHeading = "Numerics"
+
         ucrReceiverTo.Selector = ucrSelectorDoy
+        ucrReceiverTo.SetIncludedDataTypes({"numeric"}, bStrict:=True)
+        ucrReceiverTo.strSelectorHeading = "Numerics"
 
         ucrDoyFrom.SetParameterIsNumber()
         ucrDoyTo.SetParameterIsNumber()
@@ -249,5 +255,6 @@ Public Class sdgDoyRange
 
     Private Sub FromControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDoyFrom.ControlValueChanged, ucrReceiverFrom.ControlValueChanged
         UpdateFromValues()
+        UpdateToValues()
     End Sub
 End Class

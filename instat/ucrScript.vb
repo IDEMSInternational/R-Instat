@@ -33,7 +33,15 @@ Public Class ucrScript
     End Sub
 
     Private Sub cmdRun_Click(sender As Object, e As EventArgs) Handles cmdRun.Click
-        RunText(txtScript.Text)
+        RunAllText()
+    End Sub
+
+    Private Sub RunAllText()
+        If txtScript.TextLength > 0 Then
+            If MsgBox("Are you sure you want to run the entire contents of the script window?", MessageBoxButtons.YesNo, "Run All") = MsgBoxResult.Yes Then
+                RunText(txtScript.Text)
+            End If
+        End If
     End Sub
 
     Public Sub AppendText(strText As String)
@@ -44,43 +52,50 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click
-        Dim dlgResponse As DialogResult
-        If txtScript.Text <> "" Then
-            dlgResponse = MessageBox.Show("Are you sure you want to clear the contents of the script window?" & Me.Text, "Clear " & Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            If dlgResponse = DialogResult.Yes Then
-                txtScript.Clear()
+        If txtScript.TextLength > 0 Then
+            If MessageBox.Show("Are you sure you want to clear the contents of the script window?" & Me.Text,
+                               "Clear " & Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                'This was preferred over txtScript.Clear() , to support undo
+                txtScript.Focus()
+                txtScript.SelectAll()
+                SendKeys.Send("{BACKSPACE}")
             End If
         End If
     End Sub
 
     Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
-        If txtScript.SelectionLength > 0 AndAlso txtScript.SelectedText <> "" Then
+        If txtScript.SelectionLength > 0 Then
             RunText(txtScript.SelectedText)
-        Else
-            MessageBox.Show("You need to select some text before running" & Me.Text, "No text selected" & Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
+    End Sub
 
+    Private Sub mnuRunCurrentLine_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLine.Click
+        If txtScript.TextLength > 0 Then
+            Dim lineNum As Integer = txtScript.GetLineFromCharIndex(txtScript.GetFirstCharIndexOfCurrentLine())
+            If lineNum < txtScript.Lines.Length Then
+                RunText(txtScript.Lines(lineNum))
+                If lineNum < txtScript.Lines.Length - 1 Then
+                    txtScript.SelectionStart = txtScript.GetFirstCharIndexFromLine(lineNum + 1)
+                    txtScript.ScrollToCaret()
+                End If
+            End If
         End If
     End Sub
 
     Private Sub RunText(strText As String)
         If strText <> "" Then
-            If MsgBox("Running code from the script window is not yet a stable operation." & vbNewLine & vbNewLine & "Do you want to proceed?", MessageBoxButtons.YesNo, "Warning") = MsgBoxResult.Yes Then
-                frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
-            End If
+            frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
         End If
     End Sub
 
     Private Sub mnuOpenScript_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptasFile.Click
-        Dim clsProcessStart As New RFunction
         Dim strScriptFilename As String = ""
         Dim i As Integer
-
         Try
             If Not Directory.Exists(strRInstatLogFilesFolderPath) Then
                 Directory.CreateDirectory(strRInstatLogFilesFolderPath)
             End If
             strScriptFilename = "RInstatScript.R"
-
             While File.Exists(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
                 i = i + 1
                 strScriptFilename = "RInstatScript" & i & ".R"
@@ -88,45 +103,39 @@ Public Class ucrScript
             File.WriteAllText(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename), frmMain.clsRLink.GetRSetupScript() & txtScript.Text)
             Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
         Catch
-            MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
-            End
+            MessageBox.Show("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Open Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
     Private Sub mnuSaveScript_Click(sender As Object, e As EventArgs) Handles mnuSaveScript.Click
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save Script To File"
-            dlgSave.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
-
+            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
             dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-
             If dlgSave.ShowDialog() = DialogResult.OK Then
                 Try
                     File.WriteAllText(dlgSave.FileName, txtScript.Text)
                 Catch
-                    MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                    MessageBox.Show("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Save Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
 
             End If
         End Using
     End Sub
 
-    Private Sub mnuOpenScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuLoadScriptFromFile.Click
+    Private Sub mnuLoadScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuLoadScriptFromFile.Click
+        Using dlgLoad As New OpenFileDialog
+            dlgLoad.Title = "Load Script From Text File"
+            dlgLoad.Filter = "Text & R Script Files (*.txt,*.R)|*.txt;*.R|R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+            dlgLoad.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
 
-        Dim msgWarning As DialogResult
-
-        Using dlgOpen As New OpenFileDialog
-            dlgOpen.Title = "Open Script From Text File"
-            dlgOpen.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
-            dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-
-            If dlgOpen.ShowDialog() = DialogResult.OK Then
-                msgWarning = MessageBox.Show("Opening a script from file will clear your current script" & Environment.NewLine & "Do you want still want to open?", "Open Script From File", MessageBoxButtons.YesNo)
-                If msgWarning = DialogResult.Yes Then
+            If dlgLoad.ShowDialog() = DialogResult.OK Then
+                If MessageBox.Show("Loading a script from file will clear your current script" & Environment.NewLine & "Do you still want to load?",
+                                   "Load Script From File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     Try
-                        txtScript.Text = File.ReadAllText(dlgOpen.FileName)
+                        txtScript.Text = File.ReadAllText(dlgLoad.FileName)
                     Catch
-                        MsgBox("Could not open the script from file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                        MessageBox.Show("Could not load the script from file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Load Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End Try
                 End If
             End If
@@ -134,11 +143,15 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-        CopyText()
+        If txtScript.SelectionLength > 0 Then
+            CopyText()
+        End If
     End Sub
 
     Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
-        CutText()
+        If txtScript.SelectionLength > 0 Then
+            CutText()
+        End If
     End Sub
 
     Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
@@ -149,7 +162,31 @@ Public Class ucrScript
         End If
     End Sub
 
-    Private Sub EnableCopyCut()
+    Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
+        mnuRunCurrentLine.ShortcutKeys = Keys.Enter Or Keys.Control
+        txtScript.WordWrap = False
+        cmdRun.Enabled = (txtScript.TextLength > 0)
+    End Sub
+
+    Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
+        cmdRun.Enabled = (txtScript.TextLength > 0)
+    End Sub
+
+    Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
+        If txtScript.TextLength > 0 Then
+            mnuOpenScriptasFile.Enabled = True
+            mnuClearContents.Enabled = True
+            mnuSaveScript.Enabled = True
+            mnuRunCurrentLine.Enabled = True
+            mnuRunAllText.Enabled = True
+        Else
+            mnuOpenScriptasFile.Enabled = False
+            mnuClearContents.Enabled = False
+            mnuSaveScript.Enabled = False
+            mnuRunCurrentLine.Enabled = False
+            mnuRunAllText.Enabled = False
+        End If
+
         If txtScript.SelectionLength > 0 Then
             mnuCopy.Enabled = True
             mnuCut.Enabled = True
@@ -159,32 +196,7 @@ Public Class ucrScript
             mnuCut.Enabled = False
             mnuRunSelectedText.Enabled = False
         End If
-    End Sub
 
-    Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
-        EnableCopyCut()
-        EnableMenusWhenScriptNotEmpty()
-    End Sub
-
-    Private Sub txtScript_MouseUp(sender As Object, e As EventArgs) Handles txtScript.MouseUp, txtScript.KeyUp
-        EnableCopyCut()
-    End Sub
-
-    Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
-        EnableMenusWhenScriptNotEmpty()
-    End Sub
-    Private Sub EnableMenusWhenScriptNotEmpty()
-        If txtScript.Text <> "" Then
-            cmdRun.Enabled = True
-            mnuOpenScriptasFile.Enabled = True
-            mnuClearContents.Enabled = True
-            mnuSaveScript.Enabled = True
-        Else
-            cmdRun.Enabled = False
-            mnuOpenScriptasFile.Enabled = False
-            mnuClearContents.Enabled = False
-            mnuSaveScript.Enabled = False
-        End If
     End Sub
 
     Private Sub Menu_Undo(sender As Object, e As EventArgs) Handles mnuUndo.Click
@@ -198,6 +210,10 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuRunAllText_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click
-        RunText(txtScript.Text)
+        RunAllText()
+    End Sub
+
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
     End Sub
 End Class

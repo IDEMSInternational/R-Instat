@@ -59,7 +59,12 @@ Partial Class dlgOneWayFrequencies
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverOneWayFreq = New instat.ucrReceiverMultiple()
         Me.ucrSaveGraph = New instat.ucrSave()
+        Me.grpOutput = New System.Windows.Forms.GroupBox()
+        Me.rdoAsHtml = New System.Windows.Forms.RadioButton()
+        Me.rdoAsText = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlOutput = New instat.UcrPanel()
         Me.grpSort.SuspendLayout()
+        Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpSort
@@ -185,6 +190,7 @@ Partial Class dlgOneWayFrequencies
         '
         'ucrSelectorOneWayFreq
         '
+        Me.ucrSelectorOneWayFreq.bDropUnusedFilterLevels = False
         Me.ucrSelectorOneWayFreq.bShowHiddenColumns = False
         Me.ucrSelectorOneWayFreq.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorOneWayFreq, "ucrSelectorOneWayFreq")
@@ -204,10 +210,37 @@ Partial Class dlgOneWayFrequencies
         resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         '
+        'grpOutput
+        '
+        Me.grpOutput.Controls.Add(Me.rdoAsHtml)
+        Me.grpOutput.Controls.Add(Me.rdoAsText)
+        Me.grpOutput.Controls.Add(Me.ucrPnlOutput)
+        resources.ApplyResources(Me.grpOutput, "grpOutput")
+        Me.grpOutput.Name = "grpOutput"
+        Me.grpOutput.TabStop = False
+        '
+        'rdoAsHtml
+        '
+        resources.ApplyResources(Me.rdoAsHtml, "rdoAsHtml")
+        Me.rdoAsHtml.Name = "rdoAsHtml"
+        Me.rdoAsHtml.UseVisualStyleBackColor = True
+        '
+        'rdoAsText
+        '
+        resources.ApplyResources(Me.rdoAsText, "rdoAsText")
+        Me.rdoAsText.Name = "rdoAsText"
+        Me.rdoAsText.UseVisualStyleBackColor = True
+        '
+        'ucrPnlOutput
+        '
+        resources.ApplyResources(Me.ucrPnlOutput, "ucrPnlOutput")
+        Me.ucrPnlOutput.Name = "ucrPnlOutput"
+        '
         'dlgOneWayFrequencies
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpOutput)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrReceiverOneWayFreq)
         Me.Controls.Add(Me.rdoBoth)
@@ -229,7 +262,8 @@ Partial Class dlgOneWayFrequencies
         Me.MinimizeBox = False
         Me.Name = "dlgOneWayFrequencies"
         Me.grpSort.ResumeLayout(False)
-        Me.grpSort.PerformLayout()
+        Me.grpOutput.ResumeLayout(False)
+        Me.grpOutput.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -255,4 +289,8 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents rdoBoth As RadioButton
     Friend WithEvents ucrReceiverOneWayFreq As ucrReceiverMultiple
     Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents grpOutput As GroupBox
+    Friend WithEvents rdoAsHtml As RadioButton
+    Friend WithEvents rdoAsText As RadioButton
+    Friend WithEvents ucrPnlOutput As UcrPanel
 End Class

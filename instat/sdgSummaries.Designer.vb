@@ -40,14 +40,14 @@ Partial Class sdgSummaries
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgSummaries))
         Me.tbMissingOptions = New System.Windows.Forms.TabPage()
+        Me.ucrInputPercentage = New instat.ucrInputTextBox()
+        Me.ucrChkMinNumNonMissing = New instat.ucrCheck()
+        Me.ucrNudNumberNotMissing = New instat.ucrNud()
+        Me.ucrNudConsecutive = New instat.ucrNud()
+        Me.ucrChkConsecutiveMissing = New instat.ucrCheck()
+        Me.ucrChkMaxNumMissing = New instat.ucrCheck()
+        Me.ucrChkMaxPercMissing = New instat.ucrCheck()
         Me.ucrNudNumber = New instat.ucrNud()
-        Me.ucrNudPercentage = New instat.ucrNud()
-        Me.lblPercentage = New System.Windows.Forms.Label()
-        Me.lblNumber = New System.Windows.Forms.Label()
-        Me.rdoPercentage = New System.Windows.Forms.RadioButton()
-        Me.rdoNumber = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMissingOptions = New instat.UcrPanel()
-        Me.ucrChkIncludeMissingOpt = New instat.ucrCheck()
         Me.tbMore = New System.Windows.Forms.TabPage()
         Me.grpProportionsPercentiles = New System.Windows.Forms.GroupBox()
         Me.ucrInputCountValue = New instat.ucrInputTextBox()
@@ -104,17 +104,18 @@ Partial Class sdgSummaries
         Me.tbPosition = New System.Windows.Forms.TabPage()
         Me.ucrChkOrderBy = New instat.ucrCheck()
         Me.lblOrderBy = New System.Windows.Forms.Label()
-        Me.ucrSelectorOrderBy = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverOrderBy = New instat.ucrReceiverSingle()
         Me.grpPosition = New System.Windows.Forms.GroupBox()
         Me.ucrInputN = New instat.ucrInputTextBox()
         Me.lblInputN = New System.Windows.Forms.Label()
         Me.ucrChkFirst = New instat.ucrCheck()
         Me.ucrChkLast = New instat.ucrCheck()
         Me.ucrChknth = New instat.ucrCheck()
+        Me.ucrSelectorOrderBy = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverOrderBy = New instat.ucrReceiverSingle()
         Me.tbModel = New System.Windows.Forms.TabPage()
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
+        Me.lblPercentage = New System.Windows.Forms.Label()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpProportionsPercentiles.SuspendLayout()
@@ -137,17 +138,70 @@ Partial Class sdgSummaries
         '
         'tbMissingOptions
         '
-        Me.tbMissingOptions.Controls.Add(Me.ucrNudNumber)
-        Me.tbMissingOptions.Controls.Add(Me.ucrNudPercentage)
         Me.tbMissingOptions.Controls.Add(Me.lblPercentage)
-        Me.tbMissingOptions.Controls.Add(Me.lblNumber)
-        Me.tbMissingOptions.Controls.Add(Me.rdoPercentage)
-        Me.tbMissingOptions.Controls.Add(Me.rdoNumber)
-        Me.tbMissingOptions.Controls.Add(Me.ucrPnlMissingOptions)
-        Me.tbMissingOptions.Controls.Add(Me.ucrChkIncludeMissingOpt)
+        Me.tbMissingOptions.Controls.Add(Me.ucrInputPercentage)
+        Me.tbMissingOptions.Controls.Add(Me.ucrChkMinNumNonMissing)
+        Me.tbMissingOptions.Controls.Add(Me.ucrNudNumberNotMissing)
+        Me.tbMissingOptions.Controls.Add(Me.ucrNudConsecutive)
+        Me.tbMissingOptions.Controls.Add(Me.ucrChkConsecutiveMissing)
+        Me.tbMissingOptions.Controls.Add(Me.ucrChkMaxNumMissing)
+        Me.tbMissingOptions.Controls.Add(Me.ucrChkMaxPercMissing)
+        Me.tbMissingOptions.Controls.Add(Me.ucrNudNumber)
         resources.ApplyResources(Me.tbMissingOptions, "tbMissingOptions")
         Me.tbMissingOptions.Name = "tbMissingOptions"
         Me.tbMissingOptions.UseVisualStyleBackColor = True
+        '
+        'ucrInputPercentage
+        '
+        Me.ucrInputPercentage.AddQuotesIfUnrecognised = True
+        Me.ucrInputPercentage.IsMultiline = False
+        Me.ucrInputPercentage.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPercentage, "ucrInputPercentage")
+        Me.ucrInputPercentage.Name = "ucrInputPercentage"
+        '
+        'ucrChkMinNumNonMissing
+        '
+        Me.ucrChkMinNumNonMissing.Checked = False
+        resources.ApplyResources(Me.ucrChkMinNumNonMissing, "ucrChkMinNumNonMissing")
+        Me.ucrChkMinNumNonMissing.Name = "ucrChkMinNumNonMissing"
+        '
+        'ucrNudNumberNotMissing
+        '
+        Me.ucrNudNumberNotMissing.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberNotMissing.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNumberNotMissing, "ucrNudNumberNotMissing")
+        Me.ucrNudNumberNotMissing.Maximum = New Decimal(New Integer() {340, 0, 0, 0})
+        Me.ucrNudNumberNotMissing.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberNotMissing.Name = "ucrNudNumberNotMissing"
+        Me.ucrNudNumberNotMissing.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudConsecutive
+        '
+        Me.ucrNudConsecutive.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudConsecutive.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudConsecutive, "ucrNudConsecutive")
+        Me.ucrNudConsecutive.Maximum = New Decimal(New Integer() {340, 0, 0, 0})
+        Me.ucrNudConsecutive.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudConsecutive.Name = "ucrNudConsecutive"
+        Me.ucrNudConsecutive.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkConsecutiveMissing
+        '
+        Me.ucrChkConsecutiveMissing.Checked = False
+        resources.ApplyResources(Me.ucrChkConsecutiveMissing, "ucrChkConsecutiveMissing")
+        Me.ucrChkConsecutiveMissing.Name = "ucrChkConsecutiveMissing"
+        '
+        'ucrChkMaxNumMissing
+        '
+        Me.ucrChkMaxNumMissing.Checked = False
+        resources.ApplyResources(Me.ucrChkMaxNumMissing, "ucrChkMaxNumMissing")
+        Me.ucrChkMaxNumMissing.Name = "ucrChkMaxNumMissing"
+        '
+        'ucrChkMaxPercMissing
+        '
+        Me.ucrChkMaxPercMissing.Checked = False
+        resources.ApplyResources(Me.ucrChkMaxPercMissing, "ucrChkMaxPercMissing")
+        Me.ucrChkMaxPercMissing.Name = "ucrChkMaxPercMissing"
         '
         'ucrNudNumber
         '
@@ -158,49 +212,6 @@ Partial Class sdgSummaries
         Me.ucrNudNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumber.Name = "ucrNudNumber"
         Me.ucrNudNumber.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudPercentage
-        '
-        Me.ucrNudPercentage.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPercentage.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudPercentage, "ucrNudPercentage")
-        Me.ucrNudPercentage.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPercentage.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPercentage.Name = "ucrNudPercentage"
-        Me.ucrNudPercentage.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblPercentage
-        '
-        resources.ApplyResources(Me.lblPercentage, "lblPercentage")
-        Me.lblPercentage.Name = "lblPercentage"
-        '
-        'lblNumber
-        '
-        resources.ApplyResources(Me.lblNumber, "lblNumber")
-        Me.lblNumber.Name = "lblNumber"
-        '
-        'rdoPercentage
-        '
-        resources.ApplyResources(Me.rdoPercentage, "rdoPercentage")
-        Me.rdoPercentage.Name = "rdoPercentage"
-        Me.rdoPercentage.UseVisualStyleBackColor = True
-        '
-        'rdoNumber
-        '
-        resources.ApplyResources(Me.rdoNumber, "rdoNumber")
-        Me.rdoNumber.Name = "rdoNumber"
-        Me.rdoNumber.UseVisualStyleBackColor = True
-        '
-        'ucrPnlMissingOptions
-        '
-        resources.ApplyResources(Me.ucrPnlMissingOptions, "ucrPnlMissingOptions")
-        Me.ucrPnlMissingOptions.Name = "ucrPnlMissingOptions"
-        '
-        'ucrChkIncludeMissingOpt
-        '
-        Me.ucrChkIncludeMissingOpt.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeMissingOpt, "ucrChkIncludeMissingOpt")
-        Me.ucrChkIncludeMissingOpt.Name = "ucrChkIncludeMissingOpt"
         '
         'tbMore
         '
@@ -598,9 +609,9 @@ Partial Class sdgSummaries
         '
         Me.tbPosition.Controls.Add(Me.ucrChkOrderBy)
         Me.tbPosition.Controls.Add(Me.lblOrderBy)
+        Me.tbPosition.Controls.Add(Me.grpPosition)
         Me.tbPosition.Controls.Add(Me.ucrSelectorOrderBy)
         Me.tbPosition.Controls.Add(Me.ucrReceiverOrderBy)
-        Me.tbPosition.Controls.Add(Me.grpPosition)
         resources.ApplyResources(Me.tbPosition, "tbPosition")
         Me.tbPosition.Name = "tbPosition"
         Me.tbPosition.UseVisualStyleBackColor = True
@@ -615,23 +626,6 @@ Partial Class sdgSummaries
         '
         resources.ApplyResources(Me.lblOrderBy, "lblOrderBy")
         Me.lblOrderBy.Name = "lblOrderBy"
-        '
-        'ucrSelectorOrderBy
-        '
-        Me.ucrSelectorOrderBy.bDropUnusedFilterLevels = False
-        Me.ucrSelectorOrderBy.bShowHiddenColumns = False
-        Me.ucrSelectorOrderBy.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorOrderBy, "ucrSelectorOrderBy")
-        Me.ucrSelectorOrderBy.Name = "ucrSelectorOrderBy"
-        '
-        'ucrReceiverOrderBy
-        '
-        Me.ucrReceiverOrderBy.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverOrderBy, "ucrReceiverOrderBy")
-        Me.ucrReceiverOrderBy.Name = "ucrReceiverOrderBy"
-        Me.ucrReceiverOrderBy.Selector = Nothing
-        Me.ucrReceiverOrderBy.strNcFilePath = ""
-        Me.ucrReceiverOrderBy.ucrSelector = Nothing
         '
         'grpPosition
         '
@@ -675,6 +669,23 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrChknth, "ucrChknth")
         Me.ucrChknth.Name = "ucrChknth"
         '
+        'ucrSelectorOrderBy
+        '
+        Me.ucrSelectorOrderBy.bDropUnusedFilterLevels = False
+        Me.ucrSelectorOrderBy.bShowHiddenColumns = False
+        Me.ucrSelectorOrderBy.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorOrderBy, "ucrSelectorOrderBy")
+        Me.ucrSelectorOrderBy.Name = "ucrSelectorOrderBy"
+        '
+        'ucrReceiverOrderBy
+        '
+        Me.ucrReceiverOrderBy.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverOrderBy, "ucrReceiverOrderBy")
+        Me.ucrReceiverOrderBy.Name = "ucrReceiverOrderBy"
+        Me.ucrReceiverOrderBy.Selector = Nothing
+        Me.ucrReceiverOrderBy.strNcFilePath = ""
+        Me.ucrReceiverOrderBy.ucrSelector = Nothing
+        '
         'tbModel
         '
         Me.tbModel.Controls.Add(Me.ucrChkStandardErrorOfMean)
@@ -692,6 +703,11 @@ Partial Class sdgSummaries
         '
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
+        '
+        'lblPercentage
+        '
+        resources.ApplyResources(Me.lblPercentage, "lblPercentage")
+        Me.lblPercentage.Name = "lblPercentage"
         '
         'sdgSummaries
         '
@@ -784,18 +800,11 @@ Partial Class sdgSummaries
     Friend WithEvents ucrInputPercentile As ucrInputTextBox
     Friend WithEvents ucrChkPercentile As ucrCheck
     Friend WithEvents ucrChkn_distinct As ucrCheck
-    Friend WithEvents ucrChkIncludeMissingOpt As ucrCheck
-    Friend WithEvents rdoPercentage As RadioButton
-    Friend WithEvents rdoNumber As RadioButton
-    Friend WithEvents ucrPnlMissingOptions As UcrPanel
-    Friend WithEvents lblPercentage As Label
-    Friend WithEvents lblNumber As Label
     Friend WithEvents ucrInputCountValue As ucrInputTextBox
     Friend WithEvents ucrInputComboCountTest As ucrInputComboBox
     Friend WithEvents tbModel As TabPage
     Friend WithEvents ucrChkStandardErrorOfMean As ucrCheck
     Friend WithEvents ucrNudNumber As ucrNud
-    Friend WithEvents ucrNudPercentage As ucrNud
     Friend WithEvents tbPosition As TabPage
     Friend WithEvents grpPosition As GroupBox
     Friend WithEvents ucrInputN As ucrInputTextBox
@@ -807,4 +816,12 @@ Partial Class sdgSummaries
     Friend WithEvents ucrSelectorOrderBy As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverOrderBy As ucrReceiverSingle
     Friend WithEvents ucrChkOrderBy As ucrCheck
+    Friend WithEvents ucrChkMaxNumMissing As ucrCheck
+    Friend WithEvents ucrChkMaxPercMissing As ucrCheck
+    Friend WithEvents ucrChkConsecutiveMissing As ucrCheck
+    Friend WithEvents ucrNudConsecutive As ucrNud
+    Friend WithEvents ucrChkMinNumNonMissing As ucrCheck
+    Friend WithEvents ucrNudNumberNotMissing As ucrNud
+    Friend WithEvents ucrInputPercentage As ucrInputTextBox
+    Friend WithEvents lblPercentage As Label
 End Class

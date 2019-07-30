@@ -169,7 +169,7 @@
     <value>6</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 307</value>
+    <value>10, 333</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 53</value>
@@ -223,10 +223,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>419, 366</value>
+    <value>418, 388</value>
   </data>
   <data name="ucrNewDataFrameName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 256</value>
+    <value>10, 254</value>
   </data>
   <data name="ucrNewDataFrameName.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 24</value>
@@ -246,21 +246,6 @@
   <data name="&gt;&gt;ucrNewDataFrameName.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdoApplyAsSubset.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoApplyAsSubset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 22</value>
-  </data>
-  <data name="rdoApplyAsSubset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 17</value>
-  </data>
-  <data name="rdoApplyAsSubset.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="rdoApplyAsSubset.Text" xml:space="preserve">
-    <value>Apply As Subset</value>
-  </data>
   <data name="&gt;&gt;rdoApplyAsSubset.Name" xml:space="preserve">
     <value>rdoApplyAsSubset</value>
   </data>
@@ -272,21 +257,6 @@
   </data>
   <data name="&gt;&gt;rdoApplyAsSubset.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="rdoApplyAsFilter.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoApplyAsFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 22</value>
-  </data>
-  <data name="rdoApplyAsFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 17</value>
-  </data>
-  <data name="rdoApplyAsFilter.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="rdoApplyAsFilter.Text" xml:space="preserve">
-    <value>Apply As Filter</value>
   </data>
   <data name="&gt;&gt;rdoApplyAsFilter.Name" xml:space="preserve">
     <value>rdoApplyAsFilter</value>
@@ -304,7 +274,7 @@
     <value>10, 197</value>
   </data>
   <data name="grpApplyOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 53</value>
+    <value>378, 53</value>
   </data>
   <data name="grpApplyOptions.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -325,10 +295,10 @@
     <value>1</value>
   </data>
   <data name="ucrInputFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 281</value>
+    <value>163, 284</value>
   </data>
   <data name="ucrInputFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 21</value>
+    <value>246, 42</value>
   </data>
   <data name="ucrInputFilterPreview.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -345,14 +315,11 @@
   <data name="&gt;&gt;ucrInputFilterPreview.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="lblFilterPreview.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="lblFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 285</value>
   </data>
   <data name="lblFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 13</value>
+    <value>147, 13</value>
   </data>
   <data name="lblFilterPreview.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -407,5 +374,53 @@
   </data>
   <data name="&gt;&gt;ucrReceiverFilter.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="rdoApplyAsSubset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="rdoApplyAsSubset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 17</value>
+  </data>
+  <data name="rdoApplyAsSubset.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoApplyAsSubset.Text" xml:space="preserve">
+    <value>Apply As Subset</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsSubset.Name" xml:space="preserve">
+    <value>rdoApplyAsSubset</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsSubset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsSubset.Parent" xml:space="preserve">
+    <value>grpApplyOptions</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsSubset.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoApplyAsFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 22</value>
+  </data>
+  <data name="rdoApplyAsFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 17</value>
+  </data>
+  <data name="rdoApplyAsFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoApplyAsFilter.Text" xml:space="preserve">
+    <value>Apply As Filter</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsFilter.Name" xml:space="preserve">
+    <value>rdoApplyAsFilter</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsFilter.Parent" xml:space="preserve">
+    <value>grpApplyOptions</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsFilter.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
 </root>
