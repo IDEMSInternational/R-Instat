@@ -337,9 +337,7 @@ Public Class dlgClimaticSummary
 
     Private Sub UpdateRCode()
         If rdoAnnual.Checked Then
-            If clsDefaultFactors.ContainsParameter("within_variable") Then
-                clsDefaultFactors.RemoveParameterByName("within_variable")
-            End If
+            clsDefaultFactors.RemoveParameterByName("within_variable")
             clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
         ElseIf rdoAnnualWithinYear.Checked Then
             If Not clsDefaultFactors.ContainsParameter("within_variable") Then
@@ -349,9 +347,8 @@ Public Class dlgClimaticSummary
                 clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
             End If
         ElseIf rdoWithinYear.Checked Then
-            If clsDefaultFactors.ContainsParameter("year") Then
-                clsDefaultFactors.RemoveParameterByName("year")
-            End If
+            clsDefaultFactors.ContainsParameter("year")
+            clsDefaultFactors.RemoveParameterByName("year")
             clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
         End If
     End Sub
