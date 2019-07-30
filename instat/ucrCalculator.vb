@@ -1792,4 +1792,28 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::var.circular()", 1)
         End If
     End Sub
+
+    Private Sub cmdA1_Click(sender As Object, e As EventArgs) Handles cmdA1.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::besselI(x = , nu, expon.scaled = FALSE)", 27)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::besselI()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAngVar_Click(sender As Object, e As EventArgs) Handles cmdAngVar.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.variance(x = , na.rm = FALSE)", 16)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.variance()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAngDev_Click(sender As Object, e As EventArgs) Handles cmdAngDev.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.deviation(x = , na.rm = FALSE)", 16)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.deviation()", 1)
+        End If
+    End Sub
 End Class
