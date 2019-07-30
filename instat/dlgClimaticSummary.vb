@@ -335,7 +335,7 @@ Public Class dlgClimaticSummary
         End If
     End Sub
 
-  Private Sub UpdateRCode()
+    Private Sub UpdateRCode()
         If rdoAnnual.Checked Then
             If clsDefaultFactors.ContainsParameter("within_variable") Then
                 clsDefaultFactors.RemoveParameterByName("within_variable")
@@ -353,7 +353,8 @@ Public Class dlgClimaticSummary
                 clsDefaultFactors.RemoveParameterByName("year")
             End If
             clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
-
+        End If
+    End Sub
     Private Sub ucrChkAddDateColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddDateColumn.ControlValueChanged
         If ucrChkAddDateColumn.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddDateFunction, iPosition:=0)
