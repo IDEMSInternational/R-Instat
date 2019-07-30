@@ -2341,6 +2341,12 @@ DataBook$set("public","define_as_climatic", function(data_name, types, key_col_n
     }
   }
   self$get_data_objects(data_name)$set_climatic_types(types)
+  cat("Climatic dataset:", data_name, "\n")
+  cat("----------------\n")
+  types <- types[sort(names(types))]
+  for(i in seq_along(types)) {
+    cat(names(types)[i], ": ", types[i], "\n", sep = "")
+  }
 }
 )
 
