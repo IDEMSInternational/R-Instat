@@ -22,7 +22,7 @@ Public Class dlgMakeDate
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
     Private strSelectedDataFrame As String = ""
-    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsGregorianDefault, clsJulianDateDefault, clsAsCharacterFunction As New RFunction
+    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsRDefaultDate, clsGregorianDefault, clsJulianDateDefault, clsAsCharacterFunction As New RFunction
     Private clsDivisionOperator, clsMultiplicationOperator As New ROperator
 
     Private Sub dlgMakeDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -103,7 +103,7 @@ Public Class dlgMakeDate
         ucrInputFormat.SetItems(dctDateFormat)
         ucrInputFormat.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
 
-        ucrInputOrigin.SetItems({"Excel", "Gregorian", "Julian Day Number", "Specify"})
+        ucrInputOrigin.SetItems({"R(1970/01/01)", "Excel(1899/12/30)", "Gregorian(1600/03/01)", "Julian Day Number(-2440588)", "Specify"})
         ucrInputOrigin.SetDropDownStyleAsNonEditable()
         ucrInputOrigin.AddToLinkedControls(ucrDtpSpecifyOrigin, {"Specify"}, bNewLinkedHideIfParameterMissing:=True)
 
@@ -214,6 +214,10 @@ Public Class dlgMakeDate
 
         ucrDtpSpecifyOrigin.SetParameter(New RParameter("origin", 1))
         ucrDtpSpecifyOrigin.SetParameterIsRDate()
+
+        clsRDefaultDate = New RFunction
+        clsRDefaultDate.SetRCommand("as.Date")
+        clsRDefaultDate.AddParameter("x", Chr(34) & "1970/01/01" & Chr(34))
 
         clsDefaultDate = New RFunction
         clsDefaultDate.SetRCommand("as.Date")
@@ -446,12 +450,14 @@ Public Class dlgMakeDate
         ElseIf rdoOrigin.Checked Then
             cmdHelp.Visible = False
             ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
-            If ucrInputOrigin.GetText = "Excel" Then
+            If ucrInputOrigin.GetText = "Excel(1899/12/30)" Then
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate)
-            ElseIf ucrInputOrigin.GetText = "Gregorian" Then
+            ElseIf ucrInputOrigin.GetText = "Gregorian(1600/03/01)" Then
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsGregorianDefault)
-            ElseIf ucrInputOrigin.GetText = "Julian Day Number" Then
+            ElseIf ucrInputOrigin.GetText = "Julian Day Number(-2440588)" Then
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsJulianDateDefault)
+            ElseIf ucrInputOrigin.GetText = "R(1970/01/01)" Then
+                clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsRDefaultDate)
             End If
         ElseIf rdoSpecifyFormat.Checked Then
             cmdHelp.Visible = True
