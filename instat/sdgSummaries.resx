@@ -117,14 +117,62 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblPercentage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblPercentage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>324, 71</value>
+  </data>
+  <data name="lblPercentage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>15, 13</value>
+  </data>
+  <data name="lblPercentage.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblPercentage.Text" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="&gt;&gt;lblPercentage.Name" xml:space="preserve">
+    <value>lblPercentage</value>
+  </data>
+  <data name="&gt;&gt;lblPercentage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPercentage.Parent" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;lblPercentage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputPercentage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>273, 68</value>
+  </data>
+  <data name="ucrInputPercentage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 21</value>
+  </data>
+  <data name="ucrInputPercentage.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPercentage.Name" xml:space="preserve">
+    <value>ucrInputPercentage</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPercentage.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPercentage.Parent" xml:space="preserve">
+    <value>tbMissingOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPercentage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrChkMinNumNonMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 42</value>
   </data>
   <data name="ucrChkMinNumNonMissing.Size" type="System.Drawing.Size, System.Drawing">
     <value>227, 20</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrChkMinNumNonMissing.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -138,7 +186,7 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkMinNumNonMissing.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="ucrNudNumberNotMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 42</value>
@@ -159,7 +207,7 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;ucrNudNumberNotMissing.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrNudConsecutive.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 100</value>
@@ -180,7 +228,7 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;ucrNudConsecutive.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="ucrChkConsecutiveMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 100</value>
@@ -201,7 +249,7 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkConsecutiveMissing.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="ucrChkMaxNumMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 13</value>
@@ -222,7 +270,7 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkMaxNumMissing.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="ucrChkMaxPercMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 71</value>
@@ -243,7 +291,7 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkMaxPercMissing.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="ucrNudNumber.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 13</value>
@@ -264,28 +312,7 @@
     <value>tbMissingOptions</value>
   </data>
   <data name="&gt;&gt;ucrNudNumber.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ucrNudPercentage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 71</value>
-  </data>
-  <data name="ucrNudPercentage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudPercentage.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrNudPercentage.Name" xml:space="preserve">
-    <value>ucrNudPercentage</value>
-  </data>
-  <data name="&gt;&gt;ucrNudPercentage.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudPercentage.Parent" xml:space="preserve">
-    <value>tbMissingOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrNudPercentage.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="tbMissingOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
