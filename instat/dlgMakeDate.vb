@@ -138,7 +138,7 @@ Public Class dlgMakeDate
         ucrPnlFormat.AddRadioButton(rdoSpecifyFormat)
         ucrPnlFormat.AddRadioButton(rdoOrigin)
         ucrPnlFormat.AddToLinkedControls(ucrInputFormat, {rdoSpecifyFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Year(4-digit)-Month-Day")
-        ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Excel")
+        ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Excel(1899/12/30)")
 
         ttMakeDate.SetToolTip(rdoDefaultFormat, "This will try 'Year(4-digit)-Month-Day %Y-%m-%d' then 'Year(4-digit)/Month/Day %Y/%m/%d' on the first non-NA element")
 
