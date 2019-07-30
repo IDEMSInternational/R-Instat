@@ -103,7 +103,7 @@ Public Class dlgMakeDate
         ucrInputFormat.SetItems(dctDateFormat)
         ucrInputFormat.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
 
-        ucrInputOrigin.SetItems({"R(1970/01/01)", "Excel(1899/12/30)", "Gregorian(1600/03/01)", "Julian Day Number(-2440588)", "Specify"})
+        ucrInputOrigin.SetItems({"R (1970/01/01)", "Excel (1899/12/30)", "Gregorian (1600/03/01)", "Julian Day Number (-4713/11/24)", "Specify"})
         ucrInputOrigin.SetDropDownStyleAsNonEditable()
         ucrInputOrigin.AddToLinkedControls(ucrDtpSpecifyOrigin, {"Specify"}, bNewLinkedHideIfParameterMissing:=True)
 
@@ -450,13 +450,13 @@ Public Class dlgMakeDate
         ElseIf rdoOrigin.Checked Then
             cmdHelp.Visible = False
             ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
-            If ucrInputOrigin.GetText = "Excel(1899/12/30)" Then
+            If ucrInputOrigin.GetText = "Excel (1899/12/30)" Then
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate)
-            ElseIf ucrInputOrigin.GetText = "Gregorian(1600/03/01)" Then
+            ElseIf ucrInputOrigin.GetText = "Gregorian (1600/03/01)" Then
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsGregorianDefault)
-            ElseIf ucrInputOrigin.GetText = "Julian Day Number(-2440588)" Then
+            ElseIf ucrInputOrigin.GetText = "Julian Day Number (-4713/11/24)" Then
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsJulianDateDefault)
-            ElseIf ucrInputOrigin.GetText = "R(1970/01/01)" Then
+            ElseIf ucrInputOrigin.GetText = "R (1970/01/01)" Then
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsRDefaultDate)
             End If
         ElseIf rdoSpecifyFormat.Checked Then
