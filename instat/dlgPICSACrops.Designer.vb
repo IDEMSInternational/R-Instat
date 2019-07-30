@@ -49,10 +49,11 @@ Partial Class dlgPICSACrops
         Me.ucrReceiverStart = New instat.ucrReceiverSingle()
         Me.ucrReceiverEnd = New instat.ucrReceiverSingle()
         Me.grpCropDefinitions = New System.Windows.Forms.GroupBox()
-        Me.lblPlantingLengthDays = New System.Windows.Forms.Label()
+        Me.lblPlantingDays = New System.Windows.Forms.Label()
+        Me.lblCropLengthDays = New System.Windows.Forms.Label()
         Me.lblWaterAmounts = New System.Windows.Forms.Label()
         Me.ucrChkRequirePlantingDays = New instat.ucrCheck()
-        Me.ucrInputPlantingLengths = New instat.ucrInputComboBox()
+        Me.ucrInputCropLengths = New instat.ucrInputComboBox()
         Me.ucrInputWaterAmounts = New instat.ucrInputComboBox()
         Me.ucrInputPlantingDates = New instat.ucrInputComboBox()
         Me.ucrChkDataProp = New instat.ucrCheck()
@@ -63,7 +64,6 @@ Partial Class dlgPICSACrops
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorForCrops = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblPlantingDays = New System.Windows.Forms.Label()
         Me.grpSeasonReceivers.SuspendLayout()
         Me.grpCropDefinitions.SuspendLayout()
         Me.SuspendLayout()
@@ -179,10 +179,10 @@ Partial Class dlgPICSACrops
         'grpCropDefinitions
         '
         Me.grpCropDefinitions.Controls.Add(Me.lblPlantingDays)
-        Me.grpCropDefinitions.Controls.Add(Me.lblPlantingLengthDays)
+        Me.grpCropDefinitions.Controls.Add(Me.lblCropLengthDays)
         Me.grpCropDefinitions.Controls.Add(Me.lblWaterAmounts)
         Me.grpCropDefinitions.Controls.Add(Me.ucrChkRequirePlantingDays)
-        Me.grpCropDefinitions.Controls.Add(Me.ucrInputPlantingLengths)
+        Me.grpCropDefinitions.Controls.Add(Me.ucrInputCropLengths)
         Me.grpCropDefinitions.Controls.Add(Me.ucrInputWaterAmounts)
         Me.grpCropDefinitions.Controls.Add(Me.ucrInputPlantingDates)
         Me.grpCropDefinitions.Location = New System.Drawing.Point(6, 194)
@@ -192,14 +192,23 @@ Partial Class dlgPICSACrops
         Me.grpCropDefinitions.TabStop = False
         Me.grpCropDefinitions.Text = "Crop Definitions"
         '
-        'lblPlantingLengthDays
+        'lblPlantingDays
         '
-        Me.lblPlantingLengthDays.AutoSize = True
-        Me.lblPlantingLengthDays.Location = New System.Drawing.Point(6, 129)
-        Me.lblPlantingLengthDays.Name = "lblPlantingLengthDays"
-        Me.lblPlantingLengthDays.Size = New System.Drawing.Size(117, 13)
-        Me.lblPlantingLengthDays.TabIndex = 41
-        Me.lblPlantingLengthDays.Text = "Planting Length Day(s):"
+        Me.lblPlantingDays.AutoSize = True
+        Me.lblPlantingDays.Location = New System.Drawing.Point(6, 51)
+        Me.lblPlantingDays.Name = "lblPlantingDays"
+        Me.lblPlantingDays.Size = New System.Drawing.Size(81, 13)
+        Me.lblPlantingDays.TabIndex = 42
+        Me.lblPlantingDays.Text = "Planting Day(s):"
+        '
+        'lblCropLengthDays
+        '
+        Me.lblCropLengthDays.AutoSize = True
+        Me.lblCropLengthDays.Location = New System.Drawing.Point(6, 129)
+        Me.lblCropLengthDays.Name = "lblCropLengthDays"
+        Me.lblCropLengthDays.Size = New System.Drawing.Size(101, 13)
+        Me.lblCropLengthDays.TabIndex = 41
+        Me.lblCropLengthDays.Text = "Crop Length Day(s):"
         '
         'lblWaterAmounts
         '
@@ -218,14 +227,14 @@ Partial Class dlgPICSACrops
         Me.ucrChkRequirePlantingDays.Size = New System.Drawing.Size(204, 20)
         Me.ucrChkRequirePlantingDays.TabIndex = 39
         '
-        'ucrInputPlantingLengths
+        'ucrInputCropLengths
         '
-        Me.ucrInputPlantingLengths.AddQuotesIfUnrecognised = True
-        Me.ucrInputPlantingLengths.IsReadOnly = False
-        Me.ucrInputPlantingLengths.Location = New System.Drawing.Point(172, 126)
-        Me.ucrInputPlantingLengths.Name = "ucrInputPlantingLengths"
-        Me.ucrInputPlantingLengths.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputPlantingLengths.TabIndex = 38
+        Me.ucrInputCropLengths.AddQuotesIfUnrecognised = True
+        Me.ucrInputCropLengths.IsReadOnly = False
+        Me.ucrInputCropLengths.Location = New System.Drawing.Point(172, 126)
+        Me.ucrInputCropLengths.Name = "ucrInputCropLengths"
+        Me.ucrInputCropLengths.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputCropLengths.TabIndex = 38
         '
         'ucrInputWaterAmounts
         '
@@ -327,15 +336,6 @@ Partial Class dlgPICSACrops
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
-        'lblPlantingDays
-        '
-        Me.lblPlantingDays.AutoSize = True
-        Me.lblPlantingDays.Location = New System.Drawing.Point(6, 51)
-        Me.lblPlantingDays.Name = "lblPlantingDays"
-        Me.lblPlantingDays.Size = New System.Drawing.Size(81, 13)
-        Me.lblPlantingDays.TabIndex = 42
-        Me.lblPlantingDays.Text = "Planting Day(s):"
-        '
         'dlgPICSACrops
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -390,11 +390,11 @@ Partial Class dlgPICSACrops
     Friend WithEvents ucrChkDataProp As ucrCheck
     Friend WithEvents ucrInputPlantingDates As ucrInputComboBox
     Friend WithEvents ucrInputWaterAmounts As ucrInputComboBox
-    Friend WithEvents ucrInputPlantingLengths As ucrInputComboBox
+    Friend WithEvents ucrInputCropLengths As ucrInputComboBox
     Friend WithEvents grpSeasonReceivers As GroupBox
     Friend WithEvents grpCropDefinitions As GroupBox
     Friend WithEvents ucrChkRequirePlantingDays As ucrCheck
-    Friend WithEvents lblPlantingLengthDays As Label
+    Friend WithEvents lblCropLengthDays As Label
     Friend WithEvents lblWaterAmounts As Label
     Friend WithEvents lblPlantingDays As Label
 End Class
