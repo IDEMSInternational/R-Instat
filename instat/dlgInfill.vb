@@ -62,14 +62,11 @@ Public Class dlgInfill
         ucrChkResort.SetRDefault("TRUE")
         ucrChkResort.SetText("Sort Data after Infilling")
 
-        ucrPnlDateOptions.AddRadioButton(rdoDataLimits)
-        ucrPnlDateOptions.AddRadioButton(rdoFixedLimits)
-        ucrPnlDateOptions.AddParameterPresentCondition(rdoDataLimits, "start_month")
-        ucrPnlDateOptions.AddParameterPresentCondition(rdoFixedLimits, "start_month", False)
-
-        ucrChkCompleteYears.SetText("Complete years starting from")
-        ucrChkStartDate.SetText("Start date")
-        ucrChkEndDate.SetText("End date")
+        ucrInputLimitOptions.SetItems({"Data Limits", "Fixed Limits"})
+        ucrInputLimitOptions.AddParameterPresentCondition("Data Limits", "start_month")
+        ucrInputLimitOptions.AddParameterPresentCondition("Fixed Limits", {"start_date", "end_date"})
+        ucrInputLimitOptions.SetDropDownStyleAsNonEditable()
+        ucrInputLimitOptions.SetRDefault("Data Limits")
 
         ucrInputComboMonth.SetParameter(New RParameter("start_month", 2))
         Dim dctMonth As New Dictionary(Of String, String)
@@ -95,11 +92,11 @@ Public Class dlgInfill
         ucrDtpEndDate.SetParameter(New RParameter("end_date", 4))
         ucrDtpEndDate.SetParameterIsRDate()
 
-        ucrPnlDateOptions.AddToLinkedControls(ucrChkCompleteYears, {rdoDataLimits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDateOptions.AddToLinkedControls({ucrChkStartDate, ucrChkEndDate}, {rdoFixedLimits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkCompleteYears.AddToLinkedControls(ucrInputComboMonth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkStartDate.AddToLinkedControls(ucrDtpStartDate, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=Chr(34) & "2018/1/1" & Chr(34))
-        ucrChkEndDate.AddToLinkedControls(ucrDtpEndDate, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=Chr(34) & "2018/12/31" & Chr(34))
+        ucrInputLimitOptions.AddToLinkedControls(ucrInputComboMonth, {"Data Limits"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputLimitOptions.AddToLinkedControls({ucrDtpStartDate, ucrDtpEndDate}, {"Fixed Limits"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboMonth.SetLinkedDisplayControl(lblCompleteYears)
+        ucrDtpEndDate.SetLinkedDisplayControl(lblEndDate)
+        ucrDtpStartDate.SetLinkedDisplayControl(lblStartDate)
     End Sub
 
     Private Sub SetDefaults()
@@ -107,9 +104,8 @@ Public Class dlgInfill
 
         'Set default RFunction as the base function
         ucrInfillSelector.Reset()
+        ucrInputLimitOptions.SetName("Data Limits")
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$infill_missing_dates")
-        'clsDefaultFunction.AddParameter("start_date", iPosition:=3)
-        'clsDefaultFunction.AddParameter("end_date", Chr(34) & "2018/12/31" & Chr(34), iPosition:=4)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
 
     End Sub
