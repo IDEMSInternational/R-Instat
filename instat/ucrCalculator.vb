@@ -1768,7 +1768,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircMean_Click(sender As Object, e As EventArgs) Handles cmdCircMean.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular(x = , na.rm=FALSE, control.circular=list(), ...)", 45)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular(x = , na.rm = FALSE, control.circular = list(), ...)", 49)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular()", 1)
         End If
@@ -1784,7 +1784,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMedianHL_Click(sender As Object, e As EventArgs) Handles cmdMedianHL.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular(x = , na.rm=FALSE, method=c(HL1,HL2,HL3), prop=NULL)", 49)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular(x = , na.rm = FALSE, method = c(HL1,HL2,HL3), prop = NULL)", 55)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular()", 1)
         End If
@@ -1792,7 +1792,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircRange_Click(sender As Object, e As EventArgs) Handles cmdCircRange.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::range.circular(x = , test=FALSE, na.rm = FALSE, finite = FALSE, control.circular=list(), ...)", 75)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::range.circular(x = , test = FALSE, na.rm = FALSE, finite = FALSE, control.circular = list(), ...)", 79)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::range.circular()", 1)
         End If
@@ -1816,7 +1816,7 @@ Public Class ucrCalculator
 
     Private Sub cmdA1_Click(sender As Object, e As EventArgs) Handles cmdA1.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::besselI(x = , nu, expon.scaled = FALSE)", 28)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::A1(kappa = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::besselI()", 1)
         End If
@@ -1840,7 +1840,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircQ1_Click(sender As Object, e As EventArgs) Handles cmdCircQ1.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25), na.rm=FALSE, names = TRUE, type = 7, ...)", 69)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.25 , na.rm = FALSE , names = TRUE , type = 7 , ...)", 61)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular()", 1)
         End If
@@ -1848,7 +1848,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircMin_Click(sender As Object, e As EventArgs) Handles cmdCircMin.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25), na.rm=FALSE, names = TRUE, type = 7, ...)", 69)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0 , na.rm = FALSE , names = TRUE , type = 7 , ...)", 61)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular()", 1)
         End If
@@ -1856,7 +1856,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircMax_Click(sender As Object, e As EventArgs) Handles cmdCircMax.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25), na.rm=FALSE, names = TRUE, type = 7, ...)", 69)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 1 , na.rm = FALSE , names = TRUE, type = 7 , ...)", 61)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular()", 1)
         End If
@@ -1864,7 +1864,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircQ3_Click(sender As Object, e As EventArgs) Handles cmdCircQ3.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25), na.rm=FALSE, names = TRUE, type = 7, ...)", 69)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.75 , na.rm = FALSE , names = TRUE , type = 7 , ...)", 61)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular()", 1)
         End If
