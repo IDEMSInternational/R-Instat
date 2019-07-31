@@ -575,4 +575,8 @@ Public Class ucrReceiver
     Public Sub SetVariablesListFunctionName(strNewVariablesListFunctionName As String)
         strVariablesListFunctionName = strNewVariablesListFunctionName
     End Sub
+
+    Public Overridable Sub SetSelectorHeading(strNewHeading As String)
+        strSelectorHeading = strNewHeading
+    End Sub
 End Class
