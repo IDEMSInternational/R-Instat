@@ -39,6 +39,13 @@ Public Class dlgLinePlot
     Private clsPeaksFunction As New RFunction
     Private clsValleysFunction As New RFunction
 
+    Private strFirstParameterName As String = "lineplot"
+    Private strgeomSmoothParameterName As String = "geom_smooth"
+    Private strPeaksParameterName As String = "stat_peaks"
+    Private strValleysParameterName As String = "stat_valleys"
+    Private strgeomPointParameterName As String = "geom_point"
+    Private strGeomParameterNames() As String = {strFirstParameterName, strgeomSmoothParameterName, strPeaksParameterName, strValleysParameterName, strgeomPointParameterName}
+
     Private Sub dlgPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -160,7 +167,7 @@ Public Class dlgLinePlot
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("lineplot", clsRFunctionParameter:=clsRgeomlineplotFunction, iPosition:=2)
+        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsRgeomlineplotFunction, iPosition:=2)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -232,7 +239,7 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
