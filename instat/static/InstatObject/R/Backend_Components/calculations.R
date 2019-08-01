@@ -326,7 +326,9 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
             # If the current data has a filter and overall does not, then we should merge the current into the overall
             # We subset the current data to only have by and output columns so that merge doesn't produce duplicate columns
             # Overall sub data should be full data so we don't lose any data by subsetting the current sub calc
-            sub_calc_results[[c_data_label]] <- dplyr::full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]][c(as.vector(by), sub_calc$result_name)], by = by)
+            sub_calc_cols <- as.vector(by)
+            if(sub_calc$result_name != "") sub_calc_cols <- c(sub_calc_cols, sub_calc$result_name)
+            sub_calc_results[[c_data_label]] <- dplyr::full_join(sub_calc_results[[c_data_label]], curr_sub_calc[[c_data_label]][sub_calc_cols], by = by)
             # Overall data has no filter so output does even though current does
             joined <- TRUE
           }

@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgDefineCorruption
+Partial Class dlgCorruptionDefineProcurement
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -38,7 +38,7 @@ Partial Class dlgDefineCorruption
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDefineCorruption))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCorruptionDefineProcurement))
         Me.ucrDefineCorruptionSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.lblNoBidsReceived = New System.Windows.Forms.Label()
@@ -78,6 +78,7 @@ Partial Class dlgDefineCorruption
         '
         'ucrDefineCorruptionSelector
         '
+        Me.ucrDefineCorruptionSelector.bDropUnusedFilterLevels = False
         Me.ucrDefineCorruptionSelector.bShowHiddenColumns = False
         Me.ucrDefineCorruptionSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrDefineCorruptionSelector, "ucrDefineCorruptionSelector")
@@ -316,7 +317,7 @@ Partial Class dlgDefineCorruption
         Me.cmdCalculatedColumns.Name = "cmdCalculatedColumns"
         Me.cmdCalculatedColumns.UseVisualStyleBackColor = True
         '
-        'dlgDefineCorruption
+        'dlgCorruptionDefineProcurement
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -358,7 +359,7 @@ Partial Class dlgDefineCorruption
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgDefineCorruption"
+        Me.Name = "dlgCorruptionDefineProcurement"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
