@@ -222,75 +222,92 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
+        Dim iCountGeoms As Integer = 0
+        Dim clsTempFunc As RFunction
         If ucrVariablesAsFactorForLinePlot.bSingleVariable Then
             cmdLineOptions.Enabled = True
-            cmdOptions.Enabled = True
         Else
             cmdLineOptions.Enabled = False
-            cmdOptions.Enabled = True
-        End If
-    End Sub
-
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector, bReset:=bResetSubdialog)
-        sdgPlots.ShowDialog()
-        bResetSubdialog = False
-    End Sub
-
-    Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomlineplotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrLinePlotSelector, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
-        sdgLayerOptions.ShowDialog()
-        bResetLineLayerSubdialog = False
-        'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
-
-        'The aesthetics parameters on the main dialog are repopulated as required. 
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrReceiverX.Clear()
-                Else
-                    ucrReceiverX.Add(clsParam.strArgumentValue)
+            For Each clsTempParam In clsBaseOperator.clsParameters
+                If clsTempParam IsNot Nothing AndAlso clsTempParam.bIsFunction AndAlso clsTempParam.clsArgumentCodeStructure IsNot Nothing Then
+                    clsTempFunc = TryCast(clsTempParam.clsArgumentCodeStructure, RFunction)
+                    If clsTempFunc IsNot Nothing Then
+                        If clsTempFunc.strRCommand.StartsWith("geom_") Then
+                            iCountGeoms = iCountGeoms + 1
+                        End If
+                    End If
                 End If
-                'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
-                'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForLinePlot.bSingleVariable) Then
-                'Still might be in the case of bSingleVariable with mapping y="".
-                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
-                    ucrVariablesAsFactorForLinePlot.Clear()
-                Else ucrVariablesAsFactorForLinePlot.Add(clsParam.strArgumentValue)
-                End If
-            ElseIf clsParam.strArgumentName = "colour" Then
-                ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "group" Then
-                ucrReceiverGroup.Add(clsParam.strArgumentValue)
+            Next
+            If iCountGeoms > 1 Then
+                MsgBox("Be careful there's more than one layer ,you may want to reset the dialogue before continuing")
             End If
-        Next
-        TestOkEnabled()
-    End Sub
-
-    Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
-        TempOptionsDisabledInMultipleVariablesCase()
-    End Sub
-
-    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged
-        SetGroupParam()
-    End Sub
-
-    Private Sub SetGroupParam()
-        If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("group", "1", iPosition:=3)
-            ucrReceiverGroup.Enabled = False
-
-        ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
-            ucrReceiverGroup.Enabled = True
-            ucrReceiverGroup.SetText(ucrFactorOptionalReceiver.GetVariableNames(False))
-            clsRaesFunction.AddParameter("group", ucrReceiverGroup.GetVariableNames(False), iPosition:=3)
-        Else
-            clsRaesFunction.RemoveParameterByName("group")
         End If
-    End Sub
-End Class
+        End Sub
+
+        Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+            sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector, bReset:=bResetSubdialog)
+            If Not ucrVariablesAsFactorForLinePlot.bSingleVariable Then
+                sdgPlots.tbpLayers.Enabled = False
+            End If
+            sdgPlots.ShowDialog()
+            sdgPlots.tbpLayers.Enabled = True
+            bResetSubdialog = False
+        End Sub
+
+        Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
+            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomlineplotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrLinePlotSelector, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
+            sdgLayerOptions.ShowDialog()
+            bResetLineLayerSubdialog = False
+            'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
+
+            'The aesthetics parameters on the main dialog are repopulated as required. 
+            For Each clsParam In clsRaesFunction.clsParameters
+                If clsParam.strArgumentName = "x" Then
+                    If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                        ucrReceiverX.Clear()
+                    Else
+                        ucrReceiverX.Add(clsParam.strArgumentValue)
+                    End If
+                    'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
+                    'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
+                ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForLinePlot.bSingleVariable) Then
+                    'Still might be in the case of bSingleVariable with mapping y="".
+                    If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
+                        ucrVariablesAsFactorForLinePlot.Clear()
+                    Else ucrVariablesAsFactorForLinePlot.Add(clsParam.strArgumentValue)
+                    End If
+                ElseIf clsParam.strArgumentName = "colour" Then
+                    ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
+                ElseIf clsParam.strArgumentName = "group" Then
+                    ucrReceiverGroup.Add(clsParam.strArgumentValue)
+                End If
+            Next
+            TestOkEnabled()
+        End Sub
+
+        Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
+            TempOptionsDisabledInMultipleVariablesCase()
+        End Sub
+
+        Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged
+            TestOkEnabled()
+        End Sub
+
+        Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged
+            SetGroupParam()
+        End Sub
+
+        Private Sub SetGroupParam()
+            If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
+                clsRaesFunction.AddParameter("group", "1", iPosition:=3)
+                ucrReceiverGroup.Enabled = False
+
+            ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
+                ucrReceiverGroup.Enabled = True
+                ucrReceiverGroup.SetText(ucrFactorOptionalReceiver.GetVariableNames(False))
+                clsRaesFunction.AddParameter("group", ucrReceiverGroup.GetVariableNames(False), iPosition:=3)
+            Else
+                clsRaesFunction.RemoveParameterByName("group")
+            End If
+        End Sub
+    End Class
