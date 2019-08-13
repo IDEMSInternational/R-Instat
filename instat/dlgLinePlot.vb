@@ -227,7 +227,7 @@ Public Class dlgLinePlot
             cmdOptions.Enabled = True
         Else
             cmdLineOptions.Enabled = False
-            cmdOptions.Enabled = False
+            cmdOptions.Enabled = True
         End If
     End Sub
 
