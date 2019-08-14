@@ -147,7 +147,6 @@ Public Class dlgSplitText
             ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
         ElseIf rdoTextComponents.Checked Then
             SplitTextOptions()
-            ucrSaveColumn.SetName("split")
         End If
     End Sub
     Private Sub ucrPnlTextComponents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTextComponents.ControlValueChanged
