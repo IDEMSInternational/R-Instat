@@ -640,4 +640,8 @@ Public Class dlgHypothesisTestsCalculator
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        ucrReceiverForTestColumn.AddtoCombobox(ucrReceiverForTestColumn.GetText)
+    End Sub
+
 End Class
