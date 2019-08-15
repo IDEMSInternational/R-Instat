@@ -52,7 +52,7 @@ Public Class ucrCalculator
     End Sub
 
     Public Sub InitialiseControls()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Strings (Character Columns)", "Probability", "Dates", "Transform", "Wakefield"}) ' "Rows" is a temp. name
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Strings (Character Columns)", "Probability", "Dates", "Transform", "Wakefield", "Circular"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
         cmdTry.Enabled = False
@@ -186,6 +186,7 @@ Public Class ucrCalculator
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
                 grpDates.Visible = False
+                grpCircular.Visible = False
                 grpWakefield.Visible = False
                 iHelpCalcID = 126
                 Me.Size = New Size(iBasicWidth * 1.38, Me.Height)
@@ -200,6 +201,7 @@ Public Class ucrCalculator
                 Me.Size = New Size(iBasicWidth * 1.44, Me.Height)
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
+                grpCircular.Visible = False
                 grpWakefield.Visible = False
             Case "Summary"
                 grpDates.Visible = False
@@ -212,6 +214,7 @@ Public Class ucrCalculator
                 grpStrings.Visible = False
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
+                grpCircular.Visible = False
                 grpWakefield.Visible = False
             Case "Strings (Character Columns)"
                 grpDates.Visible = False
@@ -222,6 +225,7 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
+                grpCircular.Visible = False
                 grpWakefield.Visible = False
                 iHelpCalcID = 129
                 Me.Size = New Size(iBasicWidth * 1.42, Me.Height)
@@ -234,6 +238,7 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpTransform.Visible = False
+                grpCircular.Visible = False
                 grpWakefield.Visible = False
                 iHelpCalcID = 120
                 Me.Size = New Size(iBasicWidth * 1.57, Me.Height)
@@ -246,6 +251,7 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpTransform.Visible = False
+                grpCircular.Visible = False
                 grpWakefield.Visible = False
                 iHelpCalcID = 130
                 Me.Size = New Size(iBasicWidth * 1.32, Me.Height)
@@ -258,6 +264,7 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpStrings.Visible = False
                 grpTransform.Visible = True
+                grpCircular.Visible = False
                 grpWakefield.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.33, Me.Height)
             Case "Wakefield"
@@ -269,8 +276,21 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpStrings.Visible = False
                 grpTransform.Visible = False
+                grpCircular.Visible = False
                 grpWakefield.Visible = True
                 Me.Size = New Size(iBasicWidth * 1.7, Me.Height * 1.07)
+            Case "Circular"
+                grpDates.Visible = False
+                grpProbabilty.Visible = False
+                grpSummary.Visible = False
+                grpBasic.Visible = True
+                grpLogical.Visible = False
+                grpMaths.Visible = False
+                grpStrings.Visible = False
+                grpTransform.Visible = False
+                grpWakefield.Visible = False
+                grpCircular.Visible = True
+                Me.Size = New Size(iBasicWidth * 1.37, Me.Height)
             Case Else
                 grpDates.Visible = False
                 Me.Size = New Size(iBasicWidth, Me.Height)
@@ -281,6 +301,7 @@ Public Class ucrCalculator
                 grpMaths.Visible = False
                 grpTransform.Visible = False
                 grpStrings.Visible = False
+                grpCircular.Visible = False
                 grpWakefield.Visible = False
                 iHelpCalcID = 14
         End Select
@@ -1742,6 +1763,110 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_year(n = , x = 1996:as.numeric(format(Sys.Date() , ""%Y"")) , prob = NULL , name = ""Year"")", 80)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_year()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCircMean_Click(sender As Object, e As EventArgs) Handles cmdCircMean.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular(x = , na.rm = FALSE, control.circular = list(), ...)", 49)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCircMedian_Click(sender As Object, e As EventArgs) Handles cmdCircMedian.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::median.circular(x = , na.rm = FALSE, ...)", 22)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::median.circular()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMedianHL_Click(sender As Object, e As EventArgs) Handles cmdMedianHL.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular(x = , na.rm = FALSE, method = c(HL1,HL2,HL3), prop = NULL)", 55)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCircRange_Click(sender As Object, e As EventArgs) Handles cmdCircRange.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::range.circular(x = , test = FALSE, na.rm = FALSE, finite = FALSE, control.circular = list(), ...)", 79)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::range.circular()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCircSd_Click(sender As Object, e As EventArgs) Handles cmdCircSd.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::sd.circular(x = ,  na.rm = FALSE, ...)", 23)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::sd.circular()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCircVar_Click(sender As Object, e As EventArgs) Handles cmdCircVar.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::var.circular(x = ,  na.rm = FALSE, ...)", 23)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::var.circular()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdA1_Click(sender As Object, e As EventArgs) Handles cmdA1.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::A1(kappa = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::besselI()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAngVar_Click(sender As Object, e As EventArgs) Handles cmdAngVar.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.variance(x = , na.rm = FALSE)", 17)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.variance()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAngDev_Click(sender As Object, e As EventArgs) Handles cmdAngDev.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.deviation(x = , na.rm = FALSE)", 17)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.deviation()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCircQ1_Click(sender As Object, e As EventArgs) Handles cmdCircQ1.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.25, na.rm = FALSE, names = TRUE, type = 7, ...)", 60)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCircMin_Click(sender As Object, e As EventArgs) Handles cmdCircMin.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0, na.rm = FALSE, names = TRUE, type = 7, ...)", 57)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCircMax_Click(sender As Object, e As EventArgs) Handles cmdCircMax.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 1, na.rm = FALSE, names = TRUE, type = 7, ...)", 57)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCircQ3_Click(sender As Object, e As EventArgs) Handles cmdCircQ3.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.75, na.rm = FALSE, names = TRUE, type = 7, ...)", 60)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular()", 1)
         End If
     End Sub
 End Class
