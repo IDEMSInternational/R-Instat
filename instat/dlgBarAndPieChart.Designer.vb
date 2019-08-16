@@ -46,6 +46,7 @@ Partial Class dlgBarAndPieChart
         Me.rdoPieChart = New System.Windows.Forms.RadioButton()
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
         Me.cmdBarChartOptions = New System.Windows.Forms.Button()
+        Me.lblPosition = New System.Windows.Forms.Label()
         Me.ucrInputBarChartPosition = New instat.ucrInputComboBox()
         Me.ucrSaveBar = New instat.ucrSave()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
@@ -54,7 +55,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.lblPosition = New System.Windows.Forms.Label()
+        Me.rdoColumnChart = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblVariable
@@ -114,6 +115,11 @@ Partial Class dlgBarAndPieChart
         Me.cmdBarChartOptions.Tag = "Bar_Chart_Options"
         Me.cmdBarChartOptions.UseVisualStyleBackColor = True
         '
+        'lblPosition
+        '
+        resources.ApplyResources(Me.lblPosition, "lblPosition")
+        Me.lblPosition.Name = "lblPosition"
+        '
         'ucrInputBarChartPosition
         '
         Me.ucrInputBarChartPosition.AddQuotesIfUnrecognised = True
@@ -168,15 +174,23 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
-        'lblPosition
+        'rdoColumnChart
         '
-        resources.ApplyResources(Me.lblPosition, "lblPosition")
-        Me.lblPosition.Name = "lblPosition"
+        resources.ApplyResources(Me.rdoColumnChart, "rdoColumnChart")
+        Me.rdoColumnChart.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoColumnChart.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoColumnChart.FlatAppearance.BorderSize = 2
+        Me.rdoColumnChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoColumnChart.Name = "rdoColumnChart"
+        Me.rdoColumnChart.TabStop = True
+        Me.rdoColumnChart.Tag = "Column_Chart"
+        Me.rdoColumnChart.UseVisualStyleBackColor = False
         '
         'dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoColumnChart)
         Me.Controls.Add(Me.lblPosition)
         Me.Controls.Add(Me.ucrInputBarChartPosition)
         Me.Controls.Add(Me.ucrSaveBar)
@@ -219,4 +233,5 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents cmdBarChartOptions As Button
     Friend WithEvents ucrInputBarChartPosition As ucrInputComboBox
     Friend WithEvents lblPosition As Label
+    Friend WithEvents rdoColumnChart As RadioButton
 End Class

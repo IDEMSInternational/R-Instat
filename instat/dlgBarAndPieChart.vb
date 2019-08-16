@@ -21,6 +21,8 @@ Public Class dlgBarAndPieChart
     Private clsRgeomBarFunction As New RFunction
     Private clsBarAesFunction As New RFunction
     Private clsPieAesFunction As New RFunction
+    Private clsRColFunction As New RFunction
+    Private clsColAesFunction As New RFunction
     Private clsLocalRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsRCoordPolarParam As New RParameter
@@ -63,8 +65,10 @@ Public Class dlgBarAndPieChart
 
         ucrPnlOptions.AddRadioButton(rdoBarChart)
         ucrPnlOptions.AddRadioButton(rdoPieChart)
+        ucrPnlOptions.AddRadioButton(rdoColumnChart)
         ucrPnlOptions.AddParameterPresentCondition(rdoPieChart, "coord_polar")
         ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coord_polar", False)
+        ucrPnlOptions.AddParameterPresentCondition(rdoColumnChart, "coord_polar", False)
         ucrPnlOptions.AddToLinkedControls(ucrInputBarChartPosition, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputBarChartPosition.SetLinkedDisplayControl(lblPosition)
 
@@ -127,6 +131,8 @@ Public Class dlgBarAndPieChart
         clsRgeomBarFunction = New RFunction
         clsBarAesFunction = New RFunction
         clsPieAesFunction = New RFunction
+        clsColAesFunction = New RFunction
+        clsRColFunction = New RFunction
 
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
@@ -137,11 +143,13 @@ Public Class dlgBarAndPieChart
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
+        clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
+        clsBaseOperator.AddParameter("geom_col", clsRFunctionParameter:=clsRColFunction)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsColAesFunction, iPosition:=1)
 
         clsBarAesFunction.SetPackageName("ggplot2")
         clsBarAesFunction.SetRCommand("aes")
@@ -153,6 +161,14 @@ Public Class dlgBarAndPieChart
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
         clsRgeomBarFunction.AddParameter("position", Chr(34) & "dodge" & Chr(34), iPosition:=0)
+
+        clsColAesFunction.SetPackageName("ggplot2")
+        clsColAesFunction.SetRCommand("aes")
+        clsColAesFunction.AddParameter("x", Chr(34) & Chr(34))
+        clsColAesFunction.AddParameter("y", Chr(34) & Chr(34))
+
+        clsRColFunction.SetPackageName("ggplot2")
+        clsRColFunction.SetRCommand("geom_col")
 
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXlabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
