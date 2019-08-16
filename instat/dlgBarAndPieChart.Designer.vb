@@ -56,6 +56,8 @@ Partial Class dlgBarAndPieChart
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.rdoColumnChart = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverY = New instat.ucrReceiverSingle()
+        Me.lblYvariable = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblVariable
@@ -186,10 +188,26 @@ Partial Class dlgBarAndPieChart
         Me.rdoColumnChart.Tag = "Column_Chart"
         Me.rdoColumnChart.UseVisualStyleBackColor = False
         '
+        'ucrReceiverY
+        '
+        Me.ucrReceiverY.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverY, "ucrReceiverY")
+        Me.ucrReceiverY.Name = "ucrReceiverY"
+        Me.ucrReceiverY.Selector = Nothing
+        Me.ucrReceiverY.strNcFilePath = ""
+        Me.ucrReceiverY.ucrSelector = Nothing
+        '
+        'lblYvariable
+        '
+        resources.ApplyResources(Me.lblYvariable, "lblYvariable")
+        Me.lblYvariable.Name = "lblYvariable"
+        '
         'dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblYvariable)
+        Me.Controls.Add(Me.ucrReceiverY)
         Me.Controls.Add(Me.rdoColumnChart)
         Me.Controls.Add(Me.lblPosition)
         Me.Controls.Add(Me.ucrInputBarChartPosition)
@@ -234,4 +252,6 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrInputBarChartPosition As ucrInputComboBox
     Friend WithEvents lblPosition As Label
     Friend WithEvents rdoColumnChart As RadioButton
+    Friend WithEvents lblYvariable As Label
+    Friend WithEvents ucrReceiverY As ucrReceiverSingle
 End Class

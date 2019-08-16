@@ -92,6 +92,12 @@ Public Class dlgBarAndPieChart
         ucrReceiverByFactor.bWithQuotes = False
         ucrReceiverByFactor.SetParameterIsString()
 
+        ucrReceiverY.Selector = ucrBarChartSelector
+        ucrReceiverY.strSelectorHeading = "Y Variable"
+        ucrReceiverY.SetParameter(New RParameter("y", 1))
+        ucrReceiverY.bWithQuotes = False
+        ucrReceiverY.SetParameterIsString()
+
         ucrSaveBar.SetIsComboBox()
         ucrSaveBar.SetCheckBoxText("Save Graph")
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
@@ -169,6 +175,7 @@ Public Class dlgBarAndPieChart
 
         clsRColFunction.SetPackageName("ggplot2")
         clsRColFunction.SetRCommand("geom_col")
+        
 
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXlabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -188,8 +195,11 @@ Public Class dlgBarAndPieChart
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverFirst.SetRCode(clsBarAesFunction, bReset)
         ucrReceiverFirst.AddAdditionalCodeParameterPair(clsPieAesFunction, New RParameter("fill", 0), iAdditionalPairNo:=1)
+        ucrReceiverFirst.AddAdditionalCodeParameterPair(clsColAesFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
 
         ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
+
+        ucrReceiverY.SetRCode(clsColAesFunction, bReset)
 
         ucrSaveBar.SetRCode(clsBaseOperator, bReset)
         ucrBarChartSelector.SetRCode(clsRggplotFunction, bReset)
