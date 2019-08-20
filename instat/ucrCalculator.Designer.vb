@@ -270,6 +270,16 @@ Partial Class ucrCalculator
         Me.cmdChildren = New System.Windows.Forms.Button()
         Me.cmdHeight = New System.Windows.Forms.Button()
         Me.grpWakefield = New System.Windows.Forms.GroupBox()
+        Me.cmdLikert = New System.Windows.Forms.Button()
+        Me.cmdCar = New System.Windows.Forms.Button()
+        Me.cmdAnswer = New System.Windows.Forms.Button()
+        Me.cmdPet = New System.Windows.Forms.Button()
+        Me.cmdAnimal = New System.Windows.Forms.Button()
+        Me.cmdAge = New System.Windows.Forms.Button()
+        Me.cmdIncome = New System.Windows.Forms.Button()
+        Me.cmdHair = New System.Windows.Forms.Button()
+        Me.cmdGroup = New System.Windows.Forms.Button()
+        Me.cmdGrade = New System.Windows.Forms.Button()
         Me.grpCircular = New System.Windows.Forms.GroupBox()
         Me.cmdCircQ3 = New System.Windows.Forms.Button()
         Me.cmdCircQ1 = New System.Windows.Forms.Button()
@@ -284,16 +294,8 @@ Partial Class ucrCalculator
         Me.cmdMedianHL = New System.Windows.Forms.Button()
         Me.cmdCircMedian = New System.Windows.Forms.Button()
         Me.cmdCircMean = New System.Windows.Forms.Button()
-        Me.cmdLikert = New System.Windows.Forms.Button()
-        Me.cmdCar = New System.Windows.Forms.Button()
-        Me.cmdAnswer = New System.Windows.Forms.Button()
-        Me.cmdPet = New System.Windows.Forms.Button()
-        Me.cmdAnimal = New System.Windows.Forms.Button()
-        Me.cmdAge = New System.Windows.Forms.Button()
-        Me.cmdIncome = New System.Windows.Forms.Button()
-        Me.cmdHair = New System.Windows.Forms.Button()
-        Me.cmdGroup = New System.Windows.Forms.Button()
-        Me.cmdGrade = New System.Windows.Forms.Button()
+        Me.cmdCircQuantile = New System.Windows.Forms.Button()
+        Me.cmdCircRho = New System.Windows.Forms.Button()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
@@ -1916,8 +1918,70 @@ Partial Class ucrCalculator
         Me.grpWakefield.Name = "grpWakefield"
         Me.grpWakefield.TabStop = False
         '
+        'cmdLikert
+        '
+        resources.ApplyResources(Me.cmdLikert, "cmdLikert")
+        Me.cmdLikert.Name = "cmdLikert"
+        Me.cmdLikert.UseVisualStyleBackColor = True
+        '
+        'cmdCar
+        '
+        resources.ApplyResources(Me.cmdCar, "cmdCar")
+        Me.cmdCar.Name = "cmdCar"
+        Me.cmdCar.UseVisualStyleBackColor = True
+        '
+        'cmdAnswer
+        '
+        resources.ApplyResources(Me.cmdAnswer, "cmdAnswer")
+        Me.cmdAnswer.Name = "cmdAnswer"
+        Me.cmdAnswer.UseVisualStyleBackColor = True
+        '
+        'cmdPet
+        '
+        resources.ApplyResources(Me.cmdPet, "cmdPet")
+        Me.cmdPet.Name = "cmdPet"
+        Me.cmdPet.UseVisualStyleBackColor = True
+        '
+        'cmdAnimal
+        '
+        resources.ApplyResources(Me.cmdAnimal, "cmdAnimal")
+        Me.cmdAnimal.Name = "cmdAnimal"
+        Me.cmdAnimal.UseVisualStyleBackColor = True
+        '
+        'cmdAge
+        '
+        resources.ApplyResources(Me.cmdAge, "cmdAge")
+        Me.cmdAge.Name = "cmdAge"
+        Me.cmdAge.UseVisualStyleBackColor = True
+        '
+        'cmdIncome
+        '
+        resources.ApplyResources(Me.cmdIncome, "cmdIncome")
+        Me.cmdIncome.Name = "cmdIncome"
+        Me.cmdIncome.UseVisualStyleBackColor = True
+        '
+        'cmdHair
+        '
+        resources.ApplyResources(Me.cmdHair, "cmdHair")
+        Me.cmdHair.Name = "cmdHair"
+        Me.cmdHair.UseVisualStyleBackColor = True
+        '
+        'cmdGroup
+        '
+        resources.ApplyResources(Me.cmdGroup, "cmdGroup")
+        Me.cmdGroup.Name = "cmdGroup"
+        Me.cmdGroup.UseVisualStyleBackColor = True
+        '
+        'cmdGrade
+        '
+        resources.ApplyResources(Me.cmdGrade, "cmdGrade")
+        Me.cmdGrade.Name = "cmdGrade"
+        Me.cmdGrade.UseVisualStyleBackColor = True
+        '
         'grpCircular
         '
+        Me.grpCircular.Controls.Add(Me.cmdCircRho)
+        Me.grpCircular.Controls.Add(Me.cmdCircQuantile)
         Me.grpCircular.Controls.Add(Me.cmdCircQ3)
         Me.grpCircular.Controls.Add(Me.cmdCircQ1)
         Me.grpCircular.Controls.Add(Me.cmdCircMax)
@@ -2013,65 +2077,17 @@ Partial Class ucrCalculator
         Me.cmdCircMean.Name = "cmdCircMean"
         Me.cmdCircMean.UseVisualStyleBackColor = True
         '
-        'cmdLikert
+        'cmdCircQuantile
         '
-        resources.ApplyResources(Me.cmdLikert, "cmdLikert")
-        Me.cmdLikert.Name = "cmdLikert"
-        Me.cmdLikert.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCircQuantile, "cmdCircQuantile")
+        Me.cmdCircQuantile.Name = "cmdCircQuantile"
+        Me.cmdCircQuantile.UseVisualStyleBackColor = True
         '
-        'cmdCar
+        'cmdCircRho
         '
-        resources.ApplyResources(Me.cmdCar, "cmdCar")
-        Me.cmdCar.Name = "cmdCar"
-        Me.cmdCar.UseVisualStyleBackColor = True
-        '
-        'cmdAnswer
-        '
-        resources.ApplyResources(Me.cmdAnswer, "cmdAnswer")
-        Me.cmdAnswer.Name = "cmdAnswer"
-        Me.cmdAnswer.UseVisualStyleBackColor = True
-        '
-        'cmdPet
-        '
-        resources.ApplyResources(Me.cmdPet, "cmdPet")
-        Me.cmdPet.Name = "cmdPet"
-        Me.cmdPet.UseVisualStyleBackColor = True
-        '
-        'cmdAnimal
-        '
-        resources.ApplyResources(Me.cmdAnimal, "cmdAnimal")
-        Me.cmdAnimal.Name = "cmdAnimal"
-        Me.cmdAnimal.UseVisualStyleBackColor = True
-        '
-        'cmdAge
-        '
-        resources.ApplyResources(Me.cmdAge, "cmdAge")
-        Me.cmdAge.Name = "cmdAge"
-        Me.cmdAge.UseVisualStyleBackColor = True
-        '
-        'cmdIncome
-        '
-        resources.ApplyResources(Me.cmdIncome, "cmdIncome")
-        Me.cmdIncome.Name = "cmdIncome"
-        Me.cmdIncome.UseVisualStyleBackColor = True
-        '
-        'cmdHair
-        '
-        resources.ApplyResources(Me.cmdHair, "cmdHair")
-        Me.cmdHair.Name = "cmdHair"
-        Me.cmdHair.UseVisualStyleBackColor = True
-        '
-        'cmdGroup
-        '
-        resources.ApplyResources(Me.cmdGroup, "cmdGroup")
-        Me.cmdGroup.Name = "cmdGroup"
-        Me.cmdGroup.UseVisualStyleBackColor = True
-        '
-        'cmdGrade
-        '
-        resources.ApplyResources(Me.cmdGrade, "cmdGrade")
-        Me.cmdGrade.Name = "cmdGrade"
-        Me.cmdGrade.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCircRho, "cmdCircRho")
+        Me.cmdCircRho.Name = "cmdCircRho"
+        Me.cmdCircRho.UseVisualStyleBackColor = True
         '
         'ucrInputCalOptions
         '
@@ -2412,4 +2428,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdCircSd As Button
     Friend WithEvents cmdCircRange As Button
     Friend WithEvents cmdMedianHL As Button
+    Friend WithEvents cmdCircRho As Button
+    Friend WithEvents cmdCircQuantile As Button
 End Class
