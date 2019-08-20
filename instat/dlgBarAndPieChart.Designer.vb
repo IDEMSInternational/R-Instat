@@ -58,6 +58,7 @@ Partial Class dlgBarAndPieChart
         Me.rdoColumnChart = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.lblYvariable = New System.Windows.Forms.Label()
+        Me.cmdColumnChartOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblVariable
@@ -202,10 +203,18 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.lblYvariable, "lblYvariable")
         Me.lblYvariable.Name = "lblYvariable"
         '
+        'cmdColumnChartOptions
+        '
+        resources.ApplyResources(Me.cmdColumnChartOptions, "cmdColumnChartOptions")
+        Me.cmdColumnChartOptions.Name = "cmdColumnChartOptions"
+        Me.cmdColumnChartOptions.Tag = "Column_Chart_Options"
+        Me.cmdColumnChartOptions.UseVisualStyleBackColor = True
+        '
         'dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdColumnChartOptions)
         Me.Controls.Add(Me.lblYvariable)
         Me.Controls.Add(Me.ucrReceiverY)
         Me.Controls.Add(Me.rdoColumnChart)
@@ -254,4 +263,5 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents rdoColumnChart As RadioButton
     Friend WithEvents lblYvariable As Label
     Friend WithEvents ucrReceiverY As ucrReceiverSingle
+    Friend WithEvents cmdColumnChartOptions As Button
 End Class

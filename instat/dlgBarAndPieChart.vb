@@ -256,6 +256,24 @@ Public Class dlgBarAndPieChart
         TestOkEnabled()
     End Sub
 
+    Private Sub cmdColumnChartOptions_Click(sender As Object, e As EventArgs) Handles cmdColumnChartOptions.Click
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRColFunction, clsNewGlobalAesFunc:=clsColAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetBarLayerSubdialog = False
+        If clsColAesFunction.ContainsParameter("x") Then
+            ucrReceiverFirst.Add(clsColAesFunction.GetParameter("x").strArgumentValue)
+        Else
+            ucrReceiverFirst.Clear()
+        End If
+        If clsColAesFunction.ContainsParameter("y") Then
+            ucrReceiverY.Add(clsColAesFunction.GetParameter("y").strArgumentValue)
+        Else
+            ucrReceiverY.Clear()
+        End If
+        TestOkEnabled()
+    End Sub
+
+
     Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsPieAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
         sdgLayerOptions.ShowDialog()
@@ -277,8 +295,10 @@ Public Class dlgBarAndPieChart
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
             cmdPieChartOptions.Visible = False
             cmdBarChartOptions.Visible = True
+            cmdColumnChartOptions.Visible = False
             clsRgeomBarFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
+            clsBaseOperator.RemoveParameterByName("geom_col")
             If Not ucrSaveBar.bUserTyped Then
                 ucrSaveBar.SetPrefix("bar")
             End If
@@ -288,9 +308,11 @@ Public Class dlgBarAndPieChart
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1)
             clsRgeomBarFunction.AddParameter("width", "1")
             clsBaseOperator.AddParameter(clsRCoordPolarParam)
+            clsBaseOperator.RemoveParameterByName("geom_col")
             ucrReceiverFirst.SetMeAsReceiver()
             cmdPieChartOptions.Visible = True
             cmdBarChartOptions.Visible = False
+            cmdColumnChartOptions.Visible = False
             If Not ucrSaveBar.bUserTyped Then
                 ucrSaveBar.SetPrefix("pie")
             End If
@@ -298,6 +320,15 @@ Public Class dlgBarAndPieChart
             ucrReceiverFirst.strSelectorHeading = "Factors"
             If Not {"factor", "logical"}.Contains(ucrReceiverFirst.strCurrDataType) Then
                 ucrReceiverFirst.Clear()
+            End If
+        ElseIf rdoColumnChart.Checked Then
+            clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsColAesFunction, iPosition:=1)
+            cmdPieChartOptions.Visible = False
+            cmdBarChartOptions.Visible = False
+            cmdColumnChartOptions.Visible = True
+            clsBaseOperator.RemoveParameterByName("geom_bar")
+            If Not ucrSaveBar.bUserTyped Then
+                ucrSaveBar.SetPrefix("column")
             End If
         End If
     End Sub
