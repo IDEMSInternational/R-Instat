@@ -9822,38 +9822,11 @@
   <data name="&gt;&gt;cmdGrade.ZOrder" xml:space="preserve">
     <value>53</value>
   </data>
-  <data name="cmdCircRho.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdCircRho.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 60</value>
-  </data>
-  <data name="cmdCircRho.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 42</value>
-  </data>
-  <data name="cmdCircRho.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="cmdCircRho.Text" xml:space="preserve">
-    <value>rho</value>
-  </data>
-  <data name="&gt;&gt;cmdCircRho.Name" xml:space="preserve">
-    <value>cmdCircRho</value>
-  </data>
-  <data name="&gt;&gt;cmdCircRho.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdCircRho.Parent" xml:space="preserve">
-    <value>grpCircular</value>
-  </data>
-  <data name="&gt;&gt;cmdCircRho.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="cmdCircQuantile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdCircQuantile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 99</value>
+    <value>161, 99</value>
   </data>
   <data name="cmdCircQuantile.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 40</value>
@@ -9874,67 +9847,13 @@
     <value>grpCircular</value>
   </data>
   <data name="&gt;&gt;cmdCircQuantile.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="cmdCircQ3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdCircQ3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 138</value>
-  </data>
-  <data name="cmdCircQ3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 40</value>
-  </data>
-  <data name="cmdCircQ3.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="cmdCircQ3.Text" xml:space="preserve">
-    <value>q3</value>
-  </data>
-  <data name="&gt;&gt;cmdCircQ3.Name" xml:space="preserve">
-    <value>cmdCircQ3</value>
-  </data>
-  <data name="&gt;&gt;cmdCircQ3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdCircQ3.Parent" xml:space="preserve">
-    <value>grpCircular</value>
-  </data>
-  <data name="&gt;&gt;cmdCircQ3.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="cmdCircQ1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdCircQ1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 140</value>
-  </data>
-  <data name="cmdCircQ1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 40</value>
-  </data>
-  <data name="cmdCircQ1.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="cmdCircQ1.Text" xml:space="preserve">
-    <value>q1</value>
-  </data>
-  <data name="&gt;&gt;cmdCircQ1.Name" xml:space="preserve">
-    <value>cmdCircQ1</value>
-  </data>
-  <data name="&gt;&gt;cmdCircQ1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdCircQ1.Parent" xml:space="preserve">
-    <value>grpCircular</value>
-  </data>
-  <data name="&gt;&gt;cmdCircQ1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="cmdCircMax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdCircMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 101</value>
+    <value>240, 99</value>
   </data>
   <data name="cmdCircMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 40</value>
@@ -9955,40 +9874,13 @@
     <value>grpCircular</value>
   </data>
   <data name="&gt;&gt;cmdCircMax.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="cmdCircMin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdCircMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 140</value>
-  </data>
-  <data name="cmdCircMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 40</value>
-  </data>
-  <data name="cmdCircMin.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="cmdCircMin.Text" xml:space="preserve">
-    <value>min</value>
-  </data>
-  <data name="&gt;&gt;cmdCircMin.Name" xml:space="preserve">
-    <value>cmdCircMin</value>
-  </data>
-  <data name="&gt;&gt;cmdCircMin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdCircMin.Parent" xml:space="preserve">
-    <value>grpCircular</value>
-  </data>
-  <data name="&gt;&gt;cmdCircMin.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>1</value>
   </data>
   <data name="cmdA1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdA1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 101</value>
+    <value>3, 99</value>
   </data>
   <data name="cmdA1.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 40</value>
@@ -10009,13 +9901,148 @@
     <value>grpCircular</value>
   </data>
   <data name="&gt;&gt;cmdA1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cmdAngVar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdAngVar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>82, 99</value>
+  </data>
+  <data name="cmdAngVar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 40</value>
+  </data>
+  <data name="cmdAngVar.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
+  </data>
+  <data name="cmdAngVar.Text" xml:space="preserve">
+    <value>ang.var</value>
+  </data>
+  <data name="&gt;&gt;cmdAngVar.Name" xml:space="preserve">
+    <value>cmdAngVar</value>
+  </data>
+  <data name="&gt;&gt;cmdAngVar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdAngVar.Parent" xml:space="preserve">
+    <value>grpCircular</value>
+  </data>
+  <data name="&gt;&gt;cmdAngVar.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cmdCircRho.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdCircRho.Location" type="System.Drawing.Point, System.Drawing">
+    <value>240, 60</value>
+  </data>
+  <data name="cmdCircRho.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 40</value>
+  </data>
+  <data name="cmdCircRho.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="cmdCircRho.Text" xml:space="preserve">
+    <value>rho</value>
+  </data>
+  <data name="&gt;&gt;cmdCircRho.Name" xml:space="preserve">
+    <value>cmdCircRho</value>
+  </data>
+  <data name="&gt;&gt;cmdCircRho.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdCircRho.Parent" xml:space="preserve">
+    <value>grpCircular</value>
+  </data>
+  <data name="&gt;&gt;cmdCircRho.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cmdCircQ3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdCircQ3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>161, 138</value>
+  </data>
+  <data name="cmdCircQ3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 40</value>
+  </data>
+  <data name="cmdCircQ3.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="cmdCircQ3.Text" xml:space="preserve">
+    <value>q3</value>
+  </data>
+  <data name="&gt;&gt;cmdCircQ3.Name" xml:space="preserve">
+    <value>cmdCircQ3</value>
+  </data>
+  <data name="&gt;&gt;cmdCircQ3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdCircQ3.Parent" xml:space="preserve">
+    <value>grpCircular</value>
+  </data>
+  <data name="&gt;&gt;cmdCircQ3.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cmdCircQ1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdCircQ1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>82, 138</value>
+  </data>
+  <data name="cmdCircQ1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 40</value>
+  </data>
+  <data name="cmdCircQ1.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="cmdCircQ1.Text" xml:space="preserve">
+    <value>q1</value>
+  </data>
+  <data name="&gt;&gt;cmdCircQ1.Name" xml:space="preserve">
+    <value>cmdCircQ1</value>
+  </data>
+  <data name="&gt;&gt;cmdCircQ1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdCircQ1.Parent" xml:space="preserve">
+    <value>grpCircular</value>
+  </data>
+  <data name="&gt;&gt;cmdCircQ1.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="cmdCircMin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdCircMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 138</value>
+  </data>
+  <data name="cmdCircMin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 40</value>
+  </data>
+  <data name="cmdCircMin.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="cmdCircMin.Text" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="&gt;&gt;cmdCircMin.Name" xml:space="preserve">
+    <value>cmdCircMin</value>
+  </data>
+  <data name="&gt;&gt;cmdCircMin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdCircMin.Parent" xml:space="preserve">
+    <value>grpCircular</value>
+  </data>
+  <data name="&gt;&gt;cmdCircMin.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="cmdAngDev.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdAngDev.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 60</value>
+    <value>161, 60</value>
   </data>
   <data name="cmdAngDev.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 40</value>
@@ -10036,40 +10063,13 @@
     <value>grpCircular</value>
   </data>
   <data name="&gt;&gt;cmdAngDev.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="cmdAngVar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdAngVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 101</value>
-  </data>
-  <data name="cmdAngVar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 40</value>
-  </data>
-  <data name="cmdAngVar.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="cmdAngVar.Text" xml:space="preserve">
-    <value>ang.var</value>
-  </data>
-  <data name="&gt;&gt;cmdAngVar.Name" xml:space="preserve">
-    <value>cmdAngVar</value>
-  </data>
-  <data name="&gt;&gt;cmdAngVar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdAngVar.Parent" xml:space="preserve">
-    <value>grpCircular</value>
-  </data>
-  <data name="&gt;&gt;cmdAngVar.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="cmdCircVar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdCircVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 21</value>
+    <value>240, 21</value>
   </data>
   <data name="cmdCircVar.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 40</value>
@@ -10096,10 +10096,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdCircSd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 60</value>
+    <value>82, 60</value>
   </data>
   <data name="cmdCircSd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 42</value>
+    <value>80, 40</value>
   </data>
   <data name="cmdCircSd.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -10123,10 +10123,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdCircRange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 60</value>
+    <value>3, 60</value>
   </data>
   <data name="cmdCircRange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 42</value>
+    <value>80, 40</value>
   </data>
   <data name="cmdCircRange.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -10150,7 +10150,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdMedianHL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 21</value>
+    <value>161, 21</value>
   </data>
   <data name="cmdMedianHL.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 40</value>
@@ -10177,10 +10177,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdCircMedian.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 21</value>
+    <value>82, 21</value>
   </data>
   <data name="cmdCircMedian.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 40</value>
+    <value>80, 40</value>
   </data>
   <data name="cmdCircMedian.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -10204,7 +10204,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdCircMean.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 21</value>
+    <value>3, 21</value>
   </data>
   <data name="cmdCircMean.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 40</value>
@@ -10231,7 +10231,7 @@
     <value>571, 76</value>
   </data>
   <data name="grpCircular.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 189</value>
+    <value>331, 189</value>
   </data>
   <data name="grpCircular.TabIndex" type="System.Int32, mscorlib">
     <value>192</value>
