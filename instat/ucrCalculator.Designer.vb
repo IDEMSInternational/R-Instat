@@ -1980,15 +1980,15 @@ Partial Class ucrCalculator
         '
         'grpCircular
         '
-        Me.grpCircular.Controls.Add(Me.cmdCircRho)
         Me.grpCircular.Controls.Add(Me.cmdCircQuantile)
+        Me.grpCircular.Controls.Add(Me.cmdCircMax)
+        Me.grpCircular.Controls.Add(Me.cmdA1)
+        Me.grpCircular.Controls.Add(Me.cmdAngVar)
+        Me.grpCircular.Controls.Add(Me.cmdCircRho)
         Me.grpCircular.Controls.Add(Me.cmdCircQ3)
         Me.grpCircular.Controls.Add(Me.cmdCircQ1)
-        Me.grpCircular.Controls.Add(Me.cmdCircMax)
         Me.grpCircular.Controls.Add(Me.cmdCircMin)
-        Me.grpCircular.Controls.Add(Me.cmdA1)
         Me.grpCircular.Controls.Add(Me.cmdAngDev)
-        Me.grpCircular.Controls.Add(Me.cmdAngVar)
         Me.grpCircular.Controls.Add(Me.cmdCircVar)
         Me.grpCircular.Controls.Add(Me.cmdCircSd)
         Me.grpCircular.Controls.Add(Me.cmdCircRange)
