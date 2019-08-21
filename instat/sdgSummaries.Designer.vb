@@ -116,9 +116,17 @@ Partial Class sdgSummaries
         Me.tbModel = New System.Windows.Forms.TabPage()
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.tbCircular = New System.Windows.Forms.TabPage()
-        Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
-        Me.grpCircLocation = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.grpCircLocation = New System.Windows.Forms.GroupBox()
+        Me.ucrChkCircMean = New instat.ucrCheck()
+        Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkMax = New instat.ucrCheck()
+        Me.ucrChkQ1 = New instat.ucrCheck()
+        Me.ucrChkQ3 = New instat.ucrCheck()
+        Me.ucrChkMedianH = New instat.ucrCheck()
+        Me.ucrChkMin = New instat.ucrCheck()
+        Me.ucrChkCircMedian = New instat.ucrCheck()
+        Me.ucrChkQuantile = New instat.ucrCheck()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpProportionsPercentiles.SuspendLayout()
@@ -138,6 +146,7 @@ Partial Class sdgSummaries
         Me.grpPosition.SuspendLayout()
         Me.tbModel.SuspendLayout()
         Me.tbCircular.SuspendLayout()
+        Me.grpCircLocation.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbMissingOptions
@@ -717,22 +726,78 @@ Partial Class sdgSummaries
         Me.tbCircular.Name = "tbCircular"
         Me.tbCircular.UseVisualStyleBackColor = True
         '
-        'ucrButtonsSummaries
-        '
-        resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
-        Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
-        '
-        'grpCircLocation
-        '
-        resources.ApplyResources(Me.grpCircLocation, "grpCircLocation")
-        Me.grpCircLocation.Name = "grpCircLocation"
-        Me.grpCircLocation.TabStop = False
-        '
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        '
+        'grpCircLocation
+        '
+        Me.grpCircLocation.Controls.Add(Me.ucrChkQuantile)
+        Me.grpCircLocation.Controls.Add(Me.ucrChkCircMedian)
+        Me.grpCircLocation.Controls.Add(Me.ucrChkMin)
+        Me.grpCircLocation.Controls.Add(Me.ucrChkMedianH)
+        Me.grpCircLocation.Controls.Add(Me.ucrChkQ3)
+        Me.grpCircLocation.Controls.Add(Me.ucrChkQ1)
+        Me.grpCircLocation.Controls.Add(Me.ucrChkMax)
+        Me.grpCircLocation.Controls.Add(Me.ucrChkCircMean)
+        resources.ApplyResources(Me.grpCircLocation, "grpCircLocation")
+        Me.grpCircLocation.Name = "grpCircLocation"
+        Me.grpCircLocation.TabStop = False
+        '
+        'ucrChkCircMean
+        '
+        Me.ucrChkCircMean.Checked = False
+        resources.ApplyResources(Me.ucrChkCircMean, "ucrChkCircMean")
+        Me.ucrChkCircMean.Name = "ucrChkCircMean"
+        '
+        'ucrButtonsSummaries
+        '
+        resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
+        Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
+        '
+        'ucrChkMax
+        '
+        Me.ucrChkMax.Checked = False
+        resources.ApplyResources(Me.ucrChkMax, "ucrChkMax")
+        Me.ucrChkMax.Name = "ucrChkMax"
+        '
+        'ucrChkQ1
+        '
+        Me.ucrChkQ1.Checked = False
+        resources.ApplyResources(Me.ucrChkQ1, "ucrChkQ1")
+        Me.ucrChkQ1.Name = "ucrChkQ1"
+        '
+        'ucrChkQ3
+        '
+        Me.ucrChkQ3.Checked = False
+        resources.ApplyResources(Me.ucrChkQ3, "ucrChkQ3")
+        Me.ucrChkQ3.Name = "ucrChkQ3"
+        '
+        'ucrChkMedianH
+        '
+        Me.ucrChkMedianH.Checked = False
+        resources.ApplyResources(Me.ucrChkMedianH, "ucrChkMedianH")
+        Me.ucrChkMedianH.Name = "ucrChkMedianH"
+        '
+        'ucrChkMin
+        '
+        Me.ucrChkMin.Checked = False
+        resources.ApplyResources(Me.ucrChkMin, "ucrChkMin")
+        Me.ucrChkMin.Name = "ucrChkMin"
+        '
+        'ucrChkCircMedian
+        '
+        Me.ucrChkCircMedian.Checked = False
+        resources.ApplyResources(Me.ucrChkCircMedian, "ucrChkCircMedian")
+        Me.ucrChkCircMedian.Name = "ucrChkCircMedian"
+        '
+        'ucrChkQuantile
+        '
+        Me.ucrChkQuantile.Checked = False
+        resources.ApplyResources(Me.ucrChkQuantile, "ucrChkQuantile")
+        Me.ucrChkQuantile.Name = "ucrChkQuantile"
         '
         'sdgSummaries
         '
@@ -769,6 +834,7 @@ Partial Class sdgSummaries
         Me.grpPosition.PerformLayout()
         Me.tbModel.ResumeLayout(False)
         Me.tbCircular.ResumeLayout(False)
+        Me.grpCircLocation.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -853,4 +919,12 @@ Partial Class sdgSummaries
     Friend WithEvents tbCircular As TabPage
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents grpCircLocation As GroupBox
+    Friend WithEvents ucrChkCircMean As ucrCheck
+    Friend WithEvents ucrChkQuantile As ucrCheck
+    Friend WithEvents ucrChkCircMedian As ucrCheck
+    Friend WithEvents ucrChkMin As ucrCheck
+    Friend WithEvents ucrChkMedianH As ucrCheck
+    Friend WithEvents ucrChkQ3 As ucrCheck
+    Friend WithEvents ucrChkQ1 As ucrCheck
+    Friend WithEvents ucrChkMax As ucrCheck
 End Class
