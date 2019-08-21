@@ -127,6 +127,13 @@ Partial Class sdgSummaries
         Me.ucrChkMin = New instat.ucrCheck()
         Me.ucrChkCircMedian = New instat.ucrCheck()
         Me.ucrChkQuantile = New instat.ucrCheck()
+        Me.ucrChkSd = New instat.ucrCheck()
+        Me.ucrChkVar = New instat.ucrCheck()
+        Me.ucrChkAngDev = New instat.ucrCheck()
+        Me.ucrChkrho = New instat.ucrCheck()
+        Me.ucrChkAngVar = New instat.ucrCheck()
+        Me.ucrChkCircRange = New instat.ucrCheck()
+        Me.ucrChkA1 = New instat.ucrCheck()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpProportionsPercentiles.SuspendLayout()
@@ -146,6 +153,7 @@ Partial Class sdgSummaries
         Me.grpPosition.SuspendLayout()
         Me.tbModel.SuspendLayout()
         Me.tbCircular.SuspendLayout()
+        Me.grpCircScale.SuspendLayout()
         Me.grpCircLocation.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -728,6 +736,13 @@ Partial Class sdgSummaries
         '
         'grpCircScale
         '
+        Me.grpCircScale.Controls.Add(Me.ucrChkA1)
+        Me.grpCircScale.Controls.Add(Me.ucrChkCircRange)
+        Me.grpCircScale.Controls.Add(Me.ucrChkAngVar)
+        Me.grpCircScale.Controls.Add(Me.ucrChkrho)
+        Me.grpCircScale.Controls.Add(Me.ucrChkAngDev)
+        Me.grpCircScale.Controls.Add(Me.ucrChkVar)
+        Me.grpCircScale.Controls.Add(Me.ucrChkSd)
         resources.ApplyResources(Me.grpCircScale, "grpCircScale")
         Me.grpCircScale.Name = "grpCircScale"
         Me.grpCircScale.TabStop = False
@@ -799,6 +814,48 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrChkQuantile, "ucrChkQuantile")
         Me.ucrChkQuantile.Name = "ucrChkQuantile"
         '
+        'ucrChkSd
+        '
+        Me.ucrChkSd.Checked = False
+        resources.ApplyResources(Me.ucrChkSd, "ucrChkSd")
+        Me.ucrChkSd.Name = "ucrChkSd"
+        '
+        'ucrChkVar
+        '
+        Me.ucrChkVar.Checked = False
+        resources.ApplyResources(Me.ucrChkVar, "ucrChkVar")
+        Me.ucrChkVar.Name = "ucrChkVar"
+        '
+        'ucrChkAngDev
+        '
+        Me.ucrChkAngDev.Checked = False
+        resources.ApplyResources(Me.ucrChkAngDev, "ucrChkAngDev")
+        Me.ucrChkAngDev.Name = "ucrChkAngDev"
+        '
+        'ucrChkrho
+        '
+        Me.ucrChkrho.Checked = False
+        resources.ApplyResources(Me.ucrChkrho, "ucrChkrho")
+        Me.ucrChkrho.Name = "ucrChkrho"
+        '
+        'ucrChkAngVar
+        '
+        Me.ucrChkAngVar.Checked = False
+        resources.ApplyResources(Me.ucrChkAngVar, "ucrChkAngVar")
+        Me.ucrChkAngVar.Name = "ucrChkAngVar"
+        '
+        'ucrChkCircRange
+        '
+        Me.ucrChkCircRange.Checked = False
+        resources.ApplyResources(Me.ucrChkCircRange, "ucrChkCircRange")
+        Me.ucrChkCircRange.Name = "ucrChkCircRange"
+        '
+        'ucrChkA1
+        '
+        Me.ucrChkA1.Checked = False
+        resources.ApplyResources(Me.ucrChkA1, "ucrChkA1")
+        Me.ucrChkA1.Name = "ucrChkA1"
+        '
         'sdgSummaries
         '
         resources.ApplyResources(Me, "$this")
@@ -834,6 +891,7 @@ Partial Class sdgSummaries
         Me.grpPosition.PerformLayout()
         Me.tbModel.ResumeLayout(False)
         Me.tbCircular.ResumeLayout(False)
+        Me.grpCircScale.ResumeLayout(False)
         Me.grpCircLocation.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -927,4 +985,11 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkQ3 As ucrCheck
     Friend WithEvents ucrChkQ1 As ucrCheck
     Friend WithEvents ucrChkMax As ucrCheck
+    Friend WithEvents ucrChkA1 As ucrCheck
+    Friend WithEvents ucrChkCircRange As ucrCheck
+    Friend WithEvents ucrChkAngVar As ucrCheck
+    Friend WithEvents ucrChkrho As ucrCheck
+    Friend WithEvents ucrChkAngDev As ucrCheck
+    Friend WithEvents ucrChkVar As ucrCheck
+    Friend WithEvents ucrChkSd As ucrCheck
 End Class
