@@ -84,6 +84,8 @@ Public Class dlgBarAndPieChart
         ucrReceiverFirst.SetParameter(New RParameter("x", 0))
         ucrReceiverFirst.bWithQuotes = False
         ucrReceiverFirst.SetParameterIsString()
+        ucrReceiverFirst.SetLinkedDisplayControl(lblVariable)
+
 
         ucrReceiverByFactor.Selector = ucrBarChartSelector
         ucrReceiverByFactor.SetIncludedDataTypes({"factor"})
@@ -97,6 +99,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverY.SetParameter(New RParameter("y", 1))
         ucrReceiverY.bWithQuotes = False
         ucrReceiverY.SetParameterIsString()
+        ucrReceiverY.SetLinkedDisplayControl(lblYvariable)
 
         ucrSaveBar.SetIsComboBox()
         ucrSaveBar.SetCheckBoxText("Save Graph")
@@ -150,12 +153,13 @@ Public Class dlgBarAndPieChart
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
-        clsBaseOperator.AddParameter("geom_col", clsRFunctionParameter:=clsRColFunction)
+
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsColAesFunction, iPosition:=1)
+
 
         clsBarAesFunction.SetPackageName("ggplot2")
         clsBarAesFunction.SetRCommand("aes")
@@ -296,6 +300,9 @@ Public Class dlgBarAndPieChart
             cmdPieChartOptions.Visible = False
             cmdBarChartOptions.Visible = True
             cmdColumnChartOptions.Visible = False
+            ucrReceiverFirst.Visible = True
+            ucrReceiverY.Visible = False
+            ucrReceiverByFactor.Visible = True
             clsRgeomBarFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
             clsBaseOperator.RemoveParameterByName("geom_col")
@@ -310,6 +317,8 @@ Public Class dlgBarAndPieChart
             clsBaseOperator.AddParameter(clsRCoordPolarParam)
             clsBaseOperator.RemoveParameterByName("geom_col")
             ucrReceiverFirst.SetMeAsReceiver()
+            ucrReceiverFirst.Visible = True
+            ucrReceiverY.Visible = False
             cmdPieChartOptions.Visible = True
             cmdBarChartOptions.Visible = False
             cmdColumnChartOptions.Visible = False
@@ -326,7 +335,13 @@ Public Class dlgBarAndPieChart
             cmdPieChartOptions.Visible = False
             cmdBarChartOptions.Visible = False
             cmdColumnChartOptions.Visible = True
+            ucrReceiverFirst.Visible = True
+            ucrReceiverY.Visible = True
+            ucrReceiverByFactor.Visible = False
+            ucrReceiverFirst.SetIncludedDataTypes({"numeric", "factor"})
             clsBaseOperator.RemoveParameterByName("geom_bar")
+            clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
+            clsBaseOperator.AddParameter("geom_col", clsRFunctionParameter:=clsRColFunction, iPosition:=2)
             If Not ucrSaveBar.bUserTyped Then
                 ucrSaveBar.SetPrefix("column")
             End If

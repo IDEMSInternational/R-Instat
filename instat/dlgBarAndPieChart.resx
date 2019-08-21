@@ -130,13 +130,13 @@
     <value>255, 76</value>
   </data>
   <data name="lblVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 13</value>
+    <value>58, 13</value>
   </data>
   <data name="lblVariable.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="lblVariable.Text" xml:space="preserve">
-    <value>Variable:</value>
+    <value>X Variable:</value>
   </data>
   <data name="&gt;&gt;lblVariable.Name" xml:space="preserve">
     <value>lblVariable</value>
