@@ -303,6 +303,9 @@ Public Class dlgBarAndPieChart
             ucrReceiverFirst.Visible = True
             ucrReceiverY.Visible = False
             ucrReceiverByFactor.Visible = True
+            If Not clsBaseOperator.ContainsParameter("geom_bar") Then
+                clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
+            End If
             clsRgeomBarFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
             clsBaseOperator.RemoveParameterByName("geom_col")
