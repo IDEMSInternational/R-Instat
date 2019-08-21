@@ -40,6 +40,7 @@ Partial Class sdgSummaries
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgSummaries))
         Me.tbMissingOptions = New System.Windows.Forms.TabPage()
+        Me.lblPercentage = New System.Windows.Forms.Label()
         Me.ucrInputPercentage = New instat.ucrInputTextBox()
         Me.ucrChkMinNumNonMissing = New instat.ucrCheck()
         Me.ucrNudNumberNotMissing = New instat.ucrNud()
@@ -114,8 +115,8 @@ Partial Class sdgSummaries
         Me.ucrReceiverOrderBy = New instat.ucrReceiverSingle()
         Me.tbModel = New System.Windows.Forms.TabPage()
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
+        Me.tbCircular = New System.Windows.Forms.TabPage()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
-        Me.lblPercentage = New System.Windows.Forms.Label()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpProportionsPercentiles.SuspendLayout()
@@ -150,6 +151,11 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.tbMissingOptions, "tbMissingOptions")
         Me.tbMissingOptions.Name = "tbMissingOptions"
         Me.tbMissingOptions.UseVisualStyleBackColor = True
+        '
+        'lblPercentage
+        '
+        resources.ApplyResources(Me.lblPercentage, "lblPercentage")
+        Me.lblPercentage.Name = "lblPercentage"
         '
         'ucrInputPercentage
         '
@@ -549,6 +555,7 @@ Partial Class sdgSummaries
         Me.tbSummaries.Controls.Add(Me.tbPosition)
         Me.tbSummaries.Controls.Add(Me.tbModel)
         Me.tbSummaries.Controls.Add(Me.tbMissingOptions)
+        Me.tbSummaries.Controls.Add(Me.tbCircular)
         resources.ApplyResources(Me.tbSummaries, "tbSummaries")
         Me.tbSummaries.Name = "tbSummaries"
         Me.tbSummaries.SelectedIndex = 0
@@ -699,15 +706,16 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrChkStandardErrorOfMean, "ucrChkStandardErrorOfMean")
         Me.ucrChkStandardErrorOfMean.Name = "ucrChkStandardErrorOfMean"
         '
+        'tbCircular
+        '
+        resources.ApplyResources(Me.tbCircular, "tbCircular")
+        Me.tbCircular.Name = "tbCircular"
+        Me.tbCircular.UseVisualStyleBackColor = True
+        '
         'ucrButtonsSummaries
         '
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
-        '
-        'lblPercentage
-        '
-        resources.ApplyResources(Me.lblPercentage, "lblPercentage")
-        Me.lblPercentage.Name = "lblPercentage"
         '
         'sdgSummaries
         '
@@ -824,4 +832,5 @@ Partial Class sdgSummaries
     Friend WithEvents ucrNudNumberNotMissing As ucrNud
     Friend WithEvents ucrInputPercentage As ucrInputTextBox
     Friend WithEvents lblPercentage As Label
+    Friend WithEvents tbCircular As TabPage
 End Class
