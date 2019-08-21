@@ -117,23 +117,23 @@ Partial Class sdgSummaries
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.tbCircular = New System.Windows.Forms.TabPage()
         Me.grpCircScale = New System.Windows.Forms.GroupBox()
+        Me.ucrChkA1 = New instat.ucrCheck()
+        Me.ucrChkCircRange = New instat.ucrCheck()
+        Me.ucrChkAngVar = New instat.ucrCheck()
+        Me.ucrChkrho = New instat.ucrCheck()
+        Me.ucrChkAngDev = New instat.ucrCheck()
+        Me.ucrChkVar = New instat.ucrCheck()
+        Me.ucrChkSd = New instat.ucrCheck()
         Me.grpCircLocation = New System.Windows.Forms.GroupBox()
+        Me.ucrChkQuantile = New instat.ucrCheck()
+        Me.ucrChkCircMedian = New instat.ucrCheck()
+        Me.ucrChkMin = New instat.ucrCheck()
+        Me.ucrChkMedianH = New instat.ucrCheck()
+        Me.ucrChkQ3 = New instat.ucrCheck()
+        Me.ucrChkQ1 = New instat.ucrCheck()
+        Me.ucrChkMax = New instat.ucrCheck()
         Me.ucrChkCircMean = New instat.ucrCheck()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkMax = New instat.ucrCheck()
-        Me.ucrChkQ1 = New instat.ucrCheck()
-        Me.ucrChkQ3 = New instat.ucrCheck()
-        Me.ucrChkMedianH = New instat.ucrCheck()
-        Me.ucrChkMin = New instat.ucrCheck()
-        Me.ucrChkCircMedian = New instat.ucrCheck()
-        Me.ucrChkQuantile = New instat.ucrCheck()
-        Me.ucrChkSd = New instat.ucrCheck()
-        Me.ucrChkVar = New instat.ucrCheck()
-        Me.ucrChkAngDev = New instat.ucrCheck()
-        Me.ucrChkrho = New instat.ucrCheck()
-        Me.ucrChkAngVar = New instat.ucrCheck()
-        Me.ucrChkCircRange = New instat.ucrCheck()
-        Me.ucrChkA1 = New instat.ucrCheck()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpProportionsPercentiles.SuspendLayout()
@@ -747,6 +747,48 @@ Partial Class sdgSummaries
         Me.grpCircScale.Name = "grpCircScale"
         Me.grpCircScale.TabStop = False
         '
+        'ucrChkA1
+        '
+        Me.ucrChkA1.Checked = False
+        resources.ApplyResources(Me.ucrChkA1, "ucrChkA1")
+        Me.ucrChkA1.Name = "ucrChkA1"
+        '
+        'ucrChkCircRange
+        '
+        Me.ucrChkCircRange.Checked = False
+        resources.ApplyResources(Me.ucrChkCircRange, "ucrChkCircRange")
+        Me.ucrChkCircRange.Name = "ucrChkCircRange"
+        '
+        'ucrChkAngVar
+        '
+        Me.ucrChkAngVar.Checked = False
+        resources.ApplyResources(Me.ucrChkAngVar, "ucrChkAngVar")
+        Me.ucrChkAngVar.Name = "ucrChkAngVar"
+        '
+        'ucrChkrho
+        '
+        Me.ucrChkrho.Checked = False
+        resources.ApplyResources(Me.ucrChkrho, "ucrChkrho")
+        Me.ucrChkrho.Name = "ucrChkrho"
+        '
+        'ucrChkAngDev
+        '
+        Me.ucrChkAngDev.Checked = False
+        resources.ApplyResources(Me.ucrChkAngDev, "ucrChkAngDev")
+        Me.ucrChkAngDev.Name = "ucrChkAngDev"
+        '
+        'ucrChkVar
+        '
+        Me.ucrChkVar.Checked = False
+        resources.ApplyResources(Me.ucrChkVar, "ucrChkVar")
+        Me.ucrChkVar.Name = "ucrChkVar"
+        '
+        'ucrChkSd
+        '
+        Me.ucrChkSd.Checked = False
+        resources.ApplyResources(Me.ucrChkSd, "ucrChkSd")
+        Me.ucrChkSd.Name = "ucrChkSd"
+        '
         'grpCircLocation
         '
         Me.grpCircLocation.Controls.Add(Me.ucrChkQuantile)
@@ -761,6 +803,48 @@ Partial Class sdgSummaries
         Me.grpCircLocation.Name = "grpCircLocation"
         Me.grpCircLocation.TabStop = False
         '
+        'ucrChkQuantile
+        '
+        Me.ucrChkQuantile.Checked = False
+        resources.ApplyResources(Me.ucrChkQuantile, "ucrChkQuantile")
+        Me.ucrChkQuantile.Name = "ucrChkQuantile"
+        '
+        'ucrChkCircMedian
+        '
+        Me.ucrChkCircMedian.Checked = False
+        resources.ApplyResources(Me.ucrChkCircMedian, "ucrChkCircMedian")
+        Me.ucrChkCircMedian.Name = "ucrChkCircMedian"
+        '
+        'ucrChkMin
+        '
+        Me.ucrChkMin.Checked = False
+        resources.ApplyResources(Me.ucrChkMin, "ucrChkMin")
+        Me.ucrChkMin.Name = "ucrChkMin"
+        '
+        'ucrChkMedianH
+        '
+        Me.ucrChkMedianH.Checked = False
+        resources.ApplyResources(Me.ucrChkMedianH, "ucrChkMedianH")
+        Me.ucrChkMedianH.Name = "ucrChkMedianH"
+        '
+        'ucrChkQ3
+        '
+        Me.ucrChkQ3.Checked = False
+        resources.ApplyResources(Me.ucrChkQ3, "ucrChkQ3")
+        Me.ucrChkQ3.Name = "ucrChkQ3"
+        '
+        'ucrChkQ1
+        '
+        Me.ucrChkQ1.Checked = False
+        resources.ApplyResources(Me.ucrChkQ1, "ucrChkQ1")
+        Me.ucrChkQ1.Name = "ucrChkQ1"
+        '
+        'ucrChkMax
+        '
+        Me.ucrChkMax.Checked = False
+        resources.ApplyResources(Me.ucrChkMax, "ucrChkMax")
+        Me.ucrChkMax.Name = "ucrChkMax"
+        '
         'ucrChkCircMean
         '
         Me.ucrChkCircMean.Checked = False
@@ -772,96 +856,12 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         '
-        'ucrChkMax
-        '
-        Me.ucrChkMax.Checked = False
-        resources.ApplyResources(Me.ucrChkMax, "ucrChkMax")
-        Me.ucrChkMax.Name = "ucrChkMax"
-        '
-        'ucrChkQ1
-        '
-        Me.ucrChkQ1.Checked = False
-        resources.ApplyResources(Me.ucrChkQ1, "ucrChkQ1")
-        Me.ucrChkQ1.Name = "ucrChkQ1"
-        '
-        'ucrChkQ3
-        '
-        Me.ucrChkQ3.Checked = False
-        resources.ApplyResources(Me.ucrChkQ3, "ucrChkQ3")
-        Me.ucrChkQ3.Name = "ucrChkQ3"
-        '
-        'ucrChkMedianH
-        '
-        Me.ucrChkMedianH.Checked = False
-        resources.ApplyResources(Me.ucrChkMedianH, "ucrChkMedianH")
-        Me.ucrChkMedianH.Name = "ucrChkMedianH"
-        '
-        'ucrChkMin
-        '
-        Me.ucrChkMin.Checked = False
-        resources.ApplyResources(Me.ucrChkMin, "ucrChkMin")
-        Me.ucrChkMin.Name = "ucrChkMin"
-        '
-        'ucrChkCircMedian
-        '
-        Me.ucrChkCircMedian.Checked = False
-        resources.ApplyResources(Me.ucrChkCircMedian, "ucrChkCircMedian")
-        Me.ucrChkCircMedian.Name = "ucrChkCircMedian"
-        '
-        'ucrChkQuantile
-        '
-        Me.ucrChkQuantile.Checked = False
-        resources.ApplyResources(Me.ucrChkQuantile, "ucrChkQuantile")
-        Me.ucrChkQuantile.Name = "ucrChkQuantile"
-        '
-        'ucrChkSd
-        '
-        Me.ucrChkSd.Checked = False
-        resources.ApplyResources(Me.ucrChkSd, "ucrChkSd")
-        Me.ucrChkSd.Name = "ucrChkSd"
-        '
-        'ucrChkVar
-        '
-        Me.ucrChkVar.Checked = False
-        resources.ApplyResources(Me.ucrChkVar, "ucrChkVar")
-        Me.ucrChkVar.Name = "ucrChkVar"
-        '
-        'ucrChkAngDev
-        '
-        Me.ucrChkAngDev.Checked = False
-        resources.ApplyResources(Me.ucrChkAngDev, "ucrChkAngDev")
-        Me.ucrChkAngDev.Name = "ucrChkAngDev"
-        '
-        'ucrChkrho
-        '
-        Me.ucrChkrho.Checked = False
-        resources.ApplyResources(Me.ucrChkrho, "ucrChkrho")
-        Me.ucrChkrho.Name = "ucrChkrho"
-        '
-        'ucrChkAngVar
-        '
-        Me.ucrChkAngVar.Checked = False
-        resources.ApplyResources(Me.ucrChkAngVar, "ucrChkAngVar")
-        Me.ucrChkAngVar.Name = "ucrChkAngVar"
-        '
-        'ucrChkCircRange
-        '
-        Me.ucrChkCircRange.Checked = False
-        resources.ApplyResources(Me.ucrChkCircRange, "ucrChkCircRange")
-        Me.ucrChkCircRange.Name = "ucrChkCircRange"
-        '
-        'ucrChkA1
-        '
-        Me.ucrChkA1.Checked = False
-        resources.ApplyResources(Me.ucrChkA1, "ucrChkA1")
-        Me.ucrChkA1.Name = "ucrChkA1"
-        '
         'sdgSummaries
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.tbSummaries)
         Me.Controls.Add(Me.ucrButtonsSummaries)
+        Me.Controls.Add(Me.tbSummaries)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
