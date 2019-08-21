@@ -116,7 +116,7 @@ Partial Class sdgSummaries
         Me.tbModel = New System.Windows.Forms.TabPage()
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.tbCircular = New System.Windows.Forms.TabPage()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.grpCircScale = New System.Windows.Forms.GroupBox()
         Me.grpCircLocation = New System.Windows.Forms.GroupBox()
         Me.ucrChkCircMean = New instat.ucrCheck()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
@@ -720,17 +720,17 @@ Partial Class sdgSummaries
         '
         'tbCircular
         '
-        Me.tbCircular.Controls.Add(Me.GroupBox2)
+        Me.tbCircular.Controls.Add(Me.grpCircScale)
         Me.tbCircular.Controls.Add(Me.grpCircLocation)
         resources.ApplyResources(Me.tbCircular, "tbCircular")
         Me.tbCircular.Name = "tbCircular"
         Me.tbCircular.UseVisualStyleBackColor = True
         '
-        'GroupBox2
+        'grpCircScale
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
+        resources.ApplyResources(Me.grpCircScale, "grpCircScale")
+        Me.grpCircScale.Name = "grpCircScale"
+        Me.grpCircScale.TabStop = False
         '
         'grpCircLocation
         '
@@ -917,7 +917,7 @@ Partial Class sdgSummaries
     Friend WithEvents ucrInputPercentage As ucrInputTextBox
     Friend WithEvents lblPercentage As Label
     Friend WithEvents tbCircular As TabPage
-    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents grpCircScale As GroupBox
     Friend WithEvents grpCircLocation As GroupBox
     Friend WithEvents ucrChkCircMean As ucrCheck
     Friend WithEvents ucrChkQuantile As ucrCheck
