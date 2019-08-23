@@ -416,21 +416,21 @@ n_distinct_label="summary_n_distinct"
 proportion_label="proportion_calc"
 count_calc_label="count_calc"
 standard_error_mean_label="standard_error_mean"
-circular_mean_label="circular_mean_label"
-circular_median_label="circular_median_label"
-circular_medianHL_label="circular_medianHL_label"
-circular_min_label="circular_min_label"
-circular_max_label="circular_max_label"
-circular_Q1_label="circular_Q1_label"
-circular_Q3_label="circular_Q3_label"
-circular_quantile_label="circular_quantile_label"
-circular_sd_label="circular_sd_label"
-circular_var_label="circular_var_label"
-circular_ang.dev_label="circular_ang.dev_label"
-circular_ang.var_label="circular_ang.var_label"
-circular_rho_label="circular_rho_label"
-circular_range_label="circular_range_label"
-circular_A1_label="circular_A1_label"
+circular_mean_label="circular_mean"
+circular_median_label="circular_median"
+circular_medianHL_label="circular_medianHL"
+circular_min_label="circular_min"
+circular_max_label="circular_max"
+circular_Q1_label="circular_Q1"
+circular_Q3_label="circular_Q3"
+circular_quantile_label="circular_quantile"
+circular_sd_label="circular_sd"
+circular_var_label="circular_var"
+circular_ang.dev_label="circular_ang_dev"
+circular_ang.var_label="circular_ang_var"
+circular_rho_label="circular_rho"
+circular_range_label="circular_range"
+circular_A1_label="circular_A1"
 
 
 # list of all summary function names
@@ -472,77 +472,82 @@ na_check <- function(x, na_type = c(), na_consecutive_n = NULL, na_max_n = NULL,
   return(all(res))
 }
 
-
-summary_mean_circular <- function (x, na.rm = FALSE, na_type = "", control.circular = list(), ...) {
+summary_mean_circular <- function (x, na.rm = FALSE, control.circular = list(), na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else return(suppressWarnings(circular::mean.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]]))
+  else return(circular::mean.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]])
 }
 
-summary_median_circular <- function (x, na.rm = FALSE, na_type = "", control.circular = list(), ...) {
+summary_median_circular <- function (x, na.rm = FALSE, na_type = "", ...) {
+  if(!na.rm & anyNA(x)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else return(suppressWarnings(circular::median.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]]))
+  else return(circular::median.circular(x, na.rm = na.rm)[[1]])
 }
 
-
-summary_medianHL_circular <- function (x, na.rm = FALSE, method=c("HL1","HL2","HL3"), prop=NULL, na_type = "", control.circular = list(), ...) {
+summary_medianHL_circular <- function (x, na.rm = FALSE, method = c("HL1","HL2","HL3"), prop = NULL, na_type = "", ...) {
+  if(!na.rm & anyNA(x)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else return(suppressWarnings(circular::medianHL.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]]))
+  else return(circular::medianHL.circular(x, na.rm = na.rm, method = method, prop = prop)[[1]])
 }
 
-
-summary_min_circular <- function (x, na.rm = FALSE, probs = 0, names = TRUE, na_type = "", control.circular = list(), ...) {
+summary_min_circular <- function (x, na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
+  if(!na.rm & anyNA(x)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else return(suppressWarnings(circular::quantile.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]]))
+  else return(circular::quantile.circular(x, probs = 0, na.rm = na.rm, names = names, type = type)[[1]])
 }
 
-summary_max_circular <- function (x, na.rm = FALSE, probs = 1, names = TRUE, na_type = "", control.circular = list(), ...) {
+summary_max_circular <- function (x, na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
+  if(!na.rm & anyNA(x)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else return(suppressWarnings(circular::quantile.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]]))
+  else return(circular::quantile.circular(x, probs = 1, na.rm = na.rm, names = names, type = type)[[1]])
 }
 
-summary_Q3_circular <- function (x, na.rm = FALSE, probs = 0.75, names = TRUE, na_type = "", control.circular = list(), ...) {
+summary_Q3_circular <- function (x, na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
+  if(!na.rm & anyNA(x)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else return(suppressWarnings(circular::quantile.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]]))
+  else return(circular::quantile.circular(x, probs = 0.75, na.rm = na.rm, names = names, type = type)[[1]])
 }
 
-summary_Q1_circular <- function (x, na.rm = FALSE, probs = 0.25, names = TRUE, na_type = "", control.circular = list(), ...) {
+summary_Q1_circular <- function (x, na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
+  if(!na.rm & anyNA(x)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else return(suppressWarnings(circular::quantile.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]]))
+  else return(circular::quantile.circular(x, probs = 0.25, na.rm = na.rm, names = names, type = type)[[1]])
 }
 
-summary_quantile_circular <- function (x, na.rm = FALSE, probs = seq(0, 1, 0.25), names = TRUE, na_type = "", control.circular = list(), ...) {
+summary_sd_circular <- function (x, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else return(suppressWarnings(circular::quantile.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]]))
+  else return(circular::sd.circular(x, na.rm = na.rm))
 }
 
-summary_sd_circular <- function (x, na.rm = FALSE, names = TRUE, na_type = "", control.circular = list(), ...) {
+summary_var_circular <- function (x, na.rm = FALSE, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else return(suppressWarnings(circular::sd.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]]))
+  else return(circular::var.circular(x, na.rm = na.rm))
 }
 
-summary_var_circular <- function (x, na.rm = FALSE, names = TRUE, na_type = "", control.circular = list(), ...) {
+summary_ang_dev_circular <- function (x, na.rm = FALSE, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else return(suppressWarnings(circular::var.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]]))
+  else return(circular::angular.deviation(x, na.rm = na.rm))
 }
 
-summary_ang.dev_circular <- function (x, na.rm = FALSE, names = TRUE, na_type = "", control.circular = list(), ...) {
+summary_range_circular <- function (x, test = FALSE, na.rm = FALSE, finite = FALSE, control.circular = list(),  na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else return(suppressWarnings(circular::angular.deviation(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]]))
+  else return(circular::range.circular(x, test = test, na.rm = na.rm, finite = finite,  control.circular = control.circular)[[1]])
 }
 
-summary_range_circular <- function (x, test=FALSE, na.rm = FALSE, names = TRUE,finite = FALSE, na_type = "", control.circular = list(), ...) {
+summary_rho_circular <- function (x, na.rm = FALSE, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else return(suppressWarnings(circular::range.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]]))
+  else return(circular::rho.circular(x, na.rm = na.rm))
 }
 
-summary_rho_circular <- function (x, test=FALSE, na.rm = FALSE, names = TRUE,finite = FALSE, na_type = "", control.circular = list(), ...) {
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else return(suppressWarnings(circular::rho.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]]))
-}
-
-summary_range_circular <- function (x, test=FALSE, na.rm = FALSE, names = TRUE,finite = FALSE, na_type = "", control.circular = list(), ...) {
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else return(suppressWarnings(circular::range.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]]))
+summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0, na_type = "", ...) {
+  if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
+  else {
+    if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+    else return(mean(x, na.rm = na.rm, trim = trim))
+  }
 }
 
 summary_trimmed_mean <- function (x, add_cols, weights="", na.rm = FALSE, trimmed = 0, na_type = "", ...) {
