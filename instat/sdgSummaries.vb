@@ -133,6 +133,9 @@ Public Class sdgSummaries
         ucrChkVar.SetParameter(New RParameter("summary_var_circular", 32), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_var_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkVar.SetText("Var")
 
+        ucrChkAngVar.SetParameter(New RParameter("summary_ang_var_circular", 33), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_ang_var_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkAngVar.SetText("Ang_var")
+
         ucrReceiverSecondVariable.Selector = ucrSelectorSecondVariable
         ucrReceiverSecondVariable.SetMeAsReceiver()
         ucrReceiverSecondVariable.SetIncludedDataTypes({"numeric"})
@@ -257,7 +260,7 @@ Public Class sdgSummaries
         ucrChkStandardErrorOfMean.SetParameter(New RParameter("standard_error_mean", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "standard_error_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkStandardErrorOfMean.SetText("Standard Error of the Mean")
 
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean, ucrChkMaxNumMissing, ucrChkMinNumNonMissing, ucrChkMaxPercMissing, ucrChkConsecutiveMissing, ucrChkCircMean, ucrChkCircMedian, ucrChkMin, ucrChkMedianH, ucrChkMax, ucrChkQ1, ucrChkQ3, ucrChkQuantile, ucrChkSd, ucrChkVar})
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean, ucrChkMaxNumMissing, ucrChkMinNumNonMissing, ucrChkMaxPercMissing, ucrChkConsecutiveMissing, ucrChkCircMean, ucrChkCircMedian, ucrChkMin, ucrChkMedianH, ucrChkMax, ucrChkQ1, ucrChkQ3, ucrChkQuantile, ucrChkSd, ucrChkVar, ucrChkAngVar})
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
             ctrTemp.SetRDefault(Chr(34) & Chr(34))
@@ -344,6 +347,7 @@ Public Class sdgSummaries
         ucrChkQuantile.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkSd.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkVar.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkAngVar.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             tbSummaries.SelectedIndex = 0
