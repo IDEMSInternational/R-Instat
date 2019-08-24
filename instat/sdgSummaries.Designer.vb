@@ -117,7 +117,6 @@ Partial Class sdgSummaries
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.tbCircular = New System.Windows.Forms.TabPage()
         Me.grpCircScale = New System.Windows.Forms.GroupBox()
-        Me.ucrChkA1 = New instat.ucrCheck()
         Me.ucrChkCircRange = New instat.ucrCheck()
         Me.ucrChkAngVar = New instat.ucrCheck()
         Me.ucrChkrho = New instat.ucrCheck()
@@ -736,7 +735,6 @@ Partial Class sdgSummaries
         '
         'grpCircScale
         '
-        Me.grpCircScale.Controls.Add(Me.ucrChkA1)
         Me.grpCircScale.Controls.Add(Me.ucrChkCircRange)
         Me.grpCircScale.Controls.Add(Me.ucrChkAngVar)
         Me.grpCircScale.Controls.Add(Me.ucrChkrho)
@@ -746,12 +744,6 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.grpCircScale, "grpCircScale")
         Me.grpCircScale.Name = "grpCircScale"
         Me.grpCircScale.TabStop = False
-        '
-        'ucrChkA1
-        '
-        Me.ucrChkA1.Checked = False
-        resources.ApplyResources(Me.ucrChkA1, "ucrChkA1")
-        Me.ucrChkA1.Name = "ucrChkA1"
         '
         'ucrChkCircRange
         '
@@ -985,7 +977,6 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkQ3 As ucrCheck
     Friend WithEvents ucrChkQ1 As ucrCheck
     Friend WithEvents ucrChkMax As ucrCheck
-    Friend WithEvents ucrChkA1 As ucrCheck
     Friend WithEvents ucrChkCircRange As ucrCheck
     Friend WithEvents ucrChkAngVar As ucrCheck
     Friend WithEvents ucrChkrho As ucrCheck
