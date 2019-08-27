@@ -2239,7 +2239,9 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     month_abbr_vector <- factor(forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE)), n = (s_start_month - 1)),ordered = FALSE)
 	  dekad_val_vector <- ((as.numeric(dekade(col_data))) - (s_start_month - 1)*3) %% 36
 	  dekad_val_vector <- ifelse(dekad_val_vector == 0, 36, dekad_val_vector)
-	  dekad_abbr_vector <- factor(paste(month_abbr_vector, dekad_val_vector, sep = ""),ordered = FALSE)
+	  month.list <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+	  dekad_levels<-paste0(rep(month.list, each = 3), 1:36)
+	  dekad_abbr_vector <- factor(paste(month_abbr_vector, dekad_val_vector, sep = ""),levels = dekad_levels)
 	  col_name <- next_default_item(prefix = "dekad_abbr", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = dekad_abbr_vector)
   }
@@ -2253,7 +2255,9 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
 	  month_abbr_vector <-forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE)), n = (s_start_month - 1))
 	  pentad_val_vector <- ((as.integer(pentad(col_data))) - (s_start_month - 1)*6) %% 72
 	  pentad_val_vector <- ifelse(pentad_val_vector == 0, 72, pentad_val_vector)
-	  pentad_abbr_vector <- factor(paste(month_abbr_vector, pentad_val_vector, sep = ""),ordered = FALSE)
+	  month.list <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+	  pentad_levels<-paste0(rep(month.list, each = 6), 1:72)
+	  pentad_abbr_vector <- factor(paste(month_abbr_vector, pentad_val_vector, sep = ""),levels = pentad_levels)
 	  col_name <- next_default_item(prefix = "pentad_abbr", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = pentad_abbr_vector)
   }
