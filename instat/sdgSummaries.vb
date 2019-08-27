@@ -121,10 +121,10 @@ Public Class sdgSummaries
         ucrChkQ1.SetParameter(New RParameter("summary_Q1_circular", 28), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Q1_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkQ1.SetText("Q1")
 
-        ucrChkQ3.SetParameter(New RParameter("summary_Q3_circular", 29), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Q1_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkQ3.SetParameter(New RParameter("summary_Q3_circular", 29), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Q3_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkQ3.SetText("Q3")
 
-        ucrChkQuantile.SetParameter(New RParameter("summary_Quantile_circular", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_quantile_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkQuantile.SetParameter(New RParameter("summary_quantile_circular", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_quantile_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkQuantile.SetText("Quantile")
 
         ucrChkSd.SetParameter(New RParameter("summary_sd_circular", 31), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_sd_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
@@ -136,7 +136,7 @@ Public Class sdgSummaries
         ucrChkAngVar.SetParameter(New RParameter("summary_ang_var_circular", 33), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_ang_var_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkAngVar.SetText("Ang_var")
 
-        ucrChkAngDev.SetParameter(New RParameter("summary_ang_dev", 34), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_ang_dev" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkAngDev.SetParameter(New RParameter("summary_ang_dev_circular", 34), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_ang_dev_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkAngDev.SetText("Ang_dev")
 
         ucrChkrho.SetParameter(New RParameter("summary_rho_circular", 35), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_rho_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
@@ -144,6 +144,10 @@ Public Class sdgSummaries
 
         ucrChkCircRange.SetParameter(New RParameter("summary_range_circular", 36), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_range_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCircRange.SetText("Range")
+
+        ucrInputQuantile.SetParameter(New RParameter("probs", 37))
+        ucrInputQuantile.SetValidationTypeAsNumeric(dcmMin:=0, dcmMax:=1)
+        ucrInputQuantile.AddQuotesIfUnrecognised = False
 
         ucrReceiverSecondVariable.Selector = ucrSelectorSecondVariable
         ucrReceiverSecondVariable.SetMeAsReceiver()
@@ -301,11 +305,6 @@ Public Class sdgSummaries
         ucrNudNumber.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudNumberNotMissing.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudConsecutive.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkMaxNumMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkMaxPercMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkConsecutiveMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkMinNumNonMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
-
         ucrChkPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPropValue.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputComboPropTest.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
@@ -314,6 +313,12 @@ Public Class sdgSummaries
         ucrInputPercentile.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudFraction.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputN.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputQuantile.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+
+        ucrChkMaxNumMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMaxPercMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkConsecutiveMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMinNumNonMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkCount.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkProportion.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
