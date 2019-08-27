@@ -47,6 +47,10 @@ Partial Class dlgBarAndPieChart
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
         Me.cmdBarChartOptions = New System.Windows.Forms.Button()
         Me.lblPosition = New System.Windows.Forms.Label()
+        Me.rdoColumnChart = New System.Windows.Forms.RadioButton()
+        Me.lblYvariable = New System.Windows.Forms.Label()
+        Me.cmdColumnChartOptions = New System.Windows.Forms.Button()
+        Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ucrInputBarChartPosition = New instat.ucrInputComboBox()
         Me.ucrSaveBar = New instat.ucrSave()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
@@ -55,10 +59,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.rdoColumnChart = New System.Windows.Forms.RadioButton()
-        Me.ucrReceiverY = New instat.ucrReceiverSingle()
-        Me.lblYvariable = New System.Windows.Forms.Label()
-        Me.cmdColumnChartOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblVariable
@@ -123,6 +123,39 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.lblPosition, "lblPosition")
         Me.lblPosition.Name = "lblPosition"
         '
+        'rdoColumnChart
+        '
+        resources.ApplyResources(Me.rdoColumnChart, "rdoColumnChart")
+        Me.rdoColumnChart.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoColumnChart.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoColumnChart.FlatAppearance.BorderSize = 2
+        Me.rdoColumnChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoColumnChart.Name = "rdoColumnChart"
+        Me.rdoColumnChart.TabStop = True
+        Me.rdoColumnChart.Tag = "Column_Chart"
+        Me.rdoColumnChart.UseVisualStyleBackColor = False
+        '
+        'lblYvariable
+        '
+        resources.ApplyResources(Me.lblYvariable, "lblYvariable")
+        Me.lblYvariable.Name = "lblYvariable"
+        '
+        'cmdColumnChartOptions
+        '
+        resources.ApplyResources(Me.cmdColumnChartOptions, "cmdColumnChartOptions")
+        Me.cmdColumnChartOptions.Name = "cmdColumnChartOptions"
+        Me.cmdColumnChartOptions.Tag = "Column_Chart_Options"
+        Me.cmdColumnChartOptions.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverY
+        '
+        Me.ucrReceiverY.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverY, "ucrReceiverY")
+        Me.ucrReceiverY.Name = "ucrReceiverY"
+        Me.ucrReceiverY.Selector = Nothing
+        Me.ucrReceiverY.strNcFilePath = ""
+        Me.ucrReceiverY.ucrSelector = Nothing
+        '
         'ucrInputBarChartPosition
         '
         Me.ucrInputBarChartPosition.AddQuotesIfUnrecognised = True
@@ -176,39 +209,6 @@ Partial Class dlgBarAndPieChart
         '
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        '
-        'rdoColumnChart
-        '
-        resources.ApplyResources(Me.rdoColumnChart, "rdoColumnChart")
-        Me.rdoColumnChart.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoColumnChart.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoColumnChart.FlatAppearance.BorderSize = 2
-        Me.rdoColumnChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoColumnChart.Name = "rdoColumnChart"
-        Me.rdoColumnChart.TabStop = True
-        Me.rdoColumnChart.Tag = "Column_Chart"
-        Me.rdoColumnChart.UseVisualStyleBackColor = False
-        '
-        'ucrReceiverY
-        '
-        Me.ucrReceiverY.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverY, "ucrReceiverY")
-        Me.ucrReceiverY.Name = "ucrReceiverY"
-        Me.ucrReceiverY.Selector = Nothing
-        Me.ucrReceiverY.strNcFilePath = ""
-        Me.ucrReceiverY.ucrSelector = Nothing
-        '
-        'lblYvariable
-        '
-        resources.ApplyResources(Me.lblYvariable, "lblYvariable")
-        Me.lblYvariable.Name = "lblYvariable"
-        '
-        'cmdColumnChartOptions
-        '
-        resources.ApplyResources(Me.cmdColumnChartOptions, "cmdColumnChartOptions")
-        Me.cmdColumnChartOptions.Name = "cmdColumnChartOptions"
-        Me.cmdColumnChartOptions.Tag = "Column_Chart_Options"
-        Me.cmdColumnChartOptions.UseVisualStyleBackColor = True
         '
         'dlgBarAndPieChart
         '
