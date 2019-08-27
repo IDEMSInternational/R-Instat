@@ -281,6 +281,7 @@ Partial Class ucrCalculator
         Me.cmdGroup = New System.Windows.Forms.Button()
         Me.cmdGrade = New System.Windows.Forms.Button()
         Me.grpCircular = New System.Windows.Forms.GroupBox()
+        Me.cmdCircular = New System.Windows.Forms.Button()
         Me.cmdCircQuantile = New System.Windows.Forms.Button()
         Me.cmdCircMax = New System.Windows.Forms.Button()
         Me.cmdA1 = New System.Windows.Forms.Button()
@@ -301,7 +302,6 @@ Partial Class ucrCalculator
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdCircular = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -2001,6 +2001,12 @@ Partial Class ucrCalculator
         Me.grpCircular.Name = "grpCircular"
         Me.grpCircular.TabStop = False
         '
+        'cmdCircular
+        '
+        resources.ApplyResources(Me.cmdCircular, "cmdCircular")
+        Me.cmdCircular.Name = "cmdCircular"
+        Me.cmdCircular.UseVisualStyleBackColor = True
+        '
         'cmdCircQuantile
         '
         resources.ApplyResources(Me.cmdCircQuantile, "cmdCircQuantile")
@@ -2129,12 +2135,6 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.Selector = Nothing
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
-        '
-        'cmdCircular
-        '
-        resources.ApplyResources(Me.cmdCircular, "cmdCircular")
-        Me.cmdCircular.Name = "cmdCircular"
-        Me.cmdCircular.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
