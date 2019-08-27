@@ -350,8 +350,15 @@ Public Class dlgBarAndPieChart
             End If
         End If
     End Sub
+    Private Sub ChangeLocation()
+        If rdoColumnChart.Checked Then
+            Me.ucrReceiverFirst.Location = New Point(255, 141)
+            Me.ucrReceiverY.Location = New Point(255, 91)
+        End If
+    End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
+        ChangeLocation()
         SetDialogOptions()
     End Sub
 
