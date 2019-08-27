@@ -2124,4 +2124,7 @@ Public Class frmMain
         dlgCumulativeDistribution.ShowDialog()
     End Sub
 
+    Private Sub mnuClimaticCheckLocation_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckLocation.Click
+        dlgCategorizingMapsFromPoints.ShowDialog()
+    End Sub
 End Class

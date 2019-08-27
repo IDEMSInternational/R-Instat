@@ -1,4 +1,6 @@
-﻿Public Class dlgCategorizingMapsFromPoints
+﻿Imports instat
+
+Public Class dlgCategorizingMapsFromPoints
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsStASSfStationFunction As RFunction
@@ -8,8 +10,7 @@
     Private clsUnlist As RFunction
     Private clsAsCharacter As RFunction
     Private clsDollarSignOperator As ROperator
-
-    Private Sub dlgPolygonMapping_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgCategorizingMApsFromPoints_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -22,11 +23,10 @@
         bReset = False
         TestOkEnabled()
     End Sub
-
-
     Private Sub InitialiseDialog()
         ucrSelectorStationAndShapeFile.SetParameter(New RParameter("data", 0, bNewIncludeArgumentName:=False))
         ucrSelectorStationAndShapeFile.SetParameterIsrfunction()
+        ucrSelectorStationAndShapeFile.SetDataframe("", bSilent:=True)
 
         'Station File
         ucrReceiverLongitude.SetParameter(New RParameter("longitude", 0, bNewIncludeArgumentName:=False))
@@ -42,16 +42,18 @@
         ucrReceiverLatitude.SetParameterIsString()
 
         'Shape File
-        ucrReceiverPolygon.SetParameter(New RParameter())
+        ucrReceiverPolygon.SetParameter(New RParameter("shape file", 0, bNewIncludeArgumentName:=False))
         ucrReceiverPolygon.SetParameterIsString()
         ucrReceiverPolygon.Selector = ucrSelectorStationAndShapeFile
-        ucrReceiverPolygon.bAttachedToPrimaryDataFrame = False
+        ucrReceiverPolygon.txtReceiverSingle.Text = ucrSelectorStationAndShapeFile.GetValueToSet()
+
+        'ucrReceiverPolygon.bAttachedToPrimaryDataFrame = False
 
         'End Receiver
         ucrReceiverName.Selector = ucrSelectorStationAndShapeFile
         ucrReceiverName.SetParameter(New RParameter())
         ucrReceiverName.SetParameterIsString()
-        ucrReceiverName.bAttachedToPrimaryDataFrame = False
+        'ucrReceiverName.bAttachedToPrimaryDataFrame = False
 
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorStationAndShapeFile.ucrAvailableDataFrames)
@@ -60,8 +62,8 @@
         ucrSaveColumn.SetName("Location1")
         ucrSaveColumn.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
 
-    End Sub
 
+    End Sub
     Private Sub SetDefaults()
         clsStASSfShapeFileFunction = New RFunction
         clsStASSfStationFunction = New RFunction
@@ -108,27 +110,40 @@
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorStationAndShapeFile.SetRCode(clsStASSfStationFunction)
+        ucrSelectorStationAndShapeFile.SetRCode(clsStASSfStationFunction, bReset)
         ucrReceiverLatitude.SetRCode(clsCoordsList, bReset)
         ucrReceiverLongitude.SetRCode(clsCoordsList, bReset)
-        ucrSelectorStationAndShapeFile.SetDataframe(ucrReceiverPolygon.GetDataName())
+        ucrReceiverPolygon.SetRCode(clsStASSfShapeFileFunction, bReset)
         ucrSaveColumn.SetRCode(clsAsCharacter, bReset)
-        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        Dim bOkEnabled As Boolean
-
-        If Not ucrReceiverLongitude.IsEmpty AndAlso ucrReceiverLatitude.IsEmpty Then
-            bOkEnabled = False
-        ElseIf ucrReceiverLongitude.IsEmpty AndAlso Not ucrReceiverLatitude.IsEmpty Then
-            bOkEnabled = False
-        Else
-            bOkEnabled = True
-        End If
-
+        Dim bOkEnabled As Boolean = True
         ucrBase.OKEnabled(bOkEnabled)
     End Sub
 
-End Class
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
 
+    Private Sub ShapeFileUpdate()
+        Dim ShapeFilePosition As Integer = ucrSelectorStationAndShapeFile.ucrAvailableDataFrames.cboAvailableDataFrames.FindString("gadm")
+        If ShapeFilePosition <> -1 Then
+            ucrSelectorStationAndShapeFile.ucrAvailableDataFrames.SetText(ucrSelectorStationAndShapeFile.ucrAvailableDataFrames.cboAvailableDataFrames.Items.Item(ShapeFilePosition))
+            ucrReceiverPolygon.SetText(ucrSelectorStationAndShapeFile.ucrAvailableDataFrames.cboAvailableDataFrames.Items.Item(ShapeFilePosition))
+        End If
+    End Sub
+    Private Sub ucrReceiverLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlValueChanged
+        If Not ucrReceiverLongitude.IsEmpty Then
+            ShapeFileUpdate()
+        End If
+    End Sub
+
+    Private Sub ucrReceiverLongitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLongitude.ControlValueChanged
+        If Not ucrReceiverLatitude.IsEmpty Then
+            ShapeFileUpdate()
+        End If
+    End Sub
+End Class

@@ -580,6 +580,8 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.ToolStripSeparator55 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticCheckLocation = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1586,7 +1588,7 @@ Partial Class frmMain
         '
         'mnuClimaticCheckData
         '
-        Me.mnuClimaticCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCheckDataInventory, Me.mnuClimaticCheckDataDisplayDaily, Me.mnuClimaticCheckDataBoxplot, Me.mnuClimaticCheckDataQCTemperatures, Me.mnuClimaticCheckDataQCRainfall})
+        Me.mnuClimaticCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCheckDataInventory, Me.mnuClimaticCheckDataDisplayDaily, Me.mnuClimaticCheckDataBoxplot, Me.mnuClimaticCheckDataQCTemperatures, Me.mnuClimaticCheckDataQCRainfall, Me.ToolStripSeparator55, Me.mnuClimaticCheckLocation})
         Me.mnuClimaticCheckData.Name = "mnuClimaticCheckData"
         resources.ApplyResources(Me.mnuClimaticCheckData, "mnuClimaticCheckData")
         '
@@ -3718,6 +3720,16 @@ Partial Class frmMain
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
         '
+        'ToolStripSeparator55
+        '
+        Me.ToolStripSeparator55.Name = "ToolStripSeparator55"
+        resources.ApplyResources(Me.ToolStripSeparator55, "ToolStripSeparator55")
+        '
+        'mnuClimaticCheckLocation
+        '
+        Me.mnuClimaticCheckLocation.Name = "mnuClimaticCheckLocation"
+        resources.ApplyResources(Me.mnuClimaticCheckLocation, "mnuClimaticCheckLocation")
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4303,4 +4315,6 @@ Partial Class frmMain
     Friend WithEvents mnuModelUseModel As ToolStripMenuItem
     Friend WithEvents mnuClimaticPICSACumExeedenceGraph As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckDataQCTemperatures As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator55 As ToolStripSeparator
+    Friend WithEvents mnuClimaticCheckLocation As ToolStripMenuItem
 End Class
