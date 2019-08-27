@@ -1885,4 +1885,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::rho.circular()", 1)
         End If
     End Sub
+
+    Private Sub cmdCircular_Click(sender As Object, e As EventArgs) Handles cmdCircular.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::circular(x = , type = c(angles, directions), units = c(radians, degrees, hours), template = c(none, geographics, clock12, clock24),  modulo = c(asis, 2pi, pi), zero = 0, rotation = c(counter, clock), names))", 195)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::circular()", 1)
+        End If
+    End Sub
 End Class
