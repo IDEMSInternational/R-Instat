@@ -121,7 +121,7 @@ Public Class sdgSummaries
         ucrChkQ1.SetParameter(New RParameter("summary_Q1_circular", 28), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Q1_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkQ1.SetText("Q1")
 
-        ucrChkQ3.SetParameter(New RParameter("summary_Q3_circular", 29), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Q1_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkQ3.SetParameter(New RParameter("summary_Q3_circular", 29), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Q3_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkQ3.SetText("Q3")
 
         ucrChkQuantile.SetParameter(New RParameter("summary_Quantile_circular", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_quantile_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
@@ -136,7 +136,7 @@ Public Class sdgSummaries
         ucrChkAngVar.SetParameter(New RParameter("summary_ang_var_circular", 33), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_ang_var_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkAngVar.SetText("Ang_var")
 
-        ucrChkAngDev.SetParameter(New RParameter("summary_ang_dev", 34), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_ang_dev" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkAngDev.SetParameter(New RParameter("summary_ang_dev_circular", 34), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_ang_dev_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkAngDev.SetText("Ang_dev")
 
         ucrChkrho.SetParameter(New RParameter("summary_rho_circular", 35), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_rho_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
