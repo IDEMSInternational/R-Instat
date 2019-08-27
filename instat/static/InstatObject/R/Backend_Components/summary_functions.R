@@ -416,25 +416,24 @@ n_distinct_label="summary_n_distinct"
 proportion_label="proportion_calc"
 count_calc_label="count_calc"
 standard_error_mean_label="standard_error_mean"
-circular_mean_label="circular_mean"
-circular_median_label="circular_median"
-circular_medianHL_label="circular_medianHL"
-circular_min_label="circular_min"
-circular_max_label="circular_max"
-circular_Q1_label="circular_Q1"
-circular_Q3_label="circular_Q3"
-circular_quantile_label="circular_quantile"
-circular_sd_label="circular_sd"
-circular_var_label="circular_var"
-circular_ang.dev_label="circular_ang_dev"
-circular_ang.var_label="circular_ang_var"
-circular_rho_label="circular_rho"
-circular_range_label="circular_range"
-circular_A1_label="circular_A1"
+circular_mean_label="summary_circular_mean"
+circular_median_label="summary_circular_median"
+circular_medianHL_label="summary_circular_medianHL"
+circular_min_label="summary_circular_min"
+circular_max_label="summary_circular_max"
+circular_Q1_label="summary_circular_Q1"
+circular_Q3_label="summary_circular_Q3"
+circular_quantile_label="summary_circular_quantile"
+circular_sd_label="summary_circular_sd"
+circular_var_label="summary_circular_var"
+circular_ang_dev_label="summary_circular_ang_dev"
+circular_ang_var_label="summary_circular_ang_var"
+circular_rho_label="summary_circular_rho"
+circular_range_label="summary_circular_range"
 
 
 # list of all summary function names
-all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label, trimmed_mean_label, quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_outlier_limit_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label,first_label, last_label, nth_label, n_distinct_label, proportion_label, count_calc_label,standard_error_mean_label, circular_mean_label, circular_median_label, circular_medianHL_label, circular_min_label, circular_max_label, circular_Q1_label, circular_Q3_label, circular_quantile_label, circular_sd_label, circular_var_label, circular_ang.dev_label, circular_ang.var_label, circular_rho_label, circular_range_label, circular_A1_label)
+all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label, trimmed_mean_label, quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_outlier_limit_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label,first_label, last_label, nth_label, n_distinct_label, proportion_label, count_calc_label,standard_error_mean_label, circular_mean_label, circular_median_label, circular_medianHL_label, circular_min_label, circular_max_label, circular_Q1_label, circular_Q3_label, circular_quantile_label, circular_sd_label, circular_var_label, circular_ang_dev_label, circular_ang_var_label, circular_rho_label, circular_range_label)
 summary_mode <- function(x,...) {
   ux <- unique(x)
   out <- ux[which.max(tabulate(match(x, ux)))]
@@ -490,25 +489,31 @@ summary_medianHL_circular <- function (x, na.rm = FALSE, method = c("HL1","HL2",
 }
 
 summary_min_circular <- function (x, na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
-  if(!na.rm & anyNA(x)) return(NA)
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)||(!na.rm & anyNA(x))) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else return(circular::quantile.circular(x, probs = 0, na.rm = na.rm, names = names, type = type)[[1]])
 }
 
 summary_max_circular <- function (x, na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
-  if(!na.rm & anyNA(x)) return(NA)
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)||(!na.rm & anyNA(x))) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else return(circular::quantile.circular(x, probs = 1, na.rm = na.rm, names = names, type = type)[[1]])
 }
 
+summary_quantile_circular <- function (x, probs = seq(0, 1, 0.25), na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)||(!na.rm & anyNA(x))) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::quantile.circular(x, probs = probs, na.rm = na.rm, names = names, type = type)[[1]])
+}
+
 summary_Q3_circular <- function (x, na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
-  if(!na.rm & anyNA(x)) return(NA)
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)||(!na.rm & anyNA(x))) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else return(circular::quantile.circular(x, probs = 0.75, na.rm = na.rm, names = names, type = type)[[1]])
 }
 
 summary_Q1_circular <- function (x, na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
-  if(!na.rm & anyNA(x)) return(NA)
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)||(!na.rm & anyNA(x))) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else return(circular::quantile.circular(x, probs = 0.25, na.rm = na.rm, names = names, type = type)[[1]])
 }
@@ -530,6 +535,12 @@ summary_ang_dev_circular <- function (x, na.rm = FALSE, na_type = "", ...) {
   else return(circular::angular.deviation(x, na.rm = na.rm))
 }
 
+summary_ang_var_circular <- function (x, na.rm = FALSE, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::angular.variance(x, na.rm = na.rm))
+}
+
 summary_range_circular <- function (x, test = FALSE, na.rm = FALSE, finite = FALSE, control.circular = list(),  na_type = "", ...) {
   if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
@@ -540,6 +551,12 @@ summary_rho_circular <- function (x, na.rm = FALSE, na_type = "", ...) {
   if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else return(circular::rho.circular(x, na.rm = na.rm))
+}
+
+summary_quantile_circular <- function (x, probs = seq(0, 1, 0.25), na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)||(!na.rm & anyNA(x))) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::quantile.circular(x, probs = probs, na.rm = na.rm, names = names, type = type)[[1]])
 }
 
 summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0, na_type = "", ...) {
