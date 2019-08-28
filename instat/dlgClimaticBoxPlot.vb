@@ -372,6 +372,7 @@ Public Class dlgClimaticBoxPlot
             End If
         Next
         'TODO need to check for the variable width from the geom function in a way that when we check the var width checkbox, it triggers controlvaluechanged
+        clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsFilteredDataOperator, iPosition:=0)
     End Sub
 
     Private Sub AutoFill()
@@ -524,6 +525,7 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub OmitFilter()
+        clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsFilteredDataOperator, iPosition:=0)
         If ucrChkOmitBelow.Checked Then
             clsFilteredDataOperator.AddParameter("right", clsRFunctionParameter:=clsFilterElementFunction, iPosition:=1)
         Else
