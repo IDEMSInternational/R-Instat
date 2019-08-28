@@ -189,27 +189,25 @@ Public Class ucrAxes
         ucrChKDateBreaks.SetText("Breaks")
         ucrChKDateBreaks.AddParameterPresentCondition(True, "breaks")
         ucrChKDateBreaks.AddParameterPresentCondition(False, "breaks", False)
-        ucrChKDateBreaks.AddToLinkedControls(ucrInputDateBreaks, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-        ucrInputDateBreaks.SetParameter(New RParameter("breaks"))
+        ucrChKDateBreaks.AddToLinkedControls(ucrPickerDateBreak, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrPickerDateBreak.SetParameter(New RParameter("breaks"))
 
-        ucrInputUpperBreak.Hide()
-        ucrInputLowerBreak.Hide()
+        ucrPickerUpperBreak.Hide()
+        ucrPickerLowerBreak.Hide()
 
         ucrChkLimitDate.SetText("Limits")
         ucrChkLimitDate.AddParameterPresentCondition(True, "limits")
         ucrChkLimitDate.AddParameterPresentCondition(False, "limits", False)
-        ucrChkLimitDate.AddToLinkedControls(ucrInputUpperBreak, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLimitDate.AddToLinkedControls(ucrInputLowerBreak, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLimitDate.AddToLinkedControls(ucrPickerUpperBreak, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLimitDate.AddToLinkedControls(ucrPickerLowerBreak, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrInputLowerBreak.SetParameter(New RParameter("lowerlimit", 0))
-        ucrInputLowerBreak.SetParameterIncludeArgumentName(False)
-        ucrInputLowerBreak.AddQuotesIfUnrecognised = False
-        ucrInputLowerBreak.SetLinkedDisplayControl(lblLowerDateBreaks)
+        ucrPickerLowerBreak.SetParameter(New RParameter("lowerlimit", 0))
+        ucrPickerLowerBreak.SetParameterIncludeArgumentName(False)
+        ucrPickerLowerBreak.SetLinkedDisplayControl(lblLowerDateBreaks)
 
-        ucrInputUpperBreak.SetParameter(New RParameter("upperlimit", 1))
-        ucrInputUpperBreak.SetParameterIncludeArgumentName(False)
-        ucrInputUpperBreak.AddQuotesIfUnrecognised = False
-        ucrInputUpperBreak.SetLinkedDisplayControl(lblUpperDateBreaks)
+        ucrPickerUpperBreak.SetParameter(New RParameter("upperlimit", 1))
+        ucrPickerUpperBreak.SetParameterIncludeArgumentName(False)
+        ucrPickerUpperBreak.SetLinkedDisplayControl(lblUpperDateBreaks)
 
         bControlsInitialised = True
     End Sub
@@ -310,7 +308,7 @@ Public Class ucrAxes
 
         'Date scales functions
         ucrChKDateBreaks.SetRCode(clsXYScaleDateFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-        ucrInputDateBreaks.SetRCode(clsXYScaleDateFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrPickerDateBreak.SetRCode(clsXYScaleDateFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         'Temp disabled, not yet implemented
         ucrInputMajorBreaksInStepsOf.SetRCode(clsMajorBreaksSeqFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
@@ -468,7 +466,7 @@ Public Class ucrAxes
         AddRemoveContinuousXYScales()
     End Sub
 
-    Private Sub ucrInputDateBreaks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDateBreaks.ControlValueChanged
+    Private Sub ucrInputDateBreaks_ControlValueChanged(ucrChangedControl As ucrCore)
         AddRemoveXYDateScales()
     End Sub
 End Class

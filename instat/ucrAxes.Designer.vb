@@ -51,9 +51,6 @@ Partial Class ucrAxes
         Me.ucrChKDateBreaks = New instat.ucrCheck()
         Me.lblUpperDateBreaks = New System.Windows.Forms.Label()
         Me.lblLowerDateBreaks = New System.Windows.Forms.Label()
-        Me.ucrInputUpperBreak = New instat.ucrInputTextBox()
-        Me.ucrInputLowerBreak = New instat.ucrInputTextBox()
-        Me.ucrInputDateBreaks = New instat.ucrInputTextBox()
         Me.grpMajorBreaks = New System.Windows.Forms.GroupBox()
         Me.ucrChkLabels = New instat.ucrCheck()
         Me.ucrInputMajorBreaksLabels = New instat.ucrInputTextBox()
@@ -100,6 +97,9 @@ Partial Class ucrAxes
         Me.lblMinorBreaksFrom = New System.Windows.Forms.Label()
         Me.rdoMinorBreaksNone = New System.Windows.Forms.RadioButton()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.ucrPickerDateBreak = New instat.ucrDateTimePicker()
+        Me.ucrPickerLowerBreak = New instat.ucrDateTimePicker()
+        Me.ucrPickerUpperBreak = New instat.ucrDateTimePicker()
         Me.grpAxisTitle.SuspendLayout()
         Me.grpDateBox.SuspendLayout()
         Me.grpMajorBreaks.SuspendLayout()
@@ -160,13 +160,13 @@ Partial Class ucrAxes
         '
         'grpDateBox
         '
+        Me.grpDateBox.Controls.Add(Me.ucrPickerUpperBreak)
+        Me.grpDateBox.Controls.Add(Me.ucrPickerLowerBreak)
+        Me.grpDateBox.Controls.Add(Me.ucrPickerDateBreak)
         Me.grpDateBox.Controls.Add(Me.ucrChkLimitDate)
         Me.grpDateBox.Controls.Add(Me.ucrChKDateBreaks)
         Me.grpDateBox.Controls.Add(Me.lblUpperDateBreaks)
         Me.grpDateBox.Controls.Add(Me.lblLowerDateBreaks)
-        Me.grpDateBox.Controls.Add(Me.ucrInputUpperBreak)
-        Me.grpDateBox.Controls.Add(Me.ucrInputLowerBreak)
-        Me.grpDateBox.Controls.Add(Me.ucrInputDateBreaks)
         resources.ApplyResources(Me.grpDateBox, "grpDateBox")
         Me.grpDateBox.Name = "grpDateBox"
         Me.grpDateBox.TabStop = False
@@ -192,30 +192,6 @@ Partial Class ucrAxes
         '
         resources.ApplyResources(Me.lblLowerDateBreaks, "lblLowerDateBreaks")
         Me.lblLowerDateBreaks.Name = "lblLowerDateBreaks"
-        '
-        'ucrInputUpperBreak
-        '
-        Me.ucrInputUpperBreak.AddQuotesIfUnrecognised = True
-        Me.ucrInputUpperBreak.IsMultiline = False
-        Me.ucrInputUpperBreak.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputUpperBreak, "ucrInputUpperBreak")
-        Me.ucrInputUpperBreak.Name = "ucrInputUpperBreak"
-        '
-        'ucrInputLowerBreak
-        '
-        Me.ucrInputLowerBreak.AddQuotesIfUnrecognised = True
-        Me.ucrInputLowerBreak.IsMultiline = False
-        Me.ucrInputLowerBreak.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLowerBreak, "ucrInputLowerBreak")
-        Me.ucrInputLowerBreak.Name = "ucrInputLowerBreak"
-        '
-        'ucrInputDateBreaks
-        '
-        Me.ucrInputDateBreaks.AddQuotesIfUnrecognised = True
-        Me.ucrInputDateBreaks.IsMultiline = False
-        Me.ucrInputDateBreaks.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDateBreaks, "ucrInputDateBreaks")
-        Me.ucrInputDateBreaks.Name = "ucrInputDateBreaks"
         '
         'grpMajorBreaks
         '
@@ -556,6 +532,27 @@ Partial Class ucrAxes
         Me.rdoMinorBreaksNone.TabStop = True
         Me.rdoMinorBreaksNone.UseVisualStyleBackColor = True
         '
+        'ucrPickerDateBreak
+        '
+        resources.ApplyResources(Me.ucrPickerDateBreak, "ucrPickerDateBreak")
+        Me.ucrPickerDateBreak.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrPickerDateBreak.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrPickerDateBreak.Name = "ucrPickerDateBreak"
+        '
+        'ucrPickerLowerBreak
+        '
+        resources.ApplyResources(Me.ucrPickerLowerBreak, "ucrPickerLowerBreak")
+        Me.ucrPickerLowerBreak.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrPickerLowerBreak.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrPickerLowerBreak.Name = "ucrPickerLowerBreak"
+        '
+        'ucrPickerUpperBreak
+        '
+        resources.ApplyResources(Me.ucrPickerUpperBreak, "ucrPickerUpperBreak")
+        Me.ucrPickerUpperBreak.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrPickerUpperBreak.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrPickerUpperBreak.Name = "ucrPickerUpperBreak"
+        '
         'ucrAxes
         '
         resources.ApplyResources(Me, "$this")
@@ -635,12 +632,12 @@ Partial Class ucrAxes
     Friend WithEvents ucrChkExpand As ucrCheck
     Friend WithEvents ucrChkTransformation As ucrCheck
     Friend WithEvents grpDateBox As GroupBox
-    Friend WithEvents ucrInputUpperBreak As ucrInputTextBox
-    Friend WithEvents ucrInputLowerBreak As ucrInputTextBox
-    Friend WithEvents ucrInputDateBreaks As ucrInputTextBox
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents lblUpperDateBreaks As Label
     Friend WithEvents lblLowerDateBreaks As Label
     Friend WithEvents ucrChKDateBreaks As ucrCheck
     Friend WithEvents ucrChkLimitDate As ucrCheck
+    Friend WithEvents ucrPickerDateBreak As ucrDateTimePicker
+    Friend WithEvents ucrPickerLowerBreak As ucrDateTimePicker
+    Friend WithEvents ucrPickerUpperBreak As ucrDateTimePicker
 End Class

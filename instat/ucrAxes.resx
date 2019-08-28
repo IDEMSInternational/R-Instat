@@ -293,6 +293,69 @@
   <data name="&gt;&gt;grpAxisTitle.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="ucrPickerUpperBreak.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 73</value>
+  </data>
+  <data name="ucrPickerUpperBreak.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 20</value>
+  </data>
+  <data name="ucrPickerUpperBreak.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="&gt;&gt;ucrPickerUpperBreak.Name" xml:space="preserve">
+    <value>ucrPickerUpperBreak</value>
+  </data>
+  <data name="&gt;&gt;ucrPickerUpperBreak.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPickerUpperBreak.Parent" xml:space="preserve">
+    <value>grpDateBox</value>
+  </data>
+  <data name="&gt;&gt;ucrPickerUpperBreak.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrPickerLowerBreak.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 46</value>
+  </data>
+  <data name="ucrPickerLowerBreak.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 20</value>
+  </data>
+  <data name="ucrPickerLowerBreak.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="&gt;&gt;ucrPickerLowerBreak.Name" xml:space="preserve">
+    <value>ucrPickerLowerBreak</value>
+  </data>
+  <data name="&gt;&gt;ucrPickerLowerBreak.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPickerLowerBreak.Parent" xml:space="preserve">
+    <value>grpDateBox</value>
+  </data>
+  <data name="&gt;&gt;ucrPickerLowerBreak.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrPickerDateBreak.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 19</value>
+  </data>
+  <data name="ucrPickerDateBreak.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 20</value>
+  </data>
+  <data name="ucrPickerDateBreak.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="&gt;&gt;ucrPickerDateBreak.Name" xml:space="preserve">
+    <value>ucrPickerDateBreak</value>
+  </data>
+  <data name="&gt;&gt;ucrPickerDateBreak.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPickerDateBreak.Parent" xml:space="preserve">
+    <value>grpDateBox</value>
+  </data>
+  <data name="&gt;&gt;ucrPickerDateBreak.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="ucrChkLimitDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 46</value>
   </data>
@@ -312,7 +375,7 @@
     <value>grpDateBox</value>
   </data>
   <data name="&gt;&gt;ucrChkLimitDate.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="ucrChKDateBreaks.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 19</value>
@@ -333,7 +396,7 @@
     <value>grpDateBox</value>
   </data>
   <data name="&gt;&gt;ucrChKDateBreaks.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="lblUpperDateBreaks.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -360,7 +423,7 @@
     <value>grpDateBox</value>
   </data>
   <data name="&gt;&gt;lblUpperDateBreaks.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="lblLowerDateBreaks.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -387,76 +450,13 @@
     <value>grpDateBox</value>
   </data>
   <data name="&gt;&gt;lblLowerDateBreaks.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrInputUpperBreak.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 71</value>
-  </data>
-  <data name="ucrInputUpperBreak.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 21</value>
-  </data>
-  <data name="ucrInputUpperBreak.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUpperBreak.Name" xml:space="preserve">
-    <value>ucrInputUpperBreak</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUpperBreak.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUpperBreak.Parent" xml:space="preserve">
-    <value>grpDateBox</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUpperBreak.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrInputLowerBreak.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 46</value>
-  </data>
-  <data name="ucrInputLowerBreak.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 21</value>
-  </data>
-  <data name="ucrInputLowerBreak.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLowerBreak.Name" xml:space="preserve">
-    <value>ucrInputLowerBreak</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLowerBreak.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLowerBreak.Parent" xml:space="preserve">
-    <value>grpDateBox</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLowerBreak.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrInputDateBreaks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 19</value>
-  </data>
-  <data name="ucrInputDateBreaks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 21</value>
-  </data>
-  <data name="ucrInputDateBreaks.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDateBreaks.Name" xml:space="preserve">
-    <value>ucrInputDateBreaks</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDateBreaks.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDateBreaks.Parent" xml:space="preserve">
-    <value>grpDateBox</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDateBreaks.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="grpDateBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 335</value>
   </data>
   <data name="grpDateBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 109</value>
+    <value>350, 109</value>
   </data>
   <data name="grpDateBox.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
