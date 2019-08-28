@@ -2240,7 +2240,8 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
 	  dekad_val_vector <- ((as.numeric(dekade(col_data))) - (s_start_month - 1)*3) %% 36
 	  dekad_val_vector <- ifelse(dekad_val_vector == 0, 36, dekad_val_vector)
 	  month.list <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-	  dekad_levels<-paste0(rep(month.list, each = 3), 1:36)
+	  month_levels<-if (s_start_month == 1) month.list else c(tail(month.list, -s_start_month + 1), head(month.list, s_start_month - 1))
+	  dekad_levels<-paste0(rep(month_levels, each = 3), 1:36)
 	  dekad_abbr_vector <- factor(paste(month_abbr_vector, dekad_val_vector, sep = ""),levels = dekad_levels)
 	  col_name <- next_default_item(prefix = "dekad_abbr", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = dekad_abbr_vector)
@@ -2256,7 +2257,8 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
 	  pentad_val_vector <- ((as.integer(pentad(col_data))) - (s_start_month - 1)*6) %% 72
 	  pentad_val_vector <- ifelse(pentad_val_vector == 0, 72, pentad_val_vector)
 	  month.list <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-	  pentad_levels<-paste0(rep(month.list, each = 6), 1:72)
+	  month_levels<-if (s_start_month == 1) month.list else c(tail(month.list, -s_start_month + 1), head(month.list, s_start_month - 1))
+	  pentad_levels<-paste0(rep(month_levels, each = 6), 1:72)
 	  pentad_abbr_vector <- factor(paste(month_abbr_vector, pentad_val_vector, sep = ""),levels = pentad_levels)
 	  col_name <- next_default_item(prefix = "pentad_abbr", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = pentad_abbr_vector)
