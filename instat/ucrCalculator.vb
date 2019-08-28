@@ -1872,7 +1872,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircQuantile_Click_1(sender As Object, e As EventArgs) Handles cmdCircQuantile.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25), na.rm = FALSE, names = TRUE, type = 7)", 65)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25), na.rm = TRUE, names = TRUE, type = 7)", 65)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular()", 1)
         End If
@@ -1888,9 +1888,9 @@ Public Class ucrCalculator
 
     Private Sub cmdCircular_Click(sender As Object, e As EventArgs) Handles cmdCircular.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::circular(x = , type = c(angles, directions), units = c(radians, degrees, hours), template = c(none, geographics, clock12, clock24),  modulo = c(asis, 2pi, pi), zero = 0, rotation = c(counter, clock), names))", 195)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::circular(x = , type = c(""angles"", ""directions""), units = c(""radians"", ""degrees"", ""hours""), ""template"" = c(""none"", ""geographics"", ""clock12"", ""clock24""),  modulo = c(""asis"", ""2pi"", ""pi""), zero = 0, rotation = c(""counter"", ""clock""), names))", 195)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::circular()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::circular(x =, modulo = ""2pi"", units = ""radians"")", 36)
         End If
     End Sub
 End Class
