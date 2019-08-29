@@ -222,29 +222,14 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
-        Dim iCountGeoms As Integer = 0
-        Dim clsTempFunc As RFunction
         If ucrVariablesAsFactorForLinePlot.bSingleVariable Then
             cmdLineOptions.Enabled = True
         Else
             cmdLineOptions.Enabled = False
-            For Each clsTempParam In clsBaseOperator.clsParameters
-                If clsTempParam IsNot Nothing AndAlso clsTempParam.bIsFunction AndAlso clsTempParam.clsArgumentCodeStructure IsNot Nothing Then
-                    clsTempFunc = TryCast(clsTempParam.clsArgumentCodeStructure, RFunction)
-                    If clsTempFunc IsNot Nothing Then
-                        If clsTempFunc.strRCommand.StartsWith("geom_") Then
-                            iCountGeoms = iCountGeoms + 1
-                        End If
-                    End If
-                End If
-            Next
-            If iCountGeoms > 1 Then
-                MsgBox("Be careful there's more than one layer ,you may want to reset the dialogue before continuing")
-            End If
         End If
-        End Sub
+    End Sub
 
-        Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
             sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector, bReset:=bResetSubdialog)
             If Not ucrVariablesAsFactorForLinePlot.bSingleVariable Then
                 sdgPlots.tbpLayers.Enabled = False
@@ -286,8 +271,8 @@ Public Class dlgLinePlot
         End Sub
 
         Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
-            TempOptionsDisabledInMultipleVariablesCase()
-        End Sub
+        TempOptionsDisabledInMultipleVariablesCase()
+    End Sub
 
         Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged
             TestOkEnabled()
