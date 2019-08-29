@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLimits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 23</value>
+    <value>12, 23</value>
   </data>
   <data name="lblLimits.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
@@ -211,7 +211,7 @@
     <value>4</value>
   </data>
   <data name="ucrChkResort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 19</value>
+    <value>249, 19</value>
   </data>
   <data name="ucrChkResort.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 20</value>
@@ -232,7 +232,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputComboMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 45</value>
+    <value>138, 44</value>
   </data>
   <data name="ucrInputComboMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 21</value>
@@ -253,7 +253,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputLimitOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 17</value>
+    <value>138, 19</value>
   </data>
   <data name="ucrInputLimitOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 21</value>
@@ -274,7 +274,7 @@
     <value>2</value>
   </data>
   <data name="ucrDtpEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 71</value>
+    <value>138, 70</value>
   </data>
   <data name="ucrDtpEndDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 20</value>
@@ -301,16 +301,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 74</value>
+    <value>12, 74</value>
   </data>
   <data name="lblEndDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
+    <value>53, 13</value>
   </data>
   <data name="lblEndDate.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
   </data>
   <data name="lblEndDate.Text" xml:space="preserve">
-    <value>End Date:</value>
+    <value>End date:</value>
   </data>
   <data name="&gt;&gt;lblEndDate.Name" xml:space="preserve">
     <value>lblEndDate</value>
@@ -331,7 +331,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblStartDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 51</value>
+    <value>12, 49</value>
   </data>
   <data name="lblStartDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -361,16 +361,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblCompleteYears.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 51</value>
+    <value>12, 48</value>
   </data>
   <data name="lblCompleteYears.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 13</value>
+    <value>119, 13</value>
   </data>
   <data name="lblCompleteYears.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
   </data>
   <data name="lblCompleteYears.Text" xml:space="preserve">
-    <value>Complete Years:</value>
+    <value>Complete years starting:</value>
   </data>
   <data name="&gt;&gt;lblCompleteYears.Name" xml:space="preserve">
     <value>lblCompleteYears</value>
@@ -385,7 +385,7 @@
     <value>7</value>
   </data>
   <data name="ucrDtpStartDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 45</value>
+    <value>138, 45</value>
   </data>
   <data name="ucrDtpStartDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 20</value>
@@ -506,9 +506,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

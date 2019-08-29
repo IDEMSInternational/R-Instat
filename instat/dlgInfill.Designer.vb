@@ -43,8 +43,8 @@ Partial Class dlgInfill
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblLimits = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.lblStartDate = New System.Windows.Forms.Label()
         Me.lblEndDate = New System.Windows.Forms.Label()
+        Me.lblStartDate = New System.Windows.Forms.Label()
         Me.lblCompleteYears = New System.Windows.Forms.Label()
         Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -88,15 +88,15 @@ Partial Class dlgInfill
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
         '
-        'lblStartDate
-        '
-        resources.ApplyResources(Me.lblStartDate, "lblStartDate")
-        Me.lblStartDate.Name = "lblStartDate"
-        '
         'lblEndDate
         '
         resources.ApplyResources(Me.lblEndDate, "lblEndDate")
         Me.lblEndDate.Name = "lblEndDate"
+        '
+        'lblStartDate
+        '
+        resources.ApplyResources(Me.lblStartDate, "lblStartDate")
+        Me.lblStartDate.Name = "lblStartDate"
         '
         'lblCompleteYears
         '
