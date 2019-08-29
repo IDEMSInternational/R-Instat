@@ -210,6 +210,126 @@
   <data name="&gt;&gt;lblLimits.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="&gt;&gt;ucrChkCompleteYears.Name" xml:space="preserve">
+    <value>ucrChkCompleteYears</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCompleteYears.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCompleteYears.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCompleteYears.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkResort.Name" xml:space="preserve">
+    <value>ucrChkResort</value>
+  </data>
+  <data name="&gt;&gt;ucrChkResort.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkResort.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkResort.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboMonth.Name" xml:space="preserve">
+    <value>ucrInputComboMonth</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboMonth.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboMonth.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboMonth.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLimitOptions.Name" xml:space="preserve">
+    <value>ucrInputLimitOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLimitOptions.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLimitOptions.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLimitOptions.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpEndDate.Name" xml:space="preserve">
+    <value>ucrDtpEndDate</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpEndDate.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpEndDate.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpEndDate.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblEndDate.Name" xml:space="preserve">
+    <value>lblEndDate</value>
+  </data>
+  <data name="&gt;&gt;lblEndDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblEndDate.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;lblEndDate.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblStartDate.Name" xml:space="preserve">
+    <value>lblStartDate</value>
+  </data>
+  <data name="&gt;&gt;lblStartDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStartDate.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;lblStartDate.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.Name" xml:space="preserve">
+    <value>ucrDtpStartDate</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 196</value>
+  </data>
+  <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>396, 104</value>
+  </data>
+  <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="grpOptions.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Name" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="ucrChkCompleteYears.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 45</value>
   </data>
@@ -396,30 +516,6 @@
   <data name="&gt;&gt;ucrDtpStartDate.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 196</value>
-  </data>
-  <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 104</value>
-  </data>
-  <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="grpOptions.Text" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="&gt;&gt;grpOptions.Name" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;grpOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpOptions.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -502,7 +598,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Infill</value>
+    <value>Fill date gaps</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgInfill</value>
