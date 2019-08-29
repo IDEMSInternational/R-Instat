@@ -208,7 +208,28 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblLimits.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
+  </data>
+  <data name="ucrChkCompleteYears.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 45</value>
+  </data>
+  <data name="ucrChkCompleteYears.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 20</value>
+  </data>
+  <data name="ucrChkCompleteYears.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCompleteYears.Name" xml:space="preserve">
+    <value>ucrChkCompleteYears</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCompleteYears.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCompleteYears.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCompleteYears.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrChkResort.Location" type="System.Drawing.Point, System.Drawing">
     <value>249, 19</value>
@@ -229,7 +250,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkResort.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrInputComboMonth.Location" type="System.Drawing.Point, System.Drawing">
     <value>138, 44</value>
@@ -250,7 +271,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrInputComboMonth.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrInputLimitOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>138, 19</value>
@@ -271,7 +292,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrInputLimitOptions.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrDtpEndDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>138, 70</value>
@@ -292,7 +313,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrDtpEndDate.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="lblEndDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -322,7 +343,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblEndDate.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="lblStartDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -352,36 +373,6 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblStartDate.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="lblCompleteYears.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblCompleteYears.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblCompleteYears.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 48</value>
-  </data>
-  <data name="lblCompleteYears.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 13</value>
-  </data>
-  <data name="lblCompleteYears.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="lblCompleteYears.Text" xml:space="preserve">
-    <value>Complete years starting:</value>
-  </data>
-  <data name="&gt;&gt;lblCompleteYears.Name" xml:space="preserve">
-    <value>lblCompleteYears</value>
-  </data>
-  <data name="&gt;&gt;lblCompleteYears.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblCompleteYears.Parent" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;lblCompleteYears.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="ucrDtpStartDate.Location" type="System.Drawing.Point, System.Drawing">
