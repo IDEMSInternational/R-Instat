@@ -2494,7 +2494,6 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
   if(!missing(start_date) && !lubridate::is.Date(start_date)) stop(start_date, " is an invalid start date")
   if(!missing(end_date) && !lubridate::is.Date(end_date)) stop(end_date, " is an invalid end date")
   if (!missing(start_month) && !is.numeric(start_month)) stop(start_month, " month not numeric")
-  # check start_month is 1-12
   min_date <- min(date_col)
   max_date <- max(date_col)
   if(!missing(start_date)) {
@@ -2518,7 +2517,8 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
     else if(!missing(start_month)) {
       if(start_month <= lubridate::month(min_date)) min_date <- as.Date(paste(lubridate::year(min_date), start_month, 1, sep = "-"), format = "%Y-%m-%d")
       else min_date <- as.Date(paste(lubridate::year(min_date) - 1, start_month, 1, sep = "-"), format = "%Y-%m-%d")
-      # end date
+      if(start_month <= lubridate::month(max_date)) max_date <- as.Date(paste(lubridate::year(max_date), 12, 1, sep = "-"), format = "%Y-%m-%d")
+      else max_date <- as.Date(paste(lubridate::year(max_date) - 1, 12, 1, sep = "-"), format = "%Y-%m-%d")
     }
     full_dates <- seq(min_date, max_date, by = "day")
     if(length(full_dates) > length(date_col)) {
@@ -2551,10 +2551,12 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
       }
     }
     else if(!missing(start_month)) {
-      date_ranges$min_date <- ifelse(lubridate::month(date_ranges$min_date) >= start_month, 
+      date_ranges$min_date <- dplyr::if_else(lubridate::month(date_ranges$min_date) >= start_month, 
                                      as.Date(paste(lubridate::year(date_ranges$min_date), start_month, 1, sep = "-"), format = "%Y-%m-%d"),
                                      as.Date(paste(lubridate::year(date_ranges$min_date) - 1, start_month, 1, sep = "-"), format = "%Y-%m-%d"))
-      # max_date
+      date_ranges$max_date <- dplyr::if_else(lubridate::month(date_ranges$max_date) >= start_month, 
+                                     as.Date(paste(lubridate::year(date_ranges$max_date), 12, 1, sep = "-"), format = "%Y-%m-%d"),
+                                     as.Date(paste(lubridate::year(date_ranges$max_date) - 1, 12, 1, sep = "-"), format = "%Y-%m-%d"))
     }
     full_dates_list <- list()
     for(j in 1:nrow(date_ranges)) {
