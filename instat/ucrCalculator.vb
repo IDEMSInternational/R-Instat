@@ -1768,7 +1768,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircMean_Click(sender As Object, e As EventArgs) Handles cmdCircMean.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular(x = , na.rm = TRUE, control.circular = list())", 43)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular(x = , na.rm = FALSE, control.circular = list())", 44)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular()", 1)
         End If
@@ -1776,7 +1776,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircMedian_Click(sender As Object, e As EventArgs) Handles cmdCircMedian.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::median.circular(x = , na.rm = TRUE)", 16)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::median.circular(x = , na.rm = FALSE)", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::median.circular()", 1)
         End If
@@ -1784,7 +1784,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMedianHL_Click(sender As Object, e As EventArgs) Handles cmdMedianHL.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular(x = , na.rm = TRUE, method = c(HL1,HL2,HL3), prop = NULL)", 54)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular(x = , na.rm = FALSE, method = c(HL1,HL2,HL3), prop = NULL)", 55)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular()", 1)
         End If
@@ -1792,7 +1792,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircRange_Click(sender As Object, e As EventArgs) Handles cmdCircRange.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::range.circular(x = , test = FALSE, na.rm = TRUE, finite = FALSE, control.circular = list(), )", 75)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::range.circular(x = , test = FALSE, na.rm = FALSE, finite = FALSE, control.circular = list(), )", 76)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::range.circular()", 1)
         End If
@@ -1800,7 +1800,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircSd_Click(sender As Object, e As EventArgs) Handles cmdCircSd.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::sd.circular(x = ,  na.rm = TRUE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::sd.circular(x = ,  na.rm = FALSE)", 18)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::sd.circular()", 1)
         End If
@@ -1808,7 +1808,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircVar_Click(sender As Object, e As EventArgs) Handles cmdCircVar.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::var.circular(x = ,  na.rm = TRUE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::var.circular(x = ,  na.rm = FALSE)", 18)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::var.circular()", 1)
         End If
@@ -1824,7 +1824,7 @@ Public Class ucrCalculator
 
     Private Sub cmdAngVar_Click(sender As Object, e As EventArgs) Handles cmdAngVar.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.variance(x = , na.rm = TRUE)", 16)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.variance(x = , na.rm = FALSE)", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.variance()", 1)
         End If
@@ -1832,7 +1832,7 @@ Public Class ucrCalculator
 
     Private Sub cmdAngDev_Click(sender As Object, e As EventArgs) Handles cmdAngDev.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.deviation(x = , na.rm = TRUE)", 16)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.deviation(x = , na.rm = FALSE)", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.deviation()", 1)
         End If
@@ -1840,7 +1840,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircQ1_Click(sender As Object, e As EventArgs) Handles cmdCircQ1.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.25, na.rm = TRUE, names = TRUE, type = 7)", 54)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.25, na.rm = FALSE, names = TRUE, type = 7)", 55)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.25)", 16)
         End If
@@ -1848,7 +1848,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircMin_Click(sender As Object, e As EventArgs) Handles cmdCircMin.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0, na.rm = TRUE, names = TRUE, type = 7)", 51)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0, na.rm = FALSE, names = TRUE, type = 7)", 52)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0)", 13)
         End If
@@ -1856,7 +1856,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircMax_Click(sender As Object, e As EventArgs) Handles cmdCircMax.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 1, na.rm = TRUE, names = TRUE, type = 7)", 51)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 1, na.rm = FALSE, names = TRUE, type = 7)", 52)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 1)", 13)
         End If
@@ -1864,7 +1864,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircQ3_Click(sender As Object, e As EventArgs) Handles cmdCircQ3.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.75, na.rm = TRUE, names = TRUE, type = 7)", 54)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.75, na.rm = FALSE, names = TRUE, type = 7)", 55)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.75)", 16)
         End If
@@ -1872,7 +1872,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircQuantile_Click_1(sender As Object, e As EventArgs) Handles cmdCircQuantile.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25), na.rm = TRUE, names = TRUE, type = 7)", 65)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25), na.rm = FALSE, names = TRUE, type = 7)", 66)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25))", 28)
         End If
@@ -1880,7 +1880,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircRho_Click_1(sender As Object, e As EventArgs) Handles cmdCircRho.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::rho.circular(x = , na.rm = TRUE)", 16)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::rho.circular(x = , na.rm = FALSE)", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::rho.circular()", 1)
         End If
@@ -1888,7 +1888,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircular_Click(sender As Object, e As EventArgs) Handles cmdCircular.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::circular(x = , type = c(""angles"", ""directions""), units = c(""radians"", ""degrees"", ""hours""), ""template"" = c(""none"", ""geographics"", ""clock12"", ""clock24""),  modulo = c(""asis"", ""2pi"", ""pi""), zero = 0, rotation = c(""counter"", ""clock""), names))", 195)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::circular(x = , type = c(""angles"", ""directions""), units = c(""radians"", ""degrees"", ""hours""), ""template"" = c(""none"", ""geographics"", ""clock12"", ""clock24""),  modulo = c(""asis"", ""2pi"", ""pi""), zero = 0, rotation = c(""counter"", ""clock""), names))", 225)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::circular(x =, modulo = ""2pi"", units = ""radians"")", 36)
         End If
