@@ -38,7 +38,6 @@ Public Class dlgInfill
         ucrBase.clsRsyntax.iCallType = 2
         'Set receiver
         ucrReceiverDate.Selector = ucrInfillSelector
-        ucrReceiverDate.SetMeAsReceiver()
         ucrReceiverDate.SetDataType("Date")
         ucrReceiverDate.SetParameter(New RParameter("date_name", 1))
         ucrReceiverDate.SetParameterIsString()
@@ -107,6 +106,8 @@ Public Class dlgInfill
 
         'Set default RFunction as the base function
         ucrInfillSelector.Reset()
+        ucrReceiverFactors.SetMeAsReceiver()
+
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$infill_missing_dates")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
