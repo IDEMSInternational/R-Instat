@@ -76,6 +76,9 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddToLinkedControls(ucrReceiverByFactor, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
 
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverY, {rdoColumnChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+
         ucrBarChartSelector.SetParameter(New RParameter("data", 0))
         ucrBarChartSelector.SetParameterIsrfunction()
 
@@ -300,9 +303,6 @@ Public Class dlgBarAndPieChart
             cmdPieChartOptions.Visible = False
             cmdBarChartOptions.Visible = True
             cmdColumnChartOptions.Visible = False
-            ucrReceiverFirst.Visible = True
-            ucrReceiverY.Visible = False
-            ucrReceiverByFactor.Visible = True
             If Not clsBaseOperator.ContainsParameter("geom_bar") Then
                 clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
             End If
@@ -320,8 +320,6 @@ Public Class dlgBarAndPieChart
             clsBaseOperator.AddParameter(clsRCoordPolarParam)
             clsBaseOperator.RemoveParameterByName("geom_col")
             ucrReceiverFirst.SetMeAsReceiver()
-            ucrReceiverFirst.Visible = True
-            ucrReceiverY.Visible = False
             cmdPieChartOptions.Visible = True
             cmdBarChartOptions.Visible = False
             cmdColumnChartOptions.Visible = False
@@ -338,9 +336,6 @@ Public Class dlgBarAndPieChart
             cmdPieChartOptions.Visible = False
             cmdBarChartOptions.Visible = False
             cmdColumnChartOptions.Visible = True
-            ucrReceiverFirst.Visible = True
-            ucrReceiverY.Visible = True
-            ucrReceiverByFactor.Visible = False
             ucrReceiverFirst.SetIncludedDataTypes({"numeric", "factor"})
             clsBaseOperator.RemoveParameterByName("geom_bar")
             clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
