@@ -28,6 +28,10 @@ Public Class ucrSave
     Private bAssignToIsPrefix As Boolean = False
     Private bAssignToColumnWithoutNames As Boolean = False
     Private bInsertColumnBefore As Boolean = False
+    ' If true then a list of data frames is being assigned, otherwise a single data frame
+    Public bDataFrameList As Boolean = False
+    ' Optional R character vector to give names of new data frames if data frame list is not named
+    Public strDataFrameNames As String
     Private strAssignToIfUnchecked As String = ""
     Private strGlobalDataName As String = ""
 
@@ -117,11 +121,33 @@ Public Class ucrSave
         UpdateRCode()
     End Sub
 
-    Public Sub SetAssignToBooleans(Optional bTempAssignToIsPrefix As Boolean = False, Optional bTempAssignToColumnWithoutNames As Boolean = False, Optional bTempInsertColumnBefore As Boolean = False)
+    Public Sub SetAssignToBooleans(Optional bTempAssignToIsPrefix As Boolean = False, Optional bTempAssignToColumnWithoutNames As Boolean = False, Optional bTempInsertColumnBefore As Boolean = False, Optional bTempDataFrameList As Boolean = False)
         bAssignToIsPrefix = bTempAssignToIsPrefix
         bAssignToColumnWithoutNames = bTempAssignToColumnWithoutNames
         bInsertColumnBefore = bTempInsertColumnBefore
+        bDataFrameList = bTempDataFrameList
         UpdateRCode()
+    End Sub
+
+    ' Use this if you already have a valid R character vector
+    ' strTempDataFrameNames should be a valid R character vector
+    ' e.g. "data" or c("data1", "data2")
+    Public Sub SetDataFrameNames(strTempDataFrameNames As String)
+        strDataFrameNames = strTempDataFrameNames
+        UpdateRCode()
+    End Sub
+
+    ' Use this if you just have a list of string
+    ' This will be convered into a valid R character vector
+    Public Sub SetDataFrameNames(lstTempDataFrameNames As List(Of String))
+        If lstTempDataFrameNames.Count = 1 Then
+            SetDataFrameNames(lstTempDataFrameNames(0))
+        Else
+            For i As Integer = 0 To lstTempDataFrameNames.Count - 1
+                lstTempDataFrameNames(i) = Chr(34) & frmMain.clsRLink.MakeValidText(lstTempDataFrameNames(i)) & Chr(34)
+            Next
+            SetDataFrameNames("c(" & String.Join(", ", lstTempDataFrameNames) & ")")
+        End If
     End Sub
 
     Private Sub LabelOrCheckboxSettings()
@@ -293,7 +319,7 @@ Public Class ucrSave
                             Case "column"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
                             Case "dataframe"
-                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bDataFrameList:=bDataFrameList, strDataFrameNames:=strDataFrameNames)
                             Case "graph"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                             Case "model"

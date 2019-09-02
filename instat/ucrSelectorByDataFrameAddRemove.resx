@@ -173,6 +173,9 @@
   <data name="&gt;&gt;btnAdd.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="btnDataOptions.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.75pt</value>
+  </data>
   <data name="btnDataOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>153, 146</value>
   </data>
