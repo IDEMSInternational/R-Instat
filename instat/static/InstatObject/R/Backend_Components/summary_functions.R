@@ -1,5 +1,5 @@
 #Methods temporarily here to avoid conflicts
-data_object$set("public", "merge_data", function(new_data, by = NULL, type = "left", match = "all") {
+DataSheet$set("public", "merge_data", function(new_data, by = NULL, type = "left", match = "all") {
   #TODO how to use match argument with dplyr join functions
   old_metadata <- attributes(private$data)
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
@@ -42,7 +42,7 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
 }
 )
 
-instat_object$set("public", "append_summaries_to_data_object", function(out, data_name, columns_to_summarise, summaries, factors = c(), summary_name, calc, calc_name = "") {
+DataBook$set("public", "append_summaries_to_data_object", function(out, data_name, columns_to_summarise, summaries, factors = c(), summary_name, calc, calc_name = "") {
   if(!is.character(data_name)) stop("data_name must be of type character")
   
   exists = FALSE
@@ -95,7 +95,7 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, return_output = FALSE, summary_name = NA, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, silent = FALSE, additional_filter, original_level = FALSE, ...) {
+DataBook$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, return_output = FALSE, summary_name = NA, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, silent = FALSE, additional_filter, original_level = FALSE, ...) {
   if(original_level) type <- "calculation"
   else type <- "summary"
   include_columns_to_summarise <- TRUE
@@ -237,7 +237,7 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
 }
 )
 
-instat_object$set("public", "summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = FALSE, drop = FALSE, return_output = FALSE, summary_name = NA, add_cols = c(), filter_names = c(), ...) {
+DataBook$set("public", "summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = FALSE, drop = FALSE, return_output = FALSE, summary_name = NA, add_cols = c(), filter_names = c(), ...) {
   calculated_from = list()
   calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
   #TODO Change this to store sub_calculations for each column
@@ -300,7 +300,7 @@ instat_object$set("public", "summary", function(data_name, columns_to_summarise,
 }
 )
 
-data_object$set("public", "calculate_summary", function(calc, ...) {
+DataSheet$set("public", "calculate_summary", function(calc, ...) {
   columns_to_summarise = calc[["parameters"]][["columns_to_summarise"]]
   summaries = calc[["parameters"]][["summaries"]]
   factors = calc[["parameters"]][["factors"]]
@@ -416,9 +416,24 @@ n_distinct_label="summary_n_distinct"
 proportion_label="proportion_calc"
 count_calc_label="count_calc"
 standard_error_mean_label="standard_error_mean"
+circular_mean_label="summary_circular_mean"
+circular_median_label="summary_circular_median"
+circular_medianHL_label="summary_circular_medianHL"
+circular_min_label="summary_circular_min"
+circular_max_label="summary_circular_max"
+circular_Q1_label="summary_circular_Q1"
+circular_Q3_label="summary_circular_Q3"
+circular_quantile_label="summary_circular_quantile"
+circular_sd_label="summary_circular_sd"
+circular_var_label="summary_circular_var"
+circular_ang_dev_label="summary_circular_ang_dev"
+circular_ang_var_label="summary_circular_ang_var"
+circular_rho_label="summary_circular_rho"
+circular_range_label="summary_circular_range"
+
 
 # list of all summary function names
-all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label, trimmed_mean_label, quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_outlier_limit_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label,first_label, last_label, nth_label, n_distinct_label, proportion_label, count_calc_label,standard_error_mean_label)
+all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label, trimmed_mean_label, quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_outlier_limit_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label,first_label, last_label, nth_label, n_distinct_label, proportion_label, count_calc_label,standard_error_mean_label, circular_mean_label, circular_median_label, circular_medianHL_label, circular_min_label, circular_max_label, circular_Q1_label, circular_Q3_label, circular_quantile_label, circular_sd_label, circular_var_label, circular_ang_dev_label, circular_ang_var_label, circular_rho_label, circular_range_label)
 summary_mode <- function(x,...) {
   ux <- unique(x)
   out <- ux[which.max(tabulate(match(x, ux)))]
@@ -427,17 +442,121 @@ summary_mode <- function(x,...) {
   else return(out)
 }
 
-na_check <- function(x, na_type = "n", na_max_n = NULL, na_max_prop = NULL, na_FUN = NULL, ...) {
-  if(na_type == "n") {
-    return(summary_count_missing(x) <= na_max_n)
+na_check <- function(x, na_type = c(), na_consecutive_n = NULL, na_max_n = NULL, na_max_prop = NULL, na_min_n = NULL, na_FUN = NULL, ...) {
+  res <- c()
+  k <- 1
+  for (i in na_type) {
+    ##Added this to avoid error when "" is trancated. Not sure why "" is removed in some instances. 
+    ##Works differently with main summary function when you have a single case/multiple cases of na_type.
+    if(i == "'n'" || i == "n") {
+      res[k] <- summary_count_missing(x) <= na_max_n
+    }
+    else if(i == "'prop'" || i == "prop") {
+      res[k] <- (summary_count_missing(x)/summary_count(x)) <= na_max_prop/100
+    }
+    else if(i == "'n_non_miss'" || i == "n_non_miss") {
+      res[k] <- summary_count_non_missing(x) >= na_min_n
+    }
+    else if(i == "'FUN'" || i == "FUN") {
+      res[k] <- na_FUN(x, ...)
+    }
+    else if(i == "'con'" || i == "con") {
+      is_na_rle <- rle(is.na(x))
+      res[k] <- max(is_na_rle$lengths[is_na_rle$values]) <= na_consecutive_n
+    }
+    else stop("Invalid na_type specified for missing values check.")
+    if(!res[k]) return(FALSE)
+    k <-  k+1
   }
-  else if(na_type == "prop") {
-    return(summary_count_missing(x)/summary_count(x) <= na_max_prop)
-  }
-  else if(na_type == "FUN") {
-    return(na_FUN(x, ...))
-  }
-  else stop("Invalid na_type specified for missing values check.")
+  return(all(res))
+}
+
+summary_mean_circular <- function (x, na.rm = FALSE, control.circular = list(), na_type = "", ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::mean.circular(x, na.rm = na.rm, trim = trim, control.circular = control.circular)[[1]])
+}
+
+summary_median_circular <- function (x, na.rm = FALSE, na_type = "", ...) {
+  if(!na.rm & anyNA(x)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::median.circular(x, na.rm = na.rm)[[1]])
+}
+
+summary_medianHL_circular <- function (x, na.rm = FALSE, method = c("HL1","HL2","HL3"), prop = NULL, na_type = "", ...) {
+  if(!na.rm & anyNA(x)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::medianHL.circular(x, na.rm = na.rm, method = method, prop = prop)[[1]])
+}
+
+summary_min_circular <- function (x, na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)||(!na.rm & anyNA(x))) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::quantile.circular(x, probs = 0, na.rm = na.rm, names = names, type = type)[[1]])
+}
+
+summary_max_circular <- function (x, na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)||(!na.rm & anyNA(x))) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::quantile.circular(x, probs = 1, na.rm = na.rm, names = names, type = type)[[1]])
+}
+
+summary_quantile_circular <- function (x, probs = seq(0, 1, 0.25), na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)||(!na.rm & anyNA(x))) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::quantile.circular(x, probs = probs, na.rm = na.rm, names = names, type = type)[[1]])
+}
+
+summary_Q3_circular <- function (x, na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)||(!na.rm & anyNA(x))) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::quantile.circular(x, probs = 0.75, na.rm = na.rm, names = names, type = type)[[1]])
+}
+
+summary_Q1_circular <- function (x, na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)||(!na.rm & anyNA(x))) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::quantile.circular(x, probs = 0.25, na.rm = na.rm, names = names, type = type)[[1]])
+}
+
+summary_sd_circular <- function (x, na.rm = FALSE, na_type = "", ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::sd.circular(x, na.rm = na.rm))
+}
+
+summary_var_circular <- function (x, na.rm = FALSE, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::var.circular(x, na.rm = na.rm))
+}
+
+summary_ang_dev_circular <- function (x, na.rm = FALSE, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::angular.deviation(x, na.rm = na.rm))
+}
+
+summary_ang_var_circular <- function (x, na.rm = FALSE, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::angular.variance(x, na.rm = na.rm))
+}
+
+summary_range_circular <- function (x, test = FALSE, na.rm = FALSE, finite = FALSE, control.circular = list(),  na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::range.circular(x, test = test, na.rm = na.rm, finite = finite,  control.circular = control.circular)[[1]])
+}
+
+summary_rho_circular <- function (x, na.rm = FALSE, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::rho.circular(x, na.rm = na.rm))
+}
+
+summary_quantile_circular <- function (x, probs = seq(0, 1, 0.25), na.rm = FALSE, names = FALSE, type = 7, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)||(!na.rm & anyNA(x))) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else return(circular::quantile.circular(x, probs = probs, na.rm = na.rm, names = names, type = type)[[1]])
 }
 
 summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0, na_type = "", ...) {
@@ -567,23 +686,31 @@ summary_skewness_mc <- function(x, na.rm = FALSE, na_type = "", ...) {
 }
 
 # skewness outlier limit function
-summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc = FALSE, skewnessweight = 4, na.rm = TRUE, na_type = "", ...){ 
+summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc = FALSE, skewnessweight = 4, na.rm = TRUE, na_type = "", omit = FALSE, value = 0, ...){ 
+  if(omit){
+    #This is needed when we need rainy days defined(Rain>=0.85)
+    #if(value!=0){
+     # x <- x[x>=value]
+    #}else{
+      x <- x[x>value]
+      #}
+  }
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-      else{
-      quart <- quantile(x, na.rm = na.rm)
-      Q1 <- quart[[2]]
-      Q3 <- quart[[4]]
-      IQR <- Q3 - Q1
-      MC <- 0
-      if(bskewedcalc){
-        MC <- robustbase::mc(x, na.rm = na.rm)
-      }
-      if(bupperlimit){
-        Q3 + coef*exp(skewnessweight*MC)*IQR
-      } else {
-        Q1 - coef*exp(-skewnessweight*MC)*IQR
-      }
-      }
+  else{
+    quart <- quantile(x, na.rm = na.rm)
+    Q1 <- quart[[2]]
+    Q3 <- quart[[4]]
+    IQR <- Q3 - Q1
+    MC <- 0
+    if(bskewedcalc){
+      MC <- robustbase::mc(x, na.rm = na.rm)
+    }
+    if(bupperlimit){
+      Q3 + coef*exp(skewnessweight*MC)*IQR
+    } else {
+      Q1 - coef*exp(-skewnessweight*MC)*IQR
+    }
+  }
 }
 
 # kurtosis function
@@ -650,18 +777,18 @@ summary_cov <- function(x, y, na.rm = FALSE, na_type = "", method = c("pearson",
 }
 }
 # first function
-summary_first <- function(x, order_by = NULL, default = default_missing(x), ...) {
-    return(dplyr::first(x = x, order_by = order_by, default = default))
+summary_first <- function(x, order_by = NULL, ...) {
+    return(dplyr::first(x = x, order_by = order_by))
 }
 
 # last function
-summary_last <- function(x, order_by = NULL, default = default_missing(x), ...) {
-     return(dplyr::last(x = x, order_by = order_by, default = default))
+summary_last <- function(x, order_by = NULL, ...) {
+     return(dplyr::last(x = x, order_by = order_by))
 }
 
 # nth function
-summary_nth <- function(x, nth_value, order_by = NULL, default = default_missing(x), ...) {
-    return(dplyr::nth(x = x, n = nth_value, order_by = order_by, default = default_missing(x)))
+summary_nth <- function(x, nth_value, order_by = NULL, ...) {
+    return(dplyr::nth(x = x, n = nth_value, order_by = order_by))
 }
 
 # n_distinct function
@@ -727,7 +854,7 @@ standard_error_mean <- function(x, na.rm = FALSE, na_type = "", ...){
 }
 
 
-instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
+DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   if(n_column_factors == 1 && length(factors) == 0) n_column_factors <- 0
   if(n_column_factors > length(factors)) stop("n_column_factors must be <= number of factors specified.")
   if(na_level_display == "") stop("na_level_display must be a non empty string")

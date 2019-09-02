@@ -43,6 +43,7 @@ Public Class dlgAddKey
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 504
         ucrInputCheckInput.IsReadOnly = True
+        EnableDisableCmdCheckUnique()
 
         ucrSelectorKeyColumns.SetParameter(New RParameter("data_name", 0))
         ucrSelectorKeyColumns.SetParameterIsString()
@@ -113,12 +114,16 @@ Public Class dlgAddKey
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverKeyColumns_ControlValueChanged() Handles ucrReceiverKeyColumns.ControlValueChanged
+    Private Sub EnableDisableCmdCheckUnique()
         If ucrReceiverKeyColumns.IsEmpty Then
             cmdCheckUnique.Enabled = False
         Else
             cmdCheckUnique.Enabled = True
         End If
+    End Sub
+
+    Private Sub ucrReceiverKeyColumns_ControlValueChanged() Handles ucrReceiverKeyColumns.ControlValueChanged
+        EnableDisableCmdCheckUnique()
         bUniqueChecked = False
         ucrInputCheckInput.SetName("")
         ucrInputCheckInput.txtInput.BackColor = SystemColors.Window

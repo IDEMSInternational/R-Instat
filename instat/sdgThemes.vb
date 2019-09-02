@@ -19,10 +19,8 @@ Imports instat.Translations
 Public Class sdgThemes
     Public bControlsInitialised As Boolean = False
     Private clsElementLine, clsElementRect, clsElementXAxisTextTop, clsElementXAxisLine, clsElementYAxisLine, clsElementText, clsElementYAxisTextRight, clsElementXAxisLineTop, clsThemeFunction As New RFunction
-
     Private clsBaseOperator As New ROperator
-
-    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
+    Private clsThemeSubFunctions As New clsThemeSubFunctions
 
     Private Sub sdgThemes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -158,68 +156,6 @@ Public Class sdgThemes
     End Sub
 
     Public Sub SetRCode(clsBaseOperator As ROperator, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), Optional bReset As Boolean = False)
-        Dim clsXElementText As New RFunction
-        Dim clsElementTickText As New RFunction
-        Dim clsXElementTitleText As New RFunction
-        Dim clsYElementText As New RFunction
-        Dim clsXTopElementText As New RFunction
-        Dim clsYRightElementText As New RFunction
-        Dim clsXElementTitle As New RFunction
-        Dim clsYElementTitle As New RFunction
-        Dim clsXTopElementTitle As New RFunction
-        Dim clsYRightElementTitle As New RFunction
-        Dim clsElementLegendText As New RFunction
-        Dim clsElementLegendTitle As New RFunction
-
-        Dim clsElementPlotTitle As New RFunction
-        Dim clsElementPlotSubtitle As New RFunction
-        Dim clsElementPlotCaption As New RFunction
-
-        Dim clsElementStripText As New RFunction
-        Dim clsElementStripTextXAxis As New RFunction
-        Dim clsElementStripTextYAxis As New RFunction
-
-        Dim clsXElementLine As New RFunction
-        Dim clsElementLineAxes As New RFunction
-        Dim clsYElementLine As New RFunction
-        Dim clsElementTickAxes As New RFunction
-        Dim clsElementTickXAxis As New RFunction
-        Dim clsElementTickYAxis As New RFunction
-        Dim clsElementLineXAxis As New RFunction
-        Dim clsElementLineYAxis As New RFunction
-
-        Dim clsElementLegendBackground As New RFunction
-        Dim clsElementLegendBoxBackground As New RFunction
-        Dim clsElementLegendtKey As New RFunction
-
-        Dim clsElementBorder As New RFunction
-        Dim clsElementPanelBackGround As New RFunction
-
-        Dim clsElementPlotBackground As New RFunction
-        Dim clsElementStripBackground As New RFunction
-
-        Dim clsElementPanelGrid As New RFunction
-        Dim clsElementPanelGridMajor As New RFunction
-        Dim clsElementPanelGridMinor As New RFunction
-        Dim clsElementPanelGridMajorXAxis As New RFunction
-        Dim clsElementPanelGridMajorYAxis As New RFunction
-        Dim clsElementPanelGridMinorXAxis As New RFunction
-        Dim clsElementPanelGridMinorYAxis As New RFunction
-
-        Dim clsUnitAxisTickLength As New RFunction
-        Dim clsUnitLegendSize As New RFunction
-        Dim clsUnitLegendHeight As New RFunction
-        Dim clsUnitLegendWidth As New RFunction
-        Dim clsUnitPanelSpacing As New RFunction
-        Dim clsUnitPanelSpacingXAxis As New RFunction
-        Dim clsUnitPanelSpacingYAxis As New RFunction
-        Dim clsUnitPlotMargin As New RFunction
-        Dim clsUnitStripsGrid As New RFunction
-        Dim clsUnitStripsWrap As New RFunction
-        Dim clsUnitLegendSpacing As New RFunction
-        Dim clsUnitLegendSpacingXAxis As New RFunction
-        Dim clsUnitLegendSpacingYAxis As New RFunction
-        Dim clsUnitLegendBoxSpacing As New RFunction
 
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -230,136 +166,73 @@ Public Class sdgThemes
         ' Currently set to large value as no reason this cannot be at the end currently
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=100)
 
-        dctThemeFunctions = dctNewThemeFunctions
-        dctThemeFunctions.TryGetValue("axis.text", clsElementTickText)
-        dctThemeFunctions.TryGetValue("axis.text.x", clsXElementText)
-        dctThemeFunctions.TryGetValue("axis.text.y", clsYElementText)
-        dctThemeFunctions.TryGetValue("axis.text.x.top", clsXTopElementText)
-        dctThemeFunctions.TryGetValue("axis.text.y.right", clsYRightElementText)
+        clsThemeSubFunctions.SetRCode(clsBaseOperator, dctNewThemeFunctions, bReset)
 
-        dctThemeFunctions.TryGetValue("legend.text", clsElementLegendText)
-        dctThemeFunctions.TryGetValue("legend.title", clsElementLegendTitle)
+        ucrTickMarksXAxis.SetRCodeForControl("axis.ticks.x", clsThemeSubFunctions.clsXElementLine, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrTickMarksYAxis.SetRCodeForControl("axis.ticks.y", clsThemeSubFunctions.clsYElementLine, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrXAxisLines.SetRCodeForControl("axis.line.x", clsThemeSubFunctions.clsElementLineXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrYAxisLines.SetRCodeForControl("axis.line.y", clsThemeSubFunctions.clsElementLineYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrTickMarksAxes.SetRCodeForControl("axis.ticks", clsThemeSubFunctions.clsElementTickAxes, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrThemeAxesTickLabels.SetRCodeForControl("axis.text", clsThemeSubFunctions.clsElementTickText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrThemeAxesTitle.SetRCodeForControl("axis.title", clsThemeSubFunctions.clsXElementTitleText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrThemeAxesLines.SetRCodeForControl("axis.line", clsThemeSubFunctions.clsElementLineAxes, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        dctThemeFunctions.TryGetValue("axis.title", clsXElementTitleText)
-        dctThemeFunctions.TryGetValue("axis.title.x", clsXElementTitle)
-        dctThemeFunctions.TryGetValue("axis.title.y", clsYElementTitle)
-        dctThemeFunctions.TryGetValue("axis.title.x.top", clsXTopElementTitle)
-        dctThemeFunctions.TryGetValue("axis.title.y.right", clsYRightElementTitle)
+        ucrThemeBottomXAxis.SetRCodeForControl("axis.text.x", clsThemeSubFunctions.clsXElementText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrThemeTopXAxis.SetRCodeForControl("axis.text.x.top", clsThemeSubFunctions.clsXTopElementText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrThemeLeftYAxis.SetRCodeForControl("axis.text.y", clsThemeSubFunctions.clsYElementText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrThemeYRightAxis.SetRCodeForControl("axis.text.y.right", clsThemeSubFunctions.clsYRightElementText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        dctThemeFunctions.TryGetValue("plot.title", clsElementPlotTitle)
-        dctThemeFunctions.TryGetValue("plot.subtitle", clsElementPlotSubtitle)
-        dctThemeFunctions.TryGetValue("plot.caption", clsElementPlotCaption)
+        ucrThemeTitleXAxis.SetRCodeForControl("axis.title.x", clsThemeSubFunctions.clsXElementTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrThemeTitleXTopAxis.SetRCodeForControl("axis.title.x.top", clsThemeSubFunctions.clsXTopElementTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrThemeTitleYAxis.SetRCodeForControl("axis.title.y", clsThemeSubFunctions.clsYElementTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrThemeTitleYRightAxis.SetRCodeForControl("axis.title.y.right", clsThemeSubFunctions.clsYRightElementTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        dctThemeFunctions.TryGetValue("strip.text", clsElementStripText)
-        dctThemeFunctions.TryGetValue("strip.text.x", clsElementStripTextXAxis)
-        dctThemeFunctions.TryGetValue("strip.text.y", clsElementStripTextYAxis)
+        ucrLegendTitle.SetRCodeForControl("legend.title", clsThemeSubFunctions.clsElementLegendTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendText.SetRCodeForControl("legend.text", clsThemeSubFunctions.clsElementLegendText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendBackground.SetRCodeForControl("legend.background", clsThemeSubFunctions.clsElementLegendBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendBoxBackground.SetRCodeForControl("legend.box.background", clsThemeSubFunctions.clsElementLegendBoxBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendKey.SetRCodeForControl("legend.key", clsThemeSubFunctions.clsElementLegendtKey, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        dctThemeFunctions.TryGetValue("axis.ticks.x", clsXElementLine)
-        dctThemeFunctions.TryGetValue("axis.ticks.y", clsYElementLine)
-        dctThemeFunctions.TryGetValue("axis.line.x", clsElementLineXAxis)
-        dctThemeFunctions.TryGetValue("axis.line.y", clsElementLineYAxis)
-        dctThemeFunctions.TryGetValue("axis.ticks", clsElementTickAxes)
-        dctThemeFunctions.TryGetValue("axis.line", clsElementLineAxes)
+        ucrLegendSpacing.SetRCodeForControl("legend.spacing", clsThemeSubFunctions.clsUnitLegendSpacing, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendSpacingXAxis.SetRCodeForControl("legend.spacing.x", clsThemeSubFunctions.clsUnitLegendSpacingXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendSpacingYAxis.SetRCodeForControl("legend.spacing.y", clsThemeSubFunctions.clsUnitLegendSpacingYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendBoxSpacing.SetRCodeForControl("legend.box.spacing", clsThemeSubFunctions.clsUnitLegendBoxSpacing, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        dctThemeFunctions.TryGetValue("panel.grid", clsElementPanelGrid)
-        dctThemeFunctions.TryGetValue("panel.grid.major", clsElementPanelGridMajor)
-        dctThemeFunctions.TryGetValue("panel.grid.minor", clsElementPanelGridMinor)
-        dctThemeFunctions.TryGetValue("panel.grid.major.x", clsElementPanelGridMajorXAxis)
-        dctThemeFunctions.TryGetValue("panel.grid.major.y", clsElementPanelGridMajorYAxis)
-        dctThemeFunctions.TryGetValue("panel.grid.minor.x", clsElementPanelGridMinorXAxis)
-        dctThemeFunctions.TryGetValue("panel.grid.minor.y", clsElementPanelGridMinorYAxis)
+        ucrPanelGridMajorXAxis.SetRCodeForControl("panel.grid.major.x", clsThemeSubFunctions.clsElementPanelGridMajorXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelGridMajorYAxis.SetRCodeForControl("panel.grid.major.y", clsThemeSubFunctions.clsElementPanelGridMajorYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelGridMinorXAxis.SetRCodeForControl("panel.grid.minor.x", clsThemeSubFunctions.clsElementPanelGridMinorXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelGridMinorYAxis.SetRCodeForControl("panel.grid.minor.y", clsThemeSubFunctions.clsElementPanelGridMinorYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        dctThemeFunctions.TryGetValue("axis.ticks.length", clsUnitAxisTickLength)
-        dctThemeFunctions.TryGetValue("legend.key.size", clsUnitLegendSize)
-        dctThemeFunctions.TryGetValue("legend.key.height", clsUnitLegendHeight)
-        dctThemeFunctions.TryGetValue("legend.key.width", clsUnitLegendWidth)
-        dctThemeFunctions.TryGetValue("panel.spacing", clsUnitPanelSpacing)
-        dctThemeFunctions.TryGetValue("panel.spacing.x", clsUnitPanelSpacingXAxis)
-        dctThemeFunctions.TryGetValue("panel.spacing.y", clsUnitPanelSpacingYAxis)
-        dctThemeFunctions.TryGetValue("plot.margin", clsUnitPlotMargin)
-        dctThemeFunctions.TryGetValue("strip.switch.pad.grid", clsUnitStripsGrid)
-        dctThemeFunctions.TryGetValue("strip.switch.pad.wrap", clsUnitStripsWrap)
+        ucrPanelGrid.SetRCodeForControl("panel.grid", clsThemeSubFunctions.clsElementPanelGrid, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelGridMajor.SetRCodeForControl("panel.grid.major", clsThemeSubFunctions.clsElementPanelGridMajor, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelGridMinor.SetRCodeForControl("panel.grid.minor", clsThemeSubFunctions.clsElementPanelGridMinor, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelBackGround.SetRCodeForControl("panel.background", clsThemeSubFunctions.clsElementPanelBackGround, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelBorder.SetRCodeForControl("panel.border", clsThemeSubFunctions.clsElementBorder, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        dctThemeFunctions.TryGetValue("legend.background", clsElementLegendBackground)
-        dctThemeFunctions.TryGetValue("legend.box.background", clsElementLegendBoxBackground)
-        dctThemeFunctions.TryGetValue("legend.key", clsElementLegendtKey)
-        dctThemeFunctions.TryGetValue("panel.background", clsElementPanelBackGround)
-        dctThemeFunctions.TryGetValue("panel.border", clsElementBorder)
+        ucrPlotBackground.SetRCodeForControl("plot.background", clsThemeSubFunctions.clsElementPlotBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPlotCaption.SetRCodeForControl("plot.caption", clsThemeSubFunctions.clsElementPlotCaption, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPlotSubTitle.SetRCodeForControl("plot.subtitle", clsThemeSubFunctions.clsElementPlotSubtitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPlotTitle.SetRCodeForControl("plot.title", clsThemeSubFunctions.clsElementPlotTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        dctThemeFunctions.TryGetValue("legend.spacing", clsUnitLegendSpacing)
-        dctThemeFunctions.TryGetValue("legend.spacing.x", clsUnitLegendSpacingXAxis)
-        dctThemeFunctions.TryGetValue("legend.spacing.y", clsUnitLegendSpacingYAxis)
-        dctThemeFunctions.TryGetValue("legend.box.spacing", clsUnitLegendBoxSpacing)
+        ucrStripBackGround.SetRCodeForControl("strip.background", clsThemeSubFunctions.clsElementStripBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrStripText.SetRCodeForControl("strip.text", clsThemeSubFunctions.clsElementStripText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrStripTextXAxis.SetRCodeForControl("strip.text.x", clsThemeSubFunctions.clsElementStripTextXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrStripTextYAxis.SetRCodeForControl("strip.text.y", clsThemeSubFunctions.clsElementStripTextYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        dctThemeFunctions.TryGetValue("plot.background", clsElementPlotBackground)
+        ucrTickLength.SetRCodeForControl("axis.ticks.length", clsThemeSubFunctions.clsUnitAxisTickLength, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        dctThemeFunctions.TryGetValue("strip.background", clsElementStripBackground)
+        ucrLegendKeySize.SetRCodeForControl("legend.key.size", clsThemeSubFunctions.clsUnitLegendSize, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendKeyHeight.SetRCodeForControl("legend.key.height", clsThemeSubFunctions.clsUnitLegendHeight, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendKeyWidth.SetRCodeForControl("legend.key.width", clsThemeSubFunctions.clsUnitLegendWidth, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        ucrTickMarksXAxis.SetRCodeForControl("axis.ticks.x", clsXElementLine, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrTickMarksYAxis.SetRCodeForControl("axis.ticks.y", clsYElementLine, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrXAxisLines.SetRCodeForControl("axis.line.x", clsElementLineXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrYAxisLines.SetRCodeForControl("axis.line.y", clsElementLineYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrTickMarksAxes.SetRCodeForControl("axis.ticks", clsElementTickAxes, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrThemeAxesTickLabels.SetRCodeForControl("axis.text", clsElementTickText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrThemeAxesTitle.SetRCodeForControl("axis.title", clsXElementTitleText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrThemeAxesLines.SetRCodeForControl("axis.line", clsElementLineAxes, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelSpacing.SetRCodeForControl("panel.spacing", clsThemeSubFunctions.clsUnitPanelSpacing, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelSpacingXAxis.SetRCodeForControl("panel.spacing.x", clsThemeSubFunctions.clsUnitPanelSpacingXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelSpacingYAxis.SetRCodeForControl("panel.spacing.y", clsThemeSubFunctions.clsUnitPanelSpacingYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        ucrThemeBottomXAxis.SetRCodeForControl("axis.text.x", clsXElementText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrThemeTopXAxis.SetRCodeForControl("axis.text.x.top", clsXTopElementText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrThemeLeftYAxis.SetRCodeForControl("axis.text.y", clsYElementText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrThemeYRightAxis.SetRCodeForControl("axis.text.y.right", clsYRightElementText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrStripsSpaceGrid.SetRCodeForControl("strip.switch.pad.grid", clsThemeSubFunctions.clsUnitStripsGrid, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrStripsSpaceWrap.SetRCodeForControl("strip.switch.pad.wrap", clsThemeSubFunctions.clsUnitStripsWrap, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        ucrThemeTitleXAxis.SetRCodeForControl("axis.title.x", clsXElementTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrThemeTitleXTopAxis.SetRCodeForControl("axis.title.x.top", clsXTopElementTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrThemeTitleYAxis.SetRCodeForControl("axis.title.y", clsYElementTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrThemeTitleYRightAxis.SetRCodeForControl("axis.title.y.right", clsYRightElementTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-
-        ucrLegendTitle.SetRCodeForControl("legend.title", clsElementLegendTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrLegendText.SetRCodeForControl("legend.text", clsElementLegendText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrLegendBackground.SetRCodeForControl("legend.background", clsElementLegendBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrLegendBoxBackground.SetRCodeForControl("legend.box.background", clsElementLegendBoxBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrLegendKey.SetRCodeForControl("legend.key", clsElementLegendtKey, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-
-        ucrLegendSpacing.SetRCodeForControl("legend.spacing", clsUnitLegendSpacing, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrLegendSpacingXAxis.SetRCodeForControl("legend.spacing.x", clsUnitLegendSpacingXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrLegendSpacingYAxis.SetRCodeForControl("legend.spacing.y", clsUnitLegendSpacingYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrLegendBoxSpacing.SetRCodeForControl("legend.box.spacing", clsUnitLegendBoxSpacing, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-
-        ucrPanelGridMajorXAxis.SetRCodeForControl("panel.grid.major.x", clsElementPanelGridMajorXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPanelGridMajorYAxis.SetRCodeForControl("panel.grid.major.y", clsElementPanelGridMajorYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPanelGridMinorXAxis.SetRCodeForControl("panel.grid.minor.x", clsElementPanelGridMinorXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPanelGridMinorYAxis.SetRCodeForControl("panel.grid.minor.y", clsElementPanelGridMinorYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-
-        ucrPanelGrid.SetRCodeForControl("panel.grid", clsElementPanelGrid, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPanelGridMajor.SetRCodeForControl("panel.grid.major", clsElementPanelGridMajor, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPanelGridMinor.SetRCodeForControl("panel.grid.minor", clsElementPanelGridMinor, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPanelBackGround.SetRCodeForControl("panel.background", clsElementPanelBackGround, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPanelBorder.SetRCodeForControl("panel.border", clsElementBorder, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-
-        ucrPlotBackground.SetRCodeForControl("plot.background", clsElementPlotBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPlotCaption.SetRCodeForControl("plot.caption", clsElementPlotCaption, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPlotSubTitle.SetRCodeForControl("plot.subtitle", clsElementPlotSubtitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPlotTitle.SetRCodeForControl("plot.title", clsElementPlotTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-
-        ucrStripBackGround.SetRCodeForControl("strip.background", clsElementStripBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrStripText.SetRCodeForControl("strip.text", clsElementStripText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrStripTextXAxis.SetRCodeForControl("strip.text.x", clsElementStripTextXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrStripTextYAxis.SetRCodeForControl("strip.text.y", clsElementStripTextYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-
-        ucrTickLength.SetRCodeForControl("axis.ticks.length", clsUnitAxisTickLength, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-
-        ucrLegendKeySize.SetRCodeForControl("legend.key.size", clsUnitLegendSize, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrLegendKeyHeight.SetRCodeForControl("legend.key.height", clsUnitLegendHeight, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrLegendKeyWidth.SetRCodeForControl("legend.key.width", clsUnitLegendWidth, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-
-        ucrPanelSpacing.SetRCodeForControl("panel.spacing", clsUnitPanelSpacing, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPanelSpacingXAxis.SetRCodeForControl("panel.spacing.x", clsUnitPanelSpacingXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPanelSpacingYAxis.SetRCodeForControl("panel.spacing.y", clsUnitPanelSpacingYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-
-        ucrStripsSpaceGrid.SetRCodeForControl("strip.switch.pad.grid", clsUnitStripsGrid, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrStripsSpaceWrap.SetRCodeForControl("strip.switch.pad.wrap", clsUnitStripsWrap, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-
-        ucrPlotMargin.SetRCodeForControl("plot.margin", clsUnitPlotMargin, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPlotMargin.SetRCodeForControl("plot.margin", clsThemeSubFunctions.clsUnitPlotMargin, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         urChkLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)

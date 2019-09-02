@@ -5,7 +5,8 @@ get_default_significant_figures <- function(data) {
 
 convert_to_character_matrix <- function(data, format_decimal_places = TRUE, decimal_places, return_data_frame = TRUE, na_display = NULL, check.names = TRUE) {
   if(nrow(data) == 0) {
-    out <- data
+    out <- matrix(nrow = 0, ncol = ncol(data))
+    colnames(out) <- colnames(data)
   }
   else {
     out = matrix(nrow = nrow(data), ncol = ncol(data))
@@ -173,7 +174,7 @@ lat_lon_dataframe <- function(datafile){
   return(cbind(lat_lon,station))
 }
 
-output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitude, station, year, element, long.data = TRUE) {
+output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitude, station, year, element, long.data = TRUE, na_code = -999) {
   
   if(missing(data)) stop("data should be provided")
   if(missing(station)) stop("station must be provided")
@@ -229,10 +230,12 @@ output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitu
     }
   }
   
-  unstacked_data <- data %>% dplyr::select(station, year, element) %>% tidyr::spread(key = station, element)
+  unstacked_data <- data %>% dplyr::select(station, year, element) %>% tidyr::spread(key = station, value = element)
   names(unstacked_data)[1] <- station_label
+  unstacked_data <- unstacked_data %>% mutate_all(funs(replace(., is.na(.), na_code)))
   
-  lat_lon_data <- data %>% dplyr::group_by(station) %>% dplyr::summarise(latitude = min(latitude), longitude = min(longitude))
+  lat_lon_data <- data %>% dplyr::group_by(station) %>% dplyr::summarise(latitude = min(latitude, na.rm = TRUE), longitude = min(longitude, na.rm = TRUE))
+  if(anyNA(data$latitude) || anyNA(data$longitude)) warning("Missing values in latitude or longitude.")
   t_lat_lon_data <- t(lat_lon_data)
   station.names <- as.vector(t_lat_lon_data[1, ])
   t_lat_lon_data <- data.frame(t_lat_lon_data, stringsAsFactors = FALSE)
@@ -1123,6 +1126,27 @@ compare_columns <- function(x, y, use_unique = TRUE, sort_values = TRUE, firstno
   }
 }
 
+
+consecutive_sum <- function(x, initial_value = NA){
+  out = x
+  for(i in 1:length(x)){
+    if(!is.na(x[i])){
+    if(x[i] != 0){
+      if(i > 1){
+        out[i]=x[i] + out[i-1]
+    } else{
+        out[i] = x[i] + initial_value
+      }
+    } 
+    }
+  }
+  return(out)
+}
+
+max_consecutive_sum <- function(x){
+  max(consecutive_sum(x, initial_value = 0))
+}
+
 hashed_id <- function(x, salt, algo = "crc32") {
   if (missing(salt)){
       y <- x
@@ -1132,4 +1156,36 @@ hashed_id <- function(x, salt, algo = "crc32") {
   y <- sapply(y, function(X) digest::digest(X, algo = algo))
   as.character(y)
 
+}
+
+# Possible alternative but is slower:
+# spells <- function(z) {
+#   Reduce(function(x,y) {y = dplyr::if_else(y == 0, 0, x + 1)}, z[-1], 
+#          init = dplyr::if_else(z[1] == 0, 0, NA_real_), accumulate = TRUE)
+# }
+.spells <- function(x, initial_value = NA_real_) {
+  y <- mat.or.vec(length(x), 1)
+  if(length(x) > 0) {
+    y[1] <- dplyr::if_else(x[1] == 0, 0, initial_value + 1)
+    if(length(x) > 1) {
+      for(i in 2:length(x)) {
+        y[i] <- dplyr::if_else(x[i] == 0, 0, y[i-1] + 1)
+      }
+    }
+  }
+  return(y)
+}
+
+convert_to_dec_deg <- function (dd, mm = 0 , ss = 0, dir) {
+  if(missing(dd))  stop("dd must be supplied")
+  if(!missing(dir)) {
+    dir <- toupper(dir)
+    if(!all(na.omit(dir) %in% c("E", "W", "N", "S"))) stop("dir must only contain direction letters E, W, N or S")
+    if(any(na.omit(dd) < 0)) stop("dd must be positive if dir is supplied") 
+  }
+  if(!all(mm >= 0 & mm <= 60, na.rm = TRUE)) stop("mm must be between 0 and 60")
+  if(!all(ss >= 0 & ss <= 60, na.rm = TRUE)) stop("ss must be between 0 and 60")
+  sgn <- ifelse(is.na(dir), NA, ifelse(dir %in% c("S", "W"), -1, 1))
+  decdeg <- (dd + ((mm * 60) + ss)/3600) * sgn
+  return(decdeg)
 }

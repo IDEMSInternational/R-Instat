@@ -24,6 +24,13 @@ Public Class RCodeStructure
     Public strAssignToGraph As String
     Public strAssignToSurv As String
     Public strAssignToTable As String
+
+
+    ' If true then a list of data frames is being assigned, otherwise a single data frame
+    Public bDataFrameList As Boolean = False
+    ' Optional R character vector to give names of new data frames if data frame list is not named
+    Public strDataFrameNames As String
+
     'These AssingTo's are only relevant in the string case, as RFunction and ROperator have internal equivalents.
     'If they are empty, the output Of the command Is Not linked To an R-instat object.
     'If they are non-empty, that gives the name of the R-instat Object fields it needs to be linked with.
@@ -79,7 +86,9 @@ Public Class RCodeStructure
     End Sub
 
     'Most methods from RFunction/ROperator have been moved here
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempSurv As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True)
+
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempSurv As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True, Optional bDataFrameList As Boolean = False, Optional strDataFrameNames As String = "")
+
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -96,6 +105,7 @@ Public Class RCodeStructure
         If Not strTempSurv = "" Then
             strAssignToSurv = strTempSurv
         End If
+
         If Not strTempTable = "" Then
             strAssignToTable = strTempTable
         End If
@@ -105,6 +115,9 @@ Public Class RCodeStructure
         Me.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
         Me.bInsertColumnBefore = bInsertColumnBefore
         Me.bRequireCorrectLength = bRequireCorrectLength
+        Me.bDataFrameList = bDataFrameList
+        Me.strDataFrameNames = strDataFrameNames
+
     End Sub
 
     Public Sub RemoveAssignTo()
@@ -142,7 +155,10 @@ Public Class RCodeStructure
         End If
 
         If bToBeAssigned Then
-            strScript = strScript & strAssignTo & " <- " & strTemp & Environment.NewLine
+
+            strScript = strScript & ConstructAssignTo(strAssignTo, strTemp) & Environment.NewLine
+            'strScript = strScript & strAssignTo & " <- " & strTemp & Environment.NewLine
+
             If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
                 clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
@@ -157,6 +173,7 @@ Public Class RCodeStructure
                         clsAddColumns.AddParameter("use_col_name_as_prefix", "FALSE")
                     End If
                 End If
+
                 'If bInsertColumnBefore Then
                 '    clsAddColumns.AddParameter("before", "TRUE")
                 'Else
@@ -175,6 +192,7 @@ Public Class RCodeStructure
                         If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                             clsAddColumns.AddParameter("before", "FALSE")
                         End If
+
                     End If
                 End If
                 If Not bRequireCorrectLength Then
@@ -242,9 +260,18 @@ Public Class RCodeStructure
                 strAssignTo = clsGetTables.ToScript()
             ElseIf Not strAssignToDataFrame = "" Then
                 clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
-                clsDataList.SetRCommand("list")
-                clsDataList.AddParameter(strAssignToDataFrame, strAssignTo)
-                clsAddData.AddParameter("data_tables", clsRFunctionParameter:=clsDataList)
+
+                If bDataFrameList Then
+                    clsAddData.AddParameter("data_tables", strAssignTo, iPosition:=0)
+                    If strDataFrameNames <> "" Then
+                        clsAddData.AddParameter("data_names", strDataFrameNames, iPosition:=5)
+                    End If
+                Else
+                    clsDataList.SetRCommand("list")
+                    clsDataList.AddParameter(strAssignToDataFrame, strAssignTo)
+                    clsAddData.AddParameter("data_tables", clsRFunctionParameter:=clsDataList, iPosition:=0)
+                End If
+
                 strScript = strScript & clsAddData.ToScript() & Environment.NewLine
 
                 clsGetData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
@@ -258,6 +285,27 @@ Public Class RCodeStructure
             Return strTemp
         End If
     End Function
+
+
+    'sets assign to , to the last line of strTemp
+    Private Function ConstructAssignTo(strAssignTo As String, strTemp As String) As String
+        'Split strTemp and get the last line then set assign to it then merge the wole string
+        Dim strReconstructed As String = ""
+        Dim strParts As String()
+        If Not String.IsNullOrEmpty(strTemp) Then
+            strParts = strTemp.Split(ControlChars.CrLf.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+            If strParts.Length > 1 Then
+                For i As Integer = 0 To strParts.Length - 2
+                    strReconstructed = strReconstructed & strParts(i) & Environment.NewLine
+                Next
+                strReconstructed = strReconstructed & strAssignTo & " <- " & strParts.Last
+            Else
+                strReconstructed = strAssignTo & " <- " & strTemp
+            End If
+        End If
+        Return strReconstructed
+    End Function
+
 
     Public Overridable Function GetParameter(strName As String) As RParameter
         Return New RParameter
@@ -453,6 +501,8 @@ Public Class RCodeStructure
         clsTempCode.strAssignToGraph = strAssignToGraph
         clsTempCode.strAssignToSurv = strAssignToSurv
         clsTempCode.strAssignToTable = strAssignToTable
+        clsTempCode.bDataFrameList = bDataFrameList
+        clsTempCode.strDataFrameNames = strDataFrameNames
         clsTempCode.bToBeAssigned = bToBeAssigned
         clsTempCode.bIsAssigned = bIsAssigned
         clsTempCode.bAssignToIsPrefix = bAssignToIsPrefix
