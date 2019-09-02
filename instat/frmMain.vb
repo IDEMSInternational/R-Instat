@@ -2124,4 +2124,7 @@ Public Class frmMain
         dlgCumulativeDistribution.ShowDialog()
     End Sub
 
+    Private Sub mnuDescribeVisualizeData_Click(sender As Object, e As EventArgs) Handles mnuDescribeVisualizeData.Click
+        dlgVisualizeData.ShowDialog()
+    End Sub
 End Class

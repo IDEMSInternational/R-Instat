@@ -87,6 +87,7 @@ Partial Class frmMain
         Me.mnuDescribeCombineGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeThemes = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeViewGraph = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeVisualizeData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelProbabilityDistributions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelProbabilityDistributionsShowModel = New System.Windows.Forms.ToolStripMenuItem()
@@ -607,7 +608,7 @@ Partial Class frmMain
         '
         'mnuDescribe
         '
-        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoVariables, Me.mnuDescribeThreeVariable, Me.mnuDescribeSpecific, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph})
+        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoVariables, Me.mnuDescribeThreeVariable, Me.mnuDescribeSpecific, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph, Me.mnuDescribeVisualizeData})
         Me.mnuDescribe.Name = "mnuDescribe"
         resources.ApplyResources(Me.mnuDescribe, "mnuDescribe")
         Me.mnuDescribe.Tag = "Describe"
@@ -874,6 +875,11 @@ Partial Class frmMain
         '
         Me.mnuDescribeViewGraph.Name = "mnuDescribeViewGraph"
         resources.ApplyResources(Me.mnuDescribeViewGraph, "mnuDescribeViewGraph")
+        '
+        'mnuDescribeVisualizeData
+        '
+        Me.mnuDescribeVisualizeData.Name = "mnuDescribeVisualizeData"
+        resources.ApplyResources(Me.mnuDescribeVisualizeData, "mnuDescribeVisualizeData")
         '
         'mnuModel
         '
@@ -4303,4 +4309,5 @@ Partial Class frmMain
     Friend WithEvents mnuModelUseModel As ToolStripMenuItem
     Friend WithEvents mnuClimaticPICSACumExeedenceGraph As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckDataQCTemperatures As ToolStripMenuItem
+    Friend WithEvents mnuDescribeVisualizeData As ToolStripMenuItem
 End Class
