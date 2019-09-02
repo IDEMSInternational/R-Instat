@@ -83,6 +83,7 @@ Public Class DlgDefineClimaticData
 
         ucrReceiverDate.SetIncludedDataTypes({"Date"})
         SetRSelector()
+        ucrBase.clsRsyntax.iCallType = 2
     End Sub
 
     Private Sub SetDefaults()
@@ -200,14 +201,6 @@ Public Class DlgDefineClimaticData
         AutoFillReceivers()
     End Sub
 
-    Private Sub MessageBox()
-        If Not ucrReceiverStationName.IsEmpty Then
-            MsgBox("You have multiple rows with the same dates in one or more stations. Use the Climatic > Check Data > Duplicates dialog to investigate these issues", MsgBoxStyle.Information, Title:="Key")
-        Else
-            MsgBox("You have multiple rows with the same dates. Did you forget to add the station column? Otherwise, use the Climatic > Check Data > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Key")
-        End If
-    End Sub
-
     Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles cmdCheckUnique.Click
         Dim iAnyDuplicated As Integer
 
@@ -222,12 +215,18 @@ Public Class DlgDefineClimaticData
             ucrInputCheckInput.txtInput.BackColor = Color.Yellow
             bIsUnique = False
         ElseIf iAnyDuplicated > 0 Then
-            MessageBox()
-            ucrInputCheckInput.SetName("Column(s) cannot define a key. Entries not unique.")
+            ucrInputCheckInput.SetName("")
             ucrInputCheckInput.txtInput.BackColor = Color.LightCoral
             bIsUnique = False
+            If ucrReceiverStationName.IsEmpty Then
+                ucrInputCheckInput.SetName("Duplicate dates found.")
+                MsgBox("You have multiple rows with the same dates. Did you forget to add the station column? Otherwise, use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+            Else
+                ucrInputCheckInput.SetName("Duplicate dates for station(s) were found.")
+                MsgBox("You have multiple rows with the same dates for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+            End If
         Else
-            ucrInputCheckInput.SetName("Column(s) can define a key.")
+            ucrInputCheckInput.SetName("No duplicate dates.")
             ucrInputCheckInput.txtInput.BackColor = Color.LightGreen
             bIsUnique = True
         End If

@@ -23,7 +23,8 @@ Public Class RLink
     Dim strClimateObjectPath As String = "/ClimateObject/R" 'new climateobject path
     Public strClimateObject As String = "ClimateObject"
     Dim strInstatObjectPath As String = "/InstatObject/R" 'path to the Instat object
-    Public strInstatDataObject As String = "InstatDataObject"
+    Public strInstatDataObject As String = "data_book"
+    Public strDataBookClassName As String = "DataBook"
 
     Private bFirstRCode As Boolean = True
     Private bDebugLogExists As Boolean = False
@@ -64,14 +65,13 @@ Public Class RLink
     Private iWaitDelay As Integer = 2
 
     Private strRVersionMajorRequired As String = "3"
-    Private strRVersionMinorRequired As String = "4"
+    Private strRVersionMinorRequired As String = "6"
 
     Public Function StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True) As Boolean
         Dim strMissingPackages() As String
         Dim expTemp As SymbolicExpression
         Dim strMajor As String = ""
         Dim strMinor As String = ""
-        Dim iMinor2 As Integer
         Dim iCurrentCallType As Integer
         Dim bClose As Boolean = False
 
@@ -80,8 +80,8 @@ Public Class RLink
             clsEngine = REngine.GetInstance()
             clsEngine.Initialize()
         Catch ex As Exception
-            ' Modified message since currently not working for R 3.5.0
-            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4 of R." & vbNewLine & "Note that R-Instat does not currently work with R 3.5.0 or above. Try reruning the installation to install R 3.4.4 or download R 3.4.4 from https://cran.r-project.org/bin/windows/base/old/3.4.4/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
+            ' Modified message since currently we recommend use of R version 3.6.0
+            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 of R." & vbNewLine & "Note that R-Instat does not work with R below 3.5.0. We recommend using R 3.6.0.  Try reruning the installation to install R 3.6.0 or download R 3.6.0 from https://cran.r-project.org/bin/windows/base/old/3.6.0/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
             Application.Exit()
             Environment.Exit(0)
         End Try
@@ -94,16 +94,14 @@ Public Class RLink
             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                 strMinor = expTemp.AsCharacter(0)
             End If
-            ' TEMPORARY strMinor(2) = "4" is required because R 3.4.3 has a bug and so R 3.4.4 is required
-            ' Once R 3.5.1 is released this can be removed. Error message should also be updated.
-            If strMinor.Count >= 3 AndAlso Integer.TryParse(strMinor(2), iMinor2) Then
-                If Not (strMajor = strRVersionMajorRequired AndAlso strMinor.Count > 0 AndAlso strMinor(0) = strRVersionMinorRequired AndAlso iMinor2 >= 4) Then
-                    MsgBox("Your current version of R is outdated or you have R 3.5.0 and above which is currently not supported by R-Instat. You are currently running R version: " & strMajor & "." & strMinor & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4." & vbNewLine & "Try reruning the installation to install R 3.4.4 or download R 3.4.4 from https://cran.r-project.org/bin/windows/base/old/3.4.4/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version not supported.")
+            If strMinor.Count >= 3 Then
+                If Not (strMajor = strRVersionMajorRequired AndAlso strMinor.Count > 0 AndAlso strMinor(0) >= strRVersionMinorRequired) Then
+                    MsgBox("Your current version of R is outdated. You are currently running R version: " & strMajor & "." & strMinor & vbNewLine & "R-Instat requires at least version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 or greater." & vbNewLine & "Try reruning the installation to install an updated version of R or download R from https://cran.r-project.org/bin/windows/base/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version not supported.")
                     Application.Exit()
                     Environment.Exit(0)
                 End If
             Else
-                MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".4." & vbNewLine & "Try uninstalling any versions of R and rerun the installation to install R 3.4.4 or download R 3.4.4 from https://cran.r-project.org/bin/windows/base/old/3.4.4/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version error.")
+                MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0." & vbNewLine & "Try uninstalling any versions of R and rerun the installation to install R 3.6.0 or download R 3.6.0 from https://cran.r-project.org/bin/windows/base/old/3.6.0/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version error.")
                 Application.Exit()
                 Environment.Exit(0)
             End If
@@ -281,7 +279,7 @@ Public Class RLink
         Return lstDataFrameNames
     End Function
 
-    Public Function GetColumnNames(strDataFrameName As String) As List(Of String)
+    Public Function GetColumnNames(strDataFrameName As String, Optional bIncludeHiddenColumns As Boolean = True) As List(Of String)
         Dim chrCurrColumns As CharacterVector = Nothing
         Dim lstCurrColumns As New List(Of String)
         Dim clsGetColumnNames As New RFunction
@@ -290,6 +288,9 @@ Public Class RLink
         If strDataFrameName <> "" AndAlso DataFrameExists(strDataFrameName) Then
             clsGetColumnNames.SetRCommand(strInstatDataObject & "$get_column_names")
             clsGetColumnNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+            If Not bIncludeHiddenColumns Then
+                clsGetColumnNames.AddParameter("exclude", "list(Is_Hidden = TRUE)")
+            End If
             expNames = RunInternalScriptGetValue(clsGetColumnNames.ToScript(), bSilent:=True)
             If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
                 chrCurrColumns = expNames.AsCharacter
@@ -448,7 +449,7 @@ Public Class RLink
         strOutput = ""
 
         If strComment <> "" Then
-            strComment = "# " & strComment
+            strComment = GetFormattedComment(strComment)
             strScriptWithComment = strComment & Environment.NewLine & strScript
         Else
             strScriptWithComment = strScript
@@ -818,7 +819,7 @@ Public Class RLink
         clsSource.AddParameter("file", Chr(34) & "Rsetup.R" & Chr(34))
         clsCreateIO.SetOperation("<-")
         clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
-        clsCreateIO.AddParameter("right", "instat_object$new()", iPosition:=1)
+        clsCreateIO.AddParameter("right", strDataBookClassName & "$new()", iPosition:=1)
 
         strScript = ""
         strScript = strScript & clsSetWd.ToScript() & Environment.NewLine
@@ -829,7 +830,7 @@ Public Class RLink
     End Function
 
     Public Sub CreateNewInstatObject()
-        RunScript(strInstatDataObject & " <- instat_object$new()", strComment:="Defining new Instat Object")
+        RunScript(strInstatDataObject & " <- " & strDataBookClassName & "$new()", strComment:="Defining new Instat Object")
         bInstatObjectExists = True
     End Sub
 
@@ -1431,7 +1432,7 @@ Public Class RLink
 
         clsCreateIO.SetOperation("<-")
         clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
-        clsCreateIO.AddParameter("right", "instat_object$new()", iPosition:=1)
+        clsCreateIO.AddParameter("right", strDataBookClassName & "$new()", iPosition:=1)
 
         bInstatObjectExists = False
         RunScript(clsRm.ToScript(), strComment:="Closing data")
@@ -1445,4 +1446,21 @@ Public Class RLink
         clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
         RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bSeparateThread:=False)
     End Sub
+
+    'construct and format the comment
+    Public Function GetFormattedComment(strComment As String) As String
+        Dim strReconstructedComment As String = ""
+        Dim arrCommentParts As String()
+        If strComment.Length > 0 Then
+            arrCommentParts = strComment.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+            For Each strPart As String In arrCommentParts
+                If strReconstructedComment = "" Then
+                    strReconstructedComment = "# " & strPart
+                Else
+                    strReconstructedComment = strReconstructedComment & Environment.NewLine & "# " & strPart
+                End If
+            Next
+        End If
+        Return strReconstructedComment
+    End Function
 End Class

@@ -1,15 +1,15 @@
-country,country_wb,country_name,country_name_map,cft_pr_country,WBCode,iso3_code,iso2_code,gci2007,coc2007,cpi2007,gci2013,coc2013,cpi2013,gci2015
+country,country_wb,country_name,country_name_map,cft_pr_country,wb_Code,iso3_code,iso2_code,gci_2007,coc_2007,cpi_2007,gci_2013,coc_2013,cpi_2013,gci_2015
 Afghanistan,Afghanistan,Afghanistan,Afghanistan,Afghanistan,AFG,AFG,AF,,-1.5905141680911,1.8,,-1.42642140388489,8,
-Africa,Africa,Africa,Africa,Africa,,,,,,,,,,
+Africa,Africa,Africa,Africa,Africa,"","","",,,,,,,
 Albania,Albania,Albania,Albania,Albania,ALB,ALB,AL,2.1653826338276,-0.659164046048052,2.9,2.912407721875,-0.716584920883179,31,3.08020041032648
 Algeria,Algeria,Algeria,Algeria,Algeria,DZA,DZA,DZ,3.76903319224772,-0.515521677106959,3,2.23960149166667,-0.478770405054092,36,3.0096294245469
-Andean Countrie,Andean Countrie,Andean Countrie,Andean Countrie,Andean Countrie,,,,,,,,,,
+Andean Countrie,Andean Countrie,Andean Countrie,Andean Countrie,Andean Countrie,"","","",,,,,,,
 Angola,Angola,Angola,Angola,Angola,AGO,AGO,AO,,-1.320408322317,2.2,,-1.32479870319366,23,1.98170905191182
 Antigua and Barbuda,Antigua and Bar,Antigua and Barbuda,Antigua and Barbuda,Antigua and Barbuda,ATG,ATG,AG,,1.29827388151318,,,1.28598201274872,,
-Aral Sea,Aral Sea,Aral Sea,Aral Sea,Aral Sea,,,,,,,,,,
+Aral Sea,Aral Sea,Aral Sea,Aral Sea,Aral Sea,"","","",,,,,,,
 Argentina,Argentina,Argentina,Argentina,Argentina,ARG,ARG,AR,2.2921006742618,-0.398080135392146,2.9,1.85321362162162,-0.459178745746613,34,1.73577343966631
 Armenia,Armenia,Armenia,Armenia,Armenia,ARM,ARM,AM,2.35120286185795,-0.663681698579819,3,2.99013207055215,-0.4661023914814,36,3.05024136949768
-Asia,Asia,Asia,Asia,Asia,,,,,,,,,,
+Asia,Asia,Asia,Asia,Asia,"","","",,,,,,,
 Azerbaijan,Azerbaijan,Azerbaijan,Azerbaijan,Azerbaijan,AZE,AZE,AZ,3.05162191192266,-1.01777705197595,2.1,3.58821837591623,-0.901316523551941,28,3.26095312805932
 Bangladesh,Bangladesh,Bangladesh,Bangladesh,Bangladesh,BGD,BGD,BD,2.06174307036247,-1.04698687730798,2,2.23802212580645,-0.890836656093597,27,2.24970353157786
 Barbados,Barbados,Barbados,Barbados,Barbados,BRB,BRB,BB,3.69642857142857,1.33904583459622,6.9,3.72104349908257,1.61007487773895,75,3.33298343066383
@@ -27,11 +27,11 @@ Burundi,Burundi,Burundi,Burundi,Burundi,BDI,BDI,BI,2.87341772151899,-1.116411624
 Cambodia,Cambodia,Cambodia,Cambodia,Cambodia,KHM,KHM,KH,2.49032842449743,-1.08996593601319,2,3.50371762259887,-1.01307034492493,20,2.60929922789388
 Cameroon,Cameroon,Cameroon,Cameroon,Cameroon,CMR,CMR,CM,2.56731526590624,-0.951248026123157,2.4,2.59157113103448,-1.19218444824219,25,2.78076291655746
 Cape Verde,Cabo Verde,Cape Verde,Cape Verde,Cape Verde,CPV,CPV,CV,,0.787132380574862,4.9,3.45325361256544,0.76906144618988,58,3.41307879970778
-Caribbean,Caribbean,Caribbean,Caribbean,Caribbean,,,,,,,,,,
-Caucasus,Caucasus,Caucasus,Caucasus,Caucasus,,,,,,,,,,
+Caribbean,Caribbean,Caribbean,Caribbean,Caribbean,"","","",,,,,,,
+Caucasus,Caucasus,Caucasus,Caucasus,Caucasus,"","","",,,,,,,
 Central African Republic,Central African,Central African Republic,Central African Republic,Central African Republic,CAF,CAF,CF,,-0.97239702284773,2,,-1.04145860671997,25,
-Central America,Central America,Central America,Central America,Central America,,,,,,,,,,
-Central Asia,Central Asia,Central Asia,Central Asia,Central Asia,,,,,,,,,,
+Central America,Central America,Central America,Central America,Central America,"","","",,,,,,,
+Central Asia,Central Asia,Central Asia,Central Asia,Central Asia,"","","",,,,,,,
 Chad,Chad,Chad,Chad,Chad,TCD,TCD,TD,2.32025815494749,-1.30060112466011,1.8,2.42564606192661,-1.28494489192963,19,2.127925
 Chile,Chile,Chile,Chile,Chile,CHL,CHL,CL,4.07357073822327,1.32648491713574,7,4.27121668627451,1.51704454421997,71,3.98186103331023
 China,China,China,China,China,CHN,CHN,CN,3.00893020642494,-0.594141237807882,3.5,3.83464034898786,-0.354171365499496,40,4.10182220264304
@@ -47,8 +47,8 @@ Democratic Republic of the Congo,"Congo, Democrat","Congo, Dem. Rep.",Democratic
 Djibouti,Djibouti,Djibouti,Djibouti,Djibouti,DJI,DJI,DJ,,-0.467931667195227,2.9,,-0.440679520368576,36,
 Dominica,Dominica,Dominica,Dominica,Dominica,DMA,DMA,DM,,0.665700099621334,5.6,,0.693847358226776,58,
 Dominican Republic,Dominican Repub,Dominican Republic,Dominican Republic,Dominican Republic,DOM,DOM,DO,1.77693370949753,-0.679177040780055,3,1.79806153103448,-0.846265912055969,29,2.18865864612385
-East Asia and P,East Asia and P,East Asia and Pacific,East Asia and Pacific,East Asia and Pacific,,,,,,,,,,
-Eastern Africa,Eastern Africa,Eastern Africa,Eastern Africa,Eastern Africa,,,,,,,,,,
+East Asia and P,East Asia and P,East Asia and Pacific,East Asia and Pacific,East Asia and Pacific,"","","",,,,,,,
+Eastern Africa,Eastern Africa,Eastern Africa,Eastern Africa,Eastern Africa,"","","",,,,,,,
 Ecuador,Ecuador,Ecuador,Ecuador,Ecuador,ECU,ECU,EC,1.8766662847978,-0.87424030686369,2.1,2.946051,-0.609578251838684,35,
 Egypt,"Egypt, Arab Rep","Egypt, Arab Rep.",Egypt,"Egypt, Arab Republic of",EGY,EGY,EG,3.34078008684864,-0.674316818772814,2.9,2.99606045051546,-0.599026024341583,32,3.73548763831749
 El Salvador,El Salvador,El Salvador,El Salvador,El Salvador,SLV,SLV,SV,3.65206993688565,-0.286799140164089,4,2.41655212903226,-0.348085403442383,38,2.94280835359891
@@ -56,7 +56,7 @@ Equatorial Guinea,Equatorial Guin,Equatorial Guinea,Equatorial Guinea,Equatorial
 Eritrea,Eritrea,Eritrea,Eritrea,Eritrea,ERI,ERI,ER,,-0.494970017520235,2.8,,-0.794702708721161,20,
 Estonia,Estonia,Estonia,Estonia,Estonia,EST,EST,EE,3.60521744878819,0.913658668625523,6.5,4.10500969044944,1.10913991928101,68,4.09966183586122
 Ethiopia,Ethiopia,Ethiopia,Ethiopia,Ethiopia,ETH,ETH,ET,2.95260297900013,-0.606461986900203,2.4,3.0051419,-0.502808570861816,33,2.82374215299909
-Europe and Cent,Europe and Cent,Europe and Central Asia,Europe and Central Asia,Europe and Central Asia,,,,,,,,,,
+Europe and Cent,Europe and Cent,Europe and Central Asia,Europe and Central Asia,Europe and Central Asia,"","","",,,,,,,
 Fiji,Fiji,Fiji,Fiji,Fiji,FJI,FJI,FJ,,-0.364761754130136,,,-0.403245151042938,,
 Gabon,Gabon,Gabon,Gabon,Gabon,GAB,GAB,GA,,-1.03289243039178,3.3,3.032639,-0.557250618934631,34,3.14905122076411
 Gambia,"Gambia, The","Gambia, The",Gambia,"Gambia, The",GMB,GMB,GM,3.39077694235589,-0.771498926603948,2.3,4.34338373483146,-0.700936794281006,28,3.86976060150313
@@ -83,7 +83,7 @@ Kiribati,Kiribati,Kiribati,Kiribati,Kiribati,KIR,KIR,KI,,0.139084295220506,3.3,,
 Kosovo,Kosovo,Kosovo,Kosovo,Kosovo,KSV,KOS,KS,,-0.75909105324757,,,-0.64154326915741,33,
 Kyrgyzstan,Kyrgyz Republic,Kyrgyz Republic,Kyrgyzstan,Kyrgyz Republic,KGZ,KGZ,KG,2.21377124747911,-1.24066013721867,2.1,2.19715915,-1.12493538856506,24,2.3297041749545
 Lao People's Democratic Republic,Lao People's De,Lao PDR,Laos,Lao People's Democratic Republic,LAO,LAO,LA,,-1.28441339266493,1.9,,-0.899369776248932,26,3.68533731453368
-Latin America,Latin America,Latin America,Latin America,Latin America,,,,,,,,,,
+Latin America,Latin America,Latin America,Latin America,Latin America,"","","",,,,,,,
 Latvia,Latvia,Latvia,Latvia,Latvia,LVA,LVA,LV,2.99242306133351,0.248064501656104,4.8,3.09809762627737,0.265698671340942,53,3.0532335759691
 Lebanon,Lebanon,Lebanon,Lebanon,Lebanon,LBN,LBN,LB,,-0.892340740524495,3,1.97054850697674,-0.924912393093109,28,1.73789298567968
 Lesotho,Lesotho,Lesotho,Lesotho,Lesotho,LSO,LSO,LS,2.86486486486487,-0.120186358302042,3.3,2.49392115297619,0.229800209403038,49,3.65926901628164
@@ -97,22 +97,22 @@ Maldives,Maldives,Maldives,Maldives,Maldives,MDV,MDV,MV,,-0.83343581502996,3.3,,
 Mali,Mali,Mali,Mali,Mali,MLI,MLI,ML,3.17359049207673,-0.335154326368211,2.7,2.75394873636364,-0.725320279598236,28,2.74295602293142
 Mauritania,Mauritania,Mauritania,Mauritania,Mauritania,MRT,MRT,MR,3.64285714285714,-0.50439882982934,2.6,2.09865916797386,-0.679253578186035,30,2.27446291124707
 Mauritius,Mauritius,Mauritius,Mauritius,Mauritius,MUS,MUS,MU,3.11779014636157,0.494920120415209,4.7,3.20787950591398,0.302493423223496,52,3.03560239162373
-Mekong,Mekong,Mekong,Mekong,Mekong,,,,,,,,,,
+Mekong,Mekong,Mekong,Mekong,Mekong,"","","",,,,,,,
 Mexico,Mexico,Mexico,Mexico,Mexico,MEX,MEX,MX,2.78333392938035,-0.260690006467443,3.5,3.0009470835443,-0.476363927125931,34,2.67969095208111
-Middle East and,Middle East and,Middle East and North Africa,Middle East and North Africa,Middle East and North Africa,,,,,,,,,,
+Middle East and,Middle East and,Middle East and North Africa,Middle East and North Africa,Middle East and North Africa,"","","",,,,,,,
 "Moldova, Republic of",Moldova,Moldova,Moldova,Moldova,MDA,MDA,MD,,-0.60159262822862,2.8,2.46311778181818,-0.739164352416992,35,2.25672010985833
 Mongolia,Mongolia,Mongolia,Mongolia,Mongolia,MNG,MNG,MN,2.24149322388358,-0.65614289988956,3,2.34871382130178,-0.462237387895584,38,2.29834573413042
 Montenegro,Montenegro,Montenegro,Montenegro,Montenegro,MNE,MNE,ME,,-0.306316420429428,3.3,4.02656862467532,-0.247479870915413,44,3.46916488027771
 Morocco,Morocco,Morocco,Morocco,Morocco,MAR,MAR,MA,3.22628200583536,-0.323179534380086,3.5,3.59629550298507,-0.356160014867783,37,3.48481841540177
 Mozambique,Mozambique,Mozambique,Mozambique,Mozambique,MOZ,MOZ,MZ,2.79847144994529,-0.494207466370053,2.8,2.92785783448276,-0.649699091911316,30,2.52892300863603
 Myanmar,Myanmar,Myanmar,Myanmar,Myanmar,MMR,MMR,MM,,-1.56526265389362,1.4,,-1.06778883934021,21,2.2759221195066
-Namibia,Namibia,Namibia,Namibia,Namibia,NAM,NAM,NA,2.83874079715664,0.262119338574235,4.5,2.8107656611465,0.295800894498825,48,2.8742856383751
+Namibia,Namibia,Namibia,Namibia,Namibia,NAM,NAM,,2.83874079715664,0.262119338574235,4.5,2.8107656611465,0.295800894498825,48,2.8742856383751
 Nepal,Nepal,Nepal,Nepal,Nepal,NPL,NPL,NP,2.72222222222222,-0.714512254804655,2.5,3.00098415384615,-0.67726731300354,31,2.78838308355325
 Nicaragua,Nicaragua,Nicaragua,Nicaragua,Nicaragua,NIC,NIC,NI,2.60267197522672,-0.764142461056763,2.6,2.66472119117647,-0.731063544750214,28,2.60103339851761
 Niger,Niger,Niger,Niger,Niger,NER,NER,NE,,-0.776496225093261,2.6,,-0.570109903812408,34,
 Nigeria,Nigeria,Nigeria,Nigeria,Nigeria,NGA,NGA,NG,2.69451786788188,-0.983503411394053,2.2,2.45144442523364,-1.19670653343201,25,2.29041862231942
-OECS Countries,OECS Countries,OECS Countries,OECS Countries,OECS Countries,,,,,,,,,,
-Pacific Islands,Pacific Islands,Pacific Islands,Pacific Islands,Pacific Islands,,,,,,,,,,
+OECS Countries,OECS Countries,OECS Countries,OECS Countries,OECS Countries,"","","",,,,,,,
+Pacific Islands,Pacific Islands,Pacific Islands,Pacific Islands,Pacific Islands,"","","",,,,,,,
 Pakistan,Pakistan,Pakistan,Pakistan,Pakistan,PAK,PAK,PK,3.04765729171266,-0.739817094994624,2.4,2.36539215,-0.933546960353851,28,2.62611195393281
 Palau,Palau,Palau,Palau,Palau,PLW,PLW,PW,,,,,-0.57633638381958,,
 Panama,Panama,Panama,Panama,Panama,PAN,PAN,PA,3.17942291970999,-0.354772189689485,3.2,2.64616211535581,-0.361370801925659,35,2.79748251885398
@@ -121,7 +121,7 @@ Paraguay,Paraguay,Paraguay,Paraguay,Paraguay,PRY,PRY,PY,1.80378033205619,-1.2441
 Peru,Peru,Peru,Peru,Peru,PER,PER,PE,2.79307083376169,-0.260524325273502,3.5,2.93767831111111,-0.437862247228622,38,2.65100728253177
 Philippines,Philippines,Philippines,Philippines,Philippines,PHL,PHL,PH,2.51641939081469,-0.697716481214942,2.5,2.83243531333333,-0.400744020938873,36,3.1325949579076
 Poland,Poland,Poland,Poland,Poland,POL,POL,PL,2.98497027217921,0.192792969491779,4.2,3.29505869158416,0.548211872577667,60,3.12602941699757
-Red Sea and Gul,Red Sea and Gul,Red Sea and Gulf of Aden,Red Sea and Gulf of Aden,Red Sea and Gulf of Aden,,,,,,,,,,
+Red Sea and Gul,Red Sea and Gul,Red Sea and Gulf of Aden,Red Sea and Gulf of Aden,Red Sea and Gulf of Aden,"","","",,,,,,,
 Romania,Romania,Romania,Romania,Romania,ROM,ROU,RO,2.34495859638282,-0.17075448160132,3.7,2.37950785625,-0.203381642699242,43,2.54502421403163
 Russian Federation,Russian Federat,Russian Federation,Russia,Russian Federation,RUS,RUS,RU,2.21208477449634,-0.949859764672787,2.3,2.37992217433628,-0.993410229682922,28,2.82043483191593
 Rwanda,Rwanda,Rwanda,Rwanda,Rwanda,RWA,RWA,RW,,0.0142278635813903,2.8,5.135748,0.647295117378235,53,4.500766
@@ -138,10 +138,10 @@ Slovakia,Slovak Republic,Slovak Republic,Slovakia,Slovak Republic,SVK,SVK,SK,2.6
 Slovenia,Slovenia,Slovenia,Slovenia,Slovenia,SVN,SVN,SI,3.27651859833972,0.980720477046333,6.6,2.62787144834123,0.701808333396912,57,2.55647093689775
 Solomon Islands,Solomon Islands,Solomon Islands,Solomon Islands,Solomon Islands,SLB,SLB,SB,,-0.629218936663624,2.8,,-0.451545119285584,,
 South Africa,South Africa,South Africa,South Africa,South Africa,ZAF,ZAF,ZA,3.09224154002026,0.219553841330232,5.1,2.56765781176471,-0.119706742465496,42,2.60408475798551
-South Asia,South Asia,South Asia,South Asia,South Asia,,,,,,,,,,
-South Eastern E,South Eastern E,South Eastern Europe and Balkans,South Eastern Europe and Balkans,South Eastern Europe and Balkans,,,,,,,,,,
+South Asia,South Asia,South Asia,South Asia,South Asia,"","","",,,,,,,
+South Eastern E,South Eastern E,South Eastern Europe and Balkans,South Eastern Europe and Balkans,South Eastern Europe and Balkans,"","","",,,,,,,
 South Sudan,South Sudan,South Sudan,South Sudan,South Sudan,SSD,SSD,SS,,,,,-1.35559916496277,14,
-Southern Africa,Southern Africa,Southern Africa,Southern Africa,Southern Africa,,,,,,,,,,
+Southern Africa,Southern Africa,Southern Africa,Southern Africa,Southern Africa,"","","",,,,,,,
 Sri Lanka,Sri Lanka,Sri Lanka,Sri Lanka,Sri Lanka,LKA,LKA,LK,2.50543941797183,-0.0976835159907206,3.2,3.554324,-0.227087020874023,37,2.68119429778758
 Sudan,Sudan,Sudan,Sudan,Sudan,SDN,SDN,SD,,-1.34324250739115,1.8,,-1.48824656009674,11,
 Swaziland,Swaziland,Swaziland,Swaziland,Swaziland,SWZ,SWZ,SZ,,-0.240784540482049,3.3,2.55937132307692,-0.336667001247406,39,3.16012175
@@ -165,7 +165,7 @@ Vanuatu,Vanuatu,Vanuatu,Vanuatu,Vanuatu,VUT,VUT,VU,,0.277759476032107,3.1,,0.376
 Venezuela,"Venezuela, Repu","Venezuela, RB",Venezuela,"Venezuela, Republica Bolivariana de",VEN,VEN,VE,1.68210363893532,-1.01215274408563,2,1.86367575357143,-1.27520513534546,20,1.48031642554782
 Viet Nam,Vietnam,Vietnam,Vietnam,Vietnam,VNM,VNM,VN,2.8193687067775,-0.635259008448332,2.6,2.95760805,-0.5340256690979,31,3.03534609324309
 West Bank and Gaza,West Bank and G,West Bank and Gaza,West Bank and Gaza,West Bank and Gaza,WBG,WBG,WG,,-0.812915766434853,,,-0.714735448360443,,
-World,World,World,World,World,,,,,,,,,,
+World,World,World,World,World,"","","",,,,,,,
 Yemen,"Yemen, Republic","Yemen, Rep.",Yemen,"Yemen, Republic of",YEM,YEM,YE,,-0.694189352561652,2.5,2.12931777142857,-1.20271563529968,18,2.05693102289063
 Zambia,Zambia,Zambia,Zambia,Zambia,ZMB,ZMB,ZM,2.22105263157895,-0.57105539753793,2.6,3.03368416263736,-0.3868627846241,38,3.40264942368421
 Zimbabwe,Zimbabwe,Zimbabwe,Zimbabwe,Zimbabwe,ZWE,ZWE,ZW,2.23040364583333,-1.35760496237759,2.1,2.49432466666667,-1.36513996124268,21,2.48040154011407

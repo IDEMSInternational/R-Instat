@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblFactorToUnstackBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 63</value>
+    <value>272, 63</value>
   </data>
   <data name="lblFactorToUnstackBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 13</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 154</value>
+    <value>269, 154</value>
   </data>
   <data name="lblCarryColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 13</value>
@@ -190,7 +190,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoSingle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>46, 13</value>
+    <value>47, 13</value>
   </data>
   <data name="rdoSingle.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 28</value>
@@ -265,7 +265,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoRestoreHierarchy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>244, 13</value>
+    <value>243, 13</value>
   </data>
   <data name="rdoRestoreHierarchy.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 28</value>
@@ -298,7 +298,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMultipleColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 156</value>
+    <value>272, 156</value>
   </data>
   <data name="lblMultipleColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 13</value>
@@ -370,10 +370,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>416, 370</value>
+    <value>414, 370</value>
   </data>
   <data name="ucrReceiverColumnToUnstack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 125</value>
+    <value>272, 125</value>
   </data>
   <data name="ucrReceiverColumnToUnstack.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -403,7 +403,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblColumnToUnstack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 110</value>
+    <value>272, 110</value>
   </data>
   <data name="lblColumnToUnstack.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 13</value>
@@ -427,7 +427,7 @@
     <value>1</value>
   </data>
   <data name="ucrReceiverFactorToUnstackby.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 78</value>
+    <value>272, 78</value>
   </data>
   <data name="ucrReceiverFactorToUnstackby.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -451,7 +451,7 @@
     <value>8</value>
   </data>
   <data name="ucrSelectorForUnstack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 59</value>
+    <value>9, 59</value>
   </data>
   <data name="ucrSelectorForUnstack.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -553,7 +553,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 169</value>
+    <value>272, 169</value>
   </data>
   <data name="ucrReceiverCarryColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
