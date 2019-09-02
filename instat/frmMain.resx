@@ -2985,6 +2985,12 @@
   <data name="mnuPrepareColumnDate.Text" xml:space="preserve">
     <value>Column: Date</value>
   </data>
+  <data name="mnuPrepareColumnDefineConvertColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 26</value>
+  </data>
+  <data name="mnuPrepareColumnDefineConvertColumns.Text" xml:space="preserve">
+    <value>Convert Columns...</value>
+  </data>
   <data name="mnuPrepareColumnDefine.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 26</value>
   </data>
@@ -9022,6 +9028,12 @@
     <value>ExportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnDefineConvertColumns.Name" xml:space="preserve">
+    <value>mnuPrepareColumnDefineConvertColumns</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnDefineConvertColumns.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

@@ -581,6 +581,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.mnuPrepareColumnDefineConvertColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3020,6 +3021,7 @@ Partial Class frmMain
         '
         'mnuPrepareColumnDefine
         '
+        Me.mnuPrepareColumnDefine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnDefineConvertColumns})
         Me.mnuPrepareColumnDefine.Name = "mnuPrepareColumnDefine"
         resources.ApplyResources(Me.mnuPrepareColumnDefine, "mnuPrepareColumnDefine")
         '
@@ -3724,6 +3726,11 @@ Partial Class frmMain
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
         '
+        'mnuPrepareColumnDefineConvertColumns
+        '
+        Me.mnuPrepareColumnDefineConvertColumns.Name = "mnuPrepareColumnDefineConvertColumns"
+        resources.ApplyResources(Me.mnuPrepareColumnDefineConvertColumns, "mnuPrepareColumnDefineConvertColumns")
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4310,4 +4317,5 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticPICSACumExeedenceGraph As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckDataQCTemperatures As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnDefine As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnDefineConvertColumns As ToolStripMenuItem
 End Class
