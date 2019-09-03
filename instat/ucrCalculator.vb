@@ -1624,10 +1624,15 @@ Public Class ucrCalculator
 
     Private Sub cmdWakefield_Month_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Month.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_month(n = , x = month.name , prob = NULL , name = ""Month"")", 49)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::month(n = , x = month.name , prob = NULL , name = ""Month"")", 49)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_month()", 1)
+            If ucrSelectorForCalculations.ucrAvailableDataFrames.iDataFrameLength <> 0 Then
+                ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::month(n=" & ucrSelectorForCalculations.ucrAvailableDataFrames.iDataFrameLength & ")", 1)
+            Else
+                ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::month()", 1)
+            End If
         End If
+
     End Sub
 
     Private Sub cmdName_Click(sender As Object, e As EventArgs) Handles cmdName.Click
@@ -1650,7 +1655,11 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::political((n = , x = c(""Democrat"" , ""Republican"" , ""Constitution"" , ""Libertarian"" , ""Green"") , prob = c(0.577269133302094 , 0.410800432748879 , 0.00491084954793489 , 0.00372590303330866 , 0.0032936813677832) , name = ""Political"")", 215)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::political()", 1)
+            If ucrSelectorForCalculations.ucrAvailableDataFrames.iDataFrameLength <> 0 Then
+                ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::political(n=" & ucrSelectorForCalculations.ucrAvailableDataFrames.iDataFrameLength & ")", 1)
+            Else
+                ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::political()", 1)
+            End If
         End If
     End Sub
 
@@ -1706,7 +1715,12 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex(n = , x = c(""Male"" , ""Female"") , prob = c(0.51219512195122 , 0.48780487804878) , name = ""Sex"")", 91)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex()", 1)
+            If ucrSelectorForCalculations.ucrAvailableDataFrames.iDataFrameLength <> 0 Then
+                ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex(n=" & ucrSelectorForCalculations.ucrAvailableDataFrames.iDataFrameLength & ")", 1)
+            Else
+                ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex()", 1)
+            End If
+
         End If
     End Sub
 
@@ -1714,7 +1728,12 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::smokes(n = , prob = c(0.822 , 0.178) , name = ""Smokes"")", 45)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::smokes()", 1)
+            If ucrSelectorForCalculations.ucrAvailableDataFrames.iDataFrameLength <> 0 Then
+                ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::smokes(n=" & ucrSelectorForCalculations.ucrAvailableDataFrames.iDataFrameLength & ")", 1)
+            Else
+                ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::smokes()", 1)
+            End If
+
         End If
     End Sub
 
@@ -1730,7 +1749,11 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::state(n = , x = datasets::state.name , prob = wakefield::state_populations[[""Proportion""]], name = ""State"")", 98)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::state()", 1)
+            If ucrSelectorForCalculations.ucrAvailableDataFrames.iDataFrameLength <> 0 Then
+                ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::state(n=" & ucrSelectorForCalculations.ucrAvailableDataFrames.iDataFrameLength & ")", 1)
+            Else
+                ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::state()", 1)
+            End If
         End If
     End Sub
 
@@ -1746,7 +1769,11 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::upper(n = , k = 5, x = LETTERS , prob = NULL, name = ""Upper"")", 52)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::upper()", 1)
+            If ucrSelectorForCalculations.ucrAvailableDataFrames.iDataFrameLength <> 0 Then
+                ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::upper(n=" & ucrSelectorForCalculations.ucrAvailableDataFrames.iDataFrameLength & ")", 1)
+            Else
+                ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::upper()", 1)
+            End If
         End If
     End Sub
 
@@ -1762,7 +1789,11 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::year(n = , x = 1996:as.numeric(format(Sys.Date() , ""%Y"")) , prob = NULL , name = ""Year"")", 80)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::year()", 1)
+            If ucrSelectorForCalculations.ucrAvailableDataFrames.iDataFrameLength <> 0 Then
+                ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::year(n=" & ucrSelectorForCalculations.ucrAvailableDataFrames.iDataFrameLength & ")", 1)
+            Else
+                ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::year()", 1)
+            End If
         End If
     End Sub
 
