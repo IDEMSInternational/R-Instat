@@ -127,10 +127,10 @@ Partial Class dlgVisualizeData
         Me.rdoWholeDataFrame.AutoSize = True
         Me.rdoWholeDataFrame.Location = New System.Drawing.Point(243, 80)
         Me.rdoWholeDataFrame.Name = "rdoWholeDataFrame"
-        Me.rdoWholeDataFrame.Size = New System.Drawing.Size(108, 17)
+        Me.rdoWholeDataFrame.Size = New System.Drawing.Size(80, 17)
         Me.rdoWholeDataFrame.TabIndex = 8
         Me.rdoWholeDataFrame.TabStop = True
-        Me.rdoWholeDataFrame.Text = "Whole Dataframe"
+        Me.rdoWholeDataFrame.Text = "Data Frame"
         Me.rdoWholeDataFrame.UseVisualStyleBackColor = True
         '
         'rdoSelectedColumn
@@ -138,10 +138,10 @@ Partial Class dlgVisualizeData
         Me.rdoSelectedColumn.AutoSize = True
         Me.rdoSelectedColumn.Location = New System.Drawing.Point(243, 103)
         Me.rdoSelectedColumn.Name = "rdoSelectedColumn"
-        Me.rdoSelectedColumn.Size = New System.Drawing.Size(105, 17)
+        Me.rdoSelectedColumn.Size = New System.Drawing.Size(113, 17)
         Me.rdoSelectedColumn.TabIndex = 9
         Me.rdoSelectedColumn.TabStop = True
-        Me.rdoSelectedColumn.Text = "Selected Column"
+        Me.rdoSelectedColumn.Text = "Selected Variables"
         Me.rdoSelectedColumn.UseVisualStyleBackColor = True
         '
         'ucrReceiverVisualizeData
