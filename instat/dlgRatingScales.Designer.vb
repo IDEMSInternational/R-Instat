@@ -231,6 +231,7 @@ Partial Class dlgRatingScales
         '
         'ucrSelectorRatingScale
         '
+        Me.ucrSelectorRatingScale.bDropUnusedFilterLevels = False
         Me.ucrSelectorRatingScale.bShowHiddenColumns = False
         Me.ucrSelectorRatingScale.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorRatingScale, "ucrSelectorRatingScale")

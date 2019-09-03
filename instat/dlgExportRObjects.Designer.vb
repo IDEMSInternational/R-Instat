@@ -64,6 +64,7 @@ Partial Class dlgExportRObjects
         '
         'ucrSelectorObjects
         '
+        Me.ucrSelectorObjects.bDropUnusedFilterLevels = False
         Me.ucrSelectorObjects.bShowHiddenColumns = False
         Me.ucrSelectorObjects.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorObjects, "ucrSelectorObjects")
