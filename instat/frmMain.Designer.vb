@@ -260,7 +260,6 @@ Partial Class frmMain
 
         Me.mnuClimaticPICSATemperature = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSARainfall = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPICSACumulative = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSACrops = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCMSAF = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCMSAFPlotRegion = New System.Windows.Forms.ToolStripMenuItem()
@@ -1818,12 +1817,7 @@ Partial Class frmMain
         Me.mnuClimaticPICSACumExeedenceGraph.Name = "mnuClimaticPICSACumExeedenceGraph"
         resources.ApplyResources(Me.mnuClimaticPICSACumExeedenceGraph, "mnuClimaticPICSACumExeedenceGraph")
         '
-        'mnuClimaticPICSATemperature
 
-        '
-        Me.mnuClimaticPICSACumulative.Name = "mnuClimaticPICSACumulative"
-        resources.ApplyResources(Me.mnuClimaticPICSACumulative, "mnuClimaticPICSACumulative")
-        '
         'mnuClimaticPICSACrops
         '
         Me.mnuClimaticPICSACrops.Name = "mnuClimaticPICSACrops"

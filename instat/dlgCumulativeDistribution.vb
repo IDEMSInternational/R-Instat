@@ -133,10 +133,13 @@ Public Class dlgCumulativeDistribution
         clsRaesFunction.SetRCommand("aes")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
 
-
         clsRgeomCumDistFunction.SetPackageName("ggplot2")
         clsRgeomCumDistFunction.SetRCommand("stat_ecdf")
         clsRgeomCumDistFunction.AddParameter("pad", Chr(34) & "FALSE" & Chr(34))
+
+        clsScaleYReverseFunc.SetPackageName("ggplot2")
+        clsScaleYReverseFunc.SetRCommand("scale_y_reverse")
+        clsScaleYReverseFunc.AddParameter("breaks", "seq(1,0,-0.25), labels = seq(0,1,0.25)")
 
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
@@ -201,9 +204,6 @@ Public Class dlgCumulativeDistribution
 
         If rdoExceedance.Checked Then
             clsBaseOperator.RemoveParameterByName("Yscales")
-            clsScaleYReverseFunc.SetPackageName("ggplot2")
-            clsScaleYReverseFunc.SetRCommand("scale_y_reverse")
-            clsScaleYReverseFunc.AddParameter("breaks", "seq(1,0,-0.25), labels = seq(0,1,0.25)")
             clsBaseOperator.AddParameter("reverseYscales", clsRFunctionParameter:=clsScaleYReverseFunc)
         Else
             clsBaseOperator.RemoveParameterByName("reverseYscales")
