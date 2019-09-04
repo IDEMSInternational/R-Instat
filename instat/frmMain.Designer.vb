@@ -3740,8 +3740,8 @@ Partial Class frmMain
         '
         'mnuPrepareColumnDefineCircular
         '
-        Me.mnuPrepareColumnDefineCircular.Name = "mnuPrepareColumnDefineCircular"
         resources.ApplyResources(Me.mnuPrepareColumnDefineCircular, "mnuPrepareColumnDefineCircular")
+        Me.mnuPrepareColumnDefineCircular.Name = "mnuPrepareColumnDefineCircular"
         '
         'frmMain
         '
