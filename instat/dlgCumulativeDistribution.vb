@@ -86,8 +86,13 @@ Public Class dlgCumulativeDistribution
         ucrVariablesAsFactorforCumDist.SetParameterIsString()
         ucrVariablesAsFactorforCumDist.bWithQuotes = False
 
-
-
+        ucrNudFrom.SetParameter(New RParameter("from"))
+        ucrNudFrom.SetMinMax(0, 0)
+        ucrNudTo.SetParameter(New RParameter("to"))
+        ucrNudBy.SetParameter(New RParameter("by"))
+        ucrNudBy.DecimalPlaces = 2
+        ucrNudBy.Increment = 0.01
+        ucrNudBy.SetMinMax(0, 1)
 
         ucrChkCountsOnYAxis.SetText("Counts on Y Axis")
 
