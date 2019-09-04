@@ -463,6 +463,9 @@ Partial Class frmMain
         Me.mnuPrepareColumnDateMakeTime = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnDateUseTime = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnDefine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnDefineConvertColumns = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator55 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuPrepareColumnDefineCircular = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnReshape = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnReshapeColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnReshapeGeneralSummaries = New System.Windows.Forms.ToolStripMenuItem()
@@ -581,9 +584,6 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuPrepareColumnDefineConvertColumns = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator55 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuPrepareColumnDefineCircular = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3027,6 +3027,21 @@ Partial Class frmMain
         Me.mnuPrepareColumnDefine.Name = "mnuPrepareColumnDefine"
         resources.ApplyResources(Me.mnuPrepareColumnDefine, "mnuPrepareColumnDefine")
         '
+        'mnuPrepareColumnDefineConvertColumns
+        '
+        Me.mnuPrepareColumnDefineConvertColumns.Name = "mnuPrepareColumnDefineConvertColumns"
+        resources.ApplyResources(Me.mnuPrepareColumnDefineConvertColumns, "mnuPrepareColumnDefineConvertColumns")
+        '
+        'ToolStripSeparator55
+        '
+        Me.ToolStripSeparator55.Name = "ToolStripSeparator55"
+        resources.ApplyResources(Me.ToolStripSeparator55, "ToolStripSeparator55")
+        '
+        'mnuPrepareColumnDefineCircular
+        '
+        resources.ApplyResources(Me.mnuPrepareColumnDefineCircular, "mnuPrepareColumnDefineCircular")
+        Me.mnuPrepareColumnDefineCircular.Name = "mnuPrepareColumnDefineCircular"
+        '
         'mnuPrepareColumnReshape
         '
         Me.mnuPrepareColumnReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnReshapeColumnSummaries, Me.mnuPrepareColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuPrepareColumnReshapeStack, Me.mnuPrepareColumnReshapeUnstack, Me.mnuPrepareColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuPrepareAppendDataFrame, Me.mnuPrepareColumnReshapeSubset, Me.mnuPrepareColumnReshapeRandomSubset, Me.mnuPrepareColumnReshapeTranspose})
@@ -3727,21 +3742,6 @@ Partial Class frmMain
         Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
-        '
-        'mnuPrepareColumnDefineConvertColumns
-        '
-        Me.mnuPrepareColumnDefineConvertColumns.Name = "mnuPrepareColumnDefineConvertColumns"
-        resources.ApplyResources(Me.mnuPrepareColumnDefineConvertColumns, "mnuPrepareColumnDefineConvertColumns")
-        '
-        'ToolStripSeparator55
-        '
-        Me.ToolStripSeparator55.Name = "ToolStripSeparator55"
-        resources.ApplyResources(Me.ToolStripSeparator55, "ToolStripSeparator55")
-        '
-        'mnuPrepareColumnDefineCircular
-        '
-        Me.mnuPrepareColumnDefineCircular.Name = "mnuPrepareColumnDefineCircular"
-        resources.ApplyResources(Me.mnuPrepareColumnDefineCircular, "mnuPrepareColumnDefineCircular")
         '
         'frmMain
         '
