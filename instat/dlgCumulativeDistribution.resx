@@ -148,43 +148,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactors.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="cmdLineOptions.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="cmdLineOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdLineOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 248</value>
-  </data>
-  <data name="cmdLineOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 25</value>
-  </data>
-  <data name="cmdLineOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="cmdLineOptions.Text" xml:space="preserve">
-    <value>Line Options</value>
-  </data>
-  <data name="&gt;&gt;cmdLineOptions.Name" xml:space="preserve">
-    <value>cmdLineOptions</value>
-  </data>
-  <data name="&gt;&gt;cmdLineOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdLineOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdLineOptions.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="cmdPlotOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdPlotOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 279</value>
+    <value>10, 247</value>
   </data>
   <data name="cmdPlotOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 25</value>
@@ -193,7 +163,7 @@
     <value>5</value>
   </data>
   <data name="cmdPlotOptions.Text" xml:space="preserve">
-    <value>Options</value>
+    <value>Plot Options</value>
   </data>
   <data name="&gt;&gt;cmdPlotOptions.Name" xml:space="preserve">
     <value>cmdPlotOptions</value>
@@ -286,7 +256,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 294</value>
+    <value>201, 258</value>
   </data>
   <data name="lblFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
@@ -316,7 +286,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>211, 321</value>
+    <value>211, 285</value>
   </data>
   <data name="lblTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 13</value>
@@ -346,7 +316,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSequence.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 348</value>
+    <value>175, 312</value>
   </data>
   <data name="lblSequence.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 13</value>
@@ -370,7 +340,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 294</value>
+    <value>243, 261</value>
   </data>
   <data name="ucrNudFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -412,7 +382,7 @@
     <value>8</value>
   </data>
   <data name="ucrChkIncludePoints.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 362</value>
+    <value>10, 313</value>
   </data>
   <data name="ucrChkIncludePoints.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 20</value>
@@ -433,7 +403,7 @@
     <value>9</value>
   </data>
   <data name="ucrChkCountsOnYAxis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 336</value>
+    <value>10, 287</value>
   </data>
   <data name="ucrChkCountsOnYAxis.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 20</value>
@@ -454,10 +424,13 @@
     <value>10</value>
   </data>
   <data name="ucrSaveCumDist.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 388</value>
+    <value>10, 341</value>
+  </data>
+  <data name="ucrSaveCumDist.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveCumDist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>255, 38</value>
   </data>
   <data name="ucrSaveCumDist.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -481,10 +454,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>418, 498</value>
+    <value>418, 447</value>
   </data>
   <data name="ucrNudBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 348</value>
+    <value>243, 315</value>
   </data>
   <data name="ucrNudBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -505,7 +478,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 321</value>
+    <value>243, 288</value>
   </data>
   <data name="ucrNudTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -571,10 +544,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrCumDistSelector.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 434</value>
+    <value>10, 387</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -592,7 +565,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>17</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
