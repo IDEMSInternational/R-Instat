@@ -1541,7 +1541,7 @@ DataBook$set("public", "database_disconnect", function() {
 }
 )
 
-DataBook$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date = NULL, end_date = NULL) {
+DataBook$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date = NULL, end_date = NULL,unstack=FALSE) {
   #need to perform checks here
   con = self$get_database_connection()
   if(!is.null(stations)){
@@ -1573,6 +1573,12 @@ DataBook$set("public", "import_from_climsoft", function(stations = c(), elements
       station_data <-  DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.describedBy IN", element_id_vec, date_bounds, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
       my_stations = paste0("(", paste(as.character(unique(station_data$recordedFrom)), collapse=", "), ")")
       station_info <-  DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
+    }
+    
+    #if stack=TRUE
+    #station_data <- reshape2::dcast(data=station_data, formula=recordedFrom + obsDatetime ~ abbreviation, value.var="obsValue")
+    if (unstack){
+      station_data <- reshape2::dcast(data=station_data, formula=recordedFrom + obsDatetime ~ abbreviation, value.var="obsValue")
     }
 
     data_list <- list(station_info, station_data)

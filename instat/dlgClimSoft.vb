@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 
 Public Class dlgClimSoft
@@ -60,7 +61,10 @@ Public Class dlgClimSoft
 
 
         ucrChkUnstackData.SetText("Unstack Data")
-        ucrChkUnstackData.Enabled = False
+        ucrChkUnstackData.SetParameter(New RParameter("unstack", 5))
+        ucrChkUnstackData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkUnstackData.SetRDefault("FALSE")
+
 
         ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 2))
         ucrChkObservationData.SetText("Observation Data")

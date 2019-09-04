@@ -46,14 +46,14 @@ Partial Class dlgClimSoft
         Me.lblStartDate = New System.Windows.Forms.Label()
         Me.lblEndDate = New System.Windows.Forms.Label()
         Me.ttClimsoft = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrChkUnstackData = New instat.ucrCheck()
+        Me.UcrDtpEndDate = New instat.ucrDateTimePicker()
+        Me.ucrDtpStartdate = New instat.ucrDateTimePicker()
         Me.ucrChkObservationData = New instat.ucrCheck()
         Me.ucrSelectorForClimSoft = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverMultipleStations = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrDtpStartdate = New instat.ucrDateTimePicker()
-        Me.UcrDtpEndDate = New instat.ucrDateTimePicker()
-        Me.ucrChkUnstackData = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdEstablishConnection
@@ -81,6 +81,26 @@ Partial Class dlgClimSoft
         '
         resources.ApplyResources(Me.lblEndDate, "lblEndDate")
         Me.lblEndDate.Name = "lblEndDate"
+        '
+        'ucrChkUnstackData
+        '
+        Me.ucrChkUnstackData.Checked = False
+        resources.ApplyResources(Me.ucrChkUnstackData, "ucrChkUnstackData")
+        Me.ucrChkUnstackData.Name = "ucrChkUnstackData"
+        '
+        'UcrDtpEndDate
+        '
+        resources.ApplyResources(Me.UcrDtpEndDate, "UcrDtpEndDate")
+        Me.UcrDtpEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.UcrDtpEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.UcrDtpEndDate.Name = "UcrDtpEndDate"
+        '
+        'ucrDtpStartdate
+        '
+        resources.ApplyResources(Me.ucrDtpStartdate, "ucrDtpStartdate")
+        Me.ucrDtpStartdate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpStartdate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpStartdate.Name = "ucrDtpStartdate"
         '
         'ucrChkObservationData
         '
@@ -116,26 +136,6 @@ Partial Class dlgClimSoft
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrDtpStartdate
-        '
-        resources.ApplyResources(Me.ucrDtpStartdate, "ucrDtpStartdate")
-        Me.ucrDtpStartdate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDtpStartdate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDtpStartdate.Name = "ucrDtpStartdate"
-        '
-        'UcrDtpEndDate
-        '
-        resources.ApplyResources(Me.UcrDtpEndDate, "UcrDtpEndDate")
-        Me.UcrDtpEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.UcrDtpEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.UcrDtpEndDate.Name = "UcrDtpEndDate"
-        '
-        'ucrChkUnstackData
-        '
-        Me.ucrChkUnstackData.Checked = False
-        resources.ApplyResources(Me.ucrChkUnstackData, "ucrChkUnstackData")
-        Me.ucrChkUnstackData.Name = "ucrChkUnstackData"
         '
         'dlgClimSoft
         '

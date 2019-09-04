@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cmdEstablishConnection.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdEstablishConnection.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 14</value>
@@ -146,6 +150,9 @@
   <data name="lblElements.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblElements.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblElements.Location" type="System.Drawing.Point, System.Drawing">
     <value>260, 178</value>
   </data>
@@ -172,6 +179,9 @@
   </data>
   <data name="lblStations.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblStations.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblStations.Location" type="System.Drawing.Point, System.Drawing">
     <value>260, 42</value>
@@ -203,6 +213,9 @@
   <data name="lblStartDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblStartDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblStartDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 232</value>
   </data>
@@ -229,6 +242,9 @@
   </data>
   <data name="lblEndDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblEndDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblEndDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 281</value>
@@ -257,61 +273,6 @@
   <metadata name="ttClimsoft.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="ucrChkObservationData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 210</value>
-  </data>
-  <data name="ucrChkObservationData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 20</value>
-  </data>
-  <data name="ucrChkObservationData.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrChkObservationData.Name" xml:space="preserve">
-    <value>ucrChkObservationData</value>
-  </data>
-  <data name="&gt;&gt;ucrChkObservationData.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkObservationData.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkObservationData.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrSelectorForClimSoft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 57</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrSelectorForClimSoft.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrSelectorForClimSoft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 147</value>
-  </data>
-  <data name="ucrSelectorForClimSoft.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorForClimSoft.Name" xml:space="preserve">
-    <value>ucrSelectorForClimSoft</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorForClimSoft.Type" xml:space="preserve">
-    <value>instat.ucrSelectorAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorForClimSoft.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorForClimSoft.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 382</value>
-  </data>
   <data name="ucrChkUnstackData.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 189</value>
   </data>
@@ -375,6 +336,60 @@
   <data name="&gt;&gt;ucrDtpStartdate.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrChkObservationData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 210</value>
+  </data>
+  <data name="ucrChkObservationData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 20</value>
+  </data>
+  <data name="ucrChkObservationData.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkObservationData.Name" xml:space="preserve">
+    <value>ucrChkObservationData</value>
+  </data>
+  <data name="&gt;&gt;ucrChkObservationData.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkObservationData.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkObservationData.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrSelectorForClimSoft.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 57</value>
+  </data>
+  <data name="ucrSelectorForClimSoft.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorForClimSoft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 147</value>
+  </data>
+  <data name="ucrSelectorForClimSoft.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForClimSoft.Name" xml:space="preserve">
+    <value>ucrSelectorForClimSoft</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForClimSoft.Type" xml:space="preserve">
+    <value>instat.ucrSelectorAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForClimSoft.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForClimSoft.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>415, 382</value>
+  </data>
   <data name="ucrReceiverMultipleStations.Location" type="System.Drawing.Point, System.Drawing">
     <value>260, 57</value>
   </data>
@@ -419,6 +434,9 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>12</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
