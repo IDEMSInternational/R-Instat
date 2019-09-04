@@ -307,7 +307,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFrom.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="lblTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -337,7 +337,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTo.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="lblSequence.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -367,70 +367,28 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSequence.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrInputBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 348</value>
-  </data>
-  <data name="ucrInputBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 21</value>
-  </data>
-  <data name="ucrInputBy.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBy.Name" xml:space="preserve">
-    <value>ucrInputBy</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBy.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBy.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBy.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrInputTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 321</value>
-  </data>
-  <data name="ucrInputTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 21</value>
-  </data>
-  <data name="ucrInputTo.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTo.Name" xml:space="preserve">
-    <value>ucrInputTo</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTo.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTo.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTo.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrInputFrom.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrNudFrom.Location" type="System.Drawing.Point, System.Drawing">
     <value>243, 294</value>
   </data>
-  <data name="ucrInputFrom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 21</value>
+  <data name="ucrNudFrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
   </data>
-  <data name="ucrInputFrom.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+  <data name="ucrNudFrom.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
-  <data name="&gt;&gt;ucrInputFrom.Name" xml:space="preserve">
-    <value>ucrInputFrom</value>
+  <data name="&gt;&gt;ucrNudFrom.Name" xml:space="preserve">
+    <value>ucrNudFrom</value>
   </data>
-  <data name="&gt;&gt;ucrInputFrom.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrNudFrom.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputFrom.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudFrom.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrInputFrom.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;ucrNudFrom.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="ucrPnlOption.Location" type="System.Drawing.Point, System.Drawing">
     <value>99, 12</value>
@@ -524,6 +482,48 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>418, 498</value>
+  </data>
+  <data name="ucrNudBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 348</value>
+  </data>
+  <data name="ucrNudBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudBy.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;ucrNudBy.Name" xml:space="preserve">
+    <value>ucrNudBy</value>
+  </data>
+  <data name="&gt;&gt;ucrNudBy.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudBy.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudBy.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrNudTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 321</value>
+  </data>
+  <data name="ucrNudTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudTo.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;ucrNudTo.Name" xml:space="preserve">
+    <value>ucrNudTo</value>
+  </data>
+  <data name="&gt;&gt;ucrNudTo.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudTo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudTo.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>243, 229</value>
