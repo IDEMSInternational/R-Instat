@@ -19,7 +19,7 @@ Partial Class dlgScatterPlot
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,13 +36,16 @@ Partial Class dlgScatterPlot
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgScatterPlot))
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.cmdScatterPlotOptions = New System.Windows.Forms.Button()
+        Me.lblVariable = New System.Windows.Forms.Label()
+        Me.ucrReceiverLabel = New instat.ucrReceiverSingle()
+        Me.ucrChkWithSE = New instat.ucrCheck()
         Me.ucrChkLineofBestFit = New instat.ucrCheck()
         Me.ucrSaveScatterPlot = New instat.ucrSave()
         Me.ucrSelectorForScatter = New instat.ucrSelectorByDataFrameAddRemove()
@@ -50,7 +53,6 @@ Partial Class dlgScatterPlot
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkWithSE = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -79,6 +81,26 @@ Partial Class dlgScatterPlot
         Me.cmdScatterPlotOptions.Tag = "ScatterPlot_Options"
         Me.cmdScatterPlotOptions.UseVisualStyleBackColor = True
         '
+        'lblVariable
+        '
+        resources.ApplyResources(Me.lblVariable, "lblVariable")
+        Me.lblVariable.Name = "lblVariable"
+        '
+        'ucrReceiverLabel
+        '
+        Me.ucrReceiverLabel.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverLabel, "ucrReceiverLabel")
+        Me.ucrReceiverLabel.Name = "ucrReceiverLabel"
+        Me.ucrReceiverLabel.Selector = Nothing
+        Me.ucrReceiverLabel.strNcFilePath = ""
+        Me.ucrReceiverLabel.ucrSelector = Nothing
+        '
+        'ucrChkWithSE
+        '
+        Me.ucrChkWithSE.Checked = False
+        resources.ApplyResources(Me.ucrChkWithSE, "ucrChkWithSE")
+        Me.ucrChkWithSE.Name = "ucrChkWithSE"
+        '
         'ucrChkLineofBestFit
         '
         Me.ucrChkLineofBestFit.Checked = False
@@ -92,6 +114,7 @@ Partial Class dlgScatterPlot
         '
         'ucrSelectorForScatter
         '
+        Me.ucrSelectorForScatter.bDropUnusedFilterLevels = False
         Me.ucrSelectorForScatter.bShowHiddenColumns = False
         Me.ucrSelectorForScatter.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForScatter, "ucrSelectorForScatter")
@@ -130,16 +153,12 @@ Partial Class dlgScatterPlot
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrChkWithSE
-        '
-        Me.ucrChkWithSE.Checked = False
-        resources.ApplyResources(Me.ucrChkWithSE, "ucrChkWithSE")
-        Me.ucrChkWithSE.Name = "ucrChkWithSE"
-        '
         'dlgScatterPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblVariable)
+        Me.Controls.Add(Me.ucrReceiverLabel)
         Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrSaveScatterPlot)
@@ -173,4 +192,6 @@ Partial Class dlgScatterPlot
     Friend WithEvents ucrSaveScatterPlot As ucrSave
     Friend WithEvents ucrChkLineofBestFit As ucrCheck
     Friend WithEvents ucrChkWithSE As ucrCheck
+    Friend WithEvents lblVariable As Label
+    Friend WithEvents ucrReceiverLabel As ucrReceiverSingle
 End Class
