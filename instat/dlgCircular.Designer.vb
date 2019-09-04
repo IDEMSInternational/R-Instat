@@ -24,11 +24,13 @@ Partial Class dlgCircular
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrToCircularSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrToCircularReceiver = New instat.ucrReceiverSingle()
+        Me.lblToCircular = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(86, 373)
+        Me.ucrBase.Location = New System.Drawing.Point(25, 373)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(547, 64)
@@ -45,11 +47,34 @@ Partial Class dlgCircular
         Me.ucrToCircularSelector.Size = New System.Drawing.Size(280, 222)
         Me.ucrToCircularSelector.TabIndex = 1
         '
+        'ucrToCircularReceiver
+        '
+        Me.ucrToCircularReceiver.frmParent = Me
+        Me.ucrToCircularReceiver.Location = New System.Drawing.Point(446, 119)
+        Me.ucrToCircularReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrToCircularReceiver.Name = "ucrToCircularReceiver"
+        Me.ucrToCircularReceiver.Selector = Nothing
+        Me.ucrToCircularReceiver.Size = New System.Drawing.Size(160, 25)
+        Me.ucrToCircularReceiver.strNcFilePath = ""
+        Me.ucrToCircularReceiver.TabIndex = 2
+        Me.ucrToCircularReceiver.ucrSelector = Nothing
+        '
+        'lblToCircular
+        '
+        Me.lblToCircular.AutoSize = True
+        Me.lblToCircular.Location = New System.Drawing.Point(504, 83)
+        Me.lblToCircular.Name = "lblToCircular"
+        Me.lblToCircular.Size = New System.Drawing.Size(75, 17)
+        Me.lblToCircular.TabIndex = 3
+        Me.lblToCircular.Text = "To circular"
+        '
         'dlgCircular
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(636, 450)
+        Me.Controls.Add(Me.lblToCircular)
+        Me.Controls.Add(Me.ucrToCircularReceiver)
         Me.Controls.Add(Me.ucrToCircularSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -59,9 +84,12 @@ Partial Class dlgCircular
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Circular"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrToCircularSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrToCircularReceiver As ucrReceiverSingle
+    Friend WithEvents lblToCircular As Label
 End Class
