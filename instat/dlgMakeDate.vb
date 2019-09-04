@@ -22,7 +22,7 @@ Public Class dlgMakeDate
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
     Private strSelectedDataFrame As String = ""
-    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsGregorianDefault, clsJulianDateDefault As New RFunction
+    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsRDefaultDate, clsGregorianDefault, clsJulianDateDefault, clsAsCharacterFunction As New RFunction
     Private clsDivisionOperator, clsMultiplicationOperator As New ROperator
 
     Private Sub dlgMakeDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -103,7 +103,7 @@ Public Class dlgMakeDate
         ucrInputFormat.SetItems(dctDateFormat)
         ucrInputFormat.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
 
-        ucrInputOrigin.SetItems({"Excel", "Gregorian", "Julian Day Number", "Specify"})
+        ucrInputOrigin.SetItems({"R (1970/01/01)", "Excel (1899/12/30)", "Gregorian (1600/03/01)", "Julian Day Number (-4713/11/24)", "Specify"})
         ucrInputOrigin.SetDropDownStyleAsNonEditable()
         ucrInputOrigin.AddToLinkedControls(ucrDtpSpecifyOrigin, {"Specify"}, bNewLinkedHideIfParameterMissing:=True)
 
@@ -138,7 +138,7 @@ Public Class dlgMakeDate
         ucrPnlFormat.AddRadioButton(rdoSpecifyFormat)
         ucrPnlFormat.AddRadioButton(rdoOrigin)
         ucrPnlFormat.AddToLinkedControls(ucrInputFormat, {rdoSpecifyFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Year(4-digit)-Month-Day")
-        ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Excel")
+        ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Excel(1899/12/30)")
 
         ttMakeDate.SetToolTip(rdoDefaultFormat, "This will try 'Year(4-digit)-Month-Day %Y-%m-%d' then 'Year(4-digit)/Month/Day %Y/%m/%d' on the first non-NA element")
 
@@ -215,6 +215,10 @@ Public Class dlgMakeDate
         ucrDtpSpecifyOrigin.SetParameter(New RParameter("origin", 1))
         ucrDtpSpecifyOrigin.SetParameterIsRDate()
 
+        clsRDefaultDate = New RFunction
+        clsRDefaultDate.SetRCommand("as.Date")
+        clsRDefaultDate.AddParameter("x", Chr(34) & "1970/01/01" & Chr(34))
+
         clsDefaultDate = New RFunction
         clsDefaultDate.SetRCommand("as.Date")
         clsDefaultDate.AddParameter("x", Chr(34) & "1899/12/30" & Chr(34))
@@ -227,6 +231,9 @@ Public Class dlgMakeDate
         clsJulianDateDefault.SetRCommand("structure")
         clsJulianDateDefault.AddParameter("x", "-2440588", bIncludeArgumentName:=False)
         clsJulianDateDefault.AddParameter("class", Chr(34) & "Date" & Chr(34))
+
+        clsAsCharacterFunction = New RFunction
+        clsAsCharacterFunction.SetRCommand("as.character")
 
         ''when rdoSingleColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDefaultFormat)
@@ -312,6 +319,8 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverForDate.AddAdditionalCodeParameterPair(clsAsCharacterFunction, New RParameter("x", 0, False), iAdditionalPairNo:=1)
+
         ucrPnlDate.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrSaveDate.AddAdditionalRCode(clsMakeYearDay, iAdditionalPairNo:=1)
@@ -406,10 +415,12 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub SelectorHeader()
-        If rdoOrigin.Checked Then
+        If rdoDefaultFormat.Checked Then
+            ucrReceiverForDate.strSelectorHeading = "Non Numerics"
+        ElseIf rdoOrigin.Checked Then
             ucrReceiverForDate.strSelectorHeading = "Numerics"
         Else
-            ucrReceiverForDate.strSelectorHeading = "Non Numeric"
+            ucrReceiverForDate.strSelectorHeading = "Variables"
         End If
     End Sub
 
@@ -429,6 +440,8 @@ Public Class dlgMakeDate
 
     Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged, ucrInputFormat.ControlValueChanged, ucrInputOrigin.ControlValueChanged
         ucrReceiverForDate.RemoveIncludedMetadataProperty("class")
+        clsDateFunction.RemoveParameterByName("yearmoda")
+        clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
         If rdoDefaultFormat.Checked Then
             cmdHelp.Visible = False
             ucrReceiverForDate.SetExcludedDataTypes({"numeric"})
@@ -437,16 +450,20 @@ Public Class dlgMakeDate
         ElseIf rdoOrigin.Checked Then
             cmdHelp.Visible = False
             ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
-            If ucrInputOrigin.GetText = "Excel" Then
+            If ucrInputOrigin.GetText = "Excel (1899/12/30)" Then
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate)
-            ElseIf ucrInputOrigin.GetText = "Gregorian" Then
+            ElseIf ucrInputOrigin.GetText = "Gregorian (1600/03/01)" Then
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsGregorianDefault)
-            ElseIf ucrInputOrigin.GetText = "Julian Day Number"
+            ElseIf ucrInputOrigin.GetText = "Julian Day Number (-4713/11/24)" Then
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsJulianDateDefault)
+            ElseIf ucrInputOrigin.GetText = "R (1970/01/01)" Then
+                clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsRDefaultDate)
             End If
         ElseIf rdoSpecifyFormat.Checked Then
-            ucrReceiverForDate.SetExcludedDataTypes({"numeric"})
             cmdHelp.Visible = True
+            ucrReceiverForDate.RemoveExcludedMetadataProperty("class")
+            clsDateFunction.AddParameter("yearmoda", clsRFunctionParameter:=clsAsCharacterFunction, bIncludeArgumentName:=False, iPosition:=0)
+            clsDateFunction.RemoveParameterByName("x")
             clsDateFunction.RemoveParameterByName("origin")
         End If
         grpFormats.Visible = (rdoSpecifyFormat.Checked)
