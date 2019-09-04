@@ -580,6 +580,10 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.mnuPrepareColumnDefine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnDefineConvertColumns = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator55 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuPrepareColumnDefineCircular = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2538,7 +2542,7 @@ Partial Class frmMain
         '
         'mnuPrepare
         '
-        Me.mnuPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrame, Me.mnuPrepareCheckData, Me.ToolStripSeparator6, Me.mnuPrepareColumnCalculate, Me.mnuPrepareColumnGenerate, Me.mnuPrepareColumnFactor, Me.mnuPrepareColumnText, Me.mnuPrepareColumnDate, Me.mnuPrepareColumnReshape, Me.ToolStripSeparator7, Me.mnuPrepareKeysAndLinks, Me.mnuPrepareDataObject, Me.mnuPrepareRObjects})
+        Me.mnuPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrame, Me.mnuPrepareCheckData, Me.ToolStripSeparator6, Me.mnuPrepareColumnCalculate, Me.mnuPrepareColumnGenerate, Me.mnuPrepareColumnFactor, Me.mnuPrepareColumnText, Me.mnuPrepareColumnDate, Me.mnuPrepareColumnDefine, Me.mnuPrepareColumnReshape, Me.ToolStripSeparator7, Me.mnuPrepareKeysAndLinks, Me.mnuPrepareDataObject, Me.mnuPrepareRObjects})
         Me.mnuPrepare.Name = "mnuPrepare"
         resources.ApplyResources(Me.mnuPrepare, "mnuPrepare")
         Me.mnuPrepare.Tag = "Prepare"
@@ -3718,6 +3722,27 @@ Partial Class frmMain
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
         '
+        'mnuPrepareColumnDefine
+        '
+        Me.mnuPrepareColumnDefine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnDefineConvertColumns, Me.ToolStripSeparator55, Me.mnuPrepareColumnDefineCircular})
+        Me.mnuPrepareColumnDefine.Name = "mnuPrepareColumnDefine"
+        resources.ApplyResources(Me.mnuPrepareColumnDefine, "mnuPrepareColumnDefine")
+        '
+        'mnuPrepareColumnDefineConvertColumns
+        '
+        Me.mnuPrepareColumnDefineConvertColumns.Name = "mnuPrepareColumnDefineConvertColumns"
+        resources.ApplyResources(Me.mnuPrepareColumnDefineConvertColumns, "mnuPrepareColumnDefineConvertColumns")
+        '
+        'ToolStripSeparator55
+        '
+        Me.ToolStripSeparator55.Name = "ToolStripSeparator55"
+        resources.ApplyResources(Me.ToolStripSeparator55, "ToolStripSeparator55")
+        '
+        'mnuPrepareColumnDefineCircular
+        '
+        resources.ApplyResources(Me.mnuPrepareColumnDefineCircular, "mnuPrepareColumnDefineCircular")
+        Me.mnuPrepareColumnDefineCircular.Name = "mnuPrepareColumnDefineCircular"
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4303,4 +4328,8 @@ Partial Class frmMain
     Friend WithEvents mnuModelUseModel As ToolStripMenuItem
     Friend WithEvents mnuClimaticPICSACumExeedenceGraph As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckDataQCTemperatures As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnDefine As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnDefineConvertColumns As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator55 As ToolStripSeparator
+    Friend WithEvents mnuPrepareColumnDefineCircular As ToolStripMenuItem
 End Class
