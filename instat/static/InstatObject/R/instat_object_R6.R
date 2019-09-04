@@ -1575,8 +1575,7 @@ DataBook$set("public", "import_from_climsoft", function(stations = c(), elements
       station_info <-  DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
     }
     
-    #if stack=TRUE
-    #station_data <- reshape2::dcast(data=station_data, formula=recordedFrom + obsDatetime ~ abbreviation, value.var="obsValue")
+   
     if (unstack){
       station_data <- reshape2::dcast(data=station_data, formula=recordedFrom + obsDatetime ~ abbreviation, value.var="obsValue")
     }
