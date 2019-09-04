@@ -23,6 +23,7 @@ Partial Class dlgCircular
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.UcrButtons1 = New instat.ucrButtons()
+        Me.ucrToCircularSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'UcrButtons1
@@ -33,11 +34,23 @@ Partial Class dlgCircular
         Me.UcrButtons1.Size = New System.Drawing.Size(547, 64)
         Me.UcrButtons1.TabIndex = 0
         '
+        'ucrToCircularSelector
+        '
+        Me.ucrToCircularSelector.bDropUnusedFilterLevels = False
+        Me.ucrToCircularSelector.bShowHiddenColumns = False
+        Me.ucrToCircularSelector.bUseCurrentFilter = True
+        Me.ucrToCircularSelector.Location = New System.Drawing.Point(9, 9)
+        Me.ucrToCircularSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrToCircularSelector.Name = "ucrToCircularSelector"
+        Me.ucrToCircularSelector.Size = New System.Drawing.Size(280, 222)
+        Me.ucrToCircularSelector.TabIndex = 1
+        '
         'dlgCircular
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.ucrToCircularSelector)
         Me.Controls.Add(Me.UcrButtons1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -50,4 +63,5 @@ Partial Class dlgCircular
     End Sub
 
     Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents ucrToCircularSelector As ucrSelectorByDataFrameAddRemove
 End Class
