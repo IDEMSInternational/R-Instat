@@ -254,9 +254,12 @@ Partial Class frmMain
         Me.mnuClimaticDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator31 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticPICSA = New System.Windows.Forms.ToolStripMenuItem()
+
         Me.mnuClimaticPICSARainfall = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSACumExeedenceGraph = New System.Windows.Forms.ToolStripMenuItem()
+
         Me.mnuClimaticPICSATemperature = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPICSARainfall = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSACrops = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCMSAF = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCMSAFPlotRegion = New System.Windows.Forms.ToolStripMenuItem()
@@ -1792,25 +1795,29 @@ Partial Class frmMain
         '
         'mnuClimaticPICSA
         '
+
         Me.mnuClimaticPICSA.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticPICSARainfall, Me.mnuClimaticPICSACumExeedenceGraph, Me.mnuClimaticPICSATemperature, Me.mnuClimaticPICSACrops})
+
         Me.mnuClimaticPICSA.Name = "mnuClimaticPICSA"
         resources.ApplyResources(Me.mnuClimaticPICSA, "mnuClimaticPICSA")
-        '
-        'mnuClimaticPICSARainfall
-        '
-        Me.mnuClimaticPICSARainfall.Name = "mnuClimaticPICSARainfall"
-        resources.ApplyResources(Me.mnuClimaticPICSARainfall, "mnuClimaticPICSARainfall")
-        '
-        'mnuClimaticPICSACumExeedenceGraph
-        '
-        Me.mnuClimaticPICSACumExeedenceGraph.Name = "mnuClimaticPICSACumExeedenceGraph"
-        resources.ApplyResources(Me.mnuClimaticPICSACumExeedenceGraph, "mnuClimaticPICSACumExeedenceGraph")
         '
         'mnuClimaticPICSATemperature
         '
         resources.ApplyResources(Me.mnuClimaticPICSATemperature, "mnuClimaticPICSATemperature")
         Me.mnuClimaticPICSATemperature.Name = "mnuClimaticPICSATemperature"
         '
+        'mnuClimaticPICSARainfall
+        '
+        Me.mnuClimaticPICSARainfall.Name = "mnuClimaticPICSARainfall"
+        resources.ApplyResources(Me.mnuClimaticPICSARainfall, "mnuClimaticPICSARainfall")
+        '
+
+        'mnuClimaticPICSACumExeedenceGraph
+        '
+        Me.mnuClimaticPICSACumExeedenceGraph.Name = "mnuClimaticPICSACumExeedenceGraph"
+        resources.ApplyResources(Me.mnuClimaticPICSACumExeedenceGraph, "mnuClimaticPICSACumExeedenceGraph")
+        '
+
         'mnuClimaticPICSACrops
         '
         Me.mnuClimaticPICSACrops.Name = "mnuClimaticPICSACrops"
@@ -4300,7 +4307,9 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticTidyandExamineDuplicates As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineOneVariableGraph As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineOneVariableFrequencies As ToolStripMenuItem
+
     Friend WithEvents mnuModelUseModel As ToolStripMenuItem
     Friend WithEvents mnuClimaticPICSACumExeedenceGraph As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckDataQCTemperatures As ToolStripMenuItem
+
 End Class

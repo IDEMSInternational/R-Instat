@@ -42,14 +42,22 @@ Partial Class dlgCumulativeDistribution
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
-        Me.ucrChkExceedancePlots = New instat.ucrCheck()
+        Me.rdoCumulative = New System.Windows.Forms.RadioButton()
+        Me.rdoExceedance = New System.Windows.Forms.RadioButton()
+        Me.lblFrom = New System.Windows.Forms.Label()
+        Me.lblTo = New System.Windows.Forms.Label()
+        Me.lblSequence = New System.Windows.Forms.Label()
+        Me.ucrInputBy = New instat.ucrInputTextBox()
+        Me.ucrInputTo = New instat.ucrInputTextBox()
+        Me.ucrInputFrom = New instat.ucrInputTextBox()
+        Me.ucrPnlOption = New instat.UcrPanel()
+        Me.ucrChkIncludePoints = New instat.ucrCheck()
+        Me.ucrChkCountsOnYAxis = New instat.ucrCheck()
         Me.ucrSaveCumDist = New instat.ucrSave()
         Me.ucrVariablesAsFactorforCumDist = New instat.ucrVariablesAsFactor()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrCumDistSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkCountsOnYAxis = New instat.ucrCheck()
-        Me.ucrChkIncludePoints = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblFactors
@@ -72,11 +80,81 @@ Partial Class dlgCumulativeDistribution
         Me.cmdPlotOptions.Tag = "Plot_Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
-        'ucrChkExceedancePlots
+        'rdoCumulative
         '
-        Me.ucrChkExceedancePlots.Checked = False
-        resources.ApplyResources(Me.ucrChkExceedancePlots, "ucrChkExceedancePlots")
-        Me.ucrChkExceedancePlots.Name = "ucrChkExceedancePlots"
+        resources.ApplyResources(Me.rdoCumulative, "rdoCumulative")
+        Me.rdoCumulative.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCumulative.FlatAppearance.BorderSize = 2
+        Me.rdoCumulative.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCumulative.Name = "rdoCumulative"
+        Me.rdoCumulative.TabStop = True
+        Me.rdoCumulative.UseVisualStyleBackColor = True
+        '
+        'rdoExceedance
+        '
+        resources.ApplyResources(Me.rdoExceedance, "rdoExceedance")
+        Me.rdoExceedance.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExceedance.FlatAppearance.BorderSize = 2
+        Me.rdoExceedance.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExceedance.Name = "rdoExceedance"
+        Me.rdoExceedance.TabStop = True
+        Me.rdoExceedance.UseVisualStyleBackColor = True
+        '
+        'lblFrom
+        '
+        resources.ApplyResources(Me.lblFrom, "lblFrom")
+        Me.lblFrom.Name = "lblFrom"
+        '
+        'lblTo
+        '
+        resources.ApplyResources(Me.lblTo, "lblTo")
+        Me.lblTo.Name = "lblTo"
+        '
+        'lblSequence
+        '
+        resources.ApplyResources(Me.lblSequence, "lblSequence")
+        Me.lblSequence.Name = "lblSequence"
+        '
+        'ucrInputBy
+        '
+        Me.ucrInputBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputBy.IsMultiline = False
+        Me.ucrInputBy.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputBy, "ucrInputBy")
+        Me.ucrInputBy.Name = "ucrInputBy"
+        '
+        'ucrInputTo
+        '
+        Me.ucrInputTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputTo.IsMultiline = False
+        Me.ucrInputTo.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTo, "ucrInputTo")
+        Me.ucrInputTo.Name = "ucrInputTo"
+        '
+        'ucrInputFrom
+        '
+        Me.ucrInputFrom.AddQuotesIfUnrecognised = True
+        Me.ucrInputFrom.IsMultiline = False
+        Me.ucrInputFrom.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFrom, "ucrInputFrom")
+        Me.ucrInputFrom.Name = "ucrInputFrom"
+        '
+        'ucrPnlOption
+        '
+        resources.ApplyResources(Me.ucrPnlOption, "ucrPnlOption")
+        Me.ucrPnlOption.Name = "ucrPnlOption"
+        '
+        'ucrChkIncludePoints
+        '
+        Me.ucrChkIncludePoints.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludePoints, "ucrChkIncludePoints")
+        Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
+        '
+        'ucrChkCountsOnYAxis
+        '
+        Me.ucrChkCountsOnYAxis.Checked = False
+        resources.ApplyResources(Me.ucrChkCountsOnYAxis, "ucrChkCountsOnYAxis")
+        Me.ucrChkCountsOnYAxis.Name = "ucrChkCountsOnYAxis"
         '
         'ucrSaveCumDist
         '
@@ -104,6 +182,7 @@ Partial Class dlgCumulativeDistribution
         '
         'ucrCumDistSelector
         '
+        Me.ucrCumDistSelector.bDropUnusedFilterLevels = False
         Me.ucrCumDistSelector.bShowHiddenColumns = False
         Me.ucrCumDistSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrCumDistSelector, "ucrCumDistSelector")
@@ -114,25 +193,21 @@ Partial Class dlgCumulativeDistribution
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrChkCountsOnYAxis
-        '
-        Me.ucrChkCountsOnYAxis.Checked = False
-        resources.ApplyResources(Me.ucrChkCountsOnYAxis, "ucrChkCountsOnYAxis")
-        Me.ucrChkCountsOnYAxis.Name = "ucrChkCountsOnYAxis"
-        '
-        'ucrChkIncludePoints
-        '
-        Me.ucrChkIncludePoints.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludePoints, "ucrChkIncludePoints")
-        Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
-        '
         'dlgCumulativeDistribution
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblSequence)
+        Me.Controls.Add(Me.lblTo)
+        Me.Controls.Add(Me.lblFrom)
+        Me.Controls.Add(Me.ucrInputBy)
+        Me.Controls.Add(Me.ucrInputTo)
+        Me.Controls.Add(Me.ucrInputFrom)
+        Me.Controls.Add(Me.rdoExceedance)
+        Me.Controls.Add(Me.rdoCumulative)
+        Me.Controls.Add(Me.ucrPnlOption)
         Me.Controls.Add(Me.ucrChkIncludePoints)
         Me.Controls.Add(Me.ucrChkCountsOnYAxis)
-        Me.Controls.Add(Me.ucrChkExceedancePlots)
         Me.Controls.Add(Me.ucrSaveCumDist)
         Me.Controls.Add(Me.ucrVariablesAsFactorforCumDist)
         Me.Controls.Add(Me.ucrFactorReceiver)
@@ -159,7 +234,15 @@ Partial Class dlgCumulativeDistribution
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
     Friend WithEvents ucrVariablesAsFactorforCumDist As ucrVariablesAsFactor
     Friend WithEvents ucrSaveCumDist As ucrSave
-    Friend WithEvents ucrChkExceedancePlots As ucrCheck
     Friend WithEvents ucrChkIncludePoints As ucrCheck
     Friend WithEvents ucrChkCountsOnYAxis As ucrCheck
+    Friend WithEvents ucrPnlOption As UcrPanel
+    Friend WithEvents rdoCumulative As RadioButton
+    Friend WithEvents rdoExceedance As RadioButton
+    Friend WithEvents lblSequence As Label
+    Friend WithEvents lblTo As Label
+    Friend WithEvents lblFrom As Label
+    Friend WithEvents ucrInputBy As ucrInputTextBox
+    Friend WithEvents ucrInputTo As ucrInputTextBox
+    Friend WithEvents ucrInputFrom As ucrInputTextBox
 End Class
