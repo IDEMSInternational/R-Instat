@@ -172,10 +172,10 @@ Public Class dlgCumulativeDistribution
         ucrCumDistSelector.SetRCode(clsRggplotFunction, bReset)
 
         ucrPnlOption.SetRCode(clsBaseOperator, bReset)
-        ucrInputFrom.SetRCode(clsSequence, bReset)
-        ucrInputTo.SetRCode(clsSequence, bReset)
-        ucrInputBy.SetRCode(clsSequence, bReset)
 
+        ucrNudFrom.SetRCode(clsSequence, bReset)
+        ucrNudTo.SetRCode(clsSequence, bReset)
+        ucrNudBy.SetRCode(clsSequence, bReset)
 
     End Sub
 
