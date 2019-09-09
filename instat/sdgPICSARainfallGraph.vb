@@ -546,11 +546,23 @@ Public Class sdgPICSARainfallGraph
 
 
         ' Rug Tab
+        clsGeomRug.SetPackageName("ggplot2")
+        clsGeomRug.SetRCommand("geom_rug")
+
         ucrChkYaxis.SetText("Y-axis")
+        ucrChkYaxis.SetParameter(New RParameter("sides"))
+        ucrChkYaxis.AddToLinkedControls(ucrChkYLeft, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkYaxis.AddToLinkedControls(ucrChkYRight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkYaxis.AddToLinkedControls(ucrChkYBoth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkYLeft.SetText("Left")
+        ucrChkYLeft.SetParameter(New RParameter("sides", "l"))
+
         ucrChkYRight.SetText("Right")
+        ucrChkYRight.SetParameter(New RParameter("sides", "r"))
+
         ucrChkYBoth.SetText("Both")
+        ucrChkYBoth.SetParameter(New RParameter("sides", "lr"))
 
         bControlsInitialised = True
     End Sub
@@ -914,6 +926,12 @@ Public Class sdgPICSARainfallGraph
         ucrNudLabelTransparency.AddAdditionalCodeParameterPair(clsGeomTextLabelLowerTercileLine, New RParameter("alpha", 4), iAdditionalPairNo:=2)
         ucrNudLabelTransparency.AddAdditionalCodeParameterPair(clsGeomTextLabelUpperTercileLine, New RParameter("alpha", 4), iAdditionalPairNo:=3)
         ucrNudLabelTransparency.SetRCode(clsGeomTextLabelMeanLine, bReset, bCloneIfNeeded:=True)
+
+        ' Rug Tab
+        ucrChkYaxis.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
+        ucrChkYLeft.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
+        ucrChkYRight.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
+        ucrChkYBoth.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
 
         bRCodeSet = True
         AddRemoveTheme()
