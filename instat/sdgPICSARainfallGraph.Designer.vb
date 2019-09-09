@@ -163,12 +163,14 @@ Partial Class sdgPICSARainfallGraph
         Me.UcrChkPnlBackgroundLineType = New instat.ucrCheck()
         Me.UcrChkPnlBackgroundFill = New instat.ucrCheck()
         Me.ucrChkPnlBackgroundColour = New instat.ucrCheck()
-        Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
         Me.tpRug = New System.Windows.Forms.TabPage()
+        Me.ucrInputXaxisOptions = New instat.ucrInputComboBox()
+        Me.lblXaxisOptions = New System.Windows.Forms.Label()
+        Me.ucrChkXaxis = New instat.ucrCheck()
+        Me.ucrInputYaxisOptions = New instat.ucrInputComboBox()
+        Me.lblYaxisOptions = New System.Windows.Forms.Label()
         Me.ucrChkYaxis = New instat.ucrCheck()
-        Me.ucrChkYLeft = New instat.ucrCheck()
-        Me.ucrChkYRight = New instat.ucrCheck()
-        Me.ucrChkYBoth = New instat.ucrCheck()
+        Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
         Me.tbPICSA.SuspendLayout()
         Me.tpTitles.SuspendLayout()
         Me.grpyAxisTitle.SuspendLayout()
@@ -1273,20 +1275,47 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrChkPnlBackgroundColour, "ucrChkPnlBackgroundColour")
         Me.ucrChkPnlBackgroundColour.Name = "ucrChkPnlBackgroundColour"
         '
-        'ucrSdgPICSARainfalbuttons
-        '
-        resources.ApplyResources(Me.ucrSdgPICSARainfalbuttons, "ucrSdgPICSARainfalbuttons")
-        Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
-        '
         'tpRug
         '
-        Me.tpRug.Controls.Add(Me.ucrChkYBoth)
-        Me.tpRug.Controls.Add(Me.ucrChkYRight)
-        Me.tpRug.Controls.Add(Me.ucrChkYLeft)
+        Me.tpRug.Controls.Add(Me.ucrInputXaxisOptions)
+        Me.tpRug.Controls.Add(Me.lblXaxisOptions)
+        Me.tpRug.Controls.Add(Me.ucrChkXaxis)
+        Me.tpRug.Controls.Add(Me.ucrInputYaxisOptions)
+        Me.tpRug.Controls.Add(Me.lblYaxisOptions)
         Me.tpRug.Controls.Add(Me.ucrChkYaxis)
         resources.ApplyResources(Me.tpRug, "tpRug")
         Me.tpRug.Name = "tpRug"
         Me.tpRug.UseVisualStyleBackColor = True
+        '
+        'ucrInputXaxisOptions
+        '
+        Me.ucrInputXaxisOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputXaxisOptions.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXaxisOptions, "ucrInputXaxisOptions")
+        Me.ucrInputXaxisOptions.Name = "ucrInputXaxisOptions"
+        '
+        'lblXaxisOptions
+        '
+        resources.ApplyResources(Me.lblXaxisOptions, "lblXaxisOptions")
+        Me.lblXaxisOptions.Name = "lblXaxisOptions"
+        '
+        'ucrChkXaxis
+        '
+        Me.ucrChkXaxis.Checked = False
+        resources.ApplyResources(Me.ucrChkXaxis, "ucrChkXaxis")
+        Me.ucrChkXaxis.Name = "ucrChkXaxis"
+        '
+        'ucrInputYaxisOptions
+        '
+        Me.ucrInputYaxisOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputYaxisOptions.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYaxisOptions, "ucrInputYaxisOptions")
+        Me.ucrInputYaxisOptions.Name = "ucrInputYaxisOptions"
+        '
+        'lblYaxisOptions
+        '
+        resources.ApplyResources(Me.lblYaxisOptions, "lblYaxisOptions")
+        Me.lblYaxisOptions.Name = "lblYaxisOptions"
         '
         'ucrChkYaxis
         '
@@ -1294,23 +1323,10 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrChkYaxis, "ucrChkYaxis")
         Me.ucrChkYaxis.Name = "ucrChkYaxis"
         '
-        'ucrChkYLeft
+        'ucrSdgPICSARainfalbuttons
         '
-        Me.ucrChkYLeft.Checked = False
-        resources.ApplyResources(Me.ucrChkYLeft, "ucrChkYLeft")
-        Me.ucrChkYLeft.Name = "ucrChkYLeft"
-        '
-        'ucrChkYRight
-        '
-        Me.ucrChkYRight.Checked = False
-        resources.ApplyResources(Me.ucrChkYRight, "ucrChkYRight")
-        Me.ucrChkYRight.Name = "ucrChkYRight"
-        '
-        'ucrChkYBoth
-        '
-        Me.ucrChkYBoth.Checked = False
-        resources.ApplyResources(Me.ucrChkYBoth, "ucrChkYBoth")
-        Me.ucrChkYBoth.Name = "ucrChkYBoth"
+        resources.ApplyResources(Me.ucrSdgPICSARainfalbuttons, "ucrSdgPICSARainfalbuttons")
+        Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
         '
         'sdgPICSARainfallGraph
         '
@@ -1347,6 +1363,7 @@ Partial Class sdgPICSARainfallGraph
         Me.grpMajorGridLines.PerformLayout()
         Me.grpPnlBackground.ResumeLayout(False)
         Me.tpRug.ResumeLayout(False)
+        Me.tpRug.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1494,7 +1511,9 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents ucrNudLowerLimit As ucrNud
     Friend WithEvents tpRug As TabPage
     Friend WithEvents ucrChkYaxis As ucrCheck
-    Friend WithEvents ucrChkYBoth As ucrCheck
-    Friend WithEvents ucrChkYRight As ucrCheck
-    Friend WithEvents ucrChkYLeft As ucrCheck
+    Friend WithEvents lblYaxisOptions As Label
+    Friend WithEvents ucrInputYaxisOptions As ucrInputComboBox
+    Friend WithEvents ucrInputXaxisOptions As ucrInputComboBox
+    Friend WithEvents lblXaxisOptions As Label
+    Friend WithEvents ucrChkXaxis As ucrCheck
 End Class
