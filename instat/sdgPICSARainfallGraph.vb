@@ -44,6 +44,8 @@ Public Class sdgPICSARainfallGraph
     Public clsThemeFunction As RFunction
     Public dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bRCodeSet As Boolean = False
+    Public dctRugSidesX As New Dictionary(Of String, String)
+    Public dctRugSidesY As New Dictionary(Of String, String)
 
     Private clsPlotElementTitle As New RFunction
     Private clsPlotElementSubTitle As New RFunction
@@ -550,31 +552,40 @@ Public Class sdgPICSARainfallGraph
         clsGeomRug.SetRCommand("geom_rug")
 
         ucrChkYaxis.SetText("Y-axis")
-        ucrChkYaxis.SetParameter(New RParameter("sides"))
-        ucrChkYaxis.AddToLinkedControls(ucrInputYaxisOptions, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkYaxis.AddToLinkedControls(ucrInputYaxisOptions, {True}, bNewLinkedHideIfParameterMissing:=True) 'objNewDefaultState:="Left" 
+        ucrChkYaxis.AddParameterPresentCondition({True}, "sides")
+        ucrChkYaxis.AddParameterPresentCondition({False}, "sides", False)
 
         ucrInputYaxisOptions.SetLinkedDisplayControl(lblYaxisOptions)
-        ucrInputYaxisOptions.SetItems({"left", "Right", "Both"})
+        ucrInputYaxisOptions.SetParameter(New RParameter("sides"))
+
+        dctRugSidesY.Add("Left", Chr(34) & "l" & Chr(34))
+        dctRugSidesY.Add("Right", Chr(34) & "r" & Chr(34))
+        dctRugSidesY.Add("Both", Chr(34) & "lr" & Chr(34))
+
+        ucrInputYaxisOptions.SetItems(dctRugSidesY)
         ucrInputYaxisOptions.SetDropDownStyleAsNonEditable()
         ucrInputYaxisOptions.AddFunctionNamesCondition("Left", "geom_rug")
         ucrInputYaxisOptions.AddFunctionNamesCondition("Right", "geom_rug")
         ucrInputYaxisOptions.AddFunctionNamesCondition("Both", "geom_rug")
 
         ucrChkXaxis.SetText("X-axis")
-        ucrChkXaxis.SetParameter(New RParameter("sides"))
-        ucrChkXaxis.AddToLinkedControls(ucrInputXaxisOptions, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkXaxis.AddToLinkedControls(ucrInputXaxisOptions, {True}, bNewLinkedHideIfParameterMissing:=True) 'objNewDefaultState:="Top")
         ucrChkXaxis.AddParameterPresentCondition({True}, "sides")
+        ucrChkXaxis.AddParameterPresentCondition({False}, "sides", False)
 
         ucrInputXaxisOptions.SetLinkedDisplayControl(lblXaxisOptions)
-        ucrInputXaxisOptions.SetItems({"Top", "Bottom", "Both"})
+        ucrInputXaxisOptions.SetParameter(New RParameter("sides"))
 
+        dctRugSidesX.Add("Top", Chr(34) & "t" & Chr(34))
+        dctRugSidesX.Add("Bottom", Chr(34) & "b" & Chr(34))
+        dctRugSidesX.Add("Both", Chr(34) & "tb" & Chr(34))
+
+        ucrInputXaxisOptions.SetItems(dctRugSidesX)
         ucrInputXaxisOptions.SetDropDownStyleAsNonEditable()
-
         ucrInputXaxisOptions.AddFunctionNamesCondition("Top", "geom_rug")
         ucrInputXaxisOptions.AddFunctionNamesCondition("Bottom", "geom_rug")
         ucrInputXaxisOptions.AddFunctionNamesCondition("Both", "geom_rug")
-
-
 
         bControlsInitialised = True
     End Sub
