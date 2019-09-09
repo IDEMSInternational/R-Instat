@@ -204,7 +204,11 @@ Public Class dlgHistogram
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrHistogramSelector, clsNewGlobalAesFunction:=clsRaesFunction, bReset:=bResetSubdialog)
+        If Not ucrVariablesAsFactorforHist.bSingleVariable Then
+            sdgPlots.tbpLayers.Enabled = False
+        End If
         sdgPlots.ShowDialog()
+        sdgPlots.tbpLayers.Enabled = True
         bResetSubdialog = False
     End Sub
 
@@ -272,10 +276,8 @@ Public Class dlgHistogram
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
         If ucrVariablesAsFactorforHist.bSingleVariable Then
             cmdHistogramOptions.Enabled = True
-            cmdOptions.Enabled = True
         Else
             cmdHistogramOptions.Enabled = False
-            cmdOptions.Enabled = False
         End If
     End Sub
 

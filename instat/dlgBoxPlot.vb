@@ -293,7 +293,11 @@ Public Class dlgBoxplot
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
+        If Not ucrVariablesAsFactorForBoxplot.bSingleVariable Then
+            sdgPlots.tbpLayers.Enabled = False
+        End If
         sdgPlots.ShowDialog()
+        sdgPlots.tbpLayers.Enabled = True
         bResetSubdialog = False
 
         'this syncs the coordflip in sdgplots and this main dlg
@@ -374,10 +378,8 @@ Public Class dlgBoxplot
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
         If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
             cmdBoxPlotOptions.Enabled = True
-            cmdOptions.Enabled = True
         Else
             cmdBoxPlotOptions.Enabled = False
-            cmdOptions.Enabled = False
         End If
     End Sub
 
