@@ -96,6 +96,9 @@ Public Class sdgPICSARainfallGraph
     Private clsAsDateYLimit As New RFunction
     Private clsAsNumeric As New RFunction
 
+    Private clsGeomRug As New RFunction
+    Private clsRugParam As New RParameter
+
     Private Sub sdgPICSARainfallGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -541,6 +544,13 @@ Public Class sdgPICSARainfallGraph
         ucrNudUpperLimit.Maximum = 31
         ucrNudUpperLimit.Value = 31
 
+
+        ' Rug Tab
+        ucrChkYaxis.SetText("Y-axis")
+
+        ucrChkYLeft.SetText("Left")
+        ucrChkYRight.SetText("Right")
+        ucrChkYBoth.SetText("Both")
 
         bControlsInitialised = True
     End Sub
