@@ -128,7 +128,7 @@ Public Class sdgDoyRange
                         End If
                     End If
                     rdoToVariable.Checked = True
-                    ucrReceiverTo.Add(clsFromParam.strArgumentValue, strDataFrameName, False)
+                    ucrReceiverTo.Add(clsToParam.strArgumentValue, strDataFrameName, False)
                 End If
             ElseIf clsToParam.bIsOperator AndAlso clsToParam.clsArgumentCodeStructure IsNot Nothing Then
                 clsFixedDiffOp = TryCast(clsToParam.clsArgumentCodeStructure, ROperator)
