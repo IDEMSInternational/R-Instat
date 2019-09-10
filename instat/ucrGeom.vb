@@ -163,6 +163,22 @@ Public Class ucrGeom
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
 
+        Dim clsgeom_statECDF As New Geoms
+
+        clsgeom_statECDF.SetGeomName("stat_ecdf")
+        'mandatory
+        clsgeom_statECDF.AddAesParameter("x", bIsMandatory:=True)
+        'optional
+        clsgeom_statECDF.AddAesParameter("colour")
+
+        'add layer parameter
+        clsgeom_statECDF.AddLayerParameter("geom", "list", Chr(34) & "step" & Chr(34), lstParameterStrings:={Chr(34) & "step" & Chr(34), Chr(34) & "line" & Chr(34), Chr(34) & "point" & Chr(34), Chr(34) & "bar" & Chr(34), Chr(34) & "density" & Chr(34)})
+        clsgeom_statECDF.AddLayerParameter("pad", "boolean", "TRUE")
+        clsgeom_statECDF.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_statECDF.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_statECDF.AddLayerParameter("na.rm", "boolean", "FALSE")
+        lstAllGeoms.Add(clsgeom_statECDF)
+
 
         Dim clsgeom_statsummary As New Geoms
 
