@@ -2124,4 +2124,11 @@ Public Class frmMain
         dlgCumulativeDistribution.ShowDialog()
     End Sub
 
+    Private Sub mnuPrepareColumnDefineCircular_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDefineCircular.Click
+        dlgCircular.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnDefineConvertColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDefineConvertColumns.Click
+        dlgConvertColumns.ShowDialog()
+    End Sub
 End Class
