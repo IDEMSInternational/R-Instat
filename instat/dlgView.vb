@@ -37,6 +37,7 @@ Public Class dlgView
     End Sub
 
     Private Sub InitialiseDialog()
+        rdoHTMLOutputWindow.Enabled = False 'TODO. temporarily disabled until the feauture can be improved on.
         ucrBase.iHelpTopicID = 32
         'Needed because window may pop up window which will disappear in a separate thread
         ucrBase.clsRsyntax.bSeparateThread = False
