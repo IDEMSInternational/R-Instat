@@ -97,6 +97,12 @@ Partial Class sdgPlots
         Me.cmdAllOptions = New System.Windows.Forms.Button()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.tbpCoordinates = New System.Windows.Forms.TabPage()
+        Me.grpPolarCordinates = New System.Windows.Forms.GroupBox()
+        Me.ucrChkUsePolarCoordinates = New instat.ucrCheck()
+        Me.lblPi = New System.Windows.Forms.Label()
+        Me.ucrChkDirectionAnticlockwise = New instat.ucrCheck()
+        Me.ucrtxtStartingAngle = New instat.ucrInputTextBox()
+        Me.ucrChkStartingAngle = New instat.ucrCheck()
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
@@ -110,6 +116,7 @@ Partial Class sdgPlots
         Me.tbpTheme.SuspendLayout()
         Me.grpCommonOptions.SuspendLayout()
         Me.tbpCoordinates.SuspendLayout()
+        Me.grpPolarCordinates.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbpPlotsOptions
@@ -555,11 +562,55 @@ Partial Class sdgPlots
         '
         'tbpCoordinates
         '
+        Me.tbpCoordinates.Controls.Add(Me.grpPolarCordinates)
         Me.tbpCoordinates.Controls.Add(Me.ucrChkSameScale)
         Me.tbpCoordinates.Controls.Add(Me.ucrChkHorizontalPlot)
         resources.ApplyResources(Me.tbpCoordinates, "tbpCoordinates")
         Me.tbpCoordinates.Name = "tbpCoordinates"
         Me.tbpCoordinates.UseVisualStyleBackColor = True
+        '
+        'grpPolarCordinates
+        '
+        Me.grpPolarCordinates.Controls.Add(Me.ucrChkUsePolarCoordinates)
+        Me.grpPolarCordinates.Controls.Add(Me.lblPi)
+        Me.grpPolarCordinates.Controls.Add(Me.ucrChkDirectionAnticlockwise)
+        Me.grpPolarCordinates.Controls.Add(Me.ucrtxtStartingAngle)
+        Me.grpPolarCordinates.Controls.Add(Me.ucrChkStartingAngle)
+        resources.ApplyResources(Me.grpPolarCordinates, "grpPolarCordinates")
+        Me.grpPolarCordinates.Name = "grpPolarCordinates"
+        Me.grpPolarCordinates.TabStop = False
+        '
+        'ucrChkUsePolarCoordinates
+        '
+        Me.ucrChkUsePolarCoordinates.Checked = False
+        resources.ApplyResources(Me.ucrChkUsePolarCoordinates, "ucrChkUsePolarCoordinates")
+        Me.ucrChkUsePolarCoordinates.Name = "ucrChkUsePolarCoordinates"
+        '
+        'lblPi
+        '
+        resources.ApplyResources(Me.lblPi, "lblPi")
+        Me.lblPi.Name = "lblPi"
+        Me.lblPi.Tag = "By_Factor:"
+        '
+        'ucrChkDirectionAnticlockwise
+        '
+        Me.ucrChkDirectionAnticlockwise.Checked = False
+        resources.ApplyResources(Me.ucrChkDirectionAnticlockwise, "ucrChkDirectionAnticlockwise")
+        Me.ucrChkDirectionAnticlockwise.Name = "ucrChkDirectionAnticlockwise"
+        '
+        'ucrtxtStartingAngle
+        '
+        Me.ucrtxtStartingAngle.AddQuotesIfUnrecognised = True
+        Me.ucrtxtStartingAngle.IsMultiline = False
+        Me.ucrtxtStartingAngle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrtxtStartingAngle, "ucrtxtStartingAngle")
+        Me.ucrtxtStartingAngle.Name = "ucrtxtStartingAngle"
+        '
+        'ucrChkStartingAngle
+        '
+        Me.ucrChkStartingAngle.Checked = False
+        resources.ApplyResources(Me.ucrChkStartingAngle, "ucrChkStartingAngle")
+        Me.ucrChkStartingAngle.Name = "ucrChkStartingAngle"
         '
         'ucrChkSameScale
         '
@@ -603,6 +654,8 @@ Partial Class sdgPlots
         Me.tbpTheme.PerformLayout()
         Me.grpCommonOptions.ResumeLayout(False)
         Me.tbpCoordinates.ResumeLayout(False)
+        Me.grpPolarCordinates.ResumeLayout(False)
+        Me.grpPolarCordinates.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -670,6 +723,12 @@ Partial Class sdgPlots
     Friend WithEvents ucrChkLabeler As ucrCheck
     Friend WithEvents cmdSimpleOptions As Button
     Friend WithEvents ucrChkSameScale As ucrCheck
+    Friend WithEvents ucrChkUsePolarCoordinates As ucrCheck
+    Friend WithEvents ucrChkStartingAngle As ucrCheck
+    Friend WithEvents ucrChkDirectionAnticlockwise As ucrCheck
+    Friend WithEvents ucrtxtStartingAngle As ucrInputTextBox
+    Friend WithEvents lblPi As Label
+    Friend WithEvents grpPolarCordinates As GroupBox
 End Class
 
 

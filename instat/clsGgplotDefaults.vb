@@ -127,6 +127,15 @@ Public Class GgplotDefaults
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsCoordPolarFunction As RFunction
+        Get
+            Dim clsCoordPolarTempFunc As New RFunction
+            clsCoordPolarTempFunc.SetPackageName("ggplot2")
+            clsCoordPolarTempFunc.SetRCommand("coord_polar")
+            Return clsCoordPolarTempFunc
+        End Get
+    End Property
+
     Public Shared ReadOnly Property dctThemeFunctions As Dictionary(Of String, RFunction)
         Get
             Dim dctTemp As New Dictionary(Of String, RFunction)
