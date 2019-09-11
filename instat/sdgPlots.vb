@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
+
 Imports instat.Translations
 Public Class sdgPlots
     'Question to be discussed (later: need to explore first)/Exploration Task: In order to uniformise the code, could create a PlotOptionsSetup where all the necessary links between specific plots and plot options are made ? For the moment all these are scattered around. Might be necessary to have this flexibility though... 
@@ -320,7 +320,7 @@ Public Class sdgPlots
         ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(False, "size", False)
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional clsNewCoordPolarFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
         Dim clsTempParam As RParameter
 
         bRCodeSet = False
@@ -335,12 +335,6 @@ Public Class sdgPlots
         End If
 
 
-        If bReset Then
-            clsCoordPolarFunc = New RFunction
-        End If
-
-
-
         ucrFacetSelector.SetLinkedSelector(ucrBaseSelector)
         clsBaseOperator = clsNewOperator
         clsGlobalAesFunction = clsNewGlobalAesFunction
@@ -350,6 +344,7 @@ Public Class sdgPlots
         clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
         clsFacetFunction = clsNewFacetFunction
         clsThemeFunction = clsNewThemeFunction
+        clsCoordPolarFunc = clsNewCoordPolarFunction
         dctThemeFunctions = dctNewThemeFunctions
 
         dctThemeFunctions.TryGetValue("axis.text.x", clsXElementText)
@@ -769,22 +764,16 @@ Public Class sdgPlots
     End Sub
 
     Private Sub ucrChkUsePolarCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUsePolarCoordinates.ControlValueChanged
-
-
-        clsCoordPolarFunc.SetPackageName("ggplot2")
-        clsCoordPolarFunc.SetRCommand("coord_polar")
-
         If ucrChkUsePolarCoordinates.Checked Then
             clsBaseOperator.AddParameter("coord_polars", clsRFunctionParameter:=clsCoordPolarFunc, bIncludeArgumentName:=False)
         Else
             clsBaseOperator.RemoveParameterByName("coord_polars")
         End If
-
     End Sub
-
     Private Sub ucrtxtStartingAngle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrtxtStartingAngle.ControlValueChanged
         If ucrtxtStartingAngle.GetText <> "1" Then
             ucrtxtStartingAngle.SetParameterValue(ucrtxtStartingAngle.GetText() & "*pi")
         End If
     End Sub
+
 End Class
