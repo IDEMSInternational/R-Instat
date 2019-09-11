@@ -21,4 +21,31 @@ Public Class dlgCircular
     Private bRest As Boolean = True
     Private clsCircularFunction As New RFunction
 
+    Private Sub dlgCircular_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+
+        If bRest Then
+            SetDefaults()
+        End If
+
+        SetRCodeForControls(bRest)
+        bRest = False
+        autoTranslate(Me)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
+    End Sub
+
+    Private Sub SetDefaults()
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+    End Sub
+
+    Private Sub TestOkEnabled()
+    End Sub
 End Class
