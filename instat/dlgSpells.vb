@@ -55,27 +55,25 @@ Public Class dlgSpells
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
         ucrReceiverElement.Selector = ucrSelectorForSpells
-        'ucrReceiverElement.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
-        ucrReceiverElement.bAutoFill = True
         ucrReceiverElement.SetDataType("numeric")
-        ucrReceiverElement.strSelectorHeading = "Variables"
+        ucrReceiverElement.SetClimaticType("rain")
+        ucrReceiverElement.bAutoFill = True
 
         ucrReceiverStation.SetParameter(New RParameter("station", 1, False))
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.Selector = ucrSelectorForSpells
-        ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
+        ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
-        ucrReceiverStation.strSelectorHeading = "Station Variables"
 
         ucrReceiverYear.Selector = ucrSelectorForSpells
-        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
-        ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ucrReceiverDate.SetParameter(New RParameter("date", 0, False))
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.Selector = ucrSelectorForSpells
-        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
+        ucrReceiverDate.SetDataType("Date")
+        ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.strSelectorHeading = "Date Variables"
 
@@ -83,9 +81,9 @@ Public Class dlgSpells
         ucrReceiverDOY.SetParameterIsString()
         ucrReceiverDOY.bWithQuotes = False
         ucrReceiverDOY.Selector = ucrSelectorForSpells
-        ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
+        ucrReceiverDOY.SetDataType("numeric")
+        ucrReceiverDOY.SetClimaticType("doy")
         ucrReceiverDOY.bAutoFill = True
-        ucrReceiverDOY.strSelectorHeading = "Day Variables"
 
         clsSubSpellLength1.SetRCommand("list")
         clsMaxValueList.SetRCommand("list")
@@ -124,6 +122,7 @@ Public Class dlgSpells
         clsMaxSpellManipulation.Clear()
         clsDayFilter.Clear()
         clsGroupBy.Clear()
+        clsSpellsFunction.Clear()
         clsSpellLogicalCalc.Clear()
         clsSpellLength.Clear()
         clsMaxSpellSummary.Clear()
@@ -229,7 +228,6 @@ Public Class dlgSpells
         clsMaxSpellSummary.AddParameter("function_exp", clsRFunctionParameter:=clsMaxFunction, iPosition:=1)
         clsMaxSpellSummary.AddParameter("save", 2, iPosition:=6)
         clsMaxSpellSummary.AddParameter("result_name", Chr(34) & ucrInputNewColumnName.GetText() & Chr(34), iPosition:=3)
-        'clsMaxSpellSummary.AddParameter("sub_calculation", clsRFunctionParameter:=clsMaxSpellSubCalcs, iPosition:=5)
         clsMaxSpellSummary.AddParameter("manipulations", clsRFunctionParameter:=clsMaxSpellManipulation, iPosition:=5)
         clsMaxSpellSummary.SetAssignTo("spells")
 
@@ -239,7 +237,6 @@ Public Class dlgSpells
 
         clsMaxSpellSubCalcs.SetRCommand("list")
         clsMaxSpellSubCalcs.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
-        clsMaxSpellSubCalcs.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=1)
 
         clsMaxSpellManipulation.SetRCommand("list")
         clsMaxSpellManipulation.AddParameter("manip1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
@@ -354,11 +351,9 @@ Public Class dlgSpells
         If ucrChkConditional.Checked Then
             clsMaxSpellSummary.AddParameter("sub_calculation", clsRFunctionParameter:=clsMaxSpellSubCalcs, iPosition:=5)
             clsMaxSpellManipulation.RemoveParameterByName("manip1")
-            clsMaxSpellManipulation.RemoveParameterByName("manip2")
         Else
             clsMaxSpellSummary.RemoveParameterByName("sub_calculation")
             clsMaxSpellManipulation.AddParameter("manip1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
-            clsMaxSpellManipulation.AddParameter("manip2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=1)
         End If
     End Sub
 
