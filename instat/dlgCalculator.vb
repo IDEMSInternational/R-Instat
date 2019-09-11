@@ -148,7 +148,7 @@ Public Class dlgCalculator
             Case "Transform"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.35, Me.Height)
             Case "Circular"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.3, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.39, Me.Height)
             Case "Wakefield"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.7, Me.Height)
             Case Else
