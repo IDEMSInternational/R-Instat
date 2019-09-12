@@ -102,10 +102,11 @@ Public Class sdgPICSARainfallGraph
 
     Private Sub sdgPICSARainfallGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        ' Hide the rug tab
+        tbPICSA.TabPages.Remove(tpRug)
     End Sub
 
     Public Sub InitialiseControls()
-
         clsElementBlank = New RFunction
         clsElementBlank.SetPackageName("ggplot2")
         clsElementBlank.SetRCommand("element_blank")
@@ -221,21 +222,21 @@ Public Class sdgPICSARainfallGraph
         ucrPnlYAxisType.AddToLinkedControls(ucrInputYSpecifyUpperLimitDateMonth, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkYSpecifyLowerLimit.SetText("Specify Lower Limit")
-        ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(True, "min", "NA", False)
-        ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(False, "min", "NA", True)
+        ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(True, "lowerlimit", "NA", False)
+        ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(False, "lowerlimit", "NA", True)
         ucrChkYSpecifyLowerLimit.AddToLinkedControls(ucrInputYSpecifyLowerLimitNumeric, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrInputYSpecifyLowerLimitNumeric.SetParameter(New RParameter("min", 0))
+        ucrInputYSpecifyLowerLimitNumeric.SetParameter(New RParameter("lowerlimit", 0))
         ucrInputYSpecifyLowerLimitNumeric.SetValidationTypeAsNumeric()
         ucrInputYSpecifyLowerLimitNumeric.SetValuesToIgnore({"NA"})
         ucrInputYSpecifyLowerLimitNumeric.AddQuotesIfUnrecognised = False
 
         ucrChkYSpecifyUpperLimit.SetText("Specify Upper Limit")
-        ucrChkYSpecifyUpperLimit.AddParameterValuesCondition(True, "max", "NA", False)
-        ucrChkYSpecifyUpperLimit.AddParameterValuesCondition(False, "max", "NA", True)
+        ucrChkYSpecifyUpperLimit.AddParameterValuesCondition(True, "upperlimit", "NA", False)
+        ucrChkYSpecifyUpperLimit.AddParameterValuesCondition(False, "upperlimit", "NA", True)
         ucrChkYSpecifyUpperLimit.AddToLinkedControls(ucrInputYSpecifyUpperLimitNumeric, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrInputYSpecifyUpperLimitNumeric.SetParameter(New RParameter("max", 1))
+        ucrInputYSpecifyUpperLimitNumeric.SetParameter(New RParameter("upperlimit", 1))
         ucrInputYSpecifyUpperLimitNumeric.SetValidationTypeAsNumeric()
         ucrInputYSpecifyUpperLimitNumeric.SetValuesToIgnore({"NA"})
         ucrInputYSpecifyUpperLimitNumeric.AddQuotesIfUnrecognised = False
@@ -734,10 +735,14 @@ Public Class sdgPICSARainfallGraph
             Else
                 clsCLimitsYContinuous = New RFunction
                 clsCLimitsYContinuous.SetRCommand("c")
+                clsCLimitsYContinuous.AddParameter("lowerlimit", "NA", bIncludeArgumentName:=False, iPosition:=0)
+                clsCLimitsYContinuous.AddParameter("upperlimit", "NA", bIncludeArgumentName:=False, iPosition:=1)
             End If
         Else
             clsCLimitsYContinuous = New RFunction
             clsCLimitsYContinuous.SetRCommand("c")
+            clsCLimitsYContinuous.AddParameter("lowerlimit", "NA", bIncludeArgumentName:=False, iPosition:=0)
+            clsCLimitsYContinuous.AddParameter("upperlimit", "NA", bIncludeArgumentName:=False, iPosition:=1)
         End If
 
         ucrPnlYAxisType.SetRCode(clsRaesFunction, bReset, bCloneIfNeeded:=True)
@@ -764,26 +769,6 @@ Public Class sdgPICSARainfallGraph
         Else
             clsXScalecontinuousSeqFunction = New RFunction
             clsXScalecontinuousSeqFunction.SetRCommand("seq")
-        End If
-
-        ' Limits c() function for y continuous scales
-        Dim clsTempYLimitsContinuousParam As RParameter
-        If clsYScaleContinuousFunction.ContainsParameter("limits") Then
-            clsTempYLimitsContinuousParam = clsYScaleContinuousFunction.GetParameter("limits")
-            If clsTempYLimitsContinuousParam.clsArgumentCodeStructure IsNot Nothing Then
-                clsCLimitsYContinuous = clsTempYLimitsContinuousParam.clsArgumentCodeStructure
-            Else
-                'TODO move to ggplot defaults
-                clsCLimitsYContinuous = New RFunction
-                clsCLimitsYContinuous.SetRCommand("c")
-                clsCLimitsYContinuous.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
-                clsCLimitsYContinuous.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
-            End If
-        Else
-            clsCLimitsYContinuous = New RFunction
-            clsCLimitsYContinuous.SetRCommand("c")
-            clsCLimitsYContinuous.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
-            clsCLimitsYContinuous.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
         End If
 
         ' Limits c() function for y date scales
@@ -949,10 +934,10 @@ Public Class sdgPICSARainfallGraph
         ucrNudLabelTransparency.SetRCode(clsGeomTextLabelMeanLine, bReset, bCloneIfNeeded:=True)
 
         ' Rug Tab
-        ucrChkYaxis.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
-        ucrInputYaxisOptions.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
-        ucrChkXaxis.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
-        ucrInputXaxisOptions.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
+        'ucrChkYaxis.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
+        'ucrInputYaxisOptions.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
+        'ucrChkXaxis.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
+        'ucrInputXaxisOptions.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
 
         bRCodeSet = True
         AddRemoveTheme()
@@ -1408,9 +1393,6 @@ Public Class sdgPICSARainfallGraph
             If ucrChkYSpecifyUpperLimit.Checked Then
                 ucrInputYSpecifyUpperLimitNumeric.Visible = True
             End If
-
-
-
         End If
     End Sub
 
@@ -1418,10 +1400,10 @@ Public Class sdgPICSARainfallGraph
     Private Sub ucrYLimitControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYSpecifyLowerLimit.ControlValueChanged, ucrChkYSpecifyUpperLimit.ControlValueChanged, ucrInputYSpecifyLowerLimitNumeric.ControlValueChanged, ucrInputYSpecifyUpperLimitNumeric.ControlValueChanged
         If bRCodeSet Then
             If Not ucrChkYSpecifyLowerLimit.Checked Then
-                clsCLimitsYContinuous.AddParameter("min", "NA", bIncludeArgumentName:=False, iPosition:=0)
+                clsCLimitsYContinuous.AddParameter("lowerlimit", "NA", bIncludeArgumentName:=False, iPosition:=0)
             End If
             If Not ucrChkYSpecifyUpperLimit.Checked Then
-                clsCLimitsYContinuous.AddParameter("max", "NA", bIncludeArgumentName:=False, iPosition:=1)
+                clsCLimitsYContinuous.AddParameter("upperlimit", "NA", bIncludeArgumentName:=False, iPosition:=1)
             End If
             AddRemoveYLimits()
         End If
@@ -1535,9 +1517,9 @@ Public Class sdgPICSARainfallGraph
     End Sub
 
     Private Sub AddRemoveRugPlot()
-        If ucrChkYaxis.Checked Or ucrChkXaxis.Checked Then
-            clsBaseOperator.AddParameter("sides", clsRFunctionParameter:=clsGeomRug)
-        End If
+        'If ucrChkYaxis.Checked Or ucrChkXaxis.Checked Then
+        '    clsBaseOperator.AddParameter("sides", clsRFunctionParameter:=clsGeomRug)
+        'End If
     End Sub
 
 End Class
