@@ -44,6 +44,8 @@ Public Class sdgPICSARainfallGraph
     Public clsThemeFunction As RFunction
     Public dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bRCodeSet As Boolean = False
+    Public dctRugSidesX As New Dictionary(Of String, String)
+    Public dctRugSidesY As New Dictionary(Of String, String)
 
     Private clsPlotElementTitle As New RFunction
     Private clsPlotElementSubTitle As New RFunction
@@ -94,6 +96,9 @@ Public Class sdgPICSARainfallGraph
     Private clsAsDate As New RFunction
     Private clsAsDateYLimit As New RFunction
     Private clsAsNumeric As New RFunction
+
+    Private clsGeomRug As New RFunction
+    Private clsRugParam As New RParameter
 
     Private Sub sdgPICSARainfallGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -541,6 +546,46 @@ Public Class sdgPICSARainfallGraph
         ucrNudUpperLimit.Value = 31
 
 
+        ' Rug Tab
+        clsGeomRug.SetPackageName("ggplot2")
+        clsGeomRug.SetRCommand("geom_rug")
+
+        ucrChkYaxis.SetText("Y-axis")
+        ucrChkYaxis.AddToLinkedControls(ucrInputYaxisOptions, {True}, bNewLinkedHideIfParameterMissing:=True) 'objNewDefaultState:="Left" 
+        ucrChkYaxis.AddParameterPresentCondition({True}, "sides")
+        ucrChkYaxis.AddParameterPresentCondition({False}, "sides", False)
+
+        ucrInputYaxisOptions.SetLinkedDisplayControl(lblYaxisOptions)
+        ucrInputYaxisOptions.SetParameter(New RParameter("sides"))
+
+        dctRugSidesY.Add("Left", Chr(34) & "l" & Chr(34))
+        dctRugSidesY.Add("Right", Chr(34) & "r" & Chr(34))
+        dctRugSidesY.Add("Both", Chr(34) & "lr" & Chr(34))
+
+        ucrInputYaxisOptions.SetItems(dctRugSidesY)
+        ucrInputYaxisOptions.SetDropDownStyleAsNonEditable()
+        ucrInputYaxisOptions.AddFunctionNamesCondition("Left", "geom_rug")
+        ucrInputYaxisOptions.AddFunctionNamesCondition("Right", "geom_rug")
+        ucrInputYaxisOptions.AddFunctionNamesCondition("Both", "geom_rug")
+
+        ucrChkXaxis.SetText("X-axis")
+        ucrChkXaxis.AddToLinkedControls(ucrInputXaxisOptions, {True}, bNewLinkedHideIfParameterMissing:=True) 'objNewDefaultState:="Top")
+        ucrChkXaxis.AddParameterPresentCondition({True}, "sides")
+        ucrChkXaxis.AddParameterPresentCondition({False}, "sides", False)
+
+        ucrInputXaxisOptions.SetLinkedDisplayControl(lblXaxisOptions)
+        ucrInputXaxisOptions.SetParameter(New RParameter("sides"))
+
+        dctRugSidesX.Add("Top", Chr(34) & "t" & Chr(34))
+        dctRugSidesX.Add("Bottom", Chr(34) & "b" & Chr(34))
+        dctRugSidesX.Add("Both", Chr(34) & "tb" & Chr(34))
+
+        ucrInputXaxisOptions.SetItems(dctRugSidesX)
+        ucrInputXaxisOptions.SetDropDownStyleAsNonEditable()
+        ucrInputXaxisOptions.AddFunctionNamesCondition("Top", "geom_rug")
+        ucrInputXaxisOptions.AddFunctionNamesCondition("Bottom", "geom_rug")
+        ucrInputXaxisOptions.AddFunctionNamesCondition("Both", "geom_rug")
+
         bControlsInitialised = True
     End Sub
 
@@ -902,6 +947,12 @@ Public Class sdgPICSARainfallGraph
         ucrNudLabelTransparency.AddAdditionalCodeParameterPair(clsGeomTextLabelLowerTercileLine, New RParameter("alpha", 4), iAdditionalPairNo:=2)
         ucrNudLabelTransparency.AddAdditionalCodeParameterPair(clsGeomTextLabelUpperTercileLine, New RParameter("alpha", 4), iAdditionalPairNo:=3)
         ucrNudLabelTransparency.SetRCode(clsGeomTextLabelMeanLine, bReset, bCloneIfNeeded:=True)
+
+        ' Rug Tab
+        ucrChkYaxis.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
+        ucrInputYaxisOptions.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
+        ucrChkXaxis.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
+        ucrInputXaxisOptions.SetRCode(clsGeomRug, bReset, bCloneIfNeeded:=True)
 
         bRCodeSet = True
         AddRemoveTheme()
@@ -1478,4 +1529,15 @@ Public Class sdgPICSARainfallGraph
             End If
         End If
     End Sub
+
+    Private Sub ucrInputYaxisOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputYaxisOptions.ControlValueChanged
+        AddRemoveRugPlot()
+    End Sub
+
+    Private Sub AddRemoveRugPlot()
+        If ucrChkYaxis.Checked Or ucrChkXaxis.Checked Then
+            clsBaseOperator.AddParameter("sides", clsRFunctionParameter:=clsGeomRug)
+        End If
+    End Sub
+
 End Class
