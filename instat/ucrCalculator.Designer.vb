@@ -315,8 +315,8 @@ Partial Class ucrCalculator
         Me.cmdInfreq = New System.Windows.Forms.Button()
         Me.cmdInnum = New System.Windows.Forms.Button()
         Me.cmdLump = New System.Windows.Forms.Button()
-        Me.Button14 = New System.Windows.Forms.Button()
-        Me.Button15 = New System.Windows.Forms.Button()
+        Me.cmdFmatch = New System.Windows.Forms.Button()
+        Me.cmdOther = New System.Windows.Forms.Button()
         Me.Button16 = New System.Windows.Forms.Button()
         Me.Button17 = New System.Windows.Forms.Button()
         Me.Button18 = New System.Windows.Forms.Button()
@@ -2166,8 +2166,8 @@ Partial Class ucrCalculator
         Me.grpFactor.Controls.Add(Me.Button18)
         Me.grpFactor.Controls.Add(Me.Button17)
         Me.grpFactor.Controls.Add(Me.Button16)
-        Me.grpFactor.Controls.Add(Me.Button15)
-        Me.grpFactor.Controls.Add(Me.Button14)
+        Me.grpFactor.Controls.Add(Me.cmdOther)
+        Me.grpFactor.Controls.Add(Me.cmdFmatch)
         Me.grpFactor.Controls.Add(Me.cmdLump)
         Me.grpFactor.Controls.Add(Me.cmdInnum)
         Me.grpFactor.Controls.Add(Me.cmdInfreq)
@@ -2256,17 +2256,17 @@ Partial Class ucrCalculator
         Me.cmdLump.Name = "cmdLump"
         Me.cmdLump.UseVisualStyleBackColor = True
         '
-        'Button14
+        'cmdFmatch
         '
-        resources.ApplyResources(Me.Button14, "Button14")
-        Me.Button14.Name = "Button14"
-        Me.Button14.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdFmatch, "cmdFmatch")
+        Me.cmdFmatch.Name = "cmdFmatch"
+        Me.cmdFmatch.UseVisualStyleBackColor = True
         '
-        'Button15
+        'cmdOther
         '
-        resources.ApplyResources(Me.Button15, "Button15")
-        Me.Button15.Name = "Button15"
-        Me.Button15.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdOther, "cmdOther")
+        Me.cmdOther.Name = "cmdOther"
+        Me.cmdOther.UseVisualStyleBackColor = True
         '
         'Button16
         '
@@ -2616,8 +2616,8 @@ Partial Class ucrCalculator
     Friend WithEvents Button18 As Button
     Friend WithEvents Button17 As Button
     Friend WithEvents Button16 As Button
-    Friend WithEvents Button15 As Button
-    Friend WithEvents Button14 As Button
+    Friend WithEvents cmdOther As Button
+    Friend WithEvents cmdFmatch As Button
     Friend WithEvents cmdLump As Button
     Friend WithEvents cmdInnum As Button
     Friend WithEvents cmdInfreq As Button

@@ -8388,58 +8388,58 @@
   <data name="&gt;&gt;Button16.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="Button15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdOther.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button15.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdOther.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 87</value>
   </data>
-  <data name="Button15.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdOther.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Button15.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdOther.TabIndex" type="System.Int32, mscorlib">
     <value>204</value>
   </data>
-  <data name="Button15.Text" xml:space="preserve">
-    <value>Button15</value>
+  <data name="cmdOther.Text" xml:space="preserve">
+    <value>other</value>
   </data>
-  <data name="&gt;&gt;Button15.Name" xml:space="preserve">
-    <value>Button15</value>
+  <data name="&gt;&gt;cmdOther.Name" xml:space="preserve">
+    <value>cmdOther</value>
   </data>
-  <data name="&gt;&gt;Button15.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdOther.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button15.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdOther.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;Button15.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdOther.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="Button14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdFmatch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button14.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdFmatch.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 88</value>
   </data>
-  <data name="Button14.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdFmatch.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Button14.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdFmatch.TabIndex" type="System.Int32, mscorlib">
     <value>203</value>
   </data>
-  <data name="Button14.Text" xml:space="preserve">
-    <value>Button14</value>
+  <data name="cmdFmatch.Text" xml:space="preserve">
+    <value>match</value>
   </data>
-  <data name="&gt;&gt;Button14.Name" xml:space="preserve">
-    <value>Button14</value>
+  <data name="&gt;&gt;cmdFmatch.Name" xml:space="preserve">
+    <value>cmdFmatch</value>
   </data>
-  <data name="&gt;&gt;Button14.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdFmatch.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button14.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdFmatch.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;Button14.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdFmatch.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="cmdLump.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
