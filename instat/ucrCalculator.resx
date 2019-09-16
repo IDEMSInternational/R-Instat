@@ -8712,52 +8712,55 @@
   <data name="&gt;&gt;Button4.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdFactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 22</value>
   </data>
-  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Button2.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdFactor.TabIndex" type="System.Int32, mscorlib">
     <value>191</value>
   </data>
-  <data name="Button2.Text" xml:space="preserve">
-    <value>Button2</value>
+  <data name="cmdFactor.Text" xml:space="preserve">
+    <value>factor</value>
   </data>
-  <data name="&gt;&gt;Button2.Name" xml:space="preserve">
-    <value>Button2</value>
+  <data name="&gt;&gt;cmdFactor.Name" xml:space="preserve">
+    <value>cmdFactor</value>
   </data>
-  <data name="&gt;&gt;Button2.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdFactor.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdFactor.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdFactor.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdAnon.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 21</value>
   </data>
-  <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdAnon.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Button3.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdAnon.TabIndex" type="System.Int32, mscorlib">
     <value>192</value>
   </data>
-  <data name="Button3.Text" xml:space="preserve">
-    <value>Button3</value>
+  <data name="cmdAnon.Text" xml:space="preserve">
+    <value>anon</value>
   </data>
-  <data name="&gt;&gt;Button3.Name" xml:space="preserve">
-    <value>Button3</value>
+  <data name="&gt;&gt;cmdAnon.Name" xml:space="preserve">
+    <value>cmdAnon</value>
   </data>
-  <data name="&gt;&gt;Button3.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdAnon.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdAnon.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;Button3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdAnon.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
   <data name="grpFactor.Location" type="System.Drawing.Point, System.Drawing">
