@@ -302,6 +302,27 @@ Partial Class ucrCalculator
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.grpFactor = New System.Windows.Forms.GroupBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.Button12 = New System.Windows.Forms.Button()
+        Me.Button13 = New System.Windows.Forms.Button()
+        Me.Button14 = New System.Windows.Forms.Button()
+        Me.Button15 = New System.Windows.Forms.Button()
+        Me.Button16 = New System.Windows.Forms.Button()
+        Me.Button17 = New System.Windows.Forms.Button()
+        Me.Button18 = New System.Windows.Forms.Button()
+        Me.Button19 = New System.Windows.Forms.Button()
+        Me.Button20 = New System.Windows.Forms.Button()
+        Me.Button21 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -312,6 +333,7 @@ Partial Class ucrCalculator
         Me.grpMaths.SuspendLayout()
         Me.grpWakefield.SuspendLayout()
         Me.grpCircular.SuspendLayout()
+        Me.grpFactor.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -2136,10 +2158,157 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'grpFactor
+        '
+        Me.grpFactor.Controls.Add(Me.Button21)
+        Me.grpFactor.Controls.Add(Me.Button20)
+        Me.grpFactor.Controls.Add(Me.Button19)
+        Me.grpFactor.Controls.Add(Me.Button18)
+        Me.grpFactor.Controls.Add(Me.Button17)
+        Me.grpFactor.Controls.Add(Me.Button16)
+        Me.grpFactor.Controls.Add(Me.Button15)
+        Me.grpFactor.Controls.Add(Me.Button14)
+        Me.grpFactor.Controls.Add(Me.Button13)
+        Me.grpFactor.Controls.Add(Me.Button12)
+        Me.grpFactor.Controls.Add(Me.Button11)
+        Me.grpFactor.Controls.Add(Me.Button10)
+        Me.grpFactor.Controls.Add(Me.Button9)
+        Me.grpFactor.Controls.Add(Me.Button8)
+        Me.grpFactor.Controls.Add(Me.Button7)
+        Me.grpFactor.Controls.Add(Me.Button6)
+        Me.grpFactor.Controls.Add(Me.Button5)
+        Me.grpFactor.Controls.Add(Me.Button4)
+        Me.grpFactor.Controls.Add(Me.Button2)
+        Me.grpFactor.Controls.Add(Me.Button3)
+        resources.ApplyResources(Me.grpFactor, "grpFactor")
+        Me.grpFactor.Name = "grpFactor"
+        Me.grpFactor.TabStop = False
+        '
+        'Button2
+        '
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Name = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.Name = "Button3"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        resources.ApplyResources(Me.Button4, "Button4")
+        Me.Button4.Name = "Button4"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        resources.ApplyResources(Me.Button5, "Button5")
+        Me.Button5.Name = "Button5"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        resources.ApplyResources(Me.Button6, "Button6")
+        Me.Button6.Name = "Button6"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button7
+        '
+        resources.ApplyResources(Me.Button7, "Button7")
+        Me.Button7.Name = "Button7"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button8
+        '
+        resources.ApplyResources(Me.Button8, "Button8")
+        Me.Button8.Name = "Button8"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
+        'Button9
+        '
+        resources.ApplyResources(Me.Button9, "Button9")
+        Me.Button9.Name = "Button9"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
+        'Button10
+        '
+        resources.ApplyResources(Me.Button10, "Button10")
+        Me.Button10.Name = "Button10"
+        Me.Button10.UseVisualStyleBackColor = True
+        '
+        'Button11
+        '
+        resources.ApplyResources(Me.Button11, "Button11")
+        Me.Button11.Name = "Button11"
+        Me.Button11.UseVisualStyleBackColor = True
+        '
+        'Button12
+        '
+        resources.ApplyResources(Me.Button12, "Button12")
+        Me.Button12.Name = "Button12"
+        Me.Button12.UseVisualStyleBackColor = True
+        '
+        'Button13
+        '
+        resources.ApplyResources(Me.Button13, "Button13")
+        Me.Button13.Name = "Button13"
+        Me.Button13.UseVisualStyleBackColor = True
+        '
+        'Button14
+        '
+        resources.ApplyResources(Me.Button14, "Button14")
+        Me.Button14.Name = "Button14"
+        Me.Button14.UseVisualStyleBackColor = True
+        '
+        'Button15
+        '
+        resources.ApplyResources(Me.Button15, "Button15")
+        Me.Button15.Name = "Button15"
+        Me.Button15.UseVisualStyleBackColor = True
+        '
+        'Button16
+        '
+        resources.ApplyResources(Me.Button16, "Button16")
+        Me.Button16.Name = "Button16"
+        Me.Button16.UseVisualStyleBackColor = True
+        '
+        'Button17
+        '
+        resources.ApplyResources(Me.Button17, "Button17")
+        Me.Button17.Name = "Button17"
+        Me.Button17.UseVisualStyleBackColor = True
+        '
+        'Button18
+        '
+        resources.ApplyResources(Me.Button18, "Button18")
+        Me.Button18.Name = "Button18"
+        Me.Button18.UseVisualStyleBackColor = True
+        '
+        'Button19
+        '
+        resources.ApplyResources(Me.Button19, "Button19")
+        Me.Button19.Name = "Button19"
+        Me.Button19.UseVisualStyleBackColor = True
+        '
+        'Button20
+        '
+        resources.ApplyResources(Me.Button20, "Button20")
+        Me.Button20.Name = "Button20"
+        Me.Button20.UseVisualStyleBackColor = True
+        '
+        'Button21
+        '
+        resources.ApplyResources(Me.Button21, "Button21")
+        Me.Button21.Name = "Button21"
+        Me.Button21.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpLogical)
@@ -2171,6 +2340,7 @@ Partial Class ucrCalculator
         Me.grpMaths.ResumeLayout(False)
         Me.grpWakefield.ResumeLayout(False)
         Me.grpCircular.ResumeLayout(False)
+        Me.grpFactor.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2439,4 +2609,25 @@ Partial Class ucrCalculator
     Friend WithEvents cmdCircRho As Button
     Friend WithEvents cmdCircQuantile As Button
     Friend WithEvents cmdCircular As Button
+    Friend WithEvents grpFactor As GroupBox
+    Friend WithEvents Button21 As Button
+    Friend WithEvents Button20 As Button
+    Friend WithEvents Button19 As Button
+    Friend WithEvents Button18 As Button
+    Friend WithEvents Button17 As Button
+    Friend WithEvents Button16 As Button
+    Friend WithEvents Button15 As Button
+    Friend WithEvents Button14 As Button
+    Friend WithEvents Button13 As Button
+    Friend WithEvents Button12 As Button
+    Friend WithEvents Button11 As Button
+    Friend WithEvents Button10 As Button
+    Friend WithEvents Button9 As Button
+    Friend WithEvents Button8 As Button
+    Friend WithEvents Button7 As Button
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
 End Class
