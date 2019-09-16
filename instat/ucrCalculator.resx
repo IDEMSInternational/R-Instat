@@ -8550,58 +8550,58 @@
   <data name="&gt;&gt;Button10.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="Button9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdAdd_na.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button9.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdAdd_na.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 43</value>
   </data>
-  <data name="Button9.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdAdd_na.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Button9.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdAdd_na.TabIndex" type="System.Int32, mscorlib">
     <value>198</value>
   </data>
-  <data name="Button9.Text" xml:space="preserve">
-    <value>Button9</value>
+  <data name="cmdAdd_na.Text" xml:space="preserve">
+    <value>add_na</value>
   </data>
-  <data name="&gt;&gt;Button9.Name" xml:space="preserve">
-    <value>Button9</value>
+  <data name="&gt;&gt;cmdAdd_na.Name" xml:space="preserve">
+    <value>cmdAdd_na</value>
   </data>
-  <data name="&gt;&gt;Button9.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdAdd_na.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button9.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdAdd_na.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;Button9.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdAdd_na.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="Button8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdExpand.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button8.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdExpand.Location" type="System.Drawing.Point, System.Drawing">
     <value>154, 43</value>
   </data>
-  <data name="Button8.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdExpand.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Button8.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdExpand.TabIndex" type="System.Int32, mscorlib">
     <value>197</value>
   </data>
-  <data name="Button8.Text" xml:space="preserve">
-    <value>Button8</value>
+  <data name="cmdExpand.Text" xml:space="preserve">
+    <value>expand</value>
   </data>
-  <data name="&gt;&gt;Button8.Name" xml:space="preserve">
-    <value>Button8</value>
+  <data name="&gt;&gt;cmdExpand.Name" xml:space="preserve">
+    <value>cmdExpand</value>
   </data>
-  <data name="&gt;&gt;Button8.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdExpand.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button8.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdExpand.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;Button8.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdExpand.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="cmdDrop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">

@@ -309,8 +309,8 @@ Partial Class ucrCalculator
         Me.cmdCollapse = New System.Windows.Forms.Button()
         Me.cmdCross = New System.Windows.Forms.Button()
         Me.cmdDrop = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
+        Me.cmdExpand = New System.Windows.Forms.Button()
+        Me.cmdAdd_na = New System.Windows.Forms.Button()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
@@ -2172,8 +2172,8 @@ Partial Class ucrCalculator
         Me.grpFactor.Controls.Add(Me.Button12)
         Me.grpFactor.Controls.Add(Me.Button11)
         Me.grpFactor.Controls.Add(Me.Button10)
-        Me.grpFactor.Controls.Add(Me.Button9)
-        Me.grpFactor.Controls.Add(Me.Button8)
+        Me.grpFactor.Controls.Add(Me.cmdAdd_na)
+        Me.grpFactor.Controls.Add(Me.cmdExpand)
         Me.grpFactor.Controls.Add(Me.cmdDrop)
         Me.grpFactor.Controls.Add(Me.cmdCross)
         Me.grpFactor.Controls.Add(Me.cmdCollapse)
@@ -2220,17 +2220,17 @@ Partial Class ucrCalculator
         Me.cmdDrop.Name = "cmdDrop"
         Me.cmdDrop.UseVisualStyleBackColor = True
         '
-        'Button8
+        'cmdExpand
         '
-        resources.ApplyResources(Me.Button8, "Button8")
-        Me.Button8.Name = "Button8"
-        Me.Button8.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdExpand, "cmdExpand")
+        Me.cmdExpand.Name = "cmdExpand"
+        Me.cmdExpand.UseVisualStyleBackColor = True
         '
-        'Button9
+        'cmdAdd_na
         '
-        resources.ApplyResources(Me.Button9, "Button9")
-        Me.Button9.Name = "Button9"
-        Me.Button9.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdAdd_na, "cmdAdd_na")
+        Me.cmdAdd_na.Name = "cmdAdd_na"
+        Me.cmdAdd_na.UseVisualStyleBackColor = True
         '
         'Button10
         '
@@ -2622,8 +2622,8 @@ Partial Class ucrCalculator
     Friend WithEvents Button12 As Button
     Friend WithEvents Button11 As Button
     Friend WithEvents Button10 As Button
-    Friend WithEvents Button9 As Button
-    Friend WithEvents Button8 As Button
+    Friend WithEvents cmdAdd_na As Button
+    Friend WithEvents cmdExpand As Button
     Friend WithEvents cmdDrop As Button
     Friend WithEvents cmdCross As Button
     Friend WithEvents cmdCollapse As Button
