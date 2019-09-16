@@ -1893,4 +1893,20 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::circular(x =, modulo = ""2pi"", units = ""radians"")", 36)
         End If
     End Sub
+
+    Private Sub cmdFactor_Click(sender As Object, e As EventArgs) Handles cmdFactor.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::as_factor(x = , ... )", 7)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::as_factor()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAnon_Click(sender As Object, e As EventArgs) Handles cmdAnon.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_anon(x = , prefix = "" )", 15)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_anon()", 1)
+        End If
+    End Sub
 End Class
