@@ -319,8 +319,8 @@ Partial Class ucrCalculator
         Me.cmdOther = New System.Windows.Forms.Button()
         Me.cmdRecode = New System.Windows.Forms.Button()
         Me.cmdRelevel = New System.Windows.Forms.Button()
-        Me.Button18 = New System.Windows.Forms.Button()
-        Me.Button19 = New System.Windows.Forms.Button()
+        Me.cmdReorder = New System.Windows.Forms.Button()
+        Me.cmdReverse = New System.Windows.Forms.Button()
         Me.Button20 = New System.Windows.Forms.Button()
         Me.Button21 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
@@ -2162,8 +2162,8 @@ Partial Class ucrCalculator
         '
         Me.grpFactor.Controls.Add(Me.Button21)
         Me.grpFactor.Controls.Add(Me.Button20)
-        Me.grpFactor.Controls.Add(Me.Button19)
-        Me.grpFactor.Controls.Add(Me.Button18)
+        Me.grpFactor.Controls.Add(Me.cmdReverse)
+        Me.grpFactor.Controls.Add(Me.cmdReorder)
         Me.grpFactor.Controls.Add(Me.cmdRelevel)
         Me.grpFactor.Controls.Add(Me.cmdRecode)
         Me.grpFactor.Controls.Add(Me.cmdOther)
@@ -2280,17 +2280,17 @@ Partial Class ucrCalculator
         Me.cmdRelevel.Name = "cmdRelevel"
         Me.cmdRelevel.UseVisualStyleBackColor = True
         '
-        'Button18
+        'cmdReorder
         '
-        resources.ApplyResources(Me.Button18, "Button18")
-        Me.Button18.Name = "Button18"
-        Me.Button18.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdReorder, "cmdReorder")
+        Me.cmdReorder.Name = "cmdReorder"
+        Me.cmdReorder.UseVisualStyleBackColor = True
         '
-        'Button19
+        'cmdReverse
         '
-        resources.ApplyResources(Me.Button19, "Button19")
-        Me.Button19.Name = "Button19"
-        Me.Button19.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdReverse, "cmdReverse")
+        Me.cmdReverse.Name = "cmdReverse"
+        Me.cmdReverse.UseVisualStyleBackColor = True
         '
         'Button20
         '
@@ -2612,8 +2612,8 @@ Partial Class ucrCalculator
     Friend WithEvents grpFactor As GroupBox
     Friend WithEvents Button21 As Button
     Friend WithEvents Button20 As Button
-    Friend WithEvents Button19 As Button
-    Friend WithEvents Button18 As Button
+    Friend WithEvents cmdReverse As Button
+    Friend WithEvents cmdReorder As Button
     Friend WithEvents cmdRelevel As Button
     Friend WithEvents cmdRecode As Button
     Friend WithEvents cmdOther As Button
