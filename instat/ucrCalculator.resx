@@ -8604,58 +8604,58 @@
   <data name="&gt;&gt;Button8.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="Button7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdDrop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdDrop.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 43</value>
   </data>
-  <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdDrop.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Button7.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdDrop.TabIndex" type="System.Int32, mscorlib">
     <value>196</value>
   </data>
-  <data name="Button7.Text" xml:space="preserve">
-    <value>Button7</value>
+  <data name="cmdDrop.Text" xml:space="preserve">
+    <value>drop</value>
   </data>
-  <data name="&gt;&gt;Button7.Name" xml:space="preserve">
-    <value>Button7</value>
+  <data name="&gt;&gt;cmdDrop.Name" xml:space="preserve">
+    <value>cmdDrop</value>
   </data>
-  <data name="&gt;&gt;Button7.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdDrop.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button7.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdDrop.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;Button7.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdDrop.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="Button6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdCross.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdCross.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 44</value>
   </data>
-  <data name="Button6.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdCross.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Button6.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdCross.TabIndex" type="System.Int32, mscorlib">
     <value>195</value>
   </data>
-  <data name="Button6.Text" xml:space="preserve">
-    <value>Button6</value>
+  <data name="cmdCross.Text" xml:space="preserve">
+    <value>cross</value>
   </data>
-  <data name="&gt;&gt;Button6.Name" xml:space="preserve">
-    <value>Button6</value>
+  <data name="&gt;&gt;cmdCross.Name" xml:space="preserve">
+    <value>cmdCross</value>
   </data>
-  <data name="&gt;&gt;Button6.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdCross.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button6.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdCross.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;Button6.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdCross.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="cmdCollapse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
