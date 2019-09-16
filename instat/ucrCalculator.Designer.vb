@@ -317,8 +317,8 @@ Partial Class ucrCalculator
         Me.cmdLump = New System.Windows.Forms.Button()
         Me.cmdFmatch = New System.Windows.Forms.Button()
         Me.cmdOther = New System.Windows.Forms.Button()
-        Me.Button16 = New System.Windows.Forms.Button()
-        Me.Button17 = New System.Windows.Forms.Button()
+        Me.cmdRecode = New System.Windows.Forms.Button()
+        Me.cmdRelevel = New System.Windows.Forms.Button()
         Me.Button18 = New System.Windows.Forms.Button()
         Me.Button19 = New System.Windows.Forms.Button()
         Me.Button20 = New System.Windows.Forms.Button()
@@ -2164,8 +2164,8 @@ Partial Class ucrCalculator
         Me.grpFactor.Controls.Add(Me.Button20)
         Me.grpFactor.Controls.Add(Me.Button19)
         Me.grpFactor.Controls.Add(Me.Button18)
-        Me.grpFactor.Controls.Add(Me.Button17)
-        Me.grpFactor.Controls.Add(Me.Button16)
+        Me.grpFactor.Controls.Add(Me.cmdRelevel)
+        Me.grpFactor.Controls.Add(Me.cmdRecode)
         Me.grpFactor.Controls.Add(Me.cmdOther)
         Me.grpFactor.Controls.Add(Me.cmdFmatch)
         Me.grpFactor.Controls.Add(Me.cmdLump)
@@ -2268,17 +2268,17 @@ Partial Class ucrCalculator
         Me.cmdOther.Name = "cmdOther"
         Me.cmdOther.UseVisualStyleBackColor = True
         '
-        'Button16
+        'cmdRecode
         '
-        resources.ApplyResources(Me.Button16, "Button16")
-        Me.Button16.Name = "Button16"
-        Me.Button16.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdRecode, "cmdRecode")
+        Me.cmdRecode.Name = "cmdRecode"
+        Me.cmdRecode.UseVisualStyleBackColor = True
         '
-        'Button17
+        'cmdRelevel
         '
-        resources.ApplyResources(Me.Button17, "Button17")
-        Me.Button17.Name = "Button17"
-        Me.Button17.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdRelevel, "cmdRelevel")
+        Me.cmdRelevel.Name = "cmdRelevel"
+        Me.cmdRelevel.UseVisualStyleBackColor = True
         '
         'Button18
         '
@@ -2614,8 +2614,8 @@ Partial Class ucrCalculator
     Friend WithEvents Button20 As Button
     Friend WithEvents Button19 As Button
     Friend WithEvents Button18 As Button
-    Friend WithEvents Button17 As Button
-    Friend WithEvents Button16 As Button
+    Friend WithEvents cmdRelevel As Button
+    Friend WithEvents cmdRecode As Button
     Friend WithEvents cmdOther As Button
     Friend WithEvents cmdFmatch As Button
     Friend WithEvents cmdLump As Button

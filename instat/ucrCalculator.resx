@@ -8334,58 +8334,58 @@
   <data name="&gt;&gt;Button18.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="Button17.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdRelevel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button17.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdRelevel.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 87</value>
   </data>
-  <data name="Button17.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdRelevel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Button17.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdRelevel.TabIndex" type="System.Int32, mscorlib">
     <value>206</value>
   </data>
-  <data name="Button17.Text" xml:space="preserve">
-    <value>Button17</value>
+  <data name="cmdRelevel.Text" xml:space="preserve">
+    <value>relevel</value>
   </data>
-  <data name="&gt;&gt;Button17.Name" xml:space="preserve">
-    <value>Button17</value>
+  <data name="&gt;&gt;cmdRelevel.Name" xml:space="preserve">
+    <value>cmdRelevel</value>
   </data>
-  <data name="&gt;&gt;Button17.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdRelevel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button17.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdRelevel.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;Button17.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdRelevel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="Button16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdRecode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button16.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdRecode.Location" type="System.Drawing.Point, System.Drawing">
     <value>154, 87</value>
   </data>
-  <data name="Button16.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdRecode.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Button16.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdRecode.TabIndex" type="System.Int32, mscorlib">
     <value>205</value>
   </data>
-  <data name="Button16.Text" xml:space="preserve">
-    <value>Button16</value>
+  <data name="cmdRecode.Text" xml:space="preserve">
+    <value>recode</value>
   </data>
-  <data name="&gt;&gt;Button16.Name" xml:space="preserve">
-    <value>Button16</value>
+  <data name="&gt;&gt;cmdRecode.Name" xml:space="preserve">
+    <value>cmdRecode</value>
   </data>
-  <data name="&gt;&gt;Button16.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdRecode.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button16.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdRecode.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;Button16.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdRecode.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="cmdOther.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
