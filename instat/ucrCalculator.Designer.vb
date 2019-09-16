@@ -321,8 +321,8 @@ Partial Class ucrCalculator
         Me.cmdRelevel = New System.Windows.Forms.Button()
         Me.cmdReorder = New System.Windows.Forms.Button()
         Me.cmdReverse = New System.Windows.Forms.Button()
-        Me.Button20 = New System.Windows.Forms.Button()
-        Me.Button21 = New System.Windows.Forms.Button()
+        Me.cmdShift = New System.Windows.Forms.Button()
+        Me.cmdShuffle = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -2160,8 +2160,8 @@ Partial Class ucrCalculator
         '
         'grpFactor
         '
-        Me.grpFactor.Controls.Add(Me.Button21)
-        Me.grpFactor.Controls.Add(Me.Button20)
+        Me.grpFactor.Controls.Add(Me.cmdShuffle)
+        Me.grpFactor.Controls.Add(Me.cmdShift)
         Me.grpFactor.Controls.Add(Me.cmdReverse)
         Me.grpFactor.Controls.Add(Me.cmdReorder)
         Me.grpFactor.Controls.Add(Me.cmdRelevel)
@@ -2292,17 +2292,17 @@ Partial Class ucrCalculator
         Me.cmdReverse.Name = "cmdReverse"
         Me.cmdReverse.UseVisualStyleBackColor = True
         '
-        'Button20
+        'cmdShift
         '
-        resources.ApplyResources(Me.Button20, "Button20")
-        Me.Button20.Name = "Button20"
-        Me.Button20.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdShift, "cmdShift")
+        Me.cmdShift.Name = "cmdShift"
+        Me.cmdShift.UseVisualStyleBackColor = True
         '
-        'Button21
+        'cmdShuffle
         '
-        resources.ApplyResources(Me.Button21, "Button21")
-        Me.Button21.Name = "Button21"
-        Me.Button21.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdShuffle, "cmdShuffle")
+        Me.cmdShuffle.Name = "cmdShuffle"
+        Me.cmdShuffle.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
@@ -2610,8 +2610,8 @@ Partial Class ucrCalculator
     Friend WithEvents cmdCircQuantile As Button
     Friend WithEvents cmdCircular As Button
     Friend WithEvents grpFactor As GroupBox
-    Friend WithEvents Button21 As Button
-    Friend WithEvents Button20 As Button
+    Friend WithEvents cmdShuffle As Button
+    Friend WithEvents cmdShift As Button
     Friend WithEvents cmdReverse As Button
     Friend WithEvents cmdReorder As Button
     Friend WithEvents cmdRelevel As Button

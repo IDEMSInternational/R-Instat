@@ -8226,58 +8226,58 @@
   <data name="&gt;&gt;ucrReceiverForCalculation.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
-  <data name="Button21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdShuffle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button21.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdShuffle.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 109</value>
   </data>
-  <data name="Button21.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdShuffle.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Button21.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdShuffle.TabIndex" type="System.Int32, mscorlib">
     <value>210</value>
   </data>
-  <data name="Button21.Text" xml:space="preserve">
-    <value>Button21</value>
+  <data name="cmdShuffle.Text" xml:space="preserve">
+    <value>shuffle</value>
   </data>
-  <data name="&gt;&gt;Button21.Name" xml:space="preserve">
-    <value>Button21</value>
+  <data name="&gt;&gt;cmdShuffle.Name" xml:space="preserve">
+    <value>cmdShuffle</value>
   </data>
-  <data name="&gt;&gt;Button21.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdShuffle.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button21.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdShuffle.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;Button21.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdShuffle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Button20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdShift.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button20.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdShift.Location" type="System.Drawing.Point, System.Drawing">
     <value>154, 109</value>
   </data>
-  <data name="Button20.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdShift.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Button20.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdShift.TabIndex" type="System.Int32, mscorlib">
     <value>209</value>
   </data>
-  <data name="Button20.Text" xml:space="preserve">
-    <value>Button20</value>
+  <data name="cmdShift.Text" xml:space="preserve">
+    <value>shift</value>
   </data>
-  <data name="&gt;&gt;Button20.Name" xml:space="preserve">
-    <value>Button20</value>
+  <data name="&gt;&gt;cmdShift.Name" xml:space="preserve">
+    <value>cmdShift</value>
   </data>
-  <data name="&gt;&gt;Button20.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdShift.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button20.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdShift.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;Button20.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdShift.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="cmdReverse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
