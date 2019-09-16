@@ -303,8 +303,8 @@ Partial Class ucrCalculator
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpFactor = New System.Windows.Forms.GroupBox()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.cmdFactor = New System.Windows.Forms.Button()
+        Me.cmdAnon = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
@@ -2178,23 +2178,23 @@ Partial Class ucrCalculator
         Me.grpFactor.Controls.Add(Me.Button6)
         Me.grpFactor.Controls.Add(Me.Button5)
         Me.grpFactor.Controls.Add(Me.Button4)
-        Me.grpFactor.Controls.Add(Me.Button2)
-        Me.grpFactor.Controls.Add(Me.Button3)
+        Me.grpFactor.Controls.Add(Me.cmdFactor)
+        Me.grpFactor.Controls.Add(Me.cmdAnon)
         resources.ApplyResources(Me.grpFactor, "grpFactor")
         Me.grpFactor.Name = "grpFactor"
         Me.grpFactor.TabStop = False
         '
-        'Button2
+        'cmdFactor
         '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Name = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdFactor, "cmdFactor")
+        Me.cmdFactor.Name = "cmdFactor"
+        Me.cmdFactor.UseVisualStyleBackColor = True
         '
-        'Button3
+        'cmdAnon
         '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.Name = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdAnon, "cmdAnon")
+        Me.cmdAnon.Name = "cmdAnon"
+        Me.cmdAnon.UseVisualStyleBackColor = True
         '
         'Button4
         '
@@ -2628,6 +2628,6 @@ Partial Class ucrCalculator
     Friend WithEvents Button6 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Button4 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents cmdFactor As Button
+    Friend WithEvents cmdAnon As Button
 End Class
