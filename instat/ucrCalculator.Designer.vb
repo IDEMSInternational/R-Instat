@@ -305,8 +305,8 @@ Partial Class ucrCalculator
         Me.grpFactor = New System.Windows.Forms.GroupBox()
         Me.cmdFactor = New System.Windows.Forms.Button()
         Me.cmdAnon = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
+        Me.cmdConcat = New System.Windows.Forms.Button()
+        Me.cmdCollapse = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
@@ -2176,8 +2176,8 @@ Partial Class ucrCalculator
         Me.grpFactor.Controls.Add(Me.Button8)
         Me.grpFactor.Controls.Add(Me.Button7)
         Me.grpFactor.Controls.Add(Me.Button6)
-        Me.grpFactor.Controls.Add(Me.Button5)
-        Me.grpFactor.Controls.Add(Me.Button4)
+        Me.grpFactor.Controls.Add(Me.cmdCollapse)
+        Me.grpFactor.Controls.Add(Me.cmdConcat)
         Me.grpFactor.Controls.Add(Me.cmdFactor)
         Me.grpFactor.Controls.Add(Me.cmdAnon)
         resources.ApplyResources(Me.grpFactor, "grpFactor")
@@ -2196,17 +2196,17 @@ Partial Class ucrCalculator
         Me.cmdAnon.Name = "cmdAnon"
         Me.cmdAnon.UseVisualStyleBackColor = True
         '
-        'Button4
+        'cmdConcat
         '
-        resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.Name = "Button4"
-        Me.Button4.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdConcat, "cmdConcat")
+        Me.cmdConcat.Name = "cmdConcat"
+        Me.cmdConcat.UseVisualStyleBackColor = True
         '
-        'Button5
+        'cmdCollapse
         '
-        resources.ApplyResources(Me.Button5, "Button5")
-        Me.Button5.Name = "Button5"
-        Me.Button5.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCollapse, "cmdCollapse")
+        Me.cmdCollapse.Name = "cmdCollapse"
+        Me.cmdCollapse.UseVisualStyleBackColor = True
         '
         'Button6
         '
@@ -2626,8 +2626,8 @@ Partial Class ucrCalculator
     Friend WithEvents Button8 As Button
     Friend WithEvents Button7 As Button
     Friend WithEvents Button6 As Button
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button4 As Button
+    Friend WithEvents cmdCollapse As Button
+    Friend WithEvents cmdConcat As Button
     Friend WithEvents cmdFactor As Button
     Friend WithEvents cmdAnon As Button
 End Class

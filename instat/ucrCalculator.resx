@@ -8658,58 +8658,58 @@
   <data name="&gt;&gt;Button6.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="Button5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdCollapse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdCollapse.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 21</value>
   </data>
-  <data name="Button5.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdCollapse.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Button5.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdCollapse.TabIndex" type="System.Int32, mscorlib">
     <value>194</value>
   </data>
-  <data name="Button5.Text" xml:space="preserve">
-    <value>Button5</value>
+  <data name="cmdCollapse.Text" xml:space="preserve">
+    <value>collapse</value>
   </data>
-  <data name="&gt;&gt;Button5.Name" xml:space="preserve">
-    <value>Button5</value>
+  <data name="&gt;&gt;cmdCollapse.Name" xml:space="preserve">
+    <value>cmdCollapse</value>
   </data>
-  <data name="&gt;&gt;Button5.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdCollapse.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button5.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdCollapse.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;Button5.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdCollapse.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="Button4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdConcat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdConcat.Location" type="System.Drawing.Point, System.Drawing">
     <value>154, 21</value>
   </data>
-  <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdConcat.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Button4.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdConcat.TabIndex" type="System.Int32, mscorlib">
     <value>193</value>
   </data>
-  <data name="Button4.Text" xml:space="preserve">
-    <value>Button4</value>
+  <data name="cmdConcat.Text" xml:space="preserve">
+    <value>concat</value>
   </data>
-  <data name="&gt;&gt;Button4.Name" xml:space="preserve">
-    <value>Button4</value>
+  <data name="&gt;&gt;cmdConcat.Name" xml:space="preserve">
+    <value>cmdConcat</value>
   </data>
-  <data name="&gt;&gt;Button4.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdConcat.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdConcat.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;Button4.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdConcat.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
   <data name="cmdFactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
