@@ -149,7 +149,7 @@ Public Class ucrAxes
         ucrInputUpperLimit.SetLinkedDisplayControl(lblUpperLimit)
 
         'Axis type - controls which options are available
-        ucrInputAxisType.SetItems({"Continuous", "Discrete", "Date"})
+        ucrInputAxisType.SetItems({"continuous", "discrete", "date"})
         ucrInputAxisType.SetDropDownStyleAsNonEditable()
 
         ucrInputRelaceMissingvalues.SetParameter(New RParameter("na.value"))
@@ -186,7 +186,7 @@ Public Class ucrAxes
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "Continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempBreaksParam As RParameter
         Dim clsTempMinorBreaksParam As RParameter
 
@@ -389,12 +389,14 @@ Public Class ucrAxes
     End Sub
 
     Private Sub ExpandControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrInputExpand.ControlValueChanged
-        If ucrChkExpand.Checked AndAlso Not ucrInputExpand.IsEmpty Then
-            clsXYScaleContinuousFunction.AddParameter("expand", clsRFunctionParameter:=ucrInputExpand.clsRList)
-        Else
-            clsXYScaleContinuousFunction.RemoveParameterByName("expand")
+        If bRCodeSet Then
+            If ucrChkExpand.Checked AndAlso Not ucrInputExpand.IsEmpty Then
+                clsXYScaleContinuousFunction.AddParameter("expand", clsRFunctionParameter:=ucrInputExpand.clsRList)
+            Else
+                clsXYScaleContinuousFunction.RemoveParameterByName("expand")
+            End If
+            AddRemoveContinuousXYScales()
         End If
-        AddRemoveContinuousXYScales()
     End Sub
 
     Private Sub ScalesCheckboxes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkTransformation.ControlValueChanged, ucrChkExpand.ControlValueChanged, ucrChkNaValue.ControlValueChanged
