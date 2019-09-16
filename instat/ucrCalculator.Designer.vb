@@ -311,8 +311,8 @@ Partial Class ucrCalculator
         Me.cmdDrop = New System.Windows.Forms.Button()
         Me.cmdExpand = New System.Windows.Forms.Button()
         Me.cmdAdd_na = New System.Windows.Forms.Button()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button11 = New System.Windows.Forms.Button()
+        Me.cmdInorder = New System.Windows.Forms.Button()
+        Me.cmdInfreq = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
@@ -2170,8 +2170,8 @@ Partial Class ucrCalculator
         Me.grpFactor.Controls.Add(Me.Button14)
         Me.grpFactor.Controls.Add(Me.Button13)
         Me.grpFactor.Controls.Add(Me.Button12)
-        Me.grpFactor.Controls.Add(Me.Button11)
-        Me.grpFactor.Controls.Add(Me.Button10)
+        Me.grpFactor.Controls.Add(Me.cmdInfreq)
+        Me.grpFactor.Controls.Add(Me.cmdInorder)
         Me.grpFactor.Controls.Add(Me.cmdAdd_na)
         Me.grpFactor.Controls.Add(Me.cmdExpand)
         Me.grpFactor.Controls.Add(Me.cmdDrop)
@@ -2232,17 +2232,17 @@ Partial Class ucrCalculator
         Me.cmdAdd_na.Name = "cmdAdd_na"
         Me.cmdAdd_na.UseVisualStyleBackColor = True
         '
-        'Button10
+        'cmdInorder
         '
-        resources.ApplyResources(Me.Button10, "Button10")
-        Me.Button10.Name = "Button10"
-        Me.Button10.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdInorder, "cmdInorder")
+        Me.cmdInorder.Name = "cmdInorder"
+        Me.cmdInorder.UseVisualStyleBackColor = True
         '
-        'Button11
+        'cmdInfreq
         '
-        resources.ApplyResources(Me.Button11, "Button11")
-        Me.Button11.Name = "Button11"
-        Me.Button11.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdInfreq, "cmdInfreq")
+        Me.cmdInfreq.Name = "cmdInfreq"
+        Me.cmdInfreq.UseVisualStyleBackColor = True
         '
         'Button12
         '
@@ -2620,8 +2620,8 @@ Partial Class ucrCalculator
     Friend WithEvents Button14 As Button
     Friend WithEvents Button13 As Button
     Friend WithEvents Button12 As Button
-    Friend WithEvents Button11 As Button
-    Friend WithEvents Button10 As Button
+    Friend WithEvents cmdInfreq As Button
+    Friend WithEvents cmdInorder As Button
     Friend WithEvents cmdAdd_na As Button
     Friend WithEvents cmdExpand As Button
     Friend WithEvents cmdDrop As Button
