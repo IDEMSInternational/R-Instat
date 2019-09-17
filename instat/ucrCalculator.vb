@@ -1920,9 +1920,17 @@ Public Class ucrCalculator
 
     Private Sub cmdCollapse_Click(sender As Object, e As EventArgs) Handles cmdCollapse.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_collapse(.f, ..., group_other = FALSE)", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_collapse(.f = , ..., group_other = FALSE)", 27)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_collapse()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCross_Click(sender As Object, e As EventArgs) Handles cmdCross.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_cross(.f = , ..., sep = "":"", keep_empty = FALSE)", 39)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_cross()", 1)
         End If
     End Sub
 End Class
