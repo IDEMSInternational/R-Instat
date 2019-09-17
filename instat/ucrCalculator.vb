@@ -1920,7 +1920,7 @@ Public Class ucrCalculator
 
     Private Sub cmdFactor_Click(sender As Object, e As EventArgs) Handles cmdFactor.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::as_factor(x = , ... )", 7)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::as_factor(x = , ... )", 8)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::as_factor()", 1)
         End If
@@ -1944,7 +1944,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCollapse_Click(sender As Object, e As EventArgs) Handles cmdCollapse.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_collapse(.f = , ..., group_other = FALSE)", 27)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_collapse(.f = , ..., group_other = FALSE)", 28)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_collapse()", 1)
         End If
@@ -1952,7 +1952,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCross_Click(sender As Object, e As EventArgs) Handles cmdCross.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_cross(.f = , ..., sep = "":"", keep_empty = FALSE)", 39)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_cross(.f = , ..., sep = "":"", keep_empty = FALSE)", 38)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_cross()", 1)
         End If
@@ -1960,7 +1960,7 @@ Public Class ucrCalculator
 
     Private Sub cmdDrop_Click(sender As Object, e As EventArgs) Handles cmdDrop.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_drop(f = , only)", 7)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_drop(f = , only)", 8)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_drop()", 1)
         End If
@@ -1968,7 +1968,7 @@ Public Class ucrCalculator
 
     Private Sub cmdExpand_Click(sender As Object, e As EventArgs) Handles cmdExpand.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_expand(f = , ...)", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_expand(f = , ...)", 7)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_expand()", 1)
         End If
@@ -1976,7 +1976,7 @@ Public Class ucrCalculator
 
     Private Sub cmdAdd_na_Click(sender As Object, e As EventArgs) Handles cmdAdd_na.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_explicit_na(f = , na_level = ""(Missing)"")", 27)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_explicit_na(f = , na_level = ""(Missing)"")", 26)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_explicit_na()", 1)
         End If
@@ -1984,7 +1984,7 @@ Public Class ucrCalculator
 
     Private Sub cmdInorder_Click(sender As Object, e As EventArgs) Handles cmdInorder.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_inorder(f = , ordered = NA)", 15)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_inorder(f = , ordered = NA)", 16)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_inorder()", 1)
         End If
@@ -1992,7 +1992,7 @@ Public Class ucrCalculator
 
     Private Sub cmdInfreq_Click(sender As Object, e As EventArgs) Handles cmdInfreq.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_infreq(f = , ordered = NA)", 15)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_infreq(f = , ordered = NA)", 16)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_infreq()", 1)
         End If
@@ -2000,7 +2000,7 @@ Public Class ucrCalculator
 
     Private Sub cmdInseq_Click(sender As Object, e As EventArgs) Handles cmdInseq.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_inseq(f = , ordered = NA)", 15)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_inseq(f = , ordered = NA)", 16)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_inseq()", 1)
         End If
@@ -2008,7 +2008,7 @@ Public Class ucrCalculator
 
     Private Sub cmdLump_Click(sender As Object, e As EventArgs) Handles cmdLump.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_lump(f = , n, prop, w = NULL, other_level = ""Other"", ties.method = c(""min"", ""average"", ""first"", ""last"", ""random"", ""max""))", 110)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_lump(f = , n, prop, w = NULL, other_level = ""Other"", ties.method = c(""min"", ""average"", ""first"", ""last"", ""random"", ""max""))", 113)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_lump()", 1)
         End If
@@ -2016,7 +2016,7 @@ Public Class ucrCalculator
 
     Private Sub cmdFmatch_Click(sender As Object, e As EventArgs) Handles cmdFmatch.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_match(f = , lvls)", 7)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_match(f = , lvls)", 8)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_match()", 1)
         End If
@@ -2032,7 +2032,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRecode_Click(sender As Object, e As EventArgs) Handles cmdRecode.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_recode(.f = , ...)", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_recode(.f = , ...)", 7)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_recode()", 1)
         End If
@@ -2040,15 +2040,15 @@ Public Class ucrCalculator
 
     Private Sub cmdRelevel_Click(sender As Object, e As EventArgs) Handles cmdRelevel.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_relabel(.f = , .fun, ...)", 12)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_relevel(.f = , ..., after = 0L)", 19)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_relabel()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_relevel()", 1)
         End If
     End Sub
 
     Private Sub cmdReorder_Click(sender As Object, e As EventArgs) Handles cmdReorder.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_reorder(.f = , .x = , .fun = median, ..., .desc = FALSE)", 42)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_reorder(.f = , .x = , .fun = median, ..., .desc = FALSE)", 44)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_reorder()", 1)
         End If
@@ -2056,7 +2056,7 @@ Public Class ucrCalculator
 
     Private Sub cmdReverse_Click(sender As Object, e As EventArgs) Handles cmdReverse.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_rev(f = , )", 3)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_rev(f = , )", 4)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_rev()", 1)
         End If
@@ -2064,7 +2064,7 @@ Public Class ucrCalculator
 
     Private Sub cmdShift_Click(sender As Object, e As EventArgs) Handles cmdShift.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_shift(f = , n = 1L)", 9)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_shift(f = , n = 1L)", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_shift()", 1)
         End If
@@ -2072,7 +2072,7 @@ Public Class ucrCalculator
 
     Private Sub cmdShuffle_Click(sender As Object, e As EventArgs) Handles cmdShuffle.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_shuffle(f = , )", 3)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_shuffle(f = , )", 4)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_shuffle()", 1)
         End If
