@@ -609,13 +609,13 @@ Public Class sdgPlots
             If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) & Chr(34) Then
                 'Run R code to determine type
                 'Temp default to continuous
-                Return "Continuous"
+                Return "continuous"
             Else
                 'When aes not present discrete scale function works
-                Return "Discrete"
+                Return "discrete"
             End If
         Else
-            Return "Discrete"
+            Return "discrete"
         End If
     End Function
 
