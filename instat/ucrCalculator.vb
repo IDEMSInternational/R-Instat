@@ -52,7 +52,7 @@ Public Class ucrCalculator
     End Sub
 
     Public Sub InitialiseControls()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Strings (Character Columns)", "Probability", "Dates", "Transform", "Wakefield", "Circular", "Factor"}) ' "Rows" is a temp. name
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Strings (Character Columns)", "Factor", "Probability", "Dates", "Transform", "Wakefield", "Circular"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
         cmdTry.Enabled = False
@@ -237,7 +237,7 @@ Public Class ucrCalculator
                 grpFactor.Visible = True
                 grpDates.Visible = False
                 grpSummary.Visible = False
-                grpLogical.Visible = True
+                grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
                 grpStrings.Visible = False
