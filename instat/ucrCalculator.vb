@@ -2021,4 +2021,20 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_relabel()", 1)
         End If
     End Sub
+
+    Private Sub cmdReorder_Click(sender As Object, e As EventArgs) Handles cmdReorder.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_reorder(.f = , .x = , .fun = median, ..., .desc = FALSE)", 42)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_reorder()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdReverse_Click(sender As Object, e As EventArgs) Handles cmdReverse.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_rev(f = , )", 3)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_rev()", 1)
+        End If
+    End Sub
 End Class
