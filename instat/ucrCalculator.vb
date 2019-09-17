@@ -1949,4 +1949,20 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_expand()", 1)
         End If
     End Sub
+
+    Private Sub cmdAdd_na_Click(sender As Object, e As EventArgs) Handles cmdAdd_na.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_add_na(f = , ...)", 6)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_add_na()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdInorder_Click(sender As Object, e As EventArgs) Handles cmdInorder.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_inorder(f = , ordered = NA)", 15)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_inorder()", 1)
+        End If
+    End Sub
 End Class
