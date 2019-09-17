@@ -1965,4 +1965,28 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_inorder()", 1)
         End If
     End Sub
+
+    Private Sub cmdInfreq_Click(sender As Object, e As EventArgs) Handles cmdInfreq.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_infreq(f = , ordered = NA)", 15)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_infreq()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdInnum_Click(sender As Object, e As EventArgs) Handles cmdInnum.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_innum(f = , ordered = NA)", 15)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_innum()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdLump_Click(sender As Object, e As EventArgs) Handles cmdLump.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_lump(f = , n, prop, w = NULL, other_level = ""Other"", ties.method = c(""min"", ""average"", ""first"", ""last"", ""random"", ""max""))", 110)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_lump()", 1)
+        End If
+    End Sub
 End Class
