@@ -1933,4 +1933,20 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_cross()", 1)
         End If
     End Sub
+
+    Private Sub cmdDrop_Click(sender As Object, e As EventArgs) Handles cmdDrop.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_drop(f = , only)", 7)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_drop()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdExpand_Click(sender As Object, e As EventArgs) Handles cmdExpand.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_expand(f = , ...)", 6)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_expand()", 1)
+        End If
+    End Sub
 End Class
