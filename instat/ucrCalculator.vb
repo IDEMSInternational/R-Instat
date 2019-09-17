@@ -1909,4 +1909,20 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_anon()", 1)
         End If
     End Sub
+
+    Private Sub cmdConcat_Click(sender As Object, e As EventArgs) Handles cmdConcat.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_concat(x = , prefix = "" )", 15)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_concat()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCollapse_Click(sender As Object, e As EventArgs) Handles cmdCollapse.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_collapse(.f, ..., group_other = FALSE)", 6)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_collapse()", 1)
+        End If
+    End Sub
 End Class
