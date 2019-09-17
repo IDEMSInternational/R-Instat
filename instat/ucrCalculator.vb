@@ -2005,4 +2005,20 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_other()", 1)
         End If
     End Sub
+
+    Private Sub cmdRecode_Click(sender As Object, e As EventArgs) Handles cmdRecode.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_recode(.f = , ...)", 6)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_recode()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdRelevel_Click(sender As Object, e As EventArgs) Handles cmdRelevel.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_relabel(.f = , .fun, ...)", 12)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_relabel()", 1)
+        End If
+    End Sub
 End Class
