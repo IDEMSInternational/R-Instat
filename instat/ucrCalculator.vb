@@ -2037,4 +2037,20 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_rev()", 1)
         End If
     End Sub
+
+    Private Sub cmdShift_Click(sender As Object, e As EventArgs) Handles cmdShift.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_shift(f = , n = 1L)", 9)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_shift()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdShuffle_Click(sender As Object, e As EventArgs) Handles cmdShuffle.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_shuffle(f = , )", 3)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_shuffle()", 1)
+        End If
+    End Sub
 End Class
