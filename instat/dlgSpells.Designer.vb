@@ -207,7 +207,7 @@ Partial Class dlgSpells
         Me.ucrChkConditional.Checked = False
         Me.ucrChkConditional.Location = New System.Drawing.Point(10, 325)
         Me.ucrChkConditional.Name = "ucrChkConditional"
-        Me.ucrChkConditional.Size = New System.Drawing.Size(193, 20)
+        Me.ucrChkConditional.Size = New System.Drawing.Size(288, 20)
         Me.ucrChkConditional.TabIndex = 13
         '
         'ucrReceiverStation

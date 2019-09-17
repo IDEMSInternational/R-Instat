@@ -104,7 +104,7 @@ Public Class dlgSpells
         ucrInputCondition.SetItems({strLessThan, strGreaterThan, strBetween, strExcludingBetween})
         ucrInputCondition.SetDropDownStyleAsNonEditable()
 
-        ucrChkConditional.SetText("Assuming Condition Satisfied at Start of Each Period")
+        ucrChkConditional.SetText("Assume condition not satisfied at start of each period")
         ucrChkConditional.SetParameter(New RParameter("initial_value"))
         ucrChkConditional.SetValuesCheckedAndUnchecked("0", "NA_real_")
         ucrChkConditional.SetRDefault("NA_real_")
