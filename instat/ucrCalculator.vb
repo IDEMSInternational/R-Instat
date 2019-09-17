@@ -1998,11 +1998,11 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdInnum_Click(sender As Object, e As EventArgs) Handles cmdInnum.Click
+    Private Sub cmdInseq_Click(sender As Object, e As EventArgs) Handles cmdInseq.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_innum(f = , ordered = NA)", 15)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_inseq(f = , ordered = NA)", 15)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_innum()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_inseq()", 1)
         End If
     End Sub
 
