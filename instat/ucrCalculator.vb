@@ -1989,4 +1989,20 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_lump()", 1)
         End If
     End Sub
+
+    Private Sub cmdFmatch_Click(sender As Object, e As EventArgs) Handles cmdFmatch.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_match(f = , lvls)", 7)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_match()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdOther_Click(sender As Object, e As EventArgs) Handles cmdOther.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_other(f = , keep = , drop = , other_level = ""Other"")", 43)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_other()", 1)
+        End If
+    End Sub
 End Class
