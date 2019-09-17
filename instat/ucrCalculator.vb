@@ -1912,9 +1912,9 @@ Public Class ucrCalculator
 
     Private Sub cmdConcat_Click(sender As Object, e As EventArgs) Handles cmdConcat.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_concat(x = , prefix = "" )", 15)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_c(...)", 1)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_concat()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_c()", 1)
         End If
     End Sub
 
