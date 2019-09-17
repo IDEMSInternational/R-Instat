@@ -1976,9 +1976,9 @@ Public Class ucrCalculator
 
     Private Sub cmdAdd_na_Click(sender As Object, e As EventArgs) Handles cmdAdd_na.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_add_na(f = , ...)", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_explicit_na(f = , na_level = ""(Missing)"")", 27)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_add_na()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_explicit_na()", 1)
         End If
     End Sub
 
