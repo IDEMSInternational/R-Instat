@@ -30,6 +30,7 @@ Public Class dlgEndOfRainsSeason
 #Region "general_code_structures"
     ' General
     Private clsRunCalculation As New RFunction
+    Private clsFirstOrLastFunction As New RFunction
 
     ' Group by
     Private clsGroupByStationYearCalc As New RFunction
@@ -206,14 +207,14 @@ Public Class dlgEndOfRainsSeason
         ucrChkEndofSeasonDoy.AddParameterPresentCondition(False, "sub1", False)
         ucrChkEndofSeasonDoy.SetText("Day")
 
-#End Region
-
-#Region "end_of_rains_controls"
         'TODO Set conditions for end of rains vs end of season
         ucrPnlEndOfRainsAndSeasons.AddRadioButton(rdoEndOfRains)
         ucrPnlEndOfRainsAndSeasons.AddRadioButton(rdoEndOfSeasons)
-        'ucrPnlEndOfRainsAndSeasons.AddParameterValueFunctionNamesCondition(rdoEndOfRains, "calc", strEndofSeason)
-        'ucrPnlEndOfRainsAndSeasons.AddParameterValueFunctionNamesCondition(rdoEndOfSeasons, "calc", strEndofSeason)
+        ucrPnlEndOfRainsAndSeasons.AddFunctionNamesCondition(rdoEndOfRains, "last")
+        ucrPnlEndOfRainsAndSeasons.AddFunctionNamesCondition(rdoEndOfSeasons, "first")
+#End Region
+
+#Region "end_of_rains_controls"
 
         ucrNudAmount.SetParameter(New RParameter("threshold", 1, False))
         ucrNudAmount.DecimalPlaces = 2
@@ -345,6 +346,7 @@ Public Class dlgEndOfRainsSeason
 #Region "clear_code_structures"
         ' General
         clsRunCalculation.Clear()
+        clsFirstOrLastFunction.Clear()
 
         '   Group by
         clsGroupByStationYearCalc.Clear()
@@ -496,7 +498,6 @@ Public Class dlgEndOfRainsSeason
 
         clsDayToOperator.SetOperation("<=")
         clsDayToOperator.AddParameter("to", 366, iPosition:=1)
-
 
 #Region "end_of_rains"
 
@@ -818,6 +819,7 @@ Public Class dlgEndOfRainsSeason
         clsEndSeasonCombinationSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsEndSeasonFirstDoySummaryCalc, bIncludeArgumentName:=False, iPosition:=0)
 #End Region
 
+        clsFirstOrLastFunction = clsLastDoyFunction
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -867,7 +869,7 @@ Public Class dlgEndOfRainsSeason
         ucrChkEndofRainsDoy.SetRCode(clsEndRainsCombinationSubCalcList, bReset)
         ucrChkEndofRainsDate.SetRCode(clsEndRainsCombinationSubCalcList, bReset)
         ucrChkEndofRainsOccurence.SetRCode(clsEndRainsCombinationSubCalcList, bReset)
-        'ucrPnlEndOfRainsAndSeasons.SetRCode(clsEndRainsCombinationCalc, bReset)
+        ucrPnlEndOfRainsAndSeasons.SetRCode(clsFirstOrLastFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -995,11 +997,12 @@ Public Class dlgEndOfRainsSeason
     End Sub
 
     Private Sub ucrPnlEndOfRainsAndSeasons_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEndOfRainsAndSeasons.ControlValueChanged
-
         If rdoEndOfRains.Checked Then
             clsRunCalculation.AddParameter("calc", clsRFunctionParameter:=clsEndRainsCombinationCalc)
+            clsFirstOrLastFunction = clsLastDoyFunction
         Else
             clsRunCalculation.AddParameter("calc", clsRFunctionParameter:=clsEndSeasonCombinationCalc)
+            clsFirstOrLastFunction = clsFirstDoyFunction
         End If
     End Sub
 
@@ -1033,17 +1036,14 @@ Public Class dlgEndOfRainsSeason
         Else
             clsEndSeasonCombinationSubCalcList.RemoveParameterByName("sub1")
         End If
-
     End Sub
 
     Private Sub ucrChkEndofSeasonDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofSeasonDate.ControlValueChanged
-
         If ucrChkEndofSeasonDate.Checked Then
             clsEndSeasonCombinationSubCalcList.AddParameter("sub2", clsRFunctionParameter:=clsEndSeasonFirstDateSummaryCalc, bIncludeArgumentName:=False, iPosition:=1)
         Else
             clsEndSeasonCombinationSubCalcList.RemoveParameterByName("sub2")
         End If
-
     End Sub
 
     Private Sub ucrChkEndofRainsOccurence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofRainsOccurence.ControlValueChanged
