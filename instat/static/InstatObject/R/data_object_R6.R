@@ -2534,18 +2534,20 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
 
 DataSheet$set("public","infill_missing_dates", function(date_name, factors, start_month, start_date, end_date, resort = TRUE) {
   date_col <- self$get_columns_from_data(date_name)
-  if(!lubridate::is.Date(date_col)) stop(date_name, " is not a Date column.")
+  if(!lubridate::is.Date(date_col)) stop("date_col is not a Date column.")
   if(anyNA(date_col)) stop("Cannot do infilling as date column has missing values")
-  if(!missing(start_date) && !lubridate::is.Date(start_date)) stop(start_date, " is an invalid start date")
-  if(!missing(end_date) && !lubridate::is.Date(end_date)) stop(end_date, " is an invalid end date")
-  if (!missing(start_month) && !is.numeric(start_month)) stop(start_month, " month not numeric")
+  if(!missing(start_date) && !lubridate::is.Date(start_date)) stop("start_date is not of type Date")
+  if(!missing(end_date) && !lubridate::is.Date(end_date)) stop("end_date is not of type Date")
+  if(!missing(start_month) && !is.numeric(start_month)) stop("start_month is not numeric")
+  if(!missing(start_month)) end_month <- ((start_month - 2) %% 12) + 1
+  
   min_date <- min(date_col)
   max_date <- max(date_col)
   if(!missing(start_date)) {
-    if(start_date > min_date) stop("Start date cannot be greater than minimum date")
+    if(start_date > min_date) stop("Start date cannot be greater than earliest date")
   }
   if(!missing(end_date)) {
-    if(end_date < max_date) stop("End date cannot be less than maximum date")
+    if(end_date < max_date) stop("End date cannot be less than latest date")
   }
   
   if(missing(factors)) {
@@ -2562,12 +2564,12 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
     else if(!missing(start_month)) {
       if(start_month <= lubridate::month(min_date)) min_date <- as.Date(paste(lubridate::year(min_date), start_month, 1, sep = "-"), format = "%Y-%m-%d")
       else min_date <- as.Date(paste(lubridate::year(min_date) - 1, start_month, 1, sep = "-"), format = "%Y-%m-%d")
-      if(start_month <= lubridate::month(max_date)) max_date <- as.Date(paste(lubridate::year(max_date), 12, 1, sep = "-"), format = "%Y-%m-%d")
-      else max_date <- as.Date(paste(lubridate::year(max_date) - 1, 12, 1, sep = "-"), format = "%Y-%m-%d")
+      if(end_month >= lubridate::month(max_date)) as.Date(paste(lubridate::year(max_date), end_month, lubridate::days_in_month(as.Date(paste(lubridate::year(max_date), end_month, 1, sep = "-", format = "%Y-%m-%d"))), sep = "-"), format = "%Y-%m-%d")
+      else max_date <- as.Date(paste(lubridate::year(max_date) + 1, end_month, lubridate::days_in_month(as.Date(paste(lubridate::year(max_date) + 1, end_month, 1, sep = "-"))), sep = "-", format = "%Y-%m-%d"), format = "%Y-%m-%d")
     }
     full_dates <- seq(min_date, max_date, by = "day")
     if(length(full_dates) > length(date_col)) {
-      cat("Infilling", (length(full_dates) - length(date_col)), "missing dates", "\n")
+      cat("Adding", (length(full_dates) - length(date_col)), "rows for date gaps", "\n")
       full_dates <- data.frame(full_dates)
       names(full_dates) <- date_name
       by <- date_name
@@ -2599,15 +2601,16 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
       date_ranges$min_date <- dplyr::if_else(lubridate::month(date_ranges$min_date) >= start_month, 
                                      as.Date(paste(lubridate::year(date_ranges$min_date), start_month, 1, sep = "-"), format = "%Y-%m-%d"),
                                      as.Date(paste(lubridate::year(date_ranges$min_date) - 1, start_month, 1, sep = "-"), format = "%Y-%m-%d"))
-      date_ranges$max_date <- dplyr::if_else(lubridate::month(date_ranges$max_date) >= start_month, 
-                                     as.Date(paste(lubridate::year(date_ranges$max_date), 12, 1, sep = "-"), format = "%Y-%m-%d"),
-                                     as.Date(paste(lubridate::year(date_ranges$max_date) - 1, 12, 1, sep = "-"), format = "%Y-%m-%d"))
+      date_ranges$max_date <- dplyr::if_else(lubridate::month(date_ranges$max_date) <= end_month, 
+                                     as.Date(paste(lubridate::year(date_ranges$max_date), end_month, lubridate::days_in_month(as.Date(paste(lubridate::year(date_ranges$max_date), end_month, 1, sep = "-"), format = "%Y-%m-%d")), sep = "-"), format = "%Y-%m-%d"),
+                                     as.Date(paste(lubridate::year(date_ranges$max_date) + 1, end_month, lubridate::days_in_month(as.Date(paste(lubridate::year(date_ranges$max_date), end_month, 1, sep = "-"), format = "%Y-%m-%d")), sep = "-"), format = "%Y-%m-%d"))
     }
+    print(date_ranges)
     full_dates_list <- list()
     for(j in 1:nrow(date_ranges)) {
       full_dates <- seq(date_ranges$min_date[j], date_ranges$max_date[j], by = "day")
       if(length(full_dates) > date_lengths[[2]][j]) {
-        cat("Infilling", (length(full_dates) - date_lengths[[2]][j]), "missing dates for:", paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), "\n")
+        cat(paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), ": Adding", (length(full_dates) - date_lengths[[2]][j]), "rows for date gaps", "\n")
         merge_required <- TRUE
       }
       full_dates <- data.frame(full_dates)
