@@ -43,6 +43,9 @@ Partial Class dlgPICSARainfall
         Me.lblAvailable = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdLineOptions = New System.Windows.Forms.Button()
+        Me.cmdPICSAOptions = New System.Windows.Forms.Button()
+        Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrChkPoints = New instat.ucrCheck()
         Me.ucrSave = New instat.ucrSave()
@@ -50,9 +53,6 @@ Partial Class dlgPICSARainfall
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverColourBy = New instat.ucrReceiverSingle()
         Me.ucrVariablesAsFactorForPicsa = New instat.ucrVariablesAsFactor()
-        Me.cmdPICSAOptions = New System.Windows.Forms.Button()
-        Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
-        Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblFactorOptional
@@ -107,6 +107,41 @@ Partial Class dlgPICSARainfall
         Me.cmdLineOptions.Tag = "Line_Options"
         Me.cmdLineOptions.Text = "Line Options"
         Me.cmdLineOptions.UseVisualStyleBackColor = True
+        '
+        'cmdPICSAOptions
+        '
+        Me.cmdPICSAOptions.Enabled = False
+        Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 260)
+        Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
+        Me.cmdPICSAOptions.Size = New System.Drawing.Size(119, 23)
+        Me.cmdPICSAOptions.TabIndex = 21
+        Me.cmdPICSAOptions.Tag = ""
+        Me.cmdPICSAOptions.Text = "PICSA Options"
+        Me.cmdPICSAOptions.UseVisualStyleBackColor = True
+        '
+        'lblFacetBy
+        '
+        Me.lblFacetBy.AutoSize = True
+        Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFacetBy.Location = New System.Drawing.Point(248, 278)
+        Me.lblFacetBy.Name = "lblFacetBy"
+        Me.lblFacetBy.Size = New System.Drawing.Size(100, 13)
+        Me.lblFacetBy.TabIndex = 31
+        Me.lblFacetBy.Tag = ""
+        Me.lblFacetBy.Text = "Facet By (Optional):"
+        '
+        'ucrReceiverFacetBy
+        '
+        Me.ucrReceiverFacetBy.frmParent = Me
+        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(248, 293)
+        Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
+        Me.ucrReceiverFacetBy.Selector = Nothing
+        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(125, 26)
+        Me.ucrReceiverFacetBy.strNcFilePath = ""
+        Me.ucrReceiverFacetBy.TabIndex = 32
+        Me.ucrReceiverFacetBy.ucrSelector = Nothing
         '
         'ucrReceiverX
         '
@@ -176,41 +211,6 @@ Partial Class dlgPICSARainfall
         Me.ucrVariablesAsFactorForPicsa.TabIndex = 30
         Me.ucrVariablesAsFactorForPicsa.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForPicsa.ucrVariableSelector = Nothing
-        '
-        'cmdPICSAOptions
-        '
-        Me.cmdPICSAOptions.Enabled = False
-        Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 260)
-        Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
-        Me.cmdPICSAOptions.Size = New System.Drawing.Size(119, 23)
-        Me.cmdPICSAOptions.TabIndex = 21
-        Me.cmdPICSAOptions.Tag = ""
-        Me.cmdPICSAOptions.Text = "PICSA Options"
-        Me.cmdPICSAOptions.UseVisualStyleBackColor = True
-        '
-        'ucrReceiverFacetBy
-        '
-        Me.ucrReceiverFacetBy.frmParent = Me
-        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(248, 293)
-        Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
-        Me.ucrReceiverFacetBy.Selector = Nothing
-        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(125, 26)
-        Me.ucrReceiverFacetBy.strNcFilePath = ""
-        Me.ucrReceiverFacetBy.TabIndex = 32
-        Me.ucrReceiverFacetBy.ucrSelector = Nothing
-        '
-        'lblFacetBy
-        '
-        Me.lblFacetBy.AutoSize = True
-        Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFacetBy.Location = New System.Drawing.Point(248, 278)
-        Me.lblFacetBy.Name = "lblFacetBy"
-        Me.lblFacetBy.Size = New System.Drawing.Size(100, 13)
-        Me.lblFacetBy.TabIndex = 31
-        Me.lblFacetBy.Tag = ""
-        Me.lblFacetBy.Text = "Facet By (Optional):"
         '
         'dlgPICSARainfall
         '
