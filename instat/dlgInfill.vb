@@ -59,7 +59,7 @@ Public Class dlgInfill
         ucrChkResort.SetParameter(New RParameter("resort", 3))
         ucrChkResort.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkResort.SetRDefault("TRUE")
-        ucrChkResort.SetText("Sort Data after Infilling")
+        ucrChkResort.SetText("Sort Data after filling gaps")
 
         ucrInputLimitOptions.SetItems({"Data Limits", "Fixed Limits"})
         ucrInputLimitOptions.AddParameterPresentCondition("Fixed Limits", {"start_date", "end_date"})
@@ -82,6 +82,7 @@ Public Class dlgInfill
         dctMonth.Add("December", 12)
         ucrInputComboMonth.SetItems(dctMonth)
         ucrInputComboMonth.SetDropDownStyleAsNonEditable()
+        ucrInputComboMonth.SetLinkedDisplayControl(lblStartingFrom)
 
         ucrDtpStartDate.SetParameter(New RParameter("start_date", 3))
         ucrDtpStartDate.SetParameterIsRDate()
@@ -89,7 +90,7 @@ Public Class dlgInfill
         ucrDtpEndDate.SetParameter(New RParameter("end_date", 4))
         ucrDtpEndDate.SetParameterIsRDate()
 
-        ucrChkCompleteYears.SetText("Complete years starting from")
+        ucrChkCompleteYears.SetText("Ensure complete years")
         ucrChkCompleteYears.AddParameterPresentCondition(True, "start_month")
         ucrChkCompleteYears.AddParameterPresentCondition(False, "start_month", False)
 

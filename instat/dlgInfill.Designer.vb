@@ -43,18 +43,19 @@ Partial Class dlgInfill
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblLimits = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.lblEndDate = New System.Windows.Forms.Label()
+        Me.lblStartDate = New System.Windows.Forms.Label()
+        Me.lblStartingFrom = New System.Windows.Forms.Label()
+        Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrInfillSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkCompleteYears = New instat.ucrCheck()
         Me.ucrChkResort = New instat.ucrCheck()
         Me.ucrInputComboMonth = New instat.ucrInputComboBox()
         Me.ucrInputLimitOptions = New instat.ucrInputComboBox()
         Me.ucrDtpEndDate = New instat.ucrDateTimePicker()
-        Me.lblEndDate = New System.Windows.Forms.Label()
-        Me.lblStartDate = New System.Windows.Forms.Label()
         Me.ucrDtpStartDate = New instat.ucrDateTimePicker()
-        Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
-        Me.ucrInfillSelector = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -75,6 +76,7 @@ Partial Class dlgInfill
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.lblStartingFrom)
         Me.grpOptions.Controls.Add(Me.ucrChkCompleteYears)
         Me.grpOptions.Controls.Add(Me.ucrChkResort)
         Me.grpOptions.Controls.Add(Me.ucrInputComboMonth)
@@ -87,6 +89,52 @@ Partial Class dlgInfill
         resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
+        '
+        'lblEndDate
+        '
+        resources.ApplyResources(Me.lblEndDate, "lblEndDate")
+        Me.lblEndDate.Name = "lblEndDate"
+        '
+        'lblStartDate
+        '
+        resources.ApplyResources(Me.lblStartDate, "lblStartDate")
+        Me.lblStartDate.Name = "lblStartDate"
+        '
+        'lblStartingFrom
+        '
+        resources.ApplyResources(Me.lblStartingFrom, "lblStartingFrom")
+        Me.lblStartingFrom.Name = "lblStartingFrom"
+        '
+        'ucrReceiverFactors
+        '
+        Me.ucrReceiverFactors.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFactors, "ucrReceiverFactors")
+        Me.ucrReceiverFactors.Name = "ucrReceiverFactors"
+        Me.ucrReceiverFactors.Selector = Nothing
+        Me.ucrReceiverFactors.strNcFilePath = ""
+        Me.ucrReceiverFactors.ucrSelector = Nothing
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
+        'ucrInfillSelector
+        '
+        Me.ucrInfillSelector.bDropUnusedFilterLevels = False
+        Me.ucrInfillSelector.bShowHiddenColumns = False
+        Me.ucrInfillSelector.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrInfillSelector, "ucrInfillSelector")
+        Me.ucrInfillSelector.Name = "ucrInfillSelector"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'ucrChkCompleteYears
         '
@@ -121,53 +169,12 @@ Partial Class dlgInfill
         Me.ucrDtpEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.ucrDtpEndDate.Name = "ucrDtpEndDate"
         '
-        'lblEndDate
-        '
-        resources.ApplyResources(Me.lblEndDate, "lblEndDate")
-        Me.lblEndDate.Name = "lblEndDate"
-        '
-        'lblStartDate
-        '
-        resources.ApplyResources(Me.lblStartDate, "lblStartDate")
-        Me.lblStartDate.Name = "lblStartDate"
-        '
         'ucrDtpStartDate
         '
         resources.ApplyResources(Me.ucrDtpStartDate, "ucrDtpStartDate")
         Me.ucrDtpStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDtpStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.ucrDtpStartDate.Name = "ucrDtpStartDate"
-        '
-        'ucrReceiverFactors
-        '
-        Me.ucrReceiverFactors.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFactors, "ucrReceiverFactors")
-        Me.ucrReceiverFactors.Name = "ucrReceiverFactors"
-        Me.ucrReceiverFactors.Selector = Nothing
-        Me.ucrReceiverFactors.strNcFilePath = ""
-        Me.ucrReceiverFactors.ucrSelector = Nothing
-        '
-        'ucrReceiverDate
-        '
-        Me.ucrReceiverDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.ucrSelector = Nothing
-        '
-        'ucrInfillSelector
-        '
-        Me.ucrInfillSelector.bDropUnusedFilterLevels = False
-        Me.ucrInfillSelector.bShowHiddenColumns = False
-        Me.ucrInfillSelector.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrInfillSelector, "ucrInfillSelector")
-        Me.ucrInfillSelector.Name = "ucrInfillSelector"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
         '
         'dlgInfill
         '
@@ -208,4 +215,5 @@ Partial Class dlgInfill
     Friend WithEvents lblEndDate As Label
     Friend WithEvents lblStartDate As Label
     Friend WithEvents ucrChkCompleteYears As ucrCheck
+    Friend WithEvents lblStartingFrom As Label
 End Class
