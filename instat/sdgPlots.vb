@@ -54,6 +54,10 @@ Public Class sdgPlots
     Private clsYElemetText As New RFunction
     Private clsYElemetTitle As New RFunction
 
+    'Polar Coordinates
+    Private clsCoordPolarFunc As New RFunction
+
+
     'See bLayersDefaultIsGolobal below.
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs)
@@ -255,6 +259,27 @@ Public Class sdgPlots
         ucrChkLegendPosition.AddParameterPresentCondition(True, "legend.position")
         ucrChkLegendPosition.AddParameterPresentCondition(False, "legend.position", False)
 
+        'Use Polar Coordinates
+        ucrChkUsePolarCoordinates.SetText("Use Polar Coordinates")
+
+        ucrChkDirectionAnticlockwise.SetText("Direction Anticlockwise")
+        ucrChkDirectionAnticlockwise.SetParameter(New RParameter("direction"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkDirectionAnticlockwise.SetRDefault("-1")
+        ucrChkStartingAngle.SetText("Starting Angle")
+        lblPi.Text = "pi"
+        ucrtxtStartingAngle.SetParameter(New RParameter("start"))
+        ucrtxtStartingAngle.SetValidationTypeAsNumeric()
+        ucrtxtStartingAngle.AddQuotesIfUnrecognised = False
+
+
+        ucrChkStartingAngle.AddToLinkedControls({ucrtxtStartingAngle}, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkUsePolarCoordinates.AddToLinkedControls({ucrChkDirectionAnticlockwise, ucrChkStartingAngle}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrtxtStartingAngle.SetLinkedDisplayControl(lblPi)
+        ucrChkUsePolarCoordinates.AddParameterPresentCondition(True, "coord_polars", True)
+        ucrChkDirectionAnticlockwise.AddParameterPresentCondition(True, "direction", True)
+        ucrChkStartingAngle.AddParameterPresentCondition(True, "start", True)
+
+
         ucrChkXaxisAngle.SetText("X axis Tick Labels Angle")
         ucrChkXaxisAngle.AddToLinkedControls(ucrNudXAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
         ucrNudXAngle.SetParameter(New RParameter("angle"))
@@ -294,7 +319,7 @@ Public Class sdgPlots
         ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(False, "size", False)
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional clsNewCoordPolarFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional bReset As Boolean = False)
         Dim clsTempParam As RParameter
 
         bRCodeSet = False
@@ -316,6 +341,7 @@ Public Class sdgPlots
         clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
         clsFacetFunction = clsNewFacetFunction
         clsThemeFunction = clsNewThemeFunction
+        clsCoordPolarFunc = clsNewCoordPolarFunction
         dctThemeFunctions = dctNewThemeFunctions
 
         dctThemeFunctions.TryGetValue("axis.text.x", clsXElementText)
@@ -374,6 +400,11 @@ Public Class sdgPlots
         'coordinates tab
         ucrChkHorizontalPlot.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkSameScale.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkUsePolarCoordinates.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkDirectionAnticlockwise.SetRCode(clsCoordPolarFunc, bReset:=True, bCloneIfNeeded:=True)
+        ucrChkStartingAngle.SetRCode(clsCoordPolarFunc, bReset, bCloneIfNeeded:=True)
+        ucrtxtStartingAngle.SetRCode(clsCoordPolarFunc, bReset, bCloneIfNeeded:=True)
+
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, strMainDialogGeomParameterNames:=strMainDialogGeomParameterNames, bReset:=bReset)
         bRCodeSet = True
@@ -727,4 +758,17 @@ Public Class sdgPlots
         sdgThemesSub.ShowDialog()
         SetRcodeForCommonThemesControls(False)
     End Sub
+    Private Sub ucrChkUsePolarCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUsePolarCoordinates.ControlValueChanged
+        If ucrChkUsePolarCoordinates.Checked Then
+            clsBaseOperator.AddParameter("coord_polars", clsRFunctionParameter:=clsCoordPolarFunc, bIncludeArgumentName:=False)
+        Else
+            clsBaseOperator.RemoveParameterByName("coord_polars")
+        End If
+    End Sub
+    Private Sub ucrtxtStartingAngle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrtxtStartingAngle.ControlValueChanged
+        If ucrtxtStartingAngle.GetText <> "1" Then
+            ucrtxtStartingAngle.SetParameterValue(ucrtxtStartingAngle.GetText() & "*pi")
+        End If
+    End Sub
+
 End Class
