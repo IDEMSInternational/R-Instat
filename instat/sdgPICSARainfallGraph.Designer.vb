@@ -163,6 +163,13 @@ Partial Class sdgPICSARainfallGraph
         Me.UcrChkPnlBackgroundLineType = New instat.ucrCheck()
         Me.UcrChkPnlBackgroundFill = New instat.ucrCheck()
         Me.ucrChkPnlBackgroundColour = New instat.ucrCheck()
+        Me.tpRug = New System.Windows.Forms.TabPage()
+        Me.ucrInputXaxisOptions = New instat.ucrInputComboBox()
+        Me.lblXaxisOptions = New System.Windows.Forms.Label()
+        Me.ucrChkXaxis = New instat.ucrCheck()
+        Me.ucrInputYaxisOptions = New instat.ucrInputComboBox()
+        Me.lblYaxisOptions = New System.Windows.Forms.Label()
+        Me.ucrChkYaxis = New instat.ucrCheck()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
         Me.tbPICSA.SuspendLayout()
         Me.tpTitles.SuspendLayout()
@@ -179,6 +186,7 @@ Partial Class sdgPICSARainfallGraph
         Me.grpPnlBorder.SuspendLayout()
         Me.grpMajorGridLines.SuspendLayout()
         Me.grpPnlBackground.SuspendLayout()
+        Me.tpRug.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblXTo
@@ -203,6 +211,7 @@ Partial Class sdgPICSARainfallGraph
         Me.tbPICSA.Controls.Add(Me.tpYAxis)
         Me.tbPICSA.Controls.Add(Me.tpLines)
         Me.tbPICSA.Controls.Add(Me.tpPanel)
+        Me.tbPICSA.Controls.Add(Me.tpRug)
         resources.ApplyResources(Me.tbPICSA, "tbPICSA")
         Me.tbPICSA.Name = "tbPICSA"
         Me.tbPICSA.SelectedIndex = 0
@@ -1266,6 +1275,54 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrChkPnlBackgroundColour, "ucrChkPnlBackgroundColour")
         Me.ucrChkPnlBackgroundColour.Name = "ucrChkPnlBackgroundColour"
         '
+        'tpRug
+        '
+        Me.tpRug.Controls.Add(Me.ucrInputXaxisOptions)
+        Me.tpRug.Controls.Add(Me.lblXaxisOptions)
+        Me.tpRug.Controls.Add(Me.ucrChkXaxis)
+        Me.tpRug.Controls.Add(Me.ucrInputYaxisOptions)
+        Me.tpRug.Controls.Add(Me.lblYaxisOptions)
+        Me.tpRug.Controls.Add(Me.ucrChkYaxis)
+        resources.ApplyResources(Me.tpRug, "tpRug")
+        Me.tpRug.Name = "tpRug"
+        Me.tpRug.UseVisualStyleBackColor = True
+        '
+        'ucrInputXaxisOptions
+        '
+        Me.ucrInputXaxisOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputXaxisOptions.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXaxisOptions, "ucrInputXaxisOptions")
+        Me.ucrInputXaxisOptions.Name = "ucrInputXaxisOptions"
+        '
+        'lblXaxisOptions
+        '
+        resources.ApplyResources(Me.lblXaxisOptions, "lblXaxisOptions")
+        Me.lblXaxisOptions.Name = "lblXaxisOptions"
+        '
+        'ucrChkXaxis
+        '
+        Me.ucrChkXaxis.Checked = False
+        resources.ApplyResources(Me.ucrChkXaxis, "ucrChkXaxis")
+        Me.ucrChkXaxis.Name = "ucrChkXaxis"
+        '
+        'ucrInputYaxisOptions
+        '
+        Me.ucrInputYaxisOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputYaxisOptions.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYaxisOptions, "ucrInputYaxisOptions")
+        Me.ucrInputYaxisOptions.Name = "ucrInputYaxisOptions"
+        '
+        'lblYaxisOptions
+        '
+        resources.ApplyResources(Me.lblYaxisOptions, "lblYaxisOptions")
+        Me.lblYaxisOptions.Name = "lblYaxisOptions"
+        '
+        'ucrChkYaxis
+        '
+        Me.ucrChkYaxis.Checked = False
+        resources.ApplyResources(Me.ucrChkYaxis, "ucrChkYaxis")
+        Me.ucrChkYaxis.Name = "ucrChkYaxis"
+        '
         'ucrSdgPICSARainfalbuttons
         '
         resources.ApplyResources(Me.ucrSdgPICSARainfalbuttons, "ucrSdgPICSARainfalbuttons")
@@ -1305,6 +1362,8 @@ Partial Class sdgPICSARainfallGraph
         Me.grpMajorGridLines.ResumeLayout(False)
         Me.grpMajorGridLines.PerformLayout()
         Me.grpPnlBackground.ResumeLayout(False)
+        Me.tpRug.ResumeLayout(False)
+        Me.tpRug.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1450,4 +1509,11 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents ucrInputYSpecifyLowerLimitDateMonth As ucrInputComboBox
     Friend WithEvents ucrNudUpperLimit As ucrNud
     Friend WithEvents ucrNudLowerLimit As ucrNud
+    Friend WithEvents tpRug As TabPage
+    Friend WithEvents ucrChkYaxis As ucrCheck
+    Friend WithEvents lblYaxisOptions As Label
+    Friend WithEvents ucrInputYaxisOptions As ucrInputComboBox
+    Friend WithEvents ucrInputXaxisOptions As ucrInputComboBox
+    Friend WithEvents lblXaxisOptions As Label
+    Friend WithEvents ucrChkXaxis As ucrCheck
 End Class
