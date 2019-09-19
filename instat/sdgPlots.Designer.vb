@@ -101,11 +101,11 @@ Partial Class sdgPlots
         Me.ucrChkUsePolarCoordinates = New instat.ucrCheck()
         Me.lblPi = New System.Windows.Forms.Label()
         Me.ucrChkDirectionAnticlockwise = New instat.ucrCheck()
-        Me.ucrtxtStartingAngle = New instat.ucrInputTextBox()
-        Me.ucrChkStartingAngle = New instat.ucrCheck()
+        Me.ucrInputStartingAngle = New instat.ucrInputTextBox()
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.lblStartingAngle = New System.Windows.Forms.Label()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -571,11 +571,11 @@ Partial Class sdgPlots
         '
         'grpPolarCordinates
         '
+        Me.grpPolarCordinates.Controls.Add(Me.lblStartingAngle)
         Me.grpPolarCordinates.Controls.Add(Me.ucrChkUsePolarCoordinates)
         Me.grpPolarCordinates.Controls.Add(Me.lblPi)
         Me.grpPolarCordinates.Controls.Add(Me.ucrChkDirectionAnticlockwise)
-        Me.grpPolarCordinates.Controls.Add(Me.ucrtxtStartingAngle)
-        Me.grpPolarCordinates.Controls.Add(Me.ucrChkStartingAngle)
+        Me.grpPolarCordinates.Controls.Add(Me.ucrInputStartingAngle)
         resources.ApplyResources(Me.grpPolarCordinates, "grpPolarCordinates")
         Me.grpPolarCordinates.Name = "grpPolarCordinates"
         Me.grpPolarCordinates.TabStop = False
@@ -590,7 +590,7 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.lblPi, "lblPi")
         Me.lblPi.Name = "lblPi"
-        Me.lblPi.Tag = "By_Factor:"
+        Me.lblPi.Tag = ""
         '
         'ucrChkDirectionAnticlockwise
         '
@@ -598,19 +598,13 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrChkDirectionAnticlockwise, "ucrChkDirectionAnticlockwise")
         Me.ucrChkDirectionAnticlockwise.Name = "ucrChkDirectionAnticlockwise"
         '
-        'ucrtxtStartingAngle
+        'ucrInputStartingAngle
         '
-        Me.ucrtxtStartingAngle.AddQuotesIfUnrecognised = True
-        Me.ucrtxtStartingAngle.IsMultiline = False
-        Me.ucrtxtStartingAngle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrtxtStartingAngle, "ucrtxtStartingAngle")
-        Me.ucrtxtStartingAngle.Name = "ucrtxtStartingAngle"
-        '
-        'ucrChkStartingAngle
-        '
-        Me.ucrChkStartingAngle.Checked = False
-        resources.ApplyResources(Me.ucrChkStartingAngle, "ucrChkStartingAngle")
-        Me.ucrChkStartingAngle.Name = "ucrChkStartingAngle"
+        Me.ucrInputStartingAngle.AddQuotesIfUnrecognised = True
+        Me.ucrInputStartingAngle.IsMultiline = False
+        Me.ucrInputStartingAngle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStartingAngle, "ucrInputStartingAngle")
+        Me.ucrInputStartingAngle.Name = "ucrInputStartingAngle"
         '
         'ucrChkSameScale
         '
@@ -628,6 +622,11 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        '
+        'lblStartingAngle
+        '
+        resources.ApplyResources(Me.lblStartingAngle, "lblStartingAngle")
+        Me.lblStartingAngle.Name = "lblStartingAngle"
         '
         'sdgPlots
         '
@@ -724,11 +723,11 @@ Partial Class sdgPlots
     Friend WithEvents cmdSimpleOptions As Button
     Friend WithEvents ucrChkSameScale As ucrCheck
     Friend WithEvents ucrChkUsePolarCoordinates As ucrCheck
-    Friend WithEvents ucrChkStartingAngle As ucrCheck
     Friend WithEvents ucrChkDirectionAnticlockwise As ucrCheck
-    Friend WithEvents ucrtxtStartingAngle As ucrInputTextBox
+    Friend WithEvents ucrInputStartingAngle As ucrInputTextBox
     Friend WithEvents lblPi As Label
     Friend WithEvents grpPolarCordinates As GroupBox
+    Friend WithEvents lblStartingAngle As Label
 End Class
 
 
