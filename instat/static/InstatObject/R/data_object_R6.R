@@ -2605,7 +2605,6 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
                                      as.Date(paste(lubridate::year(date_ranges$max_date), end_month, lubridate::days_in_month(as.Date(paste(lubridate::year(date_ranges$max_date), end_month, 1, sep = "-"), format = "%Y-%m-%d")), sep = "-"), format = "%Y-%m-%d"),
                                      as.Date(paste(lubridate::year(date_ranges$max_date) + 1, end_month, lubridate::days_in_month(as.Date(paste(lubridate::year(date_ranges$max_date), end_month, 1, sep = "-"), format = "%Y-%m-%d")), sep = "-"), format = "%Y-%m-%d"))
     }
-    print(date_ranges)
     full_dates_list <- list()
     for(j in 1:nrow(date_ranges)) {
       full_dates <- seq(date_ranges$min_date[j], date_ranges$max_date[j], by = "day")
