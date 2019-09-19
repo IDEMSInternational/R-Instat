@@ -1578,10 +1578,16 @@ DataBook$set("public", "import_from_climsoft", function(stations = c(), elements
    
     if(unstack) {
       station_data <- reshape2::dcast(data = station_data, formula = recordedFrom + obsDatetime ~ abbreviation, value.var = "obsValue")
+      element_info<- DBI::dbGetQuery(con,"SELECT abbreviation, elementName FROM obselement")
     }
-
+    if(exists("element_info")){
+      data_list <- list(station_info, station_data,element_info)
+      names(data_list) = c("station_info","station_data","element_info")
+    }
+    else{
     data_list <- list(station_info, station_data)
     names(data_list) = c("station_info","station_data")
+    }
   }
   else{
     data_list <- list(station_info)
