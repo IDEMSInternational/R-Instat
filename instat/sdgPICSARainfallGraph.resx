@@ -3447,8 +3447,173 @@
   <data name="&gt;&gt;tpPanel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="ucrInputXaxisOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>225, 69</value>
+  </data>
+  <data name="ucrInputXaxisOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputXaxisOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrInputXaxisOptions.Name" xml:space="preserve">
+    <value>ucrInputXaxisOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrInputXaxisOptions.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputXaxisOptions.Parent" xml:space="preserve">
+    <value>tpRug</value>
+  </data>
+  <data name="&gt;&gt;ucrInputXaxisOptions.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblXaxisOptions.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXaxisOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>135, 69</value>
+  </data>
+  <data name="lblXaxisOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 13</value>
+  </data>
+  <data name="lblXaxisOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblXaxisOptions.Text" xml:space="preserve">
+    <value>X-axis Options:</value>
+  </data>
+  <data name="&gt;&gt;lblXaxisOptions.Name" xml:space="preserve">
+    <value>lblXaxisOptions</value>
+  </data>
+  <data name="&gt;&gt;lblXaxisOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblXaxisOptions.Parent" xml:space="preserve">
+    <value>tpRug</value>
+  </data>
+  <data name="&gt;&gt;lblXaxisOptions.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkXaxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 69</value>
+  </data>
+  <data name="ucrChkXaxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkXaxis.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkXaxis.Name" xml:space="preserve">
+    <value>ucrChkXaxis</value>
+  </data>
+  <data name="&gt;&gt;ucrChkXaxis.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkXaxis.Parent" xml:space="preserve">
+    <value>tpRug</value>
+  </data>
+  <data name="&gt;&gt;ucrChkXaxis.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrInputYaxisOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>225, 25</value>
+  </data>
+  <data name="ucrInputYaxisOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputYaxisOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYaxisOptions.Name" xml:space="preserve">
+    <value>ucrInputYaxisOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYaxisOptions.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYaxisOptions.Parent" xml:space="preserve">
+    <value>tpRug</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYaxisOptions.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblYaxisOptions.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblYaxisOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>135, 25</value>
+  </data>
+  <data name="lblYaxisOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 13</value>
+  </data>
+  <data name="lblYaxisOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblYaxisOptions.Text" xml:space="preserve">
+    <value>Y-axis Options:</value>
+  </data>
+  <data name="&gt;&gt;lblYaxisOptions.Name" xml:space="preserve">
+    <value>lblYaxisOptions</value>
+  </data>
+  <data name="&gt;&gt;lblYaxisOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblYaxisOptions.Parent" xml:space="preserve">
+    <value>tpRug</value>
+  </data>
+  <data name="&gt;&gt;lblYaxisOptions.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrChkYaxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="ucrChkYaxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkYaxis.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkYaxis.Name" xml:space="preserve">
+    <value>ucrChkYaxis</value>
+  </data>
+  <data name="&gt;&gt;ucrChkYaxis.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkYaxis.Parent" xml:space="preserve">
+    <value>tpRug</value>
+  </data>
+  <data name="&gt;&gt;ucrChkYaxis.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="tpRug.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tpRug.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tpRug.Size" type="System.Drawing.Size, System.Drawing">
+    <value>567, 309</value>
+  </data>
+  <data name="tpRug.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tpRug.Text" xml:space="preserve">
+    <value>Rug</value>
+  </data>
+  <data name="&gt;&gt;tpRug.Name" xml:space="preserve">
+    <value>tpRug</value>
+  </data>
+  <data name="&gt;&gt;tpRug.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tpRug.Parent" xml:space="preserve">
+    <value>tbPICSA</value>
+  </data>
+  <data name="&gt;&gt;tpRug.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="tbPICSA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 4</value>
+    <value>12, -3</value>
   </data>
   <data name="tbPICSA.Size" type="System.Drawing.Size, System.Drawing">
     <value>575, 335</value>

@@ -1756,6 +1756,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   }
   if(definition_props) {
     calc_from <- list()
+    if(!missing(station)) calc_from[[length(calc_from) + 1]] <- station
     calc_from[[length(calc_from) + 1]] <- plant_day_name
     calc_from[[length(calc_from) + 1]] <- plant_length_name
     calc_from[[length(calc_from) + 1]] <- rain_total_name
@@ -1770,8 +1771,10 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     prop_data_frame <- self$run_instat_calculation(propor_table, display = TRUE)
     if(print_table) {
       prop_data_frame$prop_success <- round(prop_data_frame$prop_success, 2)
-      prop_table_unstacked <- reshape2::dcast(formula = as.formula(paste(plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame, value.var = "prop_success")
-      prop_table_split <- split(prop_table_unstacked, prop_table_unstacked[[plant_length_name]])
+      prop_table_unstacked <- reshape2::dcast(formula = as.formula(paste(if(!missing(station)) paste(station, "+"), plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame, value.var = "prop_success")
+      if(!missing(station)) f <- interaction(prop_table_unstacked[[station]], prop_table_unstacked[[plant_length_name]], lex.order = TRUE)
+      else f <- prop_table_unstacked[[plant_length_name]]
+      prop_table_split <- split(prop_table_unstacked, f)
       return(prop_table_split)
     }
   }
