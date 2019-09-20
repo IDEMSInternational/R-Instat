@@ -602,11 +602,9 @@ Public Class dlgPICSARainfall
         If ucrVariablesAsFactorForPicsa.bSingleVariable Then
             'Added this because this sub is called on sed defaults and  it over writes the enabled property 
             cmdPICSAOptions.Enabled = True
-            cmdLineOptions.Enabled = True
             cmdOptions.Enabled = True
         Else
             'cmdPICSAOptions.Enabled = False
-            cmdLineOptions.Enabled = False
             cmdOptions.Enabled = False
         End If
     End Sub
@@ -630,7 +628,7 @@ Public Class dlgPICSARainfall
         'AddRemoveGroupByAndHlines()
     End Sub
 
-    Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
+    Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs)
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomLine, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetLineLayerSubdialog = False
