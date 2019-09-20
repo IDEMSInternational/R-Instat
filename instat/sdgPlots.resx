@@ -1449,11 +1449,38 @@
   <data name="&gt;&gt;tbpTheme.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="lblStartingAngle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblStartingAngle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 89</value>
+  </data>
+  <data name="lblStartingAngle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 13</value>
+  </data>
+  <data name="lblStartingAngle.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="lblStartingAngle.Text" xml:space="preserve">
+    <value>Starting Angle:</value>
+  </data>
+  <data name="&gt;&gt;lblStartingAngle.Name" xml:space="preserve">
+    <value>lblStartingAngle</value>
+  </data>
+  <data name="&gt;&gt;lblStartingAngle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStartingAngle.Parent" xml:space="preserve">
+    <value>grpPolarCordinates</value>
+  </data>
+  <data name="&gt;&gt;lblStartingAngle.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkUsePolarCoordinates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 30</value>
+    <value>11, 22</value>
   </data>
   <data name="ucrChkUsePolarCoordinates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 20</value>
+    <value>147, 20</value>
   </data>
   <data name="ucrChkUsePolarCoordinates.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1468,7 +1495,7 @@
     <value>grpPolarCordinates</value>
   </data>
   <data name="&gt;&gt;ucrChkUsePolarCoordinates.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="lblPi.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1477,7 +1504,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPi.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 86</value>
+    <value>138, 90</value>
   </data>
   <data name="lblPi.Size" type="System.Drawing.Size, System.Drawing">
     <value>15, 13</value>
@@ -1498,13 +1525,13 @@
     <value>grpPolarCordinates</value>
   </data>
   <data name="&gt;&gt;lblPi.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrChkDirectionAnticlockwise.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 56</value>
+    <value>11, 59</value>
   </data>
   <data name="ucrChkDirectionAnticlockwise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 20</value>
+    <value>155, 20</value>
   </data>
   <data name="ucrChkDirectionAnticlockwise.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1519,48 +1546,27 @@
     <value>grpPolarCordinates</value>
   </data>
   <data name="&gt;&gt;ucrChkDirectionAnticlockwise.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrtxtStartingAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 81</value>
-  </data>
-  <data name="ucrtxtStartingAngle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 21</value>
-  </data>
-  <data name="ucrtxtStartingAngle.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;ucrtxtStartingAngle.Name" xml:space="preserve">
-    <value>ucrtxtStartingAngle</value>
-  </data>
-  <data name="&gt;&gt;ucrtxtStartingAngle.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrtxtStartingAngle.Parent" xml:space="preserve">
-    <value>grpPolarCordinates</value>
-  </data>
-  <data name="&gt;&gt;ucrtxtStartingAngle.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrChkStartingAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 82</value>
+  <data name="ucrInputStartingAngle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 85</value>
   </data>
-  <data name="ucrChkStartingAngle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 20</value>
+  <data name="ucrInputStartingAngle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 21</value>
   </data>
-  <data name="ucrChkStartingAngle.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+  <data name="ucrInputStartingAngle.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
   </data>
-  <data name="&gt;&gt;ucrChkStartingAngle.Name" xml:space="preserve">
-    <value>ucrChkStartingAngle</value>
+  <data name="&gt;&gt;ucrInputStartingAngle.Name" xml:space="preserve">
+    <value>ucrInputStartingAngle</value>
   </data>
-  <data name="&gt;&gt;ucrChkStartingAngle.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrInputStartingAngle.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkStartingAngle.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputStartingAngle.Parent" xml:space="preserve">
     <value>grpPolarCordinates</value>
   </data>
-  <data name="&gt;&gt;ucrChkStartingAngle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputStartingAngle.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="grpPolarCordinates.Location" type="System.Drawing.Point, System.Drawing">
