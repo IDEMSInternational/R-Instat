@@ -48,14 +48,14 @@ Public Class dlgCircular
         ucrPnlUnits.AddRadioButton(rdoHours, Chr(34) & "hours" & Chr(34))
         ucrPnlUnits.AddRadioButton(rdoRadians, Chr(34) & "radians" & Chr(34))
 
-        ucrSaveCircularColumn.SetPrefix("Circ")
+        ucrSaveCircularColumn.SetPrefix("circ")
         ucrSaveCircularColumn.SetSaveTypeAsColumn()
         ucrSaveCircularColumn.SetDataFrameSelector(ucrSelectorCircular.ucrAvailableDataFrames)
         ucrSaveCircularColumn.SetLabelText("New Column Name:")
         ucrSaveCircularColumn.SetIsComboBox()
     End Sub
 
-    Private Sub setDefaults()
+    Private Sub SetDefaults()
         clsCircularFunction = New RFunction
 
         ucrSelectorCircular.Reset()
@@ -70,7 +70,7 @@ Public Class dlgCircular
         ucrBase.clsRsyntax.SetBaseRFunction(clsCircularFunction)
     End Sub
 
-    Private Sub setRcodeforControls(breset As Boolean)
+    Private Sub SetRcodeforControls(breset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, breset)
     End Sub
 
