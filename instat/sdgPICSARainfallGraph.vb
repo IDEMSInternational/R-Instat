@@ -31,14 +31,11 @@ Public Class sdgPICSARainfallGraph
     Private strLowerTercileName As String = ".lower_ter_y"
     Private strUpperTercileName As String = ".upper_ter_y"
 
-    Private strLeapYearSelected As String = "2016"
-
-
     Public clsBaseOperator As ROperator
     Public clsPipeOperator As ROperator
     Public clsLabsFunction, clsXLabsFunction, clsYLabsFunction As RFunction
     Public clsXScaleContinuousFunction, clsYScaleContinuousFunction As New RFunction
-    Public clsCLimitsYContinuous, clsCLimitsYDate, clsYLimitsYDate, clsAsDateLimit As New RFunction
+    Public clsCLimitsYContinuous, clsCLimitsYDate, clsAsDateLimit As New RFunction
     Public clsXScalecontinuousSeqFunction, clsYScaleContinuousSeqFunction As New RFunction
     Public clsYScaleDateFunction As New RFunction
     Public clsThemeFunction As RFunction
@@ -61,7 +58,6 @@ Public Class sdgPICSARainfallGraph
     Private clsElementBlank As New RFunction
     Private dctLabelForDays As New Dictionary(Of String, String)
     Private dctDateTimePeriods As New Dictionary(Of String, String)
-    Private dctDateStartMonths As New Dictionary(Of String, String)
 
     Private clsDatePeriodOperator As New ROperator
 
@@ -589,7 +585,7 @@ Public Class sdgPICSARainfallGraph
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, clsNewPipeOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing, Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsDateYLimit As RFunction = Nothing, Optional clsNewAsNumeric As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing, Optional clsNewGeomTextLabelMeanLine As RFunction = Nothing, Optional clsNewRoundMeanY As RFunction = Nothing, Optional clsNewPasteMeanY As RFunction = Nothing, Optional clsNewGeomTextLabelMedianLine As RFunction = Nothing, Optional clsNewRoundMedianY As RFunction = Nothing, Optional clsNewPasteMedianY As RFunction = Nothing, Optional clsNewGeomTextLabelLowerTercileLine As RFunction = Nothing, Optional clsNewRoundLowerTercileY As RFunction = Nothing, Optional clsNewPasteLowerTercileY As RFunction = Nothing, Optional clsNewGeomTextLabelUpperTercileLine As RFunction = Nothing, Optional clsNewRoundUpperTercileY As RFunction = Nothing, Optional clsNewPasteUpperTercileY As RFunction = Nothing, Optional strXAxisType As String = "", Optional clsNewMutateFunction As RFunction = Nothing, Optional clsNewMeanFunction As RFunction = Nothing, Optional clsNewMedianFunction As RFunction = Nothing, Optional clsNewLowerTercileFunction As RFunction = Nothing, Optional clsNewUpperTercileFunction As RFunction = Nothing, Optional clsNewAsDateMeanY As RFunction = Nothing, Optional clsNewAsDateMedianY As RFunction = Nothing, Optional clsNewAsDateLowerTercileY As RFunction = Nothing, Optional clsNewAsDateUpperTercileY As RFunction = Nothing, Optional clsNewFormatMeanY As RFunction = Nothing, Optional clsNewFormatMedianY As RFunction = Nothing, Optional clsNewFormatLowerTercileY As RFunction = Nothing, Optional clsNewFormatUpperTercileY As RFunction = Nothing, Optional clsNewYLimitsYDate As RFunction = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, clsNewPipeOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsFunction As RFunction = Nothing, Optional clsNewYLabsFunction As RFunction = Nothing, Optional clsNewXScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleContinuousFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional clsNewGeomhlineMean As RFunction = Nothing, Optional clsNewGeomhlineMedian As RFunction = Nothing, Optional clsNewGeomhlineLowerTercile As RFunction = Nothing, Optional clsNewGeomhlineUpperTercile As RFunction = Nothing, Optional clsNewRaesFunction As RFunction = Nothing, Optional clsNewAsDate As RFunction = Nothing, Optional clsNewAsDateYLimit As RFunction = Nothing, Optional clsNewAsNumeric As RFunction = Nothing, Optional clsNewDatePeriodOperator As ROperator = Nothing, Optional clsNewGeomTextLabelMeanLine As RFunction = Nothing, Optional clsNewRoundMeanY As RFunction = Nothing, Optional clsNewPasteMeanY As RFunction = Nothing, Optional clsNewGeomTextLabelMedianLine As RFunction = Nothing, Optional clsNewRoundMedianY As RFunction = Nothing, Optional clsNewPasteMedianY As RFunction = Nothing, Optional clsNewGeomTextLabelLowerTercileLine As RFunction = Nothing, Optional clsNewRoundLowerTercileY As RFunction = Nothing, Optional clsNewPasteLowerTercileY As RFunction = Nothing, Optional clsNewGeomTextLabelUpperTercileLine As RFunction = Nothing, Optional clsNewRoundUpperTercileY As RFunction = Nothing, Optional clsNewPasteUpperTercileY As RFunction = Nothing, Optional strXAxisType As String = "", Optional clsNewMutateFunction As RFunction = Nothing, Optional clsNewMeanFunction As RFunction = Nothing, Optional clsNewMedianFunction As RFunction = Nothing, Optional clsNewLowerTercileFunction As RFunction = Nothing, Optional clsNewUpperTercileFunction As RFunction = Nothing, Optional clsNewAsDateMeanY As RFunction = Nothing, Optional clsNewAsDateMedianY As RFunction = Nothing, Optional clsNewAsDateLowerTercileY As RFunction = Nothing, Optional clsNewAsDateUpperTercileY As RFunction = Nothing, Optional clsNewFormatMeanY As RFunction = Nothing, Optional clsNewFormatMedianY As RFunction = Nothing, Optional clsNewFormatLowerTercileY As RFunction = Nothing, Optional clsNewFormatUpperTercileY As RFunction = Nothing, Optional bReset As Boolean = False)
         Dim clsCLimitsY As RFunction
 
         bRCodeSet = False
@@ -708,7 +704,6 @@ Public Class sdgPICSARainfallGraph
         clsAsNumeric = clsNewAsNumeric
 
         clsAsDateYLimit = clsNewAsDateYLimit
-        clsYLimitsYDate = clsNewYLimitsYDate
 
         clsDatePeriodOperator = clsNewDatePeriodOperator
 
@@ -748,8 +743,8 @@ Public Class sdgPICSARainfallGraph
 
         ' Limits c() function for y date scales
         Dim clsTempYLimitsDateParam As RParameter
-        If clsYScaleDateFunction.ContainsParameter("limits") Then
-            clsTempYLimitsDateParam = clsYScaleDateFunction.GetParameter("limits")
+        If clsAsDateYLimit.ContainsParameter("x") Then
+            clsTempYLimitsDateParam = clsAsDateYLimit.GetParameter("x")
             If clsTempYLimitsDateParam.clsArgumentCodeStructure IsNot Nothing Then
                 clsCLimitsYDate = clsTempYLimitsDateParam.clsArgumentCodeStructure
             Else
@@ -771,7 +766,7 @@ Public Class sdgPICSARainfallGraph
         'This is needed to set the R code correctly for ucrChkYSpecifyLowerLimit/ucrChkYSpecifyUpperLimit
         'since used by both continuous and date scales
         If rdoYDate.Checked Then
-            clsCLimitsY = clsYLimitsYDate
+            clsCLimitsY = clsCLimitsYDate
         Else
             clsCLimitsY = clsCLimitsYContinuous
         End If
@@ -960,6 +955,7 @@ Public Class sdgPICSARainfallGraph
         AddRemoveXAxisScalesContinuous()
         AddRemoveYAxisScales()
         AddRemoveHline()
+        AddRemoveDateLimits()
         SetMeanLabelType()
         SetMedianLabelType()
         SetTercilesLabelType()
@@ -967,10 +963,12 @@ Public Class sdgPICSARainfallGraph
         AddRemoveMinorGridLines()
         AddRemovePanelBorder()
         AddRemoveDateBreaks()
-        ucrNudLowerLimit.Value = 1
-        ucrNudUpperLimit.Value = 31
-        ucrInputYSpecifyLowerLimitDateMonth.SetName("January")
-        ucrInputYSpecifyUpperLimitDateMonth.SetName("December")
+        If bReset Then
+            ucrNudLowerLimit.Value = 1
+            ucrNudUpperLimit.Value = 31
+            ucrInputYSpecifyLowerLimitDateMonth.SetName("January")
+            ucrInputYSpecifyUpperLimitDateMonth.SetName("December")
+        End If
     End Sub
 
     Private Sub ucrChkAddMedian_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddMean.ControlValueChanged, ucrChkAddMedian.ControlValueChanged, ucrChkAddTerciles.ControlValueChanged
@@ -1337,38 +1335,48 @@ Public Class sdgPICSARainfallGraph
         AddRemoveDateLimits()
     End Sub
 
-    Private Sub SetDefault()
-        clsYLimitsYDate.AddParameter("lowerlimit", 1)
-        clsYLimitsYDate.AddParameter("upperlimit", 31)
-        clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsYLimitsYDate)
-        clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
-    End Sub
-
     Private Sub AddRemoveDateLimits()
+        Dim iYear As Integer
+        Dim iYearLower As Integer
+        Dim iYearUpper As Integer
 
-        If rdoYDate.Checked Then
-            If ucrChkYSpecifyLowerLimit.Checked AndAlso ucrChkYSpecifyUpperLimit.Checked Then
-                clsYLimitsYDate.AddParameter("lowerlimit", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyLowerLimitDateMonth.GetText & "/" & ucrNudLowerLimit.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-                clsYLimitsYDate.AddParameter("upperlimit", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyUpperLimitDateMonth.GetText & "/" & ucrNudUpperLimit.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
-                clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsYLimitsYDate)
-                clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
-            ElseIf ucrChkYSpecifyLowerLimit.Checked AndAlso Not ucrChkYSpecifyUpperLimit.Checked Then
-                clsYLimitsYDate.AddParameter("lowerlimit", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyLowerLimitDateMonth.GetText & "/" & ucrNudLowerLimit.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-                clsYLimitsYDate.AddParameter("upperlimit", "NA", bIncludeArgumentName:=False, iPosition:=1)
-                clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsYLimitsYDate)
-                clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
-            ElseIf Not ucrChkYSpecifyLowerLimit.Checked AndAlso ucrChkYSpecifyUpperLimit.Checked Then
-                clsYLimitsYDate.AddParameter("lowerlimit", "NA", bIncludeArgumentName:=False, iPosition:=0)
-                clsYLimitsYDate.AddParameter("upperlimit", Chr(34) & strLeapYearSelected & "/" & ucrInputYSpecifyUpperLimitDateMonth.GetText & "/" & ucrNudUpperLimit.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
-                clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsYLimitsYDate)
-                clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
-            Else
-                clsYScaleDateFunction.RemoveParameterByName("limits")
-                clsYLimitsYDate.RemoveParameterByName("lowerlimit")
-                clsYLimitsYDate.RemoveParameterByName("upperlimit")
-            End If
+        If ucrInputStartMonth.GetText() = "January" OrElse ucrInputStartMonth.GetText() = "February" Then
+            iYear = 2016
+        Else
+            iYear = 2015
+        End If
+        iYearLower = iYear
+        iYearUpper = iYear
+
+        If ucrInputYSpecifyLowerLimitDateMonth.cboInput.SelectedIndex < ucrInputStartMonth.cboInput.SelectedIndex Then
+            iYearLower = iYear + 1
+        End If
+        If ucrInputYSpecifyUpperLimitDateMonth.cboInput.SelectedIndex < ucrInputStartMonth.cboInput.SelectedIndex Then
+            iYearUpper = iYear + 1
         End If
 
+        If bRCodeSet Then
+            If rdoYDate.Checked Then
+                If ucrChkYSpecifyLowerLimit.Checked AndAlso ucrChkYSpecifyUpperLimit.Checked Then
+                    clsCLimitsYDate.AddParameter("lowerlimit", Chr(34) & iYearLower & "/" & ucrInputYSpecifyLowerLimitDateMonth.GetText & "/" & ucrNudLowerLimit.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+                    clsCLimitsYDate.AddParameter("upperlimit", Chr(34) & iYearUpper & "/" & ucrInputYSpecifyUpperLimitDateMonth.GetText & "/" & ucrNudUpperLimit.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+                    clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsCLimitsYDate)
+                    clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
+                ElseIf ucrChkYSpecifyLowerLimit.Checked AndAlso Not ucrChkYSpecifyUpperLimit.Checked Then
+                    clsCLimitsYDate.AddParameter("lowerlimit", Chr(34) & iYearLower & "/" & ucrInputYSpecifyLowerLimitDateMonth.GetText & "/" & ucrNudLowerLimit.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+                    clsCLimitsYDate.AddParameter("upperlimit", "NA", bIncludeArgumentName:=False, iPosition:=1)
+                    clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsCLimitsYDate)
+                    clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
+                ElseIf Not ucrChkYSpecifyLowerLimit.Checked AndAlso ucrChkYSpecifyUpperLimit.Checked Then
+                    clsCLimitsYDate.AddParameter("lowerlimit", "NA", bIncludeArgumentName:=False, iPosition:=0)
+                    clsCLimitsYDate.AddParameter("upperlimit", Chr(34) & iYearUpper & "/" & ucrInputYSpecifyUpperLimitDateMonth.GetText & "/" & ucrNudUpperLimit.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+                    clsAsDateYLimit.AddParameter("x", clsRFunctionParameter:=clsCLimitsYDate)
+                    clsYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsAsDateYLimit, iPosition:=0)
+                Else
+                    clsYScaleDateFunction.RemoveParameterByName("limits")
+                End If
+            End If
+        End If
     End Sub
 
 
@@ -1530,4 +1538,9 @@ Public Class sdgPICSARainfallGraph
         'End If
     End Sub
 
+    Private Sub ucrInputStartMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStartMonth.ControlValueChanged
+        If bRCodeSet Then
+            AddRemoveDateLimits()
+        End If
+    End Sub
 End Class
