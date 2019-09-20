@@ -759,4 +759,8 @@ Public Class sdgPlots
             clsBaseOperator.RemoveParameterByName("coord_polar")
         End If
     End Sub
+
+    Private Sub sdgPlots_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
+        '''''
+    End Sub
 End Class
