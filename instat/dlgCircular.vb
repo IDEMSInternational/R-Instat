@@ -24,9 +24,9 @@ Public Class dlgCircular
             bFirstLoad = False
         End If
         If bReset Then
-            setDefaults()
+            SetDefaults()
         End If
-        setRcodeforControls(bReset)
+        SetRcodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -75,8 +75,8 @@ Public Class dlgCircular
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        setDefaults()
-        setRcodeforControls(True)
+        SetDefaults()
+        SetRcodeforControls(True)
         TestOkEnabled()
     End Sub
 
