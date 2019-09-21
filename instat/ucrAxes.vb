@@ -140,12 +140,14 @@ Public Class ucrAxes
         ucrInputLowerLimit.SetParameterIncludeArgumentName(False)
         ucrInputLowerLimit.SetValidationTypeAsNumeric()
         ucrInputLowerLimit.AddQuotesIfUnrecognised = False
+        ucrInputLowerLimit.SetValuesToIgnore({"NA"})
         ucrInputLowerLimit.SetLinkedDisplayControl(lblLowerLimit)
 
         ucrInputUpperLimit.SetParameter(New RParameter("upperlimit", 1))
         ucrInputUpperLimit.SetParameterIncludeArgumentName(False)
         ucrInputUpperLimit.SetValidationTypeAsNumeric()
         ucrInputUpperLimit.AddQuotesIfUnrecognised = False
+        ucrInputUpperLimit.SetValuesToIgnore({"NA"})
         ucrInputUpperLimit.SetLinkedDisplayControl(lblUpperLimit)
 
         'Axis type - controls which options are available
