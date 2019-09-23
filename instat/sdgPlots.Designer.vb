@@ -98,6 +98,9 @@ Partial Class sdgPlots
         Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.tbpCoordinates = New System.Windows.Forms.TabPage()
         Me.grpPolarCordinates = New System.Windows.Forms.GroupBox()
+        Me.ucrInputPolarCoordinates = New instat.ucrInputComboBox()
+        Me.lblPolarCoordinate = New System.Windows.Forms.Label()
+        Me.lblStartingAngle = New System.Windows.Forms.Label()
         Me.ucrChkUsePolarCoordinates = New instat.ucrCheck()
         Me.lblPi = New System.Windows.Forms.Label()
         Me.ucrChkDirectionAnticlockwise = New instat.ucrCheck()
@@ -105,7 +108,6 @@ Partial Class sdgPlots
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.lblStartingAngle = New System.Windows.Forms.Label()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -571,6 +573,8 @@ Partial Class sdgPlots
         '
         'grpPolarCordinates
         '
+        Me.grpPolarCordinates.Controls.Add(Me.ucrInputPolarCoordinates)
+        Me.grpPolarCordinates.Controls.Add(Me.lblPolarCoordinate)
         Me.grpPolarCordinates.Controls.Add(Me.lblStartingAngle)
         Me.grpPolarCordinates.Controls.Add(Me.ucrChkUsePolarCoordinates)
         Me.grpPolarCordinates.Controls.Add(Me.lblPi)
@@ -579,6 +583,23 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.grpPolarCordinates, "grpPolarCordinates")
         Me.grpPolarCordinates.Name = "grpPolarCordinates"
         Me.grpPolarCordinates.TabStop = False
+        '
+        'ucrInputPolarCoordinates
+        '
+        Me.ucrInputPolarCoordinates.AddQuotesIfUnrecognised = True
+        Me.ucrInputPolarCoordinates.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPolarCoordinates, "ucrInputPolarCoordinates")
+        Me.ucrInputPolarCoordinates.Name = "ucrInputPolarCoordinates"
+        '
+        'lblPolarCoordinate
+        '
+        resources.ApplyResources(Me.lblPolarCoordinate, "lblPolarCoordinate")
+        Me.lblPolarCoordinate.Name = "lblPolarCoordinate"
+        '
+        'lblStartingAngle
+        '
+        resources.ApplyResources(Me.lblStartingAngle, "lblStartingAngle")
+        Me.lblStartingAngle.Name = "lblStartingAngle"
         '
         'ucrChkUsePolarCoordinates
         '
@@ -622,11 +643,6 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        '
-        'lblStartingAngle
-        '
-        resources.ApplyResources(Me.lblStartingAngle, "lblStartingAngle")
-        Me.lblStartingAngle.Name = "lblStartingAngle"
         '
         'sdgPlots
         '
@@ -728,6 +744,8 @@ Partial Class sdgPlots
     Friend WithEvents lblPi As Label
     Friend WithEvents grpPolarCordinates As GroupBox
     Friend WithEvents lblStartingAngle As Label
+    Friend WithEvents ucrInputPolarCoordinates As ucrInputComboBox
+    Friend WithEvents lblPolarCoordinate As Label
 End Class
 
 
