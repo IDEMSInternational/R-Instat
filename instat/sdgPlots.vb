@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class sdgPlots
     'Question to be discussed (later: need to explore first)/Exploration Task: In order to uniformise the code, could create a PlotOptionsSetup where all the necessary links between specific plots and plot options are made ? For the moment all these are scattered around. Might be necessary to have this flexibility though... 
@@ -60,6 +59,8 @@ Public Class sdgPlots
     Private clsCoordPolarStartOperator As New ROperator
 
     'See bLayersDefaultIsGolobal below.
+
+    Private dctTheta As New Dictionary(Of String, String)
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs)
         autoTranslate(Me)
@@ -264,6 +265,7 @@ Public Class sdgPlots
         ucrChkUsePolarCoordinates.AddParameterPresentCondition(True, "coord_polar")
         ucrChkUsePolarCoordinates.AddParameterPresentCondition(False, "coord_polar", False)
         ucrChkUsePolarCoordinates.AddToLinkedControls({ucrChkDirectionAnticlockwise, ucrInputStartingAngle}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkUsePolarCoordinates.AddToLinkedControls({ucrInputPolarCoordinates}, {True}, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=Chr(34) & "x" & Chr(34))
 
         ucrChkDirectionAnticlockwise.SetText("Anticlockwise Direction")
         ucrChkDirectionAnticlockwise.SetParameter(New RParameter("direction"), bNewChangeParameterValue:=True, strNewValueIfChecked:="-1", strNewValueIfUnchecked:="1")
@@ -273,6 +275,16 @@ Public Class sdgPlots
         ucrInputStartingAngle.SetValidationTypeAsNumeric()
         ucrInputStartingAngle.AddQuotesIfUnrecognised = False
         ucrInputStartingAngle.SetLinkedDisplayControl(New List(Of Control)({lblPi, lblStartingAngle}))
+
+
+        dctTheta.Add("x", Chr(34) & "x" & Chr(34))
+        dctTheta.Add("y", Chr(34) & "y" & Chr(34))
+        ucrInputPolarCoordinates.SetParameter(New RParameter("theta", iNewPosition:=1))
+        ucrInputPolarCoordinates.SetLinkedDisplayControl(lblPolarCoordinate)
+        ucrInputPolarCoordinates.SetItems(dctTheta)
+        ucrInputPolarCoordinates.SetDropDownStyleAsNonEditable()
+        'ucrInputPolarCoordinates.SetRDefault(Chr(34) & "x" & Chr(34))
+
 
         ucrChkXaxisAngle.SetText("X axis Tick Labels Angle")
         ucrChkXaxisAngle.AddToLinkedControls(ucrNudXAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
@@ -339,7 +351,6 @@ Public Class sdgPlots
         clsCoordPolarStartOperator = clsNewCoordPolarStartOperator
         clsCoordPolarFunc.AddParameter("start", clsROperatorParameter:=clsCoordPolarStartOperator, iPosition:=1)
         dctThemeFunctions = dctNewThemeFunctions
-
         dctThemeFunctions.TryGetValue("axis.text.x", clsXElementText)
         dctThemeFunctions.TryGetValue("axis.title.x", clsXElementTitle)
         dctThemeFunctions.TryGetValue("axis.text.y", clsYElemetText)
@@ -399,6 +410,7 @@ Public Class sdgPlots
         ucrChkUsePolarCoordinates.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkDirectionAnticlockwise.SetRCode(clsCoordPolarFunc, bReset:=True, bCloneIfNeeded:=True)
         ucrInputStartingAngle.SetRCode(clsCoordPolarStartOperator, bReset, bCloneIfNeeded:=True)
+        ucrInputPolarCoordinates.SetRCode(clsCoordPolarFunc, bReset:=True, bCloneIfNeeded:=True)
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, strMainDialogGeomParameterNames:=strMainDialogGeomParameterNames, bReset:=bReset)
         bRCodeSet = True
@@ -758,9 +770,5 @@ Public Class sdgPlots
         Else
             clsBaseOperator.RemoveParameterByName("coord_polar")
         End If
-    End Sub
-
-    Private Sub sdgPlots_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
-        '''''
     End Sub
 End Class

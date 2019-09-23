@@ -1449,11 +1449,62 @@
   <data name="&gt;&gt;tbpTheme.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="ucrInputPolarCoordinates.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 46</value>
+  </data>
+  <data name="ucrInputPolarCoordinates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 21</value>
+  </data>
+  <data name="ucrInputPolarCoordinates.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPolarCoordinates.Name" xml:space="preserve">
+    <value>ucrInputPolarCoordinates</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPolarCoordinates.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPolarCoordinates.Parent" xml:space="preserve">
+    <value>grpPolarCordinates</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPolarCoordinates.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblPolarCoordinate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPolarCoordinate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblPolarCoordinate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 46</value>
+  </data>
+  <data name="lblPolarCoordinate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
+  </data>
+  <data name="lblPolarCoordinate.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="lblPolarCoordinate.Text" xml:space="preserve">
+    <value>Polar Coordinate:</value>
+  </data>
+  <data name="&gt;&gt;lblPolarCoordinate.Name" xml:space="preserve">
+    <value>lblPolarCoordinate</value>
+  </data>
+  <data name="&gt;&gt;lblPolarCoordinate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPolarCoordinate.Parent" xml:space="preserve">
+    <value>grpPolarCordinates</value>
+  </data>
+  <data name="&gt;&gt;lblPolarCoordinate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="lblStartingAngle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblStartingAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 89</value>
+    <value>9, 94</value>
   </data>
   <data name="lblStartingAngle.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
@@ -1474,10 +1525,10 @@
     <value>grpPolarCordinates</value>
   </data>
   <data name="&gt;&gt;lblStartingAngle.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="ucrChkUsePolarCoordinates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 22</value>
+    <value>12, 19</value>
   </data>
   <data name="ucrChkUsePolarCoordinates.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 20</value>
@@ -1495,7 +1546,7 @@
     <value>grpPolarCordinates</value>
   </data>
   <data name="&gt;&gt;ucrChkUsePolarCoordinates.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="lblPi.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1504,7 +1555,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPi.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 90</value>
+    <value>138, 95</value>
   </data>
   <data name="lblPi.Size" type="System.Drawing.Size, System.Drawing">
     <value>15, 13</value>
@@ -1525,10 +1576,10 @@
     <value>grpPolarCordinates</value>
   </data>
   <data name="&gt;&gt;lblPi.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="ucrChkDirectionAnticlockwise.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 59</value>
+    <value>10, 70</value>
   </data>
   <data name="ucrChkDirectionAnticlockwise.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 20</value>
@@ -1546,10 +1597,10 @@
     <value>grpPolarCordinates</value>
   </data>
   <data name="&gt;&gt;ucrChkDirectionAnticlockwise.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="ucrInputStartingAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 85</value>
+    <value>92, 90</value>
   </data>
   <data name="ucrInputStartingAngle.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 21</value>
@@ -1567,7 +1618,7 @@
     <value>grpPolarCordinates</value>
   </data>
   <data name="&gt;&gt;ucrInputStartingAngle.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="grpPolarCordinates.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 67</value>
