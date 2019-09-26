@@ -604,25 +604,34 @@ Public Class ucrReceiver
         '     don't always want to autofill when dataframe is changed.
         '     Something like AndAlso Selector.CurrentReceiver.bAttachedToPrimaryDataFrame
         '     except always want to autofill when resetting regardless of current receiver
-        If bAutoFill AndAlso lstIncludedAutoFillProperties.Count > 0 AndAlso Selector IsNot Nothing AndAlso ((bTypeSet AndAlso GetItemType() = "column") OrElse Selector.GetItemType() = "column") AndAlso (Selector.CurrentReceiver Is Nothing OrElse Selector.CurrentReceiver.bAttachedToPrimaryDataFrame) Then
-            SetMeAsReceiver()
-            clsGetItems.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
-            clsIncludeList.SetRCommand("list")
-            For Each kvpInclude In lstIncludedAutoFillProperties
-                clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList(), bWithQuotes:=False))
-            Next
-            clsGetItems.AddParameter("include", clsRFunctionParameter:=clsIncludeList)
-            clsGetItems.AddParameter("data_name", Chr(34) & Selector.strCurrentDataFrame & Chr(34))
-            expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
-            If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
-                chrColumns = expItems.AsCharacter
-                If chrColumns.Count = 1 Then
-                    For Each lviTempVariable As ListViewItem In Selector.lstAvailableVariable.Items
-                        If lviTempVariable.Text = chrColumns(0) Then
-                            Add(lviTempVariable.Text, Selector.strCurrentDataFrame)
-                            Exit For
-                        End If
-                    Next
+        If bAutoFill AndAlso Selector IsNot Nothing AndAlso (Selector.CurrentReceiver Is Nothing OrElse Selector.CurrentReceiver.bAttachedToPrimaryDataFrame) Then
+            ' If no autofill properties then simply check if one item is in the selector
+            ' (may need to modify behaviour for multiple receivers)
+            If lstIncludedAutoFillProperties.Count = 0 Then
+                SetMeAsReceiver()
+                If Selector.lstAvailableVariable.Items.Count = 1 Then
+                    Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
+                End If
+            ElseIf lstIncludedAutoFillProperties.Count > 0 AndAlso ((bTypeSet AndAlso GetItemType() = "column") OrElse Selector.GetItemType() = "column") Then
+                SetMeAsReceiver()
+                clsGetItems.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+                clsIncludeList.SetRCommand("list")
+                For Each kvpInclude In lstIncludedAutoFillProperties
+                    clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList(), bWithQuotes:=False))
+                Next
+                clsGetItems.AddParameter("include", clsRFunctionParameter:=clsIncludeList)
+                clsGetItems.AddParameter("data_name", Chr(34) & Selector.strCurrentDataFrame & Chr(34))
+                expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
+                If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+                    chrColumns = expItems.AsCharacter
+                    If chrColumns.Count = 1 Then
+                        For Each lviTempVariable As ListViewItem In Selector.lstAvailableVariable.Items
+                            If lviTempVariable.Text = chrColumns(0) Then
+                                Add(lviTempVariable.Text, Selector.strCurrentDataFrame)
+                                Exit For
+                            End If
+                        Next
+                    End If
                 End If
             End If
         End If

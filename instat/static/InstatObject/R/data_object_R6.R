@@ -2122,20 +2122,6 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     col_name <- next_default_item(prefix = "leap_year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = leap_year_vector)
   }
-  if(year_val) {
-    if(s_shift) {
-      col_name <- next_default_item(prefix = "s_year", existing_names = self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name = col_name, col_data = temp_s_year_num)
-      self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted year starting on day", s_start_day))
-    }
-    else {
-      year_vector <- lubridate::year(col_data)
-      col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name = col_name, col_data = year_vector)
-    }
-    if(is_climatic) self$set_climatic_types(types = c(year = col_name))
-    self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
-  }
   if(year_name) {
     if(s_shift) {
       col_name <- next_default_item(prefix = "s_year", existing_names = self$get_column_names(), include_index = FALSE)
@@ -2150,22 +2136,25 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
       col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = factor(year_vector))
     }
-    if(is_climatic) self$set_climatic_types(types = c(year = col_name))
+    if(is_climatic && is.null(self$get_climatic_column_name(year_label))) {
+      self$append_climatic_types(types = c(year = col_name))
+    }
     self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
   }
-  if(month_val) {
-	  month_val_vector <- (lubridate::month(col_data) - (s_start_month - 1)) %% 12
-	  month_val_vector <- ifelse(month_val_vector == 0, 12, month_val_vector)
-    col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = month_val_vector)
-    if(s_shift) self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted month starting on day", s_start_day))
-    self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
-  }
-  if(month_abbr) {
-    month_abbr_vector <- factor(forcats::fct_shift(f = lubridate::month(col_data, label = TRUE), n = s_start_month - 1), ordered = FALSE)
-    col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = month_abbr_vector)
-    if(s_shift) self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted month starting on day", s_start_day))
+  if(year_val) {
+    if(s_shift) {
+      col_name <- next_default_item(prefix = "s_year", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = temp_s_year_num)
+      self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted year starting on day", s_start_day))
+    }
+    else {
+      year_vector <- lubridate::year(col_data)
+      col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = year_vector)
+    }
+    if(is_climatic && is.null(self$get_climatic_column_name(year_label))) {
+      self$append_climatic_types(types = c(year = col_name))
+    }
     self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
   }
   if(month_name) { 
@@ -2173,17 +2162,39 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     col_name <- next_default_item(prefix = "month_name", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_name_vector)
     if(s_shift) self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted month starting on day", s_start_day))
+    if(is_climatic && is.null(self$get_climatic_column_name(month_label))) {
+      self$append_climatic_types(types = c(month = col_name))
+    }
     self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
   }
-  if(day) {
-    day_vector <- lubridate::day(col_data)
-    col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
-    self$add_columns_to_data(col_name = col_name, col_data = day_vector)
+  if(month_abbr) {
+    month_abbr_vector <- factor(forcats::fct_shift(f = lubridate::month(col_data, label = TRUE), n = s_start_month - 1), ordered = FALSE)
+    col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month_abbr_vector)
+    if(s_shift) self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted month starting on day", s_start_day))
+    if(is_climatic && is.null(self$get_climatic_column_name(month_label))) {
+      self$append_climatic_types(types = c(month = col_name))
+    }
+    self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
+  }
+  if(month_val) {
+    month_val_vector <- (lubridate::month(col_data) - (s_start_month - 1)) %% 12
+    month_val_vector <- ifelse(month_val_vector == 0, 12, month_val_vector)
+    col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
+    self$add_columns_to_data(col_name = col_name, col_data = month_val_vector)
+    if(s_shift) self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted month starting on day", s_start_day))
+    if(is_climatic && is.null(self$get_climatic_column_name(month_label))) {
+      self$append_climatic_types(types = c(month = col_name))
+    }
+    self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
   }
   if(day_in_month) {
     day_in_month_vector <- as.numeric(lubridate::mday(col_data))
     col_name <- next_default_item(prefix = "day_in_month", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_month_vector)
+    if(is_climatic && is.null(self$get_climatic_column_name(day_label))) {
+      self$append_climatic_types(types = c(day = col_name))
+    }
   }
   if(days_in_month) {
     days_in_month_vector <- as.numeric(lubridate::days_in_month(col_data))
@@ -2201,7 +2212,9 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
       col_name <- next_default_item(prefix = "doy", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = day_in_year_366_vector)
     }
-    if(is_climatic) self$set_climatic_types(types = c(doy = col_name))
+    if(is_climatic && is.null(self$get_climatic_column_name(doy_label))) {
+      self$append_climatic_types(types = c(doy = col_name))
+    }
     self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
   }
   if(day_in_year) {
@@ -2210,7 +2223,6 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
 	  day_in_year_vector <- dplyr::if_else(day_in_year_vector == 0, dplyr::if_else(lubridate::leap_year(col_data), 366, 365), day_in_year_vector)
     col_name <- next_default_item(prefix = "doy_365", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_year_vector)
-    if(is_climatic) self$set_climatic_types(types = c(doy = col_name))
     self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
     if(s_shift) self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted year starting on day", s_start_day))
   }
@@ -2347,18 +2359,39 @@ DataBook$set("public","define_as_climatic", function(data_name, types, key_col_n
     }
   }
   self$get_data_objects(data_name)$set_climatic_types(types)
-  cat("Climatic dataset:", data_name, "\n")
-  cat("----------------\n")
+}
+)
+
+DataSheet$set("public","set_climatic_types", function(types) {
+  # Clear all climatic types first
+  self$append_to_variables_metadata(property = climatic_type_label, new_val = NULL)
+  if(!all(names(types) %in% all_climatic_column_types)) stop("Cannot recognise the following climatic types: ", paste(names(types)[!names(types) %in% all_climatic_column_types], collapse = ", "))
+  invisible(sapply(names(types), function(name) self$append_to_variables_metadata(types[name], climatic_type_label, name)))
   types <- types[sort(names(types))]
+  cat("Climatic dataset:", self$get_metadata(data_name_label), "\n")
+  cat("----------------\n")
+  cat("Definition", "\n")
+  cat("----------------\n")
   for(i in seq_along(types)) {
     cat(names(types)[i], ": ", types[i], "\n", sep = "")
   }
 }
 )
 
-DataSheet$set("public","set_climatic_types", function(types) {
+DataSheet$set("public","append_climatic_types", function(types) {
   if(!all(names(types) %in% all_climatic_column_types)) stop("Cannot recognise the following climatic types: ", paste(names(types)[!names(types) %in% all_climatic_column_types], collapse = ", "))
+  for(i in seq_along(types)) {
+    col <- self$get_climatic_column_name(names(types)[i])
+    if(!is.null(col)) self$append_to_variables_metadata(col, climatic_type_label, NULL)
+  }
   invisible(sapply(names(types), function(name) self$append_to_variables_metadata(types[name], climatic_type_label, name)))
+  cat("Climatic dataset:", self$get_metadata(data_name_label), "\n")
+  cat("----------------\n")
+  cat("Update", "\n")
+  cat("----------------\n")
+  for(i in seq_along(types)) {
+    cat(names(types)[i], ": ", types[i], "\n", sep = "")
+  }
 }
 )
 
@@ -2499,17 +2532,44 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
 }
 )
 
-DataSheet$set("public","infill_missing_dates", function(date_name, factors, resort = TRUE) {
+DataSheet$set("public","infill_missing_dates", function(date_name, factors, start_month, start_date, end_date, resort = TRUE) {
   date_col <- self$get_columns_from_data(date_name)
-  if(!lubridate::is.Date(date_col)) stop(date_name, " is not a Date column.")
+  if(!lubridate::is.Date(date_col)) stop("date_col is not a Date column.")
   if(anyNA(date_col)) stop("Cannot do infilling as date column has missing values")
+  if(!missing(start_date) && !lubridate::is.Date(start_date)) stop("start_date is not of type Date")
+  if(!missing(end_date) && !lubridate::is.Date(end_date)) stop("end_date is not of type Date")
+  if(!missing(start_month) && !is.numeric(start_month)) stop("start_month is not numeric")
+  if(!missing(start_month)) end_month <- ((start_month - 2) %% 12) + 1
+  
+  min_date <- min(date_col)
+  max_date <- max(date_col)
+  if(!missing(start_date)) {
+    if(start_date > min_date) stop("Start date cannot be greater than earliest date")
+  }
+  if(!missing(end_date)) {
+    if(end_date < max_date) stop("End date cannot be less than latest date")
+  }
+  
   if(missing(factors)) {
     if(anyDuplicated(date_col) > 0) stop("Cannot do infilling as date column has duplicate values.")
-    min <- min(date_col)
-    max <- max(date_col)
-    full_dates <- seq(min, max, by = "day")
+
+    if(!missing(start_date) | !missing(end_date)) {
+      if(!missing(start_date)) {
+        min_date <- start_date
+      }
+      if(!missing(end_date)) {
+        max_date <- end_date
+      }
+    }
+    else if(!missing(start_month)) {
+      if(start_month <= lubridate::month(min_date)) min_date <- as.Date(paste(lubridate::year(min_date), start_month, 1, sep = "-"), format = "%Y-%m-%d")
+      else min_date <- as.Date(paste(lubridate::year(min_date) - 1, start_month, 1, sep = "-"), format = "%Y-%m-%d")
+      if(end_month >= lubridate::month(max_date)) as.Date(paste(lubridate::year(max_date), end_month, lubridate::days_in_month(as.Date(paste(lubridate::year(max_date), end_month, 1, sep = "-", format = "%Y-%m-%d"))), sep = "-"), format = "%Y-%m-%d")
+      else max_date <- as.Date(paste(lubridate::year(max_date) + 1, end_month, lubridate::days_in_month(as.Date(paste(lubridate::year(max_date) + 1, end_month, 1, sep = "-"))), sep = "-", format = "%Y-%m-%d"), format = "%Y-%m-%d")
+    }
+    full_dates <- seq(min_date, max_date, by = "day")
     if(length(full_dates) > length(date_col)) {
-      cat("Infilling", (length(full_dates) - length(date_col)), "missing dates", "\n")
+      cat("Adding", (length(full_dates) - length(date_col)), "rows for date gaps", "\n")
       full_dates <- data.frame(full_dates)
       names(full_dates) <- date_name
       by <- date_name
@@ -2527,13 +2587,29 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, reso
       col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
     }
     grouped_data <- self$get_data_frame(use_current_filter = FALSE) %>% dplyr::group_by_(.dots = col_names_exp)
-    date_ranges <- grouped_data %>% dplyr::summarise_(.dots = setNames(list(lazyeval::interp(~ min(var), var = as.name(date_name)), lazyeval::interp(~ max(var), var = as.name(date_name))), c("Min", "Max")))
-    date_lengths <- grouped_data %>% dplyr::summarise(Count = n())
+    date_ranges <- grouped_data %>% dplyr::summarise_(.dots = setNames(list(lazyeval::interp(~ min(var), var = as.name(date_name)), lazyeval::interp(~ max(var), var = as.name(date_name))), c("min_date", "max_date")))
+    date_lengths <- grouped_data %>% dplyr::summarise(count = n())
+    if(!missing(start_date) | !missing(end_date)) {
+      if(!missing(start_date)) {
+        date_ranges$min_date <- start_date
+      }
+      if(!missing(end_date)) {
+        date_ranges$max_date <- end_date
+      }
+    }
+    else if(!missing(start_month)) {
+      date_ranges$min_date <- dplyr::if_else(lubridate::month(date_ranges$min_date) >= start_month, 
+                                     as.Date(paste(lubridate::year(date_ranges$min_date), start_month, 1, sep = "-"), format = "%Y-%m-%d"),
+                                     as.Date(paste(lubridate::year(date_ranges$min_date) - 1, start_month, 1, sep = "-"), format = "%Y-%m-%d"))
+      date_ranges$max_date <- dplyr::if_else(lubridate::month(date_ranges$max_date) <= end_month, 
+                                     as.Date(paste(lubridate::year(date_ranges$max_date), end_month, lubridate::days_in_month(as.Date(paste(lubridate::year(date_ranges$max_date), end_month, 1, sep = "-"), format = "%Y-%m-%d")), sep = "-"), format = "%Y-%m-%d"),
+                                     as.Date(paste(lubridate::year(date_ranges$max_date) + 1, end_month, lubridate::days_in_month(as.Date(paste(lubridate::year(date_ranges$max_date), end_month, 1, sep = "-"), format = "%Y-%m-%d")), sep = "-"), format = "%Y-%m-%d"))
+    }
     full_dates_list <- list()
     for(j in 1:nrow(date_ranges)) {
-      full_dates <- seq(date_ranges$Min[j], date_ranges$Max[j], by = "day")
+      full_dates <- seq(date_ranges$min_date[j], date_ranges$max_date[j], by = "day")
       if(length(full_dates) > date_lengths[[2]][j]) {
-        cat("Infilling", (length(full_dates) - date_lengths[[2]][j]), "missing dates for:", paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), "\n")
+        cat(paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), ": Adding", (length(full_dates) - date_lengths[[2]][j]), "rows for date gaps", "\n")
         merge_required <- TRUE
       }
       full_dates <- data.frame(full_dates)
@@ -3335,7 +3411,10 @@ DataSheet$set("public","standardise_country_names", function(country_columns = c
 )
 
 DataSheet$set("public", "get_climatic_column_name", function(col_name) {
-  if(!self$get_metadata(is_climatic_label))stop("Define data as climatic.")
+  if(!self$get_metadata(is_climatic_label)) {
+    warning("Data not defined as climatic.")
+    return(NULL)
+  }
   if(col_name %in% self$get_variables_metadata()$Climatic_Type){
     new_data = subset(self$get_variables_metadata(), Climatic_Type==col_name, select = Name)
     return(as.character(new_data))
