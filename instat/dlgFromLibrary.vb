@@ -127,7 +127,7 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub FillListView(dfDataframe As DataFrame)
-        Dim lstItem As New ListViewItem
+        Dim lstItem As ListViewItem
 
         lstCollection.Items.Clear()
         If dfDataframe IsNot Nothing Then
@@ -139,6 +139,7 @@ Public Class dlgFromLibrary
                     lstItem.SubItems.Add("")
                 End If
             Next
+            lstCollection.Select()
         End If
     End Sub
 
