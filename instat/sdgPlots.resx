@@ -1450,7 +1450,7 @@
     <value>5</value>
   </data>
   <data name="ucrInputPolarCoordinates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 46</value>
+    <value>103, 43</value>
   </data>
   <data name="ucrInputPolarCoordinates.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 21</value>
@@ -1477,7 +1477,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPolarCoordinate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 46</value>
+    <value>10, 46</value>
   </data>
   <data name="lblPolarCoordinate.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
@@ -1504,7 +1504,7 @@
     <value>True</value>
   </data>
   <data name="lblStartingAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 94</value>
+    <value>10, 99</value>
   </data>
   <data name="lblStartingAngle.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
@@ -1555,7 +1555,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPi.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 95</value>
+    <value>138, 100</value>
   </data>
   <data name="lblPi.Size" type="System.Drawing.Size, System.Drawing">
     <value>15, 13</value>
@@ -1579,7 +1579,7 @@
     <value>4</value>
   </data>
   <data name="ucrChkDirectionAnticlockwise.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 70</value>
+    <value>12, 70</value>
   </data>
   <data name="ucrChkDirectionAnticlockwise.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 20</value>
@@ -1600,7 +1600,7 @@
     <value>5</value>
   </data>
   <data name="ucrInputStartingAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 90</value>
+    <value>92, 95</value>
   </data>
   <data name="ucrInputStartingAngle.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 21</value>

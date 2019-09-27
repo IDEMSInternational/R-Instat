@@ -265,7 +265,7 @@ Public Class sdgPlots
         ucrChkUsePolarCoordinates.AddParameterPresentCondition(True, "coord_polar")
         ucrChkUsePolarCoordinates.AddParameterPresentCondition(False, "coord_polar", False)
         ucrChkUsePolarCoordinates.AddToLinkedControls({ucrChkDirectionAnticlockwise, ucrInputStartingAngle}, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkUsePolarCoordinates.AddToLinkedControls({ucrInputPolarCoordinates}, {True}, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=Chr(34) & "x" & Chr(34))
+        ucrChkUsePolarCoordinates.AddToLinkedControls({ucrInputPolarCoordinates}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkDirectionAnticlockwise.SetText("Anticlockwise Direction")
         ucrChkDirectionAnticlockwise.SetParameter(New RParameter("direction"), bNewChangeParameterValue:=True, strNewValueIfChecked:="-1", strNewValueIfUnchecked:="1")
@@ -283,7 +283,7 @@ Public Class sdgPlots
         ucrInputPolarCoordinates.SetLinkedDisplayControl(lblPolarCoordinate)
         ucrInputPolarCoordinates.SetItems(dctTheta)
         ucrInputPolarCoordinates.SetDropDownStyleAsNonEditable()
-        'ucrInputPolarCoordinates.SetRDefault(Chr(34) & "x" & Chr(34))
+        ucrInputPolarCoordinates.SetRDefault(Chr(34) & "x" & Chr(34))
 
 
         ucrChkXaxisAngle.SetText("X axis Tick Labels Angle")
