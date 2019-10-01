@@ -42,7 +42,6 @@ Partial Class dlgPICSARainfall
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.cmdPICSAOptions = New System.Windows.Forms.Button()
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
@@ -97,22 +96,11 @@ Partial Class dlgPICSARainfall
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'cmdLineOptions
-        '
-        Me.cmdLineOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLineOptions.Location = New System.Drawing.Point(9, 201)
-        Me.cmdLineOptions.Name = "cmdLineOptions"
-        Me.cmdLineOptions.Size = New System.Drawing.Size(119, 23)
-        Me.cmdLineOptions.TabIndex = 29
-        Me.cmdLineOptions.Tag = "Line_Options"
-        Me.cmdLineOptions.Text = "Line Options"
-        Me.cmdLineOptions.UseVisualStyleBackColor = True
-        '
         'cmdPICSAOptions
         '
         Me.cmdPICSAOptions.Enabled = False
         Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 260)
+        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 201)
         Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
         Me.cmdPICSAOptions.Size = New System.Drawing.Size(119, 23)
         Me.cmdPICSAOptions.TabIndex = 21
@@ -219,7 +207,6 @@ Partial Class dlgPICSARainfall
         Me.ClientSize = New System.Drawing.Size(429, 407)
         Me.Controls.Add(Me.ucrReceiverFacetBy)
         Me.Controls.Add(Me.lblFacetBy)
-        Me.Controls.Add(Me.cmdLineOptions)
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkPoints)
@@ -253,7 +240,6 @@ Partial Class dlgPICSARainfall
     Friend WithEvents lblXVariable As Label
     Friend WithEvents lblAvailable As Label
     Friend WithEvents cmdOptions As Button
-    Friend WithEvents cmdLineOptions As Button
     Friend WithEvents ucrVariablesAsFactorForPicsa As ucrVariablesAsFactor
     Friend WithEvents cmdPICSAOptions As Button
     Friend WithEvents ucrReceiverFacetBy As ucrReceiverSingle
