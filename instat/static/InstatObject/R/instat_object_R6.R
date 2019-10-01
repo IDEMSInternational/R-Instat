@@ -1324,8 +1324,8 @@ DataBook$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE
 # }
 # )
 
-DataBook$set("public", "infill_missing_dates", function(data_name, date_name, factors, resort = TRUE) {
-  self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors, resort = resort)
+DataBook$set("public", "infill_missing_dates", function(data_name, date_name, factors, start_month, start_date, end_date, resort = TRUE) {
+  self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors, start_month = start_month, start_date = start_date, end_date = end_date, resort = resort)
 }
 )
 
