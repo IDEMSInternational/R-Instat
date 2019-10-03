@@ -72,7 +72,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdGreater, "greater than(>). For example (2 > 3) is FALSE, (2 > 2) is FALSE, (2 > 1) is TRUE")
         ttCalculator.SetToolTip(cmdGreaterOrEqualsTo, "greater or equals to(>=). For example (2 >= 3) is FALSE, (2 >=2) is TRUE, (2 >= 1) is TRUE")
         ttCalculator.SetToolTip(cmdEquivalent, "logical equals(==). For example (2 == 3) is FALSE, (2 == 2) is TRUE, (2 == 1) is FALSE")
-        ttCalculator.SetToolTip(cmdNotEqualsTo, "( (opposite of ==). For example (2 ! 3) is TRUE, (2 != 2) is FALSE and (2 != 1) is TRUE)")
+        ttCalculator.SetToolTip(cmdNotEqualsTo, "not equals(!= )(opposite of ==). For example (2 ! 3) is TRUE, (2 != 2) is FALSE and (2 != 1) is TRUE)")
 
 
     End Sub
