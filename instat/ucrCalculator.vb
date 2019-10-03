@@ -88,7 +88,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdNotIsNa, "!is.na detects non-missing values, for example !is.na(c(1,3,NA, 5)) gives TRUE, TRUE, FALSE, TRUE")
         ttCalculator.SetToolTip(cmdDuplicate, "duplicate detects non-unique values, for example duplicated(c(1:3,2,7)) gives FALSE, FALSE, FALSE, TRUE, FALSE")
         ttCalculator.SetToolTip(cmdNear, "near(x,y)compares 2 variables. For example sqrt(5)^2 is almost, but isn't exactly 5, however near(sqrt(5)^2,5) is TRUE")
-
+        ttCalculator.SetToolTip(cmdWhich, "which gives the indices of a logical variable. For example which(11:15>13) gives 4, 5. Note the result is usually not the same length as the original variable.")
 
 
 
