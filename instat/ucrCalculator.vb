@@ -74,6 +74,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdEquivalent, "logical equals(==). For example (2 == 3) is FALSE, (2 == 2) is TRUE, (2 == 1) is FALSE")
         ttCalculator.SetToolTip(cmdNotEqualsTo, "not equals(!= )(opposite of ==). For example (2 ! 3) is TRUE, (2 != 2) is FALSE and (2 != 1) is TRUE)")
         ttCalculator.SetToolTip(cmdOr, "logical OR(|). For example (2 < 3) | (2 < 1) is the same as (TRUE | FALSE) which is TRUE")
+        ttCalculator.SetToolTip(cmdAnd, " logical AND(&). For example (2 < 3) & (2 < 1) is the same as (TRUE & FALSE) which is FALSE")
+
 
 
     End Sub
