@@ -255,7 +255,7 @@ Public Class dlgModelling
     Private Sub cmdlm_Click(sender As Object, e As EventArgs) Handles cmdlm.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm(formula = , data, subset, weights, na.action,method = ""qr"", model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE, contrasts = NULL, offset)", 143)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm(formula = , data, subset, weights, na.action,method = ""qr"", model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE, contrasts = NULL, offset)", 133)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm()", 1)
         End If

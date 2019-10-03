@@ -35,7 +35,6 @@ Public Class dlgUseModel
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrReceiverForTestColumn.Selector = ucrSelectorUseModel
         ucrReceiverForTestColumn.SetParameterIsRFunction()
         ucrReceiverForTestColumn.SetItemType("model")
         ucrReceiverForTestColumn.strSelectorHeading = "Models"
@@ -44,6 +43,8 @@ Public Class dlgUseModel
 
         ucrInputComboRPackage.SetItems({"General", "Prediction", "extRemes"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
+
+        ucrChkIncludeArguments.SetText("Include Arguments")
 
         ucrInputTryMessage.Hide()
 
@@ -63,6 +64,8 @@ Public Class dlgUseModel
         ucrReceiverForTestColumn.Clear()
 
         ucrInputComboRPackage.SetName("General")
+
+        ucrChkIncludeArguments.Checked = False
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetCommandString("")
@@ -84,19 +87,39 @@ Public Class dlgUseModel
     End Sub
 
     Private Sub cmdsummary_Click(sender As Object, e As EventArgs) Handles cmdsummary.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("summary()", 1)
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("summary(object, ..., digits, quantile.type = 7)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("summary()", 1)
+        End If
     End Sub
 
     Private Sub cmdanova_Click(sender As Object, e As EventArgs) Handles cmdanova.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("anova()", 1)
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("anova(object, ...)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("anova()", 1)
+        End If
     End Sub
 
     Private Sub cmdresiduals_Click(sender As Object, e As EventArgs) Handles cmdresiduals.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("residuals()", 1)
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("residuals(object, ...)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("residuals()", 1)
+        End If
     End Sub
 
     Private Sub cmdPredict_Click(sender As Object, e As EventArgs) Handles cmdPredict.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("prediction::prediction()", 1)
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("prediction::prediction(model, data = find_data(model,parent.frame()), at = NULL, type = ""response"",vcov = stats::vcov(model), calculate_se = TRUE, ...)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("prediction::prediction()", 1)
+        End If
     End Sub
 
     Private Sub Clear()
@@ -165,65 +188,131 @@ Public Class dlgUseModel
     End Sub
 
     Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("print()", 1)
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("print(x, ...)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("print()", 1)
+        End If
     End Sub
 
     Private Sub cmdCoefficient_Click(sender As Object, e As EventArgs) Handles cmdCoefficient.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coefficients()", 1)
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coefficients(object, complete = TRUE, ...)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coefficients()", 1)
+        End If
     End Sub
 
     Private Sub cmdAIC_Click(sender As Object, e As EventArgs) Handles cmdAIC.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("AIC()", 1)
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("AIC(object, ..., k = 2)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("AIC()", 1)
+        End If
     End Sub
 
     Private Sub cmdBIC_Click(sender As Object, e As EventArgs) Handles cmdBIC.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("BIC()", 1)
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("BIC(object, ...)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("BIC()", 1)
+        End If
     End Sub
 
     Private Sub cmdOutlierTest_Click(sender As Object, e As EventArgs) Handles cmdOutlierTest.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("car::outlierTest()", 1)
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("car::outlierTest(model, ...)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("car::outlierTest()", 1)
+        End If
     End Sub
 
     Private Sub cmdNcvTest_Click(sender As Object, e As EventArgs) Handles cmdNcvTest.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("car::ncvTest()", 1)
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("car::ncvTest(model, ...)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("car::ncvTest()", 1)
+        End If
     End Sub
 
     Private Sub cmdDurbinWatsonTest_Click(sender As Object, e As EventArgs) Handles cmdDurbinWatsonTest.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("car:: durbinWatsonTest()", 1)
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("car:: durbinWatsonTest(model, max.lag=1, ...)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("car:: durbinWatsonTest()", 1)
+        End If
+
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("car::Anova()", 1)
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("car::Anova(mod, type=c(""II"", ""III"", 2, 3),test.statistic=c(""Chisq"", ""F""), vcov.=vcov(mod, complete=FALSE),
+	singular.ok, ...)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("car::Anova()", 1)
+        End If
     End Sub
 
     Private Sub cmdCi_Click(sender As Object, e As EventArgs) Handles cmdCi.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::ci.fevd()", 1)
-
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("x, alpha = 0.05, type = c(""Return.level"", ""parameter""),return.period = 100, which.par, R = 502, ...")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::ci.fevd()", 1)
+        End If
     End Sub
 
     Private Sub cmdDistill_Click(sender As Object, e As EventArgs) Handles cmdDistill.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::distill.fevd()", 1)
-
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("x, cov = TRUE, FUN = ""mean"", burn.in = 499, ...")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::distill.fevd()", 1)
+        End If
     End Sub
 
     Private Sub cmdErlevd_Click(sender As Object, e As EventArgs) Handles cmdErlevd.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::erlevd()", 1)
-
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::erlevd(x, period = 100)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::erlevd()", 1)
+        End If
     End Sub
 
     Private Sub cmdFindpars_Click(sender As Object, e As EventArgs) Handles cmdFindpars.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::findpars()", 1)
-
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::findpars(x, use.blocks = FALSE, ..., qcov = NULL)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::findpars()", 1)
+        End If
     End Sub
 
     Private Sub cmdIsFixedfevd_Click(sender As Object, e As EventArgs) Handles cmdIsFixedfevd.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::is.fixedfevd()", 1)
-
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::is.fixedfevd(x)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::is.fixedfevd()", 1)
+        End If
     End Sub
 
     Private Sub cmdLrTest_Click(sender As Object, e As EventArgs) Handles cmdLrTest.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::lr.test()", 1)
-
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::lr.test(x, y, alpha = 0.05, df = 1)")
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::lr.test()", 1)
+        End If
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
