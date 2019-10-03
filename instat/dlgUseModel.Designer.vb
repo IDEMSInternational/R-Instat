@@ -53,6 +53,7 @@ Partial Class dlgUseModel
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
         Me.cmdClear = New System.Windows.Forms.Button()
+        Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.grpGeneral.SuspendLayout()
         Me.grpPrediction.SuspendLayout()
         Me.grpExtrRemes.SuspendLayout()
@@ -62,7 +63,7 @@ Partial Class dlgUseModel
         '
         Me.lblModel.AutoSize = True
         Me.lblModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblModel.Location = New System.Drawing.Point(19, 21)
+        Me.lblModel.Location = New System.Drawing.Point(19, 18)
         Me.lblModel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblModel.Name = "lblModel"
         Me.lblModel.Size = New System.Drawing.Size(58, 13)
@@ -381,7 +382,7 @@ Partial Class dlgUseModel
         'ucrReceiverForTestColumn
         '
         Me.ucrReceiverForTestColumn.frmParent = Me
-        Me.ucrReceiverForTestColumn.Location = New System.Drawing.Point(82, 17)
+        Me.ucrReceiverForTestColumn.Location = New System.Drawing.Point(82, 11)
         Me.ucrReceiverForTestColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrReceiverForTestColumn.Name = "ucrReceiverForTestColumn"
         Me.ucrReceiverForTestColumn.Selector = Nothing
@@ -410,11 +411,20 @@ Partial Class dlgUseModel
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
+        'ucrChkIncludeArguments
+        '
+        Me.ucrChkIncludeArguments.Checked = False
+        Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(480, 14)
+        Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
+        Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(85, 20)
+        Me.ucrChkIncludeArguments.TabIndex = 32
+        '
         'dlgUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(502, 381)
+        Me.ClientSize = New System.Drawing.Size(587, 381)
+        Me.Controls.Add(Me.ucrChkIncludeArguments)
         Me.Controls.Add(Me.cmdClear)
         Me.Controls.Add(Me.grpGeneral)
         Me.Controls.Add(Me.grpExtrRemes)
@@ -472,4 +482,5 @@ Partial Class dlgUseModel
     Friend WithEvents cmdCi As Button
     Friend WithEvents cmdErlevd As Button
     Friend WithEvents cmdClear As Button
+    Friend WithEvents ucrChkIncludeArguments As ucrCheck
 End Class
