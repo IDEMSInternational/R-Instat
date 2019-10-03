@@ -69,6 +69,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdPower, "power(^)or exponent and can also be given as **. For example 2^3 = 8")
         ttCalculator.SetToolTip(cmdLesser, "less than(<). For example (2 < 3) is TRUE. (2 < 2) is FALSE, (2 < 1) is FALSE")
         ttCalculator.SetToolTip(cmdLesserOrEqualsTo, "less than or equals(<=). For example (2 <= 3) is TRUE, (2 <=2) is TRUE, (2 <= 1) is FALSE")
+        ttCalculator.SetToolTip(cmdGreater, "greater than(>). For example (2 > 3) is FALSE, (2 > 2) is FALSE, (2 > 1) is TRUE")
     End Sub
 
     Public Sub Reset()
