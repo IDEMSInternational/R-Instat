@@ -80,6 +80,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdModulas, "modulus operator(%%)gives the remainder after integer division. For example 7 %% 3 is 1, 12 %% 3 is 0")
         ttCalculator.SetToolTip(cmdIn, "(%in%)is like the match function and returns a logical vector. For example (11:15 %in% c(11,13)) gives TRUE, FALSE, TRUE, FALSE, FALSE")
         ttCalculator.SetToolTip(cmdmatch, "(see also %in%)gives the positions of the matching elements. For example match(11:15, c(11,13)) gives (1,NA, 2, NA, NA). match(11:15,c(11,13),nomatch=0) gives 1, 0, 2, 0, 0)")
+        ttCalculator.SetToolTip(cmdIntegerDivision, "div operator(%/%)is for integer division. For example (7 %/% 3) is 2, (13 %/% 3) is 4")
 
 
 
