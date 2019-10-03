@@ -84,6 +84,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdwhen, "when is multiple ifelse, for example case_when(1:5>320,1:5>110) gives NA, 10, 10, 20, 20")
         ttCalculator.SetToolTip(cmdIfelse, "is what it says, for example ifelse((1:5 > 3,20,10) gives 10, 10, 10, 20, 20")
         ttCalculator.SetToolTip(cmdBetween, "between two values, for example between(1:5, 3,4) is FALSE, FALSE, TRUE, TRUE, FALSE")
+        ttCalculator.SetToolTip(cmdMiss, "sum(is.na(x= ))detects missing values, for example is.na(c(1,3,NA, 5)) gives FALSE, FALSE, TRUE, FALSE")
 
 
 
