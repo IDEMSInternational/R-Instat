@@ -82,6 +82,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdmatch, "(see also %in%)gives the positions of the matching elements. For example match(11:15, c(11,13)) gives (1,NA, 2, NA, NA). match(11:15,c(11,13),nomatch=0) gives 1, 0, 2, 0, 0)")
         ttCalculator.SetToolTip(cmdIntegerDivision, "div operator(%/%)is for integer division. For example (7 %/% 3) is 2, (13 %/% 3) is 4")
         ttCalculator.SetToolTip(cmdwhen, "when is multiple ifelse, for example case_when(1:5>320,1:5>110) gives NA, 10, 10, 20, 20")
+        ttCalculator.SetToolTip(cmdIfelse, "is what it says, for example ifelse((1:5 > 3,20,10) gives 10, 10, 10, 20, 20")
 
 
 
