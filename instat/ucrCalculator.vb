@@ -72,9 +72,13 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdGreater, "greater than(>). For example (2 > 3) is FALSE, (2 > 2) is FALSE, (2 > 1) is TRUE")
         ttCalculator.SetToolTip(cmdGreaterOrEqualsTo, "greater or equals to(>=). For example (2 >= 3) is FALSE, (2 >=2) is TRUE, (2 >= 1) is TRUE")
         ttCalculator.SetToolTip(cmdEquivalent, "logical equals(==). For example (2 == 3) is FALSE, (2 == 2) is TRUE, (2 == 1) is FALSE")
-        ttCalculator.SetToolTip(cmdNotEqualsTo, "not equals(!= )(opposite of ==). For example (2 ! 3) is TRUE, (2 != 2) is FALSE and (2 != 1) is TRUE)")
+        ttCalculator.SetToolTip(cmdNotEqualsTo, "not equals(!= )(opposite of ==). For example (2 != 3) is TRUE, (2 != 2) is FALSE and (2 != 1) is TRUE)")
         ttCalculator.SetToolTip(cmdOr, "logical OR(|). For example (2 < 3) | (2 < 1) is the same as (TRUE | FALSE) which is TRUE")
         ttCalculator.SetToolTip(cmdAnd, " logical AND(&). For example (2 < 3) & (2 < 1) is the same as (TRUE & FALSE) which is FALSE")
+        ttCalculator.SetToolTip(cmdNot, "logical NOT(!). For example !(2 < 3) is FALSE, !(2 < 1) is TRUE")
+        ttCalculator.SetToolTip(cmdColon, "colon is from:to(:) For example 3:6 is 3, 4, 5, 6. 6:3 is 6, 5, 4, 3 (It is the seq function with a step-length of 1 or -1.)")
+
+
 
 
 
