@@ -89,13 +89,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdDuplicate, "duplicate detects non-unique values, for example duplicated(c(1:3,2,7)) gives FALSE, FALSE, FALSE, TRUE, FALSE")
         ttCalculator.SetToolTip(cmdNear, "near(x,y)compares 2 variables. For example sqrt(5)^2 is almost, but isn't exactly 5, however near(sqrt(5)^2,5) is TRUE")
         ttCalculator.SetToolTip(cmdWhich, "which gives the indices of a logical variable. For example which(11:15>13) gives 4, 5. Note the result is usually not the same length as the original variable.")
-
-
-
-
-
-
-
+        ttCalculator.SetToolTip(cmdAnyDup, "any Are any values TRUE in a logical variable. For example any(1:5 >3) gives TRUE")
+        ttCalculator.SetToolTip(cmdAll, "all Are all values TRUE in a logical variable. For example all(1:5 >3) gives FALSE")
     End Sub
 
     Public Sub Reset()
