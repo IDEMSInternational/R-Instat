@@ -73,6 +73,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdGreaterOrEqualsTo, "greater or equals to(>=). For example (2 >= 3) is FALSE, (2 >=2) is TRUE, (2 >= 1) is TRUE")
         ttCalculator.SetToolTip(cmdEquivalent, "logical equals(==). For example (2 == 3) is FALSE, (2 == 2) is TRUE, (2 == 1) is FALSE")
 
+
     End Sub
 
     Public Sub Reset()
