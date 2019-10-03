@@ -75,6 +75,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdNotEqualsTo, "not equals(!= )(opposite of ==). For example (2 ! 3) is TRUE, (2 != 2) is FALSE and (2 != 1) is TRUE)")
 
 
+
     End Sub
 
     Public Sub Reset()
