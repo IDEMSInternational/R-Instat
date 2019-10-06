@@ -280,7 +280,7 @@ Public Class dlgTreemap
         TestOkEnabled()
     End Sub
 
-    Private Sub CoreControls_ContentsChanged() Handles ucrReceiverIdentifier.ControlContentsChanged, ucrSaveTreemap.ControlContentsChanged, ucrPnlDataType.ControlContentsChanged
+    Private Sub CoreControls_ContentsChanged() Handles ucrReceiverIdentifier.ControlContentsChanged, ucrSaveTreemap.ControlContentsChanged, ucrPnlDataType.ControlContentsChanged, ucrReceiverWeightBy.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
