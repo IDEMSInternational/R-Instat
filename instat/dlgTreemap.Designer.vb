@@ -31,13 +31,11 @@ Partial Class dlgTreemap
         Me.rdoSummary = New System.Windows.Forms.RadioButton()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblWeightBy = New System.Windows.Forms.Label()
-        Me.lblGroupByIdentifier = New System.Windows.Forms.Label()
+        Me.lblIdentifier = New System.Windows.Forms.Label()
         Me.ucrReceiverWeightBy = New instat.ucrReceiverSingle()
         Me.ucrReceiverIdentifier = New instat.ucrReceiverSingle()
         Me.ucrSelectorTreemap = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdBarChartOptions = New System.Windows.Forms.Button()
-        Me.cmdPieChartOptions = New System.Windows.Forms.Button()
         Me.ucrPnlDataType = New instat.UcrPanel()
         Me.lblSymbol = New System.Windows.Forms.Label()
         Me.ucrInputSymbol = New instat.ucrInputTextBox()
@@ -113,11 +111,11 @@ Partial Class dlgTreemap
         Me.lblWeightBy.Name = "lblWeightBy"
         Me.lblWeightBy.Tag = ""
         '
-        'lblGroupByIdentifier
+        'lblIdentifier
         '
-        resources.ApplyResources(Me.lblGroupByIdentifier, "lblGroupByIdentifier")
-        Me.lblGroupByIdentifier.Name = "lblGroupByIdentifier"
-        Me.lblGroupByIdentifier.Tag = "Variable:"
+        resources.ApplyResources(Me.lblIdentifier, "lblIdentifier")
+        Me.lblIdentifier.Name = "lblIdentifier"
+        Me.lblIdentifier.Tag = "Variable:"
         '
         'ucrReceiverWeightBy
         '
@@ -149,20 +147,6 @@ Partial Class dlgTreemap
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'cmdBarChartOptions
-        '
-        resources.ApplyResources(Me.cmdBarChartOptions, "cmdBarChartOptions")
-        Me.cmdBarChartOptions.Name = "cmdBarChartOptions"
-        Me.cmdBarChartOptions.Tag = "Bar_Chart_Options"
-        Me.cmdBarChartOptions.UseVisualStyleBackColor = True
-        '
-        'cmdPieChartOptions
-        '
-        resources.ApplyResources(Me.cmdPieChartOptions, "cmdPieChartOptions")
-        Me.cmdPieChartOptions.Name = "cmdPieChartOptions"
-        Me.cmdPieChartOptions.Tag = "Pie_Chart_Options"
-        Me.cmdPieChartOptions.UseVisualStyleBackColor = True
         '
         'ucrPnlDataType
         '
@@ -262,13 +246,11 @@ Partial Class dlgTreemap
         Me.Controls.Add(Me.rdoSummary)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblWeightBy)
-        Me.Controls.Add(Me.lblGroupByIdentifier)
+        Me.Controls.Add(Me.lblIdentifier)
         Me.Controls.Add(Me.ucrReceiverWeightBy)
         Me.Controls.Add(Me.ucrReceiverIdentifier)
         Me.Controls.Add(Me.ucrSelectorTreemap)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.cmdBarChartOptions)
-        Me.Controls.Add(Me.cmdPieChartOptions)
         Me.Controls.Add(Me.ucrPnlDataType)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -289,13 +271,11 @@ Partial Class dlgTreemap
     Friend WithEvents rdoSummary As RadioButton
     Friend WithEvents cmdOptions As Button
     Friend WithEvents lblWeightBy As Label
-    Friend WithEvents lblGroupByIdentifier As Label
+    Friend WithEvents lblIdentifier As Label
     Friend WithEvents ucrReceiverWeightBy As ucrReceiverSingle
     Friend WithEvents ucrReceiverIdentifier As ucrReceiverSingle
     Friend WithEvents ucrSelectorTreemap As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents cmdBarChartOptions As Button
-    Friend WithEvents cmdPieChartOptions As Button
     Friend WithEvents ucrPnlDataType As UcrPanel
     Friend WithEvents ucrInputSymbol As ucrInputTextBox
     Friend WithEvents lblSymbol As Label

@@ -43,11 +43,20 @@ Public Class dlgTreemap
     Private clsXScalecontinuousFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
     Private clsRFacetFunction As New RFunction
+    Private clsCoordPolarFunction As New RFunction
+    Private clsCoordPolarStartOperator As New ROperator
     Private clsThemeFuction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
 
+    Private strIdentifier As String = "Identifier"
+    Private strIdentifierAndWeighty As String = "Identifier & Weight"
+    Private strWeight As String = "Weight"
+    Private strNone As String = "None"
+
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
+    Private bRCodeSet As Boolean = False
+    Private bResetSubdialog As Boolean = True
 
     Private Sub dlgTreemap_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -70,8 +79,8 @@ Public Class dlgTreemap
 
         ucrPnlDataType.AddRadioButton(rdoPrimary)
         ucrPnlDataType.AddRadioButton(rdoSummary)
-        ucrPnlDataType.AddParameterPresentCondition(rdoPrimary, "group_by", False)
-        ucrPnlDataType.AddParameterPresentCondition(rdoSummary, "group_by", True)
+        ucrPnlDataType.AddParameterPresentCondition(rdoPrimary, "group_by", True)
+        ucrPnlDataType.AddParameterPresentCondition(rdoSummary, "group_by", False)
 
         ucrSelectorTreemap.SetParameter(New RParameter("data", 0))
         ucrSelectorTreemap.SetParameterIsrfunction()
@@ -92,19 +101,23 @@ Public Class dlgTreemap
         ucrInputSummary.SetItems({"sum", "mean", "min", "max"})
         ucrInputSummary.AddQuotesIfUnrecognised = False
         ucrInputSummary.SetLinkedDisplayControl(lblSummary)
+        ucrInputSummary.SetValidationTypeAsRVariable()
 
         ucrChkIsCurrency.SetText("Is Currency")
-        ucrChkIsCurrency.SetParameter(New RParameter("weight", iNewPosition:=2, bNewIncludeArgumentName:=False), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkIsCurrency.SetParameter(New RParameter("dollar", iNewPosition:=2, bNewIncludeArgumentName:=False), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkIsCurrency.AddToLinkedControls(ucrInputSymbol, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputSymbol.SetParameter(New RParameter("prefix", 3))
         ucrInputSymbol.SetLinkedDisplayControl(lblSymbol)
 
-        ucrInputLabel.SetItems({"Identifier only", "Identifier & Weight", "Weight only", "None"})
-        ucrInputLabel.AddParameterPresentCondition("Identifier only", "group")
-        ucrInputLabel.AddParameterPresentCondition("Identifier & Weight", "\n")
-        ucrInputLabel.AddParameterPresentCondition("Weight only", "weight")
-        ucrInputLabel.AddParameterPresentCondition("None", "label", bNewIsPositive:=False)
+        ucrInputLabel.SetItems({strIdentifier, strIdentifierAndWeighty, strWeight, strNone})
+        ucrInputLabel.AddParameterPresentCondition(strIdentifier, "identifier")
+        ucrInputLabel.AddParameterPresentCondition(strIdentifier, "\n", False)
+        ucrInputLabel.AddParameterPresentCondition(strIdentifierAndWeighty, "\n")
+        ucrInputLabel.AddParameterPresentCondition(strWeight, "weight")
+        ucrInputLabel.AddParameterPresentCondition(strWeight, "\n", False)
+        ucrInputLabel.AddParameterPresentCondition(strNone, "identifier", False)
+        ucrInputLabel.AddParameterPresentCondition(strNone, "weight", False)
         ucrInputLabel.SetDropDownStyleAsNonEditable()
 
         ucrReceiverFill.Selector = ucrSelectorTreemap
@@ -113,8 +126,17 @@ Public Class dlgTreemap
         ucrReceiverFill.SetParameterIsString()
 
         ucrColourBox.SetParameter(New RParameter("fill", 3))
+        ucrColourBox.SetColours()
 
         ucrColourText.SetParameter(New RParameter("colour", 3))
+        ucrColourText.SetColours()
+
+        ucrSaveTreemap.SetIsComboBox()
+        ucrSaveTreemap.SetCheckBoxText("Save Treemap")
+        ucrSaveTreemap.SetDataFrameSelector(ucrSelectorTreemap.ucrAvailableDataFrames)
+        ucrSaveTreemap.SetSaveTypeAsGraph()
+        ucrSaveTreemap.SetPrefix("treemap")
+        ucrSaveTreemap.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
@@ -141,12 +163,16 @@ Public Class dlgTreemap
         clsThemeFuction = New RFunction
         dctThemeFunctions = New Dictionary(Of String, RFunction)
 
+        bResetSubdialog = True
+
         ucrSelectorTreemap.Reset()
         ucrSelectorTreemap.SetGgplotFunction(clsBaseOperator)
         ucrReceiverIdentifier.SetMeAsReceiver()
         ucrSaveTreemap.Reset()
 
         clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+        clsPipeOperator.AddParameter("summarise", clsRFunctionParameter:=clsGroupByFunction, iPosition:=2)
 
         clsGroupByFunction.SetPackageName("dplyr")
         clsGroupByFunction.SetRCommand("group_by")
@@ -184,7 +210,7 @@ Public Class dlgTreemap
         clsGeomTreemapTextAesFunction.AddParameter("label", clsRFunctionParameter:=clsPaste0Function, iPosition:=2)
 
         clsPaste0Function.SetRCommand("paste0")
-        clsPaste0Function.AddParameter("group", ucrReceiverIdentifier.GetVariableNames(), iPosition:=0)
+        clsPaste0Function.AddParameter("identifier", ucrReceiverIdentifier.GetVariableNames(), iPosition:=0)
 
         clsDollarFunction.SetPackageName("scales")
         clsDollarFunction.SetRCommand("dollar")
@@ -196,6 +222,8 @@ Public Class dlgTreemap
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+        clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
+        clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsThemeFuction = GgplotDefaults.clsDefaultThemeFunction.Clone
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
@@ -206,10 +234,12 @@ Public Class dlgTreemap
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        bRCodeSet = False
+        ucrReceiverWeightBy.AddAdditionalCodeParameterPair(clsSummaryFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False))
+
         ucrPnlDataType.SetRCode(clsPipeOperator, bReset)
         ucrSelectorTreemap.SetRCode(clsPipeOperator, bReset)
         ucrReceiverIdentifier.SetRCode(clsGroupByFunction, bReset)
-        ucrReceiverWeightBy.SetRCode(clsGeomTreemapAesFunction, bReset)
         ucrReceiverWeightBy.SetRCode(clsGeomTreemapAesFunction, bReset)
         ucrChkIsCurrency.SetRCode(clsPaste0Function, bReset)
         ucrInputSymbol.SetRCode(clsDollarFunction, bReset)
@@ -217,16 +247,30 @@ Public Class dlgTreemap
         ucrReceiverFill.SetRCode(clsGeomTreemapAesFunction, bReset)
         ucrColourBox.SetRCode(clsGeomTreemapFunction, bReset)
         ucrColourText.SetRCode(clsGeomTreemapTextFunction, bReset)
-
-        ucrInputLabel.SetText("Identifier only")
+        If bReset Then
+            ucrInputLabel.SetText(strIdentifier)
+        End If
+        bRCodeSet = True
+        ucrInputSummary.SetName(clsSummaryFunction.strRCommand)
         SetLabel()
+        WeightControls()
+        SetPipeAssignTo()
+        PanelSettings()
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverIdentifier.IsEmpty() AndAlso ucrSaveTreemap.IsComplete() Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
+        If rdoPrimary.Checked Then
+            If Not ucrReceiverIdentifier.IsEmpty() AndAlso ucrSaveTreemap.IsComplete() Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        ElseIf rdoSummary.Checked Then
+            If Not ucrReceiverWeightBy.IsEmpty() AndAlso ucrSaveTreemap.IsComplete() Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
@@ -236,21 +280,31 @@ Public Class dlgTreemap
         TestOkEnabled()
     End Sub
 
-    Private Sub CoreControls_ContentsChanged() Handles ucrReceiverIdentifier.ControlContentsChanged, ucrSaveTreemap.ControlContentsChanged
+    Private Sub CoreControls_ContentsChanged() Handles ucrReceiverIdentifier.ControlContentsChanged, ucrSaveTreemap.ControlContentsChanged, ucrPnlDataType.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
     Private Sub ucrPnlDataType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataType.ControlValueChanged
-        If rdoPrimary.Checked Then
-            lblGroupByIdentifier.Text = "Identifier:"
-            lblWeightBy.Text = "Weight By (Optional):"
-            clsPipeOperator.AddParameter("1", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
-            clsPipeOperator.AddParameter("2", clsRFunctionParameter:=clsSummariseFunction, iPosition:=2)
-        ElseIf rdoSummary.Checked Then
-            lblGroupByIdentifier.Text = "Identifier (Optional):"
-            lblWeightBy.Text = "Weight By:"
-            clsPipeOperator.RemoveParameterByName("1")
-            clsPipeOperator.RemoveParameterByName("2")
+        PanelSettings()
+    End Sub
+
+    Private Sub PanelSettings()
+        If bRCodeSet Then
+            If rdoPrimary.Checked Then
+                ' Cannot have facets in Primary data case since columns are not carried.
+                clsBaseOperator.RemoveParameterByName("facets")
+                lblIdentifier.Text = "Identifier:"
+                lblWeightBy.Text = "Weight By (Optional):"
+                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+                clsPipeOperator.AddParameter("summarise", clsRFunctionParameter:=clsSummariseFunction, iPosition:=2)
+            ElseIf rdoSummary.Checked Then
+                lblIdentifier.Text = "Identifier (Optional):"
+                lblWeightBy.Text = "Weight By:"
+                clsPipeOperator.RemoveParameterByName("group_by")
+                clsPipeOperator.RemoveParameterByName("summarise")
+            End If
+            SetPipeAssignTo()
+            WeightControls()
         End If
     End Sub
 
@@ -259,29 +313,32 @@ Public Class dlgTreemap
     End Sub
 
     Private Sub SetLabel()
-        clsPaste0Function.ClearParameters()
-        Select Case ucrInputLabel.GetText()
-            Case "Identifier only"
-                clsBaseOperator.AddParameter("geomfunc2", clsRFunctionParameter:=clsGeomTreemapTextFunction, iPosition:=3)
-                clsGeomTreemapTextAesFunction.AddParameter("label", clsRFunctionParameter:=clsPaste0Function, iPosition:=2)
-                clsPaste0Function.AddParameter("group", ucrReceiverIdentifier.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-            Case "Identifier & Weight", "Weight only"
-                clsBaseOperator.AddParameter("geomfunc2", clsRFunctionParameter:=clsGeomTreemapTextFunction, iPosition:=3)
-                clsGeomTreemapTextAesFunction.AddParameter("label", clsRFunctionParameter:=clsPaste0Function, iPosition:=2)
-                clsPaste0Function.AddParameter("group", ucrReceiverIdentifier.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-                clsPaste0Function.AddParameter("\n", "\n", iPosition:=1, bIncludeArgumentName:=False)
-                SetWeightLabel()
-            Case "None"
-                clsBaseOperator.RemoveParameterByName("geomfunc2")
-                clsGeomTreemapTextAesFunction.RemoveParameterByName("label")
-        End Select
-    End Sub
-
-    Private Sub SetWeightLabel()
-        If ucrChkIsCurrency.Checked Then
-            clsPaste0Function.AddParameter("weight", clsRFunctionParameter:=clsDollarFunction, iPosition:=2, bIncludeArgumentName:=False)
-        Else
-            clsPaste0Function.AddParameter("weight", ucrReceiverIdentifier.GetVariableNames(), iPosition:=2, bIncludeArgumentName:=False)
+        If bRCodeSet Then
+            clsPaste0Function.ClearParameters()
+            Select Case ucrInputLabel.GetText()
+                Case strIdentifier
+                    clsBaseOperator.AddParameter("geomfunc2", clsRFunctionParameter:=clsGeomTreemapTextFunction, iPosition:=3)
+                    clsGeomTreemapTextAesFunction.AddParameter("label", clsRFunctionParameter:=clsPaste0Function, iPosition:=2)
+                    clsPaste0Function.AddParameter("identifier", ucrReceiverIdentifier.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+                Case strIdentifierAndWeighty, strWeight
+                    clsBaseOperator.AddParameter("geomfunc2", clsRFunctionParameter:=clsGeomTreemapTextFunction, iPosition:=3)
+                    clsGeomTreemapTextAesFunction.AddParameter("label", clsRFunctionParameter:=clsPaste0Function, iPosition:=2)
+                    If ucrInputLabel.GetText() = strIdentifierAndWeighty Then
+                        clsPaste0Function.AddParameter("identifier", ucrReceiverIdentifier.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+                        clsPaste0Function.AddParameter("\n", Chr(34) & "\n" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+                    End If
+                    If ucrChkIsCurrency.Checked Then
+                        clsPaste0Function.AddParameter("dollar", clsRFunctionParameter:=clsDollarFunction, iPosition:=2, bIncludeArgumentName:=False)
+                        clsDollarFunction.AddParameter("x", ucrReceiverWeightBy.GetVariableNames(False), iPosition:=0)
+                        clsPaste0Function.RemoveParameterByName("weight")
+                    Else
+                        clsPaste0Function.AddParameter("weight", ucrReceiverWeightBy.GetVariableNames(False), iPosition:=2, bIncludeArgumentName:=False)
+                        clsPaste0Function.RemoveParameterByName("dollar")
+                    End If
+                Case strNone
+                    clsBaseOperator.RemoveParameterByName("geomfunc2")
+                    clsGeomTreemapTextAesFunction.RemoveParameterByName("label")
+            End Select
         End If
     End Sub
 
@@ -300,19 +357,48 @@ Public Class dlgTreemap
             If ucrReceiverWeightBy.IsEmpty Then
                 clsGeomTreemapAesFunction.AddParameter("area", ".n", iPosition:=0)
             Else
-                clsGeomTreemapAesFunction.AddParameter("area", ucrReceiverWeightBy.GetVariableNames(), iPosition:=0)
+                clsGeomTreemapAesFunction.AddParameter("area", ucrReceiverWeightBy.GetVariableNames(False), iPosition:=0)
             End If
         ElseIf rdoSummary.Checked Then
-            clsGeomTreemapAesFunction.AddParameter("area", ucrReceiverWeightBy.GetVariableNames(), iPosition:=0)
+            clsGeomTreemapAesFunction.AddParameter("area", ucrReceiverWeightBy.GetVariableNames(False), iPosition:=0)
         End If
         SetLabel()
     End Sub
 
     Private Sub ucrReceiverWeightBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeightBy.ControlValueChanged
-        If ucrReceiverWeightBy.IsEmpty Then
-            ucrChkIsCurrency.Visible = False
-        Else
-            ucrChkIsCurrency.Visible = True
+        WeightControls()
+    End Sub
+
+    Private Sub WeightControls()
+        If bRCodeSet Then
+            If rdoPrimary.Checked Then
+                ucrInputSummary.Visible = True
+                If ucrReceiverWeightBy.IsEmpty Then
+                    ucrChkIsCurrency.Enabled = False
+                    ucrInputSummary.Enabled = False
+                    ucrInputSymbol.Enabled = False
+                    If {strIdentifierAndWeighty, strWeight}.Contains(ucrInputLabel.GetText()) Then
+                        ucrInputLabel.SetName(strIdentifier)
+                    End If
+                Else
+                    ucrChkIsCurrency.Enabled = True
+                    ucrInputSummary.Enabled = True
+                    ucrInputSymbol.Enabled = True
+                End If
+            ElseIf rdoSummary.Checked Then
+                ucrInputSummary.Visible = False
+            End If
+            SetSummary()
+        End If
+    End Sub
+
+    Private Sub SetSummary()
+        If bRCodeSet Then
+            clsSummariseFunction.ClearParameters()
+            clsSummariseFunction.AddParameter(".n", "n()", iPosition:=0)
+            If Not ucrReceiverWeightBy.IsEmpty Then
+                clsSummariseFunction.AddParameter(ucrReceiverWeightBy.GetVariableNames(False), clsRFunctionParameter:=clsSummaryFunction, iPosition:=1)
+            End If
         End If
     End Sub
 
@@ -320,15 +406,36 @@ Public Class dlgTreemap
         clsSummaryFunction.SetRCommand(ucrInputSummary.GetText())
     End Sub
 
-    Private Sub ucrSelectorTreemap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTreemap.ControlValueChanged, ucrPnlDataType.ControlValueChanged
+    Private Sub ucrSelectorTreemap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTreemap.ControlValueChanged
         SetPipeAssignTo()
     End Sub
 
     Private Sub SetPipeAssignTo()
-        If rdoPrimary.Checked Then
-            clsPipeOperator.SetAssignTo(ucrSelectorTreemap.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_summary")
-        ElseIf rdoSummary.Checked Then
-            clsPipeOperator.RemoveAssignTo()
+        If bRCodeSet Then
+            If rdoPrimary.Checked Then
+                If ucrSelectorTreemap.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+                    clsPipeOperator.SetAssignTo(ucrSelectorTreemap.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_summary")
+                End If
+            ElseIf rdoSummary.Checked Then
+                clsPipeOperator.RemoveAssignTo()
+            End If
         End If
+    End Sub
+
+    Private Sub ucrChkIsCurrency_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIsCurrency.ControlValueChanged
+        SetLabel()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsGeomTreemapAesFunction, ucrNewBaseSelector:=ucrSelectorTreemap, bReset:=bResetSubdialog)
+        'this is a temporary fix
+        If rdoPrimary.Checked Then
+            sdgPlots.tbpFacet.Enabled = False
+            sdgPlots.tbpLayers.Enabled = False
+        End If
+        sdgPlots.ShowDialog()
+        sdgPlots.tbpFacet.Enabled = True
+        sdgPlots.tbpLayers.Enabled = True
+        bResetSubdialog = False
     End Sub
 End Class

@@ -292,7 +292,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 261</value>
+    <value>9, 232</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 25</value>
@@ -345,34 +345,34 @@
   <data name="&gt;&gt;lblWeightBy.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="lblGroupByIdentifier.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblIdentifier.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblGroupByIdentifier.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblIdentifier.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblGroupByIdentifier.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblIdentifier.Location" type="System.Drawing.Point, System.Drawing">
     <value>254, 61</value>
   </data>
-  <data name="lblGroupByIdentifier.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 13</value>
+  <data name="lblIdentifier.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
   </data>
-  <data name="lblGroupByIdentifier.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblIdentifier.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name="lblGroupByIdentifier.Text" xml:space="preserve">
-    <value>Group By:</value>
+  <data name="lblIdentifier.Text" xml:space="preserve">
+    <value>Identifier:</value>
   </data>
-  <data name="&gt;&gt;lblGroupByIdentifier.Name" xml:space="preserve">
-    <value>lblGroupByIdentifier</value>
+  <data name="&gt;&gt;lblIdentifier.Name" xml:space="preserve">
+    <value>lblIdentifier</value>
   </data>
-  <data name="&gt;&gt;lblGroupByIdentifier.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblIdentifier.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblGroupByIdentifier.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblIdentifier.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblGroupByIdentifier.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblIdentifier.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -735,60 +735,6 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
-  <data name="cmdBarChartOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdBarChartOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 230</value>
-  </data>
-  <data name="cmdBarChartOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 25</value>
-  </data>
-  <data name="cmdBarChartOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="cmdBarChartOptions.Text" xml:space="preserve">
-    <value>Bar Chart Options</value>
-  </data>
-  <data name="&gt;&gt;cmdBarChartOptions.Name" xml:space="preserve">
-    <value>cmdBarChartOptions</value>
-  </data>
-  <data name="&gt;&gt;cmdBarChartOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdBarChartOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdBarChartOptions.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="cmdPieChartOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdPieChartOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 230</value>
-  </data>
-  <data name="cmdPieChartOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 25</value>
-  </data>
-  <data name="cmdPieChartOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="cmdPieChartOptions.Text" xml:space="preserve">
-    <value>Pie Chart Options</value>
-  </data>
-  <data name="&gt;&gt;cmdPieChartOptions.Name" xml:space="preserve">
-    <value>cmdPieChartOptions</value>
-  </data>
-  <data name="&gt;&gt;cmdPieChartOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdPieChartOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdPieChartOptions.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
   <data name="ucrPnlDataType.Location" type="System.Drawing.Point, System.Drawing">
     <value>86, 5</value>
   </data>
@@ -808,7 +754,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlDataType.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>20</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
