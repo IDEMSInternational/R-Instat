@@ -46,14 +46,16 @@ Partial Class dlgUseModel
         Me.cmdDistill = New System.Windows.Forms.Button()
         Me.cmdCi = New System.Windows.Forms.Button()
         Me.cmdErlevd = New System.Windows.Forms.Button()
+        Me.cmdClear = New System.Windows.Forms.Button()
+        Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrInputModels = New instat.ucrInputTextBox()
         Me.ucrSelectorUseModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
-        Me.cmdClear = New System.Windows.Forms.Button()
-        Me.ucrChkIncludeArguments = New instat.ucrCheck()
+        Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.grpGeneral.SuspendLayout()
         Me.grpPrediction.SuspendLayout()
         Me.grpExtrRemes.SuspendLayout()
@@ -340,6 +342,25 @@ Partial Class dlgUseModel
         Me.cmdErlevd.Text = "erlevd"
         Me.cmdErlevd.UseVisualStyleBackColor = True
         '
+        'cmdClear
+        '
+        Me.cmdClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdClear.Location = New System.Drawing.Point(397, 254)
+        Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.Size = New System.Drawing.Size(74, 23)
+        Me.cmdClear.TabIndex = 31
+        Me.cmdClear.Text = "Clear"
+        Me.cmdClear.UseVisualStyleBackColor = True
+        '
+        'ucrChkIncludeArguments
+        '
+        Me.ucrChkIncludeArguments.Checked = False
+        Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(445, 12)
+        Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
+        Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(130, 20)
+        Me.ucrChkIncludeArguments.TabIndex = 32
+        '
         'ucrInputModels
         '
         Me.ucrInputModels.AddQuotesIfUnrecognised = True
@@ -386,7 +407,7 @@ Partial Class dlgUseModel
         Me.ucrReceiverForTestColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrReceiverForTestColumn.Name = "ucrReceiverForTestColumn"
         Me.ucrReceiverForTestColumn.Selector = Nothing
-        Me.ucrReceiverForTestColumn.Size = New System.Drawing.Size(393, 27)
+        Me.ucrReceiverForTestColumn.Size = New System.Drawing.Size(358, 27)
         Me.ucrReceiverForTestColumn.strNcFilePath = ""
         Me.ucrReceiverForTestColumn.TabIndex = 12
         Me.ucrReceiverForTestColumn.ucrSelector = Nothing
@@ -395,35 +416,38 @@ Partial Class dlgUseModel
         '
         Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
         Me.ucrInputComboRPackage.IsReadOnly = False
-        Me.ucrInputComboRPackage.Location = New System.Drawing.Point(262, 79)
+        Me.ucrInputComboRPackage.Location = New System.Drawing.Point(338, 79)
         Me.ucrInputComboRPackage.Name = "ucrInputComboRPackage"
-        Me.ucrInputComboRPackage.Size = New System.Drawing.Size(141, 21)
+        Me.ucrInputComboRPackage.Size = New System.Drawing.Size(122, 21)
         Me.ucrInputComboRPackage.TabIndex = 5
         '
-        'cmdClear
+        'cmdHelp
         '
-        Me.cmdClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdClear.Location = New System.Drawing.Point(397, 254)
-        Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(74, 23)
-        Me.cmdClear.TabIndex = 31
-        Me.cmdClear.Text = "Clear"
-        Me.cmdClear.UseVisualStyleBackColor = True
+        Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdHelp.Location = New System.Drawing.Point(460, 78)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(60, 23)
+        Me.cmdHelp.TabIndex = 33
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
         '
-        'ucrChkIncludeArguments
+        'Button1
         '
-        Me.ucrChkIncludeArguments.Checked = False
-        Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(480, 14)
-        Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
-        Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(85, 20)
-        Me.ucrChkIncludeArguments.TabIndex = 32
+        Me.Button1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Button1.Location = New System.Drawing.Point(267, 77)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(71, 23)
+        Me.Button1.TabIndex = 34
+        Me.Button1.Text = "R Package"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'dlgUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(587, 381)
+        Me.ClientSize = New System.Drawing.Size(569, 381)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.ucrChkIncludeArguments)
         Me.Controls.Add(Me.cmdClear)
         Me.Controls.Add(Me.grpGeneral)
@@ -483,4 +507,6 @@ Partial Class dlgUseModel
     Friend WithEvents cmdErlevd As Button
     Friend WithEvents cmdClear As Button
     Friend WithEvents ucrChkIncludeArguments As ucrCheck
+    Friend WithEvents cmdHelp As Button
+    Friend WithEvents Button1 As Button
 End Class

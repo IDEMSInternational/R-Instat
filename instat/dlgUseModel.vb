@@ -45,7 +45,7 @@ Public Class dlgUseModel
         ucrInputComboRPackage.SetItems({"General", "Prediction", "extRemes"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
 
-        ucrChkIncludeArguments.SetText("Include Arguments")
+        ucrChkIncludeArguments.SetText("Show Arguments")
 
         ucrInputModels.IsReadOnly = True
 
@@ -371,6 +371,18 @@ Public Class dlgUseModel
         End If
     End Sub
 
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Dim clsHelp As New RFunction
+        Dim strPackageName As String
+
+        strPackageName = ucrInputComboRPackage.GetText
+        clsHelp.SetPackageName("utils")
+        clsHelp.SetRCommand("help")
+        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
+        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Modelling", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+    End Sub
+
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
         ucrReceiverForTestColumn.Clear()
     End Sub
@@ -381,6 +393,10 @@ Public Class dlgUseModel
         cmdTry.Enabled = Not ucrReceiverForTestColumn.IsEmpty()
         ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        ucrReceiverForTestColumn.AddtoCombobox(ucrReceiverForTestColumn.GetText)
     End Sub
 
 End Class
