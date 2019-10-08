@@ -212,6 +212,7 @@ Public Class ucrGeom
 
         Dim clsgeom_statpeaks As New Geoms
 
+        clsgeom_statpeaks.SetGeomPackage("ggpmisc")
         clsgeom_statpeaks.SetGeomName("stat_peaks")
 
         'add aes parameter
@@ -235,6 +236,7 @@ Public Class ucrGeom
 
         Dim clsgeom_statvalleys As New Geoms
 
+        clsgeom_statvalleys.SetGeomPackage("ggpmisc")
         clsgeom_statvalleys.SetGeomName("stat_valleys")
 
         'add aes parameter
