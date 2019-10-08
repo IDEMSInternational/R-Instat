@@ -24,11 +24,15 @@ Public Class dlgSpells
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsApplyInstatFunction, clsSpellLogicalCalc, clsRRaindayMatch As New RFunction
     Private clsSpellsFunction As New RFunction
-    Private clsRRaindayOperator, clsSpellLogicalAndOperator, clsSpellLogicalLowerOperator, clsSpellLogicalUpperOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2, clsGreaterThanOperator, clsLessThanOperator As New ROperator
+    Private clsRRaindayOperator, clsSpellLogicalAndOperator, clsSpellLogicalGreaterThanOperator, clsSpellLogicalLessThanOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2, clsGreaterThanOperator, clsLessThanOperator As New ROperator
     Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
 
     Private strCurrDataName As String = ""
-    Private strRainDay As String = "rain_day"
+
+    Private strLessThan As String = "Less than or equal to"
+    Private strGreaterThan As String = "Greater than or equal to"
+    Private strBetween As String = "Between"
+    Private strExcludingBetween As String = "Excluding between"
 
     Private Sub dlgSpells_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -55,27 +59,25 @@ Public Class dlgSpells
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
         ucrReceiverElement.Selector = ucrSelectorForSpells
-        'ucrReceiverElement.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
-        ucrReceiverElement.bAutoFill = True
         ucrReceiverElement.SetDataType("numeric")
-        ucrReceiverElement.strSelectorHeading = "Variables"
+        ucrReceiverElement.SetClimaticType("rain")
+        ucrReceiverElement.bAutoFill = True
 
         ucrReceiverStation.SetParameter(New RParameter("station", 1, False))
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.Selector = ucrSelectorForSpells
-        ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
+        ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
-        ucrReceiverStation.strSelectorHeading = "Station Variables"
 
         ucrReceiverYear.Selector = ucrSelectorForSpells
-        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
-        ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ucrReceiverDate.SetParameter(New RParameter("date", 0, False))
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.Selector = ucrSelectorForSpells
-        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
+        ucrReceiverDate.SetDataType("Date")
+        ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.strSelectorHeading = "Date Variables"
 
@@ -83,9 +85,9 @@ Public Class dlgSpells
         ucrReceiverDOY.SetParameterIsString()
         ucrReceiverDOY.bWithQuotes = False
         ucrReceiverDOY.Selector = ucrSelectorForSpells
-        ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
+        ucrReceiverDOY.SetDataType("numeric")
+        ucrReceiverDOY.SetClimaticType("doy")
         ucrReceiverDOY.bAutoFill = True
-        ucrReceiverDOY.strSelectorHeading = "Day Variables"
 
         clsSubSpellLength1.SetRCommand("list")
         clsMaxValueList.SetRCommand("list")
@@ -97,11 +99,12 @@ Public Class dlgSpells
         ucrInputSpellUpper.SetParameter(New RParameter("max", 1))
         ucrInputSpellUpper.SetValidationTypeAsNumeric()
         ucrInputSpellUpper.AddQuotesIfUnrecognised = False
+        ucrInputSpellUpper.SetLinkedDisplayControl(lblAnd)
 
-        ucrInputCondition.SetItems({"<=", "Between", "Outer", ">="})
+        ucrInputCondition.SetItems({strLessThan, strGreaterThan, strBetween, strExcludingBetween})
         ucrInputCondition.SetDropDownStyleAsNonEditable()
 
-        ucrChkConditional.SetText("Assuming Condition Satisfied at Start of Each Period")
+        ucrChkConditional.SetText("Assume condition not satisfied at start of each period")
         ucrChkConditional.SetParameter(New RParameter("initial_value"))
         ucrChkConditional.SetValuesCheckedAndUnchecked("0", "NA_real_")
         ucrChkConditional.SetRDefault("NA_real_")
@@ -110,8 +113,8 @@ Public Class dlgSpells
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
         ucrInputNewColumnName.SetName("spells")
 
-        ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {"<=", "Between", "Outer", ">="}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
-        ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {"Between", "Outer"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {strLessThan, strGreaterThan, strBetween, strExcludingBetween}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {strBetween, strExcludingBetween}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
 
         ucrInputFilterPreview.IsReadOnly = True
     End Sub
@@ -124,6 +127,7 @@ Public Class dlgSpells
         clsMaxSpellManipulation.Clear()
         clsDayFilter.Clear()
         clsGroupBy.Clear()
+        clsSpellsFunction.Clear()
         clsSpellLogicalCalc.Clear()
         clsSpellLength.Clear()
         clsMaxSpellSummary.Clear()
@@ -132,8 +136,8 @@ Public Class dlgSpells
         clsDayToOperator.Clear()
         clsRRaindayOperator.Clear()
         clsSpellLogicalAndOperator.Clear()
-        clsSpellLogicalLowerOperator.Clear()
-        clsSpellLogicalUpperOperator.Clear()
+        clsSpellLogicalGreaterThanOperator.Clear()
+        clsSpellLogicalLessThanOperator.Clear()
         clsMaxFunction.Clear()
         clsAdditionalCondition.Clear()
         clsAdditionalConditionList.Clear()
@@ -146,7 +150,7 @@ Public Class dlgSpells
 
         ucrSelectorForSpells.Reset()
         ucrReceiverElement.SetMeAsReceiver()
-        ucrInputCondition.SetName("Between")
+        ucrInputCondition.SetName(strBetween)
         ucrInputNewColumnName.SetName("spells")
         ucrInputSpellLower.SetName(0)
         ucrInputSpellUpper.SetName(0.85)
@@ -190,10 +194,10 @@ Public Class dlgSpells
 
         clsSpellLogicalAndOperator.bToScriptAsRString = True
         clsSpellLogicalAndOperator.SetOperation("&")
-        clsSpellLogicalLowerOperator.SetOperation(">=")
-        clsSpellLogicalLowerOperator.AddParameter("min", 0, iPosition:=1)
-        clsSpellLogicalUpperOperator.SetOperation("<=")
-        clsSpellLogicalUpperOperator.AddParameter("max", 0.85, iPosition:=1)
+        clsSpellLogicalGreaterThanOperator.SetOperation(">=")
+        clsSpellLogicalGreaterThanOperator.AddParameter("min", 0, iPosition:=1)
+        clsSpellLogicalLessThanOperator.SetOperation("<=")
+        clsSpellLogicalLessThanOperator.AddParameter("max", 0.85, iPosition:=1)
 
         clsGreaterThanOperator.SetOperation(">")
         clsLessThanOperator.SetOperation("<")
@@ -229,7 +233,6 @@ Public Class dlgSpells
         clsMaxSpellSummary.AddParameter("function_exp", clsRFunctionParameter:=clsMaxFunction, iPosition:=1)
         clsMaxSpellSummary.AddParameter("save", 2, iPosition:=6)
         clsMaxSpellSummary.AddParameter("result_name", Chr(34) & ucrInputNewColumnName.GetText() & Chr(34), iPosition:=3)
-        'clsMaxSpellSummary.AddParameter("sub_calculation", clsRFunctionParameter:=clsMaxSpellSubCalcs, iPosition:=5)
         clsMaxSpellSummary.AddParameter("manipulations", clsRFunctionParameter:=clsMaxSpellManipulation, iPosition:=5)
         clsMaxSpellSummary.SetAssignTo("spells")
 
@@ -239,7 +242,6 @@ Public Class dlgSpells
 
         clsMaxSpellSubCalcs.SetRCommand("list")
         clsMaxSpellSubCalcs.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
-        clsMaxSpellSubCalcs.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=1)
 
         clsMaxSpellManipulation.SetRCommand("list")
         clsMaxSpellManipulation.AddParameter("manip1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
@@ -260,16 +262,16 @@ Public Class dlgSpells
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsSpellLogicalLowerOperator, New RParameter("rain", 0), iAdditionalPairNo:=1)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsSpellLogicalGreaterThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=2)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
         ucrInputSpellUpper.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
-        ucrReceiverElement.SetRCode(clsSpellLogicalUpperOperator, bReset)
-        ucrInputSpellLower.SetRCode(clsSpellLogicalLowerOperator, bReset)
-        ucrInputSpellUpper.SetRCode(clsSpellLogicalUpperOperator, bReset)
+        ucrReceiverElement.SetRCode(clsSpellLogicalLessThanOperator, bReset)
+        ucrInputSpellLower.SetRCode(clsSpellLogicalGreaterThanOperator, bReset)
+        ucrInputSpellUpper.SetRCode(clsSpellLogicalLessThanOperator, bReset)
         ucrInputNewColumnName.SetRCode(clsMaxSpellSummary, bReset)
         ucrChkConditional.SetRCode(clsSpellsFunction, bReset)
     End Sub
@@ -281,7 +283,7 @@ Public Class dlgSpells
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverElement.IsEmpty AndAlso Not ucrInputNewColumnName.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ((ucrInputCondition.GetText = "Between" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "Outer" AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty)) Then
+        If Not ucrReceiverElement.IsEmpty AndAlso Not ucrInputNewColumnName.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ((ucrInputCondition.GetText = strBetween AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strExcludingBetween AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strLessThan AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strGreaterThan AndAlso Not ucrInputSpellUpper.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -295,33 +297,38 @@ Public Class dlgSpells
     End Sub
 
     Private Sub InputConditionOptions()
+        'Set here as they are > and < for "Excluding between"
+        clsSpellLogicalGreaterThanOperator.SetOperation(">=")
+        clsSpellLogicalLessThanOperator.SetOperation("<=")
         Select Case ucrInputCondition.GetText
-            Case "<="
-                ucrInputSpellLower.Visible = False
-                clsSpellLogicalAndOperator.RemoveParameterByName("upper")
-                clsSpellLogicalUpperOperator.RemoveParameterByName("max")
-                clsSpellLogicalAndOperator.AddParameter("lower", clsROperatorParameter:=clsSpellLogicalLowerOperator, iPosition:=0)
-                clsSpellLogicalLowerOperator.AddParameter("min", ucrInputSpellUpper.GetText, iPosition:=1)
-                clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsSpellLogicalLowerOperator, iPosition:=0)
-            Case "Between" ' match(Rain>=LEFT & Rain<=RIGHT, 1, nomatch = 0)
-                ucrInputSpellLower.Visible = True
-                clsSpellLogicalAndOperator.AddParameter("lower", clsROperatorParameter:=clsSpellLogicalLowerOperator, iPosition:=0)
-                clsSpellLogicalLowerOperator.AddParameter("min", ucrInputSpellLower.GetText, iPosition:=1)
-                clsSpellLogicalAndOperator.AddParameter("upper", clsROperatorParameter:=clsSpellLogicalUpperOperator, iPosition:=0)
-                clsSpellLogicalUpperOperator.AddParameter("max", ucrInputSpellUpper.GetText, iPosition:=1)
-                clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=0)
-            Case "Outer"
-                ucrInputSpellLower.Visible = True
-                clsSpellLogicalAndOperator.AddParameter("upper", clsROperatorParameter:=clsGreaterThanOperator, iPosition:=0)
-                clsSpellLogicalAndOperator.AddParameter("lower", clsROperatorParameter:=clsLessThanOperator, iPosition:=1)
-                clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=2)
-            Case ">="
-                ucrInputSpellLower.Visible = False
+            Case strLessThan
                 clsSpellLogicalAndOperator.RemoveParameterByName("lower")
-                clsSpellLogicalLowerOperator.RemoveParameterByName("min")
-                clsSpellLogicalAndOperator.AddParameter("upper", clsROperatorParameter:=clsSpellLogicalUpperOperator, iPosition:=0)
-                clsSpellLogicalUpperOperator.AddParameter("max", ucrInputSpellUpper.GetText, iPosition:=1)
-                clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsSpellLogicalUpperOperator, iPosition:=0)
+                clsSpellLogicalGreaterThanOperator.RemoveParameterByName("min")
+                clsSpellLogicalAndOperator.AddParameter("upper", clsROperatorParameter:=clsSpellLogicalLessThanOperator, iPosition:=0)
+                clsSpellLogicalLessThanOperator.AddParameter("max", ucrInputSpellLower.GetText, iPosition:=1)
+                clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsSpellLogicalLessThanOperator, iPosition:=0)
+            Case strGreaterThan
+                clsSpellLogicalAndOperator.RemoveParameterByName("upper")
+                clsSpellLogicalLessThanOperator.RemoveParameterByName("max")
+                clsSpellLogicalAndOperator.AddParameter("lower", clsROperatorParameter:=clsSpellLogicalGreaterThanOperator, iPosition:=0)
+                clsSpellLogicalGreaterThanOperator.AddParameter("min", ucrInputSpellLower.GetText, iPosition:=1)
+                clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsSpellLogicalGreaterThanOperator, iPosition:=0)
+            Case strBetween
+                clsSpellLogicalAndOperator.SetOperation("&")
+                clsSpellLogicalAndOperator.AddParameter("lower", clsROperatorParameter:=clsSpellLogicalGreaterThanOperator, iPosition:=0)
+                clsSpellLogicalGreaterThanOperator.AddParameter("min", ucrInputSpellLower.GetText, iPosition:=1)
+                clsSpellLogicalAndOperator.AddParameter("upper", clsROperatorParameter:=clsSpellLogicalLessThanOperator, iPosition:=1)
+                clsSpellLogicalLessThanOperator.AddParameter("max", ucrInputSpellUpper.GetText, iPosition:=1)
+                clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=0)
+            Case strExcludingBetween
+                clsSpellLogicalAndOperator.SetOperation("|")
+                clsSpellLogicalAndOperator.AddParameter("lower", clsROperatorParameter:=clsSpellLogicalGreaterThanOperator, iPosition:=1)
+                clsSpellLogicalGreaterThanOperator.SetOperation(">")
+                clsSpellLogicalGreaterThanOperator.AddParameter("min", ucrInputSpellUpper.GetText, iPosition:=1)
+                clsSpellLogicalAndOperator.AddParameter("upper", clsROperatorParameter:=clsSpellLogicalLessThanOperator, iPosition:=0)
+                clsSpellLogicalLessThanOperator.SetOperation("<")
+                clsSpellLogicalLessThanOperator.AddParameter("max", ucrInputSpellLower.GetText, iPosition:=1)
+                clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=0)
         End Select
     End Sub
 
@@ -354,11 +361,9 @@ Public Class dlgSpells
         If ucrChkConditional.Checked Then
             clsMaxSpellSummary.AddParameter("sub_calculation", clsRFunctionParameter:=clsMaxSpellSubCalcs, iPosition:=5)
             clsMaxSpellManipulation.RemoveParameterByName("manip1")
-            clsMaxSpellManipulation.RemoveParameterByName("manip2")
         Else
             clsMaxSpellSummary.RemoveParameterByName("sub_calculation")
             clsMaxSpellManipulation.AddParameter("manip1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
-            clsMaxSpellManipulation.AddParameter("manip2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=1)
         End If
     End Sub
 
