@@ -325,7 +325,7 @@ Public Class sdgPlots
         ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(False, "size", False)
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction, clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector, bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing)
         Dim clsTempParam As RParameter
 
         bRCodeSet = False
