@@ -36,6 +36,13 @@ Public Class dlgUseModel
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrSaveResult.SetPrefix("model")
+        ucrSaveResult.SetIsComboBox()
+        ucrSaveResult.SetSaveTypeAsModel()
+        ucrSaveResult.SetCheckBoxText("Save Model")
+        ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
+        ucrSaveResult.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
+
         ucrReceiverForTestColumn.SetParameterIsRFunction()
         ucrReceiverForTestColumn.SetItemType("model")
         ucrReceiverForTestColumn.strSelectorHeading = "Models"
@@ -60,6 +67,7 @@ Public Class dlgUseModel
         ucrBase.clsRsyntax.ClearCodes()
 
         ucrSelectorUseModel.Reset()
+        ucrSaveResult.Reset()
 
         ucrReceiverForTestColumn.SetMeAsReceiver()
         ucrReceiverForTestColumn.Clear()
@@ -71,6 +79,10 @@ Public Class dlgUseModel
 
         ucrBase.clsRsyntax.SetCommandString("")
 
+        ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 2
+
         clsAttach.SetRCommand("attach")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorUseModel.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
@@ -80,8 +92,6 @@ Public Class dlgUseModel
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach, 1000)
-        ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.SetCommandString("")
         ucrBase.clsRsyntax.iCallType = 2
         KeyboardsVisibility()
         GetModels()

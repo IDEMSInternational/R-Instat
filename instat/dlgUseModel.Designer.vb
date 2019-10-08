@@ -56,6 +56,7 @@ Partial Class dlgUseModel
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.ucrSaveResult = New instat.ucrSave()
         Me.grpGeneral.SuspendLayout()
         Me.grpPrediction.SuspendLayout()
         Me.grpExtrRemes.SuspendLayout()
@@ -76,7 +77,7 @@ Partial Class dlgUseModel
         'cmdTry
         '
         Me.cmdTry.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTry.Location = New System.Drawing.Point(9, 293)
+        Me.cmdTry.Location = New System.Drawing.Point(9, 281)
         Me.cmdTry.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdTry.Name = "cmdTry"
         Me.cmdTry.Size = New System.Drawing.Size(74, 23)
@@ -345,7 +346,7 @@ Partial Class dlgUseModel
         'cmdClear
         '
         Me.cmdClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdClear.Location = New System.Drawing.Point(397, 254)
+        Me.cmdClear.Location = New System.Drawing.Point(402, 251)
         Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(74, 23)
@@ -387,7 +388,7 @@ Partial Class dlgUseModel
         Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
         Me.ucrInputTryMessage.IsMultiline = False
         Me.ucrInputTryMessage.IsReadOnly = True
-        Me.ucrInputTryMessage.Location = New System.Drawing.Point(87, 294)
+        Me.ucrInputTryMessage.Location = New System.Drawing.Point(87, 282)
         Me.ucrInputTryMessage.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
         Me.ucrInputTryMessage.Size = New System.Drawing.Size(321, 22)
@@ -395,7 +396,7 @@ Partial Class dlgUseModel
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 315)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 338)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 20
@@ -441,11 +442,19 @@ Partial Class dlgUseModel
         Me.Button1.Text = "R Package"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'ucrSaveResult
+        '
+        Me.ucrSaveResult.Location = New System.Drawing.Point(9, 309)
+        Me.ucrSaveResult.Name = "ucrSaveResult"
+        Me.ucrSaveResult.Size = New System.Drawing.Size(277, 24)
+        Me.ucrSaveResult.TabIndex = 35
+        '
         'dlgUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(569, 381)
+        Me.ClientSize = New System.Drawing.Size(569, 393)
+        Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.ucrChkIncludeArguments)
@@ -466,7 +475,7 @@ Partial Class dlgUseModel
         Me.MinimizeBox = False
         Me.Name = "dlgUseModel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "dlgUseModel"
+        Me.Text = "Use Model "
         Me.grpGeneral.ResumeLayout(False)
         Me.grpPrediction.ResumeLayout(False)
         Me.grpExtrRemes.ResumeLayout(False)
@@ -509,4 +518,5 @@ Partial Class dlgUseModel
     Friend WithEvents ucrChkIncludeArguments As ucrCheck
     Friend WithEvents cmdHelp As Button
     Friend WithEvents Button1 As Button
+    Friend WithEvents ucrSaveResult As ucrSave
 End Class
