@@ -50,6 +50,7 @@ Partial Class dlgCumulativeDistribution
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkCountsOnYAxis = New instat.ucrCheck()
         Me.ucrChkIncludePoints = New instat.ucrCheck()
+        Me.ucrPnlOption = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'lblFactors
@@ -104,6 +105,7 @@ Partial Class dlgCumulativeDistribution
         '
         'ucrCumDistSelector
         '
+        Me.ucrCumDistSelector.bDropUnusedFilterLevels = False
         Me.ucrCumDistSelector.bShowHiddenColumns = False
         Me.ucrCumDistSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrCumDistSelector, "ucrCumDistSelector")
@@ -126,10 +128,16 @@ Partial Class dlgCumulativeDistribution
         resources.ApplyResources(Me.ucrChkIncludePoints, "ucrChkIncludePoints")
         Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
         '
+        'ucrPnlOption
+        '
+        resources.ApplyResources(Me.ucrPnlOption, "ucrPnlOption")
+        Me.ucrPnlOption.Name = "ucrPnlOption"
+        '
         'dlgCumulativeDistribution
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrPnlOption)
         Me.Controls.Add(Me.ucrChkIncludePoints)
         Me.Controls.Add(Me.ucrChkCountsOnYAxis)
         Me.Controls.Add(Me.ucrChkExceedancePlots)
@@ -162,4 +170,5 @@ Partial Class dlgCumulativeDistribution
     Friend WithEvents ucrChkExceedancePlots As ucrCheck
     Friend WithEvents ucrChkIncludePoints As ucrCheck
     Friend WithEvents ucrChkCountsOnYAxis As ucrCheck
+    Friend WithEvents ucrPnlOption As UcrPanel
 End Class
