@@ -52,6 +52,7 @@ Partial Class dlgCumulativeDistribution
         Me.ucrChkIncludePoints = New instat.ucrCheck()
         Me.ucrPnlOption = New instat.UcrPanel()
         Me.rdoCumulative = New System.Windows.Forms.RadioButton()
+        Me.rdoExceedance = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblFactors
@@ -141,10 +142,18 @@ Partial Class dlgCumulativeDistribution
         Me.rdoCumulative.TabStop = True
         Me.rdoCumulative.UseVisualStyleBackColor = True
         '
+        'rdoExceedance
+        '
+        resources.ApplyResources(Me.rdoExceedance, "rdoExceedance")
+        Me.rdoExceedance.Name = "rdoExceedance"
+        Me.rdoExceedance.TabStop = True
+        Me.rdoExceedance.UseVisualStyleBackColor = True
+        '
         'dlgCumulativeDistribution
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoExceedance)
         Me.Controls.Add(Me.rdoCumulative)
         Me.Controls.Add(Me.ucrPnlOption)
         Me.Controls.Add(Me.ucrChkIncludePoints)
@@ -181,4 +190,5 @@ Partial Class dlgCumulativeDistribution
     Friend WithEvents ucrChkCountsOnYAxis As ucrCheck
     Friend WithEvents ucrPnlOption As UcrPanel
     Friend WithEvents rdoCumulative As RadioButton
+    Friend WithEvents rdoExceedance As RadioButton
 End Class
