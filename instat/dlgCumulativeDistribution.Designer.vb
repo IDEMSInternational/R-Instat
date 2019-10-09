@@ -51,6 +51,7 @@ Partial Class dlgCumulativeDistribution
         Me.ucrChkCountsOnYAxis = New instat.ucrCheck()
         Me.ucrChkIncludePoints = New instat.ucrCheck()
         Me.ucrPnlOption = New instat.UcrPanel()
+        Me.rdoCumulative = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblFactors
@@ -133,10 +134,18 @@ Partial Class dlgCumulativeDistribution
         resources.ApplyResources(Me.ucrPnlOption, "ucrPnlOption")
         Me.ucrPnlOption.Name = "ucrPnlOption"
         '
+        'rdoCumulative
+        '
+        resources.ApplyResources(Me.rdoCumulative, "rdoCumulative")
+        Me.rdoCumulative.Name = "rdoCumulative"
+        Me.rdoCumulative.TabStop = True
+        Me.rdoCumulative.UseVisualStyleBackColor = True
+        '
         'dlgCumulativeDistribution
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoCumulative)
         Me.Controls.Add(Me.ucrPnlOption)
         Me.Controls.Add(Me.ucrChkIncludePoints)
         Me.Controls.Add(Me.ucrChkCountsOnYAxis)
@@ -171,4 +180,5 @@ Partial Class dlgCumulativeDistribution
     Friend WithEvents ucrChkIncludePoints As ucrCheck
     Friend WithEvents ucrChkCountsOnYAxis As ucrCheck
     Friend WithEvents ucrPnlOption As UcrPanel
+    Friend WithEvents rdoCumulative As RadioButton
 End Class
