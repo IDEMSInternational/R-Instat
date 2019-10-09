@@ -144,37 +144,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactors.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="cmdLineOptions.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="cmdLineOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 260</value>
-  </data>
-  <data name="cmdLineOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 25</value>
-  </data>
-  <data name="cmdLineOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="cmdLineOptions.Text" xml:space="preserve">
-    <value>Line Options</value>
-  </data>
-  <data name="&gt;&gt;cmdLineOptions.Name" xml:space="preserve">
-    <value>cmdLineOptions</value>
-  </data>
-  <data name="&gt;&gt;cmdLineOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdLineOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdLineOptions.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="cmdPlotOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 291</value>
+    <value>10, 247</value>
   </data>
   <data name="cmdPlotOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 25</value>
@@ -400,7 +373,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrCumDistSelector.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 387</value>
@@ -421,7 +394,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
