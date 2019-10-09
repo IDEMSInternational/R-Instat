@@ -42,7 +42,6 @@ Partial Class dlgCumulativeDistribution
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
-        Me.ucrChkExceedancePlots = New instat.ucrCheck()
         Me.ucrSaveCumDist = New instat.ucrSave()
         Me.ucrVariablesAsFactorforCumDist = New instat.ucrVariablesAsFactor()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
@@ -74,12 +73,6 @@ Partial Class dlgCumulativeDistribution
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Tag = "Plot_Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
-        '
-        'ucrChkExceedancePlots
-        '
-        Me.ucrChkExceedancePlots.Checked = False
-        resources.ApplyResources(Me.ucrChkExceedancePlots, "ucrChkExceedancePlots")
-        Me.ucrChkExceedancePlots.Name = "ucrChkExceedancePlots"
         '
         'ucrSaveCumDist
         '
@@ -158,7 +151,6 @@ Partial Class dlgCumulativeDistribution
         Me.Controls.Add(Me.ucrPnlOption)
         Me.Controls.Add(Me.ucrChkIncludePoints)
         Me.Controls.Add(Me.ucrChkCountsOnYAxis)
-        Me.Controls.Add(Me.ucrChkExceedancePlots)
         Me.Controls.Add(Me.ucrSaveCumDist)
         Me.Controls.Add(Me.ucrVariablesAsFactorforCumDist)
         Me.Controls.Add(Me.ucrFactorReceiver)
@@ -185,7 +177,6 @@ Partial Class dlgCumulativeDistribution
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
     Friend WithEvents ucrVariablesAsFactorforCumDist As ucrVariablesAsFactor
     Friend WithEvents ucrSaveCumDist As ucrSave
-    Friend WithEvents ucrChkExceedancePlots As ucrCheck
     Friend WithEvents ucrChkIncludePoints As ucrCheck
     Friend WithEvents ucrChkCountsOnYAxis As ucrCheck
     Friend WithEvents ucrPnlOption As UcrPanel
