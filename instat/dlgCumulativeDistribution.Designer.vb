@@ -40,7 +40,6 @@ Partial Class dlgCumulativeDistribution
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCumulativeDistribution))
         Me.lblFactors = New System.Windows.Forms.Label()
-        Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
         Me.ucrSaveCumDist = New instat.ucrSave()
         Me.ucrVariablesAsFactorforCumDist = New instat.ucrVariablesAsFactor()
@@ -59,13 +58,6 @@ Partial Class dlgCumulativeDistribution
         resources.ApplyResources(Me.lblFactors, "lblFactors")
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Tag = "Factors_Optional:"
-        '
-        'cmdLineOptions
-        '
-        resources.ApplyResources(Me.cmdLineOptions, "cmdLineOptions")
-        Me.cmdLineOptions.Name = "cmdLineOptions"
-        Me.cmdLineOptions.Tag = "Line_Options"
-        Me.cmdLineOptions.UseVisualStyleBackColor = True
         '
         'cmdPlotOptions
         '
@@ -155,7 +147,6 @@ Partial Class dlgCumulativeDistribution
         Me.Controls.Add(Me.ucrVariablesAsFactorforCumDist)
         Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.cmdPlotOptions)
-        Me.Controls.Add(Me.cmdLineOptions)
         Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.ucrCumDistSelector)
         Me.Controls.Add(Me.ucrBase)
@@ -172,7 +163,6 @@ Partial Class dlgCumulativeDistribution
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrCumDistSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblFactors As Label
-    Friend WithEvents cmdLineOptions As Button
     Friend WithEvents cmdPlotOptions As Button
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
     Friend WithEvents ucrVariablesAsFactorforCumDist As ucrVariablesAsFactor
