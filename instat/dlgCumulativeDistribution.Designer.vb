@@ -51,6 +51,12 @@ Partial Class dlgCumulativeDistribution
         Me.ucrPnlOption = New instat.UcrPanel()
         Me.rdoCumulative = New System.Windows.Forms.RadioButton()
         Me.rdoExceedance = New System.Windows.Forms.RadioButton()
+        Me.lblFrom = New System.Windows.Forms.Label()
+        Me.ucrNudFrom = New instat.ucrNud()
+        Me.lblTo = New System.Windows.Forms.Label()
+        Me.ucrNudTo = New instat.ucrNud()
+        Me.lblSequence = New System.Windows.Forms.Label()
+        Me.ucrNudBy = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'lblFactors
@@ -134,10 +140,61 @@ Partial Class dlgCumulativeDistribution
         Me.rdoExceedance.TabStop = True
         Me.rdoExceedance.UseVisualStyleBackColor = True
         '
+        'lblFrom
+        '
+        resources.ApplyResources(Me.lblFrom, "lblFrom")
+        Me.lblFrom.Name = "lblFrom"
+        '
+        'ucrNudFrom
+        '
+        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudFrom, "ucrNudFrom")
+        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Name = "ucrNudFrom"
+        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblTo
+        '
+        resources.ApplyResources(Me.lblTo, "lblTo")
+        Me.lblTo.Name = "lblTo"
+        '
+        'ucrNudTo
+        '
+        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudTo, "ucrNudTo")
+        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Name = "ucrNudTo"
+        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblSequence
+        '
+        resources.ApplyResources(Me.lblSequence, "lblSequence")
+        Me.lblSequence.Name = "lblSequence"
+        '
+        'ucrNudBy
+        '
+        Me.ucrNudBy.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudBy.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudBy, "ucrNudBy")
+        Me.ucrNudBy.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudBy.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudBy.Name = "ucrNudBy"
+        Me.ucrNudBy.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgCumulativeDistribution
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrNudBy)
+        Me.Controls.Add(Me.lblSequence)
+        Me.Controls.Add(Me.ucrNudTo)
+        Me.Controls.Add(Me.lblTo)
+        Me.Controls.Add(Me.ucrNudFrom)
+        Me.Controls.Add(Me.lblFrom)
         Me.Controls.Add(Me.rdoExceedance)
         Me.Controls.Add(Me.rdoCumulative)
         Me.Controls.Add(Me.ucrPnlOption)
@@ -172,4 +229,10 @@ Partial Class dlgCumulativeDistribution
     Friend WithEvents ucrPnlOption As UcrPanel
     Friend WithEvents rdoCumulative As RadioButton
     Friend WithEvents rdoExceedance As RadioButton
+    Friend WithEvents ucrNudBy As ucrNud
+    Friend WithEvents lblSequence As Label
+    Friend WithEvents ucrNudTo As ucrNud
+    Friend WithEvents lblTo As Label
+    Friend WithEvents ucrNudFrom As ucrNud
+    Friend WithEvents lblFrom As Label
 End Class
