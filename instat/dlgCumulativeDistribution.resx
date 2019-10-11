@@ -198,7 +198,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>418, 447</value>
+    <value>418, 431</value>
   </data>
   <data name="ucrNudBy.Location" type="System.Drawing.Point, System.Drawing">
     <value>243, 315</value>
@@ -361,7 +361,7 @@
     <value>Flat</value>
   </data>
   <data name="rdoExceedance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 24</value>
+    <value>204, 13</value>
   </data>
   <data name="rdoExceedance.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 27</value>
@@ -394,7 +394,7 @@
     <value>Flat</value>
   </data>
   <data name="rdoCumulative.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 24</value>
+    <value>112, 13</value>
   </data>
   <data name="rdoCumulative.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 27</value>
@@ -421,10 +421,10 @@
     <value>7</value>
   </data>
   <data name="ucrPnlOption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 12</value>
+    <value>105, 12</value>
   </data>
   <data name="ucrPnlOption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 50</value>
+    <value>197, 30</value>
   </data>
   <data name="ucrPnlOption.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -508,13 +508,13 @@
     <value>13</value>
   </data>
   <data name="ucrCumDistSelector.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 54</value>
+    <value>10, 40</value>
   </data>
   <data name="ucrCumDistSelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrCumDistSelector.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 180</value>
+    <value>211, 180</value>
   </data>
   <data name="ucrCumDistSelector.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -532,7 +532,7 @@
     <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 387</value>
+    <value>10, 371</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -565,7 +565,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrVariablesAsFactorforCumDist.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 68</value>
+    <value>243, 50</value>
   </data>
   <data name="ucrVariablesAsFactorforCumDist.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 136</value>
