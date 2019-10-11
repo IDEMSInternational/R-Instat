@@ -41,22 +41,22 @@ Partial Class dlgCumulativeDistribution
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCumulativeDistribution))
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
+        Me.rdoCumulative = New System.Windows.Forms.RadioButton()
+        Me.rdoExceedance = New System.Windows.Forms.RadioButton()
+        Me.lblFrom = New System.Windows.Forms.Label()
+        Me.lblTo = New System.Windows.Forms.Label()
+        Me.lblSequence = New System.Windows.Forms.Label()
+        Me.ucrInputTo = New instat.ucrInputTextBox()
+        Me.ucrInputFrom = New instat.ucrInputTextBox()
+        Me.ucrNudBy = New instat.ucrNud()
+        Me.ucrPnlOption = New instat.UcrPanel()
+        Me.ucrChkIncludePoints = New instat.ucrCheck()
+        Me.ucrChkCountsOnYAxis = New instat.ucrCheck()
         Me.ucrSaveCumDist = New instat.ucrSave()
         Me.ucrVariablesAsFactorforCumDist = New instat.ucrVariablesAsFactor()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrCumDistSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkCountsOnYAxis = New instat.ucrCheck()
-        Me.ucrChkIncludePoints = New instat.ucrCheck()
-        Me.ucrPnlOption = New instat.UcrPanel()
-        Me.rdoCumulative = New System.Windows.Forms.RadioButton()
-        Me.rdoExceedance = New System.Windows.Forms.RadioButton()
-        Me.lblFrom = New System.Windows.Forms.Label()
-        Me.ucrNudFrom = New instat.ucrNud()
-        Me.lblTo = New System.Windows.Forms.Label()
-        Me.ucrNudTo = New instat.ucrNud()
-        Me.lblSequence = New System.Windows.Forms.Label()
-        Me.ucrNudBy = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'lblFactors
@@ -71,6 +71,78 @@ Partial Class dlgCumulativeDistribution
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Tag = "Plot_Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
+        '
+        'rdoCumulative
+        '
+        resources.ApplyResources(Me.rdoCumulative, "rdoCumulative")
+        Me.rdoCumulative.Name = "rdoCumulative"
+        Me.rdoCumulative.TabStop = True
+        Me.rdoCumulative.UseVisualStyleBackColor = True
+        '
+        'rdoExceedance
+        '
+        resources.ApplyResources(Me.rdoExceedance, "rdoExceedance")
+        Me.rdoExceedance.Name = "rdoExceedance"
+        Me.rdoExceedance.TabStop = True
+        Me.rdoExceedance.UseVisualStyleBackColor = True
+        '
+        'lblFrom
+        '
+        resources.ApplyResources(Me.lblFrom, "lblFrom")
+        Me.lblFrom.Name = "lblFrom"
+        '
+        'lblTo
+        '
+        resources.ApplyResources(Me.lblTo, "lblTo")
+        Me.lblTo.Name = "lblTo"
+        '
+        'lblSequence
+        '
+        resources.ApplyResources(Me.lblSequence, "lblSequence")
+        Me.lblSequence.Name = "lblSequence"
+        '
+        'ucrInputTo
+        '
+        Me.ucrInputTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputTo.IsMultiline = False
+        Me.ucrInputTo.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTo, "ucrInputTo")
+        Me.ucrInputTo.Name = "ucrInputTo"
+        '
+        'ucrInputFrom
+        '
+        Me.ucrInputFrom.AddQuotesIfUnrecognised = True
+        Me.ucrInputFrom.IsMultiline = False
+        Me.ucrInputFrom.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFrom, "ucrInputFrom")
+        Me.ucrInputFrom.Name = "ucrInputFrom"
+        '
+        'ucrNudBy
+        '
+        Me.ucrNudBy.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudBy.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudBy, "ucrNudBy")
+        Me.ucrNudBy.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudBy.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudBy.Name = "ucrNudBy"
+        Me.ucrNudBy.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlOption
+        '
+        resources.ApplyResources(Me.ucrPnlOption, "ucrPnlOption")
+        Me.ucrPnlOption.Name = "ucrPnlOption"
+        '
+        'ucrChkIncludePoints
+        '
+        Me.ucrChkIncludePoints.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludePoints, "ucrChkIncludePoints")
+        Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
+        '
+        'ucrChkCountsOnYAxis
+        '
+        Me.ucrChkCountsOnYAxis.Checked = False
+        resources.ApplyResources(Me.ucrChkCountsOnYAxis, "ucrChkCountsOnYAxis")
+        Me.ucrChkCountsOnYAxis.Name = "ucrChkCountsOnYAxis"
         '
         'ucrSaveCumDist
         '
@@ -109,91 +181,15 @@ Partial Class dlgCumulativeDistribution
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrChkCountsOnYAxis
-        '
-        Me.ucrChkCountsOnYAxis.Checked = False
-        resources.ApplyResources(Me.ucrChkCountsOnYAxis, "ucrChkCountsOnYAxis")
-        Me.ucrChkCountsOnYAxis.Name = "ucrChkCountsOnYAxis"
-        '
-        'ucrChkIncludePoints
-        '
-        Me.ucrChkIncludePoints.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludePoints, "ucrChkIncludePoints")
-        Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
-        '
-        'ucrPnlOption
-        '
-        resources.ApplyResources(Me.ucrPnlOption, "ucrPnlOption")
-        Me.ucrPnlOption.Name = "ucrPnlOption"
-        '
-        'rdoCumulative
-        '
-        resources.ApplyResources(Me.rdoCumulative, "rdoCumulative")
-        Me.rdoCumulative.Name = "rdoCumulative"
-        Me.rdoCumulative.TabStop = True
-        Me.rdoCumulative.UseVisualStyleBackColor = True
-        '
-        'rdoExceedance
-        '
-        resources.ApplyResources(Me.rdoExceedance, "rdoExceedance")
-        Me.rdoExceedance.Name = "rdoExceedance"
-        Me.rdoExceedance.TabStop = True
-        Me.rdoExceedance.UseVisualStyleBackColor = True
-        '
-        'lblFrom
-        '
-        resources.ApplyResources(Me.lblFrom, "lblFrom")
-        Me.lblFrom.Name = "lblFrom"
-        '
-        'ucrNudFrom
-        '
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudFrom, "ucrNudFrom")
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblTo
-        '
-        resources.ApplyResources(Me.lblTo, "lblTo")
-        Me.lblTo.Name = "lblTo"
-        '
-        'ucrNudTo
-        '
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTo, "ucrNudTo")
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblSequence
-        '
-        resources.ApplyResources(Me.lblSequence, "lblSequence")
-        Me.lblSequence.Name = "lblSequence"
-        '
-        'ucrNudBy
-        '
-        Me.ucrNudBy.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudBy.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudBy, "ucrNudBy")
-        Me.ucrNudBy.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudBy.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudBy.Name = "ucrNudBy"
-        Me.ucrNudBy.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'dlgCumulativeDistribution
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputTo)
+        Me.Controls.Add(Me.ucrInputFrom)
         Me.Controls.Add(Me.ucrNudBy)
         Me.Controls.Add(Me.lblSequence)
-        Me.Controls.Add(Me.ucrNudTo)
         Me.Controls.Add(Me.lblTo)
-        Me.Controls.Add(Me.ucrNudFrom)
         Me.Controls.Add(Me.lblFrom)
         Me.Controls.Add(Me.rdoExceedance)
         Me.Controls.Add(Me.rdoCumulative)
@@ -231,8 +227,8 @@ Partial Class dlgCumulativeDistribution
     Friend WithEvents rdoExceedance As RadioButton
     Friend WithEvents ucrNudBy As ucrNud
     Friend WithEvents lblSequence As Label
-    Friend WithEvents ucrNudTo As ucrNud
     Friend WithEvents lblTo As Label
-    Friend WithEvents ucrNudFrom As ucrNud
     Friend WithEvents lblFrom As Label
+    Friend WithEvents ucrInputFrom As ucrInputTextBox
+    Friend WithEvents ucrInputTo As ucrInputTextBox
 End Class

@@ -85,9 +85,12 @@ Public Class dlgCumulativeDistribution
         ucrVariablesAsFactorforCumDist.SetParameterIsString()
         ucrVariablesAsFactorforCumDist.bWithQuotes = False
 
-        ucrNudFrom.SetParameter(New RParameter("from"))
-        ucrNudFrom.SetMinMax(0, 0)
-        ucrNudTo.SetParameter(New RParameter("to"))
+        ucrInputFrom.SetToValue(0)
+        ucrInputFrom.Enabled = False
+        ucrInputFrom.SetParameter(New RParameter("from"))
+        ucrInputTo.SetToValue(1)
+        ucrInputTo.Enabled = False
+        ucrInputTo.SetParameter(New RParameter("to"))
         ucrNudBy.SetParameter(New RParameter("by"))
         ucrNudBy.DecimalPlaces = 2
         ucrNudBy.Increment = 0.01
@@ -177,8 +180,8 @@ Public Class dlgCumulativeDistribution
 
         ucrPnlOption.SetRCode(clsBaseOperator, bReset)
 
-        ucrNudFrom.SetRCode(clsSequence, bReset)
-        ucrNudTo.SetRCode(clsSequence, bReset)
+        ucrInputFrom.SetRCode(clsSequence, bReset)
+        ucrInputTo.SetRCode(clsSequence, bReset)
         ucrNudBy.SetRCode(clsSequence, bReset)
 
     End Sub
