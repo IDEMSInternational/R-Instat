@@ -179,9 +179,36 @@ Public Class dlgUseModel
     Private Sub cmdresiduals_Click(sender As Object, e As EventArgs) Handles cmdresiduals.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("residuals(object, ...)", 6)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("residuals(object=, ...)", 6)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("residuals()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSummaryFevd_click(sender As Object, e As EventArgs) Handles cmdSummaryFevd.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::summary.fevd(object=, ...)", 6)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::summary.fevd()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPlotFevd_click(sender As Object, e As EventArgs) Handles cmdPlotFevd.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::plot.fevd(x=, type = c(""primary"", ""probprob"", ""qq"", ""qq2"",""Zplot"", ""hist"", ""density"",""rl"", ""trace""), rperiods = c(2, 5, 10, 20, 50, 80, 100, 120, 200, 250, 300, 500, 800),a = 0, hist.args = NULL, density.args = NULL, d = NULL, ...)", 219)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::plot.fevd()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPrintFevd_click(sender As Object, e As EventArgs) Handles cmdPrintFevd.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::print.fevd(x=, ...)", 6)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::print.fevd()", 1)
         End If
     End Sub
 
