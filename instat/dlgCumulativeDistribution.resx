@@ -201,7 +201,7 @@
     <value>418, 447</value>
   </data>
   <data name="ucrNudBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 315</value>
+    <value>243, 315</value>
   </data>
   <data name="ucrNudBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -225,7 +225,7 @@
     <value>True</value>
   </data>
   <data name="lblSequence.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 312</value>
+    <value>175, 315</value>
   </data>
   <data name="lblSequence.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 13</value>
@@ -235,6 +235,9 @@
   </data>
   <data name="lblSequence.Text" xml:space="preserve">
     <value>In steps of:</value>
+  </data>
+  <data name="lblSequence.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;lblSequence.Name" xml:space="preserve">
     <value>lblSequence</value>
@@ -273,7 +276,7 @@
     <value>True</value>
   </data>
   <data name="lblTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>211, 285</value>
+    <value>211, 288</value>
   </data>
   <data name="lblTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 13</value>
@@ -283,6 +286,9 @@
   </data>
   <data name="lblTo.Text" xml:space="preserve">
     <value>To:</value>
+  </data>
+  <data name="lblTo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;lblTo.Name" xml:space="preserve">
     <value>lblTo</value>
@@ -321,7 +327,7 @@
     <value>True</value>
   </data>
   <data name="lblFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 258</value>
+    <value>201, 261</value>
   </data>
   <data name="lblFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
@@ -331,6 +337,9 @@
   </data>
   <data name="lblFrom.Text" xml:space="preserve">
     <value>From:</value>
+  </data>
+  <data name="lblFrom.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;lblFrom.Name" xml:space="preserve">
     <value>lblFrom</value>
