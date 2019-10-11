@@ -363,6 +363,9 @@
   <data name="rdoExceedance.Text" xml:space="preserve">
     <value>Exceedance</value>
   </data>
+  <data name="rdoExceedance.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
   <data name="&gt;&gt;rdoExceedance.Name" xml:space="preserve">
     <value>rdoExceedance</value>
   </data>
