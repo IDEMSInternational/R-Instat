@@ -18,7 +18,7 @@ Imports instat
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgUseModel
-    Private clsAttach, clsDetach As New RFunction
+
     Public bFirstLoad As Boolean = True
     Public bReset As Boolean = True
     Public bUpdating As Boolean = False
@@ -36,12 +36,13 @@ Public Class dlgUseModel
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrSaveResult.SetPrefix("model")
+        ucrSaveResult.SetPrefix("object")
         ucrSaveResult.SetIsComboBox()
         ucrSaveResult.SetSaveTypeAsModel()
-        ucrSaveResult.SetCheckBoxText("Save Model")
-        ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
+        ucrSaveResult.SetCheckBoxText("Save Output")
+        ucrSaveResult.SetAssignToIfUncheckedValue("last_object")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
+
 
         ucrReceiverForTestColumn.SetParameterIsRFunction()
         ucrReceiverForTestColumn.SetItemType("model")
@@ -61,8 +62,7 @@ Public Class dlgUseModel
 
     Private Sub SetDefaults()
         ' ucrBase.iHelpTopicID = 379
-        clsAttach = New RFunction
-        clsDetach = New RFunction
+
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -79,19 +79,11 @@ Public Class dlgUseModel
 
         ucrBase.clsRsyntax.SetCommandString("")
 
-        ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        ucrBase.clsRsyntax.SetAssignTo("last_object", strTempModel:="last_object", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
 
-        clsAttach.SetRCommand("attach")
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorUseModel.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
-        clsDetach.SetRCommand("detach")
-        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorUseModel.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        clsDetach.AddParameter("unload", "TRUE", iPosition:=1)
-
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach, 1)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach, 1000)
         ucrBase.clsRsyntax.iCallType = 2
         KeyboardsVisibility()
         GetModels()
@@ -104,27 +96,41 @@ Public Class dlgUseModel
 
     Private Sub TryScript()
         Dim strOutPut As String
-        Dim strAttach As String
-        Dim strDetach As String
         Dim strTempScript As String = ""
         Dim strVecOutput As CharacterVector
         Dim clsCommandString As RCodeStructure
+        Dim lstScripts As New List(Of String)
+        Dim strBeforeScript As String
+        Dim strBeforTemp As String
+        Dim clsCodeClone As RCodeStructure
 
         Try
             If ucrReceiverForTestColumn.IsEmpty Then
                 ucrInputTryMessage.SetName("")
             Else
-                'get strScript here
-                strAttach = clsAttach.Clone().ToScript(strTempScript)
-                frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
-                strTempScript = ""
+                For Each clsTempCode In ucrBase.clsRsyntax.lstBeforeCodes
+                    clsCodeClone = clsTempCode.Clone()
+                    strBeforeScript = ""
+                    strBeforTemp = clsCodeClone.ToScript(strBeforeScript)
+                    'Sometimes the output of the R-command we deal with should not be part of the script... That's only the case when this output has already been assigned.
+                    If clsCodeClone.bExcludeAssignedFunctionOutput AndAlso clsCodeClone.bIsAssigned Then
+                        lstScripts.Add(strBeforeScript)
+                    Else
+                        lstScripts.Add(strBeforeScript & strBeforTemp)
+                    End If
+                Next
+                strTempScript = String.Join(vbNewLine, lstScripts)
+                frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript, bSilent:=True)
+
                 clsCommandString = ucrBase.clsRsyntax.clsBaseCommandString.Clone()
                 clsCommandString.RemoveAssignTo()
-                strOutPut = clsCommandString.ToScript(strTempScript, ucrBase.clsRsyntax.strCommandString)
-                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript & strOutPut, bSilent:=True)
+                strOutPut = clsCommandString.ToScript("", ucrBase.clsRsyntax.strCommandString)
+                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strOutPut, bSilent:=True)
+
+
                 If strVecOutput IsNot Nothing Then
                     If strVecOutput.Length > 1 Then
-                        ucrInputTryMessage.SetName("Model runs without error")
+                        ucrInputTryMessage.SetName("Command runs without error")
                         ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
                     End If
                 Else
@@ -137,8 +143,7 @@ Public Class dlgUseModel
             ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
         Finally
             strTempScript = ""
-            strDetach = clsDetach.Clone().ToScript(strTempScript)
-            frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
+            frmMain.clsRLink.RunInternalScript(strTempScript, bSilent:=True)
         End Try
     End Sub
 

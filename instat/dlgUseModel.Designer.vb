@@ -47,6 +47,9 @@ Partial Class dlgUseModel
         Me.cmdCi = New System.Windows.Forms.Button()
         Me.cmdErlevd = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
+        Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.lblRpackage = New System.Windows.Forms.Label()
+        Me.ucrSaveResult = New instat.ucrSave()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrInputModels = New instat.ucrInputTextBox()
         Me.ucrSelectorUseModel = New instat.ucrSelectorByDataFrameAddRemove()
@@ -54,9 +57,6 @@ Partial Class dlgUseModel
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
-        Me.cmdHelp = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.ucrSaveResult = New instat.ucrSave()
         Me.grpGeneral.SuspendLayout()
         Me.grpPrediction.SuspendLayout()
         Me.grpExtrRemes.SuspendLayout()
@@ -354,6 +354,33 @@ Partial Class dlgUseModel
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
+        'cmdHelp
+        '
+        Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdHelp.Location = New System.Drawing.Point(460, 78)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(60, 23)
+        Me.cmdHelp.TabIndex = 33
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
+        'lblRpackage
+        '
+        Me.lblRpackage.AutoSize = True
+        Me.lblRpackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblRpackage.Location = New System.Drawing.Point(273, 83)
+        Me.lblRpackage.Name = "lblRpackage"
+        Me.lblRpackage.Size = New System.Drawing.Size(63, 13)
+        Me.lblRpackage.TabIndex = 36
+        Me.lblRpackage.Text = "R package:"
+        '
+        'ucrSaveResult
+        '
+        Me.ucrSaveResult.Location = New System.Drawing.Point(9, 309)
+        Me.ucrSaveResult.Name = "ucrSaveResult"
+        Me.ucrSaveResult.Size = New System.Drawing.Size(277, 24)
+        Me.ucrSaveResult.TabIndex = 35
+        '
         'ucrChkIncludeArguments
         '
         Me.ucrChkIncludeArguments.Checked = False
@@ -422,40 +449,13 @@ Partial Class dlgUseModel
         Me.ucrInputComboRPackage.Size = New System.Drawing.Size(122, 21)
         Me.ucrInputComboRPackage.TabIndex = 5
         '
-        'cmdHelp
-        '
-        Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdHelp.Location = New System.Drawing.Point(460, 78)
-        Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(60, 23)
-        Me.cmdHelp.TabIndex = 33
-        Me.cmdHelp.Text = "Help"
-        Me.cmdHelp.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button1.Location = New System.Drawing.Point(267, 77)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(71, 23)
-        Me.Button1.TabIndex = 34
-        Me.Button1.Text = "R Package"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'ucrSaveResult
-        '
-        Me.ucrSaveResult.Location = New System.Drawing.Point(9, 309)
-        Me.ucrSaveResult.Name = "ucrSaveResult"
-        Me.ucrSaveResult.Size = New System.Drawing.Size(277, 24)
-        Me.ucrSaveResult.TabIndex = 35
-        '
         'dlgUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(569, 393)
+        Me.Controls.Add(Me.lblRpackage)
         Me.Controls.Add(Me.ucrSaveResult)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.ucrChkIncludeArguments)
         Me.Controls.Add(Me.cmdClear)
@@ -517,6 +517,6 @@ Partial Class dlgUseModel
     Friend WithEvents cmdClear As Button
     Friend WithEvents ucrChkIncludeArguments As ucrCheck
     Friend WithEvents cmdHelp As Button
-    Friend WithEvents Button1 As Button
     Friend WithEvents ucrSaveResult As ucrSave
+    Friend WithEvents lblRpackage As Label
 End Class
