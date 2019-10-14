@@ -1965,4 +1965,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qpois()", 1)
         End If
     End Sub
+
+    Private Sub cmdQnbin_Click(sender As Object, e As EventArgs) Handles cmdQnbin.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnbinom(p = , size = , prob = , mu = , lower.tail = TRUE, log.p = FALSE))", 60)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnbinom()", 1)
+        End If
+    End Sub
 End Class
