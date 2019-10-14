@@ -96,7 +96,7 @@ Public Class dlgCumulativeDistribution
         ucrNudBy.SetParameter(New RParameter("by"))
         ucrNudBy.DecimalPlaces = 2
         ucrNudBy.Increment = 0.01
-        ucrNudBy.SetMinMax(0, 1)
+        ucrNudBy.SetMinMax((-1), 1)
 
         ucrChkCountsOnYAxis.SetText("Counts on Y Axis")
 
@@ -161,8 +161,6 @@ Public Class dlgCumulativeDistribution
         clsScaleYReverseFunc.SetPackageName("ggplot2")
         clsScaleYReverseFunc.SetRCommand("scale_y_reverse")
 
-
-
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
@@ -193,7 +191,10 @@ Public Class dlgCumulativeDistribution
 
         ucrInputFrom.SetRCode(clsSequence, bReset)
         ucrInputTo.SetRCode(clsSequence, bReset)
-        ucrNudBy.SetRCode(clsSequence, bReset)
+
+        ucrNudBy.AddAdditionalCodeParameterPair(clsSequence, New RParameter("by"), iAdditionalPairNo:=1)
+        ucrNudBy.AddAdditionalCodeParameterPair(clsReverse, New RParameter("by"), iAdditionalPairNo:=2)
+
 
     End Sub
 
