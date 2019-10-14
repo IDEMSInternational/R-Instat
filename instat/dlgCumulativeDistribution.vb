@@ -96,7 +96,9 @@ Public Class dlgCumulativeDistribution
         ucrNudBy.SetParameter(New RParameter("by"))
         ucrNudBy.DecimalPlaces = 2
         ucrNudBy.Increment = 0.01
-        ucrNudBy.SetMinMax((-1), 1)
+        ucrNudBy.Minimum = 0
+        ucrNudBy.Maximum = 1
+        ucrNudBy.Value = 0.25
 
         ucrChkCountsOnYAxis.SetText("Counts on Y Axis")
 
@@ -127,7 +129,7 @@ Public Class dlgCumulativeDistribution
         clsSequence.SetRCommand("seq")
         clsSequence.AddParameter("from", "0", iPosition:=0)
         clsSequence.AddParameter("to", "1", iPosition:=1)
-        clsSequence.AddParameter("by", "0.1", iPosition:=2)
+        clsSequence.AddParameter("by", "0.25", iPosition:=2)
 
         clsReverse = New RFunction
         clsReverse.SetRCommand("seq")
@@ -195,7 +197,6 @@ Public Class dlgCumulativeDistribution
         ucrNudBy.AddAdditionalCodeParameterPair(clsSequence, New RParameter("by"), iAdditionalPairNo:=1)
         ucrNudBy.AddAdditionalCodeParameterPair(clsReverse, New RParameter("by"), iAdditionalPairNo:=2)
 
-
     End Sub
 
     Private Sub TestOkEnabled()
@@ -206,14 +207,19 @@ Public Class dlgCumulativeDistribution
         End If
     End Sub
     Private Sub ChangeNumericUpDownValues()
+
         If rdoExceedance.Checked Then
             ucrInputFrom.SetToValue(1)
             ucrInputTo.SetToValue(0)
-            ucrNudBy.SetMinMax((-1), 0)
+            ucrNudBy.Minimum = -1
+            ucrNudBy.Maximum = 0
+            ucrNudBy.Value = -0.25
         Else
             ucrInputFrom.SetToValue(0)
             ucrInputTo.SetToValue(1)
-            ucrNudBy.SetMinMax(0, 1)
+            ucrNudBy.Minimum = 0
+            ucrNudBy.Maximum = 1
+            ucrNudBy.Value = 0.25
         End If
     End Sub
 
@@ -234,7 +240,6 @@ Public Class dlgCumulativeDistribution
     End Sub
 
     Private Sub ucrPnlOption_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOption.ControlValueChanged
-
         If rdoExceedance.Checked Then
             clsBaseOperator.RemoveParameterByName("Yscales")
             clsBaseOperator.AddParameter("reverseYscales", clsRFunctionParameter:=clsScaleYReverseFunc)
