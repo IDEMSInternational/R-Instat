@@ -1909,4 +1909,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbirthday()", 1)
         End If
     End Sub
+
+    Private Sub cmdPbinom_Click(sender As Object, e As EventArgs) Handles cmdPbinom.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbinom(q = , size = , prob = , lower.tail = TRUE, log.p = FALSE))", 54)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbinom()", 1)
+        End If
+    End Sub
 End Class
