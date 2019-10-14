@@ -1896,7 +1896,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPbeta_Click(sender As Object, e As EventArgs) Handles cmdPbeta.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbeta(q = , shape1 = , shape2 = , ncp = 0, lower.tail = TRUE, log.p = FALSE))", 67)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbeta(q = , shape1 = , shape2 = , ncp = 0, lower.tail = TRUE, log.p = FALSE))", 68)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbeta()", 1)
         End If
@@ -1904,7 +1904,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPbirth_Click(sender As Object, e As EventArgs) Handles cmdPbirth.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbirthday(n = , classes = 365, coincident = 2))", 33)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbirthday(n = , classes = 365, coincident = 2))", 34)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbirthday()", 1)
         End If
@@ -1912,7 +1912,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPbinom_Click(sender As Object, e As EventArgs) Handles cmdPbinom.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbinom(q = , size = , prob = , lower.tail = TRUE, log.p = FALSE))", 54)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbinom(q = , size = , prob = , lower.tail = TRUE, log.p = FALSE))", 55)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbinom()", 1)
         End If
@@ -1920,7 +1920,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPpois_Click(sender As Object, e As EventArgs) Handles cmdPpois.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ppois(q = , lambda = , lower.tail = TRUE, log.p = FALSE))", 47)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ppois(q = , lambda = , lower.tail = TRUE, log.p = FALSE))", 48)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ppois()", 1)
         End If
@@ -1928,7 +1928,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPnbin_Click(sender As Object, e As EventArgs) Handles cmdPnbin.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnbinom(q = , size = , prob = , mu = , lower.tail = TRUE, log.p = FALSE))", 61)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnbinom(q = , size = , prob = , mu = , lower.tail = TRUE, log.p = FALSE))", 62)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnbinom()", 1)
         End If
@@ -1936,7 +1936,7 @@ Public Class ucrCalculator
 
     Private Sub cmdQbeta_Click(sender As Object, e As EventArgs) Handles cmdQbeta.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbeta(p = , shape1 = , shape2 = , ncp = 0, lower.tail = TRUE, log.p = FALSE))", 78)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbeta(p = , shape1 = , shape2 = , ncp = 0, lower.tail = TRUE, log.p = FALSE))", 68)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbeta()", 1)
         End If
@@ -1944,7 +1944,7 @@ Public Class ucrCalculator
 
     Private Sub cmdQbirth_Click(sender As Object, e As EventArgs) Handles cmdQbirth.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbirthday(prob = 0.5, classes = 365, coincident = 2))", 36)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbirthday(prob = 0.5, classes = 365, coincident = 2))", 37)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbirthday()", 1)
         End If
@@ -1952,7 +1952,7 @@ Public Class ucrCalculator
 
     Private Sub cmdQbinom_Click(sender As Object, e As EventArgs) Handles cmdQbinom.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbinom(p = , size = , prob = , lower.tail = TRUE, log.p = FALSE))", 54)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbinom(p = , size = , prob = , lower.tail = TRUE, log.p = FALSE))", 55)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbinom()", 1)
         End If
@@ -1960,7 +1960,7 @@ Public Class ucrCalculator
 
     Private Sub cmdQpois_Click(sender As Object, e As EventArgs) Handles cmdQpois.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qpois(p = , lambda = , lower.tail = TRUE, log.p = FALSE))", 47)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qpois(p = , lambda = , lower.tail = TRUE, log.p = FALSE))", 48)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qpois()", 1)
         End If
@@ -1968,7 +1968,7 @@ Public Class ucrCalculator
 
     Private Sub cmdQnbin_Click(sender As Object, e As EventArgs) Handles cmdQnbin.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnbinom(p = , size = , prob = , mu = , lower.tail = TRUE, log.p = FALSE))", 60)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnbinom(p = , size = , prob = , mu = , lower.tail = TRUE, log.p = FALSE))", 62)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnbinom()", 1)
         End If
@@ -1976,7 +1976,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPgamma_Click(sender As Object, e As EventArgs) Handles cmdPgamma.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pgamma(q = , shape = , rate = 1, scale = 1/rate, lower.tail = TRUE, log.p = FALSE))", 82)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pgamma(q = , shape = , rate = 1, scale = 1/rate, lower.tail = TRUE, log.p = FALSE))", 73)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pgamma()", 1)
         End If
@@ -1984,7 +1984,7 @@ Public Class ucrCalculator
 
     Private Sub cmdQgamma_Click(sender As Object, e As EventArgs) Handles cmdQgamma.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qgamma(p = , shape = , rate = 1, scale = 1/rate, lower.tail = TRUE, log.p = FALSE))", 82)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qgamma(p = , shape = , rate = 1, scale = 1/rate, lower.tail = TRUE, log.p = FALSE))", 73)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qgamma()", 1)
         End If
