@@ -31,10 +31,12 @@ Public Class dlgCumulativeDistribution
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private clsSequence As New RFunction
+    Private clsReverse As New RFunction
     Private clsScaleYReverseFunc As New RFunction
     Private bReset As Boolean = True
     Private strFirstParameterName As String = "stat_ecdf"
     Private strYScleParameterName As String = "Yscales"
+    Private strYScaleReverseParamName As String = "reverseYscales"
     Private strGeomParameterNames() As String = {strFirstParameterName, strYScleParameterName}
 
     Private Sub dlgCumulativeDistribution_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -127,6 +129,12 @@ Public Class dlgCumulativeDistribution
         clsSequence.AddParameter("to", "1", iPosition:=1)
         clsSequence.AddParameter("by", "0.1", iPosition:=2)
 
+        clsReverse = New RFunction
+        clsReverse.SetRCommand("seq")
+        clsReverse.AddParameter("from", "1", iPosition:=0)
+        clsReverse.AddParameter("to", "0", iPosition:=1)
+        clsReverse.AddParameter("by", "-0.25", iPosition:=2)
+
         ucrCumDistSelector.Reset()
         ucrCumDistSelector.SetGgplotFunction(clsBaseOperator)
         ucrCumDistSelector.Focus()
@@ -152,7 +160,7 @@ Public Class dlgCumulativeDistribution
 
         clsScaleYReverseFunc.SetPackageName("ggplot2")
         clsScaleYReverseFunc.SetRCommand("scale_y_reverse")
-        clsScaleYReverseFunc.AddParameter("breaks", "seq(1,0,-0.25), labels = seq(0,1,0.25)")
+
 
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
@@ -164,6 +172,9 @@ Public Class dlgCumulativeDistribution
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+
+        clsScaleYReverseFunc.AddParameter("breaks", clsRFunctionParameter:=clsReverse)
+        clsBaseOperator.AddParameter(strYScaleReverseParamName, clsRFunctionParameter:=clsScaleYReverseFunc, bIncludeArgumentName:=False)
 
         clsYScalecontinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSequence)
         clsBaseOperator.AddParameter(strYScleParameterName, clsRFunctionParameter:=clsYScalecontinuousFunction, bIncludeArgumentName:=False)
