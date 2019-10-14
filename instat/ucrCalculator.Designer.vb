@@ -1959,7 +1959,6 @@ Partial Class ucrCalculator
         '
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
         Me.grpWakefield.Controls.Add(Me.cmdValid)
-        Me.grpWakefield.Controls.Add(Me.grpLogical)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
         Me.grpWakefield.Controls.Add(Me.cmdString)
         Me.grpWakefield.Controls.Add(Me.cmdState)
@@ -2081,7 +2080,6 @@ Partial Class ucrCalculator
         Me.grpCircular.Controls.Add(Me.cmdCircular)
         Me.grpCircular.Controls.Add(Me.cmdCircQuantile)
         Me.grpCircular.Controls.Add(Me.cmdCircMax)
-        Me.grpCircular.Controls.Add(Me.grpMaths)
         Me.grpCircular.Controls.Add(Me.cmdA1)
         Me.grpCircular.Controls.Add(Me.cmdAngVar)
         Me.grpCircular.Controls.Add(Me.cmdCircRho)
@@ -2240,6 +2238,8 @@ Partial Class ucrCalculator
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
+        Me.Controls.Add(Me.grpLogical)
+        Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpTransform)
