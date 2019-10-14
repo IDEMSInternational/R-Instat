@@ -1941,4 +1941,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbeta()", 1)
         End If
     End Sub
+
+    Private Sub cmdQbirth_Click(sender As Object, e As EventArgs) Handles cmdQbirth.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbirthday(prob = 0.5, classes = 365, coincident = 2))", 36)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbirthday()", 1)
+        End If
+    End Sub
 End Class
