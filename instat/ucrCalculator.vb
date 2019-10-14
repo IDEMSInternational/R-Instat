@@ -66,6 +66,8 @@ Public Class ucrCalculator
         bControlsInitialised = True
         ttCalculator.SetToolTip(cmdRound, "round(x) to round to whole numbers, round(x,2) to round to 2 decimal places, round(x,-2) to round to the nearest 100")
         ttCalculator.SetToolTip(cmdSiginf, "signif(x,3) to round to 3 significant figures")
+        ttCalculator.SetToolTip(cmdPnorm, "(pnorm: normal probabilities. For example: pnorm(-1.6449) = 0.05; pnorm(130,100,15) = 0.9772.")
+        ttCalculator.SetToolTip(cmdPt, "pt: t probabilities. For example pt(-2,5) = 0.051; pt(-2,1000) = 0.0229 ~ pnorm(-2)")
     End Sub
 
     Public Sub Reset()
