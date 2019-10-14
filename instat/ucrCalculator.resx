@@ -6364,7 +6364,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdGamma.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 277</value>
+    <value>253, 162</value>
   </data>
   <data name="cmdGamma.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -6397,7 +6397,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdLbeta.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 238</value>
+    <value>171, 198</value>
   </data>
   <data name="cmdLbeta.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -6463,7 +6463,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdFact.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 193</value>
+    <value>7, 162</value>
   </data>
   <data name="cmdFact.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -6496,7 +6496,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdChoose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 232</value>
+    <value>89, 162</value>
   </data>
   <data name="cmdChoose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -6595,13 +6595,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdLgamma.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 277</value>
+    <value>253, 198</value>
   </data>
   <data name="cmdLgamma.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="cmdLgamma.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 37</value>
+    <value>83, 37</value>
   </data>
   <data name="cmdLgamma.TabIndex" type="System.Int32, mscorlib">
     <value>152</value>
@@ -6793,13 +6793,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdLchoose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 229</value>
+    <value>89, 198</value>
   </data>
   <data name="cmdLchoose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="cmdLchoose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 37</value>
+    <value>83, 37</value>
   </data>
   <data name="cmdLchoose.TabIndex" type="System.Int32, mscorlib">
     <value>151</value>
@@ -6826,13 +6826,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdLfact.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 229</value>
+    <value>7, 198</value>
   </data>
   <data name="cmdLfact.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="cmdLfact.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 37</value>
+    <value>83, 37</value>
   </data>
   <data name="cmdLfact.TabIndex" type="System.Int32, mscorlib">
     <value>150</value>
@@ -6859,7 +6859,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdTrigamma.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 277</value>
+    <value>335, 198</value>
   </data>
   <data name="cmdTrigamma.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -6892,7 +6892,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdBeta.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 229</value>
+    <value>171, 162</value>
   </data>
   <data name="cmdBeta.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -6925,13 +6925,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDigamma.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 277</value>
+    <value>335, 162</value>
   </data>
   <data name="cmdDigamma.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="cmdDigamma.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 37</value>
+    <value>83, 37</value>
   </data>
   <data name="cmdDigamma.TabIndex" type="System.Int32, mscorlib">
     <value>164</value>
@@ -6961,7 +6961,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="grpProbabilty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>449, 342</value>
+    <value>422, 247</value>
   </data>
   <data name="grpProbabilty.TabIndex" type="System.Int32, mscorlib">
     <value>187</value>
