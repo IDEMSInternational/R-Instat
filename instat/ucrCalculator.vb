@@ -68,6 +68,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdSiginf, "signif(x,3) to round to 3 significant figures")
         ttCalculator.SetToolTip(cmdPnorm, "(pnorm: normal probabilities. For example: pnorm(-1.6449) = 0.05; pnorm(130,100,15) = 0.9772.")
         ttCalculator.SetToolTip(cmdPt, "pt: t probabilities. For example pt(-2,5) = 0.051; pt(-2,1000) = 0.0229 ~ pnorm(-2)")
+        ttCalculator.SetToolTip(cmdPChisq, "pchisq: chi square probabilities. For example pchisq(5,1) = 0.9747; pchisq(5,10) = 0.1088")
     End Sub
 
     Public Sub Reset()
