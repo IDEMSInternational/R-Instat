@@ -304,6 +304,11 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.cmdPgamma = New System.Windows.Forms.Button()
         Me.cmdQgamma = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1299,6 +1304,11 @@ Partial Class ucrCalculator
         '
         'grpProbabilty
         '
+        Me.grpProbabilty.Controls.Add(Me.Button6)
+        Me.grpProbabilty.Controls.Add(Me.Button5)
+        Me.grpProbabilty.Controls.Add(Me.Button4)
+        Me.grpProbabilty.Controls.Add(Me.Button2)
+        Me.grpProbabilty.Controls.Add(Me.Button3)
         Me.grpProbabilty.Controls.Add(Me.cmdQgamma)
         Me.grpProbabilty.Controls.Add(Me.cmdPgamma)
         Me.grpProbabilty.Controls.Add(Me.cmdGamma)
@@ -2154,6 +2164,36 @@ Partial Class ucrCalculator
         Me.cmdQgamma.Name = "cmdQgamma"
         Me.cmdQgamma.UseVisualStyleBackColor = True
         '
+        'Button3
+        '
+        resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.Name = "Button3"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Name = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        resources.ApplyResources(Me.Button4, "Button4")
+        Me.Button4.Name = "Button4"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        resources.ApplyResources(Me.Button5, "Button5")
+        Me.Button5.Name = "Button5"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        resources.ApplyResources(Me.Button6, "Button6")
+        Me.Button6.Name = "Button6"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
@@ -2457,4 +2497,9 @@ Partial Class ucrCalculator
     Friend WithEvents cmdCircular As Button
     Friend WithEvents cmdQgamma As Button
     Friend WithEvents cmdPgamma As Button
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
 End Class
