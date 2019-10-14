@@ -1901,4 +1901,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbeta()", 1)
         End If
     End Sub
+
+    Private Sub cmdPbirth_Click(sender As Object, e As EventArgs) Handles cmdPbirth.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbirthday(n = , classes = 365, coincident = 2))", 33)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbirthday()", 1)
+        End If
+    End Sub
 End Class
