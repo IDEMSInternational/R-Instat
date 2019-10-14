@@ -1933,4 +1933,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnbinom()", 1)
         End If
     End Sub
+
+    Private Sub cmdQbeta_Click(sender As Object, e As EventArgs) Handles cmdQbeta.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbeta(p = , shape1 = , shape2 = , ncp = 0, lower.tail = TRUE, log.p = FALSE))", 78)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbeta()", 1)
+        End If
+    End Sub
 End Class
