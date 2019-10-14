@@ -1973,4 +1973,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnbinom()", 1)
         End If
     End Sub
+
+    Private Sub cmdPgamma_Click(sender As Object, e As EventArgs) Handles cmdPgamma.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pgamma(q = , shape = , rate = 1, scale = 1/rate, lower.tail = TRUE, log.p = FALSE))", 60)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pgamma()", 1)
+        End If
+    End Sub
 End Class
