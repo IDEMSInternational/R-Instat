@@ -1893,4 +1893,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::circular(x =, modulo = ""2pi"", units = ""radians"")", 36)
         End If
     End Sub
+
+    Private Sub cmdPbeta_Click(sender As Object, e As EventArgs) Handles cmdPbeta.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbeta(q = , shape1 = , shape2 = , ncp = 0, lower.tail = TRUE, log.p = FALSE))", 67)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbeta()", 1)
+        End If
+    End Sub
 End Class
