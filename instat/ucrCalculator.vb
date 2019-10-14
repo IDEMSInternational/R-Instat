@@ -1925,4 +1925,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ppois()", 1)
         End If
     End Sub
+
+    Private Sub cmdPnbin_Click(sender As Object, e As EventArgs) Handles cmdPnbin.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnbinom(q = , size = , prob = , mu = , lower.tail = TRUE, log.p = FALSE))", 61)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnbinom()", 1)
+        End If
+    End Sub
 End Class
