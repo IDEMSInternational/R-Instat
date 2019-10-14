@@ -1957,4 +1957,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbinom()", 1)
         End If
     End Sub
+
+    Private Sub cmdQpois_Click(sender As Object, e As EventArgs) Handles cmdQpois.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qpois(p = , lambda = , lower.tail = TRUE, log.p = FALSE))", 47)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qpois()", 1)
+        End If
+    End Sub
 End Class
