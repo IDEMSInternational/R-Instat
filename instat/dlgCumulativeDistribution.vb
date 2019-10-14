@@ -205,6 +205,17 @@ Public Class dlgCumulativeDistribution
             ucrBase.OKEnabled(True)
         End If
     End Sub
+    Private Sub ChangeNumericUpDownValues()
+        If rdoExceedance.Checked Then
+            ucrInputFrom.SetToValue(1)
+            ucrInputTo.SetToValue(0)
+            ucrNudBy.SetMinMax((-1), 0)
+        Else
+            ucrInputFrom.SetToValue(0)
+            ucrInputTo.SetToValue(1)
+            ucrNudBy.SetMinMax(0, 1)
+        End If
+    End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -231,6 +242,6 @@ Public Class dlgCumulativeDistribution
             clsBaseOperator.RemoveParameterByName("reverseYscales")
             clsBaseOperator.AddParameter("Yscales", clsRFunctionParameter:=clsYScalecontinuousFunction, bIncludeArgumentName:=False)
         End If
-
+        ChangeNumericUpDownValues()
     End Sub
 End Class
