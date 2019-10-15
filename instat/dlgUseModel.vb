@@ -148,10 +148,11 @@ Public Class dlgUseModel
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Object)
+        ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverForTestColumn.IsEmpty Then
+        If ucrSaveResult.IsComplete AndAlso Not ucrReceiverForTestColumn.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -439,6 +440,10 @@ Public Class dlgUseModel
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ucrReceiverForTestColumn.AddtoCombobox(ucrReceiverForTestColumn.GetText)
+    End Sub
+
+    Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverForTestColumn.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 
 End Class
