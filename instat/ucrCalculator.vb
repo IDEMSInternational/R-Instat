@@ -66,11 +66,11 @@ Public Class ucrCalculator
         bControlsInitialised = True
         ttCalculator.SetToolTip(cmdRound, "round(x) to round to whole numbers, round(x,2) to round to 2 decimal places, round(x,-2) to round to the nearest 100")
         ttCalculator.SetToolTip(cmdSiginf, "signif(x,3) to round to 3 significant figures")
-        ttCalculator.SetToolTip(cmdPnorm, "(pnorm: normal probabilities. For example: pnorm(-1.6449) = 0.05; pnorm(130,100,15) = 0.9772.")
-        ttCalculator.SetToolTip(cmdPt, "pt: t probabilities. For example pt(-2,5) = 0.051; pt(-2,1000) = 0.0229 ~ pnorm(-2)")
-        ttCalculator.SetToolTip(cmdPChisq, "pchisq: chi square probabilities. For example pchisq(5,1) = 0.9747; pchisq(5,10) = 0.1088")
-        ttCalculator.SetToolTip(cmdPf, "pf: F probabilities. For example pf(2,1,10) = 0.8123; pf(2,50,50) = 0.9921")
-        ttCalculator.SetToolTip(cmdQnorm, "qnorm: normal quantiles. For example qnorm(0.05) = -1.6449; qnorm(0.9772, 100,15) = 130")
+        ttCalculator.SetToolTip(cmdPnorm, "(normal probabilities. For example; pnorm(-1.6449) = 0.05; pnorm(130,100,15) = 0.9772.")
+        ttCalculator.SetToolTip(cmdPt, " t probabilities. For example pt(-2,5) = 0.051; pt(-2,1000) = 0.0229 ~ pnorm(-2)")
+        ttCalculator.SetToolTip(cmdPChisq, "chi square probabilities. For example pchisq(5,1) = 0.9747; pchisq(5,10) = 0.1088")
+        ttCalculator.SetToolTip(cmdPf, "F probabilities. For example pf(2,1,10) = 0.8123; pf(2,50,50) = 0.9921")
+        ttCalculator.SetToolTip(cmdQnorm, "qnormal quantiles. For example qnorm(0.05) = -1.6449; qnorm(0.9772, 100,15) = 130")
     End Sub
 
     Public Sub Reset()
