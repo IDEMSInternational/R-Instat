@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgClimaticStationMaps
     Private bFirstLoad As Boolean = True
@@ -61,6 +62,7 @@ Public Class dlgClimaticStationMaps
         ucrSelectorStation.SetParameter(New RParameter("data", 0))
         ucrSelectorStation.SetParameterIsrfunction()
 
+
         ucrReceiverFill.SetParameter(New RParameter("fill", 0))
         ucrReceiverFill.Selector = ucrSelectorOutline
         ucrReceiverFill.SetParameterIsString()
@@ -107,6 +109,9 @@ Public Class dlgClimaticStationMaps
         ucrSaveMap.SetAssignToIfUncheckedValue("last_map")
         ucrSaveMap.SetDataFrameSelector(ucrSelectorOutline.ucrAvailableDataFrames)
 
+        ucrChkAddPoints.SetText("Add Points")
+        ChangeSize()
+
     End Sub
 
     Private Sub SetDefaults()
@@ -145,7 +150,7 @@ Public Class dlgClimaticStationMaps
 
         clsGeomPointFunction.SetPackageName("ggplot2")
         clsGeomPointFunction.SetRCommand("geom_point")
-        clsGeomPointFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomPointAesFunction,iPosition:=1)
+        clsGeomPointFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomPointAesFunction, iPosition:=1)
 
         clsGeomPointAesFunction.SetPackageName("ggplot2")
         clsGeomPointAesFunction.SetRCommand("aes")
@@ -167,7 +172,7 @@ Public Class dlgClimaticStationMaps
 
         clsLabelRepelAesFunction.SetPackageName("ggplot2")
         clsLabelRepelAesFunction.SetRCommand("aes")
-        clsLabelRepelFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelRepelAesFunction,iPosition:=1)
+        clsLabelRepelFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelRepelAesFunction, iPosition:=1)
 
 
         clsGGplotOperator.SetOperation("+")
@@ -227,10 +232,15 @@ Public Class dlgClimaticStationMaps
         Next
     End Sub
 
+
     Private Sub cmdMapOptions_Click(sender As Object, e As EventArgs) Handles cmdMapOptions.Click
         sdgMapOption.SetRCode(clsBaseOperator:=clsGGplotOperator, clsXlim:=clsXlimFunction, clsylim:=clsYlimFunction, bReset:=bResetSubdialog)
         sdgMapOption.ShowDialog()
         bResetSubdialog = False
+    End Sub
+
+    Private Sub ucrChkAddPoints_Load(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub TestOkEnabled()
@@ -283,11 +293,25 @@ Public Class dlgClimaticStationMaps
         End If
     End Sub
 
+    Private Sub ChangeSize()
+        If ucrChkAddPoints.Checked Then
+            grpPoints.Visible = True
+            Me.Size = New Size(772, 495)
+        Else
+            grpPoints.Visible = False
+            Me.Size = New Size(443, 495)
+        End If
+    End Sub
+
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
         If Not ucrReceiverStation.IsEmpty Then
             clsGGplotOperator.AddParameter("geom_label_repel", clsRFunctionParameter:=clsLabelRepelFunction, bIncludeArgumentName:=False, iPosition:=2)
         Else
             clsGGplotOperator.RemoveParameterByName("geom_label_repel")
         End If
+    End Sub
+
+    Private Sub ucrChkAddPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddPoints.ControlValueChanged
+        ChangeSize()
     End Sub
 End Class
