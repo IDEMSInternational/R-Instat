@@ -81,6 +81,9 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdQnbin, "negative binomial quantiles. Fro example qnbinom(0.9,1,0.4) = 4 (geometric); qnbinom(0.9, 5,0.4) = 13")
         ttCalculator.SetToolTip(cmdFact, "factorial. For example factorial(4) = 432*1 = 24; factorial(3.5) = gamma(4.5) = 11.63")
         ttCalculator.SetToolTip(cmdLfact, "log factorial. For example lfactorial(400) = 2001")
+        ttCalculator.SetToolTip(cmdChoose, "binomial coefficient. For example choose(7,4) = 7!/(4!*3!) = 35")
+        ttCalculator.SetToolTip(cmdLchoose, "log binomial coefficient. For example lchoose(700,400) = 474.5")
+
     End Sub
 
     Public Sub Reset()
