@@ -79,7 +79,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdQpois, "Poisson quantiles. For example qpois(0.9, 5) = 8")
         ttCalculator.SetToolTip(cmdPnbin, "negative binomial probabilities. For example pnbinom(4,1,0.4) = 0.922 (geometric); pnbinom(13,5,0.4) = 0.9058")
         ttCalculator.SetToolTip(cmdQnbin, "negative binomial quantiles. Fro example qnbinom(0.9,1,0.4) = 4 (geometric); qnbinom(0.9, 5,0.4) = 13")
-
+        ttCalculator.SetToolTip(cmdFact, "factorial. For example factorial(4) = 432*1 = 24; factorial(3.5) = gamma(4.5) = 11.63")
+        ttCalculator.SetToolTip(cmdLfact, "log factorial. For example lfactorial(400) = 2001")
     End Sub
 
     Public Sub Reset()
