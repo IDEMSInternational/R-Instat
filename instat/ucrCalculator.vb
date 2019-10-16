@@ -720,17 +720,17 @@ Public Class ucrCalculator
 
     Private Sub cmdPChisq_Click(sender As Object, e As EventArgs) Handles cmdPChisq.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq(q= , df= , lower.tail = TRUE)", 26)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq(q = , df = , ncp = 0, lower.tail = TRUE, log.p = FALSE)", 51)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pt()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq()", 1)
         End If
     End Sub
 
     Private Sub cmdPf_Click(sender As Object, e As EventArgs) Handles cmdPf.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq(q= , df= , lower.tail = TRUE)", 26)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pf(q = , df1 = , df2 = , ncp = , lower.tail = TRUE, log.p = FALSE)", 59)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pf()", 1)
         End If
     End Sub
 
