@@ -87,6 +87,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdLbeta, "log beta function. For example lbeta(100,40) = -84.51")
         ttCalculator.SetToolTip(cmdGamma, "gamma function. For example gamma(8) = fact(7) = 5040")
         ttCalculator.SetToolTip(cmdLgamma, " log gamma function. For example lgamma(800) = 4545")
+        ttCalculator.SetToolTip(cmdDigamma, "digamma function. For example digamma(1) = -0.5772 (Euler's constant)")
+        ttCalculator.SetToolTip(cmdTrigamma, "trigamma function. For example trigamma(1) = 1.645 (pipi/6)")
     End Sub
 
     Public Sub Reset()
