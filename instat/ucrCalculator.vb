@@ -1108,7 +1108,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMovMax_Click(sender As Object, e As EventArgs) Handles cmdMovMax.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax(x= , k=3)", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax(x= , k=3, fill = if (na.pad) NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 89)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax()", 1)
         End If
@@ -1116,7 +1116,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMovSum_Click(sender As Object, e As EventArgs) Handles cmdMovSum.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum(x= , k=3)", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum(x= , k=3, fill = if (na.pad) NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 89)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum()", 1)
         End If
@@ -1136,7 +1136,7 @@ Public Class ucrCalculator
 
     Private Sub cmdmovemean_Click(sender As Object, e As EventArgs) Handles cmdmovemean.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmean(x= , k=3)", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmean(x= , k=3, fill = if (na.pad) NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 89)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmean()", 1)
         End If
