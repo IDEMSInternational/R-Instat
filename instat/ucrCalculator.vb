@@ -71,6 +71,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdDiff, "difference between successive elements. For example diff(c(1,4,3,7)) = (NA 3,-1,4)")
         ttCalculator.SetToolTip(cmdpmax, "maximum of a set of variables. For examples pmax(c(1,3,5),c(6,4,2)) = (6,4,5)")
         ttCalculator.SetToolTip(cmdPMin, "minimum of a set of variables. For examples pmin(c(1,3,5),c(6,4,2)) = (1,3,2)")
+        ttCalculator.SetToolTip(cmdEcdf, "Proportion of values less than or equal to the current rank. For example cume_dist(c(2,4,6,8,3)) = (0.2, 0.6, 0.8, 1.0, 0.4)")
+
     End Sub
 
     Public Sub Reset()
