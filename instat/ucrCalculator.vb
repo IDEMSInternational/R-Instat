@@ -74,6 +74,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdEcdf, "Proportion of values less than or equal to the current rank. For example cume_dist(c(2,4,6,8,3)) = (0.2, 0.6, 0.8, 1.0, 0.4)")
         ttCalculator.SetToolTip(cmdcummax, "cumulative maxima. For example cummax(c(3,2,1,4,0)) = (3,3,3,4,4)")
         ttCalculator.SetToolTip(cmdMovMax, "moving (or rolling) maxima. For example rollmax(x=c(3,2,1,4,0) ,3,fill=NA, align=""right"") = (NA,NA, 3,4,4)")
+        ttCalculator.SetToolTip(cmdMovSum, "moving (or rolling) totals. For example rollsum(x=c(3,2,1,4,0) ,3,fill=NA, align=""left"") = (6,7,5,NA,NA)")
 
     End Sub
 
