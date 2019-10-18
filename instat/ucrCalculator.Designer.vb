@@ -309,11 +309,6 @@ Partial Class ucrCalculator
         Me.cmdMedianHL = New System.Windows.Forms.Button()
         Me.cmdCircMedian = New System.Windows.Forms.Button()
         Me.cmdCircMean = New System.Windows.Forms.Button()
-        Me.ucrInputCalOptions = New instat.ucrInputComboBox()
-        Me.ucrSaveResultInto = New instat.ucrInputComboBox()
-        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
-        Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -2193,45 +2188,6 @@ Partial Class ucrCalculator
         Me.cmdCircMean.Name = "cmdCircMean"
         Me.cmdCircMean.UseVisualStyleBackColor = True
         '
-        'ucrInputCalOptions
-        '
-        Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
-        Me.ucrInputCalOptions.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputCalOptions, "ucrInputCalOptions")
-        Me.ucrInputCalOptions.Name = "ucrInputCalOptions"
-        '
-        'ucrSaveResultInto
-        '
-        Me.ucrSaveResultInto.AddQuotesIfUnrecognised = True
-        Me.ucrSaveResultInto.IsReadOnly = False
-        resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
-        Me.ucrSaveResultInto.Name = "ucrSaveResultInto"
-        '
-        'ucrInputTryMessage
-        '
-        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
-        Me.ucrInputTryMessage.IsMultiline = False
-        Me.ucrInputTryMessage.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputTryMessage, "ucrInputTryMessage")
-        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
-        '
-        'ucrSelectorForCalculations
-        '
-        Me.ucrSelectorForCalculations.bDropUnusedFilterLevels = False
-        Me.ucrSelectorForCalculations.bShowHiddenColumns = False
-        Me.ucrSelectorForCalculations.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForCalculations, "ucrSelectorForCalculations")
-        Me.ucrSelectorForCalculations.Name = "ucrSelectorForCalculations"
-        '
-        'ucrReceiverForCalculation
-        '
-        Me.ucrReceiverForCalculation.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverForCalculation, "ucrReceiverForCalculation")
-        Me.ucrReceiverForCalculation.Name = "ucrReceiverForCalculation"
-        Me.ucrReceiverForCalculation.Selector = Nothing
-        Me.ucrReceiverForCalculation.strNcFilePath = ""
-        Me.ucrReceiverForCalculation.ucrSelector = Nothing
-        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
@@ -2239,22 +2195,17 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpLogical)
-        Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.chkShowArguments)
-        Me.Controls.Add(Me.ucrInputCalOptions)
         Me.Controls.Add(Me.grpBasic)
-        Me.Controls.Add(Me.ucrSaveResultInto)
         Me.Controls.Add(Me.chkSaveResultInto)
-        Me.Controls.Add(Me.ucrInputTryMessage)
         Me.Controls.Add(Me.cmdTry)
-        Me.Controls.Add(Me.ucrSelectorForCalculations)
-        Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
         Me.Name = "ucrCalculator"
         Me.grpBasic.ResumeLayout(False)
