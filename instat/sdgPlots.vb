@@ -78,7 +78,7 @@ Public Class sdgPlots
         Dim clsCoordEqualParam As New RParameter
 
         ucrBaseSubdialog.iHelpTopicID = 136
-        'facets tab 
+        'facets tab  
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
@@ -349,7 +349,9 @@ Public Class sdgPlots
         clsThemeFunction = clsNewThemeFunction
         clsCoordPolarFunc = clsNewCoordPolarFunction
         clsCoordPolarStartOperator = clsNewCoordPolarStartOperator
-        clsCoordPolarFunc.AddParameter("start", clsROperatorParameter:=clsCoordPolarStartOperator, iPosition:=1)
+        If Not IsNothing(clsCoordPolarStartOperator) Then
+            clsCoordPolarFunc.AddParameter("start", clsROperatorParameter:=clsCoordPolarStartOperator, iPosition:=1)
+        End If
         dctThemeFunctions = dctNewThemeFunctions
         dctThemeFunctions.TryGetValue("axis.text.x", clsXElementText)
         dctThemeFunctions.TryGetValue("axis.title.x", clsXElementTitle)
