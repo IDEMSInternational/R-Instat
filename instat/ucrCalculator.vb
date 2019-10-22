@@ -1903,4 +1903,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::circular(x =, modulo = ""2pi"", units = ""radians"")", 36)
         End If
     End Sub
+
+    Private Sub cmdMovmin_Click(sender As Object, e As EventArgs) Handles cmdMovmin.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply(data = , width = , FUN = min, by = 1, by.column = TRUE, fill = if (na.pad) NA, na.pad = FALSE, partial = FALSE, align = c(""center"", ""left"", ""right""), coredata = TRUE))", 177)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum()", 1)
+        End If
+    End Sub
 End Class
