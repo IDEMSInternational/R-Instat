@@ -210,6 +210,54 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_statsummary)
 
+        Dim clsgeom_statpeaks As New Geoms
+
+        clsgeom_statpeaks.SetGeomPackage("ggpmisc")
+        clsgeom_statpeaks.SetGeomName("stat_peaks")
+
+        'add aes parameter
+        clsgeom_statpeaks.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_statpeaks.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
+
+        'add layer parameter
+        clsgeom_statpeaks.AddLayerParameter("geom", "list", Chr(34) & "point" & Chr(34), lstParameterStrings:={Chr(34) & "point" & Chr(34), Chr(34) & "text" & Chr(34), Chr(34) & "label" & Chr(34), Chr(34) & "line" & Chr(34), Chr(34) & "rug" & Chr(34), Chr(34) & "hline" & Chr(34), Chr(34) & "vline" & Chr(34)})
+        clsgeom_statpeaks.AddLayerParameter("span", "list", Chr(34) & "5" & Chr(34), lstParameterStrings:={Chr(34) & "5" & Chr(34), Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statpeaks.AddLayerParameter("ignore_threshold", "numeric", "0", lstParameterStrings:={1, 0, 1})
+        clsgeom_statpeaks.AddLayerParameter("strict", "boolean", "FALSE")
+        clsgeom_statpeaks.AddLayerParameter("label.fmt", "editablelist", Chr(34) & "%.4g" & Chr(34), lstParameterStrings:={Chr(34) & "%.4g" & Chr(34)})
+        clsgeom_statpeaks.AddLayerParameter("x.label.fmt", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statpeaks.AddLayerParameter("y.label.fmt", "editablelist", Chr(34) & "label.fmt" & Chr(34), lstParameterStrings:={Chr(34) & "label.fmt" & Chr(34)})
+        clsgeom_statpeaks.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_statpeaks.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_statpeaks.AddLayerParameter("show.legend", "list", "FALSE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_statpeaks.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+
+        lstAllGeoms.Add(clsgeom_statpeaks)
+
+        Dim clsgeom_statvalleys As New Geoms
+
+        clsgeom_statvalleys.SetGeomPackage("ggpmisc")
+        clsgeom_statvalleys.SetGeomName("stat_valleys")
+
+        'add aes parameter
+        clsgeom_statvalleys.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_statvalleys.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
+
+        'add layer parameter
+        clsgeom_statvalleys.AddLayerParameter("geom", "list", Chr(34) & "point" & Chr(34), lstParameterStrings:={Chr(34) & "point" & Chr(34), Chr(34) & "text" & Chr(34), Chr(34) & "label" & Chr(34), Chr(34) & "line" & Chr(34), Chr(34) & "rug" & Chr(34), Chr(34) & "hline" & Chr(34), Chr(34) & "vline" & Chr(34)})
+        clsgeom_statvalleys.AddLayerParameter("span", "list", Chr(34) & "5" & Chr(34), lstParameterStrings:={Chr(34) & "5" & Chr(34), Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statvalleys.AddLayerParameter("ignore_threshold", "numeric", "0", lstParameterStrings:={1, 0, 1})
+        clsgeom_statvalleys.AddLayerParameter("strict", "boolean", "FALSE")
+        clsgeom_statvalleys.AddLayerParameter("label.fmt", "editablelist", Chr(34) & "%.4g" & Chr(34), lstParameterStrings:={Chr(34) & "%.4g" & Chr(34)})
+        clsgeom_statvalleys.AddLayerParameter("x.label.fmt", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statvalleys.AddLayerParameter("y.label.fmt", "editablelist", Chr(34) & "label.fmt" & Chr(34), lstParameterStrings:={Chr(34) & "label.fmt" & Chr(34)})
+        clsgeom_statvalleys.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_statvalleys.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_statvalleys.AddLayerParameter("show.legend", "list", "FALSE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_statvalleys.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+
+        lstAllGeoms.Add(clsgeom_statvalleys)
+
 
         'Global comments:
         'WARNING: Most of the comments describing the parameters have been copied from the ggplot2 documentation: http://docs.ggplot2.org/current/
