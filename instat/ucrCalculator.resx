@@ -1467,32 +1467,113 @@
   <data name="&gt;&gt;grpDates.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 244</value>
+  <data name="cmdNaspline.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="cmdNaspline.Location" type="System.Drawing.Point, System.Drawing">
+    <value>253, 193</value>
   </data>
-  <data name="Button3.TabIndex" type="System.Int32, mscorlib">
-    <value>194</value>
+  <data name="cmdNaspline.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 37</value>
   </data>
-  <data name="Button3.Text" xml:space="preserve">
-    <value>Button3</value>
+  <data name="cmdNaspline.TabIndex" type="System.Int32, mscorlib">
+    <value>197</value>
   </data>
-  <data name="&gt;&gt;Button3.Name" xml:space="preserve">
-    <value>Button3</value>
+  <data name="cmdNaspline.Text" xml:space="preserve">
+    <value>naspline</value>
   </data>
-  <data name="&gt;&gt;Button3.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdNaspline.Name" xml:space="preserve">
+    <value>cmdNaspline</value>
+  </data>
+  <data name="&gt;&gt;cmdNaspline.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdNaspline.Parent" xml:space="preserve">
     <value>grpTransform</value>
   </data>
-  <data name="&gt;&gt;Button3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdNaspline.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="cmdNaapprox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdNaapprox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 193</value>
+  </data>
+  <data name="cmdNaapprox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 37</value>
+  </data>
+  <data name="cmdNaapprox.TabIndex" type="System.Int32, mscorlib">
+    <value>196</value>
+  </data>
+  <data name="cmdNaapprox.Text" xml:space="preserve">
+    <value>naapprox</value>
+  </data>
+  <data name="&gt;&gt;cmdNaapprox.Name" xml:space="preserve">
+    <value>cmdNaapprox</value>
+  </data>
+  <data name="&gt;&gt;cmdNaapprox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdNaapprox.Parent" xml:space="preserve">
+    <value>grpTransform</value>
+  </data>
+  <data name="&gt;&gt;cmdNaapprox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cmdNaest.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdNaest.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 193</value>
+  </data>
+  <data name="cmdNaest.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 37</value>
+  </data>
+  <data name="cmdNaest.TabIndex" type="System.Int32, mscorlib">
+    <value>195</value>
+  </data>
+  <data name="cmdNaest.Text" xml:space="preserve">
+    <value>naest</value>
+  </data>
+  <data name="&gt;&gt;cmdNaest.Name" xml:space="preserve">
+    <value>cmdNaest</value>
+  </data>
+  <data name="&gt;&gt;cmdNaest.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdNaest.Parent" xml:space="preserve">
+    <value>grpTransform</value>
+  </data>
+  <data name="&gt;&gt;cmdNaest.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cmdNafill.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 193</value>
+  </data>
+  <data name="cmdNafill.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 37</value>
+  </data>
+  <data name="cmdNafill.TabIndex" type="System.Int32, mscorlib">
+    <value>194</value>
+  </data>
+  <data name="cmdNafill.Text" xml:space="preserve">
+    <value>nafill</value>
+  </data>
+  <data name="&gt;&gt;cmdNafill.Name" xml:space="preserve">
+    <value>cmdNafill</value>
+  </data>
+  <data name="&gt;&gt;cmdNafill.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdNafill.Parent" xml:space="preserve">
+    <value>grpTransform</value>
+  </data>
+  <data name="&gt;&gt;cmdNafill.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="cmdMovmin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 137</value>
+    <value>7, 121</value>
   </data>
   <data name="cmdMovmin.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 37</value>
@@ -1513,13 +1594,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdMovmin.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="cmdRowRank.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdRowRank.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 195</value>
+    <value>7, 157</value>
   </data>
   <data name="cmdRowRank.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1543,13 +1624,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdRowRank.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="cmdDiff.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdDiff.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 137</value>
+    <value>89, 121</value>
   </data>
   <data name="cmdDiff.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1573,13 +1654,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdDiff.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="cmdCumdist.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdCumdist.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 137</value>
+    <value>253, 121</value>
   </data>
   <data name="cmdCumdist.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1603,13 +1684,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdCumdist.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="cmdmovemean.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdmovemean.Location" type="System.Drawing.Point, System.Drawing">
-    <value>189, 94</value>
+    <value>171, 85</value>
   </data>
   <data name="cmdmovemean.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1633,13 +1714,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdmovemean.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="cmdCumMean.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdCumMean.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 53</value>
+    <value>171, 49</value>
   </data>
   <data name="cmdCumMean.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1663,13 +1744,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdCumMean.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="cmdNtile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdNtile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>189, 139</value>
+    <value>171, 121</value>
   </data>
   <data name="cmdNtile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1693,13 +1774,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdNtile.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="cmMovMed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmMovMed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 95</value>
+    <value>253, 85</value>
   </data>
   <data name="cmMovMed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1723,13 +1804,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmMovMed.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="cmdMRank.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdMRank.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 234</value>
+    <value>253, 157</value>
   </data>
   <data name="cmdMRank.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1753,13 +1834,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdMRank.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="cmdDRank.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdDRank.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 198</value>
+    <value>171, 157</value>
   </data>
   <data name="cmdDRank.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1783,13 +1864,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdDRank.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>13</value>
   </data>
   <data name="cmdMovMax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdMovMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 98</value>
+    <value>7, 85</value>
   </data>
   <data name="cmdMovMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1813,13 +1894,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdMovMax.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>14</value>
   </data>
   <data name="cmdMovSum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdMovSum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 95</value>
+    <value>89, 85</value>
   </data>
   <data name="cmdMovSum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1843,7 +1924,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdMovSum.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="cmdpercentrank.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -1852,7 +1933,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdpercentrank.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 200</value>
+    <value>89, 157</value>
   </data>
   <data name="cmdpercentrank.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -1876,13 +1957,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdpercentrank.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>16</value>
   </data>
   <data name="cmdcumsum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdcumsum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 55</value>
+    <value>89, 49</value>
   </data>
   <data name="cmdcumsum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1906,13 +1987,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdcumsum.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>17</value>
   </data>
   <data name="cmdcummin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdcummin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>281, 58</value>
+    <value>253, 49</value>
   </data>
   <data name="cmdcummin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1936,13 +2017,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdcummin.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>18</value>
   </data>
   <data name="cmdcummax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdcummax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 58</value>
+    <value>7, 49</value>
   </data>
   <data name="cmdcummax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1966,13 +2047,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdcummax.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>19</value>
   </data>
   <data name="cmdPMin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdPMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 17</value>
+    <value>253, 13</value>
   </data>
   <data name="cmdPMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1996,13 +2077,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdPMin.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>20</value>
   </data>
   <data name="cmdpmax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdpmax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 13</value>
+    <value>171, 13</value>
   </data>
   <data name="cmdpmax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2026,13 +2107,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdpmax.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>21</value>
   </data>
   <data name="cmdLead.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdLead.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 17</value>
+    <value>89, 13</value>
   </data>
   <data name="cmdLead.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2056,13 +2137,13 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdLead.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>22</value>
   </data>
   <data name="cmdLag.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdLag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 18</value>
+    <value>7, 13</value>
   </data>
   <data name="cmdLag.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2086,7 +2167,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdLag.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>23</value>
   </data>
   <data name="grpTransform.Location" type="System.Drawing.Point, System.Drawing">
     <value>580, 74</value>
@@ -2098,7 +2179,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="grpTransform.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 276</value>
+    <value>339, 235</value>
   </data>
   <data name="grpTransform.TabIndex" type="System.Int32, mscorlib">
     <value>189</value>

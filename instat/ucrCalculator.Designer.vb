@@ -298,7 +298,10 @@ Partial Class ucrCalculator
         Me.cmdCircMedian = New System.Windows.Forms.Button()
         Me.cmdCircMean = New System.Windows.Forms.Button()
         Me.cmdMovmin = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.cmdNafill = New System.Windows.Forms.Button()
+        Me.cmdNaest = New System.Windows.Forms.Button()
+        Me.cmdNaapprox = New System.Windows.Forms.Button()
+        Me.cmdNaspline = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -615,7 +618,10 @@ Partial Class ucrCalculator
         '
         'grpTransform
         '
-        Me.grpTransform.Controls.Add(Me.Button3)
+        Me.grpTransform.Controls.Add(Me.cmdNaspline)
+        Me.grpTransform.Controls.Add(Me.cmdNaapprox)
+        Me.grpTransform.Controls.Add(Me.cmdNaest)
+        Me.grpTransform.Controls.Add(Me.cmdNafill)
         Me.grpTransform.Controls.Add(Me.cmdMovmin)
         Me.grpTransform.Controls.Add(Me.cmdRowRank)
         Me.grpTransform.Controls.Add(Me.cmdDiff)
@@ -2106,11 +2112,29 @@ Partial Class ucrCalculator
         Me.cmdMovmin.Name = "cmdMovmin"
         Me.cmdMovmin.UseVisualStyleBackColor = True
         '
-        'Button3
+        'cmdNafill
         '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.Name = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdNafill, "cmdNafill")
+        Me.cmdNafill.Name = "cmdNafill"
+        Me.cmdNafill.UseVisualStyleBackColor = True
+        '
+        'cmdNaest
+        '
+        resources.ApplyResources(Me.cmdNaest, "cmdNaest")
+        Me.cmdNaest.Name = "cmdNaest"
+        Me.cmdNaest.UseVisualStyleBackColor = True
+        '
+        'cmdNaapprox
+        '
+        resources.ApplyResources(Me.cmdNaapprox, "cmdNaapprox")
+        Me.cmdNaapprox.Name = "cmdNaapprox"
+        Me.cmdNaapprox.UseVisualStyleBackColor = True
+        '
+        'cmdNaspline
+        '
+        resources.ApplyResources(Me.cmdNaspline, "cmdNaspline")
+        Me.cmdNaspline.Name = "cmdNaspline"
+        Me.cmdNaspline.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
@@ -2406,6 +2430,9 @@ Partial Class ucrCalculator
     Friend WithEvents cmdCircRho As Button
     Friend WithEvents cmdCircQuantile As Button
     Friend WithEvents cmdCircular As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents cmdNafill As Button
     Friend WithEvents cmdMovmin As Button
+    Friend WithEvents cmdNaspline As Button
+    Friend WithEvents cmdNaapprox As Button
+    Friend WithEvents cmdNaest As Button
 End Class
