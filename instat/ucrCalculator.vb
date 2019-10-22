@@ -1908,7 +1908,23 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply(data = , width = , FUN = min, by = 1, by.column = TRUE, fill = if (na.pad) NA, na.pad = FALSE, partial = FALSE, align = c(""center"", ""left"", ""right""), coredata = TRUE))", 177)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdNafill_Click(sender As Object, e As EventArgs) Handles cmdNafill.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.fill(object = , fill = , ))", 12)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.fill()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdNaest_Click(sender As Object, e As EventArgs) Handles cmdNaest.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.aggregate(object = , by = 1, FUN = mean, na.rm = FALSE, maxgap = Inf))", 50)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.fill()", 1)
         End If
     End Sub
 End Class
