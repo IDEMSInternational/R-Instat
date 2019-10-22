@@ -114,6 +114,7 @@ Public Class ucrGeom
     End Sub
 
     Public Sub CreateGeomList()
+        Dim clsgeom_treemap As New Geoms
         Dim clsgeom_abline As New Geoms
         Dim clsgeom_area As New Geoms
         Dim clsgeom_bar As New Geoms
@@ -290,6 +291,25 @@ Public Class ucrGeom
         'clsgeom_area.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0})
 
         'lstAllGeoms.Add(clsgeom_area)
+
+        clsgeom_treemap.SetGeomName("geom_treemap")
+
+        clsgeom_treemap.AddAesParameter("area", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
+        clsgeom_treemap.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_treemap.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_treemap.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_treemap.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_treemap.AddAesParameter("subgroup", strIncludedDataTypes:={"factor"})
+        clsgeom_treemap.AddAesParameter("subgroup2", strIncludedDataTypes:={"factor"})
+        clsgeom_treemap.AddAesParameter("subgroup3", strIncludedDataTypes:={"factor"})
+
+        clsgeom_treemap.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_treemap.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_treemap.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_treemap.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_treemap.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+        clsgeom_treemap.AddLayerParameter("layout", "list", Chr(34) & "squarified" & Chr(34), lstParameterStrings:={Chr(34) & "squarified" & Chr(34), Chr(34) & "scol" & Chr(34), Chr(34) & "srow" & Chr(34), Chr(34) & "fixed" & Chr(34)})
+        clsgeom_treemap.AddLayerParameter("start", "list", Chr(34) & "bottomleft" & Chr(34), lstParameterStrings:={Chr(34) & "bottomleft" & Chr(34), Chr(34) & "topleft" & Chr(34), Chr(34) & "topright" & Chr(34), Chr(34) & "bottomright" & Chr(34)})
 
         clsgeom_bar.SetGeomName("geom_bar")
         'Mandatory Aesthetics
