@@ -75,6 +75,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdcummax, "cumulative maxima. For example cummax(c(3,2,1,4,0)) = (3,3,3,4,4)")
         ttCalculator.SetToolTip(cmdMovMax, "moving (or rolling) maxima. For example rollmax(x=c(3,2,1,4,0) ,3,fill=NA, align=""right"") = (NA,NA, 3,4,4)")
         ttCalculator.SetToolTip(cmdMovSum, "moving (or rolling) totals. For example rollsum(x=c(3,2,1,4,0) ,3,fill=NA, align=""left"") = (6,7,5,NA,NA)")
+        ttCalculator.SetToolTip(cmdCumMean, "cumulative means. For example cummean(c(3,2,1,4,0)) = (3,2.5,2,2.5,2)")
+        ttCalculator.SetToolTip(cmdcummin, " cumulative minima. For example cummin(c(3,2,1,4,0)) = (3,2.,1,1,0)")
 
     End Sub
 
