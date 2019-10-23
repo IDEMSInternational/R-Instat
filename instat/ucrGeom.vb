@@ -292,24 +292,6 @@ Public Class ucrGeom
 
         'lstAllGeoms.Add(clsgeom_area)
 
-        clsgeom_treemap.SetGeomName("geom_treemap")
-
-        clsgeom_treemap.AddAesParameter("area", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
-        clsgeom_treemap.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_treemap.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_treemap.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_treemap.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
-        clsgeom_treemap.AddAesParameter("subgroup", strIncludedDataTypes:={"factor"})
-        clsgeom_treemap.AddAesParameter("subgroup2", strIncludedDataTypes:={"factor"})
-        clsgeom_treemap.AddAesParameter("subgroup3", strIncludedDataTypes:={"factor"})
-
-        clsgeom_treemap.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
-        clsgeom_treemap.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        clsgeom_treemap.AddLayerParameter("na.rm", "boolean", "FALSE")
-        clsgeom_treemap.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_treemap.AddLayerParameter("inherit.aes", "boolean", "TRUE")
-        clsgeom_treemap.AddLayerParameter("layout", "list", Chr(34) & "squarified" & Chr(34), lstParameterStrings:={Chr(34) & "squarified" & Chr(34), Chr(34) & "scol" & Chr(34), Chr(34) & "srow" & Chr(34), Chr(34) & "fixed" & Chr(34)})
-        clsgeom_treemap.AddLayerParameter("start", "list", Chr(34) & "bottomleft" & Chr(34), lstParameterStrings:={Chr(34) & "bottomleft" & Chr(34), Chr(34) & "topleft" & Chr(34), Chr(34) & "topright" & Chr(34), Chr(34) & "bottomright" & Chr(34)})
 
         clsgeom_bar.SetGeomName("geom_bar")
         'Mandatory Aesthetics
@@ -1435,6 +1417,26 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_tile)
 
+        clsgeom_treemap.SetGeomName("geom_treemap")
+
+        clsgeom_treemap.AddAesParameter("area", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
+        clsgeom_treemap.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_treemap.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_treemap.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_treemap.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_treemap.AddAesParameter("subgroup", strIncludedDataTypes:={"factor"})
+        clsgeom_treemap.AddAesParameter("subgroup2", strIncludedDataTypes:={"factor"})
+        clsgeom_treemap.AddAesParameter("subgroup3", strIncludedDataTypes:={"factor"})
+
+        clsgeom_treemap.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_treemap.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_treemap.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_treemap.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_treemap.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+        clsgeom_treemap.AddLayerParameter("layout", "list", Chr(34) & "squarified" & Chr(34), lstParameterStrings:={Chr(34) & "squarified" & Chr(34), Chr(34) & "scol" & Chr(34), Chr(34) & "srow" & Chr(34), Chr(34) & "fixed" & Chr(34)})
+        clsgeom_treemap.AddLayerParameter("start", "list", Chr(34) & "bottomleft" & Chr(34), lstParameterStrings:={Chr(34) & "bottomleft" & Chr(34), Chr(34) & "topleft" & Chr(34), Chr(34) & "topright" & Chr(34), Chr(34) & "bottomright" & Chr(34)})
+
+        lstAllGeoms.Add(clsgeom_treemap)
 
         clsgeom_tufteboxplot.SetGeomName("geom_tufteboxplot")
         clsgeom_tufteboxplot.SetGeomPackage("ggthemes")
