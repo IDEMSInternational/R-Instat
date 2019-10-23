@@ -22,6 +22,7 @@ Public Class dlgCumulativeDistribution
     Private clsBaseOperator As New ROperator
     Private bFirstLoad As Boolean = True
     Private clsLabsFunction As New RFunction
+    Private clsThemeFunction As New RFunction
     Private clsXlabsFunction As New RFunction
     Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
@@ -34,10 +35,19 @@ Public Class dlgCumulativeDistribution
     Private clsReverse As New RFunction
     Private clsScaleYReverseFunc As New RFunction
     Private bReset As Boolean = True
+
     Private strFirstParameterName As String = "stat_ecdf"
     Private strYScleParameterName As String = "Yscales"
     Private strYScaleReverseParamName As String = "reverseYscales"
-    Private strGeomParameterNames() As String = {strFirstParameterName, strYScleParameterName}
+    'Private strGeomParameterNames() As String = {strFirstParameterName, strYScleParameterName}
+
+
+    Private clsCoordPolarFunction As New RFunction
+    Private clsCoordPolarStartOperator As New ROperator
+    'Parameter names for geoms
+    Private strFirstParameterName As String = "geomfunc"
+    Private strPointsParameterName As String = "geom_point"
+    Private strGeomParameterNames() As String = {strFirstParameterName, strPointsParameterName}
 
     Private Sub dlgCumulativeDistribution_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -105,7 +115,7 @@ Public Class dlgCumulativeDistribution
         clsGeomPointFunc.SetPackageName("ggplot2")
         clsGeomPointFunc.SetRCommand("geom_point")
         clsGeomPointFunc.AddParameter("stat", Chr(34) & "ecdf" & Chr(34))
-        clsGeomPointParam.SetArgumentName("geom_point")
+        clsGeomPointParam.SetArgumentName(strPointsParameterName)
         clsGeomPointParam.SetArgument(clsGeomPointFunc)
         ucrChkIncludePoints.SetText("Include Points")
         ucrChkIncludePoints.SetParameter(clsGeomPointParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
@@ -170,6 +180,7 @@ Public Class dlgCumulativeDistribution
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
+
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
 
@@ -179,6 +190,10 @@ Public Class dlgCumulativeDistribution
         clsYScalecontinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSequence)
         clsBaseOperator.AddParameter(strYScleParameterName, clsRFunctionParameter:=clsYScalecontinuousFunction, bIncludeArgumentName:=False)
 
+
+        clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
+        clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
+      
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrCumDistSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
@@ -230,7 +245,7 @@ Public Class dlgCumulativeDistribution
     End Sub
 
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrCumDistSelector, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrCumDistSelector, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
