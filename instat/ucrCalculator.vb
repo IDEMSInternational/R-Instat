@@ -77,6 +77,9 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdMovSum, "moving (or rolling) totals. For example rollsum(x=c(3,2,1,4,0) ,3,fill=NA, align=""left"") = (6,7,5,NA,NA)")
         ttCalculator.SetToolTip(cmdCumMean, "cumulative means. For example cummean(c(3,2,1,4,0)) = (3,2.5,2,2.5,2)")
         ttCalculator.SetToolTip(cmdcummin, " cumulative minima. For example cummin(c(3,2,1,4,0)) = (3,2.,1,1,0)")
+        ttCalculator.SetToolTip(cmdmovemean, "moving (or rolling) mean. For example rollmean(c(3,2,1,6,2) ,3,fill=NA) = (NA,2,3,3,NA)")
+        ttCalculator.SetToolTip(cmdMovmin, "moving (or rolling) minima. For example rollapply(c(3,2,1,6,2),width=3,fill=NA, FUN=min) = (NA,1,1,1,NA)")
+        ttCalculator.SetToolTip(cmdNtile, "Use ranks to divide into (almost) equal sized groups. For example ntile(c(15,11,13,12,NA,12),2) = (2,1,2,1,NA,1)")
 
     End Sub
 
