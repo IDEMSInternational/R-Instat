@@ -85,6 +85,11 @@ Partial Class ucrCalculator
         Me.cmdDoy = New System.Windows.Forms.Button()
         Me.cmdLeap = New System.Windows.Forms.Button()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
+        Me.cmdNaspline = New System.Windows.Forms.Button()
+        Me.cmdNaapprox = New System.Windows.Forms.Button()
+        Me.cmdNaest = New System.Windows.Forms.Button()
+        Me.cmdNafill = New System.Windows.Forms.Button()
+        Me.cmdMovmin = New System.Windows.Forms.Button()
         Me.cmdRowRank = New System.Windows.Forms.Button()
         Me.cmdDiff = New System.Windows.Forms.Button()
         Me.cmdCumdist = New System.Windows.Forms.Button()
@@ -181,25 +186,6 @@ Partial Class ucrCalculator
         Me.cmdNot = New System.Windows.Forms.Button()
         Me.cmdNotEqualsTo = New System.Windows.Forms.Button()
         Me.cmdEquivalent = New System.Windows.Forms.Button()
-        Me.grpProbabilty = New System.Windows.Forms.GroupBox()
-        Me.cmdGamma = New System.Windows.Forms.Button()
-        Me.cmdLbeta = New System.Windows.Forms.Button()
-        Me.cmdqF = New System.Windows.Forms.Button()
-        Me.cmdFact = New System.Windows.Forms.Button()
-        Me.cmdChoose = New System.Windows.Forms.Button()
-        Me.cmdPf = New System.Windows.Forms.Button()
-        Me.cmdPChisq = New System.Windows.Forms.Button()
-        Me.cmdLgamma = New System.Windows.Forms.Button()
-        Me.cmdPnorm = New System.Windows.Forms.Button()
-        Me.cmdQchisq = New System.Windows.Forms.Button()
-        Me.cmdQt = New System.Windows.Forms.Button()
-        Me.cmdQnorm = New System.Windows.Forms.Button()
-        Me.cmdPt = New System.Windows.Forms.Button()
-        Me.cmdLchoose = New System.Windows.Forms.Button()
-        Me.cmdLfact = New System.Windows.Forms.Button()
-        Me.cmdTrigamma = New System.Windows.Forms.Button()
-        Me.cmdBeta = New System.Windows.Forms.Button()
-        Me.cmdDigamma = New System.Windows.Forms.Button()
         Me.grpMaths = New System.Windows.Forms.GroupBox()
         Me.cmdAtan2 = New System.Windows.Forms.Button()
         Me.cmdLogistic = New System.Windows.Forms.Button()
@@ -224,6 +210,25 @@ Partial Class ucrCalculator
         Me.cmdAcos = New System.Windows.Forms.Button()
         Me.cmdCos = New System.Windows.Forms.Button()
         Me.cmdSqrt = New System.Windows.Forms.Button()
+        Me.grpProbabilty = New System.Windows.Forms.GroupBox()
+        Me.cmdGamma = New System.Windows.Forms.Button()
+        Me.cmdLbeta = New System.Windows.Forms.Button()
+        Me.cmdqF = New System.Windows.Forms.Button()
+        Me.cmdFact = New System.Windows.Forms.Button()
+        Me.cmdChoose = New System.Windows.Forms.Button()
+        Me.cmdPf = New System.Windows.Forms.Button()
+        Me.cmdPChisq = New System.Windows.Forms.Button()
+        Me.cmdLgamma = New System.Windows.Forms.Button()
+        Me.cmdPnorm = New System.Windows.Forms.Button()
+        Me.cmdQchisq = New System.Windows.Forms.Button()
+        Me.cmdQt = New System.Windows.Forms.Button()
+        Me.cmdQnorm = New System.Windows.Forms.Button()
+        Me.cmdPt = New System.Windows.Forms.Button()
+        Me.cmdLchoose = New System.Windows.Forms.Button()
+        Me.cmdLfact = New System.Windows.Forms.Button()
+        Me.cmdTrigamma = New System.Windows.Forms.Button()
+        Me.cmdBeta = New System.Windows.Forms.Button()
+        Me.cmdDigamma = New System.Windows.Forms.Button()
         Me.ttCalculator = New System.Windows.Forms.ToolTip(Me.components)
         Me.cmdWakefield_Year = New System.Windows.Forms.Button()
         Me.cmdValid = New System.Windows.Forms.Button()
@@ -297,19 +302,14 @@ Partial Class ucrCalculator
         Me.cmdMedianHL = New System.Windows.Forms.Button()
         Me.cmdCircMedian = New System.Windows.Forms.Button()
         Me.cmdCircMean = New System.Windows.Forms.Button()
-        Me.cmdMovmin = New System.Windows.Forms.Button()
-        Me.cmdNafill = New System.Windows.Forms.Button()
-        Me.cmdNaest = New System.Windows.Forms.Button()
-        Me.cmdNaapprox = New System.Windows.Forms.Button()
-        Me.cmdNaspline = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
         Me.grpSummary.SuspendLayout()
         Me.grpStrings.SuspendLayout()
         Me.grpLogical.SuspendLayout()
-        Me.grpProbabilty.SuspendLayout()
         Me.grpMaths.SuspendLayout()
+        Me.grpProbabilty.SuspendLayout()
         Me.grpWakefield.SuspendLayout()
         Me.grpCircular.SuspendLayout()
         Me.SuspendLayout()
@@ -645,6 +645,36 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpTransform, "grpTransform")
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.TabStop = False
+        '
+        'cmdNaspline
+        '
+        resources.ApplyResources(Me.cmdNaspline, "cmdNaspline")
+        Me.cmdNaspline.Name = "cmdNaspline"
+        Me.cmdNaspline.UseVisualStyleBackColor = True
+        '
+        'cmdNaapprox
+        '
+        resources.ApplyResources(Me.cmdNaapprox, "cmdNaapprox")
+        Me.cmdNaapprox.Name = "cmdNaapprox"
+        Me.cmdNaapprox.UseVisualStyleBackColor = True
+        '
+        'cmdNaest
+        '
+        resources.ApplyResources(Me.cmdNaest, "cmdNaest")
+        Me.cmdNaest.Name = "cmdNaest"
+        Me.cmdNaest.UseVisualStyleBackColor = True
+        '
+        'cmdNafill
+        '
+        resources.ApplyResources(Me.cmdNafill, "cmdNafill")
+        Me.cmdNafill.Name = "cmdNafill"
+        Me.cmdNafill.UseVisualStyleBackColor = True
+        '
+        'cmdMovmin
+        '
+        resources.ApplyResources(Me.cmdMovmin, "cmdMovmin")
+        Me.cmdMovmin.Name = "cmdMovmin"
+        Me.cmdMovmin.UseVisualStyleBackColor = True
         '
         'cmdRowRank
         '
@@ -1058,8 +1088,6 @@ Partial Class ucrCalculator
         '
         Me.grpLogical.Controls.Add(Me.cmdFalse)
         Me.grpLogical.Controls.Add(Me.cmdTrue)
-        Me.grpLogical.Controls.Add(Me.grpMaths)
-        Me.grpLogical.Controls.Add(Me.grpSummary)
         Me.grpLogical.Controls.Add(Me.cmdDoubleSqrBrackets)
         Me.grpLogical.Controls.Add(Me.cmdIn)
         Me.grpLogical.Controls.Add(Me.cmdWhich)
@@ -1302,139 +1330,6 @@ Partial Class ucrCalculator
         Me.cmdEquivalent.Name = "cmdEquivalent"
         Me.cmdEquivalent.UseVisualStyleBackColor = True
         '
-        'grpProbabilty
-        '
-        Me.grpProbabilty.Controls.Add(Me.cmdGamma)
-        Me.grpProbabilty.Controls.Add(Me.cmdLbeta)
-        Me.grpProbabilty.Controls.Add(Me.cmdqF)
-        Me.grpProbabilty.Controls.Add(Me.cmdFact)
-        Me.grpProbabilty.Controls.Add(Me.cmdChoose)
-        Me.grpProbabilty.Controls.Add(Me.cmdPf)
-        Me.grpProbabilty.Controls.Add(Me.cmdPChisq)
-        Me.grpProbabilty.Controls.Add(Me.cmdLgamma)
-        Me.grpProbabilty.Controls.Add(Me.cmdPnorm)
-        Me.grpProbabilty.Controls.Add(Me.cmdQchisq)
-        Me.grpProbabilty.Controls.Add(Me.cmdQt)
-        Me.grpProbabilty.Controls.Add(Me.cmdQnorm)
-        Me.grpProbabilty.Controls.Add(Me.cmdPt)
-        Me.grpProbabilty.Controls.Add(Me.cmdLchoose)
-        Me.grpProbabilty.Controls.Add(Me.cmdLfact)
-        Me.grpProbabilty.Controls.Add(Me.cmdTrigamma)
-        Me.grpProbabilty.Controls.Add(Me.cmdBeta)
-        Me.grpProbabilty.Controls.Add(Me.cmdDigamma)
-        resources.ApplyResources(Me.grpProbabilty, "grpProbabilty")
-        Me.grpProbabilty.Name = "grpProbabilty"
-        Me.grpProbabilty.TabStop = False
-        '
-        'cmdGamma
-        '
-        resources.ApplyResources(Me.cmdGamma, "cmdGamma")
-        Me.cmdGamma.Name = "cmdGamma"
-        Me.cmdGamma.Tag = ""
-        Me.cmdGamma.UseVisualStyleBackColor = True
-        '
-        'cmdLbeta
-        '
-        resources.ApplyResources(Me.cmdLbeta, "cmdLbeta")
-        Me.cmdLbeta.Name = "cmdLbeta"
-        Me.cmdLbeta.UseVisualStyleBackColor = True
-        '
-        'cmdqF
-        '
-        resources.ApplyResources(Me.cmdqF, "cmdqF")
-        Me.cmdqF.Name = "cmdqF"
-        Me.cmdqF.UseVisualStyleBackColor = True
-        '
-        'cmdFact
-        '
-        resources.ApplyResources(Me.cmdFact, "cmdFact")
-        Me.cmdFact.Name = "cmdFact"
-        Me.cmdFact.UseVisualStyleBackColor = True
-        '
-        'cmdChoose
-        '
-        resources.ApplyResources(Me.cmdChoose, "cmdChoose")
-        Me.cmdChoose.Name = "cmdChoose"
-        Me.cmdChoose.UseVisualStyleBackColor = True
-        '
-        'cmdPf
-        '
-        resources.ApplyResources(Me.cmdPf, "cmdPf")
-        Me.cmdPf.Name = "cmdPf"
-        Me.cmdPf.UseVisualStyleBackColor = True
-        '
-        'cmdPChisq
-        '
-        resources.ApplyResources(Me.cmdPChisq, "cmdPChisq")
-        Me.cmdPChisq.Name = "cmdPChisq"
-        Me.cmdPChisq.UseVisualStyleBackColor = True
-        '
-        'cmdLgamma
-        '
-        resources.ApplyResources(Me.cmdLgamma, "cmdLgamma")
-        Me.cmdLgamma.Name = "cmdLgamma"
-        Me.cmdLgamma.UseVisualStyleBackColor = True
-        '
-        'cmdPnorm
-        '
-        resources.ApplyResources(Me.cmdPnorm, "cmdPnorm")
-        Me.cmdPnorm.Name = "cmdPnorm"
-        Me.cmdPnorm.UseVisualStyleBackColor = True
-        '
-        'cmdQchisq
-        '
-        resources.ApplyResources(Me.cmdQchisq, "cmdQchisq")
-        Me.cmdQchisq.Name = "cmdQchisq"
-        Me.cmdQchisq.UseVisualStyleBackColor = True
-        '
-        'cmdQt
-        '
-        resources.ApplyResources(Me.cmdQt, "cmdQt")
-        Me.cmdQt.Name = "cmdQt"
-        Me.cmdQt.UseVisualStyleBackColor = True
-        '
-        'cmdQnorm
-        '
-        resources.ApplyResources(Me.cmdQnorm, "cmdQnorm")
-        Me.cmdQnorm.Name = "cmdQnorm"
-        Me.cmdQnorm.UseVisualStyleBackColor = True
-        '
-        'cmdPt
-        '
-        resources.ApplyResources(Me.cmdPt, "cmdPt")
-        Me.cmdPt.Name = "cmdPt"
-        Me.cmdPt.UseVisualStyleBackColor = True
-        '
-        'cmdLchoose
-        '
-        resources.ApplyResources(Me.cmdLchoose, "cmdLchoose")
-        Me.cmdLchoose.Name = "cmdLchoose"
-        Me.cmdLchoose.UseVisualStyleBackColor = True
-        '
-        'cmdLfact
-        '
-        resources.ApplyResources(Me.cmdLfact, "cmdLfact")
-        Me.cmdLfact.Name = "cmdLfact"
-        Me.cmdLfact.UseVisualStyleBackColor = True
-        '
-        'cmdTrigamma
-        '
-        resources.ApplyResources(Me.cmdTrigamma, "cmdTrigamma")
-        Me.cmdTrigamma.Name = "cmdTrigamma"
-        Me.cmdTrigamma.UseVisualStyleBackColor = True
-        '
-        'cmdBeta
-        '
-        resources.ApplyResources(Me.cmdBeta, "cmdBeta")
-        Me.cmdBeta.Name = "cmdBeta"
-        Me.cmdBeta.UseVisualStyleBackColor = True
-        '
-        'cmdDigamma
-        '
-        resources.ApplyResources(Me.cmdDigamma, "cmdDigamma")
-        Me.cmdDigamma.Name = "cmdDigamma"
-        Me.cmdDigamma.UseVisualStyleBackColor = True
-        '
         'grpMaths
         '
         Me.grpMaths.Controls.Add(Me.cmdAtan2)
@@ -1601,6 +1496,139 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.cmdSqrt, "cmdSqrt")
         Me.cmdSqrt.Name = "cmdSqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
+        '
+        'grpProbabilty
+        '
+        Me.grpProbabilty.Controls.Add(Me.cmdGamma)
+        Me.grpProbabilty.Controls.Add(Me.cmdLbeta)
+        Me.grpProbabilty.Controls.Add(Me.cmdqF)
+        Me.grpProbabilty.Controls.Add(Me.cmdFact)
+        Me.grpProbabilty.Controls.Add(Me.cmdChoose)
+        Me.grpProbabilty.Controls.Add(Me.cmdPf)
+        Me.grpProbabilty.Controls.Add(Me.cmdPChisq)
+        Me.grpProbabilty.Controls.Add(Me.cmdLgamma)
+        Me.grpProbabilty.Controls.Add(Me.cmdPnorm)
+        Me.grpProbabilty.Controls.Add(Me.cmdQchisq)
+        Me.grpProbabilty.Controls.Add(Me.cmdQt)
+        Me.grpProbabilty.Controls.Add(Me.cmdQnorm)
+        Me.grpProbabilty.Controls.Add(Me.cmdPt)
+        Me.grpProbabilty.Controls.Add(Me.cmdLchoose)
+        Me.grpProbabilty.Controls.Add(Me.cmdLfact)
+        Me.grpProbabilty.Controls.Add(Me.cmdTrigamma)
+        Me.grpProbabilty.Controls.Add(Me.cmdBeta)
+        Me.grpProbabilty.Controls.Add(Me.cmdDigamma)
+        resources.ApplyResources(Me.grpProbabilty, "grpProbabilty")
+        Me.grpProbabilty.Name = "grpProbabilty"
+        Me.grpProbabilty.TabStop = False
+        '
+        'cmdGamma
+        '
+        resources.ApplyResources(Me.cmdGamma, "cmdGamma")
+        Me.cmdGamma.Name = "cmdGamma"
+        Me.cmdGamma.Tag = ""
+        Me.cmdGamma.UseVisualStyleBackColor = True
+        '
+        'cmdLbeta
+        '
+        resources.ApplyResources(Me.cmdLbeta, "cmdLbeta")
+        Me.cmdLbeta.Name = "cmdLbeta"
+        Me.cmdLbeta.UseVisualStyleBackColor = True
+        '
+        'cmdqF
+        '
+        resources.ApplyResources(Me.cmdqF, "cmdqF")
+        Me.cmdqF.Name = "cmdqF"
+        Me.cmdqF.UseVisualStyleBackColor = True
+        '
+        'cmdFact
+        '
+        resources.ApplyResources(Me.cmdFact, "cmdFact")
+        Me.cmdFact.Name = "cmdFact"
+        Me.cmdFact.UseVisualStyleBackColor = True
+        '
+        'cmdChoose
+        '
+        resources.ApplyResources(Me.cmdChoose, "cmdChoose")
+        Me.cmdChoose.Name = "cmdChoose"
+        Me.cmdChoose.UseVisualStyleBackColor = True
+        '
+        'cmdPf
+        '
+        resources.ApplyResources(Me.cmdPf, "cmdPf")
+        Me.cmdPf.Name = "cmdPf"
+        Me.cmdPf.UseVisualStyleBackColor = True
+        '
+        'cmdPChisq
+        '
+        resources.ApplyResources(Me.cmdPChisq, "cmdPChisq")
+        Me.cmdPChisq.Name = "cmdPChisq"
+        Me.cmdPChisq.UseVisualStyleBackColor = True
+        '
+        'cmdLgamma
+        '
+        resources.ApplyResources(Me.cmdLgamma, "cmdLgamma")
+        Me.cmdLgamma.Name = "cmdLgamma"
+        Me.cmdLgamma.UseVisualStyleBackColor = True
+        '
+        'cmdPnorm
+        '
+        resources.ApplyResources(Me.cmdPnorm, "cmdPnorm")
+        Me.cmdPnorm.Name = "cmdPnorm"
+        Me.cmdPnorm.UseVisualStyleBackColor = True
+        '
+        'cmdQchisq
+        '
+        resources.ApplyResources(Me.cmdQchisq, "cmdQchisq")
+        Me.cmdQchisq.Name = "cmdQchisq"
+        Me.cmdQchisq.UseVisualStyleBackColor = True
+        '
+        'cmdQt
+        '
+        resources.ApplyResources(Me.cmdQt, "cmdQt")
+        Me.cmdQt.Name = "cmdQt"
+        Me.cmdQt.UseVisualStyleBackColor = True
+        '
+        'cmdQnorm
+        '
+        resources.ApplyResources(Me.cmdQnorm, "cmdQnorm")
+        Me.cmdQnorm.Name = "cmdQnorm"
+        Me.cmdQnorm.UseVisualStyleBackColor = True
+        '
+        'cmdPt
+        '
+        resources.ApplyResources(Me.cmdPt, "cmdPt")
+        Me.cmdPt.Name = "cmdPt"
+        Me.cmdPt.UseVisualStyleBackColor = True
+        '
+        'cmdLchoose
+        '
+        resources.ApplyResources(Me.cmdLchoose, "cmdLchoose")
+        Me.cmdLchoose.Name = "cmdLchoose"
+        Me.cmdLchoose.UseVisualStyleBackColor = True
+        '
+        'cmdLfact
+        '
+        resources.ApplyResources(Me.cmdLfact, "cmdLfact")
+        Me.cmdLfact.Name = "cmdLfact"
+        Me.cmdLfact.UseVisualStyleBackColor = True
+        '
+        'cmdTrigamma
+        '
+        resources.ApplyResources(Me.cmdTrigamma, "cmdTrigamma")
+        Me.cmdTrigamma.Name = "cmdTrigamma"
+        Me.cmdTrigamma.UseVisualStyleBackColor = True
+        '
+        'cmdBeta
+        '
+        resources.ApplyResources(Me.cmdBeta, "cmdBeta")
+        Me.cmdBeta.Name = "cmdBeta"
+        Me.cmdBeta.UseVisualStyleBackColor = True
+        '
+        'cmdDigamma
+        '
+        resources.ApplyResources(Me.cmdDigamma, "cmdDigamma")
+        Me.cmdDigamma.Name = "cmdDigamma"
+        Me.cmdDigamma.UseVisualStyleBackColor = True
         '
         'cmdWakefield_Year
         '
@@ -1990,8 +2018,6 @@ Partial Class ucrCalculator
         '
         Me.grpCircular.Controls.Add(Me.cmdCircular)
         Me.grpCircular.Controls.Add(Me.cmdCircQuantile)
-        Me.grpCircular.Controls.Add(Me.grpProbabilty)
-        Me.grpCircular.Controls.Add(Me.grpLogical)
         Me.grpCircular.Controls.Add(Me.cmdCircMax)
         Me.grpCircular.Controls.Add(Me.cmdA1)
         Me.grpCircular.Controls.Add(Me.cmdAngVar)
@@ -2106,51 +2132,25 @@ Partial Class ucrCalculator
         Me.cmdCircMean.Name = "cmdCircMean"
         Me.cmdCircMean.UseVisualStyleBackColor = True
         '
-        'cmdMovmin
-        '
-        resources.ApplyResources(Me.cmdMovmin, "cmdMovmin")
-        Me.cmdMovmin.Name = "cmdMovmin"
-        Me.cmdMovmin.UseVisualStyleBackColor = True
-        '
-        'cmdNafill
-        '
-        resources.ApplyResources(Me.cmdNafill, "cmdNafill")
-        Me.cmdNafill.Name = "cmdNafill"
-        Me.cmdNafill.UseVisualStyleBackColor = True
-        '
-        'cmdNaest
-        '
-        resources.ApplyResources(Me.cmdNaest, "cmdNaest")
-        Me.cmdNaest.Name = "cmdNaest"
-        Me.cmdNaest.UseVisualStyleBackColor = True
-        '
-        'cmdNaapprox
-        '
-        resources.ApplyResources(Me.cmdNaapprox, "cmdNaapprox")
-        Me.cmdNaapprox.Name = "cmdNaapprox"
-        Me.cmdNaapprox.UseVisualStyleBackColor = True
-        '
-        'cmdNaspline
-        '
-        resources.ApplyResources(Me.cmdNaspline, "cmdNaspline")
-        Me.cmdNaspline.Name = "cmdNaspline"
-        Me.cmdNaspline.UseVisualStyleBackColor = True
-        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.chkSaveResultInto)
+        Me.Controls.Add(Me.chkShowArguments)
+        Me.Controls.Add(Me.lblExpression)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
+        Me.Controls.Add(Me.grpLogical)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpMaths)
+        Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.cmdHelp)
-        Me.Controls.Add(Me.chkShowArguments)
         Me.Controls.Add(Me.grpBasic)
-        Me.Controls.Add(Me.chkSaveResultInto)
         Me.Controls.Add(Me.cmdTry)
-        Me.Controls.Add(Me.lblExpression)
         Me.Name = "ucrCalculator"
         Me.grpBasic.ResumeLayout(False)
         Me.grpDates.ResumeLayout(False)
@@ -2158,8 +2158,8 @@ Partial Class ucrCalculator
         Me.grpSummary.ResumeLayout(False)
         Me.grpStrings.ResumeLayout(False)
         Me.grpLogical.ResumeLayout(False)
-        Me.grpProbabilty.ResumeLayout(False)
         Me.grpMaths.ResumeLayout(False)
+        Me.grpProbabilty.ResumeLayout(False)
         Me.grpWakefield.ResumeLayout(False)
         Me.grpCircular.ResumeLayout(False)
         Me.ResumeLayout(False)
