@@ -83,6 +83,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdDeg, "change from radians to degrees. For example deg(pi/2) = 90 ( = pi/2 360/(2pi))")
         ttCalculator.SetToolTip(cmdExp, "exponential function. For example exp(3) = e ^ 3 = 2.71828 ^ 3 = 20.09")
         ttCalculator.SetToolTip(cmdAbs, "absolute value. For example abs(4.5) = abs(-4.5) = 4.5")
+        ttCalculator.SetToolTip(cmdSiginf, "rounds to a given number of significant figures. For example signif(23.4567,3) = 23.5")
 
     End Sub
 
