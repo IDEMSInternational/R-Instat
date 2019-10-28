@@ -85,6 +85,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdAbs, "absolute value. For example abs(4.5) = abs(-4.5) = 4.5")
         ttCalculator.SetToolTip(cmdSiginf, "rounds to a given number of significant figures. For example signif(23.4567,3) = 23.5")
         ttCalculator.SetToolTip(cmdRound, "rounds to the given number of decimal places. For example round(23.4567,3) = 23.456; round(23.4567) = 23; round(234567, -3) = 235000")
+        ttCalculator.SetToolTip(cmdSign, "ign of value. For example sign(4.5) = 1; sign(-4.5) = -1")
 
     End Sub
 
