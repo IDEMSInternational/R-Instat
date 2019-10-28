@@ -88,6 +88,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdSign, "ign of value. For example sign(4.5) = 1; sign(-4.5) = -1")
         ttCalculator.SetToolTip(cmdLogit, "logit quantile i.e. log(p/(1-p). For example logit(0.95) = 2.944. If > 1 then used as percentage, so logit(95) =2.944.")
         ttCalculator.SetToolTip(cmdLogistic, "logistic probability. For example qlogis(3) = 0.9526")
+        ttCalculator.SetToolTip(cmdAtan2, "angle in radians corresponding to given tangent, between x-axis ans x,y, point. For example atan2(1,1) = 0.7854 (= pi/4); deg(atan2(1,1)) = 45.")
     End Sub
 
     Public Sub Reset()
