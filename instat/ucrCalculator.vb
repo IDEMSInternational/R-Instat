@@ -79,6 +79,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdLog, "logarithm to base 10. For example log10(1000) =3 (=10^3)")
         ttCalculator.SetToolTip(cmdTan, " tangent of angle in radians. For example tan(pi/4) = sin(pi/4)/cos(pi/4) = tan(rad(45)) = 1")
         ttCalculator.SetToolTip(cmdAtan, "angle corresponding to a given tangent (in the range 0 to pi). For example atan(1) = 0..7854 (= pi/4); deg(atan(1)) = 45.")
+        ttCalculator.SetToolTip(cmdTrunc, "truncates to the nearest whole number in the direction of 0. So trunc(3.5) = 3 and trunc(-3.5) = -3.")
+
     End Sub
 
     Public Sub Reset()
