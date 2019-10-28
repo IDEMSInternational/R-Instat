@@ -72,6 +72,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdCeiling, " Integer above the given value. For example ceiling(3.5) = 4; ceiling(-3.5) = -3")
         ttCalculator.SetToolTip(cmdPi, "pi = 3.14159")
         ttCalculator.SetToolTip(cmdLog, "(natural) logarithm. For example log(512) = 6.238; log(512,2) = 9 (log to base 2, i.e. 2 ^ 9 =512)")
+        ttCalculator.SetToolTip(cmdSin, "sine of angle in radians. For example sin(pi/2) = sin(rad(90)) = 1.")
+
     End Sub
 
     Public Sub Reset()
