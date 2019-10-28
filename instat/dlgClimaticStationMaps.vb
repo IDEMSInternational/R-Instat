@@ -14,8 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgClimaticStationMaps
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -62,11 +62,15 @@ Public Class dlgClimaticStationMaps
         ucrSelectorStation.SetParameter(New RParameter("data", 0))
         ucrSelectorStation.SetParameterIsrfunction()
 
+        ucrReceiverGeometry.bAutoFill = True
+        ucrReceiverGeometry.Selector = ucrSelectorOutline
 
         ucrReceiverFill.SetParameter(New RParameter("fill", 0))
         ucrReceiverFill.Selector = ucrSelectorOutline
         ucrReceiverFill.SetParameterIsString()
         ucrReceiverFill.bWithQuotes = False
+
+
 
         ucrReceiverLongitude.SetParameter(New RParameter("x", 0))
         ucrReceiverLongitude.Selector = ucrSelectorStation
@@ -313,5 +317,21 @@ Public Class dlgClimaticStationMaps
 
     Private Sub ucrChkAddPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddPoints.ControlValueChanged
         ChangeSize()
+    End Sub
+
+    Private Sub ucrSelectorOutline_DataFrameChanged() Handles ucrSelectorOutline.DataFrameChanged
+        Dim clsSetGeometry As New RFunction
+        Dim GeometryOutput As SymbolicExpression
+        Dim strColType As String
+
+        clsSetGeometry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_geometry")
+        clsSetGeometry.AddParameter("dataframe", ucrSelectorOutline.strCurrentDataFrame)
+        GeometryOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsSetGeometry.ToScript(), bSilent:=True)
+
+        If GeometryOutput IsNot Nothing AndAlso Not GeometryOutput.Type = Internals.SymbolicExpressionType.Null Then
+            strColType = GeometryOutput.AsCharacter(0)
+            ucrReceiverGeometry.SetText(strColType)
+        End If
+
     End Sub
 End Class
