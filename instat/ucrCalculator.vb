@@ -82,6 +82,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdTrunc, "truncates to the nearest whole number in the direction of 0. So trunc(3.5) = 3 and trunc(-3.5) = -3.")
         ttCalculator.SetToolTip(cmdDeg, "change from radians to degrees. For example deg(pi/2) = 90 ( = pi/2 360/(2pi))")
         ttCalculator.SetToolTip(cmdExp, "exponential function. For example exp(3) = e ^ 3 = 2.71828 ^ 3 = 20.09")
+        ttCalculator.SetToolTip(cmdAbs, "absolute value. For example abs(4.5) = abs(-4.5) = 4.5")
+
     End Sub
 
     Public Sub Reset()
