@@ -78,6 +78,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdcummin, "cumulative minima. For example cummin(c(3,2,1,4,0)) = (3,2.,1,1,0)")
         ttCalculator.SetToolTip(cmdMovSum, "moving (or rolling) totals. For example rollsum(c(3,2,1,4,0) ,3,fill=NA, align=""left"") = (6,7,5,NA,NA)")
         ttCalculator.SetToolTip(cmdmovemean, "moving (or rolling) mean. For example rollmean(c(3,2,1,6,2) ,3,fill=NA) = (NA,2,3,3,NA)")
+        ttCalculator.SetToolTip(cmMovMed, "moving (or rolling) medians. For example rollmedian(c(3,2,1,6,2) ,3,fill=NA) = (NA,2,2,2,NA)")
 
     End Sub
 
