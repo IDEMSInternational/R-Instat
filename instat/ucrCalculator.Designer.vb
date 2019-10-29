@@ -303,6 +303,10 @@ Partial Class ucrCalculator
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.cmdMovmin = New System.Windows.Forms.Button()
+        Me.cmdNafill = New System.Windows.Forms.Button()
+        Me.cmdNaest = New System.Windows.Forms.Button()
+        Me.cmdNaapprox = New System.Windows.Forms.Button()
+        Me.cmdNasplin = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -619,6 +623,10 @@ Partial Class ucrCalculator
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.cmdNasplin)
+        Me.grpTransform.Controls.Add(Me.cmdNaapprox)
+        Me.grpTransform.Controls.Add(Me.cmdNaest)
+        Me.grpTransform.Controls.Add(Me.cmdNafill)
         Me.grpTransform.Controls.Add(Me.cmdMovmin)
         Me.grpTransform.Controls.Add(Me.cmdRowRank)
         Me.grpTransform.Controls.Add(Me.cmdDiff)
@@ -2148,6 +2156,30 @@ Partial Class ucrCalculator
         Me.cmdMovmin.Name = "cmdMovmin"
         Me.cmdMovmin.UseVisualStyleBackColor = True
         '
+        'cmdNafill
+        '
+        resources.ApplyResources(Me.cmdNafill, "cmdNafill")
+        Me.cmdNafill.Name = "cmdNafill"
+        Me.cmdNafill.UseVisualStyleBackColor = True
+        '
+        'cmdNaest
+        '
+        resources.ApplyResources(Me.cmdNaest, "cmdNaest")
+        Me.cmdNaest.Name = "cmdNaest"
+        Me.cmdNaest.UseVisualStyleBackColor = True
+        '
+        'cmdNaapprox
+        '
+        resources.ApplyResources(Me.cmdNaapprox, "cmdNaapprox")
+        Me.cmdNaapprox.Name = "cmdNaapprox"
+        Me.cmdNaapprox.UseVisualStyleBackColor = True
+        '
+        'cmdNasplin
+        '
+        resources.ApplyResources(Me.cmdNasplin, "cmdNasplin")
+        Me.cmdNasplin.Name = "cmdNasplin"
+        Me.cmdNasplin.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
@@ -2448,4 +2480,8 @@ Partial Class ucrCalculator
     Friend WithEvents cmdCircQuantile As Button
     Friend WithEvents cmdCircular As Button
     Friend WithEvents cmdMovmin As Button
+    Friend WithEvents cmdNasplin As Button
+    Friend WithEvents cmdNaapprox As Button
+    Friend WithEvents cmdNaest As Button
+    Friend WithEvents cmdNafill As Button
 End Class

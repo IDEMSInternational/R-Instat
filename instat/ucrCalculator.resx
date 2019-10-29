@@ -1467,6 +1467,126 @@
   <data name="&gt;&gt;grpDates.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="cmdNasplin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdNasplin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>277, 245</value>
+  </data>
+  <data name="cmdNasplin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="cmdNasplin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 37</value>
+  </data>
+  <data name="cmdNasplin.TabIndex" type="System.Int32, mscorlib">
+    <value>197</value>
+  </data>
+  <data name="cmdNasplin.Text" xml:space="preserve">
+    <value>nasplin</value>
+  </data>
+  <data name="&gt;&gt;cmdNasplin.Name" xml:space="preserve">
+    <value>cmdNasplin</value>
+  </data>
+  <data name="&gt;&gt;cmdNasplin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdNasplin.Parent" xml:space="preserve">
+    <value>grpTransform</value>
+  </data>
+  <data name="&gt;&gt;cmdNasplin.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cmdNaapprox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdNaapprox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>186, 250</value>
+  </data>
+  <data name="cmdNaapprox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="cmdNaapprox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 37</value>
+  </data>
+  <data name="cmdNaapprox.TabIndex" type="System.Int32, mscorlib">
+    <value>196</value>
+  </data>
+  <data name="cmdNaapprox.Text" xml:space="preserve">
+    <value>naapprox</value>
+  </data>
+  <data name="&gt;&gt;cmdNaapprox.Name" xml:space="preserve">
+    <value>cmdNaapprox</value>
+  </data>
+  <data name="&gt;&gt;cmdNaapprox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdNaapprox.Parent" xml:space="preserve">
+    <value>grpTransform</value>
+  </data>
+  <data name="&gt;&gt;cmdNaapprox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cmdNaest.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdNaest.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 250</value>
+  </data>
+  <data name="cmdNaest.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="cmdNaest.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 37</value>
+  </data>
+  <data name="cmdNaest.TabIndex" type="System.Int32, mscorlib">
+    <value>195</value>
+  </data>
+  <data name="cmdNaest.Text" xml:space="preserve">
+    <value>naest</value>
+  </data>
+  <data name="&gt;&gt;cmdNaest.Name" xml:space="preserve">
+    <value>cmdNaest</value>
+  </data>
+  <data name="&gt;&gt;cmdNaest.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdNaest.Parent" xml:space="preserve">
+    <value>grpTransform</value>
+  </data>
+  <data name="&gt;&gt;cmdNaest.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cmdNafill.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdNafill.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 250</value>
+  </data>
+  <data name="cmdNafill.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="cmdNafill.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 37</value>
+  </data>
+  <data name="cmdNafill.TabIndex" type="System.Int32, mscorlib">
+    <value>194</value>
+  </data>
+  <data name="cmdNafill.Text" xml:space="preserve">
+    <value>nafill</value>
+  </data>
+  <data name="&gt;&gt;cmdNafill.Name" xml:space="preserve">
+    <value>cmdNafill</value>
+  </data>
+  <data name="&gt;&gt;cmdNafill.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdNafill.Parent" xml:space="preserve">
+    <value>grpTransform</value>
+  </data>
+  <data name="&gt;&gt;cmdNafill.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="cmdMovmin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1495,7 +1615,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdMovmin.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>4</value>
   </data>
   <data name="cmdRowRank.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1525,7 +1645,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdRowRank.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>5</value>
   </data>
   <data name="cmdDiff.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1555,7 +1675,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdDiff.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="cmdCumdist.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1585,7 +1705,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdCumdist.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>7</value>
   </data>
   <data name="cmdmovemean.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1615,7 +1735,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdmovemean.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>8</value>
   </data>
   <data name="cmdCumMean.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1645,7 +1765,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdCumMean.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>9</value>
   </data>
   <data name="cmdNtile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1675,7 +1795,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdNtile.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>10</value>
   </data>
   <data name="cmMovMed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1705,7 +1825,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmMovMed.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>11</value>
   </data>
   <data name="cmdMRank.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1735,7 +1855,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdMRank.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>12</value>
   </data>
   <data name="cmdDRank.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1765,7 +1885,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdDRank.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>13</value>
   </data>
   <data name="cmdMovMax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1795,7 +1915,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdMovMax.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>14</value>
   </data>
   <data name="cmdMovSum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1825,7 +1945,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdMovSum.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>15</value>
   </data>
   <data name="cmdpercentrank.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -1858,7 +1978,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdpercentrank.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>16</value>
   </data>
   <data name="cmdcumsum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1888,7 +2008,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdcumsum.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>17</value>
   </data>
   <data name="cmdcummin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1918,7 +2038,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdcummin.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>18</value>
   </data>
   <data name="cmdcummax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1948,7 +2068,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdcummax.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>19</value>
   </data>
   <data name="cmdPMin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1978,7 +2098,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdPMin.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>20</value>
   </data>
   <data name="cmdpmax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2008,7 +2128,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdpmax.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>21</value>
   </data>
   <data name="cmdLead.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2038,7 +2158,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdLead.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>22</value>
   </data>
   <data name="cmdLag.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2068,7 +2188,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;cmdLag.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>23</value>
   </data>
   <data name="grpTransform.Location" type="System.Drawing.Point, System.Drawing">
     <value>580, 74</value>
@@ -2080,7 +2200,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="grpTransform.Size" type="System.Drawing.Size, System.Drawing">
-    <value>398, 291</value>
+    <value>398, 304</value>
   </data>
   <data name="grpTransform.TabIndex" type="System.Int32, mscorlib">
     <value>189</value>
