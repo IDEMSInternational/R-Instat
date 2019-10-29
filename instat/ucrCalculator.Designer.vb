@@ -87,7 +87,7 @@ Partial Class ucrCalculator
         Me.grpTransform = New System.Windows.Forms.GroupBox()
         Me.cmdRowRank = New System.Windows.Forms.Button()
         Me.cmdDiff = New System.Windows.Forms.Button()
-        Me.cmdEcdf = New System.Windows.Forms.Button()
+        Me.cmdCumdist = New System.Windows.Forms.Button()
         Me.cmdmovemean = New System.Windows.Forms.Button()
         Me.cmdCumMean = New System.Windows.Forms.Button()
         Me.cmdNtile = New System.Windows.Forms.Button()
@@ -302,6 +302,7 @@ Partial Class ucrCalculator
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.cmdMovmin = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -618,9 +619,10 @@ Partial Class ucrCalculator
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.cmdMovmin)
         Me.grpTransform.Controls.Add(Me.cmdRowRank)
         Me.grpTransform.Controls.Add(Me.cmdDiff)
-        Me.grpTransform.Controls.Add(Me.cmdEcdf)
+        Me.grpTransform.Controls.Add(Me.cmdCumdist)
         Me.grpTransform.Controls.Add(Me.cmdmovemean)
         Me.grpTransform.Controls.Add(Me.cmdCumMean)
         Me.grpTransform.Controls.Add(Me.cmdNtile)
@@ -653,11 +655,11 @@ Partial Class ucrCalculator
         Me.cmdDiff.Name = "cmdDiff"
         Me.cmdDiff.UseVisualStyleBackColor = True
         '
-        'cmdEcdf
+        'cmdCumdist
         '
-        resources.ApplyResources(Me.cmdEcdf, "cmdEcdf")
-        Me.cmdEcdf.Name = "cmdEcdf"
-        Me.cmdEcdf.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCumdist, "cmdCumdist")
+        Me.cmdCumdist.Name = "cmdCumdist"
+        Me.cmdCumdist.UseVisualStyleBackColor = True
         '
         'cmdmovemean
         '
@@ -1053,6 +1055,7 @@ Partial Class ucrCalculator
         '
         Me.grpLogical.Controls.Add(Me.cmdFalse)
         Me.grpLogical.Controls.Add(Me.cmdTrue)
+        Me.grpLogical.Controls.Add(Me.grpMaths)
         Me.grpLogical.Controls.Add(Me.cmdDoubleSqrBrackets)
         Me.grpLogical.Controls.Add(Me.cmdIn)
         Me.grpLogical.Controls.Add(Me.cmdWhich)
@@ -1863,6 +1866,8 @@ Partial Class ucrCalculator
         '
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
         Me.grpWakefield.Controls.Add(Me.cmdValid)
+        Me.grpWakefield.Controls.Add(Me.grpProbabilty)
+        Me.grpWakefield.Controls.Add(Me.grpSummary)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
         Me.grpWakefield.Controls.Add(Me.cmdString)
         Me.grpWakefield.Controls.Add(Me.cmdState)
@@ -1983,6 +1988,7 @@ Partial Class ucrCalculator
         '
         Me.grpCircular.Controls.Add(Me.cmdCircular)
         Me.grpCircular.Controls.Add(Me.cmdCircQuantile)
+        Me.grpCircular.Controls.Add(Me.grpLogical)
         Me.grpCircular.Controls.Add(Me.cmdCircMax)
         Me.grpCircular.Controls.Add(Me.cmdA1)
         Me.grpCircular.Controls.Add(Me.cmdAngVar)
@@ -2136,16 +2142,18 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'cmdMovmin
+        '
+        resources.ApplyResources(Me.cmdMovmin, "cmdMovmin")
+        Me.cmdMovmin.Name = "cmdMovmin"
+        Me.cmdMovmin.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpLogical)
-        Me.Controls.Add(Me.grpSummary)
-        Me.Controls.Add(Me.grpMaths)
-        Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpDates)
@@ -2314,7 +2322,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdMultiply As Button
     Friend WithEvents cmdpercentrank As Button
     Friend WithEvents cmdDiff As Button
-    Friend WithEvents cmdEcdf As Button
+    Friend WithEvents cmdCumdist As Button
     Friend WithEvents cmdmovemean As Button
     Friend WithEvents cmdCumMean As Button
     Friend WithEvents cmdNtile As Button
@@ -2439,4 +2447,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdCircRho As Button
     Friend WithEvents cmdCircQuantile As Button
     Friend WithEvents cmdCircular As Button
+    Friend WithEvents cmdMovmin As Button
 End Class
