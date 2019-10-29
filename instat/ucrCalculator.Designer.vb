@@ -297,16 +297,16 @@ Partial Class ucrCalculator
         Me.cmdMedianHL = New System.Windows.Forms.Button()
         Me.cmdCircMedian = New System.Windows.Forms.Button()
         Me.cmdCircMean = New System.Windows.Forms.Button()
-        Me.ucrInputCalOptions = New instat.ucrInputComboBox()
-        Me.ucrSaveResultInto = New instat.ucrInputComboBox()
-        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
-        Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.cmdMovmin = New System.Windows.Forms.Button()
         Me.cmdNafill = New System.Windows.Forms.Button()
         Me.cmdNaest = New System.Windows.Forms.Button()
         Me.cmdNaapprox = New System.Windows.Forms.Button()
         Me.cmdNasplin = New System.Windows.Forms.Button()
+        Me.ucrInputCalOptions = New instat.ucrInputComboBox()
+        Me.ucrSaveResultInto = New instat.ucrInputComboBox()
+        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
+        Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1873,6 +1873,8 @@ Partial Class ucrCalculator
         '
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
         Me.grpWakefield.Controls.Add(Me.cmdValid)
+        Me.grpWakefield.Controls.Add(Me.grpProbabilty)
+        Me.grpWakefield.Controls.Add(Me.grpMaths)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
         Me.grpWakefield.Controls.Add(Me.cmdString)
         Me.grpWakefield.Controls.Add(Me.cmdState)
@@ -1993,6 +1995,8 @@ Partial Class ucrCalculator
         '
         Me.grpCircular.Controls.Add(Me.cmdCircular)
         Me.grpCircular.Controls.Add(Me.cmdCircQuantile)
+        Me.grpCircular.Controls.Add(Me.grpSummary)
+        Me.grpCircular.Controls.Add(Me.grpLogical)
         Me.grpCircular.Controls.Add(Me.cmdCircMax)
         Me.grpCircular.Controls.Add(Me.cmdA1)
         Me.grpCircular.Controls.Add(Me.cmdAngVar)
@@ -2107,6 +2111,36 @@ Partial Class ucrCalculator
         Me.cmdCircMean.Name = "cmdCircMean"
         Me.cmdCircMean.UseVisualStyleBackColor = True
         '
+        'cmdMovmin
+        '
+        resources.ApplyResources(Me.cmdMovmin, "cmdMovmin")
+        Me.cmdMovmin.Name = "cmdMovmin"
+        Me.cmdMovmin.UseVisualStyleBackColor = True
+        '
+        'cmdNafill
+        '
+        resources.ApplyResources(Me.cmdNafill, "cmdNafill")
+        Me.cmdNafill.Name = "cmdNafill"
+        Me.cmdNafill.UseVisualStyleBackColor = True
+        '
+        'cmdNaest
+        '
+        resources.ApplyResources(Me.cmdNaest, "cmdNaest")
+        Me.cmdNaest.Name = "cmdNaest"
+        Me.cmdNaest.UseVisualStyleBackColor = True
+        '
+        'cmdNaapprox
+        '
+        resources.ApplyResources(Me.cmdNaapprox, "cmdNaapprox")
+        Me.cmdNaapprox.Name = "cmdNaapprox"
+        Me.cmdNaapprox.UseVisualStyleBackColor = True
+        '
+        'cmdNasplin
+        '
+        resources.ApplyResources(Me.cmdNasplin, "cmdNasplin")
+        Me.cmdNasplin.Name = "cmdNasplin"
+        Me.cmdNasplin.UseVisualStyleBackColor = True
+        '
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
@@ -2146,46 +2180,12 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'cmdMovmin
-        '
-        resources.ApplyResources(Me.cmdMovmin, "cmdMovmin")
-        Me.cmdMovmin.Name = "cmdMovmin"
-        Me.cmdMovmin.UseVisualStyleBackColor = True
-        '
-        'cmdNafill
-        '
-        resources.ApplyResources(Me.cmdNafill, "cmdNafill")
-        Me.cmdNafill.Name = "cmdNafill"
-        Me.cmdNafill.UseVisualStyleBackColor = True
-        '
-        'cmdNaest
-        '
-        resources.ApplyResources(Me.cmdNaest, "cmdNaest")
-        Me.cmdNaest.Name = "cmdNaest"
-        Me.cmdNaest.UseVisualStyleBackColor = True
-        '
-        'cmdNaapprox
-        '
-        resources.ApplyResources(Me.cmdNaapprox, "cmdNaapprox")
-        Me.cmdNaapprox.Name = "cmdNaapprox"
-        Me.cmdNaapprox.UseVisualStyleBackColor = True
-        '
-        'cmdNasplin
-        '
-        resources.ApplyResources(Me.cmdNasplin, "cmdNasplin")
-        Me.cmdNasplin.Name = "cmdNasplin"
-        Me.cmdNasplin.UseVisualStyleBackColor = True
-        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpLogical)
-        Me.Controls.Add(Me.grpSummary)
-        Me.Controls.Add(Me.grpMaths)
-        Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpDates)
