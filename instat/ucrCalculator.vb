@@ -69,6 +69,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdLag, "Shift a variable down. For example lag(1:5) = (NA,1,2,3,4); lag(1:5,3) = (NA,NA,NA, 1,2)")
         ttCalculator.SetToolTip(cmdLead, "Shift a variable up. For example lead(1:5) = (2,3,4,5,NA); lead(1:5;3) = (4,5, NA,NA,NA)")
         ttCalculator.SetToolTip(cmdDiff, "difference between successive elements. For example diff(c(1,4,3,7)) = (NA 3,-1,4)")
+        ttCalculator.SetToolTip(cmdpmax, " maximum of a set of variables. For examples pmax(c(1,3,5),c(6,4,2)) = (6,4,5)")
 
     End Sub
 
