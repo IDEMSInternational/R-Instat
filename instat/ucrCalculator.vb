@@ -1902,4 +1902,36 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply()", 1)
         End If
     End Sub
+
+    Private Sub cmdNafill_Click(sender As Object, e As EventArgs) Handles cmdNafill.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.fill0(object = , fill = , ix = !is.na(object)))", 32)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.fill0()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdNaest_Click(sender As Object, e As EventArgs) Handles cmdNaest.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.aggregate(object = , by = 1, FUN = mean, na.rm = FALSE, maxgap = Inf))", 51)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.aggregate()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdNaapprox_Click(sender As Object, e As EventArgs) Handles cmdNaapprox.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.approx(object = , x = index(object), xout = , na.rm = TRUE, maxgap = Inf, along))", 65)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.approx()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdNasplin_Click(sender As Object, e As EventArgs) Handles cmdNasplin.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.spline(object = , x = index(object), xout = , na.rm = TRUE, maxgap = Inf, along))", 65)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.spline()", 1)
+        End If
+    End Sub
 End Class
