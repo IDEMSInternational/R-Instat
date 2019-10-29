@@ -1094,7 +1094,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdEcdf_Click(sender As Object, e As EventArgs) Handles cmdEcdf.Click
+    Private Sub cmdEcdf_Click(sender As Object, e As EventArgs) Handles cmdCumdist.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::cume_dist()", 1)
     End Sub
 
