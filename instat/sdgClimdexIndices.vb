@@ -115,11 +115,11 @@ Public Class sdgClimdexIndices
 
         ' Precipitation tab:
         ucrChkMonthlyMax1dayPrec.SetParameter(New RParameter("max_1day_rain", "Monthly_Maximum_1day_Precipitation", 16), bNewChangeParameterValue:=False)
-        ucrChkMonthlyMax1dayPrec.SetText("Monthly/Yearly Maximum 1-day Precipitation [17]")
+        ucrChkMonthlyMax1dayPrec.SetText("Monthly/Yearly Maximum 1-day Precipitation [17: Rx1day]")
         '        dctInputindicesTriples.Add(ucrChkMonthlyMax1dayPrec.chkCheck.Text, {"Monthly_Maximum_1day_Precipitation", "climdex.rx1day"}.ToList)
 
         ucrChkMonthlyMax5dayPrec.SetParameter(New RParameter("max_5day_rain", "Monthly_Maximum_5day_Precipitation", 17), bNewChangeParameterValue:=False)
-        ucrChkMonthlyMax5dayPrec.SetText("Monthly/Yearly Maximum Consecutive 5-day Precipitation [18]")
+        ucrChkMonthlyMax5dayPrec.SetText("Monthly/Yearly Maximum Consecutive 5-day Precipitation [18:Rx5day]")
         '        dctInputindicesTriples.Add(ucrChkMonthlyMax5dayPrec.chkCheck.Text, {"Monthly_Maximum_Consecutive_5day_Precipitation", "climdex.rx5day"}.ToList)
         ucrChkMonthlyMax5dayPrec.AddToLinkedControls(ucrChkCentreMean, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -128,19 +128,19 @@ Public Class sdgClimdexIndices
         ucrChkCentreMean.SetRDefault("FALSE")
 
         ucrChkSimplePrecII.SetParameter(New RParameter("simple_rain_intensity", "Simple_Precipitation_Intensity_Index", 18), bNewChangeParameterValue:=False)
-        ucrChkSimplePrecII.SetText("Simple Precipitation Intensity Index [19]")
+        ucrChkSimplePrecII.SetText("Simple Precipitation Intensity Index [19:SDII]")
         '        dctInputindicesTriples.Add(ucrChkSimplePrecII.chkCheck.Text, {"Simple_Precipitation_Intensity_Index", "climdex.sdii"}.ToList)
 
         ucrChkPrecExceed10mm.SetParameter(New RParameter("rain_above_10mm", "Precipitation_Exceeding_10mm_Per_Day", 19), bNewChangeParameterValue:=False)
-        ucrChkPrecExceed10mm.SetText("Precipitation Exceeding 10mm Per Day [20]")
+        ucrChkPrecExceed10mm.SetText("Precipitation >= 10mm Per Day [20]")
         '        dctInputindicesTriples.Add(ucrChkPrecExceed10mm.chkCheck.Text, {"Precipitation_Exceeding_10mm_Per_Day", "climdex.r10mm"}.ToList)
 
         ucrChkPrecExceed20mm.SetParameter(New RParameter("rain_above_20mm", "Precipitation_Exceeding_20mm_Per_Day", 20), bNewChangeParameterValue:=False)
-        ucrChkPrecExceed20mm.SetText("Precipitation Exceeding 20mm Per Day [21]")
+        ucrChkPrecExceed20mm.SetText("Precipitation >= 20mm Per Day [21]")
         '        dctInputindicesTriples.Add(ucrChkPrecExceed20mm.chkCheck.Text, {"Precipitation_Exceeding_20mm_Per_Day", "climdex.r20mm"}.ToList)
 
         ucrChkPrecExceedSpecifiedA.SetParameter(New RParameter("rain_above_amount", "Precipitation_Exceeding_a_Specified_Amount_Per_Day", 21), bNewChangeParameterValue:=False)
-        ucrChkPrecExceedSpecifiedA.SetText("Precipitation Exceeding a Specified Amount Per Day [22]")
+        ucrChkPrecExceedSpecifiedA.SetText("Precipitation >= a Specified Amount Per Day [22]")
         '        dctInputindicesTriples.Add(ucrChkPrecExceedSpecifiedA.chkCheck.Text, {"Precipitation_Exceeding_a_Specified_Amount_Per_Day", "climdex.rnnmm"}.ToList)
         ucrChkPrecExceedSpecifiedA.AddToLinkedControls(ucrInputThreshold, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -151,19 +151,19 @@ Public Class sdgClimdexIndices
         ucrInputThreshold.SetLinkedDisplayControl(lblThreshold)
 
         ucrChkMaxDrySpell.SetParameter(New RParameter("max_dry_spell_length", "Maximum_Length_of_Dry_Spell", 22), bNewChangeParameterValue:=False)
-        ucrChkMaxDrySpell.SetText("Maximum Length of Dry Spell [23]")
+        ucrChkMaxDrySpell.SetText("Maximum Length of Dry Spell [23:CDD]")
         '        dctInputindicesTriples.Add(ucrChkMaxDrySpell.chkCheck.Text, {"Maximum_Length_of_Dry_Spell", "climdex.cdd"}.ToList)
 
         ucrChkMaxWetSpell.SetParameter(New RParameter("max_wet_spell_length", "Maximum_Length_of_Wet_Spell", 23), bNewChangeParameterValue:=False)
-        ucrChkMaxWetSpell.SetText("Maximum Length of Wet Spell [24]")
+        ucrChkMaxWetSpell.SetText("Maximum Length of Wet Spell [24:CWD]")
         '        dctInputindicesTriples.Add(ucrChkMaxWetSpell.chkCheck.Text, {"Maximum_Length_of_Wet_Spell", "climdex.cwd"}.ToList)
 
         ucrChkPrecExceed95Percent.SetParameter(New RParameter("total_rain_above_95th_percentile", "Total_Daily_Precipitation_Exceeding_95th_Percentile_Threshold", 24), bNewChangeParameterValue:=False)
-        ucrChkPrecExceed95Percent.SetText("Total Daily Precipitation Exceeding 95th Percentile Threshold [25]")
+        ucrChkPrecExceed95Percent.SetText("Total Daily Precipitation Exceeding 95th Percentile Threshold [25:R95p]")
         '        dctInputindicesTriples.Add(ucrChkPrecExceed95Percent.chkCheck.Text, {"Total_Daily_Precipitation_Exceeding_95th_Percentile_Threshold", "climdex.r95ptot"}.ToList)
 
         ucrChkPrecExceed99Percent.SetParameter(New RParameter("total_rain_above_99th_percentile", "Total_Daily_Precipitation_Exceeding_99th_Percentile_Threshold", 25), bNewChangeParameterValue:=False)
-        ucrChkPrecExceed99Percent.SetText("Total Daily Precipitation Exceeding 99th Percentile Threshold [26]")
+        ucrChkPrecExceed99Percent.SetText("Total Daily Precipitation Exceeding 99th Percentile Threshold [26:R99p]")
         '        dctInputindicesTriples.Add(ucrChkPrecExceed99Percent.chkCheck.Text, {"Total_Daily_Precipitation_Exceeding_99th_Percentile_Threshold", "climdex.r99ptot"}.ToList)
 
         ucrChkTotalDailyPrec.SetParameter(New RParameter("total_daily_rain", "Total_Daily_Precipitation", 26), bNewChangeParameterValue:=False)
