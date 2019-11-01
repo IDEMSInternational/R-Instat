@@ -1420,6 +1420,7 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_tile)
 
         clsgeom_treemap.SetGeomName("geom_treemap")
+        clsgeom_treemap.SetGeomPackage("treemapify")
 
         clsgeom_treemap.AddAesParameter("area", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
         clsgeom_treemap.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
@@ -1442,14 +1443,15 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_treemap)
 
         clsgeom_treemap_text.SetGeomName("geom_treemap_text")
+        clsgeom_treemap_text.SetGeomPackage("treemapify")
+
+        clsgeom_treemap_text.SetGeomName("geom_treemap_text")
         clsgeom_treemap_text.AddAesParameter("area", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
         clsgeom_treemap_text.AddAesParameter("label", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
         clsgeom_treemap_text.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_treemap_text.AddAesParameter("size", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_treemap_text.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         clsgeom_treemap_text.AddAesParameter("family", strIncludedDataTypes:={"factor"})
-        clsgeom_treemap_text.AddAesParameter("fontface", strIncludedDataTypes:={"factor"})
-        clsgeom_treemap_text.AddAesParameter("angle", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_treemap_text.AddAesParameter("subgroup", strIncludedDataTypes:={"factor"})
         clsgeom_treemap_text.AddAesParameter("subgroup2", strIncludedDataTypes:={"factor"})
         clsgeom_treemap_text.AddAesParameter("subgroup3", strIncludedDataTypes:={"factor"})
@@ -1461,9 +1463,12 @@ Public Class ucrGeom
         clsgeom_treemap_text.AddLayerParameter("inherit.aes", "boolean", "TRUE")
         clsgeom_treemap_text.AddLayerParameter("layout", "list", Chr(34) & "squarified" & Chr(34), lstParameterStrings:={Chr(34) & "squarified" & Chr(34), Chr(34) & "scol" & Chr(34), Chr(34) & "srow" & Chr(34), Chr(34) & "fixed" & Chr(34)})
         clsgeom_treemap_text.AddLayerParameter("start", "list", Chr(34) & "bottomleft" & Chr(34), lstParameterStrings:={Chr(34) & "bottomleft" & Chr(34), Chr(34) & "topleft" & Chr(34), Chr(34) & "topright" & Chr(34), Chr(34) & "bottomright" & Chr(34)})
-        clsgeom_treemap_text.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_treemap_text.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_treemap_text.AddLayerParameter("angle", "numeric", "0", lstParameterStrings:={0, 0, 360})
+        clsgeom_treemap_text.AddLayerParameter("fontface", "list", Chr(34) & "plain" & Chr(34), lstParameterStrings:={Chr(34) & "plain" & Chr(34), Chr(34) & "bold" & Chr(34), Chr(34) & "italic" & Chr(34), Chr(34) & "bold.italic" & Chr(34)})
 
         lstAllGeoms.Add(clsgeom_treemap_text)
+
 
         clsgeom_tufteboxplot.SetGeomName("geom_tufteboxplot")
         clsgeom_tufteboxplot.SetGeomPackage("ggthemes")
