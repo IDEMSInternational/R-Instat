@@ -15,7 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgFitModel
+    Private clsAttach As New RFunction
+    Private clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Public bRCodeSet As Boolean = False
@@ -174,6 +177,13 @@ Public Class dlgFitModel
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
         clsLMOrGLM = clsLM
         bResetModelOptions = True
+
+        clsAttach.SetRCommand("attach")
+        clsDetach.SetRCommand("detach")
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("unload", "TRUE")
+
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -403,4 +413,22 @@ Public Class dlgFitModel
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ucrReceiverExpressionFitModel.AddtoCombobox(ucrReceiverExpressionFitModel.GetText)
     End Sub
+
+    Private Sub TryScript()
+
+
+        Try
+
+        Catch ex As Exception
+
+        Finally
+
+        End Try
+    End Sub
+
+    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
+        TryScript()
+    End Sub
+
+
 End Class
