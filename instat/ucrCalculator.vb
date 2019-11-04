@@ -1133,25 +1133,25 @@ Public Class ucrCalculator
 
     Private Sub cmdMovMax_Click(sender As Object, e As EventArgs) Handles cmdMovMax.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax(x = , k =3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 86)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax(x = , k =3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 73)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax(3, fill = NA)", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax(,k = 3, fill = NA)", 12)
         End If
     End Sub
 
     Private Sub cmdMovSum_Click(sender As Object, e As EventArgs) Handles cmdMovSum.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum(x= , k=3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 85)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum(x = , k=3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 72)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum(3, fill = NA)", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum(,k = 3, fill = NA)", 12)
         End If
     End Sub
 
     Private Sub cmMovMed_Click(sender As Object, e As EventArgs) Handles cmMovMed.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmedian(x= , k=3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 85)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmedian(x = , k = 3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 74)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmedian(3, fill = NA)", 3)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmedian(,k = 3, fill = NA)", 12)
         End If
     End Sub
 
@@ -1161,9 +1161,9 @@ Public Class ucrCalculator
 
     Private Sub cmdmovemean_Click(sender As Object, e As EventArgs) Handles cmdmovemean.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmean(x= , k=3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 85)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmean(x = , k=3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 72)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmean(3, fill = NA)", 3)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmean(,k = 3, fill = NA)", 12)
         End If
     End Sub
 
@@ -1921,15 +1921,15 @@ Public Class ucrCalculator
 
     Private Sub cmdMovmin_Click(sender As Object, e As EventArgs) Handles cmdMovmin.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply(data = , width = , FUN = min , by = 1, by.column = TRUE, fill = NA, na.pad = FALSE, partial = FALSE, align = c(""center"", ""left"", ""right""), coredata = TRUE)))", 159)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply(data = , width = , FUN = min , by = 1, by.column = TRUE, fill = NA, na.pad = FALSE, partial = FALSE, align = c(""center"", ""left"", ""right""), coredata = TRUE)))", 151)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply(3, fill = NA)", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply(,k = 3, fill = NA)", 11)
         End If
     End Sub
 
     Private Sub cmdNafill_Click(sender As Object, e As EventArgs) Handles cmdNafill.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.fill0(object = , fill = NA , ix = !is.na(object)))", 33)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.fill(object = , fill = NA , ix = !is.na(object)))", 33)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.fill()", 1)
         End If
@@ -1953,7 +1953,7 @@ Public Class ucrCalculator
 
     Private Sub cmdNasplin_Click(sender As Object, e As EventArgs) Handles cmdNasplin.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.spline(object = , x = index(object), xout = , na.rm = TRUE, maxgap = Inf, along))", 66)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.spline(object = , x = index(object), xout = , na.rm = FALSE, maxgap = Inf, along))", 66)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.spline()", 1)
         End If
