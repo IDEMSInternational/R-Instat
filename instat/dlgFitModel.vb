@@ -183,7 +183,8 @@ Public Class dlgFitModel
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("unload", "TRUE")
-
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -415,14 +416,42 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub TryScript()
-
+        Dim strOutPut As String
+        Dim strAttach As String
+        Dim strDetach As String
+        Dim strTempScript As String = ""
+        Dim strVecOutput As CharacterVector
+        Dim clsCommandString As RCodeStructure
 
         Try
-
+            If ucrReceiverResponseVar.IsEmpty AndAlso ucrReceiverExpressionFitModel.IsEmpty Then
+                ucrInputTryMessage.SetName("")
+            Else
+                'get strScript here
+                strAttach = clsAttach.Clone().ToScript(strTempScript)
+                frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
+                strTempScript = ""
+                clsCommandString = ucrBase.clsRsyntax.clsBaseFunction.Clone()
+                clsCommandString.RemoveAssignTo()
+                strOutPut = clsCommandString.ToScript(strTempScript, ucrBase.clsRsyntax.clsBaseFunction.ToScript.ToString)
+                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript & strOutPut, bSilent:=True)
+                If strVecOutput IsNot Nothing Then
+                    If strVecOutput.Length > 1 Then
+                        ucrInputTryMessage.SetName("Model runs without error")
+                        ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
+                    End If
+                Else
+                    ucrInputTryMessage.SetName("Command produced an error or no output to display.")
+                    ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
+                End If
+            End If
         Catch ex As Exception
-
+            ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
+            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
         Finally
-
+            strTempScript = ""
+            strDetach = clsDetach.Clone().ToScript(strTempScript)
+            frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
         End Try
     End Sub
 
