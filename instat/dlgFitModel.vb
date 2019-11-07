@@ -416,42 +416,53 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub TryScript()
-        Dim strOutPut As String
-        Dim strAttach As String
-        Dim strDetach As String
-        Dim strTempScript As String = ""
         Dim strVecOutput As CharacterVector
-        Dim clsCommandString As RCodeStructure
+        Dim bValid As Boolean
 
         Try
             If ucrReceiverResponseVar.IsEmpty AndAlso ucrReceiverExpressionFitModel.IsEmpty Then
                 ucrInputTryMessage.SetName("")
             Else
-                'get strScript here
-                strAttach = clsAttach.Clone().ToScript(strTempScript)
-                frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
-                strTempScript = ""
-                clsCommandString = ucrBase.clsRsyntax.clsBaseFunction.Clone()
-                clsCommandString.RemoveAssignTo()
-                strOutPut = clsCommandString.ToScript(strTempScript, ucrBase.clsRsyntax.clsBaseFunction.ToScript.ToString)
-                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript & strOutPut, bSilent:=True)
-                If strVecOutput IsNot Nothing Then
-                    If strVecOutput.Length > 1 Then
-                        ucrInputTryMessage.SetName("Model runs without error")
-                        ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
+                Dim strScriptCommands As String = ""
+                Dim lstScriptCommands As New List(Of String)
+
+                'get the before th code scripts,base script and the after code script
+                lstScriptCommands.AddRange(ucrBase.clsRsyntax.GetBeforeCodesScripts())
+                lstScriptCommands.Add(ucrBase.clsRsyntax.GetScript())
+                lstScriptCommands.AddRange(ucrBase.clsRsyntax.GetAfterCodesScripts())
+
+                'concantenate the commands into one sentence for splitting purposes
+                strScriptCommands = ""
+                For i As Integer = 0 To lstScriptCommands.Count - 1
+                    strScriptCommands = strScriptCommands & Environment.NewLine & lstScriptCommands(i)
+                Next
+                'split the whole commands into indidual commands so that we can run them individually
+                lstScriptCommands.Clear() 'clear the list first
+                lstScriptCommands.AddRange(strScriptCommands.Split(New String() {Environment.NewLine}, StringSplitOptions.None))
+
+                bValid = False
+                For Each str As String In lstScriptCommands
+                    If Not String.IsNullOrWhiteSpace(str) Then
+                        strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(str, bSilent:=True)
+                        If strVecOutput IsNot Nothing AndAlso strVecOutput.Length > 1 Then
+                            bValid = True
+                            'don't break the if, because we may need to run of the detach command
+                        End If
                     End If
+                Next
+
+                If bValid Then
+                    ucrInputTryMessage.SetName("Model runs without error")
+                    ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
                 Else
                     ucrInputTryMessage.SetName("Command produced an error or no output to display.")
                     ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
                 End If
+
             End If
         Catch ex As Exception
             ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
             ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-        Finally
-            strTempScript = ""
-            strDetach = clsDetach.Clone().ToScript(strTempScript)
-            frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
         End Try
     End Sub
 
