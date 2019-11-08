@@ -32,8 +32,8 @@ Public Class dlgDisplayTopN
     Private clsStatSummaryPointBarAesFunction As New RFunction
     Private clsStatSummaryLineRangeFunction As New RFunction
     Private clsStatSummaryLineRangeAesFunction As New RFunction
-    Private clsStatCountPointFunction As New RFunction
-    Private clsStatCountPointAesFunction As New RFunction
+    Private clsStatCountPointBarFunction As New RFunction
+    Private clsStatCountPointBarAesFunction As New RFunction
     Private clsStatCountLineRangeFunction As New RFunction
     Private clsStatCountLineRangeAesFunction As New RFunction
 
@@ -57,7 +57,7 @@ Public Class dlgDisplayTopN
     'Parameter names for geoms
     Private strStatSummaryPointBarParameterName As String = "stat_summary_pointbar"
     Private strStatSummaryLineRangeParameterName As String = "stat_summary_linerange"
-    Private strStatCountPointBarParameterName As String = "stat_count_point"
+    Private strStatCountPointBarParameterName As String = "stat_count_pointbar"
     Private strStatCountLineRangeParameterName As String = "stat_count_linerange"
     Private strGeomParameterNames() As String = {strStatSummaryPointBarParameterName, strStatSummaryLineRangeParameterName, strStatCountPointBarParameterName, strStatCountLineRangeParameterName}
 
@@ -102,6 +102,13 @@ Public Class dlgDisplayTopN
         ucrReceiverWeightBy.bWithQuotes = False
         ucrReceiverWeightBy.SetDataType("numeric")
         ucrReceiverWeightBy.SetSelectorHeading("Numerics")
+
+        ucrInputSummary.SetParameter(New RParameter("fun.y", 5))
+        ucrInputSummary.SetItems({"sum", "mean", "min", "max"})
+        ucrInputSummary.AddQuotesIfUnrecognised = False
+        ucrInputSummary.SetLinkedDisplayControl(lblSummary)
+        ucrInputSummary.SetValidationTypeAsRVariable()
+        ucrInputSummary.bAllowNonConditionValues = True
 
         ucrInputNLevels.SetValidationTypeAsNumeric()
         ucrInputNLevels.SetParameter(New RParameter("n", iNewPosition:=1))
@@ -170,8 +177,8 @@ Public Class dlgDisplayTopN
         clsStatSummaryPointBarAesFunction = New RFunction
         clsStatSummaryLineRangeFunction = New RFunction
         clsStatSummaryLineRangeAesFunction = New RFunction
-        clsStatCountPointFunction = New RFunction
-        clsStatCountPointAesFunction = New RFunction
+        clsStatCountPointBarFunction = New RFunction
+        clsStatCountPointBarAesFunction = New RFunction
         clsStatCountLineRangeFunction = New RFunction
         clsStatCountLineRangeAesFunction = New RFunction
 
@@ -195,7 +202,7 @@ Public Class dlgDisplayTopN
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter(strStatCountPointBarParameterName, clsRFunctionParameter:=clsStatCountPointFunction, iPosition:=2)
+        clsBaseOperator.AddParameter(strStatCountPointBarParameterName, clsRFunctionParameter:=clsStatCountPointBarFunction, iPosition:=2)
         clsBaseOperator.AddParameter(strStatCountLineRangeParameterName, clsRFunctionParameter:=clsStatCountLineRangeFunction, iPosition:=3)
         clsBaseOperator.AddParameter(clsCoordFlipParam)
 
@@ -223,9 +230,9 @@ Public Class dlgDisplayTopN
         clsFctReorder.SetRCommand("fct_reorder")
         clsFctReorder.AddParameter(".fun", "length", iPosition:=2)
 
-        clsStatCountPointFunction.SetPackageName("ggplot2")
-        clsStatCountPointFunction.SetRCommand("stat_count")
-        clsStatCountPointFunction.AddParameter("geom", Chr(34) & "point" & Chr(34), iPosition:=2)
+        clsStatCountPointBarFunction.SetPackageName("ggplot2")
+        clsStatCountPointBarFunction.SetRCommand("stat_count")
+        clsStatCountPointBarFunction.AddParameter("geom", Chr(34) & "point" & Chr(34), iPosition:=2)
 
         clsStatCountLineRangeFunction.SetPackageName("ggplot2")
         clsStatCountLineRangeFunction.SetRCommand("stat_count")
@@ -270,7 +277,10 @@ Public Class dlgDisplayTopN
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsInTopNFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
-        ucrInputDisplay.AddAdditionalCodeParameterPair(clsStatCountPointFunction, New RParameter("geom", iNewPosition:=2), iAdditionalPairNo:=1)
+        ucrInputDisplay.AddAdditionalCodeParameterPair(clsStatCountPointBarFunction, New RParameter("geom", iNewPosition:=2), iAdditionalPairNo:=1)
+        ucrInputSummary.AddAdditionalCodeParameterPair(clsStatSummaryLineRangeFunction, New RParameter("fun.ymax", iNewPosition:=2), iAdditionalPairNo:=1)
+        ucrInputSummary.AddAdditionalCodeParameterPair(clsInTopNFunction, New RParameter("fun", iNewPosition:=3), iAdditionalPairNo:=2)
+        ucrInputSummary.AddAdditionalCodeParameterPair(clsFctReorder, New RParameter(".fun", iNewPosition:=3), iAdditionalPairNo:=3)
 
         ucrSelectorDisplayTopN.SetRCode(clsPipeOperator, bReset)
         ucrReceiverVariable.SetRCode(clsFctReorder, bReset)
@@ -281,6 +291,7 @@ Public Class dlgDisplayTopN
         ucrInputSymbol.SetRCode(clsDollarFormatFunction, bReset)
         ucrInputLayout.SetRCode(clsBaseOperator, bReset)
         ucrInputDisplay.SetRCode(clsStatSummaryPointBarFunction, bReset)
+        ucrInputSummary.SetRCode(clsStatSummaryPointBarFunction, bReset)
 
         bRCodeSet = True
         SetWeightAndDisplayOptions()
@@ -343,7 +354,10 @@ Public Class dlgDisplayTopN
         strBarLollipop = ucrInputDisplay.GetText()
 
         If ucrReceiverWeightBy.IsEmpty Then
-            clsBaseOperator.AddParameter(strStatCountPointBarParameterName, clsRFunctionParameter:=clsStatCountPointFunction, iPosition:=2)
+            ucrInputSummary.Visible = False
+            ucrChkIsCurrency.Visible = False
+            ucrInputSymbol.Visible = False
+            clsBaseOperator.AddParameter(strStatCountPointBarParameterName, clsRFunctionParameter:=clsStatCountPointBarFunction, iPosition:=2)
             If strBarLollipop = "Bar" Then
                 clsBaseOperator.RemoveParameterByName(strStatCountLineRangeParameterName)
             ElseIf strBarLollipop = "Lollipop" Then
@@ -356,6 +370,11 @@ Public Class dlgDisplayTopN
             clsFctReorder.RemoveParameterByName("na.rm")
             clsInTopNFunction.RemoveParameterByName("wt")
         Else
+            ucrInputSummary.Visible = True
+            ucrChkIsCurrency.Visible = True
+            If ucrChkIsCurrency.Checked Then
+                ucrInputSymbol.Visible = True
+            End If
             clsBaseOperator.AddParameter(strStatSummaryPointBarParameterName, clsRFunctionParameter:=clsStatSummaryPointBarFunction, iPosition:=2)
             If strBarLollipop = "Bar" Then
                 clsBaseOperator.RemoveParameterByName(strStatSummaryLineRangeParameterName)
@@ -365,7 +384,7 @@ Public Class dlgDisplayTopN
             clsBaseOperator.RemoveParameterByName(strStatCountPointBarParameterName)
             clsBaseOperator.RemoveParameterByName(strStatCountLineRangeParameterName)
             clsFctReorder.AddParameter(".x", ucrReceiverWeightBy.GetVariableNames(False), iPosition:=1)
-            clsFctReorder.AddParameter(".fun", "sum", iPosition:=2)
+            clsFctReorder.AddParameter(".fun", ucrInputSummary.GetText(), iPosition:=2)
             clsFctReorder.AddParameter("na.rm", "TRUE", iPosition:=3)
             clsInTopNFunction.AddParameter("wt", ucrReceiverWeightBy.GetVariableNames(False), iPosition:=2)
         End If
