@@ -46,6 +46,8 @@ Partial Class dlgDisplayTopN
         Me.ucrPnlDataType = New instat.UcrPanel()
         Me.ucrInputNLevels = New instat.ucrInputTextBox()
         Me.lblTopLevels = New System.Windows.Forms.Label()
+        Me.ucrInputSummary = New instat.ucrInputComboBox()
+        Me.lblSummary = New System.Windows.Forms.Label()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -211,10 +213,24 @@ Partial Class dlgDisplayTopN
         resources.ApplyResources(Me.lblTopLevels, "lblTopLevels")
         Me.lblTopLevels.Name = "lblTopLevels"
         '
+        'ucrInputSummary
+        '
+        Me.ucrInputSummary.AddQuotesIfUnrecognised = True
+        Me.ucrInputSummary.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSummary, "ucrInputSummary")
+        Me.ucrInputSummary.Name = "ucrInputSummary"
+        '
+        'lblSummary
+        '
+        resources.ApplyResources(Me.lblSummary, "lblSummary")
+        Me.lblSummary.Name = "lblSummary"
+        '
         'dlgDisplayTopN
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputSummary)
+        Me.Controls.Add(Me.lblSummary)
         Me.Controls.Add(Me.ucrInputNLevels)
         Me.Controls.Add(Me.ucrInputOrder)
         Me.Controls.Add(Me.lblTopLevels)
@@ -267,4 +283,6 @@ Partial Class dlgDisplayTopN
     Friend WithEvents lblTopLevels As Label
     Friend WithEvents ucrInputDisplay As ucrInputComboBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents ucrInputSummary As ucrInputComboBox
+    Friend WithEvents lblSummary As Label
 End Class

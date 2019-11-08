@@ -1190,11 +1190,13 @@ convert_to_dec_deg <- function (dd, mm = 0 , ss = 0, dir) {
   return(decdeg)
 }
 
-in_top_n <- function(x, n = 10, wt) {
+in_top_n <- function(x, n = 10, wt, fun = sum) {
   dat <- data.frame(x = x)
   if(!missing(wt)) {
     dat$wt <- wt
-    dat <- dat %>% count(x, wt = wt, sort = TRUE, name = "fq")
+    dat <- dat %>% 
+      group_by(x) %>%
+      summarise(fq = as.function(fun)(na.omit(wt))) %>% arrange(-fq)
   }
   else dat <- dat %>% count(x, sort = TRUE, name = "fq")
   return(x %in% dat$x[1:n])
