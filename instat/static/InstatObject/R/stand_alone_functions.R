@@ -1189,3 +1189,13 @@ convert_to_dec_deg <- function (dd, mm = 0 , ss = 0, dir) {
   decdeg <- (dd + ((mm * 60) + ss)/3600) * sgn
   return(decdeg)
 }
+
+in_top_n <- function(x, n = 10, wt) {
+  dat <- data.frame(x = x)
+  if(!missing(wt)) {
+    dat$wt <- wt
+    dat <- dat %>% count(x, wt = wt, sort = TRUE, name = "fq")
+  }
+  else dat <- dat %>% count(x, sort = TRUE, name = "fq")
+  return(x %in% dat$x[1:n])
+}
