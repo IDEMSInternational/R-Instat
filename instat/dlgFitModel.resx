@@ -532,7 +532,7 @@
     <value>9</value>
   </data>
   <data name="cmdZero.Text" xml:space="preserve">
-    <value>0</value>
+    <value>l()</value>
   </data>
   <data name="&gt;&gt;cmdZero.Name" xml:space="preserve">
     <value>cmdZero</value>
