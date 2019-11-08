@@ -1135,7 +1135,7 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax(x = , k =3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 73)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax(,k = 3, fill = NA)", 12)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax( ,k = 3, fill = NA)", 19)
         End If
     End Sub
 
@@ -1143,7 +1143,7 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum(x = , k=3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 72)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum(,k = 3, fill = NA)", 12)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum( ,k = 3, fill = NA)", 19)
         End If
     End Sub
 
@@ -1151,7 +1151,7 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmedian(x = , k = 3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 74)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmedian(,k = 3, fill = NA)", 12)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmedian( ,k = 3, fill = NA)", 19)
         End If
     End Sub
 
@@ -1163,7 +1163,7 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmean(x = , k=3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 72)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmean(,k = 3, fill = NA)", 12)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmean( ,k = 3, fill = NA)", 19)
         End If
     End Sub
 
@@ -1923,7 +1923,7 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply(data = , width = , FUN = min , by = 1, by.column = TRUE, fill = NA, na.pad = FALSE, partial = FALSE, align = c(""center"", ""left"", ""right""), coredata = TRUE)))", 151)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply(,k = 3, fill = NA)", 11)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply( , width = , k = 3, fill = NA)", 30)
         End If
     End Sub
 
