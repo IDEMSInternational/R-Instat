@@ -251,7 +251,7 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
-        ucrReceiverExpressionFitModel.AddToReceiverAtCursorPosition("0")
+        ucrReceiverExpressionFitModel.AddToReceiverAtCursorPosition("l()", 1)
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
@@ -388,6 +388,8 @@ Public Class dlgFitModel
     Private Sub ucrReceiverExpressionFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlValueChanged, ucrReceiverResponseVar.ControlValueChanged
         ChooseRFunction()
         ResponseConvert()
+        ucrInputTryMessage.SetName("")
+        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
     End Sub
 
     Private Sub ucrConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
