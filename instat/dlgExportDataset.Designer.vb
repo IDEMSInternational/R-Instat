@@ -44,6 +44,7 @@ Partial Class dlgExportDataset
         Me.ucrInputExportFile = New instat.ucrInputTextBox()
         Me.ucrAvailableSheets = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblClicktoConfirm = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cmdBrowse
@@ -77,6 +78,11 @@ Partial Class dlgExportDataset
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'lblClicktoConfirm
+        '
+        resources.ApplyResources(Me.lblClicktoConfirm, "lblClicktoConfirm")
+        Me.lblClicktoConfirm.Name = "lblClicktoConfirm"
+        '
         'dlgExportDataset
         '
         resources.ApplyResources(Me, "$this")
@@ -84,6 +90,7 @@ Partial Class dlgExportDataset
         Me.Controls.Add(Me.lblExport)
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.ucrInputExportFile)
+        Me.Controls.Add(Me.lblClicktoConfirm)
         Me.Controls.Add(Me.ucrAvailableSheets)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -100,4 +107,5 @@ Partial Class dlgExportDataset
     Friend WithEvents lblExport As Label
     Friend WithEvents ucrAvailableSheets As ucrDataFrame
     Friend WithEvents ucrInputExportFile As ucrInputTextBox
+    Friend WithEvents lblClicktoConfirm As Label
 End Class
