@@ -24,30 +24,30 @@ Partial Class dlgTreemap
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTreemap))
         Me.lblLabel = New System.Windows.Forms.Label()
-        Me.ucrInputLabel = New instat.ucrInputComboBox()
-        Me.ucrSaveTreemap = New instat.ucrSave()
-        Me.ucrChkIsCurrency = New instat.ucrCheck()
         Me.rdoPrimary = New System.Windows.Forms.RadioButton()
         Me.rdoSummary = New System.Windows.Forms.RadioButton()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblWeightBy = New System.Windows.Forms.Label()
         Me.lblIdentifier = New System.Windows.Forms.Label()
+        Me.lblSymbol = New System.Windows.Forms.Label()
+        Me.lblFill = New System.Windows.Forms.Label()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.lblTextColour = New System.Windows.Forms.Label()
+        Me.lblTileColour = New System.Windows.Forms.Label()
+        Me.lblSummary = New System.Windows.Forms.Label()
+        Me.ucrInputSummary = New instat.ucrInputComboBox()
+        Me.ucrColourText = New instat.ucrColors()
+        Me.ucrColourTile = New instat.ucrColors()
+        Me.ucrReceiverFill = New instat.ucrReceiverSingle()
+        Me.ucrInputSymbol = New instat.ucrInputTextBox()
+        Me.ucrInputLabel = New instat.ucrInputComboBox()
+        Me.ucrSaveTreemap = New instat.ucrSave()
+        Me.ucrChkIsCurrency = New instat.ucrCheck()
         Me.ucrReceiverWeightBy = New instat.ucrReceiverSingle()
         Me.ucrReceiverIdentifier = New instat.ucrReceiverSingle()
         Me.ucrSelectorTreemap = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlDataType = New instat.UcrPanel()
-        Me.lblSymbol = New System.Windows.Forms.Label()
-        Me.ucrInputSymbol = New instat.ucrInputTextBox()
-        Me.lblFill = New System.Windows.Forms.Label()
-        Me.ucrReceiverFill = New instat.ucrReceiverSingle()
-        Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.lblTextColour = New System.Windows.Forms.Label()
-        Me.ucrColourText = New instat.ucrColors()
-        Me.lblBoxColour = New System.Windows.Forms.Label()
-        Me.ucrColourBox = New instat.ucrColors()
-        Me.lblSummary = New System.Windows.Forms.Label()
-        Me.ucrInputSummary = New instat.ucrInputComboBox()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -55,24 +55,6 @@ Partial Class dlgTreemap
         '
         resources.ApplyResources(Me.lblLabel, "lblLabel")
         Me.lblLabel.Name = "lblLabel"
-        '
-        'ucrInputLabel
-        '
-        Me.ucrInputLabel.AddQuotesIfUnrecognised = True
-        Me.ucrInputLabel.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLabel, "ucrInputLabel")
-        Me.ucrInputLabel.Name = "ucrInputLabel"
-        '
-        'ucrSaveTreemap
-        '
-        resources.ApplyResources(Me.ucrSaveTreemap, "ucrSaveTreemap")
-        Me.ucrSaveTreemap.Name = "ucrSaveTreemap"
-        '
-        'ucrChkIsCurrency
-        '
-        Me.ucrChkIsCurrency.Checked = False
-        resources.ApplyResources(Me.ucrChkIsCurrency, "ucrChkIsCurrency")
-        Me.ucrChkIsCurrency.Name = "ucrChkIsCurrency"
         '
         'rdoPrimary
         '
@@ -117,6 +99,98 @@ Partial Class dlgTreemap
         Me.lblIdentifier.Name = "lblIdentifier"
         Me.lblIdentifier.Tag = "Variable:"
         '
+        'lblSymbol
+        '
+        resources.ApplyResources(Me.lblSymbol, "lblSymbol")
+        Me.lblSymbol.Name = "lblSymbol"
+        '
+        'lblFill
+        '
+        resources.ApplyResources(Me.lblFill, "lblFill")
+        Me.lblFill.Name = "lblFill"
+        Me.lblFill.Tag = ""
+        '
+        'grpOptions
+        '
+        Me.grpOptions.Controls.Add(Me.lblTextColour)
+        Me.grpOptions.Controls.Add(Me.ucrColourText)
+        Me.grpOptions.Controls.Add(Me.lblTileColour)
+        Me.grpOptions.Controls.Add(Me.ucrColourTile)
+        resources.ApplyResources(Me.grpOptions, "grpOptions")
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.TabStop = False
+        '
+        'lblTextColour
+        '
+        resources.ApplyResources(Me.lblTextColour, "lblTextColour")
+        Me.lblTextColour.Name = "lblTextColour"
+        '
+        'lblTileColour
+        '
+        resources.ApplyResources(Me.lblTileColour, "lblTileColour")
+        Me.lblTileColour.Name = "lblTileColour"
+        '
+        'lblSummary
+        '
+        resources.ApplyResources(Me.lblSummary, "lblSummary")
+        Me.lblSummary.Name = "lblSummary"
+        '
+        'ucrInputSummary
+        '
+        Me.ucrInputSummary.AddQuotesIfUnrecognised = True
+        Me.ucrInputSummary.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSummary, "ucrInputSummary")
+        Me.ucrInputSummary.Name = "ucrInputSummary"
+        '
+        'ucrColourText
+        '
+        Me.ucrColourText.AddQuotesIfUnrecognised = True
+        Me.ucrColourText.IsReadOnly = False
+        resources.ApplyResources(Me.ucrColourText, "ucrColourText")
+        Me.ucrColourText.Name = "ucrColourText"
+        '
+        'ucrColourTile
+        '
+        Me.ucrColourTile.AddQuotesIfUnrecognised = True
+        Me.ucrColourTile.IsReadOnly = False
+        resources.ApplyResources(Me.ucrColourTile, "ucrColourTile")
+        Me.ucrColourTile.Name = "ucrColourTile"
+        '
+        'ucrReceiverFill
+        '
+        Me.ucrReceiverFill.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFill, "ucrReceiverFill")
+        Me.ucrReceiverFill.Name = "ucrReceiverFill"
+        Me.ucrReceiverFill.Selector = Nothing
+        Me.ucrReceiverFill.strNcFilePath = ""
+        Me.ucrReceiverFill.ucrSelector = Nothing
+        '
+        'ucrInputSymbol
+        '
+        Me.ucrInputSymbol.AddQuotesIfUnrecognised = True
+        Me.ucrInputSymbol.IsMultiline = False
+        Me.ucrInputSymbol.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSymbol, "ucrInputSymbol")
+        Me.ucrInputSymbol.Name = "ucrInputSymbol"
+        '
+        'ucrInputLabel
+        '
+        Me.ucrInputLabel.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabel.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLabel, "ucrInputLabel")
+        Me.ucrInputLabel.Name = "ucrInputLabel"
+        '
+        'ucrSaveTreemap
+        '
+        resources.ApplyResources(Me.ucrSaveTreemap, "ucrSaveTreemap")
+        Me.ucrSaveTreemap.Name = "ucrSaveTreemap"
+        '
+        'ucrChkIsCurrency
+        '
+        Me.ucrChkIsCurrency.Checked = False
+        resources.ApplyResources(Me.ucrChkIsCurrency, "ucrChkIsCurrency")
+        Me.ucrChkIsCurrency.Name = "ucrChkIsCurrency"
+        '
         'ucrReceiverWeightBy
         '
         Me.ucrReceiverWeightBy.frmParent = Me
@@ -152,80 +226,6 @@ Partial Class dlgTreemap
         '
         resources.ApplyResources(Me.ucrPnlDataType, "ucrPnlDataType")
         Me.ucrPnlDataType.Name = "ucrPnlDataType"
-        '
-        'lblSymbol
-        '
-        resources.ApplyResources(Me.lblSymbol, "lblSymbol")
-        Me.lblSymbol.Name = "lblSymbol"
-        '
-        'ucrInputSymbol
-        '
-        Me.ucrInputSymbol.AddQuotesIfUnrecognised = True
-        Me.ucrInputSymbol.IsMultiline = False
-        Me.ucrInputSymbol.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSymbol, "ucrInputSymbol")
-        Me.ucrInputSymbol.Name = "ucrInputSymbol"
-        '
-        'lblFill
-        '
-        resources.ApplyResources(Me.lblFill, "lblFill")
-        Me.lblFill.Name = "lblFill"
-        Me.lblFill.Tag = ""
-        '
-        'ucrReceiverFill
-        '
-        Me.ucrReceiverFill.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFill, "ucrReceiverFill")
-        Me.ucrReceiverFill.Name = "ucrReceiverFill"
-        Me.ucrReceiverFill.Selector = Nothing
-        Me.ucrReceiverFill.strNcFilePath = ""
-        Me.ucrReceiverFill.ucrSelector = Nothing
-        '
-        'grpOptions
-        '
-        Me.grpOptions.Controls.Add(Me.lblTextColour)
-        Me.grpOptions.Controls.Add(Me.ucrColourText)
-        Me.grpOptions.Controls.Add(Me.lblBoxColour)
-        Me.grpOptions.Controls.Add(Me.ucrColourBox)
-        resources.ApplyResources(Me.grpOptions, "grpOptions")
-        Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.TabStop = False
-        '
-        'lblTextColour
-        '
-        resources.ApplyResources(Me.lblTextColour, "lblTextColour")
-        Me.lblTextColour.Name = "lblTextColour"
-        '
-        'ucrColourText
-        '
-        Me.ucrColourText.AddQuotesIfUnrecognised = True
-        Me.ucrColourText.IsReadOnly = False
-        resources.ApplyResources(Me.ucrColourText, "ucrColourText")
-        Me.ucrColourText.Name = "ucrColourText"
-        '
-        'lblBoxColour
-        '
-        resources.ApplyResources(Me.lblBoxColour, "lblBoxColour")
-        Me.lblBoxColour.Name = "lblBoxColour"
-        '
-        'ucrColourBox
-        '
-        Me.ucrColourBox.AddQuotesIfUnrecognised = True
-        Me.ucrColourBox.IsReadOnly = False
-        resources.ApplyResources(Me.ucrColourBox, "ucrColourBox")
-        Me.ucrColourBox.Name = "ucrColourBox"
-        '
-        'lblSummary
-        '
-        resources.ApplyResources(Me.lblSummary, "lblSummary")
-        Me.lblSummary.Name = "lblSummary"
-        '
-        'ucrInputSummary
-        '
-        Me.ucrInputSummary.AddQuotesIfUnrecognised = True
-        Me.ucrInputSummary.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSummary, "ucrInputSummary")
-        Me.ucrInputSummary.Name = "ucrInputSummary"
         '
         'dlgTreemap
         '
@@ -284,8 +284,8 @@ Partial Class dlgTreemap
     Friend WithEvents grpOptions As GroupBox
     Friend WithEvents lblTextColour As Label
     Friend WithEvents ucrColourText As ucrColors
-    Friend WithEvents lblBoxColour As Label
-    Friend WithEvents ucrColourBox As ucrColors
+    Friend WithEvents lblTileColour As Label
+    Friend WithEvents ucrColourTile As ucrColors
     Friend WithEvents lblSummary As Label
     Friend WithEvents ucrInputSummary As ucrInputComboBox
 End Class

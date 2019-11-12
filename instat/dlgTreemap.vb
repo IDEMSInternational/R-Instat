@@ -125,8 +125,8 @@ Public Class dlgTreemap
         ucrReceiverFill.bWithQuotes = False
         ucrReceiverFill.SetParameterIsString()
 
-        ucrColourBox.SetParameter(New RParameter("fill", 3))
-        ucrColourBox.SetColours()
+        ucrColourTile.SetParameter(New RParameter("fill", 3))
+        ucrColourTile.SetColours()
 
         ucrColourText.SetParameter(New RParameter("colour", 3))
         ucrColourText.SetColours()
@@ -245,7 +245,7 @@ Public Class dlgTreemap
         ucrInputSymbol.SetRCode(clsDollarFunction, bReset)
         ucrInputLabel.SetRCode(clsPaste0Function, bReset)
         ucrReceiverFill.SetRCode(clsGeomTreemapAesFunction, bReset)
-        ucrColourBox.SetRCode(clsGeomTreemapFunction, bReset)
+        ucrColourTile.SetRCode(clsGeomTreemapFunction, bReset)
         ucrColourText.SetRCode(clsGeomTreemapTextFunction, bReset)
         If bReset Then
             ucrInputLabel.SetText(strIdentifier)
@@ -344,11 +344,11 @@ Public Class dlgTreemap
 
     Private Sub ucrReceiverFill_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFill.ControlValueChanged
         If ucrReceiverFill.IsEmpty() Then
-            clsGeomTreemapFunction.AddParameter("fill", ucrColourBox.GetText(), iPosition:=3)
-            ucrColourBox.Enabled = True
+            clsGeomTreemapFunction.AddParameter("fill", ucrColourTile.GetText(), iPosition:=3)
+            ucrColourTile.Enabled = True
         Else
             clsGeomTreemapFunction.RemoveParameterByName("fill")
-            ucrColourBox.Enabled = False
+            ucrColourTile.Enabled = False
         End If
     End Sub
 
@@ -437,5 +437,9 @@ Public Class dlgTreemap
         sdgPlots.tbpFacet.Enabled = True
         sdgPlots.tbpLayers.Enabled = True
         bResetSubdialog = False
+    End Sub
+
+    Private Sub CoreControls_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveTreemap.ControlContentsChanged, ucrReceiverWeightBy.ControlContentsChanged, ucrReceiverIdentifier.ControlContentsChanged, ucrPnlDataType.ControlContentsChanged
+
     End Sub
 End Class
