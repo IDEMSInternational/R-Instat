@@ -251,6 +251,7 @@ DataBook$set("public", "summary", function(data_name, columns_to_summarise, summ
   
   summary_names <- ifelse(startsWith(summaries, "summary_"), substr(summaries, 9, nchar(summaries)), summaries)
   summary_names <- gsub("_", "-", summary_names)
+  summary_names <- make.unique(summary_names)
   summary_count_names <- summary_names[1:count_summaries_max]
   summary_other_names <- summary_names[(count_summaries_max + 1):summaries_max]
   col_data_type <- self$get_variables_metadata(data_name = data_name, column = columns_to_summarise, property = data_type_label)
