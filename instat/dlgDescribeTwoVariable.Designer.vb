@@ -42,9 +42,9 @@ Partial Class dlgDescribeTwoVariable
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.lblFirstVariable = New System.Windows.Forms.Label()
-        Me.lbMultipleVariables = New System.Windows.Forms.Label()
-        Me.ucrReceiverFirstVar = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSecondVar = New instat.ucrReceiverMultiple()
+        Me.lbSecondVariable = New System.Windows.Forms.Label()
+        Me.ucrReceiverSecondVar = New instat.ucrReceiverSingle()
+        Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkSaveResult = New instat.ucrCheck()
@@ -69,22 +69,13 @@ Partial Class dlgDescribeTwoVariable
         '
         resources.ApplyResources(Me.lblFirstVariable, "lblFirstVariable")
         Me.lblFirstVariable.Name = "lblFirstVariable"
-        Me.lblFirstVariable.Tag = "First_Variable"
+        Me.lblFirstVariable.Tag = ""
         '
-        'lbMultipleVariables
+        'lbSecondVariable
         '
-        resources.ApplyResources(Me.lbMultipleVariables, "lbMultipleVariables")
-        Me.lbMultipleVariables.Name = "lbMultipleVariables"
-        Me.lbMultipleVariables.Tag = "Multiple_Variables"
-        '
-        'ucrReceiverFirstVar
-        '
-        Me.ucrReceiverFirstVar.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFirstVar, "ucrReceiverFirstVar")
-        Me.ucrReceiverFirstVar.Name = "ucrReceiverFirstVar"
-        Me.ucrReceiverFirstVar.Selector = Nothing
-        Me.ucrReceiverFirstVar.strNcFilePath = ""
-        Me.ucrReceiverFirstVar.ucrSelector = Nothing
+        resources.ApplyResources(Me.lbSecondVariable, "lbSecondVariable")
+        Me.lbSecondVariable.Name = "lbSecondVariable"
+        Me.lbSecondVariable.Tag = ""
         '
         'ucrReceiverSecondVar
         '
@@ -95,8 +86,18 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverSecondVar.strNcFilePath = ""
         Me.ucrReceiverSecondVar.ucrSelector = Nothing
         '
+        'ucrReceiverFirstVars
+        '
+        Me.ucrReceiverFirstVars.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFirstVars, "ucrReceiverFirstVars")
+        Me.ucrReceiverFirstVars.Name = "ucrReceiverFirstVars"
+        Me.ucrReceiverFirstVars.Selector = Nothing
+        Me.ucrReceiverFirstVars.strNcFilePath = ""
+        Me.ucrReceiverFirstVars.ucrSelector = Nothing
+        '
         'ucrSelectorDescribeTwoVar
         '
+        Me.ucrSelectorDescribeTwoVar.bDropUnusedFilterLevels = False
         Me.ucrSelectorDescribeTwoVar.bShowHiddenColumns = False
         Me.ucrSelectorDescribeTwoVar.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorDescribeTwoVar, "ucrSelectorDescribeTwoVar")
@@ -125,11 +126,11 @@ Partial Class dlgDescribeTwoVariable
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrChkSaveResult)
         Me.Controls.Add(Me.ucrChkOmitMissing)
-        Me.Controls.Add(Me.lbMultipleVariables)
+        Me.Controls.Add(Me.lbSecondVariable)
         Me.Controls.Add(Me.lblFirstVariable)
         Me.Controls.Add(Me.cmdDisplayOptions)
-        Me.Controls.Add(Me.ucrReceiverFirstVar)
         Me.Controls.Add(Me.ucrReceiverSecondVar)
+        Me.Controls.Add(Me.ucrReceiverFirstVars)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.ucrSelectorDescribeTwoVar)
         Me.Controls.Add(Me.ucrBase)
@@ -145,12 +146,12 @@ Partial Class dlgDescribeTwoVariable
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorDescribeTwoVar As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverSecondVar As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverFirstVars As ucrReceiverMultiple
     Friend WithEvents cmdSummaries As Button
-    Friend WithEvents ucrReceiverFirstVar As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSecondVar As ucrReceiverSingle
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents lblFirstVariable As Label
-    Friend WithEvents lbMultipleVariables As Label
+    Friend WithEvents lbSecondVariable As Label
     Friend WithEvents ucrChkSaveResult As ucrCheck
     Friend WithEvents ucrChkOmitMissing As ucrCheck
 End Class

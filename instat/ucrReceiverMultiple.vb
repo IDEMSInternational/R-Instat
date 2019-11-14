@@ -439,19 +439,25 @@ Public Class ucrReceiverMultiple
                 If strVariableTypes.Count > 1 AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("numeric") AndAlso strVariableTypes.Contains("integer")) AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("factor") AndAlso strVariableTypes.Contains("ordered,factor")) Then
                     MsgBox("Cannot add these variables. All variables must be of the same data type.", MsgBoxStyle.OkOnly, "Cannot add variables.")
                     Clear()
+                    SetSelectorHeading("Variables")
                 ElseIf strVariableTypes.Count > 0 Then
                     If strVariableTypes(0) = "integer" Then
                         SetDataType("numeric", bStrict:=True)
-                    ElseIf strVariableTypes(0) = "ordered,factor" Then
+                        SetSelectorHeading("Numerics")
+                    ElseIf strVariableTypes(0) = "ordered,factor" OrElse strVariableTypes(0) = "factor" Then
                         SetDataType("factor", bStrict:=True)
+                        SetSelectorHeading("Factors")
                     Else
                         SetDataType(strVariableTypes(0), bStrict:=True)
+                        SetSelectorHeading(strVariableTypes(0) & " Variables")
                     End If
                 Else
                     RemoveIncludedMetadataProperty(strProperty:="class")
+                    SetSelectorHeading("Variables")
                 End If
             Else
                 RemoveIncludedMetadataProperty(strProperty:="class")
+                SetSelectorHeading("Variables")
             End If
         Else
             ' Removed as this was causing data type to be removed on reset for any receiver
