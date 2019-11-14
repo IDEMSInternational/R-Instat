@@ -240,7 +240,6 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
 DataBook$set("public", "summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = FALSE, drop = FALSE, return_output = FALSE, summary_name = NA, add_cols = c(), filter_names = c(), ...) {
   calculated_from = list()
   calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
-  
   summaries <- unique(summaries)
   summaries <- summaries[order(match(summaries, all_summaries))]
   summaries_count <- summaries[startsWith(summaries, "summary_count")]
@@ -254,34 +253,60 @@ DataBook$set("public", "summary", function(data_name, columns_to_summarise, summ
   summary_names <- make.unique(summary_names)
   summary_count_names <- summary_names[1:count_summaries_max]
   summary_other_names <- summary_names[(count_summaries_max + 1):summaries_max]
+  
   col_data_type <- self$get_variables_metadata(data_name = data_name, column = columns_to_summarise, property = data_type_label)
-  results_count <- data.frame(matrix(ncol = length(columns_to_summarise), nrow = max(1, count_summaries_max)))
-  results_other <- data.frame(matrix(ncol = length(columns_to_summarise), nrow = summaries_max - count_summaries_max))
-  names(results_count) <- columns_to_summarise
-  names(results_other) <- columns_to_summarise
+
+  factors_disp <- dplyr::if_else(length(factors) == 0, ".id", factors)
+  factors_levels <- lapply(factors, function(x) {
+    fac_col <- self$get_columns_from_data(data_name, x)
+    if(is.factor(fac_col)) return(levels(fac_col))
+    else return(sort(unique(fac_col)))
+    })
+  factors_levels <- expand.grid(factors_levels)
+  names(factors_levels) <- factors
+  
+  results <- list()
   i <- 1
   for(col_new in columns_to_summarise) {
+    results_temp_count <- list()
+    results_temp_other <- list()
     for(j in seq_along(summaries)) {
       calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = col_new, summaries = summaries[j], factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, ... = ...),  filters = filter_names, calculated_from = calculated_from)
       calc_apply <- tryCatch(self$apply_calculation(calc), 
                              error = function(c) {
-                               x <- data.frame(col_new, NA)
-                               names(x) <- c(".id", summary_names[j])
-                               return(x)
+                               if(length(factors) == 0) {
+                                 x <- data.frame(NA, NA)
+                                 names(x) <- c(".id", summary_names[j])
+                                 return(x)
+                               }
+                               else {
+                                 x <- factors_levels
+                                 x[[summary_names[j]]] <- NA
+                                 return(x)
+                               }
                                })
-      if(j <= count_summaries_max) results_count[j,i] <- calc_apply[1,2]
-      else results_other[j - count_summaries_max,i] <- calc_apply[1,2]
+      names(calc_apply)[length(factors_disp) + 1] <- col_new
+      calc_apply$summary <- summary_names[j]
+      if(j <= count_summaries_max) results_temp_count[[length(results_temp_count) + 1]] <- calc_apply
+      else results_temp_other[[length(results_temp_other) + 1]] <- calc_apply
     }
-    i = i + 1
+    results_temp_count <- dplyr::bind_rows(results_temp_count)
+    results_temp_other <- dplyr::bind_rows(results_temp_other)
+    # Set type of Date columns since may have coerced to numeric
+    if("Date" %in% col_data_type[i]) results_temp_other[[col_new]] <- as.Date(results_temp_other[[col_new]], origin = "1970/1/1")
+    results_temp_count <- format(results_temp_count, scientific = FALSE)
+    results_temp_other <- format(results_temp_other, scientific = FALSE)
+    results_temp <- dplyr::bind_rows(results_temp_count, results_temp_other)
+    if(i == 1) results <- results_temp
+    else results <- dplyr::full_join(results, results_temp, by = c(factors_disp, "summary"))
+    i <- i + 1
   }
-  # Set type of Date columns since may have coerced to numeric
-  for(k in seq_along(results_other)) {
-    if("Date" %in% col_data_type[k]) results_other[[k]] <- as.Date(results_other[[k]], origin = "1970/1/1")
+  results <- results %>% select(c(factors_disp, "summary"), everything())
+  if(length(factors) == 0) {
+    results$.id <- NULL
+    results$summary <- NULL
+    row.names(results) <- summary_names
   }
-  results_count <- format(results_count, scientific = FALSE)
-  results_other <- format(results_other, scientific = FALSE)
-  results <- bind_rows(results_count, results_other)
-  row.names(results) <- summary_names
   return(results)
 }
 )

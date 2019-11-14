@@ -174,13 +174,13 @@
     <value>268, 45</value>
   </data>
   <data name="lblFirstVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 13</value>
+    <value>75, 13</value>
   </data>
   <data name="lblFirstVariable.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="lblFirstVariable.Text" xml:space="preserve">
-    <value>First Variable:</value>
+    <value>First Variables:</value>
   </data>
   <data name="&gt;&gt;lblFirstVariable.Name" xml:space="preserve">
     <value>lblFirstVariable</value>
@@ -194,28 +194,28 @@
   <data name="&gt;&gt;lblFirstVariable.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="lbMultipleVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 90</value>
+  <data name="lbSecondVariable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>268, 155</value>
   </data>
-  <data name="lbMultipleVariables.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lbSecondVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 15</value>
   </data>
-  <data name="lbMultipleVariables.TabIndex" type="System.Int32, mscorlib">
+  <data name="lbSecondVariable.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="lbMultipleVariables.Text" xml:space="preserve">
-    <value>Multiple Variables:</value>
+  <data name="lbSecondVariable.Text" xml:space="preserve">
+    <value>Second Variable:</value>
   </data>
-  <data name="&gt;&gt;lbMultipleVariables.Name" xml:space="preserve">
-    <value>lbMultipleVariables</value>
+  <data name="&gt;&gt;lbSecondVariable.Name" xml:space="preserve">
+    <value>lbSecondVariable</value>
   </data>
-  <data name="&gt;&gt;lbMultipleVariables.Type" xml:space="preserve">
+  <data name="&gt;&gt;lbSecondVariable.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lbMultipleVariables.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lbSecondVariable.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lbMultipleVariables.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lbSecondVariable.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -269,29 +269,29 @@
   <data name="&gt;&gt;ucrChkOmitMissing.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ucrReceiverSecondVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 105</value>
+  <data name="ucrReceiverFirstVars.Location" type="System.Drawing.Point, System.Drawing">
+    <value>271, 63</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrReceiverSecondVar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverFirstVars.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverSecondVar.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrReceiverFirstVars.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 87</value>
   </data>
-  <data name="ucrReceiverSecondVar.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrReceiverFirstVars.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSecondVar.Name" xml:space="preserve">
-    <value>ucrReceiverSecondVar</value>
+  <data name="&gt;&gt;ucrReceiverFirstVars.Name" xml:space="preserve">
+    <value>ucrReceiverFirstVars</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSecondVar.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverFirstVars.Type" xml:space="preserve">
     <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSecondVar.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverFirstVars.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSecondVar.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverFirstVars.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="ucrSelectorDescribeTwoVar.Location" type="System.Drawing.Point, System.Drawing">
@@ -351,28 +351,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrReceiverFirstVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 60</value>
+  <data name="ucrReceiverSecondVar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>271, 170</value>
   </data>
-  <data name="ucrReceiverFirstVar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverSecondVar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverFirstVar.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrReceiverSecondVar.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
   </data>
-  <data name="ucrReceiverFirstVar.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrReceiverSecondVar.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverFirstVar.Name" xml:space="preserve">
-    <value>ucrReceiverFirstVar</value>
+  <data name="&gt;&gt;ucrReceiverSecondVar.Name" xml:space="preserve">
+    <value>ucrReceiverSecondVar</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverFirstVar.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverSecondVar.Type" xml:space="preserve">
     <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverFirstVar.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverSecondVar.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverFirstVar.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverSecondVar.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
 </root>
