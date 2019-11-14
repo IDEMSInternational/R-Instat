@@ -64,6 +64,7 @@ Public Class dlgClimaticSummary
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "within_variable", True)
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "year", False)
 
+
         'receivers:
         ' by receivers
         ucrReceiverStation.SetParameter(New RParameter("station", 0, False))
@@ -146,6 +147,8 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub SetDefaults()
+        'Temporary fix for reseting the ucrPnlAnnualWithin to rdoAnnual
+        rdoAnnual.Checked = True
         clsDefaultFunction = New RFunction
         clsSummariesList = New RFunction
         clsDefaultFactors = New RFunction
