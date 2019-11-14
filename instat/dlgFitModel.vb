@@ -420,18 +420,20 @@ Public Class dlgFitModel
     Private Sub TryScript()
         Dim strVecOutput As CharacterVector
         Dim bValid As Boolean
-
+        Dim clsTY As RCodeStructure
         Try
             If ucrReceiverResponseVar.IsEmpty AndAlso ucrReceiverExpressionFitModel.IsEmpty Then
                 ucrInputTryMessage.SetName("")
             Else
                 Dim strScriptCommands As String = ""
                 Dim lstScriptCommands As New List(Of String)
+                clsTY = ucrBase.clsRsyntax.clsBaseFunction.Clone()
+                clsTY.RemoveAssignTo()
 
                 'get the before th code scripts,base script and the after code script
                 lstScriptCommands.AddRange(ucrBase.clsRsyntax.GetBeforeCodesScripts())
-                lstScriptCommands.Add(ucrBase.clsRsyntax.GetScript())
-                lstScriptCommands.AddRange(ucrBase.clsRsyntax.GetAfterCodesScripts())
+                lstScriptCommands.Add(clsTY.ToScript())
+                ' lstScriptCommands.AddRange(ucrBase.clsRsyntax.GetAfterCodesScripts())
 
                 'concantenate the commands into one sentence for splitting purposes
                 strScriptCommands = ""
