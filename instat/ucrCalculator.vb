@@ -1923,7 +1923,7 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply(data = , width = , FUN = min , by = 1, by.column = TRUE, fill = NA, na.pad = FALSE, partial = FALSE, align = c(""center"", ""left"", ""right""), coredata = TRUE)))", 151)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply( , width = , k = 3, fill = NA)", 30)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply( , width = , FUN = min, k = 3, fill = NA)", 40)
         End If
     End Sub
 
