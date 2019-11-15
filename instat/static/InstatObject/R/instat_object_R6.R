@@ -803,6 +803,11 @@ DataBook$set("public", "anova_tables", function(data_name, x_col_names, y_col_na
 } 
 )
 
+DataBook$set("public", "cor", function(data_name, x_col_names, y_col_name, use = "everything", method = c("pearson", "kendall", "spearman")) {
+  self$get_data_objects(data_name)$cor(x_col_names = x_col_names, y_col_name = y_col_name, use = use, method = method)
+} 
+)
+
 DataBook$set("public", "remove_columns_in_data", function(data_name, cols, allow_delete_all = FALSE) {
   self$get_data_objects(data_name)$remove_columns_in_data(cols = cols, allow_delete_all = allow_delete_all)
 } 

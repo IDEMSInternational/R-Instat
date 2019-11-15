@@ -22,7 +22,6 @@ Public Class dlgDescribeTwoVariable
     Public strFirstVariablesType, strSecondVariableType As String
     Public clsGetDataType, clsGetSecondDataType, clsRCorrelation, clsRCustomSummary, clsConcFunction, clsRAnova, clsRFreqTables As New RFunction
     Private clsSummariesList As New RFunction
-    Private clsAsMatrixX, clsAsNumericY As New RFunction
 
     Private Sub dlgDescribeTwoVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -48,15 +47,11 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverFirstVars.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverFirstVars.SetParameterIsString()
         ucrReceiverFirstVars.Selector = ucrSelectorDescribeTwoVar
-        ucrReceiverFirstVars.SetSingleTypeStatus(True)
+        ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
 
         ucrReceiverSecondVar.SetParameter(New RParameter("factors", 2))
         ucrReceiverSecondVar.SetParameterIsString()
         ucrReceiverSecondVar.Selector = ucrSelectorDescribeTwoVar
-
-        ucrChkSaveResult.SetParameter(New RParameter("store_results", 4))
-        ucrChkSaveResult.SetText("Save Result")
-        ucrChkSaveResult.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
         ucrChkOmitMissing.SetText("Omit Missing Values")
@@ -77,8 +72,6 @@ Public Class dlgDescribeTwoVariable
         clsSummariesList = New RFunction
         clsRCustomSummary = New RFunction
         clsConcFunction = New RFunction
-        clsAsMatrixX = New RFunction
-        clsAsNumericY = New RFunction
 
         ucrSelectorDescribeTwoVar.Reset()
         ucrReceiverFirstVars.SetMeAsReceiver()
@@ -93,9 +86,6 @@ Public Class dlgDescribeTwoVariable
         clsRAnova.AddParameter("sign_level", "FALSE", iPosition:=3)
         clsRAnova.AddParameter("means", "FALSE", iPosition:=4)
 
-        clsRCorrelation.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34), iPosition:=2)
-        clsRCorrelation.AddParameter("method", Chr(34) & "pearson" & Chr(34), iPosition:=3)
-
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
         clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
@@ -109,14 +99,9 @@ Public Class dlgDescribeTwoVariable
         clsRCustomSummary.AddParameter("na.rm", "FALSE", iPosition:=6)
         clsRCustomSummary.AddParameter("return_output", "TRUE", iPosition:=7)
 
-        clsRCorrelation.SetRCommand("cor")
-
-        clsAsMatrixX.SetRCommand("as.matrix")
-        clsAsNumericY.SetRCommand("as.numeric")
+        clsRCorrelation.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$cor")
 
         clsRAnova.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$anova_tables")
-
-        Results()
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
         bResetSubdialog = True
@@ -124,20 +109,23 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsRAnova, New RParameter("y_col_name", 2), iAdditionalPairNo:=1)
-        ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsRCustomSummary, New RParameter("factors", 2), iAdditionalPairNo:=2)
-        ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsRFreqTables, New RParameter("y_col_name", 2), iAdditionalPairNo:=3)
+        ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsRFreqTables, New RParameter("y_col_name", 2), iAdditionalPairNo:=2)
+        ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsRCorrelation, New RParameter("y_col_name", 2), iAdditionalPairNo:=3)
 
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRAnova, New RParameter("x_col_names", 1), iAdditionalPairNo:=1)
-        ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRCustomSummary, New RParameter("columns_to_summarise", 1), iAdditionalPairNo:=2)
-        ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRFreqTables, New RParameter("x_col_names", 1), iAdditionalPairNo:=3)
+        ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRFreqTables, New RParameter("x_col_names", 1), iAdditionalPairNo:=2)
+        ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRCorrelation, New RParameter("x_col_names", 1), iAdditionalPairNo:=3)
 
-        ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRAnova, New RParameter("data_name", 0), iAdditionalPairNo:=1)
-        ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRCustomSummary, New RParameter("data_name", 0), iAdditionalPairNo:=2)
-        ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRFreqTables, New RParameter("data_name", 0), iAdditionalPairNo:=3)
+        ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRAnova, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=1)
+        ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRCustomSummary, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=2)
+        ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRFreqTables, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=3)
 
         ucrChkOmitMissing.SetRCode(clsRCustomSummary, bReset)
-        ucrChkSaveResult.SetRCode(clsRCustomSummary, bReset)
-        ucrSelectorDescribeTwoVar.SetRCode(clsRCustomSummary, bReset)
+        ucrReceiverFirstVars.SetRCode(clsRCustomSummary, bReset)
+        ucrReceiverSecondVar.SetRCode(clsRCustomSummary, bReset)
+        ucrSelectorDescribeTwoVar.SetRCode(clsRCorrelation, bReset)
+
+        Results()
     End Sub
 
     Public Sub TestOKEnabled()
@@ -165,7 +153,7 @@ Public Class dlgDescribeTwoVariable
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs)
         sdgDescribeDisplay.SetRFunction(clsRFreqTables, clsRAnova, bResetSubdialog)
         bResetSubdialog = False
         sdgDescribeDisplay.ShowDialog()
@@ -175,76 +163,84 @@ Public Class dlgDescribeTwoVariable
     Public Sub Results()
         Dim lstFirstItemTypes As List(Of String)
 
-        If (ucrReceiverFirstVars.GetCurrentItemTypes.Count > 0) Then
-            lstFirstItemTypes = ucrReceiverFirstVars.GetCurrentItemTypes()
-            If lstFirstItemTypes.Contains("factor") OrElse lstFirstItemTypes.Contains("character") Then
-                strFirstVariablesType = "categorical"
+        If Not ucrReceiverFirstVars.IsEmpty() Then
+            lstFirstItemTypes = ucrReceiverFirstVars.GetCurrentItemTypes(True, bIsCategoricalNumeric:=True)
+            If lstFirstItemTypes.Count = 1 AndAlso lstFirstItemTypes.Contains("logical") Then
+                lstFirstItemTypes(0) = "categorical"
             Else
-                strFirstVariablesType = "numeric"
+                lstFirstItemTypes.RemoveAll(Function(x) x.Contains("logical"))
             End If
+            If (lstFirstItemTypes.Count > 0) Then
+                strFirstVariablesType = lstFirstItemTypes(0)
+            Else
+                strFirstVariablesType = ""
+                lblFirstType.Text = "________"
+                lblFirstType.ForeColor = SystemColors.ControlText
+            End If
+            lblFirstType.Text = strFirstVariablesType
+            lblFirstType.ForeColor = SystemColors.Highlight
         Else
             strFirstVariablesType = ""
+            lblFirstType.Text = "________"
+            lblFirstType.ForeColor = SystemColors.ControlText
         End If
         If Not ucrReceiverSecondVar.IsEmpty() Then
             strSecondVariableType = ucrReceiverSecondVar.strCurrDataType
-            If strSecondVariableType.Contains("factor") OrElse strSecondVariableType.Contains("character") Then
+            If strSecondVariableType.Contains("factor") OrElse strSecondVariableType.Contains("character") OrElse strSecondVariableType.Contains("logical") Then
                 strSecondVariableType = "categorical"
             Else
                 strSecondVariableType = "numeric"
             End If
+            lblSecondType.Text = strSecondVariableType
+            lblSecondType.ForeColor = SystemColors.Highlight
         Else
             strSecondVariableType = ""
+            lblSecondType.Text = "________"
+            lblSecondType.ForeColor = SystemColors.ControlText
         End If
 
         If strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "numeric" Then
-            ucrChkSaveResult.Visible = False
+            grpOptions.Visible = True
             cmdSummaries.Visible = False
-            cmdDisplayOptions.Visible = False
-            ucrChkOmitMissing.Visible = False
-
-            clsRCorrelation.RemoveParameterByName("data_name")
-            ucrBase.clsRsyntax.SetBaseRFunction(clsRCorrelation)
-            'Temporary Fix- Only one of the receivers gets variables (the last variable of the two)
-            'ie, when ucrReceiverFirstVar and ucrReceiverSecondVar are set from SetParameterIsString to SetParameterIsRFunction only the second (ucrReceiverSecondVar) changes to SetParameterIsRFunction the first one remains as SetParameterIsString which is not needed
-            clsAsMatrixX.AddParameter("x", clsRFunctionParameter:=ucrReceiverFirstVars.GetVariables, iPosition:=0)
-            clsAsNumericY.AddParameter("x", clsRFunctionParameter:=ucrReceiverSecondVar.GetVariables, iPosition:=0)
-            clsRCorrelation.AddParameter("x", clsRFunctionParameter:=clsAsMatrixX, iPosition:=0)
-            clsRCorrelation.AddParameter("y", clsRFunctionParameter:=clsAsNumericY, iPosition:=1)
-            ' ucrReceiverFirstVar.SetParameterIsRFunction()
-            ' ucrReceiverSecondVar.SetParameterIsRFunction()
-        ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "numeric" Then
-            ucrChkSaveResult.Visible = False
-            cmdSummaries.Visible = False
-            cmdDisplayOptions.Visible = True
-            ucrChkOmitMissing.Visible = False
-            ucrSelectorDescribeTwoVar.SetParameterIsString()
-            ucrBase.clsRsyntax.SetBaseRFunction(clsRAnova)
-            ucrReceiverSecondVar.SetParameterIsString()
-            ucrReceiverFirstVars.SetParameterIsString()
-        ElseIf strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" Then
-            ucrChkSaveResult.Visible = True
-            cmdSummaries.Visible = True
-            cmdDisplayOptions.Visible = False
             ucrChkOmitMissing.Visible = True
-            ucrSelectorDescribeTwoVar.SetParameterIsString()
-            ucrReceiverSecondVar.SetParameterIsString()
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRCorrelation)
+            lblSummaryName.Text = "Correlations"
+            lblSummaryName.ForeColor = SystemColors.Highlight
+        ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "numeric" Then
+            grpOptions.Visible = False
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRAnova)
+            lblSummaryName.Text = "ANOVA tables"
+            lblSummaryName.ForeColor = SystemColors.Highlight
+        ElseIf strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" Then
+            grpOptions.Visible = True
+            cmdSummaries.Visible = True
+            ucrChkOmitMissing.Visible = True
             ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
             ucrReceiverFirstVars.SetParameterIsString()
+            lblSummaryName.Text = "Numerical summaries"
+            lblSummaryName.ForeColor = SystemColors.Highlight
         ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
-            ucrChkSaveResult.Visible = False
-            cmdSummaries.Visible = False
-            cmdDisplayOptions.Visible = True
-            ucrChkOmitMissing.Visible = False
-            ucrSelectorDescribeTwoVar.SetParameterIsString()
+            grpOptions.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsRFreqTables)
-            ucrReceiverSecondVar.SetParameterIsString()
-            ucrReceiverFirstVars.SetParameterIsString()
+            lblSummaryName.Text = "Frequency tables"
+            lblSummaryName.ForeColor = SystemColors.Highlight
+        Else
+            grpOptions.Visible = False
+            lblSummaryName.Text = "__________"
+            lblSummaryName.ForeColor = SystemColors.ControlText
         End If
-        SetRCodeForControls(False)
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlContentsChanged, ucrReceiverSecondVar.ControlContentsChanged
         Results()
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
+        If ucrChkOmitMissing.Checked Then
+            clsRCorrelation.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34), iPosition:=2)
+        Else
+            clsRCorrelation.RemoveParameterByName("use")
+        End If
     End Sub
 End Class
