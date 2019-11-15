@@ -610,6 +610,18 @@ DataSheet$set("public", "anova_tables", function(x_col_names, y_col_name, signif
 }
 )
 
+DataSheet$set("public", "cor", function(x_col_names, y_col_name, use = "everything", method = c("pearson", "kendall", "spearman")) {
+  x <- self$get_columns_from_data(x_col_names, force_as_data_frame = TRUE)
+  y <- self$get_columns_from_data(y_col_name)
+  x <- sapply(x, as.numeric)
+  y <- as.numeric(y)
+  results <- cor(x = x, y = y, use = use, method = method)
+  dimnames(results)[[2]] <- y_col_name
+  cat("Correlations:\n")
+  return(t(results))
+}
+)
+
 DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "") {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   # Column name must be character
