@@ -251,7 +251,7 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
-        ucrReceiverExpressionFitModel.AddToReceiverAtCursorPosition("l()", 1)
+        ucrReceiverExpressionFitModel.AddToReceiverAtCursorPosition("I()", 1)
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
