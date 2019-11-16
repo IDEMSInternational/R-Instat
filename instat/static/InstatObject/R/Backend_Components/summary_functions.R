@@ -292,10 +292,14 @@ DataBook$set("public", "summary", function(data_name, columns_to_summarise, summ
     }
     results_temp_count <- dplyr::bind_rows(results_temp_count)
     results_temp_other <- dplyr::bind_rows(results_temp_other)
-    # Set type of Date columns since may have coerced to numeric
-    if("Date" %in% col_data_type[i]) results_temp_other[[col_new]] <- as.Date(results_temp_other[[col_new]], origin = "1970/1/1")
     results_temp_count <- format(results_temp_count, scientific = FALSE)
     results_temp_other <- format(results_temp_other, scientific = FALSE)
+    # Convert summaries which have been coerced to numeric but should be dates
+    if("Date" %in% col_data_type[i]) {
+      results_temp_other[[col_new]] <- dplyr::if_else(summaries_other[match(results_temp_other$summary, summary_other_names)] %in% date_summaries,
+                                                      as.character(as.Date(as.numeric(results_temp_other[[col_new]]), origin = "1970/1/1")),
+                                                      paste(results_temp_other[[col_new]], "days"))
+    }
     results_temp <- dplyr::bind_rows(results_temp_count, results_temp_other)
     if(i == 1) results <- results_temp
     else results <- dplyr::full_join(results, results_temp, by = c(factors_disp, "summary"))
@@ -462,6 +466,14 @@ all_summaries <- c(count_label, count_non_missing_label, count_missing_label,
                    circular_sd_label, circular_var_label, circular_range_label,
                    circular_ang_dev_label, circular_ang_var_label, circular_rho_label)
 
+# which of the summaries should return a Date value when x is a Date?
+date_summaries <- c(min_label, lower_quart_label, quartile_label, median_label, 
+                    mode_label, mean_label, trimmed_mean_label, upper_quart_label, 
+                    max_label, first_label, last_label, nth_label, 
+                    circular_min_label, circular_Q1_label, circular_quantile_label, 
+                    circular_median_label, circular_medianHL_label, circular_mean_label, 
+                    circular_Q3_label, circular_max_label)
+  
 summary_mode <- function(x,...) {
   ux <- unique(x)
   out <- ux[which.max(tabulate(match(x, ux)))]
@@ -672,28 +684,32 @@ summary_median <- function(x, na.rm = FALSE, na_type = "", ...) {
 }
 
 # quantile function
-summary_quantile <- function(x, na.rm = FALSE, probs, na_type = "", ...) {
+summary_quantile <- function(x, na.rm = FALSE, probs, type = 7, na_type = "", ...) {
   if(!na.rm && anyNA(x)) return(NA)
   # This prevents multiple values being returned
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    return(quantile(x, na.rm = na.rm, probs = probs)[[1]])
+  else {
+    if(lubridate::is.Date(x) && type %in% c(2, 4:9)) {
+      message("type = ", type, " not supported for Dates. Deafulting to type = 1")
+      type <- 1
+    }
+    return(quantile(x, na.rm = na.rm, probs = probs, type = type)[[1]])
   }
 }
 
 # lower quartile function
-lower_quartile <- function(x, na.rm = FALSE, na_type = "", ...) {
+lower_quartile <- function(x, na.rm = FALSE, type = 7, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(summary_quantile(x, na.rm = na.rm, probs = 0.25))
+    return(summary_quantile(x, na.rm = na.rm, probs = 0.25, type = type))
   }
 }
 
 # upper quartile function
-upper_quartile <- function(x, na.rm = FALSE, na_type = "", ...) {
+upper_quartile <- function(x, na.rm = FALSE, type = 7, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(summary_quantile(x, na.rm = na.rm, probs = 0.75))
+    return(summary_quantile(x, na.rm = na.rm, probs = 0.75, type = type))
   }
 }
 
