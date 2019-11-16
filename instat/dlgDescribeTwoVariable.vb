@@ -87,9 +87,13 @@ Public Class dlgDescribeTwoVariable
         clsRAnova.AddParameter("means", "FALSE", iPosition:=4)
 
         clsSummariesList.SetRCommand("c")
-        clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
-        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
-        clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
+        clsSummariesList.AddParameter("summary_count_missing", Chr(34) & "summary_count_missing" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        clsSummariesList.AddParameter("summary_min", Chr(34) & "summary_min" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsSummariesList.AddParameter("lower_quartile", Chr(34) & "lower_quartile" & Chr(34), bIncludeArgumentName:=False, iPosition:=2)
+        clsSummariesList.AddParameter("summary_median", Chr(34) & "summary_median" & Chr(34), bIncludeArgumentName:=False, iPosition:=3)
+        clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False, iPosition:=4)
+        clsSummariesList.AddParameter("upper_quartile", Chr(34) & "upper_quartile" & Chr(34), bIncludeArgumentName:=False, iPosition:=5)
+        clsSummariesList.AddParameter("summary_max", Chr(34) & "summary_max" & Chr(34), bIncludeArgumentName:=False, iPosition:=6)
 
         clsRCustomSummary.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary")
         clsRCustomSummary.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
