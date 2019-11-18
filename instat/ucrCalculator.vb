@@ -1630,6 +1630,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdMilitary_Click(sender As Object, e As EventArgs) Handles cmdMilitary.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::military(n = , x = c(""Army"", ""Air Force"", ""Navy"", ""Marine Corps"" , ""Coast Guard"") , prob = c(0.3785 , 0.2334 , 0.2218 , 0.1366 , 0.0296) , name = ""Military"")", 144)
         Else
@@ -1638,6 +1639,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdWakefield_Month_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Month.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_month(n = , x = month.name , prob = NULL , name = ""Month"")", 49)
         Else
@@ -1662,6 +1664,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdPolitical_Click(sender As Object, e As EventArgs) Handles cmdPolitical.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::political((n = , x = c(""Democrat"" , ""Republican"" , ""Constitution"" , ""Libertarian"" , ""Green"") , prob = c(0.577269133302094 , 0.410800432748879 , 0.00491084954793489 , 0.00372590303330866 , 0.0032936813677832) , name = ""Political"")", 215)
         Else
