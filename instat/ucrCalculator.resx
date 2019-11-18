@@ -9342,156 +9342,6 @@
   <data name="&gt;&gt;cmdHeight.ZOrder" xml:space="preserve">
     <value>50</value>
   </data>
-  <data name="&gt;&gt;cmdLikert.Name" xml:space="preserve">
-    <value>cmdLikert</value>
-  </data>
-  <data name="&gt;&gt;cmdLikert.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdLikert.Parent" xml:space="preserve">
-    <value>grpWakefield</value>
-  </data>
-  <data name="&gt;&gt;cmdLikert.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;cmdCar.Name" xml:space="preserve">
-    <value>cmdCar</value>
-  </data>
-  <data name="&gt;&gt;cmdCar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdCar.Parent" xml:space="preserve">
-    <value>grpWakefield</value>
-  </data>
-  <data name="&gt;&gt;cmdCar.ZOrder" xml:space="preserve">
-    <value>44</value>
-  </data>
-  <data name="&gt;&gt;cmdAnswer.Name" xml:space="preserve">
-    <value>cmdAnswer</value>
-  </data>
-  <data name="&gt;&gt;cmdAnswer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdAnswer.Parent" xml:space="preserve">
-    <value>grpWakefield</value>
-  </data>
-  <data name="&gt;&gt;cmdAnswer.ZOrder" xml:space="preserve">
-    <value>45</value>
-  </data>
-  <data name="&gt;&gt;cmdPet.Name" xml:space="preserve">
-    <value>cmdPet</value>
-  </data>
-  <data name="&gt;&gt;cmdPet.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdPet.Parent" xml:space="preserve">
-    <value>grpWakefield</value>
-  </data>
-  <data name="&gt;&gt;cmdPet.ZOrder" xml:space="preserve">
-    <value>46</value>
-  </data>
-  <data name="&gt;&gt;cmdAnimal.Name" xml:space="preserve">
-    <value>cmdAnimal</value>
-  </data>
-  <data name="&gt;&gt;cmdAnimal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdAnimal.Parent" xml:space="preserve">
-    <value>grpWakefield</value>
-  </data>
-  <data name="&gt;&gt;cmdAnimal.ZOrder" xml:space="preserve">
-    <value>47</value>
-  </data>
-  <data name="&gt;&gt;cmdAge.Name" xml:space="preserve">
-    <value>cmdAge</value>
-  </data>
-  <data name="&gt;&gt;cmdAge.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdAge.Parent" xml:space="preserve">
-    <value>grpWakefield</value>
-  </data>
-  <data name="&gt;&gt;cmdAge.ZOrder" xml:space="preserve">
-    <value>48</value>
-  </data>
-  <data name="&gt;&gt;cmdIncome.Name" xml:space="preserve">
-    <value>cmdIncome</value>
-  </data>
-  <data name="&gt;&gt;cmdIncome.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdIncome.Parent" xml:space="preserve">
-    <value>grpWakefield</value>
-  </data>
-  <data name="&gt;&gt;cmdIncome.ZOrder" xml:space="preserve">
-    <value>49</value>
-  </data>
-  <data name="&gt;&gt;cmdHair.Name" xml:space="preserve">
-    <value>cmdHair</value>
-  </data>
-  <data name="&gt;&gt;cmdHair.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdHair.Parent" xml:space="preserve">
-    <value>grpWakefield</value>
-  </data>
-  <data name="&gt;&gt;cmdHair.ZOrder" xml:space="preserve">
-    <value>51</value>
-  </data>
-  <data name="&gt;&gt;cmdGroup.Name" xml:space="preserve">
-    <value>cmdGroup</value>
-  </data>
-  <data name="&gt;&gt;cmdGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdGroup.Parent" xml:space="preserve">
-    <value>grpWakefield</value>
-  </data>
-  <data name="&gt;&gt;cmdGroup.ZOrder" xml:space="preserve">
-    <value>52</value>
-  </data>
-  <data name="&gt;&gt;cmdGrade.Name" xml:space="preserve">
-    <value>cmdGrade</value>
-  </data>
-  <data name="&gt;&gt;cmdGrade.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdGrade.Parent" xml:space="preserve">
-    <value>grpWakefield</value>
-  </data>
-  <data name="&gt;&gt;cmdGrade.ZOrder" xml:space="preserve">
-    <value>53</value>
-  </data>
-  <data name="grpWakefield.Location" type="System.Drawing.Point, System.Drawing">
-    <value>573, 78</value>
-  </data>
-  <data name="grpWakefield.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="grpWakefield.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="grpWakefield.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 423</value>
-  </data>
-  <data name="grpWakefield.TabIndex" type="System.Int32, mscorlib">
-    <value>191</value>
-  </data>
-  <data name="grpWakefield.Text" xml:space="preserve">
-    <value>Wakefield</value>
-  </data>
-  <data name="&gt;&gt;grpWakefield.Name" xml:space="preserve">
-    <value>grpWakefield</value>
-  </data>
-  <data name="&gt;&gt;grpWakefield.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpWakefield.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpWakefield.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="cmdLikert.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
   </data>
@@ -9742,7 +9592,7 @@
     <value>22</value>
   </data>
   <data name="cmdHair.Text" xml:space="preserve">
-    <value>hair</value>
+    <value>Hair</value>
   </data>
   <data name="&gt;&gt;cmdHair.Name" xml:space="preserve">
     <value>cmdHair</value>
@@ -9821,6 +9671,36 @@
   </data>
   <data name="&gt;&gt;cmdGrade.ZOrder" xml:space="preserve">
     <value>53</value>
+  </data>
+  <data name="grpWakefield.Location" type="System.Drawing.Point, System.Drawing">
+    <value>573, 78</value>
+  </data>
+  <data name="grpWakefield.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="grpWakefield.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="grpWakefield.Size" type="System.Drawing.Size, System.Drawing">
+    <value>579, 423</value>
+  </data>
+  <data name="grpWakefield.TabIndex" type="System.Int32, mscorlib">
+    <value>191</value>
+  </data>
+  <data name="grpWakefield.Text" xml:space="preserve">
+    <value>Wakefield</value>
+  </data>
+  <data name="&gt;&gt;grpWakefield.Name" xml:space="preserve">
+    <value>grpWakefield</value>
+  </data>
+  <data name="&gt;&gt;grpWakefield.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpWakefield.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpWakefield.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="cmdCircular.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

@@ -1673,6 +1673,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdRace_Click(sender As Object, e As EventArgs) Handles cmdRace.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::race(n = , x = c(""White"" , ""Hispanic"" , ""Black"" , ""Asian"" , ""Bi-Racial"" , ""Native"" , ""Other"" , ""Hawaiian"") , prob = c(0.637 , 0.163 , 0.122 , 0.047 , 0.019 , 0.007 , 0.002 , 0.0015) , name = ""Race"")", 190)
         Else
@@ -1681,6 +1682,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdReligion_Click(sender As Object, e As EventArgs) Handles cmdReligion.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::religion(n = , x = c(""Christian"" , ""Muslim"" , ""None"" , ""Hindu"" , ""Buddhist"" , ""Folk"" , ""Other"" , ""Jewish"") , prob = c(0.31477 , 0.23163 , 0.16323 , 0.14985 , 0.07083 , 0.05882 , 0.00859 , 0.00227) , name = ""Religion"")", 205)
         Else
@@ -1713,6 +1715,8 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdSex_Inclusive_Click(sender As Object, e As EventArgs) Handles cmdSex_Inclusive.Click
+        ucrReceiverForCalculation.SetDataType("factor")
+        ucrReceiverForCalculation.SetDataType("factors")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex_inclusive(n = , x = c(""Male"" , ""Female"" , ""Intersex"") , prob = NULL , name = ""Sex"")", 70)
         Else
@@ -1745,6 +1749,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdState_Click(sender As Object, e As EventArgs) Handles cmdState.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::state(n = , x = datasets::state.name , prob = wakefield::state_populations[[""Proportion""]], name = ""State"")", 98)
         Else
