@@ -1565,6 +1565,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdLanguage_Click(sender As Object, e As EventArgs) Handles cmdLanguage.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::language(n = , x = wakefield::languages[[""Language""]] , prob = wakefield::languages[[""Proportion""]], name = ""Language"")", 107)
         Else
@@ -1620,6 +1621,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdMarital_Click(sender As Object, e As EventArgs) Handles cmdMarital.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::marital(n = , x = c(""Married"" , ""Divorced"" , ""Widowed"" , ""Separated"" , ""Never Married"") , prob = NULL , name = ""Marital"")", 110)
         Else
