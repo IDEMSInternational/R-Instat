@@ -1421,6 +1421,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdDeath_Click(sender As Object, e As EventArgs) Handles cmdDeath.Click
+        ucrReceiverForCalculation.SetDataType("logical")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::death(n = , prob = NULL, name = ""Death"")", 31)
         Else
@@ -1454,6 +1455,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdDob_Click(sender As Object, e As EventArgs) Handles cmdDob.Click
+        ucrReceiverForCalculation.SetDataType("date")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::dob(n = , random = TRUE , x = NULL , start = Sys.Date() - 365 * 15 , k = 365 *2 , by = ""1 days"" , prob = NULL , name = ""DOB"")", 118)
         Else
@@ -1733,6 +1735,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdSmokes_Click(sender As Object, e As EventArgs) Handles cmdSmokes.Click
+        ucrReceiverForCalculation.SetDataType("logical")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::smokes(n = , prob = c(0.822 , 0.178) , name = ""Smokes"")", 45)
         Else
@@ -1774,6 +1777,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdValid_Click(sender As Object, e As EventArgs) Handles cmdValid.Click
+        ucrReceiverForCalculation.SetDataType("logical")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::Valid(n = , prob = NULL, name = ""Valid"")", 31)
         Else
