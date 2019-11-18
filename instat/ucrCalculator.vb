@@ -1396,6 +1396,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdColor_Click(sender As Object, e As EventArgs) Handles cmdColor.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::color(n = , x = c(""Red"" , ""Green"" , ""Blue"" , ""Yellow"" , ""Black"" , ""White"") , prob = NULL, name = ""Color"")", 96)
         Else
@@ -1444,6 +1445,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdDna_Click(sender As Object, e As EventArgs) Handles cmdDna.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::dna(n = , x = c(""Guanine"", ""Adenine"", ""Thymine"", ""Cytosine""), prob = NULL , name = ""DNA"")", 82)
         Else
