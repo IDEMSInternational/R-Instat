@@ -1721,7 +1721,6 @@ Public Class ucrCalculator
 
     Private Sub cmdSex_Inclusive_Click(sender As Object, e As EventArgs) Handles cmdSex_Inclusive.Click
         ucrReceiverForCalculation.SetDataType("factor")
-        ucrReceiverForCalculation.SetDataType("factors")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex_inclusive(n = , x = c(""Male"" , ""Female"" , ""Intersex"") , prob = NULL , name = ""Sex"")", 70)
         Else
