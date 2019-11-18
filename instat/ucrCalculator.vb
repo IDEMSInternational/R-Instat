@@ -1488,6 +1488,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdEye_Click(sender As Object, e As EventArgs) Handles cmdEye.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::eye(n =, x = c(""Brown"" , ""Blue"" , ""Green"" , ""Hazel"" , ""Gray"") , prob = c(0.44 , 0.3 , 0.13 , 0.09 , 0.04) , name = ""Eye"")", 114)
         Else
@@ -1496,6 +1497,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdGrade_Level_Click(sender As Object, e As EventArgs) Handles cmdGrade_Level.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::grade_level(n = , x = c(""K"" , ""1"" , ""2"" , ""3"" , ""4"" , ""5"" , ""6"" , ""7"" , ""8"" , ""9"" , ""10"" ,""11"" , ""12""), prob = NULL, name = ""Grade_Level"")", 123)
         Else
