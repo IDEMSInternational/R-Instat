@@ -1615,6 +1615,8 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdLorem_Ipsum_Click(sender As Object, e As EventArgs) Handles cmdLorem_ipsum.Click
+        ucrReceiverForCalculation.SetDataType("character")
+        ucrReceiverForCalculation.SetDataType("character")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::lorem_ipsum(n = , ..., name = ""Lorem_Ipsum"")", 29)
         Else
@@ -1701,6 +1703,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdSentence_Click(sender As Object, e As EventArgs) Handles cmdSentence.Click
+        ucrReceiverForCalculation.SetDataType("character")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sentence(n = , x = wakefield::presidential_debates_2012 , prob = NULL , name = ""Sentence"")", 78)
         Else
