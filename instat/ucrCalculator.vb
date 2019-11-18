@@ -1344,6 +1344,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdAnimal_Click(sender As Object, e As EventArgs) Handles cmdAnimal.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::animal(n = , k =10 , x = wakefield::animal_list, prob = NULL, name = ""Animal"")", 68)
         Else
@@ -1360,6 +1361,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdAnswer_Click(sender As Object, e As EventArgs) Handles cmdAnswer.Click
+        ucrReceiverForCalculation.SetDataType("factors")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::answer(n = , x = c(""No"" , ""Yes""), prob = NULL , name = ""Answer"")", 54)
         Else
