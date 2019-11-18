@@ -1514,6 +1514,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdGroup_Click(sender As Object, e As EventArgs) Handles cmdGroup.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::group(n = , x = c(""Control"" , ""Treatment"") , prob = NULL , name = ""Group"")", 65)
         Else
@@ -1522,6 +1523,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdHair_Click(sender As Object, e As EventArgs) Handles cmdHair.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::hair(n = , x = c(""Brown"" , ""Black"" , ""Blonde"" , ""Red""), prob = c(0.35 , 0.28, 0.26 , 0.11), name = ""hair"")", 98)
         Else
@@ -1546,6 +1548,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdInternet_Browser_Click(sender As Object, e As EventArgs) Handles cmdInternet_Browser.Click
+        ucrReceiverForCalculation.SetDataType("factor")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::internet_browser(n = , x = c(""Chrome"" , ""IE"", ""Firefox"" , ""Safari"" , ""Opera"" , ""Android"") , prob = c(0.5027 , 0.175 , 0.1689 , 0.0994, 0.017, 0.0132) , name = ""Browser"")", 149)
         Else
