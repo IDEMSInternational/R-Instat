@@ -1764,6 +1764,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdString_Click(sender As Object, e As EventArgs) Handles cmdString.Click
+        ucrReceiverForCalculation.SetDataType("character")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::string(n = , x = ""[A-Za-z0-9]"" , length = 10 , name = ""String"")", 52)
         Else
@@ -1772,6 +1773,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdWakefield_Upper_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Upper.Click
+        ucrReceiverForCalculation.SetDataType("character")
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_upper(n = , k = 5, x = LETTERS , prob = NULL, name = ""Upper"")", 52)
         Else
