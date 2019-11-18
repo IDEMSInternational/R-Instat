@@ -35,6 +35,8 @@ Public Class dlgClimaticStationMaps
     Private bResetSubdialog As Boolean = True
     Private bResetSFLayerSubdialog As Boolean = True
     Private clsLabelRepelAesFunction As New RFunction
+    Private clsCoordPolarFunction As RFunction
+    Private clsCoordPolarStartOperator As ROperator
 
     Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -62,7 +64,7 @@ Public Class dlgClimaticStationMaps
         ucrSelectorStation.SetParameter(New RParameter("data", 0))
         ucrSelectorStation.SetParameterIsrfunction()
 
-        ucrReceiverGeometry.bAutoFill = True
+        'ucrReceiverGeometry.bAutoFill = True
         ucrReceiverGeometry.Selector = ucrSelectorOutline
 
         ucrReceiverFill.SetParameter(New RParameter("fill", 0))
@@ -134,6 +136,12 @@ Public Class dlgClimaticStationMaps
         clsYlimFunction = New RFunction
         clsFacetOp = New ROperator
 
+        clsCoordPolarFunction = New RFunction
+        clsCoordPolarStartOperator = New ROperator
+
+        clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
+        clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
+
         ucrSelectorOutline.Reset()
         ucrSelectorStation.Reset()
         ucrReceiverLongitude.SetMeAsReceiver()
@@ -202,7 +210,7 @@ Public Class dlgClimaticStationMaps
     End Sub
 
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
-        sdgPlots.SetRCode(clsGGplotOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsSfAesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorStation, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsGGplotOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsSfAesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, ucrNewBaseSelector:=ucrSelectorStation, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -321,16 +329,26 @@ Public Class dlgClimaticStationMaps
 
     Private Sub ucrSelectorOutline_DataFrameChanged() Handles ucrSelectorOutline.DataFrameChanged
         Dim clsSetGeometry As New RFunction
+        Dim clsGetDataFrame As RFunction = New RFunction
+        Dim clsParam As RParameter = New RParameter
         Dim GeometryOutput As SymbolicExpression
-        Dim strColType As String
+        Dim strScript As String = ""
+
+        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsParam.SetArgumentName("data_name")
+        clsParam.SetArgumentValue(Chr(34) & ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        clsGetDataFrame.AddParameter(clsParam)
+        clsGetDataFrame.SetAssignTo(ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        clsGetDataFrame.ToScript(strScript)
+        frmMain.clsRLink.RunInternalScript(strScript)
 
         clsSetGeometry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_geometry")
-        clsSetGeometry.AddParameter("dataframe", ucrSelectorOutline.strCurrentDataFrame)
-        GeometryOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsSetGeometry.ToScript(), bSilent:=True)
+        clsSetGeometry.AddParameter("data", ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        GeometryOutput = frmMain.clsRLink.RunInternalScriptGetOutput(clsSetGeometry.ToScript(), bSilent:=True)
 
         If GeometryOutput IsNot Nothing AndAlso Not GeometryOutput.Type = Internals.SymbolicExpressionType.Null Then
-            strColType = GeometryOutput.AsCharacter(0)
-            ucrReceiverGeometry.SetText(strColType)
+            ucrReceiverGeometry.txtReceiverSingle.Enabled = True
+            ucrReceiverGeometry.SetText("sd")
         End If
 
     End Sub
