@@ -239,6 +239,7 @@ Public Class dlgNewDataFrame
 
     Private Sub ucrInputCommand_ContentsChanged() Handles ucrInputCommand.ContentsChanged
         ucrInputTryMessage.SetText("")
+        ucrInputTryMessage.txtInput.BackColor = Color.White
         ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
         TestOKEnabled()
     End Sub
@@ -332,16 +333,16 @@ Public Class dlgNewDataFrame
                 'If strVecOutput.Length > 0 Then
                 'End If
                 ucrInputTryMessage.SetText("Command Ok.")
-                ucrInputTryMessage.txtInput.BackColor = Color.White
+                ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
             Else
                 ucrInputTryMessage.SetText("Command produced an error or no output to display.")
-                ucrInputTryMessage.txtInput.BackColor = Color.Red
+                ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
             End If
 
 
         Catch ex As Exception
             ucrInputTryMessage.SetText("Command produced an error.")
-            ucrInputTryMessage.txtInput.BackColor = Color.Red
+            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
         End Try
     End Sub
 
