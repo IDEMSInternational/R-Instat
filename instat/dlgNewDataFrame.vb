@@ -42,8 +42,6 @@ Public Class dlgNewDataFrame
         ucrInputCommand.txtInput.WordWrap = False
         ucrInputCommand.txtInput.ScrollBars = ScrollBars.Both
 
-        rdoRandom.Enabled = False 'TODO remove this later
-
         'nudRows
         ucrNudRows.SetParameter(New RParameter("nrow", iNewPosition:=1))
         ucrNudRows.SetMinMax(1, Integer.MaxValue)
@@ -72,7 +70,7 @@ Public Class dlgNewDataFrame
 
         ucrPnlDataFrame.AddToLinkedControls(ucrNudCols, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrPnlDataFrame.AddToLinkedControls(ucrNudRows, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
-        ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand, rdoRandom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
         ucrInputCommand.SetLinkedDisplayControl(New List(Of Control)({lblCommand, btnExample}))
@@ -172,8 +170,8 @@ Public Class dlgNewDataFrame
             'enable if there is text in the input textbox
             ucrBase.OKEnabled(ucrNewDFName.IsComplete AndAlso Not ucrInputCommand.IsEmpty)
         ElseIf rdoRandom.Checked Then
-            'TODO
-            ucrBase.OKEnabled(False)
+            'enable if there is text in the input textbox
+            ucrBase.OKEnabled(ucrNewDFName.IsComplete AndAlso Not ucrInputCommand.IsEmpty)
         ElseIf rdoEmpty.Checked Then
             If ucrNewDFName.IsComplete AndAlso ucrNudCols.GetText <> "" AndAlso ucrNudRows.GetText <> "" Then
                 ucrBase.OKEnabled(True)
@@ -213,7 +211,7 @@ Public Class dlgNewDataFrame
             ucrInputTryMessage.SetText("")
             ucrInputTryMessage.txtInput.BackColor = Color.White
             ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
-        ElseIf rdoCommand.Checked Then
+        ElseIf rdoCommand.Checked OrElse rdoRandom.Checked Then
             dataGridView.Visible = False
             btnTry.Visible = True
             ucrInputTryMessage.Visible = True
@@ -221,8 +219,6 @@ Public Class dlgNewDataFrame
             ucrInputTryMessage.txtInput.BackColor = Color.White
             ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
-        ElseIf rdoRandom.Checked Then
-            'TODO 
         ElseIf rdoEmpty.Checked Then
             btnTry.Visible = False
             ucrInputTryMessage.Visible = False
@@ -232,7 +228,7 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub ucrNewDFName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlValueChanged
-        If rdoCommand.Checked Then
+        If rdoCommand.Checked OrElse rdoRandom.Checked Then
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
         End If
     End Sub
@@ -284,16 +280,27 @@ Public Class dlgNewDataFrame
         lstView.View = View.Details
         lstView.FullRowSelect = True
 
+
         'add columns
         lstView.Columns.Add("Command", 250)
         lstView.Columns.Add("Comment", 200)
 
-        lstView.Items.Add(New ListViewItem({"data.frame()", "Empty data frame"}))
-        lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data = NA, nrow = 10, ncol = 2))", "10 rows and 2 columns filled with missing values"}))
-        lstView.Items.Add(New ListViewItem({"data.frame(x = 1:30, y = rnorm(30, mean = 100, sd = 15), z = runif(30, min = 10, max = 30))", " "}))
-        lstView.Items.Add(New ListViewItem({"data.frame(block = gl(4, 3), treat = c(""C"", ""A"", ""B"", ""B"", ""C"", ""A"", ""A"", ""B"", ""C"", ""A"", ""C"", ""B""), yield = c(74, 68,  50, 62, 68, 57, 70, 56, 83, 67, 67, 59))", " "}))
-        lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 100, data_theme = ""the_works"")", " "}))
-        lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 30, id, race, age, sex, hour, iq, height, died, Scoring = rnorm, Smoker = valid)", " "}))
+        'add the appropraite rows with the commands based on the option selected
+        If rdoCommand.Checked Then
+            lstView.Items.Add(New ListViewItem({"data.frame()", "Empty data frame"}))
+            lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data = NA, nrow = 10, ncol = 2))", "10 rows and 2 columns filled with missing values"}))
+            lstView.Items.Add(New ListViewItem({"data.frame(x = 1:30, y = rnorm(30, mean = 100, sd = 15), z = runif(30, min = 10, max = 30))", " "}))
+            lstView.Items.Add(New ListViewItem({"data.frame(block = gl(4, 3), treat = c(""C"", ""A"", ""B"", ""B"", ""C"", ""A"", ""A"", ""B"", ""C"", ""A"", ""C"", ""B""), yield = c(74, 68,  50, 62, 68, 57, 70, 56, 83, 67, 67, 59))", " "}))
+            lstView.Items.Add(New ListViewItem({"data.frame(data = replicate(20,rbinom(n=25, p=0.4,size=1)))", " "}))
+            lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data=c(rbinom(7300,p=0.4,size=1)*rexp(7300,0.1)), nrow = 365, ncol = 20))", " "}))
+            lstView.Items.Add(New ListViewItem({"data.frame(replicate(10,(sample(c(TRUE,FALSE),size=50,replace=TRUE,prob=c(0.3,0.7)))))", " "}))
+        ElseIf rdoRandom.Checked Then
+            lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 100, data_theme = ""the_works"")", " "}))
+            lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 30, id, race, age, sex, hour, iq, height, died, Scoring = rnorm, Smoker = valid)", " "}))
+            lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 200, data_theme = ""survey"")", " "}))
+            lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n=500, data_theme = ""survey2"") %>% r_na(prob=0.1)", " "}))
+            lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 50,id, r_dummy(color),r_series(likert,3),grade,grade,grade)", " "}))
+        End If
 
         'set respective handlers
         AddHandler lstView.LostFocus, Sub()
