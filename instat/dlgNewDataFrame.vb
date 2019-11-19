@@ -280,7 +280,6 @@ Public Class dlgNewDataFrame
         lstView.View = View.Details
         lstView.FullRowSelect = True
 
-
         'add columns
         lstView.Columns.Add("Command", 250)
         lstView.Columns.Add("Comment", 200)
@@ -320,25 +319,33 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles btnTry.Click
+        Dim bValid As Boolean = False
         Dim vecOutput As CharacterVector
-        Dim strScript As String = ""
+        Dim strScript As String
         Try
 
             If rdoConstruct.Checked Then
                 strScript = clsConstructFunction.ToScript
-            ElseIf rdoCommand.Checked Then
-                If ucrInputCommand.IsEmpty Then
-                    ucrInputTryMessage.SetText("")
-                    ucrInputTryMessage.txtInput.BackColor = Color.White
-                    Return
-                End If
+                vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strScript, bSilent:=True)
+                bValid = Not IsNothing(vecOutput)
+            ElseIf rdoCommand.Checked OrElse rdoRandom.Checked Then
+                Dim lstScriptCommands As New List(Of String)
                 strScript = ucrInputCommand.GetText
+                lstScriptCommands.AddRange(strScript.Split(New String() {Environment.NewLine}, StringSplitOptions.None))
+                For Each str As String In lstScriptCommands
+                    If Not String.IsNullOrWhiteSpace(str) Then
+                        vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(str, bSilent:=True)
+                        If vecOutput IsNot Nothing Then
+                            bValid = True
+                            'don't break the if, we probably want to loop through to the last command checking validity? 
+                        End If
+                    End If
+                Next
+
             End If
 
-            vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strScript, bSilent:=True)
-            If vecOutput IsNot Nothing Then
-                'If strVecOutput.Length > 0 Then
-                'End If
+
+            If bValid Then
                 ucrInputTryMessage.SetText("Command Ok.")
                 ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
             Else
