@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>539, 51</value>
+    <value>569, 52</value>
   </data>
   <data name="cmdBrowse.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -160,7 +160,7 @@
     <value>4, 0, 4, 0</value>
   </data>
   <data name="lblExport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 16</value>
+    <value>268, 16</value>
   </data>
   <data name="lblExport.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -180,14 +180,41 @@
   <data name="&gt;&gt;lblExport.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lblClicktoConfirm.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblClicktoConfirm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>281, 89</value>
+  </data>
+  <data name="lblClicktoConfirm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblClicktoConfirm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 28</value>
+  </data>
+  <data name="lblClicktoConfirm.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblClicktoConfirm.Name" xml:space="preserve">
+    <value>lblClicktoConfirm</value>
+  </data>
+  <data name="&gt;&gt;lblClicktoConfirm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblClicktoConfirm.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblClicktoConfirm.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="ucrInputExportFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>244, 55</value>
+    <value>284, 53</value>
   </data>
   <data name="ucrInputExportFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>8, 10, 8, 10</value>
   </data>
   <data name="ucrInputExportFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 26</value>
+    <value>282, 26</value>
   </data>
   <data name="ucrInputExportFile.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -252,30 +279,6 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="lblClicktoConfirm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 91</value>
-  </data>
-  <data name="lblClicktoConfirm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="lblClicktoConfirm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 28</value>
-  </data>
-  <data name="lblClicktoConfirm.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblClicktoConfirm.Name" xml:space="preserve">
-    <value>lblClicktoConfirm</value>
-  </data>
-  <data name="&gt;&gt;lblClicktoConfirm.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblClicktoConfirm.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblClicktoConfirm.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -286,7 +289,10 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>623, 193</value>
+    <value>653, 183</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>

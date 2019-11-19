@@ -41,10 +41,10 @@ Partial Class dlgExportDataset
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportDataset))
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.lblExport = New System.Windows.Forms.Label()
+        Me.lblClicktoConfirm = New System.Windows.Forms.Label()
         Me.ucrInputExportFile = New instat.ucrInputTextBox()
         Me.ucrAvailableSheets = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblClicktoConfirm = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cmdBrowse
@@ -57,6 +57,11 @@ Partial Class dlgExportDataset
         '
         resources.ApplyResources(Me.lblExport, "lblExport")
         Me.lblExport.Name = "lblExport"
+        '
+        'lblClicktoConfirm
+        '
+        resources.ApplyResources(Me.lblClicktoConfirm, "lblClicktoConfirm")
+        Me.lblClicktoConfirm.Name = "lblClicktoConfirm"
         '
         'ucrInputExportFile
         '
@@ -77,11 +82,6 @@ Partial Class dlgExportDataset
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'lblClicktoConfirm
-        '
-        resources.ApplyResources(Me.lblClicktoConfirm, "lblClicktoConfirm")
-        Me.lblClicktoConfirm.Name = "lblClicktoConfirm"
         '
         'dlgExportDataset
         '
