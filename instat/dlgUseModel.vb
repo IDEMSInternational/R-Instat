@@ -42,7 +42,7 @@ Public Class dlgUseModel
         ucrReceiverForTestColumn.Selector = ucrSelectorUseModel
         ucrReceiverForTestColumn.SetMeAsReceiver()
 
-        ucrInputComboRPackage.SetItems({"General", "Prediction", "extRemes"})
+        ucrInputComboRPackage.SetItems({"General", "Prediction", "extRemes", "segmented"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
 
         ucrInputTryMessage.Hide()
@@ -117,6 +117,7 @@ Public Class dlgUseModel
         grpGeneral.Visible = False
         grpPrediction.Visible = False
         grpExtrRemes.Visible = False
+        grpSegmented.Visible = False
         Select Case ucrInputComboRPackage.GetText
             Case "General"
                 grpGeneral.Visible = True
@@ -124,6 +125,8 @@ Public Class dlgUseModel
                 grpPrediction.Visible = True
             Case "extRemes"
                 grpExtrRemes.Visible = True
+            Case "segmented"
+                grpSegmented.Visible = True
         End Select
     End Sub
 
@@ -228,5 +231,61 @@ Public Class dlgUseModel
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
         ucrReceiverForTestColumn.Clear()
+    End Sub
+
+    Private Sub cmdSegmented_Click(sender As Object, e As EventArgs) Handles cmdSegmented.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" segmented::segmented()", 1)
+    End Sub
+
+    Private Sub cmdAapc_Click(sender As Object, e As EventArgs) Handles cmdAapc.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" segmented::aapc()", 1)
+    End Sub
+
+    Private Sub cmdSegmentedPrint_Click(sender As Object, e As EventArgs) Handles cmdSegmentedPrint.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" print()", 1)
+    End Sub
+
+    Private Sub cmdPscore_Click(sender As Object, e As EventArgs) Handles cmdPscore.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" segmented::pscore.test()", 1)
+    End Sub
+
+    Private Sub cmdSegmentedSummary_Click(sender As Object, e As EventArgs) Handles cmdSegmentedSummary.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" summary()", 1)
+    End Sub
+
+    Private Sub cmdConfint_Click(sender As Object, e As EventArgs) Handles cmdConfint.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" confint()", 1)
+    End Sub
+
+    Private Sub cmdVcov_Click(sender As Object, e As EventArgs) Handles cmdVcov.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" vcov()", 1)
+    End Sub
+
+    Private Sub cmdSlope_Click(sender As Object, e As EventArgs) Handles cmdSlope.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" segmented::slope()", 1)
+    End Sub
+
+    Private Sub cmdSegmentedPredict_Click(sender As Object, e As EventArgs) Handles cmdSegmentedPredict.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" predict()", 1)
+    End Sub
+
+    Private Sub cmdPlotLines_Click(sender As Object, e As EventArgs) Handles cmdPlotLines.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" plot lines()", 1)
+    End Sub
+
+    Private Sub cmdPoints_Click(sender As Object, e As EventArgs) Handles cmdPoints.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" points()", 1)
+    End Sub
+
+    Private Sub cmdBroken_Click(sender As Object, e As EventArgs) Handles cmdBroken.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" segmented::broken.line()", 1)
+    End Sub
+
+    Private Sub cmdDavies_Click(sender As Object, e As EventArgs) Handles cmdDavies.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" segmented::davies.test()", 1)
+    End Sub
+
+    Private Sub cmdIntercept_Click(sender As Object, e As EventArgs) Handles cmdIntercept.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" segmented::intercept()", 1)
     End Sub
 End Class
