@@ -98,7 +98,6 @@ Public Class dlgNewDataFrame
         'Construct option function
         clsConstructFunction.SetRCommand("data.frame")
 
-        ucrInputCommand.SetText("data.frame(data=matrix(data=NA, nrow=10, ncol=2))")
         'empty and create 5 (+1) default rows
         dataGridView.Rows.Clear()
         dataGridView.Rows.Add(5)
@@ -219,6 +218,11 @@ Public Class dlgNewDataFrame
             ucrInputTryMessage.txtInput.BackColor = Color.White
             ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
+            If rdoCommand.Checked Then
+                ucrInputCommand.SetText("data.frame(data=matrix(data=NA, nrow=10, ncol=2))")
+            Else
+                ucrInputCommand.SetText("wakefield::r_data_theme(n = 100, data_theme = ""the_works"")")
+            End If
         ElseIf rdoEmpty.Checked Then
             btnTry.Visible = False
             ucrInputTryMessage.Visible = False
