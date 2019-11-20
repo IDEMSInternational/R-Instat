@@ -73,10 +73,9 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates}, {rdoColumnChart, rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrInputBarChartPosition, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputBarChartPosition.SetLinkedDisplayControl(lblPosition)
-        ucrPnlOptions.AddToLinkedControls(ucrReceiverByFactor, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverByFactor}, {rdoBarChart, rdoColumnChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverY, {rdoColumnChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
 
         ucrBarChartSelector.SetParameter(New RParameter("data", 0))
         ucrBarChartSelector.SetParameterIsrfunction()
@@ -87,7 +86,6 @@ Public Class dlgBarAndPieChart
         ucrReceiverFirst.bWithQuotes = False
         ucrReceiverFirst.SetParameterIsString()
         ucrReceiverFirst.SetLinkedDisplayControl(lblVariable)
-
 
         ucrReceiverByFactor.Selector = ucrBarChartSelector
         ucrReceiverByFactor.SetIncludedDataTypes({"factor"})
@@ -181,7 +179,8 @@ Public Class dlgBarAndPieChart
 
         clsRColFunction.SetPackageName("ggplot2")
         clsRColFunction.SetRCommand("geom_col")
-        
+
+
 
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXlabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -204,6 +203,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverFirst.AddAdditionalCodeParameterPair(clsColAesFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
 
         ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
+        ucrReceiverByFactor.AddAdditionalCodeParameterPair(clsColAesFunction, New RParameter("fill", 0), iAdditionalPairNo:=1)
 
         ucrReceiverY.SetRCode(clsColAesFunction, bReset)
 
@@ -275,6 +275,11 @@ Public Class dlgBarAndPieChart
             ucrReceiverY.Add(clsColAesFunction.GetParameter("y").strArgumentValue)
         Else
             ucrReceiverY.Clear()
+        End If
+        If clsColAesFunction.ContainsParameter("fill") Then
+            ucrReceiverByFactor.Add(clsColAesFunction.GetParameter("fill").strArgumentValue)
+        Else
+            ucrReceiverByFactor.Clear()
         End If
         TestOkEnabled()
     End Sub
