@@ -64,8 +64,10 @@ Public Class dlgClimaticStationMaps
         ucrSelectorStation.SetParameter(New RParameter("data", 0))
         ucrSelectorStation.SetParameterIsrfunction()
 
-        'ucrReceiverGeometry.bAutoFill = True
+
         ucrReceiverGeometry.Selector = ucrSelectorOutline
+        ucrReceiverGeometry.SetParameterIsString()
+        ucrReceiverGeometry.bWithQuotes = False
 
         ucrReceiverFill.SetParameter(New RParameter("fill", 0))
         ucrReceiverFill.Selector = ucrSelectorOutline
@@ -344,11 +346,10 @@ Public Class dlgClimaticStationMaps
 
         clsSetGeometry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_geometry")
         clsSetGeometry.AddParameter("data", ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        GeometryOutput = frmMain.clsRLink.RunInternalScriptGetOutput(clsSetGeometry.ToScript(), bSilent:=True)
-
+        GeometryOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsSetGeometry.ToScript(), bSilent:=True)
+        Dim str As String = GeometryOutput.AsCharacter(0)
         If GeometryOutput IsNot Nothing AndAlso Not GeometryOutput.Type = Internals.SymbolicExpressionType.Null Then
-            ucrReceiverGeometry.txtReceiverSingle.Enabled = True
-            ucrReceiverGeometry.SetText("sd")
+            ucrReceiverGeometry.Add(str, ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         End If
 
     End Sub
