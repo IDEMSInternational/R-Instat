@@ -69,6 +69,7 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddParameterPresentCondition(rdoPieChart, "coord_polar")
         ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coord_polar", False)
         ucrPnlOptions.AddParameterPresentCondition(rdoColumnChart, "geom_col")
+
         ucrPnlOptions.AddToLinkedControls(ucrInputBarChartPosition, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputBarChartPosition.SetLinkedDisplayControl(lblPosition)
 
@@ -345,15 +346,7 @@ Public Class dlgBarAndPieChart
             End If
         End If
     End Sub
-    Private Sub ChangeLocation()
-        If rdoColumnChart.Checked Then
-            Me.ucrReceiverFirst.Location = New Point(255, 141)
-            Me.ucrReceiverY.Location = New Point(255, 91)
-        End If
-    End Sub
-
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
-        ChangeLocation()
         SetDialogOptions()
     End Sub
 
