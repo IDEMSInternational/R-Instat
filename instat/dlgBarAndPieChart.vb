@@ -70,13 +70,11 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coord_polar", False)
         ucrPnlOptions.AddParameterPresentCondition(rdoColumnChart, "geom_col")
 
+        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates}, {rdoColumnChart, rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrInputBarChartPosition, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputBarChartPosition.SetLinkedDisplayControl(lblPosition)
-
-        ucrPnlOptions.AddToLinkedControls(ucrChkFlipCoordinates, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverByFactor, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
-
         ucrPnlOptions.AddToLinkedControls(ucrReceiverY, {rdoColumnChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
 
