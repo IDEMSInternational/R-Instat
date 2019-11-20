@@ -68,7 +68,7 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddRadioButton(rdoColumnChart)
         ucrPnlOptions.AddParameterPresentCondition(rdoPieChart, "coord_polar")
         ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coord_polar", False)
-        ucrPnlOptions.AddParameterPresentCondition(rdoColumnChart, "coord_polar", False)
+        ucrPnlOptions.AddParameterPresentCondition(rdoColumnChart, "geom_col")
         ucrPnlOptions.AddToLinkedControls(ucrInputBarChartPosition, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputBarChartPosition.SetLinkedDisplayControl(lblPosition)
 
