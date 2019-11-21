@@ -366,20 +366,27 @@ Public Class dlgBarAndPieChart
     End Sub
     Private Sub ChangeReceiverLocation()
         If rdoBarChart.Checked Then
+            lblVariable.Text = "Variable"
             lblVariable.Location = New Point(255, 76)
             ucrReceiverFirst.Location = New Point(255, 91)
+            lblByFactor.Text = "By Factor (Optional):"
             lblByFactor.Location = New Point(255, 126)
             ucrReceiverByFactor.Location = New Point(255, 141)
+            lblPosition.Text = "Position"
             lblPosition.Location = New Point(255, 171)
             ucrInputBarChartPosition.Location = New Point(255, 184)
         ElseIf rdoColumnChart.Checked Then
+            lblYvariable.Text = "Y Variable:"
             lblYvariable.Location = New Point(255, 76)
             ucrReceiverY.Location = New Point(255, 91)
+            lblVariable.Text = "X Variable:"
             lblVariable.Location = New Point(255, 126)
             ucrReceiverFirst.Location = New Point(255, 141)
+            lblByFactor.Text = "By Factor (Optional):"
             lblByFactor.Location = New Point(255, 171)
             ucrReceiverByFactor.Location = New Point(255, 184)
         ElseIf rdoPieChart.Checked Then
+            lblVariable.Text = "Variable"
             lblVariable.Location = New Point(255, 76)
             ucrReceiverFirst.Location = New Point(255, 91)
         End If
