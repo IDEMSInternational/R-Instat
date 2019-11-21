@@ -7897,7 +7897,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdWakefield_Year.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 382</value>
+    <value>347, 383</value>
   </data>
   <data name="cmdWakefield_Year.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -7921,7 +7921,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdWakefield_Year.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="cmdValid.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -7930,7 +7930,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdValid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 382</value>
+    <value>233, 383</value>
   </data>
   <data name="cmdValid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -7942,7 +7942,7 @@
     <value>52</value>
   </data>
   <data name="cmdValid.Text" xml:space="preserve">
-    <value>valid</value>
+    <value>valid(L)</value>
   </data>
   <data name="&gt;&gt;cmdValid.Name" xml:space="preserve">
     <value>cmdValid</value>
@@ -7954,7 +7954,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdValid.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="cmdWakefield_Upper.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -7975,7 +7975,7 @@
     <value>51</value>
   </data>
   <data name="cmdWakefield_Upper.Text" xml:space="preserve">
-    <value>wakefield_upper</value>
+    <value>wakefield_upper(c)</value>
   </data>
   <data name="&gt;&gt;cmdWakefield_Upper.Name" xml:space="preserve">
     <value>cmdWakefield_Upper</value>
@@ -7987,7 +7987,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdWakefield_Upper.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="cmdString.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8008,7 +8008,7 @@
     <value>50</value>
   </data>
   <data name="cmdString.Text" xml:space="preserve">
-    <value>string</value>
+    <value>string(c)</value>
   </data>
   <data name="&gt;&gt;cmdString.Name" xml:space="preserve">
     <value>cmdString</value>
@@ -8020,7 +8020,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdString.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="cmdState.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8029,7 +8029,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdState.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 346</value>
+    <value>460, 383</value>
   </data>
   <data name="cmdState.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -8041,7 +8041,7 @@
     <value>49</value>
   </data>
   <data name="cmdState.Text" xml:space="preserve">
-    <value>state</value>
+    <value>state(f)</value>
   </data>
   <data name="&gt;&gt;cmdState.Name" xml:space="preserve">
     <value>cmdState</value>
@@ -8053,7 +8053,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdState.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="cmdSpeed.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8062,7 +8062,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 346</value>
+    <value>347, 347</value>
   </data>
   <data name="cmdSpeed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -8086,7 +8086,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdSpeed.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="cmdSmokes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8095,7 +8095,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdSmokes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 346</value>
+    <value>233, 347</value>
   </data>
   <data name="cmdSmokes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -8107,7 +8107,7 @@
     <value>47</value>
   </data>
   <data name="cmdSmokes.Text" xml:space="preserve">
-    <value>smokes</value>
+    <value>smokes(L)</value>
   </data>
   <data name="&gt;&gt;cmdSmokes.Name" xml:space="preserve">
     <value>cmdSmokes</value>
@@ -8119,7 +8119,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdSmokes.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="cmdSex.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8140,7 +8140,7 @@
     <value>46</value>
   </data>
   <data name="cmdSex.Text" xml:space="preserve">
-    <value>sex</value>
+    <value>sex(f)</value>
   </data>
   <data name="&gt;&gt;cmdSex.Name" xml:space="preserve">
     <value>cmdSex</value>
@@ -8152,7 +8152,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdSex.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="cmdSex_Inclusive.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8173,7 +8173,7 @@
     <value>45</value>
   </data>
   <data name="cmdSex_Inclusive.Text" xml:space="preserve">
-    <value>sex_inclusive</value>
+    <value>sex_inclusive(f)</value>
   </data>
   <data name="&gt;&gt;cmdSex_Inclusive.Name" xml:space="preserve">
     <value>cmdSex_Inclusive</value>
@@ -8185,7 +8185,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdSex_Inclusive.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="cmdGender.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8194,7 +8194,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdGender.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 310</value>
+    <value>460, 347</value>
   </data>
   <data name="cmdGender.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -8218,7 +8218,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdGender.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="cmdSentence.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8227,7 +8227,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdSentence.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 310</value>
+    <value>347, 311</value>
   </data>
   <data name="cmdSentence.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -8239,7 +8239,7 @@
     <value>43</value>
   </data>
   <data name="cmdSentence.Text" xml:space="preserve">
-    <value>sentence</value>
+    <value>sentence(c)</value>
   </data>
   <data name="&gt;&gt;cmdSentence.Name" xml:space="preserve">
     <value>cmdSentence</value>
@@ -8251,7 +8251,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdSentence.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="cmdSat.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8260,7 +8260,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdSat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 310</value>
+    <value>233, 311</value>
   </data>
   <data name="cmdSat.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -8284,7 +8284,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdSat.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="cmdReligion.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8305,7 +8305,7 @@
     <value>41</value>
   </data>
   <data name="cmdReligion.Text" xml:space="preserve">
-    <value>religion</value>
+    <value>religion(f)</value>
   </data>
   <data name="&gt;&gt;cmdReligion.Name" xml:space="preserve">
     <value>cmdReligion</value>
@@ -8317,7 +8317,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdReligion.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="cmdRace.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8338,7 +8338,7 @@
     <value>40</value>
   </data>
   <data name="cmdRace.Text" xml:space="preserve">
-    <value>race</value>
+    <value>race(f)</value>
   </data>
   <data name="&gt;&gt;cmdRace.Name" xml:space="preserve">
     <value>cmdRace</value>
@@ -8350,7 +8350,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdRace.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="cmdPolitical.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8359,7 +8359,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdPolitical.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 274</value>
+    <value>460, 311</value>
   </data>
   <data name="cmdPolitical.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -8371,7 +8371,7 @@
     <value>39</value>
   </data>
   <data name="cmdPolitical.Text" xml:space="preserve">
-    <value>political</value>
+    <value>political(f)</value>
   </data>
   <data name="&gt;&gt;cmdPolitical.Name" xml:space="preserve">
     <value>cmdPolitical</value>
@@ -8383,7 +8383,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdPolitical.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="cmdNormal.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8392,7 +8392,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdNormal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 274</value>
+    <value>347, 275</value>
   </data>
   <data name="cmdNormal.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -8416,7 +8416,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdNormal.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="cmdName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8425,7 +8425,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 274</value>
+    <value>233, 275</value>
   </data>
   <data name="cmdName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -8437,7 +8437,7 @@
     <value>37</value>
   </data>
   <data name="cmdName.Text" xml:space="preserve">
-    <value>name</value>
+    <value>name(c)</value>
   </data>
   <data name="&gt;&gt;cmdName.Name" xml:space="preserve">
     <value>cmdName</value>
@@ -8449,7 +8449,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdName.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="cmdWakefield_Month.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8470,7 +8470,7 @@
     <value>36</value>
   </data>
   <data name="cmdWakefield_Month.Text" xml:space="preserve">
-    <value>wakefield_month</value>
+    <value>wakefield_month(f)</value>
   </data>
   <data name="&gt;&gt;cmdWakefield_Month.Name" xml:space="preserve">
     <value>cmdWakefield_Month</value>
@@ -8482,7 +8482,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdWakefield_Month.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="cmdMilitary.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8503,7 +8503,7 @@
     <value>35</value>
   </data>
   <data name="cmdMilitary.Text" xml:space="preserve">
-    <value>military</value>
+    <value>military(f)</value>
   </data>
   <data name="&gt;&gt;cmdMilitary.Name" xml:space="preserve">
     <value>cmdMilitary</value>
@@ -8515,7 +8515,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdMilitary.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="cmdMarital.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8524,7 +8524,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdMarital.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 239</value>
+    <value>460, 275</value>
   </data>
   <data name="cmdMarital.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -8548,7 +8548,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdMarital.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="cmdLorem_ipsum.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8557,7 +8557,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdLorem_ipsum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 239</value>
+    <value>460, 239</value>
   </data>
   <data name="cmdLorem_ipsum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -8569,7 +8569,7 @@
     <value>33</value>
   </data>
   <data name="cmdLorem_ipsum.Text" xml:space="preserve">
-    <value>lorem_ipsum</value>
+    <value>lorem_ipsum(c)</value>
   </data>
   <data name="&gt;&gt;cmdLorem_ipsum.Name" xml:space="preserve">
     <value>cmdLorem_ipsum</value>
@@ -8581,7 +8581,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdLorem_ipsum.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="cmdGpa.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8614,7 +8614,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdGpa.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>23</value>
   </data>
   <data name="cmdEla.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8647,7 +8647,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdEla.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>24</value>
   </data>
   <data name="cmdMath.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8680,7 +8680,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdMath.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>25</value>
   </data>
   <data name="cmdLevel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8713,7 +8713,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdLevel.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>26</value>
   </data>
   <data name="cmdLanguage.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8734,7 +8734,7 @@
     <value>27</value>
   </data>
   <data name="cmdLanguage.Text" xml:space="preserve">
-    <value>language</value>
+    <value>language(f)</value>
   </data>
   <data name="&gt;&gt;cmdLanguage.Name" xml:space="preserve">
     <value>cmdLanguage</value>
@@ -8746,7 +8746,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdLanguage.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>27</value>
   </data>
   <data name="cmdIq.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8779,7 +8779,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdIq.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>28</value>
   </data>
   <data name="cmdInternet_Browser.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8800,7 +8800,7 @@
     <value>25</value>
   </data>
   <data name="cmdInternet_Browser.Text" xml:space="preserve">
-    <value>internet_browser</value>
+    <value>internet_browser(f)</value>
   </data>
   <data name="&gt;&gt;cmdInternet_Browser.Name" xml:space="preserve">
     <value>cmdInternet_Browser</value>
@@ -8812,7 +8812,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdInternet_Browser.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>29</value>
   </data>
   <data name="cmdGrade_Level.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8833,7 +8833,7 @@
     <value>19</value>
   </data>
   <data name="cmdGrade_Level.Text" xml:space="preserve">
-    <value>grade_level</value>
+    <value>grade_level(f)</value>
   </data>
   <data name="&gt;&gt;cmdGrade_Level.Name" xml:space="preserve">
     <value>cmdGrade_Level</value>
@@ -8845,7 +8845,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdGrade_Level.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>30</value>
   </data>
   <data name="cmdEye.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8866,7 +8866,7 @@
     <value>18</value>
   </data>
   <data name="cmdEye.Text" xml:space="preserve">
-    <value>eye</value>
+    <value>eye(f)</value>
   </data>
   <data name="&gt;&gt;cmdEye.Name" xml:space="preserve">
     <value>cmdEye</value>
@@ -8878,7 +8878,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdEye.ZOrder" xml:space="preserve">
-    <value>30</value>
+    <value>31</value>
   </data>
   <data name="cmdEmployment.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8899,7 +8899,7 @@
     <value>17</value>
   </data>
   <data name="cmdEmployment.Text" xml:space="preserve">
-    <value>employment</value>
+    <value>employment(f)</value>
   </data>
   <data name="&gt;&gt;cmdEmployment.Name" xml:space="preserve">
     <value>cmdEmployment</value>
@@ -8911,7 +8911,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdEmployment.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>32</value>
   </data>
   <data name="cmdEducation.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8932,7 +8932,7 @@
     <value>16</value>
   </data>
   <data name="cmdEducation.Text" xml:space="preserve">
-    <value>education</value>
+    <value>education(f)</value>
   </data>
   <data name="&gt;&gt;cmdEducation.Name" xml:space="preserve">
     <value>cmdEducation</value>
@@ -8944,7 +8944,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdEducation.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>33</value>
   </data>
   <data name="cmdDummy.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8977,7 +8977,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdDummy.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>34</value>
   </data>
   <data name="cmdDob.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -8998,7 +8998,7 @@
     <value>14</value>
   </data>
   <data name="cmdDob.Text" xml:space="preserve">
-    <value>dob</value>
+    <value>dob(D)</value>
   </data>
   <data name="&gt;&gt;cmdDob.Name" xml:space="preserve">
     <value>cmdDob</value>
@@ -9010,7 +9010,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdDob.ZOrder" xml:space="preserve">
-    <value>34</value>
+    <value>35</value>
   </data>
   <data name="cmdDna.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9043,7 +9043,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdDna.ZOrder" xml:space="preserve">
-    <value>35</value>
+    <value>36</value>
   </data>
   <data name="cmdDice.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9076,7 +9076,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdDice.ZOrder" xml:space="preserve">
-    <value>36</value>
+    <value>37</value>
   </data>
   <data name="cmdDied.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9109,7 +9109,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdDied.ZOrder" xml:space="preserve">
-    <value>37</value>
+    <value>38</value>
   </data>
   <data name="cmdDeath.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9130,7 +9130,7 @@
     <value>10</value>
   </data>
   <data name="cmdDeath.Text" xml:space="preserve">
-    <value>death</value>
+    <value>death(L)</value>
   </data>
   <data name="&gt;&gt;cmdDeath.Name" xml:space="preserve">
     <value>cmdDeath</value>
@@ -9142,7 +9142,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdDeath.ZOrder" xml:space="preserve">
-    <value>38</value>
+    <value>39</value>
   </data>
   <data name="cmdDate_Stamp.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9163,7 +9163,7 @@
     <value>9</value>
   </data>
   <data name="cmdDate_Stamp.Text" xml:space="preserve">
-    <value>date_stamp</value>
+    <value>date_stamp(D)</value>
   </data>
   <data name="&gt;&gt;cmdDate_Stamp.Name" xml:space="preserve">
     <value>cmdDate_Stamp</value>
@@ -9175,7 +9175,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdDate_Stamp.ZOrder" xml:space="preserve">
-    <value>39</value>
+    <value>40</value>
   </data>
   <data name="cmdPrimary.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9208,7 +9208,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdPrimary.ZOrder" xml:space="preserve">
-    <value>40</value>
+    <value>41</value>
   </data>
   <data name="cmdColor.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9229,7 +9229,7 @@
     <value>7</value>
   </data>
   <data name="cmdColor.Text" xml:space="preserve">
-    <value>color</value>
+    <value>color(f)</value>
   </data>
   <data name="&gt;&gt;cmdColor.Name" xml:space="preserve">
     <value>cmdColor</value>
@@ -9241,7 +9241,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdColor.ZOrder" xml:space="preserve">
-    <value>41</value>
+    <value>42</value>
   </data>
   <data name="cmdCoin.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9262,7 +9262,7 @@
     <value>6</value>
   </data>
   <data name="cmdCoin.Text" xml:space="preserve">
-    <value>coin</value>
+    <value>coin(f)</value>
   </data>
   <data name="&gt;&gt;cmdCoin.Name" xml:space="preserve">
     <value>cmdCoin</value>
@@ -9274,7 +9274,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdCoin.ZOrder" xml:space="preserve">
-    <value>42</value>
+    <value>43</value>
   </data>
   <data name="cmdChildren.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9307,7 +9307,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdChildren.ZOrder" xml:space="preserve">
-    <value>43</value>
+    <value>44</value>
   </data>
   <data name="cmdHeight.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9316,7 +9316,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdHeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 167</value>
+    <value>347, 168</value>
   </data>
   <data name="cmdHeight.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -9340,7 +9340,19 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdHeight.ZOrder" xml:space="preserve">
-    <value>50</value>
+    <value>51</value>
+  </data>
+  <data name="&gt;&gt;cmdLikert7.Name" xml:space="preserve">
+    <value>cmdLikert7</value>
+  </data>
+  <data name="&gt;&gt;cmdLikert7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdLikert7.Parent" xml:space="preserve">
+    <value>grpWakefield</value>
+  </data>
+  <data name="&gt;&gt;cmdLikert7.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;cmdLikert.Name" xml:space="preserve">
     <value>cmdLikert</value>
@@ -9352,7 +9364,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdLikert.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="&gt;&gt;cmdCar.Name" xml:space="preserve">
     <value>cmdCar</value>
@@ -9364,7 +9376,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdCar.ZOrder" xml:space="preserve">
-    <value>44</value>
+    <value>45</value>
   </data>
   <data name="&gt;&gt;cmdAnswer.Name" xml:space="preserve">
     <value>cmdAnswer</value>
@@ -9376,7 +9388,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdAnswer.ZOrder" xml:space="preserve">
-    <value>45</value>
+    <value>46</value>
   </data>
   <data name="&gt;&gt;cmdPet.Name" xml:space="preserve">
     <value>cmdPet</value>
@@ -9388,7 +9400,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdPet.ZOrder" xml:space="preserve">
-    <value>46</value>
+    <value>47</value>
   </data>
   <data name="&gt;&gt;cmdAnimal.Name" xml:space="preserve">
     <value>cmdAnimal</value>
@@ -9400,7 +9412,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdAnimal.ZOrder" xml:space="preserve">
-    <value>47</value>
+    <value>48</value>
   </data>
   <data name="&gt;&gt;cmdAge.Name" xml:space="preserve">
     <value>cmdAge</value>
@@ -9412,7 +9424,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdAge.ZOrder" xml:space="preserve">
-    <value>48</value>
+    <value>49</value>
   </data>
   <data name="&gt;&gt;cmdIncome.Name" xml:space="preserve">
     <value>cmdIncome</value>
@@ -9424,7 +9436,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdIncome.ZOrder" xml:space="preserve">
-    <value>49</value>
+    <value>50</value>
   </data>
   <data name="&gt;&gt;cmdHair.Name" xml:space="preserve">
     <value>cmdHair</value>
@@ -9436,7 +9448,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdHair.ZOrder" xml:space="preserve">
-    <value>51</value>
+    <value>52</value>
   </data>
   <data name="&gt;&gt;cmdGroup.Name" xml:space="preserve">
     <value>cmdGroup</value>
@@ -9448,7 +9460,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdGroup.ZOrder" xml:space="preserve">
-    <value>52</value>
+    <value>53</value>
   </data>
   <data name="&gt;&gt;cmdGrade.Name" xml:space="preserve">
     <value>cmdGrade</value>
@@ -9460,7 +9472,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdGrade.ZOrder" xml:space="preserve">
-    <value>53</value>
+    <value>54</value>
   </data>
   <data name="grpWakefield.Location" type="System.Drawing.Point, System.Drawing">
     <value>573, 78</value>
@@ -9511,7 +9523,7 @@
     <value>32</value>
   </data>
   <data name="cmdLikert.Text" xml:space="preserve">
-    <value>likert</value>
+    <value>likert(o.f)</value>
   </data>
   <data name="&gt;&gt;cmdLikert.Name" xml:space="preserve">
     <value>cmdLikert</value>
@@ -9523,7 +9535,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdLikert.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="cmdCar.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9544,7 +9556,7 @@
     <value>4</value>
   </data>
   <data name="cmdCar.Text" xml:space="preserve">
-    <value>car</value>
+    <value>car(f)</value>
   </data>
   <data name="&gt;&gt;cmdCar.Name" xml:space="preserve">
     <value>cmdCar</value>
@@ -9556,7 +9568,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdCar.ZOrder" xml:space="preserve">
-    <value>44</value>
+    <value>45</value>
   </data>
   <data name="cmdAnswer.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9577,7 +9589,7 @@
     <value>3</value>
   </data>
   <data name="cmdAnswer.Text" xml:space="preserve">
-    <value>answer</value>
+    <value>answer(f)</value>
   </data>
   <data name="&gt;&gt;cmdAnswer.Name" xml:space="preserve">
     <value>cmdAnswer</value>
@@ -9589,7 +9601,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdAnswer.ZOrder" xml:space="preserve">
-    <value>45</value>
+    <value>46</value>
   </data>
   <data name="cmdPet.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9622,7 +9634,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdPet.ZOrder" xml:space="preserve">
-    <value>46</value>
+    <value>47</value>
   </data>
   <data name="cmdAnimal.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9643,7 +9655,7 @@
     <value>1</value>
   </data>
   <data name="cmdAnimal.Text" xml:space="preserve">
-    <value>animal</value>
+    <value>animal(f)</value>
   </data>
   <data name="&gt;&gt;cmdAnimal.Name" xml:space="preserve">
     <value>cmdAnimal</value>
@@ -9655,7 +9667,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdAnimal.ZOrder" xml:space="preserve">
-    <value>47</value>
+    <value>48</value>
   </data>
   <data name="cmdAge.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9688,7 +9700,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdAge.ZOrder" xml:space="preserve">
-    <value>48</value>
+    <value>49</value>
   </data>
   <data name="cmdIncome.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9721,7 +9733,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdIncome.ZOrder" xml:space="preserve">
-    <value>49</value>
+    <value>50</value>
   </data>
   <data name="cmdHair.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9742,7 +9754,7 @@
     <value>22</value>
   </data>
   <data name="cmdHair.Text" xml:space="preserve">
-    <value>hair</value>
+    <value>Hair(f)</value>
   </data>
   <data name="&gt;&gt;cmdHair.Name" xml:space="preserve">
     <value>cmdHair</value>
@@ -9754,7 +9766,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdHair.ZOrder" xml:space="preserve">
-    <value>51</value>
+    <value>52</value>
   </data>
   <data name="cmdGroup.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9775,7 +9787,7 @@
     <value>21</value>
   </data>
   <data name="cmdGroup.Text" xml:space="preserve">
-    <value>group</value>
+    <value>group(f)</value>
   </data>
   <data name="&gt;&gt;cmdGroup.Name" xml:space="preserve">
     <value>cmdGroup</value>
@@ -9787,7 +9799,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdGroup.ZOrder" xml:space="preserve">
-    <value>52</value>
+    <value>53</value>
   </data>
   <data name="cmdGrade.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -9820,7 +9832,7 @@
     <value>grpWakefield</value>
   </data>
   <data name="&gt;&gt;cmdGrade.ZOrder" xml:space="preserve">
-    <value>53</value>
+    <value>54</value>
   </data>
   <data name="cmdCircular.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -10397,6 +10409,39 @@
   </data>
   <data name="&gt;&gt;ucrReceiverForCalculation.ZOrder" xml:space="preserve">
     <value>18</value>
+  </data>
+  <data name="cmdLikert7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.25pt</value>
+  </data>
+  <data name="cmdLikert7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdLikert7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 239</value>
+  </data>
+  <data name="cmdLikert7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="cmdLikert7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 37</value>
+  </data>
+  <data name="cmdLikert7.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
+  <data name="cmdLikert7.Text" xml:space="preserve">
+    <value>likert7(o.f)</value>
+  </data>
+  <data name="&gt;&gt;cmdLikert7.Name" xml:space="preserve">
+    <value>cmdLikert7</value>
+  </data>
+  <data name="&gt;&gt;cmdLikert7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdLikert7.Parent" xml:space="preserve">
+    <value>grpWakefield</value>
+  </data>
+  <data name="&gt;&gt;cmdLikert7.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

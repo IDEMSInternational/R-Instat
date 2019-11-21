@@ -302,6 +302,7 @@ Partial Class ucrCalculator
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.cmdLikert7 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1861,6 +1862,7 @@ Partial Class ucrCalculator
         '
         'grpWakefield
         '
+        Me.grpWakefield.Controls.Add(Me.cmdLikert7)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
         Me.grpWakefield.Controls.Add(Me.cmdValid)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
@@ -2135,6 +2137,12 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.Selector = Nothing
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
+        '
+        'cmdLikert7
+        '
+        resources.ApplyResources(Me.cmdLikert7, "cmdLikert7")
+        Me.cmdLikert7.Name = "cmdLikert7"
+        Me.cmdLikert7.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
@@ -2439,4 +2447,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdCircRho As Button
     Friend WithEvents cmdCircQuantile As Button
     Friend WithEvents cmdCircular As Button
+    Friend WithEvents cmdLikert7 As Button
 End Class

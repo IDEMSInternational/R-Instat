@@ -1893,4 +1893,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::circular(x =, modulo = ""2pi"", units = ""radians"")", 36)
         End If
     End Sub
+
+    Private Sub cmdLikert7_Click(sender As Object, e As EventArgs) Handles cmdLikert7.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert_7(n = , x = c(""Strongly Agree"", ""Agree"", ""Somewhat Agree"", ""Neutral"",""Somewhat Disagree"", ""Disagree"", ""Strongly Disagree""), prob = NULL,name = ""Likert""))", 148)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert_7()", 1)
+        End If
+    End Sub
 End Class
