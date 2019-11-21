@@ -44,7 +44,7 @@ Public Class dlgExportDataset
 
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
 
-        lblClicktoConfirm.Text = "click Ok to export data"
+        lblClicktoConfirm.Text = "Click OK to export data"
     End Sub
 
     Private Sub SetDefaults()
