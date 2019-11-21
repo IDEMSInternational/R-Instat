@@ -48,6 +48,9 @@ Partial Class dlgUseModel
         Me.cmdErlevd = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.grpSegmented = New System.Windows.Forms.GroupBox()
+        Me.cmdSlope = New System.Windows.Forms.Button()
+        Me.cmdPscore = New System.Windows.Forms.Button()
+        Me.cmdDavies = New System.Windows.Forms.Button()
         Me.cmdIntercept = New System.Windows.Forms.Button()
         Me.cmdBroken = New System.Windows.Forms.Button()
         Me.cmdPoints = New System.Windows.Forms.Button()
@@ -59,9 +62,6 @@ Partial Class dlgUseModel
         Me.cmdAapc = New System.Windows.Forms.Button()
         Me.cmdSegmented = New System.Windows.Forms.Button()
         Me.cmdSegmentedPrint = New System.Windows.Forms.Button()
-        Me.cmdDavies = New System.Windows.Forms.Button()
-        Me.cmdPscore = New System.Windows.Forms.Button()
-        Me.cmdSlope = New System.Windows.Forms.Button()
         Me.ucrInputModels = New instat.ucrInputTextBox()
         Me.ucrSelectorUseModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
@@ -391,6 +391,39 @@ Partial Class dlgUseModel
         Me.grpSegmented.TabStop = False
         Me.grpSegmented.Text = "segmented"
         '
+        'cmdSlope
+        '
+        Me.cmdSlope.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSlope.Location = New System.Drawing.Point(208, 70)
+        Me.cmdSlope.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdSlope.Name = "cmdSlope"
+        Me.cmdSlope.Size = New System.Drawing.Size(69, 30)
+        Me.cmdSlope.TabIndex = 164
+        Me.cmdSlope.Text = "slope"
+        Me.cmdSlope.UseVisualStyleBackColor = True
+        '
+        'cmdPscore
+        '
+        Me.cmdPscore.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPscore.Location = New System.Drawing.Point(140, 10)
+        Me.cmdPscore.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPscore.Name = "cmdPscore"
+        Me.cmdPscore.Size = New System.Drawing.Size(69, 30)
+        Me.cmdPscore.TabIndex = 163
+        Me.cmdPscore.Text = "pscore"
+        Me.cmdPscore.UseVisualStyleBackColor = True
+        '
+        'cmdDavies
+        '
+        Me.cmdDavies.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDavies.Location = New System.Drawing.Point(3, 10)
+        Me.cmdDavies.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdDavies.Name = "cmdDavies"
+        Me.cmdDavies.Size = New System.Drawing.Size(69, 30)
+        Me.cmdDavies.TabIndex = 162
+        Me.cmdDavies.Text = "davies"
+        Me.cmdDavies.UseVisualStyleBackColor = True
+        '
         'cmdIntercept
         '
         Me.cmdIntercept.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -482,7 +515,7 @@ Partial Class dlgUseModel
         'cmdAapc
         '
         Me.cmdAapc.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAapc.Location = New System.Drawing.Point(72, 12)
+        Me.cmdAapc.Location = New System.Drawing.Point(72, 100)
         Me.cmdAapc.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdAapc.Name = "cmdAapc"
         Me.cmdAapc.Size = New System.Drawing.Size(69, 30)
@@ -493,7 +526,7 @@ Partial Class dlgUseModel
         'cmdSegmented
         '
         Me.cmdSegmented.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSegmented.Location = New System.Drawing.Point(3, 12)
+        Me.cmdSegmented.Location = New System.Drawing.Point(72, 10)
         Me.cmdSegmented.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSegmented.Name = "cmdSegmented"
         Me.cmdSegmented.Size = New System.Drawing.Size(69, 30)
@@ -504,46 +537,13 @@ Partial Class dlgUseModel
         'cmdSegmentedPrint
         '
         Me.cmdSegmentedPrint.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSegmentedPrint.Location = New System.Drawing.Point(140, 12)
+        Me.cmdSegmentedPrint.Location = New System.Drawing.Point(208, 41)
         Me.cmdSegmentedPrint.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSegmentedPrint.Name = "cmdSegmentedPrint"
         Me.cmdSegmentedPrint.Size = New System.Drawing.Size(69, 30)
         Me.cmdSegmentedPrint.TabIndex = 153
         Me.cmdSegmentedPrint.Text = "print"
         Me.cmdSegmentedPrint.UseVisualStyleBackColor = True
-        '
-        'cmdDavies
-        '
-        Me.cmdDavies.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDavies.Location = New System.Drawing.Point(72, 100)
-        Me.cmdDavies.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdDavies.Name = "cmdDavies"
-        Me.cmdDavies.Size = New System.Drawing.Size(69, 30)
-        Me.cmdDavies.TabIndex = 162
-        Me.cmdDavies.Text = "davies"
-        Me.cmdDavies.UseVisualStyleBackColor = True
-        '
-        'cmdPscore
-        '
-        Me.cmdPscore.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPscore.Location = New System.Drawing.Point(208, 12)
-        Me.cmdPscore.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdPscore.Name = "cmdPscore"
-        Me.cmdPscore.Size = New System.Drawing.Size(69, 30)
-        Me.cmdPscore.TabIndex = 163
-        Me.cmdPscore.Text = "pscore"
-        Me.cmdPscore.UseVisualStyleBackColor = True
-        '
-        'cmdSlope
-        '
-        Me.cmdSlope.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSlope.Location = New System.Drawing.Point(208, 41)
-        Me.cmdSlope.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdSlope.Name = "cmdSlope"
-        Me.cmdSlope.Size = New System.Drawing.Size(69, 30)
-        Me.cmdSlope.TabIndex = 164
-        Me.cmdSlope.Text = "slope"
-        Me.cmdSlope.UseVisualStyleBackColor = True
         '
         'ucrInputModels
         '
