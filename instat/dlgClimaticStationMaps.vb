@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgClimaticStationMaps
@@ -66,8 +67,6 @@ Public Class dlgClimaticStationMaps
 
 
         ucrReceiverGeometry.Selector = ucrSelectorOutline
-        ucrReceiverGeometry.SetParameterIsString()
-        ucrReceiverGeometry.bWithQuotes = False
 
         ucrReceiverFill.SetParameter(New RParameter("fill", 0))
         ucrReceiverFill.Selector = ucrSelectorOutline
@@ -148,6 +147,7 @@ Public Class dlgClimaticStationMaps
         ucrSelectorStation.Reset()
         ucrReceiverLongitude.SetMeAsReceiver()
         ucrReceiverFill.SetMeAsReceiver()
+        ucrReceiverGeometry.SetMeAsReceiver()
         ucrSaveMap.Reset()
         bResetSubdialog = True
         bResetSFLayerSubdialog = True
@@ -209,6 +209,7 @@ Public Class dlgClimaticStationMaps
 
         clsGGplotOperator.SetAssignTo("last_map", strTempDataframe:=ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_map")
         ucrBase.clsRsyntax.SetBaseROperator(clsGGplotOperator)
+        AutoFillGeometry()
     End Sub
 
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
@@ -329,7 +330,7 @@ Public Class dlgClimaticStationMaps
         ChangeSize()
     End Sub
 
-    Private Sub ucrSelectorOutline_DataFrameChanged() Handles ucrSelectorOutline.DataFrameChanged
+    Private Sub AutoFillGeometry()
         Dim clsSetGeometry As New RFunction
         Dim clsGetDataFrame As RFunction = New RFunction
         Dim clsParam As RParameter = New RParameter
@@ -347,10 +348,13 @@ Public Class dlgClimaticStationMaps
         clsSetGeometry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_geometry")
         clsSetGeometry.AddParameter("data", ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         GeometryOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsSetGeometry.ToScript(), bSilent:=True)
-        Dim str As String = GeometryOutput.AsCharacter(0)
-        If GeometryOutput IsNot Nothing AndAlso Not GeometryOutput.Type = Internals.SymbolicExpressionType.Null Then
-            ucrReceiverGeometry.Add(str, ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        End If
 
+        If GeometryOutput IsNot Nothing AndAlso Not GeometryOutput.Type = Internals.SymbolicExpressionType.Null Then
+            ucrReceiverGeometry.Add(GeometryOutput.AsCharacter(0), ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        End If
+    End Sub
+
+    Private Sub ucrSelectorOutline_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOutline.ControlValueChanged
+        AutoFillGeometry()
     End Sub
 End Class
