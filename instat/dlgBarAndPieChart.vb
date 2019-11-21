@@ -76,6 +76,7 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddToLinkedControls({ucrReceiverByFactor}, {rdoBarChart, rdoColumnChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverY, {rdoColumnChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverY.SetLinkedDisplayControl(lblYvariable)
 
         ucrBarChartSelector.SetParameter(New RParameter("data", 0))
         ucrBarChartSelector.SetParameterIsrfunction()
@@ -215,10 +216,24 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverFirst.IsEmpty OrElse Not ucrSaveBar.IsComplete Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
+        If rdoBarChart.Checked Then
+            If ucrReceiverFirst.IsEmpty OrElse Not ucrSaveBar.IsComplete Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
+        ElseIf rdoPieChart.Checked Then
+            If ucrReceiverFirst.IsEmpty OrElse Not ucrSaveBar.IsComplete Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
+        ElseIf rdoColumnChart.Checked Then
+            If Not ucrReceiverFirst.IsEmpty AndAlso Not ucrReceiverY.IsEmpty AndAlso ucrSaveBar.IsComplete Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
@@ -349,8 +364,30 @@ Public Class dlgBarAndPieChart
             End If
         End If
     End Sub
+    Private Sub ChangeReceiverLocation()
+        If rdoBarChart.Checked Then
+            lblVariable.Location = New Point(255, 76)
+            ucrReceiverFirst.Location = New Point(255, 91)
+            lblByFactor.Location = New Point(255, 126)
+            ucrReceiverByFactor.Location = New Point(255, 141)
+            lblPosition.Location = New Point(255, 171)
+            ucrInputBarChartPosition.Location = New Point(255, 184)
+        ElseIf rdoColumnChart.Checked Then
+            lblYvariable.Location = New Point(255, 76)
+            ucrReceiverY.Location = New Point(255, 91)
+            lblVariable.Location = New Point(255, 126)
+            ucrReceiverFirst.Location = New Point(255, 141)
+            lblByFactor.Location = New Point(255, 171)
+            ucrReceiverByFactor.Location = New Point(255, 184)
+        ElseIf rdoPieChart.Checked Then
+            lblVariable.Location = New Point(255, 76)
+            ucrReceiverFirst.Location = New Point(255, 91)
+        End If
+    End Sub
+
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
         SetDialogOptions()
+        ChangeReceiverLocation()
     End Sub
 
     Private Sub CoreControls_ContentsChanged() Handles ucrReceiverFirst.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
