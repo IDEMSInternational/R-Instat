@@ -1537,9 +1537,9 @@ Public Class ucrCalculator
 
     Private Sub cmdInternet_Browser_Click(sender As Object, e As EventArgs) Handles cmdInternet_Browser.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::internet_browser(n = , x = c(""Chrome"" , ""IE"", ""Firefox"" , ""Safari"" , ""Opera"" , ""Android"") , prob = c(0.5027 , 0.175 , 0.1689 , 0.0994, 0.017, 0.0132) , name = ""Browser"")", 149)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::browser(n = , x = c(""Chrome"" , ""IE"", ""Firefox"" , ""Safari"" , ""Opera"" , ""Android"") , prob = c(0.5027 , 0.175 , 0.1689 , 0.0994, 0.017, 0.0132) , name = ""Browser"")", 149)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::internet_browser()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::browser()", 1)
         End If
     End Sub
 
@@ -1624,9 +1624,9 @@ Public Class ucrCalculator
 
     Private Sub cmdWakefield_Month_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Month.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_month(n = , x = month.name , prob = NULL , name = ""Month"")", 49)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::month(n = , x = month.name , prob = NULL , name = ""Month"")", 49)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_month()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::month()", 1)
         End If
     End Sub
 
@@ -1744,9 +1744,9 @@ Public Class ucrCalculator
 
     Private Sub cmdWakefield_Upper_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Upper.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_upper(n = , k = 5, x = LETTERS , prob = NULL, name = ""Upper"")", 52)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::upper(n = , k = 5, x = LETTERS , prob = NULL, name = ""Upper"")", 52)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_upper()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::upper()", 1)
         End If
     End Sub
 
@@ -1760,9 +1760,9 @@ Public Class ucrCalculator
 
     Private Sub cmdWakefield_Year_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Year.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_year(n = , x = 1996:as.numeric(format(Sys.Date() , ""%Y"")) , prob = NULL , name = ""Year"")", 80)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::year(n = , x = 1996:as.numeric(format(Sys.Date() , ""%Y"")) , prob = NULL , name = ""Year"")", 80)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_year()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::year()", 1)
         End If
     End Sub
 
