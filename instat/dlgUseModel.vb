@@ -23,6 +23,7 @@ Public Class dlgUseModel
     Public bUpdating As Boolean = False
 
     Private clsAttach As New RFunction
+
     Private Sub dlgUseModelLoad(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -53,6 +54,7 @@ Public Class dlgUseModel
         ucrInputModels.IsReadOnly = True
 
         bUpdating = False
+
     End Sub
 
     Private Sub SetDefaults()
@@ -70,7 +72,7 @@ Public Class dlgUseModel
         ucrInputComboRPackage.SetName("General")
 
         ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach, 1)
+
         ucrBase.clsRsyntax.SetCommandString("")
         ucrBase.clsRsyntax.iCallType = 2
 
@@ -172,7 +174,13 @@ Public Class dlgUseModel
         If i > 0 Then
             ucrInputModels.SetName(String.Join(", ", lstModels))
         End If
+        'Checking if the commandString contains the commands from the segmented ,davie and pscore buttons.If so Again check if the list of before codes contains the clsAttach function before adiing
+        If Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::segmented") = 0) Or Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::davies.test") = 0) Or Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::pscore.test") = 0) Then
+            If Not ucrBase.clsRsyntax.lstBeforeCodes.Contains(clsAttach) Then
+                ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+            End If
 
+        End If
     End Sub
 
     Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
