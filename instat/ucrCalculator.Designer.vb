@@ -270,6 +270,7 @@ Partial Class ucrCalculator
         Me.cmdChildren = New System.Windows.Forms.Button()
         Me.cmdHeight = New System.Windows.Forms.Button()
         Me.grpWakefield = New System.Windows.Forms.GroupBox()
+        Me.cmdLikert7 = New System.Windows.Forms.Button()
         Me.cmdLikert = New System.Windows.Forms.Button()
         Me.cmdCar = New System.Windows.Forms.Button()
         Me.cmdAnswer = New System.Windows.Forms.Button()
@@ -302,7 +303,6 @@ Partial Class ucrCalculator
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdLikert7 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1921,6 +1921,12 @@ Partial Class ucrCalculator
         Me.grpWakefield.Name = "grpWakefield"
         Me.grpWakefield.TabStop = False
         '
+        'cmdLikert7
+        '
+        resources.ApplyResources(Me.cmdLikert7, "cmdLikert7")
+        Me.cmdLikert7.Name = "cmdLikert7"
+        Me.cmdLikert7.UseVisualStyleBackColor = True
+        '
         'cmdLikert
         '
         resources.ApplyResources(Me.cmdLikert, "cmdLikert")
@@ -2137,12 +2143,6 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.Selector = Nothing
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
-        '
-        'cmdLikert7
-        '
-        resources.ApplyResources(Me.cmdLikert7, "cmdLikert7")
-        Me.cmdLikert7.Name = "cmdLikert7"
-        Me.cmdLikert7.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
