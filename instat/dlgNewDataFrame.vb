@@ -301,23 +301,27 @@ Public Class dlgNewDataFrame
         If rdoCommand.Checked Then
             lstView.Items.Add(New ListViewItem({"data.frame()"}))
             lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data = NA, nrow = 10, ncol = 2))"}))
-            lstView.Items.Add(New ListViewItem({"data.frame(replicate(10,(sample(c(TRUE,FALSE),size=50,replace=TRUE,prob=c(0.3,0.7)))))"}))
 
             lstView.Items.Add(New ListViewItem({"data.frame(x=1:30, s=rep(""Reading"",30),r=seq(1, 6.8, length=30),t=seq(1,60,2))"}))
             lstView.Items.Add(New ListViewItem({"data.frame(l=1:31,d=seq(as.Date(""2013-1-1""),as.Date(""2013-1-31""),""day""))"}))
             lstView.Items.Add(New ListViewItem({"data.frame(n=1:12,h=seq(as.POSIXct(""2010-1-1 3: 0:0""),by=""2 hours"",length=12))"}))
+            lstView.Items.Add(New ListViewItem({"data.frame(block = gl(4, 3), treat = c(""C"", ""A"", ""B"", ""B"", ""C"", ""A"", ""A"", ""B"", ""C"", ""A"", ""C"", ""B""), yield = c(74, 68,  50, 62, 68, 57, 70, 56, 83, 67, 67, 59))"}))
+
         ElseIf rdoRandom.Checked Then
+            lstView.Items.Add(New ListViewItem({"data.frame(x = 1:30, y = rnorm(30, mean = 100, sd = 15), z = runif(30, min = 10, max = 30))"}))
+            lstView.Items.Add(New ListViewItem({"data.frame(data = replicate(20,rbinom(n=25, p=0.4,size=1)))"}))
+            lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data=c(rbinom(7300,p=0.4,size=1)*rexp(7300,0.1)), nrow = 365, ncol = 20))"}))
+            lstView.Items.Add(New ListViewItem({"data.frame(replicate(10,(sample(c(TRUE,FALSE),size=50,replace=TRUE,prob=c(0.3,0.7)))))"}))
+
             lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 100, data_theme = ""the_works"")"}))
             lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 30, id, race, age, sex, hour, iq, height, died, Scoring = rnorm, Smoker = valid)"}))
             lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 200, data_theme = ""survey"")"}))
             lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n=500, data_theme = ""survey2"") %>% r_na(prob=0.1)"}))
             lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 50,id, r_dummy(color),r_series(likert,3),grade,grade,grade)"}))
 
-            lstView.Items.Add(New ListViewItem({"data.frame(x = 1:30, y = rnorm(30, mean = 100, sd = 15), z = runif(30, min = 10, max = 30))"}))
-            lstView.Items.Add(New ListViewItem({"data.frame(block = gl(4, 3), treat = c(""C"", ""A"", ""B"", ""B"", ""C"", ""A"", ""A"", ""B"", ""C"", ""A"", ""C"", ""B""), yield = c(74, 68,  50, 62, 68, 57, 70, 56, 83, 67, 67, 59))"}))
-            lstView.Items.Add(New ListViewItem({"data.frame(data = replicate(20,rbinom(n=25, p=0.4,size=1)))"}))
-            lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data=c(rbinom(7300,p=0.4,size=1)*rexp(7300,0.1)), nrow = 365, ncol = 20))"}))
 
+        ElseIf rdoConstruct.Checked Then
+            'TODO
         End If
 
         'set respective handlers
@@ -325,10 +329,17 @@ Public Class dlgNewDataFrame
                                           frm.Close()
                                       End Sub
         AddHandler lstView.DoubleClick, Sub()
-                                            If lstView.SelectedItems.Count > 0 Then
-                                                ucrInputCommand.SetText(lstView.SelectedItems.Item(0).SubItems(0).Text)
-                                                frm.Close()
+                                            If lstView.SelectedItems.Count < 1 Then
+                                                Exit Sub
                                             End If
+
+                                            If rdoConstruct.Checked Then
+                                                'TODO. 
+                                            Else
+                                                ucrInputCommand.SetText(lstView.SelectedItems.Item(0).SubItems(0).Text)
+                                            End If
+
+                                            frm.Close()
                                         End Sub
 
         Dim ctlpos As Point = btnExample.PointToScreen(New Point(0, 0)) 'Point.Empty is not function so use Point(0, 0)
