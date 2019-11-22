@@ -213,12 +213,12 @@ Public Class dlgNewDataFrame
         ElseIf rdoCommand.Checked OrElse rdoRandom.Checked Then
             If rdoCommand.Checked Then
                 btnExample.Text = "Command Examples"
-                If ucrInputCommand.GetText = "data.frame(data=matrix(data=NA, nrow=10, ncol=2))" OrElse ucrInputCommand.GetText = "wakefield::r_data_theme(n = 100, data_theme = ""the_works"")" Then
+                If ucrInputCommand.GetText = "" OrElse ucrInputCommand.GetText = "data.frame(data=matrix(data=NA, nrow=10, ncol=2))" OrElse ucrInputCommand.GetText = "wakefield::r_data_theme(n = 100, data_theme = ""the_works"")" Then
                     ucrInputCommand.SetText("data.frame(data=matrix(data=NA, nrow=10, ncol=2))")
                 End If
             Else
                 btnExample.Text = "Random Examples"
-                If ucrInputCommand.GetText = "data.frame(data=matrix(data=NA, nrow=10, ncol=2))" OrElse ucrInputCommand.GetText = "wakefield::r_data_theme(n = 100, data_theme = ""the_works"")" Then
+                If ucrInputCommand.GetText = "" OrElse ucrInputCommand.GetText = "data.frame(data=matrix(data=NA, nrow=10, ncol=2))" OrElse ucrInputCommand.GetText = "wakefield::r_data_theme(n = 100, data_theme = ""the_works"")" Then
                     ucrInputCommand.SetText("wakefield::r_data_theme(n = 100, data_theme = ""the_works"")")
                 End If
 
@@ -293,14 +293,16 @@ Public Class dlgNewDataFrame
         lstView.Scrollable = True
         lstView.View = View.Details
         lstView.FullRowSelect = True
+        lstView.ShowItemToolTips = True
 
         'add the appropriate columns and rows with the commands based on the option selected
         If rdoCommand.Checked Then
             lstView.Columns.Add("Command", 450)  'add columns
 
-            lstView.Items.Add(New ListViewItem({"data.frame()"}))
-            lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data = NA, nrow = 10, ncol = 2))"}))
+            lstView.Items.Add(New ListViewItem({"data.frame()"))
+            lstView.Items.Item(0).ToolTipText = "creates an empty dataframe"
 
+            lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data = NA, nrow = 10, ncol = 2))"}))
             lstView.Items.Add(New ListViewItem({"data.frame(x=1:30, s=rep(""Reading"",30),r=seq(1, 6.8, length=30),t=seq(1,60,2))"}))
             lstView.Items.Add(New ListViewItem({"data.frame(l=1:31,d=seq(as.Date(""2013-1-1""),as.Date(""2013-1-31""),""day""))"}))
             lstView.Items.Add(New ListViewItem({"data.frame(n=1:12,h=seq(as.POSIXct(""2010-1-1 3: 0:0""),by=""2 hours"",length=12))"}))
