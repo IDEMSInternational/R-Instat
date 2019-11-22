@@ -282,9 +282,10 @@ Public Class dlgNewDataFrame
         'shows a popup that displays the example commands
         Dim frm As New Form
         Dim lstView As New ListView
+
         frm.ShowInTaskbar = False
         frm.FormBorderStyle = FormBorderStyle.None
-        frm.Size = New Size(ucrInputCommand.Width, ucrInputCommand.Height)
+        frm.Size = New Size(ucrInputCommand.Width, ucrInputCommand.Height + 50)
         frm.Controls.Add(lstView)
 
         'Set the listview properties
@@ -293,12 +294,10 @@ Public Class dlgNewDataFrame
         lstView.View = View.Details
         lstView.FullRowSelect = True
 
-        'add columns
-        lstView.Columns.Add("Command", 450)
-        'lstView.Columns.Add("Comment", 200)
-
-        'add the appropraite rows with the commands based on the option selected
+        'add the appropriate columns and rows with the commands based on the option selected
         If rdoCommand.Checked Then
+            lstView.Columns.Add("Command", 450)  'add columns
+
             lstView.Items.Add(New ListViewItem({"data.frame()"}))
             lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data = NA, nrow = 10, ncol = 2))"}))
 
@@ -308,6 +307,8 @@ Public Class dlgNewDataFrame
             lstView.Items.Add(New ListViewItem({"data.frame(block = gl(4, 3), treat = c(""C"", ""A"", ""B"", ""B"", ""C"", ""A"", ""A"", ""B"", ""C"", ""A"", ""C"", ""B""), yield = c(74, 68,  50, 62, 68, 57, 70, 56, 83, 67, 67, 59))"}))
 
         ElseIf rdoRandom.Checked Then
+            lstView.Columns.Add("Command", 450)  'add columns
+
             lstView.Items.Add(New ListViewItem({"data.frame(x = 1:30, y = rnorm(30, mean = 100, sd = 15), z = runif(30, min = 10, max = 30))"}))
             lstView.Items.Add(New ListViewItem({"data.frame(data = replicate(20,rbinom(n=25, p=0.4,size=1)))"}))
             lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data=c(rbinom(7300,p=0.4,size=1)*rexp(7300,0.1)), nrow = 365, ncol = 20))"}))
@@ -321,7 +322,11 @@ Public Class dlgNewDataFrame
 
 
         ElseIf rdoConstruct.Checked Then
-            'TODO
+            lstView.Columns.Add("Name", 150)  'add columns
+            lstView.Columns.Add("Expression", 300)  'add columns
+
+
+
         End If
 
         'set respective handlers
@@ -365,7 +370,10 @@ Public Class dlgNewDataFrame
                 For Each str As String In lstScriptCommands
                     If Not String.IsNullOrWhiteSpace(str) Then
                         vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(str, bSilent:=True)
-                        If vecOutput IsNot Nothing AndAlso vecOutput.Length > 0 Then
+                        If vecOutput Is Nothing Then
+                            bValid = False
+                            Exit For
+                        ElseIf vecOutput.Length > 0 Then
                             bValid = True
                             'don't break the if, we probably want to loop through to the last command checking validity? 
                         End If
