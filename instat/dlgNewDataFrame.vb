@@ -357,7 +357,7 @@ Public Class dlgNewDataFrame
             If rdoConstruct.Checked Then
                 strScript = clsConstructFunction.ToScript
                 vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strScript, bSilent:=True)
-                bValid = Not IsNothing(vecOutput)
+                bValid = (Not IsNothing(vecOutput) AndAlso vecOutput.Length > 0)
             ElseIf rdoCommand.Checked OrElse rdoRandom.Checked Then
                 Dim lstScriptCommands As New List(Of String)
                 strScript = ucrInputCommand.GetText
@@ -365,7 +365,7 @@ Public Class dlgNewDataFrame
                 For Each str As String In lstScriptCommands
                     If Not String.IsNullOrWhiteSpace(str) Then
                         vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(str, bSilent:=True)
-                        If vecOutput IsNot Nothing Then
+                        If vecOutput IsNot Nothing AndAlso vecOutput.Length > 0 Then
                             bValid = True
                             'don't break the if, we probably want to loop through to the last command checking validity? 
                         End If
