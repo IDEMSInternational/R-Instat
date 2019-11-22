@@ -359,6 +359,7 @@ Public Class dlgBarAndPieChart
             clsBaseOperator.RemoveParameterByName("geom_bar")
             clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
             clsBaseOperator.AddParameter("geom_col", clsRFunctionParameter:=clsRColFunction, iPosition:=2)
+            ucrReceiverY.SetMeAsReceiver()
             If Not ucrSaveBar.bUserTyped Then
                 ucrSaveBar.SetPrefix("column")
             End If
