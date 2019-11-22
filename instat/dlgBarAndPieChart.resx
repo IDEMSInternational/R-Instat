@@ -193,7 +193,7 @@
     <value>11</value>
   </data>
   <data name="cmdOptions.Text" xml:space="preserve">
-    <value>Options</value>
+    <value>Plot Options</value>
   </data>
   <data name="&gt;&gt;cmdOptions.Name" xml:space="preserve">
     <value>cmdOptions</value>
@@ -644,6 +644,9 @@
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
     <value>19</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
