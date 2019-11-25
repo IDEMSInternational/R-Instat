@@ -204,6 +204,7 @@ Public Class dlgNewDataFrame
 
     Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged
         If rdoConstruct.Checked Then
+            btnExample.Text = "Construct Examples"
             dataGridView.Visible = True
             btnTry.Visible = True
             ucrInputTryMessage.Visible = True
@@ -299,7 +300,7 @@ Public Class dlgNewDataFrame
         If rdoCommand.Checked Then
             lstView.Columns.Add("Command", 450)  'add columns
 
-            lstView.Items.Add(New ListViewItem({"data.frame()"))
+            lstView.Items.Add(New ListViewItem({"data.frame()"}))
             lstView.Items.Item(0).ToolTipText = "creates an empty dataframe"
 
             lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data = NA, nrow = 10, ncol = 2))"}))
@@ -342,6 +343,7 @@ Public Class dlgNewDataFrame
 
                                             If rdoConstruct.Checked Then
                                                 'TODO. 
+                                                dataGridView.Rows.Add("x", "rr")
                                             Else
                                                 ucrInputCommand.SetText(lstView.SelectedItems.Item(0).SubItems(0).Text)
                                             End If
