@@ -74,6 +74,7 @@ Public Class dlgNewDataFrame
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
         ucrInputCommand.SetLinkedDisplayControl(New List(Of Control)({lblCommand, btnExample}))
+
     End Sub
 
     Private Sub SetDefaults()
@@ -205,6 +206,8 @@ Public Class dlgNewDataFrame
     Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged
         If rdoConstruct.Checked Then
             btnExample.Text = "Construct Examples"
+            lblCommand.Visible = True
+            btnExample.Visible = True
             dataGridView.Visible = True
             btnTry.Visible = True
             ucrInputTryMessage.Visible = True
@@ -328,6 +331,7 @@ Public Class dlgNewDataFrame
             lstView.Columns.Add("Name", 150)  'add columns
             lstView.Columns.Add("Expression", 300)  'add columns
 
+            lstView.Items.Add(New ListViewItem({"data.frame()"}))
 
 
         End If
@@ -342,8 +346,14 @@ Public Class dlgNewDataFrame
                                             End If
 
                                             If rdoConstruct.Checked Then
-                                                'TODO. 
-                                                dataGridView.Rows.Add("x", "rr")
+                                                'fill in the empty rows with the selected example
+                                                For Each row As DataGridViewRow In dataGridView.Rows
+                                                    If row.Cells("colName").Value <> "" AndAlso row.Cells("colExpression").Value <> "" Then
+                                                        dataGridView.Rows.Add(lstView.SelectedItems.Item(0).SubItems(0).Text, lstView.SelectedItems.Item(0).SubItems(1).Text)
+                                                        Exit For
+                                                    End If
+                                                Next
+
                                             Else
                                                 ucrInputCommand.SetText(lstView.SelectedItems.Item(0).SubItems(0).Text)
                                             End If
