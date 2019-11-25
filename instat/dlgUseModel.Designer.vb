@@ -465,7 +465,7 @@ Partial Class dlgUseModel
         Me.cmdPlotLines.Name = "cmdPlotLines"
         Me.cmdPlotLines.Size = New System.Drawing.Size(69, 30)
         Me.cmdPlotLines.TabIndex = 158
-        Me.cmdPlotLines.Text = "plot lines"
+        Me.cmdPlotLines.Text = "plot "
         Me.cmdPlotLines.UseVisualStyleBackColor = True
         '
         'cmdSegmentedPredict

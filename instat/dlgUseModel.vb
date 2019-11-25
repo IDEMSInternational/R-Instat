@@ -286,7 +286,7 @@ Public Class dlgUseModel
     End Sub
 
     Private Sub cmdPlotLines_Click(sender As Object, e As EventArgs) Handles cmdPlotLines.Click
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("plot lines()", 1)
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("plot()", 1)
     End Sub
 
     Private Sub cmdPoints_Click(sender As Object, e As EventArgs) Handles cmdPoints.Click
