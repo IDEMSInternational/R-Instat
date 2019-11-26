@@ -73,7 +73,6 @@ Public Class dlgNewDataFrame
         ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand, rdoRandom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
-        ucrInputCommand.SetLinkedDisplayControl(New List(Of Control)({lblCommand, btnExample}))
 
     End Sub
 
@@ -205,7 +204,7 @@ Public Class dlgNewDataFrame
 
     Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged
         If rdoConstruct.Checked Then
-            btnExample.Text = "Construct Examples"
+            btnExample.Text = "Construct Examples" 'this is being done here cause of the datagridview. We don't have its custom control
             lblCommand.Visible = True
             btnExample.Visible = True
             dataGridView.Visible = True
@@ -225,9 +224,9 @@ Public Class dlgNewDataFrame
                 If ucrInputCommand.GetText = "" OrElse ucrInputCommand.GetText = "data.frame(data=matrix(data=NA, nrow=10, ncol=2))" OrElse ucrInputCommand.GetText = "wakefield::r_data_theme(n = 100, data_theme = ""the_works"")" Then
                     ucrInputCommand.SetText("wakefield::r_data_theme(n = 100, data_theme = ""the_works"")")
                 End If
-
             End If
-
+            lblCommand.Visible = True 'this is being done here cause of the datagridview. We don't have its custom control
+            btnExample.Visible = True
             dataGridView.Visible = False
             btnTry.Visible = True
             ucrInputTryMessage.Visible = True
@@ -237,6 +236,8 @@ Public Class dlgNewDataFrame
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
 
         ElseIf rdoEmpty.Checked Then
+            lblCommand.Visible = False 'this is being done here cause of the datagridview. We don't have its custom control
+            btnExample.Visible = False
             btnTry.Visible = False
             ucrInputTryMessage.Visible = False
             dataGridView.Visible = False
@@ -258,21 +259,19 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub dataGridView_ValueChanged(sender As Object, e As EventArgs) Handles dataGridView.CellValueChanged
-        ucrInputTryMessage.SetText("")
-        ucrInputTryMessage.txtInput.BackColor = Color.White
-        TestOKEnabled()
-    End Sub
-
-    Private Sub dataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridView.CellEndEdit
         Dim iPosition As Integer = 0
-        'clear the previous parameters which acted as the columns then add the new ones
-        clsConstructFunction.ClearParameters()
+
+        clsConstructFunction.ClearParameters() 'clear the previous parameters which acted as the columns then add the new ones
         For Each row As DataGridViewRow In dataGridView.Rows
-            If row.Cells("colName").Value <> "" AndAlso row.Cells("colExpression").Value <> "" Then
+            If Not String.IsNullOrEmpty(row.Cells.Item(0).Value) AndAlso Not String.IsNullOrEmpty(row.Cells(1).Value) Then
                 clsConstructFunction.AddParameter(row.Cells("colName").Value, row.Cells("colExpression").Value, iPosition:=iPosition)
                 iPosition = iPosition + 1
             End If
         Next
+
+        ucrInputTryMessage.SetText("")
+        ucrInputTryMessage.txtInput.BackColor = Color.White
+        TestOKEnabled()
     End Sub
 
     Private Sub dataGridView_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dataGridView.RowsAdded
@@ -328,11 +327,15 @@ Public Class dlgNewDataFrame
 
 
         ElseIf rdoConstruct.Checked Then
-            lstView.Columns.Add("Name", 150)  'add columns
+            lstView.Columns.Add("Column Name", 150)  'add columns
             lstView.Columns.Add("Expression", 300)  'add columns
 
-            lstView.Items.Add(New ListViewItem({"data.frame()"}))
-
+            lstView.Items.Add(New ListViewItem({"no", "c(0,0.5,1,2:28)"}))
+            lstView.Items.Add(New ListViewItem({"seq", "seq(30,1,-1)"}))
+            lstView.Items.Add(New ListViewItem({"place", "rep(""Kisumu"",30)"}))
+            lstView.Items.Add(New ListViewItem({"place2", "c(rep(""Mombasa"",10),rep(""Nairobi"",20))"}))
+            lstView.Items.Add(New ListViewItem({"days", "seq(as.Date(""2020/4/1""),as.Date(""2020/4/30""),""days"")"}))
+            lstView.Items.Add(New ListViewItem({"occasions", "seq(as.Date(""1970/1/1""),by=""4 months"",length=30)"}))
 
         End If
 
@@ -346,14 +349,19 @@ Public Class dlgNewDataFrame
                                             End If
 
                                             If rdoConstruct.Checked Then
-                                                'fill in the empty rows with the selected example
+                                                'fill in the empty rows with the selected example or replace existing column names since R doesn't accept duplicate column names
                                                 For Each row As DataGridViewRow In dataGridView.Rows
-                                                    If row.Cells("colName").Value <> "" AndAlso row.Cells("colExpression").Value <> "" Then
-                                                        dataGridView.Rows.Add(lstView.SelectedItems.Item(0).SubItems(0).Text, lstView.SelectedItems.Item(0).SubItems(1).Text)
+                                                    If String.IsNullOrEmpty(row.Cells("colName").Value) AndAlso String.IsNullOrEmpty(row.Cells("colExpression").Value) Then
+                                                        row.Cells("colName").Value = lstView.SelectedItems.Item(0).SubItems(0).Text
+                                                        row.Cells("colExpression").Value = lstView.SelectedItems.Item(0).SubItems(1).Text
+                                                        dataGridView.Rows.Add(1)
+                                                        Exit For
+                                                    ElseIf row.Cells("colName").Value = lstView.SelectedItems.Item(0).SubItems(0).Text Then
+                                                        row.Cells("colName").Value = lstView.SelectedItems.Item(0).SubItems(0).Text
+                                                        row.Cells("colExpression").Value = lstView.SelectedItems.Item(0).SubItems(1).Text
                                                         Exit For
                                                     End If
                                                 Next
-
                                             Else
                                                 ucrInputCommand.SetText(lstView.SelectedItems.Item(0).SubItems(0).Text)
                                             End If
@@ -371,30 +379,30 @@ Public Class dlgNewDataFrame
         Dim bValid As Boolean = False
         Dim vecOutput As CharacterVector
         Dim strScript As String
+        Dim lstScriptCommands As New List(Of String)
         Try
 
             If rdoConstruct.Checked Then
-                strScript = clsConstructFunction.ToScript
-                vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strScript, bSilent:=True)
-                bValid = (Not IsNothing(vecOutput) AndAlso vecOutput.Length > 0)
+                strScript = clsConstructFunction.Clone.ToScript()
+                lstScriptCommands.AddRange(strScript.Split(New String() {Environment.NewLine}, StringSplitOptions.None))
             ElseIf rdoCommand.Checked OrElse rdoRandom.Checked Then
-                Dim lstScriptCommands As New List(Of String)
                 strScript = ucrInputCommand.GetText
                 lstScriptCommands.AddRange(strScript.Split(New String() {Environment.NewLine}, StringSplitOptions.None))
-                For Each str As String In lstScriptCommands
-                    If Not String.IsNullOrWhiteSpace(str) Then
-                        vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(str, bSilent:=True)
-                        If vecOutput Is Nothing Then
-                            bValid = False
-                            Exit For
-                        ElseIf vecOutput.Length > 0 Then
-                            bValid = True
-                            'don't break the if, we probably want to loop through to the last command checking validity? 
-                        End If
-                    End If
-                Next
-
             End If
+
+            'always run line by line. The last line should produuce a dataframe
+            For Each str As String In lstScriptCommands
+                If Not String.IsNullOrWhiteSpace(str) Then
+                    vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(str, bSilent:=True)
+                    If vecOutput Is Nothing Then
+                        bValid = False
+                        Exit For
+                    ElseIf vecOutput.Length > 0 Then
+                        bValid = True
+                        'don't break the if, we probably want to loop through to the last command checking validity? 
+                    End If
+                End If
+            Next
 
 
             If bValid Then
