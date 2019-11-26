@@ -1480,7 +1480,7 @@ Public Class ucrGeom
         clsgeom_treemap.AddAesParameter("subgroup3", strIncludedDataTypes:={"factor"})
 
         clsgeom_treemap.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "count" & Chr(34)})
-        clsgeom_treemap.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34))
+        clsgeom_treemap.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
         clsgeom_treemap.AddLayerParameter("na.rm", "boolean", "FALSE")
         clsgeom_treemap.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_treemap.AddLayerParameter("inherit.aes", "boolean", "TRUE")
