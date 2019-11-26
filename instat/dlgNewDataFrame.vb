@@ -263,8 +263,10 @@ Public Class dlgNewDataFrame
 
         clsConstructFunction.ClearParameters() 'clear the previous parameters which acted as the columns then add the new ones
         For Each row As DataGridViewRow In dataGridView.Rows
-            If Not String.IsNullOrEmpty(row.Cells.Item(0).Value) AndAlso Not String.IsNullOrEmpty(row.Cells(1).Value) Then
-                clsConstructFunction.AddParameter(row.Cells("colName").Value, row.Cells("colExpression").Value, iPosition:=iPosition)
+            'check for colName for the colName and colExpression which is column index 1 & 2
+            'used column index instead of column name because of argument exception
+            If Not String.IsNullOrEmpty(row.Cells(1).Value) AndAlso Not String.IsNullOrEmpty(row.Cells(2).Value) Then
+                clsConstructFunction.AddParameter(row.Cells(1).Value, row.Cells(2).Value, iPosition:=iPosition)
                 iPosition = iPosition + 1
             End If
         Next
@@ -383,7 +385,11 @@ Public Class dlgNewDataFrame
         Try
 
             If rdoConstruct.Checked Then
-                strScript = clsConstructFunction.Clone.ToScript()
+                Dim clsTempConstructFunction As RFunction
+                clsTempConstructFunction = clsConstructFunction.Clone
+                clsTempConstructFunction.bToBeAssigned = False
+                clsTempConstructFunction.bIsAssigned = False
+                strScript = clsTempConstructFunction.ToScript()
                 lstScriptCommands.AddRange(strScript.Split(New String() {Environment.NewLine}, StringSplitOptions.None))
             ElseIf rdoCommand.Checked OrElse rdoRandom.Checked Then
                 strScript = ucrInputCommand.GetText
