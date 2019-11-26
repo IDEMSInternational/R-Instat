@@ -2010,6 +2010,10 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.spline(object = , x = index(object), xout = , na.rm = FALSE, maxgap = Inf, along))", 66)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.spline()", 1)
+        End If
+
+    End Sub
+
 
     Private Sub cmdFactor_Click(sender As Object, e As EventArgs) Handles cmdFactor.Click
         If chkShowArguments.Checked Then

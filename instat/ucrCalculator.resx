@@ -4638,9 +4638,9 @@
 
   <data name="&gt;&gt;cmdAll.Parent" xml:space="preserve">
     <value>grpLogical</value>
+    </data>
   <data name="&gt;&gt;grpStrings.ZOrder" xml:space="preserve">
     <value>8</value>
-
   </data>
   <data name="&gt;&gt;cmdAll.ZOrder" xml:space="preserve">
     <value>10</value>
@@ -5510,9 +5510,9 @@
     <value>3</value>
   </data>
 
-  <data name="cmdChoose.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-
+    <data name="cmdChoose.Font" type="System.Drawing.Font, System.Drawing">
+      <value>Microsoft Sans Serif, 8.25pt</value>
+    </data>
   <data name="&gt;&gt;grpLogical.ZOrder" xml:space="preserve">
     <value>3</value>
 
@@ -5943,7 +5943,7 @@
 
   <data name="&gt;&gt;cmdBeta.ZOrder" xml:space="preserve">
     <value>16</value>
-
+</data>
   <data name="cmdOpeningBracket.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -7581,9 +7581,10 @@
   </data>
 
   <data name="&gt;&gt;grpProbabilty.ZOrder" xml:space="preserve">
+    <value>2</value>
+    </data>
 
   <data name="&gt;&gt;grpMaths.ZOrder" xml:space="preserve">
-
     <value>5</value>
   </data>
   <data name="cmdAtan2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -9779,10 +9780,9 @@
 
   <data name="&gt;&gt;cmdHeight.ZOrder" xml:space="preserve">
     <value>50</value>
-
+</data>
   <data name="&gt;&gt;grpWakefield.ZOrder" xml:space="preserve">
     <value>2</value>
-
   </data>
   <data name="cmdLikert.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -10143,7 +10143,8 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpWakefield.ZOrder" xml:space="preserve">
-
+    <value>5</value>
+</data>
   <data name="&gt;&gt;cmdCircular.Name" xml:space="preserve">
     <value>cmdCircular</value>
   </data>
