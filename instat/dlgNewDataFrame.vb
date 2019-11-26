@@ -384,6 +384,7 @@ Public Class dlgNewDataFrame
         Dim lstScriptCommands As New List(Of String)
         Try
 
+
             If rdoConstruct.Checked Then
                 Dim clsTempConstructFunction As RFunction
                 clsTempConstructFunction = clsConstructFunction.Clone
@@ -411,7 +412,7 @@ Public Class dlgNewDataFrame
             Next
 
 
-            If bValid Then
+            If ucrBase.cmdOk.Enabled AndAlso bValid Then
                 ucrInputTryMessage.SetText("Command Ok.")
                 ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
             Else
