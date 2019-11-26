@@ -26,6 +26,7 @@ Public Class dlgFromLibrary
     Private clsDataFunction As New RFunction
     Private dctPackages As New Dictionary(Of String, String)
     Private strAvailablePackages() As String
+    Private newDlgImportDataset As dlgImportDataset
 
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -106,9 +107,14 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub cmdLibraryCollection_Click(sender As Object, e As EventArgs) Handles cmdLibraryCollection.Click
-        dlgImportDataset.bFromLibrary = True
-        dlgImportDataset.bStartOpenDialog = True
-        dlgImportDataset.ShowDialog()
+        'we need a new instance of the import dialog to not overwrite the open from file import dialog settings
+        If newDlgImportDataset Is Nothing Then
+            newDlgImportDataset = New dlgImportDataset
+            newDlgImportDataset.Text &= " from Library" 'to distinguish it in the list of recent used dialogs
+        End If
+        newDlgImportDataset.bFromLibrary = True
+        newDlgImportDataset.bStartOpenDialog = True
+        newDlgImportDataset.ShowDialog()
         Me.Hide()
     End Sub
 
