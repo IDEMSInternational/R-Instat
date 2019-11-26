@@ -265,7 +265,7 @@ Public Class dlgNewDataFrame
         For Each row As DataGridViewRow In dataGridView.Rows
             'check for colName for the colName and colExpression which is column index 1 & 2
             'used column index instead of column name because of argument exception
-            If Not String.IsNullOrEmpty(row.Cells(1).Value) AndAlso Not String.IsNullOrEmpty(row.Cells(2).Value) Then
+            If Not String.IsNullOrEmpty(row.Cells(1).Value) OrElse Not String.IsNullOrEmpty(row.Cells(2).Value) Then
                 clsConstructFunction.AddParameter(row.Cells(1).Value, row.Cells(2).Value, iPosition:=iPosition)
                 iPosition = iPosition + 1
             End If
