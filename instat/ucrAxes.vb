@@ -341,15 +341,15 @@ Public Class ucrAxes
         grpMajorBreaks.Hide()
         grpMinorBreaks.Hide()
         grpScales.Hide()
-        If strAxisType = "Continuous" Then
+        If strAxisType.ToLower = "continuous" Then
             'show continous panels
             'TODO put controls in panels so group boxes can be used for multiple cases
             grpMajorBreaks.Show()
             grpMinorBreaks.Show()
             grpScales.Show()
-        ElseIf strAxisType = "Discrete" Then
+        ElseIf strAxisType.ToLower = "discrete" Then
             'show discrete panels
-        ElseIf strAxisType = "Date" Then
+        ElseIf strAxisType.ToLower = "date" Then
             'show date panels
         End If
     End Sub
