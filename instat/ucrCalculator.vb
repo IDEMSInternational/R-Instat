@@ -67,6 +67,33 @@ Public Class ucrCalculator
         bControlsInitialised = True
         ttCalculator.SetToolTip(cmdRound, "round(x) to round to whole numbers, round(x,2) to round to 2 decimal places, round(x,-2) to round to the nearest 100")
         ttCalculator.SetToolTip(cmdSiginf, "signif(x,3) to round to 3 significant figures")
+
+        ttCalculator.SetToolTip(cmdLag, "Shift a variable down. For example lag(1:5) = (NA,1,2,3,4); lag(1:5,3) = (NA,NA,NA, 1,2)")
+        ttCalculator.SetToolTip(cmdLead, "Shift a variable up. For example lead(1:5) = (2,3,4,5,NA); lead(1:5;3) = (4,5, NA,NA,NA)")
+        ttCalculator.SetToolTip(cmdDiff, "difference between successive elements. For example diff(c(1,4,3,7)) = (NA 3,-1,4)")
+        ttCalculator.SetToolTip(cmdpmax, " maximum of a set of variables. For examples pmax(c(1,3,5),c(6,4,2)) = (6,4,5)")
+        ttCalculator.SetToolTip(cmdPMin, "minimum of a set of variables. For examples pmin(c(1,3,5),c(6,4,2)) = (1,3,2)")
+        ttCalculator.SetToolTip(cmdcummax, "cumulative maxima. For example cummax(c(3,2,1,4,0)) = (3,3,3,4,4)")
+        ttCalculator.SetToolTip(cmdMovMax, "moving (or rolling) maxima. For example rollmax(x=c(3,2,1,4,0) ,3,fill=NA, align=""right"") = (NA,NA, 3,4,4)")
+        ttCalculator.SetToolTip(cmdcumsum, "cumulative sums. For example cumsum(c(3,2,1,4,0)) = (3,5,6,10,10)")
+        ttCalculator.SetToolTip(cmdCumMean, "cumulative means. For example cummean(c(3,2,1,4,0)) = (3,2.5,2,2.5,2)")
+        ttCalculator.SetToolTip(cmdcummin, "cumulative minima. For example cummin(c(3,2,1,4,0)) = (3,2.,1,1,0)")
+        ttCalculator.SetToolTip(cmdMovSum, "moving (or rolling) totals. For example rollsum(c(3,2,1,4,0) ,3,fill=NA, align=""left"") = (6,7,5,NA,NA)")
+        ttCalculator.SetToolTip(cmdmovemean, "moving (or rolling) mean. For example rollmean(c(3,2,1,6,2) ,3,fill=NA) = (NA,2,3,3,NA)")
+        ttCalculator.SetToolTip(cmMovMed, "moving (or rolling) medians. For example rollmedian(c(3,2,1,6,2) ,3,fill=NA) = (NA,2,2,2,NA)")
+        ttCalculator.SetToolTip(cmdMovmin, "moving (or rolling) minima. For example rollapply(c(3,2,1,6,2),width=3,fill=NA, FUN=min) = (NA,1,1,1,NA)")
+        ttCalculator.SetToolTip(cmdNtile, " Use ranks to divide into (almost) equal sized groups. For example ntile(c(15,11,13,12,NA,12),2) = (2,1,2,1,NA,1)")
+        ttCalculator.SetToolTip(cmdCumdist, "Proportion of values less than or equal to the current rank. For example cume_dist(c(2,4,6,8,3)) = (0.2, 0.6, 0.8, 1.0, 0.4)")
+        ttCalculator.SetToolTip(cmdRowRank, "row numbers as ranks. For example :row_number(c(15,11,13,12,NA,12)) = (5,1,3,2,NA,3)")
+        ttCalculator.SetToolTip(cmdpercentrank, "rescale of minimum ranks to [0,1]. For example percent_rank(c(15,11,13,12,NA,12)) = (1,0,0.75,0.25,NA,0.25)")
+        ttCalculator.SetToolTip(cmdDRank, "dense ranks. For example d_rank(c(15,11,13,12,NA,12)) = (4,1,3,2,NA,2)")
+        ttCalculator.SetToolTip(cmdMRank, " minimum ranks. For example m_rank(c(15,11,13,12,NA,12)) = (5,1,4,2,NA,2)")
+        ttCalculator.SetToolTip(cmdNafill, "fills missing values at the start, middle and end. For example na.fill(c(NA,2,NA,4,5,NA),fill=""extend"") = (2,2,3,4,5,5); while fill=c(15,""extend"",NA) = (15,2,3,4,5,NA)")
+        ttCalculator.SetToolTip(cmdNaapprox, "linear interpolation of missing values. For example na.approx(c(5,NA,NA,2,2,NA,4,7,NA),maxgap=1,na.rm=FALSE) = (5,NA,NA,2,2,3,4,7,NA)")
+        ttCalculator.SetToolTip(cmdNasplin, "Spline interpolation of missing values. For example na.spline(c(NA,NA,NA,2,2,NA,4,7,NA),maxgap=2,na.rm=FALSE) = (NA,NA,NA,2,2,2.5,4,7,12)")
+        ttCalculator.SetToolTip(cmdNaest, "Missing values as the mean (usually) overall or with a factor. For example na.aggregate(c(NA,NA,NA,2,2,NA,4,7,NA),maxgap=2,na.rm=FALSE) = (NA,NA,NA,2,2,3.75,4,7,3.75)")
+
+
         ttCalculator.SetToolTip(cmdPower, "power(^)or exponent and can also be given as **. For example 2^3 = 8")
         ttCalculator.SetToolTip(cmdLesser, "less than(<). For example (2 < 3) is TRUE. (2 < 2) is FALSE, (2 < 1) is FALSE")
         ttCalculator.SetToolTip(cmdLesserOrEqualsTo, "less than or equals(<=). For example (2 <= 3) is TRUE, (2 <=2) is TRUE, (2 <= 1) is FALSE")
@@ -92,6 +119,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdWhich, "which gives the indices of a logical variable. For example which(11:15>13) gives 4, 5. Note the result is usually not the same length as the original variable.")
         ttCalculator.SetToolTip(cmdAnyDup, "any Are any values TRUE in a logical variable. For example any(1:5 >3) gives TRUE")
         ttCalculator.SetToolTip(cmdAll, "all Are all values TRUE in a logical variable. For example all(1:5 >3) gives FALSE")
+
     End Sub
 
     Public Sub Reset()
@@ -1144,7 +1172,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdEcdf_Click(sender As Object, e As EventArgs) Handles cmdEcdf.Click
+    Private Sub cmdEcdf_Click(sender As Object, e As EventArgs) Handles cmdCumdist.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::cume_dist()", 1)
     End Sub
 
@@ -1158,25 +1186,25 @@ Public Class ucrCalculator
 
     Private Sub cmdMovMax_Click(sender As Object, e As EventArgs) Handles cmdMovMax.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax(x= , k=3)", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax(x = , k =3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 73)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmax( ,k = 3, fill = NA)", 19)
         End If
     End Sub
 
     Private Sub cmdMovSum_Click(sender As Object, e As EventArgs) Handles cmdMovSum.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum(x= , k=3)", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum(x = , k=3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 72)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollsum( ,k = 3, fill = NA)", 19)
         End If
     End Sub
 
     Private Sub cmMovMed_Click(sender As Object, e As EventArgs) Handles cmMovMed.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmedian(x= , k=3)", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmedian(x = , k = 3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 74)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmedian()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmedian( ,k = 3, fill = NA)", 19)
         End If
     End Sub
 
@@ -1186,9 +1214,9 @@ Public Class ucrCalculator
 
     Private Sub cmdmovemean_Click(sender As Object, e As EventArgs) Handles cmdmovemean.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmean(x= , k=3)", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmean(x = , k=3, fill = NA, na.pad = FALSE, align = c(""center"", ""left"", ""right""))", 72)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmean()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollmean( ,k = 3, fill = NA)", 19)
         End If
     End Sub
 
@@ -1944,6 +1972,49 @@ Public Class ucrCalculator
         End If
     End Sub
 
+
+    Private Sub cmdMovmin_Click(sender As Object, e As EventArgs) Handles cmdMovmin.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply(data = , width = , FUN = min , by = 1, by.column = TRUE, fill = NA, na.pad = FALSE, partial = FALSE, align = c(""center"", ""left"", ""right""), coredata = TRUE)))", 151)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply( , width = , FUN = min, k = 3, fill = NA)", 40)
+        End If
+    End Sub
+
+    Private Sub cmdNafill_Click(sender As Object, e As EventArgs) Handles cmdNafill.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.fill(object = , fill = NA , ix = !is.na(object)))", 33)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.fill()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdNaest_Click(sender As Object, e As EventArgs) Handles cmdNaest.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.aggregate(object = , by = 1, FUN = mean, na.rm = FALSE, maxgap = Inf))", 52)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.aggregate()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdNaapprox_Click(sender As Object, e As EventArgs) Handles cmdNaapprox.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.approx(object = , x = index(object), xout = , na.rm = FALSE, maxgap = Inf, along))", 66)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.approx()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdNasplin_Click(sender As Object, e As EventArgs) Handles cmdNasplin.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.spline(object = , x = index(object), xout = , na.rm = FALSE, maxgap = Inf, along))", 66)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::na.spline()", 1)
+        End If
+
+    End Sub
+
+
     Private Sub cmdFactor_Click(sender As Object, e As EventArgs) Handles cmdFactor.Click
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::as_factor(x = , ... )", 8)
@@ -2101,6 +2172,7 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_shuffle(f = , )", 4)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_shuffle()", 1)
+
         End If
     End Sub
 End Class
