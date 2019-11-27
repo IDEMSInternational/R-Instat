@@ -333,9 +333,16 @@ Public Class dlgNewDataFrame
             lstView.Columns.Add("Expression", 300)  'add columns
 
             lstView.Items.Add(New ListViewItem({"no", "c(0,0.5,1,2:28)"}))
+            lstView.Items.Item(0).ToolTipText = "c( ) produces a vector. Here it produces a variable (column) of 30 values between 0 and 28 seq produces a regular sequence. Here from 30 down to 1 in steps of -1"
+
             lstView.Items.Add(New ListViewItem({"seq", "seq(30,1,-1)"}))
+
             lstView.Items.Add(New ListViewItem({"place", "rep(""Kisumu"",30)"}))
+            lstView.Items.Item(2).ToolTipText = "rep repeats one or more values as shown here. Try also rep(1:5, each =6) and rep((1:5,length = 30)"
+
             lstView.Items.Add(New ListViewItem({"place2", "c(rep(""Mombasa"",10),rep(""Nairobi"",20))"}))
+            lstView.Items.Item(3).ToolTipText = "c( ) and rep or seq can be combined as shown here. Try also c(rep(1:5,each=2),seq(6,100,length=20)) regular sequence of dates. Alternatively use Prepare > Column: Date > Generate Dates"
+
             lstView.Items.Add(New ListViewItem({"days", "seq(as.Date(""2020/4/1""),as.Date(""2020/4/30""),""days"")"}))
             lstView.Items.Add(New ListViewItem({"occasions", "seq(as.Date(""1970/1/1""),by=""4 months"",length=30)"}))
 
