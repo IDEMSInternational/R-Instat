@@ -331,7 +331,7 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.cmdQgamma = New System.Windows.Forms.Button()
         Me.cmdPbeta = New System.Windows.Forms.Button()
-        Me.cmd = New System.Windows.Forms.Button()
+        Me.cmdPbirth = New System.Windows.Forms.Button()
         Me.cmdPbinom = New System.Windows.Forms.Button()
         Me.cmdPpois = New System.Windows.Forms.Button()
         Me.cmdPnbin = New System.Windows.Forms.Button()
@@ -1379,7 +1379,7 @@ Partial Class ucrCalculator
         Me.grpProbabilty.Controls.Add(Me.cmdPnbin)
         Me.grpProbabilty.Controls.Add(Me.cmdPpois)
         Me.grpProbabilty.Controls.Add(Me.cmdPbinom)
-        Me.grpProbabilty.Controls.Add(Me.cmd)
+        Me.grpProbabilty.Controls.Add(Me.cmdPbirth)
         Me.grpProbabilty.Controls.Add(Me.cmdPbeta)
         Me.grpProbabilty.Controls.Add(Me.cmdQgamma)
         Me.grpProbabilty.Controls.Add(Me.cmdPgamma)
@@ -2389,11 +2389,11 @@ Partial Class ucrCalculator
         Me.cmdPbeta.Name = "cmdPbeta"
         Me.cmdPbeta.UseVisualStyleBackColor = True
         '
-        'cmd
+        'cmdPbirth
         '
-        resources.ApplyResources(Me.cmd, "cmd")
-        Me.cmd.Name = "cmd"
-        Me.cmd.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdPbirth, "cmdPbirth")
+        Me.cmdPbirth.Name = "cmdPbirth"
+        Me.cmdPbirth.UseVisualStyleBackColor = True
         '
         'cmdPbinom
         '
@@ -2778,7 +2778,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdPnbin As Button
     Friend WithEvents cmdPpois As Button
     Friend WithEvents cmdPbinom As Button
-    Friend WithEvents cmd As Button
+    Friend WithEvents cmdPbirth As Button
     Friend WithEvents cmdPbeta As Button
     Friend WithEvents cmdQnbin As Button
     Friend WithEvents Button5 As Button
