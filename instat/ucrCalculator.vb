@@ -122,6 +122,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdPnorm, "(normal probabilities. For example; pnorm(-1.6449) = 0.05; pnorm(130,100,15) = 0.9772.")
         ttCalculator.SetToolTip(cmdPt, " t probabilities. For example pt(-2,5) = 0.051; pt(-2,1000) = 0.0229 ~ pnorm(-2)")
         ttCalculator.SetToolTip(cmdPChisq, "chi square probabilities. For example pchisq(5,1) = 0.9747; pchisq(5,10) = 0.1088")
+
         ttCalculator.SetToolTip(cmdPf, "F probabilities. For example pf(2,1,10) = 0.8123; pf(2,50,50) = 0.9921")
         ttCalculator.SetToolTip(cmdQnorm, "qnormal quantiles. For example qnorm(0.05) = -1.6449; qnorm(0.9772, 100,15) = 130")
         ttCalculator.SetToolTip(cmdPbirth, "simultaneous birthday probabilities. For example pbirthday(10) = 0.1169 ; pbirthday(50) = 0.97")
@@ -149,6 +150,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdQchisq, "chi square quantiles. For example qchisq(0.95, 1) = 3.841; qchisq(0.95, 10) = 18.31")
         ttCalculator.SetToolTip(cmdQt, "t quantiles. For example qt(0.05, 5) = -2.015; qt(0.05, 100) = -1.66")
         ttCalculator.SetToolTip(cmdqF, "F quantiles. For example qf(0.95,1,10) = 4.965; qf(0.95, 50,50)= 1.599")
+
         ttCalculator.SetToolTip(cmdSqrt, "square root. For example sqrt(3) = 3 ^ 0.5 = 1.732")
         ttCalculator.SetToolTip(cmdCos, "cosine of angle in radians. For example cos(pi) = -1, cos(rad(90)) = (almost) 0.")
         ttCalculator.SetToolTip(cmdAcos, "angle corresponding to a given cosine (in the range 0 to pi). For example acos(0) = 1.57 = pi/2; deg(acos(-1))=180.")
@@ -162,10 +164,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdLogTen, "logarithm to base 10. For example log10(1000) =3 (=10^3)")
         ttCalculator.SetToolTip(cmdTan, " tangent of angle in radians. For example tan(pi/4) = sin(pi/4)/cos(pi/4) = tan(rad(45)) = 1")
         ttCalculator.SetToolTip(cmdAtan, "angle corresponding to a given tangent (in the range 0 to pi). For example atan(1) = 0..7854 (= pi/4); deg(atan(1)) = 45.")
-        ttCalculator.SetToolTip(cmdTrunc, "truncates to the nearest whole number in the direction of 0. So trunc(3.5) = 3 and trunc(-3.5) = -3.")
-        ttCalculator.SetToolTip(cmdDeg, "change from radians to degrees. For example deg(pi/2) = 90 ( = pi/2 360/(2pi))")
-        ttCalculator.SetToolTip(cmdExp, "exponential function. For example exp(3) = e ^ 3 = 2.71828 ^ 3 = 20.09")
-        ttCalculator.SetToolTip(cmdAbs, "absolute value. For example abs(4.5) = abs(-4.5) = 4.5")
+
     End Sub
 
     Public Sub Reset()
