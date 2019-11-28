@@ -6276,37 +6276,37 @@
   <data name="&gt;&gt;cmdQnbin.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Button5.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cmdQpois.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="Button5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdQpois.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdQpois.Location" type="System.Drawing.Point, System.Drawing">
     <value>249, 126</value>
   </data>
-  <data name="Button5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cmdQpois.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
-  <data name="Button5.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdQpois.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 37</value>
   </data>
-  <data name="Button5.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdQpois.TabIndex" type="System.Int32, mscorlib">
     <value>175</value>
   </data>
-  <data name="Button5.Text" xml:space="preserve">
-    <value>pbeta</value>
+  <data name="cmdQpois.Text" xml:space="preserve">
+    <value>qpois</value>
   </data>
-  <data name="&gt;&gt;Button5.Name" xml:space="preserve">
-    <value>Button5</value>
+  <data name="&gt;&gt;cmdQpois.Name" xml:space="preserve">
+    <value>cmdQpois</value>
   </data>
-  <data name="&gt;&gt;Button5.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdQpois.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button5.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdQpois.Parent" xml:space="preserve">
     <value>grpProbabilty</value>
   </data>
-  <data name="&gt;&gt;Button5.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdQpois.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="cmdQbinom.Font" type="System.Drawing.Font, System.Drawing">

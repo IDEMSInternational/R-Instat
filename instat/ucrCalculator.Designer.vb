@@ -338,7 +338,7 @@ Partial Class ucrCalculator
         Me.cmdQbeta = New System.Windows.Forms.Button()
         Me.cmdQbirth = New System.Windows.Forms.Button()
         Me.cmdQbinom = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
+        Me.cmdQpois = New System.Windows.Forms.Button()
         Me.cmdQnbin = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
@@ -1372,7 +1372,7 @@ Partial Class ucrCalculator
         'grpProbabilty
         '
         Me.grpProbabilty.Controls.Add(Me.cmdQnbin)
-        Me.grpProbabilty.Controls.Add(Me.Button5)
+        Me.grpProbabilty.Controls.Add(Me.cmdQpois)
         Me.grpProbabilty.Controls.Add(Me.cmdQbinom)
         Me.grpProbabilty.Controls.Add(Me.cmdQbirth)
         Me.grpProbabilty.Controls.Add(Me.cmdQbeta)
@@ -2431,11 +2431,11 @@ Partial Class ucrCalculator
         Me.cmdQbinom.Name = "cmdQbinom"
         Me.cmdQbinom.UseVisualStyleBackColor = True
         '
-        'Button5
+        'cmdQpois
         '
-        resources.ApplyResources(Me.Button5, "Button5")
-        Me.Button5.Name = "Button5"
-        Me.Button5.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdQpois, "cmdQpois")
+        Me.cmdQpois.Name = "cmdQpois"
+        Me.cmdQpois.UseVisualStyleBackColor = True
         '
         'cmdQnbin
         '
@@ -2781,7 +2781,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdPbirth As Button
     Friend WithEvents cmdPbeta As Button
     Friend WithEvents cmdQnbin As Button
-    Friend WithEvents Button5 As Button
+    Friend WithEvents cmdQpois As Button
     Friend WithEvents cmdQbinom As Button
     Friend WithEvents cmdQbirth As Button
     Friend WithEvents cmdQbeta As Button
