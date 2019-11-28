@@ -8428,7 +8428,7 @@
     <value>49</value>
   </data>
   <data name="cmdState.Text" xml:space="preserve">
-    <value>state</value>
+    <value>state (f)</value>
   </data>
   <data name="&gt;&gt;cmdState.Name" xml:space="preserve">
     <value>cmdState</value>
@@ -8527,7 +8527,7 @@
     <value>46</value>
   </data>
   <data name="cmdSex.Text" xml:space="preserve">
-    <value>sex</value>
+    <value>sex (f)</value>
   </data>
   <data name="&gt;&gt;cmdSex.Name" xml:space="preserve">
     <value>cmdSex</value>
@@ -8560,7 +8560,7 @@
     <value>45</value>
   </data>
   <data name="cmdSex_Inclusive.Text" xml:space="preserve">
-    <value>sex_inclusive</value>
+    <value>sex_inclusive (f)</value>
   </data>
   <data name="&gt;&gt;cmdSex_Inclusive.Name" xml:space="preserve">
     <value>cmdSex_Inclusive</value>
@@ -8692,7 +8692,7 @@
     <value>41</value>
   </data>
   <data name="cmdReligion.Text" xml:space="preserve">
-    <value>religion</value>
+    <value>religion (f)</value>
   </data>
   <data name="&gt;&gt;cmdReligion.Name" xml:space="preserve">
     <value>cmdReligion</value>
@@ -8725,7 +8725,7 @@
     <value>40</value>
   </data>
   <data name="cmdRace.Text" xml:space="preserve">
-    <value>race</value>
+    <value>race (f)</value>
   </data>
   <data name="&gt;&gt;cmdRace.Name" xml:space="preserve">
     <value>cmdRace</value>
@@ -8758,7 +8758,7 @@
     <value>39</value>
   </data>
   <data name="cmdPolitical.Text" xml:space="preserve">
-    <value>political</value>
+    <value>political (f)</value>
   </data>
   <data name="&gt;&gt;cmdPolitical.Name" xml:space="preserve">
     <value>cmdPolitical</value>
