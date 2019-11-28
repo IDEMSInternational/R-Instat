@@ -156,6 +156,9 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdPi, "pi = 3.14159")
         ttCalculator.SetToolTip(cmdLog, "(natural) logarithm. For example log(512) = 6.238; log(512,2) = 9 (log to base 2, i.e. 2 ^ 9 =512)")
         ttCalculator.SetToolTip(cmdSin, "sine of angle in radians. For example sin(pi/2) = sin(rad(90)) = 1.")
+        ttCalculator.SetToolTip(cmdAsin, "angle corresponding to a given sine (in the range (0 to pi). For example asin(1) = 1.57 = pi/2.")
+        ttCalculator.SetToolTip(cmdFloor, "integer below the given value. For example floor(3.5)=3; floor(-3.5) = -4.")
+        ttCalculator.SetToolTip(cmdRad, "change from degrees to radians. For example rad(90) = 2*pi * 90/360 = 1.57 ( = pi/2)")
 
     End Sub
 
