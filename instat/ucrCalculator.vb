@@ -2316,4 +2316,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnbinom()", 1)
         End If
     End Sub
+
+    Private Sub cmdLinkert7_Click(sender As Object, e As EventArgs) Handles cmdLinkert7.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert_7(n = , x = c(""Strongly Agree"", ""Agree"", ""Somewhat Agree"", ""Neutral"",""Somewhat Disagree"", ""Disagree"", ""Strongly Disagree""), prob = NULL,name = ""Likert""))", 113)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert_7()", 1)
+        End If
+    End Sub
 End Class
