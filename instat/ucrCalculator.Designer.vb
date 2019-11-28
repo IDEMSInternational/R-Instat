@@ -1954,7 +1954,6 @@ Partial Class ucrCalculator
         'grpWakefield
         '
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
-        Me.grpWakefield.Controls.Add(Me.grpCircular)
         Me.grpWakefield.Controls.Add(Me.cmdValid)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
         Me.grpWakefield.Controls.Add(Me.cmdString)
@@ -2445,11 +2444,12 @@ Partial Class ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpLogical)
+        Me.Controls.Add(Me.grpCircular)
+        Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpStrings)
