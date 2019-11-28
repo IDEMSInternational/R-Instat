@@ -87,7 +87,7 @@ Partial Class ucrCalculator
         Me.grpTransform = New System.Windows.Forms.GroupBox()
         Me.cmdRowRank = New System.Windows.Forms.Button()
         Me.cmdDiff = New System.Windows.Forms.Button()
-        Me.cmdEcdf = New System.Windows.Forms.Button()
+        Me.cmdCumdist = New System.Windows.Forms.Button()
         Me.cmdmovemean = New System.Windows.Forms.Button()
         Me.cmdCumMean = New System.Windows.Forms.Button()
         Me.cmdNtile = New System.Windows.Forms.Button()
@@ -297,6 +297,13 @@ Partial Class ucrCalculator
         Me.cmdMedianHL = New System.Windows.Forms.Button()
         Me.cmdCircMedian = New System.Windows.Forms.Button()
         Me.cmdCircMean = New System.Windows.Forms.Button()
+
+        Me.cmdMovmin = New System.Windows.Forms.Button()
+        Me.cmdNafill = New System.Windows.Forms.Button()
+        Me.cmdNaest = New System.Windows.Forms.Button()
+        Me.cmdNaapprox = New System.Windows.Forms.Button()
+        Me.cmdNasplin = New System.Windows.Forms.Button()
+
         Me.grpFactor = New System.Windows.Forms.GroupBox()
         Me.cmdShuffle = New System.Windows.Forms.Button()
         Me.cmdShift = New System.Windows.Forms.Button()
@@ -318,6 +325,7 @@ Partial Class ucrCalculator
         Me.cmdConcat = New System.Windows.Forms.Button()
         Me.cmdFactor = New System.Windows.Forms.Button()
         Me.cmdAnon = New System.Windows.Forms.Button()
+
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
@@ -640,9 +648,14 @@ Partial Class ucrCalculator
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.cmdNasplin)
+        Me.grpTransform.Controls.Add(Me.cmdNaapprox)
+        Me.grpTransform.Controls.Add(Me.cmdNaest)
+        Me.grpTransform.Controls.Add(Me.cmdNafill)
+        Me.grpTransform.Controls.Add(Me.cmdMovmin)
         Me.grpTransform.Controls.Add(Me.cmdRowRank)
         Me.grpTransform.Controls.Add(Me.cmdDiff)
-        Me.grpTransform.Controls.Add(Me.cmdEcdf)
+        Me.grpTransform.Controls.Add(Me.cmdCumdist)
         Me.grpTransform.Controls.Add(Me.cmdmovemean)
         Me.grpTransform.Controls.Add(Me.cmdCumMean)
         Me.grpTransform.Controls.Add(Me.cmdNtile)
@@ -675,11 +688,11 @@ Partial Class ucrCalculator
         Me.cmdDiff.Name = "cmdDiff"
         Me.cmdDiff.UseVisualStyleBackColor = True
         '
-        'cmdEcdf
+        'cmdCumdist
         '
-        resources.ApplyResources(Me.cmdEcdf, "cmdEcdf")
-        Me.cmdEcdf.Name = "cmdEcdf"
-        Me.cmdEcdf.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCumdist, "cmdCumdist")
+        Me.cmdCumdist.Name = "cmdCumdist"
+        Me.cmdCumdist.UseVisualStyleBackColor = True
         '
         'cmdmovemean
         '
@@ -2119,6 +2132,37 @@ Partial Class ucrCalculator
         Me.cmdCircMean.Name = "cmdCircMean"
         Me.cmdCircMean.UseVisualStyleBackColor = True
         '
+
+        'cmdMovmin
+        '
+        resources.ApplyResources(Me.cmdMovmin, "cmdMovmin")
+        Me.cmdMovmin.Name = "cmdMovmin"
+        Me.cmdMovmin.UseVisualStyleBackColor = True
+        '
+        'cmdNafill
+        '
+        resources.ApplyResources(Me.cmdNafill, "cmdNafill")
+        Me.cmdNafill.Name = "cmdNafill"
+        Me.cmdNafill.UseVisualStyleBackColor = True
+        '
+        'cmdNaest
+        '
+        resources.ApplyResources(Me.cmdNaest, "cmdNaest")
+        Me.cmdNaest.Name = "cmdNaest"
+        Me.cmdNaest.UseVisualStyleBackColor = True
+        '
+        'cmdNaapprox
+        '
+        resources.ApplyResources(Me.cmdNaapprox, "cmdNaapprox")
+        Me.cmdNaapprox.Name = "cmdNaapprox"
+        Me.cmdNaapprox.UseVisualStyleBackColor = True
+        '
+        'cmdNasplin
+        '
+        resources.ApplyResources(Me.cmdNasplin, "cmdNasplin")
+        Me.cmdNasplin.Name = "cmdNasplin"
+        Me.cmdNasplin.UseVisualStyleBackColor = True
+
         'grpFactor
         '
         Me.grpFactor.Controls.Add(Me.cmdShuffle)
@@ -2264,6 +2308,7 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.cmdAnon, "cmdAnon")
         Me.cmdAnon.Name = "cmdAnon"
         Me.cmdAnon.UseVisualStyleBackColor = True
+
         '
         'ucrInputCalOptions
         '
@@ -2484,7 +2529,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdMultiply As Button
     Friend WithEvents cmdpercentrank As Button
     Friend WithEvents cmdDiff As Button
-    Friend WithEvents cmdEcdf As Button
+    Friend WithEvents cmdCumdist As Button
     Friend WithEvents cmdmovemean As Button
     Friend WithEvents cmdCumMean As Button
     Friend WithEvents cmdNtile As Button
@@ -2609,6 +2654,13 @@ Partial Class ucrCalculator
     Friend WithEvents cmdCircRho As Button
     Friend WithEvents cmdCircQuantile As Button
     Friend WithEvents cmdCircular As Button
+
+    Friend WithEvents cmdMovmin As Button
+    Friend WithEvents cmdNasplin As Button
+    Friend WithEvents cmdNaapprox As Button
+    Friend WithEvents cmdNaest As Button
+    Friend WithEvents cmdNafill As Button
+
     Friend WithEvents grpFactor As GroupBox
     Friend WithEvents cmdShuffle As Button
     Friend WithEvents cmdShift As Button
@@ -2630,4 +2682,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdConcat As Button
     Friend WithEvents cmdFactor As Button
     Friend WithEvents cmdAnon As Button
+
 End Class
