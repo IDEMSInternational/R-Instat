@@ -2175,4 +2175,20 @@ Public Class ucrCalculator
 
         End If
     End Sub
+
+    Private Sub cmdPgamma_Click(sender As Object, e As EventArgs) Handles cmdPgamma.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pgamma(q = , shape = , rate = 1, scale = 1/rate, lower.tail = TRUE,log.p = FALSE))", 73)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pgamma()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdQgamma_Click(sender As Object, e As EventArgs) Handles cmdQgamma.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qgamma(p = , shape = , rate = 1, scale = 1/rate, lower.tail = TRUE, log.p = FALSE))", 73)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qgamma()", 1)
+        End If
+    End Sub
 End Class
