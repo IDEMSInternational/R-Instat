@@ -340,6 +340,7 @@ Partial Class ucrCalculator
         Me.cmdQbinom = New System.Windows.Forms.Button()
         Me.cmdQpois = New System.Windows.Forms.Button()
         Me.cmdQnbin = New System.Windows.Forms.Button()
+        Me.cmdLinkert7 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1953,6 +1954,7 @@ Partial Class ucrCalculator
         '
         'grpWakefield
         '
+        Me.grpWakefield.Controls.Add(Me.cmdLinkert7)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
         Me.grpWakefield.Controls.Add(Me.cmdValid)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
@@ -2440,6 +2442,12 @@ Partial Class ucrCalculator
         Me.cmdQnbin.Name = "cmdQnbin"
         Me.cmdQnbin.UseVisualStyleBackColor = True
         '
+        'cmdLinkert7
+        '
+        resources.ApplyResources(Me.cmdLinkert7, "cmdLinkert7")
+        Me.cmdLinkert7.Name = "cmdLinkert7"
+        Me.cmdLinkert7.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
@@ -2785,4 +2793,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdQbinom As Button
     Friend WithEvents cmdQbirth As Button
     Friend WithEvents cmdQbeta As Button
+    Friend WithEvents cmdLinkert7 As Button
 End Class
