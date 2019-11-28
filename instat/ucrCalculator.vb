@@ -141,6 +141,15 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdGamma, "gamma function. For example gamma(8) = fact(7) = 5040")
         ttCalculator.SetToolTip(cmdLgamma, " log gamma function. For example lgamma(800) = 4545")
         ttCalculator.SetToolTip(cmdDigamma, "digamma function. For example digamma(1) = -0.5772 (Euler's constant)")
+        ttCalculator.SetToolTip(cmdTrigamma, "trigamma function. For example trigamma(1) = 1.645 (pi*pi/6)")
+        ttCalculator.SetToolTip(cmdPbeta, "beta probabilities. For example pbeta(0.8,1,1) = 0.8 (Uniform); pbeta(0.8,10,10) = 0.9984")
+        ttCalculator.SetToolTip(cmdQbeta, " beta quantiles. For example qbeta(0.2,1,1) = 0.2 (Uniform); qbeta(0.95,10,10) = 0.6799")
+        ttCalculator.SetToolTip(cmdPgamma, "gamma probabilities. For example pgamma(2,1,1) = 0.8647; (Exponential) pgamma(2,10,10) = 0.995")
+        ttCalculator.SetToolTip(cmdQgamma, "gamma quantiles. For example qgamma(0.95,1,1) = 2.995; qgamma( 0.95,10,10) = 1.571")
+        ttCalculator.SetToolTip(cmdQchisq, "chi square quantiles. For example qchisq(0.95, 1) = 3.841; qchisq(0.95, 10) = 18.31")
+        ttCalculator.SetToolTip(cmdQt, "t quantiles. For example qt(0.05, 5) = -2.015; qt(0.05, 100) = -1.66")
+        ttCalculator.SetToolTip(cmdqF, "F quantiles. For example qf(0.95,1,10) = 4.965; qf(0.95, 50,50)= 1.599")
+
 
     End Sub
 
