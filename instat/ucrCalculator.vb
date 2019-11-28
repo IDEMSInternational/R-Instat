@@ -2231,4 +2231,20 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnbinom()", 1)
         End If
     End Sub
+
+    Private Sub cmdQbeta_Click(sender As Object, e As EventArgs) Handles cmdQbeta.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbeta(p = , shape1 = , shape2 = , ncp = 0, lower.tail = TRUE, log.p = FALSE))", 68)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbeta()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdQbirth_Click(sender As Object, e As EventArgs) Handles cmdQbirth.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbirthday(prob = 0.5, classes = 365, coincident = 2))", 37)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbirthday()", 1)
+        End If
+    End Sub
 End Class
