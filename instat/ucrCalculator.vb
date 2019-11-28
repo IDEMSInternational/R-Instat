@@ -2207,4 +2207,28 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbirthday()", 1)
         End If
     End Sub
+
+    Private Sub cmdPbinom_Click(sender As Object, e As EventArgs) Handles cmdPbinom.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbinom(q = , size = , prob = , lower.tail = TRUE, log.p = FALSE))", 55)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbinom()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPpois_Click(sender As Object, e As EventArgs) Handles cmdPpois.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ppois(q = , lambda = , lower.tail = TRUE, log.p = FALSE))", 48)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ppois()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPnbin_Click(sender As Object, e As EventArgs) Handles cmdPnbin.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnbinom(q = , size = , prob = , mu = , lower.tail = TRUE, log.p = FALSE))", 62)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnbinom()", 1)
+        End If
+    End Sub
 End Class
