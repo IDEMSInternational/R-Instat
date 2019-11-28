@@ -330,6 +330,11 @@ Partial Class ucrCalculator
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.cmdQgamma = New System.Windows.Forms.Button()
+        Me.cmdPbeta = New System.Windows.Forms.Button()
+        Me.cmd = New System.Windows.Forms.Button()
+        Me.cmdPbinom = New System.Windows.Forms.Button()
+        Me.cmdPpois = New System.Windows.Forms.Button()
+        Me.cmdPnbin = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1361,6 +1366,11 @@ Partial Class ucrCalculator
         '
         'grpProbabilty
         '
+        Me.grpProbabilty.Controls.Add(Me.cmdPnbin)
+        Me.grpProbabilty.Controls.Add(Me.cmdPpois)
+        Me.grpProbabilty.Controls.Add(Me.cmdPbinom)
+        Me.grpProbabilty.Controls.Add(Me.cmd)
+        Me.grpProbabilty.Controls.Add(Me.cmdPbeta)
         Me.grpProbabilty.Controls.Add(Me.cmdQgamma)
         Me.grpProbabilty.Controls.Add(Me.cmdPgamma)
         Me.grpProbabilty.Controls.Add(Me.cmdGamma)
@@ -2363,6 +2373,36 @@ Partial Class ucrCalculator
         Me.cmdQgamma.Name = "cmdQgamma"
         Me.cmdQgamma.UseVisualStyleBackColor = True
         '
+        'cmdPbeta
+        '
+        resources.ApplyResources(Me.cmdPbeta, "cmdPbeta")
+        Me.cmdPbeta.Name = "cmdPbeta"
+        Me.cmdPbeta.UseVisualStyleBackColor = True
+        '
+        'cmd
+        '
+        resources.ApplyResources(Me.cmd, "cmd")
+        Me.cmd.Name = "cmd"
+        Me.cmd.UseVisualStyleBackColor = True
+        '
+        'cmdPbinom
+        '
+        resources.ApplyResources(Me.cmdPbinom, "cmdPbinom")
+        Me.cmdPbinom.Name = "cmdPbinom"
+        Me.cmdPbinom.UseVisualStyleBackColor = True
+        '
+        'cmdPpois
+        '
+        resources.ApplyResources(Me.cmdPpois, "cmdPpois")
+        Me.cmdPpois.Name = "cmdPpois"
+        Me.cmdPpois.UseVisualStyleBackColor = True
+        '
+        'cmdPnbin
+        '
+        resources.ApplyResources(Me.cmdPnbin, "cmdPnbin")
+        Me.cmdPnbin.Name = "cmdPnbin"
+        Me.cmdPnbin.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
@@ -2695,4 +2735,9 @@ Partial Class ucrCalculator
     Friend WithEvents cmdAnon As Button
     Friend WithEvents cmdPgamma As Button
     Friend WithEvents cmdQgamma As Button
+    Friend WithEvents cmdPnbin As Button
+    Friend WithEvents cmdPpois As Button
+    Friend WithEvents cmdPbinom As Button
+    Friend WithEvents cmd As Button
+    Friend WithEvents cmdPbeta As Button
 End Class
