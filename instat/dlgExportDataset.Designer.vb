@@ -44,6 +44,7 @@ Partial Class dlgExportDataset
         Me.ucrInputExportFile = New instat.ucrInputTextBox()
         Me.ucrAvailableSheets = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblConfirmText = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cmdBrowse
@@ -77,10 +78,16 @@ Partial Class dlgExportDataset
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'lblConfirmText
+        '
+        resources.ApplyResources(Me.lblConfirmText, "lblConfirmText")
+        Me.lblConfirmText.Name = "lblConfirmText"
+        '
         'dlgExportDataset
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblConfirmText)
         Me.Controls.Add(Me.lblExport)
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.ucrInputExportFile)
@@ -92,6 +99,7 @@ Partial Class dlgExportDataset
         Me.Name = "dlgExportDataset"
         Me.ShowIcon = False
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -100,4 +108,5 @@ Partial Class dlgExportDataset
     Friend WithEvents lblExport As Label
     Friend WithEvents ucrAvailableSheets As ucrDataFrame
     Friend WithEvents ucrInputExportFile As ucrInputTextBox
+    Friend WithEvents lblConfirmText As Label
 End Class
