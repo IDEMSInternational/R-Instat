@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblSelectedVariable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
     <value>261, 45</value>
@@ -141,46 +145,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSelectedVariable.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 288</value>
-  </data>
-  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 52</value>
-  </data>
-  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
-    <value>ucrBase</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
-    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 345</value>
+  <data name="lblMaxSum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblMaxSum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 210</value>
+    <value>10, 238</value>
   </data>
   <data name="lblMaxSum.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 13</value>
   </data>
   <data name="lblMaxSum.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="lblMaxSum.Text" xml:space="preserve">
     <value>Maximum Factor Levels Shown:</value>
@@ -195,18 +172,136 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblMaxSum.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cmdSummaries.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cmdSummaries.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdSummaries.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 200</value>
+  </data>
+  <data name="cmdSummaries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 23</value>
+  </data>
+  <data name="cmdSummaries.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cmdSummaries.Text" xml:space="preserve">
+    <value>Choose Summaries...</value>
+  </data>
+  <data name="&gt;&gt;cmdSummaries.Name" xml:space="preserve">
+    <value>cmdSummaries</value>
+  </data>
+  <data name="&gt;&gt;cmdSummaries.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdSummaries.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdSummaries.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lblSummaries.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSummaries.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSummaries.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 205</value>
+  </data>
+  <data name="lblSummaries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 13</value>
+  </data>
+  <data name="lblSummaries.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblSummaries.Text" xml:space="preserve">
+    <value>Summaries:</value>
+  </data>
+  <data name="&gt;&gt;lblSummaries.Name" xml:space="preserve">
+    <value>lblSummaries</value>
+  </data>
+  <data name="&gt;&gt;lblSummaries.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSummaries.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSummaries.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rdoDefault.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoDefault.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoDefault.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 203</value>
+  </data>
+  <data name="rdoDefault.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 17</value>
+  </data>
+  <data name="rdoDefault.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="rdoDefault.Text" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="&gt;&gt;rdoDefault.Name" xml:space="preserve">
+    <value>rdoDefault</value>
+  </data>
+  <data name="&gt;&gt;rdoDefault.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDefault.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoDefault.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoCustomised.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoCustomised.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoCustomised.Location" type="System.Drawing.Point, System.Drawing">
+    <value>147, 203</value>
+  </data>
+  <data name="rdoCustomised.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 17</value>
+  </data>
+  <data name="rdoCustomised.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rdoCustomised.Text" xml:space="preserve">
+    <value>Customised</value>
+  </data>
+  <data name="&gt;&gt;rdoCustomised.Name" xml:space="preserve">
+    <value>rdoCustomised</value>
+  </data>
+  <data name="&gt;&gt;rdoCustomised.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCustomised.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoCustomised.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ucrNudMaxSum.Location" type="System.Drawing.Point, System.Drawing">
-
-    <value>200, 207</value>
-
+    <value>205, 235</value>
   </data>
   <data name="ucrNudMaxSum.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
   </data>
   <data name="ucrNudMaxSum.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrNudMaxSum.Name" xml:space="preserve">
     <value>ucrNudMaxSum</value>
@@ -218,58 +313,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudMaxSum.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrChkCustomise.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 163</value>
-  </data>
-  <data name="ucrChkCustomise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkCustomise.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCustomise.Name" xml:space="preserve">
-    <value>ucrChkCustomise</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCustomise.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCustomise.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCustomise.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrChkSaveResult.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 262</value>
-  </data>
-  <data name="ucrChkSaveResult.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 20</value>
-  </data>
-  <data name="ucrChkSaveResult.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSaveResult.Name" xml:space="preserve">
-    <value>ucrChkSaveResult</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSaveResult.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSaveResult.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSaveResult.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrChkOmitMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 235</value>
+    <value>14, 235</value>
   </data>
   <data name="ucrChkOmitMissing.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 20</value>
   </data>
   <data name="ucrChkOmitMissing.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrChkOmitMissing.Name" xml:space="preserve">
     <value>ucrChkOmitMissing</value>
@@ -281,12 +334,11 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkOmitMissing.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrSelectorOneVarSummarise.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSelectorOneVarSummarise.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
@@ -306,34 +358,58 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorOneVarSummarise.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
-  <data name="cmdSummaries.AutoSize" type="System.Boolean, mscorlib">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
-  <data name="cmdSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>305, 189</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>421, 327</value>
   </data>
-  <data name="cmdSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 23</value>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 273</value>
   </data>
-  <data name="cmdSummaries.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>410, 52</value>
   </data>
-  <data name="cmdSummaries.Text" xml:space="preserve">
-    <value>Summaries...</value>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
-  <data name="&gt;&gt;cmdSummaries.Name" xml:space="preserve">
-    <value>cmdSummaries</value>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
   </data>
-  <data name="&gt;&gt;cmdSummaries.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cmdSummaries.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cmdSummaries.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrPnlSummaries.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 192</value>
+  </data>
+  <data name="ucrPnlSummaries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>352, 37</value>
+  </data>
+  <data name="ucrPnlSummaries.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlSummaries.Name" xml:space="preserve">
+    <value>ucrPnlSummaries</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlSummaries.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlSummaries.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlSummaries.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -369,6 +445,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverOneVarSummarise.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
 </root>
