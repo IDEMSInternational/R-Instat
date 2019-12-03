@@ -304,19 +304,19 @@ Public Class dlgNewDataFrame
         If rdoCommand.Checked Then
             lstView.Columns.Add("Command", 450)  'add columns
 
-            lstView.Items.Add(New ListViewItem({"data.frame(row=1:100)"}))
+            lstView.Items.Add(New ListViewItem({"data.frame(row = 1:100)"}))
             lstView.Items.Item(0).ToolTipText = "Data frame with a single variable to build on."
 
             lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data = NA, nrow = 10, ncol = 2))"}))
             lstView.Items.Item(1).ToolTipText = "The same data frame as the default from the Empty option of this dialogue."
 
-            lstView.Items.Add(New ListViewItem({"data.frame(x=1:30, s=rep(""Reading"",30),r=seq(1, 6.8, length=30),t=seq(1,60,2))"}))
+            lstView.Items.Add(New ListViewItem({"data.frame(x = 1:30, s = rep(""Reading"",30), r = seq(1, 6.8, length=30), t = seq(1, 60, 2))"}))
             lstView.Items.Item(2).ToolTipText = "4 variables, showing use of seq and rep function"
 
-            lstView.Items.Add(New ListViewItem({"data.frame(l=1:31,d=seq(as.Date(""2013-1-1""),as.Date(""2013-1-31""),""day""))"}))
+            lstView.Items.Add(New ListViewItem({"data.frame(l = 1:31, d = seq(as.Date(""2013-1-1""), as.Date(""2013-1-31""), ""day""))"}))
             lstView.Items.Item(3).ToolTipText = "2 variables with dates. Or use Prepare > Column: Date > Generate Dates to add a date variable."
 
-            lstView.Items.Add(New ListViewItem({"data.frame(n=1:12,h=seq(as.POSIXct(""2010-1-1 3: 0:0""),by=""2 hours"",length=12))"}))
+            lstView.Items.Add(New ListViewItem({"data.frame(n = 1:12, h = seq(as.POSIXct(""2010-1-1 3: 0:0""), by = ""2 hours"",length = 12))"}))
             lstView.Items.Item(4).ToolTipText = "2 variables including generating a sequence of times"
 
             lstView.Items.Add(New ListViewItem({"data.frame(block = gl(4, 3), treat = c(""C"", ""A"", ""B"", ""B"", ""C"", ""A"", ""A"", ""B"", ""C"", ""A"", ""C"", ""B""), yield = c(74, 68,  50, 62, 68, 57, 70, 56, 83, 67, 67, 59))"}))
@@ -328,13 +328,13 @@ Public Class dlgNewDataFrame
             lstView.Items.Add(New ListViewItem({"data.frame(x = 1:30, y = rnorm(30, mean = 100, sd = 15), z = runif(30, min = 10, max = 30))"}))
             lstView.Items.Item(0).ToolTipText = "3 variables including both random normal and uniform data"
 
-            lstView.Items.Add(New ListViewItem({"data.frame(data = replicate(20,rbinom(n=25, p=0.4,size=1)))"}))
+            lstView.Items.Add(New ListViewItem({"data.frame(data = replicate(20, rbinom(n = 25, p = 0.4,size = 1)))"}))
             lstView.Items.Item(1).ToolTipText = "20 variables, each a random sample from a binomial distribution"
 
-            lstView.Items.Add(New ListViewItem({"data.frame(year = matrix(data=c(rbinom(7300,p=0.4,size=1)*rexp(7300,0.1)), nrow = 365, ncol = 20))"}))
-            lstView.Items.Item(2).ToolTipText = "20 years of rainfall-type data using binomial (p=0.4) and exponential (mean = 10) variables"
+            lstView.Items.Add(New ListViewItem({"data.frame(year = matrix(data = c(rbinom(7300, p = 0.4, size = 1) * rexp(7300, 0.1)), nrow = 365, ncol = 20))"}))
+            lstView.Items.Item(2).ToolTipText = "20 years of rainfall-type data using binomial (p = 0.4) and exponential (mean = 10) variables"
 
-            lstView.Items.Add(New ListViewItem({"data.frame(replicate(10,(sample(c(TRUE,FALSE),size=50,replace=TRUE,prob=c(0.3,0.7)))))"}))
+            lstView.Items.Add(New ListViewItem({"data.frame(replicate(10,(sample(c(TRUE,FALSE), size = 50,replace = TRUE,prob = c(0.3,0.7)))))"}))
             lstView.Items.Item(3).ToolTipText = "10 variables and 50 observations, sampling with replacement and probability 0.3 of TRUE"
 
             'wakefield commands
@@ -347,33 +347,33 @@ Public Class dlgNewDataFrame
             lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 200, data_theme = ""survey"")"}))
             lstView.Items.Item(6).ToolTipText = "ID plus 10 categorical variables each with 5 levels"
 
-            lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n=500, data_theme = ""survey2"") %>% r_na(prob=0.1)"}))
+            lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 500, data_theme = ""survey2"") %>% r_na(prob = 0.1)"}))
             lstView.Items.Item(7).ToolTipText = "ID plus 10 categorical variables (as factors) and 10% of missing values"
 
-            lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 50,id, r_dummy(color),r_series(likert,3),grade,grade,grade)"}))
+            lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 50,id, r_dummy(color), r_series(likert, 3), grade, grade, grade)"}))
             lstView.Items.Item(8).ToolTipText = "ID, plus 12 variables. 6 are indicator (dummy) variables, 3 Likert and 3 grades"
 
         ElseIf rdoConstruct.Checked Then
             lstView.Columns.Add("Column Name", 150)  'add columns
             lstView.Columns.Add("Expression", 300)  'add columns
 
-            lstView.Items.Add(New ListViewItem({"no", "c(0,0.5,1,2:28)"}))
+            lstView.Items.Add(New ListViewItem({"no", "c(0, 0.5, 1, 2:28)"}))
             lstView.Items.Item(0).ToolTipText = "c( ) produces a vector. Here it produces a variable (column) of 30 values between 0 and 28 seq produces a regular sequence. Here from 30 down to 1 in steps of -1"
 
-            lstView.Items.Add(New ListViewItem({"seq", "seq(30,1,-1)"}))
+            lstView.Items.Add(New ListViewItem({"seq", "seq(30, 1, -1)"}))
             lstView.Items.Item(1).ToolTipText = "seq produces a regular sequence. Here from 30 down to 1 in steps of -1"
 
-            lstView.Items.Add(New ListViewItem({"place", "rep(""Kisumu"",30)"}))
+            lstView.Items.Add(New ListViewItem({"place", "rep(""Kisumu"", 30)"}))
             lstView.Items.Item(2).ToolTipText = "rep repeats one or more values as shown here. Try also rep(1:5, each =6) and rep((1:5,length = 30)"
 
-            lstView.Items.Add(New ListViewItem({"place2", "c(rep(""Mombasa"",10),rep(""Nairobi"",20))"}))
+            lstView.Items.Add(New ListViewItem({"place2", "c(rep(""Mombasa"", 10), rep(""Nairobi"", 20))"}))
             lstView.Items.Item(3).ToolTipText = "c( ) and rep or seq can be combined as shown here. Try also c(rep(1:5,each=2),seq(6,100,length=20)) regular sequence of dates. Alternatively use Prepare > Column: Date > Generate Dates"
 
-            lstView.Items.Add(New ListViewItem({"days", "seq(as.Date(""2020/4/1""),as.Date(""2020/4/30""),""days"")"}))
+            lstView.Items.Add(New ListViewItem({"days", "seq(as.Date(""2020/4/1""), as.Date(""2020/4/30""), ""days"")"}))
             lstView.Items.Item(4).ToolTipText = "regular sequence of dates. Alternatively use Prepare > Column: Date > Generate Dates"
 
-            lstView.Items.Add(New ListViewItem({"occasions", "seq(as.Date(""1970/1/1""),by=""4 months"",length=30)"}))
-
+            lstView.Items.Add(New ListViewItem({"occasions", "seq(as.Date(""1970/1/1""), by = ""4 months"", length = 30)"}))
+            lstView.Items.Item(4).ToolTipText = "Regular sequence of monthly data"
         End If
 
         'set respective handlers
