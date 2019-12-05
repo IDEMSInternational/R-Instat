@@ -200,12 +200,14 @@ Public Class dlgBarAndPieChart
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverFirst.SetRCode(clsBarAesFunction, bReset)
         ucrReceiverFirst.AddAdditionalCodeParameterPair(clsPieAesFunction, New RParameter("fill", 0), iAdditionalPairNo:=1)
+        ucrReceiverY.SetRCode(clsBarAesFunction, bReset)
         ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
         ucrSaveBar.SetRCode(clsBaseOperator, bReset)
         ucrBarChartSelector.SetRCode(clsRggplotFunction, bReset)
         ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         ucrInputBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
+        ucrInputYValue.SetRCode(clsRgeomBarFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
