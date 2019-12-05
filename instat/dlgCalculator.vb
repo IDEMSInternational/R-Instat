@@ -141,12 +141,16 @@ Public Class dlgCalculator
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.49, Me.Height)
             Case "Strings (Character Columns)"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.41, Me.Height)
+            Case "Factor"
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.42, Me.Height)
             Case "Probability"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.59, Me.Height)
             Case "Dates"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.3, Me.Height)
             Case "Transform"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.35, Me.Height)
+            Case "Circular"
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.39, Me.Height)
             Case "Wakefield"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.7, Me.Height)
             Case Else

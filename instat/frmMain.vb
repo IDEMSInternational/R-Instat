@@ -2019,7 +2019,9 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbLastGraph_Click(sender As Object, e As EventArgs) Handles mnuTbLastGraph.Click
+        Me.Enabled = False
         clsRLink.ViewLastGraph()
+        Me.Enabled = True
     End Sub
 
     Private Sub mnuClimaticCMSAFExporttoCMSAFRToolbox_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFExporttoCMSAFRToolbox.Click
@@ -2122,4 +2124,15 @@ Public Class frmMain
         dlgCumulativeDistribution.ShowDialog()
     End Sub
 
+    Private Sub mnuPrepareColumnDefineCircular_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDefineCircular.Click
+        dlgCircular.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnDefineConvertColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDefineConvertColumns.Click
+        dlgConvertColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuProcurementDescribeCategoricalTreemap_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeCategoricalTreemap.Click
+        dlgTreemap.ShowDialog()
+    End Sub
 End Class

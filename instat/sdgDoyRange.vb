@@ -128,7 +128,7 @@ Public Class sdgDoyRange
                         End If
                     End If
                     rdoToVariable.Checked = True
-                    ucrReceiverTo.Add(clsFromParam.strArgumentValue, strDataFrameName, False)
+                    ucrReceiverTo.Add(clsToParam.strArgumentValue, strDataFrameName, False)
                 End If
             ElseIf clsToParam.bIsOperator AndAlso clsToParam.clsArgumentCodeStructure IsNot Nothing Then
                 clsFixedDiffOp = TryCast(clsToParam.clsArgumentCodeStructure, ROperator)
@@ -162,7 +162,13 @@ Public Class sdgDoyRange
         ucrPnlTo.AddToLinkedControls(ucrNudToDiff, {rdoLength}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverFrom.Selector = ucrSelectorDoy
+        'Strict because we only want numeric/integer, not Dates etc.
+        ucrReceiverFrom.SetIncludedDataTypes({"numeric"}, bStrict:=True)
+        ucrReceiverFrom.strSelectorHeading = "Numerics"
+
         ucrReceiverTo.Selector = ucrSelectorDoy
+        ucrReceiverTo.SetIncludedDataTypes({"numeric"}, bStrict:=True)
+        ucrReceiverTo.strSelectorHeading = "Numerics"
 
         ucrDoyFrom.SetParameterIsNumber()
         ucrDoyTo.SetParameterIsNumber()
