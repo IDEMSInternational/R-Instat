@@ -592,7 +592,7 @@ Public Class RLink
         End If
     End Sub
 
-    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing) As SymbolicExpression
+    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional ByRef strError As String = "") As SymbolicExpression
         Dim expTemp As SymbolicExpression
         Dim strCommand As String
 
@@ -600,7 +600,7 @@ Public Class RLink
         'TODO Bug here if strScript is multiple lines. Wrong value will be returned
         strCommand = strVariableName & "<-" & strScript
         If clsEngine IsNot Nothing Then
-            Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+            Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride, strError:=strError)
             expTemp = GetSymbol(strVariableName, bSilent:=True)
             'Very important to remove the variable after getting it othewise could be returning wrong variable later if a command gives an error
             Evaluate("rm(" & strVariableName & ")", bSilent:=bSilent, bSeparateThread:=bSeparateThread)
@@ -608,11 +608,11 @@ Public Class RLink
         Return expTemp
     End Function
 
-    Public Function RunInternalScriptGetOutput(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing) As CharacterVector
+    Public Function RunInternalScriptGetOutput(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional ByRef strError As String = "") As CharacterVector
         Dim chrTemp As CharacterVector
         Dim expTemp As SymbolicExpression
 
-        expTemp = RunInternalScriptGetValue("capture.output(" & strScript & ")", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+        expTemp = RunInternalScriptGetValue("capture.output(" & strScript & ")", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride, strError:=strError)
         Try
             chrTemp = expTemp.AsCharacter()
         Catch ex As Exception
@@ -641,7 +641,7 @@ Public Class RLink
         End If
     End Function
 
-    Private Function Evaluate(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing) As Boolean
+    Private Function Evaluate(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional ByRef strError As String = "") As Boolean
         Dim thrRScript As Threading.Thread
         Dim thrDelay As Threading.Thread
         Dim thrWaitDisplay As Threading.Thread
@@ -649,6 +649,7 @@ Public Class RLink
         Dim evtWaitHandleDelayDone As New System.Threading.AutoResetEvent(False)
         Dim bReturn As Boolean = True
         Dim i As Integer = 1
+        Dim strTempError As String = ""
         Dim strTempFile As String
         Dim bErrorMessageOpen As Boolean = False
         Dim bCurrentShowWaiting As Boolean
@@ -716,6 +717,7 @@ Public Class RLink
                                                                   MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                                                                   bErrorMessageOpen = False
                                                               End If
+                                                              strTempError = ex.Message
                                                               bReturn = False
                                                           End Try
                                                       End Sub)
@@ -758,12 +760,14 @@ Public Class RLink
                 If Not bSilent Then
                     MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                 End If
+                strTempError = ex.Message
                 bReturn = False
             End Try
         Else
             bReturn = False
         End If
         bRCodeRunning = False
+        strError = strTempError
         Return bReturn
     End Function
 

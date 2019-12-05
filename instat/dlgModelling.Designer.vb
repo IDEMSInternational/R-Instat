@@ -79,6 +79,7 @@ Partial Class dlgModelling
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrSelectorModelling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdDetails = New System.Windows.Forms.Button()
         Me.grpStats.SuspendLayout()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpextRemes.SuspendLayout()
@@ -464,10 +465,17 @@ Partial Class dlgModelling
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'cmdDetails
+        '
+        resources.ApplyResources(Me.cmdDetails, "cmdDetails")
+        Me.cmdDetails.Name = "cmdDetails"
+        Me.cmdDetails.UseVisualStyleBackColor = True
+        '
         'dlgModelling
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdDetails)
         Me.Controls.Add(Me.grplme4)
         Me.Controls.Add(Me.grpMASS)
         Me.Controls.Add(Me.grpextRemes)
@@ -557,4 +565,5 @@ Partial Class dlgModelling
     Friend WithEvents cmdlqs As Button
     Friend WithEvents cmdmca As Button
     Friend WithEvents cmdqda As Button
+    Friend WithEvents cmdDetails As Button
 End Class

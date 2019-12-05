@@ -36,6 +36,8 @@ Public Class dlgModelling
 
     Private bResetDisplayOptions = False
 
+    Private strError As String = ""
+
     Private Sub dlgModelling_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -51,6 +53,7 @@ Public Class dlgModelling
     Private Sub InitialiseDialog()
         bUpdating = True
         cmdPredict.Visible = False
+        cmdDetails.Visible = False
 
         ucrReceiverForTestColumn.Selector = ucrSelectorModelling
 
@@ -435,6 +438,11 @@ Public Class dlgModelling
         End If
     End Sub
 
+    Private Sub cmdDetails_Click(sender As Object, e As EventArgs) Handles cmdDetails.Click
+        sdgErrorDetails.setErrorText(strError)
+        sdgErrorDetails.ShowDialog()
+    End Sub
+
     Private Sub cmdlqs_Click(sender As Object, e As EventArgs) Handles cmdlqs.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
@@ -536,6 +544,7 @@ Public Class dlgModelling
         Dim strAttach As String
         Dim strDetach As String
         Dim strTempScript As String = ""
+        Dim strErrorDetail As String = ""
         Dim strVecOutput As CharacterVector
         Dim clsCommandString As RCodeStructure
 
@@ -550,7 +559,7 @@ Public Class dlgModelling
                 clsCommandString = ucrBase.clsRsyntax.clsBaseCommandString.Clone()
                 clsCommandString.RemoveAssignTo()
                 strOutPut = clsCommandString.ToScript(strTempScript, ucrBase.clsRsyntax.strCommandString)
-                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript & strOutPut, bSilent:=True)
+                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript & strOutPut, bSilent:=True, strError:=strErrorDetail)
                 If strVecOutput IsNot Nothing Then
                     If strVecOutput.Length > 1 Then
                         ucrInputTryMessage.SetName("Model runs without error")
@@ -559,11 +568,15 @@ Public Class dlgModelling
                 Else
                     ucrInputTryMessage.SetName("Command produced an error or no output to display.")
                     ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
+                    cmdDetails.Visible = True
+                    strError = strErrorDetail
+
                 End If
             End If
         Catch ex As Exception
             ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
             ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
+            cmdDetails.Visible = True
         Finally
             strTempScript = ""
             strDetach = clsDetach.Clone().ToScript(strTempScript)
@@ -577,6 +590,7 @@ Public Class dlgModelling
         cmdTry.Enabled = Not ucrReceiverForTestColumn.IsEmpty()
         ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
         TestOkEnabled()
+        cmdDetails.Visible = False
     End Sub
 
     Private Sub GraphAssignTo()
