@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 
 Public Class dlgBarAndPieChart
@@ -68,7 +69,7 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddRadioButton(rdoBarChart)
         ucrPnlOptions.AddRadioButton(rdoPieChart)
         ucrPnlOptions.AddParameterPresentCondition(rdoPieChart, "coord_polar")
-        ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "geom_bar")
+        ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coord_polar", False)
 
 
         ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates}, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -76,11 +77,11 @@ Public Class dlgBarAndPieChart
         ucrInputBarChartPosition.SetLinkedDisplayControl(lblPosition)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverByFactor}, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
-        ucrPnlOptions.AddToLinkedControls(ucrReceiverY, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverY, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverY.SetLinkedDisplayControl(lblYvariable)
+
         ucrPnlOptions.AddToLinkedControls({ucrInputYValue}, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputYValue.SetLinkedDisplayControl(lblYValue)
-
 
         ucrBarChartSelector.SetParameter(New RParameter("data", 0))
         ucrBarChartSelector.SetParameterIsrfunction()
@@ -178,7 +179,7 @@ Public Class dlgBarAndPieChart
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
         clsRgeomBarFunction.AddParameter("position", Chr(34) & "dodge" & Chr(34), iPosition:=0)
-        clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=0)
+        clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
 
 
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
@@ -321,6 +322,21 @@ Public Class dlgBarAndPieChart
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
         SetDialogOptions()
+    End Sub
+
+    Private Sub setColumnChartOption()
+        If ucrInputYValue.GetValue = "Column" Then
+            ucrReceiverY.Enabled = True
+        Else
+            ucrReceiverY.Enabled = False
+            ucrReceiverY.Clear()
+            clsRgeomBarFunction.RemoveParameterByName("y")
+
+        End If
+    End Sub
+
+    Private Sub ucrInputYValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputYValue.ControlValueChanged
+        setColumnChartOption()
     End Sub
 
     Private Sub CoreControls_ContentsChanged() Handles ucrReceiverFirst.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
