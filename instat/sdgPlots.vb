@@ -54,7 +54,13 @@ Public Class sdgPlots
     Private clsYElemetText As New RFunction
     Private clsYElemetTitle As New RFunction
 
+    'Polar Coordinates
+    Private clsCoordPolarFunc As New RFunction
+    Private clsCoordPolarStartOperator As New ROperator
+
     'See bLayersDefaultIsGolobal below.
+
+    Private dctTheta As New Dictionary(Of String, String)
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs)
         autoTranslate(Me)
@@ -72,7 +78,7 @@ Public Class sdgPlots
         Dim clsCoordEqualParam As New RParameter
 
         ucrBaseSubdialog.iHelpTopicID = 136
-        'facets tab 
+        'facets tab  
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
@@ -223,7 +229,6 @@ Public Class sdgPlots
         ucrChkHorizontalPlot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkHorizontalPlot.AddParameterPresentCondition(True, "coord_flip", True)
 
-
         ucrChkSameScale.SetText("Same Scale (coord-equal)")
         clsCoordEqualFunc.SetPackageName("ggplot2")
         clsCoordEqualFunc.SetRCommand("coord_equal")
@@ -254,6 +259,32 @@ Public Class sdgPlots
         ucrInputLegendPosition.SetItems(dctLegendPosition)
         ucrChkLegendPosition.AddParameterPresentCondition(True, "legend.position")
         ucrChkLegendPosition.AddParameterPresentCondition(False, "legend.position", False)
+
+        'Polar Coordinates
+        ucrChkUsePolarCoordinates.SetText("Polar Coordinates")
+        ucrChkUsePolarCoordinates.AddParameterPresentCondition(True, "coord_polar")
+        ucrChkUsePolarCoordinates.AddParameterPresentCondition(False, "coord_polar", False)
+        ucrChkUsePolarCoordinates.AddToLinkedControls({ucrChkDirectionAnticlockwise, ucrInputStartingAngle}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkUsePolarCoordinates.AddToLinkedControls({ucrInputPolarCoordinates}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkDirectionAnticlockwise.SetText("Anticlockwise Direction")
+        ucrChkDirectionAnticlockwise.SetParameter(New RParameter("direction"), bNewChangeParameterValue:=True, strNewValueIfChecked:="-1", strNewValueIfUnchecked:="1")
+        ucrChkDirectionAnticlockwise.SetRDefault("1")
+
+        ucrInputStartingAngle.SetParameter(New RParameter("0", iNewPosition:=0))
+        ucrInputStartingAngle.SetValidationTypeAsNumeric()
+        ucrInputStartingAngle.AddQuotesIfUnrecognised = False
+        ucrInputStartingAngle.SetLinkedDisplayControl(New List(Of Control)({lblPi, lblStartingAngle}))
+
+
+        dctTheta.Add("x", Chr(34) & "x" & Chr(34))
+        dctTheta.Add("y", Chr(34) & "y" & Chr(34))
+        ucrInputPolarCoordinates.SetParameter(New RParameter("theta", iNewPosition:=1))
+        ucrInputPolarCoordinates.SetLinkedDisplayControl(lblPolarCoordinate)
+        ucrInputPolarCoordinates.SetItems(dctTheta)
+        ucrInputPolarCoordinates.SetDropDownStyleAsNonEditable()
+        ucrInputPolarCoordinates.SetRDefault(Chr(34) & "x" & Chr(34))
+
 
         ucrChkXaxisAngle.SetText("X axis Tick Labels Angle")
         ucrChkXaxisAngle.AddToLinkedControls(ucrNudXAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10, bNewLinkedChangeParameterValue:=True)
@@ -294,7 +325,7 @@ Public Class sdgPlots
         ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(False, "size", False)
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction, clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector, bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing)
         Dim clsTempParam As RParameter
 
         bRCodeSet = False
@@ -316,8 +347,12 @@ Public Class sdgPlots
         clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
         clsFacetFunction = clsNewFacetFunction
         clsThemeFunction = clsNewThemeFunction
+        clsCoordPolarFunc = clsNewCoordPolarFunction
+        clsCoordPolarStartOperator = clsNewCoordPolarStartOperator
+        If Not IsNothing(clsCoordPolarStartOperator) Then
+            clsCoordPolarFunc.AddParameter("start", clsROperatorParameter:=clsCoordPolarStartOperator, iPosition:=1)
+        End If
         dctThemeFunctions = dctNewThemeFunctions
-
         dctThemeFunctions.TryGetValue("axis.text.x", clsXElementText)
         dctThemeFunctions.TryGetValue("axis.title.x", clsXElementTitle)
         dctThemeFunctions.TryGetValue("axis.text.y", clsYElemetText)
@@ -374,8 +409,12 @@ Public Class sdgPlots
         'coordinates tab
         ucrChkHorizontalPlot.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkSameScale.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkUsePolarCoordinates.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkDirectionAnticlockwise.SetRCode(clsCoordPolarFunc, bReset:=True, bCloneIfNeeded:=True)
+        ucrInputStartingAngle.SetRCode(clsCoordPolarStartOperator, bReset, bCloneIfNeeded:=True)
+        ucrInputPolarCoordinates.SetRCode(clsCoordPolarFunc, bReset:=True, bCloneIfNeeded:=True)
 
-        ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, bReset:=bReset)
+        ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, strMainDialogGeomParameterNames:=strMainDialogGeomParameterNames, bReset:=bReset)
         bRCodeSet = True
         AddRemoveLabs()
         AddRemoveFacets()
@@ -609,13 +648,13 @@ Public Class sdgPlots
             If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) & Chr(34) Then
                 'Run R code to determine type
                 'Temp default to continuous
-                Return "Continuous"
+                Return "continuous"
             Else
                 'When aes not present discrete scale function works
-                Return "Discrete"
+                Return "discrete"
             End If
         Else
-            Return "Discrete"
+            Return "discrete"
         End If
     End Function
 
@@ -727,4 +766,12 @@ Public Class sdgPlots
         sdgThemesSub.ShowDialog()
         SetRcodeForCommonThemesControls(False)
     End Sub
+    Private Sub ucrChkUsePolarCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUsePolarCoordinates.ControlValueChanged
+        If ucrChkUsePolarCoordinates.Checked Then
+            clsBaseOperator.AddParameter("coord_polar", clsRFunctionParameter:=clsCoordPolarFunc, iPosition:=20)
+        Else
+            clsBaseOperator.RemoveParameterByName("coord_polar")
+        End If
+    End Sub
+
 End Class
