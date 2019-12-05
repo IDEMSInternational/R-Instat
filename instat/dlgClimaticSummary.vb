@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgClimaticSummary
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+    Private bRCodeSet As Boolean = True
     Private iReceiverMaxY As Integer
     Private iReceiverLabelMaxY As Integer
     Private bResetSubdialog As Boolean = False
@@ -25,6 +26,7 @@ Public Class dlgClimaticSummary
     Private clsFromAndToConditionOperator, clsFromConditionOperator, clsToConditionOperator As New ROperator
 
     Private Sub dlgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        bRCodeSet = False
         If bFirstload Then
             iReceiverMaxY = ucrReceiverWithinYear.Location.Y
             iReceiverLabelMaxY = lblWithinYear.Location.Y
@@ -35,9 +37,11 @@ Public Class dlgClimaticSummary
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        bRCodeSet = True
         bReset = False
         autoTranslate(Me)
         WithinYearLabelReceiverLocation()
+        SetFactors()
         TestOKEnabled()
     End Sub
 
@@ -63,7 +67,6 @@ Public Class dlgClimaticSummary
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnualWithinYear, "year", True)
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "within_variable", True)
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "year", False)
-
 
         'receivers:
         ' by receivers
@@ -147,8 +150,6 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub SetDefaults()
-        'Temporary fix for reseting the ucrPnlAnnualWithin to rdoAnnual
-        rdoAnnual.Checked = True
         clsDefaultFunction = New RFunction
         clsSummariesList = New RFunction
         clsDefaultFactors = New RFunction
@@ -258,8 +259,11 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        bRCodeSet = False
         SetDefaults()
         SetRCodeForControls(True)
+        bRCodeSet = True
+        SetFactors()
         TestOKEnabled()
     End Sub
 
@@ -311,7 +315,10 @@ Public Class dlgClimaticSummary
 
     Private Sub ucrPnlAnnualWithin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualWithin.ControlValueChanged
         WithinYearLabelReceiverLocation()
-        UpdateRCode()
+        SetFactors()
+        If (rdoWithinYear.Checked AndAlso (ucrSelectorVariable.CurrentReceiver Is ucrReceiverYear)) OrElse (rdoAnnual.Checked AndAlso (ucrSelectorVariable.CurrentReceiver Is ucrReceiverWithinYear)) Then
+            ucrReceiverElement.SetMeAsReceiver()
+        End If
     End Sub
 
     Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
@@ -338,20 +345,19 @@ Public Class dlgClimaticSummary
         End If
     End Sub
 
-    Private Sub UpdateRCode()
-        If rdoAnnual.Checked Then
-            clsDefaultFactors.RemoveParameterByName("within_variable")
-            clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
-        ElseIf rdoAnnualWithinYear.Checked Then
-            If Not ucrReceiverWithinYear.IsEmpty Then
+    Private Sub SetFactors()
+        If bRCodeSet Then
+            If rdoAnnual.Checked Then
+                clsDefaultFactors.RemoveParameterByName("within_variable")
+                clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
+            ElseIf rdoAnnualWithinYear.Checked Then
+                clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
+                clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
+            ElseIf rdoWithinYear.Checked Then
+                clsDefaultFactors.RemoveParameterByName("year")
                 clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
             End If
-            If Not ucrReceiverYear.IsEmpty Then
-                clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
-            End If
-        ElseIf rdoWithinYear.Checked Then
-                clsDefaultFactors.RemoveParameterByName("year")
-            clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
+
         End If
     End Sub
     Private Sub ucrChkAddDateColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddDateColumn.ControlValueChanged
@@ -362,6 +368,6 @@ Public Class dlgClimaticSummary
         End If
     End Sub
     Private Sub Receivers_controlValueChanged(ucrChangedControl As Control) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverElement.ControlValueChanged, ucrReceiverDOY.ControlValueChanged, ucrReceiverDate.ControlValueChanged
-        UpdateRCode()
+        SetFactors()
     End Sub
 End Class
