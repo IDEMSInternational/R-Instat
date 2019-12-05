@@ -50,8 +50,10 @@ Public Class dlgBarAndPieChart
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+
         bReset = False
         autoTranslate(Me)
+        changeLabel() 'TODO. this has been put here temporarily because there is a problem with the translation of the label
         TestOkEnabled()
     End Sub
 
@@ -77,7 +79,7 @@ Public Class dlgBarAndPieChart
         ucrInputBarChartPosition.SetLinkedDisplayControl(lblPosition)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverByFactor}, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
-        ucrPnlOptions.AddToLinkedControls(ucrReceiverY, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverY, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverY.SetLinkedDisplayControl(lblYvariable)
 
         ucrPnlOptions.AddToLinkedControls({ucrInputYValue}, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -213,10 +215,10 @@ Public Class dlgBarAndPieChart
 
     Private Sub TestOkEnabled()
         If rdoBarChart.Checked Then
-            If ucrReceiverFirst.IsEmpty OrElse Not ucrSaveBar.IsComplete Then
-                ucrBase.OKEnabled(False)
-            Else
+            If Not ucrReceiverFirst.IsEmpty AndAlso Not (ucrReceiverY.IsEmpty AndAlso ucrReceiverY.Visible) AndAlso ucrSaveBar.IsComplete Then
                 ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
             End If
         ElseIf rdoPieChart.Checked Then
             If ucrReceiverFirst.IsEmpty OrElse Not ucrSaveBar.IsComplete Then
@@ -320,23 +322,31 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
+    Private Sub changeLabel()
+        lblVariable.Text = If(rdoBarChart.Checked, "X Variable", "Variable")
+    End Sub
+
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
         SetDialogOptions()
+        changeLabel()
+        setColumnChartOption()
+        TestOkEnabled()
+
     End Sub
 
     Private Sub setColumnChartOption()
-        If ucrInputYValue.GetValue = "Column" Then
-            ucrReceiverY.Enabled = True
+        If rdoBarChart.Checked AndAlso ucrInputYValue.GetValue = "Column" Then
+            ucrReceiverY.SetVisible(True)
+            ucrReceiverY.AddOrRemoveParameter(True)
         Else
-            ucrReceiverY.Enabled = False
-            ucrReceiverY.Clear()
-            clsRgeomBarFunction.RemoveParameterByName("y")
-
+            ucrReceiverY.SetVisible(False)
+            ucrReceiverY.AddOrRemoveParameter(False)
         End If
     End Sub
 
     Private Sub ucrInputYValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputYValue.ControlValueChanged
         setColumnChartOption()
+        TestOkEnabled()
     End Sub
 
     Private Sub CoreControls_ContentsChanged() Handles ucrReceiverFirst.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
