@@ -59,6 +59,7 @@ Public Class dlgBarAndPieChart
         Dim clsCoordFlipParam As New RParameter
         Dim clsRCoordPolarFunction As New RFunction
         Dim dctPositionPairs As New Dictionary(Of String, String)
+        Dim dctStatOptions As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -125,6 +126,13 @@ Public Class dlgBarAndPieChart
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
         ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
+        ucrInputYValue.SetParameter(New RParameter("stat", 0))
+        dctStatOptions.Add("Count", Chr(34) & "count" & Chr(34))
+        dctStatOptions.Add("Column", Chr(34) & "identity" & Chr(34))
+        ucrInputYValue.SetItems(dctStatOptions)
+        ucrInputYValue.SetDropDownStyleAsNonEditable()
+        ucrInputYValue.SetRDefault(Chr(34) & "count" & Chr(34))
+
         ucrInputBarChartPosition.SetParameter(New RParameter("position", 0))
         dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
         dctPositionPairs.Add("Dodge", Chr(34) & "dodge" & Chr(34))
@@ -156,7 +164,6 @@ Public Class dlgBarAndPieChart
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
 
-
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
@@ -171,6 +178,7 @@ Public Class dlgBarAndPieChart
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
         clsRgeomBarFunction.AddParameter("position", Chr(34) & "dodge" & Chr(34), iPosition:=0)
+        clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=0)
 
 
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
