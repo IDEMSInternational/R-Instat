@@ -40,7 +40,6 @@ Public Class dlgBarAndPieChart
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
 
-
     Private Sub cmdOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -53,7 +52,7 @@ Public Class dlgBarAndPieChart
 
         bReset = False
         autoTranslate(Me)
-        changeLabel() 'TODO. this has been put here temporarily because there is a problem with the translation of the label
+        ChangeLabel() 'TODO. this has been put here temporarily because there is a problem with the translation of the label
         TestOkEnabled()
     End Sub
 
@@ -322,16 +321,15 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
-    Private Sub changeLabel()
+    Private Sub ChangeLabel()
         lblVariable.Text = If(rdoBarChart.Checked, "X Variable", "Variable")
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
         SetDialogOptions()
-        changeLabel()
+        ChangeLabel()
         setColumnChartOption()
         TestOkEnabled()
-
     End Sub
 
     Private Sub setColumnChartOption()
