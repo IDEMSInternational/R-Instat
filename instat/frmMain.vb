@@ -2131,4 +2131,8 @@ Public Class frmMain
     Private Sub mnuPrepareColumnDefineConvertColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDefineConvertColumns.Click
         dlgConvertColumns.ShowDialog()
     End Sub
+
+    Private Sub mnuProcurementDescribeCategoricalTreemap_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeCategoricalTreemap.Click
+        dlgTreemap.ShowDialog()
+    End Sub
 End Class
