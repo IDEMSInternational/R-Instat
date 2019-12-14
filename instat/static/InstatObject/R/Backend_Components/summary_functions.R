@@ -287,6 +287,7 @@ DataBook$set("public", "summary", function(data_name, columns_to_summarise, summ
                                })
       names(calc_apply)[length(factors_disp) + 1] <- col_new
       calc_apply$summary <- summary_names[j]
+      names(calc_apply) <- make.names(names(calc_apply), unique = TRUE)
       if(j <= count_summaries_max) results_temp_count[[length(results_temp_count) + 1]] <- calc_apply
       else results_temp_other[[length(results_temp_other) + 1]] <- calc_apply
     }
@@ -298,7 +299,7 @@ DataBook$set("public", "summary", function(data_name, columns_to_summarise, summ
     if("Date" %in% col_data_type[i]) {
       results_temp_other[[col_new]] <- dplyr::if_else(summaries_other[match(results_temp_other$summary, summary_other_names)] %in% date_summaries,
                                                       as.character(as.Date(as.numeric(results_temp_other[[col_new]]), origin = "1970/1/1")),
-                                                      paste(results_temp_other[[col_new]], "days"))
+                                                      dplyr::if_else(stringr::str_trim(results_temp_other[[col_new]]) == "NA", NA_character_, paste(results_temp_other[[col_new]], "days")))
     }
     results_temp <- dplyr::bind_rows(results_temp_count, results_temp_other)
     if(i == 1) results <- results_temp
