@@ -240,63 +240,79 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
 DataBook$set("public", "summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = FALSE, drop = FALSE, return_output = FALSE, summary_name = NA, add_cols = c(), filter_names = c(), ...) {
   calculated_from = list()
   calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
-  #TODO Change this to store sub_calculations for each column
-  alltypes_collection <- c(count_non_missing_label, count_missing_label, count_label, mode_label)
-  numeric_collection <- c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label, mean_label, sd_label, range_label, median_label, sum_label, var_label, lower_quart_label, upper_quart_label, skewness_label, summary_skewness_mc_label, kurtosis_label, summary_coef_var_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label, first_label, last_label, nth_label, n_distinct_label, proportion_label, count_calc_label)
-  factor_collection <-  c(count_non_missing_label, count_missing_label, count_label, mode_label) #maximum and minimum labels should be added when we distinguish ordered factors
-  ordered_factor_collection <-  c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label)
-  i = 1
+  summaries <- unique(summaries)
+  summaries <- summaries[order(match(summaries, all_summaries))]
+  summaries_count <- summaries[startsWith(summaries, "summary_count")]
+  summaries_other <- setdiff(summaries, summaries_count)
+  summaries <- c(summaries_count, summaries_other)
+  count_summaries_max <- length(summaries_count)
+  summaries_max <- length(summaries)
+  
+  summary_names <- ifelse(startsWith(summaries, "summary_"), substr(summaries, 9, nchar(summaries)), summaries)
+  summary_names <- gsub("_", "-", summary_names)
+  summary_names <- make.unique(summary_names)
+  summary_count_names <- summary_names[1:count_summaries_max]
+  summary_other_names <- summary_names[(count_summaries_max + 1):summaries_max]
+  
+  col_data_type <- self$get_variables_metadata(data_name = data_name, column = columns_to_summarise, property = data_type_label)
+
+  factors_disp <- dplyr::if_else(length(factors) == 0, ".id", factors)
+  factors_levels <- lapply(factors, function(x) {
+    fac_col <- self$get_columns_from_data(data_name, x)
+    if(is.factor(fac_col)) return(levels(fac_col))
+    else return(sort(unique(fac_col)))
+    })
+  factors_levels <- expand.grid(factors_levels)
+  names(factors_levels) <- factors
+  
+  results <- list()
+  i <- 1
   for(col_new in columns_to_summarise) {
-    col_data_type = self$get_variables_metadata(data_name = data_name, column = col_new, property = data_type_label)
-    if(col_data_type == "numeric" || col_data_type == "integer") {
-      column_summaries = intersect(summaries, numeric_collection)
+    results_temp_count <- list()
+    results_temp_other <- list()
+    for(j in seq_along(summaries)) {
+      calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = col_new, summaries = summaries[j], factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, ... = ...),  filters = filter_names, calculated_from = calculated_from)
+      calc_apply <- tryCatch(self$apply_calculation(calc), 
+                             error = function(c) {
+                               if(length(factors) == 0) {
+                                 x <- data.frame(NA, NA)
+                                 names(x) <- c(".id", summary_names[j])
+                                 return(x)
+                               }
+                               else {
+                                 x <- factors_levels
+                                 x[[summary_names[j]]] <- NA
+                                 return(x)
+                               }
+                               })
+      names(calc_apply)[length(factors_disp) + 1] <- col_new
+      calc_apply$summary <- summary_names[j]
+      names(calc_apply) <- make.names(names(calc_apply), unique = TRUE)
+      if(j <= count_summaries_max) results_temp_count[[length(results_temp_count) + 1]] <- calc_apply
+      else results_temp_other[[length(results_temp_other) + 1]] <- calc_apply
     }
-    else if(col_data_type == "factor") {
-      column_summaries = intersect(summaries, factor_collection)
+    results_temp_count <- dplyr::bind_rows(results_temp_count)
+    results_temp_other <- dplyr::bind_rows(results_temp_other)
+    results_temp_count <- format(results_temp_count, scientific = FALSE)
+    results_temp_other <- format(results_temp_other, scientific = FALSE)
+    # Convert summaries which have been coerced to numeric but should be dates
+    if("Date" %in% col_data_type[i]) {
+      results_temp_other[[col_new]] <- dplyr::if_else(summaries_other[match(results_temp_other$summary, summary_other_names)] %in% date_summaries,
+                                                      as.character(as.Date(as.numeric(results_temp_other[[col_new]]), origin = "1970/1/1")),
+                                                      dplyr::if_else(stringr::str_trim(results_temp_other[[col_new]]) == "NA", NA_character_, paste(results_temp_other[[col_new]], "days")))
     }
-    else if(col_data_type == paste0(c("ordered","factor"), collapse = ",")) {
-      column_summaries = intersect(summaries, ordered_factor_collection)
-    }
-    else if(col_data_type == "character") {
-      column_summaries = intersect(summaries, alltypes_collection)
-    }
-    else if(col_data_type == "logical") {
-      #To be defined
-    }
-    else if(col_data_type == "Date") {
-      #To be defined
-    }
-    if(length(column_summaries) == 0) {
-      results <- data.frame(matrix(ncol = length(summaries) + 1))
-      names(results) <- c(".id", summaries)
-      column_summaries <- summaries
-    }
-    else {
-      calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = col_new, summaries = column_summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, ... = ...),  filters = filter_names, calculated_from = calculated_from)
-      results <- self$apply_calculation(calc)
-    }
-    if(!is.null(results)) {
-      results <- as.data.frame(t(results[,-1]))
-      #row_names(results) <- get_summary_calculation_names(calc, column_summaries, col_new, calc_filters)
-      names(results) <- col_new
-      #use summaries as row names for now. This needs to change in the long run
-      row.names(results) <- column_summaries
-      if(i == 1) {
-        calc_columns <- results
-      }
-      else {
-        calc_columns <- merge(calc_columns, results, by=0, all=TRUE, sort = FALSE)#Sort should be user defined
-        #we need to clarify which filters are being used
-        rownames(calc_columns)=calc_columns$Row.names
-        calc_columns<-calc_columns[,-1]
-      }
-      i = i + 1
-    }
-    else {
-      calc_columns <- NULL
-    }
-	}
-       return(calc_columns)
+    results_temp <- dplyr::bind_rows(results_temp_count, results_temp_other)
+    if(i == 1) results <- results_temp
+    else results <- dplyr::full_join(results, results_temp, by = c(factors_disp, "summary"))
+    i <- i + 1
+  }
+  results <- results %>% select(c(factors_disp, "summary"), everything())
+  if(length(factors) == 0) {
+    results$.id <- NULL
+    results$summary <- NULL
+    row.names(results) <- summary_names
+  }
+  return(results)
 }
 )
 
@@ -433,7 +449,32 @@ circular_range_label="summary_circular_range"
 
 
 # list of all summary function names
-all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, var_label, median_label, range_label, min_label, max_label, mean_label, trimmed_mean_label, quartile_label, lower_quart_label, upper_quart_label, skewness_label, kurtosis_label, summary_coef_var_label, summary_skewness_mc_label, summary_outlier_limit_label, summary_median_absolute_deviation_label, summary_Qn_label, summary_Sn_label, cor_label, cov_label,first_label, last_label, nth_label, n_distinct_label, proportion_label, count_calc_label,standard_error_mean_label, circular_mean_label, circular_median_label, circular_medianHL_label, circular_min_label, circular_max_label, circular_Q1_label, circular_Q3_label, circular_quantile_label, circular_sd_label, circular_var_label, circular_ang_dev_label, circular_ang_var_label, circular_rho_label, circular_range_label)
+# the order of this list determines the order summaries appears in certain functions
+all_summaries <- c(count_label, count_non_missing_label, count_missing_label, 
+                   min_label, lower_quart_label, quartile_label, median_label, 
+                   summary_median_absolute_deviation_label, summary_coef_var_label, 
+                   summary_Qn_label, summary_Sn_label,
+                   mode_label, mean_label, 
+                   trimmed_mean_label, upper_quart_label, max_label, sum_label, 
+                   sd_label, var_label, range_label, standard_error_mean_label,
+                   skewness_label, summary_skewness_mc_label, kurtosis_label, 
+                   summary_outlier_limit_label, 
+                   cor_label, cov_label, first_label, last_label, nth_label, n_distinct_label, 
+                   proportion_label, count_calc_label, 
+                   circular_min_label, circular_Q1_label, circular_quantile_label, 
+                   circular_median_label, circular_medianHL_label, circular_mean_label, 
+                   circular_Q3_label, circular_max_label, 
+                   circular_sd_label, circular_var_label, circular_range_label,
+                   circular_ang_dev_label, circular_ang_var_label, circular_rho_label)
+
+# which of the summaries should return a Date value when x is a Date?
+date_summaries <- c(min_label, lower_quart_label, quartile_label, median_label, 
+                    mode_label, mean_label, trimmed_mean_label, upper_quart_label, 
+                    max_label, first_label, last_label, nth_label, 
+                    circular_min_label, circular_Q1_label, circular_quantile_label, 
+                    circular_median_label, circular_medianHL_label, circular_mean_label, 
+                    circular_Q3_label, circular_max_label)
+  
 summary_mode <- function(x,...) {
   ux <- unique(x)
   out <- ux[which.max(tabulate(match(x, ux)))]
@@ -644,28 +685,32 @@ summary_median <- function(x, na.rm = FALSE, na_type = "", ...) {
 }
 
 # quantile function
-summary_quantile <- function(x, na.rm = FALSE, probs, na_type = "", ...) {
+summary_quantile <- function(x, na.rm = FALSE, probs, type = 7, na_type = "", ...) {
   if(!na.rm && anyNA(x)) return(NA)
   # This prevents multiple values being returned
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    return(quantile(x, na.rm = na.rm, probs = probs)[[1]])
+  else {
+    if(lubridate::is.Date(x) && type %in% c(2, 4:9)) {
+      message("type = ", type, " not supported for Dates. Deafulting to type = 1")
+      type <- 1
+    }
+    return(quantile(x, na.rm = na.rm, probs = probs, type = type)[[1]])
   }
 }
 
 # lower quartile function
-lower_quartile <- function(x, na.rm = FALSE, na_type = "", ...) {
+lower_quartile <- function(x, na.rm = FALSE, type = 7, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(summary_quantile(x, na.rm = na.rm, probs = 0.25))
+    return(summary_quantile(x, na.rm = na.rm, probs = 0.25, type = type))
   }
 }
 
 # upper quartile function
-upper_quartile <- function(x, na.rm = FALSE, na_type = "", ...) {
+upper_quartile <- function(x, na.rm = FALSE, type = 7, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(summary_quantile(x, na.rm = na.rm, probs = 0.75))
+    return(summary_quantile(x, na.rm = na.rm, probs = 0.75, type = type))
   }
 }
 
