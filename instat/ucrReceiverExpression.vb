@@ -85,6 +85,8 @@ Public Class ucrReceiverExpression
         iCurrentPosition = iPosition + strText.Length - iSetCursorBackCharacters
         cboExpression.SelectionStart = iCurrentPosition
         cboExpression.SelectedText = ""
+        'Adding focus to the function in the Receiver Expreession
+        cboExpression.Focus()
     End Sub
 
     Public Sub Backspace()

@@ -85,9 +85,14 @@ Partial Class ucrCalculator
         Me.cmdDoy = New System.Windows.Forms.Button()
         Me.cmdLeap = New System.Windows.Forms.Button()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
+        Me.cmdNasplin = New System.Windows.Forms.Button()
+        Me.cmdNaapprox = New System.Windows.Forms.Button()
+        Me.cmdNaest = New System.Windows.Forms.Button()
+        Me.cmdNafill = New System.Windows.Forms.Button()
+        Me.cmdMovmin = New System.Windows.Forms.Button()
         Me.cmdRowRank = New System.Windows.Forms.Button()
         Me.cmdDiff = New System.Windows.Forms.Button()
-        Me.cmdEcdf = New System.Windows.Forms.Button()
+        Me.cmdCumdist = New System.Windows.Forms.Button()
         Me.cmdmovemean = New System.Windows.Forms.Button()
         Me.cmdCumMean = New System.Windows.Forms.Button()
         Me.cmdNtile = New System.Windows.Forms.Button()
@@ -182,6 +187,7 @@ Partial Class ucrCalculator
         Me.cmdNotEqualsTo = New System.Windows.Forms.Button()
         Me.cmdEquivalent = New System.Windows.Forms.Button()
         Me.grpProbabilty = New System.Windows.Forms.GroupBox()
+        Me.cmdPgamma = New System.Windows.Forms.Button()
         Me.cmdGamma = New System.Windows.Forms.Button()
         Me.cmdLbeta = New System.Windows.Forms.Button()
         Me.cmdqF = New System.Windows.Forms.Button()
@@ -297,6 +303,39 @@ Partial Class ucrCalculator
         Me.cmdMedianHL = New System.Windows.Forms.Button()
         Me.cmdCircMedian = New System.Windows.Forms.Button()
         Me.cmdCircMean = New System.Windows.Forms.Button()
+        Me.grpFactor = New System.Windows.Forms.GroupBox()
+        Me.cmdShuffle = New System.Windows.Forms.Button()
+        Me.cmdShift = New System.Windows.Forms.Button()
+        Me.cmdReverse = New System.Windows.Forms.Button()
+        Me.cmdReorder = New System.Windows.Forms.Button()
+        Me.cmdRelevel = New System.Windows.Forms.Button()
+        Me.cmdRecode = New System.Windows.Forms.Button()
+        Me.cmdOther = New System.Windows.Forms.Button()
+        Me.cmdFmatch = New System.Windows.Forms.Button()
+        Me.cmdLump = New System.Windows.Forms.Button()
+        Me.cmdInseq = New System.Windows.Forms.Button()
+        Me.cmdInfreq = New System.Windows.Forms.Button()
+        Me.cmdInorder = New System.Windows.Forms.Button()
+        Me.cmdAdd_na = New System.Windows.Forms.Button()
+        Me.cmdExpand = New System.Windows.Forms.Button()
+        Me.cmdDrop = New System.Windows.Forms.Button()
+        Me.cmdCross = New System.Windows.Forms.Button()
+        Me.cmdCollapse = New System.Windows.Forms.Button()
+        Me.cmdConcat = New System.Windows.Forms.Button()
+        Me.cmdFactor = New System.Windows.Forms.Button()
+        Me.cmdAnon = New System.Windows.Forms.Button()
+        Me.cmdQgamma = New System.Windows.Forms.Button()
+        Me.cmdPbeta = New System.Windows.Forms.Button()
+        Me.cmdPbirth = New System.Windows.Forms.Button()
+        Me.cmdPbinom = New System.Windows.Forms.Button()
+        Me.cmdPpois = New System.Windows.Forms.Button()
+        Me.cmdPnbin = New System.Windows.Forms.Button()
+        Me.cmdQbeta = New System.Windows.Forms.Button()
+        Me.cmdQbirth = New System.Windows.Forms.Button()
+        Me.cmdQbinom = New System.Windows.Forms.Button()
+        Me.cmdQpois = New System.Windows.Forms.Button()
+        Me.cmdQnbin = New System.Windows.Forms.Button()
+        Me.cmdLinkert7 = New System.Windows.Forms.Button()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
@@ -312,6 +351,7 @@ Partial Class ucrCalculator
         Me.grpMaths.SuspendLayout()
         Me.grpWakefield.SuspendLayout()
         Me.grpCircular.SuspendLayout()
+        Me.grpFactor.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -618,9 +658,14 @@ Partial Class ucrCalculator
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.cmdNasplin)
+        Me.grpTransform.Controls.Add(Me.cmdNaapprox)
+        Me.grpTransform.Controls.Add(Me.cmdNaest)
+        Me.grpTransform.Controls.Add(Me.cmdNafill)
+        Me.grpTransform.Controls.Add(Me.cmdMovmin)
         Me.grpTransform.Controls.Add(Me.cmdRowRank)
         Me.grpTransform.Controls.Add(Me.cmdDiff)
-        Me.grpTransform.Controls.Add(Me.cmdEcdf)
+        Me.grpTransform.Controls.Add(Me.cmdCumdist)
         Me.grpTransform.Controls.Add(Me.cmdmovemean)
         Me.grpTransform.Controls.Add(Me.cmdCumMean)
         Me.grpTransform.Controls.Add(Me.cmdNtile)
@@ -641,6 +686,36 @@ Partial Class ucrCalculator
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.TabStop = False
         '
+        'cmdNasplin
+        '
+        resources.ApplyResources(Me.cmdNasplin, "cmdNasplin")
+        Me.cmdNasplin.Name = "cmdNasplin"
+        Me.cmdNasplin.UseVisualStyleBackColor = True
+        '
+        'cmdNaapprox
+        '
+        resources.ApplyResources(Me.cmdNaapprox, "cmdNaapprox")
+        Me.cmdNaapprox.Name = "cmdNaapprox"
+        Me.cmdNaapprox.UseVisualStyleBackColor = True
+        '
+        'cmdNaest
+        '
+        resources.ApplyResources(Me.cmdNaest, "cmdNaest")
+        Me.cmdNaest.Name = "cmdNaest"
+        Me.cmdNaest.UseVisualStyleBackColor = True
+        '
+        'cmdNafill
+        '
+        resources.ApplyResources(Me.cmdNafill, "cmdNafill")
+        Me.cmdNafill.Name = "cmdNafill"
+        Me.cmdNafill.UseVisualStyleBackColor = True
+        '
+        'cmdMovmin
+        '
+        resources.ApplyResources(Me.cmdMovmin, "cmdMovmin")
+        Me.cmdMovmin.Name = "cmdMovmin"
+        Me.cmdMovmin.UseVisualStyleBackColor = True
+        '
         'cmdRowRank
         '
         resources.ApplyResources(Me.cmdRowRank, "cmdRowRank")
@@ -653,11 +728,11 @@ Partial Class ucrCalculator
         Me.cmdDiff.Name = "cmdDiff"
         Me.cmdDiff.UseVisualStyleBackColor = True
         '
-        'cmdEcdf
+        'cmdCumdist
         '
-        resources.ApplyResources(Me.cmdEcdf, "cmdEcdf")
-        Me.cmdEcdf.Name = "cmdEcdf"
-        Me.cmdEcdf.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCumdist, "cmdCumdist")
+        Me.cmdCumdist.Name = "cmdCumdist"
+        Me.cmdCumdist.UseVisualStyleBackColor = True
         '
         'cmdmovemean
         '
@@ -1297,6 +1372,18 @@ Partial Class ucrCalculator
         '
         'grpProbabilty
         '
+        Me.grpProbabilty.Controls.Add(Me.cmdQnbin)
+        Me.grpProbabilty.Controls.Add(Me.cmdQpois)
+        Me.grpProbabilty.Controls.Add(Me.cmdQbinom)
+        Me.grpProbabilty.Controls.Add(Me.cmdQbirth)
+        Me.grpProbabilty.Controls.Add(Me.cmdQbeta)
+        Me.grpProbabilty.Controls.Add(Me.cmdPnbin)
+        Me.grpProbabilty.Controls.Add(Me.cmdPpois)
+        Me.grpProbabilty.Controls.Add(Me.cmdPbinom)
+        Me.grpProbabilty.Controls.Add(Me.cmdPbirth)
+        Me.grpProbabilty.Controls.Add(Me.cmdPbeta)
+        Me.grpProbabilty.Controls.Add(Me.cmdQgamma)
+        Me.grpProbabilty.Controls.Add(Me.cmdPgamma)
         Me.grpProbabilty.Controls.Add(Me.cmdGamma)
         Me.grpProbabilty.Controls.Add(Me.cmdLbeta)
         Me.grpProbabilty.Controls.Add(Me.cmdqF)
@@ -1318,6 +1405,12 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpProbabilty, "grpProbabilty")
         Me.grpProbabilty.Name = "grpProbabilty"
         Me.grpProbabilty.TabStop = False
+        '
+        'cmdPgamma
+        '
+        resources.ApplyResources(Me.cmdPgamma, "cmdPgamma")
+        Me.cmdPgamma.Name = "cmdPgamma"
+        Me.cmdPgamma.UseVisualStyleBackColor = True
         '
         'cmdGamma
         '
@@ -1861,6 +1954,7 @@ Partial Class ucrCalculator
         '
         'grpWakefield
         '
+        Me.grpWakefield.Controls.Add(Me.cmdLinkert7)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
         Me.grpWakefield.Controls.Add(Me.cmdValid)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
@@ -2097,6 +2191,224 @@ Partial Class ucrCalculator
         Me.cmdCircMean.Name = "cmdCircMean"
         Me.cmdCircMean.UseVisualStyleBackColor = True
         '
+        'grpFactor
+        '
+        Me.grpFactor.Controls.Add(Me.cmdShuffle)
+        Me.grpFactor.Controls.Add(Me.cmdShift)
+        Me.grpFactor.Controls.Add(Me.cmdReverse)
+        Me.grpFactor.Controls.Add(Me.cmdReorder)
+        Me.grpFactor.Controls.Add(Me.cmdRelevel)
+        Me.grpFactor.Controls.Add(Me.cmdRecode)
+        Me.grpFactor.Controls.Add(Me.cmdOther)
+        Me.grpFactor.Controls.Add(Me.cmdFmatch)
+        Me.grpFactor.Controls.Add(Me.cmdLump)
+        Me.grpFactor.Controls.Add(Me.cmdInseq)
+        Me.grpFactor.Controls.Add(Me.cmdInfreq)
+        Me.grpFactor.Controls.Add(Me.cmdInorder)
+        Me.grpFactor.Controls.Add(Me.cmdAdd_na)
+        Me.grpFactor.Controls.Add(Me.cmdExpand)
+        Me.grpFactor.Controls.Add(Me.cmdDrop)
+        Me.grpFactor.Controls.Add(Me.cmdCross)
+        Me.grpFactor.Controls.Add(Me.cmdCollapse)
+        Me.grpFactor.Controls.Add(Me.cmdConcat)
+        Me.grpFactor.Controls.Add(Me.cmdFactor)
+        Me.grpFactor.Controls.Add(Me.cmdAnon)
+        resources.ApplyResources(Me.grpFactor, "grpFactor")
+        Me.grpFactor.Name = "grpFactor"
+        Me.grpFactor.TabStop = False
+        '
+        'cmdShuffle
+        '
+        resources.ApplyResources(Me.cmdShuffle, "cmdShuffle")
+        Me.cmdShuffle.Name = "cmdShuffle"
+        Me.cmdShuffle.UseVisualStyleBackColor = True
+        '
+        'cmdShift
+        '
+        resources.ApplyResources(Me.cmdShift, "cmdShift")
+        Me.cmdShift.Name = "cmdShift"
+        Me.cmdShift.UseVisualStyleBackColor = True
+        '
+        'cmdReverse
+        '
+        resources.ApplyResources(Me.cmdReverse, "cmdReverse")
+        Me.cmdReverse.Name = "cmdReverse"
+        Me.cmdReverse.UseVisualStyleBackColor = True
+        '
+        'cmdReorder
+        '
+        resources.ApplyResources(Me.cmdReorder, "cmdReorder")
+        Me.cmdReorder.Name = "cmdReorder"
+        Me.cmdReorder.UseVisualStyleBackColor = True
+        '
+        'cmdRelevel
+        '
+        resources.ApplyResources(Me.cmdRelevel, "cmdRelevel")
+        Me.cmdRelevel.Name = "cmdRelevel"
+        Me.cmdRelevel.UseVisualStyleBackColor = True
+        '
+        'cmdRecode
+        '
+        resources.ApplyResources(Me.cmdRecode, "cmdRecode")
+        Me.cmdRecode.Name = "cmdRecode"
+        Me.cmdRecode.UseVisualStyleBackColor = True
+        '
+        'cmdOther
+        '
+        resources.ApplyResources(Me.cmdOther, "cmdOther")
+        Me.cmdOther.Name = "cmdOther"
+        Me.cmdOther.UseVisualStyleBackColor = True
+        '
+        'cmdFmatch
+        '
+        resources.ApplyResources(Me.cmdFmatch, "cmdFmatch")
+        Me.cmdFmatch.Name = "cmdFmatch"
+        Me.cmdFmatch.UseVisualStyleBackColor = True
+        '
+        'cmdLump
+        '
+        resources.ApplyResources(Me.cmdLump, "cmdLump")
+        Me.cmdLump.Name = "cmdLump"
+        Me.cmdLump.UseVisualStyleBackColor = True
+        '
+        'cmdInseq
+        '
+        resources.ApplyResources(Me.cmdInseq, "cmdInseq")
+        Me.cmdInseq.Name = "cmdInseq"
+        Me.cmdInseq.UseVisualStyleBackColor = True
+        '
+        'cmdInfreq
+        '
+        resources.ApplyResources(Me.cmdInfreq, "cmdInfreq")
+        Me.cmdInfreq.Name = "cmdInfreq"
+        Me.cmdInfreq.UseVisualStyleBackColor = True
+        '
+        'cmdInorder
+        '
+        resources.ApplyResources(Me.cmdInorder, "cmdInorder")
+        Me.cmdInorder.Name = "cmdInorder"
+        Me.cmdInorder.UseVisualStyleBackColor = True
+        '
+        'cmdAdd_na
+        '
+        resources.ApplyResources(Me.cmdAdd_na, "cmdAdd_na")
+        Me.cmdAdd_na.Name = "cmdAdd_na"
+        Me.cmdAdd_na.UseVisualStyleBackColor = True
+        '
+        'cmdExpand
+        '
+        resources.ApplyResources(Me.cmdExpand, "cmdExpand")
+        Me.cmdExpand.Name = "cmdExpand"
+        Me.cmdExpand.UseVisualStyleBackColor = True
+        '
+        'cmdDrop
+        '
+        resources.ApplyResources(Me.cmdDrop, "cmdDrop")
+        Me.cmdDrop.Name = "cmdDrop"
+        Me.cmdDrop.UseVisualStyleBackColor = True
+        '
+        'cmdCross
+        '
+        resources.ApplyResources(Me.cmdCross, "cmdCross")
+        Me.cmdCross.Name = "cmdCross"
+        Me.cmdCross.UseVisualStyleBackColor = True
+        '
+        'cmdCollapse
+        '
+        resources.ApplyResources(Me.cmdCollapse, "cmdCollapse")
+        Me.cmdCollapse.Name = "cmdCollapse"
+        Me.cmdCollapse.UseVisualStyleBackColor = True
+        '
+        'cmdConcat
+        '
+        resources.ApplyResources(Me.cmdConcat, "cmdConcat")
+        Me.cmdConcat.Name = "cmdConcat"
+        Me.cmdConcat.UseVisualStyleBackColor = True
+        '
+        'cmdFactor
+        '
+        resources.ApplyResources(Me.cmdFactor, "cmdFactor")
+        Me.cmdFactor.Name = "cmdFactor"
+        Me.cmdFactor.UseVisualStyleBackColor = True
+        '
+        'cmdAnon
+        '
+        resources.ApplyResources(Me.cmdAnon, "cmdAnon")
+        Me.cmdAnon.Name = "cmdAnon"
+        Me.cmdAnon.UseVisualStyleBackColor = True
+        '
+        'cmdQgamma
+        '
+        resources.ApplyResources(Me.cmdQgamma, "cmdQgamma")
+        Me.cmdQgamma.Name = "cmdQgamma"
+        Me.cmdQgamma.UseVisualStyleBackColor = True
+        '
+        'cmdPbeta
+        '
+        resources.ApplyResources(Me.cmdPbeta, "cmdPbeta")
+        Me.cmdPbeta.Name = "cmdPbeta"
+        Me.cmdPbeta.UseVisualStyleBackColor = True
+        '
+        'cmdPbirth
+        '
+        resources.ApplyResources(Me.cmdPbirth, "cmdPbirth")
+        Me.cmdPbirth.Name = "cmdPbirth"
+        Me.cmdPbirth.UseVisualStyleBackColor = True
+        '
+        'cmdPbinom
+        '
+        resources.ApplyResources(Me.cmdPbinom, "cmdPbinom")
+        Me.cmdPbinom.Name = "cmdPbinom"
+        Me.cmdPbinom.UseVisualStyleBackColor = True
+        '
+        'cmdPpois
+        '
+        resources.ApplyResources(Me.cmdPpois, "cmdPpois")
+        Me.cmdPpois.Name = "cmdPpois"
+        Me.cmdPpois.UseVisualStyleBackColor = True
+        '
+        'cmdPnbin
+        '
+        resources.ApplyResources(Me.cmdPnbin, "cmdPnbin")
+        Me.cmdPnbin.Name = "cmdPnbin"
+        Me.cmdPnbin.UseVisualStyleBackColor = True
+        '
+        'cmdQbeta
+        '
+        resources.ApplyResources(Me.cmdQbeta, "cmdQbeta")
+        Me.cmdQbeta.Name = "cmdQbeta"
+        Me.cmdQbeta.UseVisualStyleBackColor = True
+        '
+        'cmdQbirth
+        '
+        resources.ApplyResources(Me.cmdQbirth, "cmdQbirth")
+        Me.cmdQbirth.Name = "cmdQbirth"
+        Me.cmdQbirth.UseVisualStyleBackColor = True
+        '
+        'cmdQbinom
+        '
+        resources.ApplyResources(Me.cmdQbinom, "cmdQbinom")
+        Me.cmdQbinom.Name = "cmdQbinom"
+        Me.cmdQbinom.UseVisualStyleBackColor = True
+        '
+        'cmdQpois
+        '
+        resources.ApplyResources(Me.cmdQpois, "cmdQpois")
+        Me.cmdQpois.Name = "cmdQpois"
+        Me.cmdQpois.UseVisualStyleBackColor = True
+        '
+        'cmdQnbin
+        '
+        resources.ApplyResources(Me.cmdQnbin, "cmdQnbin")
+        Me.cmdQnbin.Name = "cmdQnbin"
+        Me.cmdQnbin.UseVisualStyleBackColor = True
+        '
+        'cmdLinkert7
+        '
+        resources.ApplyResources(Me.cmdLinkert7, "cmdLinkert7")
+        Me.cmdLinkert7.Name = "cmdLinkert7"
+        Me.cmdLinkert7.UseVisualStyleBackColor = True
+        '
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
@@ -2140,6 +2452,7 @@ Partial Class ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpLogical)
@@ -2171,6 +2484,7 @@ Partial Class ucrCalculator
         Me.grpMaths.ResumeLayout(False)
         Me.grpWakefield.ResumeLayout(False)
         Me.grpCircular.ResumeLayout(False)
+        Me.grpFactor.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2314,7 +2628,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdMultiply As Button
     Friend WithEvents cmdpercentrank As Button
     Friend WithEvents cmdDiff As Button
-    Friend WithEvents cmdEcdf As Button
+    Friend WithEvents cmdCumdist As Button
     Friend WithEvents cmdmovemean As Button
     Friend WithEvents cmdCumMean As Button
     Friend WithEvents cmdNtile As Button
@@ -2439,4 +2753,45 @@ Partial Class ucrCalculator
     Friend WithEvents cmdCircRho As Button
     Friend WithEvents cmdCircQuantile As Button
     Friend WithEvents cmdCircular As Button
+
+    Friend WithEvents cmdMovmin As Button
+    Friend WithEvents cmdNasplin As Button
+    Friend WithEvents cmdNaapprox As Button
+    Friend WithEvents cmdNaest As Button
+    Friend WithEvents cmdNafill As Button
+
+    Friend WithEvents grpFactor As GroupBox
+    Friend WithEvents cmdShuffle As Button
+    Friend WithEvents cmdShift As Button
+    Friend WithEvents cmdReverse As Button
+    Friend WithEvents cmdReorder As Button
+    Friend WithEvents cmdRelevel As Button
+    Friend WithEvents cmdRecode As Button
+    Friend WithEvents cmdOther As Button
+    Friend WithEvents cmdFmatch As Button
+    Friend WithEvents cmdLump As Button
+    Friend WithEvents cmdInseq As Button
+    Friend WithEvents cmdInfreq As Button
+    Friend WithEvents cmdInorder As Button
+    Friend WithEvents cmdAdd_na As Button
+    Friend WithEvents cmdExpand As Button
+    Friend WithEvents cmdDrop As Button
+    Friend WithEvents cmdCross As Button
+    Friend WithEvents cmdCollapse As Button
+    Friend WithEvents cmdConcat As Button
+    Friend WithEvents cmdFactor As Button
+    Friend WithEvents cmdAnon As Button
+    Friend WithEvents cmdPgamma As Button
+    Friend WithEvents cmdQgamma As Button
+    Friend WithEvents cmdPnbin As Button
+    Friend WithEvents cmdPpois As Button
+    Friend WithEvents cmdPbinom As Button
+    Friend WithEvents cmdPbirth As Button
+    Friend WithEvents cmdPbeta As Button
+    Friend WithEvents cmdQnbin As Button
+    Friend WithEvents cmdQpois As Button
+    Friend WithEvents cmdQbinom As Button
+    Friend WithEvents cmdQbirth As Button
+    Friend WithEvents cmdQbeta As Button
+    Friend WithEvents cmdLinkert7 As Button
 End Class
