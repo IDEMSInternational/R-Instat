@@ -99,8 +99,8 @@ Public Class dlgDescribeTwoVarGraph
         ucrSelectorTwoVarGraph.SetParameterIsrfunction()
 
         ucrReceiverFirstVars.Selector = ucrSelectorTwoVarGraph
-        ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
         ucrReceiverFirstVars.SetMultipleOnlyStatus(True)
+        ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
 
         ucrReceiverSecondVar.SetParameter(New RParameter("fill", 0))
         ucrReceiverSecondVar.Selector = ucrSelectorTwoVarGraph
