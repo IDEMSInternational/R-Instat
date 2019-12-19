@@ -134,8 +134,8 @@ Public Class dlgDescribeTwoVarGraph
 
         ucrChkFreeScaleYAxis.SetText("Free Scale Y Axis")
         ucrChkFreeScaleYAxis.SetParameter(New RParameter("scales", iNewPosition:=3), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=False)
+        ucrChkFreeScaleYAxis.AddParameterPresentCondition(True, "scales")
         ucrChkFreeScaleYAxis.AddParameterValuesCondition(True, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_y" & Chr(34)})
-        ucrChkFreeScaleYAxis.AddParameterValuesCondition(False, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_y" & Chr(34)}, bNewIsPositive:=False)
 
         dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
         dctPositionPairs.Add("Dodge", Chr(34) & "dodge" & Chr(34))
@@ -644,24 +644,33 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub SetFreeYAxis()
         Dim clsScaleParam As RParameter
+        Dim strXName As String
+        Dim strYName As String
 
+        If IsCoordFlip() Then
+            strXName = "y"
+            strYName = "x"
+        Else
+            strXName = "x"
+            strYName = "y"
+        End If
         If bRCodeSet Then
             If ucrChkFreeScaleYAxis.Checked Then
                 If clsRFacet.ContainsParameter("scales") Then
                     clsScaleParam = clsRFacet.GetParameter("scales")
-                    If clsScaleParam.strArgumentValue = Chr(34) & "free_x" & Chr(34) Then
+                    If clsScaleParam.strArgumentValue = Chr(34) & "free_" & strXName & Chr(34) OrElse clsScaleParam.strArgumentValue = Chr(34) & "free" & Chr(34) Then
                         clsScaleParam.strArgumentValue = Chr(34) & "free" & Chr(34)
                     Else
-                        clsScaleParam.strArgumentValue = Chr(34) & "free_y" & Chr(34)
+                        clsScaleParam.strArgumentValue = Chr(34) & "free_" & strYName & Chr(34)
                     End If
                 Else
-                    clsRFacet.AddParameter("scales", Chr(34) & "free_y" & Chr(34), iPosition:=3)
+                    clsRFacet.AddParameter("scales", Chr(34) & "free_" & strYName & Chr(34), iPosition:=3)
                 End If
             Else
                 If clsRFacet.ContainsParameter("scales") Then
                     clsScaleParam = clsRFacet.GetParameter("scales")
-                    If clsScaleParam.strArgumentValue = Chr(34) & "free" & Chr(34) OrElse clsScaleParam.strArgumentValue = Chr(34) & "free_x" & Chr(34) Then
-                        clsScaleParam.strArgumentValue = Chr(34) & "free_x" & Chr(34)
+                    If clsScaleParam.strArgumentValue = Chr(34) & "free" & Chr(34) OrElse clsScaleParam.strArgumentValue = Chr(34) & "free_" & strXName & Chr(34) Then
+                        clsScaleParam.strArgumentValue = Chr(34) & "free_" & strXName & Chr(34)
                     Else
                         clsRFacet.RemoveParameter(clsScaleParam)
                     End If
@@ -672,26 +681,62 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub AddRemoveFreeScaleX(bAdd As Boolean)
         Dim clsScaleParam As RParameter
+        Dim strXName As String
+        Dim strYName As String
+
+        If IsCoordFlip() Then
+            strXName = "y"
+            strYName = "x"
+        Else
+            strXName = "x"
+            strYName = "y"
+        End If
 
         If bAdd Then
             If clsRFacet.ContainsParameter("scales") Then
                 clsScaleParam = clsRFacet.GetParameter("scales")
-                If clsScaleParam.strArgumentValue = Chr(34) & "free_y" & Chr(34) OrElse clsScaleParam.strArgumentValue = Chr(34) & "free" & Chr(34) Then
+                If clsScaleParam.strArgumentValue = Chr(34) & "free_" & strYName & Chr(34) OrElse clsScaleParam.strArgumentValue = Chr(34) & "free" & Chr(34) Then
                     clsScaleParam.strArgumentValue = Chr(34) & "free" & Chr(34)
                 Else
-                    clsScaleParam.strArgumentValue = Chr(34) & "free_x" & Chr(34)
+                    clsScaleParam.strArgumentValue = Chr(34) & "free_" & strXName & Chr(34)
                 End If
             Else
-                clsRFacet.AddParameter("scales", Chr(34) & "free_x" & Chr(34), iPosition:=3)
+                clsRFacet.AddParameter("scales", Chr(34) & "free_" & strXName & Chr(34), iPosition:=3)
             End If
         Else
             If clsRFacet.ContainsParameter("scales") Then
                 clsScaleParam = clsRFacet.GetParameter("scales")
                 If clsScaleParam.strArgumentValue = Chr(34) & "free" & Chr(34) OrElse clsScaleParam.strArgumentValue = Chr(34) & "free_y" & Chr(34) Then
-                    clsScaleParam.strArgumentValue = Chr(34) & "free_y" & Chr(34)
+                    clsScaleParam.strArgumentValue = Chr(34) & "free_" & strYName & Chr(34)
                 Else
                     clsRFacet.RemoveParameter(clsScaleParam)
                 End If
+            End If
+        End If
+    End Sub
+
+    Private Function IsCoordFlip() As Boolean
+        Return clsBaseOperator.ContainsParameter("coord_flip")
+    End Function
+
+    Private Sub ucrFlipCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFlipCoordinates.ControlValueChanged
+        Dim clsScaleParam As RParameter
+
+        If bRCodeSet Then
+            If clsRFacet.ContainsParameter("scales") Then
+                clsScaleParam = clsRFacet.GetParameter("scales")
+                If clsScaleParam.strArgumentValue = Chr(34) & "free_x" & Chr(34) Then
+                    clsScaleParam.strArgumentValue = Chr(34) & "free_y" & Chr(34)
+                ElseIf clsScaleParam.strArgumentValue = Chr(34) & "free_y" & Chr(34) Then
+                    clsScaleParam.strArgumentValue = Chr(34) & "free_x" & Chr(34)
+                End If
+            End If
+            ucrChkFreeScaleYAxis.ClearConditions()
+            ucrChkFreeScaleYAxis.AddParameterPresentCondition(True, "scales")
+            If ucrFlipCoordinates.Checked Then
+                ucrChkFreeScaleYAxis.AddParameterValuesCondition(True, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_x" & Chr(34)})
+            Else
+                ucrChkFreeScaleYAxis.AddParameterValuesCondition(True, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_y" & Chr(34)})
             End If
         End If
     End Sub

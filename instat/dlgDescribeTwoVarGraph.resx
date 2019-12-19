@@ -207,135 +207,6 @@
   <data name="&gt;&gt;lblFirstVariables.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;ucrInputCategoricalByCategorical.Name" xml:space="preserve">
-    <value>ucrInputCategoricalByCategorical</value>
-  </data>
-  <data name="&gt;&gt;ucrInputCategoricalByCategorical.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputCategoricalByCategorical.Parent" xml:space="preserve">
-    <value>grpSummaries</value>
-  </data>
-  <data name="&gt;&gt;ucrInputCategoricalByCategorical.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrInputCategoricalByNumeric.Name" xml:space="preserve">
-    <value>ucrInputCategoricalByNumeric</value>
-  </data>
-  <data name="&gt;&gt;ucrInputCategoricalByNumeric.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputCategoricalByNumeric.Parent" xml:space="preserve">
-    <value>grpSummaries</value>
-  </data>
-  <data name="&gt;&gt;ucrInputCategoricalByNumeric.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNumericByCategorical.Name" xml:space="preserve">
-    <value>ucrInputNumericByCategorical</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNumericByCategorical.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNumericByCategorical.Parent" xml:space="preserve">
-    <value>grpSummaries</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNumericByCategorical.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNumericByNumeric.Name" xml:space="preserve">
-    <value>ucrInputNumericByNumeric</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNumericByNumeric.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNumericByNumeric.Parent" xml:space="preserve">
-    <value>grpSummaries</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNumericByNumeric.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblFirstType.Name" xml:space="preserve">
-    <value>lblFirstType</value>
-  </data>
-  <data name="&gt;&gt;lblFirstType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblFirstType.Parent" xml:space="preserve">
-    <value>grpSummaries</value>
-  </data>
-  <data name="&gt;&gt;lblFirstType.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblGraphName.Name" xml:space="preserve">
-    <value>lblGraphName</value>
-  </data>
-  <data name="&gt;&gt;lblGraphName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblGraphName.Parent" xml:space="preserve">
-    <value>grpSummaries</value>
-  </data>
-  <data name="&gt;&gt;lblGraphName.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;lblGraph.Name" xml:space="preserve">
-    <value>lblGraph</value>
-  </data>
-  <data name="&gt;&gt;lblGraph.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblGraph.Parent" xml:space="preserve">
-    <value>grpSummaries</value>
-  </data>
-  <data name="&gt;&gt;lblGraph.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lblBy.Name" xml:space="preserve">
-    <value>lblBy</value>
-  </data>
-  <data name="&gt;&gt;lblBy.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblBy.Parent" xml:space="preserve">
-    <value>grpSummaries</value>
-  </data>
-  <data name="&gt;&gt;lblBy.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;lblSecondType.Name" xml:space="preserve">
-    <value>lblSecondType</value>
-  </data>
-  <data name="&gt;&gt;lblSecondType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSecondType.Parent" xml:space="preserve">
-    <value>grpSummaries</value>
-  </data>
-  <data name="&gt;&gt;lblSecondType.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="grpSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 221</value>
-  </data>
-  <data name="grpSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 72</value>
-  </data>
-  <data name="grpSummaries.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;grpSummaries.Name" xml:space="preserve">
-    <value>grpSummaries</value>
-  </data>
-  <data name="&gt;&gt;grpSummaries.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpSummaries.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpSummaries.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="ucrInputCategoricalByCategorical.Location" type="System.Drawing.Point, System.Drawing">
     <value>60, 40</value>
   </data>
@@ -560,6 +431,27 @@
   </data>
   <data name="&gt;&gt;lblSecondType.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="grpSummaries.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 221</value>
+  </data>
+  <data name="grpSummaries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 72</value>
+  </data>
+  <data name="grpSummaries.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;grpSummaries.Name" xml:space="preserve">
+    <value>grpSummaries</value>
+  </data>
+  <data name="&gt;&gt;grpSummaries.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpSummaries.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpSummaries.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrInputPosition.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 63</value>
@@ -889,7 +781,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverSecondVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 180</value>
+    <value>270, 180</value>
   </data>
   <data name="ucrReceiverSecondVar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

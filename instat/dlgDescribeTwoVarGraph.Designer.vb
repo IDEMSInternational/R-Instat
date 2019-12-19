@@ -53,6 +53,12 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblBy = New System.Windows.Forms.Label()
         Me.lblSecondType = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrInputPosition = New instat.ucrInputComboBox()
+        Me.lblPosition = New System.Windows.Forms.Label()
+        Me.ucrNudTransparency = New instat.ucrNud()
+        Me.ucrNudJitter = New instat.ucrNud()
+        Me.lblPointTransparency = New System.Windows.Forms.Label()
+        Me.lblPointJitter = New System.Windows.Forms.Label()
         Me.ucrChkFreeScaleYAxis = New instat.ucrCheck()
         Me.ucrFlipCoordinates = New instat.ucrCheck()
         Me.ucrSaveGraph = New instat.ucrSave()
@@ -60,12 +66,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrSelectorTwoVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverFirstVars = New instat.ucrVariablesAsFactor()
-        Me.lblPointJitter = New System.Windows.Forms.Label()
-        Me.lblPointTransparency = New System.Windows.Forms.Label()
-        Me.ucrNudJitter = New instat.ucrNud()
-        Me.ucrNudTransparency = New instat.ucrNud()
-        Me.lblPosition = New System.Windows.Forms.Label()
-        Me.ucrInputPosition = New instat.ucrInputComboBox()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -171,6 +171,48 @@ Partial Class dlgDescribeTwoVarGraph
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
         '
+        'ucrInputPosition
+        '
+        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
+        Me.ucrInputPosition.Name = "ucrInputPosition"
+        '
+        'lblPosition
+        '
+        resources.ApplyResources(Me.lblPosition, "lblPosition")
+        Me.lblPosition.Name = "lblPosition"
+        '
+        'ucrNudTransparency
+        '
+        Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudTransparency, "ucrNudTransparency")
+        Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTransparency.Name = "ucrNudTransparency"
+        Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudJitter
+        '
+        Me.ucrNudJitter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJitter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudJitter, "ucrNudJitter")
+        Me.ucrNudJitter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudJitter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJitter.Name = "ucrNudJitter"
+        Me.ucrNudJitter.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblPointTransparency
+        '
+        resources.ApplyResources(Me.lblPointTransparency, "lblPointTransparency")
+        Me.lblPointTransparency.Name = "lblPointTransparency"
+        '
+        'lblPointJitter
+        '
+        resources.ApplyResources(Me.lblPointJitter, "lblPointJitter")
+        Me.lblPointJitter.Name = "lblPointJitter"
+        '
         'ucrChkFreeScaleYAxis
         '
         Me.ucrChkFreeScaleYAxis.Checked = False
@@ -219,48 +261,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrReceiverFirstVars.strNcFilePath = ""
         Me.ucrReceiverFirstVars.ucrSelector = Nothing
         Me.ucrReceiverFirstVars.ucrVariableSelector = Nothing
-        '
-        'lblPointJitter
-        '
-        resources.ApplyResources(Me.lblPointJitter, "lblPointJitter")
-        Me.lblPointJitter.Name = "lblPointJitter"
-        '
-        'lblPointTransparency
-        '
-        resources.ApplyResources(Me.lblPointTransparency, "lblPointTransparency")
-        Me.lblPointTransparency.Name = "lblPointTransparency"
-        '
-        'ucrNudJitter
-        '
-        Me.ucrNudJitter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudJitter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudJitter, "ucrNudJitter")
-        Me.ucrNudJitter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudJitter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudJitter.Name = "ucrNudJitter"
-        Me.ucrNudJitter.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudTransparency
-        '
-        Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTransparency, "ucrNudTransparency")
-        Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTransparency.Name = "ucrNudTransparency"
-        Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblPosition
-        '
-        resources.ApplyResources(Me.lblPosition, "lblPosition")
-        Me.lblPosition.Name = "lblPosition"
-        '
-        'ucrInputPosition
-        '
-        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
-        Me.ucrInputPosition.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
-        Me.ucrInputPosition.Name = "ucrInputPosition"
         '
         'dlgDescribeTwoVarGraph
         '
