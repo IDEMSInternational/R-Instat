@@ -137,6 +137,16 @@ Partial Class ucrCalculator
         Me.cmdSum = New System.Windows.Forms.Button()
         Me.cmdVar = New System.Windows.Forms.Button()
         Me.grpStrings = New System.Windows.Forms.GroupBox()
+        Me.cmdStarts = New System.Windows.Forms.Button()
+        Me.cmdReplace2 = New System.Windows.Forms.Button()
+        Me.cmdReplace = New System.Windows.Forms.Button()
+        Me.cmdRemove2 = New System.Windows.Forms.Button()
+        Me.cmdRemove1 = New System.Windows.Forms.Button()
+        Me.cmdLocate2 = New System.Windows.Forms.Button()
+        Me.cmdExtract2 = New System.Windows.Forms.Button()
+        Me.cmdEnd = New System.Windows.Forms.Button()
+        Me.cmdEncodeb = New System.Windows.Forms.Button()
+        Me.cmdSquishb = New System.Windows.Forms.Button()
         Me.cmdSplit = New System.Windows.Forms.Button()
         Me.cmdCombine = New System.Windows.Forms.Button()
         Me.cmdDetect = New System.Windows.Forms.Button()
@@ -340,16 +350,6 @@ Partial Class ucrCalculator
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdSquishb = New System.Windows.Forms.Button()
-        Me.cmdEncodeb = New System.Windows.Forms.Button()
-        Me.cmdEnd = New System.Windows.Forms.Button()
-        Me.cmdExtract2 = New System.Windows.Forms.Button()
-        Me.cmdLocate2 = New System.Windows.Forms.Button()
-        Me.cmdRemove1 = New System.Windows.Forms.Button()
-        Me.cmdRemove2 = New System.Windows.Forms.Button()
-        Me.cmdReplace = New System.Windows.Forms.Button()
-        Me.cmdReplace2 = New System.Windows.Forms.Button()
-        Me.cmdStarts = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1056,6 +1056,74 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpStrings, "grpStrings")
         Me.grpStrings.Name = "grpStrings"
         Me.grpStrings.TabStop = False
+        '
+        'cmdStarts
+        '
+        resources.ApplyResources(Me.cmdStarts, "cmdStarts")
+        Me.cmdStarts.Name = "cmdStarts"
+        Me.cmdStarts.Tag = ""
+        Me.cmdStarts.UseVisualStyleBackColor = True
+        '
+        'cmdReplace2
+        '
+        resources.ApplyResources(Me.cmdReplace2, "cmdReplace2")
+        Me.cmdReplace2.Name = "cmdReplace2"
+        Me.cmdReplace2.Tag = ""
+        Me.cmdReplace2.UseVisualStyleBackColor = True
+        '
+        'cmdReplace
+        '
+        resources.ApplyResources(Me.cmdReplace, "cmdReplace")
+        Me.cmdReplace.Name = "cmdReplace"
+        Me.cmdReplace.Tag = ""
+        Me.cmdReplace.UseVisualStyleBackColor = True
+        '
+        'cmdRemove2
+        '
+        resources.ApplyResources(Me.cmdRemove2, "cmdRemove2")
+        Me.cmdRemove2.Name = "cmdRemove2"
+        Me.cmdRemove2.Tag = ""
+        Me.cmdRemove2.UseVisualStyleBackColor = True
+        '
+        'cmdRemove1
+        '
+        resources.ApplyResources(Me.cmdRemove1, "cmdRemove1")
+        Me.cmdRemove1.Name = "cmdRemove1"
+        Me.cmdRemove1.Tag = ""
+        Me.cmdRemove1.UseVisualStyleBackColor = True
+        '
+        'cmdLocate2
+        '
+        resources.ApplyResources(Me.cmdLocate2, "cmdLocate2")
+        Me.cmdLocate2.Name = "cmdLocate2"
+        Me.cmdLocate2.Tag = ""
+        Me.cmdLocate2.UseVisualStyleBackColor = True
+        '
+        'cmdExtract2
+        '
+        resources.ApplyResources(Me.cmdExtract2, "cmdExtract2")
+        Me.cmdExtract2.Name = "cmdExtract2"
+        Me.cmdExtract2.Tag = ""
+        Me.cmdExtract2.UseVisualStyleBackColor = True
+        '
+        'cmdEnd
+        '
+        resources.ApplyResources(Me.cmdEnd, "cmdEnd")
+        Me.cmdEnd.Name = "cmdEnd"
+        Me.cmdEnd.Tag = ""
+        Me.cmdEnd.UseVisualStyleBackColor = True
+        '
+        'cmdEncodeb
+        '
+        resources.ApplyResources(Me.cmdEncodeb, "cmdEncodeb")
+        Me.cmdEncodeb.Name = "cmdEncodeb"
+        Me.cmdEncodeb.UseVisualStyleBackColor = True
+        '
+        'cmdSquishb
+        '
+        resources.ApplyResources(Me.cmdSquishb, "cmdSquishb")
+        Me.cmdSquishb.Name = "cmdSquishb"
+        Me.cmdSquishb.UseVisualStyleBackColor = True
         '
         'cmdSplit
         '
@@ -2464,74 +2532,6 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.Selector = Nothing
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
-        '
-        'cmdSquishb
-        '
-        resources.ApplyResources(Me.cmdSquishb, "cmdSquishb")
-        Me.cmdSquishb.Name = "cmdSquishb"
-        Me.cmdSquishb.UseVisualStyleBackColor = True
-        '
-        'cmdEncodeb
-        '
-        resources.ApplyResources(Me.cmdEncodeb, "cmdEncodeb")
-        Me.cmdEncodeb.Name = "cmdEncodeb"
-        Me.cmdEncodeb.UseVisualStyleBackColor = True
-        '
-        'cmdEnd
-        '
-        resources.ApplyResources(Me.cmdEnd, "cmdEnd")
-        Me.cmdEnd.Name = "cmdEnd"
-        Me.cmdEnd.Tag = ""
-        Me.cmdEnd.UseVisualStyleBackColor = True
-        '
-        'cmdExtract2
-        '
-        resources.ApplyResources(Me.cmdExtract2, "cmdExtract2")
-        Me.cmdExtract2.Name = "cmdExtract2"
-        Me.cmdExtract2.Tag = ""
-        Me.cmdExtract2.UseVisualStyleBackColor = True
-        '
-        'cmdLocate2
-        '
-        resources.ApplyResources(Me.cmdLocate2, "cmdLocate2")
-        Me.cmdLocate2.Name = "cmdLocate2"
-        Me.cmdLocate2.Tag = ""
-        Me.cmdLocate2.UseVisualStyleBackColor = True
-        '
-        'cmdRemove1
-        '
-        resources.ApplyResources(Me.cmdRemove1, "cmdRemove1")
-        Me.cmdRemove1.Name = "cmdRemove1"
-        Me.cmdRemove1.Tag = ""
-        Me.cmdRemove1.UseVisualStyleBackColor = True
-        '
-        'cmdRemove2
-        '
-        resources.ApplyResources(Me.cmdRemove2, "cmdRemove2")
-        Me.cmdRemove2.Name = "cmdRemove2"
-        Me.cmdRemove2.Tag = ""
-        Me.cmdRemove2.UseVisualStyleBackColor = True
-        '
-        'cmdReplace
-        '
-        resources.ApplyResources(Me.cmdReplace, "cmdReplace")
-        Me.cmdReplace.Name = "cmdReplace"
-        Me.cmdReplace.Tag = ""
-        Me.cmdReplace.UseVisualStyleBackColor = True
-        '
-        'cmdReplace2
-        '
-        resources.ApplyResources(Me.cmdReplace2, "cmdReplace2")
-        Me.cmdReplace2.Name = "cmdReplace2"
-        Me.cmdReplace2.Tag = ""
-        Me.cmdReplace2.UseVisualStyleBackColor = True
-        '
-        'cmdStarts
-        '
-        resources.ApplyResources(Me.cmdStarts, "cmdStarts")
-        Me.cmdStarts.Name = "cmdStarts"
-        Me.cmdStarts.Tag = ""
-        Me.cmdStarts.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
