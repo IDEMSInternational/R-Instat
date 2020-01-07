@@ -2339,4 +2339,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_ends()", 1)
         End If
     End Sub
+
+    Private Sub cmdRemove1_Click(sender As Object, e As EventArgs) Handles cmdRemove1.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove(string = , pattern = argument)", 13)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove()", 1)
+        End If
+    End Sub
 End Class
