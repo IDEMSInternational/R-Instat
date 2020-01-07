@@ -53,7 +53,6 @@ Public Class dlgModelling
     Private Sub InitialiseDialog()
         bUpdating = True
         cmdPredict.Visible = False
-        cmdDetails.Visible = False
 
         ucrReceiverForTestColumn.Selector = ucrSelectorModelling
 
@@ -438,11 +437,6 @@ Public Class dlgModelling
         End If
     End Sub
 
-    Private Sub cmdDetails_Click(sender As Object, e As EventArgs) Handles cmdDetails.Click
-        sdgErrorDetails.setErrorText(strError)
-        sdgErrorDetails.ShowDialog()
-    End Sub
-
     Private Sub cmdlqs_Click(sender As Object, e As EventArgs) Handles cmdlqs.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
@@ -547,6 +541,7 @@ Public Class dlgModelling
         Dim strErrorDetail As String = ""
         Dim strVecOutput As CharacterVector
         Dim clsCommandString As RCodeStructure
+        ucrInputTryMessage.txtInput.Controls.Clear()
 
         Try
             If ucrReceiverForTestColumn.IsEmpty Then
@@ -568,7 +563,7 @@ Public Class dlgModelling
                 Else
                     ucrInputTryMessage.SetName("Command produced an error or no output to display.")
                     ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-                    cmdDetails.Visible = True
+                    AddButtonInTryTextBox()
                     strError = strErrorDetail
 
                 End If
@@ -576,7 +571,7 @@ Public Class dlgModelling
         Catch ex As Exception
             ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
             ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-            cmdDetails.Visible = True
+            AddButtonInTryTextBox()
         Finally
             strTempScript = ""
             strDetach = clsDetach.Clone().ToScript(strTempScript)
@@ -587,10 +582,10 @@ Public Class dlgModelling
     Private Sub ucrReceiverForTestColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForTestColumn.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForTestColumn.GetVariableNames(False))
         ucrInputTryMessage.SetName("")
+        ucrInputTryMessage.txtInput.Controls.Clear()
         cmdTry.Enabled = Not ucrReceiverForTestColumn.IsEmpty()
         ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
         TestOkEnabled()
-        cmdDetails.Visible = False
     End Sub
 
     Private Sub GraphAssignTo()
@@ -648,6 +643,55 @@ Public Class dlgModelling
                 grplme4.Visible = False
                 grpMASS.Visible = True
         End Select
+    End Sub
+
+    Private Sub AddButtonInTryTextBox()
+        Dim btnDetails As New Button
+        'Add the button to the try textbox first
+        ucrInputTryMessage.txtInput.Controls.Add(btnDetails)
+        'setting button properties
+        btnDetails.Text = ":::"
+        btnDetails.Size = New Size(25, ucrInputTryMessage.txtInput.ClientSize.Height + 2)
+        btnDetails.TextAlign = ContentAlignment.TopCenter
+        btnDetails.FlatStyle = FlatStyle.Standard
+        btnDetails.FlatAppearance.BorderSize = 0
+        btnDetails.Cursor = Cursors.Default
+        btnDetails.Dock = DockStyle.Right
+        btnDetails.BackColor = cmdaov.BackColor
+        btnDetails.UseVisualStyleBackColor = True
+
+        'set the btn eventHandler
+        AddHandler btnDetails.Click, Sub()
+                                         'Shows a pop up that displays the error
+                                         Dim frmPopUp As New Form
+                                         Dim txtPopUpErrorDetail As New TextBox
+                                         frmPopUp.ShowInTaskbar = False
+                                         frmPopUp.FormBorderStyle = FormBorderStyle.None
+                                         frmPopUp.Size = New Size(ucrInputTryMessage.Width, 120)
+                                         frmPopUp.Controls.Add(txtPopUpErrorDetail)
+
+                                         'set the text properties
+                                         txtPopUpErrorDetail.Dock = DockStyle.Fill
+                                         txtPopUpErrorDetail.Multiline = True
+                                         txtPopUpErrorDetail.ScrollBars = ScrollBars.Vertical
+                                         txtPopUpErrorDetail.WordWrap = True
+
+                                         AddHandler txtPopUpErrorDetail.LostFocus, Sub()
+                                                                                       frmPopUp.Close()
+                                                                                   End Sub
+                                         AddHandler txtPopUpErrorDetail.KeyDown, Sub(sender As Object, e As KeyEventArgs)
+                                                                                     If e.Control AndAlso e.KeyCode = Keys.KeyCode.Enter Then
+                                                                                         frmPopUp.Close()
+                                                                                     End If
+                                                                                 End Sub
+                                         Dim ctlpos As Point = ucrInputTryMessage.PointToScreen(New Point(0, 0))
+                                         frmPopUp.StartPosition = FormStartPosition.Manual
+                                         frmPopUp.Location = New Point(ctlpos.X - 2, ctlpos.Y - frmPopUp.Height - 2)
+                                         frmPopUp.Show()
+                                         txtPopUpErrorDetail.Text = strError
+                                         txtPopUpErrorDetail.SelectionStart = txtPopUpErrorDetail.TextLength
+
+                                     End Sub
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
