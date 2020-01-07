@@ -950,9 +950,9 @@ Public Class ucrCalculator
 
     Private Sub cmdSplit_Click(sender As Object, e As EventArgs) Handles cmdSplit.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_split_fixed(string = , pattern = argument, n = )", 28)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_split(string = , pattern = argument, n = )", 28)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_split_fixed()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_split()", 1)
         End If
     End Sub
 
@@ -2366,7 +2366,7 @@ Public Class ucrCalculator
 
     Private Sub cmdEncodeb_Click(sender As Object, e As EventArgs) Handles cmdEncodeb.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_conv(string = , encoding = )", 5)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_conv(string = , encoding = )", 15)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_conv()", 1)
         End If
