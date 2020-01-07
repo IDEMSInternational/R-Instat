@@ -2379,4 +2379,16 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_extract_all()", 1)
         End If
     End Sub
+
+    Private Sub cmdLocate2_Click(sender As Object, e As EventArgs) Handles cmdLocate2.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_locate_all(string = , pattern = )", 13)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_locate_all()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdReplace2_Click(sender As Object, e As EventArgs) Handles cmdReplace2.Click
+
+    End Sub
 End Class
