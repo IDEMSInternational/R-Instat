@@ -2331,4 +2331,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_starts()", 1)
         End If
     End Sub
+
+    Private Sub cmdEnd_Click(sender As Object, e As EventArgs) Handles cmdEnd.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_ends(string = , pattern = argument, negate = FALSE)", 38)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_ends()", 1)
+        End If
+    End Sub
 End Class
