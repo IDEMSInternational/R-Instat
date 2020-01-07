@@ -748,7 +748,7 @@ Public Class ucrCalculator
 
     Private Sub cmdReplace_Click(sender As Object, e As EventArgs) Handles cmdReplace.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_replace(string= , pattern=' ' , replacement=' ' )", 33)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_replace(string = , pattern = argument , replacement = ' ' )", 42)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_replace()", 1)
         End If
@@ -756,7 +756,7 @@ Public Class ucrCalculator
 
     Private Sub cmdLocate_Click(sender As Object, e As EventArgs) Handles cmdLocate.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_locate(string= , pattern=' ' )", 15)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_locate(string = , pattern = argument)", 21)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_locate()", 1)
         End If
@@ -764,7 +764,7 @@ Public Class ucrCalculator
 
     Private Sub cmdExtract_Click(sender As Object, e As EventArgs) Handles cmdExtract.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_extract(string= , pattern=' ' )", 15)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_extract(string = , pattern = argument )", 21)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_extract()", 1)
         End If
@@ -781,7 +781,7 @@ Public Class ucrCalculator
 
     Private Sub cmdDetect_Click(sender As Object, e As EventArgs) Handles cmdDetect.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_detect(string= , pattern=' ' )", 15)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_detect(string = , pattern = argument)", 21)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_detect()", 1)
         End If
@@ -950,7 +950,7 @@ Public Class ucrCalculator
 
     Private Sub cmdSplit_Click(sender As Object, e As EventArgs) Handles cmdSplit.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_split_fixed(string= , pattern=' ', n= )", 19)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_split_fixed(string = , pattern = argument, n = )", 27)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_split_fixed()", 1)
         End If
