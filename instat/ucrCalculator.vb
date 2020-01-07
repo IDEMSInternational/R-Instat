@@ -772,7 +772,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCountstrings_Click(sender As Object, e As EventArgs) Handles cmdCountstrings.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_count(string= , pattern =' ')", 16)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_count(string = , pattern = argument )", 22)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_count()", 1)
         End If
