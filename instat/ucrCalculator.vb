@@ -2323,4 +2323,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert_7()", 1)
         End If
     End Sub
+
+    Private Sub cmdStarts_Click(sender As Object, e As EventArgs) Handles cmdStarts.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_starts(string = , pattern = argument, negate = FALSE)", 38)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_starts()", 1)
+        End If
+    End Sub
 End Class
