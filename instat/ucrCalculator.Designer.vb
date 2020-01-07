@@ -346,6 +346,9 @@ Partial Class ucrCalculator
         Me.cmdEnd = New System.Windows.Forms.Button()
         Me.cmdExtract1 = New System.Windows.Forms.Button()
         Me.cmdExtract2 = New System.Windows.Forms.Button()
+        Me.cmdLocate2 = New System.Windows.Forms.Button()
+        Me.cmdRemove1 = New System.Windows.Forms.Button()
+        Me.cmdRemove2 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1026,6 +1029,9 @@ Partial Class ucrCalculator
         '
         'grpStrings
         '
+        Me.grpStrings.Controls.Add(Me.cmdRemove2)
+        Me.grpStrings.Controls.Add(Me.cmdRemove1)
+        Me.grpStrings.Controls.Add(Me.cmdLocate2)
         Me.grpStrings.Controls.Add(Me.cmdExtract2)
         Me.grpStrings.Controls.Add(Me.cmdExtract1)
         Me.grpStrings.Controls.Add(Me.cmdEnd)
@@ -2496,6 +2502,27 @@ Partial Class ucrCalculator
         Me.cmdExtract2.Tag = ""
         Me.cmdExtract2.UseVisualStyleBackColor = True
         '
+        'cmdLocate2
+        '
+        resources.ApplyResources(Me.cmdLocate2, "cmdLocate2")
+        Me.cmdLocate2.Name = "cmdLocate2"
+        Me.cmdLocate2.Tag = ""
+        Me.cmdLocate2.UseVisualStyleBackColor = True
+        '
+        'cmdRemove1
+        '
+        resources.ApplyResources(Me.cmdRemove1, "cmdRemove1")
+        Me.cmdRemove1.Name = "cmdRemove1"
+        Me.cmdRemove1.Tag = ""
+        Me.cmdRemove1.UseVisualStyleBackColor = True
+        '
+        'cmdRemove2
+        '
+        resources.ApplyResources(Me.cmdRemove2, "cmdRemove2")
+        Me.cmdRemove2.Name = "cmdRemove2"
+        Me.cmdRemove2.Tag = ""
+        Me.cmdRemove2.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
@@ -2842,4 +2869,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdExtract2 As Button
     Friend WithEvents cmdExtract1 As Button
     Friend WithEvents cmdEnd As Button
+    Friend WithEvents cmdLocate2 As Button
+    Friend WithEvents cmdRemove2 As Button
+    Friend WithEvents cmdRemove1 As Button
 End Class
