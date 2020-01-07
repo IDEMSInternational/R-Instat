@@ -141,7 +141,6 @@ Partial Class ucrCalculator
         Me.cmdCombine = New System.Windows.Forms.Button()
         Me.cmdDetect = New System.Windows.Forms.Button()
         Me.cmdTrim = New System.Windows.Forms.Button()
-        Me.cmdReplace = New System.Windows.Forms.Button()
         Me.cmdTitle = New System.Windows.Forms.Button()
         Me.cmdLower = New System.Windows.Forms.Button()
         Me.cmdUpper = New System.Windows.Forms.Button()
@@ -344,11 +343,13 @@ Partial Class ucrCalculator
         Me.cmdSquishb = New System.Windows.Forms.Button()
         Me.cmdEncodeb = New System.Windows.Forms.Button()
         Me.cmdEnd = New System.Windows.Forms.Button()
-        Me.cmdExtract1 = New System.Windows.Forms.Button()
         Me.cmdExtract2 = New System.Windows.Forms.Button()
         Me.cmdLocate2 = New System.Windows.Forms.Button()
         Me.cmdRemove1 = New System.Windows.Forms.Button()
         Me.cmdRemove2 = New System.Windows.Forms.Button()
+        Me.cmdReplace = New System.Windows.Forms.Button()
+        Me.cmdReplace2 = New System.Windows.Forms.Button()
+        Me.cmdStarts = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1029,11 +1030,13 @@ Partial Class ucrCalculator
         '
         'grpStrings
         '
+        Me.grpStrings.Controls.Add(Me.cmdStarts)
+        Me.grpStrings.Controls.Add(Me.cmdReplace2)
+        Me.grpStrings.Controls.Add(Me.cmdReplace)
         Me.grpStrings.Controls.Add(Me.cmdRemove2)
         Me.grpStrings.Controls.Add(Me.cmdRemove1)
         Me.grpStrings.Controls.Add(Me.cmdLocate2)
         Me.grpStrings.Controls.Add(Me.cmdExtract2)
-        Me.grpStrings.Controls.Add(Me.cmdExtract1)
         Me.grpStrings.Controls.Add(Me.cmdEnd)
         Me.grpStrings.Controls.Add(Me.cmdEncodeb)
         Me.grpStrings.Controls.Add(Me.cmdSquishb)
@@ -1041,7 +1044,6 @@ Partial Class ucrCalculator
         Me.grpStrings.Controls.Add(Me.cmdCombine)
         Me.grpStrings.Controls.Add(Me.cmdDetect)
         Me.grpStrings.Controls.Add(Me.cmdTrim)
-        Me.grpStrings.Controls.Add(Me.cmdReplace)
         Me.grpStrings.Controls.Add(Me.cmdTitle)
         Me.grpStrings.Controls.Add(Me.cmdLower)
         Me.grpStrings.Controls.Add(Me.cmdUpper)
@@ -1080,12 +1082,6 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.cmdTrim, "cmdTrim")
         Me.cmdTrim.Name = "cmdTrim"
         Me.cmdTrim.UseVisualStyleBackColor = True
-        '
-        'cmdReplace
-        '
-        resources.ApplyResources(Me.cmdReplace, "cmdReplace")
-        Me.cmdReplace.Name = "cmdReplace"
-        Me.cmdReplace.UseVisualStyleBackColor = True
         '
         'cmdTitle
         '
@@ -2488,13 +2484,6 @@ Partial Class ucrCalculator
         Me.cmdEnd.Tag = ""
         Me.cmdEnd.UseVisualStyleBackColor = True
         '
-        'cmdExtract1
-        '
-        resources.ApplyResources(Me.cmdExtract1, "cmdExtract1")
-        Me.cmdExtract1.Name = "cmdExtract1"
-        Me.cmdExtract1.Tag = ""
-        Me.cmdExtract1.UseVisualStyleBackColor = True
-        '
         'cmdExtract2
         '
         resources.ApplyResources(Me.cmdExtract2, "cmdExtract2")
@@ -2522,6 +2511,27 @@ Partial Class ucrCalculator
         Me.cmdRemove2.Name = "cmdRemove2"
         Me.cmdRemove2.Tag = ""
         Me.cmdRemove2.UseVisualStyleBackColor = True
+        '
+        'cmdReplace
+        '
+        resources.ApplyResources(Me.cmdReplace, "cmdReplace")
+        Me.cmdReplace.Name = "cmdReplace"
+        Me.cmdReplace.Tag = ""
+        Me.cmdReplace.UseVisualStyleBackColor = True
+        '
+        'cmdReplace2
+        '
+        resources.ApplyResources(Me.cmdReplace2, "cmdReplace2")
+        Me.cmdReplace2.Name = "cmdReplace2"
+        Me.cmdReplace2.Tag = ""
+        Me.cmdReplace2.UseVisualStyleBackColor = True
+        '
+        'cmdStarts
+        '
+        resources.ApplyResources(Me.cmdStarts, "cmdStarts")
+        Me.cmdStarts.Name = "cmdStarts"
+        Me.cmdStarts.Tag = ""
+        Me.cmdStarts.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
@@ -2613,7 +2623,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdCombine As Button
     Friend WithEvents cmdDetect As Button
     Friend WithEvents cmdTrim As Button
-    Friend WithEvents cmdReplace As Button
     Friend WithEvents cmdTitle As Button
     Friend WithEvents cmdLower As Button
     Friend WithEvents cmdUpper As Button
@@ -2867,9 +2876,11 @@ Partial Class ucrCalculator
     Friend WithEvents cmdEncodeb As Button
     Friend WithEvents cmdSquishb As Button
     Friend WithEvents cmdExtract2 As Button
-    Friend WithEvents cmdExtract1 As Button
     Friend WithEvents cmdEnd As Button
     Friend WithEvents cmdLocate2 As Button
     Friend WithEvents cmdRemove2 As Button
     Friend WithEvents cmdRemove1 As Button
+    Friend WithEvents cmdStarts As Button
+    Friend WithEvents cmdReplace2 As Button
+    Friend WithEvents cmdReplace As Button
 End Class
