@@ -341,6 +341,8 @@ Partial Class ucrCalculator
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.cmdSquishb = New System.Windows.Forms.Button()
+        Me.cmdEncodeb = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -835,6 +837,7 @@ Partial Class ucrCalculator
         Me.grpSummary.Controls.Add(Me.cmdMode)
         Me.grpSummary.Controls.Add(Me.cmdFirst)
         Me.grpSummary.Controls.Add(Me.cmdLast)
+        Me.grpSummary.Controls.Add(Me.grpTransform)
         Me.grpSummary.Controls.Add(Me.cmdnth)
         Me.grpSummary.Controls.Add(Me.cmdCor)
         Me.grpSummary.Controls.Add(Me.cmdCov)
@@ -1020,6 +1023,8 @@ Partial Class ucrCalculator
         '
         'grpStrings
         '
+        Me.grpStrings.Controls.Add(Me.cmdEncodeb)
+        Me.grpStrings.Controls.Add(Me.cmdSquishb)
         Me.grpStrings.Controls.Add(Me.cmdSplit)
         Me.grpStrings.Controls.Add(Me.cmdCombine)
         Me.grpStrings.Controls.Add(Me.cmdDetect)
@@ -2022,6 +2027,7 @@ Partial Class ucrCalculator
         '
         Me.grpWakefield.Controls.Add(Me.cmdLinkert7)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
+        Me.grpWakefield.Controls.Add(Me.grpLogical)
         Me.grpWakefield.Controls.Add(Me.cmdValid)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
         Me.grpWakefield.Controls.Add(Me.cmdString)
@@ -2149,6 +2155,8 @@ Partial Class ucrCalculator
         '
         Me.grpCircular.Controls.Add(Me.cmdCircular)
         Me.grpCircular.Controls.Add(Me.cmdCircQuantile)
+        Me.grpCircular.Controls.Add(Me.grpMaths)
+        Me.grpCircular.Controls.Add(Me.grpSummary)
         Me.grpCircular.Controls.Add(Me.cmdCircMax)
         Me.grpCircular.Controls.Add(Me.cmdA1)
         Me.grpCircular.Controls.Add(Me.cmdAngVar)
@@ -2266,6 +2274,7 @@ Partial Class ucrCalculator
         'grpFactor
         '
         Me.grpFactor.Controls.Add(Me.cmdShuffle)
+        Me.grpFactor.Controls.Add(Me.grpCircular)
         Me.grpFactor.Controls.Add(Me.cmdShift)
         Me.grpFactor.Controls.Add(Me.cmdReverse)
         Me.grpFactor.Controls.Add(Me.cmdReorder)
@@ -2448,18 +2457,25 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'cmdSquishb
+        '
+        resources.ApplyResources(Me.cmdSquishb, "cmdSquishb")
+        Me.cmdSquishb.Name = "cmdSquishb"
+        Me.cmdSquishb.UseVisualStyleBackColor = True
+        '
+        'cmdEncodeb
+        '
+        resources.ApplyResources(Me.cmdEncodeb, "cmdEncodeb")
+        Me.cmdEncodeb.Name = "cmdEncodeb"
+        Me.cmdEncodeb.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpFactor)
-        Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpLogical)
-        Me.Controls.Add(Me.grpSummary)
-        Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpProbabilty)
-        Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.cmdHelp)
@@ -2794,4 +2810,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdQbirth As Button
     Friend WithEvents cmdQbeta As Button
     Friend WithEvents cmdLinkert7 As Button
+    Friend WithEvents cmdEncodeb As Button
+    Friend WithEvents cmdSquishb As Button
 End Class
