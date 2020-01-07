@@ -343,6 +343,9 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.cmdSquishb = New System.Windows.Forms.Button()
         Me.cmdEncodeb = New System.Windows.Forms.Button()
+        Me.cmdEnd = New System.Windows.Forms.Button()
+        Me.cmdExtract1 = New System.Windows.Forms.Button()
+        Me.cmdExtract2 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1023,6 +1026,9 @@ Partial Class ucrCalculator
         '
         'grpStrings
         '
+        Me.grpStrings.Controls.Add(Me.cmdExtract2)
+        Me.grpStrings.Controls.Add(Me.cmdExtract1)
+        Me.grpStrings.Controls.Add(Me.cmdEnd)
         Me.grpStrings.Controls.Add(Me.cmdEncodeb)
         Me.grpStrings.Controls.Add(Me.cmdSquishb)
         Me.grpStrings.Controls.Add(Me.cmdSplit)
@@ -2469,6 +2475,27 @@ Partial Class ucrCalculator
         Me.cmdEncodeb.Name = "cmdEncodeb"
         Me.cmdEncodeb.UseVisualStyleBackColor = True
         '
+        'cmdEnd
+        '
+        resources.ApplyResources(Me.cmdEnd, "cmdEnd")
+        Me.cmdEnd.Name = "cmdEnd"
+        Me.cmdEnd.Tag = ""
+        Me.cmdEnd.UseVisualStyleBackColor = True
+        '
+        'cmdExtract1
+        '
+        resources.ApplyResources(Me.cmdExtract1, "cmdExtract1")
+        Me.cmdExtract1.Name = "cmdExtract1"
+        Me.cmdExtract1.Tag = ""
+        Me.cmdExtract1.UseVisualStyleBackColor = True
+        '
+        'cmdExtract2
+        '
+        resources.ApplyResources(Me.cmdExtract2, "cmdExtract2")
+        Me.cmdExtract2.Name = "cmdExtract2"
+        Me.cmdExtract2.Tag = ""
+        Me.cmdExtract2.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
@@ -2812,4 +2839,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdLinkert7 As Button
     Friend WithEvents cmdEncodeb As Button
     Friend WithEvents cmdSquishb As Button
+    Friend WithEvents cmdExtract2 As Button
+    Friend WithEvents cmdExtract1 As Button
+    Friend WithEvents cmdEnd As Button
 End Class
