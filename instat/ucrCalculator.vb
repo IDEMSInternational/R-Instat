@@ -63,7 +63,6 @@ Public Class ucrCalculator
         cmdAll.Enabled = False
         cmdIsTrue.Enabled = False
         cmdIsFalse.Enabled = False
-        cmdConcat.Enabled = False
         bControlsInitialised = True
         ttCalculator.SetToolTip(cmdRound, "round(x) to round to whole numbers, round(x,2) to round to 2 decimal places, round(x,-2) to round to the nearest 100")
         ttCalculator.SetToolTip(cmdSiginf, "signif(x,3) to round to 3 significant figures")
@@ -2076,11 +2075,11 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdConcat_Click(sender As Object, e As EventArgs) Handles cmdConcat.Click
+    Private Sub cmdLabelled_Click(sender As Object, e As EventArgs) Handles cmdLabelled.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_c(...)", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("labelled::labelled(x = , labels = , label = NULL)", 27)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_c()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("labelled::labelled()", 1)
         End If
     End Sub
 

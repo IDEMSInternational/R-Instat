@@ -9144,31 +9144,31 @@
   <data name="&gt;&gt;cmdCollapse.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="cmdConcat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdLabelled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdConcat.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdLabelled.Location" type="System.Drawing.Point, System.Drawing">
     <value>164, 20</value>
   </data>
-  <data name="cmdConcat.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdLabelled.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 40</value>
   </data>
-  <data name="cmdConcat.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdLabelled.TabIndex" type="System.Int32, mscorlib">
     <value>193</value>
   </data>
-  <data name="cmdConcat.Text" xml:space="preserve">
-    <value>concat</value>
+  <data name="cmdLabelled.Text" xml:space="preserve">
+    <value>labelled </value>
   </data>
-  <data name="&gt;&gt;cmdConcat.Name" xml:space="preserve">
-    <value>cmdConcat</value>
+  <data name="&gt;&gt;cmdLabelled.Name" xml:space="preserve">
+    <value>cmdLabelled</value>
   </data>
-  <data name="&gt;&gt;cmdConcat.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdLabelled.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmdConcat.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdLabelled.Parent" xml:space="preserve">
     <value>grpFactor</value>
   </data>
-  <data name="&gt;&gt;cmdConcat.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdLabelled.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
   <data name="cmdFactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
