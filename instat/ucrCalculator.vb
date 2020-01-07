@@ -2355,4 +2355,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove_all()", 1)
         End If
     End Sub
+
+    Private Sub cmdSquishb_Click(sender As Object, e As EventArgs) Handles cmdSquishb.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_squish(string = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_squish()", 1)
+        End If
+    End Sub
 End Class
