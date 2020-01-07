@@ -2389,6 +2389,10 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdReplace2_Click(sender As Object, e As EventArgs) Handles cmdReplace2.Click
-
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_replace_all(string = , pattern = , replacement = )", 28)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_replace_all()", 1)
+        End If
     End Sub
 End Class
