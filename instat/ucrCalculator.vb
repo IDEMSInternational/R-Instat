@@ -2363,4 +2363,20 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_squish()", 1)
         End If
     End Sub
+
+    Private Sub cmdEncodeb_Click(sender As Object, e As EventArgs) Handles cmdEncodeb.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_conv(string = , encoding = )", 5)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_conv()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdExtract2_Click(sender As Object, e As EventArgs) Handles cmdExtract2.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_extract_all(string = , pattern = , simplify = FALSE)", 31)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_extract_all()", 1)
+        End If
+    End Sub
 End Class
