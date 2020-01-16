@@ -8497,7 +8497,7 @@
     <value>54</value>
   </data>
   <data name="grpWakefield.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 7</value>
+    <value>-22, 7</value>
   </data>
   <data name="grpWakefield.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -9769,7 +9769,7 @@
     <value>3</value>
   </data>
   <data name="grpModifier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>586, 320</value>
+    <value>578, 320</value>
   </data>
   <data name="grpModifier.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 73</value>
@@ -9792,38 +9792,38 @@
   <data name="&gt;&gt;grpModifier.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="cmdPlusZero.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdOr3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdPlusZero.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 93</value>
+  <data name="cmdOr3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>119, 57</value>
   </data>
-  <data name="cmdPlusZero.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdOr3.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 37</value>
   </data>
-  <data name="cmdPlusZero.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+  <data name="cmdOr3.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
-  <data name="cmdPlusZero.Text" xml:space="preserve">
-    <value>- to</value>
+  <data name="cmdOr3.Text" xml:space="preserve">
+    <value>| or</value>
   </data>
-  <data name="&gt;&gt;cmdPlusZero.Name" xml:space="preserve">
-    <value>cmdPlusZero</value>
+  <data name="&gt;&gt;cmdOr3.Name" xml:space="preserve">
+    <value>cmdOr3</value>
   </data>
-  <data name="&gt;&gt;cmdPlusZero.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdOr3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmdPlusZero.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdOr3.Parent" xml:space="preserve">
     <value>grpNumber</value>
   </data>
-  <data name="&gt;&gt;cmdPlusZero.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdOr3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="cmdEscape.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdEscape.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 57</value>
+    <value>190, 93</value>
   </data>
   <data name="cmdEscape.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 37</value>
@@ -9846,11 +9846,38 @@
   <data name="&gt;&gt;cmdEscape.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="cmdPlusZero.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdPlusZero.Location" type="System.Drawing.Point, System.Drawing">
+    <value>273, 93</value>
+  </data>
+  <data name="cmdPlusZero.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 37</value>
+  </data>
+  <data name="cmdPlusZero.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="cmdPlusZero.Text" xml:space="preserve">
+    <value>- to</value>
+  </data>
+  <data name="&gt;&gt;cmdPlusZero.Name" xml:space="preserve">
+    <value>cmdPlusZero</value>
+  </data>
+  <data name="&gt;&gt;cmdPlusZero.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdPlusZero.Parent" xml:space="preserve">
+    <value>grpNumber</value>
+  </data>
+  <data name="&gt;&gt;cmdPlusZero.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="cmdZero.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdZero.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 93</value>
+    <value>132, 93</value>
   </data>
   <data name="cmdZero.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 37</value>
@@ -9871,13 +9898,13 @@
     <value>grpNumber</value>
   </data>
   <data name="&gt;&gt;cmdZero.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="cmdPlusOne.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdPlusOne.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 93</value>
+    <value>74, 93</value>
   </data>
   <data name="cmdPlusOne.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 37</value>
@@ -9898,13 +9925,13 @@
     <value>grpNumber</value>
   </data>
   <data name="&gt;&gt;cmdPlusOne.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="cmdZeroOrOne.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdZeroOrOne.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 57</value>
+    <value>3, 93</value>
   </data>
   <data name="cmdZeroOrOne.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 37</value>
@@ -9925,22 +9952,22 @@
     <value>grpNumber</value>
   </data>
   <data name="&gt;&gt;cmdZeroOrOne.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="cmdNumbers.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdNumbers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 57</value>
+    <value>235, 57</value>
   </data>
   <data name="cmdNumbers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 37</value>
+    <value>59, 37</value>
   </data>
   <data name="cmdNumbers.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="cmdNumbers.Text" xml:space="preserve">
-    <value>{ , } numbers</value>
+    <value>{ m,n } </value>
   </data>
   <data name="&gt;&gt;cmdNumbers.Name" xml:space="preserve">
     <value>cmdNumbers</value>
@@ -9952,40 +9979,13 @@
     <value>grpNumber</value>
   </data>
   <data name="&gt;&gt;cmdNumbers.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="cmdOr2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdOr2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>86, 57</value>
-  </data>
-  <data name="cmdOr2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 37</value>
-  </data>
-  <data name="cmdOr2.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="cmdOr2.Text" xml:space="preserve">
-    <value>{ } number</value>
-  </data>
-  <data name="&gt;&gt;cmdOr2.Name" xml:space="preserve">
-    <value>cmdOr2</value>
-  </data>
-  <data name="&gt;&gt;cmdOr2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdOr2.Parent" xml:space="preserve">
-    <value>grpNumber</value>
-  </data>
-  <data name="&gt;&gt;cmdOr2.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="cmdNot1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdNot1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>339, 57</value>
+    <value>61, 57</value>
   </data>
   <data name="cmdNot1.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 37</value>
@@ -10008,11 +10008,38 @@
   <data name="&gt;&gt;cmdNot1.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="cmdOr2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdOr2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>177, 57</value>
+  </data>
+  <data name="cmdOr2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 37</value>
+  </data>
+  <data name="cmdOr2.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="cmdOr2.Text" xml:space="preserve">
+    <value>{ n} </value>
+  </data>
+  <data name="&gt;&gt;cmdOr2.Name" xml:space="preserve">
+    <value>cmdOr2</value>
+  </data>
+  <data name="&gt;&gt;cmdOr2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdOr2.Parent" xml:space="preserve">
+    <value>grpNumber</value>
+  </data>
+  <data name="&gt;&gt;cmdOr2.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
   <data name="cmdOr1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdOr1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 93</value>
+    <value>3, 57</value>
   </data>
   <data name="cmdOr1.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 37</value>
@@ -10033,7 +10060,7 @@
     <value>grpNumber</value>
   </data>
   <data name="&gt;&gt;cmdOr1.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="cmdSpace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -10048,7 +10075,7 @@
     <value>6</value>
   </data>
   <data name="cmdSpace.Text" xml:space="preserve">
-    <value>\ space</value>
+    <value>\ s space</value>
   </data>
   <data name="&gt;&gt;cmdSpace.Name" xml:space="preserve">
     <value>cmdSpace</value>
@@ -10060,7 +10087,7 @@
     <value>grpNumber</value>
   </data>
   <data name="&gt;&gt;cmdSpace.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="cmdDigit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -10075,7 +10102,7 @@
     <value>5</value>
   </data>
   <data name="cmdDigit.Text" xml:space="preserve">
-    <value>\ digit</value>
+    <value>\ d digit</value>
   </data>
   <data name="&gt;&gt;cmdDigit.Name" xml:space="preserve">
     <value>cmdDigit</value>
@@ -10087,7 +10114,7 @@
     <value>grpNumber</value>
   </data>
   <data name="&gt;&gt;cmdDigit.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="cmdEnd1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -10102,7 +10129,7 @@
     <value>4</value>
   </data>
   <data name="cmdEnd1.Text" xml:space="preserve">
-    <value>$ End</value>
+    <value>$ end</value>
   </data>
   <data name="&gt;&gt;cmdEnd1.Name" xml:space="preserve">
     <value>cmdEnd1</value>
@@ -10114,7 +10141,7 @@
     <value>grpNumber</value>
   </data>
   <data name="&gt;&gt;cmdEnd1.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="cmdbegin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -10141,7 +10168,7 @@
     <value>grpNumber</value>
   </data>
   <data name="&gt;&gt;cmdbegin.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="cmdAny1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -10168,13 +10195,13 @@
     <value>grpNumber</value>
   </data>
   <data name="&gt;&gt;cmdAny1.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="grpNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>588, 394</value>
+    <value>577, 394</value>
   </data>
   <data name="grpNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>404, 133</value>
+    <value>388, 133</value>
   </data>
   <data name="grpNumber.TabIndex" type="System.Int32, mscorlib">
     <value>193</value>

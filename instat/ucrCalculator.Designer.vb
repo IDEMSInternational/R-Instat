@@ -370,6 +370,7 @@ Partial Class ucrCalculator
         Me.cmdEnd1 = New System.Windows.Forms.Button()
         Me.cmdbegin = New System.Windows.Forms.Button()
         Me.cmdAny1 = New System.Windows.Forms.Button()
+        Me.cmdOr3 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -2592,14 +2593,15 @@ Partial Class ucrCalculator
         '
         'grpNumber
         '
-        Me.grpNumber.Controls.Add(Me.cmdPlusZero)
+        Me.grpNumber.Controls.Add(Me.cmdOr3)
         Me.grpNumber.Controls.Add(Me.cmdEscape)
+        Me.grpNumber.Controls.Add(Me.cmdPlusZero)
         Me.grpNumber.Controls.Add(Me.cmdZero)
         Me.grpNumber.Controls.Add(Me.cmdPlusOne)
         Me.grpNumber.Controls.Add(Me.cmdZeroOrOne)
         Me.grpNumber.Controls.Add(Me.cmdNumbers)
-        Me.grpNumber.Controls.Add(Me.cmdOr2)
         Me.grpNumber.Controls.Add(Me.cmdNot1)
+        Me.grpNumber.Controls.Add(Me.cmdOr2)
         Me.grpNumber.Controls.Add(Me.cmdOr1)
         Me.grpNumber.Controls.Add(Me.cmdSpace)
         Me.grpNumber.Controls.Add(Me.cmdDigit)
@@ -2693,6 +2695,12 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.cmdAny1, "cmdAny1")
         Me.cmdAny1.Name = "cmdAny1"
         Me.cmdAny1.UseVisualStyleBackColor = True
+        '
+        'cmdOr3
+        '
+        resources.ApplyResources(Me.cmdOr3, "cmdOr3")
+        Me.cmdOr3.Name = "cmdOr3"
+        Me.cmdOr3.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
@@ -3067,4 +3075,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdPlusOne As Button
     Friend WithEvents cmdZeroOrOne As Button
     Friend WithEvents cmdNumbers As Button
+    Friend WithEvents cmdOr3 As Button
 End Class
