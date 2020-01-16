@@ -9769,7 +9769,7 @@
     <value>3</value>
   </data>
   <data name="grpModifier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>637, 320</value>
+    <value>586, 320</value>
   </data>
   <data name="grpModifier.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 73</value>
@@ -9796,7 +9796,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdPlusZero.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 150</value>
+    <value>136, 93</value>
   </data>
   <data name="cmdPlusZero.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 37</value>
@@ -9823,7 +9823,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdEscape.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 150</value>
+    <value>3, 57</value>
   </data>
   <data name="cmdEscape.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 37</value>
@@ -9850,7 +9850,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdZero.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 107</value>
+    <value>252, 93</value>
   </data>
   <data name="cmdZero.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 37</value>
@@ -9877,7 +9877,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdPlusOne.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 107</value>
+    <value>194, 93</value>
   </data>
   <data name="cmdPlusOne.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 37</value>
@@ -9904,7 +9904,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdZeroOrOne.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 107</value>
+    <value>268, 57</value>
   </data>
   <data name="cmdZeroOrOne.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 37</value>
@@ -9931,10 +9931,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdNumbers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 107</value>
+    <value>169, 57</value>
   </data>
   <data name="cmdNumbers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 37</value>
+    <value>100, 37</value>
   </data>
   <data name="cmdNumbers.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -9958,7 +9958,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdOr2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 64</value>
+    <value>86, 57</value>
   </data>
   <data name="cmdOr2.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 37</value>
@@ -9985,7 +9985,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdNot1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 64</value>
+    <value>339, 57</value>
   </data>
   <data name="cmdNot1.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 37</value>
@@ -10012,7 +10012,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdOr1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 64</value>
+    <value>78, 93</value>
   </data>
   <data name="cmdOr1.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 37</value>
@@ -10039,7 +10039,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdSpace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 64</value>
+    <value>301, 21</value>
   </data>
   <data name="cmdSpace.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 37</value>
@@ -10066,7 +10066,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDigit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 21</value>
+    <value>218, 21</value>
   </data>
   <data name="cmdDigit.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 37</value>
@@ -10093,7 +10093,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdEnd1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 21</value>
+    <value>144, 21</value>
   </data>
   <data name="cmdEnd1.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 37</value>
@@ -10120,7 +10120,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdbegin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 21</value>
+    <value>61, 21</value>
   </data>
   <data name="cmdbegin.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 37</value>
@@ -10147,7 +10147,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdAny1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 21</value>
+    <value>3, 21</value>
   </data>
   <data name="cmdAny1.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 37</value>
@@ -10171,10 +10171,10 @@
     <value>13</value>
   </data>
   <data name="grpNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>663, 394</value>
+    <value>588, 394</value>
   </data>
   <data name="grpNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 192</value>
+    <value>404, 133</value>
   </data>
   <data name="grpNumber.TabIndex" type="System.Int32, mscorlib">
     <value>193</value>
@@ -10207,7 +10207,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1168, 613</value>
+    <value>1250, 613</value>
   </data>
   <data name="&gt;&gt;ttCalculator.Name" xml:space="preserve">
     <value>ttCalculator</value>
