@@ -355,7 +355,7 @@ Partial Class ucrCalculator
         Me.cmdFixed = New System.Windows.Forms.Button()
         Me.cmdCollate = New System.Windows.Forms.Button()
         Me.cmdBoundary = New System.Windows.Forms.Button()
-        Me.grpNumber = New System.Windows.Forms.GroupBox()
+        Me.grpSymbols = New System.Windows.Forms.GroupBox()
         Me.cmdPlusZero = New System.Windows.Forms.Button()
         Me.cmdEscape = New System.Windows.Forms.Button()
         Me.cmdZero = New System.Windows.Forms.Button()
@@ -383,7 +383,7 @@ Partial Class ucrCalculator
         Me.grpCircular.SuspendLayout()
         Me.grpFactor.SuspendLayout()
         Me.grpModifier.SuspendLayout()
-        Me.grpNumber.SuspendLayout()
+        Me.grpSymbols.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -866,7 +866,6 @@ Partial Class ucrCalculator
         '
         Me.grpSummary.Controls.Add(Me.cmdMode)
         Me.grpSummary.Controls.Add(Me.cmdFirst)
-        Me.grpSummary.Controls.Add(Me.grpLogical)
         Me.grpSummary.Controls.Add(Me.cmdLast)
         Me.grpSummary.Controls.Add(Me.cmdnth)
         Me.grpSummary.Controls.Add(Me.cmdCor)
@@ -1478,7 +1477,6 @@ Partial Class ucrCalculator
         '
         Me.grpProbabilty.Controls.Add(Me.cmdQnbin)
         Me.grpProbabilty.Controls.Add(Me.cmdQpois)
-        Me.grpProbabilty.Controls.Add(Me.grpTransform)
         Me.grpProbabilty.Controls.Add(Me.cmdQbinom)
         Me.grpProbabilty.Controls.Add(Me.cmdQbirth)
         Me.grpProbabilty.Controls.Add(Me.cmdQbeta)
@@ -2254,9 +2252,6 @@ Partial Class ucrCalculator
         '
         Me.grpCircular.Controls.Add(Me.cmdCircular)
         Me.grpCircular.Controls.Add(Me.cmdCircQuantile)
-        Me.grpCircular.Controls.Add(Me.grpProbabilty)
-        Me.grpCircular.Controls.Add(Me.grpMaths)
-        Me.grpCircular.Controls.Add(Me.grpSummary)
         Me.grpCircular.Controls.Add(Me.cmdCircMax)
         Me.grpCircular.Controls.Add(Me.cmdA1)
         Me.grpCircular.Controls.Add(Me.cmdAngVar)
@@ -2373,6 +2368,7 @@ Partial Class ucrCalculator
         '
         'grpFactor
         '
+        Me.grpFactor.Controls.Add(Me.grpWakefield)
         Me.grpFactor.Controls.Add(Me.cmdShuffle)
         Me.grpFactor.Controls.Add(Me.grpCircular)
         Me.grpFactor.Controls.Add(Me.cmdShift)
@@ -2591,26 +2587,26 @@ Partial Class ucrCalculator
         Me.cmdBoundary.Name = "cmdBoundary"
         Me.cmdBoundary.UseVisualStyleBackColor = True
         '
-        'grpNumber
+        'grpSymbols
         '
-        Me.grpNumber.Controls.Add(Me.cmdOr3)
-        Me.grpNumber.Controls.Add(Me.cmdEscape)
-        Me.grpNumber.Controls.Add(Me.cmdPlusZero)
-        Me.grpNumber.Controls.Add(Me.cmdZero)
-        Me.grpNumber.Controls.Add(Me.cmdPlusOne)
-        Me.grpNumber.Controls.Add(Me.cmdZeroOrOne)
-        Me.grpNumber.Controls.Add(Me.cmdNumbers)
-        Me.grpNumber.Controls.Add(Me.cmdNot1)
-        Me.grpNumber.Controls.Add(Me.cmdOr2)
-        Me.grpNumber.Controls.Add(Me.cmdOr1)
-        Me.grpNumber.Controls.Add(Me.cmdSpace)
-        Me.grpNumber.Controls.Add(Me.cmdDigit)
-        Me.grpNumber.Controls.Add(Me.cmdEnd1)
-        Me.grpNumber.Controls.Add(Me.cmdbegin)
-        Me.grpNumber.Controls.Add(Me.cmdAny1)
-        resources.ApplyResources(Me.grpNumber, "grpNumber")
-        Me.grpNumber.Name = "grpNumber"
-        Me.grpNumber.TabStop = False
+        Me.grpSymbols.Controls.Add(Me.cmdOr3)
+        Me.grpSymbols.Controls.Add(Me.cmdEscape)
+        Me.grpSymbols.Controls.Add(Me.cmdPlusZero)
+        Me.grpSymbols.Controls.Add(Me.cmdZero)
+        Me.grpSymbols.Controls.Add(Me.cmdPlusOne)
+        Me.grpSymbols.Controls.Add(Me.cmdZeroOrOne)
+        Me.grpSymbols.Controls.Add(Me.cmdNumbers)
+        Me.grpSymbols.Controls.Add(Me.cmdNot1)
+        Me.grpSymbols.Controls.Add(Me.cmdOr2)
+        Me.grpSymbols.Controls.Add(Me.cmdOr1)
+        Me.grpSymbols.Controls.Add(Me.cmdSpace)
+        Me.grpSymbols.Controls.Add(Me.cmdDigit)
+        Me.grpSymbols.Controls.Add(Me.cmdEnd1)
+        Me.grpSymbols.Controls.Add(Me.cmdbegin)
+        Me.grpSymbols.Controls.Add(Me.cmdAny1)
+        resources.ApplyResources(Me.grpSymbols, "grpSymbols")
+        Me.grpSymbols.Name = "grpSymbols"
+        Me.grpSymbols.TabStop = False
         '
         'cmdPlusZero
         '
@@ -2706,10 +2702,14 @@ Partial Class ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpNumber)
+        Me.Controls.Add(Me.grpLogical)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpMaths)
+        Me.Controls.Add(Me.grpProbabilty)
+        Me.Controls.Add(Me.grpTransform)
+        Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.grpModifier)
         Me.Controls.Add(Me.grpFactor)
-        Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.cmdHelp)
@@ -2736,7 +2736,7 @@ Partial Class ucrCalculator
         Me.grpCircular.ResumeLayout(False)
         Me.grpFactor.ResumeLayout(False)
         Me.grpModifier.ResumeLayout(False)
-        Me.grpNumber.ResumeLayout(False)
+        Me.grpSymbols.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3056,7 +3056,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdReplace2 As Button
     Friend WithEvents cmdReplace As Button
     Friend WithEvents grpModifier As GroupBox
-    Friend WithEvents grpNumber As GroupBox
+    Friend WithEvents grpSymbols As GroupBox
     Friend WithEvents cmdRegex As Button
     Friend WithEvents cmdFixed As Button
     Friend WithEvents cmdCollate As Button
