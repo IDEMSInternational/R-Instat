@@ -351,25 +351,25 @@ Partial Class ucrCalculator
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpModifier = New System.Windows.Forms.GroupBox()
-        Me.grpNumber = New System.Windows.Forms.GroupBox()
-        Me.cmdBoundary = New System.Windows.Forms.Button()
-        Me.cmdCollate = New System.Windows.Forms.Button()
-        Me.cmdFixed = New System.Windows.Forms.Button()
         Me.cmdRegex = New System.Windows.Forms.Button()
-        Me.cmdAny1 = New System.Windows.Forms.Button()
-        Me.cmdbegin = New System.Windows.Forms.Button()
-        Me.cmdEnd1 = New System.Windows.Forms.Button()
-        Me.cmdDigit = New System.Windows.Forms.Button()
-        Me.cmdSpace = New System.Windows.Forms.Button()
-        Me.cmdOr1 = New System.Windows.Forms.Button()
-        Me.cmdNot1 = New System.Windows.Forms.Button()
-        Me.cmdOr2 = New System.Windows.Forms.Button()
-        Me.cmdNumbers = New System.Windows.Forms.Button()
-        Me.cmdZeroOrOne = New System.Windows.Forms.Button()
-        Me.cmdPlusOne = New System.Windows.Forms.Button()
-        Me.cmdZero = New System.Windows.Forms.Button()
-        Me.cmdEscape = New System.Windows.Forms.Button()
+        Me.cmdFixed = New System.Windows.Forms.Button()
+        Me.cmdCollate = New System.Windows.Forms.Button()
+        Me.cmdBoundary = New System.Windows.Forms.Button()
+        Me.grpNumber = New System.Windows.Forms.GroupBox()
         Me.cmdPlusZero = New System.Windows.Forms.Button()
+        Me.cmdEscape = New System.Windows.Forms.Button()
+        Me.cmdZero = New System.Windows.Forms.Button()
+        Me.cmdPlusOne = New System.Windows.Forms.Button()
+        Me.cmdZeroOrOne = New System.Windows.Forms.Button()
+        Me.cmdNumbers = New System.Windows.Forms.Button()
+        Me.cmdOr2 = New System.Windows.Forms.Button()
+        Me.cmdNot1 = New System.Windows.Forms.Button()
+        Me.cmdOr1 = New System.Windows.Forms.Button()
+        Me.cmdSpace = New System.Windows.Forms.Button()
+        Me.cmdDigit = New System.Windows.Forms.Button()
+        Me.cmdEnd1 = New System.Windows.Forms.Button()
+        Me.cmdbegin = New System.Windows.Forms.Button()
+        Me.cmdAny1 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -2566,6 +2566,30 @@ Partial Class ucrCalculator
         Me.grpModifier.Name = "grpModifier"
         Me.grpModifier.TabStop = False
         '
+        'cmdRegex
+        '
+        resources.ApplyResources(Me.cmdRegex, "cmdRegex")
+        Me.cmdRegex.Name = "cmdRegex"
+        Me.cmdRegex.UseVisualStyleBackColor = True
+        '
+        'cmdFixed
+        '
+        resources.ApplyResources(Me.cmdFixed, "cmdFixed")
+        Me.cmdFixed.Name = "cmdFixed"
+        Me.cmdFixed.UseVisualStyleBackColor = True
+        '
+        'cmdCollate
+        '
+        resources.ApplyResources(Me.cmdCollate, "cmdCollate")
+        Me.cmdCollate.Name = "cmdCollate"
+        Me.cmdCollate.UseVisualStyleBackColor = True
+        '
+        'cmdBoundary
+        '
+        resources.ApplyResources(Me.cmdBoundary, "cmdBoundary")
+        Me.cmdBoundary.Name = "cmdBoundary"
+        Me.cmdBoundary.UseVisualStyleBackColor = True
+        '
         'grpNumber
         '
         Me.grpNumber.Controls.Add(Me.cmdPlusZero)
@@ -2586,101 +2610,11 @@ Partial Class ucrCalculator
         Me.grpNumber.Name = "grpNumber"
         Me.grpNumber.TabStop = False
         '
-        'cmdBoundary
+        'cmdPlusZero
         '
-        resources.ApplyResources(Me.cmdBoundary, "cmdBoundary")
-        Me.cmdBoundary.Name = "cmdBoundary"
-        Me.cmdBoundary.UseVisualStyleBackColor = True
-        '
-        'cmdCollate
-        '
-        resources.ApplyResources(Me.cmdCollate, "cmdCollate")
-        Me.cmdCollate.Name = "cmdCollate"
-        Me.cmdCollate.UseVisualStyleBackColor = True
-        '
-        'cmdFixed
-        '
-        resources.ApplyResources(Me.cmdFixed, "cmdFixed")
-        Me.cmdFixed.Name = "cmdFixed"
-        Me.cmdFixed.UseVisualStyleBackColor = True
-        '
-        'cmdRegex
-        '
-        resources.ApplyResources(Me.cmdRegex, "cmdRegex")
-        Me.cmdRegex.Name = "cmdRegex"
-        Me.cmdRegex.UseVisualStyleBackColor = True
-        '
-        'cmdAny1
-        '
-        resources.ApplyResources(Me.cmdAny1, "cmdAny1")
-        Me.cmdAny1.Name = "cmdAny1"
-        Me.cmdAny1.UseVisualStyleBackColor = True
-        '
-        'cmdbegin
-        '
-        resources.ApplyResources(Me.cmdbegin, "cmdbegin")
-        Me.cmdbegin.Name = "cmdbegin"
-        Me.cmdbegin.UseVisualStyleBackColor = True
-        '
-        'cmdEnd1
-        '
-        resources.ApplyResources(Me.cmdEnd1, "cmdEnd1")
-        Me.cmdEnd1.Name = "cmdEnd1"
-        Me.cmdEnd1.UseVisualStyleBackColor = True
-        '
-        'cmdDigit
-        '
-        resources.ApplyResources(Me.cmdDigit, "cmdDigit")
-        Me.cmdDigit.Name = "cmdDigit"
-        Me.cmdDigit.UseVisualStyleBackColor = True
-        '
-        'cmdSpace
-        '
-        resources.ApplyResources(Me.cmdSpace, "cmdSpace")
-        Me.cmdSpace.Name = "cmdSpace"
-        Me.cmdSpace.UseVisualStyleBackColor = True
-        '
-        'cmdOr1
-        '
-        resources.ApplyResources(Me.cmdOr1, "cmdOr1")
-        Me.cmdOr1.Name = "cmdOr1"
-        Me.cmdOr1.UseVisualStyleBackColor = True
-        '
-        'cmdNot1
-        '
-        resources.ApplyResources(Me.cmdNot1, "cmdNot1")
-        Me.cmdNot1.Name = "cmdNot1"
-        Me.cmdNot1.UseVisualStyleBackColor = True
-        '
-        'cmdOr2
-        '
-        resources.ApplyResources(Me.cmdOr2, "cmdOr2")
-        Me.cmdOr2.Name = "cmdOr2"
-        Me.cmdOr2.UseVisualStyleBackColor = True
-        '
-        'cmdNumbers
-        '
-        resources.ApplyResources(Me.cmdNumbers, "cmdNumbers")
-        Me.cmdNumbers.Name = "cmdNumbers"
-        Me.cmdNumbers.UseVisualStyleBackColor = True
-        '
-        'cmdZeroOrOne
-        '
-        resources.ApplyResources(Me.cmdZeroOrOne, "cmdZeroOrOne")
-        Me.cmdZeroOrOne.Name = "cmdZeroOrOne"
-        Me.cmdZeroOrOne.UseVisualStyleBackColor = True
-        '
-        'cmdPlusOne
-        '
-        resources.ApplyResources(Me.cmdPlusOne, "cmdPlusOne")
-        Me.cmdPlusOne.Name = "cmdPlusOne"
-        Me.cmdPlusOne.UseVisualStyleBackColor = True
-        '
-        'cmdZero
-        '
-        resources.ApplyResources(Me.cmdZero, "cmdZero")
-        Me.cmdZero.Name = "cmdZero"
-        Me.cmdZero.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdPlusZero, "cmdPlusZero")
+        Me.cmdPlusZero.Name = "cmdPlusZero"
+        Me.cmdPlusZero.UseVisualStyleBackColor = True
         '
         'cmdEscape
         '
@@ -2688,11 +2622,77 @@ Partial Class ucrCalculator
         Me.cmdEscape.Name = "cmdEscape"
         Me.cmdEscape.UseVisualStyleBackColor = True
         '
-        'cmdPlusZero
+        'cmdZero
         '
-        resources.ApplyResources(Me.cmdPlusZero, "cmdPlusZero")
-        Me.cmdPlusZero.Name = "cmdPlusZero"
-        Me.cmdPlusZero.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdZero, "cmdZero")
+        Me.cmdZero.Name = "cmdZero"
+        Me.cmdZero.UseVisualStyleBackColor = True
+        '
+        'cmdPlusOne
+        '
+        resources.ApplyResources(Me.cmdPlusOne, "cmdPlusOne")
+        Me.cmdPlusOne.Name = "cmdPlusOne"
+        Me.cmdPlusOne.UseVisualStyleBackColor = True
+        '
+        'cmdZeroOrOne
+        '
+        resources.ApplyResources(Me.cmdZeroOrOne, "cmdZeroOrOne")
+        Me.cmdZeroOrOne.Name = "cmdZeroOrOne"
+        Me.cmdZeroOrOne.UseVisualStyleBackColor = True
+        '
+        'cmdNumbers
+        '
+        resources.ApplyResources(Me.cmdNumbers, "cmdNumbers")
+        Me.cmdNumbers.Name = "cmdNumbers"
+        Me.cmdNumbers.UseVisualStyleBackColor = True
+        '
+        'cmdOr2
+        '
+        resources.ApplyResources(Me.cmdOr2, "cmdOr2")
+        Me.cmdOr2.Name = "cmdOr2"
+        Me.cmdOr2.UseVisualStyleBackColor = True
+        '
+        'cmdNot1
+        '
+        resources.ApplyResources(Me.cmdNot1, "cmdNot1")
+        Me.cmdNot1.Name = "cmdNot1"
+        Me.cmdNot1.UseVisualStyleBackColor = True
+        '
+        'cmdOr1
+        '
+        resources.ApplyResources(Me.cmdOr1, "cmdOr1")
+        Me.cmdOr1.Name = "cmdOr1"
+        Me.cmdOr1.UseVisualStyleBackColor = True
+        '
+        'cmdSpace
+        '
+        resources.ApplyResources(Me.cmdSpace, "cmdSpace")
+        Me.cmdSpace.Name = "cmdSpace"
+        Me.cmdSpace.UseVisualStyleBackColor = True
+        '
+        'cmdDigit
+        '
+        resources.ApplyResources(Me.cmdDigit, "cmdDigit")
+        Me.cmdDigit.Name = "cmdDigit"
+        Me.cmdDigit.UseVisualStyleBackColor = True
+        '
+        'cmdEnd1
+        '
+        resources.ApplyResources(Me.cmdEnd1, "cmdEnd1")
+        Me.cmdEnd1.Name = "cmdEnd1"
+        Me.cmdEnd1.UseVisualStyleBackColor = True
+        '
+        'cmdbegin
+        '
+        resources.ApplyResources(Me.cmdbegin, "cmdbegin")
+        Me.cmdbegin.Name = "cmdbegin"
+        Me.cmdbegin.UseVisualStyleBackColor = True
+        '
+        'cmdAny1
+        '
+        resources.ApplyResources(Me.cmdAny1, "cmdAny1")
+        Me.cmdAny1.Name = "cmdAny1"
+        Me.cmdAny1.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
