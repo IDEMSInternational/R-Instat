@@ -2435,4 +2435,8 @@ Public Class ucrCalculator
     Private Sub cmdbegin_Click(sender As Object, e As EventArgs) Handles cmdbegin.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("^")
     End Sub
+
+    Private Sub cmdEnd1_Click(sender As Object, e As EventArgs) Handles cmdEnd1.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("&")
+    End Sub
 End Class
