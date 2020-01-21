@@ -2447,4 +2447,12 @@ Public Class ucrCalculator
     Private Sub cmdSpace_Click(sender As Object, e As EventArgs) Handles cmdSpace.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\ s")
     End Sub
+
+    Private Sub cmdOr1_Click(sender As Object, e As EventArgs) Handles cmdOr1.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[]")
+    End Sub
+
+    Private Sub cmdNot1_Click(sender As Object, e As EventArgs) Handles cmdNot1.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[^ ]")
+    End Sub
 End Class
