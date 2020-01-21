@@ -71,7 +71,7 @@ Partial Class dlgModelling
         Me.cmdlda = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.lblRpackage = New System.Windows.Forms.Label()
-        Me.ucrTry = New instat.ucrTry()
+        Me.ucrTryModelling = New instat.ucrTry()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrSaveResult = New instat.ucrSave()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
@@ -409,10 +409,10 @@ Partial Class dlgModelling
         resources.ApplyResources(Me.lblRpackage, "lblRpackage")
         Me.lblRpackage.Name = "lblRpackage"
         '
-        'ucrTry
+        'ucrTryModelling
         '
-        resources.ApplyResources(Me.ucrTry, "ucrTry")
-        Me.ucrTry.Name = "ucrTry"
+        resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
+        Me.ucrTryModelling.Name = "ucrTryModelling"
         '
         'ucrChkIncludeArguments
         '
@@ -458,7 +458,7 @@ Partial Class dlgModelling
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrTry)
+        Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.grplme4)
         Me.Controls.Add(Me.grpMASS)
         Me.Controls.Add(Me.grpextRemes)
@@ -544,5 +544,5 @@ Partial Class dlgModelling
     Friend WithEvents cmdlqs As Button
     Friend WithEvents cmdmca As Button
     Friend WithEvents cmdqda As Button
-    Friend WithEvents ucrTry As ucrTry
+    Friend WithEvents ucrTryModelling As ucrTry
 End Class

@@ -1,25 +1,69 @@
-﻿Imports RDotNet
-Public Class ucrTry
-    Public bFirstLoad As Boolean
-    Private strError As String
-    Private bReceiverExpressionIsEmpty As Boolean
-    Private baseCommandString As RCodeStructure
-    Private commandStr As String
-    Public clsAttachNameRFunctionParam As RFunction
-    Public clsAttach As RFunction
-    Public clsDetach As RFunction
-    Public Sub New()
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+Imports RDotNet
+Public Class ucrTry
+    Public bFirstLoad As Boolean = False
+    Private bIsCommand As Boolean = False
+    Private CommandModel As String = ""
+    Private bIsModel As Boolean
+    Private strError As String
+    Private WithEvents ucrReceiverScript As ucrReceiverExpression
+    Private clsRSyntax As RSyntax
+    Private bstrVecOutput As Boolean
+
+    Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
         bFirstLoad = True
-        clsAttach = New RFunction
-        clsDetach = New RFunction
-
+        strError = ""
+        clsRSyntax = New RSyntax
+        bstrVecOutput = False
     End Sub
 
+    Public Sub SetReceiver(ucrNewReceiverScript As ucrReceiverExpression)
+        ucrReceiverScript = ucrNewReceiverScript
+    End Sub
+
+    Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
+        clsRSyntax = clsNewRSyntax
+    End Sub
+
+    Public Sub StrvecOutputRequired()
+        bstrVecOutput = True
+    End Sub
+
+    Public Sub SetIsModel()
+        bIsModel = True
+    End Sub
+
+    Public Sub SetIsCommand()
+        bIsCommand = True
+    End Sub
+
+    Private Sub setToCommandOrModel()
+        If bIsCommand Then
+            CommandModel = "Command"
+        ElseIf bIsModel Then
+            CommandModel = "Model"
+        End If
+    End Sub
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
         TryScript()
     End Sub
@@ -31,74 +75,99 @@ Public Class ucrTry
         End If
     End Sub
 
-    'Ckecks if the ucrReceiverExpression is empty
-    Public Sub ReceiverExpressionIsEmpty(IsEmpty As Boolean)
-        bReceiverExpressionIsEmpty = IsEmpty
-    End Sub
 
-    Public Sub SetCommandStringAsRCode(commandString As RCodeStructure)
-        baseCommandString = commandString
-    End Sub
-
-    Public Sub SetCommandStringAsString(commandString As String)
-        commandStr = commandString
-    End Sub
-
-    Public Sub setclsAttachNameRFunctionParam(RFunctionParamName As RFunction)
-        clsAttachNameRFunctionParam = RFunctionParamName
-    End Sub
     Private Sub TryScript()
-        Dim strOutPut As String
-        Dim strAttach As String
-        Dim strDetach As String
         Dim strTempScript As String = ""
         Dim strErrorDetail As String = ""
         Dim strVecOutput As CharacterVector
-        Dim clsCommandString As RCodeStructure
 
-        clsAttach.SetRCommand("attach")
-        clsAttach.AddParameter("what", clsRFunctionParameter:=clsAttachNameRFunctionParam, iPosition:=0)
+        Dim lstScripts As New List(Of String)
+        Dim strBeforeAfterScript As String
+        Dim strBeforeAfterTemp As String
+        Dim clsCodeClone As RCodeStructure
 
-        clsDetach.SetRCommand("detach")
-        clsDetach.AddParameter("name", clsRFunctionParameter:=clsAttachNameRFunctionParam, iPosition:=0)
-        clsDetach.AddParameter("unload", "TRUE", iPosition:=1)
-
+        Dim strTemp As String = ""
+        Dim strScript As String = ""
+        Dim clsMainCode As RCodeStructure = Nothing
 
         ucrInputTryMessage.txtInput.Controls.Clear()
 
         Try
-            If bReceiverExpressionIsEmpty Then
+            setToCommandOrModel()
+            If ucrReceiverScript.IsEmpty Then
                 ucrInputTryMessage.SetName("")
             Else
-                'get strScript here
-                strAttach = clsAttach.Clone().ToScript(strTempScript)
-                frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
-                strTempScript = ""
-                clsCommandString = baseCommandString
-                clsCommandString.RemoveAssignTo()
-                strOutPut = clsCommandString.ToScript(strTempScript, commandStr)
-                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript & strOutPut, bSilent:=True, strError:=strErrorDetail)
-                If strVecOutput IsNot Nothing Then
-                    If strVecOutput.Length > 1 Then
-                        ucrInputTryMessage.SetName("Model runs without error")
-                        ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
+                For Each clsTempCode In clsRSyntax.lstBeforeCodes
+                    clsCodeClone = clsTempCode.Clone()
+                    strBeforeAfterScript = ""
+                    strBeforeAfterTemp = clsCodeClone.ToScript(strBeforeAfterScript)
+                    'Sometimes the output of the R-command we deal with should not be part of the script... That's only the case when this output has already been assigned.
+                    If clsCodeClone.bExcludeAssignedFunctionOutput AndAlso clsCodeClone.bIsAssigned Then
+                        lstScripts.Add(strBeforeAfterScript)
+                    Else
+                        lstScripts.Add(strBeforeAfterScript & strBeforeAfterTemp)
                     End If
-                Else
-                    ucrInputTryMessage.SetName("Command produced an error or no output to display.")
-                    ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-                    AddButtonInTryTextBox()
-                    strError = strErrorDetail
+                Next
+                If lstScripts.Count > 0 Then
+                    strTempScript = String.Join(vbNewLine, lstScripts)
+                    frmMain.clsRLink.RunInternalScript(strTempScript, bSilent:=True)
+                End If
 
+                If clsRSyntax.bUseBaseFunction Then
+                    clsMainCode = clsRSyntax.clsBaseFunction.Clone()
+                ElseIf clsRSyntax.bUseBaseOperator Then
+                    clsMainCode = clsRSyntax.clsBaseOperator.Clone()
+                ElseIf clsRSyntax.bUseCommandString Then
+                    clsMainCode = clsRSyntax.clsBaseCommandString.Clone()
+                End If
+                If clsMainCode IsNot Nothing Then
+                    clsMainCode.RemoveAssignTo()
+                    strTemp = clsMainCode.ToScript(strScript, clsRSyntax.strCommandString)
+                    strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTemp, bSilent:=True, strError:=strErrorDetail)
+                    If strVecOutput IsNot Nothing Then
+                        If bstrVecOutput Then
+                            If strVecOutput.Length > 1 Then
+                                ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5) & "...")
+                            Else
+                                ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5))
+                            End If
+                        Else
+                            If strVecOutput.Length > 1 Then
+                                ucrInputTryMessage.SetName(CommandModel & " runs without error")
+                                ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
+                            End If
+                        End If
+
+                    Else
+                        ucrInputTryMessage.SetName(CommandModel & " produced an error or no output to display.")
+                        ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
+                        strError = strErrorDetail
+                        AddButtonInTryTextBox()
+                    End If
                 End If
             End If
         Catch ex As Exception
-            ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
+            ucrInputTryMessage.SetName(CommandModel & "produced an error. Modify input before running.")
+            strError = strErrorDetail
             ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
             AddButtonInTryTextBox()
-            'Finally
-            strTempScript = ""
-            strDetach = clsDetach.Clone().ToScript(strTempScript)
-            frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
+        Finally
+            lstScripts = New List(Of String)
+            For Each clsTempCode In clsRSyntax.lstAfterCodes
+                clsCodeClone = clsTempCode.Clone()
+                strBeforeAfterScript = ""
+                strBeforeAfterTemp = clsCodeClone.ToScript(strBeforeAfterScript)
+                'Sometimes the output of the R-command we deal with should not be part of the script... That's only the case when this output has already been assigned.
+                If clsCodeClone.bExcludeAssignedFunctionOutput AndAlso clsCodeClone.bIsAssigned Then
+                    lstScripts.Add(strBeforeAfterScript)
+                Else
+                    lstScripts.Add(strBeforeAfterScript & strBeforeAfterTemp)
+                End If
+            Next
+            If lstScripts.Count > 0 Then
+                strTempScript = String.Join(vbNewLine, lstScripts)
+                frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript, bSilent:=True)
+            End If
         End Try
     End Sub
 
@@ -151,5 +220,9 @@ Public Class ucrTry
                                      End Sub
     End Sub
 
-
+    Private Sub ucrReceiverScript_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverScript.SelectionChanged
+        ucrInputTryMessage.SetName("")
+        ucrInputTryMessage.txtInput.BackColor = Color.White
+        ucrInputTryMessage.txtInput.Controls.Clear()
+    End Sub
 End Class
