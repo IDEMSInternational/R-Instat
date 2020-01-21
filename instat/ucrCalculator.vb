@@ -2406,7 +2406,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCollate_Click(sender As Object, e As EventArgs) Handles cmdCollate.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::coll(pattern = , stringr::coll(), ignore_case = FALSE, locale = ""en"")", 56)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(pattern = , stringr::coll(), ignore_case = FALSE, locale = ""en"")", 56)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::coll()", 1)
         End If
@@ -2414,15 +2414,15 @@ Public Class ucrCalculator
 
     Private Sub cmdFixed_Click(sender As Object, e As EventArgs) Handles cmdFixed.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_replace_all(string = , pattern = , replacement = )", 30)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(pattern = , stringr::fixed(), ignore_case = FALSE)", 50)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_replace_all()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::fixed()", 1)
         End If
     End Sub
 
     Private Sub cmdRegex_Click(sender As Object, e As EventArgs) Handles cmdRegex.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::regex(pattern = , stringr::regex() , ignore_case = FALSE , multiline = FALSE , comments = FALSE, dotall = FALSE)", 78)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(pattern = , stringr::regex() , ignore_case = FALSE , multiline = FALSE , comments = FALSE, dotall = FALSE)", 78)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::regex()", 1)
         End If
