@@ -2395,4 +2395,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_replace_all()", 1)
         End If
     End Sub
+
+    Private Sub cmdBoundary_Click(sender As Object, e As EventArgs) Handles cmdBoundary.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(type = c(""character"", ""line_break"", ""sentence"", ""word""), stringr::boundary(), skip_word_none = NA)", 24)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("boundary()", 1)
+        End If
+    End Sub
 End Class
