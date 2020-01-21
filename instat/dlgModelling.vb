@@ -37,8 +37,6 @@ Public Class dlgModelling
 
     Private bResetDisplayOptions = False
 
-    Private strError As String = ""
-
     Private Sub dlgModelling_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -65,6 +63,9 @@ Public Class dlgModelling
         ucrSaveResult.SetCheckBoxText("Save Model")
         ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorModelling.ucrAvailableDataFrames)
+
+        ucrTryModelling.SetReceiver(ucrReceiverForTestColumn)
+        ucrTryModelling.SetIsModel()
 
         ucrInputComboRPackage.SetItems({"stats", "extRemes", "lme4", "MASS"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
@@ -114,14 +115,20 @@ Public Class dlgModelling
 
         ucrSaveResult.Reset()
 
+        clsAttach.SetRCommand("attach")
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorModelling.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+
+        clsDetach.SetRCommand("detach")
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorModelling.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsDetach.AddParameter("unload", "TRUE", iPosition:=1)
+
+
         ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
 
         ucrChkIncludeArguments.Checked = False
         ucrInputComboRPackage.SetName("stats")
-
-        ucrTry.setclsAttachNameRFunctionParam(ucrSelectorModelling.ucrAvailableDataFrames.clsCurrDataFrame)
 
         'Residual Plots
         clsAutoplot = clsRegressionDefaults.clsDefaultAutoplot.Clone
@@ -194,6 +201,8 @@ Public Class dlgModelling
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach, 1000)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
+
+        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
 
         bResetDisplayOptions = True
         bUpdating = False
@@ -529,18 +538,6 @@ Public Class dlgModelling
 
     Private Sub ucrReceiverForTestColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForTestColumn.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForTestColumn.GetVariableNames(False))
-        ucrTry.ucrInputTryMessage.SetName("")
-        ucrTry.cmdTry.Enabled = Not ucrReceiverForTestColumn.IsEmpty()
-        ucrTry.ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
-        If ucrReceiverForTestColumn.IsEmpty Then
-            ucrTry.ReceiverExpressionIsEmpty(True)
-        Else
-            ucrTry.ReceiverExpressionIsEmpty(False)
-        End If
-        ucrTry.ucrInputTryMessage.txtInput.Controls.Clear()
-        ucrTry.SetCommandStringAsRCode(ucrBase.clsRsyntax.clsBaseCommandString.Clone())
-        ucrTry.SetCommandStringAsString(ucrBase.clsRsyntax.strCommandString)
-
         TestOkEnabled()
     End Sub
 
@@ -606,7 +603,5 @@ Public Class dlgModelling
         ucrReceiverForTestColumn.AddtoCombobox(ucrReceiverForTestColumn.GetText)
     End Sub
 
-    Private Sub ucrReceiverForTestColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForTestColumn.ControlValueChanged
 
-    End Sub
 End Class

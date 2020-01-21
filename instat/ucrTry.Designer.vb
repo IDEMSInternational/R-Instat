@@ -42,7 +42,7 @@ Partial Class ucrTry
         Me.ucrInputTryMessage.IsReadOnly = False
         Me.ucrInputTryMessage.Location = New System.Drawing.Point(89, 4)
         Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
-        Me.ucrInputTryMessage.Size = New System.Drawing.Size(388, 21)
+        Me.ucrInputTryMessage.Size = New System.Drawing.Size(297, 21)
         Me.ucrInputTryMessage.TabIndex = 3
         '
         'ucrTry
@@ -52,7 +52,7 @@ Partial Class ucrTry
         Me.Controls.Add(Me.ucrInputTryMessage)
         Me.Controls.Add(Me.cmdTry)
         Me.Name = "ucrTry"
-        Me.Size = New System.Drawing.Size(480, 33)
+        Me.Size = New System.Drawing.Size(396, 33)
         Me.ResumeLayout(False)
 
     End Sub

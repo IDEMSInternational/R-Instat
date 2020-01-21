@@ -55,6 +55,8 @@ Public Class dlgUseModel
         ucrInputComboRPackage.SetItems({"General", "Prediction", "extRemes", "segmented"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
 
+        ucrTryModelling.SetReceiver(ucrReceiverForTestColumn)
+
         ucrChkIncludeArguments.SetText("Show Arguments")
 
         ucrInputModels.IsReadOnly = True
@@ -83,7 +85,6 @@ Public Class dlgUseModel
 
 
         ucrChkIncludeArguments.Checked = False
-        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -94,69 +95,13 @@ Public Class dlgUseModel
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
 
+        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
 
         ucrBase.clsRsyntax.iCallType = 2
 
         KeyboardsVisibility()
         GetModels()
         TestOkEnabled()
-    End Sub
-
-    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
-        TryScript()
-    End Sub
-
-    Private Sub TryScript()
-        Dim strOutPut As String
-        Dim strTempScript As String = ""
-        Dim strVecOutput As CharacterVector
-        Dim clsCommandString As RCodeStructure
-        Dim lstScripts As New List(Of String)
-        Dim strBeforeScript As String
-        Dim strBeforTemp As String
-        Dim clsCodeClone As RCodeStructure
-
-        Try
-            If ucrReceiverForTestColumn.IsEmpty Then
-                ucrInputTryMessage.SetName("")
-            Else
-                For Each clsTempCode In ucrBase.clsRsyntax.lstBeforeCodes
-                    clsCodeClone = clsTempCode.Clone()
-                    strBeforeScript = ""
-                    strBeforTemp = clsCodeClone.ToScript(strBeforeScript)
-                    'Sometimes the output of the R-command we deal with should not be part of the script... That's only the case when this output has already been assigned.
-                    If clsCodeClone.bExcludeAssignedFunctionOutput AndAlso clsCodeClone.bIsAssigned Then
-                        lstScripts.Add(strBeforeScript)
-                    Else
-                        lstScripts.Add(strBeforeScript & strBeforTemp)
-                    End If
-                Next
-                strTempScript = String.Join(vbNewLine, lstScripts)
-                frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript, bSilent:=True)
-
-                clsCommandString = ucrBase.clsRsyntax.clsBaseCommandString.Clone()
-                clsCommandString.RemoveAssignTo()
-                strOutPut = clsCommandString.ToScript("", ucrBase.clsRsyntax.strCommandString)
-                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strOutPut, bSilent:=True)
-
-
-                If strVecOutput IsNot Nothing Then
-                    If strVecOutput.Length > 1 Then
-                        ucrInputTryMessage.SetName("Command runs without error")
-                        ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
-                    End If
-                Else
-                    ucrInputTryMessage.SetName("Command produced an error or no output to display.")
-                    ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-                End If
-            End If
-        Catch ex As Exception
-            ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
-            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-        Finally
-            strTempScript = ""
-            frmMain.clsRLink.RunInternalScript(strTempScript, bSilent:=True)
-        End Try
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Object)
@@ -455,9 +400,6 @@ Public Class dlgUseModel
 
     Private Sub ucrReceiverForTestColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForTestColumn.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForTestColumn.GetVariableNames(False))
-        ucrInputTryMessage.SetName("")
-        cmdTry.Enabled = Not ucrReceiverForTestColumn.IsEmpty()
-        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
         TestOkEnabled()
     End Sub
 
