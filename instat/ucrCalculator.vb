@@ -2479,4 +2479,8 @@ Public Class ucrCalculator
     Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("*0+")
     End Sub
+
+    Private Sub cmdEscape_Click(sender As Object, e As EventArgs) Handles cmdEscape.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\\")
+    End Sub
 End Class
