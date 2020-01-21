@@ -2427,4 +2427,8 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::regex()", 1)
         End If
     End Sub
+
+    Private Sub cmdAny1_Click(sender As Object, e As EventArgs) Handles cmdAny1.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(".")
+    End Sub
 End Class
