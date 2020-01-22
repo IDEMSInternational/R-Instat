@@ -2191,7 +2191,7 @@
     <value>23</value>
   </data>
   <data name="grpTransform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>580, 74</value>
+    <value>577, 81</value>
   </data>
   <data name="grpTransform.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -2218,7 +2218,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpTransform.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="cmdMode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3037,7 +3037,7 @@
     <value>25</value>
   </data>
   <data name="grpSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>569, 75</value>
+    <value>575, 79</value>
   </data>
   <data name="grpSummary.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -3064,7 +3064,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpSummary.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="cmdFalse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -4099,7 +4099,7 @@
     <value>33</value>
   </data>
   <data name="grpLogical.Location" type="System.Drawing.Point, System.Drawing">
-    <value>569, 74</value>
+    <value>575, 75</value>
   </data>
   <data name="grpLogical.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -4126,7 +4126,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpLogical.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="cmdStarts.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -4234,7 +4234,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdRemove2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 126</value>
+    <value>239, 126</value>
   </data>
   <data name="cmdRemove2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -4267,7 +4267,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdRemove1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 126</value>
+    <value>160, 126</value>
   </data>
   <data name="cmdRemove1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -4300,7 +4300,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdLocate2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 126</value>
+    <value>81, 126</value>
   </data>
   <data name="cmdLocate2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -4465,7 +4465,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdSplit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>317, 126</value>
+    <value>318, 126</value>
   </data>
   <data name="cmdSplit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -4861,7 +4861,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdLocate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 126</value>
+    <value>2, 126</value>
   </data>
   <data name="cmdLocate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -5911,7 +5911,7 @@
     <value>29</value>
   </data>
   <data name="grpProbabilty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>573, 78</value>
+    <value>578, 81</value>
   </data>
   <data name="grpProbabilty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -5938,7 +5938,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpProbabilty.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="cmdAtan2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -6649,7 +6649,7 @@
     <value>22</value>
   </data>
   <data name="grpMaths.Location" type="System.Drawing.Point, System.Drawing">
-    <value>573, 78</value>
+    <value>575, 71</value>
   </data>
   <data name="grpMaths.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -6676,7 +6676,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpMaths.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
   <metadata name="ttCalculator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -8497,7 +8497,7 @@
     <value>54</value>
   </data>
   <data name="grpWakefield.Location" type="System.Drawing.Point, System.Drawing">
-    <value>573, 74</value>
+    <value>570, 67</value>
   </data>
   <data name="grpWakefield.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -8959,7 +8959,7 @@
     <value>15</value>
   </data>
   <data name="grpCircular.Location" type="System.Drawing.Point, System.Drawing">
-    <value>569, 72</value>
+    <value>567, 68</value>
   </data>
   <data name="grpCircular.Size" type="System.Drawing.Size, System.Drawing">
     <value>331, 189</value>
@@ -9523,7 +9523,7 @@
     <value>19</value>
   </data>
   <data name="grpFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>570, 71</value>
+    <value>569, 67</value>
   </data>
   <data name="grpFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>330, 226</value>
@@ -9655,7 +9655,7 @@
     <value>3</value>
   </data>
   <data name="grpModifier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>578, 316</value>
+    <value>578, 278</value>
   </data>
   <data name="grpModifier.Size" type="System.Drawing.Size, System.Drawing">
     <value>360, 73</value>
@@ -10084,7 +10084,7 @@
     <value>14</value>
   </data>
   <data name="grpSymbols.Location" type="System.Drawing.Point, System.Drawing">
-    <value>577, 388</value>
+    <value>577, 353</value>
   </data>
   <data name="grpSymbols.Size" type="System.Drawing.Size, System.Drawing">
     <value>388, 133</value>
