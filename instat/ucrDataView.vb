@@ -686,8 +686,7 @@ Public Class ucrDataView
         Dim strTemp As String
         clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
         clsGetDataFrame.SetAssignTo(grdCurrSheet.Name)
-        clsGetDataFrame.ToScript(strScript)
-        strTemp = clsViewDataFrame.ToScript()
+        strTemp = clsViewDataFrame.ToScript(strScript)
         RunScriptFromDataView(strScript & strTemp, strComment:="Right Click Menu: View R Data Frame", bSeparateThread:=False)
 
     End Sub
