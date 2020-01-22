@@ -2420,7 +2420,7 @@ Public Class ucrCalculator
 
     Private Sub cmdBoundary_Click(sender As Object, e As EventArgs) Handles cmdBoundary.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(type = c(""character"", ""line_break"", ""sentence"", ""word""), stringr::boundary(), skip_word_none = NA)", 24)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(type = c(""character"", ""line_break"", ""sentence"", ""word""), stringr::boundary(), skip_word_none = NA)", 23)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::boundary()", 1)
         End If
@@ -2428,7 +2428,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCollate_Click(sender As Object, e As EventArgs) Handles cmdCollate.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(pattern = , stringr::coll(), ignore_case = FALSE, locale = ""en"")", 56)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(pattern = , stringr::coll(), ignore_case = FALSE, locale = ""en"")", 51)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::coll()", 1)
         End If
@@ -2436,7 +2436,7 @@ Public Class ucrCalculator
 
     Private Sub cmdFixed_Click(sender As Object, e As EventArgs) Handles cmdFixed.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(pattern = , stringr::fixed(), ignore_case = FALSE)", 50)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(pattern = , stringr::fixed(), ignore_case = FALSE)", 41)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::fixed()", 1)
         End If
@@ -2444,7 +2444,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRegex_Click(sender As Object, e As EventArgs) Handles cmdRegex.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(pattern = , stringr::regex() , ignore_case = FALSE , multiline = FALSE , comments = FALSE, dotall = FALSE)", 78)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(pattern = , stringr::regex() , ignore_case = FALSE , multiline = FALSE , comments = FALSE, dotall = FALSE)", 97)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::regex()", 1)
         End If
