@@ -287,6 +287,8 @@ Public Class ucrCalculator
                 grpDates.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
                 iHelpCalcID = 126
                 Me.Size = New Size(iBasicWidth * 1.38, Me.Height)
             Case "Logical and Symbols"
@@ -303,6 +305,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
             Case "Summary"
                 grpDates.Visible = False
                 grpSummary.Visible = True
@@ -317,6 +321,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
             Case "Strings (Character Columns)"
                 grpDates.Visible = False
                 grpStrings.Visible = True
@@ -329,6 +335,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = True
+                grpSymbols.Visible = True
                 iHelpCalcID = 129
                 Me.Size = New Size(iBasicWidth * 1.42, Me.Height)
             Case "Factor"
@@ -345,6 +353,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
             Case "Probability"
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
@@ -357,6 +367,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
                 iHelpCalcID = 120
                 Me.Size = New Size(iBasicWidth * 1.57, Me.Height)
             Case "Dates"
@@ -371,6 +383,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
                 iHelpCalcID = 130
                 Me.Size = New Size(iBasicWidth * 1.32, Me.Height)
             Case "Transform"
@@ -385,6 +399,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = True
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.33, Me.Height)
             Case "Wakefield"
                 grpDates.Visible = False
@@ -398,6 +414,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = True
+                grpSymbols.Visible = False
+                grpModifier.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.7, Me.Height * 1.07)
             Case "Circular"
                 grpDates.Visible = False
@@ -411,6 +429,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpWakefield.Visible = False
                 grpCircular.Visible = True
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.39, Me.Height)
             Case Else
                 grpDates.Visible = False
@@ -425,6 +445,8 @@ Public Class ucrCalculator
                 grpFactor.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpSymbols.Visible = False
+                grpModifier.Visible = False
                 iHelpCalcID = 14
         End Select
     End Sub
