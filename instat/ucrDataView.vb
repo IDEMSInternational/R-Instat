@@ -683,10 +683,12 @@ Public Class ucrDataView
 
     Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
         Dim strScript As String = ""
+        Dim strTemp As String
         clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
-        clsViewDataFrame.SetAssignTo(grdCurrSheet.Name)
-        clsViewDataFrame.ToScript(strScript)
-        RunScriptFromDataView(strScript, strComment:="Right Click Menu: View R Data Frame", bSeparateThread:=False)
+        clsGetDataFrame.SetAssignTo(grdCurrSheet.Name)
+        clsGetDataFrame.ToScript(strScript)
+        strTemp = clsViewDataFrame.ToScript()
+        RunScriptFromDataView(strScript & strTemp, strComment:="Right Click Menu: View R Data Frame", bSeparateThread:=False)
 
     End Sub
 
