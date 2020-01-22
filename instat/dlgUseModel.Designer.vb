@@ -46,23 +46,51 @@ Partial Class dlgUseModel
         Me.cmdDistill = New System.Windows.Forms.Button()
         Me.cmdCi = New System.Windows.Forms.Button()
         Me.cmdErlevd = New System.Windows.Forms.Button()
+        Me.cmdClear = New System.Windows.Forms.Button()
+
+        Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.lblRpackage = New System.Windows.Forms.Label()
+        Me.ucrSaveResult = New instat.ucrSave()
+        Me.ucrChkIncludeArguments = New instat.ucrCheck()
+
+        Me.grpSegmented = New System.Windows.Forms.GroupBox()
+        Me.cmdSlope = New System.Windows.Forms.Button()
+        Me.cmdPscore = New System.Windows.Forms.Button()
+        Me.cmdDavies = New System.Windows.Forms.Button()
+        Me.cmdIntercept = New System.Windows.Forms.Button()
+        Me.cmdBroken = New System.Windows.Forms.Button()
+        Me.cmdPoints = New System.Windows.Forms.Button()
+        Me.cmdPlotLines = New System.Windows.Forms.Button()
+        Me.cmdSegmentedPredict = New System.Windows.Forms.Button()
+        Me.cmdVcov = New System.Windows.Forms.Button()
+        Me.cmdConfint = New System.Windows.Forms.Button()
+        Me.cmdSegmentedSummary = New System.Windows.Forms.Button()
+        Me.cmdAapc = New System.Windows.Forms.Button()
+        Me.cmdSegmented = New System.Windows.Forms.Button()
+        Me.cmdSegmentedPrint = New System.Windows.Forms.Button()
+
         Me.ucrInputModels = New instat.ucrInputTextBox()
         Me.ucrSelectorUseModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
-        Me.cmdClear = New System.Windows.Forms.Button()
+
+        Me.cmdPrintFevd = New System.Windows.Forms.Button()
+        Me.cmdSummaryFevd = New System.Windows.Forms.Button()
+        Me.cmdPlotFevd = New System.Windows.Forms.Button()
+
         Me.grpGeneral.SuspendLayout()
         Me.grpPrediction.SuspendLayout()
         Me.grpExtrRemes.SuspendLayout()
+        Me.grpSegmented.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblModel
         '
         Me.lblModel.AutoSize = True
         Me.lblModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblModel.Location = New System.Drawing.Point(19, 21)
+        Me.lblModel.Location = New System.Drawing.Point(19, 18)
         Me.lblModel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblModel.Name = "lblModel"
         Me.lblModel.Size = New System.Drawing.Size(58, 13)
@@ -73,7 +101,7 @@ Partial Class dlgUseModel
         'cmdTry
         '
         Me.cmdTry.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTry.Location = New System.Drawing.Point(9, 293)
+        Me.cmdTry.Location = New System.Drawing.Point(9, 281)
         Me.cmdTry.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdTry.Name = "cmdTry"
         Me.cmdTry.Size = New System.Drawing.Size(74, 23)
@@ -127,7 +155,7 @@ Partial Class dlgUseModel
         Me.grpGeneral.Controls.Add(Me.cmdsummary)
         Me.grpGeneral.Controls.Add(Me.cmdanova)
         Me.grpGeneral.Controls.Add(Me.cmdresiduals)
-        Me.grpGeneral.Location = New System.Drawing.Point(262, 106)
+        Me.grpGeneral.Location = New System.Drawing.Point(260, 110)
         Me.grpGeneral.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpGeneral.Name = "grpGeneral"
         Me.grpGeneral.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -258,17 +286,20 @@ Partial Class dlgUseModel
         '
         'grpExtrRemes
         '
+        Me.grpExtrRemes.Controls.Add(Me.cmdPlotFevd)
+        Me.grpExtrRemes.Controls.Add(Me.cmdSummaryFevd)
+        Me.grpExtrRemes.Controls.Add(Me.cmdPrintFevd)
         Me.grpExtrRemes.Controls.Add(Me.cmdLrTest)
         Me.grpExtrRemes.Controls.Add(Me.cmdIsFixedfevd)
         Me.grpExtrRemes.Controls.Add(Me.cmdFindpars)
         Me.grpExtrRemes.Controls.Add(Me.cmdDistill)
         Me.grpExtrRemes.Controls.Add(Me.cmdCi)
         Me.grpExtrRemes.Controls.Add(Me.cmdErlevd)
-        Me.grpExtrRemes.Location = New System.Drawing.Point(264, 106)
+        Me.grpExtrRemes.Location = New System.Drawing.Point(260, 108)
         Me.grpExtrRemes.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpExtrRemes.Name = "grpExtrRemes"
         Me.grpExtrRemes.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpExtrRemes.Size = New System.Drawing.Size(213, 77)
+        Me.grpExtrRemes.Size = New System.Drawing.Size(234, 109)
         Me.grpExtrRemes.TabIndex = 30
         Me.grpExtrRemes.TabStop = False
         Me.grpExtrRemes.Text = "extRemes"
@@ -276,7 +307,7 @@ Partial Class dlgUseModel
         'cmdLrTest
         '
         Me.cmdLrTest.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLrTest.Location = New System.Drawing.Point(140, 41)
+        Me.cmdLrTest.Location = New System.Drawing.Point(155, 76)
         Me.cmdLrTest.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLrTest.Name = "cmdLrTest"
         Me.cmdLrTest.Size = New System.Drawing.Size(69, 30)
@@ -287,10 +318,10 @@ Partial Class dlgUseModel
         'cmdIsFixedfevd
         '
         Me.cmdIsFixedfevd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdIsFixedfevd.Location = New System.Drawing.Point(72, 41)
+        Me.cmdIsFixedfevd.Location = New System.Drawing.Point(72, 76)
         Me.cmdIsFixedfevd.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdIsFixedfevd.Name = "cmdIsFixedfevd"
-        Me.cmdIsFixedfevd.Size = New System.Drawing.Size(69, 30)
+        Me.cmdIsFixedfevd.Size = New System.Drawing.Size(83, 30)
         Me.cmdIsFixedfevd.TabIndex = 155
         Me.cmdIsFixedfevd.Text = "is.fixedfevd"
         Me.cmdIsFixedfevd.UseVisualStyleBackColor = True
@@ -298,7 +329,7 @@ Partial Class dlgUseModel
         'cmdFindpars
         '
         Me.cmdFindpars.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFindpars.Location = New System.Drawing.Point(3, 41)
+        Me.cmdFindpars.Location = New System.Drawing.Point(3, 76)
         Me.cmdFindpars.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdFindpars.Name = "cmdFindpars"
         Me.cmdFindpars.Size = New System.Drawing.Size(69, 30)
@@ -309,10 +340,10 @@ Partial Class dlgUseModel
         'cmdDistill
         '
         Me.cmdDistill.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDistill.Location = New System.Drawing.Point(72, 12)
+        Me.cmdDistill.Location = New System.Drawing.Point(72, 47)
         Me.cmdDistill.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDistill.Name = "cmdDistill"
-        Me.cmdDistill.Size = New System.Drawing.Size(69, 30)
+        Me.cmdDistill.Size = New System.Drawing.Size(83, 30)
         Me.cmdDistill.TabIndex = 126
         Me.cmdDistill.Text = "distill"
         Me.cmdDistill.UseVisualStyleBackColor = True
@@ -320,7 +351,7 @@ Partial Class dlgUseModel
         'cmdCi
         '
         Me.cmdCi.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCi.Location = New System.Drawing.Point(3, 12)
+        Me.cmdCi.Location = New System.Drawing.Point(3, 47)
         Me.cmdCi.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdCi.Name = "cmdCi"
         Me.cmdCi.Size = New System.Drawing.Size(69, 30)
@@ -331,13 +362,244 @@ Partial Class dlgUseModel
         'cmdErlevd
         '
         Me.cmdErlevd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdErlevd.Location = New System.Drawing.Point(140, 12)
+        Me.cmdErlevd.Location = New System.Drawing.Point(155, 47)
         Me.cmdErlevd.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdErlevd.Name = "cmdErlevd"
         Me.cmdErlevd.Size = New System.Drawing.Size(69, 30)
         Me.cmdErlevd.TabIndex = 153
         Me.cmdErlevd.Text = "erlevd"
         Me.cmdErlevd.UseVisualStyleBackColor = True
+        '
+        'cmdClear
+        '
+        Me.cmdClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
+
+        Me.cmdClear.Location = New System.Drawing.Point(402, 251)
+
+        Me.cmdClear.Location = New System.Drawing.Point(397, 254)
+
+        Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.Size = New System.Drawing.Size(74, 23)
+        Me.cmdClear.TabIndex = 31
+        Me.cmdClear.Text = "Clear"
+        Me.cmdClear.UseVisualStyleBackColor = True
+        '
+
+        'cmdHelp
+        '
+        Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdHelp.Location = New System.Drawing.Point(460, 78)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(60, 23)
+        Me.cmdHelp.TabIndex = 33
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
+        'lblRpackage
+        '
+        Me.lblRpackage.AutoSize = True
+        Me.lblRpackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblRpackage.Location = New System.Drawing.Point(273, 83)
+        Me.lblRpackage.Name = "lblRpackage"
+        Me.lblRpackage.Size = New System.Drawing.Size(63, 13)
+        Me.lblRpackage.TabIndex = 36
+        Me.lblRpackage.Text = "R package:"
+        '
+        'ucrSaveResult
+        '
+        Me.ucrSaveResult.Location = New System.Drawing.Point(9, 309)
+        Me.ucrSaveResult.Name = "ucrSaveResult"
+        Me.ucrSaveResult.Size = New System.Drawing.Size(277, 24)
+        Me.ucrSaveResult.TabIndex = 35
+        '
+        'ucrChkIncludeArguments
+        '
+        Me.ucrChkIncludeArguments.Checked = False
+        Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(445, 12)
+        Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
+        Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(130, 20)
+        Me.ucrChkIncludeArguments.TabIndex = 32
+
+        'grpSegmented
+        '
+        Me.grpSegmented.Controls.Add(Me.cmdSlope)
+        Me.grpSegmented.Controls.Add(Me.cmdPscore)
+        Me.grpSegmented.Controls.Add(Me.cmdDavies)
+        Me.grpSegmented.Controls.Add(Me.cmdIntercept)
+        Me.grpSegmented.Controls.Add(Me.cmdBroken)
+        Me.grpSegmented.Controls.Add(Me.cmdPoints)
+        Me.grpSegmented.Controls.Add(Me.cmdPlotLines)
+        Me.grpSegmented.Controls.Add(Me.cmdSegmentedPredict)
+        Me.grpSegmented.Controls.Add(Me.cmdVcov)
+        Me.grpSegmented.Controls.Add(Me.cmdConfint)
+        Me.grpSegmented.Controls.Add(Me.cmdSegmentedSummary)
+        Me.grpSegmented.Controls.Add(Me.cmdAapc)
+        Me.grpSegmented.Controls.Add(Me.cmdSegmented)
+        Me.grpSegmented.Controls.Add(Me.cmdSegmentedPrint)
+        Me.grpSegmented.Location = New System.Drawing.Point(260, 112)
+        Me.grpSegmented.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.grpSegmented.Name = "grpSegmented"
+        Me.grpSegmented.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.grpSegmented.Size = New System.Drawing.Size(277, 134)
+        Me.grpSegmented.TabIndex = 162
+        Me.grpSegmented.TabStop = False
+        Me.grpSegmented.Text = "segmented"
+        '
+        'cmdSlope
+        '
+        Me.cmdSlope.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSlope.Location = New System.Drawing.Point(208, 70)
+        Me.cmdSlope.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdSlope.Name = "cmdSlope"
+        Me.cmdSlope.Size = New System.Drawing.Size(69, 30)
+        Me.cmdSlope.TabIndex = 164
+        Me.cmdSlope.Text = "slope"
+        Me.cmdSlope.UseVisualStyleBackColor = True
+        '
+        'cmdPscore
+        '
+        Me.cmdPscore.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPscore.Location = New System.Drawing.Point(140, 10)
+        Me.cmdPscore.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPscore.Name = "cmdPscore"
+        Me.cmdPscore.Size = New System.Drawing.Size(69, 30)
+        Me.cmdPscore.TabIndex = 163
+        Me.cmdPscore.Text = "pscore"
+        Me.cmdPscore.UseVisualStyleBackColor = True
+        '
+        'cmdDavies
+        '
+        Me.cmdDavies.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDavies.Location = New System.Drawing.Point(3, 10)
+        Me.cmdDavies.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdDavies.Name = "cmdDavies"
+        Me.cmdDavies.Size = New System.Drawing.Size(69, 30)
+        Me.cmdDavies.TabIndex = 162
+        Me.cmdDavies.Text = "davies"
+        Me.cmdDavies.UseVisualStyleBackColor = True
+        '
+        'cmdIntercept
+        '
+        Me.cmdIntercept.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdIntercept.Location = New System.Drawing.Point(140, 100)
+        Me.cmdIntercept.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdIntercept.Name = "cmdIntercept"
+        Me.cmdIntercept.Size = New System.Drawing.Size(69, 30)
+        Me.cmdIntercept.TabIndex = 161
+        Me.cmdIntercept.Text = "intercept"
+        Me.cmdIntercept.UseVisualStyleBackColor = True
+        '
+        'cmdBroken
+        '
+        Me.cmdBroken.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdBroken.Location = New System.Drawing.Point(3, 100)
+        Me.cmdBroken.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdBroken.Name = "cmdBroken"
+        Me.cmdBroken.Size = New System.Drawing.Size(69, 30)
+        Me.cmdBroken.TabIndex = 160
+        Me.cmdBroken.Text = "broken"
+        Me.cmdBroken.UseVisualStyleBackColor = True
+        '
+        'cmdPoints
+        '
+        Me.cmdPoints.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPoints.Location = New System.Drawing.Point(140, 70)
+        Me.cmdPoints.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPoints.Name = "cmdPoints"
+        Me.cmdPoints.Size = New System.Drawing.Size(69, 30)
+        Me.cmdPoints.TabIndex = 159
+        Me.cmdPoints.Text = "points"
+        Me.cmdPoints.UseVisualStyleBackColor = True
+        '
+        'cmdPlotLines
+        '
+        Me.cmdPlotLines.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlotLines.Location = New System.Drawing.Point(72, 70)
+        Me.cmdPlotLines.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPlotLines.Name = "cmdPlotLines"
+        Me.cmdPlotLines.Size = New System.Drawing.Size(69, 30)
+        Me.cmdPlotLines.TabIndex = 158
+        Me.cmdPlotLines.Text = "plot "
+        Me.cmdPlotLines.UseVisualStyleBackColor = True
+        '
+        'cmdSegmentedPredict
+        '
+        Me.cmdSegmentedPredict.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSegmentedPredict.Location = New System.Drawing.Point(3, 70)
+        Me.cmdSegmentedPredict.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdSegmentedPredict.Name = "cmdSegmentedPredict"
+        Me.cmdSegmentedPredict.Size = New System.Drawing.Size(69, 30)
+        Me.cmdSegmentedPredict.TabIndex = 157
+        Me.cmdSegmentedPredict.Text = "predict"
+        Me.cmdSegmentedPredict.UseVisualStyleBackColor = True
+        '
+        'cmdVcov
+        '
+        Me.cmdVcov.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdVcov.Location = New System.Drawing.Point(140, 41)
+        Me.cmdVcov.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdVcov.Name = "cmdVcov"
+        Me.cmdVcov.Size = New System.Drawing.Size(69, 30)
+        Me.cmdVcov.TabIndex = 156
+        Me.cmdVcov.Text = "vcov"
+        Me.cmdVcov.UseVisualStyleBackColor = True
+        '
+        'cmdConfint
+        '
+        Me.cmdConfint.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdConfint.Location = New System.Drawing.Point(72, 41)
+        Me.cmdConfint.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdConfint.Name = "cmdConfint"
+        Me.cmdConfint.Size = New System.Drawing.Size(69, 30)
+        Me.cmdConfint.TabIndex = 155
+        Me.cmdConfint.Text = "confint"
+        Me.cmdConfint.UseVisualStyleBackColor = True
+        '
+        'cmdSegmentedSummary
+        '
+        Me.cmdSegmentedSummary.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSegmentedSummary.Location = New System.Drawing.Point(3, 41)
+        Me.cmdSegmentedSummary.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdSegmentedSummary.Name = "cmdSegmentedSummary"
+        Me.cmdSegmentedSummary.Size = New System.Drawing.Size(69, 30)
+        Me.cmdSegmentedSummary.TabIndex = 154
+        Me.cmdSegmentedSummary.Text = "summary"
+        Me.cmdSegmentedSummary.UseVisualStyleBackColor = True
+        '
+        'cmdAapc
+        '
+        Me.cmdAapc.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAapc.Location = New System.Drawing.Point(72, 100)
+        Me.cmdAapc.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdAapc.Name = "cmdAapc"
+        Me.cmdAapc.Size = New System.Drawing.Size(69, 30)
+        Me.cmdAapc.TabIndex = 126
+        Me.cmdAapc.Text = "aapc"
+        Me.cmdAapc.UseVisualStyleBackColor = True
+        '
+        'cmdSegmented
+        '
+        Me.cmdSegmented.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSegmented.Location = New System.Drawing.Point(72, 10)
+        Me.cmdSegmented.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdSegmented.Name = "cmdSegmented"
+        Me.cmdSegmented.Size = New System.Drawing.Size(69, 30)
+        Me.cmdSegmented.TabIndex = 124
+        Me.cmdSegmented.Text = "segmented"
+        Me.cmdSegmented.UseVisualStyleBackColor = True
+        '
+        'cmdSegmentedPrint
+        '
+        Me.cmdSegmentedPrint.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSegmentedPrint.Location = New System.Drawing.Point(208, 41)
+        Me.cmdSegmentedPrint.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdSegmentedPrint.Name = "cmdSegmentedPrint"
+        Me.cmdSegmentedPrint.Size = New System.Drawing.Size(69, 30)
+        Me.cmdSegmentedPrint.TabIndex = 153
+        Me.cmdSegmentedPrint.Text = "print"
+        Me.cmdSegmentedPrint.UseVisualStyleBackColor = True
+
         '
         'ucrInputModels
         '
@@ -365,7 +627,7 @@ Partial Class dlgUseModel
         Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
         Me.ucrInputTryMessage.IsMultiline = False
         Me.ucrInputTryMessage.IsReadOnly = True
-        Me.ucrInputTryMessage.Location = New System.Drawing.Point(87, 294)
+        Me.ucrInputTryMessage.Location = New System.Drawing.Point(87, 282)
         Me.ucrInputTryMessage.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
         Me.ucrInputTryMessage.Size = New System.Drawing.Size(321, 22)
@@ -373,7 +635,7 @@ Partial Class dlgUseModel
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 315)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 338)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 20
@@ -381,11 +643,11 @@ Partial Class dlgUseModel
         'ucrReceiverForTestColumn
         '
         Me.ucrReceiverForTestColumn.frmParent = Me
-        Me.ucrReceiverForTestColumn.Location = New System.Drawing.Point(82, 17)
+        Me.ucrReceiverForTestColumn.Location = New System.Drawing.Point(82, 11)
         Me.ucrReceiverForTestColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrReceiverForTestColumn.Name = "ucrReceiverForTestColumn"
         Me.ucrReceiverForTestColumn.Selector = Nothing
-        Me.ucrReceiverForTestColumn.Size = New System.Drawing.Size(393, 27)
+        Me.ucrReceiverForTestColumn.Size = New System.Drawing.Size(358, 27)
         Me.ucrReceiverForTestColumn.strNcFilePath = ""
         Me.ucrReceiverForTestColumn.TabIndex = 12
         Me.ucrReceiverForTestColumn.ucrSelector = Nothing
@@ -394,29 +656,63 @@ Partial Class dlgUseModel
         '
         Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
         Me.ucrInputComboRPackage.IsReadOnly = False
-        Me.ucrInputComboRPackage.Location = New System.Drawing.Point(262, 79)
+        Me.ucrInputComboRPackage.Location = New System.Drawing.Point(338, 79)
         Me.ucrInputComboRPackage.Name = "ucrInputComboRPackage"
-        Me.ucrInputComboRPackage.Size = New System.Drawing.Size(141, 21)
+        Me.ucrInputComboRPackage.Size = New System.Drawing.Size(122, 21)
         Me.ucrInputComboRPackage.TabIndex = 5
         '
-        'cmdClear
+
+        'cmdPrintFevd
         '
-        Me.cmdClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdClear.Location = New System.Drawing.Point(397, 254)
-        Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(74, 23)
-        Me.cmdClear.TabIndex = 31
-        Me.cmdClear.Text = "Clear"
-        Me.cmdClear.UseVisualStyleBackColor = True
+        Me.cmdPrintFevd.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPrintFevd.Location = New System.Drawing.Point(3, 18)
+        Me.cmdPrintFevd.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPrintFevd.Name = "cmdPrintFevd"
+        Me.cmdPrintFevd.Size = New System.Drawing.Size(69, 30)
+        Me.cmdPrintFevd.TabIndex = 157
+        Me.cmdPrintFevd.Text = "print.fevd"
+        Me.cmdPrintFevd.UseVisualStyleBackColor = True
         '
+        'cmdSummaryFevd
+        '
+        Me.cmdSummaryFevd.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSummaryFevd.Location = New System.Drawing.Point(72, 18)
+        Me.cmdSummaryFevd.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdSummaryFevd.Name = "cmdSummaryFevd"
+        Me.cmdSummaryFevd.Size = New System.Drawing.Size(83, 30)
+        Me.cmdSummaryFevd.TabIndex = 158
+        Me.cmdSummaryFevd.Text = "summary.fevd"
+        Me.cmdSummaryFevd.UseVisualStyleBackColor = True
+        '
+        'cmdPlotFevd
+        '
+        Me.cmdPlotFevd.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlotFevd.Location = New System.Drawing.Point(155, 18)
+        Me.cmdPlotFevd.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPlotFevd.Name = "cmdPlotFevd"
+        Me.cmdPlotFevd.Size = New System.Drawing.Size(69, 30)
+        Me.cmdPlotFevd.TabIndex = 159
+        Me.cmdPlotFevd.Text = "plot.fevd"
+        Me.cmdPlotFevd.UseVisualStyleBackColor = True
+        '
+
         'dlgUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(502, 381)
+
+        Me.ClientSize = New System.Drawing.Size(569, 393)
+        Me.Controls.Add(Me.lblRpackage)
+        Me.Controls.Add(Me.ucrSaveResult)
+        Me.Controls.Add(Me.cmdHelp)
+        Me.Controls.Add(Me.ucrChkIncludeArguments)
         Me.Controls.Add(Me.cmdClear)
+
+        Me.ClientSize = New System.Drawing.Size(746, 381)
+        Me.Controls.Add(Me.grpSegmented)
+
         Me.Controls.Add(Me.grpGeneral)
+        Me.Controls.Add(Me.cmdClear)
         Me.Controls.Add(Me.grpExtrRemes)
         Me.Controls.Add(Me.ucrInputModels)
         Me.Controls.Add(Me.lblModels)
@@ -432,10 +728,11 @@ Partial Class dlgUseModel
         Me.MinimizeBox = False
         Me.Name = "dlgUseModel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "dlgUseModel"
+        Me.Text = "Use Model "
         Me.grpGeneral.ResumeLayout(False)
         Me.grpPrediction.ResumeLayout(False)
         Me.grpExtrRemes.ResumeLayout(False)
+        Me.grpSegmented.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -472,4 +769,29 @@ Partial Class dlgUseModel
     Friend WithEvents cmdCi As Button
     Friend WithEvents cmdErlevd As Button
     Friend WithEvents cmdClear As Button
+
+    Friend WithEvents ucrChkIncludeArguments As ucrCheck
+    Friend WithEvents cmdHelp As Button
+    Friend WithEvents ucrSaveResult As ucrSave
+    Friend WithEvents lblRpackage As Label
+    Friend WithEvents cmdPlotFevd As Button
+    Friend WithEvents cmdSummaryFevd As Button
+    Friend WithEvents cmdPrintFevd As Button
+
+    Friend WithEvents grpSegmented As GroupBox
+    Friend WithEvents cmdIntercept As Button
+    Friend WithEvents cmdBroken As Button
+    Friend WithEvents cmdPoints As Button
+    Friend WithEvents cmdPlotLines As Button
+    Friend WithEvents cmdSegmentedPredict As Button
+    Friend WithEvents cmdVcov As Button
+    Friend WithEvents cmdConfint As Button
+    Friend WithEvents cmdSegmentedSummary As Button
+    Friend WithEvents cmdAapc As Button
+    Friend WithEvents cmdSegmented As Button
+    Friend WithEvents cmdSegmentedPrint As Button
+    Friend WithEvents cmdDavies As Button
+    Friend WithEvents cmdSlope As Button
+    Friend WithEvents cmdPscore As Button
+
 End Class
