@@ -79,7 +79,7 @@ Partial Class dlgOpenNetCDF
         Me.lblDataFramePrefix.Location = New System.Drawing.Point(10, 137)
         Me.lblDataFramePrefix.Name = "lblDataFramePrefix"
         Me.lblDataFramePrefix.Size = New System.Drawing.Size(114, 13)
-        Me.lblDataFramePrefix.TabIndex = 6
+        Me.lblDataFramePrefix.TabIndex = 10
         Me.lblDataFramePrefix.Tag = "Prefix_for_Data_Frames:"
         Me.lblDataFramePrefix.Text = "Prefix for Data Frames:"
         '
@@ -101,21 +101,21 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputDataName.Location = New System.Drawing.Point(138, 134)
         Me.ucrInputDataName.Name = "ucrInputDataName"
         Me.ucrInputDataName.Size = New System.Drawing.Size(188, 21)
-        Me.ucrInputDataName.TabIndex = 7
+        Me.ucrInputDataName.TabIndex = 11
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 161)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 15
+        Me.ucrBase.TabIndex = 13
         '
         'cmdOptions
         '
         Me.cmdOptions.Location = New System.Drawing.Point(332, 132)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(77, 23)
-        Me.cmdOptions.TabIndex = 14
+        Me.cmdOptions.TabIndex = 12
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
@@ -124,7 +124,7 @@ Partial Class dlgOpenNetCDF
         Me.cmdDetails.Location = New System.Drawing.Point(314, 77)
         Me.cmdDetails.Name = "cmdDetails"
         Me.cmdDetails.Size = New System.Drawing.Size(95, 23)
-        Me.cmdDetails.TabIndex = 8
+        Me.cmdDetails.TabIndex = 4
         Me.cmdDetails.Tag = "Show_Details"
         Me.cmdDetails.Text = "Show Details >>"
         Me.cmdDetails.UseVisualStyleBackColor = True
@@ -137,7 +137,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputFileDetails.Location = New System.Drawing.Point(429, 46)
         Me.ucrInputFileDetails.Name = "ucrInputFileDetails"
         Me.ucrInputFileDetails.Size = New System.Drawing.Size(320, 159)
-        Me.ucrInputFileDetails.TabIndex = 13
+        Me.ucrInputFileDetails.TabIndex = 9
         '
         'rdoShort
         '
@@ -149,7 +149,7 @@ Partial Class dlgOpenNetCDF
         Me.rdoShort.Location = New System.Drawing.Point(477, 13)
         Me.rdoShort.Name = "rdoShort"
         Me.rdoShort.Size = New System.Drawing.Size(76, 27)
-        Me.rdoShort.TabIndex = 10
+        Me.rdoShort.TabIndex = 6
         Me.rdoShort.TabStop = True
         Me.rdoShort.Text = "Short"
         Me.rdoShort.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -165,7 +165,7 @@ Partial Class dlgOpenNetCDF
         Me.rdoMedium.Location = New System.Drawing.Point(550, 13)
         Me.rdoMedium.Name = "rdoMedium"
         Me.rdoMedium.Size = New System.Drawing.Size(76, 27)
-        Me.rdoMedium.TabIndex = 11
+        Me.rdoMedium.TabIndex = 7
         Me.rdoMedium.TabStop = True
         Me.rdoMedium.Text = "Medium"
         Me.rdoMedium.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -181,7 +181,7 @@ Partial Class dlgOpenNetCDF
         Me.rdoLong.Location = New System.Drawing.Point(624, 13)
         Me.rdoLong.Name = "rdoLong"
         Me.rdoLong.Size = New System.Drawing.Size(76, 27)
-        Me.rdoLong.TabIndex = 12
+        Me.rdoLong.TabIndex = 8
         Me.rdoLong.TabStop = True
         Me.rdoLong.Text = "Long"
         Me.rdoLong.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -192,14 +192,15 @@ Partial Class dlgOpenNetCDF
         Me.ucrPnlFileDetails.Location = New System.Drawing.Point(462, 11)
         Me.ucrPnlFileDetails.Name = "ucrPnlFileDetails"
         Me.ucrPnlFileDetails.Size = New System.Drawing.Size(254, 30)
-        Me.ucrPnlFileDetails.TabIndex = 9
+        Me.ucrPnlFileDetails.TabIndex = 0
+        Me.ucrPnlFileDetails.TabStop = False
         '
         'cmdFromLibrary
         '
         Me.cmdFromLibrary.Location = New System.Drawing.Point(332, 48)
         Me.cmdFromLibrary.Name = "cmdFromLibrary"
         Me.cmdFromLibrary.Size = New System.Drawing.Size(77, 23)
-        Me.cmdFromLibrary.TabIndex = 16
+        Me.cmdFromLibrary.TabIndex = 3
         Me.cmdFromLibrary.Tag = "Browse"
         Me.cmdFromLibrary.Text = "From Library"
         Me.cmdFromLibrary.UseVisualStyleBackColor = True
