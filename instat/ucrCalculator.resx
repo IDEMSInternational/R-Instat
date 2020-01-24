@@ -9745,7 +9745,7 @@
     <value>15</value>
   </data>
   <data name="cmdPlusZero.Text" xml:space="preserve">
-    <value>- (to)</value>
+    <value>- to</value>
   </data>
   <data name="&gt;&gt;cmdPlusZero.Name" xml:space="preserve">
     <value>cmdPlusZero</value>
