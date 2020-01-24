@@ -692,7 +692,6 @@ Partial Class ucrCalculator
         '
         Me.grpTransform.Controls.Add(Me.cmdNasplin)
         Me.grpTransform.Controls.Add(Me.cmdNaapprox)
-        Me.grpTransform.Controls.Add(Me.grpProbabilty)
         Me.grpTransform.Controls.Add(Me.cmdNaest)
         Me.grpTransform.Controls.Add(Me.cmdNafill)
         Me.grpTransform.Controls.Add(Me.cmdMovmin)
@@ -867,7 +866,6 @@ Partial Class ucrCalculator
         '
         Me.grpSummary.Controls.Add(Me.cmdMode)
         Me.grpSummary.Controls.Add(Me.cmdFirst)
-        Me.grpSummary.Controls.Add(Me.grpTransform)
         Me.grpSummary.Controls.Add(Me.cmdLast)
         Me.grpSummary.Controls.Add(Me.cmdnth)
         Me.grpSummary.Controls.Add(Me.cmdCor)
@@ -1056,7 +1054,6 @@ Partial Class ucrCalculator
         '
         Me.grpLogical.Controls.Add(Me.cmdFalse)
         Me.grpLogical.Controls.Add(Me.cmdTrue)
-        Me.grpLogical.Controls.Add(Me.grpSummary)
         Me.grpLogical.Controls.Add(Me.cmdDoubleSqrBrackets)
         Me.grpLogical.Controls.Add(Me.cmdIn)
         Me.grpLogical.Controls.Add(Me.cmdWhich)
@@ -2255,8 +2252,6 @@ Partial Class ucrCalculator
         '
         Me.grpCircular.Controls.Add(Me.cmdCircular)
         Me.grpCircular.Controls.Add(Me.cmdCircQuantile)
-        Me.grpCircular.Controls.Add(Me.grpLogical)
-        Me.grpCircular.Controls.Add(Me.grpMaths)
         Me.grpCircular.Controls.Add(Me.cmdCircMax)
         Me.grpCircular.Controls.Add(Me.cmdA1)
         Me.grpCircular.Controls.Add(Me.cmdAngVar)
@@ -2374,7 +2369,6 @@ Partial Class ucrCalculator
         'grpFactor
         '
         Me.grpFactor.Controls.Add(Me.cmdShuffle)
-        Me.grpFactor.Controls.Add(Me.grpCircular)
         Me.grpFactor.Controls.Add(Me.cmdShift)
         Me.grpFactor.Controls.Add(Me.cmdReverse)
         Me.grpFactor.Controls.Add(Me.cmdReorder)
@@ -2707,7 +2701,13 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpFactor)
+        Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
+        Me.Controls.Add(Me.grpMaths)
+        Me.Controls.Add(Me.grpLogical)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpTransform)
+        Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.grpModifier)
         Me.Controls.Add(Me.grpStrings)
