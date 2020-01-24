@@ -2455,7 +2455,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdbegin_Click(sender As Object, e As EventArgs) Handles cmdbegin.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("^")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("^", 1)
     End Sub
 
     Private Sub cmdEnd1_Click(sender As Object, e As EventArgs) Handles cmdEnd1.Click
@@ -2463,19 +2463,19 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdDigit_Click(sender As Object, e As EventArgs) Handles cmdDigit.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\ d")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\d")
     End Sub
 
     Private Sub cmdSpace_Click(sender As Object, e As EventArgs) Handles cmdSpace.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\ s")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\s")
     End Sub
 
     Private Sub cmdOr1_Click(sender As Object, e As EventArgs) Handles cmdOr1.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[]")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[]", 1)
     End Sub
 
     Private Sub cmdNot1_Click(sender As Object, e As EventArgs) Handles cmdNot1.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[^ ]")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[^ ]", 2)
     End Sub
 
     Private Sub cmdOr3_Click(sender As Object, e As EventArgs) Handles cmdOr3.Click
@@ -2483,23 +2483,23 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdOr2_Click(sender As Object, e As EventArgs) Handles cmdOr2.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("{n}")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("{}", 1)
     End Sub
 
     Private Sub cmdNumbers_Click(sender As Object, e As EventArgs) Handles cmdNumbers.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("{m,n}")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("{,}", 2)
     End Sub
 
     Private Sub cmdZeroOrOne_Click(sender As Object, e As EventArgs) Handles cmdZeroOrOne.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("? 0 1")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("?")
     End Sub
 
     Private Sub cmdPlusOne_Click(sender As Object, e As EventArgs) Handles cmdPlusOne.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+ 1+")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+")
     End Sub
 
     Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("*0+")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+")
     End Sub
 
     Private Sub cmdEscape_Click(sender As Object, e As EventArgs) Handles cmdEscape.Click
