@@ -1078,6 +1078,21 @@ Public Class RLink
         Return bExists
     End Function
 
+    Public Function GetDataFrameCount() As Integer
+        Dim iCount As Integer
+        Dim clsDataFrameCount As New RFunction
+        Dim expCount As SymbolicExpression
+
+        clsDataFrameCount.SetRCommand(strInstatDataObject & "$dataframe_count")
+        expCount = RunInternalScriptGetValue(clsDataFrameCount.ToScript(), bSilent:=True)
+        If expCount IsNot Nothing AndAlso Not expCount.Type = Internals.SymbolicExpressionType.Null Then
+            iCount = expCount.AsInteger(0)
+        Else
+            iCount = 0
+        End If
+        Return iCount
+    End Function
+
     Public Function GetDataFrameLength(strDataFrameName As String, Optional bUseCurrentFilter As Boolean = False) As Integer
         Dim iLength As Integer
         Dim clsDataFrameLength As New RFunction
