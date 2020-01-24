@@ -2369,6 +2369,7 @@ Partial Class ucrCalculator
         'grpFactor
         '
         Me.grpFactor.Controls.Add(Me.cmdShuffle)
+        Me.grpFactor.Controls.Add(Me.grpCircular)
         Me.grpFactor.Controls.Add(Me.cmdShift)
         Me.grpFactor.Controls.Add(Me.cmdReverse)
         Me.grpFactor.Controls.Add(Me.cmdReorder)
@@ -2701,7 +2702,6 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpFactor)
-        Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpLogical)
