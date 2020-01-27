@@ -567,12 +567,14 @@ Public Class RLink
                 strCapturedScript = "capture.output(" & strSplitScript & ")"
             End If
             Try
-                Evaluate(strTempAssignTo & " <- " & strCapturedScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-                expTemp = GetSymbol(strTempAssignTo)
-                If expTemp IsNot Nothing Then
-                    strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
-                    If strTemp <> "" Then
-                        strOutput = strOutput & strTemp & Environment.NewLine
+                If Evaluate(strTempAssignTo & " <- " & strCapturedScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride) = True Then
+                    expTemp = GetSymbol(strTempAssignTo)
+                    Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
+                    If expTemp IsNot Nothing Then
+                        strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
+                        If strTemp <> "" Then
+                            strOutput = strOutput & strTemp & Environment.NewLine
+                        End If
                     End If
                 End If
             Catch e As Exception
