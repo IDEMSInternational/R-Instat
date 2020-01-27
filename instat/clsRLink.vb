@@ -567,7 +567,7 @@ Public Class RLink
                 strCapturedScript = "capture.output(" & strSplitScript & ")"
             End If
             Try
-                If Evaluate(strTempAssignTo & " <- " & strCapturedScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride) = True Then
+                If Evaluate(strTempAssignTo & " <- " & strCapturedScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride) Then
                     expTemp = GetSymbol(strTempAssignTo)
                     Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
                     If expTemp IsNot Nothing Then
