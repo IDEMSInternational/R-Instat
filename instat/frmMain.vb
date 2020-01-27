@@ -2135,4 +2135,8 @@ Public Class frmMain
     Private Sub mnuProcurementDescribeCategoricalTreemap_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeCategoricalTreemap.Click
         dlgTreemap.ShowDialog()
     End Sub
+
+    Private Sub mnuToolsRPackage_Click(sender As Object, e As EventArgs) Handles mnuToolsRPackage.Click
+        dlgRPackages.ShowDialog()
+    End Sub
 End Class
