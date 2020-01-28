@@ -2139,4 +2139,8 @@ Public Class frmMain
     Private Sub mnuPrepareColumnGenerateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateDuplicateColumn.Click
         dlgDuplicateColumns.ShowDialog()
     End Sub
+
+    Private Sub mnuPrepareColumnGenerateRowSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateRowSummaries.Click
+        dlgRowSummary.ShowDialog()
+    End Sub
 End Class

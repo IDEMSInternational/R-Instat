@@ -586,7 +586,7 @@ Partial Class frmMain
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
         Me.mnuPrepareColumnGenerateDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnGenerateRowSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2814,7 +2814,7 @@ Partial Class frmMain
         '
         'mnuPrepareColumnGenerate
         '
-        Me.mnuPrepareColumnGenerate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateRegularSequence, Me.mnuPrepareColumnGenerateEnter, Me.mnuPrepareColumnGenerateDuplicateColumn, Me.ToolStripSeparator25, Me.mnuPrepareColumnGenerateCountInFactor, Me.ToolStripMenuItem2, Me.mnuPrepareColumnGenerateRandomSamples, Me.mnuPrepareColumnGeneratePermuteRows})
+        Me.mnuPrepareColumnGenerate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateRegularSequence, Me.mnuPrepareColumnGenerateEnter, Me.mnuPrepareColumnGenerateDuplicateColumn, Me.ToolStripSeparator25, Me.mnuPrepareColumnGenerateCountInFactor, Me.mnuPrepareColumnGenerateRowSummaries, Me.mnuPrepareColumnGenerateRandomSamples, Me.mnuPrepareColumnGeneratePermuteRows})
         Me.mnuPrepareColumnGenerate.Name = "mnuPrepareColumnGenerate"
         resources.ApplyResources(Me.mnuPrepareColumnGenerate, "mnuPrepareColumnGenerate")
         Me.mnuPrepareColumnGenerate.Tag = "Column:_Generate"
@@ -3756,10 +3756,10 @@ Partial Class frmMain
         Me.mnuPrepareColumnGenerateDuplicateColumn.Name = "mnuPrepareColumnGenerateDuplicateColumn"
         resources.ApplyResources(Me.mnuPrepareColumnGenerateDuplicateColumn, "mnuPrepareColumnGenerateDuplicateColumn")
         '
-        'ToolStripMenuItem2
+        'mnuPrepareColumnGenerateRowSummaries
         '
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
+        Me.mnuPrepareColumnGenerateRowSummaries.Name = "mnuPrepareColumnGenerateRowSummaries"
+        resources.ApplyResources(Me.mnuPrepareColumnGenerateRowSummaries, "mnuPrepareColumnGenerateRowSummaries")
         '
         'frmMain
         '
@@ -4352,5 +4352,5 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareColumnDefineCircular As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribeCategoricalTreemap As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGenerateDuplicateColumn As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnGenerateRowSummaries As ToolStripMenuItem
 End Class
