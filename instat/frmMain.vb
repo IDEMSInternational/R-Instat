@@ -340,7 +340,7 @@ Public Class frmMain
         dlgRegularSequence.ShowDialog()
     End Sub
 
-    Private Sub mnuCalculations_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateCalculations.Click
+    Private Sub mnuCalculations_Click(sender As Object, e As EventArgs)
         dlgCalculator.ShowDialog()
     End Sub
 
@@ -356,7 +356,7 @@ Public Class frmMain
         dlgSummaryTables.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareAddColumnTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateTransform.Click
+    Private Sub mnuPrepareAddColumnTransform_Click(sender As Object, e As EventArgs)
         dlgTransform.ShowDialog()
     End Sub
 
@@ -2142,5 +2142,9 @@ Public Class frmMain
 
     Private Sub mnuPrepareColumnPrpareColumnGeneratePolynomials_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnPrpareColumnGeneratePolynomials.Click
         dlgPolynomials.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCalculateCalculations_Click(sender As Object, e As EventArgs) Handles mnuPrepareCalculateCalculations.Click
+        dlgCalculator.ShowDialog()
     End Sub
 End Class
