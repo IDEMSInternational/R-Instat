@@ -1,5 +1,5 @@
 ﻿Imports instat
-
+Imports RDotNet
 Public Class dlgRPackages
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
@@ -18,7 +18,7 @@ Public Class dlgRPackages
     End Sub
     Private Sub InitialiseDialog()
         ucrInputTextBoxRPackage.SetParameter(New RParameter("package", 1))
-
+        CheckEnable()
     End Sub
 
     Private Sub SetDefaults()
@@ -39,6 +39,61 @@ Public Class dlgRPackages
     End Sub
 
     Private Sub ucrInputTextBoxRPackage_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputTextBoxRPackage.ControlContentsChanged
+        ucrInputMessage.SetText("")
+        ucrInputMessage.txtInput.BackColor = Color.White
+        CheckEnable()
         TestOkEnabled()
+    End Sub
+
+    Private Sub check()
+        Dim clsPackageCheck As New RFunction
+        Dim expOutput As SymbolicExpression
+        Dim chrOutput As CharacterVector
+
+        clsPackageCheck.SetRCommand("package_check")
+        clsPackageCheck.AddParameter("package", Chr(34) & ucrInputTextBoxRPackage.GetText() & Chr(34))
+
+        expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript(), bSilent:=True)
+        If expOutput IsNot Nothing AndAlso Not expOutput.Type = Internals.SymbolicExpressionType.Null Then
+            chrOutput = expOutput.AsCharacter
+            If chrOutput.Count >= 1 Then
+                If chrOutput(0) = "0" Then
+                    ucrInputMessage.SetText("No package with this name.")
+                    ucrInputMessage.txtInput.BackColor = Color.LightCoral
+                ElseIf chrOutput(0) = "2" Then
+                    ucrInputMessage.SetText("Package exists and not currently installed.")
+                    ucrInputMessage.txtInput.BackColor = Color.LightGreen
+                ElseIf chrOutput(0) = "1" Then
+                    If chrOutput.Count = 4 Then
+                        If chrOutput(1) = "0" Then
+                            ucrInputMessage.SetText("Package is installed and up to date.")
+                            ucrInputMessage.txtInput.BackColor = Color.Yellow
+                        ElseIf chrOutput(1) = "-1" Then
+                            ucrInputMessage.SetText("Package is installed. Newer version available: " & chrOutput(3) & " (current: " & chrOutput(2) & ").")
+                        End If
+                    Else
+                        ucrInputMessage.SetText("Package is installed. No version information available.")
+                    End If
+                End If
+            Else
+                ucrInputMessage.SetText("Cannot get package information.")
+            End If
+        Else
+            ucrInputMessage.SetText("Cannot get package information. Check your internet connection.")
+        End If
+    End Sub
+
+    Private Sub CheckEnable()
+        If Not ucrInputTextBoxRPackage.IsEmpty Then
+            cmdCheck.Enabled = True
+            ucrInputMessage.Enabled = True
+        Else
+            cmdCheck.Enabled = False
+            ucrInputMessage.Enabled = False
+        End If
+    End Sub
+
+    Private Sub cmdCheck_Click(sender As Object, e As EventArgs) Handles cmdCheck.Click
+        check()
     End Sub
 End Class

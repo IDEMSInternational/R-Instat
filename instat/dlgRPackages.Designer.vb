@@ -23,30 +23,12 @@ Partial Class dlgRPackages
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRPackages))
-        Me.lblRPackage = New System.Windows.Forms.Label()
-        Me.cmdTry = New System.Windows.Forms.Button()
-        Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputTextBoxRPackage = New instat.ucrInputTextBox()
+        Me.ucrInputMessage = New instat.ucrInputTextBox()
+        Me.cmdCheck = New System.Windows.Forms.Button()
+        Me.lblRPackage = New System.Windows.Forms.Label()
         Me.SuspendLayout()
-        '
-        'lblRPackage
-        '
-        resources.ApplyResources(Me.lblRPackage, "lblRPackage")
-        Me.lblRPackage.Name = "lblRPackage"
-        '
-        'cmdTry
-        '
-        resources.ApplyResources(Me.cmdTry, "cmdTry")
-        Me.cmdTry.Name = "cmdTry"
-        Me.cmdTry.UseVisualStyleBackColor = True
-        '
-        'UcrInputComboBox1
-        '
-        Me.UcrInputComboBox1.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox1.IsReadOnly = False
-        resources.ApplyResources(Me.UcrInputComboBox1, "UcrInputComboBox1")
-        Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
         '
         'ucrBase
         '
@@ -61,12 +43,31 @@ Partial Class dlgRPackages
         resources.ApplyResources(Me.ucrInputTextBoxRPackage, "ucrInputTextBoxRPackage")
         Me.ucrInputTextBoxRPackage.Name = "ucrInputTextBoxRPackage"
         '
+        'ucrInputMessage
+        '
+        Me.ucrInputMessage.AddQuotesIfUnrecognised = True
+        Me.ucrInputMessage.IsMultiline = False
+        Me.ucrInputMessage.IsReadOnly = True
+        resources.ApplyResources(Me.ucrInputMessage, "ucrInputMessage")
+        Me.ucrInputMessage.Name = "ucrInputMessage"
+        '
+        'cmdCheck
+        '
+        resources.ApplyResources(Me.cmdCheck, "cmdCheck")
+        Me.cmdCheck.Name = "cmdCheck"
+        Me.cmdCheck.UseVisualStyleBackColor = True
+        '
+        'lblRPackage
+        '
+        resources.ApplyResources(Me.lblRPackage, "lblRPackage")
+        Me.lblRPackage.Name = "lblRPackage"
+        '
         'dlgRPackages
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.UcrInputComboBox1)
-        Me.Controls.Add(Me.cmdTry)
+        Me.Controls.Add(Me.ucrInputMessage)
+        Me.Controls.Add(Me.cmdCheck)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblRPackage)
         Me.Controls.Add(Me.ucrInputTextBoxRPackage)
@@ -78,9 +79,9 @@ Partial Class dlgRPackages
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents lblRPackage As Label
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents cmdTry As Button
-    Friend WithEvents UcrInputComboBox1 As ucrInputComboBox
     Friend WithEvents ucrInputTextBoxRPackage As ucrInputTextBox
+    Friend WithEvents ucrInputMessage As ucrInputTextBox
+    Friend WithEvents cmdCheck As Button
+    Friend WithEvents lblRPackage As Label
 End Class
