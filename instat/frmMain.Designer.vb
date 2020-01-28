@@ -417,14 +417,7 @@ Partial Class frmMain
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareCalculate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnCalculateCalculations = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnCalculateColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnCalculateGeneralSummaries = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator24 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuPrepareColumnCalculateDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnCalculateTransform = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnCalculateRank = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnCalculatePolynomials = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnCalculateRowSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnGenerate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnGenerateRegularSequence = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnGenerateCountInFactor = New System.Windows.Forms.ToolStripMenuItem()
@@ -587,6 +580,9 @@ Partial Class frmMain
         Me.ucrOutput = New instat.ucrOutputWindow()
         Me.mnuPrepareColumnGenerateDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnGenerateRowSummaries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnPrpareColumnGeneratePolynomials = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator56 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuPrepareColumnGenerateRank = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2756,7 +2752,7 @@ Partial Class frmMain
         '
         'mnuPrepareCalculate
         '
-        Me.mnuPrepareCalculate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnCalculateCalculations, Me.mnuPrepareColumnCalculateColumnSummaries, Me.mnuPrepareColumnCalculateGeneralSummaries, Me.ToolStripSeparator24, Me.mnuPrepareColumnCalculateDuplicateColumn, Me.mnuPrepareColumnCalculateTransform, Me.mnuPrepareColumnCalculateRank, Me.mnuPrepareColumnCalculatePolynomials, Me.mnuPrepareColumnCalculateRowSummary})
+        Me.mnuPrepareCalculate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnCalculateCalculations, Me.mnuPrepareColumnCalculateTransform})
         Me.mnuPrepareCalculate.Name = "mnuPrepareCalculate"
         resources.ApplyResources(Me.mnuPrepareCalculate, "mnuPrepareCalculate")
         Me.mnuPrepareCalculate.Tag = "Calculate"
@@ -2767,54 +2763,15 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuPrepareColumnCalculateCalculations, "mnuPrepareColumnCalculateCalculations")
         Me.mnuPrepareColumnCalculateCalculations.Tag = "Calculations..."
         '
-        'mnuPrepareColumnCalculateColumnSummaries
-        '
-        Me.mnuPrepareColumnCalculateColumnSummaries.Name = "mnuPrepareColumnCalculateColumnSummaries"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateColumnSummaries, "mnuPrepareColumnCalculateColumnSummaries")
-        Me.mnuPrepareColumnCalculateColumnSummaries.Tag = ""
-        '
-        'mnuPrepareColumnCalculateGeneralSummaries
-        '
-        Me.mnuPrepareColumnCalculateGeneralSummaries.Name = "mnuPrepareColumnCalculateGeneralSummaries"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateGeneralSummaries, "mnuPrepareColumnCalculateGeneralSummaries")
-        '
-        'ToolStripSeparator24
-        '
-        Me.ToolStripSeparator24.Name = "ToolStripSeparator24"
-        resources.ApplyResources(Me.ToolStripSeparator24, "ToolStripSeparator24")
-        '
-        'mnuPrepareColumnCalculateDuplicateColumn
-        '
-        Me.mnuPrepareColumnCalculateDuplicateColumn.Name = "mnuPrepareColumnCalculateDuplicateColumn"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateDuplicateColumn, "mnuPrepareColumnCalculateDuplicateColumn")
-        '
         'mnuPrepareColumnCalculateTransform
         '
         resources.ApplyResources(Me.mnuPrepareColumnCalculateTransform, "mnuPrepareColumnCalculateTransform")
         Me.mnuPrepareColumnCalculateTransform.Name = "mnuPrepareColumnCalculateTransform"
         Me.mnuPrepareColumnCalculateTransform.Tag = "..."
         '
-        'mnuPrepareColumnCalculateRank
-        '
-        Me.mnuPrepareColumnCalculateRank.Name = "mnuPrepareColumnCalculateRank"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateRank, "mnuPrepareColumnCalculateRank")
-        Me.mnuPrepareColumnCalculateRank.Tag = "Rank..."
-        '
-        'mnuPrepareColumnCalculatePolynomials
-        '
-        Me.mnuPrepareColumnCalculatePolynomials.Name = "mnuPrepareColumnCalculatePolynomials"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculatePolynomials, "mnuPrepareColumnCalculatePolynomials")
-        Me.mnuPrepareColumnCalculatePolynomials.Tag = "Polynomials..."
-        '
-        'mnuPrepareColumnCalculateRowSummary
-        '
-        Me.mnuPrepareColumnCalculateRowSummary.Name = "mnuPrepareColumnCalculateRowSummary"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateRowSummary, "mnuPrepareColumnCalculateRowSummary")
-        Me.mnuPrepareColumnCalculateRowSummary.Tag = "Row_Summary..."
-        '
         'mnuPrepareColumnGenerate
         '
-        Me.mnuPrepareColumnGenerate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateRegularSequence, Me.mnuPrepareColumnGenerateEnter, Me.mnuPrepareColumnGenerateDuplicateColumn, Me.ToolStripSeparator25, Me.mnuPrepareColumnGenerateCountInFactor, Me.mnuPrepareColumnGenerateRowSummaries, Me.mnuPrepareColumnGenerateRandomSamples, Me.mnuPrepareColumnGeneratePermuteRows})
+        Me.mnuPrepareColumnGenerate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateRegularSequence, Me.mnuPrepareColumnGenerateEnter, Me.mnuPrepareColumnGenerateDuplicateColumn, Me.ToolStripSeparator25, Me.mnuPrepareColumnGenerateCountInFactor, Me.mnuPrepareColumnGenerateRowSummaries, Me.mnuPrepareColumnGenerateRank, Me.mnuPrepareColumnPrpareColumnGeneratePolynomials, Me.ToolStripSeparator56, Me.mnuPrepareColumnGenerateRandomSamples, Me.mnuPrepareColumnGeneratePermuteRows})
         Me.mnuPrepareColumnGenerate.Name = "mnuPrepareColumnGenerate"
         resources.ApplyResources(Me.mnuPrepareColumnGenerate, "mnuPrepareColumnGenerate")
         Me.mnuPrepareColumnGenerate.Tag = "Column:_Generate"
@@ -3761,6 +3718,23 @@ Partial Class frmMain
         Me.mnuPrepareColumnGenerateRowSummaries.Name = "mnuPrepareColumnGenerateRowSummaries"
         resources.ApplyResources(Me.mnuPrepareColumnGenerateRowSummaries, "mnuPrepareColumnGenerateRowSummaries")
         '
+        'mnuPrepareColumnPrpareColumnGeneratePolynomials
+        '
+        Me.mnuPrepareColumnPrpareColumnGeneratePolynomials.Name = "mnuPrepareColumnPrpareColumnGeneratePolynomials"
+        resources.ApplyResources(Me.mnuPrepareColumnPrpareColumnGeneratePolynomials, "mnuPrepareColumnPrpareColumnGeneratePolynomials")
+        Me.mnuPrepareColumnPrpareColumnGeneratePolynomials.Tag = "Polynomials..."
+        '
+        'ToolStripSeparator56
+        '
+        Me.ToolStripSeparator56.Name = "ToolStripSeparator56"
+        resources.ApplyResources(Me.ToolStripSeparator56, "ToolStripSeparator56")
+        '
+        'mnuPrepareColumnGenerateRank
+        '
+        Me.mnuPrepareColumnGenerateRank.Name = "mnuPrepareColumnGenerateRank"
+        resources.ApplyResources(Me.mnuPrepareColumnGenerateRank, "mnuPrepareColumnGenerateRank")
+        Me.mnuPrepareColumnGenerateRank.Tag = "Rank..."
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -3936,10 +3910,7 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareDataFrameFreezeColumns As ToolStripMenuItem
     Friend WithEvents mnuPrepareCalculate As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnCalculateTransform As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculateRank As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculatePolynomials As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnCalculateCalculations As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculateRowSummary As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGenerateRegularSequence As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGenerateRandomSamples As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnFactorRecodeNumeric As ToolStripMenuItem
@@ -4074,7 +4045,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticClimateMethodsAdditionalSeasonalSummaryRain As ToolStripMenuItem
     Friend WithEvents mnuClimaticClimateMethodsAdditionalWaterBalance As ToolStripMenuItem
     Friend WithEvents mnuClimateMethodsCreateClimateObject As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator24 As ToolStripSeparator
     Friend WithEvents mnuClimaticFile As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileOpensst As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGenerateEnter As ToolStripMenuItem
@@ -4150,7 +4120,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticSCFSupportCanonicalCorrelations As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareUnstackDailyData As ToolStripMenuItem
     Friend WithEvents mnuClimaticDefineClimaticData As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculateDuplicateColumn As ToolStripMenuItem
     Friend WithEvents mnuProcurement As ToolStripMenuItem
     Friend WithEvents mnuProcurementPrepare As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribe As ToolStripMenuItem
@@ -4271,8 +4240,6 @@ Partial Class frmMain
     Friend WithEvents mnuFileImportandTidyNetCDFFile As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificMosaic As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificParallelCoordinatePlot As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculateGeneralSummaries As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculateColumnSummaries As ToolStripMenuItem
     Friend WithEvents mnuModelHypothesisTests As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator46 As ToolStripSeparator
     Friend WithEvents mnuClimaticPrepareEvapotranspiration As ToolStripMenuItem
@@ -4353,4 +4320,7 @@ Partial Class frmMain
     Friend WithEvents mnuProcurementDescribeCategoricalTreemap As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGenerateDuplicateColumn As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGenerateRowSummaries As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnGenerateRank As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnPrpareColumnGeneratePolynomials As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator56 As ToolStripSeparator
 End Class
