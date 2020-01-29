@@ -2136,7 +2136,7 @@ Public Class frmMain
         dlgTreemap.ShowDialog()
     End Sub
 
-    Private Sub mnuToolsRPackage_Click(sender As Object, e As EventArgs) Handles mnuToolsRPackage.Click
-        dlgRPackages.ShowDialog()
+    Private Sub mnuToolsInstallRPackage_Click(sender As Object, e As EventArgs) Handles mnuToolsInstallRPackage.Click
+        dlgInstallRPackage.ShowDialog()
     End Sub
 End Class
