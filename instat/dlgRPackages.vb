@@ -1,6 +1,6 @@
 ﻿Imports instat
 Imports RDotNet
-Public Class dlgRPackages
+Public Class dlgInstallRPackage
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private clsInstallPackage As New RFunction
@@ -17,13 +17,15 @@ Public Class dlgRPackages
         TestOkEnabled()
     End Sub
     Private Sub InitialiseDialog()
-        ucrInputTextBoxRPackage.SetParameter(New RParameter("package", 1))
+        ucrBase.iHelpTopicID = 592
+        ucrInputTextBoxRPackage.SetParameter(New RParameter("pkgs", 1))
         CheckEnable()
     End Sub
 
     Private Sub SetDefaults()
         clsInstallPackage = New RFunction
         clsInstallPackage.SetRCommand("install.packages")
+        clsInstallPackage.AddParameter("repos", Chr(34) & "https://cran.rstudio.com/" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsInstallPackage)
     End Sub
     Private Sub SetRCodeForControls(bReset As Boolean)

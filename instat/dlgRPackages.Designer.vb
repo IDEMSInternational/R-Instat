@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgRPackages
+Partial Class dlgInstallRPackage
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,13 +22,32 @@ Partial Class dlgRPackages
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRPackages))
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputTextBoxRPackage = New instat.ucrInputTextBox()
-        Me.ucrInputMessage = New instat.ucrInputTextBox()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgInstallRPackage))
         Me.cmdCheck = New System.Windows.Forms.Button()
         Me.lblRPackage = New System.Windows.Forms.Label()
+        Me.ucrInputMessage = New instat.ucrInputTextBox()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputTextBoxRPackage = New instat.ucrInputTextBox()
         Me.SuspendLayout()
+        '
+        'cmdCheck
+        '
+        resources.ApplyResources(Me.cmdCheck, "cmdCheck")
+        Me.cmdCheck.Name = "cmdCheck"
+        Me.cmdCheck.UseVisualStyleBackColor = True
+        '
+        'lblRPackage
+        '
+        resources.ApplyResources(Me.lblRPackage, "lblRPackage")
+        Me.lblRPackage.Name = "lblRPackage"
+        '
+        'ucrInputMessage
+        '
+        Me.ucrInputMessage.AddQuotesIfUnrecognised = True
+        Me.ucrInputMessage.IsMultiline = False
+        Me.ucrInputMessage.IsReadOnly = True
+        resources.ApplyResources(Me.ucrInputMessage, "ucrInputMessage")
+        Me.ucrInputMessage.Name = "ucrInputMessage"
         '
         'ucrBase
         '
@@ -43,26 +62,7 @@ Partial Class dlgRPackages
         resources.ApplyResources(Me.ucrInputTextBoxRPackage, "ucrInputTextBoxRPackage")
         Me.ucrInputTextBoxRPackage.Name = "ucrInputTextBoxRPackage"
         '
-        'ucrInputMessage
-        '
-        Me.ucrInputMessage.AddQuotesIfUnrecognised = True
-        Me.ucrInputMessage.IsMultiline = False
-        Me.ucrInputMessage.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputMessage, "ucrInputMessage")
-        Me.ucrInputMessage.Name = "ucrInputMessage"
-        '
-        'cmdCheck
-        '
-        resources.ApplyResources(Me.cmdCheck, "cmdCheck")
-        Me.cmdCheck.Name = "cmdCheck"
-        Me.cmdCheck.UseVisualStyleBackColor = True
-        '
-        'lblRPackage
-        '
-        resources.ApplyResources(Me.lblRPackage, "lblRPackage")
-        Me.lblRPackage.Name = "lblRPackage"
-        '
-        'dlgRPackages
+        'dlgInstallRPackage
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -74,7 +74,7 @@ Partial Class dlgRPackages
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgRPackages"
+        Me.Name = "dlgInstallRPackage"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
