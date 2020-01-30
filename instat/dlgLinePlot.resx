@@ -298,7 +298,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkValley.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrChkValley.Name" xml:space="preserve">
     <value>ucrChkValley</value>
@@ -319,7 +319,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkPeak.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrChkPeak.Name" xml:space="preserve">
     <value>ucrChkPeak</value>
@@ -349,7 +349,7 @@
     <value>135, 20</value>
   </data>
   <data name="ucrChkWithSE.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrChkWithSE.Name" xml:space="preserve">
     <value>ucrChkWithSE</value>
@@ -415,7 +415,7 @@
     <value>254, 24</value>
   </data>
   <data name="ucrSave.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrSave.Name" xml:space="preserve">
     <value>ucrSave</value>
