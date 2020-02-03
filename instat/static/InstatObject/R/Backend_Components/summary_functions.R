@@ -287,18 +287,23 @@ DataBook$set("public", "summary", function(data_name, columns_to_summarise, summ
                                })
       names(calc_apply)[length(factors_disp) + 1] <- col_new
       calc_apply$summary <- summary_names[j]
+      names(calc_apply) <- make.names(names(calc_apply), unique = TRUE)
       if(j <= count_summaries_max) results_temp_count[[length(results_temp_count) + 1]] <- calc_apply
       else results_temp_other[[length(results_temp_other) + 1]] <- calc_apply
     }
-    results_temp_count <- dplyr::bind_rows(results_temp_count)
-    results_temp_other <- dplyr::bind_rows(results_temp_other)
-    results_temp_count <- format(results_temp_count, scientific = FALSE)
-    results_temp_other <- format(results_temp_other, scientific = FALSE)
-    # Convert summaries which have been coerced to numeric but should be dates
-    if("Date" %in% col_data_type[i]) {
-      results_temp_other[[col_new]] <- dplyr::if_else(summaries_other[match(results_temp_other$summary, summary_other_names)] %in% date_summaries,
-                                                      as.character(as.Date(as.numeric(results_temp_other[[col_new]]), origin = "1970/1/1")),
-                                                      paste(results_temp_other[[col_new]], "days"))
+    if(length(results_temp_count) > 0) {
+      results_temp_count <- dplyr::bind_rows(results_temp_count)
+      results_temp_count <- format(results_temp_count, scientific = FALSE)
+    }
+    if(length(results_temp_other) > 0) {
+      results_temp_other <- dplyr::bind_rows(results_temp_other)
+      results_temp_other <- format(results_temp_other, scientific = FALSE)
+      # Convert summaries which have been coerced to numeric but should be dates
+      if("Date" %in% col_data_type[i]) {
+        results_temp_other[[col_new]] <- dplyr::if_else(summaries_other[match(results_temp_other$summary, summary_other_names)] %in% date_summaries,
+                                                        as.character(as.Date(as.numeric(results_temp_other[[col_new]]), origin = "1970/1/1")),
+                                                        dplyr::if_else(stringr::str_trim(results_temp_other[[col_new]]) == "NA", NA_character_, paste(results_temp_other[[col_new]], "days")))
+      }
     }
     results_temp <- dplyr::bind_rows(results_temp_count, results_temp_other)
     if(i == 1) results <- results_temp
@@ -637,6 +642,8 @@ summary_count_non_missing <- function(x, ...) {
 }
 
 summary_sd <- function(x, na.rm = FALSE, na_type = "", ...) {
+  # needed because e.g. sd(as.character(1:10)) returns a numeric value
+  if(is.character(x)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
     else{
       return(sd(x,na.rm = na.rm))
