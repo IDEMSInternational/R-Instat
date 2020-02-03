@@ -104,14 +104,14 @@ Public Class clsRegressionDefaults
         Get
             Dim dctTemp As New Dictionary(Of String, RFunction)
             Dim clsPlot As New RFunction
-            Dim lstPlotTypes As List(Of String)
+            Dim lstPlotTypes As New List(Of String)
 
             lstPlotTypes = New List(Of String)({"residplot", "qqplot", "scaleloc", "cooksdist", "residlev", "cookslev"})
             clsPlot.SetRCommand("plot")
             clsPlot.bExcludeAssignedFunctionOutput = False
             For i As Integer = 1 To 6
                 clsPlot.AddParameter("which", i, iPosition:=1)
-                dctTemp.Add(lstPlotTypes(i), clsPlot.Clone())
+                dctTemp.Add(lstPlotTypes(i - 1), clsPlot.Clone)
             Next
             Return dctTemp
         End Get

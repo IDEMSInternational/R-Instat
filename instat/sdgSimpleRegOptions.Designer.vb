@@ -65,6 +65,12 @@ Partial Class sdgSimpleRegOptions
         Me.rdoLinear = New System.Windows.Forms.RadioButton()
         Me.ucrPnlScale = New instat.UcrPanel()
         Me.tbResiduals = New System.Windows.Forms.TabPage()
+        Me.ucrChkCooksDistance = New instat.ucrCheck()
+        Me.ucrChkResidualsFitted = New instat.ucrCheck()
+        Me.ucrChkScaleLocation = New instat.ucrCheck()
+        Me.ucrChkResidualsLeverage = New instat.ucrCheck()
+        Me.ucrChkQQ = New instat.ucrCheck()
+        Me.ucrChkCooksDistanceLeverage = New instat.ucrCheck()
         Me.tbDisplay = New System.Windows.Forms.TabPage()
         Me.ucrNudConfLevel = New instat.ucrNud()
         Me.ucrChkPvalues = New instat.ucrCheck()
@@ -80,12 +86,6 @@ Partial Class sdgSimpleRegOptions
         Me.ucrSaveResidualsColumnName = New instat.ucrSave()
         Me.ucrSaveFittedColumnName = New instat.ucrSave()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkCooksDistance = New instat.ucrCheck()
-        Me.ucrChkResidualsFitted = New instat.ucrCheck()
-        Me.ucrChkScaleLocation = New instat.ucrCheck()
-        Me.ucrChkResidualsLeverage = New instat.ucrCheck()
-        Me.ucrChkQQ = New instat.ucrCheck()
-        Me.ucrChkCooksDistanceLeverage = New instat.ucrCheck()
         Me.tbGraphics.SuspendLayout()
         Me.tcGraphics.SuspendLayout()
         Me.tbModel.SuspendLayout()
@@ -307,6 +307,42 @@ Partial Class sdgSimpleRegOptions
         Me.tbResiduals.Tag = "Residuals"
         Me.tbResiduals.UseVisualStyleBackColor = True
         '
+        'ucrChkCooksDistance
+        '
+        Me.ucrChkCooksDistance.Checked = False
+        resources.ApplyResources(Me.ucrChkCooksDistance, "ucrChkCooksDistance")
+        Me.ucrChkCooksDistance.Name = "ucrChkCooksDistance"
+        '
+        'ucrChkResidualsFitted
+        '
+        Me.ucrChkResidualsFitted.Checked = False
+        resources.ApplyResources(Me.ucrChkResidualsFitted, "ucrChkResidualsFitted")
+        Me.ucrChkResidualsFitted.Name = "ucrChkResidualsFitted"
+        '
+        'ucrChkScaleLocation
+        '
+        Me.ucrChkScaleLocation.Checked = False
+        resources.ApplyResources(Me.ucrChkScaleLocation, "ucrChkScaleLocation")
+        Me.ucrChkScaleLocation.Name = "ucrChkScaleLocation"
+        '
+        'ucrChkResidualsLeverage
+        '
+        Me.ucrChkResidualsLeverage.Checked = False
+        resources.ApplyResources(Me.ucrChkResidualsLeverage, "ucrChkResidualsLeverage")
+        Me.ucrChkResidualsLeverage.Name = "ucrChkResidualsLeverage"
+        '
+        'ucrChkQQ
+        '
+        Me.ucrChkQQ.Checked = False
+        resources.ApplyResources(Me.ucrChkQQ, "ucrChkQQ")
+        Me.ucrChkQQ.Name = "ucrChkQQ"
+        '
+        'ucrChkCooksDistanceLeverage
+        '
+        Me.ucrChkCooksDistanceLeverage.Checked = False
+        resources.ApplyResources(Me.ucrChkCooksDistanceLeverage, "ucrChkCooksDistanceLeverage")
+        Me.ucrChkCooksDistanceLeverage.Name = "ucrChkCooksDistanceLeverage"
+        '
         'tbDisplay
         '
         Me.tbDisplay.Controls.Add(Me.ucrNudConfLevel)
@@ -411,42 +447,6 @@ Partial Class sdgSimpleRegOptions
         '
         resources.ApplyResources(Me.ucrSdgButtons, "ucrSdgButtons")
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
-        '
-        'ucrChkCooksDistance
-        '
-        Me.ucrChkCooksDistance.Checked = False
-        resources.ApplyResources(Me.ucrChkCooksDistance, "ucrChkCooksDistance")
-        Me.ucrChkCooksDistance.Name = "ucrChkCooksDistance"
-        '
-        'ucrChkResidualsFitted
-        '
-        Me.ucrChkResidualsFitted.Checked = False
-        resources.ApplyResources(Me.ucrChkResidualsFitted, "ucrChkResidualsFitted")
-        Me.ucrChkResidualsFitted.Name = "ucrChkResidualsFitted"
-        '
-        'ucrChkScaleLocation
-        '
-        Me.ucrChkScaleLocation.Checked = False
-        resources.ApplyResources(Me.ucrChkScaleLocation, "ucrChkScaleLocation")
-        Me.ucrChkScaleLocation.Name = "ucrChkScaleLocation"
-        '
-        'ucrChkResidualsLeverage
-        '
-        Me.ucrChkResidualsLeverage.Checked = False
-        resources.ApplyResources(Me.ucrChkResidualsLeverage, "ucrChkResidualsLeverage")
-        Me.ucrChkResidualsLeverage.Name = "ucrChkResidualsLeverage"
-        '
-        'ucrChkQQ
-        '
-        Me.ucrChkQQ.Checked = False
-        resources.ApplyResources(Me.ucrChkQQ, "ucrChkQQ")
-        Me.ucrChkQQ.Name = "ucrChkQQ"
-        '
-        'ucrChkCooksDistanceLeverage
-        '
-        Me.ucrChkCooksDistanceLeverage.Checked = False
-        resources.ApplyResources(Me.ucrChkCooksDistanceLeverage, "ucrChkCooksDistanceLeverage")
-        Me.ucrChkCooksDistanceLeverage.Name = "ucrChkCooksDistanceLeverage"
         '
         'sdgSimpleRegOptions
         '

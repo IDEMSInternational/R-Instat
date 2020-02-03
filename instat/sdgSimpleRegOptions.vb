@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 
 Public Class sdgSimpleRegOptions
@@ -24,7 +25,7 @@ Public Class sdgSimpleRegOptions
     Public clsVisReg, clsRaesFunction, clsRStat_smooth, clsR_ribbon, clsRaes_ribbon As New RFunction
     'Public clsWhichFunction As RFunction
     Public bRCodeSet As Boolean = True
-    Public dctPlot As New Dictionary(Of String, RFunction)
+    Private dctPlot As New Dictionary(Of String, RFunction)
 
     'Display tab functions
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
@@ -519,9 +520,55 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrChkResidualsFitted_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkResidualsFitted.ControlValueChanged
         If ucrChkResidualsFitted.Checked Then
-            'clsRSyntax.AddToAfterCodes(dctPlot.Values("", clsAutoplot), iPosition:=0)
+            clsRSyntax.AddToAfterCodes(dctPlot.Values(0), iPosition:=0)
+            dctPlot.Values(0).iCallType = 3
         Else
-            clsRSyntax.RemoveFromAfterCodes(clsAutoplot)
+            clsRSyntax.RemoveFromAfterCodes(dctPlot.Values(0))
+        End If
+    End Sub
+
+    Private Sub ucrChkQQ_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkQQ.ControlValueChanged
+        If ucrChkResidualsFitted.Checked Then
+            clsRSyntax.AddToAfterCodes(dctPlot.Values(1), iPosition:=1)
+            dctPlot.Values(1).iCallType = 3
+        Else
+            clsRSyntax.RemoveFromAfterCodes(dctPlot.Values(1))
+        End If
+    End Sub
+
+    Private Sub ucrChkScaleLocation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkScaleLocation.ControlValueChanged
+        If ucrChkResidualsFitted.Checked Then
+            clsRSyntax.AddToAfterCodes(dctPlot.Values(2), iPosition:=2)
+            dctPlot.Values(2).iCallType = 3
+        Else
+            clsRSyntax.RemoveFromAfterCodes(dctPlot.Values(2))
+        End If
+    End Sub
+
+    Private Sub ucrChkCooksDistance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCooksDistance.ControlValueChanged
+        If ucrChkResidualsFitted.Checked Then
+            clsRSyntax.AddToAfterCodes(dctPlot.Values(3), iPosition:=3)
+            dctPlot.Values(3).iCallType = 3
+        Else
+            clsRSyntax.RemoveFromAfterCodes(dctPlot.Values(3))
+        End If
+    End Sub
+
+    Private Sub ucrChkResidualsLeverage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkResidualsLeverage.ControlValueChanged
+        If ucrChkResidualsFitted.Checked Then
+            clsRSyntax.AddToAfterCodes(dctPlot.Values(4), iPosition:=4)
+            dctPlot.Values(4).iCallType = 3
+        Else
+            clsRSyntax.RemoveFromAfterCodes(dctPlot.Values(4))
+        End If
+    End Sub
+
+    Private Sub ucrChkCooksDistanceLeverage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCooksDistanceLeverage.ControlValueChanged
+        If ucrChkResidualsFitted.Checked Then
+            clsRSyntax.AddToAfterCodes(dctPlot.Values(5), iPosition:=5)
+            dctPlot.Values(5).iCallType = 3
+        Else
+            clsRSyntax.RemoveFromAfterCodes(dctPlot.Values(5))
         End If
     End Sub
 End Class
