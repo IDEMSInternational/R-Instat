@@ -172,6 +172,12 @@
     <Compile Include="dlgGraphsGUI.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRPackages.Designer.vb">
+      <DependentUpon>dlgRPackages.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRPackages.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSurvivalDefine.Designer.vb">
       <DependentUpon>dlgSurvivalDefine.vb</DependentUpon>
     </Compile>
@@ -2430,6 +2436,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGraphsGUI.resx">
       <DependentUpon>dlgGraphsGUI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRPackages.resx">
+      <DependentUpon>dlgRPackages.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSurvivalDefine.resx">
       <DependentUpon>dlgSurvivalDefine.vb</DependentUpon>
