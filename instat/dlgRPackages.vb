@@ -4,6 +4,9 @@ Public Class dlgInstallRPackage
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private clsInstallPackage As New RFunction
+    Private clsBeforeOptionsFunc As New RFunction
+    Private clsAfterOptionsFunc As New RFunction
+
     Private Sub dlgRPackages_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -16,18 +19,34 @@ Public Class dlgInstallRPackage
         bReset = False
         TestOkEnabled()
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 592
+        ucrBase.clsRsyntax.iCallType = 2
         ucrInputTextBoxRPackage.SetParameter(New RParameter("pkgs", 1))
         CheckEnable()
     End Sub
 
     Private Sub SetDefaults()
         clsInstallPackage = New RFunction
+        clsBeforeOptionsFunc = New RFunction
+        clsAfterOptionsFunc = New RFunction
+
         clsInstallPackage.SetRCommand("install.packages")
-        clsInstallPackage.AddParameter("repos", Chr(34) & "https://cran.rstudio.com/" & Chr(34))
+        clsInstallPackage.AddParameter("repos", Chr(34) & "https://cran.rstudio.com/" & Chr(34), iPosition:=1)
+
+        clsBeforeOptionsFunc.SetRCommand("options")
+        clsBeforeOptionsFunc.AddParameter(strParameterName:="warn", strParameterValue:="2")
+
+
+        clsAfterOptionsFunc.SetRCommand("options")
+        clsAfterOptionsFunc.AddParameter(strParameterName:="warn", strParameterValue:="0")
+
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsBeforeOptionsFunc)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsAfterOptionsFunc)
         ucrBase.clsRsyntax.SetBaseRFunction(clsInstallPackage)
     End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputTextBoxRPackage.SetRCode(clsInstallPackage, bReset)
     End Sub
@@ -47,7 +66,7 @@ Public Class dlgInstallRPackage
         TestOkEnabled()
     End Sub
 
-    Private Sub check()
+    Private Sub Check()
         Dim clsPackageCheck As New RFunction
         Dim expOutput As SymbolicExpression
         Dim chrOutput As CharacterVector
