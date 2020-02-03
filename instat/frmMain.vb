@@ -60,7 +60,6 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
         Dim bClose As Boolean = False
         ' Note: this must change when R version changes
@@ -340,9 +339,6 @@ Public Class frmMain
         dlgRegularSequence.ShowDialog()
     End Sub
 
-    Private Sub mnuCalculations_Click(sender As Object, e As EventArgs)
-        dlgCalculator.ShowDialog()
-    End Sub
 
     Private Sub mnuPrepareAddColumnRowSummary_Click(sender As Object, e As EventArgs)
         dlgRowSummary.ShowDialog()
@@ -1112,9 +1108,6 @@ Public Class frmMain
         dlgEndOfRainsSeason.ShowDialog()
     End Sub
 
-    Private Sub mnuOrganiseColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateCountInFactor.Click
-        dlgCountinFactor.ShowDialog()
-    End Sub
 
     Private Sub mnuDescribeSpecificScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificScatterPlot.Click
         dlgScatterPlot.ShowDialog()
@@ -2144,7 +2137,11 @@ Public Class frmMain
         dlgPolynomials.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareCalculateCalculations_Click(sender As Object, e As EventArgs) Handles mnuPrepareCalculateCalculations.Click
+    Private Sub mnuPrepareCalculateCalculations_Click(sender As Object, e As EventArgs) Handles mnuPrepareCalculator.Click
         dlgCalculator.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCountInFactor.Click
+        dlgCountinFactor.ShowDialog()
     End Sub
 End Class
