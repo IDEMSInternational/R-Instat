@@ -136,23 +136,27 @@ Public Class dlgCalculator
             Case "Maths"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.38, Me.Height)
             Case "Logical and Symbols"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.46, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.4, Me.Height)
             Case "Summary"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.49, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.43, Me.Height)
             Case "Strings (Character Columns)"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.41, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.47, Me.Height)
             Case "Factor"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.42, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.4, Me.Height)
             Case "Probability"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.59, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.5, Me.Height)
             Case "Dates"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.3, Me.Height)
             Case "Transform"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.35, Me.Height)
             Case "Circular"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.39, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.36, Me.Height)
             Case "Wakefield"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.7, Me.Height)
+            Case "Modifier"
+                Me.Size = New Size(iBasicWidth * 1.39, Me.Height)
+            Case "Symbols"
+                Me.Size = New Size(iBasicWidth * 2.56, Me.Height)
             Case Else
                 Me.Size = New System.Drawing.Size(iBasicWidth, Me.Height)
         End Select
