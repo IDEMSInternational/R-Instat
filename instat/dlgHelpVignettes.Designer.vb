@@ -22,8 +22,8 @@ Partial Class dlgHelpVignettes
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Me.ucrInputComboPackage = New instat.ucrInputComboBox()
+        Me.ucrBase = New instat.ucrButtons()
         Me.lblPackage = New System.Windows.Forms.Label()
         Me.rdoHelp = New System.Windows.Forms.RadioButton()
         Me.rdoVignettes = New System.Windows.Forms.RadioButton()
@@ -32,29 +32,29 @@ Partial Class dlgHelpVignettes
         Me.lblFunctionName = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'UcrInputComboBox1
+        'ucrInputComboPackage
         '
-        Me.UcrInputComboBox1.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox1.IsReadOnly = False
-        Me.UcrInputComboBox1.Location = New System.Drawing.Point(111, 58)
-        Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
-        Me.UcrInputComboBox1.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox1.TabIndex = 0
+        Me.ucrInputComboPackage.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboPackage.IsReadOnly = False
+        Me.ucrInputComboPackage.Location = New System.Drawing.Point(111, 58)
+        Me.ucrInputComboPackage.Name = "ucrInputComboPackage"
+        Me.ucrInputComboPackage.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputComboPackage.TabIndex = 4
         '
-        'UcrButtons1
+        'ucrBase
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(2, 145)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(410, 52)
-        Me.UcrButtons1.TabIndex = 1
+        Me.ucrBase.Location = New System.Drawing.Point(10, 145)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 7
         '
         'lblPackage
         '
         Me.lblPackage.AutoSize = True
-        Me.lblPackage.Location = New System.Drawing.Point(23, 61)
+        Me.lblPackage.Location = New System.Drawing.Point(23, 62)
         Me.lblPackage.Name = "lblPackage"
         Me.lblPackage.Size = New System.Drawing.Size(84, 13)
-        Me.lblPackage.TabIndex = 2
+        Me.lblPackage.TabIndex = 3
         Me.lblPackage.Text = "Package Name:"
         '
         'rdoHelp
@@ -65,10 +65,10 @@ Partial Class dlgHelpVignettes
         Me.rdoHelp.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoHelp.Location = New System.Drawing.Point(130, 12)
+        Me.rdoHelp.Location = New System.Drawing.Point(132, 12)
         Me.rdoHelp.Name = "rdoHelp"
         Me.rdoHelp.Size = New System.Drawing.Size(91, 27)
-        Me.rdoHelp.TabIndex = 4
+        Me.rdoHelp.TabIndex = 1
         Me.rdoHelp.TabStop = True
         Me.rdoHelp.Text = "Help"
         Me.rdoHelp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -82,10 +82,10 @@ Partial Class dlgHelpVignettes
         Me.rdoVignettes.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoVignettes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoVignettes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoVignettes.Location = New System.Drawing.Point(218, 12)
+        Me.rdoVignettes.Location = New System.Drawing.Point(220, 12)
         Me.rdoVignettes.Name = "rdoVignettes"
         Me.rdoVignettes.Size = New System.Drawing.Size(91, 27)
-        Me.rdoVignettes.TabIndex = 5
+        Me.rdoVignettes.TabIndex = 2
         Me.rdoVignettes.TabStop = True
         Me.rdoVignettes.Text = "Vignettes"
         Me.rdoVignettes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -93,10 +93,10 @@ Partial Class dlgHelpVignettes
         '
         'ucrPnlHelpVignettes
         '
-        Me.ucrPnlHelpVignettes.Location = New System.Drawing.Point(82, 8)
+        Me.ucrPnlHelpVignettes.Location = New System.Drawing.Point(103, 8)
         Me.ucrPnlHelpVignettes.Name = "ucrPnlHelpVignettes"
-        Me.ucrPnlHelpVignettes.Size = New System.Drawing.Size(250, 36)
-        Me.ucrPnlHelpVignettes.TabIndex = 3
+        Me.ucrPnlHelpVignettes.Size = New System.Drawing.Size(231, 36)
+        Me.ucrPnlHelpVignettes.TabIndex = 0
         '
         'ucrInputFunctionName
         '
@@ -111,25 +111,25 @@ Partial Class dlgHelpVignettes
         'lblFunctionName
         '
         Me.lblFunctionName.AutoSize = True
-        Me.lblFunctionName.Location = New System.Drawing.Point(24, 106)
+        Me.lblFunctionName.Location = New System.Drawing.Point(26, 105)
         Me.lblFunctionName.Name = "lblFunctionName"
         Me.lblFunctionName.Size = New System.Drawing.Size(82, 13)
-        Me.lblFunctionName.TabIndex = 7
+        Me.lblFunctionName.TabIndex = 5
         Me.lblFunctionName.Text = "Function Name:"
         '
         'dlgHelpVignettes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 202)
+        Me.ClientSize = New System.Drawing.Size(436, 207)
         Me.Controls.Add(Me.lblFunctionName)
         Me.Controls.Add(Me.ucrInputFunctionName)
         Me.Controls.Add(Me.rdoHelp)
         Me.Controls.Add(Me.rdoVignettes)
         Me.Controls.Add(Me.ucrPnlHelpVignettes)
         Me.Controls.Add(Me.lblPackage)
-        Me.Controls.Add(Me.UcrButtons1)
-        Me.Controls.Add(Me.UcrInputComboBox1)
+        Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrInputComboPackage)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgHelpVignettes"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -139,8 +139,8 @@ Partial Class dlgHelpVignettes
 
     End Sub
 
-    Friend WithEvents UcrInputComboBox1 As ucrInputComboBox
-    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents ucrInputComboPackage As ucrInputComboBox
+    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblPackage As Label
     Friend WithEvents rdoHelp As RadioButton
     Friend WithEvents rdoVignettes As RadioButton
