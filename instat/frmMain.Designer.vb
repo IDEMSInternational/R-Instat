@@ -526,6 +526,7 @@ Partial Class frmMain
         Me.ToolStripSeparator52 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuProcurementDescribeCategoricalBarCharts = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeCategoricalMosaic = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeCategoricalTreemap = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeNumeric = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeNumericBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.HistogramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -3344,7 +3345,7 @@ Partial Class frmMain
         '
         'mnuProcurementDescribeCategorical
         '
-        Me.mnuProcurementDescribeCategorical.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeCategoricalOneVarFreq, Me.mnuProcurementDescribeCategoricalTwoVarFreq, Me.ToolStripSeparator52, Me.mnuProcurementDescribeCategoricalBarCharts, Me.mnuProcurementDescribeCategoricalMosaic})
+        Me.mnuProcurementDescribeCategorical.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeCategoricalOneVarFreq, Me.mnuProcurementDescribeCategoricalTwoVarFreq, Me.ToolStripSeparator52, Me.mnuProcurementDescribeCategoricalBarCharts, Me.mnuProcurementDescribeCategoricalMosaic, Me.mnuProcurementDescribeCategoricalTreemap})
         Me.mnuProcurementDescribeCategorical.Name = "mnuProcurementDescribeCategorical"
         resources.ApplyResources(Me.mnuProcurementDescribeCategorical, "mnuProcurementDescribeCategorical")
         '
@@ -3372,6 +3373,11 @@ Partial Class frmMain
         '
         Me.mnuProcurementDescribeCategoricalMosaic.Name = "mnuProcurementDescribeCategoricalMosaic"
         resources.ApplyResources(Me.mnuProcurementDescribeCategoricalMosaic, "mnuProcurementDescribeCategoricalMosaic")
+        '
+        'mnuProcurementDescribeCategoricalTreemap
+        '
+        Me.mnuProcurementDescribeCategoricalTreemap.Name = "mnuProcurementDescribeCategoricalTreemap"
+        resources.ApplyResources(Me.mnuProcurementDescribeCategoricalTreemap, "mnuProcurementDescribeCategoricalTreemap")
         '
         'mnuProcurementDescribeNumeric
         '
@@ -4332,4 +4338,5 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareColumnDefineConvertColumns As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator55 As ToolStripSeparator
     Friend WithEvents mnuPrepareColumnDefineCircular As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDescribeCategoricalTreemap As ToolStripMenuItem
 End Class
