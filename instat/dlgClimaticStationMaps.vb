@@ -350,6 +350,7 @@ Public Class dlgClimaticStationMaps
         frmMain.clsRLink.RunInternalScript(strScript)
         clsRemoveFunc.AddParameter(ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
+
         clsSetGeometry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_geometry")
         clsSetGeometry.AddParameter("data", ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         GeometryOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsSetGeometry.ToScript(), bSilent:=True)
