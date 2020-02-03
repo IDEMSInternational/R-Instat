@@ -377,6 +377,7 @@ Public Class ucrDistributions
         ' von mises distribution
         clsVonnMisesDist.strNameTag = "von_mises"
         clsVonnMisesDist.strRName = "vonmises"
+        clsVonnMisesDist.strPackagName = "circular"
         clsVonnMisesDist.strRFunctionName = "rvonmises"
         clsVonnMisesDist.strPFunctionName = "pvonmises"
         clsVonnMisesDist.strQFunctionName = "qvonmises"

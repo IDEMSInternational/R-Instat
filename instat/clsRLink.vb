@@ -444,6 +444,7 @@ Public Class RLink
         Dim clsPNGFunction As New RFunction
         Dim strTempAssignTo As String = ".temp_val"
         Dim bSuccess As Boolean
+        Dim bError As Boolean = False
 
         strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
         strOutput = ""
@@ -558,7 +559,7 @@ Public Class RLink
                 strSplitScript = Left(strScript, strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray))
                 If strSplitScript <> "" Then
                     Try
-                        Evaluate(strSplitScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                        bError = Not Evaluate(strSplitScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                     Catch e As Exception
                         MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                     End Try
@@ -567,12 +568,16 @@ Public Class RLink
                 strCapturedScript = "capture.output(" & strSplitScript & ")"
             End If
             Try
-                Evaluate(strTempAssignTo & " <- " & strCapturedScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-                expTemp = GetSymbol(strTempAssignTo)
-                If expTemp IsNot Nothing Then
-                    strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
-                    If strTemp <> "" Then
-                        strOutput = strOutput & strTemp & Environment.NewLine
+                If Not bError Then
+                    If Evaluate(strTempAssignTo & " <- " & strCapturedScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride) Then
+                        expTemp = GetSymbol(strTempAssignTo)
+                        Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
+                        If expTemp IsNot Nothing Then
+                            strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
+                            If strTemp <> "" Then
+                                strOutput = strOutput & strTemp & Environment.NewLine
+                            End If
+                        End If
                     End If
                 End If
             Catch e As Exception
@@ -1080,6 +1085,21 @@ Public Class RLink
             bExists = False
         End If
         Return bExists
+    End Function
+
+    Public Function GetDataFrameCount() As Integer
+        Dim iCount As Integer
+        Dim clsDataFrameCount As New RFunction
+        Dim expCount As SymbolicExpression
+
+        clsDataFrameCount.SetRCommand(strInstatDataObject & "$dataframe_count")
+        expCount = RunInternalScriptGetValue(clsDataFrameCount.ToScript(), bSilent:=True)
+        If expCount IsNot Nothing AndAlso Not expCount.Type = Internals.SymbolicExpressionType.Null Then
+            iCount = expCount.AsInteger(0)
+        Else
+            iCount = 0
+        End If
+        Return iCount
     End Function
 
     Public Function GetDataFrameLength(strDataFrameName As String, Optional bUseCurrentFilter As Boolean = False) As Integer
