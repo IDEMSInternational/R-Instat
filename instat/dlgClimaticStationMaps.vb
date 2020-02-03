@@ -38,6 +38,7 @@ Public Class dlgClimaticStationMaps
     Private clsLabelRepelAesFunction As New RFunction
     Private clsCoordPolarFunction As RFunction
     Private clsCoordPolarStartOperator As ROperator
+    Private clsGetDataFrame As RFunction
 
     Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -122,6 +123,7 @@ Public Class dlgClimaticStationMaps
     End Sub
 
     Private Sub SetDefaults()
+        clsGetDataFrame = New RFunction
         clsGeomSfFunction = New RFunction
         clsGgplotFunction = New RFunction
         clsSfAesFunction = New RFunction
@@ -151,6 +153,8 @@ Public Class dlgClimaticStationMaps
         ucrSaveMap.Reset()
         bResetSubdialog = True
         bResetSFLayerSubdialog = True
+
+        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
         clsGgplotFunction.SetPackageName("ggplot2")
         clsGgplotFunction.SetRCommand("ggplot")
@@ -332,22 +336,24 @@ Public Class dlgClimaticStationMaps
 
     Private Sub AutoFillGeometry()
         Dim clsSetGeometry As New RFunction
-        Dim clsGetDataFrame As RFunction = New RFunction
         Dim clsParam As RParameter = New RParameter
         Dim GeometryOutput As SymbolicExpression
         Dim strScript As String = ""
+        Dim clsRemoveFunc As New RFunction
 
-        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsRemoveFunc.SetRCommand("rm")
         clsParam.SetArgumentName("data_name")
         clsParam.SetArgumentValue(Chr(34) & ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
         clsGetDataFrame.AddParameter(clsParam)
         clsGetDataFrame.SetAssignTo(ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         clsGetDataFrame.ToScript(strScript)
         frmMain.clsRLink.RunInternalScript(strScript)
+        clsRemoveFunc.AddParameter(ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
         clsSetGeometry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_geometry")
         clsSetGeometry.AddParameter("data", ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         GeometryOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsSetGeometry.ToScript(), bSilent:=True)
+
 
         If GeometryOutput IsNot Nothing AndAlso Not GeometryOutput.Type = Internals.SymbolicExpressionType.Null Then
             ucrReceiverGeometry.Add(GeometryOutput.AsCharacter(0), ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
