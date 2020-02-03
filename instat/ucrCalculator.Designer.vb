@@ -2252,6 +2252,7 @@ Partial Class ucrCalculator
         '
         Me.grpCircular.Controls.Add(Me.cmdCircular)
         Me.grpCircular.Controls.Add(Me.cmdCircQuantile)
+        Me.grpCircular.Controls.Add(Me.grpMaths)
         Me.grpCircular.Controls.Add(Me.cmdCircMax)
         Me.grpCircular.Controls.Add(Me.cmdA1)
         Me.grpCircular.Controls.Add(Me.cmdAngVar)
@@ -2369,6 +2370,8 @@ Partial Class ucrCalculator
         'grpFactor
         '
         Me.grpFactor.Controls.Add(Me.cmdShuffle)
+        Me.grpFactor.Controls.Add(Me.grpCircular)
+        Me.grpFactor.Controls.Add(Me.grpLogical)
         Me.grpFactor.Controls.Add(Me.cmdShift)
         Me.grpFactor.Controls.Add(Me.cmdReverse)
         Me.grpFactor.Controls.Add(Me.cmdReorder)
@@ -2701,10 +2704,7 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpFactor)
-        Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpMaths)
-        Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpProbabilty)
