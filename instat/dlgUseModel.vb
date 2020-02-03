@@ -525,4 +525,11 @@ Public Class dlgUseModel
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("segmented::intercept()", 1)
     End Sub
 
+    Private Sub cmdPrint1_Click(sender As Object, e As EventArgs) Handles cmdPrint1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::fevd(x = , data, threshold = NULL, threshold.fun = ~1, location.fun = ~1,scale.fun = ~1, shape.fun = ~1, use.phi = FALSE,type = c(""GEV"", ""GP"", ""PP"", ""Gumbel"", ""Exponential""),method = c(""MLE"", ""GMLE"", ""Bayesian"", ""Lmoments""), initial = NULL,span, units = NULL, time.units = ""days"", period.basis = ""year"",na.action = na.fail, optim.args = NULL, priorFun = NULL,priorParams = NULL, proposalFun = NULL, proposalParams = NULL,iter = 9999, weights = 1, blocks = NULL, verbose = FALSE)", 310)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::fevd()", 1)
+        End If
+    End Sub
 End Class
