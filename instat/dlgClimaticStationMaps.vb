@@ -38,6 +38,7 @@ Public Class dlgClimaticStationMaps
     Private clsCoordPolarFunction As RFunction
     Private clsCoordPolarStartOperator As ROperator
     Private clsGetDataFrame As RFunction
+    Private clsRemoveFunc As New RFunction
 
     Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -154,6 +155,8 @@ Public Class dlgClimaticStationMaps
         bResetSFLayerSubdialog = True
 
         clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+
+        clsRemoveFunc.SetRCommand("rm")
 
         clsGgplotFunction.SetPackageName("ggplot2")
         clsGgplotFunction.SetRCommand("ggplot")
@@ -338,13 +341,11 @@ Public Class dlgClimaticStationMaps
     End Sub
 
     Private Sub AutoFillGeometry()
-        Dim clsRemoveFunc As New RFunction
         Dim clsSetGeometry As New RFunction
         Dim clsParam As RParameter = New RParameter
         Dim GeometryOutput As SymbolicExpression
         Dim strScript As String = ""
 
-        clsRemoveFunc.SetRCommand("rm")
         clsRemoveFunc.AddParameter(strParameterValue:=ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         clsParam.SetArgumentName("data_name")
         clsParam.SetArgumentValue(Chr(34) & ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
