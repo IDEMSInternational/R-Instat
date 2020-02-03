@@ -104,6 +104,7 @@ Partial Class dlgCumulativeDistribution
         '
         'ucrCumDistSelector
         '
+        Me.ucrCumDistSelector.bDropUnusedFilterLevels = False
         Me.ucrCumDistSelector.bShowHiddenColumns = False
         Me.ucrCumDistSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrCumDistSelector, "ucrCumDistSelector")
