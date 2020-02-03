@@ -538,7 +538,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudConfidenceInterval.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 283</value>
+    <value>130, 283</value>
   </data>
   <data name="ucrNudConfidenceInterval.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -583,7 +583,7 @@
     <value>86, 6</value>
   </data>
   <data name="ucrPnlColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 36</value>
+    <value>284, 36</value>
   </data>
   <data name="ucrPnlColumns.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

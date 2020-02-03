@@ -71,6 +71,8 @@ Partial Class dlgFitModel
         Me.ucrReceiverResponseVar = New instat.ucrReceiverSingle()
         Me.ucrSelectorByDataFrameAddRemoveForFitModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
+        Me.cmdTry = New System.Windows.Forms.Button()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpSecondCalc.SuspendLayout()
         Me.SuspendLayout()
@@ -277,6 +279,7 @@ Partial Class dlgFitModel
         '
         'ucrSelectorByDataFrameAddRemoveForFitModel
         '
+        Me.ucrSelectorByDataFrameAddRemoveForFitModel.bDropUnusedFilterLevels = False
         Me.ucrSelectorByDataFrameAddRemoveForFitModel.bShowHiddenColumns = False
         Me.ucrSelectorByDataFrameAddRemoveForFitModel.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorByDataFrameAddRemoveForFitModel, "ucrSelectorByDataFrameAddRemoveForFitModel")
@@ -287,10 +290,26 @@ Partial Class dlgFitModel
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrInputTryMessage
+        '
+        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
+        Me.ucrInputTryMessage.IsMultiline = False
+        Me.ucrInputTryMessage.IsReadOnly = True
+        resources.ApplyResources(Me.ucrInputTryMessage, "ucrInputTryMessage")
+        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
+        '
+        'cmdTry
+        '
+        resources.ApplyResources(Me.cmdTry, "cmdTry")
+        Me.cmdTry.Name = "cmdTry"
+        Me.cmdTry.UseVisualStyleBackColor = True
+        '
         'dlgFitModel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputTryMessage)
+        Me.Controls.Add(Me.cmdTry)
         Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.ucrChkConvertToVariate)
         Me.Controls.Add(Me.grpSecondCalc)
@@ -350,4 +369,6 @@ Partial Class dlgFitModel
     Friend WithEvents cmdPower As Button
     Friend WithEvents ucrChkConvertToVariate As ucrCheck
     Friend WithEvents ucrModelName As ucrSave
+    Friend WithEvents ucrInputTryMessage As ucrInputTextBox
+    Friend WithEvents cmdTry As Button
 End Class

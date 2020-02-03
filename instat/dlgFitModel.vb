@@ -14,9 +14,11 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgFitModel
+    Private clsAttach As New RFunction
+    Private clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Public bRCodeSet As Boolean = False
@@ -26,6 +28,10 @@ Public Class dlgFitModel
     Public bResetModelOptions As Boolean = False
     Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
+
+    'Saving Operators/Functions
+    Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
+
     Public bResetSubDialog As Boolean = False
     Public bResetOptionsSubDialog As Boolean = False
 
@@ -61,6 +67,7 @@ Public Class dlgFitModel
         ucrReceiverExpressionFitModel.SetParameter(New RParameter("y", 1))
         ucrReceiverExpressionFitModel.SetParameterIsString()
         ucrReceiverExpressionFitModel.bWithQuotes = False
+        ucrReceiverExpressionFitModel.AddtoCombobox("1")
 
         ucrFamily.SetGLMDistributions()
         ucrFamily.SetFunctionIsDistFunction()
@@ -90,6 +97,11 @@ Public Class dlgFitModel
         clsVisReg = New RFunction
         clsFamilyFunction = New RFunction
 
+        clsRstandardFunction = New RFunction
+        clsHatvaluesFunction = New RFunction
+        clsResidualFunction = New RFunction
+        clsFittedValuesFunction = New RFunction
+
         ucrSelectorByDataFrameAddRemoveForFitModel.Reset()
         ucrReceiverResponseVar.SetMeAsReceiver()
         ucrSelectorByDataFrameAddRemoveForFitModel.Focus()
@@ -98,7 +110,6 @@ Public Class dlgFitModel
 
         clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator.Clone
 
-        ucrReceiverExpressionFitModel.Clear()
         ucrReceiverExpressionFitModel.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.SetMeAsReceiver()
@@ -111,9 +122,11 @@ Public Class dlgFitModel
 
         clsFamilyFunction = ucrFamily.clsCurrRFunction
         clsGLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
+        clsGLM.AddParameter("na.action", "na.exclude", iPosition:=4)
 
         clsLM = clsRegressionDefaults.clsDefaultLmFunction.Clone
         clsLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsLM.AddParameter("na.action", "na.exclude", iPosition:=4)
 
         'Residual Plots
         clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
@@ -150,6 +163,11 @@ Public Class dlgFitModel
         bResetSubDialog = True
         bResetOptionsSubDialog = True
 
+        clsResidualFunction.SetRCommand("residuals")
+        clsFittedValuesFunction.SetRCommand("fitted.values")
+        clsRstandardFunction.SetRCommand("rstandard")
+        clsHatvaluesFunction.SetRCommand("hatvalues")
+
         clsLM.SetAssignTo(ucrModelName.GetText, strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
 
         clsGLM.SetAssignTo(ucrModelName.GetText, strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
@@ -159,6 +177,14 @@ Public Class dlgFitModel
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
         clsLMOrGLM = clsLM
         bResetModelOptions = True
+
+        clsAttach.SetRCommand("attach")
+        clsDetach.SetRCommand("detach")
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("unload", "TRUE")
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -225,7 +251,7 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
-        ucrReceiverExpressionFitModel.AddToReceiverAtCursorPosition("0")
+        ucrReceiverExpressionFitModel.AddToReceiverAtCursorPosition("I()", 1)
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
@@ -273,7 +299,7 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewAutoplot:=clsAutoPlot, clsNewVisReg:=clsVisReg, clsNewConfint:=clsConfint, bReset:=bResetOptionsSubDialog)
+        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesFunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames, bReset:=bResetOptionsSubDialog)
         sdgSimpleRegOptions.ShowDialog()
         GraphAssignTo()
         bResetOptionsSubDialog = False
@@ -342,6 +368,10 @@ Public Class dlgFitModel
             clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsResidualFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsFittedValuesFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsLMOrGLM)
         End If
     End Sub
@@ -358,6 +388,8 @@ Public Class dlgFitModel
     Private Sub ucrReceiverExpressionFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlValueChanged, ucrReceiverResponseVar.ControlValueChanged
         ChooseRFunction()
         ResponseConvert()
+        ucrInputTryMessage.SetName("")
+        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
     End Sub
 
     Private Sub ucrConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
@@ -380,4 +412,67 @@ Public Class dlgFitModel
         clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
         clsAutoPlot.SetAssignTo("last_autoplot", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_autoplot")
     End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        ucrReceiverExpressionFitModel.AddtoCombobox(ucrReceiverExpressionFitModel.GetText)
+    End Sub
+
+    Private Sub TryScript()
+        Dim strVecOutput As CharacterVector
+        Dim bValid As Boolean
+        Dim clsTY As RCodeStructure
+        Try
+            If ucrReceiverResponseVar.IsEmpty AndAlso ucrReceiverExpressionFitModel.IsEmpty Then
+                ucrInputTryMessage.SetName("")
+            Else
+                Dim strScriptCommands As String = ""
+                Dim lstScriptCommands As New List(Of String)
+                clsTY = ucrBase.clsRsyntax.clsBaseFunction.Clone()
+                clsTY.RemoveAssignTo()
+
+                'get the before th code scripts,base script and the after code script
+                lstScriptCommands.AddRange(ucrBase.clsRsyntax.GetBeforeCodesScripts())
+                lstScriptCommands.Add(clsTY.ToScript())
+                ' lstScriptCommands.AddRange(ucrBase.clsRsyntax.GetAfterCodesScripts())
+
+                'concantenate the commands into one sentence for splitting purposes
+                strScriptCommands = ""
+                For i As Integer = 0 To lstScriptCommands.Count - 1
+                    strScriptCommands = strScriptCommands & Environment.NewLine & lstScriptCommands(i)
+                Next
+                'split the whole commands into indidual commands so that we can run them individually
+                lstScriptCommands.Clear() 'clear the list first
+                lstScriptCommands.AddRange(strScriptCommands.Split(New String() {Environment.NewLine}, StringSplitOptions.None))
+
+                bValid = False
+                For Each str As String In lstScriptCommands
+                    If Not String.IsNullOrWhiteSpace(str) Then
+                        strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(str, bSilent:=True)
+                        If strVecOutput IsNot Nothing AndAlso strVecOutput.Length > 1 Then
+                            bValid = True
+                            'don't break the if, because we may need to run of the detach command
+                        End If
+                    End If
+                Next
+
+                If bValid Then
+                    ucrInputTryMessage.SetName("Model runs without error")
+                    ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
+                Else
+                    ucrInputTryMessage.SetName("Command produced an error or no output to display.")
+                    ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
+                End If
+
+            End If
+        Catch ex As Exception
+            ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
+            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
+        End Try
+    End Sub
+
+    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
+        TryScript()
+    End Sub
+
+
 End Class

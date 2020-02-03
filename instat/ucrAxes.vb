@@ -140,16 +140,18 @@ Public Class ucrAxes
         ucrInputLowerLimit.SetParameterIncludeArgumentName(False)
         ucrInputLowerLimit.SetValidationTypeAsNumeric()
         ucrInputLowerLimit.AddQuotesIfUnrecognised = False
+        ucrInputLowerLimit.SetValuesToIgnore({"NA"})
         ucrInputLowerLimit.SetLinkedDisplayControl(lblLowerLimit)
 
         ucrInputUpperLimit.SetParameter(New RParameter("upperlimit", 1))
         ucrInputUpperLimit.SetParameterIncludeArgumentName(False)
         ucrInputUpperLimit.SetValidationTypeAsNumeric()
         ucrInputUpperLimit.AddQuotesIfUnrecognised = False
+        ucrInputUpperLimit.SetValuesToIgnore({"NA"})
         ucrInputUpperLimit.SetLinkedDisplayControl(lblUpperLimit)
 
         'Axis type - controls which options are available
-        ucrInputAxisType.SetItems({"Continuous", "Discrete", "Date"})
+        ucrInputAxisType.SetItems({"continuous", "discrete", "date"})
         ucrInputAxisType.SetDropDownStyleAsNonEditable()
 
         ucrInputRelaceMissingvalues.SetParameter(New RParameter("na.value"))
@@ -186,7 +188,7 @@ Public Class ucrAxes
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "Continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempBreaksParam As RParameter
         Dim clsTempMinorBreaksParam As RParameter
 
@@ -339,15 +341,15 @@ Public Class ucrAxes
         grpMajorBreaks.Hide()
         grpMinorBreaks.Hide()
         grpScales.Hide()
-        If strAxisType = "Continuous" Then
+        If strAxisType.ToLower = "continuous" Then
             'show continous panels
             'TODO put controls in panels so group boxes can be used for multiple cases
             grpMajorBreaks.Show()
             grpMinorBreaks.Show()
             grpScales.Show()
-        ElseIf strAxisType = "Discrete" Then
+        ElseIf strAxisType.ToLower = "discrete" Then
             'show discrete panels
-        ElseIf strAxisType = "Date" Then
+        ElseIf strAxisType.ToLower = "date" Then
             'show date panels
         End If
     End Sub
@@ -389,12 +391,14 @@ Public Class ucrAxes
     End Sub
 
     Private Sub ExpandControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrInputExpand.ControlValueChanged
-        If ucrChkExpand.Checked AndAlso Not ucrInputExpand.IsEmpty Then
-            clsXYScaleContinuousFunction.AddParameter("expand", clsRFunctionParameter:=ucrInputExpand.clsRList)
-        Else
-            clsXYScaleContinuousFunction.RemoveParameterByName("expand")
+        If bRCodeSet Then
+            If ucrChkExpand.Checked AndAlso Not ucrInputExpand.IsEmpty Then
+                clsXYScaleContinuousFunction.AddParameter("expand", clsRFunctionParameter:=ucrInputExpand.clsRList)
+            Else
+                clsXYScaleContinuousFunction.RemoveParameterByName("expand")
+            End If
+            AddRemoveContinuousXYScales()
         End If
-        AddRemoveContinuousXYScales()
     End Sub
 
     Private Sub ScalesCheckboxes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkTransformation.ControlValueChanged, ucrChkExpand.ControlValueChanged, ucrChkNaValue.ControlValueChanged

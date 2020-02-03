@@ -95,7 +95,9 @@ Public Class ucrGeomListWithParameters
             strDataFrameName = strDataFrameName.Substring(1, strDataFrameName.Length - 2) 'The value of the parameter "data_name" has quotes around it that need to be erased as we merely want the name of the data_frame.
             ucrGeomWithAesSelector.SetDataframe(strDataFrameName)
         Else
-            ucrGeomWithAesSelector.SetDataframe(strDataFrameName, (Not ucrChkApplyOnAllLayers.Checked) OrElse strGlobalDataFrame = "")
+            If strDataFrameName IsNot Nothing Then
+                ucrGeomWithAesSelector.SetDataframe(strDataFrameName, (Not ucrChkApplyOnAllLayers.Checked) OrElse strGlobalDataFrame = "")
+            End If
         End If
     End Sub
 
@@ -366,7 +368,7 @@ Public Class ucrGeomListWithParameters
 
         'Done after because aes may be added in from above
         If Not ucrChkApplyOnAllLayers.Checked AndAlso clsLocalAesFunction.iParameterCount > 0 Then
-            clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsLocalAesFunction.Clone(), iPosition:=0)
+            clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsLocalAesFunction, iPosition:=0)
         Else
             clsGeomFunction.RemoveParameterByName("mapping")
         End If
