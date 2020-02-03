@@ -109,7 +109,7 @@ Public Class dlgCorruptionFitModel
         clsFormula.AddParameter("input", clsROperatorParameter:=clsExplanatoryVariables, iPosition:=1)
 
         'Residual Plots
-        clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
+        'clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
 
         ucrReceiverOutput.SetMeAsReceiver()
 
@@ -119,7 +119,7 @@ Public Class dlgCorruptionFitModel
         ucrInputModelPreview.SetName("")
 
         'Residual Plots
-        clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
+        'clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
         clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsCorruptionModel, iPosition:=0)
         clsAutoPlot.bExcludeAssignedFunctionOutput = False
 

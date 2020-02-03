@@ -170,7 +170,7 @@ Public Class dlgFourVariableModelling
         clsGLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
 
         'Residual Plots
-        clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
+        'clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
         clsAutoPlot.bExcludeAssignedFunctionOutput = False
 
         'Model

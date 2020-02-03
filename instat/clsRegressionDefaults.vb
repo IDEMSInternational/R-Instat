@@ -118,24 +118,6 @@ Public Class clsRegressionDefaults
 
     End Property
 
-    Public Shared ReadOnly Property clsDefaultAutoplot As RFunction
-        Get
-            Dim clsPlotFitRes As New RFunction
-            'Dim clsWhichFuntion As New RFunction
-
-            'clsAutoplot.SetPackageName("ggplot2")
-            clsPlotFitRes.SetRCommand("plot")
-            clsPlotFitRes.iCallType = 3
-            'clsWhichFuntion.SetRCommand("c")
-            clsPlotFitRes.AddParameter("which", "1", iPosition:=0)
-            'clsWhichFuntion.AddParameter("2", "2", bIncludeArgumentName:=False)
-            'clsWhichFuntion.AddParameter("3", "3", bIncludeArgumentName:=False)
-            'clsWhichFuntion.AddParameter("5", "5", bIncludeArgumentName:=False)
-            'clsAutoplot.AddParameter("which", clsRFunctionParameter:=clsWhichFuntion, iPosition:=1)
-            Return clsPlotFitRes
-        End Get
-    End Property
-
     Public Shared ReadOnly Property clsDefaultRgeom_pointFunction As RFunction
         Get
             Dim clsDefaultRgeom_point As New RFunction

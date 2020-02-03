@@ -193,7 +193,7 @@ Public Class dlgTwoVariableFitModel
         clsPowerOperator.bBrackets = False
 
         'Residual Plots
-        clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
+        'clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
         clsAutoPlot.bExcludeAssignedFunctionOutput = False
 
         clsRgeom_point = clsRegressionDefaults.clsDefaultRgeom_pointFunction.Clone

@@ -166,7 +166,7 @@ Public Class dlgThreeVariableModelling
         clsSecondPowerOperator.bBrackets = False
 
         'Residual Plots
-        clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
+        'clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
         clsAutoPlot.bExcludeAssignedFunctionOutput = False
 
         'Model

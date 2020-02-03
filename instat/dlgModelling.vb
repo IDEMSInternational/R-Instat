@@ -126,7 +126,7 @@ Public Class dlgModelling
         clsDetach.AddParameter("unload", "TRUE", iPosition:=1)
 
         'Residual Plots
-        clsAutoplot = clsRegressionDefaults.clsDefaultAutoplot.Clone
+        'clsAutoplot = clsRegressionDefaults.clsDefaultAutoplot.Clone
         clsAutoplot.bExcludeAssignedFunctionOutput = False
 
         clsRgeom_point = clsRegressionDefaults.clsDefaultRgeom_pointFunction.Clone
