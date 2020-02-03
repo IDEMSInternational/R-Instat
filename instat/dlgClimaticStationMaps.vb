@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgClimaticStationMaps
@@ -38,6 +37,7 @@ Public Class dlgClimaticStationMaps
     Private clsLabelRepelAesFunction As New RFunction
     Private clsCoordPolarFunction As RFunction
     Private clsCoordPolarStartOperator As ROperator
+    Private clsGetDataFrame As RFunction
 
     Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -122,6 +122,7 @@ Public Class dlgClimaticStationMaps
     End Sub
 
     Private Sub SetDefaults()
+        clsGetDataFrame = New RFunction
         clsGeomSfFunction = New RFunction
         clsGgplotFunction = New RFunction
         clsSfAesFunction = New RFunction
@@ -151,6 +152,8 @@ Public Class dlgClimaticStationMaps
         ucrSaveMap.Reset()
         bResetSubdialog = True
         bResetSFLayerSubdialog = True
+
+        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
         clsGgplotFunction.SetPackageName("ggplot2")
         clsGgplotFunction.SetRCommand("ggplot")
@@ -335,13 +338,14 @@ Public Class dlgClimaticStationMaps
     End Sub
 
     Private Sub AutoFillGeometry()
+        Dim clsRemoveFunc As New RFunction
         Dim clsSetGeometry As New RFunction
-        Dim clsGetDataFrame As RFunction = New RFunction
         Dim clsParam As RParameter = New RParameter
         Dim GeometryOutput As SymbolicExpression
         Dim strScript As String = ""
 
-        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsRemoveFunc.SetRCommand("rm")
+        clsRemoveFunc.AddParameter(strParameterValue:=ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         clsParam.SetArgumentName("data_name")
         clsParam.SetArgumentValue(Chr(34) & ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
         clsGetDataFrame.AddParameter(clsParam)
@@ -352,6 +356,8 @@ Public Class dlgClimaticStationMaps
         clsSetGeometry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_geometry")
         clsSetGeometry.AddParameter("data", ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         GeometryOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsSetGeometry.ToScript(), bSilent:=True)
+
+        frmMain.clsRLink.RunInternalScript(clsRemoveFunc.ToScript())
 
         If GeometryOutput IsNot Nothing AndAlso Not GeometryOutput.Type = Internals.SymbolicExpressionType.Null Then
             ucrReceiverGeometry.Add(GeometryOutput.AsCharacter(0), ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
