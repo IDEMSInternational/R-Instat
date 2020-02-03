@@ -1365,7 +1365,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCv_Click(sender As Object, e As EventArgs) Handles cmdCv.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("raster::cv(x = , aszero = FALSE, na.rm = FALSE)", 32)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("raster::cv(x = , aszero = FALSE, na.rm = FALSE)", 33)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("raster::cv()", 1)
         End If
@@ -1373,7 +1373,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMad_Click(sender As Object, e As EventArgs) Handles cmdMad.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad(x = , center = median(x), constant = 1.4826, na.rm = FALSE,low = FALSE, high = FALSE)", 81)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad(x = , center = median(x), constant = 1.4826, na.rm = FALSE,low = FALSE, high = FALSE)", 82)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad()", 1)
         End If
@@ -1381,7 +1381,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMc_Click(sender As Object, e As EventArgs) Handles cmdMc.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc(x =, na.rm = FALSE, doReflect = (length(x) <= 100),doScale = TRUE, maxit = 100, trace.lev = 0, full.result = FALSE)", 110)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc(x =, na.rm = FALSE, doReflect = (length(x) <= 100),doScale = TRUE, maxit = 100, trace.lev = 0, full.result = FALSE)", 112)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc()", 1)
         End If
@@ -1397,7 +1397,7 @@ Public Class ucrCalculator
 
     Private Sub cmdSkew_Click(sender As Object, e As EventArgs) Handles cmdSkew.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::skewness(x = , na.rm = FALSE, type = 3)", 26)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::skewness(x = , na.rm = FALSE, type = 3)", 27)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::skewness()", 1)
         End If
@@ -1465,7 +1465,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMode_Click(sender As Object, e As EventArgs) Handles cmdMode.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv(x = , na_rm = FALSE)", 16)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv(x = , na_rm = FALSE)", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv()", 1)
         End If
@@ -2540,7 +2540,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMode1_Click(sender As Object, e As EventArgs) Handles cmdMode1.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1(x = , na_rm = FALSE)", 16)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1(x = , na_rm = FALSE)", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1()", 1)
         End If

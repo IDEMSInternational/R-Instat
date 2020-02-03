@@ -138,7 +138,7 @@ Public Class dlgCalculator
             Case "Logical and Symbols"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.4, Me.Height)
             Case "Summary"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.43, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.47, Me.Height)
             Case "Strings (Character Columns)"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.47, Me.Height)
             Case "Factor"
