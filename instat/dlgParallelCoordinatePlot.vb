@@ -50,7 +50,7 @@ Public Class dlgParallelCoordinatePlot
     Private Sub InitialiseDialog()
         Dim dctScale As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        'ucrBase.iHelpTopicID 
+        ucrBase.iHelpTopicID = 593
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrSelectorParallelCoordinatePlot.SetParameter(New RParameter("data", 0))

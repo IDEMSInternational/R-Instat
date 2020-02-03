@@ -65,7 +65,7 @@ Public Class dlgBarAndPieChart
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
-        ucrBase.iHelpTopicID = 439
+        ucrBase.iHelpTopicID = 438
 
         ucrPnlOptions.AddRadioButton(rdoBarChart)
         ucrPnlOptions.AddRadioButton(rdoPieChart)
