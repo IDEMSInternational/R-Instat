@@ -65,19 +65,6 @@ Partial Class sdgSimpleRegOptions
         Me.rdoLinear = New System.Windows.Forms.RadioButton()
         Me.ucrPnlScale = New instat.UcrPanel()
         Me.tbResiduals = New System.Windows.Forms.TabPage()
-        Me.grpMultiplePlots = New System.Windows.Forms.GroupBox()
-        Me.rdoSixPlots = New System.Windows.Forms.RadioButton()
-        Me.rdoFourPlots = New System.Windows.Forms.RadioButton()
-        Me.rdoChooseIndividual = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMutiplePlots = New instat.UcrPanel()
-        Me.grpIndividualPlots = New System.Windows.Forms.GroupBox()
-        Me.ucrChkCooksDistance = New instat.ucrCheck()
-        Me.ucrChkResidualsFitted = New instat.ucrCheck()
-        Me.ucrChkScaleLocation = New instat.ucrCheck()
-        Me.ucrChkResidualsLeverage = New instat.ucrCheck()
-        Me.ucrChkQQ = New instat.ucrCheck()
-        Me.ucrChkCooksDistanceLeverage = New instat.ucrCheck()
-        Me.ucrChkResidualPlots = New instat.ucrCheck()
         Me.tbDisplay = New System.Windows.Forms.TabPage()
         Me.ucrNudConfLevel = New instat.ucrNud()
         Me.ucrChkPvalues = New instat.ucrCheck()
@@ -93,6 +80,12 @@ Partial Class sdgSimpleRegOptions
         Me.ucrSaveResidualsColumnName = New instat.ucrSave()
         Me.ucrSaveFittedColumnName = New instat.ucrSave()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkCooksDistance = New instat.ucrCheck()
+        Me.ucrChkResidualsFitted = New instat.ucrCheck()
+        Me.ucrChkScaleLocation = New instat.ucrCheck()
+        Me.ucrChkResidualsLeverage = New instat.ucrCheck()
+        Me.ucrChkQQ = New instat.ucrCheck()
+        Me.ucrChkCooksDistanceLeverage = New instat.ucrCheck()
         Me.tbGraphics.SuspendLayout()
         Me.tcGraphics.SuspendLayout()
         Me.tbModel.SuspendLayout()
@@ -100,8 +93,6 @@ Partial Class sdgSimpleRegOptions
         Me.grpPlotType.SuspendLayout()
         Me.grpScale.SuspendLayout()
         Me.tbResiduals.SuspendLayout()
-        Me.grpMultiplePlots.SuspendLayout()
-        Me.grpIndividualPlots.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbpRegOptions.SuspendLayout()
         Me.tbSave.SuspendLayout()
@@ -305,108 +296,16 @@ Partial Class sdgSimpleRegOptions
         '
         'tbResiduals
         '
-        Me.tbResiduals.Controls.Add(Me.grpMultiplePlots)
-        Me.tbResiduals.Controls.Add(Me.grpIndividualPlots)
-        Me.tbResiduals.Controls.Add(Me.ucrChkResidualPlots)
+        Me.tbResiduals.Controls.Add(Me.ucrChkCooksDistance)
+        Me.tbResiduals.Controls.Add(Me.ucrChkResidualsFitted)
+        Me.tbResiduals.Controls.Add(Me.ucrChkScaleLocation)
+        Me.tbResiduals.Controls.Add(Me.ucrChkResidualsLeverage)
+        Me.tbResiduals.Controls.Add(Me.ucrChkQQ)
+        Me.tbResiduals.Controls.Add(Me.ucrChkCooksDistanceLeverage)
         resources.ApplyResources(Me.tbResiduals, "tbResiduals")
         Me.tbResiduals.Name = "tbResiduals"
         Me.tbResiduals.Tag = "Residuals"
         Me.tbResiduals.UseVisualStyleBackColor = True
-        '
-        'grpMultiplePlots
-        '
-        Me.grpMultiplePlots.Controls.Add(Me.rdoSixPlots)
-        Me.grpMultiplePlots.Controls.Add(Me.rdoFourPlots)
-        Me.grpMultiplePlots.Controls.Add(Me.rdoChooseIndividual)
-        Me.grpMultiplePlots.Controls.Add(Me.ucrPnlMutiplePlots)
-        resources.ApplyResources(Me.grpMultiplePlots, "grpMultiplePlots")
-        Me.grpMultiplePlots.Name = "grpMultiplePlots"
-        Me.grpMultiplePlots.TabStop = False
-        Me.grpMultiplePlots.Tag = ""
-        '
-        'rdoSixPlots
-        '
-        resources.ApplyResources(Me.rdoSixPlots, "rdoSixPlots")
-        Me.rdoSixPlots.Name = "rdoSixPlots"
-        Me.rdoSixPlots.TabStop = True
-        Me.rdoSixPlots.Tag = "Six Plots"
-        Me.rdoSixPlots.UseVisualStyleBackColor = True
-        '
-        'rdoFourPlots
-        '
-        resources.ApplyResources(Me.rdoFourPlots, "rdoFourPlots")
-        Me.rdoFourPlots.Name = "rdoFourPlots"
-        Me.rdoFourPlots.TabStop = True
-        Me.rdoFourPlots.Tag = "Four_Plots"
-        Me.rdoFourPlots.UseVisualStyleBackColor = True
-        '
-        'rdoChooseIndividual
-        '
-        resources.ApplyResources(Me.rdoChooseIndividual, "rdoChooseIndividual")
-        Me.rdoChooseIndividual.Name = "rdoChooseIndividual"
-        Me.rdoChooseIndividual.TabStop = True
-        Me.rdoChooseIndividual.Tag = ""
-        Me.rdoChooseIndividual.UseVisualStyleBackColor = True
-        '
-        'ucrPnlMutiplePlots
-        '
-        resources.ApplyResources(Me.ucrPnlMutiplePlots, "ucrPnlMutiplePlots")
-        Me.ucrPnlMutiplePlots.Name = "ucrPnlMutiplePlots"
-        '
-        'grpIndividualPlots
-        '
-        Me.grpIndividualPlots.Controls.Add(Me.ucrChkCooksDistance)
-        Me.grpIndividualPlots.Controls.Add(Me.ucrChkResidualsFitted)
-        Me.grpIndividualPlots.Controls.Add(Me.ucrChkScaleLocation)
-        Me.grpIndividualPlots.Controls.Add(Me.ucrChkResidualsLeverage)
-        Me.grpIndividualPlots.Controls.Add(Me.ucrChkQQ)
-        Me.grpIndividualPlots.Controls.Add(Me.ucrChkCooksDistanceLeverage)
-        resources.ApplyResources(Me.grpIndividualPlots, "grpIndividualPlots")
-        Me.grpIndividualPlots.Name = "grpIndividualPlots"
-        Me.grpIndividualPlots.TabStop = False
-        Me.grpIndividualPlots.Tag = ""
-        '
-        'ucrChkCooksDistance
-        '
-        Me.ucrChkCooksDistance.Checked = False
-        resources.ApplyResources(Me.ucrChkCooksDistance, "ucrChkCooksDistance")
-        Me.ucrChkCooksDistance.Name = "ucrChkCooksDistance"
-        '
-        'ucrChkResidualsFitted
-        '
-        Me.ucrChkResidualsFitted.Checked = False
-        resources.ApplyResources(Me.ucrChkResidualsFitted, "ucrChkResidualsFitted")
-        Me.ucrChkResidualsFitted.Name = "ucrChkResidualsFitted"
-        '
-        'ucrChkScaleLocation
-        '
-        Me.ucrChkScaleLocation.Checked = False
-        resources.ApplyResources(Me.ucrChkScaleLocation, "ucrChkScaleLocation")
-        Me.ucrChkScaleLocation.Name = "ucrChkScaleLocation"
-        '
-        'ucrChkResidualsLeverage
-        '
-        Me.ucrChkResidualsLeverage.Checked = False
-        resources.ApplyResources(Me.ucrChkResidualsLeverage, "ucrChkResidualsLeverage")
-        Me.ucrChkResidualsLeverage.Name = "ucrChkResidualsLeverage"
-        '
-        'ucrChkQQ
-        '
-        Me.ucrChkQQ.Checked = False
-        resources.ApplyResources(Me.ucrChkQQ, "ucrChkQQ")
-        Me.ucrChkQQ.Name = "ucrChkQQ"
-        '
-        'ucrChkCooksDistanceLeverage
-        '
-        Me.ucrChkCooksDistanceLeverage.Checked = False
-        resources.ApplyResources(Me.ucrChkCooksDistanceLeverage, "ucrChkCooksDistanceLeverage")
-        Me.ucrChkCooksDistanceLeverage.Name = "ucrChkCooksDistanceLeverage"
-        '
-        'ucrChkResidualPlots
-        '
-        Me.ucrChkResidualPlots.Checked = False
-        resources.ApplyResources(Me.ucrChkResidualPlots, "ucrChkResidualPlots")
-        Me.ucrChkResidualPlots.Name = "ucrChkResidualPlots"
         '
         'tbDisplay
         '
@@ -513,6 +412,42 @@ Partial Class sdgSimpleRegOptions
         resources.ApplyResources(Me.ucrSdgButtons, "ucrSdgButtons")
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         '
+        'ucrChkCooksDistance
+        '
+        Me.ucrChkCooksDistance.Checked = False
+        resources.ApplyResources(Me.ucrChkCooksDistance, "ucrChkCooksDistance")
+        Me.ucrChkCooksDistance.Name = "ucrChkCooksDistance"
+        '
+        'ucrChkResidualsFitted
+        '
+        Me.ucrChkResidualsFitted.Checked = False
+        resources.ApplyResources(Me.ucrChkResidualsFitted, "ucrChkResidualsFitted")
+        Me.ucrChkResidualsFitted.Name = "ucrChkResidualsFitted"
+        '
+        'ucrChkScaleLocation
+        '
+        Me.ucrChkScaleLocation.Checked = False
+        resources.ApplyResources(Me.ucrChkScaleLocation, "ucrChkScaleLocation")
+        Me.ucrChkScaleLocation.Name = "ucrChkScaleLocation"
+        '
+        'ucrChkResidualsLeverage
+        '
+        Me.ucrChkResidualsLeverage.Checked = False
+        resources.ApplyResources(Me.ucrChkResidualsLeverage, "ucrChkResidualsLeverage")
+        Me.ucrChkResidualsLeverage.Name = "ucrChkResidualsLeverage"
+        '
+        'ucrChkQQ
+        '
+        Me.ucrChkQQ.Checked = False
+        resources.ApplyResources(Me.ucrChkQQ, "ucrChkQQ")
+        Me.ucrChkQQ.Name = "ucrChkQQ"
+        '
+        'ucrChkCooksDistanceLeverage
+        '
+        Me.ucrChkCooksDistanceLeverage.Checked = False
+        resources.ApplyResources(Me.ucrChkCooksDistanceLeverage, "ucrChkCooksDistanceLeverage")
+        Me.ucrChkCooksDistanceLeverage.Name = "ucrChkCooksDistanceLeverage"
+        '
         'sdgSimpleRegOptions
         '
         resources.ApplyResources(Me, "$this")
@@ -535,9 +470,6 @@ Partial Class sdgSimpleRegOptions
         Me.grpScale.ResumeLayout(False)
         Me.grpScale.PerformLayout()
         Me.tbResiduals.ResumeLayout(False)
-        Me.grpMultiplePlots.ResumeLayout(False)
-        Me.grpMultiplePlots.PerformLayout()
-        Me.grpIndividualPlots.ResumeLayout(False)
         Me.tbDisplay.ResumeLayout(False)
         Me.tbDisplay.PerformLayout()
         Me.tbpRegOptions.ResumeLayout(False)
@@ -550,7 +482,6 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents tbGraphics As TabPage
     Friend WithEvents nudGraphicsCLevel As NumericUpDown
     Friend WithEvents lblGraphicsSignLevel As Label
-    Friend WithEvents grpMultiplePlots As GroupBox
     Friend WithEvents tbDisplay As TabPage
     Friend WithEvents lblConfLevel As Label
     Friend WithEvents chkPvalues As CheckBox
@@ -564,7 +495,6 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents tcGraphics As TabControl
     Friend WithEvents tbModel As TabPage
     Friend WithEvents tbResiduals As TabPage
-    Friend WithEvents grpIndividualPlots As GroupBox
     Friend WithEvents ucrChkEstimates As ucrCheck
     Friend WithEvents ucrChkConfLimits As ucrCheck
     Friend WithEvents ucrChkANOVA As ucrCheck
@@ -586,21 +516,16 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents rdo1 As RadioButton
     Friend WithEvents rdo2 As RadioButton
     Friend WithEvents ucrPnlPartial12 As UcrPanel
-    Friend WithEvents ucrChkResidualPlots As ucrCheck
-    Friend WithEvents rdoSixPlots As RadioButton
-    Friend WithEvents rdoFourPlots As RadioButton
-    Friend WithEvents rdoChooseIndividual As RadioButton
-    Friend WithEvents ucrPnlMutiplePlots As UcrPanel
     Friend WithEvents ucrSaveFittedColumnName As ucrSave
     Friend WithEvents ucrSaveLeverageColumnName As ucrSave
     Friend WithEvents ucrSaveStdResidualsColumnName As ucrSave
     Friend WithEvents ucrSaveResidualsColumnName As ucrSave
     Friend WithEvents ucrNudWhiteSpace As ucrNud
-    Friend WithEvents ucrChkCooksDistance As ucrCheck
-    Friend WithEvents ucrChkScaleLocation As ucrCheck
-    Friend WithEvents ucrChkQQ As ucrCheck
-    Friend WithEvents ucrChkResidualsLeverage As ucrCheck
-    Friend WithEvents ucrChkCooksDistanceLeverage As ucrCheck
-    Friend WithEvents ucrChkResidualsFitted As ucrCheck
     Friend WithEvents ucrNudGraphicsCLevel As ucrNud
+    Friend WithEvents ucrChkCooksDistance As ucrCheck
+    Friend WithEvents ucrChkResidualsFitted As ucrCheck
+    Friend WithEvents ucrChkScaleLocation As ucrCheck
+    Friend WithEvents ucrChkResidualsLeverage As ucrCheck
+    Friend WithEvents ucrChkQQ As ucrCheck
+    Friend WithEvents ucrChkCooksDistanceLeverage As ucrCheck
 End Class

@@ -35,6 +35,8 @@ Public Class dlgFitModel
     Public bResetSubDialog As Boolean = False
     Public bResetOptionsSubDialog As Boolean = False
 
+    Private dctPlotFunctions As New Dictionary(Of String, RFunction)
+
     Private Sub dlgFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -129,8 +131,9 @@ Public Class dlgFitModel
         clsLM.AddParameter("na.action", "na.exclude", iPosition:=4)
 
         'Residual Plots
-        clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
-        clsAutoPlot.bExcludeAssignedFunctionOutput = False
+        'clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
+        dctPlotFunctions = New Dictionary(Of String, RFunction)(clsRegressionDefaults.dctModelPlotFunctions)
+        'clsAutoPlot.bExcludeAssignedFunctionOutput = False
 
         'Model
         clsFormulaFunction = clsRegressionDefaults.clsDefaultFormulaFunction.Clone
@@ -299,7 +302,7 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesFunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames, bReset:=bResetOptionsSubDialog)
+        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesFunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, dctNewPlot:=dctPlotFunctions, ucrNewAvailableDatafrane:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames, bReset:=bResetOptionsSubDialog)
         sdgSimpleRegOptions.ShowDialog()
         GraphAssignTo()
         bResetOptionsSubDialog = False
@@ -367,7 +370,11 @@ Public Class dlgFitModel
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
-            clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+
+            For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
+                kvp.Value.AddParameter("x", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            Next
+
             clsResidualFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsFittedValuesFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
@@ -410,7 +417,10 @@ Public Class dlgFitModel
     Private Sub GraphAssignTo()
         'temp fix for graph display problem with RDotNet
         clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
-        clsAutoPlot.SetAssignTo("last_autoplot", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_autoplot")
+
+        For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
+            kvp.Value.SetAssignTo("last_residplot", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_residplot")
+        Next
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
@@ -473,6 +483,4 @@ Public Class dlgFitModel
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
         TryScript()
     End Sub
-
-
 End Class

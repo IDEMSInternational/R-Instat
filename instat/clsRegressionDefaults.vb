@@ -100,21 +100,39 @@ Public Class clsRegressionDefaults
         End Get
     End Property
 
+    Public Shared ReadOnly Property dctModelPlotFunctions As Dictionary(Of String, RFunction)
+        Get
+            Dim dctTemp As New Dictionary(Of String, RFunction)
+            Dim clsPlot As New RFunction
+            Dim lstPlotTypes As List(Of String)
+
+            lstPlotTypes = New List(Of String)({"residplot", "qqplot", "scaleloc", "cooksdist", "residlev", "cookslev"})
+            clsPlot.SetRCommand("plot")
+            clsPlot.bExcludeAssignedFunctionOutput = False
+            For i As Integer = 1 To 6
+                clsPlot.AddParameter("which", i, iPosition:=1)
+                dctTemp.Add(lstPlotTypes(i), clsPlot.Clone())
+            Next
+            Return dctTemp
+        End Get
+
+    End Property
+
     Public Shared ReadOnly Property clsDefaultAutoplot As RFunction
         Get
-            Dim clsAutoplot As New RFunction
-            Dim clsWhichFuntion As New RFunction
+            Dim clsPlotFitRes As New RFunction
+            'Dim clsWhichFuntion As New RFunction
 
-            clsAutoplot.SetPackageName("ggplot2")
-            clsAutoplot.SetRCommand("autoplot")
-            clsAutoplot.iCallType = 3
-            clsWhichFuntion.SetRCommand("c")
-            clsWhichFuntion.AddParameter("1", "1", bIncludeArgumentName:=False)
-            clsWhichFuntion.AddParameter("2", "2", bIncludeArgumentName:=False)
-            clsWhichFuntion.AddParameter("3", "3", bIncludeArgumentName:=False)
-            clsWhichFuntion.AddParameter("5", "5", bIncludeArgumentName:=False)
-            clsAutoplot.AddParameter("which", clsRFunctionParameter:=clsWhichFuntion, iPosition:=1)
-            Return clsAutoplot
+            'clsAutoplot.SetPackageName("ggplot2")
+            clsPlotFitRes.SetRCommand("plot")
+            clsPlotFitRes.iCallType = 3
+            'clsWhichFuntion.SetRCommand("c")
+            clsPlotFitRes.AddParameter("which", "1", iPosition:=0)
+            'clsWhichFuntion.AddParameter("2", "2", bIncludeArgumentName:=False)
+            'clsWhichFuntion.AddParameter("3", "3", bIncludeArgumentName:=False)
+            'clsWhichFuntion.AddParameter("5", "5", bIncludeArgumentName:=False)
+            'clsAutoplot.AddParameter("which", clsRFunctionParameter:=clsWhichFuntion, iPosition:=1)
+            Return clsPlotFitRes
         End Get
     End Property
 
