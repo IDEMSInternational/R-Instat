@@ -233,6 +233,7 @@ Public Class sdgSimpleRegOptions
         ucrChkPartial.SetRCode(clsVisReg, bReset)
         ucrChkConfIntervalband.SetRCode(clsVisReg, bReset)
         ucrPnlPartial12.SetRCode(clsVisReg, bReset)
+        'ucrChkResidualsFitted.SetRCode(dctNewPlot.Values(0), bReset)
 
         'Saving options
         ucrSaveFittedColumnName.SetRCode(clsFittedValuesFunction, bReset, bCloneIfNeeded:=True)
@@ -376,7 +377,7 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     Private Sub ucrChkQQ_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkQQ.ControlValueChanged
-        If ucrChkResidualsFitted.Checked Then
+        If ucrChkQQ.Checked Then
             clsRSyntax.AddToAfterCodes(dctPlot.Values(1), iPosition:=1)
             dctPlot.Values(1).iCallType = 3
         Else
@@ -385,7 +386,7 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     Private Sub ucrChkScaleLocation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkScaleLocation.ControlValueChanged
-        If ucrChkResidualsFitted.Checked Then
+        If ucrChkScaleLocation.Checked Then
             clsRSyntax.AddToAfterCodes(dctPlot.Values(2), iPosition:=2)
             dctPlot.Values(2).iCallType = 3
         Else
@@ -394,7 +395,7 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     Private Sub ucrChkCooksDistance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCooksDistance.ControlValueChanged
-        If ucrChkResidualsFitted.Checked Then
+        If ucrChkCooksDistance.Checked Then
             clsRSyntax.AddToAfterCodes(dctPlot.Values(3), iPosition:=3)
             dctPlot.Values(3).iCallType = 3
         Else
@@ -403,7 +404,7 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     Private Sub ucrChkResidualsLeverage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkResidualsLeverage.ControlValueChanged
-        If ucrChkResidualsFitted.Checked Then
+        If ucrChkResidualsLeverage.Checked Then
             clsRSyntax.AddToAfterCodes(dctPlot.Values(4), iPosition:=4)
             dctPlot.Values(4).iCallType = 3
         Else
@@ -412,7 +413,7 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     Private Sub ucrChkCooksDistanceLeverage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCooksDistanceLeverage.ControlValueChanged
-        If ucrChkResidualsFitted.Checked Then
+        If ucrChkCooksDistanceLeverage.Checked Then
             clsRSyntax.AddToAfterCodes(dctPlot.Values(5), iPosition:=5)
             dctPlot.Values(5).iCallType = 3
         Else
