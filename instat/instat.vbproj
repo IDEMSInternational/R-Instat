@@ -2396,6 +2396,12 @@
     <Compile Include="ucrElementLineControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrTry.Designer.vb">
+      <DependentUpon>ucrTry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrTry.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrVariablename.designer.vb">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
     </Compile>
@@ -4487,6 +4493,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrElementLineControl.resx">
       <DependentUpon>ucrElementLineControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrTry.resx">
+      <DependentUpon>ucrTry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrVariablename.resx">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
