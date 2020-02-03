@@ -80,6 +80,7 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
         ucrSaveStringHandling.SetIsTextBox()
         ucrSaveStringHandling.SetLabelText("Prefix for New Column:")
+        ucrSaveStringHandling.setLinkedReceiver(ucrReceiverStringHandling) 'added
 
         'ucrChkIncludeRegularExpressions
         ucrChkIncludeRegularExpressions.SetText("Include Regular Expressions")
@@ -90,6 +91,8 @@ Public Class dlgStringHandling
 
         'temporary disabling
         grpRegex.Enabled = False
+        'hiding the Regex group box 
+        grpRegex.Hide()
         ucrChkIncludeRegularExpressions.Enabled = False
         'cmdDBackSlah.Visible = False
         'cmdWBackSlash.Visible = False
@@ -153,7 +156,7 @@ Public Class dlgStringHandling
         clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
         NewColumnName()
-        ChangeSize()
+        'ChangeSize()
     End Sub
 
     'temporary fix.
@@ -409,7 +412,7 @@ Public Class dlgStringHandling
     Private Sub ucrPnlFixedRegex_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFixedRegex.ControlContentsChanged, ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverForRegexExpression.ControlValueChanged, ucrInputPattern.ControlValueChanged
         Visibile()
         AddRemoveParameters()
-        ChangeSize()
+        'ChangeSize()
     End Sub
 
     Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrReceiverForRegexExpression.ControlContentsChanged, ucrPnlFixedRegex.ControlContentsChanged, ucrChkIncludeRegularExpressions.ControlContentsChanged, ucrSaveStringHandling.ControlContentsChanged

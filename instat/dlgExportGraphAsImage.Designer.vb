@@ -70,6 +70,7 @@ Partial Class dlgExportGraphAsImage
         '
         'ucrSelectorGraphAsImage
         '
+        Me.ucrSelectorGraphAsImage.bDropUnusedFilterLevels = False
         Me.ucrSelectorGraphAsImage.bShowHiddenColumns = False
         Me.ucrSelectorGraphAsImage.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorGraphAsImage, "ucrSelectorGraphAsImage")

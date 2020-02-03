@@ -21,6 +21,16 @@ Public Class ucrOutputWindow
     'TEST temporary
     Private Sub ucrOutputWindow_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
+        'for some reason the normal KeyDown event is not raised when del key is pressed
+        'probably because the del is not recognised as an inputkey to ucrRichTextBox 
+        AddHandler ucrRichTextBox.PreviewKeyDown, AddressOf ucrRichTextBox_KeyDownEventHandler
+    End Sub
+
+    Private Sub ucrRichTextBox_KeyDownEventHandler(sender As Object, e As EventArgs)
+        'if its a delete key then delete the selection
+        If DirectCast(e, System.Windows.Input.KeyEventArgs).Key = System.Windows.Input.Key.Delete Then
+            ucrRichTextBox.rtbOutput.Selection.Text = ""
+        End If
     End Sub
 
     'Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
@@ -67,6 +77,12 @@ Public Class ucrOutputWindow
             deleteRTB.Enabled = True
         End If
 
+        If frmMain.clsInstatOptions.bCommandsinOutput Then
+            mnuHideCommands.Text = "Hide (future) commands"
+        Else
+            mnuHideCommands.Text = "Show commands"
+        End If
+
     End Sub
 
     'Private Function RtfToImage(ByVal strRtf As String) As Image
@@ -106,4 +122,13 @@ Public Class ucrOutputWindow
     Private Sub deleteRTB_Click(sender As Object, e As EventArgs) Handles deleteRTB.Click
         ucrRichTextBox.rtbOutput.Selection.Text = ""
     End Sub
+
+    Private Sub mnuHideCommands_Click(sender As Object, e As EventArgs) Handles mnuHideCommands.Click
+        frmMain.clsInstatOptions.SetCommandInOutpt(Not frmMain.clsInstatOptions.bCommandsinOutput)
+    End Sub
+
+    Private Sub HelpRTB_Click(sender As Object, e As EventArgs) Handles HelpRTB.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "540")
+    End Sub
+
 End Class

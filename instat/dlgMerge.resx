@@ -208,7 +208,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputMergingBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 125</value>
+    <value>87, 125</value>
   </data>
   <data name="ucrInputMergingBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>289, 53</value>
@@ -250,7 +250,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputJoinType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 85</value>
+    <value>116, 85</value>
   </data>
   <data name="ucrInputJoinType.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -347,9 +347,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>418, 306</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
