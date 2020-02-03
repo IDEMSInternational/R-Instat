@@ -221,6 +221,10 @@
   <data name="ucrSaveCumDist.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 338</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrSaveCumDist.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrSaveCumDist.Size" type="System.Drawing.Size, System.Drawing">
     <value>255, 24</value>
   </data>
@@ -293,7 +297,6 @@
   <data name="ucrFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>255, 188</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrFactorReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
