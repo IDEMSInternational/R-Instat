@@ -55,7 +55,6 @@ Public Class ucrCalculator
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Strings (Character Columns)", "Factor", "Probability", "Dates", "Transform", "Wakefield", "Circular"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
-        cmdTry.Enabled = False
         cmdDoy.Enabled = False ' temp
         cmdDek.Enabled = False ' temp
         'Temp disabled::Needs discussions to see if they are needed
@@ -63,7 +62,6 @@ Public Class ucrCalculator
         cmdAll.Enabled = False
         cmdIsTrue.Enabled = False
         cmdIsFalse.Enabled = False
-        cmdConcat.Enabled = False
         bControlsInitialised = True
         ttCalculator.SetToolTip(cmdRound, "round(x) to round to whole numbers, round(x,2) to round to 2 decimal places, round(x,-2) to round to the nearest 100")
         ttCalculator.SetToolTip(cmdSiginf, "signif(x,3) to round to 3 significant figures")
@@ -170,7 +168,6 @@ Public Class ucrCalculator
     Public Sub Reset()
         ucrReceiverForCalculation.ResetText()
         ucrInputCalOptions.Reset()
-        ucrInputTryMessage.Reset()
         ucrSaveResultInto.Reset()
         ucrSelectorForCalculations.Reset()
     End Sub
@@ -288,6 +285,8 @@ Public Class ucrCalculator
                 grpDates.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
                 iHelpCalcID = 126
                 Me.Size = New Size(iBasicWidth * 1.38, Me.Height)
             Case "Logical and Symbols"
@@ -304,6 +303,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
             Case "Summary"
                 grpDates.Visible = False
                 grpSummary.Visible = True
@@ -318,6 +319,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
             Case "Strings (Character Columns)"
                 grpDates.Visible = False
                 grpStrings.Visible = True
@@ -330,6 +333,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = True
+                grpSymbols.Visible = True
                 iHelpCalcID = 129
                 Me.Size = New Size(iBasicWidth * 1.42, Me.Height)
             Case "Factor"
@@ -346,6 +351,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
             Case "Probability"
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
@@ -358,6 +365,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
                 iHelpCalcID = 120
                 Me.Size = New Size(iBasicWidth * 1.57, Me.Height)
             Case "Dates"
@@ -372,6 +381,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
                 iHelpCalcID = 130
                 Me.Size = New Size(iBasicWidth * 1.32, Me.Height)
             Case "Transform"
@@ -386,6 +397,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = True
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.33, Me.Height)
             Case "Wakefield"
                 grpDates.Visible = False
@@ -399,6 +412,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = True
+                grpSymbols.Visible = False
+                grpModifier.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.7, Me.Height * 1.07)
             Case "Circular"
                 grpDates.Visible = False
@@ -412,6 +427,8 @@ Public Class ucrCalculator
                 grpTransform.Visible = False
                 grpWakefield.Visible = False
                 grpCircular.Visible = True
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.39, Me.Height)
             Case Else
                 grpDates.Visible = False
@@ -426,6 +443,8 @@ Public Class ucrCalculator
                 grpFactor.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False
+                grpSymbols.Visible = False
+                grpModifier.Visible = False
                 iHelpCalcID = 14
         End Select
     End Sub
@@ -749,7 +768,7 @@ Public Class ucrCalculator
 
     Private Sub cmdReplace_Click(sender As Object, e As EventArgs) Handles cmdReplace.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_replace(string= , pattern=' ' , replacement=' ' )", 33)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_replace(string = , pattern = argument , replacement = ' ' )", 43)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_replace()", 1)
         End If
@@ -757,7 +776,7 @@ Public Class ucrCalculator
 
     Private Sub cmdLocate_Click(sender As Object, e As EventArgs) Handles cmdLocate.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_locate(string= , pattern=' ' )", 15)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_locate(string = , pattern = argument)", 22)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_locate()", 1)
         End If
@@ -765,7 +784,7 @@ Public Class ucrCalculator
 
     Private Sub cmdExtract_Click(sender As Object, e As EventArgs) Handles cmdExtract.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_extract(string= , pattern=' ' )", 15)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_extract(string = , pattern = argument )", 23)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_extract()", 1)
         End If
@@ -773,7 +792,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCountstrings_Click(sender As Object, e As EventArgs) Handles cmdCountstrings.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_count(string= , pattern =' ')", 16)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_count(string = , pattern = argument )", 23)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_count()", 1)
         End If
@@ -782,7 +801,7 @@ Public Class ucrCalculator
 
     Private Sub cmdDetect_Click(sender As Object, e As EventArgs) Handles cmdDetect.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_detect(string= , pattern=' ' )", 15)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_detect(string = , pattern = argument)", 22)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_detect()", 1)
         End If
@@ -937,7 +956,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrSelectorForCalculations.DataFrameChanged
-        ucrInputTryMessage.SetName("")
+        'ucrTryModelling.ucrInputTryMessage.SetName("")
         RaiseEvent DataFrameChanged()
     End Sub
 
@@ -951,9 +970,9 @@ Public Class ucrCalculator
 
     Private Sub cmdSplit_Click(sender As Object, e As EventArgs) Handles cmdSplit.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_split_fixed(string= , pattern=' ', n= )", 19)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_split(string = , pattern = argument, n = )", 28)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_split_fixed()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_split()", 1)
         End If
     End Sub
 
@@ -1176,11 +1195,6 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
-        If ucrReceiverForCalculation.IsEmpty Then
-            cmdTry.Enabled = False
-        Else
-            cmdTry.Enabled = True
-        End If
         RaiseEvent SelectionChanged()
     End Sub
 
@@ -1192,7 +1206,7 @@ Public Class ucrCalculator
         HelpContent()
     End Sub
 
-    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
+    Private Sub cmdTry_Click(sender As Object, e As EventArgs)
         RaiseEvent TryCommadClick()
     End Sub
 
@@ -2076,11 +2090,11 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdConcat_Click(sender As Object, e As EventArgs) Handles cmdConcat.Click
+    Private Sub cmdLabelled_Click(sender As Object, e As EventArgs) Handles cmdLabelled.Click
         If chkShowArguments.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_c(...)", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("labelled::labelled(x = , labels = , label = NULL)", 27)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_c()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("labelled::labelled()", 1)
         End If
     End Sub
 
@@ -2323,5 +2337,169 @@ Public Class ucrCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert_7()", 1)
         End If
+    End Sub
+
+    Private Sub cmdStarts_Click(sender As Object, e As EventArgs) Handles cmdStarts.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_starts(string = , pattern = argument, negate = FALSE)", 38)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_starts()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdEnd_Click(sender As Object, e As EventArgs) Handles cmdEnd.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_ends(string = , pattern = argument, negate = FALSE)", 38)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_ends()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdRemove1_Click(sender As Object, e As EventArgs) Handles cmdRemove1.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove(string = , pattern = argument)", 22)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdRemove2_Click(sender As Object, e As EventArgs) Handles cmdRemove2.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove_all(string = , pattern = argument)", 22)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove_all()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSquishb_Click(sender As Object, e As EventArgs) Handles cmdSquishb.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_squish(string = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_squish()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdEncodeb_Click(sender As Object, e As EventArgs) Handles cmdEncodeb.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_conv(string = , encoding = )", 15)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_conv()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdExtract2_Click(sender As Object, e As EventArgs) Handles cmdExtract2.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_extract_all(string = , pattern = , simplify = FALSE)", 32)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_extract_all()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdLocate2_Click(sender As Object, e As EventArgs) Handles cmdLocate2.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_locate_all(string = , pattern = )", 14)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_locate_all()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdReplace2_Click(sender As Object, e As EventArgs) Handles cmdReplace2.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_replace_all(string = , pattern = , replacement = )", 30)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_replace_all()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdBoundary_Click(sender As Object, e As EventArgs) Handles cmdBoundary.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(type = c(""character"", ""line_break"", ""sentence"", ""word""), stringr::boundary(), skip_word_none = NA)", 23)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::boundary()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCollate_Click(sender As Object, e As EventArgs) Handles cmdCollate.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(pattern = , stringr::coll(), ignore_case = FALSE, locale = ""en"")", 51)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::coll()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdFixed_Click(sender As Object, e As EventArgs) Handles cmdFixed.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(pattern = , stringr::fixed(), ignore_case = FALSE)", 41)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::fixed()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdRegex_Click(sender As Object, e As EventArgs) Handles cmdRegex.Click
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(pattern = , stringr::regex() , ignore_case = FALSE , multiline = FALSE , comments = FALSE, dotall = FALSE)", 97)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::regex()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAny1_Click(sender As Object, e As EventArgs) Handles cmdAny1.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(".")
+    End Sub
+
+    Private Sub cmdbegin_Click(sender As Object, e As EventArgs) Handles cmdbegin.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("^", 1)
+    End Sub
+
+    Private Sub cmdEnd1_Click(sender As Object, e As EventArgs) Handles cmdEnd1.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("$")
+    End Sub
+
+    Private Sub cmdDigit_Click(sender As Object, e As EventArgs) Handles cmdDigit.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\d")
+    End Sub
+
+    Private Sub cmdSpace_Click(sender As Object, e As EventArgs) Handles cmdSpace.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\s")
+    End Sub
+
+    Private Sub cmdOr1_Click(sender As Object, e As EventArgs) Handles cmdOr1.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[]", 1)
+    End Sub
+
+    Private Sub cmdNot1_Click(sender As Object, e As EventArgs) Handles cmdNot1.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[^ ]", 2)
+    End Sub
+
+    Private Sub cmdOr3_Click(sender As Object, e As EventArgs) Handles cmdOr3.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("|")
+    End Sub
+
+    Private Sub cmdOr2_Click(sender As Object, e As EventArgs) Handles cmdOr2.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("{}", 1)
+    End Sub
+
+    Private Sub cmdNumbers_Click(sender As Object, e As EventArgs) Handles cmdNumbers.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("{,}", 2)
+    End Sub
+
+    Private Sub cmdZeroOrOne_Click(sender As Object, e As EventArgs) Handles cmdZeroOrOne.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("?")
+    End Sub
+
+    Private Sub cmdPlusOne_Click(sender As Object, e As EventArgs) Handles cmdPlusOne.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+")
+    End Sub
+
+    Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+")
+    End Sub
+
+    Private Sub cmdEscape_Click(sender As Object, e As EventArgs) Handles cmdEscape.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\\")
+    End Sub
+
+    Private Sub cmdPlusZero_Click(sender As Object, e As EventArgs) Handles cmdPlusZero.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("-")
     End Sub
 End Class
