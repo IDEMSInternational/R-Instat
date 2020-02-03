@@ -60,7 +60,6 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
         Dim bClose As Boolean = False
         ' Note: this must change when R version changes
@@ -340,11 +339,8 @@ Public Class frmMain
         dlgRegularSequence.ShowDialog()
     End Sub
 
-    Private Sub mnuCalculations_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateCalculations.Click
-        dlgCalculator.ShowDialog()
-    End Sub
 
-    Private Sub mnuPrepareAddColumnRowSummary_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateRowSummary.Click
+    Private Sub mnuPrepareAddColumnRowSummary_Click(sender As Object, e As EventArgs)
         dlgRowSummary.ShowDialog()
     End Sub
 
@@ -356,12 +352,8 @@ Public Class frmMain
         dlgSummaryTables.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareAddColumnTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateTransform.Click
+    Private Sub mnuPrepareAddColumnTransform_Click(sender As Object, e As EventArgs)
         dlgTransform.ShowDialog()
-    End Sub
-
-    Private Sub mnuPrepareAddColumnPolynomials_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculatePolynomials.Click
-        dlgPolynomials.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareReshapeStack_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeStack.Click
@@ -507,10 +499,6 @@ Public Class frmMain
 
     Private Sub mnuFilePrintPreview_Click(sender As Object, e As EventArgs) Handles mnuFilePrintPreview.Click
         dlgPrintPreviewOptions.ShowDialog()
-    End Sub
-
-    Private Sub mnuPrepareAddColumnRank_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateRank.Click
-        dlgRank.ShowDialog()
     End Sub
 
     Private Sub mnuClimateMethodsCreateClimateObject_Click(sender As Object, e As EventArgs)
@@ -1120,9 +1108,6 @@ Public Class frmMain
         dlgEndOfRainsSeason.ShowDialog()
     End Sub
 
-    Private Sub mnuOrganiseColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateCountInFactor.Click
-        dlgCountinFactor.ShowDialog()
-    End Sub
 
     Private Sub mnuDescribeSpecificScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificScatterPlot.Click
         dlgScatterPlot.ShowDialog()
@@ -1248,7 +1233,7 @@ Public Class frmMain
         dlgOpenSST.ShowDialog()
     End Sub
 
-    Private Sub mnuOrgCalculateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateDuplicateColumn.Click
+    Private Sub mnuOrgCalculateDuplicateColumn_Click(sender As Object, e As EventArgs)
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
@@ -1892,11 +1877,11 @@ Public Class frmMain
         dlgParallelCoordinatePlot.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnCalculateColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateColumnSummaries.Click
+    Private Sub mnuPrepareColumnCalculateColumnSummaries_Click(sender As Object, e As EventArgs)
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnCalculateGeneralSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateGeneralSummaries.Click
+    Private Sub mnuPrepareColumnCalculateGeneralSummaries_Click(sender As Object, e As EventArgs)
         dlgCalculationsSummary.ShowDialog()
     End Sub
 
@@ -2134,5 +2119,29 @@ Public Class frmMain
 
     Private Sub mnuProcurementDescribeCategoricalTreemap_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeCategoricalTreemap.Click
         dlgTreemap.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnGenerateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateDuplicateColumn.Click
+        dlgDuplicateColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnGenerateRowSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateRowSummaries.Click
+        dlgRowSummary.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnGenerateRank_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateRank.Click
+        dlgRank.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnPrpareColumnGeneratePolynomials_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnPrpareColumnGeneratePolynomials.Click
+        dlgPolynomials.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCalculateCalculations_Click(sender As Object, e As EventArgs) Handles mnuPrepareCalculator.Click
+        dlgCalculator.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCountInFactor.Click
+        dlgCountinFactor.ShowDialog()
     End Sub
 End Class
