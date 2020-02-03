@@ -532,4 +532,20 @@ Public Class dlgUseModel
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::fevd()", 1)
         End If
     End Sub
+
+    Private Sub cmdSummary2_Click(sender As Object, e As EventArgs) Handles cmdSummary2.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::fevd(x = , data = , threshold = NULL, threshold.fun = ~1, location.fun = ~1,scale.fun = ~1, shape.fun = ~1, use.phi = FALSE,type = c(""GEV"", ""GP"", ""PP"", ""Gumbel2"", ""Exponential""),method = c(""MLE"", ""GMLE"", ""Bayesian"", ""Lmoments""), initial = NULL,span, units = NULL, time.units = ""days"", period.basis = ""year"",na.action = na.fail, optim.args = NULL, priorFun = NULL,priorParams = NULL, proposalFun = NULL, proposalParams = NULL,iter = 9999, weights = 1, blocks = NULL, verbose = FALSE)", 300)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::fevd()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPlot_Click(sender As Object, e As EventArgs) Handles cmdPlot.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::lr.test(x=, y, alpha = 0.05, df = 1)", 26)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::lr.test()", 1)
+        End If
+    End Sub
 End Class
