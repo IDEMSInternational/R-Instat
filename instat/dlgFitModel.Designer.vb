@@ -71,6 +71,7 @@ Partial Class dlgFitModel
         Me.ucrReceiverResponseVar = New instat.ucrReceiverSingle()
         Me.ucrSelectorByDataFrameAddRemoveForFitModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrTryModelling = New instat.ucrTry()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpSecondCalc.SuspendLayout()
         Me.SuspendLayout()
@@ -288,10 +289,16 @@ Partial Class dlgFitModel
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrTryModelling
+        '
+        resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
+        Me.ucrTryModelling.Name = "ucrTryModelling"
+        '
         'dlgFitModel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.ucrChkConvertToVariate)
         Me.Controls.Add(Me.grpSecondCalc)
@@ -351,4 +358,5 @@ Partial Class dlgFitModel
     Friend WithEvents cmdPower As Button
     Friend WithEvents ucrChkConvertToVariate As ucrCheck
     Friend WithEvents ucrModelName As ucrSave
+    Friend WithEvents ucrTryModelling As ucrTry
 End Class
