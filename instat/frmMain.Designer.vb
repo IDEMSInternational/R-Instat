@@ -414,16 +414,13 @@ Partial Class frmMain
         Me.mnuPreparePrepareToShareJitter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataPrePareToShareSdcPackage = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataAnonymiseIDColumn = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareCalculate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareCalculateCalculations = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnCalculateTransform = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareCalculator = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuPrepareColumnGenerate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnCalculate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnGenerateRegularSequence = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnGenerateEnter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnGenerateDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator25 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuPrepareColumnGenerateCountInFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnGenerateRowSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnGenerateRank = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnPrpareColumnGeneratePolynomials = New System.Windows.Forms.ToolStripMenuItem()
@@ -433,6 +430,7 @@ Partial Class frmMain
         Me.mnuPrepareColumnFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnFactorConvertToFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnFactorRecodeNumeric = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnFactorCountInFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareColumnFactorRecodeFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnFactorCombineFactors = New System.Windows.Forms.ToolStripMenuItem()
@@ -2541,7 +2539,7 @@ Partial Class frmMain
         '
         'mnuPrepare
         '
-        Me.mnuPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrame, Me.mnuPrepareCheckData, Me.mnuPrepareCalculate, Me.ToolStripSeparator6, Me.mnuPrepareColumnGenerate, Me.mnuPrepareColumnFactor, Me.mnuPrepareColumnText, Me.mnuPrepareColumnDate, Me.mnuPrepareColumnDefine, Me.mnuPrepareColumnReshape, Me.ToolStripSeparator7, Me.mnuPrepareKeysAndLinks, Me.mnuPrepareDataObject, Me.mnuPrepareRObjects})
+        Me.mnuPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrame, Me.mnuPrepareCheckData, Me.mnuPrepareCalculator, Me.ToolStripSeparator6, Me.mnuPrepareColumnCalculate, Me.mnuPrepareColumnFactor, Me.mnuPrepareColumnText, Me.mnuPrepareColumnDate, Me.mnuPrepareColumnDefine, Me.mnuPrepareColumnReshape, Me.ToolStripSeparator7, Me.mnuPrepareKeysAndLinks, Me.mnuPrepareDataObject, Me.mnuPrepareRObjects})
         Me.mnuPrepare.Name = "mnuPrepare"
         resources.ApplyResources(Me.mnuPrepare, "mnuPrepare")
         Me.mnuPrepare.Tag = "Prepare"
@@ -2745,36 +2743,23 @@ Partial Class frmMain
         Me.mnuPrepareCheckDataAnonymiseIDColumn.Name = "mnuPrepareCheckDataAnonymiseIDColumn"
         resources.ApplyResources(Me.mnuPrepareCheckDataAnonymiseIDColumn, "mnuPrepareCheckDataAnonymiseIDColumn")
         '
-        'mnuPrepareCalculate
+        'mnuPrepareCalculator
         '
-        Me.mnuPrepareCalculate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareCalculateCalculations, Me.mnuPrepareColumnCalculateTransform})
-        Me.mnuPrepareCalculate.Name = "mnuPrepareCalculate"
-        resources.ApplyResources(Me.mnuPrepareCalculate, "mnuPrepareCalculate")
-        Me.mnuPrepareCalculate.Tag = "Calculate"
-        '
-        'mnuPrepareCalculateCalculations
-        '
-        Me.mnuPrepareCalculateCalculations.Name = "mnuPrepareCalculateCalculations"
-        resources.ApplyResources(Me.mnuPrepareCalculateCalculations, "mnuPrepareCalculateCalculations")
-        Me.mnuPrepareCalculateCalculations.Tag = "Calculations..."
-        '
-        'mnuPrepareColumnCalculateTransform
-        '
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateTransform, "mnuPrepareColumnCalculateTransform")
-        Me.mnuPrepareColumnCalculateTransform.Name = "mnuPrepareColumnCalculateTransform"
-        Me.mnuPrepareColumnCalculateTransform.Tag = "..."
+        Me.mnuPrepareCalculator.Name = "mnuPrepareCalculator"
+        resources.ApplyResources(Me.mnuPrepareCalculator, "mnuPrepareCalculator")
+        Me.mnuPrepareCalculator.Tag = "Calculator..."
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
         resources.ApplyResources(Me.ToolStripSeparator6, "ToolStripSeparator6")
         '
-        'mnuPrepareColumnGenerate
+        'mnuPrepareColumnCalculate
         '
-        Me.mnuPrepareColumnGenerate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateRegularSequence, Me.mnuPrepareColumnGenerateEnter, Me.mnuPrepareColumnGenerateDuplicateColumn, Me.ToolStripSeparator25, Me.mnuPrepareColumnGenerateCountInFactor, Me.mnuPrepareColumnGenerateRowSummaries, Me.mnuPrepareColumnGenerateRank, Me.mnuPrepareColumnPrpareColumnGeneratePolynomials, Me.ToolStripSeparator56, Me.mnuPrepareColumnGenerateRandomSamples, Me.mnuPrepareColumnGeneratePermuteRows})
-        Me.mnuPrepareColumnGenerate.Name = "mnuPrepareColumnGenerate"
-        resources.ApplyResources(Me.mnuPrepareColumnGenerate, "mnuPrepareColumnGenerate")
-        Me.mnuPrepareColumnGenerate.Tag = "Column:_Generate"
+        Me.mnuPrepareColumnCalculate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateRegularSequence, Me.mnuPrepareColumnGenerateEnter, Me.mnuPrepareColumnGenerateDuplicateColumn, Me.ToolStripSeparator25, Me.mnuPrepareColumnGenerateRowSummaries, Me.mnuPrepareColumnGenerateRank, Me.mnuPrepareColumnPrpareColumnGeneratePolynomials, Me.ToolStripSeparator56, Me.mnuPrepareColumnGenerateRandomSamples, Me.mnuPrepareColumnGeneratePermuteRows})
+        Me.mnuPrepareColumnCalculate.Name = "mnuPrepareColumnCalculate"
+        resources.ApplyResources(Me.mnuPrepareColumnCalculate, "mnuPrepareColumnCalculate")
+        Me.mnuPrepareColumnCalculate.Tag = "Column:_Calculate"
         '
         'mnuPrepareColumnGenerateRegularSequence
         '
@@ -2796,11 +2781,6 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator25.Name = "ToolStripSeparator25"
         resources.ApplyResources(Me.ToolStripSeparator25, "ToolStripSeparator25")
-        '
-        'mnuPrepareColumnGenerateCountInFactor
-        '
-        Me.mnuPrepareColumnGenerateCountInFactor.Name = "mnuPrepareColumnGenerateCountInFactor"
-        resources.ApplyResources(Me.mnuPrepareColumnGenerateCountInFactor, "mnuPrepareColumnGenerateCountInFactor")
         '
         'mnuPrepareColumnGenerateRowSummaries
         '
@@ -2838,7 +2818,7 @@ Partial Class frmMain
         '
         'mnuPrepareColumnFactor
         '
-        Me.mnuPrepareColumnFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnFactorConvertToFactor, Me.mnuPrepareColumnFactorRecodeNumeric, Me.ToolStripSeparator12, Me.mnuPrepareColumnFactorRecodeFactor, Me.mnuPrepareColumnFactorCombineFactors, Me.mnuPrepareColumnFactorDummyVariables, Me.ToolStripSeparator14, Me.mnuPrepareColumnFactorLevelsLabels, Me.mnuPrepareFactorViewLabels, Me.mnuPrepareColumnFactorReorderLevels, Me.mnuPrepareColumnFactorReferenceLevel, Me.mnuPrepareColumnFactorUnusedLevels, Me.mnuPrepareColumnFactorContrasts, Me.ToolStripSeparator19, Me.mnuPrepareColumnFactorFactorDataFrame})
+        Me.mnuPrepareColumnFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnFactorConvertToFactor, Me.mnuPrepareColumnFactorRecodeNumeric, Me.mnuPrepareColumnFactorCountInFactor, Me.ToolStripSeparator12, Me.mnuPrepareColumnFactorRecodeFactor, Me.mnuPrepareColumnFactorCombineFactors, Me.mnuPrepareColumnFactorDummyVariables, Me.ToolStripSeparator14, Me.mnuPrepareColumnFactorLevelsLabels, Me.mnuPrepareFactorViewLabels, Me.mnuPrepareColumnFactorReorderLevels, Me.mnuPrepareColumnFactorReferenceLevel, Me.mnuPrepareColumnFactorUnusedLevels, Me.mnuPrepareColumnFactorContrasts, Me.ToolStripSeparator19, Me.mnuPrepareColumnFactorFactorDataFrame})
         Me.mnuPrepareColumnFactor.Name = "mnuPrepareColumnFactor"
         resources.ApplyResources(Me.mnuPrepareColumnFactor, "mnuPrepareColumnFactor")
         Me.mnuPrepareColumnFactor.Tag = "Column:_Factor"
@@ -2854,6 +2834,11 @@ Partial Class frmMain
         Me.mnuPrepareColumnFactorRecodeNumeric.Name = "mnuPrepareColumnFactorRecodeNumeric"
         resources.ApplyResources(Me.mnuPrepareColumnFactorRecodeNumeric, "mnuPrepareColumnFactorRecodeNumeric")
         Me.mnuPrepareColumnFactorRecodeNumeric.Tag = "Recode_Numeric..."
+        '
+        'mnuPrepareColumnFactorCountInFactor
+        '
+        Me.mnuPrepareColumnFactorCountInFactor.Name = "mnuPrepareColumnFactorCountInFactor"
+        resources.ApplyResources(Me.mnuPrepareColumnFactorCountInFactor, "mnuPrepareColumnFactorCountInFactor")
         '
         'ToolStripSeparator12
         '
@@ -3857,7 +3842,7 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareColumnFactorRecodeFactor As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnFactorReferenceLevel As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnFactorUnusedLevels As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnGenerate As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnCalculate As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameConvertColumns As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGeneratePermuteRows As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnReshapeColumnSummaries As ToolStripMenuItem
@@ -4046,7 +4031,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticFileOpensst As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGenerateEnter As ToolStripMenuItem
     Friend WithEvents mnuFileOpenFromODK As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnGenerateCountInFactor As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator25 As ToolStripSeparator
     Friend WithEvents mnuPrepareColumnDate As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnDateGenerateDate As ToolStripMenuItem
@@ -4320,7 +4304,6 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareColumnGenerateRank As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnPrpareColumnGeneratePolynomials As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator56 As ToolStripSeparator
-    Friend WithEvents mnuPrepareCalculate As ToolStripMenuItem
-    Friend WithEvents mnuPrepareCalculateCalculations As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculateTransform As ToolStripMenuItem
+    Friend WithEvents mnuPrepareCalculator As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnFactorCountInFactor As ToolStripMenuItem
 End Class
