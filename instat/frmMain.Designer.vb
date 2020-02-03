@@ -526,6 +526,7 @@ Partial Class frmMain
         Me.ToolStripSeparator52 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuProcurementDescribeCategoricalBarCharts = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeCategoricalMosaic = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeCategoricalTreemap = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeNumeric = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeNumericBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.HistogramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -584,7 +585,6 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuProcurementDescribeCategoricalTreemap = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3374,6 +3374,11 @@ Partial Class frmMain
         Me.mnuProcurementDescribeCategoricalMosaic.Name = "mnuProcurementDescribeCategoricalMosaic"
         resources.ApplyResources(Me.mnuProcurementDescribeCategoricalMosaic, "mnuProcurementDescribeCategoricalMosaic")
         '
+        'mnuProcurementDescribeCategoricalTreemap
+        '
+        Me.mnuProcurementDescribeCategoricalTreemap.Name = "mnuProcurementDescribeCategoricalTreemap"
+        resources.ApplyResources(Me.mnuProcurementDescribeCategoricalTreemap, "mnuProcurementDescribeCategoricalTreemap")
+        '
         'mnuProcurementDescribeNumeric
         '
         Me.mnuProcurementDescribeNumeric.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeNumericBoxplot, Me.HistogramToolStripMenuItem, Me.ToolStripSeparator53, Me.mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers})
@@ -3743,11 +3748,6 @@ Partial Class frmMain
         Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
-        '
-        'mnuProcurementDescribeCategoricalTreemap
-        '
-        Me.mnuProcurementDescribeCategoricalTreemap.Name = "mnuProcurementDescribeCategoricalTreemap"
-        resources.ApplyResources(Me.mnuProcurementDescribeCategoricalTreemap, "mnuProcurementDescribeCategoricalTreemap")
         '
         'frmMain
         '
