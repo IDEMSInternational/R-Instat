@@ -27,6 +27,7 @@ Public Class dlgFromLibrary
     Private dctPackages As New Dictionary(Of String, String)
     Private strAvailablePackages() As String
     Private dlgImportDatasetFromLibrary As dlgImportDataset
+    Private strSelectedPackage As String = ""
 
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -38,6 +39,14 @@ Public Class dlgFromLibrary
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
+
+        If lstCollection.SelectedItems.Count > 0 Then
+            'make the listview have the focus
+            lstCollection.Select()
+            'set the selected item to be visible 
+            lstCollection.TopItem = lstCollection.Items(lstCollection.Items.IndexOf(lstCollection.SelectedItems.Item(0)))
+        End If
+
         bReset = False
         TestOkEnabled()
     End Sub
@@ -163,8 +172,12 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub ucrInputPackages_ControlValueChanged() Handles ucrInputPackages.ControlValueChanged
-        LoadDatasets(ucrInputPackages.GetText())
-        TestOkEnabled()
+        If strSelectedPackage <> ucrInputPackages.GetText() Then
+            strSelectedPackage = ucrInputPackages.GetText()
+            LoadDatasets(strSelectedPackage)
+            TestOkEnabled()
+        End If
+
     End Sub
 
     Private Sub lstCollection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCollection.SelectedIndexChanged
@@ -184,10 +197,11 @@ Public Class dlgFromLibrary
     Private Sub TestOkEnabled()
         If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 AndAlso ucrNewDataFrameName.IsComplete Then
             ucrBase.OKEnabled(True)
+            cmdHelp.Enabled = True
         Else
             ucrBase.OKEnabled(False)
+            cmdHelp.Enabled = False
         End If
-        EnableHelp()
     End Sub
 
     Private Function CheckString(ByVal strValue As String)
@@ -207,14 +221,6 @@ Public Class dlgFromLibrary
         clsHelp.AddParameter("package", Chr(34) & ucrInputPackages.cboInput.SelectedItem & Chr(34))
         clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
         frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & lstCollection.SelectedItems(0).Text & " " & "dataset. Generated from dialog Open Dataset from Library", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
-    End Sub
-
-    Private Sub EnableHelp()
-        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 Then
-            cmdHelp.Enabled = True
-        Else
-            cmdHelp.Enabled = False
-        End If
     End Sub
 
     Private Sub ucrNewDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlContentsChanged
