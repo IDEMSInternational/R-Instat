@@ -1357,7 +1357,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdCv_Click(sender As Object, e As EventArgs) Handles cmdCv.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("summary_coef_var()", 1)
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("raster::cv(x = , aszero = FALSE, na.rm = FALSE)", 33)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("raster::cv()", 1)
+        End If
     End Sub
 
     Private Sub cmdMad_Click(sender As Object, e As EventArgs) Handles cmdMad.Click
