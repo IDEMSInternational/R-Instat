@@ -2502,4 +2502,12 @@ Public Class ucrCalculator
     Private Sub cmdPlusZero_Click(sender As Object, e As EventArgs) Handles cmdPlusZero.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("-")
     End Sub
+
+    Private Sub cmdMode1_Click(sender As Object, e As EventArgs) Handles cmdMode1.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1(x = , na_rm = FALSE)", 17)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1()", 1)
+        End If
+    End Sub
 End Class
