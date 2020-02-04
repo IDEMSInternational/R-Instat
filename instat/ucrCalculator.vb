@@ -1441,7 +1441,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdMode_Click(sender As Object, e As EventArgs) Handles cmdMode.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("summary_mode()", 1)
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv(x = , na_rm = FALSE)", 17)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv()", 1)
+        End If
     End Sub
 
     Private Sub cmdNA_Click(sender As Object, e As EventArgs) Handles cmdNA.Click
