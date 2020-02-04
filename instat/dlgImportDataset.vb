@@ -425,33 +425,25 @@ Public Class dlgImportDataset
             If bFromLibrary Then
                 dlgOpen.Title = "Import from Library"
                 dlgOpen.InitialDirectory = strLibraryPath
-                bFromLibrary = False
             Else
                 dlgOpen.Title = "Open Data from file"
-                If strCurrentDirectory <> "" Then
-                    dlgOpen.InitialDirectory = strCurrentDirectory
-                Else
-                    dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-                End If
+                dlgOpen.InitialDirectory = If(String.IsNullOrEmpty(strCurrentDirectory), frmMain.clsInstatOptions.strWorkingDirectory, strCurrentDirectory)
             End If
 
-            If dlgOpen.ShowDialog() = DialogResult.OK Then
+            If DialogResult.OK = dlgOpen.ShowDialog() Then
                 ucrSaveFile.Reset()
                 'TODO This is in place for when we allow multiple files selected.
                 bMultiFiles = (dlgOpen.FileNames.Count > 1)
                 If NumberOfFileTypes(dlgOpen.FileNames) > 1 Then
                     MsgBox("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
-                    SetControlsFromFile("")
+                    SetControlsFromFile("", bFromLibrary)
                 Else
-                    If dlgOpen.FileName <> "" Then
-                        SetControlsFromFile(dlgOpen.FileName)
-                    End If
+                    SetControlsFromFile(dlgOpen.FileName, bFromLibrary)
                 End If
             Else
                 If bFromLibrary Then
                     'TODO something like this so that the Import dialog closes
                     '     when using open from library but library dialog stays open
-                    'bFromLibrary = False
                     'Me.Close()
                 End If
                 If ucrInputFilePath.GetText() = "" Then
@@ -468,6 +460,7 @@ Public Class dlgImportDataset
                     lblTextFilePreview.Hide()
                 End If
             End If
+            bFromLibrary = False
             TestOkEnabled()
         End Using
     End Sub
@@ -550,7 +543,7 @@ Public Class dlgImportDataset
         ucrNudPreviewLines.Visible = bVisible
     End Sub
 
-    Public Sub SetControlsFromFile(strFilePath As String)
+    Public Sub SetControlsFromFile(strFilePath As String, Optional bFromLibrary As Boolean = False)
         Dim strFileExt As String
 
         strFileName = ""
@@ -559,7 +552,9 @@ Public Class dlgImportDataset
             strFileExt = Path.GetExtension(strFilePath).ToLower()
             strFilePathSystem = strFilePath
             strFilePathR = Replace(strFilePath, "\", "/")
-            strCurrentDirectory = Path.GetDirectoryName(strFilePath)
+            If Not bFromLibrary Then
+                strCurrentDirectory = Path.GetDirectoryName(strFilePath)
+            End If
         Else
             strFileName = ""
             strFileExt = ""
@@ -945,5 +940,20 @@ Public Class dlgImportDataset
                 clbSheets.SetItemChecked(i, bCheckAll)
             Next
         End If
+    End Sub
+
+    ''' <summary>
+    ''' gets the selected path and filename
+    ''' </summary>
+    Public Function GetFileOpened() As String
+        Return ucrInputFilePath.GetText()
+    End Function
+
+    ''' <summary>
+    ''' sets the filepath and name to open on form load
+    ''' </summary>
+    ''' <param name="strNewFileToOpenOnAs"></param>
+    Public Sub SetFileToOpenOn(strNewFileToOpenOnAs As String)
+        strFileToOpenOn = strNewFileToOpenOnAs
     End Sub
 End Class
