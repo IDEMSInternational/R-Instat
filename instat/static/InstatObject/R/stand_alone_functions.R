@@ -326,7 +326,6 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
               ind <- integer(0)
               try({
                 units <- ncdf4::ncatt_get(nc, dim_var, "units")
-                print(units)
                 if(units$hasatt && units$value == "julian_day") {
                   # RDotNet interprets Date class as numeric so character needed to preserve date
                   time_vals <- as.Date(curr_dim_values, origin = structure(-2440588, class = "Date"))
