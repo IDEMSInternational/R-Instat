@@ -191,6 +191,7 @@ Public Class dlgOpenNetCDF
                         clsRFileDetails.AddParameter("infile", Chr(34) & Replace(strFilePath, "\", "/") & Chr(34), iPosition:=1)
                         FileDetails()
                         clsImportNetcdfFunction.RemoveParameterByName("boundary")
+                        clsBoundaryListFunction.ClearParameters()
                     End If
                 End If
             End If
