@@ -1377,7 +1377,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdSkew_Click(sender As Object, e As EventArgs) Handles cmdSkew.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("summary_skewness()", 1)
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::skewness(x = , na.rm = FALSE, type = 3)", 27)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::skewness()", 1)
+        End If
     End Sub
 
     Private Sub cmdPropn_Click(sender As Object, e As EventArgs) Handles cmdPropn.Click
