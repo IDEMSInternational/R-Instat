@@ -32,17 +32,13 @@ Public Class dlgCumulativeDistribution
     Private bResetSubdialog As Boolean = True
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private clsSequence As New RFunction
-    Private clsReverse As New RFunction
-    Private clsScaleYReverseFunc As New RFunction
     Private clsYScalesFunc As New RFunction
     Private clsYlabFunc As New RFunction
     Private bReset As Boolean = True
 
     Private strFirstParameterName As String = "stat_ecdf"
-    Private strYScleParameterName As String = "Yscales"
-    Private strYScaleReverseParamName As String = "reverseYscales"
+    Private strYScleParameterName As String = "YscaleContinous"
     Private strGeomParameterNames() As String = {strFirstParameterName, strYScleParameterName}
-
 
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
@@ -79,8 +75,8 @@ Public Class dlgCumulativeDistribution
         ucrPnlOption.AddRadioButton(rdoCumulative)
         ucrPnlOption.AddRadioButton(rdoExceedance)
 
-        ucrPnlOption.AddParameterPresentCondition(rdoCumulative, "Yscales")
-        ucrPnlOption.AddParameterPresentCondition(rdoExceedance, "reverseYscales")
+        ucrPnlOption.AddParameterPresentCondition(rdoCumulative, "y", bNewIsPositive:=False)
+        ucrPnlOption.AddParameterPresentCondition(rdoExceedance, "y")
 
         ucrCumDistSelector.SetParameter(New RParameter("data", 0))
         ucrCumDistSelector.SetParameterIsrfunction()
@@ -107,18 +103,11 @@ Public Class dlgCumulativeDistribution
         ucrInputComboScales.SetDropDownStyleAsNonEditable()
         ucrInputComboScales.SetRDefault("scales::comma")
 
-        'ucrInputFrom.SetToValue(0)
-        'ucrInputFrom.Enabled = False
-        'ucrInputFrom.SetParameter(New RParameter("from"))
-        'ucrInputTo.SetToValue(1)
-        'ucrInputTo.Enabled = False
-        'ucrInputTo.SetParameter(New RParameter("to"))
         ucrNudBy.SetParameter(New RParameter("by"))
         ucrNudBy.DecimalPlaces = 2
         ucrNudBy.Increment = 0.01
         ucrNudBy.Minimum = 0
         ucrNudBy.Maximum = 1
-        ucrNudBy.Value = 0.25
 
         ucrChkCountsOnYAxis.SetText("Counts on Y Axis")
 
@@ -129,6 +118,11 @@ Public Class dlgCumulativeDistribution
         clsGeomPointParam.SetArgument(clsGeomPointFunc)
         ucrChkIncludePoints.SetText("Include Points")
         ucrChkIncludePoints.SetParameter(clsGeomPointParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        'ucrInputComboPad.SetParameter(New RParameter("pad"))
+        'ucrInputComboPad.SetItems({"TRUE", "FALSE"})
+        'ucrInputComboPad.SetDropDownStyleAsNonEditable()
+        'ucrInputComboPad.SetRDefault("TRUE")
 
         ucrSaveCumDist.SetPrefix("cumulative_dist")
         ucrSaveCumDist.SetSaveTypeAsGraph()
@@ -143,21 +137,13 @@ Public Class dlgCumulativeDistribution
         clsRaesFunction = New RFunction
         clsRgeomCumDistFunction = New RFunction
         clsRggplotFunction = New RFunction
-        clsScaleYReverseFunc = New RFunction
         clsYScalesFunc = New RFunction
-
 
         clsSequence = New RFunction
         clsSequence.SetRCommand("seq")
         clsSequence.AddParameter("from", "0", iPosition:=0)
         clsSequence.AddParameter("to", "1", iPosition:=1)
         clsSequence.AddParameter("by", "0.25", iPosition:=2)
-
-        clsReverse = New RFunction
-        clsReverse.SetRCommand("seq")
-        clsReverse.AddParameter("from", "1", iPosition:=0)
-        clsReverse.AddParameter("to", "0", iPosition:=1)
-        clsReverse.AddParameter("by", "-0.25", iPosition:=2)
 
         ucrCumDistSelector.Reset()
         ucrCumDistSelector.SetGgplotFunction(clsBaseOperator)
@@ -169,7 +155,6 @@ Public Class dlgCumulativeDistribution
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("scale_y_continuous", clsRFunctionParameter:=clsYScalesFunc, iPosition:=1)
         clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
 
         clsRggplotFunction.SetPackageName("ggplot2")
@@ -181,19 +166,12 @@ Public Class dlgCumulativeDistribution
 
         clsRgeomCumDistFunction.SetPackageName("ggplot2")
         clsRgeomCumDistFunction.SetRCommand("stat_ecdf")
-        clsRgeomCumDistFunction.AddParameter("pad", Chr(34) & "FALSE" & Chr(34))
+        clsRgeomCumDistFunction.AddParameter("pad", "FALSE")
 
         clsAesFunction.SetPackageName("ggplot2")
         clsAesFunction.SetRCommand("aes")
-        clsAesFunction.AddParameter("y", "1 - ..y..")
 
-        clsScaleYReverseFunc.SetPackageName("ggplot2")
-        clsScaleYReverseFunc.SetRCommand("stat_ecdf")
-        clsScaleYReverseFunc.AddParameter("mapping", clsRFunctionParameter:=clsAesFunction, iPosition:=1)
-
-        clsYScalesFunc.SetPackageName("ggplot2")
-        clsYScalesFunc.SetRCommand("scale_y_continuous")
-        clsYScalesFunc.AddParameter("labels", "scales::comma")
+        clsYScalecontinuousFunction.AddParameter("labels", "scales::comma")
 
         clsLabsFunction.SetRCommand("labs")
         clsLabsFunction.AddParameter("y", "NULL")
@@ -209,12 +187,10 @@ Public Class dlgCumulativeDistribution
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
 
-        'clsScaleYReverseFunc.AddParameter("breaks", clsRFunctionParameter:=clsReverse)
-        'clsBaseOperator.AddParameter(strYScaleReverseParamName, clsRFunctionParameter:=clsScaleYReverseFunc, bIncludeArgumentName:=False)
-
         clsYScalecontinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSequence)
-        clsBaseOperator.AddParameter(strYScleParameterName, clsRFunctionParameter:=clsYScalecontinuousFunction, bIncludeArgumentName:=False)
 
+        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsRgeomCumDistFunction, iPosition:=1)
+        clsBaseOperator.AddParameter(strYScleParameterName, clsRFunctionParameter:=clsYScalecontinuousFunction, bIncludeArgumentName:=False)
 
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
@@ -229,14 +205,12 @@ Public Class dlgCumulativeDistribution
         ucrSaveCumDist.SetRCode(clsBaseOperator, bReset)
         ucrCumDistSelector.SetRCode(clsRggplotFunction, bReset)
 
-        ucrPnlOption.SetRCode(clsBaseOperator, bReset)
-        ucrInputComboScales.SetRCode(clsYScalesFunc, bReset)
+        ucrPnlOption.SetRCode(clsAesFunction, bReset)
+        ucrInputComboScales.SetRCode(clsYScalecontinuousFunction, bReset)
 
-        'ucrInputFrom.SetRCode(clsSequence, bReset)
-        'ucrInputTo.SetRCode(clsSequence, bReset)
+        'ucrInputComboPad.SetRCode(clsRgeomCumDistFunction, bReset)
 
-        ucrNudBy.AddAdditionalCodeParameterPair(clsSequence, New RParameter("by"), iAdditionalPairNo:=1)
-        ucrNudBy.AddAdditionalCodeParameterPair(clsReverse, New RParameter("by"), iAdditionalPairNo:=2)
+        ucrNudBy.SetRCode(clsSequence, bReset)
 
     End Sub
 
@@ -245,17 +219,6 @@ Public Class dlgCumulativeDistribution
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
-        End If
-    End Sub
-    Private Sub ChangeNumericUpDownValues()
-        If rdoExceedance.Checked Then
-            'ucrInputFrom.SetToValue(1)
-            'ucrInputTo.SetToValue(0)
-            ucrNudBy.dScaleBy = -1
-        Else
-            'ucrInputFrom.SetToValue(0)
-            'ucrInputTo.SetToValue(1)
-            ucrNudBy.dScaleBy = 1
         End If
     End Sub
 
@@ -277,12 +240,23 @@ Public Class dlgCumulativeDistribution
 
     Private Sub ucrPnlOption_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOption.ControlValueChanged
         If rdoExceedance.Checked Then
-            clsBaseOperator.RemoveParameterByName("Yscales")
-            clsBaseOperator.AddParameter("reverseYscales", clsRFunctionParameter:=clsScaleYReverseFunc)
-        Else
-            clsBaseOperator.RemoveParameterByName("reverseYscales")
-            clsBaseOperator.AddParameter("Yscales", clsRFunctionParameter:=clsRgeomCumDistFunction, iPosition:=2)
+            ' add y = ..y.. to aes()
+            clsAesFunction.AddParameter("y", "1 - ..y..")
+            ' add aes()
+            clsRgeomCumDistFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesFunction, iPosition:=1)
+        ElseIf rdoCumulative.Checked Then
+            ' remove y from aes()
+            clsAesFunction.RemoveParameterByName("y")
+            ' remove aes() if no parameters
+            If clsAesFunction.iParameterCount > 0 Then
+                clsRgeomCumDistFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesFunction, iPosition:=1)
+            Else
+                clsRgeomCumDistFunction.RemoveParameterByName("mapping")
+            End If
         End If
-        ChangeNumericUpDownValues()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorforCumDist.ControlContentsChanged, ucrSaveCumDist.ControlContentsChanged
+
     End Sub
 End Class

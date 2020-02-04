@@ -256,7 +256,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 294</value>
+    <value>188, 294</value>
   </data>
   <data name="lblScale.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
@@ -281,6 +281,81 @@
   </data>
   <data name="&gt;&gt;lblScale.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="lblNudby.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNudby.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblNudby.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 325</value>
+  </data>
+  <data name="lblNudby.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
+  </data>
+  <data name="lblNudby.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="lblNudby.Text" xml:space="preserve">
+    <value>In steps of:</value>
+  </data>
+  <data name="lblNudby.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblNudby.Name" xml:space="preserve">
+    <value>lblNudby</value>
+  </data>
+  <data name="&gt;&gt;lblNudby.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNudby.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblNudby.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrNudBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 325</value>
+  </data>
+  <data name="ucrNudBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudBy.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;ucrNudBy.Name" xml:space="preserve">
+    <value>ucrNudBy</value>
+  </data>
+  <data name="&gt;&gt;ucrNudBy.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudBy.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudBy.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputComboScales.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 294</value>
+  </data>
+  <data name="ucrInputComboScales.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 26</value>
+  </data>
+  <data name="ucrInputComboScales.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboScales.Name" xml:space="preserve">
+    <value>ucrInputComboScales</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboScales.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboScales.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboScales.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="ucrPnlOption.Location" type="System.Drawing.Point, System.Drawing">
     <value>105, 12</value>
@@ -349,7 +424,7 @@
     <value>10, 341</value>
   </data>
   <data name="ucrSaveCumDist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>120, 24</value>
   </data>
   <data name="ucrSaveCumDist.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -373,82 +448,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>418, 431</value>
-  </data>
-  <data name="ucrNudBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 325</value>
-  </data>
-  <data name="ucrNudBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudBy.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;ucrNudBy.Name" xml:space="preserve">
-    <value>ucrNudBy</value>
-  </data>
-  <data name="&gt;&gt;ucrNudBy.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudBy.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudBy.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblNudby.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblNudby.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblNudby.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 325</value>
-  </data>
-  <data name="lblNudby.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
-  </data>
-  <data name="lblNudby.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="lblNudby.Text" xml:space="preserve">
-    <value>In steps of:</value>
-  </data>
-  <data name="lblNudby.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;lblNudby.Name" xml:space="preserve">
-    <value>lblNudby</value>
-  </data>
-  <data name="&gt;&gt;lblNudby.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblNudby.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblNudby.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrInputComboScales.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 294</value>
-  </data>
-  <data name="ucrInputComboScales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
-  </data>
-  <data name="ucrInputComboScales.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;ucrInputComboScales.Name" xml:space="preserve">
-    <value>ucrInputComboScales</value>
-  </data>
-  <data name="&gt;&gt;ucrInputComboScales.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputComboScales.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputComboScales.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>418, 441</value>
   </data>
   <data name="ucrFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>243, 229</value>
@@ -499,7 +499,7 @@
     <value>14</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 371</value>
+    <value>10, 386</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -518,6 +518,9 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>15</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
