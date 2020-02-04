@@ -44,6 +44,9 @@ Partial Class dlgCumulativeDistribution
         Me.rdoCumulative = New System.Windows.Forms.RadioButton()
         Me.rdoExceedance = New System.Windows.Forms.RadioButton()
         Me.lblScale = New System.Windows.Forms.Label()
+        Me.lblNudby = New System.Windows.Forms.Label()
+        Me.ucrNudBy = New instat.ucrNud()
+        Me.ucrInputComboScales = New instat.ucrInputComboBox()
         Me.ucrPnlOption = New instat.UcrPanel()
         Me.ucrChkIncludePoints = New instat.ucrCheck()
         Me.ucrChkCountsOnYAxis = New instat.ucrCheck()
@@ -52,9 +55,6 @@ Partial Class dlgCumulativeDistribution
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrCumDistSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputComboScales = New instat.ucrInputComboBox()
-        Me.lblNudby = New System.Windows.Forms.Label()
-        Me.ucrNudBy = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'lblFactors
@@ -88,6 +88,28 @@ Partial Class dlgCumulativeDistribution
         '
         resources.ApplyResources(Me.lblScale, "lblScale")
         Me.lblScale.Name = "lblScale"
+        '
+        'lblNudby
+        '
+        resources.ApplyResources(Me.lblNudby, "lblNudby")
+        Me.lblNudby.Name = "lblNudby"
+        '
+        'ucrNudBy
+        '
+        Me.ucrNudBy.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudBy.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudBy, "ucrNudBy")
+        Me.ucrNudBy.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudBy.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudBy.Name = "ucrNudBy"
+        Me.ucrNudBy.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputComboScales
+        '
+        Me.ucrInputComboScales.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboScales.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboScales, "ucrInputComboScales")
+        Me.ucrInputComboScales.Name = "ucrInputComboScales"
         '
         'ucrPnlOption
         '
@@ -142,28 +164,6 @@ Partial Class dlgCumulativeDistribution
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrInputComboScales
-        '
-        Me.ucrInputComboScales.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboScales.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboScales, "ucrInputComboScales")
-        Me.ucrInputComboScales.Name = "ucrInputComboScales"
-        '
-        'lblNudby
-        '
-        resources.ApplyResources(Me.lblNudby, "lblNudby")
-        Me.lblNudby.Name = "lblNudby"
-        '
-        'ucrNudBy
-        '
-        Me.ucrNudBy.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudBy.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudBy, "ucrNudBy")
-        Me.ucrNudBy.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudBy.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudBy.Name = "ucrNudBy"
-        Me.ucrNudBy.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgCumulativeDistribution
         '
