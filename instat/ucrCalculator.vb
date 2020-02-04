@@ -1365,7 +1365,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdMc_Click(sender As Object, e As EventArgs) Handles cmdMc.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("summary_skewness_mc()", 1)
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc(x =, na.rm = FALSE, doReflect = (length(x) <= 100),doScale = TRUE, maxit = 100, trace.lev = 0, full.result = FALSE)", 112)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc()", 1)
+        End If
     End Sub
 
     Private Sub cmdNonMiss_Click(sender As Object, e As EventArgs) Handles cmdNonMiss.Click
