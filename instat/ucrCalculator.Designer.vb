@@ -2738,7 +2738,6 @@ Partial Class ucrCalculator
         Me.grpModifier.ResumeLayout(False)
         Me.grpSymbols.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
