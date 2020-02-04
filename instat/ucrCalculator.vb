@@ -1412,7 +1412,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor(x= , y= , use = ""everything"", method = c(""pearson"", ""kendall"", ""spearman""))", 73)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor(x = , y = )", 7)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor(x = , y = )", 8)
         End If
     End Sub
 
@@ -1420,7 +1420,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov(x= , y= , use = ""everything"", method = c(""pearson"", ""kendall"", ""spearman""))", 73)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov(x = , y = )", 7)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov(x = , y = )", 8)
         End If
     End Sub
 
