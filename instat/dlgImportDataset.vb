@@ -437,9 +437,9 @@ Public Class dlgImportDataset
                 bMultiFiles = (dlgOpen.FileNames.Count > 1)
                 If NumberOfFileTypes(dlgOpen.FileNames) > 1 Then
                     MsgBox("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
-                    SetControlsFromFile("", bFromLibrary)
+                    SetControlsFromFile("")
                 Else
-                    SetControlsFromFile(dlgOpen.FileName, bFromLibrary)
+                    SetControlsFromFile(dlgOpen.FileName)
                 End If
             Else
                 If bFromLibrary Then
@@ -461,7 +461,6 @@ Public Class dlgImportDataset
                     lblTextFilePreview.Hide()
                 End If
             End If
-            'bFromLibrary = False
             TestOkEnabled()
         End Using
     End Sub
@@ -544,19 +543,20 @@ Public Class dlgImportDataset
         ucrNudPreviewLines.Visible = bVisible
     End Sub
 
-    Public Sub SetControlsFromFile(strFilePath As String, Optional bFromLibrary As Boolean = False)
+    Public Sub SetControlsFromFile(strFilePath As String)
         Dim strFileExt As String
 
         strFileName = ""
         If strFilePath <> "" Then
             strFileName = Path.GetFileNameWithoutExtension(strFilePath)
             strFileExt = Path.GetExtension(strFilePath).ToLower()
+            If bFromLibrary Then
+                strFilePathSystemTemp = strFilePathSystem 'store what was there temporarily first 
+            End If
             strFilePathSystem = strFilePath
             strFilePathR = Replace(strFilePath, "\", "/")
             strCurrentDirectory = Path.GetDirectoryName(strFilePath)
-            If Not bFromLibrary Then
-                strFilePathSystemTemp = strFilePath
-            End If
+
         Else
             strFileName = ""
             strFileExt = ""
@@ -947,12 +947,20 @@ Public Class dlgImportDataset
     Private Sub dlgImportDataset_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         If (Not Me.Visible) AndAlso bFromLibrary Then
             bFromLibrary = False
-            If Not String.IsNullOrEmpty(strFilePathSystemTemp) Then
+            If String.IsNullOrEmpty(strFilePathSystemTemp) Then
+                strCurrentDirectory = ""
+                strFileName = ""
+                strFileType = ""
+                strFilePathSystem = ""
+                strFilePathR = ""
+                ucrInputFilePath.SetName("")
+            Else
                 strCurrentDirectory = Path.GetDirectoryName(strFilePathSystemTemp)
                 strFileName = Path.GetFileNameWithoutExtension(strFilePathSystemTemp)
                 strFileType = Path.GetExtension(strFilePathSystemTemp).Substring(1).ToUpper()
                 strFilePathSystem = strFilePathSystemTemp
                 strFilePathR = Replace(strFilePathSystemTemp, "\", "/")
+                ucrInputFilePath.SetName(strFilePathR)
             End If
         End If
     End Sub
