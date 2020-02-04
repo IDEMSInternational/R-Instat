@@ -2510,4 +2510,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1()", 1)
         End If
     End Sub
+
+    Private Sub cmdKurtosis_Click(sender As Object, e As EventArgs) Handles cmdKurtosis.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::kurtosis(x = , na.rm = FALSE, type = 3)", 26)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::kurtosis()", 1)
+        End If
+    End Sub
 End Class
