@@ -99,17 +99,17 @@ Public Class dlgImportDataset
             If Not String.IsNullOrEmpty(ucrInputFilePath.GetText()) Then
                 If File.Exists(ucrInputFilePath.GetText()) Then
                     SetControlsFromFile(ucrInputFilePath.GetText())
-                    bDialogLoaded = True
-                    RefreshFilePreview()
-                    RefreshFrameView()
                 Else
                     MsgBox("File no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File No Longer Exists")
                     SetControlsFromFile("")
-                    bDialogLoaded = True
-                    RefreshFilePreview()
-                    RefreshFrameView()
                 End If
+            Else
+                SetControlsFromFile(ucrInputFilePath.GetText())
             End If
+            'still refresh the preview. Incase the dialog was previously opened from the library
+            bDialogLoaded = True
+            RefreshFilePreview()
+            RefreshFrameView()
         End If
 
         'temprary fix for autotranslate(me) translating this to Label1. Can be removed after that
@@ -379,10 +379,7 @@ Public Class dlgImportDataset
         grpText.Hide()
         grpCSV.Hide()
         grpRDS.Hide()
-        grpExcel.Hide()
-        clbSheets.Hide()
-        lblSelectSheets.Hide()
-        ucrChkSheetsCheckAll.Hide()
+        ExcelSheetPreviewVisible(False)
         TextPreviewVisible(False)
         lblNoPreview.Hide()
         lblCannotImport.Hide()
@@ -450,10 +447,7 @@ Public Class dlgImportDataset
                 If ucrInputFilePath.GetText() = "" Then
                     grpText.Hide()
                     grpCSV.Hide()
-                    grpExcel.Hide()
-                    clbSheets.Hide()
-                    lblSelectSheets.Hide()
-                    ucrChkSheetsCheckAll.Hide()
+                    ExcelSheetPreviewVisible(False)
                     grpRDS.Hide()
                     grdDataPreview.Hide()
                     lblDataFrame.Hide()
@@ -543,6 +537,13 @@ Public Class dlgImportDataset
         ucrNudPreviewLines.Visible = bVisible
     End Sub
 
+    Private Sub ExcelSheetPreviewVisible(bVisible As Boolean)
+        grpExcel.Visible = bVisible
+        clbSheets.Visible = bVisible
+        lblSelectSheets.Visible = bVisible
+        ucrChkSheetsCheckAll.Visible = bVisible
+    End Sub
+
     Public Sub SetControlsFromFile(strFilePath As String)
         Dim strFileExt As String
 
@@ -569,10 +570,7 @@ Public Class dlgImportDataset
         grpText.Hide()
         ucrPanelFixedWidthText.Hide()
         grpRDS.Hide()
-        grpExcel.Hide()
-        clbSheets.Hide()
-        lblSelectSheets.Hide()
-        ucrChkSheetsCheckAll.Hide()
+        ExcelSheetPreviewVisible(False)
         grpCSV.Hide()
         'TODO This needs to be different when RDS is a data frame
         'need to be able to detect RDS as data.frame/Instat Object
@@ -604,10 +602,7 @@ Public Class dlgImportDataset
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
             End If
-            grpExcel.Show()
-            clbSheets.Show()
-            lblSelectSheets.Show()
-            ucrChkSheetsCheckAll.Show()
+            ExcelSheetPreviewVisible(True)
             FillExcelSheets(strFilePath)
         ElseIf strFileExt <> "" Then
             strFileType = strFileExt.Substring(1).ToUpper()
