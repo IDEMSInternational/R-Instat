@@ -35,6 +35,7 @@ Public Class dlgCumulativeDistribution
     Private clsReverse As New RFunction
     Private clsScaleYReverseFunc As New RFunction
     Private clsYScalesFunc As New RFunction
+    Private clsYlabFunc As New RFunction
     Private bReset As Boolean = True
 
     Private strFirstParameterName As String = "stat_ecdf"
@@ -152,11 +153,11 @@ Public Class dlgCumulativeDistribution
         clsSequence.AddParameter("to", "1", iPosition:=1)
         clsSequence.AddParameter("by", "0.25", iPosition:=2)
 
-        'clsReverse = New RFunction
-        'clsReverse.SetRCommand("seq")
-        'clsReverse.AddParameter("from", "1", iPosition:=0)
-        'clsReverse.AddParameter("to", "0", iPosition:=1)
-        'clsReverse.AddParameter("by", "-0.25", iPosition:=2)
+        clsReverse = New RFunction
+        clsReverse.SetRCommand("seq")
+        clsReverse.AddParameter("from", "1", iPosition:=0)
+        clsReverse.AddParameter("to", "0", iPosition:=1)
+        clsReverse.AddParameter("by", "-0.25", iPosition:=2)
 
         ucrCumDistSelector.Reset()
         ucrCumDistSelector.SetGgplotFunction(clsBaseOperator)
@@ -169,6 +170,7 @@ Public Class dlgCumulativeDistribution
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("scale_y_continuous", clsRFunctionParameter:=clsYScalesFunc, iPosition:=1)
+        clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -192,6 +194,9 @@ Public Class dlgCumulativeDistribution
         clsYScalesFunc.SetPackageName("ggplot2")
         clsYScalesFunc.SetRCommand("scale_y_continuous")
         clsYScalesFunc.AddParameter("labels", "scales::comma")
+
+        clsLabsFunction.SetRCommand("labs")
+        clsLabsFunction.AddParameter("y", "NULL")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -230,8 +235,8 @@ Public Class dlgCumulativeDistribution
         'ucrInputFrom.SetRCode(clsSequence, bReset)
         'ucrInputTo.SetRCode(clsSequence, bReset)
 
-        ucrNudBy.SetRCode(clsSequence, bReset)
-        'ucrNudBy.AddAdditionalCodeParameterPair(clsReverse, New RParameter("by"), iAdditionalPairNo:=2)
+        ucrNudBy.AddAdditionalCodeParameterPair(clsSequence, New RParameter("by"), iAdditionalPairNo:=1)
+        ucrNudBy.AddAdditionalCodeParameterPair(clsReverse, New RParameter("by"), iAdditionalPairNo:=2)
 
     End Sub
 
