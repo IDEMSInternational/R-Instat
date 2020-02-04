@@ -3061,7 +3061,7 @@
     <value>178</value>
   </data>
   <data name="cmdFirst.Text" xml:space="preserve">
-    <value>First</value>
+    <value>first</value>
   </data>
   <data name="&gt;&gt;cmdFirst.Name" xml:space="preserve">
     <value>cmdFirst</value>
@@ -3091,7 +3091,7 @@
     <value>177</value>
   </data>
   <data name="cmdLast.Text" xml:space="preserve">
-    <value>Last</value>
+    <value>last</value>
   </data>
   <data name="&gt;&gt;cmdLast.Name" xml:space="preserve">
     <value>cmdLast</value>
