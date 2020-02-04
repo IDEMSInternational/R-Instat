@@ -2453,6 +2453,12 @@
   <data name="mnuTbColumnMetadata.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
+  <data name="mnuToolsInstallRPackage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
+  </data>
+  <data name="mnuToolsInstallRPackage.Text" xml:space="preserve">
+    <value>Install R Package</value>
+  </data>
   <data name="mnuTbColumnMetadata.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 34</value>
   </data>
@@ -9146,10 +9152,16 @@
   <data name="&gt;&gt;mnuOptionsByContextDescribeCompareMultipleTreatments.Name" xml:space="preserve">
     <value>mnuOptionsByContextDescribeCompareMultipleTreatments</value>
   </data>
+   <data name="&gt;&gt;mnuToolsInstallRPackage.Name" xml:space="preserve">
+    <value>mnuToolsInstallRPackage</value>
+  </data>
+  <data name="&gt;&gt;mnuToolsInstallRPackage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuOptionsByContextDescribeCompareMultipleTreatments.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuOptionsByContextDescribeBoxplot.Name" xml:space="preserve">
+    <data name="&gt;&gt;mnuOptionsByContextDescribeBoxplot.Name" xml:space="preserve">
     <value>mnuOptionsByContextDescribeBoxplot</value>
   </data>
   <data name="&gt;&gt;mnuOptionsByContextDescribeBoxplot.Type" xml:space="preserve">
