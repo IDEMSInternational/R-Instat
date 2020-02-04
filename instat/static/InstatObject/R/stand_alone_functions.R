@@ -1209,3 +1209,36 @@ convert_to_dec_deg <- function (dd, mm = 0 , ss = 0, dir) {
   decdeg <- (dd + ((mm * 60) + ss)/3600) * sgn
   return(decdeg)
 }
+
+create_av_packs <- function() {
+  av_packs <<- available.packages(repos = "https://cran.rstudio.com/")
+  av_packs <<- data.frame(av_packs)
+}
+
+package_check <- function(package) {
+  out <- c()
+  if(!exists("av_packs")) {
+    create_av_packs()
+  }
+  if(package %in% rownames(installed.packages())) {
+    out[[1]] <- "1"
+    v_machine <- as.character(packageVersion(package))
+    v_web <- as.character(av_packs[av_packs$Package == package, "Version"])
+    out[[2]] <- compareVersion(v_machine, v_web)
+    out[[3]] <- v_machine
+    out[[4]] <- v_web
+    return(out)
+  }
+  else {
+    #check if the package name is typed right
+    if(package %in% av_packs$Package) {
+      out[[1]] <- "2"
+      return(out)
+    }
+    else {
+      #wrong  spelling check you spelling
+      out[[1]] <- "0"
+      return(out)
+    }
+  }
+}
