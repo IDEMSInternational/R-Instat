@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgClimdexIndices
     Private bFirstLoad As Boolean = True
@@ -84,6 +85,10 @@ Public Class dlgClimdexIndices
         ucrReceiverPrec.SetClimaticType("rain")
         ucrReceiverPrec.bAutoFill = True
         ucrReceiverPrec.strSelectorHeading = "Rain Variables"
+
+
+        ucrPnlAnnualMonthly.AddToLinkedControls({ucrReceiverMonth}, {rdoMonthly}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverMonth.SetLinkedDisplayControl(lblMonth)
 
         ucrPnlAnnualMonthly.SetParameter(New RParameter("freq", 2))
         ucrPnlAnnualMonthly.AddRadioButton(rdoAnnual, Chr(34) & "annual" & Chr(34))
@@ -405,4 +410,5 @@ Public Class dlgClimdexIndices
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverPrec.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
 End Class
