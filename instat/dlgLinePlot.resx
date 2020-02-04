@@ -133,7 +133,7 @@
     <value>58, 13</value>
   </data>
   <data name="lblXVariable.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lblXVariable.Text" xml:space="preserve">
     <value>X Variable:</value>
@@ -187,7 +187,7 @@
     <value>119, 23</value>
   </data>
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="cmdOptions.Text" xml:space="preserve">
     <value>Plot Options</value>
@@ -214,7 +214,7 @@
     <value>119, 23</value>
   </data>
   <data name="cmdLineOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="cmdLineOptions.Text" xml:space="preserve">
     <value>Line Options</value>
@@ -244,7 +244,7 @@
     <value>88, 13</value>
   </data>
   <data name="lblFactorOptional.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblFactorOptional.Text" xml:space="preserve">
     <value>Factor (Optional):</value>
@@ -274,7 +274,7 @@
     <value>39, 13</value>
   </data>
   <data name="lblGroupLine.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>7</value>
   </data>
   <data name="lblGroupLine.Text" xml:space="preserve">
     <value>Group:</value>
@@ -298,7 +298,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkValley.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrChkValley.Name" xml:space="preserve">
     <value>ucrChkValley</value>
@@ -319,7 +319,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkPeak.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrChkPeak.Name" xml:space="preserve">
     <value>ucrChkPeak</value>
@@ -349,7 +349,7 @@
     <value>135, 20</value>
   </data>
   <data name="ucrChkWithSE.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrChkWithSE.Name" xml:space="preserve">
     <value>ucrChkWithSE</value>
@@ -370,7 +370,7 @@
     <value>127, 24</value>
   </data>
   <data name="ucrChkLineofBestFit.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;ucrChkLineofBestFit.Name" xml:space="preserve">
     <value>ucrChkLineofBestFit</value>
@@ -391,7 +391,7 @@
     <value>100, 24</value>
   </data>
   <data name="ucrChkPoints.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrChkPoints.Name" xml:space="preserve">
     <value>ucrChkPoints</value>
@@ -408,11 +408,14 @@
   <data name="ucrSave.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 366</value>
   </data>
+  <data name="ucrSave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 24</value>
   </data>
   <data name="ucrSave.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrSave.Name" xml:space="preserve">
     <value>ucrSave</value>
@@ -433,7 +436,7 @@
     <value>125, 136</value>
   </data>
   <data name="ucrVariablesAsFactorForLinePlot.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.Name" xml:space="preserve">
     <value>ucrVariablesAsFactorForLinePlot</value>
@@ -478,7 +481,7 @@
     <value>410, 53</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -502,7 +505,7 @@
     <value>125, 26</value>
   </data>
   <data name="ucrFactorOptionalReceiver.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrFactorOptionalReceiver.Name" xml:space="preserve">
     <value>ucrFactorOptionalReceiver</value>
@@ -526,7 +529,7 @@
     <value>125, 26</value>
   </data>
   <data name="ucrReceiverX.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrReceiverX.Name" xml:space="preserve">
     <value>ucrReceiverX</value>
@@ -562,7 +565,7 @@
     <value>125, 20</value>
   </data>
   <data name="ucrReceiverGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrReceiverGroup.Name" xml:space="preserve">
     <value>ucrReceiverGroup</value>
