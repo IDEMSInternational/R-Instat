@@ -40,6 +40,9 @@ Partial Class dlgUseModel
         Me.cmdPredict = New System.Windows.Forms.Button()
         Me.lblModels = New System.Windows.Forms.Label()
         Me.grpExtrRemes = New System.Windows.Forms.GroupBox()
+        Me.cmdPlot = New System.Windows.Forms.Button()
+        Me.cmdSummary2 = New System.Windows.Forms.Button()
+        Me.cmdPrint1 = New System.Windows.Forms.Button()
         Me.cmdPlotFevd = New System.Windows.Forms.Button()
         Me.cmdSummaryFevd = New System.Windows.Forms.Button()
         Me.cmdPrintFevd = New System.Windows.Forms.Button()
@@ -75,9 +78,6 @@ Partial Class dlgUseModel
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
-        Me.cmdPrint1 = New System.Windows.Forms.Button()
-        Me.cmdSummary2 = New System.Windows.Forms.Button()
-        Me.cmdPlot = New System.Windows.Forms.Button()
         Me.grpGeneral.SuspendLayout()
         Me.grpPrediction.SuspendLayout()
         Me.grpExtrRemes.SuspendLayout()
@@ -305,6 +305,39 @@ Partial Class dlgUseModel
         Me.grpExtrRemes.TabStop = False
         Me.grpExtrRemes.Text = "extRemes"
         '
+        'cmdPlot
+        '
+        Me.cmdPlot.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlot.Location = New System.Drawing.Point(205, 18)
+        Me.cmdPlot.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cmdPlot.Name = "cmdPlot"
+        Me.cmdPlot.Size = New System.Drawing.Size(92, 37)
+        Me.cmdPlot.TabIndex = 162
+        Me.cmdPlot.Text = "plot"
+        Me.cmdPlot.UseVisualStyleBackColor = True
+        '
+        'cmdSummary2
+        '
+        Me.cmdSummary2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSummary2.Location = New System.Drawing.Point(95, 18)
+        Me.cmdSummary2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cmdSummary2.Name = "cmdSummary2"
+        Me.cmdSummary2.Size = New System.Drawing.Size(111, 37)
+        Me.cmdSummary2.TabIndex = 161
+        Me.cmdSummary2.Text = "summary"
+        Me.cmdSummary2.UseVisualStyleBackColor = True
+        '
+        'cmdPrint1
+        '
+        Me.cmdPrint1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPrint1.Location = New System.Drawing.Point(4, 18)
+        Me.cmdPrint1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cmdPrint1.Name = "cmdPrint1"
+        Me.cmdPrint1.Size = New System.Drawing.Size(92, 37)
+        Me.cmdPrint1.TabIndex = 160
+        Me.cmdPrint1.Text = "print"
+        Me.cmdPrint1.UseVisualStyleBackColor = True
+        '
         'cmdPlotFevd
         '
         Me.cmdPlotFevd.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -418,8 +451,8 @@ Partial Class dlgUseModel
         'cmdHelp
         '
         Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdHelp.Location = New System.Drawing.Point(613, 96)
-        Me.cmdHelp.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdHelp.Location = New System.Drawing.Point(615, 96)
+        Me.cmdHelp.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(80, 28)
         Me.cmdHelp.TabIndex = 33
@@ -440,7 +473,7 @@ Partial Class dlgUseModel
         'ucrSaveResult
         '
         Me.ucrSaveResult.Location = New System.Drawing.Point(12, 380)
-        Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(7)
         Me.ucrSaveResult.Name = "ucrSaveResult"
         Me.ucrSaveResult.Size = New System.Drawing.Size(369, 30)
         Me.ucrSaveResult.TabIndex = 35
@@ -669,7 +702,7 @@ Partial Class dlgUseModel
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(12, 416)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(547, 64)
         Me.ucrBase.TabIndex = 20
@@ -696,39 +729,6 @@ Partial Class dlgUseModel
         Me.ucrInputComboRPackage.Size = New System.Drawing.Size(163, 26)
         Me.ucrInputComboRPackage.TabIndex = 5
         '
-        'cmdPrint1
-        '
-        Me.cmdPrint1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPrint1.Location = New System.Drawing.Point(5, 18)
-        Me.cmdPrint1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.cmdPrint1.Name = "cmdPrint1"
-        Me.cmdPrint1.Size = New System.Drawing.Size(92, 37)
-        Me.cmdPrint1.TabIndex = 160
-        Me.cmdPrint1.Text = "print"
-        Me.cmdPrint1.UseVisualStyleBackColor = True
-        '
-        'cmdSummary2
-        '
-        Me.cmdSummary2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSummary2.Location = New System.Drawing.Point(96, 18)
-        Me.cmdSummary2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.cmdSummary2.Name = "cmdSummary2"
-        Me.cmdSummary2.Size = New System.Drawing.Size(92, 37)
-        Me.cmdSummary2.TabIndex = 161
-        Me.cmdSummary2.Text = "summary"
-        Me.cmdSummary2.UseVisualStyleBackColor = True
-        '
-        'cmdPlot
-        '
-        Me.cmdPlot.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPlot.Location = New System.Drawing.Point(187, 18)
-        Me.cmdPlot.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.cmdPlot.Name = "cmdPlot"
-        Me.cmdPlot.Size = New System.Drawing.Size(92, 37)
-        Me.cmdPlot.TabIndex = 162
-        Me.cmdPlot.Text = "plot"
-        Me.cmdPlot.UseVisualStyleBackColor = True
-        '
         'dlgUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -753,7 +753,7 @@ Partial Class dlgUseModel
         Me.Controls.Add(Me.ucrReceiverForTestColumn)
         Me.Controls.Add(Me.ucrInputComboRPackage)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MinimizeBox = False
         Me.Name = "dlgUseModel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
