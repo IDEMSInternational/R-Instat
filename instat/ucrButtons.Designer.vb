@@ -46,6 +46,7 @@ Partial Class ucrButtons
         Me.cmdPaste = New System.Windows.Forms.Button()
         Me.chkComment = New System.Windows.Forms.CheckBox()
         Me.txtComment = New System.Windows.Forms.TextBox()
+        Me.cmdLanguage = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cmdOk
@@ -95,10 +96,18 @@ Partial Class ucrButtons
         resources.ApplyResources(Me.txtComment, "txtComment")
         Me.txtComment.Name = "txtComment"
         '
+        'cmdLanguage
+        '
+        resources.ApplyResources(Me.cmdLanguage, "cmdLanguage")
+        Me.cmdLanguage.Name = "cmdLanguage"
+        Me.cmdLanguage.Tag = ""
+        Me.cmdLanguage.UseVisualStyleBackColor = True
+        '
         'ucrButtons
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdLanguage)
         Me.Controls.Add(Me.txtComment)
         Me.Controls.Add(Me.chkComment)
         Me.Controls.Add(Me.cmdPaste)
@@ -119,4 +128,5 @@ Partial Class ucrButtons
     Friend WithEvents cmdPaste As Button
     Friend WithEvents chkComment As CheckBox
     Friend WithEvents txtComment As TextBox
+    Friend WithEvents cmdLanguage As Button
 End Class

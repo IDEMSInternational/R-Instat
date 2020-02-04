@@ -84,6 +84,32 @@ Partial Class dlgDuplicateColumns
         resources.ApplyResources(Me.lblNewColumnName, "lblNewColumnName")
         Me.lblNewColumnName.Name = "lblNewColumnName"
         '
+
+        'ucrInputColumnName
+        '
+        Me.ucrInputColumnName.AddQuotesIfUnrecognised = True
+        Me.ucrInputColumnName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputColumnName, "ucrInputColumnName")
+        Me.ucrInputColumnName.Name = "ucrInputColumnName"
+        '
+        'ucrReceiverDuplicateColumns
+        '
+        Me.ucrReceiverDuplicateColumns.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDuplicateColumns, "ucrReceiverDuplicateColumns")
+        Me.ucrReceiverDuplicateColumns.Name = "ucrReceiverDuplicateColumns"
+        Me.ucrReceiverDuplicateColumns.Selector = Nothing
+        Me.ucrReceiverDuplicateColumns.strNcFilePath = ""
+        Me.ucrReceiverDuplicateColumns.ucrSelector = Nothing
+        '
+        'ucrSelectorForDuplicateColumn
+        '
+        Me.ucrSelectorForDuplicateColumn.bDropUnusedFilterLevels = False
+        Me.ucrSelectorForDuplicateColumn.bShowHiddenColumns = False
+        Me.ucrSelectorForDuplicateColumn.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorForDuplicateColumn, "ucrSelectorForDuplicateColumn")
+        Me.ucrSelectorForDuplicateColumn.Name = "ucrSelectorForDuplicateColumn"
+        '
+
         'grpDuplicatedColumn
         '
         Me.grpDuplicatedColumn.Controls.Add(Me.rdoBefore)

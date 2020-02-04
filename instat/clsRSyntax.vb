@@ -200,6 +200,7 @@ Public Class RSyntax
         Dim lstScripts As New List(Of String)
 
         For Each clsTempCode In lstCodes
+            strScript = ""
             strTemp = clsTempCode.ToScript(strScript)
             'Sometimes the output of the R-command we deal with should not be part of the script... That's only the case when this output has already been assigned.
             If clsTempCode.bExcludeAssignedFunctionOutput AndAlso clsTempCode.bIsAssigned Then
@@ -410,7 +411,7 @@ Public Class RSyntax
     End Function
 
     Public Function ContainsCode(clsRCode As RCodeStructure) As Boolean
-        Return (clsBaseFunction IsNot Nothing AndAlso clsBaseFunction.Equals(clsRCode)) OrElse (clsBaseOperator.Equals(clsRCode) AndAlso clsBaseOperator.Equals(clsRCode)) OrElse BeforeCodesContain(clsRCode) OrElse AfterCodesContain(clsRCode)
+        Return (clsBaseFunction IsNot Nothing AndAlso clsBaseFunction.Equals(clsRCode)) OrElse (clsBaseOperator IsNot Nothing AndAlso clsBaseOperator.Equals(clsRCode) AndAlso clsBaseOperator.Equals(clsRCode)) OrElse BeforeCodesContain(clsRCode) OrElse AfterCodesContain(clsRCode)
     End Function
 
     Public Function ContainsFunctionName(strFunctionName As String) As Boolean
@@ -466,9 +467,9 @@ Public Class RSyntax
     Public Sub ClearCodes()
         lstBeforeCodes = New List(Of RCodeStructure)
         lstAfterCodes = New List(Of RCodeStructure)
-        clsBaseFunction = Nothing
-        clsBaseOperator = Nothing
-        clsBaseCommandString = Nothing
+        clsBaseFunction = New RFunction
+        clsBaseOperator = New ROperator
+        clsBaseCommandString = New RCodeStructure
         strCommandString = ""
         bUseBaseFunction = False
         bUseBaseOperator = False

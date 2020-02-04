@@ -34,11 +34,17 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblRainDays = New System.Windows.Forms.Label()
         Me.lblSkewnessWeight = New System.Windows.Forms.Label()
         Me.grpLogicalCalculatedColumns = New System.Windows.Forms.GroupBox()
+        Me.ucrChkLogicalColumns = New instat.ucrCheck()
+        Me.ucrChkCalculatedColumns = New instat.ucrCheck()
         Me.lblCoeff = New System.Windows.Forms.Label()
+        Me.cmdOmitMonths = New System.Windows.Forms.Button()
+        Me.lblThreshold = New System.Windows.Forms.Label()
+        Me.lblMissingThreshold = New System.Windows.Forms.Label()
+        Me.lblThresholdmm = New System.Windows.Forms.Label()
+        Me.ucrInputThreshold = New instat.ucrInputTextBox()
+        Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
         Me.ucrNudCoeff = New instat.ucrNud()
         Me.ucrChkOmitZero = New instat.ucrCheck()
-        Me.ucrChkCalculatedColumns = New instat.ucrCheck()
-        Me.ucrChkLogicalColumns = New instat.ucrCheck()
         Me.ucrNudSkewnessWeight = New instat.ucrNud()
         Me.ucrNudWetDays = New instat.ucrNud()
         Me.ucrNudSame = New instat.ucrNud()
@@ -56,6 +62,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorRain = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.grpLogicalCalculatedColumns.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblStation
@@ -110,14 +117,65 @@ Partial Class dlgClimaticCheckDataRain
         '
         'grpLogicalCalculatedColumns
         '
+        Me.grpLogicalCalculatedColumns.Controls.Add(Me.ucrChkLogicalColumns)
+        Me.grpLogicalCalculatedColumns.Controls.Add(Me.ucrChkCalculatedColumns)
         resources.ApplyResources(Me.grpLogicalCalculatedColumns, "grpLogicalCalculatedColumns")
         Me.grpLogicalCalculatedColumns.Name = "grpLogicalCalculatedColumns"
         Me.grpLogicalCalculatedColumns.TabStop = False
+        '
+        'ucrChkLogicalColumns
+        '
+        Me.ucrChkLogicalColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkLogicalColumns, "ucrChkLogicalColumns")
+        Me.ucrChkLogicalColumns.Name = "ucrChkLogicalColumns"
+        '
+        'ucrChkCalculatedColumns
+        '
+        Me.ucrChkCalculatedColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkCalculatedColumns, "ucrChkCalculatedColumns")
+        Me.ucrChkCalculatedColumns.Name = "ucrChkCalculatedColumns"
         '
         'lblCoeff
         '
         resources.ApplyResources(Me.lblCoeff, "lblCoeff")
         Me.lblCoeff.Name = "lblCoeff"
+        '
+        'cmdOmitMonths
+        '
+        resources.ApplyResources(Me.cmdOmitMonths, "cmdOmitMonths")
+        Me.cmdOmitMonths.Name = "cmdOmitMonths"
+        Me.cmdOmitMonths.UseVisualStyleBackColor = True
+        '
+        'lblThreshold
+        '
+        resources.ApplyResources(Me.lblThreshold, "lblThreshold")
+        Me.lblThreshold.Name = "lblThreshold"
+        '
+        'lblMissingThreshold
+        '
+        resources.ApplyResources(Me.lblMissingThreshold, "lblMissingThreshold")
+        Me.lblMissingThreshold.Name = "lblMissingThreshold"
+        '
+        'lblThresholdmm
+        '
+        resources.ApplyResources(Me.lblThresholdmm, "lblThresholdmm")
+        Me.lblThresholdmm.Name = "lblThresholdmm"
+        '
+        'ucrInputThreshold
+        '
+        Me.ucrInputThreshold.AddQuotesIfUnrecognised = True
+        Me.ucrInputThreshold.IsMultiline = False
+        Me.ucrInputThreshold.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputThreshold, "ucrInputThreshold")
+        Me.ucrInputThreshold.Name = "ucrInputThreshold"
+        '
+        'ucrInputThresholdValue
+        '
+        Me.ucrInputThresholdValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputThresholdValue.IsMultiline = False
+        Me.ucrInputThresholdValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputThresholdValue, "ucrInputThresholdValue")
+        Me.ucrInputThresholdValue.Name = "ucrInputThresholdValue"
         '
         'ucrNudCoeff
         '
@@ -134,18 +192,6 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrChkOmitZero.Checked = False
         resources.ApplyResources(Me.ucrChkOmitZero, "ucrChkOmitZero")
         Me.ucrChkOmitZero.Name = "ucrChkOmitZero"
-        '
-        'ucrChkCalculatedColumns
-        '
-        Me.ucrChkCalculatedColumns.Checked = False
-        resources.ApplyResources(Me.ucrChkCalculatedColumns, "ucrChkCalculatedColumns")
-        Me.ucrChkCalculatedColumns.Name = "ucrChkCalculatedColumns"
-        '
-        'ucrChkLogicalColumns
-        '
-        Me.ucrChkLogicalColumns.Checked = False
-        resources.ApplyResources(Me.ucrChkLogicalColumns, "ucrChkLogicalColumns")
-        Me.ucrChkLogicalColumns.Name = "ucrChkLogicalColumns"
         '
         'ucrNudSkewnessWeight
         '
@@ -288,11 +334,15 @@ Partial Class dlgClimaticCheckDataRain
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblThresholdmm)
+        Me.Controls.Add(Me.ucrInputThreshold)
+        Me.Controls.Add(Me.lblMissingThreshold)
+        Me.Controls.Add(Me.lblThreshold)
+        Me.Controls.Add(Me.ucrInputThresholdValue)
+        Me.Controls.Add(Me.cmdOmitMonths)
         Me.Controls.Add(Me.lblCoeff)
         Me.Controls.Add(Me.ucrNudCoeff)
         Me.Controls.Add(Me.ucrChkOmitZero)
-        Me.Controls.Add(Me.ucrChkCalculatedColumns)
-        Me.Controls.Add(Me.ucrChkLogicalColumns)
         Me.Controls.Add(Me.lblSkewnessWeight)
         Me.Controls.Add(Me.ucrNudSkewnessWeight)
         Me.Controls.Add(Me.lblRainDays)
@@ -325,6 +375,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgClimaticCheckDataRain"
+        Me.grpLogicalCalculatedColumns.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -363,4 +414,10 @@ Partial Class dlgClimaticCheckDataRain
     Friend WithEvents ucrChkOmitZero As ucrCheck
     Friend WithEvents lblCoeff As Label
     Friend WithEvents ucrNudCoeff As ucrNud
+    Friend WithEvents cmdOmitMonths As Button
+    Friend WithEvents ucrInputThresholdValue As ucrInputTextBox
+    Friend WithEvents lblThreshold As Label
+    Friend WithEvents lblMissingThreshold As Label
+    Friend WithEvents ucrInputThreshold As ucrInputTextBox
+    Friend WithEvents lblThresholdmm As Label
 End Class

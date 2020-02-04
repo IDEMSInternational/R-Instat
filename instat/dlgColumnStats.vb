@@ -20,7 +20,7 @@ Public Class dlgColumnStats
     Private bReset As Boolean = True
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
-    Private clsDefaultFunction As New RFunction
+    Private clsDefaultFunction, clsConcFunction As New RFunction
     Public strDefaultDataFrame As String = ""
     Public strDefaultVariables() As String
     Public strDefaultFactors() As String
@@ -56,8 +56,8 @@ Public Class dlgColumnStats
 
         ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
         ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
-        ucrReceiverByFactor.SetIncludedDataTypes({"factor"})
-        ucrReceiverByFactor.strSelectorHeading = "Factors"
+        ucrReceiverByFactor.SetExcludedDataTypes({"numeric"})
+        ucrReceiverByFactor.strSelectorHeading = "Non-numeric(s)"
         ucrReceiverByFactor.SetParameterIsString()
 
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
@@ -92,10 +92,13 @@ Public Class dlgColumnStats
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
         clsSummariesList = New RFunction
+        clsConcFunction = New RFunction
 
         ucrSelectorForColumnStatistics.Reset()
         sdgProportionsPercentages.ucrSelectorProportionsPercentiles.Reset()
         ucrReceiverSelectedVariables.SetMeAsReceiver()
+
+        clsConcFunction.SetRCommand("c")
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
@@ -136,7 +139,7 @@ Public Class dlgColumnStats
     End Sub
 
     Public Sub TestOKEnabled()
-        If ((ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0) Then
+        If ((ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0) AndAlso sdgSummaries.bOkEnabled Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -150,7 +153,7 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsSummariesList, clsDefaultFunction, ucrSelectorForColumnStatistics, bResetSubdialog)
+        sdgSummaries.SetRFunction(clsSummariesList, clsDefaultFunction, clsConcFunction, ucrSelectorForColumnStatistics, bResetSubdialog)
         sdgSummaries.ShowDialog()
         bResetSubdialog = False
         TestOKEnabled()
@@ -161,6 +164,14 @@ Public Class dlgColumnStats
         sdgProportionsPercentages.ShowDialog()
         bResetSubdialog = False
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
+        If clsSummariesList.ContainsParameter("summary_cor") OrElse clsSummariesList.ContainsParameter("summary_cov") Then
+            clsDefaultFunction.AddParameter("use", Chr(34) & "'na.or.complete'" & Chr(34))
+        Else
+            clsDefaultFunction.RemoveParameterByName("use")
+        End If
     End Sub
 
     Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
