@@ -44,7 +44,7 @@ Partial Class ucrCalculator
         Me.chkSaveResultInto = New System.Windows.Forms.CheckBox()
         Me.cmdTry = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
-        Me.chkShowArguments = New System.Windows.Forms.CheckBox()
+        Me.chkShowParameters = New System.Windows.Forms.CheckBox()
         Me.grpBasic = New System.Windows.Forms.GroupBox()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdComma = New System.Windows.Forms.Button()
@@ -412,11 +412,11 @@ Partial Class ucrCalculator
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
-        'chkShowArguments
+        'chkShowParameters
         '
-        resources.ApplyResources(Me.chkShowArguments, "chkShowArguments")
-        Me.chkShowArguments.Name = "chkShowArguments"
-        Me.chkShowArguments.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.chkShowParameters, "chkShowParameters")
+        Me.chkShowParameters.Name = "chkShowParameters"
+        Me.chkShowParameters.UseVisualStyleBackColor = True
         '
         'grpBasic
         '
@@ -2729,7 +2729,7 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.cmdHelp)
-        Me.Controls.Add(Me.chkShowArguments)
+        Me.Controls.Add(Me.chkShowParameters)
         Me.Controls.Add(Me.ucrInputCalOptions)
         Me.Controls.Add(Me.grpBasic)
         Me.Controls.Add(Me.ucrSaveResultInto)
@@ -2766,7 +2766,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdTry As Button
     Friend WithEvents ucrSelectorForCalculations As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdHelp As Button
-    Friend WithEvents chkShowArguments As CheckBox
+    Friend WithEvents chkShowParameters As CheckBox
     Friend WithEvents ucrInputCalOptions As ucrInputComboBox
     Friend WithEvents grpBasic As GroupBox
     Friend WithEvents cmdBrackets As Button
