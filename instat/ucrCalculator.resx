@@ -3139,13 +3139,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdCor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 196</value>
+    <value>87, 196</value>
   </data>
   <data name="cmdCor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="cmdCor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 37</value>
+    <value>75, 37</value>
   </data>
   <data name="cmdCor.TabIndex" type="System.Int32, mscorlib">
     <value>175</value>
@@ -3841,7 +3841,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="grpSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 265</value>
+    <value>388, 237</value>
   </data>
   <data name="grpSummary.TabIndex" type="System.Int32, mscorlib">
     <value>185</value>
