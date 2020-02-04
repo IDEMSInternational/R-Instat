@@ -1078,13 +1078,13 @@
     <value>0</value>
   </data>
   <data name="ucrSaveLeverageColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 91</value>
+    <value>4, 91</value>
   </data>
   <data name="ucrSaveLeverageColumnName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveLeverageColumnName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 24</value>
+    <value>322, 24</value>
   </data>
   <data name="ucrSaveLeverageColumnName.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1102,13 +1102,13 @@
     <value>0</value>
   </data>
   <data name="ucrSaveStdResidualsColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 64</value>
+    <value>4, 64</value>
   </data>
   <data name="ucrSaveStdResidualsColumnName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveStdResidualsColumnName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 24</value>
+    <value>322, 24</value>
   </data>
   <data name="ucrSaveStdResidualsColumnName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1126,13 +1126,13 @@
     <value>1</value>
   </data>
   <data name="ucrSaveResidualsColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 37</value>
+    <value>4, 37</value>
   </data>
   <data name="ucrSaveResidualsColumnName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveResidualsColumnName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 24</value>
+    <value>322, 24</value>
   </data>
   <data name="ucrSaveResidualsColumnName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1150,13 +1150,13 @@
     <value>2</value>
   </data>
   <data name="ucrSaveFittedColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
+    <value>4, 10</value>
   </data>
   <data name="ucrSaveFittedColumnName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveFittedColumnName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 24</value>
+    <value>322, 24</value>
   </data>
   <data name="ucrSaveFittedColumnName.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1180,7 +1180,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 316</value>
+    <value>333, 316</value>
   </data>
   <data name="tbSave.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1204,7 +1204,7 @@
     <value>2, 3</value>
   </data>
   <data name="tbpRegOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 342</value>
+    <value>341, 342</value>
   </data>
   <data name="tbpRegOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1249,7 +1249,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>322, 378</value>
+    <value>355, 378</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
