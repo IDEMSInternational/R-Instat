@@ -110,6 +110,8 @@ Partial Class ucrCalculator
         Me.cmdLead = New System.Windows.Forms.Button()
         Me.cmdLag = New System.Windows.Forms.Button()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.cmdKurtosis = New System.Windows.Forms.Button()
+        Me.cmdMode1 = New System.Windows.Forms.Button()
         Me.cmdMode = New System.Windows.Forms.Button()
         Me.cmdFirst = New System.Windows.Forms.Button()
         Me.cmdLast = New System.Windows.Forms.Button()
@@ -371,8 +373,6 @@ Partial Class ucrCalculator
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdMode1 = New System.Windows.Forms.Button()
-        Me.cmdKurtosis = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -897,6 +897,18 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpSummary, "grpSummary")
         Me.grpSummary.Name = "grpSummary"
         Me.grpSummary.TabStop = False
+        '
+        'cmdKurtosis
+        '
+        resources.ApplyResources(Me.cmdKurtosis, "cmdKurtosis")
+        Me.cmdKurtosis.Name = "cmdKurtosis"
+        Me.cmdKurtosis.UseVisualStyleBackColor = True
+        '
+        'cmdMode1
+        '
+        resources.ApplyResources(Me.cmdMode1, "cmdMode1")
+        Me.cmdMode1.Name = "cmdMode1"
+        Me.cmdMode1.UseVisualStyleBackColor = True
         '
         'cmdMode
         '
@@ -2373,7 +2385,6 @@ Partial Class ucrCalculator
         'grpFactor
         '
         Me.grpFactor.Controls.Add(Me.cmdShuffle)
-        Me.grpFactor.Controls.Add(Me.grpCircular)
         Me.grpFactor.Controls.Add(Me.cmdShift)
         Me.grpFactor.Controls.Add(Me.cmdReverse)
         Me.grpFactor.Controls.Add(Me.cmdReorder)
@@ -2701,23 +2712,12 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'cmdMode1
-        '
-        resources.ApplyResources(Me.cmdMode1, "cmdMode1")
-        Me.cmdMode1.Name = "cmdMode1"
-        Me.cmdMode1.UseVisualStyleBackColor = True
-        '
-        'cmdKurtosis
-        '
-        resources.ApplyResources(Me.cmdKurtosis, "cmdKurtosis")
-        Me.cmdKurtosis.Name = "cmdKurtosis"
-        Me.cmdKurtosis.UseVisualStyleBackColor = True
-        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpFactor)
+        Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpLogical)
