@@ -573,6 +573,12 @@ Public Class dlgHypothesisTestsCalculator
                 grpStats1.Visible = False
                 grpStats2.Visible = False
                 grpAgricolae.Visible = True
+            Case "Verify"
+                strPackageName = "Verification"
+                grpStats1.Visible = False
+                grpStats2.Visible = False
+                grpAgricolae.Visible = False
+                grpVerify.Visible = True
         End Select
     End Sub
 
