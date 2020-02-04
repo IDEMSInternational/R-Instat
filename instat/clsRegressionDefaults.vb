@@ -108,6 +108,7 @@ Public Class clsRegressionDefaults
 
             lstPlotTypes = New List(Of String)({"residplot", "qqplot", "scaleloc", "cooksdist", "residlev", "cookslev"})
             clsPlot.SetRCommand("plot")
+            clsPlot.iCallType = 3
             clsPlot.bExcludeAssignedFunctionOutput = False
             For i As Integer = 1 To 6
                 clsPlot.AddParameter("which", i, iPosition:=1)

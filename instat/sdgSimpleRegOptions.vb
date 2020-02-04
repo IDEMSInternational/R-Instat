@@ -24,7 +24,8 @@ Public Class sdgSimpleRegOptions
     Public clsVisReg, clsRaesFunction, clsRStat_smooth, clsR_ribbon, clsRaes_ribbon As New RFunction
     'Public clsWhichFunction As RFunction
     Public bRCodeSet As Boolean = True
-    Private dctPlot As New Dictionary(Of String, RFunction)
+    Private clsResidplotFunction, clsQQplotFunction, clsScaleLocationFunction, clsCooksDistanceFunction, clsResidualsLeverageFunction, clsCooksDistanceLeverage As New RFunction
+    'Private dctPlot As New Dictionary(Of String, RFunction)
 
     'Display tab functions
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
@@ -101,20 +102,6 @@ Public Class sdgSimpleRegOptions
         ucrChkCooksDistance.SetText("Cook's Distance")
         ucrChkResidualsLeverage.SetText("Residuals v Leverage")
         ucrChkCooksDistanceLeverage.SetText("Cook's Distance v Leverage")
-
-        ucrChkResidualsFitted.AddParameterPresentCondition(True, "1")
-        ucrChkResidualsFitted.AddParameterPresentCondition(False, "1", False)
-        ucrChkQQ.AddParameterPresentCondition(True, "2")
-        ucrChkQQ.AddParameterPresentCondition(False, "2", False)
-        ucrChkScaleLocation.AddParameterPresentCondition(True, "3")
-        ucrChkScaleLocation.AddParameterPresentCondition(False, "3", False)
-        ucrChkCooksDistance.AddParameterPresentCondition(True, "4")
-        ucrChkCooksDistance.AddParameterPresentCondition(False, "4", False)
-        ucrChkResidualsLeverage.AddParameterPresentCondition(True, "5")
-        ucrChkResidualsLeverage.AddParameterPresentCondition(False, "5", False)
-        ucrChkCooksDistanceLeverage.AddParameterPresentCondition(True, "6")
-        ucrChkCooksDistanceLeverage.AddParameterPresentCondition(False, "6", False)
-
 
         ''type
         ucrPnlPlotType.SetParameter(New RParameter("type"))
@@ -208,7 +195,12 @@ Public Class sdgSimpleRegOptions
         'Graph functions
         clsVisReg = clsNewVisReg
 
-        dctPlot = dctNewPlot
+        clsResidplotFunction = dctNewPlot.Values(0)
+        clsQQplotFunction = dctNewPlot.Values(1)
+        clsScaleLocationFunction = dctNewPlot.Values(2)
+        clsCooksDistanceFunction = dctNewPlot.Values(3)
+        clsResidualsLeverageFunction = dctNewPlot.Values(4)
+        clsCooksDistanceLeverage = dctNewPlot.Values(5)
 
         ucrAvailableDataframe = ucrNewAvailableDatafrane
 
@@ -233,7 +225,43 @@ Public Class sdgSimpleRegOptions
         ucrChkPartial.SetRCode(clsVisReg, bReset)
         ucrChkConfIntervalband.SetRCode(clsVisReg, bReset)
         ucrPnlPartial12.SetRCode(clsVisReg, bReset)
-        'ucrChkResidualsFitted.SetRCode(dctNewPlot.Values(0), bReset)
+
+        Dim clsTempFunc As RFunction
+        Dim clsTempParam As RParameter
+        Dim lstPlots As New List(Of Integer)
+
+        For Each clsRCode As RCodeStructure In clsRSyntax.lstAfterCodes
+            clsTempFunc = TryCast(clsRCode, RFunction)
+            If clsTempFunc IsNot Nothing AndAlso clsTempFunc.strRCommand = "plot" AndAlso clsTempFunc.ContainsParameter("which") Then
+                clsTempParam = clsTempFunc.GetParameter("which")
+                Select Case clsTempParam.strArgumentValue
+                    Case 1
+                        clsResidplotFunction = clsTempFunc
+                        lstPlots.Add(1)
+                    Case 2
+                        clsQQplotFunction = clsTempFunc
+                        lstPlots.Add(2)
+                    Case 3
+                        clsScaleLocationFunction = clsTempFunc
+                        lstPlots.Add(3)
+                    Case 4
+                        clsCooksDistanceFunction = clsTempFunc
+                        lstPlots.Add(4)
+                    Case 5
+                        clsResidualsLeverageFunction = clsTempFunc
+                        lstPlots.Add(5)
+                    Case 6
+                        clsCooksDistanceLeverage = clsTempFunc
+                        lstPlots.Add(6)
+                End Select
+            End If
+        Next
+        ucrChkResidualsFitted.Checked = (lstPlots.Contains(1))
+        ucrChkQQ.Checked = (lstPlots.Contains(2))
+        ucrChkScaleLocation.Checked = (lstPlots.Contains(3))
+        ucrChkCooksDistance.Checked = (lstPlots.Contains(4))
+        ucrChkResidualsLeverage.Checked = (lstPlots.Contains(5))
+        ucrChkCooksDistanceLeverage.Checked = (lstPlots.Contains(6))
 
         'Saving options
         ucrSaveFittedColumnName.SetRCode(clsFittedValuesFunction, bReset, bCloneIfNeeded:=True)
@@ -369,55 +397,49 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrChkResidualsFitted_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkResidualsFitted.ControlValueChanged
         If ucrChkResidualsFitted.Checked Then
-            clsRSyntax.AddToAfterCodes(dctPlot.Values(0), iPosition:=0)
-            dctPlot.Values(0).iCallType = 3
+            clsRSyntax.AddToAfterCodes(clsResidplotFunction, iPosition:=0)
         Else
-            clsRSyntax.RemoveFromAfterCodes(dctPlot.Values(0))
+            clsRSyntax.RemoveFromAfterCodes(clsResidplotFunction)
         End If
     End Sub
 
     Private Sub ucrChkQQ_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkQQ.ControlValueChanged
         If ucrChkQQ.Checked Then
-            clsRSyntax.AddToAfterCodes(dctPlot.Values(1), iPosition:=1)
-            dctPlot.Values(1).iCallType = 3
+            clsRSyntax.AddToAfterCodes(clsQQplotFunction, iPosition:=1)
         Else
-            clsRSyntax.RemoveFromAfterCodes(dctPlot.Values(1))
+            clsRSyntax.RemoveFromAfterCodes(clsQQplotFunction)
         End If
     End Sub
 
     Private Sub ucrChkScaleLocation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkScaleLocation.ControlValueChanged
         If ucrChkScaleLocation.Checked Then
-            clsRSyntax.AddToAfterCodes(dctPlot.Values(2), iPosition:=2)
-            dctPlot.Values(2).iCallType = 3
+            clsRSyntax.AddToAfterCodes(clsScaleLocationFunction, iPosition:=2)
         Else
-            clsRSyntax.RemoveFromAfterCodes(dctPlot.Values(2))
+            clsRSyntax.RemoveFromAfterCodes(clsScaleLocationFunction)
         End If
     End Sub
 
     Private Sub ucrChkCooksDistance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCooksDistance.ControlValueChanged
         If ucrChkCooksDistance.Checked Then
-            clsRSyntax.AddToAfterCodes(dctPlot.Values(3), iPosition:=3)
-            dctPlot.Values(3).iCallType = 3
+            clsRSyntax.AddToAfterCodes(clsCooksDistanceFunction, iPosition:=3)
         Else
-            clsRSyntax.RemoveFromAfterCodes(dctPlot.Values(3))
+            clsRSyntax.RemoveFromAfterCodes(clsCooksDistanceFunction)
         End If
     End Sub
 
     Private Sub ucrChkResidualsLeverage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkResidualsLeverage.ControlValueChanged
         If ucrChkResidualsLeverage.Checked Then
-            clsRSyntax.AddToAfterCodes(dctPlot.Values(4), iPosition:=4)
-            dctPlot.Values(4).iCallType = 3
+            clsRSyntax.AddToAfterCodes(clsResidualsLeverageFunction, iPosition:=4)
         Else
-            clsRSyntax.RemoveFromAfterCodes(dctPlot.Values(4))
+            clsRSyntax.RemoveFromAfterCodes(clsResidualsLeverageFunction)
         End If
     End Sub
 
     Private Sub ucrChkCooksDistanceLeverage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCooksDistanceLeverage.ControlValueChanged
         If ucrChkCooksDistanceLeverage.Checked Then
-            clsRSyntax.AddToAfterCodes(dctPlot.Values(5), iPosition:=5)
-            dctPlot.Values(5).iCallType = 3
+            clsRSyntax.AddToAfterCodes(clsCooksDistanceLeverage, iPosition:=5)
         Else
-            clsRSyntax.RemoveFromAfterCodes(dctPlot.Values(5))
+            clsRSyntax.RemoveFromAfterCodes(clsCooksDistanceLeverage)
         End If
     End Sub
 End Class
