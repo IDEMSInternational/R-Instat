@@ -371,6 +371,7 @@ Partial Class ucrCalculator
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.cmdMode1 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -864,6 +865,7 @@ Partial Class ucrCalculator
         '
         'grpSummary
         '
+        Me.grpSummary.Controls.Add(Me.cmdMode1)
         Me.grpSummary.Controls.Add(Me.cmdMode)
         Me.grpSummary.Controls.Add(Me.cmdFirst)
         Me.grpSummary.Controls.Add(Me.cmdLast)
@@ -2253,6 +2255,7 @@ Partial Class ucrCalculator
         Me.grpCircular.Controls.Add(Me.cmdCircular)
         Me.grpCircular.Controls.Add(Me.cmdCircQuantile)
         Me.grpCircular.Controls.Add(Me.cmdCircMax)
+        Me.grpCircular.Controls.Add(Me.grpLogical)
         Me.grpCircular.Controls.Add(Me.cmdA1)
         Me.grpCircular.Controls.Add(Me.cmdAngVar)
         Me.grpCircular.Controls.Add(Me.cmdCircRho)
@@ -2371,6 +2374,7 @@ Partial Class ucrCalculator
         Me.grpFactor.Controls.Add(Me.cmdShuffle)
         Me.grpFactor.Controls.Add(Me.cmdShift)
         Me.grpFactor.Controls.Add(Me.cmdReverse)
+        Me.grpFactor.Controls.Add(Me.grpMaths)
         Me.grpFactor.Controls.Add(Me.cmdReorder)
         Me.grpFactor.Controls.Add(Me.cmdRelevel)
         Me.grpFactor.Controls.Add(Me.cmdRecode)
@@ -2696,6 +2700,12 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'cmdMode1
+        '
+        resources.ApplyResources(Me.cmdMode1, "cmdMode1")
+        Me.cmdMode1.Name = "cmdMode1"
+        Me.cmdMode1.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
@@ -2703,8 +2713,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpMaths)
-        Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpProbabilty)
@@ -2738,6 +2746,7 @@ Partial Class ucrCalculator
         Me.grpModifier.ResumeLayout(False)
         Me.grpSymbols.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -3075,4 +3084,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdZeroOrOne As Button
     Friend WithEvents cmdNumbers As Button
     Friend WithEvents cmdOr3 As Button
+    Friend WithEvents cmdMode1 As Button
 End Class
