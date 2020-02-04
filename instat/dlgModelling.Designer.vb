@@ -50,7 +50,6 @@ Partial Class dlgModelling
         Me.cmdMinus = New System.Windows.Forms.Button()
         Me.grpFirstCalc = New System.Windows.Forms.GroupBox()
         Me.cmdTilda = New System.Windows.Forms.Button()
-        Me.cmdTry = New System.Windows.Forms.Button()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.cmdPredict = New System.Windows.Forms.Button()
         Me.grpextRemes = New System.Windows.Forms.GroupBox()
@@ -72,9 +71,9 @@ Partial Class dlgModelling
         Me.cmdlda = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.lblRpackage = New System.Windows.Forms.Label()
+        Me.ucrTryModelling = New instat.ucrTry()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrSaveResult = New instat.ucrSave()
-        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrSelectorModelling = New instat.ucrSelectorByDataFrameAddRemove()
@@ -271,12 +270,6 @@ Partial Class dlgModelling
         Me.cmdTilda.Name = "cmdTilda"
         Me.cmdTilda.UseVisualStyleBackColor = True
         '
-        'cmdTry
-        '
-        resources.ApplyResources(Me.cmdTry, "cmdTry")
-        Me.cmdTry.Name = "cmdTry"
-        Me.cmdTry.UseVisualStyleBackColor = True
-        '
         'cmdDisplayOptions
         '
         resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
@@ -416,6 +409,11 @@ Partial Class dlgModelling
         resources.ApplyResources(Me.lblRpackage, "lblRpackage")
         Me.lblRpackage.Name = "lblRpackage"
         '
+        'ucrTryModelling
+        '
+        resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
+        Me.ucrTryModelling.Name = "ucrTryModelling"
+        '
         'ucrChkIncludeArguments
         '
         Me.ucrChkIncludeArguments.Checked = False
@@ -426,14 +424,6 @@ Partial Class dlgModelling
         '
         resources.ApplyResources(Me.ucrSaveResult, "ucrSaveResult")
         Me.ucrSaveResult.Name = "ucrSaveResult"
-        '
-        'ucrInputTryMessage
-        '
-        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
-        Me.ucrInputTryMessage.IsMultiline = False
-        Me.ucrInputTryMessage.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputTryMessage, "ucrInputTryMessage")
-        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
         '
         'ucrInputComboRPackage
         '
@@ -468,6 +458,7 @@ Partial Class dlgModelling
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.grplme4)
         Me.Controls.Add(Me.grpMASS)
         Me.Controls.Add(Me.grpextRemes)
@@ -478,8 +469,6 @@ Partial Class dlgModelling
         Me.Controls.Add(Me.cmdPredict)
         Me.Controls.Add(Me.cmdClear)
         Me.Controls.Add(Me.ucrSaveResult)
-        Me.Controls.Add(Me.ucrInputTryMessage)
-        Me.Controls.Add(Me.cmdTry)
         Me.Controls.Add(Me.grpFirstCalc)
         Me.Controls.Add(Me.ucrInputComboRPackage)
         Me.Controls.Add(Me.lblModel)
@@ -529,8 +518,6 @@ Partial Class dlgModelling
     Friend WithEvents cmdSquareBrackets As Button
     Friend WithEvents cmdMinus As Button
     Friend WithEvents ucrSaveResult As ucrSave
-    Friend WithEvents ucrInputTryMessage As ucrInputTextBox
-    Friend WithEvents cmdTry As Button
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents cmdPredict As Button
     Friend WithEvents grpextRemes As GroupBox
@@ -557,4 +544,5 @@ Partial Class dlgModelling
     Friend WithEvents cmdlqs As Button
     Friend WithEvents cmdmca As Button
     Friend WithEvents cmdqda As Button
+    Friend WithEvents ucrTryModelling As ucrTry
 End Class
