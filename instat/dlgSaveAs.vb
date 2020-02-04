@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.IO
 Imports instat.Translations
 Public Class dlgSaveAs
     Private bFirstLoad As Boolean = True
@@ -90,15 +91,18 @@ Public Class dlgSaveAs
     End Sub
 
     Private Sub SelectFileToSave()
+        Dim strCurrentFileName As String = ucrInputFilePath.GetText()
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save Data File"
             dlgSave.Filter = "RDS Data file (*.RDS)|*.RDS"
-            If ucrInputFilePath.GetText() <> "" Then
-                dlgSave.InitialDirectory = ucrInputFilePath.GetText().Replace("/", "\")
+            If Not String.IsNullOrEmpty(strCurrentFileName) Then
+                strCurrentFileName = strCurrentFileName.Replace("/", "\")
+                dlgSave.FileName = Path.GetFileName(strCurrentFileName)
+                dlgSave.InitialDirectory = Path.GetDirectoryName(strCurrentFileName)
             Else
                 dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
             End If
-            If dlgSave.ShowDialog() = DialogResult.OK Then
+            If DialogResult.OK = dlgSave.ShowDialog() Then
                 ucrInputFilePath.SetName(dlgSave.FileName.Replace("\", "/"))
             End If
             TestOKEnabled()
