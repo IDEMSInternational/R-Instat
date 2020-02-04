@@ -1412,7 +1412,7 @@ Public Class ucrCalculator
         If chkShowArguments.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor(x= , y= , use = ""everything"", method = c(""pearson"", ""kendall"", ""spearman""))", 73)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor(x = , y = )", 7)
         End If
     End Sub
 
