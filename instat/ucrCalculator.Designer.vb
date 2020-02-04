@@ -372,6 +372,7 @@ Partial Class ucrCalculator
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.cmdMode1 = New System.Windows.Forms.Button()
+        Me.cmdKurtosis = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -865,6 +866,7 @@ Partial Class ucrCalculator
         '
         'grpSummary
         '
+        Me.grpSummary.Controls.Add(Me.cmdKurtosis)
         Me.grpSummary.Controls.Add(Me.cmdMode1)
         Me.grpSummary.Controls.Add(Me.cmdMode)
         Me.grpSummary.Controls.Add(Me.cmdFirst)
@@ -2706,6 +2708,12 @@ Partial Class ucrCalculator
         Me.cmdMode1.Name = "cmdMode1"
         Me.cmdMode1.UseVisualStyleBackColor = True
         '
+        'cmdKurtosis
+        '
+        resources.ApplyResources(Me.cmdKurtosis, "cmdKurtosis")
+        Me.cmdKurtosis.Name = "cmdKurtosis"
+        Me.cmdKurtosis.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
@@ -3085,4 +3093,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdNumbers As Button
     Friend WithEvents cmdOr3 As Button
     Friend WithEvents cmdMode1 As Button
+    Friend WithEvents cmdKurtosis As Button
 End Class
