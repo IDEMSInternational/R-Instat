@@ -606,4 +606,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify( )", 1)
         End If
     End Sub
+
+    Private Sub cmdCat_Click(sender As Object, e As EventArgs) Handles cmdCat.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs, pred, p = NULL, baseline = NULL, frcst.type = ""prob"", obs.type = ""binary"",thresholds = seq(0,1,0.1), show = TRUE, bins = TRUE,fudge = 0.01)", 91)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify( )", 1)
+        End If
+    End Sub
 End Class
