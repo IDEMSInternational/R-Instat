@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 229</value>
@@ -126,7 +130,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="cmdOptions.Text" xml:space="preserve">
     <value>Plot Options</value>
@@ -141,10 +145,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="lblFactorOptional.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblFactorOptional.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblFactorOptional.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 219</value>
@@ -168,10 +175,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactorOptional.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="lblXVariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblXVariable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblXVariable.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 172</value>
@@ -195,7 +205,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblXVariable.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
+  </data>
+  <data name="cmdScatterPlotOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdScatterPlotOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 198</value>
@@ -204,7 +217,7 @@
     <value>120, 25</value>
   </data>
   <data name="cmdScatterPlotOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="cmdScatterPlotOptions.Text" xml:space="preserve">
     <value>Scatter Plot Options</value>
@@ -219,7 +232,67 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdScatterPlotOptions.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
+  </data>
+  <data name="lblVariable.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblVariable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblVariable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 267</value>
+  </data>
+  <data name="lblVariable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 13</value>
+  </data>
+  <data name="lblVariable.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblVariable.Text" xml:space="preserve">
+    <value>Label Variable (Optional):</value>
+  </data>
+  <data name="&gt;&gt;lblVariable.Name" xml:space="preserve">
+    <value>lblVariable</value>
+  </data>
+  <data name="&gt;&gt;lblVariable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblVariable.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblVariable.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>421, 368</value>
+  </data>
+  <data name="ucrChkWithSE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>136, 260</value>
+  </data>
+  <data name="ucrChkWithSE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 20</value>
+  </data>
+  <data name="ucrChkWithSE.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWithSE.Name" xml:space="preserve">
+    <value>ucrChkWithSE</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWithSE.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWithSE.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWithSE.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="ucrChkLineofBestFit.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 260</value>
@@ -228,7 +301,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrChkLineofBestFit.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrChkLineofBestFit.Name" xml:space="preserve">
     <value>ucrChkLineofBestFit</value>
@@ -240,16 +313,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkLineofBestFit.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrSaveScatterPlot.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 285</value>
+  </data>
+  <data name="ucrSaveScatterPlot.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveScatterPlot.Size" type="System.Drawing.Size, System.Drawing">
     <value>255, 24</value>
   </data>
   <data name="ucrSaveScatterPlot.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrSaveScatterPlot.Name" xml:space="preserve">
     <value>ucrSaveScatterPlot</value>
@@ -261,12 +337,11 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveScatterPlot.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="ucrSelectorForScatter.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSelectorForScatter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
@@ -286,37 +361,28 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorForScatter.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="ucrVariablesAsFactorForScatter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 30</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>421, 368</value>
+  <data name="ucrVariablesAsFactorForScatter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 136</value>
   </data>
-  <data name="ucrChkWithSE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 260</value>
+  <data name="ucrVariablesAsFactorForScatter.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="ucrChkWithSE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 20</value>
+  <data name="&gt;&gt;ucrVariablesAsFactorForScatter.Name" xml:space="preserve">
+    <value>ucrVariablesAsFactorForScatter</value>
   </data>
-  <data name="ucrChkWithSE.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="&gt;&gt;ucrVariablesAsFactorForScatter.Type" xml:space="preserve">
+    <value>instat.ucrVariablesAsFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkWithSE.Name" xml:space="preserve">
-    <value>ucrChkWithSE</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWithSE.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkWithSE.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrVariablesAsFactorForScatter.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrChkWithSE.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;ucrVariablesAsFactorForScatter.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="ucrFactorOptionalReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 234</value>
@@ -340,7 +406,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFactorOptionalReceiver.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="ucrReceiverX.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 187</value>
@@ -364,7 +430,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverX.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 312</value>
@@ -373,7 +439,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -385,7 +451,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -399,25 +465,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrVariablesAsFactorForScatter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 30</value>
+  <data name="ucrReceiverLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 283</value>
   </data>
-  <data name="ucrVariablesAsFactorForScatter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 136</value>
+  <data name="ucrReceiverLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrVariablesAsFactorForScatter.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="ucrReceiverLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
   </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForScatter.Name" xml:space="preserve">
-    <value>ucrVariablesAsFactorForScatter</value>
+  <data name="ucrReceiverLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForScatter.Type" xml:space="preserve">
-    <value>instat.ucrVariablesAsFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrReceiverLabel.Name" xml:space="preserve">
+    <value>ucrReceiverLabel</value>
   </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForScatter.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverLabel.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForScatter.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;ucrReceiverLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
 </root>

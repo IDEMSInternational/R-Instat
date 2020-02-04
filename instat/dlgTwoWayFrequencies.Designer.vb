@@ -65,6 +65,7 @@ Partial Class dlgTwoWayFrequencies
         Me.ucrReceiverColumnFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverRowFactor = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkFacetGrid = New instat.ucrCheck()
         Me.grpFreqTypeTable.SuspendLayout()
         Me.grpFreqTypeGraph.SuspendLayout()
         Me.SuspendLayout()
@@ -200,6 +201,7 @@ Partial Class dlgTwoWayFrequencies
         '
         'ucrSelectorTwoWayFrequencies
         '
+        Me.ucrSelectorTwoWayFrequencies.bDropUnusedFilterLevels = False
         Me.ucrSelectorTwoWayFrequencies.bShowHiddenColumns = False
         Me.ucrSelectorTwoWayFrequencies.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorTwoWayFrequencies, "ucrSelectorTwoWayFrequencies")
@@ -254,10 +256,17 @@ Partial Class dlgTwoWayFrequencies
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrChkFacetGrid
+        '
+        Me.ucrChkFacetGrid.Checked = False
+        resources.ApplyResources(Me.ucrChkFacetGrid, "ucrChkFacetGrid")
+        Me.ucrChkFacetGrid.Name = "ucrChkFacetGrid"
+        '
         'dlgTwoWayFrequencies
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkFacetGrid)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.grpFreqTypeGraph)
         Me.Controls.Add(Me.rdoBoth)
@@ -313,4 +322,5 @@ Partial Class dlgTwoWayFrequencies
     Friend WithEvents ucrChkColumn As ucrCheck
     Friend WithEvents ucrChkRow As ucrCheck
     Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrChkFacetGrid As ucrCheck
 End Class

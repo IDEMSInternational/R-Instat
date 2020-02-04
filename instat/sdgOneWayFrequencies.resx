@@ -118,217 +118,85 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblOmitZero.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblTableTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lblOmitZero.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 121</value>
-  </data>
-  <data name="lblOmitZero.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 13</value>
-  </data>
-  <data name="lblOmitZero.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="lblOmitZero.Text" xml:space="preserve">
-    <value>Omit Zero Counts from Table:</value>
-  </data>
-  <data name="&gt;&gt;lblOmitZero.Name" xml:space="preserve">
-    <value>lblOmitZero</value>
-  </data>
-  <data name="&gt;&gt;lblOmitZero.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblOmitZero.Parent" xml:space="preserve">
-    <value>grpTableOptions</value>
-  </data>
-  <data name="&gt;&gt;lblOmitZero.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrInputOmitZero.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 116</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrInputOmitZero.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>21, 17, 21, 17</value>
+  <data name="lblTableTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ucrInputOmitZero.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblTableTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 56</value>
   </data>
-  <data name="ucrInputOmitZero.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="lblTableTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
   </data>
-  <data name="&gt;&gt;ucrInputOmitZero.Name" xml:space="preserve">
-    <value>ucrInputOmitZero</value>
-  </data>
-  <data name="&gt;&gt;ucrInputOmitZero.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputOmitZero.Parent" xml:space="preserve">
-    <value>grpTableOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrInputOmitZero.ZOrder" xml:space="preserve">
+  <data name="lblTableTitle.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="ucrChkCountName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 93</value>
+  <data name="lblTableTitle.Text" xml:space="preserve">
+    <value>Table Title:</value>
   </data>
-  <data name="ucrChkCountName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+  <data name="&gt;&gt;lblTableTitle.Name" xml:space="preserve">
+    <value>lblTableTitle</value>
   </data>
-  <data name="ucrChkCountName.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCountName.Name" xml:space="preserve">
-    <value>ucrChkCountName</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCountName.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCountName.Parent" xml:space="preserve">
-    <value>grpTableOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCountName.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrInputCountsName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 92</value>
-  </data>
-  <data name="ucrInputCountsName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
-  </data>
-  <data name="ucrInputCountsName.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrInputCountsName.Name" xml:space="preserve">
-    <value>ucrInputCountsName</value>
-  </data>
-  <data name="&gt;&gt;ucrInputCountsName.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputCountsName.Parent" xml:space="preserve">
-    <value>grpTableOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrInputCountsName.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 145</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 13</value>
-  </data>
-  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Decimal Places for Percentages:</value>
-  </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
-  </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblTableTitle.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblTableTitle.Parent" xml:space="preserve">
     <value>grpTableOptions</value>
   </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrNudDecimalPlaces.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 144</value>
-  </data>
-  <data name="ucrNudDecimalPlaces.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudDecimalPlaces.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDecimalPlaces.Name" xml:space="preserve">
-    <value>ucrNudDecimalPlaces</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDecimalPlaces.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDecimalPlaces.Parent" xml:space="preserve">
-    <value>grpTableOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDecimalPlaces.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrChkHighlightedRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 43</value>
-  </data>
-  <data name="ucrChkHighlightedRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 20</value>
-  </data>
-  <data name="ucrChkHighlightedRows.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkHighlightedRows.Name" xml:space="preserve">
-    <value>ucrChkHighlightedRows</value>
-  </data>
-  <data name="&gt;&gt;ucrChkHighlightedRows.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkHighlightedRows.Parent" xml:space="preserve">
-    <value>grpTableOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkHighlightedRows.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ucrChkMedian.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 68</value>
-  </data>
-  <data name="ucrChkMedian.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 20</value>
-  </data>
-  <data name="ucrChkMedian.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMedian.Name" xml:space="preserve">
-    <value>ucrChkMedian</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMedian.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMedian.Parent" xml:space="preserve">
-    <value>grpTableOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMedian.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="ucrChkShowSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 18</value>
-  </data>
-  <data name="ucrChkShowSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 20</value>
-  </data>
-  <data name="ucrChkShowSummary.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;lblTableTitle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;ucrChkShowSummary.Name" xml:space="preserve">
-    <value>ucrChkShowSummary</value>
+  <data name="ucrInputTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 52</value>
   </data>
-  <data name="&gt;&gt;ucrChkShowSummary.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="ucrInputTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
   </data>
-  <data name="&gt;&gt;ucrChkShowSummary.Parent" xml:space="preserve">
+  <data name="ucrInputTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTitle.Name" xml:space="preserve">
+    <value>ucrInputTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTitle.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputTitle.Parent" xml:space="preserve">
     <value>grpTableOptions</value>
   </data>
-  <data name="&gt;&gt;ucrChkShowSummary.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="&gt;&gt;ucrInputTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkShowStrings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 22</value>
+  </data>
+  <data name="ucrChkShowStrings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 20</value>
+  </data>
+  <data name="ucrChkShowStrings.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShowStrings.Name" xml:space="preserve">
+    <value>ucrChkShowStrings</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShowStrings.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShowStrings.Parent" xml:space="preserve">
+    <value>grpTableOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShowStrings.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="grpTableOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 7</value>
   </data>
   <data name="grpTableOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>327, 177</value>
+    <value>236, 101</value>
   </data>
   <data name="grpTableOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

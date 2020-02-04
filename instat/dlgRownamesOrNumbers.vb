@@ -22,7 +22,7 @@ Public Class dlgRowNamesOrNumbers
     Private clsRowNamesFunction As New RFunction
 
     Private Sub dlgRowNamesOrNumbers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'autoTranslate(Me)
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False

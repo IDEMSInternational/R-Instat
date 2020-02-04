@@ -91,6 +91,7 @@ Public Class dlgSort
     End Sub
 
     Private Sub SetDefaultColumn()
+        ucrReceiverSort.Clear()
         ucrSelectForSort.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
         ucrReceiverSort.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
@@ -119,4 +120,5 @@ Public Class dlgSort
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSort.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
 End Class

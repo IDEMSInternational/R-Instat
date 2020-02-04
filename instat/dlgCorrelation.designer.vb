@@ -237,6 +237,7 @@ Partial Class dlgCorrelation
         '
         'ucrSelectorCorrelation
         '
+        Me.ucrSelectorCorrelation.bDropUnusedFilterLevels = False
         Me.ucrSelectorCorrelation.bShowHiddenColumns = False
         Me.ucrSelectorCorrelation.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorCorrelation, "ucrSelectorCorrelation")

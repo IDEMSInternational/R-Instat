@@ -60,6 +60,7 @@ Partial Class dlgConvertColumns
         Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkCreateLabels = New instat.ucrCheck()
+        Me.ucrChkIgnoreLabels = New instat.ucrCheck()
         Me.grpConvertTo.SuspendLayout()
         Me.grpFactorToNumericOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -190,6 +191,7 @@ Partial Class dlgConvertColumns
         '
         'ucrSelectorDataFrameColumns
         '
+        Me.ucrSelectorDataFrameColumns.bDropUnusedFilterLevels = False
         Me.ucrSelectorDataFrameColumns.bShowHiddenColumns = False
         Me.ucrSelectorDataFrameColumns.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorDataFrameColumns, "ucrSelectorDataFrameColumns")
@@ -215,10 +217,17 @@ Partial Class dlgConvertColumns
         resources.ApplyResources(Me.ucrChkCreateLabels, "ucrChkCreateLabels")
         Me.ucrChkCreateLabels.Name = "ucrChkCreateLabels"
         '
+        'ucrChkIgnoreLabels
+        '
+        Me.ucrChkIgnoreLabels.Checked = False
+        resources.ApplyResources(Me.ucrChkIgnoreLabels, "ucrChkIgnoreLabels")
+        Me.ucrChkIgnoreLabels.Name = "ucrChkIgnoreLabels"
+        '
         'dlgConvertColumns
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkIgnoreLabels)
         Me.Controls.Add(Me.ucrChkCreateLabels)
         Me.Controls.Add(Me.grpFactorToNumericOptions)
         Me.Controls.Add(Me.ucrChkKeepAttributes)
@@ -264,4 +273,5 @@ Partial Class dlgConvertColumns
     Friend WithEvents rdoConvertLevels As RadioButton
     Friend WithEvents rdoLogical As RadioButton
     Friend WithEvents ucrChkCreateLabels As ucrCheck
+    Friend WithEvents ucrChkIgnoreLabels As ucrCheck
 End Class
