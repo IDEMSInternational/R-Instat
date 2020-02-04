@@ -441,7 +441,6 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
         # need to subset this if time var has been subsetted
         time_ind <- which(raw_time_full %in% raw_time)
         units <- ncdf4::ncatt_get(nc, time_var, "units")
-        print(units)
         if(units$hasatt && units$value == "julian_day") {
           time_df[[paste0(time_var, "_date")]] <- as.Date(raw_time, origin = structure(-2440588, class = "Date"))
         }
