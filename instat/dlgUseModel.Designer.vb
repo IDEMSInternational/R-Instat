@@ -55,8 +55,6 @@ Partial Class dlgUseModel
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.lblRpackage = New System.Windows.Forms.Label()
-        Me.ucrSaveResult = New instat.ucrSave()
-        Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.grpSegmented = New System.Windows.Forms.GroupBox()
         Me.cmdSlope = New System.Windows.Forms.Button()
         Me.cmdPscore = New System.Windows.Forms.Button()
@@ -72,6 +70,8 @@ Partial Class dlgUseModel
         Me.cmdAapc = New System.Windows.Forms.Button()
         Me.cmdSegmented = New System.Windows.Forms.Button()
         Me.cmdSegmentedPrint = New System.Windows.Forms.Button()
+        Me.ucrSaveResult = New instat.ucrSave()
+        Me.ucrChkIncludeParameters = New instat.ucrCheck()
         Me.ucrInputModels = New instat.ucrInputTextBox()
         Me.ucrSelectorUseModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
@@ -470,23 +470,6 @@ Partial Class dlgUseModel
         Me.lblRpackage.TabIndex = 36
         Me.lblRpackage.Text = "R package:"
         '
-        'ucrSaveResult
-        '
-        Me.ucrSaveResult.Location = New System.Drawing.Point(12, 380)
-        Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(7)
-        Me.ucrSaveResult.Name = "ucrSaveResult"
-        Me.ucrSaveResult.Size = New System.Drawing.Size(369, 30)
-        Me.ucrSaveResult.TabIndex = 35
-        '
-        'ucrChkIncludeArguments
-        '
-        Me.ucrChkIncludeArguments.Checked = False
-        Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(593, 15)
-        Me.ucrChkIncludeArguments.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
-        Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
-        Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(173, 25)
-        Me.ucrChkIncludeArguments.TabIndex = 32
-        '
         'grpSegmented
         '
         Me.grpSegmented.Controls.Add(Me.cmdSlope)
@@ -666,6 +649,23 @@ Partial Class dlgUseModel
         Me.cmdSegmentedPrint.Text = "print"
         Me.cmdSegmentedPrint.UseVisualStyleBackColor = True
         '
+        'ucrSaveResult
+        '
+        Me.ucrSaveResult.Location = New System.Drawing.Point(12, 380)
+        Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(7)
+        Me.ucrSaveResult.Name = "ucrSaveResult"
+        Me.ucrSaveResult.Size = New System.Drawing.Size(369, 30)
+        Me.ucrSaveResult.TabIndex = 35
+        '
+        'ucrChkIncludeParameters
+        '
+        Me.ucrChkIncludeParameters.Checked = False
+        Me.ucrChkIncludeParameters.Location = New System.Drawing.Point(593, 15)
+        Me.ucrChkIncludeParameters.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.ucrChkIncludeParameters.Name = "ucrChkIncludeParameters"
+        Me.ucrChkIncludeParameters.Size = New System.Drawing.Size(173, 25)
+        Me.ucrChkIncludeParameters.TabIndex = 32
+        '
         'ucrInputModels
         '
         Me.ucrInputModels.AddQuotesIfUnrecognised = True
@@ -733,13 +733,13 @@ Partial Class dlgUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(731, 489)
+        Me.ClientSize = New System.Drawing.Size(775, 489)
         Me.Controls.Add(Me.grpGeneral)
         Me.Controls.Add(Me.grpSegmented)
         Me.Controls.Add(Me.lblRpackage)
         Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.cmdHelp)
-        Me.Controls.Add(Me.ucrChkIncludeArguments)
+        Me.Controls.Add(Me.ucrChkIncludeParameters)
         Me.Controls.Add(Me.cmdClear)
         Me.Controls.Add(Me.grpExtrRemes)
         Me.Controls.Add(Me.ucrInputModels)
@@ -799,7 +799,7 @@ Partial Class dlgUseModel
     Friend WithEvents cmdErlevd As Button
     Friend WithEvents cmdClear As Button
 
-    Friend WithEvents ucrChkIncludeArguments As ucrCheck
+    Friend WithEvents ucrChkIncludeParameters As ucrCheck
     Friend WithEvents cmdHelp As Button
     Friend WithEvents ucrSaveResult As ucrSave
     Friend WithEvents lblRpackage As Label
