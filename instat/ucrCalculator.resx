@@ -3142,7 +3142,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdCor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 197</value>
+    <value>79, 197</value>
   </data>
   <data name="cmdCor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -3172,7 +3172,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdCov.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 197</value>
+    <value>153, 197</value>
   </data>
   <data name="cmdCov.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -3496,7 +3496,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdQuantile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 197</value>
+    <value>227, 197</value>
   </data>
   <data name="cmdQuantile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -3844,7 +3844,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="grpSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 252</value>
+    <value>379, 237</value>
   </data>
   <data name="grpSummary.TabIndex" type="System.Int32, mscorlib">
     <value>185</value>
