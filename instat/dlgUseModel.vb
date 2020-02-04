@@ -467,4 +467,7 @@ Public Class dlgUseModel
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("segmented::intercept()", 1)
     End Sub
 
+    Private Sub cmdPrintFev_Click(sender As Object, e As EventArgs) Handles cmdPrintFev.Click
+
+    End Sub
 End Class
