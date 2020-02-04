@@ -290,7 +290,7 @@ Public Class dlgNewDataFrame
 
         frm.ShowInTaskbar = False
         frm.FormBorderStyle = FormBorderStyle.None
-        frm.Size = New Size(ucrInputCommand.Width, ucrInputCommand.Height + 50)
+        frm.Size = New Size(ucrInputCommand.Width, ucrInputCommand.Height)
         frm.Controls.Add(lstView)
 
         'Set the listview properties
