@@ -1361,7 +1361,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdMad_Click(sender As Object, e As EventArgs) Handles cmdMad.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("summary_median_absolute_deviation()", 1)
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad(x = , center = median(x), constant = 1.4826, na.rm = FALSE,low = FALSE, high = FALSE)", 82)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad()", 1)
+        End If
     End Sub
 
     Private Sub cmdMc_Click(sender As Object, e As EventArgs) Handles cmdMc.Click
