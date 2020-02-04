@@ -35,9 +35,10 @@ Public Class dlgImportDataset
     Private bReset As Boolean = True
     Private bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
-    Public strFilePathSystem As String
-    Public strFilePathR As String
-    Public strCurrentDirectory As String
+    Private strFilePathSystem As String
+    Private strFilePathSystemTemp As String 'to hold and set back what was previously the path in the case of open from library
+    Private strFilePathR As String
+    Private strCurrentDirectory As String
     Public strFileToOpenOn As String
     Private bDialogLoaded As Boolean
     Private iDataFrameCount As Integer
@@ -460,7 +461,7 @@ Public Class dlgImportDataset
                     lblTextFilePreview.Hide()
                 End If
             End If
-            bFromLibrary = False
+            'bFromLibrary = False
             TestOkEnabled()
         End Using
     End Sub
@@ -552,8 +553,9 @@ Public Class dlgImportDataset
             strFileExt = Path.GetExtension(strFilePath).ToLower()
             strFilePathSystem = strFilePath
             strFilePathR = Replace(strFilePath, "\", "/")
+            strCurrentDirectory = Path.GetDirectoryName(strFilePath)
             If Not bFromLibrary Then
-                strCurrentDirectory = Path.GetDirectoryName(strFilePath)
+                strFilePathSystemTemp = strFilePath
             End If
         Else
             strFileName = ""
@@ -942,18 +944,16 @@ Public Class dlgImportDataset
         End If
     End Sub
 
-    ''' <summary>
-    ''' gets the selected path and filename
-    ''' </summary>
-    Public Function GetFileOpened() As String
-        Return ucrInputFilePath.GetText()
-    End Function
-
-    ''' <summary>
-    ''' sets the filepath and name to open on form load
-    ''' </summary>
-    ''' <param name="strNewFileToOpenOnAs"></param>
-    Public Sub SetFileToOpenOn(strNewFileToOpenOnAs As String)
-        strFileToOpenOn = strNewFileToOpenOnAs
+    Private Sub dlgImportDataset_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        If (Not Me.Visible) AndAlso bFromLibrary Then
+            bFromLibrary = False
+            If Not String.IsNullOrEmpty(strFilePathSystemTemp) Then
+                strCurrentDirectory = Path.GetDirectoryName(strFilePathSystemTemp)
+                strFileName = Path.GetFileNameWithoutExtension(strFilePathSystemTemp)
+                strFileType = Path.GetExtension(strFilePathSystemTemp).Substring(1).ToUpper()
+                strFilePathSystem = strFilePathSystemTemp
+                strFilePathR = Replace(strFilePathSystemTemp, "\", "/")
+            End If
+        End If
     End Sub
 End Class
