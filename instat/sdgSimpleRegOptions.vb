@@ -353,7 +353,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrSaveResidualsColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResidualsColumnName.ControlValueChanged
         If ucrSaveResidualsColumnName.ucrChkSave.Checked Then
-            clsRSyntax.AddToAfterCodes(clsResidualFunction, iPosition:=6)
+            clsRSyntax.AddToAfterCodes(clsResidualFunction, iPosition:=5)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsResidualFunction)
         End If
@@ -361,7 +361,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrSaveFittedColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveFittedColumnName.ControlValueChanged
         If ucrSaveFittedColumnName.ucrChkSave.Checked Then
-            clsRSyntax.AddToAfterCodes(clsFittedValuesFunction, iPosition:=7)
+            clsRSyntax.AddToAfterCodes(clsFittedValuesFunction, iPosition:=6)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsFittedValuesFunction)
         End If
@@ -369,7 +369,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrSaveStdResidualsColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveStdResidualsColumnName.ControlValueChanged
         If ucrSaveStdResidualsColumnName.ucrChkSave.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRstandardFunction, iPosition:=8)
+            clsRSyntax.AddToAfterCodes(clsRstandardFunction, iPosition:=7)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRstandardFunction)
         End If
@@ -377,7 +377,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrSaveLeverageColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveLeverageColumnName.ControlValueChanged
         If ucrSaveLeverageColumnName.ucrChkSave.Checked Then
-            clsRSyntax.AddToAfterCodes(clsHatvaluesFunction, iPosition:=9)
+            clsRSyntax.AddToAfterCodes(clsHatvaluesFunction, iPosition:=8)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsHatvaluesFunction)
         End If
@@ -397,7 +397,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrChkResidualsFitted_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkResidualsFitted.ControlValueChanged
         If ucrChkResidualsFitted.Checked Then
-            clsRSyntax.AddToAfterCodes(clsResidplotFunction, iPosition:=0)
+            clsRSyntax.AddToAfterCodes(clsResidplotFunction, iPosition:=9)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsResidplotFunction)
         End If
@@ -405,7 +405,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrChkQQ_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkQQ.ControlValueChanged
         If ucrChkQQ.Checked Then
-            clsRSyntax.AddToAfterCodes(clsQQplotFunction, iPosition:=1)
+            clsRSyntax.AddToAfterCodes(clsQQplotFunction, iPosition:=10)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsQQplotFunction)
         End If
@@ -413,7 +413,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrChkScaleLocation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkScaleLocation.ControlValueChanged
         If ucrChkScaleLocation.Checked Then
-            clsRSyntax.AddToAfterCodes(clsScaleLocationFunction, iPosition:=2)
+            clsRSyntax.AddToAfterCodes(clsScaleLocationFunction, iPosition:=11)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsScaleLocationFunction)
         End If
@@ -421,7 +421,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrChkCooksDistance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCooksDistance.ControlValueChanged
         If ucrChkCooksDistance.Checked Then
-            clsRSyntax.AddToAfterCodes(clsCooksDistanceFunction, iPosition:=3)
+            clsRSyntax.AddToAfterCodes(clsCooksDistanceFunction, iPosition:=12)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsCooksDistanceFunction)
         End If
@@ -429,7 +429,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrChkResidualsLeverage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkResidualsLeverage.ControlValueChanged
         If ucrChkResidualsLeverage.Checked Then
-            clsRSyntax.AddToAfterCodes(clsResidualsLeverageFunction, iPosition:=4)
+            clsRSyntax.AddToAfterCodes(clsResidualsLeverageFunction, iPosition:=13)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsResidualsLeverageFunction)
         End If
@@ -437,7 +437,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ucrChkCooksDistanceLeverage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCooksDistanceLeverage.ControlValueChanged
         If ucrChkCooksDistanceLeverage.Checked Then
-            clsRSyntax.AddToAfterCodes(clsCooksDistanceLeverage, iPosition:=5)
+            clsRSyntax.AddToAfterCodes(clsCooksDistanceLeverage, iPosition:=14)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsCooksDistanceLeverage)
         End If
