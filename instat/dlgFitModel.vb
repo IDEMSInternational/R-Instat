@@ -70,6 +70,8 @@ Public Class dlgFitModel
         ucrReceiverExpressionFitModel.SetParameterIsString()
         ucrReceiverExpressionFitModel.bWithQuotes = False
         ucrReceiverExpressionFitModel.AddtoCombobox("1")
+        ucrTryModelling.SetReceiver(ucrReceiverExpressionFitModel)
+        ucrTryModelling.SetIsModel()
 
         ucrFamily.SetGLMDistributions()
         ucrFamily.SetFunctionIsDistFunction()
@@ -188,6 +190,8 @@ Public Class dlgFitModel
         clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
+
+        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -395,8 +399,6 @@ Public Class dlgFitModel
     Private Sub ucrReceiverExpressionFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlValueChanged, ucrReceiverResponseVar.ControlValueChanged
         ChooseRFunction()
         ResponseConvert()
-        ucrInputTryMessage.SetName("")
-        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
     End Sub
 
     Private Sub ucrConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
