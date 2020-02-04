@@ -2121,6 +2121,11 @@ Public Class frmMain
         dlgTreemap.ShowDialog()
     End Sub
 
+
+    Private Sub mnuToolsInstallRPackage_Click(sender As Object, e As EventArgs) Handles mnuToolsInstallRPackage.Click
+        dlgInstallRPackage.ShowDialog()
+End Sub
+
     Private Sub mnuPrepareColumnGenerateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateDuplicateColumn.Click
         dlgDuplicateColumns.ShowDialog()
     End Sub
@@ -2143,5 +2148,6 @@ Public Class frmMain
 
     Private Sub mnuPrepareColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCountInFactor.Click
         dlgCountinFactor.ShowDialog()
+
     End Sub
 End Class
