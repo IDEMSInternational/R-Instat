@@ -3004,7 +3004,7 @@
     <value>180</value>
   </data>
   <data name="cmdMode1.Text" xml:space="preserve">
-    <value>mcmode1</value>
+    <value>mode1</value>
   </data>
   <data name="&gt;&gt;cmdMode1.Name" xml:space="preserve">
     <value>cmdMode1</value>
