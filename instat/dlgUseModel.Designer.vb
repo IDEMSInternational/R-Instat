@@ -152,7 +152,7 @@ Partial Class dlgUseModel
         Me.grpGeneral.Controls.Add(Me.cmdsummary)
         Me.grpGeneral.Controls.Add(Me.cmdanova)
         Me.grpGeneral.Controls.Add(Me.cmdresiduals)
-        Me.grpGeneral.Location = New System.Drawing.Point(632, 301)
+        Me.grpGeneral.Location = New System.Drawing.Point(347, 123)
         Me.grpGeneral.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.grpGeneral.Name = "grpGeneral"
         Me.grpGeneral.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -503,7 +503,7 @@ Partial Class dlgUseModel
         Me.grpSegmented.Controls.Add(Me.cmdAapc)
         Me.grpSegmented.Controls.Add(Me.cmdSegmented)
         Me.grpSegmented.Controls.Add(Me.cmdSegmentedPrint)
-        Me.grpSegmented.Location = New System.Drawing.Point(637, 301)
+        Me.grpSegmented.Location = New System.Drawing.Point(347, 128)
         Me.grpSegmented.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.grpSegmented.Name = "grpSegmented"
         Me.grpSegmented.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -734,12 +734,12 @@ Partial Class dlgUseModel
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(995, 469)
+        Me.Controls.Add(Me.grpGeneral)
+        Me.Controls.Add(Me.grpSegmented)
         Me.Controls.Add(Me.lblRpackage)
         Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.ucrChkIncludeArguments)
-        Me.Controls.Add(Me.grpSegmented)
-        Me.Controls.Add(Me.grpGeneral)
         Me.Controls.Add(Me.cmdClear)
         Me.Controls.Add(Me.grpExtrRemes)
         Me.Controls.Add(Me.ucrInputModels)
