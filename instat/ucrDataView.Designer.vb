@@ -102,7 +102,7 @@ Partial Class ucrDataView
         Me.mnuSorts = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFilters = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRemoveCurrentFilters = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCellCut = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCellCutRange = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCellCopyRange = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCellPasteRange = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCellHelp = New System.Windows.Forms.ToolStripMenuItem()
@@ -428,7 +428,7 @@ Partial Class ucrDataView
         '
         'mnuCell
         '
-        Me.mnuCell.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCellCut, Me.mnuCellCopyRange, Me.mnuCellPasteRange, Me.mnuCellHelp})
+        Me.mnuCell.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCellCutRange, Me.mnuCellCopyRange, Me.mnuCellPasteRange, Me.mnuCellHelp})
         Me.mnuCell.Name = "mnuCell"
         Me.mnuCell.Size = New System.Drawing.Size(250, 24)
         Me.mnuCell.Text = "cell"
@@ -543,12 +543,12 @@ Partial Class ucrDataView
         Me.mnuRemoveCurrentFilters.Size = New System.Drawing.Size(250, 24)
         Me.mnuRemoveCurrentFilters.Text = "Remove Current Filter"
         '
-        'mnuCellCut
+        'mnuCellCutRange
         '
-        Me.mnuCellCut.Enabled = False
-        Me.mnuCellCut.Name = "mnuCellCut"
-        Me.mnuCellCut.Size = New System.Drawing.Size(216, 26)
-        Me.mnuCellCut.Text = "Cut"
+        Me.mnuCellCutRange.Enabled = False
+        Me.mnuCellCutRange.Name = "mnuCellCutRange"
+        Me.mnuCellCutRange.Size = New System.Drawing.Size(216, 26)
+        Me.mnuCellCutRange.Text = "Cut"
         '
         'mnuCellCopyRange
         '
@@ -651,7 +651,7 @@ Partial Class ucrDataView
     Friend WithEvents mnuSorts As ToolStripMenuItem
     Private WithEvents mnuFilters As ToolStripMenuItem
     Private WithEvents mnuRemoveCurrentFilters As ToolStripMenuItem
-    Private WithEvents mnuCellCut As ToolStripMenuItem
+    Private WithEvents mnuCellCutRange As ToolStripMenuItem
     Private WithEvents mnuCellCopyRange As ToolStripMenuItem
     Private WithEvents mnuCellPasteRange As ToolStripMenuItem
     Friend WithEvents mnuCellHelp As ToolStripMenuItem
