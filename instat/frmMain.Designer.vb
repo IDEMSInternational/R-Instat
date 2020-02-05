@@ -348,18 +348,18 @@ Partial Class frmMain
         Me.mnuTbLast10Dialogs = New System.Windows.Forms.ToolStripDropDownButton()
         Me.sepStart = New System.Windows.Forms.ToolStripSeparator()
         Me.sepEnd = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuLastGraph = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.mnuRGraph = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPlotly = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLastGraph = New System.Windows.Forms.ToolStripSplitButton()
+        Me.mnuViewer = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuploty = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbDataView = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbOutput = New System.Windows.Forms.ToolStripButton()
-        Me.mnuMetadata = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.mnuColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTbLog = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuMetadata = New System.Windows.Forms.ToolStripSplitButton()
+        Me.mnuColumnMetadat = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDataFrameMetadat = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTbLog = New System.Windows.Forms.ToolStripSplitButton()
+        Me.mnuScriptWindow = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLogWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTbResetLayout = New System.Windows.Forms.ToolStripButton()
         Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbHelp = New System.Windows.Forms.ToolStripButton()
@@ -580,12 +580,18 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
+        Me.splLogScript = New System.Windows.Forms.SplitContainer()
+        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
+        Me.mnuRViewer = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPlotly = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
-        Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.ucrLogWindow = New instat.ucrLog()
         Me.ucrScriptWindow = New instat.ucrScript()
-        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
         Me.stsStrip.SuspendLayout()
@@ -2365,19 +2371,19 @@ Partial Class frmMain
         'mnuLastGraph
         '
         Me.mnuLastGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuLastGraph.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRGraph, Me.mnuPlotly})
+        Me.mnuLastGraph.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewer, Me.mnuploty})
         resources.ApplyResources(Me.mnuLastGraph, "mnuLastGraph")
         Me.mnuLastGraph.Name = "mnuLastGraph"
         '
-        'mnuRGraph
+        'mnuViewer
         '
-        Me.mnuRGraph.Name = "mnuRGraph"
-        resources.ApplyResources(Me.mnuRGraph, "mnuRGraph")
+        Me.mnuViewer.Name = "mnuViewer"
+        resources.ApplyResources(Me.mnuViewer, "mnuViewer")
         '
-        'mnuPlotly
+        'mnuploty
         '
-        Me.mnuPlotly.Name = "mnuPlotly"
-        resources.ApplyResources(Me.mnuPlotly, "mnuPlotly")
+        Me.mnuploty.Name = "mnuploty"
+        resources.ApplyResources(Me.mnuploty, "mnuploty")
         '
         'separator2
         '
@@ -2405,36 +2411,36 @@ Partial Class frmMain
         'mnuMetadata
         '
         Me.mnuMetadata.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuMetadata.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnMetadata, Me.mnuDataFrameMetadata})
+        Me.mnuMetadata.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnMetadat, Me.mnuDataFrameMetadat})
         resources.ApplyResources(Me.mnuMetadata, "mnuMetadata")
         Me.mnuMetadata.Name = "mnuMetadata"
         '
-        'mnuColumnMetadata
+        'mnuColumnMetadat
         '
-        Me.mnuColumnMetadata.Name = "mnuColumnMetadata"
-        resources.ApplyResources(Me.mnuColumnMetadata, "mnuColumnMetadata")
+        Me.mnuColumnMetadat.Name = "mnuColumnMetadat"
+        resources.ApplyResources(Me.mnuColumnMetadat, "mnuColumnMetadat")
         '
-        'mnuDataFrameMetadata
+        'mnuDataFrameMetadat
         '
-        Me.mnuDataFrameMetadata.Name = "mnuDataFrameMetadata"
-        resources.ApplyResources(Me.mnuDataFrameMetadata, "mnuDataFrameMetadata")
+        Me.mnuDataFrameMetadat.Name = "mnuDataFrameMetadat"
+        resources.ApplyResources(Me.mnuDataFrameMetadat, "mnuDataFrameMetadat")
         '
         'mnuTbLog
         '
         Me.mnuTbLog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbLog.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuScriptFile, Me.mnuLogFile})
+        Me.mnuTbLog.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuScriptWindow, Me.mnuLogWindow})
         resources.ApplyResources(Me.mnuTbLog, "mnuTbLog")
         Me.mnuTbLog.Name = "mnuTbLog"
         '
-        'mnuScriptFile
+        'mnuScriptWindow
         '
-        Me.mnuScriptFile.Name = "mnuScriptFile"
-        resources.ApplyResources(Me.mnuScriptFile, "mnuScriptFile")
+        Me.mnuScriptWindow.Name = "mnuScriptWindow"
+        resources.ApplyResources(Me.mnuScriptWindow, "mnuScriptWindow")
         '
-        'mnuLogFile
+        'mnuLogWindow
         '
-        Me.mnuLogFile.Name = "mnuLogFile"
-        resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
+        Me.mnuLogWindow.Name = "mnuLogWindow"
+        resources.ApplyResources(Me.mnuLogWindow, "mnuLogWindow")
         '
         'mnuTbResetLayout
         '
@@ -3687,18 +3693,6 @@ Partial Class frmMain
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
         '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -3715,19 +3709,6 @@ Partial Class frmMain
         Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
         '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Tag = "Script_Window"
-        '
         'splDataOutput
         '
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
@@ -3743,6 +3724,61 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
+        '
+        'mnuRViewer
+        '
+        Me.mnuRViewer.Name = "mnuRViewer"
+        resources.ApplyResources(Me.mnuRViewer, "mnuRViewer")
+        '
+        'mnuPlotly
+        '
+        Me.mnuPlotly.Name = "mnuPlotly"
+        resources.ApplyResources(Me.mnuPlotly, "mnuPlotly")
+        '
+        'mnuColumnMetadata
+        '
+        Me.mnuColumnMetadata.Name = "mnuColumnMetadata"
+        resources.ApplyResources(Me.mnuColumnMetadata, "mnuColumnMetadata")
+        '
+        'mnuDataFrameMetadata
+        '
+        Me.mnuDataFrameMetadata.Name = "mnuDataFrameMetadata"
+        resources.ApplyResources(Me.mnuDataFrameMetadata, "mnuDataFrameMetadata")
+        '
+        'mnuScriptFile
+        '
+        Me.mnuScriptFile.Name = "mnuScriptFile"
+        resources.ApplyResources(Me.mnuScriptFile, "mnuScriptFile")
+        '
+        'mnuLogFile
+        '
+        Me.mnuLogFile.Name = "mnuLogFile"
+        resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
+        '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'ucrDataViewer
         '
@@ -4344,13 +4380,19 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareCalculator As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnFactorCountInFactor As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
-    Friend WithEvents mnuLastGraph As ToolStripDropDownButton
-    Friend WithEvents mnuTbLog As ToolStripDropDownButton
-    Friend WithEvents mnuRGraph As ToolStripMenuItem
+    Friend WithEvents mnuTbLog As ToolStripSplitButton
+    Friend WithEvents mnuScriptWindow As ToolStripMenuItem
+    Friend WithEvents mnuLogWindow As ToolStripMenuItem
+    Friend WithEvents mnuMetadata As ToolStripSplitButton
+    Friend WithEvents mnuLastGraph As ToolStripSplitButton
+    Friend WithEvents mnuColumnMetadat As ToolStripMenuItem
+    Friend WithEvents mnuDataFrameMetadat As ToolStripMenuItem
+    Friend WithEvents mnuViewer As ToolStripMenuItem
+    Friend WithEvents mnuploty As ToolStripMenuItem
+    Friend WithEvents mnuRViewer As ToolStripMenuItem
     Friend WithEvents mnuPlotly As ToolStripMenuItem
-    Friend WithEvents mnuScriptFile As ToolStripMenuItem
-    Friend WithEvents mnuLogFile As ToolStripMenuItem
-    Friend WithEvents mnuMetadata As ToolStripDropDownButton
     Friend WithEvents mnuColumnMetadata As ToolStripMenuItem
     Friend WithEvents mnuDataFrameMetadata As ToolStripMenuItem
+    Friend WithEvents mnuScriptFile As ToolStripMenuItem
+    Friend WithEvents mnuLogFile As ToolStripMenuItem
 End Class

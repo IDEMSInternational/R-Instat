@@ -581,12 +581,6 @@
     <Compile Include="dlgExportToOpenRefine.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgCorruptionFile.Designer.vb">
-      <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgCorruptionFile.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgExtremesClimatic.Designer.vb">
       <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
     </Compile>
@@ -2076,12 +2070,6 @@
     <Compile Include="dlgThreeSummaries.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgTransform.Designer.vb">
-      <DependentUpon>dlgTransform.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgTransform.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgNon_ParametricTwoWayAnova.Designer.vb">
       <DependentUpon>dlgNon_ParametricTwoWayAnova.vb</DependentUpon>
     </Compile>
@@ -2679,9 +2667,6 @@
     <EmbeddedResource Include="dlgCorruptionDescribe.sw-KE.resx">
       <DependentUpon>dlgCorruptionDescribe.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgCorruptionFile.sw-KE.resx">
-      <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgCorruptionModel.sw-KE.resx">
       <DependentUpon>dlgCorruptionModel.vb</DependentUpon>
     </EmbeddedResource>
@@ -3008,9 +2993,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToOpenRefine.resx">
       <DependentUpon>dlgExportToOpenRefine.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgCorruptionFile.resx">
-      <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExtremesClimatic.resx">
       <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
@@ -4070,12 +4052,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummary.sw-KE.resx">
       <DependentUpon>dlgSummary.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgTransform.resx">
-      <DependentUpon>dlgTransform.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgTransform.sw-KE.resx">
-      <DependentUpon>dlgTransform.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnstack.resx">
       <DependentUpon>dlgUnstack.vb</DependentUpon>
