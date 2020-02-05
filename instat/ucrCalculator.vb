@@ -1206,10 +1206,6 @@ Public Class ucrCalculator
         HelpContent()
     End Sub
 
-    Private Sub cmdTry_Click(sender As Object, e As EventArgs)
-        RaiseEvent TryCommadClick()
-    End Sub
-
     Private Sub HelpContent()
         If iHelpCalcID > 0 Then
             Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
