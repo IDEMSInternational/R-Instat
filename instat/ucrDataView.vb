@@ -635,7 +635,7 @@ Public Class ucrDataView
         dlgSort.ShowDialog()
     End Sub
 
-    Private Sub mnuFreezeToHere_Click(sender As Object, e As EventArgs) Handles mnuFreezeToHere.Click
+    Private Sub mnuFreezeToHere_Click(sender As Object, e As EventArgs) 
         Dim strLastSelectedColumn As String
         Dim strSelectedColumns As String()
 
@@ -647,7 +647,7 @@ Public Class ucrDataView
         End If
     End Sub
 
-    Private Sub mnuUnfreeze_Click(sender As Object, e As EventArgs) Handles mnuUnfreeze.Click
+    Private Sub mnuUnfreeze_Click(sender As Object, e As EventArgs) 
         RunScriptFromDataView(clsUnfreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
     End Sub
 
@@ -711,7 +711,7 @@ Public Class ucrDataView
         dlgAddComment.ShowDialog()
     End Sub
 
-    Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddComment.Click
+    Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs) 
         dlgAddComment.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgAddComment.ShowDialog()
     End Sub
@@ -788,5 +788,9 @@ Public Class ucrDataView
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
+    End Sub
+
+    Private Sub lblHeader_Click(sender As Object, e As EventArgs) Handles lblHeader.Click
+
     End Sub
 End Class
