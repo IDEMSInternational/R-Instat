@@ -1857,6 +1857,12 @@ Partial Class ucrCalculator
         Me.cmdSqrt.Name = "cmdSqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
         '
+        'ttCalculator
+        '
+        Me.ttCalculator.AutoPopDelay = 10000
+        Me.ttCalculator.InitialDelay = 500
+        Me.ttCalculator.ReshowDelay = 100
+        '
         'cmdWakefield_Year
         '
         resources.ApplyResources(Me.cmdWakefield_Year, "cmdWakefield_Year")
@@ -2738,6 +2744,7 @@ Partial Class ucrCalculator
         Me.grpModifier.ResumeLayout(False)
         Me.grpSymbols.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
