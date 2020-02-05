@@ -92,6 +92,8 @@ Partial Class ucrDataView
         Me.mnuDuplColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuReorderColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertColumnBefore = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuInsertColumnsAfter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDeleteColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -235,9 +237,9 @@ Partial Class ucrDataView
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCell, Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem, Me.mnuHelp, Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuInsertColumnBefore})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCell, Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem, Me.mnuHelp, Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuInsertColumnBefore, Me.mnuInsertColumnsAfter, Me.mnuDeleteColumn})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(234, 254)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(234, 302)
         '
         'cutRangeToolStripMenuItem
         '
@@ -473,6 +475,18 @@ Partial Class ucrDataView
         Me.mnuInsertColumnBefore.Size = New System.Drawing.Size(233, 24)
         Me.mnuInsertColumnBefore.Text = "Insert Column(s) Before"
         '
+        'mnuInsertColumnsAfter
+        '
+        Me.mnuInsertColumnsAfter.Name = "mnuInsertColumnsAfter"
+        Me.mnuInsertColumnsAfter.Size = New System.Drawing.Size(233, 24)
+        Me.mnuInsertColumnsAfter.Text = "Insert Column(s) After"
+        '
+        'mnuDeleteColumn
+        '
+        Me.mnuDeleteColumn.Name = "mnuDeleteColumn"
+        Me.mnuDeleteColumn.Size = New System.Drawing.Size(233, 24)
+        Me.mnuDeleteColumn.Text = "Delete Column(s)"
+        '
         'ucrDataView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -545,4 +559,6 @@ Partial Class ucrDataView
     Friend WithEvents mnuDuplColumn As ToolStripMenuItem
     Friend WithEvents mnuReorderColumn As ToolStripMenuItem
     Private WithEvents mnuInsertColumnBefore As ToolStripMenuItem
+    Friend WithEvents mnuInsertColumnsAfter As ToolStripMenuItem
+    Private WithEvents mnuDeleteColumn As ToolStripMenuItem
 End Class
