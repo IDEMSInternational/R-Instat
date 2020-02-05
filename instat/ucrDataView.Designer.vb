@@ -90,6 +90,8 @@ Partial Class ucrDataView
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuRenameColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDuplColumn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuReorderColumn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuInsertColumnBefore = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -233,34 +235,34 @@ Partial Class ucrDataView
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCell, Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem, Me.mnuHelp, Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCell, Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem, Me.mnuHelp, Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuInsertColumnBefore})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(211, 206)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(234, 254)
         '
         'cutRangeToolStripMenuItem
         '
         Me.cutRangeToolStripMenuItem.Enabled = False
         Me.cutRangeToolStripMenuItem.Name = "cutRangeToolStripMenuItem"
-        Me.cutRangeToolStripMenuItem.Size = New System.Drawing.Size(210, 24)
+        Me.cutRangeToolStripMenuItem.Size = New System.Drawing.Size(233, 24)
         Me.cutRangeToolStripMenuItem.Text = "Cut"
         '
         'copyRangeToolStripMenuItem
         '
         Me.copyRangeToolStripMenuItem.Name = "copyRangeToolStripMenuItem"
-        Me.copyRangeToolStripMenuItem.Size = New System.Drawing.Size(210, 24)
+        Me.copyRangeToolStripMenuItem.Size = New System.Drawing.Size(233, 24)
         Me.copyRangeToolStripMenuItem.Text = "Copy"
         '
         'pasteRangeToolStripMenuItem
         '
         Me.pasteRangeToolStripMenuItem.Enabled = False
         Me.pasteRangeToolStripMenuItem.Name = "pasteRangeToolStripMenuItem"
-        Me.pasteRangeToolStripMenuItem.Size = New System.Drawing.Size(210, 24)
+        Me.pasteRangeToolStripMenuItem.Size = New System.Drawing.Size(233, 24)
         Me.pasteRangeToolStripMenuItem.Text = "Paste"
         '
         'mnuHelp
         '
         Me.mnuHelp.Name = "mnuHelp"
-        Me.mnuHelp.Size = New System.Drawing.Size(210, 24)
+        Me.mnuHelp.Size = New System.Drawing.Size(233, 24)
         Me.mnuHelp.Text = "Help"
         '
         'rowContextMenuStrip
@@ -439,25 +441,37 @@ Partial Class ucrDataView
         'mnuCell
         '
         Me.mnuCell.Name = "mnuCell"
-        Me.mnuCell.Size = New System.Drawing.Size(210, 24)
+        Me.mnuCell.Size = New System.Drawing.Size(233, 24)
         Me.mnuCell.Text = "cell"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(207, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(230, 6)
         '
         'mnuRenameColumn
         '
         Me.mnuRenameColumn.Name = "mnuRenameColumn"
-        Me.mnuRenameColumn.Size = New System.Drawing.Size(210, 24)
+        Me.mnuRenameColumn.Size = New System.Drawing.Size(233, 24)
         Me.mnuRenameColumn.Text = "Rename Column..."
         '
         'mnuDuplColumn
         '
         Me.mnuDuplColumn.Name = "mnuDuplColumn"
-        Me.mnuDuplColumn.Size = New System.Drawing.Size(210, 24)
+        Me.mnuDuplColumn.Size = New System.Drawing.Size(233, 24)
         Me.mnuDuplColumn.Text = "Duplicate Column..."
+        '
+        'mnuReorderColumn
+        '
+        Me.mnuReorderColumn.Name = "mnuReorderColumn"
+        Me.mnuReorderColumn.Size = New System.Drawing.Size(233, 24)
+        Me.mnuReorderColumn.Text = "Reorder Column(s)..."
+        '
+        'mnuInsertColumnBefore
+        '
+        Me.mnuInsertColumnBefore.Name = "mnuInsertColumnBefore"
+        Me.mnuInsertColumnBefore.Size = New System.Drawing.Size(233, 24)
+        Me.mnuInsertColumnBefore.Text = "Insert Column(s) Before"
         '
         'ucrDataView
         '
@@ -529,4 +543,6 @@ Partial Class ucrDataView
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents mnuRenameColumn As ToolStripMenuItem
     Friend WithEvents mnuDuplColumn As ToolStripMenuItem
+    Friend WithEvents mnuReorderColumn As ToolStripMenuItem
+    Private WithEvents mnuInsertColumnBefore As ToolStripMenuItem
 End Class
