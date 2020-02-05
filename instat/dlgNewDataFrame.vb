@@ -417,11 +417,9 @@ Public Class dlgNewDataFrame
         Dim vecOutput As CharacterVector
         Dim strScript As String
         Dim lstScriptCommands As New List(Of String)
+        Dim clsTempConstructFunction As RFunction
         Try
-
-
             If rdoConstruct.Checked Then
-                Dim clsTempConstructFunction As RFunction
                 clsTempConstructFunction = clsConstructFunction.Clone
                 clsTempConstructFunction.bToBeAssigned = False
                 clsTempConstructFunction.bIsAssigned = False
