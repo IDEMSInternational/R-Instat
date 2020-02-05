@@ -1471,6 +1471,17 @@ Public Class RLink
         RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bSeparateThread:=False)
     End Sub
 
+    Public Sub ViewLastGraphPlotly()
+        Dim clsInteractivePlot As New RFunction
+        Dim clsLastGraph As New RFunction
+
+        clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
+        clsInteractivePlot.SetPackageName("plotly")
+        clsInteractivePlot.SetRCommand("ggplotly")
+        clsInteractivePlot.AddParameter("p", clsRFunctionParameter:=clsLastGraph, iPosition:=0)
+        RunScript(clsInteractivePlot.ToScript(), strComment:="View last graph as Plotly", bSeparateThread:=False)
+    End Sub
+
     'construct and format the comment
     Public Function GetFormattedComment(strComment As String) As String
         Dim strReconstructedComment As String = ""
