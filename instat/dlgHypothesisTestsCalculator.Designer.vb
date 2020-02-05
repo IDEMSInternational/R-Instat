@@ -862,7 +862,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpVerification.Controls.Add(Me.cmdCont)
         Me.grpVerification.Controls.Add(Me.cmdCat)
         Me.grpVerification.Controls.Add(Me.cmdBinary)
-        Me.grpVerification.Location = New System.Drawing.Point(329, 94)
+        Me.grpVerification.Location = New System.Drawing.Point(329, 99)
         Me.grpVerification.Name = "grpVerification"
         Me.grpVerification.Size = New System.Drawing.Size(232, 75)
         Me.grpVerification.TabIndex = 18
@@ -899,7 +899,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkDisplayModel
         '
         Me.ucrChkDisplayModel.Checked = False
-        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(25, 354)
+        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(8, 362)
         Me.ucrChkDisplayModel.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.ucrChkDisplayModel.Name = "ucrChkDisplayModel"
         Me.ucrChkDisplayModel.Size = New System.Drawing.Size(185, 25)
@@ -908,7 +908,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkSummaryModel
         '
         Me.ucrChkSummaryModel.Checked = False
-        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(25, 308)
+        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(8, 308)
         Me.ucrChkSummaryModel.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.ucrChkSummaryModel.Name = "ucrChkSummaryModel"
         Me.ucrChkSummaryModel.Size = New System.Drawing.Size(185, 25)
@@ -1006,9 +1006,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(787, 599)
+        Me.Controls.Add(Me.grpVerification)
         Me.Controls.Add(Me.ucrChkDisplayModel)
         Me.Controls.Add(Me.ucrChkSummaryModel)
-        Me.Controls.Add(Me.grpVerification)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.ucrReceiverMultiple)
