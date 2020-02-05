@@ -1478,8 +1478,10 @@ Public Class RLink
         clsInteractivePlot.SetPackageName("plotly")
         clsInteractivePlot.SetRCommand("ggplotly")
         clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
+        clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
         clsInteractivePlot.AddParameter("p", clsRFunctionParameter:=clsLastGraph, iPosition:=0)
-        RunScript(clsInteractivePlot.ToScript(), strComment:="View last graph as Plotly", bSeparateThread:=False)
+        'Need to set iCallType = 2 to obtain a graph in an interactive viewer.
+        RunScript(clsInteractivePlot.ToScript(), iCallType:=2, strComment:="View last graph as Plotly", bSeparateThread:=False)
     End Sub
 
     'construct and format the comment
