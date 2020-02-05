@@ -55,7 +55,7 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetPrefix("Calc")
         ucrCalc.ucrInputCalOptions.SetName("Basic")
         ucrCalc.Reset()
-        ucrCalc.chkShowArguments.Checked = False
+        ucrCalc.chkShowParameters.Checked = False
         ucrCalc.chkSaveResultInto.Checked = True
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
