@@ -27,6 +27,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgDuplicateColumns
     Public bFirstLoad As Boolean = True
@@ -37,12 +38,10 @@ Public Class dlgDuplicateColumns
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
 
-    Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub dlgDuplicateColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -59,16 +58,15 @@ Public Class dlgDuplicateColumns
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 512
 
-        ' For ucrSelector
+        'For ucrSelector
         ucrSelectorForDuplicateColumn.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForDuplicateColumn.SetParameterIsString()
 
-        ' For ucrReceiver
-        ucrReceiverDuplicateColumns.SetParameter(New RParameter("col_data", 1))
-        ucrReceiverDuplicateColumns.SetParameterIsRFunction()
+        'For ucrReceiver
+        ucrReceiverDuplicateColumns.SetParameter(New RParameter("col_names", 1))
+        ucrReceiverDuplicateColumns.SetParameterIsString()
         ucrReceiverDuplicateColumns.Selector = ucrSelectorForDuplicateColumn
         ucrReceiverDuplicateColumns.SetMeAsReceiver()
-        ucrReceiverDuplicateColumns.bUseFilteredData = False
 
         'For change type check box 
         ucrChkChangeType.SetText("Change type")
@@ -115,24 +113,13 @@ Public Class dlgDuplicateColumns
         ucrChkConvertCreateLabels.SetText("Create Labels")
         ucrChkConvertCreateLabels.SetRDefault("TRUE")
 
-
-
-        ' For ucrSaveColumn
-        'ucrInputDuplicateColumnName.SetParameter(New RParameter("col_name", 2))
-        'ucrInputDuplicateColumnName.SetDataFrameSelector(ucrSelectorForDuplicateColumn.ucrAvailableDataFrames)
-        'ucrInputDuplicateColumnName.SetItemsTypeAsColumns()
-        'ucrInputDuplicateColumnName.SetDefaultTypeAsColumn()
-        'ucrInputDuplicateColumnName.SetValidationTypeAsRVariable()
-        'ucrInputDuplicateColumnName.bAllowNonConditionValues = True
-
-        'ucrSave
-        ucrSaveColumn.SetParameter(New RParameter("col_name", 2))
-        ucrSaveColumn.SetPrefix("count") 'todo. remove
+        'For ucrSave
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorForDuplicateColumn.ucrAvailableDataFrames)
-        ucrSaveColumn.SetIsTextBox()
         ucrSaveColumn.SetLabelText("New Column Name:")
+        ucrSaveColumn.SetIsTextBox()
         ucrSaveColumn.setLinkedReceiver(ucrReceiverDuplicateColumns) 'added
+
     End Sub
 
     Private Sub SetDefaults()
@@ -141,19 +128,21 @@ Public Class dlgDuplicateColumns
         ucrBase.clsRsyntax.lstAfterCodes.Clear()
 
         ucrSelectorForDuplicateColumn.Reset()
-        'ucrInputDuplicateColumnName.Reset()
-        'ucrInputDuplicateColumnName.SetName("")
         ucrSaveColumn.Reset()
 
-        'set up duplicate function
-        clsDuplicateFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        'clsDuplicateFunction.AddParameter("before", "FALSE")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicateFunction)
 
         'set up convert function
         clsConvertFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
-        clsConvertFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
         clsConvertFunction.AddParameter("data_name", Chr(34) & ucrSelectorForDuplicateColumn.strCurrentDataFrame & Chr(34), iPosition:=0)
+        clsConvertFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
+
+        'set up duplicate function
+        clsDuplicateFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsDuplicateFunction.AddParameter("use_current_filter", "FALSE", iPosition:=2)
+
+        'set the duplicate function as the base function
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicateFunction)
+
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -161,10 +150,6 @@ Public Class dlgDuplicateColumns
         ucrSelectorForDuplicateColumn.SetRCode(clsDuplicateFunction, bReset)
         ucrReceiverDuplicateColumns.SetRCode(clsDuplicateFunction, bReset)
 
-        'ucrInputDuplicateColumnName.AddAdditionalCodeParameterPair(clsConvertFunction, New RParameter("col_names", 1), iAdditionalPairNo:=1)
-        'ucrInputDuplicateColumnName.SetRCode(clsDuplicateFunction, bReset)
-
-        ucrSaveColumn.AddAdditionalCodeParameterPair(clsConvertFunction, New RParameter("col_names", 1), iAdditionalPairNo:=1)
         ucrSaveColumn.SetRCode(clsDuplicateFunction, bReset)
 
         ucrPnlConvertTo.SetRCode(clsConvertFunction, bReset)
@@ -189,11 +174,6 @@ Public Class dlgDuplicateColumns
         End If
     End Sub
 
-    Private Sub ReopenDialog()
-        'ucrInputDuplicateColumnName.bAllowNonConditionValues = True ' temporary fix
-        ucrReceiverDuplicateColumns.bAllowNonConditionValues = True ' temporary fix
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeforControls(True)
@@ -212,31 +192,6 @@ Public Class dlgDuplicateColumns
         bUseSelectedColumn = False
     End Sub
 
-
-
-    Private Sub DefaultNewName()
-        If Not ucrSaveColumn.bUserTyped AndAlso Not ucrReceiverDuplicateColumns.IsEmpty Then
-            ucrSaveColumn.SetPrefix(ucrReceiverDuplicateColumns.GetVariableNames(False))
-        End If
-        'If Not ucrInputDuplicateColumnName.bUserTyped AndAlso Not ucrReceiverDuplicateColumns.IsEmpty Then
-        '    ucrInputDuplicateColumnName.SetPrefix(ucrReceiverDuplicateColumns.GetVariableNames(False))
-        'End If
-    End Sub
-
-    Private Sub ucrPnlColPosition_ControlValueChanged(ucrChangedControl As ucrCore)
-        ucrReceiverDuplicateColumns.UpdateControl()
-        'PositionOfDuplicatedColumn()
-    End Sub
-
-    Private Sub ucrReceiverForCopyColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDuplicateColumns.ControlValueChanged
-        DefaultNewName()
-        'PositionOfDuplicatedColumn()
-    End Sub
-
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDuplicateColumns.ControlContentsChanged, ucrPnlConvertTo.ControlContentsChanged, ucrNudConvertDisplayDecimals.ControlContentsChanged, ucrChkConvertSpecifyDecimalsToDisplay.ControlContentsChanged, ucrChkChangeType.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrChkChangeType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkChangeType.ControlValueChanged
         'Remove the Convert Function if change type is unchecked
         If ucrChkChangeType.Checked Then
@@ -246,8 +201,23 @@ Public Class dlgDuplicateColumns
         End If
     End Sub
 
+    Private Sub ucrReceiverForCopyColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDuplicateColumns.ControlValueChanged
+        If Not ucrSaveColumn.bUserTyped AndAlso Not ucrReceiverDuplicateColumns.IsEmpty Then
+            ucrSaveColumn.SetPrefix(ucrReceiverDuplicateColumns.GetVariableNames(False))
+        End If
+    End Sub
+
     Private Sub ucrSelectorForDuplicateColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForDuplicateColumn.ControlValueChanged
-        'also change the data_name parameter value of the Convert Function with the new value of the selector
+        'change the data_name parameter value of the Convert Function with the new value of the selector
         clsConvertFunction.AddParameter("data_name", Chr(34) & ucrSelectorForDuplicateColumn.strCurrentDataFrame & Chr(34), iPosition:=0)
     End Sub
+    Private Sub ucrSaveColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveColumn.ControlValueChanged
+        clsConvertFunction.AddParameter("col_names", Chr(34) & ucrSaveColumn.GetText & Chr(34), iPosition:=1)
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDuplicateColumns.ControlContentsChanged, ucrPnlConvertTo.ControlContentsChanged, ucrNudConvertDisplayDecimals.ControlContentsChanged, ucrChkConvertSpecifyDecimalsToDisplay.ControlContentsChanged, ucrChkChangeType.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
+
 End Class
