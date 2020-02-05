@@ -97,9 +97,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.ucrTryModelling = New instat.ucrTry()
         Me.grpVerify = New System.Windows.Forms.GroupBox()
-        Me.cmdBinary = New System.Windows.Forms.Button()
-        Me.cmdCat = New System.Windows.Forms.Button()
         Me.cmdCont = New System.Windows.Forms.Button()
+        Me.cmdCat = New System.Windows.Forms.Button()
+        Me.cmdBinary = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -657,9 +657,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpStats2.Controls.Add(Me.cmdPowerT)
         Me.grpStats2.Controls.Add(Me.cmdPowerProp)
         Me.grpStats2.Location = New System.Drawing.Point(329, 97)
-        Me.grpStats2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpStats2.Margin = New System.Windows.Forms.Padding(4)
         Me.grpStats2.Name = "grpStats2"
-        Me.grpStats2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpStats2.Padding = New System.Windows.Forms.Padding(4)
         Me.grpStats2.Size = New System.Drawing.Size(433, 166)
         Me.grpStats2.TabIndex = 14
         Me.grpStats2.TabStop = False
@@ -682,9 +682,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpAgricolae.Controls.Add(Me.cmdDuncan)
         Me.grpAgricolae.Controls.Add(Me.cmdBIB)
         Me.grpAgricolae.Location = New System.Drawing.Point(336, 97)
-        Me.grpAgricolae.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpAgricolae.Margin = New System.Windows.Forms.Padding(4)
         Me.grpAgricolae.Name = "grpAgricolae"
-        Me.grpAgricolae.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpAgricolae.Padding = New System.Windows.Forms.Padding(4)
         Me.grpAgricolae.Size = New System.Drawing.Size(419, 165)
         Me.grpAgricolae.TabIndex = 15
         Me.grpAgricolae.TabStop = False
@@ -877,7 +877,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(16, 524)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(603, 64)
         Me.ucrBase.TabIndex = 13
@@ -927,7 +927,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdHelp.Location = New System.Drawing.Point(637, 276)
-        Me.cmdHelp.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdHelp.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(100, 28)
         Me.cmdHelp.TabIndex = 16
@@ -937,7 +937,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrTryModelling
         '
         Me.ucrTryModelling.Location = New System.Drawing.Point(0, 433)
-        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrTryModelling.Name = "ucrTryModelling"
         Me.ucrTryModelling.Size = New System.Drawing.Size(640, 34)
         Me.ucrTryModelling.TabIndex = 17
@@ -952,16 +952,16 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpVerify.Size = New System.Drawing.Size(232, 75)
         Me.grpVerify.TabIndex = 18
         Me.grpVerify.TabStop = False
-        Me.grpVerify.Text = "Verify"
+        Me.grpVerify.Text = "verification"
         '
-        'cmdBinary
+        'cmdCont
         '
-        Me.cmdBinary.Location = New System.Drawing.Point(2, 19)
-        Me.cmdBinary.Name = "cmdBinary"
-        Me.cmdBinary.Size = New System.Drawing.Size(75, 38)
-        Me.cmdBinary.TabIndex = 19
-        Me.cmdBinary.Text = "binary"
-        Me.cmdBinary.UseVisualStyleBackColor = True
+        Me.cmdCont.Location = New System.Drawing.Point(150, 19)
+        Me.cmdCont.Name = "cmdCont"
+        Me.cmdCont.Size = New System.Drawing.Size(75, 38)
+        Me.cmdCont.TabIndex = 21
+        Me.cmdCont.Text = "cont"
+        Me.cmdCont.UseVisualStyleBackColor = True
         '
         'cmdCat
         '
@@ -972,14 +972,14 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdCat.Text = "cat"
         Me.cmdCat.UseVisualStyleBackColor = True
         '
-        'cmdCont
+        'cmdBinary
         '
-        Me.cmdCont.Location = New System.Drawing.Point(150, 19)
-        Me.cmdCont.Name = "cmdCont"
-        Me.cmdCont.Size = New System.Drawing.Size(75, 38)
-        Me.cmdCont.TabIndex = 21
-        Me.cmdCont.Text = "cont"
-        Me.cmdCont.UseVisualStyleBackColor = True
+        Me.cmdBinary.Location = New System.Drawing.Point(2, 19)
+        Me.cmdBinary.Name = "cmdBinary"
+        Me.cmdBinary.Size = New System.Drawing.Size(75, 38)
+        Me.cmdBinary.TabIndex = 19
+        Me.cmdBinary.Text = "binary"
+        Me.cmdBinary.UseVisualStyleBackColor = True
         '
         'dlgHypothesisTestsCalculator
         '
@@ -1004,7 +1004,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.Controls.Add(Me.ucrReceiverForTestColumn)
         Me.Controls.Add(Me.grpAgricolae)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgHypothesisTestsCalculator"
