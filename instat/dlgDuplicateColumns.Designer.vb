@@ -40,12 +40,6 @@ Partial Class dlgDuplicateColumns
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDuplicateColumns))
         Me.lblColumns = New System.Windows.Forms.Label()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
-        Me.grpDuplicatedColumn = New System.Windows.Forms.GroupBox()
-        Me.rdoBefore = New System.Windows.Forms.RadioButton()
-        Me.rdoEnd = New System.Windows.Forms.RadioButton()
-        Me.rdoAfter = New System.Windows.Forms.RadioButton()
-        Me.rdoBeginning = New System.Windows.Forms.RadioButton()
         Me.grpConvertTo = New System.Windows.Forms.GroupBox()
         Me.rdoConvertToLogical = New System.Windows.Forms.RadioButton()
         Me.rdoConvertToCharacter = New System.Windows.Forms.RadioButton()
@@ -64,12 +58,10 @@ Partial Class dlgDuplicateColumns
         Me.ucrPnlConvertFactorToNumericOptions = New instat.UcrPanel()
         Me.ucrPnlConvertTo = New instat.UcrPanel()
         Me.ucrChkConvertSpecifyDecimalsToDisplay = New instat.ucrCheck()
-        Me.ucrInputDuplicateColumnName = New instat.ucrInputComboBox()
         Me.ucrReceiverDuplicateColumns = New instat.ucrReceiverSingle()
         Me.ucrSelectorForDuplicateColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPnlDuplicateColPosition = New instat.UcrPanel()
-        Me.grpDuplicatedColumn.SuspendLayout()
+        Me.ucrSaveColumn = New instat.ucrSave()
         Me.grpConvertTo.SuspendLayout()
         Me.grpFactorToNumericOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -78,76 +70,6 @@ Partial Class dlgDuplicateColumns
         '
         resources.ApplyResources(Me.lblColumns, "lblColumns")
         Me.lblColumns.Name = "lblColumns"
-        '
-        'lblNewColumnName
-        '
-        resources.ApplyResources(Me.lblNewColumnName, "lblNewColumnName")
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        '
-
-        'ucrInputColumnName
-        '
-        Me.ucrInputColumnName.AddQuotesIfUnrecognised = True
-        Me.ucrInputColumnName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputColumnName, "ucrInputColumnName")
-        Me.ucrInputColumnName.Name = "ucrInputColumnName"
-        '
-        'ucrReceiverDuplicateColumns
-        '
-        Me.ucrReceiverDuplicateColumns.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDuplicateColumns, "ucrReceiverDuplicateColumns")
-        Me.ucrReceiverDuplicateColumns.Name = "ucrReceiverDuplicateColumns"
-        Me.ucrReceiverDuplicateColumns.Selector = Nothing
-        Me.ucrReceiverDuplicateColumns.strNcFilePath = ""
-        Me.ucrReceiverDuplicateColumns.ucrSelector = Nothing
-        '
-        'ucrSelectorForDuplicateColumn
-        '
-        Me.ucrSelectorForDuplicateColumn.bDropUnusedFilterLevels = False
-        Me.ucrSelectorForDuplicateColumn.bShowHiddenColumns = False
-        Me.ucrSelectorForDuplicateColumn.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForDuplicateColumn, "ucrSelectorForDuplicateColumn")
-        Me.ucrSelectorForDuplicateColumn.Name = "ucrSelectorForDuplicateColumn"
-        '
-
-        'grpDuplicatedColumn
-        '
-        Me.grpDuplicatedColumn.Controls.Add(Me.rdoBefore)
-        Me.grpDuplicatedColumn.Controls.Add(Me.rdoEnd)
-        Me.grpDuplicatedColumn.Controls.Add(Me.rdoAfter)
-        Me.grpDuplicatedColumn.Controls.Add(Me.rdoBeginning)
-        Me.grpDuplicatedColumn.Controls.Add(Me.ucrPnlDuplicateColPosition)
-        resources.ApplyResources(Me.grpDuplicatedColumn, "grpDuplicatedColumn")
-        Me.grpDuplicatedColumn.Name = "grpDuplicatedColumn"
-        Me.grpDuplicatedColumn.TabStop = False
-        '
-        'rdoBefore
-        '
-        resources.ApplyResources(Me.rdoBefore, "rdoBefore")
-        Me.rdoBefore.Name = "rdoBefore"
-        Me.rdoBefore.TabStop = True
-        Me.rdoBefore.UseVisualStyleBackColor = True
-        '
-        'rdoEnd
-        '
-        resources.ApplyResources(Me.rdoEnd, "rdoEnd")
-        Me.rdoEnd.Name = "rdoEnd"
-        Me.rdoEnd.TabStop = True
-        Me.rdoEnd.UseVisualStyleBackColor = True
-        '
-        'rdoAfter
-        '
-        resources.ApplyResources(Me.rdoAfter, "rdoAfter")
-        Me.rdoAfter.Name = "rdoAfter"
-        Me.rdoAfter.TabStop = True
-        Me.rdoAfter.UseVisualStyleBackColor = True
-        '
-        'rdoBeginning
-        '
-        resources.ApplyResources(Me.rdoBeginning, "rdoBeginning")
-        Me.rdoBeginning.Name = "rdoBeginning"
-        Me.rdoBeginning.TabStop = True
-        Me.rdoBeginning.UseVisualStyleBackColor = True
         '
         'grpConvertTo
         '
@@ -279,13 +201,6 @@ Partial Class dlgDuplicateColumns
         resources.ApplyResources(Me.ucrChkConvertSpecifyDecimalsToDisplay, "ucrChkConvertSpecifyDecimalsToDisplay")
         Me.ucrChkConvertSpecifyDecimalsToDisplay.Name = "ucrChkConvertSpecifyDecimalsToDisplay"
         '
-        'ucrInputDuplicateColumnName
-        '
-        Me.ucrInputDuplicateColumnName.AddQuotesIfUnrecognised = True
-        Me.ucrInputDuplicateColumnName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDuplicateColumnName, "ucrInputDuplicateColumnName")
-        Me.ucrInputDuplicateColumnName.Name = "ucrInputDuplicateColumnName"
-        '
         'ucrReceiverDuplicateColumns
         '
         Me.ucrReceiverDuplicateColumns.frmParent = Me
@@ -308,15 +223,16 @@ Partial Class dlgDuplicateColumns
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrPnlDuplicateColPosition
+        'ucrSaveColumn
         '
-        resources.ApplyResources(Me.ucrPnlDuplicateColPosition, "ucrPnlDuplicateColPosition")
-        Me.ucrPnlDuplicateColPosition.Name = "ucrPnlDuplicateColPosition"
+        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
+        Me.ucrSaveColumn.Name = "ucrSaveColumn"
         '
         'dlgDuplicateColumns
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.ucrChkChangeType)
         Me.Controls.Add(Me.ucrChkConvertCreateLabels)
         Me.Controls.Add(Me.ucrChkConvertKeepAttributes)
@@ -324,20 +240,15 @@ Partial Class dlgDuplicateColumns
         Me.Controls.Add(Me.grpFactorToNumericOptions)
         Me.Controls.Add(Me.grpConvertTo)
         Me.Controls.Add(Me.ucrChkConvertSpecifyDecimalsToDisplay)
-        Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.ucrInputDuplicateColumnName)
         Me.Controls.Add(Me.ucrReceiverDuplicateColumns)
         Me.Controls.Add(Me.ucrSelectorForDuplicateColumn)
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.grpDuplicatedColumn)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDuplicateColumns"
         Me.Tag = ""
-        Me.grpDuplicatedColumn.ResumeLayout(False)
-        Me.grpDuplicatedColumn.PerformLayout()
         Me.grpConvertTo.ResumeLayout(False)
         Me.grpConvertTo.PerformLayout()
         Me.grpFactorToNumericOptions.ResumeLayout(False)
@@ -349,15 +260,8 @@ Partial Class dlgDuplicateColumns
     Friend WithEvents lblColumns As Label
     Friend WithEvents ucrSelectorForDuplicateColumn As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverDuplicateColumns As ucrReceiverSingle
-    Friend WithEvents ucrInputDuplicateColumnName As ucrInputComboBox
     Friend WithEvents lblNewColumnName As Label
-    Friend WithEvents grpDuplicatedColumn As GroupBox
-    Friend WithEvents rdoBefore As RadioButton
-    Friend WithEvents rdoEnd As RadioButton
-    Friend WithEvents rdoAfter As RadioButton
-    Friend WithEvents rdoBeginning As RadioButton
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrPnlDuplicateColPosition As UcrPanel
     Friend WithEvents grpConvertTo As GroupBox
     Friend WithEvents rdoConvertToLogical As RadioButton
     Friend WithEvents rdoConvertToCharacter As RadioButton
@@ -376,4 +280,5 @@ Partial Class dlgDuplicateColumns
     Friend WithEvents ucrChkConvertCreateLabels As ucrCheck
     Friend WithEvents ucrChkConvertKeepAttributes As ucrCheck
     Friend WithEvents ucrChkChangeType As ucrCheck
+    Friend WithEvents ucrSaveColumn As ucrSave
 End Class
