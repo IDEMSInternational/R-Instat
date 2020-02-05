@@ -55,7 +55,6 @@ Public Class ucrCalculator
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Strings (Character Columns)", "Factor", "Probability", "Dates", "Transform", "Wakefield", "Circular"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
-        cmdTry.Enabled = False
         cmdDoy.Enabled = False ' temp
         cmdDek.Enabled = False ' temp
         'Temp disabled::Needs discussions to see if they are needed
@@ -169,7 +168,6 @@ Public Class ucrCalculator
     Public Sub Reset()
         ucrReceiverForCalculation.ResetText()
         ucrInputCalOptions.Reset()
-        ucrInputTryMessage.Reset()
         ucrSaveResultInto.Reset()
         ucrSelectorForCalculations.Reset()
     End Sub
@@ -958,7 +956,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrSelectorForCalculations.DataFrameChanged
-        ucrInputTryMessage.SetName("")
+        'ucrTryModelling.ucrInputTryMessage.SetName("")
         RaiseEvent DataFrameChanged()
     End Sub
 
@@ -1197,11 +1195,6 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
-        If ucrReceiverForCalculation.IsEmpty Then
-            cmdTry.Enabled = False
-        Else
-            cmdTry.Enabled = True
-        End If
         RaiseEvent SelectionChanged()
     End Sub
 
@@ -1213,7 +1206,7 @@ Public Class ucrCalculator
         HelpContent()
     End Sub
 
-    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
+    Private Sub cmdTry_Click(sender As Object, e As EventArgs)
         RaiseEvent TryCommadClick()
     End Sub
 

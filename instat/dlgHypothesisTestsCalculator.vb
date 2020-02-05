@@ -57,6 +57,8 @@ Public Class dlgHypothesisTestsCalculator
         ucrChkBy.Enabled = False
         ucrReceiverMultiple.Enabled = False
         ucrChkBy.AddToLinkedControls(ucrReceiverMultiple, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrTryModelling.SetReceiver(ucrReceiverForTestColumn)
+        ucrTryModelling.SetIsCommand()
     End Sub
 
     Private Sub SetDefaults()
@@ -76,6 +78,7 @@ Public Class dlgHypothesisTestsCalculator
         clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
+        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
@@ -84,9 +87,6 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub ucrReceiverForTestColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForTestColumn.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForTestColumn.GetVariableNames(False))
-        ucrInputTryMessage.SetName("")
-        cmdTry.Enabled = Not ucrReceiverForTestColumn.IsEmpty()
-        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
         TestOKEnabled()
     End Sub
 
@@ -132,51 +132,6 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdAlt_Click(sender As Object, e As EventArgs) Handles cmdAlt.Click
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("Alt=""two""")
-    End Sub
-
-    Private Sub TryScript()
-        Dim strOutPut As String
-        Dim strAttach As String
-        Dim strDetach As String
-        Dim strTempScript As String = ""
-        Dim strVecOutput As CharacterVector
-        Dim clsCommandString As RCodeStructure
-
-        Try
-            If ucrReceiverForTestColumn.IsEmpty Then
-                ucrInputTryMessage.SetName("")
-            Else
-                'get strScript here
-                strAttach = clsAttach.Clone().ToScript(strTempScript)
-                frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
-                strTempScript = ""
-                clsCommandString = ucrBase.clsRsyntax.clsBaseCommandString.Clone()
-                clsCommandString.RemoveAssignTo()
-                strOutPut = clsCommandString.ToScript(strTempScript, ucrBase.clsRsyntax.strCommandString)
-                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript & strOutPut, bSilent:=True)
-                If strVecOutput IsNot Nothing Then
-                    If strVecOutput.Length > 1 Then
-                        ucrInputTryMessage.SetName("Model runs without error")
-                        ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
-                    End If
-                Else
-                    ucrInputTryMessage.SetName("Command produced an error or no output to display.")
-                    ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-                End If
-            End If
-        Catch ex As Exception
-            ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
-            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-        Finally
-            strTempScript = ""
-            strDetach = clsDetach.Clone().ToScript(strTempScript)
-            frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
-        End Try
-    End Sub
-
-
-    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
-        TryScript()
     End Sub
 
     Private Sub cmdBartlett_Click(sender As Object, e As EventArgs) Handles cmdBartlett.Click

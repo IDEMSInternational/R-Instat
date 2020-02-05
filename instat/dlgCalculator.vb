@@ -59,6 +59,7 @@ Public Class dlgCalculator
         ucrCalc.chkSaveResultInto.Checked = True
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
+        'ucrCalc.ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.Visible = True
     End Sub
 
@@ -69,17 +70,22 @@ Public Class dlgCalculator
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 14
         ucrCalc.ucrReceiverForCalculation.SetMeAsReceiver()
+        'ucrCalc.ucrTryModelling.SetIsCommand()
+        'ucrCalc.ucrTryModelling.SetReceiver(ucrCalc.ucrReceiverForCalculation)
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("unload", "TRUE")
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
         ucrBase.clsRsyntax.SetCommandString("")
         ucrCalc.ucrSaveResultInto.SetItemsTypeAsColumns()
         ucrCalc.ucrSaveResultInto.SetDefaultTypeAsColumn()
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrSaveResultInto.SetValidationTypeAsRVariable()
+        ' ucrCalc.ucrTryModelling.StrvecOutputRequired()
     End Sub
 
     Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveNameChanged
@@ -98,27 +104,13 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        Dim strScript As String = ""
-        Dim strFunc As String
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
-        strFunc = clsAttach.ToScript(strScript)
-        frmMain.clsRLink.RunScript(strScript & strFunc)
-    End Sub
-
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        Dim strScript As String = ""
-        Dim strFunc As String
-        strFunc = clsDetach.ToScript(strScript)
-        frmMain.clsRLink.RunScript(strScript & strFunc)
         ucrCalc.SetCalculationHistory()
     End Sub
 
     Private Sub ucrCalc_SelectionChanged() Handles ucrCalc.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrCalc.ucrReceiverForCalculation.GetVariableNames(False))
-        ucrCalc.ucrInputTryMessage.SetName("")
-        ucrCalc.cmdTry.Enabled = Not ucrCalc.ucrReceiverForCalculation.IsEmpty()
+        ' ucrCalc.ucrTryModelling.ucrInputTryMessage.SetName("")
         TestOKEnabled()
     End Sub
 
@@ -168,7 +160,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrCalc.DataFrameChanged
-        ucrCalc.ucrInputTryMessage.SetName("")
+        'ucrCalc.ucrTryModelling.ucrInputTryMessage.SetName("")
         SaveResults()
     End Sub
 
@@ -178,63 +170,5 @@ Public Class dlgCalculator
         Else
             ucrCalc.ucrSaveResultInto.Visible = False
         End If
-    End Sub
-
-    Private Sub TryScript()
-        Dim strOutPut As String
-        Dim strAttach As String
-        Dim strDetach As String
-        Dim strTempScript As String = ""
-        Dim strVecOutput As CharacterVector
-        Dim bIsAssigned As Boolean
-        Dim bToBeAssigned As Boolean
-        Dim strAssignTo As String
-        Dim strAssignToColumn As String
-        Dim strAssignToDataFrame As String
-
-        bIsAssigned = ucrBase.clsRsyntax.GetbIsAssigned()
-        bToBeAssigned = ucrBase.clsRsyntax.GetbToBeAssigned()
-        strAssignTo = ucrBase.clsRsyntax.GetstrAssignTo()
-        'These should really be done through RSyntax methods as above
-        strAssignToColumn = ucrBase.clsRsyntax.GetstrAssignToColumn()
-        strAssignToDataFrame = ucrBase.clsRsyntax.GetstrAssignToDataFrame()
-
-        Try
-            If ucrCalc.ucrReceiverForCalculation.IsEmpty Then
-                ucrCalc.ucrInputTryMessage.SetName("")
-            Else
-                'get strScript here
-                strAttach = clsAttach.ToScript(strTempScript)
-                frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
-                ucrBase.clsRsyntax.RemoveAssignTo()
-                strOutPut = ucrBase.clsRsyntax.GetScript
-                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strOutPut, bSilent:=True)
-                If strVecOutput IsNot Nothing Then
-                    If strVecOutput.Length > 1 Then
-                        ucrCalc.ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5) & "...")
-                    Else
-                        ucrCalc.ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5))
-                    End If
-                Else
-                    ucrCalc.ucrInputTryMessage.SetName("Command produced an error or no output to display.")
-                End If
-            End If
-        Catch ex As Exception
-            ucrCalc.ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
-        Finally
-            strTempScript = ""
-            strDetach = clsDetach.ToScript(strTempScript)
-            frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
-            ucrBase.clsRsyntax.SetbIsAssigned(bIsAssigned)
-            ucrBase.clsRsyntax.SetbToBeAssigned(bToBeAssigned)
-            ucrBase.clsRsyntax.SetstrAssignTo(strAssignTo)
-            'These should really be done through RSyntax methods as above
-            ucrBase.clsRsyntax.SetstrAssignToColumn(strAssignToColumn)
-            ucrBase.clsRsyntax.SetstrAssignToDataFrame(strAssignToDataFrame)
-        End Try
-    End Sub
-
-    Private Sub cmdTry_Click() Handles ucrCalc.TryCommadClick
-        TryScript()
     End Sub
 End Class
