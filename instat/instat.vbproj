@@ -5887,7 +5887,7 @@
     <Content Include="static\InstatObject\R\extras\ncdf4.helpers_0.3-3.tar.gz">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="static\Library\Climatic\Climatic-guide_datasets.xlsx" />
+    <None Include="static\Library\Climatic\climatic_guide_datasets.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Carlosjj-Microsoft-Office-2013-Excel.ico" />
