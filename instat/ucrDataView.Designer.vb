@@ -94,6 +94,10 @@ Partial Class ucrDataView
         Me.mnuInsertColumnBefore = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertColumnsAfter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDeleteColumn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuConvertToFact = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuConvertToOrderedFactor = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -237,34 +241,34 @@ Partial Class ucrDataView
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCell, Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem, Me.mnuHelp, Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuInsertColumnBefore, Me.mnuInsertColumnsAfter, Me.mnuDeleteColumn})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCell, Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem, Me.mnuHelp, Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuInsertColumnBefore, Me.mnuInsertColumnsAfter, Me.mnuDeleteColumn, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.ToolStripMenuItem1})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(234, 302)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(251, 380)
         '
         'cutRangeToolStripMenuItem
         '
         Me.cutRangeToolStripMenuItem.Enabled = False
         Me.cutRangeToolStripMenuItem.Name = "cutRangeToolStripMenuItem"
-        Me.cutRangeToolStripMenuItem.Size = New System.Drawing.Size(233, 24)
+        Me.cutRangeToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
         Me.cutRangeToolStripMenuItem.Text = "Cut"
         '
         'copyRangeToolStripMenuItem
         '
         Me.copyRangeToolStripMenuItem.Name = "copyRangeToolStripMenuItem"
-        Me.copyRangeToolStripMenuItem.Size = New System.Drawing.Size(233, 24)
+        Me.copyRangeToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
         Me.copyRangeToolStripMenuItem.Text = "Copy"
         '
         'pasteRangeToolStripMenuItem
         '
         Me.pasteRangeToolStripMenuItem.Enabled = False
         Me.pasteRangeToolStripMenuItem.Name = "pasteRangeToolStripMenuItem"
-        Me.pasteRangeToolStripMenuItem.Size = New System.Drawing.Size(233, 24)
+        Me.pasteRangeToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
         Me.pasteRangeToolStripMenuItem.Text = "Paste"
         '
         'mnuHelp
         '
         Me.mnuHelp.Name = "mnuHelp"
-        Me.mnuHelp.Size = New System.Drawing.Size(233, 24)
+        Me.mnuHelp.Size = New System.Drawing.Size(250, 24)
         Me.mnuHelp.Text = "Help"
         '
         'rowContextMenuStrip
@@ -443,49 +447,72 @@ Partial Class ucrDataView
         'mnuCell
         '
         Me.mnuCell.Name = "mnuCell"
-        Me.mnuCell.Size = New System.Drawing.Size(233, 24)
+        Me.mnuCell.Size = New System.Drawing.Size(250, 24)
         Me.mnuCell.Text = "cell"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(230, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(247, 6)
         '
         'mnuRenameColumn
         '
         Me.mnuRenameColumn.Name = "mnuRenameColumn"
-        Me.mnuRenameColumn.Size = New System.Drawing.Size(233, 24)
+        Me.mnuRenameColumn.Size = New System.Drawing.Size(250, 24)
         Me.mnuRenameColumn.Text = "Rename Column..."
         '
         'mnuDuplColumn
         '
         Me.mnuDuplColumn.Name = "mnuDuplColumn"
-        Me.mnuDuplColumn.Size = New System.Drawing.Size(233, 24)
+        Me.mnuDuplColumn.Size = New System.Drawing.Size(250, 24)
         Me.mnuDuplColumn.Text = "Duplicate Column..."
         '
         'mnuReorderColumn
         '
         Me.mnuReorderColumn.Name = "mnuReorderColumn"
-        Me.mnuReorderColumn.Size = New System.Drawing.Size(233, 24)
+        Me.mnuReorderColumn.Size = New System.Drawing.Size(250, 24)
         Me.mnuReorderColumn.Text = "Reorder Column(s)..."
         '
         'mnuInsertColumnBefore
         '
         Me.mnuInsertColumnBefore.Name = "mnuInsertColumnBefore"
-        Me.mnuInsertColumnBefore.Size = New System.Drawing.Size(233, 24)
+        Me.mnuInsertColumnBefore.Size = New System.Drawing.Size(250, 24)
         Me.mnuInsertColumnBefore.Text = "Insert Column(s) Before"
         '
         'mnuInsertColumnsAfter
         '
         Me.mnuInsertColumnsAfter.Name = "mnuInsertColumnsAfter"
-        Me.mnuInsertColumnsAfter.Size = New System.Drawing.Size(233, 24)
+        Me.mnuInsertColumnsAfter.Size = New System.Drawing.Size(250, 24)
         Me.mnuInsertColumnsAfter.Text = "Insert Column(s) After"
         '
         'mnuDeleteColumn
         '
         Me.mnuDeleteColumn.Name = "mnuDeleteColumn"
-        Me.mnuDeleteColumn.Size = New System.Drawing.Size(233, 24)
+        Me.mnuDeleteColumn.Size = New System.Drawing.Size(250, 24)
         Me.mnuDeleteColumn.Text = "Delete Column(s)"
+        '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(247, 6)
+        '
+        'mnuConvertToFact
+        '
+        Me.mnuConvertToFact.Name = "mnuConvertToFact"
+        Me.mnuConvertToFact.Size = New System.Drawing.Size(250, 24)
+        Me.mnuConvertToFact.Text = "Convert to Factor"
+        '
+        'mnuConvertToOrderedFactor
+        '
+        Me.mnuConvertToOrderedFactor.Name = "mnuConvertToOrderedFactor"
+        Me.mnuConvertToOrderedFactor.Size = New System.Drawing.Size(250, 24)
+        Me.mnuConvertToOrderedFactor.Text = "Convert to Ordered Factor"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(250, 24)
+        Me.ToolStripMenuItem1.Text = "Convert to Character"
         '
         'ucrDataView
         '
@@ -561,4 +588,8 @@ Partial Class ucrDataView
     Private WithEvents mnuInsertColumnBefore As ToolStripMenuItem
     Friend WithEvents mnuInsertColumnsAfter As ToolStripMenuItem
     Private WithEvents mnuDeleteColumn As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
+    Friend WithEvents mnuConvertToFact As ToolStripMenuItem
+    Friend WithEvents mnuConvertToOrderedFactor As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
 End Class
