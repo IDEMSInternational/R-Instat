@@ -60,10 +60,6 @@ Partial Class ucrDataView
         Me.mnuColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.cutRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.copyRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.pasteRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.rowContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuInsertRowsBefore = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertRowsAfter = New System.Windows.Forms.ToolStripMenuItem()
@@ -106,6 +102,10 @@ Partial Class ucrDataView
         Me.mnuSorts = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFilters = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRemoveCurrentFilters = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCellCut = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCellCopyRange = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCellPasteRange = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCellHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -249,35 +249,9 @@ Partial Class ucrDataView
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCell, Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem, Me.mnuHelp, Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuInsertColumnBefore, Me.mnuInsertColumnsAfter, Me.mnuDeleteColumn, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLebelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCell, Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuInsertColumnBefore, Me.mnuInsertColumnsAfter, Me.mnuDeleteColumn, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLebelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(251, 536)
-        '
-        'cutRangeToolStripMenuItem
-        '
-        Me.cutRangeToolStripMenuItem.Enabled = False
-        Me.cutRangeToolStripMenuItem.Name = "cutRangeToolStripMenuItem"
-        Me.cutRangeToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
-        Me.cutRangeToolStripMenuItem.Text = "Cut"
-        '
-        'copyRangeToolStripMenuItem
-        '
-        Me.copyRangeToolStripMenuItem.Name = "copyRangeToolStripMenuItem"
-        Me.copyRangeToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
-        Me.copyRangeToolStripMenuItem.Text = "Copy"
-        '
-        'pasteRangeToolStripMenuItem
-        '
-        Me.pasteRangeToolStripMenuItem.Enabled = False
-        Me.pasteRangeToolStripMenuItem.Name = "pasteRangeToolStripMenuItem"
-        Me.pasteRangeToolStripMenuItem.Size = New System.Drawing.Size(250, 24)
-        Me.pasteRangeToolStripMenuItem.Text = "Paste"
-        '
-        'mnuHelp
-        '
-        Me.mnuHelp.Name = "mnuHelp"
-        Me.mnuHelp.Size = New System.Drawing.Size(250, 24)
-        Me.mnuHelp.Text = "Help"
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(251, 440)
         '
         'rowContextMenuStrip
         '
@@ -454,6 +428,7 @@ Partial Class ucrDataView
         '
         'mnuCell
         '
+        Me.mnuCell.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCellCut, Me.mnuCellCopyRange, Me.mnuCellPasteRange, Me.mnuCellHelp})
         Me.mnuCell.Name = "mnuCell"
         Me.mnuCell.Size = New System.Drawing.Size(250, 24)
         Me.mnuCell.Text = "cell"
@@ -568,6 +543,32 @@ Partial Class ucrDataView
         Me.mnuRemoveCurrentFilters.Size = New System.Drawing.Size(250, 24)
         Me.mnuRemoveCurrentFilters.Text = "Remove Current Filter"
         '
+        'mnuCellCut
+        '
+        Me.mnuCellCut.Enabled = False
+        Me.mnuCellCut.Name = "mnuCellCut"
+        Me.mnuCellCut.Size = New System.Drawing.Size(216, 26)
+        Me.mnuCellCut.Text = "Cut"
+        '
+        'mnuCellCopyRange
+        '
+        Me.mnuCellCopyRange.Name = "mnuCellCopyRange"
+        Me.mnuCellCopyRange.Size = New System.Drawing.Size(216, 26)
+        Me.mnuCellCopyRange.Text = "Copy"
+        '
+        'mnuCellPasteRange
+        '
+        Me.mnuCellPasteRange.Enabled = False
+        Me.mnuCellPasteRange.Name = "mnuCellPasteRange"
+        Me.mnuCellPasteRange.Size = New System.Drawing.Size(216, 26)
+        Me.mnuCellPasteRange.Text = "Paste"
+        '
+        'mnuCellHelp
+        '
+        Me.mnuCellHelp.Name = "mnuCellHelp"
+        Me.mnuCellHelp.Size = New System.Drawing.Size(216, 26)
+        Me.mnuCellHelp.Text = "Help"
+        '
         'ucrDataView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -597,9 +598,6 @@ Partial Class ucrDataView
     Private WithEvents mnuColumnFilter As ToolStripMenuItem
     Private WithEvents mnuClearColumnFilter As ToolStripMenuItem
     Private WithEvents cellContextMenuStrip As ContextMenuStrip
-    Private WithEvents cutRangeToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents copyRangeToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents pasteRangeToolStripMenuItem As ToolStripMenuItem
     Private WithEvents rowContextMenuStrip As ContextMenuStrip
     Private WithEvents mnuInsertRowsAfter As ToolStripMenuItem
     Private WithEvents mnuDeleteRows As ToolStripMenuItem
@@ -633,7 +631,6 @@ Partial Class ucrDataView
     Friend WithEvents mnuLevelsLabels As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents mnuReorderColumns As ToolStripMenuItem
-    Friend WithEvents mnuHelp As ToolStripMenuItem
     Friend WithEvents mnuCell As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents mnuRenameColumn As ToolStripMenuItem
@@ -654,4 +651,8 @@ Partial Class ucrDataView
     Friend WithEvents mnuSorts As ToolStripMenuItem
     Private WithEvents mnuFilters As ToolStripMenuItem
     Private WithEvents mnuRemoveCurrentFilters As ToolStripMenuItem
+    Private WithEvents mnuCellCut As ToolStripMenuItem
+    Private WithEvents mnuCellCopyRange As ToolStripMenuItem
+    Private WithEvents mnuCellPasteRange As ToolStripMenuItem
+    Friend WithEvents mnuCellHelp As ToolStripMenuItem
 End Class

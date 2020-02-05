@@ -45,8 +45,6 @@ Public Class ucrDataView
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
 
     Private Sub ucrDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        mnuFreezeToHere.Enabled = False
-        mnuUnfreeze.Enabled = False
         grdData.Visible = False
         mnuInsertColsBefore.Visible = False
         mnuInsertColsAfter.Visible = False
