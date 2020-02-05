@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrFilter
     Public bFirstLoad As Boolean
     Public clsFilterView As ROperator
@@ -63,7 +65,7 @@ Public Class ucrFilter
     Private Sub InitialiseControl()
         ucrFilterPreview.txtInput.ReadOnly = True
         ucrFilterByReceiver.Selector = ucrSelectorForFitler
-        ucrFilterOperation.SetItems({"==", "<", "<=", ">", ">=", "!="})
+        ucrFilterOperation.SetItems({"==", "<", "<=", ">", ">=", "!=", "is.na", "!is.na"})
         ucrFilterOperation.SetDropDownStyleAsNonEditable()
         ucrFactorLevels.SetAsMultipleSelector()
         ucrFactorLevels.SetReceiver(ucrFilterByReceiver)
@@ -90,23 +92,49 @@ Public Class ucrFilter
     End Sub
 
     Private Sub VariableTypeProperties()
-        Dim bIsFactor As Boolean
-        If ucrFilterByReceiver.IsEmpty() Then
-            ucrValueForFilter.Visible = False
-            lblSelectLevels.Visible = False
-            ucrFactorLevels.Visible = False
-            cmdToggleSelectAll.Visible = False
-            ucrFilterOperation.Visible = False
-        Else
-            bIsFactor = ucrFilterByReceiver.strCurrDataType.Contains("factor")
-            lblSelectLevels.Visible = bIsFactor
-            ucrFactorLevels.Visible = bIsFactor
-            cmdToggleSelectAll.Visible = bIsFactor
-            ucrValueForFilter.Visible = Not bIsFactor
-            ucrFilterOperation.Visible = Not bIsFactor
+        'Dim bIsFactor As Boolean
+        ucrValueForFilter.Visible = False
+        lblSelectLevels.Visible = False
+        ucrFactorLevels.Visible = False
+        cmdToggleSelectAll.Visible = False
+        ucrFilterOperation.Visible = False
+        ucrLogicalCombobox.Visible = False
+        ucrDatePicker.Visible = False
+        cmdAddCondition.Visible = False
+        'todo.logical combobox and date picker will be false
+        If Not ucrFilterByReceiver.IsEmpty() Then
+            If ucrFilterByReceiver.strCurrDataType.ToLower.Contains("factor") Then
+                lblSelectLevels.Visible = True
+                ucrFactorLevels.Visible = True
+                cmdToggleSelectAll.Visible = True
+            Else
+                ucrFilterOperation.Visible = True
+                If ucrFilterOperation.GetText() <> "is.na" OrElse ucrFilterOperation.GetText() <> "!is.na" Then
+                    If ucrFilterByReceiver.strCurrDataType.ToLower = "logical" Then
+                        'todo. the logical combobox will be true 
+                        ucrLogicalCombobox.Visible = True
+                    ElseIf ucrFilterByReceiver.strCurrDataType.ToLower = "date" Then
+                        'todo. date picker will be true 
+                        ucrDatePicker.Visible = True
+                    Else
+                        ucrValueForFilter.Visible = True
+                    End If
+                End If
+            End If
+
+
+
+            'bIsFactor = ucrFilterByReceiver.strCurrDataType.Contains("factor")
+            'lblSelectLevels.Visible = bIsFactor
+            'ucrFactorLevels.Visible = bIsFactor
+            'cmdToggleSelectAll.Visible = bIsFactor
+            'ucrValueForFilter.Visible = Not bIsFactor
+            'ucrFilterOperation.Visible = Not bIsFactor
+            SetToggleButtonSettings()
+            CheckAddEnabled()
         End If
-        SetToggleButtonSettings()
-        CheckAddEnabled()
+
+
     End Sub
 
     Private Sub CheckAddEnabled()
@@ -121,6 +149,7 @@ Public Class ucrFilter
         Else
             cmdAddCondition.Enabled = False
         End If
+
     End Sub
 
     Private Sub cmdAddFilter_Click(sender As Object, e As EventArgs) Handles cmdAddCondition.Click
@@ -244,5 +273,9 @@ Public Class ucrFilter
 
     Public Sub SetDefaultDataFrame(strDataFrame As String)
         strDefaultDataFrame = strDataFrame
+    End Sub
+
+    Private Sub ucrFilterOperation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFilterOperation.ControlValueChanged
+        VariableTypeProperties()
     End Sub
 End Class
