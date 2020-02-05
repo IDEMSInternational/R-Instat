@@ -86,6 +86,14 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdLSD = New System.Windows.Forms.Button()
         Me.cmdDuncan = New System.Windows.Forms.Button()
         Me.cmdBIB = New System.Windows.Forms.Button()
+        Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.grpVerification = New System.Windows.Forms.GroupBox()
+        Me.cmdCont = New System.Windows.Forms.Button()
+        Me.cmdCat = New System.Windows.Forms.Button()
+        Me.cmdBinary = New System.Windows.Forms.Button()
+        Me.ucrChkDisplayModel = New instat.ucrCheck()
+        Me.ucrChkSummaryModel = New instat.ucrCheck()
+        Me.ucrTryModelling = New instat.ucrTry()
         Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
         Me.ucrSaveResult = New instat.ucrSave()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
@@ -94,14 +102,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrSelectorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
-        Me.cmdHelp = New System.Windows.Forms.Button()
-        Me.ucrTryModelling = New instat.ucrTry()
-        Me.grpVerification = New System.Windows.Forms.GroupBox()
-        Me.cmdCont = New System.Windows.Forms.Button()
-        Me.cmdCat = New System.Windows.Forms.Button()
-        Me.cmdBinary = New System.Windows.Forms.Button()
-        Me.ucrChkSummaryModel = New instat.ucrCheck()
-        Me.ucrChkDisplayModel = New instat.ucrCheck()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -846,6 +846,82 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBIB.Text = "BIB"
         Me.cmdBIB.UseVisualStyleBackColor = True
         '
+        'cmdHelp
+        '
+        Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdHelp.Location = New System.Drawing.Point(637, 276)
+        Me.cmdHelp.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(100, 28)
+        Me.cmdHelp.TabIndex = 16
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
+        'grpVerification
+        '
+        Me.grpVerification.Controls.Add(Me.cmdCont)
+        Me.grpVerification.Controls.Add(Me.cmdCat)
+        Me.grpVerification.Controls.Add(Me.cmdBinary)
+        Me.grpVerification.Location = New System.Drawing.Point(329, 94)
+        Me.grpVerification.Name = "grpVerification"
+        Me.grpVerification.Size = New System.Drawing.Size(232, 75)
+        Me.grpVerification.TabIndex = 18
+        Me.grpVerification.TabStop = False
+        Me.grpVerification.Text = "verification"
+        '
+        'cmdCont
+        '
+        Me.cmdCont.Location = New System.Drawing.Point(150, 19)
+        Me.cmdCont.Name = "cmdCont"
+        Me.cmdCont.Size = New System.Drawing.Size(75, 38)
+        Me.cmdCont.TabIndex = 21
+        Me.cmdCont.Text = "cont"
+        Me.cmdCont.UseVisualStyleBackColor = True
+        '
+        'cmdCat
+        '
+        Me.cmdCat.Location = New System.Drawing.Point(76, 19)
+        Me.cmdCat.Name = "cmdCat"
+        Me.cmdCat.Size = New System.Drawing.Size(75, 38)
+        Me.cmdCat.TabIndex = 20
+        Me.cmdCat.Text = "cat"
+        Me.cmdCat.UseVisualStyleBackColor = True
+        '
+        'cmdBinary
+        '
+        Me.cmdBinary.Location = New System.Drawing.Point(2, 19)
+        Me.cmdBinary.Name = "cmdBinary"
+        Me.cmdBinary.Size = New System.Drawing.Size(75, 38)
+        Me.cmdBinary.TabIndex = 19
+        Me.cmdBinary.Text = "binary"
+        Me.cmdBinary.UseVisualStyleBackColor = True
+        '
+        'ucrChkDisplayModel
+        '
+        Me.ucrChkDisplayModel.Checked = False
+        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(25, 354)
+        Me.ucrChkDisplayModel.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrChkDisplayModel.Name = "ucrChkDisplayModel"
+        Me.ucrChkDisplayModel.Size = New System.Drawing.Size(185, 25)
+        Me.ucrChkDisplayModel.TabIndex = 20
+        '
+        'ucrChkSummaryModel
+        '
+        Me.ucrChkSummaryModel.Checked = False
+        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(25, 308)
+        Me.ucrChkSummaryModel.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrChkSummaryModel.Name = "ucrChkSummaryModel"
+        Me.ucrChkSummaryModel.Size = New System.Drawing.Size(185, 25)
+        Me.ucrChkSummaryModel.TabIndex = 19
+        '
+        'ucrTryModelling
+        '
+        Me.ucrTryModelling.Location = New System.Drawing.Point(0, 433)
+        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrTryModelling.Name = "ucrTryModelling"
+        Me.ucrTryModelling.Size = New System.Drawing.Size(640, 34)
+        Me.ucrTryModelling.TabIndex = 17
+        '
         'ucrReceiverMultiple
         '
         Me.ucrReceiverMultiple.frmParent = Me
@@ -924,82 +1000,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn.strNcFilePath = ""
         Me.ucrReceiverForTestColumn.TabIndex = 1
         Me.ucrReceiverForTestColumn.ucrSelector = Nothing
-        '
-        'cmdHelp
-        '
-        Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdHelp.Location = New System.Drawing.Point(637, 276)
-        Me.cmdHelp.Margin = New System.Windows.Forms.Padding(4)
-        Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(100, 28)
-        Me.cmdHelp.TabIndex = 16
-        Me.cmdHelp.Text = "Help"
-        Me.cmdHelp.UseVisualStyleBackColor = True
-        '
-        'ucrTryModelling
-        '
-        Me.ucrTryModelling.Location = New System.Drawing.Point(0, 433)
-        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrTryModelling.Name = "ucrTryModelling"
-        Me.ucrTryModelling.Size = New System.Drawing.Size(640, 34)
-        Me.ucrTryModelling.TabIndex = 17
-        '
-        'grpVerification
-        '
-        Me.grpVerification.Controls.Add(Me.cmdCont)
-        Me.grpVerification.Controls.Add(Me.cmdCat)
-        Me.grpVerification.Controls.Add(Me.cmdBinary)
-        Me.grpVerification.Location = New System.Drawing.Point(329, 94)
-        Me.grpVerification.Name = "grpVerification"
-        Me.grpVerification.Size = New System.Drawing.Size(232, 75)
-        Me.grpVerification.TabIndex = 18
-        Me.grpVerification.TabStop = False
-        Me.grpVerification.Text = "verification"
-        '
-        'cmdCont
-        '
-        Me.cmdCont.Location = New System.Drawing.Point(150, 19)
-        Me.cmdCont.Name = "cmdCont"
-        Me.cmdCont.Size = New System.Drawing.Size(75, 38)
-        Me.cmdCont.TabIndex = 21
-        Me.cmdCont.Text = "cont"
-        Me.cmdCont.UseVisualStyleBackColor = True
-        '
-        'cmdCat
-        '
-        Me.cmdCat.Location = New System.Drawing.Point(76, 19)
-        Me.cmdCat.Name = "cmdCat"
-        Me.cmdCat.Size = New System.Drawing.Size(75, 38)
-        Me.cmdCat.TabIndex = 20
-        Me.cmdCat.Text = "cat"
-        Me.cmdCat.UseVisualStyleBackColor = True
-        '
-        'cmdBinary
-        '
-        Me.cmdBinary.Location = New System.Drawing.Point(2, 19)
-        Me.cmdBinary.Name = "cmdBinary"
-        Me.cmdBinary.Size = New System.Drawing.Size(75, 38)
-        Me.cmdBinary.TabIndex = 19
-        Me.cmdBinary.Text = "binary"
-        Me.cmdBinary.UseVisualStyleBackColor = True
-        '
-        'ucrChkSummaryModel
-        '
-        Me.ucrChkSummaryModel.Checked = False
-        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(25, 308)
-        Me.ucrChkSummaryModel.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
-        Me.ucrChkSummaryModel.Name = "ucrChkSummaryModel"
-        Me.ucrChkSummaryModel.Size = New System.Drawing.Size(185, 25)
-        Me.ucrChkSummaryModel.TabIndex = 19
-        '
-        'ucrChkDisplayModel
-        '
-        Me.ucrChkDisplayModel.Checked = False
-        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(25, 354)
-        Me.ucrChkDisplayModel.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
-        Me.ucrChkDisplayModel.Name = "ucrChkDisplayModel"
-        Me.ucrChkDisplayModel.Size = New System.Drawing.Size(185, 25)
-        Me.ucrChkDisplayModel.TabIndex = 20
         '
         'dlgHypothesisTestsCalculator
         '
