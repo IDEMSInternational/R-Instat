@@ -100,6 +100,8 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdCont = New System.Windows.Forms.Button()
         Me.cmdCat = New System.Windows.Forms.Button()
         Me.cmdBinary = New System.Windows.Forms.Button()
+        Me.ucrChkSummaryModel = New instat.ucrCheck()
+        Me.ucrChkDisplayModel = New instat.ucrCheck()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -981,11 +983,31 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBinary.Text = "binary"
         Me.cmdBinary.UseVisualStyleBackColor = True
         '
+        'ucrChkSummaryModel
+        '
+        Me.ucrChkSummaryModel.Checked = False
+        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(25, 308)
+        Me.ucrChkSummaryModel.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrChkSummaryModel.Name = "ucrChkSummaryModel"
+        Me.ucrChkSummaryModel.Size = New System.Drawing.Size(185, 25)
+        Me.ucrChkSummaryModel.TabIndex = 19
+        '
+        'ucrChkDisplayModel
+        '
+        Me.ucrChkDisplayModel.Checked = False
+        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(25, 354)
+        Me.ucrChkDisplayModel.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrChkDisplayModel.Name = "ucrChkDisplayModel"
+        Me.ucrChkDisplayModel.Size = New System.Drawing.Size(185, 25)
+        Me.ucrChkDisplayModel.TabIndex = 20
+        '
         'dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(787, 599)
+        Me.Controls.Add(Me.ucrChkDisplayModel)
+        Me.Controls.Add(Me.ucrChkSummaryModel)
         Me.Controls.Add(Me.grpVerification)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.cmdHelp)
@@ -1096,4 +1118,6 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdCont As Button
     Friend WithEvents cmdCat As Button
     Friend WithEvents cmdBinary As Button
+    Friend WithEvents ucrChkDisplayModel As ucrCheck
+    Friend WithEvents ucrChkSummaryModel As ucrCheck
 End Class
