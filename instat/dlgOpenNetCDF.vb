@@ -178,7 +178,7 @@ Public Class dlgOpenNetCDF
                 If dlgOpen.FileName <> "" Then
                     strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
                     strFilePath = dlgOpen.FileName
-                    strFileExt = Path.GetExtension(strFilePath)
+                    strFileExt = Path.GetExtension(strFilePath).ToLower()
                     ucrInputFilePath.SetName(Replace(strFilePath, "\", "/"))
                     If strFileExt = ".nc" Then
                         CheckCloseFile()
@@ -193,6 +193,8 @@ Public Class dlgOpenNetCDF
                         clsImportNetcdfFunction.RemoveParameterByName("boundary")
                         clsBoundaryListFunction.ClearParameters()
                     End If
+                Else
+                    MsgBox("File type: '" & strFileExt & "' not recognised as a NetCDF file (.nc).", vbOKOnly)
                 End If
             End If
         End Using
