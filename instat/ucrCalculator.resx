@@ -10173,28 +10173,28 @@
   <data name="&gt;&gt;ucrReceiverForCalculation.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
-  <data name="ucrTry.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrTryCalculator.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 314</value>
   </data>
-  <data name="ucrTry.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrTryCalculator.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="ucrTry.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrTryCalculator.Size" type="System.Drawing.Size, System.Drawing">
     <value>528, 32</value>
   </data>
-  <data name="ucrTry.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrTryCalculator.TabIndex" type="System.Int32, mscorlib">
     <value>194</value>
   </data>
-  <data name="&gt;&gt;ucrTry.Name" xml:space="preserve">
-    <value>ucrTry</value>
+  <data name="&gt;&gt;ucrTryCalculator.Name" xml:space="preserve">
+    <value>ucrTryCalculator</value>
   </data>
-  <data name="&gt;&gt;ucrTry.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrTryCalculator.Type" xml:space="preserve">
     <value>instat.ucrTry, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrTry.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrTryCalculator.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrTry.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrTryCalculator.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

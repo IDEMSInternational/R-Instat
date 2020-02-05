@@ -369,7 +369,7 @@ Partial Class ucrCalculator
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.ucrTry = New instat.ucrTry()
+        Me.ucrTryCalculator = New instat.ucrTry()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -2687,16 +2687,16 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'ucrTry
+        'ucrTryCalculator
         '
-        resources.ApplyResources(Me.ucrTry, "ucrTry")
-        Me.ucrTry.Name = "ucrTry"
+        resources.ApplyResources(Me.ucrTryCalculator, "ucrTryCalculator")
+        Me.ucrTryCalculator.Name = "ucrTryCalculator"
         '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrTry)
+        Me.Controls.Add(Me.ucrTryCalculator)
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
@@ -3069,5 +3069,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdZeroOrOne As Button
     Friend WithEvents cmdNumbers As Button
     Friend WithEvents cmdOr3 As Button
-    Friend WithEvents ucrTry As ucrTry
+    Friend WithEvents ucrTryCalculator As ucrTry
 End Class
