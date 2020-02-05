@@ -96,7 +96,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.ucrTryModelling = New instat.ucrTry()
-        Me.grpVerify = New System.Windows.Forms.GroupBox()
+        Me.grpVerification = New System.Windows.Forms.GroupBox()
         Me.cmdCont = New System.Windows.Forms.Button()
         Me.cmdCat = New System.Windows.Forms.Button()
         Me.cmdBinary = New System.Windows.Forms.Button()
@@ -104,7 +104,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
         Me.grpAgricolae.SuspendLayout()
-        Me.grpVerify.SuspendLayout()
+        Me.grpVerification.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblTest
@@ -942,17 +942,17 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrTryModelling.Size = New System.Drawing.Size(640, 34)
         Me.ucrTryModelling.TabIndex = 17
         '
-        'grpVerify
+        'grpVerification
         '
-        Me.grpVerify.Controls.Add(Me.cmdCont)
-        Me.grpVerify.Controls.Add(Me.cmdCat)
-        Me.grpVerify.Controls.Add(Me.cmdBinary)
-        Me.grpVerify.Location = New System.Drawing.Point(329, 94)
-        Me.grpVerify.Name = "grpVerify"
-        Me.grpVerify.Size = New System.Drawing.Size(232, 75)
-        Me.grpVerify.TabIndex = 18
-        Me.grpVerify.TabStop = False
-        Me.grpVerify.Text = "verification"
+        Me.grpVerification.Controls.Add(Me.cmdCont)
+        Me.grpVerification.Controls.Add(Me.cmdCat)
+        Me.grpVerification.Controls.Add(Me.cmdBinary)
+        Me.grpVerification.Location = New System.Drawing.Point(329, 94)
+        Me.grpVerification.Name = "grpVerification"
+        Me.grpVerification.Size = New System.Drawing.Size(232, 75)
+        Me.grpVerification.TabIndex = 18
+        Me.grpVerification.TabStop = False
+        Me.grpVerification.Text = "verification"
         '
         'cmdCont
         '
@@ -986,7 +986,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(787, 599)
-        Me.Controls.Add(Me.grpVerify)
+        Me.Controls.Add(Me.grpVerification)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.ucrReceiverMultiple)
@@ -1014,7 +1014,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpStats1.ResumeLayout(False)
         Me.grpStats2.ResumeLayout(False)
         Me.grpAgricolae.ResumeLayout(False)
-        Me.grpVerify.ResumeLayout(False)
+        Me.grpVerification.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1092,7 +1092,7 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdBIB As Button
     Friend WithEvents cmdHelp As Button
     Friend WithEvents ucrTryModelling As ucrTry
-    Friend WithEvents grpVerify As GroupBox
+    Friend WithEvents grpVerification As GroupBox
     Friend WithEvents cmdCont As Button
     Friend WithEvents cmdCat As Button
     Friend WithEvents cmdBinary As Button
