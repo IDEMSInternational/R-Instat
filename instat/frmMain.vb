@@ -264,9 +264,6 @@ Public Class frmMain
 
         mnuTbDataView.Checked = True
         mnuTbOutput.Checked = True
-        mnuTbColumnMetadata.Checked = False
-        mnuTbLog.Checked = False
-
         UpdateLayout()
     End Sub
 
@@ -342,11 +339,6 @@ Public Class frmMain
         dlgRegularSequence.ShowDialog()
     End Sub
 
-
-    Private Sub mnuPrepareAddColumnRowSummary_Click(sender As Object, e As EventArgs)
-        dlgRowSummary.ShowDialog()
-    End Sub
-
     Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificFrequency.Click
         dlgFrequency.ShowDialog()
     End Sub
@@ -391,10 +383,6 @@ Public Class frmMain
     'Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Click
     '    dlgNon_ParametricTwoWayAnova.ShowDialog()
     'End Sub
-
-    Private Sub ImportDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareImportDailyData.Click
-
-    End Sub
 
     Private Sub ShiftDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareShiftDailyData.Click
         dlgShiftDailyData.ShowDialog()
@@ -463,8 +451,6 @@ Public Class frmMain
         End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
         mnuTbOutput.Checked = mnuViewOutputWindow.Checked
-        mnuTbColumnMetadata.Checked = mnuViewColumnMetadata.Checked
-        mnuTbLog.Checked = mnuViewLog.Checked
     End Sub
 
     Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
@@ -503,14 +489,6 @@ Public Class frmMain
     Private Sub mnuFilePrintPreview_Click(sender As Object, e As EventArgs) Handles mnuFilePrintPreview.Click
         dlgPrintPreviewOptions.ShowDialog()
     End Sub
-
-    Private Sub mnuClimateMethodsCreateClimateObject_Click(sender As Object, e As EventArgs)
-        dlgCreateClimateObject.ShowDialog()
-    End Sub
-
-    'Private Sub mnuExport_Click(sender As Object, e As EventArgs) Handles mnuExport.Click
-    '    dlgExportDataset.ShowDialog()
-    'End Sub
 
     Private Sub mnuPrepareDataFileSheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectDataFrameMetadata.Click
         dlgDataFrameMetaData.ShowDialog()
@@ -1696,16 +1674,6 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub mnuTbColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuTbColumnMetadata.Click
-        mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
-        UpdateLayout()
-    End Sub
-
-    Private Sub mnuTbLog_Click(sender As Object, e As EventArgs) Handles mnuTbLog.Click
-        mnuViewLog.Checked = Not mnuViewLog.Checked
-        UpdateLayout()
-    End Sub
-
     Private Sub mnuTbResetLayout_Click(sender As Object, e As EventArgs) Handles mnuTbResetLayout.Click
         SetToDefaultLayout()
     End Sub
@@ -1898,14 +1866,6 @@ Public Class frmMain
         dlgParallelCoordinatePlot.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnCalculateColumnSummaries_Click(sender As Object, e As EventArgs)
-        dlgColumnStats.ShowDialog()
-    End Sub
-
-    Private Sub mnuPrepareColumnCalculateGeneralSummaries_Click(sender As Object, e As EventArgs)
-        dlgCalculationsSummary.ShowDialog()
-    End Sub
-
     Private Sub mnuModelHypothesisTests_Click(sender As Object, e As EventArgs) Handles mnuModelHypothesisTests.Click
         dlgHypothesisTestsCalculator.ShowDialog()
     End Sub
@@ -2024,12 +1984,6 @@ Public Class frmMain
         dlgMerge.ShowDialog()
     End Sub
 
-    Private Sub mnuTbLastGraph_Click(sender As Object, e As EventArgs) Handles mnuTbLastGraph.Click
-        Me.Enabled = False
-        clsRLink.ViewLastGraph()
-        Me.Enabled = True
-    End Sub
-
     Private Sub mnuClimaticCMSAFExporttoCMSAFRToolbox_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFExporttoCMSAFRToolbox.Click
         dlgExportToCMSAF.ShowDialog()
     End Sub
@@ -2075,7 +2029,6 @@ Public Class frmMain
 
     Private Sub MnuClimaticTidyandExamineUnstack_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineUnstack.Click
         dlgUnstack.ShowDialog()
-
     End Sub
 
     Private Sub mnuClimaticTidyandExamineStack_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineStack.Click
@@ -2169,6 +2122,51 @@ End Sub
 
     Private Sub mnuPrepareColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCountInFactor.Click
         dlgCountinFactor.ShowDialog()
+    End Sub
 
+    Private Sub MnuRGraph_Click(sender As Object, e As EventArgs) Handles mnuRGraph.Click
+        Me.Enabled = False
+        clsRLink.ViewLastGraph()
+        Me.Enabled = True
+    End Sub
+
+    Private Sub MnuScriptFile_Click(sender As Object, e As EventArgs) Handles mnuScriptFile.Click
+        mnuViewScriptWindow.Checked = Not mnuViewScriptWindow.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub MnuLogFile_Click(sender As Object, e As EventArgs) Handles mnuLogFile.Click
+        mnuViewLog.Checked = Not mnuViewLog.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub MnuColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuColumnMetadata.Click
+        mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub MnuDataFrameMetadata_Click(sender As Object, e As EventArgs) Handles mnuDataFrameMetadata.Click
+        mnuViewDataFrameMetadata.Checked = Not mnuViewDataFrameMetadata.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub MnuPlotly_Click(sender As Object, e As EventArgs) Handles mnuPlotly.Click
+        dlgViewGraph.ShowDialog()
+    End Sub
+
+    Private Sub MnuLastGraph_Click(sender As Object, e As EventArgs) Handles mnuLastGraph.Click
+        Me.Enabled = False
+        clsRLink.ViewLastGraph()
+        Me.Enabled = True
+    End Sub
+
+    Private Sub MnuTbLog_Click(sender As Object, e As EventArgs) Handles mnuTbLog.Click
+        mnuViewScriptWindow.Checked = Not mnuViewScriptWindow.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub MnuMetadata_Click(sender As Object, e As EventArgs) Handles mnuMetadata.Click
+        mnuColumnMetadata.Checked = Not mnuColumnMetadata.Checked
+        UpdateLayout()
     End Sub
 End Class
