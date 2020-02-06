@@ -85,6 +85,15 @@ Public Class dlgColumnStats
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
 
+        ucrReceiverWeights.SetParameter(New RParameter("weights", 7))
+        ucrReceiverWeights.Selector = ucrSelectorForColumnStatistics
+        ucrReceiverWeights.SetParameterIsString()
+
+        ucrChkWeights.SetText("Weights")
+        ucrChkWeights.AddParameterPresentCondition(True, "weights")
+        ucrChkWeights.AddParameterPresentCondition(False, "weights", False)
+
+        ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedHideIfParameterMissing:=True)
         'linking
         ucrChkStoreResults.AddToLinkedControls(ucrChkOriginalLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
@@ -182,7 +191,16 @@ Public Class dlgColumnStats
         End If
     End Sub
 
+    Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged
+        If ucrChkWeights.Checked Then
+            ucrReceiverWeights.SetMeAsReceiver()
+        Else
+            ucrReceiverSelectedVariables.SetMeAsReceiver()
+        End If
+    End Sub
+
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
 End Class
