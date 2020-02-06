@@ -1,4 +1,4 @@
-install.packages("miniCRAN",  lib = "../library",)
+install.packages("miniCRAN")
 
 core_pkgs <- c("reshape2", "lubridate","plyr", "dplyr", "rtf", "openxlsx", "ggplot2", 
                "extRemes", "GGally", "agridat", "FactoMineR", "plotrix", "candisc", "R6", 
@@ -17,6 +17,7 @@ core_pkgs <- c("reshape2", "lubridate","plyr", "dplyr", "rtf", "openxlsx", "ggpl
 			   "PCICt", "abind") # Added because of ncdf4.helpers
 			   # You must unzip ncdf4.helpers folder into library folder manually
 			   # Download from here https://drive.google.com/file/d/1UqwqVDxMvlHNocUa0i6uiGFT24zwGdgB/view?usp=sharing
+
 pkgList <- miniCRAN::pkgDep(core_pkgs, type = "win.binary", repos = "https://cran.rstudio.com/", 
                   suggests = FALSE, includeBasePkgs = TRUE, Rversion = "3.6")
 
