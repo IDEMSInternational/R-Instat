@@ -110,7 +110,7 @@ Public Class dlgCalculator
 
     Private Sub ucrCalc_SelectionChanged() Handles ucrCalc.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrCalc.ucrReceiverForCalculation.GetVariableNames(False))
-        ' ucrCalc.ucrTryModelling.ucrInputTryMessage.SetName("")
+        ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
         TestOKEnabled()
     End Sub
 
@@ -160,7 +160,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrCalc.DataFrameChanged
-        'ucrCalc.ucrTryModelling.ucrInputTryMessage.SetName("")
+        ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
         SaveResults()
     End Sub
 
