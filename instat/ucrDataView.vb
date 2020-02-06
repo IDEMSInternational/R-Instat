@@ -860,4 +860,8 @@ Public Class ucrDataView
         dlgRestrict.strDefaultDataframe = grdCurrSheet.Name
         dlgRestrict.ShowDialog()
     End Sub
+
+    Private Sub mnuRemoveCurrentFilters_Click(sender As Object, e As EventArgs) Handles mnuRemoveCurrentFilters.Click
+        RunScriptFromDataView(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
+    End Sub
 End Class
