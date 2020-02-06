@@ -1469,9 +1469,9 @@ Public Class RLink
         Dim clsInteractivePlot As New RFunction
 
         clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
-        clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
 
         If bAsPlotly Then
+            clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
             clsInteractivePlot.SetPackageName("plotly")
             clsInteractivePlot.SetRCommand("ggplotly")
             clsInteractivePlot.AddParameter("p", clsRFunctionParameter:=clsLastGraph, iPosition:=0)
