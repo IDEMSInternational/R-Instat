@@ -55,11 +55,11 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetPrefix("Calc")
         ucrCalc.ucrInputCalOptions.SetName("Basic")
         ucrCalc.Reset()
-        ucrCalc.chkShowArguments.Checked = False
+        ucrCalc.chkShowParameters.Checked = False
         ucrCalc.chkSaveResultInto.Checked = True
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
-        'ucrCalc.ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
+        ucrCalc.ucrTryCalculator.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.Visible = True
     End Sub
 
@@ -70,8 +70,8 @@ Public Class dlgCalculator
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 14
         ucrCalc.ucrReceiverForCalculation.SetMeAsReceiver()
-        'ucrCalc.ucrTryModelling.SetIsCommand()
-        'ucrCalc.ucrTryModelling.SetReceiver(ucrCalc.ucrReceiverForCalculation)
+        ucrCalc.ucrTryCalculator.SetIsCommand()
+        ucrCalc.ucrTryCalculator.SetReceiver(ucrCalc.ucrReceiverForCalculation)
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -85,7 +85,7 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrSaveResultInto.SetValidationTypeAsRVariable()
-        ' ucrCalc.ucrTryModelling.StrvecOutputRequired()
+        ucrCalc.ucrTryCalculator.StrvecOutputRequired()
     End Sub
 
     Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveNameChanged
@@ -110,7 +110,7 @@ Public Class dlgCalculator
 
     Private Sub ucrCalc_SelectionChanged() Handles ucrCalc.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrCalc.ucrReceiverForCalculation.GetVariableNames(False))
-        ' ucrCalc.ucrTryModelling.ucrInputTryMessage.SetName("")
+        ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
         TestOKEnabled()
     End Sub
 
@@ -160,7 +160,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrCalc.DataFrameChanged
-        'ucrCalc.ucrTryModelling.ucrInputTryMessage.SetName("")
+        ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
         SaveResults()
     End Sub
 
