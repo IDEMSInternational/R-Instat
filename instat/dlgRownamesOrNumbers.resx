@@ -394,7 +394,7 @@
     <value>1</value>
   </data>
   <data name="rdoCopyRowNamesIntoFirstColumn.Text" xml:space="preserve">
-    <value>Copy Row Names into First Column</value>
+    <value>Copy Row Names into Column</value>
   </data>
   <data name="&gt;&gt;rdoCopyRowNamesIntoFirstColumn.Name" xml:space="preserve">
     <value>rdoCopyRowNamesIntoFirstColumn</value>
