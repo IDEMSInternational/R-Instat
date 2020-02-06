@@ -85,7 +85,7 @@ Public Class dlgHypothesisTestsCalculator
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
         clsSummary.AddParameter("object", clsRCodeStructureParameter:=ucrBase.clsRsyntax.clsBaseCommandString, iPosition:=0)
-        clsFormula.AddParameter("")
+        clsFormula.AddParameter("object", clsRCodeStructureParameter:=ucrBase.clsRsyntax.clsBaseCommandString, iPosition:=1)
         clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
@@ -648,6 +648,7 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub ucrChkSummaryDisplayModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummaryModel.ControlValueChanged
         If ucrChkSummaryModel.Checked Then
+            clsSummary.iCallType = 2
             ucrBase.clsRsyntax.AddToAfterCodes(clsSummary, 0)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummary)
@@ -656,6 +657,7 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub ucrChkDisplayModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayModel.ControlValueChanged
         If ucrChkDisplayModel.Checked Then
+            clsFormula.iCallType = 2
             ucrBase.clsRsyntax.AddToAfterCodes(clsFormula, 1)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsFormula)
