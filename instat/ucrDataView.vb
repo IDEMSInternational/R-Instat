@@ -811,4 +811,10 @@ Public Class ucrDataView
         clsConvertTo.AddParameter("col_names", SelectedColumns())
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
     End Sub
+
+    Private Sub mnuConvertToOrderedFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToOrderedFactor.Click
+        clsConvertOrderedFactor.AddParameter("col_names", SelectedColumns())
+        clsConvertOrderedFactor.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34))
+        RunScriptFromDataView(clsConvertOrderedFactor.ToScript, strComment:="Right Click Menu: Convert to Ordered Factor")
+    End Sub
 End Class
