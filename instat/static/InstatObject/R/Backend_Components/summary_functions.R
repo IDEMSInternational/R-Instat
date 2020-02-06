@@ -957,7 +957,6 @@ count_calc <- function(x, count_test = "==", count_value, na.rm = FALSE, na_type
 }
 
 #standard error of mean function
-
 standard_error_mean <- function(x, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
       else{
@@ -972,6 +971,26 @@ standard_error_mean <- function(x, na.rm = FALSE, na_type = "", ...){
       }
 }
 
+#Verification functions 
+#HydroGOF Package
+
+#Coefficient of determination
+coef_det <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::br2(sim = x, obs = y, na.rm = na.rm))
+  }
+}
+
+#Coefficient of persistence
+coef_pers <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(any(is.na(x))) return(NA)
+    return(hydroGOF::cp(sim = x, obs = y, na.rm = na.rm))
+  }
+}
 
 DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   if(n_column_factors == 1 && length(factors) == 0) n_column_factors <- 0
