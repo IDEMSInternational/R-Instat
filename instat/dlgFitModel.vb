@@ -15,7 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgFitModel
+    Private clsAttach As New RFunction
+    Private clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Public bRCodeSet As Boolean = False
@@ -65,6 +68,8 @@ Public Class dlgFitModel
         ucrReceiverExpressionFitModel.SetParameterIsString()
         ucrReceiverExpressionFitModel.bWithQuotes = False
         ucrReceiverExpressionFitModel.AddtoCombobox("1")
+        ucrTryModelling.SetReceiver(ucrReceiverExpressionFitModel)
+        ucrTryModelling.SetIsModel()
 
         ucrFamily.SetGLMDistributions()
         ucrFamily.SetFunctionIsDistFunction()
@@ -174,6 +179,16 @@ Public Class dlgFitModel
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
         clsLMOrGLM = clsLM
         bResetModelOptions = True
+
+        clsAttach.SetRCommand("attach")
+        clsDetach.SetRCommand("detach")
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("unload", "TRUE")
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
+
+        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -240,7 +255,7 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
-        ucrReceiverExpressionFitModel.AddToReceiverAtCursorPosition("0")
+        ucrReceiverExpressionFitModel.AddToReceiverAtCursorPosition("I()", 1)
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click

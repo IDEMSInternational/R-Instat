@@ -144,10 +144,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblResponseVariable.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="cmdModelOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 243</value>
+    <value>394, 285</value>
   </data>
   <data name="cmdModelOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 23</value>
@@ -168,13 +168,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdModelOptions.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="lblModelPreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblModelPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 248</value>
+    <value>7, 295</value>
   </data>
   <data name="lblModelPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -195,10 +195,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblModelPreview.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="cmdDisplayOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 271</value>
+    <value>394, 313</value>
   </data>
   <data name="cmdDisplayOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 23</value>
@@ -219,7 +219,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdDisplayOptions.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblExplanatoryModel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -246,7 +246,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblExplanatoryModel.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="cmdDiv.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
@@ -532,7 +532,7 @@
     <value>9</value>
   </data>
   <data name="cmdZero.Text" xml:space="preserve">
-    <value>0</value>
+    <value>l()</value>
   </data>
   <data name="&gt;&gt;cmdZero.Name" xml:space="preserve">
     <value>cmdZero</value>
@@ -595,7 +595,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpFirstCalc.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="cmdCos.Location" type="System.Drawing.Point, System.Drawing">
     <value>62, 10</value>
@@ -778,10 +778,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpSecondCalc.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrModelName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 272</value>
+    <value>10, 316</value>
+  </data>
+  <data name="ucrModelName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrModelName.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 24</value>
@@ -799,7 +802,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrModelName.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkConvertToVariate.Location" type="System.Drawing.Point, System.Drawing">
     <value>378, 43</value>
@@ -820,7 +823,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkConvertToVariate.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -829,10 +832,31 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>510, 357</value>
+    <value>510, 420</value>
+  </data>
+  <data name="ucrTryModelling.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 246</value>
+  </data>
+  <data name="ucrTryModelling.Size" type="System.Drawing.Size, System.Drawing">
+    <value>480, 33</value>
+  </data>
+  <data name="ucrTryModelling.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.Name" xml:space="preserve">
+    <value>ucrTryModelling</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.Type" xml:space="preserve">
+    <value>instat.ucrTry, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrInputModelPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 245</value>
+    <value>90, 292</value>
   </data>
   <data name="ucrInputModelPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>298, 21</value>
@@ -850,7 +874,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputModelPreview.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="ucrFamily.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 199</value>
@@ -871,7 +895,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFamily.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrReceiverResponseVar.Location" type="System.Drawing.Point, System.Drawing">
     <value>243, 43</value>
@@ -895,7 +919,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverResponseVar.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="ucrSelectorByDataFrameAddRemoveForFitModel.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -919,10 +943,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorByDataFrameAddRemoveForFitModel.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 300</value>
+    <value>10, 344</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -940,7 +964,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -973,6 +997,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverExpressionFitModel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
 </root>

@@ -80,6 +80,7 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
         ucrSaveStringHandling.SetIsTextBox()
         ucrSaveStringHandling.SetLabelText("Prefix for New Column:")
+        ucrSaveStringHandling.setLinkedReceiver(ucrReceiverStringHandling) 'added
 
         'ucrChkIncludeRegularExpressions
         ucrChkIncludeRegularExpressions.SetText("Include Regular Expressions")

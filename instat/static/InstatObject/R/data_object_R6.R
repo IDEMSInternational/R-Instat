@@ -128,6 +128,8 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
       message("data is empty. Data will be an empty data frame.")
     }
     if(check_names) {
+      # "T" should be avoided as a column name but is not checked by make.names()
+      if("T" %in% names(new_data)) names(new_data)[names(new_data) == "T"] <- ".T"
       valid_names <- make.names(iconv(names(new_data), to = "ASCII//TRANSLIT", sub = "."))
       if(!all(names(new_data) == valid_names)) {
         warning("Not all column names are syntactically valid. make.names() and iconv() will be used to force them to be valid.")
@@ -596,31 +598,29 @@ DataSheet$set("public", "get_columns_from_data", function(col_names, force_as_da
 }
 )
 
-DataSheet$set("public", "frequency_tables", function(x_col_names, y_col_name, addmargins = FALSE,  proportions = FALSE, percentages = FALSE,  transpose = FALSE) {
-  if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_name are required")
-  multiply_by = 1
-  for (i in 1:length(x_col_names)){
-    if(transpose)(my_table = table(private$data[[y_col_name]], private$data[[x_col_names[i]]])) else(my_table = table(private$data[[x_col_names[i]]], private$data[[y_col_name]]))
-    
-    if(percentages && proportions)( multiply_by = 100)
-    else if(percentages && !proportions)warning("Proportions should be set to true to display percentages.")
-    if(addmargins && proportions)(print(addmargins(prop.table(my_table)*multiply_by))) #Is FUN appropriate here?
-    else if(addmargins && !proportions)(print(addmargins(my_table)))
-    else if(!addmargins && proportions)(print(prop.table(my_table)*multiply_by))
-    else if(!addmargins && !proportions)(print(my_table))
+DataSheet$set("public", "anova_tables", function(x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
+  if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+  if(sign_level || signif.stars) message("This is no longer descriptive")
+  if(sign_level) end_col = 5 else end_col = 4
+  for (i in seq_along(x_col_names)) {
+    mod <- lm(formula = as.formula(paste0("as.numeric(", as.name(y_col_name), ") ~ ", as.name(x_col_names[i]))), data = self$get_data_frame())
+    cat("ANOVA table: ", y_col_name, " ~ ", x_col_names[i], "\n", sep = "")
+    print(anova(mod)[1:end_col], signif.stars = signif.stars)
+    cat("\n")
+    if(means) (print(model.tables(aov(mod), type = "means")))
   }
 }
 )
 
-DataSheet$set("public", "anova_tables", function(x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
-  if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
-  if(sign_level || signif.stars)warning("This is nolonger descriptive")
-  if(sign_level)(end_col = 5)else(end_col = 4)
-  for (i in 1:length(x_col_names)){
-    my_model = lm(formula = as.formula(paste(as.name(y_col_name),as.name(x_col_names[i]), sep = "~")), data=private$data)
-    print(anova(my_model)[1:end_col], signif.stars = signif.stars)
-    if(means)(print(model.tables(aov(my_model), type = "means")))
-  }
+DataSheet$set("public", "cor", function(x_col_names, y_col_name, use = "everything", method = c("pearson", "kendall", "spearman")) {
+  x <- self$get_columns_from_data(x_col_names, force_as_data_frame = TRUE)
+  y <- self$get_columns_from_data(y_col_name)
+  x <- sapply(x, as.numeric)
+  y <- as.numeric(y)
+  results <- cor(x = x, y = y, use = use, method = method)
+  dimnames(results)[[2]] <- y_col_name
+  cat("Correlations:\n")
+  return(t(results))
 }
 )
 
