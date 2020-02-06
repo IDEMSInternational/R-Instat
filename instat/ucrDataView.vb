@@ -45,8 +45,6 @@ Public Class ucrDataView
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
 
     Private Sub ucrDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        mnuFreezeToHere.Enabled = False
-        mnuUnfreeze.Enabled = False
         grdData.Visible = False
         mnuInsertColsBefore.Visible = False
         mnuInsertColsAfter.Visible = False
@@ -635,7 +633,7 @@ Public Class ucrDataView
         dlgSort.ShowDialog()
     End Sub
 
-    Private Sub mnuFreezeToHere_Click(sender As Object, e As EventArgs) Handles mnuFreezeToHere.Click
+    Private Sub mnuFreezeToHere_Click(sender As Object, e As EventArgs)
         Dim strLastSelectedColumn As String
         Dim strSelectedColumns As String()
 
@@ -647,7 +645,7 @@ Public Class ucrDataView
         End If
     End Sub
 
-    Private Sub mnuUnfreeze_Click(sender As Object, e As EventArgs) Handles mnuUnfreeze.Click
+    Private Sub mnuUnfreeze_Click(sender As Object, e As EventArgs)
         RunScriptFromDataView(clsUnfreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
     End Sub
 
@@ -677,14 +675,18 @@ Public Class ucrDataView
         End If
     End Sub
 
-    Private Sub copyRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles copyRangeToolStripMenuItem.Click
+    Private Sub mnuCellCopyRange_Click(sender As Object, e As EventArgs) Handles mnuCellCopyRange.Click
         grdData.CurrentWorksheet.Copy()
     End Sub
 
     Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
+        Dim strScript As String = ""
+        Dim strTemp As String
         clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
-        clsViewDataFrame.AddParameter("title", Chr(34) & grdCurrSheet.Name & Chr(34))
-        RunScriptFromDataView(clsViewDataFrame.ToScript, strComment:="Right Click Menu: View R Data Frame", bSeparateThread:=False)
+        clsGetDataFrame.SetAssignTo(grdCurrSheet.Name)
+        strTemp = clsViewDataFrame.ToScript(strScript)
+        RunScriptFromDataView(strScript & strTemp, strComment:="Right Click Menu: View R Data Frame", bSeparateThread:=False)
+
     End Sub
 
     'Private Sub mnuConvertDate_Click(sender As Object, e As EventArgs)
@@ -707,7 +709,7 @@ Public Class ucrDataView
         dlgAddComment.ShowDialog()
     End Sub
 
-    Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddComment.Click
+    Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgAddComment.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgAddComment.ShowDialog()
     End Sub
@@ -782,7 +784,11 @@ Public Class ucrDataView
         dlgReorderColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuCellHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
+    End Sub
+
+    Private Sub lblHeader_Click(sender As Object, e As EventArgs) Handles lblHeader.Click
+
     End Sub
 End Class

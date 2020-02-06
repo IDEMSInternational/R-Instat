@@ -29,6 +29,8 @@ Public Class dlgParallelCoordinatePlot
     Private clsRFacetFunction As New RFunction
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
+    Private clsCoordPolarFunction As New RFunction
+    Private clsCoordPolarStartOperator As New ROperator
 
     Private Sub dlgParallelCoordinatePlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -48,7 +50,7 @@ Public Class dlgParallelCoordinatePlot
     Private Sub InitialiseDialog()
         Dim dctScale As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        'ucrBase.iHelpTopicID 
+        ucrBase.iHelpTopicID = 593
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrSelectorParallelCoordinatePlot.SetParameter(New RParameter("data", 0))
@@ -128,6 +130,8 @@ Public Class dlgParallelCoordinatePlot
         clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
         clsYLabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone
+        clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
+        clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
 
@@ -168,7 +172,7 @@ Public Class dlgParallelCoordinatePlot
     End Sub
 
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorParallelCoordinatePlot, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrSelectorParallelCoordinatePlot, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub

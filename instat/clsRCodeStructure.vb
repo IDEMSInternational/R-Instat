@@ -24,10 +24,13 @@ Public Class RCodeStructure
     Public strAssignToGraph As String
     Public strAssignToSurv As String
     Public strAssignToTable As String
+
+
     ' If true then a list of data frames is being assigned, otherwise a single data frame
     Public bDataFrameList As Boolean = False
     ' Optional R character vector to give names of new data frames if data frame list is not named
     Public strDataFrameNames As String
+
     'These AssingTo's are only relevant in the string case, as RFunction and ROperator have internal equivalents.
     'If they are empty, the output Of the command Is Not linked To an R-instat object.
     'If they are non-empty, that gives the name of the R-instat Object fields it needs to be linked with.
@@ -42,6 +45,7 @@ Public Class RCodeStructure
     Public bAssignToIsPrefix As Boolean = False
     Public bAssignToColumnWithoutNames As Boolean = False
     Public bInsertColumnBefore As Boolean = False
+    Public strAdjacentColumn As String = ""
     Public bRequireCorrectLength As Boolean = True
     Public clsParameters As New List(Of RParameter)
     Protected iNumberOfAddedParameters As Integer = 0 'This might be temporary, it enables to have a default name for parameters...
@@ -82,7 +86,9 @@ Public Class RCodeStructure
     End Sub
 
     'Most methods from RFunction/ROperator have been moved here
+
     Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempSurv As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True, Optional bDataFrameList As Boolean = False, Optional strDataFrameNames As String = "")
+
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -99,6 +105,7 @@ Public Class RCodeStructure
         If Not strTempSurv = "" Then
             strAssignToSurv = strTempSurv
         End If
+
         If Not strTempTable = "" Then
             strAssignToTable = strTempTable
         End If
@@ -110,6 +117,7 @@ Public Class RCodeStructure
         Me.bRequireCorrectLength = bRequireCorrectLength
         Me.bDataFrameList = bDataFrameList
         Me.strDataFrameNames = strDataFrameNames
+
     End Sub
 
     Public Sub RemoveAssignTo()
@@ -147,8 +155,10 @@ Public Class RCodeStructure
         End If
 
         If bToBeAssigned Then
+
             strScript = strScript & ConstructAssignTo(strAssignTo, strTemp) & Environment.NewLine
             'strScript = strScript & strAssignTo & " <- " & strTemp & Environment.NewLine
+
             If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
                 clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
@@ -163,11 +173,26 @@ Public Class RCodeStructure
                         clsAddColumns.AddParameter("use_col_name_as_prefix", "FALSE")
                     End If
                 End If
-                If bInsertColumnBefore Then
-                    clsAddColumns.AddParameter("before", "TRUE")
+
+                'If bInsertColumnBefore Then
+                '    clsAddColumns.AddParameter("before", "TRUE")
+                'Else
+                '    If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                '        clsAddColumns.AddParameter("before", "FALSE")
+                '    End If
+                'End If
+                If Not String.IsNullOrEmpty(strAdjacentColumn) Then
+                    clsAddColumns.AddParameter("before", If(bInsertColumnBefore, "TRUE", "FALSE"))
+                    clsAddColumns.AddParameter("adjacent_column", strAdjacentColumn)
+                    'clsAddColumns.AddParameter("adjacent_column", Chr(34) & strAdjacentColumn & Chr(34))
                 Else
-                    If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                        clsAddColumns.AddParameter("before", "FALSE")
+                    If bInsertColumnBefore Then
+                        clsAddColumns.AddParameter("before", "TRUE")
+                    Else
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsAddColumns.AddParameter("before", "FALSE")
+                        End If
+
                     End If
                 End If
                 If Not bRequireCorrectLength Then
@@ -235,6 +260,7 @@ Public Class RCodeStructure
                 strAssignTo = clsGetTables.ToScript()
             ElseIf Not strAssignToDataFrame = "" Then
                 clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+
                 If bDataFrameList Then
                     clsAddData.AddParameter("data_tables", strAssignTo, iPosition:=0)
                     If strDataFrameNames <> "" Then
@@ -245,6 +271,7 @@ Public Class RCodeStructure
                     clsDataList.AddParameter(strAssignToDataFrame, strAssignTo)
                     clsAddData.AddParameter("data_tables", clsRFunctionParameter:=clsDataList, iPosition:=0)
                 End If
+
                 strScript = strScript & clsAddData.ToScript() & Environment.NewLine
 
                 clsGetData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
@@ -258,6 +285,7 @@ Public Class RCodeStructure
             Return strTemp
         End If
     End Function
+
 
     'sets assign to , to the last line of strTemp
     Private Function ConstructAssignTo(strAssignTo As String, strTemp As String) As String

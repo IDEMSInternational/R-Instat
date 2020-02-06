@@ -208,7 +208,7 @@ DataBook$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, ov
 
 DataBook$set("public", "clone_data_object", function(curr_data_object, include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE, ...) {
   curr_names <- names(curr_data_object)
-  if("get_data_frame" %in% curr_names) new_data <- curr_data_object$get_data_frame(use_current_filter = TRUE)
+  if("get_data_frame" %in% curr_names) new_data <- curr_data_object$get_data_frame(use_current_filter = FALSE)
   else stop("Cannot import data. No 'get_data_frame' method.")
   if("get_metadata" %in% curr_names) new_data_name <- curr_data_object$get_metadata(data_name_label)
   if(include_objects && "get_objects" %in% curr_names) new_objects <- curr_data_object$get_objects()
@@ -789,13 +789,22 @@ DataBook$set("public", "rename_column_in_data", function(data_name, column_name,
 } 
 )
 
-DataBook$set("public", "frequency_tables", function(data_name, x_col_names, y_col_name, addmargins = FALSE, proportions = FALSE, percentages = FALSE, transpose = FALSE) {
-  self$get_data_objects(data_name)$frequency_tables(x_col_names, y_col_name, addmargins = addmargins, proportions = proportions, percentages = percentages, transpose = transpose)
+DataBook$set("public", "frequency_tables", function(data_name, x_col_names, y_col_name, n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
+  for(i in seq_along(x_col_names)) {
+    cat(x_col_names[i], "by", y_col_name, "\n")
+    print(data_book$summary_table(data_name = data_name, summaries = count_label, factors=c(x_col_names[i], y_col_name), n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = page_by, as_html = as_html, signif_fig = signif_fig, na_display = na_display, na_level_display = na_level_display, weights = weights, caption = caption, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, ... = ...))
+    cat("\n")
+  }
 } 
 )
 
 DataBook$set("public", "anova_tables", function(data_name, x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
   self$get_data_objects(data_name)$anova_tables(x_col_names = x_col_names, y_col_name = y_col_name, signif.stars = signif.stars, sign_level = sign_level, means = means)
+} 
+)
+
+DataBook$set("public", "cor", function(data_name, x_col_names, y_col_name, use = "everything", method = c("pearson", "kendall", "spearman")) {
+  self$get_data_objects(data_name)$cor(x_col_names = x_col_names, y_col_name = y_col_name, use = use, method = method)
 } 
 )
 
@@ -1324,8 +1333,8 @@ DataBook$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE
 # }
 # )
 
-DataBook$set("public", "infill_missing_dates", function(data_name, date_name, factors, resort = TRUE) {
-  self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors, resort = resort)
+DataBook$set("public", "infill_missing_dates", function(data_name, date_name, factors, start_month, start_date, end_date, resort = TRUE) {
+  self$get_data_objects(data_name)$infill_missing_dates(date_name = date_name, factor = factors, start_month = start_month, start_date = start_date, end_date = end_date, resort = resort)
 }
 )
 
@@ -1730,11 +1739,19 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
 
   # Rain total condition
   df[["rain_total_actual"]] <- sapply(1:nrow(df), 
-                                      function(x) sum(daily_data[[rain]][daily_data[[year]] == df[[year]][x]][seq(df[[plant_day_name]][x], length = df[[plant_length_name]][x])], na.rm = TRUE))
-  df$rain_cond <- (df[[rain_total_name]] <= df[["rain_total_actual"]])
-
+                                      function(x) {
+                                        rain_values <- daily_data[[rain]][daily_data[[year]] == df[[year]][x] & daily_data[[day]] >= df[[plant_day_name]][x] & daily_data[[day]] < df[[plant_day_name]][x] + df[[plant_length_name]][x]]
+                                        sum_rain <- sum(rain_values, na.rm = TRUE)
+                                        # TODO + 1 is needed because of non leap years
+                                        # if period include 29 Feb then period is 1 less than required length
+                                        if(length(rain_values) + 1 < df[[plant_length_name]][x] || (anyNA(rain_values) && sum_rain < df[[rain_total_name]][x])) sum_rain <- NA
+                                        sum_rain
+                                      }
+  )
+  df$rain_cond <- df[[rain_total_name]] <= df[["rain_total_actual"]]
+  
   # All three conditions met
-  df$overall_cond <- (ifelse(start_check, df$plant_day_cond, TRUE) & df$length_cond & df$rain_cond)
+  df$overall_cond <- ((if(start_check) df$plant_day_cond else TRUE) & df$length_cond & df$rain_cond)
 
   crops_name <- "crop_def"
   crops_name <- next_default_item(prefix = crops_name, existing_names = self$get_data_names(), include_index = FALSE)
@@ -1748,6 +1765,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   }
   if(definition_props) {
     calc_from <- list()
+    if(!missing(station)) calc_from[[length(calc_from) + 1]] <- station
     calc_from[[length(calc_from) + 1]] <- plant_day_name
     calc_from[[length(calc_from) + 1]] <- plant_length_name
     calc_from[[length(calc_from) + 1]] <- rain_total_name
@@ -1755,15 +1773,17 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     grouping <- instat_calculation$new(type = "by", calculated_from = calc_from)
     prop_calc_from <- list("overall_cond")
     names(prop_calc_from) <- crops_name
-    propor_table <- instat_calculation$new(function_exp="length(x = overall_cond[overall_cond == TRUE])/length(x = overall_cond)",
+    propor_table <- instat_calculation$new(function_exp="sum(overall_cond, na.rm = TRUE)/length(na.omit(overall_cond))",
                                            save = 2, calculated_from = prop_calc_from,
                                            manipulations = list(grouping),
                                            type="summary", result_name = "prop_success", result_data_frame = "crop_prop")
     prop_data_frame <- self$run_instat_calculation(propor_table, display = TRUE)
     if(print_table) {
       prop_data_frame$prop_success <- round(prop_data_frame$prop_success, 2)
-      prop_table_unstacked <- reshape2::dcast(formula = as.formula(paste(plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame, value.var = "prop_success")
-      prop_table_split <- split(prop_table_unstacked, prop_table_unstacked[[plant_length_name]])
+      prop_table_unstacked <- reshape2::dcast(formula = as.formula(paste(if(!missing(station)) paste(station, "+"), plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame, value.var = "prop_success")
+      if(!missing(station)) f <- interaction(prop_table_unstacked[[station]], prop_table_unstacked[[plant_length_name]], lex.order = TRUE)
+      else f <- prop_table_unstacked[[plant_length_name]]
+      prop_table_split <- split(prop_table_unstacked, f)
       return(prop_table_split)
     }
   }
@@ -2020,6 +2040,33 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     data_list <- list(z)
     names(data_list) <- new_name
     self$import_data(data_tables=data_list)
+  }
+}
+)
+DataBook$set("public","package_check", function(package) {
+  out <- list()
+  av_packs <- available.packages()
+  av_packs <- data.frame(av_packs)
+  if(package %in% rownames(installed.packages())) {
+    out[[1]] <- 1
+    v_machine <- as.character(packageVersion(package))
+    v_web <- as.character(av_packs[av_packs$Package == package, "Version"])
+    out[[2]] <- compareVersion(v_machine, v_web)
+    out[[3]] <- v_machine
+    out[[4]] <- v_web
+    return(out)
+  }
+  else {
+    #check if the package name is typed right
+    if(package %in% av_packs) {
+      out[[1]] <- 2
+      return(out)
+    }
+    else {
+      #wrong  spelling check you spelling
+      out[[1]] <- 0
+      return(out)
+    }
   }
 }
 )

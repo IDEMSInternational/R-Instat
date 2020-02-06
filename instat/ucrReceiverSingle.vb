@@ -20,7 +20,6 @@ Public Class ucrReceiverSingle
     Dim strDataFrameName As String
     Public strCurrDataType As String
     Public Event WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle)
-    Public bAutoFill As Boolean = False
     'We have not added this to multiple receiver because we have no case yet that we want not to print graph
     Public bPrintGraph As Boolean = True
     'If True variable will be assigned to e.g. DF.x instead of x (where DF is strDataFrameName and x is receiver value)
@@ -94,7 +93,11 @@ Public Class ucrReceiverSingle
                         Else
                             expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
                             If expColumnType IsNot Nothing AndAlso expColumnType.Type <> Internals.SymbolicExpressionType.Null Then
-                                strCurrDataType = expColumnType.AsCharacter(0)
+                                If expColumnType.AsCharacter.Count > 1 Then
+                                    strCurrDataType = Join(expColumnType.AsCharacter.ToArray, ",")
+                                Else
+                                    strCurrDataType = expColumnType.AsCharacter(0)
+                                End If
                             Else
                                 strCurrDataType = ""
                                 bRemove = True
@@ -306,20 +309,6 @@ Public Class ucrReceiverSingle
 
     Private Sub Selector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
         CheckAutoFill()
-    End Sub
-
-    Public Sub CheckAutoFill()
-
-        'TODO When there are receivers with bAttachedToPrimaryDataFrame = False
-        '     don't always want to autofill when dataframe is changed.
-        '     Something like AndAlso Selector.CurrentReceiver.bAttachedToPrimaryDataFrame
-        '     except always want to autofill when resetting regardless of current receiver
-        If bAutoFill AndAlso Selector IsNot Nothing AndAlso (Selector.CurrentReceiver Is Nothing OrElse Selector.CurrentReceiver.bAttachedToPrimaryDataFrame) Then
-            SetMeAsReceiver()
-            If Selector.lstAvailableVariable.Items.Count = 1 Then
-                Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
-            End If
-        End If
     End Sub
 
     Private Sub ParentForm_Shown()

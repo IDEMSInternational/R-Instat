@@ -36,7 +36,7 @@ Public Class dlgOpenNetCDF
     Private bCloseFile As Boolean = False
     Private strFileAssignName As String = "nc"
     Private iExpandedWidth As Integer
-    Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath, "Library", "Climatic", "Satellite/")
+    Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath, "Library", "Climatic", "_Satellite/")
     Private bFromLibrary As Boolean = False
     Private bSubDialogOKEnabled As Boolean = True
 
@@ -191,6 +191,7 @@ Public Class dlgOpenNetCDF
                         clsRFileDetails.AddParameter("infile", Chr(34) & Replace(strFilePath, "\", "/") & Chr(34), iPosition:=1)
                         FileDetails()
                         clsImportNetcdfFunction.RemoveParameterByName("boundary")
+                        clsBoundaryListFunction.ClearParameters()
                     End If
                 End If
             End If
