@@ -22,7 +22,7 @@ Public Class dlgHypothesisTestsCalculator
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
     Private strPackageName As String
-    Private clssSummary As New RFunction
+    Private clsSummary As New RFunction
     Private clsFormula As New RFunction
     Private Sub dlgHypothesisTestsCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -77,7 +77,7 @@ Public Class dlgHypothesisTestsCalculator
         ucrInputComboRPackage.SetName("Stats1")
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
-        clssSummary.SetRCommand("summary")
+        clsSummary.SetRCommand("summary")
         clsFormula.SetRCommand("formula")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -638,6 +638,22 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs = , pred, p = NULL, baseline = NULL, frcst.type = ""prob"", obs.type = ""binary"",thresholds = seq(0,1,0.1), show = TRUE, bins = TRUE,fudge = 0.01)", 142)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs = , pred = , frcst.type = cont, obs.type = cont )", 46)
+        End If
+    End Sub
+
+    Private Sub ucrChkSummaryModel_Load(sender As Object, e As EventArgs) Handles ucrChkSummaryModel.Load
+        If ucrChkSummaryModel.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSummary, 0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummary)
+        End If
+    End Sub
+
+    Private Sub ucrChkDisplayModel_Load(sender As Object, e As EventArgs) Handles ucrChkDisplayModel.Load
+        If ucrChkDisplayModel.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsFormula, 1)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsFormula)
         End If
     End Sub
 End Class
