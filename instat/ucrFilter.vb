@@ -154,7 +154,17 @@ Public Class ucrFilter
     Private Sub ucrValueForFilter_ContentsChanged() Handles ucrValueForFilter.ContentsChanged
         CheckAddEnabled()
     End Sub
-    Private Sub ucrFilterOperation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFilterByReceiver.ControlContentsChanged, ucrFilterOperation.ControlContentsChanged
+
+    Private Sub ucrFilterReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFilterByReceiver.ControlContentsChanged
+        'for logical columns add {"==", "is.na", "!is.na"} only
+        ucrFilterOperation.SetItems(If(ucrFilterByReceiver.strCurrDataType.ToLower = "logical", {"==", "is.na", "!is.na"}, {"==", "<", "<=", ">", ">=", "!=", "is.na", "!is.na"}))
+        ucrFilterOperation.cboInput.SelectedIndex = 0
+
+        VariableTypeProperties()
+        CheckAddEnabled()
+    End Sub
+
+    Private Sub ucrFilterOperation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFilterOperation.ControlContentsChanged
         VariableTypeProperties()
         CheckAddEnabled()
     End Sub
@@ -208,7 +218,6 @@ Public Class ucrFilter
         ucrFilterPreview.SetName(clsFilterView.ToScript())
         ucrFilterByReceiver.Clear()
         RaiseEvent FilterChanged()
-        'CheckAddEnabled() todo. investigate this
     End Sub
 
     Private Sub cmdToggleSelectAll_Click(sender As Object, e As EventArgs) Handles cmdToggleSelectAll.Click
