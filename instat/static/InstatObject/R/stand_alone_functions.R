@@ -617,7 +617,7 @@ multiple_nc_as_data_frame <- function(path, vars, keep_raw_time = TRUE, include_
     dat <- nc_as_data_frame(nc = nc, vars = vars, keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = boundary, lon_points = lon_points, lat_points = lat_points, id_points = id_points, show_requested_points = show_requested_points, great_circle_dist = great_circle_dist)
     nc_list[[length(nc_list) + 1]] <- dat
     ncdf4::nc_close(nc)
-    info <- paste("Reading file", i, "of", n_files)
+    info <- paste0("Reading file ", i, " of ", n_files, " - ", round(100*i/n_files), "%")
     setWinProgressBar(pb, value = i, title = info, label = info)
   }
   close(pb)
