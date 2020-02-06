@@ -56,8 +56,6 @@ Public Class ucrFilter
             ucrFilterByReceiver.Add(strDefaultColumn)
             SetDefaultColumn("")
         End If
-
-        'ucrInputFilterName.SetPrefix("filter") 'todo. remove this
     End Sub
 
     Private Sub InitialiseControl()
@@ -101,6 +99,7 @@ Public Class ucrFilter
                 lblSelectLevels.Visible = True
                 ucrFactorLevels.Visible = True
                 cmdToggleSelectAll.Visible = True
+                'ucrFactorLevels.SetSelectionAllLevels(False) 'by default don't select any factors
                 SetToggleButtonSettings()
             Else
                 ucrFilterOperation.Visible = True
