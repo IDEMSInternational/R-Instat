@@ -348,12 +348,18 @@ Partial Class frmMain
         Me.mnuTbLast10Dialogs = New System.Windows.Forms.ToolStripDropDownButton()
         Me.sepStart = New System.Windows.Forms.ToolStripSeparator()
         Me.sepEnd = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuTbLastGraph = New System.Windows.Forms.ToolStripButton()
+        Me.mnuLastGraph = New System.Windows.Forms.ToolStripSplitButton()
+        Me.mnuViewer = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuploty = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbDataView = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbOutput = New System.Windows.Forms.ToolStripButton()
-        Me.mnuTbColumnMetadata = New System.Windows.Forms.ToolStripButton()
-        Me.mnuTbLog = New System.Windows.Forms.ToolStripButton()
+        Me.mnuMetadata = New System.Windows.Forms.ToolStripSplitButton()
+        Me.mnuColumnMetadat = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDataFrameMetadat = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTbLog = New System.Windows.Forms.ToolStripSplitButton()
+        Me.mnuScriptWindow = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLogWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTbResetLayout = New System.Windows.Forms.ToolStripButton()
         Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbHelp = New System.Windows.Forms.ToolStripButton()
@@ -415,26 +421,22 @@ Partial Class frmMain
         Me.mnuPrepareCheckDataPrePareToShareSdcPackage = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataAnonymiseIDColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuPrepareCalculator = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnCalculate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnCalculateCalculations = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnCalculateColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnCalculateGeneralSummaries = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator24 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuPrepareColumnCalculateDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnCalculateTransform = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnCalculateRank = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnCalculatePolynomials = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnCalculateRowSummary = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnGenerate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnGenerateRegularSequence = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnGenerateCountInFactor = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator25 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareColumnGenerateEnter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnGenerateDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator25 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuPrepareColumnGenerateRowSummaries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnGenerateRank = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnPrpareColumnGeneratePolynomials = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator56 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareColumnGenerateRandomSamples = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnGeneratePermuteRows = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnFactorConvertToFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnFactorRecodeNumeric = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareColumnFactorCountInFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareColumnFactorRecodeFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnFactorCombineFactors = New System.Windows.Forms.ToolStripMenuItem()
@@ -526,6 +528,7 @@ Partial Class frmMain
         Me.ToolStripSeparator52 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuProcurementDescribeCategoricalBarCharts = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeCategoricalMosaic = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeCategoricalTreemap = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeNumeric = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeNumericBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.HistogramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -571,20 +574,26 @@ Partial Class frmMain
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuToolsInstallRPackage = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
+        Me.splLogScript = New System.Windows.Forms.SplitContainer()
+        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
+        Me.mnuRViewer = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPlotly = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
-        Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.ucrLogWindow = New instat.ucrLog()
         Me.ucrScriptWindow = New instat.ucrScript()
-        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuProcurementDescribeCategoricalTreemap = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2277,7 +2286,7 @@ Partial Class frmMain
         Me.Tool_strip.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.Tool_strip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.Tool_strip.ImageScalingSize = New System.Drawing.Size(30, 30)
-        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbEditLastDialog, Me.mnuTbLast10Dialogs, Me.mnuTbLastGraph, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuTbColumnMetadata, Me.mnuTbLog, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp})
+        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbEditLastDialog, Me.mnuTbLast10Dialogs, Me.mnuLastGraph, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuMetadata, Me.mnuTbLog, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp})
         resources.ApplyResources(Me.Tool_strip, "Tool_strip")
         Me.Tool_strip.Name = "Tool_strip"
         Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -2359,12 +2368,22 @@ Partial Class frmMain
         Me.sepEnd.Name = "sepEnd"
         resources.ApplyResources(Me.sepEnd, "sepEnd")
         '
-        'mnuTbLastGraph
+        'mnuLastGraph
         '
-        Me.mnuTbLastGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbLastGraph.Image = Global.instat.My.Resources.Resources.lastgraph
-        resources.ApplyResources(Me.mnuTbLastGraph, "mnuTbLastGraph")
-        Me.mnuTbLastGraph.Name = "mnuTbLastGraph"
+        Me.mnuLastGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuLastGraph.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewer, Me.mnuploty})
+        resources.ApplyResources(Me.mnuLastGraph, "mnuLastGraph")
+        Me.mnuLastGraph.Name = "mnuLastGraph"
+        '
+        'mnuViewer
+        '
+        Me.mnuViewer.Name = "mnuViewer"
+        resources.ApplyResources(Me.mnuViewer, "mnuViewer")
+        '
+        'mnuploty
+        '
+        Me.mnuploty.Name = "mnuploty"
+        resources.ApplyResources(Me.mnuploty, "mnuploty")
         '
         'separator2
         '
@@ -2389,23 +2408,39 @@ Partial Class frmMain
         Me.mnuTbOutput.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbOutput.Name = "mnuTbOutput"
         '
-        'mnuTbColumnMetadata
+        'mnuMetadata
         '
-        Me.mnuTbColumnMetadata.CheckOnClick = True
-        Me.mnuTbColumnMetadata.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbColumnMetadata.Image = Global.instat.My.Resources.Resources.columnmetadata
-        resources.ApplyResources(Me.mnuTbColumnMetadata, "mnuTbColumnMetadata")
-        Me.mnuTbColumnMetadata.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
-        Me.mnuTbColumnMetadata.Name = "mnuTbColumnMetadata"
+        Me.mnuMetadata.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuMetadata.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnMetadat, Me.mnuDataFrameMetadat})
+        resources.ApplyResources(Me.mnuMetadata, "mnuMetadata")
+        Me.mnuMetadata.Name = "mnuMetadata"
+        '
+        'mnuColumnMetadat
+        '
+        Me.mnuColumnMetadat.Name = "mnuColumnMetadat"
+        resources.ApplyResources(Me.mnuColumnMetadat, "mnuColumnMetadat")
+        '
+        'mnuDataFrameMetadat
+        '
+        Me.mnuDataFrameMetadat.Name = "mnuDataFrameMetadat"
+        resources.ApplyResources(Me.mnuDataFrameMetadat, "mnuDataFrameMetadat")
         '
         'mnuTbLog
         '
-        Me.mnuTbLog.CheckOnClick = True
         Me.mnuTbLog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbLog.Image = Global.instat.My.Resources.Resources.script2
+        Me.mnuTbLog.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuLogWindow, Me.mnuScriptWindow})
         resources.ApplyResources(Me.mnuTbLog, "mnuTbLog")
-        Me.mnuTbLog.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbLog.Name = "mnuTbLog"
+        '
+        'mnuScriptWindow
+        '
+        Me.mnuScriptWindow.Name = "mnuScriptWindow"
+        resources.ApplyResources(Me.mnuScriptWindow, "mnuScriptWindow")
+        '
+        'mnuLogWindow
+        '
+        Me.mnuLogWindow.Name = "mnuLogWindow"
+        resources.ApplyResources(Me.mnuLogWindow, "mnuLogWindow")
         '
         'mnuTbResetLayout
         '
@@ -2543,7 +2578,7 @@ Partial Class frmMain
         '
         'mnuPrepare
         '
-        Me.mnuPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrame, Me.mnuPrepareCheckData, Me.ToolStripSeparator6, Me.mnuPrepareColumnCalculate, Me.mnuPrepareColumnGenerate, Me.mnuPrepareColumnFactor, Me.mnuPrepareColumnText, Me.mnuPrepareColumnDate, Me.mnuPrepareColumnDefine, Me.mnuPrepareColumnReshape, Me.ToolStripSeparator7, Me.mnuPrepareKeysAndLinks, Me.mnuPrepareDataObject, Me.mnuPrepareRObjects})
+        Me.mnuPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrame, Me.mnuPrepareCheckData, Me.ToolStripSeparator6, Me.mnuPrepareCalculator, Me.mnuPrepareColumnCalculate, Me.mnuPrepareColumnFactor, Me.mnuPrepareColumnText, Me.mnuPrepareColumnDate, Me.mnuPrepareColumnDefine, Me.mnuPrepareColumnReshape, Me.ToolStripSeparator7, Me.mnuPrepareKeysAndLinks, Me.mnuPrepareDataObject, Me.mnuPrepareRObjects})
         Me.mnuPrepare.Name = "mnuPrepare"
         resources.ApplyResources(Me.mnuPrepare, "mnuPrepare")
         Me.mnuPrepare.Tag = "Prepare"
@@ -2752,70 +2787,18 @@ Partial Class frmMain
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
         resources.ApplyResources(Me.ToolStripSeparator6, "ToolStripSeparator6")
         '
+        'mnuPrepareCalculator
+        '
+        Me.mnuPrepareCalculator.Name = "mnuPrepareCalculator"
+        resources.ApplyResources(Me.mnuPrepareCalculator, "mnuPrepareCalculator")
+        Me.mnuPrepareCalculator.Tag = "Calculator..."
+        '
         'mnuPrepareColumnCalculate
         '
-        Me.mnuPrepareColumnCalculate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnCalculateCalculations, Me.mnuPrepareColumnCalculateColumnSummaries, Me.mnuPrepareColumnCalculateGeneralSummaries, Me.ToolStripSeparator24, Me.mnuPrepareColumnCalculateDuplicateColumn, Me.mnuPrepareColumnCalculateTransform, Me.mnuPrepareColumnCalculateRank, Me.mnuPrepareColumnCalculatePolynomials, Me.mnuPrepareColumnCalculateRowSummary})
+        Me.mnuPrepareColumnCalculate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateRegularSequence, Me.mnuPrepareColumnGenerateEnter, Me.mnuPrepareColumnGenerateDuplicateColumn, Me.ToolStripSeparator25, Me.mnuPrepareColumnGenerateRowSummaries, Me.mnuPrepareColumnGenerateRank, Me.mnuPrepareColumnPrpareColumnGeneratePolynomials, Me.ToolStripSeparator56, Me.mnuPrepareColumnGenerateRandomSamples, Me.mnuPrepareColumnGeneratePermuteRows})
         Me.mnuPrepareColumnCalculate.Name = "mnuPrepareColumnCalculate"
         resources.ApplyResources(Me.mnuPrepareColumnCalculate, "mnuPrepareColumnCalculate")
         Me.mnuPrepareColumnCalculate.Tag = "Column:_Calculate"
-        '
-        'mnuPrepareColumnCalculateCalculations
-        '
-        Me.mnuPrepareColumnCalculateCalculations.Name = "mnuPrepareColumnCalculateCalculations"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateCalculations, "mnuPrepareColumnCalculateCalculations")
-        Me.mnuPrepareColumnCalculateCalculations.Tag = "Calculations..."
-        '
-        'mnuPrepareColumnCalculateColumnSummaries
-        '
-        Me.mnuPrepareColumnCalculateColumnSummaries.Name = "mnuPrepareColumnCalculateColumnSummaries"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateColumnSummaries, "mnuPrepareColumnCalculateColumnSummaries")
-        Me.mnuPrepareColumnCalculateColumnSummaries.Tag = "Column_Summaries..."
-        '
-        'mnuPrepareColumnCalculateGeneralSummaries
-        '
-        Me.mnuPrepareColumnCalculateGeneralSummaries.Name = "mnuPrepareColumnCalculateGeneralSummaries"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateGeneralSummaries, "mnuPrepareColumnCalculateGeneralSummaries")
-        '
-        'ToolStripSeparator24
-        '
-        Me.ToolStripSeparator24.Name = "ToolStripSeparator24"
-        resources.ApplyResources(Me.ToolStripSeparator24, "ToolStripSeparator24")
-        '
-        'mnuPrepareColumnCalculateDuplicateColumn
-        '
-        Me.mnuPrepareColumnCalculateDuplicateColumn.Name = "mnuPrepareColumnCalculateDuplicateColumn"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateDuplicateColumn, "mnuPrepareColumnCalculateDuplicateColumn")
-        '
-        'mnuPrepareColumnCalculateTransform
-        '
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateTransform, "mnuPrepareColumnCalculateTransform")
-        Me.mnuPrepareColumnCalculateTransform.Name = "mnuPrepareColumnCalculateTransform"
-        Me.mnuPrepareColumnCalculateTransform.Tag = "..."
-        '
-        'mnuPrepareColumnCalculateRank
-        '
-        Me.mnuPrepareColumnCalculateRank.Name = "mnuPrepareColumnCalculateRank"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateRank, "mnuPrepareColumnCalculateRank")
-        Me.mnuPrepareColumnCalculateRank.Tag = "Rank..."
-        '
-        'mnuPrepareColumnCalculatePolynomials
-        '
-        Me.mnuPrepareColumnCalculatePolynomials.Name = "mnuPrepareColumnCalculatePolynomials"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculatePolynomials, "mnuPrepareColumnCalculatePolynomials")
-        Me.mnuPrepareColumnCalculatePolynomials.Tag = "Polynomials..."
-        '
-        'mnuPrepareColumnCalculateRowSummary
-        '
-        Me.mnuPrepareColumnCalculateRowSummary.Name = "mnuPrepareColumnCalculateRowSummary"
-        resources.ApplyResources(Me.mnuPrepareColumnCalculateRowSummary, "mnuPrepareColumnCalculateRowSummary")
-        Me.mnuPrepareColumnCalculateRowSummary.Tag = "Row_Summary..."
-        '
-        'mnuPrepareColumnGenerate
-        '
-        Me.mnuPrepareColumnGenerate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnGenerateRegularSequence, Me.mnuPrepareColumnGenerateCountInFactor, Me.ToolStripSeparator25, Me.mnuPrepareColumnGenerateEnter, Me.mnuPrepareColumnGenerateRandomSamples, Me.mnuPrepareColumnGeneratePermuteRows})
-        Me.mnuPrepareColumnGenerate.Name = "mnuPrepareColumnGenerate"
-        resources.ApplyResources(Me.mnuPrepareColumnGenerate, "mnuPrepareColumnGenerate")
-        Me.mnuPrepareColumnGenerate.Tag = "Column:_Generate"
         '
         'mnuPrepareColumnGenerateRegularSequence
         '
@@ -2823,20 +2806,42 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuPrepareColumnGenerateRegularSequence, "mnuPrepareColumnGenerateRegularSequence")
         Me.mnuPrepareColumnGenerateRegularSequence.Tag = "Regular_Sequence..."
         '
-        'mnuPrepareColumnGenerateCountInFactor
+        'mnuPrepareColumnGenerateEnter
         '
-        Me.mnuPrepareColumnGenerateCountInFactor.Name = "mnuPrepareColumnGenerateCountInFactor"
-        resources.ApplyResources(Me.mnuPrepareColumnGenerateCountInFactor, "mnuPrepareColumnGenerateCountInFactor")
+        Me.mnuPrepareColumnGenerateEnter.Name = "mnuPrepareColumnGenerateEnter"
+        resources.ApplyResources(Me.mnuPrepareColumnGenerateEnter, "mnuPrepareColumnGenerateEnter")
+        '
+        'mnuPrepareColumnGenerateDuplicateColumn
+        '
+        Me.mnuPrepareColumnGenerateDuplicateColumn.Name = "mnuPrepareColumnGenerateDuplicateColumn"
+        resources.ApplyResources(Me.mnuPrepareColumnGenerateDuplicateColumn, "mnuPrepareColumnGenerateDuplicateColumn")
         '
         'ToolStripSeparator25
         '
         Me.ToolStripSeparator25.Name = "ToolStripSeparator25"
         resources.ApplyResources(Me.ToolStripSeparator25, "ToolStripSeparator25")
         '
-        'mnuPrepareColumnGenerateEnter
+        'mnuPrepareColumnGenerateRowSummaries
         '
-        Me.mnuPrepareColumnGenerateEnter.Name = "mnuPrepareColumnGenerateEnter"
-        resources.ApplyResources(Me.mnuPrepareColumnGenerateEnter, "mnuPrepareColumnGenerateEnter")
+        Me.mnuPrepareColumnGenerateRowSummaries.Name = "mnuPrepareColumnGenerateRowSummaries"
+        resources.ApplyResources(Me.mnuPrepareColumnGenerateRowSummaries, "mnuPrepareColumnGenerateRowSummaries")
+        '
+        'mnuPrepareColumnGenerateRank
+        '
+        Me.mnuPrepareColumnGenerateRank.Name = "mnuPrepareColumnGenerateRank"
+        resources.ApplyResources(Me.mnuPrepareColumnGenerateRank, "mnuPrepareColumnGenerateRank")
+        Me.mnuPrepareColumnGenerateRank.Tag = "Rank..."
+        '
+        'mnuPrepareColumnPrpareColumnGeneratePolynomials
+        '
+        Me.mnuPrepareColumnPrpareColumnGeneratePolynomials.Name = "mnuPrepareColumnPrpareColumnGeneratePolynomials"
+        resources.ApplyResources(Me.mnuPrepareColumnPrpareColumnGeneratePolynomials, "mnuPrepareColumnPrpareColumnGeneratePolynomials")
+        Me.mnuPrepareColumnPrpareColumnGeneratePolynomials.Tag = "Polynomials..."
+        '
+        'ToolStripSeparator56
+        '
+        Me.ToolStripSeparator56.Name = "ToolStripSeparator56"
+        resources.ApplyResources(Me.ToolStripSeparator56, "ToolStripSeparator56")
         '
         'mnuPrepareColumnGenerateRandomSamples
         '
@@ -2852,7 +2857,7 @@ Partial Class frmMain
         '
         'mnuPrepareColumnFactor
         '
-        Me.mnuPrepareColumnFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnFactorConvertToFactor, Me.mnuPrepareColumnFactorRecodeNumeric, Me.ToolStripSeparator12, Me.mnuPrepareColumnFactorRecodeFactor, Me.mnuPrepareColumnFactorCombineFactors, Me.mnuPrepareColumnFactorDummyVariables, Me.ToolStripSeparator14, Me.mnuPrepareColumnFactorLevelsLabels, Me.mnuPrepareFactorViewLabels, Me.mnuPrepareColumnFactorReorderLevels, Me.mnuPrepareColumnFactorReferenceLevel, Me.mnuPrepareColumnFactorUnusedLevels, Me.mnuPrepareColumnFactorContrasts, Me.ToolStripSeparator19, Me.mnuPrepareColumnFactorFactorDataFrame})
+        Me.mnuPrepareColumnFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnFactorConvertToFactor, Me.mnuPrepareColumnFactorRecodeNumeric, Me.mnuPrepareColumnFactorCountInFactor, Me.ToolStripSeparator12, Me.mnuPrepareColumnFactorRecodeFactor, Me.mnuPrepareColumnFactorCombineFactors, Me.mnuPrepareColumnFactorDummyVariables, Me.ToolStripSeparator14, Me.mnuPrepareColumnFactorLevelsLabels, Me.mnuPrepareFactorViewLabels, Me.mnuPrepareColumnFactorReorderLevels, Me.mnuPrepareColumnFactorReferenceLevel, Me.mnuPrepareColumnFactorUnusedLevels, Me.mnuPrepareColumnFactorContrasts, Me.ToolStripSeparator19, Me.mnuPrepareColumnFactorFactorDataFrame})
         Me.mnuPrepareColumnFactor.Name = "mnuPrepareColumnFactor"
         resources.ApplyResources(Me.mnuPrepareColumnFactor, "mnuPrepareColumnFactor")
         Me.mnuPrepareColumnFactor.Tag = "Column:_Factor"
@@ -2868,6 +2873,11 @@ Partial Class frmMain
         Me.mnuPrepareColumnFactorRecodeNumeric.Name = "mnuPrepareColumnFactorRecodeNumeric"
         resources.ApplyResources(Me.mnuPrepareColumnFactorRecodeNumeric, "mnuPrepareColumnFactorRecodeNumeric")
         Me.mnuPrepareColumnFactorRecodeNumeric.Tag = "Recode_Numeric..."
+        '
+        'mnuPrepareColumnFactorCountInFactor
+        '
+        Me.mnuPrepareColumnFactorCountInFactor.Name = "mnuPrepareColumnFactorCountInFactor"
+        resources.ApplyResources(Me.mnuPrepareColumnFactorCountInFactor, "mnuPrepareColumnFactorCountInFactor")
         '
         'ToolStripSeparator12
         '
@@ -3374,6 +3384,11 @@ Partial Class frmMain
         Me.mnuProcurementDescribeCategoricalMosaic.Name = "mnuProcurementDescribeCategoricalMosaic"
         resources.ApplyResources(Me.mnuProcurementDescribeCategoricalMosaic, "mnuProcurementDescribeCategoricalMosaic")
         '
+        'mnuProcurementDescribeCategoricalTreemap
+        '
+        Me.mnuProcurementDescribeCategoricalTreemap.Name = "mnuProcurementDescribeCategoricalTreemap"
+        resources.ApplyResources(Me.mnuProcurementDescribeCategoricalTreemap, "mnuProcurementDescribeCategoricalTreemap")
+        '
         'mnuProcurementDescribeNumeric
         '
         Me.mnuProcurementDescribeNumeric.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeNumericBoxplot, Me.HistogramToolStripMenuItem, Me.ToolStripSeparator53, Me.mnuProcurementDescribeNumericCorrelationsRedFlagsOrOthers})
@@ -3570,7 +3585,7 @@ Partial Class frmMain
         '
         'mnuTools
         '
-        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsRunRCode, Me.mnuToolsRestartR, Me.mnuToolsCheckForUpdates, Me.mnuToolsClearOutputWindow, Me.ToolStripSeparator5, Me.mnuToolsSaveCurrentOptions, Me.mnuToolsLoadOptions, Me.mnuToolsOptions})
+        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsRunRCode, Me.mnuToolsRestartR, Me.mnuToolsCheckForUpdates, Me.mnuToolsClearOutputWindow, Me.ToolStripSeparator5, Me.mnuToolsSaveCurrentOptions, Me.mnuToolsLoadOptions, Me.mnuToolsInstallRPackage, Me.mnuToolsOptions})
         Me.mnuTools.Name = "mnuTools"
         resources.ApplyResources(Me.mnuTools, "mnuTools")
         '
@@ -3614,6 +3629,11 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuToolsLoadOptions, "mnuToolsLoadOptions")
         Me.mnuToolsLoadOptions.Name = "mnuToolsLoadOptions"
         Me.mnuToolsLoadOptions.Tag = "Load_Options..."
+        '
+        'mnuToolsInstallRPackage
+        '
+        Me.mnuToolsInstallRPackage.Name = "mnuToolsInstallRPackage"
+        resources.ApplyResources(Me.mnuToolsInstallRPackage, "mnuToolsInstallRPackage")
         '
         'mnuToolsOptions
         '
@@ -3673,18 +3693,6 @@ Partial Class frmMain
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
         '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -3700,19 +3708,6 @@ Partial Class frmMain
         '
         Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
-        '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'splDataOutput
         '
@@ -3730,6 +3725,61 @@ Partial Class frmMain
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
         '
+        'mnuRViewer
+        '
+        Me.mnuRViewer.Name = "mnuRViewer"
+        resources.ApplyResources(Me.mnuRViewer, "mnuRViewer")
+        '
+        'mnuPlotly
+        '
+        Me.mnuPlotly.Name = "mnuPlotly"
+        resources.ApplyResources(Me.mnuPlotly, "mnuPlotly")
+        '
+        'mnuColumnMetadata
+        '
+        Me.mnuColumnMetadata.Name = "mnuColumnMetadata"
+        resources.ApplyResources(Me.mnuColumnMetadata, "mnuColumnMetadata")
+        '
+        'mnuDataFrameMetadata
+        '
+        Me.mnuDataFrameMetadata.Name = "mnuDataFrameMetadata"
+        resources.ApplyResources(Me.mnuDataFrameMetadata, "mnuDataFrameMetadata")
+        '
+        'mnuScriptFile
+        '
+        Me.mnuScriptFile.Name = "mnuScriptFile"
+        resources.ApplyResources(Me.mnuScriptFile, "mnuScriptFile")
+        '
+        'mnuLogFile
+        '
+        Me.mnuLogFile.Name = "mnuLogFile"
+        resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
+        '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Tag = "Script_Window"
+        '
         'ucrDataViewer
         '
         Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
@@ -3743,11 +3793,6 @@ Partial Class frmMain
         Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.ucrOutput, "ucrOutput")
         Me.ucrOutput.Name = "ucrOutput"
-        '
-        'mnuProcurementDescribeCategoricalTreemap
-        '
-        Me.mnuProcurementDescribeCategoricalTreemap.Name = "mnuProcurementDescribeCategoricalTreemap"
-        resources.ApplyResources(Me.mnuProcurementDescribeCategoricalTreemap, "mnuProcurementDescribeCategoricalTreemap")
         '
         'frmMain
         '
@@ -3871,7 +3916,7 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareColumnFactorRecodeFactor As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnFactorReferenceLevel As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnFactorUnusedLevels As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnGenerate As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnCalculate As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameConvertColumns As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGeneratePermuteRows As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnReshapeColumnSummaries As ToolStripMenuItem
@@ -3922,17 +3967,10 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareDataFrameProtectColumn As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameHideColumns As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameFreezeColumns As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculate As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculateTransform As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculateRank As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculatePolynomials As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculateCalculations As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculateRowSummary As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGenerateRegularSequence As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGenerateRandomSamples As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnFactorRecodeNumeric As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnTextFindReplace As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator21 As ToolStripSeparator
     Friend WithEvents mnuPrepareDataObjectMetadata As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectRenameMetadata As ToolStripMenuItem
@@ -4062,12 +4100,10 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticClimateMethodsAdditionalSeasonalSummaryRain As ToolStripMenuItem
     Friend WithEvents mnuClimaticClimateMethodsAdditionalWaterBalance As ToolStripMenuItem
     Friend WithEvents mnuClimateMethodsCreateClimateObject As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator24 As ToolStripSeparator
     Friend WithEvents mnuClimaticFile As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileOpensst As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGenerateEnter As ToolStripMenuItem
     Friend WithEvents mnuFileOpenFromODK As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnGenerateCountInFactor As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator25 As ToolStripSeparator
     Friend WithEvents mnuPrepareColumnDate As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnDateGenerateDate As ToolStripMenuItem
@@ -4138,7 +4174,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticSCFSupportCanonicalCorrelations As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareUnstackDailyData As ToolStripMenuItem
     Friend WithEvents mnuClimaticDefineClimaticData As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculateDuplicateColumn As ToolStripMenuItem
     Friend WithEvents mnuProcurement As ToolStripMenuItem
     Friend WithEvents mnuProcurementPrepare As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribe As ToolStripMenuItem
@@ -4228,8 +4263,6 @@ Partial Class frmMain
     Friend WithEvents mnuTbOpenFromLibrary As ToolStripButton
     Friend WithEvents mnuTbDataView As ToolStripButton
     Friend WithEvents mnuTbOutput As ToolStripButton
-    Friend WithEvents mnuTbColumnMetadata As ToolStripButton
-    Friend WithEvents mnuTbLog As ToolStripButton
     Friend WithEvents separator3 As ToolStripSeparator
     Friend WithEvents mnuTbResetLayout As ToolStripButton
     Friend WithEvents mnuTbOpen As ToolStripSplitButton
@@ -4259,8 +4292,6 @@ Partial Class frmMain
     Friend WithEvents mnuFileImportandTidyNetCDFFile As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificMosaic As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificParallelCoordinatePlot As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculateGeneralSummaries As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnCalculateColumnSummaries As ToolStripMenuItem
     Friend WithEvents mnuModelHypothesisTests As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator46 As ToolStripSeparator
     Friend WithEvents mnuClimaticPrepareEvapotranspiration As ToolStripMenuItem
@@ -4301,7 +4332,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticPrepareCompare As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileOpenandTidyShapefile As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineMerge As ToolStripMenuItem
-    Friend WithEvents mnuTbLastGraph As ToolStripButton
     Friend WithEvents mnuClimaticCMSAFExporttoCMSAFRToolbox As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareConversions As ToolStripMenuItem
     Friend WithEvents mnuHelpAcknowledgments As ToolStripMenuItem
@@ -4339,4 +4369,30 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator55 As ToolStripSeparator
     Friend WithEvents mnuPrepareColumnDefineCircular As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribeCategoricalTreemap As ToolStripMenuItem
+
+    Friend WithEvents mnuToolsInstallRPackage As ToolStripMenuItem
+
+    Friend WithEvents mnuPrepareColumnGenerateDuplicateColumn As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnGenerateRowSummaries As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnGenerateRank As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnPrpareColumnGeneratePolynomials As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator56 As ToolStripSeparator
+    Friend WithEvents mnuPrepareCalculator As ToolStripMenuItem
+    Friend WithEvents mnuPrepareColumnFactorCountInFactor As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
+    Friend WithEvents mnuTbLog As ToolStripSplitButton
+    Friend WithEvents mnuScriptWindow As ToolStripMenuItem
+    Friend WithEvents mnuLogWindow As ToolStripMenuItem
+    Friend WithEvents mnuMetadata As ToolStripSplitButton
+    Friend WithEvents mnuLastGraph As ToolStripSplitButton
+    Friend WithEvents mnuColumnMetadat As ToolStripMenuItem
+    Friend WithEvents mnuDataFrameMetadat As ToolStripMenuItem
+    Friend WithEvents mnuViewer As ToolStripMenuItem
+    Friend WithEvents mnuploty As ToolStripMenuItem
+    Friend WithEvents mnuRViewer As ToolStripMenuItem
+    Friend WithEvents mnuPlotly As ToolStripMenuItem
+    Friend WithEvents mnuColumnMetadata As ToolStripMenuItem
+    Friend WithEvents mnuDataFrameMetadata As ToolStripMenuItem
+    Friend WithEvents mnuScriptFile As ToolStripMenuItem
+    Friend WithEvents mnuLogFile As ToolStripMenuItem
 End Class

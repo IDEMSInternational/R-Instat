@@ -274,9 +274,10 @@ Public Class ucrDayOfYear
                 iDoy = ModPos(iDoy + iStartDay - 1, If(b366DayOfYear, 366, 365))
                 dtTemp = New Date(year:=iYear, month:=1, day:=1).AddDays(iDoy - 1)
                 bUpdate = False
-                ucrInputDay.SetName(dtTemp.Day)
+
                 'TODO this should be done through a method in ucrInputMonth
                 ucrInputMonth.cboInput.SelectedIndex = dtTemp.Month - 1
+                ucrInputDay.SetName(dtTemp.Day)
                 bUpdate = True
                 UpdateAllParameters()
             Catch ex As Exception
