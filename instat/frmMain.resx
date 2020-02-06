@@ -1999,28 +1999,28 @@
     <value>Save...</value>
   </data>
   <data name="mnuFileSaveAsDataAs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuFileSaveAsDataAs.Text" xml:space="preserve">
     <value>Save Data As...</value>
   </data>
   <data name="mnuFileSaveAsOutputAs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuFileSaveAsOutputAs.Text" xml:space="preserve">
-    <value>Save Output Window As...</value>
+    <value>Save Output As...</value>
   </data>
   <data name="mnuFileSaveAsLogAs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuFileSaveAsLogAs.Text" xml:space="preserve">
     <value>Save Log As...</value>
   </data>
   <data name="mnuFileSaveAsScriptAs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuFileSaveAsScriptAs.Text" xml:space="preserve">
-    <value>Save Script Window As...</value>
+    <value>Save Script As...</value>
   </data>
   <data name="mnuFileSaveAs.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 22</value>
@@ -2479,7 +2479,7 @@
     <value>232, 22</value>
   </data>
   <data name="mnuFileCloseData.Text" xml:space="preserve">
-    <value>Close Data File</value>
+    <value>Close Data Book</value>
   </data>
   <data name="ToolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 6</value>
@@ -2700,68 +2700,14 @@
   <data name="mnuPrepareCheckData.Text" xml:space="preserve">
     <value>Check Data</value>
   </data>
-  <data name="ToolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 6</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateCalculations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateCalculations.Text" xml:space="preserve">
-    <value>Calculations...</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateColumnSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateColumnSummaries.Text" xml:space="preserve">
-    <value>Column Summaries...</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateGeneralSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateGeneralSummaries.Text" xml:space="preserve">
-    <value>General Summaries...</value>
-  </data>
-  <data name="ToolStripSeparator24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 6</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateDuplicateColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateDuplicateColumn.Text" xml:space="preserve">
-    <value>Duplicate Column...</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateTransform.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateTransform.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateTransform.Text" xml:space="preserve">
-    <value>Transform...</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateRank.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateRank.Text" xml:space="preserve">
-    <value>Rank...</value>
-  </data>
-  <data name="mnuPrepareColumnCalculatePolynomials.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
-  </data>
-  <data name="mnuPrepareColumnCalculatePolynomials.Text" xml:space="preserve">
-    <value>Polynomials...</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateRowSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
-  </data>
-  <data name="mnuPrepareColumnCalculateRowSummary.Text" xml:space="preserve">
-    <value>Row Summary...</value>
-  </data>
-  <data name="mnuPrepareColumnCalculate.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuPrepareCalculator.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
   </data>
-  <data name="mnuPrepareColumnCalculate.Text" xml:space="preserve">
-    <value>Column: Calculate</value>
+  <data name="mnuPrepareCalculator.Text" xml:space="preserve">
+    <value>Calculator...</value>
+  </data>
+  <data name="ToolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 6</value>
   </data>
   <data name="mnuPrepareColumnGenerateRegularSequence.Size" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
@@ -2769,20 +2715,41 @@
   <data name="mnuPrepareColumnGenerateRegularSequence.Text" xml:space="preserve">
     <value>Regular Sequence...</value>
   </data>
-  <data name="mnuPrepareColumnGenerateCountInFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
-  </data>
-  <data name="mnuPrepareColumnGenerateCountInFactor.Text" xml:space="preserve">
-    <value>Count in Factor...</value>
-  </data>
-  <data name="ToolStripSeparator25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 6</value>
-  </data>
   <data name="mnuPrepareColumnGenerateEnter.Size" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
   </data>
   <data name="mnuPrepareColumnGenerateEnter.Text" xml:space="preserve">
     <value>Enter...</value>
+  </data>
+  <data name="mnuPrepareColumnGenerateDuplicateColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 22</value>
+  </data>
+  <data name="mnuPrepareColumnGenerateDuplicateColumn.Text" xml:space="preserve">
+    <value>Duplicate Column...</value>
+  </data>
+  <data name="ToolStripSeparator25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 6</value>
+  </data>
+  <data name="mnuPrepareColumnGenerateRowSummaries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 22</value>
+  </data>
+  <data name="mnuPrepareColumnGenerateRowSummaries.Text" xml:space="preserve">
+    <value>Row Summaries...</value>
+  </data>
+  <data name="mnuPrepareColumnGenerateRank.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 22</value>
+  </data>
+  <data name="mnuPrepareColumnGenerateRank.Text" xml:space="preserve">
+    <value>Rank...</value>
+  </data>
+  <data name="mnuPrepareColumnPrpareColumnGeneratePolynomials.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 22</value>
+  </data>
+  <data name="mnuPrepareColumnPrpareColumnGeneratePolynomials.Text" xml:space="preserve">
+    <value>Polynomials...</value>
+  </data>
+  <data name="ToolStripSeparator56.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 6</value>
   </data>
   <data name="mnuPrepareColumnGenerateRandomSamples.Size" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
@@ -2796,11 +2763,11 @@
   <data name="mnuPrepareColumnGeneratePermuteRows.Text" xml:space="preserve">
     <value>Permute Columns...</value>
   </data>
-  <data name="mnuPrepareColumnGenerate.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuPrepareColumnCalculate.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
   </data>
-  <data name="mnuPrepareColumnGenerate.Text" xml:space="preserve">
-    <value>Column: Generate</value>
+  <data name="mnuPrepareColumnCalculate.Text" xml:space="preserve">
+    <value>Column: Calculate</value>
   </data>
   <data name="mnuPrepareColumnFactorConvertToFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
@@ -2813,6 +2780,12 @@
   </data>
   <data name="mnuPrepareColumnFactorRecodeNumeric.Text" xml:space="preserve">
     <value>Recode Numeric...</value>
+  </data>
+  <data name="mnuPrepareColumnFactorCountInFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 22</value>
+  </data>
+  <data name="mnuPrepareColumnFactorCountInFactor.Text" xml:space="preserve">
+    <value>Count in Factor...</value>
   </data>
   <data name="ToolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 6</value>
@@ -3633,6 +3606,12 @@
   <data name="mnuToolsLoadOptions.Text" xml:space="preserve">
     <value>Load Options...</value>
   </data>
+  <data name="mnuToolsInstallRPackage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
+  </data>
+  <data name="mnuToolsInstallRPackage.Text" xml:space="preserve">
+    <value>Install R Package</value>
+  </data>
   <data name="mnuToolsOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 22</value>
   </data>
@@ -3706,7 +3685,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrColumnMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 171</value>
+    <value>72, 170</value>
   </data>
   <data name="ucrColumnMeta.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3745,7 +3724,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrDataFrameMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 171</value>
+    <value>178, 170</value>
   </data>
   <data name="ucrDataFrameMeta.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3775,7 +3754,7 @@
     <value>1</value>
   </data>
   <data name="splMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 171</value>
+    <value>255, 170</value>
   </data>
   <data name="splMetadata.SplitterDistance" type="System.Int32, mscorlib">
     <value>72</value>
@@ -3826,7 +3805,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrLogWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 171</value>
+    <value>176, 170</value>
   </data>
   <data name="ucrLogWindow.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3865,7 +3844,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrScriptWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 171</value>
+    <value>393, 170</value>
   </data>
   <data name="ucrScriptWindow.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3895,10 +3874,10 @@
     <value>1</value>
   </data>
   <data name="splLogScript.Size" type="System.Drawing.Size, System.Drawing">
-    <value>574, 171</value>
+    <value>574, 170</value>
   </data>
   <data name="splLogScript.SplitterDistance" type="System.Int32, mscorlib">
-    <value>177</value>
+    <value>176</value>
   </data>
   <data name="splLogScript.SplitterWidth" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3931,7 +3910,7 @@
     <value>1</value>
   </data>
   <data name="splExtraWindows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>834, 171</value>
+    <value>834, 170</value>
   </data>
   <data name="splExtraWindows.SplitterDistance" type="System.Int32, mscorlib">
     <value>255</value>
@@ -3982,7 +3961,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrDataViewer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>384, 223</value>
+    <value>384, 224</value>
   </data>
   <data name="ucrDataViewer.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4021,7 +4000,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>445, 223</value>
+    <value>445, 224</value>
   </data>
   <data name="ucrOutput.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4051,7 +4030,7 @@
     <value>1</value>
   </data>
   <data name="splDataOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>834, 223</value>
+    <value>834, 224</value>
   </data>
   <data name="splDataOutput.SplitterDistance" type="System.Int32, mscorlib">
     <value>384</value>
@@ -4090,7 +4069,7 @@
     <value>834, 399</value>
   </data>
   <data name="splOverall.SplitterDistance" type="System.Int32, mscorlib">
-    <value>171</value>
+    <value>170</value>
   </data>
   <data name="splOverall.SplitterWidth" type="System.Int32, mscorlib">
     <value>5</value>
@@ -8085,6 +8064,12 @@
   <data name="&gt;&gt;mnuPrepareCheckDataAnonymiseIDColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuPrepareCalculator.Name" xml:space="preserve">
+    <value>mnuPrepareCalculator</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareCalculator.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ToolStripSeparator6.Name" xml:space="preserve">
     <value>ToolStripSeparator6</value>
   </data>
@@ -8097,76 +8082,22 @@
   <data name="&gt;&gt;mnuPrepareColumnCalculate.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculateCalculations.Name" xml:space="preserve">
-    <value>mnuPrepareColumnCalculateCalculations</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculateCalculations.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculateColumnSummaries.Name" xml:space="preserve">
-    <value>mnuPrepareColumnCalculateColumnSummaries</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculateColumnSummaries.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculateGeneralSummaries.Name" xml:space="preserve">
-    <value>mnuPrepareColumnCalculateGeneralSummaries</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculateGeneralSummaries.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripSeparator24.Name" xml:space="preserve">
-    <value>ToolStripSeparator24</value>
-  </data>
-  <data name="&gt;&gt;ToolStripSeparator24.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculateDuplicateColumn.Name" xml:space="preserve">
-    <value>mnuPrepareColumnCalculateDuplicateColumn</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculateDuplicateColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculateTransform.Name" xml:space="preserve">
-    <value>mnuPrepareColumnCalculateTransform</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculateTransform.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculateRank.Name" xml:space="preserve">
-    <value>mnuPrepareColumnCalculateRank</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculateRank.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculatePolynomials.Name" xml:space="preserve">
-    <value>mnuPrepareColumnCalculatePolynomials</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculatePolynomials.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculateRowSummary.Name" xml:space="preserve">
-    <value>mnuPrepareColumnCalculateRowSummary</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnCalculateRowSummary.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnGenerate.Name" xml:space="preserve">
-    <value>mnuPrepareColumnGenerate</value>
-  </data>
-  <data name="&gt;&gt;mnuPrepareColumnGenerate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;mnuPrepareColumnGenerateRegularSequence.Name" xml:space="preserve">
     <value>mnuPrepareColumnGenerateRegularSequence</value>
   </data>
   <data name="&gt;&gt;mnuPrepareColumnGenerateRegularSequence.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuPrepareColumnGenerateCountInFactor.Name" xml:space="preserve">
-    <value>mnuPrepareColumnGenerateCountInFactor</value>
+  <data name="&gt;&gt;mnuPrepareColumnGenerateEnter.Name" xml:space="preserve">
+    <value>mnuPrepareColumnGenerateEnter</value>
   </data>
-  <data name="&gt;&gt;mnuPrepareColumnGenerateCountInFactor.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuPrepareColumnGenerateEnter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnGenerateDuplicateColumn.Name" xml:space="preserve">
+    <value>mnuPrepareColumnGenerateDuplicateColumn</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnGenerateDuplicateColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator25.Name" xml:space="preserve">
@@ -8175,11 +8106,29 @@
   <data name="&gt;&gt;ToolStripSeparator25.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuPrepareColumnGenerateEnter.Name" xml:space="preserve">
-    <value>mnuPrepareColumnGenerateEnter</value>
+  <data name="&gt;&gt;mnuPrepareColumnGenerateRowSummaries.Name" xml:space="preserve">
+    <value>mnuPrepareColumnGenerateRowSummaries</value>
   </data>
-  <data name="&gt;&gt;mnuPrepareColumnGenerateEnter.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuPrepareColumnGenerateRowSummaries.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnGenerateRank.Name" xml:space="preserve">
+    <value>mnuPrepareColumnGenerateRank</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnGenerateRank.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnPrpareColumnGeneratePolynomials.Name" xml:space="preserve">
+    <value>mnuPrepareColumnPrpareColumnGeneratePolynomials</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnPrpareColumnGeneratePolynomials.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator56.Name" xml:space="preserve">
+    <value>ToolStripSeparator56</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator56.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuPrepareColumnGenerateRandomSamples.Name" xml:space="preserve">
     <value>mnuPrepareColumnGenerateRandomSamples</value>
@@ -8209,6 +8158,12 @@
     <value>mnuPrepareColumnFactorRecodeNumeric</value>
   </data>
   <data name="&gt;&gt;mnuPrepareColumnFactorRecodeNumeric.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnFactorCountInFactor.Name" xml:space="preserve">
+    <value>mnuPrepareColumnFactorCountInFactor</value>
+  </data>
+  <data name="&gt;&gt;mnuPrepareColumnFactorCountInFactor.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator12.Name" xml:space="preserve">
@@ -8757,6 +8712,12 @@
   <data name="&gt;&gt;mnuProcurementDescribeCategoricalMosaic.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuProcurementDescribeCategoricalTreemap.Name" xml:space="preserve">
+    <value>mnuProcurementDescribeCategoricalTreemap</value>
+  </data>
+  <data name="&gt;&gt;mnuProcurementDescribeCategoricalTreemap.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuProcurementDescribeNumeric.Name" xml:space="preserve">
     <value>mnuProcurementDescribeNumeric</value>
   </data>
@@ -9027,6 +8988,12 @@
   <data name="&gt;&gt;mnuToolsLoadOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuToolsInstallRPackage.Name" xml:space="preserve">
+    <value>mnuToolsInstallRPackage</value>
+  </data>
+  <data name="&gt;&gt;mnuToolsInstallRPackage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuToolsOptions.Name" xml:space="preserve">
     <value>mnuToolsOptions</value>
   </data>
@@ -9037,12 +9004,6 @@
     <value>ExportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuProcurementDescribeCategoricalTreemap.Name" xml:space="preserve">
-    <value>mnuProcurementDescribeCategoricalTreemap</value>
-  </data>
-  <data name="&gt;&gt;mnuProcurementDescribeCategoricalTreemap.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

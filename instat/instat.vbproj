@@ -195,6 +195,12 @@
     <Compile Include="dlgGraphsGUI.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRPackages.Designer.vb">
+      <DependentUpon>dlgRPackages.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRPackages.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSurvivalDefine.Designer.vb">
       <DependentUpon>dlgSurvivalDefine.vb</DependentUpon>
     </Compile>
@@ -2419,6 +2425,12 @@
     <Compile Include="ucrElementLineControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrTry.Designer.vb">
+      <DependentUpon>ucrTry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrTry.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrVariablename.designer.vb">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
     </Compile>
@@ -2447,6 +2459,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGraphsGUI.resx">
       <DependentUpon>dlgGraphsGUI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRPackages.resx">
+      <DependentUpon>dlgRPackages.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSurvivalDefine.resx">
       <DependentUpon>dlgSurvivalDefine.vb</DependentUpon>
@@ -4510,6 +4525,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrElementLineControl.resx">
       <DependentUpon>ucrElementLineControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrTry.resx">
+      <DependentUpon>ucrTry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrVariablename.resx">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
