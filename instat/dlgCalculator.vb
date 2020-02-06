@@ -59,7 +59,7 @@ Public Class dlgCalculator
         ucrCalc.chkSaveResultInto.Checked = True
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
-        'ucrCalc.ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
+        ucrCalc.ucrTryCalculator.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.Visible = True
     End Sub
 
@@ -70,8 +70,8 @@ Public Class dlgCalculator
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 14
         ucrCalc.ucrReceiverForCalculation.SetMeAsReceiver()
-        'ucrCalc.ucrTryModelling.SetIsCommand()
-        'ucrCalc.ucrTryModelling.SetReceiver(ucrCalc.ucrReceiverForCalculation)
+        ucrCalc.ucrTryCalculator.SetIsCommand()
+        ucrCalc.ucrTryCalculator.SetReceiver(ucrCalc.ucrReceiverForCalculation)
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -85,7 +85,7 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrSaveResultInto.SetValidationTypeAsRVariable()
-        ' ucrCalc.ucrTryModelling.StrvecOutputRequired()
+        ucrCalc.ucrTryCalculator.StrvecOutputRequired()
     End Sub
 
     Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveNameChanged
