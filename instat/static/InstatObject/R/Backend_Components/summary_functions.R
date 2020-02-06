@@ -612,7 +612,7 @@ summary_mean <- function (x, add_cols, weights = "", na.rm = FALSE, trim = 0, na
       if (missing(weights)) 
         return(mean(x, na.rm = na.rm, trim = trim))
       else 
-        return(stats::weighted.mean(x, w = weights, na.rm =na.rm))
+        return(stats::weighted.mean(x, w = weights, na.rm = na.rm))
     }
   }
 }
@@ -711,7 +711,7 @@ summary_quantile <- function(x, na.rm = FALSE, weights = "", probs, na_type = ""
     if(missing(weights))
       return(quantile(x, na.rm = na.rm, probs = probs)[[1]])
     else 
-      return(Hmisc::wtd.quantile(x, weights= weights, probs= probs, na.rm= na.rm))
+      return(Hmisc::wtd.quantile(x, weights = weights, probs = probs, na.rm = na.rm))
   }
 }
 
@@ -872,7 +872,7 @@ summary_cor <- function(x, y, na.rm = FALSE, na_type = "", weights = "", method 
     if (missing(weights))
       return(cor(x = x, y = y, use = use, method = method))
     else{
-      weights::wtd.cor(x = x, y = y, weight = weights, mean1 = TRUE, collapse = TRUE, bootse = FALSE, bootp = FALSE, bootn = 1000)[1]
+      weights::wtd.cor(x = x, y = y, weight = weights)[1]
     }
   }
 }
@@ -887,11 +887,11 @@ summary_cov <- function(x, y, na.rm = FALSE, weights = "", na_type = "", method 
     if (length(weights) != length(x)) 
       stop("'x' and 'weights' must have the same length")
     if (na.rm) {
-      i <- !is.na(x) && !is.na(weigths)
+      i <- !is.na(x) && !is.na(weights)
       weights <- weights[i]
       x <- x[i]
     }
-    (sum(weights * x * y)/sum(weights)) - (Weighted.Desc.Stat::w.mean(x, weights) * Weighted.Desc.Stat::w.mean(y, weights))
+    (sum(weights * x * y)/sum(weights)) - (Weighted.Desc.Stat::w.mean(x = x, mu = weights) * Weighted.Desc.Stat::w.mean(x = y, mu = weights))
   }
 }
 
