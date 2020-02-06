@@ -44,7 +44,7 @@ Partial Class ucrCalculator
         Me.chkSaveResultInto = New System.Windows.Forms.CheckBox()
         Me.cmdTry = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
-        Me.chkShowArguments = New System.Windows.Forms.CheckBox()
+        Me.chkShowParameters = New System.Windows.Forms.CheckBox()
         Me.grpBasic = New System.Windows.Forms.GroupBox()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdComma = New System.Windows.Forms.Button()
@@ -371,6 +371,8 @@ Partial Class ucrCalculator
         Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.cmdMode1 = New System.Windows.Forms.Button()
+        Me.cmdKurtosis = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -410,11 +412,11 @@ Partial Class ucrCalculator
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
-        'chkShowArguments
+        'chkShowParameters
         '
-        resources.ApplyResources(Me.chkShowArguments, "chkShowArguments")
-        Me.chkShowArguments.Name = "chkShowArguments"
-        Me.chkShowArguments.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.chkShowParameters, "chkShowParameters")
+        Me.chkShowParameters.Name = "chkShowParameters"
+        Me.chkShowParameters.UseVisualStyleBackColor = True
         '
         'grpBasic
         '
@@ -864,6 +866,8 @@ Partial Class ucrCalculator
         '
         'grpSummary
         '
+        Me.grpSummary.Controls.Add(Me.cmdKurtosis)
+        Me.grpSummary.Controls.Add(Me.cmdMode1)
         Me.grpSummary.Controls.Add(Me.cmdMode)
         Me.grpSummary.Controls.Add(Me.cmdFirst)
         Me.grpSummary.Controls.Add(Me.cmdLast)
@@ -2696,6 +2700,18 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'cmdMode1
+        '
+        resources.ApplyResources(Me.cmdMode1, "cmdMode1")
+        Me.cmdMode1.Name = "cmdMode1"
+        Me.cmdMode1.UseVisualStyleBackColor = True
+        '
+        'cmdKurtosis
+        '
+        resources.ApplyResources(Me.cmdKurtosis, "cmdKurtosis")
+        Me.cmdKurtosis.Name = "cmdKurtosis"
+        Me.cmdKurtosis.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
@@ -2703,8 +2719,8 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpLogical)
+        Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpProbabilty)
@@ -2713,7 +2729,7 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.cmdHelp)
-        Me.Controls.Add(Me.chkShowArguments)
+        Me.Controls.Add(Me.chkShowParameters)
         Me.Controls.Add(Me.ucrInputCalOptions)
         Me.Controls.Add(Me.grpBasic)
         Me.Controls.Add(Me.ucrSaveResultInto)
@@ -2750,7 +2766,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdTry As Button
     Friend WithEvents ucrSelectorForCalculations As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdHelp As Button
-    Friend WithEvents chkShowArguments As CheckBox
+    Friend WithEvents chkShowParameters As CheckBox
     Friend WithEvents ucrInputCalOptions As ucrInputComboBox
     Friend WithEvents grpBasic As GroupBox
     Friend WithEvents cmdBrackets As Button
@@ -3076,4 +3092,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdZeroOrOne As Button
     Friend WithEvents cmdNumbers As Button
     Friend WithEvents cmdOr3 As Button
+    Friend WithEvents cmdMode1 As Button
+    Friend WithEvents cmdKurtosis As Button
 End Class
