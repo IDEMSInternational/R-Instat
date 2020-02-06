@@ -54,8 +54,6 @@ Public Class sdgDoyRange
             bUpdate = True
         End If
         clsDoyFilterCalc = clsNewDoyFilterCalc
-        clsDayFromOperator = clsNewDayFromOperator
-        clsDayToOperator = clsNewDayToOperator
         clsCalcFromList = clsNewCalcFromList
         strMainDataFrame = strNewMainDataFrame
         strDoyColumn = strNewDoyColumn
@@ -91,7 +89,9 @@ Public Class sdgDoyRange
             ucrDoyTo.SetStartDay(1)
         End If
 
+        clsDayFromOperator = clsNewDayFromOperator
         clsFromParam = clsDayFromOperator.GetParameter("from")
+        bUpdate = False
         If clsFromParam IsNot Nothing Then
             If clsFromParam.bIsString AndAlso clsFromParam.strArgumentValue IsNot Nothing Then
                 If Integer.TryParse(clsFromParam.strArgumentValue, iFrom) Then
@@ -112,6 +112,8 @@ Public Class sdgDoyRange
             End If
         End If
 
+        bUpdate = True
+        clsDayToOperator = clsNewDayToOperator
         clsToParam = clsDayToOperator.GetParameter("to")
         If clsToParam IsNot Nothing Then
             If clsToParam.bIsString AndAlso clsToParam.strArgumentValue IsNot Nothing Then
@@ -255,8 +257,6 @@ Public Class sdgDoyRange
 
     Private Sub FromControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDoyFrom.ControlValueChanged, ucrReceiverFrom.ControlValueChanged
         UpdateFromValues()
-        If rdoLength.Checked Then
-            UpdateToValues()
-        End If
+        UpdateToValues()
     End Sub
 End Class
