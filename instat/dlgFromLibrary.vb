@@ -190,14 +190,12 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub TestOkEnabled()
-        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 Then
-            ucrBase.OKEnabled(ucrNewDataFrameName.IsComplete)
-            cmdHelp.Enabled = True
-        Else
-            ucrBase.OKEnabled(False)
-            cmdHelp.Enabled = False
-        End If
+        ucrBase.OKEnabled(rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 AndAlso ucrNewDataFrameName.IsComplete)
+        EnableHelp()
+    End Sub
 
+    Private Sub EnableHelp()
+        cmdHelp.Enabled = rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0
     End Sub
 
     Private Function CheckString(ByVal strValue As String)
