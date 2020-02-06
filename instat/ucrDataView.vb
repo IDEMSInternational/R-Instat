@@ -801,4 +801,14 @@ Public Class ucrDataView
         dlgDuplicateColumns.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgDuplicateColumns.ShowDialog()
     End Sub
+
+    Private Sub mnuReorderColumn_Click(sender As Object, e As EventArgs) Handles mnuReorderColumn.Click
+        dlgReorderColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuConvertToFact_Click(sender As Object, e As EventArgs) Handles mnuConvertToFact.Click
+        clsConvertTo.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
+        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
+    End Sub
 End Class
