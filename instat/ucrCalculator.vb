@@ -956,7 +956,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrSelectorForCalculations.DataFrameChanged
-        'ucrTryModelling.ucrInputTryMessage.SetName("")
+        ucrTryCalculator.ucrInputTryMessage.SetName("")
         RaiseEvent DataFrameChanged()
     End Sub
 
