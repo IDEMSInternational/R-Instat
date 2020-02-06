@@ -835,4 +835,18 @@ Public Class ucrDataView
         clsConvertTo.AddParameter("col_names", SelectedColumns())
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
     End Sub
+
+    Private Sub mnuLebelsLevel_Click(sender As Object, e As EventArgs) Handles mnuLebelsLevel.Click
+        Dim strType As String
+        Dim strColumns() As String
+
+        strColumns = SelectedColumnsAsArray()
+        If strColumns.Count = 1 Then
+            strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
+            If strType.Contains("factor") Then
+                dlgLabelsLevels.SetCurrentColumn(strColumns(0), grdCurrSheet.Name)
+            End If
+        End If
+        dlgLabelsLevels.ShowDialog()
+    End Sub
 End Class
