@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgHypothesisTestsCalculator
@@ -74,6 +75,8 @@ Public Class dlgHypothesisTestsCalculator
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
         ucrChkIncludeArguments.Checked = False
+        'ucrChkSummaryModel.AddRSyntaxContainsFunctionNamesCondition()
+        'ucrChkDisplayModel.AddRSyntaxContainsFunctionNamesCondition()
         ucrInputComboRPackage.SetName("Stats1")
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
@@ -641,7 +644,7 @@ Public Class dlgHypothesisTestsCalculator
         End If
     End Sub
 
-    Private Sub ucrChkSummaryModel_Load(sender As Object, e As EventArgs) Handles ucrChkSummaryModel.Load
+    Private Sub ucrChkSummaryDisplayModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummaryModel.ControlValueChanged
         If ucrChkSummaryModel.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsSummary, 0)
         Else
@@ -649,7 +652,7 @@ Public Class dlgHypothesisTestsCalculator
         End If
     End Sub
 
-    Private Sub ucrChkDisplayModel_Load(sender As Object, e As EventArgs) Handles ucrChkDisplayModel.Load
+    Private Sub ucrChkDisplayModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayModel.ControlValueChanged
         If ucrChkDisplayModel.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsFormula, 1)
         Else
