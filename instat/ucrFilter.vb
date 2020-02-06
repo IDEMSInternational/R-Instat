@@ -157,7 +157,7 @@ Public Class ucrFilter
 
     Private Sub ucrFilterReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFilterByReceiver.ControlContentsChanged
         'for logical columns add {"==", "is.na", "!is.na"} only
-        ucrFilterOperation.SetItems(If(ucrFilterByReceiver.strCurrDataType.ToLower = "logical", {"==", "is.na", "!is.na"}, {"==", "<", "<=", ">", ">=", "!=", "is.na", "!is.na"}))
+        ucrFilterOperation.SetItems(If(ucrFilterByReceiver.strCurrDataType.ToLower = "logical", {"==", "is.na", "! is.na"}, {"==", "<", "<=", ">", ">=", "!=", "is.na", "! is.na"}))
         ucrFilterOperation.cboInput.SelectedIndex = 0
 
         VariableTypeProperties()
