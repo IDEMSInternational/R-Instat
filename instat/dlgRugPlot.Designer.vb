@@ -112,6 +112,7 @@ Partial Class dlgRugPlot
         '
         'ucrRugPlotSelector
         '
+        Me.ucrRugPlotSelector.bDropUnusedFilterLevels = False
         Me.ucrRugPlotSelector.bShowHiddenColumns = False
         Me.ucrRugPlotSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrRugPlotSelector, "ucrRugPlotSelector")
