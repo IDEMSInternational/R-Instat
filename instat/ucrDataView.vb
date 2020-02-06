@@ -823,4 +823,10 @@ Public Class ucrDataView
         clsConvertTo.AddParameter("col_names", SelectedColumns())
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Character")
     End Sub
+
+    Private Sub mnuConvertToLogic_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogic.Click
+        clsConvertTo.AddParameter("to_type", Chr(34) & "logical" & Chr(34))
+        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Logical")
+    End Sub
 End Class
