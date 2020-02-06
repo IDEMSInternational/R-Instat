@@ -75,8 +75,8 @@ Public Class dlgHypothesisTestsCalculator
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
         ucrChkIncludeArguments.Checked = False
-        'ucrChkSummaryModel.AddRSyntaxContainsFunctionNamesCondition()
-        'ucrChkDisplayModel.AddRSyntaxContainsFunctionNamesCondition()
+        ucrChkSummaryModel.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"}, bNewIsPositive:=True)
+        ucrChkDisplayModel.AddRSyntaxContainsFunctionNamesCondition(True, {"formula"}, bNewIsPositive:=True)
         ucrInputComboRPackage.SetName("Stats1")
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
@@ -84,6 +84,8 @@ Public Class dlgHypothesisTestsCalculator
         clsFormula.SetRCommand("formula")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsSummary.AddParameter("object", clsRCodeStructureParameter:=ucrBase.clsRsyntax.clsBaseCommandString, iPosition:=0)
+        clsFormula.AddParameter("")
         clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
