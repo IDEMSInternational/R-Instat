@@ -791,4 +791,14 @@ Public Class ucrDataView
     Private Sub lblHeader_Click(sender As Object, e As EventArgs) Handles lblHeader.Click
 
     End Sub
+
+    Private Sub mnuRenameColumn_Click(sender As Object, e As EventArgs) Handles mnuRenameColumn.Click
+        dlgName.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+        dlgName.ShowDialog()
+    End Sub
+
+    Private Sub mnuDuplColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplColumn.Click
+        dlgDuplicateColumns.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+        dlgDuplicateColumns.ShowDialog()
+    End Sub
 End Class
