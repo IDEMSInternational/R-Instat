@@ -34,7 +34,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdAlt = New System.Windows.Forms.Button()
         Me.cmdSquiggle = New System.Windows.Forms.Button()
         Me.cmdSquareBrackets = New System.Windows.Forms.Button()
-        Me.cmdTry = New System.Windows.Forms.Button()
         Me.grpStats1 = New System.Windows.Forms.GroupBox()
         Me.cmdT = New System.Windows.Forms.Button()
         Me.cmdProp = New System.Windows.Forms.Button()
@@ -91,12 +90,12 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrSaveResult = New instat.ucrSave()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrChkBy = New instat.ucrCheck()
         Me.ucrSelectorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.ucrTryModelling = New instat.ucrTry()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -237,17 +236,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdSquareBrackets.TabIndex = 142
         Me.cmdSquareBrackets.Text = "[ ]"
         Me.cmdSquareBrackets.UseVisualStyleBackColor = True
-        '
-        'cmdTry
-        '
-        Me.cmdTry.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTry.Location = New System.Drawing.Point(13, 353)
-        Me.cmdTry.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdTry.Name = "cmdTry"
-        Me.cmdTry.Size = New System.Drawing.Size(74, 23)
-        Me.cmdTry.TabIndex = 10
-        Me.cmdTry.Text = "Try"
-        Me.cmdTry.UseVisualStyleBackColor = True
         '
         'grpStats1
         '
@@ -862,6 +850,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrSaveResult
         '
         Me.ucrSaveResult.Location = New System.Drawing.Point(10, 385)
+        Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveResult.Name = "ucrSaveResult"
         Me.ucrSaveResult.Size = New System.Drawing.Size(277, 24)
         Me.ucrSaveResult.TabIndex = 12
@@ -881,17 +870,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(452, 52)
         Me.ucrBase.TabIndex = 13
-        '
-        'ucrInputTryMessage
-        '
-        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
-        Me.ucrInputTryMessage.IsMultiline = False
-        Me.ucrInputTryMessage.IsReadOnly = True
-        Me.ucrInputTryMessage.Location = New System.Drawing.Point(89, 354)
-        Me.ucrInputTryMessage.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
-        Me.ucrInputTryMessage.Size = New System.Drawing.Size(321, 22)
-        Me.ucrInputTryMessage.TabIndex = 11
         '
         'ucrChkBy
         '
@@ -942,11 +920,19 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
+        'ucrTryModelling
+        '
+        Me.ucrTryModelling.Location = New System.Drawing.Point(0, 352)
+        Me.ucrTryModelling.Name = "ucrTryModelling"
+        Me.ucrTryModelling.Size = New System.Drawing.Size(480, 28)
+        Me.ucrTryModelling.TabIndex = 17
+        '
         'dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(590, 487)
+        Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.ucrReceiverMultiple)
         Me.Controls.Add(Me.grpStats2)
@@ -955,8 +941,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.Controls.Add(Me.ucrInputComboRPackage)
         Me.Controls.Add(Me.lblRpackage)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrInputTryMessage)
-        Me.Controls.Add(Me.cmdTry)
         Me.Controls.Add(Me.ucrChkBy)
         Me.Controls.Add(Me.grpMainKeyboard)
         Me.Controls.Add(Me.ucrSelectorColumn)
@@ -994,8 +978,6 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdSquareBrackets As Button
     Friend WithEvents ucrChkBy As ucrCheck
     Friend WithEvents ucrReceiverMultiple As ucrReceiverMultiple
-    Friend WithEvents ucrInputTryMessage As ucrInputTextBox
-    Friend WithEvents cmdTry As Button
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grpStats1 As GroupBox
     Friend WithEvents cmdPowerT As Button
@@ -1052,4 +1034,5 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdDuncan As Button
     Friend WithEvents cmdBIB As Button
     Friend WithEvents cmdHelp As Button
+    Friend WithEvents ucrTryModelling As ucrTry
 End Class

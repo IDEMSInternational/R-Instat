@@ -51,6 +51,9 @@ Public Class frmMain
     '     User can choose a default data frame or set the default as the current worksheet
     Public strDefaultDataFrame As String = ""
 
+    Private strCurrentOutputFileName As String = "" 'holds the saved ouput file name to help remember the current selected folder path
+    Private strCurrentScriptFileName As String = "" 'holds the saved script file name to help remember the current selected folder path
+    Private strCurrentLogFileName As String = "" 'holds the saved log file name to help remember the current selected folder path
     Public Sub New()
 
         ' This call is required by the designer.
@@ -60,7 +63,6 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
         Dim bClose As Boolean = False
         ' Note: this must change when R version changes
@@ -340,11 +342,8 @@ Public Class frmMain
         dlgRegularSequence.ShowDialog()
     End Sub
 
-    Private Sub mnuCalculations_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateCalculations.Click
-        dlgCalculator.ShowDialog()
-    End Sub
 
-    Private Sub mnuPrepareAddColumnRowSummary_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateRowSummary.Click
+    Private Sub mnuPrepareAddColumnRowSummary_Click(sender As Object, e As EventArgs)
         dlgRowSummary.ShowDialog()
     End Sub
 
@@ -356,12 +355,8 @@ Public Class frmMain
         dlgSummaryTables.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareAddColumnTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateTransform.Click
+    Private Sub mnuPrepareAddColumnTransform_Click(sender As Object, e As EventArgs)
         dlgTransform.ShowDialog()
-    End Sub
-
-    Private Sub mnuPrepareAddColumnPolynomials_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculatePolynomials.Click
-        dlgPolynomials.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareReshapeStack_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeStack.Click
@@ -507,10 +502,6 @@ Public Class frmMain
 
     Private Sub mnuFilePrintPreview_Click(sender As Object, e As EventArgs) Handles mnuFilePrintPreview.Click
         dlgPrintPreviewOptions.ShowDialog()
-    End Sub
-
-    Private Sub mnuPrepareAddColumnRank_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateRank.Click
-        dlgRank.ShowDialog()
     End Sub
 
     Private Sub mnuClimateMethodsCreateClimateObject_Click(sender As Object, e As EventArgs)
@@ -995,11 +986,17 @@ Public Class frmMain
         Using dlgSaveFile As New SaveFileDialog
             dlgSaveFile.Title = "Save Output Window"
             dlgSaveFile.Filter = "Rich Text Format (*.rtf)|*.rtf"
-            dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
-            If dlgSaveFile.ShowDialog() = DialogResult.OK Then
+            If Not String.IsNullOrEmpty(strCurrentOutputFileName) Then
+                dlgSaveFile.FileName = Path.GetFileName(strCurrentOutputFileName)
+                dlgSaveFile.InitialDirectory = Path.GetDirectoryName(strCurrentOutputFileName)
+            Else
+                dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
+            End If
+            If DialogResult.OK = dlgSaveFile.ShowDialog() Then
                 Try
                     'Send file name string specifying the location to save the rtf in.
                     ucrOutput.ucrRichTextBox.SaveRtf(dlgSaveFile.FileName)
+                    strCurrentOutputFileName = dlgSaveFile.FileName
                 Catch
                     MsgBox("Could not save the output window." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
@@ -1011,10 +1008,16 @@ Public Class frmMain
         Using dlgSaveFile As New SaveFileDialog
             dlgSaveFile.Title = "Save Log Window"
             dlgSaveFile.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
-            dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
+            If Not String.IsNullOrEmpty(strCurrentLogFileName) Then
+                dlgSaveFile.FileName = Path.GetFileName(strCurrentLogFileName)
+                dlgSaveFile.InitialDirectory = Path.GetDirectoryName(strCurrentLogFileName)
+            Else
+                dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
+            End If
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
                     File.WriteAllText(dlgSaveFile.FileName, ucrLogWindow.txtLog.Text)
+                    strCurrentLogFileName = dlgSaveFile.FileName
                 Catch
                     MsgBox("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
@@ -1026,10 +1029,16 @@ Public Class frmMain
         Using dlgSaveFile As New SaveFileDialog
             dlgSaveFile.Title = "Save Script Window"
             dlgSaveFile.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
-            dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
+            If Not String.IsNullOrEmpty(strCurrentScriptFileName) Then
+                dlgSaveFile.FileName = Path.GetFileName(strCurrentScriptFileName)
+                dlgSaveFile.InitialDirectory = Path.GetDirectoryName(strCurrentScriptFileName)
+            Else
+                dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
+            End If
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
                     File.WriteAllText(dlgSaveFile.FileName, ucrScriptWindow.txtScript.Text)
+                    strCurrentScriptFileName = dlgSaveFile.FileName
                 Catch
                     MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
@@ -1120,9 +1129,6 @@ Public Class frmMain
         dlgEndOfRainsSeason.ShowDialog()
     End Sub
 
-    Private Sub mnuOrganiseColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateCountInFactor.Click
-        dlgCountinFactor.ShowDialog()
-    End Sub
 
     Private Sub mnuDescribeSpecificScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificScatterPlot.Click
         dlgScatterPlot.ShowDialog()
@@ -1208,7 +1214,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuHelpRPackagesCommands_Click(sender As Object, e As EventArgs) Handles mnuHelpRPackagesCommands.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "26")
+        dlgHelpVignettes.ShowDialog()
     End Sub
 
     Private Sub mnuHelpR_Click(sender As Object, e As EventArgs) Handles mnuHelpAboutR.Click
@@ -1248,7 +1254,7 @@ Public Class frmMain
         dlgOpenSST.ShowDialog()
     End Sub
 
-    Private Sub mnuOrgCalculateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateDuplicateColumn.Click
+    Private Sub mnuOrgCalculateDuplicateColumn_Click(sender As Object, e As EventArgs)
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
@@ -1892,11 +1898,11 @@ Public Class frmMain
         dlgParallelCoordinatePlot.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnCalculateColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateColumnSummaries.Click
+    Private Sub mnuPrepareColumnCalculateColumnSummaries_Click(sender As Object, e As EventArgs)
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnCalculateGeneralSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateGeneralSummaries.Click
+    Private Sub mnuPrepareColumnCalculateGeneralSummaries_Click(sender As Object, e As EventArgs)
         dlgCalculationsSummary.ShowDialog()
     End Sub
 
@@ -2130,5 +2136,39 @@ Public Class frmMain
 
     Private Sub mnuPrepareColumnDefineConvertColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDefineConvertColumns.Click
         dlgConvertColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuProcurementDescribeCategoricalTreemap_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeCategoricalTreemap.Click
+        dlgTreemap.ShowDialog()
+    End Sub
+
+
+    Private Sub mnuToolsInstallRPackage_Click(sender As Object, e As EventArgs) Handles mnuToolsInstallRPackage.Click
+        dlgInstallRPackage.ShowDialog()
+End Sub
+
+    Private Sub mnuPrepareColumnGenerateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateDuplicateColumn.Click
+        dlgDuplicateColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnGenerateRowSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateRowSummaries.Click
+        dlgRowSummary.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnGenerateRank_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateRank.Click
+        dlgRank.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnPrpareColumnGeneratePolynomials_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnPrpareColumnGeneratePolynomials.Click
+        dlgPolynomials.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCalculateCalculations_Click(sender As Object, e As EventArgs) Handles mnuPrepareCalculator.Click
+        dlgCalculator.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnGenerateCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCountInFactor.Click
+        dlgCountinFactor.ShowDialog()
+
     End Sub
 End Class
