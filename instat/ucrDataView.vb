@@ -849,4 +849,15 @@ Public Class ucrDataView
         End If
         dlgLabelsLevels.ShowDialog()
     End Sub
+
+    Private Sub mnuSorts_Click(sender As Object, e As EventArgs) Handles mnuSorts.Click
+        dlgSort.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+        dlgSort.ShowDialog()
+    End Sub
+
+    Private Sub mnuFilters_Click(sender As Object, e As EventArgs) Handles mnuFilters.Click
+        dlgRestrict.bIsSubsetDialog = False
+        dlgRestrict.strDefaultDataframe = grdCurrSheet.Name
+        dlgRestrict.ShowDialog()
+    End Sub
 End Class
