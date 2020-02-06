@@ -13,11 +13,11 @@ AppPublisher=African Maths Institute
 AppPublisherURL=http://r-instat.org/
 AppSupportURL=http://r-instat.org/
 AppUpdatesURL=http://r-instat.org/
-DefaultDirName={pf}\AMI\R-Instat\{#AppVerName}
+DefaultDirName={autopf}\R-Instat\{#AppVerName}
 DefaultGroupName=R-Instat
 AllowNoIcons=yes
-OutputBaseFilename=R-Instat_{#AppVerName}_Installer
-SetupIconFile=D:\IDEMS\R-Instat\instat\Resources\rinstat_icon_Hih_icon.ico
+OutputBaseFilename=R-Instat_{#AppVerName}_Installer_32
+SetupIconFile=..\instat\Resources\rinstat_icon_Hih_icon.ico
 Compression=lzma
 SolidCompression=yes
 
@@ -26,8 +26,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "..\instat\bin\x86\Release\instat.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\instat\bin\x86\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\instat\bin\Release\instat.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\instat\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
