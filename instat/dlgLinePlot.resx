@@ -133,7 +133,7 @@
     <value>58, 13</value>
   </data>
   <data name="lblXVariable.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lblXVariable.Text" xml:space="preserve">
     <value>X Variable:</value>
@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblXVariable.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>16</value>
   </data>
   <data name="lblAvailable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblAvailable.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>17</value>
   </data>
   <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -187,7 +187,7 @@
     <value>119, 23</value>
   </data>
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="cmdOptions.Text" xml:space="preserve">
     <value>Plot Options</value>
@@ -202,7 +202,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="cmdLineOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -214,7 +214,7 @@
     <value>119, 23</value>
   </data>
   <data name="cmdLineOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="cmdLineOptions.Text" xml:space="preserve">
     <value>Line Options</value>
@@ -229,7 +229,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdLineOptions.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="lblFactorOptional.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -244,7 +244,7 @@
     <value>88, 13</value>
   </data>
   <data name="lblFactorOptional.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblFactorOptional.Text" xml:space="preserve">
     <value>Factor (Optional):</value>
@@ -259,31 +259,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactorOptional.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="lblGroup.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblGroup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>221, 88</value>
-  </data>
-  <data name="lblGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="lblGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lblGroup.Name" xml:space="preserve">
-    <value>lblGroup</value>
-  </data>
-  <data name="&gt;&gt;lblGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblGroup.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblGroup.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>14</value>
   </data>
   <data name="lblGroupLine.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -298,7 +274,7 @@
     <value>39, 13</value>
   </data>
   <data name="lblGroupLine.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>7</value>
   </data>
   <data name="lblGroupLine.Text" xml:space="preserve">
     <value>Group:</value>
@@ -322,7 +298,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkValley.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrChkValley.Name" xml:space="preserve">
     <value>ucrChkValley</value>
@@ -343,7 +319,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkPeak.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrChkPeak.Name" xml:space="preserve">
     <value>ucrChkPeak</value>
@@ -373,7 +349,7 @@
     <value>135, 20</value>
   </data>
   <data name="ucrChkWithSE.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrChkWithSE.Name" xml:space="preserve">
     <value>ucrChkWithSE</value>
@@ -385,7 +361,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkWithSE.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="ucrChkLineofBestFit.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 314</value>
@@ -394,7 +370,7 @@
     <value>127, 24</value>
   </data>
   <data name="ucrChkLineofBestFit.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;ucrChkLineofBestFit.Name" xml:space="preserve">
     <value>ucrChkLineofBestFit</value>
@@ -406,7 +382,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkLineofBestFit.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="ucrChkPoints.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 288</value>
@@ -415,7 +391,7 @@
     <value>100, 24</value>
   </data>
   <data name="ucrChkPoints.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrChkPoints.Name" xml:space="preserve">
     <value>ucrChkPoints</value>
@@ -427,16 +403,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkPoints.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="ucrSave.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 366</value>
+  </data>
+  <data name="ucrSave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 24</value>
   </data>
   <data name="ucrSave.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrSave.Name" xml:space="preserve">
     <value>ucrSave</value>
@@ -448,7 +427,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSave.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="ucrVariablesAsFactorForLinePlot.Location" type="System.Drawing.Point, System.Drawing">
     <value>249, 30</value>
@@ -457,7 +436,7 @@
     <value>125, 136</value>
   </data>
   <data name="ucrVariablesAsFactorForLinePlot.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.Name" xml:space="preserve">
     <value>ucrVariablesAsFactorForLinePlot</value>
@@ -469,7 +448,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrVariablesAsFactorForLinePlot.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="ucrLinePlotSelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -493,7 +472,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrLinePlotSelector.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 396</value>
@@ -502,7 +481,7 @@
     <value>410, 53</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -514,7 +493,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="ucrFactorOptionalReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>249, 248</value>
@@ -526,7 +505,7 @@
     <value>125, 26</value>
   </data>
   <data name="ucrFactorOptionalReceiver.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrFactorOptionalReceiver.Name" xml:space="preserve">
     <value>ucrFactorOptionalReceiver</value>
@@ -538,7 +517,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFactorOptionalReceiver.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="ucrReceiverX.Location" type="System.Drawing.Point, System.Drawing">
     <value>249, 202</value>
@@ -550,7 +529,7 @@
     <value>125, 26</value>
   </data>
   <data name="ucrReceiverX.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrReceiverX.Name" xml:space="preserve">
     <value>ucrReceiverX</value>
@@ -562,7 +541,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverX.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -586,7 +565,7 @@
     <value>125, 20</value>
   </data>
   <data name="ucrReceiverGroup.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrReceiverGroup.Name" xml:space="preserve">
     <value>ucrReceiverGroup</value>

@@ -150,119 +150,35 @@
   <data name="&gt;&gt;lblSelectedVariables.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="lblByFactors.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblSummariseBy.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblByFactors.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblSummariseBy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblByFactors.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblSummariseBy.Location" type="System.Drawing.Point, System.Drawing">
     <value>265, 168</value>
   </data>
-  <data name="lblByFactors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
+  <data name="lblSummariseBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 13</value>
   </data>
-  <data name="lblByFactors.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblSummariseBy.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="lblByFactors.Text" xml:space="preserve">
-    <value>By Factor(s):</value>
+  <data name="lblSummariseBy.Text" xml:space="preserve">
+    <value>Summarise By:</value>
   </data>
-  <data name="&gt;&gt;lblByFactors.Name" xml:space="preserve">
-    <value>lblByFactors</value>
+  <data name="&gt;&gt;lblSummariseBy.Name" xml:space="preserve">
+    <value>lblSummariseBy</value>
   </data>
-  <data name="&gt;&gt;lblByFactors.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblSummariseBy.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblByFactors.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblSummariseBy.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblByFactors.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblSummariseBy.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOriginalLevel.Name" xml:space="preserve">
-    <value>ucrChkOriginalLevel</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOriginalLevel.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOriginalLevel.Parent" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOriginalLevel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkStoreResults.Name" xml:space="preserve">
-    <value>ucrChkStoreResults</value>
-  </data>
-  <data name="&gt;&gt;ucrChkStoreResults.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkStoreResults.Parent" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkStoreResults.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitMissing.Name" xml:space="preserve">
-    <value>ucrChkOmitMissing</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitMissing.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitMissing.Parent" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitMissing.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPrintOutput.Name" xml:space="preserve">
-    <value>ucrChkPrintOutput</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPrintOutput.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPrintOutput.Parent" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkPrintOutput.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDropUnusedLevels.Name" xml:space="preserve">
-    <value>ucrChkDropUnusedLevels</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDropUnusedLevels.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDropUnusedLevels.Parent" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDropUnusedLevels.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 196</value>
-  </data>
-  <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 145</value>
-  </data>
-  <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="grpOptions.Text" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="&gt;&gt;grpOptions.Name" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;grpOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpOptions.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="ucrChkOriginalLevel.Location" type="System.Drawing.Point, System.Drawing">
     <value>25, 42</value>
@@ -368,6 +284,30 @@
   </data>
   <data name="&gt;&gt;ucrChkDropUnusedLevels.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 196</value>
+  </data>
+  <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 145</value>
+  </data>
+  <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="grpOptions.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Name" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="cmdSummaries.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

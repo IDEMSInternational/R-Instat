@@ -68,6 +68,8 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputXTo = New instat.ucrInputTextBox()
         Me.ucrNudXAxisAngle = New instat.ucrNud()
         Me.tpYAxis = New System.Windows.Forms.TabPage()
+        Me.ucrNudUpperLimit = New instat.ucrNud()
+        Me.ucrNudLowerLimit = New instat.ucrNud()
         Me.lblDateDisplayFormat = New System.Windows.Forms.Label()
         Me.rdoYDate = New System.Windows.Forms.RadioButton()
         Me.rdoYNumeric = New System.Windows.Forms.RadioButton()
@@ -75,7 +77,9 @@ Partial Class sdgPICSARainfallGraph
         Me.lblYInStepsOf = New System.Windows.Forms.Label()
         Me.lblYTo = New System.Windows.Forms.Label()
         Me.lblYFrom = New System.Windows.Forms.Label()
+        Me.ucrInputYSpecifyUpperLimitDateMonth = New instat.ucrInputComboBox()
         Me.ucrInputYSpecifyUpperLimitNumeric = New instat.ucrInputTextBox()
+        Me.ucrInputYSpecifyLowerLimitDateMonth = New instat.ucrInputComboBox()
         Me.ucrChkYSpecifyUpperLimit = New instat.ucrCheck()
         Me.ucrInputYSpecifyLowerLimitNumeric = New instat.ucrInputTextBox()
         Me.ucrChkYSpecifyLowerLimit = New instat.ucrCheck()
@@ -159,9 +163,14 @@ Partial Class sdgPICSARainfallGraph
         Me.UcrChkPnlBackgroundLineType = New instat.ucrCheck()
         Me.UcrChkPnlBackgroundFill = New instat.ucrCheck()
         Me.ucrChkPnlBackgroundColour = New instat.ucrCheck()
+        Me.tpRug = New System.Windows.Forms.TabPage()
+        Me.ucrInputXaxisOptions = New instat.ucrInputComboBox()
+        Me.lblXaxisOptions = New System.Windows.Forms.Label()
+        Me.ucrChkXaxis = New instat.ucrCheck()
+        Me.ucrInputYaxisOptions = New instat.ucrInputComboBox()
+        Me.lblYaxisOptions = New System.Windows.Forms.Label()
+        Me.ucrChkYaxis = New instat.ucrCheck()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
-        Me.ucrInputYSpecifyLowerLimitDateMonth = New instat.ucrInputComboBox()
-        Me.ucrInputYSpecifyUpperLimitDateMonth = New instat.ucrInputComboBox()
         Me.tbPICSA.SuspendLayout()
         Me.tpTitles.SuspendLayout()
         Me.grpyAxisTitle.SuspendLayout()
@@ -177,6 +186,7 @@ Partial Class sdgPICSARainfallGraph
         Me.grpPnlBorder.SuspendLayout()
         Me.grpMajorGridLines.SuspendLayout()
         Me.grpPnlBackground.SuspendLayout()
+        Me.tpRug.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblXTo
@@ -201,6 +211,7 @@ Partial Class sdgPICSARainfallGraph
         Me.tbPICSA.Controls.Add(Me.tpYAxis)
         Me.tbPICSA.Controls.Add(Me.tpLines)
         Me.tbPICSA.Controls.Add(Me.tpPanel)
+        Me.tbPICSA.Controls.Add(Me.tpRug)
         resources.ApplyResources(Me.tbPICSA, "tbPICSA")
         Me.tbPICSA.Name = "tbPICSA"
         Me.tbPICSA.SelectedIndex = 0
@@ -528,6 +539,8 @@ Partial Class sdgPICSARainfallGraph
         '
         'tpYAxis
         '
+        Me.tpYAxis.Controls.Add(Me.ucrNudUpperLimit)
+        Me.tpYAxis.Controls.Add(Me.ucrNudLowerLimit)
         Me.tpYAxis.Controls.Add(Me.lblDateDisplayFormat)
         Me.tpYAxis.Controls.Add(Me.rdoYDate)
         Me.tpYAxis.Controls.Add(Me.rdoYNumeric)
@@ -558,6 +571,26 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.tpYAxis, "tpYAxis")
         Me.tpYAxis.Name = "tpYAxis"
         Me.tpYAxis.UseVisualStyleBackColor = True
+        '
+        'ucrNudUpperLimit
+        '
+        Me.ucrNudUpperLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudUpperLimit, "ucrNudUpperLimit")
+        Me.ucrNudUpperLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudUpperLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperLimit.Name = "ucrNudUpperLimit"
+        Me.ucrNudUpperLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudLowerLimit
+        '
+        Me.ucrNudLowerLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLowerLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLowerLimit, "ucrNudLowerLimit")
+        Me.ucrNudLowerLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLowerLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLowerLimit.Name = "ucrNudLowerLimit"
+        Me.ucrNudLowerLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblDateDisplayFormat
         '
@@ -604,6 +637,13 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.lblYFrom, "lblYFrom")
         Me.lblYFrom.Name = "lblYFrom"
         '
+        'ucrInputYSpecifyUpperLimitDateMonth
+        '
+        Me.ucrInputYSpecifyUpperLimitDateMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputYSpecifyUpperLimitDateMonth.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYSpecifyUpperLimitDateMonth, "ucrInputYSpecifyUpperLimitDateMonth")
+        Me.ucrInputYSpecifyUpperLimitDateMonth.Name = "ucrInputYSpecifyUpperLimitDateMonth"
+        '
         'ucrInputYSpecifyUpperLimitNumeric
         '
         Me.ucrInputYSpecifyUpperLimitNumeric.AddQuotesIfUnrecognised = True
@@ -611,6 +651,13 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputYSpecifyUpperLimitNumeric.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputYSpecifyUpperLimitNumeric, "ucrInputYSpecifyUpperLimitNumeric")
         Me.ucrInputYSpecifyUpperLimitNumeric.Name = "ucrInputYSpecifyUpperLimitNumeric"
+        '
+        'ucrInputYSpecifyLowerLimitDateMonth
+        '
+        Me.ucrInputYSpecifyLowerLimitDateMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputYSpecifyLowerLimitDateMonth.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYSpecifyLowerLimitDateMonth, "ucrInputYSpecifyLowerLimitDateMonth")
+        Me.ucrInputYSpecifyLowerLimitDateMonth.Name = "ucrInputYSpecifyLowerLimitDateMonth"
         '
         'ucrChkYSpecifyUpperLimit
         '
@@ -1228,24 +1275,58 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrChkPnlBackgroundColour, "ucrChkPnlBackgroundColour")
         Me.ucrChkPnlBackgroundColour.Name = "ucrChkPnlBackgroundColour"
         '
+        'tpRug
+        '
+        Me.tpRug.Controls.Add(Me.ucrInputXaxisOptions)
+        Me.tpRug.Controls.Add(Me.lblXaxisOptions)
+        Me.tpRug.Controls.Add(Me.ucrChkXaxis)
+        Me.tpRug.Controls.Add(Me.ucrInputYaxisOptions)
+        Me.tpRug.Controls.Add(Me.lblYaxisOptions)
+        Me.tpRug.Controls.Add(Me.ucrChkYaxis)
+        resources.ApplyResources(Me.tpRug, "tpRug")
+        Me.tpRug.Name = "tpRug"
+        Me.tpRug.UseVisualStyleBackColor = True
+        '
+        'ucrInputXaxisOptions
+        '
+        Me.ucrInputXaxisOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputXaxisOptions.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXaxisOptions, "ucrInputXaxisOptions")
+        Me.ucrInputXaxisOptions.Name = "ucrInputXaxisOptions"
+        '
+        'lblXaxisOptions
+        '
+        resources.ApplyResources(Me.lblXaxisOptions, "lblXaxisOptions")
+        Me.lblXaxisOptions.Name = "lblXaxisOptions"
+        '
+        'ucrChkXaxis
+        '
+        Me.ucrChkXaxis.Checked = False
+        resources.ApplyResources(Me.ucrChkXaxis, "ucrChkXaxis")
+        Me.ucrChkXaxis.Name = "ucrChkXaxis"
+        '
+        'ucrInputYaxisOptions
+        '
+        Me.ucrInputYaxisOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputYaxisOptions.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYaxisOptions, "ucrInputYaxisOptions")
+        Me.ucrInputYaxisOptions.Name = "ucrInputYaxisOptions"
+        '
+        'lblYaxisOptions
+        '
+        resources.ApplyResources(Me.lblYaxisOptions, "lblYaxisOptions")
+        Me.lblYaxisOptions.Name = "lblYaxisOptions"
+        '
+        'ucrChkYaxis
+        '
+        Me.ucrChkYaxis.Checked = False
+        resources.ApplyResources(Me.ucrChkYaxis, "ucrChkYaxis")
+        Me.ucrChkYaxis.Name = "ucrChkYaxis"
+        '
         'ucrSdgPICSARainfalbuttons
         '
         resources.ApplyResources(Me.ucrSdgPICSARainfalbuttons, "ucrSdgPICSARainfalbuttons")
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
-        '
-        'ucrInputYSpecifyLowerLimitDateMonth
-        '
-        Me.ucrInputYSpecifyLowerLimitDateMonth.AddQuotesIfUnrecognised = True
-        Me.ucrInputYSpecifyLowerLimitDateMonth.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYSpecifyLowerLimitDateMonth, "ucrInputYSpecifyLowerLimitDateMonth")
-        Me.ucrInputYSpecifyLowerLimitDateMonth.Name = "ucrInputYSpecifyLowerLimitDateMonth"
-        '
-        'ucrInputYSpecifyUpperLimitDateMonth
-        '
-        Me.ucrInputYSpecifyUpperLimitDateMonth.AddQuotesIfUnrecognised = True
-        Me.ucrInputYSpecifyUpperLimitDateMonth.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYSpecifyUpperLimitDateMonth, "ucrInputYSpecifyUpperLimitDateMonth")
-        Me.ucrInputYSpecifyUpperLimitDateMonth.Name = "ucrInputYSpecifyUpperLimitDateMonth"
         '
         'sdgPICSARainfallGraph
         '
@@ -1281,6 +1362,8 @@ Partial Class sdgPICSARainfallGraph
         Me.grpMajorGridLines.ResumeLayout(False)
         Me.grpMajorGridLines.PerformLayout()
         Me.grpPnlBackground.ResumeLayout(False)
+        Me.tpRug.ResumeLayout(False)
+        Me.tpRug.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1424,4 +1507,13 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents lblMajorGridLineColour As Label
     Friend WithEvents ucrInputYSpecifyUpperLimitDateMonth As ucrInputComboBox
     Friend WithEvents ucrInputYSpecifyLowerLimitDateMonth As ucrInputComboBox
+    Friend WithEvents ucrNudUpperLimit As ucrNud
+    Friend WithEvents ucrNudLowerLimit As ucrNud
+    Friend WithEvents tpRug As TabPage
+    Friend WithEvents ucrChkYaxis As ucrCheck
+    Friend WithEvents lblYaxisOptions As Label
+    Friend WithEvents ucrInputYaxisOptions As ucrInputComboBox
+    Friend WithEvents ucrInputXaxisOptions As ucrInputComboBox
+    Friend WithEvents lblXaxisOptions As Label
+    Friend WithEvents ucrChkXaxis As ucrCheck
 End Class
