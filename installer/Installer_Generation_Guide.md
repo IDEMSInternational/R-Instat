@@ -33,6 +33,8 @@ R-3.6.2-win.exe /DIR="./R-3.6.2"
 1. Cd into the R folder you just installed ./R-3.6.2/bin
 2. Run R.exe
 3. Run the install_bundled_packages.R script in the same folder as this Readme.
+4. The ncdf4.helpers package required a custom version, you can download it from here: https://drive.google.com/file/d/1UqwqVDxMvlHNocUa0i6uiGFT24zwGdgB/view?usp=sharing
+Once you've downloaded that zip file, extract the ncdf4.helpers folder into the ./R-3.6.2/library folder
 
 ## Step 4: Build Installer EXE using Inno Setup
 
