@@ -604,11 +604,16 @@ summary_quantile_circular <- function (x, probs = seq(0, 1, 0.25), na.rm = FALSE
   else return(circular::quantile.circular(x, probs = probs, na.rm = na.rm, names = names, type = type)[[1]])
 }
 
-summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0, na_type = "", ...) {
+summary_mean <- function (x, add_cols, weights = "", na.rm = FALSE, trim = 0, na_type = "", ...) {
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
   else {
     if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-    else return(mean(x, na.rm = na.rm, trim = trim))
+    else {
+      if (missing(weights)) 
+        return(mean(x, na.rm = na.rm, trim = trim))
+      else 
+        return(stats::weighted.mean(x, w = weights, na.rm =na.rm))
+    }
   }
 }
 
@@ -641,19 +646,23 @@ summary_count_non_missing <- function(x, ...) {
   return(sum(!is.na(x)))
 }
 
-summary_sd <- function(x, na.rm = FALSE, na_type = "", ...) {
-  # needed because e.g. sd(as.character(1:10)) returns a numeric value
-  if(is.character(x)) return(NA)
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-    else{
-      return(sd(x,na.rm = na.rm))
-    }
-}
-
-summary_var <- function(x, na.rm = FALSE, na_type = "", ...) {
+summary_sd <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(var(x,na.rm = na.rm))
+    if (missing(weights)) 
+      return(sd(x, na.rm = na.rm))
+    else 
+      return(sqrt(Hmisc::wtd.var(x, weights = weights, na.rm = na.rm)))
+  }  
+}
+
+summary_var <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if (missing(weights)) 
+      return(var(x,na.rm = na.rm))
+    else 
+      return(Hmisc::wtd.var(x, weights = weights, na.rm = na.rm))
   }
 }
 
@@ -683,48 +692,68 @@ summary_range <- function(x, na.rm = FALSE, na_type = "", ...) {
 }
 
 # median function
-summary_median <- function(x, na.rm = FALSE, na_type = "", ...) {
+summary_median <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(median(x, na.rm = na.rm))
+    if(missing(weights))
+      return(median(x, na.rm = na.rm))
+    else 
+      return(spatstat::weighted.median(x, w = weights, na.rm = na.rm))
   }
 }
 
 # quantile function
-summary_quantile <- function(x, na.rm = FALSE, probs, type = 7, na_type = "", ...) {
+summary_quantile <- function(x, na.rm = FALSE, weights = "", probs, na_type = "", ...) {
   if(!na.rm && anyNA(x)) return(NA)
   # This prevents multiple values being returned
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else {
-    if(lubridate::is.Date(x) && type %in% c(2, 4:9)) {
-      message("type = ", type, " not supported for Dates. Deafulting to type = 1")
-      type <- 1
-    }
-    return(quantile(x, na.rm = na.rm, probs = probs, type = type)[[1]])
+  else{
+    if(missing(weights))
+      return(quantile(x, na.rm = na.rm, probs = probs)[[1]])
+    else 
+      return(Hmisc::wtd.quantile(x, weights= weights, probs= probs, na.rm= na.rm))
   }
 }
 
 # lower quartile function
-lower_quartile <- function(x, na.rm = FALSE, type = 7, na_type = "", ...) {
+lower_quartile <- function(x, na.rm = FALSE, na_type = "", weights = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(summary_quantile(x, na.rm = na.rm, probs = 0.25, type = type))
+    if(missing(weights))
+      return(summary_quantile(x, na.rm = na.rm, probs = 0.25))
+    else{
+      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.25, na.rm = na.rm)[[1]])
+    }
   }
 }
 
 # upper quartile function
-upper_quartile <- function(x, na.rm = FALSE, type = 7, na_type = "", ...) {
+upper_quartile <- function(x, na.rm = FALSE, na_type = "" ,weights = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(summary_quantile(x, na.rm = na.rm, probs = 0.75, type = type))
+    if(missing(weights))
+      return(summary_quantile(x, na.rm = na.rm, probs = 0.75))
+    else{
+      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.75, na.rm = na.rm)[[1]])
+    }
   }
 }
 
 # Skewness e1071 function
-summary_skewness <- function(x, na.rm = FALSE, type = 2, na_type = "", ...) {
+summary_skewness <- function(x, weights = "", na.rm = FALSE, type = 2, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(e1071::skewness(x, na.rm = na.rm, type = type))
+    if (missing(weights)) {
+      return(e1071::skewness(x, na.rm = na.rm, type = type))
+    }
+    if (length(weights) != length(x)) 
+      stop("'x' and 'weights' must have the same length")
+    if (na.rm) {
+      i <- !is.na(x)&&!is.na(weights)
+      weights <- weights[i]
+      x <- x[i]
+    }
+    ( sum( weights*(x - Weighted.Desc.Stat::w.mean(x, weights))^3 ) / sum(weights)) / Weighted.Desc.Stat::w.sd(x, weights)^3
   }
 }
 
@@ -765,26 +794,50 @@ summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc
 }
 
 # kurtosis function
-summary_kurtosis <- function(x, na.rm = FALSE, type = 2, na_type = "", ...) {
+summary_kurtosis <- function(x, na.rm = FALSE, weights = "", type = 2, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
+    if (missing(weights)) {
       return(e1071::kurtosis(x, na.rm = na.rm, type = type))
+    }
+    if (length(weights) != length(x)) 
+      stop("'x' and 'weights' must have the same length")
+    if (na.rm) {
+      i <- !is.na(x) && !is.na(weights)
+      weights <- weights[i]
+      x <- x[i]
+    }
+    ((sum(weights * (x - Weighted.Desc.Stat::w.mean(x, weights))^4)/sum(weights))/Weighted.Desc.Stat::w.sd(x, weights)^4) - 3
   }
 }
 
 # Coefficient of Variation function
-summary_coef_var <- function(x, na.rm = FALSE, na_type = "", ...) {
+summary_coef_var <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
+    if (missing(weights)) {
       return(summary_sd(x) / summary_mean(x))
+    }
+    if (length(weights) != length(x)) 
+      stop("'x' and 'weights' must have the same length")
+    if (na.rm) {
+      i <- !is.na(x) && !is.na(weights)
+      weights <- weights[i]
+      x <- x[i]
+    }
+    Weighted.Desc.Stat::w.cv(x = x, mu = weights)
   }
 }
 
 # median absolute deviation function
-summary_median_absolute_deviation <- function(x, constant = 1.4826, na.rm = FALSE, na_type = "", low = FALSE, high = FALSE, ...) {
+summary_median_absolute_deviation <- function(x, constant = 1.4826, na.rm = FALSE, na_type = "", weights = "", low = FALSE, high = FALSE, ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(stats::mad(x, constant = constant, na.rm = na.rm, low = low, high = high))  
+    if (missing(weights))
+      return(stats::mad(x, constant = constant, na.rm = na.rm, low = low, high = high))
+    else{
+      Weighted.Desc.Stat::w.ad(x = x, mu = weights)
+    }
   }
 }
 
@@ -813,20 +866,35 @@ summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na
 }
 
 # cor function
-summary_cor <- function(x, y, na.rm = FALSE, na_type = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+summary_cor <- function(x, y, na.rm = FALSE, na_type = "", weights = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(cor(x = x, y = y, use = use, method = method))
+    if (missing(weights))
+      return(cor(x = x, y = y, use = use, method = method))
+    else{
+      weights::wtd.cor(x = x, y = y, weight = weights, mean1 = TRUE, collapse = TRUE, bootse = FALSE, bootp = FALSE, bootn = 1000)[1]
+    }
   }
 }
 
-# cov function
-summary_cov <- function(x, y, na.rm = FALSE, na_type = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+# cov function 
+summary_cov <- function(x, y, na.rm = FALSE, weights = "", na_type = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    return(cov(x = x, y = y, use = use, method = method))
+    if (missing(weights)) {
+      return(cov(x = x, y = y, use = use, method = method))
+    }
+    if (length(weights) != length(x)) 
+      stop("'x' and 'weights' must have the same length")
+    if (na.rm) {
+      i <- !is.na(x) && !is.na(weigths)
+      weights <- weights[i]
+      x <- x[i]
+    }
+    (sum(weights * x * y)/sum(weights)) - (Weighted.Desc.Stat::w.mean(x, weights) * Weighted.Desc.Stat::w.mean(y, weights))
+  }
 }
-}
+
 # first function
 summary_first <- function(x, order_by = NULL, ...) {
     return(dplyr::first(x = x, order_by = order_by))
