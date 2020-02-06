@@ -42,8 +42,6 @@ Public Class dlgNewDataFrame
         ucrInputCommand.txtInput.WordWrap = False
         ucrInputCommand.txtInput.ScrollBars = ScrollBars.Both
 
-        rdoRandom.Enabled = False 'TODO remove this later
-
         'nudRows
         ucrNudRows.SetParameter(New RParameter("nrow", iNewPosition:=1))
         ucrNudRows.SetMinMax(1, Integer.MaxValue)
@@ -72,10 +70,10 @@ Public Class dlgNewDataFrame
 
         ucrPnlDataFrame.AddToLinkedControls(ucrNudCols, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrPnlDataFrame.AddToLinkedControls(ucrNudRows, {rdoEmpty}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
-        ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDataFrame.AddToLinkedControls(ucrInputCommand, {rdoCommand, rdoRandom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudRows.SetLinkedDisplayControl(lblRows)
         ucrNudCols.SetLinkedDisplayControl(lblColumns)
-        ucrInputCommand.SetLinkedDisplayControl(New List(Of Control)({lblCommand, btnExample}))
+
     End Sub
 
     Private Sub SetDefaults()
@@ -100,7 +98,6 @@ Public Class dlgNewDataFrame
         'Construct option function
         clsConstructFunction.SetRCommand("data.frame")
 
-        ucrInputCommand.SetText("data.frame(data=matrix(data=NA, nrow=10, ncol=2))")
         'empty and create 5 (+1) default rows
         dataGridView.Rows.Clear()
         dataGridView.Rows.Add(5)
@@ -172,8 +169,8 @@ Public Class dlgNewDataFrame
             'enable if there is text in the input textbox
             ucrBase.OKEnabled(ucrNewDFName.IsComplete AndAlso Not ucrInputCommand.IsEmpty)
         ElseIf rdoRandom.Checked Then
-            'TODO
-            ucrBase.OKEnabled(False)
+            'enable if there is text in the input textbox
+            ucrBase.OKEnabled(ucrNewDFName.IsComplete AndAlso Not ucrInputCommand.IsEmpty)
         ElseIf rdoEmpty.Checked Then
             If ucrNewDFName.IsComplete AndAlso ucrNudCols.GetText <> "" AndAlso ucrNudRows.GetText <> "" Then
                 ucrBase.OKEnabled(True)
@@ -207,13 +204,29 @@ Public Class dlgNewDataFrame
 
     Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged
         If rdoConstruct.Checked Then
+            btnExample.Text = "Construct Examples" 'this is being done here cause of the datagridview. We don't have its custom control
+            lblCommand.Visible = True
+            btnExample.Visible = True
             dataGridView.Visible = True
             btnTry.Visible = True
             ucrInputTryMessage.Visible = True
             ucrInputTryMessage.SetText("")
             ucrInputTryMessage.txtInput.BackColor = Color.White
             ucrBase.clsRsyntax.SetBaseRFunction(clsConstructFunction)
-        ElseIf rdoCommand.Checked Then
+        ElseIf rdoCommand.Checked OrElse rdoRandom.Checked Then
+            If rdoCommand.Checked Then
+                btnExample.Text = "Command Examples"
+                If ucrInputCommand.GetText = "" OrElse ucrInputCommand.GetText = "data.frame(data=matrix(data=NA, nrow=10, ncol=2))" OrElse ucrInputCommand.GetText = "wakefield::r_data_theme(n = 100, data_theme = ""the_works"")" Then
+                    ucrInputCommand.SetText("data.frame(data=matrix(data=NA, nrow=10, ncol=2))")
+                End If
+            Else
+                btnExample.Text = "Random Examples"
+                If ucrInputCommand.GetText = "" OrElse ucrInputCommand.GetText = "data.frame(data=matrix(data=NA, nrow=10, ncol=2))" OrElse ucrInputCommand.GetText = "wakefield::r_data_theme(n = 100, data_theme = ""the_works"")" Then
+                    ucrInputCommand.SetText("wakefield::r_data_theme(n = 100, data_theme = ""the_works"")")
+                End If
+            End If
+            lblCommand.Visible = True 'this is being done here cause of the datagridview. We don't have its custom control
+            btnExample.Visible = True
             dataGridView.Visible = False
             btnTry.Visible = True
             ucrInputTryMessage.Visible = True
@@ -221,9 +234,10 @@ Public Class dlgNewDataFrame
             ucrInputTryMessage.txtInput.BackColor = Color.White
             ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
-        ElseIf rdoRandom.Checked Then
-            'TODO 
+
         ElseIf rdoEmpty.Checked Then
+            lblCommand.Visible = False 'this is being done here cause of the datagridview. We don't have its custom control
+            btnExample.Visible = False
             btnTry.Visible = False
             ucrInputTryMessage.Visible = False
             dataGridView.Visible = False
@@ -232,33 +246,34 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub ucrNewDFName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlValueChanged
-        If rdoCommand.Checked Then
+        If rdoCommand.Checked OrElse rdoRandom.Checked Then
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
         End If
     End Sub
 
     Private Sub ucrInputCommand_ContentsChanged() Handles ucrInputCommand.ContentsChanged
         ucrInputTryMessage.SetText("")
+        ucrInputTryMessage.txtInput.BackColor = Color.White
         ucrBase.clsRsyntax.SetCommandString(ucrInputCommand.GetText())
         TestOKEnabled()
     End Sub
 
     Private Sub dataGridView_ValueChanged(sender As Object, e As EventArgs) Handles dataGridView.CellValueChanged
-        ucrInputTryMessage.SetText("")
-        ucrInputTryMessage.txtInput.BackColor = Color.White
-        TestOKEnabled()
-    End Sub
-
-    Private Sub dataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridView.CellEndEdit
         Dim iPosition As Integer = 0
-        'clear the previous parameters which acted as the columns then add the new ones
-        clsConstructFunction.ClearParameters()
+
+        clsConstructFunction.ClearParameters() 'clear the previous parameters which acted as the columns then add the new ones
         For Each row As DataGridViewRow In dataGridView.Rows
-            If row.Cells("colName").Value <> "" AndAlso row.Cells("colExpression").Value <> "" Then
-                clsConstructFunction.AddParameter(row.Cells("colName").Value, row.Cells("colExpression").Value, iPosition:=iPosition)
+            'check for colName for the colName and colExpression which is column index 1 & 2
+            'used column index instead of column name because of argument exception
+            If Not String.IsNullOrEmpty(row.Cells(1).Value) OrElse Not String.IsNullOrEmpty(row.Cells(2).Value) Then
+                clsConstructFunction.AddParameter(row.Cells(1).Value, row.Cells(2).Value, iPosition:=iPosition)
                 iPosition = iPosition + 1
             End If
         Next
+
+        ucrInputTryMessage.SetText("")
+        ucrInputTryMessage.txtInput.BackColor = Color.White
+        TestOKEnabled()
     End Sub
 
     Private Sub dataGridView_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dataGridView.RowsAdded
@@ -272,6 +287,7 @@ Public Class dlgNewDataFrame
         'shows a popup that displays the example commands
         Dim frm As New Form
         Dim lstView As New ListView
+
         frm.ShowInTaskbar = False
         frm.FormBorderStyle = FormBorderStyle.None
         frm.Size = New Size(ucrInputCommand.Width, ucrInputCommand.Height)
@@ -282,27 +298,112 @@ Public Class dlgNewDataFrame
         lstView.Scrollable = True
         lstView.View = View.Details
         lstView.FullRowSelect = True
+        lstView.ShowItemToolTips = True
 
-        'add columns
-        lstView.Columns.Add("Command", 250)
-        lstView.Columns.Add("Comment", 200)
+        'add the appropriate columns and rows with the commands based on the option selected
+        If rdoCommand.Checked Then
+            lstView.Columns.Add("Command", 450)  'add columns
 
-        lstView.Items.Add(New ListViewItem({"data.frame()", "Empty data frame"}))
-        lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data = NA, nrow = 10, ncol = 2))", "10 rows and 2 columns filled with missing values"}))
-        lstView.Items.Add(New ListViewItem({"data.frame(x = 1:30, y = rnorm(30, mean = 100, sd = 15), z = runif(30, min = 10, max = 30))", " "}))
-        lstView.Items.Add(New ListViewItem({"data.frame(block = gl(4, 3), treat = c(""C"", ""A"", ""B"", ""B"", ""C"", ""A"", ""A"", ""B"", ""C"", ""A"", ""C"", ""B""), yield = c(74, 68,  50, 62, 68, 57, 70, 56, 83, 67, 67, 59))", " "}))
-        lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 100, data_theme = ""the_works"")", " "}))
-        lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 30, id, race, age, sex, hour, iq, height, died, Scoring = rnorm, Smoker = valid)", " "}))
+            lstView.Items.Add(New ListViewItem({"data.frame(row = 1:100)"}))
+            lstView.Items.Item(0).ToolTipText = "Data frame with a single variable to build on."
+
+            lstView.Items.Add(New ListViewItem({"data.frame(data = matrix(data = NA, nrow = 10, ncol = 2))"}))
+            lstView.Items.Item(1).ToolTipText = "The same data frame as the default from the Empty option of this dialogue."
+
+            lstView.Items.Add(New ListViewItem({"data.frame(x = 1:30, s = rep(""Reading"",30), r = seq(1, 6.8, length=30), t = seq(1, 60, 2))"}))
+            lstView.Items.Item(2).ToolTipText = "4 variables, showing use of seq and rep function"
+
+            lstView.Items.Add(New ListViewItem({"data.frame(l = 1:31, d = seq(as.Date(""2013-1-1""), as.Date(""2013-1-31""), ""day""))"}))
+            lstView.Items.Item(3).ToolTipText = "2 variables with dates. Or use Prepare > Column: Date > Generate Dates to add a date variable."
+
+            lstView.Items.Add(New ListViewItem({"data.frame(n = 1:12, h = seq(as.POSIXct(""2010-1-1 3: 0:0""), by = ""2 hours"",length = 12))"}))
+            lstView.Items.Item(4).ToolTipText = "2 variables including generating a sequence of times"
+
+            lstView.Items.Add(New ListViewItem({"data.frame(block = gl(4, 3), treat = c(""C"", ""A"", ""B"", ""B"", ""C"", ""A"", ""A"", ""B"", ""C"", ""A"", ""C"", ""B""), yield = c(74, 68,  50, 62, 68, 57, 70, 56, 83, 67, 67, 59))"}))
+            lstView.Items.Item(5).ToolTipText = "Illustrates the gl function and generates data for a simple experiment on 12 plots"
+
+        ElseIf rdoRandom.Checked Then
+            lstView.Columns.Add("Command", 450)  'add columns
+
+            lstView.Items.Add(New ListViewItem({"data.frame(x = 1:30, y = rnorm(30, mean = 100, sd = 15), z = runif(30, min = 10, max = 30))"}))
+            lstView.Items.Item(0).ToolTipText = "3 variables including both random normal and uniform data"
+
+            lstView.Items.Add(New ListViewItem({"data.frame(data = replicate(20, rbinom(n = 25, p = 0.4,size = 1)))"}))
+            lstView.Items.Item(1).ToolTipText = "20 variables, each a random sample from a binomial distribution"
+
+            lstView.Items.Add(New ListViewItem({"data.frame(year = matrix(data = c(rbinom(7300, p = 0.4, size = 1) * rexp(7300, 0.1)), nrow = 365, ncol = 20))"}))
+            lstView.Items.Item(2).ToolTipText = "20 years of rainfall-type data using binomial (p = 0.4) and exponential (mean = 10) variables"
+
+            lstView.Items.Add(New ListViewItem({"data.frame(replicate(10,(sample(c(TRUE,FALSE), size = 50,replace = TRUE,prob = c(0.3,0.7)))))"}))
+            lstView.Items.Item(3).ToolTipText = "10 variables and 50 observations, sampling with replacement and probability 0.3 of TRUE"
+
+            'wakefield commands
+            lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 100, data_theme = ""the_works"")"}))
+            lstView.Items.Item(4).ToolTipText = "49 variables, illustrating most of the types of data in the Wakefield package"
+
+            lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 30, id, race, age, sex, hour, iq, height, died, Scoring = rnorm, Smoker = valid)"}))
+            lstView.Items.Item(5).ToolTipText = "10 variables from the Wakefield package"
+
+            lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 200, data_theme = ""survey"")"}))
+            lstView.Items.Item(6).ToolTipText = "ID plus 10 categorical variables each with 5 levels"
+
+            lstView.Items.Add(New ListViewItem({"wakefield::r_data_theme(n = 500, data_theme = ""survey2"") %>% r_na(prob = 0.1)"}))
+            lstView.Items.Item(7).ToolTipText = "ID plus 10 categorical variables (as factors) and 10% of missing values"
+
+            lstView.Items.Add(New ListViewItem({"wakefield::r_data_frame(n = 50,id, r_dummy(color), r_series(likert, 3), grade, grade, grade)"}))
+            lstView.Items.Item(8).ToolTipText = "ID, plus 12 variables. 6 are indicator (dummy) variables, 3 Likert and 3 grades"
+
+        ElseIf rdoConstruct.Checked Then
+            lstView.Columns.Add("Column Name", 150)  'add columns
+            lstView.Columns.Add("Expression", 300)  'add columns
+
+            lstView.Items.Add(New ListViewItem({"no", "c(0, 0.5, 1, 2:28)"}))
+            lstView.Items.Item(0).ToolTipText = "c( ) produces a vector. Here it produces a variable (column) of 30 values between 0 and 28 seq produces a regular sequence. Here from 30 down to 1 in steps of -1"
+
+            lstView.Items.Add(New ListViewItem({"seq", "seq(30, 1, -1)"}))
+            lstView.Items.Item(1).ToolTipText = "seq produces a regular sequence. Here from 30 down to 1 in steps of -1"
+
+            lstView.Items.Add(New ListViewItem({"place", "rep(""Kisumu"", 30)"}))
+            lstView.Items.Item(2).ToolTipText = "rep repeats one or more values as shown here. Try also rep(1:5, each =6) and rep((1:5,length = 30)"
+
+            lstView.Items.Add(New ListViewItem({"place2", "c(rep(""Mombasa"", 10), rep(""Nairobi"", 20))"}))
+            lstView.Items.Item(3).ToolTipText = "c( ) and rep or seq can be combined as shown here. Try also c(rep(1:5,each=2),seq(6,100,length=20)) regular sequence of dates. Alternatively use Prepare > Column: Date > Generate Dates"
+
+            lstView.Items.Add(New ListViewItem({"days", "seq(as.Date(""2020/4/1""), as.Date(""2020/4/30""), ""days"")"}))
+            lstView.Items.Item(4).ToolTipText = "regular sequence of dates. Alternatively use Prepare > Column: Date > Generate Dates"
+
+            lstView.Items.Add(New ListViewItem({"occasions", "seq(as.Date(""1970/1/1""), by = ""4 months"", length = 30)"}))
+            lstView.Items.Item(4).ToolTipText = "Regular sequence of monthly data"
+        End If
 
         'set respective handlers
         AddHandler lstView.LostFocus, Sub()
                                           frm.Close()
                                       End Sub
         AddHandler lstView.DoubleClick, Sub()
-                                            If lstView.SelectedItems.Count > 0 Then
-                                                ucrInputCommand.SetText(lstView.SelectedItems.Item(0).SubItems(0).Text)
-                                                frm.Close()
+                                            If lstView.SelectedItems.Count < 1 Then
+                                                Exit Sub
                                             End If
+
+                                            If rdoConstruct.Checked Then
+                                                'fill in the empty rows with the selected example or replace existing column names since R doesn't accept duplicate column names
+                                                For Each row As DataGridViewRow In dataGridView.Rows
+                                                    If String.IsNullOrEmpty(row.Cells("colName").Value) AndAlso String.IsNullOrEmpty(row.Cells("colExpression").Value) Then
+                                                        row.Cells("colName").Value = lstView.SelectedItems.Item(0).SubItems(0).Text
+                                                        row.Cells("colExpression").Value = lstView.SelectedItems.Item(0).SubItems(1).Text
+                                                        dataGridView.Rows.Add(1)
+                                                        Exit For
+                                                    ElseIf row.Cells("colName").Value = lstView.SelectedItems.Item(0).SubItems(0).Text Then
+                                                        row.Cells("colName").Value = lstView.SelectedItems.Item(0).SubItems(0).Text
+                                                        row.Cells("colExpression").Value = lstView.SelectedItems.Item(0).SubItems(1).Text
+                                                        Exit For
+                                                    End If
+                                                Next
+                                            Else
+                                                ucrInputCommand.SetText(lstView.SelectedItems.Item(0).SubItems(0).Text)
+                                            End If
+
+                                            frm.Close()
                                         End Sub
 
         Dim ctlpos As Point = btnExample.PointToScreen(New Point(0, 0)) 'Point.Empty is not function so use Point(0, 0)
@@ -312,36 +413,50 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles btnTry.Click
+        Dim bValid As Boolean = False
         Dim vecOutput As CharacterVector
-        Dim strScript As String = ""
+        Dim strScript As String
+        Dim lstScriptCommands As New List(Of String)
+        Dim clsTempConstructFunction As RFunction
         Try
-
             If rdoConstruct.Checked Then
-                strScript = clsConstructFunction.ToScript
-            ElseIf rdoCommand.Checked Then
-                If ucrInputCommand.IsEmpty Then
-                    ucrInputTryMessage.SetText("")
-                    ucrInputTryMessage.txtInput.BackColor = Color.White
-                    Return
-                End If
+                clsTempConstructFunction = clsConstructFunction.Clone
+                clsTempConstructFunction.bToBeAssigned = False
+                clsTempConstructFunction.bIsAssigned = False
+                strScript = clsTempConstructFunction.ToScript()
+                lstScriptCommands.AddRange(strScript.Split(New String() {Environment.NewLine}, StringSplitOptions.None))
+            ElseIf rdoCommand.Checked OrElse rdoRandom.Checked Then
                 strScript = ucrInputCommand.GetText
+                lstScriptCommands.AddRange(strScript.Split(New String() {Environment.NewLine}, StringSplitOptions.None))
             End If
 
-            vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strScript, bSilent:=True)
-            If vecOutput IsNot Nothing Then
-                'If strVecOutput.Length > 0 Then
-                'End If
+            'always run line by line. The last line should produuce a dataframe
+            For Each str As String In lstScriptCommands
+                If Not String.IsNullOrWhiteSpace(str) Then
+                    vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(str, bSilent:=True)
+                    If vecOutput Is Nothing Then
+                        bValid = False
+                        Exit For
+                    ElseIf vecOutput.Length > 0 Then
+                        bValid = True
+                        'don't break the if, we probably want to loop through to the last command checking validity? 
+                    End If
+                End If
+            Next
+
+
+            If ucrBase.cmdOk.Enabled AndAlso bValid Then
                 ucrInputTryMessage.SetText("Command Ok.")
-                ucrInputTryMessage.txtInput.BackColor = Color.White
+                ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
             Else
                 ucrInputTryMessage.SetText("Command produced an error or no output to display.")
-                ucrInputTryMessage.txtInput.BackColor = Color.Red
+                ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
             End If
 
 
         Catch ex As Exception
             ucrInputTryMessage.SetText("Command produced an error.")
-            ucrInputTryMessage.txtInput.BackColor = Color.Red
+            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
         End Try
     End Sub
 
