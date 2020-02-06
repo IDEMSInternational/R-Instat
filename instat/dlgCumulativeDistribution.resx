@@ -216,17 +216,8 @@
   <data name="rdoExceedance.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
-
   <data name="rdoExceedance.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
-
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrSaveCumDist.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ucrSaveCumDist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
-
   </data>
   <data name="rdoExceedance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -430,10 +421,13 @@
     <value>8</value>
   </data>
   <data name="ucrSaveCumDist.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 341</value>
+    <value>10, 353</value>
+  </data>
+  <data name="ucrSaveCumDist.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveCumDist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 24</value>
+    <value>358, 25</value>
   </data>
   <data name="ucrSaveCumDist.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -527,9 +521,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>15</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
