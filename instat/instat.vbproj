@@ -172,6 +172,12 @@
     <Compile Include="dlgGraphsGUI.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRPackages.Designer.vb">
+      <DependentUpon>dlgRPackages.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRPackages.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSurvivalDefine.Designer.vb">
       <DependentUpon>dlgSurvivalDefine.vb</DependentUpon>
     </Compile>
@@ -573,12 +579,6 @@
       <DependentUpon>dlgExportToOpenRefine.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgExportToOpenRefine.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgCorruptionFile.Designer.vb">
-      <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgCorruptionFile.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgExtremesClimatic.Designer.vb">
@@ -2070,12 +2070,6 @@
     <Compile Include="dlgThreeSummaries.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgTransform.Designer.vb">
-      <DependentUpon>dlgTransform.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgTransform.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgNon_ParametricTwoWayAnova.Designer.vb">
       <DependentUpon>dlgNon_ParametricTwoWayAnova.vb</DependentUpon>
     </Compile>
@@ -2396,6 +2390,12 @@
     <Compile Include="ucrElementLineControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrTry.Designer.vb">
+      <DependentUpon>ucrTry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrTry.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrVariablename.designer.vb">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
     </Compile>
@@ -2424,6 +2424,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGraphsGUI.resx">
       <DependentUpon>dlgGraphsGUI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRPackages.resx">
+      <DependentUpon>dlgRPackages.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSurvivalDefine.resx">
       <DependentUpon>dlgSurvivalDefine.vb</DependentUpon>
@@ -2663,9 +2666,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorruptionDescribe.sw-KE.resx">
       <DependentUpon>dlgCorruptionDescribe.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgCorruptionFile.sw-KE.resx">
-      <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorruptionModel.sw-KE.resx">
       <DependentUpon>dlgCorruptionModel.vb</DependentUpon>
@@ -2993,9 +2993,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToOpenRefine.resx">
       <DependentUpon>dlgExportToOpenRefine.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgCorruptionFile.resx">
-      <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExtremesClimatic.resx">
       <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
@@ -4056,12 +4053,6 @@
     <EmbeddedResource Include="dlgSummary.sw-KE.resx">
       <DependentUpon>dlgSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgTransform.resx">
-      <DependentUpon>dlgTransform.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgTransform.sw-KE.resx">
-      <DependentUpon>dlgTransform.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgUnstack.resx">
       <DependentUpon>dlgUnstack.vb</DependentUpon>
     </EmbeddedResource>
@@ -4488,6 +4479,9 @@
     <EmbeddedResource Include="ucrElementLineControl.resx">
       <DependentUpon>ucrElementLineControl.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrTry.resx">
+      <DependentUpon>ucrTry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrVariablename.resx">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
     </EmbeddedResource>
@@ -4879,9 +4873,7 @@
     <Content Include="static\Library\Climatic\Nigeria\samaru_56.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Climatic\rain_galle.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="static\Library\Climatic\rain_galle.xlsx" />
     <Content Include="static\Library\Climatic\Tanzania\dodoma.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -5893,6 +5885,7 @@
     <Content Include="static\InstatObject\R\extras\ncdf4.helpers_0.3-3.tar.gz">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\Library\Climatic\climatic_guide_datasets.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Carlosjj-Microsoft-Office-2013-Excel.ico" />

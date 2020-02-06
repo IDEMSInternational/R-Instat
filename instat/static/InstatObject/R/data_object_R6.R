@@ -128,6 +128,8 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
       message("data is empty. Data will be an empty data frame.")
     }
     if(check_names) {
+      # "T" should be avoided as a column name but is not checked by make.names()
+      if("T" %in% names(new_data)) names(new_data)[names(new_data) == "T"] <- ".T"
       valid_names <- make.names(iconv(names(new_data), to = "ASCII//TRANSLIT", sub = "."))
       if(!all(names(new_data) == valid_names)) {
         warning("Not all column names are syntactically valid. make.names() and iconv() will be used to force them to be valid.")

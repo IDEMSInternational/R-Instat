@@ -73,12 +73,11 @@ Partial Class dlgEnter
         Me.cmdMonthMinus = New System.Windows.Forms.Button()
         Me.cmdColon = New System.Windows.Forms.Button()
         Me.grpEnterKeyboard2 = New System.Windows.Forms.GroupBox()
-        Me.cmdTry = New System.Windows.Forms.Button()
-        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSaveEnterResultInto = New instat.ucrInputComboBox()
         Me.ucrDataFrameEnter = New instat.ucrDataFrame()
         Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrTryModelling = New instat.ucrTry()
         Me.grpEnterKeybord1.SuspendLayout()
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.SuspendLayout()
@@ -319,20 +318,6 @@ Partial Class dlgEnter
         Me.grpEnterKeyboard2.Name = "grpEnterKeyboard2"
         Me.grpEnterKeyboard2.TabStop = False
         '
-        'cmdTry
-        '
-        resources.ApplyResources(Me.cmdTry, "cmdTry")
-        Me.cmdTry.Name = "cmdTry"
-        Me.cmdTry.UseVisualStyleBackColor = True
-        '
-        'ucrInputTryMessage
-        '
-        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
-        Me.ucrInputTryMessage.IsMultiline = False
-        Me.ucrInputTryMessage.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputTryMessage, "ucrInputTryMessage")
-        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
-        '
         'ucrSaveEnterResultInto
         '
         Me.ucrSaveEnterResultInto.AddQuotesIfUnrecognised = True
@@ -361,12 +346,16 @@ Partial Class dlgEnter
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrTryModelling
+        '
+        resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
+        Me.ucrTryModelling.Name = "ucrTryModelling"
+        '
         'dlgEnter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrInputTryMessage)
-        Me.Controls.Add(Me.cmdTry)
+        Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.grpEnterKeyboard2)
         Me.Controls.Add(Me.ucrSaveEnterResultInto)
         Me.Controls.Add(Me.chkSaveEnterResultInto)
@@ -425,6 +414,5 @@ Partial Class dlgEnter
     Friend WithEvents cmdMonthMinus As Button
     Friend WithEvents cmdColon As Button
     Friend WithEvents grpEnterKeyboard2 As GroupBox
-    Friend WithEvents ucrInputTryMessage As ucrInputTextBox
-    Friend WithEvents cmdTry As Button
+    Friend WithEvents ucrTryModelling As ucrTry
 End Class

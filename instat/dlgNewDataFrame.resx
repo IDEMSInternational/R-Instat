@@ -463,13 +463,13 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="btnExample.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 22</value>
+    <value>118, 22</value>
   </data>
   <data name="btnExample.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="btnExample.Text" xml:space="preserve">
-    <value>Examples</value>
+    <value>Command Examples</value>
   </data>
   <data name="&gt;&gt;btnExample.Name" xml:space="preserve">
     <value>btnExample</value>
@@ -689,9 +689,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>439, 378</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
