@@ -24,7 +24,7 @@ Public Class dlgNewDataFrame
     Private bReset As Boolean = True
 
     Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
+        'autoTranslate(Me) this subroutine was causing a bug in the button examples
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
