@@ -418,7 +418,7 @@
     <value>2</value>
   </data>
   <data name="ucrValueForFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 40</value>
+    <value>488, 40</value>
   </data>
   <data name="ucrValueForFilter.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 21</value>
@@ -460,10 +460,10 @@
     <value>9</value>
   </data>
   <data name="ucrFilterOperation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>420, 40</value>
+    <value>413, 40</value>
   </data>
   <data name="ucrFilterOperation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 21</value>
+    <value>56, 21</value>
   </data>
   <data name="ucrFilterOperation.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -553,7 +553,7 @@
     <value>18</value>
   </data>
   <data name="ucrDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>491, 40</value>
+    <value>489, 40</value>
   </data>
   <data name="ucrDatePicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 21</value>
@@ -574,7 +574,7 @@
     <value>1</value>
   </data>
   <data name="ucrLogicalCombobox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>502, 39</value>
+    <value>489, 39</value>
   </data>
   <data name="ucrLogicalCombobox.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 21</value>

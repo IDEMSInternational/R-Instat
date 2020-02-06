@@ -61,7 +61,7 @@ Public Class ucrFilter
     Private Sub InitialiseControl()
         ucrFilterPreview.txtInput.ReadOnly = True
         ucrFilterByReceiver.Selector = ucrSelectorForFitler
-        ucrFilterOperation.SetItems({"==", "<", "<=", ">", ">=", "!=", "is.na", "!is.na"})
+        ucrFilterOperation.SetItems({"==", "<", "<=", ">", ">=", "!=", "is.na", "! is.na"})
         ucrFilterOperation.SetDropDownStyleAsNonEditable()
         ucrFactorLevels.SetAsMultipleSelector()
         ucrFactorLevels.SetReceiver(ucrFilterByReceiver)
@@ -103,7 +103,7 @@ Public Class ucrFilter
                 SetToggleButtonSettings()
             Else
                 ucrFilterOperation.Visible = True
-                If ucrFilterOperation.GetText() <> "is.na" AndAlso ucrFilterOperation.GetText() <> "!is.na" Then
+                If ucrFilterOperation.GetText() <> "is.na" AndAlso ucrFilterOperation.GetText() <> "! is.na" Then
                     Select Case ucrFilterByReceiver.strCurrDataType.ToLower
                         Case "logical"
                             ucrLogicalCombobox.Visible = True
@@ -125,7 +125,7 @@ Public Class ucrFilter
                 cmdAddCondition.Enabled = Not String.IsNullOrEmpty(ucrFactorLevels.GetSelectedLevels())
             Else
                 Select Case ucrFilterOperation.GetText()
-                    Case "is.na", "!is.na"
+                    Case "is.na", "! is.na"
                         cmdAddCondition.Enabled = True
                     Case Else
                         Select Case ucrFilterByReceiver.strCurrDataType.ToLower
@@ -174,11 +174,9 @@ Public Class ucrFilter
             clsCurrentConditionList.AddParameter("operation", Chr(34) & "%in%" & Chr(34))
             strCondition = ucrFactorLevels.GetSelectedLevels()
         Else
-
             clsCurrentConditionView.SetOperation(ucrFilterOperation.GetText())
             clsCurrentConditionList.AddParameter("operation", Chr(34) & ucrFilterOperation.GetText() & Chr(34))
-
-            If ucrFilterOperation.GetText() = "is.na" OrElse ucrFilterOperation.GetText() = "!is.na" Then
+            If ucrFilterOperation.GetText() = "is.na" OrElse ucrFilterOperation.GetText() = "! is.na" Then
                 strCondition = ""
             Else
                 If ucrFilterByReceiver.strCurrDataType.ToLower = "character" Then
@@ -191,14 +189,12 @@ Public Class ucrFilter
                 Else
                     strCondition = ucrValueForFilter.GetText()
                 End If
-
             End If
-
         End If
         If Not String.IsNullOrEmpty(strCondition) Then
-            clsCurrentConditionView.AddParameter(strParameterValue:=strCondition.Replace(Chr(34), Chr(39)))
+            clsCurrentConditionView.AddParameter("condition", strCondition.Replace(Chr(34), Chr(39)))
+            clsCurrentConditionList.AddParameter("value", strCondition)
         End If
-        clsCurrentConditionList.AddParameter("value", strCondition)
         clsConditionsList.AddParameter("C" & clsConditionsList.clsParameters.Count, clsRFunctionParameter:=(clsCurrentConditionList))
         lviCondition = New ListViewItem({ucrFilterByReceiver.GetVariableNames(), clsCurrentConditionView.strOperation & " " & strCondition})
         lstFilters.Items.Add(lviCondition)
