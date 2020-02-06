@@ -2083,7 +2083,7 @@ End Sub
     End Sub
 
     Private Sub MnuTbLog_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLog.ButtonClick
-        mnuViewScriptWindow.Checked = Not mnuViewScriptWindow.Checked
+        mnuViewLog.Checked = Not mnuViewLog.Checked
         UpdateLayout()
     End Sub
 
@@ -2115,7 +2115,7 @@ End Sub
 
     Private Sub Mnuploty_Click(sender As Object, e As EventArgs) Handles mnuploty.Click
         Me.Enabled = False
-        clsRLink.ViewLastGraphPlotly()
+        clsRLink.ViewLastGraph(bAsPlotly:=True)
         Me.Enabled = True
     End Sub
 End Class
