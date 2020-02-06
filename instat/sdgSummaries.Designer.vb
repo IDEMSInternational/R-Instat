@@ -99,6 +99,8 @@ Partial Class sdgSummaries
         Me.tbSummaries = New System.Windows.Forms.TabControl()
         Me.tbTwoVariables = New System.Windows.Forms.TabPage()
         Me.grpRelationships = New System.Windows.Forms.GroupBox()
+        Me.ucrChkCoefPersistence = New instat.ucrCheck()
+        Me.ucrChkCoefDetermination = New instat.ucrCheck()
         Me.ucrChkCovariance = New instat.ucrCheck()
         Me.ucrChkCorrelations = New instat.ucrCheck()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
@@ -608,11 +610,25 @@ Partial Class sdgSummaries
         '
         'grpRelationships
         '
+        Me.grpRelationships.Controls.Add(Me.ucrChkCoefPersistence)
+        Me.grpRelationships.Controls.Add(Me.ucrChkCoefDetermination)
         Me.grpRelationships.Controls.Add(Me.ucrChkCovariance)
         Me.grpRelationships.Controls.Add(Me.ucrChkCorrelations)
         resources.ApplyResources(Me.grpRelationships, "grpRelationships")
         Me.grpRelationships.Name = "grpRelationships"
         Me.grpRelationships.TabStop = False
+        '
+        'ucrChkCoefPersistence
+        '
+        Me.ucrChkCoefPersistence.Checked = False
+        resources.ApplyResources(Me.ucrChkCoefPersistence, "ucrChkCoefPersistence")
+        Me.ucrChkCoefPersistence.Name = "ucrChkCoefPersistence"
+        '
+        'ucrChkCoefDetermination
+        '
+        Me.ucrChkCoefDetermination.Checked = False
+        resources.ApplyResources(Me.ucrChkCoefDetermination, "ucrChkCoefDetermination")
+        Me.ucrChkCoefDetermination.Name = "ucrChkCoefDetermination"
         '
         'ucrChkCovariance
         '
@@ -994,4 +1010,6 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkSd As ucrCheck
     Friend WithEvents ucrChkQuantile As ucrCheck
     Friend WithEvents ucrInputQuantile As ucrInputTextBox
+    Friend WithEvents ucrChkCoefPersistence As ucrCheck
+    Friend WithEvents ucrChkCoefDetermination As ucrCheck
 End Class

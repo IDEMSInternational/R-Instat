@@ -274,7 +274,13 @@ Public Class sdgSummaries
         ucrChkStandardErrorOfMean.SetParameter(New RParameter("standard_error_mean", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "standard_error_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkStandardErrorOfMean.SetText("Standard Error of the Mean")
 
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean, ucrChkMaxNumMissing, ucrChkMinNumNonMissing, ucrChkMaxPercMissing, ucrChkConsecutiveMissing, ucrChkCircMean, ucrChkCircMedian, ucrChkMin, ucrChkMedianH, ucrChkMax, ucrChkQ1, ucrChkQ3, ucrChkQuantile, ucrChkSd, ucrChkVar, ucrChkAngVar, ucrChkAngDev, ucrChkrho, ucrChkCircRange})
+        ucrChkCoefDetermination.SetParameter(New RParameter("coef_det", 31), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "coef_det" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkCoefDetermination.SetText("Coefficient of determination")
+
+        ucrChkCoefPersistence.SetParameter(New RParameter("coef_pers", 32), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "coef_pers" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkCoefPersistence.SetText("Coefficient of persistence")
+
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean, ucrChkMaxNumMissing, ucrChkMinNumNonMissing, ucrChkMaxPercMissing, ucrChkConsecutiveMissing, ucrChkCircMean, ucrChkCircMedian, ucrChkMin, ucrChkMedianH, ucrChkMax, ucrChkQ1, ucrChkQ3, ucrChkQuantile, ucrChkSd, ucrChkVar, ucrChkAngVar, ucrChkAngDev, ucrChkrho, ucrChkCircRange, ucrChkCoefDetermination, ucrChkCoefPersistence})
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
             ctrTemp.SetRDefault(Chr(34) & Chr(34))
@@ -366,6 +372,8 @@ Public Class sdgSummaries
         ucrChkAngDev.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkrho.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkCircRange.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkCoefDetermination.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkCoefPersistence.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             tbSummaries.SelectedIndex = 0
@@ -392,7 +400,7 @@ Public Class sdgSummaries
         If SummaryCount = 0 Then
             MsgBox("No summaries selected. Ok will Not be enabled on the main dialog.", Title:="No summaries selected", Buttons:=MsgBoxStyle.Information)
         End If
-        If (ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked) AndAlso ucrReceiverSecondVariable.IsEmpty Then
+        If (ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked OrElse ucrChkCoefDetermination.Checked OrElse ucrChkCoefPersistence.Checked) AndAlso ucrReceiverSecondVariable.IsEmpty Then
             MsgBox("Second Variable receiver in Two-Variables tab is empty. Ok will Not be enabled on the main dialog.", Title:="Second Variable Receiver", Buttons:=MsgBoxStyle.Information)
             bOkEnabled = False
         Else
@@ -401,7 +409,7 @@ Public Class sdgSummaries
     End Sub
 
     Private Sub MissingOptionsVisibilty()
-        If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked Then
+        If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked OrElse ucrChkCoefDetermination.Checked OrElse ucrChkCoefPersistence.Checked Then
             ucrSelectorSecondVariable.Show()
             ucrReceiverSecondVariable.Show()
             lblSecondVariable.Show()
@@ -433,9 +441,9 @@ Public Class sdgSummaries
         End If
     End Sub
 
-    Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged, ucrChkCovariance.ControlValueChanged, ucrReceiverSecondVariable.ControlValueChanged
+    Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged, ucrChkCovariance.ControlValueChanged, ucrReceiverSecondVariable.ControlValueChanged, ucrChkCoefDetermination.ControlValueChanged, ucrChkCoefPersistence.ControlValueChanged
         MissingOptionsVisibilty()
-        If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked Then
+        If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked OrElse ucrChkCoefDetermination.Checked OrElse ucrChkCoefPersistence.Checked Then
             clsDefaultFunction.AddParameter("y", ucrReceiverSecondVariable.GetVariableNames, iPosition:=3)
         Else
             clsDefaultFunction.RemoveParameterByName("y")
