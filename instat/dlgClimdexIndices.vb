@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgClimdexIndices
     Private bFirstLoad As Boolean = True
@@ -85,6 +86,10 @@ Public Class dlgClimdexIndices
         ucrReceiverPrec.bAutoFill = True
         ucrReceiverPrec.strSelectorHeading = "Rain Variables"
 
+
+        ucrPnlAnnualMonthly.AddToLinkedControls({ucrReceiverMonth}, {rdoMonthly}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverMonth.SetLinkedDisplayControl(lblMonth)
+
         ucrPnlAnnualMonthly.SetParameter(New RParameter("freq", 2))
         ucrPnlAnnualMonthly.AddRadioButton(rdoAnnual, Chr(34) & "annual" & Chr(34))
         ucrPnlAnnualMonthly.AddRadioButton(rdoMonthly, Chr(34) & "monthly" & Chr(34))
@@ -92,6 +97,9 @@ Public Class dlgClimdexIndices
 
         ucrChkSave.SetText("Save Indices")
         ucrChkSave.bChangeParameterValue = False
+
+
+
     End Sub
 
     Private Sub SetDefaults()
@@ -331,6 +339,7 @@ Public Class dlgClimdexIndices
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsRWriteDf)
         bResetSubdialog = True
+        ParameterCount()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -362,6 +371,7 @@ Public Class dlgClimdexIndices
         sdgClimdexIndices.SetRCode(clsDefaultFunction, clsRWriteDf, clsRWriteDfIndicesList, clsRMaxMissingDays, clsRBaseRange, clsRTempQTiles, clsRPrecQTiles, clsFrostDays, clsSummerDays, clsIcingDays, clsTropicalNights, clsWarmSpellDI, clsColdSpellDI, clsGrowingSeasonLength, clsMonthlyMaxDailyTMax, clsMonthlyMaxDailyTMin, clsMonthlyMinDailyTMax, clsMonthlyMinDailyTMin, clsTminBelow10Percent, clsTmaxBelow10Percent, clsTminAbove90Percent, clsTmaxAbove90Percent, clsMeanDiurnalTempRange, clsMonthlyMax1DayPrec, clsMonthlyMax5DayPrec, clsSimplePrecII, clsPrecExceed10mm, clsPrecExceed20mm, clsPrecExceedSpecifiedA, clsMaxDrySpell, clsMaxWetSpell, clsPrecExceed95Percent, clsPrecExceed99Percent, clsTotalDailyPrec, bResetSubdialog)
         bResetSubdialog = False
         sdgClimdexIndices.ShowDialog()
+        ParameterCount()
     End Sub
 
     Private Sub ucrPnlAnnualMonthly_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualMonthly.ControlContentsChanged
@@ -404,5 +414,19 @@ Public Class dlgClimdexIndices
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverPrec.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ParameterCount()
+        lblSelectedIndices.Text = clsRWriteDfIndicesList.iParameterCount
+        If rdoAnnual.Checked Then
+            lblTotalIndices.Text = 27
+        Else
+            lblTotalIndices.Text = 11
+        End If
+
+    End Sub
+
+    Private Sub ucrPnlAnnualMonthly_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualMonthly.ControlValueChanged
+        ParameterCount()
     End Sub
 End Class
