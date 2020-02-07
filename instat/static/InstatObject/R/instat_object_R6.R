@@ -2043,6 +2043,14 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
   }
 }
 )
+
+DataBook$set("public","get_geometry", function(data) {
+  if(missing(data)) stop("data_name is required")
+  else if("sf" %in% class(data)) return(attr(data, "sf_column"))
+  else if("geometry" %in% colnames(data)) return("geometry")
+  else return("")
+}
+)
 DataBook$set("public","package_check", function(package) {
   out <- list()
   av_packs <- available.packages()
