@@ -687,15 +687,15 @@ Public Class dlgTwoVariableFitModel
     'correct solution is to have save controls linked to each graph
     Private Sub GraphAssignTo()
         clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
-        Dim lstPlotNames As New List(Of String)
-        Dim i As Integer = 0
+        'Dim lstPlotNames As New List(Of String)
+        'Dim i As Integer = 0
 
-        lstPlotNames = New List(Of String)({"last_residplot", "last_qqplot", "last_scaleloc", "last_cooksdist", "last_residlev", "last_cookslev"})
+        'lstPlotNames = New List(Of String)({"last_residplot", "last_qqplot", "last_scaleloc", "last_cooksdist", "last_residlev", "last_cookslev"})
 
-        For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
-            kvp.Value.SetAssignTo(lstPlotNames(index:=i), strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=lstPlotNames(index:=i))
-            i = i + 1
-        Next
+        'For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
+        '    kvp.Value.SetAssignTo(lstPlotNames(index:=i), strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=lstPlotNames(index:=i))
+        '    i = i + 1
+        'Next
     End Sub
 
     Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverExplanatory.SelectionChanged
