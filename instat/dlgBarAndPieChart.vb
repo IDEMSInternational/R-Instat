@@ -124,7 +124,7 @@ Public Class dlgBarAndPieChart
 
         ucrInputYValue.SetParameter(New RParameter("stat", 0))
         dctStatOptions.Add("Count", Chr(34) & "count" & Chr(34))
-        dctStatOptions.Add("Column", Chr(34) & "identity" & Chr(34))
+        dctStatOptions.Add("Variable", Chr(34) & "identity" & Chr(34))
         ucrInputYValue.SetItems(dctStatOptions)
         ucrInputYValue.SetDropDownStyleAsNonEditable()
         ucrInputYValue.SetRDefault(Chr(34) & "count" & Chr(34))
@@ -330,7 +330,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub setColumnChartOption()
-        If ucrInputYValue.GetValue = "Column" Then
+        If ucrInputYValue.GetValue = "Variable" Then
             ucrReceiverY.SetVisible(True)
             ucrReceiverY.AddOrRemoveParameter(True)
         Else
