@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
+
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgHypothesisTestsCalculator
@@ -24,7 +24,7 @@ Public Class dlgHypothesisTestsCalculator
     Private clsDetach As New RFunction
     Private strPackageName As String
     Private clsSummary As New RFunction
-    Private clsFormula As New RFunction
+    Private clsDisplay As New RFunction
     Private Sub dlgHypothesisTestsCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -74,18 +74,17 @@ Public Class dlgHypothesisTestsCalculator
         ucrBase.clsRsyntax.SetAssignTo("Last_Test", strTempModel:="Last_Test", strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
+        ucrChkDisplayModel.Checked = True
         ucrChkIncludeArguments.Checked = False
         ucrChkSummaryModel.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"}, bNewIsPositive:=True)
-        ucrChkDisplayModel.AddRSyntaxContainsFunctionNamesCondition(True, {"formula"}, bNewIsPositive:=True)
         ucrInputComboRPackage.SetName("Stats1")
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
         clsSummary.SetRCommand("summary")
-        clsFormula.SetRCommand("formula")
+        clsDisplay.SetRCommand("formula")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
         clsSummary.AddParameter("object", clsRCodeStructureParameter:=ucrBase.clsRsyntax.clsBaseCommandString, iPosition:=0)
-        clsFormula.AddParameter("object", clsRCodeStructureParameter:=ucrBase.clsRsyntax.clsBaseCommandString, iPosition:=1)
         clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
@@ -657,10 +656,9 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub ucrChkDisplayModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayModel.ControlValueChanged
         If ucrChkDisplayModel.Checked Then
-            clsFormula.iCallType = 2
-            ucrBase.clsRsyntax.AddToAfterCodes(clsFormula, 1)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         Else
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsFormula)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         End If
     End Sub
 End Class
