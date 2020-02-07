@@ -245,10 +245,8 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub SetNFilesInFolder(strPath As String)
-        Dim iFiles As Integer
-
         strFiles = Directory.GetFiles(strPath, "*.nc")
-        lblNFiles.Text = strFiles.Count
+        lblNFiles.Text = If(strFiles.Count = 0, "No", strFiles.Count)
         NFilesLabelVisible(True)
     End Sub
 

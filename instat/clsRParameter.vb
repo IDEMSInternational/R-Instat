@@ -125,7 +125,7 @@ Public Class RParameter
     Public Function HasValue() As Boolean
         If bIsString Then
             Return strArgumentValue IsNot Nothing
-        ElseIf bIsFunction OrElse bIsOperator Then
+        ElseIf bIsFunction OrElse bIsOperator OrElse clsArgumentCodeStructure IsNot Nothing Then
             Return clsArgumentCodeStructure IsNot Nothing
         Else
             Return False
