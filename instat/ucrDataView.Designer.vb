@@ -255,32 +255,34 @@ Partial Class ucrDataView
         Me.mnuCell.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCellCutRange, Me.mnuCellCopyRange, Me.mnuCellPasteRange, Me.mnuCellHelp})
         Me.mnuCell.Name = "mnuCell"
         Me.mnuCell.Size = New System.Drawing.Size(250, 24)
-        Me.mnuCell.Text = "cell"
+        Me.mnuCell.Text = "Cell"
         '
         'mnuCellCutRange
         '
         Me.mnuCellCutRange.Enabled = False
         Me.mnuCellCutRange.Name = "mnuCellCutRange"
-        Me.mnuCellCutRange.Size = New System.Drawing.Size(118, 26)
+        Me.mnuCellCutRange.Size = New System.Drawing.Size(216, 26)
         Me.mnuCellCutRange.Text = "Cut"
+        Me.mnuCellCutRange.Visible = False
         '
         'mnuCellCopyRange
         '
         Me.mnuCellCopyRange.Name = "mnuCellCopyRange"
-        Me.mnuCellCopyRange.Size = New System.Drawing.Size(118, 26)
+        Me.mnuCellCopyRange.Size = New System.Drawing.Size(216, 26)
         Me.mnuCellCopyRange.Text = "Copy"
         '
         'mnuCellPasteRange
         '
         Me.mnuCellPasteRange.Enabled = False
         Me.mnuCellPasteRange.Name = "mnuCellPasteRange"
-        Me.mnuCellPasteRange.Size = New System.Drawing.Size(118, 26)
+        Me.mnuCellPasteRange.Size = New System.Drawing.Size(216, 26)
         Me.mnuCellPasteRange.Text = "Paste"
+        Me.mnuCellPasteRange.Visible = False
         '
         'mnuCellHelp
         '
         Me.mnuCellHelp.Name = "mnuCellHelp"
-        Me.mnuCellHelp.Size = New System.Drawing.Size(118, 26)
+        Me.mnuCellHelp.Size = New System.Drawing.Size(216, 26)
         Me.mnuCellHelp.Text = "Help"
         '
         'ToolStripSeparator3
