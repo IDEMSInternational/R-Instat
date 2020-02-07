@@ -19,7 +19,7 @@ Imports RDotNet
 Public Class dlgClimaticStationMaps
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsSfAesFunction, clsGeomPointAesFunction, clsFacetFunction, clsScaleShapeFunction, clsLabelRepelFunction As RFunction
+    Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsSfAesFunction, clsGeomPointAesFunction, clsScaleShapeFunction, clsLabelRepelFunction As RFunction
     Private clsGGplotOperator, clsFacetOp As New ROperator
 
     Private clsLabsFunction As New RFunction
@@ -39,6 +39,7 @@ Public Class dlgClimaticStationMaps
     Private clsCoordPolarStartOperator As ROperator
     Private clsGetDataFrame As RFunction
     Private clsRemoveFunc As New RFunction
+    Private clsParamOperator As New ROperator
 
     Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -117,19 +118,20 @@ Public Class dlgClimaticStationMaps
         ucrSaveMap.SetAssignToIfUncheckedValue("last_map")
         ucrSaveMap.SetDataFrameSelector(ucrSelectorOutline.ucrAvailableDataFrames)
 
+        ucrChkAddPoints.SetParameter(New RParameter("data layers", strParamValue:=clsParamOperator), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkAddPoints.SetText("Add Points")
         ChangeSize()
 
     End Sub
 
     Private Sub SetDefaults()
+        clsParamOperator.Clear()
         clsGetDataFrame = New RFunction
         clsGeomSfFunction = New RFunction
         clsGgplotFunction = New RFunction
         clsSfAesFunction = New RFunction
         clsGeomPointFunction = New RFunction
         clsGeomPointAesFunction = New RFunction
-        clsFacetFunction = New RFunction
         clsScaleShapeFunction = New RFunction
         clsLabelRepelFunction = New RFunction
         clsLabelRepelAesFunction = New RFunction
@@ -154,6 +156,8 @@ Public Class dlgClimaticStationMaps
         bResetSubdialog = True
         bResetSFLayerSubdialog = True
 
+        clsParamOperator.SetOperation("+")
+
         clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
         clsRemoveFunc.SetRCommand("rm")
@@ -171,6 +175,7 @@ Public Class dlgClimaticStationMaps
         clsGeomPointFunction.SetPackageName("ggplot2")
         clsGeomPointFunction.SetRCommand("geom_point")
         clsGeomPointFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomPointAesFunction, iPosition:=1)
+        clsParamOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointFunction, bIncludeArgumentName:=False, iPosition:=1)
 
         clsGeomPointAesFunction.SetPackageName("ggplot2")
         clsGeomPointAesFunction.SetRCommand("aes")
@@ -182,10 +187,6 @@ Public Class dlgClimaticStationMaps
         clsFacetOp.SetOperation("~")
         clsFacetOp.bForceIncludeOperation = True
         clsFacetOp.bBrackets = False
-
-        clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetFunction.SetRCommand("facet_wrap")
-        clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsFacetOp, bIncludeArgumentName:=False)
 
         clsLabelRepelFunction.SetPackageName("ggrepel")
         clsLabelRepelFunction.SetRCommand("geom_label_repel")
@@ -211,6 +212,8 @@ Public Class dlgClimaticStationMaps
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
+
+        clsRFacetFunction.AddParameter("facet", clsROperatorParameter:=clsFacetOp, bIncludeArgumentName:=False)
 
         clsXlimFunction.SetRCommand("xlim")
         clsYlimFunction.SetRCommand("ylim")
@@ -244,6 +247,7 @@ Public Class dlgClimaticStationMaps
         ucrReceiverFacet.SetRCode(clsFacetOp, bReset)
 
         ucrReceiverStation.SetRCode(clsLabelRepelAesFunction, bReset)
+        ucrChkAddPoints.SetRCode(clsGGplotOperator, bReset)
     End Sub
 
     Private Sub cmdSFOptions_Click(sender As Object, e As EventArgs) Handles cmdSFOptions.Click
@@ -264,9 +268,6 @@ Public Class dlgClimaticStationMaps
         bResetSubdialog = False
     End Sub
 
-    Private Sub ucrChkAddPoints_Load(sender As Object, e As EventArgs)
-
-    End Sub
 
     Private Sub TestOkEnabled()
         Dim bOkEnabled As Boolean
@@ -291,18 +292,11 @@ Public Class dlgClimaticStationMaps
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlValueChanged, ucrReceiverLongitude.ControlValueChanged
-        If Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongitude.IsEmpty Then
-            clsGGplotOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointFunction, bIncludeArgumentName:=False, iPosition:=2)
-        Else
-            clsGGplotOperator.RemoveParameterByName("geom_point")
-        End If
-    End Sub
     Private Sub ucrReceiverShape_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverShape.ControlValueChanged
-        If Not ucrReceiverShape.IsEmpty Then
-            clsGGplotOperator.AddParameter("scale_shape_manual", clsRFunctionParameter:=clsScaleShapeFunction, bIncludeArgumentName:=False, iPosition:=2)
+        If Not ucrReceiverShape.IsEmpty AndAlso ucrChkAddPoints.Checked Then
+            clsParamOperator.AddParameter("scale_shape_manual", clsRFunctionParameter:=clsScaleShapeFunction, bIncludeArgumentName:=False, iPosition:=2)
         Else
-            clsGGplotOperator.RemoveParameterByName("scale_shape_manual")
+            clsParamOperator.RemoveParameterByName("scale_shape_manual")
         End If
     End Sub
 
@@ -311,10 +305,10 @@ Public Class dlgClimaticStationMaps
     End Sub
 
     Private Sub ucrReceiverFacet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacet.ControlValueChanged
-        If Not ucrReceiverFacet.IsEmpty Then
-            clsGGplotOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, bIncludeArgumentName:=False, iPosition:=2)
+        If Not ucrReceiverFacet.IsEmpty AndAlso ucrChkAddPoints.Checked Then
+            clsParamOperator.AddParameter("facets", clsRFunctionParameter:=clsRFacetFunction, bIncludeArgumentName:=False, iPosition:=2)
         Else
-            clsGGplotOperator.RemoveParameterByName("facets")
+            clsParamOperator.RemoveParameterByName("facets")
         End If
     End Sub
 
@@ -329,39 +323,42 @@ Public Class dlgClimaticStationMaps
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
-        If Not ucrReceiverStation.IsEmpty Then
-            clsGGplotOperator.AddParameter("geom_label_repel", clsRFunctionParameter:=clsLabelRepelFunction, bIncludeArgumentName:=False, iPosition:=2)
+        If Not ucrReceiverStation.IsEmpty AndAlso ucrChkAddPoints.Checked Then
+            clsParamOperator.AddParameter("geom_label_repel", clsRFunctionParameter:=clsLabelRepelFunction, bIncludeArgumentName:=False, iPosition:=2)
         Else
-            clsGGplotOperator.RemoveParameterByName("geom_label_repel")
+            clsParamOperator.RemoveParameterByName("geom_label_repel")
         End If
     End Sub
 
     Private Sub ucrChkAddPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddPoints.ControlValueChanged
+
         ChangeSize()
     End Sub
 
     Private Sub AutoFillGeometry()
-        Dim clsSetGeometry As New RFunction
+        Dim clsGetGeometry As New RFunction
         Dim clsParam As RParameter = New RParameter
         Dim GeometryOutput As SymbolicExpression
         Dim strScript As String = ""
 
-        clsRemoveFunc.AddParameter(strParameterValue:=ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        clsParam.SetArgumentName("data_name")
-        clsParam.SetArgumentValue(Chr(34) & ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-        clsGetDataFrame.AddParameter(clsParam)
-        clsGetDataFrame.SetAssignTo(ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        clsGetDataFrame.ToScript(strScript)
-        frmMain.clsRLink.RunInternalScript(strScript)
+        If ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            clsRemoveFunc.AddParameter(strParameterValue:=ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            clsParam.SetArgumentName("data_name")
+            clsParam.SetArgumentValue(Chr(34) & ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+            clsGetDataFrame.AddParameter(clsParam)
+            clsGetDataFrame.SetAssignTo(ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            clsGetDataFrame.ToScript(strScript)
+            frmMain.clsRLink.RunInternalScript(strScript)
 
-        clsSetGeometry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_geometry")
-        clsSetGeometry.AddParameter("data", ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        GeometryOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsSetGeometry.ToScript(), bSilent:=True)
+            clsGetGeometry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_geometry")
+            clsGetGeometry.AddParameter("data", ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            GeometryOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsGetGeometry.ToScript(), bSilent:=True)
 
-        frmMain.clsRLink.RunInternalScript(clsRemoveFunc.ToScript())
+            frmMain.clsRLink.RunInternalScript(clsRemoveFunc.ToScript())
 
-        If GeometryOutput IsNot Nothing AndAlso Not GeometryOutput.Type = Internals.SymbolicExpressionType.Null Then
-            ucrReceiverGeometry.Add(GeometryOutput.AsCharacter(0), ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            If GeometryOutput IsNot Nothing AndAlso Not GeometryOutput.Type = Internals.SymbolicExpressionType.Null Then
+                ucrReceiverGeometry.Add(GeometryOutput.AsCharacter(0), ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            End If
         End If
     End Sub
 
