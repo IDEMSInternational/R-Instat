@@ -540,16 +540,16 @@ Public Class dlgModelling
     End Sub
 
     Private Sub GraphAssignTo()
-        Dim lstPlotNames As New List(Of String)
-        Dim i As Integer = 0
+        'Dim lstPlotNames As New List(Of String)
+        'Dim i As Integer = 0
 
-        lstPlotNames = New List(Of String)({"last_residplot", "last_qqplot", "last_scaleloc", "last_cooksdist", "last_residlev", "last_cookslev"})
+        'lstPlotNames = New List(Of String)({"last_residplot", "last_qqplot", "last_scaleloc", "last_cooksdist", "last_residlev", "last_cookslev"})
 
         clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
-        For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
-            kvp.Value.SetAssignTo(lstPlotNames(index:=i), strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=lstPlotNames(index:=i))
-            i = i + 1
-        Next
+        'For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
+        '    kvp.Value.SetAssignTo(lstPlotNames(index:=i), strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=lstPlotNames(index:=i))
+        '    i = i + 1
+        'Next
     End Sub
 
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverForTestColumn.ControlContentsChanged
