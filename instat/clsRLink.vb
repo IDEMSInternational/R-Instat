@@ -76,36 +76,36 @@ Public Class RLink
         Dim strMinor As String = ""
         Dim iCurrentCallType As Integer
         Dim bClose As Boolean = False
+        Dim strStaticPath = Path.GetFullPath("static")
+        Dim rHome = Path.Combine(strStaticPath, "R-" & strRBundledVersion)
+        Dim cpuArchitectureFolder = "i386"
 
-		Try
-			' Get R .NET to use bundled R in static folder
-			' This static folder is added as a part of the install process as described in 
-			' installer/Installer_Generation_Guide.md
-			' 
-			Dim strStaticPath = Path.GetFullPath("static")
-			Dim rHome = Path.Combine(strStaticPath, "R-" & strRBundledVersion)
-			Dim cpuArchitectureFolder = "i386"
-			If Environment.Is64BitProcess Then
-				cpuArchitectureFolder = "x64"
-			End If
-			Dim rPath = Path.Combine(rHome, "bin", cpuArchitectureFolder)
-			Console.WriteLine("R Home: " & rHome)
-			Console.WriteLine("R Path: " & rPath)
+        Try
+            ' Get R .NET to use bundled R in static folder
+            ' This static folder is added as a part of the install process as described in 
+            ' installer/Installer_Generation_Guide.md
+            ' 
+            If Environment.Is64BitProcess Then
+                cpuArchitectureFolder = "x64"
+            End If
+            Dim rPath = Path.Combine(rHome, "bin", cpuArchitectureFolder)
+            Console.WriteLine("R Home: " & rHome)
+            Console.WriteLine("R Path: " & rPath)
 
-			' Use bundled R if included
-			If Directory.Exists(rHome) And Directory.Exists(rPath) Then
-				Console.WriteLine("Using bundled R")
-				REngine.SetEnvironmentVariables(rPath, rHome)
-			Else
-				' Use normal process for finding local R if bundled version not included
-				REngine.SetEnvironmentVariables()
-			End If
+            ' Use bundled R if included
+            If Directory.Exists(rHome) And Directory.Exists(rPath) Then
+                Console.WriteLine("Using bundled R")
+                REngine.SetEnvironmentVariables(rPath, rHome)
+            Else
+                ' Use normal process for finding local R if bundled version not included
+                REngine.SetEnvironmentVariables()
+            End If
 
-			clsEngine = REngine.GetInstance()
-			clsEngine.Initialize()
-		Catch ex As Exception
-			' Modified message since currently we recommend use of same R version as bundled version
-			MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionRequired & " of R." & vbNewLine & "Note that R-Instat does not work with R below 3.5.0. We recommend using R " & strRBundledVersion & ".  Try reruning the installation to install R " & strRBundledVersion & " or download R " & strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
+            clsEngine = REngine.GetInstance()
+            clsEngine.Initialize()
+        Catch ex As Exception
+            ' Modified message since currently we recommend use of same R version as bundled version
+            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionRequired & " of R." & vbNewLine & "Note that R-Instat does not work with R below 3.5.0. We recommend using R " & strRBundledVersion & ".  Try reruning the installation to install R " & strRBundledVersion & " or download R " & strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
 			Application.Exit()
             Environment.Exit(0)
         End Try
