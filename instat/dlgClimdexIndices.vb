@@ -417,13 +417,13 @@ Public Class dlgClimdexIndices
 
     Private Sub ParameterCount()
         lblSelectedIndices.Text = clsRWriteDfIndicesList.iParameterCount
-        lblSelectedIndices.BackColor = Color.Red
+        lblSelectedIndices.ForeColor = Color.Red
         If rdoAnnual.Checked Then
             lblTotalIndices.Text = 27
-            lblTotalIndices.BackColor = Color.Green
+            lblTotalIndices.ForeColor = Color.Green
         Else
             lblTotalIndices.Text = 11
-            lblTotalIndices.BackColor = Color.Green
+            lblTotalIndices.ForeColor = Color.Green
         End If
 
     End Sub
