@@ -1464,11 +1464,22 @@ Public Class RLink
         RunScript(clsCreateIO.ToScript(), strComment:="Creating New Instat Object")
     End Sub
 
-    Public Sub ViewLastGraph()
+    Public Sub ViewLastGraph(Optional bAsPlotly As Boolean = False)
         Dim clsLastGraph As New RFunction
+        Dim clsInteractivePlot As New RFunction
 
         clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
-        RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bSeparateThread:=False)
+
+        If bAsPlotly Then
+            clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
+            clsInteractivePlot.SetPackageName("plotly")
+            clsInteractivePlot.SetRCommand("ggplotly")
+            clsInteractivePlot.AddParameter("p", clsRFunctionParameter:=clsLastGraph, iPosition:=0)
+            'Need to set iCallType = 2 to obtain a graph in an interactive viewer.
+            RunScript(clsInteractivePlot.ToScript(), iCallType:=2, strComment:="View last graph as Plotly", bSeparateThread:=False)
+        Else
+            RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bSeparateThread:=False)
+        End If
     End Sub
 
     'construct and format the comment
