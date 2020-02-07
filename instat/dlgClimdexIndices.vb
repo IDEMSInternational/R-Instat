@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgClimdexIndices
     Private bFirstLoad As Boolean = True
@@ -189,152 +188,152 @@ Public Class dlgClimdexIndices
         clsFrostDays.SetPackageName("climdex.pcic")
         clsFrostDays.SetRCommand("climdex.fd")
         clsFrostDays.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsFrostDays.SetAssignTo("Frost_Days")
+        clsFrostDays.SetAssignTo("FD")
 
         clsSummerDays.SetPackageName("climdex.pcic")
         clsSummerDays.SetRCommand("climdex.su")
         clsSummerDays.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsSummerDays.SetAssignTo("Summer_Days")
+        clsSummerDays.SetAssignTo("SU")
 
         clsIcingDays.SetPackageName("climdex.pcic")
         clsIcingDays.SetRCommand("climdex.id")
         clsIcingDays.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsIcingDays.SetAssignTo("Icing_Days")
+        clsIcingDays.SetAssignTo("ID")
 
         clsTropicalNights.SetPackageName("climdex.pcic")
         clsTropicalNights.SetRCommand("climdex.tr")
         clsTropicalNights.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsTropicalNights.SetAssignTo("Tropical_Nights")
+        clsTropicalNights.SetAssignTo("TR")
 
         clsWarmSpellDI.SetPackageName("climdex.pcic")
         clsWarmSpellDI.SetRCommand("climdex.wsdi")
         clsWarmSpellDI.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
         clsWarmSpellDI.AddParameter("spells.can.span.years", "FALSE", iPosition:=1) ' r-default
-        clsWarmSpellDI.SetAssignTo("Warm_Spell_Duration_Index")
+        clsWarmSpellDI.SetAssignTo("WSDI")
 
         clsColdSpellDI.SetPackageName("climdex.pcic")
         clsColdSpellDI.SetRCommand("climdex.csdi")
         clsColdSpellDI.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
         clsColdSpellDI.AddParameter("spells.can.span.years", "FALSE", iPosition:=1) ' r-default
-        clsColdSpellDI.SetAssignTo("Cold_Spell_Duration_Index")
+        clsColdSpellDI.SetAssignTo("CSDI")
 
         clsGrowingSeasonLength.SetPackageName("climdex.pcic")
         clsGrowingSeasonLength.SetRCommand("climdex.gsl")
         clsGrowingSeasonLength.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsGrowingSeasonLength.SetAssignTo("Growing_Season_Length")
+        clsGrowingSeasonLength.SetAssignTo("GSL")
 
         clsMonthlyMaxDailyTMax.SetPackageName("climdex.pcic")
         clsMonthlyMaxDailyTMax.SetRCommand("climdex.txx")
         clsMonthlyMaxDailyTMax.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
         clsMonthlyMaxDailyTMax.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsMonthlyMaxDailyTMax.SetAssignTo("Monthly_Maximum_of_Daily_Maximum_Temperature")
+        clsMonthlyMaxDailyTMax.SetAssignTo("TXx")
 
         clsMonthlyMaxDailyTMin.SetPackageName("climdex.pcic")
         clsMonthlyMaxDailyTMin.SetRCommand("climdex.txn")
         clsMonthlyMaxDailyTMin.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
         clsMonthlyMaxDailyTMin.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsMonthlyMaxDailyTMin.SetAssignTo("Monthly_Maximum_of_Daily_Minimum_Temperature")
+        clsMonthlyMaxDailyTMin.SetAssignTo("TNx")
 
         clsMonthlyMinDailyTMax.SetPackageName("climdex.pcic")
         clsMonthlyMinDailyTMax.SetRCommand("climdex.tnx")
         clsMonthlyMinDailyTMax.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
         clsMonthlyMinDailyTMax.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsMonthlyMinDailyTMax.SetAssignTo("Monthly_Minimum_of_Daily_Maximum_Temperature")
+        clsMonthlyMinDailyTMax.SetAssignTo("TXn")
 
         clsMonthlyMinDailyTMin.SetPackageName("climdex.pcic")
         clsMonthlyMinDailyTMin.SetRCommand("climdex.tnn")
         clsMonthlyMinDailyTMin.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
         clsMonthlyMinDailyTMin.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsMonthlyMinDailyTMin.SetAssignTo("Monthly_Minimum_of_Daily_Minimum_Temperature")
+        clsMonthlyMinDailyTMin.SetAssignTo("TNn")
 
         clsTminBelow10Percent.SetPackageName("climdex.pcic")
         clsTminBelow10Percent.SetRCommand("climdex.tn10p")
         clsTminBelow10Percent.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
         clsTminBelow10Percent.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsTminBelow10Percent.SetAssignTo("Percentage_of_Days_When_Tmin_is_Below_10th_Percentile")
+        clsTminBelow10Percent.SetAssignTo("TN10p")
 
         clsTmaxBelow10Percent.SetPackageName("climdex.pcic")
         clsTmaxBelow10Percent.SetRCommand("climdex.tx10p")
         clsTmaxBelow10Percent.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
         clsTmaxBelow10Percent.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsTmaxBelow10Percent.SetAssignTo("Percentage_of_Days_When_Tmax_is_Below_10th_Percentile")
+        clsTmaxBelow10Percent.SetAssignTo("TX10p")
 
         clsTminAbove90Percent.SetPackageName("climdex.pcic")
         clsTminAbove90Percent.SetRCommand("climdex.tn90p")
         clsTminAbove90Percent.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
         clsTminAbove90Percent.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsTminAbove90Percent.SetAssignTo("Percentage_of_Days_When_Tmin_is_Above_90th_Percentile")
+        clsTminAbove90Percent.SetAssignTo("TN90p")
 
         clsTmaxAbove90Percent.SetPackageName("climdex.pcic")
         clsTmaxAbove90Percent.SetRCommand("climdex.tx90p")
         clsTmaxAbove90Percent.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
         clsTmaxAbove90Percent.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsTmaxAbove90Percent.SetAssignTo("Percentage_of_Days_When_Tmax_is_Above_90th_Percentile")
+        clsTmaxAbove90Percent.SetAssignTo("TX90p")
 
         clsMeanDiurnalTempRange.SetPackageName("climdex.pcic")
         clsMeanDiurnalTempRange.SetRCommand("climdex.dtr")
         clsMeanDiurnalTempRange.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
         clsMeanDiurnalTempRange.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsMeanDiurnalTempRange.SetAssignTo("Mean_Diurnal_Temperature_Range")
+        clsMeanDiurnalTempRange.SetAssignTo("DTR")
 
         clsMonthlyMax1DayPrec.SetPackageName("climdex.pcic")
         clsMonthlyMax1DayPrec.SetRCommand("climdex.rx1day")
         clsMonthlyMax1DayPrec.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
         clsMonthlyMax1DayPrec.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsMonthlyMax1DayPrec.SetAssignTo("Monthly_Maximum_1day_Precipitation")
+        clsMonthlyMax1DayPrec.SetAssignTo("Rx1day")
 
         clsMonthlyMax5DayPrec.SetPackageName("climdex.pcic")
         clsMonthlyMax5DayPrec.SetRCommand("climdex.rx5day")
         clsMonthlyMax5DayPrec.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
         clsMonthlyMax5DayPrec.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=2)
-        clsMonthlyMax5DayPrec.SetAssignTo("Monthly_Maximum_5day_Precipitation")
+        clsMonthlyMax5DayPrec.SetAssignTo("Rx5day")
 
         clsSimplePrecII.SetPackageName("climdex.pcic")
         clsSimplePrecII.SetRCommand("climdex.sdii")
         clsSimplePrecII.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsSimplePrecII.SetAssignTo("Simple_Precipitation_Intensity_Index")
+        clsSimplePrecII.SetAssignTo("SDII")
 
         clsPrecExceed10mm.SetPackageName("climdex.pcic")
         clsPrecExceed10mm.SetRCommand("climdex.r10mm")
         clsPrecExceed10mm.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsPrecExceed10mm.SetAssignTo("Precipitation_Exceeding_10mm_Per_Day")
+        clsPrecExceed10mm.SetAssignTo("R10mm")
 
         clsPrecExceed20mm.SetPackageName("climdex.pcic")
         clsPrecExceed20mm.SetRCommand("climdex.r20mm")
         clsPrecExceed20mm.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsPrecExceed20mm.SetAssignTo("Precipitation_Exceeding_20mm_Per_Day")
+        clsPrecExceed20mm.SetAssignTo("R20mm")
 
         clsPrecExceedSpecifiedA.SetPackageName("climdex.pcic")
         clsPrecExceedSpecifiedA.SetRCommand("climdex.rnnmm")
         clsPrecExceedSpecifiedA.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsPrecExceedSpecifiedA.SetAssignTo("Precipitation_Exceeding_a_Specified_Amount_Per_Day")
+        clsPrecExceedSpecifiedA.SetAssignTo("Rnnmm")
 
         clsMaxDrySpell.SetPackageName("climdex.pcic")
         clsMaxDrySpell.SetRCommand("climdex.cdd")
         clsMaxDrySpell.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
         clsMaxDrySpell.AddParameter("spells.can.span.years", "TRUE", iPosition:=1) ' r-default
-        clsMaxDrySpell.SetAssignTo("Maximum_Length_of_Dry_Spell")
+        clsMaxDrySpell.SetAssignTo("CDD")
 
         clsMaxWetSpell.SetPackageName("climdex.pcic")
         clsMaxWetSpell.SetRCommand("climdex.cwd")
         clsMaxWetSpell.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
         clsMaxWetSpell.AddParameter("spells.can.span.years", "TRUE", iPosition:=1) ' r-default
-        clsMaxWetSpell.SetAssignTo("Maximum_Length_of_Wet_Spell")
+        clsMaxWetSpell.SetAssignTo("CWD")
 
         clsPrecExceed95Percent.SetPackageName("climdex.pcic")
         clsPrecExceed95Percent.SetRCommand("climdex.r95ptot")
         clsPrecExceed95Percent.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsPrecExceed95Percent.SetAssignTo("Total_Daily_Precipitation_Exceeding_95th_Percentile_Threshold")
+        clsPrecExceed95Percent.SetAssignTo("R95p")
 
         clsPrecExceed99Percent.SetPackageName("climdex.pcic")
         clsPrecExceed99Percent.SetRCommand("climdex.r99ptot")
         clsPrecExceed99Percent.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsPrecExceed99Percent.SetAssignTo("Total_Daily_Precipitation_Exceeding_99th_Percentile_Threshold")
+        clsPrecExceed99Percent.SetAssignTo("R99p")
 
         clsTotalDailyPrec.SetPackageName("climdex.pcic")
         clsTotalDailyPrec.SetRCommand("climdex.prcptot")
         clsTotalDailyPrec.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsTotalDailyPrec.SetAssignTo("Total_Daily_Precipitation")
+        clsTotalDailyPrec.SetAssignTo("PRCPTOT")
 
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsRWriteDf)
@@ -418,10 +417,13 @@ Public Class dlgClimdexIndices
 
     Private Sub ParameterCount()
         lblSelectedIndices.Text = clsRWriteDfIndicesList.iParameterCount
+        lblSelectedIndices.BackColor = Color.Red
         If rdoAnnual.Checked Then
             lblTotalIndices.Text = 27
+            lblTotalIndices.BackColor = Color.Green
         Else
             lblTotalIndices.Text = 11
+            lblTotalIndices.BackColor = Color.Green
         End If
 
     End Sub
