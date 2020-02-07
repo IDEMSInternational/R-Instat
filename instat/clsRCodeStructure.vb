@@ -311,7 +311,7 @@ Public Class RCodeStructure
         Return New RParameter
     End Function
 
-    Public Overridable Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
+    Public Overridable Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional clsRCodeStructureParameter As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
         Dim clsParam = New RParameter
 
         If strParameterName = "" Then
@@ -330,6 +330,8 @@ Public Class RCodeStructure
             clsParam.SetArgument(clsRFunctionParameter)
         ElseIf clsROperatorParameter IsNot Nothing Then
             clsParam.SetArgument(clsROperatorParameter)
+        ElseIf clsRCodeStructureParameter IsNot Nothing Then
+            clsParam.SetArgument(clsRCodeStructureParameter)
         End If
         clsParam.bIncludeArgumentName = bIncludeArgumentName
         clsParam.Position = iPosition
