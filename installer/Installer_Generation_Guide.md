@@ -26,7 +26,8 @@ or for 64 bit /R-Instat/instat/bin/x64/Release
 ```
 R-3.6.2-win.exe /DIR="./R-3.6.2"
 ```
-6. Go through the install process. Choose custom install and deselect either 32 bit or 64 bit. (If you're building for 32 bit then exclude 64 bit).
+6. Go through the install process. Choose custom install and deselect either 32 bit or 64 bit. (If you're building for 32 bit then exclude 64 bit). Also uncheck "Save version number in registry" so that a registery entry isn't added on your machine.
+7. Remove the installer from this folder after installing.
 
 ## Step 3: Install R packages inside bundled R
 
@@ -45,6 +46,9 @@ Once you've downloaded that zip file, extract the ncdf4.helpers folder into the 
 5. Then navigate to the inno_install_script_32bit.iss script (or 64 bit version) in the same folder as this readme.
 6. From the top menu choose compile.
 7. The installer should be in installer/Output folder
+
+## Step 5: Code sign installers
+Ensure that the installers are code signed by the IDEMS International code signing certificate. This requires the physical USB key. You may need to contact a member of the development team to arrange this.
 
 ## Bundling a newer version of R
 
