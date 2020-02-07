@@ -49,6 +49,7 @@ Public Class dlgFromLibrary
 
         bReset = False
         TestOkEnabled()
+        EnableHelp()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -113,6 +114,7 @@ Public Class dlgFromLibrary
         SetDefaults()
         SetRCodeforControls(bReset)
         TestOkEnabled()
+        EnableHelp()
     End Sub
 
     Private Sub cmdLibraryCollection_Click(sender As Object, e As EventArgs) Handles cmdLibraryCollection.Click
@@ -134,6 +136,7 @@ Public Class dlgFromLibrary
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDataFunction)
         End If
         TestOkEnabled()
+        EnableHelp()
     End Sub
 
     Private Sub FillListView(dfDataframe As DataFrame)
@@ -171,6 +174,7 @@ Public Class dlgFromLibrary
             strSelectedPackage = ucrInputPackages.GetText()
             LoadDatasets(strSelectedPackage)
             TestOkEnabled()
+            EnableHelp()
         End If
 
     End Sub
@@ -187,11 +191,11 @@ Public Class dlgFromLibrary
             clsDataFunction.AddParameter("X", strDataName)
         End If
         TestOkEnabled()
+        EnableHelp()
     End Sub
 
     Private Sub TestOkEnabled()
         ucrBase.OKEnabled(rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 AndAlso ucrNewDataFrameName.IsComplete)
-        EnableHelp()
     End Sub
 
     Private Sub EnableHelp()
