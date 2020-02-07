@@ -24,7 +24,6 @@ Public Class dlgHypothesisTestsCalculator
     Private clsDetach As New RFunction
     Private strPackageName As String
     Private clsSummary As New RFunction
-    Private clsDisplay As New RFunction
     Private Sub dlgHypothesisTestsCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -81,7 +80,6 @@ Public Class dlgHypothesisTestsCalculator
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
         clsSummary.SetRCommand("summary")
-        clsDisplay.SetRCommand("formula")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
         clsSummary.AddParameter("object", clsRCodeStructureParameter:=ucrBase.clsRsyntax.clsBaseCommandString, iPosition:=0)
