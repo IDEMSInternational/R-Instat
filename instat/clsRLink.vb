@@ -137,7 +137,8 @@ Public Class RLink
                 Environment.Exit(0)
             End If
         Catch ex As Exception
-            MsgBox(ex.Message & Environment.NewLine & "Could Not determine the version of R installed on your machine. We recommend rerunning the installation to install an updated version of R Or download the latest version from https//cran.r-project.org/ And restart R-Instat.", MsgBoxStyle.Critical, "Cannot determine R version.")
+            MsgBox(ex.Message & Environment.NewLine & "Could not determine the version of R installed on your machine. We recommend rerunning the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "Cannot determine R version.")
+
             Application.Exit()
             Environment.Exit(0)
         End Try
@@ -145,7 +146,8 @@ Public Class RLink
         If strScript = "" Then
             strScript = GetRSetupScript()
             iCallType = 0
-            strComment = "Setting working directory, sourcing R code And loading R packages"
+            strComment = "Setting working directory, sourcing R code and loading R packages"
+
             bSeparateThread = True
         End If
         For Each strLine As String In strScript.Split(Environment.NewLine)
@@ -193,7 +195,8 @@ Public Class RLink
             Try
                 clsEngine.Dispose()
             Catch ex As Exception
-                MsgBox("Could Not dispose for the connection to R" & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Cannot close R connection.")
+                MsgBox("Could not dispose for the connection to R" & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Cannot close R connection.")
+
             End Try
         End If
     End Sub
@@ -457,7 +460,8 @@ Public Class RLink
                 End Using
             End If
         Catch ex As Exception
-            'MsgBox("Could Not add script to auto save log file at" & frmMain.strAutoSaveLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Auot save Log File")
+            'MsgBox("Could not add script to auto save log file at:" & frmMain.strAutoSaveLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Auot save Log File")
+
             bAutoSaveLogExists = False
         Finally
             bFirstLogCode = False
@@ -521,7 +525,8 @@ Public Class RLink
                         If Not bSuccess Then
                             Evaluate("graphics.off()", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                             strGraphDisplayOption = "view_R_viewer"
-                            MsgBox("A problem occured saving graphs in the temporary location " & strTempGraphsDirectory & vbNewLine & vbNewLine & "To ensure graphs can still be viewed, graphs will now appear in a pop up R viewer." & vbNewLine & "Restarting R-Instat And/Or your machine usually resolves this. You can change this setting back in Tools > Options: 'Graph Display' if this later becomes resolved.", MsgBoxStyle.Exclamation)
+                            MsgBox("A problem occured saving graphs in the temporary location " & strTempGraphsDirectory & vbNewLine & vbNewLine & "To ensure graphs can still be viewed, graphs will now appear in a pop up R viewer." & vbNewLine & "Restarting R-Instat and/or your machine usually resolves this. You can change this setting back in Tools > Options: 'Graph Display' if this later becomes resolved.", MsgBoxStyle.Exclamation)
+
                         End If
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
