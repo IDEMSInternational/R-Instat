@@ -105,20 +105,20 @@ Partial Class sdgSummaries
         Me.ucrSelectorSecondVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSecondVariable = New instat.ucrReceiverSingle()
         Me.grpHyroGOF = New System.Windows.Forms.GroupBox()
-        Me.UcrCheck13 = New instat.ucrCheck()
-        Me.UcrCheck12 = New instat.ucrCheck()
-        Me.UcrCheck11 = New instat.ucrCheck()
-        Me.UcrCheck7 = New instat.ucrCheck()
-        Me.UcrCheck8 = New instat.ucrCheck()
-        Me.UcrCheck9 = New instat.ucrCheck()
-        Me.UcrCheck10 = New instat.ucrCheck()
-        Me.UcrCheck6 = New instat.ucrCheck()
+        Me.ucrChkMeanAbsoluteError = New instat.ucrCheck()
+        Me.ucrChkNormRootMeanSquaredError = New instat.ucrCheck()
+        Me.ucrChkRelativeNashSutcliffeEff = New instat.ucrCheck()
+        Me.ucrChkNashSutcliffeEfficiency = New instat.ucrCheck()
+        Me.ucrChkPercentBias = New instat.ucrCheck()
+        Me.ucrChkRelativeIndexOfAgreement = New instat.ucrCheck()
+        Me.ucrChkRootMeanSquaredError = New instat.ucrCheck()
+        Me.ucrChkIndexOfAgreement = New instat.ucrCheck()
         Me.ucrChkCoefDetermination = New instat.ucrCheck()
-        Me.UcrCheck5 = New instat.ucrCheck()
-        Me.UcrCheck4 = New instat.ucrCheck()
-        Me.UcrCheck3 = New instat.ucrCheck()
-        Me.UcrCheck2 = New instat.ucrCheck()
-        Me.UcrCheck1 = New instat.ucrCheck()
+        Me.ucrChkKlingGuptaEfficiency = New instat.ucrCheck()
+        Me.ucrChkModifiedIndexOfAgreement = New instat.ucrCheck()
+        Me.ucrChkMeanError = New instat.ucrCheck()
+        Me.ucrChkModNashSutcliffeEff = New instat.ucrCheck()
+        Me.ucrChkMeanSquaredError = New instat.ucrCheck()
         Me.ucrChkCoefPersistence = New instat.ucrCheck()
         Me.tbPosition = New System.Windows.Forms.TabPage()
         Me.ucrChkOrderBy = New instat.ucrCheck()
@@ -150,6 +150,10 @@ Partial Class sdgSummaries
         Me.ucrChkMax = New instat.ucrCheck()
         Me.ucrChkCircMean = New instat.ucrCheck()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkRatioOfStandardDeviation = New instat.ucrCheck()
+        Me.ucrChkVolumetricEfficiency = New instat.ucrCheck()
+        Me.ucrChkSumOfSquaredResiduals = New instat.ucrCheck()
+        Me.ucrChkRatioOfRootMeanSquaredError = New instat.ucrCheck()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbMore.SuspendLayout()
         Me.grpProportionsPercentiles.SuspendLayout()
@@ -615,6 +619,10 @@ Partial Class sdgSummaries
         '
         'tbTwoVariables
         '
+        Me.tbTwoVariables.Controls.Add(Me.ucrChkRatioOfRootMeanSquaredError)
+        Me.tbTwoVariables.Controls.Add(Me.ucrChkSumOfSquaredResiduals)
+        Me.tbTwoVariables.Controls.Add(Me.ucrChkVolumetricEfficiency)
+        Me.tbTwoVariables.Controls.Add(Me.ucrChkRatioOfStandardDeviation)
         Me.tbTwoVariables.Controls.Add(Me.grpRelationships)
         Me.tbTwoVariables.Controls.Add(Me.lblSecondVariable)
         Me.tbTwoVariables.Controls.Add(Me.ucrSelectorSecondVariable)
@@ -668,72 +676,72 @@ Partial Class sdgSummaries
         '
         'grpHyroGOF
         '
-        Me.grpHyroGOF.Controls.Add(Me.UcrCheck13)
-        Me.grpHyroGOF.Controls.Add(Me.UcrCheck12)
-        Me.grpHyroGOF.Controls.Add(Me.UcrCheck11)
-        Me.grpHyroGOF.Controls.Add(Me.UcrCheck7)
-        Me.grpHyroGOF.Controls.Add(Me.UcrCheck8)
-        Me.grpHyroGOF.Controls.Add(Me.UcrCheck9)
-        Me.grpHyroGOF.Controls.Add(Me.UcrCheck10)
-        Me.grpHyroGOF.Controls.Add(Me.UcrCheck6)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkMeanAbsoluteError)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkNormRootMeanSquaredError)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkRelativeNashSutcliffeEff)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkNashSutcliffeEfficiency)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkPercentBias)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkRelativeIndexOfAgreement)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkRootMeanSquaredError)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkIndexOfAgreement)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkCoefDetermination)
-        Me.grpHyroGOF.Controls.Add(Me.UcrCheck5)
-        Me.grpHyroGOF.Controls.Add(Me.UcrCheck4)
-        Me.grpHyroGOF.Controls.Add(Me.UcrCheck3)
-        Me.grpHyroGOF.Controls.Add(Me.UcrCheck2)
-        Me.grpHyroGOF.Controls.Add(Me.UcrCheck1)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkKlingGuptaEfficiency)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkModifiedIndexOfAgreement)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkMeanError)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkModNashSutcliffeEff)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkMeanSquaredError)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkCoefPersistence)
         resources.ApplyResources(Me.grpHyroGOF, "grpHyroGOF")
         Me.grpHyroGOF.Name = "grpHyroGOF"
         Me.grpHyroGOF.TabStop = False
         '
-        'UcrCheck13
+        'ucrChkMeanAbsoluteError
         '
-        Me.UcrCheck13.Checked = False
-        resources.ApplyResources(Me.UcrCheck13, "UcrCheck13")
-        Me.UcrCheck13.Name = "UcrCheck13"
+        Me.ucrChkMeanAbsoluteError.Checked = False
+        resources.ApplyResources(Me.ucrChkMeanAbsoluteError, "ucrChkMeanAbsoluteError")
+        Me.ucrChkMeanAbsoluteError.Name = "ucrChkMeanAbsoluteError"
         '
-        'UcrCheck12
+        'ucrChkNormRootMeanSquaredError
         '
-        Me.UcrCheck12.Checked = False
-        resources.ApplyResources(Me.UcrCheck12, "UcrCheck12")
-        Me.UcrCheck12.Name = "UcrCheck12"
+        Me.ucrChkNormRootMeanSquaredError.Checked = False
+        resources.ApplyResources(Me.ucrChkNormRootMeanSquaredError, "ucrChkNormRootMeanSquaredError")
+        Me.ucrChkNormRootMeanSquaredError.Name = "ucrChkNormRootMeanSquaredError"
         '
-        'UcrCheck11
+        'ucrChkRelativeNashSutcliffeEff
         '
-        Me.UcrCheck11.Checked = False
-        resources.ApplyResources(Me.UcrCheck11, "UcrCheck11")
-        Me.UcrCheck11.Name = "UcrCheck11"
+        Me.ucrChkRelativeNashSutcliffeEff.Checked = False
+        resources.ApplyResources(Me.ucrChkRelativeNashSutcliffeEff, "ucrChkRelativeNashSutcliffeEff")
+        Me.ucrChkRelativeNashSutcliffeEff.Name = "ucrChkRelativeNashSutcliffeEff"
         '
-        'UcrCheck7
+        'ucrChkNashSutcliffeEfficiency
         '
-        Me.UcrCheck7.Checked = False
-        resources.ApplyResources(Me.UcrCheck7, "UcrCheck7")
-        Me.UcrCheck7.Name = "UcrCheck7"
+        Me.ucrChkNashSutcliffeEfficiency.Checked = False
+        resources.ApplyResources(Me.ucrChkNashSutcliffeEfficiency, "ucrChkNashSutcliffeEfficiency")
+        Me.ucrChkNashSutcliffeEfficiency.Name = "ucrChkNashSutcliffeEfficiency"
         '
-        'UcrCheck8
+        'ucrChkPercentBias
         '
-        Me.UcrCheck8.Checked = False
-        resources.ApplyResources(Me.UcrCheck8, "UcrCheck8")
-        Me.UcrCheck8.Name = "UcrCheck8"
+        Me.ucrChkPercentBias.Checked = False
+        resources.ApplyResources(Me.ucrChkPercentBias, "ucrChkPercentBias")
+        Me.ucrChkPercentBias.Name = "ucrChkPercentBias"
         '
-        'UcrCheck9
+        'ucrChkRelativeIndexOfAgreement
         '
-        Me.UcrCheck9.Checked = False
-        resources.ApplyResources(Me.UcrCheck9, "UcrCheck9")
-        Me.UcrCheck9.Name = "UcrCheck9"
+        Me.ucrChkRelativeIndexOfAgreement.Checked = False
+        resources.ApplyResources(Me.ucrChkRelativeIndexOfAgreement, "ucrChkRelativeIndexOfAgreement")
+        Me.ucrChkRelativeIndexOfAgreement.Name = "ucrChkRelativeIndexOfAgreement"
         '
-        'UcrCheck10
+        'ucrChkRootMeanSquaredError
         '
-        Me.UcrCheck10.Checked = False
-        resources.ApplyResources(Me.UcrCheck10, "UcrCheck10")
-        Me.UcrCheck10.Name = "UcrCheck10"
+        Me.ucrChkRootMeanSquaredError.Checked = False
+        resources.ApplyResources(Me.ucrChkRootMeanSquaredError, "ucrChkRootMeanSquaredError")
+        Me.ucrChkRootMeanSquaredError.Name = "ucrChkRootMeanSquaredError"
         '
-        'UcrCheck6
+        'ucrChkIndexOfAgreement
         '
-        Me.UcrCheck6.Checked = False
-        resources.ApplyResources(Me.UcrCheck6, "UcrCheck6")
-        Me.UcrCheck6.Name = "UcrCheck6"
+        Me.ucrChkIndexOfAgreement.Checked = False
+        resources.ApplyResources(Me.ucrChkIndexOfAgreement, "ucrChkIndexOfAgreement")
+        Me.ucrChkIndexOfAgreement.Name = "ucrChkIndexOfAgreement"
         '
         'ucrChkCoefDetermination
         '
@@ -741,35 +749,35 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrChkCoefDetermination, "ucrChkCoefDetermination")
         Me.ucrChkCoefDetermination.Name = "ucrChkCoefDetermination"
         '
-        'UcrCheck5
+        'ucrChkKlingGuptaEfficiency
         '
-        Me.UcrCheck5.Checked = False
-        resources.ApplyResources(Me.UcrCheck5, "UcrCheck5")
-        Me.UcrCheck5.Name = "UcrCheck5"
+        Me.ucrChkKlingGuptaEfficiency.Checked = False
+        resources.ApplyResources(Me.ucrChkKlingGuptaEfficiency, "ucrChkKlingGuptaEfficiency")
+        Me.ucrChkKlingGuptaEfficiency.Name = "ucrChkKlingGuptaEfficiency"
         '
-        'UcrCheck4
+        'ucrChkModifiedIndexOfAgreement
         '
-        Me.UcrCheck4.Checked = False
-        resources.ApplyResources(Me.UcrCheck4, "UcrCheck4")
-        Me.UcrCheck4.Name = "UcrCheck4"
+        Me.ucrChkModifiedIndexOfAgreement.Checked = False
+        resources.ApplyResources(Me.ucrChkModifiedIndexOfAgreement, "ucrChkModifiedIndexOfAgreement")
+        Me.ucrChkModifiedIndexOfAgreement.Name = "ucrChkModifiedIndexOfAgreement"
         '
-        'UcrCheck3
+        'ucrChkMeanError
         '
-        Me.UcrCheck3.Checked = False
-        resources.ApplyResources(Me.UcrCheck3, "UcrCheck3")
-        Me.UcrCheck3.Name = "UcrCheck3"
+        Me.ucrChkMeanError.Checked = False
+        resources.ApplyResources(Me.ucrChkMeanError, "ucrChkMeanError")
+        Me.ucrChkMeanError.Name = "ucrChkMeanError"
         '
-        'UcrCheck2
+        'ucrChkModNashSutcliffeEff
         '
-        Me.UcrCheck2.Checked = False
-        resources.ApplyResources(Me.UcrCheck2, "UcrCheck2")
-        Me.UcrCheck2.Name = "UcrCheck2"
+        Me.ucrChkModNashSutcliffeEff.Checked = False
+        resources.ApplyResources(Me.ucrChkModNashSutcliffeEff, "ucrChkModNashSutcliffeEff")
+        Me.ucrChkModNashSutcliffeEff.Name = "ucrChkModNashSutcliffeEff"
         '
-        'UcrCheck1
+        'ucrChkMeanSquaredError
         '
-        Me.UcrCheck1.Checked = False
-        resources.ApplyResources(Me.UcrCheck1, "UcrCheck1")
-        Me.UcrCheck1.Name = "UcrCheck1"
+        Me.ucrChkMeanSquaredError.Checked = False
+        resources.ApplyResources(Me.ucrChkMeanSquaredError, "ucrChkMeanSquaredError")
+        Me.ucrChkMeanSquaredError.Name = "ucrChkMeanSquaredError"
         '
         'ucrChkCoefPersistence
         '
@@ -987,6 +995,30 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         '
+        'ucrChkRatioOfStandardDeviation
+        '
+        Me.ucrChkRatioOfStandardDeviation.Checked = False
+        resources.ApplyResources(Me.ucrChkRatioOfStandardDeviation, "ucrChkRatioOfStandardDeviation")
+        Me.ucrChkRatioOfStandardDeviation.Name = "ucrChkRatioOfStandardDeviation"
+        '
+        'ucrChkVolumetricEfficiency
+        '
+        Me.ucrChkVolumetricEfficiency.Checked = False
+        resources.ApplyResources(Me.ucrChkVolumetricEfficiency, "ucrChkVolumetricEfficiency")
+        Me.ucrChkVolumetricEfficiency.Name = "ucrChkVolumetricEfficiency"
+        '
+        'ucrChkSumOfSquaredResiduals
+        '
+        Me.ucrChkSumOfSquaredResiduals.Checked = False
+        resources.ApplyResources(Me.ucrChkSumOfSquaredResiduals, "ucrChkSumOfSquaredResiduals")
+        Me.ucrChkSumOfSquaredResiduals.Name = "ucrChkSumOfSquaredResiduals"
+        '
+        'ucrChkRatioOfRootMeanSquaredError
+        '
+        Me.ucrChkRatioOfRootMeanSquaredError.Checked = False
+        resources.ApplyResources(Me.ucrChkRatioOfRootMeanSquaredError, "ucrChkRatioOfRootMeanSquaredError")
+        Me.ucrChkRatioOfRootMeanSquaredError.Name = "ucrChkRatioOfRootMeanSquaredError"
+        '
         'sdgSummaries
         '
         resources.ApplyResources(Me, "$this")
@@ -1127,17 +1159,21 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkCoefPersistence As ucrCheck
     Friend WithEvents ucrChkCoefDetermination As ucrCheck
     Friend WithEvents grpHyroGOF As GroupBox
-    Friend WithEvents UcrCheck6 As ucrCheck
-    Friend WithEvents UcrCheck5 As ucrCheck
-    Friend WithEvents UcrCheck4 As ucrCheck
-    Friend WithEvents UcrCheck3 As ucrCheck
-    Friend WithEvents UcrCheck2 As ucrCheck
-    Friend WithEvents UcrCheck1 As ucrCheck
-    Friend WithEvents UcrCheck7 As ucrCheck
-    Friend WithEvents UcrCheck8 As ucrCheck
-    Friend WithEvents UcrCheck9 As ucrCheck
-    Friend WithEvents UcrCheck10 As ucrCheck
-    Friend WithEvents UcrCheck13 As ucrCheck
-    Friend WithEvents UcrCheck12 As ucrCheck
-    Friend WithEvents UcrCheck11 As ucrCheck
+    Friend WithEvents ucrChkIndexOfAgreement As ucrCheck
+    Friend WithEvents ucrChkKlingGuptaEfficiency As ucrCheck
+    Friend WithEvents ucrChkModifiedIndexOfAgreement As ucrCheck
+    Friend WithEvents ucrChkMeanError As ucrCheck
+    Friend WithEvents ucrChkModNashSutcliffeEff As ucrCheck
+    Friend WithEvents ucrChkMeanSquaredError As ucrCheck
+    Friend WithEvents ucrChkNashSutcliffeEfficiency As ucrCheck
+    Friend WithEvents ucrChkPercentBias As ucrCheck
+    Friend WithEvents ucrChkRelativeIndexOfAgreement As ucrCheck
+    Friend WithEvents ucrChkRootMeanSquaredError As ucrCheck
+    Friend WithEvents ucrChkMeanAbsoluteError As ucrCheck
+    Friend WithEvents ucrChkNormRootMeanSquaredError As ucrCheck
+    Friend WithEvents ucrChkRelativeNashSutcliffeEff As ucrCheck
+    Friend WithEvents ucrChkRatioOfRootMeanSquaredError As ucrCheck
+    Friend WithEvents ucrChkSumOfSquaredResiduals As ucrCheck
+    Friend WithEvents ucrChkVolumetricEfficiency As ucrCheck
+    Friend WithEvents ucrChkRatioOfStandardDeviation As ucrCheck
 End Class
