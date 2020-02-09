@@ -436,7 +436,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSelectedIndices.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 311</value>
+    <value>143, 311</value>
   </data>
   <data name="lblSelectedIndices.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 13</value>
