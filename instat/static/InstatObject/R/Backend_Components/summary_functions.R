@@ -626,12 +626,14 @@ summary_trimmed_mean <- function (x, add_cols, weights="", na.rm = FALSE, trimme
   }
 }
 
-summary_sum <- function (x, na.rm = FALSE, na_type = "", ...) {
+summary_sum <- function (x, weights = "", na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    return(sum(x, na.rm = na.rm))
+  else {
+      if (missing(weights)) return(sum(x, na.rm = na.rm))
+      else return(sum(x*weights, na.rm = na.rm))
+    }
   }
-}
+
 
 summary_count <- function(x, ...) {
   return(length(x))

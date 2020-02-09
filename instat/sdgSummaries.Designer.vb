@@ -99,13 +99,27 @@ Partial Class sdgSummaries
         Me.tbSummaries = New System.Windows.Forms.TabControl()
         Me.tbTwoVariables = New System.Windows.Forms.TabPage()
         Me.grpRelationships = New System.Windows.Forms.GroupBox()
-        Me.ucrChkCoefPersistence = New instat.ucrCheck()
-        Me.ucrChkCoefDetermination = New instat.ucrCheck()
         Me.ucrChkCovariance = New instat.ucrCheck()
         Me.ucrChkCorrelations = New instat.ucrCheck()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.ucrSelectorSecondVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSecondVariable = New instat.ucrReceiverSingle()
+        Me.grpHyroGOF = New System.Windows.Forms.GroupBox()
+        Me.UcrCheck13 = New instat.ucrCheck()
+        Me.UcrCheck12 = New instat.ucrCheck()
+        Me.UcrCheck11 = New instat.ucrCheck()
+        Me.UcrCheck7 = New instat.ucrCheck()
+        Me.UcrCheck8 = New instat.ucrCheck()
+        Me.UcrCheck9 = New instat.ucrCheck()
+        Me.UcrCheck10 = New instat.ucrCheck()
+        Me.UcrCheck6 = New instat.ucrCheck()
+        Me.ucrChkCoefDetermination = New instat.ucrCheck()
+        Me.UcrCheck5 = New instat.ucrCheck()
+        Me.UcrCheck4 = New instat.ucrCheck()
+        Me.UcrCheck3 = New instat.ucrCheck()
+        Me.UcrCheck2 = New instat.ucrCheck()
+        Me.UcrCheck1 = New instat.ucrCheck()
+        Me.ucrChkCoefPersistence = New instat.ucrCheck()
         Me.tbPosition = New System.Windows.Forms.TabPage()
         Me.ucrChkOrderBy = New instat.ucrCheck()
         Me.lblOrderBy = New System.Windows.Forms.Label()
@@ -151,6 +165,7 @@ Partial Class sdgSummaries
         Me.tbSummaries.SuspendLayout()
         Me.tbTwoVariables.SuspendLayout()
         Me.grpRelationships.SuspendLayout()
+        Me.grpHyroGOF.SuspendLayout()
         Me.tbPosition.SuspendLayout()
         Me.grpPosition.SuspendLayout()
         Me.tbModel.SuspendLayout()
@@ -604,31 +619,18 @@ Partial Class sdgSummaries
         Me.tbTwoVariables.Controls.Add(Me.lblSecondVariable)
         Me.tbTwoVariables.Controls.Add(Me.ucrSelectorSecondVariable)
         Me.tbTwoVariables.Controls.Add(Me.ucrReceiverSecondVariable)
+        Me.tbTwoVariables.Controls.Add(Me.grpHyroGOF)
         resources.ApplyResources(Me.tbTwoVariables, "tbTwoVariables")
         Me.tbTwoVariables.Name = "tbTwoVariables"
         Me.tbTwoVariables.UseVisualStyleBackColor = True
         '
         'grpRelationships
         '
-        Me.grpRelationships.Controls.Add(Me.ucrChkCoefPersistence)
-        Me.grpRelationships.Controls.Add(Me.ucrChkCoefDetermination)
         Me.grpRelationships.Controls.Add(Me.ucrChkCovariance)
         Me.grpRelationships.Controls.Add(Me.ucrChkCorrelations)
         resources.ApplyResources(Me.grpRelationships, "grpRelationships")
         Me.grpRelationships.Name = "grpRelationships"
         Me.grpRelationships.TabStop = False
-        '
-        'ucrChkCoefPersistence
-        '
-        Me.ucrChkCoefPersistence.Checked = False
-        resources.ApplyResources(Me.ucrChkCoefPersistence, "ucrChkCoefPersistence")
-        Me.ucrChkCoefPersistence.Name = "ucrChkCoefPersistence"
-        '
-        'ucrChkCoefDetermination
-        '
-        Me.ucrChkCoefDetermination.Checked = False
-        resources.ApplyResources(Me.ucrChkCoefDetermination, "ucrChkCoefDetermination")
-        Me.ucrChkCoefDetermination.Name = "ucrChkCoefDetermination"
         '
         'ucrChkCovariance
         '
@@ -663,6 +665,117 @@ Partial Class sdgSummaries
         Me.ucrReceiverSecondVariable.Selector = Nothing
         Me.ucrReceiverSecondVariable.strNcFilePath = ""
         Me.ucrReceiverSecondVariable.ucrSelector = Nothing
+        '
+        'grpHyroGOF
+        '
+        Me.grpHyroGOF.Controls.Add(Me.UcrCheck13)
+        Me.grpHyroGOF.Controls.Add(Me.UcrCheck12)
+        Me.grpHyroGOF.Controls.Add(Me.UcrCheck11)
+        Me.grpHyroGOF.Controls.Add(Me.UcrCheck7)
+        Me.grpHyroGOF.Controls.Add(Me.UcrCheck8)
+        Me.grpHyroGOF.Controls.Add(Me.UcrCheck9)
+        Me.grpHyroGOF.Controls.Add(Me.UcrCheck10)
+        Me.grpHyroGOF.Controls.Add(Me.UcrCheck6)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkCoefDetermination)
+        Me.grpHyroGOF.Controls.Add(Me.UcrCheck5)
+        Me.grpHyroGOF.Controls.Add(Me.UcrCheck4)
+        Me.grpHyroGOF.Controls.Add(Me.UcrCheck3)
+        Me.grpHyroGOF.Controls.Add(Me.UcrCheck2)
+        Me.grpHyroGOF.Controls.Add(Me.UcrCheck1)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkCoefPersistence)
+        resources.ApplyResources(Me.grpHyroGOF, "grpHyroGOF")
+        Me.grpHyroGOF.Name = "grpHyroGOF"
+        Me.grpHyroGOF.TabStop = False
+        '
+        'UcrCheck13
+        '
+        Me.UcrCheck13.Checked = False
+        resources.ApplyResources(Me.UcrCheck13, "UcrCheck13")
+        Me.UcrCheck13.Name = "UcrCheck13"
+        '
+        'UcrCheck12
+        '
+        Me.UcrCheck12.Checked = False
+        resources.ApplyResources(Me.UcrCheck12, "UcrCheck12")
+        Me.UcrCheck12.Name = "UcrCheck12"
+        '
+        'UcrCheck11
+        '
+        Me.UcrCheck11.Checked = False
+        resources.ApplyResources(Me.UcrCheck11, "UcrCheck11")
+        Me.UcrCheck11.Name = "UcrCheck11"
+        '
+        'UcrCheck7
+        '
+        Me.UcrCheck7.Checked = False
+        resources.ApplyResources(Me.UcrCheck7, "UcrCheck7")
+        Me.UcrCheck7.Name = "UcrCheck7"
+        '
+        'UcrCheck8
+        '
+        Me.UcrCheck8.Checked = False
+        resources.ApplyResources(Me.UcrCheck8, "UcrCheck8")
+        Me.UcrCheck8.Name = "UcrCheck8"
+        '
+        'UcrCheck9
+        '
+        Me.UcrCheck9.Checked = False
+        resources.ApplyResources(Me.UcrCheck9, "UcrCheck9")
+        Me.UcrCheck9.Name = "UcrCheck9"
+        '
+        'UcrCheck10
+        '
+        Me.UcrCheck10.Checked = False
+        resources.ApplyResources(Me.UcrCheck10, "UcrCheck10")
+        Me.UcrCheck10.Name = "UcrCheck10"
+        '
+        'UcrCheck6
+        '
+        Me.UcrCheck6.Checked = False
+        resources.ApplyResources(Me.UcrCheck6, "UcrCheck6")
+        Me.UcrCheck6.Name = "UcrCheck6"
+        '
+        'ucrChkCoefDetermination
+        '
+        Me.ucrChkCoefDetermination.Checked = False
+        resources.ApplyResources(Me.ucrChkCoefDetermination, "ucrChkCoefDetermination")
+        Me.ucrChkCoefDetermination.Name = "ucrChkCoefDetermination"
+        '
+        'UcrCheck5
+        '
+        Me.UcrCheck5.Checked = False
+        resources.ApplyResources(Me.UcrCheck5, "UcrCheck5")
+        Me.UcrCheck5.Name = "UcrCheck5"
+        '
+        'UcrCheck4
+        '
+        Me.UcrCheck4.Checked = False
+        resources.ApplyResources(Me.UcrCheck4, "UcrCheck4")
+        Me.UcrCheck4.Name = "UcrCheck4"
+        '
+        'UcrCheck3
+        '
+        Me.UcrCheck3.Checked = False
+        resources.ApplyResources(Me.UcrCheck3, "UcrCheck3")
+        Me.UcrCheck3.Name = "UcrCheck3"
+        '
+        'UcrCheck2
+        '
+        Me.UcrCheck2.Checked = False
+        resources.ApplyResources(Me.UcrCheck2, "UcrCheck2")
+        Me.UcrCheck2.Name = "UcrCheck2"
+        '
+        'UcrCheck1
+        '
+        Me.UcrCheck1.Checked = False
+        resources.ApplyResources(Me.UcrCheck1, "UcrCheck1")
+        Me.UcrCheck1.Name = "UcrCheck1"
+        '
+        'ucrChkCoefPersistence
+        '
+        Me.ucrChkCoefPersistence.Checked = False
+        resources.ApplyResources(Me.ucrChkCoefPersistence, "ucrChkCoefPersistence")
+        Me.ucrChkCoefPersistence.Name = "ucrChkCoefPersistence"
         '
         'tbPosition
         '
@@ -903,6 +1016,7 @@ Partial Class sdgSummaries
         Me.tbTwoVariables.ResumeLayout(False)
         Me.tbTwoVariables.PerformLayout()
         Me.grpRelationships.ResumeLayout(False)
+        Me.grpHyroGOF.ResumeLayout(False)
         Me.tbPosition.ResumeLayout(False)
         Me.tbPosition.PerformLayout()
         Me.grpPosition.ResumeLayout(False)
@@ -1012,4 +1126,18 @@ Partial Class sdgSummaries
     Friend WithEvents ucrInputQuantile As ucrInputTextBox
     Friend WithEvents ucrChkCoefPersistence As ucrCheck
     Friend WithEvents ucrChkCoefDetermination As ucrCheck
+    Friend WithEvents grpHyroGOF As GroupBox
+    Friend WithEvents UcrCheck6 As ucrCheck
+    Friend WithEvents UcrCheck5 As ucrCheck
+    Friend WithEvents UcrCheck4 As ucrCheck
+    Friend WithEvents UcrCheck3 As ucrCheck
+    Friend WithEvents UcrCheck2 As ucrCheck
+    Friend WithEvents UcrCheck1 As ucrCheck
+    Friend WithEvents UcrCheck7 As ucrCheck
+    Friend WithEvents UcrCheck8 As ucrCheck
+    Friend WithEvents UcrCheck9 As ucrCheck
+    Friend WithEvents UcrCheck10 As ucrCheck
+    Friend WithEvents UcrCheck13 As ucrCheck
+    Friend WithEvents UcrCheck12 As ucrCheck
+    Friend WithEvents UcrCheck11 As ucrCheck
 End Class

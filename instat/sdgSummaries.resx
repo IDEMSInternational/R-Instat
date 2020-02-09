@@ -234,7 +234,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbMissingOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 386</value>
+    <value>417, 398</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tbMissingOptions.TabIndex" type="System.Int32, mscorlib">
@@ -544,7 +544,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbMore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 386</value>
+    <value>417, 398</value>
   </data>
   <data name="tbMore.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1507,7 +1507,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbsum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 386</value>
+    <value>417, 398</value>
   </data>
   <data name="tbsum.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2163,66 +2163,6 @@
   <data name="&gt;&gt;ucrChkMean.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="ucrChkCoefPersistence.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 45</value>
-  </data>
-  <data name="ucrChkCoefPersistence.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="ucrChkCoefPersistence.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
-  </data>
-  <data name="ucrChkCoefPersistence.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCoefPersistence.Name" xml:space="preserve">
-    <value>ucrChkCoefPersistence</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCoefPersistence.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCoefPersistence.Parent" xml:space="preserve">
-    <value>grpRelationships</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCoefPersistence.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkCoefDetermination.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 19</value>
-  </data>
-  <data name="ucrChkCoefDetermination.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="ucrChkCoefDetermination.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 20</value>
-  </data>
-  <data name="ucrChkCoefDetermination.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCoefDetermination.Name" xml:space="preserve">
-    <value>ucrChkCoefDetermination</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCoefDetermination.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCoefDetermination.Parent" xml:space="preserve">
-    <value>grpRelationships</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCoefDetermination.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrChkCovariance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 45</value>
-  </data>
-  <data name="ucrChkCovariance.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="ucrChkCovariance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 20</value>
-  </data>
-  <data name="ucrChkCovariance.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;ucrChkCovariance.Name" xml:space="preserve">
     <value>ucrChkCovariance</value>
   </data>
@@ -2233,18 +2173,6 @@
     <value>grpRelationships</value>
   </data>
   <data name="&gt;&gt;ucrChkCovariance.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrChkCorrelations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 19</value>
-  </data>
-  <data name="ucrChkCorrelations.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="ucrChkCorrelations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
-  </data>
-  <data name="ucrChkCorrelations.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;ucrChkCorrelations.Name" xml:space="preserve">
@@ -2257,13 +2185,13 @@
     <value>grpRelationships</value>
   </data>
   <data name="&gt;&gt;ucrChkCorrelations.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="grpRelationships.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 11</value>
   </data>
   <data name="grpRelationships.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 73</value>
+    <value>403, 48</value>
   </data>
   <data name="grpRelationships.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2290,7 +2218,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSecondVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 116</value>
+    <value>235, 220</value>
   </data>
   <data name="lblSecondVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
@@ -2314,13 +2242,13 @@
     <value>1</value>
   </data>
   <data name="ucrSelectorSecondVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 91</value>
+    <value>9, 210</value>
   </data>
   <data name="ucrSelectorSecondVariable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrSelectorSecondVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 180</value>
+    <value>223, 184</value>
   </data>
   <data name="ucrSelectorSecondVariable.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2344,7 +2272,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>437, 463</value>
+    <value>438, 463</value>
   </data>
   <data name="&gt;&gt;ucrButtonsSummaries.Name" xml:space="preserve">
     <value>ucrButtonsSummaries</value>
@@ -2371,7 +2299,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverSecondVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 132</value>
+    <value>238, 236</value>
   </data>
   <data name="ucrReceiverSecondVariable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -2394,6 +2322,390 @@
   <data name="&gt;&gt;ucrReceiverSecondVariable.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="UcrCheck13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 122</value>
+  </data>
+  <data name="UcrCheck13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="UcrCheck13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="UcrCheck13.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck13.Name" xml:space="preserve">
+    <value>UcrCheck13</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck13.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck13.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck13.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="UcrCheck12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 119</value>
+  </data>
+  <data name="UcrCheck12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="UcrCheck12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 20</value>
+  </data>
+  <data name="UcrCheck12.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck12.Name" xml:space="preserve">
+    <value>UcrCheck12</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck12.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck12.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck12.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="UcrCheck11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>293, 122</value>
+  </data>
+  <data name="UcrCheck11.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="UcrCheck11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 20</value>
+  </data>
+  <data name="UcrCheck11.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck11.Name" xml:space="preserve">
+    <value>UcrCheck11</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck11.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck11.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck11.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="UcrCheck7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>293, 18</value>
+  </data>
+  <data name="UcrCheck7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="UcrCheck7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
+  </data>
+  <data name="UcrCheck7.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck7.Name" xml:space="preserve">
+    <value>UcrCheck7</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck7.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck7.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck7.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="UcrCheck8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>293, 44</value>
+  </data>
+  <data name="UcrCheck8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="UcrCheck8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
+  </data>
+  <data name="UcrCheck8.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck8.Name" xml:space="preserve">
+    <value>UcrCheck8</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck8.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck8.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck8.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="UcrCheck9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>293, 68</value>
+  </data>
+  <data name="UcrCheck9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="UcrCheck9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
+  </data>
+  <data name="UcrCheck9.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck9.Name" xml:space="preserve">
+    <value>UcrCheck9</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck9.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck9.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck9.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="UcrCheck10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>293, 96</value>
+  </data>
+  <data name="UcrCheck10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="UcrCheck10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
+  </data>
+  <data name="UcrCheck10.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck10.Name" xml:space="preserve">
+    <value>UcrCheck10</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck10.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck10.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck10.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="UcrCheck6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 68</value>
+  </data>
+  <data name="UcrCheck6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="UcrCheck6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="UcrCheck6.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck6.Name" xml:space="preserve">
+    <value>UcrCheck6</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck6.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck6.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck6.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrChkCoefDetermination.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 18</value>
+  </data>
+  <data name="ucrChkCoefDetermination.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkCoefDetermination.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 20</value>
+  </data>
+  <data name="ucrChkCoefDetermination.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCoefDetermination.Name" xml:space="preserve">
+    <value>ucrChkCoefDetermination</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCoefDetermination.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCoefDetermination.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCoefDetermination.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="UcrCheck5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 95</value>
+  </data>
+  <data name="UcrCheck5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="UcrCheck5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="UcrCheck5.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck5.Name" xml:space="preserve">
+    <value>UcrCheck5</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck5.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck5.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck5.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="UcrCheck4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>169, 18</value>
+  </data>
+  <data name="UcrCheck4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="UcrCheck4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 20</value>
+  </data>
+  <data name="UcrCheck4.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck4.Name" xml:space="preserve">
+    <value>UcrCheck4</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck4.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck4.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck4.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="UcrCheck3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 44</value>
+  </data>
+  <data name="UcrCheck3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="UcrCheck3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 20</value>
+  </data>
+  <data name="UcrCheck3.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.Name" xml:space="preserve">
+    <value>UcrCheck3</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck3.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="UcrCheck2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 68</value>
+  </data>
+  <data name="UcrCheck2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="UcrCheck2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 20</value>
+  </data>
+  <data name="UcrCheck2.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.Name" xml:space="preserve">
+    <value>UcrCheck2</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck2.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="UcrCheck1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 95</value>
+  </data>
+  <data name="UcrCheck1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="UcrCheck1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 20</value>
+  </data>
+  <data name="UcrCheck1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck1.Name" xml:space="preserve">
+    <value>UcrCheck1</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck1.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck1.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;UcrCheck1.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="ucrChkCoefPersistence.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 44</value>
+  </data>
+  <data name="ucrChkCoefPersistence.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkCoefPersistence.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 20</value>
+  </data>
+  <data name="ucrChkCoefPersistence.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCoefPersistence.Name" xml:space="preserve">
+    <value>ucrChkCoefPersistence</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCoefPersistence.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCoefPersistence.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCoefPersistence.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="grpHyroGOF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 60</value>
+  </data>
+  <data name="grpHyroGOF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 147</value>
+  </data>
+  <data name="grpHyroGOF.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="grpHyroGOF.Text" xml:space="preserve">
+    <value>HydroGOF</value>
+  </data>
+  <data name="&gt;&gt;grpHyroGOF.Name" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;grpHyroGOF.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpHyroGOF.Parent" xml:space="preserve">
+    <value>tbTwoVariables</value>
+  </data>
+  <data name="&gt;&gt;grpHyroGOF.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="tbTwoVariables.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -2401,7 +2713,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbTwoVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 386</value>
+    <value>417, 398</value>
   </data>
   <data name="tbTwoVariables.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2488,7 +2800,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 386</value>
+    <value>417, 398</value>
   </data>
   <data name="tbPosition.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2527,7 +2839,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 386</value>
+    <value>417, 398</value>
   </data>
   <data name="tbModel.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2581,7 +2893,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="tbCircular.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 386</value>
+    <value>417, 398</value>
   </data>
   <data name="tbCircular.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2605,7 +2917,7 @@
     <value>7, 7</value>
   </data>
   <data name="tbSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 412</value>
+    <value>425, 424</value>
   </data>
   <data name="tbSummaries.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2620,6 +2932,54 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tbSummaries.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkCovariance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>163, 19</value>
+  </data>
+  <data name="ucrChkCovariance.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkCovariance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 20</value>
+  </data>
+  <data name="ucrChkCovariance.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCovariance.Name" xml:space="preserve">
+    <value>ucrChkCovariance</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCovariance.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCovariance.Parent" xml:space="preserve">
+    <value>grpRelationships</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCovariance.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkCorrelations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 19</value>
+  </data>
+  <data name="ucrChkCorrelations.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkCorrelations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="ucrChkCorrelations.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCorrelations.Name" xml:space="preserve">
+    <value>ucrChkCorrelations</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCorrelations.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCorrelations.Parent" xml:space="preserve">
+    <value>grpRelationships</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCorrelations.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ucrChkOrderBy.Location" type="System.Drawing.Point, System.Drawing">
@@ -3487,7 +3847,7 @@
     <value>6</value>
   </data>
   <data name="ucrButtonsSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 426</value>
+    <value>144, 432</value>
   </data>
   <data name="ucrButtonsSummaries.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>

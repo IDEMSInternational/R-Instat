@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 19</value>
+    <value>265, 11</value>
   </data>
   <data name="lblSelectedVariables.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 13</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSummariseBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 142</value>
+    <value>265, 134</value>
   </data>
   <data name="lblSummariseBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
@@ -292,7 +292,7 @@
     <value>160, 145</value>
   </data>
   <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="grpOptions.Text" xml:space="preserve">
     <value>Options</value>
@@ -313,13 +313,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 299</value>
+    <value>265, 302</value>
   </data>
   <data name="cmdSummaries.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 23</value>
   </data>
   <data name="cmdSummaries.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="cmdSummaries.Text" xml:space="preserve">
     <value>Summaries...</value>
@@ -346,7 +346,7 @@
     <value>143, 23</value>
   </data>
   <data name="cmdProportionsPercentages.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="cmdProportionsPercentages.Text" xml:space="preserve">
     <value>Prop. and Percentages...</value>
@@ -364,13 +364,13 @@
     <value>2</value>
   </data>
   <data name="ucrChkWeights.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 266</value>
+    <value>266, 253</value>
   </data>
   <data name="ucrChkWeights.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 20</value>
+    <value>119, 20</value>
   </data>
   <data name="ucrChkWeights.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrChkWeights.Name" xml:space="preserve">
     <value>ucrChkWeights</value>
@@ -394,7 +394,7 @@
     <value>416, 418</value>
   </data>
   <data name="ucrReceiverByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 157</value>
+    <value>265, 149</value>
   </data>
   <data name="ucrReceiverByFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -418,7 +418,7 @@
     <value>5</value>
   </data>
   <data name="ucrReceiverSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 34</value>
+    <value>265, 26</value>
   </data>
   <data name="ucrReceiverSelectedVariables.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -472,7 +472,7 @@
     <value>402, 53</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -499,7 +499,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverWeights.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 266</value>
+    <value>265, 276</value>
   </data>
   <data name="ucrReceiverWeights.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -508,7 +508,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverWeights.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrReceiverWeights.Name" xml:space="preserve">
     <value>ucrReceiverWeights</value>

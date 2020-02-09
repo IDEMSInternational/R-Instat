@@ -93,7 +93,7 @@ Public Class dlgColumnStats
         ucrChkWeights.AddParameterPresentCondition(True, "weights")
         ucrChkWeights.AddParameterPresentCondition(False, "weights", False)
 
-        ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
         'linking
         ucrChkStoreResults.AddToLinkedControls(ucrChkOriginalLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub

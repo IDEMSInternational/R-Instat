@@ -42,15 +42,15 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.lblSummariseBy = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.cmdSummaries = New System.Windows.Forms.Button()
-        Me.cmdProportionsPercentages = New System.Windows.Forms.Button()
-        Me.ucrChkWeights = New instat.ucrCheck()
-        Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkOriginalLevel = New instat.ucrCheck()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
+        Me.cmdSummaries = New System.Windows.Forms.Button()
+        Me.cmdProportionsPercentages = New System.Windows.Forms.Button()
+        Me.ucrChkWeights = New instat.ucrCheck()
+        Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForColumnStatistics = New instat.ucrSelectorByDataFrameAddRemove()
@@ -78,35 +78,6 @@ Partial Class dlgColumnStats
         resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
-        '
-        'cmdSummaries
-        '
-        resources.ApplyResources(Me.cmdSummaries, "cmdSummaries")
-        Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Tag = "Summaries"
-        Me.cmdSummaries.UseVisualStyleBackColor = True
-        '
-        'cmdProportionsPercentages
-        '
-        resources.ApplyResources(Me.cmdProportionsPercentages, "cmdProportionsPercentages")
-        Me.cmdProportionsPercentages.Name = "cmdProportionsPercentages"
-        Me.cmdProportionsPercentages.Tag = "Proportions/Percentages..."
-        Me.cmdProportionsPercentages.UseVisualStyleBackColor = True
-        '
-        'ucrChkWeights
-        '
-        Me.ucrChkWeights.Checked = False
-        resources.ApplyResources(Me.ucrChkWeights, "ucrChkWeights")
-        Me.ucrChkWeights.Name = "ucrChkWeights"
-        '
-        'ucrReceiverWeights
-        '
-        Me.ucrReceiverWeights.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverWeights, "ucrReceiverWeights")
-        Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
-        Me.ucrReceiverWeights.Selector = Nothing
-        Me.ucrReceiverWeights.strNcFilePath = ""
-        Me.ucrReceiverWeights.ucrSelector = Nothing
         '
         'ucrChkOriginalLevel
         '
@@ -137,6 +108,35 @@ Partial Class dlgColumnStats
         Me.ucrChkDropUnusedLevels.Checked = False
         resources.ApplyResources(Me.ucrChkDropUnusedLevels, "ucrChkDropUnusedLevels")
         Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
+        '
+        'cmdSummaries
+        '
+        resources.ApplyResources(Me.cmdSummaries, "cmdSummaries")
+        Me.cmdSummaries.Name = "cmdSummaries"
+        Me.cmdSummaries.Tag = "Summaries"
+        Me.cmdSummaries.UseVisualStyleBackColor = True
+        '
+        'cmdProportionsPercentages
+        '
+        resources.ApplyResources(Me.cmdProportionsPercentages, "cmdProportionsPercentages")
+        Me.cmdProportionsPercentages.Name = "cmdProportionsPercentages"
+        Me.cmdProportionsPercentages.Tag = "Proportions/Percentages..."
+        Me.cmdProportionsPercentages.UseVisualStyleBackColor = True
+        '
+        'ucrChkWeights
+        '
+        Me.ucrChkWeights.Checked = False
+        resources.ApplyResources(Me.ucrChkWeights, "ucrChkWeights")
+        Me.ucrChkWeights.Name = "ucrChkWeights"
+        '
+        'ucrReceiverWeights
+        '
+        Me.ucrReceiverWeights.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWeights, "ucrReceiverWeights")
+        Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
+        Me.ucrReceiverWeights.Selector = Nothing
+        Me.ucrReceiverWeights.strNcFilePath = ""
+        Me.ucrReceiverWeights.ucrSelector = Nothing
         '
         'ucrReceiverByFactor
         '
