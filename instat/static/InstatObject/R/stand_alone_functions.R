@@ -292,6 +292,7 @@ nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
 }
 
 nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = TRUE) {
+  if(missing(vars)) vars <- ncdf4.helpers::nc.get.variable.list(nc)
   if(sum(is.null(lon_points), is.null(lat_points)) == 1) stop("You must specificy both lon_points and lat_points")
   has_points <- (sum(is.null(lon_points), is.null(lat_points)) == 0)
   if(has_points && length(lon_points) != length(lat_points)) stop("lon_points and lat_points have unequal lengths.")
@@ -325,6 +326,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
             if(dim == "T") {
               ind <- integer(0)
               try({
+                print(dim_var)
                 units <- ncdf4::ncatt_get(nc, dim_var, "units")
                 if(units$hasatt && units$value == "julian_day") {
                   # RDotNet interprets Date class as numeric so character needed to preserve date
@@ -603,6 +605,26 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
 #   return(list(my_data, lat_lon_df, new_lat_lon_column_names))
 # }
 
+multiple_nc_as_data_frame <- function(path, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = TRUE, id = "id") {
+  filepaths <- list.files(path = path, pattern="*\\.nc", full.names = TRUE)
+  filenames <- basename(filepaths)
+  nc_list <- list()
+  
+  n_files <- length(filepaths)
+  pb <- winProgressBar(title = "Reading files", min = 0, max = n_files)
+  for(i in seq_along(filepaths)) {
+    nc <- ncdf4::nc_open(filename = filepaths[i])
+    dat <- nc_as_data_frame(nc = nc, vars = vars, keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = boundary, lon_points = lon_points, lat_points = lat_points, id_points = id_points, show_requested_points = show_requested_points, great_circle_dist = great_circle_dist)
+    nc_list[[length(nc_list) + 1]] <- dat
+    ncdf4::nc_close(nc)
+    info <- paste0("Reading file ", i, " of ", n_files, " - ", round(100*i/n_files), "%")
+    setWinProgressBar(pb, value = i, title = info, label = info)
+  }
+  close(pb)
+  names(nc_list) <- tools::file_path_sans_ext(filenames)
+  merged_data <- dplyr::bind_rows(nc_list, .id = id)
+  return(merged_data)
+}
 
 import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_area_point){
   if(path == ""){

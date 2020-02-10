@@ -69,7 +69,6 @@ Partial Class ucrDataView
         Me.mnuRenameColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDuplColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuReorderColumn = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDeleteColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuConvertToFact = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertToOrderedFactor = New System.Windows.Forms.ToolStripMenuItem()
@@ -247,9 +246,9 @@ Partial Class ucrDataView
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCell, Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuDeleteColumn, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLebelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCell, Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLebelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(251, 364)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(251, 368)
         '
         'mnuCell
         '
@@ -262,26 +261,26 @@ Partial Class ucrDataView
         '
         Me.mnuCellCutRange.Enabled = False
         Me.mnuCellCutRange.Name = "mnuCellCutRange"
-        Me.mnuCellCutRange.Size = New System.Drawing.Size(216, 26)
+        Me.mnuCellCutRange.Size = New System.Drawing.Size(118, 26)
         Me.mnuCellCutRange.Text = "Cut"
         '
         'mnuCellCopyRange
         '
         Me.mnuCellCopyRange.Name = "mnuCellCopyRange"
-        Me.mnuCellCopyRange.Size = New System.Drawing.Size(216, 26)
+        Me.mnuCellCopyRange.Size = New System.Drawing.Size(118, 26)
         Me.mnuCellCopyRange.Text = "Copy"
         '
         'mnuCellPasteRange
         '
         Me.mnuCellPasteRange.Enabled = False
         Me.mnuCellPasteRange.Name = "mnuCellPasteRange"
-        Me.mnuCellPasteRange.Size = New System.Drawing.Size(216, 26)
+        Me.mnuCellPasteRange.Size = New System.Drawing.Size(118, 26)
         Me.mnuCellPasteRange.Text = "Paste"
         '
         'mnuCellHelp
         '
         Me.mnuCellHelp.Name = "mnuCellHelp"
-        Me.mnuCellHelp.Size = New System.Drawing.Size(216, 26)
+        Me.mnuCellHelp.Size = New System.Drawing.Size(118, 26)
         Me.mnuCellHelp.Text = "Help"
         '
         'ToolStripSeparator3
@@ -306,12 +305,6 @@ Partial Class ucrDataView
         Me.mnuReorderColumn.Name = "mnuReorderColumn"
         Me.mnuReorderColumn.Size = New System.Drawing.Size(250, 24)
         Me.mnuReorderColumn.Text = "Reorder Column(s)..."
-        '
-        'mnuDeleteColumn
-        '
-        Me.mnuDeleteColumn.Name = "mnuDeleteColumn"
-        Me.mnuDeleteColumn.Size = New System.Drawing.Size(250, 24)
-        Me.mnuDeleteColumn.Text = "Delete Column(s)"
         '
         'ToolStripSeparator5
         '
@@ -622,7 +615,6 @@ Partial Class ucrDataView
     Friend WithEvents mnuRenameColumn As ToolStripMenuItem
     Friend WithEvents mnuDuplColumn As ToolStripMenuItem
     Friend WithEvents mnuReorderColumn As ToolStripMenuItem
-    Private WithEvents mnuDeleteColumn As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
     Friend WithEvents mnuConvertToFact As ToolStripMenuItem
     Friend WithEvents mnuConvertToOrderedFactor As ToolStripMenuItem

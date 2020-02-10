@@ -1267,7 +1267,7 @@ DataBook$set("public","make_inventory_plot", function(data_name, date_col, stati
 }
 )
 
-DataBook$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE, keep_raw_time = TRUE, include_metadata = TRUE, boundary, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = TRUE) {
+DataBook$set("public", "import_NetCDF", function(nc, path, name, only_data_vars = TRUE, keep_raw_time = TRUE, include_metadata = TRUE, boundary, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = FALSE) {
   if(only_data_vars) {
     all_var_names <- ncdf4.helpers::nc.get.variable.list(nc)
   }
@@ -1300,7 +1300,8 @@ DataBook$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE
     else curr_boundary <- NULL
     curr_name <- make.names(curr_name)
     curr_name <- next_default_item(curr_name, self$get_data_names(), include_index = FALSE)
-    data_list[[curr_name]] <- nc_as_data_frame(nc, var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = curr_boundary, lon_points = lon_points, lat_points = lat_points, id_points = id_points, show_requested_points = show_requested_points, great_circle_dist = great_circle_dist)
+    if(!missing(path)) data_list[[curr_name]] <- multiple_nc_as_data_frame(path = path, vars = var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = curr_boundary, lon_points = lon_points, lat_points = lat_points, id_points = id_points, show_requested_points = show_requested_points, great_circle_dist = great_circle_dist)
+    else data_list[[curr_name]] <- nc_as_data_frame(nc = nc, vars = var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = curr_boundary, lon_points = lon_points, lat_points = lat_points, id_points = id_points, show_requested_points = show_requested_points, great_circle_dist = great_circle_dist)
     tmp_list <- list()
     tmp_list[[curr_name]] <- data_list[[curr_name]]
     data_names <- c(data_names, curr_name)
@@ -1360,12 +1361,16 @@ DataBook$set("public", "add_climdex_indices", function(data_name, indices = list
 
 DataBook$set("public", "add_single_climdex_index", function(data_name, indices, index_name = "", freq = "annual", year, month) {
   if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label)) stop("Data must be defined as climatic to calculate climdex indices.")
-  
+  col_year <- self$get_columns_from_data(data_name = data_name, col_names = year)
+  year_class <- class(col_year)
   if(freq == "annual") {
-    ind_data <- data.frame(factor(names(indices)), indices, row.names = NULL)
+    ind_data <- data.frame(names(indices), indices)
     names(ind_data) <- c(year, index_name)
     linked_data_name <- self$get_linked_to_data_name(data_name, year)
     if(length(linked_data_name) == 0) {
+      if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, sep = "_")
       new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
@@ -1402,6 +1407,9 @@ DataBook$set("public", "add_single_climdex_index", function(data_name, indices, 
     ind_data[[month]] <- as.numeric(ind_data[[month]])
     linked_data_name <- self$get_linked_to_data_name(data_name, c(year, month))
     if(length(linked_data_name) == 0) {
+      if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, month, sep = "_")
       new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)

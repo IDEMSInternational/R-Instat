@@ -42,7 +42,6 @@ Partial Class ucrCalculator
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrCalculator))
         Me.lblExpression = New System.Windows.Forms.Label()
         Me.chkSaveResultInto = New System.Windows.Forms.CheckBox()
-        Me.cmdTry = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.chkShowParameters = New System.Windows.Forms.CheckBox()
         Me.grpBasic = New System.Windows.Forms.GroupBox()
@@ -110,6 +109,8 @@ Partial Class ucrCalculator
         Me.cmdLead = New System.Windows.Forms.Button()
         Me.cmdLag = New System.Windows.Forms.Button()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.cmdKurtosis = New System.Windows.Forms.Button()
+        Me.cmdMode1 = New System.Windows.Forms.Button()
         Me.cmdMode = New System.Windows.Forms.Button()
         Me.cmdFirst = New System.Windows.Forms.Button()
         Me.cmdLast = New System.Windows.Forms.Button()
@@ -368,11 +369,9 @@ Partial Class ucrCalculator
         Me.cmdAny1 = New System.Windows.Forms.Button()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
-        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdMode1 = New System.Windows.Forms.Button()
-        Me.cmdKurtosis = New System.Windows.Forms.Button()
+        Me.ucrTryCalculator = New instat.ucrTry()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -399,12 +398,6 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.chkSaveResultInto, "chkSaveResultInto")
         Me.chkSaveResultInto.Name = "chkSaveResultInto"
         Me.chkSaveResultInto.UseVisualStyleBackColor = True
-        '
-        'cmdTry
-        '
-        resources.ApplyResources(Me.cmdTry, "cmdTry")
-        Me.cmdTry.Name = "cmdTry"
-        Me.cmdTry.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
@@ -897,6 +890,18 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpSummary, "grpSummary")
         Me.grpSummary.Name = "grpSummary"
         Me.grpSummary.TabStop = False
+        '
+        'cmdKurtosis
+        '
+        resources.ApplyResources(Me.cmdKurtosis, "cmdKurtosis")
+        Me.cmdKurtosis.Name = "cmdKurtosis"
+        Me.cmdKurtosis.UseVisualStyleBackColor = True
+        '
+        'cmdMode1
+        '
+        resources.ApplyResources(Me.cmdMode1, "cmdMode1")
+        Me.cmdMode1.Name = "cmdMode1"
+        Me.cmdMode1.UseVisualStyleBackColor = True
         '
         'cmdMode
         '
@@ -1861,6 +1866,12 @@ Partial Class ucrCalculator
         Me.cmdSqrt.Name = "cmdSqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
         '
+        'ttCalculator
+        '
+        Me.ttCalculator.AutoPopDelay = 10000
+        Me.ttCalculator.InitialDelay = 500
+        Me.ttCalculator.ReshowDelay = 100
+        '
         'cmdWakefield_Year
         '
         resources.ApplyResources(Me.cmdWakefield_Year, "cmdWakefield_Year")
@@ -2675,14 +2686,6 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
         Me.ucrSaveResultInto.Name = "ucrSaveResultInto"
         '
-        'ucrInputTryMessage
-        '
-        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
-        Me.ucrInputTryMessage.IsMultiline = False
-        Me.ucrInputTryMessage.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputTryMessage, "ucrInputTryMessage")
-        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
-        '
         'ucrSelectorForCalculations
         '
         Me.ucrSelectorForCalculations.bDropUnusedFilterLevels = False
@@ -2700,22 +2703,16 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'cmdMode1
+        'ucrTryCalculator
         '
-        resources.ApplyResources(Me.cmdMode1, "cmdMode1")
-        Me.cmdMode1.Name = "cmdMode1"
-        Me.cmdMode1.UseVisualStyleBackColor = True
-        '
-        'cmdKurtosis
-        '
-        resources.ApplyResources(Me.cmdKurtosis, "cmdKurtosis")
-        Me.cmdKurtosis.Name = "cmdKurtosis"
-        Me.cmdKurtosis.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ucrTryCalculator, "ucrTryCalculator")
+        Me.ucrTryCalculator.Name = "ucrTryCalculator"
         '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTryCalculator)
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
@@ -2734,8 +2731,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpBasic)
         Me.Controls.Add(Me.ucrSaveResultInto)
         Me.Controls.Add(Me.chkSaveResultInto)
-        Me.Controls.Add(Me.ucrInputTryMessage)
-        Me.Controls.Add(Me.cmdTry)
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
@@ -2762,8 +2757,6 @@ Partial Class ucrCalculator
     Friend WithEvents lblExpression As Label
     Friend WithEvents ucrSaveResultInto As ucrInputComboBox
     Friend WithEvents chkSaveResultInto As CheckBox
-    Friend WithEvents ucrInputTryMessage As ucrInputTextBox
-    Friend WithEvents cmdTry As Button
     Friend WithEvents ucrSelectorForCalculations As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdHelp As Button
     Friend WithEvents chkShowParameters As CheckBox
@@ -3094,4 +3087,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdOr3 As Button
     Friend WithEvents cmdMode1 As Button
     Friend WithEvents cmdKurtosis As Button
+    Friend WithEvents ucrTryCalculator As ucrTry
 End Class
