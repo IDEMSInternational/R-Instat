@@ -305,7 +305,7 @@ Public Class sdgSummaries
         ucrChkNormRootMeanSquaredError.SetText(" Normalized root mean squared error")
 
         ucrChkNashSutcliffeEfficiency.SetParameter(New RParameter("", 41), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkNashSutcliffeEfficiency.SetText("Nash-Sutcliffe effieciency")
+        ucrChkNashSutcliffeEfficiency.SetText("Nash-Sutcliffe efficiency")
 
         ucrChkPercentBias.SetParameter(New RParameter("", 42), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkPercentBias.SetText("Percent Bias")
