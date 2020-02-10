@@ -380,22 +380,22 @@ Public Class dlgClimdexIndices
             sdgClimdexIndices.grpTmaxTminAnnual.Enabled = True
             sdgClimdexIndices.grpPrecAnnual.Enabled = True
         ElseIf rdoMonthly.Checked Then
-            clsRWriteDfIndicesList.RemoveParameterByName("frost")
-            clsRWriteDfIndicesList.RemoveParameterByName("tropical_nights")
-            clsRWriteDfIndicesList.RemoveParameterByName("cold_spell_duration")
-            clsRWriteDfIndicesList.RemoveParameterByName("summer")
-            clsRWriteDfIndicesList.RemoveParameterByName("icing")
-            clsRWriteDfIndicesList.RemoveParameterByName("growing_season_length")
-            clsRWriteDfIndicesList.RemoveParameterByName("simple_rain_intensity")
-            clsRWriteDfIndicesList.RemoveParameterByName("rain_above_10mm")
-            clsRWriteDfIndicesList.RemoveParameterByName("rain_above_20mm")
-            clsRWriteDfIndicesList.RemoveParameterByName("rain_above_amount")
-            clsRWriteDfIndicesList.RemoveParameterByName("warm_spell_duration")
-            clsRWriteDfIndicesList.RemoveParameterByName("max_dry_spell_length")
-            clsRWriteDfIndicesList.RemoveParameterByName("max_wet_spell_length")
-            clsRWriteDfIndicesList.RemoveParameterByName("total_rain_above_95th_percentile")
-            clsRWriteDfIndicesList.RemoveParameterByName("total_rain_above_99th_percentile")
-            clsRWriteDfIndicesList.RemoveParameterByName("total_daily_rain")
+            clsRWriteDfIndicesList.RemoveParameterByName("FD")
+            clsRWriteDfIndicesList.RemoveParameterByName("TR")
+            clsRWriteDfIndicesList.RemoveParameterByName("CSDI")
+            clsRWriteDfIndicesList.RemoveParameterByName("SU")
+            clsRWriteDfIndicesList.RemoveParameterByName("ID")
+            clsRWriteDfIndicesList.RemoveParameterByName("GSL")
+            clsRWriteDfIndicesList.RemoveParameterByName("SDII")
+            clsRWriteDfIndicesList.RemoveParameterByName("R10mm")
+            clsRWriteDfIndicesList.RemoveParameterByName("R20mm")
+            clsRWriteDfIndicesList.RemoveParameterByName("Rnnmm")
+            clsRWriteDfIndicesList.RemoveParameterByName("WSDI")
+            clsRWriteDfIndicesList.RemoveParameterByName("CDD")
+            clsRWriteDfIndicesList.RemoveParameterByName("CWD")
+            clsRWriteDfIndicesList.RemoveParameterByName("R95p")
+            clsRWriteDfIndicesList.RemoveParameterByName("R99p")
+            clsRWriteDfIndicesList.RemoveParameterByName("PRCPTOT")
             sdgClimdexIndices.grpTminAnnual.Enabled = False
             sdgClimdexIndices.grpTmaxAnnual.Enabled = False
             sdgClimdexIndices.grpTmaxTminAnnual.Enabled = False
@@ -428,7 +428,24 @@ Public Class dlgClimdexIndices
 
     End Sub
 
+    Private Sub EnableGroupBoxes()
+        If ucrReceiverPrec.IsEmpty Then
+            sdgClimdexIndices.tbpPrecipitation.Enabled = False
+        Else
+            sdgClimdexIndices.tbpPrecipitation.Enabled = True
+        End If
+        If ucrReceiverTmax.IsEmpty AndAlso ucrReceiverTmin.IsEmpty Then
+            sdgClimdexIndices.tbpTemperature.Enabled = False
+        Else
+            sdgClimdexIndices.tbpTemperature.Enabled = True
+        End If
+    End Sub
+
     Private Sub ucrPnlAnnualMonthly_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualMonthly.ControlValueChanged
         ParameterCount()
+    End Sub
+
+    Private Sub ucrReceiverPrec_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPrec.ControlValueChanged, ucrReceiverTmin.ControlValueChanged, ucrReceiverTmax.ControlValueChanged
+        EnableGroupBoxes()
     End Sub
 End Class
