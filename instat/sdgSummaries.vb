@@ -337,7 +337,7 @@ Public Class sdgSummaries
             ctrTemp.SetRDefault(Chr(34) & Chr(34))
         Next
         bControlsInitialised = True
-        MissingOptionsVisibilty()
+        TwoVariablesControls()
         PositionOptions()
         OrderByCheckEnabled()
     End Sub
@@ -425,23 +425,23 @@ Public Class sdgSummaries
         ucrChkCircRange.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkCoefDetermination.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkCoefPersistence.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkIndexOfAgreement.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkKlingGuptaEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkMeanAbsoluteError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkModifiedIndexOfAgreement.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkMeanError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkModNashSutcliffeEff.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkNormRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkNashSutcliffeEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkPercentBias.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkRelativeIndexOfAgreement.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkRelativeNashSutcliffeEff.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkRatioOfStandardDeviation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkRatioOfRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkSumOfSquaredResiduals.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkVolumetricEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkIndexOfAgreement.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkKlingGuptaEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkMeanAbsoluteError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkModifiedIndexOfAgreement.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkMeanError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkModNashSutcliffeEff.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkNormRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkNashSutcliffeEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkPercentBias.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkRelativeIndexOfAgreement.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkRelativeNashSutcliffeEff.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkRatioOfStandardDeviation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkRatioOfRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkSumOfSquaredResiduals.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkVolumetricEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             tbSummaries.SelectedIndex = 0
@@ -476,15 +476,15 @@ Public Class sdgSummaries
         End If
     End Sub
 
-    Private Sub MissingOptionsVisibilty()
+    Private Sub TwoVariablesControls()
         If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked OrElse ucrChkCoefDetermination.Checked OrElse ucrChkCoefPersistence.Checked OrElse ucrChkIndexOfAgreement.Checked OrElse ucrChkKlingGuptaEfficiency.Checked OrElse ucrChkMeanAbsoluteError.Checked OrElse ucrChkModifiedIndexOfAgreement.Checked OrElse ucrChkMeanError.Checked OrElse ucrChkModNashSutcliffeEff.Checked OrElse ucrChkMeanSquaredError.Checked OrElse ucrChkNormRootMeanSquaredError.Checked OrElse ucrChkNashSutcliffeEfficiency.Checked OrElse ucrChkPercentBias.Checked OrElse ucrChkRelativeIndexOfAgreement.Checked OrElse ucrChkRootMeanSquaredError.Checked OrElse ucrChkRelativeNashSutcliffeEff.Checked OrElse ucrChkRatioOfStandardDeviation.Checked OrElse ucrChkRatioOfRootMeanSquaredError.Checked OrElse ucrChkSumOfSquaredResiduals.Checked OrElse ucrChkVolumetricEfficiency.Checked Then
-            ucrSelectorSecondVariable.Show()
-            ucrReceiverSecondVariable.Show()
-            lblSecondVariable.Show()
+            ucrSelectorSecondVariable.Visible = True
+            ucrReceiverSecondVariable.Visible = True
+            lblSecondVariable.Visible = True
         Else
-            ucrSelectorSecondVariable.Hide()
-            ucrReceiverSecondVariable.Hide()
-            lblSecondVariable.Hide()
+            ucrSelectorSecondVariable.Visible = False
+            ucrReceiverSecondVariable.Visible = False
+            lblSecondVariable.Visible = False
         End If
     End Sub
 
@@ -510,7 +510,7 @@ Public Class sdgSummaries
     End Sub
 
     Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged, ucrChkCovariance.ControlValueChanged, ucrReceiverSecondVariable.ControlValueChanged, ucrChkCoefDetermination.ControlValueChanged, ucrChkCoefPersistence.ControlValueChanged, ucrChkIndexOfAgreement.ControlContentsChanged, ucrChkKlingGuptaEfficiency.ControlContentsChanged, ucrChkMeanAbsoluteError.ControlContentsChanged, ucrChkModifiedIndexOfAgreement.ControlContentsChanged, ucrChkMeanError.ControlContentsChanged, ucrChkModNashSutcliffeEff.ControlContentsChanged, ucrChkMeanSquaredError.ControlContentsChanged, ucrChkNormRootMeanSquaredError.ControlContentsChanged, ucrChkNashSutcliffeEfficiency.ControlContentsChanged, ucrChkPercentBias.ControlContentsChanged, ucrChkRelativeIndexOfAgreement.ControlContentsChanged, ucrChkRootMeanSquaredError.ControlContentsChanged, ucrChkRelativeNashSutcliffeEff.ControlContentsChanged, ucrChkRatioOfStandardDeviation.ControlContentsChanged, ucrChkRatioOfRootMeanSquaredError.ControlContentsChanged, ucrChkSumOfSquaredResiduals.ControlContentsChanged, ucrChkVolumetricEfficiency.ControlContentsChanged
-        MissingOptionsVisibilty()
+        TwoVariablesControls()
         If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked OrElse ucrChkCoefDetermination.Checked OrElse ucrChkCoefPersistence.Checked OrElse ucrChkIndexOfAgreement.Checked OrElse ucrChkKlingGuptaEfficiency.Checked OrElse ucrChkMeanAbsoluteError.Checked OrElse ucrChkModifiedIndexOfAgreement.Checked OrElse ucrChkMeanError.Checked OrElse ucrChkModNashSutcliffeEff.Checked OrElse ucrChkMeanSquaredError.Checked OrElse ucrChkNormRootMeanSquaredError.Checked OrElse ucrChkNashSutcliffeEfficiency.Checked OrElse ucrChkPercentBias.Checked OrElse ucrChkRelativeIndexOfAgreement.Checked OrElse ucrChkRootMeanSquaredError.Checked OrElse ucrChkRelativeNashSutcliffeEff.Checked OrElse ucrChkRatioOfStandardDeviation.Checked OrElse ucrChkRatioOfRootMeanSquaredError.Checked OrElse ucrChkSumOfSquaredResiduals.Checked OrElse ucrChkVolumetricEfficiency.Checked Then
             clsDefaultFunction.AddParameter("y", ucrReceiverSecondVariable.GetVariableNames, iPosition:=3)
         Else

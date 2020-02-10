@@ -123,7 +123,10 @@ Public Class dlgColumnStats
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'temporary fix
+        If bReset Then
+            SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        End If
     End Sub
 
     Private Sub SetDefaultColumns()
