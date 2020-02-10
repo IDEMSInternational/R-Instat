@@ -304,31 +304,31 @@ Public Class sdgSummaries
         ucrChkNormRootMeanSquaredError.SetParameter(New RParameter("normalised_mean_squared_error", 40), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "normalised_mean_squared_error" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkNormRootMeanSquaredError.SetText(" Normalized root mean squared error")
 
-        ucrChkNashSutcliffeEfficiency.SetParameter(New RParameter("", 41), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkNashSutcliffeEfficiency.SetParameter(New RParameter("Nash_Sutcliffe_efficiency", 41), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "Nash_Sutcliffe_efficiency" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkNashSutcliffeEfficiency.SetText("Nash-Sutcliffe efficiency")
 
-        ucrChkPercentBias.SetParameter(New RParameter("", 42), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkPercentBias.SetParameter(New RParameter("percent_bias", 42), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "percent_bias" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkPercentBias.SetText("Percent Bias")
 
-        ucrChkRelativeIndexOfAgreement.SetParameter(New RParameter("", 43), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkRelativeIndexOfAgreement.SetParameter(New RParameter("relative_index_agreement", 43), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "relative_index_agreement" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkRelativeIndexOfAgreement.SetText("Relative index of agreement")
 
-        ucrChkRootMeanSquaredError.SetParameter(New RParameter("", 44), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkRootMeanSquaredError.SetParameter(New RParameter("root_mean_square_error", 44), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "root_mean_square_error" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkRootMeanSquaredError.SetText("Root mean squared error")
 
-        ucrChkRelativeNashSutcliffeEff.SetParameter(New RParameter("", 45), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkRelativeNashSutcliffeEff.SetParameter(New RParameter("relative_Nash_Sutcliffe", 45), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "relative_Nash_Sutcliffe" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkRelativeNashSutcliffeEff.SetText("Relative Nash-Sutcliffe efficiency")
 
-        ucrChkRatioOfStandardDeviation.SetParameter(New RParameter("", 46), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkRatioOfStandardDeviation.SetParameter(New RParameter("ratio_standard_deviations", 46), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "ratio_standard_deviations" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkRatioOfStandardDeviation.SetText("Ratio of standard deviations")
 
-        ucrChkRatioOfRootMeanSquaredError.SetParameter(New RParameter("", 46), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkRatioOfRootMeanSquaredError.SetParameter(New RParameter("ratio_RMSE", 46), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "ratio_RMSE" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkRatioOfRootMeanSquaredError.SetText("Ratio of root mean square error")
 
-        ucrChkSumOfSquaredResiduals.SetParameter(New RParameter("", 46), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkSumOfSquaredResiduals.SetParameter(New RParameter("sum_squared_residuals", 46), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "sum_squared_residuals" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkSumOfSquaredResiduals.SetText("Sum of squared residuals")
 
-        ucrChkVolumetricEfficiency.SetParameter(New RParameter("", 46), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkVolumetricEfficiency.SetParameter(New RParameter("volumetric_efficiency", 46), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "volumetric_efficiency" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkVolumetricEfficiency.SetText("Volumetric efficiency")
 
         lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean, ucrChkMaxNumMissing, ucrChkMinNumNonMissing, ucrChkMaxPercMissing, ucrChkConsecutiveMissing, ucrChkCircMean, ucrChkCircMedian, ucrChkMin, ucrChkMedianH, ucrChkMax, ucrChkQ1, ucrChkQ3, ucrChkQuantile, ucrChkSd, ucrChkVar, ucrChkAngVar, ucrChkAngDev, ucrChkrho, ucrChkCircRange, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency})
@@ -433,15 +433,15 @@ Public Class sdgSummaries
         ucrChkModNashSutcliffeEff.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkNormRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        'ucrChkNashSutcliffeEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        'ucrChkPercentBias.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        'ucrChkRelativeIndexOfAgreement.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        'ucrChkRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        'ucrChkRelativeNashSutcliffeEff.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        'ucrChkRatioOfStandardDeviation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        'ucrChkRatioOfRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        'ucrChkSumOfSquaredResiduals.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        'ucrChkVolumetricEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkNashSutcliffeEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkPercentBias.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkRelativeIndexOfAgreement.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkRelativeNashSutcliffeEff.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkRatioOfStandardDeviation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkRatioOfRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkSumOfSquaredResiduals.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkVolumetricEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             tbSummaries.SelectedIndex = 0

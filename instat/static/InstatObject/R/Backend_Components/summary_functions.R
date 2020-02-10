@@ -1066,7 +1066,86 @@ normalised_mean_squared_error <- function(x, y, na.rm = FALSE, na_type = "", ...
   }
 } 
 
+#Nash-Sutcliffe efficiency
+Nash_Sutcliffe_efficiency <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::NSeff(sim = x, obs = y, na.rm = na.rm))
+  }
+}
 
+#Percent bias
+percent_bias <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::pbias(sim = x, obs = y, na.rm = na.rm))
+  }
+}
+
+#Relative index of agreement
+relative_index_agreement <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::rd(sim = x, obs = y, na.rm = na.rm))
+  }
+}
+
+#Root mean square error
+root_mean_square_error <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::rmse(sim = x, obs = y, na.rm = na.rm))
+  }
+}
+
+#Relative Nash-Sutcliffe efficiency
+relative_Nash_Sutcliffe <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::rNSeff(sim = x, obs = y, na.rm = na.rm))
+  }
+}
+
+#Ratio of standard deviations
+ratio_standard_deviations <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::rSD(sim = x, obs = y, na.rm = na.rm))
+  }
+}
+
+#Ratio of RMSE
+ratio_RMSE <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::rsr(sim = x, obs = y, na.rm = na.rm))
+  }
+}
+
+#Sum of squared residuals
+sum_squared_residuals <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::ssq(sim = x, obs = y, na.rm = na.rm))
+  }
+}
+
+#Volumetric efficiency
+volumetric_efficiency <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::VE(sim = x, obs = y, na.rm = na.rm))
+  }
+}
 DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   if(n_column_factors == 1 && length(factors) == 0) n_column_factors <- 0
   if(n_column_factors > length(factors)) stop("n_column_factors must be <= number of factors specified.")
