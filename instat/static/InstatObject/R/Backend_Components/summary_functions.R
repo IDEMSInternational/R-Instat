@@ -989,11 +989,83 @@ coef_det <- function(x, y, na.rm = FALSE, na_type = "", ...){
 coef_pers <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
+    if(length(unique(y))==1||length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
     return(hydroGOF::cp(sim = x, obs = y, na.rm = na.rm))
   }
 }
 
-#
+#Index of agreement
+index_agreement <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::d(sim = x, obs = y, na.rm = na.rm))
+  }
+}
+
+#Kling-Gupta efficiency
+Kling_Gupta_efficiency <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::KGE(sim = x, obs = y, na.rm = na.rm))
+  }
+}
+
+#Mean absolute error
+mean_absolute_error <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::mae(sim = x, obs = y, na.rm = na.rm))
+  }
+} 
+
+#Modified index of aggrement
+modified_index_aggrement <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::md(sim = x, obs = y, na.rm = na.rm))
+  }
+} 
+
+#Mean error
+mean_error <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::me(sim = x, obs = y, na.rm = na.rm))
+  }
+} 
+
+#Modified Nash-Sutcliffe efficiency
+modified_Nash_Sutcliffe_efficiency <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::mNSE(sim = x, obs = y, na.rm = na.rm))
+  }
+} 
+
+#mean squared error
+mean_squared_error <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::mse(sim = x, obs = y, na.rm = na.rm))
+  }
+} 
+
+#Normalised mean square error
+normalised_mean_squared_error <- function(x, y, na.rm = FALSE, na_type = "", ...){
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
+    return(hydroGOF::nrmse(sim = x, obs = y, na.rm = na.rm))
+  }
+} 
+
 
 DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   if(n_column_factors == 1 && length(factors) == 0) n_column_factors <- 0
