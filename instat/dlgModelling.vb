@@ -25,7 +25,7 @@ Public Class dlgModelling
     Public clsRModelFunction As RFunction
     Public clsRYVariable, clsRXVariable As String
     Private ucrAvailableDataframe As ucrDataFrame
-    Public clsRAovFunction, clsRAovPValFunction, clsREstPValFunction, clsAutoplot, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
+    Public clsRAovFunction, clsRAovPValFunction, clsREstPValFunction, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
     Public clsVisReg, clsRaesFunction, clsRStat_smooth, clsR_ribbon, clsRaes_ribbon As New RFunction
     Public clsWhichFunction As RFunction
     Public bUpdating As Boolean = False
@@ -35,6 +35,7 @@ Public Class dlgModelling
     Private clsFittedValuesFunction, clsResidualFunction, clsRstandardFunction, clsHatvaluesFunction As New RFunction
 
     Private bResetDisplayOptions = False
+    Private dctPlotFunctions As New Dictionary(Of String, RFunction)
 
     Private Sub dlgModelling_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -63,6 +64,9 @@ Public Class dlgModelling
         ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorModelling.ucrAvailableDataFrames)
 
+        ucrTryModelling.SetReceiver(ucrReceiverForTestColumn)
+        ucrTryModelling.SetIsModel()
+
         ucrInputComboRPackage.SetItems({"stats", "extRemes", "lme4", "MASS"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
 
@@ -89,7 +93,6 @@ Public Class dlgModelling
         clsRWriteFitted = New RFunction
         clsSummaryFunction = New RFunction
         clsAnovaFunction = New RFunction
-        clsAutoplot = New RFunction
         clsRgeom_point = New RFunction
         clsVisReg = New RFunction
         clsRstandardFunction = New RFunction
@@ -107,16 +110,9 @@ Public Class dlgModelling
 
         ucrBase.clsRsyntax.SetCommandString("")
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm()", 1)
-        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
+
 
         ucrSaveResult.Reset()
-
-        ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 2
-
-        ucrChkIncludeArguments.Checked = False
-        ucrInputComboRPackage.SetName("stats")
 
         clsAttach.SetRCommand("attach")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorModelling.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
@@ -125,9 +121,16 @@ Public Class dlgModelling
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorModelling.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsDetach.AddParameter("unload", "TRUE", iPosition:=1)
 
+
+        ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 2
+
+        ucrChkIncludeArguments.Checked = False
+        ucrInputComboRPackage.SetName("stats")
+
         'Residual Plots
-        clsAutoplot = clsRegressionDefaults.clsDefaultAutoplot.Clone
-        clsAutoplot.bExcludeAssignedFunctionOutput = False
+        dctPlotFunctions = New Dictionary(Of String, RFunction)(clsRegressionDefaults.dctModelPlotFunctions)
 
         clsRgeom_point = clsRegressionDefaults.clsDefaultRgeom_pointFunction.Clone
 
@@ -196,6 +199,8 @@ Public Class dlgModelling
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach, 1000)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
+
+        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
 
         bResetDisplayOptions = True
         bUpdating = False
@@ -498,15 +503,12 @@ Public Class dlgModelling
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoplot, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesFunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorModelling.ucrAvailableDataFrames, bReset:=bResetDisplayOptions)
+        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, dctNewPlot:=dctPlotFunctions, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesFunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorModelling.ucrAvailableDataFrames, bReset:=bResetDisplayOptions)
         sdgSimpleRegOptions.ShowDialog()
         GraphAssignTo()
         bResetDisplayOptions = False
     End Sub
 
-    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
-        TryScript()
-    End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Dim clsHelp As New RFunction
@@ -531,57 +533,23 @@ Public Class dlgModelling
         SetObjectInFunctions()
     End Sub
 
-    Private Sub TryScript()
-        Dim strOutPut As String
-        Dim strAttach As String
-        Dim strDetach As String
-        Dim strTempScript As String = ""
-        Dim strVecOutput As CharacterVector
-        Dim clsCommandString As RCodeStructure
-
-        Try
-            If ucrReceiverForTestColumn.IsEmpty Then
-                ucrInputTryMessage.SetName("")
-            Else
-                'get strScript here
-                strAttach = clsAttach.Clone().ToScript(strTempScript)
-                frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
-                strTempScript = ""
-                clsCommandString = ucrBase.clsRsyntax.clsBaseCommandString.Clone()
-                clsCommandString.RemoveAssignTo()
-                strOutPut = clsCommandString.ToScript(strTempScript, ucrBase.clsRsyntax.strCommandString)
-                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript & strOutPut, bSilent:=True)
-                If strVecOutput IsNot Nothing Then
-                    If strVecOutput.Length > 1 Then
-                        ucrInputTryMessage.SetName("Model runs without error")
-                        ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
-                    End If
-                Else
-                    ucrInputTryMessage.SetName("Command produced an error or no output to display.")
-                    ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-                End If
-            End If
-        Catch ex As Exception
-            ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
-            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-        Finally
-            strTempScript = ""
-            strDetach = clsDetach.Clone().ToScript(strTempScript)
-            frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
-        End Try
-    End Sub
 
     Private Sub ucrReceiverForTestColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForTestColumn.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForTestColumn.GetVariableNames(False))
-        ucrInputTryMessage.SetName("")
-        cmdTry.Enabled = Not ucrReceiverForTestColumn.IsEmpty()
-        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
         TestOkEnabled()
     End Sub
 
     Private Sub GraphAssignTo()
+        'Dim lstPlotNames As New List(Of String)
+        'Dim i As Integer = 0
+
+        'lstPlotNames = New List(Of String)({"last_residplot", "last_qqplot", "last_scaleloc", "last_cooksdist", "last_residlev", "last_cookslev"})
+
         clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
-        clsAutoplot.SetAssignTo("last_autoplot", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_autoplot")
+        'For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
+        '    kvp.Value.SetAssignTo(lstPlotNames(index:=i), strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=lstPlotNames(index:=i))
+        '    i = i + 1
+        'Next
     End Sub
 
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverForTestColumn.ControlContentsChanged
@@ -604,7 +572,11 @@ Public Class dlgModelling
         clsSummaryFunction.AddParameter("object", strAssginTo)
         clsConfint.AddParameter("object", strAssginTo)
         clsVisReg.AddParameter("fit", strAssginTo)
-        clsAutoplot.AddParameter("object", strAssginTo)
+
+        For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
+            kvp.Value.AddParameter("x", strAssginTo, iPosition:=0)
+        Next
+
         clsResidualFunction.AddParameter("object", strAssginTo)
         clsFittedValuesFunction.AddParameter("object", strAssginTo)
         clsRstandardFunction.AddParameter("model", strAssginTo)
@@ -636,7 +608,10 @@ Public Class dlgModelling
         End Select
     End Sub
 
+
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ucrReceiverForTestColumn.AddtoCombobox(ucrReceiverForTestColumn.GetText)
     End Sub
+
+
 End Class

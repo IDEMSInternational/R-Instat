@@ -65,24 +65,48 @@ Public Class RLink
     Private iWaitDelay As Integer = 2
 
     Private strRVersionMajorRequired As String = "3"
-    Private strRVersionMinorRequired As String = "6"
+	Private strRVersionMinorRequired As String = "6"
+	Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0"
+	Private strRBundledVersion As String = "3.6.2"
 
-    Public Function StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True) As Boolean
+	Public Function StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True) As Boolean
         Dim strMissingPackages() As String
         Dim expTemp As SymbolicExpression
         Dim strMajor As String = ""
         Dim strMinor As String = ""
         Dim iCurrentCallType As Integer
         Dim bClose As Boolean = False
+        Dim strStaticPath = Path.GetFullPath("static")
+        Dim rHome = Path.Combine(strStaticPath, "R-" & strRBundledVersion)
+        Dim cpuArchitectureFolder = "i386"
 
         Try
-            REngine.SetEnvironmentVariables()
+            ' Get R .NET to use bundled R in static folder
+            ' This static folder is added as a part of the install process as described in 
+            ' installer/Installer_Generation_Guide.md
+            ' 
+            If Environment.Is64BitProcess Then
+                cpuArchitectureFolder = "x64"
+            End If
+            Dim rPath = Path.Combine(rHome, "bin", cpuArchitectureFolder)
+            Console.WriteLine("R Home: " & rHome)
+            Console.WriteLine("R Path: " & rPath)
+
+            ' Use bundled R if included
+            If Directory.Exists(rHome) And Directory.Exists(rPath) Then
+                Console.WriteLine("Using bundled R")
+                REngine.SetEnvironmentVariables(rPath, rHome)
+            Else
+                ' Use normal process for finding local R if bundled version not included
+                REngine.SetEnvironmentVariables()
+            End If
+
             clsEngine = REngine.GetInstance()
             clsEngine.Initialize()
         Catch ex As Exception
-            ' Modified message since currently we recommend use of R version 3.6.0
-            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 of R." & vbNewLine & "Note that R-Instat does not work with R below 3.5.0. We recommend using R 3.6.0.  Try reruning the installation to install R 3.6.0 or download R 3.6.0 from https://cran.r-project.org/bin/windows/base/old/3.6.0/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
-            Application.Exit()
+            ' Modified message since currently we recommend use of same R version as bundled version
+            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionRequired & " of R." & vbNewLine & "Note that R-Instat does not work with R below 3.5.0. We recommend using R " & strRBundledVersion & ".  Try reruning the installation to install R " & strRBundledVersion & " or download R " & strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
+			Application.Exit()
             Environment.Exit(0)
         End Try
         Try
@@ -91,22 +115,30 @@ Public Class RLink
                 strMajor = expTemp.AsCharacter(0)
             End If
             expTemp = RunInternalScriptGetValue("R.Version()$minor", bSilent:=True)
-            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                strMinor = expTemp.AsCharacter(0)
-            End If
-            If strMinor.Count >= 3 Then
+			If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+				strMinor = expTemp.AsCharacter(0)
+			End If
+			Dim strRVersionRunning = strMajor & "." & strMinor
+			If strMinor.Count >= 3 Then
                 If Not (strMajor = strRVersionMajorRequired AndAlso strMinor.Count > 0 AndAlso strMinor(0) >= strRVersionMinorRequired) Then
-                    MsgBox("Your current version of R is outdated. You are currently running R version: " & strMajor & "." & strMinor & vbNewLine & "R-Instat requires at least version " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0 or greater." & vbNewLine & "Try reruning the installation to install an updated version of R or download R from https://cran.r-project.org/bin/windows/base/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version not supported.")
-                    Application.Exit()
+					MsgBox("Your current version of R is outdated. You are currently running R version: " & strRVersionRunning & vbNewLine &
+						   "R-Instat requires at least version " & strRVersionRequired & " or greater." &
+						   vbNewLine & "Try reruning the installation to install an updated version of R or download R from " &
+						   "https://cran.r-project.org/bin/windows/base/" & strRVersionRequired & "and restart R-Instat.", MsgBoxStyle.Critical, "R Version not supported.")
+					Application.Exit()
                     Environment.Exit(0)
                 End If
             Else
-                MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0." & vbNewLine & "Try uninstalling any versions of R and rerun the installation to install R 3.6.0 or download R 3.6.0 from https://cran.r-project.org/bin/windows/base/old/3.6.0/ and restart R-Instat.", MsgBoxStyle.Critical, "R Version error.")
-                Application.Exit()
+				MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionRequired & vbNewLine &
+					   "Try uninstalling any versions of R and rerun the installation to install R " & strRVersionRequired & " or download R " &
+					   strRVersionRequired & "From https://cran.r-project.org/bin/windows/base/old/" & strRVersionRequired &
+					   "And restart R-Instat.", MsgBoxStyle.Critical, "R Version error.")
+				Application.Exit()
                 Environment.Exit(0)
             End If
         Catch ex As Exception
             MsgBox(ex.Message & Environment.NewLine & "Could not determine the version of R installed on your machine. We recommend rerunning the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "Cannot determine R version.")
+
             Application.Exit()
             Environment.Exit(0)
         End Try
@@ -115,6 +147,7 @@ Public Class RLink
             strScript = GetRSetupScript()
             iCallType = 0
             strComment = "Setting working directory, sourcing R code and loading R packages"
+
             bSeparateThread = True
         End If
         For Each strLine As String In strScript.Split(Environment.NewLine)
@@ -163,6 +196,7 @@ Public Class RLink
                 clsEngine.Dispose()
             Catch ex As Exception
                 MsgBox("Could not dispose for the connection to R" & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Cannot close R connection.")
+
             End Try
         End If
     End Sub
@@ -427,6 +461,7 @@ Public Class RLink
             End If
         Catch ex As Exception
             'MsgBox("Could not add script to auto save log file at:" & frmMain.strAutoSaveLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Auot save Log File")
+
             bAutoSaveLogExists = False
         Finally
             bFirstLogCode = False
@@ -444,6 +479,7 @@ Public Class RLink
         Dim clsPNGFunction As New RFunction
         Dim strTempAssignTo As String = ".temp_val"
         Dim bSuccess As Boolean
+        Dim bError As Boolean = False
 
         strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
         strOutput = ""
@@ -489,7 +525,8 @@ Public Class RLink
                         If Not bSuccess Then
                             Evaluate("graphics.off()", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                             strGraphDisplayOption = "view_R_viewer"
-                            MsgBox("A problem occured saving graphs in the temporary location: " & strTempGraphsDirectory & vbNewLine & vbNewLine & "To ensure graphs can still be viewed, graphs will now appear in a pop up R viewer." & vbNewLine & "Restarting R-Instat and/or your machine usually resolves this. You can change this setting back in Tools > Options: 'Graph Display' if this later becomes resolved.", MsgBoxStyle.Exclamation)
+                            MsgBox("A problem occured saving graphs in the temporary location " & strTempGraphsDirectory & vbNewLine & vbNewLine & "To ensure graphs can still be viewed, graphs will now appear in a pop up R viewer." & vbNewLine & "Restarting R-Instat and/or your machine usually resolves this. You can change this setting back in Tools > Options: 'Graph Display' if this later becomes resolved.", MsgBoxStyle.Exclamation)
+
                         End If
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
@@ -558,7 +595,7 @@ Public Class RLink
                 strSplitScript = Left(strScript, strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray))
                 If strSplitScript <> "" Then
                     Try
-                        Evaluate(strSplitScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                        bError = Not Evaluate(strSplitScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                     Catch e As Exception
                         MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                     End Try
@@ -567,12 +604,16 @@ Public Class RLink
                 strCapturedScript = "capture.output(" & strSplitScript & ")"
             End If
             Try
-                Evaluate(strTempAssignTo & " <- " & strCapturedScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-                expTemp = GetSymbol(strTempAssignTo)
-                If expTemp IsNot Nothing Then
-                    strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
-                    If strTemp <> "" Then
-                        strOutput = strOutput & strTemp & Environment.NewLine
+                If Not bError Then
+                    If Evaluate(strTempAssignTo & " <- " & strCapturedScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride) Then
+                        expTemp = GetSymbol(strTempAssignTo)
+                        Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
+                        If expTemp IsNot Nothing Then
+                            strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
+                            If strTemp <> "" Then
+                                strOutput = strOutput & strTemp & Environment.NewLine
+                            End If
+                        End If
                     End If
                 End If
             Catch e As Exception
@@ -592,15 +633,15 @@ Public Class RLink
         End If
     End Sub
 
-    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing) As SymbolicExpression
+    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional ByRef strError As String = "") As SymbolicExpression
         Dim expTemp As SymbolicExpression
         Dim strCommand As String
 
         expTemp = Nothing
         'TODO Bug here if strScript is multiple lines. Wrong value will be returned
-        strCommand = strVariableName & "<-" & strScript
+        strCommand = strVariableName & " <- " & strScript
         If clsEngine IsNot Nothing Then
-            Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+            Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride, strError:=strError)
             expTemp = GetSymbol(strVariableName, bSilent:=True)
             'Very important to remove the variable after getting it othewise could be returning wrong variable later if a command gives an error
             Evaluate("rm(" & strVariableName & ")", bSilent:=bSilent, bSeparateThread:=bSeparateThread)
@@ -608,11 +649,11 @@ Public Class RLink
         Return expTemp
     End Function
 
-    Public Function RunInternalScriptGetOutput(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing) As CharacterVector
+    Public Function RunInternalScriptGetOutput(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional ByRef strError As String = "") As CharacterVector
         Dim chrTemp As CharacterVector
         Dim expTemp As SymbolicExpression
 
-        expTemp = RunInternalScriptGetValue("capture.output(" & strScript & ")", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+        expTemp = RunInternalScriptGetValue("capture.output(" & strScript & ")", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride, strError:=strError)
         Try
             chrTemp = expTemp.AsCharacter()
         Catch ex As Exception
@@ -641,7 +682,7 @@ Public Class RLink
         End If
     End Function
 
-    Private Function Evaluate(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing) As Boolean
+    Private Function Evaluate(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional ByRef strError As String = "") As Boolean
         Dim thrRScript As Threading.Thread
         Dim thrDelay As Threading.Thread
         Dim thrWaitDisplay As Threading.Thread
@@ -649,6 +690,7 @@ Public Class RLink
         Dim evtWaitHandleDelayDone As New System.Threading.AutoResetEvent(False)
         Dim bReturn As Boolean = True
         Dim i As Integer = 1
+        Dim strTempError As String = ""
         Dim strTempFile As String
         Dim bErrorMessageOpen As Boolean = False
         Dim bCurrentShowWaiting As Boolean
@@ -716,6 +758,7 @@ Public Class RLink
                                                                   MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                                                                   bErrorMessageOpen = False
                                                               End If
+                                                              strTempError = ex.Message
                                                               bReturn = False
                                                           End Try
                                                       End Sub)
@@ -758,12 +801,14 @@ Public Class RLink
                 If Not bSilent Then
                     MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                 End If
+                strTempError = ex.Message
                 bReturn = False
             End Try
         Else
             bReturn = False
         End If
         bRCodeRunning = False
+        strError = strTempError
         Return bReturn
     End Function
 
@@ -1076,6 +1121,21 @@ Public Class RLink
             bExists = False
         End If
         Return bExists
+    End Function
+
+    Public Function GetDataFrameCount() As Integer
+        Dim iCount As Integer
+        Dim clsDataFrameCount As New RFunction
+        Dim expCount As SymbolicExpression
+
+        clsDataFrameCount.SetRCommand(strInstatDataObject & "$dataframe_count")
+        expCount = RunInternalScriptGetValue(clsDataFrameCount.ToScript(), bSilent:=True)
+        If expCount IsNot Nothing AndAlso Not expCount.Type = Internals.SymbolicExpressionType.Null Then
+            iCount = expCount.AsInteger(0)
+        Else
+            iCount = 0
+        End If
+        Return iCount
     End Function
 
     Public Function GetDataFrameLength(strDataFrameName As String, Optional bUseCurrentFilter As Boolean = False) As Integer
@@ -1440,11 +1500,22 @@ Public Class RLink
         RunScript(clsCreateIO.ToScript(), strComment:="Creating New Instat Object")
     End Sub
 
-    Public Sub ViewLastGraph()
+    Public Sub ViewLastGraph(Optional bAsPlotly As Boolean = False)
         Dim clsLastGraph As New RFunction
+        Dim clsInteractivePlot As New RFunction
 
         clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
-        RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bSeparateThread:=False)
+
+        If bAsPlotly Then
+            clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
+            clsInteractivePlot.SetPackageName("plotly")
+            clsInteractivePlot.SetRCommand("ggplotly")
+            clsInteractivePlot.AddParameter("p", clsRFunctionParameter:=clsLastGraph, iPosition:=0)
+            'Need to set iCallType = 2 to obtain a graph in an interactive viewer.
+            RunScript(clsInteractivePlot.ToScript(), iCallType:=2, strComment:="View last graph as Plotly", bSeparateThread:=False)
+        Else
+            RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bSeparateThread:=False)
+        End If
     End Sub
 
     'construct and format the comment

@@ -45,8 +45,6 @@ Public Class ucrDataView
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
 
     Private Sub ucrDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        mnuFreezeToHere.Enabled = False
-        mnuUnfreeze.Enabled = False
         grdData.Visible = False
         mnuInsertColsBefore.Visible = False
         mnuInsertColsAfter.Visible = False
@@ -635,7 +633,7 @@ Public Class ucrDataView
         dlgSort.ShowDialog()
     End Sub
 
-    Private Sub mnuFreezeToHere_Click(sender As Object, e As EventArgs) Handles mnuFreezeToHere.Click
+    Private Sub mnuFreezeToHere_Click(sender As Object, e As EventArgs)
         Dim strLastSelectedColumn As String
         Dim strSelectedColumns As String()
 
@@ -647,7 +645,7 @@ Public Class ucrDataView
         End If
     End Sub
 
-    Private Sub mnuUnfreeze_Click(sender As Object, e As EventArgs) Handles mnuUnfreeze.Click
+    Private Sub mnuUnfreeze_Click(sender As Object, e As EventArgs)
         RunScriptFromDataView(clsUnfreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
     End Sub
 
@@ -677,14 +675,18 @@ Public Class ucrDataView
         End If
     End Sub
 
-    Private Sub copyRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles copyRangeToolStripMenuItem.Click
+    Private Sub mnuCellCopyRange_Click(sender As Object, e As EventArgs) Handles mnuCellCopyRange.Click
         grdData.CurrentWorksheet.Copy()
     End Sub
 
     Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
+        Dim strScript As String = ""
+        Dim strTemp As String
         clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
-        clsViewDataFrame.AddParameter("title", Chr(34) & grdCurrSheet.Name & Chr(34))
-        RunScriptFromDataView(clsViewDataFrame.ToScript, strComment:="Right Click Menu: View R Data Frame", bSeparateThread:=False)
+        clsGetDataFrame.SetAssignTo(grdCurrSheet.Name)
+        strTemp = clsViewDataFrame.ToScript(strScript)
+        RunScriptFromDataView(strScript & strTemp, strComment:="Right Click Menu: View R Data Frame", bSeparateThread:=False)
+
     End Sub
 
     'Private Sub mnuConvertDate_Click(sender As Object, e As EventArgs)
@@ -707,7 +709,7 @@ Public Class ucrDataView
         dlgAddComment.ShowDialog()
     End Sub
 
-    Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddComment.Click
+    Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgAddComment.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgAddComment.ShowDialog()
     End Sub
@@ -782,7 +784,84 @@ Public Class ucrDataView
         dlgReorderColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuCellHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
+    End Sub
+
+    Private Sub lblHeader_Click(sender As Object, e As EventArgs) Handles lblHeader.Click
+
+    End Sub
+
+    Private Sub mnuRenameColumn_Click(sender As Object, e As EventArgs) Handles mnuRenameColumn.Click
+        dlgName.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+        dlgName.ShowDialog()
+    End Sub
+
+    Private Sub mnuDuplColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplColumn.Click
+        dlgDuplicateColumns.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+        dlgDuplicateColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuReorderColumn_Click(sender As Object, e As EventArgs) Handles mnuReorderColumn.Click
+        dlgReorderColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuConvertToFact_Click(sender As Object, e As EventArgs) Handles mnuConvertToFact.Click
+        clsConvertTo.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
+        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
+    End Sub
+
+    Private Sub mnuConvertToOrderedFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToOrderedFactor.Click
+        clsConvertOrderedFactor.AddParameter("col_names", SelectedColumns())
+        clsConvertOrderedFactor.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34))
+        RunScriptFromDataView(clsConvertOrderedFactor.ToScript, strComment:="Right Click Menu: Convert to Ordered Factor")
+    End Sub
+
+    Private Sub mnuConvertToCharacter_Click(sender As Object, e As EventArgs) Handles mnuConvertToCharacter.Click
+        clsConvertTo.AddParameter("to_type", Chr(34) & "character" & Chr(34))
+        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Character")
+    End Sub
+
+    Private Sub mnuConvertToLogic_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogic.Click
+        clsConvertTo.AddParameter("to_type", Chr(34) & "logical" & Chr(34))
+        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Logical")
+    End Sub
+
+    Private Sub mnuConvertToNumeric_Click(sender As Object, e As EventArgs) Handles mnuConvertToNumeric.Click
+        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
+        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
+    End Sub
+
+    Private Sub mnuLebelsLevel_Click(sender As Object, e As EventArgs) Handles mnuLebelsLevel.Click
+        Dim strType As String
+        Dim strColumns() As String
+
+        strColumns = SelectedColumnsAsArray()
+        If strColumns.Count = 1 Then
+            strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
+            If strType.Contains("factor") Then
+                dlgLabelsLevels.SetCurrentColumn(strColumns(0), grdCurrSheet.Name)
+            End If
+        End If
+        dlgLabelsLevels.ShowDialog()
+    End Sub
+
+    Private Sub mnuSorts_Click(sender As Object, e As EventArgs) Handles mnuSorts.Click
+        dlgSort.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+        dlgSort.ShowDialog()
+    End Sub
+
+    Private Sub mnuFilters_Click(sender As Object, e As EventArgs) Handles mnuFilters.Click
+        dlgRestrict.bIsSubsetDialog = False
+        dlgRestrict.strDefaultDataframe = grdCurrSheet.Name
+        dlgRestrict.ShowDialog()
+    End Sub
+
+    Private Sub mnuRemoveCurrentFilters_Click(sender As Object, e As EventArgs) Handles mnuRemoveCurrentFilters.Click
+        RunScriptFromDataView(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
     End Sub
 End Class

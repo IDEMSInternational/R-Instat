@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgHypothesisTestsCalculator
@@ -22,6 +23,7 @@ Public Class dlgHypothesisTestsCalculator
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
     Private strPackageName As String
+    Private clsSummary As New RFunction
     Private Sub dlgHypothesisTestsCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -40,6 +42,8 @@ Public Class dlgHypothesisTestsCalculator
         ucrReceiverForTestColumn.SetMeAsReceiver()
         ucrChkIncludeArguments.SetText("Include Arguments")
         ucrChkBy.SetText("By")
+        ucrChkDisplayModel.SetText("Display Model")
+        ucrChkSummaryModel.SetText("Summary Model")
         ucrBase.clsRsyntax.SetCommandString("")
         ucrSaveResult.SetPrefix("Test")
         ucrSaveResult.SetIsComboBox()
@@ -48,7 +52,7 @@ Public Class dlgHypothesisTestsCalculator
         ucrSaveResult.SetAssignToIfUncheckedValue("Last_Test")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorColumn.ucrAvailableDataFrames)
 
-        ucrInputComboRPackage.SetItems({"Stats1", "Stats2", "Agricolae"})
+        ucrInputComboRPackage.SetItems({"Stats1", "Stats2", "Agricolae", "Verification"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
         'Tooltips for conf & and Alt Buttons
         tpConf.SetToolTip(cmdConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
@@ -57,6 +61,8 @@ Public Class dlgHypothesisTestsCalculator
         ucrChkBy.Enabled = False
         ucrReceiverMultiple.Enabled = False
         ucrChkBy.AddToLinkedControls(ucrReceiverMultiple, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrTryModelling.SetReceiver(ucrReceiverForTestColumn)
+        ucrTryModelling.SetIsCommand()
     End Sub
 
     Private Sub SetDefaults()
@@ -67,15 +73,20 @@ Public Class dlgHypothesisTestsCalculator
         ucrBase.clsRsyntax.SetAssignTo("Last_Test", strTempModel:="Last_Test", strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
+        ucrChkDisplayModel.Checked = True
         ucrChkIncludeArguments.Checked = False
+        ucrChkSummaryModel.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"}, bNewIsPositive:=True)
         ucrInputComboRPackage.SetName("Stats1")
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
+        clsSummary.SetRCommand("summary")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsSummary.AddParameter("object", clsRCodeStructureParameter:=ucrBase.clsRsyntax.clsBaseCommandString, iPosition:=0)
         clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
+        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
@@ -84,9 +95,6 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub ucrReceiverForTestColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForTestColumn.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForTestColumn.GetVariableNames(False))
-        ucrInputTryMessage.SetName("")
-        cmdTry.Enabled = Not ucrReceiverForTestColumn.IsEmpty()
-        ucrInputTryMessage.txtInput.BackColor = SystemColors.Window
         TestOKEnabled()
     End Sub
 
@@ -132,51 +140,6 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdAlt_Click(sender As Object, e As EventArgs) Handles cmdAlt.Click
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("Alt=""two""")
-    End Sub
-
-    Private Sub TryScript()
-        Dim strOutPut As String
-        Dim strAttach As String
-        Dim strDetach As String
-        Dim strTempScript As String = ""
-        Dim strVecOutput As CharacterVector
-        Dim clsCommandString As RCodeStructure
-
-        Try
-            If ucrReceiverForTestColumn.IsEmpty Then
-                ucrInputTryMessage.SetName("")
-            Else
-                'get strScript here
-                strAttach = clsAttach.Clone().ToScript(strTempScript)
-                frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
-                strTempScript = ""
-                clsCommandString = ucrBase.clsRsyntax.clsBaseCommandString.Clone()
-                clsCommandString.RemoveAssignTo()
-                strOutPut = clsCommandString.ToScript(strTempScript, ucrBase.clsRsyntax.strCommandString)
-                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript & strOutPut, bSilent:=True)
-                If strVecOutput IsNot Nothing Then
-                    If strVecOutput.Length > 1 Then
-                        ucrInputTryMessage.SetName("Model runs without error")
-                        ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
-                    End If
-                Else
-                    ucrInputTryMessage.SetName("Command produced an error or no output to display.")
-                    ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-                End If
-            End If
-        Catch ex As Exception
-            ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
-            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-        Finally
-            strTempScript = ""
-            strDetach = clsDetach.Clone().ToScript(strTempScript)
-            frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
-        End Try
-    End Sub
-
-
-    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
-        TryScript()
     End Sub
 
     Private Sub cmdBartlett_Click(sender As Object, e As EventArgs) Handles cmdBartlett.Click
@@ -608,16 +571,25 @@ Public Class dlgHypothesisTestsCalculator
                 grpAgricolae.Visible = False
                 grpStats1.Visible = True
                 grpStats2.Visible = False
+                grpVerification.Visible = False
             Case "Stats2"
                 strPackageName = "stats"
                 grpAgricolae.Visible = False
                 grpStats1.Visible = False
                 grpStats2.Visible = True
+                grpVerification.Visible = False
             Case "Agricolae"
                 strPackageName = "agricolae"
                 grpStats1.Visible = False
                 grpStats2.Visible = False
                 grpAgricolae.Visible = True
+                grpVerification.Visible = False
+            Case "Verification"
+                strPackageName = "verification"
+                grpStats1.Visible = False
+                grpStats2.Visible = False
+                grpAgricolae.Visible = False
+                grpVerification.Visible = True
         End Select
     End Sub
 
@@ -644,4 +616,47 @@ Public Class dlgHypothesisTestsCalculator
         ucrReceiverForTestColumn.AddtoCombobox(ucrReceiverForTestColumn.GetText)
     End Sub
 
+    Private Sub cmdBinary_Click(sender As Object, e As EventArgs) Handles cmdBinary.Click
+        clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs = , pred, p = NULL, baseline = NULL, frcst.type = ""prob"", obs.type = ""binary"",thresholds = seq(0,1,0.1), show = TRUE, bins = TRUE,fudge = 0.01)", 142)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs = , pred = , frcst.type = ""bin"", obs.type = ""bin"" )", 50)
+        End If
+    End Sub
+
+    Private Sub cmdCat_Click(sender As Object, e As EventArgs) Handles cmdCat.Click
+        clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs = , pred, p = NULL, baseline = NULL, frcst.type = ""prob"", obs.type = ""binary"",thresholds = seq(0,1,0.1), show = TRUE, bins = TRUE,fudge = 0.01)", 142)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs = , pred = , frcst.type = ""cat"", obs.type = ""cat"" )", 50)
+        End If
+    End Sub
+
+    Private Sub cmdCont_Click(sender As Object, e As EventArgs) Handles cmdCont.Click
+        clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs = , pred, p = NULL, baseline = NULL, frcst.type = ""prob"", obs.type = ""binary"",thresholds = seq(0,1,0.1), show = TRUE, bins = TRUE,fudge = 0.01)", 142)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs = , pred = , frcst.type = ""cont"", obs.type = ""cont"" )", 52)
+        End If
+    End Sub
+
+    Private Sub ucrChkSummaryDisplayModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummaryModel.ControlValueChanged
+        If ucrChkSummaryModel.Checked Then
+            clsSummary.iCallType = 2
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSummary, 0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummary)
+        End If
+    End Sub
+
+    Private Sub ucrChkDisplayModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayModel.ControlValueChanged
+        If ucrChkDisplayModel.Checked Then
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        Else
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        End If
+    End Sub
 End Class

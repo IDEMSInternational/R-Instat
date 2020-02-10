@@ -94,7 +94,7 @@ Public Class clsGridLink
         clsGetCombinedMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_combined_metadata")
         clsSetMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_metadata_changed")
 
-        If frmMain.clsRLink.bInstatObjectExists Then
+        If frmMain.clsRLink.bInstatObjectExists AndAlso frmMain.clsRLink.GetDataFrameCount() > 0 Then
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsDataChanged.ToScript())
             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                 bRDataChanged = expTemp.AsLogical(0)
