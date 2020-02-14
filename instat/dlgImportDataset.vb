@@ -262,6 +262,7 @@ Public Class dlgImportDataset
 
         ucrNudRowsToSkipExcel.SetParameter(New RParameter("skip"))
         ucrNudRowsToSkipExcel.Minimum = 0
+        ucrNudRowsToSkipExcel.Maximum = Decimal.MaxValue
         ucrNudRowsToSkipExcel.SetRDefault(0)
 
         ucrChkColumnNamesExcel.SetText("First Row is Column Headers")
@@ -792,6 +793,7 @@ Public Class dlgImportDataset
         clbSheets.Items.Clear()
         If chrSheets IsNot Nothing AndAlso chrSheets.Count > 0 Then
             clbSheets.Items.AddRange(chrSheets.ToArray())
+
             clbSheets.SetItemChecked(0, True)
         End If
 

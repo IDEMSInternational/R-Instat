@@ -1502,7 +1502,7 @@ Modify options or select a different file.</value>
     <value>6</value>
   </data>
   <data name="grpText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 130</value>
+    <value>255, 136</value>
   </data>
   <data name="grpText.Size" type="System.Drawing.Size, System.Drawing">
     <value>227, 204</value>
@@ -1538,7 +1538,7 @@ Modify options or select a different file.</value>
     <value>NoControl</value>
   </data>
   <data name="rdoSeparatortext.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 83</value>
+    <value>10, 49</value>
   </data>
   <data name="rdoSeparatortext.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 40</value>
@@ -1574,7 +1574,7 @@ Modify options or select a different file.</value>
     <value>NoControl</value>
   </data>
   <data name="rdoFixedWidthText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 83</value>
+    <value>101, 49</value>
   </data>
   <data name="rdoFixedWidthText.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 40</value>
@@ -1610,7 +1610,7 @@ Modify options or select a different file.</value>
     <value>NoControl</value>
   </data>
   <data name="rdoFixedWidthWhiteSpacesText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 83</value>
+    <value>192, 49</value>
   </data>
   <data name="rdoFixedWidthWhiteSpacesText.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 40</value>
@@ -1773,7 +1773,7 @@ white spaces</value>
     <value>10</value>
   </data>
   <data name="ucrPanelFixedWidthText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 80</value>
+    <value>8, 49</value>
   </data>
   <data name="ucrPanelFixedWidthText.Size" type="System.Drawing.Size, System.Drawing">
     <value>279, 45</value>
@@ -1794,13 +1794,13 @@ white spaces</value>
     <value>11</value>
   </data>
   <data name="ucrSaveFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 52</value>
+    <value>10, 510</value>
   </data>
   <data name="ucrSaveFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 24</value>
+    <value>389, 24</value>
   </data>
   <data name="ucrSaveFile.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1845,7 +1845,7 @@ white spaces</value>
     <value>17</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 508</value>
+    <value>10, 535</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1875,7 +1875,7 @@ white spaces</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>730, 569</value>
+    <value>730, 588</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
