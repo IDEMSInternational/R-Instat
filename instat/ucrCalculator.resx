@@ -13320,282 +13320,6 @@
   <data name="&gt;&gt;cmdAny1.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;cmdVE.Name" xml:space="preserve">
-    <value>cmdVE</value>
-  </data>
-  <data name="&gt;&gt;cmdVE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdVE.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdVE.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cmdSsq.Name" xml:space="preserve">
-    <value>cmdSsq</value>
-  </data>
-  <data name="&gt;&gt;cmdSsq.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdSsq.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdSsq.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cmdRsr.Name" xml:space="preserve">
-    <value>cmdRsr</value>
-  </data>
-  <data name="&gt;&gt;cmdRsr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdRsr.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdRsr.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;cmdRSD.Name" xml:space="preserve">
-    <value>cmdRSD</value>
-  </data>
-  <data name="&gt;&gt;cmdRSD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdRSD.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdRSD.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;cmdRPearson.Name" xml:space="preserve">
-    <value>cmdRPearson</value>
-  </data>
-  <data name="&gt;&gt;cmdRPearson.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdRPearson.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdRPearson.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;cmdRNSE.Name" xml:space="preserve">
-    <value>cmdRNSE</value>
-  </data>
-  <data name="&gt;&gt;cmdRNSE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdRNSE.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdRNSE.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;cmdRmse.Name" xml:space="preserve">
-    <value>cmdRmse</value>
-  </data>
-  <data name="&gt;&gt;cmdRmse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdRmse.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdRmse.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;cmdRd.Name" xml:space="preserve">
-    <value>cmdRd</value>
-  </data>
-  <data name="&gt;&gt;cmdRd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdRd.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdRd.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;cmdPbiasfde.Name" xml:space="preserve">
-    <value>cmdPbiasfde</value>
-  </data>
-  <data name="&gt;&gt;cmdPbiasfde.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdPbiasfde.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdPbiasfde.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;cmdPbias.Name" xml:space="preserve">
-    <value>cmdPbias</value>
-  </data>
-  <data name="&gt;&gt;cmdPbias.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdPbias.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdPbias.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;cmdNSE.Name" xml:space="preserve">
-    <value>cmdNSE</value>
-  </data>
-  <data name="&gt;&gt;cmdNSE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdNSE.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdNSE.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;cmdNrmse.Name" xml:space="preserve">
-    <value>cmdNrmse</value>
-  </data>
-  <data name="&gt;&gt;cmdNrmse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdNrmse.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdNrmse.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;cmdMse.Name" xml:space="preserve">
-    <value>cmdMse</value>
-  </data>
-  <data name="&gt;&gt;cmdMse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdMse.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdMse.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;cmdmNSE.Name" xml:space="preserve">
-    <value>cmdmNSE</value>
-  </data>
-  <data name="&gt;&gt;cmdmNSE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdmNSE.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdmNSE.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;cmdMe.Name" xml:space="preserve">
-    <value>cmdMe</value>
-  </data>
-  <data name="&gt;&gt;cmdMe.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdMe.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdMe.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;cmdMd.Name" xml:space="preserve">
-    <value>cmdMd</value>
-  </data>
-  <data name="&gt;&gt;cmdMd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdMd.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdMd.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;cmdMae.Name" xml:space="preserve">
-    <value>cmdMae</value>
-  </data>
-  <data name="&gt;&gt;cmdMae.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdMae.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdMae.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;cmdKGE.Name" xml:space="preserve">
-    <value>cmdKGE</value>
-  </data>
-  <data name="&gt;&gt;cmdKGE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdKGE.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdKGE.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;cmdV.Name" xml:space="preserve">
-    <value>cmdV</value>
-  </data>
-  <data name="&gt;&gt;cmdV.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdV.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdV.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;cmdCp.Name" xml:space="preserve">
-    <value>cmdCp</value>
-  </data>
-  <data name="&gt;&gt;cmdCp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdCp.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdCp.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;cmdBr2.Name" xml:space="preserve">
-    <value>cmdBr2</value>
-  </data>
-  <data name="&gt;&gt;cmdBr2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdBr2.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;cmdBr2.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="grpHydrogof.Location" type="System.Drawing.Point, System.Drawing">
-    <value>569, 75</value>
-  </data>
-  <data name="grpHydrogof.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 301</value>
-  </data>
-  <data name="grpHydrogof.TabIndex" type="System.Int32, mscorlib">
-    <value>195</value>
-  </data>
-  <data name="grpHydrogof.Text" xml:space="preserve">
-    <value>hydroGOF </value>
-  </data>
-  <data name="&gt;&gt;grpHydrogof.Name" xml:space="preserve">
-    <value>grpHydrogof</value>
-  </data>
-  <data name="&gt;&gt;grpHydrogof.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpHydrogof.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpHydrogof.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="cmdVE.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -13618,7 +13342,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdVE.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdVE.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -13645,7 +13369,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdSsq.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdSsq.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -13672,7 +13396,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdRsr.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdRsr.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -13699,7 +13423,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdRSD.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdRSD.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -13726,7 +13450,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdRPearson.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdRPearson.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -13753,7 +13477,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdRNSE.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdRNSE.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -13780,7 +13504,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdRmse.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdRmse.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -13807,7 +13531,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdRd.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdRd.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -13834,7 +13558,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdPbiasfde.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdPbiasfde.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -13861,7 +13585,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdPbias.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdPbias.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -13888,7 +13612,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdNSE.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdNSE.ZOrder" xml:space="preserve">
     <value>10</value>
@@ -13915,7 +13639,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdNrmse.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdNrmse.ZOrder" xml:space="preserve">
     <value>11</value>
@@ -13942,7 +13666,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdMse.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdMse.ZOrder" xml:space="preserve">
     <value>12</value>
@@ -13969,7 +13693,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdmNSE.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdmNSE.ZOrder" xml:space="preserve">
     <value>13</value>
@@ -13996,7 +13720,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdMe.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdMe.ZOrder" xml:space="preserve">
     <value>14</value>
@@ -14023,7 +13747,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdMd.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdMd.ZOrder" xml:space="preserve">
     <value>15</value>
@@ -14050,7 +13774,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdMae.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdMae.ZOrder" xml:space="preserve">
     <value>16</value>
@@ -14077,7 +13801,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdKGE.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdKGE.ZOrder" xml:space="preserve">
     <value>17</value>
@@ -14104,7 +13828,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdV.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdV.ZOrder" xml:space="preserve">
     <value>18</value>
@@ -14131,7 +13855,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdCp.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdCp.ZOrder" xml:space="preserve">
     <value>19</value>
@@ -14158,10 +13882,34 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmdBr2.Parent" xml:space="preserve">
-    <value>grpHydrogof</value>
+    <value>grpHydroGOF</value>
   </data>
   <data name="&gt;&gt;cmdBr2.ZOrder" xml:space="preserve">
     <value>20</value>
+  </data>
+  <data name="grpHydroGOF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>569, 75</value>
+  </data>
+  <data name="grpHydroGOF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 301</value>
+  </data>
+  <data name="grpHydroGOF.TabIndex" type="System.Int32, mscorlib">
+    <value>195</value>
+  </data>
+  <data name="grpHydroGOF.Text" xml:space="preserve">
+    <value>hydroGOF </value>
+  </data>
+  <data name="&gt;&gt;grpHydroGOF.Name" xml:space="preserve">
+    <value>grpHydroGOF</value>
+  </data>
+  <data name="&gt;&gt;grpHydroGOF.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpHydroGOF.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpHydroGOF.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrTryCalculator.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 315</value>
