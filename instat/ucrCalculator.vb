@@ -2674,4 +2674,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rPearson()", 1)
         End If
     End Sub
+
+    Private Sub cmdRSD_Click(sender As Object, e As EventArgs) Handles cmdRSD.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rSD(sim = , obs = )", 8)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rSD()", 1)
+        End If
+    End Sub
 End Class
