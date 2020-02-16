@@ -2658,4 +2658,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rmse()", 1)
         End If
     End Sub
+
+    Private Sub cmdRNSE_Click(sender As Object, e As EventArgs) Handles cmdRNSE.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rNSE(sim = , obs = )", 8)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rNSE()", 1)
+        End If
+    End Sub
 End Class
