@@ -2541,7 +2541,7 @@ Public Class ucrCalculator
 
     Private Sub cmdBr2_Click(sender As Object, e As EventArgs) Handles cmdBr2.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2()", 1)
         End If
@@ -2549,7 +2549,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCp_Click(sender As Object, e As EventArgs) Handles cmdCp.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::cp(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::cp(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::cp()", 1)
         End If
@@ -2557,7 +2557,7 @@ Public Class ucrCalculator
 
     Private Sub cmdV_Click(sender As Object, e As EventArgs) Handles cmdV.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2()", 1)
         End If
@@ -2565,7 +2565,7 @@ Public Class ucrCalculator
 
     Private Sub cmdKGE_Click(sender As Object, e As EventArgs) Handles cmdKGE.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::KGE(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::KGE(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::KGE()", 1)
         End If
@@ -2573,7 +2573,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMae_Click(sender As Object, e As EventArgs) Handles cmdMae.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mae(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mae(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mae()", 1)
         End If
@@ -2581,7 +2581,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMd_Click(sender As Object, e As EventArgs) Handles cmdMd.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::md(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::md(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::md()", 1)
         End If
@@ -2589,7 +2589,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMe_Click(sender As Object, e As EventArgs) Handles cmdMe.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::me(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::me(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::me()", 1)
         End If
@@ -2597,7 +2597,7 @@ Public Class ucrCalculator
 
     Private Sub cmdmNSE_Click(sender As Object, e As EventArgs) Handles cmdmNSE.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mNSE(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mNSE(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mNSE()", 1)
         End If
@@ -2605,7 +2605,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMse_Click(sender As Object, e As EventArgs) Handles cmdMse.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mse(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mse(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mse()", 1)
         End If
@@ -2613,7 +2613,7 @@ Public Class ucrCalculator
 
     Private Sub cmdNrmse_Click(sender As Object, e As EventArgs) Handles cmdNrmse.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::nrmse(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::nrmse(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::nrmse()", 1)
         End If
@@ -2621,7 +2621,7 @@ Public Class ucrCalculator
 
     Private Sub cmdNSE_Click(sender As Object, e As EventArgs) Handles cmdNSE.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::NSE(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::NSE(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::NSE()", 1)
         End If
@@ -2629,7 +2629,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPbias_Click(sender As Object, e As EventArgs) Handles cmdPbias.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::pbias(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::pbias(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::pbias()", 1)
         End If
@@ -2637,7 +2637,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPbiasfde_Click(sender As Object, e As EventArgs) Handles cmdPbiasfde.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::pbiasfdc(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::pbiasfdc(sim = , obs = , plot = FALSE)", 16)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::pbiasfdc()", 1)
         End If
@@ -2645,7 +2645,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRd_Click(sender As Object, e As EventArgs) Handles cmdRd.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rd(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rd(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rd()", 1)
         End If
@@ -2653,7 +2653,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRmse_Click(sender As Object, e As EventArgs) Handles cmdRmse.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rmse(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rmse(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rmse()", 1)
         End If
@@ -2661,7 +2661,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRNSE_Click(sender As Object, e As EventArgs) Handles cmdRNSE.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rNSE(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rNSE(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rNSE()", 1)
         End If
@@ -2669,7 +2669,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRPearson_Click(sender As Object, e As EventArgs) Handles cmdRPearson.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rPearson(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rPearson(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rPearson()", 1)
         End If
@@ -2677,7 +2677,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRSD_Click(sender As Object, e As EventArgs) Handles cmdRSD.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rSD(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rSD(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rSD()", 1)
         End If
@@ -2685,7 +2685,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRsr_Click(sender As Object, e As EventArgs) Handles cmdRsr.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rsr(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rsr(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::rsr()", 1)
         End If
@@ -2693,9 +2693,17 @@ Public Class ucrCalculator
 
     Private Sub cmdSsq_Click(sender As Object, e As EventArgs) Handles cmdSsq.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::ssq(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::ssq(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::ssq()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdVE_Click(sender As Object, e As EventArgs) Handles cmdVE.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::VE(sim = , obs = )", 10)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::VE()", 1)
         End If
     End Sub
 End Class
