@@ -10503,85 +10503,85 @@
   <data name="&gt;&gt;Button13.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="Button12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdPbias.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button12.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdPbias.Location" type="System.Drawing.Point, System.Drawing">
     <value>169, 144</value>
   </data>
-  <data name="Button12.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdPbias.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 33</value>
   </data>
-  <data name="Button12.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdPbias.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="Button12.Text" xml:space="preserve">
-    <value>br2</value>
+  <data name="cmdPbias.Text" xml:space="preserve">
+    <value>pbias</value>
   </data>
-  <data name="&gt;&gt;Button12.Name" xml:space="preserve">
-    <value>Button12</value>
+  <data name="&gt;&gt;cmdPbias.Name" xml:space="preserve">
+    <value>cmdPbias</value>
   </data>
-  <data name="&gt;&gt;Button12.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdPbias.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button12.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdPbias.Parent" xml:space="preserve">
     <value>grpHydrogof</value>
   </data>
-  <data name="&gt;&gt;Button12.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdPbias.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="Button11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdNSE.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button11.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdNSE.Location" type="System.Drawing.Point, System.Drawing">
     <value>88, 144</value>
   </data>
-  <data name="Button11.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdNSE.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 33</value>
   </data>
-  <data name="Button11.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdNSE.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="Button11.Text" xml:space="preserve">
-    <value>br2</value>
+  <data name="cmdNSE.Text" xml:space="preserve">
+    <value>NSE</value>
   </data>
-  <data name="&gt;&gt;Button11.Name" xml:space="preserve">
-    <value>Button11</value>
+  <data name="&gt;&gt;cmdNSE.Name" xml:space="preserve">
+    <value>cmdNSE</value>
   </data>
-  <data name="&gt;&gt;Button11.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdNSE.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button11.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdNSE.Parent" xml:space="preserve">
     <value>grpHydrogof</value>
   </data>
-  <data name="&gt;&gt;Button11.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdNSE.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="Button10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdNrmse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button10.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdNrmse.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 144</value>
   </data>
-  <data name="Button10.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdNrmse.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 33</value>
   </data>
-  <data name="Button10.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdNrmse.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="Button10.Text" xml:space="preserve">
-    <value>br2</value>
+  <data name="cmdNrmse.Text" xml:space="preserve">
+    <value>nrmse</value>
   </data>
-  <data name="&gt;&gt;Button10.Name" xml:space="preserve">
-    <value>Button10</value>
+  <data name="&gt;&gt;cmdNrmse.Name" xml:space="preserve">
+    <value>cmdNrmse</value>
   </data>
-  <data name="&gt;&gt;Button10.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdNrmse.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button10.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdNrmse.Parent" xml:space="preserve">
     <value>grpHydrogof</value>
   </data>
-  <data name="&gt;&gt;Button10.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdNrmse.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="cmdMse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
