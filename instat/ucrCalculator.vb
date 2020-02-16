@@ -2626,4 +2626,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::NSE()", 1)
         End If
     End Sub
+
+    Private Sub cmdPbias_Click(sender As Object, e As EventArgs) Handles cmdPbias.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::pbias(sim = , obs = )", 8)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::pbias()", 1)
+        End If
+    End Sub
 End Class
