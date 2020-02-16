@@ -2562,4 +2562,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2()", 1)
         End If
     End Sub
+
+    Private Sub cmdKGE_Click(sender As Object, e As EventArgs) Handles cmdKGE.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::KGE(sim = , obs = )", 8)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::KGE()", 1)
+        End If
+    End Sub
 End Class
