@@ -2573,9 +2573,17 @@ Public Class ucrCalculator
 
     Private Sub cmdMae_Click(sender As Object, e As EventArgs) Handles cmdMae.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2(sim = , obs = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mae(sim = , obs = )", 8)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mae()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMd_Click(sender As Object, e As EventArgs) Handles cmdMd.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::md(sim = , obs = )", 8)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::md()", 1)
         End If
     End Sub
 End Class
