@@ -2538,4 +2538,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::kurtosis()", 1)
         End If
     End Sub
+
+    Private Sub cmdBr2_Click(sender As Object, e As EventArgs) Handles cmdBr2.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2(sim = , obs = )", 8)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2()", 1)
+        End If
+    End Sub
 End Class
