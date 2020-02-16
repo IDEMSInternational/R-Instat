@@ -2554,4 +2554,12 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::cp()", 1)
         End If
     End Sub
+
+    Private Sub cmdV_Click(sender As Object, e As EventArgs) Handles cmdV.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2(sim = , obs = )", 8)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2()", 1)
+        End If
+    End Sub
 End Class
