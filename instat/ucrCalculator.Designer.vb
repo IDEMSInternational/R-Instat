@@ -379,9 +379,9 @@ Partial Class ucrCalculator
         Me.cmdKGE = New System.Windows.Forms.Button()
         Me.cmdMae = New System.Windows.Forms.Button()
         Me.cmdMd = New System.Windows.Forms.Button()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
+        Me.cmdMe = New System.Windows.Forms.Button()
+        Me.cmdmNSE = New System.Windows.Forms.Button()
+        Me.cmdMse = New System.Windows.Forms.Button()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
@@ -2745,9 +2745,9 @@ Partial Class ucrCalculator
         Me.grpHydrogof.Controls.Add(Me.Button12)
         Me.grpHydrogof.Controls.Add(Me.Button11)
         Me.grpHydrogof.Controls.Add(Me.Button10)
-        Me.grpHydrogof.Controls.Add(Me.Button9)
-        Me.grpHydrogof.Controls.Add(Me.Button8)
-        Me.grpHydrogof.Controls.Add(Me.Button7)
+        Me.grpHydrogof.Controls.Add(Me.cmdMse)
+        Me.grpHydrogof.Controls.Add(Me.cmdmNSE)
+        Me.grpHydrogof.Controls.Add(Me.cmdMe)
         Me.grpHydrogof.Controls.Add(Me.cmdMd)
         Me.grpHydrogof.Controls.Add(Me.cmdMae)
         Me.grpHydrogof.Controls.Add(Me.cmdKGE)
@@ -2794,23 +2794,23 @@ Partial Class ucrCalculator
         Me.cmdMd.Name = "cmdMd"
         Me.cmdMd.UseVisualStyleBackColor = True
         '
-        'Button7
+        'cmdMe
         '
-        resources.ApplyResources(Me.Button7, "Button7")
-        Me.Button7.Name = "Button7"
-        Me.Button7.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdMe, "cmdMe")
+        Me.cmdMe.Name = "cmdMe"
+        Me.cmdMe.UseVisualStyleBackColor = True
         '
-        'Button8
+        'cmdmNSE
         '
-        resources.ApplyResources(Me.Button8, "Button8")
-        Me.Button8.Name = "Button8"
-        Me.Button8.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdmNSE, "cmdmNSE")
+        Me.cmdmNSE.Name = "cmdmNSE"
+        Me.cmdmNSE.UseVisualStyleBackColor = True
         '
-        'Button9
+        'cmdMse
         '
-        resources.ApplyResources(Me.Button9, "Button9")
-        Me.Button9.Name = "Button9"
-        Me.Button9.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdMse, "cmdMse")
+        Me.cmdMse.Name = "cmdMse"
+        Me.cmdMse.UseVisualStyleBackColor = True
         '
         'Button10
         '
@@ -3273,9 +3273,9 @@ Partial Class ucrCalculator
     Friend WithEvents cmdMd As Button
     Friend WithEvents cmdMae As Button
     Friend WithEvents cmdKGE As Button
-    Friend WithEvents Button9 As Button
-    Friend WithEvents Button8 As Button
-    Friend WithEvents Button7 As Button
+    Friend WithEvents cmdMse As Button
+    Friend WithEvents cmdmNSE As Button
+    Friend WithEvents cmdMe As Button
     Friend WithEvents Button12 As Button
     Friend WithEvents Button11 As Button
     Friend WithEvents Button10 As Button
