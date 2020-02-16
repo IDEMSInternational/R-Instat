@@ -367,11 +367,6 @@ Partial Class ucrCalculator
         Me.cmdEnd1 = New System.Windows.Forms.Button()
         Me.cmdbegin = New System.Windows.Forms.Button()
         Me.cmdAny1 = New System.Windows.Forms.Button()
-        Me.ucrInputCalOptions = New instat.ucrInputComboBox()
-        Me.ucrSaveResultInto = New instat.ucrInputComboBox()
-        Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.ucrTryCalculator = New instat.ucrTry()
         Me.grpHydrogof = New System.Windows.Forms.GroupBox()
         Me.cmdBr2 = New System.Windows.Forms.Button()
         Me.cmdCp = New System.Windows.Forms.Button()
@@ -394,6 +389,11 @@ Partial Class ucrCalculator
         Me.cmdRsr = New System.Windows.Forms.Button()
         Me.cmdSsq = New System.Windows.Forms.Button()
         Me.cmdVE = New System.Windows.Forms.Button()
+        Me.ucrTryCalculator = New instat.ucrTry()
+        Me.ucrInputCalOptions = New instat.ucrInputComboBox()
+        Me.ucrSaveResultInto = New instat.ucrInputComboBox()
+        Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -2695,42 +2695,6 @@ Partial Class ucrCalculator
         Me.cmdAny1.Name = "cmdAny1"
         Me.cmdAny1.UseVisualStyleBackColor = True
         '
-        'ucrInputCalOptions
-        '
-        Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
-        Me.ucrInputCalOptions.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputCalOptions, "ucrInputCalOptions")
-        Me.ucrInputCalOptions.Name = "ucrInputCalOptions"
-        '
-        'ucrSaveResultInto
-        '
-        Me.ucrSaveResultInto.AddQuotesIfUnrecognised = True
-        Me.ucrSaveResultInto.IsReadOnly = False
-        resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
-        Me.ucrSaveResultInto.Name = "ucrSaveResultInto"
-        '
-        'ucrSelectorForCalculations
-        '
-        Me.ucrSelectorForCalculations.bDropUnusedFilterLevels = False
-        Me.ucrSelectorForCalculations.bShowHiddenColumns = False
-        Me.ucrSelectorForCalculations.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForCalculations, "ucrSelectorForCalculations")
-        Me.ucrSelectorForCalculations.Name = "ucrSelectorForCalculations"
-        '
-        'ucrReceiverForCalculation
-        '
-        Me.ucrReceiverForCalculation.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverForCalculation, "ucrReceiverForCalculation")
-        Me.ucrReceiverForCalculation.Name = "ucrReceiverForCalculation"
-        Me.ucrReceiverForCalculation.Selector = Nothing
-        Me.ucrReceiverForCalculation.strNcFilePath = ""
-        Me.ucrReceiverForCalculation.ucrSelector = Nothing
-        '
-        'ucrTryCalculator
-        '
-        resources.ApplyResources(Me.ucrTryCalculator, "ucrTryCalculator")
-        Me.ucrTryCalculator.Name = "ucrTryCalculator"
-        '
         'grpHydrogof
         '
         Me.grpHydrogof.Controls.Add(Me.cmdVE)
@@ -2883,6 +2847,42 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.cmdVE, "cmdVE")
         Me.cmdVE.Name = "cmdVE"
         Me.cmdVE.UseVisualStyleBackColor = True
+        '
+        'ucrTryCalculator
+        '
+        resources.ApplyResources(Me.ucrTryCalculator, "ucrTryCalculator")
+        Me.ucrTryCalculator.Name = "ucrTryCalculator"
+        '
+        'ucrInputCalOptions
+        '
+        Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputCalOptions.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCalOptions, "ucrInputCalOptions")
+        Me.ucrInputCalOptions.Name = "ucrInputCalOptions"
+        '
+        'ucrSaveResultInto
+        '
+        Me.ucrSaveResultInto.AddQuotesIfUnrecognised = True
+        Me.ucrSaveResultInto.IsReadOnly = False
+        resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
+        Me.ucrSaveResultInto.Name = "ucrSaveResultInto"
+        '
+        'ucrSelectorForCalculations
+        '
+        Me.ucrSelectorForCalculations.bDropUnusedFilterLevels = False
+        Me.ucrSelectorForCalculations.bShowHiddenColumns = False
+        Me.ucrSelectorForCalculations.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorForCalculations, "ucrSelectorForCalculations")
+        Me.ucrSelectorForCalculations.Name = "ucrSelectorForCalculations"
+        '
+        'ucrReceiverForCalculation
+        '
+        Me.ucrReceiverForCalculation.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverForCalculation, "ucrReceiverForCalculation")
+        Me.ucrReceiverForCalculation.Name = "ucrReceiverForCalculation"
+        Me.ucrReceiverForCalculation.Selector = Nothing
+        Me.ucrReceiverForCalculation.strNcFilePath = ""
+        Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
         'ucrCalculator
         '
