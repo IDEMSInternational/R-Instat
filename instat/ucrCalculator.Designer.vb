@@ -368,27 +368,27 @@ Partial Class ucrCalculator
         Me.cmdbegin = New System.Windows.Forms.Button()
         Me.cmdAny1 = New System.Windows.Forms.Button()
         Me.grpHydrogof = New System.Windows.Forms.GroupBox()
-        Me.cmdBr2 = New System.Windows.Forms.Button()
-        Me.cmdCp = New System.Windows.Forms.Button()
-        Me.cmdV = New System.Windows.Forms.Button()
-        Me.cmdKGE = New System.Windows.Forms.Button()
-        Me.cmdMae = New System.Windows.Forms.Button()
-        Me.cmdMd = New System.Windows.Forms.Button()
-        Me.cmdMe = New System.Windows.Forms.Button()
-        Me.cmdmNSE = New System.Windows.Forms.Button()
-        Me.cmdMse = New System.Windows.Forms.Button()
-        Me.cmdNrmse = New System.Windows.Forms.Button()
-        Me.cmdNSE = New System.Windows.Forms.Button()
-        Me.cmdPbias = New System.Windows.Forms.Button()
-        Me.cmdPbiasfde = New System.Windows.Forms.Button()
-        Me.cmdRd = New System.Windows.Forms.Button()
-        Me.cmdRmse = New System.Windows.Forms.Button()
-        Me.cmdRNSE = New System.Windows.Forms.Button()
-        Me.cmdRPearson = New System.Windows.Forms.Button()
-        Me.cmdRSD = New System.Windows.Forms.Button()
-        Me.cmdRsr = New System.Windows.Forms.Button()
-        Me.cmdSsq = New System.Windows.Forms.Button()
         Me.cmdVE = New System.Windows.Forms.Button()
+        Me.cmdSsq = New System.Windows.Forms.Button()
+        Me.cmdRsr = New System.Windows.Forms.Button()
+        Me.cmdRSD = New System.Windows.Forms.Button()
+        Me.cmdRPearson = New System.Windows.Forms.Button()
+        Me.cmdRNSE = New System.Windows.Forms.Button()
+        Me.cmdRmse = New System.Windows.Forms.Button()
+        Me.cmdRd = New System.Windows.Forms.Button()
+        Me.cmdPbiasfde = New System.Windows.Forms.Button()
+        Me.cmdPbias = New System.Windows.Forms.Button()
+        Me.cmdNSE = New System.Windows.Forms.Button()
+        Me.cmdNrmse = New System.Windows.Forms.Button()
+        Me.cmdMse = New System.Windows.Forms.Button()
+        Me.cmdmNSE = New System.Windows.Forms.Button()
+        Me.cmdMe = New System.Windows.Forms.Button()
+        Me.cmdMd = New System.Windows.Forms.Button()
+        Me.cmdMae = New System.Windows.Forms.Button()
+        Me.cmdKGE = New System.Windows.Forms.Button()
+        Me.cmdV = New System.Windows.Forms.Button()
+        Me.cmdCp = New System.Windows.Forms.Button()
+        Me.cmdBr2 = New System.Windows.Forms.Button()
         Me.ucrTryCalculator = New instat.ucrTry()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
@@ -2722,119 +2722,11 @@ Partial Class ucrCalculator
         Me.grpHydrogof.Name = "grpHydrogof"
         Me.grpHydrogof.TabStop = False
         '
-        'cmdBr2
+        'cmdVE
         '
-        resources.ApplyResources(Me.cmdBr2, "cmdBr2")
-        Me.cmdBr2.Name = "cmdBr2"
-        Me.cmdBr2.UseVisualStyleBackColor = True
-        '
-        'cmdCp
-        '
-        resources.ApplyResources(Me.cmdCp, "cmdCp")
-        Me.cmdCp.Name = "cmdCp"
-        Me.cmdCp.UseVisualStyleBackColor = True
-        '
-        'cmdV
-        '
-        resources.ApplyResources(Me.cmdV, "cmdV")
-        Me.cmdV.Name = "cmdV"
-        Me.cmdV.UseVisualStyleBackColor = True
-        '
-        'cmdKGE
-        '
-        resources.ApplyResources(Me.cmdKGE, "cmdKGE")
-        Me.cmdKGE.Name = "cmdKGE"
-        Me.cmdKGE.UseVisualStyleBackColor = True
-        '
-        'cmdMae
-        '
-        resources.ApplyResources(Me.cmdMae, "cmdMae")
-        Me.cmdMae.Name = "cmdMae"
-        Me.cmdMae.UseVisualStyleBackColor = True
-        '
-        'cmdMd
-        '
-        resources.ApplyResources(Me.cmdMd, "cmdMd")
-        Me.cmdMd.Name = "cmdMd"
-        Me.cmdMd.UseVisualStyleBackColor = True
-        '
-        'cmdMe
-        '
-        resources.ApplyResources(Me.cmdMe, "cmdMe")
-        Me.cmdMe.Name = "cmdMe"
-        Me.cmdMe.UseVisualStyleBackColor = True
-        '
-        'cmdmNSE
-        '
-        resources.ApplyResources(Me.cmdmNSE, "cmdmNSE")
-        Me.cmdmNSE.Name = "cmdmNSE"
-        Me.cmdmNSE.UseVisualStyleBackColor = True
-        '
-        'cmdMse
-        '
-        resources.ApplyResources(Me.cmdMse, "cmdMse")
-        Me.cmdMse.Name = "cmdMse"
-        Me.cmdMse.UseVisualStyleBackColor = True
-        '
-        'cmdNrmse
-        '
-        resources.ApplyResources(Me.cmdNrmse, "cmdNrmse")
-        Me.cmdNrmse.Name = "cmdNrmse"
-        Me.cmdNrmse.UseVisualStyleBackColor = True
-        '
-        'cmdNSE
-        '
-        resources.ApplyResources(Me.cmdNSE, "cmdNSE")
-        Me.cmdNSE.Name = "cmdNSE"
-        Me.cmdNSE.UseVisualStyleBackColor = True
-        '
-        'cmdPbias
-        '
-        resources.ApplyResources(Me.cmdPbias, "cmdPbias")
-        Me.cmdPbias.Name = "cmdPbias"
-        Me.cmdPbias.UseVisualStyleBackColor = True
-        '
-        'cmdPbiasfde
-        '
-        resources.ApplyResources(Me.cmdPbiasfde, "cmdPbiasfde")
-        Me.cmdPbiasfde.Name = "cmdPbiasfde"
-        Me.cmdPbiasfde.UseVisualStyleBackColor = True
-        '
-        'cmdRd
-        '
-        resources.ApplyResources(Me.cmdRd, "cmdRd")
-        Me.cmdRd.Name = "cmdRd"
-        Me.cmdRd.UseVisualStyleBackColor = True
-        '
-        'cmdRmse
-        '
-        resources.ApplyResources(Me.cmdRmse, "cmdRmse")
-        Me.cmdRmse.Name = "cmdRmse"
-        Me.cmdRmse.UseVisualStyleBackColor = True
-        '
-        'cmdRNSE
-        '
-        resources.ApplyResources(Me.cmdRNSE, "cmdRNSE")
-        Me.cmdRNSE.Name = "cmdRNSE"
-        Me.cmdRNSE.UseVisualStyleBackColor = True
-        '
-        'cmdRPearson
-        '
-        resources.ApplyResources(Me.cmdRPearson, "cmdRPearson")
-        Me.cmdRPearson.Name = "cmdRPearson"
-        Me.cmdRPearson.UseVisualStyleBackColor = True
-        '
-        'cmdRSD
-        '
-        resources.ApplyResources(Me.cmdRSD, "cmdRSD")
-        Me.cmdRSD.Name = "cmdRSD"
-        Me.cmdRSD.UseVisualStyleBackColor = True
-        '
-        'cmdRsr
-        '
-        resources.ApplyResources(Me.cmdRsr, "cmdRsr")
-        Me.cmdRsr.Name = "cmdRsr"
-        Me.cmdRsr.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdVE, "cmdVE")
+        Me.cmdVE.Name = "cmdVE"
+        Me.cmdVE.UseVisualStyleBackColor = True
         '
         'cmdSsq
         '
@@ -2842,11 +2734,119 @@ Partial Class ucrCalculator
         Me.cmdSsq.Name = "cmdSsq"
         Me.cmdSsq.UseVisualStyleBackColor = True
         '
-        'cmdVE
+        'cmdRsr
         '
-        resources.ApplyResources(Me.cmdVE, "cmdVE")
-        Me.cmdVE.Name = "cmdVE"
-        Me.cmdVE.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdRsr, "cmdRsr")
+        Me.cmdRsr.Name = "cmdRsr"
+        Me.cmdRsr.UseVisualStyleBackColor = True
+        '
+        'cmdRSD
+        '
+        resources.ApplyResources(Me.cmdRSD, "cmdRSD")
+        Me.cmdRSD.Name = "cmdRSD"
+        Me.cmdRSD.UseVisualStyleBackColor = True
+        '
+        'cmdRPearson
+        '
+        resources.ApplyResources(Me.cmdRPearson, "cmdRPearson")
+        Me.cmdRPearson.Name = "cmdRPearson"
+        Me.cmdRPearson.UseVisualStyleBackColor = True
+        '
+        'cmdRNSE
+        '
+        resources.ApplyResources(Me.cmdRNSE, "cmdRNSE")
+        Me.cmdRNSE.Name = "cmdRNSE"
+        Me.cmdRNSE.UseVisualStyleBackColor = True
+        '
+        'cmdRmse
+        '
+        resources.ApplyResources(Me.cmdRmse, "cmdRmse")
+        Me.cmdRmse.Name = "cmdRmse"
+        Me.cmdRmse.UseVisualStyleBackColor = True
+        '
+        'cmdRd
+        '
+        resources.ApplyResources(Me.cmdRd, "cmdRd")
+        Me.cmdRd.Name = "cmdRd"
+        Me.cmdRd.UseVisualStyleBackColor = True
+        '
+        'cmdPbiasfde
+        '
+        resources.ApplyResources(Me.cmdPbiasfde, "cmdPbiasfde")
+        Me.cmdPbiasfde.Name = "cmdPbiasfde"
+        Me.cmdPbiasfde.UseVisualStyleBackColor = True
+        '
+        'cmdPbias
+        '
+        resources.ApplyResources(Me.cmdPbias, "cmdPbias")
+        Me.cmdPbias.Name = "cmdPbias"
+        Me.cmdPbias.UseVisualStyleBackColor = True
+        '
+        'cmdNSE
+        '
+        resources.ApplyResources(Me.cmdNSE, "cmdNSE")
+        Me.cmdNSE.Name = "cmdNSE"
+        Me.cmdNSE.UseVisualStyleBackColor = True
+        '
+        'cmdNrmse
+        '
+        resources.ApplyResources(Me.cmdNrmse, "cmdNrmse")
+        Me.cmdNrmse.Name = "cmdNrmse"
+        Me.cmdNrmse.UseVisualStyleBackColor = True
+        '
+        'cmdMse
+        '
+        resources.ApplyResources(Me.cmdMse, "cmdMse")
+        Me.cmdMse.Name = "cmdMse"
+        Me.cmdMse.UseVisualStyleBackColor = True
+        '
+        'cmdmNSE
+        '
+        resources.ApplyResources(Me.cmdmNSE, "cmdmNSE")
+        Me.cmdmNSE.Name = "cmdmNSE"
+        Me.cmdmNSE.UseVisualStyleBackColor = True
+        '
+        'cmdMe
+        '
+        resources.ApplyResources(Me.cmdMe, "cmdMe")
+        Me.cmdMe.Name = "cmdMe"
+        Me.cmdMe.UseVisualStyleBackColor = True
+        '
+        'cmdMd
+        '
+        resources.ApplyResources(Me.cmdMd, "cmdMd")
+        Me.cmdMd.Name = "cmdMd"
+        Me.cmdMd.UseVisualStyleBackColor = True
+        '
+        'cmdMae
+        '
+        resources.ApplyResources(Me.cmdMae, "cmdMae")
+        Me.cmdMae.Name = "cmdMae"
+        Me.cmdMae.UseVisualStyleBackColor = True
+        '
+        'cmdKGE
+        '
+        resources.ApplyResources(Me.cmdKGE, "cmdKGE")
+        Me.cmdKGE.Name = "cmdKGE"
+        Me.cmdKGE.UseVisualStyleBackColor = True
+        '
+        'cmdV
+        '
+        resources.ApplyResources(Me.cmdV, "cmdV")
+        Me.cmdV.Name = "cmdV"
+        Me.cmdV.UseVisualStyleBackColor = True
+        '
+        'cmdCp
+        '
+        resources.ApplyResources(Me.cmdCp, "cmdCp")
+        Me.cmdCp.Name = "cmdCp"
+        Me.cmdCp.UseVisualStyleBackColor = True
+        '
+        'cmdBr2
+        '
+        resources.ApplyResources(Me.cmdBr2, "cmdBr2")
+        Me.cmdBr2.Name = "cmdBr2"
+        Me.cmdBr2.UseVisualStyleBackColor = True
         '
         'ucrTryCalculator
         '
