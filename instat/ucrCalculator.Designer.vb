@@ -374,8 +374,8 @@ Partial Class ucrCalculator
         Me.ucrTryCalculator = New instat.ucrTry()
         Me.grpHydrogof = New System.Windows.Forms.GroupBox()
         Me.cmdBr2 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.cmdCp = New System.Windows.Forms.Button()
+        Me.cmdV = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
@@ -2751,8 +2751,8 @@ Partial Class ucrCalculator
         Me.grpHydrogof.Controls.Add(Me.Button6)
         Me.grpHydrogof.Controls.Add(Me.Button5)
         Me.grpHydrogof.Controls.Add(Me.Button4)
-        Me.grpHydrogof.Controls.Add(Me.Button3)
-        Me.grpHydrogof.Controls.Add(Me.Button2)
+        Me.grpHydrogof.Controls.Add(Me.cmdV)
+        Me.grpHydrogof.Controls.Add(Me.cmdCp)
         Me.grpHydrogof.Controls.Add(Me.cmdBr2)
         resources.ApplyResources(Me.grpHydrogof, "grpHydrogof")
         Me.grpHydrogof.Name = "grpHydrogof"
@@ -2764,17 +2764,17 @@ Partial Class ucrCalculator
         Me.cmdBr2.Name = "cmdBr2"
         Me.cmdBr2.UseVisualStyleBackColor = True
         '
-        'Button2
+        'cmdCp
         '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Name = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCp, "cmdCp")
+        Me.cmdCp.Name = "cmdCp"
+        Me.cmdCp.UseVisualStyleBackColor = True
         '
-        'Button3
+        'cmdV
         '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.Name = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdV, "cmdV")
+        Me.cmdV.Name = "cmdV"
+        Me.cmdV.UseVisualStyleBackColor = True
         '
         'Button4
         '
@@ -3267,8 +3267,8 @@ Partial Class ucrCalculator
     Friend WithEvents cmdKurtosis As Button
     Friend WithEvents ucrTryCalculator As ucrTry
     Friend WithEvents grpHydrogof As GroupBox
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents cmdV As Button
+    Friend WithEvents cmdCp As Button
     Friend WithEvents cmdBr2 As Button
     Friend WithEvents Button6 As Button
     Friend WithEvents Button5 As Button
