@@ -373,6 +373,9 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.ucrTryCalculator = New instat.ucrTry()
         Me.grpHydrogof = New System.Windows.Forms.GroupBox()
+        Me.cmdBr2 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -386,6 +389,7 @@ Partial Class ucrCalculator
         Me.grpFactor.SuspendLayout()
         Me.grpModifier.SuspendLayout()
         Me.grpSymbols.SuspendLayout()
+        Me.grpHydrogof.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -2711,9 +2715,30 @@ Partial Class ucrCalculator
         '
         'grpHydrogof
         '
+        Me.grpHydrogof.Controls.Add(Me.Button3)
+        Me.grpHydrogof.Controls.Add(Me.Button2)
+        Me.grpHydrogof.Controls.Add(Me.cmdBr2)
         resources.ApplyResources(Me.grpHydrogof, "grpHydrogof")
         Me.grpHydrogof.Name = "grpHydrogof"
         Me.grpHydrogof.TabStop = False
+        '
+        'cmdBr2
+        '
+        resources.ApplyResources(Me.cmdBr2, "cmdBr2")
+        Me.cmdBr2.Name = "cmdBr2"
+        Me.cmdBr2.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Name = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.Name = "Button3"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
@@ -2756,6 +2781,7 @@ Partial Class ucrCalculator
         Me.grpFactor.ResumeLayout(False)
         Me.grpModifier.ResumeLayout(False)
         Me.grpSymbols.ResumeLayout(False)
+        Me.grpHydrogof.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3097,4 +3123,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdKurtosis As Button
     Friend WithEvents ucrTryCalculator As ucrTry
     Friend WithEvents grpHydrogof As GroupBox
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents cmdBr2 As Button
 End Class
