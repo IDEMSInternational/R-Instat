@@ -385,6 +385,9 @@ Partial Class ucrCalculator
         Me.Button10 = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
+        Me.Button13 = New System.Windows.Forms.Button()
+        Me.Button14 = New System.Windows.Forms.Button()
+        Me.Button15 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -2724,6 +2727,9 @@ Partial Class ucrCalculator
         '
         'grpHydrogof
         '
+        Me.grpHydrogof.Controls.Add(Me.Button15)
+        Me.grpHydrogof.Controls.Add(Me.Button14)
+        Me.grpHydrogof.Controls.Add(Me.Button13)
         Me.grpHydrogof.Controls.Add(Me.Button12)
         Me.grpHydrogof.Controls.Add(Me.Button11)
         Me.grpHydrogof.Controls.Add(Me.Button10)
@@ -2811,6 +2817,24 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.Button12, "Button12")
         Me.Button12.Name = "Button12"
         Me.Button12.UseVisualStyleBackColor = True
+        '
+        'Button13
+        '
+        resources.ApplyResources(Me.Button13, "Button13")
+        Me.Button13.Name = "Button13"
+        Me.Button13.UseVisualStyleBackColor = True
+        '
+        'Button14
+        '
+        resources.ApplyResources(Me.Button14, "Button14")
+        Me.Button14.Name = "Button14"
+        Me.Button14.UseVisualStyleBackColor = True
+        '
+        'Button15
+        '
+        resources.ApplyResources(Me.Button15, "Button15")
+        Me.Button15.Name = "Button15"
+        Me.Button15.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
@@ -3207,4 +3231,7 @@ Partial Class ucrCalculator
     Friend WithEvents Button12 As Button
     Friend WithEvents Button11 As Button
     Friend WithEvents Button10 As Button
+    Friend WithEvents Button15 As Button
+    Friend WithEvents Button14 As Button
+    Friend WithEvents Button13 As Button
 End Class
