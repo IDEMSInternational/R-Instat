@@ -372,6 +372,7 @@ Partial Class ucrCalculator
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.ucrTryCalculator = New instat.ucrTry()
+        Me.grpHydrogof = New System.Windows.Forms.GroupBox()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -2708,10 +2709,17 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.ucrTryCalculator, "ucrTryCalculator")
         Me.ucrTryCalculator.Name = "ucrTryCalculator"
         '
+        'grpHydrogof
+        '
+        resources.ApplyResources(Me.grpHydrogof, "grpHydrogof")
+        Me.grpHydrogof.Name = "grpHydrogof"
+        Me.grpHydrogof.TabStop = False
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpHydrogof)
         Me.Controls.Add(Me.ucrTryCalculator)
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
@@ -3088,4 +3096,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdMode1 As Button
     Friend WithEvents cmdKurtosis As Button
     Friend WithEvents ucrTryCalculator As ucrTry
+    Friend WithEvents grpHydrogof As GroupBox
 End Class
