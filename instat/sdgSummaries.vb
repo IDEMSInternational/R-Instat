@@ -531,6 +531,18 @@ Public Class sdgSummaries
         OrderByCheckEnabled()
     End Sub
 
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Dim clsHelp As New RFunction
+        Dim strPackageName As String
+
+        strPackageName = "hydroGOF"
+        clsHelp.SetPackageName("utils")
+        clsHelp.SetRCommand("help")
+        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
+        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Modelling", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+    End Sub
+
     Private Sub ucrChkOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOrderBy.ControlValueChanged
         PositionOptions()
         OrderByCheckEnabled()

@@ -154,6 +154,7 @@ Partial Class sdgSummaries
         Me.ucrChkSum = New instat.ucrCheck()
         Me.ucrChkMean = New instat.ucrCheck()
         Me.tbSummaries = New System.Windows.Forms.TabControl()
+        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbCircular.SuspendLayout()
         Me.grpCircScale.SuspendLayout()
@@ -525,6 +526,7 @@ Partial Class sdgSummaries
         '
         'grpHyroGOF
         '
+        Me.grpHyroGOF.Controls.Add(Me.cmdHelp)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkRelativeIndexOfAgreement)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkSumOfSquaredResiduals)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkNormRootMeanSquaredError)
@@ -1019,6 +1021,12 @@ Partial Class sdgSummaries
         Me.tbSummaries.Name = "tbSummaries"
         Me.tbSummaries.SelectedIndex = 0
         '
+        'cmdHelp
+        '
+        resources.ApplyResources(Me.cmdHelp, "cmdHelp")
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
         'sdgSummaries
         '
         resources.ApplyResources(Me, "$this")
@@ -1176,4 +1184,5 @@ Partial Class sdgSummaries
     Friend WithEvents ucrSelectorSecondVariable As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblSecondVariable As Label
     Friend WithEvents ucrReceiverSecondVariable As ucrReceiverSingle
+    Friend WithEvents cmdHelp As Button
 End Class

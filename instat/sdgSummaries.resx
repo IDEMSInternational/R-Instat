@@ -1668,6 +1668,33 @@
   <data name="&gt;&gt;grpRelationships.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="cmdHelp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>442, 135</value>
+  </data>
+  <data name="cmdHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 23</value>
+  </data>
+  <data name="cmdHelp.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="cmdHelp.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.Name" xml:space="preserve">
+    <value>cmdHelp</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkRelativeIndexOfAgreement.Location" type="System.Drawing.Point, System.Drawing">
     <value>329, 15</value>
   </data>
@@ -1690,7 +1717,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkRelativeIndexOfAgreement.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkSumOfSquaredResiduals.Location" type="System.Drawing.Point, System.Drawing">
     <value>329, 35</value>
@@ -1714,7 +1741,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkSumOfSquaredResiduals.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrChkNormRootMeanSquaredError.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 137</value>
@@ -1738,7 +1765,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkNormRootMeanSquaredError.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrChkRatioOfRootMeanSquaredError.Location" type="System.Drawing.Point, System.Drawing">
     <value>329, 97</value>
@@ -1762,7 +1789,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkRatioOfRootMeanSquaredError.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrChkMeanAbsoluteError.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 97</value>
@@ -1786,7 +1813,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkMeanAbsoluteError.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrChkModifiedIndexOfAgreement.Location" type="System.Drawing.Point, System.Drawing">
     <value>329, 76</value>
@@ -1810,7 +1837,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkModifiedIndexOfAgreement.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrChkVolumetricEfficiency.Location" type="System.Drawing.Point, System.Drawing">
     <value>329, 57</value>
@@ -1834,7 +1861,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkVolumetricEfficiency.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="ucrChkNashSutcliffeEfficiency.Location" type="System.Drawing.Point, System.Drawing">
     <value>167, 14</value>
@@ -1858,7 +1885,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkNashSutcliffeEfficiency.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="ucrChkPercentBias.Location" type="System.Drawing.Point, System.Drawing">
     <value>167, 35</value>
@@ -1882,7 +1909,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkPercentBias.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="ucrChkIndexOfAgreement.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 57</value>
@@ -1906,7 +1933,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkIndexOfAgreement.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrChkCoefDetermination.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 15</value>
@@ -1930,7 +1957,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkCoefDetermination.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="ucrChkRatioOfStandardDeviation.Location" type="System.Drawing.Point, System.Drawing">
     <value>329, 117</value>
@@ -1954,7 +1981,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkRatioOfStandardDeviation.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="ucrChkKlingGuptaEfficiency.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 76</value>
@@ -1978,7 +2005,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkKlingGuptaEfficiency.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="ucrChkRelativeNashSutcliffeEff.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 117</value>
@@ -2002,7 +2029,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkRelativeNashSutcliffeEff.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="ucrChkModNashSutcliffeEff.Location" type="System.Drawing.Point, System.Drawing">
     <value>167, 57</value>
@@ -2026,7 +2053,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkModNashSutcliffeEff.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="ucrChkMeanError.Location" type="System.Drawing.Point, System.Drawing">
     <value>167, 97</value>
@@ -2050,7 +2077,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkMeanError.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="ucrChkMeanSquaredError.Location" type="System.Drawing.Point, System.Drawing">
     <value>167, 76</value>
@@ -2074,7 +2101,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkMeanSquaredError.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="ucrChkRootMeanSquaredError.Location" type="System.Drawing.Point, System.Drawing">
     <value>167, 117</value>
@@ -2098,7 +2125,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkRootMeanSquaredError.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="ucrChkCoefPersistence.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 35</value>
@@ -2122,7 +2149,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkCoefPersistence.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="grpHyroGOF.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 45</value>
