@@ -308,7 +308,7 @@ Public Class sdgSummaries
         ucrChkNashSutcliffeEfficiency.SetText("Nash-Sutcliffe efficiency")
 
         ucrChkPercentBias.SetParameter(New RParameter("percent_bias", 42), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "percent_bias" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkPercentBias.SetText("Percent Bias")
+        ucrChkPercentBias.SetText("Percent bias")
 
         ucrChkRelativeIndexOfAgreement.SetParameter(New RParameter("relative_index_agreement", 43), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "relative_index_agreement" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkRelativeIndexOfAgreement.SetText("Relative index of agreement")
