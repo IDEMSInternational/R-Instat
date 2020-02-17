@@ -237,6 +237,12 @@
     <Compile Include="dlgSurvivalRates.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTidy.Designer.vb">
+      <DependentUpon>dlgTidy.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTidy.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTreemap.Designer.vb">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
     </Compile>
@@ -2474,6 +2480,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSurvivalRates.resx">
       <DependentUpon>dlgSurvivalRates.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTidy.resx">
+      <DependentUpon>dlgTidy.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTreemap.resx">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
