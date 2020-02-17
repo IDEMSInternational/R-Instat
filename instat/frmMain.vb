@@ -372,7 +372,7 @@ Public Class frmMain
         dlgRestrict.ShowDialog()
     End Sub
 
-    Private Sub mnuModelThreeVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelThreeVariablesFitModel.Click
+    Private Sub mnuModelThreeVariablesFitModel_Click(sender As Object, e As EventArgs)
         dlgThreeVariableModelling.ShowDialog()
     End Sub
 
@@ -715,7 +715,7 @@ Public Class frmMain
         dlgRandomSample.ShowDialog()
     End Sub
 
-    Private Sub mnuModelTwoVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelTwoVariablesFitModel.Click
+    Private Sub mnuModelTwoVariablesFitModel_Click(sender As Object, e As EventArgs)
         dlgTwoVariableFitModel.ShowDialog()
     End Sub
 
@@ -802,7 +802,7 @@ Public Class frmMain
         dlgJitter.ShowDialog()
     End Sub
 
-    Private Sub mnuModelFourVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelFourVariablesFitModel.Click
+    Private Sub mnuModelFourVariablesFitModel_Click(sender As Object, e As EventArgs)
         dlgFourVariableModelling.ShowDialog()
     End Sub
 
@@ -1016,7 +1016,7 @@ Public Class frmMain
         dlgOpenSST.ShowDialog()
     End Sub
 
-    Private Sub mnuModelGeneralFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelGeneralFitModel.Click
+    Private Sub mnuModelGeneralFitModel_Click(sender As Object, e As EventArgs)
         dlgFitModel.ShowDialog()
     End Sub
 
@@ -1024,11 +1024,11 @@ Public Class frmMain
         dlgImportFromODK.ShowDialog()
     End Sub
 
-    Private Sub mnuModelOneVariableFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelOneVariableFitModel.Click
+    Private Sub mnuModelOneVariableFitModel_Click(sender As Object, e As EventArgs)
         dlgOneVarFitModel.ShowDialog()
     End Sub
 
-    Private Sub mnuModelTwoVariablesUseModel_Click(sender As Object, e As EventArgs) Handles mnuModelTwoVariablesUseModel.Click
+    Private Sub mnuModelTwoVariablesUseModel_Click(sender As Object, e As EventArgs)
         dlgTwoVariableUseModel.ShowDialog()
     End Sub
 
@@ -1036,11 +1036,11 @@ Public Class frmMain
         dlgEnter.ShowDialog()
     End Sub
 
-    Private Sub mnuModelOneVariableCompareModels_Click(sender As Object, e As EventArgs) Handles mnuModelOneVariableCompareModels.Click
+    Private Sub mnuModelOneVariableCompareModels_Click(sender As Object, e As EventArgs)
         dlgOneVarCompareModels.ShowDialog()
     End Sub
 
-    Private Sub mnuModelOneVariableUseModel_Click(sender As Object, e As EventArgs) Handles mnuModelOneVariableUseModel.Click
+    Private Sub mnuModelOneVariableUseModel_Click(sender As Object, e As EventArgs)
         dlgOneVarUseModel.ShowDialog()
     End Sub
 
@@ -1988,10 +1988,6 @@ Public Class frmMain
         dlgClimaticStationMaps.ShowDialog()
     End Sub
 
-    Private Sub mnuModelModel_Click(sender As Object, e As EventArgs) Handles mnuModelModel.Click
-        dlgModelling.ShowDialog()
-    End Sub
-
     Private Sub mnuHelpWindows_Click(sender As Object, e As EventArgs) Handles mnuHelpWindows.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "539")
     End Sub
@@ -2035,7 +2031,7 @@ Public Class frmMain
 
     Private Sub mnuToolsInstallRPackage_Click(sender As Object, e As EventArgs) Handles mnuToolsInstallRPackage.Click
         dlgInstallRPackage.ShowDialog()
-End Sub
+    End Sub
 
     Private Sub mnuPrepareColumnGenerateDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnGenerateDuplicateColumn.Click
         dlgDuplicateColumns.ShowDialog()
@@ -2117,5 +2113,45 @@ End Sub
         Me.Enabled = False
         clsRLink.ViewLastGraph(bAsPlotly:=True)
         Me.Enabled = True
+    End Sub
+
+    Private Sub OneVariableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelOneVariable.Click
+        dlgOneVarFitModel.ShowDialog()
+    End Sub
+
+    Private Sub TwoVariablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelTwoVariables.Click
+        dlgTwoVariableFitModel.ShowDialog()
+    End Sub
+
+    Private Sub ThreeVariablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelThreeVariables.Click
+        dlgThreeVariableModelling.ShowDialog()
+    End Sub
+
+    Private Sub FourVariablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelFourVariables.Click
+        dlgFourVariableModelling.ShowDialog()
+    End Sub
+
+    Private Sub GeneralToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles mnuModelFitModelGeneral.Click
+        dlgFitModel.ShowDialog()
+    End Sub
+
+    Private Sub ModelKeyboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelModelKeyboard.Click
+        dlgModelling.ShowDialog()
+    End Sub
+
+    Private Sub OneVariableToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles OneVariableToolStripMenuItem.Click
+        dlgOneVarCompareModels.ShowDialog()
+    End Sub
+
+    Private Sub OneVariableToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuModelUseModelOneVariable.Click
+        dlgOneVarUseModel.ShowDialog()
+    End Sub
+
+    Private Sub TwoVariablesToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuModelUseModelTwoVariables.Click
+        dlgTwoVariableUseModel.ShowDialog()
+    End Sub
+
+    Private Sub UseModelKeyboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelUseModelUseModelKeyboard.Click
+        dlgUseModel.ShowDialog()
     End Sub
 End Class
