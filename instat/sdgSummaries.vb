@@ -79,7 +79,7 @@ Public Class sdgSummaries
         ucrChkKurtosis.SetText("Kurtosis")
 
         ucrChkSkewness.SetParameter(New RParameter("summary_skewness", 16), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_skewness" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkSkewness.SetText("Skewness(3rd Moment)")
+        ucrChkSkewness.SetText("Skewness (3rd Moment)")
 
         ucrChkMc.SetParameter(New RParameter("summary_skewness_mc", 20), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_skewness_mc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkMc.SetText("mc")

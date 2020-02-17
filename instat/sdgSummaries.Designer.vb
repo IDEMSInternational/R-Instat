@@ -89,22 +89,23 @@ Partial Class sdgSummaries
         Me.grpHyroGOF = New System.Windows.Forms.GroupBox()
         Me.ucrChkRelativeIndexOfAgreement = New instat.ucrCheck()
         Me.ucrChkSumOfSquaredResiduals = New instat.ucrCheck()
-        Me.ucrChkNormRootMeanSquaredError = New instat.ucrCheck()
         Me.ucrChkRatioOfRootMeanSquaredError = New instat.ucrCheck()
-        Me.ucrChkMeanAbsoluteError = New instat.ucrCheck()
         Me.ucrChkModifiedIndexOfAgreement = New instat.ucrCheck()
         Me.ucrChkVolumetricEfficiency = New instat.ucrCheck()
+        Me.ucrChkRatioOfStandardDeviation = New instat.ucrCheck()
         Me.ucrChkNashSutcliffeEfficiency = New instat.ucrCheck()
         Me.ucrChkPercentBias = New instat.ucrCheck()
-        Me.ucrChkIndexOfAgreement = New instat.ucrCheck()
-        Me.ucrChkCoefDetermination = New instat.ucrCheck()
-        Me.ucrChkRatioOfStandardDeviation = New instat.ucrCheck()
-        Me.ucrChkKlingGuptaEfficiency = New instat.ucrCheck()
-        Me.ucrChkRelativeNashSutcliffeEff = New instat.ucrCheck()
         Me.ucrChkModNashSutcliffeEff = New instat.ucrCheck()
         Me.ucrChkMeanError = New instat.ucrCheck()
         Me.ucrChkMeanSquaredError = New instat.ucrCheck()
         Me.ucrChkRootMeanSquaredError = New instat.ucrCheck()
+        Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.ucrChkNormRootMeanSquaredError = New instat.ucrCheck()
+        Me.ucrChkMeanAbsoluteError = New instat.ucrCheck()
+        Me.ucrChkIndexOfAgreement = New instat.ucrCheck()
+        Me.ucrChkCoefDetermination = New instat.ucrCheck()
+        Me.ucrChkKlingGuptaEfficiency = New instat.ucrCheck()
+        Me.ucrChkRelativeNashSutcliffeEff = New instat.ucrCheck()
         Me.ucrChkCoefPersistence = New instat.ucrCheck()
         Me.tbMore = New System.Windows.Forms.TabPage()
         Me.grpProportionsPercentiles = New System.Windows.Forms.GroupBox()
@@ -154,7 +155,6 @@ Partial Class sdgSummaries
         Me.ucrChkSum = New instat.ucrCheck()
         Me.ucrChkMean = New instat.ucrCheck()
         Me.tbSummaries = New System.Windows.Forms.TabControl()
-        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.tbMissingOptions.SuspendLayout()
         Me.tbCircular.SuspendLayout()
         Me.grpCircScale.SuspendLayout()
@@ -526,26 +526,26 @@ Partial Class sdgSummaries
         '
         'grpHyroGOF
         '
-        Me.grpHyroGOF.Controls.Add(Me.cmdHelp)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkRelativeIndexOfAgreement)
-        Me.grpHyroGOF.Controls.Add(Me.ucrChkSumOfSquaredResiduals)
-        Me.grpHyroGOF.Controls.Add(Me.ucrChkNormRootMeanSquaredError)
-        Me.grpHyroGOF.Controls.Add(Me.ucrChkRatioOfRootMeanSquaredError)
-        Me.grpHyroGOF.Controls.Add(Me.ucrChkMeanAbsoluteError)
-        Me.grpHyroGOF.Controls.Add(Me.ucrChkModifiedIndexOfAgreement)
-        Me.grpHyroGOF.Controls.Add(Me.ucrChkVolumetricEfficiency)
-        Me.grpHyroGOF.Controls.Add(Me.ucrChkNashSutcliffeEfficiency)
-        Me.grpHyroGOF.Controls.Add(Me.ucrChkPercentBias)
-        Me.grpHyroGOF.Controls.Add(Me.ucrChkIndexOfAgreement)
-        Me.grpHyroGOF.Controls.Add(Me.ucrChkCoefDetermination)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkRatioOfStandardDeviation)
-        Me.grpHyroGOF.Controls.Add(Me.ucrChkKlingGuptaEfficiency)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkCoefDetermination)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkRatioOfRootMeanSquaredError)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkRelativeNashSutcliffeEff)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkModifiedIndexOfAgreement)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkCoefPersistence)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkNashSutcliffeEfficiency)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkSumOfSquaredResiduals)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkKlingGuptaEfficiency)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkVolumetricEfficiency)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkPercentBias)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkModNashSutcliffeEff)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkMeanError)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkMeanSquaredError)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkRootMeanSquaredError)
-        Me.grpHyroGOF.Controls.Add(Me.ucrChkCoefPersistence)
+        Me.grpHyroGOF.Controls.Add(Me.cmdHelp)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkNormRootMeanSquaredError)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkMeanAbsoluteError)
+        Me.grpHyroGOF.Controls.Add(Me.ucrChkIndexOfAgreement)
         resources.ApplyResources(Me.grpHyroGOF, "grpHyroGOF")
         Me.grpHyroGOF.Name = "grpHyroGOF"
         Me.grpHyroGOF.TabStop = False
@@ -562,23 +562,11 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrChkSumOfSquaredResiduals, "ucrChkSumOfSquaredResiduals")
         Me.ucrChkSumOfSquaredResiduals.Name = "ucrChkSumOfSquaredResiduals"
         '
-        'ucrChkNormRootMeanSquaredError
-        '
-        Me.ucrChkNormRootMeanSquaredError.Checked = False
-        resources.ApplyResources(Me.ucrChkNormRootMeanSquaredError, "ucrChkNormRootMeanSquaredError")
-        Me.ucrChkNormRootMeanSquaredError.Name = "ucrChkNormRootMeanSquaredError"
-        '
         'ucrChkRatioOfRootMeanSquaredError
         '
         Me.ucrChkRatioOfRootMeanSquaredError.Checked = False
         resources.ApplyResources(Me.ucrChkRatioOfRootMeanSquaredError, "ucrChkRatioOfRootMeanSquaredError")
         Me.ucrChkRatioOfRootMeanSquaredError.Name = "ucrChkRatioOfRootMeanSquaredError"
-        '
-        'ucrChkMeanAbsoluteError
-        '
-        Me.ucrChkMeanAbsoluteError.Checked = False
-        resources.ApplyResources(Me.ucrChkMeanAbsoluteError, "ucrChkMeanAbsoluteError")
-        Me.ucrChkMeanAbsoluteError.Name = "ucrChkMeanAbsoluteError"
         '
         'ucrChkModifiedIndexOfAgreement
         '
@@ -592,6 +580,12 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrChkVolumetricEfficiency, "ucrChkVolumetricEfficiency")
         Me.ucrChkVolumetricEfficiency.Name = "ucrChkVolumetricEfficiency"
         '
+        'ucrChkRatioOfStandardDeviation
+        '
+        Me.ucrChkRatioOfStandardDeviation.Checked = False
+        resources.ApplyResources(Me.ucrChkRatioOfStandardDeviation, "ucrChkRatioOfStandardDeviation")
+        Me.ucrChkRatioOfStandardDeviation.Name = "ucrChkRatioOfStandardDeviation"
+        '
         'ucrChkNashSutcliffeEfficiency
         '
         Me.ucrChkNashSutcliffeEfficiency.Checked = False
@@ -603,36 +597,6 @@ Partial Class sdgSummaries
         Me.ucrChkPercentBias.Checked = False
         resources.ApplyResources(Me.ucrChkPercentBias, "ucrChkPercentBias")
         Me.ucrChkPercentBias.Name = "ucrChkPercentBias"
-        '
-        'ucrChkIndexOfAgreement
-        '
-        Me.ucrChkIndexOfAgreement.Checked = False
-        resources.ApplyResources(Me.ucrChkIndexOfAgreement, "ucrChkIndexOfAgreement")
-        Me.ucrChkIndexOfAgreement.Name = "ucrChkIndexOfAgreement"
-        '
-        'ucrChkCoefDetermination
-        '
-        Me.ucrChkCoefDetermination.Checked = False
-        resources.ApplyResources(Me.ucrChkCoefDetermination, "ucrChkCoefDetermination")
-        Me.ucrChkCoefDetermination.Name = "ucrChkCoefDetermination"
-        '
-        'ucrChkRatioOfStandardDeviation
-        '
-        Me.ucrChkRatioOfStandardDeviation.Checked = False
-        resources.ApplyResources(Me.ucrChkRatioOfStandardDeviation, "ucrChkRatioOfStandardDeviation")
-        Me.ucrChkRatioOfStandardDeviation.Name = "ucrChkRatioOfStandardDeviation"
-        '
-        'ucrChkKlingGuptaEfficiency
-        '
-        Me.ucrChkKlingGuptaEfficiency.Checked = False
-        resources.ApplyResources(Me.ucrChkKlingGuptaEfficiency, "ucrChkKlingGuptaEfficiency")
-        Me.ucrChkKlingGuptaEfficiency.Name = "ucrChkKlingGuptaEfficiency"
-        '
-        'ucrChkRelativeNashSutcliffeEff
-        '
-        Me.ucrChkRelativeNashSutcliffeEff.Checked = False
-        resources.ApplyResources(Me.ucrChkRelativeNashSutcliffeEff, "ucrChkRelativeNashSutcliffeEff")
-        Me.ucrChkRelativeNashSutcliffeEff.Name = "ucrChkRelativeNashSutcliffeEff"
         '
         'ucrChkModNashSutcliffeEff
         '
@@ -657,6 +621,48 @@ Partial Class sdgSummaries
         Me.ucrChkRootMeanSquaredError.Checked = False
         resources.ApplyResources(Me.ucrChkRootMeanSquaredError, "ucrChkRootMeanSquaredError")
         Me.ucrChkRootMeanSquaredError.Name = "ucrChkRootMeanSquaredError"
+        '
+        'cmdHelp
+        '
+        resources.ApplyResources(Me.cmdHelp, "cmdHelp")
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
+        'ucrChkNormRootMeanSquaredError
+        '
+        Me.ucrChkNormRootMeanSquaredError.Checked = False
+        resources.ApplyResources(Me.ucrChkNormRootMeanSquaredError, "ucrChkNormRootMeanSquaredError")
+        Me.ucrChkNormRootMeanSquaredError.Name = "ucrChkNormRootMeanSquaredError"
+        '
+        'ucrChkMeanAbsoluteError
+        '
+        Me.ucrChkMeanAbsoluteError.Checked = False
+        resources.ApplyResources(Me.ucrChkMeanAbsoluteError, "ucrChkMeanAbsoluteError")
+        Me.ucrChkMeanAbsoluteError.Name = "ucrChkMeanAbsoluteError"
+        '
+        'ucrChkIndexOfAgreement
+        '
+        Me.ucrChkIndexOfAgreement.Checked = False
+        resources.ApplyResources(Me.ucrChkIndexOfAgreement, "ucrChkIndexOfAgreement")
+        Me.ucrChkIndexOfAgreement.Name = "ucrChkIndexOfAgreement"
+        '
+        'ucrChkCoefDetermination
+        '
+        Me.ucrChkCoefDetermination.Checked = False
+        resources.ApplyResources(Me.ucrChkCoefDetermination, "ucrChkCoefDetermination")
+        Me.ucrChkCoefDetermination.Name = "ucrChkCoefDetermination"
+        '
+        'ucrChkKlingGuptaEfficiency
+        '
+        Me.ucrChkKlingGuptaEfficiency.Checked = False
+        resources.ApplyResources(Me.ucrChkKlingGuptaEfficiency, "ucrChkKlingGuptaEfficiency")
+        Me.ucrChkKlingGuptaEfficiency.Name = "ucrChkKlingGuptaEfficiency"
+        '
+        'ucrChkRelativeNashSutcliffeEff
+        '
+        Me.ucrChkRelativeNashSutcliffeEff.Checked = False
+        resources.ApplyResources(Me.ucrChkRelativeNashSutcliffeEff, "ucrChkRelativeNashSutcliffeEff")
+        Me.ucrChkRelativeNashSutcliffeEff.Name = "ucrChkRelativeNashSutcliffeEff"
         '
         'ucrChkCoefPersistence
         '
@@ -1020,12 +1026,6 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.tbSummaries, "tbSummaries")
         Me.tbSummaries.Name = "tbSummaries"
         Me.tbSummaries.SelectedIndex = 0
-        '
-        'cmdHelp
-        '
-        resources.ApplyResources(Me.cmdHelp, "cmdHelp")
-        Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'sdgSummaries
         '
