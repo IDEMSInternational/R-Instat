@@ -104,6 +104,8 @@ Partial Class frmMain
         Me.mnuModelFitModelGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator57 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuModelFitModelModelKeyboard = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuModelCompareModels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuModelCompareModelsOneVariable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelUseModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelUseModelOneVariable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelUseModelTwoVariables = New System.Windows.Forms.ToolStripMenuItem()
@@ -590,8 +592,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CompareModelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OneVariableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -889,7 +889,7 @@ Partial Class frmMain
         '
         'mnuModel
         '
-        Me.mnuModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributions, Me.ToolStripSeparator60, Me.mnuModelHypothesisTests, Me.ToolStripSeparator3, Me.mnuModelFitModel, Me.CompareModelsToolStripMenuItem, Me.mnuModelUseModel, Me.mnuModelOtherOneVariable, Me.mnuModelOtherTwoVariables, Me.mnuModelOtherThreeVariables, Me.mnuModelOtherGeneral})
+        Me.mnuModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributions, Me.ToolStripSeparator60, Me.mnuModelHypothesisTests, Me.ToolStripSeparator3, Me.mnuModelFitModel, Me.mnuModelCompareModels, Me.mnuModelUseModel, Me.mnuModelOtherOneVariable, Me.mnuModelOtherTwoVariables, Me.mnuModelOtherThreeVariables, Me.mnuModelOtherGeneral})
         Me.mnuModel.Name = "mnuModel"
         resources.ApplyResources(Me.mnuModel, "mnuModel")
         Me.mnuModel.Tag = "Model"
@@ -979,6 +979,17 @@ Partial Class frmMain
         '
         Me.mnuModelFitModelModelKeyboard.Name = "mnuModelFitModelModelKeyboard"
         resources.ApplyResources(Me.mnuModelFitModelModelKeyboard, "mnuModelFitModelModelKeyboard")
+        '
+        'mnuModelCompareModels
+        '
+        Me.mnuModelCompareModels.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelCompareModelsOneVariable})
+        Me.mnuModelCompareModels.Name = "mnuModelCompareModels"
+        resources.ApplyResources(Me.mnuModelCompareModels, "mnuModelCompareModels")
+        '
+        'mnuModelCompareModelsOneVariable
+        '
+        Me.mnuModelCompareModelsOneVariable.Name = "mnuModelCompareModelsOneVariable"
+        resources.ApplyResources(Me.mnuModelCompareModelsOneVariable, "mnuModelCompareModelsOneVariable")
         '
         'mnuModelUseModel
         '
@@ -3750,17 +3761,6 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
-        'CompareModelsToolStripMenuItem
-        '
-        Me.CompareModelsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OneVariableToolStripMenuItem})
-        Me.CompareModelsToolStripMenuItem.Name = "CompareModelsToolStripMenuItem"
-        resources.ApplyResources(Me.CompareModelsToolStripMenuItem, "CompareModelsToolStripMenuItem")
-        '
-        'OneVariableToolStripMenuItem
-        '
-        Me.OneVariableToolStripMenuItem.Name = "OneVariableToolStripMenuItem"
-        resources.ApplyResources(Me.OneVariableToolStripMenuItem, "OneVariableToolStripMenuItem")
-        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4358,6 +4358,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator58 As ToolStripSeparator
     Friend WithEvents mnuModelUseModelUseModelKeyboard As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator60 As ToolStripSeparator
-    Friend WithEvents CompareModelsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OneVariableToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuModelCompareModels As ToolStripMenuItem
+    Friend WithEvents mnuModelCompareModelsOneVariable As ToolStripMenuItem
 End Class
