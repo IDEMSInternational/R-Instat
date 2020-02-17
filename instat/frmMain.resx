@@ -428,53 +428,17 @@
   <data name="mnuModelFitModel.Text" xml:space="preserve">
     <value>Fit Model</value>
   </data>
-  <data name="CompareModelsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 26</value>
+  <data name="mnuModelCompareModelsOneVariable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 26</value>
   </data>
-  <data name="CompareModelsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Compare Models</value>
-  </data>
-  <data name="mnuModelUseModelOneVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 26</value>
-  </data>
-  <data name="mnuModelUseModelOneVariable.Text" xml:space="preserve">
+  <data name="mnuModelCompareModelsOneVariable.Text" xml:space="preserve">
     <value>One Variable...</value>
   </data>
-  <data name="mnuModelUseModelTwoVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 26</value>
+  <data name="mnuModelCompareModels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 26</value>
   </data>
-  <data name="mnuModelUseModelTwoVariables.Text" xml:space="preserve">
-    <value>Two Variables...</value>
-  </data>
-  <data name="ToolStripSeparator59.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 6</value>
-  </data>
-  <data name="mnuModelUseModelGlance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 26</value>
-  </data>
-  <data name="mnuModelUseModelGlance.Text" xml:space="preserve">
-    <value>Glance...</value>
-  </data>
-  <data name="mnuModelUseModelTidy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 26</value>
-  </data>
-  <data name="mnuModelUseModelTidy.Text" xml:space="preserve">
-    <value>Tidy...</value>
-  </data>
-  <data name="mnuModelUseModelAugment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 26</value>
-  </data>
-  <data name="mnuModelUseModelAugment.Text" xml:space="preserve">
-    <value>Augment...</value>
-  </data>
-  <data name="ToolStripSeparator58.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 6</value>
-  </data>
-  <data name="mnuModelUseModelUseModelKeyboard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 26</value>
-  </data>
-  <data name="mnuModelUseModelUseModelKeyboard.Text" xml:space="preserve">
-    <value>Use Model Keyboard...</value>
+  <data name="mnuModelCompareModels.Text" xml:space="preserve">
+    <value>Compare Models</value>
   </data>
   <data name="mnuModelUseModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>244, 26</value>
@@ -546,46 +510,88 @@
     <value>Random Samples (Use Model)...</value>
   </data>
   <data name="mnuModelFitModelOneVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="mnuModelFitModelOneVariable.Text" xml:space="preserve">
     <value>One Variable...</value>
   </data>
   <data name="mnuModelFitModelTwoVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="mnuModelFitModelTwoVariables.Text" xml:space="preserve">
     <value>Two Variables...</value>
   </data>
   <data name="mnuModelFitModelThreeVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="mnuModelFitModelThreeVariables.Text" xml:space="preserve">
     <value>Three Variables...</value>
   </data>
   <data name="mnuModelFitModelFourVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="mnuModelFitModelFourVariables.Text" xml:space="preserve">
     <value>Four Variables...</value>
   </data>
   <data name="ToolStripSeparator24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 6</value>
+    <value>201, 6</value>
   </data>
   <data name="mnuModelFitModelGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="mnuModelFitModelGeneral.Text" xml:space="preserve">
     <value>General...</value>
   </data>
   <data name="ToolStripSeparator57.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 6</value>
+    <value>201, 6</value>
   </data>
   <data name="mnuModelFitModelModelKeyboard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
+    <value>204, 26</value>
   </data>
   <data name="mnuModelFitModelModelKeyboard.Text" xml:space="preserve">
     <value>Model Keyboard...</value>
+  </data>
+  <data name="mnuModelUseModelOneVariable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 26</value>
+  </data>
+  <data name="mnuModelUseModelOneVariable.Text" xml:space="preserve">
+    <value>One Variable...</value>
+  </data>
+  <data name="mnuModelUseModelTwoVariables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 26</value>
+  </data>
+  <data name="mnuModelUseModelTwoVariables.Text" xml:space="preserve">
+    <value>Two Variables...</value>
+  </data>
+  <data name="ToolStripSeparator59.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 6</value>
+  </data>
+  <data name="mnuModelUseModelGlance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 26</value>
+  </data>
+  <data name="mnuModelUseModelGlance.Text" xml:space="preserve">
+    <value>Glance...</value>
+  </data>
+  <data name="mnuModelUseModelTidy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 26</value>
+  </data>
+  <data name="mnuModelUseModelTidy.Text" xml:space="preserve">
+    <value>Tidy...</value>
+  </data>
+  <data name="mnuModelUseModelAugment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 26</value>
+  </data>
+  <data name="mnuModelUseModelAugment.Text" xml:space="preserve">
+    <value>Augment...</value>
+  </data>
+  <data name="ToolStripSeparator58.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 6</value>
+  </data>
+  <data name="mnuModelUseModelUseModelKeyboard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 26</value>
+  </data>
+  <data name="mnuModelUseModelUseModelKeyboard.Text" xml:space="preserve">
+    <value>Use Model Keyboard...</value>
   </data>
   <data name="mnuModelOtherOneVariableExactResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 26</value>
@@ -4344,12 +4350,6 @@
   <data name="mnuLogFile.ToolTipText" xml:space="preserve">
     <value>Log Window</value>
   </data>
-  <data name="OneVariableToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 26</value>
-  </data>
-  <data name="OneVariableToolStripMenuItem.Text" xml:space="preserve">
-    <value>One Variable</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -6484,6 +6484,18 @@
     <value>mnuModelFitModelModelKeyboard</value>
   </data>
   <data name="&gt;&gt;mnuModelFitModelModelKeyboard.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuModelCompareModels.Name" xml:space="preserve">
+    <value>mnuModelCompareModels</value>
+  </data>
+  <data name="&gt;&gt;mnuModelCompareModels.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuModelCompareModelsOneVariable.Name" xml:space="preserve">
+    <value>mnuModelCompareModelsOneVariable</value>
+  </data>
+  <data name="&gt;&gt;mnuModelCompareModelsOneVariable.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuModelUseModel.Name" xml:space="preserve">
@@ -9316,18 +9328,6 @@
     <value>mnuLogFile</value>
   </data>
   <data name="&gt;&gt;mnuLogFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CompareModelsToolStripMenuItem.Name" xml:space="preserve">
-    <value>CompareModelsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;CompareModelsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OneVariableToolStripMenuItem.Name" xml:space="preserve">
-    <value>OneVariableToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;OneVariableToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
