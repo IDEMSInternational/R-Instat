@@ -157,13 +157,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblSummariseBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 134</value>
+    <value>265, 181</value>
   </data>
   <data name="lblSummariseBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
   </data>
   <data name="lblSummariseBy.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="lblSummariseBy.Text" xml:space="preserve">
     <value>Summarise By:</value>
@@ -364,13 +364,13 @@
     <value>2</value>
   </data>
   <data name="ucrChkWeights.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 253</value>
+    <value>265, 134</value>
   </data>
   <data name="ucrChkWeights.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 20</value>
   </data>
   <data name="ucrChkWeights.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrChkWeights.Name" xml:space="preserve">
     <value>ucrChkWeights</value>
@@ -394,7 +394,7 @@
     <value>416, 418</value>
   </data>
   <data name="ucrReceiverByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 149</value>
+    <value>265, 196</value>
   </data>
   <data name="ucrReceiverByFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -403,7 +403,7 @@
     <value>120, 100</value>
   </data>
   <data name="ucrReceiverByFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrReceiverByFactor.Name" xml:space="preserve">
     <value>ucrReceiverByFactor</value>
@@ -499,7 +499,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverWeights.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 276</value>
+    <value>265, 157</value>
   </data>
   <data name="ucrReceiverWeights.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -508,7 +508,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverWeights.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrReceiverWeights.Name" xml:space="preserve">
     <value>ucrReceiverWeights</value>
