@@ -189,6 +189,12 @@
     <Compile Include="dlgCircular.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgGlance.Designer.vb">
+      <DependentUpon>dlgGlance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGlance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgGraphsGUI.Designer.vb">
       <DependentUpon>dlgGraphsGUI.vb</DependentUpon>
     </Compile>
@@ -2444,6 +2450,9 @@
   <ItemGroup>
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGlance.resx">
+      <DependentUpon>dlgGlance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGraphsGUI.resx">
       <DependentUpon>dlgGraphsGUI.vb</DependentUpon>
