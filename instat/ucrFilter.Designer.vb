@@ -56,6 +56,8 @@ Partial Class ucrFilter
         Me.ucrFactorLevels = New instat.ucrFactor()
         Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrDatePicker = New instat.ucrDateTimePicker()
+        Me.ucrLogicalCombobox = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblSelectLevels
@@ -78,6 +80,7 @@ Partial Class ucrFilter
         '
         'lstFilters
         '
+        Me.lstFilters.HideSelection = False
         resources.ApplyResources(Me.lstFilters, "lstFilters")
         Me.lstFilters.Name = "lstFilters"
         Me.lstFilters.UseCompatibleStateImageBehavior = False
@@ -175,10 +178,26 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.ucrSelectorForFitler, "ucrSelectorForFitler")
         Me.ucrSelectorForFitler.Name = "ucrSelectorForFitler"
         '
+        'ucrDatePicker
+        '
+        resources.ApplyResources(Me.ucrDatePicker, "ucrDatePicker")
+        Me.ucrDatePicker.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDatePicker.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDatePicker.Name = "ucrDatePicker"
+        '
+        'ucrLogicalCombobox
+        '
+        Me.ucrLogicalCombobox.AddQuotesIfUnrecognised = True
+        Me.ucrLogicalCombobox.IsReadOnly = False
+        resources.ApplyResources(Me.ucrLogicalCombobox, "ucrLogicalCombobox")
+        Me.ucrLogicalCombobox.Name = "ucrLogicalCombobox"
+        '
         'ucrFilter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrLogicalCombobox)
+        Me.Controls.Add(Me.ucrDatePicker)
         Me.Controls.Add(Me.ucrInputFilterName)
         Me.Controls.Add(Me.lblNewFilterName)
         Me.Controls.Add(Me.cmdRemoveCondition)
@@ -219,4 +238,6 @@ Partial Class ucrFilter
     Friend WithEvents cmdRemoveCondition As Button
     Friend WithEvents lblNewFilterName As Label
     Friend WithEvents ucrInputFilterName As ucrInputComboBox
+    Friend WithEvents ucrDatePicker As ucrDateTimePicker
+    Friend WithEvents ucrLogicalCombobox As ucrInputComboBox
 End Class
