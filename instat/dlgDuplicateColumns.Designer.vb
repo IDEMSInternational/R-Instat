@@ -40,18 +40,30 @@ Partial Class dlgDuplicateColumns
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDuplicateColumns))
         Me.lblColumns = New System.Windows.Forms.Label()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
-        Me.ucrInputColumnName = New instat.ucrInputComboBox()
+        Me.grpConvertTo = New System.Windows.Forms.GroupBox()
+        Me.rdoConvertToLogical = New System.Windows.Forms.RadioButton()
+        Me.rdoConvertToCharacter = New System.Windows.Forms.RadioButton()
+        Me.rdoConvertToInteger = New System.Windows.Forms.RadioButton()
+        Me.rdoConvertToNumeric = New System.Windows.Forms.RadioButton()
+        Me.rdoConvertToOrderedFactor = New System.Windows.Forms.RadioButton()
+        Me.rdoConvertToFactor = New System.Windows.Forms.RadioButton()
+        Me.grpFactorToNumericOptions = New System.Windows.Forms.GroupBox()
+        Me.rdoConvertDefault = New System.Windows.Forms.RadioButton()
+        Me.rdoConvertOrdinals = New System.Windows.Forms.RadioButton()
+        Me.rdoConvertLevels = New System.Windows.Forms.RadioButton()
+        Me.ucrChkChangeType = New instat.ucrCheck()
+        Me.ucrChkConvertCreateLabels = New instat.ucrCheck()
+        Me.ucrChkConvertKeepAttributes = New instat.ucrCheck()
+        Me.ucrNudConvertDisplayDecimals = New instat.ucrNud()
+        Me.ucrPnlConvertFactorToNumericOptions = New instat.UcrPanel()
+        Me.ucrPnlConvertTo = New instat.UcrPanel()
+        Me.ucrChkConvertSpecifyDecimalsToDisplay = New instat.ucrCheck()
         Me.ucrReceiverDuplicateColumns = New instat.ucrReceiverSingle()
         Me.ucrSelectorForDuplicateColumn = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.grpDuplicatedColumn = New System.Windows.Forms.GroupBox()
-        Me.rdoBefore = New System.Windows.Forms.RadioButton()
-        Me.rdoEnd = New System.Windows.Forms.RadioButton()
-        Me.rdoAfter = New System.Windows.Forms.RadioButton()
-        Me.rdoBeginning = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlColPosition = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpDuplicatedColumn.SuspendLayout()
+        Me.ucrSaveColumn = New instat.ucrSave()
+        Me.grpConvertTo.SuspendLayout()
+        Me.grpFactorToNumericOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblColumns
@@ -59,17 +71,135 @@ Partial Class dlgDuplicateColumns
         resources.ApplyResources(Me.lblColumns, "lblColumns")
         Me.lblColumns.Name = "lblColumns"
         '
-        'lblNewColumnName
+        'grpConvertTo
         '
-        resources.ApplyResources(Me.lblNewColumnName, "lblNewColumnName")
-        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.grpConvertTo.Controls.Add(Me.rdoConvertToLogical)
+        Me.grpConvertTo.Controls.Add(Me.rdoConvertToCharacter)
+        Me.grpConvertTo.Controls.Add(Me.rdoConvertToInteger)
+        Me.grpConvertTo.Controls.Add(Me.rdoConvertToNumeric)
+        Me.grpConvertTo.Controls.Add(Me.rdoConvertToOrderedFactor)
+        Me.grpConvertTo.Controls.Add(Me.rdoConvertToFactor)
+        Me.grpConvertTo.Controls.Add(Me.ucrPnlConvertTo)
+        resources.ApplyResources(Me.grpConvertTo, "grpConvertTo")
+        Me.grpConvertTo.Name = "grpConvertTo"
+        Me.grpConvertTo.TabStop = False
         '
-        'ucrInputColumnName
+        'rdoConvertToLogical
         '
-        Me.ucrInputColumnName.AddQuotesIfUnrecognised = True
-        Me.ucrInputColumnName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputColumnName, "ucrInputColumnName")
-        Me.ucrInputColumnName.Name = "ucrInputColumnName"
+        resources.ApplyResources(Me.rdoConvertToLogical, "rdoConvertToLogical")
+        Me.rdoConvertToLogical.Name = "rdoConvertToLogical"
+        Me.rdoConvertToLogical.TabStop = True
+        Me.rdoConvertToLogical.UseVisualStyleBackColor = True
+        '
+        'rdoConvertToCharacter
+        '
+        resources.ApplyResources(Me.rdoConvertToCharacter, "rdoConvertToCharacter")
+        Me.rdoConvertToCharacter.Name = "rdoConvertToCharacter"
+        Me.rdoConvertToCharacter.TabStop = True
+        Me.rdoConvertToCharacter.UseVisualStyleBackColor = True
+        '
+        'rdoConvertToInteger
+        '
+        resources.ApplyResources(Me.rdoConvertToInteger, "rdoConvertToInteger")
+        Me.rdoConvertToInteger.Name = "rdoConvertToInteger"
+        Me.rdoConvertToInteger.TabStop = True
+        Me.rdoConvertToInteger.UseVisualStyleBackColor = True
+        '
+        'rdoConvertToNumeric
+        '
+        resources.ApplyResources(Me.rdoConvertToNumeric, "rdoConvertToNumeric")
+        Me.rdoConvertToNumeric.Name = "rdoConvertToNumeric"
+        Me.rdoConvertToNumeric.TabStop = True
+        Me.rdoConvertToNumeric.UseVisualStyleBackColor = True
+        '
+        'rdoConvertToOrderedFactor
+        '
+        resources.ApplyResources(Me.rdoConvertToOrderedFactor, "rdoConvertToOrderedFactor")
+        Me.rdoConvertToOrderedFactor.Name = "rdoConvertToOrderedFactor"
+        Me.rdoConvertToOrderedFactor.TabStop = True
+        Me.rdoConvertToOrderedFactor.UseVisualStyleBackColor = True
+        '
+        'rdoConvertToFactor
+        '
+        resources.ApplyResources(Me.rdoConvertToFactor, "rdoConvertToFactor")
+        Me.rdoConvertToFactor.Name = "rdoConvertToFactor"
+        Me.rdoConvertToFactor.TabStop = True
+        Me.rdoConvertToFactor.UseVisualStyleBackColor = True
+        '
+        'grpFactorToNumericOptions
+        '
+        Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertDefault)
+        Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertOrdinals)
+        Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertLevels)
+        Me.grpFactorToNumericOptions.Controls.Add(Me.ucrPnlConvertFactorToNumericOptions)
+        resources.ApplyResources(Me.grpFactorToNumericOptions, "grpFactorToNumericOptions")
+        Me.grpFactorToNumericOptions.Name = "grpFactorToNumericOptions"
+        Me.grpFactorToNumericOptions.TabStop = False
+        '
+        'rdoConvertDefault
+        '
+        resources.ApplyResources(Me.rdoConvertDefault, "rdoConvertDefault")
+        Me.rdoConvertDefault.Name = "rdoConvertDefault"
+        Me.rdoConvertDefault.TabStop = True
+        Me.rdoConvertDefault.UseVisualStyleBackColor = True
+        '
+        'rdoConvertOrdinals
+        '
+        resources.ApplyResources(Me.rdoConvertOrdinals, "rdoConvertOrdinals")
+        Me.rdoConvertOrdinals.Name = "rdoConvertOrdinals"
+        Me.rdoConvertOrdinals.TabStop = True
+        Me.rdoConvertOrdinals.UseVisualStyleBackColor = True
+        '
+        'rdoConvertLevels
+        '
+        resources.ApplyResources(Me.rdoConvertLevels, "rdoConvertLevels")
+        Me.rdoConvertLevels.Name = "rdoConvertLevels"
+        Me.rdoConvertLevels.TabStop = True
+        Me.rdoConvertLevels.UseVisualStyleBackColor = True
+        '
+        'ucrChkChangeType
+        '
+        Me.ucrChkChangeType.Checked = False
+        resources.ApplyResources(Me.ucrChkChangeType, "ucrChkChangeType")
+        Me.ucrChkChangeType.Name = "ucrChkChangeType"
+        '
+        'ucrChkConvertCreateLabels
+        '
+        Me.ucrChkConvertCreateLabels.Checked = False
+        resources.ApplyResources(Me.ucrChkConvertCreateLabels, "ucrChkConvertCreateLabels")
+        Me.ucrChkConvertCreateLabels.Name = "ucrChkConvertCreateLabels"
+        '
+        'ucrChkConvertKeepAttributes
+        '
+        Me.ucrChkConvertKeepAttributes.Checked = False
+        resources.ApplyResources(Me.ucrChkConvertKeepAttributes, "ucrChkConvertKeepAttributes")
+        Me.ucrChkConvertKeepAttributes.Name = "ucrChkConvertKeepAttributes"
+        '
+        'ucrNudConvertDisplayDecimals
+        '
+        Me.ucrNudConvertDisplayDecimals.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudConvertDisplayDecimals.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudConvertDisplayDecimals, "ucrNudConvertDisplayDecimals")
+        Me.ucrNudConvertDisplayDecimals.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudConvertDisplayDecimals.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudConvertDisplayDecimals.Name = "ucrNudConvertDisplayDecimals"
+        Me.ucrNudConvertDisplayDecimals.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlConvertFactorToNumericOptions
+        '
+        resources.ApplyResources(Me.ucrPnlConvertFactorToNumericOptions, "ucrPnlConvertFactorToNumericOptions")
+        Me.ucrPnlConvertFactorToNumericOptions.Name = "ucrPnlConvertFactorToNumericOptions"
+        '
+        'ucrPnlConvertTo
+        '
+        resources.ApplyResources(Me.ucrPnlConvertTo, "ucrPnlConvertTo")
+        Me.ucrPnlConvertTo.Name = "ucrPnlConvertTo"
+        '
+        'ucrChkConvertSpecifyDecimalsToDisplay
+        '
+        Me.ucrChkConvertSpecifyDecimalsToDisplay.Checked = False
+        resources.ApplyResources(Me.ucrChkConvertSpecifyDecimalsToDisplay, "ucrChkConvertSpecifyDecimalsToDisplay")
+        Me.ucrChkConvertSpecifyDecimalsToDisplay.Name = "ucrChkConvertSpecifyDecimalsToDisplay"
         '
         'ucrReceiverDuplicateColumns
         '
@@ -88,73 +218,41 @@ Partial Class dlgDuplicateColumns
         resources.ApplyResources(Me.ucrSelectorForDuplicateColumn, "ucrSelectorForDuplicateColumn")
         Me.ucrSelectorForDuplicateColumn.Name = "ucrSelectorForDuplicateColumn"
         '
-        'grpDuplicatedColumn
-        '
-        Me.grpDuplicatedColumn.Controls.Add(Me.rdoBefore)
-        Me.grpDuplicatedColumn.Controls.Add(Me.rdoEnd)
-        Me.grpDuplicatedColumn.Controls.Add(Me.rdoAfter)
-        Me.grpDuplicatedColumn.Controls.Add(Me.rdoBeginning)
-        Me.grpDuplicatedColumn.Controls.Add(Me.ucrPnlColPosition)
-        resources.ApplyResources(Me.grpDuplicatedColumn, "grpDuplicatedColumn")
-        Me.grpDuplicatedColumn.Name = "grpDuplicatedColumn"
-        Me.grpDuplicatedColumn.TabStop = False
-        '
-        'rdoBefore
-        '
-        resources.ApplyResources(Me.rdoBefore, "rdoBefore")
-        Me.rdoBefore.Name = "rdoBefore"
-        Me.rdoBefore.TabStop = True
-        Me.rdoBefore.UseVisualStyleBackColor = True
-        '
-        'rdoEnd
-        '
-        resources.ApplyResources(Me.rdoEnd, "rdoEnd")
-        Me.rdoEnd.Name = "rdoEnd"
-        Me.rdoEnd.TabStop = True
-        Me.rdoEnd.UseVisualStyleBackColor = True
-        '
-        'rdoAfter
-        '
-        resources.ApplyResources(Me.rdoAfter, "rdoAfter")
-        Me.rdoAfter.Name = "rdoAfter"
-        Me.rdoAfter.TabStop = True
-        Me.rdoAfter.UseVisualStyleBackColor = True
-        '
-        'rdoBeginning
-        '
-        resources.ApplyResources(Me.rdoBeginning, "rdoBeginning")
-        Me.rdoBeginning.Name = "rdoBeginning"
-        Me.rdoBeginning.TabStop = True
-        Me.rdoBeginning.UseVisualStyleBackColor = True
-        '
-        'ucrPnlColPosition
-        '
-        resources.ApplyResources(Me.ucrPnlColPosition, "ucrPnlColPosition")
-        Me.ucrPnlColPosition.Name = "ucrPnlColPosition"
-        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrSaveColumn
+        '
+        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
+        Me.ucrSaveColumn.Name = "ucrSaveColumn"
+        '
         'dlgDuplicateColumns
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.ucrInputColumnName)
+        Me.Controls.Add(Me.ucrSaveColumn)
+        Me.Controls.Add(Me.ucrChkChangeType)
+        Me.Controls.Add(Me.ucrChkConvertCreateLabels)
+        Me.Controls.Add(Me.ucrChkConvertKeepAttributes)
+        Me.Controls.Add(Me.ucrNudConvertDisplayDecimals)
+        Me.Controls.Add(Me.grpFactorToNumericOptions)
+        Me.Controls.Add(Me.grpConvertTo)
+        Me.Controls.Add(Me.ucrChkConvertSpecifyDecimalsToDisplay)
         Me.Controls.Add(Me.ucrReceiverDuplicateColumns)
         Me.Controls.Add(Me.ucrSelectorForDuplicateColumn)
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.grpDuplicatedColumn)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDuplicateColumns"
         Me.Tag = ""
-        Me.grpDuplicatedColumn.ResumeLayout(False)
-        Me.grpDuplicatedColumn.PerformLayout()
+        Me.grpConvertTo.ResumeLayout(False)
+        Me.grpConvertTo.PerformLayout()
+        Me.grpFactorToNumericOptions.ResumeLayout(False)
+        Me.grpFactorToNumericOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -162,13 +260,25 @@ Partial Class dlgDuplicateColumns
     Friend WithEvents lblColumns As Label
     Friend WithEvents ucrSelectorForDuplicateColumn As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverDuplicateColumns As ucrReceiverSingle
-    Friend WithEvents ucrInputColumnName As ucrInputComboBox
     Friend WithEvents lblNewColumnName As Label
-    Friend WithEvents grpDuplicatedColumn As GroupBox
-    Friend WithEvents rdoBefore As RadioButton
-    Friend WithEvents rdoEnd As RadioButton
-    Friend WithEvents rdoAfter As RadioButton
-    Friend WithEvents rdoBeginning As RadioButton
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrPnlColPosition As UcrPanel
+    Friend WithEvents grpConvertTo As GroupBox
+    Friend WithEvents rdoConvertToLogical As RadioButton
+    Friend WithEvents rdoConvertToCharacter As RadioButton
+    Friend WithEvents rdoConvertToInteger As RadioButton
+    Friend WithEvents rdoConvertToNumeric As RadioButton
+    Friend WithEvents rdoConvertToOrderedFactor As RadioButton
+    Friend WithEvents rdoConvertToFactor As RadioButton
+    Friend WithEvents ucrPnlConvertTo As UcrPanel
+    Friend WithEvents grpFactorToNumericOptions As GroupBox
+    Friend WithEvents rdoConvertDefault As RadioButton
+    Friend WithEvents rdoConvertOrdinals As RadioButton
+    Friend WithEvents rdoConvertLevels As RadioButton
+    Friend WithEvents ucrPnlConvertFactorToNumericOptions As UcrPanel
+    Friend WithEvents ucrChkConvertSpecifyDecimalsToDisplay As ucrCheck
+    Friend WithEvents ucrNudConvertDisplayDecimals As ucrNud
+    Friend WithEvents ucrChkConvertCreateLabels As ucrCheck
+    Friend WithEvents ucrChkConvertKeepAttributes As ucrCheck
+    Friend WithEvents ucrChkChangeType As ucrCheck
+    Friend WithEvents ucrSaveColumn As ucrSave
 End Class
