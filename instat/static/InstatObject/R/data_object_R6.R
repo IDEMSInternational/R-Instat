@@ -128,6 +128,8 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
       message("data is empty. Data will be an empty data frame.")
     }
     if(check_names) {
+      # "T" should be avoided as a column name but is not checked by make.names()
+      if("T" %in% names(new_data)) names(new_data)[names(new_data) == "T"] <- ".T"
       valid_names <- make.names(iconv(names(new_data), to = "ASCII//TRANSLIT", sub = "."))
       if(!all(names(new_data) == valid_names)) {
         warning("Not all column names are syntactically valid. make.names() and iconv() will be used to force them to be valid.")
@@ -1458,8 +1460,8 @@ DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace
   if(filter_name == "") filter_name = next_default_item("Filter", names(private$filters))
   
   for(condition in filter) {
-    if(length(condition) != 3 || !all(sort(names(condition)) == c("column", "operation", "value"))) {
-      stop("filter must be a list of conditions containing: column, operation and value")
+    if(length(condition) < 2 || length(condition) > 3 || !all(names(condition) %in% c("column", "operation", "value"))) {
+      stop("filter must be a list of conditions containing: column, operation and (sometimes) value")
     }
     if(!condition[["column"]] %in% self$get_column_names()) stop(condition[["column"]], " not found in data.")
   }
@@ -1523,13 +1525,16 @@ DataSheet$set("public", "get_filter_as_logical", function(filter_name) {
       # Prevents crash if column no longer exists
       # TODO still shows filter is applied
       if(!condition[["column"]] %in% self$get_column_names()) return(TRUE)
-      func = match.fun(condition[["operation"]])
-      # TODO Have better hanlding and dealing with NA values in filter
-      # and special options for NA in the dialog
-      if(condition[["operation"]] == "==" && is.na(condition[["value"]])) result[ ,i] <- is.na(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE))
-      else if(condition[["operation"]] == "!=" && is.na(condition[["value"]])) result[ ,i] <- !is.na(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE))
-      else if(any(is.na(condition[["value"]])) && condition[["operation"]] != "%in%") stop("Cannot create a filter on missing values with operation: ", condition[["operation"]])
-      else result[ ,i] <- func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
+      if(condition[["operation"]] == "is.na" || condition[["operation"]] == "! is.na") {
+        col_is_na <- is.na(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE))
+        if(condition[["operation"]] == "is.na") result[ ,i] <- col_is_na
+        else result[ ,i] <- !col_is_na
+      }
+      else {
+        func <- match.fun(condition[["operation"]])
+        if(any(is.na(condition[["value"]])) && condition[["operation"]] != "%in%") stop("Cannot create a filter on missing values with operation: ", condition[["operation"]])
+        else result[ ,i] <- func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
+      }
       i = i + 1
     }
     out <- apply(result, 1, all)

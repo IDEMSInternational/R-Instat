@@ -273,10 +273,17 @@ nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
   if(dimension %in% time_dims && time_as_date) {
     time_vals <- c()
     try({
-      pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = dimension)
-      posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
-      # RDotNet interprets Date class as numeric so character needed to preserve date
-      time_vals <- as.character(as.Date(posixct_time))
+      units <- ncdf4::ncatt_get(nc, dimension, "units")
+      if(units$hasatt && units$value == "julian_day") {
+        # RDotNet interprets Date class as numeric so character needed to preserve date
+        time_vals <- as.character(as.Date(vals, origin = structure(-2440588, class = "Date")))
+      }
+      else {
+        pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = dimension)
+        posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
+        # RDotNet interprets Date class as numeric so character needed to preserve date
+        time_vals <- as.character(as.Date(posixct_time))
+      }
     })
     if(length(time_vals) > 0 && !anyNA(time_vals)) vals <- time_vals
   }
@@ -285,6 +292,7 @@ nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
 }
 
 nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = TRUE) {
+  if(missing(vars)) vars <- ncdf4.helpers::nc.get.variable.list(nc)
   if(sum(is.null(lon_points), is.null(lat_points)) == 1) stop("You must specificy both lon_points and lat_points")
   has_points <- (sum(is.null(lon_points), is.null(lat_points)) == 0)
   if(has_points && length(lon_points) != length(lat_points)) stop("lon_points and lat_points have unequal lengths.")
@@ -318,9 +326,17 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
             if(dim == "T") {
               ind <- integer(0)
               try({
-                pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = dim_var)
-                posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
-                time_vals <- as.Date(posixct_time)
+                print(dim_var)
+                units <- ncdf4::ncatt_get(nc, dim_var, "units")
+                if(units$hasatt && units$value == "julian_day") {
+                  # RDotNet interprets Date class as numeric so character needed to preserve date
+                  time_vals <- as.Date(curr_dim_values, origin = structure(-2440588, class = "Date"))
+                }
+                else {
+                  pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = dim_var)
+                  posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
+                  time_vals <- as.Date(posixct_time)
+                }
                 ind <- which(time_vals >= boundary[[dim_var]][[1]] & time_vals <= boundary[[dim_var]][[2]])
               })
             }
@@ -426,11 +442,17 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
       try({
         # need to subset this if time var has been subsetted
         time_ind <- which(raw_time_full %in% raw_time)
-        pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
-        pcict_time <- pcict_time[time_ind]
-        posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
-        time_df[[paste0(time_var, "_full")]] <- posixct_time
-        time_df[[paste0(time_var, "_date")]] <- as.Date(posixct_time)
+        units <- ncdf4::ncatt_get(nc, time_var, "units")
+        if(units$hasatt && units$value == "julian_day") {
+          time_df[[paste0(time_var, "_date")]] <- as.Date(raw_time, origin = structure(-2440588, class = "Date"))
+        }
+        else {
+          pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
+          pcict_time <- pcict_time[time_ind]
+          posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
+          time_df[[paste0(time_var, "_full")]] <- posixct_time
+          time_df[[paste0(time_var, "_date")]] <- as.Date(posixct_time)
+        }
       })
       if(ncol(time_df) > 1) curr_var_data <- dplyr::full_join(curr_var_data, time_df, by = time_var)
       if(!keep_raw_time) {
@@ -583,6 +605,26 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
 #   return(list(my_data, lat_lon_df, new_lat_lon_column_names))
 # }
 
+multiple_nc_as_data_frame <- function(path, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = TRUE, id = "id") {
+  filepaths <- list.files(path = path, pattern="*\\.nc", full.names = TRUE)
+  filenames <- basename(filepaths)
+  nc_list <- list()
+  
+  n_files <- length(filepaths)
+  pb <- winProgressBar(title = "Reading files", min = 0, max = n_files)
+  for(i in seq_along(filepaths)) {
+    nc <- ncdf4::nc_open(filename = filepaths[i])
+    dat <- nc_as_data_frame(nc = nc, vars = vars, keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = boundary, lon_points = lon_points, lat_points = lat_points, id_points = id_points, show_requested_points = show_requested_points, great_circle_dist = great_circle_dist)
+    nc_list[[length(nc_list) + 1]] <- dat
+    ncdf4::nc_close(nc)
+    info <- paste0("Reading file ", i, " of ", n_files, " - ", round(100*i/n_files), "%")
+    setWinProgressBar(pb, value = i, title = info, label = info)
+  }
+  close(pb)
+  names(nc_list) <- tools::file_path_sans_ext(filenames)
+  merged_data <- dplyr::bind_rows(nc_list, .id = id)
+  return(merged_data)
+}
 
 import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_area_point){
   if(path == ""){
