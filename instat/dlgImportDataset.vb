@@ -35,9 +35,10 @@ Public Class dlgImportDataset
     Private bReset As Boolean = True
     Private bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
-    Public strFilePathSystem As String
-    Public strFilePathR As String
-    Public strCurrentDirectory As String
+    Private strFilePathSystem As String
+    Private strFilePathSystemTemp As String 'to hold and set back what was previously the path in the case of open from library
+    Private strFilePathR As String
+    Private strCurrentDirectory As String
     Public strFileToOpenOn As String
     Private bDialogLoaded As Boolean
     Private iDataFrameCount As Integer
@@ -98,17 +99,17 @@ Public Class dlgImportDataset
             If Not String.IsNullOrEmpty(ucrInputFilePath.GetText()) Then
                 If File.Exists(ucrInputFilePath.GetText()) Then
                     SetControlsFromFile(ucrInputFilePath.GetText())
-                    bDialogLoaded = True
-                    RefreshFilePreview()
-                    RefreshFrameView()
                 Else
                     MsgBox("File no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File No Longer Exists")
                     SetControlsFromFile("")
-                    bDialogLoaded = True
-                    RefreshFilePreview()
-                    RefreshFrameView()
                 End If
+            Else
+                SetControlsFromFile(ucrInputFilePath.GetText())
             End If
+            'still refresh the preview. Incase the dialog was previously opened from the library
+            bDialogLoaded = True
+            RefreshFilePreview()
+            RefreshFrameView()
         End If
 
         'temprary fix for autotranslate(me) translating this to Label1. Can be removed after that
@@ -378,10 +379,7 @@ Public Class dlgImportDataset
         grpText.Hide()
         grpCSV.Hide()
         grpRDS.Hide()
-        grpExcel.Hide()
-        clbSheets.Hide()
-        lblSelectSheets.Hide()
-        ucrChkSheetsCheckAll.Hide()
+        ExcelSheetPreviewVisible(False)
         TextPreviewVisible(False)
         lblNoPreview.Hide()
         lblCannotImport.Hide()
@@ -425,17 +423,12 @@ Public Class dlgImportDataset
             If bFromLibrary Then
                 dlgOpen.Title = "Import from Library"
                 dlgOpen.InitialDirectory = strLibraryPath
-                bFromLibrary = False
             Else
                 dlgOpen.Title = "Open Data from file"
-                If strCurrentDirectory <> "" Then
-                    dlgOpen.InitialDirectory = strCurrentDirectory
-                Else
-                    dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-                End If
+                dlgOpen.InitialDirectory = If(String.IsNullOrEmpty(strCurrentDirectory), frmMain.clsInstatOptions.strWorkingDirectory, strCurrentDirectory)
             End If
 
-            If dlgOpen.ShowDialog() = DialogResult.OK Then
+            If DialogResult.OK = dlgOpen.ShowDialog() Then
                 ucrSaveFile.Reset()
                 'TODO This is in place for when we allow multiple files selected.
                 bMultiFiles = (dlgOpen.FileNames.Count > 1)
@@ -443,24 +436,18 @@ Public Class dlgImportDataset
                     MsgBox("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
                     SetControlsFromFile("")
                 Else
-                    If dlgOpen.FileName <> "" Then
-                        SetControlsFromFile(dlgOpen.FileName)
-                    End If
+                    SetControlsFromFile(dlgOpen.FileName)
                 End If
             Else
                 If bFromLibrary Then
                     'TODO something like this so that the Import dialog closes
                     '     when using open from library but library dialog stays open
-                    'bFromLibrary = False
                     'Me.Close()
                 End If
                 If ucrInputFilePath.GetText() = "" Then
                     grpText.Hide()
                     grpCSV.Hide()
-                    grpExcel.Hide()
-                    clbSheets.Hide()
-                    lblSelectSheets.Hide()
-                    ucrChkSheetsCheckAll.Hide()
+                    ExcelSheetPreviewVisible(False)
                     grpRDS.Hide()
                     grdDataPreview.Hide()
                     lblDataFrame.Hide()
@@ -550,6 +537,13 @@ Public Class dlgImportDataset
         ucrNudPreviewLines.Visible = bVisible
     End Sub
 
+    Private Sub ExcelSheetPreviewVisible(bVisible As Boolean)
+        grpExcel.Visible = bVisible
+        clbSheets.Visible = bVisible
+        lblSelectSheets.Visible = bVisible
+        ucrChkSheetsCheckAll.Visible = bVisible
+    End Sub
+
     Public Sub SetControlsFromFile(strFilePath As String)
         Dim strFileExt As String
 
@@ -557,9 +551,13 @@ Public Class dlgImportDataset
         If strFilePath <> "" Then
             strFileName = Path.GetFileNameWithoutExtension(strFilePath)
             strFileExt = Path.GetExtension(strFilePath).ToLower()
+            If bFromLibrary Then
+                strFilePathSystemTemp = strFilePathSystem 'store what was there temporarily first 
+            End If
             strFilePathSystem = strFilePath
             strFilePathR = Replace(strFilePath, "\", "/")
             strCurrentDirectory = Path.GetDirectoryName(strFilePath)
+
         Else
             strFileName = ""
             strFileExt = ""
@@ -572,10 +570,7 @@ Public Class dlgImportDataset
         grpText.Hide()
         ucrPanelFixedWidthText.Hide()
         grpRDS.Hide()
-        grpExcel.Hide()
-        clbSheets.Hide()
-        lblSelectSheets.Hide()
-        ucrChkSheetsCheckAll.Hide()
+        ExcelSheetPreviewVisible(False)
         grpCSV.Hide()
         'TODO This needs to be different when RDS is a data frame
         'need to be able to detect RDS as data.frame/Instat Object
@@ -607,10 +602,7 @@ Public Class dlgImportDataset
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
             End If
-            grpExcel.Show()
-            clbSheets.Show()
-            lblSelectSheets.Show()
-            ucrChkSheetsCheckAll.Show()
+            ExcelSheetPreviewVisible(True)
             FillExcelSheets(strFilePath)
         ElseIf strFileExt <> "" Then
             strFileType = strFileExt.Substring(1).ToUpper()
@@ -944,6 +936,27 @@ Public Class dlgImportDataset
                 End If
                 clbSheets.SetItemChecked(i, bCheckAll)
             Next
+        End If
+    End Sub
+
+    Private Sub dlgImportDataset_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        If (Not Me.Visible) AndAlso bFromLibrary Then
+            bFromLibrary = False
+            If String.IsNullOrEmpty(strFilePathSystemTemp) Then
+                strCurrentDirectory = ""
+                strFileName = ""
+                strFileType = ""
+                strFilePathSystem = ""
+                strFilePathR = ""
+                ucrInputFilePath.SetName("")
+            Else
+                strCurrentDirectory = Path.GetDirectoryName(strFilePathSystemTemp)
+                strFileName = Path.GetFileNameWithoutExtension(strFilePathSystemTemp)
+                strFileType = Path.GetExtension(strFilePathSystemTemp).Substring(1).ToUpper()
+                strFilePathSystem = strFilePathSystemTemp
+                strFilePathR = Replace(strFilePathSystemTemp, "\", "/")
+                ucrInputFilePath.SetName(strFilePathR)
+            End If
         End If
     End Sub
 End Class

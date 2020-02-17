@@ -121,6 +121,10 @@
   <data name="lblSelectLevels.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblSelectLevels.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSelectLevels.Location" type="System.Drawing.Point, System.Drawing">
     <value>413, 42</value>
@@ -144,7 +148,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSelectLevels.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
+  </data>
+  <data name="cmdAddCondition.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdAddCondition.Location" type="System.Drawing.Point, System.Drawing">
     <value>278, 64</value>
@@ -168,7 +175,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdAddCondition.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
+  </data>
+  <data name="cmdToggleSelectAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdToggleSelectAll.Location" type="System.Drawing.Point, System.Drawing">
     <value>674, 363</value>
@@ -192,7 +202,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdToggleSelectAll.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="lstFilters.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 195</value>
@@ -213,7 +223,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lstFilters.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
+  </data>
+  <data name="lblFilterPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 339</value>
@@ -237,10 +250,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFilterPreview.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="lblFilterBy.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblFilterBy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblFilterBy.Location" type="System.Drawing.Point, System.Drawing">
     <value>278, 27</value>
@@ -264,7 +280,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFilterBy.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
+  </data>
+  <data name="cmdClearConditions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdClearConditions.Location" type="System.Drawing.Point, System.Drawing">
     <value>278, 304</value>
@@ -288,10 +307,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdClearConditions.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="mcdEditCondition.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="mcdEditCondition.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="mcdEditCondition.Location" type="System.Drawing.Point, System.Drawing">
     <value>278, 216</value>
@@ -315,10 +337,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mcdEditCondition.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="cmdRemoveCondition.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="cmdRemoveCondition.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdRemoveCondition.Location" type="System.Drawing.Point, System.Drawing">
     <value>278, 260</value>
@@ -342,7 +367,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdRemoveCondition.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
+  </data>
+  <data name="lblNewFilterName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblNewFilterName.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 366</value>
@@ -366,7 +394,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblNewFilterName.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrInputFilterName.Location" type="System.Drawing.Point, System.Drawing">
     <value>131, 364</value>
@@ -387,10 +415,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputFilterName.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="ucrValueForFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 40</value>
+    <value>488, 40</value>
   </data>
   <data name="ucrValueForFilter.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 21</value>
@@ -408,7 +436,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrValueForFilter.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="ucrFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>131, 337</value>
@@ -429,13 +457,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFilterPreview.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="ucrFilterOperation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>420, 40</value>
+    <value>413, 40</value>
   </data>
   <data name="ucrFilterOperation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 21</value>
+    <value>56, 21</value>
   </data>
   <data name="ucrFilterOperation.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -450,7 +478,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFilterOperation.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="ucrFactorLevels.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -474,12 +502,11 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFactorLevels.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="ucrFilterByReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>278, 42</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrFilterByReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
@@ -499,7 +526,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFilterByReceiver.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="ucrSelectorForFitler.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 4</value>
@@ -523,7 +550,49 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorForFitler.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>18</value>
+  </data>
+  <data name="ucrDatePicker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>489, 40</value>
+  </data>
+  <data name="ucrDatePicker.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 21</value>
+  </data>
+  <data name="ucrDatePicker.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;ucrDatePicker.Name" xml:space="preserve">
+    <value>ucrDatePicker</value>
+  </data>
+  <data name="&gt;&gt;ucrDatePicker.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDatePicker.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrDatePicker.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrLogicalCombobox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>489, 39</value>
+  </data>
+  <data name="ucrLogicalCombobox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 21</value>
+  </data>
+  <data name="ucrLogicalCombobox.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;ucrLogicalCombobox.Name" xml:space="preserve">
+    <value>ucrLogicalCombobox</value>
+  </data>
+  <data name="&gt;&gt;ucrLogicalCombobox.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLogicalCombobox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrLogicalCombobox.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
