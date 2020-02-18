@@ -183,10 +183,22 @@
     <Compile Include="clsRCodeStructure.vb" />
     <Compile Include="clsRegressionDefaults.vb" />
     <Compile Include="clsThemeSubFunctions.vb" />
+    <Compile Include="dlgAugment.Designer.vb">
+      <DependentUpon>dlgAugment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAugment.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCircular.Designer.vb">
       <DependentUpon>dlgCircular.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCircular.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgGlance.Designer.vb">
+      <DependentUpon>dlgGlance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGlance.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgGraphsGUI.Designer.vb">
@@ -229,6 +241,12 @@
       <DependentUpon>dlgSurvivalRates.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgSurvivalRates.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTidy.Designer.vb">
+      <DependentUpon>dlgTidy.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTidy.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTreemap.Designer.vb">
@@ -2442,8 +2460,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgAugment.resx">
+      <DependentUpon>dlgAugment.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGlance.resx">
+      <DependentUpon>dlgGlance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGraphsGUI.resx">
       <DependentUpon>dlgGraphsGUI.vb</DependentUpon>
@@ -2465,6 +2489,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSurvivalRates.resx">
       <DependentUpon>dlgSurvivalRates.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTidy.resx">
+      <DependentUpon>dlgTidy.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTreemap.resx">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
@@ -4896,7 +4923,9 @@
     <Content Include="static\Library\Climatic\Nigeria\samaru_56.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Climatic\rain_galle.xlsx" />
+    <Content Include="static\Library\Climatic\rain_galle.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="static\Library\Climatic\Tanzania\dodoma.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -4972,7 +5001,9 @@
     <Content Include="static\Library\Climatic\Lesotho\thaba_tseka.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Climatic\climatic_guide_datasets.xlsx" />
+    <Content Include="static\Library\Climatic\climatic_guide_datasets.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Carlosjj-Microsoft-Office-2013-Excel.ico" />
