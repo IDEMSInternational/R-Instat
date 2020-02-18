@@ -2622,7 +2622,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::md(sim = , obs = )", 10)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::md()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::md((sim = , obs = )", 10)
         End If
     End Sub
 
@@ -2630,7 +2630,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::me(sim = , obs = )", 10)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::me()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::me(sim = , obs = )", 10)
         End If
     End Sub
 
@@ -2638,7 +2638,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mNSE(sim = , obs = )", 10)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mNSE()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mNSE(sim = , obs = )", 10)
         End If
     End Sub
 
@@ -2646,7 +2646,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mse(sim = , obs = )", 10)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mse()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::mse(sim = , obs = )", 10)
         End If
     End Sub
 
@@ -2654,7 +2654,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::nrmse(sim = , obs = )", 10)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::nrmse()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::nrmse(sim = , obs = )", 10)
         End If
     End Sub
 
@@ -2662,7 +2662,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::NSE(sim = , obs = )", 10)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::NSE()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::NSE(sim = , obs = )", 10)
         End If
     End Sub
 
@@ -2670,7 +2670,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::pbias(sim = , obs = )", 10)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::pbias()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::pbias(sim = , obs = )", 10)
         End If
     End Sub
 
