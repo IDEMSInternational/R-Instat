@@ -262,6 +262,7 @@ Public Class dlgImportDataset
 
         ucrNudRowsToSkipExcel.SetParameter(New RParameter("skip"))
         ucrNudRowsToSkipExcel.Minimum = 0
+        ucrNudRowsToSkipExcel.Maximum = Decimal.MaxValue
         ucrNudRowsToSkipExcel.SetRDefault(0)
 
         ucrChkColumnNamesExcel.SetText("First Row is Column Headers")
@@ -363,6 +364,8 @@ Public Class dlgImportDataset
         clsImportExcelMulti.SetRCommand("import_list")
 
         clsFileList.SetRCommand("c")
+        clsFileList.AddParameter("guess_max", "Inf")
+
 
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
 
