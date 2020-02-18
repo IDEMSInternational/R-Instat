@@ -366,7 +366,6 @@ Public Class dlgImportDataset
         clsFileList.SetRCommand("c")
         clsFileList.AddParameter("guess_max", "Inf")
 
-
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
@@ -403,6 +402,7 @@ Public Class dlgImportDataset
         SetDefaults()
         SetRCodeForControls(True)
         RefreshFrameView()
+        dctSelectedExcelSheets.Clear()
         TestOkEnabled()
     End Sub
 
@@ -439,6 +439,7 @@ Public Class dlgImportDataset
                     MsgBox("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
                     SetControlsFromFile("")
                 Else
+                    dctSelectedExcelSheets.Clear()
                     SetControlsFromFile(dlgOpen.FileName)
                 End If
             Else
@@ -605,6 +606,7 @@ Public Class dlgImportDataset
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
             End If
+
             ExcelSheetPreviewVisible(True)
             FillExcelSheets(strFilePath)
         ElseIf strFileExt <> "" Then
@@ -795,7 +797,17 @@ Public Class dlgImportDataset
         clbSheets.Items.Clear()
         If chrSheets IsNot Nothing AndAlso chrSheets.Count > 0 Then
             clbSheets.Items.AddRange(chrSheets.ToArray())
-            clbSheets.SetItemChecked(0, True)
+            If dctSelectedExcelSheets.Count = 0 Then
+                clbSheets.SetItemChecked(0, True)
+            Else
+                'Storing the array here because the dctSeleceted indice changes on clbSheets.itemsClicked
+                Dim ListOfItems As Integer() = ListOfCheckedItems.ToArray
+                For i = 0 To ListOfItems.Length - 1
+                    clbSheets.SetItemChecked((ListOfItems(i) - 1), True)
+                Next
+            End If
+
+
         End If
 
         'ucrInputNamedRegions.cboInput.Items.Clear()
@@ -962,4 +974,12 @@ Public Class dlgImportDataset
             End If
         End If
     End Sub
+
+    Private Function ListOfCheckedItems()
+        Dim keyList As New List(Of Integer)
+        For Each kvp As KeyValuePair(Of Integer, String) In dctSelectedExcelSheets
+            keyList.Add(kvp.Key)
+        Next
+        Return keyList
+    End Function
 End Class
