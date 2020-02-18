@@ -333,6 +333,27 @@
   <data name="&gt;&gt;grpyAxisTitle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lblXAxisTitleSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXAxisTitleSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblXAxisTitleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 101</value>
+  </data>
+  <data name="lblXAxisTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblXAxisTitleSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 17</value>
+  </data>
+  <data name="lblXAxisTitleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="lblXAxisTitleSize.Text" xml:space="preserve">
+    <value>Size:</value>
+  </data>
   <data name="&gt;&gt;lblXAxisTitleSize.Name" xml:space="preserve">
     <value>lblXAxisTitleSize</value>
   </data>
@@ -344,6 +365,27 @@
   </data>
   <data name="&gt;&gt;lblXAxisTitleSize.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="rdoAutoXAxis.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoAutoXAxis.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoAutoXAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 26</value>
+  </data>
+  <data name="rdoAutoXAxis.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="rdoAutoXAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 21</value>
+  </data>
+  <data name="rdoAutoXAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="rdoAutoXAxis.Text" xml:space="preserve">
+    <value>Auto </value>
   </data>
   <data name="&gt;&gt;rdoAutoXAxis.Name" xml:space="preserve">
     <value>rdoAutoXAxis</value>
@@ -357,6 +399,18 @@
   <data name="&gt;&gt;rdoAutoXAxis.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrInputXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 54</value>
+  </data>
+  <data name="ucrInputXAxisTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 7, 9, 7</value>
+  </data>
+  <data name="ucrInputXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 26</value>
+  </data>
+  <data name="ucrInputXAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
   <data name="&gt;&gt;ucrInputXAxisTitle.Name" xml:space="preserve">
     <value>ucrInputXAxisTitle</value>
   </data>
@@ -368,6 +422,27 @@
   </data>
   <data name="&gt;&gt;ucrInputXAxisTitle.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="rdoNoTitleXAxisTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoNoTitleXAxisTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoNoTitleXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>189, 26</value>
+  </data>
+  <data name="rdoNoTitleXAxisTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="rdoNoTitleXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 21</value>
+  </data>
+  <data name="rdoNoTitleXAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="rdoNoTitleXAxisTitle.Text" xml:space="preserve">
+    <value>No Title</value>
   </data>
   <data name="&gt;&gt;rdoNoTitleXAxisTitle.Name" xml:space="preserve">
     <value>rdoNoTitleXAxisTitle</value>
@@ -381,6 +456,27 @@
   <data name="&gt;&gt;rdoNoTitleXAxisTitle.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="rdoSpecifyXAxisTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoSpecifyXAxisTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoSpecifyXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 26</value>
+  </data>
+  <data name="rdoSpecifyXAxisTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="rdoSpecifyXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 21</value>
+  </data>
+  <data name="rdoSpecifyXAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="rdoSpecifyXAxisTitle.Text" xml:space="preserve">
+    <value>Specifiy</value>
+  </data>
   <data name="&gt;&gt;rdoSpecifyXAxisTitle.Name" xml:space="preserve">
     <value>rdoSpecifyXAxisTitle</value>
   </data>
@@ -393,6 +489,18 @@
   <data name="&gt;&gt;rdoSpecifyXAxisTitle.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="ucrPnlXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 18</value>
+  </data>
+  <data name="ucrPnlXAxisTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="ucrPnlXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 70</value>
+  </data>
+  <data name="ucrPnlXAxisTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
   <data name="&gt;&gt;ucrPnlXAxisTitle.Name" xml:space="preserve">
     <value>ucrPnlXAxisTitle</value>
   </data>
@@ -404,6 +512,18 @@
   </data>
   <data name="&gt;&gt;ucrPnlXAxisTitle.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="ucrNudXAxisTitleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>57, 99</value>
+  </data>
+  <data name="ucrNudXAxisTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="ucrNudXAxisTitleSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 25</value>
+  </data>
+  <data name="ucrNudXAxisTitleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
   </data>
   <data name="&gt;&gt;ucrNudXAxisTitleSize.Name" xml:space="preserve">
     <value>ucrNudXAxisTitleSize</value>
@@ -447,27 +567,6 @@
   <data name="&gt;&gt;grpAxes.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblCaptionSize.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblCaptionSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblCaptionSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 102</value>
-  </data>
-  <data name="lblCaptionSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="lblCaptionSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 17</value>
-  </data>
-  <data name="lblCaptionSize.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="lblCaptionSize.Text" xml:space="preserve">
-    <value>Caption Size:</value>
-  </data>
   <data name="&gt;&gt;lblCaptionSize.Name" xml:space="preserve">
     <value>lblCaptionSize</value>
   </data>
@@ -479,27 +578,6 @@
   </data>
   <data name="&gt;&gt;lblCaptionSize.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="lblSubTitleSize.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSubTitleSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSubTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 65</value>
-  </data>
-  <data name="lblSubTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="lblSubTitleSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 17</value>
-  </data>
-  <data name="lblSubTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="lblSubTitleSize.Text" xml:space="preserve">
-    <value>Sub Title Size:</value>
   </data>
   <data name="&gt;&gt;lblSubTitleSize.Name" xml:space="preserve">
     <value>lblSubTitleSize</value>
@@ -513,27 +591,6 @@
   <data name="&gt;&gt;lblSubTitleSize.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblTitleSize.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblTitleSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>481, 28</value>
-  </data>
-  <data name="lblTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="lblTitleSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 17</value>
-  </data>
-  <data name="lblTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="lblTitleSize.Text" xml:space="preserve">
-    <value>Title Size:</value>
-  </data>
   <data name="&gt;&gt;lblTitleSize.Name" xml:space="preserve">
     <value>lblTitleSize</value>
   </data>
@@ -545,27 +602,6 @@
   </data>
   <data name="&gt;&gt;lblTitleSize.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="lblCaption.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblCaption.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 102</value>
-  </data>
-  <data name="lblCaption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="lblCaption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 17</value>
-  </data>
-  <data name="lblCaption.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="lblCaption.Text" xml:space="preserve">
-    <value>Graph Caption:</value>
   </data>
   <data name="&gt;&gt;lblCaption.Name" xml:space="preserve">
     <value>lblCaption</value>
@@ -579,27 +615,6 @@
   <data name="&gt;&gt;lblCaption.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="lblSubTitle.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSubTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblSubTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 65</value>
-  </data>
-  <data name="lblSubTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="lblSubTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 17</value>
-  </data>
-  <data name="lblSubTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="lblSubTitle.Text" xml:space="preserve">
-    <value>Graph Sub Title:</value>
-  </data>
   <data name="&gt;&gt;lblSubTitle.Name" xml:space="preserve">
     <value>lblSubTitle</value>
   </data>
@@ -611,27 +626,6 @@
   </data>
   <data name="&gt;&gt;lblSubTitle.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="lblTitle.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 28</value>
-  </data>
-  <data name="lblTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 17</value>
-  </data>
-  <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="lblTitle.Text" xml:space="preserve">
-    <value>Graph Title:</value>
   </data>
   <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
     <value>lblTitle</value>
@@ -645,18 +639,6 @@
   <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="ucrNudCaptionSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>597, 96</value>
-  </data>
-  <data name="ucrNudCaptionSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="ucrNudCaptionSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 25</value>
-  </data>
-  <data name="ucrNudCaptionSize.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
   <data name="&gt;&gt;ucrNudCaptionSize.Name" xml:space="preserve">
     <value>ucrNudCaptionSize</value>
   </data>
@@ -668,18 +650,6 @@
   </data>
   <data name="&gt;&gt;ucrNudCaptionSize.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="ucrNudSubTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>597, 59</value>
-  </data>
-  <data name="ucrNudSubTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="ucrNudSubTitleSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 25</value>
-  </data>
-  <data name="ucrNudSubTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
   </data>
   <data name="&gt;&gt;ucrNudSubTitleSize.Name" xml:space="preserve">
     <value>ucrNudSubTitleSize</value>
@@ -693,18 +663,6 @@
   <data name="&gt;&gt;ucrNudSubTitleSize.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="ucrNudTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>597, 22</value>
-  </data>
-  <data name="ucrNudTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="ucrNudTitleSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 25</value>
-  </data>
-  <data name="ucrNudTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
   <data name="&gt;&gt;ucrNudTitleSize.Name" xml:space="preserve">
     <value>ucrNudTitleSize</value>
   </data>
@@ -716,18 +674,6 @@
   </data>
   <data name="&gt;&gt;ucrNudTitleSize.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="ucrInputGraphcCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 96</value>
-  </data>
-  <data name="ucrInputGraphcCaption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 7, 9, 7</value>
-  </data>
-  <data name="ucrInputGraphcCaption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 72</value>
-  </data>
-  <data name="ucrInputGraphcCaption.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrInputGraphcCaption.Name" xml:space="preserve">
     <value>ucrInputGraphcCaption</value>
@@ -741,18 +687,6 @@
   <data name="&gt;&gt;ucrInputGraphcCaption.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="ucrInputGraphTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 22</value>
-  </data>
-  <data name="ucrInputGraphTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 7, 9, 7</value>
-  </data>
-  <data name="ucrInputGraphTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 26</value>
-  </data>
-  <data name="ucrInputGraphTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
   <data name="&gt;&gt;ucrInputGraphTitle.Name" xml:space="preserve">
     <value>ucrInputGraphTitle</value>
   </data>
@@ -764,18 +698,6 @@
   </data>
   <data name="&gt;&gt;ucrInputGraphTitle.ZOrder" xml:space="preserve">
     <value>10</value>
-  </data>
-  <data name="ucrInputGraphSubTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 59</value>
-  </data>
-  <data name="ucrInputGraphSubTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 7, 9, 7</value>
-  </data>
-  <data name="ucrInputGraphSubTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 26</value>
-  </data>
-  <data name="ucrInputGraphSubTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrInputGraphSubTitle.Name" xml:space="preserve">
     <value>ucrInputGraphSubTitle</value>
@@ -1995,209 +1917,347 @@
   <data name="&gt;&gt;UcrPnlYAxisTitle.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="lblXAxisTitleSize.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblCaptionSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblXAxisTitleSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblCaptionSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblXAxisTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 101</value>
+  <data name="lblCaptionSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 102</value>
   </data>
-  <data name="lblXAxisTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblCaptionSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="lblXAxisTitleSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 17</value>
+  <data name="lblCaptionSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 17</value>
   </data>
-  <data name="lblXAxisTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
+  <data name="lblCaptionSize.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
   </data>
-  <data name="lblXAxisTitleSize.Text" xml:space="preserve">
-    <value>Size:</value>
+  <data name="lblCaptionSize.Text" xml:space="preserve">
+    <value>Caption Size:</value>
   </data>
-  <data name="&gt;&gt;lblXAxisTitleSize.Name" xml:space="preserve">
-    <value>lblXAxisTitleSize</value>
+  <data name="&gt;&gt;lblCaptionSize.Name" xml:space="preserve">
+    <value>lblCaptionSize</value>
   </data>
-  <data name="&gt;&gt;lblXAxisTitleSize.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblCaptionSize.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblXAxisTitleSize.Parent" xml:space="preserve">
-    <value>grpAxes</value>
+  <data name="&gt;&gt;lblCaptionSize.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
   </data>
-  <data name="&gt;&gt;lblXAxisTitleSize.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblCaptionSize.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdoAutoXAxis.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblSubTitleSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdoAutoXAxis.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblSubTitleSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdoAutoXAxis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 26</value>
+  <data name="lblSubTitleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 65</value>
   </data>
-  <data name="rdoAutoXAxis.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="lblSubTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="rdoAutoXAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 21</value>
+  <data name="lblSubTitleSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 17</value>
   </data>
-  <data name="rdoAutoXAxis.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
+  <data name="lblSubTitleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
   </data>
-  <data name="rdoAutoXAxis.Text" xml:space="preserve">
-    <value>Auto </value>
+  <data name="lblSubTitleSize.Text" xml:space="preserve">
+    <value>Sub Title Size:</value>
   </data>
-  <data name="&gt;&gt;rdoAutoXAxis.Name" xml:space="preserve">
-    <value>rdoAutoXAxis</value>
+  <data name="&gt;&gt;lblSubTitleSize.Name" xml:space="preserve">
+    <value>lblSubTitleSize</value>
   </data>
-  <data name="&gt;&gt;rdoAutoXAxis.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lblSubTitleSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoAutoXAxis.Parent" xml:space="preserve">
-    <value>grpAxes</value>
+  <data name="&gt;&gt;lblSubTitleSize.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
   </data>
-  <data name="&gt;&gt;rdoAutoXAxis.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblSubTitleSize.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ucrInputXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 54</value>
+  <data name="lblTitleSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="ucrInputXAxisTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 7, 9, 7</value>
+  <data name="lblTitleSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ucrInputXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 26</value>
+  <data name="lblTitleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>481, 28</value>
   </data>
-  <data name="ucrInputXAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
+  <data name="lblTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="&gt;&gt;ucrInputXAxisTitle.Name" xml:space="preserve">
-    <value>ucrInputXAxisTitle</value>
+  <data name="lblTitleSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 17</value>
   </data>
-  <data name="&gt;&gt;ucrInputXAxisTitle.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="lblTitleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
   </data>
-  <data name="&gt;&gt;ucrInputXAxisTitle.Parent" xml:space="preserve">
-    <value>grpAxes</value>
+  <data name="lblTitleSize.Text" xml:space="preserve">
+    <value>Title Size:</value>
   </data>
-  <data name="&gt;&gt;ucrInputXAxisTitle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblTitleSize.Name" xml:space="preserve">
+    <value>lblTitleSize</value>
+  </data>
+  <data name="&gt;&gt;lblTitleSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTitleSize.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;lblTitleSize.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="rdoNoTitleXAxisTitle.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblCaption.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdoNoTitleXAxisTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblCaption.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdoNoTitleXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>189, 26</value>
+  <data name="lblCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 102</value>
   </data>
-  <data name="rdoNoTitleXAxisTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="lblCaption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
-  <data name="rdoNoTitleXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 21</value>
+  <data name="lblCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 17</value>
   </data>
-  <data name="rdoNoTitleXAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
-  </data>
-  <data name="rdoNoTitleXAxisTitle.Text" xml:space="preserve">
-    <value>No Title</value>
-  </data>
-  <data name="&gt;&gt;rdoNoTitleXAxisTitle.Name" xml:space="preserve">
-    <value>rdoNoTitleXAxisTitle</value>
-  </data>
-  <data name="&gt;&gt;rdoNoTitleXAxisTitle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoNoTitleXAxisTitle.Parent" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;rdoNoTitleXAxisTitle.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="rdoSpecifyXAxisTitle.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoSpecifyXAxisTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoSpecifyXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 26</value>
-  </data>
-  <data name="rdoSpecifyXAxisTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="rdoSpecifyXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 21</value>
-  </data>
-  <data name="rdoSpecifyXAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <data name="rdoSpecifyXAxisTitle.Text" xml:space="preserve">
-    <value>Specifiy</value>
-  </data>
-  <data name="&gt;&gt;rdoSpecifyXAxisTitle.Name" xml:space="preserve">
-    <value>rdoSpecifyXAxisTitle</value>
-  </data>
-  <data name="&gt;&gt;rdoSpecifyXAxisTitle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoSpecifyXAxisTitle.Parent" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;rdoSpecifyXAxisTitle.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrPnlXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 18</value>
-  </data>
-  <data name="ucrPnlXAxisTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="ucrPnlXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 70</value>
-  </data>
-  <data name="ucrPnlXAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlXAxisTitle.Name" xml:space="preserve">
-    <value>ucrPnlXAxisTitle</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlXAxisTitle.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlXAxisTitle.Parent" xml:space="preserve">
-    <value>grpAxes</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlXAxisTitle.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrNudXAxisTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 97</value>
-  </data>
-  <data name="ucrNudXAxisTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="ucrNudXAxisTitleSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 25</value>
-  </data>
-  <data name="ucrNudXAxisTitleSize.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblCaption.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
-  <data name="&gt;&gt;ucrNudXAxisTitleSize.Name" xml:space="preserve">
-    <value>ucrNudXAxisTitleSize</value>
+  <data name="lblCaption.Text" xml:space="preserve">
+    <value>Graph Caption:</value>
   </data>
-  <data name="&gt;&gt;ucrNudXAxisTitleSize.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblCaption.Name" xml:space="preserve">
+    <value>lblCaption</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;lblCaption.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblSubTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSubTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSubTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 65</value>
+  </data>
+  <data name="lblSubTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblSubTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 17</value>
+  </data>
+  <data name="lblSubTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="lblSubTitle.Text" xml:space="preserve">
+    <value>Graph Sub Title:</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.Name" xml:space="preserve">
+    <value>lblSubTitle</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;lblSubTitle.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 28</value>
+  </data>
+  <data name="lblTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 17</value>
+  </data>
+  <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>Graph Title:</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
+    <value>lblTitle</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrNudCaptionSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>597, 96</value>
+  </data>
+  <data name="ucrNudCaptionSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="ucrNudCaptionSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 25</value>
+  </data>
+  <data name="ucrNudCaptionSize.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;ucrNudCaptionSize.Name" xml:space="preserve">
+    <value>ucrNudCaptionSize</value>
+  </data>
+  <data name="&gt;&gt;ucrNudCaptionSize.Type" xml:space="preserve">
     <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrNudXAxisTitleSize.Parent" xml:space="preserve">
-    <value>grpAxes</value>
+  <data name="&gt;&gt;ucrNudCaptionSize.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
   </data>
-  <data name="&gt;&gt;ucrNudXAxisTitleSize.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudCaptionSize.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="ucrNudSubTitleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>597, 59</value>
+  </data>
+  <data name="ucrNudSubTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="ucrNudSubTitleSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 25</value>
+  </data>
+  <data name="ucrNudSubTitleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSubTitleSize.Name" xml:space="preserve">
+    <value>ucrNudSubTitleSize</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSubTitleSize.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSubTitleSize.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSubTitleSize.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrNudTitleSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>597, 22</value>
+  </data>
+  <data name="ucrNudTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="ucrNudTitleSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 25</value>
+  </data>
+  <data name="ucrNudTitleSize.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;ucrNudTitleSize.Name" xml:space="preserve">
+    <value>ucrNudTitleSize</value>
+  </data>
+  <data name="&gt;&gt;ucrNudTitleSize.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudTitleSize.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;ucrNudTitleSize.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrInputGraphcCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 96</value>
+  </data>
+  <data name="ucrInputGraphcCaption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 7, 9, 7</value>
+  </data>
+  <data name="ucrInputGraphcCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 72</value>
+  </data>
+  <data name="ucrInputGraphcCaption.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphcCaption.Name" xml:space="preserve">
+    <value>ucrInputGraphcCaption</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphcCaption.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphcCaption.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphcCaption.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ucrInputGraphTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 22</value>
+  </data>
+  <data name="ucrInputGraphTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 7, 9, 7</value>
+  </data>
+  <data name="ucrInputGraphTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 26</value>
+  </data>
+  <data name="ucrInputGraphTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphTitle.Name" xml:space="preserve">
+    <value>ucrInputGraphTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphTitle.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphTitle.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphTitle.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="ucrInputGraphSubTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 59</value>
+  </data>
+  <data name="ucrInputGraphSubTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 7, 9, 7</value>
+  </data>
+  <data name="ucrInputGraphSubTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 26</value>
+  </data>
+  <data name="ucrInputGraphSubTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphSubTitle.Name" xml:space="preserve">
+    <value>ucrInputGraphSubTitle</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphSubTitle.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphSubTitle.Parent" xml:space="preserve">
+    <value>grpGraphTitles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputGraphSubTitle.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrChkXAxisLabelSize.Name" xml:space="preserve">
     <value>ucrChkXAxisLabelSize</value>

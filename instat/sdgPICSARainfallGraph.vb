@@ -1500,14 +1500,6 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
-    Private Sub ucrInputGraphTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphcCaption.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrInputGraphcCaption_Load(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub ucrChkIncludeMajorGridLines_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeMajorGridLines.ControlValueChanged
         AddRemoveMajorGridLines()
     End Sub
