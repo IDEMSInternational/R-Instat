@@ -430,7 +430,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputGraphcCaption
         '
         Me.ucrInputGraphcCaption.AddQuotesIfUnrecognised = True
-        Me.ucrInputGraphcCaption.IsMultiline = False
+        Me.ucrInputGraphcCaption.IsMultiline = True
         Me.ucrInputGraphcCaption.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputGraphcCaption, "ucrInputGraphcCaption")
         Me.ucrInputGraphcCaption.Name = "ucrInputGraphcCaption"
