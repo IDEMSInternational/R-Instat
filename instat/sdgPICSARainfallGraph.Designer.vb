@@ -220,22 +220,22 @@ Partial Class sdgPICSARainfallGraph
         '
         'tpTitles
         '
-        Me.tpTitles.Controls.Add(Me.grpyAxisTitle)
-        Me.tpTitles.Controls.Add(Me.grpAxes)
         Me.tpTitles.Controls.Add(Me.grpGraphTitles)
+        Me.tpTitles.Controls.Add(Me.grpAxes)
+        Me.tpTitles.Controls.Add(Me.grpyAxisTitle)
         resources.ApplyResources(Me.tpTitles, "tpTitles")
         Me.tpTitles.Name = "tpTitles"
         Me.tpTitles.UseVisualStyleBackColor = True
         '
         'grpyAxisTitle
         '
-        Me.grpyAxisTitle.Controls.Add(Me.lblYAxisTitleSize)
         Me.grpyAxisTitle.Controls.Add(Me.rdoAutoYAxis)
         Me.grpyAxisTitle.Controls.Add(Me.ucrInputYAxisTitle)
         Me.grpyAxisTitle.Controls.Add(Me.rdoNoYAxisTitle)
         Me.grpyAxisTitle.Controls.Add(Me.ucrNudYAxisTitleSize)
         Me.grpyAxisTitle.Controls.Add(Me.rdoSpecifyYAxisTitle)
         Me.grpyAxisTitle.Controls.Add(Me.UcrPnlYAxisTitle)
+        Me.grpyAxisTitle.Controls.Add(Me.lblYAxisTitleSize)
         resources.ApplyResources(Me.grpyAxisTitle, "grpyAxisTitle")
         Me.grpyAxisTitle.Name = "grpyAxisTitle"
         Me.grpyAxisTitle.TabStop = False
@@ -296,8 +296,8 @@ Partial Class sdgPICSARainfallGraph
         Me.grpAxes.Controls.Add(Me.ucrInputXAxisTitle)
         Me.grpAxes.Controls.Add(Me.rdoNoTitleXAxisTitle)
         Me.grpAxes.Controls.Add(Me.rdoSpecifyXAxisTitle)
-        Me.grpAxes.Controls.Add(Me.ucrPnlXAxisTitle)
         Me.grpAxes.Controls.Add(Me.ucrNudXAxisTitleSize)
+        Me.grpAxes.Controls.Add(Me.ucrPnlXAxisTitle)
         resources.ApplyResources(Me.grpAxes, "grpAxes")
         Me.grpAxes.Name = "grpAxes"
         Me.grpAxes.TabStop = False
@@ -1340,8 +1340,8 @@ Partial Class sdgPICSARainfallGraph
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.tbPICSA)
         Me.Controls.Add(Me.ucrSdgPICSARainfalbuttons)
+        Me.Controls.Add(Me.tbPICSA)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
