@@ -581,7 +581,7 @@ Public Class sdgPICSARainfallGraph
         ucrInputXaxisOptions.AddFunctionNamesCondition("Top", "geom_rug")
         ucrInputXaxisOptions.AddFunctionNamesCondition("Bottom", "geom_rug")
         ucrInputXaxisOptions.AddFunctionNamesCondition("Both", "geom_rug")
-
+        ttPICSARainfallGraph.SetToolTip(ucrInputGraphcCaption.txtInput, "Type \n where you would like a new-line")
         bControlsInitialised = True
     End Sub
 
@@ -1498,6 +1498,14 @@ Public Class sdgPICSARainfallGraph
                 clsGeomTextLabelUpperTercileLine.SetRCommand("geom_label")
             End If
         End If
+    End Sub
+
+    Private Sub ucrInputGraphTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphcCaption.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrInputGraphcCaption_Load(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub ucrChkIncludeMajorGridLines_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeMajorGridLines.ControlValueChanged
