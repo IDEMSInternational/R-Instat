@@ -386,7 +386,7 @@ Partial Class ucrCalculator
         Me.cmdMd = New System.Windows.Forms.Button()
         Me.cmdMae = New System.Windows.Forms.Button()
         Me.cmdKGE = New System.Windows.Forms.Button()
-        Me.cmdV = New System.Windows.Forms.Button()
+        Me.cmdD = New System.Windows.Forms.Button()
         Me.cmdCp = New System.Windows.Forms.Button()
         Me.cmdBr2 = New System.Windows.Forms.Button()
         Me.ucrTryCalculator = New instat.ucrTry()
@@ -2715,7 +2715,7 @@ Partial Class ucrCalculator
         Me.grpHydroGOF.Controls.Add(Me.cmdMd)
         Me.grpHydroGOF.Controls.Add(Me.cmdMae)
         Me.grpHydroGOF.Controls.Add(Me.cmdKGE)
-        Me.grpHydroGOF.Controls.Add(Me.cmdV)
+        Me.grpHydroGOF.Controls.Add(Me.cmdD)
         Me.grpHydroGOF.Controls.Add(Me.cmdCp)
         Me.grpHydroGOF.Controls.Add(Me.cmdBr2)
         resources.ApplyResources(Me.grpHydroGOF, "grpHydroGOF")
@@ -2830,11 +2830,11 @@ Partial Class ucrCalculator
         Me.cmdKGE.Name = "cmdKGE"
         Me.cmdKGE.UseVisualStyleBackColor = True
         '
-        'cmdV
+        'cmdD
         '
-        resources.ApplyResources(Me.cmdV, "cmdV")
-        Me.cmdV.Name = "cmdV"
-        Me.cmdV.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdD, "cmdD")
+        Me.cmdD.Name = "cmdD"
+        Me.cmdD.UseVisualStyleBackColor = True
         '
         'cmdCp
         '
@@ -3267,7 +3267,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdKurtosis As Button
     Friend WithEvents ucrTryCalculator As ucrTry
     Friend WithEvents grpHydroGOF As GroupBox
-    Friend WithEvents cmdV As Button
+    Friend WithEvents cmdD As Button
     Friend WithEvents cmdCp As Button
     Friend WithEvents cmdBr2 As Button
     Friend WithEvents cmdMd As Button

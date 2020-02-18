@@ -24,6 +24,7 @@ Public Class ucrCalculator
     Public Event TryCommadClick()
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
+    Public clsHelp As New RFunction
     Private iBasicWidth As Integer
 
     Public Sub New()
@@ -55,6 +56,9 @@ Public Class ucrCalculator
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Strings (Character Columns)", "Factor", "Probability", "Dates", "Transform", "Wakefield", "Circular", "hydroGOF"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
+
+        clsHelp.SetPackageName("utils")
+        clsHelp.SetRCommand("help")
         cmdDoy.Enabled = False ' temp
         cmdDek.Enabled = False ' temp
         'Temp disabled::Needs discussions to see if they are needed
@@ -170,6 +174,7 @@ Public Class ucrCalculator
         ucrInputCalOptions.Reset()
         ucrSaveResultInto.Reset()
         ucrSelectorForCalculations.Reset()
+        clsHelp.ClearParameters()
     End Sub
     Public Sub SetCalculationHistory()
         ucrReceiverForCalculation.AddtoCombobox(ucrReceiverForCalculation.GetText)
@@ -1238,10 +1243,17 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub HelpContent()
-        If iHelpCalcID > 0 Then
-            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
+
+        If ucrInputCalOptions.GetText = "hydroGOF" Then
+            clsHelp.AddParameter("package", Chr(34) & "hydroGOF" & Chr(34), iPosition:=1)
+            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Code generated to view help for hydroGOF package")
         Else
-            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
+            If iHelpCalcID > 0 Then
+                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpCalcID.ToString())
+            Else
+                Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
+            End If
+
         End If
     End Sub
 
@@ -2582,11 +2594,11 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdV_Click(sender As Object, e As EventArgs) Handles cmdV.Click
+    Private Sub cmdV_Click(sender As Object, e As EventArgs) Handles cmdD.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2(sim = , obs = )", 10)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::d(sim = , obs = )", 10)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::br2()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::d(sim = , obs = )", 10)
         End If
     End Sub
 
