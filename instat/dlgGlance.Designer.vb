@@ -24,6 +24,7 @@ Partial Class dlgGlance
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgGlance))
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrModelSelector = New instat.ucrSelectorByDataFrame()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -31,10 +32,19 @@ Partial Class dlgGlance
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrModelSelector
+        '
+        Me.ucrModelSelector.bDropUnusedFilterLevels = False
+        Me.ucrModelSelector.bShowHiddenColumns = False
+        Me.ucrModelSelector.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrModelSelector, "ucrModelSelector")
+        Me.ucrModelSelector.Name = "ucrModelSelector"
+        '
         'dlgGlance
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrModelSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -45,4 +55,5 @@ Partial Class dlgGlance
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrModelSelector As ucrSelectorByDataFrame
 End Class
