@@ -25,6 +25,8 @@ Partial Class dlgGlance
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgGlance))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrModelSelector = New instat.ucrSelectorByDataFrame()
+        Me.ucrModelReceiver = New instat.ucrReceiverMultiple()
+        Me.lblSelectedColumn = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -40,10 +42,26 @@ Partial Class dlgGlance
         resources.ApplyResources(Me.ucrModelSelector, "ucrModelSelector")
         Me.ucrModelSelector.Name = "ucrModelSelector"
         '
+        'ucrModelReceiver
+        '
+        Me.ucrModelReceiver.frmParent = Me
+        resources.ApplyResources(Me.ucrModelReceiver, "ucrModelReceiver")
+        Me.ucrModelReceiver.Name = "ucrModelReceiver"
+        Me.ucrModelReceiver.Selector = Nothing
+        Me.ucrModelReceiver.strNcFilePath = ""
+        Me.ucrModelReceiver.ucrSelector = Nothing
+        '
+        'lblSelectedColumn
+        '
+        resources.ApplyResources(Me.lblSelectedColumn, "lblSelectedColumn")
+        Me.lblSelectedColumn.Name = "lblSelectedColumn"
+        '
         'dlgGlance
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblSelectedColumn)
+        Me.Controls.Add(Me.ucrModelReceiver)
         Me.Controls.Add(Me.ucrModelSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -51,9 +69,12 @@ Partial Class dlgGlance
         Me.MinimizeBox = False
         Me.Name = "dlgGlance"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrModelSelector As ucrSelectorByDataFrame
+    Friend WithEvents ucrModelReceiver As ucrReceiverMultiple
+    Friend WithEvents lblSelectedColumn As Label
 End Class
