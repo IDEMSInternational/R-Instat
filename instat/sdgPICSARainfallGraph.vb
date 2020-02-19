@@ -581,7 +581,7 @@ Public Class sdgPICSARainfallGraph
         ucrInputXaxisOptions.AddFunctionNamesCondition("Top", "geom_rug")
         ucrInputXaxisOptions.AddFunctionNamesCondition("Bottom", "geom_rug")
         ucrInputXaxisOptions.AddFunctionNamesCondition("Both", "geom_rug")
-
+        ttPICSARainfallGraph.SetToolTip(ucrInputGraphcCaption.txtInput, "Type \n where you would like a new-line")
         bControlsInitialised = True
     End Sub
 
