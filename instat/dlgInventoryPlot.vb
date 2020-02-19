@@ -40,19 +40,19 @@ Public Class dlgInventoryPlot
         ucrInventoryPlotSelector.SetParameter(New RParameter("data_name", 0))
         ucrInventoryPlotSelector.SetParameterIsString()
 
-        ucrReceiverDate.SetParameter(New RParameter("date_col", 1))
+        ucrReceiverDate.SetParameter(New RParameter("date", 1))
         ucrReceiverDate.Selector = ucrInventoryPlotSelector
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.strSelectorHeading = "Date"
 
-        ucrReceiverElements.SetParameter(New RParameter("element_cols", 2))
+        ucrReceiverElements.SetParameter(New RParameter("element", 2))
         ucrReceiverElements.Selector = ucrInventoryPlotSelector
         ucrReceiverElements.SetParameterIsString()
         ucrReceiverElements.strSelectorHeading = "Numerics"
 
-        ucrReceiverStation.SetParameter(New RParameter("station_col", 3))
+        ucrReceiverStation.SetParameter(New RParameter("station", 3))
         ucrReceiverStation.Selector = ucrInventoryPlotSelector
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
