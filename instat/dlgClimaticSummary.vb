@@ -347,6 +347,14 @@ Public Class dlgClimaticSummary
 
     Private Sub SetFactors()
         If bRCodeSet Then
+
+
+            If Not ucrReceiverStation.IsEmpty Then
+                    clsDefaultFactors.AddParameter(ucrReceiverStation.GetParameter())
+                Else
+                    clsDefaultFactors.RemoveParameterByName("station")
+                End If
+
             If rdoAnnual.Checked Then
                 clsDefaultFactors.RemoveParameterByName("within_variable")
                 clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
