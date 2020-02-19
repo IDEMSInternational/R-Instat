@@ -26,7 +26,7 @@ Partial Class dlgGlance
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrModelSelector = New instat.ucrSelectorByDataFrame()
         Me.ucrModelReceiver = New instat.ucrReceiverMultiple()
-        Me.lblSelectedColumn = New System.Windows.Forms.Label()
+        Me.lblModels = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -51,16 +51,16 @@ Partial Class dlgGlance
         Me.ucrModelReceiver.strNcFilePath = ""
         Me.ucrModelReceiver.ucrSelector = Nothing
         '
-        'lblSelectedColumn
+        'lblModels
         '
-        resources.ApplyResources(Me.lblSelectedColumn, "lblSelectedColumn")
-        Me.lblSelectedColumn.Name = "lblSelectedColumn"
+        resources.ApplyResources(Me.lblModels, "lblModels")
+        Me.lblModels.Name = "lblModels"
         '
         'dlgGlance
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblSelectedColumn)
+        Me.Controls.Add(Me.lblModels)
         Me.Controls.Add(Me.ucrModelReceiver)
         Me.Controls.Add(Me.ucrModelSelector)
         Me.Controls.Add(Me.ucrBase)
@@ -76,5 +76,5 @@ Partial Class dlgGlance
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrModelSelector As ucrSelectorByDataFrame
     Friend WithEvents ucrModelReceiver As ucrReceiverMultiple
-    Friend WithEvents lblSelectedColumn As Label
+    Friend WithEvents lblModels As Label
 End Class
