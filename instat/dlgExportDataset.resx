@@ -123,13 +123,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>541, 68</value>
-  </data>
-  <data name="cmdBrowse.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>429, 48</value>
   </data>
   <data name="cmdBrowse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 28</value>
+    <value>62, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdBrowse.TabIndex" type="System.Int32, mscorlib">
@@ -148,19 +145,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdBrowse.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="lblExport.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblExport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 73</value>
-  </data>
-  <data name="lblExport.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>2, 53</value>
   </data>
   <data name="lblExport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 16</value>
+    <value>197, 13</value>
   </data>
   <data name="lblExport.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -178,7 +172,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblExport.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>5</value>
   </data>
   <data name="lblConfirmText.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -187,10 +181,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblConfirmText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 105</value>
+    <value>88, 87</value>
+  </data>
+  <data name="lblConfirmText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
   </data>
   <data name="lblConfirmText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 17</value>
+    <value>148, 13</value>
   </data>
   <data name="lblConfirmText.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -211,13 +208,13 @@
     <value>0</value>
   </data>
   <data name="ucrInputExportFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 69</value>
+    <value>215, 50</value>
   </data>
   <data name="ucrInputExportFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 10, 8, 10</value>
+    <value>6, 8, 6, 8</value>
   </data>
   <data name="ucrInputExportFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>421, 26</value>
+    <value>212, 21</value>
   </data>
   <data name="ucrInputExportFile.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -232,16 +229,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputExportFile.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="ucrAvailableSheets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 11</value>
+    <value>8, 4</value>
   </data>
   <data name="ucrAvailableSheets.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrAvailableSheets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 50</value>
+    <value>154, 41</value>
   </data>
   <data name="ucrAvailableSheets.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -256,16 +253,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrAvailableSheets.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 137</value>
+    <value>8, 111</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 6, 5, 6</value>
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>541, 65</value>
+    <value>386, 53</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -280,25 +277,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>656, 210</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>489, 165</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
