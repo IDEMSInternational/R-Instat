@@ -700,7 +700,7 @@ summary_median <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
     if(missing(weights))
       return(median(x, na.rm = na.rm))
     else 
-      return(spatstat::weighted.median(x, w = weights, na.rm = na.rm))
+      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.5, na.rm = na.rm))
   }
 }
 
