@@ -42,7 +42,6 @@ Partial Class ucrCalculator
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrCalculator))
         Me.lblExpression = New System.Windows.Forms.Label()
         Me.chkSaveResultInto = New System.Windows.Forms.CheckBox()
-        Me.cmdTry = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.chkShowParameters = New System.Windows.Forms.CheckBox()
         Me.grpBasic = New System.Windows.Forms.GroupBox()
@@ -110,6 +109,8 @@ Partial Class ucrCalculator
         Me.cmdLead = New System.Windows.Forms.Button()
         Me.cmdLag = New System.Windows.Forms.Button()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.cmdKurtosis = New System.Windows.Forms.Button()
+        Me.cmdMode1 = New System.Windows.Forms.Button()
         Me.cmdMode = New System.Windows.Forms.Button()
         Me.cmdFirst = New System.Windows.Forms.Button()
         Me.cmdLast = New System.Windows.Forms.Button()
@@ -366,13 +367,33 @@ Partial Class ucrCalculator
         Me.cmdEnd1 = New System.Windows.Forms.Button()
         Me.cmdbegin = New System.Windows.Forms.Button()
         Me.cmdAny1 = New System.Windows.Forms.Button()
+        Me.grpHydroGOF = New System.Windows.Forms.GroupBox()
+        Me.cmdVE = New System.Windows.Forms.Button()
+        Me.cmdSsq = New System.Windows.Forms.Button()
+        Me.cmdRsr = New System.Windows.Forms.Button()
+        Me.cmdRSD = New System.Windows.Forms.Button()
+        Me.cmdRPearson = New System.Windows.Forms.Button()
+        Me.cmdRNSE = New System.Windows.Forms.Button()
+        Me.cmdRmse = New System.Windows.Forms.Button()
+        Me.cmdRd = New System.Windows.Forms.Button()
+        Me.cmdPbiasfde = New System.Windows.Forms.Button()
+        Me.cmdPbias = New System.Windows.Forms.Button()
+        Me.cmdNSE = New System.Windows.Forms.Button()
+        Me.cmdNrmse = New System.Windows.Forms.Button()
+        Me.cmdMse = New System.Windows.Forms.Button()
+        Me.cmdmNSE = New System.Windows.Forms.Button()
+        Me.cmdMe = New System.Windows.Forms.Button()
+        Me.cmdMd = New System.Windows.Forms.Button()
+        Me.cmdMae = New System.Windows.Forms.Button()
+        Me.cmdKGE = New System.Windows.Forms.Button()
+        Me.cmdD = New System.Windows.Forms.Button()
+        Me.cmdCp = New System.Windows.Forms.Button()
+        Me.cmdBr2 = New System.Windows.Forms.Button()
+        Me.ucrTryCalculator = New instat.ucrTry()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
-        Me.ucrInputTryMessage = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdMode1 = New System.Windows.Forms.Button()
-        Me.cmdKurtosis = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -386,6 +407,7 @@ Partial Class ucrCalculator
         Me.grpFactor.SuspendLayout()
         Me.grpModifier.SuspendLayout()
         Me.grpSymbols.SuspendLayout()
+        Me.grpHydroGOF.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -399,12 +421,6 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.chkSaveResultInto, "chkSaveResultInto")
         Me.chkSaveResultInto.Name = "chkSaveResultInto"
         Me.chkSaveResultInto.UseVisualStyleBackColor = True
-        '
-        'cmdTry
-        '
-        resources.ApplyResources(Me.cmdTry, "cmdTry")
-        Me.cmdTry.Name = "cmdTry"
-        Me.cmdTry.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
@@ -897,6 +913,18 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpSummary, "grpSummary")
         Me.grpSummary.Name = "grpSummary"
         Me.grpSummary.TabStop = False
+        '
+        'cmdKurtosis
+        '
+        resources.ApplyResources(Me.cmdKurtosis, "cmdKurtosis")
+        Me.cmdKurtosis.Name = "cmdKurtosis"
+        Me.cmdKurtosis.UseVisualStyleBackColor = True
+        '
+        'cmdMode1
+        '
+        resources.ApplyResources(Me.cmdMode1, "cmdMode1")
+        Me.cmdMode1.Name = "cmdMode1"
+        Me.cmdMode1.UseVisualStyleBackColor = True
         '
         'cmdMode
         '
@@ -1861,6 +1889,12 @@ Partial Class ucrCalculator
         Me.cmdSqrt.Name = "cmdSqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
         '
+        'ttCalculator
+        '
+        Me.ttCalculator.AutoPopDelay = 10000
+        Me.ttCalculator.InitialDelay = 500
+        Me.ttCalculator.ReshowDelay = 100
+        '
         'cmdWakefield_Year
         '
         resources.ApplyResources(Me.cmdWakefield_Year, "cmdWakefield_Year")
@@ -2661,6 +2695,164 @@ Partial Class ucrCalculator
         Me.cmdAny1.Name = "cmdAny1"
         Me.cmdAny1.UseVisualStyleBackColor = True
         '
+        'grpHydroGOF
+        '
+        Me.grpHydroGOF.Controls.Add(Me.cmdVE)
+        Me.grpHydroGOF.Controls.Add(Me.cmdSsq)
+        Me.grpHydroGOF.Controls.Add(Me.cmdRsr)
+        Me.grpHydroGOF.Controls.Add(Me.cmdRSD)
+        Me.grpHydroGOF.Controls.Add(Me.cmdRPearson)
+        Me.grpHydroGOF.Controls.Add(Me.cmdRNSE)
+        Me.grpHydroGOF.Controls.Add(Me.cmdRmse)
+        Me.grpHydroGOF.Controls.Add(Me.cmdRd)
+        Me.grpHydroGOF.Controls.Add(Me.cmdPbiasfde)
+        Me.grpHydroGOF.Controls.Add(Me.cmdPbias)
+        Me.grpHydroGOF.Controls.Add(Me.cmdNSE)
+        Me.grpHydroGOF.Controls.Add(Me.cmdNrmse)
+        Me.grpHydroGOF.Controls.Add(Me.cmdMse)
+        Me.grpHydroGOF.Controls.Add(Me.cmdmNSE)
+        Me.grpHydroGOF.Controls.Add(Me.cmdMe)
+        Me.grpHydroGOF.Controls.Add(Me.cmdMd)
+        Me.grpHydroGOF.Controls.Add(Me.cmdMae)
+        Me.grpHydroGOF.Controls.Add(Me.cmdKGE)
+        Me.grpHydroGOF.Controls.Add(Me.cmdD)
+        Me.grpHydroGOF.Controls.Add(Me.cmdCp)
+        Me.grpHydroGOF.Controls.Add(Me.cmdBr2)
+        resources.ApplyResources(Me.grpHydroGOF, "grpHydroGOF")
+        Me.grpHydroGOF.Name = "grpHydroGOF"
+        Me.grpHydroGOF.TabStop = False
+        '
+        'cmdVE
+        '
+        resources.ApplyResources(Me.cmdVE, "cmdVE")
+        Me.cmdVE.Name = "cmdVE"
+        Me.cmdVE.UseVisualStyleBackColor = True
+        '
+        'cmdSsq
+        '
+        resources.ApplyResources(Me.cmdSsq, "cmdSsq")
+        Me.cmdSsq.Name = "cmdSsq"
+        Me.cmdSsq.UseVisualStyleBackColor = True
+        '
+        'cmdRsr
+        '
+        resources.ApplyResources(Me.cmdRsr, "cmdRsr")
+        Me.cmdRsr.Name = "cmdRsr"
+        Me.cmdRsr.UseVisualStyleBackColor = True
+        '
+        'cmdRSD
+        '
+        resources.ApplyResources(Me.cmdRSD, "cmdRSD")
+        Me.cmdRSD.Name = "cmdRSD"
+        Me.cmdRSD.UseVisualStyleBackColor = True
+        '
+        'cmdRPearson
+        '
+        resources.ApplyResources(Me.cmdRPearson, "cmdRPearson")
+        Me.cmdRPearson.Name = "cmdRPearson"
+        Me.cmdRPearson.UseVisualStyleBackColor = True
+        '
+        'cmdRNSE
+        '
+        resources.ApplyResources(Me.cmdRNSE, "cmdRNSE")
+        Me.cmdRNSE.Name = "cmdRNSE"
+        Me.cmdRNSE.UseVisualStyleBackColor = True
+        '
+        'cmdRmse
+        '
+        resources.ApplyResources(Me.cmdRmse, "cmdRmse")
+        Me.cmdRmse.Name = "cmdRmse"
+        Me.cmdRmse.UseVisualStyleBackColor = True
+        '
+        'cmdRd
+        '
+        resources.ApplyResources(Me.cmdRd, "cmdRd")
+        Me.cmdRd.Name = "cmdRd"
+        Me.cmdRd.UseVisualStyleBackColor = True
+        '
+        'cmdPbiasfde
+        '
+        resources.ApplyResources(Me.cmdPbiasfde, "cmdPbiasfde")
+        Me.cmdPbiasfde.Name = "cmdPbiasfde"
+        Me.cmdPbiasfde.UseVisualStyleBackColor = True
+        '
+        'cmdPbias
+        '
+        resources.ApplyResources(Me.cmdPbias, "cmdPbias")
+        Me.cmdPbias.Name = "cmdPbias"
+        Me.cmdPbias.UseVisualStyleBackColor = True
+        '
+        'cmdNSE
+        '
+        resources.ApplyResources(Me.cmdNSE, "cmdNSE")
+        Me.cmdNSE.Name = "cmdNSE"
+        Me.cmdNSE.UseVisualStyleBackColor = True
+        '
+        'cmdNrmse
+        '
+        resources.ApplyResources(Me.cmdNrmse, "cmdNrmse")
+        Me.cmdNrmse.Name = "cmdNrmse"
+        Me.cmdNrmse.UseVisualStyleBackColor = True
+        '
+        'cmdMse
+        '
+        resources.ApplyResources(Me.cmdMse, "cmdMse")
+        Me.cmdMse.Name = "cmdMse"
+        Me.cmdMse.UseVisualStyleBackColor = True
+        '
+        'cmdmNSE
+        '
+        resources.ApplyResources(Me.cmdmNSE, "cmdmNSE")
+        Me.cmdmNSE.Name = "cmdmNSE"
+        Me.cmdmNSE.UseVisualStyleBackColor = True
+        '
+        'cmdMe
+        '
+        resources.ApplyResources(Me.cmdMe, "cmdMe")
+        Me.cmdMe.Name = "cmdMe"
+        Me.cmdMe.UseVisualStyleBackColor = True
+        '
+        'cmdMd
+        '
+        resources.ApplyResources(Me.cmdMd, "cmdMd")
+        Me.cmdMd.Name = "cmdMd"
+        Me.cmdMd.UseVisualStyleBackColor = True
+        '
+        'cmdMae
+        '
+        resources.ApplyResources(Me.cmdMae, "cmdMae")
+        Me.cmdMae.Name = "cmdMae"
+        Me.cmdMae.UseVisualStyleBackColor = True
+        '
+        'cmdKGE
+        '
+        resources.ApplyResources(Me.cmdKGE, "cmdKGE")
+        Me.cmdKGE.Name = "cmdKGE"
+        Me.cmdKGE.UseVisualStyleBackColor = True
+        '
+        'cmdD
+        '
+        resources.ApplyResources(Me.cmdD, "cmdD")
+        Me.cmdD.Name = "cmdD"
+        Me.cmdD.UseVisualStyleBackColor = True
+        '
+        'cmdCp
+        '
+        resources.ApplyResources(Me.cmdCp, "cmdCp")
+        Me.cmdCp.Name = "cmdCp"
+        Me.cmdCp.UseVisualStyleBackColor = True
+        '
+        'cmdBr2
+        '
+        resources.ApplyResources(Me.cmdBr2, "cmdBr2")
+        Me.cmdBr2.Name = "cmdBr2"
+        Me.cmdBr2.UseVisualStyleBackColor = True
+        '
+        'ucrTryCalculator
+        '
+        resources.ApplyResources(Me.ucrTryCalculator, "ucrTryCalculator")
+        Me.ucrTryCalculator.Name = "ucrTryCalculator"
+        '
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
@@ -2674,14 +2866,6 @@ Partial Class ucrCalculator
         Me.ucrSaveResultInto.IsReadOnly = False
         resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
         Me.ucrSaveResultInto.Name = "ucrSaveResultInto"
-        '
-        'ucrInputTryMessage
-        '
-        Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
-        Me.ucrInputTryMessage.IsMultiline = False
-        Me.ucrInputTryMessage.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputTryMessage, "ucrInputTryMessage")
-        Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
         '
         'ucrSelectorForCalculations
         '
@@ -2700,22 +2884,12 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'cmdMode1
-        '
-        resources.ApplyResources(Me.cmdMode1, "cmdMode1")
-        Me.cmdMode1.Name = "cmdMode1"
-        Me.cmdMode1.UseVisualStyleBackColor = True
-        '
-        'cmdKurtosis
-        '
-        resources.ApplyResources(Me.cmdKurtosis, "cmdKurtosis")
-        Me.cmdKurtosis.Name = "cmdKurtosis"
-        Me.cmdKurtosis.UseVisualStyleBackColor = True
-        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpHydroGOF)
+        Me.Controls.Add(Me.ucrTryCalculator)
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
@@ -2734,8 +2908,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpBasic)
         Me.Controls.Add(Me.ucrSaveResultInto)
         Me.Controls.Add(Me.chkSaveResultInto)
-        Me.Controls.Add(Me.ucrInputTryMessage)
-        Me.Controls.Add(Me.cmdTry)
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
@@ -2753,6 +2925,7 @@ Partial Class ucrCalculator
         Me.grpFactor.ResumeLayout(False)
         Me.grpModifier.ResumeLayout(False)
         Me.grpSymbols.ResumeLayout(False)
+        Me.grpHydroGOF.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2762,8 +2935,6 @@ Partial Class ucrCalculator
     Friend WithEvents lblExpression As Label
     Friend WithEvents ucrSaveResultInto As ucrInputComboBox
     Friend WithEvents chkSaveResultInto As CheckBox
-    Friend WithEvents ucrInputTryMessage As ucrInputTextBox
-    Friend WithEvents cmdTry As Button
     Friend WithEvents ucrSelectorForCalculations As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdHelp As Button
     Friend WithEvents chkShowParameters As CheckBox
@@ -3094,4 +3265,27 @@ Partial Class ucrCalculator
     Friend WithEvents cmdOr3 As Button
     Friend WithEvents cmdMode1 As Button
     Friend WithEvents cmdKurtosis As Button
+    Friend WithEvents ucrTryCalculator As ucrTry
+    Friend WithEvents grpHydroGOF As GroupBox
+    Friend WithEvents cmdD As Button
+    Friend WithEvents cmdCp As Button
+    Friend WithEvents cmdBr2 As Button
+    Friend WithEvents cmdMd As Button
+    Friend WithEvents cmdMae As Button
+    Friend WithEvents cmdKGE As Button
+    Friend WithEvents cmdMse As Button
+    Friend WithEvents cmdmNSE As Button
+    Friend WithEvents cmdMe As Button
+    Friend WithEvents cmdPbias As Button
+    Friend WithEvents cmdNSE As Button
+    Friend WithEvents cmdNrmse As Button
+    Friend WithEvents cmdRmse As Button
+    Friend WithEvents cmdRd As Button
+    Friend WithEvents cmdPbiasfde As Button
+    Friend WithEvents cmdRSD As Button
+    Friend WithEvents cmdRPearson As Button
+    Friend WithEvents cmdRNSE As Button
+    Friend WithEvents cmdVE As Button
+    Friend WithEvents cmdSsq As Button
+    Friend WithEvents cmdRsr As Button
 End Class

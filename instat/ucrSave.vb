@@ -36,6 +36,7 @@ Public Class ucrSave
     Private strGlobalDataName As String = ""
     Private ucrLinkedReceiver As ucrReceiver
     Private clsColPosFunction As New RFunction
+    Private iComboBoxWidth As Integer
 
     Private Sub ucrSave_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -54,6 +55,7 @@ Public Class ucrSave
         ucrInputTextSave.bIsActiveRControl = False
         ucrInputComboSave.bUpdateRCodeFromControl = True
         ucrInputTextSave.bUpdateRCodeFromControl = True
+        iComboBoxWidth = ucrInputComboSave.Size.Width
     End Sub
 
     Private Sub SetDefaults()
@@ -76,7 +78,7 @@ Public Class ucrSave
         'Do for both in case text/combo not set yet, or will change at run time
         iTemp = lblSaveText.Location.X + lblSaveText.Size.Width - ucrInputComboSave.Location.X
         If iTemp > 0 Then
-            ucrInputComboSave.Width = ucrInputComboSave.Size.Width - iTemp
+            ucrInputComboSave.Width = iComboBoxWidth - iTemp
             ucrInputTextSave.Width = ucrInputComboSave.Width
         End If
     End Sub
