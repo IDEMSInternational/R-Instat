@@ -27,6 +27,8 @@ Partial Class dlgGlance
         Me.ucrModelSelector = New instat.ucrSelectorByDataFrame()
         Me.ucrModelReceiver = New instat.ucrReceiverMultiple()
         Me.lblModels = New System.Windows.Forms.Label()
+        Me.ucrChkDisplayinOutput = New instat.ucrCheck()
+        Me.ucrSaveNewDataFrame = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -56,10 +58,23 @@ Partial Class dlgGlance
         resources.ApplyResources(Me.lblModels, "lblModels")
         Me.lblModels.Name = "lblModels"
         '
+        'ucrChkDisplayinOutput
+        '
+        Me.ucrChkDisplayinOutput.Checked = False
+        resources.ApplyResources(Me.ucrChkDisplayinOutput, "ucrChkDisplayinOutput")
+        Me.ucrChkDisplayinOutput.Name = "ucrChkDisplayinOutput"
+        '
+        'ucrSaveNewDataFrame
+        '
+        resources.ApplyResources(Me.ucrSaveNewDataFrame, "ucrSaveNewDataFrame")
+        Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
+        '
         'dlgGlance
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveNewDataFrame)
+        Me.Controls.Add(Me.ucrChkDisplayinOutput)
         Me.Controls.Add(Me.lblModels)
         Me.Controls.Add(Me.ucrModelReceiver)
         Me.Controls.Add(Me.ucrModelSelector)
@@ -77,4 +92,6 @@ Partial Class dlgGlance
     Friend WithEvents ucrModelSelector As ucrSelectorByDataFrame
     Friend WithEvents ucrModelReceiver As ucrReceiverMultiple
     Friend WithEvents lblModels As Label
+    Friend WithEvents ucrSaveNewDataFrame As ucrSave
+    Friend WithEvents ucrChkDisplayinOutput As ucrCheck
 End Class
