@@ -45,6 +45,7 @@ Public Class dlgExportDataset
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
 
         lblConfirmText.Text = "Click Ok to Confirm the Export"
+        lblConfirmText.ForeColor = Color.Red
     End Sub
 
     Private Sub SetDefaults()
