@@ -797,15 +797,15 @@ Public Class dlgImportDataset
         clbSheets.Items.Clear()
         If chrSheets IsNot Nothing AndAlso chrSheets.Count > 0 Then
             clbSheets.Items.AddRange(chrSheets.ToArray())
-            If dctSelectedExcelSheets.Count = 0 Then
-                clbSheets.SetItemChecked(0, True)
-            Else
-                'Storing the array here because the dctSeleceted indice changes on clbSheets.itemsClicked
-                Dim ListOfItems As Integer() = ListOfCheckedItems.ToArray
-                For i = 0 To ListOfItems.Length - 1
-                    clbSheets.SetItemChecked((ListOfItems(i) - 1), True)
-                Next
-            End If
+            'If dctSelectedExcelSheets.Count = 0 Then
+            '    clbSheets.SetItemChecked(0, True)
+            'Else
+            '    'Storing the array here because the dctSeleceted indice changes on clbSheets.itemsClicked
+            '    Dim ListOfItems As Integer() = ListOfCheckedItems.ToArray
+            '    For i = 0 To ListOfItems.Length - 1
+            '        clbSheets.SetItemChecked((ListOfItems(i) - 1), True)
+            '    Next
+            'End If
 
 
         End If
