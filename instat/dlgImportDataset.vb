@@ -362,9 +362,9 @@ Public Class dlgImportDataset
 
         clsImportExcelMulti.SetPackageName("rio")
         clsImportExcelMulti.SetRCommand("import_list")
+        clsImportExcelMulti.AddParameter("guess_max", "Inf", iPosition:=6)
 
         clsFileList.SetRCommand("c")
-        clsFileList.AddParameter("guess_max", "Inf")
 
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
 
