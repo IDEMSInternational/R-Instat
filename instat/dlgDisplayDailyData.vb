@@ -62,7 +62,7 @@ Public Class dlgDisplayDailyData
         ucrReceiverStations.SetClimaticType("station")
         ucrReceiverStations.bAutoFill = True
 
-        ucrReceiverYear.SetParameter(New RParameter("year", 3))
+        ucrReceiverYear.SetParameter(New RParameter("year_col", 3))
         ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverYear.SetClimaticType("year")
