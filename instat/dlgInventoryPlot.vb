@@ -47,7 +47,7 @@ Public Class dlgInventoryPlot
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.strSelectorHeading = "Date"
 
-        ucrReceiverElements.SetParameter(New RParameter("element_cols", 2))
+        ucrReceiverElements.SetParameter(New RParameter("element_col", 2))
         ucrReceiverElements.Selector = ucrInventoryPlotSelector
         ucrReceiverElements.SetParameterIsString()
         ucrReceiverElements.strSelectorHeading = "Numerics"

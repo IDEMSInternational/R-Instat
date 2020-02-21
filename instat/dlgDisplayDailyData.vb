@@ -56,7 +56,7 @@ Public Class dlgDisplayDailyData
         ucrSelectorDisplayDailyClimaticData.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDisplayDailyClimaticData.SetParameterIsString()
 
-        ucrReceiverStations.SetParameter(New RParameter("station_col", 0, bNewIncludeArgumentName:=False))
+        ucrReceiverStations.SetParameter(New RParameter("station", 0, bNewIncludeArgumentName:=False))
         ucrReceiverStations.SetParameterIsString()
         ucrReceiverStations.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverStations.SetClimaticType("station")
@@ -67,17 +67,16 @@ Public Class dlgDisplayDailyData
         ucrReceiverYear.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
-        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverYear.SetClimaticType("year")
 
-        ucrReceiverDate.SetParameter(New RParameter("date_col", 2))
+        ucrReceiverDate.SetParameter(New RParameter("date", 2))
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverDate.SetClimaticType("date")
-        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.strSelectorHeading = "Date Variables"
 
-        ucrReceiverDayOfYear.SetParameter(New RParameter("doy_col", 5))
+        ucrReceiverDayOfYear.SetParameter(New RParameter("doy", 5))
         ucrReceiverDayOfYear.SetParameterIsString()
         ucrReceiverDayOfYear.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverDayOfYear.SetClimaticType("doy")
