@@ -22,28 +22,13 @@ Partial Class sdgPICSARainfallGraph
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgPICSARainfallGraph))
         Me.lblXTo = New System.Windows.Forms.Label()
         Me.lblXFrom = New System.Windows.Forms.Label()
         Me.lblXInStepsOf = New System.Windows.Forms.Label()
         Me.tbPICSA = New System.Windows.Forms.TabControl()
         Me.tpTitles = New System.Windows.Forms.TabPage()
-        Me.grpyAxisTitle = New System.Windows.Forms.GroupBox()
-        Me.lblYAxisTitleSize = New System.Windows.Forms.Label()
-        Me.rdoAutoYAxis = New System.Windows.Forms.RadioButton()
-        Me.ucrInputYAxisTitle = New instat.ucrInputTextBox()
-        Me.rdoNoYAxisTitle = New System.Windows.Forms.RadioButton()
-        Me.ucrNudYAxisTitleSize = New instat.ucrNud()
-        Me.rdoSpecifyYAxisTitle = New System.Windows.Forms.RadioButton()
-        Me.UcrPnlYAxisTitle = New instat.UcrPanel()
-        Me.grpAxes = New System.Windows.Forms.GroupBox()
-        Me.lblXAxisTitleSize = New System.Windows.Forms.Label()
-        Me.rdoAutoXAxis = New System.Windows.Forms.RadioButton()
-        Me.ucrInputXAxisTitle = New instat.ucrInputTextBox()
-        Me.rdoNoTitleXAxisTitle = New System.Windows.Forms.RadioButton()
-        Me.rdoSpecifyXAxisTitle = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlXAxisTitle = New instat.UcrPanel()
-        Me.ucrNudXAxisTitleSize = New instat.ucrNud()
         Me.grpGraphTitles = New System.Windows.Forms.GroupBox()
         Me.lblCaptionSize = New System.Windows.Forms.Label()
         Me.lblSubTitleSize = New System.Windows.Forms.Label()
@@ -57,6 +42,22 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputGraphcCaption = New instat.ucrInputTextBox()
         Me.ucrInputGraphTitle = New instat.ucrInputTextBox()
         Me.ucrInputGraphSubTitle = New instat.ucrInputTextBox()
+        Me.grpAxes = New System.Windows.Forms.GroupBox()
+        Me.lblXAxisTitleSize = New System.Windows.Forms.Label()
+        Me.rdoAutoXAxis = New System.Windows.Forms.RadioButton()
+        Me.ucrInputXAxisTitle = New instat.ucrInputTextBox()
+        Me.rdoNoTitleXAxisTitle = New System.Windows.Forms.RadioButton()
+        Me.rdoSpecifyXAxisTitle = New System.Windows.Forms.RadioButton()
+        Me.ucrNudXAxisTitleSize = New instat.ucrNud()
+        Me.ucrPnlXAxisTitle = New instat.UcrPanel()
+        Me.grpyAxisTitle = New System.Windows.Forms.GroupBox()
+        Me.rdoAutoYAxis = New System.Windows.Forms.RadioButton()
+        Me.ucrInputYAxisTitle = New instat.ucrInputTextBox()
+        Me.rdoNoYAxisTitle = New System.Windows.Forms.RadioButton()
+        Me.ucrNudYAxisTitleSize = New instat.ucrNud()
+        Me.rdoSpecifyYAxisTitle = New System.Windows.Forms.RadioButton()
+        Me.UcrPnlYAxisTitle = New instat.UcrPanel()
+        Me.lblYAxisTitleSize = New System.Windows.Forms.Label()
         Me.tpXAxis = New System.Windows.Forms.TabPage()
         Me.grpXAxisLabels = New System.Windows.Forms.GroupBox()
         Me.ucrChkXAxisLabelSize = New instat.ucrCheck()
@@ -166,16 +167,17 @@ Partial Class sdgPICSARainfallGraph
         Me.tpRug = New System.Windows.Forms.TabPage()
         Me.ucrInputXaxisOptions = New instat.ucrInputComboBox()
         Me.lblXaxisOptions = New System.Windows.Forms.Label()
+        Me.lblYaxisOptions = New System.Windows.Forms.Label()
         Me.ucrChkXaxis = New instat.ucrCheck()
         Me.ucrInputYaxisOptions = New instat.ucrInputComboBox()
-        Me.lblYaxisOptions = New System.Windows.Forms.Label()
         Me.ucrChkYaxis = New instat.ucrCheck()
+        Me.ttPICSARainfallGraph = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
         Me.tbPICSA.SuspendLayout()
         Me.tpTitles.SuspendLayout()
-        Me.grpyAxisTitle.SuspendLayout()
-        Me.grpAxes.SuspendLayout()
         Me.grpGraphTitles.SuspendLayout()
+        Me.grpAxes.SuspendLayout()
+        Me.grpyAxisTitle.SuspendLayout()
         Me.tpXAxis.SuspendLayout()
         Me.grpXAxisLabels.SuspendLayout()
         Me.tpYAxis.SuspendLayout()
@@ -218,136 +220,12 @@ Partial Class sdgPICSARainfallGraph
         '
         'tpTitles
         '
-        Me.tpTitles.Controls.Add(Me.grpyAxisTitle)
-        Me.tpTitles.Controls.Add(Me.grpAxes)
         Me.tpTitles.Controls.Add(Me.grpGraphTitles)
+        Me.tpTitles.Controls.Add(Me.grpAxes)
+        Me.tpTitles.Controls.Add(Me.grpyAxisTitle)
         resources.ApplyResources(Me.tpTitles, "tpTitles")
         Me.tpTitles.Name = "tpTitles"
         Me.tpTitles.UseVisualStyleBackColor = True
-        '
-        'grpyAxisTitle
-        '
-        Me.grpyAxisTitle.Controls.Add(Me.lblYAxisTitleSize)
-        Me.grpyAxisTitle.Controls.Add(Me.rdoAutoYAxis)
-        Me.grpyAxisTitle.Controls.Add(Me.ucrInputYAxisTitle)
-        Me.grpyAxisTitle.Controls.Add(Me.rdoNoYAxisTitle)
-        Me.grpyAxisTitle.Controls.Add(Me.ucrNudYAxisTitleSize)
-        Me.grpyAxisTitle.Controls.Add(Me.rdoSpecifyYAxisTitle)
-        Me.grpyAxisTitle.Controls.Add(Me.UcrPnlYAxisTitle)
-        resources.ApplyResources(Me.grpyAxisTitle, "grpyAxisTitle")
-        Me.grpyAxisTitle.Name = "grpyAxisTitle"
-        Me.grpyAxisTitle.TabStop = False
-        '
-        'lblYAxisTitleSize
-        '
-        resources.ApplyResources(Me.lblYAxisTitleSize, "lblYAxisTitleSize")
-        Me.lblYAxisTitleSize.Name = "lblYAxisTitleSize"
-        '
-        'rdoAutoYAxis
-        '
-        resources.ApplyResources(Me.rdoAutoYAxis, "rdoAutoYAxis")
-        Me.rdoAutoYAxis.Name = "rdoAutoYAxis"
-        Me.rdoAutoYAxis.TabStop = True
-        Me.rdoAutoYAxis.UseVisualStyleBackColor = True
-        '
-        'ucrInputYAxisTitle
-        '
-        Me.ucrInputYAxisTitle.AddQuotesIfUnrecognised = True
-        Me.ucrInputYAxisTitle.IsMultiline = False
-        Me.ucrInputYAxisTitle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYAxisTitle, "ucrInputYAxisTitle")
-        Me.ucrInputYAxisTitle.Name = "ucrInputYAxisTitle"
-        '
-        'rdoNoYAxisTitle
-        '
-        resources.ApplyResources(Me.rdoNoYAxisTitle, "rdoNoYAxisTitle")
-        Me.rdoNoYAxisTitle.Name = "rdoNoYAxisTitle"
-        Me.rdoNoYAxisTitle.TabStop = True
-        Me.rdoNoYAxisTitle.UseVisualStyleBackColor = True
-        '
-        'ucrNudYAxisTitleSize
-        '
-        Me.ucrNudYAxisTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudYAxisTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudYAxisTitleSize, "ucrNudYAxisTitleSize")
-        Me.ucrNudYAxisTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudYAxisTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudYAxisTitleSize.Name = "ucrNudYAxisTitleSize"
-        Me.ucrNudYAxisTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'rdoSpecifyYAxisTitle
-        '
-        resources.ApplyResources(Me.rdoSpecifyYAxisTitle, "rdoSpecifyYAxisTitle")
-        Me.rdoSpecifyYAxisTitle.Name = "rdoSpecifyYAxisTitle"
-        Me.rdoSpecifyYAxisTitle.TabStop = True
-        Me.rdoSpecifyYAxisTitle.UseVisualStyleBackColor = True
-        '
-        'UcrPnlYAxisTitle
-        '
-        resources.ApplyResources(Me.UcrPnlYAxisTitle, "UcrPnlYAxisTitle")
-        Me.UcrPnlYAxisTitle.Name = "UcrPnlYAxisTitle"
-        '
-        'grpAxes
-        '
-        Me.grpAxes.Controls.Add(Me.lblXAxisTitleSize)
-        Me.grpAxes.Controls.Add(Me.rdoAutoXAxis)
-        Me.grpAxes.Controls.Add(Me.ucrInputXAxisTitle)
-        Me.grpAxes.Controls.Add(Me.rdoNoTitleXAxisTitle)
-        Me.grpAxes.Controls.Add(Me.rdoSpecifyXAxisTitle)
-        Me.grpAxes.Controls.Add(Me.ucrPnlXAxisTitle)
-        Me.grpAxes.Controls.Add(Me.ucrNudXAxisTitleSize)
-        resources.ApplyResources(Me.grpAxes, "grpAxes")
-        Me.grpAxes.Name = "grpAxes"
-        Me.grpAxes.TabStop = False
-        '
-        'lblXAxisTitleSize
-        '
-        resources.ApplyResources(Me.lblXAxisTitleSize, "lblXAxisTitleSize")
-        Me.lblXAxisTitleSize.Name = "lblXAxisTitleSize"
-        '
-        'rdoAutoXAxis
-        '
-        resources.ApplyResources(Me.rdoAutoXAxis, "rdoAutoXAxis")
-        Me.rdoAutoXAxis.Name = "rdoAutoXAxis"
-        Me.rdoAutoXAxis.TabStop = True
-        Me.rdoAutoXAxis.UseVisualStyleBackColor = True
-        '
-        'ucrInputXAxisTitle
-        '
-        Me.ucrInputXAxisTitle.AddQuotesIfUnrecognised = True
-        Me.ucrInputXAxisTitle.IsMultiline = False
-        Me.ucrInputXAxisTitle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputXAxisTitle, "ucrInputXAxisTitle")
-        Me.ucrInputXAxisTitle.Name = "ucrInputXAxisTitle"
-        '
-        'rdoNoTitleXAxisTitle
-        '
-        resources.ApplyResources(Me.rdoNoTitleXAxisTitle, "rdoNoTitleXAxisTitle")
-        Me.rdoNoTitleXAxisTitle.Name = "rdoNoTitleXAxisTitle"
-        Me.rdoNoTitleXAxisTitle.TabStop = True
-        Me.rdoNoTitleXAxisTitle.UseVisualStyleBackColor = True
-        '
-        'rdoSpecifyXAxisTitle
-        '
-        resources.ApplyResources(Me.rdoSpecifyXAxisTitle, "rdoSpecifyXAxisTitle")
-        Me.rdoSpecifyXAxisTitle.Name = "rdoSpecifyXAxisTitle"
-        Me.rdoSpecifyXAxisTitle.TabStop = True
-        Me.rdoSpecifyXAxisTitle.UseVisualStyleBackColor = True
-        '
-        'ucrPnlXAxisTitle
-        '
-        resources.ApplyResources(Me.ucrPnlXAxisTitle, "ucrPnlXAxisTitle")
-        Me.ucrPnlXAxisTitle.Name = "ucrPnlXAxisTitle"
-        '
-        'ucrNudXAxisTitleSize
-        '
-        Me.ucrNudXAxisTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudXAxisTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudXAxisTitleSize, "ucrNudXAxisTitleSize")
-        Me.ucrNudXAxisTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudXAxisTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudXAxisTitleSize.Name = "ucrNudXAxisTitleSize"
-        Me.ucrNudXAxisTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'grpGraphTitles
         '
@@ -430,7 +308,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputGraphcCaption
         '
         Me.ucrInputGraphcCaption.AddQuotesIfUnrecognised = True
-        Me.ucrInputGraphcCaption.IsMultiline = False
+        Me.ucrInputGraphcCaption.IsMultiline = True
         Me.ucrInputGraphcCaption.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputGraphcCaption, "ucrInputGraphcCaption")
         Me.ucrInputGraphcCaption.Name = "ucrInputGraphcCaption"
@@ -450,6 +328,130 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputGraphSubTitle.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputGraphSubTitle, "ucrInputGraphSubTitle")
         Me.ucrInputGraphSubTitle.Name = "ucrInputGraphSubTitle"
+        '
+        'grpAxes
+        '
+        Me.grpAxes.Controls.Add(Me.lblXAxisTitleSize)
+        Me.grpAxes.Controls.Add(Me.rdoAutoXAxis)
+        Me.grpAxes.Controls.Add(Me.ucrInputXAxisTitle)
+        Me.grpAxes.Controls.Add(Me.rdoNoTitleXAxisTitle)
+        Me.grpAxes.Controls.Add(Me.rdoSpecifyXAxisTitle)
+        Me.grpAxes.Controls.Add(Me.ucrNudXAxisTitleSize)
+        Me.grpAxes.Controls.Add(Me.ucrPnlXAxisTitle)
+        resources.ApplyResources(Me.grpAxes, "grpAxes")
+        Me.grpAxes.Name = "grpAxes"
+        Me.grpAxes.TabStop = False
+        '
+        'lblXAxisTitleSize
+        '
+        resources.ApplyResources(Me.lblXAxisTitleSize, "lblXAxisTitleSize")
+        Me.lblXAxisTitleSize.Name = "lblXAxisTitleSize"
+        '
+        'rdoAutoXAxis
+        '
+        resources.ApplyResources(Me.rdoAutoXAxis, "rdoAutoXAxis")
+        Me.rdoAutoXAxis.Name = "rdoAutoXAxis"
+        Me.rdoAutoXAxis.TabStop = True
+        Me.rdoAutoXAxis.UseVisualStyleBackColor = True
+        '
+        'ucrInputXAxisTitle
+        '
+        Me.ucrInputXAxisTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputXAxisTitle.IsMultiline = False
+        Me.ucrInputXAxisTitle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXAxisTitle, "ucrInputXAxisTitle")
+        Me.ucrInputXAxisTitle.Name = "ucrInputXAxisTitle"
+        '
+        'rdoNoTitleXAxisTitle
+        '
+        resources.ApplyResources(Me.rdoNoTitleXAxisTitle, "rdoNoTitleXAxisTitle")
+        Me.rdoNoTitleXAxisTitle.Name = "rdoNoTitleXAxisTitle"
+        Me.rdoNoTitleXAxisTitle.TabStop = True
+        Me.rdoNoTitleXAxisTitle.UseVisualStyleBackColor = True
+        '
+        'rdoSpecifyXAxisTitle
+        '
+        resources.ApplyResources(Me.rdoSpecifyXAxisTitle, "rdoSpecifyXAxisTitle")
+        Me.rdoSpecifyXAxisTitle.Name = "rdoSpecifyXAxisTitle"
+        Me.rdoSpecifyXAxisTitle.TabStop = True
+        Me.rdoSpecifyXAxisTitle.UseVisualStyleBackColor = True
+        '
+        'ucrNudXAxisTitleSize
+        '
+        Me.ucrNudXAxisTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXAxisTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudXAxisTitleSize, "ucrNudXAxisTitleSize")
+        Me.ucrNudXAxisTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudXAxisTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXAxisTitleSize.Name = "ucrNudXAxisTitleSize"
+        Me.ucrNudXAxisTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlXAxisTitle
+        '
+        resources.ApplyResources(Me.ucrPnlXAxisTitle, "ucrPnlXAxisTitle")
+        Me.ucrPnlXAxisTitle.Name = "ucrPnlXAxisTitle"
+        '
+        'grpyAxisTitle
+        '
+        Me.grpyAxisTitle.Controls.Add(Me.rdoAutoYAxis)
+        Me.grpyAxisTitle.Controls.Add(Me.ucrInputYAxisTitle)
+        Me.grpyAxisTitle.Controls.Add(Me.rdoNoYAxisTitle)
+        Me.grpyAxisTitle.Controls.Add(Me.ucrNudYAxisTitleSize)
+        Me.grpyAxisTitle.Controls.Add(Me.rdoSpecifyYAxisTitle)
+        Me.grpyAxisTitle.Controls.Add(Me.UcrPnlYAxisTitle)
+        Me.grpyAxisTitle.Controls.Add(Me.lblYAxisTitleSize)
+        resources.ApplyResources(Me.grpyAxisTitle, "grpyAxisTitle")
+        Me.grpyAxisTitle.Name = "grpyAxisTitle"
+        Me.grpyAxisTitle.TabStop = False
+        '
+        'rdoAutoYAxis
+        '
+        resources.ApplyResources(Me.rdoAutoYAxis, "rdoAutoYAxis")
+        Me.rdoAutoYAxis.Name = "rdoAutoYAxis"
+        Me.rdoAutoYAxis.TabStop = True
+        Me.rdoAutoYAxis.UseVisualStyleBackColor = True
+        '
+        'ucrInputYAxisTitle
+        '
+        Me.ucrInputYAxisTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputYAxisTitle.IsMultiline = False
+        Me.ucrInputYAxisTitle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYAxisTitle, "ucrInputYAxisTitle")
+        Me.ucrInputYAxisTitle.Name = "ucrInputYAxisTitle"
+        '
+        'rdoNoYAxisTitle
+        '
+        resources.ApplyResources(Me.rdoNoYAxisTitle, "rdoNoYAxisTitle")
+        Me.rdoNoYAxisTitle.Name = "rdoNoYAxisTitle"
+        Me.rdoNoYAxisTitle.TabStop = True
+        Me.rdoNoYAxisTitle.UseVisualStyleBackColor = True
+        '
+        'ucrNudYAxisTitleSize
+        '
+        Me.ucrNudYAxisTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudYAxisTitleSize, "ucrNudYAxisTitleSize")
+        Me.ucrNudYAxisTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudYAxisTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisTitleSize.Name = "ucrNudYAxisTitleSize"
+        Me.ucrNudYAxisTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'rdoSpecifyYAxisTitle
+        '
+        resources.ApplyResources(Me.rdoSpecifyYAxisTitle, "rdoSpecifyYAxisTitle")
+        Me.rdoSpecifyYAxisTitle.Name = "rdoSpecifyYAxisTitle"
+        Me.rdoSpecifyYAxisTitle.TabStop = True
+        Me.rdoSpecifyYAxisTitle.UseVisualStyleBackColor = True
+        '
+        'UcrPnlYAxisTitle
+        '
+        resources.ApplyResources(Me.UcrPnlYAxisTitle, "UcrPnlYAxisTitle")
+        Me.UcrPnlYAxisTitle.Name = "UcrPnlYAxisTitle"
+        '
+        'lblYAxisTitleSize
+        '
+        resources.ApplyResources(Me.lblYAxisTitleSize, "lblYAxisTitleSize")
+        Me.lblYAxisTitleSize.Name = "lblYAxisTitleSize"
         '
         'tpXAxis
         '
@@ -1279,9 +1281,9 @@ Partial Class sdgPICSARainfallGraph
         '
         Me.tpRug.Controls.Add(Me.ucrInputXaxisOptions)
         Me.tpRug.Controls.Add(Me.lblXaxisOptions)
+        Me.tpRug.Controls.Add(Me.lblYaxisOptions)
         Me.tpRug.Controls.Add(Me.ucrChkXaxis)
         Me.tpRug.Controls.Add(Me.ucrInputYaxisOptions)
-        Me.tpRug.Controls.Add(Me.lblYaxisOptions)
         Me.tpRug.Controls.Add(Me.ucrChkYaxis)
         resources.ApplyResources(Me.tpRug, "tpRug")
         Me.tpRug.Name = "tpRug"
@@ -1299,6 +1301,11 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.lblXaxisOptions, "lblXaxisOptions")
         Me.lblXaxisOptions.Name = "lblXaxisOptions"
         '
+        'lblYaxisOptions
+        '
+        resources.ApplyResources(Me.lblYaxisOptions, "lblYaxisOptions")
+        Me.lblYaxisOptions.Name = "lblYaxisOptions"
+        '
         'ucrChkXaxis
         '
         Me.ucrChkXaxis.Checked = False
@@ -1312,16 +1319,17 @@ Partial Class sdgPICSARainfallGraph
         resources.ApplyResources(Me.ucrInputYaxisOptions, "ucrInputYaxisOptions")
         Me.ucrInputYaxisOptions.Name = "ucrInputYaxisOptions"
         '
-        'lblYaxisOptions
-        '
-        resources.ApplyResources(Me.lblYaxisOptions, "lblYaxisOptions")
-        Me.lblYaxisOptions.Name = "lblYaxisOptions"
-        '
         'ucrChkYaxis
         '
         Me.ucrChkYaxis.Checked = False
         resources.ApplyResources(Me.ucrChkYaxis, "ucrChkYaxis")
         Me.ucrChkYaxis.Name = "ucrChkYaxis"
+        '
+        'ttPICSARainfallGraph
+        '
+        Me.ttPICSARainfallGraph.AutoPopDelay = 10000
+        Me.ttPICSARainfallGraph.InitialDelay = 500
+        Me.ttPICSARainfallGraph.ReshowDelay = 100
         '
         'ucrSdgPICSARainfalbuttons
         '
@@ -1332,20 +1340,20 @@ Partial Class sdgPICSARainfallGraph
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.tbPICSA)
         Me.Controls.Add(Me.ucrSdgPICSARainfalbuttons)
+        Me.Controls.Add(Me.tbPICSA)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgPICSARainfallGraph"
         Me.tbPICSA.ResumeLayout(False)
         Me.tpTitles.ResumeLayout(False)
-        Me.grpyAxisTitle.ResumeLayout(False)
-        Me.grpyAxisTitle.PerformLayout()
-        Me.grpAxes.ResumeLayout(False)
-        Me.grpAxes.PerformLayout()
         Me.grpGraphTitles.ResumeLayout(False)
         Me.grpGraphTitles.PerformLayout()
+        Me.grpAxes.ResumeLayout(False)
+        Me.grpAxes.PerformLayout()
+        Me.grpyAxisTitle.ResumeLayout(False)
+        Me.grpyAxisTitle.PerformLayout()
         Me.tpXAxis.ResumeLayout(False)
         Me.grpXAxisLabels.ResumeLayout(False)
         Me.grpXAxisLabels.PerformLayout()
@@ -1516,4 +1524,5 @@ Partial Class sdgPICSARainfallGraph
     Friend WithEvents ucrInputXaxisOptions As ucrInputComboBox
     Friend WithEvents lblXaxisOptions As Label
     Friend WithEvents ucrChkXaxis As ucrCheck
+    Friend WithEvents ttPICSARainfallGraph As ToolTip
 End Class
