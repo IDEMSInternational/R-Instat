@@ -16,11 +16,14 @@
 
 ''' <summary>   This class TBD. </summary>
 Public Class RCodeStructure
-    ''' <summary>   Decides whether or not the output of the R-command should be part of the 
-    '''             script or not, in the case this has already been assigned. </summary>
+    ''' <summary>   If the output from the R command needs to be assigned, then this string is 
+    '''             the part of the script to the left of the assignment operator ('&lt;-'), 
+    '''             i.e. the name that should be used to assign in R the output of the main 
+    '''             (Base) R-command.
+    '''             If the output from the R command doesn't to be assigned, then this string is
+    '''             empty. </summary>
     Public strAssignTo As String
-    ''' <summary>   The name that should be used to assign in R the output of the main 
-    '''             (Base) R-command. </summary>
+    ''' <summary>   TBD . </summary>
     Public strAssignToDataFrame As String
     ''' <summary>   The assign to column TBD. </summary>
     Public strAssignToColumn As String
@@ -47,7 +50,7 @@ Public Class RCodeStructure
     '''             - and potentially assigned to elements in an R-instat object, if specified   
     '''               in the AssignToDataFrame,... parameters.    
     '''             
-    '''             Note: Both bToBeAssigned and bISassigned are necessary to distinguish between:
+    '''             Note: Both bToBeAssigned and bIsAssigned are necessary to distinguish between:
     '''             - the output hasn't been assigned but doesn't need to be    
     '''             - the output has already been assigned. 
     '''             (i.e. bIsAssigned Is Not enough To decide whether Or Not we should assign, 
@@ -62,7 +65,7 @@ Public Class RCodeStructure
     '''             assigned and, if relevant, the link with the appropriate R-instat object has 
     '''             been done.
     '''             
-    '''             Note: Both bToBeAssigned and bISassigned are necessary to distinguish between:
+    '''             Note: Both bToBeAssigned and bIsAssigned are necessary to distinguish between:
     '''             - the output hasn't been assigned but doesn't need to be    
     '''             - the output has already been assigned. 
     '''             (i.e. bIsAssigned Is Not enough To decide whether Or Not we should assign, 
@@ -114,20 +117,19 @@ Public Class RCodeStructure
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets assign to. Most methods from RFunction/ROperator have been moved here. </summary>
+    ''' <summary>   Sets the 'assignTo' variables. </summary>
     '''
-    ''' <param name="strTemp">                      The temporary. </param>
-    ''' <param name="strTempDataframe">             (Optional) The temporary dataframe. </param>
-    ''' <param name="strTempColumn">                (Optional) The temporary column. </param>
-    ''' <param name="strTempModel">                 (Optional) The temporary model. </param>
-    ''' <param name="strTempGraph">                 (Optional) The temporary graph. </param>
-    ''' <param name="strTempSurv">                  (Optional) The temporary surv. </param>
-    ''' <param name="strTempTable">                 (Optional) The temporary table. </param>
-    ''' <param name="bAssignToIsPrefix">            (Optional) True if assign to is prefix. </param>
-    ''' <param name="bAssignToColumnWithoutNames">  (Optional) True to assign to column without
-    '''                                             names. </param>
-    ''' <param name="bInsertColumnBefore">          (Optional) True to insert column before. </param>
-    ''' <param name="bRequireCorrectLength">        (Optional) True to require correct length. </param>
+    ''' <param name="strTemp">                      The new value for the assignment string. </param>
+    ''' <param name="strTempDataframe">             (Optional) The new value for the dataframe. </param>
+    ''' <param name="strTempColumn">                (Optional) The new value for the column. </param>
+    ''' <param name="strTempModel">                 (Optional) The new value for the model. </param>
+    ''' <param name="strTempGraph">                 (Optional) The new value for the graph. </param>
+    ''' <param name="strTempSurv">                  (Optional) The new value for the surv. </param>
+    ''' <param name="strTempTable">                 (Optional) The new value for the table. </param>
+    ''' <param name="bAssignToIsPrefix">            (Optional) The new value for bAssignToIsPrefix. </param>
+    ''' <param name="bAssignToColumnWithoutNames">  (Optional) The new value for bAssignToColumnWithoutNames. </param>
+    ''' <param name="bInsertColumnBefore">          (Optional) The new value for bInsertColumnBefore. </param>
+    ''' <param name="bRequireCorrectLength">        (Optional) The new value for bRequireCorrectLength. </param>
     ''' <param name="bDataFrameList">               (Optional) If true then a list of data frames is
     '''                                             being assigned, otherwise a single data frame. </param>
     ''' <param name="strDataFrameNames">            (Optional) Optional R character vector to give
@@ -167,7 +169,8 @@ Public Class RCodeStructure
 
     End Sub
 
-    ''' <summary>   Removes the assign to. </summary>
+    ''' <summary>   Resets all the 'AssignTo' variables. String variables are set to "".
+    '''             Booleans are set to false. </summary>
     Public Sub RemoveAssignTo()
         strAssignTo = ""
         strAssignToDataFrame = ""
@@ -214,7 +217,7 @@ Public Class RCodeStructure
         Dim clsGetTables As New RFunction
         Dim clsDataList As New RFunction
 
-        ' if R script already assigned to this object then return the assigned script
+        ' if R script already assigned for this object then return the existing assign script
         If bIsAssigned Then
             Return (strAssignTo)
         End If
@@ -225,6 +228,7 @@ Public Class RCodeStructure
             'assign 'strTemp' to 'strAssignTo'. 
             'Same as the following (but handles multi-line strings):
             '    strScript = strScript & strAssignTo & " <- " & strTemp & Environment.NewLine
+            '    e.g. 'strScript' set to "new_RDS <- readRDS(file=""C:/Users/myName/Library/experimental_survey.RDS"")" & vbCrLf
             strScript = strScript & ConstructAssignTo(strAssignTo, strTemp) & Environment.NewLine
 
             'if we need to assign to column elements, but not data frames
@@ -259,11 +263,14 @@ Public Class RCodeStructure
                 If Not bRequireCorrectLength Then
                     clsAddColumns.AddParameter("require_correct_length", "FALSE")
                 End If
+                ' add '$add-columns_to_data' parameters to 'strScript' 
+                ' e.g. "row_names1 <- data_book$get_row_names(data_name=""survey"")" & vbCrLf & "data_book$add_columns_to_data(data_name=""survey"", col_name=""row_names1"", col_data=row_names1, before=TRUE)" & vbCrLf
                 strScript = strScript & clsAddColumns.ToScript() & Environment.NewLine
 
                 clsGetColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
                 clsGetColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 clsGetColumns.AddParameter("col_names", Chr(34) & strAssignToColumn & Chr(34))
+                ' set 'strAssignTo' to e.g. "data_book$get_columns_from_data(data_name=""survey"", col_names=""row_names1"")"
                 strAssignTo = clsGetColumns.ToScript()
             ElseIf Not strAssignToModel = "" Then 'else if we need to assign to model elements
                 clsAddModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_model")
@@ -385,11 +392,14 @@ Public Class RCodeStructure
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets a parameter. </summary>
+    ''' <summary>   Creates and returns a new RParameter object. Child classes that override this
+    '''             function should return the parameter named <paramref name="strName"/>. 
+    '''             </summary>
     '''
-    ''' <param name="strName">  The name. </param>
+    ''' <param name="strName">  The name of the parameter to return (only used when this function
+    '''                         is overridden by a child class). </param>
     '''
-    ''' <returns>   The parameter. </returns>
+    ''' <returns>   A new RParameter object. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Function GetParameter(strName As String) As RParameter
         Return New RParameter
