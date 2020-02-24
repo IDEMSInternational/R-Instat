@@ -23,24 +23,46 @@ Public Class RCodeStructure
     '''             If the output from the R command doesn't to be assigned, then this string is
     '''             empty. </summary>
     Public strAssignTo As String
-    ''' <summary>   TBD . </summary>
+
+    ''' <summary>   The name of the data frame to assign to 
+    '''             (i.e. the data frame name associated with the R "data_name" parameter). 
+    '''             </summary>
     Public strAssignToDataFrame As String
-    ''' <summary>   The assign to column TBD. </summary>
+
+    ''' <summary>   The name of the column to assign to
+    '''             (i.e. the column name associated with the R "col_name" or "col_names" 
+    '''             parameters).
+    '''             </summary>
     Public strAssignToColumn As String
-    ''' <summary>   The assign to model TBD. </summary>
+
+    ''' <summary>   The name of the model to assign to
+    '''             (i.e. the model name associated with the R "model_name" parameter).
+    '''             </summary>
     Public strAssignToModel As String
-    ''' <summary>   The assign to graph TBD. </summary>
+
+    ''' <summary>   The name of the graph to assign to
+    '''             (i.e. the graph name associated with the R "graph_name" parameter).
+    '''             </summary>
     Public strAssignToGraph As String
-    ''' <summary>   The assign to surv TBD. </summary>
+
+    ''' <summary>   The name of the surv to assign to
+    '''             (i.e. the surv name associated with the R "surv_name" parameter).
+    '''             </summary>
     Public strAssignToSurv As String
-    ''' <summary>   The assign to table TBD. </summary>
+
+    ''' <summary>   The name of the table to assign to
+    '''             (i.e. the table name associated with the R "table_name" parameter).
+    '''             </summary>
     Public strAssignToTable As String
 
-    ''' <summary>   If true then a list of data frames is being assigned, otherwise a single 
-    '''             data frame. </summary>
+    ''' <summary>   If true then a list of data frames is assigned (i.e. the R "data_names" 
+    '''             parameter needs to be set).
+    '''             </summary>
     Public bDataFrameList As Boolean = False
-    ''' <summary>   Optional R character vector to give names of new data frames if data frame 
-    '''             list is not named. </summary>
+
+    ''' <summary>   The names of the new data frames (i.e. the data frame names associated with 
+    '''             the R "data_names" parameter). Only used if 'bDataFrameList' is true. 
+    '''             </summary>
     Public strDataFrameNames As String
 
     ''' <summary>    
@@ -53,13 +75,14 @@ Public Class RCodeStructure
     '''             Note: Both bToBeAssigned and bIsAssigned are necessary to distinguish between:
     '''             - the output hasn't been assigned but doesn't need to be    
     '''             - the output has already been assigned. 
-    '''             (i.e. bIsAssigned Is Not enough To decide whether Or Not we should assign, 
+    '''             (i.e. bIsAssigned isn't enough to decide whether or not we should assign, 
     '''             unless we use the information "is strAssignTo empty or not", but for the moment 
     '''             we keep it like it is.)
     '''             
     '''             Note: This variable is only relevant in the string case, as RFunction and
     '''             ROperator have internal equivalents.
     ''' </summary>
+
     Public bToBeAssigned As Boolean = False
     ''' <summary>   Tells blindly whether or not the output of the R-command has been 
     '''             assigned and, if relevant, the link with the appropriate R-instat object has 
@@ -68,7 +91,7 @@ Public Class RCodeStructure
     '''             Note: Both bToBeAssigned and bIsAssigned are necessary to distinguish between:
     '''             - the output hasn't been assigned but doesn't need to be    
     '''             - the output has already been assigned. 
-    '''             (i.e. bIsAssigned Is Not enough To decide whether Or Not we should assign, 
+    '''             (i.e. bIsAssigned isn't enough to decide whether or not we should assign, 
     '''             unless we use the information "is strAssignTo empty or not", but for the moment 
     '''             we keep it like it is.)
     '''             
@@ -77,27 +100,71 @@ Public Class RCodeStructure
     ''' </summary>
     Public bIsAssigned As Boolean = False
 
-    ''' <summary>   True if assign to is prefix TBD. </summary>
+    ''' <summary>   If true then the R parameter "use_col_name_as_prefix" is set to true, 
+    '''             else the parameter is set to false.
+    '''             </summary>
     Public bAssignToIsPrefix As Boolean = False
-    ''' <summary>   True to assign to column without names TBD. </summary>
+
+    ''' <summary>   If true then don't assign to a specific named column. If false then assign to 
+    '''             a named column (i.e. the R "col_name" parameter needs to be set). 
+    '''             </summary>
     Public bAssignToColumnWithoutNames As Boolean = False
-    ''' <summary>   True to insert column before TBD. </summary>
+
+    ''' <summary>   If true then set the R "before" parameter to true, else set it to false.
+    '''             Only used when assigning to a column.
+    '''             </summary>
     Public bInsertColumnBefore As Boolean = False
-    ''' <summary>   The adjacent column TBD. </summary>
-    '''             If they are non-empty, that gives the name of the R-instat Object fields it 
-    '''             needs to be linked with.
+
+    ''' <summary>   The name of the column to associate with the R "adjacent_column" parameter.
+    '''             Only used when assigning to a column.
+    '''             </summary>
     Public strAdjacentColumn As String = ""
-    ''' <summary>   True to require correct length TBD. </summary>
+
+    ''' <summary>   If true then there is no effect.
+    '''             If false then set the R "require_correct_length" parameter to false. 
+    '''             Only used when assigning to a column.
+    '''             </summary>
     Public bRequireCorrectLength As Boolean = True
-    ''' <summary>   Options for controlling the cls TBD. </summary>
+
+    ''' <summary>   The list of parameters associated with this R code. </summary>
     Public clsParameters As New List(Of RParameter)
-    ''' <summary>   Number of added parameters TBD. This might be temporary, it enables to have a default name for parameters.</summary>
-    Protected iNumberOfAddedParameters As Integer = 0
-    ''' <summary>   An enum constant representing the position option TBD Currently only used when this is in RSyntax as a before/after code to determine position code should be run in the list
+
+    ''' <summary>   The number of parameters associated with this R code.</summary>
+    Protected iNumberOfAddedParameters As Integer = 0 'TODSO Is this used or needed? Couldn't we find the number of parameters from the num of elements in clsParameters?
+
+    ''' <summary>   An enum constant representing the position option.
+    '''             Note: This is currently only used in RSyntax as a before/after code to 
+    '''             determine the position code should be run in the list.
     '''    Similar behaviour to parameter positions. </summary>
-    Public iPosition = -1
-    ''' <summary>   Type of the call TBD. </summary>
+    Public iPosition = -1 ' TODO SJL This seems to be a constant, should we declare it with 'const'?
+
+    ''' <summary>   Type of the call TBD. 
+    ''' <list type="bullet">
+    '''     <item>
+    '''        <description>0 Ignore the result of the R code.</description>
+    '''     </item>
+    '''     <item>
+    '''        <description>1 Store the result of the R code in a temporary R variable, and then 
+    '''                     output the variable's value as text.</description>
+    '''     </item>
+    '''     <item>
+    '''        <description>2 If the R code executes successfully then show the result as text.
+    '''                     </description>
+    '''     </item>
+    '''     <item>
+    '''        <description>3 If the R code executes successfully then show the result as a graph.
+    '''                     </description>
+    '''     </item>
+    '''     <item>
+    '''        <description>4 Store the result of the R code in a temporary R variable, and then 
+    '''                     output the variable's value in a web browser.
+    '''                     </description>
+    '''     </item>
+    ''' </list>
+    '''             TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are call types 1 and 4 used?
+    '''             </summary>
     Public iCallType As Integer = 0
+
     ''' <summary>   True to exclude, false to include the assigned function output TBD. </summary>
     Public bExcludeAssignedFunctionOutput As Boolean = True
     ''' <summary>   This is used to clear the global environment of unused variables. Will be cleared after running unless bClearFromGlobal = False </summary>
@@ -108,6 +175,7 @@ Public Class RCodeStructure
     Public Tag As Object
     ''' <summary>   Event queue for all listeners interested in ParametersChanged events. </summary>
     Public Event ParametersChanged()
+
     ''' <summary>   Executes the parameters changed action. Currently only used when this is in 
     '''             RSyntax as a before/after code to determine position code should be run in the list.
     '''    This is because RSyntax has iCallType and bExcludeAssignedFunctionOutput which it uses for the base code
@@ -231,10 +299,11 @@ Public Class RCodeStructure
             '    e.g. 'strScript' set to "new_RDS <- readRDS(file=""C:/Users/myName/Library/experimental_survey.RDS"")" & vbCrLf
             strScript = strScript & ConstructAssignTo(strAssignTo, strTemp) & Environment.NewLine
 
-            'if we need to assign to column elements, but not data frames
+            'if we need to assign to a column in a data frame
             If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
                 clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                'if we need to assign to a named column
                 If Not bAssignToColumnWithoutNames Then
                     clsAddColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
                 End If
@@ -272,7 +341,7 @@ Public Class RCodeStructure
                 clsGetColumns.AddParameter("col_names", Chr(34) & strAssignToColumn & Chr(34))
                 ' set 'strAssignTo' to e.g. "data_book$get_columns_from_data(data_name=""survey"", col_names=""row_names1"")"
                 strAssignTo = clsGetColumns.ToScript()
-            ElseIf Not strAssignToModel = "" Then 'else if we need to assign to model elements
+            ElseIf Not strAssignToModel = "" Then 'else if we need to assign to a model
                 clsAddModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_model")
                 clsAddModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
                 clsAddModels.AddParameter("model", strAssignTo)
@@ -286,7 +355,7 @@ Public Class RCodeStructure
                 clsGetModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                 clsGetModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
                 strAssignTo = clsGetModels.ToScript()
-            ElseIf Not strAssignToGraph = "" Then 'else if we need to assign to graph elements
+            ElseIf Not strAssignToGraph = "" Then 'else if we need to assign to a graph
                 clsAddGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_graph")
                 clsAddGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
                 clsAddGraphs.AddParameter("graph", strAssignTo)
@@ -299,7 +368,7 @@ Public Class RCodeStructure
                 clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                 clsGetGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
                 strAssignTo = clsGetGraphs.ToScript()
-            ElseIf Not strAssignToSurv = "" Then 'else if we need to assign to surv elements
+            ElseIf Not strAssignToSurv = "" Then 'else if we need to assign to a surv
                 clsAddSurv.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_surv")
                 clsAddSurv.AddParameter("surv_name", Chr(34) & strAssignToSurv & Chr(34))
                 clsAddSurv.AddParameter("surv", strAssignTo)
@@ -313,7 +382,7 @@ Public Class RCodeStructure
                 clsGetSurv.AddParameter("surv_name", Chr(34) & strAssignToSurv & Chr(34))
                 strAssignTo = clsGetSurv.ToScript()
 
-            ElseIf Not strAssignToTable = "" Then 'else if we need to assign to table elements
+            ElseIf Not strAssignToTable = "" Then 'else if we need to assign to a table
                 clsAddTables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_table")
                 clsAddTables.AddParameter("table_name", Chr(34) & strAssignToTable & Chr(34))
                 clsAddTables.AddParameter("table", strAssignTo)
@@ -326,7 +395,7 @@ Public Class RCodeStructure
                 clsGetTables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_tables")
                 clsGetTables.AddParameter("table_name", Chr(34) & strAssignToTable & Chr(34))
                 strAssignTo = clsGetTables.ToScript()
-            ElseIf Not strAssignToDataFrame = "" Then 'else if we need to assign to data frame elements
+            ElseIf Not strAssignToDataFrame = "" Then 'else if we need to assign to a data frame
                 clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
 
                 If bDataFrameList Then
