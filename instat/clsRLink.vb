@@ -714,6 +714,7 @@ Public Class RLink
                 MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
         ElseIf iCallType = 1 OrElse iCallType = 4 Then 'else if script output should be stored in a temp variable
+            ' TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are call types 1 and 4 used?
             Try
                 'TODO check this is valid syntax in all cases
                 '     i.e. this is potentially: x <- y <- 1
