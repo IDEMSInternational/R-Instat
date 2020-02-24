@@ -1794,13 +1794,13 @@ white spaces</value>
     <value>11</value>
   </data>
   <data name="ucrSaveFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 52</value>
+    <value>10, 509</value>
   </data>
   <data name="ucrSaveFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 24</value>
+    <value>389, 24</value>
   </data>
   <data name="ucrSaveFile.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1845,7 +1845,7 @@ white spaces</value>
     <value>17</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 508</value>
+    <value>7, 542</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1875,7 +1875,10 @@ white spaces</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>730, 569</value>
+    <value>730, 606</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
