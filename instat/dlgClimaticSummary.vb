@@ -219,6 +219,7 @@ Public Class dlgClimaticSummary
         'ucrSelectorVariable.AddAdditionalCodeParameterPair(clsAddDateFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsToConditionOperator, bReset)
+        ucrReceiverStation.SetRCode(clsDefaultFactors, bReset)
         ucrChkAddDateColumn.SetRCode(clsAddDateFunction, bReset)
 
         ucrSelectorVariable.SetRCode(clsDefaultFunction, bReset)
@@ -347,14 +348,6 @@ Public Class dlgClimaticSummary
 
     Private Sub SetFactors()
         If bRCodeSet Then
-
-
-            If Not ucrReceiverStation.IsEmpty Then
-                    clsDefaultFactors.AddParameter(ucrReceiverStation.GetParameter())
-                Else
-                    clsDefaultFactors.RemoveParameterByName("station")
-                End If
-
             If rdoAnnual.Checked Then
                 clsDefaultFactors.RemoveParameterByName("within_variable")
                 clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
