@@ -405,17 +405,6 @@ Public Class RCodeStructure
         Return New RParameter
     End Function
 
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Adds a parameter. </summary>
-    '''
-    ''' <param name="strParameterName">         (Optional) Name of the parameter. </param>
-    ''' <param name="strParameterValue">        (Optional) The parameter value. </param>
-    ''' <param name="clsRFunctionParameter">    (Optional) The cls r function parameter. </param>
-    ''' <param name="clsROperatorParameter">    (Optional) The cls r operator parameter. </param>
-    ''' <param name="bIncludeArgumentName">     (Optional) True to include, false to exclude the
-    '''                                         argument name. </param>
-    ''' <param name="iPosition">                (Optional) Zero-based index of the position. </param>
-    '''--------------------------------------------------------------------------------------------
     Public Overridable Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional clsRCodeStructureParameter As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
         Dim clsParam = New RParameter
 
