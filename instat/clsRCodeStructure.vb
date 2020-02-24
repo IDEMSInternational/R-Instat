@@ -14,79 +14,128 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+''' <summary>   This class TBD. </summary>
 Public Class RCodeStructure
-    'Decides whether or not the output of the R-command should be part of the script or not, in the case this has already been assigned.
+    ''' <summary>   If the output from the R command needs to be assigned, then this string is 
+    '''             the part of the script to the left of the assignment operator ('&lt;-'), 
+    '''             i.e. the name that should be used to assign in R the output of the main 
+    '''             (Base) R-command.
+    '''             If the output from the R command doesn't to be assigned, then this string is
+    '''             empty. </summary>
     Public strAssignTo As String
-    'strAssignTo is the name that should be used to assign in R the output of the main (Base) R-command.
+    ''' <summary>   TBD . </summary>
     Public strAssignToDataFrame As String
+    ''' <summary>   The assign to column TBD. </summary>
     Public strAssignToColumn As String
+    ''' <summary>   The assign to model TBD. </summary>
     Public strAssignToModel As String
+    ''' <summary>   The assign to graph TBD. </summary>
     Public strAssignToGraph As String
+    ''' <summary>   The assign to surv TBD. </summary>
     Public strAssignToSurv As String
+    ''' <summary>   The assign to table TBD. </summary>
     Public strAssignToTable As String
 
-
-    ' If true then a list of data frames is being assigned, otherwise a single data frame
+    ''' <summary>   If true then a list of data frames is being assigned, otherwise a single 
+    '''             data frame. </summary>
     Public bDataFrameList As Boolean = False
-    ' Optional R character vector to give names of new data frames if data frame list is not named
+    ''' <summary>   Optional R character vector to give names of new data frames if data frame 
+    '''             list is not named. </summary>
     Public strDataFrameNames As String
 
-    'These AssingTo's are only relevant in the string case, as RFunction and ROperator have internal equivalents.
-    'If they are empty, the output Of the command Is Not linked To an R-instat object.
-    'If they are non-empty, that gives the name of the R-instat Object fields it needs to be linked with.
+    ''' <summary>    
+    '''             If true then, AT THE CURRENT STAGE of running code within R, the output of 
+    '''             the Base R-command NEEDS TO BE assigned to:
+    '''             - the variable With the appropriate name: strAssignTo,   
+    '''             - and potentially assigned to elements in an R-instat object, if specified   
+    '''               in the AssignToDataFrame,... parameters.    
+    '''             
+    '''             Note: Both bToBeAssigned and bIsAssigned are necessary to distinguish between:
+    '''             - the output hasn't been assigned but doesn't need to be    
+    '''             - the output has already been assigned. 
+    '''             (i.e. bIsAssigned Is Not enough To decide whether Or Not we should assign, 
+    '''             unless we use the information "is strAssignTo empty or not", but for the moment 
+    '''             we keep it like it is.)
+    '''             
+    '''             Note: This variable is only relevant in the string case, as RFunction and
+    '''             ROperator have internal equivalents.
+    ''' </summary>
     Public bToBeAssigned As Boolean = False
-    'bToBeAssigned is a boolean telling whether or not, AT THE CURRENT STAGE of running code within R, the output of the Base R-command NEEDS TO BE assigned to 
-    ' - the variable With the appropriate name: strAssignTo, 
-    ' - And potentially assigned to elements in an R-instat object, if specified in the AssignToDataFrame,... parameters.
+    ''' <summary>   Tells blindly whether or not the output of the R-command has been 
+    '''             assigned and, if relevant, the link with the appropriate R-instat object has 
+    '''             been done.
+    '''             
+    '''             Note: Both bToBeAssigned and bIsAssigned are necessary to distinguish between:
+    '''             - the output hasn't been assigned but doesn't need to be    
+    '''             - the output has already been assigned. 
+    '''             (i.e. bIsAssigned Is Not enough To decide whether Or Not we should assign, 
+    '''             unless we use the information "is strAssignTo empty or not", but for the moment 
+    '''             we keep it like it is.)
+    '''             
+    '''             Note: This variable is only relevant in the string case, as RFunction and
+    '''             ROperator have internal equivalents.
+    ''' </summary>
     Public bIsAssigned As Boolean = False
-    'bIsAssigned tells blindly whether or not the output of the R-command has been assigned and, if relevant, the link with the appropriate R-instat object has been done.
-    'Both booleans are necessary to distinguish the case where nothing needs to be assigned, and nothing is indeed assigned from the case, nothing needs to be assigned as it has already been assigned. 
-    'So bIsAssigned Is Not enough To decide whether Or Not we should assign, unless we use the information "is strAssignTo empty or not", but for the moment we keep it like it is.
+
+    ''' <summary>   True if assign to is prefix TBD. </summary>
     Public bAssignToIsPrefix As Boolean = False
+    ''' <summary>   True to assign to column without names TBD. </summary>
     Public bAssignToColumnWithoutNames As Boolean = False
+    ''' <summary>   True to insert column before TBD. </summary>
     Public bInsertColumnBefore As Boolean = False
+    ''' <summary>   The adjacent column TBD. </summary>
+    '''             If they are non-empty, that gives the name of the R-instat Object fields it 
+    '''             needs to be linked with.
     Public strAdjacentColumn As String = ""
+    ''' <summary>   True to require correct length TBD. </summary>
     Public bRequireCorrectLength As Boolean = True
+    ''' <summary>   Options for controlling the cls TBD. </summary>
     Public clsParameters As New List(Of RParameter)
-    Protected iNumberOfAddedParameters As Integer = 0 'This might be temporary, it enables to have a default name for parameters...
-    'Currently only used when this is in RSyntax as a before/after code to determine position code should be run in the list
-    'Similar behaviour to parameter positions
+    ''' <summary>   Number of added parameters TBD. This might be temporary, it enables to have a default name for parameters.</summary>
+    Protected iNumberOfAddedParameters As Integer = 0
+    ''' <summary>   An enum constant representing the position option TBD Currently only used when this is in RSyntax as a before/after code to determine position code should be run in the list
+    '''    Similar behaviour to parameter positions. </summary>
     Public iPosition = -1
-
-    'Currently only used when this is in RSyntax as a before/after code to determine position code should be run in the list
-    'This is because RSyntax has iCallType & bExcludeAssignedFunctionOutput which it uses for the base code
-    'Eventually migrate these out of RSyntax
+    ''' <summary>   Type of the call TBD. </summary>
     Public iCallType As Integer = 0
+    ''' <summary>   True to exclude, false to include the assigned function output TBD. </summary>
     Public bExcludeAssignedFunctionOutput As Boolean = True
-
-    'The name this code is represented by in the R global environment
-    'This is used to clear the global environment of unused variables
-    'Will be cleared after running unless bClearFromGlobal = False
+    ''' <summary>   This is used to clear the global environment of unused variables. Will be cleared after running unless bClearFromGlobal = False </summary>
     Public bClearFromGlobal As Boolean = False
-
-    ' If True when running ToScript the function will be returned as a string that could be passed to R
-    ' e.g. "seq(from = 1, to = 10)" instead of seq(from = 1, to = 10)
-    ' When True, assignment cannot be used for the function or its parameters
+    ''' <summary>   If True when running ToScript the function will be returned as a string that could be passed to R e.g. "seq(from = 1, to = 10)" instead of seq(from = 1, to = 10). When True, assignment cannot be used for the function or its parameters. </summary>
     Public bToScriptAsRString As Boolean = False
-
-    'Tag object for any use
+    ''' <summary>   Tag object for any use. </summary>
     Public Tag As Object
-
+    ''' <summary>   Event queue for all listeners interested in ParametersChanged events. </summary>
     Public Event ParametersChanged()
-
-    'Public ReadOnly Property OrderedIndices As List(Of Integer)
-    'This was initially intended to provide
-    '    Get
-    '        Return lstOrderedIndices
-    '    End Get
-    'End Property
-
+    ''' <summary>   Executes the parameters changed action. Currently only used when this is in 
+    '''             RSyntax as a before/after code to determine position code should be run in the list.
+    '''    This is because RSyntax has iCallType and bExcludeAssignedFunctionOutput which it uses for the base code
+    '''    Eventually migrate these out of RSyntax</summary>
     Protected Sub OnParametersChanged()
         RaiseEvent ParametersChanged()
     End Sub
 
-    'Most methods from RFunction/ROperator have been moved here
-
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Sets the 'assignTo' variables. </summary>
+    '''
+    ''' <param name="strTemp">                      The new value for the assignment string. </param>
+    ''' <param name="strTempDataframe">             (Optional) The new value for the dataframe. </param>
+    ''' <param name="strTempColumn">                (Optional) The new value for the column. </param>
+    ''' <param name="strTempModel">                 (Optional) The new value for the model. </param>
+    ''' <param name="strTempGraph">                 (Optional) The new value for the graph. </param>
+    ''' <param name="strTempSurv">                  (Optional) The new value for the surv. </param>
+    ''' <param name="strTempTable">                 (Optional) The new value for the table. </param>
+    ''' <param name="bAssignToIsPrefix">            (Optional) The new value for bAssignToIsPrefix. </param>
+    ''' <param name="bAssignToColumnWithoutNames">  (Optional) The new value for bAssignToColumnWithoutNames. </param>
+    ''' <param name="bInsertColumnBefore">          (Optional) The new value for bInsertColumnBefore. </param>
+    ''' <param name="bRequireCorrectLength">        (Optional) The new value for bRequireCorrectLength. </param>
+    ''' <param name="bDataFrameList">               (Optional) If true then a list of data frames is
+    '''                                             being assigned, otherwise a single data frame. </param>
+    ''' <param name="strDataFrameNames">            (Optional) Optional R character vector to give
+    '''                                             names of new data frames if data frame list is
+    '''                                             not named. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempSurv As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True, Optional bDataFrameList As Boolean = False, Optional strDataFrameNames As String = "")
 
         strAssignTo = strTemp
@@ -120,6 +169,8 @@ Public Class RCodeStructure
 
     End Sub
 
+    ''' <summary>   Resets all the 'AssignTo' variables. String variables are set to "".
+    '''             Booleans are set to false. </summary>
     Public Sub RemoveAssignTo()
         strAssignTo = ""
         strAssignToDataFrame = ""
@@ -135,6 +186,22 @@ Public Class RCodeStructure
         bInsertColumnBefore = False
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   If object needs to be assigned to, then creates/updates the assignment script 
+    '''             (if needed) amd returns the assignment script.
+    '''             If object doesn't need to be assigned to, then returns <paramref name="strTemp"/>
+    '''             </summary>
+    '''
+    ''' <param name="strScript">    [in,out] (Optional) The existing script. 
+    '''                             If the assignment requires extra elements (e.g. columns, models, 
+    '''                             graphs etc.) then this script is updated to include the 
+    '''                             addition of the new elements.</param>
+    ''' <param name="strTemp">      (Optional) The expression to assign (i.e. the right side of the
+    '''                             assignment). </param>
+    '''
+    ''' <returns>   If object needs to be assigned to, then returns the assign string. 
+    '''             Else returns <paramref name="strTemp"/>. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Overridable Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
         Dim clsAddColumns As New RFunction
         Dim clsGetColumns As New RFunction
@@ -150,15 +217,21 @@ Public Class RCodeStructure
         Dim clsGetTables As New RFunction
         Dim clsDataList As New RFunction
 
+        ' if R script already assigned for this object then return the existing assign script
         If bIsAssigned Then
             Return (strAssignTo)
         End If
 
+        ' if R script still needs to be assigned to this object
         If bToBeAssigned Then
 
+            'assign 'strTemp' to 'strAssignTo'. 
+            'Same as the following (but handles multi-line strings):
+            '    strScript = strScript & strAssignTo & " <- " & strTemp & Environment.NewLine
+            '    e.g. 'strScript' set to "new_RDS <- readRDS(file=""C:/Users/myName/Library/experimental_survey.RDS"")" & vbCrLf
             strScript = strScript & ConstructAssignTo(strAssignTo, strTemp) & Environment.NewLine
-            'strScript = strScript & strAssignTo & " <- " & strTemp & Environment.NewLine
 
+            'if we need to assign to column elements, but not data frames
             If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
                 clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
@@ -174,17 +247,9 @@ Public Class RCodeStructure
                     End If
                 End If
 
-                'If bInsertColumnBefore Then
-                '    clsAddColumns.AddParameter("before", "TRUE")
-                'Else
-                '    If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                '        clsAddColumns.AddParameter("before", "FALSE")
-                '    End If
-                'End If
                 If Not String.IsNullOrEmpty(strAdjacentColumn) Then
                     clsAddColumns.AddParameter("before", If(bInsertColumnBefore, "TRUE", "FALSE"))
                     clsAddColumns.AddParameter("adjacent_column", strAdjacentColumn)
-                    'clsAddColumns.AddParameter("adjacent_column", Chr(34) & strAdjacentColumn & Chr(34))
                 Else
                     If bInsertColumnBefore Then
                         clsAddColumns.AddParameter("before", "TRUE")
@@ -198,13 +263,16 @@ Public Class RCodeStructure
                 If Not bRequireCorrectLength Then
                     clsAddColumns.AddParameter("require_correct_length", "FALSE")
                 End If
+                ' add '$add-columns_to_data' parameters to 'strScript' 
+                ' e.g. "row_names1 <- data_book$get_row_names(data_name=""survey"")" & vbCrLf & "data_book$add_columns_to_data(data_name=""survey"", col_name=""row_names1"", col_data=row_names1, before=TRUE)" & vbCrLf
                 strScript = strScript & clsAddColumns.ToScript() & Environment.NewLine
 
                 clsGetColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
                 clsGetColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 clsGetColumns.AddParameter("col_names", Chr(34) & strAssignToColumn & Chr(34))
+                ' set 'strAssignTo' to e.g. "data_book$get_columns_from_data(data_name=""survey"", col_names=""row_names1"")"
                 strAssignTo = clsGetColumns.ToScript()
-            ElseIf Not strAssignToModel = "" Then
+            ElseIf Not strAssignToModel = "" Then 'else if we need to assign to model elements
                 clsAddModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_model")
                 clsAddModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
                 clsAddModels.AddParameter("model", strAssignTo)
@@ -218,7 +286,7 @@ Public Class RCodeStructure
                 clsGetModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                 clsGetModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
                 strAssignTo = clsGetModels.ToScript()
-            ElseIf Not strAssignToGraph = "" Then
+            ElseIf Not strAssignToGraph = "" Then 'else if we need to assign to graph elements
                 clsAddGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_graph")
                 clsAddGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
                 clsAddGraphs.AddParameter("graph", strAssignTo)
@@ -231,7 +299,7 @@ Public Class RCodeStructure
                 clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                 clsGetGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
                 strAssignTo = clsGetGraphs.ToScript()
-            ElseIf Not strAssignToSurv = "" Then
+            ElseIf Not strAssignToSurv = "" Then 'else if we need to assign to surv elements
                 clsAddSurv.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_surv")
                 clsAddSurv.AddParameter("surv_name", Chr(34) & strAssignToSurv & Chr(34))
                 clsAddSurv.AddParameter("surv", strAssignTo)
@@ -245,7 +313,7 @@ Public Class RCodeStructure
                 clsGetSurv.AddParameter("surv_name", Chr(34) & strAssignToSurv & Chr(34))
                 strAssignTo = clsGetSurv.ToScript()
 
-            ElseIf Not strAssignToTable = "" Then
+            ElseIf Not strAssignToTable = "" Then 'else if we need to assign to table elements
                 clsAddTables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_table")
                 clsAddTables.AddParameter("table_name", Chr(34) & strAssignToTable & Chr(34))
                 clsAddTables.AddParameter("table", strAssignTo)
@@ -258,7 +326,7 @@ Public Class RCodeStructure
                 clsGetTables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_tables")
                 clsGetTables.AddParameter("table_name", Chr(34) & strAssignToTable & Chr(34))
                 strAssignTo = clsGetTables.ToScript()
-            ElseIf Not strAssignToDataFrame = "" Then
+            ElseIf Not strAssignToDataFrame = "" Then 'else if we need to assign to data frame elements
                 clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
 
                 If bDataFrameList Then
@@ -281,36 +349,73 @@ Public Class RCodeStructure
             bIsAssigned = True
             bToBeAssigned = False
             Return strAssignTo
-        Else
+        Else 'else if R script doesn't need to be assigned to this object
+            ' just return the right side of the assignment
             Return strTemp
         End If
     End Function
 
-
-    'sets assign to , to the last line of strTemp
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Returns an assignment statement of the form:
+    '''             <code>
+    '''             <paramref name="strAssignTo"/> &lt;- <paramref name="strTemp"/> 
+    '''             </code>
+    '''             If <paramref name="strTemp"/> is multiple lines then <paramref name="strTemp"/> 
+    '''             is assigned to the final line. All previous lines are returned unchanged.
+    '''              </summary>
+    '''
+    ''' <param name="strAssignTo">  The variable to assign to (i.e. the left side of the 
+    '''                             assignment). </param>
+    ''' <param name="strTemp">      The expression to assign (i.e. the right side of the 
+    '''                             assignment). </param>
+    '''
+    ''' <returns>   The constructed assignment statement. </returns>
+    '''--------------------------------------------------------------------------------------------
     Private Function ConstructAssignTo(strAssignTo As String, strTemp As String) As String
-        'Split strTemp and get the last line then set assign to it then merge the wole string
         Dim strReconstructed As String = ""
         Dim strParts As String()
         If Not String.IsNullOrEmpty(strTemp) Then
+            'if string contains more than one line, then divide it up into an array of separate lines
             strParts = strTemp.Split(ControlChars.CrLf.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
             If strParts.Length > 1 Then
+                're-assemble the string, apart from the last line
                 For i As Integer = 0 To strParts.Length - 2
                     strReconstructed = strReconstructed & strParts(i) & Environment.NewLine
                 Next
+                'assign just the last line of the multi-line string
                 strReconstructed = strReconstructed & strAssignTo & " <- " & strParts.Last
-            Else
+            Else 'else if string has only one line, then assign to the whole string
                 strReconstructed = strAssignTo & " <- " & strTemp
             End If
         End If
         Return strReconstructed
     End Function
 
-
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Creates and returns a new RParameter object. Child classes that override this
+    '''             function should return the parameter named <paramref name="strName"/>. 
+    '''             </summary>
+    '''
+    ''' <param name="strName">  The name of the parameter to return (only used when this function
+    '''                         is overridden by a child class). </param>
+    '''
+    ''' <returns>   A new RParameter object. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Overridable Function GetParameter(strName As String) As RParameter
         Return New RParameter
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Adds a parameter. </summary>
+    '''
+    ''' <param name="strParameterName">         (Optional) Name of the parameter. </param>
+    ''' <param name="strParameterValue">        (Optional) The parameter value. </param>
+    ''' <param name="clsRFunctionParameter">    (Optional) The cls r function parameter. </param>
+    ''' <param name="clsROperatorParameter">    (Optional) The cls r operator parameter. </param>
+    ''' <param name="bIncludeArgumentName">     (Optional) True to include, false to exclude the
+    '''                                         argument name. </param>
+    ''' <param name="iPosition">                (Optional) Zero-based index of the position. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Overridable Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional clsRCodeStructureParameter As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
         Dim clsParam = New RParameter
 
@@ -338,7 +443,17 @@ Public Class RCodeStructure
         AddParameter(clsParam)
     End Sub
 
-    'TODO This should be call AddParameter but need to make it unambiguous with above
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Adds a parameter with code structure. 
+    '''             TODO This should be call AddParameter but need to make it unambiguous with above. </summary>
+    '''
+    ''' <param name="strParameterName">     (Optional) Name of the parameter. </param>
+    ''' <param name="strParameterValue">    (Optional) The parameter value. </param>
+    ''' <param name="clsRCodeObject">       (Optional) The cls r code object. </param>
+    ''' <param name="bIncludeArgumentName"> (Optional) True to include, false to exclude the argument
+    '''                                     name. </param>
+    ''' <param name="iPosition">            (Optional) Zero-based index of the position. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Overridable Sub AddParameterWithCodeStructure(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRCodeObject As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
         If TypeOf (clsRCodeObject) Is RFunction Then
             AddParameter(strParameterName:=strParameterName, strParameterValue:=strParameterValue, clsRFunctionParameter:=clsRCodeObject, bIncludeArgumentName:=bIncludeArgumentName, iPosition:=iPosition)
@@ -347,6 +462,11 @@ Public Class RCodeStructure
         End If
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Adds a parameter. </summary>
+    '''
+    ''' <param name="clsNewParam">  The cls new parameter. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Overridable Sub AddParameter(clsNewParam As RParameter)
         Dim i As Integer = -1
         Dim strTempArgumentName As String = clsNewParam.strArgumentName
@@ -384,6 +504,11 @@ Public Class RCodeStructure
         OnParametersChanged()
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Shift parameters positions. </summary>
+    '''
+    ''' <param name="iPosition">    Zero-based index of the position. </param>
+    '''--------------------------------------------------------------------------------------------
     Private Sub ShiftParametersPositions(iPosition As Integer)
         'Assuming that there are no repetitions in the positions of ordered parameters, this sub will shift all positions starting from iPosition until there are no repititions of positions even if a parameter with position iposition was added.
         'In particular it won't do anything if there is no parameter with position iPosition in clsParameters.
@@ -407,12 +532,21 @@ Public Class RCodeStructure
         End If
     End Sub
 
+    ''' <summary>   Sort parameters. </summary>
     Public Sub SortParameters()
         'This sub is used to reorder the parameters according to their Position property.
         'It will be called only in places where it is necessary ie before ToScript or RemoveAdditionalParameters in ROperator.
         clsParameters.Sort(AddressOf CompareParametersPosition)
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Compare parameters position. </summary>
+    '''
+    ''' <param name="clsMain">      The cls main. </param>
+    ''' <param name="clsRelative">  The cls relative. </param>
+    '''
+    ''' <returns>   An Integer. </returns>
+    '''--------------------------------------------------------------------------------------------
     Private Function CompareParametersPosition(ByVal clsMain As RParameter, ByVal clsRelative As RParameter) As Integer
         'Compares two RParameters according to their Position property. If x is "smaller" than y, then return -1, if they are "equal" return 0 else return 1.
         If clsMain.Position = clsRelative.Position Then
@@ -426,6 +560,7 @@ Public Class RCodeStructure
         End If
     End Function
 
+    ''' <summary>   Removes the unordered parameters. </summary>
     Public Sub RemoveUnorderedParameters()
         'Removes all parameters that are of position -1 i e unordered.
         Dim clsParam As RParameter
@@ -437,6 +572,11 @@ Public Class RCodeStructure
         OnParametersChanged()
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Removes the parameter by name described by strArgName. </summary>
+    '''
+    ''' <param name="strArgName">   Name of the argument. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Overridable Sub RemoveParameterByName(strArgName As String)
         Dim clsParam As RParameter
         If Not clsParameters Is Nothing Then
@@ -447,6 +587,11 @@ Public Class RCodeStructure
         OnParametersChanged()
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Removes the parameter by position described by iPosition. </summary>
+    '''
+    ''' <param name="iPosition">    Zero-based index of the position. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Overridable Sub RemoveParameterByPosition(iPosition As Integer)
         Dim clsParam As RParameter
         If Not clsParameters Is Nothing Then
@@ -457,6 +602,11 @@ Public Class RCodeStructure
         OnParametersChanged()
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Removes the parameter described by clsParam. </summary>
+    '''
+    ''' <param name="clsParam"> The cls parameter. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Overridable Sub RemoveParameter(clsParam As RParameter)
         If Not clsParameters Is Nothing Then
             clsParameters.Remove(clsParam)
@@ -465,14 +615,29 @@ Public Class RCodeStructure
         OnParametersChanged()
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Query if 'strParameterName' contains parameter. </summary>
+    '''
+    ''' <param name="clsParam"> The cls parameter. </param>
+    '''
+    ''' <returns>   True if it succeeds, false if it fails. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Overridable Function ContainsParameter(clsParam As RParameter) As Boolean
         Return clsParameters.Contains(clsParam)
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Query if 'strParameterName' contains parameter. </summary>
+    '''
+    ''' <param name="strParameterName"> Name of the parameter. </param>
+    '''
+    ''' <returns>   True if it succeeds, false if it fails. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Overridable Function ContainsParameter(strParameterName As String) As Boolean
         Return (clsParameters.FindIndex(Function(x) x.strArgumentName = strParameterName) <> -1)
     End Function
 
+    ''' <summary>   Clears this object to its blank/initial state. </summary>
     Public Overridable Sub Clear()
         'todo tidy up iPosition 
         iPosition = -1
@@ -485,6 +650,7 @@ Public Class RCodeStructure
         ClearParameters()
     End Sub
 
+    ''' <summary>   Clears the parameters. </summary>
     Public Overridable Sub ClearParameters()
         clsParameters.Clear()
         iNumberOfAddedParameters = 0
@@ -492,6 +658,11 @@ Public Class RCodeStructure
         OnParametersChanged()
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Makes a deep copy of this object. </summary>
+    '''
+    ''' <returns>   A copy of this object. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Overridable Function Clone() As RCodeStructure
         Dim clsTempCode As New RCodeStructure
         Dim clsRParam As RParameter
@@ -523,6 +694,12 @@ Public Class RCodeStructure
         Return clsTempCode
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets all assign to. </summary>
+    '''
+    ''' <param name="lstCodes">     The list codes. </param>
+    ''' <param name="lstValues">    The list values. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub GetAllAssignTo(lstCodes As List(Of RCodeStructure), lstValues As List(Of String))
         SortParameters()
         If bToBeAssigned AndAlso Not lstCodes.Contains(Me) Then
