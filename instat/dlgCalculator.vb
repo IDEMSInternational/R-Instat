@@ -149,6 +149,8 @@ Public Class dlgCalculator
                 Me.Size = New Size(iBasicWidth * 1.39, Me.Height)
             Case "Symbols"
                 Me.Size = New Size(iBasicWidth * 2.56, Me.Height)
+            Case "hydroGOF"
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.27, Me.Height)
             Case Else
                 Me.Size = New System.Drawing.Size(iBasicWidth, Me.Height)
         End Select
