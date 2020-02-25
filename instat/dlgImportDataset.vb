@@ -721,7 +721,7 @@ Public Class dlgImportDataset
                     End If
                     clsTempImport = clsImportExcel.Clone()
                     strRowMaxParamName = "n_max"
-                    clsTempImport.AddParameter("na", Chr(34) & ucrInputMissingValueStringExcel.GetText & Chr(34))
+                    clsTempImport.AddParameter("na", GetMissingValueRText)
                 End If
                 If clsTempImport.ContainsParameter(strRowMaxParamName) Then
                     If Integer.TryParse(clsTempImport.GetParameter(strRowMaxParamName).strArgumentValue, iTemp) Then
@@ -981,5 +981,27 @@ Public Class dlgImportDataset
             keyList.Add(kvp.Key)
         Next
         Return keyList
+    End Function
+
+    Private Function GetMissingValueRText() As String
+        Dim arrStr() As String = ucrInputMissingValueStringExcel.GetText().Split(",")
+        Dim strMissingValue As String
+
+        If arrStr.Length < 2 Then
+            strMissingValue = Chr(34) & ucrInputMissingValueStringExcel.GetText() & Chr(34)
+        Else
+            strMissingValue = ""
+            For Each strTemp As String In arrStr
+                If strMissingValue = "" Then
+                    strMissingValue = Chr(34) & strTemp & Chr(34)
+                Else
+                    strMissingValue = strMissingValue & "," & Chr(34) & strTemp & Chr(34)
+                End If
+
+            Next
+            strMissingValue = "c(" & strMissingValue & ")"
+        End If
+
+        Return strMissingValue
     End Function
 End Class
