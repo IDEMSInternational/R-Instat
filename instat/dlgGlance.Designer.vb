@@ -23,26 +23,29 @@ Partial Class dlgGlance
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgGlance))
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrModelSelector = New instat.ucrSelectorByDataFrame()
-        Me.ucrModelReceiver = New instat.ucrReceiverMultiple()
         Me.lblModels = New System.Windows.Forms.Label()
-        Me.ucrChkDisplayinOutput = New instat.ucrCheck()
         Me.ucrSaveNewDataFrame = New instat.ucrSave()
+        Me.ucrChkDisplayinOutput = New instat.ucrCheck()
+        Me.ucrModelReceiver = New instat.ucrReceiverMultiple()
+        Me.ucrModelSelector = New instat.ucrSelectorByDataFrame()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'lblModels
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
+        resources.ApplyResources(Me.lblModels, "lblModels")
+        Me.lblModels.Name = "lblModels"
         '
-        'ucrModelSelector
+        'ucrSaveNewDataFrame
         '
-        Me.ucrModelSelector.bDropUnusedFilterLevels = False
-        Me.ucrModelSelector.bShowHiddenColumns = False
-        Me.ucrModelSelector.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrModelSelector, "ucrModelSelector")
-        Me.ucrModelSelector.Name = "ucrModelSelector"
+        resources.ApplyResources(Me.ucrSaveNewDataFrame, "ucrSaveNewDataFrame")
+        Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
+        '
+        'ucrChkDisplayinOutput
+        '
+        Me.ucrChkDisplayinOutput.Checked = False
+        resources.ApplyResources(Me.ucrChkDisplayinOutput, "ucrChkDisplayinOutput")
+        Me.ucrChkDisplayinOutput.Name = "ucrChkDisplayinOutput"
         '
         'ucrModelReceiver
         '
@@ -53,21 +56,18 @@ Partial Class dlgGlance
         Me.ucrModelReceiver.strNcFilePath = ""
         Me.ucrModelReceiver.ucrSelector = Nothing
         '
-        'lblModels
+        'ucrModelSelector
         '
-        resources.ApplyResources(Me.lblModels, "lblModels")
-        Me.lblModels.Name = "lblModels"
+        Me.ucrModelSelector.bDropUnusedFilterLevels = False
+        Me.ucrModelSelector.bShowHiddenColumns = False
+        Me.ucrModelSelector.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrModelSelector, "ucrModelSelector")
+        Me.ucrModelSelector.Name = "ucrModelSelector"
         '
-        'ucrChkDisplayinOutput
+        'ucrBase
         '
-        Me.ucrChkDisplayinOutput.Checked = False
-        resources.ApplyResources(Me.ucrChkDisplayinOutput, "ucrChkDisplayinOutput")
-        Me.ucrChkDisplayinOutput.Name = "ucrChkDisplayinOutput"
-        '
-        'ucrSaveNewDataFrame
-        '
-        resources.ApplyResources(Me.ucrSaveNewDataFrame, "ucrSaveNewDataFrame")
-        Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgGlance
         '
