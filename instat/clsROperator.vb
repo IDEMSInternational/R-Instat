@@ -36,6 +36,7 @@ Public Class ROperator
 
     Public Overrides Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
         Dim strAdjustedOperation As String
+        'TODO SJL Parts of this function seem to duplicate the ToScript function in RFunction. Refactor?
 
         'Parameters are sorted in the appropriate order and then the script is built.
         SortParameters()

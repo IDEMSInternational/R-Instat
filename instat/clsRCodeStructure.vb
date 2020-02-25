@@ -68,13 +68,24 @@ Public Class RCodeStructure
     ''' <summary>    
     '''             If true then, AT THE CURRENT STAGE of running code within R, the output of 
     '''             the Base R-command NEEDS TO BE assigned to:
-    '''             - the variable With the appropriate name: strAssignTo,   
-    '''             - and potentially assigned to elements in an R-instat object, if specified   
-    '''               in the AssignToDataFrame,... parameters.    
-    '''             
+    ''' <list type="bullet">
+    '''     <item>
+    '''             <description>the variable With the appropriate name: strAssignTo</description>
+    '''     </item>
+    '''     <item>
+    '''             <description>and potentially assigned to elements in an R-instat object, if specified
+    '''               in the AssignToDataFrame,... parameters</description>
+    '''     </item>
+    ''' </list>
     '''             Note: Both bToBeAssigned and bIsAssigned are necessary to distinguish between:
-    '''             - the output hasn't been assigned but doesn't need to be    
-    '''             - the output has already been assigned. 
+    ''' <list type="bullet">
+    '''     <item>
+    '''             <description>the output hasn't been assigned but doesn't need to be</description>
+    '''     </item>
+    '''     <item>
+    '''             <description>the output has already been assigned</description>
+    '''     </item>
+    ''' </list>
     '''             (i.e. bIsAssigned isn't enough to decide whether or not we should assign, 
     '''             unless we use the information "is strAssignTo empty or not", but for the moment 
     '''             we keep it like it is.)
@@ -82,15 +93,21 @@ Public Class RCodeStructure
     '''             Note: This variable is only relevant in the string case, as RFunction and
     '''             ROperator have internal equivalents.
     ''' </summary>
-
     Public bToBeAssigned As Boolean = False
+
     ''' <summary>   Tells blindly whether or not the output of the R-command has been 
     '''             assigned and, if relevant, the link with the appropriate R-instat object has 
     '''             been done.
     '''             
     '''             Note: Both bToBeAssigned and bIsAssigned are necessary to distinguish between:
-    '''             - the output hasn't been assigned but doesn't need to be    
-    '''             - the output has already been assigned. 
+    ''' <list type="bullet">
+    '''     <item>
+    '''             <description>the output hasn't been assigned but doesn't need to be</description>
+    '''     </item>
+    '''     <item>
+    '''             <description>the output has already been assigned</description>
+    '''     </item>
+    ''' </list>
     '''             (i.e. bIsAssigned isn't enough to decide whether or not we should assign, 
     '''             unless we use the information "is strAssignTo empty or not", but for the moment 
     '''             we keep it like it is.)
@@ -138,7 +155,7 @@ Public Class RCodeStructure
     '''    Similar behaviour to parameter positions. </summary>
     Public iPosition = -1 ' TODO SJL This seems to be a constant, should we declare it with 'const'?
 
-    ''' <summary>   Type of the call TBD. 
+    ''' <summary>   What to do with the result returned by executing the R code: 
     ''' <list type="bullet">
     '''     <item>
     '''        <description>0 Ignore the result of the R code.</description>
@@ -161,27 +178,51 @@ Public Class RCodeStructure
     '''                     </description>
     '''     </item>
     ''' </list>
-    '''             TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are call types 1 and 4 used?
-    '''             </summary>
-    Public iCallType As Integer = 0
+    ''' </summary>
+    Public iCallType As Integer = 0 'TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are call types 1 and 4 used?
 
-    ''' <summary>   True to exclude, false to include the assigned function output TBD. </summary>
+    ''' <summary>   If true then potentially exclude the assignment part of the script from the R 
+    '''             command.
+    '''             Normally, the assignment part of the script should only be excluded if the 
+    '''             output has already been assigned. 
+    '''             For example:
+    '''             <code>
+    '''                 If bExcludeAssignedFunctionOutput AndAlso bIsAssigned Then
+    '''                     'process script without assignment part
+    '''                 Else
+    '''                     'process script with assignment part 
+    '''             </code>
+    '''             </summary>
     Public bExcludeAssignedFunctionOutput As Boolean = True
-    ''' <summary>   This is used to clear the global environment of unused variables. Will be cleared after running unless bClearFromGlobal = False </summary>
-    Public bClearFromGlobal As Boolean = False
-    ''' <summary>   If True when running ToScript the function will be returned as a string that could be passed to R e.g. "seq(from = 1, to = 10)" instead of seq(from = 1, to = 10). When True, assignment cannot be used for the function or its parameters. </summary>
+
+    ''' <summary>   This is used to clear the global environment of unused variables. 
+    '''             Will be cleared after running unless bClearFromGlobal = False 
+    '''             </summary>
+    Public bClearFromGlobal As Boolean = False 'TODO SJL This variable is never checked or set to true, can we remove?
+
+    ''' <summary>   If true then 'clsRFunction.ToScript' and 'clsROperator.ToScript' return a string 
+    '''             that can be passed to R (i.e. double quotes are replaced with single quotes, 
+    '''             and the string is wrapped in double quotes).
+    '''             For example: <c>seq(from = 1, to = 10)</c> becomes <c>"seq(from = 1, to = 10)"</c>.
+    '''             Note: if true then then the returned string can no longer be used for the 
+    '''             function or its parameters because it will not produce the correct script
+    '''             (i.e. it should not be true if 'bToBeAssigned' or 'bIsAssigned' is true.
+    '''             </summary>
     Public bToScriptAsRString As Boolean = False
+
     ''' <summary>   Tag object for any use. </summary>
-    Public Tag As Object
+    Public Tag As Object 'TODO SJL This only seems to be used by dlgCalculationsSummary. Could we add something local to this dialog and then remove the tag from this calss?
+
     ''' <summary>   Event queue for all listeners interested in ParametersChanged events. </summary>
-    Public Event ParametersChanged()
+    Public Event ParametersChanged() 'TODO SJL Is this still used? Can it be removed?
 
     ''' <summary>   Executes the parameters changed action. Currently only used when this is in 
-    '''             RSyntax as a before/after code to determine position code should be run in the list.
-    '''    This is because RSyntax has iCallType and bExcludeAssignedFunctionOutput which it uses for the base code
-    '''    Eventually migrate these out of RSyntax</summary>
+    '''             RSyntax as a before/after code to determine position code should be run in the 
+    '''             list. This is because RSyntax has iCallType and bExcludeAssignedFunctionOutput 
+    '''             which it uses for the base code. Eventually migrate these out of RSyntax.
+    '''             </summary>
     Protected Sub OnParametersChanged()
-        RaiseEvent ParametersChanged()
+        RaiseEvent ParametersChanged() 'TODO SJL Is this still used? Can it be removed?
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -237,10 +278,12 @@ Public Class RCodeStructure
 
     End Sub
 
-    ''' <summary>   Resets all the 'AssignTo' variables. String variables are set to "".
-    '''             Booleans are set to false. </summary>
+    ''' <summary>   Resets all the 'AssignTo' variables. 
+    '''             String variables are set to "".
+    '''             Booleans are set to false. 
+    '''             </summary>
     Public Sub RemoveAssignTo()
-        strAssignTo = ""
+        strAssignTo = "" ' TODO SJL should bRequireCorrectLength, bDataFrameList, strDataFrameNames also be reset?
         strAssignToDataFrame = ""
         strAssignToColumn = ""
         strAssignToModel = ""
@@ -257,7 +300,7 @@ Public Class RCodeStructure
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   If object needs to be assigned to, then creates/updates the assignment script 
     '''             (if needed) amd returns the assignment script.
-    '''             If object doesn't need to be assigned to, then returns <paramref name="strTemp"/>
+    '''             If object doesn't need to be assigned to, then returns <paramref name="strTemp"/>.
     '''             </summary>
     '''
     ''' <param name="strScript">    [in,out] (Optional) The existing script. 
@@ -475,21 +518,31 @@ Public Class RCodeStructure
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Adds a parameter. </summary>
+    ''' <summary>   Creates and adds a parameter to this object.
+    '''             Sets the parameter's name to <paramref name="strParameterName"/>.
+    '''             Sets the parameter's argument to ONE OF <paramref name="strParameterValue"/>,
+    '''             <paramref name="clsRFunctionParameter"/>, <paramref name="clsROperatorParameter"/>,
+    '''             or <paramref name="clsRCodeStructureParameter"/>.
+    '''             Sets the parameter's position and include/exclude argument name flag to 
+    '''             <paramref name="iPosition"/> and <paramref name="bIncludeArgumentName"/> 
+    '''             respectively.
+    '''             </summary>
     '''
-    ''' <param name="strParameterName">         (Optional) Name of the parameter. </param>
-    ''' <param name="strParameterValue">        (Optional) The parameter value. </param>
-    ''' <param name="clsRFunctionParameter">    (Optional) The cls r function parameter. </param>
-    ''' <param name="clsROperatorParameter">    (Optional) The cls r operator parameter. </param>
-    ''' <param name="bIncludeArgumentName">     (Optional) True to include, false to exclude the
-    '''                                         argument name. </param>
-    ''' <param name="iPosition">                (Optional) Zero-based index of the position. </param>
+    ''' <param name="strParameterName">             (Optional) Name of the parameter. </param>
+    ''' <param name="strParameterValue">            (Optional) The parameter value. </param>
+    ''' <param name="clsRFunctionParameter">        (Optional) The cls r function parameter. </param>
+    ''' <param name="clsROperatorParameter">        (Optional) The cls r operator parameter. </param>
+    ''' <param name="clsRCodeStructureParameter">   (Optional) The cls r code structure parameter. </param>
+    ''' <param name="bIncludeArgumentName">         (Optional) True to include, false to exclude the
+    '''                                             argument name. </param>
+    ''' <param name="iPosition">                    (Optional) Zero-based index of the position. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional clsRCodeStructureParameter As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
         Dim clsParam = New RParameter
 
-        If strParameterName = "" Then
-            'MsgBox("Developer Error: some parameter has been added without specifying a name. We want all parameters to be given a name eventually.", MsgBoxStyle.OkOnly)
+        If strParameterName = "" Then 'TODO SJL If we make strParameterName a mandatory parameter then we can remove this check.
+            ' MsgBox("Developer Error: some parameter has been added without specifying a name. We want all
+            ' parameters to be given a name eventually.", MsgBoxStyle.OkOnly)
             bIncludeArgumentName = False
             If iPosition = 0 Then
                 strParameterName = "First"
@@ -498,7 +551,7 @@ Public Class RCodeStructure
             End If
         End If
         clsParam.SetArgumentName(strParameterName)
-        If Not strParameterValue = "" Then
+        If Not strParameterValue = "" Then 'TODO SJL If the caller specifies more than one of these parameters then the result may be unexpected. Safer use an enum parameter to enforce correct usage??
             clsParam.SetArgumentValue(strParameterValue)
         ElseIf clsRFunctionParameter IsNot Nothing Then
             clsParam.SetArgument(clsRFunctionParameter)
@@ -514,7 +567,9 @@ Public Class RCodeStructure
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Adds a parameter with code structure. 
-    '''             TODO This should be call AddParameter but need to make it unambiguous with above. </summary>
+    '''             TODO This should be call AddParameter but need to make it unambiguous with above. 
+    '''             TODO SJL This function is not used, and is not overridden by any child classes. Can we remove?
+    '''             </summary>
     '''
     ''' <param name="strParameterName">     (Optional) Name of the parameter. </param>
     ''' <param name="strParameterValue">    (Optional) The parameter value. </param>
@@ -532,7 +587,10 @@ Public Class RCodeStructure
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Adds a parameter. </summary>
+    ''' <summary>   If the object already has a parameter with the same name then changes the 
+    '''             parameter's value to the value in <paramref name="clsNewParam"/>.
+    '''             Else adds <paramref name="clsNewParam"/> to the object as as a new parameter.
+    '''             </summary>
     '''
     ''' <param name="clsNewParam">  The cls new parameter. </param>
     '''--------------------------------------------------------------------------------------------
