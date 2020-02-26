@@ -314,4 +314,12 @@ Public Class ucrFilter
     Private Sub cmd6_Click(sender As Object, e As EventArgs) Handles cmd6.Click
         ucrFilterOperation.AddToReceiverAtCursorPosition("6")
     End Sub
+
+    Private Sub cmdMultiply_Click(sender As Object, e As EventArgs) Handles cmdMultiply.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition("*")
+    End Sub
+
+    Private Sub cmdPower_Click(sender As Object, e As EventArgs) Handles cmdPower.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition("^")
+    End Sub
 End Class
