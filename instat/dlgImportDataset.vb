@@ -1010,6 +1010,7 @@ Public Class dlgImportDataset
         Dim arrStr() As String = ucrInputMissingValueStringExcel.GetText().Split(",")
         Dim strMissingValue As String
 
+        'if length is < 2 return an R string else return a vector of strings for R
         If arrStr.Length < 2 Then
             strMissingValue = Chr(34) & ucrInputMissingValueStringExcel.GetText() & Chr(34)
         Else
@@ -1020,11 +1021,9 @@ Public Class dlgImportDataset
                 Else
                     strMissingValue = strMissingValue & "," & Chr(34) & strTemp & Chr(34)
                 End If
-
             Next
             strMissingValue = "c(" & strMissingValue & ")"
         End If
-
         Return strMissingValue
     End Function
 End Class
