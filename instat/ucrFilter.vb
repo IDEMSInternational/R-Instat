@@ -94,10 +94,12 @@ Public Class ucrFilter
         ucrFilterOperation.Visible = False
         ucrLogicalCombobox.Visible = False
         ucrDatePicker.Visible = False
+        grpBasic.Visible = False
         If Not ucrFilterByReceiver.IsEmpty() Then
             If ucrFilterByReceiver.strCurrDataType.ToLower.Contains("factor") Then
                 lblSelectLevels.Visible = True
                 ucrFactorLevels.Visible = True
+                grpBasic.Visible = True
                 cmdToggleSelectAll.Visible = True
                 'ucrFactorLevels.SetSelectionAllLevels(False) 'by default don't select any factors
                 SetToggleButtonSettings()
@@ -281,5 +283,7 @@ Public Class ucrFilter
         strDefaultDataFrame = strDataFrame
     End Sub
 
-
+    Private Sub cmd7_Click(sender As Object, e As EventArgs) Handles cmd7.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition("7")
+    End Sub
 End Class

@@ -58,6 +58,27 @@ Partial Class ucrFilter
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrDatePicker = New instat.ucrDateTimePicker()
         Me.ucrLogicalCombobox = New instat.ucrInputComboBox()
+        Me.grpBasic = New System.Windows.Forms.GroupBox()
+        Me.cmdClear = New System.Windows.Forms.Button()
+        Me.cmdComma = New System.Windows.Forms.Button()
+        Me.cmdBrackets = New System.Windows.Forms.Button()
+        Me.cmdPower = New System.Windows.Forms.Button()
+        Me.cmdDivide = New System.Windows.Forms.Button()
+        Me.cmdPlus = New System.Windows.Forms.Button()
+        Me.cmdMinus = New System.Windows.Forms.Button()
+        Me.cmdMultiply = New System.Windows.Forms.Button()
+        Me.cmdDot = New System.Windows.Forms.Button()
+        Me.cmd9 = New System.Windows.Forms.Button()
+        Me.cmd8 = New System.Windows.Forms.Button()
+        Me.cmd7 = New System.Windows.Forms.Button()
+        Me.cmd6 = New System.Windows.Forms.Button()
+        Me.cmd5 = New System.Windows.Forms.Button()
+        Me.cmd4 = New System.Windows.Forms.Button()
+        Me.cmd3 = New System.Windows.Forms.Button()
+        Me.cmd2 = New System.Windows.Forms.Button()
+        Me.cmd0 = New System.Windows.Forms.Button()
+        Me.cmd1 = New System.Windows.Forms.Button()
+        Me.grpBasic.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblSelectLevels
@@ -192,10 +213,150 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.ucrLogicalCombobox, "ucrLogicalCombobox")
         Me.ucrLogicalCombobox.Name = "ucrLogicalCombobox"
         '
+        'grpBasic
+        '
+        Me.grpBasic.Controls.Add(Me.cmdClear)
+        Me.grpBasic.Controls.Add(Me.cmdComma)
+        Me.grpBasic.Controls.Add(Me.cmdBrackets)
+        Me.grpBasic.Controls.Add(Me.cmdPower)
+        Me.grpBasic.Controls.Add(Me.cmdDivide)
+        Me.grpBasic.Controls.Add(Me.cmdPlus)
+        Me.grpBasic.Controls.Add(Me.cmdMinus)
+        Me.grpBasic.Controls.Add(Me.cmdMultiply)
+        Me.grpBasic.Controls.Add(Me.cmdDot)
+        Me.grpBasic.Controls.Add(Me.cmd9)
+        Me.grpBasic.Controls.Add(Me.cmd8)
+        Me.grpBasic.Controls.Add(Me.cmd7)
+        Me.grpBasic.Controls.Add(Me.cmd6)
+        Me.grpBasic.Controls.Add(Me.cmd5)
+        Me.grpBasic.Controls.Add(Me.cmd4)
+        Me.grpBasic.Controls.Add(Me.cmd3)
+        Me.grpBasic.Controls.Add(Me.cmd2)
+        Me.grpBasic.Controls.Add(Me.cmd0)
+        Me.grpBasic.Controls.Add(Me.cmd1)
+        resources.ApplyResources(Me.grpBasic, "grpBasic")
+        Me.grpBasic.Name = "grpBasic"
+        Me.grpBasic.TabStop = False
+        '
+        'cmdClear
+        '
+        resources.ApplyResources(Me.cmdClear, "cmdClear")
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.UseVisualStyleBackColor = True
+        '
+        'cmdComma
+        '
+        resources.ApplyResources(Me.cmdComma, "cmdComma")
+        Me.cmdComma.Name = "cmdComma"
+        Me.cmdComma.UseVisualStyleBackColor = True
+        '
+        'cmdBrackets
+        '
+        resources.ApplyResources(Me.cmdBrackets, "cmdBrackets")
+        Me.cmdBrackets.Name = "cmdBrackets"
+        Me.cmdBrackets.UseVisualStyleBackColor = True
+        '
+        'cmdPower
+        '
+        resources.ApplyResources(Me.cmdPower, "cmdPower")
+        Me.cmdPower.Name = "cmdPower"
+        Me.cmdPower.UseVisualStyleBackColor = True
+        '
+        'cmdDivide
+        '
+        resources.ApplyResources(Me.cmdDivide, "cmdDivide")
+        Me.cmdDivide.Name = "cmdDivide"
+        Me.cmdDivide.UseVisualStyleBackColor = True
+        '
+        'cmdPlus
+        '
+        resources.ApplyResources(Me.cmdPlus, "cmdPlus")
+        Me.cmdPlus.Name = "cmdPlus"
+        Me.cmdPlus.UseVisualStyleBackColor = True
+        '
+        'cmdMinus
+        '
+        resources.ApplyResources(Me.cmdMinus, "cmdMinus")
+        Me.cmdMinus.Name = "cmdMinus"
+        Me.cmdMinus.UseVisualStyleBackColor = True
+        '
+        'cmdMultiply
+        '
+        resources.ApplyResources(Me.cmdMultiply, "cmdMultiply")
+        Me.cmdMultiply.Name = "cmdMultiply"
+        Me.cmdMultiply.UseVisualStyleBackColor = True
+        '
+        'cmdDot
+        '
+        resources.ApplyResources(Me.cmdDot, "cmdDot")
+        Me.cmdDot.Name = "cmdDot"
+        Me.cmdDot.UseVisualStyleBackColor = True
+        '
+        'cmd9
+        '
+        resources.ApplyResources(Me.cmd9, "cmd9")
+        Me.cmd9.Name = "cmd9"
+        Me.cmd9.UseVisualStyleBackColor = True
+        '
+        'cmd8
+        '
+        resources.ApplyResources(Me.cmd8, "cmd8")
+        Me.cmd8.Name = "cmd8"
+        Me.cmd8.UseVisualStyleBackColor = True
+        '
+        'cmd7
+        '
+        resources.ApplyResources(Me.cmd7, "cmd7")
+        Me.cmd7.Name = "cmd7"
+        Me.cmd7.UseVisualStyleBackColor = True
+        '
+        'cmd6
+        '
+        resources.ApplyResources(Me.cmd6, "cmd6")
+        Me.cmd6.Name = "cmd6"
+        Me.cmd6.UseVisualStyleBackColor = True
+        '
+        'cmd5
+        '
+        resources.ApplyResources(Me.cmd5, "cmd5")
+        Me.cmd5.Name = "cmd5"
+        Me.cmd5.UseVisualStyleBackColor = True
+        '
+        'cmd4
+        '
+        resources.ApplyResources(Me.cmd4, "cmd4")
+        Me.cmd4.Name = "cmd4"
+        Me.cmd4.UseVisualStyleBackColor = True
+        '
+        'cmd3
+        '
+        resources.ApplyResources(Me.cmd3, "cmd3")
+        Me.cmd3.Name = "cmd3"
+        Me.cmd3.UseVisualStyleBackColor = True
+        '
+        'cmd2
+        '
+        resources.ApplyResources(Me.cmd2, "cmd2")
+        Me.cmd2.Name = "cmd2"
+        Me.cmd2.UseVisualStyleBackColor = True
+        '
+        'cmd0
+        '
+        resources.ApplyResources(Me.cmd0, "cmd0")
+        Me.cmd0.Name = "cmd0"
+        Me.cmd0.UseVisualStyleBackColor = True
+        '
+        'cmd1
+        '
+        resources.ApplyResources(Me.cmd1, "cmd1")
+        Me.cmd1.Name = "cmd1"
+        Me.cmd1.UseVisualStyleBackColor = True
+        '
         'ucrFilter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpBasic)
         Me.Controls.Add(Me.ucrLogicalCombobox)
         Me.Controls.Add(Me.ucrDatePicker)
         Me.Controls.Add(Me.ucrInputFilterName)
@@ -216,6 +377,7 @@ Partial Class ucrFilter
         Me.Controls.Add(Me.ucrFilterByReceiver)
         Me.Controls.Add(Me.ucrSelectorForFitler)
         Me.Name = "ucrFilter"
+        Me.grpBasic.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -240,4 +402,24 @@ Partial Class ucrFilter
     Friend WithEvents ucrInputFilterName As ucrInputComboBox
     Friend WithEvents ucrDatePicker As ucrDateTimePicker
     Friend WithEvents ucrLogicalCombobox As ucrInputComboBox
+    Friend WithEvents grpBasic As GroupBox
+    Friend WithEvents cmdClear As Button
+    Friend WithEvents cmdComma As Button
+    Friend WithEvents cmdBrackets As Button
+    Friend WithEvents cmdPower As Button
+    Friend WithEvents cmdDivide As Button
+    Friend WithEvents cmdPlus As Button
+    Friend WithEvents cmdMinus As Button
+    Friend WithEvents cmdMultiply As Button
+    Friend WithEvents cmdDot As Button
+    Friend WithEvents cmd9 As Button
+    Friend WithEvents cmd8 As Button
+    Friend WithEvents cmd7 As Button
+    Friend WithEvents cmd6 As Button
+    Friend WithEvents cmd5 As Button
+    Friend WithEvents cmd4 As Button
+    Friend WithEvents cmd3 As Button
+    Friend WithEvents cmd2 As Button
+    Friend WithEvents cmd0 As Button
+    Friend WithEvents cmd1 As Button
 End Class
