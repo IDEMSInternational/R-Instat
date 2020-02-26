@@ -334,4 +334,8 @@ Public Class ucrFilter
     Private Sub cmd3_Click(sender As Object, e As EventArgs) Handles cmd3.Click
         ucrFilterOperation.AddToReceiverAtCursorPosition("3")
     End Sub
+
+    Private Sub cmdMinus_Click(sender As Object, e As EventArgs) Handles cmdMinus.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition("-")
+    End Sub
 End Class
