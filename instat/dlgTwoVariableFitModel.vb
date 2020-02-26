@@ -61,6 +61,8 @@ Public Class dlgTwoVariableFitModel
         'temp disabled until implemented
         rdoTwoSample.Enabled = False
 
+        cmdExplanatoryFunction.Enabled = False
+
         ucrBase.iHelpTopicID = 366
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -404,9 +406,6 @@ Public Class dlgTwoVariableFitModel
             If ucrReceiverExplanatory.strCurrDataType = "integer" OrElse ucrReceiverExplanatory.strCurrDataType = "numeric" OrElse ucrReceiverResponse.strCurrDataType = "positive integer" Then
                 ucrReceiverExplanatory.Clear()
             End If
-        ElseIf rdoGeneralCase.Checked Then
-            ucrReceiverResponse.SetIncludedDataTypes({"integer", "numeric", "character", "factor", "Date"})
-            ucrReceiverExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor", "Date"})
         End If
     End Sub
 
