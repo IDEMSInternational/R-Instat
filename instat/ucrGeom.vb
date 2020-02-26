@@ -166,6 +166,31 @@ Public Class ucrGeom
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
 
+        Dim clsgeom_statcor As New Geoms
+
+        clsgeom_statcor.SetGeomPackage("ggpubr")
+        clsgeom_statcor.SetGeomName("stat_cor")
+
+        'add aes parameter
+        clsgeom_statcor.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_statcor.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
+
+        'add layer parameter
+        clsgeom_statcor.AddLayerParameter("geom", "list", Chr(34) & "point" & Chr(34), lstParameterStrings:={Chr(34) & "point" & Chr(34), Chr(34) & "text" & Chr(34), Chr(34) & "label" & Chr(34), Chr(34) & "line" & Chr(34), Chr(34) & "rug" & Chr(34), Chr(34) & "hline" & Chr(34), Chr(34) & "vline" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("span", "list", Chr(34) & "5" & Chr(34), lstParameterStrings:={Chr(34) & "5" & Chr(34), Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("ignore_threshold", "numeric", "0", lstParameterStrings:={1, 0, 1})
+        clsgeom_statcor.AddLayerParameter("strict", "boolean", "FALSE")
+        clsgeom_statcor.AddLayerParameter("label.fmt", "editablelist", Chr(34) & "%.4g" & Chr(34), lstParameterStrings:={Chr(34) & "%.4g" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("x.label.fmt", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("y.label.fmt", "editablelist", Chr(34) & "label.fmt" & Chr(34), lstParameterStrings:={Chr(34) & "label.fmt" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_statcor.AddLayerParameter("show.legend", "list", "FALSE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_statcor.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+
+        lstAllGeoms.Add(clsgeom_statcor)
+
+
         Dim clsgeom_statECDF As New Geoms
 
         clsgeom_statECDF.SetGeomName("stat_ecdf")
@@ -181,6 +206,30 @@ Public Class ucrGeom
         clsgeom_statECDF.AddLayerParameter("show.legend", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_statECDF.AddLayerParameter("na.rm", "boolean", "FALSE")
         lstAllGeoms.Add(clsgeom_statECDF)
+
+        Dim clsgeom_statreglineequation As New Geoms
+
+        clsgeom_statreglineequation.SetGeomPackage("ggpubr")
+        clsgeom_statreglineequation.SetGeomName("stat_regline_equation ")
+
+        'add aes parameter
+        clsgeom_statreglineequation.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_statreglineequation.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
+
+        'add layer parameter
+        clsgeom_statreglineequation.AddLayerParameter("geom", "list", Chr(34) & "point" & Chr(34), lstParameterStrings:={Chr(34) & "point" & Chr(34), Chr(34) & "text" & Chr(34), Chr(34) & "label" & Chr(34), Chr(34) & "line" & Chr(34), Chr(34) & "rug" & Chr(34), Chr(34) & "hline" & Chr(34), Chr(34) & "vline" & Chr(34)})
+        clsgeom_statreglineequation.AddLayerParameter("span", "list", Chr(34) & "5" & Chr(34), lstParameterStrings:={Chr(34) & "5" & Chr(34), Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statreglineequation.AddLayerParameter("ignore_threshold", "numeric", "0", lstParameterStrings:={1, 0, 1})
+        clsgeom_statreglineequation.AddLayerParameter("strict", "boolean", "FALSE")
+        clsgeom_statreglineequation.AddLayerParameter("label.fmt", "editablelist", Chr(34) & "%.4g" & Chr(34), lstParameterStrings:={Chr(34) & "%.4g" & Chr(34)})
+        clsgeom_statreglineequation.AddLayerParameter("x.label.fmt", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statreglineequation.AddLayerParameter("y.label.fmt", "editablelist", Chr(34) & "label.fmt" & Chr(34), lstParameterStrings:={Chr(34) & "label.fmt" & Chr(34)})
+        clsgeom_statreglineequation.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_statreglineequation.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_statreglineequation.AddLayerParameter("show.legend", "list", "FALSE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_statreglineequation.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+
+        lstAllGeoms.Add(clsgeom_statreglineequation)
 
 
         Dim clsgeom_statsummary As New Geoms
