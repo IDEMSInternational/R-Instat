@@ -405,8 +405,8 @@ Public Class dlgTwoVariableFitModel
                 ucrReceiverExplanatory.Clear()
             End If
         ElseIf rdoGeneralCase.Checked Then
-            ucrReceiverResponse.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
-            ucrReceiverExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
+            ucrReceiverResponse.SetIncludedDataTypes({"integer", "numeric", "character", "factor", "Date"})
+            ucrReceiverExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor", "Date"})
         End If
     End Sub
 
