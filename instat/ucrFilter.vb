@@ -338,4 +338,20 @@ Public Class ucrFilter
     Private Sub cmdMinus_Click(sender As Object, e As EventArgs) Handles cmdMinus.Click
         ucrFilterOperation.AddToReceiverAtCursorPosition("-")
     End Sub
+
+    Private Sub cmdComma_Click(sender As Object, e As EventArgs) Handles cmdComma.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition(",")
+    End Sub
+
+    Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition("0")
+    End Sub
+
+    Private Sub cmdBrackets_Click(sender As Object, e As EventArgs) Handles cmdBrackets.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition("()")
+    End Sub
+
+    Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition("+")
+    End Sub
 End Class
