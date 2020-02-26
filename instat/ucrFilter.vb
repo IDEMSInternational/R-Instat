@@ -294,4 +294,12 @@ Public Class ucrFilter
     Private Sub cmd9_Click(sender As Object, e As EventArgs) Handles cmd9.Click
         ucrFilterOperation.AddToReceiverAtCursorPosition("9")
     End Sub
+
+    Private Sub cmdDivide_Click(sender As Object, e As EventArgs) Handles cmdDivide.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition("/")
+    End Sub
+
+    Private Sub cmdDot_Click(sender As Object, e As EventArgs) Handles cmdDot.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition(".")
+    End Sub
 End Class
