@@ -396,204 +396,6 @@
   <data name="&gt;&gt;lblNewFilterName.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="ucrInputFilterName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 364</value>
-  </data>
-  <data name="ucrInputFilterName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 21</value>
-  </data>
-  <data name="ucrInputFilterName.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFilterName.Name" xml:space="preserve">
-    <value>ucrInputFilterName</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFilterName.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFilterName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFilterName.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrValueForFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>488, 40</value>
-  </data>
-  <data name="ucrValueForFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 21</value>
-  </data>
-  <data name="ucrValueForFilter.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;ucrValueForFilter.Name" xml:space="preserve">
-    <value>ucrValueForFilter</value>
-  </data>
-  <data name="&gt;&gt;ucrValueForFilter.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrValueForFilter.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrValueForFilter.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="ucrFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 337</value>
-  </data>
-  <data name="ucrFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 21</value>
-  </data>
-  <data name="ucrFilterPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;ucrFilterPreview.Name" xml:space="preserve">
-    <value>ucrFilterPreview</value>
-  </data>
-  <data name="&gt;&gt;ucrFilterPreview.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrFilterPreview.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrFilterPreview.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="ucrFilterOperation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>413, 40</value>
-  </data>
-  <data name="ucrFilterOperation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 21</value>
-  </data>
-  <data name="ucrFilterOperation.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrFilterOperation.Name" xml:space="preserve">
-    <value>ucrFilterOperation</value>
-  </data>
-  <data name="&gt;&gt;ucrFilterOperation.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrFilterOperation.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrFilterOperation.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="ucrFactorLevels.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ucrFactorLevels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>413, 61</value>
-  </data>
-  <data name="ucrFactorLevels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 297</value>
-  </data>
-  <data name="ucrFactorLevels.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorLevels.Name" xml:space="preserve">
-    <value>ucrFactorLevels</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorLevels.Type" xml:space="preserve">
-    <value>instat.ucrFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorLevels.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrFactorLevels.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="ucrFilterByReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 42</value>
-  </data>
-  <data name="ucrFilterByReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrFilterByReceiver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
-  </data>
-  <data name="ucrFilterByReceiver.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrFilterByReceiver.Name" xml:space="preserve">
-    <value>ucrFilterByReceiver</value>
-  </data>
-  <data name="&gt;&gt;ucrFilterByReceiver.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrFilterByReceiver.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrFilterByReceiver.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="ucrSelectorForFitler.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
-  </data>
-  <data name="ucrSelectorForFitler.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrSelectorForFitler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 180</value>
-  </data>
-  <data name="ucrSelectorForFitler.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorForFitler.Name" xml:space="preserve">
-    <value>ucrSelectorForFitler</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorForFitler.Type" xml:space="preserve">
-    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorForFitler.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorForFitler.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="ucrDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 40</value>
-  </data>
-  <data name="ucrDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 21</value>
-  </data>
-  <data name="ucrDatePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;ucrDatePicker.Name" xml:space="preserve">
-    <value>ucrDatePicker</value>
-  </data>
-  <data name="&gt;&gt;ucrDatePicker.Type" xml:space="preserve">
-    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDatePicker.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrDatePicker.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrLogicalCombobox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 39</value>
-  </data>
-  <data name="ucrLogicalCombobox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 21</value>
-  </data>
-  <data name="ucrLogicalCombobox.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;ucrLogicalCombobox.Name" xml:space="preserve">
-    <value>ucrLogicalCombobox</value>
-  </data>
-  <data name="&gt;&gt;ucrLogicalCombobox.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrLogicalCombobox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrLogicalCombobox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="cmdClear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1214,6 +1016,204 @@
   </data>
   <data name="&gt;&gt;grpBasic.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrLogicalCombobox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>489, 39</value>
+  </data>
+  <data name="ucrLogicalCombobox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 21</value>
+  </data>
+  <data name="ucrLogicalCombobox.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;ucrLogicalCombobox.Name" xml:space="preserve">
+    <value>ucrLogicalCombobox</value>
+  </data>
+  <data name="&gt;&gt;ucrLogicalCombobox.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLogicalCombobox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrLogicalCombobox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrDatePicker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>489, 40</value>
+  </data>
+  <data name="ucrDatePicker.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 21</value>
+  </data>
+  <data name="ucrDatePicker.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;ucrDatePicker.Name" xml:space="preserve">
+    <value>ucrDatePicker</value>
+  </data>
+  <data name="&gt;&gt;ucrDatePicker.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDatePicker.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrDatePicker.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrInputFilterName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>131, 364</value>
+  </data>
+  <data name="ucrInputFilterName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 21</value>
+  </data>
+  <data name="ucrInputFilterName.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFilterName.Name" xml:space="preserve">
+    <value>ucrInputFilterName</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFilterName.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFilterName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputFilterName.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrValueForFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>488, 40</value>
+  </data>
+  <data name="ucrValueForFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 21</value>
+  </data>
+  <data name="ucrValueForFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrValueForFilter.Name" xml:space="preserve">
+    <value>ucrValueForFilter</value>
+  </data>
+  <data name="&gt;&gt;ucrValueForFilter.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrValueForFilter.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrValueForFilter.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ucrFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>131, 337</value>
+  </data>
+  <data name="ucrFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 21</value>
+  </data>
+  <data name="ucrFilterPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterPreview.Name" xml:space="preserve">
+    <value>ucrFilterPreview</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterPreview.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterPreview.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterPreview.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="ucrFilterOperation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>413, 40</value>
+  </data>
+  <data name="ucrFilterOperation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 21</value>
+  </data>
+  <data name="ucrFilterOperation.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterOperation.Name" xml:space="preserve">
+    <value>ucrFilterOperation</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterOperation.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterOperation.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterOperation.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="ucrFactorLevels.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucrFactorLevels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>413, 61</value>
+  </data>
+  <data name="ucrFactorLevels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>354, 297</value>
+  </data>
+  <data name="ucrFactorLevels.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorLevels.Name" xml:space="preserve">
+    <value>ucrFactorLevels</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorLevels.Type" xml:space="preserve">
+    <value>instat.ucrFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorLevels.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFactorLevels.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="ucrFilterByReceiver.Location" type="System.Drawing.Point, System.Drawing">
+    <value>278, 42</value>
+  </data>
+  <data name="ucrFilterByReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrFilterByReceiver.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrFilterByReceiver.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterByReceiver.Name" xml:space="preserve">
+    <value>ucrFilterByReceiver</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterByReceiver.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterByReceiver.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFilterByReceiver.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="ucrSelectorForFitler.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 4</value>
+  </data>
+  <data name="ucrSelectorForFitler.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorForFitler.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorForFitler.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForFitler.Name" xml:space="preserve">
+    <value>ucrSelectorForFitler</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForFitler.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForFitler.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorForFitler.ZOrder" xml:space="preserve">
+    <value>19</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
