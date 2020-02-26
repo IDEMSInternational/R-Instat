@@ -253,8 +253,8 @@ Public Class dlgImportDataset
 
         '##############################################################
         'EXCEL controls
-        ucrInputMissingValueStringExcel.SetParameter(New RParameter("na"))
-        ucrInputMissingValueStringExcel.SetRDefault(Chr(34) & "" & Chr(34))
+        'ucrInputMissingValueStringExcel.SetParameter(New RParameter("na"))
+        'ucrInputMissingValueStringExcel.SetRDefault(Chr(34) & "" & Chr(34))
 
         ucrChkTrimWSExcel.SetText("Trim Trailing White Space")
         ucrChkTrimWSExcel.SetParameter(New RParameter("trim_ws"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
@@ -512,14 +512,14 @@ Public Class dlgImportDataset
 
         'EXCEL CONTROLS
         ucrNudRowsToSkipExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("skip"), iAdditionalPairNo:=1)
-        ucrInputMissingValueStringExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("na"), iAdditionalPairNo:=1)
+        'ucrInputMissingValueStringExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("na"), iAdditionalPairNo:=1)
         ucrChkTrimWSExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("trim_ws"), iAdditionalPairNo:=1)
         ucrChkColumnNamesExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("col_names"), iAdditionalPairNo:=1)
         ucrNudMaxRowsExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("n_max"), iAdditionalPairNo:=1)
         ucrChkMaxRowsExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("n_max"), iAdditionalPairNo:=1)
 
         ucrNudRowsToSkipExcel.SetRCode(clsImportExcel, bReset)
-        ucrInputMissingValueStringExcel.SetRCode(clsImportExcel, bReset)
+        'ucrInputMissingValueStringExcel.SetRCode(clsImportExcel, bReset)
         ucrChkTrimWSExcel.SetRCode(clsImportExcel, bReset)
         ucrChkColumnNamesExcel.SetRCode(clsImportExcel, bReset)
         ucrNudMaxRowsExcel.SetRCode(clsImportExcel, bReset)
@@ -786,6 +786,7 @@ Public Class dlgImportDataset
     Private Sub FillExcelSheets(strFilePath As String)
         Dim expSheet As SymbolicExpression
         Dim chrSheets As CharacterVector
+        Dim lstCheckedItems As New List(Of String)
 
         expSheet = frmMain.clsRLink.RunInternalScriptGetValue(clsGetExcelSheetNames.ToScript())
         If expSheet IsNot Nothing Then
@@ -794,9 +795,26 @@ Public Class dlgImportDataset
             chrSheets = Nothing
         End If
 
+        'store the checked items first temporarily 
+        For i As Integer = 0 To clbSheets.CheckedItems.Count - 1
+            lstCheckedItems.Add(clbSheets.CheckedItems(i).ToString)
+        Next
+
         clbSheets.Items.Clear()
         If chrSheets IsNot Nothing AndAlso chrSheets.Count > 0 Then
             clbSheets.Items.AddRange(chrSheets.ToArray())
+
+            'if there were previously checked items then restore them
+            If lstCheckedItems.Count > 0 Then
+                For i As Integer = 0 To clbSheets.Items.Count - 1
+                    For Each strSelected As String In lstCheckedItems
+                        If strSelected = clbSheets.Items(i).ToString Then
+                            clbSheets.SetItemChecked(i, True)
+                        End If
+                    Next
+                Next
+            End If
+
             'If dctSelectedExcelSheets.Count = 0 Then
             '    clbSheets.SetItemChecked(0, True)
             'Else
@@ -982,6 +1000,11 @@ Public Class dlgImportDataset
         Next
         Return keyList
     End Function
+
+    Private Sub ucrInputMissingValueStringExcel_ContentsChanged() Handles ucrInputMissingValueStringExcel.ContentsChanged
+        clsImportExcelMulti.AddParameter("na", GetMissingValueRText)
+        clsImportExcel.AddParameter("na", GetMissingValueRText)
+    End Sub
 
     Private Function GetMissingValueRText() As String
         Dim arrStr() As String = ucrInputMissingValueStringExcel.GetText().Split(",")
