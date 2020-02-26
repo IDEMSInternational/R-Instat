@@ -354,4 +354,8 @@ Public Class ucrFilter
     Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
         ucrFilterOperation.AddToReceiverAtCursorPosition("+")
     End Sub
+
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+        ucrFilterOperation.ClearCodeAndParameters()
+    End Sub
 End Class
