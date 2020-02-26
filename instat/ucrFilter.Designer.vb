@@ -49,15 +49,6 @@ Partial Class ucrFilter
         Me.mcdEditCondition = New System.Windows.Forms.Button()
         Me.cmdRemoveCondition = New System.Windows.Forms.Button()
         Me.lblNewFilterName = New System.Windows.Forms.Label()
-        Me.ucrInputFilterName = New instat.ucrInputComboBox()
-        Me.ucrValueForFilter = New instat.ucrInputTextBox()
-        Me.ucrFilterPreview = New instat.ucrInputTextBox()
-        Me.ucrFilterOperation = New instat.ucrInputComboBox()
-        Me.ucrFactorLevels = New instat.ucrFactor()
-        Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
-        Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrDatePicker = New instat.ucrDateTimePicker()
-        Me.ucrLogicalCombobox = New instat.ucrInputComboBox()
         Me.grpBasic = New System.Windows.Forms.GroupBox()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdComma = New System.Windows.Forms.Button()
@@ -78,6 +69,15 @@ Partial Class ucrFilter
         Me.cmd2 = New System.Windows.Forms.Button()
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
+        Me.ucrLogicalCombobox = New instat.ucrInputComboBox()
+        Me.ucrDatePicker = New instat.ucrDateTimePicker()
+        Me.ucrInputFilterName = New instat.ucrInputComboBox()
+        Me.ucrValueForFilter = New instat.ucrInputTextBox()
+        Me.ucrFilterPreview = New instat.ucrInputTextBox()
+        Me.ucrFilterOperation = New instat.ucrInputComboBox()
+        Me.ucrFactorLevels = New instat.ucrFactor()
+        Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpBasic.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -142,76 +142,6 @@ Partial Class ucrFilter
         '
         resources.ApplyResources(Me.lblNewFilterName, "lblNewFilterName")
         Me.lblNewFilterName.Name = "lblNewFilterName"
-        '
-        'ucrInputFilterName
-        '
-        Me.ucrInputFilterName.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilterName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFilterName, "ucrInputFilterName")
-        Me.ucrInputFilterName.Name = "ucrInputFilterName"
-        '
-        'ucrValueForFilter
-        '
-        Me.ucrValueForFilter.AddQuotesIfUnrecognised = True
-        Me.ucrValueForFilter.IsMultiline = False
-        Me.ucrValueForFilter.IsReadOnly = False
-        resources.ApplyResources(Me.ucrValueForFilter, "ucrValueForFilter")
-        Me.ucrValueForFilter.Name = "ucrValueForFilter"
-        '
-        'ucrFilterPreview
-        '
-        Me.ucrFilterPreview.AddQuotesIfUnrecognised = True
-        Me.ucrFilterPreview.IsMultiline = False
-        Me.ucrFilterPreview.IsReadOnly = False
-        resources.ApplyResources(Me.ucrFilterPreview, "ucrFilterPreview")
-        Me.ucrFilterPreview.Name = "ucrFilterPreview"
-        '
-        'ucrFilterOperation
-        '
-        Me.ucrFilterOperation.AddQuotesIfUnrecognised = True
-        Me.ucrFilterOperation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrFilterOperation, "ucrFilterOperation")
-        Me.ucrFilterOperation.Name = "ucrFilterOperation"
-        '
-        'ucrFactorLevels
-        '
-        resources.ApplyResources(Me.ucrFactorLevels, "ucrFactorLevels")
-        Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorLevels.clsReceiver = Nothing
-        Me.ucrFactorLevels.Name = "ucrFactorLevels"
-        Me.ucrFactorLevels.shtCurrSheet = Nothing
-        Me.ucrFactorLevels.ucrChkLevels = Nothing
-        '
-        'ucrFilterByReceiver
-        '
-        Me.ucrFilterByReceiver.frmParent = Nothing
-        resources.ApplyResources(Me.ucrFilterByReceiver, "ucrFilterByReceiver")
-        Me.ucrFilterByReceiver.Name = "ucrFilterByReceiver"
-        Me.ucrFilterByReceiver.Selector = Nothing
-        Me.ucrFilterByReceiver.strNcFilePath = ""
-        Me.ucrFilterByReceiver.ucrSelector = Nothing
-        '
-        'ucrSelectorForFitler
-        '
-        Me.ucrSelectorForFitler.bDropUnusedFilterLevels = False
-        Me.ucrSelectorForFitler.bShowHiddenColumns = False
-        Me.ucrSelectorForFitler.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForFitler, "ucrSelectorForFitler")
-        Me.ucrSelectorForFitler.Name = "ucrSelectorForFitler"
-        '
-        'ucrDatePicker
-        '
-        resources.ApplyResources(Me.ucrDatePicker, "ucrDatePicker")
-        Me.ucrDatePicker.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDatePicker.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDatePicker.Name = "ucrDatePicker"
-        '
-        'ucrLogicalCombobox
-        '
-        Me.ucrLogicalCombobox.AddQuotesIfUnrecognised = True
-        Me.ucrLogicalCombobox.IsReadOnly = False
-        resources.ApplyResources(Me.ucrLogicalCombobox, "ucrLogicalCombobox")
-        Me.ucrLogicalCombobox.Name = "ucrLogicalCombobox"
         '
         'grpBasic
         '
@@ -351,6 +281,76 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.cmd1, "cmd1")
         Me.cmd1.Name = "cmd1"
         Me.cmd1.UseVisualStyleBackColor = True
+        '
+        'ucrLogicalCombobox
+        '
+        Me.ucrLogicalCombobox.AddQuotesIfUnrecognised = True
+        Me.ucrLogicalCombobox.IsReadOnly = False
+        resources.ApplyResources(Me.ucrLogicalCombobox, "ucrLogicalCombobox")
+        Me.ucrLogicalCombobox.Name = "ucrLogicalCombobox"
+        '
+        'ucrDatePicker
+        '
+        resources.ApplyResources(Me.ucrDatePicker, "ucrDatePicker")
+        Me.ucrDatePicker.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDatePicker.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDatePicker.Name = "ucrDatePicker"
+        '
+        'ucrInputFilterName
+        '
+        Me.ucrInputFilterName.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFilterName, "ucrInputFilterName")
+        Me.ucrInputFilterName.Name = "ucrInputFilterName"
+        '
+        'ucrValueForFilter
+        '
+        Me.ucrValueForFilter.AddQuotesIfUnrecognised = True
+        Me.ucrValueForFilter.IsMultiline = False
+        Me.ucrValueForFilter.IsReadOnly = False
+        resources.ApplyResources(Me.ucrValueForFilter, "ucrValueForFilter")
+        Me.ucrValueForFilter.Name = "ucrValueForFilter"
+        '
+        'ucrFilterPreview
+        '
+        Me.ucrFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrFilterPreview.IsMultiline = False
+        Me.ucrFilterPreview.IsReadOnly = False
+        resources.ApplyResources(Me.ucrFilterPreview, "ucrFilterPreview")
+        Me.ucrFilterPreview.Name = "ucrFilterPreview"
+        '
+        'ucrFilterOperation
+        '
+        Me.ucrFilterOperation.AddQuotesIfUnrecognised = True
+        Me.ucrFilterOperation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrFilterOperation, "ucrFilterOperation")
+        Me.ucrFilterOperation.Name = "ucrFilterOperation"
+        '
+        'ucrFactorLevels
+        '
+        resources.ApplyResources(Me.ucrFactorLevels, "ucrFactorLevels")
+        Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrFactorLevels.clsReceiver = Nothing
+        Me.ucrFactorLevels.Name = "ucrFactorLevels"
+        Me.ucrFactorLevels.shtCurrSheet = Nothing
+        Me.ucrFactorLevels.ucrChkLevels = Nothing
+        '
+        'ucrFilterByReceiver
+        '
+        Me.ucrFilterByReceiver.frmParent = Nothing
+        resources.ApplyResources(Me.ucrFilterByReceiver, "ucrFilterByReceiver")
+        Me.ucrFilterByReceiver.Name = "ucrFilterByReceiver"
+        Me.ucrFilterByReceiver.Selector = Nothing
+        Me.ucrFilterByReceiver.strNcFilePath = ""
+        Me.ucrFilterByReceiver.ucrSelector = Nothing
+        '
+        'ucrSelectorForFitler
+        '
+        Me.ucrSelectorForFitler.bDropUnusedFilterLevels = False
+        Me.ucrSelectorForFitler.bShowHiddenColumns = False
+        Me.ucrSelectorForFitler.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorForFitler, "ucrSelectorForFitler")
+        Me.ucrSelectorForFitler.Name = "ucrSelectorForFitler"
         '
         'ucrFilter
         '

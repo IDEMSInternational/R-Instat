@@ -286,4 +286,12 @@ Public Class ucrFilter
     Private Sub cmd7_Click(sender As Object, e As EventArgs) Handles cmd7.Click
         ucrFilterOperation.AddToReceiverAtCursorPosition("7")
     End Sub
+
+    Private Sub cmd8_Click(sender As Object, e As EventArgs) Handles cmd8.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition("8")
+    End Sub
+
+    Private Sub cmd9_Click(sender As Object, e As EventArgs) Handles cmd9.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition("9")
+    End Sub
 End Class
