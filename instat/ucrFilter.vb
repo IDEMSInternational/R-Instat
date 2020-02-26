@@ -302,4 +302,16 @@ Public Class ucrFilter
     Private Sub cmdDot_Click(sender As Object, e As EventArgs) Handles cmdDot.Click
         ucrFilterOperation.AddToReceiverAtCursorPosition(".")
     End Sub
+
+    Private Sub cmd4_Click(sender As Object, e As EventArgs) Handles cmd4.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition("4")
+    End Sub
+
+    Private Sub cmd5_Click(sender As Object, e As EventArgs) Handles cmd5.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition("5")
+    End Sub
+
+    Private Sub cmd6_Click(sender As Object, e As EventArgs) Handles cmd6.Click
+        ucrFilterOperation.AddToReceiverAtCursorPosition("6")
+    End Sub
 End Class
