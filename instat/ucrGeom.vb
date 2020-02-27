@@ -176,17 +176,15 @@ Public Class ucrGeom
         clsgeom_statcor.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
 
         'add layer parameter
-        clsgeom_statcor.AddLayerParameter("geom", "list", Chr(34) & "point" & Chr(34), lstParameterStrings:={Chr(34) & "point" & Chr(34), Chr(34) & "text" & Chr(34), Chr(34) & "label" & Chr(34), Chr(34) & "line" & Chr(34), Chr(34) & "rug" & Chr(34), Chr(34) & "hline" & Chr(34), Chr(34) & "vline" & Chr(34)})
-        clsgeom_statcor.AddLayerParameter("span", "list", Chr(34) & "5" & Chr(34), lstParameterStrings:={Chr(34) & "5" & Chr(34), Chr(34) & "NULL" & Chr(34)})
-        clsgeom_statcor.AddLayerParameter("ignore_threshold", "numeric", "0", lstParameterStrings:={1, 0, 1})
-        clsgeom_statcor.AddLayerParameter("strict", "boolean", "FALSE")
-        clsgeom_statcor.AddLayerParameter("label.fmt", "editablelist", Chr(34) & "%.4g" & Chr(34), lstParameterStrings:={Chr(34) & "%.4g" & Chr(34)})
-        clsgeom_statcor.AddLayerParameter("x.label.fmt", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
-        clsgeom_statcor.AddLayerParameter("y.label.fmt", "editablelist", Chr(34) & "label.fmt" & Chr(34), lstParameterStrings:={Chr(34) & "label.fmt" & Chr(34)})
-        clsgeom_statcor.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
-        clsgeom_statcor.AddLayerParameter("na.rm", "boolean", "FALSE")
-        clsgeom_statcor.AddLayerParameter("show.legend", "list", "FALSE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_statcor.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+        clsgeom_statcor.AddLayerParameter("geom", "list", Chr(34) & "text" & Chr(34), lstParameterStrings:={Chr(34) & "text" & Chr(34), Chr(34) & "label" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("label.x.npc", "editablelist", Chr(34) & "left" & Chr(34), lstParameterStrings:={Chr(34) & "left" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "right" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("label.y.npc", "editablelist", Chr(34) & "left" & Chr(34), lstParameterStrings:={Chr(34) & "left" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "right" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_statcor.AddLayerParameter("size", "numeric", "5", lstParameterStrings:={0, 0})
+        clsgeom_statcor.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+        clsgeom_statcor.AddLayerParameter("label.x", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("label.y", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
 
         lstAllGeoms.Add(clsgeom_statcor)
 
@@ -217,17 +215,15 @@ Public Class ucrGeom
         clsgeom_statreglineequation.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
 
         'add layer parameter
-        clsgeom_statreglineequation.AddLayerParameter("geom", "list", Chr(34) & "point" & Chr(34), lstParameterStrings:={Chr(34) & "point" & Chr(34), Chr(34) & "text" & Chr(34), Chr(34) & "label" & Chr(34), Chr(34) & "line" & Chr(34), Chr(34) & "rug" & Chr(34), Chr(34) & "hline" & Chr(34), Chr(34) & "vline" & Chr(34)})
-        clsgeom_statreglineequation.AddLayerParameter("span", "list", Chr(34) & "5" & Chr(34), lstParameterStrings:={Chr(34) & "5" & Chr(34), Chr(34) & "NULL" & Chr(34)})
-        clsgeom_statreglineequation.AddLayerParameter("ignore_threshold", "numeric", "0", lstParameterStrings:={1, 0, 1})
-        clsgeom_statreglineequation.AddLayerParameter("strict", "boolean", "FALSE")
-        clsgeom_statreglineequation.AddLayerParameter("label.fmt", "editablelist", Chr(34) & "%.4g" & Chr(34), lstParameterStrings:={Chr(34) & "%.4g" & Chr(34)})
-        clsgeom_statreglineequation.AddLayerParameter("x.label.fmt", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
-        clsgeom_statreglineequation.AddLayerParameter("y.label.fmt", "editablelist", Chr(34) & "label.fmt" & Chr(34), lstParameterStrings:={Chr(34) & "label.fmt" & Chr(34)})
-        clsgeom_statreglineequation.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
-        clsgeom_statreglineequation.AddLayerParameter("na.rm", "boolean", "FALSE")
-        clsgeom_statreglineequation.AddLayerParameter("show.legend", "list", "FALSE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_statreglineequation.AddLayerParameter("inherit.aes", "boolean", "TRUE")
+        clsgeom_statreglineequation.AddLayerParameter("geom", "list", Chr(34) & "text" & Chr(34), lstParameterStrings:={Chr(34) & "text" & Chr(34), Chr(34) & "label" & Chr(34)})
+        clsgeom_statreglineequation.AddLayerParameter("label.x.npc", "editablelist", Chr(34) & "left" & Chr(34), lstParameterStrings:={Chr(34) & "left" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "right" & Chr(34)})
+        clsgeom_statreglineequation.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_statreglineequation.AddLayerParameter("label.y.npc", "editablelist", Chr(34) & "left" & Chr(34), lstParameterStrings:={Chr(34) & "left" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "right" & Chr(34)})
+        clsgeom_statreglineequation.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_statreglineequation.AddLayerParameter("size", "numeric", "5", lstParameterStrings:={0, 0})
+        clsgeom_statreglineequation.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
+        clsgeom_statreglineequation.AddLayerParameter("label.x", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statreglineequation.AddLayerParameter("label.y", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
 
         lstAllGeoms.Add(clsgeom_statreglineequation)
 
