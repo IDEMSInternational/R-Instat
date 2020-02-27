@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 
 Public Class dlgTwoVariableFitModel
@@ -25,6 +26,10 @@ Public Class dlgTwoVariableFitModel
     'General case codes
     Public clsFormulaOperator, clsPowerOperator As ROperator
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
+
+    Private Sub ucrFamily_EnabledChanged(sender As Object, e As EventArgs) Handles ucrDistributionChoice.EnabledChanged
+
+    End Sub
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
@@ -62,6 +67,7 @@ Public Class dlgTwoVariableFitModel
         rdoTwoSample.Enabled = False
 
         cmdExplanatoryFunction.Enabled = False
+        cmdExplanatoryFunctionTwo.Enabled = False
 
         ucrBase.iHelpTopicID = 366
         ucrBase.clsRsyntax.iCallType = 2
@@ -131,6 +137,9 @@ Public Class dlgTwoVariableFitModel
 
         ucrPnlMeansAndVariance.SetLinkedDisplayControl(grpParameters)
         ucrPnlMeansAndVariance.AddToLinkedControls(ucrNudHypothesis, {rdoCompareVariance}, bNewLinkedDisabledIfParameterMissing:=True)
+
+        ucrChkWithSecondFunction.SetText("With Second Functions")
+
     End Sub
 
     Private Sub SetDefaults()
@@ -828,5 +837,13 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlContentsChanged, ucrPnlModelType.ControlContentsChanged, ucrReceiverExplanatory.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkWithSecondFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWithSecondFunction.ControlValueChanged
+        If ucrChkWithSecondFunction.Checked Then
+            cmdExplanatoryFunctionTwo.Enabled = True
+        Else
+            cmdExplanatoryFunctionTwo.Enabled = False
+        End If
     End Sub
 End Class

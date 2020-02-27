@@ -68,6 +68,8 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrDistributionChoice = New instat.ucrDistributions()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkWithSecondFunction = New instat.ucrCheck()
+        Me.cmdExplanatoryFunctionTwo = New System.Windows.Forms.Button()
         Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -197,7 +199,7 @@ Partial Class dlgTwoVariableFitModel
         Me.grpParameters.Controls.Add(Me.ucrNudCI)
         Me.grpParameters.Controls.Add(Me.lblDifferenceInMeans)
         Me.grpParameters.Controls.Add(Me.lblConfidenceInterval)
-        Me.grpParameters.Location = New System.Drawing.Point(268, 212)
+        Me.grpParameters.Location = New System.Drawing.Point(35, 98)
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.Size = New System.Drawing.Size(183, 137)
         Me.grpParameters.TabIndex = 9
@@ -299,6 +301,7 @@ Partial Class dlgTwoVariableFitModel
         'ucrSaveModels
         '
         Me.ucrSaveModels.Location = New System.Drawing.Point(10, 390)
+        Me.ucrSaveModels.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveModels.Name = "ucrSaveModels"
         Me.ucrSaveModels.Size = New System.Drawing.Size(258, 24)
         Me.ucrSaveModels.TabIndex = 14
@@ -377,11 +380,30 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrBase.Size = New System.Drawing.Size(406, 54)
         Me.ucrBase.TabIndex = 17
         '
+        'ucrChkWithSecondFunction
+        '
+        Me.ucrChkWithSecondFunction.Checked = False
+        Me.ucrChkWithSecondFunction.Location = New System.Drawing.Point(268, 228)
+        Me.ucrChkWithSecondFunction.Name = "ucrChkWithSecondFunction"
+        Me.ucrChkWithSecondFunction.Size = New System.Drawing.Size(116, 18)
+        Me.ucrChkWithSecondFunction.TabIndex = 18
+        '
+        'cmdExplanatoryFunctionTwo
+        '
+        Me.cmdExplanatoryFunctionTwo.Location = New System.Drawing.Point(268, 245)
+        Me.cmdExplanatoryFunctionTwo.Name = "cmdExplanatoryFunctionTwo"
+        Me.cmdExplanatoryFunctionTwo.Size = New System.Drawing.Size(103, 23)
+        Me.cmdExplanatoryFunctionTwo.TabIndex = 19
+        Me.cmdExplanatoryFunctionTwo.Text = "Function..."
+        Me.cmdExplanatoryFunctionTwo.UseVisualStyleBackColor = True
+        '
         'dlgTwoVariableFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(462, 478)
+        Me.Controls.Add(Me.cmdExplanatoryFunctionTwo)
+        Me.Controls.Add(Me.ucrChkWithSecondFunction)
         Me.Controls.Add(Me.cmdExplanatoryFunction)
         Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.ucrSaveModels)
@@ -446,4 +468,6 @@ Partial Class dlgTwoVariableFitModel
     Friend WithEvents rdoCompareMeans As RadioButton
     Friend WithEvents ucrPnlMeansAndVariance As UcrPanel
     Friend WithEvents cmdExplanatoryFunction As Button
+    Friend WithEvents ucrChkWithSecondFunction As ucrCheck
+    Friend WithEvents cmdExplanatoryFunctionTwo As Button
 End Class

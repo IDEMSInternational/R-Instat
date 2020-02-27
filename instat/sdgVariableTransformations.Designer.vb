@@ -45,11 +45,17 @@ Partial Class sdgVariableTransformations
         Me.rdoPower = New System.Windows.Forms.RadioButton()
         Me.rdoNaturalLog = New System.Windows.Forms.RadioButton()
         Me.rdoIdentity = New System.Windows.Forms.RadioButton()
-        Me.ucrNudPower = New instat.ucrNud()
         Me.grpChooseFunction = New System.Windows.Forms.GroupBox()
         Me.ucrPnlChooseFunction = New instat.UcrPanel()
         Me.lblPreview = New System.Windows.Forms.Label()
         Me.ucrInputPreview = New instat.ucrInputTextBox()
+        Me.ucrInputTxtPower = New instat.ucrInputTextBox()
+        Me.rdoSplineDf = New System.Windows.Forms.RadioButton()
+        Me.ucrNudSplineDF = New instat.ucrNud()
+        Me.rdoBrokenStick = New System.Windows.Forms.RadioButton()
+        Me.ucrInputTxtBrokenStick = New instat.ucrInputTextBox()
+        Me.rdoOwn = New System.Windows.Forms.RadioButton()
+        Me.ucrInputTxtOwn = New instat.ucrInputTextBox()
         Me.grpChooseFunction.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -98,19 +104,15 @@ Partial Class sdgVariableTransformations
         Me.rdoIdentity.Tag = "Identity"
         Me.rdoIdentity.UseVisualStyleBackColor = True
         '
-        'ucrNudPower
-        '
-        Me.ucrNudPower.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPower.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudPower, "ucrNudPower")
-        Me.ucrNudPower.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPower.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPower.Name = "ucrNudPower"
-        Me.ucrNudPower.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'grpChooseFunction
         '
-        Me.grpChooseFunction.Controls.Add(Me.ucrNudPower)
+        Me.grpChooseFunction.Controls.Add(Me.ucrInputTxtOwn)
+        Me.grpChooseFunction.Controls.Add(Me.rdoOwn)
+        Me.grpChooseFunction.Controls.Add(Me.ucrInputTxtBrokenStick)
+        Me.grpChooseFunction.Controls.Add(Me.rdoBrokenStick)
+        Me.grpChooseFunction.Controls.Add(Me.ucrNudSplineDF)
+        Me.grpChooseFunction.Controls.Add(Me.rdoSplineDf)
+        Me.grpChooseFunction.Controls.Add(Me.ucrInputTxtPower)
         Me.grpChooseFunction.Controls.Add(Me.rdoIdentity)
         Me.grpChooseFunction.Controls.Add(Me.rdoNaturalLog)
         Me.grpChooseFunction.Controls.Add(Me.rdoPower)
@@ -140,6 +142,64 @@ Partial Class sdgVariableTransformations
         resources.ApplyResources(Me.ucrInputPreview, "ucrInputPreview")
         Me.ucrInputPreview.Name = "ucrInputPreview"
         '
+        'ucrInputTxtPower
+        '
+        Me.ucrInputTxtPower.AddQuotesIfUnrecognised = True
+        Me.ucrInputTxtPower.IsMultiline = False
+        Me.ucrInputTxtPower.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTxtPower, "ucrInputTxtPower")
+        Me.ucrInputTxtPower.Name = "ucrInputTxtPower"
+        '
+        'rdoSplineDf
+        '
+        resources.ApplyResources(Me.rdoSplineDf, "rdoSplineDf")
+        Me.rdoSplineDf.Name = "rdoSplineDf"
+        Me.rdoSplineDf.TabStop = True
+        Me.rdoSplineDf.Tag = ""
+        Me.rdoSplineDf.UseVisualStyleBackColor = True
+        '
+        'ucrNudSplineDF
+        '
+        Me.ucrNudSplineDF.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSplineDF.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSplineDF, "ucrNudSplineDF")
+        Me.ucrNudSplineDF.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSplineDF.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSplineDF.Name = "ucrNudSplineDF"
+        Me.ucrNudSplineDF.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'rdoBrokenStick
+        '
+        resources.ApplyResources(Me.rdoBrokenStick, "rdoBrokenStick")
+        Me.rdoBrokenStick.Name = "rdoBrokenStick"
+        Me.rdoBrokenStick.TabStop = True
+        Me.rdoBrokenStick.Tag = ""
+        Me.rdoBrokenStick.UseVisualStyleBackColor = True
+        '
+        'ucrInputTxtBrokenStick
+        '
+        Me.ucrInputTxtBrokenStick.AddQuotesIfUnrecognised = True
+        Me.ucrInputTxtBrokenStick.IsMultiline = False
+        Me.ucrInputTxtBrokenStick.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTxtBrokenStick, "ucrInputTxtBrokenStick")
+        Me.ucrInputTxtBrokenStick.Name = "ucrInputTxtBrokenStick"
+        '
+        'rdoOwn
+        '
+        resources.ApplyResources(Me.rdoOwn, "rdoOwn")
+        Me.rdoOwn.Name = "rdoOwn"
+        Me.rdoOwn.TabStop = True
+        Me.rdoOwn.Tag = ""
+        Me.rdoOwn.UseVisualStyleBackColor = True
+        '
+        'ucrInputTxtOwn
+        '
+        Me.ucrInputTxtOwn.AddQuotesIfUnrecognised = True
+        Me.ucrInputTxtOwn.IsMultiline = False
+        Me.ucrInputTxtOwn.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTxtOwn, "ucrInputTxtOwn")
+        Me.ucrInputTxtOwn.Name = "ucrInputTxtOwn"
+        '
         'sdgVariableTransformations
         '
         resources.ApplyResources(Me, "$this")
@@ -165,9 +225,15 @@ Partial Class sdgVariableTransformations
     Friend WithEvents rdoPower As RadioButton
     Friend WithEvents rdoNaturalLog As RadioButton
     Friend WithEvents rdoIdentity As RadioButton
-    Friend WithEvents ucrNudPower As ucrNud
     Friend WithEvents grpChooseFunction As GroupBox
     Friend WithEvents ucrPnlChooseFunction As UcrPanel
     Friend WithEvents lblPreview As Label
     Friend WithEvents ucrInputPreview As ucrInputTextBox
+    Friend WithEvents ucrInputTxtPower As ucrInputTextBox
+    Friend WithEvents ucrNudSplineDF As ucrNud
+    Friend WithEvents rdoSplineDf As RadioButton
+    Friend WithEvents ucrInputTxtOwn As ucrInputTextBox
+    Friend WithEvents rdoOwn As RadioButton
+    Friend WithEvents ucrInputTxtBrokenStick As ucrInputTextBox
+    Friend WithEvents rdoBrokenStick As RadioButton
 End Class

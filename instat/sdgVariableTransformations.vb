@@ -36,13 +36,17 @@ Public Class sdgVariableTransformations
         ucrPnlChooseFunction.AddRadioButton(rdoNaturalLog)
         ucrPnlChooseFunction.AddRadioButton(rdoPower)
         ucrPnlChooseFunction.AddRadioButton(rdoSquareRoot)
-        ucrPnlChooseFunction.AddToLinkedControls(ucrNudPower, {rdoPower}, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrPnlChooseFunction.AddToLinkedControls(ucrInputTxtPower, {rdoPower}, bNewLinkedDisabledIfParameterMissing:=True)
 
         'temp disabled as need to use I(x ^ 2) instead of x ^ 2 as this has different meaning in a formula
         rdoPower.Enabled = False
 
-        ucrNudPower.SetParameter(New RParameter("power", 1))
-        ucrNudPower.SetMinMax(Integer.MinValue, Integer.MaxValue)
+        ucrInputTxtPower.SetParameter(New RParameter("power", 1))
+        ucrInputTxtPower.SetValidationTypeAsNumeric()
+        ucrInputTxtPower.AddQuotesIfUnrecognised = False
+
+        ucrNudSplineDF.SetMinMax(0, Integer.MaxValue)
+
         bControlsInitialised = True
     End Sub
 
@@ -66,7 +70,7 @@ Public Class sdgVariableTransformations
         ucrPnlChooseFunction.AddParameterIsROperatorCondition(rdoPower, strParamName)
 
         ucrPnlChooseFunction.SetRCode(clsContainingCode, bReset, bCloneIfNeeded:=True)
-        ucrNudPower.SetRCode(clsPowerOperator, bReset, bCloneIfNeeded:=True)
+        ucrInputTxtPower.SetRCode(clsPowerOperator, bReset, bCloneIfNeeded:=True)
         UpdatePreview()
     End Sub
 
@@ -95,7 +99,7 @@ Public Class sdgVariableTransformations
         ucrInputPreview.SetName(clsTransformParameter.ToScript(""))
     End Sub
 
-    Private Sub ucrNudPower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudPower.ControlValueChanged
+    Private Sub ucrNudPower_ControlValueChanged(ucrChangedControl As ucrCore)
         UpdatePreview()
     End Sub
 End Class
