@@ -17,9 +17,7 @@
 ''' <summary>   This class TBD. </summary>
 Public Class RCodeStructure
     ''' <summary>   If the output from the R command needs to be assigned, then this string is 
-    '''             the part of the script to the left of the assignment operator ('&lt;-'), 
-    '''             i.e. the name that should be used to assign in R the output of the main 
-    '''             (Base) R-command.
+    '''             the part of the script to the left of the assignment operator ('&lt;-').
     '''             If the output from the R command doesn't to be assigned, then this string is
     '''             empty. </summary>
     Public strAssignTo As String
@@ -66,32 +64,31 @@ Public Class RCodeStructure
     Public strDataFrameNames As String
 
     ''' <summary>    
-    '''             If true then, AT THE CURRENT STAGE of running code within R, the output of 
-    '''             the Base R-command NEEDS TO BE assigned to:
+    '''             If true then, <b>at the current stage</b> of running code within R, the output of
+    '''             the R command needs to be assigned to:
     ''' <list type="bullet">
     '''     <item>
-    '''             <description>the variable With the appropriate name: strAssignTo</description>
+    '''             <description>The variable defined by 'strAssignTo'</description>
     '''     </item>
     '''     <item>
-    '''             <description>and potentially assigned to elements in an R-instat object, if specified
-    '''               in the AssignToDataFrame,... parameters</description>
+    '''             <description>Elements in an R-instat object (only if specified by the 
+    '''                          'AssignTo...' variables).</description>
     '''     </item>
     ''' </list>
-    '''             Note: Both bToBeAssigned and bIsAssigned are necessary to distinguish between:
+    '''             Note: Both bIsAssigned and bToBeAssigned are necessary to distinguish between:
     ''' <list type="bullet">
     '''     <item>
-    '''             <description>the output hasn't been assigned but doesn't need to be</description>
+    '''             <description>The output hasn't been assigned but doesn't need to be</description>
     '''     </item>
     '''     <item>
-    '''             <description>the output has already been assigned</description>
+    '''             <description>The output has already been assigned</description>
     '''     </item>
     ''' </list>
     '''             (i.e. bIsAssigned isn't enough to decide whether or not we should assign, 
-    '''             unless we use the information "is strAssignTo empty or not", but for the moment 
-    '''             we keep it like it is.)
-    '''             
+    '''             unless we use the information "is strAssignTo empty or not".)
+    '''             <para>
     '''             Note: This variable is only relevant in the string case, as RFunction and
-    '''             ROperator have internal equivalents.
+    '''             ROperator have internal equivalents.</para>
     ''' </summary>
     Public bToBeAssigned As Boolean = False
 
@@ -99,21 +96,20 @@ Public Class RCodeStructure
     '''             assigned and, if relevant, the link with the appropriate R-instat object has 
     '''             been done.
     '''             
-    '''             Note: Both bToBeAssigned and bIsAssigned are necessary to distinguish between:
+    '''             Note: Both bIsAssigned and bToBeAssigned are necessary to distinguish between:
     ''' <list type="bullet">
     '''     <item>
-    '''             <description>the output hasn't been assigned but doesn't need to be</description>
+    '''             <description>The output hasn't been assigned but doesn't need to be</description>
     '''     </item>
     '''     <item>
-    '''             <description>the output has already been assigned</description>
+    '''             <description>The output has already been assigned</description>
     '''     </item>
     ''' </list>
     '''             (i.e. bIsAssigned isn't enough to decide whether or not we should assign, 
-    '''             unless we use the information "is strAssignTo empty or not", but for the moment 
-    '''             we keep it like it is.)
-    '''             
+    '''             unless we use the information "is strAssignTo empty or not".)
+    '''             <para>
     '''             Note: This variable is only relevant in the string case, as RFunction and
-    '''             ROperator have internal equivalents.
+    '''             ROperator have internal equivalents.</para>
     ''' </summary>
     Public bIsAssigned As Boolean = False
 
@@ -146,14 +142,15 @@ Public Class RCodeStructure
     ''' <summary>   The list of parameters associated with this R code. </summary>
     Public clsParameters As New List(Of RParameter)
 
-    ''' <summary>   The number of parameters associated with this R code.</summary>
+    ''' <summary>   The number of parameters associated with this R command.</summary>
     Protected iNumberOfAddedParameters As Integer = 0 'TODSO Is this used or needed? Couldn't we find the number of parameters from the num of elements in clsParameters?
 
-    ''' <summary>   An enum constant representing the position option.
+    ''' <summary>   used as a constant to represent an undefined parameter position.
     '''             Note: This is currently only used in RSyntax as a before/after code to 
-    '''             determine the position code should be run in the list.
-    '''    Similar behaviour to parameter positions. </summary>
-    Public iPosition = -1 ' TODO SJL This seems to be a constant, should we declare it with 'const'?
+    '''             determine whether the position code should be run in the list.
+    '''             </summary>
+    Public iPosition = -1 ' TODO SJL This seems to be a constant, should we declare it with 'const'? 
+    'TODO SJL - Also, it only seems to be used by RSyntax. Move the constant to that class and give it a less confusing name?
 
     ''' <summary>   What to do with the result returned by executing the R code: 
     ''' <list type="bullet">
@@ -196,17 +193,18 @@ Public Class RCodeStructure
     Public bExcludeAssignedFunctionOutput As Boolean = True
 
     ''' <summary>   This is used to clear the global environment of unused variables. 
-    '''             Will be cleared after running unless bClearFromGlobal = False 
     '''             </summary>
     Public bClearFromGlobal As Boolean = False 'TODO SJL This variable is never checked or set to true, can we remove?
 
     ''' <summary>   If true then 'clsRFunction.ToScript' and 'clsROperator.ToScript' return a string 
     '''             that can be passed to R (i.e. double quotes are replaced with single quotes, 
     '''             and the string is wrapped in double quotes).
+    '''             <para>
     '''             For example: <c>seq(from = 1, to = 10)</c> becomes <c>"seq(from = 1, to = 10)"</c>.
-    '''             Note: if true then then the returned string can no longer be used for the 
+    '''             </para><para>
+    '''             Note: if true then the returned string can no longer be used for the 
     '''             function or its parameters because it will not produce the correct script
-    '''             (i.e. it should not be true if 'bToBeAssigned' or 'bIsAssigned' is true.
+    '''             (i.e. it should not be true if 'bToBeAssigned' or 'bIsAssigned' is true.</para>
     '''             </summary>
     Public bToScriptAsRString As Boolean = False
 
@@ -214,15 +212,16 @@ Public Class RCodeStructure
     Public Tag As Object 'TODO SJL This only seems to be used by dlgCalculationsSummary. Could we add something local to this dialog and then remove the tag from this calss?
 
     ''' <summary>   Event queue for all listeners interested in ParametersChanged events. </summary>
-    Public Event ParametersChanged() 'TODO SJL Is this still used? Can it be removed?
+    Public Event ParametersChanged() 'TODO SJL Is this used? Can it be removed?
 
-    ''' <summary>   Executes the parameters changed action. Currently only used when this is in 
-    '''             RSyntax as a before/after code to determine position code should be run in the 
-    '''             list. This is because RSyntax has iCallType and bExcludeAssignedFunctionOutput 
-    '''             which it uses for the base code. Eventually migrate these out of RSyntax.
+    ''' <summary>   Executes the parameters changed action. 
     '''             </summary>
     Protected Sub OnParametersChanged()
-        RaiseEvent ParametersChanged() 'TODO SJL Is this still used? Can it be removed?
+        RaiseEvent ParametersChanged()
+        'TODO SJL Is this still used? Can it be removed?
+        ' Currently only used when this is in RSyntax as a before/after code to determine if 
+        ' position code should be run in the list. This is because RSyntax has iCallType and 
+        ' bExcludeAssignedFunctionOutput which it uses for the base code. Eventually migrate these out of RSyntax.
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -299,7 +298,7 @@ Public Class RCodeStructure
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   If object needs to be assigned to, then creates/updates the assignment script 
-    '''             (if needed) amd returns the assignment script.
+    '''             (if needed) and returns the assignment script.
     '''             If object doesn't need to be assigned to, then returns <paramref name="strTemp"/>.
     '''             </summary>
     '''
@@ -472,9 +471,10 @@ Public Class RCodeStructure
     '''             <code>
     '''             <paramref name="strAssignTo"/> &lt;- <paramref name="strTemp"/> 
     '''             </code>
-    '''             If <paramref name="strTemp"/> is multiple lines then <paramref name="strTemp"/> 
-    '''             is assigned to the final line. All previous lines are returned unchanged.
-    '''              </summary>
+    '''             If <paramref name="strTemp"/> is multiple lines then the assignment is done
+    '''             on <paramref name="strTemp"/>'s last line. All previous lines are returned 
+    '''             unchanged.
+    '''             </summary>
     '''
     ''' <param name="strAssignTo">  The variable to assign to (i.e. the left side of the 
     '''                             assignment). </param>
@@ -520,9 +520,9 @@ Public Class RCodeStructure
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Creates and adds a parameter to this object.
     '''             Sets the parameter's name to <paramref name="strParameterName"/>.
-    '''             Sets the parameter's argument to ONE OF <paramref name="strParameterValue"/>,
+    '''             <para>Sets the parameter's argument to <b>one of</b> <paramref name="strParameterValue"/>,
     '''             <paramref name="clsRFunctionParameter"/>, <paramref name="clsROperatorParameter"/>,
-    '''             or <paramref name="clsRCodeStructureParameter"/>.
+    '''             or <paramref name="clsRCodeStructureParameter"/>.</para>
     '''             Sets the parameter's position and include/exclude argument name flag to 
     '''             <paramref name="iPosition"/> and <paramref name="bIncludeArgumentName"/> 
     '''             respectively.
@@ -530,12 +530,13 @@ Public Class RCodeStructure
     '''
     ''' <param name="strParameterName">             (Optional) Name of the parameter. </param>
     ''' <param name="strParameterValue">            (Optional) The parameter value. </param>
-    ''' <param name="clsRFunctionParameter">        (Optional) The cls r function parameter. </param>
-    ''' <param name="clsROperatorParameter">        (Optional) The cls r operator parameter. </param>
-    ''' <param name="clsRCodeStructureParameter">   (Optional) The cls r code structure parameter. </param>
+    ''' <param name="clsRFunctionParameter">        (Optional) The R function parameter. </param>
+    ''' <param name="clsROperatorParameter">        (Optional) The R operator parameter. </param>
+    ''' <param name="clsRCodeStructureParameter">   (Optional) The R code structure parameter. </param>
     ''' <param name="bIncludeArgumentName">         (Optional) True to include, false to exclude the
     '''                                             argument name. </param>
-    ''' <param name="iPosition">                    (Optional) Zero-based index of the position. </param>
+    ''' <param name="iPosition">                    (Optional) The position of the parameter. The position
+    '''                                             is zero-based (i.e. first position is zero). </param>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional clsRCodeStructureParameter As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
         Dim clsParam = New RParameter
@@ -566,56 +567,71 @@ Public Class RCodeStructure
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Adds a parameter with code structure. 
-    '''             TODO This should be call AddParameter but need to make it unambiguous with above. 
-    '''             TODO SJL This function is not used, and is not overridden by any child classes. Can we remove?
+    ''' <summary>   TODO SJL This function is not used, and is not overridden by any child classes. Can we remove?
     '''             </summary>
     '''
     ''' <param name="strParameterName">     (Optional) Name of the parameter. </param>
     ''' <param name="strParameterValue">    (Optional) The parameter value. </param>
-    ''' <param name="clsRCodeObject">       (Optional) The cls r code object. </param>
+    ''' <param name="clsRCodeObject">       (Optional) The R code structure parameter. </param>
     ''' <param name="bIncludeArgumentName"> (Optional) True to include, false to exclude the argument
     '''                                     name. </param>
-    ''' <param name="iPosition">            (Optional) Zero-based index of the position. </param>
+    ''' <param name="iPosition">            (Optional) The position of the parameter. The position 
+    '''                                     is zero-based (i.e. first position is zero). </param>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Sub AddParameterWithCodeStructure(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRCodeObject As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
+        ' TODO This should be call AddParameter but need to make it unambiguous with above. 
+        ' TODO SJL I think this function has a bug: If strParameterValue is specified then the
+        ' clsRFunctionParameter and clsROperatorParameter parameters will be ignored.
         If TypeOf (clsRCodeObject) Is RFunction Then
-            AddParameter(strParameterName:=strParameterName, strParameterValue:=strParameterValue, clsRFunctionParameter:=clsRCodeObject, bIncludeArgumentName:=bIncludeArgumentName, iPosition:=iPosition)
+            AddParameter(strParameterName:=strParameterName, strParameterValue:=strParameterValue,
+                         clsRFunctionParameter:=clsRCodeObject, bIncludeArgumentName:=bIncludeArgumentName,
+                         iPosition:=iPosition)
         ElseIf TypeOf (clsRCodeObject) Is ROperator Then
-            AddParameter(strParameterName:=strParameterName, strParameterValue:=strParameterValue, clsROperatorParameter:=clsRCodeObject, bIncludeArgumentName:=bIncludeArgumentName, iPosition:=iPosition)
+            AddParameter(strParameterName:=strParameterName, strParameterValue:=strParameterValue,
+                         clsROperatorParameter:=clsRCodeObject, bIncludeArgumentName:=bIncludeArgumentName,
+                         iPosition:=iPosition)
         End If
     End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   If the object already has a parameter with the same name then changes the 
     '''             parameter's value to the value in <paramref name="clsNewParam"/>.
-    '''             Else adds <paramref name="clsNewParam"/> to the object as as a new parameter.
+    '''             Else adds <paramref name="clsNewParam"/> to the object as a new parameter.
+    '''             <para>
+    '''             This function also ensures that there is no existing parameter with the same 
+    '''             position as the newly added/updated parameter.</para>
     '''             </summary>
     '''
-    ''' <param name="clsNewParam">  The cls new parameter. </param>
+    ''' <param name="clsNewParam">  The new parameter to add. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Sub AddParameter(clsNewParam As RParameter)
         Dim i As Integer = -1
         Dim strTempArgumentName As String = clsNewParam.strArgumentName
+
         If clsParameters IsNot Nothing Then
             If clsNewParam.strArgumentName IsNot Nothing Then
-                'Dim match As Predicate(Of RParameter) = Function(x) x.strArgumentName.Equals(clsParam.strArgumentName)
                 i = clsParameters.FindIndex(Function(x) x.strArgumentName.Equals(strTempArgumentName))
             End If
+            'if there's no existing parameter with the same name
             If i = -1 Then
-                ShiftParametersPositions(clsNewParam.Position) 'Checking if there is room in the parameter's positions to add a parameter with position = iPosition
+                'ensure that there is no existing parameter with the same position
+                ShiftParametersPositions(clsNewParam.Position)
+                'add the new parameter
                 clsParameters.Add(clsNewParam)
-            Else
+            Else 'else if a parameter with the same name already exists
                 If clsNewParam.bIsString AndAlso clsNewParam.strArgumentValue IsNot Nothing Then
                     clsParameters(i).SetArgumentValue(clsNewParam.strArgumentValue)
                 ElseIf (clsNewParam.bIsOperator OrElse clsNewParam.bIsFunction) AndAlso clsNewParam.clsArgumentCodeStructure IsNot Nothing Then
                     clsParameters(i).SetArgument(clsNewParam.clsArgumentCodeStructure)
                 Else
-                    'message
+                    'TODO SJL Do something here?
                 End If
+
+                'if the parameter's position has changed
                 If clsParameters(i).Position <> clsNewParam.Position Then
-                    'In case the position needs to be changed, there might exist another parameter with the new position in the list
-                    'The parameter i is then temporarily set to unordered until the Shift in positions has been operated within the clsParameters (if necessary).
+                    'Ensure that there is no existing parameter with the same position.
+                    'Temporarily set the changed parameter's position to unordered until the other
+                    'parameters have had their positions incremented (if needed).
                     clsParameters(i).Position = -1
                     If clsNewParam.Position <> -1 Then
                         ShiftParametersPositions(clsNewParam.Position)
@@ -624,42 +640,63 @@ Public Class RCodeStructure
                 End If
             End If
         Else
-            'message
+            'TODO SJL Do something here?
         End If
-        bIsAssigned = False
+        bIsAssigned = False 'parameters have changed so the output of the R command needs to be reassigned
         iNumberOfAddedParameters = iNumberOfAddedParameters + 1
-        OnParametersChanged()
+        OnParametersChanged() 'TODO SJL can this line be removed?
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Shift parameters positions. </summary>
+    ''' <summary>   Ensures that there is no existing parameter with position <paramref name="iPosition"/>.
+    '''             It does this by searching for a parameter with position <paramref name="iPosition"/>. 
+    '''             If it finds one then it increments that parameter's position (and if needed, 
+    '''             also increments the position of any subsequent parameters to avoid new 
+    '''             duplications).
+    '''             <para>
+    '''             This function assumes that each existing parameter has a unique position.
+    '''             </para> </summary>
     '''
-    ''' <param name="iPosition">    Zero-based index of the position. </param>
+    ''' <param name="iPosition">    The position that needs to be made free for a new parameter.
+    '''                             The position is zero-based (i.e. first position is zero). 
+    '''                             If this parameter is less than zero then this function does 
+    '''                             nothing.</param>
     '''--------------------------------------------------------------------------------------------
     Private Sub ShiftParametersPositions(iPosition As Integer)
-        'Assuming that there are no repetitions in the positions of ordered parameters, this sub will shift all positions starting from iPosition until there are no repititions of positions even if a parameter with position iposition was added.
-        'In particular it won't do anything if there is no parameter with position iPosition in clsParameters.
-        Dim bReady As Boolean = False 'indicates when incrementing will solve all repetitions among positions of ordered parameters.
-        Dim lstIndices As New List(Of Integer) 'The list of indices of the parameters of which the position need to be incremented.
-        'Only Shift if iPosition is > -1
+        'TODO SJL if we sorted the parameter list by position (see functions below) then this function could be simpler
+
+        Dim bReady As Boolean = False 'true if no more duplicate parameter positions potentially still exist
+        Dim lstIndices As New List(Of Integer) 'list of indices of the parameters which have positions that need to be incremented
+
         If iPosition > -1 Then
+            ' while duplicate parameter positions potentially still exist
             While Not bReady
-                bReady = True 'the list is ready unless there is a parameter that has position iPosition. In which case, this parameter's position will be incremented. Now need to check that there is no other parameter with position iposition + 1.
+                bReady = True
+                'for each parameter
                 For i As Integer = 0 To clsParameters.Count - 1
+                    'If an existing parameter already has the required position
                     If clsParameters(i).Position = iPosition Then
-                        iPosition = iPosition + 1
+                        ' The parameter with the duplicated position will have its position incremented. 
+                        ' But this in turn may duplicate the position of another parameter.
+                        ' So increment 'iPosition' so that this duplication is also checked for.
+                        iPosition = iPosition + 1 ' TODO SJL if there are more duplicates of iPosition then we won't find them. Should we check for this?
+                        'store the index of the parameter with the duplicate position
                         lstIndices.Add(i)
-                        bReady = False
+                        'indicate that we need to iterate at least once more through all the parameters
+                        bReady = False 'TODO SJL All the parameters will be checked again in the next while loop iteration. Could we break out of the for loop here?
                     End If
                 Next
             End While
+            ' for each parameter with a duplicated position
             For Each iIndex As Integer In lstIndices
+                ' increment that paremeter's position
+                ' (the new position is guaranteed not to be a duplicate because of the checks done in the previous while loop)
                 clsParameters(iIndex).Position = clsParameters(iIndex).Position + 1
             Next
         End If
     End Sub
 
-    ''' <summary>   Sort parameters. </summary>
+    ''' <summary>   Sorts the parameters into position order. </summary>
     Public Sub SortParameters()
         'This sub is used to reorder the parameters according to their Position property.
         'It will be called only in places where it is necessary ie before ToScript or RemoveAdditionalParameters in ROperator.
@@ -667,15 +704,22 @@ Public Class RCodeStructure
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Compare parameters position. </summary>
+    ''' <summary>   Compares the positions of <paramref name="clsMain"/> and <paramref name="clsRelative"/>.
+    '''             If the 2 parameters have the same position then return 0.
+    '''             If <paramref name="clsMain"/>'s position is less than
+    '''             <paramref name="clsRelative"/>'s position, then return -1.
+    '''             Else return 1.
+    '''             </summary>
     '''
-    ''' <param name="clsMain">      The cls main. </param>
-    ''' <param name="clsRelative">  The cls relative. </param>
+    ''' <param name="clsMain">      The first parameter. </param>
+    ''' <param name="clsRelative">  The second parameter. </param>
     '''
-    ''' <returns>   An Integer. </returns>
+    ''' <returns>   If the 2 parameters have the same position then returns 0.
+    '''             If <paramref name="clsMain"/>'s position is less than 
+    '''             <paramref name="clsRelative"/>'s position, then returns -1.
+    '''             Else returns 1. </returns>
     '''--------------------------------------------------------------------------------------------
     Private Function CompareParametersPosition(ByVal clsMain As RParameter, ByVal clsRelative As RParameter) As Integer
-        'Compares two RParameters according to their Position property. If x is "smaller" than y, then return -1, if they are "equal" return 0 else return 1.
         If clsMain.Position = clsRelative.Position Then
             Return 0
         ElseIf clsRelative.Position = -1 Then
@@ -687,78 +731,96 @@ Public Class RCodeStructure
         End If
     End Function
 
-    ''' <summary>   Removes the unordered parameters. </summary>
+    ''' <summary>   Removes all parameters that do not have a specified position 
+    '''             (i.e. parameter's position is -1).
+    '''             </summary>
     Public Sub RemoveUnorderedParameters()
-        'Removes all parameters that are of position -1 i e unordered.
+        'TODO SJL This function is not used, remove it?
         Dim clsParam As RParameter
+        'TODO SJL This function only seems to remove the first unordered param, is this a bug?
         If Not clsParameters Is Nothing Then
             clsParam = clsParameters.Find(Function(x) x.Position = -1)
             clsParameters.Remove(clsParam)
         End If
-        bIsAssigned = False
-        OnParametersChanged()
+        bIsAssigned = False 'parameters have changed so the output of the R command needs to be reassigned
+        OnParametersChanged() 'TODO SJL can this line be removed?
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Removes the parameter by name described by strArgName. </summary>
+    ''' <summary>   Removes the parameter named <paramref name="strArgName"/>. </summary>
     '''
-    ''' <param name="strArgName">   Name of the argument. </param>
+    ''' <param name="strArgName">   Name of the parameter to remove. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Sub RemoveParameterByName(strArgName As String)
         Dim clsParam As RParameter
+
+        ' TODO SJL If there is no parameter with the required name then Find returns a default 
+        '     RParameter, is this a problem?
+        '     Remove will then try and remove this default parameter. It returns False if the removal 
+        '     fails. Should we check this return value?
         If Not clsParameters Is Nothing Then
             clsParam = clsParameters.Find(Function(x) x.strArgumentName = strArgName)
-            clsParameters.Remove(clsParam)
+            clsParameters.Remove(clsParam) 'TODO
         End If
-        bIsAssigned = False
-        OnParametersChanged()
+        bIsAssigned = False 'parameters have changed so the output of the R command needs to be reassigned
+        OnParametersChanged() 'TODO SJL can this line be removed?
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Removes the parameter by position described by iPosition. </summary>
+    ''' <summary>   Removes the parameter with position <paramref name="iPosition"/>. </summary>
     '''
-    ''' <param name="iPosition">    Zero-based index of the position. </param>
+    ''' <param name="iPosition">    The position of the parameter to remove.
+    '''                             The position is zero-based (i.e. first position is zero).
+    '''                             </param>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Sub RemoveParameterByPosition(iPosition As Integer)
         Dim clsParam As RParameter
+
+        ' TODO SJL If there is no parameter with the required position then Find returns a default 
+        '     RParameter, is this a problem?
+        '     Remove will then try and remove this default parameter. It returns False if the removal 
+        '     fails. Should we check this return value?
         If Not clsParameters Is Nothing Then
             clsParam = clsParameters.Find(Function(x) x.Position = iPosition)
             clsParameters.Remove(clsParam)
         End If
-        bIsAssigned = False
-        OnParametersChanged()
+        bIsAssigned = False 'parameters have changed so the output of the R command needs to be reassigned
+        OnParametersChanged() 'TODO SJL can this line be removed?
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Removes the parameter described by clsParam. </summary>
+    ''' <summary>   Removes the parameter <paramref name="clsParam"/>. </summary>
     '''
-    ''' <param name="clsParam"> The cls parameter. </param>
+    ''' <param name="clsParam"> The parameter to remove. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Sub RemoveParameter(clsParam As RParameter)
+        ' TODO SJL Remove returns false if the removal fails. Should we check this return parameter?
         If Not clsParameters Is Nothing Then
             clsParameters.Remove(clsParam)
         End If
-        bIsAssigned = False
-        OnParametersChanged()
+        bIsAssigned = False 'parameters have changed so the output of the R command needs to be reassigned
+        OnParametersChanged() 'TODO SJL can this line be removed?
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Query if 'strParameterName' contains parameter. </summary>
+    ''' <summary>   Returns true if <paramref name="clsParam"/> exists, else returns false. </summary>
     '''
-    ''' <param name="clsParam"> The cls parameter. </param>
+    ''' <param name="clsParam"> The parameter to look for. </param>
     '''
-    ''' <returns>   True if it succeeds, false if it fails. </returns>
+    ''' <returns>   Returns true if <paramref name="clsParam"/> exists, else returns false. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Function ContainsParameter(clsParam As RParameter) As Boolean
         Return clsParameters.Contains(clsParam)
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Query if 'strParameterName' contains parameter. </summary>
+    ''' <summary>   Returns true if there is a parameter named <paramref name="strParameterName"/>,
+    '''             else returns false. </summary>
     '''
-    ''' <param name="strParameterName"> Name of the parameter. </param>
+    ''' <param name="strParameterName"> Name of the parameter to look for. </param>
     '''
-    ''' <returns>   True if it succeeds, false if it fails. </returns>
+    ''' <returns>   Returns true if there is a parameter named <paramref name="strParameterName"/>,
+    '''             else returns false. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Function ContainsParameter(strParameterName As String) As Boolean
         Return (clsParameters.FindIndex(Function(x) x.strArgumentName = strParameterName) <> -1)
@@ -770,7 +832,6 @@ Public Class RCodeStructure
         iPosition = -1
         iCallType = 0
         bExcludeAssignedFunctionOutput = True
-        'todo shouldn't this be true by default
         bClearFromGlobal = False
         bToScriptAsRString = False
         RemoveAssignTo()
@@ -782,7 +843,7 @@ Public Class RCodeStructure
         clsParameters.Clear()
         iNumberOfAddedParameters = 0
         bIsAssigned = False
-        OnParametersChanged()
+        OnParametersChanged() 'TODO SJL can this line be removed?
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -822,18 +883,27 @@ Public Class RCodeStructure
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets all assign to. </summary>
+    ''' <summary>   Adds this object and its associated assign script to <paramref name="lstCodes"/>
+    '''             and <paramref name="lstValues"/> respectively.<para>
+    '''             If this object's parameters also contain functions or operators then also 
+    '''             recursively add their respective RCodeStructure objects and associated assign 
+    '''             scripts to the respective lists.
+    '''             </para> </summary>
     '''
-    ''' <param name="lstCodes">     The list codes. </param>
-    ''' <param name="lstValues">    The list values. </param>
+    ''' <param name="lstCodes">     The list of RCodeStructure objects. </param>
+    ''' <param name="lstValues">    The list of assign scripts . </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub GetAllAssignTo(lstCodes As List(Of RCodeStructure), lstValues As List(Of String))
         SortParameters()
+        ' if this object is to be assigned, but is not yet in the lists
         If bToBeAssigned AndAlso Not lstCodes.Contains(Me) Then
+            'add this object and its assign script to the respective lists
             lstCodes.Add(Me)
             lstValues.Add(strAssignTo)
         End If
         For Each clsTempParam As RParameter In clsParameters
+            ' if parameter is a function or operator then also add its respective RCodeStructure
+            '     objects and associated assign scripts to the respective lists.
             clsTempParam.GetAllAssignTo(lstCodes, lstValues)
         Next
     End Sub
