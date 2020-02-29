@@ -14,8 +14,32 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-''' <summary>   This class TBD. </summary>
+''' <summary>   An object of this class represents an R command. 
+'''             The R command may include parameters and an assignment part.
+'''             <para>
+'''             This class provides methods and fields to:</para>
+''' <list type="bullet">
+'''     <item><description>
+'''             Insert, update and delete the R command's parameters.
+'''     </description></item><item><description>
+'''             Change the relative position of the R command's parameters.
+'''     </description></item><item><description>
+'''             Define what to assign to (e.g. data frame, column, model etc.).
+'''     </description></item><item><description>
+'''             Whether the assignment part has been created (or needs to be created).
+'''     </description></item><item><description>
+'''             Define what to do with the result returned from the R command (e.g. ignore, show 
+'''             the result as text, show the result as a graph or store in a temporary variable).
+'''     </description></item><item><description>
+'''             Return the R command as an executable R string.
+'''     </description></item>
+''' </list>
+'''             </summary>
+
 Public Class RCodeStructure
+    'TODO SJL - The name of this class is missing the prefix 'cls'. The vast majority of R-Instat 
+    '               classes have this prefix. Should we add it?
+
     ''' <summary>   If the output from the R command needs to be assigned, then this string is 
     '''             the part of the script to the left of the assignment operator ('&lt;-').
     '''             If the output from the R command doesn't to be assigned, then this string is
@@ -63,53 +87,36 @@ Public Class RCodeStructure
     '''             </summary>
     Public strDataFrameNames As String
 
-    ''' <summary>    
-    '''             If true then, <b>at the current stage</b> of running code within R, the output of
+    ''' <summary>   If true then, <b>at the current stage</b> of running code within R, the output of
     '''             the R command needs to be assigned to:
     ''' <list type="bullet">
-    '''     <item>
-    '''             <description>The variable defined by 'strAssignTo'</description>
-    '''     </item>
-    '''     <item>
-    '''             <description>Elements in an R-instat object (only if specified by the 
-    '''                          'AssignTo...' variables).</description>
-    '''     </item>
+    '''     <item><description>
+    '''                 The variable defined by 'strAssignTo'
+    '''     </description></item><item><description>
+    '''                 R elements such as data frame, columns, graphs, models etc. (only if 
+    '''                 specified by the 'AssignTo...' variables).
+    '''     </description></item>
     ''' </list>
-    '''             Note: Both bIsAssigned and bToBeAssigned are necessary to distinguish between:
-    ''' <list type="bullet">
-    '''     <item>
-    '''             <description>The output hasn't been assigned but doesn't need to be</description>
-    '''     </item>
-    '''     <item>
-    '''             <description>The output has already been assigned</description>
-    '''     </item>
-    ''' </list>
-    '''             (i.e. bIsAssigned isn't enough to decide whether or not we should assign, 
-    '''             unless we use the information "is strAssignTo empty or not".)
-    '''             <para>
-    '''             Note: This variable is only relevant in the string case, as RFunction and
-    '''             ROperator have internal equivalents.</para>
     ''' </summary>
     Public bToBeAssigned As Boolean = False
 
-    ''' <summary>   Tells blindly whether or not the output of the R-command has been 
-    '''             assigned and, if relevant, the link with the appropriate R-instat object has 
-    '''             been done.
-    '''             
-    '''             Note: Both bIsAssigned and bToBeAssigned are necessary to distinguish between:
+    ''' <summary>   If true then the output of the R-command has been assigned to:
     ''' <list type="bullet">
-    '''     <item>
-    '''             <description>The output hasn't been assigned but doesn't need to be</description>
-    '''     </item>
-    '''     <item>
-    '''             <description>The output has already been assigned</description>
-    '''     </item>
+    '''     <item><description>
+    '''                 The variable defined by 'strAssignTo'
+    '''     </description></item><item><description>
+    '''                 R elements such as data frame, columns, graphs, models etc. (only if 
+    '''                 specified by the 'AssignTo...' variables).
+    '''     </description></item>
     ''' </list>
-    '''             (i.e. bIsAssigned isn't enough to decide whether or not we should assign, 
-    '''             unless we use the information "is strAssignTo empty or not".)
+    '''             This variable is only relevant in the string case, as RFunction and
+    '''             ROperator have internal equivalents.
     '''             <para>
-    '''             Note: This variable is only relevant in the string case, as RFunction and
-    '''             ROperator have internal equivalents.</para>
+    '''             Note: Both bToBeAssigned and bIsAssigned are needed. 
+    '''             bToBeAssigned defines if the R command actually needs to be defined.
+    '''             bIsAssigned defines if the R command has already been defined (only relevent 
+    '''             if bToBeAssigned is true).
+    '''             </para>
     ''' </summary>
     Public bIsAssigned As Boolean = False
 
