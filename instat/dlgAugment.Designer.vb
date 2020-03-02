@@ -26,6 +26,8 @@ Partial Class dlgAugment
         Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblModels = New System.Windows.Forms.Label()
         Me.ucrModelReceiver = New instat.ucrReceiverMultiple()
+        Me.ucrChkDisplayInOutput = New instat.ucrCheck()
+        Me.ucrSaveNewDataFrame = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -67,11 +69,29 @@ Partial Class dlgAugment
         Me.ucrModelReceiver.TabIndex = 3
         Me.ucrModelReceiver.ucrSelector = Nothing
         '
+        'ucrChkDisplayInOutput
+        '
+        Me.ucrChkDisplayInOutput.Checked = False
+        Me.ucrChkDisplayInOutput.Location = New System.Drawing.Point(13, 206)
+        Me.ucrChkDisplayInOutput.Name = "ucrChkDisplayInOutput"
+        Me.ucrChkDisplayInOutput.Size = New System.Drawing.Size(287, 20)
+        Me.ucrChkDisplayInOutput.TabIndex = 4
+        '
+        'ucrSaveNewDataFrame
+        '
+        Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(13, 245)
+        Me.ucrSaveNewDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
+        Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(287, 34)
+        Me.ucrSaveNewDataFrame.TabIndex = 5
+        '
         'dlgAugment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(423, 347)
+        Me.Controls.Add(Me.ucrSaveNewDataFrame)
+        Me.Controls.Add(Me.ucrChkDisplayInOutput)
         Me.Controls.Add(Me.ucrModelReceiver)
         Me.Controls.Add(Me.lblModels)
         Me.Controls.Add(Me.ucrModelSelector)
@@ -92,4 +112,6 @@ Partial Class dlgAugment
     Friend WithEvents ucrModelSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblModels As Label
     Friend WithEvents ucrModelReceiver As ucrReceiverMultiple
+    Friend WithEvents ucrSaveNewDataFrame As ucrSave
+    Friend WithEvents ucrChkDisplayInOutput As ucrCheck
 End Class
