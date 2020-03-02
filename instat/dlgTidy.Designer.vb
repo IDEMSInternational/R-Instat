@@ -27,6 +27,8 @@ Partial Class dlgTidy
         Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblModels = New System.Windows.Forms.Label()
         Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
+        Me.ucrChkDisplayInOutput = New instat.ucrCheck()
+        Me.UcrSave1 = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -56,10 +58,23 @@ Partial Class dlgTidy
         Me.UcrReceiverMultiple1.strNcFilePath = ""
         Me.UcrReceiverMultiple1.ucrSelector = Nothing
         '
+        'ucrChkDisplayInOutput
+        '
+        Me.ucrChkDisplayInOutput.Checked = False
+        resources.ApplyResources(Me.ucrChkDisplayInOutput, "ucrChkDisplayInOutput")
+        Me.ucrChkDisplayInOutput.Name = "ucrChkDisplayInOutput"
+        '
+        'UcrSave1
+        '
+        resources.ApplyResources(Me.UcrSave1, "UcrSave1")
+        Me.UcrSave1.Name = "UcrSave1"
+        '
         'dlgTidy
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.UcrSave1)
+        Me.Controls.Add(Me.ucrChkDisplayInOutput)
         Me.Controls.Add(Me.UcrReceiverMultiple1)
         Me.Controls.Add(Me.lblModels)
         Me.Controls.Add(Me.ucrModelSelector)
@@ -77,4 +92,6 @@ Partial Class dlgTidy
     Friend WithEvents ucrModelSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblModels As Label
     Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
+    Friend WithEvents UcrSave1 As ucrSave
+    Friend WithEvents ucrChkDisplayInOutput As ucrCheck
 End Class
