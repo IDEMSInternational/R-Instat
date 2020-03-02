@@ -22,24 +22,37 @@ Partial Class dlgAugment
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
-        'UcrButtons1
+        'ucrBase
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(13, 292)
-        Me.UcrButtons1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(547, 64)
-        Me.UcrButtons1.TabIndex = 0
+        Me.ucrBase.Location = New System.Drawing.Point(10, 288)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 0
+        '
+        'ucrModelSelector
+        '
+        Me.ucrModelSelector.bDropUnusedFilterLevels = False
+        Me.ucrModelSelector.bShowHiddenColumns = False
+        Me.ucrModelSelector.bUseCurrentFilter = True
+        Me.ucrModelSelector.Location = New System.Drawing.Point(9, 9)
+        Me.ucrModelSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrModelSelector.Name = "ucrModelSelector"
+        Me.ucrModelSelector.Size = New System.Drawing.Size(210, 180)
+        Me.ucrModelSelector.TabIndex = 1
         '
         'dlgAugment
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(564, 369)
-        Me.Controls.Add(Me.UcrButtons1)
+        Me.ClientSize = New System.Drawing.Size(423, 347)
+        Me.Controls.Add(Me.ucrModelSelector)
+        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgAugment"
@@ -49,5 +62,6 @@ Partial Class dlgAugment
 
     End Sub
 
-    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrModelSelector As ucrSelectorByDataFrameAddRemove
 End Class
