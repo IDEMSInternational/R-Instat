@@ -204,28 +204,28 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>541, 450</value>
   </data>
-  <data name="UcrSave1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrSaveNewDataFrame.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 296</value>
   </data>
-  <data name="UcrSave1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrSaveNewDataFrame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 6, 5, 6</value>
   </data>
-  <data name="UcrSave1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrSaveNewDataFrame.Size" type="System.Drawing.Size, System.Drawing">
     <value>311, 42</value>
   </data>
-  <data name="UcrSave1.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrSaveNewDataFrame.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;UcrSave1.Name" xml:space="preserve">
-    <value>UcrSave1</value>
+  <data name="&gt;&gt;ucrSaveNewDataFrame.Name" xml:space="preserve">
+    <value>ucrSaveNewDataFrame</value>
   </data>
-  <data name="&gt;&gt;UcrSave1.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrSaveNewDataFrame.Type" xml:space="preserve">
     <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrSave1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrSaveNewDataFrame.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;UcrSave1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrSaveNewDataFrame.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ucrChkDisplayInOutput.Location" type="System.Drawing.Point, System.Drawing">
@@ -264,28 +264,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="UcrReceiverMultiple1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrModelReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>375, 40</value>
   </data>
-  <data name="UcrReceiverMultiple1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrModelReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="UcrReceiverMultiple1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrModelReceiver.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 123</value>
   </data>
-  <data name="UcrReceiverMultiple1.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrModelReceiver.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;UcrReceiverMultiple1.Name" xml:space="preserve">
-    <value>UcrReceiverMultiple1</value>
+  <data name="&gt;&gt;ucrModelReceiver.Name" xml:space="preserve">
+    <value>ucrModelReceiver</value>
   </data>
-  <data name="&gt;&gt;UcrReceiverMultiple1.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrModelReceiver.Type" xml:space="preserve">
     <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrReceiverMultiple1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrModelReceiver.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;UcrReceiverMultiple1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrModelReceiver.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
 </root>
