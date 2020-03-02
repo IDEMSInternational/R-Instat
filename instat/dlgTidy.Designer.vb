@@ -26,6 +26,7 @@ Partial Class dlgTidy
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblModels = New System.Windows.Forms.Label()
+        Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -46,10 +47,20 @@ Partial Class dlgTidy
         resources.ApplyResources(Me.lblModels, "lblModels")
         Me.lblModels.Name = "lblModels"
         '
+        'UcrReceiverMultiple1
+        '
+        Me.UcrReceiverMultiple1.frmParent = Me
+        resources.ApplyResources(Me.UcrReceiverMultiple1, "UcrReceiverMultiple1")
+        Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
+        Me.UcrReceiverMultiple1.Selector = Nothing
+        Me.UcrReceiverMultiple1.strNcFilePath = ""
+        Me.UcrReceiverMultiple1.ucrSelector = Nothing
+        '
         'dlgTidy
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.UcrReceiverMultiple1)
         Me.Controls.Add(Me.lblModels)
         Me.Controls.Add(Me.ucrModelSelector)
         Me.Controls.Add(Me.ucrBase)
@@ -65,4 +76,5 @@ Partial Class dlgTidy
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrModelSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblModels As Label
+    Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
 End Class
