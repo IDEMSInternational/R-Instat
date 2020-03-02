@@ -24,6 +24,8 @@ Partial Class dlgAugment
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblModels = New System.Windows.Forms.Label()
+        Me.ucrModelReceiver = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -44,11 +46,34 @@ Partial Class dlgAugment
         Me.ucrModelSelector.Size = New System.Drawing.Size(210, 180)
         Me.ucrModelSelector.TabIndex = 1
         '
+        'lblModels
+        '
+        Me.lblModels.AutoSize = True
+        Me.lblModels.Location = New System.Drawing.Point(318, 13)
+        Me.lblModels.Name = "lblModels"
+        Me.lblModels.Size = New System.Drawing.Size(41, 13)
+        Me.lblModels.TabIndex = 2
+        Me.lblModels.Text = "Models"
+        '
+        'ucrModelReceiver
+        '
+        Me.ucrModelReceiver.frmParent = Me
+        Me.ucrModelReceiver.Location = New System.Drawing.Point(294, 35)
+        Me.ucrModelReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrModelReceiver.Name = "ucrModelReceiver"
+        Me.ucrModelReceiver.Selector = Nothing
+        Me.ucrModelReceiver.Size = New System.Drawing.Size(120, 100)
+        Me.ucrModelReceiver.strNcFilePath = ""
+        Me.ucrModelReceiver.TabIndex = 3
+        Me.ucrModelReceiver.ucrSelector = Nothing
+        '
         'dlgAugment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(423, 347)
+        Me.Controls.Add(Me.ucrModelReceiver)
+        Me.Controls.Add(Me.lblModels)
         Me.Controls.Add(Me.ucrModelSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -59,9 +84,12 @@ Partial Class dlgAugment
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Augment"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrModelSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents lblModels As Label
+    Friend WithEvents ucrModelReceiver As ucrReceiverMultiple
 End Class
