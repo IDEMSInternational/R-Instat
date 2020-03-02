@@ -25,6 +25,7 @@ Partial Class dlgTidy
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTidy))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblModels = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -40,10 +41,16 @@ Partial Class dlgTidy
         resources.ApplyResources(Me.ucrModelSelector, "ucrModelSelector")
         Me.ucrModelSelector.Name = "ucrModelSelector"
         '
+        'lblModels
+        '
+        resources.ApplyResources(Me.lblModels, "lblModels")
+        Me.lblModels.Name = "lblModels"
+        '
         'dlgTidy
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblModels)
         Me.Controls.Add(Me.ucrModelSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -51,9 +58,11 @@ Partial Class dlgTidy
         Me.MinimizeBox = False
         Me.Name = "dlgTidy"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrModelSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents lblModels As Label
 End Class
