@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrReceiverSingleNew
-    Inherits System.Windows.Forms.UserControl
+    Inherits instat.ucrReceiver
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class ucrReceiverSingleNew
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.cboBox = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
@@ -28,7 +28,7 @@ Partial Class ucrReceiverSingleNew
         'cboBox
         '
         Me.cboBox.FormattingEnabled = True
-        Me.cboBox.Location = New System.Drawing.Point(3, 3)
+        Me.cboBox.Location = New System.Drawing.Point(68, 75)
         Me.cboBox.Name = "cboBox"
         Me.cboBox.Size = New System.Drawing.Size(144, 21)
         Me.cboBox.TabIndex = 0
@@ -39,7 +39,7 @@ Partial Class ucrReceiverSingleNew
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cboBox)
         Me.Name = "ucrReceiverSingleNew"
-        Me.Size = New System.Drawing.Size(150, 29)
+        Me.Size = New System.Drawing.Size(261, 127)
         Me.ResumeLayout(False)
 
     End Sub
