@@ -403,6 +403,8 @@ Public Class dlgImportDataset
         SetRCodeForControls(True)
         RefreshFrameView()
         dctSelectedExcelSheets.Clear()
+        clbSheets.Items.Clear() 'reset this here. Not set by R code
+        ucrInputMissingValueStringExcel.SetText("") 'reset this here. Not set by R code
         TestOkEnabled()
     End Sub
 
@@ -616,8 +618,12 @@ Public Class dlgImportDataset
             strFileType = ""
         End If
         If strFileType <> "" AndAlso strFileType <> "RDS" Then
-            ucrSaveFile.Show()
-            ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
+            'don't ovewrite the name for excel sheets if there is a selected sheet name
+            If (strFileType <> "XLSX" OrElse strFileType <> "XLS") AndAlso clbSheets.CheckedItems.Count = 0 Then
+                ucrSaveFile.Show()
+                ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
+            End If
+
         Else
             ucrSaveFile.Hide()
         End If
