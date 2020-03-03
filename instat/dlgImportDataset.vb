@@ -1017,7 +1017,9 @@ Public Class dlgImportDataset
         Dim strMissingValue As String
 
         'if length is < 2 return an R string else return a vector of strings for R
-        If arrStr.Length < 2 Then
+        If arrStr.Length = 0 Then
+            strMissingValue = ""
+        ElseIf arrStr.Length = 1 Then
             strMissingValue = Chr(34) & ucrInputMissingValueStringExcel.GetText() & Chr(34)
         Else
             strMissingValue = ""
