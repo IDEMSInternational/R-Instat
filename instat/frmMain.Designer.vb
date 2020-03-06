@@ -1018,13 +1018,13 @@ Partial Class frmMain
         '
         'mnuModelUseModelTidy
         '
-        resources.ApplyResources(Me.mnuModelUseModelTidy, "mnuModelUseModelTidy")
         Me.mnuModelUseModelTidy.Name = "mnuModelUseModelTidy"
+        resources.ApplyResources(Me.mnuModelUseModelTidy, "mnuModelUseModelTidy")
         '
         'mnuModelUseModelAugment
         '
-        resources.ApplyResources(Me.mnuModelUseModelAugment, "mnuModelUseModelAugment")
         Me.mnuModelUseModelAugment.Name = "mnuModelUseModelAugment"
+        resources.ApplyResources(Me.mnuModelUseModelAugment, "mnuModelUseModelAugment")
         '
         'ToolStripSeparator58
         '
