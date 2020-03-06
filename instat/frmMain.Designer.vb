@@ -1013,8 +1013,8 @@ Partial Class frmMain
         '
         'mnuModelUseModelGlance
         '
-        resources.ApplyResources(Me.mnuModelUseModelGlance, "mnuModelUseModelGlance")
         Me.mnuModelUseModelGlance.Name = "mnuModelUseModelGlance"
+        resources.ApplyResources(Me.mnuModelUseModelGlance, "mnuModelUseModelGlance")
         '
         'mnuModelUseModelTidy
         '

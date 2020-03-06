@@ -2118,4 +2118,8 @@ Public Class frmMain
     Private Sub mnuModelUseModelUseModelKeyboard_Click(sender As Object, e As EventArgs) Handles mnuModelUseModelUseModelKeyboard.Click
         dlgUseModel.ShowDialog()
     End Sub
+
+    Private Sub mnuModelUseModelGlance_Click(sender As Object, e As EventArgs) Handles mnuModelUseModelGlance.Click
+        dlgGlance.ShowDialog()
+    End Sub
 End Class
