@@ -1767,10 +1767,6 @@ Public Class frmMain
         dlgParallelCoordinatePlot.ShowDialog()
     End Sub
 
-    Private Sub mnuModelHypothesisTests_Click(sender As Object, e As EventArgs) Handles mnuModelHypothesisTests.Click
-        dlgHypothesisTestsCalculator.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareColumnGenerateDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateGenerateDate.Click
         dlgRegularSequence.bNumericIsDefault = False
         dlgRegularSequence.ShowDialog()
@@ -2129,5 +2125,9 @@ Public Class frmMain
 
     Private Sub mnuModelUseModelAugment_Click(sender As Object, e As EventArgs) Handles mnuModelUseModelAugment.Click
         dlgAugment.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelFitModelHypothesisTestsKeyboard_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelHypothesisTestsKeyboard.Click
+        dlgHypothesisTestsCalculator.ShowDialog()
     End Sub
 End Class
