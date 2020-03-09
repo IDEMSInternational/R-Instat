@@ -72,12 +72,12 @@ Partial Class ucrFilter
         Me.ucrLogicalCombobox = New instat.ucrInputComboBox()
         Me.ucrDatePicker = New instat.ucrDateTimePicker()
         Me.ucrInputFilterName = New instat.ucrInputComboBox()
-        Me.ucrValueForFilter = New instat.ucrInputTextBox()
         Me.ucrFilterPreview = New instat.ucrInputTextBox()
         Me.ucrFilterOperation = New instat.ucrInputComboBox()
         Me.ucrFactorLevels = New instat.ucrFactor()
         Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverExpression = New instat.ucrReceiverExpression()
         Me.grpBasic.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -303,14 +303,6 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.ucrInputFilterName, "ucrInputFilterName")
         Me.ucrInputFilterName.Name = "ucrInputFilterName"
         '
-        'ucrValueForFilter
-        '
-        Me.ucrValueForFilter.AddQuotesIfUnrecognised = True
-        Me.ucrValueForFilter.IsMultiline = False
-        Me.ucrValueForFilter.IsReadOnly = False
-        resources.ApplyResources(Me.ucrValueForFilter, "ucrValueForFilter")
-        Me.ucrValueForFilter.Name = "ucrValueForFilter"
-        '
         'ucrFilterPreview
         '
         Me.ucrFilterPreview.AddQuotesIfUnrecognised = True
@@ -352,10 +344,20 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.ucrSelectorForFitler, "ucrSelectorForFitler")
         Me.ucrSelectorForFitler.Name = "ucrSelectorForFitler"
         '
+        'ucrReceiverExpression
+        '
+        Me.ucrReceiverExpression.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverExpression, "ucrReceiverExpression")
+        Me.ucrReceiverExpression.Name = "ucrReceiverExpression"
+        Me.ucrReceiverExpression.Selector = Nothing
+        Me.ucrReceiverExpression.strNcFilePath = ""
+        Me.ucrReceiverExpression.ucrSelector = Nothing
+        '
         'ucrFilter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverExpression)
         Me.Controls.Add(Me.grpBasic)
         Me.Controls.Add(Me.ucrLogicalCombobox)
         Me.Controls.Add(Me.ucrDatePicker)
@@ -365,7 +367,6 @@ Partial Class ucrFilter
         Me.Controls.Add(Me.mcdEditCondition)
         Me.Controls.Add(Me.cmdClearConditions)
         Me.Controls.Add(Me.lblFilterBy)
-        Me.Controls.Add(Me.ucrValueForFilter)
         Me.Controls.Add(Me.ucrFilterPreview)
         Me.Controls.Add(Me.lblFilterPreview)
         Me.Controls.Add(Me.lstFilters)
@@ -393,7 +394,6 @@ Partial Class ucrFilter
     Friend WithEvents lstFilters As ListView
     Friend WithEvents lblFilterPreview As Label
     Friend WithEvents ucrFilterPreview As ucrInputTextBox
-    Friend WithEvents ucrValueForFilter As ucrInputTextBox
     Friend WithEvents lblFilterBy As Label
     Friend WithEvents cmdClearConditions As Button
     Friend WithEvents mcdEditCondition As Button
@@ -422,4 +422,5 @@ Partial Class ucrFilter
     Friend WithEvents cmd2 As Button
     Friend WithEvents cmd0 As Button
     Friend WithEvents cmd1 As Button
+    Friend WithEvents ucrReceiverExpression As ucrReceiverExpression
 End Class

@@ -87,7 +87,7 @@ Public Class ucrFilter
     End Sub
 
     Private Sub VariableTypeProperties()
-        ucrValueForFilter.Visible = False
+        ucrReceiverExpression.Visible = False
         lblSelectLevels.Visible = False
         ucrFactorLevels.Visible = False
         cmdToggleSelectAll.Visible = False
@@ -111,7 +111,7 @@ Public Class ucrFilter
                         Case "date"
                             ucrDatePicker.Visible = True
                         Case Else
-                            ucrValueForFilter.Visible = True
+                            ucrReceiverExpression.Visible = True
                     End Select
                     grpBasic.Visible = True
                 End If
@@ -136,7 +136,7 @@ Public Class ucrFilter
                             Case "date"
                                 cmdAddCondition.Enabled = Not IsNothing(ucrDatePicker.DateValue())
                             Case Else
-                                cmdAddCondition.Enabled = Not ucrValueForFilter.IsEmpty
+                                cmdAddCondition.Enabled = Not ucrReceiverExpression.IsEmpty
                         End Select
                 End Select
             End If
@@ -153,7 +153,7 @@ Public Class ucrFilter
         End If
     End Sub
 
-    Private Sub ucrValueForFilter_ContentsChanged() Handles ucrValueForFilter.ContentsChanged
+    Private Sub ucrValueForFilter_ContentsChanged()
         CheckAddEnabled()
     End Sub
 
@@ -192,14 +192,14 @@ Public Class ucrFilter
                 strCondition = ""
             Else
                 If ucrFilterByReceiver.strCurrDataType.ToLower = "character" Then
-                    strCondition = Chr(34) & ucrValueForFilter.GetText() & Chr(34)
+                    strCondition = Chr(34) & ucrReceiverExpression.GetText() & Chr(34)
                 ElseIf ucrFilterByReceiver.strCurrDataType.ToLower = "date" Then
                     clsDateFunction = ucrDatePicker.ValueAsRDate()
                     strCondition = clsDateFunction.ToScript()
                 ElseIf ucrFilterByReceiver.strCurrDataType.ToLower = "logical" Then
                     strCondition = ucrLogicalCombobox.GetText()
                 Else
-                    strCondition = ucrValueForFilter.GetText()
+                    strCondition = ucrReceiverExpression.GetText()
                 End If
             End If
         End If
@@ -284,78 +284,78 @@ Public Class ucrFilter
     End Sub
 
     Private Sub cmd7_Click(sender As Object, e As EventArgs) Handles cmd7.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("7")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("7")
     End Sub
 
     Private Sub cmd8_Click(sender As Object, e As EventArgs) Handles cmd8.Click
-        ' ucrLogicalCombobox.AddToReceiverAtCursorPosition("8")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("8")
     End Sub
 
     Private Sub cmd9_Click(sender As Object, e As EventArgs) Handles cmd9.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("9")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("9")
     End Sub
 
     Private Sub cmdDivide_Click(sender As Object, e As EventArgs) Handles cmdDivide.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("/")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("/")
     End Sub
 
     Private Sub cmdDot_Click(sender As Object, e As EventArgs) Handles cmdDot.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition(".")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition(".")
     End Sub
 
     Private Sub cmd4_Click(sender As Object, e As EventArgs) Handles cmd4.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("4")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("4")
     End Sub
 
     Private Sub cmd5_Click(sender As Object, e As EventArgs) Handles cmd5.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("5")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("5")
     End Sub
 
     Private Sub cmd6_Click(sender As Object, e As EventArgs) Handles cmd6.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("6")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("6")
     End Sub
 
     Private Sub cmdMultiply_Click(sender As Object, e As EventArgs) Handles cmdMultiply.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("*")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("*")
     End Sub
 
     Private Sub cmdPower_Click(sender As Object, e As EventArgs) Handles cmdPower.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("^")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("^")
     End Sub
 
     Private Sub cmd1_Click(sender As Object, e As EventArgs) Handles cmd1.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("1")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("1")
     End Sub
 
     Private Sub cmd2_Click(sender As Object, e As EventArgs) Handles cmd2.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("2")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("2")
     End Sub
 
     Private Sub cmd3_Click(sender As Object, e As EventArgs) Handles cmd3.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("3")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("3")
     End Sub
 
     Private Sub cmdMinus_Click(sender As Object, e As EventArgs) Handles cmdMinus.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("-")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("-")
     End Sub
 
     Private Sub cmdComma_Click(sender As Object, e As EventArgs) Handles cmdComma.Click
-        ' ucrLogicalCombobox.AddToReceiverAtCursorPosition(",")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition(",")
     End Sub
 
     Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("0")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("0")
     End Sub
 
     Private Sub cmdBrackets_Click(sender As Object, e As EventArgs) Handles cmdBrackets.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("()")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("()")
     End Sub
 
     Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
-        'ucrLogicalCombobox.AddToReceiverAtCursorPosition("+")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("+")
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
-        'ucrLogicalCombobox.ClearCodeAndParameters()
+        ucrReceiverExpression.ClearCodeAndParameters()
     End Sub
 End Class
