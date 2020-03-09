@@ -319,10 +319,10 @@
     <value>0</value>
   </data>
   <data name="ucrNudTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 165</value>
+    <value>80, 165</value>
   </data>
   <data name="ucrNudTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 20</value>
+    <value>82, 20</value>
   </data>
   <data name="ucrNudTo.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -382,10 +382,10 @@
     <value>5</value>
   </data>
   <data name="ucrNudFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 139</value>
+    <value>80, 139</value>
   </data>
   <data name="ucrNudFrom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 20</value>
+    <value>82, 20</value>
   </data>
   <data name="ucrNudFrom.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
