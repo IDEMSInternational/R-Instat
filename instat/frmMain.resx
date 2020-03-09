@@ -146,7 +146,7 @@
     <value>Rating Data...</value>
   </data>
   <data name="mnuDescribeOneVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeOneVariable.Text" xml:space="preserve">
     <value>One Variable</value>
@@ -173,7 +173,7 @@
     <value>Frequencies...</value>
   </data>
   <data name="mnuDescribeTwoVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeTwoVariables.Text" xml:space="preserve">
     <value>Two Variables</value>
@@ -207,7 +207,7 @@
     <value>Frequencies</value>
   </data>
   <data name="mnuDescribeThreeVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeThreeVariable.Text" xml:space="preserve">
     <value>Three Variables</value>
@@ -300,7 +300,7 @@
     <value>Mosaic Plot...</value>
   </data>
   <data name="mnuDescribeSpecific.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeSpecific.Text" xml:space="preserve">
     <value>Specific</value>
@@ -336,13 +336,13 @@
     <value>Use Summaries...</value>
   </data>
   <data name="mnuDescribeGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeGeneral.Text" xml:space="preserve">
     <value>General</value>
   </data>
   <data name="ToolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mnuDescribeMultivariateCorrelations.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 22</value>
@@ -363,22 +363,22 @@
     <value>Canonical Correlations...</value>
   </data>
   <data name="mnuDescribeMultivariate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeMultivariate.Text" xml:space="preserve">
     <value>Multivariate</value>
   </data>
   <data name="ToolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mnuDescribeUseGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeUseGraph.Text" xml:space="preserve">
     <value>Use Graph...</value>
   </data>
   <data name="mnuDescribeCombineGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeCombineGraph.Text" xml:space="preserve">
     <value>Combine Graphs...</value>
@@ -387,13 +387,13 @@
     <value>False</value>
   </data>
   <data name="mnuDescribeThemes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeThemes.Text" xml:space="preserve">
     <value>Themes...</value>
   </data>
   <data name="mnuDescribeViewGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuDescribeViewGraph.Text" xml:space="preserve">
     <value>View Graph...</value>
@@ -489,7 +489,7 @@
     <value>Fit Model</value>
   </data>
   <data name="mnuModelCompareModelsOneVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>149, 22</value>
   </data>
   <data name="mnuModelCompareModelsOneVariable.Text" xml:space="preserve">
     <value>One Variable...</value>
@@ -549,7 +549,7 @@
     <value>Use Model</value>
   </data>
   <data name="mnuModelOtherOneVariableExactResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelOtherOneVariableExactResults.Text" xml:space="preserve">
     <value>Exact Results...</value>
@@ -558,7 +558,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelOtherOneVariableSampleSummaryData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelOtherOneVariableSampleSummaryData.Text" xml:space="preserve">
     <value>Summary Data...</value>
@@ -567,7 +567,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelOtherOneVariableNonParametric.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelOtherOneVariableNonParametric.Text" xml:space="preserve">
     <value>Non Parametric...</value>
@@ -576,7 +576,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelOtherOneVariableGoodnessofFit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelOtherOneVariableGoodnessofFit.Text" xml:space="preserve">
     <value>Goodness of Fit...</value>
@@ -589,6 +589,9 @@
   </data>
   <data name="mnuModelOtherOneVariable.Text" xml:space="preserve">
     <value>Other (One Variable)</value>
+  </data>
+  <data name="mnuModelOtherOneVariable.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="mnuModelOtherTwoVariablesTwoSamples.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -644,6 +647,9 @@
   <data name="mnuModelOtherTwoVariables.Text" xml:space="preserve">
     <value>Other (Two Variables)</value>
   </data>
+  <data name="mnuModelOtherTwoVariables.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="mnuModelOtherThreeVariablesSimpleWithGroups.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -674,11 +680,14 @@
   <data name="mnuModelOtherThreeVariables.Text" xml:space="preserve">
     <value>Other (Three Variable)</value>
   </data>
+  <data name="mnuModelOtherThreeVariables.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="mnuModelOtherGeneralANOVAGeneral.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="mnuModelOtherGeneralANOVAGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelOtherGeneralANOVAGeneral.Text" xml:space="preserve">
     <value>ANOVA General...</value>
@@ -687,7 +696,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelOtherGeneralRegression.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelOtherGeneralRegression.Text" xml:space="preserve">
     <value>Regression...</value>
@@ -696,7 +705,7 @@
     <value>False</value>
   </data>
   <data name="mnuModelOtherGeneralLogLinear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuModelOtherGeneralLogLinear.Text" xml:space="preserve">
     <value>Log Linear...</value>
@@ -709,6 +718,9 @@
   </data>
   <data name="mnuModelOtherGeneral.Text" xml:space="preserve">
     <value>Other (General)</value>
+  </data>
+  <data name="mnuModelOtherGeneral.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="mnuModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 20</value>
@@ -6441,6 +6453,12 @@
   <data name="&gt;&gt;ToolStripSeparator57.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuModelFitModelHypothesisTestsKeyboard.Name" xml:space="preserve">
+    <value>mnuModelFitModelHypothesisTestsKeyboard</value>
+  </data>
+  <data name="&gt;&gt;mnuModelFitModelHypothesisTestsKeyboard.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuModelFitModelModelKeyboard.Name" xml:space="preserve">
     <value>mnuModelFitModelModelKeyboard</value>
   </data>
@@ -9283,12 +9301,6 @@
     <value>mnuLogFile</value>
   </data>
   <data name="&gt;&gt;mnuLogFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuModelFitModelHypothesisTestsKeyboard.Name" xml:space="preserve">
-    <value>mnuModelFitModelHypothesisTestsKeyboard</value>
-  </data>
-  <data name="&gt;&gt;mnuModelFitModelHypothesisTestsKeyboard.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

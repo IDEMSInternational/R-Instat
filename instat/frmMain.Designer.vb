@@ -101,6 +101,7 @@ Partial Class frmMain
         Me.ToolStripSeparator24 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuModelFitModelGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator57 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuModelFitModelHypothesisTestsKeyboard = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelFitModelModelKeyboard = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelCompareModels = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelCompareModelsOneVariable = New System.Windows.Forms.ToolStripMenuItem()
@@ -589,7 +590,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuModelFitModelHypothesisTestsKeyboard = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -962,6 +962,11 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator57.Name = "ToolStripSeparator57"
         resources.ApplyResources(Me.ToolStripSeparator57, "ToolStripSeparator57")
+        '
+        'mnuModelFitModelHypothesisTestsKeyboard
+        '
+        Me.mnuModelFitModelHypothesisTestsKeyboard.Name = "mnuModelFitModelHypothesisTestsKeyboard"
+        resources.ApplyResources(Me.mnuModelFitModelHypothesisTestsKeyboard, "mnuModelFitModelHypothesisTestsKeyboard")
         '
         'mnuModelFitModelModelKeyboard
         '
@@ -3742,11 +3747,6 @@ Partial Class frmMain
         '
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
-        '
-        'mnuModelFitModelHypothesisTestsKeyboard
-        '
-        Me.mnuModelFitModelHypothesisTestsKeyboard.Name = "mnuModelFitModelHypothesisTestsKeyboard"
-        resources.ApplyResources(Me.mnuModelFitModelHypothesisTestsKeyboard, "mnuModelFitModelHypothesisTestsKeyboard")
         '
         'frmMain
         '
