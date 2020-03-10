@@ -146,12 +146,16 @@ Public Class ucrNud
     End Function
 
     Public Function GetText() As String
-        Return CStr(Value)
+        If nudUpDown.Text = "" Then
+            Return ""
+        Else
+            Return CStr(Value)
+        End If
     End Function
 
     Public Overrides Sub SetToValue(objTemp As Object)
         Dim dNewValue As Decimal
-        If objTemp Is Nothing Then
+        If objTemp Is Nothing OrElse objTemp.ToString() = "" Then
             'If no value reset to a default value
             Value = nudUpDown.Minimum
         Else
