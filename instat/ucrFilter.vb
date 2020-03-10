@@ -94,7 +94,7 @@ Public Class ucrFilter
         ucrFilterOperation.Visible = False
         ucrLogicalCombobox.Visible = False
         ucrDatePicker.Visible = False
-        grpBasic.Visible = False
+        grpNumeric.Visible = False
         If Not ucrFilterByReceiver.IsEmpty() Then
             If ucrFilterByReceiver.strCurrDataType.ToLower.Contains("factor") Then
                 lblSelectLevels.Visible = True
@@ -113,18 +113,19 @@ Public Class ucrFilter
                         Case Else
                             ucrReceiverExpression.Visible = True
                     End Select
-                    grpBasic.Visible = True
+                    grpNumeric.Visible = True
                 End If
             End If
         End If
     End Sub
 
     Private Sub CheckAddEnabled()
-        If ucrFilterByReceiver.IsEmpty() Then
+        If ucrFilterByReceiver.IsEmpty() AndAlso ucrReceiverExpression.IsEmpty() Then
             cmdAddCondition.Enabled = False
         Else
             If ucrFilterByReceiver.strCurrDataType.ToLower.Contains("factor") Then
                 cmdAddCondition.Enabled = Not String.IsNullOrEmpty(ucrFactorLevels.GetSelectedLevels())
+
             Else
                 Select Case ucrFilterOperation.GetText()
                     Case "is.na", "! is.na"
@@ -168,6 +169,10 @@ Public Class ucrFilter
 
     Private Sub ucrFilterOperation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFilterOperation.ControlContentsChanged
         VariableTypeProperties()
+        CheckAddEnabled()
+    End Sub
+
+    Private Sub ucrReceiverExpression_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpression.ControlContentsChanged
         CheckAddEnabled()
     End Sub
 
