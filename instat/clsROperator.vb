@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+' deals with R-commands of the form: __+__
 Public Class ROperator
     Inherits RCodeStructure
     Public bForceIncludeOperation As Boolean = False
@@ -35,24 +36,27 @@ Public Class ROperator
 
     Public Overrides Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
         Dim strAdjustedOperation As String
+        'TODO SJL Parts of this function seem to duplicate the ToScript function in RFunction. Refactor?
 
         'Parameters are sorted in the appropriate order and then the script is built.
         SortParameters()
+        'if needed, put spaces around assignment operator (e.g. " <- ")
         If bSpaceAroundOperation Then
             strAdjustedOperation = Chr(32) & strOperation & Chr(32)
         Else
             strAdjustedOperation = strOperation
         End If
+        'if operator has parameters
         If clsParameters.Count > 0 Then
             If clsParameters(0) IsNot Nothing Then
+                'if first parameter is an operator that needs brackets, then add brackets
                 If clsParameters(0).bIsOperator AndAlso bBrackets Then
                     strTemp = strTemp & "(" & clsParameters(0).ToScript(strScript) & ")"
-                Else
+                Else 'else just add the parameter without brackets
                     strTemp = strTemp & clsParameters(0).ToScript(strScript)
                 End If
                 'If there's only one parameter and bForceIncludeOperation then we include the operator
                 'The position of the operator depends on the parameter position
-
                 If bForceIncludeOperation AndAlso clsParameters.Count = 1 Then
                     If clsParameters(0).Position = 0 Then
                         strTemp = strTemp & strAdjustedOperation
@@ -61,15 +65,16 @@ Public Class ROperator
                     End If
                 End If
             Else
-                'message
+                'TODO message
             End If
+            'for each parameter (starting from 2nd parameter)
             For Each clsParam In clsParameters.GetRange(1, clsParameters.Count - 1)
-                'If bIncludeOperation Then
                 strTemp = strTemp & strAdjustedOperation
+                'if parameter is an operator that needs brackets, then add brackets
                 If bAllBrackets AndAlso (clsParam.bIsFunction OrElse clsParam.bIsOperator) Then
                     strTemp = strTemp & "(" & clsParam.ToScript(strScript) & ")"
-                Else
-                    strTemp = strTemp & clsParam.ToScript(strScript)
+                Else 'else just add the parameter without brackets
+                    strTemp = strTemp & clsParam.ToScript(strScript) 'e.g. set 'strTemp' to "data_book <- DataBook$new()"
                 End If
             Next
             If bToScriptAsRString Then
