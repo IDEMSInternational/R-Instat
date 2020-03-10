@@ -49,7 +49,7 @@ Partial Class ucrFilter
         Me.mcdEditCondition = New System.Windows.Forms.Button()
         Me.cmdRemoveCondition = New System.Windows.Forms.Button()
         Me.lblNewFilterName = New System.Windows.Forms.Label()
-        Me.grpBasic = New System.Windows.Forms.GroupBox()
+        Me.grpNumeric = New System.Windows.Forms.GroupBox()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdComma = New System.Windows.Forms.Button()
         Me.cmdBrackets = New System.Windows.Forms.Button()
@@ -69,6 +69,7 @@ Partial Class ucrFilter
         Me.cmd2 = New System.Windows.Forms.Button()
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
+        Me.ucrReceiverExpression = New instat.ucrReceiverExpression()
         Me.ucrLogicalCombobox = New instat.ucrInputComboBox()
         Me.ucrDatePicker = New instat.ucrDateTimePicker()
         Me.ucrInputFilterName = New instat.ucrInputComboBox()
@@ -77,8 +78,7 @@ Partial Class ucrFilter
         Me.ucrFactorLevels = New instat.ucrFactor()
         Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverExpression = New instat.ucrReceiverExpression()
-        Me.grpBasic.SuspendLayout()
+        Me.grpNumeric.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblSelectLevels
@@ -143,30 +143,30 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.lblNewFilterName, "lblNewFilterName")
         Me.lblNewFilterName.Name = "lblNewFilterName"
         '
-        'grpBasic
+        'grpNumeric
         '
-        Me.grpBasic.Controls.Add(Me.cmdClear)
-        Me.grpBasic.Controls.Add(Me.cmdComma)
-        Me.grpBasic.Controls.Add(Me.cmdBrackets)
-        Me.grpBasic.Controls.Add(Me.cmdPower)
-        Me.grpBasic.Controls.Add(Me.cmdDivide)
-        Me.grpBasic.Controls.Add(Me.cmdPlus)
-        Me.grpBasic.Controls.Add(Me.cmdMinus)
-        Me.grpBasic.Controls.Add(Me.cmdMultiply)
-        Me.grpBasic.Controls.Add(Me.cmdDot)
-        Me.grpBasic.Controls.Add(Me.cmd9)
-        Me.grpBasic.Controls.Add(Me.cmd8)
-        Me.grpBasic.Controls.Add(Me.cmd7)
-        Me.grpBasic.Controls.Add(Me.cmd6)
-        Me.grpBasic.Controls.Add(Me.cmd5)
-        Me.grpBasic.Controls.Add(Me.cmd4)
-        Me.grpBasic.Controls.Add(Me.cmd3)
-        Me.grpBasic.Controls.Add(Me.cmd2)
-        Me.grpBasic.Controls.Add(Me.cmd0)
-        Me.grpBasic.Controls.Add(Me.cmd1)
-        resources.ApplyResources(Me.grpBasic, "grpBasic")
-        Me.grpBasic.Name = "grpBasic"
-        Me.grpBasic.TabStop = False
+        Me.grpNumeric.Controls.Add(Me.cmdClear)
+        Me.grpNumeric.Controls.Add(Me.cmdComma)
+        Me.grpNumeric.Controls.Add(Me.cmdBrackets)
+        Me.grpNumeric.Controls.Add(Me.cmdPower)
+        Me.grpNumeric.Controls.Add(Me.cmdDivide)
+        Me.grpNumeric.Controls.Add(Me.cmdPlus)
+        Me.grpNumeric.Controls.Add(Me.cmdMinus)
+        Me.grpNumeric.Controls.Add(Me.cmdMultiply)
+        Me.grpNumeric.Controls.Add(Me.cmdDot)
+        Me.grpNumeric.Controls.Add(Me.cmd9)
+        Me.grpNumeric.Controls.Add(Me.cmd8)
+        Me.grpNumeric.Controls.Add(Me.cmd7)
+        Me.grpNumeric.Controls.Add(Me.cmd6)
+        Me.grpNumeric.Controls.Add(Me.cmd5)
+        Me.grpNumeric.Controls.Add(Me.cmd4)
+        Me.grpNumeric.Controls.Add(Me.cmd3)
+        Me.grpNumeric.Controls.Add(Me.cmd2)
+        Me.grpNumeric.Controls.Add(Me.cmd0)
+        Me.grpNumeric.Controls.Add(Me.cmd1)
+        resources.ApplyResources(Me.grpNumeric, "grpNumeric")
+        Me.grpNumeric.Name = "grpNumeric"
+        Me.grpNumeric.TabStop = False
         '
         'cmdClear
         '
@@ -282,6 +282,15 @@ Partial Class ucrFilter
         Me.cmd1.Name = "cmd1"
         Me.cmd1.UseVisualStyleBackColor = True
         '
+        'ucrReceiverExpression
+        '
+        Me.ucrReceiverExpression.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverExpression, "ucrReceiverExpression")
+        Me.ucrReceiverExpression.Name = "ucrReceiverExpression"
+        Me.ucrReceiverExpression.Selector = Nothing
+        Me.ucrReceiverExpression.strNcFilePath = ""
+        Me.ucrReceiverExpression.ucrSelector = Nothing
+        '
         'ucrLogicalCombobox
         '
         Me.ucrLogicalCombobox.AddQuotesIfUnrecognised = True
@@ -344,21 +353,12 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.ucrSelectorForFitler, "ucrSelectorForFitler")
         Me.ucrSelectorForFitler.Name = "ucrSelectorForFitler"
         '
-        'ucrReceiverExpression
-        '
-        Me.ucrReceiverExpression.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverExpression, "ucrReceiverExpression")
-        Me.ucrReceiverExpression.Name = "ucrReceiverExpression"
-        Me.ucrReceiverExpression.Selector = Nothing
-        Me.ucrReceiverExpression.strNcFilePath = ""
-        Me.ucrReceiverExpression.ucrSelector = Nothing
-        '
         'ucrFilter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrReceiverExpression)
-        Me.Controls.Add(Me.grpBasic)
+        Me.Controls.Add(Me.grpNumeric)
         Me.Controls.Add(Me.ucrLogicalCombobox)
         Me.Controls.Add(Me.ucrDatePicker)
         Me.Controls.Add(Me.ucrInputFilterName)
@@ -378,7 +378,7 @@ Partial Class ucrFilter
         Me.Controls.Add(Me.ucrFilterByReceiver)
         Me.Controls.Add(Me.ucrSelectorForFitler)
         Me.Name = "ucrFilter"
-        Me.grpBasic.ResumeLayout(False)
+        Me.grpNumeric.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -402,7 +402,7 @@ Partial Class ucrFilter
     Friend WithEvents ucrInputFilterName As ucrInputComboBox
     Friend WithEvents ucrDatePicker As ucrDateTimePicker
     Friend WithEvents ucrLogicalCombobox As ucrInputComboBox
-    Friend WithEvents grpBasic As GroupBox
+    Friend WithEvents grpNumeric As GroupBox
     Friend WithEvents cmdClear As Button
     Friend WithEvents cmdComma As Button
     Friend WithEvents cmdBrackets As Button
