@@ -109,7 +109,7 @@ Public Class dlgModelling
         ucrReceiverForTestColumn.SetMeAsReceiver()
 
         ucrBase.clsRsyntax.SetCommandString("")
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm()", 1)
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm(, na.action = na.exclude)", 25)
 
 
         ucrSaveResult.Reset()
@@ -251,18 +251,18 @@ Public Class dlgModelling
     Private Sub cmdglm_Click(sender As Object, e As EventArgs) Handles cmdglm.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("glm(formula = , family = gaussian, data, weights, subset,na.action, start = NULL, etastart, mustart, offset, control = list(...), model = TRUE, method = ""glm.fit"" ,x = FALSE, y = TRUE, contrasts = NULL)", 188)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("glm(formula = , family = gaussian, data, weights, subset, na.action = na.exclude, start = NULL, etastart, mustart, offset, control = list(...), model = TRUE, method = ""glm.fit"" ,x = FALSE, y = TRUE, contrasts = NULL)", 188)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("glm()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("glm(, na.action = na.exclude)", 25)
         End If
     End Sub
 
     Private Sub cmdlm_Click(sender As Object, e As EventArgs) Handles cmdlm.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm(formula = , data, subset, weights, na.action,method = ""qr"", model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE, contrasts = NULL, offset)", 143)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm(formula = , data, subset, weights, na.action = na.exclude, method = ""qr"", model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE, contrasts = NULL, offset)", 143)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm(, na.action = na.exclude)", 25)
         End If
     End Sub
 
@@ -403,7 +403,7 @@ Public Class dlgModelling
     Private Sub cmdpolr_Click(sender As Object, e As EventArgs) Handles cmdpolr.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::polr(formula = , data, weights, start, ..., subset, na.action,contrasts = NULL, Hess = FALSE, model = TRUE, method = c(""logistic"", ""probit"", ""loglog"", ""cloglog"", ""cauchit""))", 158)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::polr(formula = , data, weights, start, ..., subset, na.action, contrasts = NULL, Hess = FALSE, model = TRUE, method = c(""logistic"", ""probit"", ""loglog"", ""cloglog"", ""cauchit""))", 158)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::polr()", 1)
         End If
@@ -443,7 +443,7 @@ Public Class dlgModelling
     Private Sub cmdlqs_Click(sender As Object, e As EventArgs) Handles cmdlqs.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::lqs(formula = , data, method = c(""lts"", ""lqs"",""lms"",""S"",""model.frame""),subset,na.action, model = TRUE, x.ret = FALSE, y.ret = FALSE, contrasts = NULL)", 150)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::lqs(formula = , data, method = c(""lts"", ""lqs"",""lms"",""S"",""model.frame""), subset,na.action, model = TRUE, x.ret = FALSE, y.ret = FALSE, contrasts = NULL)", 150)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("MASS::lqs()", 1)
         End If
