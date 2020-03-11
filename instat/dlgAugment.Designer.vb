@@ -25,16 +25,17 @@ Partial Class dlgAugment
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblModels = New System.Windows.Forms.Label()
-        Me.ucrModelReceiver = New instat.ucrReceiverMultiple()
         Me.ucrChkDisplayInOutput = New instat.ucrCheck()
         Me.ucrSaveNewDataFrame = New instat.ucrSave()
+        Me.ucrModelReceiver = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 288)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 354)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(547, 64)
         Me.ucrBase.TabIndex = 0
         '
         'ucrModelSelector
@@ -42,62 +43,64 @@ Partial Class dlgAugment
         Me.ucrModelSelector.bDropUnusedFilterLevels = False
         Me.ucrModelSelector.bShowHiddenColumns = False
         Me.ucrModelSelector.bUseCurrentFilter = True
-        Me.ucrModelSelector.Location = New System.Drawing.Point(9, 9)
+        Me.ucrModelSelector.Location = New System.Drawing.Point(12, 11)
         Me.ucrModelSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrModelSelector.Name = "ucrModelSelector"
-        Me.ucrModelSelector.Size = New System.Drawing.Size(210, 180)
+        Me.ucrModelSelector.Size = New System.Drawing.Size(280, 222)
         Me.ucrModelSelector.TabIndex = 1
         '
         'lblModels
         '
         Me.lblModels.AutoSize = True
-        Me.lblModels.Location = New System.Drawing.Point(318, 13)
+        Me.lblModels.Location = New System.Drawing.Point(424, 16)
+        Me.lblModels.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblModels.Name = "lblModels"
-        Me.lblModels.Size = New System.Drawing.Size(41, 13)
+        Me.lblModels.Size = New System.Drawing.Size(53, 17)
         Me.lblModels.TabIndex = 2
         Me.lblModels.Text = "Models"
-        '
-        'ucrModelReceiver
-        '
-        Me.ucrModelReceiver.frmParent = Me
-        Me.ucrModelReceiver.Location = New System.Drawing.Point(294, 35)
-        Me.ucrModelReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrModelReceiver.Name = "ucrModelReceiver"
-        Me.ucrModelReceiver.Selector = Nothing
-        Me.ucrModelReceiver.Size = New System.Drawing.Size(120, 100)
-        Me.ucrModelReceiver.strNcFilePath = ""
-        Me.ucrModelReceiver.TabIndex = 3
-        Me.ucrModelReceiver.ucrSelector = Nothing
         '
         'ucrChkDisplayInOutput
         '
         Me.ucrChkDisplayInOutput.Checked = False
-        Me.ucrChkDisplayInOutput.Location = New System.Drawing.Point(13, 206)
+        Me.ucrChkDisplayInOutput.Location = New System.Drawing.Point(17, 254)
+        Me.ucrChkDisplayInOutput.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrChkDisplayInOutput.Name = "ucrChkDisplayInOutput"
-        Me.ucrChkDisplayInOutput.Size = New System.Drawing.Size(287, 20)
+        Me.ucrChkDisplayInOutput.Size = New System.Drawing.Size(383, 25)
         Me.ucrChkDisplayInOutput.TabIndex = 4
         '
         'ucrSaveNewDataFrame
         '
-        Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(13, 245)
-        Me.ucrSaveNewDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(17, 302)
+        Me.ucrSaveNewDataFrame.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
-        Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(287, 34)
+        Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(383, 42)
         Me.ucrSaveNewDataFrame.TabIndex = 5
+        '
+        'ucrModelReceiver
+        '
+        Me.ucrModelReceiver.frmParent = Me
+        Me.ucrModelReceiver.Location = New System.Drawing.Point(377, 43)
+        Me.ucrModelReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrModelReceiver.Name = "ucrModelReceiver"
+        Me.ucrModelReceiver.Selector = Nothing
+        Me.ucrModelReceiver.Size = New System.Drawing.Size(160, 25)
+        Me.ucrModelReceiver.strNcFilePath = ""
+        Me.ucrModelReceiver.TabIndex = 6
+        Me.ucrModelReceiver.ucrSelector = Nothing
         '
         'dlgAugment
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 347)
+        Me.ClientSize = New System.Drawing.Size(564, 427)
+        Me.Controls.Add(Me.ucrModelReceiver)
         Me.Controls.Add(Me.ucrSaveNewDataFrame)
         Me.Controls.Add(Me.ucrChkDisplayInOutput)
-        Me.Controls.Add(Me.ucrModelReceiver)
         Me.Controls.Add(Me.lblModels)
         Me.Controls.Add(Me.ucrModelSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgAugment"
@@ -111,7 +114,7 @@ Partial Class dlgAugment
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrModelSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblModels As Label
-    Friend WithEvents ucrModelReceiver As ucrReceiverMultiple
     Friend WithEvents ucrSaveNewDataFrame As ucrSave
     Friend WithEvents ucrChkDisplayInOutput As ucrCheck
+    Friend WithEvents ucrModelReceiver As ucrReceiverSingle
 End Class
