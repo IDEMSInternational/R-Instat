@@ -354,7 +354,7 @@ Public Class ucrFilter
     End Sub
 
     Private Sub cmdBrackets_Click(sender As Object, e As EventArgs) Handles cmdBrackets.Click
-        ucrReceiverExpression.AddToReceiverAtCursorPosition("()")
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("()", 1)
     End Sub
 
     Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
@@ -362,6 +362,6 @@ Public Class ucrFilter
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
-        ucrReceiverExpression.ClearCodeAndParameters()
+        ucrReceiverExpression.Clear()
     End Sub
 End Class
