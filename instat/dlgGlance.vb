@@ -13,13 +13,13 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgGlance
     Public bfirstload As Boolean = True
     Public bReset As Boolean = True
-    Private bResetSubdialog As Boolean = False
-    Private clsRSyntax As RSyntax
-    Private clsGlance As New RFunction
+    Private clsGlance, clsList As New RFunction
+
 
     Private Sub dlgGlance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -64,13 +64,12 @@ Public Class dlgGlance
     End Sub
 
     Private Sub SetDefaults()
-
+        clsGlance = New RFunction
         ucrSaveNewDataFrame.Reset()
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 2
         clsGlance.SetRCommand("glance")
         clsGlance.SetPackageName("broom")
         ucrBase.clsRsyntax.SetBaseRFunction(clsGlance)
+
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -95,5 +94,14 @@ Public Class dlgGlance
 
     Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkDisplayinOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayinOutput.ControlValueChanged
+        If ucrChkDisplayinOutput.Checked Then
+            'ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+            ucrBase.clsRsyntax.iCallType = 2
+        Else
+
+        End If
     End Sub
 End Class
