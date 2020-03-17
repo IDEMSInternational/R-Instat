@@ -18,8 +18,7 @@ Imports instat.Translations
 Public Class dlgGlance
     Public bfirstload As Boolean = True
     Public bReset As Boolean = True
-    Private clsGlance, clsList As New RFunction
-
+    Private clsGlance, clsList, clsMap_df As New RFunction
 
     Private Sub dlgGlance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -56,18 +55,23 @@ Public Class dlgGlance
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
         ucrSaveNewDataFrame.ucrChkSave.Checked = False
 
-        ucrModelReceiver.SetParameter(New RParameter("x", 0))
+        ucrModelReceiver.SetParameter(New RParameter(".x", 0))
         ucrModelReceiver.Selector = ucrModelSelector
         ucrModelReceiver.SetMeAsReceiver()
-
+        ucrModelReceiver.SetVariablesListFunctionName("list")
 
     End Sub
 
     Private Sub SetDefaults()
         clsGlance = New RFunction
         ucrSaveNewDataFrame.Reset()
+
         clsGlance.SetRCommand("glance")
         clsGlance.SetPackageName("broom")
+
+        clsMap_df.SetRCommand("map_df")
+        clsMap_df.SetPackageName("purrr")
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsGlance)
 
     End Sub
