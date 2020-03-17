@@ -55,7 +55,7 @@ Public Class dlgGlance
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
         ucrSaveNewDataFrame.ucrChkSave.Checked = False
 
-        ucrModelReceiver.SetParameter(New RParameter(".x", 0))
+        ucrModelReceiver.SetParameter(New RParameter("x", 0))
         ucrModelReceiver.Selector = ucrModelSelector
         ucrModelReceiver.SetMeAsReceiver()
         ucrModelReceiver.SetVariablesListFunctionName("list")
@@ -65,6 +65,8 @@ Public Class dlgGlance
     Private Sub SetDefaults()
         clsGlance = New RFunction
         ucrSaveNewDataFrame.Reset()
+        ucrModelReceiver.ResetText()
+        ucrModelSelector.Reset()
 
         clsGlance.SetRCommand("glance")
         clsGlance.SetPackageName("broom")
