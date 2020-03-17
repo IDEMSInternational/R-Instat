@@ -1,4 +1,5 @@
 ﻿
+Imports instat
 Imports instat.Translations
 Public Class dlgAugment
     Public bfirstload As Boolean = True
@@ -50,10 +51,9 @@ Public Class dlgAugment
     End Sub
 
     Private Sub SetDefaults()
-
+        clsAugment = New RFunction
         ucrModelSelector.Reset()
         ucrSaveDataFrame.Reset()
-        ucrBase.clsRsyntax.iCallType = 2
         clsAugment.SetRCommand("augment")
         clsAugment.SetPackageName("broom")
         ucrBase.clsRsyntax.SetBaseRFunction(clsAugment)
