@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgGlance
     Public bfirstload As Boolean = True
     Public bReset As Boolean = True
-    Private clsGlance, clsList, clsMap_df As New RFunction
+    Private clsGlance, clsMap_df As New RFunction
 
     Private Sub dlgGlance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -44,6 +44,7 @@ Public Class dlgGlance
         ucrChkDisplayinOutput.SetText("Display in Output")
         ucrChkDisplayinOutput.Checked = True
 
+
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
 
@@ -55,15 +56,15 @@ Public Class dlgGlance
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
         ucrSaveNewDataFrame.ucrChkSave.Checked = False
 
-        ucrModelReceiver.SetParameter(New RParameter("x", 0))
+        ucrModelReceiver.SetParameter(New RParameter(".x", 0))
         ucrModelReceiver.Selector = ucrModelSelector
         ucrModelReceiver.SetMeAsReceiver()
-        ucrModelReceiver.SetVariablesListFunctionName("list")
 
     End Sub
 
     Private Sub SetDefaults()
         clsGlance = New RFunction
+
         ucrSaveNewDataFrame.Reset()
         ucrModelReceiver.ResetText()
         ucrModelSelector.Reset()
@@ -71,16 +72,18 @@ Public Class dlgGlance
         clsGlance.SetRCommand("glance")
         clsGlance.SetPackageName("broom")
 
+        'todo implement as a function properly
         clsMap_df.SetRCommand("map_df")
         clsMap_df.SetPackageName("purrr")
+        clsMap_df.AddParameter(strParameterName:=".f", strParameterValue:="broom::glance", iPosition:=1)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsGlance)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsMap_df)
 
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrSaveNewDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString, bReset)
-        ucrModelReceiver.SetRCode(clsGlance, bReset)
+        ucrModelReceiver.SetRCode(clsMap_df, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
