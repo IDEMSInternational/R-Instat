@@ -1,4 +1,5 @@
 ﻿
+Imports instat
 Imports instat.Translations
 Public Class dlgTidy
     Public bfirstload As Boolean = True
@@ -51,9 +52,9 @@ Public Class dlgTidy
 
     Private Sub SetDefaults()
         clsTidy = New RFunction
+
         ucrSaveNewDataFrame.Reset()
         ucrModelSelector.Reset()
-
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
@@ -92,5 +93,13 @@ Public Class dlgTidy
 
     Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkDisplayInOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayInOutput.ControlValueChanged
+        If ucrChkDisplayInOutput.Checked Then
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        Else
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        End If
     End Sub
 End Class
