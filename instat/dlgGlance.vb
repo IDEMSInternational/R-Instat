@@ -79,6 +79,7 @@ Public Class dlgGlance
         clsMap_df.SetRCommand("map_df")
         clsMap_df.SetPackageName("purrr")
         clsMap_df.AddParameter(strParameterName:=".f", strParameterValue:="broom::glance", iPosition:=1)
+        clsMap_df.AddParameter(strParameterName:=".id", strParameterValue:=Chr(34) & "model" & Chr(34))
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsMap_df)
 
