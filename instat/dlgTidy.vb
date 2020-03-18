@@ -52,6 +52,7 @@ Public Class dlgTidy
     Private Sub SetDefaults()
         clsTidy = New RFunction
         ucrSaveNewDataFrame.Reset()
+        ucrModelSelector.Reset()
 
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -63,7 +64,8 @@ Public Class dlgTidy
         clsMap_df.SetPackageName("purrr")
         clsMap_df.SetRCommand("map_df")
 
-        clsMap_df.AddParameter(strParameterName:=".df", strParameterValue:="broom::tidy", iPosition:=1)
+        clsMap_df.AddParameter(strParameterName:=".f", strParameterValue:="broom::tidy", iPosition:=1)
+        clsMap_df.AddParameter(strParameterName:=".id", strParameterValue:=Chr(34) & "model" & Chr(34), iPosition:=2)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsMap_df)
     End Sub
