@@ -65,6 +65,9 @@ Public Class dlgGlance
     Private Sub SetDefaults()
         clsGlance = New RFunction
 
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 2
+
         ucrSaveNewDataFrame.Reset()
         ucrModelReceiver.ResetText()
         ucrModelSelector.Reset()
@@ -107,10 +110,9 @@ Public Class dlgGlance
 
     Private Sub ucrChkDisplayinOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayinOutput.ControlValueChanged
         If ucrChkDisplayinOutput.Checked Then
-            'ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-            ucrBase.clsRsyntax.iCallType = 2
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         Else
-
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         End If
     End Sub
 End Class
