@@ -5,7 +5,7 @@ Public Class dlgTidy
     Public bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsRSyntax As RSyntax
-    Private clsTidy As New RFunction
+    Private clsTidy, clsMap_df As New RFunction
 
     Private Sub dlgTidy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -42,7 +42,7 @@ Public Class dlgTidy
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
         ucrSaveNewDataFrame.ucrChkSave.Checked = False
 
-        ucrModelReceiver.SetParameter(New RParameter("x", 0))
+        ucrModelReceiver.SetParameter(New RParameter(".x", 0))
         ucrModelReceiver.Selector = ucrModelSelector
         ucrModelReceiver.SetMeAsReceiver()
 
@@ -50,18 +50,27 @@ Public Class dlgTidy
     End Sub
 
     Private Sub SetDefaults()
-
+        clsTidy = New RFunction
         ucrSaveNewDataFrame.Reset()
+
+
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
+
         clsTidy.SetRCommand("tidy")
         clsTidy.SetPackageName("broom")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsTidy)
+
+        clsMap_df.SetPackageName("purrr")
+        clsMap_df.SetRCommand("map_df")
+
+        clsMap_df.AddParameter(strParameterName:=".df", strParameterValue:="broom::tidy", iPosition:=1)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsMap_df)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrSaveNewDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString, bReset)
-        ucrModelReceiver.SetRCode(clsTidy, bReset)
+        ucrModelReceiver.SetRCode(clsMap_df, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
