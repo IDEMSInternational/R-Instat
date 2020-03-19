@@ -151,7 +151,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblModels.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrSaveNewDataFrame.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 246</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveNewDataFrame.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkDisplayinOutput.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 208</value>
@@ -199,7 +199,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkDisplayinOutput.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -211,28 +211,28 @@
     <value>392, 347</value>
   </data>
   <data name="ucrModelSelector.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 7</value>
+    <value>4, 9</value>
   </data>
   <data name="ucrModelSelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrModelSelector.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 180</value>
+    <value>212, 180</value>
   </data>
   <data name="ucrModelSelector.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrModelSelector.Name" xml:space="preserve">
     <value>ucrModelSelector</value>
   </data>
   <data name="&gt;&gt;ucrModelSelector.Type" xml:space="preserve">
-    <value>instat.ucrSelectorByDataFrame, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrModelSelector.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrModelSelector.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 287</value>
@@ -292,6 +292,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrModelReceiver.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
 </root>
