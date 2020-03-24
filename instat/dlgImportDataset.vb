@@ -22,6 +22,10 @@ Public Class dlgImportDataset
 
     Private clsImportFixedWidthText, clsImportCSV, clsImportDAT, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As RFunction
     Private clsGetExcelSheetNames As RFunction
+    ''' <summary>   Ensures that any file paths containing special characters (e.g. accents) are 
+    '''             correctly encoded.
+    '''             </summary>
+    Private clsEnc2Native As RFunction
     ' Functions for multi file import
     Private clsLapply As RFunction
     Private clsFileList As RFunction
@@ -324,6 +328,7 @@ Public Class dlgImportDataset
         clsReadRDS = New RFunction
         clsImportDAT = New RFunction
         clsGetExcelSheetNames = New RFunction
+        clsEnc2Native = New RFunction
 
         clsLapply = New RFunction
 
@@ -354,8 +359,15 @@ Public Class dlgImportDataset
         clsReadRDS.SetRCommand("readRDS")
         clsReadRDS.SetAssignTo("new_RDS")
 
+        'This R command ensures that any file paths containing special characters (e.g. accents) 
+        'are correctly encoded
+        clsEnc2Native.SetRCommand("enc2native")
+
         clsGetExcelSheetNames.SetPackageName("readxl")
         clsGetExcelSheetNames.SetRCommand("excel_sheets")
+        'Ensure that the file path is enclosed by 'enc2native' to ensure that file paths containing 
+        'special characters(e.g.accents) are correctly encoded
+        clsGetExcelSheetNames.AddParameter("path", "", clsEnc2Native, Nothing, Nothing, True, 0)
 
         clsLapply.SetRCommand("lappy")
         clsLapply.AddParameter("X", clsRFunctionParameter:=clsFileList, iPosition:=0)
@@ -469,7 +481,7 @@ Public Class dlgImportDataset
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportDAT, New RParameter("file", 0), iAdditionalPairNo:=3)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcel, New RParameter("file", 0), iAdditionalPairNo:=4)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsReadRDS, New RParameter("file", 0), iAdditionalPairNo:=5)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsGetExcelSheetNames, New RParameter("path", 0), iAdditionalPairNo:=6)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsEnc2Native, New RParameter("path", 0, False), iAdditionalPairNo:=6)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("file", 0), iAdditionalPairNo:=7)
         ucrInputFilePath.SetRCode(clsImport, bReset)
 
@@ -553,7 +565,8 @@ Public Class dlgImportDataset
 
         strFileName = ""
         If strFilePath <> "" Then
-            strFileName = Path.GetFileNameWithoutExtension(strFilePath)
+            'get the name of the file (without extension), with any special characters removed
+            strFileName = GetCleanFileName(strFilePath)
             strFileExt = Path.GetExtension(strFilePath).ToLower()
             If bFromLibrary Then
                 strFilePathSystemTemp = strFilePathSystem 'store what was there temporarily first 
@@ -966,7 +979,8 @@ Public Class dlgImportDataset
                 ucrInputFilePath.SetName("")
             Else
                 strCurrentDirectory = Path.GetDirectoryName(strFilePathSystemTemp)
-                strFileName = Path.GetFileNameWithoutExtension(strFilePathSystemTemp)
+                'get the name of the file (without extension), with any special characters removed
+                strFileName = GetCleanFileName(strFilePathSystemTemp)
                 strFileType = Path.GetExtension(strFilePathSystemTemp).Substring(1).ToUpper()
                 strFilePathSystem = strFilePathSystemTemp
                 strFilePathR = Replace(strFilePathSystemTemp, "\", "/")
@@ -982,4 +996,30 @@ Public Class dlgImportDataset
         Next
         Return keyList
     End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Extracts the name of the file (without the extension) from 
+    '''             <paramref name="strFilePathTmp"/>. It removes any special characters (i.e. any 
+    '''             characters that are not letters, digits '_' or '-'). It returns the resulting 
+    '''             clean name. If the cleaned name is an empty string then returns 
+    '''             'defaultCleanFileName'.             i
+    '''             The special characters need to be removed because otherwise they trigger an 
+    '''             error in some R commands.
+    '''             </summary>
+    '''
+    ''' <param name="strFilePathTmp">      The full path of the file. </param>
+    '''
+    ''' <returns>   Returns the file name (without extension) with any special characters removed.
+    '''             If the cleaned name is an empty string then returns 'defaultCleanFileName'.
+    ''' </returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function GetCleanFileName(strFilePathTmp As String) As String
+        Dim strCleanFileName As String
+        strCleanFileName = System.Text.RegularExpressions.Regex.Replace(Path.GetFileNameWithoutExtension(strFilePathTmp), "[^A-Za-z0-9_\-]", "")
+        If strCleanFileName Is "" Or strCleanFileName Is Nothing Then
+            strCleanFileName = "defaultCleanFileName"
+        End If
+        Return strCleanFileName
+    End Function
+
 End Class
