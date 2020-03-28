@@ -197,24 +197,22 @@ Public Class RLink
     ''' <param name="strNewComment"> is shown as a comment. If this parameter is "" then shows 
     '''                              <paramref name="strNewScript"/> as the comment.</param>
     Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String)
-        Dim strScriptLines() As String = strNewScript.Split(Environment.NewLine)
-        Dim strScriptCmds(strScriptLines.Length - 1) As String 'num of cmds is always <= num of lines
-        Dim iScriptCmdIndex = 0
+        Dim strScriptCmd As String = ""
 
-        'create an array of clean, single-line R commands
-        For i = 0 To strScriptLines.Length - 1
-            Dim strScriptLine As String = strScriptLines(i).Trim(vbLf) 'remove linefeed at end of line
+        'for each line in script
+        For Each strScriptLine As String In strNewScript.Split(Environment.NewLine)
+            strScriptLine = strScriptLine.Trim(vbLf) 'remove linefeed at end of line
+            strScriptLine = Trim(strScriptLine)      'trim any spaces from front or end
 
             'if line is empty or a comment, then ignore line
             If strScriptLine.Count <= 0 Or strScriptLine.StartsWith("#") Then
                 Continue For
             End If
 
-            'else add line of script to array of cmds
-            strScriptCmds(iScriptCmdIndex) &= strScriptLine
+            'else append line of script to command
+            strScriptCmd &= strScriptLine
 
-            'if line ends in a '+', ',', or '%>%' then assume cmd is not complete
-            strScriptLine = Trim(strScriptLine) 'trim any spaces from front or end
+            'if line ends in a '+', ',', or '%>%' then assume command is not complete
             Dim cLastChar As Char = strScriptLine.Last
             Dim strLast3Chars As String = ""
             If strScriptLine.Length >= 3 Then
@@ -224,19 +222,13 @@ Public Class RLink
                 Continue For
             End If
 
-            'else assume cmd is complete
-            iScriptCmdIndex += 1
-        Next
-
-        'execute each R command
-        For i = 0 To iScriptCmdIndex - 1
+            'else execute command
             Dim iCallType As Integer = 2
-
-            If strScriptCmds(i).Contains(strInstatDataObject & "$get_graphs") Then
+            If strScriptCmd.Contains(strInstatDataObject & "$get_graphs") Then
                 iCallType = 3
             End If
-
-            RunScript(strScriptCmds(i), iCallType:=iCallType, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
+            RunScript(strScriptCmd, iCallType:=iCallType, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
+            strScriptCmd = ""
             strNewComment = ""
         Next
     End Sub
