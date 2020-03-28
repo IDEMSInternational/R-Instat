@@ -184,29 +184,60 @@ Public Class RLink
         Return bClose
     End Function
 
-    ''' <summary>
-    ''' This method executes the <paramref name="strNewScript"/> R script and displays the output 
-    ''' as text or graph (determined by <paramref name="strNewScript"/>).
+    ''' <summary> This method executes the <paramref name="strNewScript"/> R script and displays 
+    '''           the output as text or graph (determined by <paramref name="strNewScript"/>).
+    '''           R commands may be split over multiple lines. This is only allowed if the  
+    '''           non-final line ends with '+', ',', or '%>%'.
+    '''           This function is named '...FromWindow' because it's designed to execute scripts 
+    '''           entered by a human from a dialog window (e.g. a script window). These scripts 
+    '''           may contain R commands split over multiple lines to make the commands more 
+    '''           readable.
     ''' </summary>
-    ''' <param name="strNewScript"> is the R script to execute.</param>
+    ''' <param name="strNewScript">  is the R script to execute.</param>
     ''' <param name="strNewComment"> is shown as a comment. If this parameter is "" then shows 
-    ''' <paramref name="strNewScript"/> as the comment.</param>
+    '''                              <paramref name="strNewScript"/> as the comment.</param>
     Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String)
-        Dim strSelectedScript As String = strNewScript
-        Dim iCallType As Integer
-        Dim bFirst As Boolean = True
-        Dim strComment As String = strNewComment
+        Dim strScriptLines() As String = strNewScript.Split(Environment.NewLine)
+        Dim strScriptCmds(strScriptLines.Length - 1) As String 'num of cmds is always <= num of lines
+        Dim iScriptCmdIndex = 0
 
-        For Each strLine As String In strSelectedScript.Split(Environment.NewLine)
-            If strLine.Trim(vbLf).Count > 0 AndAlso Not strLine.Trim(vbLf).StartsWith("#") Then
-                If strLine.Contains(strInstatDataObject & "$get_graphs") Then
-                    iCallType = 3
-                Else
-                    iCallType = 2
-                End If
-                RunScript(strScript:=strLine.Trim(vbLf), iCallType:=iCallType, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
-                strComment = ""
+        'create an array of clean, single-line R commands
+        For i = 0 To strScriptLines.Length - 1
+            Dim strScriptLine As String = strScriptLines(i).Trim(vbLf) 'remove linefeed at end of line
+
+            'if line is empty or a comment, then ignore line
+            If strScriptLine.Count <= 0 Or strScriptLine.StartsWith("#") Then
+                Continue For
             End If
+
+            'else add line of script to array of cmds
+            strScriptCmds(iScriptCmdIndex) &= strScriptLine
+
+            'if line ends in a '+', ',', or '%>%' then assume cmd is not complete
+            strScriptLine = Trim(strScriptLine) 'trim any spaces from front or end
+            Dim cLastChar As Char = strScriptLine.Last
+            Dim strLast3Chars As String = ""
+            If strScriptLine.Length >= 3 Then
+                strLast3Chars = strScriptLine.Substring(strScriptLine.Length - 3)
+            End If
+            If cLastChar = "+" Or cLastChar = "," Or strLast3Chars = "%>%" Then
+                Continue For
+            End If
+
+            'else assume cmd is complete
+            iScriptCmdIndex += 1
+        Next
+
+        'execute each R command
+        For i = 0 To iScriptCmdIndex - 1
+            Dim iCallType As Integer = 2
+
+            If strScriptCmds(i).Contains(strInstatDataObject & "$get_graphs") Then
+                iCallType = 3
+            End If
+
+            RunScript(strScriptCmds(i), iCallType:=iCallType, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
+            strNewComment = ""
         Next
     End Sub
 
