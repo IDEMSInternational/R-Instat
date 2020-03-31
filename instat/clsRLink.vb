@@ -187,7 +187,8 @@ Public Class RLink
     ''' <summary> This method executes the <paramref name="strNewScript"/> R script and displays 
     '''           the output as text or graph (determined by <paramref name="strNewScript"/>).
     '''           R commands may be split over multiple lines. This is only allowed if the  
-    '''           non-final line ends with '+', ',', or '%>%'.
+    '''           non-final line ends with '+', ',', or '%>%'; or there are one or more '{'
+    '''           brackets that have not been closed with an equivalent '}' bracket.
     '''           This function is named '...FromWindow' because it's designed to execute scripts 
     '''           entered by a human from a dialog window (e.g. a script window). These scripts 
     '''           may contain R commands split over multiple lines to make the commands more 
@@ -196,16 +197,36 @@ Public Class RLink
     ''' <param name="strNewScript">  is the R script to execute.</param>
     ''' <param name="strNewComment"> is shown as a comment. If this parameter is "" then shows 
     '''                              <paramref name="strNewScript"/> as the comment.</param>
-    Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String)
-        Dim strScriptCmd As String = ""
+    ''' <param name="bClearScriptCmd"> (Optional) If true then the command buffer is flushed 
+    '''                                before <paramref name="strNewScript"/> is processed. 
+    '''                                Otherwise <paramref name="strNewScript"/> is treated as a 
+    '''                                continuation of the previous string that was sent to this 
+    '''                                function.</param>
+    Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String, Optional bClearScriptCmd As Boolean = True)
+        Static strScriptCmd As String = ""
+        Static iOpenCurlyBraces As Integer = 0
+
+        'by default, flush out any unexecuted full or partial commands
+        If bClearScriptCmd Then
+            strScriptCmd = ""
+        End If
 
         'for each line in script
         For Each strScriptLine As String In strNewScript.Split(Environment.NewLine)
-            strScriptLine = strScriptLine.Trim(vbLf) 'remove linefeed at end of line
-            strScriptLine = Trim(strScriptLine)      'trim any spaces from front or end
+            'remove any comments (character '#' and anything after)
+            Dim iCommentPos As Integer = strScriptLine.IndexOf("#")
+            Select Case iCommentPos
+                Case 0      'a normal comment line (starts with '#')
+                    Continue For
+                Case Is > 0 ' a line with an appended comment (e.g. 'x <- 1 # generate data' converted to 'x <- 1 ')
+                    strScriptLine = strScriptLine.Substring(0, iCommentPos - 1)
+            End Select
 
-            'if line is empty or a comment, then ignore line
-            If strScriptLine.Count <= 0 Or strScriptLine.StartsWith("#") Then
+            'remove any linefeeds and spaces from front or end
+            strScriptLine = strScriptLine.Trim(vbLf).Trim()
+
+            'if line is empty then ignore line
+            If strScriptLine.Length <= 0 Then
                 Continue For
             End If
 
@@ -218,7 +239,15 @@ Public Class RLink
             If strScriptLine.Length >= 3 Then
                 strLast3Chars = strScriptLine.Substring(strScriptLine.Length - 3)
             End If
-            If cLastChar = "+" Or cLastChar = "," Or strLast3Chars = "%>%" Then
+            If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" Then
+                Continue For
+            End If
+
+            'if there are open curly braces then assume command is not complete
+            Dim iNumOpenCurlies = strScriptCmd.Where(Function(c) c = "{"c).Count
+            Dim iNumClosedCurlies = strScriptCmd.Where(Function(c) c = "}"c).Count
+            If iNumOpenCurlies <> iNumClosedCurlies Then
+                strScriptCmd &= "; " 'allow next command to be on same line
                 Continue For
             End If
 
