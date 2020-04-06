@@ -13,12 +13,12 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
+
 Imports instat.Translations
 Public Class dlgGlance
     Public bfirstload As Boolean = True
     Public bReset As Boolean = True
-    Private clsGlance, clsMap_df As New RFunction
+    Private clsMap_df, clsDummyRfunction As New RFunction
 
     Private Sub dlgGlance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -40,62 +40,51 @@ Public Class dlgGlance
         ucrModelReceiver.strSelectorHeading = "Model"
         ucrModelReceiver.SetParameterIsRFunction()
         ucrModelReceiver.Selector = ucrModelSelector
+        ucrModelReceiver.bForceVariablesAsList = True
 
         ucrChkDisplayinOutput.SetText("Display in Output")
-        ucrChkDisplayinOutput.Checked = True
-
 
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
 
-        ucrSaveNewDataFrame.SetPrefix("Newdataframe")
         ucrSaveNewDataFrame.SetIsComboBox()
-        ucrSaveNewDataFrame.SetSaveTypeAsModel()
+        ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveNewDataFrame.SetCheckBoxText("Save New data frame")
-        ucrSaveNewDataFrame.SetAssignToIfUncheckedValue("Last_Model")
+        ucrSaveNewDataFrame.SetPrefix("Newdataframe")
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
-        ucrSaveNewDataFrame.ucrChkSave.Checked = False
 
         ucrModelReceiver.SetParameter(New RParameter(".x", 0))
         ucrModelReceiver.Selector = ucrModelSelector
         ucrModelReceiver.SetMeAsReceiver()
-
     End Sub
 
     Private Sub SetDefaults()
-        clsGlance = New RFunction
+        clsMap_df = New RFunction
+        clsDummyRfunction = New RFunction
 
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 2
-
-        ucrSaveNewDataFrame.Reset()
-        ucrModelReceiver.ResetText()
         ucrModelSelector.Reset()
-
-        clsGlance.SetRCommand("glance")
-        clsGlance.SetPackageName("broom")
+        ucrSaveNewDataFrame.Reset()
 
         'todo implement as a function properly
-        clsMap_df.SetRCommand("map_df")
         clsMap_df.SetPackageName("purrr")
+        clsMap_df.SetRCommand("map_df")
         clsMap_df.AddParameter(strParameterName:=".f", strParameterValue:="broom::glance", iPosition:=1)
         clsMap_df.AddParameter(strParameterName:=".id", strParameterValue:=Chr(34) & "model" & Chr(34))
 
+        clsDummyRfunction = clsMap_df.Clone()
+        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsMap_df)
-
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrSaveNewDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString, bReset)
-        ucrModelReceiver.SetRCode(clsMap_df, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        'Tests when ok can be enabled
-        If ucrModelReceiver.IsEmpty OrElse Not ucrSaveNewDataFrame.IsComplete Then
-            ucrBase.OKEnabled(False)
-        Else
+        If (Not ucrModelReceiver.IsEmpty()) AndAlso ucrSaveNewDataFrame.IsComplete AndAlso ucrChkDisplayinOutput.Checked Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -105,15 +94,15 @@ Public Class dlgGlance
         TestOKEnabled()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrChkDisplayinOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayinOutput.ControlValueChanged
         If ucrChkDisplayinOutput.Checked Then
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+            ucrBase.clsRsyntax.iCallType = 2
         Else
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+            ucrBase.clsRsyntax.iCallType = 0
         End If
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrChkDisplayinOutput.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
