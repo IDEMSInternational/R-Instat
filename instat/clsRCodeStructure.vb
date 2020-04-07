@@ -38,9 +38,6 @@
 '''             </summary>
 '''--------------------------------------------------------------------------------------------
 Public Class RCodeStructure
-    'TODO SJL 03/04/20 - The name of this class is missing the prefix 'cls'. The vast majority of R-Instat 
-    '               classes have this prefix. Should we add it?
-
     ''' <summary>   If the output from the R command needs to be assigned, then this string is 
     '''             the part of the script to the left of the assignment operator ('&lt;-').
     '''             If the output from the R command doesn't to be assigned, then this string is
@@ -285,10 +282,12 @@ Public Class RCodeStructure
 
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
     ''' <summary>   Resets all the 'AssignTo' variables. 
     '''             String variables are set to "".
     '''             Booleans are set to false. 
     '''             </summary>
+    '''--------------------------------------------------------------------------------------------
     Public Sub RemoveAssignTo()
         strAssignTo = "" ' TODO SJL 03/04/20 should bRequireCorrectLength, bDataFrameList, strDataFrameNames also be reset?
         strAssignToDataFrame = ""
@@ -332,6 +331,8 @@ Public Class RCodeStructure
         '         'strScript' and 'strTemp' also seem to be used for different purposes in the child 'ToScript' functions
         '         This could be confusing to developers. 
         '         Refactor?
+        '         Also, this function returns 2 scripts 'strScript' (as a ByRef parameter) and the return script.
+        '         Whats's the difference between these 2 scripts? Why can't we just return a single script?
         Dim clsAddColumns As New RFunction
         Dim clsGetColumns As New RFunction
         Dim clsAddData As New RFunction
@@ -537,7 +538,7 @@ Public Class RCodeStructure
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Creates and adds a parameter to this object.
+    ''' <summary>   Creates and adds a parameter to this operator.
     '''             Sets the parameter's name to <paramref name="strParameterName"/>.
     '''             <para>Sets the parameter's argument to <b>one of</b> <paramref name="strParameterValue"/>,
     '''             <paramref name="clsRFunctionParameter"/>, <paramref name="clsROperatorParameter"/>,
@@ -554,8 +555,8 @@ Public Class RCodeStructure
     ''' <param name="clsRCodeStructureParameter">   (Optional) The R code structure parameter. </param>
     ''' <param name="bIncludeArgumentName">         (Optional) True to include, false to exclude the
     '''                                             argument name. </param>
-    ''' <param name="iPosition">                    (Optional) The position of the parameter. The position
-    '''                                             is zero-based (i.e. first position is zero). </param>
+    ''' <param name="iPosition">                    (Optional) (Optional) The relative position of the
+    '''                                             parameter in this object's parameter list. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional clsRCodeStructureParameter As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
         Dim clsParam = New RParameter
@@ -594,8 +595,8 @@ Public Class RCodeStructure
     ''' <param name="clsRCodeObject">       (Optional) The R code structure parameter. </param>
     ''' <param name="bIncludeArgumentName"> (Optional) True to include, false to exclude the argument
     '''                                     name. </param>
-    ''' <param name="iPosition">            (Optional) The position of the parameter. The position 
-    '''                                     is zero-based (i.e. first position is zero). </param>
+    ''' <param name="iPosition">            (Optional) (Optional) The relative position of the
+    '''                                     parameter in this object's parameter list. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Sub AddParameterWithCodeStructure(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRCodeObject As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
         ' TODO This should be call AddParameter but need to make it unambiguous with above. 
@@ -677,7 +678,6 @@ Public Class RCodeStructure
     '''             </para> </summary>
     '''
     ''' <param name="iPosition">    The position that needs to be made free for a new parameter.
-    '''                             The position is zero-based (i.e. first position is zero). 
     '''                             If this parameter is less than zero then this function does 
     '''                             nothing.</param>
     '''--------------------------------------------------------------------------------------------
@@ -739,6 +739,8 @@ Public Class RCodeStructure
     '''             Else returns 1. </returns>
     '''--------------------------------------------------------------------------------------------
     Private Function CompareParametersPosition(ByVal clsMain As RParameter, ByVal clsRelative As RParameter) As Integer
+        'TODO SJL 04/04/20 As far as I can see, this function is functionally identical to 'clsMain.Position.CompareTo'.
+        '                  Can we remove this function?
         If clsMain.Position = clsRelative.Position Then
             Return 0
         ElseIf clsRelative.Position = -1 Then
@@ -788,9 +790,7 @@ Public Class RCodeStructure
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Removes the parameter with position <paramref name="iPosition"/>. </summary>
     '''
-    ''' <param name="iPosition">    The position of the parameter to remove.
-    '''                             The position is zero-based (i.e. first position is zero).
-    '''                             </param>
+    ''' <param name="iPosition">    The position of the parameter to remove. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Sub RemoveParameterByPosition(iPosition As Integer)
         Dim clsParam As RParameter
@@ -847,7 +847,7 @@ Public Class RCodeStructure
 
     ''' <summary>   Clears this object to its blank/initial state. </summary>
     Public Overridable Sub Clear()
-        'todo tidy up iPosition 
+        'TODO legacy  tidy up iPosition 
         iPosition = -1
         iCallType = 0
         bExcludeAssignedFunctionOutput = True
@@ -913,6 +913,7 @@ Public Class RCodeStructure
     ''' <param name="lstValues">    The list of assign scripts . </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub GetAllAssignTo(lstCodes As List(Of RCodeStructure), lstValues As List(Of String))
+        'TBD SJL 06/04/20 This is a 'get' function but it does not return any value! Rename?
         SortParameters()
         ' if this object is to be assigned, but is not yet in the lists
         If bToBeAssigned AndAlso Not lstCodes.Contains(Me) Then

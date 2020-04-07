@@ -63,7 +63,8 @@ Public Class ROperator
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets an operation. </summary>
+    ''' <summary>   Sets the operation's symbol (e.g. "+") and defines whether to include the first
+    '''             operation parameter in brackets. </summary>
     '''
     ''' <param name="strTemp">          The operation symbol (e.g. "+"). </param>
     ''' <param name="bBracketsTemp">    (Optional) If true then enclose first parameter in brackets. 

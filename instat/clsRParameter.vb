@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 '''--------------------------------------------------------------------------------------------
-''' <summary>   An object of this class represents an R parameter.'
+''' <summary>   An object of this class represents an R parameter.
 '''             <para>
 '''             This class provides methods and fields to:</para>
 ''' <list type="bullet">
@@ -62,7 +62,19 @@ Public Class RParameter
     '''             are added after the ordered ones. Note that it is allowed to have gaps in the 
     '''             positions.</para><para>
     '''             For example, parameters with positions a 0, b 2, c 5, d 3, e 0 will be sorted 
-    '''             as b d c (a e). </para></summary>
+    '''             as b d c (a e). </para>
+    '''             TBD SJL 04/04/20 The comment above is based on the legacy comments I found in 
+    '''                 this file. However, when I look at the code, I can't see any evidence that 
+    '''                 the position is zero-based or that position 0 has any special significance. 
+    '''                 If I look at the 'ToScript' functions in the ROperator or RFunction classes, 
+    '''                 then they just add the parameters in the order they are stored in the list. 
+    '''                 The list order is determined by the 'RCodeStructure.SortParameters' function. 
+    '''                 This function just sorts the parameters according to their 'iPosition'.
+    '''                 Therefore I think iPosition can be any signed integer that represents this 
+    '''                 parameter's position in relation to the other parameters.
+    '''                 If my understanding is correct then the comments for all the 'iPosition'
+    '''                 parameters in the different functions also need to be updated.
+    '''             </summary> 
     Private iPosition As Integer = -1
 
     ''' <summary>   If true then include the name of the parameter in the R script 

@@ -130,21 +130,22 @@ Public Class RFunction
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
-    '''     Creates and adds a parameter to this object. Sets the parameter's name to
-    '''     <paramref name="strParameterName"/>.
-    '''     <para>Sets the parameter's argument to <b>one of</b> <paramref name="strParameterValue"/>,
-    '''             <paramref name="clsRFunctionParameter"/>, <paramref name="clsROperatorParameter"/>,
-    '''             or <paramref name="clsRCodeStructureParameter"/>.</para>
+    '''     Adds a parameter to this function. Sets the parameter's name to
+    '''     <paramref name="strParameterName"/>.<para>
+    '''     Sets the parameter's argument to <b>one of</b> <paramref name="strParameterValue"/>,
+    '''     <paramref name="clsRFunctionParameter"/>, <paramref name="clsROperatorParameter"/>,
+    '''     or <paramref name="clsRCodeStructureParameter"/>.</para>
     ''' </summary>
     '''
     ''' <param name="strParameterName">             (Optional) Name of the parameter. </param>
     ''' <param name="strParameterValue">            (Optional) The parameter value. </param>
-    ''' <param name="clsRFunctionParameter">        (Optional) </param>
+    ''' <param name="clsRFunctionParameter">        (Optional) The R function parameter. </param>
     ''' <param name="clsROperatorParameter">        (Optional) The R operator parameter. </param>
     ''' <param name="clsRCodeStructureParameter">   (Optional) The R code structure parameter. </param>
     ''' <param name="bIncludeArgumentName">         (Optional) True to include, false to exclude the
     '''                                             argument name. </param>
-    ''' <param name="iPosition">                    (Optional) </param>
+    ''' <param name="iPosition">                    (Optional) The relative position of the
+    '''                                             parameter in this object's parameter list.</param>
     '''--------------------------------------------------------------------------------------------
     Public Overrides Sub AddParameter(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional clsRCodeStructureParameter As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
         'TODO SJL what's the purpose of overriding this function if it just calls the parent function?
@@ -153,7 +154,7 @@ Public Class RFunction
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
-    '''     If the object already has a parameter with the same name then changes the parameter's
+    '''     If the R function already has a parameter with the same name then changes the parameter's
     '''     value to the value in <paramref name="clsParam"/>. Else adds
     '''     <paramref name="clsParam"/> to the object as a new parameter.
     '''     <para>
