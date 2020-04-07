@@ -24,17 +24,25 @@ Partial Class dlgGlance
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgGlance))
         Me.lblModels = New System.Windows.Forms.Label()
+        Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSaveNewDataFrame = New instat.ucrSave()
         Me.ucrChkDisplayinOutput = New instat.ucrCheck()
         Me.ucrModelReceiver = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'lblModels
         '
         resources.ApplyResources(Me.lblModels, "lblModels")
         Me.lblModels.Name = "lblModels"
+        '
+        'ucrModelSelector
+        '
+        Me.ucrModelSelector.bDropUnusedFilterLevels = False
+        Me.ucrModelSelector.bShowHiddenColumns = False
+        Me.ucrModelSelector.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrModelSelector, "ucrModelSelector")
+        Me.ucrModelSelector.Name = "ucrModelSelector"
         '
         'ucrSaveNewDataFrame
         '
@@ -60,14 +68,6 @@ Partial Class dlgGlance
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrModelSelector
-        '
-        Me.ucrModelSelector.bDropUnusedFilterLevels = False
-        Me.ucrModelSelector.bShowHiddenColumns = False
-        Me.ucrModelSelector.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrModelSelector, "ucrModelSelector")
-        Me.ucrModelSelector.Name = "ucrModelSelector"
         '
         'dlgGlance
         '
