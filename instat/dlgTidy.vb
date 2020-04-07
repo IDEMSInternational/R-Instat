@@ -28,6 +28,7 @@ Public Class dlgTidy
         ucrModelReceiver.strSelectorHeading = "Model"
         ucrModelReceiver.SetParameterIsRFunction()
         ucrModelReceiver.Selector = ucrModelSelector
+        ucrModelReceiver.bForceVariablesAsList = True
 
         ucrChkDisplayInOutput.SetText("Display in Output")
         ucrChkDisplayInOutput.Checked = True
@@ -35,13 +36,11 @@ Public Class dlgTidy
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
 
-        ucrSaveNewDataFrame.SetPrefix("Newdataframe")
-        ucrSaveNewDataFrame.SetIsComboBox()
-        ucrSaveNewDataFrame.SetSaveTypeAsModel()
         ucrSaveNewDataFrame.SetCheckBoxText("Save New data frame")
-        ucrSaveNewDataFrame.SetAssignToIfUncheckedValue("Last_Model")
+        ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
+        ucrSaveNewDataFrame.SetPrefix("tidy_dataframe")
+        ucrSaveNewDataFrame.SetIsComboBox()
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
-        ucrSaveNewDataFrame.ucrChkSave.Checked = False
 
         ucrModelReceiver.SetParameter(New RParameter(".x", 0))
         ucrModelReceiver.Selector = ucrModelSelector
@@ -51,7 +50,8 @@ Public Class dlgTidy
     End Sub
 
     Private Sub SetDefaults()
-        clsTidy = New RFunction
+
+        clsMap_df = New RFunction
 
         ucrSaveNewDataFrame.Reset()
         ucrModelSelector.Reset()
@@ -59,21 +59,18 @@ Public Class dlgTidy
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
 
-        clsTidy.SetRCommand("tidy")
-        clsTidy.SetPackageName("broom")
-
         clsMap_df.SetPackageName("purrr")
         clsMap_df.SetRCommand("map_df")
 
         clsMap_df.AddParameter(strParameterName:=".f", strParameterValue:="broom::tidy", iPosition:=1)
         clsMap_df.AddParameter(strParameterName:=".id", strParameterValue:=Chr(34) & "model" & Chr(34), iPosition:=2)
 
+        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsMap_df)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrSaveNewDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString, bReset)
-        ucrModelReceiver.SetRCode(clsMap_df, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -97,9 +94,9 @@ Public Class dlgTidy
 
     Private Sub ucrChkDisplayInOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayInOutput.ControlValueChanged
         If ucrChkDisplayInOutput.Checked Then
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+            ucrBase.clsRsyntax.iCallType = 2
         Else
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+            ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 End Class
