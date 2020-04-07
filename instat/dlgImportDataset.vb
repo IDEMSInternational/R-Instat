@@ -256,6 +256,9 @@ Public Class dlgImportDataset
         ucrInputMissingValueStringExcel.SetParameter(New RParameter("na"))
         ucrInputMissingValueStringExcel.SetRDefault(Chr(34) & "" & Chr(34))
 
+        ucrChkRange.SetText("Range:")
+        ucrCHkRow.SetText("Row:")
+
         ucrChkTrimWSExcel.SetText("Trim Trailing White Space")
         ucrChkTrimWSExcel.SetParameter(New RParameter("trim_ws"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkTrimWSExcel.SetRDefault("TRUE")
