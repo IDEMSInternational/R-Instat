@@ -31,40 +31,35 @@ Public Class dlgTidy
         ucrModelReceiver.bForceVariablesAsList = True
 
         ucrChkDisplayInOutput.SetText("Display in Output")
-        ucrChkDisplayInOutput.Checked = True
 
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
 
-        ucrSaveNewDataFrame.SetCheckBoxText("Save New data frame")
-        ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
-        ucrSaveNewDataFrame.SetPrefix("tidy_dataframe")
         ucrSaveNewDataFrame.SetIsComboBox()
+        ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
+        ucrSaveNewDataFrame.SetCheckBoxText("Save New data frame")
+        ucrSaveNewDataFrame.SetPrefix("Tidy_dataframe")
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
 
         ucrModelReceiver.SetParameter(New RParameter(".x", 0))
         ucrModelReceiver.Selector = ucrModelSelector
         ucrModelReceiver.SetMeAsReceiver()
-
-
     End Sub
 
     Private Sub SetDefaults()
-
         clsMap_df = New RFunction
+        'clsDummyRfunction = New RFunction
 
-        ucrSaveNewDataFrame.Reset()
         ucrModelSelector.Reset()
+        ucrSaveNewDataFrame.Reset()
 
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 2
-
+        'todo implement as a function properly
         clsMap_df.SetPackageName("purrr")
         clsMap_df.SetRCommand("map_df")
-
         clsMap_df.AddParameter(strParameterName:=".f", strParameterValue:="broom::tidy", iPosition:=1)
-        clsMap_df.AddParameter(strParameterName:=".id", strParameterValue:=Chr(34) & "model" & Chr(34), iPosition:=2)
+        clsMap_df.AddParameter(strParameterName:=".id", strParameterValue:=Chr(34) & "model" & Chr(34))
 
+        'clsDummyRfunction = clsMap_df.Clone()
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsMap_df)
     End Sub
@@ -74,11 +69,10 @@ Public Class dlgTidy
     End Sub
 
     Private Sub TestOKEnabled()
-        'Tests when ok can be enabled
-        If ucrModelReceiver.IsEmpty OrElse Not ucrSaveNewDataFrame.IsComplete Then
-            ucrBase.OKEnabled(False)
-        Else
+        If (ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty() AndAlso ucrChkDisplayInOutput.Checked) Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -88,15 +82,15 @@ Public Class dlgTidy
         TestOKEnabled()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrChkDisplayInOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayInOutput.ControlValueChanged
+    Private Sub ucrChkDisplayinOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayInOutput.ControlValueChanged
         If ucrChkDisplayInOutput.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
         Else
             ucrBase.clsRsyntax.iCallType = 0
         End If
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrChkDisplayInOutput.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

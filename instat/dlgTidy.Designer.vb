@@ -23,31 +23,29 @@ Partial Class dlgTidy
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTidy))
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblModels = New System.Windows.Forms.Label()
-        Me.ucrModelReceiver = New instat.ucrReceiverMultiple()
-        Me.ucrChkDisplayInOutput = New instat.ucrCheck()
         Me.ucrSaveNewDataFrame = New instat.ucrSave()
+        Me.ucrChkDisplayInOutput = New instat.ucrCheck()
+        Me.ucrModelReceiver = New instat.ucrReceiverMultiple()
+        Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrModelSelector
-        '
-        Me.ucrModelSelector.bDropUnusedFilterLevels = False
-        Me.ucrModelSelector.bShowHiddenColumns = False
-        Me.ucrModelSelector.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrModelSelector, "ucrModelSelector")
-        Me.ucrModelSelector.Name = "ucrModelSelector"
         '
         'lblModels
         '
         resources.ApplyResources(Me.lblModels, "lblModels")
         Me.lblModels.Name = "lblModels"
+        '
+        'ucrSaveNewDataFrame
+        '
+        resources.ApplyResources(Me.ucrSaveNewDataFrame, "ucrSaveNewDataFrame")
+        Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
+        '
+        'ucrChkDisplayInOutput
+        '
+        Me.ucrChkDisplayInOutput.Checked = False
+        resources.ApplyResources(Me.ucrChkDisplayInOutput, "ucrChkDisplayInOutput")
+        Me.ucrChkDisplayInOutput.Name = "ucrChkDisplayInOutput"
         '
         'ucrModelReceiver
         '
@@ -58,16 +56,18 @@ Partial Class dlgTidy
         Me.ucrModelReceiver.strNcFilePath = ""
         Me.ucrModelReceiver.ucrSelector = Nothing
         '
-        'ucrChkDisplayInOutput
+        'ucrModelSelector
         '
-        Me.ucrChkDisplayInOutput.Checked = False
-        resources.ApplyResources(Me.ucrChkDisplayInOutput, "ucrChkDisplayInOutput")
-        Me.ucrChkDisplayInOutput.Name = "ucrChkDisplayInOutput"
+        Me.ucrModelSelector.bDropUnusedFilterLevels = False
+        Me.ucrModelSelector.bShowHiddenColumns = False
+        Me.ucrModelSelector.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrModelSelector, "ucrModelSelector")
+        Me.ucrModelSelector.Name = "ucrModelSelector"
         '
-        'ucrSaveNewDataFrame
+        'ucrBase
         '
-        resources.ApplyResources(Me.ucrSaveNewDataFrame, "ucrSaveNewDataFrame")
-        Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgTidy
         '
