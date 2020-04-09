@@ -2365,6 +2365,12 @@
     <Compile Include="ucrReceiverSingle.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrReceiverSingleNew.Designer.vb">
+      <DependentUpon>ucrReceiverSingleNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrReceiverSingleNew.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrReorder.Designer.vb">
       <DependentUpon>ucrReorder.vb</DependentUpon>
     </Compile>
