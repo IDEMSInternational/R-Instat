@@ -591,6 +591,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayTopNToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3315,7 +3316,7 @@ Partial Class frmMain
         '
         'mnuProcurementDescribeCategorical
         '
-        Me.mnuProcurementDescribeCategorical.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeCategoricalOneVarFreq, Me.mnuProcurementDescribeCategoricalTwoVarFreq, Me.ToolStripSeparator52, Me.mnuProcurementDescribeCategoricalBarCharts, Me.mnuProcurementDescribeCategoricalMosaic, Me.mnuProcurementDescribeCategoricalTreemap})
+        Me.mnuProcurementDescribeCategorical.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeCategoricalOneVarFreq, Me.mnuProcurementDescribeCategoricalTwoVarFreq, Me.ToolStripSeparator52, Me.mnuProcurementDescribeCategoricalBarCharts, Me.mnuProcurementDescribeCategoricalMosaic, Me.mnuProcurementDescribeCategoricalTreemap, Me.DisplayTopNToolStripMenuItem})
         Me.mnuProcurementDescribeCategorical.Name = "mnuProcurementDescribeCategorical"
         resources.ApplyResources(Me.mnuProcurementDescribeCategorical, "mnuProcurementDescribeCategorical")
         '
@@ -3753,6 +3754,11 @@ Partial Class frmMain
         '
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
+        '
+        'DisplayTopNToolStripMenuItem
+        '
+        Me.DisplayTopNToolStripMenuItem.Name = "DisplayTopNToolStripMenuItem"
+        resources.ApplyResources(Me.DisplayTopNToolStripMenuItem, "DisplayTopNToolStripMenuItem")
         '
         'frmMain
         '
@@ -4352,4 +4358,5 @@ Partial Class frmMain
     Friend WithEvents mnuModelCompareModels As ToolStripMenuItem
     Friend WithEvents mnuModelCompareModelsOneVariable As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Friend WithEvents DisplayTopNToolStripMenuItem As ToolStripMenuItem
 End Class
