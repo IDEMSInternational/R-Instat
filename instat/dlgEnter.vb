@@ -42,15 +42,21 @@ Public Class dlgEnter
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 458
+        ucrTryModelling.SetReceiver(ucrReceiverForEnterCalculation)
+        ucrTryModelling.SetIsCommand()
+        ucrTryModelling.StrvecOutputRequired()
         clsAttach.SetRCommand("attach")
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
         clsDetach.SetRCommand("detach")
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
         clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.SetCommandString("")
         ucrSaveEnterResultInto.SetItemsTypeAsColumns()
         ucrSaveEnterResultInto.SetDefaultTypeAsColumn()
         ucrSaveEnterResultInto.SetDataFrameSelector(ucrDataFrameEnter)
         ucrSaveEnterResultInto.SetValidationTypeAsRVariable()
-        cmdTry.Enabled = False
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
     End Sub
     Private Sub SetDefaults()
         chkShowEnterArguments.Checked = False
@@ -58,6 +64,7 @@ Public Class dlgEnter
         chkSaveEnterResultInto.Checked = True
         ucrSaveEnterResultInto.SetPrefix("Enter")
         ucrReceiverForEnterCalculation.Clear()
+        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
     Private Sub ReopenDialog()
         SaveResults()
@@ -87,26 +94,24 @@ Public Class dlgEnter
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        Dim strScript As String = ""
-        Dim strFunc As String
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
-        strFunc = clsAttach.ToScript(strScript)
-        frmMain.clsRLink.RunScript(strScript & strFunc)
+        'Dim strScript As String = ""
+        'Dim strFunc As String
+        'clsAttach.AddParameter("what", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
+        'strFunc = clsAttach.ToScript(strScript)
+        ' frmMain.clsRLink.RunScript(strScript & strFunc)
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        Dim strScript As String = ""
-        Dim strFunc As String
-        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
-        strFunc = clsDetach.ToScript(strScript)
-        frmMain.clsRLink.RunScript(strScript & strFunc)
+        'Dim strScript As String = ""
+        ' Dim strFunc As String
+        'clsDetach.AddParameter("name", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
+        'strFunc = clsDetach.ToScript(strScript)
+        'frmMain.clsRLink.RunScript(strScript & strFunc)
         SetEntryHistory()
     End Sub
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForEnterCalculation.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForEnterCalculation.GetVariableNames(False))
-        ucrInputTryMessage.SetName("")
-        cmdTry.Enabled = Not ucrReceiverForEnterCalculation.IsEmpty()
         TestOKEnabled()
     End Sub
 
@@ -284,68 +289,5 @@ Public Class dlgEnter
             ucrSaveEnterResultInto.Visible = False
         End If
         SaveResults()
-    End Sub
-
-    Private Sub TryScript()
-        Dim strOutPut As String
-        Dim strAttach As String
-        Dim strDetach As String
-        Dim strTempScript As String = ""
-        Dim strVecOutput As CharacterVector
-        Dim bIsAssigned As Boolean
-        Dim bToBeAssigned As Boolean
-        Dim strAssignTo As String
-        Dim strAssignToColumn As String
-        Dim strAssignToDataFrame As String
-
-        'First store the RSyntax settings temporarily, as these will be modified in the Try process. 
-        'Task: could use a clone RSyntax method
-
-        bIsAssigned = ucrBase.clsRsyntax.GetbIsAssigned()
-        bToBeAssigned = ucrBase.clsRsyntax.GetbToBeAssigned()
-        strAssignTo = ucrBase.clsRsyntax.GetstrAssignTo()
-        strAssignToColumn = ucrBase.clsRsyntax.GetstrAssignToColumn()
-        strAssignToDataFrame = ucrBase.clsRsyntax.GetstrAssignToDataFrame()
-
-        Try
-            If ucrReceiverForEnterCalculation.IsEmpty Then
-                ucrInputTryMessage.SetName("")
-            Else
-                strAttach = clsAttach.ToScript(strTempScript)
-                frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
-                ucrBase.clsRsyntax.RemoveAssignTo()
-                strOutPut = ucrBase.clsRsyntax.GetScript
-                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strOutPut, bSilent:=True)
-                'Mid does only take Strings And strVecOutput Is a CharacterVector (a custom type from RDotNet), 
-                'but each element of strVecOutput i.e. strVecOutput(0) Is a String.
-                'It doesn't show all the output, just the output from the first line you would get in the R console. So strVecOutput(1) would give you the next line.
-                If strVecOutput IsNot Nothing Then
-                    If strVecOutput.Length > 1 Then
-                        ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5) & "...")
-                    Else
-                        ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5))
-                    End If
-                Else
-                    ucrInputTryMessage.SetName("Command produced an error or no output to display.")
-                End If
-            End If
-        Catch ex As Exception
-            ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
-        Finally
-
-            strTempScript = ""
-            strDetach = clsDetach.ToScript(strTempScript)
-            frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
-            ucrBase.clsRsyntax.SetbIsAssigned(bIsAssigned)
-            ucrBase.clsRsyntax.SetbToBeAssigned(bToBeAssigned)
-            ucrBase.clsRsyntax.SetstrAssignTo(strAssignTo)
-            ucrBase.clsRsyntax.SetstrAssignToColumn(strAssignToColumn)
-            ucrBase.clsRsyntax.SetstrAssignToDataFrame(strAssignToDataFrame)
-        End Try
-    End Sub
-
-
-    Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles cmdTry.Click
-        TryScript()
     End Sub
 End Class

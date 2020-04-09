@@ -43,6 +43,7 @@ Public Class dlgInventoryPlot
         ucrReceiverDate.SetParameter(New RParameter("date_col", 1))
         ucrReceiverDate.Selector = ucrInventoryPlotSelector
         ucrReceiverDate.SetClimaticType("date")
+        ucrReceiverDate.SetIncludedDataTypes({"Date"})
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.strSelectorHeading = "Date"

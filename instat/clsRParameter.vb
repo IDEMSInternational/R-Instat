@@ -110,9 +110,9 @@ Public Class RParameter
             strRet = strArgumentName & "="
         End If
         If bIsFunction OrElse bIsOperator Then
-            strRet = strRet & clsArgumentCodeStructure.ToScript(strScript)
+            strRet = strRet & clsArgumentCodeStructure.ToScript(strScript) 'e.g. set 'strRet' to "data_RDS=new_RDS"
         ElseIf bIsString Then
-            strRet = strRet & strArgumentValue
+            strRet = strRet & strArgumentValue 'e.g. set 'strRet' to "dir=""C:/Users/myName/InstatObject/R"""
         ElseIf clsArgumentCodeStructure IsNot Nothing Then
             strRet = strRet & clsArgumentCodeStructure.ToScript(strScript)
             'message
@@ -125,7 +125,7 @@ Public Class RParameter
     Public Function HasValue() As Boolean
         If bIsString Then
             Return strArgumentValue IsNot Nothing
-        ElseIf bIsFunction OrElse bIsOperator Then
+        ElseIf bIsFunction OrElse bIsOperator OrElse clsArgumentCodeStructure IsNot Nothing Then
             Return clsArgumentCodeStructure IsNot Nothing
         Else
             Return False

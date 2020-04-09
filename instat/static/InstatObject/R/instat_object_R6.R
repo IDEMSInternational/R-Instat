@@ -789,13 +789,22 @@ DataBook$set("public", "rename_column_in_data", function(data_name, column_name,
 } 
 )
 
-DataBook$set("public", "frequency_tables", function(data_name, x_col_names, y_col_name, addmargins = FALSE, proportions = FALSE, percentages = FALSE, transpose = FALSE) {
-  self$get_data_objects(data_name)$frequency_tables(x_col_names, y_col_name, addmargins = addmargins, proportions = proportions, percentages = percentages, transpose = transpose)
+DataBook$set("public", "frequency_tables", function(data_name, x_col_names, y_col_name, n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
+  for(i in seq_along(x_col_names)) {
+    cat(x_col_names[i], "by", y_col_name, "\n")
+    print(data_book$summary_table(data_name = data_name, summaries = count_label, factors=c(x_col_names[i], y_col_name), n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = page_by, as_html = as_html, signif_fig = signif_fig, na_display = na_display, na_level_display = na_level_display, weights = weights, caption = caption, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, ... = ...))
+    cat("\n")
+  }
 } 
 )
 
 DataBook$set("public", "anova_tables", function(data_name, x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
   self$get_data_objects(data_name)$anova_tables(x_col_names = x_col_names, y_col_name = y_col_name, signif.stars = signif.stars, sign_level = sign_level, means = means)
+} 
+)
+
+DataBook$set("public", "cor", function(data_name, x_col_names, y_col_name, use = "everything", method = c("pearson", "kendall", "spearman")) {
+  self$get_data_objects(data_name)$cor(x_col_names = x_col_names, y_col_name = y_col_name, use = use, method = method)
 } 
 )
 
@@ -1258,7 +1267,7 @@ DataBook$set("public","make_inventory_plot", function(data_name, date_col, stati
 }
 )
 
-DataBook$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE, keep_raw_time = TRUE, include_metadata = TRUE, boundary, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = TRUE) {
+DataBook$set("public", "import_NetCDF", function(nc, path, name, only_data_vars = TRUE, keep_raw_time = TRUE, include_metadata = TRUE, boundary, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = FALSE) {
   if(only_data_vars) {
     all_var_names <- ncdf4.helpers::nc.get.variable.list(nc)
   }
@@ -1291,7 +1300,8 @@ DataBook$set("public", "import_NetCDF", function(nc, name, only_data_vars = TRUE
     else curr_boundary <- NULL
     curr_name <- make.names(curr_name)
     curr_name <- next_default_item(curr_name, self$get_data_names(), include_index = FALSE)
-    data_list[[curr_name]] <- nc_as_data_frame(nc, var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = curr_boundary, lon_points = lon_points, lat_points = lat_points, id_points = id_points, show_requested_points = show_requested_points, great_circle_dist = great_circle_dist)
+    if(!missing(path)) data_list[[curr_name]] <- multiple_nc_as_data_frame(path = path, vars = var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = curr_boundary, lon_points = lon_points, lat_points = lat_points, id_points = id_points, show_requested_points = show_requested_points, great_circle_dist = great_circle_dist)
+    else data_list[[curr_name]] <- nc_as_data_frame(nc = nc, vars = var_groups[[i]], keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = curr_boundary, lon_points = lon_points, lat_points = lat_points, id_points = id_points, show_requested_points = show_requested_points, great_circle_dist = great_circle_dist)
     tmp_list <- list()
     tmp_list[[curr_name]] <- data_list[[curr_name]]
     data_names <- c(data_names, curr_name)
@@ -1351,12 +1361,16 @@ DataBook$set("public", "add_climdex_indices", function(data_name, indices = list
 
 DataBook$set("public", "add_single_climdex_index", function(data_name, indices, index_name = "", freq = "annual", year, month) {
   if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label)) stop("Data must be defined as climatic to calculate climdex indices.")
-  
+  col_year <- self$get_columns_from_data(data_name = data_name, col_names = year)
+  year_class <- class(col_year)
   if(freq == "annual") {
-    ind_data <- data.frame(factor(names(indices)), indices, row.names = NULL)
+    ind_data <- data.frame(names(indices), indices)
     names(ind_data) <- c(year, index_name)
     linked_data_name <- self$get_linked_to_data_name(data_name, year)
     if(length(linked_data_name) == 0) {
+      if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, sep = "_")
       new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
@@ -1393,6 +1407,9 @@ DataBook$set("public", "add_single_climdex_index", function(data_name, indices, 
     ind_data[[month]] <- as.numeric(ind_data[[month]])
     linked_data_name <- self$get_linked_to_data_name(data_name, c(year, month))
     if(length(linked_data_name) == 0) {
+      if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, month, sep = "_")
       new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
@@ -2031,6 +2048,41 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     data_list <- list(z)
     names(data_list) <- new_name
     self$import_data(data_tables=data_list)
+  }
+}
+)
+
+DataBook$set("public","get_geometry", function(data) {
+  if(missing(data)) stop("data_name is required")
+  else if("sf" %in% class(data)) return(attr(data, "sf_column"))
+  else if("geometry" %in% colnames(data)) return("geometry")
+  else return("")
+}
+)
+DataBook$set("public","package_check", function(package) {
+  out <- list()
+  av_packs <- available.packages()
+  av_packs <- data.frame(av_packs)
+  if(package %in% rownames(installed.packages())) {
+    out[[1]] <- 1
+    v_machine <- as.character(packageVersion(package))
+    v_web <- as.character(av_packs[av_packs$Package == package, "Version"])
+    out[[2]] <- compareVersion(v_machine, v_web)
+    out[[3]] <- v_machine
+    out[[4]] <- v_web
+    return(out)
+  }
+  else {
+    #check if the package name is typed right
+    if(package %in% av_packs) {
+      out[[1]] <- 2
+      return(out)
+    }
+    else {
+      #wrong  spelling check you spelling
+      out[[1]] <- 0
+      return(out)
+    }
   }
 }
 )

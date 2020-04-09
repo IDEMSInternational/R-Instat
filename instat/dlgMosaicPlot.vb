@@ -61,7 +61,7 @@ Public Class dlgMosaicPlot
         Dim dctPartitionOptions As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        'ucrBase.iHelpTopicID = 
+        ucrBase.iHelpTopicID = 594
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrSelectorMosaicPlot.SetParameter(New RParameter("data", 0))
