@@ -5,9 +5,9 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{4263A8D4-1068-45F9-A542-C340C4A22E8B}
+AppId={{A28EA3A8-6635-48BE-BCF0-F783E0132E5C}
 AppName=R-Instat
-#define AppVerName "0.6.0"
+#define AppVerName "0.6.1"
 AppVersion={#AppVerName}
 AppPublisher=African Maths Institute
 AppPublisherURL=http://r-instat.org/
@@ -24,7 +24,7 @@ ArchitecturesInstallIn64BitMode=x64
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}";
-Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; OnlyBelowVersion: 0,6.1
+Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; OnlyBelowVersion: 0,6.2
 
 [Files]
 Source: "..\instat\bin\x64\Release\instat.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -32,10 +32,10 @@ Source: "..\instat\bin\x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion re
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\R-Instat 0.6.0"; Filename: "{app}\instat.exe"
+Name: "{group}\R-Instat 0.6.1"; Filename: "{app}\instat.exe"
 Name: "{group}\{cm:UninstallProgram,R-Instat}"; Filename: "{uninstallexe}"
-Name: "{commondesktop}\R-Instat 0.6.0"; Filename: "{app}\instat.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\R-Instat 0.6.0"; Filename: "{app}\instat.exe"; Tasks: quicklaunchicon
+Name: "{commondesktop}\R-Instat 0.6.1"; Filename: "{app}\instat.exe"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\R-Instat 0.6.1"; Filename: "{app}\instat.exe"; Tasks: quicklaunchicon
 
 [Run]
 Filename: "{app}\instat.exe"; Description: "{cm:LaunchProgram,R-Instat}"; Flags: nowait postinstall skipifsilent
