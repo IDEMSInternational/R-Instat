@@ -44,8 +44,9 @@ Once you've downloaded that zip file, extract the ncdf4.helpers folder into the 
 3. Open the Inno Script Compiler from the start menu
 4. From the file menu choose open
 5. Then navigate to the inno_install_script_32bit.iss script (or 64 bit version) in the same folder as this readme.
-6. From the top menu choose compile.
-7. The installer should be in installer/Output folder
+6. Modify neccessary detailed e.g. version numbers
+7. From the top menu choose compile.
+8. The installer should be in installer/Output folder
 
 ## Step 5: Code sign installers
 Ensure that the installers are code signed by the IDEMS International code signing certificate. This requires the physical USB key. You may need to contact a member of the development team to arrange this.
