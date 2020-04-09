@@ -1258,7 +1258,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuProcurementDefineData_Click(sender As Object, e As EventArgs) Handles mnuProcurementDefineData.Click
-        dlgCorruptionDefineProcurement.ShowDialog()
+        dlgDefineCorruption.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticSCFSupportCumulativeExceedanceGraphs_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportCumulativeExceedanceGraph.Click
