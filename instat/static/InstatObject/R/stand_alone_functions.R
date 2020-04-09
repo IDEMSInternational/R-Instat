@@ -1264,3 +1264,15 @@ package_check <- function(package) {
     }
   }
 }
+              
+in_top_n <- function(x, n = 10, wt, fun = sum) {
+  dat <- data.frame(x = x)
+  if(!missing(wt)) {
+    dat$wt <- wt
+    dat <- dat %>% 
+      group_by(x) %>%
+      summarise(fq = as.function(fun)(na.omit(wt))) %>% arrange(-fq)
+  }
+  else dat <- dat %>% count(x, sort = TRUE, name = "fq")
+  return(x %in% dat$x[1:n])
+}
