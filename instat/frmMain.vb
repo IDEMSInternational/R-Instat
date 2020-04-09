@@ -2130,4 +2130,8 @@ Public Class frmMain
     Private Sub mnuModelUseModelAugment_Click(sender As Object, e As EventArgs) Handles mnuModelUseModelAugment.Click
         dlgAugment.ShowDialog()
     End Sub
+
+    Private Sub DisplayTopNToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayTopNToolStripMenuItem.Click
+        dlgDisplayTopN.ShowDialog()
+    End Sub
 End Class
