@@ -41,7 +41,7 @@ Public Class dlgCalculator
 
     Private Sub TestOKEnabled()
         If Not ucrCalc.ucrReceiverForCalculation.IsEmpty Then
-            If ucrCalc.chkSaveResultInto.Checked AndAlso ucrCalc.ucrSaveResultInto.IsEmpty Then
+            If ucrCalc.chkSaveResultInto.Checked AndAlso ucrCalc.ucrSaveResultInto.IsEmpty AndAlso ucrSaveNewColumn.IsComplete Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -61,6 +61,7 @@ Public Class dlgCalculator
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
         ucrCalc.ucrTryCalculator.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.Visible = True
+        ucrSaveNewColumn.Reset()
     End Sub
 
     Private Sub ReopenDialog()
@@ -86,6 +87,10 @@ Public Class dlgCalculator
         ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrSaveResultInto.SetValidationTypeAsRVariable()
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
+        ucrSaveNewColumn.SetSaveTypeAsColumn()
+        ucrSaveNewColumn.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
+        ucrSaveNewColumn.SetIsComboBox()
+        ucrSaveNewColumn.SetLabelText("New Column Name:")
     End Sub
 
     Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveNameChanged
@@ -173,4 +178,12 @@ Public Class dlgCalculator
             ucrCalc.ucrSaveResultInto.Visible = False
         End If
     End Sub
+
+    Private Sub DefaultNewName() ' TODO SJL 09/04/20 call when ucrCalc.ucrReceiverForCalculation changes
+        If ((Not ucrSaveNewColumn.bUserTyped) AndAlso (Not ucrCalc.ucrReceiverForCalculation.IsEmpty)) Then
+            ucrSaveNewColumn.SetPrefix(ucrCalc.ucrReceiverForCalculation.GetVariableNames(bWithQuotes:=False) & "_calculated")
+        End If
+    End Sub
+
+    'TODO SJL 09/04/20 Call TestOkEnabled() when ucrSaveNewColumn content changes
 End Class

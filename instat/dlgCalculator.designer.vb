@@ -41,6 +41,7 @@ Partial Class dlgCalculator
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCalculator))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrCalc = New instat.ucrCalculator()
+        Me.ucrSaveNewColumn = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -53,10 +54,16 @@ Partial Class dlgCalculator
         resources.ApplyResources(Me.ucrCalc, "ucrCalc")
         Me.ucrCalc.Name = "ucrCalc"
         '
+        'ucrSaveNewColumn
+        '
+        resources.ApplyResources(Me.ucrSaveNewColumn, "ucrSaveNewColumn")
+        Me.ucrSaveNewColumn.Name = "ucrSaveNewColumn"
+        '
         'dlgCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveNewColumn)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrCalc)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -70,4 +77,5 @@ Partial Class dlgCalculator
     End Sub
     Friend WithEvents ucrCalc As ucrCalculator
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSaveNewColumn As ucrSave
 End Class
