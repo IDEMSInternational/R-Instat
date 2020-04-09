@@ -41,6 +41,7 @@ Public Class dlgSummaryTables
     Private Sub InitialiseDialog()
         Dim dctPageBy As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.iCallType = 4
+        ucrBase.iHelpTopicID = 426
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrInputPageBy.Enabled = False ' temporarily disabled

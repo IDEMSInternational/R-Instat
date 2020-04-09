@@ -43,6 +43,9 @@ Public Class dlgExportDataset
         ucrAvailableSheets.SetText("Data Frame to Export:")
 
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
+
+        lblConfirmText.Text = "Click Ok to Confirm the Export"
+        lblConfirmText.ForeColor = Color.Red
     End Sub
 
     Private Sub SetDefaults()
@@ -66,6 +69,13 @@ Public Class dlgExportDataset
         Else
             ucrBase.OKEnabled(False)
         End If
+        If Not ucrInputExportFile.IsEmpty() Then
+            lblConfirmText.Show()
+            ucrBase.OKEnabled(True)
+        Else
+            lblConfirmText.Hide()
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -77,19 +87,16 @@ Public Class dlgExportDataset
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Export File Dialog"
-            dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            If strCurrentFileName <> "" Then
-                dlgSave.FileName = Path.GetFileNameWithoutExtension(strCurrentFileName)
+            dlgSave.Filter = "Comma separated file (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|TAB-separated data (*.tsv)|*.tsv|Pipe-separated data (*.psv)|*.psv|Feather r / Python interchange format (*.feather)|*.feather|Fixed-Width format data (*.fwf)|*.fwf|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|JSON(*.json)|*.json|YAML(*.yml)|*.yml|Stata(*.dta)|*.dta|SPSS(*.sav)|*.sav|XBASE database files (*.dbf)|*.dbf| Weka Attribute - Relation File Format (*.arff)|*.arff|r syntax object (*.R)|*.R|Xml(*.xml)|*.xml|HTML(*.html)|*.html"
+            If Not String.IsNullOrEmpty(strCurrentFileName) Then
+                dlgSave.FileName = Path.GetFileName(strCurrentFileName)
                 dlgSave.InitialDirectory = Path.GetDirectoryName(strCurrentFileName)
             Else
                 dlgSave.FileName = ucrAvailableSheets.cboAvailableDataFrames.Text
                 dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
             End If
-            dlgSave.Filter = "Comma separated file (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|TAB-separated data (*.tsv)|*.tsv|Pipe-separated data (*.psv)|*.psv|Feather r / Python interchange format (*.feather)|*.feather|Fixed-Width format data (*.fwf)|*.fwf|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|JSON(*.json)|*.json|YAML(*.yml)|*.yml|Stata(*.dta)|*.dta|SPSS(*.sav)|*.sav|XBASE database files (*.dbf)|*.dbf| Weka Attribute - Relation File Format (*.arff)|*.arff|r syntax object (*.R)|*.R|Xml(*.xml)|*.xml|HTML(*.html)|*.html"
             If dlgSave.ShowDialog = DialogResult.OK Then
-                If dlgSave.FileName <> "" Then
-                    ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
-                End If
+                ucrInputExportFile.SetName(dlgSave.FileName.Replace("\", "/"))
                 strCurrentFileName = dlgSave.FileName
             End If
         End Using
