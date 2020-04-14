@@ -92,11 +92,11 @@ Public Class dlgHistogram
         dctStats.Add("Scaled Fractions", "stat(count/max(count))")
         ucrInputStats.SetDropDownStyleAsNonEditable()
         ucrInputStats.SetItems(dctStats)
-        ucrInputStats.AddToLinkedControls(ucrChkPercentages, {"Fractions"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputStats.AddToLinkedControls(ucrChkPercentages, {"Fractions"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
 
         ucrChkPercentages.SetText("percentages")
-        ucrChkPercentages.AddParameterPresentCondition(True, "labels", True)
-        ucrChkPercentages.AddParameterPresentCondition(False, "labels", False)
+        ucrChkPercentages.AddParameterPresentCondition(True, "scale")
+        ucrChkPercentages.AddParameterPresentCondition(False, "scale", False)
 
 
         ucrVariablesAsFactorforHist.SetParameter(New RParameter("x", 0))
@@ -294,14 +294,11 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub Adding_Percentages(ucrChangedControl As ucrCore) Handles ucrInputStats.ControlValueChanged, ucrChkPercentages.ControlValueChanged
-        If ucrInputStats.GetText() = "Fractions" Then
-            ucrChkPercentages.Visible = True
-            If ucrChkPercentages.Checked Then
-                clsYScalecontinuousFunction.AddParameter("labels", clsRFunctionParameter:=clsPercentage)
-                clsBaseOperator.AddParameter("scale", clsRFunctionParameter:=clsYScalecontinuousFunction)
-            Else
-                clsBaseOperator.RemoveParameterByName("scale")
-            End If
+        If ucrInputStats.GetText() = "Fractions" AndAlso ucrChkPercentages.Checked Then
+            clsYScalecontinuousFunction.AddParameter("labels", clsRFunctionParameter:=clsPercentage)
+            clsBaseOperator.AddParameter("scale", clsRFunctionParameter:=clsYScalecontinuousFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("scale")
         End If
     End Sub
 
