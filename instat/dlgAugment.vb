@@ -35,13 +35,12 @@ Public Class dlgAugment
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
 
-        ucrSaveDataFrame.SetPrefix("Newdataframe")
-        ucrSaveDataFrame.SetIsComboBox()
-        ucrSaveDataFrame.SetSaveTypeAsModel()
-        ucrSaveDataFrame.SetCheckBoxText("SaveNewdataframe")
-        ucrSaveDataFrame.SetAssignToIfUncheckedValue("dataframe")
-        ucrSaveDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
-        ucrSaveDataFrame.ucrChkSave.Checked = False
+
+        ucrSaveNewColumn.SetIsComboBox()
+        ucrSaveNewColumn.SetSaveTypeAsColumn()
+        ucrSaveNewColumn.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
+        ucrSaveNewColumn.SetLabelText("New Column Name:")
+
 
         ucrModelReceiver.SetParameter(New RParameter("x", 0))
         ucrModelReceiver.Selector = ucrModelSelector
@@ -53,22 +52,24 @@ Public Class dlgAugment
     Private Sub SetDefaults()
         clsAugment = New RFunction
         ucrModelSelector.Reset()
-        ucrSaveDataFrame.Reset()
+        ucrSaveNewColumn.Reset()
         clsAugment.SetRCommand("augment")
         clsAugment.SetPackageName("broom")
+        clsAugment.SetAssignTo(strTemp:=ucrSaveNewColumn.GetText(), strTempDataframe:=ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewColumn.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsAugment)
+        ucrBase.clsRsyntax.iCallType = 2
         UpdateAssignTo()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrSaveDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString, bReset)
+        ucrSaveNewColumn.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString, bReset)
         ucrModelReceiver.SetRCode(clsAugment, bReset)
         UpdateAssignTo()
     End Sub
 
     Private Sub TestOKEnabled()
         'Tests when ok can be enabled
-        If ucrModelReceiver.IsEmpty AndAlso ucrSaveDataFrame.IsComplete Then
+        If ucrModelReceiver.IsEmpty AndAlso ucrSaveNewColumn.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -81,19 +82,23 @@ Public Class dlgAugment
         TestOKEnabled()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveDataFrame.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub UpdateAssignTo()
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="augment_data", strTempDataframe:=ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
     End Sub
 
     Private Sub ucrChkDisplayInOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayInOutput.ControlValueChanged
         If ucrChkDisplayInOutput.Checked Then
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+            ucrBase.clsRsyntax.iCallType = 2
         Else
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+            ucrBase.clsRsyntax.iCallType = 0
         End If
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveNewColumn.ControlContentsChanged, ucrModelReceiver.ControlContentsChanged
+
     End Sub
 End Class
