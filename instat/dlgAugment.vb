@@ -48,12 +48,11 @@ Public Class dlgAugment
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
 
-
         ucrSaveNewDataFrame.SetIsComboBox()
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
+        ucrSaveNewDataFrame.SetCheckBoxText("Save New data frame")
+        ucrSaveNewDataFrame.SetPrefix("Augment_data")
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
-        ucrSaveNewDataFrame.SetPrefix("Newdataframe")
-
 
         ucrModelReceiver.SetParameter(New RParameter("x", 0))
         ucrModelReceiver.Selector = ucrModelSelector
@@ -79,12 +78,13 @@ Public Class dlgAugment
 
     Private Sub TestOKEnabled()
         'Tests when ok can be enabled
-        If ucrModelReceiver.IsEmpty AndAlso ucrSaveNewDataFrame.IsComplete Then
-            ucrBase.OKEnabled(False)
-        Else
+        If (ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty() AndAlso ucrChkDisplayInOutput.Checked) Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
+
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -102,5 +102,9 @@ Public Class dlgAugment
 
     Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveNewDataFrame.ControlContentsChanged, ucrModelReceiver.ControlContentsChanged
+
     End Sub
 End Class

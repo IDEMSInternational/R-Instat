@@ -45,7 +45,7 @@ Partial Class dlgAugment
         Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(17, 300)
         Me.ucrSaveNewDataFrame.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
-        Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(317, 30)
+        Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(387, 30)
         Me.ucrSaveNewDataFrame.TabIndex = 7
         '
         'ucrModelReceiver
