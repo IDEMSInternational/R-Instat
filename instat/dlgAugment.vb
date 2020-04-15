@@ -1,11 +1,24 @@
-﻿
-Imports instat
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgAugment
     Public bfirstload As Boolean = True
     Public bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsRSyntax As RSyntax
     Private clsAugment As New RFunction
 
     Private Sub dlgTidy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -36,40 +49,37 @@ Public Class dlgAugment
         ucrModelSelector.SetParameterIsrfunction()
 
 
-        ucrSaveNewColumn.SetIsComboBox()
-        ucrSaveNewColumn.SetSaveTypeAsColumn()
-        ucrSaveNewColumn.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
-        ucrSaveNewColumn.SetLabelText("New Column Name:")
+        ucrSaveNewDataFrame.SetIsComboBox()
+        ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
+        ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
+        ucrSaveNewDataFrame.SetPrefix("Newdataframe")
 
 
         ucrModelReceiver.SetParameter(New RParameter("x", 0))
         ucrModelReceiver.Selector = ucrModelSelector
         ucrModelReceiver.SetMeAsReceiver()
-
-
     End Sub
 
     Private Sub SetDefaults()
         clsAugment = New RFunction
+
         ucrModelSelector.Reset()
-        ucrSaveNewColumn.Reset()
+        ucrSaveNewDataFrame.Reset()
+        ucrBase.clsRsyntax.iCallType = 2
+
         clsAugment.SetRCommand("augment")
         clsAugment.SetPackageName("broom")
-        clsAugment.SetAssignTo(strTemp:=ucrSaveNewColumn.GetText(), strTempDataframe:=ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewColumn.GetText())
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsAugment)
-        ucrBase.clsRsyntax.iCallType = 2
-        UpdateAssignTo()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrSaveNewColumn.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString, bReset)
-        ucrModelReceiver.SetRCode(clsAugment, bReset)
-        UpdateAssignTo()
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
         'Tests when ok can be enabled
-        If ucrModelReceiver.IsEmpty AndAlso ucrSaveNewColumn.IsComplete Then
+        If ucrModelReceiver.IsEmpty AndAlso ucrSaveNewDataFrame.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -82,10 +92,6 @@ Public Class dlgAugment
         TestOKEnabled()
     End Sub
 
-    Private Sub UpdateAssignTo()
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="augment_data", strTempDataframe:=ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
-    End Sub
-
     Private Sub ucrChkDisplayInOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayInOutput.ControlValueChanged
         If ucrChkDisplayInOutput.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
@@ -94,11 +100,7 @@ Public Class dlgAugment
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveNewColumn.ControlContentsChanged, ucrModelReceiver.ControlContentsChanged
-
     End Sub
 End Class
