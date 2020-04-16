@@ -57,29 +57,18 @@ Public Class RParameter
     Public bIsString As Boolean = False
 
     ''' <summary>   This parameter's (zero-based) position in relation to the associated 
-    '''             R command's other parameters.<para> 
-    '''             If iPosition is 0, then the parameter is part of the unordered parameters that 
-    '''             are added after the ordered ones. Note that it is allowed to have gaps in the 
-    '''             positions.</para><para>
-    '''             For example, parameters with positions a 0, b 2, c 5, d 3, e 0 will be sorted 
-    '''             as b d c (a e). </para>
-    '''             TBD SJL 04/04/20 The comment above is based on the legacy comments I found in 
-    '''                 this file. However, when I look at the code, I can't see any evidence that 
-    '''                 the position is zero-based or that position 0 has any special significance. 
-    '''                 If I look at the 'ToScript' functions in the ROperator or RFunction classes, 
-    '''                 then they just add the parameters in the order they are stored in the list. 
-    '''                 The list order is determined by the 'RCodeStructure.SortParameters' function. 
-    '''                 This function just sorts the parameters according to their 'iPosition'.
-    '''                 Therefore I think iPosition can be any signed integer that represents this 
-    '''                 parameter's position in relation to the other parameters.
-    '''                 If my understanding is correct then the comments for all the 'iPosition'
-    '''                 parameters in the different functions also need to be updated.
+    '''             R command's other parameters.<para>
+    '''             For example, parameters with positions a 0, b 2, c 5, d 3 will be sorted 
+    '''             as a, b, d, c. </para><para>
+    '''             Note that a position of 0 has a special meaning for ROperators with only one 
+    '''             parameter. In this case, a position of 0 means that the parameter will be put 
+    '''             on the left side of the operation symbol (e.g. '!x')</para>
     '''             </summary> 
     Private iPosition As Integer = -1
 
     ''' <summary>   If true then include the name of the parameter in the R script 
     '''             (e.g. 'dir="C:/Users/myName/InstatObject/R"'. </summary>
-    Public bIncludeArgumentName As Boolean = True 'TODO SJL 03/04/20 the only purpose of the argument name is to include it in the R script. If we only name the argument when it needs to be included then we can remove this boolean.
+    Public bIncludeArgumentName As Boolean = True
 
     ''' <summary>   Default constructor. </summary>
     Public Sub New()
@@ -282,7 +271,7 @@ Public Class RParameter
     '''             If this parameter's function/operator parameters also contain functions or 
     '''             operators, then also recursively adds these operators/functions/scripts to the 
     '''             respective lists.
-    '''             </para>. </summary>
+    '''             </para></summary>
     '''
     ''' <param name="lstCodes">     The existing list of functions/operators. </param>
     ''' <param name="lstValues">    The existing list the functions/operators' R scripts. </param>

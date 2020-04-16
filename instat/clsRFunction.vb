@@ -72,9 +72,11 @@ Public Class RFunction
     '''     object. This script will have the form 'RCommand(param1=param1Val, param2=param2Val, ...)'.
     ''' </summary>
     '''
-    ''' <param name="strScript">    [in,out] (Optional) The existing script. If the assignment
-    '''                             requires extra elements (e.g. columns, models, graphs etc.) then this
-    '''                             script is updated to include the addition of the new elements. </param>
+    ''' <param name="strScript">    [in,out] (Optional) The existing script including any
+    '''                             assignment part.
+    '''                             This script is passed to the 'ToScript' function of the base
+    '''                             class. This script is also passed to the 'ToScript' function
+    '''                             of the operator's parameters. </param>
     ''' <param name="strTemp">      (Optional) Ignored, only included so that this function overrides 
     '''                             its parent function. </param>
     '''
@@ -83,7 +85,7 @@ Public Class RFunction
     '''--------------------------------------------------------------------------------------------
     Public Overrides Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
         Dim i As Integer
-        'TODO SJL legacy comment:'For method with OrderedIndices, replace clsParameters.count by Mybase.OrderedIndices.count and i by Mybase.OrderedIndices(i)'
+        'TODO Legacy comment:'For method with OrderedIndices, replace clsParameters.count by Mybase.OrderedIndices.count and i by Mybase.OrderedIndices(i)'
 
         SortParameters()
         'if the object has an associated package name, then prefix the script with the package name
@@ -97,7 +99,7 @@ Public Class RFunction
             If i > 0 Then
                 strTemp = strTemp & ", "
             End If
-            'append the script associated the parameter (e.g. "max_cols=30")
+            'append the script associated with the parameter (e.g. "max_cols=30")
             strTemp = strTemp & clsParameters(i).ToScript(strScript)
         Next
 
@@ -108,7 +110,7 @@ Public Class RFunction
         If bToScriptAsRString Then
             'if string is intended to be assigned to a script then raise error (because modified script will no longer suitable for this)
             'TODO SJL if we only allow these 3 flags to be accessed through 'set/get' functions then we can guarantee that this error situation doesn't occur
-            'TODO SJL legacy comment:'should also check assignment of parameters'
+            'TODO legacy comment:'should also check assignment of parameters'
             If bToBeAssigned OrElse bIsAssigned Then
                 MsgBox("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
             End If
@@ -232,7 +234,7 @@ Public Class RFunction
         clsRFunction.bToScriptAsRString = bToScriptAsRString
         clsRFunction.Tag = Tag
         For Each clsRParam In clsParameters
-            clsRFunction.AddParameter(clsRParam.Clone) 'TODO SJL add '()' to be consistent?
+            clsRFunction.AddParameter(clsRParam.Clone)
         Next
 
         'RFunction specific properties
