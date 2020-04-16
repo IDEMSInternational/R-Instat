@@ -50,8 +50,8 @@ Public Class dlgAugment
 
         ucrSaveNewDataFrame.SetIsComboBox()
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
-        ucrSaveNewDataFrame.SetCheckBoxText("Save New data frame")
-        ucrSaveNewDataFrame.SetPrefix("Augment_data")
+        ucrSaveNewDataFrame.SetCheckBoxText("SaveNewdataframe")
+        ucrSaveNewDataFrame.SetPrefix("Augment_dataframe")
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
 
         ucrModelReceiver.SetParameter(New RParameter("x", 0))
@@ -102,9 +102,5 @@ Public Class dlgAugment
 
     Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveNewDataFrame.ControlContentsChanged, ucrModelReceiver.ControlContentsChanged
-
     End Sub
 End Class
