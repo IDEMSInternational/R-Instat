@@ -60,9 +60,10 @@ Public Class RSyntax
     Public clsBaseOperator As New ROperator
 
     ''' <summary>   An R command (of any type). </summary>
-    Public clsBaseCommandString As New RCodeStructure
+    Public clsBaseCommandString As New RCodeStructure 'TODO SJL 17/04/20 What's the connection between this and 'bUeseCommandString' and 'strCommandString'? 
 
-    ''' <summary>   An R command in the form of a string. </summary>
+
+    ''' <summary>   The R command in the form of a string. </summary>
     Public strCommandString As String = ""
 
     ''' <summary>   The R functions/operators/commands that should be run before the base R code. </summary>
@@ -70,6 +71,7 @@ Public Class RSyntax
 
     ''' <summary>   TThe R functions/operators/commands that should be run before the base R code. </summary>
     Public lstAfterCodes As New List(Of RCodeStructure)
+
 
     ''' <summary>   If true then use 'clsBaseFunction' as this object's base R code. </summary>
     Public bUseBaseFunction As Boolean = False
@@ -79,6 +81,7 @@ Public Class RSyntax
 
     ''' <summary>   If true then use 'clsBaseCommandString' as this object's base R code. </summary>
     Public bUseCommandString As Boolean = False
+
 
     ''' <summary>   Defines how to display the R output.
     ''' <list type="bullet">
@@ -256,6 +259,8 @@ Public Class RSyntax
     '''                                             parameter in this object's parameter list.</param>
     '''--------------------------------------------------------------------------------------------
     Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional clsRCodeStructureParameter As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
+        'TODO SJL 17/04/20 This function should only be used if this class encapsulates a function. But it doesn't check the booleans for this.
+        '                  Also, 'clsBaseFunction' is public so 'AddParameter' can be called directly. Remove this function?
         clsBaseFunction.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter, clsRCodeStructureParameter, bIncludeArgumentName, iPosition)
     End Sub
 
@@ -332,6 +337,8 @@ Public Class RSyntax
     '''                                     parameter in this object's parameter list. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub SetOperatorParameter(iPosition As Integer, Optional strParameterName As String = "", Optional strValue As String = "", Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional clsCs As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True)
+        'TODO SJL 17/04/20 This function should only be used if this class encapsulates an operator. But it doesn't check the booleans for this.
+        '                  Also, 'clsBaseOperator' is public so 'AddParameter' can be called directly. Remove this function?
         clsBaseOperator.AddParameter(strParameterName, strValue, clsRFunc, clsOp, clsCs, bIncludeArgumentName, iPosition)
     End Sub
 
@@ -347,6 +354,7 @@ Public Class RSyntax
     '''                                     name. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub AddOperatorParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional clsCs As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True)
+        'TDDO SJL 17/04/20 What's the difference between this function and the one above? Remove this function?
         clsBaseOperator.AddParameter(strParameterName, strParameterValue, clsRFunc, clsOp, clsCs, bIncludeArgumentName)
     End Sub
 
@@ -354,12 +362,12 @@ Public Class RSyntax
     ''' <summary>   Removes the parameter named <paramref name="strParameterName"/>. </summary>
     '''
     ''' <param name="strParameterName"> Name of the parameter. </param>
-    ''' <param name="clsFunction">      [in,out] (Optional) TBD SJL 06/04/20 remove?. </param>
+    ''' <param name="clsFunction">      [in,out] (Optional) The function to add the parameter to.
+    '''                                 If not specified then adds the parameter to 'clsBaseFunction'. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub RemoveParameter(strParameterName As String, Optional ByRef clsFunction As RFunction = Nothing)
-        'TODO SJL 06/04/20 What is the purpose of the 'clsFunction' parameter? 
-        ' I think it's cleaner and safer if developers just use 'Rysntax.clsBaseFunction'. 
-        ' This parameter is also currently unused in the current code, I think it should be removed.
+        'TODO SJL 17/04/20 This function should only be used if this class encapsulates a function. But it doesn't check the booleans for this.
+        '                  Also, 'clsBaseFunction' is public so 'RemoveParameterByName' can be called directly. Remove this function?
         If clsFunction Is Nothing Then
             clsFunction = clsBaseFunction
         End If
@@ -782,7 +790,7 @@ Public Class RSyntax
     '''             the base R code), else returns false. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function BeforeCodesContain(strFunctionName As String) As Boolean
-        'TODO SJL 04/04/20 This function is only called from within this class. Make private? 
+        'TODO SJL 04/04/20 This function is only called from within this class. Inline or make private? 
         Dim clsTempFunc As RFunction
         For Each clsRCode As RCodeStructure In lstBeforeCodes
             clsTempFunc = TryCast(clsRCode, RFunction)
