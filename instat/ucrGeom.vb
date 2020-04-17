@@ -1217,20 +1217,29 @@ Public Class ucrGeom
         'clsgeom_rect.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_rect)
 
-        'clsgeom_ribbon.strGeomName = "geom_ribbon"
-        'clsgeom_ribbon.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_ribbon.AddAesParameter("ymax", bIsMandatory:=TRUE)
-        'clsgeom_ribbon.AddAesParameter("ymin", bIsMandatory:=TRUE)
-        ''optional
-        'clsgeom_ribbon.AddAesParameter("alpha")
-        'clsgeom_ribbon.AddAesParameter("colour")
-        'clsgeom_ribbon.AddAesParameter("linetype")
-        'clsgeom_ribbon.AddAesParameter("size")
+        clsgeom_ribbon.strGeomName = "geom_ribbon"
+        'mandatory aes are s or y or ymax or y min 
+        clsgeom_ribbon.AddAesParameter("x")
+        clsgeom_ribbon.AddAesParameter("y")
+        clsgeom_ribbon.AddAesParameter("ymax")
+        clsgeom_ribbon.AddAesParameter("ymin")
+        'optional
+        clsgeom_ribbon.AddAesParameter("alpha")
+        clsgeom_ribbon.AddAesParameter("colour")
+        clsgeom_ribbon.AddAesParameter("group")
+        clsgeom_ribbon.AddAesParameter("linetype")
+        clsgeom_ribbon.AddAesParameter("size")
 
         ''add layer parameter 
-        'clsgeom_ribbon.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_ribbon.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
-        'lstAllGeoms.Add(clsgeom_ribbon)
+        'not sure of all the options for this so i leave it as an editable list- once we know we can add all of them
+        clsgeom_ribbon.AddLayerParameter("stat", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_ribbon.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_ribbon.AddLayerParameter("size", "numeric", "1")
+        clsgeom_ribbon.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_ribbon.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_ribbon.AddLayerParameter("orientation", "list", "NA", lstParameterStrings:={"NA", "x", "y"})
+        clsgeom_ribbon.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_ribbon)
 
         clsgeom_rug.SetGeomName("geom_rug")
         clsgeom_rug.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
