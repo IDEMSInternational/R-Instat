@@ -17,25 +17,41 @@
 Imports RDotNet
 Imports unvell.ReoGrid
 Imports System.IO
+''' <summary>   A link. </summary>
 
 Public Class RLink
     ' R interface class. Each instance of the class has its own REngine instance
+
+    ''' <summary>   Full pathname of the climate object file. </summary>
     Dim strClimateObjectPath As String = "/ClimateObject/R" 'new climateobject path
+    ''' <summary>   The climate object. </summary>
     Public strClimateObject As String = "ClimateObject"
+    ''' <summary>   Full pathname of the instat object file. </summary>
     Dim strInstatObjectPath As String = "/InstatObject/R" 'path to the Instat object
+    ''' <summary>   The instat data object. </summary>
     Public strInstatDataObject As String = "data_book"
+    ''' <summary>   Name of the data book class. </summary>
     Public strDataBookClassName As String = "DataBook"
+    ''' <summary>   True to first r code. </summary>
 
     Private bFirstRCode As Boolean = True
+    ''' <summary>   True to debug log exists. </summary>
     Private bDebugLogExists As Boolean = False
+    ''' <summary>   True to automatically save log exists. </summary>
     Private bAutoSaveLogExists As Boolean = False
+    ''' <summary>   True to first log code. </summary>
     Private bFirstLogCode As Boolean = True
+    ''' <summary>   True to r code running. </summary>
     Public bRCodeRunning As Boolean = False
+    ''' <summary>   Full pathname of the automatic save log file. </summary>
 
     Public strAutoSaveLogFilePath As String = ""
+    ''' <summary>   Full pathname of the automatic save debug log file. </summary>
     Public strAutoSaveDebugLogFilePath As String = ""
+    ''' <summary>   The cls engine. </summary>
 
     Public clsEngine As REngine
+    ''' <summary>   True if r engine initialised. </summary>
     Public bREngineInitialised As Boolean = False
     ''' The R output window (the window on the right that displays the R scripts and results).
     Public rtbOutput As New ucrWPFRichTextBox
@@ -45,8 +61,11 @@ Public Class RLink
     Public bLog As Boolean = False
     ''' <summary> If true then the R output window is defined.</summary>
     Public bOutput As Boolean = False
+    ''' <summary>   True to climate object exists. </summary>
     Public bClimateObjectExists As Boolean = False
+    ''' <summary>   True to instat object exists. </summary>
     Public bInstatObjectExists As Boolean = False
+    ''' <summary>   True to climsoft link exists. </summary>
     Public bClimsoftLinkExists As Boolean = False
 
     ''' <summary> if true then show the executed commands in 'rtbOutput' TBD - is this the output window?</summary>
@@ -65,6 +84,7 @@ Public Class RLink
     Public fComments As Font = New Font("Microsoft Sans Serif", 11, FontStyle.Regular)
     ''' <summary> The colour of the R script comment. </summary>
     Public clrComments As Color = Color.Green
+    ''' <summary>   The graph display option. </summary>
 
     Public strGraphDisplayOption As String = "view_output_window"
     ''' <summary> The current grid (the worksheet that appears similar to a spreadsheet on the 
@@ -76,12 +96,67 @@ Public Class RLink
     Private bShowWaitDialog As Boolean = True
     ''' The time in seconds to wait before showing the waiting dialog
     Private iWaitDelay As Integer = 2
+    ''' <summary>   The r version major required. </summary>
 
     Private strRVersionMajorRequired As String = "3"
-	Private strRVersionMinorRequired As String = "6"
-	Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0"
-	Private strRBundledVersion As String = "3.6.2"
+    ''' <summary>   The r version minor required. </summary>
+    Private strRVersionMinorRequired As String = "6"
+    ''' <summary>   The r version required. </summary>
+    Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0"
+    ''' <summary>   The r bundled version. </summary>
+    Private strRBundledVersion As String = "3.6.2"
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Initialises the connection with the R environment:
+    ''' <list type="bullet">
+    '''     <item><description>
+    '''             Ensures that a suitable version of R is installed
+    '''     </description></item><item><description>
+    '''             Sets the necessary environment variables
+    '''     </description></item><item><description>
+    '''             Creates and initializes the REngine (which enacpsulates the R environment)
+    '''     </description></item><item><description>
+    '''             Sets the working directory
+    '''     </description></item><item><description>
+    '''             Loads the R packages, and displays information about any missing packages 
+    '''     </description></item>
+    ''' </list></summary>
+    '''
+    ''' <param name="strScript">        (Optional) The R setup script to execute. If "" then 
+    '''                                 a default setup script is used. </param>
+    ''' <param name="iCallType">        (Optional) How to display the output from the setup script:
+    ''' <list type="bullet">
+    '''     <item>
+    '''        <description>0 Executes <paramref name="strScript"/> and ignores the result.</description>
+    '''     </item>
+    '''     <item>
+    '''        <description>1 Executes <paramref name="strScript"/>, stores the result in a
+    '''        temporary R variable, and then outputs the variable's value as text.</description>
+    '''     </item>
+    '''     <item>
+    '''        <description>2 Executes <paramref name="strScript"/> and if successful shows the
+    '''        result as text.</description>
+    '''     </item>
+    '''     <item>
+    '''        <description>3 Executes <paramref name="strScript"/> and if successful shows the
+    '''        result as a graph.</description>
+    '''     </item>
+    '''     <item>
+    '''        <description>4 Executes <paramref name="strScript"/>, stores the result in a
+    '''        temporary R variable, and then outputs the variable's value in a web browser.</description>
+    '''     </item>
+    ''' </list>
+    '''                                 Note: If a script line contains "$get_graphs" then call 
+    '''                                 type is set to 3 just for that line.</param>
+    ''' <param name="strComment">       (Optional) The comment to display before the first line of
+    '''                                 <paramref name="strScript"/>.
+    '''                                 If <paramref name="strScript"/> is not defined then a
+    '''                                 default comment is used. </param>
+    ''' <param name="bSeparateThread">  (Optional) If true then execute the R script in a new 
+    '''                                 thread. </param>
+    '''
+    ''' <returns>   True if it succeeds, false if it fails. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True) As Boolean
         Dim strMissingPackages() As String
         Dim expTemp As SymbolicExpression
@@ -119,7 +194,7 @@ Public Class RLink
         Catch ex As Exception
             ' Modified message since currently we recommend use of same R version as bundled version
             MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionRequired & " of R." & vbNewLine & "Note that R-Instat does not work with R below 3.5.0. We recommend using R " & strRBundledVersion & ".  Try reruning the installation to install R " & strRBundledVersion & " or download R " & strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
-			Application.Exit()
+            Application.Exit()
             Environment.Exit(0)
         End Try
         Try
@@ -128,25 +203,25 @@ Public Class RLink
                 strMajor = expTemp.AsCharacter(0)
             End If
             expTemp = RunInternalScriptGetValue("R.Version()$minor", bSilent:=True)
-			If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-				strMinor = expTemp.AsCharacter(0)
-			End If
-			Dim strRVersionRunning = strMajor & "." & strMinor
-			If strMinor.Count >= 3 Then
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                strMinor = expTemp.AsCharacter(0)
+            End If
+            Dim strRVersionRunning = strMajor & "." & strMinor
+            If strMinor.Count >= 3 Then
                 If Not (strMajor = strRVersionMajorRequired AndAlso strMinor.Count > 0 AndAlso strMinor(0) >= strRVersionMinorRequired) Then
-					MsgBox("Your current version of R is outdated. You are currently running R version: " & strRVersionRunning & vbNewLine &
-						   "R-Instat requires at least version " & strRVersionRequired & " or greater." &
-						   vbNewLine & "Try reruning the installation to install an updated version of R or download R from " &
-						   "https://cran.r-project.org/bin/windows/base/" & strRVersionRequired & "and restart R-Instat.", MsgBoxStyle.Critical, "R Version not supported.")
-					Application.Exit()
+                    MsgBox("Your current version of R is outdated. You are currently running R version: " & strRVersionRunning & vbNewLine &
+                           "R-Instat requires at least version " & strRVersionRequired & " or greater." &
+                           vbNewLine & "Try reruning the installation to install an updated version of R or download R from " &
+                           "https://cran.r-project.org/bin/windows/base/" & strRVersionRequired & "and restart R-Instat.", MsgBoxStyle.Critical, "R Version not supported.")
+                    Application.Exit()
                     Environment.Exit(0)
                 End If
             Else
-				MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionRequired & vbNewLine &
-					   "Try uninstalling any versions of R and rerun the installation to install R " & strRVersionRequired & " or download R " &
-					   strRVersionRequired & "From https://cran.r-project.org/bin/windows/base/old/" & strRVersionRequired &
-					   "And restart R-Instat.", MsgBoxStyle.Critical, "R Version error.")
-				Application.Exit()
+                MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionRequired & vbNewLine &
+                       "Try uninstalling any versions of R and rerun the installation to install R " & strRVersionRequired & " or download R " &
+                       strRVersionRequired & "From https://cran.r-project.org/bin/windows/base/old/" & strRVersionRequired &
+                       "And restart R-Instat.", MsgBoxStyle.Critical, "R Version error.")
+                Application.Exit()
                 Environment.Exit(0)
             End If
         Catch ex As Exception
@@ -184,13 +259,15 @@ Public Class RLink
         Return bClose
     End Function
 
-    ''' <summary>
-    ''' This method executes the <paramref name="strNewScript"/> R script and displays the output 
-    ''' as text or graph (determined by <paramref name="strNewScript"/>).
-    ''' </summary>
-    ''' <param name="strNewScript"> is the R script to execute.</param>
-    ''' <param name="strNewComment"> is shown as a comment. If this parameter is "" then shows 
-    ''' <paramref name="strNewScript"/> as the comment.</param>
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Executes the <paramref name="strNewScript"/> R script and displays the output 
+    '''             as text or graph (determined by <paramref name="strNewScript"/>). 
+    '''             </summary>
+    '''
+    ''' <param name="strNewScript">     The R script to execute. </param>
+    ''' <param name="strNewComment">    The comment to display. If this parameter is "" then shows
+    '''                                  <paramref name="strNewScript"/> as the comment.</param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String)
         Dim strSelectedScript As String = strNewScript
         Dim iCallType As Integer
@@ -209,7 +286,7 @@ Public Class RLink
             End If
         Next
     End Sub
-
+    ''' <summary>   Closes down the R engine (which encapsulates the R environment). </summary>
     Public Sub CloseREngine()
         If clsEngine IsNot Nothing Then
             Try
@@ -220,12 +297,11 @@ Public Class RLink
         End If
     End Sub
 
-    ''' <summary>
-    ''' This method returns the packages not installed.
-    ''' </summary>
-    ''' <returns>
-    ''' Returns the packages not installed as an array of strings.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets packages not installed. </summary>
+    '''
+    ''' <returns>   The packages not installed. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetPackagesNotInstalled() As String()
         Dim chrPackagesNotInstalled As CharacterVector
         Dim clsPackagesNotInstalled As New RFunction
@@ -241,6 +317,14 @@ Public Class RLink
         End If
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Loads the required packages. </summary>
+    '''
+    ''' <param name="bSilent">  (Optional) if false and an exception is raised then open a message
+    '''                         box that displays the exception message. </param>
+    '''
+    ''' <returns>   True if it succeeds, false if it fails. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function LoadedRequiredPackages(Optional bSilent As Boolean = False) As Boolean
         Dim clsLoadPackages As New RFunction
 
@@ -248,6 +332,14 @@ Public Class RLink
         Return RunInternalScript(clsLoadPackages.ToScript(), bSilent:=bSilent)
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Loads the <paramref name="strFile"/> data file. </summary>
+    '''
+    ''' <param name="strFile">          The data file to load. </param>
+    ''' <param name="bKeepExisting">    (Optional) the value for the 'keep_existing' parameter. </param>
+    ''' <param name="strComment">       (Optional) The comment to show before executing the 
+    '''                                 R script. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub LoadInstatDataObjectFromFile(strFile As String, Optional bKeepExisting As Boolean = False, Optional strComment As String = "")
         Dim clsImportRDS As New RFunction
         Dim clsReadRDS As New RFunction
@@ -268,70 +360,77 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
-    ''' <summary>
-    ''' This method sets the current grid (the worksheet that appears similar to a spreadsheet 
-    ''' on the left-hand side of the display).
-    ''' </summary>
-    ''' <param name="grdNewDataGrid"> is the current grid.</param>
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Sets the current grid (the worksheet that appears similar to a spreadsheet
+    '''             on the left-hand side of the display). </summary>
+    '''
+    ''' <param name="grdNewDataGrid">   The current grid. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub SetDataViewGrid(grdNewDataGrid As ReoGridControl)
+        'TODO SJL 19/04/20 Never used, remove?
         grdDataView = grdNewDataGrid
     End Sub
 
-    ''' <summary>
-    ''' This method sets the font and colour for output generated by the R script.
-    ''' </summary>
-    ''' <param name="tempFont"> is the font to use for output text.</param>
-    ''' <param name="tempColor"> is the colour to use for output text.</param>
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Sets the font and colour for output generated by the R script. </summary>
+    '''
+    ''' <param name="tempFont">     The font to use for output text. </param>
+    ''' <param name="tempColor">    The colour to use for output text. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub SetFormatOutput(tempFont As Font, tempColor As Color)
         fOutput = tempFont
         clrOutput = tempColor
     End Sub
 
-    ''' <summary>
-    ''' This method sets the font and colour for the R script.
-    ''' </summary>
-    ''' <param name="tempFont"> is the font to use for output text.</param>
-    ''' <param name="tempColor"> is the colour to use for output text.</param>
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Sets the font and colour for the R script. </summary>
+    '''
+    ''' <param name="tempFont">     The font to use for the R script. </param>
+    ''' <param name="tempColor">    The colour to use for the R script. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub SetFormatScript(tempFont As Font, tempColor As Color)
         fScript = tempFont
         clrScript = tempColor
     End Sub
 
-    ''' <summary>
-    ''' This method sets the font and colour for the R script comment.
-    ''' </summary>
-    ''' <param name="tempFont"> is the font to use for output text.</param>
-    ''' <param name="tempColor"> is the colour to use for output text.</param>
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Sets the font and colour for the R script comment. </summary>
+    '''
+    ''' <param name="tempFont">     The font to use for the R script comment. </param>
+    ''' <param name="tempColor">    The colour to use for the R script comment. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub SetFormatComment(tempFont As Font, tempColor As Color)
         fComments = tempFont
         clrComments = tempColor
     End Sub
 
-    ''' <summary>
-    ''' This method sets the R output window (the window on the right that displays the R scripts and results).
-    ''' </summary>
-    ''' <param name="tempOutput"> is the R output window.</param>
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Sets the R output window (the window on the right that displays the R scripts 
+    '''             and results). </summary>
+    '''
+    ''' <param name="tempOutput">   The R output window. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub SetOutput(tempOutput As ucrWPFRichTextBox)
         'TEST temporary
         rtbOutput = tempOutput
         bOutput = True
     End Sub
 
-    ''' <summary>
-    ''' This method sets the log window.
-    ''' </summary>
-    ''' <param name="tempLog"> is the log window.</param>
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Sets the log window. </summary>
+    '''
+    ''' <param name="tempLog">  The log window. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub SetLog(tempLog As TextBox)
         txtLog = tempLog
         bLog = True
     End Sub
 
-    ''' <summary>
-    ''' This method returns the data frame names.
-    ''' </summary>
-    ''' <returns>
-    ''' Returns the data frame names as a list of strings.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets the data frame names. </summary>
+    '''
+    ''' <returns>   The data frame names. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetDataFrameNames() As List(Of String)
         Dim chrDataFrameNames As CharacterVector = Nothing
         Dim lstDataFrameNames As New List(Of String)
@@ -349,14 +448,15 @@ Public Class RLink
         Return lstDataFrameNames
     End Function
 
-    ''' <summary>
-    ''' This method returns the data names linked to <paramref name="strDataName"/>.
-    ''' </summary>
-    ''' <param name="strDataName"> is the data frame to link to.</param>
-    ''' <param name="bIncludeSelf"> if true then also return the <paramref name="strDataName"/> data name.</param>
-    ''' <returns>
-    ''' Returns the data names linked to <paramref name="strDataName"/> as a list of strings.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets the data names linked to <paramref name="strDataName"/>. </summary>
+    '''
+    ''' <param name="strDataName">  The data frame to link to. </param>
+    ''' <param name="bIncludeSelf"> (Optional) If true then also return the <paramref name="strDataName"/> 
+    '''                             data name.</param>.
+    '''
+    ''' <returns>   The data names linked to <paramref name="strDataName"/>. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetLinkedToDataFrameNames(strDataName As String, Optional bIncludeSelf As Boolean = True) As List(Of String)
         Dim chrDataFrameNames As CharacterVector = Nothing
         Dim lstDataFrameNames As New List(Of String)
@@ -380,14 +480,15 @@ Public Class RLink
         Return lstDataFrameNames
     End Function
 
-    ''' <summary>
-    ''' This method returns <paramref name="strDataFrameName"/>. TBD
-    ''' </summary>
-    ''' <param name="strDataFrameName"> is the data name TBD.</param>
-    ''' <param name="bIncludeHiddenColumns"> is the column name TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets column names. </summary>
+    '''
+    ''' <param name="strDataFrameName">         Is the data name TBD. </param>
+    ''' <param name="bIncludeHiddenColumns">    (Optional) True to include, false to exclude the
+    '''                                         hidden columns. </param>
+    '''
+    ''' <returns>   The column names. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetColumnNames(strDataFrameName As String, Optional bIncludeHiddenColumns As Boolean = True) As List(Of String)
         Dim chrCurrColumns As CharacterVector = Nothing
         Dim lstCurrColumns As New List(Of String)
@@ -409,7 +510,21 @@ Public Class RLink
         Return lstCurrColumns
     End Function
 
-    'bIncludeOverall = True includes an extra item in the combo box for overall i.e. items not at data frame level 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Fill combo data frames. </summary>
+    '''
+    ''' <param name="cboDataFrames">                    [in,out] The combobox data frames control. </param>
+    ''' <param name="bSetDefault">                      (Optional) True to set default. </param>
+    ''' <param name="bIncludeOverall">                  (Optional) True to an extra item in the 
+    '''                                                 combo box for overall i.e. items not at 
+    '''                                                 data frame level. </param>
+    ''' <param name="strCurrentDataFrame">              (Optional) The current data frame. </param>
+    ''' <param name="bOnlyLinkedToPrimaryDataFrames">   (Optional) True to only linked to primary
+    '''                                                 data frames. </param>
+    ''' <param name="strPrimaryDataFrame">              (Optional) The primary data frame. </param>
+    ''' <param name="bIncludePrimaryDataFrameAsLinked"> (Optional) True to include, false to exclude
+    '''                                                 the primary data frame as linked. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False, Optional strCurrentDataFrame As String = "", Optional bOnlyLinkedToPrimaryDataFrames As Boolean = False, Optional strPrimaryDataFrame As String = "", Optional bIncludePrimaryDataFrameAsLinked As Boolean = True)
         'This sub is filling the cboDataFrames with the relevant dat frame names (obtained by using GetDataFrameNames()) and potentially "[Overall]".  On thing it is doing, is setting the selected index in the cboDataFrames.
         'It is used on the ucrDataFrame in the FillComboBox sub.
@@ -432,9 +547,14 @@ Public Class RLink
         End If
     End Sub
 
-    'TODO This is used above but will not be once ucrDataFrame uses proper controls
-    ' Then this can be removed
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Adjust combo box width. </summary>
+    '''
+    ''' <param name="cboCurrent">   The combobox current. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Shared Sub AdjustComboBoxWidth(cboCurrent As ComboBox)
+        'TODO Legacy This is used above but will not be once ucrDataFrame uses proper controls
+        ' Then this can be removed
         Dim iWidth As Integer = cboCurrent.DropDownWidth
         Dim graTemp As System.Drawing.Graphics = cboCurrent.CreateGraphics()
         Dim font As Font = cboCurrent.Font
@@ -454,6 +574,12 @@ Public Class RLink
         cboCurrent.DropDownWidth = iWidth
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Fill column names. </summary>
+    '''
+    ''' <param name="strDataFrame"> The data frame. </param>
+    ''' <param name="cboColumns">   [in,out] The combobox columns control. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub FillColumnNames(strDataFrame As String, ByRef cboColumns As ComboBox)
         Dim lstCurrColumns As New List(Of String)
 
@@ -464,6 +590,12 @@ Public Class RLink
         cboColumns.Items.AddRange(lstCurrColumns.ToArray)
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Fill column names. </summary>
+    '''
+    ''' <param name="strDataFrame"> The data frame. </param>
+    ''' <param name="lstColumns">   [in,out] The list columns. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub FillColumnNames(strDataFrame As String, ByRef lstColumns As ListView)
         Dim lstCurrColumns As List(Of String)
 
@@ -479,14 +611,14 @@ Public Class RLink
 
     End Sub
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strPrefix"> is TBD.</param>
-    ''' <param name="strDataFrameName"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets default column names. </summary>
+    '''
+    ''' <param name="strPrefix">        is TBD. </param>
+    ''' <param name="strDataFrameName"> is TBD. </param>
+    '''
+    ''' <returns>   The default column names. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetDefaultColumnNames(strPrefix As String, strDataFrameName As String) As String
         Dim strNextDefault As String = ""
         Dim clsGetNextDefault As New RFunction
@@ -499,14 +631,14 @@ Public Class RLink
         Return strNextDefault
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strPrefix"> is TBD.</param>
-    ''' <param name="lstItems"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets the next default. </summary>
+    '''
+    ''' <param name="strPrefix">    is TBD. </param>
+    ''' <param name="lstItems">     The list items. </param>
+    '''
+    ''' <returns>   The next default. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetNextDefault(strPrefix As String, lstItems As List(Of String)) As String
         Dim strNextDefault As String
         Dim clsGetDefault As New RFunction
@@ -528,6 +660,11 @@ Public Class RLink
         Return strNextDefault
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Appends to automatic save log. </summary>
+    '''
+    ''' <param name="strScript">    is the R script to execute. </param>
+    '''--------------------------------------------------------------------------------------------
     Private Sub AppendToAutoSaveLog(strScript As String)
         Dim strTempFile As String
         Dim i As Integer = 1
@@ -558,6 +695,7 @@ Public Class RLink
         End Try
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
     ''' <summary>
     ''' This method executes the <paramref name="strScript"/> R script and displays the output. The
     ''' output may be displayed as text, graph or in a web browser (see <paramref name="iCallType"/>).
@@ -596,6 +734,7 @@ Public Class RLink
     ''' <paramref name="strScript"/>.</param>
     ''' <param name="bSilent"> if false and an exception is raised then open a message box that 
     ''' displays the exception message.</param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional bUpdateGrids As Boolean = True, Optional bSilent As Boolean = False)
         Dim strCapturedScript As String
         Dim expTemp As RDotNet.SymbolicExpression
@@ -775,53 +914,64 @@ Public Class RLink
         End If
     End Sub
 
-
-    ''' <summary>
-    ''' This method executes the <paramref name="strScript"/> R script and returns the result as a
-    ''' 'SymbolicExpression' object.
-    ''' </summary>
-    ''' <param name="strScript"> is the R script to execute.</param>
-    ''' <param name="strVariableName"> is the name of the variable to store the result of
-    ''' <paramref name="strScript"/>. The variable is deleted before returning.</param>
-    ''' <param name="bSilent"> if false and an exception is raised then open a message box that 
-    ''' displays the exception message.</param>
-    ''' <param name="bSeparateThread"> if true then execute the R script in a new thread.</param>
-    ''' <param name="bShowWaitDialogOverride"> if true and <paramref name="bSeparateThread"/> is 
-    ''' also true then display a waiting dialog while the R script is executing.</param>
-    ''' <returns>
-    ''' Returns the output returned from <paramref name="strScript"/> as a collection of strings. 
-    ''' If an exception is raised then returns 'Nothing'.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Executes the the <paramref name="strScript"/> R script and returns the result 
+    '''             as a 'SymbolicExpression' object. </summary>
+    '''
+    ''' <param name="strScript">                The R script to execute. </param>
+    ''' <param name="strVariableName">          (Optional) The name of the variable to store the 
+    '''                                         result of <paramref name="strScript"/>. The variable 
+    '''                                         is deleted before returning.</param>
+    ''' <param name="bSilent">                  (Optional) If false and an exception is raised then
+    '''                                         open a message box that displays the exception
+    '''                                         message. </param>
+    ''' <param name="bSeparateThread">          (Optional) If true then executes
+    '''                                         <paramref name="strScript"/> in a new thread. </param>
+    ''' <param name="bShowWaitDialogOverride">  (Optional) if true and
+    '''                                         <paramref name="bSeparateThread"/> is also true then
+    '''                                         display a waiting dialog while the R script is
+    '''                                         executing. </param>
+    ''' <param name="strError">                 [in,out] (Optional) The error. </param>
+    '''
+    ''' <returns>   The output returned from <paramref name="strScript"/> as a collection of strings.
+    '''             If an exception is raised then returns 'Nothing'. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional ByRef strError As String = "") As SymbolicExpression
         Dim expTemp As SymbolicExpression
         Dim strCommand As String
 
         expTemp = Nothing
-        'TODO Bug here if strScript is multiple lines. Wrong value will be returned
+        'TODO Legacy - Bug here if strScript is multiple lines. Wrong value will be returned
         strCommand = strVariableName & " <- " & strScript
         If clsEngine IsNot Nothing Then
             Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride, strError:=strError)
             expTemp = GetSymbol(strVariableName, bSilent:=True)
-            'Very important to remove the variable after getting it othewise could be returning wrong variable later if a command gives an error
+            'Very important to remove the variable after getting it otherwise could be returning wrong variable later if a command gives an error
             Evaluate("rm(" & strVariableName & ")", bSilent:=bSilent, bSeparateThread:=bSeparateThread)
         End If
         Return expTemp
     End Function
 
-    ''' <summary>
-    ''' This method executes the <paramref name="strScript"/> R script and returns the result as a 
-    ''' collection of strings.
-    ''' </summary>
-    ''' <param name="strScript"> is the R script to execute.</param>
-    ''' <param name="bSilent"> if false and an exception is raised then open a message box that 
-    ''' displays the exception message.</param>
-    ''' <param name="bSeparateThread"> if true then execute the R script in a new thread.</param>
-    ''' <param name="bShowWaitDialogOverride"> if true and <paramref name="bSeparateThread"/> is 
-    ''' also true then display a waiting dialog while the R script is executing.</param>
-    ''' <returns>
-    ''' Returns the output returned from <paramref name="strScript"/> as a collection of strings. 
-    ''' If an exception is raised then returns 'Nothing'.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Executes the the <paramref name="strScript"/> R script and returns the result 
+    '''             as a collection of strings. </summary>
+    '''
+    ''' <param name="strScript">                The R script to execute. </param>
+    ''' <param name="bSilent">                  (Optional) If false and an exception is raised then
+    '''                                         opens a message box that displays the exception
+    '''                                         message. </param>
+    ''' <param name="bSeparateThread">          (Optional) If true then executes
+    '''                                         <paramref name="strScript"/> in a new thread. </param>
+    ''' <param name="bShowWaitDialogOverride">  (Optional) if true and <paramref name="bSeparateThread"/> 
+    '''                                         is also true then displays a waiting dialog while 
+    '''                                         the R script is executing. </param>
+    ''' <param name="strError">                 [in,out] (Optional) The output returned from 
+    '''                                         <paramref name="strScript"/> as a collection of 
+    '''                                         strings.
+    '''                                         If an exception is raised then returns 'Nothing'. </param>
+    '''
+    ''' <returns>   The result of the script execution as a collection of strings. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function RunInternalScriptGetOutput(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional ByRef strError As String = "") As CharacterVector
         Dim chrTemp As CharacterVector
         Dim expTemp As SymbolicExpression
@@ -838,18 +988,25 @@ Public Class RLink
         Return chrTemp
     End Function
 
-    ''' <summary>
-    ''' This method executes the <paramref name="strScript"/> R script and returns true if execution was successful.
-    ''' </summary>
-    ''' <param name="strScript"> is the R script to execute.</param>
-    ''' <param name="bSilent"> if false and an exception is raised then open a message box that displays the exception 
-    ''' message.</param>
-    ''' <param name="bSeparateThread"> if true then execute the R script in a new thread.</param>
-    ''' <param name="bShowWaitDialogOverride"> if true and <paramref name="bSeparateThread"/> is also true then display a waiting dialog while the 
-    ''' R script is executing.</param>
-    ''' <returns>
-    ''' Returns true if <paramref name="strScript"/> executes without raising an exception, else returns false.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Executes the <paramref name="strScript"/> R script and returns true if execution 
+    '''             was successful. </summary>
+    '''
+    ''' <param name="strScript">                The R script to execute. </param>
+    ''' <param name="strVariableName">          (Optional) The name of the variable to store the
+    '''                                         result of the R script execution. </param>
+    ''' <param name="bSilent">                  (Optional) If false and an exception is raised then
+    '''                                         opens a message box that displays the exception
+    '''                                         message. </param>
+    ''' <param name="bSeparateThread">          (Optional) If true then executes the R script in a new
+    '''                                         thread. </param>
+    ''' <param name="bShowWaitDialogOverride">  (Optional) If true and <paramref name="bSeparateThread"/> 
+    '''                                         is also true then displays a waiting dialog while 
+    '''                                         the R script is executing. </param>
+    '''
+    ''' <returns>   True if <paramref name="strScript"/> executes without raising an exception, 
+    '''             else returns false. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function RunInternalScript(strScript As String, Optional strVariableName As String = "", Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing) As Boolean
         Dim strCommand As String
         Dim bReturn As Boolean
@@ -867,19 +1024,28 @@ Public Class RLink
         End If
     End Function
 
-
-    ''' <summary>
-    ''' This method executes the <paramref name="strScript"/> R script and returns true if execution was successful.
-    ''' </summary>
-    ''' <param name="strScript"> is the R script to execute.</param>
-    ''' <param name="bSilent"> If true then do NOT open a message box when an exception is raised.
-    '''                        If false then do NOT open a message box when an exception is raised.</param>
-    ''' <param name="bSeparateThread"> if true then execute the R script in a new thread.</param>
-    ''' <param name="bShowWaitDialogOverride"> if true and <paramref name="bSeparateThread"/> is also true then display a waiting dialog while the 
-    ''' R script is executing.</param>
-    ''' <returns>
-    ''' Returns true if <paramref name="strScript"/> executes without raising an exception, else returns false.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Executes the <paramref name="strScript"/> R script and returns true if 
+    '''             execution was successful. </summary>
+    '''
+    ''' <param name="strScript">                The R script to execute. </param>
+    ''' <param name="bSilent">                  (Optional) If false and an exception is raised then
+    '''                                         open a message box that displays the exception
+    '''                                         message. </param>
+    ''' <param name="bSeparateThread">          (Optional) If true then execute the R script in a new
+    '''                                         thread. </param>
+    ''' <param name="bShowWaitDialogOverride">  (Optional) If true and
+    '''                                         <paramref name="bSeparateThread"/> is also true then
+    '''                                         display a waiting dialog while the R script is
+    '''                                         executing. </param>
+    ''' <param name="strError">                 [in,out] (Optional) The error message of the caught 
+    '''                                         error. If no error is caught then is an empty
+    '''                                         string. 
+    '''                                         Note that the input value is ignored. </param>
+    '''
+    ''' <returns>   True if <paramref name="strScript"/> executes without raising an exception, 
+    '''             else returns false. </returns>
+    '''--------------------------------------------------------------------------------------------
     Private Function Evaluate(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional ByRef strError As String = "") As Boolean
         Dim thrRScript As Threading.Thread
         Dim thrDelay As Threading.Thread
@@ -1016,14 +1182,15 @@ Public Class RLink
         Return bReturn ' return if script executed without raising an exception
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strSymbol"> is TBD.</param>
-    ''' <param name="bSilent"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets a symbol. </summary>
+    '''
+    ''' <param name="strSymbol">    The symbol. </param>
+    ''' <param name="bSilent">      (Optional) if false and an exception is raised then open a
+    '''                             message box that displays the exception message. </param>
+    '''
+    ''' <returns>   The symbol. </returns>
+    '''--------------------------------------------------------------------------------------------
     Private Function GetSymbol(strSymbol As String, Optional bSilent As Boolean = False) As SymbolicExpression
         Dim expTemp As SymbolicExpression = Nothing
 
@@ -1039,15 +1206,15 @@ Public Class RLink
         Return expTemp
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strPrefix"> is TBD.</param>
-    ''' <param name="iStartIndex"> is TBD.</param>
-    ''' <param name="bIncludeIndex"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets default data frame name. </summary>
+    '''
+    ''' <param name="strPrefix">        is TBD. </param>
+    ''' <param name="iStartIndex">      (Optional) The start index. </param>
+    ''' <param name="bIncludeIndex">    (Optional) True to include, false to exclude the index. </param>
+    '''
+    ''' <returns>   The default data frame name. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetDefaultDataFrameName(strPrefix As String, Optional iStartIndex As Integer = 1, Optional bIncludeIndex As Boolean = True) As String
         Dim strTemp As String
         Dim clsGetNextDataName As New RFunction
@@ -1073,12 +1240,11 @@ Public Class RLink
         Return strTemp
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets r setup script. </summary>
+    '''
+    ''' <returns>   The r setup script. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetRSetupScript() As String
         Dim clsSetWd As New RFunction
         Dim clsSource As New RFunction
@@ -1100,12 +1266,26 @@ Public Class RLink
 
         Return strScript
     End Function
+    ''' <summary>   Creates a new instat object. </summary>
 
     Public Sub CreateNewInstatObject()
         RunScript(strInstatDataObject & " <- " & strDataBookClassName & "$new()", strComment:="Defining new Instat Object")
         bInstatObjectExists = True
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Fill list view. </summary>
+    '''
+    ''' <param name="lstView">              The list view control. </param>
+    ''' <param name="strType">              is TBD. </param>
+    ''' <param name="lstIncludedDataTypes"> (Optional) List of types of the list included data. </param>
+    ''' <param name="lstExcludedDataTypes"> (Optional) List of types of the list excluded data. </param>
+    ''' <param name="strDataFrameName">     (Optional) is the data name TBD. </param>
+    ''' <param name="strHeading">           (Optional) The heading. </param>
+    ''' <param name="strExcludedItems">     (Optional) The excluded items. </param>
+    ''' <param name="strDatabaseQuery">     (Optional) The database query. </param>
+    ''' <param name="strNcFilePath">        (Optional) Full pathname of the non client file. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "")
         Dim vecColumns As GenericVector = Nothing
         Dim chrCurrColumns As CharacterVector
@@ -1253,6 +1433,14 @@ Public Class RLink
         End If
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Select columns with metadata property. </summary>
+    '''
+    ''' <param name="ucrCurrentReceiver">   The ucr current receiver. </param>
+    ''' <param name="strDataFrameName">     is the data name TBD. </param>
+    ''' <param name="strProperty">          The property. </param>
+    ''' <param name="strValues">            The values. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub SelectColumnsWithMetadataProperty(ucrCurrentReceiver As ucrReceiver, strDataFrameName As String, strProperty As String, strValues As String())
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
@@ -1305,14 +1493,14 @@ Public Class RLink
         ucrCurrentReceiver.Selector.LoadList()
     End Sub
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="lstStrings"> is TBD.</param>
-    ''' <param name="bWithQuotes"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets list as r string. </summary>
+    '''
+    ''' <param name="lstStrings">   The list strings. </param>
+    ''' <param name="bWithQuotes">  (Optional) True to with quotes. </param>
+    '''
+    ''' <returns>   The list as r string. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetListAsRString(lstStrings As List(Of String), Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
         Dim i As Integer
@@ -1342,6 +1530,13 @@ Public Class RLink
         Return strTemp
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Queries if a given data frame exists. </summary>
+    '''
+    ''' <param name="strDataFrameName"> is the data name TBD. </param>
+    '''
+    ''' <returns>   True if it succeeds, false if it fails. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function DataFrameExists(strDataFrameName As String) As Boolean
         Dim bExists As Boolean
         Dim clsDataFrameExists As New RFunction
@@ -1358,12 +1553,11 @@ Public Class RLink
         Return bExists
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets data frame count. </summary>
+    '''
+    ''' <returns>   The data frame count. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetDataFrameCount() As Integer
         Dim iCount As Integer
         Dim clsDataFrameCount As New RFunction
@@ -1379,14 +1573,14 @@ Public Class RLink
         Return iCount
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strDataFrameName"> is TBD.</param>
-    ''' <param name="bUseCurrentFilter"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets data frame length. </summary>
+    '''
+    ''' <param name="strDataFrameName">     is TBD. </param>
+    ''' <param name="bUseCurrentFilter">    (Optional) True to use current filter. </param>
+    '''
+    ''' <returns>   The data frame length. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetDataFrameLength(strDataFrameName As String, Optional bUseCurrentFilter As Boolean = False) As Integer
         Dim iLength As Integer
         Dim clsDataFrameLength As New RFunction
@@ -1408,13 +1602,13 @@ Public Class RLink
         Return iLength
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strDataFrameName"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets data frame column count. </summary>
+    '''
+    ''' <param name="strDataFrameName"> is TBD. </param>
+    '''
+    ''' <returns>   The data frame column count. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetDataFrameColumnCount(strDataFrameName As String) As Integer
         Dim iColumnCount As Integer
         Dim clsDataFrameColCount As New RFunction
@@ -1431,13 +1625,13 @@ Public Class RLink
         Return iColumnCount
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strDataFrameName"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets model names. </summary>
+    '''
+    ''' <param name="strDataFrameName"> (Optional) is the data name TBD. </param>
+    '''
+    ''' <returns>   The model names. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetModelNames(Optional strDataFrameName As String = "") As List(Of String)
         Dim chrModelNames As CharacterVector
         Dim lstModelNames As New List(Of String)
@@ -1458,13 +1652,13 @@ Public Class RLink
         Return lstModelNames
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strDataFrameName"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets table names. </summary>
+    '''
+    ''' <param name="strDataFrameName"> (Optional) is the data name TBD. </param>
+    '''
+    ''' <returns>   The table names. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetTableNames(Optional strDataFrameName As String = "") As List(Of String)
         Dim chrTableNames As CharacterVector
         Dim lstTableNames As New List(Of String)
@@ -1485,13 +1679,13 @@ Public Class RLink
         Return lstTableNames
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strDataFrameName"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets filter names. </summary>
+    '''
+    ''' <param name="strDataFrameName"> is the data name TBD. </param>
+    '''
+    ''' <returns>   The filter names. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetFilterNames(strDataFrameName As String) As List(Of String)
         Dim expFilterNames As SymbolicExpression
         Dim chrFilterNames As CharacterVector
@@ -1512,13 +1706,13 @@ Public Class RLink
         Return lstFilterNames
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strDataFrameName"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets graph names. </summary>
+    '''
+    ''' <param name="strDataFrameName"> (Optional) is the data name TBD. </param>
+    '''
+    ''' <returns>   The graph names. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetGraphNames(Optional strDataFrameName As String = "") As List(Of String)
         Dim chrGraphNames As CharacterVector
         Dim lstGraphNames As New List(Of String)
@@ -1539,13 +1733,13 @@ Public Class RLink
         Return lstGraphNames
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strDataFrameName"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets surv names. </summary>
+    '''
+    ''' <param name="strDataFrameName"> (Optional) is the data name TBD. </param>
+    '''
+    ''' <returns>   The surv names. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetSurvNames(Optional strDataFrameName As String = "") As List(Of String)
         Dim chrSurvNames As CharacterVector
         Dim lstSurvNames As New List(Of String)
@@ -1566,14 +1760,14 @@ Public Class RLink
         Return lstSurvNames
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strDataFrameName"> is TBD.</param>
-    ''' <param name="strColumnName"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets data type. </summary>
+    '''
+    ''' <param name="strDataFrameName"> is TBD. </param>
+    ''' <param name="strColumnName">    is TBD. </param>
+    '''
+    ''' <returns>   The data type. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetDataType(strDataFrameName As String, strColumnName As String) As String
         Dim strDataType As String
         Dim clsGetDataType As New RFunction
@@ -1591,14 +1785,14 @@ Public Class RLink
         Return strDataType
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strDataName"> is TBD.</param>
-    ''' <param name="strColumnName"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets column type. </summary>
+    '''
+    ''' <param name="strDataName">      is TBD. </param>
+    ''' <param name="strColumnName">    is TBD. </param>
+    '''
+    ''' <returns>   The column type. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetColumnType(strDataName As String, strColumnName As String) As String
         Dim strDataType As String
         Dim clsGetColumnType As New RFunction
@@ -1616,6 +1810,13 @@ Public Class RLink
         Return strDataType
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Makes valid text. </summary>
+    '''
+    ''' <param name="strText">  The text. </param>
+    '''
+    ''' <returns>   A String. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function MakeValidText(strText As String) As String
         Dim strOut As String
         Dim clsMakeNames As New RFunction
@@ -1632,6 +1833,13 @@ Public Class RLink
         Return strOut
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Is valid text. </summary>
+    '''
+    ''' <param name="strText">  The text. </param>
+    '''
+    ''' <returns>   A String. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function IsValidText(strText As String) As String
         Dim strValidText As String
         Dim clsMakeNames As New RFunction
@@ -1640,13 +1848,11 @@ Public Class RLink
         Return (strText = strValidText)
     End Function
 
-    'Corruption analysis functions
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets corruption contract data frame names. </summary>
+    '''
+    ''' <returns>   The corruption contract data frame names. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetCorruptionContractDataFrameNames() As List(Of String)
         Dim clsGetDataNames As New RFunction
         Dim lstNames As List(Of String)
@@ -1662,14 +1868,14 @@ Public Class RLink
         Return lstNames
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strDataName"> is TBD.</param>
-    ''' <param name="strType"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets corruption column of type. </summary>
+    '''
+    ''' <param name="strDataName">  is TBD. </param>
+    ''' <param name="strType">      is TBD. </param>
+    '''
+    ''' <returns>   The corruption column of type. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetCorruptionColumnOfType(strDataName As String, strType As String) As String
         Dim clsGetColumnName As New RFunction
         Dim strColumn As String
@@ -1687,13 +1893,13 @@ Public Class RLink
         Return strColumn
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strDataName"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets corruption components column names. </summary>
+    '''
+    ''' <param name="strDataName">  is TBD. </param>
+    '''
+    ''' <returns>   The corruption components column names. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetCorruptionComponentsColumnNames(strDataName As String) As String()
         Dim clsGetComponents As New RFunction
         Dim strColumn() As String
@@ -1710,15 +1916,14 @@ Public Class RLink
         Return strColumn
     End Function
 
-    ''' <summary>
-    ''' This method returns the climatic column name of the column named 
-    ''' <paramref name="strType"/> in data name <paramref name="strDataName"/>. TBD
-    ''' </summary>
-    ''' <param name="strDataName"> is the data name TBD.</param>
-    ''' <param name="strType"> is the column name TBD.</param>
-    ''' <returns>
-    ''' Returns the climatic column name.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets climatic column of type. </summary>
+    '''
+    ''' <param name="strDataName">  is TBD. </param>
+    ''' <param name="strType">      is TBD. </param>
+    '''
+    ''' <returns>   The climatic column of type. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetClimaticColumnOfType(strDataName As String, strType As String) As String
         Dim clsGetColumnName As New RFunction
         Dim strColumn As String
@@ -1736,13 +1941,13 @@ Public Class RLink
         Return strColumn
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strDataName"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets cri column names. </summary>
+    '''
+    ''' <param name="strDataName">  is TBD. </param>
+    '''
+    ''' <returns>   The cri column names. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetCRIColumnNames(strDataName As String) As String()
         Dim clsGetColumnName As New RFunction
         Dim strColumn() As String
@@ -1759,13 +1964,13 @@ Public Class RLink
         Return strColumn
     End Function
 
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strDataName"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets red flag column names. </summary>
+    '''
+    ''' <param name="strDataName">  is TBD. </param>
+    '''
+    ''' <returns>   The red flag column names. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetRedFlagColumnNames(strDataName As String) As String()
         Dim clsGetColumnName As New RFunction
         Dim strColumn() As String
@@ -1782,6 +1987,14 @@ Public Class RLink
         Return strColumn
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Query if 'strDataName' is binary. </summary>
+    '''
+    ''' <param name="strDataName">  is the data frame to link to. </param>
+    ''' <param name="strColumn">    The column. </param>
+    '''
+    ''' <returns>   True if binary, false if not. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function IsBinary(strDataName As String, strColumn As String) As Boolean
         Dim clsGetColumn As New RFunction
         Dim clsIsBinary As New RFunction
@@ -1802,6 +2015,15 @@ Public Class RLink
         Return bIsBinary
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Query if 'strDataName' is variables metadata. </summary>
+    '''
+    ''' <param name="strDataName">  is the data frame to link to. </param>
+    ''' <param name="strProperty">  The property. </param>
+    ''' <param name="strColumn">    (Optional) The column. </param>
+    '''
+    ''' <returns>   True if variables metadata, false if not. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function IsVariablesMetadata(strDataName As String, strProperty As String, Optional strColumn As String = "") As Boolean
         Dim clsIsVarMetadata As New RFunction
         Dim bIsVarMetadata As Boolean
@@ -1822,19 +2044,21 @@ Public Class RLink
         Return bIsVarMetadata
     End Function
 
-    ''' <summary>
-    ''' This method sets whether to show the wait window (the window that is optionally displayed 
-    ''' while an R script is running).
-    ''' </summary>
-    ''' <param name="bNewShow"> is the R output window.</param>
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Sets whether to show the wait window (the window that is optionally displayed 
+    '''             while an R script is running). </summary>
+    '''
+    ''' <param name="bNewShow"> If true then show the wait window. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub SetShowWaitDialog(bNewShow As Boolean)
         bShowWaitDialog = bNewShow
     End Sub
 
-    ''' <summary>
-    ''' This method sets the time in seconds to wait before showing the waiting dialog.
-    ''' </summary>
-    ''' <param name="iTimeInSeconds"> is the delay in seconds (must be >= 0).</param>
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Sets the time in seconds to wait before showing the waiting dialog. </summary>
+    '''
+    ''' <param name="iTimeInSeconds">   The delay in seconds (must be >= 0). </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub SetWaitDelayTime(iTimeInSeconds As Integer)
         If iTimeInSeconds <= 0 Then
             MsgBox("Wait time must be a positive integer. Resetting to default of 2 seconds.", MsgBoxStyle.Exclamation, "Invalid value")
@@ -1843,6 +2067,7 @@ Public Class RLink
         iWaitDelay = iTimeInSeconds
     End Sub
 
+    ''' <summary>   Closes the data. </summary>
     Public Sub CloseData()
         Dim clsRm As New RFunction
         Dim clsCreateIO As New ROperator
@@ -1860,6 +2085,11 @@ Public Class RLink
         RunScript(clsCreateIO.ToScript(), strComment:="Creating New Instat Object")
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   View last graph. </summary>
+    '''
+    ''' <param name="bAsPlotly">    (Optional) True to as plotly. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub ViewLastGraph(Optional bAsPlotly As Boolean = False)
         Dim clsLastGraph As New RFunction
         Dim clsInteractivePlot As New RFunction
@@ -1878,14 +2108,13 @@ Public Class RLink
         End If
     End Sub
 
-    'construct and format the comment
-    ''' <summary>
-    ''' This method returns TBD.
-    ''' </summary>
-    ''' <param name="strComment"> is TBD.</param>
-    ''' <returns>
-    ''' Returns TBD.
-    ''' </returns>    
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Prefixes each line of text in <paramref name="strComment"/> with '# '. </summary>
+    '''
+    ''' <param name="strComment">   The comment text. </param>
+    '''
+    ''' <returns>   <paramref name="strComment"/> converted to a valid R comment. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetFormattedComment(strComment As String) As String
         Dim strReconstructedComment As String = ""
         Dim arrCommentParts As String()
