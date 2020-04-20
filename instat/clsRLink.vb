@@ -63,7 +63,7 @@ Public Class RLink
     Public bOutput As Boolean = False
     ''' <summary>   True to climate object exists. </summary>
     Public bClimateObjectExists As Boolean = False
-    ''' <summary>   True to instat object exists. </summary>
+    ''' <summary>   True if the connection to R is initialized and open. </summary>
     Public bInstatObjectExists As Boolean = False
     ''' <summary>   True to climsoft link exists. </summary>
     Public bClimsoftLinkExists As Boolean = False
@@ -427,7 +427,7 @@ Public Class RLink
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets the data frame names. </summary>
+    ''' <summary>   Gets a list of data frame names. </summary>
     '''
     ''' <returns>   The data frame names. </returns>
     '''--------------------------------------------------------------------------------------------
@@ -437,7 +437,7 @@ Public Class RLink
         Dim clsGetDataNames As New RFunction
         Dim expNames As SymbolicExpression
 
-        clsGetDataNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
+        clsGetDataNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names") 'TODO SJL 20/04/20 move to inside if statement?
         If bInstatObjectExists Then
             expNames = RunInternalScriptGetValue(clsGetDataNames.ToScript(), bSilent:=True)
             If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
@@ -449,7 +449,7 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets the data names linked to <paramref name="strDataName"/>. </summary>
+    ''' <summary>   Gets the list of data names linked to <paramref name="strDataName"/>. </summary>
     '''
     ''' <param name="strDataName">  The data frame to link to. </param>
     ''' <param name="bIncludeSelf"> (Optional) If true then also return the <paramref name="strDataName"/> 
@@ -481,11 +481,11 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets column names. </summary>
+    ''' <summary>   Gets the column names for a returned dataframe. </summary>
     '''
-    ''' <param name="strDataFrameName">         Is the data name TBD. </param>
-    ''' <param name="bIncludeHiddenColumns">    (Optional) True to include, false to exclude the
-    '''                                         hidden columns. </param>
+    ''' <param name="strDataFrameName">         The dataframe name. </param>
+    ''' <param name="bIncludeHiddenColumns">    (Optional) If true then also include the hidden 
+    '''                                         column names in the returned list. </param>
     '''
     ''' <returns>   The column names. </returns>
     '''--------------------------------------------------------------------------------------------
@@ -511,26 +511,35 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Fill combo data frames. </summary>
+    ''' <summary>   Fills the data frame control combo box with the specified data frame names and
+    '''             sets the combo box index.
+    '''             The data frames to include, and the source of the index are set by the 
+    '''             parameters below.</summary>
     '''
     ''' <param name="cboDataFrames">                    [in,out] The combobox data frames control. </param>
-    ''' <param name="bSetDefault">                      (Optional) True to set default. </param>
-    ''' <param name="bIncludeOverall">                  (Optional) True to an extra item in the 
-    '''                                                 combo box for overall i.e. items not at 
-    '''                                                 data frame level. </param>
+    ''' <param name="bSetDefault">                      (Optional) If true then sets the combo box 
+    '''                                                 index to the index of the current worksheet.
+    '''                                                 If false then sets the index to the index of 
+    '''                                                 the current data frame. </param>
+    ''' <param name="bIncludeOverall">                  (Optional) If true then adds an extra item 
+    '''                                                 in the combo box for '[Overall]' i.e. items 
+    '''                                                 not at data frame level. </param>
     ''' <param name="strCurrentDataFrame">              (Optional) The current data frame. </param>
-    ''' <param name="bOnlyLinkedToPrimaryDataFrames">   (Optional) True to only linked to primary
-    '''                                                 data frames. </param>
+    ''' <param name="bOnlyLinkedToPrimaryDataFrames">   (Optional) If true then only fill the 
+    '''                                                 combo box with data frame names linked to 
+    '''                                                 <paramref name="strPrimaryDataFrame"/>. </param>
     ''' <param name="strPrimaryDataFrame">              (Optional) The primary data frame. </param>
-    ''' <param name="bIncludePrimaryDataFrameAsLinked"> (Optional) True to include, false to exclude
-    '''                                                 the primary data frame as linked. </param>
+    ''' <param name="bIncludePrimaryDataFrameAsLinked"> (Optional) If true then also include the 
+    '''                                                 <paramref name="strPrimaryDataFrame"/> in 
+    '''                                                 the list of data frames. 
+    '''                                                 This parameter is only used if 
+    '''                                                 <paramref name="bOnlyLinkedToPrimaryDataFrames"/> 
+    '''                                                 is true.</param>
     '''--------------------------------------------------------------------------------------------
     Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False, Optional strCurrentDataFrame As String = "", Optional bOnlyLinkedToPrimaryDataFrames As Boolean = False, Optional strPrimaryDataFrame As String = "", Optional bIncludePrimaryDataFrameAsLinked As Boolean = True)
-        'This sub is filling the cboDataFrames with the relevant dat frame names (obtained by using GetDataFrameNames()) and potentially "[Overall]".  On thing it is doing, is setting the selected index in the cboDataFrames.
-        'It is used on the ucrDataFrame in the FillComboBox sub.
         If bInstatObjectExists Then
             If bIncludeOverall Then
-                cboDataFrames.Items.Add("[Overall]") 'Task/question: explain this.
+                cboDataFrames.Items.Add("[Overall]") 'TODO legacy - Task/question: explain this.
             End If
             If bOnlyLinkedToPrimaryDataFrames Then
                 cboDataFrames.Items.AddRange(GetLinkedToDataFrameNames(strPrimaryDataFrame, bIncludePrimaryDataFrameAsLinked).ToArray)
@@ -538,7 +547,7 @@ Public Class RLink
                 cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
             End If
             AdjustComboBoxWidth(cboDataFrames)
-            'Task/Question: From what I understood, if bSetDefault is true or if the strCurrentDataFrame (given as an argument) is actually not in cboDataFrames (is this case generic or should it never happen ?), then the selected Index should be the current worksheet.
+            'TODO Legacy - Task/Question: From what I understood, if bSetDefault is true or if the strCurrentDataFrame (given as an argument) is actually not in cboDataFrames (is this case generic or should it never happen ?), then the selected Index should be the current worksheet.
             If (bSetDefault OrElse cboDataFrames.Items.IndexOf(strCurrentDataFrame) = -1) AndAlso (grdDataView IsNot Nothing) AndAlso (grdDataView.CurrentWorksheet IsNot Nothing) Then
                 cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(grdDataView.CurrentWorksheet.Name)
             ElseIf cboDataFrames.Items.IndexOf(strCurrentDataFrame) <> -1 Then
@@ -550,11 +559,12 @@ Public Class RLink
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Adjust combo box width. </summary>
     '''
-    ''' <param name="cboCurrent">   The combobox current. </param>
+    ''' <param name="cboCurrent">   The combo box to adjust. </param>
     '''--------------------------------------------------------------------------------------------
     Public Shared Sub AdjustComboBoxWidth(cboCurrent As ComboBox)
-        'TODO Legacy This is used above but will not be once ucrDataFrame uses proper controls
+        'TODO Legacy - This is used above but will not be once ucrDataFrame uses proper controls
         ' Then this can be removed
+        ' TODO SJL 20/04/20 This is only used by the function above. Make private?
         Dim iWidth As Integer = cboCurrent.DropDownWidth
         Dim graTemp As System.Drawing.Graphics = cboCurrent.CreateGraphics()
         Dim font As Font = cboCurrent.Font
@@ -575,9 +585,10 @@ Public Class RLink
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Fill column names. </summary>
+    ''' <summary>   Fills the <paramref name="cboColumns"/> combo box with the <paramref name="strDataFrame"/> 
+    '''             data frame's column names. </summary>
     '''
-    ''' <param name="strDataFrame"> The data frame. </param>
+    ''' <param name="strDataFrame"> The data frame name. </param>
     ''' <param name="cboColumns">   [in,out] The combobox columns control. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub FillColumnNames(strDataFrame As String, ByRef cboColumns As ComboBox)
@@ -591,7 +602,7 @@ Public Class RLink
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Fill column names. </summary>
+    ''' <summary>   TODO SJL 20/04/20 Not used, remove?. </summary>
     '''
     ''' <param name="strDataFrame"> The data frame. </param>
     ''' <param name="lstColumns">   [in,out] The list columns. </param>
@@ -612,10 +623,11 @@ Public Class RLink
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets default column names. </summary>
+    ''' <summary>   Gets the <paramref name="strDataFrameName"/> data frame's next default column 
+    '''             name. </summary>
     '''
-    ''' <param name="strPrefix">        is TBD. </param>
-    ''' <param name="strDataFrameName"> is TBD. </param>
+    ''' <param name="strPrefix">        The value for the R 'prefix' parameter. </param>
+    ''' <param name="strDataFrameName"> The data frame name. </param>
     '''
     ''' <returns>   The default column names. </returns>
     '''--------------------------------------------------------------------------------------------
@@ -632,12 +644,16 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets the next default. </summary>
+    ''' <summary>   Gets the name of the next default item from the <paramref name="lstItems"/> 
+    '''             list of named items. 
+    '''             These items may be data frames, tables, graphs or any other type of named R 
+    '''             item. </summary>
     '''
-    ''' <param name="strPrefix">    is TBD. </param>
-    ''' <param name="lstItems">     The list items. </param>
+    ''' <param name="strPrefix">    The value for the R 'prefix' parameter. </param>
+    ''' <param name="lstItems">     The list of named items. </param>
     '''
-    ''' <returns>   The next default. </returns>
+    ''' <returns>   The name of next default. If the R command doesn't return any items, then
+    '''             returns "".</returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetNextDefault(strPrefix As String, lstItems As List(Of String)) As String
         Dim strNextDefault As String
@@ -661,9 +677,10 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Appends to automatic save log. </summary>
+    ''' <summary>   Appends <paramref name="strScript"/> as a new line to the automatic save log
+    '''             file. If the log file doesn't exist yet, then it creates it.. </summary>
     '''
-    ''' <param name="strScript">    is the R script to execute. </param>
+    ''' <param name="strScript">    The text to add to the save log file. </param>
     '''--------------------------------------------------------------------------------------------
     Private Sub AppendToAutoSaveLog(strScript As String)
         Dim strTempFile As String
@@ -766,7 +783,7 @@ Public Class RLink
         ' if the output window is defined then output comments (if exists) and script (if 'bShowCommands' is true).
         If bOutput Then
             If strComment <> "" AndAlso bShowCommands Then
-                'TODO SJL - why is this needed in addition to the else block? 
+                'TODO SJL 20/04/20 - why is this needed in addition to the else block? 
                 ' (only difference I see is 'TrimEnd' which trims any trailing newlines but then adds a newline after anyway)
                 rtbOutput.AppendText(clrComments, fComments, strComment & Environment.NewLine, clrScript, fScript, strScript.TrimEnd(Environment.NewLine.ToCharArray) & Environment.NewLine)
             Else
@@ -779,7 +796,7 @@ Public Class RLink
             End If
         End If
 
-        'TODO SJL - is the commented out check below needed?
+        'TODO SJL 20/04/20 - is the commented out check below needed?
         'If strScript.Length > 2000 Then
         '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & Environment.NewLine & strScript & Environment.NewLine & Environment.NewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
 
@@ -989,7 +1006,8 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Executes the <paramref name="strScript"/> R script and returns true if execution 
+    ''' <summary>   Executes the <paramref name="strScript"/> R script, optionally stores the 
+    '''             result in <paramref name="strVariableName"/>, and returns true if execution 
     '''             was successful. </summary>
     '''
     ''' <param name="strScript">                The R script to execute. </param>
@@ -1106,7 +1124,7 @@ Public Class RLink
             ' append script to log file
             Try
                 If bDebugLogExists Then
-                    Dim ts As New Stopwatch ' TODO SJL what is the purpose of the stopwatch?
+                    Dim ts As New Stopwatch ' TODO SJL 20/04/20 what is the purpose of the stopwatch?
                     ts.Start()
                     Using w As StreamWriter = File.AppendText(strAutoSaveDebugLogFilePath)
                         w.WriteLine(strScript)
@@ -1179,17 +1197,17 @@ Public Class RLink
         End If
         bRCodeRunning = False
         strError = strTempError
-        Return bReturn ' return if script executed without raising an exception
+        Return bReturn 'return if script executed without raising an exception
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets a symbol. </summary>
+    ''' <summary>   Gets the symbol named <paramref name="strSymbol"/>. </summary>
     '''
-    ''' <param name="strSymbol">    The symbol. </param>
-    ''' <param name="bSilent">      (Optional) if false and an exception is raised then open a
+    ''' <param name="strSymbol">    The name of the symbol to return. </param>
+    ''' <param name="bSilent">      (Optional) If false and an exception is raised then open a
     '''                             message box that displays the exception message. </param>
     '''
-    ''' <returns>   The symbol. </returns>
+    ''' <returns>   The symbol named <paramref name="strSymbol"/>. </returns>
     '''--------------------------------------------------------------------------------------------
     Private Function GetSymbol(strSymbol As String, Optional bSilent As Boolean = False) As SymbolicExpression
         Dim expTemp As SymbolicExpression = Nothing
@@ -1207,13 +1225,13 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets default data frame name. </summary>
+    ''' <summary>   Gets the next default data frame name. </summary>
     '''
-    ''' <param name="strPrefix">        is TBD. </param>
-    ''' <param name="iStartIndex">      (Optional) The start index. </param>
-    ''' <param name="bIncludeIndex">    (Optional) True to include, false to exclude the index. </param>
+    ''' <param name="strPrefix">        The value for the R 'prefix' parameter. </param>
+    ''' <param name="iStartIndex">      (Optional) The value for the R 'start_index' parameter. </param>
+    ''' <param name="bIncludeIndex">    (Optional) The value for the R 'include_index' parameter. </param>
     '''
-    ''' <returns>   The default data frame name. </returns>
+    ''' <returns>   The next default data frame name. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetDefaultDataFrameName(strPrefix As String, Optional iStartIndex As Integer = 1, Optional bIncludeIndex As Boolean = True) As String
         Dim strTemp As String
@@ -1241,9 +1259,9 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets r setup script. </summary>
+    ''' <summary>   Gets the R setup script.</summary>
     '''
-    ''' <returns>   The r setup script. </returns>
+    ''' <returns>   The R setup script. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetRSetupScript() As String
         Dim clsSetWd As New RFunction
@@ -1266,25 +1284,38 @@ Public Class RLink
 
         Return strScript
     End Function
-    ''' <summary>   Creates a new instat object. </summary>
 
+    ''' <summary>   Creates a new instat object. </summary>
     Public Sub CreateNewInstatObject()
         RunScript(strInstatDataObject & " <- " & strDataBookClassName & "$new()", strComment:="Defining new Instat Object")
         bInstatObjectExists = True
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Fill list view. </summary>
+    ''' <summary>   Fills the list view control <paramref name="lstView"/> with the type of items 
+    '''             specified by <paramref name="strType"/>. </summary>
     '''
     ''' <param name="lstView">              The list view control. </param>
-    ''' <param name="strType">              is TBD. </param>
-    ''' <param name="lstIncludedDataTypes"> (Optional) List of types of the list included data. </param>
-    ''' <param name="lstExcludedDataTypes"> (Optional) List of types of the list excluded data. </param>
-    ''' <param name="strDataFrameName">     (Optional) is the data name TBD. </param>
-    ''' <param name="strHeading">           (Optional) The heading. </param>
-    ''' <param name="strExcludedItems">     (Optional) The excluded items. </param>
-    ''' <param name="strDatabaseQuery">     (Optional) The database query. </param>
-    ''' <param name="strNcFilePath">        (Optional) Full pathname of the non client file. </param>
+    ''' <param name="strType">              The type of item to display in the list view.
+    '''                                     This can be 'data frame', 'graph', model', 'column' etc. 
+    '''                                     For a full list of possible values, please see the 
+    '''                                     select statement in the function body below. </param>
+    ''' <param name="lstIncludedDataTypes"> (Optional) List of item names to display in the list 
+    '''                                     view control. These are passed as 'include' parameters to 
+    '''                                     the R 'list' command.</param>
+    ''' <param name="lstExcludedDataTypes"> (Optional) List of item names **not** to display in the list
+    '''                                     view control. These are passed as 'exclude' parameters to
+    '''                                     the R 'list' command. </param>
+    ''' <param name="strDataFrameName">     (Optional) The data frame name. </param>
+    ''' <param name="strHeading">           (Optional) The heading for the list view display. </param>
+    ''' <param name="strExcludedItems">     (Optional) List of item names to exclude from the list
+    '''                                     view control. These are passed as parameter values for 
+    '''                                     the 'excluded_items' R parameter. </param>
+    ''' <param name="strDatabaseQuery">     (Optional) The database query. Only used if 
+    '''                                     <paramref name="strType"/> is 'database_variables'.</param>
+    ''' <param name="strNcFilePath">        (Optional) Full pathname of the non client file. 
+    '''                                     Only used if <paramref name="strType"/> is 
+    '''                                     'nc_dim_variables'.</param>
     '''--------------------------------------------------------------------------------------------
     Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "")
         Dim vecColumns As GenericVector = Nothing
@@ -1434,12 +1465,19 @@ Public Class RLink
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Select columns with metadata property. </summary>
+    ''' <summary>   Selects the specified <paramref name="strDataFrameName"/> data frame columns in 
+    '''             the <paramref name="ucrCurrentReceiver"/> receiver. 
+    '''             Columns are specified by <paramref name="strProperty"/> property and 
+    '''             <paramref name="strValues"/> values.</summary>
     '''
-    ''' <param name="ucrCurrentReceiver">   The ucr current receiver. </param>
-    ''' <param name="strDataFrameName">     is the data name TBD. </param>
-    ''' <param name="strProperty">          The property. </param>
-    ''' <param name="strValues">            The values. </param>
+    ''' <param name="ucrCurrentReceiver">   The receiver to add the column names to (may be a single 
+    '''                                     or multiple receiver). </param>
+    ''' <param name="strDataFrameName">     The data frame name. </param>
+    ''' <param name="strProperty">          Type of column to display in the receiver.
+    '''                                     This is passed as a parameter to the R 'list' command. </param>
+    ''' <param name="strValues">            List of column names to display in the receiver.
+    '''                                     These are passed as 'include' parameters to
+    '''                                     the R 'list' command. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub SelectColumnsWithMetadataProperty(ucrCurrentReceiver As ucrReceiver, strDataFrameName As String, strProperty As String, strValues As String())
         Dim vecColumns As GenericVector
@@ -1494,12 +1532,13 @@ Public Class RLink
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets list as r string. </summary>
+    ''' <summary>   Gets a single concatenated string containing all the strings in <paramref name="lstStrings"/>.
+    '''             The returned string has the form "(str1,str2,str3, ...)". </summary>
     '''
-    ''' <param name="lstStrings">   The list strings. </param>
-    ''' <param name="bWithQuotes">  (Optional) True to with quotes. </param>
+    ''' <param name="lstStrings">   The list of strings to concatenate. </param>
+    ''' <param name="bWithQuotes">  (Optional) If true then surround each string with quotes. </param>
     '''
-    ''' <returns>   The list as r string. </returns>
+    ''' <returns>   As single concatenated string containing all the strings in <paramref name="lstStrings"/>. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetListAsRString(lstStrings As List(Of String), Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
@@ -1533,9 +1572,9 @@ Public Class RLink
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Queries if a given data frame exists. </summary>
     '''
-    ''' <param name="strDataFrameName"> is the data name TBD. </param>
+    ''' <param name="strDataFrameName"> The data frame name. </param>
     '''
-    ''' <returns>   True if it succeeds, false if it fails. </returns>
+    ''' <returns>   True if <paramref name="strDataFrameName"/> data frame exists, else false. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function DataFrameExists(strDataFrameName As String) As Boolean
         Dim bExists As Boolean
@@ -1554,7 +1593,7 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets data frame count. </summary>
+    ''' <summary>   Gets the data frame count. </summary>
     '''
     ''' <returns>   The data frame count. </returns>
     '''--------------------------------------------------------------------------------------------
@@ -1574,10 +1613,11 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets data frame length. </summary>
+    ''' <summary>   Gets the length of <paramref name="strDataFrameName"/> data frame. </summary>
     '''
-    ''' <param name="strDataFrameName">     is TBD. </param>
-    ''' <param name="bUseCurrentFilter">    (Optional) True to use current filter. </param>
+    ''' <param name="strDataFrameName">     The name of the data frame. </param>
+    ''' <param name="bUseCurrentFilter">    (Optional) The value for the R 'use_current_filter' 
+    '''                                     parameter. </param>
     '''
     ''' <returns>   The data frame length. </returns>
     '''--------------------------------------------------------------------------------------------
