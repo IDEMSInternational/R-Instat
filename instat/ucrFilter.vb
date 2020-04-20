@@ -87,13 +87,14 @@ Public Class ucrFilter
     End Sub
 
     Private Sub VariableTypeProperties()
-        ucrValueForFilter.Visible = False
+        ucrReceiverExpression.Visible = False
         lblSelectLevels.Visible = False
         ucrFactorLevels.Visible = False
         cmdToggleSelectAll.Visible = False
         ucrFilterOperation.Visible = False
         ucrLogicalCombobox.Visible = False
         ucrDatePicker.Visible = False
+        grpNumeric.Visible = False
         If Not ucrFilterByReceiver.IsEmpty() Then
             If ucrFilterByReceiver.strCurrDataType.ToLower.Contains("factor") Then
                 lblSelectLevels.Visible = True
@@ -110,19 +111,21 @@ Public Class ucrFilter
                         Case "date"
                             ucrDatePicker.Visible = True
                         Case Else
-                            ucrValueForFilter.Visible = True
+                            ucrReceiverExpression.Visible = True
                     End Select
+                    grpNumeric.Visible = True
                 End If
             End If
         End If
     End Sub
 
     Private Sub CheckAddEnabled()
-        If ucrFilterByReceiver.IsEmpty() Then
+        If ucrFilterByReceiver.IsEmpty() AndAlso ucrReceiverExpression.IsEmpty() Then
             cmdAddCondition.Enabled = False
         Else
             If ucrFilterByReceiver.strCurrDataType.ToLower.Contains("factor") Then
                 cmdAddCondition.Enabled = Not String.IsNullOrEmpty(ucrFactorLevels.GetSelectedLevels())
+
             Else
                 Select Case ucrFilterOperation.GetText()
                     Case "is.na", "! is.na"
@@ -134,7 +137,7 @@ Public Class ucrFilter
                             Case "date"
                                 cmdAddCondition.Enabled = Not IsNothing(ucrDatePicker.DateValue())
                             Case Else
-                                cmdAddCondition.Enabled = Not ucrValueForFilter.IsEmpty
+                                cmdAddCondition.Enabled = Not ucrReceiverExpression.IsEmpty
                         End Select
                 End Select
             End If
@@ -151,7 +154,7 @@ Public Class ucrFilter
         End If
     End Sub
 
-    Private Sub ucrValueForFilter_ContentsChanged() Handles ucrValueForFilter.ContentsChanged
+    Private Sub ucrValueForFilter_ContentsChanged()
         CheckAddEnabled()
     End Sub
 
@@ -166,6 +169,10 @@ Public Class ucrFilter
 
     Private Sub ucrFilterOperation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFilterOperation.ControlContentsChanged
         VariableTypeProperties()
+        CheckAddEnabled()
+    End Sub
+
+    Private Sub ucrReceiverExpression_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpression.ControlContentsChanged
         CheckAddEnabled()
     End Sub
 
@@ -190,14 +197,14 @@ Public Class ucrFilter
                 strCondition = ""
             Else
                 If ucrFilterByReceiver.strCurrDataType.ToLower = "character" Then
-                    strCondition = Chr(34) & ucrValueForFilter.GetText() & Chr(34)
+                    strCondition = Chr(34) & ucrReceiverExpression.GetText() & Chr(34)
                 ElseIf ucrFilterByReceiver.strCurrDataType.ToLower = "date" Then
                     clsDateFunction = ucrDatePicker.ValueAsRDate()
                     strCondition = clsDateFunction.ToScript()
                 ElseIf ucrFilterByReceiver.strCurrDataType.ToLower = "logical" Then
                     strCondition = ucrLogicalCombobox.GetText()
                 Else
-                    strCondition = ucrValueForFilter.GetText()
+                    strCondition = ucrReceiverExpression.GetText()
                 End If
             End If
         End If
@@ -217,6 +224,7 @@ Public Class ucrFilter
         lstFilters.Columns(1).Width = -2
         ucrFilterPreview.SetName(clsFilterView.ToScript())
         ucrFilterByReceiver.Clear()
+        ucrReceiverExpression.Clear()
         RaiseEvent FilterChanged()
     End Sub
 
@@ -281,5 +289,79 @@ Public Class ucrFilter
         strDefaultDataFrame = strDataFrame
     End Sub
 
+    Private Sub cmd7_Click(sender As Object, e As EventArgs) Handles cmd7.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("7")
+    End Sub
 
+    Private Sub cmd8_Click(sender As Object, e As EventArgs) Handles cmd8.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("8")
+    End Sub
+
+    Private Sub cmd9_Click(sender As Object, e As EventArgs) Handles cmd9.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("9")
+    End Sub
+
+    Private Sub cmdDivide_Click(sender As Object, e As EventArgs) Handles cmdDivide.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("/")
+    End Sub
+
+    Private Sub cmdDot_Click(sender As Object, e As EventArgs) Handles cmdDot.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition(".")
+    End Sub
+
+    Private Sub cmd4_Click(sender As Object, e As EventArgs) Handles cmd4.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("4")
+    End Sub
+
+    Private Sub cmd5_Click(sender As Object, e As EventArgs) Handles cmd5.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("5")
+    End Sub
+
+    Private Sub cmd6_Click(sender As Object, e As EventArgs) Handles cmd6.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("6")
+    End Sub
+
+    Private Sub cmdMultiply_Click(sender As Object, e As EventArgs) Handles cmdMultiply.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("*")
+    End Sub
+
+    Private Sub cmdPower_Click(sender As Object, e As EventArgs) Handles cmdPower.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("^")
+    End Sub
+
+    Private Sub cmd1_Click(sender As Object, e As EventArgs) Handles cmd1.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("1")
+    End Sub
+
+    Private Sub cmd2_Click(sender As Object, e As EventArgs) Handles cmd2.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("2")
+    End Sub
+
+    Private Sub cmd3_Click(sender As Object, e As EventArgs) Handles cmd3.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("3")
+    End Sub
+
+    Private Sub cmdMinus_Click(sender As Object, e As EventArgs) Handles cmdMinus.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("-")
+    End Sub
+
+    Private Sub cmdComma_Click(sender As Object, e As EventArgs) Handles cmdComma.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition(",")
+    End Sub
+
+    Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("0")
+    End Sub
+
+    Private Sub cmdBrackets_Click(sender As Object, e As EventArgs) Handles cmdBrackets.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("()", 1)
+    End Sub
+
+    Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
+        ucrReceiverExpression.AddToReceiverAtCursorPosition("+")
+    End Sub
+
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+        ucrReceiverExpression.Clear()
+    End Sub
 End Class
