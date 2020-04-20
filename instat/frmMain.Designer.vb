@@ -590,7 +590,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuModelFitModelHypothesisTestsCalculator = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuModelFitModelHypothesisTestsKeyboard = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -924,7 +924,7 @@ Partial Class frmMain
         '
         'mnuModelFitModel
         '
-        Me.mnuModelFitModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelFitModelOneVariable, Me.mnuModelFitModelTwoVariables, Me.mnuModelFitModelThreeVariables, Me.mnuModelFitModelFourVariables, Me.ToolStripSeparator24, Me.mnuModelFitModelGeneral, Me.ToolStripSeparator57, Me.mnuModelFitModelHypothesisTestsCalculator, Me.mnuModelFitModelModelKeyboard})
+        Me.mnuModelFitModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelFitModelOneVariable, Me.mnuModelFitModelTwoVariables, Me.mnuModelFitModelThreeVariables, Me.mnuModelFitModelFourVariables, Me.ToolStripSeparator24, Me.mnuModelFitModelGeneral, Me.ToolStripSeparator57, Me.mnuModelFitModelHypothesisTestsKeyboard, Me.mnuModelFitModelModelKeyboard})
         Me.mnuModelFitModel.Name = "mnuModelFitModel"
         resources.ApplyResources(Me.mnuModelFitModel, "mnuModelFitModel")
         Me.mnuModelFitModel.Tag = "Fit_Model..."
@@ -3749,10 +3749,10 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
-        'mnuModelFitModelHypothesisTestsCalculator
+        'mnuModelFitModelHypothesisTestsKeyboard
         '
-        Me.mnuModelFitModelHypothesisTestsCalculator.Name = "mnuModelFitModelHypothesisTestsCalculator"
-        resources.ApplyResources(Me.mnuModelFitModelHypothesisTestsCalculator, "mnuModelFitModelHypothesisTestsCalculator")
+        Me.mnuModelFitModelHypothesisTestsKeyboard.Name = "mnuModelFitModelHypothesisTestsKeyboard"
+        resources.ApplyResources(Me.mnuModelFitModelHypothesisTestsKeyboard, "mnuModelFitModelHypothesisTestsKeyboard")
         '
         'frmMain
         '
@@ -4351,5 +4351,5 @@ Partial Class frmMain
     Friend WithEvents mnuModelCompareModelsOneVariable As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents DisplayTopNToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuModelFitModelHypothesisTestsCalculator As ToolStripMenuItem
+    Friend WithEvents mnuModelFitModelHypothesisTestsKeyboard As ToolStripMenuItem
 End Class
