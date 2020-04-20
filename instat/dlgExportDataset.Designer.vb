@@ -41,6 +41,7 @@ Partial Class dlgExportDataset
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportDataset))
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.lblExport = New System.Windows.Forms.Label()
+        Me.lblConfirmText = New System.Windows.Forms.Label()
         Me.ucrInputExportFile = New instat.ucrInputTextBox()
         Me.ucrAvailableSheets = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
@@ -56,6 +57,11 @@ Partial Class dlgExportDataset
         '
         resources.ApplyResources(Me.lblExport, "lblExport")
         Me.lblExport.Name = "lblExport"
+        '
+        'lblConfirmText
+        '
+        resources.ApplyResources(Me.lblConfirmText, "lblConfirmText")
+        Me.lblConfirmText.Name = "lblConfirmText"
         '
         'ucrInputExportFile
         '
@@ -81,17 +87,19 @@ Partial Class dlgExportDataset
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblExport)
+        Me.Controls.Add(Me.lblConfirmText)
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.ucrInputExportFile)
         Me.Controls.Add(Me.ucrAvailableSheets)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.lblExport)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgExportDataset"
         Me.ShowIcon = False
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -100,4 +108,5 @@ Partial Class dlgExportDataset
     Friend WithEvents lblExport As Label
     Friend WithEvents ucrAvailableSheets As ucrDataFrame
     Friend WithEvents ucrInputExportFile As ucrInputTextBox
+    Friend WithEvents lblConfirmText As Label
 End Class

@@ -43,6 +43,9 @@ Public Class dlgExportDataset
         ucrAvailableSheets.SetText("Data Frame to Export:")
 
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
+
+        lblConfirmText.Text = "Click Ok to Confirm the Export"
+        lblConfirmText.ForeColor = Color.Red
     End Sub
 
     Private Sub SetDefaults()
@@ -64,6 +67,13 @@ Public Class dlgExportDataset
         If Not ucrInputExportFile.IsEmpty AndAlso ucrAvailableSheets.cboAvailableDataFrames.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
+            ucrBase.OKEnabled(False)
+        End If
+        If Not ucrInputExportFile.IsEmpty() Then
+            lblConfirmText.Show()
+            ucrBase.OKEnabled(True)
+        Else
+            lblConfirmText.Hide()
             ucrBase.OKEnabled(False)
         End If
     End Sub
