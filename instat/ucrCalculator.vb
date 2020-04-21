@@ -1230,9 +1230,9 @@ Public Class ucrCalculator
         RaiseEvent SelectionChanged()
     End Sub
 
-    Private Sub ucrSaveResultInto_NameChanged()
-        RaiseEvent SaveNameChanged()
-    End Sub
+    'Private Sub ucrSaveResultInto_NameChanged()
+    '    RaiseEvent SaveNameChanged()
+    'End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         HelpContent()
