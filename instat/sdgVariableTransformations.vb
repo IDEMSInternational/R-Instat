@@ -22,6 +22,13 @@ Public Class sdgVariableTransformations
     Public clsTransformationFunction As RFunction
     Public clsContainingCode As RCodeStructure
     Public clsTransformParameter As RParameter
+
+    Public clsBrokenStickFirOperator As ROperator
+    Public clsBrokenStickSecOperator As ROperator
+    Public clsBrokenStickThirdOperator As ROperator
+    Public clsBrokenStickGeneralOperator As ROperator
+    Public clsBrokenStickIFunc As RFunction
+
     Public clsPowerOperator As ROperator
     Public bControlsInitialised As Boolean = False
     Public strCurrentVariableName As String
@@ -37,6 +44,7 @@ Public Class sdgVariableTransformations
         ucrPnlChooseFunction.AddRadioButton(rdoPower)
         ucrPnlChooseFunction.AddRadioButton(rdoSquareRoot)
         ucrPnlChooseFunction.AddToLinkedControls(ucrInputTxtPower, {rdoPower}, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrPnlChooseFunction.AddRadioButton(rdoBrokenStick)
 
         'temp disabled as need to use I(x ^ 2) instead of x ^ 2 as this has different meaning in a formula
         rdoPower.Enabled = False
@@ -45,12 +53,16 @@ Public Class sdgVariableTransformations
         ucrInputTxtPower.SetValidationTypeAsNumeric()
         ucrInputTxtPower.AddQuotesIfUnrecognised = False
 
+        ucrInputTxtBrokenStick.SetParameter(New RParameter("b", 1, bNewIncludeArgumentName:=False))
+        ucrInputTxtBrokenStick.SetValidationTypeAsNumeric()
+        ucrInputTxtBrokenStick.AddQuotesIfUnrecognised = False
+
         ucrNudSplineDF.SetMinMax(0, Integer.MaxValue)
 
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControls(clsNewFormulaOperator As ROperator, clsNewTransformParameter As RParameter, clsNewTransformFunction As RFunction, clsNewPowerOperator As ROperator, strVariableName As String, Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControls(clsNewFormulaOperator As ROperator, clsNewTransformParameter As RParameter, clsNewTransformFunction As RFunction, clsNewPowerOperator As ROperator, strVariableName As String, Optional clsNewBrokenStickFirOperator As ROperator = Nothing, Optional clsNewBrokenStickSecOperator As ROperator = Nothing, Optional clsNewBrokenStickThirdOperator As ROperator = Nothing, Optional clsNewBrokenStickGeneralOperator As ROperator = Nothing, Optional clsNewBrokenStickIFunc As RFunction = Nothing, Optional bReset As Boolean = False)
         Dim strParamName As String
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -60,6 +72,12 @@ Public Class sdgVariableTransformations
         clsPowerOperator = clsNewPowerOperator
         clsTransformParameter = clsNewTransformParameter
         clsContainingCode = clsNewFormulaOperator
+        clsBrokenStickFirOperator = clsNewBrokenStickFirOperator
+        clsBrokenStickSecOperator = clsNewBrokenStickSecOperator
+        clsBrokenStickThirdOperator = clsNewBrokenStickThirdOperator
+        clsBrokenStickGeneralOperator = clsNewBrokenStickGeneralOperator
+        clsBrokenStickIFunc = clsNewBrokenStickIFunc
+
         strParamName = clsTransformParameter.strArgumentName
 
         ucrPnlChooseFunction.ClearConditions()
@@ -68,15 +86,22 @@ Public Class sdgVariableTransformations
         ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoSquareRoot, strParamName, "sqrt")
         ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoNaturalLog, strParamName, "log")
         ucrPnlChooseFunction.AddParameterIsROperatorCondition(rdoPower, strParamName)
+        ucrPnlChooseFunction.AddParameterIsROperatorCondition(rdoBrokenStick, strParamName)
 
         ucrPnlChooseFunction.SetRCode(clsContainingCode, bReset, bCloneIfNeeded:=True)
         ucrInputTxtPower.SetRCode(clsPowerOperator, bReset, bCloneIfNeeded:=True)
+        ucrInputTxtBrokenStick.SetRCode(clsBrokenStickFirOperator, bReset, bCloneIfNeeded:=True)
+        ucrInputTxtBrokenStick.AddAdditionalCodeParameterPair(clsBrokenStickSecOperator, New RParameter("b", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+
+
         UpdatePreview()
     End Sub
 
     Private Sub ucrPnlGenerateFunctions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlChooseFunction.ControlValueChanged
         If rdoIdentity.Checked Then
             clsTransformParameter.SetArgumentValue(strCurrentVariableName)
+        ElseIf rdoBrokenStick.checked AndAlso Not ucrInputTxtBrokenStick.IsEmpty Then
+            clsTransformParameter.SetArgument(clsBrokenStickGeneralOperator)
         Else
             If rdoPower.Checked Then
                 clsTransformationCode = clsPowerOperator

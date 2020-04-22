@@ -23,6 +23,9 @@ Public Class dlgTwoVariableFitModel
     Public clsRPoisson, clsVisReg, clsRLeverage, clsRWriteLeverage, clsRResiduals, clsRStdResiduals, clsRWriteResiduals, clsRWriteStdResiduals, clsRgeom_point, clsRWriteFitted, clsRFittedValues, clsRestpvalFunction, clsRaovpvalFunction, clsRModelFunction, clsRaovFunction, clsRTTest, clsRFTest, clsRKruskalTest, clsRBinomial, clsRWilcoxTest, clsFamilyFunction, clsRFactor, clsRFactor2, clsRNumeric, clsxFunc, clsRMean, clsRMean2, clsRGroup, clsRGroup2, clsTFunc, clsRLength As New RFunction
     Private clsTransformFunction As RFunction
 
+    Public clsBrokenStickFirOperator, clsBrokenStickSecOperator, clsBrokenStickThirdOperator, clsBrokenStickGeneralOperator As ROperator
+    Public clsBrokenStickIFunc As RFunction
+
     'General case codes
     Public clsFormulaOperator, clsPowerOperator As ROperator
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
@@ -180,6 +183,11 @@ Public Class dlgTwoVariableFitModel
         clsHatvaluesFunction = New RFunction
         clsResidualFunction = New RFunction
         clsFittedValuesFunction = New RFunction
+        clsBrokenStickFirOperator = New ROperator
+        clsBrokenStickSecOperator = New ROperator
+        clsBrokenStickThirdOperator = New ROperator
+        clsBrokenStickGeneralOperator = New ROperator
+        clsBrokenStickIFunc = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -304,6 +312,22 @@ Public Class dlgTwoVariableFitModel
 
         clsHatvaluesFunction.SetRCommand("hatvalues")
 
+        'Broken stick
+        clsBrokenStickFirOperator.SetOperation("-")
+
+        clsBrokenStickSecOperator.SetOperation(">", bBracketsTemp:=False)
+
+        clsBrokenStickThirdOperator.SetOperation("*", bBracketsTemp:=False)
+        clsBrokenStickThirdOperator.AddParameter("first", clsROperatorParameter:=clsBrokenStickFirOperator, bIncludeArgumentName:=False, iPosition:=0)
+        clsBrokenStickThirdOperator.AddParameter("second", clsROperatorParameter:=clsBrokenStickSecOperator, bIncludeArgumentName:=False, iPosition:=1)
+
+        clsBrokenStickIFunc.SetRCommand("I")
+        clsBrokenStickIFunc.AddParameter(clsROperatorParameter:=clsBrokenStickThirdOperator)
+
+        clsBrokenStickGeneralOperator.SetOperation("+")
+        clsBrokenStickGeneralOperator.AddParameter(clsRFunctionParameter:=clsBrokenStickIFunc, iPosition:=1)
+
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
@@ -328,6 +352,9 @@ Public Class dlgTwoVariableFitModel
 
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
 
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickGeneralOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickFirOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickSecOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         '###################################################
 
         'Two sample controls

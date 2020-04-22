@@ -451,7 +451,7 @@
     <value>6</value>
   </data>
   <data name="ucrPnlChooseFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 2</value>
+    <value>0, 2</value>
   </data>
   <data name="ucrPnlChooseFunction.Size" type="System.Drawing.Size, System.Drawing">
     <value>290, 213</value>
