@@ -42,16 +42,19 @@ Public Class dlgGlance
         ucrModelReceiver.Selector = ucrModelSelector
         ucrModelReceiver.bForceVariablesAsList = True
 
-        ucrChkDisplayinOutput.SetText("Display in Output")
+        ucrPnlOptions.AddRadioButton(rdoDisplayInOutput)
+        ucrPnlOptions.AddRadioButton(rdoGlanceDataFrame)
+
+        'ucrChkDisplayinOutput.SetText("Display in Output")
 
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
 
-        ucrSaveNewDataFrame.SetIsComboBox()
-        ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
-        ucrSaveNewDataFrame.SetCheckBoxText("Save New data frame")
-        ucrSaveNewDataFrame.SetPrefix("Glance_dataframe")
-        ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
+        'ucrSaveNewDataFrame.SetIsComboBox()
+        'ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
+        'ucrSaveNewDataFrame.SetCheckBoxText("Save New data frame")
+        'ucrSaveNewDataFrame.SetPrefix("Glance_dataframe")
+        'ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
 
         ucrModelReceiver.SetParameter(New RParameter(".x", 0))
         ucrModelReceiver.Selector = ucrModelSelector
@@ -63,13 +66,15 @@ Public Class dlgGlance
         clsDummyRfunction = New RFunction
 
         ucrModelSelector.Reset()
-        ucrSaveNewDataFrame.Reset()
+        'ucrSaveNewDataFrame.Reset()
 
         'todo implement as a function properly
         clsMap_df.SetPackageName("purrr")
         clsMap_df.SetRCommand("map_df")
         clsMap_df.AddParameter(strParameterName:=".f", strParameterValue:="broom::glance", iPosition:=1)
         clsMap_df.AddParameter(strParameterName:=".id", strParameterValue:=Chr(34) & "model" & Chr(34))
+
+        'ucrChkDisplayinOutput.Checked = True
 
         clsDummyRfunction = clsMap_df.Clone()
         ucrBase.clsRsyntax.iCallType = 2
@@ -81,11 +86,11 @@ Public Class dlgGlance
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrModelReceiver.IsEmpty()) AndAlso ucrSaveNewDataFrame.IsComplete AndAlso ucrChkDisplayinOutput.Checked Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        'If (ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
+        '    ucrBase.OKEnabled(True)
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -94,15 +99,15 @@ Public Class dlgGlance
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkDisplayinOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayinOutput.ControlValueChanged
-        If ucrChkDisplayinOutput.Checked Then
+    Private Sub rdoDisplayInOutPut_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        If rdoDisplayInOutput.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
         Else
             ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrChkDisplayinOutput.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
+    'Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrChkDisplayinOutput.ControlContentsChanged
+    '    TestOKEnabled()
+    'End Sub
 End Class

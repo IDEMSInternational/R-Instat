@@ -25,10 +25,11 @@ Partial Class dlgGlance
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgGlance))
         Me.lblModels = New System.Windows.Forms.Label()
         Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrSaveNewDataFrame = New instat.ucrSave()
-        Me.ucrChkDisplayinOutput = New instat.ucrCheck()
         Me.ucrModelReceiver = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.rdoDisplayInOutput = New System.Windows.Forms.RadioButton()
+        Me.rdoGlanceDataFrame = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblModels
@@ -44,17 +45,6 @@ Partial Class dlgGlance
         resources.ApplyResources(Me.ucrModelSelector, "ucrModelSelector")
         Me.ucrModelSelector.Name = "ucrModelSelector"
         '
-        'ucrSaveNewDataFrame
-        '
-        resources.ApplyResources(Me.ucrSaveNewDataFrame, "ucrSaveNewDataFrame")
-        Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
-        '
-        'ucrChkDisplayinOutput
-        '
-        Me.ucrChkDisplayinOutput.Checked = False
-        resources.ApplyResources(Me.ucrChkDisplayinOutput, "ucrChkDisplayinOutput")
-        Me.ucrChkDisplayinOutput.Name = "ucrChkDisplayinOutput"
-        '
         'ucrModelReceiver
         '
         Me.ucrModelReceiver.frmParent = Me
@@ -69,13 +59,33 @@ Partial Class dlgGlance
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrPnlOptions
+        '
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        '
+        'rdoDisplayInOutput
+        '
+        resources.ApplyResources(Me.rdoDisplayInOutput, "rdoDisplayInOutput")
+        Me.rdoDisplayInOutput.Name = "rdoDisplayInOutput"
+        Me.rdoDisplayInOutput.TabStop = True
+        Me.rdoDisplayInOutput.UseVisualStyleBackColor = True
+        '
+        'rdoGlanceDataFrame
+        '
+        resources.ApplyResources(Me.rdoGlanceDataFrame, "rdoGlanceDataFrame")
+        Me.rdoGlanceDataFrame.Name = "rdoGlanceDataFrame"
+        Me.rdoGlanceDataFrame.TabStop = True
+        Me.rdoGlanceDataFrame.UseVisualStyleBackColor = True
+        '
         'dlgGlance
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoGlanceDataFrame)
+        Me.Controls.Add(Me.rdoDisplayInOutput)
+        Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrModelSelector)
-        Me.Controls.Add(Me.ucrSaveNewDataFrame)
-        Me.Controls.Add(Me.ucrChkDisplayinOutput)
         Me.Controls.Add(Me.lblModels)
         Me.Controls.Add(Me.ucrModelReceiver)
         Me.Controls.Add(Me.ucrBase)
@@ -91,7 +101,8 @@ Partial Class dlgGlance
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrModelReceiver As ucrReceiverMultiple
     Friend WithEvents lblModels As Label
-    Friend WithEvents ucrSaveNewDataFrame As ucrSave
-    Friend WithEvents ucrChkDisplayinOutput As ucrCheck
     Friend WithEvents ucrModelSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrPnlOptions As UcrPanel
+    Friend WithEvents rdoDisplayInOutput As RadioButton
+    Friend WithEvents rdoGlanceDataFrame As RadioButton
 End Class
