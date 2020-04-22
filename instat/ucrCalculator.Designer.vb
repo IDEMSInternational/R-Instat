@@ -41,6 +41,7 @@ Partial Class ucrCalculator
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrCalculator))
         Me.lblExpression = New System.Windows.Forms.Label()
+        Me.chkSaveResultInto = New System.Windows.Forms.CheckBox()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.chkShowParameters = New System.Windows.Forms.CheckBox()
         Me.grpBasic = New System.Windows.Forms.GroupBox()
@@ -390,9 +391,9 @@ Partial Class ucrCalculator
         Me.cmdBr2 = New System.Windows.Forms.Button()
         Me.ucrTryCalculator = New instat.ucrTry()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
+        Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.ucrSaveColumn = New instat.ucrSave()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -414,6 +415,12 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.lblExpression, "lblExpression")
         Me.lblExpression.Name = "lblExpression"
         Me.lblExpression.Tag = "Expression"
+        '
+        'chkSaveResultInto
+        '
+        resources.ApplyResources(Me.chkSaveResultInto, "chkSaveResultInto")
+        Me.chkSaveResultInto.Name = "chkSaveResultInto"
+        Me.chkSaveResultInto.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
@@ -2853,6 +2860,13 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.ucrInputCalOptions, "ucrInputCalOptions")
         Me.ucrInputCalOptions.Name = "ucrInputCalOptions"
         '
+        'ucrSaveResultInto
+        '
+        Me.ucrSaveResultInto.AddQuotesIfUnrecognised = True
+        Me.ucrSaveResultInto.IsReadOnly = False
+        resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
+        Me.ucrSaveResultInto.Name = "ucrSaveResultInto"
+        '
         'ucrSelectorForCalculations
         '
         Me.ucrSelectorForCalculations.bDropUnusedFilterLevels = False
@@ -2870,16 +2884,10 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'ucrSaveColumn
-        '
-        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
-        Me.ucrSaveColumn.Name = "ucrSaveColumn"
-        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.grpHydroGOF)
         Me.Controls.Add(Me.ucrTryCalculator)
         Me.Controls.Add(Me.grpFactor)
@@ -2898,6 +2906,8 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.chkShowParameters)
         Me.Controls.Add(Me.ucrInputCalOptions)
         Me.Controls.Add(Me.grpBasic)
+        Me.Controls.Add(Me.ucrSaveResultInto)
+        Me.Controls.Add(Me.chkSaveResultInto)
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
@@ -2923,6 +2933,8 @@ Partial Class ucrCalculator
 
     Friend WithEvents ucrReceiverForCalculation As ucrReceiverExpression
     Friend WithEvents lblExpression As Label
+    Friend WithEvents ucrSaveResultInto As ucrInputComboBox
+    Friend WithEvents chkSaveResultInto As CheckBox
     Friend WithEvents ucrSelectorForCalculations As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdHelp As Button
     Friend WithEvents chkShowParameters As CheckBox
@@ -3276,5 +3288,4 @@ Partial Class ucrCalculator
     Friend WithEvents cmdVE As Button
     Friend WithEvents cmdSsq As Button
     Friend WithEvents cmdRsr As Button
-    Friend WithEvents ucrSaveColumn As ucrSave
 End Class

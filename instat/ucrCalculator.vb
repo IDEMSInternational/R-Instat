@@ -172,7 +172,7 @@ Public Class ucrCalculator
     Public Sub Reset()
         ucrReceiverForCalculation.ResetText()
         ucrInputCalOptions.Reset()
-        ucrSaveColumn.Reset()
+        ucrSaveResultInto.Reset()
         ucrSelectorForCalculations.Reset()
         clsHelp.ClearParameters()
     End Sub
@@ -983,7 +983,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub chkSaveResultInto_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub chkSaveResultInto_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResultInto.CheckedChanged
         RaiseEvent SaveResultsCheckedChanged()
     End Sub
 
@@ -1230,7 +1230,7 @@ Public Class ucrCalculator
         RaiseEvent SelectionChanged()
     End Sub
 
-    Private Sub ucrSaveResultInto_NameChanged()
+    Private Sub ucrSaveResultInto_NameChanged() Handles ucrSaveResultInto.NameChanged
         RaiseEvent SaveNameChanged()
     End Sub
 
