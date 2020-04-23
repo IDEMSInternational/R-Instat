@@ -33,6 +33,7 @@ Public Class dlgTidy
         ucrPnlOptions.AddRadioButton(rdoDisplayInOutput)
         ucrPnlOptions.AddRadioButton(rdoNewDataFrame)
 
+        ucrPnlOptions.bAllowNonConditionValues = True
 
 
         ucrModelSelector.SetParameter(New RParameter("data", 0))
