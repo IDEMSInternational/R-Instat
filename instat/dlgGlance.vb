@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgGlance
     Public bfirstload As Boolean = True
     Public bReset As Boolean = True
-    Private clsMap_df, clsDummyRfunction As New RFunction
+    Private clsMap_df As New RFunction
 
     Private Sub dlgGlance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -44,16 +44,17 @@ Public Class dlgGlance
 
         ucrPnlOptions.AddRadioButton(rdoDisplayInOutput)
         ucrPnlOptions.AddRadioButton(rdoGlanceDataFrame)
-        ucrPnlOptions.AddToLinkedControls(ucrSaveNewDataFrame, {rdoGlanceDataFrame}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        'ucrChkDisplayinOutput.SetText("Display in Output")
+        ucrPnlOptions.bAllowNonConditionValues = True
+
+        ucrPnlOptions.AddToLinkedControls(ucrSaveNewDataFrame, {rdoGlanceDataFrame}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
 
-        ucrSaveNewDataFrame.SetIsComboBox()
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
-        ucrSaveNewDataFrame.SetCheckBoxText("Save New data frame:")
+        ucrSaveNewDataFrame.lblSaveText.Visible = False
+        ucrSaveNewDataFrame.SetLabelText("")
         ucrSaveNewDataFrame.SetPrefix("Glance_dataframe")
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
 
@@ -64,10 +65,12 @@ Public Class dlgGlance
 
     Private Sub SetDefaults()
         clsMap_df = New RFunction
-        clsDummyRfunction = New RFunction
 
         ucrModelSelector.Reset()
-        'ucrSaveNewDataFrame.Reset()
+        ucrSaveNewDataFrame.Reset()
+
+        'temp fix
+        rdoDisplayInOutput.Checked = True
 
         'todo implement as a function properly
         clsMap_df.SetPackageName("purrr")
@@ -75,9 +78,6 @@ Public Class dlgGlance
         clsMap_df.AddParameter(strParameterName:=".f", strParameterValue:="broom::glance", iPosition:=1)
         clsMap_df.AddParameter(strParameterName:=".id", strParameterValue:=Chr(34) & "model" & Chr(34))
 
-        'ucrChkDisplayinOutput.Checked = True
-
-        clsDummyRfunction = clsMap_df.Clone()
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsMap_df)
     End Sub
@@ -100,7 +100,7 @@ Public Class dlgGlance
         TestOKEnabled()
     End Sub
 
-    Private Sub rdoDisplayInOutPut_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoDisplayInOutput.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
         Else
@@ -108,7 +108,7 @@ Public Class dlgGlance
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
