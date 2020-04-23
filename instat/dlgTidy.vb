@@ -68,7 +68,7 @@ Public Class dlgTidy
         clsMap_df.AddParameter(strParameterName:=".f", strParameterValue:="broom::tidy", iPosition:=1)
         clsMap_df.AddParameter(strParameterName:=".id", strParameterValue:=Chr(34) & "model" & Chr(34))
 
-        'clsDummyRfunction = clsMap_df.Clone()
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsMap_df)
     End Sub
@@ -78,7 +78,7 @@ Public Class dlgTidy
     End Sub
 
     Private Sub TestOKEnabled()
-        If (ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
+         If (ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -91,14 +91,13 @@ Public Class dlgTidy
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlOptions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlContentsChanged
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoDisplayInOutput.Checked Then
-            ucrBase.clsRsyntax.iCallType = 2
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         Else
-            ucrBase.clsRsyntax.iCallType = 0
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         End If
     End Sub
-
 
     Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
