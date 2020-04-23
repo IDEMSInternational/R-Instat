@@ -41,9 +41,9 @@ Public Class dlgTidy
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
 
-        ucrSaveNewDataFrame.SetIsComboBox()
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
-        ucrSaveNewDataFrame.SetCheckBoxText("Save New data frame")
+        ucrSaveNewDataFrame.lblSaveText.Visible = False
+        ucrSaveNewDataFrame.SetLabelText("")
         ucrSaveNewDataFrame.SetPrefix("Tidy_dataframe")
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
 
@@ -54,10 +54,13 @@ Public Class dlgTidy
 
     Private Sub SetDefaults()
         clsMap_df = New RFunction
-        'clsDummyRfunction = New RFunction
 
         ucrModelSelector.Reset()
         ucrSaveNewDataFrame.Reset()
+
+        'tem fix
+        rdoDisplayInOutput.Checked = True
+
 
         'todo implement as a function properly
         clsMap_df.SetPackageName("purrr")
@@ -89,7 +92,11 @@ Public Class dlgTidy
     End Sub
 
     Private Sub ucrPnlOptions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlContentsChanged
-
+        If rdoDisplayInOutput.Checked Then
+            ucrBase.clsRsyntax.iCallType = 2
+        Else
+            ucrBase.clsRsyntax.iCallType = 0
+        End If
     End Sub
 
 
