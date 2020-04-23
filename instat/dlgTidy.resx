@@ -151,16 +151,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblModels.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="ucrSaveNewDataFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 240</value>
+    <value>173, 237</value>
   </data>
   <data name="ucrSaveNewDataFrame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveNewDataFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 34</value>
+    <value>185, 34</value>
   </data>
   <data name="ucrSaveNewDataFrame.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -175,31 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveNewDataFrame.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkDisplayInOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 201</value>
-  </data>
-  <data name="ucrChkDisplayInOutput.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="ucrChkDisplayInOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 20</value>
-  </data>
-  <data name="ucrChkDisplayInOutput.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplayInOutput.Name" xml:space="preserve">
-    <value>ucrChkDisplayInOutput</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplayInOutput.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplayInOutput.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDisplayInOutput.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -209,6 +185,81 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>419, 354</value>
+  </data>
+  <data name="rdoNewDataFrame.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoNewDataFrame.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 237</value>
+  </data>
+  <data name="rdoNewDataFrame.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 17</value>
+  </data>
+  <data name="rdoNewDataFrame.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="rdoNewDataFrame.Text" xml:space="preserve">
+    <value>New Data Frame:</value>
+  </data>
+  <data name="&gt;&gt;rdoNewDataFrame.Name" xml:space="preserve">
+    <value>rdoNewDataFrame</value>
+  </data>
+  <data name="&gt;&gt;rdoNewDataFrame.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoNewDataFrame.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoNewDataFrame.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoDisplayInOutput.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoDisplayInOutput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 201</value>
+  </data>
+  <data name="rdoDisplayInOutput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 17</value>
+  </data>
+  <data name="rdoDisplayInOutput.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="rdoDisplayInOutput.Text" xml:space="preserve">
+    <value>Display In Output</value>
+  </data>
+  <data name="&gt;&gt;rdoDisplayInOutput.Name" xml:space="preserve">
+    <value>rdoDisplayInOutput</value>
+  </data>
+  <data name="&gt;&gt;rdoDisplayInOutput.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDisplayInOutput.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoDisplayInOutput.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 192</value>
+  </data>
+  <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 81</value>
+  </data>
+  <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Name" xml:space="preserve">
+    <value>ucrPnlOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="ucrModelSelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 7</value>
@@ -232,7 +283,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrModelSelector.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 294</value>
@@ -256,10 +307,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>7</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -298,6 +346,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrModelReceiver.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
 </root>

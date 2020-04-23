@@ -82,7 +82,7 @@ Public Class dlgTidy
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkDisplayinOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayInOutput.ControlValueChanged
+    Private Sub ucrChkDisplayinOutput_ControlValueChanged(ucrChangedControl As ucrCore)
         If ucrChkDisplayInOutput.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
         Else

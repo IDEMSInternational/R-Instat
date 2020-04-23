@@ -25,10 +25,12 @@ Partial Class dlgTidy
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTidy))
         Me.lblModels = New System.Windows.Forms.Label()
         Me.ucrSaveNewDataFrame = New instat.ucrSave()
-        Me.ucrChkDisplayInOutput = New instat.ucrCheck()
         Me.ucrModelReceiver = New instat.ucrReceiverMultiple()
         Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.rdoDisplayInOutput = New System.Windows.Forms.RadioButton()
+        Me.rdoNewDataFrame = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblModels
@@ -40,12 +42,6 @@ Partial Class dlgTidy
         '
         resources.ApplyResources(Me.ucrSaveNewDataFrame, "ucrSaveNewDataFrame")
         Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
-        '
-        'ucrChkDisplayInOutput
-        '
-        Me.ucrChkDisplayInOutput.Checked = False
-        resources.ApplyResources(Me.ucrChkDisplayInOutput, "ucrChkDisplayInOutput")
-        Me.ucrChkDisplayInOutput.Name = "ucrChkDisplayInOutput"
         '
         'ucrModelReceiver
         '
@@ -69,12 +65,33 @@ Partial Class dlgTidy
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrPnlOptions
+        '
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        '
+        'rdoDisplayInOutput
+        '
+        resources.ApplyResources(Me.rdoDisplayInOutput, "rdoDisplayInOutput")
+        Me.rdoDisplayInOutput.Name = "rdoDisplayInOutput"
+        Me.rdoDisplayInOutput.TabStop = True
+        Me.rdoDisplayInOutput.UseVisualStyleBackColor = True
+        '
+        'rdoNewDataFrame
+        '
+        resources.ApplyResources(Me.rdoNewDataFrame, "rdoNewDataFrame")
+        Me.rdoNewDataFrame.Name = "rdoNewDataFrame"
+        Me.rdoNewDataFrame.TabStop = True
+        Me.rdoNewDataFrame.UseVisualStyleBackColor = True
+        '
         'dlgTidy
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoNewDataFrame)
+        Me.Controls.Add(Me.rdoDisplayInOutput)
+        Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrSaveNewDataFrame)
-        Me.Controls.Add(Me.ucrChkDisplayInOutput)
         Me.Controls.Add(Me.ucrModelReceiver)
         Me.Controls.Add(Me.lblModels)
         Me.Controls.Add(Me.ucrModelSelector)
@@ -93,5 +110,7 @@ Partial Class dlgTidy
     Friend WithEvents lblModels As Label
     Friend WithEvents ucrModelReceiver As ucrReceiverMultiple
     Friend WithEvents ucrSaveNewDataFrame As ucrSave
-    Friend WithEvents ucrChkDisplayInOutput As ucrCheck
+    Friend WithEvents rdoNewDataFrame As RadioButton
+    Friend WithEvents rdoDisplayInOutput As RadioButton
+    Friend WithEvents ucrPnlOptions As UcrPanel
 End Class
