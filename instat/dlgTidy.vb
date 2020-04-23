@@ -30,7 +30,10 @@ Public Class dlgTidy
         ucrModelReceiver.Selector = ucrModelSelector
         ucrModelReceiver.bForceVariablesAsList = True
 
-        ucrChkDisplayInOutput.SetText("Display in Output")
+        ucrPnlOptions.AddRadioButton(rdoDisplayInOutput)
+        ucrPnlOptions.AddRadioButton(rdoNewDataFrame)
+
+
 
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
@@ -69,7 +72,7 @@ Public Class dlgTidy
     End Sub
 
     Private Sub TestOKEnabled()
-        If (ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty() AndAlso ucrChkDisplayInOutput.Checked) Then
+        If (ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -82,15 +85,12 @@ Public Class dlgTidy
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkDisplayinOutput_ControlValueChanged(ucrChangedControl As ucrCore)
-        If ucrChkDisplayInOutput.Checked Then
-            ucrBase.clsRsyntax.iCallType = 2
-        Else
-            ucrBase.clsRsyntax.iCallType = 0
-        End If
+    Private Sub ucrPnlOptions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlContentsChanged
+
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrChkDisplayInOutput.ControlContentsChanged
+
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
