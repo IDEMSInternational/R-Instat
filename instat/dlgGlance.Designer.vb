@@ -30,6 +30,7 @@ Partial Class dlgGlance
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.rdoDisplayInOutput = New System.Windows.Forms.RadioButton()
         Me.rdoGlanceDataFrame = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveNewDataFrame = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblModels
@@ -78,10 +79,16 @@ Partial Class dlgGlance
         Me.rdoGlanceDataFrame.TabStop = True
         Me.rdoGlanceDataFrame.UseVisualStyleBackColor = True
         '
+        'ucrSaveNewDataFrame
+        '
+        resources.ApplyResources(Me.ucrSaveNewDataFrame, "ucrSaveNewDataFrame")
+        Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
+        '
         'dlgGlance
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveNewDataFrame)
         Me.Controls.Add(Me.rdoGlanceDataFrame)
         Me.Controls.Add(Me.rdoDisplayInOutput)
         Me.Controls.Add(Me.ucrPnlOptions)
@@ -105,4 +112,5 @@ Partial Class dlgGlance
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents rdoDisplayInOutput As RadioButton
     Friend WithEvents rdoGlanceDataFrame As RadioButton
+    Friend WithEvents ucrSaveNewDataFrame As ucrSave
 End Class

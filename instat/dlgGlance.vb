@@ -50,11 +50,11 @@ Public Class dlgGlance
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
 
-        'ucrSaveNewDataFrame.SetIsComboBox()
-        'ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
-        'ucrSaveNewDataFrame.SetCheckBoxText("Save New data frame")
-        'ucrSaveNewDataFrame.SetPrefix("Glance_dataframe")
-        'ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
+        ucrSaveNewDataFrame.SetIsComboBox()
+        ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
+        ucrSaveNewDataFrame.SetCheckBoxText("Save New data frame")
+        ucrSaveNewDataFrame.SetPrefix("Glance_dataframe")
+        ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
 
         ucrModelReceiver.SetParameter(New RParameter(".x", 0))
         ucrModelReceiver.Selector = ucrModelSelector
@@ -86,11 +86,11 @@ Public Class dlgGlance
     End Sub
 
     Private Sub TestOKEnabled()
-        'If (ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
-        '    ucrBase.OKEnabled(True)
-        'Else
-        '    ucrBase.OKEnabled(False)
-        'End If
+        If (ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -107,7 +107,7 @@ Public Class dlgGlance
         End If
     End Sub
 
-    'Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrChkDisplayinOutput.ControlContentsChanged
-    '    TestOKEnabled()
-    'End Sub
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
 End Class
