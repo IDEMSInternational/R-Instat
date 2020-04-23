@@ -17,76 +17,132 @@
 Imports RDotNet
 Imports unvell.ReoGrid
 Imports System.IO
-''' <summary>   A link. </summary>
 
+'''--------------------------------------------------------------------------------------------
+''' <summary>   An object of this class represents an R interface. 
+'''             Each instance of this class has its own R environment.
+'''             <para>
+'''             This class provides methods and fields to:</para>
+''' <list type="bullet">
+'''     <item><description>
+'''             Define the R environment including paths and R versions.
+'''     </description></item><item><description>
+'''             Open a direct link to the R environment and load the required R packages. 
+'''     </description></item><item><description>
+'''             Execute a specified R script and display the output as text, graph or in a 
+'''             web browser.
+'''     </description></item><item><description>
+'''             Write to log and debug files.
+'''     </description></item><item><description>
+'''             Specify the fonts and colours to be used in the output window.
+'''     </description></item><item><description>
+'''             Populate and configure the data frame control combo box, and the list view control.
+'''     </description></item><item><description>
+'''             Get names of data frames, columns, models, tables, filters, graphs and survs.
+'''     </description></item><item><description>
+'''             Get properties and other metadata.
+'''     </description></item><item><description>
+'''             Execute specific climatic and corruption commands.
+'''     </description></item>
+''' </list></summary>
+'''--------------------------------------------------------------------------------------------
 Public Class RLink
-    ' R interface class. Each instance of the class has its own REngine instance
 
     ''' <summary>   Full pathname of the climate object file. </summary>
-    Dim strClimateObjectPath As String = "/ClimateObject/R" 'new climateobject path
-    ''' <summary>   The climate object. </summary>
-    Public strClimateObject As String = "ClimateObject"
+    Dim strClimateObjectPath As String = "/ClimateObject/R" 'TODO SJL 23/04/20 Not used. Delete?
+
+    ''' <summary>   The name of the climate object. </summary>
+    Public strClimateObject As String = "ClimateObject" 'TODO SJL 23/04/20 make constant?
+
     ''' <summary>   Full pathname of the instat object file. </summary>
-    Dim strInstatObjectPath As String = "/InstatObject/R" 'path to the Instat object
-    ''' <summary>   The instat data object. </summary>
-    Public strInstatDataObject As String = "data_book"
+    Dim strInstatObjectPath As String = "/InstatObject/R" 'TODO SJL 23/04/20 make private constant?
+
+    ''' <summary>   The instat data book object. </summary> 
+    Public strInstatDataObject As String = "data_book" 'TODO SJL 23/04/20 make private constant?
+
     ''' <summary>   Name of the data book class. </summary>
-    Public strDataBookClassName As String = "DataBook"
-    ''' <summary>   True to first r code. </summary>
+    Public strDataBookClassName As String = "DataBook" 'TODO SJL 23/04/20 make private constant?
 
+
+    ''' <summary>   True if no R code has been executed yet. </summary>
     Private bFirstRCode As Boolean = True
-    ''' <summary>   True to debug log exists. </summary>
-    Private bDebugLogExists As Boolean = False
-    ''' <summary>   True to automatically save log exists. </summary>
-    Private bAutoSaveLogExists As Boolean = False
-    ''' <summary>   True to first log code. </summary>
-    Private bFirstLogCode As Boolean = True
-    ''' <summary>   True to r code running. </summary>
-    Public bRCodeRunning As Boolean = False
-    ''' <summary>   Full pathname of the automatic save log file. </summary>
 
+    ''' <summary>   If true then write executed R script to the debug log file. </summary>
+    Private bDebugLogExists As Boolean = False
+
+    ''' <summary>   If true then write executed R script to the save log file. </summary>
+    Private bAutoSaveLogExists As Boolean = False
+
+    ''' <summary>   True if log file has not yet been created yet. </summary>
+    Private bFirstLogCode As Boolean = True
+
+    ''' <summary>   True if there is R code still currently executing. </summary>
+    Public bRCodeRunning As Boolean = False
+
+
+    ''' <summary>   Full pathname of the automatic save log file. </summary>
     Public strAutoSaveLogFilePath As String = ""
+
     ''' <summary>   Full pathname of the automatic save debug log file. </summary>
     Public strAutoSaveDebugLogFilePath As String = ""
-    ''' <summary>   The cls engine. </summary>
 
-    Public clsEngine As REngine
-    ''' <summary>   True if r engine initialised. </summary>
+
+    ''' <summary>   The link to the R environment. </summary>
+    Public clsEngine As REngine 'TODO SJL 23/04/20 Make private?
+
+    ''' <summary>   True if the link to the R environment is initialised. </summary>
     Public bREngineInitialised As Boolean = False
+
+
     ''' The R output window (the window on the right that displays the R scripts and results).
     Public rtbOutput As New ucrWPFRichTextBox
+
     ''' The log window.
     Public txtLog As New TextBox
-    ''' True if the log window is defined, else false.
+
+    ''' True if the log window is defined
     Public bLog As Boolean = False
-    ''' <summary> If true then the R output window is defined.</summary>
+
+    ''' <summary> True if the R output window is defined.</summary>
     Public bOutput As Boolean = False
+
+
     ''' <summary>   True to climate object exists. </summary>
-    Public bClimateObjectExists As Boolean = False
+    Public bClimateObjectExists As Boolean = False 'TODO SJL 23/04/20 Not used. Delete?
+
     ''' <summary>   True if the connection to R is initialized and open. </summary>
     Public bInstatObjectExists As Boolean = False
-    ''' <summary>   True to climsoft link exists. </summary>
-    Public bClimsoftLinkExists As Boolean = False
 
-    ''' <summary> if true then show the executed commands in 'rtbOutput' TBD - is this the output window?</summary>
+    ''' <summary>   True to climsoft link exists. </summary>
+    Public bClimsoftLinkExists As Boolean = False 'TODO SJL 23/04/20 Not used. Delete?
+
+    ''' <summary> If true then show the executed commands in the R output window.</summary>
     Public bShowCommands As Boolean = True
+
+
     ''' <summary> The font for the R script. </summary>
     Public fScript As Font = New Font("Microsoft Sans Serif", 11, FontStyle.Regular)
+
     ''' <summary> The colour for the R script. </summary>
     Public clrScript As Color = Color.Black
-    '
+
     ''' <summary> The font for output generated by the R script. </summary>
     Public fOutput As Font = New Font(FontFamily.GenericMonospace, 11, FontStyle.Regular)
-    ''' <summary> The colour of output generated by the R script. </summary>
+
+    ''' <summary> The colour for output generated by the R script. </summary>
     Public clrOutput As Color = Color.Blue
-    '
+
     ''' <summary> The font for the R script comment. </summary>
     Public fComments As Font = New Font("Microsoft Sans Serif", 11, FontStyle.Regular)
-    ''' <summary> The colour of the R script comment. </summary>
-    Public clrComments As Color = Color.Green
-    ''' <summary>   The graph display option. </summary>
 
+    ''' <summary> The colour for the R script comment. </summary>
+    Public clrComments As Color = Color.Green
+
+
+    ''' <summary>   The graph display option (e.g. 'view_output_window' or 'view_separate_window'). </summary>
     Public strGraphDisplayOption As String = "view_output_window"
+
+
     ''' <summary> The current grid (the worksheet that appears similar to a spreadsheet on the 
     ''' left-hand side of the display). </summary>
     Private grdDataView As ReoGridControl
@@ -94,17 +150,23 @@ Public Class RLink
     ''' <summary> If true then, by default, display the waiting dialog (the dialog that is 
     ''' optionally displayed while an R script Is running). </summary>
     Private bShowWaitDialog As Boolean = True
+
     ''' The time in seconds to wait before showing the waiting dialog
     Private iWaitDelay As Integer = 2
-    ''' <summary>   The r version major required. </summary>
 
+
+    ''' <summary>   The R version major required. </summary>
     Private strRVersionMajorRequired As String = "3"
-    ''' <summary>   The r version minor required. </summary>
+
+    ''' <summary>   The R version minor required. </summary>
     Private strRVersionMinorRequired As String = "6"
-    ''' <summary>   The r version required. </summary>
+
+    ''' <summary>   The R version required. </summary>
     Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0"
-    ''' <summary>   The r bundled version. </summary>
+
+    ''' <summary>   The R bundled version. </summary>
     Private strRBundledVersion As String = "3.6.2"
+
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Initialises the connection with the R environment:
@@ -286,6 +348,7 @@ Public Class RLink
             End If
         Next
     End Sub
+
     ''' <summary>   Closes down the R engine (which encapsulates the R environment). </summary>
     Public Sub CloseREngine()
         If clsEngine IsNot Nothing Then
@@ -678,7 +741,7 @@ Public Class RLink
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Appends <paramref name="strScript"/> as a new line to the automatic save log
-    '''             file. If the log file doesn't exist yet, then it creates it.. </summary>
+    '''             file. If the log file doesn't exist yet, then it creates it. </summary>
     '''
     ''' <param name="strScript">    The text to add to the save log file. </param>
     '''--------------------------------------------------------------------------------------------
@@ -1643,11 +1706,12 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets data frame column count. </summary>
+    ''' <summary>   Gets the number of columns in the <paramref name="strDataFrameName"/> data 
+    '''             frame. </summary>
     '''
-    ''' <param name="strDataFrameName"> is TBD. </param>
+    ''' <param name="strDataFrameName"> The data frame name. </param>
     '''
-    ''' <returns>   The data frame column count. </returns>
+    ''' <returns>   The number of columns in the <paramref name="strDataFrameName"/> data frame. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetDataFrameColumnCount(strDataFrameName As String) As Integer
         Dim iColumnCount As Integer
@@ -1666,11 +1730,11 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets model names. </summary>
+    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's models. </summary>
     '''
-    ''' <param name="strDataFrameName"> (Optional) is the data name TBD. </param>
+    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
     '''
-    ''' <returns>   The model names. </returns>
+    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's models. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetModelNames(Optional strDataFrameName As String = "") As List(Of String)
         Dim chrModelNames As CharacterVector
@@ -1693,11 +1757,11 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets table names. </summary>
+    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's tables. </summary>
     '''
-    ''' <param name="strDataFrameName"> (Optional) is the data name TBD. </param>
+    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
     '''
-    ''' <returns>   The table names. </returns>
+    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's tables. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetTableNames(Optional strDataFrameName As String = "") As List(Of String)
         Dim chrTableNames As CharacterVector
@@ -1720,11 +1784,11 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets filter names. </summary>
+    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's filters. </summary>
     '''
-    ''' <param name="strDataFrameName"> is the data name TBD. </param>
+    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
     '''
-    ''' <returns>   The filter names. </returns>
+    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's filters. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetFilterNames(strDataFrameName As String) As List(Of String)
         Dim expFilterNames As SymbolicExpression
@@ -1747,11 +1811,11 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets graph names. </summary>
+    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's graphs. </summary>
     '''
-    ''' <param name="strDataFrameName"> (Optional) is the data name TBD. </param>
+    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
     '''
-    ''' <returns>   The graph names. </returns>
+    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's graphs. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetGraphNames(Optional strDataFrameName As String = "") As List(Of String)
         Dim chrGraphNames As CharacterVector
@@ -1774,11 +1838,11 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets surv names. </summary>
+    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's survs. </summary>
     '''
-    ''' <param name="strDataFrameName"> (Optional) is the data name TBD. </param>
+    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
     '''
-    ''' <returns>   The surv names. </returns>
+    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's survs. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetSurvNames(Optional strDataFrameName As String = "") As List(Of String)
         Dim chrSurvNames As CharacterVector
@@ -1801,14 +1865,17 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets data type. </summary>
+    ''' <summary>   Gets the data type of the <paramref name="strColumnName"/> column in the 
+    '''             <paramref name="strDataFrameName"/> data frame. </summary>
     '''
-    ''' <param name="strDataFrameName"> is TBD. </param>
-    ''' <param name="strColumnName">    is TBD. </param>
+    ''' <param name="strDataFrameName"> The data frame name. </param>
+    ''' <param name="strColumnName">    The column name. </param>
     '''
-    ''' <returns>   The data type. </returns>
+    ''' <returns>   The data type of the <paramref name="strColumnName"/> column in the
+    '''             <paramref name="strDataFrameName"/> data frame. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetDataType(strDataFrameName As String, strColumnName As String) As String
+        'TODO SJL 22/04/20 What's the difference between this function and the function below? Could we delete one?
         Dim strDataType As String
         Dim clsGetDataType As New RFunction
         Dim expType As SymbolicExpression
@@ -1826,12 +1893,14 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets column type. </summary>
+    ''' <summary>   Gets the data type of the <paramref name="strColumnName"/> column in the 
+    '''             <paramref name="strDataName"/> data frame. </summary>
     '''
-    ''' <param name="strDataName">      is TBD. </param>
-    ''' <param name="strColumnName">    is TBD. </param>
+    ''' <param name="strDataName"> The data frame name. </param>
+    ''' <param name="strColumnName">    The column name. </param>
     '''
-    ''' <returns>   The column type. </returns>
+    ''' <returns>   The data type of the <paramref name="strColumnName"/> column in the
+    '''             <paramref name="strDataName"/> data frame. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetColumnType(strDataName As String, strColumnName As String) As String
         Dim strDataType As String
@@ -1851,11 +1920,16 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Makes valid text. </summary>
+    ''' <summary>   Makes a syntactically valid R name from <paramref name="strText"/>. Please see 
+    '''             the R documentation for valid name syntax.<para>
+    '''             If it's not possible to make a valid name from <paramref name="strText"/> then 
+    '''             returns "".</para> </summary>
     '''
-    ''' <param name="strText">  The text. </param>
+    ''' <param name="strText">  The name to convert to a valid name. </param>
     '''
-    ''' <returns>   A String. </returns>
+    ''' <returns>   A syntactically valid R name derived from <paramref name="strText"/>. 
+    '''             If it's not possible to make a valid name from <paramref name="strText"/> then
+    '''             returns "".</returns>
     '''--------------------------------------------------------------------------------------------
     Public Function MakeValidText(strText As String) As String
         Dim strOut As String
@@ -1874,11 +1948,14 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Is valid text. </summary>
+    ''' <summary>   If <paramref name="strText"/> is a syntactically valid R name then returns true, 
+    '''             else returns false. 
+    '''             Please see the R documentation for valid name syntax. </summary>
     '''
-    ''' <param name="strText">  The text. </param>
+    ''' <param name="strText">  The name to check. </param>
     '''
-    ''' <returns>   A String. </returns>
+    ''' <returns>   True if <paramref name="strText"/> is a syntactically valid R name,
+    '''             else returns false. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function IsValidText(strText As String) As String
         Dim strValidText As String
@@ -1909,12 +1986,13 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets corruption column of type. </summary>
+    ''' <summary>   Gets corruption column of type <paramref name="strType"/> in data frame 
+    '''             <paramref name="strDataName"/>. </summary>
     '''
-    ''' <param name="strDataName">  is TBD. </param>
-    ''' <param name="strType">      is TBD. </param>
+    ''' <param name="strDataName">  The data frame name. </param>
+    ''' <param name="strType">      The column type. </param>
     '''
-    ''' <returns>   The corruption column of type. </returns>
+    ''' <returns>   The corruption column of type <paramref name="strType"/> in data frame <paramref name="strDataName"/>. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetCorruptionColumnOfType(strDataName As String, strType As String) As String
         Dim clsGetColumnName As New RFunction
@@ -1934,11 +2012,13 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets corruption components column names. </summary>
+    ''' <summary>   Gets names of the columns of the corruption components in 
+    '''             the <paramref name="strDataName"/> data frame. </summary>
     '''
-    ''' <param name="strDataName">  is TBD. </param>
+    ''' <param name="strDataName">  The data frame name. </param>
     '''
-    ''' <returns>   The corruption components column names. </returns>
+    ''' <returns>   The names of the columns of the corruption components in
+    '''             the <paramref name="strDataName"/> data frame. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetCorruptionComponentsColumnNames(strDataName As String) As String()
         Dim clsGetComponents As New RFunction
@@ -1959,8 +2039,8 @@ Public Class RLink
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets climatic column of type. </summary>
     '''
-    ''' <param name="strDataName">  is TBD. </param>
-    ''' <param name="strType">      is TBD. </param>
+    ''' <param name="strDataName">  The data frame name. </param>
+    ''' <param name="strType">      The column type. </param>
     '''
     ''' <returns>   The climatic column of type. </returns>
     '''--------------------------------------------------------------------------------------------
@@ -1982,11 +2062,11 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets cri column names. </summary>
+    ''' <summary>   Gets CRI column names. </summary>
     '''
-    ''' <param name="strDataName">  is TBD. </param>
+    ''' <param name="strDataName">  The data frame name. </param>
     '''
-    ''' <returns>   The cri column names. </returns>
+    ''' <returns>   The CRI column names. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetCRIColumnNames(strDataName As String) As String()
         Dim clsGetColumnName As New RFunction
@@ -2007,7 +2087,7 @@ Public Class RLink
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets red flag column names. </summary>
     '''
-    ''' <param name="strDataName">  is TBD. </param>
+    ''' <param name="strDataName">  The data frame name. </param>
     '''
     ''' <returns>   The red flag column names. </returns>
     '''--------------------------------------------------------------------------------------------
@@ -2028,12 +2108,14 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Query if 'strDataName' is binary. </summary>
+    ''' <summary>   Returns true if column <paramref name="strColumn"/> in data frame 
+    '''             <paramref name="strDataName"/> contains binary data. Else returns false. </summary>
     '''
-    ''' <param name="strDataName">  is the data frame to link to. </param>
+    ''' <param name="strDataName">  The data frame name. </param>
     ''' <param name="strColumn">    The column. </param>
     '''
-    ''' <returns>   True if binary, false if not. </returns>
+    ''' <returns>   True if column <paramref name="strColumn"/> in data frame
+    '''             <paramref name="strDataName"/> contains binary data. Else returns false. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function IsBinary(strDataName As String, strColumn As String) As Boolean
         Dim clsGetColumn As New RFunction
@@ -2056,13 +2138,17 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Query if 'strDataName' is variables metadata. </summary>
+    ''' <summary>   Returns true if column <paramref name="strColumn"/> in data frame 
+    '''             <paramref name="strDataName"/> has property <paramref name="strProperty"/>. 
+    '''             Else returns false. </summary>
     '''
-    ''' <param name="strDataName">  is the data frame to link to. </param>
-    ''' <param name="strProperty">  The property. </param>
-    ''' <param name="strColumn">    (Optional) The column. </param>
+    ''' <param name="strDataName">  The data frame name. </param>
+    ''' <param name="strProperty">  The property to look for. </param>
+    ''' <param name="strColumn">    (Optional) The column name. </param>
     '''
-    ''' <returns>   True if variables metadata, false if not. </returns>
+    ''' <returns>   True if column <paramref name="strColumn"/> in data frame
+    '''             <paramref name="strDataName"/> has property <paramref name="strProperty"/>.
+    '''             Else returns false. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function IsVariablesMetadata(strDataName As String, strProperty As String, Optional strColumn As String = "") As Boolean
         Dim clsIsVarMetadata As New RFunction
@@ -2107,7 +2193,7 @@ Public Class RLink
         iWaitDelay = iTimeInSeconds
     End Sub
 
-    ''' <summary>   Closes the data. </summary>
+    ''' <summary>   Closes the current instat data object, and opens a new one. </summary>
     Public Sub CloseData()
         Dim clsRm As New RFunction
         Dim clsCreateIO As New ROperator
@@ -2128,7 +2214,7 @@ Public Class RLink
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   View last graph. </summary>
     '''
-    ''' <param name="bAsPlotly">    (Optional) True to as plotly. </param>
+    ''' <param name="bAsPlotly">    (Optional) If true then view last graph as plotly. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub ViewLastGraph(Optional bAsPlotly As Boolean = False)
         Dim clsLastGraph As New RFunction
