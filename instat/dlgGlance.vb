@@ -44,6 +44,7 @@ Public Class dlgGlance
 
         ucrPnlOptions.AddRadioButton(rdoDisplayInOutput)
         ucrPnlOptions.AddRadioButton(rdoGlanceDataFrame)
+        ucrPnlOptions.AddToLinkedControls(ucrSaveNewDataFrame, {rdoGlanceDataFrame}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrChkDisplayinOutput.SetText("Display in Output")
 
@@ -52,7 +53,7 @@ Public Class dlgGlance
 
         ucrSaveNewDataFrame.SetIsComboBox()
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
-        ucrSaveNewDataFrame.SetCheckBoxText("Save New data frame")
+        ucrSaveNewDataFrame.SetCheckBoxText("Save New data frame:")
         ucrSaveNewDataFrame.SetPrefix("Glance_dataframe")
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
 
