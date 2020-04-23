@@ -45,7 +45,7 @@ Public Class dlgGlance
         ucrPnlOptions.AddRadioButton(rdoDisplayInOutput)
         ucrPnlOptions.AddRadioButton(rdoGlanceDataFrame)
 
-        ucrPnlOptions.bAllowNonConditionValues = True
+        ucrPnlOptions.bAllowNonConditionValues = False
 
         ucrPnlOptions.AddToLinkedControls(ucrSaveNewDataFrame, {rdoGlanceDataFrame}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -87,7 +87,9 @@ Public Class dlgGlance
     End Sub
 
     Private Sub TestOKEnabled()
-        If (ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
+        If (rdoGlanceDataFrame.Checked AndAlso ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
+            ucrBase.OKEnabled(True)
+        ElseIf (rdoDisplayInOutput.Checked AndAlso Not ucrModelReceiver.IsEmpty()) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
