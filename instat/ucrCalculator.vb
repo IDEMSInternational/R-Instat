@@ -14,11 +14,13 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrCalculator
     Public iHelpCalcID As Integer
     Public Event NameChanged()
     Public Event SelectionChanged()
-    Public Event SaveNameChanged()
+    Public Event ControlValueChanged()
     Public Event DataFrameChanged()
     Public Event SaveResultsCheckedChanged()
     Public Event TryCommadClick()
@@ -56,6 +58,8 @@ Public Class ucrCalculator
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Strings (Character Columns)", "Factor", "Probability", "Dates", "Transform", "Wakefield", "Circular", "hydroGOF"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
+
+        ucrSaveResultInto.setLinkedReceiver(ucrReceiverForCalculation)
 
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
@@ -983,10 +987,6 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub chkSaveResultInto_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResultInto.CheckedChanged
-        RaiseEvent SaveResultsCheckedChanged()
-    End Sub
-
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrSelectorForCalculations.DataFrameChanged
         ucrTryCalculator.ucrInputTryMessage.SetName("")
         RaiseEvent DataFrameChanged()
@@ -1228,10 +1228,6 @@ Public Class ucrCalculator
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
         RaiseEvent SelectionChanged()
-    End Sub
-
-    Private Sub ucrSaveResultInto_NameChanged() Handles ucrSaveResultInto.NameChanged
-        RaiseEvent SaveNameChanged()
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
@@ -2744,5 +2740,9 @@ Public Class ucrCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::VE(sim = , obs = )", 10)
         End If
+    End Sub
+
+    Private Sub ucrSaveResultInto_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResultInto.ControlValueChanged
+        RaiseEvent ControlValueChanged()
     End Sub
 End Class
