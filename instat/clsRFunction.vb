@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+' deals with with R-commands of the form __(__=__, __=__, ...)
 Public Class RFunction
     Inherits RCodeStructure
 
@@ -40,11 +41,13 @@ Public Class RFunction
 
         'Parameters are sorted in the appropriate order and then the script is built.
         SortParameters()
+        'if the object has an associated package name, then prefix the script with the package name
         If strPackageName <> "" Then
-            strTemp = strPackageName & "::"
+            strTemp = strPackageName & "::" 'TODO this replaces the value of the 'strTemp' parameter, is this dangerous?
         End If
+        'add each parameter to the script (e.g. "source(file=""Rsetup.R""")"
         strTemp = strTemp & strRCommand & "("
-        For i = 0 To clsParameters.Count - 1
+        For i = 0 To clsParameters.Count - 1 ' e,g, set strTemp to "data_book$get_data_frame(convert_to_character=TRUE, max_cols=30, data_name=""survey"""
             If i > 0 Then
                 strTemp = strTemp & ", "
             End If

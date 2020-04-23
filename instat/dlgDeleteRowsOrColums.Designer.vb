@@ -131,6 +131,7 @@ Partial Class dlgDeleteRowsOrColums
         '
         'ucrSelectorForDeleteColumns
         '
+        Me.ucrSelectorForDeleteColumns.bDropUnusedFilterLevels = False
         Me.ucrSelectorForDeleteColumns.bShowHiddenColumns = False
         Me.ucrSelectorForDeleteColumns.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForDeleteColumns, "ucrSelectorForDeleteColumns")
