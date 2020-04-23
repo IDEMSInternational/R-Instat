@@ -276,7 +276,7 @@ Public Class sdgSummaries
 
         'Verification: HydroGOF Options
         ucrChkCoefDetermination.SetParameter(New RParameter("R2", 31), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "R2" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkCoefDetermination.SetText("R2")
+        ucrChkCoefDetermination.SetText("R^2")
         ttVerificationSummaries.SetToolTip(ucrChkCoefDetermination.chkCheck, "Coefficient of determination")
 
         ucrChkCoefPersistence.SetParameter(New RParameter("cp", 32), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "cp" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
