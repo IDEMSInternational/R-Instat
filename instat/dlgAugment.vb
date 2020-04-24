@@ -42,11 +42,12 @@ Public Class dlgAugment
         ucrModelReceiver.SetParameterIsRFunction()
         ucrModelReceiver.Selector = ucrModelSelector
 
-        ucrChkDisplayInOutput.SetText("Display in Output")
-        ucrChkDisplayInOutput.Checked = True
-
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
+
+        ucrPnlOptions.AddRadioButton(rdoAddNewColumns)
+        ucrPnlOptions.AddRadioButton(rdoDisplayInOutput)
+        ucrPnlOptions.AddRadioButton(rdoNewDataFrame)
 
         ucrSaveNewDataFrame.SetIsComboBox()
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
@@ -78,7 +79,7 @@ Public Class dlgAugment
 
     Private Sub TestOKEnabled()
         'Tests when ok can be enabled
-        If (ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty() AndAlso ucrChkDisplayInOutput.Checked) Then
+        If (ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -92,7 +93,7 @@ Public Class dlgAugment
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkDisplayInOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayInOutput.ControlValueChanged
+    Private Sub ucrChkDisplayInOutput_ControlValueChanged(ucrChangedControl As ucrCore)
         If ucrChkDisplayInOutput.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
         Else
