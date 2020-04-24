@@ -88,6 +88,10 @@ Partial Class sdgSummaries
         Me.ucrChkCovariance = New instat.ucrCheck()
         Me.ucrChkCorrelations = New instat.ucrCheck()
         Me.grpHyroGOF = New System.Windows.Forms.GroupBox()
+        Me.lblJmia = New System.Windows.Forms.Label()
+        Me.ucrInputJmia = New instat.ucrInputTextBox()
+        Me.lblJmNse = New System.Windows.Forms.Label()
+        Me.ucrInputmNse = New instat.ucrInputTextBox()
         Me.ucrChkSelectAll = New instat.ucrCheck()
         Me.ucrChkRelativeIndexOfAgreement = New instat.ucrCheck()
         Me.ucrChkRatioOfStandardDeviation = New instat.ucrCheck()
@@ -529,6 +533,10 @@ Partial Class sdgSummaries
         '
         'grpHyroGOF
         '
+        Me.grpHyroGOF.Controls.Add(Me.lblJmia)
+        Me.grpHyroGOF.Controls.Add(Me.ucrInputJmia)
+        Me.grpHyroGOF.Controls.Add(Me.lblJmNse)
+        Me.grpHyroGOF.Controls.Add(Me.ucrInputmNse)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkSelectAll)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkRelativeIndexOfAgreement)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkRatioOfStandardDeviation)
@@ -553,6 +561,32 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.grpHyroGOF, "grpHyroGOF")
         Me.grpHyroGOF.Name = "grpHyroGOF"
         Me.grpHyroGOF.TabStop = False
+        '
+        'lblJmia
+        '
+        resources.ApplyResources(Me.lblJmia, "lblJmia")
+        Me.lblJmia.Name = "lblJmia"
+        '
+        'ucrInputJmia
+        '
+        Me.ucrInputJmia.AddQuotesIfUnrecognised = True
+        Me.ucrInputJmia.IsMultiline = False
+        Me.ucrInputJmia.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputJmia, "ucrInputJmia")
+        Me.ucrInputJmia.Name = "ucrInputJmia"
+        '
+        'lblJmNse
+        '
+        resources.ApplyResources(Me.lblJmNse, "lblJmNse")
+        Me.lblJmNse.Name = "lblJmNse"
+        '
+        'ucrInputmNse
+        '
+        Me.ucrInputmNse.AddQuotesIfUnrecognised = True
+        Me.ucrInputmNse.IsMultiline = False
+        Me.ucrInputmNse.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputmNse, "ucrInputmNse")
+        Me.ucrInputmNse.Name = "ucrInputmNse"
         '
         'ucrChkSelectAll
         '
@@ -1062,6 +1096,7 @@ Partial Class sdgSummaries
         Me.tbTwoVariables.PerformLayout()
         Me.grpRelationships.ResumeLayout(False)
         Me.grpHyroGOF.ResumeLayout(False)
+        Me.grpHyroGOF.PerformLayout()
         Me.tbMore.ResumeLayout(False)
         Me.grpProportionsPercentiles.ResumeLayout(False)
         Me.grpLocation.ResumeLayout(False)
@@ -1197,4 +1232,8 @@ Partial Class sdgSummaries
     Friend WithEvents cmdHelp As Button
     Friend WithEvents ttVerificationSummaries As ToolTip
     Friend WithEvents ucrChkSelectAll As ucrCheck
+    Friend WithEvents ucrInputmNse As ucrInputTextBox
+    Friend WithEvents lblJmNse As Label
+    Friend WithEvents lblJmia As Label
+    Friend WithEvents ucrInputJmia As ucrInputTextBox
 End Class

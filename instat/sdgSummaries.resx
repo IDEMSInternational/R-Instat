@@ -1272,6 +1272,108 @@
   <data name="&gt;&gt;grpRelationships.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="lblJmia.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblJmia.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblJmia.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 37</value>
+  </data>
+  <data name="lblJmia.Size" type="System.Drawing.Size, System.Drawing">
+    <value>12, 13</value>
+  </data>
+  <data name="lblJmia.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="lblJmia.Text" xml:space="preserve">
+    <value>j:</value>
+  </data>
+  <data name="&gt;&gt;lblJmia.Name" xml:space="preserve">
+    <value>lblJmia</value>
+  </data>
+  <data name="&gt;&gt;lblJmia.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblJmia.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;lblJmia.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputJmia.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 34</value>
+  </data>
+  <data name="ucrInputJmia.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 21</value>
+  </data>
+  <data name="ucrInputJmia.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="&gt;&gt;ucrInputJmia.Name" xml:space="preserve">
+    <value>ucrInputJmia</value>
+  </data>
+  <data name="&gt;&gt;ucrInputJmia.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputJmia.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;ucrInputJmia.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblJmNse.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblJmNse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblJmNse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>156, 97</value>
+  </data>
+  <data name="lblJmNse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>12, 13</value>
+  </data>
+  <data name="lblJmNse.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="lblJmNse.Text" xml:space="preserve">
+    <value>j:</value>
+  </data>
+  <data name="&gt;&gt;lblJmNse.Name" xml:space="preserve">
+    <value>lblJmNse</value>
+  </data>
+  <data name="&gt;&gt;lblJmNse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblJmNse.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;lblJmNse.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrInputmNse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 93</value>
+  </data>
+  <data name="ucrInputmNse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 21</value>
+  </data>
+  <data name="ucrInputmNse.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;ucrInputmNse.Name" xml:space="preserve">
+    <value>ucrInputmNse</value>
+  </data>
+  <data name="&gt;&gt;ucrInputmNse.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputmNse.Parent" xml:space="preserve">
+    <value>grpHyroGOF</value>
+  </data>
+  <data name="&gt;&gt;ucrInputmNse.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="ucrChkSelectAll.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 15</value>
   </data>
@@ -1294,10 +1396,10 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkSelectAll.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>4</value>
   </data>
   <data name="ucrChkRelativeIndexOfAgreement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 75</value>
+    <value>204, 75</value>
   </data>
   <data name="ucrChkRelativeIndexOfAgreement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1318,7 +1420,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkRelativeIndexOfAgreement.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>5</value>
   </data>
   <data name="ucrChkRatioOfStandardDeviation.Location" type="System.Drawing.Point, System.Drawing">
     <value>94, 54</value>
@@ -1342,10 +1444,10 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkRatioOfStandardDeviation.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="ucrChkCoefDetermination.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 116</value>
+    <value>204, 116</value>
   </data>
   <data name="ucrChkCoefDetermination.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1366,7 +1468,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkCoefDetermination.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>7</value>
   </data>
   <data name="ucrChkRatioOfRootMeanSquaredError.Location" type="System.Drawing.Point, System.Drawing">
     <value>94, 34</value>
@@ -1390,7 +1492,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkRatioOfRootMeanSquaredError.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>8</value>
   </data>
   <data name="ucrChkRelativeNashSutcliffeEff.Location" type="System.Drawing.Point, System.Drawing">
     <value>94, 115</value>
@@ -1399,7 +1501,7 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrChkRelativeNashSutcliffeEff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 20</value>
+    <value>69, 20</value>
   </data>
   <data name="ucrChkRelativeNashSutcliffeEff.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1414,16 +1516,16 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkRelativeNashSutcliffeEff.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>9</value>
   </data>
   <data name="ucrChkModifiedIndexOfAgreement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 36</value>
+    <value>204, 36</value>
   </data>
   <data name="ucrChkModifiedIndexOfAgreement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrChkModifiedIndexOfAgreement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 20</value>
+    <value>46, 20</value>
   </data>
   <data name="ucrChkModifiedIndexOfAgreement.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1438,10 +1540,10 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkModifiedIndexOfAgreement.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>10</value>
   </data>
   <data name="ucrChkCoefPersistence.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 95</value>
+    <value>204, 95</value>
   </data>
   <data name="ucrChkCoefPersistence.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1462,7 +1564,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkCoefPersistence.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>11</value>
   </data>
   <data name="ucrChkNashSutcliffeEfficiency.Location" type="System.Drawing.Point, System.Drawing">
     <value>94, 75</value>
@@ -1471,7 +1573,7 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrChkNashSutcliffeEfficiency.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 20</value>
+    <value>74, 20</value>
   </data>
   <data name="ucrChkNashSutcliffeEfficiency.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1486,10 +1588,10 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkNashSutcliffeEfficiency.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>12</value>
   </data>
   <data name="ucrChkSumOfSquaredResiduals.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 100</value>
+    <value>306, 100</value>
   </data>
   <data name="ucrChkSumOfSquaredResiduals.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1510,10 +1612,10 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkSumOfSquaredResiduals.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>13</value>
   </data>
   <data name="ucrChkKlingGuptaEfficiency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 38</value>
+    <value>306, 38</value>
   </data>
   <data name="ucrChkKlingGuptaEfficiency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1534,10 +1636,10 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkKlingGuptaEfficiency.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>14</value>
   </data>
   <data name="ucrChkVolumetricEfficiency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 58</value>
+    <value>306, 58</value>
   </data>
   <data name="ucrChkVolumetricEfficiency.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1558,7 +1660,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkVolumetricEfficiency.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>15</value>
   </data>
   <data name="ucrChkPercentBias.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 116</value>
@@ -1582,7 +1684,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkPercentBias.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>16</value>
   </data>
   <data name="ucrChkModNashSutcliffeEff.Location" type="System.Drawing.Point, System.Drawing">
     <value>94, 95</value>
@@ -1591,7 +1693,7 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrChkModNashSutcliffeEff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 20</value>
+    <value>69, 20</value>
   </data>
   <data name="ucrChkModNashSutcliffeEff.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1606,7 +1708,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkModNashSutcliffeEff.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>17</value>
   </data>
   <data name="ucrChkMeanError.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 34</value>
@@ -1630,10 +1732,10 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkMeanError.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>18</value>
   </data>
   <data name="ucrChkMeanSquaredError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 79</value>
+    <value>306, 79</value>
   </data>
   <data name="ucrChkMeanSquaredError.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1654,7 +1756,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkMeanSquaredError.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>19</value>
   </data>
   <data name="ucrChkRootMeanSquaredError.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 74</value>
@@ -1678,7 +1780,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkRootMeanSquaredError.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>20</value>
   </data>
   <data name="cmdHelp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1705,7 +1807,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;cmdHelp.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>21</value>
   </data>
   <data name="ucrChkNormRootMeanSquaredError.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 95</value>
@@ -1729,7 +1831,7 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkNormRootMeanSquaredError.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>22</value>
   </data>
   <data name="ucrChkMeanAbsoluteError.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 54</value>
@@ -1753,10 +1855,10 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkMeanAbsoluteError.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>23</value>
   </data>
   <data name="ucrChkIndexOfAgreement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 57</value>
+    <value>204, 57</value>
   </data>
   <data name="ucrChkIndexOfAgreement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1777,10 +1879,10 @@
     <value>grpHyroGOF</value>
   </data>
   <data name="&gt;&gt;ucrChkIndexOfAgreement.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>24</value>
   </data>
   <data name="grpHyroGOF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 45</value>
+    <value>6, 45</value>
   </data>
   <data name="grpHyroGOF.Size" type="System.Drawing.Size, System.Drawing">
     <value>399, 145</value>
@@ -3011,9 +3113,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>447, 448</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
