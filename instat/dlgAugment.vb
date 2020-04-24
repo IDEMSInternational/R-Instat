@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgAugment
     Public bfirstload As Boolean = True
@@ -68,6 +69,8 @@ Public Class dlgAugment
     Private Sub SetDefaults()
         clsAugment = New RFunction
 
+        rdoAddNewColumns.Checked = True
+
         ucrModelSelector.Reset()
         ucrSaveNewDataFrame.Reset()
         ucrBase.clsRsyntax.iCallType = 2
@@ -98,8 +101,8 @@ Public Class dlgAugment
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkDisplayInOutput_ControlValueChanged(ucrChangedControl As ucrCore)
-        If ucrChkDisplayInOutput.Checked Then
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        If rdoDisplayInOutput.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
         Else
             ucrBase.clsRsyntax.iCallType = 0
