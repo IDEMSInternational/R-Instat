@@ -1032,11 +1032,11 @@ NSE <- function(x, y, na.rm = FALSE, na_type = "", ...){
 }
 
 #Modified Nash-Sutcliffe efficiency
-mNSE <- function(x, y, na.rm = FALSE, na_type = "", ...){
+mNSE <- function(x, y, mNSEj = 1, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::mNSE(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::mNSE(sim = x, obs = y, j = mNSEj, na.rm = na.rm))
   }
 } 
 
@@ -1059,11 +1059,11 @@ d <- function(x, y, na.rm = FALSE, na_type = "", ...){
 }
 
 #Modified index of aggrement
-md <- function(x, y, na.rm = FALSE, na_type = "", ...){
+md <- function(x, y, mdj = 1, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::md(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::md(sim = x, obs = y, j = mdj,  na.rm = na.rm))
   }
 }
 
