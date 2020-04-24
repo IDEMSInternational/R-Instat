@@ -30,6 +30,8 @@ Public Class dlgTwoVariableFitModel
     Public clsFormulaOperator, clsPowerOperator As ROperator
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
 
+
+
     Private Sub ucrFamily_EnabledChanged(sender As Object, e As EventArgs) Handles ucrDistributionChoice.EnabledChanged
 
     End Sub
@@ -418,7 +420,7 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub cmdExplanatoryFunction_Click(sender As Object, e As EventArgs) Handles cmdExplanatoryFunction.Click
-        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPowerOperator:=clsPowerOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), bReset:=bResetFirstFunction)
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPowerOperator:=clsPowerOperator, clsNewBrokenStickFirOperator:=clsBrokenStickFirOperator, clsNewBrokenStickSecOperator:=clsBrokenStickSecOperator, clsNewBrokenStickGeneralOperator:=clsBrokenStickGeneralOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), strNewDataName:=ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame, bReset:=bResetFirstFunction)
         sdgVariableTransformations.ShowDialog()
         bResetFirstFunction = False
         UpdatePreview()

@@ -117,32 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ucrButtonsSDGVarTransform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 306</value>
-  </data>
-  <data name="ucrButtonsSDGVarTransform.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrButtonsSDGVarTransform.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrButtonsSDGVarTransform.Name" xml:space="preserve">
-    <value>ucrButtonsSDGVarTransform</value>
-  </data>
-  <data name="&gt;&gt;ucrButtonsSDGVarTransform.Type" xml:space="preserve">
-    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrButtonsSDGVarTransform.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrButtonsSDGVarTransform.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="rdoLogBase10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="rdoLogBase10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdoLogBase10.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 59</value>
   </data>
@@ -169,6 +152,9 @@
   </data>
   <data name="rdoSquareRoot.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoSquareRoot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoSquareRoot.Location" type="System.Drawing.Point, System.Drawing">
     <value>121, 59</value>
@@ -197,6 +183,9 @@
   <data name="rdoPower.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoPower.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoPower.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 93</value>
   </data>
@@ -224,6 +213,9 @@
   <data name="rdoNaturalLog.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoNaturalLog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoNaturalLog.Location" type="System.Drawing.Point, System.Drawing">
     <value>121, 31</value>
   </data>
@@ -250,6 +242,9 @@
   </data>
   <data name="rdoIdentity.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoIdentity.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoIdentity.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 31</value>
@@ -299,7 +294,6 @@
   <data name="rdoOwn.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoOwn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -498,6 +492,9 @@
   <data name="lblPreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 282</value>
   </data>
@@ -543,6 +540,27 @@
   <data name="&gt;&gt;ucrInputPreview.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrButtonsSDGVarTransform.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 306</value>
+  </data>
+  <data name="ucrButtonsSDGVarTransform.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrButtonsSDGVarTransform.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSDGVarTransform.Name" xml:space="preserve">
+    <value>ucrButtonsSDGVarTransform</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSDGVarTransform.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSDGVarTransform.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrButtonsSDGVarTransform.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -551,6 +569,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>428, 348</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

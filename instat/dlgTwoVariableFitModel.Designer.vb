@@ -52,13 +52,15 @@ Partial Class dlgTwoVariableFitModel
         Me.grpParameters = New System.Windows.Forms.GroupBox()
         Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
         Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
+        Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
+        Me.lblConfidenceInterval = New System.Windows.Forms.Label()
+        Me.cmdExplanatoryFunction = New System.Windows.Forms.Button()
+        Me.cmdExplanatoryFunctionTwo = New System.Windows.Forms.Button()
+        Me.ucrChkWithSecondFunction = New instat.ucrCheck()
         Me.ucrPnlMeansAndVariance = New instat.UcrPanel()
         Me.ucrChkPairedTest = New instat.ucrCheck()
         Me.ucrNudHypothesis = New instat.ucrNud()
         Me.ucrNudCI = New instat.ucrNud()
-        Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
-        Me.lblConfidenceInterval = New System.Windows.Forms.Label()
-        Me.cmdExplanatoryFunction = New System.Windows.Forms.Button()
         Me.ucrSaveModels = New instat.ucrSave()
         Me.ucrChkConvertToVariate = New instat.ucrCheck()
         Me.ucrReceiverExplanatory = New instat.ucrReceiverSingle()
@@ -68,8 +70,6 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrDistributionChoice = New instat.ucrDistributions()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkWithSecondFunction = New instat.ucrCheck()
-        Me.cmdExplanatoryFunctionTwo = New System.Windows.Forms.Button()
         Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -230,6 +230,52 @@ Partial Class dlgTwoVariableFitModel
         Me.rdoCompareMeans.Text = "Compare Means"
         Me.rdoCompareMeans.UseVisualStyleBackColor = True
         '
+        'lblDifferenceInMeans
+        '
+        Me.lblDifferenceInMeans.AutoSize = True
+        Me.lblDifferenceInMeans.Location = New System.Drawing.Point(10, 46)
+        Me.lblDifferenceInMeans.Name = "lblDifferenceInMeans"
+        Me.lblDifferenceInMeans.Size = New System.Drawing.Size(106, 13)
+        Me.lblDifferenceInMeans.TabIndex = 2
+        Me.lblDifferenceInMeans.Tag = ""
+        Me.lblDifferenceInMeans.Text = "Difference In Means:"
+        '
+        'lblConfidenceInterval
+        '
+        Me.lblConfidenceInterval.AutoSize = True
+        Me.lblConfidenceInterval.Location = New System.Drawing.Point(10, 21)
+        Me.lblConfidenceInterval.Name = "lblConfidenceInterval"
+        Me.lblConfidenceInterval.Size = New System.Drawing.Size(102, 13)
+        Me.lblConfidenceInterval.TabIndex = 0
+        Me.lblConfidenceInterval.Tag = ""
+        Me.lblConfidenceInterval.Text = "Confidence Interval:"
+        '
+        'cmdExplanatoryFunction
+        '
+        Me.cmdExplanatoryFunction.Location = New System.Drawing.Point(268, 186)
+        Me.cmdExplanatoryFunction.Name = "cmdExplanatoryFunction"
+        Me.cmdExplanatoryFunction.Size = New System.Drawing.Size(103, 23)
+        Me.cmdExplanatoryFunction.TabIndex = 10
+        Me.cmdExplanatoryFunction.Text = "Function..."
+        Me.cmdExplanatoryFunction.UseVisualStyleBackColor = True
+        '
+        'cmdExplanatoryFunctionTwo
+        '
+        Me.cmdExplanatoryFunctionTwo.Location = New System.Drawing.Point(268, 245)
+        Me.cmdExplanatoryFunctionTwo.Name = "cmdExplanatoryFunctionTwo"
+        Me.cmdExplanatoryFunctionTwo.Size = New System.Drawing.Size(103, 23)
+        Me.cmdExplanatoryFunctionTwo.TabIndex = 19
+        Me.cmdExplanatoryFunctionTwo.Text = "Function..."
+        Me.cmdExplanatoryFunctionTwo.UseVisualStyleBackColor = True
+        '
+        'ucrChkWithSecondFunction
+        '
+        Me.ucrChkWithSecondFunction.Checked = False
+        Me.ucrChkWithSecondFunction.Location = New System.Drawing.Point(268, 228)
+        Me.ucrChkWithSecondFunction.Name = "ucrChkWithSecondFunction"
+        Me.ucrChkWithSecondFunction.Size = New System.Drawing.Size(116, 18)
+        Me.ucrChkWithSecondFunction.TabIndex = 18
+        '
         'ucrPnlMeansAndVariance
         '
         Me.ucrPnlMeansAndVariance.Location = New System.Drawing.Point(8, 67)
@@ -268,35 +314,6 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrNudCI.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudCI.TabIndex = 1
         Me.ucrNudCI.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblDifferenceInMeans
-        '
-        Me.lblDifferenceInMeans.AutoSize = True
-        Me.lblDifferenceInMeans.Location = New System.Drawing.Point(10, 46)
-        Me.lblDifferenceInMeans.Name = "lblDifferenceInMeans"
-        Me.lblDifferenceInMeans.Size = New System.Drawing.Size(106, 13)
-        Me.lblDifferenceInMeans.TabIndex = 2
-        Me.lblDifferenceInMeans.Tag = ""
-        Me.lblDifferenceInMeans.Text = "Difference In Means:"
-        '
-        'lblConfidenceInterval
-        '
-        Me.lblConfidenceInterval.AutoSize = True
-        Me.lblConfidenceInterval.Location = New System.Drawing.Point(10, 21)
-        Me.lblConfidenceInterval.Name = "lblConfidenceInterval"
-        Me.lblConfidenceInterval.Size = New System.Drawing.Size(102, 13)
-        Me.lblConfidenceInterval.TabIndex = 0
-        Me.lblConfidenceInterval.Tag = ""
-        Me.lblConfidenceInterval.Text = "Confidence Interval:"
-        '
-        'cmdExplanatoryFunction
-        '
-        Me.cmdExplanatoryFunction.Location = New System.Drawing.Point(268, 186)
-        Me.cmdExplanatoryFunction.Name = "cmdExplanatoryFunction"
-        Me.cmdExplanatoryFunction.Size = New System.Drawing.Size(103, 23)
-        Me.cmdExplanatoryFunction.TabIndex = 10
-        Me.cmdExplanatoryFunction.Text = "Function..."
-        Me.cmdExplanatoryFunction.UseVisualStyleBackColor = True
         '
         'ucrSaveModels
         '
@@ -379,23 +396,6 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(406, 54)
         Me.ucrBase.TabIndex = 17
-        '
-        'ucrChkWithSecondFunction
-        '
-        Me.ucrChkWithSecondFunction.Checked = False
-        Me.ucrChkWithSecondFunction.Location = New System.Drawing.Point(268, 228)
-        Me.ucrChkWithSecondFunction.Name = "ucrChkWithSecondFunction"
-        Me.ucrChkWithSecondFunction.Size = New System.Drawing.Size(116, 18)
-        Me.ucrChkWithSecondFunction.TabIndex = 18
-        '
-        'cmdExplanatoryFunctionTwo
-        '
-        Me.cmdExplanatoryFunctionTwo.Location = New System.Drawing.Point(268, 245)
-        Me.cmdExplanatoryFunctionTwo.Name = "cmdExplanatoryFunctionTwo"
-        Me.cmdExplanatoryFunctionTwo.Size = New System.Drawing.Size(103, 23)
-        Me.cmdExplanatoryFunctionTwo.TabIndex = 19
-        Me.cmdExplanatoryFunctionTwo.Text = "Function..."
-        Me.cmdExplanatoryFunctionTwo.UseVisualStyleBackColor = True
         '
         'dlgTwoVariableFitModel
         '
