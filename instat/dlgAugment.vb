@@ -55,9 +55,9 @@ Public Class dlgAugment
         ucrPnlOptions.AddToLinkedControls(ucrSaveNewDataFrame, {rdoNewDataFrame}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
 
-        ucrSaveNewDataFrame.SetIsComboBox()
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
-        ucrSaveNewDataFrame.SetCheckBoxText("SaveNewdataframe")
+        ucrSaveNewDataFrame.lblSaveText.Visible = False
+        ucrSaveNewDataFrame.SetLabelText("")
         ucrSaveNewDataFrame.SetPrefix("Augment_dataframe")
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
 
@@ -79,10 +79,12 @@ Public Class dlgAugment
         clsAugment.SetPackageName("broom")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsAugment)
+        UpdateAssignTo()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        UpdateAssignTo()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -107,9 +109,18 @@ Public Class dlgAugment
         Else
             ucrBase.clsRsyntax.iCallType = 0
         End If
+        If rdoAddNewColumns.Checked Then
+            ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="augment_data", strTempDataframe:=ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
+        Else
+            ucrBase.clsRsyntax.iCallType = 0
+        End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged
+    Private Sub UpdateAssignTo()
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="augment_data", strTempDataframe:=ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
