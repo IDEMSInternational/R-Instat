@@ -74,11 +74,14 @@ Public Class dlgTidy
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrModelReceiver.SetRCode(clsMap_df, bReset)
+        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-         If (ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
+        If (rdoNewDataFrame.Checked AndAlso ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
+            ucrBase.OKEnabled(True)
+        ElseIf (rdoDisplayInOutput.Checked AndAlso Not ucrModelReceiver.IsEmpty()) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -93,9 +96,11 @@ Public Class dlgTidy
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoDisplayInOutput.Checked Then
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        Else
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+            ucrBase.clsRsyntax.RemoveAssignTo()
+            ucrBase.clsRsyntax.iCallType = 2
+        ElseIf rdoNewDataFrame.Checked Then
+            clsMap_df.SetAssignTo(ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempDataframe:=ucrSaveNewDataFrame.GetText)
+            ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 
