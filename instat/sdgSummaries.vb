@@ -299,6 +299,15 @@ Public Class sdgSummaries
         ucrChkModifiedIndexOfAgreement.SetText("md")
         ttVerificationSummaries.SetToolTip(ucrChkModifiedIndexOfAgreement.chkCheck, "Modified index of agreement")
 
+        ucrChkModifiedIndexOfAgreement.AddToLinkedControls(ucrInputJmia, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputJmia.SetLinkedDisplayControl(lblJmia)
+        ttVerificationSummaries.SetToolTip(ucrInputJmia, "numeric value, with the exponent to be used in the computation of the modified index of agreement. The default value is j=1")
+
+        ucrInputJmia.SetParameter(New RParameter("mdj", 47))
+        ucrInputJmia.SetValidationTypeAsNumeric()
+        ucrInputJmia.AddQuotesIfUnrecognised = False
+        ucrInputJmia.SetRDefault(1)
+
         ucrChkMeanError.SetParameter(New RParameter("me", 37), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "me" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkMeanError.SetText("me")
         ttVerificationSummaries.SetToolTip(ucrChkMeanError.chkCheck, "Mean error")
@@ -306,6 +315,15 @@ Public Class sdgSummaries
         ucrChkModNashSutcliffeEff.SetParameter(New RParameter("mNSE", 38), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "mNSE" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkModNashSutcliffeEff.SetText("mNSE")
         ttVerificationSummaries.SetToolTip(ucrChkModNashSutcliffeEff.chkCheck, "Modified Nash-Sutcliffe effieciency")
+
+        ucrChkModNashSutcliffeEff.AddToLinkedControls(ucrInputmNse, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=true)
+        ucrInputmNse.SetLinkedDisplayControl(lblJmNse)
+        ttVerificationSummaries.SetToolTip(ucrInputmNse, "numeric value, with the exponent to be used in the computation of the modified Nash-Sutcliffe efficiency. The default value is j=1")
+
+        ucrInputmNse.SetParameter(New RParameter("mNSEj", 48))
+        ucrInputmNse.SetValidationTypeAsNumeric()
+        ucrInputmNse.AddQuotesIfUnrecognised = False
+        ucrInputmNse.SetRDefault(1)
 
         ucrChkMeanSquaredError.SetParameter(New RParameter("mse", 39), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "mse" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkMeanSquaredError.SetText("mse")
@@ -395,6 +413,8 @@ Public Class sdgSummaries
         ucrNudFraction.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputN.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputQuantile.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputJmia.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputmNse.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkMaxNumMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMaxPercMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
