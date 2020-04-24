@@ -44,15 +44,14 @@ Public Class dlgGlance
 
         ucrPnlOptions.AddRadioButton(rdoDisplayInOutput)
         ucrPnlOptions.AddRadioButton(rdoGlanceDataFrame)
-
-        ucrPnlOptions.bAllowNonConditionValues = False
+        ucrPnlOptions.bAllowNonConditionValues = True
 
         ucrPnlOptions.AddToLinkedControls(ucrSaveNewDataFrame, {rdoGlanceDataFrame}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
 
-        ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
+        'ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveNewDataFrame.lblSaveText.Visible = False
         ucrSaveNewDataFrame.SetLabelText("")
         ucrSaveNewDataFrame.SetPrefix("Glance_dataframe")
@@ -78,12 +77,12 @@ Public Class dlgGlance
         clsMap_df.AddParameter(strParameterName:=".f", strParameterValue:="broom::glance", iPosition:=1)
         clsMap_df.AddParameter(strParameterName:=".id", strParameterValue:=Chr(34) & "model" & Chr(34))
 
-        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsMap_df)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrModelReceiver.SetRCode(clsMap_df, bReset)
+        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -104,8 +103,10 @@ Public Class dlgGlance
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoDisplayInOutput.Checked Then
+            ucrBase.clsRsyntax.RemoveAssignTo()
             ucrBase.clsRsyntax.iCallType = 2
-        Else
+        ElseIf rdoGlanceDataFrame.Checked Then
+            clsMap_df.SetAssignTo(ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempDataframe:=ucrSaveNewDataFrame.GetText)
             ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub

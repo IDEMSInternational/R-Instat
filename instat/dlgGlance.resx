@@ -187,13 +187,13 @@
     <value>398, 347</value>
   </data>
   <data name="ucrSaveNewDataFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 249</value>
+    <value>143, 249</value>
   </data>
   <data name="ucrSaveNewDataFrame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveNewDataFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 34</value>
+    <value>161, 34</value>
   </data>
   <data name="ucrSaveNewDataFrame.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
