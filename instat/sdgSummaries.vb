@@ -23,6 +23,7 @@ Public Class sdgSummaries
     Private lstVerifCheckboxes As New List(Of ucrCheck)
     Private ucrBaseSelector As ucrSelector
     Public strDataFrame As String
+    Private strWeightLabel As String
     Public bEnable2VariableTab As Boolean = True
     Public bOkEnabled As Boolean = True
 
@@ -44,7 +45,6 @@ Public Class sdgSummaries
         ucrChkNTotal.SetText("N Total")
 
         ucrChkMean.SetParameter(New RParameter("summary_mean", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkMean.SetText("Mean")
 
         ucrChkMinimum.SetParameter(New RParameter("summary_min", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_min" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkMinimum.SetText("Minimum")
@@ -56,40 +56,30 @@ Public Class sdgSummaries
         ucrChkMaximum.SetText("Maximum")
 
         ucrChkMedian.SetParameter(New RParameter("summary_median", 8), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_median" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkMedian.SetText("Median")
 
         ucrChkStdDev.SetParameter(New RParameter("summary_sd", 9), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_sd" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkStdDev.SetText("Standard Deviation")
 
         ucrChkRange.SetParameter(New RParameter("summary_range", 10), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_range" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkRange.SetText("Range")
 
         ucrChkSum.SetParameter(New RParameter("summary_sum", 11), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_sum" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkSum.SetText("Sum")
 
         ucrChkVariance.SetParameter(New RParameter("summary_var", 12), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_var" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkVariance.SetText("Variance")
 
         ucrChkUpperQuartile.SetParameter(New RParameter("upper_quartile", 13), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "upper_quartile" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkUpperQuartile.SetText("Upper Quartile")
 
         ucrChkLowerQuartile.SetParameter(New RParameter("lower_quartile", 14), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "lower_quartile" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkLowerQuartile.SetText("Lower Quartile")
 
         ucrChkKurtosis.SetParameter(New RParameter("summary_kurtosis", 15), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_kurtosis" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkKurtosis.SetText("Kurtosis")
 
         ucrChkSkewness.SetParameter(New RParameter("summary_skewness", 16), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_skewness" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkSkewness.SetText("Skewness (3rd Moment)")
 
         ucrChkMc.SetParameter(New RParameter("summary_skewness_mc", 20), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_skewness_mc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkMc.SetText("mc")
 
         ucrChkCoefficientOfVariation.SetParameter(New RParameter("summary_coef_var", 17), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_coef_var" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkCoefficientOfVariation.SetText("Coefficient Of Variation")
 
         ucrChkMedianAbsoluteDeviation.SetParameter(New RParameter("summary_median_absolute_deviation", 18), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_median_absolute_deviation" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkMedianAbsoluteDeviation.SetText("Median Absolute Deviation (MAD)")
 
         ucrChkQn.SetParameter(New RParameter("summary_Qn", 19), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Qn" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkQn.SetText("Qn")
@@ -98,10 +88,8 @@ Public Class sdgSummaries
         ucrChkSn.SetText("Sn")
 
         ucrChkCorrelations.SetParameter(New RParameter("summary_cor", 21), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cor" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkCorrelations.SetText("Correlations")
 
         ucrChkCovariance.SetParameter(New RParameter("summary_cov", 22), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cov" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkCovariance.SetText("Covariance")
 
         'circular
         ucrChkCircMean.SetParameter(New RParameter("summary_mean_circular", 23), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_mean_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
@@ -125,8 +113,7 @@ Public Class sdgSummaries
         ucrChkQ3.SetParameter(New RParameter("summary_Q3_circular", 29), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Q3_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkQ3.SetText("Q3")
 
-        ucrChkQuantile.SetParameter(New RParameter("summary_quantile_circular", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_quantile_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkQuantile.SetText("Quantile")
+        ucrChkQuantile.SetParameter(New RParameter("summary_quantile", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_quantile" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
 
         ucrChkSd.SetParameter(New RParameter("summary_sd_circular", 31), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_sd_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkSd.SetText("Sd")
@@ -373,13 +360,31 @@ Public Class sdgSummaries
         OrderByCheckEnabled()
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewConcFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewConcFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strNewWeightLabel As String = Nothing)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsListFunction = clsNewRFunction
         clsDefaultFunction = clsNewDefaultFunction
         clsConcFunction = clsNewConcFunction
+
+        strWeightLabel = strNewWeightLabel
+
+        'updating labels of weighted summaries
+        ucrChkSum.SetText("Sum" & strWeightLabel)
+        ucrChkMean.SetText("Mean" & strWeightLabel)
+        ucrChkStdDev.SetText("Sd" & strWeightLabel)
+        ucrChkVariance.SetText("Var" & strWeightLabel)
+        ucrChkMedian.SetText("Median" & strWeightLabel)
+        ucrChkQuantile.SetText("Quantile" & strWeightLabel)
+        ucrChkLowerQuartile.SetText("Lower Quartile" & strWeightLabel)
+        ucrChkUpperQuartile.SetText("Upper Quartile" & strWeightLabel)
+        ucrChkKurtosis.SetText("Kurtosis" & strWeightLabel)
+        ucrChkSkewness.SetText("Skewness (3rd Moment)" & strWeightLabel)
+        ucrChkCoefficientOfVariation.SetText("Coefficient Of Variation" & strWeightLabel)
+        ucrChkMedianAbsoluteDeviation.SetText("Median Absolute Deviation (MAD)" & strWeightLabel)
+        ucrChkCorrelations.SetText("Correlations" & strWeightLabel)
+        ucrChkCovariance.SetText("Covariance" & strWeightLabel)
 
         'This is meant to force selector select the current dataframe as selected in the main dialog
         ucrBaseSelector = ucrNewBaseSelector
