@@ -450,6 +450,26 @@ circular_ang_dev_label="summary_circular_ang_dev"
 circular_ang_var_label="summary_circular_ang_var"
 circular_rho_label="summary_circular_rho"
 circular_range_label="summary_circular_range"
+mean_error_label="me"
+mean_absolute_error_label="mae"
+root_mean_square_error_label="rmse"
+normalised_mean_square_error_label="nrmse"
+percent_bias_label="PBIAS"
+nash_Sutcliffe_efficiency_label="NSE"
+modified_Nash_Sutcliffe_efficiency_label="mNSE"
+relative_Nash_Sutcliffe_efficiency_label="rNSE"
+Index_of_agreement_label="d"
+modified_index_of_aggrement_label="md"
+relative_index_of_agreement_label="rd"
+coefficient_of_determination_label="R2"
+coefficient_of_persistence_label="cp"
+kling_Gupta_efficiency_label="KGE"
+mean_squared_error_label="mse"
+ratio_of_standard_deviations_label="rSD"
+ratio_of_RMSE_label="rsr"
+sum_of_squared_residuals_label="ssq"
+volumetric_efficiency_label="VE"
+
 
 
 # list of all summary function names
@@ -469,7 +489,14 @@ all_summaries <- c(count_label, count_non_missing_label, count_missing_label,
                    circular_median_label, circular_medianHL_label, circular_mean_label, 
                    circular_Q3_label, circular_max_label, 
                    circular_sd_label, circular_var_label, circular_range_label,
-                   circular_ang_dev_label, circular_ang_var_label, circular_rho_label)
+                   circular_ang_dev_label, circular_ang_var_label, circular_rho_label,
+                   mean_error_label, mean_absolute_error_label, root_mean_square_error_label,
+                   normalised_mean_square_error_label, percent_bias_label, nash_Sutcliffe_efficiency_label,
+                   modified_Nash_Sutcliffe_efficiency_label, relative_Nash_Sutcliffe_efficiency_label,
+                   Index_of_agreement_label, modified_index_of_aggrement_label, relative_index_of_agreement_label,
+                   coefficient_of_determination_label, coefficient_of_persistence_label,
+                   kling_Gupta_efficiency_label, mean_squared_error_label, ratio_of_standard_deviations_label,
+                   ratio_of_RMSE_label, sum_of_squared_residuals_label, volumetric_efficiency_label)
 
 # which of the summaries should return a Date value when x is a Date?
 date_summaries <- c(min_label, lower_quart_label, quartile_label, median_label, 
@@ -1032,11 +1059,11 @@ NSE <- function(x, y, na.rm = FALSE, na_type = "", ...){
 }
 
 #Modified Nash-Sutcliffe efficiency
-mNSE <- function(x, y, mNSEj = 1, na.rm = FALSE, na_type = "", ...){
+mNSE <- function(x, y, j = 1, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::mNSE(sim = x, obs = y, j = mNSEj, na.rm = na.rm))
+    return(hydroGOF::mNSE(sim = x, obs = y, j = j, na.rm = na.rm))
   }
 } 
 
@@ -1059,11 +1086,11 @@ d <- function(x, y, na.rm = FALSE, na_type = "", ...){
 }
 
 #Modified index of aggrement
-md <- function(x, y, mdj = 1, na.rm = FALSE, na_type = "", ...){
+md <- function(x, y, j = 1, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::md(sim = x, obs = y, j = mdj,  na.rm = na.rm))
+    return(hydroGOF::md(sim = x, obs = y, j = j,  na.rm = na.rm))
   }
 }
 
