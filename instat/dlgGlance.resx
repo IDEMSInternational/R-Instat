@@ -187,7 +187,7 @@
     <value>398, 347</value>
   </data>
   <data name="ucrSaveNewDataFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 249</value>
+    <value>150, 249</value>
   </data>
   <data name="ucrSaveNewDataFrame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -210,34 +210,34 @@
   <data name="&gt;&gt;ucrSaveNewDataFrame.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdoGlanceDataFrame.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoNewDataFrameName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdoGlanceDataFrame.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdoNewDataFrameName.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 249</value>
   </data>
-  <data name="rdoGlanceDataFrame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="rdoNewDataFrameName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
-  <data name="rdoGlanceDataFrame.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdoNewDataFrameName.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 17</value>
   </data>
-  <data name="rdoGlanceDataFrame.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoNewDataFrameName.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="rdoGlanceDataFrame.Text" xml:space="preserve">
+  <data name="rdoNewDataFrameName.Text" xml:space="preserve">
     <value>New data frame Name:</value>
   </data>
-  <data name="&gt;&gt;rdoGlanceDataFrame.Name" xml:space="preserve">
-    <value>rdoGlanceDataFrame</value>
+  <data name="&gt;&gt;rdoNewDataFrameName.Name" xml:space="preserve">
+    <value>rdoNewDataFrameName</value>
   </data>
-  <data name="&gt;&gt;rdoGlanceDataFrame.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoNewDataFrameName.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoGlanceDataFrame.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoNewDataFrameName.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rdoGlanceDataFrame.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoNewDataFrameName.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="rdoDisplayInOutput.AutoSize" type="System.Boolean, mscorlib">

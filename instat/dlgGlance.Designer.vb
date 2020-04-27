@@ -29,7 +29,7 @@ Partial Class dlgGlance
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.rdoDisplayInOutput = New System.Windows.Forms.RadioButton()
-        Me.rdoGlanceDataFrame = New System.Windows.Forms.RadioButton()
+        Me.rdoNewDataFrameName = New System.Windows.Forms.RadioButton()
         Me.ucrSaveNewDataFrame = New instat.ucrSave()
         Me.SuspendLayout()
         '
@@ -72,12 +72,12 @@ Partial Class dlgGlance
         Me.rdoDisplayInOutput.TabStop = True
         Me.rdoDisplayInOutput.UseVisualStyleBackColor = True
         '
-        'rdoGlanceDataFrame
+        'rdoNewDataFrameName
         '
-        resources.ApplyResources(Me.rdoGlanceDataFrame, "rdoGlanceDataFrame")
-        Me.rdoGlanceDataFrame.Name = "rdoGlanceDataFrame"
-        Me.rdoGlanceDataFrame.TabStop = True
-        Me.rdoGlanceDataFrame.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoNewDataFrameName, "rdoNewDataFrameName")
+        Me.rdoNewDataFrameName.Name = "rdoNewDataFrameName"
+        Me.rdoNewDataFrameName.TabStop = True
+        Me.rdoNewDataFrameName.UseVisualStyleBackColor = True
         '
         'ucrSaveNewDataFrame
         '
@@ -89,7 +89,7 @@ Partial Class dlgGlance
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrSaveNewDataFrame)
-        Me.Controls.Add(Me.rdoGlanceDataFrame)
+        Me.Controls.Add(Me.rdoNewDataFrameName)
         Me.Controls.Add(Me.rdoDisplayInOutput)
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrModelSelector)
@@ -111,6 +111,6 @@ Partial Class dlgGlance
     Friend WithEvents ucrModelSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents rdoDisplayInOutput As RadioButton
-    Friend WithEvents rdoGlanceDataFrame As RadioButton
+    Friend WithEvents rdoNewDataFrameName As RadioButton
     Friend WithEvents ucrSaveNewDataFrame As ucrSave
 End Class

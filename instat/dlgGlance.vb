@@ -43,15 +43,15 @@ Public Class dlgGlance
         ucrModelReceiver.bForceVariablesAsList = True
 
         ucrPnlOptions.AddRadioButton(rdoDisplayInOutput)
-        ucrPnlOptions.AddRadioButton(rdoGlanceDataFrame)
+        ucrPnlOptions.AddRadioButton(rdoNewDataFrameName)
         ucrPnlOptions.bAllowNonConditionValues = True
 
-        ucrPnlOptions.AddToLinkedControls(ucrSaveNewDataFrame, {rdoGlanceDataFrame}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrSaveNewDataFrame, {rdoNewDataFrameName}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
 
-        'ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
+        ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveNewDataFrame.lblSaveText.Visible = False
         ucrSaveNewDataFrame.SetLabelText("")
         ucrSaveNewDataFrame.SetPrefix("Glance_dataframe")
@@ -86,7 +86,7 @@ Public Class dlgGlance
     End Sub
 
     Private Sub TestOKEnabled()
-        If (rdoGlanceDataFrame.Checked AndAlso ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
+        If (rdoNewDataFrameName.Checked AndAlso ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
             ucrBase.OKEnabled(True)
         ElseIf (rdoDisplayInOutput.Checked AndAlso Not ucrModelReceiver.IsEmpty()) Then
             ucrBase.OKEnabled(True)
@@ -105,7 +105,7 @@ Public Class dlgGlance
         If rdoDisplayInOutput.Checked Then
             ucrBase.clsRsyntax.RemoveAssignTo()
             ucrBase.clsRsyntax.iCallType = 2
-        ElseIf rdoGlanceDataFrame.Checked Then
+        ElseIf rdoNewDataFrameName.Checked Then
             clsMap_df.SetAssignTo(ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempDataframe:=ucrSaveNewDataFrame.GetText)
             ucrBase.clsRsyntax.iCallType = 0
         End If
