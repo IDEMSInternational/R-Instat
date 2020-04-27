@@ -21,14 +21,14 @@ Public Class dlgTwoVariableFitModel
     Public bFirstLoad As Boolean = True
     Public clsModel, clsRGraphicsOperator, clsFunctionOperation, clsPoissonOperation, clsPoissonOperation2, clsRBinomialOperation, clsRBinomialOperation2, clsRBinomialOperation3 As New ROperator
     Public clsRPoisson, clsVisReg, clsRLeverage, clsRWriteLeverage, clsRResiduals, clsRStdResiduals, clsRWriteResiduals, clsRWriteStdResiduals, clsRgeom_point, clsRWriteFitted, clsRFittedValues, clsRestpvalFunction, clsRaovpvalFunction, clsRModelFunction, clsRaovFunction, clsRTTest, clsRFTest, clsRKruskalTest, clsRBinomial, clsRWilcoxTest, clsFamilyFunction, clsRFactor, clsRFactor2, clsRNumeric, clsxFunc, clsRMean, clsRMean2, clsRGroup, clsRGroup2, clsTFunc, clsRLength As New RFunction
-    Private clsTransformFunction As RFunction
+    Private clsTransformFunction As New RFunction
 
-    Public clsBrokenStickFirOperator, clsBrokenStickSecOperator, clsBrokenStickThirdOperator, clsBrokenStickGeneralOperator As ROperator
-    Public clsBrokenStickIFunc As RFunction
-
+    Public clsBrokenStickFirOperator, clsBrokenStickSecOperator, clsBrokenStickThirdOperator, clsBrokenStickGeneralOperator As New ROperator
+    Public clsBrokenStickIFunc As New RFunction
+    Public clsSplineFunc As New RFunction
     'General case codes
-    Public clsFormulaOperator, clsPowerOperator As ROperator
-    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
+    Public clsFormulaOperator, clsPowerOperator As New ROperator
+    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As New RFunction
 
 
 
@@ -145,6 +145,8 @@ Public Class dlgTwoVariableFitModel
 
         ucrChkWithSecondFunction.SetText("With Second Functions")
 
+        'ucrTryFitModel.SetReceiver()
+
     End Sub
 
     Private Sub SetDefaults()
@@ -190,6 +192,7 @@ Public Class dlgTwoVariableFitModel
         clsBrokenStickThirdOperator = New ROperator
         clsBrokenStickGeneralOperator = New ROperator
         clsBrokenStickIFunc = New RFunction
+        clsSplineFunc = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -329,6 +332,8 @@ Public Class dlgTwoVariableFitModel
         clsBrokenStickGeneralOperator.SetOperation("+")
         clsBrokenStickGeneralOperator.AddParameter(clsRFunctionParameter:=clsBrokenStickIFunc, iPosition:=1)
 
+        clsSplineFunc.SetPackageName("splines")
+        clsSplineFunc.SetRCommand("bs")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
@@ -357,6 +362,7 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickGeneralOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickFirOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickSecOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsSplineFunc, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=4)
         '###################################################
 
         'Two sample controls
@@ -420,7 +426,7 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub cmdExplanatoryFunction_Click(sender As Object, e As EventArgs) Handles cmdExplanatoryFunction.Click
-        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPowerOperator:=clsPowerOperator, clsNewBrokenStickFirOperator:=clsBrokenStickFirOperator, clsNewBrokenStickSecOperator:=clsBrokenStickSecOperator, clsNewBrokenStickGeneralOperator:=clsBrokenStickGeneralOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), strNewDataName:=ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame, bReset:=bResetFirstFunction)
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPowerOperator:=clsPowerOperator, clsNewBrokenStickFirOperator:=clsBrokenStickFirOperator, clsNewBrokenStickSecOperator:=clsBrokenStickSecOperator, clsNewBrokenStickGeneralOperator:=clsBrokenStickGeneralOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), clsNewSplineFunc:=clsSplineFunc, strNewDataName:=ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame, bReset:=bResetFirstFunction)
         sdgVariableTransformations.ShowDialog()
         bResetFirstFunction = False
         UpdatePreview()
