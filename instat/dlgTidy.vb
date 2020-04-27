@@ -75,7 +75,6 @@ Public Class dlgTidy
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrModelReceiver.SetRCode(clsMap_df, bReset)
-        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
