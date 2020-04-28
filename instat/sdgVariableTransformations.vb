@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Imports RDotNet
 
@@ -30,7 +29,7 @@ Public Class sdgVariableTransformations
 
     Private clsSplineFunc As New RFunction
 
-    Private clsPowerOperator As New ROperator
+    Private clsPolynomialFunc As New RFunction
     Private strDataName As String
     Private bControlsInitialised As Boolean = False
     Private strCurrentVariableName As String
@@ -44,20 +43,20 @@ Public Class sdgVariableTransformations
         ucrPnlChooseFunction.AddRadioButton(rdoIdentity)
         ucrPnlChooseFunction.AddRadioButton(rdoLogBase10)
         ucrPnlChooseFunction.AddRadioButton(rdoNaturalLog)
-        ucrPnlChooseFunction.AddRadioButton(rdoPower)
+        ucrPnlChooseFunction.AddRadioButton(rdoPolynomial)
         ucrPnlChooseFunction.AddRadioButton(rdoSquareRoot)
         ucrPnlChooseFunction.AddRadioButton(rdoBrokenStick)
         ucrPnlChooseFunction.AddRadioButton(rdoSplineDf)
         ucrPnlChooseFunction.AddRadioButton(rdoOwn)
 
-        ucrPnlChooseFunction.AddToLinkedControls(ucrInputTxtPower, {rdoPower}, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrPnlChooseFunction.AddToLinkedControls(ucrInputTxtBrokenStick, {rdoBrokenStick}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlChooseFunction.AddToLinkedControls(ucrNudSplineDF, {rdoSplineDf}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
+        ucrPnlChooseFunction.AddToLinkedControls(ucrInputTxtPower, {rdoPolynomial}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrPnlChooseFunction.AddToLinkedControls(ucrInputTxtBrokenStick, {rdoBrokenStick}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlChooseFunction.AddToLinkedControls(ucrNudSplineDF, {rdoSplineDf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
         'temp disabled as need to use I(x ^ 2) instead of x ^ 2 as this has different meaning in a formula
-        rdoPower.Enabled = False
+        'rdoPolynomial.Enabled = False
 
-        ucrInputTxtPower.SetParameter(New RParameter("power", 1))
+        ucrInputTxtPower.SetParameter(New RParameter("degree", 1))
         ucrInputTxtPower.SetValidationTypeAsNumeric()
         ucrInputTxtPower.AddQuotesIfUnrecognised = False
 
@@ -66,19 +65,19 @@ Public Class sdgVariableTransformations
         ucrInputTxtBrokenStick.AddQuotesIfUnrecognised = False
 
         ucrNudSplineDF.SetParameter(New RParameter("df", 1))
-        ucrNudSplineDF.SetMinMax(0, Integer.MaxValue)
+        ucrNudSplineDF.SetMinMax(Integer.MinValue = 0, Integer.MaxValue)
 
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControls(clsNewFormulaOperator As ROperator, clsNewTransformParameter As RParameter, clsNewTransformFunction As RFunction, clsNewPowerOperator As ROperator, strVariableName As String, Optional clsNewBrokenStickFirOperator As ROperator = Nothing, Optional clsNewBrokenStickSecOperator As ROperator = Nothing, Optional clsNewBrokenStickGeneralOperator As ROperator = Nothing, Optional clsNewSplineFunc As RFunction = Nothing, Optional strNewDataName As String = "", Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControls(clsNewFormulaOperator As ROperator, clsNewTransformParameter As RParameter, clsNewTransformFunction As RFunction, strVariableName As String, Optional clsNewBrokenStickFirOperator As ROperator = Nothing, Optional clsNewBrokenStickSecOperator As ROperator = Nothing, Optional clsNewBrokenStickGeneralOperator As ROperator = Nothing, Optional clsNewSplineFunc As RFunction = Nothing, Optional clsNewPowerOperator As ROperator = Nothing, Optional clsNewPolynomialFunc As RFunction = Nothing, Optional strNewDataName As String = "", Optional bReset As Boolean = False)
         Dim strParamName As String
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         strCurrentVariableName = strVariableName
         clsTransformationFunction = clsNewTransformFunction
-        clsPowerOperator = clsNewPowerOperator
+        clsPolynomialFunc = clsNewPolynomialFunc
         clsTransformParameter = clsNewTransformParameter
         clsContainingCode = clsNewFormulaOperator
         clsBrokenStickFirOperator = clsNewBrokenStickFirOperator
@@ -95,18 +94,18 @@ Public Class sdgVariableTransformations
         ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoSquareRoot, strParamName, "sqrt")
         ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoNaturalLog, strParamName, "log")
         ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoSplineDf, strParamName, "bs")
-        'ucrPnlChooseFunction.AddParameterIsROperatorCondition(rdoPower, strParamName)
+        ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoPolynomial, strParamName, "poly")
         ucrPnlChooseFunction.AddParameterIsROperatorCondition(rdoBrokenStick, strParamName)
 
         ucrInputTxtBrokenStick.AddAdditionalCodeParameterPair(clsBrokenStickSecOperator, New RParameter("b", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
 
         ucrPnlChooseFunction.SetRCode(clsContainingCode, bReset, bCloneIfNeeded:=True)
-        ucrInputTxtPower.SetRCode(clsPowerOperator, bReset, bCloneIfNeeded:=True)
+        ucrInputTxtPower.SetRCode(clsPolynomialFunc, bReset, bCloneIfNeeded:=True)
         ucrInputTxtBrokenStick.SetRCode(clsBrokenStickFirOperator, bReset, bCloneIfNeeded:=True)
         ucrNudSplineDF.SetRCode(clsSplineFunc, bReset, bCloneIfNeeded:=True)
 
         UpdatePreview()
-        GetColumnsMidianName()
+        GetColumnMidian()
     End Sub
 
     Private Sub ucrPnlGenerateFunctions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlChooseFunction.ControlValueChanged
@@ -117,8 +116,8 @@ Public Class sdgVariableTransformations
         ElseIf rdoSplineDf.Checked Then
             clsTransformParameter.SetArgument(clsSplineFunc)
         Else
-            If rdoPower.Checked Then
-                clsTransformationCode = clsPowerOperator
+            If rdoPolynomial.Checked Then
+                clsTransformationCode = clsPolynomialFunc
             Else
                 If rdoLogBase10.Checked Then
                     clsTransformationFunction.SetRCommand("log10")
@@ -142,7 +141,7 @@ Public Class sdgVariableTransformations
         UpdatePreview()
     End Sub
 
-    Private Sub GetColumnsMidianName()
+    Private Sub GetColumnMidian()
         Dim expColumn As SymbolicExpression
         Dim medianValue As String
         Dim clsGetColumnMedianFunc As New RFunction

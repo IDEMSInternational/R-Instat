@@ -27,8 +27,8 @@ Public Class dlgTwoVariableFitModel
     Public clsBrokenStickIFunc As New RFunction
     Public clsSplineFunc As New RFunction
     'General case codes
-    Public clsFormulaOperator, clsPowerOperator As New ROperator
-    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As New RFunction
+    Public clsFormulaOperator As New ROperator
+    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric, clsPolynomialFunc As New RFunction
 
 
 
@@ -153,7 +153,7 @@ Public Class dlgTwoVariableFitModel
         clsFormulaOperator = New ROperator
         clsPoissonOperation = New ROperator
         clsRGraphicsOperator = New ROperator
-        clsPowerOperator = New ROperator
+        clsPolynomialFunc = New RFunction
         clsLM = New RFunction
         clsGLM = New RFunction
         clsAsNumeric = New RFunction
@@ -213,9 +213,7 @@ Public Class dlgTwoVariableFitModel
         clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
         clsGLM.AddParameter("na.action", "na.exclude", iPosition:=4)
 
-        clsPowerOperator.SetOperation("^")
-        clsPowerOperator.AddParameter("power", 2, iPosition:=1)
-        clsPowerOperator.bBrackets = False
+        clsPolynomialFunc.SetRCommand("poly")
 
         'Residual Plots
         dctPlotFunctions = New Dictionary(Of String, RFunction)(clsRegressionDefaults.dctModelPlotFunctions)
@@ -363,6 +361,7 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickFirOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickSecOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsSplineFunc, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=4)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsPolynomialFunc, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=5)
         '###################################################
 
         'Two sample controls
@@ -426,7 +425,7 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub cmdExplanatoryFunction_Click(sender As Object, e As EventArgs) Handles cmdExplanatoryFunction.Click
-        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPowerOperator:=clsPowerOperator, clsNewBrokenStickFirOperator:=clsBrokenStickFirOperator, clsNewBrokenStickSecOperator:=clsBrokenStickSecOperator, clsNewBrokenStickGeneralOperator:=clsBrokenStickGeneralOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), clsNewSplineFunc:=clsSplineFunc, strNewDataName:=ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame, bReset:=bResetFirstFunction)
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPolynomialFunc:=clsPolynomialFunc, clsNewBrokenStickFirOperator:=clsBrokenStickFirOperator, clsNewBrokenStickSecOperator:=clsBrokenStickSecOperator, clsNewBrokenStickGeneralOperator:=clsBrokenStickGeneralOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), clsNewSplineFunc:=clsSplineFunc, strNewDataName:=ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame, bReset:=bResetFirstFunction)
         sdgVariableTransformations.ShowDialog()
         bResetFirstFunction = False
         UpdatePreview()

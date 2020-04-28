@@ -180,34 +180,34 @@
   <data name="&gt;&gt;rdoSquareRoot.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="rdoPower.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoPolynomial.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdoPower.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoPolynomial.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdoPower.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdoPolynomial.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 93</value>
   </data>
-  <data name="rdoPower.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 17</value>
+  <data name="rdoPolynomial.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 17</value>
   </data>
-  <data name="rdoPower.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoPolynomial.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="rdoPower.Text" xml:space="preserve">
-    <value>Power:</value>
+  <data name="rdoPolynomial.Text" xml:space="preserve">
+    <value>Polynomial:</value>
   </data>
-  <data name="&gt;&gt;rdoPower.Name" xml:space="preserve">
-    <value>rdoPower</value>
+  <data name="&gt;&gt;rdoPolynomial.Name" xml:space="preserve">
+    <value>rdoPolynomial</value>
   </data>
-  <data name="&gt;&gt;rdoPower.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoPolynomial.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoPower.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoPolynomial.Parent" xml:space="preserve">
     <value>grpChooseFunction</value>
   </data>
-  <data name="&gt;&gt;rdoPower.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoPolynomial.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="rdoNaturalLog.AutoSize" type="System.Boolean, mscorlib">
@@ -270,6 +270,27 @@
   <data name="&gt;&gt;rdoIdentity.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="ucrNudSplineDF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 121</value>
+  </data>
+  <data name="ucrNudSplineDF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudSplineDF.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSplineDF.Name" xml:space="preserve">
+    <value>ucrNudSplineDF</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSplineDF.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSplineDF.Parent" xml:space="preserve">
+    <value>grpChooseFunction</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSplineDF.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrInputTxtOwn.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 181</value>
   </data>
@@ -289,7 +310,7 @@
     <value>grpChooseFunction</value>
   </data>
   <data name="&gt;&gt;ucrInputTxtOwn.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="rdoOwn.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -319,7 +340,7 @@
     <value>grpChooseFunction</value>
   </data>
   <data name="&gt;&gt;rdoOwn.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrInputTxtBrokenStick.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 152</value>
@@ -340,7 +361,7 @@
     <value>grpChooseFunction</value>
   </data>
   <data name="&gt;&gt;ucrInputTxtBrokenStick.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="rdoBrokenStick.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -370,27 +391,6 @@
     <value>grpChooseFunction</value>
   </data>
   <data name="&gt;&gt;rdoBrokenStick.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrNudSplineDF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 123</value>
-  </data>
-  <data name="ucrNudSplineDF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudSplineDF.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSplineDF.Name" xml:space="preserve">
-    <value>ucrNudSplineDF</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSplineDF.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSplineDF.Parent" xml:space="preserve">
-    <value>grpChooseFunction</value>
-  </data>
-  <data name="&gt;&gt;ucrNudSplineDF.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="rdoSplineDf.AutoSize" type="System.Boolean, mscorlib">
@@ -445,10 +445,10 @@
     <value>6</value>
   </data>
   <data name="ucrPnlChooseFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 2</value>
+    <value>11, 19</value>
   </data>
   <data name="ucrPnlChooseFunction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 213</value>
+    <value>195, 196</value>
   </data>
   <data name="ucrPnlChooseFunction.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -569,9 +569,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>428, 348</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
