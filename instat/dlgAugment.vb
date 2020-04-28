@@ -89,7 +89,11 @@ Public Class dlgAugment
 
     Private Sub TestOKEnabled()
         'Tests when ok can be enabled
-        If (ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
+        If (rdoNewDataFrame.Checked AndAlso ucrSaveNewDataFrame.IsComplete AndAlso Not ucrModelReceiver.IsEmpty()) Then
+            ucrBase.OKEnabled(True)
+        ElseIf (rdoDisplayInOutput.Checked AndAlso Not ucrModelReceiver.IsEmpty()) Then
+            ucrBase.OKEnabled(True)
+        ElseIf (rdoAddNewColumns.Checked AndAlso Not ucrModelReceiver.IsEmpty()) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -105,14 +109,13 @@ Public Class dlgAugment
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoDisplayInOutput.Checked Then
-            ucrBase.clsRsyntax.iCallType = 2
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         Else
-            ucrBase.clsRsyntax.iCallType = 0
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         End If
         If rdoAddNewColumns.Checked Then
+            ucrBase.clsRsyntax.RemoveAssignTo()
             ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="augment_data", strTempDataframe:=ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
-        Else
-            ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 
