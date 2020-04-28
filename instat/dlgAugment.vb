@@ -83,7 +83,7 @@ Public Class dlgAugment
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrModelReceiver.SetRCode(clsAugment, bReset)
         UpdateAssignTo()
     End Sub
 
@@ -109,13 +109,15 @@ Public Class dlgAugment
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoDisplayInOutput.Checked Then
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        Else
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
-        End If
-        If rdoAddNewColumns.Checked Then
             ucrBase.clsRsyntax.RemoveAssignTo()
+            ucrBase.clsRsyntax.iCallType = 2
+        ElseIf rdoAddNewColumns.Checked Then
             ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="augment_data", strTempDataframe:=ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
+            ucrBase.clsRsyntax.iCallType = 0
+        End If
+        If rdoNewDataFrame.Checked Then
+            clsAugment.SetAssignTo(ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempDataframe:=ucrSaveNewDataFrame.GetText)
+            ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 
