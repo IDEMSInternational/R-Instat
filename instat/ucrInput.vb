@@ -26,6 +26,7 @@ Public Class ucrInput
     Protected dcmMinimum As Decimal = Decimal.MinValue
     Protected dcmMaximum As Decimal = Decimal.MaxValue
     Protected bMinimumIncluded, bMaximumIncluded As Boolean
+    Protected bExpressionAllowed As Boolean = True
     Protected strDefaultType As String = ""
     Protected strDefaultPrefix As String = ""
     Protected WithEvents ucrDataFrameSelector As ucrDataFrame
