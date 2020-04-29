@@ -184,10 +184,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>398, 347</value>
+    <value>430, 347</value>
   </data>
   <data name="ucrSaveNewDataFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 249</value>
+    <value>167, 249</value>
   </data>
   <data name="ucrSaveNewDataFrame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -295,13 +295,13 @@
     <value>3</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 287</value>
+    <value>28, 292</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>384, 52</value>
+    <value>402, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
