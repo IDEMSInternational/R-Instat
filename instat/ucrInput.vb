@@ -187,6 +187,7 @@ Public Class ucrInput
 
     Public Sub SetValidationTypeAsNumeric(Optional dcmMin As Decimal = Decimal.MinValue, Optional bIncludeMin As Boolean = True, Optional dcmMax As Decimal = Decimal.MaxValue, Optional bIncludeMax As Boolean = True, Optional bExpressionAllowed As Boolean = True)
         strValidationType = "Numeric"
+        Me.bExpressionAllowed = bExpressionAllowed
         If dcmMin <> Decimal.MinValue Then
             dcmMinimum = dcmMin
             bMinimumIncluded = bIncludeMin
