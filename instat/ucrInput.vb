@@ -340,6 +340,17 @@ Public Class ucrInput
         If strText <> "" AndAlso (strValuesToIgnore Is Nothing OrElse (strValuesToIgnore IsNot Nothing AndAlso Not strValuesToIgnore.Contains(strText))) Then
             If Not IsNumeric(strText) Then
                 iType = 1
+
+                If bExpressionAllowed Then
+                    'todo. is check if the expression is.numeric(strText) returns true
+                    Dim bExpressionIsNumeric As Boolean
+
+                    If bExpressionIsNumeric Then
+
+
+                        iType = 0
+                    End If
+                End If
             Else
                 dcmText = Convert.ToDecimal(strText)
                 If (dcmText < dcmMinimum) OrElse (dcmText > dcmMaximum) OrElse (Not bMinimumIncluded And dcmText <= dcmMinimum) OrElse (Not bMaximumIncluded And dcmText >= dcmMaximum) Then
