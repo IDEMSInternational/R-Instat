@@ -247,12 +247,12 @@ Public Class RLink
             Dim iNumOpenCurlies = strScriptCmd.Where(Function(c) c = "{"c).Count
             Dim iNumClosedCurlies = strScriptCmd.Where(Function(c) c = "}"c).Count
             If iNumOpenCurlies <> iNumClosedCurlies Then
-                strScriptCmd &= "; " 'allow next command to be on same line
+                strScriptCmd &= vbCrLf '"; " 'allow next command to be on same line
                 Continue For
             End If
 
             'else execute command
-            Dim iCallType As Integer = 2
+            Dim iCallType As Integer = 5 'TODO SJL 29/04/20 document iCallType 5 (only used for scripts from script window)
             If strScriptCmd.Contains(strInstatDataObject & "$get_graphs") Then
                 iCallType = 3
             End If
@@ -780,9 +780,12 @@ Public Class RLink
                 MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
         Else ' else if script output should not be ignored, not stored in a graph and not stored in a variable
-            If strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray) = -1 Then
+            'if script comes from script window, or else script is a single line
+            If iCallType = 5 OrElse strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray) = -1 Then
+                'wrap the whole script in 'capture.output'
                 strCapturedScript = "capture.output(" & strScript & ")"
-            Else
+            Else 'else if script is multi-line
+                'execute all lines apart from the final line
                 strSplitScript = Left(strScript, strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray))
                 If strSplitScript <> "" Then
                     Try
@@ -791,17 +794,20 @@ Public Class RLink
                         MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                     End Try
                 End If
+                'ensure that the final line of the script will be executed next
                 strSplitScript = Right(strScript, strScript.Length - strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray) - 2)
                 strCapturedScript = "capture.output(" & strSplitScript & ")"
             End If
             Try
                 If Not bError Then
+                    'execute the script and assign the result to a temporary variable
                     If Evaluate(strTempAssignTo & " <- " & strCapturedScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride) Then
                         expTemp = GetSymbol(strTempAssignTo)
                         Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
                         If expTemp IsNot Nothing Then
                             strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
                             If strTemp <> "" Then
+                                'ensure that the data returned from the script will be displayed in the output window
                                 strOutput = strOutput & strTemp & Environment.NewLine
                             End If
                         End If
