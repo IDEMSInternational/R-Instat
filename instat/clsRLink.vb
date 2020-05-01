@@ -203,8 +203,7 @@ Public Class RLink
     '''                                continuation of the previous string that was sent to this 
     '''                                function.</param>
     Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String, Optional bClearScriptCmd As Boolean = True)
-        Static strScriptCmd As String = ""
-        Static iOpenCurlyBraces As Integer = 0
+        Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
 
         'by default, flush out any unexecuted full or partial commands
         If bClearScriptCmd Then
@@ -222,10 +221,8 @@ Public Class RLink
                     strScriptLine = strScriptLine.Substring(0, iCommentPos - 1)
             End Select
 
-            'remove any linefeeds and spaces from front or end
-            strScriptLine = strScriptLine.Trim(vbLf).Trim()
-
-            'if line is empty then ignore line
+            'if line is empty or only whitespace then ignore line
+            strScriptLine = RTrim(strScriptLine.Trim(vbCrLf))
             If strScriptLine.Length <= 0 Then
                 Continue For
             End If
@@ -247,12 +244,12 @@ Public Class RLink
             Dim iNumOpenCurlies = strScriptCmd.Where(Function(c) c = "{"c).Count
             Dim iNumClosedCurlies = strScriptCmd.Where(Function(c) c = "}"c).Count
             If iNumOpenCurlies <> iNumClosedCurlies Then
-                strScriptCmd &= vbCrLf '"; " 'allow next command to be on same line
+                strScriptCmd &= vbCrLf
                 Continue For
             End If
 
             'else execute command
-            Dim iCallType As Integer = 5 'TODO SJL 29/04/20 document iCallType 5 (only used for scripts from script window)
+            Dim iCallType As Integer = 5
             If strScriptCmd.Contains(strInstatDataObject & "$get_graphs") Then
                 iCallType = 3
             End If
@@ -636,6 +633,11 @@ Public Class RLink
     '''        <description>4 Executes <paramref name="strScript"/>, stores the result in a 
     '''        temporary R variable, and then outputs the variable's value in a web browser.</description>
     '''     </item>
+    '''     <item>
+    '''        <description>5 Executes <paramref name="strScript"/>, and displays the result 
+    '''        in the output window. Use this value for manually entered R commands (e.g. for 
+    '''        commands entered manually in the script window).</description>
+    '''     </item>
     ''' </list>
     ''' </param>
     ''' <param name="strComment"> is shown as a comment. If this parameter is "" then shows 
@@ -783,6 +785,8 @@ Public Class RLink
             'if script comes from script window, or else script is a single line
             If iCallType = 5 OrElse strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray) = -1 Then
                 'wrap the whole script in 'capture.output'
+                '  'capture.output' returns the result of the R command as a string.
+                '  This string can be displayed later in the output window.
                 strCapturedScript = "capture.output(" & strScript & ")"
             Else 'else if script is multi-line
                 'execute all lines apart from the final line
@@ -796,6 +800,7 @@ Public Class RLink
                 End If
                 'ensure that the final line of the script will be executed next
                 strSplitScript = Right(strScript, strScript.Length - strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray) - 2)
+                'wrap the final line in 'capture.output' so that when it's executed, the result can be displayed in the output window
                 strCapturedScript = "capture.output(" & strSplitScript & ")"
             End If
             Try
