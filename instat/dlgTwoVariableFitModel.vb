@@ -29,7 +29,7 @@ Public Class dlgTwoVariableFitModel
     'General case codes
     Public clsFormulaOperator As New ROperator
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric, clsPolynomialFunc As New RFunction
-
+    Public clsMonthFunc, clsYearFunc, clsAsFactorFunc As New RFunction
 
 
     Private Sub ucrFamily_EnabledChanged(sender As Object, e As EventArgs) Handles ucrDistributionChoice.EnabledChanged
@@ -193,6 +193,9 @@ Public Class dlgTwoVariableFitModel
         clsBrokenStickGeneralOperator = New ROperator
         clsBrokenStickIFunc = New RFunction
         clsSplineFunc = New RFunction
+        clsMonthFunc = New RFunction
+        clsYearFunc = New RFunction
+        clsAsFactorFunc = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -333,6 +336,14 @@ Public Class dlgTwoVariableFitModel
         clsSplineFunc.SetPackageName("splines")
         clsSplineFunc.SetRCommand("bs")
 
+        clsAsFactorFunc.SetRCommand("as.factor")
+
+        clsMonthFunc.SetPackageName("lubridate")
+        clsMonthFunc.SetRCommand("month")
+
+        clsYearFunc.SetRCommand("year")
+        clsYearFunc.SetPackageName("lubridate")
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
@@ -362,6 +373,8 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickSecOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsSplineFunc, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=4)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsPolynomialFunc, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=5)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsMonthFunc, New RParameter("month", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=6)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsYearFunc, New RParameter("year", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
         '###################################################
 
         'Two sample controls
@@ -425,7 +438,7 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub cmdExplanatoryFunction_Click(sender As Object, e As EventArgs) Handles cmdExplanatoryFunction.Click
-        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPolynomialFunc:=clsPolynomialFunc, clsNewBrokenStickFirOperator:=clsBrokenStickFirOperator, clsNewBrokenStickSecOperator:=clsBrokenStickSecOperator, clsNewBrokenStickGeneralOperator:=clsBrokenStickGeneralOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), clsNewSplineFunc:=clsSplineFunc, strNewDataName:=ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame, bReset:=bResetFirstFunction)
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPolynomialFunc:=clsPolynomialFunc, clsNewBrokenStickFirOperator:=clsBrokenStickFirOperator, clsNewBrokenStickSecOperator:=clsBrokenStickSecOperator, clsNewBrokenStickGeneralOperator:=clsBrokenStickGeneralOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), clsNewSplineFunc:=clsSplineFunc, clsNewYearFunc:=clsYearFunc, clsNewMonthFunc:=clsMonthFunc, clsNewAsFactorFunc:=clsAsFactorFunc, strNewDataName:=ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame, bReset:=bResetFirstFunction)
         sdgVariableTransformations.ShowDialog()
         bResetFirstFunction = False
         UpdatePreview()
@@ -767,7 +780,7 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub FirstExplanatoryFunctionEnabled()
-        If Not ucrReceiverExplanatory.IsEmpty AndAlso {"numeric", "integer"}.Contains(ucrReceiverExplanatory.strCurrDataType) Then
+        If Not ucrReceiverExplanatory.IsEmpty AndAlso {"numeric", "integer", "Date"}.Contains(ucrReceiverExplanatory.strCurrDataType) Then
             cmdExplanatoryFunction.Enabled = True
         Else
             cmdExplanatoryFunction.Enabled = False

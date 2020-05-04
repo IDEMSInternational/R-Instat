@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Imports RDotNet
 
@@ -28,6 +29,10 @@ Public Class sdgVariableTransformations
     Private clsBrokenStickGeneralOperator As New ROperator
 
     Private clsSplineFunc As New RFunction
+
+    Private clsAsFactorFunc As New RFunction
+    Private clsMonthFunc As New RFunction
+    Private clsYearFunc As New RFunction
 
     Private clsPolynomialFunc As New RFunction
     Private strDataName As String
@@ -48,10 +53,14 @@ Public Class sdgVariableTransformations
         ucrPnlChooseFunction.AddRadioButton(rdoBrokenStick)
         ucrPnlChooseFunction.AddRadioButton(rdoSplineDf)
         ucrPnlChooseFunction.AddRadioButton(rdoOwn)
+        ucrPnlChooseFunction.AddRadioButton(rdoMonth)
+        ucrPnlChooseFunction.AddRadioButton(rdoYear)
 
         ucrPnlChooseFunction.AddToLinkedControls(ucrInputTxtPower, {rdoPolynomial}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrPnlChooseFunction.AddToLinkedControls(ucrInputTxtBrokenStick, {rdoBrokenStick}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlChooseFunction.AddToLinkedControls(ucrNudSplineDF, {rdoSplineDf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrPnlChooseFunction.AddToLinkedControls(ucrChkMonthAsFactor, {rdoMonth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlChooseFunction.AddToLinkedControls(ucrChkYearAsFactor, {rdoYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'temp disabled as need to use I(x ^ 2) instead of x ^ 2 as this has different meaning in a formula
         'rdoPolynomial.Enabled = False
@@ -67,10 +76,13 @@ Public Class sdgVariableTransformations
         ucrNudSplineDF.SetParameter(New RParameter("df", 1))
         ucrNudSplineDF.SetMinMax(Integer.MinValue = 0, Integer.MaxValue)
 
+        ucrChkMonthAsFactor.SetText("Month As Factor")
+        ucrChkYearAsFactor.SetText("Year As Factor")
+
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControls(clsNewFormulaOperator As ROperator, clsNewTransformParameter As RParameter, clsNewTransformFunction As RFunction, strVariableName As String, Optional clsNewBrokenStickFirOperator As ROperator = Nothing, Optional clsNewBrokenStickSecOperator As ROperator = Nothing, Optional clsNewBrokenStickGeneralOperator As ROperator = Nothing, Optional clsNewSplineFunc As RFunction = Nothing, Optional clsNewPowerOperator As ROperator = Nothing, Optional clsNewPolynomialFunc As RFunction = Nothing, Optional strNewDataName As String = "", Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControls(clsNewFormulaOperator As ROperator, clsNewTransformParameter As RParameter, clsNewTransformFunction As RFunction, strVariableName As String, Optional clsNewBrokenStickFirOperator As ROperator = Nothing, Optional clsNewBrokenStickSecOperator As ROperator = Nothing, Optional clsNewBrokenStickGeneralOperator As ROperator = Nothing, Optional clsNewSplineFunc As RFunction = Nothing, Optional clsNewPowerOperator As ROperator = Nothing, Optional clsNewPolynomialFunc As RFunction = Nothing, Optional clsNewMonthFunc As RFunction = Nothing, Optional clsNewYearFunc As RFunction = Nothing, Optional clsNewAsFactorFunc As RFunction = Nothing, Optional strNewDataName As String = "", Optional bReset As Boolean = False)
         Dim strParamName As String
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -84,6 +96,9 @@ Public Class sdgVariableTransformations
         clsBrokenStickSecOperator = clsNewBrokenStickSecOperator
         clsBrokenStickGeneralOperator = clsNewBrokenStickGeneralOperator
         clsSplineFunc = clsNewSplineFunc
+        clsAsFactorFunc = clsNewAsFactorFunc
+        clsMonthFunc = clsNewMonthFunc
+        clsYearFunc = clsNewYearFunc
         strDataName = strNewDataName
 
         strParamName = clsTransformParameter.strArgumentName
@@ -96,6 +111,11 @@ Public Class sdgVariableTransformations
         ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoSplineDf, strParamName, "bs")
         ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoPolynomial, strParamName, "poly")
         ucrPnlChooseFunction.AddParameterIsROperatorCondition(rdoBrokenStick, strParamName)
+
+        ucrPnlChooseFunction.AddParameterPresentCondition(rdoMonth, "month")
+        ucrPnlChooseFunction.AddParameterPresentCondition(rdoYear, "year")
+
+        ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoYear, strParamName, "year")
 
         ucrInputTxtBrokenStick.AddAdditionalCodeParameterPair(clsBrokenStickSecOperator, New RParameter("b", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
 
@@ -115,6 +135,8 @@ Public Class sdgVariableTransformations
             clsTransformParameter.SetArgument(clsBrokenStickGeneralOperator)
         ElseIf rdoSplineDf.Checked Then
             clsTransformParameter.SetArgument(clsSplineFunc)
+        ElseIf (rdoMonth.Checked OrElse rdoYear.Checked) Then
+            ConvertToFactorOrNot()
         Else
             If rdoPolynomial.Checked Then
                 clsTransformationCode = clsPolynomialFunc
@@ -161,4 +183,24 @@ Public Class sdgVariableTransformations
             ucrInputTxtBrokenStick.SetName(medianValue)
         End If
     End Sub
+
+    Private Sub AsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYearAsFactor.ControlValueChanged, ucrChkMonthAsFactor.ControlValueChanged
+        ConvertToFactorOrNot()
+        UpdatePreview()
+    End Sub
+
+    Private Sub ConvertToFactorOrNot()
+        If ucrChkMonthAsFactor.Checked AndAlso rdoMonth.Checked Then
+            clsAsFactorFunc.AddParameter(clsRFunctionParameter:=clsMonthFunc, iPosition:=1)
+            clsTransformParameter.SetArgument(clsAsFactorFunc)
+        ElseIf rdoMonth.Checked AndAlso Not ucrChkMonthAsFactor.Checked Then
+            clsTransformParameter.SetArgument(clsMonthFunc)
+        ElseIf ucrChkYearAsFactor.Checked AndAlso rdoYear.Checked Then
+            clsAsFactorFunc.AddParameter(clsRFunctionParameter:=clsYearFunc, iPosition:=1)
+            clsTransformParameter.SetArgument(clsAsFactorFunc)
+        ElseIf rdoYear.Checked AndAlso Not ucrChkYearAsFactor.Checked Then
+            clsTransformParameter.SetArgument(clsYearFunc)
+        End If
+    End Sub
+
 End Class
