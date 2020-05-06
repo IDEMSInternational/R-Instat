@@ -61,7 +61,7 @@ Public Class sdgVariableTransformations
         ucrPnlChooseFunction.AddToLinkedControls(ucrNudSplineDF, {rdoSplineDf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlChooseFunction.AddToLinkedControls(ucrChkMonthAsFactor, {rdoMonth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlChooseFunction.AddToLinkedControls(ucrChkYearAsFactor, {rdoYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
+        ucrPnlChooseFunction.AddToLinkedControls(ucrInputTxtOwn, {rdoOwn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'temp disabled as need to use I(x ^ 2) instead of x ^ 2 as this has different meaning in a formula
         'rdoPolynomial.Enabled = False
 
@@ -78,11 +78,12 @@ Public Class sdgVariableTransformations
 
         ucrChkMonthAsFactor.SetText("Month As Factor")
         ucrChkYearAsFactor.SetText("Year As Factor")
+        rdoOwn.Enabled = False
 
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControls(clsNewFormulaOperator As ROperator, clsNewTransformParameter As RParameter, clsNewTransformFunction As RFunction, strVariableName As String, Optional clsNewBrokenStickFirOperator As ROperator = Nothing, Optional clsNewBrokenStickSecOperator As ROperator = Nothing, Optional clsNewBrokenStickGeneralOperator As ROperator = Nothing, Optional clsNewSplineFunc As RFunction = Nothing, Optional clsNewPowerOperator As ROperator = Nothing, Optional clsNewPolynomialFunc As RFunction = Nothing, Optional clsNewMonthFunc As RFunction = Nothing, Optional clsNewYearFunc As RFunction = Nothing, Optional clsNewAsFactorFunc As RFunction = Nothing, Optional strNewDataName As String = "", Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControls(clsNewFormulaOperator As ROperator, clsNewTransformParameter As RParameter, clsNewTransformFunction As RFunction, strVariableName As String, Optional clsNewBrokenStickFirOperator As ROperator = Nothing, Optional clsNewBrokenStickSecOperator As ROperator = Nothing, Optional clsNewBrokenStickGeneralOperator As ROperator = Nothing, Optional clsNewSplineFunc As RFunction = Nothing, Optional clsNewPowerOperator As ROperator = Nothing, Optional clsNewPolynomialFunc As RFunction = Nothing, Optional clsNewMonthFunc As RFunction = Nothing, Optional clsNewYearFunc As RFunction = Nothing, Optional clsNewAsFactorFunc As RFunction = Nothing, Optional strNewCurDataType As String = "", Optional strNewDataName As String = "", Optional bReset As Boolean = False)
         Dim strParamName As String
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -112,10 +113,9 @@ Public Class sdgVariableTransformations
         ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoPolynomial, strParamName, "poly")
         ucrPnlChooseFunction.AddParameterIsROperatorCondition(rdoBrokenStick, strParamName)
 
-        ucrPnlChooseFunction.AddParameterPresentCondition(rdoMonth, "month")
-        ucrPnlChooseFunction.AddParameterPresentCondition(rdoYear, "year")
-
+        ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoMonth, strParamName, "month")
         ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoYear, strParamName, "year")
+        ucrPnlChooseFunction.bAllowNonConditionValues = True 'temp fix
 
         ucrInputTxtBrokenStick.AddAdditionalCodeParameterPair(clsBrokenStickSecOperator, New RParameter("b", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
 
@@ -124,6 +124,7 @@ Public Class sdgVariableTransformations
         ucrInputTxtBrokenStick.SetRCode(clsBrokenStickFirOperator, bReset, bCloneIfNeeded:=True)
         ucrNudSplineDF.SetRCode(clsSplineFunc, bReset, bCloneIfNeeded:=True)
 
+        showYearAndMonthFunc(strNewCurDataType)
         UpdatePreview()
         GetColumnMidian()
     End Sub
@@ -202,5 +203,16 @@ Public Class sdgVariableTransformations
             clsTransformParameter.SetArgument(clsYearFunc)
         End If
     End Sub
+
+    Private Sub showYearAndMonthFunc(strCurrDataType As String)
+        If strCurrDataType = "Date" Then
+            rdoMonth.Enabled = True
+            rdoYear.Enabled = True
+        Else
+            rdoMonth.Enabled = False
+            rdoYear.Enabled = False
+        End If
+    End Sub
+
 
 End Class
