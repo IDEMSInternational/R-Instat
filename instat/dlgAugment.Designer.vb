@@ -23,14 +23,14 @@ Partial Class dlgAugment
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblModels = New System.Windows.Forms.Label()
+        Me.rdoAddToDataFrame = New System.Windows.Forms.RadioButton()
+        Me.rdoDisplayInOutput = New System.Windows.Forms.RadioButton()
+        Me.rdoNewDataFrame = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrSaveNewDataFrame = New instat.ucrSave()
         Me.ucrModelReceiver = New instat.ucrReceiverSingle()
         Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.rdoAddNewColumns = New System.Windows.Forms.RadioButton()
-        Me.rdoDisplayInOutput = New System.Windows.Forms.RadioButton()
-        Me.rdoNewDataFrame = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblModels
@@ -42,12 +42,53 @@ Partial Class dlgAugment
         Me.lblModels.TabIndex = 2
         Me.lblModels.Text = "Model:"
         '
+        'rdoAddToDataFrame
+        '
+        Me.rdoAddToDataFrame.AutoSize = True
+        Me.rdoAddToDataFrame.Location = New System.Drawing.Point(13, 200)
+        Me.rdoAddToDataFrame.Name = "rdoAddToDataFrame"
+        Me.rdoAddToDataFrame.Size = New System.Drawing.Size(112, 17)
+        Me.rdoAddToDataFrame.TabIndex = 9
+        Me.rdoAddToDataFrame.TabStop = True
+        Me.rdoAddToDataFrame.Text = "Add to data frame:"
+        Me.rdoAddToDataFrame.UseVisualStyleBackColor = True
+        '
+        'rdoDisplayInOutput
+        '
+        Me.rdoDisplayInOutput.AutoSize = True
+        Me.rdoDisplayInOutput.Location = New System.Drawing.Point(13, 237)
+        Me.rdoDisplayInOutput.Name = "rdoDisplayInOutput"
+        Me.rdoDisplayInOutput.Size = New System.Drawing.Size(106, 17)
+        Me.rdoDisplayInOutput.TabIndex = 10
+        Me.rdoDisplayInOutput.TabStop = True
+        Me.rdoDisplayInOutput.Text = "Display In Output"
+        Me.rdoDisplayInOutput.UseVisualStyleBackColor = True
+        '
+        'rdoNewDataFrame
+        '
+        Me.rdoNewDataFrame.AutoSize = True
+        Me.rdoNewDataFrame.Location = New System.Drawing.Point(13, 278)
+        Me.rdoNewDataFrame.Name = "rdoNewDataFrame"
+        Me.rdoNewDataFrame.Size = New System.Drawing.Size(108, 17)
+        Me.rdoNewDataFrame.TabIndex = 11
+        Me.rdoNewDataFrame.TabStop = True
+        Me.rdoNewDataFrame.Text = "New Data Frame:"
+        Me.rdoNewDataFrame.UseVisualStyleBackColor = True
+        '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(10, 198)
+        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(136, 106)
+        Me.ucrPnlOptions.TabIndex = 8
+        '
         'ucrSaveNewDataFrame
         '
-        Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(153, 278)
+        Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(150, 278)
         Me.ucrSaveNewDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
-        Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(216, 24)
+        Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(158, 26)
         Me.ucrSaveNewDataFrame.TabIndex = 7
         '
         'ucrModelReceiver
@@ -75,60 +116,20 @@ Partial Class dlgAugment
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 316)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 331)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(390, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 0
-        '
-        'ucrPnlOptions
-        '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(10, 198)
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(136, 106)
-        Me.ucrPnlOptions.TabIndex = 8
-        '
-        'rdoAddNewColumns
-        '
-        Me.rdoAddNewColumns.AutoSize = True
-        Me.rdoAddNewColumns.Location = New System.Drawing.Point(13, 200)
-        Me.rdoAddNewColumns.Name = "rdoAddNewColumns"
-        Me.rdoAddNewColumns.Size = New System.Drawing.Size(110, 17)
-        Me.rdoAddNewColumns.TabIndex = 9
-        Me.rdoAddNewColumns.TabStop = True
-        Me.rdoAddNewColumns.Text = "Add New Column:"
-        Me.rdoAddNewColumns.UseVisualStyleBackColor = True
-        '
-        'rdoDisplayInOutput
-        '
-        Me.rdoDisplayInOutput.AutoSize = True
-        Me.rdoDisplayInOutput.Location = New System.Drawing.Point(15, 239)
-        Me.rdoDisplayInOutput.Name = "rdoDisplayInOutput"
-        Me.rdoDisplayInOutput.Size = New System.Drawing.Size(109, 17)
-        Me.rdoDisplayInOutput.TabIndex = 10
-        Me.rdoDisplayInOutput.TabStop = True
-        Me.rdoDisplayInOutput.Text = "Display In Output:"
-        Me.rdoDisplayInOutput.UseVisualStyleBackColor = True
-        '
-        'rdoNewDataFrame
-        '
-        Me.rdoNewDataFrame.AutoSize = True
-        Me.rdoNewDataFrame.Location = New System.Drawing.Point(15, 278)
-        Me.rdoNewDataFrame.Name = "rdoNewDataFrame"
-        Me.rdoNewDataFrame.Size = New System.Drawing.Size(108, 17)
-        Me.rdoNewDataFrame.TabIndex = 11
-        Me.rdoNewDataFrame.TabStop = True
-        Me.rdoNewDataFrame.Text = "New Data Frame:"
-        Me.rdoNewDataFrame.UseVisualStyleBackColor = True
         '
         'dlgAugment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(402, 375)
+        Me.ClientSize = New System.Drawing.Size(426, 400)
         Me.Controls.Add(Me.rdoNewDataFrame)
         Me.Controls.Add(Me.rdoDisplayInOutput)
-        Me.Controls.Add(Me.rdoAddNewColumns)
+        Me.Controls.Add(Me.rdoAddToDataFrame)
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrSaveNewDataFrame)
         Me.Controls.Add(Me.ucrModelReceiver)
@@ -154,6 +155,6 @@ Partial Class dlgAugment
     Friend WithEvents ucrSaveNewDataFrame As ucrSave
     Friend WithEvents rdoNewDataFrame As RadioButton
     Friend WithEvents rdoDisplayInOutput As RadioButton
-    Friend WithEvents rdoAddNewColumns As RadioButton
+    Friend WithEvents rdoAddToDataFrame As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
 End Class

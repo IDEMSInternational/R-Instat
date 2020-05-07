@@ -46,7 +46,7 @@ Public Class dlgAugment
         ucrModelSelector.SetParameter(New RParameter("data", 0))
         ucrModelSelector.SetParameterIsrfunction()
 
-        ucrPnlOptions.AddRadioButton(rdoAddNewColumns)
+        ucrPnlOptions.AddRadioButton(rdoAddToDataFrame)
         ucrPnlOptions.AddRadioButton(rdoDisplayInOutput)
         ucrPnlOptions.AddRadioButton(rdoNewDataFrame)
 
@@ -69,7 +69,7 @@ Public Class dlgAugment
     Private Sub SetDefaults()
         clsAugment = New RFunction
 
-        rdoAddNewColumns.Checked = True
+        rdoAddToDataFrame.Checked = True
 
         ucrModelSelector.Reset()
         ucrSaveNewDataFrame.Reset()
@@ -93,7 +93,7 @@ Public Class dlgAugment
             ucrBase.OKEnabled(True)
         ElseIf (rdoDisplayInOutput.Checked AndAlso Not ucrModelReceiver.IsEmpty()) Then
             ucrBase.OKEnabled(True)
-        ElseIf (rdoAddNewColumns.Checked AndAlso Not ucrModelReceiver.IsEmpty()) Then
+        ElseIf (rdoAddToDataFrame.Checked AndAlso Not ucrModelReceiver.IsEmpty()) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -111,7 +111,7 @@ Public Class dlgAugment
         If rdoDisplayInOutput.Checked Then
             ucrBase.clsRsyntax.RemoveAssignTo()
             ucrBase.clsRsyntax.iCallType = 2
-        ElseIf rdoAddNewColumns.Checked Then
+        ElseIf rdoAddToDataFrame.Checked Then
             ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="augment_data", strTempDataframe:=ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
             ucrBase.clsRsyntax.iCallType = 0
         End If
@@ -127,5 +127,9 @@ Public Class dlgAugment
 
     Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveNewDataFrame.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrModelReceiver.ControlContentsChanged
+
     End Sub
 End Class
