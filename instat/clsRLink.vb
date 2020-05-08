@@ -186,17 +186,17 @@ Public Class RLink
 
     ''' <summary> This method executes the <paramref name="strNewScript"/> R script and displays 
     '''           the output as text or graph (determined by <paramref name="strNewScript"/>).
-    '''           R commands may be split over multiple lines. This is only allowed if the  
+    '''           <para>R commands may be split over multiple lines. This is only allowed if the  
     '''           non-final line ends with '+', ',', or '%>%'; or there are one or more '{'
     '''           brackets that have not been closed with an equivalent '}' bracket.
     '''           This function is named '...FromWindow' because it's designed to execute scripts 
     '''           entered by a human from a dialog window (e.g. a script window). These scripts 
     '''           may contain R commands split over multiple lines to make the commands more 
-    '''           readable.
+    '''           readable.</para>
     ''' </summary>
-    ''' <param name="strNewScript">  is the R script to execute.</param>
-    ''' <param name="strNewComment"> is shown as a comment. If this parameter is "" then shows 
-    '''                              <paramref name="strNewScript"/> as the comment.</param>
+    ''' <param name="strNewScript">    The R script to execute.</param>
+    ''' <param name="strNewComment">   Shown as a comment. If this parameter is "" then shows 
+    '''                                <paramref name="strNewScript"/> as the comment.</param>
     ''' <param name="bClearScriptCmd"> (Optional) If true then the command buffer is flushed 
     '''                                before <paramref name="strNewScript"/> is processed. 
     '''                                Otherwise <paramref name="strNewScript"/> is treated as a 
@@ -222,29 +222,27 @@ Public Class RLink
             End Select
 
             'if line is empty or only whitespace then ignore line
-            strScriptLine = RTrim(strScriptLine.Trim(vbCrLf))
-            If strScriptLine.Length <= 0 Then
+            Dim strTrimmedLine As String = strScriptLine.Trim(vbLf).Trim()
+            If strTrimmedLine.Length <= 0 Then
                 Continue For
             End If
 
             'else append line of script to command
             strScriptCmd &= strScriptLine
 
-            'if line ends in a '+', ',', or '%>%' then assume command is not complete
-            Dim cLastChar As Char = strScriptLine.Last
+            'if line ends in a '+', ',', or '%>%'; or there are open curly braces, 
+            '    then assume command is not complete
+            Dim cLastChar As Char = strTrimmedLine.Last
             Dim strLast3Chars As String = ""
-            If strScriptLine.Length >= 3 Then
-                strLast3Chars = strScriptLine.Substring(strScriptLine.Length - 3)
-            End If
-            If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" Then
-                Continue For
-            End If
-
-            'if there are open curly braces then assume command is not complete
             Dim iNumOpenCurlies = strScriptCmd.Where(Function(c) c = "{"c).Count
             Dim iNumClosedCurlies = strScriptCmd.Where(Function(c) c = "}"c).Count
-            If iNumOpenCurlies <> iNumClosedCurlies Then
-                strScriptCmd &= vbCrLf
+            If strTrimmedLine.Length >= 3 Then
+                strLast3Chars = strTrimmedLine.Substring(strTrimmedLine.Length - 3)
+            End If
+            If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" OrElse iNumOpenCurlies <> iNumClosedCurlies Then
+                If Not bClearScriptCmd Then 'only add carriage return if executing a single line (not needed when executing entire script window or selected text)
+                    strScriptCmd &= vbCrLf
+                End If
                 Continue For
             End If
 
@@ -253,7 +251,7 @@ Public Class RLink
             If strScriptCmd.Contains(strInstatDataObject & "$get_graphs") Then
                 iCallType = 3
             End If
-            RunScript(strScriptCmd, iCallType:=iCallType, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
+            RunScript(strScriptCmd.Trim(vbLf), iCallType:=iCallType, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
             strScriptCmd = ""
             strNewComment = ""
         Next
