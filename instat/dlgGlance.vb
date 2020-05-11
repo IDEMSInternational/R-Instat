@@ -77,12 +77,12 @@ Public Class dlgGlance
         clsMap_df.AddParameter(strParameterName:=".f", strParameterValue:="broom::glance", iPosition:=1)
         clsMap_df.AddParameter(strParameterName:=".id", strParameterValue:=Chr(34) & "model" & Chr(34))
 
+        SetDefaultNewDataFrameName()
         ucrBase.clsRsyntax.SetBaseRFunction(clsMap_df)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrModelReceiver.SetRCode(clsMap_df, bReset)
-        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -113,5 +113,15 @@ Public Class dlgGlance
 
     Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetDefaultNewDataFrameName()
+        If ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrSaveNewDataFrame.SetPrefix("glance_" & ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        End If
+    End Sub
+
+    Private Sub ucrModelSelector_DataFrameChanged() Handles ucrModelSelector.DataFrameChanged
+        SetDefaultNewDataFrameName()
     End Sub
 End Class
