@@ -78,6 +78,7 @@ Public Class dlgAugment
         clsAugment.SetRCommand("augment")
         clsAugment.SetPackageName("broom")
 
+        SetDefaultNewDataFrameName()
         ucrBase.clsRsyntax.SetBaseRFunction(clsAugment)
         UpdateAssignTo()
     End Sub
@@ -97,6 +98,12 @@ Public Class dlgAugment
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub SetDefaultNewDataFrameName()
+        If ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrSaveNewDataFrame.SetPrefix("augment_" & ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         End If
     End Sub
 
@@ -129,7 +136,7 @@ Public Class dlgAugment
         TestOKEnabled()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveNewDataFrame.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrModelReceiver.ControlContentsChanged
-
+    Private Sub ucrModelSelector_DataFrameChanged() Handles ucrModelSelector.DataFrameChanged
+        SetDefaultNewDataFrameName()
     End Sub
 End Class

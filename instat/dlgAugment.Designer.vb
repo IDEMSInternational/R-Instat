@@ -78,7 +78,7 @@ Partial Class dlgAugment
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.Location = New System.Drawing.Point(10, 198)
-        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(136, 106)
         Me.ucrPnlOptions.TabIndex = 8
@@ -117,7 +117,7 @@ Partial Class dlgAugment
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 331)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 0
@@ -126,7 +126,7 @@ Partial Class dlgAugment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(426, 400)
+        Me.ClientSize = New System.Drawing.Size(421, 394)
         Me.Controls.Add(Me.rdoNewDataFrame)
         Me.Controls.Add(Me.rdoDisplayInOutput)
         Me.Controls.Add(Me.rdoAddToDataFrame)
@@ -137,7 +137,7 @@ Partial Class dlgAugment
         Me.Controls.Add(Me.ucrModelSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgAugment"
