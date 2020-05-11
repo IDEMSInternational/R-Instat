@@ -55,8 +55,7 @@ Partial Class dlgTwoVariableFitModel
         Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
         Me.lblConfidenceInterval = New System.Windows.Forms.Label()
         Me.cmdExplanatoryFunction = New System.Windows.Forms.Button()
-        Me.cmdExplanatoryFunctionTwo = New System.Windows.Forms.Button()
-        Me.ucrChkWithSecondFunction = New instat.ucrCheck()
+        Me.ucrTryModelling = New instat.ucrTry()
         Me.ucrPnlMeansAndVariance = New instat.UcrPanel()
         Me.ucrChkPairedTest = New instat.ucrCheck()
         Me.ucrNudHypothesis = New instat.ucrNud()
@@ -110,7 +109,7 @@ Partial Class dlgTwoVariableFitModel
         'cmdDisplayOptions
         '
         Me.cmdDisplayOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(341, 388)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(341, 413)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(110, 23)
         Me.cmdDisplayOptions.TabIndex = 16
@@ -121,7 +120,7 @@ Partial Class dlgTwoVariableFitModel
         'cmdModelOptions
         '
         Me.cmdModelOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdModelOptions.Location = New System.Drawing.Point(341, 360)
+        Me.cmdModelOptions.Location = New System.Drawing.Point(341, 385)
         Me.cmdModelOptions.Name = "cmdModelOptions"
         Me.cmdModelOptions.Size = New System.Drawing.Size(110, 23)
         Me.cmdModelOptions.TabIndex = 15
@@ -133,7 +132,7 @@ Partial Class dlgTwoVariableFitModel
         '
         Me.lblModelPreview.AutoSize = True
         Me.lblModelPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblModelPreview.Location = New System.Drawing.Point(10, 363)
+        Me.lblModelPreview.Location = New System.Drawing.Point(10, 388)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
         Me.lblModelPreview.TabIndex = 12
@@ -259,22 +258,12 @@ Partial Class dlgTwoVariableFitModel
         Me.cmdExplanatoryFunction.Text = "Function..."
         Me.cmdExplanatoryFunction.UseVisualStyleBackColor = True
         '
-        'cmdExplanatoryFunctionTwo
+        'ucrTryModelling
         '
-        Me.cmdExplanatoryFunctionTwo.Location = New System.Drawing.Point(268, 245)
-        Me.cmdExplanatoryFunctionTwo.Name = "cmdExplanatoryFunctionTwo"
-        Me.cmdExplanatoryFunctionTwo.Size = New System.Drawing.Size(103, 23)
-        Me.cmdExplanatoryFunctionTwo.TabIndex = 19
-        Me.cmdExplanatoryFunctionTwo.Text = "Function..."
-        Me.cmdExplanatoryFunctionTwo.UseVisualStyleBackColor = True
-        '
-        'ucrChkWithSecondFunction
-        '
-        Me.ucrChkWithSecondFunction.Checked = False
-        Me.ucrChkWithSecondFunction.Location = New System.Drawing.Point(268, 228)
-        Me.ucrChkWithSecondFunction.Name = "ucrChkWithSecondFunction"
-        Me.ucrChkWithSecondFunction.Size = New System.Drawing.Size(116, 18)
-        Me.ucrChkWithSecondFunction.TabIndex = 18
+        Me.ucrTryModelling.Location = New System.Drawing.Point(-3, 351)
+        Me.ucrTryModelling.Name = "ucrTryModelling"
+        Me.ucrTryModelling.Size = New System.Drawing.Size(396, 29)
+        Me.ucrTryModelling.TabIndex = 20
         '
         'ucrPnlMeansAndVariance
         '
@@ -317,7 +306,7 @@ Partial Class dlgTwoVariableFitModel
         '
         'ucrSaveModels
         '
-        Me.ucrSaveModels.Location = New System.Drawing.Point(10, 390)
+        Me.ucrSaveModels.Location = New System.Drawing.Point(10, 415)
         Me.ucrSaveModels.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveModels.Name = "ucrSaveModels"
         Me.ucrSaveModels.Size = New System.Drawing.Size(258, 24)
@@ -378,7 +367,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrModelPreview.AddQuotesIfUnrecognised = True
         Me.ucrModelPreview.IsMultiline = False
         Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(97, 361)
+        Me.ucrModelPreview.Location = New System.Drawing.Point(97, 386)
         Me.ucrModelPreview.Name = "ucrModelPreview"
         Me.ucrModelPreview.Size = New System.Drawing.Size(204, 21)
         Me.ucrModelPreview.TabIndex = 13
@@ -392,7 +381,7 @@ Partial Class dlgTwoVariableFitModel
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 424)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 449)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(406, 54)
         Me.ucrBase.TabIndex = 17
@@ -401,9 +390,8 @@ Partial Class dlgTwoVariableFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(462, 478)
-        Me.Controls.Add(Me.cmdExplanatoryFunctionTwo)
-        Me.Controls.Add(Me.ucrChkWithSecondFunction)
+        Me.ClientSize = New System.Drawing.Size(462, 510)
+        Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.cmdExplanatoryFunction)
         Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.ucrSaveModels)
@@ -468,6 +456,5 @@ Partial Class dlgTwoVariableFitModel
     Friend WithEvents rdoCompareMeans As RadioButton
     Friend WithEvents ucrPnlMeansAndVariance As UcrPanel
     Friend WithEvents cmdExplanatoryFunction As Button
-    Friend WithEvents ucrChkWithSecondFunction As ucrCheck
-    Friend WithEvents cmdExplanatoryFunctionTwo As Button
+    Friend WithEvents ucrTryModelling As ucrTry
 End Class

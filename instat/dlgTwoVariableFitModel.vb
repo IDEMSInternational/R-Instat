@@ -32,6 +32,10 @@ Public Class dlgTwoVariableFitModel
     Public clsMonthFunc, clsYearFunc, clsAsFactorFunc As New RFunction
 
 
+
+    Private clsAttach As New RFunction
+    Private clsDetach As New RFunction
+
     Private Sub ucrFamily_EnabledChanged(sender As Object, e As EventArgs) Handles ucrDistributionChoice.EnabledChanged
 
     End Sub
@@ -72,7 +76,6 @@ Public Class dlgTwoVariableFitModel
         rdoTwoSample.Enabled = False
 
         cmdExplanatoryFunction.Enabled = False
-        cmdExplanatoryFunctionTwo.Enabled = False
 
         ucrBase.iHelpTopicID = 366
         ucrBase.clsRsyntax.iCallType = 2
@@ -143,10 +146,8 @@ Public Class dlgTwoVariableFitModel
         ucrPnlMeansAndVariance.SetLinkedDisplayControl(grpParameters)
         ucrPnlMeansAndVariance.AddToLinkedControls(ucrNudHypothesis, {rdoCompareVariance}, bNewLinkedDisabledIfParameterMissing:=True)
 
-        ucrChkWithSecondFunction.SetText("With Second Functions")
-
-        'ucrTryFitModel.SetReceiver()
-
+        ucrTryModelling.SetReceiver(ucrNewInputTextBox:=ucrModelPreview)
+        ucrTryModelling.SetIsModel()
     End Sub
 
     Private Sub SetDefaults()
@@ -344,9 +345,19 @@ Public Class dlgTwoVariableFitModel
         clsYearFunc.SetRCommand("year")
         clsYearFunc.SetPackageName("lubridate")
 
+        clsAttach.SetRCommand("attach")
+        clsDetach.SetRCommand("detach")
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("unload", "TRUE")
+
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
+
+        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
 
         bResetSubDialog = True
         bResetOptionsSubDialog = True
@@ -884,13 +895,5 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlContentsChanged, ucrPnlModelType.ControlContentsChanged, ucrReceiverExplanatory.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrChkWithSecondFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWithSecondFunction.ControlValueChanged
-        If ucrChkWithSecondFunction.Checked Then
-            cmdExplanatoryFunctionTwo.Enabled = True
-        Else
-            cmdExplanatoryFunctionTwo.Enabled = False
-        End If
     End Sub
 End Class
