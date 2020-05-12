@@ -604,6 +604,10 @@ Public Class dlgImportDataset
             End If
             ExcelSheetPreviewVisible(True)
             FillExcelSheets(strFilePath)
+        ElseIf strFileExt = ".dly" Then
+            strFileType = "DLY"
+            clsImport.AddParameter("format", Chr(34) & "\t" & Chr(34))
+            ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
         ElseIf strFileExt <> "" Then
             strFileType = strFileExt.Substring(1).ToUpper()
             ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
@@ -626,7 +630,7 @@ Public Class dlgImportDataset
             If strNewFileType = "" Then
                 strNewFileType = strFileType
             End If
-            If (strNewFileType = "CSV" OrElse strNewFileType = "TXT") AndAlso strFilePathSystem <> "" Then
+            If (strNewFileType = "CSV" OrElse strNewFileType = "TXT" OrElse strNewFileType = "DLY") AndAlso strFilePathSystem <> "" Then
                 TextPreviewVisible(True)
                 rowsToSkip = If(strNewFileType = "CSV", ucrNudRowsToSkipCSV.Value, ucrNudRowsToSkipText.Value)
                 Try
@@ -670,7 +674,7 @@ Public Class dlgImportDataset
             lblImportingSheets.Hide()
             lblImportingSheets.Text = ""
             bValid = False
-            If {"TXT", "CSV", "XLSX", "XLS"}.Contains(strFileType) AndAlso Not ucrInputFilePath.IsEmpty() Then
+            If {"TXT", "CSV", "XLSX", "XLS", "DLY"}.Contains(strFileType) AndAlso Not ucrInputFilePath.IsEmpty() Then
                 If strFileType = "TXT" Then
                     If rdoSeparatortext.Checked Then
                         'for separtor we use the function used for csv
@@ -686,6 +690,9 @@ Public Class dlgImportDataset
                 ElseIf strFileType = "CSV" Then
                     clsTempImport = clsImportCSV.Clone()
                     strRowMaxParamName = "nrows"
+                    clsTempImport.AddParameter("na.strings", Chr(34) & ucrInputMissingValueStringCSV.GetText & Chr(34))
+                ElseIf strFileType = "DLY" Then
+                    clsTempImport = clsImport.Clone()
                     clsTempImport.AddParameter("na.strings", Chr(34) & ucrInputMissingValueStringCSV.GetText & Chr(34))
                 ElseIf strFileType = "XLSX" OrElse strFileType = "XLS" Then
                     If dctSelectedExcelSheets.Count = 0 Then
