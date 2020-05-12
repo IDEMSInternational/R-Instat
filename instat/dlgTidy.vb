@@ -44,7 +44,6 @@ Public Class dlgTidy
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveNewDataFrame.lblSaveText.Visible = False
         ucrSaveNewDataFrame.SetLabelText("")
-        ucrSaveNewDataFrame.SetPrefix("Tidy_dataframe")
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
 
         ucrModelReceiver.SetParameter(New RParameter(".x", 0))
@@ -93,6 +92,12 @@ Public Class dlgTidy
         TestOKEnabled()
     End Sub
 
+    Private Sub SetDefaultNewDataFrameName()
+        If ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrSaveNewDataFrame.SetPrefix("tidy_" & ucrModelSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        End If
+    End Sub
+
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoDisplayInOutput.Checked Then
             ucrBase.clsRsyntax.RemoveAssignTo()
@@ -105,5 +110,9 @@ Public Class dlgTidy
 
     Private Sub CoreControls_ControlContentsChanged() Handles ucrModelReceiver.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrModelSelector_DataFrameChanged() Handles ucrModelSelector.DataFrameChanged
+        SetDefaultNewDataFrameName()
     End Sub
 End Class
