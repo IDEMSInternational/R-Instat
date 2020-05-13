@@ -1009,7 +1009,6 @@ Public Class dlgImportDataset
             clsImportExcel.RemoveParameterByName("range")
         End If
     End Sub
-End Class
 
     Private Function ListOfCheckedItems()
         Dim keyList As New List(Of Integer)
@@ -1019,4 +1018,7 @@ End Class
         Return keyList
     End Function
 End Class
+
+
+
 
