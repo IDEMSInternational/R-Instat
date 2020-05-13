@@ -21,7 +21,7 @@ Public Class dlgColumnStats
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
     Private clsDefaultFunction, clsConcFunction As New RFunction
-    Public strWeightLabel As String = ""
+    Private strWeightLabel As String = ""
     Public strDefaultDataFrame As String = ""
     Public strDefaultVariables() As String
     Public strDefaultFactors() As String
@@ -90,13 +90,13 @@ Public Class dlgColumnStats
         ucrReceiverWeights.Selector = ucrSelectorForColumnStatistics
         ucrReceiverWeights.SetParameterIsString()
 
+        'linking
+        ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkStoreResults.AddToLinkedControls(ucrChkOriginalLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrChkWeights.SetText("Weights")
         ucrChkWeights.AddParameterPresentCondition(True, "weights")
         ucrChkWeights.AddParameterPresentCondition(False, "weights", False)
-
-        ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
-        'linking
-        ucrChkStoreResults.AddToLinkedControls(ucrChkOriginalLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -124,7 +124,7 @@ Public Class dlgColumnStats
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        'temporary fix
+        'Temporary fix: set conditions properly for ucrChkWeights so that it retains its state when the dialog is reopened and ucrReceiverWeights is empty.
         If bReset Then
             SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
         End If
