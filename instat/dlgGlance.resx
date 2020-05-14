@@ -220,13 +220,13 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="rdoNewDataFrameName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 17</value>
+    <value>139, 17</value>
   </data>
   <data name="rdoNewDataFrameName.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="rdoNewDataFrameName.Text" xml:space="preserve">
-    <value>New data frame Name:</value>
+    <value>New Data Frame Name:</value>
   </data>
   <data name="&gt;&gt;rdoNewDataFrameName.Name" xml:space="preserve">
     <value>rdoNewDataFrameName</value>
