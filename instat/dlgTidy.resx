@@ -193,13 +193,13 @@
     <value>12, 237</value>
   </data>
   <data name="rdoNewDataFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 17</value>
+    <value>139, 17</value>
   </data>
   <data name="rdoNewDataFrame.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="rdoNewDataFrame.Text" xml:space="preserve">
-    <value>New Data Frame:</value>
+    <value>New Data Frame Name:</value>
   </data>
   <data name="&gt;&gt;rdoNewDataFrame.Name" xml:space="preserve">
     <value>rdoNewDataFrame</value>
@@ -243,8 +243,11 @@
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 192</value>
   </data>
+  <data name="ucrPnlOptions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
   <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 81</value>
+    <value>157, 81</value>
   </data>
   <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
