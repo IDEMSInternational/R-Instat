@@ -47,10 +47,10 @@ Partial Class dlgAugment
         Me.rdoAddToDataFrame.AutoSize = True
         Me.rdoAddToDataFrame.Location = New System.Drawing.Point(13, 200)
         Me.rdoAddToDataFrame.Name = "rdoAddToDataFrame"
-        Me.rdoAddToDataFrame.Size = New System.Drawing.Size(112, 17)
+        Me.rdoAddToDataFrame.Size = New System.Drawing.Size(117, 17)
         Me.rdoAddToDataFrame.TabIndex = 9
         Me.rdoAddToDataFrame.TabStop = True
-        Me.rdoAddToDataFrame.Text = "Add to data frame:"
+        Me.rdoAddToDataFrame.Text = "Add to Data Frame:"
         Me.rdoAddToDataFrame.UseVisualStyleBackColor = True
         '
         'rdoDisplayInOutput
@@ -69,10 +69,10 @@ Partial Class dlgAugment
         Me.rdoNewDataFrame.AutoSize = True
         Me.rdoNewDataFrame.Location = New System.Drawing.Point(13, 278)
         Me.rdoNewDataFrame.Name = "rdoNewDataFrame"
-        Me.rdoNewDataFrame.Size = New System.Drawing.Size(108, 17)
+        Me.rdoNewDataFrame.Size = New System.Drawing.Size(139, 17)
         Me.rdoNewDataFrame.TabIndex = 11
         Me.rdoNewDataFrame.TabStop = True
-        Me.rdoNewDataFrame.Text = "New Data Frame:"
+        Me.rdoNewDataFrame.Text = "New Data Frame Name:"
         Me.rdoNewDataFrame.UseVisualStyleBackColor = True
         '
         'ucrPnlOptions
@@ -80,12 +80,12 @@ Partial Class dlgAugment
         Me.ucrPnlOptions.Location = New System.Drawing.Point(10, 198)
         Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(136, 106)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(155, 106)
         Me.ucrPnlOptions.TabIndex = 8
         '
         'ucrSaveNewDataFrame
         '
-        Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(150, 278)
+        Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(174, 278)
         Me.ucrSaveNewDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
         Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(158, 26)
