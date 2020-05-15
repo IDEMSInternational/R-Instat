@@ -17,11 +17,13 @@
 Imports System.IO
 Imports RDotNet
 Imports instat.Translations
+Imports instat
 
 Public Class dlgImportDataset
 
     Private clsImportFixedWidthText, clsImportCSV, clsImportDAT, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As RFunction
     Private clsGetExcelSheetNames As RFunction
+    Private clsRangeOperator As ROperator
     ' Functions for multi file import
     Private clsLapply As RFunction
     Private clsFileList As RFunction
@@ -256,6 +258,20 @@ Public Class dlgImportDataset
         ucrInputMissingValueStringExcel.SetParameter(New RParameter("na"))
         ucrInputMissingValueStringExcel.SetRDefault(Chr(34) & "" & Chr(34))
 
+        ucrChkRange.SetText("Range:")
+        ucrChkRange.AddParameterPresentCondition(True, "range", True)
+        ucrChkRange.AddParameterPresentCondition(False, "range", False)
+        ucrChkRange.AddToLinkedControls({ucrInputTextFrom}, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="A1")
+        ucrChkRange.AddToLinkedControls({ucrInputTextTo}, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="AA100")
+
+        ucrInputTextFrom.SetParameter(New RParameter("from", bNewIncludeArgumentName:=False, iNewPosition:=0))
+        ucrInputTextTo.SetParameter(New RParameter("To", bNewIncludeArgumentName:=False, iNewPosition:=1))
+        ucrInputTextTo.AddQuotesIfUnrecognised = False
+        ucrInputTextFrom.AddQuotesIfUnrecognised = False
+
+        ucrInputTextFrom.SetLinkedDisplayControl(lblFrom)
+        ucrInputTextTo.SetLinkedDisplayControl(lblTo)
+
         ucrChkTrimWSExcel.SetText("Trim Trailing White Space")
         ucrChkTrimWSExcel.SetParameter(New RParameter("trim_ws"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkTrimWSExcel.SetRDefault("TRUE")
@@ -324,6 +340,7 @@ Public Class dlgImportDataset
         clsReadRDS = New RFunction
         clsImportDAT = New RFunction
         clsGetExcelSheetNames = New RFunction
+        clsRangeOperator = New ROperator
 
         clsLapply = New RFunction
 
@@ -367,6 +384,10 @@ Public Class dlgImportDataset
         clsFileList.SetRCommand("c")
 
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
+
+        clsRangeOperator.SetOperation(":", bBracketsTemp:=False)
+        clsRangeOperator.bToScriptAsRString = True
+        clsRangeOperator.bSpaceAroundOperation = False
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
 
@@ -524,6 +545,11 @@ Public Class dlgImportDataset
         ucrChkColumnNamesExcel.SetRCode(clsImportExcel, bReset)
         ucrNudMaxRowsExcel.SetRCode(clsImportExcel, bReset)
         ucrChkMaxRowsExcel.SetRCode(clsImportExcel, bReset)
+        ucrChkRange.SetRCode(clsImportExcel, bReset)
+
+        ucrInputTextFrom.SetRCode(clsRangeOperator, bReset)
+        ucrInputTextTo.SetRCode(clsRangeOperator, bReset)
+
     End Sub
 
     Private Sub TextPreviewVisible(bVisible As Boolean)
@@ -975,6 +1001,15 @@ Public Class dlgImportDataset
         End If
     End Sub
 
+
+    Private Sub ucrChkRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRange.ControlValueChanged
+        If ucrChkRange.Checked Then
+            clsImportExcel.AddParameter("range", clsROperatorParameter:=clsRangeOperator)
+        Else
+            clsImportExcel.RemoveParameterByName("range")
+        End If
+    End Sub
+
     Private Function ListOfCheckedItems()
         Dim keyList As New List(Of Integer)
         For Each kvp As KeyValuePair(Of Integer, String) In dctSelectedExcelSheets
@@ -983,3 +1018,7 @@ Public Class dlgImportDataset
         Return keyList
     End Function
 End Class
+
+
+
+
