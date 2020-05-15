@@ -1122,7 +1122,7 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
     stop("to_type must be a character of length one")
   }
   
-  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor", "logical"))) {
+  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor", "logical", "scientific"))) {
     stop(to_type, " is not a valid type to convert to")
   }
   
@@ -1195,6 +1195,9 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
     else if(to_type == "logical") {
       if(is.logical.like(curr_col)) new_col <- as.logical(curr_col)
       else stop("Column is not numeric or contains values other than 0 and 1. Converting to logical would result in losing information.")
+    }
+    else if(to_type == "scientific"){
+      new_col <- formatC(x = curr_col, format = "e")
     }
     
     self$add_columns_to_data(col_name = col_name, col_data = new_col)
