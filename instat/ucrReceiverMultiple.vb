@@ -183,7 +183,6 @@ Public Class ucrReceiverMultiple
                     Else
                         clsGetVariablesFunc.RemoveParameterByName("force_as_list")
                     End If
-
                 Case "dataframe"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
                     clsGetVariablesFunc.AddParameter("data_name", GetVariableNames())

@@ -20,8 +20,10 @@ Public Class sdgSummaries
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Private lstCheckboxes As New List(Of ucrCheck)
+    Private lstVerifCheckboxes As New List(Of ucrCheck)
     Private ucrBaseSelector As ucrSelector
     Public strDataFrame As String
+    Private strWeightLabel As String
     Public bEnable2VariableTab As Boolean = True
     Public bOkEnabled As Boolean = True
 
@@ -43,7 +45,6 @@ Public Class sdgSummaries
         ucrChkNTotal.SetText("N Total")
 
         ucrChkMean.SetParameter(New RParameter("summary_mean", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkMean.SetText("Mean")
 
         ucrChkMinimum.SetParameter(New RParameter("summary_min", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_min" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkMinimum.SetText("Minimum")
@@ -55,40 +56,30 @@ Public Class sdgSummaries
         ucrChkMaximum.SetText("Maximum")
 
         ucrChkMedian.SetParameter(New RParameter("summary_median", 8), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_median" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkMedian.SetText("Median")
 
         ucrChkStdDev.SetParameter(New RParameter("summary_sd", 9), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_sd" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkStdDev.SetText("Standard Deviation")
 
         ucrChkRange.SetParameter(New RParameter("summary_range", 10), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_range" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkRange.SetText("Range")
 
         ucrChkSum.SetParameter(New RParameter("summary_sum", 11), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_sum" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkSum.SetText("Sum")
 
         ucrChkVariance.SetParameter(New RParameter("summary_var", 12), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_var" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkVariance.SetText("Variance")
 
         ucrChkUpperQuartile.SetParameter(New RParameter("upper_quartile", 13), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "upper_quartile" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkUpperQuartile.SetText("Upper Quartile")
 
         ucrChkLowerQuartile.SetParameter(New RParameter("lower_quartile", 14), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "lower_quartile" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkLowerQuartile.SetText("Lower Quartile")
 
         ucrChkKurtosis.SetParameter(New RParameter("summary_kurtosis", 15), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_kurtosis" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkKurtosis.SetText("Kurtosis")
 
         ucrChkSkewness.SetParameter(New RParameter("summary_skewness", 16), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_skewness" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkSkewness.SetText("Skewness(3rd Moment)")
 
         ucrChkMc.SetParameter(New RParameter("summary_skewness_mc", 20), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_skewness_mc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkMc.SetText("mc")
 
         ucrChkCoefficientOfVariation.SetParameter(New RParameter("summary_coef_var", 17), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_coef_var" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkCoefficientOfVariation.SetText("Coefficient Of Variation")
 
         ucrChkMedianAbsoluteDeviation.SetParameter(New RParameter("summary_median_absolute_deviation", 18), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_median_absolute_deviation" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkMedianAbsoluteDeviation.SetText("Median Absolute Deviation (MAD)")
 
         ucrChkQn.SetParameter(New RParameter("summary_Qn", 19), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Qn" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkQn.SetText("Qn")
@@ -97,10 +88,8 @@ Public Class sdgSummaries
         ucrChkSn.SetText("Sn")
 
         ucrChkCorrelations.SetParameter(New RParameter("summary_cor", 21), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cor" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkCorrelations.SetText("Correlations")
 
         ucrChkCovariance.SetParameter(New RParameter("summary_cov", 22), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cov" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkCovariance.SetText("Covariance")
 
         'circular
         ucrChkCircMean.SetParameter(New RParameter("summary_mean_circular", 23), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_mean_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
@@ -124,8 +113,7 @@ Public Class sdgSummaries
         ucrChkQ3.SetParameter(New RParameter("summary_Q3_circular", 29), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_Q3_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkQ3.SetText("Q3")
 
-        ucrChkQuantile.SetParameter(New RParameter("summary_quantile_circular", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_quantile_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkQuantile.SetText("Quantile")
+        ucrChkQuantile.SetParameter(New RParameter("summary_quantile", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_quantile" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
 
         ucrChkSd.SetParameter(New RParameter("summary_sd_circular", 31), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_sd_circular" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkSd.SetText("Sd")
@@ -263,7 +251,6 @@ Public Class sdgSummaries
         ucrInputPercentage.SetValidationTypeAsNumeric(dcmMin:=0, dcmMax:=100)
         ucrInputPercentage.SetLinkedDisplayControl(lblPercentage)
 
-
         ucrNudNumber.SetParameter(New RParameter("na_max_n", 11))
 
         ucrNudNumberNotMissing.SetParameter(New RParameter("na_min_n", 12))
@@ -274,24 +261,130 @@ Public Class sdgSummaries
         ucrChkStandardErrorOfMean.SetParameter(New RParameter("standard_error_mean", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "standard_error_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkStandardErrorOfMean.SetText("Standard Error of the Mean")
 
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean, ucrChkMaxNumMissing, ucrChkMinNumNonMissing, ucrChkMaxPercMissing, ucrChkConsecutiveMissing, ucrChkCircMean, ucrChkCircMedian, ucrChkMin, ucrChkMedianH, ucrChkMax, ucrChkQ1, ucrChkQ3, ucrChkQuantile, ucrChkSd, ucrChkVar, ucrChkAngVar, ucrChkAngDev, ucrChkrho, ucrChkCircRange})
+        'Verification::HydroGOF Options
+        ucrChkMeanError.SetParameter(New RParameter("me", 31), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "me" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMeanError.SetText("me")
+        ttVerificationSummaries.SetToolTip(ucrChkMeanError.chkCheck, "Mean error")
+
+        ucrChkMeanAbsoluteError.SetParameter(New RParameter("mae", 32), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "mae" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMeanAbsoluteError.SetText("mae")
+        ttVerificationSummaries.SetToolTip(ucrChkMeanAbsoluteError.chkCheck, "Mean absolute error")
+
+        ucrChkRootMeanSquaredError.SetParameter(New RParameter("rmse", 33), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "rmse" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkRootMeanSquaredError.SetText("rmse")
+        ttVerificationSummaries.SetToolTip(ucrChkRootMeanSquaredError.chkCheck, "Root mean squared error")
+
+        ucrChkNormRootMeanSquaredError.SetParameter(New RParameter("nrmse", 34), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "nrmse" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkNormRootMeanSquaredError.SetText("nrmse")
+        ttVerificationSummaries.SetToolTip(ucrChkNormRootMeanSquaredError.chkCheck, "Normalized root mean squared error")
+
+        ucrChkPercentBias.SetParameter(New RParameter("PBIAS", 35), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "PBIAS" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkPercentBias.SetText("PBIAS")
+        ttVerificationSummaries.SetToolTip(ucrChkPercentBias.chkCheck, "Percent bias")
+
+        ucrChkRatioOfRootMeanSquaredError.SetParameter(New RParameter("rsr", 36), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "rsr" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkRatioOfRootMeanSquaredError.SetText("rsr")
+        ttVerificationSummaries.SetToolTip(ucrChkRatioOfRootMeanSquaredError.chkCheck, "Ratio of root mean square error")
+
+        ucrChkRatioOfStandardDeviation.SetParameter(New RParameter("rSD", 37), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "rSD" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkRatioOfStandardDeviation.SetText("rSD")
+        ttVerificationSummaries.SetToolTip(ucrChkRatioOfStandardDeviation.chkCheck, "Ratio of standard deviations")
+
+        ucrChkNashSutcliffeEfficiency.SetParameter(New RParameter("NSE", 38), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "NSE" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkNashSutcliffeEfficiency.SetText("NSE")
+        ttVerificationSummaries.SetToolTip(ucrChkNashSutcliffeEfficiency.chkCheck, "Nash-Sutcliffe efficiency")
+
+        ucrChkModNashSutcliffeEff.SetParameter(New RParameter("mNSE", 39), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "mNSE" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkModNashSutcliffeEff.SetText("mNSE")
+        ttVerificationSummaries.SetToolTip(ucrChkModNashSutcliffeEff.chkCheck, "Modified Nash-Sutcliffe effieciency")
+
+        ucrChkRelativeNashSutcliffeEff.SetParameter(New RParameter("rNSE", 40), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "rNSE" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkRelativeNashSutcliffeEff.SetText("rNSE")
+        ttVerificationSummaries.SetToolTip(ucrChkRelativeNashSutcliffeEff.chkCheck, "Relative Nash-Sutcliffe efficiency")
+
+        ucrChkModifiedIndexOfAgreement.SetParameter(New RParameter("md", 41), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "md" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkModifiedIndexOfAgreement.SetText("md")
+        ttVerificationSummaries.SetToolTip(ucrChkModifiedIndexOfAgreement.chkCheck, "Modified index of agreement")
+
+        ucrChkIndexOfAgreement.SetParameter(New RParameter("d", 42), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "d" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkIndexOfAgreement.SetText("d")
+        ttVerificationSummaries.SetToolTip(ucrChkIndexOfAgreement.chkCheck, "Index of agreement")
+
+        ucrChkRelativeIndexOfAgreement.SetParameter(New RParameter("rd", 43), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "rd" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkRelativeIndexOfAgreement.SetText("rd")
+        ttVerificationSummaries.SetToolTip(ucrChkRelativeIndexOfAgreement.chkCheck, "Relative index of agreement")
+
+        ucrChkCoefPersistence.SetParameter(New RParameter("cp", 44), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "cp" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkCoefPersistence.SetText("cp")
+        ttVerificationSummaries.SetToolTip(ucrChkCoefPersistence.chkCheck, "Coefficient of persistence")
+
+        ucrChkCoefDetermination.SetParameter(New RParameter("R2", 45), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "R2" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkCoefDetermination.SetText("R^2")
+        ttVerificationSummaries.SetToolTip(ucrChkCoefDetermination.chkCheck, "Coefficient of determination")
+
+        ucrChkKlingGuptaEfficiency.SetParameter(New RParameter("KGE", 46), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "KGE" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkKlingGuptaEfficiency.SetText("KGE")
+        ttVerificationSummaries.SetToolTip(ucrChkKlingGuptaEfficiency.chkCheck, "Kling-Gupta efficiency")
+
+        ucrChkVolumetricEfficiency.SetParameter(New RParameter("VE", 47), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "VE" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkVolumetricEfficiency.SetText("VE")
+        ttVerificationSummaries.SetToolTip(ucrChkVolumetricEfficiency.chkCheck, "Volumetric efficiency")
+
+        ucrChkMeanSquaredError.SetParameter(New RParameter("mse", 48), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "mse" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMeanSquaredError.SetText("mse")
+        ttVerificationSummaries.SetToolTip(ucrChkMeanSquaredError.chkCheck, "Mean squared error")
+
+        ucrChkSumOfSquaredResiduals.SetParameter(New RParameter("ssq", 49), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "ssq" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkSumOfSquaredResiduals.SetText("ssq")
+        ttVerificationSummaries.SetToolTip(ucrChkSumOfSquaredResiduals.chkCheck, "Sum of squared residuals")
+
+        ttVerificationSummaries.SetToolTip(ucrInputJmia.txtInput, "numeric value, with the exponent to be used in the computation of the modified index of agreement. The default value is j=1")
+
+        ucrInputJmia.SetParameter(New RParameter("j", 50))
+        ucrInputJmia.SetValidationTypeAsNumeric()
+        ucrInputJmia.AddQuotesIfUnrecognised = False
+        ucrInputJmia.SetRDefault(1)
+
+        ucrChkSelectAll.SetText("Select all")
+
+        lstVerifCheckboxes.AddRange({ucrChkCorrelations, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency})
+
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkUpperQuartile, ucrChkLowerQuartile, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean, ucrChkMaxNumMissing, ucrChkMinNumNonMissing, ucrChkMaxPercMissing, ucrChkConsecutiveMissing, ucrChkCircMean, ucrChkCircMedian, ucrChkMin, ucrChkMedianH, ucrChkMax, ucrChkQ1, ucrChkQ3, ucrChkQuantile, ucrChkSd, ucrChkVar, ucrChkAngVar, ucrChkAngDev, ucrChkrho, ucrChkCircRange, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency})
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
             ctrTemp.SetRDefault(Chr(34) & Chr(34))
         Next
         bControlsInitialised = True
-        MissingOptionsVisibilty()
+        TwoVariablesControls()
         PositionOptions()
         OrderByCheckEnabled()
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewConcFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewConcFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strNewWeightLabel As String = Nothing)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsListFunction = clsNewRFunction
         clsDefaultFunction = clsNewDefaultFunction
         clsConcFunction = clsNewConcFunction
+
+        strWeightLabel = strNewWeightLabel
+
+        'updating labels of weighted summaries
+        ucrChkSum.SetText("Sum" & strWeightLabel)
+        ucrChkMean.SetText("Mean" & strWeightLabel)
+        ucrChkStdDev.SetText("Sd" & strWeightLabel)
+        ucrChkVariance.SetText("Var" & strWeightLabel)
+        ucrChkMedian.SetText("Median" & strWeightLabel)
+        ucrChkQuantile.SetText("Quantile" & strWeightLabel)
+        ucrChkLowerQuartile.SetText("Lower Quartile" & strWeightLabel)
+        ucrChkUpperQuartile.SetText("Upper Quartile" & strWeightLabel)
+        ucrChkKurtosis.SetText("Kurtosis" & strWeightLabel)
+        ucrChkSkewness.SetText("Skewness (3rd Moment)" & strWeightLabel)
+        ucrChkCoefficientOfVariation.SetText("Coefficient Of Variation" & strWeightLabel)
+        ucrChkMedianAbsoluteDeviation.SetText("Median Absolute Deviation (MAD)" & strWeightLabel)
+        ucrChkCorrelations.SetText("Correlations" & strWeightLabel)
+        ucrChkCovariance.SetText("Covariance" & strWeightLabel)
 
         'This is meant to force selector select the current dataframe as selected in the main dialog
         ucrBaseSelector = ucrNewBaseSelector
@@ -314,6 +407,7 @@ Public Class sdgSummaries
         ucrNudFraction.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputN.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputQuantile.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputJmia.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkMaxNumMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMaxPercMissing.SetRCode(clsConcFunction, bReset, bCloneIfNeeded:=True)
@@ -366,6 +460,25 @@ Public Class sdgSummaries
         ucrChkAngDev.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkrho.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkCircRange.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkCoefDetermination.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkCoefPersistence.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkIndexOfAgreement.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkKlingGuptaEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMeanAbsoluteError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkModifiedIndexOfAgreement.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMeanError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkModNashSutcliffeEff.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkNormRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkNashSutcliffeEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkPercentBias.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkRelativeIndexOfAgreement.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkRelativeNashSutcliffeEff.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkRatioOfStandardDeviation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkRatioOfRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkSumOfSquaredResiduals.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkVolumetricEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             tbSummaries.SelectedIndex = 0
@@ -392,7 +505,7 @@ Public Class sdgSummaries
         If SummaryCount = 0 Then
             MsgBox("No summaries selected. Ok will Not be enabled on the main dialog.", Title:="No summaries selected", Buttons:=MsgBoxStyle.Information)
         End If
-        If (ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked) AndAlso ucrReceiverSecondVariable.IsEmpty Then
+        If (ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked OrElse ucrChkCoefDetermination.Checked OrElse ucrChkCoefPersistence.Checked OrElse ucrChkIndexOfAgreement.Checked OrElse ucrChkKlingGuptaEfficiency.Checked OrElse ucrChkMeanAbsoluteError.Checked OrElse ucrChkModifiedIndexOfAgreement.Checked OrElse ucrChkMeanError.Checked OrElse ucrChkModNashSutcliffeEff.Checked OrElse ucrChkMeanSquaredError.Checked OrElse ucrChkNormRootMeanSquaredError.Checked OrElse ucrChkNashSutcliffeEfficiency.Checked OrElse ucrChkPercentBias.Checked OrElse ucrChkRelativeIndexOfAgreement.Checked OrElse ucrChkRootMeanSquaredError.Checked OrElse ucrChkRelativeNashSutcliffeEff.Checked OrElse ucrChkRatioOfStandardDeviation.Checked OrElse ucrChkRatioOfRootMeanSquaredError.Checked OrElse ucrChkSumOfSquaredResiduals.Checked OrElse ucrChkVolumetricEfficiency.Checked) AndAlso ucrReceiverSecondVariable.IsEmpty Then
             MsgBox("Second Variable receiver in Two-Variables tab is empty. Ok will Not be enabled on the main dialog.", Title:="Second Variable Receiver", Buttons:=MsgBoxStyle.Information)
             bOkEnabled = False
         Else
@@ -400,15 +513,15 @@ Public Class sdgSummaries
         End If
     End Sub
 
-    Private Sub MissingOptionsVisibilty()
-        If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked Then
-            ucrSelectorSecondVariable.Show()
-            ucrReceiverSecondVariable.Show()
-            lblSecondVariable.Show()
+    Private Sub TwoVariablesControls()
+        If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked OrElse ucrChkCoefDetermination.Checked OrElse ucrChkCoefPersistence.Checked OrElse ucrChkIndexOfAgreement.Checked OrElse ucrChkKlingGuptaEfficiency.Checked OrElse ucrChkMeanAbsoluteError.Checked OrElse ucrChkModifiedIndexOfAgreement.Checked OrElse ucrChkMeanError.Checked OrElse ucrChkModNashSutcliffeEff.Checked OrElse ucrChkMeanSquaredError.Checked OrElse ucrChkNormRootMeanSquaredError.Checked OrElse ucrChkNashSutcliffeEfficiency.Checked OrElse ucrChkPercentBias.Checked OrElse ucrChkRelativeIndexOfAgreement.Checked OrElse ucrChkRootMeanSquaredError.Checked OrElse ucrChkRelativeNashSutcliffeEff.Checked OrElse ucrChkRatioOfStandardDeviation.Checked OrElse ucrChkRatioOfRootMeanSquaredError.Checked OrElse ucrChkSumOfSquaredResiduals.Checked OrElse ucrChkVolumetricEfficiency.Checked Then
+            ucrSelectorSecondVariable.Visible = True
+            ucrReceiverSecondVariable.Visible = True
+            lblSecondVariable.Visible = True
         Else
-            ucrSelectorSecondVariable.Hide()
-            ucrReceiverSecondVariable.Hide()
-            lblSecondVariable.Hide()
+            ucrSelectorSecondVariable.Visible = False
+            ucrReceiverSecondVariable.Visible = False
+            lblSecondVariable.Visible = False
         End If
     End Sub
 
@@ -433,9 +546,9 @@ Public Class sdgSummaries
         End If
     End Sub
 
-    Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged, ucrChkCovariance.ControlValueChanged, ucrReceiverSecondVariable.ControlValueChanged
-        MissingOptionsVisibilty()
-        If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked Then
+    Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged, ucrChkCovariance.ControlValueChanged, ucrReceiverSecondVariable.ControlValueChanged, ucrChkCoefDetermination.ControlValueChanged, ucrChkCoefPersistence.ControlValueChanged, ucrChkIndexOfAgreement.ControlContentsChanged, ucrChkKlingGuptaEfficiency.ControlContentsChanged, ucrChkMeanAbsoluteError.ControlContentsChanged, ucrChkModifiedIndexOfAgreement.ControlContentsChanged, ucrChkMeanError.ControlContentsChanged, ucrChkModNashSutcliffeEff.ControlContentsChanged, ucrChkMeanSquaredError.ControlContentsChanged, ucrChkNormRootMeanSquaredError.ControlContentsChanged, ucrChkNashSutcliffeEfficiency.ControlContentsChanged, ucrChkPercentBias.ControlContentsChanged, ucrChkRelativeIndexOfAgreement.ControlContentsChanged, ucrChkRootMeanSquaredError.ControlContentsChanged, ucrChkRelativeNashSutcliffeEff.ControlContentsChanged, ucrChkRatioOfStandardDeviation.ControlContentsChanged, ucrChkRatioOfRootMeanSquaredError.ControlContentsChanged, ucrChkSumOfSquaredResiduals.ControlContentsChanged, ucrChkVolumetricEfficiency.ControlContentsChanged
+        TwoVariablesControls()
+        If ucrChkCorrelations.Checked OrElse ucrChkCovariance.Checked OrElse ucrChkCoefDetermination.Checked OrElse ucrChkCoefPersistence.Checked OrElse ucrChkIndexOfAgreement.Checked OrElse ucrChkKlingGuptaEfficiency.Checked OrElse ucrChkMeanAbsoluteError.Checked OrElse ucrChkModifiedIndexOfAgreement.Checked OrElse ucrChkMeanError.Checked OrElse ucrChkModNashSutcliffeEff.Checked OrElse ucrChkMeanSquaredError.Checked OrElse ucrChkNormRootMeanSquaredError.Checked OrElse ucrChkNashSutcliffeEfficiency.Checked OrElse ucrChkPercentBias.Checked OrElse ucrChkRelativeIndexOfAgreement.Checked OrElse ucrChkRootMeanSquaredError.Checked OrElse ucrChkRelativeNashSutcliffeEff.Checked OrElse ucrChkRatioOfStandardDeviation.Checked OrElse ucrChkRatioOfRootMeanSquaredError.Checked OrElse ucrChkSumOfSquaredResiduals.Checked OrElse ucrChkVolumetricEfficiency.Checked Then
             clsDefaultFunction.AddParameter("y", ucrReceiverSecondVariable.GetVariableNames, iPosition:=3)
         Else
             clsDefaultFunction.RemoveParameterByName("y")
@@ -455,6 +568,18 @@ Public Class sdgSummaries
         OrderByCheckEnabled()
     End Sub
 
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Dim clsHelp As New RFunction
+        Dim strPackageName As String
+
+        strPackageName = "hydroGOF"
+        clsHelp.SetPackageName("utils")
+        clsHelp.SetRCommand("help")
+        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
+        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Modelling", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+    End Sub
+
     Private Sub ucrChkOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOrderBy.ControlValueChanged
         PositionOptions()
         OrderByCheckEnabled()
@@ -465,6 +590,20 @@ Public Class sdgSummaries
             clsDefaultFunction.AddParameter("na_type", clsRFunctionParameter:=clsConcFunction, iPosition:=9)
         Else
             clsDefaultFunction.RemoveParameterByName("na_type")
+        End If
+    End Sub
+
+    Private Sub ucrChkSelectAll_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectAll.ControlValueChanged
+        If ucrChkSelectAll.Checked Then
+            For Each ctrTemp As ucrCheck In lstVerifCheckboxes
+                ctrTemp.Checked = True
+            Next
+            ucrChkSelectAll.SetText("Unselect all")
+        Else
+            For Each ctrTemp As ucrCheck In lstVerifCheckboxes
+                ctrTemp.Checked = False
+            Next
+            ucrChkSelectAll.SetText("Select all")
         End If
     End Sub
 End Class
