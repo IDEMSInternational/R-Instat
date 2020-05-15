@@ -49,6 +49,8 @@ Partial Class dlgColumnStats
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.cmdProportionsPercentages = New System.Windows.Forms.Button()
+        Me.ucrChkWeights = New instat.ucrCheck()
+        Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForColumnStatistics = New instat.ucrSelectorByDataFrameAddRemove()
@@ -121,6 +123,21 @@ Partial Class dlgColumnStats
         Me.cmdProportionsPercentages.Tag = "Proportions/Percentages..."
         Me.cmdProportionsPercentages.UseVisualStyleBackColor = True
         '
+        'ucrChkWeights
+        '
+        Me.ucrChkWeights.Checked = False
+        resources.ApplyResources(Me.ucrChkWeights, "ucrChkWeights")
+        Me.ucrChkWeights.Name = "ucrChkWeights"
+        '
+        'ucrReceiverWeights
+        '
+        Me.ucrReceiverWeights.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWeights, "ucrReceiverWeights")
+        Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
+        Me.ucrReceiverWeights.Selector = Nothing
+        Me.ucrReceiverWeights.strNcFilePath = ""
+        Me.ucrReceiverWeights.ucrSelector = Nothing
+        '
         'ucrReceiverByFactor
         '
         Me.ucrReceiverByFactor.frmParent = Me
@@ -156,6 +173,8 @@ Partial Class dlgColumnStats
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkWeights)
+        Me.Controls.Add(Me.ucrReceiverWeights)
         Me.Controls.Add(Me.cmdProportionsPercentages)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.grpOptions)
@@ -190,4 +209,6 @@ Partial Class dlgColumnStats
     Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
     Friend WithEvents cmdProportionsPercentages As Button
     Friend WithEvents ucrChkOriginalLevel As ucrCheck
+    Friend WithEvents ucrChkWeights As ucrCheck
+    Friend WithEvents ucrReceiverWeights As ucrReceiverSingle
 End Class

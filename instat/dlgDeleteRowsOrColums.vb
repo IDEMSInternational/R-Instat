@@ -138,16 +138,18 @@ Public Class dlgDeleteRowsOrColums
         SetMaxMin()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForColumnsToDelete.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged, ucrNudFrom.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForColumnsToDelete.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged, ucrNudTo.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
     Private Sub SetMaxMin()
+        Dim iLength As Integer
+
         If ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrNudFrom.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
             ' Should use ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength but doesn't update before dialog loads
-            ucrNudTo.SetMinMax(1, frmMain.clsRLink.GetDataFrameLength(ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text))
+            iLength = frmMain.clsRLink.GetDataFrameLength(ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            ucrNudFrom.SetMinMax(1, iLength)
+            ucrNudTo.SetMinMax(1, iLength)
         End If
     End Sub
-
 End Class
