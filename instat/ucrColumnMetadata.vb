@@ -40,6 +40,7 @@ Public Class ucrColumnMetadata
     Private strNameLabel As String = "Name"
     Private strDataTypeLabel As String = "DataType"
     Private strLabelsLabel As String = "labels"
+    Private strLabelsScientific As String = "Scientific"
 
     Private Sub frmVariables_Load(sender As Object, e As EventArgs) Handles Me.Load
         loadForm()
@@ -69,7 +70,7 @@ Public Class ucrColumnMetadata
         grdVariables.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         grdVariables.SheetTabNewButtonVisible = False
         grdVariables.SheetTabWidth = 250
-        lstNonEditableColumns.AddRange({"class", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour", "Scientific"})
+        lstNonEditableColumns.AddRange({"class", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour"})
         'grdVariables.CurrentWorksheet.Resize(5, 5)
         'grdVariables.ColumnHeaderContextMenuStrip = context.grdData.ColumnHeaderContextMenuStrip
         'grdVariables.RowHeaderContextMenuStrip = context.grdData.RowHeaderContextMenuStrip
@@ -155,6 +156,18 @@ Public Class ucrColumnMetadata
                     e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
                     Exit Sub
                 End If
+            ElseIf strProperty = strLabelsScientific Then
+                If String.Compare(strNewValue, Chr(34) & "TRUE" & Chr(34)) = 0 OrElse String.Compare(strNewValue, Chr(34) & "T" & Chr(34)) = 0 Then
+                    clsConvertTo.AddParameter("to_type", Chr(34) & "scientific" & Chr(34))
+                    clsConvertTo.AddParameter("col_names", GetSelectedVariableNames())
+                    RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Scientific")
+                ElseIf String.Compare(strNewValue, Chr(34) & "FALSE" & Chr(34)) = 0 OrElse String.Compare(strNewValue, Chr(34) & "F" & Chr(34)) = 0 Then
+                    clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
+                    clsConvertTo.AddParameter("col_names", GetSelectedVariableNames())
+                    RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
+                Else
+                    MsgBox("Type TRUE/T to change to scientific and FALSE/F back to numeric", MsgBoxStyle.Information)
+                End If
             Else
                 strScript = frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata(data_name =" & Chr(34) & grdCurrSheet.Name & Chr(34) & ",col_names = " & Chr(34) & strColumn & Chr(34) & ",property=" & Chr(34) & strProperty & Chr(34) & ",new_val=" & strNewValue & ")"
                 strComment = "Edited variables metadata value"
@@ -165,7 +178,7 @@ Public Class ucrColumnMetadata
                 e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
             End Try
         Else
-            MsgBox("Developer error: Cannot find Name column in column metadata grid.", MsgBoxStyle.Critical, "Canont find Name column")
+            MsgBox("Developer error: Cannot find Name column in column metadata grid.", MsgBoxStyle.Critical, "Cannot find Name column")
         End If
     End Sub
 
