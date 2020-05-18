@@ -169,6 +169,9 @@ Public Class dlgOneVarFitModel
         ucrSelectorOneVarFitMod.Reset()
         ucrSaveModel.Reset()
 
+        clsLoadLibrary.SetRCommand("library")
+        clsLoadLibrary.AddParameter("package", "circular", bIncludeArgumentName:=False)
+
         'General Case
         clsROneVarFitModel.SetPackageName("fitdistrplus")
         clsROneVarFitModel.SetRCommand("fitdist")
@@ -418,42 +421,34 @@ Public Class dlgOneVarFitModel
     Private Sub StartParameterValues()
         If ucrDistributionChoice.clsCurrDistribution.strNameTag = "von_mises" Then
             clsROneVarFitModel.AddParameter("start", "list(mu = 0.1, kappa = 0.2)", iPosition:=1)
-            clsLoadLibrary.SetRCommand("library")
-            clsLoadLibrary.AddParameter("package", "circular", bIncludeArgumentName:=False)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsLoadLibrary, 1)
-        ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Then
-            clsROneVarFitModel.AddParameter("start", "list(df = 0.1)", iPosition:=1)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
-        ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Then
-            clsROneVarFitModel.AddParameter("start", "list(df1 = 0.1, df2 = 0.2)", iPosition:=1)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
-        ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Then
-            clsROneVarFitModel.AddParameter("start", "list(df1 = 0.1, df2 = 0.2)", iPosition:=1)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
-        ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
-            clsROneVarFitModel.AddParameter("start", "list(size = 1,prob=0.5)", iPosition:=1)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
-        ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Then
-            clsROneVarFitModel.AddParameter("start", "list(size = 1 ,prob = 0.5)", iPosition:=1)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
-        ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Weibull" Then
-            clsROneVarFitModel.AddParameter("start", "list(shape = 1 ,scale = 2)", iPosition:=1)
-            If bMme Then
-                '' clsActuarLibrary.SetRCommand("library")
-                'clsActuarLibrary.AddParameter("package", "actuar", bIncludeArgumentName:=False)
-                'clsROneVarFitModel.AddParameter("order", "1:2")
-                'ucrBase.clsRsyntax.AddToBeforeCodes(clsActuarLibrary, 1)
-            Else
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsActuarLibrary)
-            End If
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
         Else
-            clsROneVarFitModel.RemoveParameterByName("start")
+            If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Then
+                clsROneVarFitModel.AddParameter("start", "list(df = 0.1)", iPosition:=1)
+            ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Then
+                clsROneVarFitModel.AddParameter("start", "list(df1 = 0.1, df2 = 0.2)", iPosition:=1)
+            ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Then
+                clsROneVarFitModel.AddParameter("start", "list(df1 = 0.1, df2 = 0.2)", iPosition:=1)
+            ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
+                clsROneVarFitModel.AddParameter("start", "list(size = 1,prob=0.5)", iPosition:=1)
+            ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Then
+                clsROneVarFitModel.AddParameter("start", "list(size = 1 ,prob = 0.5)", iPosition:=1)
+            ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Weibull" Then
+                clsROneVarFitModel.AddParameter("start", "list(shape = 1 ,scale = 2)", iPosition:=1)
+                'If bMme Then
+                '    '' clsActuarLibrary.SetRCommand("library")
+                '    'clsActuarLibrary.AddParameter("package", "actuar", bIncludeArgumentName:=False)
+                '    'clsROneVarFitModel.AddParameter("order", "1:2")
+                '    'ucrBase.clsRsyntax.AddToBeforeCodes(clsActuarLibrary, 1)
+                'Else
+                '    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsActuarLibrary)
+                'End If
+            Else
+                clsROneVarFitModel.RemoveParameterByName("start")
+            End If
+
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
-
         End If
-
-
 
     End Sub
     Public Sub SetBaseFunction()
@@ -579,7 +574,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
-        sdgOneVarFitModel.SetRCode(ucrBase.clsRsyntax, clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, ucrNewDistribution:=ucrDistribution, bReset:=bResetFittingOptions, bMme:=sdgOneVarFitModel.rdoMme.Checked)
+        sdgOneVarFitModel.SetRCode(ucrBase.clsRsyntax, clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, ucrNewDistribution:=ucrDistribution, bReset:=bResetFittingOptions)
         bResetFittingOptions = False
         sdgOneVarFitModel.ShowDialog()
         EnableOptions()
