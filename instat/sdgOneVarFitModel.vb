@@ -47,7 +47,7 @@ Public Class sdgOneVarFitModel
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsRNewOneVarFitModel As RFunction, Optional clsNewRLogLikFunction As RFunction = Nothing, Optional ucrNewDistribution As ucrDistributions = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsRNewOneVarFitModel As RFunction, Optional clsNewRLogLikFunction As RFunction = Nothing, Optional ucrNewDistribution As ucrDistributions = Nothing, Optional bReset As Boolean = False, Optional bMme As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
