@@ -102,6 +102,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrSelectorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
+        Me.grpCoin = New System.Windows.Forms.GroupBox()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1001,11 +1002,21 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn.TabIndex = 1
         Me.ucrReceiverForTestColumn.ucrSelector = Nothing
         '
+        'grpCoin
+        '
+        Me.grpCoin.Location = New System.Drawing.Point(60, 69)
+        Me.grpCoin.Name = "grpCoin"
+        Me.grpCoin.Size = New System.Drawing.Size(484, 264)
+        Me.grpCoin.TabIndex = 22
+        Me.grpCoin.TabStop = False
+        Me.grpCoin.Text = "Coin"
+        '
         'dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(787, 599)
+        Me.Controls.Add(Me.grpCoin)
         Me.Controls.Add(Me.grpVerification)
         Me.Controls.Add(Me.ucrChkDisplayModel)
         Me.Controls.Add(Me.ucrChkSummaryModel)
@@ -1120,4 +1131,5 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdBinary As Button
     Friend WithEvents ucrChkDisplayModel As ucrCheck
     Friend WithEvents ucrChkSummaryModel As ucrCheck
+    Friend WithEvents grpCoin As GroupBox
 End Class
