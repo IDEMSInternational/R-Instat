@@ -322,30 +322,77 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Executes the <paramref name="strNewScript"/> R script and displays the output 
-    '''             as text or graph (determined by <paramref name="strNewScript"/>). 
-    '''             </summary>
-    '''
-    ''' <param name="strNewScript">     The R script to execute. </param>
-    ''' <param name="strNewComment">    The comment to display. If this parameter is "" then shows
-    '''                                  <paramref name="strNewScript"/> as the comment.</param>
+    ''' <summary> This method executes the <paramref name="strNewScript"/> R script and displays 
+    '''           the output as text or graph (determined by <paramref name="strNewScript"/>).
+    '''           <para>R commands may be split over multiple lines. This is only allowed if the  
+    '''           non-final line ends with '+', ',', or '%>%'; or there are one or more '{'
+    '''           brackets that have not been closed with an equivalent '}' bracket.
+    '''           This function is named '...FromWindow' because it's designed to execute scripts 
+    '''           entered by a human from a dialog window (e.g. a script window). These scripts 
+    '''           may contain R commands split over multiple lines to make the commands more 
+    '''           readable.</para>
+    '''           </summary>
+    ''' <param name="strNewScript">    The R script to execute.</param>
+    ''' <param name="strNewComment">   Shown as a comment. If this parameter is "" then shows 
+    '''                                <paramref name="strNewScript"/> as the comment.</param>
+    ''' <param name="bClearScriptCmd"> (Optional) If true then the command buffer is flushed 
+    '''                                before <paramref name="strNewScript"/> is processed. 
+    '''                                Otherwise <paramref name="strNewScript"/> is treated as a 
+    '''                                continuation of the previous string that was sent to this 
+    '''                                function.</param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String)
-        Dim strSelectedScript As String = strNewScript
-        Dim iCallType As Integer
-        Dim bFirst As Boolean = True
-        Dim strComment As String = strNewComment
+    Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String, Optional bClearScriptCmd As Boolean = True)
+        Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
 
-        For Each strLine As String In strSelectedScript.Split(Environment.NewLine)
-            If strLine.Trim(vbLf).Count > 0 AndAlso Not strLine.Trim(vbLf).StartsWith("#") Then
-                If strLine.Contains(strInstatDataObject & "$get_graphs") Then
-                    iCallType = 3
-                Else
-                    iCallType = 2
-                End If
-                RunScript(strScript:=strLine.Trim(vbLf), iCallType:=iCallType, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
-                strComment = ""
+        'by default, flush out any unexecuted full or partial commands
+        If bClearScriptCmd Then
+            strScriptCmd = ""
+        End If
+
+        'for each line in script
+        For Each strScriptLine As String In strNewScript.Split(Environment.NewLine)
+            'remove any comments (character '#' and anything after)
+            Dim iCommentPos As Integer = strScriptLine.IndexOf("#")
+            Select Case iCommentPos
+                Case 0      'a normal comment line (starts with '#')
+                    Continue For
+                Case Is > 0 ' a line with an appended comment (e.g. 'x <- 1 # generate data' converted to 'x <- 1 ')
+                    strScriptLine = strScriptLine.Substring(0, iCommentPos - 1)
+            End Select
+
+            'if line is empty or only whitespace then ignore line
+            Dim strTrimmedLine As String = strScriptLine.Trim(vbLf).Trim()
+            If strTrimmedLine.Length <= 0 Then
+                Continue For
             End If
+
+            'else append line of script to command
+            strScriptCmd &= strScriptLine
+
+            'if line ends in a '+', ',', or '%>%'; or there are open curly braces, 
+            '    then assume command is not complete
+            Dim cLastChar As Char = strTrimmedLine.Last
+            Dim strLast3Chars As String = ""
+            Dim iNumOpenCurlies = strScriptCmd.Where(Function(c) c = "{"c).Count
+            Dim iNumClosedCurlies = strScriptCmd.Where(Function(c) c = "}"c).Count
+            If strTrimmedLine.Length >= 3 Then
+                strLast3Chars = strTrimmedLine.Substring(strTrimmedLine.Length - 3)
+            End If
+            If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" OrElse iNumOpenCurlies <> iNumClosedCurlies Then
+                If Not bClearScriptCmd Then 'only add carriage return if executing a single line (not needed when executing entire script window or selected text)
+                    strScriptCmd &= vbCrLf
+                End If
+                Continue For
+            End If
+
+            'else execute command
+            Dim iCallType As Integer = 5
+            If strScriptCmd.Contains(strInstatDataObject & "$get_graphs") Then
+                iCallType = 3
+            End If
+            RunScript(strScriptCmd.Trim(vbLf), iCallType:=iCallType, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
+            strScriptCmd = ""
+            strNewComment = ""
         Next
     End Sub
 
