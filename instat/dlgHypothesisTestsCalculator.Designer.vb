@@ -105,9 +105,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpCoin = New System.Windows.Forms.GroupBox()
         Me.grpLocation = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.grpSymmetry = New System.Windows.Forms.GroupBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.g = New System.Windows.Forms.GroupBox()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1010,9 +1010,9 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpCoin
         '
-        Me.grpCoin.Controls.Add(Me.GroupBox5)
+        Me.grpCoin.Controls.Add(Me.g)
         Me.grpCoin.Controls.Add(Me.GroupBox4)
-        Me.grpCoin.Controls.Add(Me.GroupBox3)
+        Me.grpCoin.Controls.Add(Me.grpSymmetry)
         Me.grpCoin.Controls.Add(Me.GroupBox2)
         Me.grpCoin.Controls.Add(Me.grpLocation)
         Me.grpCoin.Location = New System.Drawing.Point(60, 69)
@@ -1040,14 +1040,14 @@ Partial Class dlgHypothesisTestsCalculator
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "GroupBox2"
         '
-        'GroupBox3
+        'grpSymmetry
         '
-        Me.GroupBox3.Location = New System.Drawing.Point(213, 25)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(200, 100)
-        Me.GroupBox3.TabIndex = 2
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "GroupBox3"
+        Me.grpSymmetry.Location = New System.Drawing.Point(213, 25)
+        Me.grpSymmetry.Name = "grpSymmetry"
+        Me.grpSymmetry.Size = New System.Drawing.Size(200, 100)
+        Me.grpSymmetry.TabIndex = 2
+        Me.grpSymmetry.TabStop = False
+        Me.grpSymmetry.Text = "Symmetry"
         '
         'GroupBox4
         '
@@ -1058,14 +1058,14 @@ Partial Class dlgHypothesisTestsCalculator
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "GroupBox4"
         '
-        'GroupBox5
+        'g
         '
-        Me.GroupBox5.Location = New System.Drawing.Point(419, 29)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(200, 100)
-        Me.GroupBox5.TabIndex = 4
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "GroupBox5"
+        Me.g.Location = New System.Drawing.Point(419, 29)
+        Me.g.Name = "g"
+        Me.g.Size = New System.Drawing.Size(200, 100)
+        Me.g.TabIndex = 4
+        Me.g.TabStop = False
+        Me.g.Text = "GroupBox5"
         '
         'dlgHypothesisTestsCalculator
         '
@@ -1189,9 +1189,9 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents ucrChkDisplayModel As ucrCheck
     Friend WithEvents ucrChkSummaryModel As ucrCheck
     Friend WithEvents grpCoin As GroupBox
-    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents g As GroupBox
     Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents grpSymmetry As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents grpLocation As GroupBox
 End Class
