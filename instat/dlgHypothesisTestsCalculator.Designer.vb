@@ -103,11 +103,17 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.grpCoin = New System.Windows.Forms.GroupBox()
+        Me.grpLocation = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
         Me.grpAgricolae.SuspendLayout()
         Me.grpVerification.SuspendLayout()
+        Me.grpCoin.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblTest
@@ -1004,12 +1010,62 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpCoin
         '
+        Me.grpCoin.Controls.Add(Me.GroupBox5)
+        Me.grpCoin.Controls.Add(Me.GroupBox4)
+        Me.grpCoin.Controls.Add(Me.GroupBox3)
+        Me.grpCoin.Controls.Add(Me.GroupBox2)
+        Me.grpCoin.Controls.Add(Me.grpLocation)
         Me.grpCoin.Location = New System.Drawing.Point(60, 69)
         Me.grpCoin.Name = "grpCoin"
-        Me.grpCoin.Size = New System.Drawing.Size(484, 264)
+        Me.grpCoin.Size = New System.Drawing.Size(632, 264)
         Me.grpCoin.TabIndex = 22
         Me.grpCoin.TabStop = False
         Me.grpCoin.Text = "Coin"
+        '
+        'grpLocation
+        '
+        Me.grpLocation.Location = New System.Drawing.Point(7, 21)
+        Me.grpLocation.Name = "grpLocation"
+        Me.grpLocation.Size = New System.Drawing.Size(200, 100)
+        Me.grpLocation.TabIndex = 0
+        Me.grpLocation.TabStop = False
+        Me.grpLocation.Text = "Location"
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 126)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(200, 100)
+        Me.GroupBox2.TabIndex = 1
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "GroupBox2"
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Location = New System.Drawing.Point(213, 25)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(200, 100)
+        Me.GroupBox3.TabIndex = 2
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "GroupBox3"
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Location = New System.Drawing.Point(212, 131)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(200, 100)
+        Me.GroupBox4.TabIndex = 3
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "GroupBox4"
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Location = New System.Drawing.Point(419, 29)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(200, 100)
+        Me.GroupBox5.TabIndex = 4
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "GroupBox5"
         '
         'dlgHypothesisTestsCalculator
         '
@@ -1048,6 +1104,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpStats2.ResumeLayout(False)
         Me.grpAgricolae.ResumeLayout(False)
         Me.grpVerification.ResumeLayout(False)
+        Me.grpCoin.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1132,4 +1189,9 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents ucrChkDisplayModel As ucrCheck
     Friend WithEvents ucrChkSummaryModel As ucrCheck
     Friend WithEvents grpCoin As GroupBox
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents grpLocation As GroupBox
 End Class
