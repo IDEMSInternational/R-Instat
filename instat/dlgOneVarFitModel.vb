@@ -23,7 +23,6 @@ Public Class dlgOneVarFitModel
     Public bfirstload As Boolean = True
     Public bRCodeSet As Boolean = False
     Public bReset As Boolean = True
-    Public bMme As Boolean = True
     Private bResetFittingOptions As Boolean = False
     Private bResetFitModDisplay As Boolean = False
 
@@ -182,12 +181,12 @@ Public Class dlgOneVarFitModel
         clsNaExclude.SetRCommand("na.exclude")
 
         clsRConvertNumeric.SetRCommand("as.numeric")
-        clsRConvertNumeric.AddParameter("x", clsRFunctionParameter:=clsNaExclude, bIncludeArgumentName:=False)
+        clsRConvertNumeric.AddParameter("x", clsRFunctionParameter:=clsNaExclude)
         clsRConvertInteger.SetRCommand("as.integer")
-        clsRConvertInteger.AddParameter("x", clsRFunctionParameter:=clsNaExclude, bIncludeArgumentName:=False)
+        clsRConvertInteger.AddParameter("x", clsRFunctionParameter:=clsNaExclude)
 
         clsRConvertVector.SetRCommand("as.vector")
-        clsRConvertVector.AddParameter("x", clsRFunctionParameter:=clsNaExclude, bIncludeArgumentName:=False)
+        clsRConvertVector.AddParameter("x", clsRFunctionParameter:=clsNaExclude)
         clsRStartValues.SetRCommand("mean")
 
         clsRfitdist.SetPackageName("fitdistrplus")
@@ -435,14 +434,6 @@ Public Class dlgOneVarFitModel
                 clsROneVarFitModel.AddParameter("start", "list(size = 1 ,prob = 0.5)", iPosition:=1)
             ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Weibull" Then
                 clsROneVarFitModel.AddParameter("start", "list(shape = 1 ,scale = 2)", iPosition:=1)
-                'If bMme Then
-                '    '' clsActuarLibrary.SetRCommand("library")
-                '    'clsActuarLibrary.AddParameter("package", "actuar", bIncludeArgumentName:=False)
-                '    'clsROneVarFitModel.AddParameter("order", "1:2")
-                '    'ucrBase.clsRsyntax.AddToBeforeCodes(clsActuarLibrary, 1)
-                'Else
-                '    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsActuarLibrary)
-                'End If
             Else
                 clsROneVarFitModel.RemoveParameterByName("start")
             End If
