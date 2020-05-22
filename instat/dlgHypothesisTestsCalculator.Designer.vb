@@ -1034,12 +1034,13 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'GroupBox4
         '
+        Me.GroupBox4.AccessibleDescription = "grpContingency"
         Me.GroupBox4.Location = New System.Drawing.Point(212, 131)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(200, 100)
         Me.GroupBox4.TabIndex = 3
         Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "GroupBox4"
+        Me.GroupBox4.Text = "Contingency"
         '
         'grpSymmetry
         '
