@@ -197,18 +197,12 @@ Public Class RLink
     ''' <param name="strNewScript">    The R script to execute.</param>
     ''' <param name="strNewComment">   Shown as a comment. If this parameter is "" then shows 
     '''                                <paramref name="strNewScript"/> as the comment.</param>
-    ''' <param name="bClearScriptCmd"> (Optional) If true then the command buffer is flushed 
-    '''                                before <paramref name="strNewScript"/> is processed. 
-    '''                                Otherwise <paramref name="strNewScript"/> is treated as a 
-    '''                                continuation of the previous string that was sent to this 
-    '''                                function.</param>
-    Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String, Optional bClearScriptCmd As Boolean = True)
-        Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
-
-        'by default, flush out any unexecuted full or partial commands
-        If bClearScriptCmd Then
-            strScriptCmd = ""
-        End If
+    ''' 
+    ''' <returns> Any text at the end of <paramref name="strNewScript"/> that was not executed.
+    '''           If all the text in <paramref name="strNewScript"/> was executed then returns "".
+    '''           </returns>
+    Public Function RunScriptFromWindow(strNewScript As String, strNewComment As String) As String
+        Dim strScriptCmd As String = ""
 
         'for each line in script
         For Each strScriptLine As String In strNewScript.Split(Environment.NewLine)
@@ -240,9 +234,6 @@ Public Class RLink
                 strLast3Chars = strTrimmedLine.Substring(strTrimmedLine.Length - 3)
             End If
             If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" OrElse iNumOpenCurlies <> iNumClosedCurlies Then
-                If Not bClearScriptCmd Then 'only add carriage return if executing a single line (not needed when executing entire script window or selected text)
-                    strScriptCmd &= vbCrLf
-                End If
                 Continue For
             End If
 
@@ -255,7 +246,8 @@ Public Class RLink
             strScriptCmd = ""
             strNewComment = ""
         Next
-    End Sub
+        Return strScriptCmd
+    End Function
 
     Public Sub CloseREngine()
         If clsEngine IsNot Nothing Then
