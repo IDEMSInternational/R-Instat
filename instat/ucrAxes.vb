@@ -20,10 +20,13 @@ Public Class ucrAxes
     Public bIsX As Boolean
     Public clsXYlabTitleFunction As New RFunction
     Public clsXYScaleContinuousFunction As New RFunction
+    Public clsXYScaleDateFunction As New RFunction
     Public clsLimitsFunction As New RFunction
     Public clsBaseOperator As New ROperator
     Public clsMajorBreaksSeqFunction As New RFunction
     Public clsMinorBreaksSeqFunction As New RFunction
+    Public clsXYScaleDateBreakOperator As New ROperator
+    Public clsXYScaleDateLimitFunction As New RFunction
     Public strAxis As String
     'e.g. discrete, continuous
     Public strAxisType As String
@@ -185,10 +188,33 @@ Public Class ucrAxes
         ucrChkExpand.AddToLinkedControls(ucrInputExpand, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
         ucrInputExpand.SetValidationTypeAsNumericList()
 
+        'Date X Scale
+        ucrNudDateBreak.SetParameter(New RParameter("value", 0, bNewIncludeArgumentName:=False))
+
+        ucrInputComboDateBreak.SetParameter(New RParameter("duration", 1, bNewIncludeArgumentName:=False))
+        ucrInputComboDateBreak.SetItems({"sec", "min", "hour", "day", "week", "month", "year"})
+        ucrInputComboDateBreak.SetName("year")
+        ucrInputComboDateBreak.SetDropDownStyleAsNonEditable()
+        ucrInputComboDateBreak.AddQuotesIfUnrecognised = False
+
+        ucrDtpLowerLimit.SetParameter(New RParameter("lowerlimit", 0, bNewIncludeArgumentName:=False))
+        ucrDtpUpperLimit.SetParameter(New RParameter("upperLimit", 1, bNewIncludeArgumentName:=False))
+
+        ucrChkBreaks.SetText("Breaks")
+        ucrChkBreaks.AddToLinkedControls(ucrInputComboDateBreak, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBreaks.AddToLinkedControls(ucrNudDateBreak, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkLimits.AddToLinkedControls(ucrDtpLowerLimit, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLimits.AddToLinkedControls(ucrDtpUpperLimit, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrDtpUpperLimit.SetLinkedDisplayControl(lblXScalDateUpperLimit)
+        ucrDtpLowerLimit.SetLinkedDisplayControl(lbXscaleDateLowerLimit)
+
+        ucrChkLimits.SetText("Limits")
+
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewXYScaleDateFuntion As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempBreaksParam As RParameter
         Dim clsTempMinorBreaksParam As RParameter
 
@@ -218,6 +244,7 @@ Public Class ucrAxes
         ucrInputAxisType.SetName(strAxisType)
 
         clsXYlabTitleFunction = clsNewXYlabTitleFunction
+        clsXYScaleDateFunction = clsNewXYScaleDateFuntion
         clsXYScaleContinuousFunction = clsNewXYScaleContinuousFunction
 
         'TODO these could be passed through as a dictionary of scale functions instead of searched
@@ -257,6 +284,23 @@ Public Class ucrAxes
             clsMinorBreaksSeqFunction.SetRCommand("seq")
         End If
 
+        If clsXYScaleDateFunction.ContainsParameter("date_breaks") Then
+            clsXYScaleDateBreakOperator = clsXYScaleDateFunction.GetParameter("date_breaks").clsArgumentCodeStructure
+        Else
+            clsXYScaleDateBreakOperator = New ROperator
+            'clsXYScaleDateBreakOperator.SetOperation("")
+            clsXYScaleDateBreakOperator.bToScriptAsRString = True
+            clsXYScaleDateFunction.AddParameter("date_breaks", clsROperatorParameter:=clsXYScaleDateBreakOperator)
+        End If
+
+        If clsXYScaleDateFunction.ContainsParameter("limits") Then
+            clsXYScaleDateLimitFunction = clsXYScaleDateFunction.GetParameter("limits").clsArgumentCodeStructure
+        Else
+            clsXYScaleDateLimitFunction = New RFunction
+            clsXYScaleDateLimitFunction.SetRCommand("c")
+            clsXYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsXYScaleDateLimitFunction)
+        End If
+
         ucrPnlAxisTitle.SetRCode(clsXYlabTitleFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrInputTitle.SetRCode(clsXYlabTitleFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
@@ -279,6 +323,16 @@ Public Class ucrAxes
         ucrPnlMajorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrInputMajorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrInputMajorBreaksLabels.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+
+        'Scale_x_Date
+        ucrChkBreaks.SetRCode(clsXYScaleDateFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkLimits.SetRCode(clsXYScaleDateFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+
+        ucrNudDateBreak.SetRCode(clsXYScaleDateBreakOperator, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputComboDateBreak.SetRCode(clsXYScaleDateBreakOperator, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+
+        ucrDtpUpperLimit.SetRCode(clsXYScaleDateLimitFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrDtpLowerLimit.SetRCode(clsXYScaleDateLimitFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         'Temp disabled, not yet implemented
         ucrInputMajorBreaksInStepsOf.SetRCode(clsMajorBreaksSeqFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
@@ -333,6 +387,11 @@ Public Class ucrAxes
 
     Private Sub ucrInputAxisType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAxisType.ControlValueChanged
         SetAxisTypeControls()
+        If strAxisType.ToLower = "date" Then
+            clsBaseOperator.AddParameter("scale" & "_" & strAxis & "_" & strAxisType, clsRFunctionParameter:=clsXYScaleDateFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & strAxisType)
+        End If
     End Sub
 
     Private Sub SetAxisTypeControls()
@@ -341,6 +400,7 @@ Public Class ucrAxes
         grpMajorBreaks.Hide()
         grpMinorBreaks.Hide()
         grpScales.Hide()
+        grpDateScale.Hide()
         If strAxisType.ToLower = "continuous" Then
             'show continous panels
             'TODO put controls in panels so group boxes can be used for multiple cases
@@ -351,6 +411,10 @@ Public Class ucrAxes
             'show discrete panels
         ElseIf strAxisType.ToLower = "date" Then
             'show date panels
+            grpDateScale.Show()
+            grpMajorBreaks.Hide()
+            grpMinorBreaks.Hide()
+            grpScales.Hide()
         End If
     End Sub
 
@@ -418,4 +482,5 @@ Public Class ucrAxes
         End If
         AddRemoveContinuousXYScales()
     End Sub
+
 End Class
