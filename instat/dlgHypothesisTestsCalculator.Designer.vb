@@ -1163,11 +1163,12 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'Button5
         '
+        Me.Button5.AccessibleDescription = "cmdMedian"
         Me.Button5.Location = New System.Drawing.Point(76, 146)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(75, 23)
         Me.Button5.TabIndex = 4
-        Me.Button5.Text = "Button5"
+        Me.Button5.Text = "median"
         Me.Button5.UseVisualStyleBackColor = True
         '
         'Button6
