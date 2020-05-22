@@ -104,9 +104,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.grpCoin = New System.Windows.Forms.GroupBox()
         Me.g = New System.Windows.Forms.GroupBox()
-        Me.Button16 = New System.Windows.Forms.Button()
-        Me.Button15 = New System.Windows.Forms.Button()
-        Me.Button14 = New System.Windows.Forms.Button()
+        Me.cmdConover = New System.Windows.Forms.Button()
+        Me.cmdFligner1 = New System.Windows.Forms.Button()
+        Me.cmdAnsari1 = New System.Windows.Forms.Button()
         Me.cmdMood1 = New System.Windows.Forms.Button()
         Me.cmdKlotz = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
@@ -1053,9 +1053,9 @@ Partial Class dlgHypothesisTestsCalculator
         'g
         '
         Me.g.AccessibleDescription = "grpScale"
-        Me.g.Controls.Add(Me.Button16)
-        Me.g.Controls.Add(Me.Button15)
-        Me.g.Controls.Add(Me.Button14)
+        Me.g.Controls.Add(Me.cmdConover)
+        Me.g.Controls.Add(Me.cmdFligner1)
+        Me.g.Controls.Add(Me.cmdAnsari1)
         Me.g.Controls.Add(Me.cmdMood1)
         Me.g.Controls.Add(Me.cmdKlotz)
         Me.g.Controls.Add(Me.cmdTaha)
@@ -1066,32 +1066,32 @@ Partial Class dlgHypothesisTestsCalculator
         Me.g.TabStop = False
         Me.g.Text = "Scale"
         '
-        'Button16
+        'cmdConover
         '
-        Me.Button16.Location = New System.Drawing.Point(176, 51)
-        Me.Button16.Name = "Button16"
-        Me.Button16.Size = New System.Drawing.Size(75, 23)
-        Me.Button16.TabIndex = 6
-        Me.Button16.Text = "Button16"
-        Me.Button16.UseVisualStyleBackColor = True
+        Me.cmdConover.Location = New System.Drawing.Point(176, 51)
+        Me.cmdConover.Name = "cmdConover"
+        Me.cmdConover.Size = New System.Drawing.Size(75, 23)
+        Me.cmdConover.TabIndex = 6
+        Me.cmdConover.Text = "conover"
+        Me.cmdConover.UseVisualStyleBackColor = True
         '
-        'Button15
+        'cmdFligner1
         '
-        Me.Button15.Location = New System.Drawing.Point(95, 50)
-        Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(75, 23)
-        Me.Button15.TabIndex = 5
-        Me.Button15.Text = "Button15"
-        Me.Button15.UseVisualStyleBackColor = True
+        Me.cmdFligner1.Location = New System.Drawing.Point(95, 50)
+        Me.cmdFligner1.Name = "cmdFligner1"
+        Me.cmdFligner1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFligner1.TabIndex = 5
+        Me.cmdFligner1.Text = "fligner"
+        Me.cmdFligner1.UseVisualStyleBackColor = True
         '
-        'Button14
+        'cmdAnsari1
         '
-        Me.Button14.Location = New System.Drawing.Point(14, 48)
-        Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(75, 23)
-        Me.Button14.TabIndex = 4
-        Me.Button14.Text = "Button14"
-        Me.Button14.UseVisualStyleBackColor = True
+        Me.cmdAnsari1.Location = New System.Drawing.Point(14, 48)
+        Me.cmdAnsari1.Name = "cmdAnsari1"
+        Me.cmdAnsari1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdAnsari1.TabIndex = 4
+        Me.cmdAnsari1.Text = "ansari"
+        Me.cmdAnsari1.UseVisualStyleBackColor = True
         '
         'cmdMood1
         '
@@ -1466,9 +1466,9 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents grpSymmetry As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents grpLocation As GroupBox
-    Friend WithEvents Button16 As Button
-    Friend WithEvents Button15 As Button
-    Friend WithEvents Button14 As Button
+    Friend WithEvents cmdConover As Button
+    Friend WithEvents cmdFligner1 As Button
+    Friend WithEvents cmdAnsari1 As Button
     Friend WithEvents cmdMood1 As Button
     Friend WithEvents cmdKlotz As Button
     Friend WithEvents Button23 As Button
