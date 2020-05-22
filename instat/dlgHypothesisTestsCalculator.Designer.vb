@@ -107,7 +107,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.Button16 = New System.Windows.Forms.Button()
         Me.Button15 = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
-        Me.Button13 = New System.Windows.Forms.Button()
+        Me.cmdMood1 = New System.Windows.Forms.Button()
         Me.cmdKlotz = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.Button23 = New System.Windows.Forms.Button()
@@ -1056,7 +1056,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.g.Controls.Add(Me.Button16)
         Me.g.Controls.Add(Me.Button15)
         Me.g.Controls.Add(Me.Button14)
-        Me.g.Controls.Add(Me.Button13)
+        Me.g.Controls.Add(Me.cmdMood1)
         Me.g.Controls.Add(Me.cmdKlotz)
         Me.g.Controls.Add(Me.cmdTaha)
         Me.g.Location = New System.Drawing.Point(342, 29)
@@ -1093,14 +1093,14 @@ Partial Class dlgHypothesisTestsCalculator
         Me.Button14.Text = "Button14"
         Me.Button14.UseVisualStyleBackColor = True
         '
-        'Button13
+        'cmdMood1
         '
-        Me.Button13.Location = New System.Drawing.Point(172, 19)
-        Me.Button13.Name = "Button13"
-        Me.Button13.Size = New System.Drawing.Size(75, 23)
-        Me.Button13.TabIndex = 3
-        Me.Button13.Text = "Button13"
-        Me.Button13.UseVisualStyleBackColor = True
+        Me.cmdMood1.Location = New System.Drawing.Point(172, 19)
+        Me.cmdMood1.Name = "cmdMood1"
+        Me.cmdMood1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdMood1.TabIndex = 3
+        Me.cmdMood1.Text = "mood"
+        Me.cmdMood1.UseVisualStyleBackColor = True
         '
         'cmdKlotz
         '
@@ -1469,7 +1469,7 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents Button16 As Button
     Friend WithEvents Button15 As Button
     Friend WithEvents Button14 As Button
-    Friend WithEvents Button13 As Button
+    Friend WithEvents cmdMood1 As Button
     Friend WithEvents cmdKlotz As Button
     Friend WithEvents Button23 As Button
     Friend WithEvents Button22 As Button
