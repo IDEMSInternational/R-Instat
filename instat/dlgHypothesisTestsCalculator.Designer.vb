@@ -103,11 +103,11 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.grpCoin = New System.Windows.Forms.GroupBox()
-        Me.grpLocation = New System.Windows.Forms.GroupBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.grpSymmetry = New System.Windows.Forms.GroupBox()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.g = New System.Windows.Forms.GroupBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.grpSymmetry = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.grpLocation = New System.Windows.Forms.GroupBox()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1015,39 +1015,22 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpCoin.Controls.Add(Me.grpSymmetry)
         Me.grpCoin.Controls.Add(Me.GroupBox2)
         Me.grpCoin.Controls.Add(Me.grpLocation)
-        Me.grpCoin.Location = New System.Drawing.Point(60, 69)
+        Me.grpCoin.Location = New System.Drawing.Point(77, 63)
         Me.grpCoin.Name = "grpCoin"
         Me.grpCoin.Size = New System.Drawing.Size(632, 264)
         Me.grpCoin.TabIndex = 22
         Me.grpCoin.TabStop = False
         Me.grpCoin.Text = "Coin"
         '
-        'grpLocation
+        'g
         '
-        Me.grpLocation.Location = New System.Drawing.Point(7, 21)
-        Me.grpLocation.Name = "grpLocation"
-        Me.grpLocation.Size = New System.Drawing.Size(200, 100)
-        Me.grpLocation.TabIndex = 0
-        Me.grpLocation.TabStop = False
-        Me.grpLocation.Text = "Location"
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Location = New System.Drawing.Point(6, 126)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(200, 100)
-        Me.GroupBox2.TabIndex = 1
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "GroupBox2"
-        '
-        'grpSymmetry
-        '
-        Me.grpSymmetry.Location = New System.Drawing.Point(213, 25)
-        Me.grpSymmetry.Name = "grpSymmetry"
-        Me.grpSymmetry.Size = New System.Drawing.Size(200, 100)
-        Me.grpSymmetry.TabIndex = 2
-        Me.grpSymmetry.TabStop = False
-        Me.grpSymmetry.Text = "Symmetry"
+        Me.g.AccessibleDescription = "grpScale"
+        Me.g.Location = New System.Drawing.Point(419, 29)
+        Me.g.Name = "g"
+        Me.g.Size = New System.Drawing.Size(200, 100)
+        Me.g.TabIndex = 4
+        Me.g.TabStop = False
+        Me.g.Text = "Scale"
         '
         'GroupBox4
         '
@@ -1058,14 +1041,33 @@ Partial Class dlgHypothesisTestsCalculator
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "GroupBox4"
         '
-        'g
+        'grpSymmetry
         '
-        Me.g.Location = New System.Drawing.Point(419, 29)
-        Me.g.Name = "g"
-        Me.g.Size = New System.Drawing.Size(200, 100)
-        Me.g.TabIndex = 4
-        Me.g.TabStop = False
-        Me.g.Text = "GroupBox5"
+        Me.grpSymmetry.Location = New System.Drawing.Point(213, 25)
+        Me.grpSymmetry.Name = "grpSymmetry"
+        Me.grpSymmetry.Size = New System.Drawing.Size(200, 100)
+        Me.grpSymmetry.TabIndex = 2
+        Me.grpSymmetry.TabStop = False
+        Me.grpSymmetry.Text = "Symmetry"
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.AccessibleDescription = "grpCorrelation"
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 126)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(200, 100)
+        Me.GroupBox2.TabIndex = 1
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Correlation"
+        '
+        'grpLocation
+        '
+        Me.grpLocation.Location = New System.Drawing.Point(7, 21)
+        Me.grpLocation.Name = "grpLocation"
+        Me.grpLocation.Size = New System.Drawing.Size(200, 100)
+        Me.grpLocation.TabIndex = 0
+        Me.grpLocation.TabStop = False
+        Me.grpLocation.Text = "Location"
         '
         'dlgHypothesisTestsCalculator
         '
