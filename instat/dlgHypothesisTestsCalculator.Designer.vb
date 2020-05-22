@@ -1123,11 +1123,12 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'Button1
         '
+        Me.Button1.AccessibleDescription = "cmdOneway"
         Me.Button1.Location = New System.Drawing.Point(6, 27)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Button1"
+        Me.Button1.Text = "oneway"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
