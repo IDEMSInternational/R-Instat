@@ -110,16 +110,16 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdMood1 = New System.Windows.Forms.Button()
         Me.cmdKlotz = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.Button23 = New System.Windows.Forms.Button()
-        Me.Button22 = New System.Windows.Forms.Button()
-        Me.Button21 = New System.Windows.Forms.Button()
+        Me.cmdLbl = New System.Windows.Forms.Button()
+        Me.cmdCmh = New System.Windows.Forms.Button()
+        Me.cmdChisq1 = New System.Windows.Forms.Button()
         Me.grpSymmetry = New System.Windows.Forms.GroupBox()
         Me.cmdQuade1 = New System.Windows.Forms.Button()
         Me.cmdFriedman1 = New System.Windows.Forms.Button()
         Me.cmdWilcoksign = New System.Windows.Forms.Button()
         Me.cmdSign = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Button20 = New System.Windows.Forms.Button()
+        Me.cmdKoziol = New System.Windows.Forms.Button()
         Me.cmdQuadrant = New System.Windows.Forms.Button()
         Me.cmdFisyat = New System.Windows.Forms.Button()
         Me.cmdSpearman = New System.Windows.Forms.Button()
@@ -1043,9 +1043,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpCoin.Controls.Add(Me.grpSymmetry)
         Me.grpCoin.Controls.Add(Me.GroupBox2)
         Me.grpCoin.Controls.Add(Me.grpLocation)
-        Me.grpCoin.Location = New System.Drawing.Point(85, 31)
+        Me.grpCoin.Location = New System.Drawing.Point(241, 97)
         Me.grpCoin.Name = "grpCoin"
-        Me.grpCoin.Size = New System.Drawing.Size(632, 441)
+        Me.grpCoin.Size = New System.Drawing.Size(511, 246)
         Me.grpCoin.TabIndex = 22
         Me.grpCoin.TabStop = False
         Me.grpCoin.Text = "Coin"
@@ -1059,54 +1059,54 @@ Partial Class dlgHypothesisTestsCalculator
         Me.g.Controls.Add(Me.cmdMood1)
         Me.g.Controls.Add(Me.cmdKlotz)
         Me.g.Controls.Add(Me.cmdTaha)
-        Me.g.Location = New System.Drawing.Point(342, 29)
+        Me.g.Location = New System.Drawing.Point(343, 21)
         Me.g.Name = "g"
-        Me.g.Size = New System.Drawing.Size(277, 100)
+        Me.g.Size = New System.Drawing.Size(165, 108)
         Me.g.TabIndex = 4
         Me.g.TabStop = False
         Me.g.Text = "Scale"
         '
         'cmdConover
         '
-        Me.cmdConover.Location = New System.Drawing.Point(176, 51)
+        Me.cmdConover.Location = New System.Drawing.Point(81, 73)
         Me.cmdConover.Name = "cmdConover"
-        Me.cmdConover.Size = New System.Drawing.Size(75, 23)
+        Me.cmdConover.Size = New System.Drawing.Size(80, 30)
         Me.cmdConover.TabIndex = 6
         Me.cmdConover.Text = "conover"
         Me.cmdConover.UseVisualStyleBackColor = True
         '
         'cmdFligner1
         '
-        Me.cmdFligner1.Location = New System.Drawing.Point(95, 50)
+        Me.cmdFligner1.Location = New System.Drawing.Point(2, 73)
         Me.cmdFligner1.Name = "cmdFligner1"
-        Me.cmdFligner1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFligner1.Size = New System.Drawing.Size(80, 30)
         Me.cmdFligner1.TabIndex = 5
         Me.cmdFligner1.Text = "fligner"
         Me.cmdFligner1.UseVisualStyleBackColor = True
         '
         'cmdAnsari1
         '
-        Me.cmdAnsari1.Location = New System.Drawing.Point(14, 48)
+        Me.cmdAnsari1.Location = New System.Drawing.Point(81, 44)
         Me.cmdAnsari1.Name = "cmdAnsari1"
-        Me.cmdAnsari1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdAnsari1.Size = New System.Drawing.Size(80, 30)
         Me.cmdAnsari1.TabIndex = 4
         Me.cmdAnsari1.Text = "ansari"
         Me.cmdAnsari1.UseVisualStyleBackColor = True
         '
         'cmdMood1
         '
-        Me.cmdMood1.Location = New System.Drawing.Point(172, 19)
+        Me.cmdMood1.Location = New System.Drawing.Point(2, 44)
         Me.cmdMood1.Name = "cmdMood1"
-        Me.cmdMood1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdMood1.Size = New System.Drawing.Size(80, 30)
         Me.cmdMood1.TabIndex = 3
         Me.cmdMood1.Text = "mood"
         Me.cmdMood1.UseVisualStyleBackColor = True
         '
         'cmdKlotz
         '
-        Me.cmdKlotz.Location = New System.Drawing.Point(85, 19)
+        Me.cmdKlotz.Location = New System.Drawing.Point(81, 15)
         Me.cmdKlotz.Name = "cmdKlotz"
-        Me.cmdKlotz.Size = New System.Drawing.Size(75, 23)
+        Me.cmdKlotz.Size = New System.Drawing.Size(80, 30)
         Me.cmdKlotz.TabIndex = 2
         Me.cmdKlotz.Text = "klotz"
         Me.cmdKlotz.UseVisualStyleBackColor = True
@@ -1114,42 +1114,42 @@ Partial Class dlgHypothesisTestsCalculator
         'GroupBox4
         '
         Me.GroupBox4.AccessibleDescription = "grpContingency"
-        Me.GroupBox4.Controls.Add(Me.Button23)
-        Me.GroupBox4.Controls.Add(Me.Button22)
-        Me.GroupBox4.Controls.Add(Me.Button21)
-        Me.GroupBox4.Location = New System.Drawing.Point(342, 291)
+        Me.GroupBox4.Controls.Add(Me.cmdLbl)
+        Me.GroupBox4.Controls.Add(Me.cmdCmh)
+        Me.GroupBox4.Controls.Add(Me.cmdChisq1)
+        Me.GroupBox4.Location = New System.Drawing.Point(178, 131)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(200, 100)
+        Me.GroupBox4.Size = New System.Drawing.Size(165, 108)
         Me.GroupBox4.TabIndex = 3
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Contingency"
         '
-        'Button23
+        'cmdLbl
         '
-        Me.Button23.Location = New System.Drawing.Point(85, 71)
-        Me.Button23.Name = "Button23"
-        Me.Button23.Size = New System.Drawing.Size(75, 23)
-        Me.Button23.TabIndex = 3
-        Me.Button23.Text = "Button23"
-        Me.Button23.UseVisualStyleBackColor = True
+        Me.cmdLbl.Location = New System.Drawing.Point(45, 49)
+        Me.cmdLbl.Name = "cmdLbl"
+        Me.cmdLbl.Size = New System.Drawing.Size(80, 30)
+        Me.cmdLbl.TabIndex = 3
+        Me.cmdLbl.Text = "lbl"
+        Me.cmdLbl.UseVisualStyleBackColor = True
         '
-        'Button22
+        'cmdCmh
         '
-        Me.Button22.Location = New System.Drawing.Point(119, 21)
-        Me.Button22.Name = "Button22"
-        Me.Button22.Size = New System.Drawing.Size(75, 23)
-        Me.Button22.TabIndex = 2
-        Me.Button22.Text = "Button22"
-        Me.Button22.UseVisualStyleBackColor = True
+        Me.cmdCmh.Location = New System.Drawing.Point(81, 20)
+        Me.cmdCmh.Name = "cmdCmh"
+        Me.cmdCmh.Size = New System.Drawing.Size(80, 30)
+        Me.cmdCmh.TabIndex = 2
+        Me.cmdCmh.Text = "cmh"
+        Me.cmdCmh.UseVisualStyleBackColor = True
         '
-        'Button21
+        'cmdChisq1
         '
-        Me.Button21.Location = New System.Drawing.Point(6, 21)
-        Me.Button21.Name = "Button21"
-        Me.Button21.Size = New System.Drawing.Size(75, 23)
-        Me.Button21.TabIndex = 1
-        Me.Button21.Text = "Button21"
-        Me.Button21.UseVisualStyleBackColor = True
+        Me.cmdChisq1.Location = New System.Drawing.Point(2, 20)
+        Me.cmdChisq1.Name = "cmdChisq1"
+        Me.cmdChisq1.Size = New System.Drawing.Size(80, 30)
+        Me.cmdChisq1.TabIndex = 1
+        Me.cmdChisq1.Text = "chisq"
+        Me.cmdChisq1.UseVisualStyleBackColor = True
         '
         'grpSymmetry
         '
@@ -1157,45 +1157,45 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpSymmetry.Controls.Add(Me.cmdFriedman1)
         Me.grpSymmetry.Controls.Add(Me.cmdWilcoksign)
         Me.grpSymmetry.Controls.Add(Me.cmdSign)
-        Me.grpSymmetry.Location = New System.Drawing.Point(253, 149)
+        Me.grpSymmetry.Location = New System.Drawing.Point(176, 21)
         Me.grpSymmetry.Name = "grpSymmetry"
-        Me.grpSymmetry.Size = New System.Drawing.Size(200, 100)
+        Me.grpSymmetry.Size = New System.Drawing.Size(165, 108)
         Me.grpSymmetry.TabIndex = 2
         Me.grpSymmetry.TabStop = False
         Me.grpSymmetry.Text = "Symmetry"
         '
         'cmdQuade1
         '
-        Me.cmdQuade1.Location = New System.Drawing.Point(117, 63)
+        Me.cmdQuade1.Location = New System.Drawing.Point(80, 47)
         Me.cmdQuade1.Name = "cmdQuade1"
-        Me.cmdQuade1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdQuade1.Size = New System.Drawing.Size(80, 30)
         Me.cmdQuade1.TabIndex = 4
         Me.cmdQuade1.Text = "quade"
         Me.cmdQuade1.UseVisualStyleBackColor = True
         '
         'cmdFriedman1
         '
-        Me.cmdFriedman1.Location = New System.Drawing.Point(6, 63)
+        Me.cmdFriedman1.Location = New System.Drawing.Point(1, 47)
         Me.cmdFriedman1.Name = "cmdFriedman1"
-        Me.cmdFriedman1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFriedman1.Size = New System.Drawing.Size(80, 30)
         Me.cmdFriedman1.TabIndex = 3
         Me.cmdFriedman1.Text = "friedman"
         Me.cmdFriedman1.UseVisualStyleBackColor = True
         '
         'cmdWilcoksign
         '
-        Me.cmdWilcoksign.Location = New System.Drawing.Point(103, 21)
+        Me.cmdWilcoksign.Location = New System.Drawing.Point(80, 18)
         Me.cmdWilcoksign.Name = "cmdWilcoksign"
-        Me.cmdWilcoksign.Size = New System.Drawing.Size(75, 23)
+        Me.cmdWilcoksign.Size = New System.Drawing.Size(80, 30)
         Me.cmdWilcoksign.TabIndex = 2
         Me.cmdWilcoksign.Text = "wilcoksign"
         Me.cmdWilcoksign.UseVisualStyleBackColor = True
         '
         'cmdSign
         '
-        Me.cmdSign.Location = New System.Drawing.Point(4, 26)
+        Me.cmdSign.Location = New System.Drawing.Point(1, 18)
         Me.cmdSign.Name = "cmdSign"
-        Me.cmdSign.Size = New System.Drawing.Size(81, 23)
+        Me.cmdSign.Size = New System.Drawing.Size(80, 30)
         Me.cmdSign.TabIndex = 1
         Me.cmdSign.Text = "sign"
         Me.cmdSign.UseVisualStyleBackColor = True
@@ -1203,49 +1203,49 @@ Partial Class dlgHypothesisTestsCalculator
         'GroupBox2
         '
         Me.GroupBox2.AccessibleDescription = "grpCorrelation"
-        Me.GroupBox2.Controls.Add(Me.Button20)
+        Me.GroupBox2.Controls.Add(Me.cmdKoziol)
         Me.GroupBox2.Controls.Add(Me.cmdQuadrant)
         Me.GroupBox2.Controls.Add(Me.cmdFisyat)
         Me.GroupBox2.Controls.Add(Me.cmdSpearman)
-        Me.GroupBox2.Location = New System.Drawing.Point(29, 237)
+        Me.GroupBox2.Location = New System.Drawing.Point(7, 128)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(200, 154)
+        Me.GroupBox2.Size = New System.Drawing.Size(165, 108)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Correlation"
         '
-        'Button20
+        'cmdKoziol
         '
-        Me.Button20.Location = New System.Drawing.Point(87, 58)
-        Me.Button20.Name = "Button20"
-        Me.Button20.Size = New System.Drawing.Size(75, 23)
-        Me.Button20.TabIndex = 4
-        Me.Button20.Text = "Button20"
-        Me.Button20.UseVisualStyleBackColor = True
+        Me.cmdKoziol.Location = New System.Drawing.Point(81, 46)
+        Me.cmdKoziol.Name = "cmdKoziol"
+        Me.cmdKoziol.Size = New System.Drawing.Size(80, 30)
+        Me.cmdKoziol.TabIndex = 4
+        Me.cmdKoziol.Text = "koziol"
+        Me.cmdKoziol.UseVisualStyleBackColor = True
         '
         'cmdQuadrant
         '
-        Me.cmdQuadrant.Location = New System.Drawing.Point(6, 63)
+        Me.cmdQuadrant.Location = New System.Drawing.Point(1, 46)
         Me.cmdQuadrant.Name = "cmdQuadrant"
-        Me.cmdQuadrant.Size = New System.Drawing.Size(75, 23)
+        Me.cmdQuadrant.Size = New System.Drawing.Size(80, 30)
         Me.cmdQuadrant.TabIndex = 3
         Me.cmdQuadrant.Text = "quadrant"
         Me.cmdQuadrant.UseVisualStyleBackColor = True
         '
         'cmdFisyat
         '
-        Me.cmdFisyat.Location = New System.Drawing.Point(87, 21)
+        Me.cmdFisyat.Location = New System.Drawing.Point(81, 17)
         Me.cmdFisyat.Name = "cmdFisyat"
-        Me.cmdFisyat.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFisyat.Size = New System.Drawing.Size(80, 30)
         Me.cmdFisyat.TabIndex = 2
         Me.cmdFisyat.Text = "fisyat"
         Me.cmdFisyat.UseVisualStyleBackColor = True
         '
         'cmdSpearman
         '
-        Me.cmdSpearman.Location = New System.Drawing.Point(6, 26)
+        Me.cmdSpearman.Location = New System.Drawing.Point(2, 17)
         Me.cmdSpearman.Name = "cmdSpearman"
-        Me.cmdSpearman.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSpearman.Size = New System.Drawing.Size(80, 30)
         Me.cmdSpearman.TabIndex = 1
         Me.cmdSpearman.Text = "spearman"
         Me.cmdSpearman.UseVisualStyleBackColor = True
@@ -1260,16 +1260,16 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpLocation.Controls.Add(Me.cmdOneway1)
         Me.grpLocation.Location = New System.Drawing.Point(7, 21)
         Me.grpLocation.Name = "grpLocation"
-        Me.grpLocation.Size = New System.Drawing.Size(184, 135)
+        Me.grpLocation.Size = New System.Drawing.Size(165, 108)
         Me.grpLocation.TabIndex = 0
         Me.grpLocation.TabStop = False
         Me.grpLocation.Text = "Location"
         '
         'cmdSavage
         '
-        Me.cmdSavage.Location = New System.Drawing.Point(87, 98)
+        Me.cmdSavage.Location = New System.Drawing.Point(80, 75)
         Me.cmdSavage.Name = "cmdSavage"
-        Me.cmdSavage.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSavage.Size = New System.Drawing.Size(80, 30)
         Me.cmdSavage.TabIndex = 5
         Me.cmdSavage.Text = "savage"
         Me.cmdSavage.UseVisualStyleBackColor = True
@@ -1277,9 +1277,9 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdMedian1
         '
         Me.cmdMedian1.AccessibleDescription = ""
-        Me.cmdMedian1.Location = New System.Drawing.Point(6, 96)
+        Me.cmdMedian1.Location = New System.Drawing.Point(1, 75)
         Me.cmdMedian1.Name = "cmdMedian1"
-        Me.cmdMedian1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdMedian1.Size = New System.Drawing.Size(80, 30)
         Me.cmdMedian1.TabIndex = 4
         Me.cmdMedian1.Text = "median"
         Me.cmdMedian1.UseVisualStyleBackColor = True
@@ -1287,9 +1287,9 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdNormal
         '
         Me.cmdNormal.AccessibleDescription = ""
-        Me.cmdNormal.Location = New System.Drawing.Point(87, 59)
+        Me.cmdNormal.Location = New System.Drawing.Point(80, 46)
         Me.cmdNormal.Name = "cmdNormal"
-        Me.cmdNormal.Size = New System.Drawing.Size(75, 23)
+        Me.cmdNormal.Size = New System.Drawing.Size(80, 30)
         Me.cmdNormal.TabIndex = 3
         Me.cmdNormal.Text = "normal"
         Me.cmdNormal.UseVisualStyleBackColor = True
@@ -1297,9 +1297,9 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdKruskal1
         '
         Me.cmdKruskal1.AccessibleDescription = ""
-        Me.cmdKruskal1.Location = New System.Drawing.Point(6, 59)
+        Me.cmdKruskal1.Location = New System.Drawing.Point(1, 46)
         Me.cmdKruskal1.Name = "cmdKruskal1"
-        Me.cmdKruskal1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdKruskal1.Size = New System.Drawing.Size(80, 30)
         Me.cmdKruskal1.TabIndex = 2
         Me.cmdKruskal1.Text = "kruskal"
         Me.cmdKruskal1.UseVisualStyleBackColor = True
@@ -1307,9 +1307,9 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdWilcox1
         '
         Me.cmdWilcox1.AccessibleDescription = "cmdWilcox"
-        Me.cmdWilcox1.Location = New System.Drawing.Point(80, 27)
+        Me.cmdWilcox1.Location = New System.Drawing.Point(80, 17)
         Me.cmdWilcox1.Name = "cmdWilcox1"
-        Me.cmdWilcox1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdWilcox1.Size = New System.Drawing.Size(80, 30)
         Me.cmdWilcox1.TabIndex = 1
         Me.cmdWilcox1.Text = "wilcox"
         Me.cmdWilcox1.UseVisualStyleBackColor = True
@@ -1318,18 +1318,18 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdOneway1.AccessibleDescription = ""
         Me.cmdOneway1.AccessibleName = ""
-        Me.cmdOneway1.Location = New System.Drawing.Point(6, 27)
+        Me.cmdOneway1.Location = New System.Drawing.Point(1, 17)
         Me.cmdOneway1.Name = "cmdOneway1"
-        Me.cmdOneway1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOneway1.Size = New System.Drawing.Size(80, 30)
         Me.cmdOneway1.TabIndex = 0
         Me.cmdOneway1.Text = "oneway"
         Me.cmdOneway1.UseVisualStyleBackColor = True
         '
         'cmdTaha
         '
-        Me.cmdTaha.Location = New System.Drawing.Point(6, 21)
+        Me.cmdTaha.Location = New System.Drawing.Point(2, 15)
         Me.cmdTaha.Name = "cmdTaha"
-        Me.cmdTaha.Size = New System.Drawing.Size(75, 23)
+        Me.cmdTaha.Size = New System.Drawing.Size(80, 30)
         Me.cmdTaha.TabIndex = 1
         Me.cmdTaha.Text = "taha"
         Me.cmdTaha.UseVisualStyleBackColor = True
@@ -1471,14 +1471,14 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdAnsari1 As Button
     Friend WithEvents cmdMood1 As Button
     Friend WithEvents cmdKlotz As Button
-    Friend WithEvents Button23 As Button
-    Friend WithEvents Button22 As Button
-    Friend WithEvents Button21 As Button
+    Friend WithEvents cmdLbl As Button
+    Friend WithEvents cmdCmh As Button
+    Friend WithEvents cmdChisq1 As Button
     Friend WithEvents cmdQuade1 As Button
     Friend WithEvents cmdFriedman1 As Button
     Friend WithEvents cmdWilcoksign As Button
     Friend WithEvents cmdSign As Button
-    Friend WithEvents Button20 As Button
+    Friend WithEvents cmdKoziol As Button
     Friend WithEvents cmdQuadrant As Button
     Friend WithEvents cmdFisyat As Button
     Friend WithEvents cmdSpearman As Button
