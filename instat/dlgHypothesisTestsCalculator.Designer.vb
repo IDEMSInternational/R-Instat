@@ -120,7 +120,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdSign = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button20 = New System.Windows.Forms.Button()
-        Me.Button19 = New System.Windows.Forms.Button()
+        Me.cmdQuadrant = New System.Windows.Forms.Button()
         Me.cmdFisyat = New System.Windows.Forms.Button()
         Me.cmdSpearman = New System.Windows.Forms.Button()
         Me.grpLocation = New System.Windows.Forms.GroupBox()
@@ -1204,7 +1204,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.GroupBox2.AccessibleDescription = "grpCorrelation"
         Me.GroupBox2.Controls.Add(Me.Button20)
-        Me.GroupBox2.Controls.Add(Me.Button19)
+        Me.GroupBox2.Controls.Add(Me.cmdQuadrant)
         Me.GroupBox2.Controls.Add(Me.cmdFisyat)
         Me.GroupBox2.Controls.Add(Me.cmdSpearman)
         Me.GroupBox2.Location = New System.Drawing.Point(29, 237)
@@ -1223,14 +1223,14 @@ Partial Class dlgHypothesisTestsCalculator
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
-        'Button19
+        'cmdQuadrant
         '
-        Me.Button19.Location = New System.Drawing.Point(6, 63)
-        Me.Button19.Name = "Button19"
-        Me.Button19.Size = New System.Drawing.Size(75, 23)
-        Me.Button19.TabIndex = 3
-        Me.Button19.Text = "Button19"
-        Me.Button19.UseVisualStyleBackColor = True
+        Me.cmdQuadrant.Location = New System.Drawing.Point(6, 63)
+        Me.cmdQuadrant.Name = "cmdQuadrant"
+        Me.cmdQuadrant.Size = New System.Drawing.Size(75, 23)
+        Me.cmdQuadrant.TabIndex = 3
+        Me.cmdQuadrant.Text = "quadrant"
+        Me.cmdQuadrant.UseVisualStyleBackColor = True
         '
         'cmdFisyat
         '
@@ -1479,7 +1479,7 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdWilcoksign As Button
     Friend WithEvents cmdSign As Button
     Friend WithEvents Button20 As Button
-    Friend WithEvents Button19 As Button
+    Friend WithEvents cmdQuadrant As Button
     Friend WithEvents cmdFisyat As Button
     Friend WithEvents cmdSpearman As Button
     Friend WithEvents cmdSavage As Button
