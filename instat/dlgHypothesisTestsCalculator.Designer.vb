@@ -108,12 +108,40 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpSymmetry = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.grpLocation = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.Button12 = New System.Windows.Forms.Button()
+        Me.Button13 = New System.Windows.Forms.Button()
+        Me.Button14 = New System.Windows.Forms.Button()
+        Me.Button15 = New System.Windows.Forms.Button()
+        Me.Button16 = New System.Windows.Forms.Button()
+        Me.Button17 = New System.Windows.Forms.Button()
+        Me.Button18 = New System.Windows.Forms.Button()
+        Me.Button19 = New System.Windows.Forms.Button()
+        Me.Button20 = New System.Windows.Forms.Button()
+        Me.Button21 = New System.Windows.Forms.Button()
+        Me.Button22 = New System.Windows.Forms.Button()
+        Me.Button23 = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
         Me.grpAgricolae.SuspendLayout()
         Me.grpVerification.SuspendLayout()
         Me.grpCoin.SuspendLayout()
+        Me.g.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        Me.grpSymmetry.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.grpLocation.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblTest
@@ -1017,7 +1045,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpCoin.Controls.Add(Me.grpLocation)
         Me.grpCoin.Location = New System.Drawing.Point(77, 63)
         Me.grpCoin.Name = "grpCoin"
-        Me.grpCoin.Size = New System.Drawing.Size(632, 264)
+        Me.grpCoin.Size = New System.Drawing.Size(632, 441)
         Me.grpCoin.TabIndex = 22
         Me.grpCoin.TabStop = False
         Me.grpCoin.Text = "Coin"
@@ -1025,6 +1053,12 @@ Partial Class dlgHypothesisTestsCalculator
         'g
         '
         Me.g.AccessibleDescription = "grpScale"
+        Me.g.Controls.Add(Me.Button16)
+        Me.g.Controls.Add(Me.Button15)
+        Me.g.Controls.Add(Me.Button14)
+        Me.g.Controls.Add(Me.Button13)
+        Me.g.Controls.Add(Me.Button12)
+        Me.g.Controls.Add(Me.Button11)
         Me.g.Location = New System.Drawing.Point(419, 29)
         Me.g.Name = "g"
         Me.g.Size = New System.Drawing.Size(200, 100)
@@ -1035,7 +1069,10 @@ Partial Class dlgHypothesisTestsCalculator
         'GroupBox4
         '
         Me.GroupBox4.AccessibleDescription = "grpContingency"
-        Me.GroupBox4.Location = New System.Drawing.Point(212, 131)
+        Me.GroupBox4.Controls.Add(Me.Button23)
+        Me.GroupBox4.Controls.Add(Me.Button22)
+        Me.GroupBox4.Controls.Add(Me.Button21)
+        Me.GroupBox4.Location = New System.Drawing.Point(342, 291)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(200, 100)
         Me.GroupBox4.TabIndex = 3
@@ -1044,7 +1081,11 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpSymmetry
         '
-        Me.grpSymmetry.Location = New System.Drawing.Point(213, 25)
+        Me.grpSymmetry.Controls.Add(Me.Button10)
+        Me.grpSymmetry.Controls.Add(Me.Button9)
+        Me.grpSymmetry.Controls.Add(Me.Button8)
+        Me.grpSymmetry.Controls.Add(Me.Button7)
+        Me.grpSymmetry.Location = New System.Drawing.Point(310, 159)
         Me.grpSymmetry.Name = "grpSymmetry"
         Me.grpSymmetry.Size = New System.Drawing.Size(200, 100)
         Me.grpSymmetry.TabIndex = 2
@@ -1054,7 +1095,11 @@ Partial Class dlgHypothesisTestsCalculator
         'GroupBox2
         '
         Me.GroupBox2.AccessibleDescription = "grpCorrelation"
-        Me.GroupBox2.Location = New System.Drawing.Point(6, 126)
+        Me.GroupBox2.Controls.Add(Me.Button20)
+        Me.GroupBox2.Controls.Add(Me.Button19)
+        Me.GroupBox2.Controls.Add(Me.Button18)
+        Me.GroupBox2.Controls.Add(Me.Button17)
+        Me.GroupBox2.Location = New System.Drawing.Point(29, 291)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(200, 100)
         Me.GroupBox2.TabIndex = 1
@@ -1063,12 +1108,225 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpLocation
         '
+        Me.grpLocation.Controls.Add(Me.Button6)
+        Me.grpLocation.Controls.Add(Me.Button5)
+        Me.grpLocation.Controls.Add(Me.Button4)
+        Me.grpLocation.Controls.Add(Me.Button3)
+        Me.grpLocation.Controls.Add(Me.Button2)
+        Me.grpLocation.Controls.Add(Me.Button1)
         Me.grpLocation.Location = New System.Drawing.Point(7, 21)
         Me.grpLocation.Name = "grpLocation"
-        Me.grpLocation.Size = New System.Drawing.Size(200, 100)
+        Me.grpLocation.Size = New System.Drawing.Size(238, 174)
         Me.grpLocation.TabIndex = 0
         Me.grpLocation.TabStop = False
         Me.grpLocation.Text = "Location"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(6, 27)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 0
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(80, 27)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 1
+        Me.Button2.Text = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(154, 27)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(75, 23)
+        Me.Button3.TabIndex = 2
+        Me.Button3.Text = "Button3"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(6, 138)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 23)
+        Me.Button4.TabIndex = 3
+        Me.Button4.Text = "Button4"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(76, 146)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(75, 23)
+        Me.Button5.TabIndex = 4
+        Me.Button5.Text = "Button5"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(157, 144)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(75, 23)
+        Me.Button6.TabIndex = 5
+        Me.Button6.Text = "Button6"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(63, 39)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(75, 23)
+        Me.Button7.TabIndex = 1
+        Me.Button7.Text = "Button7"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(71, 47)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(75, 23)
+        Me.Button8.TabIndex = 2
+        Me.Button8.Text = "Button8"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
+        'Button9
+        '
+        Me.Button9.Location = New System.Drawing.Point(79, 55)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(75, 23)
+        Me.Button9.TabIndex = 3
+        Me.Button9.Text = "Button9"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
+        'Button10
+        '
+        Me.Button10.Location = New System.Drawing.Point(87, 63)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(75, 23)
+        Me.Button10.TabIndex = 4
+        Me.Button10.Text = "Button10"
+        Me.Button10.UseVisualStyleBackColor = True
+        '
+        'Button11
+        '
+        Me.Button11.Location = New System.Drawing.Point(63, 39)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(75, 23)
+        Me.Button11.TabIndex = 1
+        Me.Button11.Text = "Button11"
+        Me.Button11.UseVisualStyleBackColor = True
+        '
+        'Button12
+        '
+        Me.Button12.Location = New System.Drawing.Point(71, 47)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(75, 23)
+        Me.Button12.TabIndex = 2
+        Me.Button12.Text = "Button12"
+        Me.Button12.UseVisualStyleBackColor = True
+        '
+        'Button13
+        '
+        Me.Button13.Location = New System.Drawing.Point(79, 55)
+        Me.Button13.Name = "Button13"
+        Me.Button13.Size = New System.Drawing.Size(75, 23)
+        Me.Button13.TabIndex = 3
+        Me.Button13.Text = "Button13"
+        Me.Button13.UseVisualStyleBackColor = True
+        '
+        'Button14
+        '
+        Me.Button14.Location = New System.Drawing.Point(87, 63)
+        Me.Button14.Name = "Button14"
+        Me.Button14.Size = New System.Drawing.Size(75, 23)
+        Me.Button14.TabIndex = 4
+        Me.Button14.Text = "Button14"
+        Me.Button14.UseVisualStyleBackColor = True
+        '
+        'Button15
+        '
+        Me.Button15.Location = New System.Drawing.Point(95, 71)
+        Me.Button15.Name = "Button15"
+        Me.Button15.Size = New System.Drawing.Size(75, 23)
+        Me.Button15.TabIndex = 5
+        Me.Button15.Text = "Button15"
+        Me.Button15.UseVisualStyleBackColor = True
+        '
+        'Button16
+        '
+        Me.Button16.Location = New System.Drawing.Point(103, 79)
+        Me.Button16.Name = "Button16"
+        Me.Button16.Size = New System.Drawing.Size(75, 23)
+        Me.Button16.TabIndex = 6
+        Me.Button16.Text = "Button16"
+        Me.Button16.UseVisualStyleBackColor = True
+        '
+        'Button17
+        '
+        Me.Button17.Location = New System.Drawing.Point(63, 39)
+        Me.Button17.Name = "Button17"
+        Me.Button17.Size = New System.Drawing.Size(75, 23)
+        Me.Button17.TabIndex = 1
+        Me.Button17.Text = "Button17"
+        Me.Button17.UseVisualStyleBackColor = True
+        '
+        'Button18
+        '
+        Me.Button18.Location = New System.Drawing.Point(71, 47)
+        Me.Button18.Name = "Button18"
+        Me.Button18.Size = New System.Drawing.Size(75, 23)
+        Me.Button18.TabIndex = 2
+        Me.Button18.Text = "Button18"
+        Me.Button18.UseVisualStyleBackColor = True
+        '
+        'Button19
+        '
+        Me.Button19.Location = New System.Drawing.Point(79, 55)
+        Me.Button19.Name = "Button19"
+        Me.Button19.Size = New System.Drawing.Size(75, 23)
+        Me.Button19.TabIndex = 3
+        Me.Button19.Text = "Button19"
+        Me.Button19.UseVisualStyleBackColor = True
+        '
+        'Button20
+        '
+        Me.Button20.Location = New System.Drawing.Point(87, 63)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(75, 23)
+        Me.Button20.TabIndex = 4
+        Me.Button20.Text = "Button20"
+        Me.Button20.UseVisualStyleBackColor = True
+        '
+        'Button21
+        '
+        Me.Button21.Location = New System.Drawing.Point(63, 39)
+        Me.Button21.Name = "Button21"
+        Me.Button21.Size = New System.Drawing.Size(75, 23)
+        Me.Button21.TabIndex = 1
+        Me.Button21.Text = "Button21"
+        Me.Button21.UseVisualStyleBackColor = True
+        '
+        'Button22
+        '
+        Me.Button22.Location = New System.Drawing.Point(71, 47)
+        Me.Button22.Name = "Button22"
+        Me.Button22.Size = New System.Drawing.Size(75, 23)
+        Me.Button22.TabIndex = 2
+        Me.Button22.Text = "Button22"
+        Me.Button22.UseVisualStyleBackColor = True
+        '
+        'Button23
+        '
+        Me.Button23.Location = New System.Drawing.Point(79, 55)
+        Me.Button23.Name = "Button23"
+        Me.Button23.Size = New System.Drawing.Size(75, 23)
+        Me.Button23.TabIndex = 3
+        Me.Button23.Text = "Button23"
+        Me.Button23.UseVisualStyleBackColor = True
         '
         'dlgHypothesisTestsCalculator
         '
@@ -1108,6 +1366,11 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpAgricolae.ResumeLayout(False)
         Me.grpVerification.ResumeLayout(False)
         Me.grpCoin.ResumeLayout(False)
+        Me.g.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.grpSymmetry.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.grpLocation.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1197,4 +1460,27 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents grpSymmetry As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents grpLocation As GroupBox
+    Friend WithEvents Button16 As Button
+    Friend WithEvents Button15 As Button
+    Friend WithEvents Button14 As Button
+    Friend WithEvents Button13 As Button
+    Friend WithEvents Button12 As Button
+    Friend WithEvents Button11 As Button
+    Friend WithEvents Button23 As Button
+    Friend WithEvents Button22 As Button
+    Friend WithEvents Button21 As Button
+    Friend WithEvents Button10 As Button
+    Friend WithEvents Button9 As Button
+    Friend WithEvents Button8 As Button
+    Friend WithEvents Button7 As Button
+    Friend WithEvents Button20 As Button
+    Friend WithEvents Button19 As Button
+    Friend WithEvents Button18 As Button
+    Friend WithEvents Button17 As Button
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button1 As Button
 End Class
