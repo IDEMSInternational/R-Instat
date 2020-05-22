@@ -104,33 +104,33 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.grpCoin = New System.Windows.Forms.GroupBox()
         Me.g = New System.Windows.Forms.GroupBox()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.grpSymmetry = New System.Windows.Forms.GroupBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.grpLocation = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button11 = New System.Windows.Forms.Button()
-        Me.Button12 = New System.Windows.Forms.Button()
-        Me.Button13 = New System.Windows.Forms.Button()
-        Me.Button14 = New System.Windows.Forms.Button()
-        Me.Button15 = New System.Windows.Forms.Button()
         Me.Button16 = New System.Windows.Forms.Button()
-        Me.Button17 = New System.Windows.Forms.Button()
-        Me.Button18 = New System.Windows.Forms.Button()
-        Me.Button19 = New System.Windows.Forms.Button()
-        Me.Button20 = New System.Windows.Forms.Button()
-        Me.Button21 = New System.Windows.Forms.Button()
-        Me.Button22 = New System.Windows.Forms.Button()
+        Me.Button15 = New System.Windows.Forms.Button()
+        Me.Button14 = New System.Windows.Forms.Button()
+        Me.Button13 = New System.Windows.Forms.Button()
+        Me.cmdKlotz = New System.Windows.Forms.Button()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.Button23 = New System.Windows.Forms.Button()
+        Me.Button22 = New System.Windows.Forms.Button()
+        Me.Button21 = New System.Windows.Forms.Button()
+        Me.grpSymmetry = New System.Windows.Forms.GroupBox()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button20 = New System.Windows.Forms.Button()
+        Me.Button19 = New System.Windows.Forms.Button()
+        Me.Button18 = New System.Windows.Forms.Button()
+        Me.Button17 = New System.Windows.Forms.Button()
+        Me.grpLocation = New System.Windows.Forms.GroupBox()
+        Me.cmdSavage = New System.Windows.Forms.Button()
+        Me.cmdMedian1 = New System.Windows.Forms.Button()
+        Me.cmdNormal = New System.Windows.Forms.Button()
+        Me.cmdKruskal1 = New System.Windows.Forms.Button()
+        Me.cmdWilcox1 = New System.Windows.Forms.Button()
+        Me.cmdOneway1 = New System.Windows.Forms.Button()
+        Me.cmdTaha = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1043,7 +1043,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpCoin.Controls.Add(Me.grpSymmetry)
         Me.grpCoin.Controls.Add(Me.GroupBox2)
         Me.grpCoin.Controls.Add(Me.grpLocation)
-        Me.grpCoin.Location = New System.Drawing.Point(77, 63)
+        Me.grpCoin.Location = New System.Drawing.Point(85, 31)
         Me.grpCoin.Name = "grpCoin"
         Me.grpCoin.Size = New System.Drawing.Size(632, 441)
         Me.grpCoin.TabIndex = 22
@@ -1057,14 +1057,59 @@ Partial Class dlgHypothesisTestsCalculator
         Me.g.Controls.Add(Me.Button15)
         Me.g.Controls.Add(Me.Button14)
         Me.g.Controls.Add(Me.Button13)
-        Me.g.Controls.Add(Me.Button12)
-        Me.g.Controls.Add(Me.Button11)
-        Me.g.Location = New System.Drawing.Point(419, 29)
+        Me.g.Controls.Add(Me.cmdKlotz)
+        Me.g.Controls.Add(Me.cmdTaha)
+        Me.g.Location = New System.Drawing.Point(342, 29)
         Me.g.Name = "g"
-        Me.g.Size = New System.Drawing.Size(200, 100)
+        Me.g.Size = New System.Drawing.Size(277, 100)
         Me.g.TabIndex = 4
         Me.g.TabStop = False
         Me.g.Text = "Scale"
+        '
+        'Button16
+        '
+        Me.Button16.Location = New System.Drawing.Point(176, 51)
+        Me.Button16.Name = "Button16"
+        Me.Button16.Size = New System.Drawing.Size(75, 23)
+        Me.Button16.TabIndex = 6
+        Me.Button16.Text = "Button16"
+        Me.Button16.UseVisualStyleBackColor = True
+        '
+        'Button15
+        '
+        Me.Button15.Location = New System.Drawing.Point(95, 50)
+        Me.Button15.Name = "Button15"
+        Me.Button15.Size = New System.Drawing.Size(75, 23)
+        Me.Button15.TabIndex = 5
+        Me.Button15.Text = "Button15"
+        Me.Button15.UseVisualStyleBackColor = True
+        '
+        'Button14
+        '
+        Me.Button14.Location = New System.Drawing.Point(14, 48)
+        Me.Button14.Name = "Button14"
+        Me.Button14.Size = New System.Drawing.Size(75, 23)
+        Me.Button14.TabIndex = 4
+        Me.Button14.Text = "Button14"
+        Me.Button14.UseVisualStyleBackColor = True
+        '
+        'Button13
+        '
+        Me.Button13.Location = New System.Drawing.Point(172, 19)
+        Me.Button13.Name = "Button13"
+        Me.Button13.Size = New System.Drawing.Size(75, 23)
+        Me.Button13.TabIndex = 3
+        Me.Button13.Text = "Button13"
+        Me.Button13.UseVisualStyleBackColor = True
+        '
+        'cmdKlotz
+        '
+        Me.cmdKlotz.Location = New System.Drawing.Point(85, 19)
+        Me.cmdKlotz.Name = "cmdKlotz"
+        Me.cmdKlotz.Size = New System.Drawing.Size(75, 23)
+        Me.cmdKlotz.TabIndex = 2
+        Me.cmdKlotz.Text = "klotz"
+        Me.cmdKlotz.UseVisualStyleBackColor = True
         '
         'GroupBox4
         '
@@ -1079,6 +1124,33 @@ Partial Class dlgHypothesisTestsCalculator
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Contingency"
         '
+        'Button23
+        '
+        Me.Button23.Location = New System.Drawing.Point(85, 71)
+        Me.Button23.Name = "Button23"
+        Me.Button23.Size = New System.Drawing.Size(75, 23)
+        Me.Button23.TabIndex = 3
+        Me.Button23.Text = "Button23"
+        Me.Button23.UseVisualStyleBackColor = True
+        '
+        'Button22
+        '
+        Me.Button22.Location = New System.Drawing.Point(119, 21)
+        Me.Button22.Name = "Button22"
+        Me.Button22.Size = New System.Drawing.Size(75, 23)
+        Me.Button22.TabIndex = 2
+        Me.Button22.Text = "Button22"
+        Me.Button22.UseVisualStyleBackColor = True
+        '
+        'Button21
+        '
+        Me.Button21.Location = New System.Drawing.Point(6, 21)
+        Me.Button21.Name = "Button21"
+        Me.Button21.Size = New System.Drawing.Size(75, 23)
+        Me.Button21.TabIndex = 1
+        Me.Button21.Text = "Button21"
+        Me.Button21.UseVisualStyleBackColor = True
+        '
         'grpSymmetry
         '
         Me.grpSymmetry.Controls.Add(Me.Button10)
@@ -1092,6 +1164,42 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpSymmetry.TabStop = False
         Me.grpSymmetry.Text = "Symmetry"
         '
+        'Button10
+        '
+        Me.Button10.Location = New System.Drawing.Point(117, 63)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(75, 23)
+        Me.Button10.TabIndex = 4
+        Me.Button10.Text = "Button10"
+        Me.Button10.UseVisualStyleBackColor = True
+        '
+        'Button9
+        '
+        Me.Button9.Location = New System.Drawing.Point(6, 63)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(75, 23)
+        Me.Button9.TabIndex = 3
+        Me.Button9.Text = "Button9"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(103, 21)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(75, 23)
+        Me.Button8.TabIndex = 2
+        Me.Button8.Text = "Button8"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(4, 26)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(81, 23)
+        Me.Button7.TabIndex = 1
+        Me.Button7.Text = "Button7"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
         'GroupBox2
         '
         Me.GroupBox2.AccessibleDescription = "grpCorrelation"
@@ -1099,239 +1207,132 @@ Partial Class dlgHypothesisTestsCalculator
         Me.GroupBox2.Controls.Add(Me.Button19)
         Me.GroupBox2.Controls.Add(Me.Button18)
         Me.GroupBox2.Controls.Add(Me.Button17)
-        Me.GroupBox2.Location = New System.Drawing.Point(29, 291)
+        Me.GroupBox2.Location = New System.Drawing.Point(29, 237)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(200, 100)
+        Me.GroupBox2.Size = New System.Drawing.Size(200, 154)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Correlation"
         '
-        'grpLocation
-        '
-        Me.grpLocation.Controls.Add(Me.Button6)
-        Me.grpLocation.Controls.Add(Me.Button5)
-        Me.grpLocation.Controls.Add(Me.Button4)
-        Me.grpLocation.Controls.Add(Me.Button3)
-        Me.grpLocation.Controls.Add(Me.Button2)
-        Me.grpLocation.Controls.Add(Me.Button1)
-        Me.grpLocation.Location = New System.Drawing.Point(7, 21)
-        Me.grpLocation.Name = "grpLocation"
-        Me.grpLocation.Size = New System.Drawing.Size(238, 174)
-        Me.grpLocation.TabIndex = 0
-        Me.grpLocation.TabStop = False
-        Me.grpLocation.Text = "Location"
-        '
-        'Button1
-        '
-        Me.Button1.AccessibleDescription = "cmdOneway"
-        Me.Button1.Location = New System.Drawing.Point(6, 27)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "oneway"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.AccessibleDescription = "cmdWilcox"
-        Me.Button2.Location = New System.Drawing.Point(80, 27)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 1
-        Me.Button2.Text = "wilcox"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.AccessibleDescription = "cmdKruskal"
-        Me.Button3.Location = New System.Drawing.Point(154, 27)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 23)
-        Me.Button3.TabIndex = 2
-        Me.Button3.Text = "kruskal"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.AccessibleDescription = "cmdNormal"
-        Me.Button4.Location = New System.Drawing.Point(6, 138)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 23)
-        Me.Button4.TabIndex = 3
-        Me.Button4.Text = "normal"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button5
-        '
-        Me.Button5.AccessibleDescription = "cmdMedian"
-        Me.Button5.Location = New System.Drawing.Point(76, 146)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(75, 23)
-        Me.Button5.TabIndex = 4
-        Me.Button5.Text = "median"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
-        'Button6
-        '
-        Me.Button6.Location = New System.Drawing.Point(157, 144)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(75, 23)
-        Me.Button6.TabIndex = 5
-        Me.Button6.Text = "Button6"
-        Me.Button6.UseVisualStyleBackColor = True
-        '
-        'Button7
-        '
-        Me.Button7.Location = New System.Drawing.Point(63, 39)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(75, 23)
-        Me.Button7.TabIndex = 1
-        Me.Button7.Text = "Button7"
-        Me.Button7.UseVisualStyleBackColor = True
-        '
-        'Button8
-        '
-        Me.Button8.Location = New System.Drawing.Point(71, 47)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(75, 23)
-        Me.Button8.TabIndex = 2
-        Me.Button8.Text = "Button8"
-        Me.Button8.UseVisualStyleBackColor = True
-        '
-        'Button9
-        '
-        Me.Button9.Location = New System.Drawing.Point(79, 55)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(75, 23)
-        Me.Button9.TabIndex = 3
-        Me.Button9.Text = "Button9"
-        Me.Button9.UseVisualStyleBackColor = True
-        '
-        'Button10
-        '
-        Me.Button10.Location = New System.Drawing.Point(87, 63)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(75, 23)
-        Me.Button10.TabIndex = 4
-        Me.Button10.Text = "Button10"
-        Me.Button10.UseVisualStyleBackColor = True
-        '
-        'Button11
-        '
-        Me.Button11.Location = New System.Drawing.Point(63, 39)
-        Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(75, 23)
-        Me.Button11.TabIndex = 1
-        Me.Button11.Text = "Button11"
-        Me.Button11.UseVisualStyleBackColor = True
-        '
-        'Button12
-        '
-        Me.Button12.Location = New System.Drawing.Point(71, 47)
-        Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(75, 23)
-        Me.Button12.TabIndex = 2
-        Me.Button12.Text = "Button12"
-        Me.Button12.UseVisualStyleBackColor = True
-        '
-        'Button13
-        '
-        Me.Button13.Location = New System.Drawing.Point(79, 55)
-        Me.Button13.Name = "Button13"
-        Me.Button13.Size = New System.Drawing.Size(75, 23)
-        Me.Button13.TabIndex = 3
-        Me.Button13.Text = "Button13"
-        Me.Button13.UseVisualStyleBackColor = True
-        '
-        'Button14
-        '
-        Me.Button14.Location = New System.Drawing.Point(87, 63)
-        Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(75, 23)
-        Me.Button14.TabIndex = 4
-        Me.Button14.Text = "Button14"
-        Me.Button14.UseVisualStyleBackColor = True
-        '
-        'Button15
-        '
-        Me.Button15.Location = New System.Drawing.Point(95, 71)
-        Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(75, 23)
-        Me.Button15.TabIndex = 5
-        Me.Button15.Text = "Button15"
-        Me.Button15.UseVisualStyleBackColor = True
-        '
-        'Button16
-        '
-        Me.Button16.Location = New System.Drawing.Point(103, 79)
-        Me.Button16.Name = "Button16"
-        Me.Button16.Size = New System.Drawing.Size(75, 23)
-        Me.Button16.TabIndex = 6
-        Me.Button16.Text = "Button16"
-        Me.Button16.UseVisualStyleBackColor = True
-        '
-        'Button17
-        '
-        Me.Button17.Location = New System.Drawing.Point(63, 39)
-        Me.Button17.Name = "Button17"
-        Me.Button17.Size = New System.Drawing.Size(75, 23)
-        Me.Button17.TabIndex = 1
-        Me.Button17.Text = "Button17"
-        Me.Button17.UseVisualStyleBackColor = True
-        '
-        'Button18
-        '
-        Me.Button18.Location = New System.Drawing.Point(71, 47)
-        Me.Button18.Name = "Button18"
-        Me.Button18.Size = New System.Drawing.Size(75, 23)
-        Me.Button18.TabIndex = 2
-        Me.Button18.Text = "Button18"
-        Me.Button18.UseVisualStyleBackColor = True
-        '
-        'Button19
-        '
-        Me.Button19.Location = New System.Drawing.Point(79, 55)
-        Me.Button19.Name = "Button19"
-        Me.Button19.Size = New System.Drawing.Size(75, 23)
-        Me.Button19.TabIndex = 3
-        Me.Button19.Text = "Button19"
-        Me.Button19.UseVisualStyleBackColor = True
-        '
         'Button20
         '
-        Me.Button20.Location = New System.Drawing.Point(87, 63)
+        Me.Button20.Location = New System.Drawing.Point(87, 58)
         Me.Button20.Name = "Button20"
         Me.Button20.Size = New System.Drawing.Size(75, 23)
         Me.Button20.TabIndex = 4
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
-        'Button21
+        'Button19
         '
-        Me.Button21.Location = New System.Drawing.Point(63, 39)
-        Me.Button21.Name = "Button21"
-        Me.Button21.Size = New System.Drawing.Size(75, 23)
-        Me.Button21.TabIndex = 1
-        Me.Button21.Text = "Button21"
-        Me.Button21.UseVisualStyleBackColor = True
+        Me.Button19.Location = New System.Drawing.Point(6, 63)
+        Me.Button19.Name = "Button19"
+        Me.Button19.Size = New System.Drawing.Size(75, 23)
+        Me.Button19.TabIndex = 3
+        Me.Button19.Text = "Button19"
+        Me.Button19.UseVisualStyleBackColor = True
         '
-        'Button22
+        'Button18
         '
-        Me.Button22.Location = New System.Drawing.Point(71, 47)
-        Me.Button22.Name = "Button22"
-        Me.Button22.Size = New System.Drawing.Size(75, 23)
-        Me.Button22.TabIndex = 2
-        Me.Button22.Text = "Button22"
-        Me.Button22.UseVisualStyleBackColor = True
+        Me.Button18.Location = New System.Drawing.Point(87, 21)
+        Me.Button18.Name = "Button18"
+        Me.Button18.Size = New System.Drawing.Size(75, 23)
+        Me.Button18.TabIndex = 2
+        Me.Button18.Text = "Button18"
+        Me.Button18.UseVisualStyleBackColor = True
         '
-        'Button23
+        'Button17
         '
-        Me.Button23.Location = New System.Drawing.Point(79, 55)
-        Me.Button23.Name = "Button23"
-        Me.Button23.Size = New System.Drawing.Size(75, 23)
-        Me.Button23.TabIndex = 3
-        Me.Button23.Text = "Button23"
-        Me.Button23.UseVisualStyleBackColor = True
+        Me.Button17.Location = New System.Drawing.Point(6, 26)
+        Me.Button17.Name = "Button17"
+        Me.Button17.Size = New System.Drawing.Size(75, 23)
+        Me.Button17.TabIndex = 1
+        Me.Button17.Text = "Button17"
+        Me.Button17.UseVisualStyleBackColor = True
+        '
+        'grpLocation
+        '
+        Me.grpLocation.Controls.Add(Me.cmdSavage)
+        Me.grpLocation.Controls.Add(Me.cmdMedian1)
+        Me.grpLocation.Controls.Add(Me.cmdNormal)
+        Me.grpLocation.Controls.Add(Me.cmdKruskal1)
+        Me.grpLocation.Controls.Add(Me.cmdWilcox1)
+        Me.grpLocation.Controls.Add(Me.cmdOneway1)
+        Me.grpLocation.Location = New System.Drawing.Point(7, 21)
+        Me.grpLocation.Name = "grpLocation"
+        Me.grpLocation.Size = New System.Drawing.Size(184, 135)
+        Me.grpLocation.TabIndex = 0
+        Me.grpLocation.TabStop = False
+        Me.grpLocation.Text = "Location"
+        '
+        'cmdSavage
+        '
+        Me.cmdSavage.Location = New System.Drawing.Point(87, 98)
+        Me.cmdSavage.Name = "cmdSavage"
+        Me.cmdSavage.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSavage.TabIndex = 5
+        Me.cmdSavage.Text = "savage"
+        Me.cmdSavage.UseVisualStyleBackColor = True
+        '
+        'cmdMedian1
+        '
+        Me.cmdMedian1.AccessibleDescription = ""
+        Me.cmdMedian1.Location = New System.Drawing.Point(6, 96)
+        Me.cmdMedian1.Name = "cmdMedian1"
+        Me.cmdMedian1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdMedian1.TabIndex = 4
+        Me.cmdMedian1.Text = "median"
+        Me.cmdMedian1.UseVisualStyleBackColor = True
+        '
+        'cmdNormal
+        '
+        Me.cmdNormal.AccessibleDescription = ""
+        Me.cmdNormal.Location = New System.Drawing.Point(87, 59)
+        Me.cmdNormal.Name = "cmdNormal"
+        Me.cmdNormal.Size = New System.Drawing.Size(75, 23)
+        Me.cmdNormal.TabIndex = 3
+        Me.cmdNormal.Text = "normal"
+        Me.cmdNormal.UseVisualStyleBackColor = True
+        '
+        'cmdKruskal1
+        '
+        Me.cmdKruskal1.AccessibleDescription = ""
+        Me.cmdKruskal1.Location = New System.Drawing.Point(6, 59)
+        Me.cmdKruskal1.Name = "cmdKruskal1"
+        Me.cmdKruskal1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdKruskal1.TabIndex = 2
+        Me.cmdKruskal1.Text = "kruskal"
+        Me.cmdKruskal1.UseVisualStyleBackColor = True
+        '
+        'cmdWilcox1
+        '
+        Me.cmdWilcox1.AccessibleDescription = "cmdWilcox"
+        Me.cmdWilcox1.Location = New System.Drawing.Point(80, 27)
+        Me.cmdWilcox1.Name = "cmdWilcox1"
+        Me.cmdWilcox1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdWilcox1.TabIndex = 1
+        Me.cmdWilcox1.Text = "wilcox"
+        Me.cmdWilcox1.UseVisualStyleBackColor = True
+        '
+        'cmdOneway1
+        '
+        Me.cmdOneway1.AccessibleDescription = ""
+        Me.cmdOneway1.AccessibleName = ""
+        Me.cmdOneway1.Location = New System.Drawing.Point(6, 27)
+        Me.cmdOneway1.Name = "cmdOneway1"
+        Me.cmdOneway1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOneway1.TabIndex = 0
+        Me.cmdOneway1.Text = "oneway"
+        Me.cmdOneway1.UseVisualStyleBackColor = True
+        '
+        'cmdTaha
+        '
+        Me.cmdTaha.Location = New System.Drawing.Point(6, 21)
+        Me.cmdTaha.Name = "cmdTaha"
+        Me.cmdTaha.Size = New System.Drawing.Size(75, 23)
+        Me.cmdTaha.TabIndex = 1
+        Me.cmdTaha.Text = "taha"
+        Me.cmdTaha.UseVisualStyleBackColor = True
         '
         'dlgHypothesisTestsCalculator
         '
@@ -1469,8 +1470,7 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents Button15 As Button
     Friend WithEvents Button14 As Button
     Friend WithEvents Button13 As Button
-    Friend WithEvents Button12 As Button
-    Friend WithEvents Button11 As Button
+    Friend WithEvents cmdKlotz As Button
     Friend WithEvents Button23 As Button
     Friend WithEvents Button22 As Button
     Friend WithEvents Button21 As Button
@@ -1482,10 +1482,11 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents Button19 As Button
     Friend WithEvents Button18 As Button
     Friend WithEvents Button17 As Button
-    Friend WithEvents Button6 As Button
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents cmdSavage As Button
+    Friend WithEvents cmdMedian1 As Button
+    Friend WithEvents cmdNormal As Button
+    Friend WithEvents cmdKruskal1 As Button
+    Friend WithEvents cmdWilcox1 As Button
+    Friend WithEvents cmdOneway1 As Button
+    Friend WithEvents cmdTaha As Button
 End Class
