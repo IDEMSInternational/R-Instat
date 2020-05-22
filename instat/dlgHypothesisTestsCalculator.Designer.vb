@@ -1143,11 +1143,12 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'Button3
         '
+        Me.Button3.AccessibleDescription = "cmdKruskal"
         Me.Button3.Location = New System.Drawing.Point(154, 27)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 23)
         Me.Button3.TabIndex = 2
-        Me.Button3.Text = "Button3"
+        Me.Button3.Text = "kruskal"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button4
