@@ -114,10 +114,10 @@ Partial Class dlgHypothesisTestsCalculator
         Me.Button22 = New System.Windows.Forms.Button()
         Me.Button21 = New System.Windows.Forms.Button()
         Me.grpSymmetry = New System.Windows.Forms.GroupBox()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button7 = New System.Windows.Forms.Button()
+        Me.cmdQuade1 = New System.Windows.Forms.Button()
+        Me.cmdFriedman1 = New System.Windows.Forms.Button()
+        Me.cmdWilcoksign = New System.Windows.Forms.Button()
+        Me.cmdSign = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button20 = New System.Windows.Forms.Button()
         Me.Button19 = New System.Windows.Forms.Button()
@@ -1153,52 +1153,52 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpSymmetry
         '
-        Me.grpSymmetry.Controls.Add(Me.Button10)
-        Me.grpSymmetry.Controls.Add(Me.Button9)
-        Me.grpSymmetry.Controls.Add(Me.Button8)
-        Me.grpSymmetry.Controls.Add(Me.Button7)
-        Me.grpSymmetry.Location = New System.Drawing.Point(310, 159)
+        Me.grpSymmetry.Controls.Add(Me.cmdQuade1)
+        Me.grpSymmetry.Controls.Add(Me.cmdFriedman1)
+        Me.grpSymmetry.Controls.Add(Me.cmdWilcoksign)
+        Me.grpSymmetry.Controls.Add(Me.cmdSign)
+        Me.grpSymmetry.Location = New System.Drawing.Point(253, 149)
         Me.grpSymmetry.Name = "grpSymmetry"
         Me.grpSymmetry.Size = New System.Drawing.Size(200, 100)
         Me.grpSymmetry.TabIndex = 2
         Me.grpSymmetry.TabStop = False
         Me.grpSymmetry.Text = "Symmetry"
         '
-        'Button10
+        'cmdQuade1
         '
-        Me.Button10.Location = New System.Drawing.Point(117, 63)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(75, 23)
-        Me.Button10.TabIndex = 4
-        Me.Button10.Text = "Button10"
-        Me.Button10.UseVisualStyleBackColor = True
+        Me.cmdQuade1.Location = New System.Drawing.Point(117, 63)
+        Me.cmdQuade1.Name = "cmdQuade1"
+        Me.cmdQuade1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdQuade1.TabIndex = 4
+        Me.cmdQuade1.Text = "quade"
+        Me.cmdQuade1.UseVisualStyleBackColor = True
         '
-        'Button9
+        'cmdFriedman1
         '
-        Me.Button9.Location = New System.Drawing.Point(6, 63)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(75, 23)
-        Me.Button9.TabIndex = 3
-        Me.Button9.Text = "Button9"
-        Me.Button9.UseVisualStyleBackColor = True
+        Me.cmdFriedman1.Location = New System.Drawing.Point(6, 63)
+        Me.cmdFriedman1.Name = "cmdFriedman1"
+        Me.cmdFriedman1.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFriedman1.TabIndex = 3
+        Me.cmdFriedman1.Text = "friedman"
+        Me.cmdFriedman1.UseVisualStyleBackColor = True
         '
-        'Button8
+        'cmdWilcoksign
         '
-        Me.Button8.Location = New System.Drawing.Point(103, 21)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(75, 23)
-        Me.Button8.TabIndex = 2
-        Me.Button8.Text = "Button8"
-        Me.Button8.UseVisualStyleBackColor = True
+        Me.cmdWilcoksign.Location = New System.Drawing.Point(103, 21)
+        Me.cmdWilcoksign.Name = "cmdWilcoksign"
+        Me.cmdWilcoksign.Size = New System.Drawing.Size(75, 23)
+        Me.cmdWilcoksign.TabIndex = 2
+        Me.cmdWilcoksign.Text = "wilcoksign"
+        Me.cmdWilcoksign.UseVisualStyleBackColor = True
         '
-        'Button7
+        'cmdSign
         '
-        Me.Button7.Location = New System.Drawing.Point(4, 26)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(81, 23)
-        Me.Button7.TabIndex = 1
-        Me.Button7.Text = "Button7"
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.cmdSign.Location = New System.Drawing.Point(4, 26)
+        Me.cmdSign.Name = "cmdSign"
+        Me.cmdSign.Size = New System.Drawing.Size(81, 23)
+        Me.cmdSign.TabIndex = 1
+        Me.cmdSign.Text = "sign"
+        Me.cmdSign.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -1474,10 +1474,10 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents Button23 As Button
     Friend WithEvents Button22 As Button
     Friend WithEvents Button21 As Button
-    Friend WithEvents Button10 As Button
-    Friend WithEvents Button9 As Button
-    Friend WithEvents Button8 As Button
-    Friend WithEvents Button7 As Button
+    Friend WithEvents cmdQuade1 As Button
+    Friend WithEvents cmdFriedman1 As Button
+    Friend WithEvents cmdWilcoksign As Button
+    Friend WithEvents cmdSign As Button
     Friend WithEvents Button20 As Button
     Friend WithEvents Button19 As Button
     Friend WithEvents Button18 As Button
