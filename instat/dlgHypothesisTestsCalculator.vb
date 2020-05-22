@@ -52,7 +52,7 @@ Public Class dlgHypothesisTestsCalculator
         ucrSaveResult.SetAssignToIfUncheckedValue("Last_Test")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorColumn.ucrAvailableDataFrames)
 
-        ucrInputComboRPackage.SetItems({"Stats1", "Stats2", "Agricolae", "Verification"})
+        ucrInputComboRPackage.SetItems({"Stats1", "Stats2", "Agricolae", "Verification", "Coin"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
         'Tooltips for conf & and Alt Buttons
         tpConf.SetToolTip(cmdConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
@@ -572,24 +572,36 @@ Public Class dlgHypothesisTestsCalculator
                 grpStats1.Visible = True
                 grpStats2.Visible = False
                 grpVerification.Visible = False
+                grpCoin.Visible = False
             Case "Stats2"
                 strPackageName = "stats"
                 grpAgricolae.Visible = False
                 grpStats1.Visible = False
                 grpStats2.Visible = True
                 grpVerification.Visible = False
+                grpCoin.Visible = False
             Case "Agricolae"
                 strPackageName = "agricolae"
                 grpStats1.Visible = False
                 grpStats2.Visible = False
                 grpAgricolae.Visible = True
                 grpVerification.Visible = False
+                grpCoin.Visible = False
             Case "Verification"
                 strPackageName = "verification"
                 grpStats1.Visible = False
                 grpStats2.Visible = False
                 grpAgricolae.Visible = False
                 grpVerification.Visible = True
+                grpCoin.Visible = False
+            Case "Coin"
+                strPackageName = "verification"
+                grpStats1.Visible = False
+                grpStats2.Visible = False
+                grpAgricolae.Visible = False
+                grpVerification.Visible = False
+                grpCoin.Visible = True
+
         End Select
     End Sub
 

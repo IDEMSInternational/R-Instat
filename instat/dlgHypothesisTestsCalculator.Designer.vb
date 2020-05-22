@@ -103,13 +103,13 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.grpCoin = New System.Windows.Forms.GroupBox()
-        Me.g = New System.Windows.Forms.GroupBox()
+        Me.grpScale = New System.Windows.Forms.GroupBox()
         Me.cmdConover = New System.Windows.Forms.Button()
         Me.cmdFligner1 = New System.Windows.Forms.Button()
         Me.cmdAnsari1 = New System.Windows.Forms.Button()
         Me.cmdMood1 = New System.Windows.Forms.Button()
         Me.cmdKlotz = New System.Windows.Forms.Button()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.grpContigency = New System.Windows.Forms.GroupBox()
         Me.cmdLbl = New System.Windows.Forms.Button()
         Me.cmdCmh = New System.Windows.Forms.Button()
         Me.cmdChisq1 = New System.Windows.Forms.Button()
@@ -118,7 +118,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdFriedman1 = New System.Windows.Forms.Button()
         Me.cmdWilcoksign = New System.Windows.Forms.Button()
         Me.cmdSign = New System.Windows.Forms.Button()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.grpCorrelation = New System.Windows.Forms.GroupBox()
         Me.cmdKoziol = New System.Windows.Forms.Button()
         Me.cmdQuadrant = New System.Windows.Forms.Button()
         Me.cmdFisyat = New System.Windows.Forms.Button()
@@ -137,10 +137,10 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpAgricolae.SuspendLayout()
         Me.grpVerification.SuspendLayout()
         Me.grpCoin.SuspendLayout()
-        Me.g.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
+        Me.grpScale.SuspendLayout()
+        Me.grpContigency.SuspendLayout()
         Me.grpSymmetry.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.grpCorrelation.SuspendLayout()
         Me.grpLocation.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -1038,10 +1038,10 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpCoin
         '
-        Me.grpCoin.Controls.Add(Me.g)
-        Me.grpCoin.Controls.Add(Me.GroupBox4)
+        Me.grpCoin.Controls.Add(Me.grpScale)
+        Me.grpCoin.Controls.Add(Me.grpContigency)
         Me.grpCoin.Controls.Add(Me.grpSymmetry)
-        Me.grpCoin.Controls.Add(Me.GroupBox2)
+        Me.grpCoin.Controls.Add(Me.grpCorrelation)
         Me.grpCoin.Controls.Add(Me.grpLocation)
         Me.grpCoin.Location = New System.Drawing.Point(319, 94)
         Me.grpCoin.Name = "grpCoin"
@@ -1050,21 +1050,21 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpCoin.TabStop = False
         Me.grpCoin.Text = "Coin"
         '
-        'g
+        'grpScale
         '
-        Me.g.AccessibleDescription = "grpScale"
-        Me.g.Controls.Add(Me.cmdConover)
-        Me.g.Controls.Add(Me.cmdFligner1)
-        Me.g.Controls.Add(Me.cmdAnsari1)
-        Me.g.Controls.Add(Me.cmdMood1)
-        Me.g.Controls.Add(Me.cmdKlotz)
-        Me.g.Controls.Add(Me.cmdTaha)
-        Me.g.Location = New System.Drawing.Point(343, 14)
-        Me.g.Name = "g"
-        Me.g.Size = New System.Drawing.Size(165, 108)
-        Me.g.TabIndex = 4
-        Me.g.TabStop = False
-        Me.g.Text = "Scale"
+        Me.grpScale.AccessibleDescription = "grpScale"
+        Me.grpScale.Controls.Add(Me.cmdConover)
+        Me.grpScale.Controls.Add(Me.cmdFligner1)
+        Me.grpScale.Controls.Add(Me.cmdAnsari1)
+        Me.grpScale.Controls.Add(Me.cmdMood1)
+        Me.grpScale.Controls.Add(Me.cmdKlotz)
+        Me.grpScale.Controls.Add(Me.cmdTaha)
+        Me.grpScale.Location = New System.Drawing.Point(343, 14)
+        Me.grpScale.Name = "grpScale"
+        Me.grpScale.Size = New System.Drawing.Size(165, 108)
+        Me.grpScale.TabIndex = 4
+        Me.grpScale.TabStop = False
+        Me.grpScale.Text = "Scale"
         '
         'cmdConover
         '
@@ -1111,18 +1111,18 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdKlotz.Text = "klotz"
         Me.cmdKlotz.UseVisualStyleBackColor = True
         '
-        'GroupBox4
+        'grpContigency
         '
-        Me.GroupBox4.AccessibleDescription = "grpContingency"
-        Me.GroupBox4.Controls.Add(Me.cmdLbl)
-        Me.GroupBox4.Controls.Add(Me.cmdCmh)
-        Me.GroupBox4.Controls.Add(Me.cmdChisq1)
-        Me.GroupBox4.Location = New System.Drawing.Point(178, 121)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(165, 108)
-        Me.GroupBox4.TabIndex = 3
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Contingency"
+        Me.grpContigency.AccessibleDescription = "grpContingency"
+        Me.grpContigency.Controls.Add(Me.cmdLbl)
+        Me.grpContigency.Controls.Add(Me.cmdCmh)
+        Me.grpContigency.Controls.Add(Me.cmdChisq1)
+        Me.grpContigency.Location = New System.Drawing.Point(178, 121)
+        Me.grpContigency.Name = "grpContigency"
+        Me.grpContigency.Size = New System.Drawing.Size(165, 108)
+        Me.grpContigency.TabIndex = 3
+        Me.grpContigency.TabStop = False
+        Me.grpContigency.Text = "Contingency"
         '
         'cmdLbl
         '
@@ -1200,19 +1200,19 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdSign.Text = "sign"
         Me.cmdSign.UseVisualStyleBackColor = True
         '
-        'GroupBox2
+        'grpCorrelation
         '
-        Me.GroupBox2.AccessibleDescription = "grpCorrelation"
-        Me.GroupBox2.Controls.Add(Me.cmdKoziol)
-        Me.GroupBox2.Controls.Add(Me.cmdQuadrant)
-        Me.GroupBox2.Controls.Add(Me.cmdFisyat)
-        Me.GroupBox2.Controls.Add(Me.cmdSpearman)
-        Me.GroupBox2.Location = New System.Drawing.Point(7, 121)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(165, 108)
-        Me.GroupBox2.TabIndex = 1
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Correlation"
+        Me.grpCorrelation.AccessibleDescription = "grpCorrelation"
+        Me.grpCorrelation.Controls.Add(Me.cmdKoziol)
+        Me.grpCorrelation.Controls.Add(Me.cmdQuadrant)
+        Me.grpCorrelation.Controls.Add(Me.cmdFisyat)
+        Me.grpCorrelation.Controls.Add(Me.cmdSpearman)
+        Me.grpCorrelation.Location = New System.Drawing.Point(7, 121)
+        Me.grpCorrelation.Name = "grpCorrelation"
+        Me.grpCorrelation.Size = New System.Drawing.Size(165, 108)
+        Me.grpCorrelation.TabIndex = 1
+        Me.grpCorrelation.TabStop = False
+        Me.grpCorrelation.Text = "Correlation"
         '
         'cmdKoziol
         '
@@ -1372,10 +1372,10 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpAgricolae.ResumeLayout(False)
         Me.grpVerification.ResumeLayout(False)
         Me.grpCoin.ResumeLayout(False)
-        Me.g.ResumeLayout(False)
-        Me.GroupBox4.ResumeLayout(False)
+        Me.grpScale.ResumeLayout(False)
+        Me.grpContigency.ResumeLayout(False)
         Me.grpSymmetry.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
+        Me.grpCorrelation.ResumeLayout(False)
         Me.grpLocation.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -1461,10 +1461,10 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents ucrChkDisplayModel As ucrCheck
     Friend WithEvents ucrChkSummaryModel As ucrCheck
     Friend WithEvents grpCoin As GroupBox
-    Friend WithEvents g As GroupBox
-    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents grpScale As GroupBox
+    Friend WithEvents grpContigency As GroupBox
     Friend WithEvents grpSymmetry As GroupBox
-    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents grpCorrelation As GroupBox
     Friend WithEvents grpLocation As GroupBox
     Friend WithEvents cmdConover As Button
     Friend WithEvents cmdFligner1 As Button
