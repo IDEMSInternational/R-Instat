@@ -166,7 +166,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpMainKeyboard.Controls.Add(Me.cmdAlt)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquiggle)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquareBrackets)
-        Me.grpMainKeyboard.Location = New System.Drawing.Point(515, 304)
+        Me.grpMainKeyboard.Location = New System.Drawing.Point(515, 365)
         Me.grpMainKeyboard.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.grpMainKeyboard.Name = "grpMainKeyboard"
         Me.grpMainKeyboard.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -884,7 +884,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdHelp
         '
         Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdHelp.Location = New System.Drawing.Point(637, 276)
+        Me.cmdHelp.Location = New System.Drawing.Point(637, 337)
         Me.cmdHelp.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(100, 28)
@@ -934,7 +934,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkDisplayModel
         '
         Me.ucrChkDisplayModel.Checked = False
-        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(8, 362)
+        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(8, 401)
         Me.ucrChkDisplayModel.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.ucrChkDisplayModel.Name = "ucrChkDisplayModel"
         Me.ucrChkDisplayModel.Size = New System.Drawing.Size(185, 25)
@@ -943,7 +943,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkSummaryModel
         '
         Me.ucrChkSummaryModel.Checked = False
-        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(8, 308)
+        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(8, 369)
         Me.ucrChkSummaryModel.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.ucrChkSummaryModel.Name = "ucrChkSummaryModel"
         Me.ucrChkSummaryModel.Size = New System.Drawing.Size(185, 25)
@@ -951,7 +951,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'ucrTryModelling
         '
-        Me.ucrTryModelling.Location = New System.Drawing.Point(0, 433)
+        Me.ucrTryModelling.Location = New System.Drawing.Point(0, 494)
         Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrTryModelling.Name = "ucrTryModelling"
         Me.ucrTryModelling.Size = New System.Drawing.Size(640, 34)
@@ -960,7 +960,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrReceiverMultiple
         '
         Me.ucrReceiverMultiple.frmParent = Me
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(333, 308)
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(333, 369)
         Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
         Me.ucrReceiverMultiple.Selector = Nothing
@@ -971,7 +971,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'ucrSaveResult
         '
-        Me.ucrSaveResult.Location = New System.Drawing.Point(13, 474)
+        Me.ucrSaveResult.Location = New System.Drawing.Point(13, 535)
         Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrSaveResult.Name = "ucrSaveResult"
         Me.ucrSaveResult.Size = New System.Drawing.Size(369, 30)
@@ -989,7 +989,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(16, 524)
+        Me.ucrBase.Location = New System.Drawing.Point(16, 585)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(603, 64)
@@ -998,7 +998,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkBy
         '
         Me.ucrChkBy.Checked = False
-        Me.ucrChkBy.Location = New System.Drawing.Point(335, 278)
+        Me.ucrChkBy.Location = New System.Drawing.Point(335, 339)
         Me.ucrChkBy.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrChkBy.Name = "ucrChkBy"
         Me.ucrChkBy.Size = New System.Drawing.Size(92, 25)
@@ -1043,9 +1043,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpCoin.Controls.Add(Me.grpSymmetry)
         Me.grpCoin.Controls.Add(Me.GroupBox2)
         Me.grpCoin.Controls.Add(Me.grpLocation)
-        Me.grpCoin.Location = New System.Drawing.Point(241, 97)
+        Me.grpCoin.Location = New System.Drawing.Point(319, 94)
         Me.grpCoin.Name = "grpCoin"
-        Me.grpCoin.Size = New System.Drawing.Size(511, 246)
+        Me.grpCoin.Size = New System.Drawing.Size(511, 236)
         Me.grpCoin.TabIndex = 22
         Me.grpCoin.TabStop = False
         Me.grpCoin.Text = "Coin"
@@ -1059,7 +1059,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.g.Controls.Add(Me.cmdMood1)
         Me.g.Controls.Add(Me.cmdKlotz)
         Me.g.Controls.Add(Me.cmdTaha)
-        Me.g.Location = New System.Drawing.Point(343, 21)
+        Me.g.Location = New System.Drawing.Point(343, 14)
         Me.g.Name = "g"
         Me.g.Size = New System.Drawing.Size(165, 108)
         Me.g.TabIndex = 4
@@ -1117,7 +1117,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.GroupBox4.Controls.Add(Me.cmdLbl)
         Me.GroupBox4.Controls.Add(Me.cmdCmh)
         Me.GroupBox4.Controls.Add(Me.cmdChisq1)
-        Me.GroupBox4.Location = New System.Drawing.Point(178, 131)
+        Me.GroupBox4.Location = New System.Drawing.Point(178, 121)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(165, 108)
         Me.GroupBox4.TabIndex = 3
@@ -1157,7 +1157,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpSymmetry.Controls.Add(Me.cmdFriedman1)
         Me.grpSymmetry.Controls.Add(Me.cmdWilcoksign)
         Me.grpSymmetry.Controls.Add(Me.cmdSign)
-        Me.grpSymmetry.Location = New System.Drawing.Point(176, 21)
+        Me.grpSymmetry.Location = New System.Drawing.Point(176, 14)
         Me.grpSymmetry.Name = "grpSymmetry"
         Me.grpSymmetry.Size = New System.Drawing.Size(165, 108)
         Me.grpSymmetry.TabIndex = 2
@@ -1207,7 +1207,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.GroupBox2.Controls.Add(Me.cmdQuadrant)
         Me.GroupBox2.Controls.Add(Me.cmdFisyat)
         Me.GroupBox2.Controls.Add(Me.cmdSpearman)
-        Me.GroupBox2.Location = New System.Drawing.Point(7, 128)
+        Me.GroupBox2.Location = New System.Drawing.Point(7, 121)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(165, 108)
         Me.GroupBox2.TabIndex = 1
@@ -1258,7 +1258,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpLocation.Controls.Add(Me.cmdKruskal1)
         Me.grpLocation.Controls.Add(Me.cmdWilcox1)
         Me.grpLocation.Controls.Add(Me.cmdOneway1)
-        Me.grpLocation.Location = New System.Drawing.Point(7, 21)
+        Me.grpLocation.Location = New System.Drawing.Point(7, 14)
         Me.grpLocation.Name = "grpLocation"
         Me.grpLocation.Size = New System.Drawing.Size(165, 108)
         Me.grpLocation.TabIndex = 0
@@ -1338,7 +1338,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(787, 599)
+        Me.ClientSize = New System.Drawing.Size(835, 652)
         Me.Controls.Add(Me.grpCoin)
         Me.Controls.Add(Me.grpVerification)
         Me.Controls.Add(Me.ucrChkDisplayModel)
