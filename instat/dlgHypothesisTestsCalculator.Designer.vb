@@ -122,7 +122,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.Button20 = New System.Windows.Forms.Button()
         Me.Button19 = New System.Windows.Forms.Button()
         Me.Button18 = New System.Windows.Forms.Button()
-        Me.Button17 = New System.Windows.Forms.Button()
+        Me.cmdSpearman = New System.Windows.Forms.Button()
         Me.grpLocation = New System.Windows.Forms.GroupBox()
         Me.cmdSavage = New System.Windows.Forms.Button()
         Me.cmdMedian1 = New System.Windows.Forms.Button()
@@ -1206,7 +1206,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.GroupBox2.Controls.Add(Me.Button20)
         Me.GroupBox2.Controls.Add(Me.Button19)
         Me.GroupBox2.Controls.Add(Me.Button18)
-        Me.GroupBox2.Controls.Add(Me.Button17)
+        Me.GroupBox2.Controls.Add(Me.cmdSpearman)
         Me.GroupBox2.Location = New System.Drawing.Point(29, 237)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(200, 154)
@@ -1241,14 +1241,14 @@ Partial Class dlgHypothesisTestsCalculator
         Me.Button18.Text = "Button18"
         Me.Button18.UseVisualStyleBackColor = True
         '
-        'Button17
+        'cmdSpearman
         '
-        Me.Button17.Location = New System.Drawing.Point(6, 26)
-        Me.Button17.Name = "Button17"
-        Me.Button17.Size = New System.Drawing.Size(75, 23)
-        Me.Button17.TabIndex = 1
-        Me.Button17.Text = "Button17"
-        Me.Button17.UseVisualStyleBackColor = True
+        Me.cmdSpearman.Location = New System.Drawing.Point(6, 26)
+        Me.cmdSpearman.Name = "cmdSpearman"
+        Me.cmdSpearman.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSpearman.TabIndex = 1
+        Me.cmdSpearman.Text = "spearman"
+        Me.cmdSpearman.UseVisualStyleBackColor = True
         '
         'grpLocation
         '
@@ -1481,7 +1481,7 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents Button20 As Button
     Friend WithEvents Button19 As Button
     Friend WithEvents Button18 As Button
-    Friend WithEvents Button17 As Button
+    Friend WithEvents cmdSpearman As Button
     Friend WithEvents cmdSavage As Button
     Friend WithEvents cmdMedian1 As Button
     Friend WithEvents cmdNormal As Button
