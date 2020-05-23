@@ -1679,13 +1679,26 @@ DataSheet$set("public", "get_last_graph", function() {
 }
 )
 
-DataSheet$set("public", "rename_object", function(object_name, new_name) {
+DataSheet$set("public", "rename_object", function(object_name, new_name, object_type = "object") {
+  if(!object_type %in% c("object","filter","calculation")) stop(object_type, " must be either object, filter or a calculation")
+if (object_type == "object"){
   if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
   if(new_name %in% names(private$objects)) stop(new_name, " is already an object name. Cannot rename ", object_name, " to ", new_name)
   names(private$objects)[names(private$objects) == object_name] <- new_name
-}
+} 
+  else if (object_type == "filter"){
+    if(!object_name %in% names(private$filters)) stop(object_name, " not found in filters list")
+    if(new_name %in% names(private$filters)) stop(new_name, " is already a filter name. Cannot rename ", object_name, " to ", new_name)
+    names(private$filters)[names(private$filters) == object_name] <- new_name
+  } 
+  else if (object_type == "calculation") {
+    if(!object_name %in% names(private$calculations)) stop(object_name, " not found in calculations list")
+    if(new_name %in% names(private$calculations)) stop(new_name, " is already a calculation name. Cannot rename ", object_name, " to ", new_name)
+    names(private$calculations)[names(private$calculations) == object_name] <- new_name
+  }
+  }
 )
-
+  
 DataSheet$set("public", "delete_objects", function(object_names) {
   if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in objects list")
   private$objects[names(private$objects) == object_names] <- NULL
