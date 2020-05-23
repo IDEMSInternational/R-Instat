@@ -68,7 +68,7 @@ Public Class dlgRenameObjects
         ucrInputType.SetParameter(New RParameter("object_type", 3))
         dctType.Add("Objects", Chr(34) & "object" & Chr(34))
         dctType.Add("Filters", Chr(34) & "filter" & Chr(34))
-        'dctType.Add("Calculations", Chr(34) & "calculation" & Chr(34)) 'Enable this option once "get_calculation_names" method can include and exclude items
+        dctType.Add("Calculations", Chr(34) & "calculation" & Chr(34)) 
         ucrInputType.SetItems(dctType)
         ucrInputType.SetDropDownStyleAsNonEditable()
 
@@ -132,9 +132,9 @@ Public Class dlgRenameObjects
             Case "Filters"
                 ucrReceiverCurrentName.SetItemType("filter")
                 ucrReceiverCurrentName.strSelectorHeading = "Filters"
-                ' Case "Calculations"
-                ' ucrReceiverCurrentName.SetItemType("calculation")
-                ' ucrReceiverCurrentName.strSelectorHeading = "Calculations"
+            Case "Calculations"
+                ucrReceiverCurrentName.SetItemType("calculation")
+                ucrReceiverCurrentName.strSelectorHeading = "Calculations"
         End Select
     End Sub
 
