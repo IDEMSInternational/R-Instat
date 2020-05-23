@@ -476,8 +476,19 @@ DataSheet$set("public", "get_calculations", function() {
 }
 )
 
-DataSheet$set("public", "get_calculation_names", function() {
-  return(names(private$calculations))
+DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, include = list(), exclude = list(), excluded_items = c()) {
+  out = names(private$calculations)
+  if(length(excluded_items) > 0) {
+    ex_ind = which(out %in% excluded_items)
+    if(length(ex_ind) != length(excluded_items)) warning("Some of the excluded_items were not found in the list of calculations")
+    if(length(ex_ind) > 0) out = out[-ex_ind]
+  }
+  if(as_list) {
+    lst = list()
+    lst[[self$get_metadata(data_name_label)]] <- out
+    return(lst)
+  }
+  else return(out)
 }
 )
 

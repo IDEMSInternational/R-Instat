@@ -438,9 +438,9 @@ DataBook$set("public", "get_calculations", function(data_name) {
 } 
 )
 
-DataBook$set("public", "get_calculation_names", function(data_name) {
-  return(self$get_data_objects(data_name)$get_calculation_names())
-} 
+DataBook$set("public", "get_calculation_names", function(data_name, as_list = FALSE, include = list(), exclude = list(), excluded_items = c()) {
+    return(self$get_data_objects(data_name)$get_calculation_names(as_list = as_list, include = include, exclude = exclude, excluded_items = excluded_items))
+  }
 )
 
 DataBook$set("public", "dataframe_count", function() {
