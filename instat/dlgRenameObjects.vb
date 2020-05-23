@@ -49,6 +49,7 @@ Public Class dlgRenameObjects
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctType As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 350
 
         'ucrSelector
@@ -60,12 +61,17 @@ Public Class dlgRenameObjects
         ucrReceiverCurrentName.Selector = ucrSelectorForRenameObject
         ucrReceiverCurrentName.SetMeAsReceiver()
         ucrReceiverCurrentName.SetParameterIsString()
-        ucrReceiverCurrentName.SetItemType("object")
-        ucrReceiverCurrentName.strSelectorHeading = "Objects"
-
         'ucrNewName
         ucrInputNewName.SetParameter(New RParameter("new_name", 2))
         ucrInputNewName.SetValidationTypeAsRVariable()
+
+        ucrInputType.SetParameter(New RParameter("object_type", 3))
+        dctType.Add("Objects", Chr(34) & "object" & Chr(34))
+        dctType.Add("Filters", Chr(34) & "filter" & Chr(34))
+        'dctType.Add("Calculations", Chr(34) & "calculation" & Chr(34)) 'Enable this option once "get_calculation_names" method can include and exclude items
+        ucrInputType.SetItems(dctType)
+        ucrInputType.SetDropDownStyleAsNonEditable()
+
 
         NewDefaultName()
     End Sub
@@ -77,6 +83,7 @@ Public Class dlgRenameObjects
         ucrInputNewName.Reset()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_object")
+        clsDefaultFunction.AddParameter("object_type", Chr(34) & "object" & Chr(34), iPosition:=3)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
@@ -112,6 +119,23 @@ Public Class dlgRenameObjects
 
     Private Sub ucrInputNewName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCurrentName.ControlValueChanged
         NewDefaultName()
+    End Sub
+
+    Private Sub ucrInputType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputType.ControlValueChanged
+        Dim strType As String
+        strType = ucrInputType.GetValue()
+
+        Select Case strType
+            Case "Objects"
+                ucrReceiverCurrentName.SetItemType("object")
+                ucrReceiverCurrentName.strSelectorHeading = "Objects"
+            Case "Filters"
+                ucrReceiverCurrentName.SetItemType("filter")
+                ucrReceiverCurrentName.strSelectorHeading = "Filters"
+                ' Case "Calculations"
+                ' ucrReceiverCurrentName.SetItemType("calculation")
+                ' ucrReceiverCurrentName.strSelectorHeading = "Calculations"
+        End Select
     End Sub
 
     Private Sub NewDefaultName()
