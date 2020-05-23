@@ -671,4 +671,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         End If
     End Sub
+
+    Private Sub cmdOneway1_Click(sender As Object, e As EventArgs) Handles cmdOneway1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcox_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcox_test( )", 1)
+        End If
+    End Sub
 End Class
