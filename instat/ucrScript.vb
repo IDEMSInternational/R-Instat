@@ -73,7 +73,7 @@ Public Class ucrScript
         If txtScript.TextLength > 0 Then
             Dim lineNum As Integer = txtScript.GetLineFromCharIndex(txtScript.GetFirstCharIndexOfCurrentLine())
             If lineNum < txtScript.Lines.Length Then
-                RunText(txtScript.Lines(lineNum))
+                RunText(txtScript.Lines(lineNum), False)
                 If lineNum < txtScript.Lines.Length - 1 Then
                     txtScript.SelectionStart = txtScript.GetFirstCharIndexFromLine(lineNum + 1)
                     txtScript.ScrollToCaret()
@@ -82,9 +82,9 @@ Public Class ucrScript
         End If
     End Sub
 
-    Private Sub RunText(strText As String)
+    Private Sub RunText(strText As String, Optional bClearScriptCmd As Boolean = True)
         If strText <> "" Then
-            frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
+            frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment, bClearScriptCmd)
         End If
     End Sub
 

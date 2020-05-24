@@ -1258,7 +1258,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuProcurementDefineData_Click(sender As Object, e As EventArgs) Handles mnuProcurementDefineData.Click
-        dlgCorruptionDefineProcurement.ShowDialog()
+        dlgDefineCorruption.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticSCFSupportCumulativeExceedanceGraphs_Click(sender As Object, e As EventArgs) Handles mnuClimaticSCFSupportCumulativeExceedanceGraph.Click
@@ -1767,10 +1767,6 @@ Public Class frmMain
         dlgParallelCoordinatePlot.ShowDialog()
     End Sub
 
-    Private Sub mnuModelHypothesisTests_Click(sender As Object, e As EventArgs) Handles mnuModelHypothesisTests.Click
-        dlgHypothesisTestsCalculator.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareColumnGenerateDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateGenerateDate.Click
         dlgRegularSequence.bNumericIsDefault = False
         dlgRegularSequence.ShowDialog()
@@ -2129,5 +2125,13 @@ Public Class frmMain
 
     Private Sub mnuModelUseModelAugment_Click(sender As Object, e As EventArgs) Handles mnuModelUseModelAugment.Click
         dlgAugment.ShowDialog()
+    End Sub
+
+    Private Sub DisplayTopNToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayTopNToolStripMenuItem.Click
+        dlgDisplayTopN.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelFitModelHypothesisTestsKeyboard_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelHypothesisTestsKeyboard.Click
+        dlgHypothesisTestsCalculator.ShowDialog()
     End Sub
 End Class

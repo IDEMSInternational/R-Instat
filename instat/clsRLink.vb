@@ -321,7 +321,7 @@ Public Class RLink
         Return bClose
     End Function
 
-    '''--------------------------------------------------------------------------------------------
+
     ''' <summary> This method executes the <paramref name="strNewScript"/> R script and displays 
     '''           the output as text or graph (determined by <paramref name="strNewScript"/>).
     '''           <para>R commands may be split over multiple lines. This is only allowed if the  
@@ -331,7 +331,7 @@ Public Class RLink
     '''           entered by a human from a dialog window (e.g. a script window). These scripts 
     '''           may contain R commands split over multiple lines to make the commands more 
     '''           readable.</para>
-    '''           </summary>
+
     ''' <param name="strNewScript">    The R script to execute.</param>
     ''' <param name="strNewComment">   Shown as a comment. If this parameter is "" then shows 
     '''                                <paramref name="strNewScript"/> as the comment.</param>
@@ -340,7 +340,7 @@ Public Class RLink
     '''                                Otherwise <paramref name="strNewScript"/> is treated as a 
     '''                                continuation of the previous string that was sent to this 
     '''                                function.</param>
-    '''--------------------------------------------------------------------------------------------
+
     Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String, Optional bClearScriptCmd As Boolean = True)
         Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
 
@@ -849,6 +849,11 @@ Public Class RLink
     '''        <description>4 Executes <paramref name="strScript"/>, stores the result in a 
     '''        temporary R variable, and then outputs the variable's value in a web browser.</description>
     '''     </item>
+    '''     <item>
+    '''        <description>5 Executes <paramref name="strScript"/>, and displays the result 
+    '''        in the output window. Use this value for manually entered R commands (e.g. for 
+    '''        commands entered manually in the script window).</description>
+    '''     </item>
     ''' </list>
     ''' </param>
     ''' <param name="strComment"> is shown as a comment. If this parameter is "" then shows 
@@ -994,9 +999,14 @@ Public Class RLink
                 MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
         Else ' else if script output should not be ignored, not stored in a graph and not stored in a variable
-            If strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray) = -1 Then
+            'if script comes from script window, or else script is a single line
+            If iCallType = 5 OrElse strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray) = -1 Then
+                'wrap the whole script in 'capture.output'
+                '  'capture.output' returns the result of the R command as a string.
+                '  This string can be displayed later in the output window.
                 strCapturedScript = "capture.output(" & strScript & ")"
-            Else
+            Else 'else if script is multi-line
+                'execute all lines apart from the final line
                 strSplitScript = Left(strScript, strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray))
                 If strSplitScript <> "" Then
                     Try
@@ -1005,17 +1015,21 @@ Public Class RLink
                         MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                     End Try
                 End If
+                'ensure that the final line of the script will be executed next
                 strSplitScript = Right(strScript, strScript.Length - strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray) - 2)
+                'wrap the final line in 'capture.output' so that when it's executed, the result can be displayed in the output window
                 strCapturedScript = "capture.output(" & strSplitScript & ")"
             End If
             Try
                 If Not bError Then
+                    'execute the script and assign the result to a temporary variable
                     If Evaluate(strTempAssignTo & " <- " & strCapturedScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride) Then
                         expTemp = GetSymbol(strTempAssignTo)
                         Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
                         If expTemp IsNot Nothing Then
                             strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
                             If strTemp <> "" Then
+                                'ensure that the data returned from the script will be displayed in the output window
                                 strOutput = strOutput & strTemp & Environment.NewLine
                             End If
                         End If
