@@ -450,26 +450,6 @@ circular_ang_dev_label="summary_circular_ang_dev"
 circular_ang_var_label="summary_circular_ang_var"
 circular_rho_label="summary_circular_rho"
 circular_range_label="summary_circular_range"
-mean_error_label="me"
-mean_absolute_error_label="mae"
-root_mean_square_error_label="rmse"
-normalised_mean_square_error_label="nrmse"
-percent_bias_label="PBIAS"
-nash_Sutcliffe_efficiency_label="NSE"
-modified_Nash_Sutcliffe_efficiency_label="mNSE"
-relative_Nash_Sutcliffe_efficiency_label="rNSE"
-Index_of_agreement_label="d"
-modified_index_of_aggrement_label="md"
-relative_index_of_agreement_label="rd"
-coefficient_of_determination_label="R2"
-coefficient_of_persistence_label="cp"
-kling_Gupta_efficiency_label="KGE"
-mean_squared_error_label="mse"
-ratio_of_standard_deviations_label="rSD"
-ratio_of_RMSE_label="rsr"
-sum_of_squared_residuals_label="ssq"
-volumetric_efficiency_label="VE"
-
 
 
 # list of all summary function names
@@ -489,14 +469,7 @@ all_summaries <- c(count_label, count_non_missing_label, count_missing_label,
                    circular_median_label, circular_medianHL_label, circular_mean_label, 
                    circular_Q3_label, circular_max_label, 
                    circular_sd_label, circular_var_label, circular_range_label,
-                   circular_ang_dev_label, circular_ang_var_label, circular_rho_label,
-                   mean_error_label, mean_absolute_error_label, root_mean_square_error_label,
-                   normalised_mean_square_error_label, percent_bias_label, nash_Sutcliffe_efficiency_label,
-                   modified_Nash_Sutcliffe_efficiency_label, relative_Nash_Sutcliffe_efficiency_label,
-                   Index_of_agreement_label, modified_index_of_aggrement_label, relative_index_of_agreement_label,
-                   coefficient_of_determination_label, coefficient_of_persistence_label,
-                   kling_Gupta_efficiency_label, mean_squared_error_label, ratio_of_standard_deviations_label,
-                   ratio_of_RMSE_label, sum_of_squared_residuals_label, volumetric_efficiency_label)
+                   circular_ang_dev_label, circular_ang_var_label, circular_rho_label)
 
 # which of the summaries should return a Date value when x is a Date?
 date_summaries <- c(min_label, lower_quart_label, quartile_label, median_label, 
@@ -631,16 +604,11 @@ summary_quantile_circular <- function (x, probs = seq(0, 1, 0.25), na.rm = FALSE
   else return(circular::quantile.circular(x, probs = probs, na.rm = na.rm, names = names, type = type)[[1]])
 }
 
-summary_mean <- function (x, add_cols, weights = "", na.rm = FALSE, trim = 0, na_type = "", ...) {
+summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0, na_type = "", ...) {
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
   else {
     if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-    else {
-      if (missing(weights)) 
-        return(mean(x, na.rm = na.rm, trim = trim))
-      else 
-        return(stats::weighted.mean(x, w = weights, na.rm = na.rm))
-    }
+    else return(mean(x, na.rm = na.rm, trim = trim))
   }
 }
 
@@ -653,14 +621,12 @@ summary_trimmed_mean <- function (x, add_cols, weights="", na.rm = FALSE, trimme
   }
 }
 
-summary_sum <- function (x, weights = "", na.rm = FALSE, na_type = "", ...) {
+summary_sum <- function (x, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else {
-      if (missing(weights)) return(sum(x, na.rm = na.rm))
-      else return(sum(x*weights, na.rm = na.rm))
-    }
+  else{
+    return(sum(x, na.rm = na.rm))
   }
-
+}
 
 summary_count <- function(x, ...) {
   return(length(x))
@@ -675,23 +641,19 @@ summary_count_non_missing <- function(x, ...) {
   return(sum(!is.na(x)))
 }
 
-summary_sd <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
+summary_sd <- function(x, na.rm = FALSE, na_type = "", ...) {
+  # needed because e.g. sd(as.character(1:10)) returns a numeric value
+  if(is.character(x)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if (missing(weights)) 
-      return(sd(x, na.rm = na.rm))
-    else 
-      return(sqrt(Hmisc::wtd.var(x, weights = weights, na.rm = na.rm)))
-  }  
+    else{
+      return(sd(x,na.rm = na.rm))
+    }
 }
 
-summary_var <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
+summary_var <- function(x, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if (missing(weights)) 
-      return(var(x,na.rm = na.rm))
-    else 
-      return(Hmisc::wtd.var(x, weights = weights, na.rm = na.rm))
+    return(var(x,na.rm = na.rm))
   }
 }
 
@@ -721,68 +683,48 @@ summary_range <- function(x, na.rm = FALSE, na_type = "", ...) {
 }
 
 # median function
-summary_median <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
+summary_median <- function(x, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if(missing(weights))
-      return(median(x, na.rm = na.rm))
-    else 
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.5, na.rm = na.rm))
+    return(median(x, na.rm = na.rm))
   }
 }
 
 # quantile function
-summary_quantile <- function(x, na.rm = FALSE, weights = "", probs, na_type = "", ...) {
+summary_quantile <- function(x, na.rm = FALSE, probs, type = 7, na_type = "", ...) {
   if(!na.rm && anyNA(x)) return(NA)
   # This prevents multiple values being returned
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(missing(weights))
-      return(quantile(x, na.rm = na.rm, probs = probs)[[1]])
-    else 
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = probs, na.rm = na.rm))
+  else {
+    if(lubridate::is.Date(x) && type %in% c(2, 4:9)) {
+      message("type = ", type, " not supported for Dates. Deafulting to type = 1")
+      type <- 1
+    }
+    return(quantile(x, na.rm = na.rm, probs = probs, type = type)[[1]])
   }
 }
 
 # lower quartile function
-lower_quartile <- function(x, na.rm = FALSE, na_type = "", weights = "", ...) {
+lower_quartile <- function(x, na.rm = FALSE, type = 7, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if(missing(weights))
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.25))
-    else{
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.25, na.rm = na.rm)[[1]])
-    }
+    return(summary_quantile(x, na.rm = na.rm, probs = 0.25, type = type))
   }
 }
 
 # upper quartile function
-upper_quartile <- function(x, na.rm = FALSE, na_type = "" ,weights = "", ...) {
+upper_quartile <- function(x, na.rm = FALSE, type = 7, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if(missing(weights))
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.75))
-    else{
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.75, na.rm = na.rm)[[1]])
-    }
+    return(summary_quantile(x, na.rm = na.rm, probs = 0.75, type = type))
   }
 }
 
 # Skewness e1071 function
-summary_skewness <- function(x, weights = "", na.rm = FALSE, type = 2, na_type = "", ...) {
+summary_skewness <- function(x, na.rm = FALSE, type = 2, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if (missing(weights)) {
-      return(e1071::skewness(x, na.rm = na.rm, type = type))
-    }
-    if (length(weights) != length(x)) 
-      stop("'x' and 'weights' must have the same length")
-    if (na.rm) {
-      i <- !is.na(x)&&!is.na(weights)
-      weights <- weights[i]
-      x <- x[i]
-    }
-    ( sum( weights*(x - Weighted.Desc.Stat::w.mean(x, weights))^3 ) / sum(weights)) / Weighted.Desc.Stat::w.sd(x, weights)^3
+    return(e1071::skewness(x, na.rm = na.rm, type = type))
   }
 }
 
@@ -823,50 +765,26 @@ summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc
 }
 
 # kurtosis function
-summary_kurtosis <- function(x, na.rm = FALSE, weights = "", type = 2, na_type = "", ...) {
+summary_kurtosis <- function(x, na.rm = FALSE, type = 2, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if (missing(weights)) {
       return(e1071::kurtosis(x, na.rm = na.rm, type = type))
-    }
-    if (length(weights) != length(x)) 
-      stop("'x' and 'weights' must have the same length")
-    if (na.rm) {
-      i <- !is.na(x) && !is.na(weights)
-      weights <- weights[i]
-      x <- x[i]
-    }
-    ((sum(weights * (x - Weighted.Desc.Stat::w.mean(x, weights))^4)/sum(weights))/Weighted.Desc.Stat::w.sd(x, weights)^4) - 3
   }
 }
 
 # Coefficient of Variation function
-summary_coef_var <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
+summary_coef_var <- function(x, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if (missing(weights)) {
       return(summary_sd(x) / summary_mean(x))
-    }
-    if (length(weights) != length(x)) 
-      stop("'x' and 'weights' must have the same length")
-    if (na.rm) {
-      i <- !is.na(x) && !is.na(weights)
-      weights <- weights[i]
-      x <- x[i]
-    }
-    Weighted.Desc.Stat::w.cv(x = x, mu = weights)
   }
 }
 
 # median absolute deviation function
-summary_median_absolute_deviation <- function(x, constant = 1.4826, na.rm = FALSE, na_type = "", weights = "", low = FALSE, high = FALSE, ...) {
+summary_median_absolute_deviation <- function(x, constant = 1.4826, na.rm = FALSE, na_type = "", low = FALSE, high = FALSE, ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if (missing(weights))
-      return(stats::mad(x, constant = constant, na.rm = na.rm, low = low, high = high))
-    else{
-      Weighted.Desc.Stat::w.ad(x = x, mu = weights)
-    }
+    return(stats::mad(x, constant = constant, na.rm = na.rm, low = low, high = high))  
   }
 }
 
@@ -895,35 +813,20 @@ summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na
 }
 
 # cor function
-summary_cor <- function(x, y, na.rm = FALSE, na_type = "", weights = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+summary_cor <- function(x, y, na.rm = FALSE, na_type = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if (missing(weights))
-      return(cor(x = x, y = y, use = use, method = method))
-    else{
-      weights::wtd.cor(x = x, y = y, weight = weights)[1]
-    }
+    return(cor(x = x, y = y, use = use, method = method))
   }
 }
 
-# cov function 
-summary_cov <- function(x, y, na.rm = FALSE, weights = "", na_type = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+# cov function
+summary_cov <- function(x, y, na.rm = FALSE, na_type = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if (missing(weights)) {
-      return(cov(x = x, y = y, use = use, method = method))
-    }
-    if (length(weights) != length(x)) 
-      stop("'x' and 'weights' must have the same length")
-    if (na.rm) {
-      i <- !is.na(x) && !is.na(weights)
-      weights <- weights[i]
-      x <- x[i]
-    }
-    (sum(weights * x * y)/sum(weights)) - (Weighted.Desc.Stat::w.mean(x = x, mu = weights) * Weighted.Desc.Stat::w.mean(x = y, mu = weights))
-  }
+    return(cov(x = x, y = y, use = use, method = method))
 }
-
+}
 # first function
 summary_first <- function(x, order_by = NULL, ...) {
     return(dplyr::first(x = x, order_by = order_by))
@@ -970,7 +873,6 @@ proportion_calc <- function(x, prop_test = "==", prop_value, As_percentage = FAL
   }
 }
 }
-
 #count function
 count_calc <- function(x, count_test = "==", count_value, na.rm = FALSE, na_type = "", ...){ 
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
@@ -987,6 +889,7 @@ count_calc <- function(x, count_test = "==", count_value, na.rm = FALSE, na_type
 }
 
 #standard error of mean function
+
 standard_error_mean <- function(x, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
       else{
@@ -1001,182 +904,6 @@ standard_error_mean <- function(x, na.rm = FALSE, na_type = "", ...){
       }
 }
 
-#Verification functions 
-#HydroGOF Package
-
-#Mean error
-me <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::me(sim = x, obs = y, na.rm = na.rm))
-  }
-} 
-
-#Mean absolute error
-mae <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::mae(sim = x, obs = y, na.rm = na.rm))
-  }
-} 
-
-#Root mean square error
-rmse <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rmse(sim = x, obs = y, na.rm = na.rm))
-  }
-}
-
-#Normalised mean square error
-nrmse <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::nrmse(sim = x, obs = y, na.rm = na.rm))
-  }
-} 
-
-#Percent bias
-PBIAS <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::pbias(sim = x, obs = y, na.rm = na.rm))
-  }
-}
-
-#Nash-Sutcliffe efficiency
-NSE <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::NSeff(sim = x, obs = y, na.rm = na.rm))
-  }
-}
-
-#Modified Nash-Sutcliffe efficiency
-mNSE <- function(x, y, j = 1, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::mNSE(sim = x, obs = y, j = j, na.rm = na.rm))
-  }
-} 
-
-#Relative Nash-Sutcliffe efficiency
-rNSE <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rNSeff(sim = x, obs = y, na.rm = na.rm))
-  }
-}
-
-#Index of agreement
-d <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::d(sim = x, obs = y, na.rm = na.rm))
-  }
-}
-
-#Modified index of aggrement
-md <- function(x, y, j = 1, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::md(sim = x, obs = y, j = j,  na.rm = na.rm))
-  }
-}
-
-
-#Relative index of agreement
-rd <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rd(sim = x, obs = y, na.rm = na.rm))
-  }
-}
-
-
-#Coefficient of determination
-R2 <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::br2(sim = x, obs = y, na.rm = na.rm))
-  }
-}
-
-#Coefficient of persistence
-cp <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(unique(y))==1||length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::cp(sim = x, obs = y, na.rm = na.rm))
-  }
-}
-
-#Kling-Gupta efficiency
-KGE <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::KGE(sim = x, obs = y, na.rm = na.rm))
-  }
-}
-
-#mean squared error
-mse <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::mse(sim = x, obs = y, na.rm = na.rm))
-  }
-} 
-
-
-#Ratio of standard deviations
-rSD <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rSD(sim = x, obs = y, na.rm = na.rm))
-  }
-}
-
-#Ratio of RMSE
-rsr <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rsr(sim = x, obs = y, na.rm = na.rm))
-  }
-}
-
-#Sum of squared residuals
-ssq <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::ssq(sim = x, obs = y, na.rm = na.rm))
-  }
-}
-
-#Volumetric efficiency
-VE <- function(x, y, na.rm = FALSE, na_type = "", ...){
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::VE(sim = x, obs = y, na.rm = na.rm))
-  }
-}
 
 DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   if(n_column_factors == 1 && length(factors) == 0) n_column_factors <- 0

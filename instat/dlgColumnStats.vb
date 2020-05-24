@@ -21,7 +21,6 @@ Public Class dlgColumnStats
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
     Private clsDefaultFunction, clsConcFunction As New RFunction
-    Private strWeightLabel As String = ""
     Public strDefaultDataFrame As String = ""
     Public strDefaultVariables() As String
     Public strDefaultFactors() As String
@@ -86,17 +85,8 @@ Public Class dlgColumnStats
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
 
-        ucrReceiverWeights.SetParameter(New RParameter("weights", 7))
-        ucrReceiverWeights.Selector = ucrSelectorForColumnStatistics
-        ucrReceiverWeights.SetParameterIsString()
-
         'linking
-        ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStoreResults.AddToLinkedControls(ucrChkOriginalLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrChkWeights.SetText("Weights")
-        ucrChkWeights.AddParameterPresentCondition(True, "weights")
-        ucrChkWeights.AddParameterPresentCondition(False, "weights", False)
     End Sub
 
     Private Sub SetDefaults()
@@ -124,10 +114,7 @@ Public Class dlgColumnStats
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        'Temporary fix: set conditions properly for ucrChkWeights so that it retains its state when the dialog is reopened and ucrReceiverWeights is empty.
-        If bReset Then
-            SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        End If
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub SetDefaultColumns()
@@ -166,7 +153,7 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsNewRFunction:=clsSummariesList, clsNewDefaultFunction:=clsDefaultFunction, clsNewConcFunction:=clsConcFunction, ucrNewBaseSelector:=ucrSelectorForColumnStatistics, bReset:=bResetSubdialog, strNewWeightLabel:=strWeightLabel)
+        sdgSummaries.SetRFunction(clsSummariesList, clsDefaultFunction, clsConcFunction, ucrSelectorForColumnStatistics, bResetSubdialog)
         sdgSummaries.ShowDialog()
         bResetSubdialog = False
         TestOKEnabled()
@@ -192,22 +179,6 @@ Public Class dlgColumnStats
             ucrBase.clsRsyntax.iCallType = 2
         Else
             ucrBase.clsRsyntax.iCallType = 0
-        End If
-    End Sub
-
-    Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged
-        If ucrChkWeights.Checked Then
-            ucrReceiverWeights.SetMeAsReceiver()
-        Else
-            ucrReceiverSelectedVariables.SetMeAsReceiver()
-        End If
-    End Sub
-
-    Private Sub ucrReceiverWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeights.ControlValueChanged, ucrChkWeights.ControlValueChanged
-        If ucrChkWeights.Checked AndAlso Not ucrReceiverWeights.IsEmpty Then
-            strWeightLabel = " (W)"
-        Else
-            strWeightLabel = ""
         End If
     End Sub
 

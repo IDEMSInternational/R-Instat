@@ -501,7 +501,6 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
       num_cols = ncol(col_data)
     }
     else num_cols = 1
-    if(tibble::is_tibble(col_data)) col_data <- data.frame(col_data)
   }
   else {
     if(missing(col_data)) col_data = replicate(num_cols, rep(NA, self$get_data_frame_length()))

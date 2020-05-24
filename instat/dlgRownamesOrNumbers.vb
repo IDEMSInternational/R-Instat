@@ -48,7 +48,6 @@ Public Class dlgRowNamesOrNumbers
         ucrReceiverRowNames.SetParameterIsRFunction()
         ucrReceiverRowNames.Selector = ucrSelectorRowNames
         ucrReceiverRowNames.SetMeAsReceiver()
-        ucrReceiverRowNames.bUseFilteredData = False
 
         ' main rdo options
         ucrPnlOverallOptions.AddRadioButton(rdoCopyRowNamesIntoFirstColumn)
