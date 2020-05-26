@@ -78,12 +78,12 @@ Partial Class dlgStringHandling
         Me.ucrSaveStringHandling = New instat.ucrSave()
         Me.ucrReceiverForRegexExpression = New instat.ucrReceiverExpression()
         Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
-        Me.ucrReceiverStringHandling = New instat.ucrReceiverSingle()
         Me.ucrInputReplaceBy = New instat.ucrInputTextBox()
         Me.ucrInputPattern = New instat.ucrInputTextBox()
         Me.ucrSelectorStringHandling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlStringHandling = New instat.UcrPanel()
+        Me.ucrReceiverStringHandling = New instat.ucrReceiverSingleNew()
         Me.grpRegex.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -369,15 +369,6 @@ Partial Class dlgStringHandling
         resources.ApplyResources(Me.ucrChkIncludeRegularExpressions, "ucrChkIncludeRegularExpressions")
         Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
         '
-        'ucrReceiverStringHandling
-        '
-        Me.ucrReceiverStringHandling.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverStringHandling, "ucrReceiverStringHandling")
-        Me.ucrReceiverStringHandling.Name = "ucrReceiverStringHandling"
-        Me.ucrReceiverStringHandling.Selector = Nothing
-        Me.ucrReceiverStringHandling.strNcFilePath = ""
-        Me.ucrReceiverStringHandling.ucrSelector = Nothing
-        '
         'ucrInputReplaceBy
         '
         Me.ucrInputReplaceBy.AddQuotesIfUnrecognised = True
@@ -412,10 +403,20 @@ Partial Class dlgStringHandling
         resources.ApplyResources(Me.ucrPnlStringHandling, "ucrPnlStringHandling")
         Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
         '
+        'ucrReceiverStringHandling
+        '
+        Me.ucrReceiverStringHandling.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStringHandling, "ucrReceiverStringHandling")
+        Me.ucrReceiverStringHandling.Name = "ucrReceiverStringHandling"
+        Me.ucrReceiverStringHandling.Selector = Nothing
+        Me.ucrReceiverStringHandling.strNcFilePath = ""
+        Me.ucrReceiverStringHandling.ucrSelector = Nothing
+        '
         'dlgStringHandling
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverStringHandling)
         Me.Controls.Add(Me.rdoRegex)
         Me.Controls.Add(Me.rdoFixed)
         Me.Controls.Add(Me.ucrPnlFixedRegex)
@@ -429,7 +430,6 @@ Partial Class dlgStringHandling
         Me.Controls.Add(Me.rdoLocate)
         Me.Controls.Add(Me.rdoReplace)
         Me.Controls.Add(Me.rdoCount)
-        Me.Controls.Add(Me.ucrReceiverStringHandling)
         Me.Controls.Add(Me.lblPattern)
         Me.Controls.Add(Me.lblReplaceBy)
         Me.Controls.Add(Me.lblColumn)
@@ -455,7 +455,6 @@ Partial Class dlgStringHandling
     Friend WithEvents lblColumn As Label
     Friend WithEvents lblReplaceBy As Label
     Friend WithEvents lblPattern As Label
-    Friend WithEvents ucrReceiverStringHandling As ucrReceiverSingle
     Friend WithEvents rdoDetect As RadioButton
     Friend WithEvents rdoExtract As RadioButton
     Friend WithEvents rdoLocate As RadioButton
@@ -493,4 +492,5 @@ Partial Class dlgStringHandling
     Friend WithEvents rdoRegex As RadioButton
     Friend WithEvents rdoFixed As RadioButton
     Friend WithEvents ucrPnlFixedRegex As UcrPanel
+    Friend WithEvents ucrReceiverStringHandling As ucrReceiverSingleNew
 End Class
