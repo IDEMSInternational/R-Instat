@@ -19,7 +19,7 @@ Partial Class dlgRenameObjects
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,37 +36,18 @@ Partial Class dlgRenameObjects
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRenameObjects))
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorForRenameObject = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverCurrentName = New instat.ucrReceiverSingle()
         Me.lblCurrentName = New System.Windows.Forms.Label()
         Me.lblNewName = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.ucrInputType = New instat.ucrInputComboBox()
+        Me.ucrReceiverCurrentName = New instat.ucrReceiverSingle()
         Me.ucrInputNewName = New instat.ucrInputTextBox()
+        Me.ucrSelectorForRenameObject = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrSelectorForRenameObject
-        '
-        Me.ucrSelectorForRenameObject.bShowHiddenColumns = False
-        Me.ucrSelectorForRenameObject.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForRenameObject, "ucrSelectorForRenameObject")
-        Me.ucrSelectorForRenameObject.Name = "ucrSelectorForRenameObject"
-        '
-        'ucrReceiverCurrentName
-        '
-        Me.ucrReceiverCurrentName.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverCurrentName, "ucrReceiverCurrentName")
-        Me.ucrReceiverCurrentName.Name = "ucrReceiverCurrentName"
-        Me.ucrReceiverCurrentName.Selector = Nothing
-        Me.ucrReceiverCurrentName.strNcFilePath = ""
-        Me.ucrReceiverCurrentName.ucrSelector = Nothing
         '
         'lblCurrentName
         '
@@ -80,6 +61,28 @@ Partial Class dlgRenameObjects
         Me.lblNewName.Name = "lblNewName"
         Me.lblNewName.Tag = "New_Name"
         '
+        'lblType
+        '
+        resources.ApplyResources(Me.lblType, "lblType")
+        Me.lblType.Name = "lblType"
+        Me.lblType.Tag = "New_Name"
+        '
+        'ucrInputType
+        '
+        Me.ucrInputType.AddQuotesIfUnrecognised = True
+        Me.ucrInputType.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputType, "ucrInputType")
+        Me.ucrInputType.Name = "ucrInputType"
+        '
+        'ucrReceiverCurrentName
+        '
+        Me.ucrReceiverCurrentName.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverCurrentName, "ucrReceiverCurrentName")
+        Me.ucrReceiverCurrentName.Name = "ucrReceiverCurrentName"
+        Me.ucrReceiverCurrentName.Selector = Nothing
+        Me.ucrReceiverCurrentName.strNcFilePath = ""
+        Me.ucrReceiverCurrentName.ucrSelector = Nothing
+        '
         'ucrInputNewName
         '
         Me.ucrInputNewName.AddQuotesIfUnrecognised = True
@@ -88,10 +91,25 @@ Partial Class dlgRenameObjects
         resources.ApplyResources(Me.ucrInputNewName, "ucrInputNewName")
         Me.ucrInputNewName.Name = "ucrInputNewName"
         '
+        'ucrSelectorForRenameObject
+        '
+        Me.ucrSelectorForRenameObject.bDropUnusedFilterLevels = False
+        Me.ucrSelectorForRenameObject.bShowHiddenColumns = False
+        Me.ucrSelectorForRenameObject.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorForRenameObject, "ucrSelectorForRenameObject")
+        Me.ucrSelectorForRenameObject.Name = "ucrSelectorForRenameObject"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
         'dlgRenameObjects
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblType)
+        Me.Controls.Add(Me.ucrInputType)
         Me.Controls.Add(Me.ucrReceiverCurrentName)
         Me.Controls.Add(Me.ucrInputNewName)
         Me.Controls.Add(Me.lblNewName)
@@ -113,4 +131,6 @@ Partial Class dlgRenameObjects
     Friend WithEvents lblCurrentName As Label
     Friend WithEvents lblNewName As Label
     Friend WithEvents ucrInputNewName As ucrInputTextBox
+    Friend WithEvents lblType As Label
+    Friend WithEvents ucrInputType As ucrInputComboBox
 End Class
