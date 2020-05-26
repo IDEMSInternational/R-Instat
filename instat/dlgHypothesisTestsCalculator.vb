@@ -823,4 +823,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quadrant_test( )", 1)
         End If
     End Sub
+
+    Private Sub cmdKoziol_Click(sender As Object, e As EventArgs) Handles cmdKoziol.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::koziol_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::koziol_test( )", 1)
+        End If
+    End Sub
 End Class
