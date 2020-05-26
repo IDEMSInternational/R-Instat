@@ -724,7 +724,15 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::sign_test(formula = , data = , subset = NULL)", 25)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::sign_test( )", 2)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::sign_test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdWilcoksign_Click(sender As Object, e As EventArgs) Handles cmdWilcoksign.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcoxsign_test(formula = , data = , subset = NULL)", 25)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcoxsign_test( )", 1)
         End If
     End Sub
 End Class
