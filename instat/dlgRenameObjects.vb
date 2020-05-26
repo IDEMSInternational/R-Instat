@@ -45,10 +45,11 @@ Public Class dlgRenameObjects
     Private Sub ReopenDialog()
         ' temp. fix, the receivers should clear only if the name of the object in it has changed
         ucrSelectorForRenameObject.Reset()
-        NewDefaultName()
+        ucrInputNewName.SetName("")
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctType As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 350
 
         'ucrSelector
@@ -60,14 +61,19 @@ Public Class dlgRenameObjects
         ucrReceiverCurrentName.Selector = ucrSelectorForRenameObject
         ucrReceiverCurrentName.SetMeAsReceiver()
         ucrReceiverCurrentName.SetParameterIsString()
-        ucrReceiverCurrentName.SetItemType("object")
-        ucrReceiverCurrentName.strSelectorHeading = "Objects"
-
         'ucrNewName
         ucrInputNewName.SetParameter(New RParameter("new_name", 2))
         ucrInputNewName.SetValidationTypeAsRVariable()
 
-        NewDefaultName()
+        ucrInputType.SetParameter(New RParameter("object_type", 3))
+        dctType.Add("Objects", Chr(34) & "object" & Chr(34))
+        dctType.Add("Filters", Chr(34) & "filter" & Chr(34))
+        dctType.Add("Calculations", Chr(34) & "calculation" & Chr(34))
+        dctType.Add("Tables", Chr(34) & "table" & Chr(34))
+        dctType.Add("Graphs", Chr(34) & "graph" & Chr(34))
+        dctType.Add("Models", Chr(34) & "model" & Chr(34))
+        ucrInputType.SetItems(dctType)
+        ucrInputType.SetDropDownStyleAsNonEditable()
     End Sub
 
     Private Sub SetDefaults()
@@ -77,6 +83,7 @@ Public Class dlgRenameObjects
         ucrInputNewName.Reset()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_object")
+        clsDefaultFunction.AddParameter("object_type", Chr(34) & "object" & Chr(34), iPosition:=3)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
@@ -110,8 +117,34 @@ Public Class dlgRenameObjects
         bUseSelectedColumn = False
     End Sub
 
-    Private Sub ucrInputNewName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCurrentName.ControlValueChanged
+    Private Sub ucrReceiverCurrentName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCurrentName.ControlValueChanged
         NewDefaultName()
+    End Sub
+
+    Private Sub ucrInputType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputType.ControlValueChanged
+        Dim strType As String
+        strType = ucrInputType.GetValue()
+
+        Select Case strType
+            Case "Objects"
+                ucrReceiverCurrentName.SetItemType("object")
+                ucrReceiverCurrentName.strSelectorHeading = "Objects"
+            Case "Filters"
+                ucrReceiverCurrentName.SetItemType("filter")
+                ucrReceiverCurrentName.strSelectorHeading = "Filters"
+            Case "Calculations"
+                ucrReceiverCurrentName.SetItemType("calculation")
+                ucrReceiverCurrentName.strSelectorHeading = "Calculations"
+            Case "Tables"
+                ucrReceiverCurrentName.SetItemType("table")
+                ucrReceiverCurrentName.strSelectorHeading = "Tables"
+            Case "Graphs"
+                ucrReceiverCurrentName.SetItemType("graph")
+                ucrReceiverCurrentName.strSelectorHeading = "Graphs"
+            Case "Models"
+                ucrReceiverCurrentName.SetItemType("model")
+                ucrReceiverCurrentName.strSelectorHeading = "Models"
+        End Select
     End Sub
 
     Private Sub NewDefaultName()
