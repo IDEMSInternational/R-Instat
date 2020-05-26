@@ -595,7 +595,7 @@ Public Class dlgHypothesisTestsCalculator
                 grpVerification.Visible = True
                 grpCoin.Visible = False
             Case "Coin"
-                strPackageName = "verification"
+                strPackageName = "coin"
                 grpStats1.Visible = False
                 grpStats2.Visible = False
                 grpAgricolae.Visible = False
@@ -613,6 +613,7 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Dim clsHelp As New RFunction
+
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
         clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
