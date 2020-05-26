@@ -735,4 +735,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcoxsign_test( )", 1)
         End If
     End Sub
+
+    Private Sub cmdFriedman1_Click(sender As Object, e As EventArgs) Handles cmdFriedman1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::friedman_test(object = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::friedman_test( )", 1)
+        End If
+    End Sub
 End Class
