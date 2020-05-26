@@ -288,7 +288,8 @@ Public Class ucrAxes
             clsXYScaleDateBreakOperator = clsXYScaleDateFunction.GetParameter("date_breaks").clsArgumentCodeStructure
         Else
             clsXYScaleDateBreakOperator = New ROperator
-            'clsXYScaleDateBreakOperator.SetOperation("")
+            clsXYScaleDateBreakOperator.SetOperation(" ")
+            clsXYScaleDateBreakOperator.bSpaceAroundOperation = False
             clsXYScaleDateBreakOperator.bToScriptAsRString = True
             clsXYScaleDateFunction.AddParameter("date_breaks", clsROperatorParameter:=clsXYScaleDateBreakOperator)
         End If
