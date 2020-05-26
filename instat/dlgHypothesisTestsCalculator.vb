@@ -847,4 +847,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::cmh_test( )", 1)
         End If
     End Sub
+
+    Private Sub cmdLbl_Click(sender As Object, e As EventArgs) Handles cmdLbl.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::lbl_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::lbl_test( )", 1)
+        End If
+    End Sub
 End Class
