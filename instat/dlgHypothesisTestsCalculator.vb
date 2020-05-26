@@ -807,4 +807,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::spearman_test( )", 1)
         End If
     End Sub
+
+    Private Sub cmdFisyat_Click(sender As Object, e As EventArgs) Handles cmdFisyat.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fisyat_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fisyat_test( )", 1)
+        End If
+    End Sub
 End Class
