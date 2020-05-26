@@ -783,4 +783,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::ansari_test( )", 1)
         End If
     End Sub
+
+    Private Sub cmdFligner1_Click(sender As Object, e As EventArgs) Handles cmdFligner1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fligner_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fligner_test( )", 1)
+        End If
+    End Sub
 End Class
