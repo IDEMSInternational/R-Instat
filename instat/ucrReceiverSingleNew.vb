@@ -3,7 +3,7 @@ Imports RDotNet
 Public Class ucrReceiverSingleNew
     Dim strDataFrameName As String
     Public strCurrDataType As String
-    Public Event WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle)
+    Public Event WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingleNew)
     'We have not added this to multiple receiver because we have no case yet that we want not to print graph
     Public bPrintGraph As Boolean = True
     'If True variable will be assigned to e.g. DF.x instead of x (where DF is strDataFrameName and x is receiver value)
@@ -17,6 +17,32 @@ Public Class ucrReceiverSingleNew
         ' Add any initialization after the InitializeComponent() call.
         strDataFrameName = ""
         strCurrDataType = ""
+    End Sub
+
+    Public Overrides Property Selector As ucrSelector
+
+        Get
+            Return MyBase.Selector
+        End Get
+        Set(ucrNewSelector As ucrSelector)
+            MyBase.Selector = ucrNewSelector
+            'todo attach the necessary selector changes events
+            AddHandler Selector.lstAvailableVariable.DoubleClick, AddressOf OnEvtAvailableVariablesChanged
+
+            'get the selector varaibles and set them to the list of available variables for the combombobox
+            'SetVariablesToCombobox()
+        End Set
+    End Property
+
+    Private Sub SetVariablesToCombobox()
+
+        For i As Integer = 0 To i < Selector.lstAvailableVariable.SelectedItems.Count - 1
+            cboReceiverSingle.Items.Add(Selector.lstAvailableVariable.SelectedItems.Item(i).Text)
+        Next
+    End Sub
+
+    Private Sub OnEvtAvailableVariablesChanged()
+
     End Sub
 
     Public Overrides Sub AddSelected()
@@ -45,7 +71,7 @@ Public Class ucrReceiverSingleNew
         'If RemoveSelected() later contains other things, this may need to be updated.
         'RemoveSelected()
         If Selector IsNot Nothing Then
-            Selector.RemoveFromVariablesList(txtReceiverSingle.Text, strDataFrame)
+            Selector.RemoveFromVariablesList(cboReceiverSingle.Text, strDataFrame)
         End If
         MyBase.Add(strItem, strDataFrame)
 
@@ -56,7 +82,7 @@ Public Class ucrReceiverSingleNew
         End If
         clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetDataType.AddParameter("property", "data_type_label")
-        If txtReceiverSingle.Enabled Then
+        If cboReceiverSingle.Enabled Then
             If strCurrentItemType = "column" Then
                 If strDataFrame = "" Then
                     SetMeAsReceiver()
@@ -105,21 +131,21 @@ Public Class ucrReceiverSingleNew
                 strCurrDataType = ""
             End If
             strDataFrameName = strDataFrame
-            txtReceiverSingle.Text = strItem
+            cboReceiverSingle.Text = strItem
             Selector.AddToVariablesList(strItem, strDataFrameName)
             If bRemove Then
                 RemoveSelected()
             End If
-            txtReceiverSingle.Enabled = Not bFixReceiver
+            cboReceiverSingle.Enabled = Not bFixReceiver
         End If
     End Sub
 
     Public Overrides Sub RemoveSelected()
-        If txtReceiverSingle.Enabled Then
+        If cboReceiverSingle.Enabled Then
             If Selector IsNot Nothing Then
-                Selector.RemoveFromVariablesList(txtReceiverSingle.Text, strDataFrameName)
+                Selector.RemoveFromVariablesList(cboReceiverSingle.Text, strDataFrameName)
             End If
-            txtReceiverSingle.Text = ""
+            cboReceiverSingle.Text = ""
             strDataFrameName = ""
         End If
         MyBase.RemoveSelected()
@@ -131,7 +157,7 @@ Public Class ucrReceiverSingleNew
 
     Public Overrides Function IsEmpty() As Boolean
 
-        If txtReceiverSingle.Text <> "" Then
+        If cboReceiverSingle.Text <> "" Then
             Return False
         Else
             Return True
@@ -145,7 +171,7 @@ Public Class ucrReceiverSingleNew
         Dim clsGetVariablesFunc As New RFunction
         Dim clsParam As New RParameter
         Dim strCurrentType As String
-        If Selector IsNot Nothing AndAlso txtReceiverSingle.Text <> "" Then
+        If Selector IsNot Nothing AndAlso cboReceiverSingle.Text <> "" Then
             clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
             If bTypeSet Then
                 strCurrentType = strType
@@ -213,9 +239,9 @@ Public Class ucrReceiverSingleNew
 
             'TODO make this an option set in Options menu
             If bIncludeDataFrameInAssignment AndAlso strDataFrameName <> "" Then
-                clsGetVariablesFunc.SetAssignTo(strDataFrameName & "." & txtReceiverSingle.Text)
+                clsGetVariablesFunc.SetAssignTo(strDataFrameName & "." & cboReceiverSingle.Text)
             Else
-                clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
+                clsGetVariablesFunc.SetAssignTo(cboReceiverSingle.Text)
             End If
             Return clsGetVariablesFunc
         Else
@@ -225,11 +251,11 @@ Public Class ucrReceiverSingleNew
 
     Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
-        If txtReceiverSingle.Text <> "" Then
+        If cboReceiverSingle.Text <> "" Then
             If bWithQuotes Then
-                strTemp = Chr(34) & txtReceiverSingle.Text & Chr(34)
+                strTemp = Chr(34) & cboReceiverSingle.Text & Chr(34)
             Else
-                strTemp = txtReceiverSingle.Text
+                strTemp = cboReceiverSingle.Text
             End If
         End If
         Return strTemp
@@ -245,21 +271,21 @@ Public Class ucrReceiverSingleNew
         Return strDataFrameName
     End Function
 
-    Private Sub txtReceiverSingle_TextChanged(sender As Object, e As EventArgs) Handles txtReceiverSingle.TextChanged
+    Private Sub cboReceiverSingle_TextChanged(sender As Object, e As EventArgs) Handles cboReceiverSingle.TextChanged
         OnValueChanged(sender, e)
         OnSelectionChanged()
     End Sub
 
     'TODO make these global options
     Public Overrides Sub SetColor()
-        txtReceiverSingle.BackColor = Color.Aqua
+        cboReceiverSingle.BackColor = Color.Aqua
     End Sub
 
     Public Overrides Sub RemoveColor()
-        txtReceiverSingle.BackColor = Color.White
+        cboReceiverSingle.BackColor = Color.White
     End Sub
 
-    Private Sub txtReceiverSingle_KeyDown(sender As Object, e As KeyEventArgs) Handles txtReceiverSingle.KeyDown
+    Private Sub cboReceiverSingle_KeyDown(sender As Object, e As KeyEventArgs) Handles cboReceiverSingle.KeyDown
         If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
             RemoveSelected()
         End If
@@ -273,7 +299,7 @@ Public Class ucrReceiverSingleNew
             Selector.RemoveFromVariablesList("variable")
         Else
             Me.Enabled = True
-            If txtReceiverSingle.Text = "variable" Then
+            If cboReceiverSingle.Text = "variable" Then
                 RemoveSelected()
             End If
         End If
@@ -284,7 +310,7 @@ Public Class ucrReceiverSingleNew
     End Sub
 
     Private Sub mnuRightClickCopy_Click(sender As Object, e As EventArgs) Handles mnuRightClickCopy.Click
-        txtReceiverSingle.Copy()
+        'cboReceiverSingle.Copy() 
     End Sub
 
     Private Sub mnuRightClickRemove_Click(sender As Object, e As EventArgs) Handles mnuRightClickRemove.Click
@@ -321,7 +347,7 @@ Public Class ucrReceiverSingleNew
     End Sub
 
     Public Overrides Sub SetTextColour(clrNew As Color)
-        txtReceiverSingle.ForeColor = clrNew
+        cboReceiverSingle.ForeColor = clrNew
     End Sub
 
     Public Overrides Function GetItemsDataFrames() As List(Of String)
