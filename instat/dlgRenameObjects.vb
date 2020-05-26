@@ -45,7 +45,7 @@ Public Class dlgRenameObjects
     Private Sub ReopenDialog()
         ' temp. fix, the receivers should clear only if the name of the object in it has changed
         ucrSelectorForRenameObject.Reset()
-        NewDefaultName()
+        ucrInputNewName.SetName("")
     End Sub
 
     Private Sub InitialiseDialog()
@@ -71,9 +71,6 @@ Public Class dlgRenameObjects
         dctType.Add("Calculations", Chr(34) & "calculation" & Chr(34)) 
         ucrInputType.SetItems(dctType)
         ucrInputType.SetDropDownStyleAsNonEditable()
-
-
-        NewDefaultName()
     End Sub
 
     Private Sub SetDefaults()
@@ -117,7 +114,7 @@ Public Class dlgRenameObjects
         bUseSelectedColumn = False
     End Sub
 
-    Private Sub ucrInputNewName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCurrentName.ControlValueChanged
+    Private Sub ucrReceiverCurrentName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCurrentName.ControlValueChanged
         NewDefaultName()
     End Sub
 
