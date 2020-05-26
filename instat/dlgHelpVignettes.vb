@@ -57,6 +57,7 @@ Public Class dlgHelpVignettes
         ucrChkFunction.SetText("Function Name:")
 
         clsGetPackages.SetRCommand("get_installed_packages_with_data")
+        clsGetPackages.AddParameter("with_data", "FALSE")
         expPackageNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetPackages.ToScript(),bSeparateThread:=False, bSilent:=True)
         If expPackageNames IsNot Nothing AndAlso expPackageNames.Type <> Internals.SymbolicExpressionType.Null Then
             chrPackageNames = expPackageNames.AsCharacter

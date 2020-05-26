@@ -90,7 +90,7 @@ Partial Class dlgExportGraphAsImage
         '
         Me.ucrInputFile.AddQuotesIfUnrecognised = True
         Me.ucrInputFile.IsMultiline = False
-        Me.ucrInputFile.IsReadOnly = False
+        Me.ucrInputFile.IsReadOnly = True
         resources.ApplyResources(Me.ucrInputFile, "ucrInputFile")
         Me.ucrInputFile.Name = "ucrInputFile"
         '

@@ -92,8 +92,6 @@ Partial Class frmMain
         Me.mnuModelProbabilityDistributionsShowModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelProbabilityDistributionsCompareModels = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelProbabilityDistributionsRandomSamplesUseModel = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator60 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuModelHypothesisTests = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuModelFitModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelFitModelOneVariable = New System.Windows.Forms.ToolStripMenuItem()
@@ -526,6 +524,7 @@ Partial Class frmMain
         Me.mnuProcurementDescribeCategoricalBarCharts = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeCategoricalMosaic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeCategoricalTreemap = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayTopNToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeNumeric = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDescribeNumericBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.HistogramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -591,6 +590,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuModelFitModelHypothesisTestsKeyboard = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -888,7 +888,7 @@ Partial Class frmMain
         '
         'mnuModel
         '
-        Me.mnuModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributions, Me.ToolStripSeparator60, Me.mnuModelHypothesisTests, Me.ToolStripSeparator3, Me.mnuModelFitModel, Me.mnuModelCompareModels, Me.mnuModelUseModel, Me.mnuModelOtherOneVariable, Me.mnuModelOtherTwoVariables, Me.mnuModelOtherThreeVariables, Me.mnuModelOtherGeneral})
+        Me.mnuModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributions, Me.ToolStripSeparator3, Me.mnuModelFitModel, Me.mnuModelCompareModels, Me.mnuModelUseModel, Me.mnuModelOtherOneVariable, Me.mnuModelOtherTwoVariables, Me.mnuModelOtherThreeVariables, Me.mnuModelOtherGeneral})
         Me.mnuModel.Name = "mnuModel"
         resources.ApplyResources(Me.mnuModel, "mnuModel")
         Me.mnuModel.Tag = "Model"
@@ -917,16 +917,6 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuModelProbabilityDistributionsRandomSamplesUseModel, "mnuModelProbabilityDistributionsRandomSamplesUseModel")
         Me.mnuModelProbabilityDistributionsRandomSamplesUseModel.Tag = "RandomSamples_(Use_Model)..."
         '
-        'ToolStripSeparator60
-        '
-        Me.ToolStripSeparator60.Name = "ToolStripSeparator60"
-        resources.ApplyResources(Me.ToolStripSeparator60, "ToolStripSeparator60")
-        '
-        'mnuModelHypothesisTests
-        '
-        Me.mnuModelHypothesisTests.Name = "mnuModelHypothesisTests"
-        resources.ApplyResources(Me.mnuModelHypothesisTests, "mnuModelHypothesisTests")
-        '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
@@ -934,7 +924,7 @@ Partial Class frmMain
         '
         'mnuModelFitModel
         '
-        Me.mnuModelFitModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelFitModelOneVariable, Me.mnuModelFitModelTwoVariables, Me.mnuModelFitModelThreeVariables, Me.mnuModelFitModelFourVariables, Me.ToolStripSeparator24, Me.mnuModelFitModelGeneral, Me.ToolStripSeparator57, Me.mnuModelFitModelModelKeyboard})
+        Me.mnuModelFitModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelFitModelOneVariable, Me.mnuModelFitModelTwoVariables, Me.mnuModelFitModelThreeVariables, Me.mnuModelFitModelFourVariables, Me.ToolStripSeparator24, Me.mnuModelFitModelGeneral, Me.ToolStripSeparator57, Me.mnuModelFitModelHypothesisTestsKeyboard, Me.mnuModelFitModelModelKeyboard})
         Me.mnuModelFitModel.Name = "mnuModelFitModel"
         resources.ApplyResources(Me.mnuModelFitModel, "mnuModelFitModel")
         Me.mnuModelFitModel.Tag = "Fit_Model..."
@@ -1013,18 +1003,18 @@ Partial Class frmMain
         '
         'mnuModelUseModelGlance
         '
-        resources.ApplyResources(Me.mnuModelUseModelGlance, "mnuModelUseModelGlance")
         Me.mnuModelUseModelGlance.Name = "mnuModelUseModelGlance"
+        resources.ApplyResources(Me.mnuModelUseModelGlance, "mnuModelUseModelGlance")
         '
         'mnuModelUseModelTidy
         '
-        resources.ApplyResources(Me.mnuModelUseModelTidy, "mnuModelUseModelTidy")
         Me.mnuModelUseModelTidy.Name = "mnuModelUseModelTidy"
+        resources.ApplyResources(Me.mnuModelUseModelTidy, "mnuModelUseModelTidy")
         '
         'mnuModelUseModelAugment
         '
-        resources.ApplyResources(Me.mnuModelUseModelAugment, "mnuModelUseModelAugment")
         Me.mnuModelUseModelAugment.Name = "mnuModelUseModelAugment"
+        resources.ApplyResources(Me.mnuModelUseModelAugment, "mnuModelUseModelAugment")
         '
         'ToolStripSeparator58
         '
@@ -3315,7 +3305,7 @@ Partial Class frmMain
         '
         'mnuProcurementDescribeCategorical
         '
-        Me.mnuProcurementDescribeCategorical.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeCategoricalOneVarFreq, Me.mnuProcurementDescribeCategoricalTwoVarFreq, Me.ToolStripSeparator52, Me.mnuProcurementDescribeCategoricalBarCharts, Me.mnuProcurementDescribeCategoricalMosaic, Me.mnuProcurementDescribeCategoricalTreemap})
+        Me.mnuProcurementDescribeCategorical.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeCategoricalOneVarFreq, Me.mnuProcurementDescribeCategoricalTwoVarFreq, Me.ToolStripSeparator52, Me.mnuProcurementDescribeCategoricalBarCharts, Me.mnuProcurementDescribeCategoricalMosaic, Me.mnuProcurementDescribeCategoricalTreemap, Me.DisplayTopNToolStripMenuItem})
         Me.mnuProcurementDescribeCategorical.Name = "mnuProcurementDescribeCategorical"
         resources.ApplyResources(Me.mnuProcurementDescribeCategorical, "mnuProcurementDescribeCategorical")
         '
@@ -3348,6 +3338,11 @@ Partial Class frmMain
         '
         Me.mnuProcurementDescribeCategoricalTreemap.Name = "mnuProcurementDescribeCategoricalTreemap"
         resources.ApplyResources(Me.mnuProcurementDescribeCategoricalTreemap, "mnuProcurementDescribeCategoricalTreemap")
+        '
+        'DisplayTopNToolStripMenuItem
+        '
+        Me.DisplayTopNToolStripMenuItem.Name = "DisplayTopNToolStripMenuItem"
+        resources.ApplyResources(Me.DisplayTopNToolStripMenuItem, "DisplayTopNToolStripMenuItem")
         '
         'mnuProcurementDescribeNumeric
         '
@@ -3753,6 +3748,11 @@ Partial Class frmMain
         '
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
+        '
+        'mnuModelFitModelHypothesisTestsKeyboard
+        '
+        Me.mnuModelFitModelHypothesisTestsKeyboard.Name = "mnuModelFitModelHypothesisTestsKeyboard"
+        resources.ApplyResources(Me.mnuModelFitModelHypothesisTestsKeyboard, "mnuModelFitModelHypothesisTestsKeyboard")
         '
         'frmMain
         '
@@ -4229,7 +4229,6 @@ Partial Class frmMain
     Friend WithEvents mnuFileImportandTidyNetCDFFile As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificMosaic As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificParallelCoordinatePlot As ToolStripMenuItem
-    Friend WithEvents mnuModelHypothesisTests As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator46 As ToolStripSeparator
     Friend WithEvents mnuClimaticPrepareEvapotranspiration As ToolStripMenuItem
     Friend WithEvents mnuPrepareCheckDataCompareColumns As ToolStripMenuItem
@@ -4348,8 +4347,9 @@ Partial Class frmMain
     Friend WithEvents mnuModelUseModelAugment As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator58 As ToolStripSeparator
     Friend WithEvents mnuModelUseModelUseModelKeyboard As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator60 As ToolStripSeparator
     Friend WithEvents mnuModelCompareModels As ToolStripMenuItem
     Friend WithEvents mnuModelCompareModelsOneVariable As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Friend WithEvents DisplayTopNToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuModelFitModelHypothesisTestsKeyboard As ToolStripMenuItem
 End Class

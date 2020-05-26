@@ -17,7 +17,7 @@
 Imports instat.Translations
 Imports System.Text.RegularExpressions
 
-Public Class dlgCorruptionDefineProcurement
+Public Class dlgDefineCorruption
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Dim clsTypesFunction As New RFunction
