@@ -767,4 +767,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::klotz_test( )", 1)
         End If
     End Sub
+
+    Private Sub cmdMood1_Click(sender As Object, e As EventArgs) Handles cmdMood1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::mood_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::mood_test( )", 1)
+        End If
+    End Sub
 End Class
