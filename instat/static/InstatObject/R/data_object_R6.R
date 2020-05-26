@@ -1701,6 +1701,7 @@ if (object_type == "object"){
     if(!object_name %in% names(private$filters)) stop(object_name, " not found in filters list")
     if(new_name %in% names(private$filters)) stop(new_name, " is already a filter name. Cannot rename ", object_name, " to ", new_name)
     names(private$filters)[names(private$filters) == object_name] <- new_name
+    if(private$.current_filter$name == object_name){private$.current_filter$name <- new_name}
   } 
   else if (object_type == "calculation") {
     if(!object_name %in% names(private$calculations)) stop(object_name, " not found in calculations list")
