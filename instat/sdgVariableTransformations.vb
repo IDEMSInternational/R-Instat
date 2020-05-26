@@ -52,22 +52,20 @@ Public Class sdgVariableTransformations
         ucrPnlChooseFunction.AddRadioButton(rdoSquareRoot)
         ucrPnlChooseFunction.AddRadioButton(rdoBrokenStick)
         ucrPnlChooseFunction.AddRadioButton(rdoSplineDf)
-        ucrPnlChooseFunction.AddRadioButton(rdoOwn)
+        ucrPnlChooseFunction.AddRadioButton(rdoCustom)
         ucrPnlChooseFunction.AddRadioButton(rdoMonth)
         ucrPnlChooseFunction.AddRadioButton(rdoYear)
 
-        ucrPnlChooseFunction.AddToLinkedControls(ucrInputTxtPower, {rdoPolynomial}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrPnlChooseFunction.AddToLinkedControls(ucrNudPolynomial, {rdoPolynomial}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrPnlChooseFunction.AddToLinkedControls(ucrInputTxtBrokenStick, {rdoBrokenStick}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlChooseFunction.AddToLinkedControls(ucrNudSplineDF, {rdoSplineDf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrPnlChooseFunction.AddToLinkedControls(ucrNudSplineDF, {rdoSplineDf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=3)
         ucrPnlChooseFunction.AddToLinkedControls(ucrChkMonthAsFactor, {rdoMonth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlChooseFunction.AddToLinkedControls(ucrChkYearAsFactor, {rdoYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlChooseFunction.AddToLinkedControls(ucrInputTxtOwn, {rdoOwn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlChooseFunction.AddToLinkedControls(ucrInputTxtOwn, {rdoCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'temp disabled as need to use I(x ^ 2) instead of x ^ 2 as this has different meaning in a formula
         'rdoPolynomial.Enabled = False
 
-        ucrInputTxtPower.SetParameter(New RParameter("degree", 1))
-        ucrInputTxtPower.SetValidationTypeAsNumeric()
-        ucrInputTxtPower.AddQuotesIfUnrecognised = False
+        ucrNudPolynomial.SetParameter(New RParameter("degree", 1))
 
         ucrInputTxtBrokenStick.SetParameter(New RParameter("b", 1, bNewIncludeArgumentName:=False))
         ucrInputTxtBrokenStick.SetValidationTypeAsNumeric()
@@ -78,7 +76,7 @@ Public Class sdgVariableTransformations
 
         ucrChkMonthAsFactor.SetText("Month As Factor")
         ucrChkYearAsFactor.SetText("Year As Factor")
-        rdoOwn.Enabled = False
+        rdoCustom.Enabled = False
 
         bControlsInitialised = True
     End Sub
@@ -120,7 +118,7 @@ Public Class sdgVariableTransformations
         ucrInputTxtBrokenStick.AddAdditionalCodeParameterPair(clsBrokenStickSecOperator, New RParameter("b", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
 
         ucrPnlChooseFunction.SetRCode(clsContainingCode, bReset, bCloneIfNeeded:=True)
-        ucrInputTxtPower.SetRCode(clsPolynomialFunc, bReset, bCloneIfNeeded:=True)
+        ucrNudPolynomial.SetRCode(clsPolynomialFunc, bReset, bCloneIfNeeded:=True)
         ucrInputTxtBrokenStick.SetRCode(clsBrokenStickFirOperator, bReset, bCloneIfNeeded:=True)
         ucrNudSplineDF.SetRCode(clsSplineFunc, bReset, bCloneIfNeeded:=True)
 
@@ -160,7 +158,7 @@ Public Class sdgVariableTransformations
         ucrInputPreview.SetName(clsTransformParameter.ToScript(""))
     End Sub
 
-    Private Sub ucrInputTxtBrokenStick_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTxtBrokenStick.ControlValueChanged, ucrNudSplineDF.ControlValueChanged
+    Private Sub ucrInputTxtBrokenStick_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTxtBrokenStick.ControlValueChanged, ucrNudSplineDF.ControlValueChanged, ucrNudPolynomial.ControlValueChanged
         UpdatePreview()
     End Sub
 
@@ -213,6 +211,4 @@ Public Class sdgVariableTransformations
             rdoYear.Enabled = False
         End If
     End Sub
-
-
 End Class

@@ -45,21 +45,21 @@ Partial Class sdgVariableTransformations
         Me.rdoNaturalLog = New System.Windows.Forms.RadioButton()
         Me.rdoIdentity = New System.Windows.Forms.RadioButton()
         Me.grpChooseFunction = New System.Windows.Forms.GroupBox()
-        Me.rdoOwn = New System.Windows.Forms.RadioButton()
+        Me.ucrNudPolynomial = New instat.ucrNud()
+        Me.ucrChkYearAsFactor = New instat.ucrCheck()
+        Me.ucrChkMonthAsFactor = New instat.ucrCheck()
+        Me.rdoYear = New System.Windows.Forms.RadioButton()
+        Me.rdoMonth = New System.Windows.Forms.RadioButton()
+        Me.ucrNudSplineDF = New instat.ucrNud()
+        Me.ucrInputTxtOwn = New instat.ucrInputTextBox()
+        Me.rdoCustom = New System.Windows.Forms.RadioButton()
+        Me.ucrInputTxtBrokenStick = New instat.ucrInputTextBox()
         Me.rdoBrokenStick = New System.Windows.Forms.RadioButton()
         Me.rdoSplineDf = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlChooseFunction = New instat.UcrPanel()
         Me.lblPreview = New System.Windows.Forms.Label()
         Me.ucrInputPreview = New instat.ucrInputTextBox()
         Me.ucrButtonsSDGVarTransform = New instat.ucrButtonsSubdialogue()
-        Me.ucrNudSplineDF = New instat.ucrNud()
-        Me.ucrInputTxtOwn = New instat.ucrInputTextBox()
-        Me.ucrInputTxtBrokenStick = New instat.ucrInputTextBox()
-        Me.ucrInputTxtPower = New instat.ucrInputTextBox()
-        Me.ucrPnlChooseFunction = New instat.UcrPanel()
-        Me.rdoMonth = New System.Windows.Forms.RadioButton()
-        Me.rdoYear = New System.Windows.Forms.RadioButton()
-        Me.ucrChkMonthAsFactor = New instat.ucrCheck()
-        Me.ucrChkYearAsFactor = New instat.ucrCheck()
         Me.grpChooseFunction.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -105,17 +105,17 @@ Partial Class sdgVariableTransformations
         '
         'grpChooseFunction
         '
+        Me.grpChooseFunction.Controls.Add(Me.ucrNudPolynomial)
         Me.grpChooseFunction.Controls.Add(Me.ucrChkYearAsFactor)
         Me.grpChooseFunction.Controls.Add(Me.ucrChkMonthAsFactor)
         Me.grpChooseFunction.Controls.Add(Me.rdoYear)
         Me.grpChooseFunction.Controls.Add(Me.rdoMonth)
         Me.grpChooseFunction.Controls.Add(Me.ucrNudSplineDF)
         Me.grpChooseFunction.Controls.Add(Me.ucrInputTxtOwn)
-        Me.grpChooseFunction.Controls.Add(Me.rdoOwn)
+        Me.grpChooseFunction.Controls.Add(Me.rdoCustom)
         Me.grpChooseFunction.Controls.Add(Me.ucrInputTxtBrokenStick)
         Me.grpChooseFunction.Controls.Add(Me.rdoBrokenStick)
         Me.grpChooseFunction.Controls.Add(Me.rdoSplineDf)
-        Me.grpChooseFunction.Controls.Add(Me.ucrInputTxtPower)
         Me.grpChooseFunction.Controls.Add(Me.rdoIdentity)
         Me.grpChooseFunction.Controls.Add(Me.rdoNaturalLog)
         Me.grpChooseFunction.Controls.Add(Me.rdoPolynomial)
@@ -127,47 +127,43 @@ Partial Class sdgVariableTransformations
         Me.grpChooseFunction.TabStop = False
         Me.grpChooseFunction.Tag = "General_Functions"
         '
-        'rdoOwn
+        'ucrNudPolynomial
         '
-        resources.ApplyResources(Me.rdoOwn, "rdoOwn")
-        Me.rdoOwn.Name = "rdoOwn"
-        Me.rdoOwn.TabStop = True
-        Me.rdoOwn.Tag = ""
-        Me.rdoOwn.UseVisualStyleBackColor = True
+        Me.ucrNudPolynomial.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPolynomial.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudPolynomial, "ucrNudPolynomial")
+        Me.ucrNudPolynomial.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPolynomial.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPolynomial.Name = "ucrNudPolynomial"
+        Me.ucrNudPolynomial.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
-        'rdoBrokenStick
+        'ucrChkYearAsFactor
         '
-        resources.ApplyResources(Me.rdoBrokenStick, "rdoBrokenStick")
-        Me.rdoBrokenStick.Name = "rdoBrokenStick"
-        Me.rdoBrokenStick.TabStop = True
-        Me.rdoBrokenStick.Tag = ""
-        Me.rdoBrokenStick.UseVisualStyleBackColor = True
+        Me.ucrChkYearAsFactor.Checked = False
+        resources.ApplyResources(Me.ucrChkYearAsFactor, "ucrChkYearAsFactor")
+        Me.ucrChkYearAsFactor.Name = "ucrChkYearAsFactor"
         '
-        'rdoSplineDf
+        'ucrChkMonthAsFactor
         '
-        resources.ApplyResources(Me.rdoSplineDf, "rdoSplineDf")
-        Me.rdoSplineDf.Name = "rdoSplineDf"
-        Me.rdoSplineDf.TabStop = True
-        Me.rdoSplineDf.Tag = ""
-        Me.rdoSplineDf.UseVisualStyleBackColor = True
+        Me.ucrChkMonthAsFactor.Checked = False
+        resources.ApplyResources(Me.ucrChkMonthAsFactor, "ucrChkMonthAsFactor")
+        Me.ucrChkMonthAsFactor.Name = "ucrChkMonthAsFactor"
         '
-        'lblPreview
+        'rdoYear
         '
-        resources.ApplyResources(Me.lblPreview, "lblPreview")
-        Me.lblPreview.Name = "lblPreview"
+        resources.ApplyResources(Me.rdoYear, "rdoYear")
+        Me.rdoYear.Name = "rdoYear"
+        Me.rdoYear.TabStop = True
+        Me.rdoYear.Tag = ""
+        Me.rdoYear.UseVisualStyleBackColor = True
         '
-        'ucrInputPreview
+        'rdoMonth
         '
-        Me.ucrInputPreview.AddQuotesIfUnrecognised = True
-        Me.ucrInputPreview.IsMultiline = False
-        Me.ucrInputPreview.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPreview, "ucrInputPreview")
-        Me.ucrInputPreview.Name = "ucrInputPreview"
-        '
-        'ucrButtonsSDGVarTransform
-        '
-        resources.ApplyResources(Me.ucrButtonsSDGVarTransform, "ucrButtonsSDGVarTransform")
-        Me.ucrButtonsSDGVarTransform.Name = "ucrButtonsSDGVarTransform"
+        resources.ApplyResources(Me.rdoMonth, "rdoMonth")
+        Me.rdoMonth.Name = "rdoMonth"
+        Me.rdoMonth.TabStop = True
+        Me.rdoMonth.Tag = ""
+        Me.rdoMonth.UseVisualStyleBackColor = True
         '
         'ucrNudSplineDF
         '
@@ -187,6 +183,14 @@ Partial Class sdgVariableTransformations
         resources.ApplyResources(Me.ucrInputTxtOwn, "ucrInputTxtOwn")
         Me.ucrInputTxtOwn.Name = "ucrInputTxtOwn"
         '
+        'rdoCustom
+        '
+        resources.ApplyResources(Me.rdoCustom, "rdoCustom")
+        Me.rdoCustom.Name = "rdoCustom"
+        Me.rdoCustom.TabStop = True
+        Me.rdoCustom.Tag = ""
+        Me.rdoCustom.UseVisualStyleBackColor = True
+        '
         'ucrInputTxtBrokenStick
         '
         Me.ucrInputTxtBrokenStick.AddQuotesIfUnrecognised = True
@@ -195,46 +199,44 @@ Partial Class sdgVariableTransformations
         resources.ApplyResources(Me.ucrInputTxtBrokenStick, "ucrInputTxtBrokenStick")
         Me.ucrInputTxtBrokenStick.Name = "ucrInputTxtBrokenStick"
         '
-        'ucrInputTxtPower
+        'rdoBrokenStick
         '
-        Me.ucrInputTxtPower.AddQuotesIfUnrecognised = True
-        Me.ucrInputTxtPower.IsMultiline = False
-        Me.ucrInputTxtPower.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTxtPower, "ucrInputTxtPower")
-        Me.ucrInputTxtPower.Name = "ucrInputTxtPower"
+        resources.ApplyResources(Me.rdoBrokenStick, "rdoBrokenStick")
+        Me.rdoBrokenStick.Name = "rdoBrokenStick"
+        Me.rdoBrokenStick.TabStop = True
+        Me.rdoBrokenStick.Tag = ""
+        Me.rdoBrokenStick.UseVisualStyleBackColor = True
+        '
+        'rdoSplineDf
+        '
+        resources.ApplyResources(Me.rdoSplineDf, "rdoSplineDf")
+        Me.rdoSplineDf.Name = "rdoSplineDf"
+        Me.rdoSplineDf.TabStop = True
+        Me.rdoSplineDf.Tag = ""
+        Me.rdoSplineDf.UseVisualStyleBackColor = True
         '
         'ucrPnlChooseFunction
         '
         resources.ApplyResources(Me.ucrPnlChooseFunction, "ucrPnlChooseFunction")
         Me.ucrPnlChooseFunction.Name = "ucrPnlChooseFunction"
         '
-        'rdoMonth
+        'lblPreview
         '
-        resources.ApplyResources(Me.rdoMonth, "rdoMonth")
-        Me.rdoMonth.Name = "rdoMonth"
-        Me.rdoMonth.TabStop = True
-        Me.rdoMonth.Tag = ""
-        Me.rdoMonth.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.lblPreview, "lblPreview")
+        Me.lblPreview.Name = "lblPreview"
         '
-        'rdoYear
+        'ucrInputPreview
         '
-        resources.ApplyResources(Me.rdoYear, "rdoYear")
-        Me.rdoYear.Name = "rdoYear"
-        Me.rdoYear.TabStop = True
-        Me.rdoYear.Tag = ""
-        Me.rdoYear.UseVisualStyleBackColor = True
+        Me.ucrInputPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputPreview.IsMultiline = False
+        Me.ucrInputPreview.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPreview, "ucrInputPreview")
+        Me.ucrInputPreview.Name = "ucrInputPreview"
         '
-        'ucrChkMonthAsFactor
+        'ucrButtonsSDGVarTransform
         '
-        Me.ucrChkMonthAsFactor.Checked = False
-        resources.ApplyResources(Me.ucrChkMonthAsFactor, "ucrChkMonthAsFactor")
-        Me.ucrChkMonthAsFactor.Name = "ucrChkMonthAsFactor"
-        '
-        'ucrChkYearAsFactor
-        '
-        Me.ucrChkYearAsFactor.Checked = False
-        resources.ApplyResources(Me.ucrChkYearAsFactor, "ucrChkYearAsFactor")
-        Me.ucrChkYearAsFactor.Name = "ucrChkYearAsFactor"
+        resources.ApplyResources(Me.ucrButtonsSDGVarTransform, "ucrButtonsSDGVarTransform")
+        Me.ucrButtonsSDGVarTransform.Name = "ucrButtonsSDGVarTransform"
         '
         'sdgVariableTransformations
         '
@@ -265,10 +267,9 @@ Partial Class sdgVariableTransformations
     Friend WithEvents ucrPnlChooseFunction As UcrPanel
     Friend WithEvents lblPreview As Label
     Friend WithEvents ucrInputPreview As ucrInputTextBox
-    Friend WithEvents ucrInputTxtPower As ucrInputTextBox
     Friend WithEvents rdoSplineDf As RadioButton
     Friend WithEvents ucrInputTxtOwn As ucrInputTextBox
-    Friend WithEvents rdoOwn As RadioButton
+    Friend WithEvents rdoCustom As RadioButton
     Friend WithEvents ucrInputTxtBrokenStick As ucrInputTextBox
     Friend WithEvents rdoBrokenStick As RadioButton
     Friend WithEvents ucrNudSplineDF As ucrNud
@@ -276,4 +277,5 @@ Partial Class sdgVariableTransformations
     Friend WithEvents ucrChkMonthAsFactor As ucrCheck
     Friend WithEvents rdoYear As RadioButton
     Friend WithEvents rdoMonth As RadioButton
+    Friend WithEvents ucrNudPolynomial As ucrNud
 End Class

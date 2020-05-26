@@ -270,6 +270,27 @@
   <data name="&gt;&gt;rdoIdentity.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="ucrNudPolynomial.Location" type="System.Drawing.Point, System.Drawing">
+    <value>115, 88</value>
+  </data>
+  <data name="ucrNudPolynomial.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 21</value>
+  </data>
+  <data name="ucrNudPolynomial.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPolynomial.Name" xml:space="preserve">
+    <value>ucrNudPolynomial</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPolynomial.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPolynomial.Parent" xml:space="preserve">
+    <value>grpChooseFunction</value>
+  </data>
+  <data name="&gt;&gt;ucrNudPolynomial.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkYearAsFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>115, 227</value>
   </data>
@@ -289,7 +310,7 @@
     <value>grpChooseFunction</value>
   </data>
   <data name="&gt;&gt;ucrChkYearAsFactor.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkMonthAsFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>115, 199</value>
@@ -310,7 +331,7 @@
     <value>grpChooseFunction</value>
   </data>
   <data name="&gt;&gt;ucrChkMonthAsFactor.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="rdoYear.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -340,7 +361,7 @@
     <value>grpChooseFunction</value>
   </data>
   <data name="&gt;&gt;rdoYear.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="rdoMonth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -370,7 +391,7 @@
     <value>grpChooseFunction</value>
   </data>
   <data name="&gt;&gt;rdoMonth.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrNudSplineDF.Location" type="System.Drawing.Point, System.Drawing">
     <value>115, 115</value>
@@ -391,7 +412,7 @@
     <value>grpChooseFunction</value>
   </data>
   <data name="&gt;&gt;ucrNudSplineDF.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrInputTxtOwn.Location" type="System.Drawing.Point, System.Drawing">
     <value>115, 171</value>
@@ -412,37 +433,37 @@
     <value>grpChooseFunction</value>
   </data>
   <data name="&gt;&gt;ucrInputTxtOwn.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
-  <data name="rdoOwn.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rdoCustom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rdoOwn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoCustom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdoOwn.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdoCustom.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 171</value>
   </data>
-  <data name="rdoOwn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 17</value>
+  <data name="rdoCustom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
   </data>
-  <data name="rdoOwn.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoCustom.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
-  <data name="rdoOwn.Text" xml:space="preserve">
-    <value>Own</value>
+  <data name="rdoCustom.Text" xml:space="preserve">
+    <value>Custom</value>
   </data>
-  <data name="&gt;&gt;rdoOwn.Name" xml:space="preserve">
-    <value>rdoOwn</value>
+  <data name="&gt;&gt;rdoCustom.Name" xml:space="preserve">
+    <value>rdoCustom</value>
   </data>
-  <data name="&gt;&gt;rdoOwn.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoCustom.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoOwn.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoCustom.Parent" xml:space="preserve">
     <value>grpChooseFunction</value>
   </data>
-  <data name="&gt;&gt;rdoOwn.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;rdoCustom.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="ucrInputTxtBrokenStick.Location" type="System.Drawing.Point, System.Drawing">
     <value>115, 144</value>
@@ -463,7 +484,7 @@
     <value>grpChooseFunction</value>
   </data>
   <data name="&gt;&gt;ucrInputTxtBrokenStick.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="rdoBrokenStick.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -493,7 +514,7 @@
     <value>grpChooseFunction</value>
   </data>
   <data name="&gt;&gt;rdoBrokenStick.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="rdoSplineDf.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -523,34 +544,13 @@
     <value>grpChooseFunction</value>
   </data>
   <data name="&gt;&gt;rdoSplineDf.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="ucrInputTxtPower.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 87</value>
-  </data>
-  <data name="ucrInputTxtPower.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 21</value>
-  </data>
-  <data name="ucrInputTxtPower.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTxtPower.Name" xml:space="preserve">
-    <value>ucrInputTxtPower</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTxtPower.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTxtPower.Parent" xml:space="preserve">
-    <value>grpChooseFunction</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTxtPower.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="ucrPnlChooseFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 25</value>
+    <value>7, 27</value>
   </data>
   <data name="ucrPnlChooseFunction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 238</value>
+    <value>204, 217</value>
   </data>
   <data name="ucrPnlChooseFunction.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -568,10 +568,10 @@
     <value>16</value>
   </data>
   <data name="grpChooseFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
+    <value>21, 12</value>
   </data>
   <data name="grpChooseFunction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>317, 263</value>
+    <value>218, 251</value>
   </data>
   <data name="grpChooseFunction.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -598,7 +598,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 282</value>
+    <value>27, 282</value>
   </data>
   <data name="lblPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 13</value>
@@ -622,7 +622,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 279</value>
+    <value>81, 279</value>
   </data>
   <data name="ucrInputPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 21</value>
@@ -643,7 +643,7 @@
     <value>0</value>
   </data>
   <data name="ucrButtonsSDGVarTransform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 306</value>
+    <value>65, 306</value>
   </data>
   <data name="ucrButtonsSDGVarTransform.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 30</value>
@@ -670,7 +670,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>428, 348</value>
+    <value>265, 348</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
