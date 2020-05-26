@@ -695,4 +695,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test( )", 2)
         End If
     End Sub
+
+    Private Sub cmdNormal_Click(sender As Object, e As EventArgs) Handles cmdNormal.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test( )", 2)
+        End If
+    End Sub
 End Class
