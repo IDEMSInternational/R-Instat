@@ -799,4 +799,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::conover_test( )", 1)
         End If
     End Sub
+
+    Private Sub cmdSpearman_Click(sender As Object, e As EventArgs) Handles cmdSpearman.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::spearman_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::spearman_test( )", 1)
+        End If
+    End Sub
 End Class
