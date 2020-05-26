@@ -719,4 +719,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test( )", 2)
         End If
     End Sub
+
+    Private Sub cmdSign_Click(sender As Object, e As EventArgs) Handles cmdSign.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::sign_test(formula = , data = , subset = NULL)", 25)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::sign_test( )", 2)
+        End If
+    End Sub
 End Class
