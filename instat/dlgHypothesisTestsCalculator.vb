@@ -831,4 +831,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::koziol_test( )", 1)
         End If
     End Sub
+
+    Private Sub cmdChisq1_Click(sender As Object, e As EventArgs) Handles cmdChisq1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::chisq_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::chisq_test( )", 1)
+        End If
+    End Sub
 End Class
