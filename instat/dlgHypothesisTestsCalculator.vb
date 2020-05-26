@@ -676,7 +676,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test( )", 2)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test()", 1)
         End If
     End Sub
 
@@ -684,7 +684,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test( )", 2)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test()", 1)
         End If
     End Sub
 
@@ -692,7 +692,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test( )", 2)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test()", 1)
         End If
     End Sub
 
@@ -700,7 +700,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test( )", 2)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test()", 1)
         End If
     End Sub
 
@@ -708,7 +708,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test( )", 2)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test()", 1)
         End If
     End Sub
 
@@ -716,7 +716,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test( )", 2)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test()", 1)
         End If
     End Sub
 
@@ -724,7 +724,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::sign_test(formula = , data = , subset = NULL)", 25)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::sign_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::sign_test()", 1)
         End If
     End Sub
 
@@ -732,7 +732,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcoxsign_test(formula = , data = , subset = NULL)", 25)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcoxsign_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcoxsign_test()", 1)
         End If
     End Sub
 
@@ -740,7 +740,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::friedman_test(object = )", 2)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::friedman_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::friedman_test()", 1)
         End If
     End Sub
 
@@ -748,7 +748,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quade_test(object = )", 2)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quade_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quade_test()", 1)
         End If
     End Sub
 
@@ -756,7 +756,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::taha_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::taha_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::taha_test()", 1)
         End If
     End Sub
 
@@ -764,7 +764,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::klotz_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::klotz_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::klotz_test()", 1)
         End If
     End Sub
 
@@ -772,7 +772,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::mood_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::mood_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::mood_test()", 1)
         End If
     End Sub
 
@@ -780,7 +780,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::ansari_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::ansari_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::ansari_test()", 1)
         End If
     End Sub
 
@@ -788,7 +788,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fligner_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fligner_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fligner_test()", 1)
         End If
     End Sub
 
@@ -796,7 +796,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::conover_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::conover_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::conover_test()", 1)
         End If
     End Sub
 
@@ -804,7 +804,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::spearman_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::spearman_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::spearman_test()", 1)
         End If
     End Sub
 
@@ -812,7 +812,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fisyat_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fisyat_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fisyat_test()", 1)
         End If
     End Sub
 
@@ -820,7 +820,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quadrant_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quadrant_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quadrant_test()", 1)
         End If
     End Sub
 
@@ -828,7 +828,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::koziol_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::koziol_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::koziol_test()", 1)
         End If
     End Sub
 
@@ -836,7 +836,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::chisq_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::chisq_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::chisq_test()", 1)
         End If
     End Sub
 
@@ -844,7 +844,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::cmh_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::cmh_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::cmh_test()", 1)
         End If
     End Sub
 
@@ -852,7 +852,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::lbl_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::lbl_test( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::lbl_test()", 1)
         End If
     End Sub
 End Class
