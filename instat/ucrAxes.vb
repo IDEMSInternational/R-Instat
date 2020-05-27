@@ -36,6 +36,7 @@ Public Class ucrAxes
 
     Public Sub InitialiseControl()
         Dim dctTickMarkers As New Dictionary(Of String, String)
+        Dim dctDateFormat As New Dictionary(Of String, String)
 
         'Axis Section
         ucrPnlAxisTitle.AddRadioButton(rdoTitleAuto)
@@ -189,6 +190,42 @@ Public Class ucrAxes
         ucrInputExpand.SetValidationTypeAsNumericList()
 
         'Date X Scale
+        dctDateFormat.Add("Year(4-digit)-Month-Day", Chr(34) & "%Y-%m-%d" & Chr(34))
+        dctDateFormat.Add("Year(4-digit)/Month/Day", Chr(34) & "%Y/%m/%d" & Chr(34))
+        dctDateFormat.Add("Year(4-digit)-Month(Full Name)-Day", Chr(34) & "%Y-%B-%d" & Chr(34))
+        dctDateFormat.Add("Year(4-digit)/Month(Full Name)/Day", Chr(34) & "%Y/%B/%d" & Chr(34))
+        dctDateFormat.Add("Year(4-digit)-Month(abbr)-Day", Chr(34) & "%Y-%b-%d" & Chr(34))
+        dctDateFormat.Add("Year(4-digit)/Month(abbr)/Day", Chr(34) & "%Y/%b/%d" & Chr(34))
+        dctDateFormat.Add("Year(4 digit)MonthDay(YEARMODA)", Chr(34) & "%Y%m%d" & Chr(34))
+
+        dctDateFormat.Add("Year(4-digit)Doy(Julian)", Chr(34) & "%Y%j" & Chr(34))
+
+        dctDateFormat.Add("Day-Month-Year(4-digit)", Chr(34) & "%d-%m-%Y" & Chr(34))
+        dctDateFormat.Add("Day/Month/Year(4-digit)", Chr(34) & "%d/%m/%Y" & Chr(34))
+        dctDateFormat.Add("Day-Month(Full Name)-Year(4-digit)", Chr(34) & "%d-%B-%Y" & Chr(34))
+        dctDateFormat.Add("Day/Month(Full Name)/Year(4-digit)", Chr(34) & "%d/%B/%Y" & Chr(34))
+        dctDateFormat.Add("Day-Month(abbr)-Year(4-digit)", Chr(34) & "%d-%b-%Y" & Chr(34))
+        dctDateFormat.Add("Day/Month(abbr)/Year(4-digit)", Chr(34) & "%d/%b/%Y" & Chr(34))
+
+        dctDateFormat.Add("Month-Day-Year(4-digit)", Chr(34) & "%m-%d-%Y" & Chr(34))
+        dctDateFormat.Add("Month/Day/Year(4-digit)", Chr(34) & "%m/%d/%Y" & Chr(34))
+        dctDateFormat.Add("Month(Full Name)-Day-Year(4-digit)", Chr(34) & "%B-%d-%Y" & Chr(34))
+        dctDateFormat.Add("Month(Full Name)/Day/Year(4-digit)", Chr(34) & "%B/%d/%Y" & Chr(34))
+        dctDateFormat.Add("Month(abbr)-Day-Year(4-digit)", Chr(34) & "%b-%d-%Y" & Chr(34))
+        dctDateFormat.Add("Month(abbr)/Day/Year(4-digit)", Chr(34) & "%b/%d/%Y" & Chr(34))
+
+
+        ucrInputComboDateLabel.SetParameter(New RParameter("date_labels", 3))
+        ucrInputComboDateLabel.SetItems(dctDateFormat)
+        ucrInputComboDateLabel.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
+
+
+
+        ucrChkDateLabels.SetText("Date labels")
+
+        ucrChkDateLabels.SetParameter(New RParameter("date_labels"), bNewChangeParameterValue:=False)
+        ucrChkDateLabels.AddToLinkedControls(ucrInputComboDateLabel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Year(4-digit)-Month-Day")
+
         ucrNudDateBreak.SetParameter(New RParameter("value", 0, bNewIncludeArgumentName:=False))
 
         ucrInputComboDateBreak.SetParameter(New RParameter("duration", 1, bNewIncludeArgumentName:=False))
@@ -197,16 +234,16 @@ Public Class ucrAxes
         ucrInputComboDateBreak.SetDropDownStyleAsNonEditable()
         ucrInputComboDateBreak.AddQuotesIfUnrecognised = False
 
-        ucrDtpLowerLimit.SetParameter(New RParameter("lowerlimit", 0, bNewIncludeArgumentName:=False))
-        ucrDtpUpperLimit.SetParameter(New RParameter("upperLimit", 1, bNewIncludeArgumentName:=False))
+        ucrDtpLowerLimit.SetParameter(New RParameter("from", 0))
+        ucrDtpUpperLimit.SetParameter(New RParameter("to", 1))
 
         ucrChkBreaks.SetText("Breaks")
         ucrChkBreaks.SetParameter(New RParameter("date_breaks", 1), bNewChangeParameterValue:=False)
         ucrChkBreaks.AddToLinkedControls(ucrInputComboDateBreak, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="year")
         ucrChkBreaks.AddToLinkedControls(ucrNudDateBreak, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="1")
 
-        ucrChkLimits.AddToLinkedControls(ucrDtpLowerLimit, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLimits.AddToLinkedControls(ucrDtpUpperLimit, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLimits.AddToLinkedControls(ucrDtpLowerLimit, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLimits.AddToLinkedControls(ucrDtpUpperLimit, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrDtpUpperLimit.SetLinkedDisplayControl(lblXScalDateUpperLimit)
         ucrDtpLowerLimit.SetLinkedDisplayControl(lbXscaleDateLowerLimit)
 
@@ -220,14 +257,16 @@ Public Class ucrAxes
         Dim clsTempBreaksParam As RParameter
         Dim clsTempMinorBreaksParam As RParameter
 
-
         clsXYScaleDateLimitFunction = New RFunction
         clsXYScaleDateLimitFunction.SetRCommand("c")
+        clsXYScaleDateLimitFunction.AddParameter("from", clsRFunctionParameter:=ucrDtpLowerLimit.ValueAsRDate(), iPosition:=0)
+        clsXYScaleDateLimitFunction.AddParameter("to", clsRFunctionParameter:=ucrDtpLowerLimit.ValueAsRDate(), iPosition:=1)
 
         clsXYScaleDateBreakOperator = New ROperator
         clsXYScaleDateBreakOperator.SetOperation(" ")
         clsXYScaleDateBreakOperator.bSpaceAroundOperation = False
         clsXYScaleDateBreakOperator.bToScriptAsRString = True
+
 
         bRCodeSet = False
         If Not bControlsInitialised Then
@@ -327,6 +366,9 @@ Public Class ucrAxes
         ucrInputMajorBreaksLabels.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         'Scale_x_Date
+        ucrChkDateLabels.SetRCode(clsXYScaleDateFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputComboDateLabel.SetRCode(clsXYScaleDateFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+
         ucrChkBreaks.SetRCode(clsXYScaleDateFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrChkLimits.SetRCode(clsXYScaleDateFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
@@ -402,7 +444,7 @@ Public Class ucrAxes
         grpMajorBreaks.Hide()
         grpMinorBreaks.Hide()
         grpScales.Hide()
-        grpDateScale.Hide()
+        grpScaleXDate.Hide()
         If strAxisType.ToLower = "continuous" Then
             'show continous panels
             'TODO put controls in panels so group boxes can be used for multiple cases
@@ -413,7 +455,7 @@ Public Class ucrAxes
             'show discrete panels
         ElseIf strAxisType.ToLower = "date" Then
             'show date panels
-            grpDateScale.Show()
+            grpScaleXDate.Show()
             grpMajorBreaks.Hide()
             grpMinorBreaks.Hide()
             grpScales.Hide()
@@ -489,10 +531,8 @@ Public Class ucrAxes
         If ucrChkLimits.Checked Then
             clsXYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsXYScaleDateLimitFunction, iPosition:=2)
         End If
-
         If ucrChkBreaks.Checked Then
             clsXYScaleDateFunction.AddParameter("date_breaks", clsROperatorParameter:=clsXYScaleDateBreakOperator, iPosition:=1)
         End If
-
     End Sub
 End Class

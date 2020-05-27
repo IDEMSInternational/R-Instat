@@ -77,7 +77,9 @@ Partial Class ucrAxes
         Me.rdoScalesCustom = New System.Windows.Forms.RadioButton()
         Me.rdoScalesAuto = New System.Windows.Forms.RadioButton()
         Me.ucrPnlScales = New instat.UcrPanel()
-        Me.grpDateScale = New System.Windows.Forms.GroupBox()
+        Me.grpScaleXDate = New System.Windows.Forms.GroupBox()
+        Me.ucrInputComboDateLabel = New instat.ucrInputComboBox()
+        Me.ucrChkDateLabels = New instat.ucrCheck()
         Me.ucrInputComboDateBreak = New instat.ucrInputComboBox()
         Me.lbXscaleDateLowerLimit = New System.Windows.Forms.Label()
         Me.lblXScalDateUpperLimit = New System.Windows.Forms.Label()
@@ -103,7 +105,7 @@ Partial Class ucrAxes
         Me.grpAxisTitle.SuspendLayout()
         Me.grpMajorBreaks.SuspendLayout()
         Me.grpScales.SuspendLayout()
-        Me.grpDateScale.SuspendLayout()
+        Me.grpScaleXDate.SuspendLayout()
         Me.grpMinorBreaks.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -392,19 +394,34 @@ Partial Class ucrAxes
         resources.ApplyResources(Me.ucrPnlScales, "ucrPnlScales")
         Me.ucrPnlScales.Name = "ucrPnlScales"
         '
-        'grpDateScale
+        'grpScaleXDate
         '
-        Me.grpDateScale.Controls.Add(Me.ucrInputComboDateBreak)
-        Me.grpDateScale.Controls.Add(Me.lbXscaleDateLowerLimit)
-        Me.grpDateScale.Controls.Add(Me.lblXScalDateUpperLimit)
-        Me.grpDateScale.Controls.Add(Me.ucrNudDateBreak)
-        Me.grpDateScale.Controls.Add(Me.ucrDtpLowerLimit)
-        Me.grpDateScale.Controls.Add(Me.ucrDtpUpperLimit)
-        Me.grpDateScale.Controls.Add(Me.ucrChkLimits)
-        Me.grpDateScale.Controls.Add(Me.ucrChkBreaks)
-        resources.ApplyResources(Me.grpDateScale, "grpDateScale")
-        Me.grpDateScale.Name = "grpDateScale"
-        Me.grpDateScale.TabStop = False
+        Me.grpScaleXDate.Controls.Add(Me.ucrInputComboDateLabel)
+        Me.grpScaleXDate.Controls.Add(Me.ucrChkDateLabels)
+        Me.grpScaleXDate.Controls.Add(Me.ucrInputComboDateBreak)
+        Me.grpScaleXDate.Controls.Add(Me.lbXscaleDateLowerLimit)
+        Me.grpScaleXDate.Controls.Add(Me.lblXScalDateUpperLimit)
+        Me.grpScaleXDate.Controls.Add(Me.ucrNudDateBreak)
+        Me.grpScaleXDate.Controls.Add(Me.ucrDtpLowerLimit)
+        Me.grpScaleXDate.Controls.Add(Me.ucrDtpUpperLimit)
+        Me.grpScaleXDate.Controls.Add(Me.ucrChkLimits)
+        Me.grpScaleXDate.Controls.Add(Me.ucrChkBreaks)
+        resources.ApplyResources(Me.grpScaleXDate, "grpScaleXDate")
+        Me.grpScaleXDate.Name = "grpScaleXDate"
+        Me.grpScaleXDate.TabStop = False
+        '
+        'ucrInputComboDateLabel
+        '
+        Me.ucrInputComboDateLabel.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboDateLabel.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboDateLabel, "ucrInputComboDateLabel")
+        Me.ucrInputComboDateLabel.Name = "ucrInputComboDateLabel"
+        '
+        'ucrChkDateLabels
+        '
+        Me.ucrChkDateLabels.Checked = False
+        resources.ApplyResources(Me.ucrChkDateLabels, "ucrChkDateLabels")
+        Me.ucrChkDateLabels.Name = "ucrChkDateLabels"
         '
         'ucrInputComboDateBreak
         '
@@ -568,7 +585,7 @@ Partial Class ucrAxes
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpDateScale)
+        Me.Controls.Add(Me.grpScaleXDate)
         Me.Controls.Add(Me.grpMinorBreaks)
         Me.Controls.Add(Me.ucrInputAxisType)
         Me.Controls.Add(Me.grpScales)
@@ -581,8 +598,8 @@ Partial Class ucrAxes
         Me.grpMajorBreaks.PerformLayout()
         Me.grpScales.ResumeLayout(False)
         Me.grpScales.PerformLayout()
-        Me.grpDateScale.ResumeLayout(False)
-        Me.grpDateScale.PerformLayout()
+        Me.grpScaleXDate.ResumeLayout(False)
+        Me.grpScaleXDate.PerformLayout()
         Me.grpMinorBreaks.ResumeLayout(False)
         Me.grpMinorBreaks.PerformLayout()
         Me.ResumeLayout(False)
@@ -642,7 +659,7 @@ Partial Class ucrAxes
     Friend WithEvents ucrChkPosition As ucrCheck
     Friend WithEvents ucrChkExpand As ucrCheck
     Friend WithEvents ucrChkTransformation As ucrCheck
-    Friend WithEvents grpDateScale As GroupBox
+    Friend WithEvents grpScaleXDate As GroupBox
     Friend WithEvents ucrChkLimits As ucrCheck
     Friend WithEvents ucrChkBreaks As ucrCheck
     Friend WithEvents lbXscaleDateLowerLimit As Label
@@ -651,4 +668,6 @@ Partial Class ucrAxes
     Friend WithEvents ucrDtpLowerLimit As ucrDateTimePicker
     Friend WithEvents ucrDtpUpperLimit As ucrDateTimePicker
     Friend WithEvents ucrInputComboDateBreak As ucrInputComboBox
+    Friend WithEvents ucrChkDateLabels As ucrCheck
+    Friend WithEvents ucrInputComboDateLabel As ucrInputComboBox
 End Class
