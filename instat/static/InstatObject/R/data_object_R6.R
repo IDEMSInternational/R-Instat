@@ -314,7 +314,8 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
     if(convert_to_character) {
       decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE)
       decimal_places[is.na(decimal_places)] <- 0
-      return(convert_to_character_matrix(out, TRUE, decimal_places))
+      scientific_notation = self$get_variables_metadata(property = scientific_label, column = names(out), error_if_no_property = FALSE)
+      return(convert_to_character_matrix(data = out, format_decimal_places =  TRUE, decimal_places =  decimal_places, is_scientific = scientific_notation))
     }
     else return(out)
   }
@@ -1122,7 +1123,7 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
     stop("to_type must be a character of length one")
   }
   
-  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor", "logical", "scientific"))) {
+  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor", "logical"))) {
     stop(to_type, " is not a valid type to convert to")
   }
   
@@ -1195,9 +1196,6 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
     else if(to_type == "logical") {
       if(is.logical.like(curr_col)) new_col <- as.logical(curr_col)
       else stop("Column is not numeric or contains values other than 0 and 1. Converting to logical would result in losing information.")
-    }
-    else if(to_type == "scientific"){
-      new_col <- formatC(x = curr_col, format = "e")
     }
     
     self$add_columns_to_data(col_name = col_name, col_data = new_col)
