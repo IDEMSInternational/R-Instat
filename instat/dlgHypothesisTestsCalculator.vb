@@ -691,9 +691,9 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdKruskal1_Click(sender As Object, e As EventArgs) Handles cmdKruskal1.Click
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::kruskal_test(formula = , data = , subset = NULL, weights = NULL)", 42)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::kruskal_test()", 1)
         End If
     End Sub
 
