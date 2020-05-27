@@ -112,6 +112,7 @@ Public Class ucrColumnMetadata
         Dim iTemp As Integer
         Dim iNameColumn As Integer = -1
         Dim strNewValue As String
+        Dim strValAllowed As String() = {"TRUE", "T", "FALSE", "F"}
 
         If e.NewData.ToString() = strPreviousCellText Then
             e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
@@ -134,6 +135,14 @@ Public Class ucrColumnMetadata
                 Else
                     strNewValue = iTemp
                 End If
+            ElseIf strProperty = strLabelsScientific Then
+                strNewValue = e.NewData.ToString.ToUpper
+
+                If Not strValAllowed.Contains(strNewValue) Then
+                    MsgBox("Type TRUE/T to change to scientific display and FALSE/F back to numeric display", MsgBoxStyle.Information)
+                    e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+                    Exit Sub
+                End If
             Else
                 If Decimal.TryParse(e.NewData, iTemp) Then
                     strNewValue = e.NewData
@@ -155,18 +164,6 @@ Public Class ucrColumnMetadata
                     MsgBox(e.NewData & " is not a valid column name.", MsgBoxStyle.Information, "Invalid Column Name")
                     e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
                     Exit Sub
-                End If
-            ElseIf strProperty = strLabelsScientific Then
-                If String.Compare(strNewValue, Chr(34) & "TRUE" & Chr(34)) = 0 OrElse String.Compare(strNewValue, Chr(34) & "T" & Chr(34)) = 0 Then
-                    clsConvertTo.AddParameter("to_type", Chr(34) & "scientific" & Chr(34))
-                    clsConvertTo.AddParameter("col_names", GetSelectedVariableNames())
-                    RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Scientific")
-                ElseIf String.Compare(strNewValue, Chr(34) & "FALSE" & Chr(34)) = 0 OrElse String.Compare(strNewValue, Chr(34) & "F" & Chr(34)) = 0 Then
-                    clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
-                    clsConvertTo.AddParameter("col_names", GetSelectedVariableNames())
-                    RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
-                Else
-                    MsgBox("Type TRUE/T to change to scientific and FALSE/F back to numeric", MsgBoxStyle.Information)
                 End If
             Else
                 strScript = frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata(data_name =" & Chr(34) & grdCurrSheet.Name & Chr(34) & ",col_names = " & Chr(34) & strColumn & Chr(34) & ",property=" & Chr(34) & strProperty & Chr(34) & ",new_val=" & strNewValue & ")"
