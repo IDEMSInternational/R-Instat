@@ -76,7 +76,7 @@ Public Class ucrScript
             Dim lineNum As Integer = txtScript.GetLineFromCharIndex(txtScript.GetFirstCharIndexOfCurrentLine())
             If lineNum < txtScript.Lines.Length Then
                 'add the new text to any unexecuted script remaining from previous calls to this function
-                strScriptCmd &= vbCrLf & txtScript.Lines(lineNum) 'insert carraige return to ensure that new text starts on new line
+                strScriptCmd &= vbCrLf & txtScript.Lines(lineNum) 'insert carriage return to ensure that new text starts on new line
                 strScriptCmd = RunText(strScriptCmd)
                 If lineNum < txtScript.Lines.Length - 1 Then
                     txtScript.SelectionStart = txtScript.GetFirstCharIndexFromLine(lineNum + 1)
