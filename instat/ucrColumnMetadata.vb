@@ -40,6 +40,7 @@ Public Class ucrColumnMetadata
     Private strNameLabel As String = "Name"
     Private strDataTypeLabel As String = "DataType"
     Private strLabelsLabel As String = "labels"
+    Private strLabelsScientific As String = "Scientific"
 
     Private Sub frmVariables_Load(sender As Object, e As EventArgs) Handles Me.Load
         loadForm()
@@ -69,7 +70,7 @@ Public Class ucrColumnMetadata
         grdVariables.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         grdVariables.SheetTabNewButtonVisible = False
         grdVariables.SheetTabWidth = 250
-        lstNonEditableColumns.AddRange({"class", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour", "Scientific"})
+        lstNonEditableColumns.AddRange({"class", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour"})
         'grdVariables.CurrentWorksheet.Resize(5, 5)
         'grdVariables.ColumnHeaderContextMenuStrip = context.grdData.ColumnHeaderContextMenuStrip
         'grdVariables.RowHeaderContextMenuStrip = context.grdData.RowHeaderContextMenuStrip
@@ -111,6 +112,7 @@ Public Class ucrColumnMetadata
         Dim iTemp As Integer
         Dim iNameColumn As Integer = -1
         Dim strNewValue As String
+        Dim strValAllowed As String() = {"TRUE", "T", "FALSE", "F"}
 
         If e.NewData.ToString() = strPreviousCellText Then
             e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
@@ -132,6 +134,14 @@ Public Class ucrColumnMetadata
                     Exit Sub
                 Else
                     strNewValue = iTemp
+                End If
+            ElseIf strProperty = strLabelsScientific Then
+                strNewValue = e.NewData.ToString.ToUpper
+
+                If Not strValAllowed.Contains(strNewValue) Then
+                    MsgBox("Type TRUE/T to change to scientific display and FALSE/F back to numeric display", MsgBoxStyle.Information)
+                    e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+                    Exit Sub
                 End If
             Else
                 If Decimal.TryParse(e.NewData, iTemp) Then
@@ -165,7 +175,7 @@ Public Class ucrColumnMetadata
                 e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
             End Try
         Else
-            MsgBox("Developer error: Cannot find Name column in column metadata grid.", MsgBoxStyle.Critical, "Canont find Name column")
+            MsgBox("Developer error: Cannot find Name column in column metadata grid.", MsgBoxStyle.Critical, "Cannot find Name column")
         End If
     End Sub
 
