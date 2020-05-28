@@ -112,7 +112,7 @@ Public Class ucrColumnMetadata
         Dim iTemp As Integer
         Dim iNameColumn As Integer = -1
         Dim strNewValue As String
-        Dim strValAllowed As String() = {"TRUE", "T", "FALSE", "F"}
+        Dim strBooleanValsAllowed As String() = {"TRUE", "T", "FALSE", "F"}
 
         If e.NewData.ToString() = strPreviousCellText Then
             e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
@@ -136,17 +136,15 @@ Public Class ucrColumnMetadata
                     strNewValue = iTemp
                 End If
             ElseIf strProperty = strLabelsScientific Then
-                strNewValue = e.NewData.ToString.ToUpper
 
-                e.NewData = strNewValue
-                If strValAllowed.Contains(strNewValue) Then
-                    If strNewValue.Length = 1 Then
-                        If strNewValue.Contains("F") Then
-                            e.NewData = "FALSE"
-                        Else
-                            e.NewData = "TRUE"
-                        End If
+                e.NewData = e.NewData.ToString.ToUpper
+                If strBooleanValsAllowed.Contains(e.NewData) Then
+                    If e.NewData(0) = "F" Then
+                        e.NewData = "FALSE"
+                    Else
+                        e.NewData = "TRUE"
                     End If
+                    strNewValue = e.NewData
                 Else
                     MsgBox("Type TRUE/T to change to scientific display and FALSE/F back to numeric display", MsgBoxStyle.Information)
                     e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
