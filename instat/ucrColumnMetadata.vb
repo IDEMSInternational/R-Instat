@@ -138,7 +138,16 @@ Public Class ucrColumnMetadata
             ElseIf strProperty = strLabelsScientific Then
                 strNewValue = e.NewData.ToString.ToUpper
 
-                If Not strValAllowed.Contains(strNewValue) Then
+                e.NewData = strNewValue
+                If strValAllowed.Contains(strNewValue) Then
+                    If strNewValue.Length = 1 Then
+                        If strNewValue.Contains("F") Then
+                            e.NewData = "FALSE"
+                        Else
+                            e.NewData = "TRUE"
+                        End If
+                    End If
+                Else
                     MsgBox("Type TRUE/T to change to scientific display and FALSE/F back to numeric display", MsgBoxStyle.Information)
                     e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
                     Exit Sub
