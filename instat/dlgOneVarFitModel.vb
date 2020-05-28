@@ -65,7 +65,7 @@ Public Class dlgOneVarFitModel
 
         ucrNudCI.SetParameter(New RParameter("mu"))
 
-        ucrSaveModel.SetPrefix("dist")
+
         ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
         ucrSaveModel.SetCheckBoxText("Save Model")
@@ -269,7 +269,6 @@ Public Class dlgOneVarFitModel
 
         clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsROneVarFitModel)
         ucrBase.clsRsyntax.AddToAfterCodes(clsRplotFunction, iPosition:=1)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsRLogLikFunction, iPosition:=2)
         bResetFittingOptions = True
         bResetFitModDisplay = True
     End Sub
@@ -654,6 +653,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
+        ucrSaveModel.SetPrefix(ucrDistributionChoice.clsCurrDistribution.strNameTag)
         SetBaseFunction()
         BinomialConditions()
         SetDataParameter()
