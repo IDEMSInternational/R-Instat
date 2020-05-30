@@ -112,7 +112,7 @@ Public Class ucrColumnMetadata
         Dim iTemp As Integer
         Dim iNameColumn As Integer = -1
         Dim strNewValue As String
-        Dim strBooleanValsAllowed As String() = {"TRUE", "T", "FALSE", "F"}
+        Dim strBooleanValsAllowed As String() = {"T", "TR", "TRU", "TRUE", "F", "FA", "FAL", "FALS", "FALSE"}
 
         If e.NewData.ToString() = strPreviousCellText Then
             e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
