@@ -322,6 +322,7 @@ Public Class RLink
     End Function
 
 
+    '''--------------------------------------------------------------------------------------------
     ''' <summary> This method executes the <paramref name="strNewScript"/> R script and displays 
     '''           the output as text or graph (determined by <paramref name="strNewScript"/>).
     '''           <para>R commands may be split over multiple lines. This is only allowed if the  
@@ -331,6 +332,7 @@ Public Class RLink
     '''           entered by a human from a dialog window (e.g. a script window). These scripts 
     '''           may contain R commands split over multiple lines to make the commands more 
     '''           readable.</para>
+    '''</summary>
     ''' <param name="strNewScript">    The R script to execute.</param>
     ''' <param name="strNewComment">   Shown as a comment. If this parameter is "" then shows 
     '''                                <paramref name="strNewScript"/> as the comment.</param>
@@ -338,8 +340,8 @@ Public Class RLink
     '''                                before <paramref name="strNewScript"/> is processed. 
     '''                                Otherwise <paramref name="strNewScript"/> is treated as a 
     '''                                continuation of the previous string that was sent to this 
-    '''                                function.</param></summary>
-
+    '''                                function.</param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String, Optional bClearScriptCmd As Boolean = True)
         Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
 
