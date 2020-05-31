@@ -61,6 +61,7 @@ Public Class dlgRenameObjects
         ucrReceiverCurrentName.Selector = ucrSelectorForRenameObject
         ucrReceiverCurrentName.SetMeAsReceiver()
         ucrReceiverCurrentName.SetParameterIsString()
+
         'ucrNewName
         ucrInputNewName.SetParameter(New RParameter("new_name", 2))
         ucrInputNewName.SetValidationTypeAsRVariable()
@@ -80,7 +81,6 @@ Public Class dlgRenameObjects
         clsDefaultFunction = New RFunction
 
         ucrSelectorForRenameObject.Reset()
-        ucrInputNewName.Reset()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_object")
         clsDefaultFunction.AddParameter("object_type", Chr(34) & "object" & Chr(34), iPosition:=3)
@@ -118,14 +118,13 @@ Public Class dlgRenameObjects
     End Sub
 
     Private Sub ucrReceiverCurrentName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCurrentName.ControlValueChanged
-        NewDefaultName()
+        If Not ucrReceiverCurrentName.IsEmpty AndAlso Not ucrInputNewName.bUserTyped Then
+            ucrInputNewName.SetName(ucrReceiverCurrentName.GetVariableNames(bWithQuotes:=False) & "1")
+        End If
     End Sub
 
     Private Sub ucrInputType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputType.ControlValueChanged
-        Dim strType As String
-        strType = ucrInputType.GetValue()
-
-        Select Case strType
+        Select Case ucrInputType.GetValue()
             Case "Objects"
                 ucrReceiverCurrentName.SetItemType("object")
                 ucrReceiverCurrentName.strSelectorHeading = "Objects"
@@ -145,12 +144,6 @@ Public Class dlgRenameObjects
                 ucrReceiverCurrentName.SetItemType("model")
                 ucrReceiverCurrentName.strSelectorHeading = "Models"
         End Select
-    End Sub
-
-    Private Sub NewDefaultName()
-        If Not ucrReceiverCurrentName.IsEmpty AndAlso Not ucrInputNewName.bUserTyped Then
-            ucrInputNewName.SetName(ucrReceiverCurrentName.GetVariableNames(bWithQuotes:=False) & "1")
-        End If
     End Sub
 
     Private Sub CoreControls_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrSelectorForRenameObject.ControlContentsChanged, ucrReceiverCurrentName.ControlContentsChanged

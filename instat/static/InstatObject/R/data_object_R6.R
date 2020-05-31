@@ -483,12 +483,12 @@ DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, inclu
     if(length(ex_ind) != length(excluded_items)) warning("Some of the excluded_items were not found in the list of calculations")
     if(length(ex_ind) > 0) out = out[-ex_ind]
   }
-  if(as_list) {
-    lst = list()
-    lst[[self$get_metadata(data_name_label)]] <- out
-    return(lst)
+  if(!as_list) {
+    return(out)
   }
-  else return(out)
+  lst = list()
+  lst[[self$get_metadata(data_name_label)]] <- out
+  return(lst)
 }
 )
 
@@ -1692,9 +1692,9 @@ DataSheet$set("public", "get_last_graph", function() {
 )
 
 DataSheet$set("public", "rename_object", function(object_name, new_name, object_type = "object") {
-  if(!object_type %in% c("object","filter","calculation", "graph", "table","model")) stop(object_type, " must be either object, filter or a calculation")
+  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model")) stop(object_type, " must be either object (graph, table or model), filter or a calculation")
   #Temp fix:: added graph, table and model so as to distinguish this when implementing it in the dialog. Otherwise they remain as objects
-  if (object_type == "object"||object_type == "graph"||object_type == "table"||object_type == "model"){
+  if (object_type %in% c("object", "graph", "table","model")){
     if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
     if(new_name %in% names(private$objects)) stop(new_name, " is already an object name. Cannot rename ", object_name, " to ", new_name)
     names(private$objects)[names(private$objects) == object_name] <- new_name
