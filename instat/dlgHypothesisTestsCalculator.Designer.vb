@@ -149,7 +149,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdSmk = New System.Windows.Forms.Button()
         Me.cmdSnh = New System.Windows.Forms.Button()
         Me.cmdWw = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.cmdWm = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1286,7 +1286,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpTrend
         '
-        Me.grpTrend.Controls.Add(Me.Button2)
+        Me.grpTrend.Controls.Add(Me.cmdWm)
         Me.grpTrend.Controls.Add(Me.cmdWw)
         Me.grpTrend.Controls.Add(Me.cmdSnh)
         Me.grpTrend.Controls.Add(Me.cmdSmk)
@@ -1304,16 +1304,16 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpTrend.Controls.Add(Me.cmdBu)
         Me.grpTrend.Controls.Add(Me.cmdBr)
         Me.grpTrend.Controls.Add(Me.cmdBartels)
-        Me.grpTrend.Location = New System.Drawing.Point(232, 79)
+        Me.grpTrend.Location = New System.Drawing.Point(240, 76)
         Me.grpTrend.Name = "grpTrend"
-        Me.grpTrend.Size = New System.Drawing.Size(307, 180)
+        Me.grpTrend.Size = New System.Drawing.Size(232, 185)
         Me.grpTrend.TabIndex = 23
         Me.grpTrend.TabStop = False
         Me.grpTrend.Text = "Trend"
         '
         'cmdBartels
         '
-        Me.cmdBartels.Location = New System.Drawing.Point(3, 16)
+        Me.cmdBartels.Location = New System.Drawing.Point(3, 14)
         Me.cmdBartels.Name = "cmdBartels"
         Me.cmdBartels.Size = New System.Drawing.Size(75, 28)
         Me.cmdBartels.TabIndex = 0
@@ -1322,7 +1322,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdBr
         '
-        Me.cmdBr.Location = New System.Drawing.Point(84, 16)
+        Me.cmdBr.Location = New System.Drawing.Point(77, 14)
         Me.cmdBr.Name = "cmdBr"
         Me.cmdBr.Size = New System.Drawing.Size(75, 28)
         Me.cmdBr.TabIndex = 1
@@ -1331,7 +1331,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdBu
         '
-        Me.cmdBu.Location = New System.Drawing.Point(161, 16)
+        Me.cmdBu.Location = New System.Drawing.Point(151, 14)
         Me.cmdBu.Name = "cmdBu"
         Me.cmdBu.Size = New System.Drawing.Size(75, 28)
         Me.cmdBu.TabIndex = 2
@@ -1340,7 +1340,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdCs
         '
-        Me.cmdCs.Location = New System.Drawing.Point(236, 16)
+        Me.cmdCs.Location = New System.Drawing.Point(3, 41)
         Me.cmdCs.Name = "cmdCs"
         Me.cmdCs.Size = New System.Drawing.Size(75, 28)
         Me.cmdCs.TabIndex = 3
@@ -1349,7 +1349,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdCsmk
         '
-        Me.cmdCsmk.Location = New System.Drawing.Point(3, 45)
+        Me.cmdCsmk.Location = New System.Drawing.Point(77, 41)
         Me.cmdCsmk.Name = "cmdCsmk"
         Me.cmdCsmk.Size = New System.Drawing.Size(75, 28)
         Me.cmdCsmk.TabIndex = 4
@@ -1358,7 +1358,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdLanzante
         '
-        Me.cmdLanzante.Location = New System.Drawing.Point(81, 45)
+        Me.cmdLanzante.Location = New System.Drawing.Point(151, 41)
         Me.cmdLanzante.Name = "cmdLanzante"
         Me.cmdLanzante.Size = New System.Drawing.Size(75, 28)
         Me.cmdLanzante.TabIndex = 5
@@ -1367,7 +1367,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdMk
         '
-        Me.cmdMk.Location = New System.Drawing.Point(161, 45)
+        Me.cmdMk.Location = New System.Drawing.Point(3, 68)
         Me.cmdMk.Name = "cmdMk"
         Me.cmdMk.Size = New System.Drawing.Size(75, 28)
         Me.cmdMk.TabIndex = 6
@@ -1376,7 +1376,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdMmk
         '
-        Me.cmdMmk.Location = New System.Drawing.Point(232, 44)
+        Me.cmdMmk.Location = New System.Drawing.Point(77, 68)
         Me.cmdMmk.Name = "cmdMmk"
         Me.cmdMmk.Size = New System.Drawing.Size(75, 28)
         Me.cmdMmk.TabIndex = 7
@@ -1385,7 +1385,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdPcor
         '
-        Me.cmdPcor.Location = New System.Drawing.Point(3, 71)
+        Me.cmdPcor.Location = New System.Drawing.Point(151, 68)
         Me.cmdPcor.Name = "cmdPcor"
         Me.cmdPcor.Size = New System.Drawing.Size(75, 28)
         Me.cmdPcor.TabIndex = 8
@@ -1499,7 +1499,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdPmk
         '
-        Me.cmdPmk.Location = New System.Drawing.Point(79, 71)
+        Me.cmdPmk.Location = New System.Drawing.Point(3, 95)
         Me.cmdPmk.Name = "cmdPmk"
         Me.cmdPmk.Size = New System.Drawing.Size(75, 28)
         Me.cmdPmk.TabIndex = 9
@@ -1508,7 +1508,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdPettitt
         '
-        Me.cmdPettitt.Location = New System.Drawing.Point(157, 70)
+        Me.cmdPettitt.Location = New System.Drawing.Point(77, 95)
         Me.cmdPettitt.Name = "cmdPettitt"
         Me.cmdPettitt.Size = New System.Drawing.Size(75, 28)
         Me.cmdPettitt.TabIndex = 10
@@ -1517,7 +1517,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdRrod
         '
-        Me.cmdRrod.Location = New System.Drawing.Point(232, 69)
+        Me.cmdRrod.Location = New System.Drawing.Point(151, 95)
         Me.cmdRrod.Name = "cmdRrod"
         Me.cmdRrod.Size = New System.Drawing.Size(75, 28)
         Me.cmdRrod.TabIndex = 11
@@ -1526,7 +1526,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdSsens
         '
-        Me.cmdSsens.Location = New System.Drawing.Point(3, 100)
+        Me.cmdSsens.Location = New System.Drawing.Point(3, 122)
         Me.cmdSsens.Name = "cmdSsens"
         Me.cmdSsens.Size = New System.Drawing.Size(75, 28)
         Me.cmdSsens.TabIndex = 12
@@ -1535,7 +1535,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdSens
         '
-        Me.cmdSens.Location = New System.Drawing.Point(79, 100)
+        Me.cmdSens.Location = New System.Drawing.Point(77, 122)
         Me.cmdSens.Name = "cmdSens"
         Me.cmdSens.Size = New System.Drawing.Size(75, 28)
         Me.cmdSens.TabIndex = 13
@@ -1544,7 +1544,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdSmk
         '
-        Me.cmdSmk.Location = New System.Drawing.Point(157, 98)
+        Me.cmdSmk.Location = New System.Drawing.Point(151, 122)
         Me.cmdSmk.Name = "cmdSmk"
         Me.cmdSmk.Size = New System.Drawing.Size(75, 28)
         Me.cmdSmk.TabIndex = 14
@@ -1553,7 +1553,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdSnh
         '
-        Me.cmdSnh.Location = New System.Drawing.Point(232, 98)
+        Me.cmdSnh.Location = New System.Drawing.Point(3, 149)
         Me.cmdSnh.Name = "cmdSnh"
         Me.cmdSnh.Size = New System.Drawing.Size(75, 28)
         Me.cmdSnh.TabIndex = 15
@@ -1562,21 +1562,21 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdWw
         '
-        Me.cmdWw.Location = New System.Drawing.Point(3, 126)
+        Me.cmdWw.Location = New System.Drawing.Point(77, 149)
         Me.cmdWw.Name = "cmdWw"
         Me.cmdWw.Size = New System.Drawing.Size(75, 28)
         Me.cmdWw.TabIndex = 16
         Me.cmdWw.Text = "ww "
         Me.cmdWw.UseVisualStyleBackColor = True
         '
-        'Button2
+        'cmdWm
         '
-        Me.Button2.Location = New System.Drawing.Point(81, 126)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 28)
-        Me.Button2.TabIndex = 17
-        Me.Button2.Text = "ssens "
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.cmdWm.Location = New System.Drawing.Point(151, 149)
+        Me.cmdWm.Name = "cmdWm"
+        Me.cmdWm.Size = New System.Drawing.Size(75, 28)
+        Me.cmdWm.TabIndex = 17
+        Me.cmdWm.Text = "wm"
+        Me.cmdWm.UseVisualStyleBackColor = True
         '
         'dlgHypothesisTestsCalculator
         '
@@ -1750,7 +1750,7 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdRrod As Button
     Friend WithEvents cmdSmk As Button
     Friend WithEvents cmdSens As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents cmdWm As Button
     Friend WithEvents cmdWw As Button
     Friend WithEvents cmdSnh As Button
 End Class
