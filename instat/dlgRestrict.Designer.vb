@@ -50,6 +50,8 @@ Partial Class dlgRestrict
         Me.rdoApplyAsSubset = New System.Windows.Forms.RadioButton()
         Me.rdoApplyAsFilter = New System.Windows.Forms.RadioButton()
         Me.ucrNewDataFrameName = New instat.ucrSave()
+        Me.cmdEditFilter = New System.Windows.Forms.Button()
+        Me.cmdFilterFromFactors = New System.Windows.Forms.Button()
         Me.grpApplyOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -127,10 +129,26 @@ Partial Class dlgRestrict
         resources.ApplyResources(Me.ucrNewDataFrameName, "ucrNewDataFrameName")
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
         '
+        'cmdEditFilter
+        '
+        resources.ApplyResources(Me.cmdEditFilter, "cmdEditFilter")
+        Me.cmdEditFilter.Name = "cmdEditFilter"
+        Me.cmdEditFilter.Tag = "Define_New_Filter"
+        Me.cmdEditFilter.UseVisualStyleBackColor = True
+        '
+        'cmdFilterFromFactors
+        '
+        resources.ApplyResources(Me.cmdFilterFromFactors, "cmdFilterFromFactors")
+        Me.cmdFilterFromFactors.Name = "cmdFilterFromFactors"
+        Me.cmdFilterFromFactors.Tag = "Define_New_Filter"
+        Me.cmdFilterFromFactors.UseVisualStyleBackColor = True
+        '
         'dlgRestrict
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdFilterFromFactors)
+        Me.Controls.Add(Me.cmdEditFilter)
         Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.grpApplyOptions)
         Me.Controls.Add(Me.ucrInputFilterPreview)
@@ -162,4 +180,6 @@ Partial Class dlgRestrict
     Friend WithEvents rdoApplyAsSubset As RadioButton
     Friend WithEvents rdoApplyAsFilter As RadioButton
     Friend WithEvents ucrNewDataFrameName As ucrSave
+    Friend WithEvents cmdEditFilter As Button
+    Friend WithEvents cmdFilterFromFactors As Button
 End Class
