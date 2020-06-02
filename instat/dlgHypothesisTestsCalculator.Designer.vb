@@ -141,6 +141,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrSelectorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
+        Me.cmdPmk = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1277,6 +1278,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpTrend
         '
+        Me.grpTrend.Controls.Add(Me.cmdPmk)
         Me.grpTrend.Controls.Add(Me.cmdPcor)
         Me.grpTrend.Controls.Add(Me.cmdMmk)
         Me.grpTrend.Controls.Add(Me.cmdMk)
@@ -1479,6 +1481,15 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn.TabIndex = 1
         Me.ucrReceiverForTestColumn.ucrSelector = Nothing
         '
+        'cmdPmk
+        '
+        Me.cmdPmk.Location = New System.Drawing.Point(79, 71)
+        Me.cmdPmk.Name = "cmdPmk"
+        Me.cmdPmk.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPmk.TabIndex = 9
+        Me.cmdPmk.Text = "pmk "
+        Me.cmdPmk.UseVisualStyleBackColor = True
+        '
         'dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1645,4 +1656,5 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdMk As Button
     Friend WithEvents cmdMmk As Button
     Friend WithEvents cmdPcor As Button
+    Friend WithEvents cmdPmk As Button
 End Class
