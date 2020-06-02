@@ -1968,10 +1968,6 @@ Public Class frmMain
         dlgDuplicates.ShowDialog()
     End Sub
 
-    Private Sub UseModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelUseModel.Click
-        dlgUseModel.ShowDialog()
-    End Sub
-
     Private Sub mnuCumExeedenceGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSACumExeedenceGraph.Click
         dlgCumulativeDistribution.ShowDialog()
     End Sub
