@@ -968,4 +968,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::sens.slope()", 1)
         End If
     End Sub
+
+    Private Sub cmdSmk_Click(sender As Object, e As EventArgs) Handles cmdSmk.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::smk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""), continuity = TRUE)", 62)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::smk.test()", 1)
+        End If
+    End Sub
 End Class
