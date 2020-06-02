@@ -138,6 +138,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdCs = New System.Windows.Forms.Button()
         Me.cmdCsmk = New System.Windows.Forms.Button()
         Me.cmdLanzante = New System.Windows.Forms.Button()
+        Me.cmdMk = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1379,6 +1380,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpTrend
         '
+        Me.grpTrend.Controls.Add(Me.cmdMk)
         Me.grpTrend.Controls.Add(Me.cmdLanzante)
         Me.grpTrend.Controls.Add(Me.cmdCsmk)
         Me.grpTrend.Controls.Add(Me.cmdCs)
@@ -1445,6 +1447,15 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdLanzante.TabIndex = 5
         Me.cmdLanzante.Text = "lanzante"
         Me.cmdLanzante.UseVisualStyleBackColor = True
+        '
+        'cmdMk
+        '
+        Me.cmdMk.Location = New System.Drawing.Point(161, 45)
+        Me.cmdMk.Name = "cmdMk"
+        Me.cmdMk.Size = New System.Drawing.Size(75, 23)
+        Me.cmdMk.TabIndex = 6
+        Me.cmdMk.Text = "mk"
+        Me.cmdMk.UseVisualStyleBackColor = True
         '
         'dlgHypothesisTestsCalculator
         '
@@ -1609,4 +1620,5 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdCs As Button
     Friend WithEvents cmdLanzante As Button
     Friend WithEvents cmdCsmk As Button
+    Friend WithEvents cmdMk As Button
 End Class
