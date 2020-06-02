@@ -142,6 +142,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.cmdPmk = New System.Windows.Forms.Button()
+        Me.cmdPettitt = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1278,6 +1279,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpTrend
         '
+        Me.grpTrend.Controls.Add(Me.cmdPettitt)
         Me.grpTrend.Controls.Add(Me.cmdPmk)
         Me.grpTrend.Controls.Add(Me.cmdPcor)
         Me.grpTrend.Controls.Add(Me.cmdMmk)
@@ -1490,6 +1492,15 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdPmk.Text = "pmk "
         Me.cmdPmk.UseVisualStyleBackColor = True
         '
+        'cmdPettitt
+        '
+        Me.cmdPettitt.Location = New System.Drawing.Point(157, 70)
+        Me.cmdPettitt.Name = "cmdPettitt"
+        Me.cmdPettitt.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPettitt.TabIndex = 10
+        Me.cmdPettitt.Text = "pettitt "
+        Me.cmdPettitt.UseVisualStyleBackColor = True
+        '
         'dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1657,4 +1668,5 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdMmk As Button
     Friend WithEvents cmdPcor As Button
     Friend WithEvents cmdPmk As Button
+    Friend WithEvents cmdPettitt As Button
 End Class
