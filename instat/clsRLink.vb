@@ -1491,6 +1491,10 @@ Public Class RLink
                     clsGetItems.AddParameter("file", Chr(34) & strNcFilePath & Chr(34))
                 Case "variable_sets"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_variable_sets_names")
+                Case "table"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_table_names")
+                Case "calculation"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_calculation_names")
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
             If lstView.TopItem IsNot Nothing Then
