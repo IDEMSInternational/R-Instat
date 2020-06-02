@@ -132,6 +132,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.grpTrend = New System.Windows.Forms.GroupBox()
+        Me.cmdBartels = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -143,6 +144,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpSymmetry.SuspendLayout()
         Me.grpCorrelation.SuspendLayout()
         Me.grpLocation.SuspendLayout()
+        Me.grpTrend.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblTest
@@ -1372,12 +1374,22 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpTrend
         '
+        Me.grpTrend.Controls.Add(Me.cmdBartels)
         Me.grpTrend.Location = New System.Drawing.Point(241, 71)
         Me.grpTrend.Name = "grpTrend"
         Me.grpTrend.Size = New System.Drawing.Size(307, 180)
         Me.grpTrend.TabIndex = 23
         Me.grpTrend.TabStop = False
         Me.grpTrend.Text = "Trend"
+        '
+        'cmdBartels
+        '
+        Me.cmdBartels.Location = New System.Drawing.Point(3, 16)
+        Me.cmdBartels.Name = "cmdBartels"
+        Me.cmdBartels.Size = New System.Drawing.Size(75, 23)
+        Me.cmdBartels.TabIndex = 0
+        Me.cmdBartels.Text = "bartels"
+        Me.cmdBartels.UseVisualStyleBackColor = True
         '
         'dlgHypothesisTestsCalculator
         '
@@ -1422,6 +1434,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpSymmetry.ResumeLayout(False)
         Me.grpCorrelation.ResumeLayout(False)
         Me.grpLocation.ResumeLayout(False)
+        Me.grpTrend.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1535,4 +1548,5 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdOneway1 As Button
     Friend WithEvents cmdTaha As Button
     Friend WithEvents grpTrend As GroupBox
+    Friend WithEvents cmdBartels As Button
 End Class
