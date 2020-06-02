@@ -880,4 +880,20 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::bu.test()", 1)
         End If
     End Sub
+
+    Private Sub cmdCs_Click(sender As Object, e As EventArgs) Handles cmdCs.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::cs.test(x = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::cs.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCsmk_Click(sender As Object, e As EventArgs) Handles cmdCsmk.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::csmk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""))", 56)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::csmk.test()", 1)
+        End If
+    End Sub
 End Class
