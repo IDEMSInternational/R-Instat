@@ -148,7 +148,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdSens = New System.Windows.Forms.Button()
         Me.cmdSmk = New System.Windows.Forms.Button()
         Me.cmdSnh = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.cmdWw = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
@@ -1287,7 +1287,7 @@ Partial Class dlgHypothesisTestsCalculator
         'grpTrend
         '
         Me.grpTrend.Controls.Add(Me.Button2)
-        Me.grpTrend.Controls.Add(Me.Button1)
+        Me.grpTrend.Controls.Add(Me.cmdWw)
         Me.grpTrend.Controls.Add(Me.cmdSnh)
         Me.grpTrend.Controls.Add(Me.cmdSmk)
         Me.grpTrend.Controls.Add(Me.cmdSens)
@@ -1560,14 +1560,14 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdSnh.Text = "snh "
         Me.cmdSnh.UseVisualStyleBackColor = True
         '
-        'Button1
+        'cmdWw
         '
-        Me.Button1.Location = New System.Drawing.Point(3, 126)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 25)
-        Me.Button1.TabIndex = 16
-        Me.Button1.Text = "ssens "
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.cmdWw.Location = New System.Drawing.Point(3, 126)
+        Me.cmdWw.Name = "cmdWw"
+        Me.cmdWw.Size = New System.Drawing.Size(75, 25)
+        Me.cmdWw.TabIndex = 16
+        Me.cmdWw.Text = "ww "
+        Me.cmdWw.UseVisualStyleBackColor = True
         '
         'Button2
         '
@@ -1751,6 +1751,6 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdSmk As Button
     Friend WithEvents cmdSens As Button
     Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents cmdWw As Button
     Friend WithEvents cmdSnh As Button
 End Class
