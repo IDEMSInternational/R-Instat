@@ -120,6 +120,16 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdKruskal1 = New System.Windows.Forms.Button()
         Me.cmdWilcox1 = New System.Windows.Forms.Button()
         Me.cmdOneway1 = New System.Windows.Forms.Button()
+        Me.grpTrend = New System.Windows.Forms.GroupBox()
+        Me.cmdBartels = New System.Windows.Forms.Button()
+        Me.cmdBr = New System.Windows.Forms.Button()
+        Me.cmdBu = New System.Windows.Forms.Button()
+        Me.cmdCs = New System.Windows.Forms.Button()
+        Me.cmdCsmk = New System.Windows.Forms.Button()
+        Me.cmdLanzante = New System.Windows.Forms.Button()
+        Me.cmdMk = New System.Windows.Forms.Button()
+        Me.cmdMmk = New System.Windows.Forms.Button()
+        Me.cmdPcor = New System.Windows.Forms.Button()
         Me.ucrChkDisplayModel = New instat.ucrCheck()
         Me.ucrChkSummaryModel = New instat.ucrCheck()
         Me.ucrTryModelling = New instat.ucrTry()
@@ -131,16 +141,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrSelectorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
-        Me.grpTrend = New System.Windows.Forms.GroupBox()
-        Me.cmdBartels = New System.Windows.Forms.Button()
-        Me.cmdBr = New System.Windows.Forms.Button()
-        Me.cmdBu = New System.Windows.Forms.Button()
-        Me.cmdCs = New System.Windows.Forms.Button()
-        Me.cmdCsmk = New System.Windows.Forms.Button()
-        Me.cmdLanzante = New System.Windows.Forms.Button()
-        Me.cmdMk = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.cmdv = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1275,115 +1275,10 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdOneway1.Text = "oneway"
         Me.cmdOneway1.UseVisualStyleBackColor = True
         '
-        'ucrChkDisplayModel
-        '
-        Me.ucrChkDisplayModel.Checked = False
-        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(6, 307)
-        Me.ucrChkDisplayModel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.ucrChkDisplayModel.Name = "ucrChkDisplayModel"
-        Me.ucrChkDisplayModel.Size = New System.Drawing.Size(139, 20)
-        Me.ucrChkDisplayModel.TabIndex = 20
-        '
-        'ucrChkSummaryModel
-        '
-        Me.ucrChkSummaryModel.Checked = False
-        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(6, 277)
-        Me.ucrChkSummaryModel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.ucrChkSummaryModel.Name = "ucrChkSummaryModel"
-        Me.ucrChkSummaryModel.Size = New System.Drawing.Size(139, 20)
-        Me.ucrChkSummaryModel.TabIndex = 19
-        '
-        'ucrTryModelling
-        '
-        Me.ucrTryModelling.Location = New System.Drawing.Point(0, 379)
-        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.ucrTryModelling.Name = "ucrTryModelling"
-        Me.ucrTryModelling.Size = New System.Drawing.Size(480, 28)
-        Me.ucrTryModelling.TabIndex = 17
-        '
-        'ucrReceiverMultiple
-        '
-        Me.ucrReceiverMultiple.frmParent = Me
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(250, 277)
-        Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
-        Me.ucrReceiverMultiple.Selector = Nothing
-        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(113, 100)
-        Me.ucrReceiverMultiple.strNcFilePath = ""
-        Me.ucrReceiverMultiple.TabIndex = 8
-        Me.ucrReceiverMultiple.ucrSelector = Nothing
-        '
-        'ucrSaveResult
-        '
-        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 412)
-        Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveResult.Name = "ucrSaveResult"
-        Me.ucrSaveResult.Size = New System.Drawing.Size(277, 24)
-        Me.ucrSaveResult.TabIndex = 12
-        '
-        'ucrInputComboRPackage
-        '
-        Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboRPackage.IsReadOnly = False
-        Me.ucrInputComboRPackage.Location = New System.Drawing.Point(317, 51)
-        Me.ucrInputComboRPackage.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
-        Me.ucrInputComboRPackage.Name = "ucrInputComboRPackage"
-        Me.ucrInputComboRPackage.Size = New System.Drawing.Size(123, 21)
-        Me.ucrInputComboRPackage.TabIndex = 5
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 453)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(452, 52)
-        Me.ucrBase.TabIndex = 13
-        '
-        'ucrChkBy
-        '
-        Me.ucrChkBy.Checked = False
-        Me.ucrChkBy.Location = New System.Drawing.Point(251, 253)
-        Me.ucrChkBy.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
-        Me.ucrChkBy.Name = "ucrChkBy"
-        Me.ucrChkBy.Size = New System.Drawing.Size(84, 20)
-        Me.ucrChkBy.TabIndex = 7
-        '
-        'ucrSelectorColumn
-        '
-        Me.ucrSelectorColumn.bDropUnusedFilterLevels = False
-        Me.ucrSelectorColumn.bShowHiddenColumns = False
-        Me.ucrSelectorColumn.bUseCurrentFilter = True
-        Me.ucrSelectorColumn.Location = New System.Drawing.Point(19, 56)
-        Me.ucrSelectorColumn.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorColumn.Name = "ucrSelectorColumn"
-        Me.ucrSelectorColumn.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorColumn.TabIndex = 3
-        '
-        'ucrChkIncludeArguments
-        '
-        Me.ucrChkIncludeArguments.Checked = False
-        Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(445, 25)
-        Me.ucrChkIncludeArguments.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
-        Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
-        Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(131, 20)
-        Me.ucrChkIncludeArguments.TabIndex = 2
-        '
-        'ucrReceiverForTestColumn
-        '
-        Me.ucrReceiverForTestColumn.frmParent = Me
-        Me.ucrReceiverForTestColumn.Location = New System.Drawing.Point(50, 25)
-        Me.ucrReceiverForTestColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ucrReceiverForTestColumn.Name = "ucrReceiverForTestColumn"
-        Me.ucrReceiverForTestColumn.Selector = Nothing
-        Me.ucrReceiverForTestColumn.Size = New System.Drawing.Size(390, 27)
-        Me.ucrReceiverForTestColumn.strNcFilePath = ""
-        Me.ucrReceiverForTestColumn.TabIndex = 1
-        Me.ucrReceiverForTestColumn.ucrSelector = Nothing
-        '
         'grpTrend
         '
-        Me.grpTrend.Controls.Add(Me.cmdv)
-        Me.grpTrend.Controls.Add(Me.Button1)
+        Me.grpTrend.Controls.Add(Me.cmdPcor)
+        Me.grpTrend.Controls.Add(Me.cmdMmk)
         Me.grpTrend.Controls.Add(Me.cmdMk)
         Me.grpTrend.Controls.Add(Me.cmdLanzante)
         Me.grpTrend.Controls.Add(Me.cmdCsmk)
@@ -1461,23 +1356,128 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdMk.Text = "mk"
         Me.cmdMk.UseVisualStyleBackColor = True
         '
-        'Button1
+        'cmdMmk
         '
-        Me.Button1.Location = New System.Drawing.Point(232, 44)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 7
-        Me.Button1.Text = "mmk "
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.cmdMmk.Location = New System.Drawing.Point(232, 44)
+        Me.cmdMmk.Name = "cmdMmk"
+        Me.cmdMmk.Size = New System.Drawing.Size(75, 23)
+        Me.cmdMmk.TabIndex = 7
+        Me.cmdMmk.Text = "mmk "
+        Me.cmdMmk.UseVisualStyleBackColor = True
         '
-        'cmdv
+        'cmdPcor
         '
-        Me.cmdv.Location = New System.Drawing.Point(3, 71)
-        Me.cmdv.Name = "cmdv"
-        Me.cmdv.Size = New System.Drawing.Size(75, 23)
-        Me.cmdv.TabIndex = 8
-        Me.cmdv.Text = "pcor "
-        Me.cmdv.UseVisualStyleBackColor = True
+        Me.cmdPcor.Location = New System.Drawing.Point(3, 71)
+        Me.cmdPcor.Name = "cmdPcor"
+        Me.cmdPcor.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPcor.TabIndex = 8
+        Me.cmdPcor.Text = "pcor "
+        Me.cmdPcor.UseVisualStyleBackColor = True
+        '
+        'ucrChkDisplayModel
+        '
+        Me.ucrChkDisplayModel.Checked = False
+        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(6, 307)
+        Me.ucrChkDisplayModel.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrChkDisplayModel.Name = "ucrChkDisplayModel"
+        Me.ucrChkDisplayModel.Size = New System.Drawing.Size(139, 20)
+        Me.ucrChkDisplayModel.TabIndex = 20
+        '
+        'ucrChkSummaryModel
+        '
+        Me.ucrChkSummaryModel.Checked = False
+        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(6, 277)
+        Me.ucrChkSummaryModel.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrChkSummaryModel.Name = "ucrChkSummaryModel"
+        Me.ucrChkSummaryModel.Size = New System.Drawing.Size(139, 20)
+        Me.ucrChkSummaryModel.TabIndex = 19
+        '
+        'ucrTryModelling
+        '
+        Me.ucrTryModelling.Location = New System.Drawing.Point(0, 379)
+        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrTryModelling.Name = "ucrTryModelling"
+        Me.ucrTryModelling.Size = New System.Drawing.Size(480, 28)
+        Me.ucrTryModelling.TabIndex = 17
+        '
+        'ucrReceiverMultiple
+        '
+        Me.ucrReceiverMultiple.frmParent = Me
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(250, 277)
+        Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
+        Me.ucrReceiverMultiple.Selector = Nothing
+        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(113, 100)
+        Me.ucrReceiverMultiple.strNcFilePath = ""
+        Me.ucrReceiverMultiple.TabIndex = 8
+        Me.ucrReceiverMultiple.ucrSelector = Nothing
+        '
+        'ucrSaveResult
+        '
+        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 412)
+        Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveResult.Name = "ucrSaveResult"
+        Me.ucrSaveResult.Size = New System.Drawing.Size(277, 24)
+        Me.ucrSaveResult.TabIndex = 12
+        '
+        'ucrInputComboRPackage
+        '
+        Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboRPackage.IsReadOnly = False
+        Me.ucrInputComboRPackage.Location = New System.Drawing.Point(317, 51)
+        Me.ucrInputComboRPackage.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.ucrInputComboRPackage.Name = "ucrInputComboRPackage"
+        Me.ucrInputComboRPackage.Size = New System.Drawing.Size(123, 21)
+        Me.ucrInputComboRPackage.TabIndex = 5
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 453)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(452, 52)
+        Me.ucrBase.TabIndex = 13
+        '
+        'ucrChkBy
+        '
+        Me.ucrChkBy.Checked = False
+        Me.ucrChkBy.Location = New System.Drawing.Point(251, 253)
+        Me.ucrChkBy.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrChkBy.Name = "ucrChkBy"
+        Me.ucrChkBy.Size = New System.Drawing.Size(84, 20)
+        Me.ucrChkBy.TabIndex = 7
+        '
+        'ucrSelectorColumn
+        '
+        Me.ucrSelectorColumn.bDropUnusedFilterLevels = False
+        Me.ucrSelectorColumn.bShowHiddenColumns = False
+        Me.ucrSelectorColumn.bUseCurrentFilter = True
+        Me.ucrSelectorColumn.Location = New System.Drawing.Point(19, 56)
+        Me.ucrSelectorColumn.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorColumn.Name = "ucrSelectorColumn"
+        Me.ucrSelectorColumn.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorColumn.TabIndex = 3
+        '
+        'ucrChkIncludeArguments
+        '
+        Me.ucrChkIncludeArguments.Checked = False
+        Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(445, 25)
+        Me.ucrChkIncludeArguments.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
+        Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(131, 20)
+        Me.ucrChkIncludeArguments.TabIndex = 2
+        '
+        'ucrReceiverForTestColumn
+        '
+        Me.ucrReceiverForTestColumn.frmParent = Me
+        Me.ucrReceiverForTestColumn.Location = New System.Drawing.Point(50, 25)
+        Me.ucrReceiverForTestColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ucrReceiverForTestColumn.Name = "ucrReceiverForTestColumn"
+        Me.ucrReceiverForTestColumn.Selector = Nothing
+        Me.ucrReceiverForTestColumn.Size = New System.Drawing.Size(390, 27)
+        Me.ucrReceiverForTestColumn.strNcFilePath = ""
+        Me.ucrReceiverForTestColumn.TabIndex = 1
+        Me.ucrReceiverForTestColumn.ucrSelector = Nothing
         '
         'dlgHypothesisTestsCalculator
         '
@@ -1643,6 +1643,6 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdLanzante As Button
     Friend WithEvents cmdCsmk As Button
     Friend WithEvents cmdMk As Button
-    Friend WithEvents Button1 As Button
-    Friend WithEvents cmdv As Button
+    Friend WithEvents cmdMmk As Button
+    Friend WithEvents cmdPcor As Button
 End Class
