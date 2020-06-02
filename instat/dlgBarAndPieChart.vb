@@ -335,9 +335,11 @@ Public Class dlgBarAndPieChart
     Private Sub setColumnChartOption()
         If rdoBarChart.Checked AndAlso ucrInputYValue.GetValue = "Column" Then
             ucrReceiverY.SetVisible(True)
+            ucrReceiverY.SetMeAsReceiver()
             ucrReceiverY.AddOrRemoveParameter(True)
         Else
             ucrReceiverY.SetVisible(False)
+            ucrReceiverFirst.SetMeAsReceiver()
             ucrReceiverY.AddOrRemoveParameter(False)
         End If
     End Sub
