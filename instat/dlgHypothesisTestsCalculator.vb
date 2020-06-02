@@ -861,7 +861,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::bartels.test(x = )", 2)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::bartels.test(x)()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::bartels.test()", 1)
         End If
     End Sub
 
@@ -869,7 +869,15 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::br.test(x = , m = 20000)", 13)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::br.test(x)()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::br.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdBu_Click(sender As Object, e As EventArgs) Handles cmdBu.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::bu.test(x = , m = 20000)", 13)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::bu.test()", 1)
         End If
     End Sub
 End Class
