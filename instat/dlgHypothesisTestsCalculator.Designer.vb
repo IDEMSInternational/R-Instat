@@ -135,6 +135,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBartels = New System.Windows.Forms.Button()
         Me.cmdBr = New System.Windows.Forms.Button()
         Me.cmdBu = New System.Windows.Forms.Button()
+        Me.cmdCs = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1376,6 +1377,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpTrend
         '
+        Me.grpTrend.Controls.Add(Me.cmdCs)
         Me.grpTrend.Controls.Add(Me.cmdBu)
         Me.grpTrend.Controls.Add(Me.cmdBr)
         Me.grpTrend.Controls.Add(Me.cmdBartels)
@@ -1412,6 +1414,15 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBu.TabIndex = 2
         Me.cmdBu.Text = "bu"
         Me.cmdBu.UseVisualStyleBackColor = True
+        '
+        'cmdCs
+        '
+        Me.cmdCs.Location = New System.Drawing.Point(236, 16)
+        Me.cmdCs.Name = "cmdCs"
+        Me.cmdCs.Size = New System.Drawing.Size(75, 23)
+        Me.cmdCs.TabIndex = 3
+        Me.cmdCs.Text = "cs"
+        Me.cmdCs.UseVisualStyleBackColor = True
         '
         'dlgHypothesisTestsCalculator
         '
@@ -1573,4 +1584,5 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdBartels As Button
     Friend WithEvents cmdBr As Button
     Friend WithEvents cmdBu As Button
+    Friend WithEvents cmdCs As Button
 End Class
