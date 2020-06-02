@@ -896,4 +896,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::csmk.test()", 1)
         End If
     End Sub
+
+    Private Sub cmdLanzante_Click(sender As Object, e As EventArgs) Handles cmdLanzante.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::lanzante.test(x = , method = c(""wilcox.test"", ""rrod.test""))", 47)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::lanzante.test()", 1)
+        End If
+    End Sub
 End Class
