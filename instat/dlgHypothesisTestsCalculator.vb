@@ -960,4 +960,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::sea.sens.slope()", 1)
         End If
     End Sub
+
+    Private Sub cmdSens_Click(sender As Object, e As EventArgs) Handles cmdSens.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::sens.slope(x = , conf.level = 0.95)", 21)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::sens.slope()", 1)
+        End If
+    End Sub
 End Class
