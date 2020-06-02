@@ -1306,7 +1306,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpTrend.Controls.Add(Me.cmdBartels)
         Me.grpTrend.Location = New System.Drawing.Point(240, 76)
         Me.grpTrend.Name = "grpTrend"
-        Me.grpTrend.Size = New System.Drawing.Size(232, 185)
+        Me.grpTrend.Size = New System.Drawing.Size(232, 179)
         Me.grpTrend.TabIndex = 23
         Me.grpTrend.TabStop = False
         Me.grpTrend.Text = "Trend"
@@ -1562,7 +1562,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdWw
         '
-        Me.cmdWw.Location = New System.Drawing.Point(77, 149)
+        Me.cmdWw.Location = New System.Drawing.Point(151, 149)
         Me.cmdWw.Name = "cmdWw"
         Me.cmdWw.Size = New System.Drawing.Size(75, 28)
         Me.cmdWw.TabIndex = 16
@@ -1571,7 +1571,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdWm
         '
-        Me.cmdWm.Location = New System.Drawing.Point(151, 149)
+        Me.cmdWm.Location = New System.Drawing.Point(77, 149)
         Me.cmdWm.Name = "cmdWm"
         Me.cmdWm.Size = New System.Drawing.Size(75, 28)
         Me.cmdWm.TabIndex = 17
