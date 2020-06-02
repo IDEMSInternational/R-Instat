@@ -920,4 +920,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::mult.mk.test()", 1)
         End If
     End Sub
+
+    Private Sub cmdPcor_Click(sender As Object, e As EventArgs) Handles cmdPcor.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::partial.cor.trend.test(x = , z = , method = c(""pearson"", ""spearman""))", 47)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::partial.cor.trend.test()", 1)
+        End If
+    End Sub
 End Class
