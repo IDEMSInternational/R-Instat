@@ -729,7 +729,7 @@ Public Class dlgHypothesisTestsCalculator
         End If
     End Sub
 
-    Private Sub cmdWilcoksign_Click(sender As Object, e As EventArgs) Handles cmdWilcoksign.Click
+    Private Sub cmdWilcoksign_Click(sender As Object, e As EventArgs) Handles cmdWilcoxsign.Click
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcoxsign_test(formula = , data = , subset = NULL)", 26)
         Else
