@@ -987,6 +987,14 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdWw_Click(sender As Object, e As EventArgs) Handles cmdWw.Click
         If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::ww.test(x = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::::ww.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdWm_Click(sender As Object, e As EventArgs) Handles cmdWm.Click
+        If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::wm.test(x = )", 2)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::::wm.test()", 1)
