@@ -52,7 +52,7 @@ Public Class dlgHypothesisTestsCalculator
         ucrSaveResult.SetAssignToIfUncheckedValue("Last_Test")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorColumn.ucrAvailableDataFrames)
 
-        ucrInputComboRPackage.SetItems({"Stats1", "Stats2", "Agricolae", "Verification", "Coin"})
+        ucrInputComboRPackage.SetItems({"Stats1", "Stats2", "Agricolae", "Verification", "Coin", "Trend"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
         'Tooltips for conf & and Alt Buttons
         tpConf.SetToolTip(cmdConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
@@ -601,6 +601,14 @@ Public Class dlgHypothesisTestsCalculator
                 grpAgricolae.Visible = False
                 grpVerification.Visible = False
                 grpCoin.Visible = True
+            Case "Trend"
+                strPackageName = "trend"
+                grpStats1.Visible = False
+                grpStats2.Visible = False
+                grpAgricolae.Visible = False
+                grpVerification.Visible = False
+                grpCoin.Visible = False
+                grpTrend.Visible = True
 
         End Select
     End Sub
@@ -891,7 +899,7 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdCsmk_Click(sender As Object, e As EventArgs) Handles cmdCsmk.Click
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::csmk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""))", 56)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::csmk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""))", 51)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::csmk.test()", 1)
         End If
@@ -899,7 +907,7 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdLanzante_Click(sender As Object, e As EventArgs) Handles cmdLanzante.Click
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::lanzante.test(x = , method = c(""wilcox.test"", ""rrod.test""))", 47)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::lanzante.test(x = , method = c(""wilcox.test"", ""rrod.test""))", 42)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::lanzante.test()", 1)
         End If
@@ -915,7 +923,7 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdMmk_Click(sender As Object, e As EventArgs) Handles cmdMmk.Click
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::mult.mk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""))", 67)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::mult.mk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""))", 51)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::mult.mk.test()", 1)
         End If
@@ -923,7 +931,7 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdPcor_Click(sender As Object, e As EventArgs) Handles cmdPcor.Click
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::partial.cor.trend.test(x = , z = , method = c(""pearson"", ""spearman""))", 47)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::partial.cor.trend.test(x = , z = , method = c(""pearson"", ""spearman""))", 43)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::partial.cor.trend.test()", 1)
         End If
@@ -931,7 +939,7 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdPmk_Click(sender As Object, e As EventArgs) Handles cmdPmk.Click
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::partial.mk.test(x = , y = , alternative = c(""two.sided"", ""greater"", ""less""))", 49)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::partial.mk.test(x = , y = , alternative = c(""two.sided"", ""greater"", ""less""))", 57)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::partial.mk.test()", 1)
         End If
@@ -947,7 +955,7 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdRrod_Click(sender As Object, e As EventArgs) Handles cmdRrod.Click
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::rrod.test(x = , y = , alternative = c(""two.sided"", ""less"", ""greater""))", 62)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::rrod.test(x = , y = , alternative = c(""two.sided"", ""less"", ""greater""))", 57)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::rrod.test()", 1)
         End If
@@ -971,7 +979,7 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdSmk_Click(sender As Object, e As EventArgs) Handles cmdSmk.Click
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::smk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""), continuity = TRUE)", 62)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::smk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""), continuity = TRUE)", 70)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::smk.test()", 1)
         End If
