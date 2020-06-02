@@ -476,7 +476,7 @@ DataSheet$set("public", "get_calculations", function() {
 }
 )
 
-DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, include = list(), exclude = list(), excluded_items = c()) {
+DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, excluded_items = c()) {
   out = names(private$calculations)
   if(length(excluded_items) > 0) {
     ex_ind = which(out %in% excluded_items)
