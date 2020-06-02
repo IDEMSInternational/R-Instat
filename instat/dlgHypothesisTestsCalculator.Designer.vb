@@ -133,6 +133,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.grpTrend = New System.Windows.Forms.GroupBox()
         Me.cmdBartels = New System.Windows.Forms.Button()
+        Me.cmdBr = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1374,6 +1375,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpTrend
         '
+        Me.grpTrend.Controls.Add(Me.cmdBr)
         Me.grpTrend.Controls.Add(Me.cmdBartels)
         Me.grpTrend.Location = New System.Drawing.Point(241, 71)
         Me.grpTrend.Name = "grpTrend"
@@ -1390,6 +1392,15 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBartels.TabIndex = 0
         Me.cmdBartels.Text = "bartels"
         Me.cmdBartels.UseVisualStyleBackColor = True
+        '
+        'cmdBr
+        '
+        Me.cmdBr.Location = New System.Drawing.Point(84, 16)
+        Me.cmdBr.Name = "cmdBr"
+        Me.cmdBr.Size = New System.Drawing.Size(75, 23)
+        Me.cmdBr.TabIndex = 1
+        Me.cmdBr.Text = "br"
+        Me.cmdBr.UseVisualStyleBackColor = True
         '
         'dlgHypothesisTestsCalculator
         '
@@ -1549,4 +1560,5 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdTaha As Button
     Friend WithEvents grpTrend As GroupBox
     Friend WithEvents cmdBartels As Button
+    Friend WithEvents cmdBr As Button
 End Class
