@@ -137,7 +137,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBu = New System.Windows.Forms.Button()
         Me.cmdCs = New System.Windows.Forms.Button()
         Me.cmdCsmk = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.cmdLanzante = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1379,13 +1379,13 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpTrend
         '
-        Me.grpTrend.Controls.Add(Me.Button1)
+        Me.grpTrend.Controls.Add(Me.cmdLanzante)
         Me.grpTrend.Controls.Add(Me.cmdCsmk)
         Me.grpTrend.Controls.Add(Me.cmdCs)
         Me.grpTrend.Controls.Add(Me.cmdBu)
         Me.grpTrend.Controls.Add(Me.cmdBr)
         Me.grpTrend.Controls.Add(Me.cmdBartels)
-        Me.grpTrend.Location = New System.Drawing.Point(241, 71)
+        Me.grpTrend.Location = New System.Drawing.Point(241, 76)
         Me.grpTrend.Name = "grpTrend"
         Me.grpTrend.Size = New System.Drawing.Size(307, 180)
         Me.grpTrend.TabIndex = 23
@@ -1437,14 +1437,14 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdCsmk.Text = "csmk"
         Me.cmdCsmk.UseVisualStyleBackColor = True
         '
-        'Button1
+        'cmdLanzante
         '
-        Me.Button1.Location = New System.Drawing.Point(81, 45)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 5
-        Me.Button1.Text = "csmk"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.cmdLanzante.Location = New System.Drawing.Point(81, 45)
+        Me.cmdLanzante.Name = "cmdLanzante"
+        Me.cmdLanzante.Size = New System.Drawing.Size(75, 23)
+        Me.cmdLanzante.TabIndex = 5
+        Me.cmdLanzante.Text = "lanzante"
+        Me.cmdLanzante.UseVisualStyleBackColor = True
         '
         'dlgHypothesisTestsCalculator
         '
@@ -1607,6 +1607,6 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdBr As Button
     Friend WithEvents cmdBu As Button
     Friend WithEvents cmdCs As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents cmdLanzante As Button
     Friend WithEvents cmdCsmk As Button
 End Class
