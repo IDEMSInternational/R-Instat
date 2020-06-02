@@ -936,4 +936,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::partial.mk.test()", 1)
         End If
     End Sub
+
+    Private Sub cmdPettitt_Click(sender As Object, e As EventArgs) Handles cmdPettitt.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::pettitt.test(x = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::pettitt.test()", 1)
+        End If
+    End Sub
 End Class
