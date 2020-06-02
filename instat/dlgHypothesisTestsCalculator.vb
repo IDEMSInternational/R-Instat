@@ -976,4 +976,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::smk.test()", 1)
         End If
     End Sub
+
+    Private Sub cmdSnh_Click(sender As Object, e As EventArgs) Handles cmdSnh.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::snh.test(x = , m = 20000)", 13)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::snh.test()", 1)
+        End If
+    End Sub
 End Class
