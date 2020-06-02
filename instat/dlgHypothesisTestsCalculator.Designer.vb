@@ -147,6 +147,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdSsens = New System.Windows.Forms.Button()
         Me.cmdSens = New System.Windows.Forms.Button()
         Me.cmdSmk = New System.Windows.Forms.Button()
+        Me.cmdSnh = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1283,6 +1286,9 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpTrend
         '
+        Me.grpTrend.Controls.Add(Me.Button2)
+        Me.grpTrend.Controls.Add(Me.Button1)
+        Me.grpTrend.Controls.Add(Me.cmdSnh)
         Me.grpTrend.Controls.Add(Me.cmdSmk)
         Me.grpTrend.Controls.Add(Me.cmdSens)
         Me.grpTrend.Controls.Add(Me.cmdSsens)
@@ -1545,6 +1551,33 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdSmk.Text = "smk "
         Me.cmdSmk.UseVisualStyleBackColor = True
         '
+        'cmdSnh
+        '
+        Me.cmdSnh.Location = New System.Drawing.Point(232, 98)
+        Me.cmdSnh.Name = "cmdSnh"
+        Me.cmdSnh.Size = New System.Drawing.Size(75, 25)
+        Me.cmdSnh.TabIndex = 15
+        Me.cmdSnh.Text = "snh "
+        Me.cmdSnh.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(3, 126)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 25)
+        Me.Button1.TabIndex = 16
+        Me.Button1.Text = "ssens "
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(81, 126)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 25)
+        Me.Button2.TabIndex = 17
+        Me.Button2.Text = "ssens "
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1717,4 +1750,7 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdRrod As Button
     Friend WithEvents cmdSmk As Button
     Friend WithEvents cmdSens As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents cmdSnh As Button
 End Class
