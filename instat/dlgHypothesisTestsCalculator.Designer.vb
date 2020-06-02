@@ -143,6 +143,8 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.cmdPmk = New System.Windows.Forms.Button()
         Me.cmdPettitt = New System.Windows.Forms.Button()
+        Me.cmdRrod = New System.Windows.Forms.Button()
+        Me.cmdSsens = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1279,6 +1281,8 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpTrend
         '
+        Me.grpTrend.Controls.Add(Me.cmdSsens)
+        Me.grpTrend.Controls.Add(Me.cmdRrod)
         Me.grpTrend.Controls.Add(Me.cmdPettitt)
         Me.grpTrend.Controls.Add(Me.cmdPmk)
         Me.grpTrend.Controls.Add(Me.cmdPcor)
@@ -1501,6 +1505,24 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdPettitt.Text = "pettitt "
         Me.cmdPettitt.UseVisualStyleBackColor = True
         '
+        'cmdRrod
+        '
+        Me.cmdRrod.Location = New System.Drawing.Point(232, 69)
+        Me.cmdRrod.Name = "cmdRrod"
+        Me.cmdRrod.Size = New System.Drawing.Size(75, 23)
+        Me.cmdRrod.TabIndex = 11
+        Me.cmdRrod.Text = "rrod "
+        Me.cmdRrod.UseVisualStyleBackColor = True
+        '
+        'cmdSsens
+        '
+        Me.cmdSsens.Location = New System.Drawing.Point(3, 100)
+        Me.cmdSsens.Name = "cmdSsens"
+        Me.cmdSsens.Size = New System.Drawing.Size(75, 25)
+        Me.cmdSsens.TabIndex = 12
+        Me.cmdSsens.Text = "ssens "
+        Me.cmdSsens.UseVisualStyleBackColor = True
+        '
         'dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1669,4 +1691,6 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdPcor As Button
     Friend WithEvents cmdPmk As Button
     Friend WithEvents cmdPettitt As Button
+    Friend WithEvents cmdSsens As Button
+    Friend WithEvents cmdRrod As Button
 End Class
