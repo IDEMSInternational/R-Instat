@@ -944,4 +944,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::pettitt.test()", 1)
         End If
     End Sub
+
+    Private Sub cmdRrod_Click(sender As Object, e As EventArgs) Handles cmdRrod.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::rrod.test(x = , y = , alternative = c(""two.sided"", ""less"", ""greater""))", 62)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::rrod.test()", 1)
+        End If
+    End Sub
 End Class
