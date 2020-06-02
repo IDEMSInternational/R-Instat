@@ -136,6 +136,8 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBr = New System.Windows.Forms.Button()
         Me.cmdBu = New System.Windows.Forms.Button()
         Me.cmdCs = New System.Windows.Forms.Button()
+        Me.cmdCsmk = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1377,6 +1379,8 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpTrend
         '
+        Me.grpTrend.Controls.Add(Me.Button1)
+        Me.grpTrend.Controls.Add(Me.cmdCsmk)
         Me.grpTrend.Controls.Add(Me.cmdCs)
         Me.grpTrend.Controls.Add(Me.cmdBu)
         Me.grpTrend.Controls.Add(Me.cmdBr)
@@ -1423,6 +1427,24 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdCs.TabIndex = 3
         Me.cmdCs.Text = "cs"
         Me.cmdCs.UseVisualStyleBackColor = True
+        '
+        'cmdCsmk
+        '
+        Me.cmdCsmk.Location = New System.Drawing.Point(3, 45)
+        Me.cmdCsmk.Name = "cmdCsmk"
+        Me.cmdCsmk.Size = New System.Drawing.Size(75, 23)
+        Me.cmdCsmk.TabIndex = 4
+        Me.cmdCsmk.Text = "csmk"
+        Me.cmdCsmk.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(81, 45)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 5
+        Me.Button1.Text = "csmk"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'dlgHypothesisTestsCalculator
         '
@@ -1585,4 +1607,6 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdBr As Button
     Friend WithEvents cmdBu As Button
     Friend WithEvents cmdCs As Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents cmdCsmk As Button
 End Class
