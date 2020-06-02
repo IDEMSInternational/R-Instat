@@ -145,6 +145,8 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdPettitt = New System.Windows.Forms.Button()
         Me.cmdRrod = New System.Windows.Forms.Button()
         Me.cmdSsens = New System.Windows.Forms.Button()
+        Me.cmdSens = New System.Windows.Forms.Button()
+        Me.cmdSmk = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -1281,6 +1283,8 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpTrend
         '
+        Me.grpTrend.Controls.Add(Me.cmdSmk)
+        Me.grpTrend.Controls.Add(Me.cmdSens)
         Me.grpTrend.Controls.Add(Me.cmdSsens)
         Me.grpTrend.Controls.Add(Me.cmdRrod)
         Me.grpTrend.Controls.Add(Me.cmdPettitt)
@@ -1523,6 +1527,24 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdSsens.Text = "ssens "
         Me.cmdSsens.UseVisualStyleBackColor = True
         '
+        'cmdSens
+        '
+        Me.cmdSens.Location = New System.Drawing.Point(79, 100)
+        Me.cmdSens.Name = "cmdSens"
+        Me.cmdSens.Size = New System.Drawing.Size(75, 25)
+        Me.cmdSens.TabIndex = 13
+        Me.cmdSens.Text = "sens "
+        Me.cmdSens.UseVisualStyleBackColor = True
+        '
+        'cmdSmk
+        '
+        Me.cmdSmk.Location = New System.Drawing.Point(157, 98)
+        Me.cmdSmk.Name = "cmdSmk"
+        Me.cmdSmk.Size = New System.Drawing.Size(75, 25)
+        Me.cmdSmk.TabIndex = 14
+        Me.cmdSmk.Text = "smk "
+        Me.cmdSmk.UseVisualStyleBackColor = True
+        '
         'dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1693,4 +1715,6 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdPettitt As Button
     Friend WithEvents cmdSsens As Button
     Friend WithEvents cmdRrod As Button
+    Friend WithEvents cmdSmk As Button
+    Friend WithEvents cmdSens As Button
 End Class
