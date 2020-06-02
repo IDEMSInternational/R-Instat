@@ -904,4 +904,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::lanzante.test()", 1)
         End If
     End Sub
+
+    Private Sub cmdMk_Click(sender As Object, e As EventArgs) Handles cmdMk.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::mk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""), continuity = TRUE)", 70)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::mk.test()", 1)
+        End If
+    End Sub
 End Class
