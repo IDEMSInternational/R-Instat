@@ -3,7 +3,7 @@ get_default_significant_figures <- function(data) {
   else return(NA)  
 }
 
-convert_to_character_matrix <- function(data, format_decimal_places = TRUE, decimal_places, return_data_frame = TRUE, na_display = NULL, check.names = TRUE) {
+convert_to_character_matrix <- function(data, format_decimal_places = TRUE, decimal_places, is_scientific = FALSE, return_data_frame = TRUE, na_display = NULL, check.names = TRUE) {
   if(nrow(data) == 0) {
     out <- matrix(nrow = 0, ncol = ncol(data))
     colnames(out) <- colnames(data)
@@ -18,7 +18,7 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
         out[,i] <- as.character(data[[i]])
       }
       else {
-        out[,i] <- format(data[[i]], digits = decimal_places[i], scientific = FALSE)
+        out[,i] <- format(data[[i]], digits = decimal_places[i], scientific = is_scientific[i])
       }
       if(!is.null(na_display)) {
         out[is.na(data[[i]]),i] <- na_display
@@ -1114,10 +1114,10 @@ duplicated_count_index<-function(x, type = "count"){
 }
 
 
-get_installed_packages_with_data <- function() {
-  pack_data <- data(package = .packages(all.available = TRUE))
-  pack_data <- pack_data[["results"]]
-  return(unique(pack_data[,1]))
+get_installed_packages_with_data <- function(with_data = TRUE) {
+  all_installed_packages <- .packages(all.available = TRUE)
+  if (with_data) all_installed_packages <- unique(data(package = all_installed_packages)[["results"]][,1]) 
+  return(all_installed_packages)
 }
 
 drop_unused_levels <- function(dat, columns) {
@@ -1263,4 +1263,16 @@ package_check <- function(package) {
       return(out)
     }
   }
+}
+              
+in_top_n <- function(x, n = 10, wt, fun = sum) {
+  dat <- data.frame(x = x)
+  if(!missing(wt)) {
+    dat$wt <- wt
+    dat <- dat %>% 
+      group_by(x) %>%
+      summarise(fq = as.function(fun)(na.omit(wt))) %>% arrange(-fq)
+  }
+  else dat <- dat %>% count(x, sort = TRUE, name = "fq")
+  return(x %in% dat$x[1:n])
 }

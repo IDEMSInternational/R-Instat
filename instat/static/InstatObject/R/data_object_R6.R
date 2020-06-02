@@ -314,7 +314,8 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
     if(convert_to_character) {
       decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE)
       decimal_places[is.na(decimal_places)] <- 0
-      return(convert_to_character_matrix(out, TRUE, decimal_places))
+      scientific_notation = self$get_variables_metadata(property = scientific_label, column = names(out), error_if_no_property = FALSE)
+      return(convert_to_character_matrix(data = out, format_decimal_places =  TRUE, decimal_places =  decimal_places, is_scientific = scientific_notation))
     }
     else return(out)
   }
@@ -490,6 +491,7 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
       num_cols = ncol(col_data)
     }
     else num_cols = 1
+    if(tibble::is_tibble(col_data)) col_data <- data.frame(col_data)
   }
   else {
     if(missing(col_data)) col_data = replicate(num_cols, rep(NA, self$get_data_frame_length()))
@@ -2401,7 +2403,6 @@ DataSheet$set("public","append_climatic_types", function(types) {
 #Method for creating inventory plot
 
 DataSheet$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot", key_colours = c("red", "grey"), display_rain_days = FALSE, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), key_colours = c("tan3", "blue"))) {
-  if(!self$is_climatic_data()) stop("Data is not defined as climatic.")
   if(missing(date_col)) stop("Date columns must be specified.")
   if(missing(element_cols)) stop("Element column(s) must be specified.")
   if(!lubridate::is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type Date."))
@@ -2410,19 +2411,39 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
     stop("Not all elements columns found in the data")
   }
   
+  is_climatic <- self$is_climatic_data()
+
   # Add year and doy columns if doing year_doy plot
   if(year_doy_plot) {
     if(is.null(year_col)) {
-      if(is.null(self$get_climatic_column_name(year_label))) {
-        self$split_date(col_name = date_col, year = TRUE)
+      if(is_climatic) {
+        if(is.null(self$get_climatic_column_name(year_label))) {
+          self$split_date(col_name = date_col, year = TRUE)
+        }
+        year_col <- self$get_climatic_column_name(year_label)
       }
-      year_col <- self$get_climatic_column_name(year_label)
+      else {
+        self$split_date(col_name = date_col, year_val = TRUE)
+        # work around since the name of the new year column is not known from split_date
+        # TODO split_date could silently return a named character vector giving the columns created
+        col_names <- self$get_column_names()
+        year_col <- col_names[length(col_names)]
+      }
     }
     if(is.null(doy_col)) {
-      if(is.null(self$get_climatic_column_name(doy_label))) {
-        self$split_date(col_name = date_col, day_in_year_366 = TRUE)
+      if(is_climatic) {
+        if(is.null(self$get_climatic_column_name(doy_label))) {
+          self$split_date(col_name = date_col, day_in_year_366 = TRUE)
+        }
+        doy_col <- self$get_climatic_column_name(doy_label)
       }
-      doy_col <- self$get_climatic_column_name(doy_label)
+      else {
+        self$split_date(col_name = date_col, day_in_year_366 = TRUE)
+        # work around since the name of the new day_in_year column is not known from split_date
+        # TODO split_date could silently return a named character vector giving the columns created
+        col_names <- self$get_column_names()
+        doy_col <- col_names[length(col_names)]
+      }
     }
   }
   
@@ -2448,7 +2469,14 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
   names(key) <- c("Missing", "Present")
   if(display_rain_days) {
     levels(curr_data[[key_name]]) <- c(levels(curr_data[[key_name]]), rain_cats$labels)
-    rain_col <- self$get_climatic_column_name(rain_label)
+    if(is_climatic) {
+      rain_col <- self$get_climatic_column_name(rain_label)
+    }
+    else {
+      warning("Cannot determine rain column automatically. Taking first element specified as the rain column.")
+      #TODO allow the user to specify this in the function when the data is not climatic
+      rain_col <- element_cols[1]
+    }
     if(!is.null(rain_col) && rain_col %in% element_cols) {
       if(length(element_cols) > 1) {
         curr_data[[key_name]][curr_data[["variable"]] == rain_col & curr_data[[key_name]] != "Missing"] <- cut(curr_data[["value"]][curr_data[["variable"]] == rain_col & curr_data[[key_name]] != "Missing"], breaks = rain_cats$breaks, labels = rain_cats$labels, right = FALSE)

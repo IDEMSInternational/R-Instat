@@ -22,6 +22,10 @@ Public Class dlgImportDataset
 
     Private clsImportFixedWidthText, clsImportCSV, clsImportDAT, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As RFunction
     Private clsGetExcelSheetNames As RFunction
+    ''' <summary>   Ensures that any file paths containing special characters (e.g. accents) are 
+    '''             correctly encoded.
+    '''             </summary>
+    Private clsEnc2Native As RFunction
     ' Functions for multi file import
     Private clsLapply As RFunction
     Private clsFileList As RFunction
@@ -262,6 +266,7 @@ Public Class dlgImportDataset
 
         ucrNudRowsToSkipExcel.SetParameter(New RParameter("skip"))
         ucrNudRowsToSkipExcel.Minimum = 0
+        ucrNudRowsToSkipExcel.Maximum = Decimal.MaxValue
         ucrNudRowsToSkipExcel.SetRDefault(0)
 
         ucrChkColumnNamesExcel.SetText("First Row is Column Headers")
@@ -323,6 +328,7 @@ Public Class dlgImportDataset
         clsReadRDS = New RFunction
         clsImportDAT = New RFunction
         clsGetExcelSheetNames = New RFunction
+        clsEnc2Native = New RFunction
 
         clsLapply = New RFunction
 
@@ -353,14 +359,22 @@ Public Class dlgImportDataset
         clsReadRDS.SetRCommand("readRDS")
         clsReadRDS.SetAssignTo("new_RDS")
 
+        'This R command ensures that any file paths containing special characters (e.g. accents) 
+        'are correctly encoded
+        clsEnc2Native.SetRCommand("enc2native")
+
         clsGetExcelSheetNames.SetPackageName("readxl")
         clsGetExcelSheetNames.SetRCommand("excel_sheets")
+        'Ensure that the file path is enclosed by 'enc2native' to ensure that file paths containing 
+        'special characters(e.g.accents) are correctly encoded
+        clsGetExcelSheetNames.AddParameter("path", "", clsEnc2Native, Nothing, Nothing, True, 0)
 
         clsLapply.SetRCommand("lappy")
         clsLapply.AddParameter("X", clsRFunctionParameter:=clsFileList, iPosition:=0)
 
         clsImportExcelMulti.SetPackageName("rio")
         clsImportExcelMulti.SetRCommand("import_list")
+        clsImportExcelMulti.AddParameter("guess_max", "Inf", iPosition:=6)
 
         clsFileList.SetRCommand("c")
 
@@ -400,6 +414,7 @@ Public Class dlgImportDataset
         SetDefaults()
         SetRCodeForControls(True)
         RefreshFrameView()
+        dctSelectedExcelSheets.Clear()
         TestOkEnabled()
     End Sub
 
@@ -436,6 +451,7 @@ Public Class dlgImportDataset
                     MsgBox("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
                     SetControlsFromFile("")
                 Else
+                    dctSelectedExcelSheets.Clear()
                     SetControlsFromFile(dlgOpen.FileName)
                 End If
             Else
@@ -465,7 +481,7 @@ Public Class dlgImportDataset
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportDAT, New RParameter("file", 0), iAdditionalPairNo:=3)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcel, New RParameter("file", 0), iAdditionalPairNo:=4)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsReadRDS, New RParameter("file", 0), iAdditionalPairNo:=5)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsGetExcelSheetNames, New RParameter("path", 0), iAdditionalPairNo:=6)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsEnc2Native, New RParameter("path", 0, False), iAdditionalPairNo:=6)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("file", 0), iAdditionalPairNo:=7)
         ucrInputFilePath.SetRCode(clsImport, bReset)
 
@@ -549,7 +565,8 @@ Public Class dlgImportDataset
 
         strFileName = ""
         If strFilePath <> "" Then
-            strFileName = Path.GetFileNameWithoutExtension(strFilePath)
+            'get the name of the file (without extension), with any special characters removed
+            strFileName = GetCleanFileName(strFilePath)
             strFileExt = Path.GetExtension(strFilePath).ToLower()
             If bFromLibrary Then
                 strFilePathSystemTemp = strFilePathSystem 'store what was there temporarily first 
@@ -602,6 +619,7 @@ Public Class dlgImportDataset
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
             End If
+
             ExcelSheetPreviewVisible(True)
             FillExcelSheets(strFilePath)
         ElseIf strFileExt <> "" Then
@@ -792,7 +810,17 @@ Public Class dlgImportDataset
         clbSheets.Items.Clear()
         If chrSheets IsNot Nothing AndAlso chrSheets.Count > 0 Then
             clbSheets.Items.AddRange(chrSheets.ToArray())
-            clbSheets.SetItemChecked(0, True)
+            'If dctSelectedExcelSheets.Count = 0 Then
+            '    clbSheets.SetItemChecked(0, True)
+            'Else
+            '    'Storing the array here because the dctSeleceted indice changes on clbSheets.itemsClicked
+            '    Dim ListOfItems As Integer() = ListOfCheckedItems.ToArray
+            '    For i = 0 To ListOfItems.Length - 1
+            '        clbSheets.SetItemChecked((ListOfItems(i) - 1), True)
+            '    Next
+            'End If
+
+
         End If
 
         'ucrInputNamedRegions.cboInput.Items.Clear()
@@ -951,7 +979,8 @@ Public Class dlgImportDataset
                 ucrInputFilePath.SetName("")
             Else
                 strCurrentDirectory = Path.GetDirectoryName(strFilePathSystemTemp)
-                strFileName = Path.GetFileNameWithoutExtension(strFilePathSystemTemp)
+                'get the name of the file (without extension), with any special characters removed
+                strFileName = GetCleanFileName(strFilePathSystemTemp)
                 strFileType = Path.GetExtension(strFilePathSystemTemp).Substring(1).ToUpper()
                 strFilePathSystem = strFilePathSystemTemp
                 strFilePathR = Replace(strFilePathSystemTemp, "\", "/")
@@ -959,4 +988,38 @@ Public Class dlgImportDataset
             End If
         End If
     End Sub
+
+    Private Function ListOfCheckedItems()
+        Dim keyList As New List(Of Integer)
+        For Each kvp As KeyValuePair(Of Integer, String) In dctSelectedExcelSheets
+            keyList.Add(kvp.Key)
+        Next
+        Return keyList
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Extracts the name of the file (without the extension) from 
+    '''             <paramref name="strFilePathTmp"/>. It removes any special characters (i.e. any 
+    '''             characters that are not letters, digits '_' or '-'). It returns the resulting 
+    '''             clean name. If the cleaned name is an empty string then returns 
+    '''             'defaultCleanFileName'.             i
+    '''             The special characters need to be removed because otherwise they trigger an 
+    '''             error in some R commands.
+    '''             </summary>
+    '''
+    ''' <param name="strFilePathTmp">      The full path of the file. </param>
+    '''
+    ''' <returns>   Returns the file name (without extension) with any special characters removed.
+    '''             If the cleaned name is an empty string then returns 'defaultCleanFileName'.
+    ''' </returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function GetCleanFileName(strFilePathTmp As String) As String
+        Dim strCleanFileName As String
+        strCleanFileName = System.Text.RegularExpressions.Regex.Replace(Path.GetFileNameWithoutExtension(strFilePathTmp), "[^A-Za-z0-9_\-]", "")
+        If strCleanFileName Is "" Or strCleanFileName Is Nothing Then
+            strCleanFileName = "defaultCleanFileName"
+        End If
+        Return strCleanFileName
+    End Function
+
 End Class

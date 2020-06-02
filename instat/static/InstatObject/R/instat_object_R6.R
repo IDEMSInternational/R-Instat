@@ -1361,12 +1361,16 @@ DataBook$set("public", "add_climdex_indices", function(data_name, indices = list
 
 DataBook$set("public", "add_single_climdex_index", function(data_name, indices, index_name = "", freq = "annual", year, month) {
   if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label)) stop("Data must be defined as climatic to calculate climdex indices.")
-  
+  col_year <- self$get_columns_from_data(data_name = data_name, col_names = year)
+  year_class <- class(col_year)
   if(freq == "annual") {
-    ind_data <- data.frame(factor(names(indices)), indices, row.names = NULL)
+    ind_data <- data.frame(names(indices), indices)
     names(ind_data) <- c(year, index_name)
     linked_data_name <- self$get_linked_to_data_name(data_name, year)
     if(length(linked_data_name) == 0) {
+      if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, sep = "_")
       new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
@@ -1403,6 +1407,9 @@ DataBook$set("public", "add_single_climdex_index", function(data_name, indices, 
     ind_data[[month]] <- as.numeric(ind_data[[month]])
     linked_data_name <- self$get_linked_to_data_name(data_name, c(year, month))
     if(length(linked_data_name) == 0) {
+      if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, month, sep = "_")
       new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
