@@ -1304,7 +1304,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpTrend.Controls.Add(Me.cmdBu)
         Me.grpTrend.Controls.Add(Me.cmdBr)
         Me.grpTrend.Controls.Add(Me.cmdBartels)
-        Me.grpTrend.Location = New System.Drawing.Point(241, 76)
+        Me.grpTrend.Location = New System.Drawing.Point(232, 79)
         Me.grpTrend.Name = "grpTrend"
         Me.grpTrend.Size = New System.Drawing.Size(307, 180)
         Me.grpTrend.TabIndex = 23
@@ -1315,7 +1315,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdBartels.Location = New System.Drawing.Point(3, 16)
         Me.cmdBartels.Name = "cmdBartels"
-        Me.cmdBartels.Size = New System.Drawing.Size(75, 23)
+        Me.cmdBartels.Size = New System.Drawing.Size(75, 28)
         Me.cmdBartels.TabIndex = 0
         Me.cmdBartels.Text = "bartels"
         Me.cmdBartels.UseVisualStyleBackColor = True
@@ -1324,7 +1324,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdBr.Location = New System.Drawing.Point(84, 16)
         Me.cmdBr.Name = "cmdBr"
-        Me.cmdBr.Size = New System.Drawing.Size(75, 23)
+        Me.cmdBr.Size = New System.Drawing.Size(75, 28)
         Me.cmdBr.TabIndex = 1
         Me.cmdBr.Text = "br"
         Me.cmdBr.UseVisualStyleBackColor = True
@@ -1333,7 +1333,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdBu.Location = New System.Drawing.Point(161, 16)
         Me.cmdBu.Name = "cmdBu"
-        Me.cmdBu.Size = New System.Drawing.Size(75, 23)
+        Me.cmdBu.Size = New System.Drawing.Size(75, 28)
         Me.cmdBu.TabIndex = 2
         Me.cmdBu.Text = "bu"
         Me.cmdBu.UseVisualStyleBackColor = True
@@ -1342,7 +1342,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdCs.Location = New System.Drawing.Point(236, 16)
         Me.cmdCs.Name = "cmdCs"
-        Me.cmdCs.Size = New System.Drawing.Size(75, 23)
+        Me.cmdCs.Size = New System.Drawing.Size(75, 28)
         Me.cmdCs.TabIndex = 3
         Me.cmdCs.Text = "cs"
         Me.cmdCs.UseVisualStyleBackColor = True
@@ -1351,7 +1351,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdCsmk.Location = New System.Drawing.Point(3, 45)
         Me.cmdCsmk.Name = "cmdCsmk"
-        Me.cmdCsmk.Size = New System.Drawing.Size(75, 23)
+        Me.cmdCsmk.Size = New System.Drawing.Size(75, 28)
         Me.cmdCsmk.TabIndex = 4
         Me.cmdCsmk.Text = "csmk"
         Me.cmdCsmk.UseVisualStyleBackColor = True
@@ -1360,7 +1360,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdLanzante.Location = New System.Drawing.Point(81, 45)
         Me.cmdLanzante.Name = "cmdLanzante"
-        Me.cmdLanzante.Size = New System.Drawing.Size(75, 23)
+        Me.cmdLanzante.Size = New System.Drawing.Size(75, 28)
         Me.cmdLanzante.TabIndex = 5
         Me.cmdLanzante.Text = "lanzante"
         Me.cmdLanzante.UseVisualStyleBackColor = True
@@ -1369,7 +1369,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdMk.Location = New System.Drawing.Point(161, 45)
         Me.cmdMk.Name = "cmdMk"
-        Me.cmdMk.Size = New System.Drawing.Size(75, 23)
+        Me.cmdMk.Size = New System.Drawing.Size(75, 28)
         Me.cmdMk.TabIndex = 6
         Me.cmdMk.Text = "mk"
         Me.cmdMk.UseVisualStyleBackColor = True
@@ -1378,7 +1378,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdMmk.Location = New System.Drawing.Point(232, 44)
         Me.cmdMmk.Name = "cmdMmk"
-        Me.cmdMmk.Size = New System.Drawing.Size(75, 23)
+        Me.cmdMmk.Size = New System.Drawing.Size(75, 28)
         Me.cmdMmk.TabIndex = 7
         Me.cmdMmk.Text = "mmk "
         Me.cmdMmk.UseVisualStyleBackColor = True
@@ -1387,7 +1387,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdPcor.Location = New System.Drawing.Point(3, 71)
         Me.cmdPcor.Name = "cmdPcor"
-        Me.cmdPcor.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPcor.Size = New System.Drawing.Size(75, 28)
         Me.cmdPcor.TabIndex = 8
         Me.cmdPcor.Text = "pcor "
         Me.cmdPcor.UseVisualStyleBackColor = True
@@ -1501,7 +1501,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdPmk.Location = New System.Drawing.Point(79, 71)
         Me.cmdPmk.Name = "cmdPmk"
-        Me.cmdPmk.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPmk.Size = New System.Drawing.Size(75, 28)
         Me.cmdPmk.TabIndex = 9
         Me.cmdPmk.Text = "pmk "
         Me.cmdPmk.UseVisualStyleBackColor = True
@@ -1510,7 +1510,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdPettitt.Location = New System.Drawing.Point(157, 70)
         Me.cmdPettitt.Name = "cmdPettitt"
-        Me.cmdPettitt.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPettitt.Size = New System.Drawing.Size(75, 28)
         Me.cmdPettitt.TabIndex = 10
         Me.cmdPettitt.Text = "pettitt "
         Me.cmdPettitt.UseVisualStyleBackColor = True
@@ -1519,7 +1519,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdRrod.Location = New System.Drawing.Point(232, 69)
         Me.cmdRrod.Name = "cmdRrod"
-        Me.cmdRrod.Size = New System.Drawing.Size(75, 23)
+        Me.cmdRrod.Size = New System.Drawing.Size(75, 28)
         Me.cmdRrod.TabIndex = 11
         Me.cmdRrod.Text = "rrod "
         Me.cmdRrod.UseVisualStyleBackColor = True
@@ -1528,7 +1528,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdSsens.Location = New System.Drawing.Point(3, 100)
         Me.cmdSsens.Name = "cmdSsens"
-        Me.cmdSsens.Size = New System.Drawing.Size(75, 25)
+        Me.cmdSsens.Size = New System.Drawing.Size(75, 28)
         Me.cmdSsens.TabIndex = 12
         Me.cmdSsens.Text = "ssens "
         Me.cmdSsens.UseVisualStyleBackColor = True
@@ -1537,7 +1537,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdSens.Location = New System.Drawing.Point(79, 100)
         Me.cmdSens.Name = "cmdSens"
-        Me.cmdSens.Size = New System.Drawing.Size(75, 25)
+        Me.cmdSens.Size = New System.Drawing.Size(75, 28)
         Me.cmdSens.TabIndex = 13
         Me.cmdSens.Text = "sens "
         Me.cmdSens.UseVisualStyleBackColor = True
@@ -1546,7 +1546,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdSmk.Location = New System.Drawing.Point(157, 98)
         Me.cmdSmk.Name = "cmdSmk"
-        Me.cmdSmk.Size = New System.Drawing.Size(75, 25)
+        Me.cmdSmk.Size = New System.Drawing.Size(75, 28)
         Me.cmdSmk.TabIndex = 14
         Me.cmdSmk.Text = "smk "
         Me.cmdSmk.UseVisualStyleBackColor = True
@@ -1555,7 +1555,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdSnh.Location = New System.Drawing.Point(232, 98)
         Me.cmdSnh.Name = "cmdSnh"
-        Me.cmdSnh.Size = New System.Drawing.Size(75, 25)
+        Me.cmdSnh.Size = New System.Drawing.Size(75, 28)
         Me.cmdSnh.TabIndex = 15
         Me.cmdSnh.Text = "snh "
         Me.cmdSnh.UseVisualStyleBackColor = True
@@ -1564,7 +1564,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdWw.Location = New System.Drawing.Point(3, 126)
         Me.cmdWw.Name = "cmdWw"
-        Me.cmdWw.Size = New System.Drawing.Size(75, 25)
+        Me.cmdWw.Size = New System.Drawing.Size(75, 28)
         Me.cmdWw.TabIndex = 16
         Me.cmdWw.Text = "ww "
         Me.cmdWw.UseVisualStyleBackColor = True
@@ -1573,7 +1573,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.Button2.Location = New System.Drawing.Point(81, 126)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 25)
+        Me.Button2.Size = New System.Drawing.Size(75, 28)
         Me.Button2.TabIndex = 17
         Me.Button2.Text = "ssens "
         Me.Button2.UseVisualStyleBackColor = True
