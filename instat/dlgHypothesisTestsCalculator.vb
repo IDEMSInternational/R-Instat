@@ -856,4 +856,12 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::lbl_test()", 1)
         End If
     End Sub
+
+    Private Sub cmdBartels_Click(sender As Object, e As EventArgs) Handles cmdBartels.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::bartels.test(x = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::bartels.test(x)()", 1)
+        End If
+    End Sub
 End Class
