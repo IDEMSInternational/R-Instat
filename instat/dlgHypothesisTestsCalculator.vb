@@ -63,6 +63,7 @@ Public Class dlgHypothesisTestsCalculator
         ttHypothesisTests.SetToolTip(cmdCs, "The non-parametric Cox and Stuart trend test")
         ttHypothesisTests.SetToolTip(cmdCsmk, "The seasonal Mann-Kendall test under the presence of correlated seasons")
         ttHypothesisTests.SetToolTip(cmdLanzante, "The non-parametric Lanzante test for a shift in the central tendency of a time series")
+        ttHypothesisTests.SetToolTip(cmdMk, "The Mann-Kendall Trend Test")
         'Temporarily disabled: Not yet functioning.
         ucrChkBy.Enabled = False
         ucrReceiverMultiple.Enabled = False
