@@ -72,6 +72,7 @@ Public Class dlgHypothesisTestsCalculator
         ttHypothesisTests.SetToolTip(cmdSsens, "The seasonal Sen’s slope for linear rate of change")
         ttHypothesisTests.SetToolTip(cmdSens, "Sen’s slope for linear rate of change and corresponding confidence interval")
         ttHypothesisTests.SetToolTip(cmdSmk, "Seasonal Mann-Kendall trend test (Hirsch-Slack test)")
+        ttHypothesisTests.SetToolTip(cmdSnh, "The standard normal homogeneity test (SNHT) for change-point detection of a normal variate")
         'Temporarily disabled: Not yet functioning.
         ucrChkBy.Enabled = False
         ucrReceiverMultiple.Enabled = False
