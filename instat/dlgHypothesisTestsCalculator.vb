@@ -60,6 +60,7 @@ Public Class dlgHypothesisTestsCalculator
         ttHypothesisTests.SetToolTip(cmdBartels, "A rank version of von Neumann’s ratio test proposed by Bartels")
         ttHypothesisTests.SetToolTip(cmdBr, "The Buishand range test for change-point detection of a normal variate")
         ttHypothesisTests.SetToolTip(cmdBu, "The Buishand U test for change-point detection of a normal variate")
+        ttHypothesisTests.SetToolTip(cmdCs, "The non-parametric Cox and Stuart trend test")
         'Temporarily disabled: Not yet functioning.
         ucrChkBy.Enabled = False
         ucrReceiverMultiple.Enabled = False
