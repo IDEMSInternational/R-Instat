@@ -66,7 +66,7 @@ Public Class dlgHypothesisTestsCalculator
         ttHypothesisTests.SetToolTip(cmdMk, "The Mann-Kendall Trend Test")
         ttHypothesisTests.SetToolTip(cmdMmk, "The multivariate (multisite) Mann-Kendall test")
         ttHypothesisTests.SetToolTip(cmdPcor, "The partial correlation trend test")
-        ttHypothesisTests.SetToolTip(cmd)
+        ttHypothesisTests.SetToolTip(cmdPmk, "The partial Mann-Kendall trend test")
         'Temporarily disabled: Not yet functioning.
         ucrChkBy.Enabled = False
         ucrReceiverMultiple.Enabled = False
