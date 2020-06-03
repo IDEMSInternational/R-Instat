@@ -68,6 +68,7 @@ Public Class dlgHypothesisTestsCalculator
         ttHypothesisTests.SetToolTip(cmdPcor, "The partial correlation trend test")
         ttHypothesisTests.SetToolTip(cmdPmk, "The partial Mann-Kendall trend test")
         ttHypothesisTests.SetToolTip(cmdPettitt, "Pettitt’s test for change-point detection")
+        ttHypothesisTests.SetToolTip(cmdRrod, "The Fligner-Pollicello robust rank-order distributional test for location")
         'Temporarily disabled: Not yet functioning.
         ucrChkBy.Enabled = False
         ucrReceiverMultiple.Enabled = False
