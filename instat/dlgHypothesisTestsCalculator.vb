@@ -57,6 +57,8 @@ Public Class dlgHypothesisTestsCalculator
         'Tooltips for conf & and Alt Buttons
         ttHypothesisTests.SetToolTip(cmdConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
         ttHypothesisTests.SetToolTip(cmdAlt, " For some hypotheses the alternative hypothesis is two sided by default, but can be changed to ""greater"" or ""less""")
+
+        'Tooltips for the trend kyboard buttons
         ttHypothesisTests.SetToolTip(cmdBartels, "A rank version of von Neumann’s ratio test proposed by Bartels")
         ttHypothesisTests.SetToolTip(cmdBr, "The Buishand range test for change-point detection of a normal variate")
         ttHypothesisTests.SetToolTip(cmdBu, "The Buishand U test for change-point detection of a normal variate")
@@ -74,7 +76,8 @@ Public Class dlgHypothesisTestsCalculator
         ttHypothesisTests.SetToolTip(cmdSmk, "Seasonal Mann-Kendall trend test (Hirsch-Slack test)")
         ttHypothesisTests.SetToolTip(cmdSnh, "The standard normal homogeneity test (SNHT) for change-point detection of a normal variate")
         ttHypothesisTests.SetToolTip(cmdWm, "The Wallis and Moore phase-frequency test")
-        ttHypothesisTests.SetToolTip()
+        ttHypothesisTests.SetToolTip(cmdWw, "The non-parametric Wald-Wolfowitz test for independence and stationarity")
+
         'Temporarily disabled: Not yet functioning.
         ucrChkBy.Enabled = False
         ucrReceiverMultiple.Enabled = False
