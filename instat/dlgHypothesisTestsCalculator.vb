@@ -70,6 +70,7 @@ Public Class dlgHypothesisTestsCalculator
         ttHypothesisTests.SetToolTip(cmdPettitt, "Pettitt’s test for change-point detection")
         ttHypothesisTests.SetToolTip(cmdRrod, "The Fligner-Pollicello robust rank-order distributional test for location")
         ttHypothesisTests.SetToolTip(cmdSsens, "The seasonal Sen’s slope for linear rate of change")
+        ttHypothesisTests.SetToolTip(cmdSens, "Sen’s slope for linear rate of change and corresponding confidence interval")
         'Temporarily disabled: Not yet functioning.
         ucrChkBy.Enabled = False
         ucrReceiverMultiple.Enabled = False
