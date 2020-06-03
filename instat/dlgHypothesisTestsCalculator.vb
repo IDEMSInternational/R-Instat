@@ -55,8 +55,8 @@ Public Class dlgHypothesisTestsCalculator
         ucrInputComboRPackage.SetItems({"Stats1", "Stats2", "Agricolae", "Verification", "Coin", "Trend"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
         'Tooltips for conf & and Alt Buttons
-        tpConf.SetToolTip(cmdConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
-        tpAlt.SetToolTip(cmdAlt, " For some hypotheses the alternative hypothesis is two sided by default, but can be changed to ""greater"" or ""less""")
+        ttHypothesisTests.SetToolTip(cmdConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
+        ttHypothesisTests.SetToolTip(cmdAlt, " For some hypotheses the alternative hypothesis is two sided by default, but can be changed to ""greater"" or ""less""")
         'Temporarily disabled: Not yet functioning.
         ucrChkBy.Enabled = False
         ucrReceiverMultiple.Enabled = False
