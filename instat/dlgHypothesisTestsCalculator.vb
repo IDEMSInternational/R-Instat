@@ -594,6 +594,7 @@ Public Class dlgHypothesisTestsCalculator
                 grpStats2.Visible = False
                 grpVerification.Visible = False
                 grpCoin.Visible = False
+                grpTrend.Visible = False
             Case "Stats2"
                 strPackageName = "stats"
                 grpAgricolae.Visible = False
@@ -601,6 +602,7 @@ Public Class dlgHypothesisTestsCalculator
                 grpStats2.Visible = True
                 grpVerification.Visible = False
                 grpCoin.Visible = False
+                grpTrend.Visible = False
             Case "Agricolae"
                 strPackageName = "agricolae"
                 grpStats1.Visible = False
@@ -608,6 +610,7 @@ Public Class dlgHypothesisTestsCalculator
                 grpAgricolae.Visible = True
                 grpVerification.Visible = False
                 grpCoin.Visible = False
+                grpTrend.Visible = False
             Case "Verification"
                 strPackageName = "verification"
                 grpStats1.Visible = False
@@ -615,6 +618,7 @@ Public Class dlgHypothesisTestsCalculator
                 grpAgricolae.Visible = False
                 grpVerification.Visible = True
                 grpCoin.Visible = False
+                grpTrend.Visible = False
             Case "Coin"
                 strPackageName = "coin"
                 grpStats1.Visible = False
@@ -622,6 +626,7 @@ Public Class dlgHypothesisTestsCalculator
                 grpAgricolae.Visible = False
                 grpVerification.Visible = False
                 grpCoin.Visible = True
+                grpTrend.Visible = False
             Case "Trend"
                 strPackageName = "trend"
                 grpStats1.Visible = False
