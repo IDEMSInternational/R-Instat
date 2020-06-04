@@ -158,7 +158,7 @@ Public Class sdgVariableTransformations
         ucrInputPreview.SetName(clsTransformParameter.ToScript(""))
     End Sub
 
-    Private Sub ucrInputTxtBrokenStick_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTxtBrokenStick.ControlValueChanged, ucrNudSplineDF.ControlValueChanged, ucrNudPolynomial.ControlValueChanged
+    Private Sub ucrInputTxtBrokenStick_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTxtBrokenStick.ControlContentsChanged, ucrNudSplineDF.ControlValueChanged, ucrNudPolynomial.ControlValueChanged
         UpdatePreview()
     End Sub
 
@@ -169,11 +169,13 @@ Public Class sdgVariableTransformations
         Dim clsGetVariablesFunc As New RFunction
 
         clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-        clsGetVariablesFunc.AddParameter("col_names", Chr(34) & strCurrentVariableName & Chr(34))
+        clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strDataName & Chr(34), iPosition:=0)
+        clsGetVariablesFunc.AddParameter("col_names", Chr(34) & strCurrentVariableName & Chr(34), iPosition:=1)
+
 
         clsGetColumnMedianFunc.SetRCommand("summary_median")
-        clsGetColumnMedianFunc.AddParameter("x", clsRFunctionParameter:=clsGetVariablesFunc)
+        clsGetColumnMedianFunc.AddParameter("x", clsRFunctionParameter:=clsGetVariablesFunc,iPosition:=0)
+        clsGetColumnMedianFunc.AddParameter("na.rm", "TRUE", iPosition:=1)
 
 
         expColumn = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnMedianFunc.ToScript, bSilent:=False)
