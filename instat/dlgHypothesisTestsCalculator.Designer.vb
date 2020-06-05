@@ -1552,6 +1552,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkBy
         '
         Me.ucrChkBy.Checked = False
+        Me.ucrChkBy.Enabled = False
         Me.ucrChkBy.Location = New System.Drawing.Point(251, 285)
         Me.ucrChkBy.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.ucrChkBy.Name = "ucrChkBy"
