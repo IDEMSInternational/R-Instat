@@ -322,7 +322,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ChangeLabel()
-        lblVariable.Text = If(rdoBarChart.Checked, "X Variable", "Variable")
+        lblVariable.Text = If(rdoBarChart.Checked, "X Variable:", "Variable:")
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
@@ -351,5 +351,13 @@ Public Class dlgBarAndPieChart
 
     Private Sub CoreControls_ContentsChanged() Handles ucrReceiverFirst.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub CoreControls_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBar.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrReceiverFirst.ControlContentsChanged
+
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+
     End Sub
 End Class
