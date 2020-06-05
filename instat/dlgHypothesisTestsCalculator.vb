@@ -1034,4 +1034,8 @@ Public Class dlgHypothesisTestsCalculator
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::::wm.test()", 1)
         End If
     End Sub
+
+    Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("I()", 1)
+    End Sub
 End Class

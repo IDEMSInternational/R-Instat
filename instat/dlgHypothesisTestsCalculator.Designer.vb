@@ -190,7 +190,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpMainKeyboard.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.grpMainKeyboard.Name = "grpMainKeyboard"
         Me.grpMainKeyboard.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.grpMainKeyboard.Size = New System.Drawing.Size(253, 123)
+        Me.grpMainKeyboard.Size = New System.Drawing.Size(251, 123)
         Me.grpMainKeyboard.TabIndex = 9
         Me.grpMainKeyboard.TabStop = False
         '
