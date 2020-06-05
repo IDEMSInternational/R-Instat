@@ -43,6 +43,8 @@ Partial Class dlgCumulativeDistribution
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
         Me.lblScale = New System.Windows.Forms.Label()
         Me.lblNudby = New System.Windows.Forms.Label()
+        Me.rdoCumulative = New System.Windows.Forms.RadioButton()
+        Me.rdoExceedance = New System.Windows.Forms.RadioButton()
         Me.ucrNudBy = New instat.ucrNud()
         Me.ucrInputComboScales = New instat.ucrInputComboBox()
         Me.ucrPnlOption = New instat.UcrPanel()
@@ -53,8 +55,6 @@ Partial Class dlgCumulativeDistribution
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrCumDistSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoCumulative = New System.Windows.Forms.RadioButton()
-        Me.rdoExceedance = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblFactors
@@ -79,6 +79,26 @@ Partial Class dlgCumulativeDistribution
         '
         resources.ApplyResources(Me.lblNudby, "lblNudby")
         Me.lblNudby.Name = "lblNudby"
+        '
+        'rdoCumulative
+        '
+        resources.ApplyResources(Me.rdoCumulative, "rdoCumulative")
+        Me.rdoCumulative.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCumulative.FlatAppearance.BorderSize = 2
+        Me.rdoCumulative.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCumulative.Name = "rdoCumulative"
+        Me.rdoCumulative.TabStop = True
+        Me.rdoCumulative.UseVisualStyleBackColor = True
+        '
+        'rdoExceedance
+        '
+        resources.ApplyResources(Me.rdoExceedance, "rdoExceedance")
+        Me.rdoExceedance.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExceedance.FlatAppearance.BorderSize = 2
+        Me.rdoExceedance.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExceedance.Name = "rdoExceedance"
+        Me.rdoExceedance.TabStop = True
+        Me.rdoExceedance.UseVisualStyleBackColor = True
         '
         'ucrNudBy
         '
@@ -150,26 +170,6 @@ Partial Class dlgCumulativeDistribution
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'rdoCumulative
-        '
-        resources.ApplyResources(Me.rdoCumulative, "rdoCumulative")
-        Me.rdoCumulative.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoCumulative.FlatAppearance.BorderSize = 2
-        Me.rdoCumulative.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoCumulative.Name = "rdoCumulative"
-        Me.rdoCumulative.TabStop = True
-        Me.rdoCumulative.UseVisualStyleBackColor = True
-        '
-        'rdoExceedance
-        '
-        resources.ApplyResources(Me.rdoExceedance, "rdoExceedance")
-        Me.rdoExceedance.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoExceedance.FlatAppearance.BorderSize = 2
-        Me.rdoExceedance.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoExceedance.Name = "rdoExceedance"
-        Me.rdoExceedance.TabStop = True
-        Me.rdoExceedance.UseVisualStyleBackColor = True
         '
         'dlgCumulativeDistribution
         '
