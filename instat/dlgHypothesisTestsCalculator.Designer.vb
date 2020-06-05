@@ -149,6 +149,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrSelectorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
+        Me.cmdZero = New System.Windows.Forms.Button()
         Me.grpMainKeyboard.SuspendLayout()
         Me.grpStats1.SuspendLayout()
         Me.grpStats2.SuspendLayout()
@@ -176,6 +177,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'grpMainKeyboard
         '
+        Me.grpMainKeyboard.Controls.Add(Me.cmdZero)
         Me.grpMainKeyboard.Controls.Add(Me.cmdPlus)
         Me.grpMainKeyboard.Controls.Add(Me.cmdComma)
         Me.grpMainKeyboard.Controls.Add(Me.cmdDelete)
@@ -242,7 +244,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdConf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdConf.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdConf.Location = New System.Drawing.Point(4, 80)
+        Me.cmdConf.Location = New System.Drawing.Point(4, 81)
         Me.cmdConf.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdConf.Name = "cmdConf"
         Me.cmdConf.Size = New System.Drawing.Size(93, 37)
@@ -266,7 +268,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdAlt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdAlt.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAlt.Location = New System.Drawing.Point(4, 116)
+        Me.cmdAlt.Location = New System.Drawing.Point(6, 119)
         Me.cmdAlt.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdAlt.Name = "cmdAlt"
         Me.cmdAlt.Size = New System.Drawing.Size(93, 37)
@@ -1601,6 +1603,17 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrReceiverForTestColumn.TabIndex = 1
         Me.ucrReceiverForTestColumn.ucrSelector = Nothing
         '
+        'cmdZero
+        '
+        Me.cmdZero.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdZero.Location = New System.Drawing.Point(96, 81)
+        Me.cmdZero.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cmdZero.Name = "cmdZero"
+        Me.cmdZero.Size = New System.Drawing.Size(60, 37)
+        Me.cmdZero.TabIndex = 153
+        Me.cmdZero.Text = "I()"
+        Me.cmdZero.UseVisualStyleBackColor = True
+        '
         'dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1777,4 +1790,5 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdWw As Button
     Friend WithEvents cmdSnh As Button
     Friend WithEvents ttHypothesisTests As ToolTip
+    Friend WithEvents cmdZero As Button
 End Class
