@@ -1558,7 +1558,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrChkBy.Name = "ucrChkBy"
         Me.ucrChkBy.Size = New System.Drawing.Size(84, 20)
         Me.ucrChkBy.TabIndex = 7
-        Me.ucrChkBy.Visible = False
         '
         'ucrSelectorColumn
         '
