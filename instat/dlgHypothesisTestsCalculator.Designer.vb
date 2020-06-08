@@ -198,7 +198,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdZero
         '
         Me.cmdZero.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdZero.Location = New System.Drawing.Point(140, 65)
+        Me.cmdZero.Location = New System.Drawing.Point(140, 66)
         Me.cmdZero.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdZero.Name = "cmdZero"
         Me.cmdZero.Size = New System.Drawing.Size(45, 30)
@@ -209,7 +209,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdPlus
         '
         Me.cmdPlus.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPlus.Location = New System.Drawing.Point(140, 7)
+        Me.cmdPlus.Location = New System.Drawing.Point(140, 8)
         Me.cmdPlus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPlus.Name = "cmdPlus"
         Me.cmdPlus.Size = New System.Drawing.Size(45, 30)
@@ -220,7 +220,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdComma
         '
         Me.cmdComma.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComma.Location = New System.Drawing.Point(71, 7)
+        Me.cmdComma.Location = New System.Drawing.Point(71, 8)
         Me.cmdComma.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComma.Name = "cmdComma"
         Me.cmdComma.Size = New System.Drawing.Size(70, 30)
@@ -232,7 +232,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdDelete
         '
         Me.cmdDelete.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDelete.Location = New System.Drawing.Point(140, 36)
+        Me.cmdDelete.Location = New System.Drawing.Point(140, 37)
         Me.cmdDelete.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(45, 30)
@@ -244,7 +244,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdConf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdConf.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdConf.Location = New System.Drawing.Point(2, 65)
+        Me.cmdConf.Location = New System.Drawing.Point(2, 66)
         Me.cmdConf.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdConf.Name = "cmdConf"
         Me.cmdConf.Size = New System.Drawing.Size(70, 30)
@@ -256,7 +256,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdBrackets
         '
         Me.cmdBrackets.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBrackets.Location = New System.Drawing.Point(71, 36)
+        Me.cmdBrackets.Location = New System.Drawing.Point(71, 37)
         Me.cmdBrackets.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdBrackets.Name = "cmdBrackets"
         Me.cmdBrackets.Size = New System.Drawing.Size(70, 30)
@@ -268,7 +268,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdAlt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdAlt.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAlt.Location = New System.Drawing.Point(71, 65)
+        Me.cmdAlt.Location = New System.Drawing.Point(71, 66)
         Me.cmdAlt.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdAlt.Name = "cmdAlt"
         Me.cmdAlt.Size = New System.Drawing.Size(70, 30)
@@ -279,7 +279,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdSquiggle
         '
         Me.cmdSquiggle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSquiggle.Location = New System.Drawing.Point(2, 7)
+        Me.cmdSquiggle.Location = New System.Drawing.Point(2, 8)
         Me.cmdSquiggle.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSquiggle.Name = "cmdSquiggle"
         Me.cmdSquiggle.Size = New System.Drawing.Size(70, 30)
@@ -290,7 +290,7 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdSquareBrackets
         '
         Me.cmdSquareBrackets.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSquareBrackets.Location = New System.Drawing.Point(2, 36)
+        Me.cmdSquareBrackets.Location = New System.Drawing.Point(2, 37)
         Me.cmdSquareBrackets.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSquareBrackets.Name = "cmdSquareBrackets"
         Me.cmdSquareBrackets.Size = New System.Drawing.Size(70, 30)
@@ -302,7 +302,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.cmdClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdClear.Location = New System.Drawing.Point(501, 287)
+        Me.cmdClear.Location = New System.Drawing.Point(427, 264)
         Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(75, 23)
@@ -1487,7 +1487,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkDisplayModel
         '
         Me.ucrChkDisplayModel.Checked = False
-        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(6, 340)
+        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(12, 350)
         Me.ucrChkDisplayModel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrChkDisplayModel.Name = "ucrChkDisplayModel"
         Me.ucrChkDisplayModel.Size = New System.Drawing.Size(139, 20)
@@ -1496,7 +1496,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkSummaryModel
         '
         Me.ucrChkSummaryModel.Checked = False
-        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(6, 310)
+        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(12, 310)
         Me.ucrChkSummaryModel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrChkSummaryModel.Name = "ucrChkSummaryModel"
         Me.ucrChkSummaryModel.Size = New System.Drawing.Size(139, 20)
@@ -1504,7 +1504,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'ucrTryModelling
         '
-        Me.ucrTryModelling.Location = New System.Drawing.Point(0, 417)
+        Me.ucrTryModelling.Location = New System.Drawing.Point(6, 414)
         Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrTryModelling.Name = "ucrTryModelling"
         Me.ucrTryModelling.Size = New System.Drawing.Size(480, 28)
@@ -1525,7 +1525,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'ucrSaveResult
         '
-        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 450)
+        Me.ucrSaveResult.Location = New System.Drawing.Point(12, 451)
         Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveResult.Name = "ucrSaveResult"
         Me.ucrSaveResult.Size = New System.Drawing.Size(277, 24)
