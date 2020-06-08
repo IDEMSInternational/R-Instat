@@ -943,7 +943,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::mk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""), continuity = TRUE)", 70)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::mk.test()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::mk.test()", 1)
         End If
     End Sub
 
@@ -951,7 +951,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::mult.mk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""))", 51)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::mult.mk.test()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::mult.mk.test()", 1)
         End If
     End Sub
 
@@ -959,7 +959,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::partial.cor.trend.test(x = , z = , method = c(""pearson"", ""spearman""))", 43)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::partial.cor.trend.test()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::partial.cor.trend.test()", 1)
         End If
     End Sub
 
@@ -967,7 +967,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::partial.mk.test(x = , y = , alternative = c(""two.sided"", ""greater"", ""less""))", 57)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::partial.mk.test()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::partial.mk.test()", 1)
         End If
     End Sub
 
@@ -975,7 +975,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::pettitt.test(x = )", 2)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::pettitt.test()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::pettitt.test()", 1)
         End If
     End Sub
 
@@ -983,7 +983,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::rrod.test(x = , y = , alternative = c(""two.sided"", ""less"", ""greater""))", 57)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::rrod.test()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::rrod.test()", 1)
         End If
     End Sub
 
@@ -991,7 +991,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::sea.sens.slope(x = )", 2)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::sea.sens.slope()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::sea.sens.slope()", 1)
         End If
     End Sub
 
@@ -999,7 +999,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::sens.slope(x = , conf.level = 0.95)", 21)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::sens.slope()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::sens.slope()", 1)
         End If
     End Sub
 
@@ -1007,7 +1007,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::smk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""), continuity = TRUE)", 70)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::smk.test()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::smk.test()", 1)
         End If
     End Sub
 
@@ -1015,7 +1015,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::snh.test(x = , m = 20000)", 13)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend:::snh.test()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::snh.test()", 1)
         End If
     End Sub
 
@@ -1023,7 +1023,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::ww.test(x = )", 2)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::::ww.test()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::ww.test()", 1)
         End If
     End Sub
 
@@ -1031,7 +1031,7 @@ Public Class dlgHypothesisTestsCalculator
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::wm.test(x = )", 2)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::::wm.test()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::wm.test()", 1)
         End If
     End Sub
 
