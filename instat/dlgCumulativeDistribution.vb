@@ -14,10 +14,12 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgCumulativeDistribution
     Private clsRggplotFunction As New RFunction
     Private clsStatECDFFunction As New RFunction
+    Private clsStatEcdfGeomFunc As New RFunction
     Private clsRaesFunction As New RFunction
     Private clsStatECDFAesFunction As New RFunction
     Private clsBaseOperator As New ROperator
@@ -56,8 +58,6 @@ Public Class dlgCumulativeDistribution
     End Sub
 
     Private Sub InitaliseDialog()
-        Dim clsGeomPointFunc As New RFunction
-        Dim clsGeomPointParam As New RParameter
         Dim dctScalesPairs As New Dictionary(Of String, String)
 
         ucrChkCountsOnYAxis.Enabled = False ' temporary What should this do?
@@ -105,13 +105,9 @@ Public Class dlgCumulativeDistribution
 
         ucrChkCountsOnYAxis.SetText("Counts on Y Axis")
 
-        clsGeomPointFunc.SetPackageName("ggplot2")
-        clsGeomPointFunc.SetRCommand("geom_point")
-        clsGeomPointFunc.AddParameter("stat", Chr(34) & "ecdf" & Chr(34))
-        clsGeomPointParam.SetArgumentName("geom_point")
-        clsGeomPointParam.SetArgument(clsGeomPointFunc)
         ucrChkIncludePoints.SetText("Include Points")
-        ucrChkIncludePoints.SetParameter(clsGeomPointParam, bNewChangeParameterValue:=False)
+        ucrChkIncludePoints.SetParameter(New RParameter("geom_point"), bNewChangeParameterValue:=False)
+
 
         'ucrInputComboPad.SetParameter(New RParameter("pad"))
         'ucrInputComboPad.SetItems({"TRUE", "FALSE"})
@@ -131,6 +127,11 @@ Public Class dlgCumulativeDistribution
         clsRaesFunction = New RFunction
         clsStatECDFFunction = New RFunction
         clsRggplotFunction = New RFunction
+        clsStatEcdfGeomFunc = New RFunction
+
+
+        clsStatEcdfGeomFunc.SetRCommand("stat_ecdf")
+        clsStatEcdfGeomFunc.AddParameter("geom", strParameterValue:=Chr(34) & "point" & Chr(34))
 
         clsSequence = New RFunction
         clsSequence.SetRCommand("seq")
@@ -189,7 +190,7 @@ Public Class dlgCumulativeDistribution
 
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
-      
+
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrCumDistSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
@@ -203,6 +204,7 @@ Public Class dlgCumulativeDistribution
         ucrPnlOption.SetRCode(clsStatECDFFunction, bReset)
         ucrInputComboScales.SetRCode(clsYScalecontinuousFunction, bReset)
 
+        ucrChkIncludePoints.SetRCode(clsBaseOperator, bReset)
         'ucrInputComboPad.SetRCode(clsRgeomCumDistFunction, bReset)
 
         ucrNudBy.SetRCode(clsSequence, bReset)
@@ -241,7 +243,11 @@ Public Class dlgCumulativeDistribution
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorforCumDist.ControlContentsChanged, ucrSaveCumDist.ControlContentsChanged
-
+    Private Sub ucrChkIncludePoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludePoints.ControlValueChanged
+        If ucrChkIncludePoints.Checked Then
+            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsStatEcdfGeomFunc, bIncludeArgumentName:=False)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_point")
+        End If
     End Sub
 End Class
