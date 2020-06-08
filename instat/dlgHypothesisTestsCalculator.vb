@@ -65,7 +65,7 @@ Public Class dlgHypothesisTestsCalculator
         ttHypothesisTests.SetToolTip(cmdCs, "The non-parametric Cox and Stuart trend test")
         ttHypothesisTests.SetToolTip(cmdCsmk, "The seasonal Mann-Kendall test under the presence of correlated seasons")
         ttHypothesisTests.SetToolTip(cmdLanzante, "The non-parametric Lanzante test for a shift in the central tendency of a time series")
-        ttHypothesisTests.SetToolTip(cmdMk, "The Mann-Kendall Trend Test")
+        ttHypothesisTests.SetToolTip(cmdMk, "The Mann-Kendall trend test")
         ttHypothesisTests.SetToolTip(cmdMmk, "The multivariate (multisite) Mann-Kendall test")
         ttHypothesisTests.SetToolTip(cmdPcor, "The partial correlation trend test")
         ttHypothesisTests.SetToolTip(cmdPmk, "The partial Mann-Kendall trend test")
