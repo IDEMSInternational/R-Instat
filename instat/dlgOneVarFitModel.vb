@@ -72,6 +72,7 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetCheckBoxText("Save Model")
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
+        ucrSaveModel.SetPrefix("Normal")
 
         ucrChkBinModify.SetText("Modify Conditions for 'Success'")
 
@@ -278,14 +279,12 @@ Public Class dlgOneVarFitModel
         ucrChkConvertVariate.SetRCode(clsROneVarFitModel, bReset)
         ucrNudHyp.SetRCode(clsRTTest, bReset)
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsNaExclude, New RParameter("object"), iAdditionalPairNo:=1)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsNaExclude, New RParameter("object"), iAdditionalPairNo:=2)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("x"), iAdditionalPairNo:=3)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("x"), iAdditionalPairNo:=4)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRLength, New RParameter("x"), iAdditionalPairNo:=5)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=6)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=7)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRStartValues, New RParameter("x"), iAdditionalPairNo:=8)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("x"), iAdditionalPairNo:=1)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("x"), iAdditionalPairNo:=2)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRLength, New RParameter("x"), iAdditionalPairNo:=3)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=4)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=5)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRStartValues, New RParameter("x"), iAdditionalPairNo:=6)
 
         ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
 
@@ -414,21 +413,23 @@ Public Class dlgOneVarFitModel
         If ucrDistributionChoice.clsCurrDistribution.strNameTag = "von_mises" Then
             clsROneVarFitModel.AddParameter("start", "list(mu = 0.1, kappa = 0.2)", iPosition:=1)
         Else
-            If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Then
-                clsROneVarFitModel.AddParameter("start", "list(df = 0.1)", iPosition:=1)
-            ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Then
-                clsROneVarFitModel.AddParameter("start", "list(df1 = 0.1, df2 = 0.2)", iPosition:=1)
-            ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Then
-                clsROneVarFitModel.AddParameter("start", "list(df1 = 0.1, df2 = 0.2)", iPosition:=1)
-            ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
-                clsROneVarFitModel.AddParameter("start", "list(size = 1, prob = 0.5)", iPosition:=1)
-            ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Then
-                clsROneVarFitModel.AddParameter("start", "list(size = 1, prob = 0.5)", iPosition:=1)
-            ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Weibull" Then
-                clsROneVarFitModel.AddParameter("start", "list(shape = 1, scale = 2)", iPosition:=1)
-            Else
-                clsROneVarFitModel.RemoveParameterByName("start")
-            End If
+            Select Case ucrDistributionChoice.clsCurrDistribution.strNameTag
+                Case "Chi_Square"
+                    clsROneVarFitModel.AddParameter("start", "list(df = 0.1)", iPosition:=1)
+                Case "Students_t"
+                    clsROneVarFitModel.AddParameter("start", "list(df = 0.1)", iPosition:=1)
+                Case "F"
+                    clsROneVarFitModel.AddParameter("start", "list(df1 = 0.1, df2 = 0.2)", iPosition:=1)
+                Case "Bernouli"
+                    clsROneVarFitModel.AddParameter("start", "list(size = 1, prob = 0.5)", iPosition:=1)
+                Case "Binomial"
+                    clsROneVarFitModel.AddParameter("start", "list(size = 1, prob = 0.5)", iPosition:=1)
+                Case "Weibull"
+                    clsROneVarFitModel.AddParameter("start", "list(shape = 1, scale = 2)", iPosition:=1)
+                Case Else
+                    clsROneVarFitModel.RemoveParameterByName("start")
+            End Select
+
         End If
 
     End Sub
@@ -652,11 +653,21 @@ Public Class dlgOneVarFitModel
         DataTypeAccepted()
         StartParameterValues()
         TestOKEnabled()
-        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Negative_Binomial" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Geometric" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Then
-            bRdoMgeEnabled = False
-        Else
-            bRdoMgeEnabled = True
-        End If
+
+        Select Case ucrDistributionChoice.clsCurrDistribution.strNameTag
+            Case "Poisson"
+                bRdoMgeEnabled = False
+            Case "Negative_Binomial"
+                bRdoMgeEnabled = False
+            Case "Geometric"
+                bRdoMgeEnabled = False
+            Case "Bernouli"
+                bRdoMgeEnabled = False
+            Case "Binomial"
+                bRdoMgeEnabled = False
+            Case Else
+                bRdoMgeEnabled = True
+        End Select
     End Sub
 
 
