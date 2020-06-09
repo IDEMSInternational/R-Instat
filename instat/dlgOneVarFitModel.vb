@@ -655,15 +655,7 @@ Public Class dlgOneVarFitModel
         TestOKEnabled()
 
         Select Case ucrDistributionChoice.clsCurrDistribution.strNameTag
-            Case "Poisson"
-                bRdoMgeEnabled = False
-            Case "Negative_Binomial"
-                bRdoMgeEnabled = False
-            Case "Geometric"
-                bRdoMgeEnabled = False
-            Case "Bernouli"
-                bRdoMgeEnabled = False
-            Case "Binomial"
+            Case "Poisson", "Negative_Binomial", "Geometric", "Bernouli", "Binomial"
                 bRdoMgeEnabled = False
             Case Else
                 bRdoMgeEnabled = True
