@@ -25,6 +25,7 @@ Partial Class sdgFiltersFromFactor
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgFiltersFromFactor))
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.ucrFactorSelctor = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -40,10 +41,20 @@ Partial Class sdgFiltersFromFactor
         resources.ApplyResources(Me.ucrFactorSelctor, "ucrFactorSelctor")
         Me.ucrFactorSelctor.Name = "ucrFactorSelctor"
         '
+        'ucrFactorReceiver
+        '
+        Me.ucrFactorReceiver.frmParent = Me
+        resources.ApplyResources(Me.ucrFactorReceiver, "ucrFactorReceiver")
+        Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
+        Me.ucrFactorReceiver.Selector = Nothing
+        Me.ucrFactorReceiver.strNcFilePath = ""
+        Me.ucrFactorReceiver.ucrSelector = Nothing
+        '
         'sdgFiltersFromFactor
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.ucrFactorSelctor)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -56,4 +67,5 @@ Partial Class sdgFiltersFromFactor
 
     Friend WithEvents ucrBase As ucrButtonsSubdialogue
     Friend WithEvents ucrFactorSelctor As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
 End Class
