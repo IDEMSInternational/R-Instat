@@ -142,7 +142,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrFactorSelctor.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 9</value>
@@ -166,7 +166,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFactorSelctor.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -175,10 +175,37 @@
     <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>654, 415</value>
+    <value>771, 415</value>
+  </data>
+  <data name="ucrChkAndExistingFilter.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ucrChkAndExistingFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 265</value>
+  </data>
+  <data name="ucrChkAndExistingFilter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkAndExistingFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 25</value>
+  </data>
+  <data name="ucrChkAndExistingFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAndExistingFilter.Name" xml:space="preserve">
+    <value>ucrChkAndExistingFilter</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAndExistingFilter.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAndExistingFilter.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAndExistingFilter.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="cmdToggleSelectAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>516, 324</value>
+    <value>569, 324</value>
   </data>
   <data name="cmdToggleSelectAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 28</value>
@@ -199,13 +226,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdToggleSelectAll.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrFactorLevel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="ucrFactorLevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 64</value>
+    <value>372, 64</value>
   </data>
   <data name="ucrFactorLevel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -226,13 +253,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFactorLevel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="lblFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 9</value>
+    <value>369, 9</value>
   </data>
   <data name="lblFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 17</value>
@@ -253,7 +280,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactor.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -274,7 +301,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>303, 32</value>
+    <value>356, 32</value>
   </data>
   <data name="ucrFactorReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -295,6 +322,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFactorReceiver.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
 </root>
