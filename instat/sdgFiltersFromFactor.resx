@@ -181,16 +181,16 @@
     <value>True</value>
   </data>
   <data name="lblFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>336, 26</value>
+    <value>316, 9</value>
   </data>
   <data name="lblFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 17</value>
+    <value>52, 17</value>
   </data>
   <data name="lblFactor.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="lblFactor.Text" xml:space="preserve">
-    <value>Factor</value>
+    <value>Factor:</value>
   </data>
   <data name="&gt;&gt;lblFactor.Name" xml:space="preserve">
     <value>lblFactor</value>
@@ -220,7 +220,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>303, 54</value>
+    <value>303, 32</value>
   </data>
   <data name="ucrFactorReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
