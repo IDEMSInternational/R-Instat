@@ -27,6 +27,7 @@ Partial Class sdgFiltersFromFactor
         Me.ucrFactorSelctor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblFactor = New System.Windows.Forms.Label()
+        Me.ucrFactorLevel = New instat.ucrFactor()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -56,10 +57,20 @@ Partial Class sdgFiltersFromFactor
         resources.ApplyResources(Me.lblFactor, "lblFactor")
         Me.lblFactor.Name = "lblFactor"
         '
+        'ucrFactorLevel
+        '
+        resources.ApplyResources(Me.ucrFactorLevel, "ucrFactorLevel")
+        Me.ucrFactorLevel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrFactorLevel.clsReceiver = Nothing
+        Me.ucrFactorLevel.Name = "ucrFactorLevel"
+        Me.ucrFactorLevel.shtCurrSheet = Nothing
+        Me.ucrFactorLevel.ucrChkLevels = Nothing
+        '
         'sdgFiltersFromFactor
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrFactorLevel)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.ucrFactorSelctor)
@@ -77,4 +88,5 @@ Partial Class sdgFiltersFromFactor
     Friend WithEvents ucrFactorSelctor As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblFactor As Label
+    Friend WithEvents ucrFactorLevel As ucrFactor
 End Class
