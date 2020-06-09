@@ -91,6 +91,35 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdCont = New System.Windows.Forms.Button()
         Me.cmdCat = New System.Windows.Forms.Button()
         Me.cmdBinary = New System.Windows.Forms.Button()
+        Me.grpCoin = New System.Windows.Forms.GroupBox()
+        Me.grpScale = New System.Windows.Forms.GroupBox()
+        Me.cmdConover = New System.Windows.Forms.Button()
+        Me.cmdFligner1 = New System.Windows.Forms.Button()
+        Me.cmdAnsari1 = New System.Windows.Forms.Button()
+        Me.cmdMood1 = New System.Windows.Forms.Button()
+        Me.cmdKlotz = New System.Windows.Forms.Button()
+        Me.cmdTaha = New System.Windows.Forms.Button()
+        Me.grpContigency = New System.Windows.Forms.GroupBox()
+        Me.cmdLbl = New System.Windows.Forms.Button()
+        Me.cmdCmh = New System.Windows.Forms.Button()
+        Me.cmdChisq1 = New System.Windows.Forms.Button()
+        Me.grpSymmetry = New System.Windows.Forms.GroupBox()
+        Me.cmdQuade1 = New System.Windows.Forms.Button()
+        Me.cmdFriedman1 = New System.Windows.Forms.Button()
+        Me.cmdWilcoxsign = New System.Windows.Forms.Button()
+        Me.cmdSign = New System.Windows.Forms.Button()
+        Me.grpCorrelation = New System.Windows.Forms.GroupBox()
+        Me.cmdKoziol = New System.Windows.Forms.Button()
+        Me.cmdQuadrant = New System.Windows.Forms.Button()
+        Me.cmdFisyat = New System.Windows.Forms.Button()
+        Me.cmdSpearman = New System.Windows.Forms.Button()
+        Me.grpLocation = New System.Windows.Forms.GroupBox()
+        Me.cmdSavage = New System.Windows.Forms.Button()
+        Me.cmdMedian1 = New System.Windows.Forms.Button()
+        Me.cmdNormal = New System.Windows.Forms.Button()
+        Me.cmdKruskal1 = New System.Windows.Forms.Button()
+        Me.cmdWilcox1 = New System.Windows.Forms.Button()
+        Me.cmdOneway1 = New System.Windows.Forms.Button()
         Me.ucrChkDisplayModel = New instat.ucrCheck()
         Me.ucrChkSummaryModel = New instat.ucrCheck()
         Me.ucrTryModelling = New instat.ucrTry()
@@ -107,6 +136,12 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpStats2.SuspendLayout()
         Me.grpAgricolae.SuspendLayout()
         Me.grpVerification.SuspendLayout()
+        Me.grpCoin.SuspendLayout()
+        Me.grpScale.SuspendLayout()
+        Me.grpContigency.SuspendLayout()
+        Me.grpSymmetry.SuspendLayout()
+        Me.grpCorrelation.SuspendLayout()
+        Me.grpLocation.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblTest
@@ -131,7 +166,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpMainKeyboard.Controls.Add(Me.cmdAlt)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquiggle)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquareBrackets)
-        Me.grpMainKeyboard.Location = New System.Drawing.Point(515, 304)
+        Me.grpMainKeyboard.Location = New System.Drawing.Point(515, 337)
         Me.grpMainKeyboard.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.grpMainKeyboard.Name = "grpMainKeyboard"
         Me.grpMainKeyboard.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -659,9 +694,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpStats2.Controls.Add(Me.cmdPowerT)
         Me.grpStats2.Controls.Add(Me.cmdPowerProp)
         Me.grpStats2.Location = New System.Drawing.Point(329, 97)
-        Me.grpStats2.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpStats2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.grpStats2.Name = "grpStats2"
-        Me.grpStats2.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpStats2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.grpStats2.Size = New System.Drawing.Size(433, 166)
         Me.grpStats2.TabIndex = 14
         Me.grpStats2.TabStop = False
@@ -684,9 +719,9 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpAgricolae.Controls.Add(Me.cmdDuncan)
         Me.grpAgricolae.Controls.Add(Me.cmdBIB)
         Me.grpAgricolae.Location = New System.Drawing.Point(336, 97)
-        Me.grpAgricolae.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpAgricolae.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.grpAgricolae.Name = "grpAgricolae"
-        Me.grpAgricolae.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpAgricolae.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.grpAgricolae.Size = New System.Drawing.Size(419, 165)
         Me.grpAgricolae.TabIndex = 15
         Me.grpAgricolae.TabStop = False
@@ -849,8 +884,8 @@ Partial Class dlgHypothesisTestsCalculator
         'cmdHelp
         '
         Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdHelp.Location = New System.Drawing.Point(637, 276)
-        Me.cmdHelp.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdHelp.Location = New System.Drawing.Point(637, 309)
+        Me.cmdHelp.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(100, 28)
         Me.cmdHelp.TabIndex = 16
@@ -862,8 +897,10 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpVerification.Controls.Add(Me.cmdCont)
         Me.grpVerification.Controls.Add(Me.cmdCat)
         Me.grpVerification.Controls.Add(Me.cmdBinary)
-        Me.grpVerification.Location = New System.Drawing.Point(329, 99)
+        Me.grpVerification.Location = New System.Drawing.Point(329, 98)
+        Me.grpVerification.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.grpVerification.Name = "grpVerification"
+        Me.grpVerification.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.grpVerification.Size = New System.Drawing.Size(232, 75)
         Me.grpVerification.TabIndex = 18
         Me.grpVerification.TabStop = False
@@ -871,7 +908,8 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdCont
         '
-        Me.cmdCont.Location = New System.Drawing.Point(150, 19)
+        Me.cmdCont.Location = New System.Drawing.Point(149, 18)
+        Me.cmdCont.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cmdCont.Name = "cmdCont"
         Me.cmdCont.Size = New System.Drawing.Size(75, 38)
         Me.cmdCont.TabIndex = 21
@@ -880,7 +918,8 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdCat
         '
-        Me.cmdCat.Location = New System.Drawing.Point(76, 19)
+        Me.cmdCat.Location = New System.Drawing.Point(76, 18)
+        Me.cmdCat.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cmdCat.Name = "cmdCat"
         Me.cmdCat.Size = New System.Drawing.Size(75, 38)
         Me.cmdCat.TabIndex = 20
@@ -889,17 +928,351 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'cmdBinary
         '
-        Me.cmdBinary.Location = New System.Drawing.Point(2, 19)
+        Me.cmdBinary.Location = New System.Drawing.Point(3, 18)
+        Me.cmdBinary.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cmdBinary.Name = "cmdBinary"
         Me.cmdBinary.Size = New System.Drawing.Size(75, 38)
         Me.cmdBinary.TabIndex = 19
         Me.cmdBinary.Text = "binary"
         Me.cmdBinary.UseVisualStyleBackColor = True
         '
+        'grpCoin
+        '
+        Me.grpCoin.Controls.Add(Me.grpScale)
+        Me.grpCoin.Controls.Add(Me.grpContigency)
+        Me.grpCoin.Controls.Add(Me.grpSymmetry)
+        Me.grpCoin.Controls.Add(Me.grpCorrelation)
+        Me.grpCoin.Controls.Add(Me.grpLocation)
+        Me.grpCoin.Location = New System.Drawing.Point(319, 94)
+        Me.grpCoin.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.grpCoin.Name = "grpCoin"
+        Me.grpCoin.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.grpCoin.Size = New System.Drawing.Size(511, 215)
+        Me.grpCoin.TabIndex = 22
+        Me.grpCoin.TabStop = False
+        Me.grpCoin.Text = "Coin"
+        '
+        'grpScale
+        '
+        Me.grpScale.AccessibleDescription = "grpScale"
+        Me.grpScale.Controls.Add(Me.cmdConover)
+        Me.grpScale.Controls.Add(Me.cmdFligner1)
+        Me.grpScale.Controls.Add(Me.cmdAnsari1)
+        Me.grpScale.Controls.Add(Me.cmdMood1)
+        Me.grpScale.Controls.Add(Me.cmdKlotz)
+        Me.grpScale.Controls.Add(Me.cmdTaha)
+        Me.grpScale.Location = New System.Drawing.Point(343, 14)
+        Me.grpScale.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.grpScale.Name = "grpScale"
+        Me.grpScale.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.grpScale.Size = New System.Drawing.Size(165, 108)
+        Me.grpScale.TabIndex = 4
+        Me.grpScale.TabStop = False
+        Me.grpScale.Text = "Scale"
+        '
+        'cmdConover
+        '
+        Me.cmdConover.Location = New System.Drawing.Point(81, 71)
+        Me.cmdConover.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdConover.Name = "cmdConover"
+        Me.cmdConover.Size = New System.Drawing.Size(80, 30)
+        Me.cmdConover.TabIndex = 6
+        Me.cmdConover.Text = "conover"
+        Me.cmdConover.UseVisualStyleBackColor = True
+        '
+        'cmdFligner1
+        '
+        Me.cmdFligner1.Location = New System.Drawing.Point(3, 71)
+        Me.cmdFligner1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdFligner1.Name = "cmdFligner1"
+        Me.cmdFligner1.Size = New System.Drawing.Size(80, 30)
+        Me.cmdFligner1.TabIndex = 5
+        Me.cmdFligner1.Text = "fligner"
+        Me.cmdFligner1.UseVisualStyleBackColor = True
+        '
+        'cmdAnsari1
+        '
+        Me.cmdAnsari1.Location = New System.Drawing.Point(81, 43)
+        Me.cmdAnsari1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdAnsari1.Name = "cmdAnsari1"
+        Me.cmdAnsari1.Size = New System.Drawing.Size(80, 30)
+        Me.cmdAnsari1.TabIndex = 4
+        Me.cmdAnsari1.Text = "ansari"
+        Me.cmdAnsari1.UseVisualStyleBackColor = True
+        '
+        'cmdMood1
+        '
+        Me.cmdMood1.Location = New System.Drawing.Point(3, 43)
+        Me.cmdMood1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdMood1.Name = "cmdMood1"
+        Me.cmdMood1.Size = New System.Drawing.Size(80, 30)
+        Me.cmdMood1.TabIndex = 3
+        Me.cmdMood1.Text = "mood"
+        Me.cmdMood1.UseVisualStyleBackColor = True
+        '
+        'cmdKlotz
+        '
+        Me.cmdKlotz.Location = New System.Drawing.Point(81, 15)
+        Me.cmdKlotz.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdKlotz.Name = "cmdKlotz"
+        Me.cmdKlotz.Size = New System.Drawing.Size(80, 30)
+        Me.cmdKlotz.TabIndex = 2
+        Me.cmdKlotz.Text = "klotz"
+        Me.cmdKlotz.UseVisualStyleBackColor = True
+        '
+        'cmdTaha
+        '
+        Me.cmdTaha.Location = New System.Drawing.Point(3, 15)
+        Me.cmdTaha.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdTaha.Name = "cmdTaha"
+        Me.cmdTaha.Size = New System.Drawing.Size(80, 30)
+        Me.cmdTaha.TabIndex = 1
+        Me.cmdTaha.Text = "taha"
+        Me.cmdTaha.UseVisualStyleBackColor = True
+        '
+        'grpContigency
+        '
+        Me.grpContigency.AccessibleDescription = "grpContingency"
+        Me.grpContigency.Controls.Add(Me.cmdLbl)
+        Me.grpContigency.Controls.Add(Me.cmdCmh)
+        Me.grpContigency.Controls.Add(Me.cmdChisq1)
+        Me.grpContigency.Location = New System.Drawing.Point(184, 124)
+        Me.grpContigency.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.grpContigency.Name = "grpContigency"
+        Me.grpContigency.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.grpContigency.Size = New System.Drawing.Size(247, 62)
+        Me.grpContigency.TabIndex = 3
+        Me.grpContigency.TabStop = False
+        Me.grpContigency.Text = "Contingency"
+        '
+        'cmdLbl
+        '
+        Me.cmdLbl.Location = New System.Drawing.Point(160, 20)
+        Me.cmdLbl.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdLbl.Name = "cmdLbl"
+        Me.cmdLbl.Size = New System.Drawing.Size(80, 30)
+        Me.cmdLbl.TabIndex = 3
+        Me.cmdLbl.Text = "lbl"
+        Me.cmdLbl.UseVisualStyleBackColor = True
+        '
+        'cmdCmh
+        '
+        Me.cmdCmh.Location = New System.Drawing.Point(81, 20)
+        Me.cmdCmh.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdCmh.Name = "cmdCmh"
+        Me.cmdCmh.Size = New System.Drawing.Size(80, 30)
+        Me.cmdCmh.TabIndex = 2
+        Me.cmdCmh.Text = "cmh"
+        Me.cmdCmh.UseVisualStyleBackColor = True
+        '
+        'cmdChisq1
+        '
+        Me.cmdChisq1.Location = New System.Drawing.Point(3, 20)
+        Me.cmdChisq1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdChisq1.Name = "cmdChisq1"
+        Me.cmdChisq1.Size = New System.Drawing.Size(80, 30)
+        Me.cmdChisq1.TabIndex = 1
+        Me.cmdChisq1.Text = "chisq"
+        Me.cmdChisq1.UseVisualStyleBackColor = True
+        '
+        'grpSymmetry
+        '
+        Me.grpSymmetry.Controls.Add(Me.cmdQuade1)
+        Me.grpSymmetry.Controls.Add(Me.cmdFriedman1)
+        Me.grpSymmetry.Controls.Add(Me.cmdWilcoxsign)
+        Me.grpSymmetry.Controls.Add(Me.cmdSign)
+        Me.grpSymmetry.Location = New System.Drawing.Point(171, 14)
+        Me.grpSymmetry.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.grpSymmetry.Name = "grpSymmetry"
+        Me.grpSymmetry.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.grpSymmetry.Size = New System.Drawing.Size(169, 108)
+        Me.grpSymmetry.TabIndex = 2
+        Me.grpSymmetry.TabStop = False
+        Me.grpSymmetry.Text = "Symmetry"
+        '
+        'cmdQuade1
+        '
+        Me.cmdQuade1.Location = New System.Drawing.Point(80, 47)
+        Me.cmdQuade1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdQuade1.Name = "cmdQuade1"
+        Me.cmdQuade1.Size = New System.Drawing.Size(87, 30)
+        Me.cmdQuade1.TabIndex = 4
+        Me.cmdQuade1.Text = "quade"
+        Me.cmdQuade1.UseVisualStyleBackColor = True
+        '
+        'cmdFriedman1
+        '
+        Me.cmdFriedman1.Location = New System.Drawing.Point(1, 47)
+        Me.cmdFriedman1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdFriedman1.Name = "cmdFriedman1"
+        Me.cmdFriedman1.Size = New System.Drawing.Size(80, 30)
+        Me.cmdFriedman1.TabIndex = 3
+        Me.cmdFriedman1.Text = "friedman"
+        Me.cmdFriedman1.UseVisualStyleBackColor = True
+        '
+        'cmdWilcoxsign
+        '
+        Me.cmdWilcoxsign.Location = New System.Drawing.Point(80, 18)
+        Me.cmdWilcoxsign.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdWilcoxsign.Name = "cmdWilcoxsign"
+        Me.cmdWilcoxsign.Size = New System.Drawing.Size(87, 30)
+        Me.cmdWilcoxsign.TabIndex = 2
+        Me.cmdWilcoxsign.Text = "wilcoxsign"
+        Me.cmdWilcoxsign.UseVisualStyleBackColor = True
+        '
+        'cmdSign
+        '
+        Me.cmdSign.Location = New System.Drawing.Point(1, 18)
+        Me.cmdSign.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdSign.Name = "cmdSign"
+        Me.cmdSign.Size = New System.Drawing.Size(80, 30)
+        Me.cmdSign.TabIndex = 1
+        Me.cmdSign.Text = "sign"
+        Me.cmdSign.UseVisualStyleBackColor = True
+        '
+        'grpCorrelation
+        '
+        Me.grpCorrelation.AccessibleDescription = "grpCorrelation"
+        Me.grpCorrelation.Controls.Add(Me.cmdKoziol)
+        Me.grpCorrelation.Controls.Add(Me.cmdQuadrant)
+        Me.grpCorrelation.Controls.Add(Me.cmdFisyat)
+        Me.grpCorrelation.Controls.Add(Me.cmdSpearman)
+        Me.grpCorrelation.Location = New System.Drawing.Point(3, 124)
+        Me.grpCorrelation.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.grpCorrelation.Name = "grpCorrelation"
+        Me.grpCorrelation.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.grpCorrelation.Size = New System.Drawing.Size(177, 87)
+        Me.grpCorrelation.TabIndex = 1
+        Me.grpCorrelation.TabStop = False
+        Me.grpCorrelation.Text = "Correlation"
+        '
+        'cmdKoziol
+        '
+        Me.cmdKoziol.Location = New System.Drawing.Point(89, 46)
+        Me.cmdKoziol.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdKoziol.Name = "cmdKoziol"
+        Me.cmdKoziol.Size = New System.Drawing.Size(80, 30)
+        Me.cmdKoziol.TabIndex = 4
+        Me.cmdKoziol.Text = "koziol"
+        Me.cmdKoziol.UseVisualStyleBackColor = True
+        '
+        'cmdQuadrant
+        '
+        Me.cmdQuadrant.Location = New System.Drawing.Point(1, 46)
+        Me.cmdQuadrant.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdQuadrant.Name = "cmdQuadrant"
+        Me.cmdQuadrant.Size = New System.Drawing.Size(89, 30)
+        Me.cmdQuadrant.TabIndex = 3
+        Me.cmdQuadrant.Text = "quadrant"
+        Me.cmdQuadrant.UseVisualStyleBackColor = True
+        '
+        'cmdFisyat
+        '
+        Me.cmdFisyat.Location = New System.Drawing.Point(89, 17)
+        Me.cmdFisyat.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdFisyat.Name = "cmdFisyat"
+        Me.cmdFisyat.Size = New System.Drawing.Size(80, 30)
+        Me.cmdFisyat.TabIndex = 2
+        Me.cmdFisyat.Text = "fisyat"
+        Me.cmdFisyat.UseVisualStyleBackColor = True
+        '
+        'cmdSpearman
+        '
+        Me.cmdSpearman.Location = New System.Drawing.Point(1, 17)
+        Me.cmdSpearman.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdSpearman.Name = "cmdSpearman"
+        Me.cmdSpearman.Size = New System.Drawing.Size(89, 30)
+        Me.cmdSpearman.TabIndex = 1
+        Me.cmdSpearman.Text = "spearman"
+        Me.cmdSpearman.UseVisualStyleBackColor = True
+        '
+        'grpLocation
+        '
+        Me.grpLocation.Controls.Add(Me.cmdSavage)
+        Me.grpLocation.Controls.Add(Me.cmdMedian1)
+        Me.grpLocation.Controls.Add(Me.cmdNormal)
+        Me.grpLocation.Controls.Add(Me.cmdKruskal1)
+        Me.grpLocation.Controls.Add(Me.cmdWilcox1)
+        Me.grpLocation.Controls.Add(Me.cmdOneway1)
+        Me.grpLocation.Location = New System.Drawing.Point(3, 14)
+        Me.grpLocation.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.grpLocation.Name = "grpLocation"
+        Me.grpLocation.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.grpLocation.Size = New System.Drawing.Size(165, 108)
+        Me.grpLocation.TabIndex = 0
+        Me.grpLocation.TabStop = False
+        Me.grpLocation.Text = "Location"
+        '
+        'cmdSavage
+        '
+        Me.cmdSavage.Location = New System.Drawing.Point(80, 74)
+        Me.cmdSavage.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdSavage.Name = "cmdSavage"
+        Me.cmdSavage.Size = New System.Drawing.Size(80, 30)
+        Me.cmdSavage.TabIndex = 5
+        Me.cmdSavage.Text = "savage"
+        Me.cmdSavage.UseVisualStyleBackColor = True
+        '
+        'cmdMedian1
+        '
+        Me.cmdMedian1.AccessibleDescription = ""
+        Me.cmdMedian1.Location = New System.Drawing.Point(1, 74)
+        Me.cmdMedian1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdMedian1.Name = "cmdMedian1"
+        Me.cmdMedian1.Size = New System.Drawing.Size(80, 30)
+        Me.cmdMedian1.TabIndex = 4
+        Me.cmdMedian1.Text = "median"
+        Me.cmdMedian1.UseVisualStyleBackColor = True
+        '
+        'cmdNormal
+        '
+        Me.cmdNormal.AccessibleDescription = ""
+        Me.cmdNormal.Location = New System.Drawing.Point(80, 46)
+        Me.cmdNormal.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdNormal.Name = "cmdNormal"
+        Me.cmdNormal.Size = New System.Drawing.Size(80, 30)
+        Me.cmdNormal.TabIndex = 3
+        Me.cmdNormal.Text = "normal"
+        Me.cmdNormal.UseVisualStyleBackColor = True
+        '
+        'cmdKruskal1
+        '
+        Me.cmdKruskal1.AccessibleDescription = ""
+        Me.cmdKruskal1.Location = New System.Drawing.Point(1, 46)
+        Me.cmdKruskal1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdKruskal1.Name = "cmdKruskal1"
+        Me.cmdKruskal1.Size = New System.Drawing.Size(80, 30)
+        Me.cmdKruskal1.TabIndex = 2
+        Me.cmdKruskal1.Text = "kruskal"
+        Me.cmdKruskal1.UseVisualStyleBackColor = True
+        '
+        'cmdWilcox1
+        '
+        Me.cmdWilcox1.AccessibleDescription = "cmdWilcox"
+        Me.cmdWilcox1.Location = New System.Drawing.Point(80, 17)
+        Me.cmdWilcox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdWilcox1.Name = "cmdWilcox1"
+        Me.cmdWilcox1.Size = New System.Drawing.Size(80, 30)
+        Me.cmdWilcox1.TabIndex = 1
+        Me.cmdWilcox1.Text = "wilcox"
+        Me.cmdWilcox1.UseVisualStyleBackColor = True
+        '
+        'cmdOneway1
+        '
+        Me.cmdOneway1.AccessibleDescription = ""
+        Me.cmdOneway1.AccessibleName = ""
+        Me.cmdOneway1.Location = New System.Drawing.Point(1, 17)
+        Me.cmdOneway1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cmdOneway1.Name = "cmdOneway1"
+        Me.cmdOneway1.Size = New System.Drawing.Size(80, 30)
+        Me.cmdOneway1.TabIndex = 0
+        Me.cmdOneway1.Text = "oneway"
+        Me.cmdOneway1.UseVisualStyleBackColor = True
+        '
         'ucrChkDisplayModel
         '
         Me.ucrChkDisplayModel.Checked = False
-        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(8, 362)
+        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(8, 378)
         Me.ucrChkDisplayModel.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.ucrChkDisplayModel.Name = "ucrChkDisplayModel"
         Me.ucrChkDisplayModel.Size = New System.Drawing.Size(185, 25)
@@ -908,7 +1281,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkSummaryModel
         '
         Me.ucrChkSummaryModel.Checked = False
-        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(8, 308)
+        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(8, 341)
         Me.ucrChkSummaryModel.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.ucrChkSummaryModel.Name = "ucrChkSummaryModel"
         Me.ucrChkSummaryModel.Size = New System.Drawing.Size(185, 25)
@@ -916,8 +1289,8 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'ucrTryModelling
         '
-        Me.ucrTryModelling.Location = New System.Drawing.Point(0, 433)
-        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrTryModelling.Location = New System.Drawing.Point(0, 466)
+        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.ucrTryModelling.Name = "ucrTryModelling"
         Me.ucrTryModelling.Size = New System.Drawing.Size(640, 34)
         Me.ucrTryModelling.TabIndex = 17
@@ -925,7 +1298,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrReceiverMultiple
         '
         Me.ucrReceiverMultiple.frmParent = Me
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(333, 308)
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(333, 341)
         Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
         Me.ucrReceiverMultiple.Selector = Nothing
@@ -936,7 +1309,7 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'ucrSaveResult
         '
-        Me.ucrSaveResult.Location = New System.Drawing.Point(13, 474)
+        Me.ucrSaveResult.Location = New System.Drawing.Point(13, 507)
         Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrSaveResult.Name = "ucrSaveResult"
         Me.ucrSaveResult.Size = New System.Drawing.Size(369, 30)
@@ -954,8 +1327,8 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(16, 524)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrBase.Location = New System.Drawing.Point(16, 558)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(603, 64)
         Me.ucrBase.TabIndex = 13
@@ -963,10 +1336,10 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkBy
         '
         Me.ucrChkBy.Checked = False
-        Me.ucrChkBy.Location = New System.Drawing.Point(335, 278)
+        Me.ucrChkBy.Location = New System.Drawing.Point(335, 311)
         Me.ucrChkBy.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrChkBy.Name = "ucrChkBy"
-        Me.ucrChkBy.Size = New System.Drawing.Size(92, 25)
+        Me.ucrChkBy.Size = New System.Drawing.Size(112, 25)
         Me.ucrChkBy.TabIndex = 7
         '
         'ucrSelectorColumn
@@ -1005,7 +1378,8 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(787, 599)
+        Me.ClientSize = New System.Drawing.Size(835, 626)
+        Me.Controls.Add(Me.grpCoin)
         Me.Controls.Add(Me.grpVerification)
         Me.Controls.Add(Me.ucrChkDisplayModel)
         Me.Controls.Add(Me.ucrChkSummaryModel)
@@ -1026,7 +1400,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.Controls.Add(Me.ucrReceiverForTestColumn)
         Me.Controls.Add(Me.grpAgricolae)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgHypothesisTestsCalculator"
@@ -1037,6 +1411,12 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpStats2.ResumeLayout(False)
         Me.grpAgricolae.ResumeLayout(False)
         Me.grpVerification.ResumeLayout(False)
+        Me.grpCoin.ResumeLayout(False)
+        Me.grpScale.ResumeLayout(False)
+        Me.grpContigency.ResumeLayout(False)
+        Me.grpSymmetry.ResumeLayout(False)
+        Me.grpCorrelation.ResumeLayout(False)
+        Me.grpLocation.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1120,4 +1500,33 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdBinary As Button
     Friend WithEvents ucrChkDisplayModel As ucrCheck
     Friend WithEvents ucrChkSummaryModel As ucrCheck
+    Friend WithEvents grpCoin As GroupBox
+    Friend WithEvents grpScale As GroupBox
+    Friend WithEvents grpContigency As GroupBox
+    Friend WithEvents grpSymmetry As GroupBox
+    Friend WithEvents grpCorrelation As GroupBox
+    Friend WithEvents grpLocation As GroupBox
+    Friend WithEvents cmdConover As Button
+    Friend WithEvents cmdFligner1 As Button
+    Friend WithEvents cmdAnsari1 As Button
+    Friend WithEvents cmdMood1 As Button
+    Friend WithEvents cmdKlotz As Button
+    Friend WithEvents cmdLbl As Button
+    Friend WithEvents cmdCmh As Button
+    Friend WithEvents cmdChisq1 As Button
+    Friend WithEvents cmdQuade1 As Button
+    Friend WithEvents cmdFriedman1 As Button
+    Friend WithEvents cmdWilcoxsign As Button
+    Friend WithEvents cmdSign As Button
+    Friend WithEvents cmdKoziol As Button
+    Friend WithEvents cmdQuadrant As Button
+    Friend WithEvents cmdFisyat As Button
+    Friend WithEvents cmdSpearman As Button
+    Friend WithEvents cmdSavage As Button
+    Friend WithEvents cmdMedian1 As Button
+    Friend WithEvents cmdNormal As Button
+    Friend WithEvents cmdKruskal1 As Button
+    Friend WithEvents cmdWilcox1 As Button
+    Friend WithEvents cmdOneway1 As Button
+    Friend WithEvents cmdTaha As Button
 End Class

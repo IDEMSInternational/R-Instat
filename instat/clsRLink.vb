@@ -321,7 +321,7 @@ Public Class RLink
         Return bClose
     End Function
 
-
+    '''--------------------------------------------------------------------------------------------
     ''' <summary> This method executes the <paramref name="strNewScript"/> R script and displays 
     '''           the output as text or graph (determined by <paramref name="strNewScript"/>).
     '''           <para>R commands may be split over multiple lines. This is only allowed if the  
@@ -331,23 +331,18 @@ Public Class RLink
     '''           entered by a human from a dialog window (e.g. a script window). These scripts 
     '''           may contain R commands split over multiple lines to make the commands more 
     '''           readable.</para>
-
+    ''' </summary>
     ''' <param name="strNewScript">    The R script to execute.</param>
     ''' <param name="strNewComment">   Shown as a comment. If this parameter is "" then shows 
     '''                                <paramref name="strNewScript"/> as the comment.</param>
-    ''' <param name="bClearScriptCmd"> (Optional) If true then the command buffer is flushed 
-    '''                                before <paramref name="strNewScript"/> is processed. 
-    '''                                Otherwise <paramref name="strNewScript"/> is treated as a 
-    '''                                continuation of the previous string that was sent to this 
-    '''                                function.</param>
+    ''' 
+    ''' <returns> Any text at the end of <paramref name="strNewScript"/> that was not executed.
+    '''           If all the text in <paramref name="strNewScript"/> was executed then returns "".
+    '''           </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function RunScriptFromWindow(strNewScript As String, strNewComment As String) As String
+        Dim strScriptCmd As String = ""
 
-    Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String, Optional bClearScriptCmd As Boolean = True)
-        Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
-
-        'by default, flush out any unexecuted full or partial commands
-        If bClearScriptCmd Then
-            strScriptCmd = ""
-        End If
 
         'for each line in script
         For Each strScriptLine As String In strNewScript.Split(Environment.NewLine)
@@ -369,19 +364,17 @@ Public Class RLink
             'else append line of script to command
             strScriptCmd &= strScriptLine
 
-            'if line ends in a '+', ',', or '%>%'; or there are open curly braces, 
+            'if line ends in a '+', ',', or '%>%'; or there are open curly braces; or open quotations, 
             '    then assume command is not complete
             Dim cLastChar As Char = strTrimmedLine.Last
             Dim strLast3Chars As String = ""
             Dim iNumOpenCurlies = strScriptCmd.Where(Function(c) c = "{"c).Count
             Dim iNumClosedCurlies = strScriptCmd.Where(Function(c) c = "}"c).Count
+            Dim iNumDoubleQuotes = strScriptCmd.Where(Function(c) c = """"c).Count
             If strTrimmedLine.Length >= 3 Then
                 strLast3Chars = strTrimmedLine.Substring(strTrimmedLine.Length - 3)
             End If
-            If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" OrElse iNumOpenCurlies <> iNumClosedCurlies Then
-                If Not bClearScriptCmd Then 'only add carriage return if executing a single line (not needed when executing entire script window or selected text)
-                    strScriptCmd &= vbCrLf
-                End If
+            If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" OrElse iNumOpenCurlies <> iNumClosedCurlies OrElse iNumDoubleQuotes Mod 2 Then
                 Continue For
             End If
 
@@ -394,7 +387,8 @@ Public Class RLink
             strScriptCmd = ""
             strNewComment = ""
         Next
-    End Sub
+        Return strScriptCmd
+    End Function
 
     ''' <summary>   Closes down the R engine (which encapsulates the R environment). </summary>
     Public Sub CloseREngine()
@@ -1491,6 +1485,10 @@ Public Class RLink
                     clsGetItems.AddParameter("file", Chr(34) & strNcFilePath & Chr(34))
                 Case "variable_sets"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_variable_sets_names")
+                Case "table"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_table_names")
+                Case "calculation"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_calculation_names")
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
             If lstView.TopItem IsNot Nothing Then
