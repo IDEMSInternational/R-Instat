@@ -26,6 +26,7 @@ Partial Class sdgFiltersFromFactor
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.ucrFactorSelctor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
+        Me.lblFactor = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -50,10 +51,16 @@ Partial Class sdgFiltersFromFactor
         Me.ucrFactorReceiver.strNcFilePath = ""
         Me.ucrFactorReceiver.ucrSelector = Nothing
         '
+        'lblFactor
+        '
+        resources.ApplyResources(Me.lblFactor, "lblFactor")
+        Me.lblFactor.Name = "lblFactor"
+        '
         'sdgFiltersFromFactor
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.ucrFactorSelctor)
         Me.Controls.Add(Me.ucrBase)
@@ -62,10 +69,12 @@ Partial Class sdgFiltersFromFactor
         Me.MinimizeBox = False
         Me.Name = "sdgFiltersFromFactor"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtonsSubdialogue
     Friend WithEvents ucrFactorSelctor As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
+    Friend WithEvents lblFactor As Label
 End Class
