@@ -27,8 +27,6 @@ Public Class ucrInput
     Protected dcmMinimum As Decimal = Decimal.MinValue
     Protected dcmMaximum As Decimal = Decimal.MaxValue
     Protected bMinimumIncluded, bMaximumIncluded As Boolean
-    'used to determine if valid expressions are allowed for numeric validations e.g 20/2
-    Protected bNumericExpressionAllowed As Boolean = True
     Protected strDefaultType As String = ""
     Protected strDefaultPrefix As String = ""
     Protected WithEvents ucrDataFrameSelector As ucrDataFrame
@@ -39,6 +37,9 @@ Public Class ucrInput
     Private bPrivateAddQuotesIfUnrecognised As Boolean = True
     Protected dctDisplayParameterValues As New Dictionary(Of String, String)
     Protected bFirstLoad As Boolean = True
+
+    'used to determine if valid expressions are allowed for numeric validations e.g 20/2, 30-1
+    Protected bNumericExpressionAllowed As Boolean = True
 
     Public Sub New()
 
