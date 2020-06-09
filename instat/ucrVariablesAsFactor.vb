@@ -295,9 +295,20 @@ Public Class ucrVariablesAsFactor
             Return MyBase.Selector
         End Get
         Set(ucrNewSelector As ucrSelector)
+            'this by default adds the parent receiver to the list of receivers in the selector
             MyBase.Selector = ucrNewSelector
+            'we remove it here because the selector will manipulate the children receivers only
+            'todo. Currently the selector only uses the list of receiver to manipulate the focus switching, 
+            'in future the usage of the receivers could change which may require this line to be changed 
+            If MyBase.Selector IsNot Nothing Then
+                MyBase.Selector.RemoveReceiver(Me)
+            End If
+
+
+            'set the selector to the children receivers. This by default adds the receivers to the selector
             ucrSingleVariable.Selector = ucrNewSelector
             ucrMultipleVariables.Selector = ucrNewSelector
+
             If ucrNewSelector IsNot Nothing Then
                 ucrVariableSelector = TryCast(ucrNewSelector, ucrSelectorByDataFrame)
                 If ucrVariableSelector Is Nothing Then

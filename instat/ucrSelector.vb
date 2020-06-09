@@ -43,6 +43,10 @@ Public Class ucrSelector
 
     Protected bSilentDataFrameChange As Boolean = False
 
+    'this list is used to hold a list of receivers listening to this selector.
+    'the receivers are ordered by tab index and are used in autoswitching receiver after selection change
+    Private lstOrderedReceivers As New List(Of ucrReceiver)
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -187,8 +191,30 @@ Public Class ucrSelector
     Public Sub Add()
         If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
             CurrentReceiver.AddSelected()
-            CurrentReceiver.Focus()
+            CurrentReceiver.Focus() 'sets current focus enabling correct tab navigation
+            If CurrentReceiver.bAutoSwitchFromReceiver Then
+                AutoSwitchCurrentReceiver(CurrentReceiver)
+            End If
         End If
+    End Sub
+
+    Private Sub AutoSwitchCurrentReceiver(FromSelectedReceiver As ucrReceiver)
+        Dim ucrNewCurrentReceiver As ucrReceiver
+        For i As Integer = 0 To lstOrderedReceivers.Count - 2
+            If lstOrderedReceivers.Item(i) Is FromSelectedReceiver Then
+                ucrNewCurrentReceiver = lstOrderedReceivers.Item(i + 1)
+                If ucrNewCurrentReceiver.Visible AndAlso
+                   ucrNewCurrentReceiver.Enabled Then
+                    ucrNewCurrentReceiver.Focus() 'sets current focus enabling correct tab navigation
+                    SetCurrentReceiver(ucrNewCurrentReceiver)
+                Else
+                    AutoSwitchCurrentReceiver(ucrNewCurrentReceiver)
+                End If
+
+                Exit For
+
+            End If
+        Next
     End Sub
 
     'TODO can this be removed?
@@ -261,6 +287,7 @@ Public Class ucrSelector
             If ucrLinkedSelector IsNot Nothing Then
                 ucrLinkedSelector.AddToVariablesList(strVariable, strCurrentDataFrame)
             End If
+
             RaiseEvent VariablesInReceiversChanged()
         End If
     End Sub
@@ -440,4 +467,43 @@ Public Class ucrSelector
     Public Overridable Sub SetPrimaryDataFrameOptions(strNewPrimaryDataFrame As String, bNewOnlyLinkedToPrimaryDataFrames As Boolean, Optional bNewIncludePrimaryDataFrameAsLinked As Boolean = False)
 
     End Sub
+
+
+    ''' <summary>
+    ''' Adds passed receiver to the end of the receivers list
+    ''' The receiver is only added if it does not exist in the list
+    ''' </summary>
+    ''' <param name="ucrNewReceiver"></param>
+    Public Overridable Sub AddReceiver(ucrNewReceiver As ucrReceiver)
+        AddReceiver({ucrNewReceiver})
+    End Sub
+
+    ''' <summary>
+    ''' Adds passed enumerable of receivers to the end of the receivers list
+    ''' The reciver is only added if it does not exist in the list
+    ''' </summary>
+    ''' <param name="ucrNewReceivers"></param>
+    Public Overridable Sub AddReceiver(ucrNewReceivers As IEnumerable(Of ucrReceiver))
+        'add the receiver to the list if it's not already added
+        For Each ucr As ucrReceiver In ucrNewReceivers
+            If Not lstOrderedReceivers.Contains(ucr) Then
+                lstOrderedReceivers.Add(ucr)
+            End If
+        Next
+
+        'then order them by tab index. This will return an IOrderedEnumerable from which we get the list.
+        lstOrderedReceivers = (From ucr In lstOrderedReceivers Order By ucr.TabIndex).ToList
+    End Sub
+
+
+    ''' <summary>
+    ''' Removes the first occurrence of the passed receiver if found. 
+    ''' </summary>
+    ''' <param name="ucrReceiver"></param>
+    ''' <returns>true if item is successfully removed; otherwise, false. also returns false if item was not found in the list</returns>
+    Public Overridable Function RemoveReceiver(ucrReceiver As ucrReceiver) As Boolean
+        'todo.
+        Return lstOrderedReceivers.Remove(ucrReceiver)
+    End Function
+
 End Class
