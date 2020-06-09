@@ -24,6 +24,7 @@ Partial Class sdgFiltersFromFactor
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgFiltersFromFactor))
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
+        Me.ucrFactorSelctor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -31,10 +32,19 @@ Partial Class sdgFiltersFromFactor
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrFactorSelctor
+        '
+        Me.ucrFactorSelctor.bDropUnusedFilterLevels = False
+        Me.ucrFactorSelctor.bShowHiddenColumns = False
+        Me.ucrFactorSelctor.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrFactorSelctor, "ucrFactorSelctor")
+        Me.ucrFactorSelctor.Name = "ucrFactorSelctor"
+        '
         'sdgFiltersFromFactor
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrFactorSelctor)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -45,4 +55,5 @@ Partial Class sdgFiltersFromFactor
     End Sub
 
     Friend WithEvents ucrBase As ucrButtonsSubdialogue
+    Friend WithEvents ucrFactorSelctor As ucrSelectorByDataFrameAddRemove
 End Class
