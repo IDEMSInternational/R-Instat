@@ -126,7 +126,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -138,7 +138,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="ucrSelectorForRenameObject.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -163,7 +163,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorForRenameObject.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -174,8 +174,56 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>417, 264</value>
   </data>
+  <data name="lblType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 140</value>
+  </data>
+  <data name="lblType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 13</value>
+  </data>
+  <data name="lblType.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblType.Text" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="&gt;&gt;lblType.Name" xml:space="preserve">
+    <value>lblType</value>
+  </data>
+  <data name="&gt;&gt;lblType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblType.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 153</value>
+  </data>
+  <data name="ucrInputType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 21</value>
+  </data>
+  <data name="ucrInputType.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrInputType.Name" xml:space="preserve">
+    <value>ucrInputType</value>
+  </data>
+  <data name="&gt;&gt;ucrInputType.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputType.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrInputNewName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 107</value>
+    <value>262, 106</value>
   </data>
   <data name="ucrInputNewName.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 21</value>
@@ -193,7 +241,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputNewName.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="lblNewName.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 93</value>
@@ -217,10 +265,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblNewName.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="lblCurrentName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 44</value>
+    <value>262, 45</value>
   </data>
   <data name="lblCurrentName.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 15</value>
@@ -241,7 +289,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCurrentName.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -277,6 +325,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverCurrentName.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
 </root>
