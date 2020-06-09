@@ -28,6 +28,7 @@ Partial Class sdgFiltersFromFactor
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.ucrFactorLevel = New instat.ucrFactor()
+        Me.cmdToggleSelectAll = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -66,10 +67,17 @@ Partial Class sdgFiltersFromFactor
         Me.ucrFactorLevel.shtCurrSheet = Nothing
         Me.ucrFactorLevel.ucrChkLevels = Nothing
         '
+        'cmdToggleSelectAll
+        '
+        resources.ApplyResources(Me.cmdToggleSelectAll, "cmdToggleSelectAll")
+        Me.cmdToggleSelectAll.Name = "cmdToggleSelectAll"
+        Me.cmdToggleSelectAll.UseVisualStyleBackColor = True
+        '
         'sdgFiltersFromFactor
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdToggleSelectAll)
         Me.Controls.Add(Me.ucrFactorLevel)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrFactorReceiver)
@@ -89,4 +97,5 @@ Partial Class sdgFiltersFromFactor
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrFactorLevel As ucrFactor
+    Friend WithEvents cmdToggleSelectAll As Button
 End Class
