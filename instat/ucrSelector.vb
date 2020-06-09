@@ -191,31 +191,15 @@ Public Class ucrSelector
     Public Sub Add()
         If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
             CurrentReceiver.AddSelected()
-            CurrentReceiver.Focus() 'sets current focus enabling correct tab navigation
+            'sets current focus enabling correct tab navigation
+            CurrentReceiver.Focus()
+            'check if autoswitching from the receiver is allowed before doing an autoswitch. 
             If CurrentReceiver.bAutoSwitchFromReceiver Then
                 AutoSwitchCurrentReceiver(CurrentReceiver)
             End If
         End If
     End Sub
 
-    Private Sub AutoSwitchCurrentReceiver(FromSelectedReceiver As ucrReceiver)
-        Dim ucrNewCurrentReceiver As ucrReceiver
-        For i As Integer = 0 To lstOrderedReceivers.Count - 2
-            If lstOrderedReceivers.Item(i) Is FromSelectedReceiver Then
-                ucrNewCurrentReceiver = lstOrderedReceivers.Item(i + 1)
-                If ucrNewCurrentReceiver.Visible AndAlso
-                   ucrNewCurrentReceiver.Enabled Then
-                    ucrNewCurrentReceiver.Focus() 'sets current focus enabling correct tab navigation
-                    SetCurrentReceiver(ucrNewCurrentReceiver)
-                Else
-                    AutoSwitchCurrentReceiver(ucrNewCurrentReceiver)
-                End If
-
-                Exit For
-
-            End If
-        Next
-    End Sub
 
     'TODO can this be removed?
     'Public Sub AddVariable(strDataFrameName As String, strVariableName As String)
@@ -505,5 +489,28 @@ Public Class ucrSelector
         'todo.
         Return lstOrderedReceivers.Remove(ucrReceiver)
     End Function
+
+    ''' <summary>
+    ''' changes the focus of the next receiver from passed receiver and sets it as the 'current receiver' of the selector
+    ''' </summary>
+    ''' <param name="FromSelectedReceiver"></param>
+    Private Sub AutoSwitchCurrentReceiver(FromSelectedReceiver As ucrReceiver)
+        Dim ucrNewCurrentReceiver As ucrReceiver
+        For i As Integer = 0 To lstOrderedReceivers.Count - 2
+            If lstOrderedReceivers.Item(i) Is FromSelectedReceiver Then
+                ucrNewCurrentReceiver = lstOrderedReceivers.Item(i + 1)
+                If ucrNewCurrentReceiver.Visible AndAlso
+                   ucrNewCurrentReceiver.Enabled Then
+                    ucrNewCurrentReceiver.Focus() 'sets current focus enabling correct tab navigation
+                    SetCurrentReceiver(ucrNewCurrentReceiver)
+                Else
+                    AutoSwitchCurrentReceiver(ucrNewCurrentReceiver)
+                End If
+
+                Exit For
+
+            End If
+        Next
+    End Sub
 
 End Class
