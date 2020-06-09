@@ -30,6 +30,8 @@ Partial Class sdgFiltersFromFactor
         Me.ucrFactorLevel = New instat.ucrFactor()
         Me.cmdToggleSelectAll = New System.Windows.Forms.Button()
         Me.ucrChkAndExistingFilter = New instat.ucrCheck()
+        Me.ucrReceiverExistingFilter = New instat.ucrReceiverSingle()
+        Me.lblExsistingFilter = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -80,10 +82,26 @@ Partial Class sdgFiltersFromFactor
         resources.ApplyResources(Me.ucrChkAndExistingFilter, "ucrChkAndExistingFilter")
         Me.ucrChkAndExistingFilter.Name = "ucrChkAndExistingFilter"
         '
+        'ucrReceiverExistingFilter
+        '
+        Me.ucrReceiverExistingFilter.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverExistingFilter, "ucrReceiverExistingFilter")
+        Me.ucrReceiverExistingFilter.Name = "ucrReceiverExistingFilter"
+        Me.ucrReceiverExistingFilter.Selector = Nothing
+        Me.ucrReceiverExistingFilter.strNcFilePath = ""
+        Me.ucrReceiverExistingFilter.ucrSelector = Nothing
+        '
+        'lblExsistingFilter
+        '
+        resources.ApplyResources(Me.lblExsistingFilter, "lblExsistingFilter")
+        Me.lblExsistingFilter.Name = "lblExsistingFilter"
+        '
         'sdgFiltersFromFactor
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblExsistingFilter)
+        Me.Controls.Add(Me.ucrReceiverExistingFilter)
         Me.Controls.Add(Me.ucrChkAndExistingFilter)
         Me.Controls.Add(Me.cmdToggleSelectAll)
         Me.Controls.Add(Me.ucrFactorLevel)
@@ -107,4 +125,6 @@ Partial Class sdgFiltersFromFactor
     Friend WithEvents ucrFactorLevel As ucrFactor
     Friend WithEvents cmdToggleSelectAll As Button
     Friend WithEvents ucrChkAndExistingFilter As ucrCheck
+    Friend WithEvents ucrReceiverExistingFilter As ucrReceiverSingle
+    Friend WithEvents lblExsistingFilter As Label
 End Class
