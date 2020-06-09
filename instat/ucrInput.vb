@@ -26,6 +26,7 @@ Public Class ucrInput
     Protected dcmMinimum As Decimal = Decimal.MinValue
     Protected dcmMaximum As Decimal = Decimal.MaxValue
     Protected bMinimumIncluded, bMaximumIncluded As Boolean
+    Protected bExpressionAllowed As Boolean = True
     Protected strDefaultType As String = ""
     Protected strDefaultPrefix As String = ""
     Protected WithEvents ucrDataFrameSelector As ucrDataFrame
@@ -184,8 +185,9 @@ Public Class ucrInput
         End If
     End Sub
 
-    Public Sub SetValidationTypeAsNumeric(Optional dcmMin As Decimal = Decimal.MinValue, Optional bIncludeMin As Boolean = True, Optional dcmMax As Decimal = Decimal.MaxValue, Optional bIncludeMax As Boolean = True)
+    Public Sub SetValidationTypeAsNumeric(Optional dcmMin As Decimal = Decimal.MinValue, Optional bIncludeMin As Boolean = True, Optional dcmMax As Decimal = Decimal.MaxValue, Optional bIncludeMax As Boolean = True, Optional bExpressionAllowed As Boolean = True)
         strValidationType = "Numeric"
+        Me.bExpressionAllowed = bExpressionAllowed
         If dcmMin <> Decimal.MinValue Then
             dcmMinimum = dcmMin
             bMinimumIncluded = bIncludeMin
@@ -338,6 +340,17 @@ Public Class ucrInput
         If strText <> "" AndAlso (strValuesToIgnore Is Nothing OrElse (strValuesToIgnore IsNot Nothing AndAlso Not strValuesToIgnore.Contains(strText))) Then
             If Not IsNumeric(strText) Then
                 iType = 1
+
+                If bExpressionAllowed Then
+                    'todo. is check if the expression is.numeric(strText) returns true
+                    Dim bExpressionIsNumeric As Boolean
+
+                    If bExpressionIsNumeric Then
+
+
+                        iType = 0
+                    End If
+                End If
             Else
                 dcmText = Convert.ToDecimal(strText)
                 If (dcmText < dcmMinimum) OrElse (dcmText > dcmMaximum) OrElse (Not bMinimumIncluded And dcmText <= dcmMinimum) OrElse (Not bMaximumIncluded And dcmText >= dcmMaximum) Then
