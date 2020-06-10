@@ -229,7 +229,7 @@ Public Class ucrAxes
         ucrNudDateBreak.SetParameter(New RParameter("value", 0, bNewIncludeArgumentName:=False))
 
         ucrInputComboDateBreak.SetParameter(New RParameter("duration", 1, bNewIncludeArgumentName:=False))
-        ucrInputComboDateBreak.SetItems({"sec", "min", "hour", "day", "week", "month", "year"})
+        ucrInputComboDateBreak.SetItems({"year", "month", "week", "day", "hour", "min", "sec"})
         ucrInputComboDateBreak.SetName("year")
         ucrInputComboDateBreak.SetDropDownStyleAsNonEditable()
         ucrInputComboDateBreak.AddQuotesIfUnrecognised = False

@@ -1020,7 +1020,7 @@
     <value>95, 52</value>
   </data>
   <data name="ucrInputComboDateLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 21</value>
+    <value>135, 21</value>
   </data>
   <data name="ucrInputComboDateLabel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1062,7 +1062,7 @@
     <value>145, 28</value>
   </data>
   <data name="ucrInputComboDateBreak.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 21</value>
+    <value>85, 21</value>
   </data>
   <data name="ucrInputComboDateBreak.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1159,10 +1159,10 @@
     <value>5</value>
   </data>
   <data name="ucrDtpLowerLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 98</value>
+    <value>95, 98</value>
   </data>
   <data name="ucrDtpLowerLimit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 20</value>
+    <value>136, 20</value>
   </data>
   <data name="ucrDtpLowerLimit.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1180,10 +1180,10 @@
     <value>6</value>
   </data>
   <data name="ucrDtpUpperLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 126</value>
+    <value>95, 126</value>
   </data>
   <data name="ucrDtpUpperLimit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 20</value>
+    <value>135, 20</value>
   </data>
   <data name="ucrDtpUpperLimit.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
