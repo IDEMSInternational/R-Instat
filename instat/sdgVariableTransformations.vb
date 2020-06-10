@@ -62,8 +62,6 @@ Public Class sdgVariableTransformations
         ucrPnlChooseFunction.AddToLinkedControls(ucrChkMonthAsFactor, {rdoMonth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlChooseFunction.AddToLinkedControls(ucrChkYearAsFactor, {rdoYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlChooseFunction.AddToLinkedControls(ucrInputTxtOwn, {rdoCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'temp disabled as need to use I(x ^ 2) instead of x ^ 2 as this has different meaning in a formula
-        'rdoPolynomial.Enabled = False
 
         ucrNudPolynomial.SetParameter(New RParameter("degree", 1))
 
@@ -158,10 +156,18 @@ Public Class sdgVariableTransformations
         ucrInputPreview.SetName(clsTransformParameter.ToScript(""))
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary> Updates the ucrInputText when valeus of the ucrInputTxtBrokenStick,ucrNudSpplineDf and ucrNudPolynomial change     </summary>
+    '''--------------------------------------------------------------------------------------------
     Private Sub ucrInputTxtBrokenStick_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTxtBrokenStick.ControlContentsChanged, ucrNudSplineDF.ControlValueChanged, ucrNudPolynomial.ControlValueChanged
         UpdatePreview()
     End Sub
 
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>  Finds the median of the X variable from the main dialogue and sets the value to the broken stick textbox
+    '''             </summary>
+    '''--------------------------------------------------------------------------------------------
     Private Sub GetColumnMidian()
         Dim expColumn As SymbolicExpression
         Dim medianValue As String
@@ -185,22 +191,35 @@ Public Class sdgVariableTransformations
         End If
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary> Updates the ucrInputText  and converts the year and month functions to factors when values for the ucrChkMonth  and ucrChkYearAsFActor change </summary>
+    '''--------------------------------------------------------------------------------------------
     Private Sub AsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYearAsFactor.ControlValueChanged, ucrChkMonthAsFactor.ControlValueChanged
         ConvertToFactorOrNot()
         UpdatePreview()
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary> Converts the month and year functions to factors    </summary>
+    '''--------------------------------------------------------------------------------------------
     Private Sub ConvertToFactorOrNot()
-        If ucrChkMonthAsFactor.Checked AndAlso rdoMonth.Checked Then
-            clsAsFactorFunc.AddParameter(clsRFunctionParameter:=clsMonthFunc, iPosition:=1)
-            clsTransformParameter.SetArgument(clsAsFactorFunc)
-        ElseIf rdoMonth.Checked AndAlso Not ucrChkMonthAsFactor.Checked Then
-            clsTransformParameter.SetArgument(clsMonthFunc)
-        ElseIf ucrChkYearAsFactor.Checked AndAlso rdoYear.Checked Then
-            clsAsFactorFunc.AddParameter(clsRFunctionParameter:=clsYearFunc, iPosition:=1)
-            clsTransformParameter.SetArgument(clsAsFactorFunc)
-        ElseIf rdoYear.Checked AndAlso Not ucrChkYearAsFactor.Checked Then
-            clsTransformParameter.SetArgument(clsYearFunc)
+        If rdoMonth.Checked Then
+            If ucrChkMonthAsFactor.Checked Then
+                clsAsFactorFunc.AddParameter(clsRFunctionParameter:=clsMonthFunc, iPosition:=1)
+                clsTransformParameter.SetArgument(clsAsFactorFunc)
+            Else
+                clsTransformParameter.SetArgument(clsMonthFunc)
+            End If
+            Exit Sub
+        End If
+
+        If rdoYear.Checked Then
+            If ucrChkYearAsFactor.Checked Then
+                clsAsFactorFunc.AddParameter(clsRFunctionParameter:=clsYearFunc, iPosition:=1)
+                clsTransformParameter.SetArgument(clsAsFactorFunc)
+            Else
+                clsTransformParameter.SetArgument(clsYearFunc)
+            End If
         End If
     End Sub
 

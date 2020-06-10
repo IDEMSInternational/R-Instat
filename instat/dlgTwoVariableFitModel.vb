@@ -36,9 +36,6 @@ Public Class dlgTwoVariableFitModel
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
 
-    Private Sub ucrFamily_EnabledChanged(sender As Object, e As EventArgs) Handles ucrDistributionChoice.EnabledChanged
-
-    End Sub
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
