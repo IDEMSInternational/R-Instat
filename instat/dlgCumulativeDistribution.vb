@@ -131,7 +131,8 @@ Public Class dlgCumulativeDistribution
 
 
         clsStatEcdfGeomFunc.SetRCommand("stat_ecdf")
-        clsStatEcdfGeomFunc.AddParameter("geom", strParameterValue:=Chr(34) & "point" & Chr(34))
+        clsStatEcdfGeomFunc.AddParameter("geom", strParameterValue:=Chr(34) & "point" & Chr(34), iPosition:=0)
+        clsStatEcdfGeomFunc.AddParameter("pad", strParameterValue:="FALSE")
 
         clsSequence = New RFunction
         clsSequence.SetRCommand("seq")
