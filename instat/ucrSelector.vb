@@ -200,7 +200,6 @@ Public Class ucrSelector
         End If
     End Sub
 
-
     'TODO can this be removed?
     'Public Sub AddVariable(strDataFrameName As String, strVariableName As String)
     '    Dim lviTemp As New ListViewItem
@@ -271,7 +270,6 @@ Public Class ucrSelector
             If ucrLinkedSelector IsNot Nothing Then
                 ucrLinkedSelector.AddToVariablesList(strVariable, strCurrentDataFrame)
             End If
-
             RaiseEvent VariablesInReceiversChanged()
         End If
     End Sub
@@ -474,7 +472,6 @@ Public Class ucrSelector
                 lstOrderedReceivers.Add(ucr)
             End If
         Next
-
         'then order them by tab index. This will return an IOrderedEnumerable from which we get the list.
         lstOrderedReceivers = (From ucr In lstOrderedReceivers Order By ucr.TabIndex).ToList
     End Sub
@@ -486,7 +483,6 @@ Public Class ucrSelector
     ''' <param name="ucrReceiver"></param>
     ''' <returns>true if item is successfully removed; otherwise, false. also returns false if item was not found in the list</returns>
     Public Overridable Function RemoveReceiver(ucrReceiver As ucrReceiver) As Boolean
-        'todo.
         Return lstOrderedReceivers.Remove(ucrReceiver)
     End Function
 
@@ -506,9 +502,7 @@ Public Class ucrSelector
                 Else
                     AutoSwitchCurrentReceiver(ucrNewCurrentReceiver)
                 End If
-
                 Exit For
-
             End If
         Next
     End Sub

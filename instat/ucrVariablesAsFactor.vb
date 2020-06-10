@@ -299,11 +299,10 @@ Public Class ucrVariablesAsFactor
             MyBase.Selector = ucrNewSelector
             'we remove it here because the selector will manipulate the children receivers only
             'todo. Currently the selector only uses the list of receiver to manipulate the focus switching, 
-            'in future the usage of the receivers could change which may require this line to be changed 
+            'in future the usage of the receivers could change which may require this implementation to be changed 
             If MyBase.Selector IsNot Nothing Then
                 MyBase.Selector.RemoveReceiver(Me)
             End If
-
 
             'set the selector to the children receivers. This by default adds the receivers to the selector
             ucrSingleVariable.Selector = ucrNewSelector
