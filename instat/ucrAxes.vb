@@ -190,6 +190,12 @@ Public Class ucrAxes
         ucrInputExpand.SetValidationTypeAsNumericList()
 
         'Date X Scale
+        dctDateFormat.Add("Year(4-digit)", Chr(34) & "%Y" & Chr(34))
+        dctDateFormat.Add("Month", Chr(34) & "%m" & Chr(34))
+        dctDateFormat.Add("Month_abbr", Chr(34) & "%b" & Chr(34))
+
+        dctDateFormat.Add("Year(4-digit)-Month", Chr(34) & "%Y-%m" & Chr(34))
+
         dctDateFormat.Add("Year(4-digit)-Month-Day", Chr(34) & "%Y-%m-%d" & Chr(34))
         dctDateFormat.Add("Year(4-digit)/Month/Day", Chr(34) & "%Y/%m/%d" & Chr(34))
         dctDateFormat.Add("Year(4-digit)-Month(Full Name)-Day", Chr(34) & "%Y-%B-%d" & Chr(34))
