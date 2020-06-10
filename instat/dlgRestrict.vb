@@ -213,6 +213,6 @@ Public Class dlgRestrict
     End Sub
 
     Private Sub cmdFilterFromFactors_Click(sender As Object, e As EventArgs) Handles cmdFilterFromFactors.Click
-        'sdgFiltersFromFactor.ShowDialog() 'currently work in progress will soon be enabled!
+        sdgFiltersFromFactor.ShowDialog()
     End Sub
 End Class
