@@ -187,7 +187,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpMainKeyboard.Controls.Add(Me.cmdAlt)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquiggle)
         Me.grpMainKeyboard.Controls.Add(Me.cmdSquareBrackets)
-        Me.grpMainKeyboard.Location = New System.Drawing.Point(390, 313)
+        Me.grpMainKeyboard.Location = New System.Drawing.Point(406, 347)
         Me.grpMainKeyboard.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpMainKeyboard.Name = "grpMainKeyboard"
         Me.grpMainKeyboard.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -1487,7 +1487,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkDisplayModel
         '
         Me.ucrChkDisplayModel.Checked = False
-        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(12, 350)
+        Me.ucrChkDisplayModel.Location = New System.Drawing.Point(12, 341)
         Me.ucrChkDisplayModel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrChkDisplayModel.Name = "ucrChkDisplayModel"
         Me.ucrChkDisplayModel.Size = New System.Drawing.Size(139, 20)
@@ -1496,7 +1496,7 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrChkSummaryModel
         '
         Me.ucrChkSummaryModel.Checked = False
-        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(12, 310)
+        Me.ucrChkSummaryModel.Location = New System.Drawing.Point(12, 313)
         Me.ucrChkSummaryModel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrChkSummaryModel.Name = "ucrChkSummaryModel"
         Me.ucrChkSummaryModel.Size = New System.Drawing.Size(139, 20)
@@ -1504,10 +1504,10 @@ Partial Class dlgHypothesisTestsCalculator
         '
         'ucrTryModelling
         '
-        Me.ucrTryModelling.Location = New System.Drawing.Point(6, 414)
+        Me.ucrTryModelling.Location = New System.Drawing.Point(4, 414)
         Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrTryModelling.Name = "ucrTryModelling"
-        Me.ucrTryModelling.Size = New System.Drawing.Size(480, 28)
+        Me.ucrTryModelling.Size = New System.Drawing.Size(393, 28)
         Me.ucrTryModelling.TabIndex = 17
         '
         'ucrReceiverMultiple
