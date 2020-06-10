@@ -32,11 +32,23 @@ Public Class ucrSave
     ''' <summary>   True if the control has not yet loaded. </summary>
     Public bFirstLoad As Boolean = True
 
-    ''' <summary>   True to show, false to hide the check box. </summary>
+    ''' <summary>   True to show, false to hide the check box. <para>
+    '''             Note: This control can either display a check box or a label but cannot 
+    '''             display both. </para><para>
+    '''             If a checkbox is displayed then saving is optional (checked means save, 
+    '''             unchecked means don't save).</para><para>
+    '''             If a label is displayed then saving is mandatory (i.e. the dialog is forcing 
+    '''             the user to save the object).</para><para>
+    '''             Normally which to display is set once when the dialog loads and then does not
+    '''             change. However, in rare cases it may change dynamically after the control is 
+    '''             initialised. For example, radio buttons may require the control to switch 
+    '''             between different states.</para>
+    '''             </summary>
     Private bShowCheckBox As Boolean = True
 
     ''' <summary>   True to show, false to hide the label. </summary>
-    Private bShowLabel As Boolean = False
+    '''             (mutually exclusive with bShowCheckBox, see note above) 
+    Private bShowLabel As Boolean = False 'TODO SJL 04/06/20 always set to the opposite of bShowCheckBox. Remove bShowLabel?
 
     ''' <summary>   Type of object saved by this control 
     '''             (valid values are: 'column', 'dataframe', 'graph', model', 'surv', 'table') 
@@ -46,8 +58,19 @@ Public Class ucrSave
     ''' <summary>   Prefix used for the default name displayed in the text/combo box </summary>
     Private strPrefix As String
 
-    ''' <summary>   True if this control has a combo box rather than a text box
-    '''             (this control can have either a combo box or a text box but cannot have both) 
+    ''' <summary>   True if this control has a combo box rather than a text box.<para>
+    '''             Note: This control can have either a combo box or a text box but cannot have 
+    '''             both. </para><para>
+    '''             A text box is normally used when pre-defined names aren’t of any interest to 
+    '''             the user</para><para>
+    '''             A combo box is normally used when the user needs to see previously defined 
+    '''             names (e.g. existing column names, to prevent accidentally overwriting them).
+    '''             The user could then consciously select an existing column (and may be warned 
+    '''             that the column will be overwritten), or specify a new name that isn't already 
+    '''             assigned to an existing column. The user may wish to overwrite an existing 
+    '''             column if they are doing a series of intermediate steps. They would store each 
+    '''             step in a new column but wouldn't want to keep a column for each step so they 
+    '''             may overwrite the column with the next step of their analysis.</para>
     '''             </summary>
     Private bIsComboBox As Boolean = True
 
