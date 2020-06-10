@@ -349,10 +349,8 @@ Public Class ucrInput
                     'is.numeric(x) returns true if the x expression is a valid one. 
                     'So we use it here to check validity of the entry
                     vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput("is.numeric(" & strText & ")", bSilent:=True)
-                    If vecOutput IsNot Nothing Then
-                        If vecOutput.Length > 0 AndAlso Mid(vecOutput(0), 5).ToUpper = "TRUE" Then
-                            iType = 0 'set as valid entry
-                        End If
+                    If vecOutput IsNot Nothing AndAlso vecOutput.Length > 0 AndAlso Mid(vecOutput(0), 5).ToUpper = "TRUE" Then
+                        iType = 0 'set as valid entry
                     End If
                 End If
             Else
