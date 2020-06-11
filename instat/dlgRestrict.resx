@@ -119,14 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdDefineNewFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>339, 117</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cmdDefineNewFilter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>254, 91</value>
   </data>
   <data name="cmdDefineNewFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 28</value>
+    <value>120, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdDefineNewFilter.TabIndex" type="System.Int32, mscorlib">
@@ -148,13 +144,14 @@
     <value>9</value>
   </data>
   <data name="ucrSelectorFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 12</value>
+    <value>10, 10</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSelectorFilter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrSelectorFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 222</value>
+    <value>210, 180</value>
   </data>
   <data name="ucrSelectorFilter.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -172,13 +169,13 @@
     <value>8</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 410</value>
+    <value>10, 333</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>547, 65</value>
+    <value>410, 53</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -199,13 +196,10 @@
     <value>True</value>
   </data>
   <data name="lblFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 55</value>
-  </data>
-  <data name="lblFilter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>248, 40</value>
   </data>
   <data name="lblFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 17</value>
+    <value>32, 13</value>
   </data>
   <data name="lblFilter.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -229,22 +223,19 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>557, 478</value>
+    <value>418, 388</value>
   </data>
   <data name="cmdFilterFromFactors.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdFilterFromFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>339, 161</value>
-  </data>
-  <data name="cmdFilterFromFactors.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>254, 129</value>
   </data>
   <data name="cmdFilterFromFactors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 28</value>
+    <value>120, 23</value>
   </data>
   <data name="cmdFilterFromFactors.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -271,13 +262,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdEditFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>339, 206</value>
-  </data>
-  <data name="cmdEditFilter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>254, 167</value>
   </data>
   <data name="cmdEditFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 28</value>
+    <value>120, 23</value>
   </data>
   <data name="cmdEditFilter.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -298,13 +286,13 @@
     <value>1</value>
   </data>
   <data name="ucrNewDataFrameName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 313</value>
+    <value>10, 254</value>
   </data>
   <data name="ucrNewDataFrameName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 6, 5, 6</value>
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewDataFrameName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 30</value>
+    <value>291, 24</value>
   </data>
   <data name="ucrNewDataFrameName.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -321,21 +309,6 @@
   <data name="&gt;&gt;ucrNewDataFrameName.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="rdoApplyAsSubset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 27</value>
-  </data>
-  <data name="rdoApplyAsSubset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="rdoApplyAsSubset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 21</value>
-  </data>
-  <data name="rdoApplyAsSubset.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="rdoApplyAsSubset.Text" xml:space="preserve">
-    <value>Apply As Subset</value>
-  </data>
   <data name="&gt;&gt;rdoApplyAsSubset.Name" xml:space="preserve">
     <value>rdoApplyAsSubset</value>
   </data>
@@ -347,21 +320,6 @@
   </data>
   <data name="&gt;&gt;rdoApplyAsSubset.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="rdoApplyAsFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 27</value>
-  </data>
-  <data name="rdoApplyAsFilter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="rdoApplyAsFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 21</value>
-  </data>
-  <data name="rdoApplyAsFilter.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="rdoApplyAsFilter.Text" xml:space="preserve">
-    <value>Apply As Filter</value>
   </data>
   <data name="&gt;&gt;rdoApplyAsFilter.Name" xml:space="preserve">
     <value>rdoApplyAsFilter</value>
@@ -376,16 +334,10 @@
     <value>1</value>
   </data>
   <data name="grpApplyOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 242</value>
-  </data>
-  <data name="grpApplyOptions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="grpApplyOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>10, 197</value>
   </data>
   <data name="grpApplyOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 65</value>
+    <value>378, 53</value>
   </data>
   <data name="grpApplyOptions.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -406,13 +358,13 @@
     <value>3</value>
   </data>
   <data name="ucrInputFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, 350</value>
+    <value>163, 284</value>
   </data>
   <data name="ucrInputFilterPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 7, 9, 7</value>
+    <value>7, 6, 7, 6</value>
   </data>
   <data name="ucrInputFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 52</value>
+    <value>246, 42</value>
   </data>
   <data name="ucrInputFilterPreview.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -430,13 +382,10 @@
     <value>4</value>
   </data>
   <data name="lblFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 351</value>
-  </data>
-  <data name="lblFilterPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+    <value>10, 285</value>
   </data>
   <data name="lblFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 16</value>
+    <value>147, 13</value>
   </data>
   <data name="lblFilterPreview.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -456,9 +405,6 @@
   <data name="&gt;&gt;lblFilterPreview.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -472,13 +418,13 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 74</value>
+    <value>245, 58</value>
   </data>
   <data name="ucrReceiverFilter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 25</value>
+    <value>129, 20</value>
   </data>
   <data name="ucrReceiverFilter.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -494,5 +440,53 @@
   </data>
   <data name="&gt;&gt;ucrReceiverFilter.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="rdoApplyAsSubset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="rdoApplyAsSubset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 17</value>
+  </data>
+  <data name="rdoApplyAsSubset.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoApplyAsSubset.Text" xml:space="preserve">
+    <value>Apply As Subset</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsSubset.Name" xml:space="preserve">
+    <value>rdoApplyAsSubset</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsSubset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsSubset.Parent" xml:space="preserve">
+    <value>grpApplyOptions</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsSubset.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoApplyAsFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 22</value>
+  </data>
+  <data name="rdoApplyAsFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 17</value>
+  </data>
+  <data name="rdoApplyAsFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoApplyAsFilter.Text" xml:space="preserve">
+    <value>Apply As Filter</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsFilter.Name" xml:space="preserve">
+    <value>rdoApplyAsFilter</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsFilter.Parent" xml:space="preserve">
+    <value>grpApplyOptions</value>
+  </data>
+  <data name="&gt;&gt;rdoApplyAsFilter.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
 </root>
