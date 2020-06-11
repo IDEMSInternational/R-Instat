@@ -24,8 +24,8 @@ Public Class sdgVariableTransformations
     Private clsContainingCode As New RCodeStructure
     Private clsTransformParameter As New RParameter
 
-    Private clsBrokenStickFirOperator As New ROperator
-    Private clsBrokenStickSecOperator As New ROperator
+    Private clsBrokenStickFirstOperator As New ROperator
+    Private clsBrokenStickSecondOperator As New ROperator
     Private clsBrokenStickGeneralOperator As New ROperator
 
     Private clsSplineFunc As New RFunction
@@ -79,7 +79,7 @@ Public Class sdgVariableTransformations
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControls(clsNewFormulaOperator As ROperator, clsNewTransformParameter As RParameter, clsNewTransformFunction As RFunction, strVariableName As String, Optional clsNewBrokenStickFirOperator As ROperator = Nothing, Optional clsNewBrokenStickSecOperator As ROperator = Nothing, Optional clsNewBrokenStickGeneralOperator As ROperator = Nothing, Optional clsNewSplineFunc As RFunction = Nothing, Optional clsNewPowerOperator As ROperator = Nothing, Optional clsNewPolynomialFunc As RFunction = Nothing, Optional clsNewMonthFunc As RFunction = Nothing, Optional clsNewYearFunc As RFunction = Nothing, Optional clsNewAsFactorFunc As RFunction = Nothing, Optional strNewCurDataType As String = "", Optional strNewDataName As String = "", Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControls(clsNewFormulaOperator As ROperator, clsNewTransformParameter As RParameter, clsNewTransformFunction As RFunction, strVariableName As String, Optional clsNewBrokenStickFirstOperator As ROperator = Nothing, Optional clsNewBrokenStickSecondOperator As ROperator = Nothing, Optional clsNewBrokenStickGeneralOperator As ROperator = Nothing, Optional clsNewSplineFunc As RFunction = Nothing, Optional clsNewPowerOperator As ROperator = Nothing, Optional clsNewPolynomialFunc As RFunction = Nothing, Optional clsNewMonthFunc As RFunction = Nothing, Optional clsNewYearFunc As RFunction = Nothing, Optional clsNewAsFactorFunc As RFunction = Nothing, Optional strNewCurDataType As String = "", Optional strNewDataName As String = "", Optional bReset As Boolean = False)
         Dim strParamName As String
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -89,8 +89,8 @@ Public Class sdgVariableTransformations
         clsPolynomialFunc = clsNewPolynomialFunc
         clsTransformParameter = clsNewTransformParameter
         clsContainingCode = clsNewFormulaOperator
-        clsBrokenStickFirOperator = clsNewBrokenStickFirOperator
-        clsBrokenStickSecOperator = clsNewBrokenStickSecOperator
+        clsBrokenStickFirstOperator = clsNewBrokenStickFirstOperator
+        clsBrokenStickSecondOperator = clsNewBrokenStickSecondOperator
         clsBrokenStickGeneralOperator = clsNewBrokenStickGeneralOperator
         clsSplineFunc = clsNewSplineFunc
         clsAsFactorFunc = clsNewAsFactorFunc
@@ -113,11 +113,11 @@ Public Class sdgVariableTransformations
         ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoYear, strParamName, "year")
         ucrPnlChooseFunction.bAllowNonConditionValues = True 'temp fix
 
-        ucrInputTxtBrokenStick.AddAdditionalCodeParameterPair(clsBrokenStickSecOperator, New RParameter("b", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrInputTxtBrokenStick.AddAdditionalCodeParameterPair(clsBrokenStickSecondOperator, New RParameter("b", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
 
         ucrPnlChooseFunction.SetRCode(clsContainingCode, bReset, bCloneIfNeeded:=True)
         ucrNudPolynomial.SetRCode(clsPolynomialFunc, bReset, bCloneIfNeeded:=True)
-        ucrInputTxtBrokenStick.SetRCode(clsBrokenStickFirOperator, bReset, bCloneIfNeeded:=True)
+        ucrInputTxtBrokenStick.SetRCode(clsBrokenStickFirstOperator, bReset, bCloneIfNeeded:=True)
         ucrNudSplineDF.SetRCode(clsSplineFunc, bReset, bCloneIfNeeded:=True)
 
         showYearAndMonthFunc(strNewCurDataType)
@@ -157,7 +157,11 @@ Public Class sdgVariableTransformations
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary> Updates the ucrInputText when valeus of the ucrInputTxtBrokenStick,ucrNudSpplineDf and ucrNudPolynomial change     </summary>
+    ''' <summary>   Handles event triggered when the user changes values in the broken stick 
+    ''' textbox/SplineDf Nud/polynomial by Updating the text in the previewtextbox 
+    ''' </summary>
+    '''
+    ''' <param name="ucrChangedControl ">   ucrInputTxtBrokenStick/ucrNudSplineDF/ucrNudPolynomial </param>
     '''--------------------------------------------------------------------------------------------
     Private Sub ucrInputTxtBrokenStick_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTxtBrokenStick.ControlContentsChanged, ucrNudSplineDF.ControlValueChanged, ucrNudPolynomial.ControlValueChanged
         UpdatePreview()
@@ -165,7 +169,8 @@ Public Class sdgVariableTransformations
 
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>  Finds the median of the X variable from the main dialogue and sets the value to the broken stick textbox
+    ''' <summary>  Finds the median of the X variable from the main dialogue and sets the
+    '''            broken stick textbox to this value
     '''             </summary>
     '''--------------------------------------------------------------------------------------------
     Private Sub GetColumnMidian()
@@ -192,7 +197,9 @@ Public Class sdgVariableTransformations
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary> Updates the ucrInputText  and converts the year and month functions to factors when values for the ucrChkMonth  and ucrChkYearAsFActor change </summary>
+    ''' <summary> Updates the preview textbox  and converts the year/month function to factor
+    ''' when values from the month checkbox/year checkbox change 
+    ''' </summary>
     '''--------------------------------------------------------------------------------------------
     Private Sub AsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYearAsFactor.ControlValueChanged, ucrChkMonthAsFactor.ControlValueChanged
         ConvertToFactorOrNot()
@@ -200,7 +207,7 @@ Public Class sdgVariableTransformations
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary> Converts the month and year functions to factors    </summary>
+    ''' <summary> Converts the either the month or year function to factors    </summary>
     '''--------------------------------------------------------------------------------------------
     Private Sub ConvertToFactorOrNot()
         If rdoMonth.Checked Then

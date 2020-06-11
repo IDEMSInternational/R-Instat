@@ -23,7 +23,7 @@ Public Class dlgTwoVariableFitModel
     Public clsRPoisson, clsVisReg, clsRLeverage, clsRWriteLeverage, clsRResiduals, clsRStdResiduals, clsRWriteResiduals, clsRWriteStdResiduals, clsRgeom_point, clsRWriteFitted, clsRFittedValues, clsRestpvalFunction, clsRaovpvalFunction, clsRModelFunction, clsRaovFunction, clsRTTest, clsRFTest, clsRKruskalTest, clsRBinomial, clsRWilcoxTest, clsFamilyFunction, clsRFactor, clsRFactor2, clsRNumeric, clsxFunc, clsRMean, clsRMean2, clsRGroup, clsRGroup2, clsTFunc, clsRLength As New RFunction
     Private clsTransformFunction As New RFunction
 
-    Public clsBrokenStickFirOperator, clsBrokenStickSecOperator, clsBrokenStickThirdOperator, clsBrokenStickGeneralOperator As New ROperator
+    Public clsBrokenStickFirstOperator, clsBrokenStickSecondOperator, clsBrokenStickThirdOperator, clsBrokenStickGeneralOperator As New ROperator
     Public clsBrokenStickIFunc As New RFunction
     Public clsSplineFunc As New RFunction
     'General case codes
@@ -185,8 +185,8 @@ Public Class dlgTwoVariableFitModel
         clsHatvaluesFunction = New RFunction
         clsResidualFunction = New RFunction
         clsFittedValuesFunction = New RFunction
-        clsBrokenStickFirOperator = New ROperator
-        clsBrokenStickSecOperator = New ROperator
+        clsBrokenStickFirstOperator = New ROperator
+        clsBrokenStickSecondOperator = New ROperator
         clsBrokenStickThirdOperator = New ROperator
         clsBrokenStickGeneralOperator = New ROperator
         clsBrokenStickIFunc = New RFunction
@@ -317,13 +317,13 @@ Public Class dlgTwoVariableFitModel
         clsHatvaluesFunction.SetRCommand("hatvalues")
 
         'Broken stick
-        clsBrokenStickFirOperator.SetOperation("-")
+        clsBrokenStickFirstOperator.SetOperation("-")
 
-        clsBrokenStickSecOperator.SetOperation(">", bBracketsTemp:=False)
+        clsBrokenStickSecondOperator.SetOperation(">", bBracketsTemp:=False)
 
         clsBrokenStickThirdOperator.SetOperation("*", bBracketsTemp:=False)
-        clsBrokenStickThirdOperator.AddParameter("first", clsROperatorParameter:=clsBrokenStickFirOperator, bIncludeArgumentName:=False, iPosition:=0)
-        clsBrokenStickThirdOperator.AddParameter("second", clsROperatorParameter:=clsBrokenStickSecOperator, bIncludeArgumentName:=False, iPosition:=1)
+        clsBrokenStickThirdOperator.AddParameter("first", clsROperatorParameter:=clsBrokenStickFirstOperator, bIncludeArgumentName:=False, iPosition:=0)
+        clsBrokenStickThirdOperator.AddParameter("second", clsROperatorParameter:=clsBrokenStickSecondOperator, bIncludeArgumentName:=False, iPosition:=1)
 
         clsBrokenStickIFunc.SetRCommand("I")
         clsBrokenStickIFunc.AddParameter(clsROperatorParameter:=clsBrokenStickThirdOperator)
@@ -377,8 +377,8 @@ Public Class dlgTwoVariableFitModel
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
 
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickGeneralOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickFirOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickSecOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickFirstOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickSecondOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsSplineFunc, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=4)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsPolynomialFunc, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=5)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsMonthFunc, New RParameter("month", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=6)
@@ -446,7 +446,7 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub cmdExplanatoryFunction_Click(sender As Object, e As EventArgs) Handles cmdExplanatoryFunction.Click
-        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPolynomialFunc:=clsPolynomialFunc, clsNewBrokenStickFirOperator:=clsBrokenStickFirOperator, clsNewBrokenStickSecOperator:=clsBrokenStickSecOperator, clsNewBrokenStickGeneralOperator:=clsBrokenStickGeneralOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), clsNewSplineFunc:=clsSplineFunc, clsNewYearFunc:=clsYearFunc, clsNewMonthFunc:=clsMonthFunc, clsNewAsFactorFunc:=clsAsFactorFunc, strNewCurDataType:=ucrReceiverExplanatory.strCurrDataType, strNewDataName:=ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame, bReset:=bResetFirstFunction)
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPolynomialFunc:=clsPolynomialFunc, clsNewBrokenStickFirstOperator:=clsBrokenStickFirstOperator, clsNewBrokenStickSecondOperator:=clsBrokenStickSecondOperator, clsNewBrokenStickGeneralOperator:=clsBrokenStickGeneralOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), clsNewSplineFunc:=clsSplineFunc, clsNewYearFunc:=clsYearFunc, clsNewMonthFunc:=clsMonthFunc, clsNewAsFactorFunc:=clsAsFactorFunc, strNewCurDataType:=ucrReceiverExplanatory.strCurrDataType, strNewDataName:=ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame, bReset:=bResetFirstFunction)
         sdgVariableTransformations.ShowDialog()
         bResetFirstFunction = False
         UpdatePreview()

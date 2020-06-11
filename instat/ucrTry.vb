@@ -229,17 +229,18 @@ Public Class ucrTry
     End Sub
 
     Private Sub ucrReceiverScript_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverScript.SelectionChanged
-        ResetInpuTryMessage()
+        ResetInputTryMessage()
     End Sub
     Private Sub ucrModelPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrModelPreview.ControlValueChanged
-        ResetInpuTryMessage()
+        ResetInputTryMessage()
     End Sub
 
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary> Clears the ucrInputTryMessage and sets its colour to whit incase the ucrReceiverScript selection changes on the value for the ucrModelPreview changes    </summary>
+    ''' <summary> Clears the ucrInputTryMessage textbox and sets its colour to white incase the 
+    ''' ucrReceiverScript selection changes on the value for the ucrModelPreview changes    </summary>
     '''--------------------------------------------------------------------------------------------
-    Private Sub ResetInpuTryMessage()
+    Private Sub ResetInputTryMessage()
         ucrInputTryMessage.SetName("")
         ucrInputTryMessage.txtInput.BackColor = Color.White
         ucrInputTryMessage.txtInput.Controls.Clear()
