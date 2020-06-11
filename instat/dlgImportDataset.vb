@@ -1002,7 +1002,7 @@ Public Class dlgImportDataset
     '''             <paramref name="strFilePathTmp"/>. It removes any special characters (i.e. any 
     '''             characters that are not letters, digits '_' or '-'). It returns the resulting 
     '''             clean name. If the cleaned name is an empty string then returns 
-    '''             'defaultCleanFileName'.             i
+    '''             'defaultCleanFileName'.
     '''             The special characters need to be removed because otherwise they trigger an 
     '''             error in some R commands.
     '''             </summary>
@@ -1016,7 +1016,7 @@ Public Class dlgImportDataset
     Private Function GetCleanFileName(strFilePathTmp As String) As String
         Dim strCleanFileName As String
         strCleanFileName = System.Text.RegularExpressions.Regex.Replace(Path.GetFileNameWithoutExtension(strFilePathTmp), "[^A-Za-z0-9_\-]", "")
-        If strCleanFileName Is "" Or strCleanFileName Is Nothing Then
+        If String.IsNullOrEmpty(strCleanFileName) Then
             strCleanFileName = "defaultCleanFileName"
         End If
         Return strCleanFileName
