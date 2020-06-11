@@ -86,10 +86,6 @@ Public Class dlgDisplayDailyData
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.Selector = ucrSelectorDisplayDailyClimaticData
 
-        ucrReceiverMultipleElements.SetParameter(New RParameter("climatic_element", 1))
-        ucrReceiverMultipleElements.SetParameterIsString()
-        ucrReceiverMultipleElements.Selector = ucrSelectorDisplayDailyClimaticData
-
 
         ucrNudUpperYaxis.SetParameter(New RParameter("upper_limit", 9))
         ucrNudUpperYaxis.SetMinMax(0, Integer.MaxValue)
@@ -172,11 +168,11 @@ Public Class dlgDisplayDailyData
 
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
-        ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
+        ucrPnlFrequencyDisplay.AddRadioButton(rdoGraphByYear)
+        ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraphByYear, frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, frmMain.clsRLink.strInstatDataObject & "$display_daily_table")
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverMultipleElements, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
-        ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraphByYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrReceiverMultipleElements, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboMissing, ucrChkMissing}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboTrace, ucrChkTrace}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboZero, ucrChkZero}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -244,13 +240,13 @@ Public Class dlgDisplayDailyData
         ucrInputBarColour.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrNudUpperYaxis.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrReceiverElement.SetRCode(clsDisplayDailyTable, bReset)
-        ucrReceiverMultipleElements.SetRCode(clsDisplayDailyGraphFunction, bReset)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsDisplayDailyGraphFunction, New RParameter("climatic_element", 1), iAdditionalPairNo:=1)
         ucrSaveGraph.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrPnlFrequencyDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If rdoGraph.Checked AndAlso (Not ucrReceiverDate.IsEmpty OrElse Not ucrReceiverDayOfYear.IsEmpty OrElse Not ucrReceiverStations.IsEmpty) AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMultipleElements.IsEmpty AndAlso ucrNudUpperYaxis.GetText <> "" AndAlso Not ucrInputRugColour.IsEmpty AndAlso Not ucrInputBarColour.IsEmpty Then
+        If rdoGraphByYear.Checked AndAlso (Not ucrReceiverDate.IsEmpty OrElse Not ucrReceiverDayOfYear.IsEmpty OrElse Not ucrReceiverStations.IsEmpty) AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty AndAlso ucrNudUpperYaxis.GetText <> "" AndAlso Not ucrInputRugColour.IsEmpty AndAlso Not ucrInputBarColour.IsEmpty Then
             ucrBase.OKEnabled(True)
         ElseIf rdoTable.Checked AndAlso Not ucrReceiverElement.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso (ucrChkSum.Checked OrElse ucrChkMin.Checked OrElse ucrChkMax.Checked OrElse ucrChkMean.Checked OrElse ucrChkMedian.Checked OrElse ucrChkIQR.Checked OrElse ucrChkSumMissing.Checked) Then
             ucrBase.OKEnabled(True)
@@ -266,7 +262,7 @@ Public Class dlgDisplayDailyData
     End Sub
 
     Private Sub DialogSize()
-        If rdoGraph.Checked Then
+        If rdoGraphByYear.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.86)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.2)
         ElseIf rdoTable.Checked Then
@@ -277,10 +273,11 @@ Public Class dlgDisplayDailyData
 
     Private Sub ucrPnlFrequencyDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencyDisplay.ControlValueChanged
         DialogSize()
-        If rdoGraph.Checked Then
-            ucrReceiverMultipleElements.SetMeAsReceiver()
+        If rdoGraphByYear.Checked Then
             ucrBase.clsRsyntax.iCallType = 3
             ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyGraphFunction)
+        ElseIf rdoGraph.Checked Then
+            ucrReceiverMultipleElements.SetMeAsReceiver()
         Else
             ucrReceiverElement.SetMeAsReceiver()
             ucrBase.clsRsyntax.iCallType = 2

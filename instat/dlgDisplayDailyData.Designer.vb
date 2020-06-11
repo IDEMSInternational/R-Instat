@@ -63,6 +63,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrChkSum = New instat.ucrCheck()
         Me.ucrChkMin = New instat.ucrCheck()
         Me.ucrChkMean = New instat.ucrCheck()
+        Me.rdoGraphByYear = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrInputComboZero = New instat.ucrInputComboBox()
@@ -78,6 +79,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrPnlFrequencyDisplay = New instat.UcrPanel()
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverSingleElements = New instat.ucrReceiverSingle()
         Me.grpGraph.SuspendLayout()
         Me.grpSummary.SuspendLayout()
         Me.SuspendLayout()
@@ -244,6 +246,16 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.ucrChkMean, "ucrChkMean")
         Me.ucrChkMean.Name = "ucrChkMean"
         '
+        'rdoGraphByYear
+        '
+        resources.ApplyResources(Me.rdoGraphByYear, "rdoGraphByYear")
+        Me.rdoGraphByYear.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGraphByYear.FlatAppearance.BorderSize = 2
+        Me.rdoGraphByYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGraphByYear.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoGraphByYear.Name = "rdoGraphByYear"
+        Me.rdoGraphByYear.UseVisualStyleBackColor = True
+        '
         'ucrReceiverMultipleElements
         '
         Me.ucrReceiverMultipleElements.frmParent = Me
@@ -344,6 +356,7 @@ Partial Class dlgDisplayDailyData
         '
         'ucrSelectorDisplayDailyClimaticData
         '
+        Me.ucrSelectorDisplayDailyClimaticData.bDropUnusedFilterLevels = False
         Me.ucrSelectorDisplayDailyClimaticData.bShowHiddenColumns = False
         Me.ucrSelectorDisplayDailyClimaticData.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorDisplayDailyClimaticData, "ucrSelectorDisplayDailyClimaticData")
@@ -354,10 +367,20 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrReceiverSingleElements
+        '
+        Me.ucrReceiverSingleElements.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverSingleElements, "ucrReceiverSingleElements")
+        Me.ucrReceiverSingleElements.Name = "ucrReceiverSingleElements"
+        Me.ucrReceiverSingleElements.Selector = Nothing
+        Me.ucrReceiverSingleElements.strNcFilePath = ""
+        Me.ucrReceiverSingleElements.ucrSelector = Nothing
+        '
         'dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoGraphByYear)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.lblElements)
         Me.Controls.Add(Me.ucrReceiverMultipleElements)
@@ -383,6 +406,7 @@ Partial Class dlgDisplayDailyData
         Me.Controls.Add(Me.ucrSelectorDisplayDailyClimaticData)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpGraph)
+        Me.Controls.Add(Me.ucrReceiverSingleElements)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -434,4 +458,6 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrChkIQR As ucrCheck
     Friend WithEvents grpSummary As GroupBox
     Friend WithEvents ucrChkSumMissing As ucrCheck
+    Friend WithEvents rdoGraphByYear As RadioButton
+    Friend WithEvents ucrReceiverSingleElements As ucrReceiverSingle
 End Class
