@@ -14,12 +14,10 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgCumulativeDistribution
     Private clsRggplotFunction As New RFunction
     Private clsStatECDFFunction As New RFunction
-    Private clsStatEcdfGeomFunc As New RFunction
     Private clsRaesFunction As New RFunction
     Private clsStatECDFAesFunction As New RFunction
     Private clsBaseOperator As New ROperator
@@ -106,7 +104,8 @@ Public Class dlgCumulativeDistribution
         ucrChkCountsOnYAxis.SetText("Counts on Y Axis")
 
         ucrChkIncludePoints.SetText("Include Points")
-        ucrChkIncludePoints.SetParameter(New RParameter("geom_point"), bNewChangeParameterValue:=False)
+        ucrChkIncludePoints.SetParameter(New RParameter("geom", iNewPosition:=1), bNewChangeParameterValue:=False)
+        ucrChkIncludePoints.SetParameterValue(Chr(34) & "point" & Chr(34))
 
 
         'ucrInputComboPad.SetParameter(New RParameter("pad"))
@@ -127,12 +126,6 @@ Public Class dlgCumulativeDistribution
         clsRaesFunction = New RFunction
         clsStatECDFFunction = New RFunction
         clsRggplotFunction = New RFunction
-        clsStatEcdfGeomFunc = New RFunction
-
-
-        clsStatEcdfGeomFunc.SetRCommand("stat_ecdf")
-        clsStatEcdfGeomFunc.AddParameter("geom", strParameterValue:=Chr(34) & "point" & Chr(34), iPosition:=0)
-        clsStatEcdfGeomFunc.AddParameter("pad", strParameterValue:="FALSE")
 
         clsSequence = New RFunction
         clsSequence.SetRCommand("seq")
@@ -205,8 +198,7 @@ Public Class dlgCumulativeDistribution
         ucrPnlOption.SetRCode(clsStatECDFFunction, bReset)
         ucrInputComboScales.SetRCode(clsYScalecontinuousFunction, bReset)
 
-        ucrChkIncludePoints.SetRCode(clsBaseOperator, bReset)
-        'ucrInputComboPad.SetRCode(clsRgeomCumDistFunction, bReset)
+        ucrChkIncludePoints.SetRCode(clsStatECDFFunction, bReset)
 
         ucrNudBy.SetRCode(clsSequence, bReset)
 
@@ -238,17 +230,9 @@ Public Class dlgCumulativeDistribution
 
     Private Sub ucrPnlOption_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOption.ControlValueChanged
         If rdoExceedance.Checked Then
-            clsStatECDFFunction.AddParameter("mapping", clsRFunctionParameter:=clsStatECDFAesFunction, iPosition:=1)
+            clsStatECDFFunction.AddParameter("mapping", clsRFunctionParameter:=clsStatECDFAesFunction, iPosition:=2)
         ElseIf rdoCumulative.Checked Then
             clsStatECDFFunction.RemoveParameterByName("mapping")
-        End If
-    End Sub
-
-    Private Sub ucrChkIncludePoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludePoints.ControlValueChanged
-        If ucrChkIncludePoints.Checked Then
-            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsStatEcdfGeomFunc, bIncludeArgumentName:=False)
-        Else
-            clsBaseOperator.RemoveParameterByName("geom_point")
         End If
     End Sub
 End Class
