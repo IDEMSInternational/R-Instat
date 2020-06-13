@@ -297,9 +297,4 @@ Public Class dlgFromLibrary
         End If
     End Sub
 
-    Private Sub ucrInputPackages_SelectionIndexChanged() Handles ucrInputPackages.SelectionIndexChanged
-
-    End Sub
-
-
 End Class
