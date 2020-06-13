@@ -54,8 +54,18 @@ Public Class dlgHomogenization
         ucrPnlMethods.AddFunctionNamesCondition(rdoCptVariance, "cpt.var")
         ucrPnlMethods.AddFunctionNamesCondition(rdoMeanVariance, "cpt.meanvar")
 
+        ucrPnlOptions.AddRadioButton(rdoSingle)
+        ucrPnlOptions.AddRadioButton(rdoMultiple)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, {"cpt.mean", "cpt.var", "cpt.meanvar"})
+        ucrPnlOptions.AddFunctionNamesCondition(rdoMultiple, {"cpt.mean", "cpt.var", "cpt.meanvar"}, False)
+
         ucrChkPlot.SetText("Plot")
+        ucrChkPlot.AddRSyntaxContainsFunctionNamesCondition(True, {"plot"})
+        ucrChkPlot.AddRSyntaxContainsFunctionNamesCondition(False, {"plot"}, False)
+
         ucrChkSummary.SetText("Summary")
+        ucrChkSummary.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"})
+        ucrChkSummary.AddRSyntaxContainsFunctionNamesCondition(False, {"summary"}, False)
 
         ucrInputComboPenalty.SetParameter(New RParameter("penalty", 1))
         dctPenaltyOptions.Add("None", Chr(34) & "None" & Chr(34))
@@ -89,12 +99,19 @@ Public Class dlgHomogenization
 
         ucrNudMinSegLen.SetParameter(New RParameter("minseglen", 4))
         ucrNudMinSegLen.SetRDefault(1)
-        ttQ.SetToolTip(ucrNudMinSegLen, "Positive integer giving the minimum segment length (no. of observations between changes), default is the minimum allowed by theory.")
+        ttOptions.SetToolTip(ucrNudMinSegLen.nudUpDown, "Positive integer giving the minimum segment length (no. of observations between changes), default is the minimum allowed by theory.")
 
         ucrInputQ.SetParameter(New RParameter("Q", 5))
+        ucrInputQ.AddQuotesIfUnrecognised = False
         ucrInputQ.SetValidationTypeAsNumeric()
         ucrInputQ.SetRDefault(5)
-        ttQ.SetToolTip(ucrInputQ.txtInput, "The maximum number of changepoints to search for using the BinSeg method")
+        ttOptions.SetToolTip(ucrInputQ.txtInput, "The maximum number of changepoints to search for using the BinSeg method")
+
+        ucrInputPenValue.SetParameter(New RParameter("pen.value", 6))
+        ucrInputPenValue.AddQuotesIfUnrecognised = False
+        ucrInputPenValue.SetValidationTypeAsNumeric()
+        ucrInputPenValue.SetRDefault(0)
+        ttOptions.SetToolTip(ucrInputPenValue.txtInput, "The theoretical type I error e.g.0.05 when using the Asymptotic penalty. A vector of length 2 (min,max) if using the CROPS penalty")
 
         ucrSaveResult.SetLabelText("Save Result:")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorHomogenization.ucrAvailableDataFrames)
@@ -102,6 +119,8 @@ Public Class dlgHomogenization
         ucrSaveResult.SetIsComboBox()
         ucrSaveResult.SetPrefix("Result")
         ucrSaveResult.SetAssignToIfUncheckedValue("last_result")
+
+        rdoMultiple.Enabled = False 'Not yet working!
     End Sub
 
     Private Sub SetDefaults()
@@ -146,12 +165,16 @@ Public Class dlgHomogenization
         ucrInputComboDistribution.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrNudMinSegLen.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputQ.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputPenValue.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlMethods.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkPlot.SetRSyntax(ucrBase.clsRsyntax, bReset)
+        ucrChkSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverElement.IsEmpty Then
+        If ucrReceiverElement.IsEmpty OrElse Not ucrSaveResult.IsComplete OrElse ucrInputQ.IsEmpty OrElse ucrInputPenValue.IsEmpty OrElse ucrNudMinSegLen.GetText = "" Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -201,7 +224,7 @@ Public Class dlgHomogenization
         TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSaveResult.ControlContentsChanged, ucrInputQ.ControlContentsChanged, ucrInputPenValue.ControlContentsChanged, ucrNudMinSegLen.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
