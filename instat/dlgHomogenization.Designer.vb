@@ -36,9 +36,12 @@ Partial Class dlgHomogenization
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lblDistribution = New System.Windows.Forms.Label()
         Me.grpOutputOptions = New System.Windows.Forms.GroupBox()
+        Me.ttOptions = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblPenaltyValue = New System.Windows.Forms.Label()
         Me.ucrSaveResult = New instat.ucrSave()
         Me.ucrChkPlot = New instat.ucrCheck()
         Me.ucrChkSummary = New instat.ucrCheck()
+        Me.ucrInputPenValue = New instat.ucrInputTextBox()
         Me.ucrNudMinSegLen = New instat.ucrNud()
         Me.ucrInputQ = New instat.ucrInputTextBox()
         Me.ucrInputComboDistribution = New instat.ucrInputComboBox()
@@ -48,7 +51,9 @@ Partial Class dlgHomogenization
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrSelectorHomogenization = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ttQ = New System.Windows.Forms.ToolTip(Me.components)
+        Me.rdoSingle = New System.Windows.Forms.RadioButton()
+        Me.rdoMultiple = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.grpMethods.SuspendLayout()
         Me.grpCptOptions.SuspendLayout()
         Me.grpOutputOptions.SuspendLayout()
@@ -89,6 +94,8 @@ Partial Class dlgHomogenization
         '
         'grpCptOptions
         '
+        Me.grpCptOptions.Controls.Add(Me.lblPenaltyValue)
+        Me.grpCptOptions.Controls.Add(Me.ucrInputPenValue)
         Me.grpCptOptions.Controls.Add(Me.lblMinSegLen)
         Me.grpCptOptions.Controls.Add(Me.lblQ)
         Me.grpCptOptions.Controls.Add(Me.lblPenalty)
@@ -136,6 +143,11 @@ Partial Class dlgHomogenization
         Me.grpOutputOptions.Name = "grpOutputOptions"
         Me.grpOutputOptions.TabStop = False
         '
+        'lblPenaltyValue
+        '
+        resources.ApplyResources(Me.lblPenaltyValue, "lblPenaltyValue")
+        Me.lblPenaltyValue.Name = "lblPenaltyValue"
+        '
         'ucrSaveResult
         '
         resources.ApplyResources(Me.ucrSaveResult, "ucrSaveResult")
@@ -152,6 +164,14 @@ Partial Class dlgHomogenization
         Me.ucrChkSummary.Checked = False
         resources.ApplyResources(Me.ucrChkSummary, "ucrChkSummary")
         Me.ucrChkSummary.Name = "ucrChkSummary"
+        '
+        'ucrInputPenValue
+        '
+        Me.ucrInputPenValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputPenValue.IsMultiline = False
+        Me.ucrInputPenValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPenValue, "ucrInputPenValue")
+        Me.ucrInputPenValue.Name = "ucrInputPenValue"
         '
         'ucrNudMinSegLen
         '
@@ -219,10 +239,42 @@ Partial Class dlgHomogenization
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'rdoSingle
+        '
+        resources.ApplyResources(Me.rdoSingle, "rdoSingle")
+        Me.rdoSingle.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoSingle.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSingle.FlatAppearance.BorderSize = 2
+        Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSingle.Name = "rdoSingle"
+        Me.rdoSingle.TabStop = True
+        Me.rdoSingle.Tag = ""
+        Me.rdoSingle.UseVisualStyleBackColor = False
+        '
+        'rdoMultiple
+        '
+        resources.ApplyResources(Me.rdoMultiple, "rdoMultiple")
+        Me.rdoMultiple.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoMultiple.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultiple.FlatAppearance.BorderSize = 2
+        Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultiple.Name = "rdoMultiple"
+        Me.rdoMultiple.TabStop = True
+        Me.rdoMultiple.Tag = ""
+        Me.rdoMultiple.UseVisualStyleBackColor = False
+        '
+        'ucrPnlOptions
+        '
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        '
         'dlgHomogenization
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoSingle)
+        Me.Controls.Add(Me.rdoMultiple)
+        Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.grpOutputOptions)
         Me.Controls.Add(Me.grpCptOptions)
@@ -269,5 +321,10 @@ Partial Class dlgHomogenization
     Friend WithEvents lblMinSegLen As Label
     Friend WithEvents lblQ As Label
     Friend WithEvents ucrSaveResult As ucrSave
-    Friend WithEvents ttQ As ToolTip
+    Friend WithEvents ttOptions As ToolTip
+    Friend WithEvents lblPenaltyValue As Label
+    Friend WithEvents ucrInputPenValue As ucrInputTextBox
+    Friend WithEvents rdoSingle As RadioButton
+    Friend WithEvents rdoMultiple As RadioButton
+    Friend WithEvents ucrPnlOptions As UcrPanel
 End Class
