@@ -278,7 +278,7 @@ Public Class dlgFromLibrary
             ElseIf strRClass = "dgcmatrix" OrElse strRClass = "dscmatrix" Then
                 'this if block is used for dgcmatrix,dscmatrix.
                 'The R summary() function returns an object of type data.frame if given a matrix. Used here to coerce it to data.frame
-                'todo. this needs to be investigated further on the best command for coercing this type of data
+                'todo. this needs to be investigated further on the best(correct) command for coercing this type of data
                 clsListParameterFunction.SetRCommand("summary")
                 clsListParameterFunction.AddParameter("object", strParameterValue:=strSelectedDataName)
                 clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
