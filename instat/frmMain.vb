@@ -2130,4 +2130,8 @@ Public Class frmMain
     Private Sub mnuModelFitModelHypothesisTestsKeyboard_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelHypothesisTestsKeyboard.Click
         dlgHypothesisTestsCalculator.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticCheckDataHomogenization_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataHomogenization.Click
+        'dlgHomogenization.ShowDialog() 'not yet working
+    End Sub
 End Class
