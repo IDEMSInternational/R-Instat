@@ -38,7 +38,9 @@ Public Class dlgHomogenization
     Private Sub InitialiseDialog()
         Dim dctPenaltyOptions As New Dictionary(Of String, String)
         Dim dctMethodOptions As New Dictionary(Of String, String)
-        Dim dctDistributionOptions As New Dictionary(Of String, String)
+        Dim dctMeanDistribution As New Dictionary(Of String, String)
+        Dim dctVarDistribution As New Dictionary(Of String, String)
+        Dim dctMeanVarDistribution As New Dictionary(Of String, String)
 
         ucrReceiverElement.Selector = ucrSelectorHomogenization
         ucrBase.clsRsyntax.iCallType = 2
@@ -49,10 +51,10 @@ Public Class dlgHomogenization
 
         ucrPnlMethods.AddRadioButton(rdoCptMean)
         ucrPnlMethods.AddRadioButton(rdoCptVariance)
-        ucrPnlMethods.AddRadioButton(rdoMeanVariance)
+        ucrPnlMethods.AddRadioButton(rdoCptMeanVariance)
         ucrPnlMethods.AddFunctionNamesCondition(rdoCptMean, "cpt.mean")
         ucrPnlMethods.AddFunctionNamesCondition(rdoCptVariance, "cpt.var")
-        ucrPnlMethods.AddFunctionNamesCondition(rdoMeanVariance, "cpt.meanvar")
+        ucrPnlMethods.AddFunctionNamesCondition(rdoCptMeanVariance, "cpt.meanvar")
 
         ucrPnlOptions.AddRadioButton(rdoSingle)
         ucrPnlOptions.AddRadioButton(rdoNeighbouring)
@@ -81,7 +83,6 @@ Public Class dlgHomogenization
         dctPenaltyOptions.Add("CROPS", Chr(34) & "CROPS" & Chr(34))
         ucrInputComboPenalty.SetItems(dctPenaltyOptions)
         ucrInputComboPenalty.SetDropDownStyleAsNonEditable()
-        ucrInputComboPenalty.SetRDefault(Chr(34) & "None" & Chr(34))
 
         ucrInputComboMethod.SetParameter(New RParameter("method", 2))
         dctMethodOptions.Add("AMOC", Chr(34) & "AMOC" & Chr(34))
@@ -91,12 +92,28 @@ Public Class dlgHomogenization
         ucrInputComboMethod.SetItems(dctMethodOptions)
         ucrInputComboMethod.SetDropDownStyleAsNonEditable()
 
-        ucrInputComboDistribution.SetParameter(New RParameter("test.stat", 3))
-        dctDistributionOptions.Add("Normal", Chr(34) & "Normal" & Chr(34))
-        dctDistributionOptions.Add("CUSUM", Chr(34) & "CUSUM" & Chr(34))
-        ucrInputComboDistribution.SetItems(dctDistributionOptions)
-        ucrInputComboDistribution.SetDropDownStyleAsNonEditable()
-        ucrInputComboDistribution.SetRDefault(Chr(34) & "Normal" & Chr(34))
+        ucrInputComboMeanDistribution.SetParameter(New RParameter("test.stat", 3))
+        dctMeanDistribution.Add("Normal", Chr(34) & "Normal" & Chr(34))
+        dctMeanDistribution.Add("CUSUM", Chr(34) & "CUSUM" & Chr(34))
+        ucrInputComboMeanDistribution.SetItems(dctMeanDistribution)
+        ucrInputComboMeanDistribution.SetDropDownStyleAsNonEditable()
+        ucrInputComboMeanDistribution.SetRDefault(Chr(34) & "Normal" & Chr(34))
+
+        ucrInputComboVarDistribution.SetParameter(New RParameter("test.stat", 3))
+        dctVarDistribution.Add("Normal", Chr(34) & "Normal" & Chr(34))
+        dctVarDistribution.Add("CSS", Chr(34) & "CSS" & Chr(34))
+        ucrInputComboVarDistribution.SetItems(dctVarDistribution)
+        ucrInputComboVarDistribution.SetDropDownStyleAsNonEditable()
+        ucrInputComboVarDistribution.SetRDefault(Chr(34) & "Normal" & Chr(34))
+
+        ucrInputComboMeanVarDistribution.SetParameter(New RParameter("test.stat", 3))
+        dctMeanVarDistribution.Add("Normal", Chr(34) & "Normal" & Chr(34))
+        dctMeanVarDistribution.Add("Gamma", Chr(34) & "Gamma" & Chr(34))
+        dctMeanVarDistribution.Add("Exponential", Chr(34) & "Exponential" & Chr(34))
+        dctMeanVarDistribution.Add("Poisson", Chr(34) & "Poisson" & Chr(34))
+        ucrInputComboMeanVarDistribution.SetItems(dctMeanVarDistribution)
+        ucrInputComboMeanVarDistribution.SetDropDownStyleAsNonEditable()
+        ucrInputComboMeanVarDistribution.SetRDefault(Chr(34) & "Normal" & Chr(34))
 
         ucrNudMinSegLen.SetParameter(New RParameter("minseglen", 4))
         ucrNudMinSegLen.SetRDefault(1)
@@ -119,9 +136,12 @@ Public Class dlgHomogenization
         ucrSaveResult.SetPrefix("Result")
         ucrSaveResult.SetAssignToIfUncheckedValue("last_result")
 
-        ucrInputComboPenalty.AddToLinkedControls(ucrInputPenValue, {"Asymptotic", "CROPS"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboMethod.AddToLinkedControls(ucrInputQ, {"BinSeg"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboPenalty.AddToLinkedControls(ucrInputPenValue, {"Asymptotic", "CROPS"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrInputComboMethod.AddToLinkedControls(ucrInputQ, {"SegNeigh", "BinSeg"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverNeighbour, {rdoNeighbouring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMethods.AddToLinkedControls(ucrInputComboMeanDistribution, {rdoCptMean}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMethods.AddToLinkedControls(ucrInputComboVarDistribution, {rdoCptVariance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMethods.AddToLinkedControls(ucrInputComboMeanVarDistribution, {rdoCptMeanVariance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverNeighbour.SetLinkedDisplayControl(lblNeighbouring)
         ucrInputPenValue.SetLinkedDisplayControl(lblPenaltyValue)
         ucrInputQ.SetLinkedDisplayControl(lblQ)
@@ -148,6 +168,7 @@ Public Class dlgHomogenization
         clsCptMeanFunction.AddParameter("data", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
         clsCptMeanFunction.AddParameter("Q", 5, iPosition:=5)
         clsCptMeanFunction.AddParameter("pen.value", 0, iPosition:=6)
+        clsCptMeanFunction.AddParameter("penalty", Chr(34) & "None" & Chr(34), iPosition:=1)
         clsCptMeanFunction.AddParameter("method", Chr(34) & "BinSeg" & Chr(34), iPosition:=2)
 
         clsCptVarianceFunction.SetPackageName("changepoint")
@@ -173,16 +194,16 @@ Public Class dlgHomogenization
         ucrReceiverElement.SetRCode(clsExcludeNAFunction, bReset)
 
         ucrInputComboPenalty.AddAdditionalCodeParameterPair(clsCptVarianceFunction, ucrInputComboPenalty.GetParameter, iAdditionalPairNo:=1)
-        ucrInputComboPenalty.AddAdditionalCodeParameterPair(clsCptMeanVarianceFunction, ucrInputComboPenalty.GetParameter, iAdditionalPairNo:=1)
+        ucrInputComboPenalty.AddAdditionalCodeParameterPair(clsCptMeanVarianceFunction, ucrInputComboPenalty.GetParameter, iAdditionalPairNo:=2)
         ucrInputComboPenalty.SetRCode(clsCptMeanFunction, bReset)
 
         ucrInputComboMethod.AddAdditionalCodeParameterPair(clsCptVarianceFunction, ucrInputComboMethod.GetParameter, iAdditionalPairNo:=1)
         ucrInputComboMethod.AddAdditionalCodeParameterPair(clsCptMeanVarianceFunction, ucrInputComboMethod.GetParameter, iAdditionalPairNo:=2)
         ucrInputComboMethod.SetRCode(clsCptMeanFunction, bReset)
 
-        ucrInputComboDistribution.AddAdditionalCodeParameterPair(clsCptVarianceFunction, ucrInputComboDistribution.GetParameter, iAdditionalPairNo:=1)
-        ucrInputComboDistribution.AddAdditionalCodeParameterPair(clsCptMeanVarianceFunction, ucrInputComboDistribution.GetParameter, iAdditionalPairNo:=2)
-        ucrInputComboDistribution.SetRCode(clsCptMeanFunction, bReset)
+        ucrInputComboMeanDistribution.SetRCode(clsCptMeanFunction, bReset)
+        ucrInputComboVarDistribution.SetRCode(clsCptVarianceFunction, bReset)
+        ucrInputComboMeanVarDistribution.SetRCode(clsCptMeanVarianceFunction, bReset)
 
         ucrNudMinSegLen.AddAdditionalCodeParameterPair(clsCptVarianceFunction, ucrNudMinSegLen.GetParameter, iAdditionalPairNo:=1)
         ucrNudMinSegLen.AddAdditionalCodeParameterPair(clsCptMeanVarianceFunction, ucrNudMinSegLen.GetParameter, iAdditionalPairNo:=2)
@@ -220,7 +241,7 @@ Public Class dlgHomogenization
             ucrBase.clsRsyntax.SetBaseRFunction(clsCptMeanFunction)
         ElseIf rdoCptVariance.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCptVarianceFunction)
-        ElseIf rdoMeanVariance.Checked Then
+        ElseIf rdoCptMeanVariance.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCptMeanVarianceFunction)
         End If
         AddPlotSummaryParameters()
@@ -233,7 +254,7 @@ Public Class dlgHomogenization
         ElseIf rdoCptVariance.Checked Then
             clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsCptVarianceFunction, iPosition:=0)
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsCptVarianceFunction, iPosition:=0)
-        ElseIf rdoMeanVariance.Checked Then
+        ElseIf rdoCptMeanVariance.Checked Then
             clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsCptMeanVarianceFunction, iPosition:=0)
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsCptMeanVarianceFunction, iPosition:=0)
         End If
