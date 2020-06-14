@@ -2132,6 +2132,6 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticCheckDataHomogenization_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataHomogenization.Click
-        'dlgHomogenization.ShowDialog() 'not yet working
+        dlgHomogenization.ShowDialog() 'partially working now
     End Sub
 End Class

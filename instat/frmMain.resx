@@ -1220,9 +1220,6 @@
   <data name="mnuClimaticCheckDataQCRainfall.Text" xml:space="preserve">
     <value>QC Rainfall...</value>
   </data>
-  <data name="mnuClimaticCheckDataHomogenization.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuClimaticCheckDataHomogenization.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
@@ -7152,6 +7149,12 @@
   <data name="&gt;&gt;mnuClimaticCheckDataQCRainfall.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuClimaticCheckDataHomogenization.Name" xml:space="preserve">
+    <value>mnuClimaticCheckDataHomogenization</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCheckDataHomogenization.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuClimaticPrepare.Name" xml:space="preserve">
     <value>mnuClimaticPrepare</value>
   </data>
@@ -9310,12 +9313,6 @@
     <value>mnuLogFile</value>
   </data>
   <data name="&gt;&gt;mnuLogFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticCheckDataHomogenization.Name" xml:space="preserve">
-    <value>mnuClimaticCheckDataHomogenization</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticCheckDataHomogenization.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
