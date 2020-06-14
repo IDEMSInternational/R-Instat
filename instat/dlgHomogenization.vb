@@ -55,8 +55,10 @@ Public Class dlgHomogenization
         ucrPnlMethods.AddFunctionNamesCondition(rdoMeanVariance, "cpt.meanvar")
 
         ucrPnlOptions.AddRadioButton(rdoSingle)
+        ucrPnlOptions.AddRadioButton(rdoNeighbouring)
         ucrPnlOptions.AddRadioButton(rdoMultiple)
         ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, {"cpt.mean", "cpt.var", "cpt.meanvar"})
+        ucrPnlOptions.AddFunctionNamesCondition(rdoNeighbouring, {"cpt.mean", "cpt.var", "cpt.meanvar"}, False)
         ucrPnlOptions.AddFunctionNamesCondition(rdoMultiple, {"cpt.mean", "cpt.var", "cpt.meanvar"}, False)
 
         ucrChkPlot.SetText("Plot")
@@ -120,10 +122,14 @@ Public Class dlgHomogenization
 
         ucrInputComboPenalty.AddToLinkedControls(ucrInputPenValue, {"Asymptotic"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboMethod.AddToLinkedControls(ucrInputQ, {"BinSeg"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverNeighbour, {rdoNeighbouring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverNeighbour.SetLinkedDisplayControl(lblNeighbouring)
         ucrInputPenValue.SetLinkedDisplayControl(lblPenaltyValue)
         ucrInputQ.SetLinkedDisplayControl(lblQ)
 
-        rdoMultiple.Enabled = False 'Not yet working!
+        'Not yet working!
+        rdoMultiple.Enabled = False
+        rdoNeighbouring.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
