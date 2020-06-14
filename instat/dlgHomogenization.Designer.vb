@@ -27,36 +27,38 @@ Partial Class dlgHomogenization
         Me.lblElement = New System.Windows.Forms.Label()
         Me.grpMethods = New System.Windows.Forms.GroupBox()
         Me.rdoCptMean = New System.Windows.Forms.RadioButton()
-        Me.rdoMeanVariance = New System.Windows.Forms.RadioButton()
+        Me.rdoCptMeanVariance = New System.Windows.Forms.RadioButton()
         Me.rdoCptVariance = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpCptOptions = New System.Windows.Forms.GroupBox()
         Me.lblPenaltyValue = New System.Windows.Forms.Label()
-        Me.ucrInputPenValue = New instat.ucrInputTextBox()
         Me.lblMinSegLen = New System.Windows.Forms.Label()
         Me.lblQ = New System.Windows.Forms.Label()
         Me.lblPenalty = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lblDistribution = New System.Windows.Forms.Label()
-        Me.ucrNudMinSegLen = New instat.ucrNud()
-        Me.ucrInputQ = New instat.ucrInputTextBox()
-        Me.ucrInputComboDistribution = New instat.ucrInputComboBox()
-        Me.ucrInputComboMethod = New instat.ucrInputComboBox()
-        Me.ucrInputComboPenalty = New instat.ucrInputComboBox()
         Me.grpOutputOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkPlot = New instat.ucrCheck()
-        Me.ucrChkSummary = New instat.ucrCheck()
         Me.ttOptions = New System.Windows.Forms.ToolTip(Me.components)
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrSaveResult = New instat.ucrSave()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
-        Me.ucrSelectorHomogenization = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
         Me.rdoNeighbouring = New System.Windows.Forms.RadioButton()
         Me.lblNeighbouring = New System.Windows.Forms.Label()
         Me.ucrReceiverNeighbour = New instat.ucrReceiverSingle()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrSaveResult = New instat.ucrSave()
+        Me.ucrChkPlot = New instat.ucrCheck()
+        Me.ucrChkSummary = New instat.ucrCheck()
+        Me.ucrInputPenValue = New instat.ucrInputTextBox()
+        Me.ucrNudMinSegLen = New instat.ucrNud()
+        Me.ucrInputQ = New instat.ucrInputTextBox()
+        Me.ucrInputComboMeanDistribution = New instat.ucrInputComboBox()
+        Me.ucrInputComboMethod = New instat.ucrInputComboBox()
+        Me.ucrInputComboPenalty = New instat.ucrInputComboBox()
+        Me.ucrPnlMethods = New instat.UcrPanel()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.ucrSelectorHomogenization = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputComboMeanVarDistribution = New instat.ucrInputComboBox()
+        Me.ucrInputComboVarDistribution = New instat.ucrInputComboBox()
         Me.grpMethods.SuspendLayout()
         Me.grpCptOptions.SuspendLayout()
         Me.grpOutputOptions.SuspendLayout()
@@ -70,7 +72,7 @@ Partial Class dlgHomogenization
         'grpMethods
         '
         Me.grpMethods.Controls.Add(Me.rdoCptMean)
-        Me.grpMethods.Controls.Add(Me.rdoMeanVariance)
+        Me.grpMethods.Controls.Add(Me.rdoCptMeanVariance)
         Me.grpMethods.Controls.Add(Me.rdoCptVariance)
         Me.grpMethods.Controls.Add(Me.ucrPnlMethods)
         resources.ApplyResources(Me.grpMethods, "grpMethods")
@@ -83,11 +85,11 @@ Partial Class dlgHomogenization
         Me.rdoCptMean.Name = "rdoCptMean"
         Me.rdoCptMean.UseVisualStyleBackColor = True
         '
-        'rdoMeanVariance
+        'rdoCptMeanVariance
         '
-        resources.ApplyResources(Me.rdoMeanVariance, "rdoMeanVariance")
-        Me.rdoMeanVariance.Name = "rdoMeanVariance"
-        Me.rdoMeanVariance.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoCptMeanVariance, "rdoCptMeanVariance")
+        Me.rdoCptMeanVariance.Name = "rdoCptMeanVariance"
+        Me.rdoCptMeanVariance.UseVisualStyleBackColor = True
         '
         'rdoCptVariance
         '
@@ -95,13 +97,10 @@ Partial Class dlgHomogenization
         Me.rdoCptVariance.Name = "rdoCptVariance"
         Me.rdoCptVariance.UseVisualStyleBackColor = True
         '
-        'ucrPnlMethods
-        '
-        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
-        Me.ucrPnlMethods.Name = "ucrPnlMethods"
-        '
         'grpCptOptions
         '
+        Me.grpCptOptions.Controls.Add(Me.ucrInputComboMeanVarDistribution)
+        Me.grpCptOptions.Controls.Add(Me.ucrInputComboVarDistribution)
         Me.grpCptOptions.Controls.Add(Me.lblPenaltyValue)
         Me.grpCptOptions.Controls.Add(Me.ucrInputPenValue)
         Me.grpCptOptions.Controls.Add(Me.lblMinSegLen)
@@ -111,7 +110,7 @@ Partial Class dlgHomogenization
         Me.grpCptOptions.Controls.Add(Me.lblDistribution)
         Me.grpCptOptions.Controls.Add(Me.ucrNudMinSegLen)
         Me.grpCptOptions.Controls.Add(Me.ucrInputQ)
-        Me.grpCptOptions.Controls.Add(Me.ucrInputComboDistribution)
+        Me.grpCptOptions.Controls.Add(Me.ucrInputComboMeanDistribution)
         Me.grpCptOptions.Controls.Add(Me.ucrInputComboMethod)
         Me.grpCptOptions.Controls.Add(Me.ucrInputComboPenalty)
         resources.ApplyResources(Me.grpCptOptions, "grpCptOptions")
@@ -122,14 +121,6 @@ Partial Class dlgHomogenization
         '
         resources.ApplyResources(Me.lblPenaltyValue, "lblPenaltyValue")
         Me.lblPenaltyValue.Name = "lblPenaltyValue"
-        '
-        'ucrInputPenValue
-        '
-        Me.ucrInputPenValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputPenValue.IsMultiline = False
-        Me.ucrInputPenValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPenValue, "ucrInputPenValue")
-        Me.ucrInputPenValue.Name = "ucrInputPenValue"
         '
         'lblMinSegLen
         '
@@ -156,45 +147,6 @@ Partial Class dlgHomogenization
         resources.ApplyResources(Me.lblDistribution, "lblDistribution")
         Me.lblDistribution.Name = "lblDistribution"
         '
-        'ucrNudMinSegLen
-        '
-        Me.ucrNudMinSegLen.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinSegLen.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMinSegLen, "ucrNudMinSegLen")
-        Me.ucrNudMinSegLen.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMinSegLen.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinSegLen.Name = "ucrNudMinSegLen"
-        Me.ucrNudMinSegLen.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputQ
-        '
-        Me.ucrInputQ.AddQuotesIfUnrecognised = True
-        Me.ucrInputQ.IsMultiline = False
-        Me.ucrInputQ.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputQ, "ucrInputQ")
-        Me.ucrInputQ.Name = "ucrInputQ"
-        '
-        'ucrInputComboDistribution
-        '
-        Me.ucrInputComboDistribution.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboDistribution.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboDistribution, "ucrInputComboDistribution")
-        Me.ucrInputComboDistribution.Name = "ucrInputComboDistribution"
-        '
-        'ucrInputComboMethod
-        '
-        Me.ucrInputComboMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboMethod.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboMethod, "ucrInputComboMethod")
-        Me.ucrInputComboMethod.Name = "ucrInputComboMethod"
-        '
-        'ucrInputComboPenalty
-        '
-        Me.ucrInputComboPenalty.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboPenalty.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboPenalty, "ucrInputComboPenalty")
-        Me.ucrInputComboPenalty.Name = "ucrInputComboPenalty"
-        '
         'grpOutputOptions
         '
         Me.grpOutputOptions.Controls.Add(Me.ucrChkPlot)
@@ -202,18 +154,6 @@ Partial Class dlgHomogenization
         resources.ApplyResources(Me.grpOutputOptions, "grpOutputOptions")
         Me.grpOutputOptions.Name = "grpOutputOptions"
         Me.grpOutputOptions.TabStop = False
-        '
-        'ucrChkPlot
-        '
-        Me.ucrChkPlot.Checked = False
-        resources.ApplyResources(Me.ucrChkPlot, "ucrChkPlot")
-        Me.ucrChkPlot.Name = "ucrChkPlot"
-        '
-        'ucrChkSummary
-        '
-        Me.ucrChkSummary.Checked = False
-        resources.ApplyResources(Me.ucrChkSummary, "ucrChkSummary")
-        Me.ucrChkSummary.Name = "ucrChkSummary"
         '
         'rdoSingle
         '
@@ -238,38 +178,6 @@ Partial Class dlgHomogenization
         Me.rdoMultiple.TabStop = True
         Me.rdoMultiple.Tag = ""
         Me.rdoMultiple.UseVisualStyleBackColor = False
-        '
-        'ucrPnlOptions
-        '
-        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        '
-        'ucrSaveResult
-        '
-        resources.ApplyResources(Me.ucrSaveResult, "ucrSaveResult")
-        Me.ucrSaveResult.Name = "ucrSaveResult"
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.ucrSelector = Nothing
-        '
-        'ucrSelectorHomogenization
-        '
-        Me.ucrSelectorHomogenization.bDropUnusedFilterLevels = False
-        Me.ucrSelectorHomogenization.bShowHiddenColumns = False
-        Me.ucrSelectorHomogenization.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorHomogenization, "ucrSelectorHomogenization")
-        Me.ucrSelectorHomogenization.Name = "ucrSelectorHomogenization"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
         '
         'rdoNeighbouring
         '
@@ -296,6 +204,116 @@ Partial Class dlgHomogenization
         Me.ucrReceiverNeighbour.Selector = Nothing
         Me.ucrReceiverNeighbour.strNcFilePath = ""
         Me.ucrReceiverNeighbour.ucrSelector = Nothing
+        '
+        'ucrPnlOptions
+        '
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        '
+        'ucrSaveResult
+        '
+        resources.ApplyResources(Me.ucrSaveResult, "ucrSaveResult")
+        Me.ucrSaveResult.Name = "ucrSaveResult"
+        '
+        'ucrChkPlot
+        '
+        Me.ucrChkPlot.Checked = False
+        resources.ApplyResources(Me.ucrChkPlot, "ucrChkPlot")
+        Me.ucrChkPlot.Name = "ucrChkPlot"
+        '
+        'ucrChkSummary
+        '
+        Me.ucrChkSummary.Checked = False
+        resources.ApplyResources(Me.ucrChkSummary, "ucrChkSummary")
+        Me.ucrChkSummary.Name = "ucrChkSummary"
+        '
+        'ucrInputPenValue
+        '
+        Me.ucrInputPenValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputPenValue.IsMultiline = False
+        Me.ucrInputPenValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPenValue, "ucrInputPenValue")
+        Me.ucrInputPenValue.Name = "ucrInputPenValue"
+        '
+        'ucrNudMinSegLen
+        '
+        Me.ucrNudMinSegLen.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinSegLen.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMinSegLen, "ucrNudMinSegLen")
+        Me.ucrNudMinSegLen.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinSegLen.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinSegLen.Name = "ucrNudMinSegLen"
+        Me.ucrNudMinSegLen.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputQ
+        '
+        Me.ucrInputQ.AddQuotesIfUnrecognised = True
+        Me.ucrInputQ.IsMultiline = False
+        Me.ucrInputQ.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputQ, "ucrInputQ")
+        Me.ucrInputQ.Name = "ucrInputQ"
+        '
+        'ucrInputComboMeanDistribution
+        '
+        Me.ucrInputComboMeanDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMeanDistribution.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboMeanDistribution, "ucrInputComboMeanDistribution")
+        Me.ucrInputComboMeanDistribution.Name = "ucrInputComboMeanDistribution"
+        '
+        'ucrInputComboMethod
+        '
+        Me.ucrInputComboMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMethod.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboMethod, "ucrInputComboMethod")
+        Me.ucrInputComboMethod.Name = "ucrInputComboMethod"
+        '
+        'ucrInputComboPenalty
+        '
+        Me.ucrInputComboPenalty.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboPenalty.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboPenalty, "ucrInputComboPenalty")
+        Me.ucrInputComboPenalty.Name = "ucrInputComboPenalty"
+        '
+        'ucrPnlMethods
+        '
+        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
+        Me.ucrPnlMethods.Name = "ucrPnlMethods"
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
+        '
+        'ucrSelectorHomogenization
+        '
+        Me.ucrSelectorHomogenization.bDropUnusedFilterLevels = False
+        Me.ucrSelectorHomogenization.bShowHiddenColumns = False
+        Me.ucrSelectorHomogenization.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorHomogenization, "ucrSelectorHomogenization")
+        Me.ucrSelectorHomogenization.Name = "ucrSelectorHomogenization"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrInputComboMeanVarDistribution
+        '
+        Me.ucrInputComboMeanVarDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMeanVarDistribution.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboMeanVarDistribution, "ucrInputComboMeanVarDistribution")
+        Me.ucrInputComboMeanVarDistribution.Name = "ucrInputComboMeanVarDistribution"
+        '
+        'ucrInputComboVarDistribution
+        '
+        Me.ucrInputComboVarDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboVarDistribution.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboVarDistribution, "ucrInputComboVarDistribution")
+        Me.ucrInputComboVarDistribution.Name = "ucrInputComboVarDistribution"
         '
         'dlgHomogenization
         '
@@ -337,14 +355,14 @@ Partial Class dlgHomogenization
     Friend WithEvents grpMethods As GroupBox
     Friend WithEvents ucrPnlMethods As UcrPanel
     Friend WithEvents rdoCptMean As RadioButton
-    Friend WithEvents rdoMeanVariance As RadioButton
+    Friend WithEvents rdoCptMeanVariance As RadioButton
     Friend WithEvents rdoCptVariance As RadioButton
     Friend WithEvents grpOutputOptions As GroupBox
     Friend WithEvents ucrChkPlot As ucrCheck
     Friend WithEvents ucrChkSummary As ucrCheck
     Friend WithEvents ucrNudMinSegLen As ucrNud
     Friend WithEvents ucrInputQ As ucrInputTextBox
-    Friend WithEvents ucrInputComboDistribution As ucrInputComboBox
+    Friend WithEvents ucrInputComboMeanDistribution As ucrInputComboBox
     Friend WithEvents ucrInputComboMethod As ucrInputComboBox
     Friend WithEvents ucrInputComboPenalty As ucrInputComboBox
     Friend WithEvents lblPenalty As Label
@@ -362,4 +380,6 @@ Partial Class dlgHomogenization
     Friend WithEvents rdoNeighbouring As RadioButton
     Friend WithEvents lblNeighbouring As Label
     Friend WithEvents ucrReceiverNeighbour As ucrReceiverSingle
+    Friend WithEvents ucrInputComboVarDistribution As ucrInputComboBox
+    Friend WithEvents ucrInputComboMeanVarDistribution As ucrInputComboBox
 End Class
