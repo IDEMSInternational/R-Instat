@@ -88,7 +88,7 @@ Public Class dlgHomogenization
         dctMethodOptions.Add("BinSeg", Chr(34) & "BinSeg" & Chr(34))
         ucrInputComboMethod.SetItems(dctMethodOptions)
         ucrInputComboMethod.SetDropDownStyleAsNonEditable()
-        ucrInputComboMethod.SetRDefault(Chr(34) & "AMOC" & Chr(34))
+        ucrInputComboMethod.SetRDefault(Chr(34) & "BinSeg" & Chr(34))
 
         ucrInputComboDistribution.SetParameter(New RParameter("test.stat", 3))
         dctDistributionOptions.Add("Normal", Chr(34) & "Normal" & Chr(34))
@@ -104,13 +104,11 @@ Public Class dlgHomogenization
         ucrInputQ.SetParameter(New RParameter("Q", 5))
         ucrInputQ.AddQuotesIfUnrecognised = False
         ucrInputQ.SetValidationTypeAsNumeric()
-        ucrInputQ.SetRDefault(5)
         ttOptions.SetToolTip(ucrInputQ.txtInput, "The maximum number of changepoints to search for using the BinSeg method")
 
         ucrInputPenValue.SetParameter(New RParameter("pen.value", 6))
         ucrInputPenValue.AddQuotesIfUnrecognised = False
         ucrInputPenValue.SetValidationTypeAsNumeric()
-        ucrInputPenValue.SetRDefault(0)
         ttOptions.SetToolTip(ucrInputPenValue.txtInput, "The theoretical type I error e.g.0.05 when using the Asymptotic penalty. A vector of length 2 (min,max) if using the CROPS penalty")
 
         ucrSaveResult.SetLabelText("Save Result:")
@@ -119,6 +117,11 @@ Public Class dlgHomogenization
         ucrSaveResult.SetIsComboBox()
         ucrSaveResult.SetPrefix("Result")
         ucrSaveResult.SetAssignToIfUncheckedValue("last_result")
+
+        ucrInputComboPenalty.AddToLinkedControls(ucrInputPenValue, {"Asymptotic"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboMethod.AddToLinkedControls(ucrInputQ, {"BinSeg"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputPenValue.SetLinkedDisplayControl(lblPenaltyValue)
+        ucrInputQ.SetLinkedDisplayControl(lblQ)
 
         rdoMultiple.Enabled = False 'Not yet working!
     End Sub
@@ -138,6 +141,8 @@ Public Class dlgHomogenization
         clsCptMeanFunction.SetPackageName("changepoint")
         clsCptMeanFunction.SetRCommand("cpt.mean")
         clsCptMeanFunction.AddParameter("data", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
+        clsCptMeanFunction.AddParameter("Q", 5, iPosition:=5)
+        clsCptMeanFunction.AddParameter("pen.value", 0, iPosition:=6)
 
         clsCptVarianceFunction.SetPackageName("changepoint")
         clsCptVarianceFunction.SetRCommand("cpt.var")
@@ -154,34 +159,56 @@ Public Class dlgHomogenization
         clsSummaryFunction.SetRCommand("summary")
 
         ucrBase.clsRsyntax.ClearCodes()
-        SetBaseFunction()
         ucrBase.clsRsyntax.SetBaseRFunction(clsCptMeanFunction)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
         ucrReceiverElement.SetRCode(clsExcludeNAFunction, bReset)
-        ucrInputComboPenalty.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputComboMethod.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputComboDistribution.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrNudMinSegLen.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputQ.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputPenValue.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
+        ucrInputComboPenalty.AddAdditionalCodeParameterPair(clsCptVarianceFunction, ucrInputComboPenalty.GetParameter, iAdditionalPairNo:=1)
+        ucrInputComboPenalty.AddAdditionalCodeParameterPair(clsCptMeanVarianceFunction, ucrInputComboPenalty.GetParameter, iAdditionalPairNo:=1)
+        ucrInputComboPenalty.SetRCode(clsCptMeanFunction, bReset)
+
+        ucrInputComboMethod.AddAdditionalCodeParameterPair(clsCptVarianceFunction, ucrInputComboMethod.GetParameter, iAdditionalPairNo:=1)
+        ucrInputComboMethod.AddAdditionalCodeParameterPair(clsCptMeanVarianceFunction, ucrInputComboMethod.GetParameter, iAdditionalPairNo:=2)
+        ucrInputComboMethod.SetRCode(clsCptMeanFunction, bReset)
+
+        ucrInputComboDistribution.AddAdditionalCodeParameterPair(clsCptVarianceFunction, ucrInputComboDistribution.GetParameter, iAdditionalPairNo:=1)
+        ucrInputComboDistribution.AddAdditionalCodeParameterPair(clsCptMeanVarianceFunction, ucrInputComboDistribution.GetParameter, iAdditionalPairNo:=2)
+        ucrInputComboDistribution.SetRCode(clsCptMeanFunction, bReset)
+
+        ucrNudMinSegLen.AddAdditionalCodeParameterPair(clsCptVarianceFunction, ucrNudMinSegLen.GetParameter, iAdditionalPairNo:=1)
+        ucrNudMinSegLen.AddAdditionalCodeParameterPair(clsCptMeanVarianceFunction, ucrNudMinSegLen.GetParameter, iAdditionalPairNo:=2)
+        ucrNudMinSegLen.SetRCode(clsCptMeanFunction, bReset)
+
+        ucrInputQ.AddAdditionalCodeParameterPair(clsCptVarianceFunction, ucrInputQ.GetParameter, iAdditionalPairNo:=1)
+        ucrInputQ.AddAdditionalCodeParameterPair(clsCptMeanVarianceFunction, ucrInputQ.GetParameter, iAdditionalPairNo:=2)
+        ucrInputQ.SetRCode(clsCptMeanFunction, bReset)
+
+        ucrInputPenValue.AddAdditionalCodeParameterPair(clsCptVarianceFunction, ucrInputPenValue.GetParameter, iAdditionalPairNo:=1)
+        ucrInputPenValue.AddAdditionalCodeParameterPair(clsCptMeanVarianceFunction, ucrInputPenValue.GetParameter, iAdditionalPairNo:=2)
+        ucrInputPenValue.SetRCode(clsCptMeanFunction, bReset)
+
         ucrPnlMethods.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
+        ucrSaveResult.AddAdditionalRCode(clsCptVarianceFunction, iAdditionalPairNo:=1)
+        ucrSaveResult.AddAdditionalRCode(clsCptMeanVarianceFunction, iAdditionalPairNo:=2)
+        ucrSaveResult.SetRCode(clsCptMeanFunction, bReset)
+
         ucrChkPlot.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverElement.IsEmpty OrElse Not ucrSaveResult.IsComplete OrElse ucrInputQ.IsEmpty OrElse ucrInputPenValue.IsEmpty OrElse ucrNudMinSegLen.GetText = "" Then
+        If ucrReceiverElement.IsEmpty OrElse Not ucrSaveResult.IsComplete OrElse (ucrInputComboMethod.GetText = "BinSeg" AndAlso ucrInputQ.IsEmpty) OrElse (ucrInputComboPenalty.GetText = "Asymptotic" AndAlso ucrInputPenValue.IsEmpty) OrElse ucrNudMinSegLen.GetText = "" Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
     End Sub
 
-    Private Sub SetBaseFunction()
+    Private Sub ucrPnlMethods_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethods.ControlValueChanged
         If rdoCptMean.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCptMeanFunction)
             clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsCptMeanFunction, iPosition:=0)
@@ -195,10 +222,6 @@ Public Class dlgHomogenization
             clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsCptMeanVarianceFunction, iPosition:=0)
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsCptMeanVarianceFunction, iPosition:=0)
         End If
-    End Sub
-
-    Private Sub ucrPnlMethods_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethods.ControlValueChanged
-        SetBaseFunction()
     End Sub
 
     Private Sub ucrChkSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummary.ControlValueChanged
@@ -224,7 +247,7 @@ Public Class dlgHomogenization
         TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSaveResult.ControlContentsChanged, ucrInputQ.ControlContentsChanged, ucrInputPenValue.ControlContentsChanged, ucrNudMinSegLen.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSaveResult.ControlContentsChanged, ucrInputQ.ControlContentsChanged, ucrInputPenValue.ControlContentsChanged, ucrNudMinSegLen.ControlContentsChanged, ucrInputComboMethod.ControlContentsChanged, ucrInputComboPenalty.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
