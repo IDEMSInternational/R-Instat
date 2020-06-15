@@ -158,7 +158,7 @@ Public Class sdgVariableTransformations
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Handles event triggered when the user changes values in the broken stick 
-    ''' textbox/SplineDf Nud/polynomial by Updating the text in the previewtextbox 
+    ''' textbox/SplineDf Nud/polynomial  Nud by updating the text in the preview textbox 
     ''' </summary>
     '''
     ''' <param name="ucrChangedControl ">   ucrInputTxtBrokenStick/ucrNudSplineDF/ucrNudPolynomial </param>
@@ -200,6 +200,8 @@ Public Class sdgVariableTransformations
     ''' <summary> Updates the preview textbox  and converts the year/month function to factor
     ''' when values from the month checkbox/year checkbox change 
     ''' </summary>
+    ''' 
+    '''  <param name="ucrChangedControl ">  ucrChkYearAsFactor/ucrChkMonthAsFactor </param>
     '''--------------------------------------------------------------------------------------------
     Private Sub AsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYearAsFactor.ControlValueChanged, ucrChkMonthAsFactor.ControlValueChanged
         ConvertToFactorOrNot()
@@ -207,7 +209,7 @@ Public Class sdgVariableTransformations
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary> Converts the either the month or year function to factors    </summary>
+    ''' <summary> Converts either the month or year function to factors    </summary>
     '''--------------------------------------------------------------------------------------------
     Private Sub ConvertToFactorOrNot()
         If rdoMonth.Checked Then
