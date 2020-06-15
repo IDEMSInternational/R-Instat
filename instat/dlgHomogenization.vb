@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgHomogenization
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsCptMeanFunction, clsCptVarianceFunction, clsCptMeanVarianceFunction, clsExcludeNAFunction, clsPlotFunction, clsSummaryFunction, clsSnhtFunction As New RFunction
+    Private clsCptMeanFunction, clsCptVarianceFunction, clsCptMeanVarianceFunction, clsExcludeNAFunction, clsPlotFunction, clsSummaryFunction, clsSnhtFunction, clsPettittFunction As New RFunction
     Private Sub dlgHomogenization_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -53,17 +53,19 @@ Public Class dlgHomogenization
         ucrPnlMethods.AddRadioButton(rdoCptVariance)
         ucrPnlMethods.AddRadioButton(rdoCptMeanVariance)
         ucrPnlMethods.AddRadioButton(rdoSnht)
+        ucrPnlMethods.AddRadioButton(rdoPettitt)
         ucrPnlMethods.AddFunctionNamesCondition(rdoCptMean, "cpt.mean")
         ucrPnlMethods.AddFunctionNamesCondition(rdoCptVariance, "cpt.var")
         ucrPnlMethods.AddFunctionNamesCondition(rdoCptMeanVariance, "cpt.meanvar")
         ucrPnlMethods.AddFunctionNamesCondition(rdoSnht, "snht")
+        ucrPnlMethods.AddFunctionNamesCondition(rdoPettitt, "pettitt.test")
 
         ucrPnlOptions.AddRadioButton(rdoSingle)
         ucrPnlOptions.AddRadioButton(rdoNeighbouring)
         ucrPnlOptions.AddRadioButton(rdoMultiple)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, {"cpt.mean", "cpt.var", "cpt.meanvar", "snht"})
-        ucrPnlOptions.AddFunctionNamesCondition(rdoNeighbouring, {"cpt.mean", "cpt.var", "cpt.meanvar", "snht"}, False)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoMultiple, {"cpt.mean", "cpt.var", "cpt.meanvar", "snht"}, False)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, {"cpt.mean", "cpt.var", "cpt.meanvar", "snht", "pettitt.test"})
+        ucrPnlOptions.AddFunctionNamesCondition(rdoNeighbouring, {"cpt.mean", "cpt.var", "cpt.meanvar", "snht", "pettitt.test"}, False)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoMultiple, {"cpt.mean", "cpt.var", "cpt.meanvar", "snht", "pettitt.test"}, False)
 
         ucrChkPlot.SetText("Plot")
         ucrChkPlot.AddRSyntaxContainsFunctionNamesCondition(True, {"plot"})
@@ -174,6 +176,7 @@ Public Class dlgHomogenization
         clsPlotFunction = New RFunction
         clsSummaryFunction = New RFunction
         clsSnhtFunction = New RFunction
+        clsPettittFunction = New RFunction
 
         ucrSelectorHomogenization.Reset()
         ucrSaveResult.Reset()
@@ -204,6 +207,10 @@ Public Class dlgHomogenization
         clsSnhtFunction.SetPackageName("snht")
         clsSnhtFunction.SetRCommand("snht")
         clsSnhtFunction.AddParameter("period", 10, iPosition:=1)
+
+        clsPettittFunction.SetPackageName("trend")
+        clsPettittFunction.SetRCommand("pettitt.test")
+        clsPettittFunction.AddParameter("x", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
 
         ucrBase.clsRsyntax.ClearCodes()
         AddPlotSummaryParameters()
@@ -270,6 +277,8 @@ Public Class dlgHomogenization
             ucrBase.clsRsyntax.SetBaseRFunction(clsCptMeanVarianceFunction)
         ElseIf rdoSnht.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSnhtFunction)
+        ElseIf rdoPettitt.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPettittFunction)
         End If
         AddPlotSummaryParameters()
         ChangeSaveType()
@@ -288,11 +297,14 @@ Public Class dlgHomogenization
         ElseIf rdoSnht.Checked Then
             clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsSnhtFunction, iPosition:=0)
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSnhtFunction, iPosition:=0)
+        ElseIf rdoPettitt.Checked Then
+            clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsPettittFunction, iPosition:=0)
+            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsPettittFunction, iPosition:=0)
         End If
     End Sub
 
     Private Sub ChangeSaveType()
-        If rdoCptMean.Checked OrElse rdoCptVariance.Checked OrElse rdoCptMeanVariance.Checked Then
+        If rdoCptMean.Checked OrElse rdoCptVariance.Checked OrElse rdoCptMeanVariance.Checked OrElse rdoPettitt.Checked Then
             ucrSaveResult.SetCheckBoxText("Save Result:")
             ucrSaveResult.SetSaveTypeAsModel()
             ucrSaveResult.SetIsComboBox()
