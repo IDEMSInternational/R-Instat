@@ -65,6 +65,7 @@ Partial Class dlgHomogenization
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrSelectorHomogenization = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.rdoPettitt = New System.Windows.Forms.RadioButton()
         Me.grpMethods.SuspendLayout()
         Me.grpCptOptions.SuspendLayout()
         Me.grpOutputOptions.SuspendLayout()
@@ -78,6 +79,7 @@ Partial Class dlgHomogenization
         '
         'grpMethods
         '
+        Me.grpMethods.Controls.Add(Me.rdoPettitt)
         Me.grpMethods.Controls.Add(Me.rdoSnht)
         Me.grpMethods.Controls.Add(Me.rdoCptMean)
         Me.grpMethods.Controls.Add(Me.rdoCptMeanVariance)
@@ -366,6 +368,12 @@ Partial Class dlgHomogenization
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'rdoPettitt
+        '
+        resources.ApplyResources(Me.rdoPettitt, "rdoPettitt")
+        Me.rdoPettitt.Name = "rdoPettitt"
+        Me.rdoPettitt.UseVisualStyleBackColor = True
+        '
         'dlgHomogenization
         '
         resources.ApplyResources(Me, "$this")
@@ -442,4 +450,5 @@ Partial Class dlgHomogenization
     Friend WithEvents ucrNudPeriod As ucrNud
     Friend WithEvents ucrChkRobust As ucrCheck
     Friend WithEvents ucrChkScaled As ucrCheck
+    Friend WithEvents rdoPettitt As RadioButton
 End Class
