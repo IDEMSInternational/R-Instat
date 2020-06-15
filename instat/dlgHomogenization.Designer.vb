@@ -42,11 +42,19 @@ Partial Class dlgHomogenization
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.rdoNeighbouring = New System.Windows.Forms.RadioButton()
         Me.lblNeighbouring = New System.Windows.Forms.Label()
+        Me.rdoSnht = New System.Windows.Forms.RadioButton()
+        Me.grpSnhtOptions = New System.Windows.Forms.GroupBox()
+        Me.lblPeriod = New System.Windows.Forms.Label()
+        Me.ucrNudPeriod = New instat.ucrNud()
+        Me.ucrChkRobust = New instat.ucrCheck()
+        Me.ucrChkScaled = New instat.ucrCheck()
         Me.ucrReceiverNeighbour = New instat.ucrReceiverSingle()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrSaveResult = New instat.ucrSave()
         Me.ucrChkPlot = New instat.ucrCheck()
         Me.ucrChkSummary = New instat.ucrCheck()
+        Me.ucrInputComboMeanVarDistribution = New instat.ucrInputComboBox()
+        Me.ucrInputComboVarDistribution = New instat.ucrInputComboBox()
         Me.ucrInputPenValue = New instat.ucrInputTextBox()
         Me.ucrNudMinSegLen = New instat.ucrNud()
         Me.ucrInputQ = New instat.ucrInputTextBox()
@@ -57,11 +65,10 @@ Partial Class dlgHomogenization
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrSelectorHomogenization = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputComboMeanVarDistribution = New instat.ucrInputComboBox()
-        Me.ucrInputComboVarDistribution = New instat.ucrInputComboBox()
         Me.grpMethods.SuspendLayout()
         Me.grpCptOptions.SuspendLayout()
         Me.grpOutputOptions.SuspendLayout()
+        Me.grpSnhtOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblElement
@@ -71,6 +78,7 @@ Partial Class dlgHomogenization
         '
         'grpMethods
         '
+        Me.grpMethods.Controls.Add(Me.rdoSnht)
         Me.grpMethods.Controls.Add(Me.rdoCptMean)
         Me.grpMethods.Controls.Add(Me.rdoCptMeanVariance)
         Me.grpMethods.Controls.Add(Me.rdoCptVariance)
@@ -196,6 +204,49 @@ Partial Class dlgHomogenization
         resources.ApplyResources(Me.lblNeighbouring, "lblNeighbouring")
         Me.lblNeighbouring.Name = "lblNeighbouring"
         '
+        'rdoSnht
+        '
+        resources.ApplyResources(Me.rdoSnht, "rdoSnht")
+        Me.rdoSnht.Name = "rdoSnht"
+        Me.rdoSnht.UseVisualStyleBackColor = True
+        '
+        'grpSnhtOptions
+        '
+        Me.grpSnhtOptions.Controls.Add(Me.lblPeriod)
+        Me.grpSnhtOptions.Controls.Add(Me.ucrNudPeriod)
+        Me.grpSnhtOptions.Controls.Add(Me.ucrChkRobust)
+        Me.grpSnhtOptions.Controls.Add(Me.ucrChkScaled)
+        resources.ApplyResources(Me.grpSnhtOptions, "grpSnhtOptions")
+        Me.grpSnhtOptions.Name = "grpSnhtOptions"
+        Me.grpSnhtOptions.TabStop = False
+        '
+        'lblPeriod
+        '
+        resources.ApplyResources(Me.lblPeriod, "lblPeriod")
+        Me.lblPeriod.Name = "lblPeriod"
+        '
+        'ucrNudPeriod
+        '
+        Me.ucrNudPeriod.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPeriod.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudPeriod, "ucrNudPeriod")
+        Me.ucrNudPeriod.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPeriod.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPeriod.Name = "ucrNudPeriod"
+        Me.ucrNudPeriod.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkRobust
+        '
+        Me.ucrChkRobust.Checked = False
+        resources.ApplyResources(Me.ucrChkRobust, "ucrChkRobust")
+        Me.ucrChkRobust.Name = "ucrChkRobust"
+        '
+        'ucrChkScaled
+        '
+        Me.ucrChkScaled.Checked = False
+        resources.ApplyResources(Me.ucrChkScaled, "ucrChkScaled")
+        Me.ucrChkScaled.Name = "ucrChkScaled"
+        '
         'ucrReceiverNeighbour
         '
         Me.ucrReceiverNeighbour.frmParent = Me
@@ -226,6 +277,20 @@ Partial Class dlgHomogenization
         Me.ucrChkSummary.Checked = False
         resources.ApplyResources(Me.ucrChkSummary, "ucrChkSummary")
         Me.ucrChkSummary.Name = "ucrChkSummary"
+        '
+        'ucrInputComboMeanVarDistribution
+        '
+        Me.ucrInputComboMeanVarDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMeanVarDistribution.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboMeanVarDistribution, "ucrInputComboMeanVarDistribution")
+        Me.ucrInputComboMeanVarDistribution.Name = "ucrInputComboMeanVarDistribution"
+        '
+        'ucrInputComboVarDistribution
+        '
+        Me.ucrInputComboVarDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboVarDistribution.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboVarDistribution, "ucrInputComboVarDistribution")
+        Me.ucrInputComboVarDistribution.Name = "ucrInputComboVarDistribution"
         '
         'ucrInputPenValue
         '
@@ -301,24 +366,11 @@ Partial Class dlgHomogenization
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrInputComboMeanVarDistribution
-        '
-        Me.ucrInputComboMeanVarDistribution.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboMeanVarDistribution.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboMeanVarDistribution, "ucrInputComboMeanVarDistribution")
-        Me.ucrInputComboMeanVarDistribution.Name = "ucrInputComboMeanVarDistribution"
-        '
-        'ucrInputComboVarDistribution
-        '
-        Me.ucrInputComboVarDistribution.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboVarDistribution.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboVarDistribution, "ucrInputComboVarDistribution")
-        Me.ucrInputComboVarDistribution.Name = "ucrInputComboVarDistribution"
-        '
         'dlgHomogenization
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpSnhtOptions)
         Me.Controls.Add(Me.lblNeighbouring)
         Me.Controls.Add(Me.ucrReceiverNeighbour)
         Me.Controls.Add(Me.rdoNeighbouring)
@@ -342,6 +394,8 @@ Partial Class dlgHomogenization
         Me.grpCptOptions.ResumeLayout(False)
         Me.grpCptOptions.PerformLayout()
         Me.grpOutputOptions.ResumeLayout(False)
+        Me.grpSnhtOptions.ResumeLayout(False)
+        Me.grpSnhtOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -382,4 +436,10 @@ Partial Class dlgHomogenization
     Friend WithEvents ucrReceiverNeighbour As ucrReceiverSingle
     Friend WithEvents ucrInputComboVarDistribution As ucrInputComboBox
     Friend WithEvents ucrInputComboMeanVarDistribution As ucrInputComboBox
+    Friend WithEvents rdoSnht As RadioButton
+    Friend WithEvents grpSnhtOptions As GroupBox
+    Friend WithEvents lblPeriod As Label
+    Friend WithEvents ucrNudPeriod As ucrNud
+    Friend WithEvents ucrChkRobust As ucrCheck
+    Friend WithEvents ucrChkScaled As ucrCheck
 End Class
