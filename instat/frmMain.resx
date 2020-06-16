@@ -399,7 +399,7 @@
     <value>View Graph...</value>
   </data>
   <data name="mnuDescribe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 26</value>
+    <value>81, 24</value>
   </data>
   <data name="mnuDescribe.Text" xml:space="preserve">
     <value>Describe</value>
@@ -489,7 +489,7 @@
     <value>Fit Model</value>
   </data>
   <data name="mnuModelCompareModelsOneVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 26</value>
+    <value>224, 26</value>
   </data>
   <data name="mnuModelCompareModelsOneVariable.Text" xml:space="preserve">
     <value>One Variable...</value>
@@ -711,7 +711,7 @@
     <value>Other (General)</value>
   </data>
   <data name="mnuModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 26</value>
+    <value>66, 24</value>
   </data>
   <data name="mnuModel.Text" xml:space="preserve">
     <value>Model</value>
@@ -873,7 +873,7 @@
     <value>Reset to Default Layout</value>
   </data>
   <data name="mnuView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 26</value>
+    <value>55, 24</value>
   </data>
   <data name="mnuView.Text" xml:space="preserve">
     <value>View</value>
@@ -987,7 +987,7 @@
     <value>Acknowlegments</value>
   </data>
   <data name="mnuHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 26</value>
+    <value>55, 24</value>
   </data>
   <data name="mnuHelp.Text" xml:space="preserve">
     <value>Help</value>
@@ -1941,7 +1941,7 @@
     <value>False</value>
   </data>
   <data name="mnuClimatic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 26</value>
+    <value>77, 24</value>
   </data>
   <data name="mnuClimatic.Text" xml:space="preserve">
     <value>Climatic</value>
@@ -2101,7 +2101,7 @@
     <value>Select All </value>
   </data>
   <data name="mnuEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 26</value>
+    <value>49, 24</value>
   </data>
   <data name="mnuEdit.Text" xml:space="preserve">
     <value>Edit</value>
@@ -2533,7 +2533,7 @@
     <value>He&amp;lp</value>
   </data>
   <data name="Tool_strip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 30</value>
+    <value>0, 28</value>
   </data>
   <data name="Tool_strip.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
@@ -2677,7 +2677,7 @@
     <value>286, 6</value>
   </data>
   <data name="mnuFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 26</value>
+    <value>46, 24</value>
   </data>
   <data name="mnuFile.Text" xml:space="preserve">
     <value>File</value>
@@ -3388,13 +3388,22 @@
     <value>R Objects</value>
   </data>
   <data name="mnuPrepare.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 26</value>
+    <value>74, 24</value>
   </data>
   <data name="mnuPrepare.Text" xml:space="preserve">
     <value>Prepare</value>
   </data>
+  <data name="ToolStripSeparator20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 6</value>
+  </data>
+  <data name="mnuStructuredCircular.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="mnuStructuredCircular.Text" xml:space="preserve">
+    <value>Circular</value>
+  </data>
   <data name="mnuStructured.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 26</value>
+    <value>91, 24</value>
   </data>
   <data name="mnuStructured.Text" xml:space="preserve">
     <value>Structured</value>
@@ -3622,7 +3631,7 @@
     <value>Corruption Risk Index</value>
   </data>
   <data name="mnuProcurement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 26</value>
+    <value>107, 24</value>
   </data>
   <data name="mnuProcurement.Text" xml:space="preserve">
     <value>Procurement</value>
@@ -3751,7 +3760,7 @@
     <value>Model</value>
   </data>
   <data name="mnuOptionsByContext.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 26</value>
+    <value>150, 24</value>
   </data>
   <data name="mnuOptionsByContext.Text" xml:space="preserve">
     <value>Options by Context</value>
@@ -3823,7 +3832,7 @@
     <value>Options...</value>
   </data>
   <data name="mnuTools.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 26</value>
+    <value>58, 24</value>
   </data>
   <data name="mnuTools.Text" xml:space="preserve">
     <value>Tools</value>
@@ -3831,8 +3840,11 @@
   <data name="mnuBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="mnuBar.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 2, 0, 2</value>
+  </data>
   <data name="mnuBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1112, 30</value>
+    <value>1112, 28</value>
   </data>
   <data name="mnuBar.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -3862,7 +3874,7 @@
     <value>Fill</value>
   </data>
   <data name="splOverall.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 67</value>
+    <value>0, 65</value>
   </data>
   <data name="splOverall.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -3898,7 +3910,7 @@
     <value>5, 6, 5, 6</value>
   </data>
   <data name="ucrColumnMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 210</value>
+    <value>96, 211</value>
   </data>
   <data name="ucrColumnMeta.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3937,7 +3949,7 @@
     <value>5, 6, 5, 6</value>
   </data>
   <data name="ucrDataFrameMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 210</value>
+    <value>237, 211</value>
   </data>
   <data name="ucrDataFrameMeta.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3967,7 +3979,7 @@
     <value>1</value>
   </data>
   <data name="splMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>340, 210</value>
+    <value>340, 211</value>
   </data>
   <data name="splMetadata.SplitterDistance" type="System.Int32, mscorlib">
     <value>96</value>
@@ -4021,7 +4033,7 @@
     <value>5, 6, 5, 6</value>
   </data>
   <data name="ucrLogWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 210</value>
+    <value>231, 211</value>
   </data>
   <data name="ucrLogWindow.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4060,7 +4072,7 @@
     <value>5, 6, 5, 6</value>
   </data>
   <data name="ucrScriptWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>527, 210</value>
+    <value>527, 211</value>
   </data>
   <data name="ucrScriptWindow.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4090,7 +4102,7 @@
     <value>1</value>
   </data>
   <data name="splLogScript.Size" type="System.Drawing.Size, System.Drawing">
-    <value>765, 210</value>
+    <value>765, 211</value>
   </data>
   <data name="splLogScript.SplitterDistance" type="System.Int32, mscorlib">
     <value>231</value>
@@ -4126,7 +4138,7 @@
     <value>1</value>
   </data>
   <data name="splExtraWindows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1112, 210</value>
+    <value>1112, 211</value>
   </data>
   <data name="splExtraWindows.SplitterDistance" type="System.Int32, mscorlib">
     <value>340</value>
@@ -4180,7 +4192,7 @@
     <value>5, 6, 5, 6</value>
   </data>
   <data name="ucrDataViewer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>512, 284</value>
+    <value>512, 285</value>
   </data>
   <data name="ucrDataViewer.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4219,7 +4231,7 @@
     <value>5, 6, 5, 6</value>
   </data>
   <data name="ucrOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>593, 284</value>
+    <value>593, 285</value>
   </data>
   <data name="ucrOutput.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4249,7 +4261,7 @@
     <value>1</value>
   </data>
   <data name="splDataOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1112, 284</value>
+    <value>1112, 285</value>
   </data>
   <data name="splDataOutput.SplitterDistance" type="System.Int32, mscorlib">
     <value>512</value>
@@ -4285,10 +4297,10 @@
     <value>1</value>
   </data>
   <data name="splOverall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1112, 500</value>
+    <value>1112, 502</value>
   </data>
   <data name="splOverall.SplitterDistance" type="System.Int32, mscorlib">
-    <value>210</value>
+    <value>211</value>
   </data>
   <data name="splOverall.SplitterWidth" type="System.Int32, mscorlib">
     <value>6</value>
@@ -9346,6 +9358,18 @@
     <value>mnuStructured</value>
   </data>
   <data name="&gt;&gt;mnuStructured.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator20.Name" xml:space="preserve">
+    <value>ToolStripSeparator20</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator20.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircular.Name" xml:space="preserve">
+    <value>mnuStructuredCircular</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircular.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
