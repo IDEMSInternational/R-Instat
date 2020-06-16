@@ -597,6 +597,9 @@ Partial Class frmMain
         Me.mnuStructuredCircular = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredLow_Flow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredSurvival = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredTimeSeries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredTimeSeriesDefine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator60 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3767,7 +3770,7 @@ Partial Class frmMain
         '
         'mnuStructured
         '
-        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival})
+        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries})
         Me.mnuStructured.Name = "mnuStructured"
         resources.ApplyResources(Me.mnuStructured, "mnuStructured")
         '
@@ -3790,6 +3793,22 @@ Partial Class frmMain
         '
         Me.mnuStructuredSurvival.Name = "mnuStructuredSurvival"
         resources.ApplyResources(Me.mnuStructuredSurvival, "mnuStructuredSurvival")
+        '
+        'mnuStructuredTimeSeries
+        '
+        Me.mnuStructuredTimeSeries.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDefine, Me.ToolStripSeparator60})
+        Me.mnuStructuredTimeSeries.Name = "mnuStructuredTimeSeries"
+        resources.ApplyResources(Me.mnuStructuredTimeSeries, "mnuStructuredTimeSeries")
+        '
+        'mnuStructuredTimeSeriesDefine
+        '
+        Me.mnuStructuredTimeSeriesDefine.Name = "mnuStructuredTimeSeriesDefine"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesDefine, "mnuStructuredTimeSeriesDefine")
+        '
+        'ToolStripSeparator60
+        '
+        Me.ToolStripSeparator60.Name = "ToolStripSeparator60"
+        resources.ApplyResources(Me.ToolStripSeparator60, "ToolStripSeparator60")
         '
         'frmMain
         '
@@ -4395,4 +4414,7 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredCircular As ToolStripMenuItem
     Friend WithEvents mnuStructuredLow_Flow As ToolStripMenuItem
     Friend WithEvents mnuStructuredSurvival As ToolStripMenuItem
+    Friend WithEvents mnuStructuredTimeSeries As ToolStripMenuItem
+    Friend WithEvents mnuStructuredTimeSeriesDefine As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator60 As ToolStripSeparator
 End Class

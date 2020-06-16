@@ -3400,7 +3400,7 @@
     <value>224, 26</value>
   </data>
   <data name="mnuStructuredCircular.Text" xml:space="preserve">
-    <value>Circular</value>
+    <value>Circular...</value>
   </data>
   <data name="mnuStructuredLow_Flow.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 26</value>
@@ -3413,6 +3413,21 @@
   </data>
   <data name="mnuStructuredSurvival.Text" xml:space="preserve">
     <value>Survival...</value>
+  </data>
+  <data name="mnuStructuredTimeSeriesDefine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="mnuStructuredTimeSeriesDefine.Text" xml:space="preserve">
+    <value>Define...</value>
+  </data>
+  <data name="ToolStripSeparator60.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 6</value>
+  </data>
+  <data name="mnuStructuredTimeSeries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="mnuStructuredTimeSeries.Text" xml:space="preserve">
+    <value>Time Series</value>
   </data>
   <data name="mnuStructured.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 24</value>
@@ -3851,6 +3866,9 @@
   </data>
   <data name="mnuBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
+  </data>
+  <data name="mnuBar.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 2, 0, 2</value>
   </data>
   <data name="mnuBar.Size" type="System.Drawing.Size, System.Drawing">
     <value>1112, 28</value>
@@ -9392,6 +9410,24 @@
   </data>
   <data name="&gt;&gt;mnuStructuredSurvival.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredTimeSeries.Name" xml:space="preserve">
+    <value>mnuStructuredTimeSeries</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredTimeSeries.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredTimeSeriesDefine.Name" xml:space="preserve">
+    <value>mnuStructuredTimeSeriesDefine</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredTimeSeriesDefine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator60.Name" xml:space="preserve">
+    <value>ToolStripSeparator60</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator60.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmMain</value>
