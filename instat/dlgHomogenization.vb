@@ -61,6 +61,9 @@ Public Class dlgHomogenization
         ucrPnlMethods.AddFunctionNamesCondition(rdoSnht, "snht")
         ucrPnlMethods.AddFunctionNamesCondition(rdoPettitt, "pettitt.test")
         ucrPnlMethods.AddFunctionNamesCondition(rdoBuishand, "br.test")
+        ttOptions.SetToolTip(rdoSnht, "Performs a standard normal homogeneity test on the data supplied. This test searches the data for potential changepoints.")
+        ttOptions.SetToolTip(rdoPettitt, "Performes a non-parametric test after Pettitt in order to test for a shift in the central tendency of a time series. The H0-hypothesis, no change, is tested against the HA-Hypothesis, change")
+        ttOptions.SetToolTip(rdoBuishand, "Performes the Buishand range test for change-point detection of a normal variate.")
 
         ucrPnlOptions.AddRadioButton(rdoSingle)
         ucrPnlOptions.AddRadioButton(rdoNeighbouring)
