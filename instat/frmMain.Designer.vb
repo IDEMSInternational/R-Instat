@@ -610,6 +610,8 @@ Partial Class frmMain
         Me.ToolStripSeparator62 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSeparator63 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuStructuredClimatic = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredProcurement = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredOptionByContext = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3780,7 +3782,7 @@ Partial Class frmMain
         '
         'mnuStructured
         '
-        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries, Me.ToolStripSeparator63, Me.mnuStructuredClimatic})
+        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries, Me.ToolStripSeparator63, Me.mnuStructuredClimatic, Me.mnuStructuredProcurement, Me.mnuStructuredOptionByContext})
         Me.mnuStructured.Name = "mnuStructured"
         resources.ApplyResources(Me.mnuStructured, "mnuStructured")
         '
@@ -3871,6 +3873,16 @@ Partial Class frmMain
         '
         Me.mnuStructuredClimatic.Name = "mnuStructuredClimatic"
         resources.ApplyResources(Me.mnuStructuredClimatic, "mnuStructuredClimatic")
+        '
+        'mnuStructuredProcurement
+        '
+        Me.mnuStructuredProcurement.Name = "mnuStructuredProcurement"
+        resources.ApplyResources(Me.mnuStructuredProcurement, "mnuStructuredProcurement")
+        '
+        'mnuStructuredOptionByContext
+        '
+        Me.mnuStructuredOptionByContext.Name = "mnuStructuredOptionByContext"
+        resources.ApplyResources(Me.mnuStructuredOptionByContext, "mnuStructuredOptionByContext")
         '
         'frmMain
         '
@@ -4489,4 +4501,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator62 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator63 As ToolStripSeparator
     Friend WithEvents mnuStructuredClimatic As ToolStripMenuItem
+    Friend WithEvents mnuStructuredProcurement As ToolStripMenuItem
+    Friend WithEvents mnuStructuredOptionByContext As ToolStripMenuItem
 End Class
