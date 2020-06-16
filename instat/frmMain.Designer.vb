@@ -606,6 +606,7 @@ Partial Class frmMain
         Me.ToolStripSeparator61 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuStructuredTimeSeriesModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredTimeSeriesModelOneVariable = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredTimeSeriesModelGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3839,7 +3840,7 @@ Partial Class frmMain
         '
         'mnuStructuredTimeSeriesModel
         '
-        Me.mnuStructuredTimeSeriesModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesModelOneVariable})
+        Me.mnuStructuredTimeSeriesModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesModelOneVariable, Me.mnuStructuredTimeSeriesModelGeneral})
         Me.mnuStructuredTimeSeriesModel.Name = "mnuStructuredTimeSeriesModel"
         resources.ApplyResources(Me.mnuStructuredTimeSeriesModel, "mnuStructuredTimeSeriesModel")
         '
@@ -3847,6 +3848,11 @@ Partial Class frmMain
         '
         Me.mnuStructuredTimeSeriesModelOneVariable.Name = "mnuStructuredTimeSeriesModelOneVariable"
         resources.ApplyResources(Me.mnuStructuredTimeSeriesModelOneVariable, "mnuStructuredTimeSeriesModelOneVariable")
+        '
+        'mnuStructuredTimeSeriesModelGeneral
+        '
+        Me.mnuStructuredTimeSeriesModelGeneral.Name = "mnuStructuredTimeSeriesModelGeneral"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesModelGeneral, "mnuStructuredTimeSeriesModelGeneral")
         '
         'frmMain
         '
@@ -4461,4 +4467,5 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator61 As ToolStripSeparator
     Friend WithEvents mnuStructuredTimeSeriesModel As ToolStripMenuItem
     Friend WithEvents mnuStructuredTimeSeriesModelOneVariable As ToolStripMenuItem
+    Friend WithEvents mnuStructuredTimeSeriesModelGeneral As ToolStripMenuItem
 End Class
