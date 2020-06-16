@@ -600,6 +600,8 @@ Partial Class frmMain
         Me.mnuStructuredTimeSeries = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredTimeSeriesDefine = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator60 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuStructuredTimeSeriesDescribe = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredTimeSeriesDescribeOneVariable = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3796,7 +3798,7 @@ Partial Class frmMain
         '
         'mnuStructuredTimeSeries
         '
-        Me.mnuStructuredTimeSeries.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDefine, Me.ToolStripSeparator60})
+        Me.mnuStructuredTimeSeries.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDefine, Me.ToolStripSeparator60, Me.mnuStructuredTimeSeriesDescribe})
         Me.mnuStructuredTimeSeries.Name = "mnuStructuredTimeSeries"
         resources.ApplyResources(Me.mnuStructuredTimeSeries, "mnuStructuredTimeSeries")
         '
@@ -3809,6 +3811,17 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator60.Name = "ToolStripSeparator60"
         resources.ApplyResources(Me.ToolStripSeparator60, "ToolStripSeparator60")
+        '
+        'mnuStructuredTimeSeriesDescribe
+        '
+        Me.mnuStructuredTimeSeriesDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDescribeOneVariable})
+        Me.mnuStructuredTimeSeriesDescribe.Name = "mnuStructuredTimeSeriesDescribe"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesDescribe, "mnuStructuredTimeSeriesDescribe")
+        '
+        'mnuStructuredTimeSeriesDescribeOneVariable
+        '
+        Me.mnuStructuredTimeSeriesDescribeOneVariable.Name = "mnuStructuredTimeSeriesDescribeOneVariable"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesDescribeOneVariable, "mnuStructuredTimeSeriesDescribeOneVariable")
         '
         'frmMain
         '
@@ -4417,4 +4430,6 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredTimeSeries As ToolStripMenuItem
     Friend WithEvents mnuStructuredTimeSeriesDefine As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator60 As ToolStripSeparator
+    Friend WithEvents mnuStructuredTimeSeriesDescribe As ToolStripMenuItem
+    Friend WithEvents mnuStructuredTimeSeriesDescribeOneVariable As ToolStripMenuItem
 End Class
