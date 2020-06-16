@@ -3429,6 +3429,12 @@
   <data name="mnuStructuredTimeSeriesDescribeOneVariable.Text" xml:space="preserve">
     <value>One Variable...</value>
   </data>
+  <data name="mnuStructuredTimeSeriesDescribeGeneral.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 26</value>
+  </data>
+  <data name="mnuStructuredTimeSeriesDescribeGeneral.Text" xml:space="preserve">
+    <value>General...</value>
+  </data>
   <data name="mnuStructuredTimeSeriesDescribe.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 26</value>
   </data>
@@ -9448,6 +9454,12 @@
     <value>mnuStructuredTimeSeriesDescribeOneVariable</value>
   </data>
   <data name="&gt;&gt;mnuStructuredTimeSeriesDescribeOneVariable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredTimeSeriesDescribeGeneral.Name" xml:space="preserve">
+    <value>mnuStructuredTimeSeriesDescribeGeneral</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredTimeSeriesDescribeGeneral.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

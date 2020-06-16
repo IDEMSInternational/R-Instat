@@ -602,6 +602,7 @@ Partial Class frmMain
         Me.ToolStripSeparator60 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuStructuredTimeSeriesDescribe = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredTimeSeriesDescribeOneVariable = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredTimeSeriesDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3814,7 +3815,7 @@ Partial Class frmMain
         '
         'mnuStructuredTimeSeriesDescribe
         '
-        Me.mnuStructuredTimeSeriesDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDescribeOneVariable})
+        Me.mnuStructuredTimeSeriesDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDescribeOneVariable, Me.mnuStructuredTimeSeriesDescribeGeneral})
         Me.mnuStructuredTimeSeriesDescribe.Name = "mnuStructuredTimeSeriesDescribe"
         resources.ApplyResources(Me.mnuStructuredTimeSeriesDescribe, "mnuStructuredTimeSeriesDescribe")
         '
@@ -3822,6 +3823,11 @@ Partial Class frmMain
         '
         Me.mnuStructuredTimeSeriesDescribeOneVariable.Name = "mnuStructuredTimeSeriesDescribeOneVariable"
         resources.ApplyResources(Me.mnuStructuredTimeSeriesDescribeOneVariable, "mnuStructuredTimeSeriesDescribeOneVariable")
+        '
+        'mnuStructuredTimeSeriesDescribeGeneral
+        '
+        Me.mnuStructuredTimeSeriesDescribeGeneral.Name = "mnuStructuredTimeSeriesDescribeGeneral"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesDescribeGeneral, "mnuStructuredTimeSeriesDescribeGeneral")
         '
         'frmMain
         '
@@ -4432,4 +4438,5 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator60 As ToolStripSeparator
     Friend WithEvents mnuStructuredTimeSeriesDescribe As ToolStripMenuItem
     Friend WithEvents mnuStructuredTimeSeriesDescribeOneVariable As ToolStripMenuItem
+    Friend WithEvents mnuStructuredTimeSeriesDescribeGeneral As ToolStripMenuItem
 End Class
