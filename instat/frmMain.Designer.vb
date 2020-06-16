@@ -596,6 +596,7 @@ Partial Class frmMain
         Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuStructuredCircular = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredLow_Flow = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredSurvival = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3766,7 +3767,7 @@ Partial Class frmMain
         '
         'mnuStructured
         '
-        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow})
+        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival})
         Me.mnuStructured.Name = "mnuStructured"
         resources.ApplyResources(Me.mnuStructured, "mnuStructured")
         '
@@ -3784,6 +3785,11 @@ Partial Class frmMain
         '
         Me.mnuStructuredLow_Flow.Name = "mnuStructuredLow_Flow"
         resources.ApplyResources(Me.mnuStructuredLow_Flow, "mnuStructuredLow_Flow")
+        '
+        'mnuStructuredSurvival
+        '
+        Me.mnuStructuredSurvival.Name = "mnuStructuredSurvival"
+        resources.ApplyResources(Me.mnuStructuredSurvival, "mnuStructuredSurvival")
         '
         'frmMain
         '
@@ -4388,4 +4394,5 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
     Friend WithEvents mnuStructuredCircular As ToolStripMenuItem
     Friend WithEvents mnuStructuredLow_Flow As ToolStripMenuItem
+    Friend WithEvents mnuStructuredSurvival As ToolStripMenuItem
 End Class
