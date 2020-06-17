@@ -164,7 +164,7 @@ load_R_Instat_packages <- function() {
   # PCICt needed to access PCICt class when importing NET cdf files
   # ggmosaic because geom_mosaic aes only work when ggmosaic is loaded
   # wakefield because many functions do not work without loading (https://github.com/trinker/wakefield/issues/11)
-  packs_to_load <- c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield")
+  packs_to_load <- c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield", "circular")
   for(pack in packs_to_load) {
     try(library(pack, character.only = TRUE))
   }

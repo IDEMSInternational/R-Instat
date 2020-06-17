@@ -22,6 +22,7 @@ Public Class sdgOneVarFitModel
     Private WithEvents ucrDistribution As ucrDistributions
     Public bControlsInitialised As Boolean = False
     Private clsRSyntax As RSyntax
+    Private bRdoMgeEnabled
 
     Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -30,6 +31,7 @@ Public Class sdgOneVarFitModel
     Public Sub InitialiseControls()
         'TODO needs a probs argument
         rdoQme.Enabled = False
+        rdoMge.Enabled = bRdoMgeEnabled
         ucrPnlFitMethod.SetParameter(New RParameter("method"))
         ucrPnlFitMethod.AddRadioButton(rdoMle, Chr(34) & "mle" & Chr(34))
         ucrPnlFitMethod.AddRadioButton(rdoMme, Chr(34) & "mme" & Chr(34))
@@ -47,10 +49,11 @@ Public Class sdgOneVarFitModel
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsRNewOneVarFitModel As RFunction, Optional clsNewRLogLikFunction As RFunction = Nothing, Optional ucrNewDistribution As ucrDistributions = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsRNewOneVarFitModel As RFunction, Optional clsNewRLogLikFunction As RFunction = Nothing, Optional ucrNewDistribution As ucrDistributions = Nothing, Optional bNewRdoMgeEnabled As Boolean = True, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
+        bRdoMgeEnabled = bNewRdoMgeEnabled
         clsRSyntax = clsNewRSyntax
         clsRLogLikFunction = clsNewRLogLikFunction
         ucrDistribution = ucrNewDistribution
