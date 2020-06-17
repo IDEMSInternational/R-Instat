@@ -18,9 +18,11 @@ Imports instat
 
 ''' <summary>   This control allows the user to specify how an object should be saved. 
 '''             <para>
-'''             This control can save the following types of objects: 'column', 'dataframe', 'graph', model', 'surv', 'table'.
+'''             This control can save the following types of objects: 'column', 'dataframe', 
+'''             'graph', model', 'surv', 'table'.
 '''             The user can enter/update the name of the saved object via a text box or combo box.
-'''             A combo box may be used to display a list of possible save names (e.g. the existing column names).
+'''             A combo box may be used to display a list of possible save names (e.g. the existing 
+'''             column names).
 '''             An optional check box allows the text/combo box to be made visible or not visible.
 '''             </para><para>
 '''             For columns, the control provides additional functionality.
@@ -39,16 +41,17 @@ Public Class ucrSave
     '''             unchecked means don't save).</para><para>
     '''             If a label is displayed then saving is mandatory (i.e. the dialog is forcing 
     '''             the user to save the object).</para><para>
-    '''             Normally which to display is set once when the dialog loads and then does not
-    '''             change. However, in rare cases it may change dynamically after the control is 
-    '''             initialised. For example, radio buttons may require the control to switch 
-    '''             between different states.</para>
+    '''             Normally the decision to display a check box or label is only made once when 
+    '''             the dialog loads, and then does not change. 
+    '''             However, in rare cases it may change after loading. 
+    '''             For example, radio buttons may require the control to switch between different 
+    '''             states.</para>
     '''             </summary>
     Private bShowCheckBox As Boolean = True
 
     ''' <summary>   True to show, false to hide the label. </summary>
     '''             (mutually exclusive with bShowCheckBox, see note above) 
-    Private bShowLabel As Boolean = False 'TODO SJL 04/06/20 always set to the opposite of bShowCheckBox. Remove bShowLabel?
+    Private bShowLabel As Boolean = False 'TODO SJL 04/06/20 always set to the opposite of bShowCheckBox. Remove bShowLabel? May be an edge case (not yet implemented) want save/combo box with neither label or check box (e.g. if you want a separate label somewhere else in the dialog)
 
     ''' <summary>   Type of object saved by this control 
     '''             (valid values are: 'column', 'dataframe', 'graph', model', 'surv', 'table') 
@@ -62,21 +65,19 @@ Public Class ucrSave
     '''             Note: This control can have either a combo box or a text box but cannot have 
     '''             both. </para><para>
     '''             A text box is normally used when pre-defined names aren’t of any interest to 
-    '''             the user</para><para>
+    '''             the user. </para><para>
     '''             A combo box is normally used when the user needs to see previously defined 
-    '''             names (e.g. existing column names, to prevent accidentally overwriting them).
-    '''             The user could then consciously select an existing column (and may be warned 
-    '''             that the column will be overwritten), or specify a new name that isn't already 
-    '''             assigned to an existing column. The user may wish to overwrite an existing 
-    '''             column if they are doing a series of intermediate steps. They would store each 
-    '''             step in a new column but wouldn't want to keep a column for each step so they 
-    '''             may overwrite the column with the next step of their analysis.</para>
+    '''             names (e.g. existing column names). The user may then deliberately save to an 
+    '''             existing name (and overwirte that object), or select a new name (and save to 
+    '''             a new object).
+    '''             The user may wish to overwrite an existing column if they are doing a series 
+    '''             of intermediate steps. They may choose to overwrite the previous intermediate 
+    '''             column with the next step of their analysis.</para>
     '''             </summary>
     Private bIsComboBox As Boolean = True
 
-    ''' <summary>   If true then only show the text/combo box when the check box is checked
-    '''             TODO SJL 15/05/20 Always true and is never set to false. Remove? </summary>
-    Private bHideIfUnchecked As Boolean = True
+    ''' <summary>   If true then only show the text/combo box when the check box is checked. </summary>
+    Private bHideIfUnchecked As Boolean = True 'TODO SJL 15/05/20 Always true and is never set to false. Remove?
 
     ''' <summary>   The data frame selector linked to the text/combo box. 
     '''             This selector is used to set the data frame used by the R code's column 
@@ -105,7 +106,7 @@ Public Class ucrSave
     Public bDataFrameList As Boolean = False
 
     ''' <summary>   The names of the new data frames (i.e. the data frame names associated with
-    '''             the R "data_names" parameter).
+    '''             the R "data_names" parameter). This has the format "c(data1, data2, data3)".
     '''             Only used when this control is saving a data frame and 'bDataFrameList' is true.
     '''             </summary>
     Public strDataFrameNames As String
@@ -135,6 +136,16 @@ Public Class ucrSave
     '''             No other RFunction data members are used.
     '''             </para></summary>
     Private clsColPosFunction As New RFunction
+    'TODO SJL 16/06/20 This RFunction only seems to be used for local storage of parameters 
+    '                  (i.e. just a list of parameters). These parameters are never part of the 
+    '                  main function. 
+    '                  The parameters are created in LinkedReceiverControlValueChanged and 
+    '                  converted to booleans in UpdateColumnPositionVariables. 
+    '                  The booleans are converted back into parameters in 'RCodeStructure.ToScript'.
+    '                  Normally, these would be stored as parameters in the actual function that 
+    '                  adds columns. 
+    '                  Or the parameters could be explicitly stored as a list of parameters.
+    '                  Or just the booleans could be stored.
 
     ''' <summary>   Width of the combo box. </summary>
     Private iComboBoxWidth As Integer
@@ -273,7 +284,8 @@ Public Class ucrSave
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the prefix for the text/combo box value to
     '''             <paramref name="strNewPrefix"/>. If <paramref name="strNewPrefix"/> is not an
-    '''             empty string then also sets the default value for the text/combo box.</summary>
+    '''             empty string then also sets the default value associated with the text/combo 
+    '''             box.</summary>
     '''
     ''' <param name="strNewPrefix"> The new prefix for the text/combo box value. </param>
     '''--------------------------------------------------------------------------------------------
@@ -384,7 +396,7 @@ Public Class ucrSave
             lblSaveText.Visible = False
             ucrChkSave.Visible = True
             CheckedChanged()
-        Else
+        Else 'TODO SJL This checkbox should never be reached
             ucrInputComboSave.Enabled = True
             ucrInputTextSave.Enabled = True
             lblSaveText.Visible = False
@@ -549,7 +561,8 @@ Public Class ucrSave
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Handles event triggered when the state of the text/combo box or selector changes. </summary>
+    ''' <summary>   Handles event triggered when the state of the text/combo box or selector 
+    '''             changes. </summary>
     '''
     ''' <param name="ucrChangedControl">    The ucr changed control. </param>
     '''--------------------------------------------------------------------------------------------
@@ -575,12 +588,15 @@ Public Class ucrSave
         UpdateColumnPositionVariables(bReset)
     End Sub
 
-    ''' <summary>   TODO SJL 14/05/20 Could 'UpdateRCode' be called instead? Is this function needed? </summary>
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Updates the control's 'assign to' variables and column position variables. 
+    '''             </summary>
+    '''--------------------------------------------------------------------------------------------
     Protected Overrides Sub UpdateAllParameters()
         UpdateAssignTo()
         'update the variables used for column position
         UpdateColumnPositionVariables()
-        ' TODO SJL 14/05/20 Should this function also call 'UpdateLinkedControls'?
+        ' TODO SJL 16/06/20 Name ‘UpdateAllParameters’ is misleading, parent function does what the name says, this function doesn’t. Ask Danny's advice?
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -810,7 +826,7 @@ Public Class ucrSave
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Adds/updates <paramref name="clsNewRCode"/> to the control's command-parameter 
+    ''' <summary>   Adds <paramref name="clsNewRCode"/> to the control's command-parameter 
     '''             lists (sets the corresponding parameter to 'nothing'):
     ''' <list type="bullet">
     '''     <item><description>
@@ -834,16 +850,40 @@ Public Class ucrSave
     '''                                     lists. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub AddAdditionalRCode(clsNewRCode As RCodeStructure, Optional iAdditionalPairNo As Integer = -1)
+        'TODO SJL 16/06/20 This subroutine adds a command to the command-parameter pair list without a parameter! 
+        '                  This is strange behaviour? I assume it's used in situations where 
+        '                  commands are used for assignments but parameters not important. 
+        '                  For dialog Like conversions dialog. Uses just 1 of a set of commands. 
+        '                  These commands assign to but have no modifiable parameters. 
+        '                  Normally manipulating parameters but in this case we only care about the 
+        '                  assign to (because we're saving something). Ask Danny's advice?
         AddAdditionalCodeParameterPair(clsNewRCode, Nothing, iAdditionalPairNo)
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 13/05/20 This function is not called, and is also available as a public property.Remove?
-    '''             </summary>
+    ''' <summary>   Returns true if the user has typed text into the text/combo box, else returns 
+    '''             false.<para>
+    '''             This function may be used to determine whether the default value should be used.
+    '''             If the user has not typed anything into the text/combo box, then the default 
+    '''             should be used.
+    '''             Otherwise the user-entered value should be used. The default should only be 
+    '''             used again if the user resets the dialog by clicking on the reset button.
+    '''             </para></summary>
     '''
-    ''' <returns>   True if it succeeds, false if it fails. </returns>
+    ''' <returns>   True if the user has typed text into the text/combo box, else returns
+    '''             false. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function UserTyped() As Boolean
+        ' TODO SJL 16/06/20 This function is not called. It could be that the dialogue boxes 
+        '                   already know whether they are using a combo box or textbox and check 
+        '                   this boolean directly instead of via this function. We should maybe 
+        '                   check all cases of this and change the code to call this function 
+        '                   instead because it is safer because there are some cases where it 
+        '                   may change from a text box to a combo box dynamically after the 
+        '                   control has been initialised. For example, in a complex climatic 
+        '                   dialog such as summaries there may be an option to get a column back 
+        '                   or a table or a graph. Depending on the type of object the dialogue 
+        '                   may require either a combo box or a textbox.
         If bIsComboBox Then
             Return ucrInputComboSave.bUserTyped
         Else
@@ -883,11 +923,15 @@ Public Class ucrSave
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets the receiver linked to this control. This receiver allows the user to 
-    '''             specify the column name.
-    '''             Only used when this control is saving a column. </summary>
+    ''' <summary>   Sets the receiver linked to this control. 
+    '''             The receiver contains the column used for the calculation.
+    '''             Normally the user wants the new column to be inserted before/after this column. 
+    '''             <para>
+    '''             The link is made here rather than in the sub-dialog because the sub-dialog 
+    '''             should not have any specific knowledge about the calling parent. </para></summary>
     '''
-    ''' <param name="ucrLinkedReceiver">    The ucr linked receiver. </param>
+    ''' <param name="ucrLinkedReceiver">    The receiver that specifies the column used for the 
+    '''                                     calculation. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub setLinkedReceiver(ucrLinkedReceiver As ucrReceiver)
         Me.ucrLinkedReceiver = ucrLinkedReceiver
@@ -895,11 +939,16 @@ Public Class ucrSave
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Updates the control's R command's column position variables. These variables 
-    '''             specify the position of the new column in the data frame (start, end or 
-    '''             before/after a specified column). If the user has not explictly set the column 
-    '''             position then, by default, sets it to after the specified column.
-    '''             If save object is not a column then this function does nothing.
+    ''' <summary>   Updates the control's R command's column position variables.
+    '''             These variables specify the position of the new column in the data frame 
+    '''             (start, end or before/after a specified column).<para>
+    '''             This subroutine is called automatically when the receiver (specifying a column name) linked to 
+    '''             this control changes. </para><para>
+    '''             If the save object is not a column then this function does nothing.</para><para>
+    '''             If the user has selected a column in the linked receiver, then sets the 
+    '''             parameters to ensure that the new column is added directly after the receiver 
+    '''             column. If the user has not specified a column in the receiver then the 
+    '''             parameters are set to append the column after the final column. </para>
     '''             </summary>
     '''--------------------------------------------------------------------------------------------
     Private Sub LinkedReceiverControlValueChanged()
@@ -938,7 +987,7 @@ Public Class ucrSave
             Exit Sub
         End If
 
-        If bReset Then
+        If bReset Then 'TODO SJL 17/06/20 Should the reset be done here or in the normal reset function?
             sdgSaveColumnPosition.Reset()
 
             'set the 'before' parameter to false, and remove any 'adjacent_column' parameter
@@ -968,8 +1017,5 @@ Public Class ucrSave
                 clsTempCode.strAdjacentColumn = clsColPosFunction.GetParameter("adjacent_column").strArgumentValue
             End If
         Next
-        'TODO SJL 14/05/20 I assume that this control will only have 1 R command 
-        '    that uses the column position variables ('add_columns_to_data'). 
-        '    Why do we loop through and set all the commands?
     End Sub
 End Class
