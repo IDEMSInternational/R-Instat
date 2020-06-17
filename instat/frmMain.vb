@@ -2134,4 +2134,8 @@ Public Class frmMain
     Private Sub mnuClimaticCheckDataHomogenization_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataHomogenization.Click
         dlgHomogenization.ShowDialog() 'partially working now
     End Sub
+
+    Private Sub mnuStructuredCircularDefine_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularDefine.Click
+        dlgCircular.ShowDialog()
+    End Sub
 End Class
