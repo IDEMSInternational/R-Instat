@@ -378,9 +378,11 @@ Public Class ucrSave
         End If
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the child controls to the correct enabled/visible state depending on 
     '''             this control's current state.
     '''             </summary>
+    '''--------------------------------------------------------------------------------------------
     Private Sub LabelOrCheckboxSettings()
         If bShowLabel Then
             ucrInputComboSave.Enabled = True
