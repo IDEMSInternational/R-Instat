@@ -2136,6 +2136,6 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticPrepareCompareSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareCompareSummary.Click
-        dlgCompareSummary.ShowDialog()
+        'dlgCompareSummary.ShowDialog() 'not yet working
     End Sub
 End Class

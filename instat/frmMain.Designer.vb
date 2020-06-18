@@ -1663,8 +1663,8 @@ Partial Class frmMain
         '
         'mnuClimaticPrepareCompareSummary
         '
-        Me.mnuClimaticPrepareCompareSummary.Name = "mnuClimaticPrepareCompareSummary"
         resources.ApplyResources(Me.mnuClimaticPrepareCompareSummary, "mnuClimaticPrepareCompareSummary")
+        Me.mnuClimaticPrepareCompareSummary.Name = "mnuClimaticPrepareCompareSummary"
         '
         'ToolStripSeparator46
         '
