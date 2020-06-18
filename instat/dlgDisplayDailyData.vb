@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgDisplayDailyData
     Private iBasicHeight As Integer
@@ -24,6 +25,7 @@ Public Class dlgDisplayDailyData
     Private clsDisplayDailyTable, clsDisplayDailyGraphFunction, clsConcFunction As New RFunction
     Private clsGGplotFunction, clsGeomLineFunction, clsGeomRugFunction, clsThemeFunction, clsThemeGreyFunction, clsFacetGridFunction, clsGgplotAesFunction, clsGGplotElementText As New RFunction
     Private clsFacetOperator, clsCompleteGgplotOperator As New ROperator
+    Private clsIdVars As New RFunction
 
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -61,6 +63,8 @@ Public Class dlgDisplayDailyData
         ucrReceiverMultipleElements.SetParameter(New RParameter("colour", 2))
         ucrReceiverMultipleElements.SetParameterIsString()
         ucrReceiverMultipleElements.Selector = ucrSelectorDisplayDailyClimaticData
+
+
 
         ucrReceiverStations.SetParameter(New RParameter("station_col", 0, bNewIncludeArgumentName:=False))
         ucrReceiverStations.SetParameterIsString()
@@ -203,6 +207,7 @@ Public Class dlgDisplayDailyData
         clsGgplotAesFunction = New RFunction
         clsGGplotElementText = New RFunction
         clsFacetOperator = New ROperator
+        clsIdVars = New RFunction
 
         clsDisplayDailyTable = New RFunction
         clsDisplayDailyGraphFunction = New RFunction
@@ -210,6 +215,8 @@ Public Class dlgDisplayDailyData
 
         ucrSelectorDisplayDailyClimaticData.Reset()
         ucrReceiverElement.SetMeAsReceiver()
+
+        clsIdVars.SetRCommand("c")
 
         clsGGplotFunction.SetPackageName("ggplot2")
         clsGGplotFunction.SetRCommand("ggplot")
@@ -230,6 +237,8 @@ Public Class dlgDisplayDailyData
         clsThemeFunction.SetRCommand("theme")
         clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsGGplotElementText, iPosition:=0)
 
+        clsFacetOperator.SetOperation("~")
+
         clsFacetGridFunction.SetPackageName("ggplot2")
         clsFacetGridFunction.SetRCommand("facet_grid")
         clsFacetGridFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
@@ -239,12 +248,13 @@ Public Class dlgDisplayDailyData
         clsGGplotElementText.SetRCommand("element_text")
 
         clsCompleteGgplotOperator.SetOperation("+")
-        clsCompleteGgplotOperator.AddParameter(clsRFunctionParameter:=clsGGplotFunction, iPosition:=0)
-        clsCompleteGgplotOperator.AddParameter(clsRFunctionParameter:=clsGeomLineFunction, iPosition:=1)
-        clsCompleteGgplotOperator.AddParameter(clsRFunctionParameter:=clsGeomRugFunction, iPosition:=2)
-        clsCompleteGgplotOperator.AddParameter(clsRFunctionParameter:=clsThemeGreyFunction, iPosition:=3)
-        clsCompleteGgplotOperator.AddParameter(clsRFunctionParameter:=clsThemeFunction, iPosition:=4)
-        clsCompleteGgplotOperator.AddParameter(clsRFunctionParameter:=clsFacetGridFunction, iPosition:=5)
+        clsCompleteGgplotOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGGplotFunction, iPosition:=0)
+        clsCompleteGgplotOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLineFunction, iPosition:=1)
+        clsCompleteGgplotOperator.AddParameter("geom_rug", clsRFunctionParameter:=clsGeomRugFunction, iPosition:=2)
+        clsCompleteGgplotOperator.AddParameter("theme_grey", clsRFunctionParameter:=clsThemeGreyFunction, iPosition:=3)
+        clsCompleteGgplotOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=4)
+        clsCompleteGgplotOperator.AddParameter("fecet_grid", clsRFunctionParameter:=clsFacetGridFunction, iPosition:=5)
+        clsCompleteGgplotOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         clsConcFunction.SetRCommand("c")
         clsConcFunction.AddParameter("sum", Chr(34) & "sum" & Chr(34), iPosition:=0)
@@ -267,13 +277,17 @@ Public Class dlgDisplayDailyData
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverYear.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("year_col", 3), iAdditionalPairNo:=1)
         ucrReceiverStations.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("station_col", 4), iAdditionalPairNo:=1)
-        ucrReceiverStations.AddAdditionalCodeParameterPair(clsFacetOperator, New RParameter("variable", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        'ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("data_name", 0), iAdditionalPairNo:=1)
+        ucrReceiverStations.AddAdditionalCodeParameterPair(clsFacetOperator, New RParameter("station", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverStations.AddAdditionalCodeParameterPair(clsIdVars, New RParameter("station", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("date_col", 2), iAdditionalPairNo:=1)
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsGgplotAesFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrReceiverDate.AddAdditionalCodeParameterPair(clsIdVars, New RParameter("date", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
 
         ucrReceiverMultipleElements.SetRCode(clsGGplotFunction, bReset)
         ucrReceiverMultipleElements.AddAdditionalCodeParameterPair(clsFacetOperator, New RParameter("variable", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+
+        ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsGGplotFunction, New RParameter("data", iNewPosition:=0), iAdditionalPairNo:=1)
 
         ucrChkSum.SetRCode(clsConcFunction, bReset)
         ucrChkMax.SetRCode(clsConcFunction, bReset)
@@ -337,6 +351,7 @@ Public Class dlgDisplayDailyData
         ElseIf rdoGraph.Checked Then
             ucrReceiverMultipleElements.SetMeAsReceiver()
             ucrBase.clsRsyntax.SetBaseROperator(clsCompleteGgplotOperator)
+            ucrSelectorDisplayDailyClimaticData.SetParameterIsrfunction()
         Else
             ucrReceiverElement.SetMeAsReceiver()
             ucrBase.clsRsyntax.iCallType = 2
@@ -346,9 +361,28 @@ Public Class dlgDisplayDailyData
 
     Private Sub ucrSelectorDisplayDailyClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDisplayDailyClimaticData.ControlValueChanged
         clsDisplayDailyGraphFunction.AddParameter("data_name", Chr(34) & ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+        StackingFunction()
     End Sub
 
     Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverMultipleElements.ControlContentsChanged, ucrChkSum.ControlContentsChanged, ucrChkMax.ControlContentsChanged, ucrChkMin.ControlContentsChanged, ucrChkMean.ControlContentsChanged, ucrChkMedian.ControlContentsChanged, ucrChkIQR.ControlContentsChanged, ucrChkSumMissing.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub StackingFunction()
+        If Not ucrReceiverMultipleElements.IsEmpty Then
+            If rdoGraph.Checked Then
+                ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("stack_data", "TRUE")
+                ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("measure.vars", ucrReceiverMultipleElements.GetVariableNames())
+                ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("id.vars", clsRFunctionParameter:=clsIdVars)
+            Else
+                ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("measure.vars")
+                ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("stack_data")
+                ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("id.vars")
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrReceiverMultipleElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleElements.ControlValueChanged
+        StackingFunction()
     End Sub
 End Class
