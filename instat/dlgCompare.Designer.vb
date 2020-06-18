@@ -31,12 +31,29 @@ Partial Class dlgCompare
         Me.rdoDifferences = New System.Windows.Forms.RadioButton()
         Me.lblSateliteAnomalies = New System.Windows.Forms.Label()
         Me.lblStationAnomalies = New System.Windows.Forms.Label()
+        Me.rdoVerification = New System.Windows.Forms.RadioButton()
+        Me.grpObsType = New System.Windows.Forms.GroupBox()
+        Me.rdoCategorical = New System.Windows.Forms.RadioButton()
+        Me.rdoBinary = New System.Windows.Forms.RadioButton()
+        Me.rdoContinuous = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlObsType = New instat.UcrPanel()
+        Me.grpGraphics = New System.Windows.Forms.GroupBox()
+        Me.ucrChkLinePlot = New instat.ucrCheck()
+        Me.ucrChkBoxplot = New instat.ucrCheck()
+        Me.ucrChkReliabilityPlot = New instat.ucrCheck()
+        Me.ucrChkDiscriminationPlot = New instat.ucrCheck()
+        Me.ucrChkConditionalQuantile = New instat.ucrCheck()
+        Me.ucrChkROCPlot = New instat.ucrCheck()
+        Me.lblForecastType = New System.Windows.Forms.Label()
+        Me.ucrInputComboForecastType = New instat.ucrInputComboBox()
+        Me.ucrSaveModel = New instat.ucrSave()
         Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverStationElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverSateliteElement = New instat.ucrReceiverSingle()
         Me.ucrInputStationAnomalies = New instat.ucrInputTextBox()
         Me.ucrInputSateliteAnomalies = New instat.ucrInputTextBox()
+        Me.ucrChkAbsDev = New instat.ucrCheck()
         Me.ucrChkBias = New instat.ucrCheck()
         Me.ucrInputAbsDev = New instat.ucrInputTextBox()
         Me.ucrInputBias = New instat.ucrInputTextBox()
@@ -45,7 +62,8 @@ Partial Class dlgCompare
         Me.ucrChkMovingAverage = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorCompare = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkAbsDev = New instat.ucrCheck()
+        Me.grpObsType.SuspendLayout()
+        Me.grpGraphics.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblStation
@@ -98,6 +116,117 @@ Partial Class dlgCompare
         resources.ApplyResources(Me.lblStationAnomalies, "lblStationAnomalies")
         Me.lblStationAnomalies.Name = "lblStationAnomalies"
         '
+        'rdoVerification
+        '
+        resources.ApplyResources(Me.rdoVerification, "rdoVerification")
+        Me.rdoVerification.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoVerification.FlatAppearance.BorderSize = 2
+        Me.rdoVerification.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoVerification.Name = "rdoVerification"
+        Me.rdoVerification.TabStop = True
+        Me.rdoVerification.UseVisualStyleBackColor = True
+        '
+        'grpObsType
+        '
+        Me.grpObsType.Controls.Add(Me.rdoCategorical)
+        Me.grpObsType.Controls.Add(Me.rdoBinary)
+        Me.grpObsType.Controls.Add(Me.rdoContinuous)
+        Me.grpObsType.Controls.Add(Me.ucrPnlObsType)
+        resources.ApplyResources(Me.grpObsType, "grpObsType")
+        Me.grpObsType.Name = "grpObsType"
+        Me.grpObsType.TabStop = False
+        '
+        'rdoCategorical
+        '
+        resources.ApplyResources(Me.rdoCategorical, "rdoCategorical")
+        Me.rdoCategorical.Name = "rdoCategorical"
+        Me.rdoCategorical.TabStop = True
+        Me.rdoCategorical.UseVisualStyleBackColor = True
+        '
+        'rdoBinary
+        '
+        resources.ApplyResources(Me.rdoBinary, "rdoBinary")
+        Me.rdoBinary.Name = "rdoBinary"
+        Me.rdoBinary.TabStop = True
+        Me.rdoBinary.UseVisualStyleBackColor = True
+        '
+        'rdoContinuous
+        '
+        resources.ApplyResources(Me.rdoContinuous, "rdoContinuous")
+        Me.rdoContinuous.Name = "rdoContinuous"
+        Me.rdoContinuous.TabStop = True
+        Me.rdoContinuous.UseVisualStyleBackColor = True
+        '
+        'ucrPnlObsType
+        '
+        resources.ApplyResources(Me.ucrPnlObsType, "ucrPnlObsType")
+        Me.ucrPnlObsType.Name = "ucrPnlObsType"
+        '
+        'grpGraphics
+        '
+        Me.grpGraphics.Controls.Add(Me.ucrChkLinePlot)
+        Me.grpGraphics.Controls.Add(Me.ucrChkBoxplot)
+        Me.grpGraphics.Controls.Add(Me.ucrChkReliabilityPlot)
+        Me.grpGraphics.Controls.Add(Me.ucrChkDiscriminationPlot)
+        Me.grpGraphics.Controls.Add(Me.ucrChkConditionalQuantile)
+        Me.grpGraphics.Controls.Add(Me.ucrChkROCPlot)
+        resources.ApplyResources(Me.grpGraphics, "grpGraphics")
+        Me.grpGraphics.Name = "grpGraphics"
+        Me.grpGraphics.TabStop = False
+        '
+        'ucrChkLinePlot
+        '
+        Me.ucrChkLinePlot.Checked = False
+        resources.ApplyResources(Me.ucrChkLinePlot, "ucrChkLinePlot")
+        Me.ucrChkLinePlot.Name = "ucrChkLinePlot"
+        '
+        'ucrChkBoxplot
+        '
+        Me.ucrChkBoxplot.Checked = False
+        resources.ApplyResources(Me.ucrChkBoxplot, "ucrChkBoxplot")
+        Me.ucrChkBoxplot.Name = "ucrChkBoxplot"
+        '
+        'ucrChkReliabilityPlot
+        '
+        Me.ucrChkReliabilityPlot.Checked = False
+        resources.ApplyResources(Me.ucrChkReliabilityPlot, "ucrChkReliabilityPlot")
+        Me.ucrChkReliabilityPlot.Name = "ucrChkReliabilityPlot"
+        '
+        'ucrChkDiscriminationPlot
+        '
+        Me.ucrChkDiscriminationPlot.Checked = False
+        resources.ApplyResources(Me.ucrChkDiscriminationPlot, "ucrChkDiscriminationPlot")
+        Me.ucrChkDiscriminationPlot.Name = "ucrChkDiscriminationPlot"
+        '
+        'ucrChkConditionalQuantile
+        '
+        Me.ucrChkConditionalQuantile.Checked = False
+        resources.ApplyResources(Me.ucrChkConditionalQuantile, "ucrChkConditionalQuantile")
+        Me.ucrChkConditionalQuantile.Name = "ucrChkConditionalQuantile"
+        '
+        'ucrChkROCPlot
+        '
+        Me.ucrChkROCPlot.Checked = False
+        resources.ApplyResources(Me.ucrChkROCPlot, "ucrChkROCPlot")
+        Me.ucrChkROCPlot.Name = "ucrChkROCPlot"
+        '
+        'lblForecastType
+        '
+        resources.ApplyResources(Me.lblForecastType, "lblForecastType")
+        Me.lblForecastType.Name = "lblForecastType"
+        '
+        'ucrInputComboForecastType
+        '
+        Me.ucrInputComboForecastType.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboForecastType.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboForecastType, "ucrInputComboForecastType")
+        Me.ucrInputComboForecastType.Name = "ucrInputComboForecastType"
+        '
+        'ucrSaveModel
+        '
+        resources.ApplyResources(Me.ucrSaveModel, "ucrSaveModel")
+        Me.ucrSaveModel.Name = "ucrSaveModel"
+        '
         'ucrReceiverWithinYear
         '
         Me.ucrReceiverWithinYear.frmParent = Me
@@ -149,6 +278,12 @@ Partial Class dlgCompare
         Me.ucrInputSateliteAnomalies.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSateliteAnomalies, "ucrInputSateliteAnomalies")
         Me.ucrInputSateliteAnomalies.Name = "ucrInputSateliteAnomalies"
+        '
+        'ucrChkAbsDev
+        '
+        Me.ucrChkAbsDev.Checked = False
+        resources.ApplyResources(Me.ucrChkAbsDev, "ucrChkAbsDev")
+        Me.ucrChkAbsDev.Name = "ucrChkAbsDev"
         '
         'ucrChkBias
         '
@@ -206,16 +341,16 @@ Partial Class dlgCompare
         resources.ApplyResources(Me.ucrSelectorCompare, "ucrSelectorCompare")
         Me.ucrSelectorCompare.Name = "ucrSelectorCompare"
         '
-        'ucrChkAbsDev
-        '
-        Me.ucrChkAbsDev.Checked = False
-        resources.ApplyResources(Me.ucrChkAbsDev, "ucrChkAbsDev")
-        Me.ucrChkAbsDev.Name = "ucrChkAbsDev"
-        '
         'dlgCompare
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputComboForecastType)
+        Me.Controls.Add(Me.lblForecastType)
+        Me.Controls.Add(Me.grpObsType)
+        Me.Controls.Add(Me.grpGraphics)
+        Me.Controls.Add(Me.ucrSaveModel)
+        Me.Controls.Add(Me.rdoVerification)
         Me.Controls.Add(Me.ucrReceiverWithinYear)
         Me.Controls.Add(Me.ucrReceiverStationElement)
         Me.Controls.Add(Me.ucrReceiverStation)
@@ -243,6 +378,9 @@ Partial Class dlgCompare
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCompare"
+        Me.grpObsType.ResumeLayout(False)
+        Me.grpObsType.PerformLayout()
+        Me.grpGraphics.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -271,4 +409,20 @@ Partial Class dlgCompare
     Friend WithEvents ucrReceiverStationElement As ucrReceiverSingle
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrChkAbsDev As ucrCheck
+    Friend WithEvents rdoVerification As RadioButton
+    Friend WithEvents grpObsType As GroupBox
+    Friend WithEvents rdoCategorical As RadioButton
+    Friend WithEvents rdoBinary As RadioButton
+    Friend WithEvents rdoContinuous As RadioButton
+    Friend WithEvents ucrPnlObsType As UcrPanel
+    Friend WithEvents ucrSaveModel As ucrSave
+    Friend WithEvents grpGraphics As GroupBox
+    Friend WithEvents ucrChkReliabilityPlot As ucrCheck
+    Friend WithEvents ucrChkDiscriminationPlot As ucrCheck
+    Friend WithEvents ucrChkConditionalQuantile As ucrCheck
+    Friend WithEvents ucrChkROCPlot As ucrCheck
+    Friend WithEvents ucrChkLinePlot As ucrCheck
+    Friend WithEvents ucrChkBoxplot As ucrCheck
+    Friend WithEvents ucrInputComboForecastType As ucrInputComboBox
+    Friend WithEvents lblForecastType As Label
 End Class
