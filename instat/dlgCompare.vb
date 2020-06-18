@@ -19,7 +19,8 @@ Imports instat.Translations
 Public Class dlgCompare
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
+    Private dctBinaryForecastTypes As New Dictionary(Of String, String)
+    Private dctContForecastTypes As New Dictionary(Of String, String)
     Private iReceiverSateliteY As Integer
     Private iReceiverLabelSateliteY As Integer
     Private iReceiverStationY As Integer
@@ -28,11 +29,11 @@ Public Class dlgCompare
     Private clsBiasCalculation, clsListFunction, clsAbsDevCalculation, clsAbsDevFunction, clsCombinedCalculation, clsRunInstatCalculation As New RFunction
     Private clsGroupByStationWithinYear As New RFunction
     Private clsDiffOperator, clsMinusOperator As New ROperator
-
     'Anomalies
     Private clsSateliteAnomalies, clsSateliteMeanFunction, clsStationAnomalies, clsStationMeanFunction, clsListManipulation As New RFunction
     Private clsSateliteMinusOperator, clsStationMinusOperator As New ROperator
-
+    'Verification
+    Private clsVerifyFunction, clsSummaryFunction, clsROCPlotFunction, clsReliabilityPlotFunction, clsDiscriminationPlotFunction, clsConditionalPlotFunction As New RFunction
     Private Sub dlgCompare_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -48,11 +49,30 @@ Public Class dlgCompare
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim lstControls As New List(Of Control)
         ucrBase.iHelpTopicID = 562
+
         ucrPnlCompare.AddRadioButton(rdoDifferences)
         ucrPnlCompare.AddRadioButton(rdoAnomalies)
+        ucrPnlCompare.AddRadioButton(rdoVerification)
         ucrPnlCompare.AddParameterPresentCondition(rdoDifferences, "manipulations", False)
         ucrPnlCompare.AddParameterPresentCondition(rdoAnomalies, "manipulations")
+        ucrPnlCompare.AddParameterPresentCondition(rdoVerification, "obs.type")
+
+        ucrPnlObsType.SetParameter(New RParameter("obs.type", 5))
+        ucrPnlObsType.AddRadioButton(rdoContinuous, Chr(34) & "cont" & Chr(34))
+        ucrPnlObsType.AddRadioButton(rdoBinary, Chr(34) & "binary" & Chr(34))
+        ucrPnlObsType.AddRadioButton(rdoCategorical, Chr(34) & "cat" & Chr(34))
+
+        ucrInputComboForecastType.SetParameter(New RParameter("frcst.type", 4))
+        dctBinaryForecastTypes.Add("Probability", Chr(34) & "prob" & Chr(34))
+        dctBinaryForecastTypes.Add("Binary", Chr(34) & "binary" & Chr(34))
+        ucrInputComboForecastType.SetItems(dctBinaryForecastTypes)
+        ucrInputComboForecastType.SetDropDownStyleAsNonEditable()
+        ucrInputComboForecastType.SetRDefault(Chr(34) & "prob" & Chr(34))
+
+        dctContForecastTypes.Add("Continuous", Chr(34) & "cont" & Chr(34))
+        dctContForecastTypes.Add("Normal", Chr(34) & "norm.dist" & Chr(34))
 
         ucrSelectorCompare.SetParameter(New RParameter("", 0))
         ucrSelectorCompare.SetParameterIsrfunction()
@@ -95,6 +115,17 @@ Public Class dlgCompare
         ucrPnlCompare.AddToLinkedControls(ucrReceiverWithinYear, {rdoAnomalies}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlCompare.AddToLinkedControls(ucrInputSateliteAnomalies, {rdoAnomalies}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCompare.AddToLinkedControls(ucrInputStationAnomalies, {rdoAnomalies}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlCompare.AddToLinkedControls(ucrPnlObsType, {rdoVerification}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlCompare.AddToLinkedControls(ucrSaveModel, {rdoVerification}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlObsType.AddToLinkedControls(ucrChkROCPlot, {rdoBinary}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlObsType.AddToLinkedControls(ucrChkConditionalQuantile, {rdoBinary, rdoContinuous}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlObsType.AddToLinkedControls(ucrChkReliabilityPlot, {rdoBinary}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlObsType.AddToLinkedControls(ucrChkDiscriminationPlot, {rdoBinary}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlObsType.AddToLinkedControls(ucrInputComboForecastType, {rdoBinary}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Probability")
+        ucrInputComboForecastType.AddToLinkedControls(ucrChkReliabilityPlot, {"Probability"}, bNewLinkedHideIfParameterMissing:=True)
+        lstControls.AddRange({grpObsType, grpGraphics})
+        ucrPnlObsType.SetLinkedDisplayControl(lstControls)
+        ucrInputComboForecastType.SetLinkedDisplayControl(lblForecastType)
 
         ucrChkBias.AddToLinkedControls(ucrInputBias, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrChkBias.AddToLinkedControls(ucrInputBias, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
@@ -130,9 +161,44 @@ Public Class dlgCompare
         ucrInputStationAnomalies.SetDataFrameSelector(ucrSelectorCompare.ucrAvailableDataFrames)
         ucrInputStationAnomalies.SetDefaultTypeAsColumn()
         ucrInputStationAnomalies.SetPrefix("station_anom")
+
+        ucrChkROCPlot.SetText("ROC")
+        ucrChkROCPlot.AddRSyntaxContainsFunctionNamesCondition(True, {"roc.plot"})
+        ucrChkROCPlot.AddRSyntaxContainsFunctionNamesCondition(False, {"roc.plot"}, False)
+
+        ucrChkReliabilityPlot.SetText("Reliability")
+        ucrChkReliabilityPlot.AddRSyntaxContainsFunctionNamesCondition(True, {"reliability.plot"})
+        ucrChkReliabilityPlot.AddRSyntaxContainsFunctionNamesCondition(False, {"reliability.plot"}, False)
+
+        ucrChkConditionalQuantile.SetText("Conditional Quantile")
+        ucrChkConditionalQuantile.AddRSyntaxContainsFunctionNamesCondition(True, {"plot"})
+        ucrChkConditionalQuantile.AddRSyntaxContainsFunctionNamesCondition(False, {"plot"}, False)
+
+        ucrChkDiscriminationPlot.SetText("Discrimination")
+        ucrChkDiscriminationPlot.AddRSyntaxContainsFunctionNamesCondition(True, {"discrimination.plot"})
+        ucrChkDiscriminationPlot.AddRSyntaxContainsFunctionNamesCondition(False, {"discrimination.plot"}, False)
+
+        ucrChkLinePlot.SetText("Lineplot")
+        ucrChkLinePlot.Enabled = False
+
+        ucrChkBoxplot.SetText("Boxplot")
+        ucrChkBoxplot.Enabled = False
+
+        ucrSaveModel.SetPrefix("model")
+        ucrSaveModel.SetIsComboBox()
+        ucrSaveModel.SetSaveTypeAsModel()
+        ucrSaveModel.SetCheckBoxText("Save Model")
+        ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
+        ucrSaveModel.SetDataFrameSelector(ucrSelectorCompare.ucrAvailableDataFrames)
     End Sub
 
     Private Sub SetDefaults()
+        clsVerifyFunction = New RFunction
+        clsSummaryFunction = New RFunction
+        clsROCPlotFunction = New RFunction
+        clsReliabilityPlotFunction = New RFunction
+        clsConditionalPlotFunction = New RFunction
+        clsDiscriminationPlotFunction = New RFunction
         'clsBiasCalculation.Clear()
         clsDiffOperator.Clear()
         clsListFunction.Clear()
@@ -150,6 +216,9 @@ Public Class dlgCompare
         clsListManipulation.Clear()
         clsStationMinusOperator.Clear()
 
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
+        rdoDifferences.Checked = True 'temp fix
         ucrSelectorCompare.Reset()
         ucrReceiverSateliteElement.SetMeAsReceiver()
 
@@ -226,6 +295,29 @@ Public Class dlgCompare
         clsRunInstatCalculation.AddParameter("display", "FALSE", iPosition:=1)
         clsRunInstatCalculation.AddParameter("calc", clsRFunctionParameter:=clsCombinedCalculation, iPosition:=0)
 
+        clsVerifyFunction.SetPackageName("verification")
+        clsVerifyFunction.SetRCommand("verify")
+        clsVerifyFunction.AddParameter("frcst.type", Chr(34) & "prob" & Chr(34), iPosition:=4)
+        clsVerifyFunction.AddParameter("obs.type", Chr(34) & "cont" & Chr(34), iPosition:=5)
+
+        clsSummaryFunction.SetRCommand("summary")
+        clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsVerifyFunction, iPosition:=0)
+
+        clsROCPlotFunction.SetPackageName("verification")
+        clsROCPlotFunction.SetRCommand("roc.plot")
+        clsROCPlotFunction.AddParameter("x", clsRFunctionParameter:=clsVerifyFunction, iPosition:=0)
+
+        clsReliabilityPlotFunction.SetPackageName("verification")
+        clsReliabilityPlotFunction.SetRCommand("reliability.plot")
+        clsReliabilityPlotFunction.AddParameter("x", clsRFunctionParameter:=clsVerifyFunction, iPosition:=0)
+
+        clsDiscriminationPlotFunction.SetPackageName("verification")
+        clsDiscriminationPlotFunction.SetRCommand("discrimination.plot")
+
+        clsConditionalPlotFunction.SetRCommand("plot")
+        clsConditionalPlotFunction.AddParameter("x", clsRFunctionParameter:=clsVerifyFunction, iPosition:=0)
+
+        ucrBase.clsRsyntax.ClearCodes()
         'Base Function
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunInstatCalculation)
     End Sub
@@ -244,9 +336,16 @@ Public Class dlgCompare
         ucrChkAbsDev.SetRCode(clsListFunction, bReset)
         ucrInputBias.SetRCode(clsBiasCalculation, bReset)
         ucrInputAbsDev.SetRCode(clsAbsDevCalculation, bReset)
-        ucrPnlCompare.SetRCode(clsCombinedCalculation, bReset)
         ucrInputSateliteAnomalies.SetRCode(clsSateliteAnomalies, bReset)
         ucrInputStationAnomalies.SetRCode(clsStationAnomalies, bReset)
+        ucrPnlObsType.SetRCode(clsVerifyFunction, bReset)
+        ucrSaveModel.SetRCode(clsVerifyFunction, bReset)
+        ucrInputComboForecastType.SetRCode(clsVerifyFunction, bReset)
+
+        ucrChkROCPlot.SetRSyntax(ucrBase.clsRsyntax, bReset)
+        ucrChkReliabilityPlot.SetRSyntax(ucrBase.clsRsyntax, bReset)
+        ucrChkConditionalQuantile.SetRSyntax(ucrBase.clsRsyntax, bReset)
+        ucrChkDiscriminationPlot.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -290,10 +389,15 @@ Public Class dlgCompare
         End If
     End Sub
 
+    Private Sub AddObservationPredictionValues()
+        clsVerifyFunction.AddParameter("obs", clsRFunctionParameter:=ucrReceiverStationElement.GetVariables(), iPosition:=0)
+        clsVerifyFunction.AddParameter("pred", clsRFunctionParameter:=ucrReceiverSateliteElement.GetVariables(), iPosition:=1)
+    End Sub
+
     Private Sub SetCurrentReceiver()
         Dim ucrCurrentReceiver As ucrReceiver = Nothing
 
-        If rdoDifferences.Checked Then
+        If rdoDifferences.Checked OrElse rdoVerification.Checked Then
             If ucrSelectorCompare.CurrentReceiver IsNot Nothing Then
                 ucrCurrentReceiver = ucrSelectorCompare.CurrentReceiver
             End If
@@ -305,10 +409,14 @@ Public Class dlgCompare
 
     Private Sub ucrPnlCompare_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCompare.ControlValueChanged
         SetCurrentReceiver()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRunInstatCalculation)
         If rdoAnomalies.Checked Then
             clsCombinedCalculation.AddParameter("manipulations", clsRFunctionParameter:=clsListManipulation, iPosition:=1)
             clsListFunction.AddParameter("sub3", clsRFunctionParameter:=clsSateliteAnomalies, bIncludeArgumentName:=False, iPosition:=2)
             clsListFunction.AddParameter("sub4", clsRFunctionParameter:=clsStationAnomalies, bIncludeArgumentName:=False, iPosition:=3)
+        ElseIf rdoVerification.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
+            ucrBase.clsRsyntax.iCallType = 2
         Else
             clsCombinedCalculation.RemoveParameterByName("manipulations")
             clsListFunction.RemoveParameterByName("sub3")
@@ -325,6 +433,7 @@ Public Class dlgCompare
         clsAbsDevCalculation.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverSateliteElement.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStationElement.GetVariableNames & ")", iPosition:=3)
         clsSateliteAnomalies.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverSateliteElement.GetVariableNames & ")", iPosition:=3)
         clsStationAnomalies.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStationElement.GetVariableNames & ")", iPosition:=3)
+        AddObservationPredictionValues()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged
@@ -343,6 +452,50 @@ Public Class dlgCompare
             clsListManipulation.AddParameter("group_by", clsRFunctionParameter:=clsGroupByStationWithinYear, bIncludeArgumentName:=False)
         Else
             clsListManipulation.RemoveParameterByName("group_by")
+        End If
+    End Sub
+
+    Private Sub ucrPnlObsType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlObsType.ControlValueChanged
+        If rdoContinuous.Checked Then
+            clsVerifyFunction.AddParameter("frcst.type", Chr(34) & "cont" & Chr(34), iPosition:=4)
+        ElseIf rdoCategorical.Checked Then
+            clsVerifyFunction.AddParameter("frcst.type", Chr(34) & "cat" & Chr(34), iPosition:=4)
+        End If
+    End Sub
+
+    Private Sub ucrChkROCPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkROCPlot.ControlValueChanged
+        If ucrChkROCPlot.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsROCPlotFunction, iPosition:=0)
+            clsROCPlotFunction.iCallType = 3
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsROCPlotFunction)
+        End If
+    End Sub
+
+    Private Sub ucrChkReliabilityPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkReliabilityPlot.ControlValueChanged
+        If ucrChkReliabilityPlot.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsReliabilityPlotFunction, iPosition:=1)
+            clsReliabilityPlotFunction.iCallType = 3
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsReliabilityPlotFunction)
+        End If
+    End Sub
+
+    Private Sub ucrChkConditionalQuantile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConditionalQuantile.ControlValueChanged
+        If ucrChkConditionalQuantile.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsConditionalPlotFunction, iPosition:=3)
+            clsConditionalPlotFunction.iCallType = 3
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsConditionalPlotFunction)
+        End If
+    End Sub
+
+    Private Sub ucrChkDiscriminationPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDiscriminationPlot.ControlValueChanged
+        If ucrChkDiscriminationPlot.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDiscriminationPlotFunction, iPosition:=2)
+            clsDiscriminationPlotFunction.iCallType = 3
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDiscriminationPlotFunction)
         End If
     End Sub
 
