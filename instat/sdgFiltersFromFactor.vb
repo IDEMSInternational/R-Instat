@@ -14,8 +14,22 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
 Public Class sdgFiltersFromFactor
     Private Sub sdgFiltersFromFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+    End Sub
 
+    Public Sub InitialiseControls()
+
+        ucrFactorReceiver.Selector = ucrFactorSelctor
+        ucrFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucrFactorReceiver.strSelectorHeading = "Factors"
+        ucrFactorReceiver.SetParameter(New RParameter("data", 0))
+        ucrFactorReceiver.SetParameterIsString()
+        ucrFactorReceiver.bWithQuotes = False
+
+        ucrChkAndExistingFilter.SetText("AndExistingFilter")
+        ucrChkAndExistingFilter.AddToLinkedControls(ucrReceiverExistingFilter, {True}, bNewLinkedAddRemoveParameter:=False)
     End Sub
 End Class
