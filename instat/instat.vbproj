@@ -195,6 +195,12 @@
     <Compile Include="dlgCircular.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCompareSummary.Designer.vb">
+      <DependentUpon>dlgCompareSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCompareSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDisplayTopN.Designer.vb">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
     </Compile>
@@ -2489,6 +2495,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCompareSummary.resx">
+      <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayTopN.resx">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
