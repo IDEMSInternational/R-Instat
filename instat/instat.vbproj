@@ -1133,6 +1133,12 @@
     <Compile Include="sdgTwoWayFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgVerificationSummaries.Designer.vb">
+      <DependentUpon>sdgVerificationSummaries.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgVerificationSummaries.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgWindrose.Designer.vb">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
     </Compile>
@@ -4252,6 +4258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgVariableTransformations.sw-KE.resx">
       <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgVerificationSummaries.resx">
+      <DependentUpon>sdgVerificationSummaries.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgWindrose.resx">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
