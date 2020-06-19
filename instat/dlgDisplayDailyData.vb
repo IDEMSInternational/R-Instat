@@ -24,7 +24,7 @@ Public Class dlgDisplayDailyData
     Private lstCheckboxes As New List(Of ucrCheck)
     Private clsDisplayDailyTable, clsDisplayDailyGraphFunction, clsConcFunction As New RFunction
     Private clsGGplotFunction, clsGeomLineFunction, clsGeomRugFunction, clsThemeFunction, clsThemeGreyFunction, clsFacetGridFunction, clsGgplotAesFunction, clsGGplotElementText As New RFunction
-    Private clsFacetOperator, clsCompleteGgplotOperator As New ROperator
+    Private clsFacetOperator, clsBaseOperator As New ROperator
     Private clsIdVars As New RFunction
 
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -197,7 +197,7 @@ Public Class dlgDisplayDailyData
     End Sub
 
     Private Sub SetDefaults()
-        clsCompleteGgplotOperator = New ROperator
+        clsBaseOperator = New ROperator
         clsGGplotFunction = New RFunction
         clsGeomLineFunction = New RFunction
         clsGeomRugFunction = New RFunction
@@ -224,6 +224,8 @@ Public Class dlgDisplayDailyData
 
         clsGgplotAesFunction.SetPackageName("ggplot2")
         clsGgplotAesFunction.SetRCommand("aes")
+        clsGgplotAesFunction.AddParameter("y", "value", iPosition:=1)
+        clsGgplotAesFunction.AddParameter("colour", "variable", iPosition:=2)
 
         clsGeomLineFunction.SetPackageName("ggplot2")
         clsGeomLineFunction.SetRCommand("geom_line")
@@ -238,6 +240,7 @@ Public Class dlgDisplayDailyData
         clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsGGplotElementText, iPosition:=0)
 
         clsFacetOperator.SetOperation("~")
+        clsFacetOperator.AddParameter("variable", "variable", iPosition:=0)
 
         clsFacetGridFunction.SetPackageName("ggplot2")
         clsFacetGridFunction.SetRCommand("facet_grid")
@@ -247,14 +250,14 @@ Public Class dlgDisplayDailyData
         clsGGplotElementText.SetPackageName("ggplot2")
         clsGGplotElementText.SetRCommand("element_text")
 
-        clsCompleteGgplotOperator.SetOperation("+")
-        clsCompleteGgplotOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGGplotFunction, iPosition:=0)
-        clsCompleteGgplotOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLineFunction, iPosition:=1)
-        clsCompleteGgplotOperator.AddParameter("geom_rug", clsRFunctionParameter:=clsGeomRugFunction, iPosition:=2)
-        clsCompleteGgplotOperator.AddParameter("theme_grey", clsRFunctionParameter:=clsThemeGreyFunction, iPosition:=3)
-        clsCompleteGgplotOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=4)
-        clsCompleteGgplotOperator.AddParameter("fecet_grid", clsRFunctionParameter:=clsFacetGridFunction, iPosition:=5)
-        clsCompleteGgplotOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsBaseOperator.SetOperation("+")
+        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGGplotFunction, iPosition:=0)
+        clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLineFunction, iPosition:=1)
+        clsBaseOperator.AddParameter("geom_rug", clsRFunctionParameter:=clsGeomRugFunction, iPosition:=2)
+        clsBaseOperator.AddParameter("theme_grey", clsRFunctionParameter:=clsThemeGreyFunction, iPosition:=3)
+        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=4)
+        clsBaseOperator.AddParameter("fecet_grid", clsRFunctionParameter:=clsFacetGridFunction, iPosition:=5)
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         clsConcFunction.SetRCommand("c")
         clsConcFunction.AddParameter("sum", Chr(34) & "sum" & Chr(34), iPosition:=0)
@@ -284,8 +287,7 @@ Public Class dlgDisplayDailyData
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsGgplotAesFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsIdVars, New RParameter("date", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
 
-        ucrReceiverMultipleElements.SetRCode(clsGGplotFunction, bReset)
-        ucrReceiverMultipleElements.AddAdditionalCodeParameterPair(clsFacetOperator, New RParameter("variable", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverMultipleElements.SetRCode(ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame, bReset)
 
         ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsGGplotFunction, New RParameter("data", iNewPosition:=0), iAdditionalPairNo:=1)
 
@@ -345,17 +347,21 @@ Public Class dlgDisplayDailyData
 
     Private Sub ucrPnlFrequencyDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencyDisplay.ControlValueChanged
         DialogSize()
-        If rdoGraphByYear.Checked Then
-            ucrBase.clsRsyntax.iCallType = 3
-            ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyGraphFunction)
-        ElseIf rdoGraph.Checked Then
+        If rdoGraph.Checked Then
             ucrReceiverMultipleElements.SetMeAsReceiver()
-            ucrBase.clsRsyntax.SetBaseROperator(clsCompleteGgplotOperator)
+            ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
             ucrSelectorDisplayDailyClimaticData.SetParameterIsrfunction()
+            ucrReceiverDate.SetValuesToIgnore({Chr(34) & Chr(34)})
         Else
-            ucrReceiverElement.SetMeAsReceiver()
-            ucrBase.clsRsyntax.iCallType = 2
-            ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyTable)
+            If rdoGraphByYear.Checked Then
+                ucrBase.clsRsyntax.iCallType = 3
+                ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyGraphFunction)
+            Else
+                ucrReceiverElement.SetMeAsReceiver()
+                ucrBase.clsRsyntax.iCallType = 2
+                ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyTable)
+            End If
+            ucrSelectorDisplayDailyClimaticData.SetParameterIsString()
         End If
     End Sub
 
