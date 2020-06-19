@@ -30,15 +30,22 @@ Public Class sdgFiltersFromFactor
         ucrFactorReceiver.SetParameterIsRFunction()
         ucrFactorReceiver.bWithQuotes = False
 
+        ucrFactorLevel.SetAsMultipleSelector()
         ucrFactorLevel.SetReceiver(ucrFactorReceiver)
-        ucrFactorLevel.SetAsViewerOnly()
-        ucrFactorLevel.bIncludeCopyOfLevels = True
-        ucrFactorLevel.AddEditableColumns({"New Label"})
+        ucrFactorLevel.SetIncludeLevels(False)
+        ucrFactorLevel.bIncludeNA = True
 
-        ucrFactorSelctor.SetParameter(New RParameter("data", 0))
+        cmdToggleSelectAll.Visible = True
+
+        ucrFactorSelctor.SetParameter(New RParameter("factors", 0))
         ucrFactorSelctor.SetParameterIsrfunction()
+
 
         ucrChkAndExistingFilter.SetText("AndExistingFilter")
         ucrChkAndExistingFilter.AddToLinkedControls(ucrReceiverExistingFilter, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
+    Private Sub SetDefaults()
+
+    End Sub
+
 End Class
