@@ -30,7 +30,6 @@ Partial Class dlgSPI
         Me.grpIndex = New System.Windows.Forms.GroupBox()
         Me.rdoSPEI = New System.Windows.Forms.RadioButton()
         Me.rdoSPI = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlIndex = New instat.UcrPanel()
         Me.lblTimeScale = New System.Windows.Forms.Label()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.grpKernel = New System.Windows.Forms.GroupBox()
@@ -40,12 +39,14 @@ Partial Class dlgSPI
         Me.rdoGaussian = New System.Windows.Forms.RadioButton()
         Me.rdoCircular = New System.Windows.Forms.RadioButton()
         Me.rdoTriangular = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveModel = New instat.ucrSave()
+        Me.ucrSaveIndex = New instat.ucrSave()
         Me.ucrPnlKernelType = New instat.UcrPanel()
         Me.ucrNudKernelShift = New instat.ucrNud()
-        Me.ucrSaveIndex = New instat.ucrSave()
         Me.ucrNudTimeScale = New instat.ucrNud()
         Me.ucrChkOmitMissingValues = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlIndex = New instat.UcrPanel()
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
@@ -98,11 +99,6 @@ Partial Class dlgSPI
         Me.rdoSPI.Name = "rdoSPI"
         Me.rdoSPI.TabStop = True
         Me.rdoSPI.UseVisualStyleBackColor = True
-        '
-        'ucrPnlIndex
-        '
-        resources.ApplyResources(Me.ucrPnlIndex, "ucrPnlIndex")
-        Me.ucrPnlIndex.Name = "ucrPnlIndex"
         '
         'lblTimeScale
         '
@@ -162,6 +158,16 @@ Partial Class dlgSPI
         Me.rdoTriangular.TabStop = True
         Me.rdoTriangular.UseVisualStyleBackColor = True
         '
+        'ucrSaveModel
+        '
+        resources.ApplyResources(Me.ucrSaveModel, "ucrSaveModel")
+        Me.ucrSaveModel.Name = "ucrSaveModel"
+        '
+        'ucrSaveIndex
+        '
+        resources.ApplyResources(Me.ucrSaveIndex, "ucrSaveIndex")
+        Me.ucrSaveIndex.Name = "ucrSaveIndex"
+        '
         'ucrPnlKernelType
         '
         resources.ApplyResources(Me.ucrPnlKernelType, "ucrPnlKernelType")
@@ -176,11 +182,6 @@ Partial Class dlgSPI
         Me.ucrNudKernelShift.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudKernelShift.Name = "ucrNudKernelShift"
         Me.ucrNudKernelShift.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrSaveIndex
-        '
-        resources.ApplyResources(Me.ucrSaveIndex, "ucrSaveIndex")
-        Me.ucrSaveIndex.Name = "ucrSaveIndex"
         '
         'ucrNudTimeScale
         '
@@ -202,6 +203,11 @@ Partial Class dlgSPI
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrPnlIndex
+        '
+        resources.ApplyResources(Me.ucrPnlIndex, "ucrPnlIndex")
+        Me.ucrPnlIndex.Name = "ucrPnlIndex"
         '
         'ucrReceiverData
         '
@@ -241,6 +247,7 @@ Partial Class dlgSPI
         '
         'ucrSelectorVariable
         '
+        Me.ucrSelectorVariable.bDropUnusedFilterLevels = False
         Me.ucrSelectorVariable.bShowHiddenColumns = False
         Me.ucrSelectorVariable.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorVariable, "ucrSelectorVariable")
@@ -250,6 +257,7 @@ Partial Class dlgSPI
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.ucrSaveIndex)
         Me.Controls.Add(Me.grpKernel)
         Me.Controls.Add(Me.ucrNudTimeScale)
@@ -308,4 +316,5 @@ Partial Class dlgSPI
     Friend WithEvents ucrPnlIndex As UcrPanel
     Friend WithEvents ucrSaveIndex As ucrSave
     Friend WithEvents grpKernelType As GroupBox
+    Friend WithEvents ucrSaveModel As ucrSave
 End Class

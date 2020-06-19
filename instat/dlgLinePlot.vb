@@ -36,6 +36,17 @@ Public Class dlgLinePlot
     Private bResetLineLayerSubdialog As Boolean = True
     Private clsGeomSmoothFunc As New RFunction
     Private clsGeomSmoothParameter As New RParameter
+    Private clsPeaksFunction As New RFunction
+    Private clsValleysFunction As New RFunction
+    Private clsCoordPolarFunction As New RFunction
+    Private clsCoordPolarStartOperator As New ROperator
+
+    'Parameter names for geoms
+    Private strFirstParameterName As String = "geomfunc"
+    Private strgeomSmoothParameterName As String = "geom_smooth"
+    Private strPeaksPointsParameterName As String = "stat_peaks"
+    Private strValleysPointsParameterName As String = "stat_valleys"
+    Private strGeomParameterNames() As String = {strFirstParameterName, strgeomSmoothParameterName, strPeaksPointsParameterName, strValleysPointsParameterName}
 
     Private Sub dlgPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -54,6 +65,8 @@ Public Class dlgLinePlot
     Private Sub InitialiseDialog()
         Dim clsGeomPointFunc As New RFunction
         Dim clsGeomPointParam As New RParameter
+        Dim clsPeaksParam As New RParameter
+        Dim clsValleysParam As New RParameter
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -77,6 +90,11 @@ Public Class dlgLinePlot
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.SetParameterIsString()
 
+        ucrReceiverGroup.SetParameter(New RParameter("group", 2))
+        ucrReceiverGroup.Selector = ucrLinePlotSelector
+        ucrReceiverGroup.bWithQuotes = False
+        ucrReceiverGroup.SetParameterIsString()
+
         ucrVariablesAsFactorForLinePlot.SetParameter(New RParameter("y", 1))
         ucrVariablesAsFactorForLinePlot.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForLinePlot.Selector = ucrLinePlotSelector
@@ -98,11 +116,30 @@ Public Class dlgLinePlot
         clsGeomSmoothFunc.SetRCommand("geom_smooth")
         clsGeomSmoothFunc.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
         clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
-        clsGeomSmoothParameter.SetArgumentName("geom_smooth")
+        clsGeomSmoothParameter.SetArgumentName(strgeomSmoothParameterName)
         clsGeomSmoothParameter.SetArgument(clsGeomSmoothFunc)
         ucrChkLineofBestFit.SetText("Add Line of Best Fit")
         ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        clsPeaksFunction.SetPackageName("ggpmisc")
+        clsPeaksFunction.SetRCommand("stat_peaks")
+        clsPeaksParam.SetArgumentName(strPeaksPointsParameterName)
+        clsPeaksParam.SetArgument(clsPeaksFunction)
+        clsPeaksFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
+        clsPeaksFunction.AddParameter("colour", Chr(34) & "red" & Chr(34))
+        ucrChkPeak.SetText("Add Peaks")
+        ucrChkPeak.SetParameter(clsPeaksParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        clsValleysFunction.SetPackageName("ggpmisc")
+        clsValleysFunction.SetRCommand("stat_valleys")
+        clsValleysParam.SetArgumentName(strValleysPointsParameterName)
+        clsValleysParam.SetArgument(clsValleysFunction)
+        clsValleysFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
+        clsValleysFunction.AddParameter("colour", Chr(34) & "blue" & Chr(34))
+        ucrChkValley.SetText("Add Valleys")
+        ucrChkValley.SetParameter(clsValleysParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
 
         ucrChkWithSE.SetText("With Standard Error")
         ucrChkWithSE.SetParameter(New RParameter("se", 1))
@@ -132,7 +169,7 @@ Public Class dlgLinePlot
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("lineplot", clsRFunctionParameter:=clsRgeomlineplotFunction, iPosition:=2)
+        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsRgeomlineplotFunction, iPosition:=2)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -153,6 +190,8 @@ Public Class dlgLinePlot
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+        clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
+        clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
@@ -169,10 +208,14 @@ Public Class dlgLinePlot
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrVariablesAsFactorForLinePlot.SetRCode(clsRaesFunction, bReset)
         ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrReceiverGroup.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
         ucrChkWithSE.SetRCode(clsGeomSmoothFunc, bReset)
+        'set Rcode for checkboxes
+        ucrChkPeak.SetRCode(clsBaseOperator, bReset)
+        ucrChkValley.SetRCode(clsBaseOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -200,7 +243,7 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -229,6 +272,8 @@ Public Class dlgLinePlot
                 End If
             ElseIf clsParam.strArgumentName = "colour" Then
                 ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "group" Then
+                ucrReceiverGroup.Add(clsParam.strArgumentValue)
             End If
         Next
         TestOkEnabled()
@@ -249,9 +294,12 @@ Public Class dlgLinePlot
     Private Sub SetGroupParam()
         If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("group", "1", iPosition:=3)
+            ucrReceiverGroup.Enabled = False
 
         ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("group", ucrFactorOptionalReceiver.GetVariableNames(False), iPosition:=3)
+            ucrReceiverGroup.Enabled = True
+            ucrReceiverGroup.SetText(ucrFactorOptionalReceiver.GetVariableNames(False))
+            clsRaesFunction.AddParameter("group", ucrReceiverGroup.GetVariableNames(False), iPosition:=3)
         Else
             clsRaesFunction.RemoveParameterByName("group")
         End If

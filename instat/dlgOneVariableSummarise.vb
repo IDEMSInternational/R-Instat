@@ -14,12 +14,13 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 
 Public Class dlgOneVariableSummarise
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSummaryFunction, clsSummariesList, clsInstatSummaryFunction As New RFunction
+    Private clsSummaryFunction, clsSummariesList, clsInstatSummaryFunction, clsConcFunction As New RFunction
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
@@ -53,33 +54,31 @@ Public Class dlgOneVariableSummarise
 
         ucrNudMaxSum.SetParameter(New RParameter("maxsum", 2))
         ucrNudMaxSum.SetRDefault("7")
+        ucrNudMaxSum.SetLinkedDisplayControl(lblMaxSum)
+
+        ucrPnlSummaries.AddRadioButton(rdoDefault)
+        ucrPnlSummaries.AddRadioButton(rdoCustomised)
+        ucrPnlSummaries.AddFunctionNamesCondition(rdoCustomised, frmMain.clsRLink.strInstatDataObject & "$summary")
+        ucrPnlSummaries.AddFunctionNamesCondition(rdoDefault, "summary")
+        ucrPnlSummaries.AddToLinkedControls(ucrNudMaxSum, {rdoDefault}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummaries.AddToLinkedControls(ucrChkOmitMissing, {rdoCustomised}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 3))
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetRDefault("FALSE")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.bUpdateRCodeFromControl = True
-
-        ucrChkCustomise.SetText("Customise")
-        ucrChkCustomise.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$summary")
-        ucrChkCustomise.AddFunctionNamesCondition(False, "summary")
-        ucrChkCustomise.AddToLinkedControls(ucrNudMaxSum, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudMaxSum.SetLinkedDisplayControl(lblMaxSum)
-
-        ucrChkSaveResult.SetText("Save Result") 'this is disabled in the initial implementation
-        ucrChkSaveResult.Enabled = False
-        'ucrChkSaveResult.SetParameter(New RParameter("store_results"))
-        'ucrChkSaveResult.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        'ucrChkSaveResult.SetRDefault("FALSE")
     End Sub
 
     Private Sub SetDefaults()
         clsSummariesList = New RFunction
         clsSummaryFunction = New RFunction
         clsInstatSummaryFunction = New RFunction
-        cmdSummaries.Enabled = False
+        clsConcFunction = New RFunction
 
         ucrSelectorOneVarSummarise.Reset()
+
+        clsConcFunction.SetRCommand("c")
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
@@ -103,13 +102,14 @@ Public Class dlgOneVariableSummarise
         ucrNudMaxSum.SetRCode(clsSummaryFunction, bReset)
         ucrReceiverOneVarSummarise.SetRCode(clsSummaryFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
-        ucrChkCustomise.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlSummaries.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSelectorOneVarSummarise.SetRCode(clsInstatSummaryFunction, bReset)
+        ChangeBaseFunction()
     End Sub
 
     Public Sub TestOKEnabled()
         'We cannot test the values on the sub dialog because the sub dialog may not be in sync with the main dialog code. This only happens once the sub dialog has been opened.
-        If ucrReceiverOneVarSummarise.IsEmpty() OrElse (ucrChkCustomise.Checked AndAlso clsSummariesList.clsParameters.Count = 0) OrElse ucrNudMaxSum.GetText = "" Then
+        If ucrReceiverOneVarSummarise.IsEmpty() OrElse (rdoCustomised.Checked AndAlso clsSummariesList.clsParameters.Count = 0) OrElse ucrNudMaxSum.GetText = "" Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -123,7 +123,7 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsSummariesList, clsInstatSummaryFunction, ucrSelectorOneVarSummarise, bResetSubdialog)
+        sdgSummaries.SetRFunction(clsSummariesList, clsInstatSummaryFunction, clsConcFunction, ucrSelectorOneVarSummarise, bResetSubdialog)
         bResetSubdialog = False
         sdgSummaries.bEnable2VariableTab = False
         sdgSummaries.ShowDialog()
@@ -132,15 +132,13 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub ChangeBaseFunction()
-        If ucrChkCustomise.Checked Then
+        If rdoCustomised.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsInstatSummaryFunction)
-            cmdSummaries.Enabled = True
-        Else
+            cmdSummaries.Visible = True
+        ElseIf rdoDefault.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
-            cmdSummaries.Enabled = False
+            cmdSummaries.Visible = False
         End If
-        'We need to update the base function to include the 
-        'ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction.AddParameter(ucrChkOmitMissing.GetParameter())
     End Sub
 
     Private Sub ucrReceiverDescribeOneVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarSummarise.ControlValueChanged
@@ -164,11 +162,11 @@ Public Class dlgOneVariableSummarise
         strDefaultColumns = Nothing
     End Sub
 
-    Private Sub ucrChkCustomise_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCustomise.ControlValueChanged
-        ChangeBaseFunction()
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarSummarise.ControlContentsChanged, ucrNudMaxSum.ControlContentsChanged, ucrPnlSummaries.ControlValueChanged
+        TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarSummarise.ControlContentsChanged, ucrChkCustomise.ControlContentsChanged, ucrNudMaxSum.ControlContentsChanged
-        TestOKEnabled()
+    Private Sub ucrPnlSummaries_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummaries.ControlValueChanged
+        ChangeBaseFunction()
     End Sub
 End Class

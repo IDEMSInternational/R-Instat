@@ -55,10 +55,11 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetPrefix("Calc")
         ucrCalc.ucrInputCalOptions.SetName("Basic")
         ucrCalc.Reset()
-        ucrCalc.chkShowArguments.Checked = False
+        ucrCalc.chkShowParameters.Checked = False
         ucrCalc.chkSaveResultInto.Checked = True
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
+        ucrCalc.ucrTryCalculator.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.Visible = True
     End Sub
 
@@ -69,17 +70,22 @@ Public Class dlgCalculator
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 14
         ucrCalc.ucrReceiverForCalculation.SetMeAsReceiver()
+        ucrCalc.ucrTryCalculator.SetIsCommand()
+        ucrCalc.ucrTryCalculator.SetReceiver(ucrCalc.ucrReceiverForCalculation)
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("unload", "TRUE")
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
         ucrBase.clsRsyntax.SetCommandString("")
         ucrCalc.ucrSaveResultInto.SetItemsTypeAsColumns()
         ucrCalc.ucrSaveResultInto.SetDefaultTypeAsColumn()
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrSaveResultInto.SetValidationTypeAsRVariable()
+        ucrCalc.ucrTryCalculator.StrvecOutputRequired()
     End Sub
 
     Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveNameChanged
@@ -98,27 +104,13 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        Dim strScript As String = ""
-        Dim strFunc As String
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
-        strFunc = clsAttach.ToScript(strScript)
-        frmMain.clsRLink.RunScript(strScript & strFunc)
-    End Sub
-
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        Dim strScript As String = ""
-        Dim strFunc As String
-        strFunc = clsDetach.ToScript(strScript)
-        frmMain.clsRLink.RunScript(strScript & strFunc)
         ucrCalc.SetCalculationHistory()
     End Sub
 
     Private Sub ucrCalc_SelectionChanged() Handles ucrCalc.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrCalc.ucrReceiverForCalculation.GetVariableNames(False))
-        ucrCalc.ucrInputTryMessage.SetName("")
-        ucrCalc.cmdTry.Enabled = Not ucrCalc.ucrReceiverForCalculation.IsEmpty()
+        ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
         TestOKEnabled()
     End Sub
 
@@ -136,17 +128,29 @@ Public Class dlgCalculator
             Case "Maths"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.38, Me.Height)
             Case "Logical and Symbols"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.46, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.4, Me.Height)
             Case "Summary"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.49, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.43, Me.Height)
             Case "Strings (Character Columns)"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.41, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.47, Me.Height)
+            Case "Factor"
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.4, Me.Height)
             Case "Probability"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.59, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.5, Me.Height)
             Case "Dates"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.3, Me.Height)
             Case "Transform"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.35, Me.Height)
+            Case "Circular"
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.36, Me.Height)
+            Case "Wakefield"
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.7, Me.Height)
+            Case "Modifier"
+                Me.Size = New Size(iBasicWidth * 1.39, Me.Height)
+            Case "Symbols"
+                Me.Size = New Size(iBasicWidth * 2.56, Me.Height)
+            Case "hydroGOF"
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.27, Me.Height)
             Case Else
                 Me.Size = New System.Drawing.Size(iBasicWidth, Me.Height)
         End Select
@@ -158,7 +162,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrCalc.DataFrameChanged
-        ucrCalc.ucrInputTryMessage.SetName("")
+        ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
         SaveResults()
     End Sub
 
@@ -168,63 +172,5 @@ Public Class dlgCalculator
         Else
             ucrCalc.ucrSaveResultInto.Visible = False
         End If
-    End Sub
-
-    Private Sub TryScript()
-        Dim strOutPut As String
-        Dim strAttach As String
-        Dim strDetach As String
-        Dim strTempScript As String = ""
-        Dim strVecOutput As CharacterVector
-        Dim bIsAssigned As Boolean
-        Dim bToBeAssigned As Boolean
-        Dim strAssignTo As String
-        Dim strAssignToColumn As String
-        Dim strAssignToDataFrame As String
-
-        bIsAssigned = ucrBase.clsRsyntax.GetbIsAssigned()
-        bToBeAssigned = ucrBase.clsRsyntax.GetbToBeAssigned()
-        strAssignTo = ucrBase.clsRsyntax.GetstrAssignTo()
-        'These should really be done through RSyntax methods as above
-        strAssignToColumn = ucrBase.clsRsyntax.GetstrAssignToColumn()
-        strAssignToDataFrame = ucrBase.clsRsyntax.GetstrAssignToDataFrame()
-
-        Try
-            If ucrCalc.ucrReceiverForCalculation.IsEmpty Then
-                ucrCalc.ucrInputTryMessage.SetName("")
-            Else
-                'get strScript here
-                strAttach = clsAttach.ToScript(strTempScript)
-                frmMain.clsRLink.RunInternalScript(strTempScript & strAttach, bSilent:=True)
-                ucrBase.clsRsyntax.RemoveAssignTo()
-                strOutPut = ucrBase.clsRsyntax.GetScript
-                strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strOutPut, bSilent:=True)
-                If strVecOutput IsNot Nothing Then
-                    If strVecOutput.Length > 1 Then
-                        ucrCalc.ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5) & "...")
-                    Else
-                        ucrCalc.ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5))
-                    End If
-                Else
-                    ucrCalc.ucrInputTryMessage.SetName("Command produced an error or no output to display.")
-                End If
-            End If
-        Catch ex As Exception
-            ucrCalc.ucrInputTryMessage.SetName("Command produced an error. Modify input before running.")
-        Finally
-            strTempScript = ""
-            strDetach = clsDetach.ToScript(strTempScript)
-            frmMain.clsRLink.RunInternalScript(strTempScript & strDetach, bSilent:=True)
-            ucrBase.clsRsyntax.SetbIsAssigned(bIsAssigned)
-            ucrBase.clsRsyntax.SetbToBeAssigned(bToBeAssigned)
-            ucrBase.clsRsyntax.SetstrAssignTo(strAssignTo)
-            'These should really be done through RSyntax methods as above
-            ucrBase.clsRsyntax.SetstrAssignToColumn(strAssignToColumn)
-            ucrBase.clsRsyntax.SetstrAssignToDataFrame(strAssignToDataFrame)
-        End Try
-    End Sub
-
-    Private Sub cmdTry_Click() Handles ucrCalc.TryCommadClick
-        TryScript()
     End Sub
 End Class

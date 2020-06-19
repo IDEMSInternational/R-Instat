@@ -53,6 +53,7 @@ Partial Class dlgExportToOpenRefine
         '
         'ucrDataFrameOpenRefine
         '
+        Me.ucrDataFrameOpenRefine.bDropUnusedFilterLevels = False
         Me.ucrDataFrameOpenRefine.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrDataFrameOpenRefine, "ucrDataFrameOpenRefine")
         Me.ucrDataFrameOpenRefine.Name = "ucrDataFrameOpenRefine"

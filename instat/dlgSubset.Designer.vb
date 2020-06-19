@@ -48,16 +48,17 @@ Partial Class dlgSubset
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 0)
+        Me.ucrBase.Location = New System.Drawing.Point(40, 247)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 5
         '
         'ucrDataFrameAddRemove
         '
+        Me.ucrDataFrameAddRemove.bDropUnusedFilterLevels = False
         Me.ucrDataFrameAddRemove.bShowHiddenColumns = False
         Me.ucrDataFrameAddRemove.bUseCurrentFilter = True
-        Me.ucrDataFrameAddRemove.Location = New System.Drawing.Point(0, 0)
+        Me.ucrDataFrameAddRemove.Location = New System.Drawing.Point(33, 55)
         Me.ucrDataFrameAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameAddRemove.Name = "ucrDataFrameAddRemove"
         Me.ucrDataFrameAddRemove.Size = New System.Drawing.Size(210, 180)
@@ -65,12 +66,15 @@ Partial Class dlgSubset
         '
         'ucrReceiverSubset
         '
-        Me.ucrReceiverSubset.Location = New System.Drawing.Point(0, 0)
+        Me.ucrReceiverSubset.frmParent = Me
+        Me.ucrReceiverSubset.Location = New System.Drawing.Point(294, 66)
         Me.ucrReceiverSubset.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSubset.Name = "ucrReceiverSubset"
         Me.ucrReceiverSubset.Selector = Nothing
         Me.ucrReceiverSubset.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverSubset.strNcFilePath = ""
         Me.ucrReceiverSubset.TabIndex = 3
+        Me.ucrReceiverSubset.ucrSelector = Nothing
         '
         'lblSelectedVariables
         '
@@ -91,7 +95,7 @@ Partial Class dlgSubset
         'cboDrop
         '
         Me.cboDrop.FormattingEnabled = True
-        Me.cboDrop.Location = New System.Drawing.Point(0, 0)
+        Me.cboDrop.Location = New System.Drawing.Point(294, 214)
         Me.cboDrop.Name = "cboDrop"
         Me.cboDrop.Size = New System.Drawing.Size(121, 21)
         Me.cboDrop.TabIndex = 0
@@ -100,7 +104,7 @@ Partial Class dlgSubset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 262)
+        Me.ClientSize = New System.Drawing.Size(462, 334)
         Me.Controls.Add(Me.cboDrop)
         Me.Controls.Add(Me.lblDrop)
         Me.Controls.Add(Me.lblSelectedVariables)

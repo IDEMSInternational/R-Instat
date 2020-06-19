@@ -70,7 +70,7 @@ Partial Class dlgFreqTables
         Me.grpDisplay.Controls.Add(Me.rdoPercentFactor)
         Me.grpDisplay.Controls.Add(Me.rdoPercentOverallTotal)
         Me.grpDisplay.Controls.Add(Me.rdoCounts)
-        Me.grpDisplay.Location = New System.Drawing.Point(12, 183)
+        Me.grpDisplay.Location = New System.Drawing.Point(12, 187)
         Me.grpDisplay.Name = "grpDisplay"
         Me.grpDisplay.Size = New System.Drawing.Size(226, 117)
         Me.grpDisplay.TabIndex = 4
@@ -81,7 +81,7 @@ Partial Class dlgFreqTables
         'cboPercentFactor
         '
         Me.cboPercentFactor.FormattingEnabled = True
-        Me.cboPercentFactor.Location = New System.Drawing.Point(140, 95)
+        Me.cboPercentFactor.Location = New System.Drawing.Point(140, 87)
         Me.cboPercentFactor.Name = "cboPercentFactor"
         Me.cboPercentFactor.Size = New System.Drawing.Size(80, 21)
         Me.cboPercentFactor.TabIndex = 3
@@ -89,7 +89,7 @@ Partial Class dlgFreqTables
         'rdoPercentFactor
         '
         Me.rdoPercentFactor.AutoSize = True
-        Me.rdoPercentFactor.Location = New System.Drawing.Point(12, 99)
+        Me.rdoPercentFactor.Location = New System.Drawing.Point(6, 88)
         Me.rdoPercentFactor.Name = "rdoPercentFactor"
         Me.rdoPercentFactor.Size = New System.Drawing.Size(122, 17)
         Me.rdoPercentFactor.TabIndex = 2
@@ -101,7 +101,7 @@ Partial Class dlgFreqTables
         'rdoPercentOverallTotal
         '
         Me.rdoPercentOverallTotal.AutoSize = True
-        Me.rdoPercentOverallTotal.Location = New System.Drawing.Point(12, 67)
+        Me.rdoPercentOverallTotal.Location = New System.Drawing.Point(6, 56)
         Me.rdoPercentOverallTotal.Name = "rdoPercentOverallTotal"
         Me.rdoPercentOverallTotal.Size = New System.Drawing.Size(154, 17)
         Me.rdoPercentOverallTotal.TabIndex = 1
@@ -113,7 +113,7 @@ Partial Class dlgFreqTables
         'rdoCounts
         '
         Me.rdoCounts.AutoSize = True
-        Me.rdoCounts.Location = New System.Drawing.Point(12, 33)
+        Me.rdoCounts.Location = New System.Drawing.Point(6, 22)
         Me.rdoCounts.Name = "rdoCounts"
         Me.rdoCounts.Size = New System.Drawing.Size(58, 17)
         Me.rdoCounts.TabIndex = 0
@@ -125,7 +125,7 @@ Partial Class dlgFreqTables
         'chkWeights
         '
         Me.chkWeights.AutoSize = True
-        Me.chkWeights.Location = New System.Drawing.Point(340, 47)
+        Me.chkWeights.Location = New System.Drawing.Point(347, 47)
         Me.chkWeights.Name = "chkWeights"
         Me.chkWeights.Size = New System.Drawing.Size(65, 17)
         Me.chkWeights.TabIndex = 5
@@ -136,7 +136,7 @@ Partial Class dlgFreqTables
         'cboWeights
         '
         Me.cboWeights.FormattingEnabled = True
-        Me.cboWeights.Location = New System.Drawing.Point(413, 45)
+        Me.cboWeights.Location = New System.Drawing.Point(420, 45)
         Me.cboWeights.Name = "cboWeights"
         Me.cboWeights.Size = New System.Drawing.Size(83, 21)
         Me.cboWeights.TabIndex = 6
@@ -163,17 +163,20 @@ Partial Class dlgFreqTables
         '
         'ucrReceiverMultiple
         '
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(205, 45)
+        Me.ucrReceiverMultiple.frmParent = Me
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(213, 45)
         Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
         Me.ucrReceiverMultiple.Selector = Nothing
         Me.ucrReceiverMultiple.Size = New System.Drawing.Size(127, 136)
+        Me.ucrReceiverMultiple.strNcFilePath = ""
         Me.ucrReceiverMultiple.TabIndex = 3
+        Me.ucrReceiverMultiple.ucrSelector = Nothing
         '
         'ucrAddRemove
         '
         Me.ucrAddRemove.bShowHiddenColumns = False
-        Me.ucrAddRemove.Location = New System.Drawing.Point(-2, 28)
+        Me.ucrAddRemove.Location = New System.Drawing.Point(3, 28)
         Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(204, 132)

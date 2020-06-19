@@ -42,12 +42,32 @@ Partial Class dlgDescribeTwoVarGraph
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.lblFirstVariables = New System.Windows.Forms.Label()
+        Me.grpSummaries = New System.Windows.Forms.GroupBox()
+        Me.ucrInputCategoricalByCategorical = New instat.ucrInputComboBox()
+        Me.ucrInputCategoricalByNumeric = New instat.ucrInputComboBox()
+        Me.ucrInputNumericByCategorical = New instat.ucrInputComboBox()
+        Me.ucrInputNumericByNumeric = New instat.ucrInputComboBox()
+        Me.lblFirstType = New System.Windows.Forms.Label()
+        Me.lblGraphName = New System.Windows.Forms.Label()
+        Me.lblGraph = New System.Windows.Forms.Label()
+        Me.lblBy = New System.Windows.Forms.Label()
+        Me.lblSecondType = New System.Windows.Forms.Label()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrInputPosition = New instat.ucrInputComboBox()
+        Me.lblPosition = New System.Windows.Forms.Label()
+        Me.ucrNudTransparency = New instat.ucrNud()
+        Me.ucrNudJitter = New instat.ucrNud()
+        Me.lblPointTransparency = New System.Windows.Forms.Label()
+        Me.lblPointJitter = New System.Windows.Forms.Label()
+        Me.ucrChkFreeScaleYAxis = New instat.ucrCheck()
         Me.ucrFlipCoordinates = New instat.ucrCheck()
         Me.ucrSaveGraph = New instat.ucrSave()
-        Me.ucrReceiverMultipleTwoVar = New instat.ucrVariablesAsFactor()
-        Me.ucrSecondVariableReceiver = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSecondVar = New instat.ucrReceiverSingle()
         Me.ucrSelectorTwoVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverFirstVars = New instat.ucrVariablesAsFactor()
+        Me.grpSummaries.SuspendLayout()
+        Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -68,6 +88,137 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblFirstVariables.Name = "lblFirstVariables"
         Me.lblFirstVariables.Tag = "First_Variable(s)"
         '
+        'grpSummaries
+        '
+        Me.grpSummaries.Controls.Add(Me.ucrInputCategoricalByCategorical)
+        Me.grpSummaries.Controls.Add(Me.ucrInputCategoricalByNumeric)
+        Me.grpSummaries.Controls.Add(Me.ucrInputNumericByCategorical)
+        Me.grpSummaries.Controls.Add(Me.ucrInputNumericByNumeric)
+        Me.grpSummaries.Controls.Add(Me.lblFirstType)
+        Me.grpSummaries.Controls.Add(Me.lblGraphName)
+        Me.grpSummaries.Controls.Add(Me.lblGraph)
+        Me.grpSummaries.Controls.Add(Me.lblBy)
+        Me.grpSummaries.Controls.Add(Me.lblSecondType)
+        resources.ApplyResources(Me.grpSummaries, "grpSummaries")
+        Me.grpSummaries.Name = "grpSummaries"
+        Me.grpSummaries.TabStop = False
+        '
+        'ucrInputCategoricalByCategorical
+        '
+        Me.ucrInputCategoricalByCategorical.AddQuotesIfUnrecognised = True
+        Me.ucrInputCategoricalByCategorical.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCategoricalByCategorical, "ucrInputCategoricalByCategorical")
+        Me.ucrInputCategoricalByCategorical.Name = "ucrInputCategoricalByCategorical"
+        '
+        'ucrInputCategoricalByNumeric
+        '
+        Me.ucrInputCategoricalByNumeric.AddQuotesIfUnrecognised = True
+        Me.ucrInputCategoricalByNumeric.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCategoricalByNumeric, "ucrInputCategoricalByNumeric")
+        Me.ucrInputCategoricalByNumeric.Name = "ucrInputCategoricalByNumeric"
+        '
+        'ucrInputNumericByCategorical
+        '
+        Me.ucrInputNumericByCategorical.AddQuotesIfUnrecognised = True
+        Me.ucrInputNumericByCategorical.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputNumericByCategorical, "ucrInputNumericByCategorical")
+        Me.ucrInputNumericByCategorical.Name = "ucrInputNumericByCategorical"
+        '
+        'ucrInputNumericByNumeric
+        '
+        Me.ucrInputNumericByNumeric.AddQuotesIfUnrecognised = True
+        Me.ucrInputNumericByNumeric.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputNumericByNumeric, "ucrInputNumericByNumeric")
+        Me.ucrInputNumericByNumeric.Name = "ucrInputNumericByNumeric"
+        '
+        'lblFirstType
+        '
+        Me.lblFirstType.ForeColor = System.Drawing.SystemColors.ControlText
+        resources.ApplyResources(Me.lblFirstType, "lblFirstType")
+        Me.lblFirstType.Name = "lblFirstType"
+        '
+        'lblGraphName
+        '
+        resources.ApplyResources(Me.lblGraphName, "lblGraphName")
+        Me.lblGraphName.Name = "lblGraphName"
+        '
+        'lblGraph
+        '
+        resources.ApplyResources(Me.lblGraph, "lblGraph")
+        Me.lblGraph.Name = "lblGraph"
+        '
+        'lblBy
+        '
+        resources.ApplyResources(Me.lblBy, "lblBy")
+        Me.lblBy.Name = "lblBy"
+        '
+        'lblSecondType
+        '
+        resources.ApplyResources(Me.lblSecondType, "lblSecondType")
+        Me.lblSecondType.Name = "lblSecondType"
+        '
+        'grpOptions
+        '
+        Me.grpOptions.Controls.Add(Me.ucrInputPosition)
+        Me.grpOptions.Controls.Add(Me.lblPosition)
+        Me.grpOptions.Controls.Add(Me.ucrNudTransparency)
+        Me.grpOptions.Controls.Add(Me.ucrNudJitter)
+        Me.grpOptions.Controls.Add(Me.lblPointTransparency)
+        Me.grpOptions.Controls.Add(Me.lblPointJitter)
+        Me.grpOptions.Controls.Add(Me.ucrChkFreeScaleYAxis)
+        Me.grpOptions.Controls.Add(Me.ucrFlipCoordinates)
+        resources.ApplyResources(Me.grpOptions, "grpOptions")
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.TabStop = False
+        '
+        'ucrInputPosition
+        '
+        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
+        Me.ucrInputPosition.Name = "ucrInputPosition"
+        '
+        'lblPosition
+        '
+        resources.ApplyResources(Me.lblPosition, "lblPosition")
+        Me.lblPosition.Name = "lblPosition"
+        '
+        'ucrNudTransparency
+        '
+        Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudTransparency, "ucrNudTransparency")
+        Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTransparency.Name = "ucrNudTransparency"
+        Me.ucrNudTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudJitter
+        '
+        Me.ucrNudJitter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJitter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudJitter, "ucrNudJitter")
+        Me.ucrNudJitter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudJitter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJitter.Name = "ucrNudJitter"
+        Me.ucrNudJitter.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblPointTransparency
+        '
+        resources.ApplyResources(Me.lblPointTransparency, "lblPointTransparency")
+        Me.lblPointTransparency.Name = "lblPointTransparency"
+        '
+        'lblPointJitter
+        '
+        resources.ApplyResources(Me.lblPointJitter, "lblPointJitter")
+        Me.lblPointJitter.Name = "lblPointJitter"
+        '
+        'ucrChkFreeScaleYAxis
+        '
+        Me.ucrChkFreeScaleYAxis.Checked = False
+        resources.ApplyResources(Me.ucrChkFreeScaleYAxis, "ucrChkFreeScaleYAxis")
+        Me.ucrChkFreeScaleYAxis.Name = "ucrChkFreeScaleYAxis"
+        '
         'ucrFlipCoordinates
         '
         Me.ucrFlipCoordinates.Checked = False
@@ -79,27 +230,18 @@ Partial Class dlgDescribeTwoVarGraph
         resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         '
-        'ucrReceiverMultipleTwoVar
+        'ucrReceiverSecondVar
         '
-        Me.ucrReceiverMultipleTwoVar.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultipleTwoVar, "ucrReceiverMultipleTwoVar")
-        Me.ucrReceiverMultipleTwoVar.Name = "ucrReceiverMultipleTwoVar"
-        Me.ucrReceiverMultipleTwoVar.Selector = Nothing
-        Me.ucrReceiverMultipleTwoVar.strNcFilePath = ""
-        Me.ucrReceiverMultipleTwoVar.ucrSelector = Nothing
-        Me.ucrReceiverMultipleTwoVar.ucrVariableSelector = Nothing
-        '
-        'ucrSecondVariableReceiver
-        '
-        Me.ucrSecondVariableReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrSecondVariableReceiver, "ucrSecondVariableReceiver")
-        Me.ucrSecondVariableReceiver.Name = "ucrSecondVariableReceiver"
-        Me.ucrSecondVariableReceiver.Selector = Nothing
-        Me.ucrSecondVariableReceiver.strNcFilePath = ""
-        Me.ucrSecondVariableReceiver.ucrSelector = Nothing
+        Me.ucrReceiverSecondVar.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverSecondVar, "ucrReceiverSecondVar")
+        Me.ucrReceiverSecondVar.Name = "ucrReceiverSecondVar"
+        Me.ucrReceiverSecondVar.Selector = Nothing
+        Me.ucrReceiverSecondVar.strNcFilePath = ""
+        Me.ucrReceiverSecondVar.ucrSelector = Nothing
         '
         'ucrSelectorTwoVarGraph
         '
+        Me.ucrSelectorTwoVarGraph.bDropUnusedFilterLevels = False
         Me.ucrSelectorTwoVarGraph.bShowHiddenColumns = False
         Me.ucrSelectorTwoVarGraph.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorTwoVarGraph, "ucrSelectorTwoVarGraph")
@@ -110,23 +252,38 @@ Partial Class dlgDescribeTwoVarGraph
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrReceiverFirstVars
+        '
+        Me.ucrReceiverFirstVars.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFirstVars, "ucrReceiverFirstVars")
+        Me.ucrReceiverFirstVars.Name = "ucrReceiverFirstVars"
+        Me.ucrReceiverFirstVars.Selector = Nothing
+        Me.ucrReceiverFirstVars.strNcFilePath = ""
+        Me.ucrReceiverFirstVars.ucrSelector = Nothing
+        Me.ucrReceiverFirstVars.ucrVariableSelector = Nothing
+        '
         'dlgDescribeTwoVarGraph
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrFlipCoordinates)
+        Me.Controls.Add(Me.grpOptions)
+        Me.Controls.Add(Me.grpSummaries)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.lblFirstVariables)
-        Me.Controls.Add(Me.ucrReceiverMultipleTwoVar)
         Me.Controls.Add(Me.lblSecondVariable)
-        Me.Controls.Add(Me.ucrSecondVariableReceiver)
+        Me.Controls.Add(Me.ucrReceiverSecondVar)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrSelectorTwoVarGraph)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrReceiverFirstVars)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDescribeTwoVarGraph"
+        Me.grpSummaries.ResumeLayout(False)
+        Me.grpSummaries.PerformLayout()
+        Me.grpOptions.ResumeLayout(False)
+        Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -135,10 +292,28 @@ Partial Class dlgDescribeTwoVarGraph
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrSelectorTwoVarGraph As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrSecondVariableReceiver As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSecondVar As ucrReceiverSingle
     Friend WithEvents lblSecondVariable As Label
-    Friend WithEvents ucrReceiverMultipleTwoVar As ucrVariablesAsFactor
+    Friend WithEvents ucrReceiverFirstVars As ucrVariablesAsFactor
     Friend WithEvents lblFirstVariables As Label
     Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrFlipCoordinates As ucrCheck
+    Friend WithEvents grpSummaries As GroupBox
+    Friend WithEvents lblFirstType As Label
+    Friend WithEvents lblGraph As Label
+    Friend WithEvents lblBy As Label
+    Friend WithEvents lblSecondType As Label
+    Friend WithEvents grpOptions As GroupBox
+    Friend WithEvents lblGraphName As Label
+    Friend WithEvents ucrInputNumericByNumeric As ucrInputComboBox
+    Friend WithEvents ucrInputNumericByCategorical As ucrInputComboBox
+    Friend WithEvents ucrInputCategoricalByNumeric As ucrInputComboBox
+    Friend WithEvents ucrInputCategoricalByCategorical As ucrInputComboBox
+    Friend WithEvents ucrChkFreeScaleYAxis As ucrCheck
+    Friend WithEvents ucrInputPosition As ucrInputComboBox
+    Friend WithEvents lblPosition As Label
+    Friend WithEvents ucrNudTransparency As ucrNud
+    Friend WithEvents ucrNudJitter As ucrNud
+    Friend WithEvents lblPointTransparency As Label
+    Friend WithEvents lblPointJitter As Label
 End Class

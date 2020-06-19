@@ -37,6 +37,7 @@ Public Class dlgView
     End Sub
 
     Private Sub InitialiseDialog()
+        rdoHTMLOutputWindow.Enabled = False 'TODO. temporarily disabled until the feauture can be improved on.
         ucrBase.iHelpTopicID = 32
         'Needed because window may pop up window which will disappear in a separate thread
         ucrBase.clsRsyntax.bSeparateThread = False
@@ -52,7 +53,8 @@ Public Class dlgView
 
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispOutputWindow, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
-        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoHTMLOutputWindow, "sjt.df")
+        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoHTMLOutputWindow, "tab_df")
+
 
         ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
 
@@ -115,10 +117,10 @@ Public Class dlgView
         clsOutputWindowFunction.SetPackageName("utils")
 
         clsHTMLFunction.SetPackageName("sjPlot")
-        clsHTMLFunction.SetRCommand("sjt.df")
-        clsHTMLFunction.AddParameter("describe", "FALSE", iPosition:=1)
-        clsHTMLFunction.AddParameter("altr.row.col", "TRUE", iPosition:=2)
-        clsHTMLFunction.AddParameter("hide.progress", "TRUE", iPosition:=4)
+        clsHTMLFunction.SetRCommand("tab_df")
+        clsHTMLFunction.AddParameter("show.type", "FALSE", iPosition:=1)
+        clsHTMLFunction.AddParameter("alternate.rows", "TRUE", iPosition:=2)
+        clsHTMLFunction.AddParameter("use.viewer", "TRUE", iPosition:=4)
 
         clsViewColumnsFunction.SetPackageName("utils")
         clsViewColumnsFunction.SetRCommand("View")
@@ -136,7 +138,9 @@ Public Class dlgView
         'Correct maximum is then set in DataFrameLength()
         ucrNudNumberRows.Maximum = Decimal.MaxValue
 
-        ucrReceiverView.AddAdditionalCodeParameterPair(clsHTMLFunction, New RParameter("mydf"), iAdditionalPairNo:=1)
+        'ucrReceiverView.AddAdditionalCodeParameterPair(clsHTMLFunction, New RParameter("mydf"), iAdditionalPairNo:=1)
+        ucrReceiverView.AddAdditionalCodeParameterPair(clsHTMLFunction, New RParameter("x"), iAdditionalPairNo:=1)
+
         ucrReceiverView.AddAdditionalCodeParameterPair(clsOutputWindowFunction, New RParameter("x"), iAdditionalPairNo:=2)
         ucrSelectorForView.AddAdditionalCodeParameterPair(clsViewColumnsFunction, ucrSelectorForView.GetParameter(), iAdditionalPairNo:=1)
 
@@ -213,7 +217,7 @@ Public Class dlgView
                 ucrBase.clsRsyntax.iCallType = 0
                 ucrBase.clsRsyntax.SetBaseRFunction(clsViewColumnsFunction)
             Else
-                ucrBase.clsRsyntax.iCallType = 0
+                ucrBase.clsRsyntax.iCallType = 2
                 ucrBase.clsRsyntax.SetBaseRFunction(clsHTMLFunction)
             End If
         Else
@@ -226,7 +230,7 @@ Public Class dlgView
         ucrNudNumberRows.Maximum = ucrSelectorForView.ucrAvailableDataFrames.iDataFrameLength
     End Sub
 
-    Private Sub FunctionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged
+    Private Sub FunctionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged, ucrReceiverView.ControlValueChanged
         If bControlsUpdated Then
             ChangeFunctionParameters()
         End If

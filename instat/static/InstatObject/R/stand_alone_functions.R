@@ -3,9 +3,10 @@ get_default_significant_figures <- function(data) {
   else return(NA)  
 }
 
-convert_to_character_matrix <- function(data, format_decimal_places = TRUE, decimal_places, return_data_frame = TRUE, na_display = NULL, check.names = TRUE) {
+convert_to_character_matrix <- function(data, format_decimal_places = TRUE, decimal_places, is_scientific = FALSE, return_data_frame = TRUE, na_display = NULL, check.names = TRUE) {
   if(nrow(data) == 0) {
-    out <- data
+    out <- matrix(nrow = 0, ncol = ncol(data))
+    colnames(out) <- colnames(data)
   }
   else {
     out = matrix(nrow = nrow(data), ncol = ncol(data))
@@ -17,7 +18,7 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
         out[,i] <- as.character(data[[i]])
       }
       else {
-        out[,i] <- format(data[[i]], digits = decimal_places[i], scientific = FALSE)
+        out[,i] <- format(data[[i]], digits = decimal_places[i], scientific = is_scientific[i])
       }
       if(!is.null(na_display)) {
         out[is.na(data[[i]]),i] <- na_display
@@ -173,41 +174,78 @@ lat_lon_dataframe <- function(datafile){
   return(cbind(lat_lon,station))
 }
 
-output_for_CPT = function(data_name, lat_lon_data, long = TRUE, year_col, sst_cols, station_col = ""){
-  if(missing(data_name) || missing(data_name)) stop("data_name and lat_lon_data should be provided.")
-  if(missing(year_col) || missing(sst_cols)) stop("year_col and sst_cols must be provided.")
-  if(!is.character(year_col) || !is.character(sst_cols)) stop("year_col and sst_cols must be of type character.")
-  if(!all(c(year_col, sst_cols) %in% names(data_name))) stop("Some column(s) are missing in data")
-  my_lat_lon_data <- lat_lon_data
-  row.names(my_lat_lon_data) <- lat_lon_data$station
-  if (long){
-    if(length(sst_cols) != 1) stop("Only one SST column should be provided for long data format.")
-    if(missing(station_col)) stop("station_col must be provided for long data format.")
-    if(!is.character(station_col)) stop("station must be of type character.")
-    if(!all(station_col %in% names(data_name))) stop(station_col,  " is missing in data.")
-    row.names(data_name) = NULL
-    data_name <- droplevels(data_name)
-    ssT_col_names = as.character(levels(data_name[,station_col]))
-    Year = c("LAT","LON")
-    selected_lat_lon = t(my_lat_lon_data[ssT_col_names, c("lat", "lon")])
-    selected_lat_lon = cbind(Year, selected_lat_lon)
-    my_data <- as.matrix(reshape2::dcast(data = data_name, formula = as.formula(paste(year_col, "~station",sep = "")), value.var = sst_cols))
-    my_data = as.data.frame(rbind(selected_lat_lon, my_data))
-  }
-  else{
-    ssT_col_names = sst_cols
-    selected_lat_lon = t(my_lat_lon_data[ssT_col_names, c("lat", "lon")])
-    my_data = data_name[,c(ssT_col_names)]
-    if(length(ssT_col_names)==1){
-      my_data = as.data.frame(my_data)
-      names(my_data) = ssT_col_names
+output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitude, station, year, element, long.data = TRUE, na_code = -999) {
+  
+  if(missing(data)) stop("data should be provided")
+  if(missing(station)) stop("station must be provided")
+  if(missing(year) ||  missing(latitude) || missing(longitude)) stop("year, latitude and longiude must be provided")
+  
+  station_label <- "STN"
+  lat_lon_labels <- c("LAT", "LON")
+  
+  if(missing(lat_lon_data)) {
+    if(long.data) {
+      data <- data %>% dplyr::select(!!! quos(station, year, element, latitude, longitude))
+      names(data)[1] <- "station"
+      names(data)[2] <- "year"
+      names(data)[3] <- "element"
+      names(data)[4] <- "latitude"
+      names(data)[5] <- "longitude"
+      
+      data <- data %>% dplyr::filter(!is.na(station))
     }
-    my_data = rbind(selected_lat_lon, my_data)
-    Year = c("LAT","LON", as.vector(data_name[,c(year_col)]))
-    my_data = as.data.frame(cbind(Year, my_data))
+    else stop("If all data is in one data frame then must have long.data = TRUE")
   }
-  data.table::setnames(my_data, "Year", "STN")
-  return(my_data)
+  else {
+    if(missing(station_latlondata)) stop("station must be provided for lat_lon_data")
+    
+    if(long.data) {
+      yearly_data <- data %>% dplyr::select(!!! quos(station, year, element))
+      names(yearly_data)[1] <-  "station"
+      names(yearly_data)[2] <-  "year"
+      names(yearly_data)[3] <-  "element"
+      
+      lat_lon_data <- lat_lon_data %>% dplyr::select(!!! quos(station_latlondata, latitude, longitude))
+      names(lat_lon_data)[1] <- "station"
+      names(lat_lon_data)[2] <- "latitude"
+      names(lat_lon_data)[3] <- "longitude"
+      
+      data <- merge(yearly_data, lat_lon_data, by =  "station")
+    }
+    else {
+      stations <- data.frame(data[station])
+      year <- data_unstacked %>% dplyr::select(!!! quos(year))
+      data <- data.frame(year, stations)
+      stacked_data <- reshape2::melt(data, id.vars=c("year"))
+      names(stacked_data)[2] <-  "station"
+      names(stacked_data)[3] <- "element"
+      
+      lat_lon_data <- lat_lon_data %>% dplyr::select(!!! quos(station_latlondata, latitude, longitude))
+      names(lat_lon_data)[1] <- "station"
+      names(lat_lon_data)[2] <- "latitude"
+      names(lat_lon_data)[3] <- "longitude"
+      
+      data <- merge(stacked_data, lat_lon_data, by = "station")
+      
+    }
+  }
+  
+  unstacked_data <- data %>% dplyr::select(station, year, element) %>% tidyr::spread(key = station, value = element)
+  names(unstacked_data)[1] <- station_label
+  unstacked_data <- unstacked_data %>% mutate_all(funs(replace(., is.na(.), na_code)))
+  
+  lat_lon_data <- data %>% dplyr::group_by(station) %>% dplyr::summarise(latitude = min(latitude, na.rm = TRUE), longitude = min(longitude, na.rm = TRUE))
+  if(anyNA(data$latitude) || anyNA(data$longitude)) warning("Missing values in latitude or longitude.")
+  t_lat_lon_data <- t(lat_lon_data)
+  station.names <- as.vector(t_lat_lon_data[1, ])
+  t_lat_lon_data <- data.frame(t_lat_lon_data, stringsAsFactors = FALSE)
+  t_lat_lon_data <- t_lat_lon_data %>% dplyr::slice(-1)
+  names(t_lat_lon_data) <- station.names
+  row.names(t_lat_lon_data) <- lat_lon_labels
+  t_lat_lon_data <- tibble::rownames_to_column(t_lat_lon_data, station_label)
+  
+  cpt_data <- rbind(t_lat_lon_data, unstacked_data)
+  return(cpt_data)
 }
 
 yday_366 <- function(date) {
@@ -222,11 +260,10 @@ dekade <- function(date) {
   return(temp_dekade)
 }
 
-pentad <- function(date) {
-  m <- lubridate::month(date)
-  temp_pentad <- 6 * (m) - 5 + (m > 5) + (m > 10) + (m > 15) + (m > 20) + (m > 25)
-  return(temp_pentad)
-}
+pentad <- function(date){
+	temp_pentad <- 6*(lubridate::month(date)) - 5 + (lubridate::mday(date) > 5) + (lubridate::mday(date) > 10) + (lubridate::mday(date) > 15) + (lubridate::mday(date) > 20) + (lubridate::mday(date) > 25)
+	return(temp_pentad)	
+ }	 
 
 nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
   if(!dimension %in% names(nc$dim)) stop(dimension, " not found in file.")
@@ -236,10 +273,17 @@ nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
   if(dimension %in% time_dims && time_as_date) {
     time_vals <- c()
     try({
-      pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = dimension)
-      posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
-      # RDotNet interprets Date class as numeric so character needed to preserve date
-      time_vals <- as.character(as.Date(posixct_time))
+      units <- ncdf4::ncatt_get(nc, dimension, "units")
+      if(units$hasatt && units$value == "julian_day") {
+        # RDotNet interprets Date class as numeric so character needed to preserve date
+        time_vals <- as.character(as.Date(vals, origin = structure(-2440588, class = "Date")))
+      }
+      else {
+        pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = dimension)
+        posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
+        # RDotNet interprets Date class as numeric so character needed to preserve date
+        time_vals <- as.character(as.Date(posixct_time))
+      }
     })
     if(length(time_vals) > 0 && !anyNA(time_vals)) vals <- time_vals
   }
@@ -247,16 +291,19 @@ nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
   return(bounds)
 }
 
-nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, show_requested_points = TRUE) {
+nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = TRUE) {
+  if(missing(vars)) vars <- ncdf4.helpers::nc.get.variable.list(nc)
   if(sum(is.null(lon_points), is.null(lat_points)) == 1) stop("You must specificy both lon_points and lat_points")
   has_points <- (sum(is.null(lon_points), is.null(lat_points)) == 0)
   if(has_points && length(lon_points) != length(lat_points)) stop("lon_points and lat_points have unequal lengths.")
+  if(has_points && !is.null(id_points) && length(id_points) != length(lat_points)) stop("id_points (if specified) must have the same length as lon_points and lat_points.")
   dim_names <- ncdf4.helpers::nc.get.dim.names(nc, vars[1])
   dim_values <- list()
   requested_points_added <- FALSE
   for(dim_name in dim_names) {
     #why no wrapper for this in ncdf4.helper?
-    dim_values[[dim_name]] <- nc$dim[[dim_name]]$vals
+    #(as.numeric ensures vectors no not have array class)
+    dim_values[[dim_name]] <- as.numeric(nc$dim[[dim_name]]$vals)
     #This is not recommended but appears in tutorials
     #ncdf4::ncvar_get(nc, dim_name)
   }
@@ -279,9 +326,17 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
             if(dim == "T") {
               ind <- integer(0)
               try({
-                pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = dim_var)
-                posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
-                time_vals <- as.Date(posixct_time)
+                print(dim_var)
+                units <- ncdf4::ncatt_get(nc, dim_var, "units")
+                if(units$hasatt && units$value == "julian_day") {
+                  # RDotNet interprets Date class as numeric so character needed to preserve date
+                  time_vals <- as.Date(curr_dim_values, origin = structure(-2440588, class = "Date"))
+                }
+                else {
+                  pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = dim_var)
+                  posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
+                  time_vals <- as.Date(posixct_time)
+                }
                 ind <- which(time_vals >= boundary[[dim_var]][[1]] & time_vals <= boundary[[dim_var]][[2]])
               })
             }
@@ -328,7 +383,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
       curr_count <- count
       curr_dim_values <- dim_values
       xy_possible <- expand.grid(xs, ys)
-      point_ind <- which.min(sp::spDistsN1(pts = as.matrix(xy_possible), pt = c(lon_points[i], lat_points[i]), longlat = TRUE))
+      point_ind <- which.min(sp::spDistsN1(pts = as.matrix(xy_possible), pt = c(lon_points[i], lat_points[i]), longlat = great_circle_dist))
       x_ind <- which(xs == xy_possible[point_ind, 1])[1]
       curr_start[1] <- x_ind
       curr_count[1]  <- 1
@@ -340,6 +395,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
       if(show_requested_points) {
         curr_dim_values[[paste0("requested_", x_var)]] <- lon_points[i]
         curr_dim_values[[paste0("requested_", y_var)]] <- lat_points[i]
+        if(!is.null(id_points)) curr_dim_values[["requested_id"]] <- id_points[i]
         requested_points_added <- TRUE
       }
       
@@ -359,7 +415,7 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
   var_data_list <- list()
   for(i in seq_along(start_list)) {
     curr_dim_values <- dim_values_list[[i]]
-    curr_var_data <- expand.grid(curr_dim_values, KEEP.OUT.ATTRS = FALSE)
+    curr_var_data <- expand.grid(curr_dim_values, KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE)
     for(j in seq_along(curr_var_data)) {
       attr(curr_var_data[[j]], "dim") <- NULL
     }
@@ -386,11 +442,17 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
       try({
         # need to subset this if time var has been subsetted
         time_ind <- which(raw_time_full %in% raw_time)
-        pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
-        pcict_time <- pcict_time[time_ind]
-        posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
-        time_df[[paste0(time_var, "_full")]] <- posixct_time
-        time_df[[paste0(time_var, "_date")]] <- as.Date(posixct_time)
+        units <- ncdf4::ncatt_get(nc, time_var, "units")
+        if(units$hasatt && units$value == "julian_day") {
+          time_df[[paste0(time_var, "_date")]] <- as.Date(raw_time, origin = structure(-2440588, class = "Date"))
+        }
+        else {
+          pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
+          pcict_time <- pcict_time[time_ind]
+          posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
+          time_df[[paste0(time_var, "_full")]] <- posixct_time
+          time_df[[paste0(time_var, "_date")]] <- as.Date(posixct_time)
+        }
       })
       if(ncol(time_df) > 1) curr_var_data <- dplyr::full_join(curr_var_data, time_df, by = time_var)
       if(!keep_raw_time) {
@@ -543,6 +605,26 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
 #   return(list(my_data, lat_lon_df, new_lat_lon_column_names))
 # }
 
+multiple_nc_as_data_frame <- function(path, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = TRUE, id = "id") {
+  filepaths <- list.files(path = path, pattern="*\\.nc", full.names = TRUE)
+  filenames <- basename(filepaths)
+  nc_list <- list()
+  
+  n_files <- length(filepaths)
+  pb <- winProgressBar(title = "Reading files", min = 0, max = n_files)
+  for(i in seq_along(filepaths)) {
+    nc <- ncdf4::nc_open(filename = filepaths[i])
+    dat <- nc_as_data_frame(nc = nc, vars = vars, keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = boundary, lon_points = lon_points, lat_points = lat_points, id_points = id_points, show_requested_points = show_requested_points, great_circle_dist = great_circle_dist)
+    nc_list[[length(nc_list) + 1]] <- dat
+    ncdf4::nc_close(nc)
+    info <- paste0("Reading file ", i, " of ", n_files, " - ", round(100*i/n_files), "%")
+    setWinProgressBar(pb, value = i, title = info, label = info)
+  }
+  close(pb)
+  names(nc_list) <- tools::file_path_sans_ext(filenames)
+  merged_data <- dplyr::bind_rows(nc_list, .id = id)
+  return(merged_data)
+}
 
 import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_area_point){
   if(path == ""){
@@ -1032,10 +1114,10 @@ duplicated_count_index<-function(x, type = "count"){
 }
 
 
-get_installed_packages_with_data <- function() {
-  pack_data <- data(package = .packages(all.available = TRUE))
-  pack_data <- pack_data[["results"]]
-  return(unique(pack_data[,1]))
+get_installed_packages_with_data <- function(with_data = TRUE) {
+  all_installed_packages <- .packages(all.available = TRUE)
+  if (with_data) all_installed_packages <- unique(data(package = all_installed_packages)[["results"]][,1]) 
+  return(all_installed_packages)
 }
 
 drop_unused_levels <- function(dat, columns) {
@@ -1084,4 +1166,113 @@ compare_columns <- function(x, y, use_unique = TRUE, sort_values = TRUE, firstno
     }
     if(display_union) cat(paste0("Union (Values that appear in either column): ", paste0("'", dplyr::union(x, y), "'", collapse = ", ")))
   }
+}
+
+
+consecutive_sum <- function(x, initial_value = NA){
+  out = x
+  for(i in 1:length(x)){
+    if(!is.na(x[i])){
+    if(x[i] != 0){
+      if(i > 1){
+        out[i]=x[i] + out[i-1]
+    } else{
+        out[i] = x[i] + initial_value
+      }
+    } 
+    }
+  }
+  return(out)
+}
+
+max_consecutive_sum <- function(x){
+  max(consecutive_sum(x, initial_value = 0))
+}
+
+hashed_id <- function(x, salt, algo = "crc32") {
+  if (missing(salt)){
+      y <- x
+    }else{
+      y <- paste(x, salt)
+    }
+  y <- sapply(y, function(X) digest::digest(X, algo = algo))
+  as.character(y)
+
+}
+
+# Possible alternative but is slower:
+# spells <- function(z) {
+#   Reduce(function(x,y) {y = dplyr::if_else(y == 0, 0, x + 1)}, z[-1], 
+#          init = dplyr::if_else(z[1] == 0, 0, NA_real_), accumulate = TRUE)
+# }
+.spells <- function(x, initial_value = NA_real_) {
+  y <- mat.or.vec(length(x), 1)
+  if(length(x) > 0) {
+    y[1] <- dplyr::if_else(x[1] == 0, 0, initial_value + 1)
+    if(length(x) > 1) {
+      for(i in 2:length(x)) {
+        y[i] <- dplyr::if_else(x[i] == 0, 0, y[i-1] + 1)
+      }
+    }
+  }
+  return(y)
+}
+
+convert_to_dec_deg <- function (dd, mm = 0 , ss = 0, dir) {
+  if(missing(dd))  stop("dd must be supplied")
+  if(!missing(dir)) {
+    dir <- toupper(dir)
+    if(!all(na.omit(dir) %in% c("E", "W", "N", "S"))) stop("dir must only contain direction letters E, W, N or S")
+    if(any(na.omit(dd) < 0)) stop("dd must be positive if dir is supplied") 
+  }
+  if(!all(mm >= 0 & mm <= 60, na.rm = TRUE)) stop("mm must be between 0 and 60")
+  if(!all(ss >= 0 & ss <= 60, na.rm = TRUE)) stop("ss must be between 0 and 60")
+  sgn <- ifelse(is.na(dir), NA, ifelse(dir %in% c("S", "W"), -1, 1))
+  decdeg <- (dd + ((mm * 60) + ss)/3600) * sgn
+  return(decdeg)
+}
+
+create_av_packs <- function() {
+  av_packs <<- available.packages(repos = "https://cran.rstudio.com/")
+  av_packs <<- data.frame(av_packs)
+}
+
+package_check <- function(package) {
+  out <- c()
+  if(!exists("av_packs")) {
+    create_av_packs()
+  }
+  if(package %in% rownames(installed.packages())) {
+    out[[1]] <- "1"
+    v_machine <- as.character(packageVersion(package))
+    v_web <- as.character(av_packs[av_packs$Package == package, "Version"])
+    out[[2]] <- compareVersion(v_machine, v_web)
+    out[[3]] <- v_machine
+    out[[4]] <- v_web
+    return(out)
+  }
+  else {
+    #check if the package name is typed right
+    if(package %in% av_packs$Package) {
+      out[[1]] <- "2"
+      return(out)
+    }
+    else {
+      #wrong  spelling check you spelling
+      out[[1]] <- "0"
+      return(out)
+    }
+  }
+}
+              
+in_top_n <- function(x, n = 10, wt, fun = sum) {
+  dat <- data.frame(x = x)
+  if(!missing(wt)) {
+    dat$wt <- wt
+    dat <- dat %>% 
+      group_by(x) %>%
+      summarise(fq = as.function(fun)(na.omit(wt))) %>% arrange(-fq)
+  }
+  else dat <- dat %>% count(x, sort = TRUE, name = "fq")
+  return(x %in% dat$x[1:n])
 }

@@ -42,8 +42,9 @@ Partial Class dlgSpells
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDOY = New System.Windows.Forms.Label()
-        Me.lblThreshold = New System.Windows.Forms.Label()
+        Me.lblAnd = New System.Windows.Forms.Label()
         Me.grpRainParameters = New System.Windows.Forms.GroupBox()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.cmdDoyRange = New System.Windows.Forms.Button()
         Me.ucrInputSpellLower = New instat.ucrInputTextBox()
         Me.ucrInputCondition = New instat.ucrInputComboBox()
@@ -59,7 +60,6 @@ Partial Class dlgSpells
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrSelectorForSpells = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.grpRainParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -99,15 +99,15 @@ Partial Class dlgSpells
         Me.lblDOY.TabIndex = 5
         Me.lblDOY.Text = "Day of Year:"
         '
-        'lblThreshold
+        'lblAnd
         '
-        Me.lblThreshold.AutoSize = True
-        Me.lblThreshold.Location = New System.Drawing.Point(10, 58)
-        Me.lblThreshold.Name = "lblThreshold"
-        Me.lblThreshold.Size = New System.Drawing.Size(54, 13)
-        Me.lblThreshold.TabIndex = 4
-        Me.lblThreshold.Tag = "Threshold"
-        Me.lblThreshold.Text = "Condition:"
+        Me.lblAnd.AutoSize = True
+        Me.lblAnd.Location = New System.Drawing.Point(239, 59)
+        Me.lblAnd.Name = "lblAnd"
+        Me.lblAnd.Size = New System.Drawing.Size(25, 13)
+        Me.lblAnd.TabIndex = 4
+        Me.lblAnd.Tag = ""
+        Me.lblAnd.Text = "and"
         '
         'grpRainParameters
         '
@@ -116,13 +116,23 @@ Partial Class dlgSpells
         Me.grpRainParameters.Controls.Add(Me.ucrInputSpellLower)
         Me.grpRainParameters.Controls.Add(Me.ucrInputCondition)
         Me.grpRainParameters.Controls.Add(Me.ucrInputSpellUpper)
-        Me.grpRainParameters.Controls.Add(Me.lblThreshold)
+        Me.grpRainParameters.Controls.Add(Me.lblAnd)
         Me.grpRainParameters.Location = New System.Drawing.Point(10, 236)
         Me.grpRainParameters.Name = "grpRainParameters"
         Me.grpRainParameters.Size = New System.Drawing.Size(380, 86)
         Me.grpRainParameters.TabIndex = 12
         Me.grpRainParameters.TabStop = False
         Me.grpRainParameters.Text = "Options"
+        '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.IsMultiline = False
+        Me.ucrInputFilterPreview.IsReadOnly = True
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(124, 25)
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
+        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
+        Me.ucrInputFilterPreview.TabIndex = 27
         '
         'cmdDoyRange
         '
@@ -140,7 +150,7 @@ Partial Class dlgSpells
         Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
         Me.ucrInputSpellLower.IsMultiline = False
         Me.ucrInputSpellLower.IsReadOnly = False
-        Me.ucrInputSpellLower.Location = New System.Drawing.Point(67, 55)
+        Me.ucrInputSpellLower.Location = New System.Drawing.Point(168, 55)
         Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
         Me.ucrInputSpellLower.Size = New System.Drawing.Size(63, 21)
         Me.ucrInputSpellLower.TabIndex = 5
@@ -149,9 +159,9 @@ Partial Class dlgSpells
         '
         Me.ucrInputCondition.AddQuotesIfUnrecognised = True
         Me.ucrInputCondition.IsReadOnly = False
-        Me.ucrInputCondition.Location = New System.Drawing.Point(136, 55)
+        Me.ucrInputCondition.Location = New System.Drawing.Point(13, 55)
         Me.ucrInputCondition.Name = "ucrInputCondition"
-        Me.ucrInputCondition.Size = New System.Drawing.Size(86, 21)
+        Me.ucrInputCondition.Size = New System.Drawing.Size(141, 21)
         Me.ucrInputCondition.TabIndex = 6
         '
         'ucrInputSpellUpper
@@ -159,7 +169,7 @@ Partial Class dlgSpells
         Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
         Me.ucrInputSpellUpper.IsMultiline = False
         Me.ucrInputSpellUpper.IsReadOnly = False
-        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(228, 55)
+        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(272, 55)
         Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
         Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
         Me.ucrInputSpellUpper.TabIndex = 7
@@ -197,7 +207,7 @@ Partial Class dlgSpells
         Me.ucrChkConditional.Checked = False
         Me.ucrChkConditional.Location = New System.Drawing.Point(10, 325)
         Me.ucrChkConditional.Name = "ucrChkConditional"
-        Me.ucrChkConditional.Size = New System.Drawing.Size(193, 20)
+        Me.ucrChkConditional.Size = New System.Drawing.Size(288, 20)
         Me.ucrChkConditional.TabIndex = 13
         '
         'ucrReceiverStation
@@ -262,6 +272,7 @@ Partial Class dlgSpells
         '
         'ucrSelectorForSpells
         '
+        Me.ucrSelectorForSpells.bDropUnusedFilterLevels = False
         Me.ucrSelectorForSpells.bShowHiddenColumns = False
         Me.ucrSelectorForSpells.bUseCurrentFilter = True
         Me.ucrSelectorForSpells.Location = New System.Drawing.Point(10, 22)
@@ -276,16 +287,6 @@ Partial Class dlgSpells
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
-        '
-        'ucrInputFilterPreview
-        '
-        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilterPreview.IsMultiline = False
-        Me.ucrInputFilterPreview.IsReadOnly = True
-        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(124, 25)
-        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
-        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
-        Me.ucrInputFilterPreview.TabIndex = 27
         '
         'dlgSpells
         '
@@ -334,7 +335,7 @@ Partial Class dlgSpells
     Friend WithEvents ucrReceiverDOY As ucrReceiverSingle
     Friend WithEvents grpRainParameters As GroupBox
     Friend WithEvents ucrInputCondition As ucrInputComboBox
-    Friend WithEvents lblThreshold As Label
+    Friend WithEvents lblAnd As Label
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrInputSpellLower As ucrInputTextBox

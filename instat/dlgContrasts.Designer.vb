@@ -97,6 +97,7 @@ Partial Class dlgContrasts
         '
         'ucrSelectorForContrast
         '
+        Me.ucrSelectorForContrast.bDropUnusedFilterLevels = False
         Me.ucrSelectorForContrast.bShowHiddenColumns = False
         Me.ucrSelectorForContrast.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForContrast, "ucrSelectorForContrast")

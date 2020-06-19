@@ -39,46 +39,64 @@ Partial Class ucrOutputWindow
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.ucrWPFrtfElementHost = New System.Windows.Forms.Integration.ElementHost()
-        Me.ucrRichTextBox = New instat.ucrWPFRichTextBox()
         Me.mnuContextRTB = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopyRTB = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyImageRTB = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHideCommands = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.deleteRTB = New System.Windows.Forms.ToolStripMenuItem()
+        Me.clearRTB = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.ucrWPFrtfElementHost = New System.Windows.Forms.Integration.ElementHost()
+        Me.ucrRichTextBox = New instat.ucrWPFRichTextBox()
+        Me.HelpRTB = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextRTB.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ucrWPFrtfElementHost
-        '
-        Me.ucrWPFrtfElementHost.ContextMenuStrip = Me.mnuContextRTB
-        Me.ucrWPFrtfElementHost.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrWPFrtfElementHost.Location = New System.Drawing.Point(3, 23)
-        Me.ucrWPFrtfElementHost.Name = "ucrWPFrtfElementHost"
-        Me.ucrWPFrtfElementHost.Size = New System.Drawing.Size(716, 236)
-        Me.ucrWPFrtfElementHost.TabIndex = 0
-        Me.ucrWPFrtfElementHost.Text = "ucrWPFrtfElementHost"
-        Me.ucrWPFrtfElementHost.Child = Me.ucrRichTextBox
-        '
         'mnuContextRTB
         '
-        Me.mnuContextRTB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyRTB, Me.CopyImageRTB})
+        Me.mnuContextRTB.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.mnuContextRTB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyRTB, Me.CopyImageRTB, Me.mnuHideCommands, Me.ToolStripSeparator1, Me.deleteRTB, Me.clearRTB, Me.HelpRTB})
         Me.mnuContextRTB.Name = "mnuContextRTB"
-        Me.mnuContextRTB.Size = New System.Drawing.Size(150, 48)
+        Me.mnuContextRTB.Size = New System.Drawing.Size(206, 164)
         '
         'CopyRTB
         '
         Me.CopyRTB.Name = "CopyRTB"
-        Me.CopyRTB.Size = New System.Drawing.Size(149, 22)
+        Me.CopyRTB.Size = New System.Drawing.Size(205, 22)
         Me.CopyRTB.Text = "Copy RichText"
         '
         'CopyImageRTB
         '
         Me.CopyImageRTB.Enabled = False
         Me.CopyImageRTB.Name = "CopyImageRTB"
-        Me.CopyImageRTB.Size = New System.Drawing.Size(149, 22)
+        Me.CopyImageRTB.Size = New System.Drawing.Size(205, 22)
         Me.CopyImageRTB.Text = "Copy Image"
+        '
+        'mnuHideCommands
+        '
+        Me.mnuHideCommands.Name = "mnuHideCommands"
+        Me.mnuHideCommands.Size = New System.Drawing.Size(205, 22)
+        Me.mnuHideCommands.Text = "Hide (future) commands"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(202, 6)
+        '
+        'deleteRTB
+        '
+        Me.deleteRTB.Name = "deleteRTB"
+        Me.deleteRTB.Size = New System.Drawing.Size(205, 22)
+        Me.deleteRTB.Text = "Delete Selected"
+        '
+        'clearRTB
+        '
+        Me.clearRTB.Name = "clearRTB"
+        Me.clearRTB.Size = New System.Drawing.Size(205, 22)
+        Me.clearRTB.Text = "Clear"
         '
         'lblHeader
         '
@@ -108,6 +126,23 @@ Partial Class ucrOutputWindow
         Me.tlpTableContainer.Size = New System.Drawing.Size(722, 262)
         Me.tlpTableContainer.TabIndex = 7
         '
+        'ucrWPFrtfElementHost
+        '
+        Me.ucrWPFrtfElementHost.ContextMenuStrip = Me.mnuContextRTB
+        Me.ucrWPFrtfElementHost.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrWPFrtfElementHost.Location = New System.Drawing.Point(3, 23)
+        Me.ucrWPFrtfElementHost.Name = "ucrWPFrtfElementHost"
+        Me.ucrWPFrtfElementHost.Size = New System.Drawing.Size(716, 236)
+        Me.ucrWPFrtfElementHost.TabIndex = 0
+        Me.ucrWPFrtfElementHost.Text = "ucrWPFrtfElementHost"
+        Me.ucrWPFrtfElementHost.Child = Me.ucrRichTextBox
+        '
+        'HelpRTB
+        '
+        Me.HelpRTB.Name = "HelpRTB"
+        Me.HelpRTB.Size = New System.Drawing.Size(205, 22)
+        Me.HelpRTB.Text = "Help"
+        '
         'ucrOutputWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -128,4 +163,9 @@ Partial Class ucrOutputWindow
     Friend WithEvents CopyImageRTB As ToolStripMenuItem
     Friend WithEvents lblHeader As Label
     Friend WithEvents tlpTableContainer As TableLayoutPanel
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents clearRTB As ToolStripMenuItem
+    Friend WithEvents deleteRTB As ToolStripMenuItem
+    Friend WithEvents mnuHideCommands As ToolStripMenuItem
+    Friend WithEvents HelpRTB As ToolStripMenuItem
 End Class

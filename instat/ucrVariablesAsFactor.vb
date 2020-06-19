@@ -35,10 +35,6 @@ Public Class ucrVariablesAsFactor
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
-        Else
-            'This resets the factor receiver on the dialog every time the dialog opens.
-            'We don't want this on reopen
-            'SetReceiverStatus()
         End If
     End Sub
 
@@ -106,46 +102,6 @@ Public Class ucrVariablesAsFactor
         Return clsVariables
     End Function
 
-    Public Function GetIDVarNamesFromSelector(Optional bWithQuotes As Boolean = True) As String
-        Dim strIDVars As String
-        Dim arrTemp(Selector.lstVariablesInReceivers.Count - 1) As String
-        Dim lstVariablesFromSelector As New List(Of Tuple(Of String, String))
-
-        For Each tplTemp As Tuple(Of String, String) In Selector.lstVariablesInReceivers
-            lstVariablesFromSelector.Add(New Tuple(Of String, String)(tplTemp.Item1, tplTemp.Item2))
-        Next
-
-        For Each itmTemp As ListViewItem In ucrMultipleVariables.lstSelectedVariables.Items
-            lstVariablesFromSelector.Remove(lstVariablesFromSelector.Find(Function(x) x.Item1 = itmTemp.Text))
-        Next
-        lstVariablesFromSelector.RemoveAll(Function(x) x.Item1 = "value")
-        If lstVariablesFromSelector.Count = 1 Then
-            If bWithQuotes Then
-                strIDVars = Chr(34) & lstVariablesFromSelector(0).Item1 & Chr(34)
-            Else
-                strIDVars = lstVariablesFromSelector(0).Item1
-            End If
-        ElseIf lstVariablesFromSelector.Count > 1 Then
-            strIDVars = "c("
-            For i = 0 To lstVariablesFromSelector.Count - 1
-                If i > 0 Then
-                    strIDVars = strIDVars & ","
-                End If
-                If lstVariablesFromSelector(i).Item1 <> "" Then
-                    If bWithQuotes Then
-                        strIDVars = strIDVars & Chr(34) & lstVariablesFromSelector(i).Item1 & Chr(34)
-                    Else
-                        strIDVars = strIDVars & lstVariablesFromSelector(i).Item1
-                    End If
-                End If
-            Next
-            strIDVars = strIDVars & ")"
-        Else
-            strIDVars = "NULL"
-        End If
-        Return strIDVars
-    End Function
-
     Private Sub ucrMultipleVariables_SelectionChanged() Handles ucrMultipleVariables.SelectionChanged
         If Not bSingleVariable Then
             SetMeasureVars()
@@ -198,19 +154,12 @@ Public Class ucrVariablesAsFactor
             If ucrVariableSelector IsNot Nothing Then
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("stack_data", "TRUE")
                 SetMeasureVars()
-                ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("id.vars", GetIDVarNamesFromSelector())
             End If
             If Selector IsNot Nothing Then
                 Selector.bIsStacked = True
             End If
         End If
         OnControlValueChanged()
-    End Sub
-
-    Private Sub ucrVariableSelector_VariablesInReceiversChanged() Handles ucrVariableSelector.VariablesInReceiversChanged
-        If Not bSingleVariable AndAlso ucrVariableSelector IsNot Nothing Then
-            ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("id.vars", GetIDVarNamesFromSelector())
-        End If
     End Sub
 
     Private Sub SetMeasureVars()
@@ -366,6 +315,12 @@ Public Class ucrVariablesAsFactor
 
     Public Overrides Sub SetExcludedDataTypes(strExclude As String())
         ucrSingleVariable.SetExcludedDataTypes(strExclude)
-        ucrMultipleVariables.SetIncludedDataTypes(strExclude)
+        ucrMultipleVariables.SetExcludedDataTypes(strExclude)
+    End Sub
+
+    Public Overrides Sub SetSelectorHeading(strNewHeading As String)
+        MyBase.SetSelectorHeading(strNewHeading)
+        ucrSingleVariable.SetSelectorHeading(strNewHeading)
+        ucrMultipleVariables.SetSelectorHeading(strNewHeading)
     End Sub
 End Class

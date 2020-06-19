@@ -131,6 +131,7 @@ Partial Class dlgParallelCoordinatePlot
         '
         'ucrSelectorParallelCoordinatePlot
         '
+        Me.ucrSelectorParallelCoordinatePlot.bDropUnusedFilterLevels = False
         Me.ucrSelectorParallelCoordinatePlot.bShowHiddenColumns = False
         Me.ucrSelectorParallelCoordinatePlot.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorParallelCoordinatePlot, "ucrSelectorParallelCoordinatePlot")

@@ -154,22 +154,26 @@ Public Class clsRecentFiles
             Dim strFileName As String
             For iCounter As Integer = strListMRU.Count - 1 To 0 Step -1
                 strPath = strListMRU(iCounter)
-                strFileName = Path.GetFileName(strPath)
-                ' create new ToolStripItem, displaying the name of the file...
-                Dim clsItem As New ToolStripMenuItem(strFileName)
-                Dim clsItemIcon As New ToolStripMenuItem(strFileName)
-                clsItem.ToolTipText = strPath
-                clsItemIcon.ToolTipText = strPath
-                ' set the tag - identifies the ToolStripItem as an MRU item and 
-                ' contains the full path so it can be opened later...
-                clsItem.Tag = "MRU:" & strPath
-                clsItemIcon.Tag = "MRU:" & strPath
-                ' hook into the click event handler so we can open the file later...
-                AddHandler clsItem.Click, AddressOf mnuFileMRU_Click
-                AddHandler clsItemIcon.Click, AddressOf mnuFileMRU_Click
-                ' insert into DropDownItems list...
-                mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 1, clsItem)
-                mnuFileIcon.DropDownItems.Insert(mnuFileIcon.DropDownItems.Count, clsItemIcon)
+                Try
+                    strFileName = Path.GetFileName(strPath)
+                    ' create new ToolStripItem, displaying the name of the file...
+                    Dim clsItem As New ToolStripMenuItem(strFileName)
+                    Dim clsItemIcon As New ToolStripMenuItem(strFileName)
+                    clsItem.ToolTipText = strPath
+                    clsItemIcon.ToolTipText = strPath
+                    ' set the tag - identifies the ToolStripItem as an MRU item and 
+                    ' contains the full path so it can be opened later...
+                    clsItem.Tag = "MRU:" & strPath
+                    clsItemIcon.Tag = "MRU:" & strPath
+                    ' hook into the click event handler so we can open the file later...
+                    AddHandler clsItem.Click, AddressOf mnuFileMRU_Click
+                    AddHandler clsItemIcon.Click, AddressOf mnuFileMRU_Click
+                    ' insert into DropDownItems list...
+                    mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 1, clsItem)
+                    mnuFileIcon.DropDownItems.Insert(mnuFileIcon.DropDownItems.Count, clsItemIcon)
+                Catch ex As Exception
+                    'TODO it would be good to remove the invalid line from the file in this case
+                End Try
             Next
 
             ' show separator

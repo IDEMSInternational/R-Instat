@@ -70,6 +70,7 @@ Partial Class dlgExportGraphAsImage
         '
         'ucrSelectorGraphAsImage
         '
+        Me.ucrSelectorGraphAsImage.bDropUnusedFilterLevels = False
         Me.ucrSelectorGraphAsImage.bShowHiddenColumns = False
         Me.ucrSelectorGraphAsImage.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorGraphAsImage, "ucrSelectorGraphAsImage")
@@ -89,7 +90,7 @@ Partial Class dlgExportGraphAsImage
         '
         Me.ucrInputFile.AddQuotesIfUnrecognised = True
         Me.ucrInputFile.IsMultiline = False
-        Me.ucrInputFile.IsReadOnly = False
+        Me.ucrInputFile.IsReadOnly = True
         resources.ApplyResources(Me.ucrInputFile, "ucrInputFile")
         Me.ucrInputFile.Name = "ucrInputFile"
         '

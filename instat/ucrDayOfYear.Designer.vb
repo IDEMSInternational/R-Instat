@@ -30,7 +30,7 @@ Partial Class ucrDayOfYear
         '
         Me.ucrInputDay.AddQuotesIfUnrecognised = True
         Me.ucrInputDay.IsReadOnly = False
-        Me.ucrInputDay.Location = New System.Drawing.Point(0, 0)
+        Me.ucrInputDay.Location = New System.Drawing.Point(99, 0)
         Me.ucrInputDay.Name = "ucrInputDay"
         Me.ucrInputDay.Size = New System.Drawing.Size(59, 21)
         Me.ucrInputDay.TabIndex = 0
@@ -39,7 +39,7 @@ Partial Class ucrDayOfYear
         '
         Me.ucrInputMonth.AddQuotesIfUnrecognised = True
         Me.ucrInputMonth.IsReadOnly = False
-        Me.ucrInputMonth.Location = New System.Drawing.Point(64, 0)
+        Me.ucrInputMonth.Location = New System.Drawing.Point(0, 0)
         Me.ucrInputMonth.Name = "ucrInputMonth"
         Me.ucrInputMonth.Size = New System.Drawing.Size(94, 21)
         Me.ucrInputMonth.TabIndex = 1

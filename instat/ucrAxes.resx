@@ -273,7 +273,7 @@
     <value>3, 1</value>
   </data>
   <data name="grpAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 83</value>
+    <value>241, 83</value>
   </data>
   <data name="grpAxisTitle.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -630,7 +630,7 @@
     <value>13</value>
   </data>
   <data name="grpMajorBreaks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>229, 29</value>
+    <value>250, 29</value>
   </data>
   <data name="grpMajorBreaks.Size" type="System.Drawing.Size, System.Drawing">
     <value>253, 162</value>
@@ -822,7 +822,7 @@
     <value>7</value>
   </data>
   <data name="ucrInputUpperLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 76</value>
+    <value>90, 76</value>
   </data>
   <data name="ucrInputUpperLimit.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 21</value>
@@ -843,7 +843,7 @@
     <value>8</value>
   </data>
   <data name="ucrInputLowerLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 46</value>
+    <value>90, 46</value>
   </data>
   <data name="ucrInputLowerLimit.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 21</value>
@@ -921,7 +921,7 @@
     <value>True</value>
   </data>
   <data name="rdoScalesCustom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 20</value>
+    <value>79, 20</value>
   </data>
   <data name="rdoScalesCustom.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 17</value>
@@ -996,7 +996,7 @@
     <value>3, 90</value>
   </data>
   <data name="grpScales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 228</value>
+    <value>241, 228</value>
   </data>
   <data name="grpScales.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1017,7 +1017,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputAxisType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>344, 7</value>
+    <value>365, 7</value>
   </data>
   <data name="ucrInputAxisType.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -1332,7 +1332,7 @@
     <value>1</value>
   </data>
   <data name="grpMinorBreaks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>229, 197</value>
+    <value>250, 197</value>
   </data>
   <data name="grpMinorBreaks.Size" type="System.Drawing.Size, System.Drawing">
     <value>252, 121</value>
@@ -1362,7 +1362,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>485, 334</value>
+    <value>510, 334</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ucrAxes</value>

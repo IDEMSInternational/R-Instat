@@ -117,17 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblUsername.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblUsername.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 58</value>
   </data>
   <data name="lblUsername.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
+    <value>112, 13</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblUsername.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -146,14 +143,11 @@
   <data name="&gt;&gt;lblUsername.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="lblChooseForm.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="lblChooseForm.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 118</value>
   </data>
   <data name="lblChooseForm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
+    <value>112, 13</value>
   </data>
   <data name="lblChooseForm.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -198,7 +192,7 @@
     <value>3</value>
   </data>
   <data name="ucrInputChooseForm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>86, 114</value>
+    <value>131, 114</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrInputChooseForm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -223,7 +217,7 @@
     <value>4</value>
   </data>
   <data name="ucrInputUsername.Location" type="System.Drawing.Point, System.Drawing">
-    <value>86, 56</value>
+    <value>131, 56</value>
   </data>
   <data name="ucrInputUsername.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -247,7 +241,7 @@
     <value>5</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 148</value>
+    <value>2, 148</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>

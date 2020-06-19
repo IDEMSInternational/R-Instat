@@ -306,7 +306,7 @@
     <value>3</value>
   </data>
   <data name="ucrInputRecode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 233</value>
+    <value>163, 233</value>
   </data>
   <data name="ucrInputRecode.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 21</value>
@@ -357,7 +357,7 @@
     <value>0</value>
   </data>
   <data name="ucrMultipleLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 206</value>
+    <value>163, 206</value>
   </data>
   <data name="ucrMultipleLabels.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 21</value>

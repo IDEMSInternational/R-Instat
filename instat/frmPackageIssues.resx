@@ -127,10 +127,10 @@ Possible Solutions:
 
 1. If you selected "No" to the message boxes: "Would you like to use/create a Personal Library..." restart R-Instat and click "Yes" to both these messages to allow R-Instat to install R packages.
 
-2. Ensure that R or RSudio are not running, as this can prevent R-Instat from installing packages. If they are, close them and restart R-Instat.
+2. Ensure that R or RStudio are not running, as this can prevent R-Instat from installing packages. If they are, close them and restart R-Instat.
 
-3. Restart and run R-Instat as an Administrator. Administrator priviledges are sometimes required to install R packages.
+3. Restart and run R-Instat as an Administrator. Administrator privileges are sometimes required to install R packages.
 
-4. If you have an internet connect, click below to atempt to download and install the missing packages from an online server.</value>
+4. If you have an internet connect, click below to attempt to download and install the missing packages from an online server.</value>
   </data>
 </root>

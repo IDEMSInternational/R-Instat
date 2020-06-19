@@ -73,6 +73,8 @@ Public Class ucrCore
     Public bLinkedDisabledIfParameterMissing As Boolean = False
     Public bLinkedHideIfParameterMissing As Boolean = False
     Public bLinkedChangeToDefaultState As Boolean = False
+    'Suggested new option needed so that linked control gets value set correctly
+    Public bLinkedChangeParameterValue As Boolean = False
 
     Protected lstCtrLinkedDisplayControls As List(Of Control)
 
@@ -193,6 +195,7 @@ Public Class ucrCore
         Dim ucrControl As ucrCore
         Dim lstValues As Object()
         Dim bTemp As Boolean
+        Dim objTempDefaultState As Object
 
         For Each kvpTemp As KeyValuePair(Of ucrCore, Object()) In lstValuesAndControl
             lstValues = kvpTemp.Value
@@ -208,6 +211,15 @@ Public Class ucrCore
             End If
             If ucrControl.bLinkedAddRemoveParameter Then
                 ucrControl.AddOrRemoveParameter(bTemp AndAlso (ucrControl.CanAddParameter() OrElse Not ucrControl.bAddRemoveParameter))
+                If (bTemp AndAlso (ucrControl.CanAddParameter() OrElse Not ucrControl.bAddRemoveParameter)) AndAlso ucrControl.bLinkedChangeParameterValue Then
+                    ' Temp clear the default state so that control will set value correctly
+                    ' This is a temporary fix!
+                    ' TODO reimplement this through changing SetControlValue()
+                    objTempDefaultState = ucrControl.objDefaultState
+                    ucrControl.SetDefaultState(Nothing)
+                    ucrControl.SetControlValue()
+                    ucrControl.SetDefaultState(objTempDefaultState)
+                End If
             End If
             If ucrControl.bLinkedHideIfParameterMissing Then
                 ucrControl.SetVisible(bTemp)
@@ -341,13 +353,13 @@ Public Class ucrCore
         Next
     End Sub
 
-    Public Sub AddToLinkedControls(lstLinked As ucrCore(), objValues As Object(), Optional bNewLinkedAddRemoveParameter As Boolean = False, Optional bNewLinkedUpdateFunction As Boolean = False, Optional bNewLinkedDisabledIfParameterMissing As Boolean = False, Optional bNewLinkedHideIfParameterMissing As Boolean = False, Optional bNewLinkedChangeToDefaultState As Boolean = False, Optional objNewDefaultState As Object = Nothing)
+    Public Sub AddToLinkedControls(lstLinked As ucrCore(), objValues As Object(), Optional bNewLinkedAddRemoveParameter As Boolean = False, Optional bNewLinkedUpdateFunction As Boolean = False, Optional bNewLinkedDisabledIfParameterMissing As Boolean = False, Optional bNewLinkedHideIfParameterMissing As Boolean = False, Optional bNewLinkedChangeToDefaultState As Boolean = False, Optional objNewDefaultState As Object = Nothing, Optional bNewLinkedChangeParameterValue As Boolean = False)
         For Each ucrLinked As ucrCore In lstLinked
-            AddToLinkedControls(ucrLinked:=ucrLinked, objValues:=objValues, bNewLinkedAddRemoveParameter:=bNewLinkedAddRemoveParameter, bNewLinkedUpdateFunction:=bNewLinkedUpdateFunction, bNewLinkedDisabledIfParameterMissing:=bNewLinkedDisabledIfParameterMissing, bNewLinkedHideIfParameterMissing:=bNewLinkedHideIfParameterMissing, bNewLinkedChangeToDefaultState:=bNewLinkedChangeToDefaultState, objNewDefaultState:=objNewDefaultState)
+            AddToLinkedControls(ucrLinked:=ucrLinked, objValues:=objValues, bNewLinkedAddRemoveParameter:=bNewLinkedAddRemoveParameter, bNewLinkedUpdateFunction:=bNewLinkedUpdateFunction, bNewLinkedDisabledIfParameterMissing:=bNewLinkedDisabledIfParameterMissing, bNewLinkedHideIfParameterMissing:=bNewLinkedHideIfParameterMissing, bNewLinkedChangeToDefaultState:=bNewLinkedChangeToDefaultState, objNewDefaultState:=objNewDefaultState, bNewLinkedChangeParameterValue:=bNewLinkedChangeParameterValue)
         Next
     End Sub
 
-    Public Sub AddToLinkedControls(ucrLinked As ucrCore, objValues As Object(), Optional bNewLinkedAddRemoveParameter As Boolean = False, Optional bNewLinkedUpdateFunction As Boolean = False, Optional bNewLinkedDisabledIfParameterMissing As Boolean = False, Optional bNewLinkedHideIfParameterMissing As Boolean = False, Optional bNewLinkedChangeToDefaultState As Boolean = False, Optional objNewDefaultState As Object = Nothing)
+    Public Sub AddToLinkedControls(ucrLinked As ucrCore, objValues As Object(), Optional bNewLinkedAddRemoveParameter As Boolean = False, Optional bNewLinkedUpdateFunction As Boolean = False, Optional bNewLinkedDisabledIfParameterMissing As Boolean = False, Optional bNewLinkedHideIfParameterMissing As Boolean = False, Optional bNewLinkedChangeToDefaultState As Boolean = False, Optional objNewDefaultState As Object = Nothing, Optional bNewLinkedChangeParameterValue As Boolean = False)
         If Not IsLinkedTo(ucrLinked) Then
             ucrLinked.bLinkedAddRemoveParameter = bNewLinkedAddRemoveParameter
             ucrLinked.bLinkedChangeToDefaultState = bNewLinkedChangeToDefaultState
@@ -355,6 +367,7 @@ Public Class ucrCore
             ucrLinked.bLinkedHideIfParameterMissing = bNewLinkedHideIfParameterMissing
             ucrLinked.bLinkedUpdateFunction = bNewLinkedUpdateFunction
             ucrLinked.SetDefaultState(objNewDefaultState)
+            ucrLinked.bLinkedChangeParameterValue = bNewLinkedChangeParameterValue
             lstValuesAndControl.Add(New KeyValuePair(Of ucrCore, Object())(ucrLinked, objValues))
         End If
     End Sub

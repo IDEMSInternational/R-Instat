@@ -41,6 +41,8 @@ Public Class dlgDisplayDailyData
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 361
+
         Dim dctBarColour As New Dictionary(Of String, String)
         Dim dctRugColour As New Dictionary(Of String, String)
         Dim dctSummary As New Dictionary(Of String, String)
@@ -59,20 +61,18 @@ Public Class dlgDisplayDailyData
         ucrReceiverStations.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverStations.SetClimaticType("station")
         ucrReceiverStations.bAutoFill = True
-        ucrReceiverStations.SetMeAsReceiver()
 
         ucrReceiverYear.SetParameter(New RParameter("year_col", 3))
         ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
-        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverYear.SetClimaticType("year")
 
         ucrReceiverDate.SetParameter(New RParameter("date_col", 2))
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.Selector = ucrSelectorDisplayDailyClimaticData
         ucrReceiverDate.SetClimaticType("date")
-        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.strSelectorHeading = "Date Variables"
 
@@ -195,7 +195,7 @@ Public Class dlgDisplayDailyData
         clsConcFunction = New RFunction
 
         ucrSelectorDisplayDailyClimaticData.Reset()
-        ucrReceiverStations.SetMeAsReceiver()
+        ucrReceiverElement.SetMeAsReceiver()
 
         clsConcFunction.SetRCommand("c")
         clsConcFunction.AddParameter("sum", Chr(34) & "sum" & Chr(34), iPosition:=0)
@@ -278,9 +278,11 @@ Public Class dlgDisplayDailyData
     Private Sub ucrPnlFrequencyDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencyDisplay.ControlValueChanged
         DialogSize()
         If rdoGraph.Checked Then
+            ucrReceiverMultipleElements.SetMeAsReceiver()
             ucrBase.clsRsyntax.iCallType = 3
             ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyGraphFunction)
         Else
+            ucrReceiverElement.SetMeAsReceiver()
             ucrBase.clsRsyntax.iCallType = 2
             ucrBase.clsRsyntax.SetBaseRFunction(clsDisplayDailyTable)
         End If

@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgDefineCRI
+Partial Class dlgCorruptionDefineCRI
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -38,7 +38,7 @@ Partial Class dlgDefineCRI
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDefineCRI))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCorruptionDefineCRI))
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdAddComponent = New System.Windows.Forms.Button()
@@ -151,6 +151,7 @@ Partial Class dlgDefineCRI
         '
         'ucrSelectorCRI
         '
+        Me.ucrSelectorCRI.bDropUnusedFilterLevels = False
         Me.ucrSelectorCRI.bShowHiddenColumns = False
         Me.ucrSelectorCRI.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorCRI, "ucrSelectorCRI")
@@ -162,7 +163,7 @@ Partial Class dlgDefineCRI
         resources.ApplyResources(Me.ucrChkScaleNumeric, "ucrChkScaleNumeric")
         Me.ucrChkScaleNumeric.Name = "ucrChkScaleNumeric"
         '
-        'dlgDefineCRI
+        'dlgCorruptionDefineCRI
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -185,7 +186,7 @@ Partial Class dlgDefineCRI
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgDefineCRI"
+        Me.Name = "dlgCorruptionDefineCRI"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

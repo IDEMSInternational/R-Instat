@@ -62,6 +62,11 @@ Partial Class dlgImportDataset
         Me.ucrInputSeparatorCSV = New instat.ucrInputComboBox()
         Me.ucrInputEncodingCSV = New instat.ucrInputComboBox()
         Me.grpExcel = New System.Windows.Forms.GroupBox()
+        Me.lblTo = New System.Windows.Forms.Label()
+        Me.lblFrom = New System.Windows.Forms.Label()
+        Me.ucrInputTextTo = New instat.ucrInputTextBox()
+        Me.ucrChkRange = New instat.ucrCheck()
+        Me.ucrInputTextFrom = New instat.ucrInputTextBox()
         Me.ucrNudMaxRowsExcel = New instat.ucrNud()
         Me.ucrChkColumnNamesExcel = New instat.ucrCheck()
         Me.ucrChkMaxRowsExcel = New instat.ucrCheck()
@@ -71,9 +76,7 @@ Partial Class dlgImportDataset
         Me.ucrInputMissingValueStringExcel = New instat.ucrInputTextBox()
         Me.ucrInputNamedRegions = New instat.ucrInputComboBox()
         Me.lblNamedRegion = New System.Windows.Forms.Label()
-        Me.ucrInputSelectSheetExcel = New instat.ucrInputComboBox()
         Me.lblRowToSkipExcel = New System.Windows.Forms.Label()
-        Me.lblSelectSheetExcel = New System.Windows.Forms.Label()
         Me.grpRDS = New System.Windows.Forms.GroupBox()
         Me.ucrChkOverwriteRDS = New instat.ucrCheck()
         Me.ucrChkImportObjectsRDS = New instat.ucrCheck()
@@ -94,14 +97,18 @@ Partial Class dlgImportDataset
         Me.ucrNudRowsToSkipText = New instat.ucrNud()
         Me.ucrInputMissingValueStringText = New instat.ucrInputTextBox()
         Me.lblLinesToSkipText = New System.Windows.Forms.Label()
-        Me.ucrPanelFixedWidthText = New instat.UcrPanel()
-        Me.ucrNudPreviewLines = New instat.ucrNud()
-        Me.ucrSaveFile = New instat.ucrSave()
-        Me.ucrInputFilePath = New instat.ucrInputTextBox()
-        Me.ucrBase = New instat.ucrButtons()
         Me.rdoSeparatortext = New System.Windows.Forms.RadioButton()
         Me.rdoFixedWidthText = New System.Windows.Forms.RadioButton()
         Me.rdoFixedWidthWhiteSpacesText = New System.Windows.Forms.RadioButton()
+        Me.clbSheets = New System.Windows.Forms.CheckedListBox()
+        Me.lblSelectSheets = New System.Windows.Forms.Label()
+        Me.lblImportingSheets = New System.Windows.Forms.Label()
+        Me.ucrChkSheetsCheckAll = New instat.ucrCheck()
+        Me.ucrNudPreviewLines = New instat.ucrNud()
+        Me.ucrPanelFixedWidthText = New instat.UcrPanel()
+        Me.ucrSaveFile = New instat.ucrSave()
+        Me.ucrInputFilePath = New instat.ucrInputTextBox()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpCSV.SuspendLayout()
         Me.grpExcel.SuspendLayout()
         Me.grpRDS.SuspendLayout()
@@ -278,6 +285,11 @@ Partial Class dlgImportDataset
         '
         'grpExcel
         '
+        Me.grpExcel.Controls.Add(Me.lblTo)
+        Me.grpExcel.Controls.Add(Me.ucrChkRange)
+        Me.grpExcel.Controls.Add(Me.lblFrom)
+        Me.grpExcel.Controls.Add(Me.ucrInputTextTo)
+        Me.grpExcel.Controls.Add(Me.ucrInputTextFrom)
         Me.grpExcel.Controls.Add(Me.ucrNudMaxRowsExcel)
         Me.grpExcel.Controls.Add(Me.ucrChkColumnNamesExcel)
         Me.grpExcel.Controls.Add(Me.ucrChkMaxRowsExcel)
@@ -287,12 +299,42 @@ Partial Class dlgImportDataset
         Me.grpExcel.Controls.Add(Me.ucrInputMissingValueStringExcel)
         Me.grpExcel.Controls.Add(Me.ucrInputNamedRegions)
         Me.grpExcel.Controls.Add(Me.lblNamedRegion)
-        Me.grpExcel.Controls.Add(Me.ucrInputSelectSheetExcel)
         Me.grpExcel.Controls.Add(Me.lblRowToSkipExcel)
-        Me.grpExcel.Controls.Add(Me.lblSelectSheetExcel)
         resources.ApplyResources(Me.grpExcel, "grpExcel")
         Me.grpExcel.Name = "grpExcel"
         Me.grpExcel.TabStop = False
+        '
+        'lblTo
+        '
+        resources.ApplyResources(Me.lblTo, "lblTo")
+        Me.lblTo.Name = "lblTo"
+        '
+        'lblFrom
+        '
+        resources.ApplyResources(Me.lblFrom, "lblFrom")
+        Me.lblFrom.Name = "lblFrom"
+        '
+        'ucrInputTextTo
+        '
+        Me.ucrInputTextTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextTo.IsMultiline = False
+        Me.ucrInputTextTo.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTextTo, "ucrInputTextTo")
+        Me.ucrInputTextTo.Name = "ucrInputTextTo"
+        '
+        'ucrChkRange
+        '
+        Me.ucrChkRange.Checked = False
+        resources.ApplyResources(Me.ucrChkRange, "ucrChkRange")
+        Me.ucrChkRange.Name = "ucrChkRange"
+        '
+        'ucrInputTextFrom
+        '
+        Me.ucrInputTextFrom.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextFrom.IsMultiline = False
+        Me.ucrInputTextFrom.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTextFrom, "ucrInputTextFrom")
+        Me.ucrInputTextFrom.Name = "ucrInputTextFrom"
         '
         'ucrNudMaxRowsExcel
         '
@@ -357,22 +399,10 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.lblNamedRegion, "lblNamedRegion")
         Me.lblNamedRegion.Name = "lblNamedRegion"
         '
-        'ucrInputSelectSheetExcel
-        '
-        Me.ucrInputSelectSheetExcel.AddQuotesIfUnrecognised = True
-        Me.ucrInputSelectSheetExcel.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSelectSheetExcel, "ucrInputSelectSheetExcel")
-        Me.ucrInputSelectSheetExcel.Name = "ucrInputSelectSheetExcel"
-        '
         'lblRowToSkipExcel
         '
         resources.ApplyResources(Me.lblRowToSkipExcel, "lblRowToSkipExcel")
         Me.lblRowToSkipExcel.Name = "lblRowToSkipExcel"
-        '
-        'lblSelectSheetExcel
-        '
-        resources.ApplyResources(Me.lblSelectSheetExcel, "lblSelectSheetExcel")
-        Me.lblSelectSheetExcel.Name = "lblSelectSheetExcel"
         '
         'grpRDS
         '
@@ -513,39 +543,6 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.lblLinesToSkipText, "lblLinesToSkipText")
         Me.lblLinesToSkipText.Name = "lblLinesToSkipText"
         '
-        'ucrPanelFixedWidthText
-        '
-        resources.ApplyResources(Me.ucrPanelFixedWidthText, "ucrPanelFixedWidthText")
-        Me.ucrPanelFixedWidthText.Name = "ucrPanelFixedWidthText"
-        '
-        'ucrNudPreviewLines
-        '
-        Me.ucrNudPreviewLines.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPreviewLines.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudPreviewLines, "ucrNudPreviewLines")
-        Me.ucrNudPreviewLines.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPreviewLines.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPreviewLines.Name = "ucrNudPreviewLines"
-        Me.ucrNudPreviewLines.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrSaveFile
-        '
-        resources.ApplyResources(Me.ucrSaveFile, "ucrSaveFile")
-        Me.ucrSaveFile.Name = "ucrSaveFile"
-        '
-        'ucrInputFilePath
-        '
-        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilePath.IsMultiline = False
-        Me.ucrInputFilePath.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFilePath, "ucrInputFilePath")
-        Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
         'rdoSeparatortext
         '
         resources.ApplyResources(Me.rdoSeparatortext, "rdoSeparatortext")
@@ -576,10 +573,71 @@ Partial Class dlgImportDataset
         Me.rdoFixedWidthWhiteSpacesText.TabStop = True
         Me.rdoFixedWidthWhiteSpacesText.UseVisualStyleBackColor = True
         '
+        'clbSheets
+        '
+        Me.clbSheets.CheckOnClick = True
+        Me.clbSheets.FormattingEnabled = True
+        resources.ApplyResources(Me.clbSheets, "clbSheets")
+        Me.clbSheets.Name = "clbSheets"
+        '
+        'lblSelectSheets
+        '
+        resources.ApplyResources(Me.lblSelectSheets, "lblSelectSheets")
+        Me.lblSelectSheets.Name = "lblSelectSheets"
+        Me.lblSelectSheets.Tag = ""
+        '
+        'lblImportingSheets
+        '
+        resources.ApplyResources(Me.lblImportingSheets, "lblImportingSheets")
+        Me.lblImportingSheets.Name = "lblImportingSheets"
+        '
+        'ucrChkSheetsCheckAll
+        '
+        Me.ucrChkSheetsCheckAll.Checked = False
+        resources.ApplyResources(Me.ucrChkSheetsCheckAll, "ucrChkSheetsCheckAll")
+        Me.ucrChkSheetsCheckAll.Name = "ucrChkSheetsCheckAll"
+        '
+        'ucrNudPreviewLines
+        '
+        Me.ucrNudPreviewLines.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPreviewLines.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudPreviewLines, "ucrNudPreviewLines")
+        Me.ucrNudPreviewLines.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPreviewLines.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPreviewLines.Name = "ucrNudPreviewLines"
+        Me.ucrNudPreviewLines.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPanelFixedWidthText
+        '
+        resources.ApplyResources(Me.ucrPanelFixedWidthText, "ucrPanelFixedWidthText")
+        Me.ucrPanelFixedWidthText.Name = "ucrPanelFixedWidthText"
+        '
+        'ucrSaveFile
+        '
+        resources.ApplyResources(Me.ucrSaveFile, "ucrSaveFile")
+        Me.ucrSaveFile.Name = "ucrSaveFile"
+        '
+        'ucrInputFilePath
+        '
+        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.IsMultiline = False
+        Me.ucrInputFilePath.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFilePath, "ucrInputFilePath")
+        Me.ucrInputFilePath.Name = "ucrInputFilePath"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
         'dlgImportDataset
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblImportingSheets)
+        Me.Controls.Add(Me.ucrChkSheetsCheckAll)
+        Me.Controls.Add(Me.lblSelectSheets)
+        Me.Controls.Add(Me.clbSheets)
         Me.Controls.Add(Me.rdoFixedWidthWhiteSpacesText)
         Me.Controls.Add(Me.rdoSeparatortext)
         Me.Controls.Add(Me.rdoFixedWidthText)
@@ -634,8 +692,6 @@ Partial Class dlgImportDataset
     Friend WithEvents grpCSV As GroupBox
     Friend WithEvents grpExcel As GroupBox
     Friend WithEvents lblRowToSkipExcel As Label
-    Friend WithEvents lblSelectSheetExcel As Label
-    Friend WithEvents ucrInputSelectSheetExcel As ucrInputComboBox
     Friend WithEvents lblNamedRegion As Label
     Friend WithEvents ucrInputNamedRegions As ucrInputComboBox
     Friend WithEvents lblCannotImport As Label
@@ -682,4 +738,13 @@ Partial Class dlgImportDataset
     Friend WithEvents rdoSeparatortext As RadioButton
     Friend WithEvents rdoFixedWidthText As RadioButton
     Friend WithEvents rdoFixedWidthWhiteSpacesText As RadioButton
+    Friend WithEvents clbSheets As CheckedListBox
+    Friend WithEvents lblSelectSheets As Label
+    Friend WithEvents ucrChkSheetsCheckAll As ucrCheck
+    Friend WithEvents lblImportingSheets As Label
+    Friend WithEvents ucrChkRange As ucrCheck
+    Friend WithEvents lblTo As Label
+    Friend WithEvents lblFrom As Label
+    Friend WithEvents ucrInputTextTo As ucrInputTextBox
+    Friend WithEvents ucrInputTextFrom As ucrInputTextBox
 End Class

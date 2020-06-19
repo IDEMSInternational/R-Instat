@@ -35,6 +35,7 @@ Public Class dlgExportRWorkspace
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 555
         ucrInputExportFile.IsReadOnly = True
 
         ucrReceiverMultiple.SetParameter(New RParameter("data_names", 0))

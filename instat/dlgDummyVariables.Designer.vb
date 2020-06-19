@@ -124,6 +124,7 @@ Partial Class dlgDummyVariables
         '
         'ucrSelectorDummyVariable
         '
+        Me.ucrSelectorDummyVariable.bDropUnusedFilterLevels = False
         Me.ucrSelectorDummyVariable.bShowHiddenColumns = False
         Me.ucrSelectorDummyVariable.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorDummyVariable, "ucrSelectorDummyVariable")

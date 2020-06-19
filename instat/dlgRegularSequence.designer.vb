@@ -40,6 +40,15 @@ Partial Class dlgRegularSequence
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRegularSequence))
         Me.grpSequenceDefinition = New System.Windows.Forms.GroupBox()
+        Me.ucrInputComboDatesBy = New instat.ucrInputComboBox()
+        Me.ucrDateTimePickerTo = New instat.ucrDateTimePicker()
+        Me.ucrDateTimePickerFrom = New instat.ucrDateTimePicker()
+        Me.ucrChkDefineAsFactor = New instat.ucrCheck()
+        Me.ucrNudRepeatValues = New instat.ucrNud()
+        Me.ucrInputInStepsOf = New instat.ucrInputTextBox()
+        Me.ucrInputTo = New instat.ucrInputTextBox()
+        Me.ucrInputFrom = New instat.ucrInputTextBox()
+        Me.ucrDataFrameLengthForRegularSequence = New instat.ucrDataFrameLength()
         Me.lblLength = New System.Windows.Forms.Label()
         Me.lblTimes = New System.Windows.Forms.Label()
         Me.lblRepeatValues = New System.Windows.Forms.Label()
@@ -53,15 +62,6 @@ Partial Class dlgRegularSequence
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
         Me.ucrPnlSequenceType = New instat.UcrPanel()
         Me.ucrNewColumnName = New instat.ucrSave()
-        Me.ucrInputComboDatesBy = New instat.ucrInputComboBox()
-        Me.ucrDateTimePickerTo = New instat.ucrDateTimePicker()
-        Me.ucrDateTimePickerFrom = New instat.ucrDateTimePicker()
-        Me.ucrChkDefineAsFactor = New instat.ucrCheck()
-        Me.ucrNudRepeatValues = New instat.ucrNud()
-        Me.ucrInputInStepsOf = New instat.ucrInputTextBox()
-        Me.ucrInputTo = New instat.ucrInputTextBox()
-        Me.ucrInputFrom = New instat.ucrInputTextBox()
-        Me.ucrDataFrameLengthForRegularSequence = New instat.ucrDataFrameLength()
         Me.ucrSelectDataFrameRegularSequence = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpSequenceDefinition.SuspendLayout()
@@ -71,9 +71,9 @@ Partial Class dlgRegularSequence
         '
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputComboDatesBy)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrDateTimePickerTo)
-        Me.grpSequenceDefinition.Controls.Add(Me.ucrDateTimePickerFrom)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrChkDefineAsFactor)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrNudRepeatValues)
+        Me.grpSequenceDefinition.Controls.Add(Me.ucrDateTimePickerFrom)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputInStepsOf)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputTo)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputFrom)
@@ -89,6 +89,73 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.TabStop = False
         Me.grpSequenceDefinition.Tag = "Sequence_definition"
         Me.grpSequenceDefinition.UseCompatibleTextRendering = True
+        '
+        'ucrInputComboDatesBy
+        '
+        Me.ucrInputComboDatesBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboDatesBy.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboDatesBy, "ucrInputComboDatesBy")
+        Me.ucrInputComboDatesBy.Name = "ucrInputComboDatesBy"
+        '
+        'ucrDateTimePickerTo
+        '
+        resources.ApplyResources(Me.ucrDateTimePickerTo, "ucrDateTimePickerTo")
+        Me.ucrDateTimePickerTo.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDateTimePickerTo.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDateTimePickerTo.Name = "ucrDateTimePickerTo"
+        '
+        'ucrDateTimePickerFrom
+        '
+        resources.ApplyResources(Me.ucrDateTimePickerFrom, "ucrDateTimePickerFrom")
+        Me.ucrDateTimePickerFrom.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDateTimePickerFrom.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDateTimePickerFrom.Name = "ucrDateTimePickerFrom"
+        '
+        'ucrChkDefineAsFactor
+        '
+        Me.ucrChkDefineAsFactor.Checked = False
+        resources.ApplyResources(Me.ucrChkDefineAsFactor, "ucrChkDefineAsFactor")
+        Me.ucrChkDefineAsFactor.Name = "ucrChkDefineAsFactor"
+        '
+        'ucrNudRepeatValues
+        '
+        Me.ucrNudRepeatValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRepeatValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudRepeatValues, "ucrNudRepeatValues")
+        Me.ucrNudRepeatValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRepeatValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRepeatValues.Name = "ucrNudRepeatValues"
+        Me.ucrNudRepeatValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputInStepsOf
+        '
+        Me.ucrInputInStepsOf.AddQuotesIfUnrecognised = True
+        Me.ucrInputInStepsOf.IsMultiline = False
+        Me.ucrInputInStepsOf.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputInStepsOf, "ucrInputInStepsOf")
+        Me.ucrInputInStepsOf.Name = "ucrInputInStepsOf"
+        '
+        'ucrInputTo
+        '
+        Me.ucrInputTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputTo.IsMultiline = False
+        Me.ucrInputTo.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTo, "ucrInputTo")
+        Me.ucrInputTo.Name = "ucrInputTo"
+        '
+        'ucrInputFrom
+        '
+        Me.ucrInputFrom.AddQuotesIfUnrecognised = True
+        Me.ucrInputFrom.IsMultiline = False
+        Me.ucrInputFrom.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFrom, "ucrInputFrom")
+        Me.ucrInputFrom.Name = "ucrInputFrom"
+        '
+        'ucrDataFrameLengthForRegularSequence
+        '
+        resources.ApplyResources(Me.ucrDataFrameLengthForRegularSequence, "ucrDataFrameLengthForRegularSequence")
+        Me.ucrDataFrameLengthForRegularSequence.Name = "ucrDataFrameLengthForRegularSequence"
+        Me.ucrDataFrameLengthForRegularSequence.ucrDataFrameSelector = Nothing
         '
         'lblLength
         '
@@ -173,75 +240,9 @@ Partial Class dlgRegularSequence
         resources.ApplyResources(Me.ucrNewColumnName, "ucrNewColumnName")
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
         '
-        'ucrInputComboDatesBy
-        '
-        Me.ucrInputComboDatesBy.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboDatesBy.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboDatesBy, "ucrInputComboDatesBy")
-        Me.ucrInputComboDatesBy.Name = "ucrInputComboDatesBy"
-        '
-        'ucrDateTimePickerTo
-        '
-        resources.ApplyResources(Me.ucrDateTimePickerTo, "ucrDateTimePickerTo")
-        Me.ucrDateTimePickerTo.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDateTimePickerTo.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDateTimePickerTo.Name = "ucrDateTimePickerTo"
-        '
-        'ucrDateTimePickerFrom
-        '
-        resources.ApplyResources(Me.ucrDateTimePickerFrom, "ucrDateTimePickerFrom")
-        Me.ucrDateTimePickerFrom.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDateTimePickerFrom.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDateTimePickerFrom.Name = "ucrDateTimePickerFrom"
-        '
-        'ucrChkDefineAsFactor
-        '
-        Me.ucrChkDefineAsFactor.Checked = False
-        resources.ApplyResources(Me.ucrChkDefineAsFactor, "ucrChkDefineAsFactor")
-        Me.ucrChkDefineAsFactor.Name = "ucrChkDefineAsFactor"
-        '
-        'ucrNudRepeatValues
-        '
-        Me.ucrNudRepeatValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRepeatValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudRepeatValues, "ucrNudRepeatValues")
-        Me.ucrNudRepeatValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRepeatValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRepeatValues.Name = "ucrNudRepeatValues"
-        Me.ucrNudRepeatValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputInStepsOf
-        '
-        Me.ucrInputInStepsOf.AddQuotesIfUnrecognised = True
-        Me.ucrInputInStepsOf.IsMultiline = False
-        Me.ucrInputInStepsOf.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputInStepsOf, "ucrInputInStepsOf")
-        Me.ucrInputInStepsOf.Name = "ucrInputInStepsOf"
-        '
-        'ucrInputTo
-        '
-        Me.ucrInputTo.AddQuotesIfUnrecognised = True
-        Me.ucrInputTo.IsMultiline = False
-        Me.ucrInputTo.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTo, "ucrInputTo")
-        Me.ucrInputTo.Name = "ucrInputTo"
-        '
-        'ucrInputFrom
-        '
-        Me.ucrInputFrom.AddQuotesIfUnrecognised = True
-        Me.ucrInputFrom.IsMultiline = False
-        Me.ucrInputFrom.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFrom, "ucrInputFrom")
-        Me.ucrInputFrom.Name = "ucrInputFrom"
-        '
-        'ucrDataFrameLengthForRegularSequence
-        '
-        resources.ApplyResources(Me.ucrDataFrameLengthForRegularSequence, "ucrDataFrameLengthForRegularSequence")
-        Me.ucrDataFrameLengthForRegularSequence.Name = "ucrDataFrameLengthForRegularSequence"
-        Me.ucrDataFrameLengthForRegularSequence.ucrDataFrameSelector = Nothing
-        '
         'ucrSelectDataFrameRegularSequence
         '
+        Me.ucrSelectDataFrameRegularSequence.bDropUnusedFilterLevels = False
         Me.ucrSelectDataFrameRegularSequence.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectDataFrameRegularSequence, "ucrSelectDataFrameRegularSequence")
         Me.ucrSelectDataFrameRegularSequence.Name = "ucrSelectDataFrameRegularSequence"

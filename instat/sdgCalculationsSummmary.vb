@@ -66,8 +66,7 @@ Public Class sdgCalculationsSummmary
         'temp until working
         ucrCalcSummary.chkSaveResultInto.Visible = False
         ucrCalcSummary.ucrSaveResultInto.Visible = False
-        ucrCalcSummary.cmdTry.Visible = False
-        ucrCalcSummary.ucrInputTryMessage.Visible = False
+        'ucrCalcSummary.ucrTryModelling.Visible = False
 
         ucrManipulations.bIsDataType = False
         ucrManipulations.cmdBottom.Enabled = False

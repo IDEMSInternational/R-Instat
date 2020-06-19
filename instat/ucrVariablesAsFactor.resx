@@ -154,7 +154,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrSingleVariable.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrSingleVariable.Name" xml:space="preserve">
     <value>ucrSingleVariable</value>
@@ -178,10 +178,7 @@
     <value>120, 27</value>
   </data>
   <data name="cmdVariables.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="cmdVariables.Text" xml:space="preserve">
-    <value>Single Variable</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;cmdVariables.Name" xml:space="preserve">
     <value>cmdVariables</value>

@@ -127,6 +127,7 @@ Partial Class dlgStack
         '
         'ucrSelectorStack
         '
+        Me.ucrSelectorStack.bDropUnusedFilterLevels = False
         Me.ucrSelectorStack.bShowHiddenColumns = False
         Me.ucrSelectorStack.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorStack, "ucrSelectorStack")

@@ -249,6 +249,7 @@ Partial Class dlgFrequency
         '
         'ucrSelectorFrequency
         '
+        Me.ucrSelectorFrequency.bDropUnusedFilterLevels = False
         Me.ucrSelectorFrequency.bShowHiddenColumns = False
         Me.ucrSelectorFrequency.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorFrequency, "ucrSelectorFrequency")

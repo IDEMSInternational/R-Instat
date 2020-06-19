@@ -154,6 +154,7 @@ Partial Class dlgSummaryTables
         '
         'ucrSelectorSummaryTables
         '
+        Me.ucrSelectorSummaryTables.bDropUnusedFilterLevels = False
         Me.ucrSelectorSummaryTables.bShowHiddenColumns = False
         Me.ucrSelectorSummaryTables.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorSummaryTables, "ucrSelectorSummaryTables")

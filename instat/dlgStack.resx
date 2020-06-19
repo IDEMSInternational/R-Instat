@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblColumnsTostack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 45</value>
+    <value>357, 45</value>
   </data>
   <data name="lblColumnsTostack.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -201,7 +201,7 @@
     <value>10</value>
   </data>
   <data name="ucrNudNoSets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 208</value>
+    <value>280, 208</value>
   </data>
   <data name="ucrNudNoSets.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -264,7 +264,7 @@
     <value>3</value>
   </data>
   <data name="ucrChkCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 170</value>
+    <value>357, 170</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrChkCarryColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -289,7 +289,7 @@
     <value>4</value>
   </data>
   <data name="ucrStackDataInto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 272</value>
+    <value>140, 272</value>
   </data>
   <data name="ucrStackDataInto.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -313,7 +313,7 @@
     <value>5</value>
   </data>
   <data name="ucrFactorInto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 241</value>
+    <value>140, 241</value>
   </data>
   <data name="ucrFactorInto.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -343,13 +343,13 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 383</value>
+    <value>490, 383</value>
   </data>
   <data name="lblSets.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblSets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 211</value>
+    <value>218, 211</value>
   </data>
   <data name="lblSets.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 13</value>
@@ -421,7 +421,7 @@
     <value>9</value>
   </data>
   <data name="ucrReceiverColumnsToBeStack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 60</value>
+    <value>357, 60</value>
   </data>
   <data name="ucrReceiverColumnsToBeStack.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -457,7 +457,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrColumnsToCarryReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 194</value>
+    <value>357, 194</value>
   </data>
   <data name="ucrColumnsToCarryReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

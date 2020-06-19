@@ -161,6 +161,7 @@ Partial Class dlgSummaryBarOrPieChart
         '
         'ucrSummaryBarSelector
         '
+        Me.ucrSummaryBarSelector.bDropUnusedFilterLevels = False
         Me.ucrSummaryBarSelector.bShowHiddenColumns = False
         Me.ucrSummaryBarSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSummaryBarSelector, "ucrSummaryBarSelector")

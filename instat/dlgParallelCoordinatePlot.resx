@@ -247,7 +247,7 @@
     <value>37, 13</value>
   </data>
   <data name="lblScale.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="lblScale.Text" xml:space="preserve">
     <value>Scale:</value>
@@ -277,7 +277,7 @@
     <value>75, 13</value>
   </data>
   <data name="lblTransparency.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="lblTransparency.Text" xml:space="preserve">
     <value>Transparency:</value>
@@ -296,6 +296,9 @@
   </data>
   <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 344</value>
+  </data>
+  <data name="ucrSaveGraph.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>260, 24</value>
@@ -322,7 +325,7 @@
     <value>52, 20</value>
   </data>
   <data name="ucrNudTransparency.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrNudTransparency.Name" xml:space="preserve">
     <value>ucrNudTransparency</value>
@@ -385,7 +388,7 @@
     <value>137, 21</value>
   </data>
   <data name="ucrInputScale.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrInputScale.Name" xml:space="preserve">
     <value>ucrInputScale</value>

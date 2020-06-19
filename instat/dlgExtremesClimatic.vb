@@ -46,7 +46,6 @@ Public Class dlgExtremesClimatic
     Private clsFilterExtremeExp As New ROperator
 
     Private Sub dlgExtremesClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstload Then
             InitialiseDialog()
             bFirstload = False
@@ -87,7 +86,7 @@ Public Class dlgExtremesClimatic
         ucrReceiverDOY.bWithQuotes = False
         ucrReceiverDOY.Selector = ucrSelectorClimaticExtremes
         ucrReceiverDOY.bAutoFill = True
-        ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
+        ucrReceiverDOY.SetClimaticType("doy")
         ucrReceiverDOY.strSelectorHeading = "Day Variables"
 
         ucrReceiverElement.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
@@ -124,6 +123,8 @@ Public Class dlgExtremesClimatic
 
         ucrChkMissingValues.SetParameter(New RParameter("na.rm", 1))
         ucrChkMissingValues.SetText("Include Missing Values")
+        ucrChkMissingValues.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkMissingValues.SetRDefault("FALSE")
 
         ' Peaks Option
         ucrInputThresholdValue.SetParameter(New RParameter("right", 1))
@@ -226,7 +227,6 @@ Public Class dlgExtremesClimatic
         clsMinMaxSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMinMaxFuncExp, iPosition:=1)
         clsMinMaxFuncExp.SetRCommand("max")
         clsMinMaxFuncExp.AddParameter("x", iPosition:=0)
-        clsMinMaxFuncExp.AddParameter("na.rm", "TRUE", iPosition:=1)
         clsMinMaxSummariseFunction.AddParameter("result_name", "max", iPosition:=2)
         clsMinMaxSummariseFunction.AddParameter("manipulations", clsRFunctionParameter:=clsMinMaxManipulationsFunction, iPosition:=3)
         clsMinMaxManipulationsFunction.AddParameter("sub1", clsRFunctionParameter:=clsGroupByFunction, bIncludeArgumentName:=False, iPosition:=0)
@@ -334,6 +334,8 @@ Public Class dlgExtremesClimatic
 
         ucrPnlMaxMin.SetRCode(clsMinMaxFuncExp, bReset)
         ucrReceiverElement.SetRCode(clsMinMaxFuncExp, bReset)
+
+
         ucrChkMissingValues.SetRCode(clsMinMaxFuncExp, bReset)
 
         ucrInputSave.SetRCode(clsMinMaxSummariseFunction, bReset)

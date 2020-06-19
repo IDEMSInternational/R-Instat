@@ -40,7 +40,7 @@ Partial Class dlgColumnStats
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgColumnStats))
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
-        Me.lblByFactors = New System.Windows.Forms.Label()
+        Me.lblSummariseBy = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkOriginalLevel = New instat.ucrCheck()
         Me.ucrChkStoreResults = New instat.ucrCheck()
@@ -49,6 +49,8 @@ Partial Class dlgColumnStats
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.cmdProportionsPercentages = New System.Windows.Forms.Button()
+        Me.ucrChkWeights = New instat.ucrCheck()
+        Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForColumnStatistics = New instat.ucrSelectorByDataFrameAddRemove()
@@ -61,10 +63,10 @@ Partial Class dlgColumnStats
         resources.ApplyResources(Me.lblSelectedVariables, "lblSelectedVariables")
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         '
-        'lblByFactors
+        'lblSummariseBy
         '
-        resources.ApplyResources(Me.lblByFactors, "lblByFactors")
-        Me.lblByFactors.Name = "lblByFactors"
+        resources.ApplyResources(Me.lblSummariseBy, "lblSummariseBy")
+        Me.lblSummariseBy.Name = "lblSummariseBy"
         '
         'grpOptions
         '
@@ -121,6 +123,21 @@ Partial Class dlgColumnStats
         Me.cmdProportionsPercentages.Tag = "Proportions/Percentages..."
         Me.cmdProportionsPercentages.UseVisualStyleBackColor = True
         '
+        'ucrChkWeights
+        '
+        Me.ucrChkWeights.Checked = False
+        resources.ApplyResources(Me.ucrChkWeights, "ucrChkWeights")
+        Me.ucrChkWeights.Name = "ucrChkWeights"
+        '
+        'ucrReceiverWeights
+        '
+        Me.ucrReceiverWeights.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverWeights, "ucrReceiverWeights")
+        Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
+        Me.ucrReceiverWeights.Selector = Nothing
+        Me.ucrReceiverWeights.strNcFilePath = ""
+        Me.ucrReceiverWeights.ucrSelector = Nothing
+        '
         'ucrReceiverByFactor
         '
         Me.ucrReceiverByFactor.frmParent = Me
@@ -156,12 +173,14 @@ Partial Class dlgColumnStats
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkWeights)
+        Me.Controls.Add(Me.ucrReceiverWeights)
         Me.Controls.Add(Me.cmdProportionsPercentages)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrReceiverByFactor)
         Me.Controls.Add(Me.ucrReceiverSelectedVariables)
-        Me.Controls.Add(Me.lblByFactors)
+        Me.Controls.Add(Me.lblSummariseBy)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.ucrSelectorForColumnStatistics)
         Me.Controls.Add(Me.ucrBase)
@@ -179,7 +198,7 @@ Partial Class dlgColumnStats
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorForColumnStatistics As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblSelectedVariables As Label
-    Friend WithEvents lblByFactors As Label
+    Friend WithEvents lblSummariseBy As Label
     Friend WithEvents ucrReceiverSelectedVariables As ucrReceiverMultiple
     Friend WithEvents ucrReceiverByFactor As ucrReceiverMultiple
     Friend WithEvents grpOptions As GroupBox
@@ -190,4 +209,6 @@ Partial Class dlgColumnStats
     Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
     Friend WithEvents cmdProportionsPercentages As Button
     Friend WithEvents ucrChkOriginalLevel As ucrCheck
+    Friend WithEvents ucrChkWeights As ucrCheck
+    Friend WithEvents ucrReceiverWeights As ucrReceiverSingle
 End Class

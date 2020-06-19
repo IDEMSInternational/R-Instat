@@ -129,7 +129,6 @@ Partial Class dlgImportFromODK
         Me.MinimizeBox = False
         Me.Name = "dlgImportFromODK"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents lblUsername As Label

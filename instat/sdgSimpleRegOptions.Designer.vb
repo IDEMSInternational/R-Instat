@@ -65,11 +65,6 @@ Partial Class sdgSimpleRegOptions
         Me.rdoLinear = New System.Windows.Forms.RadioButton()
         Me.ucrPnlScale = New instat.UcrPanel()
         Me.tbResiduals = New System.Windows.Forms.TabPage()
-        Me.grpMultiplePlots = New System.Windows.Forms.GroupBox()
-        Me.rdoSixPlots = New System.Windows.Forms.RadioButton()
-        Me.rdoFourPlots = New System.Windows.Forms.RadioButton()
-        Me.rdoChooseIndividual = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMutiplePlots = New instat.UcrPanel()
         Me.grpIndividualPlots = New System.Windows.Forms.GroupBox()
         Me.ucrChkCooksDistance = New instat.ucrCheck()
         Me.ucrChkResidualsFitted = New instat.ucrCheck()
@@ -77,7 +72,6 @@ Partial Class sdgSimpleRegOptions
         Me.ucrChkResidualsLeverage = New instat.ucrCheck()
         Me.ucrChkQQ = New instat.ucrCheck()
         Me.ucrChkCooksDistanceLeverage = New instat.ucrCheck()
-        Me.ucrChkResidualPlots = New instat.ucrCheck()
         Me.tbDisplay = New System.Windows.Forms.TabPage()
         Me.ucrNudConfLevel = New instat.ucrNud()
         Me.ucrChkPvalues = New instat.ucrCheck()
@@ -100,7 +94,6 @@ Partial Class sdgSimpleRegOptions
         Me.grpPlotType.SuspendLayout()
         Me.grpScale.SuspendLayout()
         Me.tbResiduals.SuspendLayout()
-        Me.grpMultiplePlots.SuspendLayout()
         Me.grpIndividualPlots.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbpRegOptions.SuspendLayout()
@@ -305,53 +298,11 @@ Partial Class sdgSimpleRegOptions
         '
         'tbResiduals
         '
-        Me.tbResiduals.Controls.Add(Me.grpMultiplePlots)
         Me.tbResiduals.Controls.Add(Me.grpIndividualPlots)
-        Me.tbResiduals.Controls.Add(Me.ucrChkResidualPlots)
         resources.ApplyResources(Me.tbResiduals, "tbResiduals")
         Me.tbResiduals.Name = "tbResiduals"
         Me.tbResiduals.Tag = "Residuals"
         Me.tbResiduals.UseVisualStyleBackColor = True
-        '
-        'grpMultiplePlots
-        '
-        Me.grpMultiplePlots.Controls.Add(Me.rdoSixPlots)
-        Me.grpMultiplePlots.Controls.Add(Me.rdoFourPlots)
-        Me.grpMultiplePlots.Controls.Add(Me.rdoChooseIndividual)
-        Me.grpMultiplePlots.Controls.Add(Me.ucrPnlMutiplePlots)
-        resources.ApplyResources(Me.grpMultiplePlots, "grpMultiplePlots")
-        Me.grpMultiplePlots.Name = "grpMultiplePlots"
-        Me.grpMultiplePlots.TabStop = False
-        Me.grpMultiplePlots.Tag = ""
-        '
-        'rdoSixPlots
-        '
-        resources.ApplyResources(Me.rdoSixPlots, "rdoSixPlots")
-        Me.rdoSixPlots.Name = "rdoSixPlots"
-        Me.rdoSixPlots.TabStop = True
-        Me.rdoSixPlots.Tag = "Six Plots"
-        Me.rdoSixPlots.UseVisualStyleBackColor = True
-        '
-        'rdoFourPlots
-        '
-        resources.ApplyResources(Me.rdoFourPlots, "rdoFourPlots")
-        Me.rdoFourPlots.Name = "rdoFourPlots"
-        Me.rdoFourPlots.TabStop = True
-        Me.rdoFourPlots.Tag = "Four_Plots"
-        Me.rdoFourPlots.UseVisualStyleBackColor = True
-        '
-        'rdoChooseIndividual
-        '
-        resources.ApplyResources(Me.rdoChooseIndividual, "rdoChooseIndividual")
-        Me.rdoChooseIndividual.Name = "rdoChooseIndividual"
-        Me.rdoChooseIndividual.TabStop = True
-        Me.rdoChooseIndividual.Tag = ""
-        Me.rdoChooseIndividual.UseVisualStyleBackColor = True
-        '
-        'ucrPnlMutiplePlots
-        '
-        resources.ApplyResources(Me.ucrPnlMutiplePlots, "ucrPnlMutiplePlots")
-        Me.ucrPnlMutiplePlots.Name = "ucrPnlMutiplePlots"
         '
         'grpIndividualPlots
         '
@@ -401,12 +352,6 @@ Partial Class sdgSimpleRegOptions
         Me.ucrChkCooksDistanceLeverage.Checked = False
         resources.ApplyResources(Me.ucrChkCooksDistanceLeverage, "ucrChkCooksDistanceLeverage")
         Me.ucrChkCooksDistanceLeverage.Name = "ucrChkCooksDistanceLeverage"
-        '
-        'ucrChkResidualPlots
-        '
-        Me.ucrChkResidualPlots.Checked = False
-        resources.ApplyResources(Me.ucrChkResidualPlots, "ucrChkResidualPlots")
-        Me.ucrChkResidualPlots.Name = "ucrChkResidualPlots"
         '
         'tbDisplay
         '
@@ -535,8 +480,6 @@ Partial Class sdgSimpleRegOptions
         Me.grpScale.ResumeLayout(False)
         Me.grpScale.PerformLayout()
         Me.tbResiduals.ResumeLayout(False)
-        Me.grpMultiplePlots.ResumeLayout(False)
-        Me.grpMultiplePlots.PerformLayout()
         Me.grpIndividualPlots.ResumeLayout(False)
         Me.tbDisplay.ResumeLayout(False)
         Me.tbDisplay.PerformLayout()
@@ -550,7 +493,6 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents tbGraphics As TabPage
     Friend WithEvents nudGraphicsCLevel As NumericUpDown
     Friend WithEvents lblGraphicsSignLevel As Label
-    Friend WithEvents grpMultiplePlots As GroupBox
     Friend WithEvents tbDisplay As TabPage
     Friend WithEvents lblConfLevel As Label
     Friend WithEvents chkPvalues As CheckBox
@@ -586,11 +528,6 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents rdo1 As RadioButton
     Friend WithEvents rdo2 As RadioButton
     Friend WithEvents ucrPnlPartial12 As UcrPanel
-    Friend WithEvents ucrChkResidualPlots As ucrCheck
-    Friend WithEvents rdoSixPlots As RadioButton
-    Friend WithEvents rdoFourPlots As RadioButton
-    Friend WithEvents rdoChooseIndividual As RadioButton
-    Friend WithEvents ucrPnlMutiplePlots As UcrPanel
     Friend WithEvents ucrSaveFittedColumnName As ucrSave
     Friend WithEvents ucrSaveLeverageColumnName As ucrSave
     Friend WithEvents ucrSaveStdResidualsColumnName As ucrSave

@@ -57,21 +57,21 @@ link$set("public", "rename_column_in_link", function(data_name, old_column_name,
 }
 )
 
-instat_object$set("public", "update_links_rename_data_frame", function(old_data_name, new_data_name) {
+DataBook$set("public", "update_links_rename_data_frame", function(old_data_name, new_data_name) {
   for(i in seq_along(private$.links)) {
     private$.links[[i]]$rename_data_frame_in_link(old_data_name, new_data_name)
   }
 }
 )
 
-instat_object$set("public", "update_links_rename_column", function(data_name, old_column_name, new_column_name) {
+DataBook$set("public", "update_links_rename_column", function(data_name, old_column_name, new_column_name) {
   for(i in seq_along(private$.links)) {
     private$.links[[i]]$rename_column_in_link(data_name, old_column_name, new_column_name)
   }
 }
 )
 
-instat_object$set("public", "add_link", function(from_data_frame, to_data_frame, link_pairs, type, link_name) {
+DataBook$set("public", "add_link", function(from_data_frame, to_data_frame, link_pairs, type, link_name) {
   if(length(names(link_pairs)) != length(link_pairs)) stop("link_pairs must be a named vector or list.")
   if(!self$link_exists_between(from_data_frame, to_data_frame)) {
     # This means when creating a link to single value data frame, there will be no key in to_data_frame
@@ -137,7 +137,7 @@ instat_object$set("public", "add_link", function(from_data_frame, to_data_frame,
 }
 )
 
-instat_object$set("public", "get_link_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c(), exclude_self_links = TRUE) {
+DataBook$set("public", "get_link_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c(), exclude_self_links = TRUE) {
   if(exclude_self_links) {
     out <- c()
     i <- 1
@@ -156,7 +156,7 @@ instat_object$set("public", "get_link_names", function(data_name, include_overal
 }
 )
 
-instat_object$set("public", "link_exists_from", function(curr_data_frame, link_pairs) {
+DataBook$set("public", "link_exists_from", function(curr_data_frame, link_pairs) {
   link_exists <- FALSE
   for(curr_link in private$.links) {
     if(curr_link$from_data_frame == curr_data_frame) {
@@ -172,7 +172,7 @@ instat_object$set("public", "link_exists_from", function(curr_data_frame, link_p
 }
 )
 
-instat_object$set("public", "link_exists_from_by_to", function(first_data_frame, link_pairs, second_data_frame) {
+DataBook$set("public", "link_exists_from_by_to", function(first_data_frame, link_pairs, second_data_frame) {
   link_exists <- FALSE
   for(curr_link in private$.links) {
     if(curr_link$from_data_frame == first_data_frame && curr_link$to_data_frame == second_data_frame) {
@@ -188,7 +188,7 @@ instat_object$set("public", "link_exists_from_by_to", function(first_data_frame,
 }
 )
 
-instat_object$set("public", "get_linked_to_data_name", function(from_data_frame, link_cols = c(), include_self = FALSE) {
+DataBook$set("public", "get_linked_to_data_name", function(from_data_frame, link_cols = c(), include_self = FALSE) {
   out <- c()
   if(include_self) out <- c(out, from_data_frame)
   for(curr_link in private$.links) {
@@ -209,7 +209,7 @@ instat_object$set("public", "get_linked_to_data_name", function(from_data_frame,
 }
 )
 
-instat_object$set("public", "get_linked_to_definition", function(from_data_frame, link_pairs) {
+DataBook$set("public", "get_linked_to_definition", function(from_data_frame, link_pairs) {
   to_data_name <- self$get_linked_to_data_name(from_data_frame, link_pairs)
   if(length(to_data_name) > 0) {
     # TODO what happens if there is more than 1?
@@ -227,7 +227,7 @@ instat_object$set("public", "get_linked_to_definition", function(from_data_frame
 }
 )
 
-instat_object$set("public", "get_possible_linked_to_defintion", function(from_data_frame, link_pairs) {
+DataBook$set("public", "get_possible_linked_to_defintion", function(from_data_frame, link_pairs) {
   def <- self$get_linked_to_definition(from_data_frame, link_pairs)
   if(length(def) != 0) return(def)
   else {
@@ -265,7 +265,7 @@ instat_object$set("public", "get_possible_linked_to_defintion", function(from_da
 }
 )
 
-instat_object$set("public", "get_equivalent_columns", function(from_data_name, columns, to_data_name) {
+DataBook$set("public", "get_equivalent_columns", function(from_data_name, columns, to_data_name) {
   if(from_data_name == to_data_name) equivalent_columns <- columns
   else equivalent_columns <- self$link_between_containing(from_data_name, columns, to_data_name)
   if(length(equivalent_columns) != 0) return(equivalent_columns)
@@ -299,13 +299,20 @@ instat_object$set("public", "get_equivalent_columns", function(from_data_name, c
 }
 )
 
-instat_object$set("public", "link_exists_between", function(from_data_frame, to_data_frame) {
-  return(any(sapply(private$.links, function(link) link$from_data_frame == from_data_frame && link$to_data_frame == to_data_frame))
-         || any(sapply(private$.links, function(link) link$from_data_frame == to_data_frame && link$to_data_frame == from_data_frame)))
+# If ordered = TRUE then from_data_frame must be from_data_frame in the link
+# otherwise from_data_frame could be to_data_frame in the link
+DataBook$set("public", "link_exists_between", function(from_data_frame, to_data_frame, ordered = FALSE) {
+  if(ordered) {
+    return(any(sapply(private$.links, function(link) link$from_data_frame == from_data_frame && link$to_data_frame == to_data_frame)))
+  }
+  else {
+    return(any(sapply(private$.links, function(link) link$from_data_frame == from_data_frame && link$to_data_frame == to_data_frame))
+           || any(sapply(private$.links, function(link) link$from_data_frame == to_data_frame && link$to_data_frame == from_data_frame)))
+  }
 }
 )
 
-instat_object$set("public", "link_between_containing", function(from_data_frame, containing_columns, to_data_frame) {
+DataBook$set("public", "link_between_containing", function(from_data_frame, containing_columns, to_data_frame) {
   if(self$link_exists_between(from_data_frame, to_data_frame)) {
     curr_link <- self$get_link_between(from_data_frame, to_data_frame)
     for(curr_link_pairs in curr_link$link_columns) {
@@ -335,17 +342,26 @@ instat_object$set("public", "link_between_containing", function(from_data_frame,
 }
 )
 
-instat_object$set("public", "get_link_between", function(from_data_frame, to_data_frame) {
-  for(curr_link in private$.links) {
-    if((curr_link$from_data_frame == from_data_frame && curr_link$to_data_frame == to_data_frame) || (curr_link$from_data_frame == to_data_frame && curr_link$to_data_frame == from_data_frame)) {
-      return(curr_link)
+DataBook$set("public", "get_link_between", function(from_data_frame, to_data_frame, ordered = FALSE) {
+  if(ordered) {
+    for(curr_link in private$.links) {
+      if((curr_link$from_data_frame == from_data_frame && curr_link$to_data_frame == to_data_frame)) {
+        return(curr_link)
+      }
+    }
+  }
+  else {
+    for(curr_link in private$.links) {
+      if((curr_link$from_data_frame == from_data_frame && curr_link$to_data_frame == to_data_frame) || (curr_link$from_data_frame == to_data_frame && curr_link$to_data_frame == from_data_frame)) {
+        return(curr_link)
+      }
     }
   }
   return(NULL)
 }
 )
 
-instat_object$set("public", "view_link", function(link_name) {
+DataBook$set("public", "view_link", function(link_name) {
   temp_link <- self$get_links(link_name)
   out <- ""
   if(length(temp_link) > 0) {

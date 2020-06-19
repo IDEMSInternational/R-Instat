@@ -31,7 +31,7 @@ Public Class dlgRecodeFactor
         End If
         SetRCodeforControls(bReset)
         bReset = False
-        'autoTranslate(Me)
+        autoTranslate(Me)
         TestOKEnabled()
     End Sub
 

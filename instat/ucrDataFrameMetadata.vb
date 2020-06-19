@@ -151,4 +151,8 @@ Public Class ucrDataFrameMetadata
         grdMetaData.Enabled = True
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "544")
+    End Sub
 End Class

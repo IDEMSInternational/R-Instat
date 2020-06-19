@@ -41,6 +41,8 @@ Partial Class dlgMerge
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgMerge))
         Me.cmdJoinOptions = New System.Windows.Forms.Button()
         Me.lnlJoinType = New System.Windows.Forms.Label()
+        Me.lblMergeBy = New System.Windows.Forms.Label()
+        Me.ucrInputMergingBy = New instat.ucrInputTextBox()
         Me.ucrSaveMerge = New instat.ucrSave()
         Me.ucrInputJoinType = New instat.ucrInputComboBox()
         Me.ucrSecondDataFrame = New instat.ucrDataFrame()
@@ -59,6 +61,19 @@ Partial Class dlgMerge
         resources.ApplyResources(Me.lnlJoinType, "lnlJoinType")
         Me.lnlJoinType.Name = "lnlJoinType"
         '
+        'lblMergeBy
+        '
+        resources.ApplyResources(Me.lblMergeBy, "lblMergeBy")
+        Me.lblMergeBy.Name = "lblMergeBy"
+        '
+        'ucrInputMergingBy
+        '
+        Me.ucrInputMergingBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputMergingBy.IsMultiline = False
+        Me.ucrInputMergingBy.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMergingBy, "ucrInputMergingBy")
+        Me.ucrInputMergingBy.Name = "ucrInputMergingBy"
+        '
         'ucrSaveMerge
         '
         resources.ApplyResources(Me.ucrSaveMerge, "ucrSaveMerge")
@@ -73,12 +88,14 @@ Partial Class dlgMerge
         '
         'ucrSecondDataFrame
         '
+        Me.ucrSecondDataFrame.bDropUnusedFilterLevels = False
         Me.ucrSecondDataFrame.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSecondDataFrame, "ucrSecondDataFrame")
         Me.ucrSecondDataFrame.Name = "ucrSecondDataFrame"
         '
         'ucrFirstDataFrame
         '
+        Me.ucrFirstDataFrame.bDropUnusedFilterLevels = False
         Me.ucrFirstDataFrame.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrFirstDataFrame, "ucrFirstDataFrame")
         Me.ucrFirstDataFrame.Name = "ucrFirstDataFrame"
@@ -92,6 +109,8 @@ Partial Class dlgMerge
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputMergingBy)
+        Me.Controls.Add(Me.lblMergeBy)
         Me.Controls.Add(Me.ucrSaveMerge)
         Me.Controls.Add(Me.lnlJoinType)
         Me.Controls.Add(Me.ucrInputJoinType)
@@ -116,4 +135,6 @@ Partial Class dlgMerge
     Friend WithEvents ucrInputJoinType As ucrInputComboBox
     Friend WithEvents lnlJoinType As Label
     Friend WithEvents ucrSaveMerge As ucrSave
+    Friend WithEvents lblMergeBy As Label
+    Friend WithEvents ucrInputMergingBy As ucrInputTextBox
 End Class

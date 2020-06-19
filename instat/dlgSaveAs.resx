@@ -144,14 +144,11 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="lblSaveDataTo.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="lblSaveDataTo.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 20</value>
   </data>
   <data name="lblSaveDataTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 13</value>
+    <value>103, 13</value>
   </data>
   <data name="lblSaveDataTo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -172,7 +169,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputFilePath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 17</value>
+    <value>125, 17</value>
   </data>
   <data name="ucrInputFilePath.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -196,7 +193,7 @@
     <value>1</value>
   </data>
   <data name="cmdChooseFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>409, 17</value>
+    <value>443, 17</value>
   </data>
   <data name="cmdChooseFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 21</value>
@@ -250,7 +247,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>477, 130</value>
+    <value>511, 130</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

@@ -24,9 +24,6 @@
   <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="lblSaveDataTo.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="lblSaveDataTo.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>10, 20</value>
   </data>

@@ -32,7 +32,7 @@ Public Class dlgStringDistance
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        'autoTranslate(Me)
+        autoTranslate(Me)
         TestOkEnabled()
     End Sub
 

@@ -123,6 +123,7 @@ Partial Class dlgOneVariableGraph
         '
         'ucrSelectorOneVarGraph
         '
+        Me.ucrSelectorOneVarGraph.bDropUnusedFilterLevels = False
         Me.ucrSelectorOneVarGraph.bShowHiddenColumns = False
         Me.ucrSelectorOneVarGraph.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorOneVarGraph, "ucrSelectorOneVarGraph")
@@ -150,7 +151,6 @@ Partial Class dlgOneVariableGraph
         Me.MinimizeBox = False
         Me.Name = "dlgOneVariableGraph"
         Me.grpOutput.ResumeLayout(False)
-        Me.grpOutput.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

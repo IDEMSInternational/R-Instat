@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 45</value>
+    <value>265, 11</value>
   </data>
   <data name="lblSelectedVariables.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 13</value>
@@ -148,37 +148,37 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSelectedVariables.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
-  <data name="lblByFactors.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblSummariseBy.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblByFactors.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblSummariseBy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblByFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 168</value>
+  <data name="lblSummariseBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>265, 181</value>
   </data>
-  <data name="lblByFactors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
+  <data name="lblSummariseBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 13</value>
   </data>
-  <data name="lblByFactors.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="lblSummariseBy.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <data name="lblByFactors.Text" xml:space="preserve">
-    <value>By Factor(s):</value>
+  <data name="lblSummariseBy.Text" xml:space="preserve">
+    <value>Summarise By:</value>
   </data>
-  <data name="&gt;&gt;lblByFactors.Name" xml:space="preserve">
-    <value>lblByFactors</value>
+  <data name="&gt;&gt;lblSummariseBy.Name" xml:space="preserve">
+    <value>lblSummariseBy</value>
   </data>
-  <data name="&gt;&gt;lblByFactors.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblSummariseBy.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblByFactors.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblSummariseBy.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblByFactors.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;lblSummariseBy.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="ucrChkOriginalLevel.Location" type="System.Drawing.Point, System.Drawing">
     <value>25, 42</value>
@@ -292,7 +292,7 @@
     <value>160, 145</value>
   </data>
   <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="grpOptions.Text" xml:space="preserve">
     <value>Options</value>
@@ -307,19 +307,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpOptions.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="cmdSummaries.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 289</value>
+    <value>265, 302</value>
   </data>
   <data name="cmdSummaries.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 23</value>
   </data>
   <data name="cmdSummaries.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="cmdSummaries.Text" xml:space="preserve">
     <value>Summaries...</value>
@@ -334,22 +334,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdSummaries.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="cmdProportionsPercentages.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdProportionsPercentages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 318</value>
+    <value>265, 328</value>
   </data>
   <data name="cmdProportionsPercentages.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 23</value>
   </data>
   <data name="cmdProportionsPercentages.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="cmdProportionsPercentages.Text" xml:space="preserve">
-    <value>Proportions/Percentages...</value>
+    <value>Prop. and Percentages...</value>
   </data>
   <data name="&gt;&gt;cmdProportionsPercentages.Name" xml:space="preserve">
     <value>cmdProportionsPercentages</value>
@@ -361,6 +361,27 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdProportionsPercentages.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkWeights.Location" type="System.Drawing.Point, System.Drawing">
+    <value>265, 134</value>
+  </data>
+  <data name="ucrChkWeights.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 20</value>
+  </data>
+  <data name="ucrChkWeights.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeights.Name" xml:space="preserve">
+    <value>ucrChkWeights</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeights.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeights.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkWeights.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -370,10 +391,34 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>416, 404</value>
+    <value>416, 418</value>
+  </data>
+  <data name="ucrReceiverByFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>265, 196</value>
+  </data>
+  <data name="ucrReceiverByFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverByFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 100</value>
+  </data>
+  <data name="ucrReceiverByFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverByFactor.Name" xml:space="preserve">
+    <value>ucrReceiverByFactor</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverByFactor.Type" xml:space="preserve">
+    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverByFactor.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverByFactor.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="ucrReceiverSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 60</value>
+    <value>265, 26</value>
   </data>
   <data name="ucrReceiverSelectedVariables.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -394,7 +439,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverSelectedVariables.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="ucrSelectorForColumnStatistics.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -418,16 +463,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorForColumnStatistics.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 347</value>
+    <value>10, 358</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>402, 53</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -439,7 +484,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -453,28 +498,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrReceiverByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 183</value>
+  <data name="ucrReceiverWeights.Location" type="System.Drawing.Point, System.Drawing">
+    <value>265, 157</value>
   </data>
-  <data name="ucrReceiverByFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverWeights.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverByFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 100</value>
+  <data name="ucrReceiverWeights.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
   </data>
-  <data name="ucrReceiverByFactor.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrReceiverWeights.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverByFactor.Name" xml:space="preserve">
-    <value>ucrReceiverByFactor</value>
+  <data name="&gt;&gt;ucrReceiverWeights.Name" xml:space="preserve">
+    <value>ucrReceiverWeights</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverByFactor.Type" xml:space="preserve">
-    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrReceiverWeights.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverByFactor.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverWeights.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverByFactor.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;ucrReceiverWeights.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
 </root>

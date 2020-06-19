@@ -171,6 +171,7 @@ Partial Class dlgRank
         '
         'ucrSelectorForRank
         '
+        Me.ucrSelectorForRank.bDropUnusedFilterLevels = False
         Me.ucrSelectorForRank.bShowHiddenColumns = False
         Me.ucrSelectorForRank.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForRank, "ucrSelectorForRank")
@@ -209,7 +210,6 @@ Partial Class dlgRank
         Me.grpTies.ResumeLayout(False)
         Me.grpTies.PerformLayout()
         Me.grpMissingValues.ResumeLayout(False)
-        Me.grpMissingValues.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

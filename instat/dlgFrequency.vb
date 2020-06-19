@@ -41,6 +41,8 @@ Public Class dlgFrequency
     Private Sub InitialiseDialog()
         Dim dctPercentageType As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.iCallType = 4
+        ucrBase.iHelpTopicID = 425
+
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         cmdOptions.Enabled = False ' Temporarily disabled
 

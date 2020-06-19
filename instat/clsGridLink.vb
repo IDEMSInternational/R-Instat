@@ -94,7 +94,7 @@ Public Class clsGridLink
         clsGetCombinedMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_combined_metadata")
         clsSetMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_metadata_changed")
 
-        If frmMain.clsRLink.bInstatObjectExists Then
+        If frmMain.clsRLink.bInstatObjectExists AndAlso frmMain.clsRLink.GetDataFrameCount() > 0 Then
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsDataChanged.ToScript())
             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                 bRDataChanged = expTemp.AsLogical(0)
@@ -138,6 +138,46 @@ Public Class clsGridLink
                     lstDataNames = Nothing
                 End If
                 If lstDataNames IsNot Nothing Then
+                    'delete old sheets
+                    'TODO look at this code to improve it (simplify)
+                    If bGrdDataExists Then
+                        k = 0
+                        For i = 0 To grdData.Worksheets.Count - 1
+                            ' look up convert genericvector to string list to avoid this loop
+                            bFoundName = False
+                            For j = 0 To lstDataNames.Length - 1
+                                strDataName = lstDataNames.AsCharacter(j)
+                                If strDataName = grdData.Worksheets(i - k).Name Then
+                                    bFoundName = True
+                                    Exit For
+                                End If
+                            Next
+                            If Not bFoundName Then
+                                shtTemp = grdData.Worksheets(i - k)
+                                grdData.Worksheets.Remove(shtTemp)
+                                k = k + 1
+                            End If
+                        Next
+                    End If
+                    If bGrdVariablesMetadataExists Then
+                        k = 0
+                        For i = 0 To grdVariablesMetadata.Worksheets.Count - 1
+                            ' look up convert genericvector to string list to avoid this loop
+                            bFoundName = False
+                            For j = 0 To lstDataNames.Length - 1
+                                strDataName = lstDataNames.AsCharacter(j)
+                                If strDataName = grdVariablesMetadata.Worksheets(i - k).Name Then
+                                    bFoundName = True
+                                    Exit For
+                                End If
+                            Next
+                            If Not bFoundName Then
+                                shtTemp = grdVariablesMetadata.Worksheets(i - k)
+                                grdVariablesMetadata.Worksheets.Remove(shtTemp)
+                                k = k + 1
+                            End If
+                        Next
+                    End If
                     For i = 0 To lstDataNames.Length - 1
                         strDataName = lstDataNames.AsCharacter(i)
                         clsDataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
@@ -212,48 +252,6 @@ Public Class clsGridLink
                             End If
                         End If
                     Next
-
-                    'delete old sheets
-                    'TODO look at this code to improve it (simplify)
-                    If bGrdDataExists Then
-                        k = 0
-                        For i = 0 To grdData.Worksheets.Count - 1
-                            ' look up convert genericvector to string list to avoid this loop
-                            bFoundName = False
-                            For j = 0 To lstDataNames.Length - 1
-                                strDataName = lstDataNames.AsCharacter(j)
-                                If strDataName = grdData.Worksheets(i - k).Name Then
-                                    bFoundName = True
-                                    Exit For
-                                End If
-                            Next
-                            If Not bFoundName Then
-                                shtTemp = grdData.Worksheets(i - k)
-                                grdData.Worksheets.Remove(shtTemp)
-                                k = k + 1
-                            End If
-                        Next
-                    End If
-
-                    If bGrdVariablesMetadataExists Then
-                        k = 0
-                        For i = 0 To grdVariablesMetadata.Worksheets.Count - 1
-                            ' look up convert genericvector to string list to avoid this loop
-                            bFoundName = False
-                            For j = 0 To lstDataNames.Length - 1
-                                strDataName = lstDataNames.AsCharacter(j)
-                                If strDataName = grdVariablesMetadata.Worksheets(i - k).Name Then
-                                    bFoundName = True
-                                    Exit For
-                                End If
-                            Next
-                            If Not bFoundName Then
-                                shtTemp = grdVariablesMetadata.Worksheets(i - k)
-                                grdVariablesMetadata.Worksheets.Remove(shtTemp)
-                                k = k + 1
-                            End If
-                        Next
-                    End If
                 End If
 
                 If bGrdMetadataExists AndAlso (bGrdMetadataChanged OrElse bRMetadataChanged) Then
@@ -421,7 +419,7 @@ Public Class clsGridLink
             FormatDataView(fillWorkSheet)
         End If
         Try
-            lstColumnNames = dfTemp.ColumnNames.ToList
+            lstColumnNames = strColumnNames.ToList
             strCurrColNames = frmMain.clsRLink.GetListAsRString(lstColumnNames)
 
             If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists AndAlso bIncludeDataTypes Then

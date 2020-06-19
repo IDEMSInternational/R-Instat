@@ -326,14 +326,11 @@
   <data name="&gt;&gt;grpTies.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="rdoKeptAsMissing.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="rdoKeptAsMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 18</value>
   </data>
   <data name="rdoKeptAsMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 17</value>
+    <value>137, 17</value>
   </data>
   <data name="rdoKeptAsMissing.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -353,14 +350,11 @@
   <data name="&gt;&gt;rdoKeptAsMissing.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdoLast.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="rdoLast.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 64</value>
   </data>
   <data name="rdoLast.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 17</value>
+    <value>137, 17</value>
   </data>
   <data name="rdoLast.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -380,14 +374,11 @@
   <data name="&gt;&gt;rdoLast.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="rdoFirstMissingValues.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="rdoFirstMissingValues.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 41</value>
   </data>
   <data name="rdoFirstMissingValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 17</value>
+    <value>137, 17</value>
   </data>
   <data name="rdoFirstMissingValues.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -411,7 +402,7 @@
     <value>6, 18</value>
   </data>
   <data name="ucrPnlMissingValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 64</value>
+    <value>143, 64</value>
   </data>
   <data name="ucrPnlMissingValues.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -432,7 +423,7 @@
     <value>10, 193</value>
   </data>
   <data name="grpMissingValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 85</value>
+    <value>155, 85</value>
   </data>
   <data name="grpMissingValues.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

@@ -71,6 +71,7 @@ Partial Class dlgRandomSample
         '
         'ucrSelectorRandomSamples
         '
+        Me.ucrSelectorRandomSamples.bDropUnusedFilterLevels = False
         Me.ucrSelectorRandomSamples.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorRandomSamples, "ucrSelectorRandomSamples")
         Me.ucrSelectorRandomSamples.Name = "ucrSelectorRandomSamples"
@@ -135,7 +136,6 @@ Partial Class dlgRandomSample
         Me.MinimizeBox = False
         Me.Name = "dlgRandomSample"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 

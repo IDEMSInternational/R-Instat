@@ -50,6 +50,7 @@ Partial Class sdgImportFromClimSoft
         Me.lblConnection = New System.Windows.Forms.Label()
         Me.ucrBaseSdgClimSoft = New instat.ucrButtonsSubdialogue()
         Me.cmdEnterPassword = New System.Windows.Forms.Button()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrInputDatabaseName
@@ -120,10 +121,17 @@ Partial Class sdgImportFromClimSoft
         Me.cmdEnterPassword.Name = "cmdEnterPassword"
         Me.cmdEnterPassword.UseVisualStyleBackColor = True
         '
+        'cmdOptions
+        '
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
         'sdgImportFromClimSoft
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrBaseSdgClimSoft)
         Me.Controls.Add(Me.lblConnection)
         Me.Controls.Add(Me.cmdEnterPassword)
@@ -155,4 +163,5 @@ Partial Class sdgImportFromClimSoft
     Friend WithEvents lblConnection As Label
     Friend WithEvents ucrBaseSdgClimSoft As ucrButtonsSubdialogue
     Friend WithEvents cmdEnterPassword As Button
+    Friend WithEvents cmdOptions As Button
 End Class

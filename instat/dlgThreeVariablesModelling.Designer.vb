@@ -77,10 +77,10 @@ Partial Class dlgThreeVariableModelling
         Me.lblResponse.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblResponse.Location = New System.Drawing.Point(251, 20)
         Me.lblResponse.Name = "lblResponse"
-        Me.lblResponse.Size = New System.Drawing.Size(96, 13)
+        Me.lblResponse.Size = New System.Drawing.Size(99, 13)
         Me.lblResponse.TabIndex = 1
         Me.lblResponse.Tag = "Response_Variable"
-        Me.lblResponse.Text = "Response Variable"
+        Me.lblResponse.Text = "Response Variable:"
         '
         'lblSecondExplanatoryVariable
         '
@@ -238,6 +238,7 @@ Partial Class dlgThreeVariableModelling
         '
         'ucrSelectorThreeVariableModelling
         '
+        Me.ucrSelectorThreeVariableModelling.bDropUnusedFilterLevels = False
         Me.ucrSelectorThreeVariableModelling.bShowHiddenColumns = False
         Me.ucrSelectorThreeVariableModelling.bUseCurrentFilter = True
         Me.ucrSelectorThreeVariableModelling.Location = New System.Drawing.Point(10, 9)

@@ -42,15 +42,18 @@ Partial Class dlgSplitText
         Me.lblSelectedFactor = New System.Windows.Forms.Label()
         Me.lblSplitBy = New System.Windows.Forms.Label()
         Me.lblNumberofPiecesToReturn = New System.Windows.Forms.Label()
-        Me.ucrBase = New instat.ucrButtons()
         Me.rdoTextComponents = New System.Windows.Forms.RadioButton()
         Me.rdoBinaryColumns = New System.Windows.Forms.RadioButton()
+        Me.rdoMaximumNumberOfComponents = New System.Windows.Forms.RadioButton()
+        Me.rdoFixedNumberOfComponents = New System.Windows.Forms.RadioButton()
         Me.ucrPnlSplitText = New instat.UcrPanel()
         Me.ucrSaveColumn = New instat.ucrSave()
         Me.ucrNudPieces = New instat.ucrNud()
         Me.ucrInputPattern = New instat.ucrInputComboBox()
         Me.ucrReceiverSplitTextColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorSplitTextColumn = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlTextComponents = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'lblSelectedFactor
@@ -71,11 +74,6 @@ Partial Class dlgSplitText
         Me.lblNumberofPiecesToReturn.Name = "lblNumberofPiecesToReturn"
         Me.lblNumberofPiecesToReturn.Tag = "Number_of_Pieces_to_Return"
         '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
         'rdoTextComponents
         '
         resources.ApplyResources(Me.rdoTextComponents, "rdoTextComponents")
@@ -95,6 +93,20 @@ Partial Class dlgSplitText
         Me.rdoBinaryColumns.Name = "rdoBinaryColumns"
         Me.rdoBinaryColumns.TabStop = True
         Me.rdoBinaryColumns.UseVisualStyleBackColor = True
+        '
+        'rdoMaximumNumberOfComponents
+        '
+        resources.ApplyResources(Me.rdoMaximumNumberOfComponents, "rdoMaximumNumberOfComponents")
+        Me.rdoMaximumNumberOfComponents.Name = "rdoMaximumNumberOfComponents"
+        Me.rdoMaximumNumberOfComponents.TabStop = True
+        Me.rdoMaximumNumberOfComponents.UseVisualStyleBackColor = True
+        '
+        'rdoFixedNumberOfComponents
+        '
+        resources.ApplyResources(Me.rdoFixedNumberOfComponents, "rdoFixedNumberOfComponents")
+        Me.rdoFixedNumberOfComponents.Name = "rdoFixedNumberOfComponents"
+        Me.rdoFixedNumberOfComponents.TabStop = True
+        Me.rdoFixedNumberOfComponents.UseVisualStyleBackColor = True
         '
         'ucrPnlSplitText
         '
@@ -134,15 +146,28 @@ Partial Class dlgSplitText
         '
         'ucrSelectorSplitTextColumn
         '
+        Me.ucrSelectorSplitTextColumn.bDropUnusedFilterLevels = False
         Me.ucrSelectorSplitTextColumn.bShowHiddenColumns = False
         Me.ucrSelectorSplitTextColumn.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorSplitTextColumn, "ucrSelectorSplitTextColumn")
         Me.ucrSelectorSplitTextColumn.Name = "ucrSelectorSplitTextColumn"
         '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrPnlTextComponents
+        '
+        resources.ApplyResources(Me.ucrPnlTextComponents, "ucrPnlTextComponents")
+        Me.ucrPnlTextComponents.Name = "ucrPnlTextComponents"
+        '
         'dlgSplitText
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoFixedNumberOfComponents)
+        Me.Controls.Add(Me.rdoMaximumNumberOfComponents)
         Me.Controls.Add(Me.rdoTextComponents)
         Me.Controls.Add(Me.rdoBinaryColumns)
         Me.Controls.Add(Me.ucrPnlSplitText)
@@ -155,6 +180,7 @@ Partial Class dlgSplitText
         Me.Controls.Add(Me.lblSelectedFactor)
         Me.Controls.Add(Me.ucrSelectorSplitTextColumn)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrPnlTextComponents)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -177,4 +203,7 @@ Partial Class dlgSplitText
     Friend WithEvents rdoTextComponents As RadioButton
     Friend WithEvents rdoBinaryColumns As RadioButton
     Friend WithEvents ucrPnlSplitText As UcrPanel
+    Friend WithEvents rdoFixedNumberOfComponents As RadioButton
+    Friend WithEvents rdoMaximumNumberOfComponents As RadioButton
+    Friend WithEvents ucrPnlTextComponents As UcrPanel
 End Class

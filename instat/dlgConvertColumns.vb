@@ -95,8 +95,13 @@ Public Class dlgConvertColumns
         ucrChkKeepAttributes.SetText("Keep Attributes")
         ucrChkKeepAttributes.SetRDefault("TRUE")
 
-        ucrPnlConvertTo.AddToLinkedControls(ucrChkCreateLabels, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkCreateLabels.SetParameter(New RParameter("keep.labels", 7))
+        ucrPnlConvertTo.AddToLinkedControls(ucrChkIgnoreLabels, {rdoNumeric, rdoFactor, rdoOrderedFactor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIgnoreLabels.SetParameter(New RParameter("ignore_labels", 7))
+        ucrChkIgnoreLabels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkIgnoreLabels.SetRDefault("FALSE")
+        ucrChkIgnoreLabels.AddToLinkedControls(ucrChkCreateLabels, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkCreateLabels.SetParameter(New RParameter("keep.labels", 8))
         ucrChkCreateLabels.SetText("Create Labels")
         ucrChkCreateLabels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkCreateLabels.SetRDefault("TRUE")
@@ -163,5 +168,13 @@ Public Class dlgConvertColumns
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToConvert.ControlContentsChanged, ucrPnlConvertTo.ControlContentsChanged, ucrNudDisplayDecimals.ControlContentsChanged, ucrChkSpecifyDecimalsToDisplay.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlConvertTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlConvertTo.ControlValueChanged
+        If rdoNumeric.Checked Then
+            ucrChkIgnoreLabels.SetText("Simple Convert")
+        ElseIf rdoFactor.Checked OrElse rdoOrderedFactor.Checked Then
+            ucrChkIgnoreLabels.SetText("Ignore Labels")
+        End If
     End Sub
 End Class

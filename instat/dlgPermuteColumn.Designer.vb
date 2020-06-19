@@ -104,6 +104,7 @@ Partial Class dlgPermuteColumn
         '
         'ucrPermuteRowsSelector
         '
+        Me.ucrPermuteRowsSelector.bDropUnusedFilterLevels = False
         Me.ucrPermuteRowsSelector.bShowHiddenColumns = False
         Me.ucrPermuteRowsSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrPermuteRowsSelector, "ucrPermuteRowsSelector")

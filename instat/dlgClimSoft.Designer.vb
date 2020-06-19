@@ -46,13 +46,14 @@ Partial Class dlgClimSoft
         Me.lblStartDate = New System.Windows.Forms.Label()
         Me.lblEndDate = New System.Windows.Forms.Label()
         Me.ttClimsoft = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrInputEndDate = New instat.ucrInputTextBox()
-        Me.ucrInputStartDate = New instat.ucrInputTextBox()
         Me.ucrChkObservationData = New instat.ucrCheck()
         Me.ucrSelectorForClimSoft = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverMultipleStations = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrDtpStartdate = New instat.ucrDateTimePicker()
+        Me.UcrDtpEndDate = New instat.ucrDateTimePicker()
+        Me.ucrChkUnstackData = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdEstablishConnection
@@ -80,22 +81,6 @@ Partial Class dlgClimSoft
         '
         resources.ApplyResources(Me.lblEndDate, "lblEndDate")
         Me.lblEndDate.Name = "lblEndDate"
-        '
-        'ucrInputEndDate
-        '
-        Me.ucrInputEndDate.AddQuotesIfUnrecognised = True
-        Me.ucrInputEndDate.IsMultiline = False
-        Me.ucrInputEndDate.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputEndDate, "ucrInputEndDate")
-        Me.ucrInputEndDate.Name = "ucrInputEndDate"
-        '
-        'ucrInputStartDate
-        '
-        Me.ucrInputStartDate.AddQuotesIfUnrecognised = True
-        Me.ucrInputStartDate.IsMultiline = False
-        Me.ucrInputStartDate.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStartDate, "ucrInputStartDate")
-        Me.ucrInputStartDate.Name = "ucrInputStartDate"
         '
         'ucrChkObservationData
         '
@@ -132,12 +117,33 @@ Partial Class dlgClimSoft
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrDtpStartdate
+        '
+        resources.ApplyResources(Me.ucrDtpStartdate, "ucrDtpStartdate")
+        Me.ucrDtpStartdate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpStartdate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpStartdate.Name = "ucrDtpStartdate"
+        '
+        'UcrDtpEndDate
+        '
+        resources.ApplyResources(Me.UcrDtpEndDate, "UcrDtpEndDate")
+        Me.UcrDtpEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.UcrDtpEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.UcrDtpEndDate.Name = "UcrDtpEndDate"
+        '
+        'ucrChkUnstackData
+        '
+        Me.ucrChkUnstackData.Checked = False
+        resources.ApplyResources(Me.ucrChkUnstackData, "ucrChkUnstackData")
+        Me.ucrChkUnstackData.Name = "ucrChkUnstackData"
+        '
         'dlgClimSoft
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrInputEndDate)
-        Me.Controls.Add(Me.ucrInputStartDate)
+        Me.Controls.Add(Me.ucrChkUnstackData)
+        Me.Controls.Add(Me.UcrDtpEndDate)
+        Me.Controls.Add(Me.ucrDtpStartdate)
         Me.Controls.Add(Me.ucrChkObservationData)
         Me.Controls.Add(Me.lblEndDate)
         Me.Controls.Add(Me.ucrSelectorForClimSoft)
@@ -166,8 +172,9 @@ Partial Class dlgClimSoft
     Friend WithEvents lblStartDate As Label
     Friend WithEvents ucrSelectorForClimSoft As ucrSelectorAddRemove
     Friend WithEvents ucrChkObservationData As ucrCheck
-    Friend WithEvents ucrInputEndDate As ucrInputTextBox
-    Friend WithEvents ucrInputStartDate As ucrInputTextBox
     Friend WithEvents lblEndDate As Label
     Friend WithEvents ttClimsoft As ToolTip
+    Friend WithEvents ucrChkUnstackData As ucrCheck
+    Friend WithEvents UcrDtpEndDate As ucrDateTimePicker
+    Friend WithEvents ucrDtpStartdate As ucrDateTimePicker
 End Class

@@ -46,6 +46,10 @@ Partial Class dlgBarAndPieChart
         Me.rdoPieChart = New System.Windows.Forms.RadioButton()
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
         Me.cmdBarChartOptions = New System.Windows.Forms.Button()
+        Me.lblPosition = New System.Windows.Forms.Label()
+        Me.lblYvariable = New System.Windows.Forms.Label()
+        Me.cmdColumnChartOptions = New System.Windows.Forms.Button()
+        Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ucrInputBarChartPosition = New instat.ucrInputComboBox()
         Me.ucrSaveBar = New instat.ucrSave()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
@@ -54,7 +58,8 @@ Partial Class dlgBarAndPieChart
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.lblPosition = New System.Windows.Forms.Label()
+        Me.lblYValue = New System.Windows.Forms.Label()
+        Me.ucrInputYValue = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblVariable
@@ -114,6 +119,32 @@ Partial Class dlgBarAndPieChart
         Me.cmdBarChartOptions.Tag = "Bar_Chart_Options"
         Me.cmdBarChartOptions.UseVisualStyleBackColor = True
         '
+        'lblPosition
+        '
+        resources.ApplyResources(Me.lblPosition, "lblPosition")
+        Me.lblPosition.Name = "lblPosition"
+        '
+        'lblYvariable
+        '
+        resources.ApplyResources(Me.lblYvariable, "lblYvariable")
+        Me.lblYvariable.Name = "lblYvariable"
+        '
+        'cmdColumnChartOptions
+        '
+        resources.ApplyResources(Me.cmdColumnChartOptions, "cmdColumnChartOptions")
+        Me.cmdColumnChartOptions.Name = "cmdColumnChartOptions"
+        Me.cmdColumnChartOptions.Tag = "Column_Chart_Options"
+        Me.cmdColumnChartOptions.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverY
+        '
+        Me.ucrReceiverY.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverY, "ucrReceiverY")
+        Me.ucrReceiverY.Name = "ucrReceiverY"
+        Me.ucrReceiverY.Selector = Nothing
+        Me.ucrReceiverY.strNcFilePath = ""
+        Me.ucrReceiverY.ucrSelector = Nothing
+        '
         'ucrInputBarChartPosition
         '
         Me.ucrInputBarChartPosition.AddQuotesIfUnrecognised = True
@@ -168,15 +199,27 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
-        'lblPosition
+        'lblYValue
         '
-        resources.ApplyResources(Me.lblPosition, "lblPosition")
-        Me.lblPosition.Name = "lblPosition"
+        resources.ApplyResources(Me.lblYValue, "lblYValue")
+        Me.lblYValue.Name = "lblYValue"
+        '
+        'ucrInputYValue
+        '
+        Me.ucrInputYValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputYValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYValue, "ucrInputYValue")
+        Me.ucrInputYValue.Name = "ucrInputYValue"
         '
         'dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputYValue)
+        Me.Controls.Add(Me.lblYValue)
+        Me.Controls.Add(Me.cmdColumnChartOptions)
+        Me.Controls.Add(Me.lblYvariable)
+        Me.Controls.Add(Me.ucrReceiverY)
         Me.Controls.Add(Me.lblPosition)
         Me.Controls.Add(Me.ucrInputBarChartPosition)
         Me.Controls.Add(Me.ucrSaveBar)
@@ -219,4 +262,9 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents cmdBarChartOptions As Button
     Friend WithEvents ucrInputBarChartPosition As ucrInputComboBox
     Friend WithEvents lblPosition As Label
+    Friend WithEvents lblYvariable As Label
+    Friend WithEvents ucrReceiverY As ucrReceiverSingle
+    Friend WithEvents cmdColumnChartOptions As Button
+    Friend WithEvents ucrInputYValue As ucrInputComboBox
+    Friend WithEvents lblYValue As Label
 End Class

@@ -37,6 +37,7 @@ Imports RDotNet
     Public bIncludeCommentDefault As Nullable(Of Boolean) 'sets the default for comments on the dialog
     Public bShowProcurementMenu As Nullable(Of Boolean)
     Public bShowClimaticMenu As Nullable(Of Boolean)
+    Public bShowOptionsByContextMenu As Nullable(Of Boolean)
     Public iDigits As Nullable(Of Integer)
     Public bShowSignifStars As Nullable(Of Boolean)
     Public bChangeDataFrame As Nullable(Of Boolean)
@@ -45,6 +46,10 @@ Imports RDotNet
     Public bShowWaitDialog As Nullable(Of Boolean)
     Public iWaitTimeDelaySeconds As Nullable(Of Integer)
     Public iToolbarHeight As Nullable(Of Integer)
+    Public strClimsoftDatabaseName As String
+    Public strClimsoftHost As String
+    Public strClimsoftPort As String
+    Public strClimsoftUsername As String
 
     Public Sub New(Optional bSetOptions As Boolean = True)
         'TODO Is this sensible to do in constructor?
@@ -53,6 +58,7 @@ Imports RDotNet
         bIncludeCommentDefault = clsInstatOptionsDefaults.DEFAULTbIncludeCommentDefault
         bShowClimaticMenu = clsInstatOptionsDefaults.DEFAULTbShowClimaticMenu
         bShowProcurementMenu = clsInstatOptionsDefaults.DEFAULTbShowProcurementMenu
+        bShowOptionsByContextMenu = clsInstatOptionsDefaults.DEFAULTbShowOptionsByContextMenu
         fntOutput = clsInstatOptionsDefaults.DEFAULTfntOutput
         clrOutput = clsInstatOptionsDefaults.DEFAULTclrOutput
         fntComment = clsInstatOptionsDefaults.DEFAULTfntComment
@@ -77,6 +83,10 @@ Imports RDotNet
         bShowWaitDialog = clsInstatOptionsDefaults.DEFAULTbShowWaitDialog
         iWaitTimeDelaySeconds = clsInstatOptionsDefaults.DEFAULTiWaitTimeDelaySeconds
         iToolbarHeight = clsInstatOptionsDefaults.DEFAULTiToolbarHeight
+        strClimsoftDatabaseName = clsInstatOptionsDefaults.DEFAULTstrClimsoftDatabaseName
+        strClimsoftHost = clsInstatOptionsDefaults.DEFAULTstrClimsoftHost
+        strClimsoftPort = clsInstatOptionsDefaults.DEFAULTstrClimsoftPort
+        strClimsoftUsername = clsInstatOptionsDefaults.DEFAULTstrClimsoftUsername
         If bSetOptions Then
             SetOptions()
         End If
@@ -179,6 +189,12 @@ Imports RDotNet
             SetIncludeCommentByDefault(clsInstatOptionsDefaults.DEFAULTbIncludeCommentDefault)
         End If
 
+        If bShowOptionsByContextMenu.HasValue Then
+            SetShowOptionsByContextMenu(bShowOptionsByContextMenu)
+        Else
+            SetShowOptionsByContextMenu(clsInstatOptionsDefaults.DEFAULTbShowOptionsByContextMenu)
+        End If
+
         If bShowProcurementMenu.HasValue Then
             SetShowProcurementMenu(bShowProcurementMenu)
         Else
@@ -231,6 +247,30 @@ Imports RDotNet
             SetToolbarHeight(iToolbarHeight)
         Else
             SetToolbarHeight(clsInstatOptionsDefaults.DEFAULTiToolbarHeight)
+        End If
+
+        If strClimsoftDatabaseName IsNot Nothing Then
+            SetClimsoftDatabaseName(strClimsoftDatabaseName)
+        Else
+            SetClimsoftDatabaseName(clsInstatOptionsDefaults.DEFAULTstrClimsoftDatabaseName)
+        End If
+
+        If strClimsoftHost IsNot Nothing Then
+            SetClimsoftHost(strClimsoftHost)
+        Else
+            SetClimsoftHost(clsInstatOptionsDefaults.DEFAULTstrClimsoftHost)
+        End If
+
+        If strClimsoftPort IsNot Nothing Then
+            SetClimsoftPort(strClimsoftPort)
+        Else
+            SetClimsoftPort(clsInstatOptionsDefaults.DEFAULTstrClimsoftPort)
+        End If
+
+        If strClimsoftUsername IsNot Nothing Then
+            SetClimsoftUsername(strClimsoftUsername)
+        Else
+            SetClimsoftUsername(clsInstatOptionsDefaults.DEFAULTstrClimsoftUsername)
         End If
     End Sub
 
@@ -380,6 +420,11 @@ Imports RDotNet
         frmMain.SetShowClimaticMenu(bNewShowClimaticMenu)
     End Sub
 
+    Public Sub SetShowOptionsByContextMenu(bNewShowOptionsByContextMenu As Boolean)
+        bShowOptionsByContextMenu = bNewShowOptionsByContextMenu
+        frmMain.SetShowOptionsByContextMenu(bNewShowOptionsByContextMenu)
+    End Sub
+
     Public Sub SetIncludeRDefaultParameters(bNewInclude As Boolean)
         bIncludeRDefaultParameters = bNewInclude
     End Sub
@@ -406,5 +451,21 @@ Imports RDotNet
     Public Sub SetToolbarHeight(iNewToolbarHeight As Integer)
         iToolbarHeight = iNewToolbarHeight
         frmMain.SetToolbarHeight(iToolbarHeight)
+    End Sub
+
+    Public Sub SetClimsoftDatabaseName(strNewClimsoftDatabaseName As String)
+        strClimsoftDatabaseName = strNewClimsoftDatabaseName
+    End Sub
+
+    Public Sub SetClimsoftHost(strNewClimsoftHost As String)
+        strClimsoftHost = strNewClimsoftHost
+    End Sub
+
+    Public Sub SetClimsoftPort(strNewClimsoftPort As String)
+        strClimsoftPort = strNewClimsoftPort
+    End Sub
+
+    Public Sub SetClimsoftUsername(strNewClimsoftUsername As String)
+        strClimsoftUsername = strNewClimsoftUsername
     End Sub
 End Class

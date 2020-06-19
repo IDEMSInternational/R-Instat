@@ -28,8 +28,15 @@ Public Class ucrSave
     Private bAssignToIsPrefix As Boolean = False
     Private bAssignToColumnWithoutNames As Boolean = False
     Private bInsertColumnBefore As Boolean = False
+    ' If true then a list of data frames is being assigned, otherwise a single data frame
+    Public bDataFrameList As Boolean = False
+    ' Optional R character vector to give names of new data frames if data frame list is not named
+    Public strDataFrameNames As String
     Private strAssignToIfUnchecked As String = ""
     Private strGlobalDataName As String = ""
+    Private ucrLinkedReceiver As ucrReceiver
+    Private clsColPosFunction As New RFunction
+    Private iComboBoxWidth As Integer
 
     Private Sub ucrSave_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -48,6 +55,7 @@ Public Class ucrSave
         ucrInputTextSave.bIsActiveRControl = False
         ucrInputComboSave.bUpdateRCodeFromControl = True
         ucrInputTextSave.bUpdateRCodeFromControl = True
+        iComboBoxWidth = ucrInputComboSave.Size.Width
     End Sub
 
     Private Sub SetDefaults()
@@ -56,6 +64,8 @@ Public Class ucrSave
         SetSaveType(strSaveType)
         LabelOrCheckboxSettings()
         UpdateRCode()
+        'update the variables used for column position
+        UpdateColumnPositionVariables(True)
     End Sub
 
     Public Sub SetLabelText(strText As String)
@@ -68,7 +78,7 @@ Public Class ucrSave
         'Do for both in case text/combo not set yet, or will change at run time
         iTemp = lblSaveText.Location.X + lblSaveText.Size.Width - ucrInputComboSave.Location.X
         If iTemp > 0 Then
-            ucrInputComboSave.Width = ucrInputComboSave.Size.Width - iTemp
+            ucrInputComboSave.Width = iComboBoxWidth - iTemp
             ucrInputTextSave.Width = ucrInputComboSave.Width
         End If
     End Sub
@@ -112,16 +122,42 @@ Public Class ucrSave
         ucrInputTextSave.SetPrefix(strPrefix)
     End Sub
 
+    Public Sub showButtonPosition(bShowButton As Boolean)
+        btnColumnPosition.Visible = bShowButton
+    End Sub
+
     Public Sub SetAssignToIfUncheckedValue(strTemp As String)
         strAssignToIfUnchecked = strTemp
         UpdateRCode()
     End Sub
 
-    Public Sub SetAssignToBooleans(Optional bTempAssignToIsPrefix As Boolean = False, Optional bTempAssignToColumnWithoutNames As Boolean = False, Optional bTempInsertColumnBefore As Boolean = False)
+    Public Sub SetAssignToBooleans(Optional bTempAssignToIsPrefix As Boolean = False, Optional bTempAssignToColumnWithoutNames As Boolean = False, Optional bTempInsertColumnBefore As Boolean = False, Optional bTempDataFrameList As Boolean = False)
         bAssignToIsPrefix = bTempAssignToIsPrefix
         bAssignToColumnWithoutNames = bTempAssignToColumnWithoutNames
         bInsertColumnBefore = bTempInsertColumnBefore
+        bDataFrameList = bTempDataFrameList
         UpdateRCode()
+    End Sub
+
+    ' Use this if you already have a valid R character vector
+    ' strTempDataFrameNames should be a valid R character vector
+    ' e.g. "data" or c("data1", "data2")
+    Public Sub SetDataFrameNames(strTempDataFrameNames As String)
+        strDataFrameNames = strTempDataFrameNames
+        UpdateRCode()
+    End Sub
+
+    ' Use this if you just have a list of string
+    ' This will be convered into a valid R character vector
+    Public Sub SetDataFrameNames(lstTempDataFrameNames As List(Of String))
+        If lstTempDataFrameNames.Count = 1 Then
+            SetDataFrameNames(lstTempDataFrameNames(0))
+        Else
+            For i As Integer = 0 To lstTempDataFrameNames.Count - 1
+                lstTempDataFrameNames(i) = Chr(34) & frmMain.clsRLink.MakeValidText(lstTempDataFrameNames(i)) & Chr(34)
+            Next
+            SetDataFrameNames("c(" & String.Join(", ", lstTempDataFrameNames) & ")")
+        End If
     End Sub
 
     Private Sub LabelOrCheckboxSettings()
@@ -154,22 +190,32 @@ Public Class ucrSave
                 ucrInputComboSave.SetDefaultTypeAsColumn()
                 ucrInputComboSave.SetItemsTypeAsColumns()
                 ucrInputTextSave.SetDefaultTypeAsColumn()
+                btnColumnPosition.Visible = True
             Case "dataframe"
                 ucrInputComboSave.SetDefaultTypeAsDataFrame()
                 ucrInputComboSave.SetItemsTypeAsDataFrames()
                 ucrInputTextSave.SetDefaultTypeAsDataFrame()
+                btnColumnPosition.Visible = False
             Case "graph"
                 ucrInputComboSave.SetDefaultTypeAsGraph()
                 ucrInputComboSave.SetItemsTypeAsGraphs()
                 ucrInputTextSave.SetDefaultTypeAsGraph()
+                btnColumnPosition.Visible = False
             Case "model"
                 ucrInputComboSave.SetDefaultTypeAsModel()
                 ucrInputComboSave.SetItemsTypeAsModels()
                 ucrInputTextSave.SetDefaultTypeAsModel()
+                btnColumnPosition.Visible = False
+            Case "surv"
+                ucrInputComboSave.SetDefaultTypeAsSurv()
+                ucrInputComboSave.SetItemsTypeAsSurv()
+                ucrInputTextSave.SetDefaultTypeAsSurv()
+                btnColumnPosition.Visible = False
             Case "table"
                 ucrInputComboSave.SetDefaultTypeAsTable()
                 ucrInputComboSave.SetItemsTypeAsTables()
                 ucrInputTextSave.SetDefaultTypeAsTable()
+                btnColumnPosition.Visible = False
             Case Else
                 MsgBox("Developer error: unrecognised save type: " & strType)
         End Select
@@ -189,6 +235,10 @@ Public Class ucrSave
 
     Public Sub SetSaveTypeAsModel()
         SetSaveType("model")
+    End Sub
+
+    Public Sub SetSaveTypeAsSurv()
+        SetSaveType("surv")
     End Sub
 
     Public Sub SetSaveTypeAsTable()
@@ -249,10 +299,14 @@ Public Class ucrSave
     Public Overrides Sub UpdateRCode(Optional bReset As Boolean = False)
         UpdateAssignTo()
         UpdateLinkedControls(bReset)
+        'update the variables used for column position
+        UpdateColumnPositionVariables(bReset)
     End Sub
 
     Protected Overrides Sub UpdateAllParameters()
         UpdateAssignTo()
+        'update the variables used for column position
+        UpdateColumnPositionVariables()
     End Sub
 
     Public Overrides Sub UpdateLinkedControls(Optional bReset As Boolean = False)
@@ -285,7 +339,7 @@ Public Class ucrSave
                             Case "column"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
                             Case "dataframe"
-                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bDataFrameList:=bDataFrameList, strDataFrameNames:=strDataFrameNames)
                             Case "graph"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                             Case "model"
@@ -390,5 +444,69 @@ Public Class ucrSave
     Public Sub SetGlobalDataName(strNewGlobalDataName As String)
         strGlobalDataName = strNewGlobalDataName
         UpdateAssignTo()
+    End Sub
+
+    Private Sub btnColumnPosition_Click(sender As Object, e As EventArgs) Handles btnColumnPosition.Click
+        Dim strDataName As String
+        If ucrDataFrameSelector IsNot Nothing Then
+            strDataName = ucrDataFrameSelector.cboAvailableDataFrames.Text
+        Else
+            strDataName = strGlobalDataName
+        End If
+        sdgSaveColumnPosition.SetUp(clsColPosFunction, strDataName)
+        sdgSaveColumnPosition.ShowDialog()
+        UpdateColumnPositionVariables()
+    End Sub
+
+    Public Sub setLinkedReceiver(ucrLinkedReceiver As ucrReceiver)
+        Me.ucrLinkedReceiver = ucrLinkedReceiver
+        AddHandler ucrLinkedReceiver.ControlValueChanged, AddressOf LinkedReceiverControlValueChanged
+    End Sub
+
+    Private Sub LinkedReceiverControlValueChanged()
+        'if the user has not explictly set the column position then set it to after the specified column by default
+        If Not sdgSaveColumnPosition.bUserSelected Then
+            clsColPosFunction.AddParameter(strParameterName:="before", strParameterValue:="FALSE")
+            If Not ucrLinkedReceiver.IsEmpty Then
+                clsColPosFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrLinkedReceiver.GetVariableNames())
+            Else
+                clsColPosFunction.RemoveParameterByName("adjacent_column")
+            End If
+        End If
+        UpdateColumnPositionVariables()
+    End Sub
+
+    Private Sub UpdateColumnPositionVariables(Optional bReset As Boolean = False)
+        Dim clsTempCode As RCodeStructure
+
+        If strSaveType <> "column" Then
+            Exit Sub
+        End If
+
+        If bReset Then
+            sdgSaveColumnPosition.Reset()
+            clsColPosFunction.AddParameter(strParameterName:="before", strParameterValue:="FALSE")
+            clsColPosFunction.RemoveParameterByName("adjacent_column")
+        End If
+
+        For i As Integer = 0 To lstAllRCodes.Count - 1
+            clsTempCode = lstAllRCodes(i)
+
+            If clsTempCode Is Nothing Then
+                Continue For
+            End If
+
+            If clsColPosFunction.GetParameter("before") Is Nothing Then
+                clsTempCode.bInsertColumnBefore = False
+            Else
+                clsTempCode.bInsertColumnBefore = If(clsColPosFunction.GetParameter("before").strArgumentValue = "TRUE", True, False)
+            End If
+
+            If clsColPosFunction.GetParameter("adjacent_column") Is Nothing Then
+                clsTempCode.strAdjacentColumn = ""
+            Else
+                clsTempCode.strAdjacentColumn = clsColPosFunction.GetParameter("adjacent_column").strArgumentValue
+            End If
+        Next
     End Sub
 End Class

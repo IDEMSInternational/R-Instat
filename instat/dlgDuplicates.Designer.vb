@@ -32,6 +32,11 @@ Partial Class dlgDuplicates
         Me.ttDuplicates = New System.Windows.Forms.ToolTip(Me.components)
         Me.rdoSuccessiveValues = New System.Windows.Forms.RadioButton()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrInputOmitValues = New instat.ucrInputTextBox()
+        Me.ucrInputTolerance = New instat.ucrInputTextBox()
+        Me.ucrChkTolerance = New instat.ucrCheck()
+        Me.ucrChkOmitValues = New instat.ucrCheck()
+        Me.ucrInputConditions = New instat.ucrInputComboBox()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.lblVariablesToDuplicate = New System.Windows.Forms.Label()
         Me.lblType = New System.Windows.Forms.Label()
@@ -43,11 +48,6 @@ Partial Class dlgDuplicates
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorDuplicateswithVariables = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrInputOmitValues = New instat.ucrInputTextBox()
-        Me.ucrInputTolerance = New instat.ucrInputTextBox()
-        Me.ucrChkTolerance = New instat.ucrCheck()
-        Me.ucrChkOmitValues = New instat.ucrCheck()
-        Me.ucrInputConditions = New instat.ucrInputComboBox()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -113,6 +113,41 @@ Partial Class dlgDuplicates
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
         '
+        'ucrInputOmitValues
+        '
+        Me.ucrInputOmitValues.AddQuotesIfUnrecognised = True
+        Me.ucrInputOmitValues.IsMultiline = False
+        Me.ucrInputOmitValues.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputOmitValues, "ucrInputOmitValues")
+        Me.ucrInputOmitValues.Name = "ucrInputOmitValues"
+        '
+        'ucrInputTolerance
+        '
+        Me.ucrInputTolerance.AddQuotesIfUnrecognised = True
+        Me.ucrInputTolerance.IsMultiline = False
+        Me.ucrInputTolerance.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTolerance, "ucrInputTolerance")
+        Me.ucrInputTolerance.Name = "ucrInputTolerance"
+        '
+        'ucrChkTolerance
+        '
+        Me.ucrChkTolerance.Checked = False
+        resources.ApplyResources(Me.ucrChkTolerance, "ucrChkTolerance")
+        Me.ucrChkTolerance.Name = "ucrChkTolerance"
+        '
+        'ucrChkOmitValues
+        '
+        Me.ucrChkOmitValues.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitValues, "ucrChkOmitValues")
+        Me.ucrChkOmitValues.Name = "ucrChkOmitValues"
+        '
+        'ucrInputConditions
+        '
+        Me.ucrInputConditions.AddQuotesIfUnrecognised = True
+        Me.ucrInputConditions.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputConditions, "ucrInputConditions")
+        Me.ucrInputConditions.Name = "ucrInputConditions"
+        '
         'lblSelectedVariable
         '
         resources.ApplyResources(Me.lblSelectedVariable, "lblSelectedVariable")
@@ -177,45 +212,11 @@ Partial Class dlgDuplicates
         '
         'ucrSelectorDuplicateswithVariables
         '
+        Me.ucrSelectorDuplicateswithVariables.bDropUnusedFilterLevels = False
         Me.ucrSelectorDuplicateswithVariables.bShowHiddenColumns = False
         Me.ucrSelectorDuplicateswithVariables.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorDuplicateswithVariables, "ucrSelectorDuplicateswithVariables")
         Me.ucrSelectorDuplicateswithVariables.Name = "ucrSelectorDuplicateswithVariables"
-        '
-        'ucrInputOmitValues
-        '
-        Me.ucrInputOmitValues.AddQuotesIfUnrecognised = True
-        Me.ucrInputOmitValues.IsMultiline = False
-        Me.ucrInputOmitValues.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputOmitValues, "ucrInputOmitValues")
-        Me.ucrInputOmitValues.Name = "ucrInputOmitValues"
-        '
-        'ucrInputTolerance
-        '
-        Me.ucrInputTolerance.AddQuotesIfUnrecognised = True
-        Me.ucrInputTolerance.IsMultiline = False
-        Me.ucrInputTolerance.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTolerance, "ucrInputTolerance")
-        Me.ucrInputTolerance.Name = "ucrInputTolerance"
-        '
-        'ucrChkTolerance
-        '
-        Me.ucrChkTolerance.Checked = False
-        resources.ApplyResources(Me.ucrChkTolerance, "ucrChkTolerance")
-        Me.ucrChkTolerance.Name = "ucrChkTolerance"
-        '
-        'ucrChkOmitValues
-        '
-        Me.ucrChkOmitValues.Checked = False
-        resources.ApplyResources(Me.ucrChkOmitValues, "ucrChkOmitValues")
-        Me.ucrChkOmitValues.Name = "ucrChkOmitValues"
-        '
-        'ucrInputConditions
-        '
-        Me.ucrInputConditions.AddQuotesIfUnrecognised = True
-        Me.ucrInputConditions.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputConditions, "ucrInputConditions")
-        Me.ucrInputConditions.Name = "ucrInputConditions"
         '
         'dlgDuplicates
         '

@@ -44,13 +44,13 @@ Partial Class frmPackageIssues
         '
         Me.lblPossibleSolutions.Location = New System.Drawing.Point(12, 123)
         Me.lblPossibleSolutions.Name = "lblPossibleSolutions"
-        Me.lblPossibleSolutions.Size = New System.Drawing.Size(425, 245)
+        Me.lblPossibleSolutions.Size = New System.Drawing.Size(425, 253)
         Me.lblPossibleSolutions.TabIndex = 2
         Me.lblPossibleSolutions.Text = resources.GetString("lblPossibleSolutions.Text")
         '
         'cmdInstallPackages
         '
-        Me.cmdInstallPackages.Location = New System.Drawing.Point(12, 371)
+        Me.cmdInstallPackages.Location = New System.Drawing.Point(15, 377)
         Me.cmdInstallPackages.Name = "cmdInstallPackages"
         Me.cmdInstallPackages.Size = New System.Drawing.Size(172, 23)
         Me.cmdInstallPackages.TabIndex = 3
@@ -78,7 +78,7 @@ Partial Class frmPackageIssues
         '
         'cmdCloseRInstat
         '
-        Me.cmdCloseRInstat.Location = New System.Drawing.Point(12, 155)
+        Me.cmdCloseRInstat.Location = New System.Drawing.Point(15, 156)
         Me.cmdCloseRInstat.Name = "cmdCloseRInstat"
         Me.cmdCloseRInstat.Size = New System.Drawing.Size(120, 23)
         Me.cmdCloseRInstat.TabIndex = 5

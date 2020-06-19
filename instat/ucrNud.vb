@@ -17,6 +17,53 @@
 Imports instat
 
 Public Class ucrNud
+    Public dScaleBy As Decimal = 1
+
+    Public Property Minimum As Decimal
+        Get
+            Return nudUpDown.Minimum
+        End Get
+        Set(dNewMin As Decimal)
+            nudUpDown.Minimum = dNewMin
+        End Set
+    End Property
+
+    Public Property Maximum As Decimal
+        Get
+            Return nudUpDown.Maximum
+        End Get
+        Set(dNewMax As Decimal)
+            nudUpDown.Maximum = dNewMax
+        End Set
+    End Property
+
+    Public Property Value As Decimal
+        Get
+            Return dScaleBy * nudUpDown.Value
+        End Get
+        Set(dcNewMax As Decimal)
+            nudUpDown.Value = dcNewMax * dScaleBy
+        End Set
+    End Property
+
+    Public Property Increment As Decimal
+        Get
+            Return nudUpDown.Increment
+        End Get
+        Set(dIncrement As Decimal)
+            nudUpDown.Increment = dIncrement
+        End Set
+    End Property
+
+    Public Property DecimalPlaces As Decimal
+        Get
+            Return nudUpDown.DecimalPlaces
+        End Get
+        Set(dDecimalPlaces As Decimal)
+            nudUpDown.DecimalPlaces = dDecimalPlaces
+        End Set
+    End Property
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -38,7 +85,7 @@ Public Class ucrNud
     Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         If bChangeParameterValue AndAlso clsTempParam IsNot Nothing Then
             If nudUpDown.Text <> "" Then
-                clsTempParam.SetArgumentValue(nudUpDown.Value)
+                clsTempParam.SetArgumentValue(Value)
             Else
                 clsTempParam.SetArgumentValue("")
             End If
@@ -61,51 +108,6 @@ Public Class ucrNud
             Return False
         End If
     End Function
-
-    Public Property Minimum As Decimal
-        Get
-            Return nudUpDown.Minimum
-        End Get
-        Set(dNewMin As Decimal)
-            nudUpDown.Minimum = dNewMin
-        End Set
-    End Property
-
-    Public Property Maximum As Decimal
-        Get
-            Return nudUpDown.Maximum
-        End Get
-        Set(dNewMax As Decimal)
-            nudUpDown.Maximum = dNewMax
-        End Set
-    End Property
-
-    Public Property Value As Decimal
-        Get
-            Return nudUpDown.Value
-        End Get
-        Set(dcNewMax As Decimal)
-            nudUpDown.Value = dcNewMax
-        End Set
-    End Property
-
-    Public Property Increment As Decimal
-        Get
-            Return nudUpDown.Increment
-        End Get
-        Set(dIncrement As Decimal)
-            nudUpDown.Increment = dIncrement
-        End Set
-    End Property
-
-    Public Property DecimalPlaces As Decimal
-        Get
-            Return nudUpDown.DecimalPlaces
-        End Get
-        Set(dDecimalPlaces As Decimal)
-            nudUpDown.DecimalPlaces = dDecimalPlaces
-        End Set
-    End Property
 
     Public Overrides Sub SetRDefault(objNewDefault As Object)
         Dim dTemp As Decimal
@@ -133,7 +135,7 @@ Public Class ucrNud
 
         For Each objVal In lstTemp
             If Decimal.TryParse(objVal, dTemp) Then
-                If dTemp = nudUpDown.Value Then
+                If dTemp = Value Then
                     bTemp = True
                 End If
             Else
@@ -144,22 +146,26 @@ Public Class ucrNud
     End Function
 
     Public Function GetText() As String
-        Return nudUpDown.Text
+        If nudUpDown.Text = "" Then
+            Return ""
+        Else
+            Return CStr(Value)
+        End If
     End Function
 
     Public Overrides Sub SetToValue(objTemp As Object)
         Dim dNewValue As Decimal
-        If objTemp Is Nothing Then
+        If objTemp Is Nothing OrElse objTemp.ToString() = "" Then
             'If no value reset to a default value
-            nudUpDown.Value = nudUpDown.Minimum
+            Value = nudUpDown.Minimum
         Else
             If Decimal.TryParse(objTemp.ToString, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
-                nudUpDown.Value = dNewValue
+                Value = dNewValue
             Else
                 MsgBox("Developer error: The value given cannot be converted to a decimal or is outside the range of the control. Value will be unchanged.")
             End If
         End If
         'Ensures Text is set correctly if it has been cleared by user.
-        nudUpDown.Text = nudUpDown.Value
+        nudUpDown.Text = Value
     End Sub
 End Class

@@ -25,33 +25,64 @@ Public Class ucrAdditionalLayers
     Public bReset As Boolean = True
     Public lstLayerComplete As New List(Of Boolean)
     Public iLayerIndex As Integer
-    Public iParameterPosition As Integer
+    Public iMaxParameterPosition As Integer
     Private strGlobalDataFrame As String
     Public bSetGlobalIsDefault As Boolean = True
+    Private strMainDialogGeomNames() As String
     'Deciding if the first layer needs to be used for global aesthetics. 
     'Question to be discussed: What is this variable about again ? it is linked with sdgPlots.bAdditionalLayersSetGlobal in sdgPLots.bLayersDefaultIsGolobal.
     Public Event NumberOfLayersChanged() 'This event is raised when the number of Layers in the lstLayers on ucrAdditionalLayers has been changed, then handled by testOkEnabled On GeneralForGraphics. 
 
-    Public Sub SetRCodeForControl(Optional clsNewBaseOperator As ROperator = Nothing, Optional clsRNewggplotFunc As RFunction = Nothing, Optional clsNewAesFunc As RFunction = Nothing, Optional strNewGlobalDataFrame As String = "", Optional bReset As Boolean = False)
-        Dim strTempGeomName As String
-
+    Public Sub SetRCodeForControl(Optional clsNewBaseOperator As ROperator = Nothing, Optional clsRNewggplotFunc As RFunction = Nothing, Optional clsNewAesFunc As RFunction = Nothing, Optional strNewGlobalDataFrame As String = "", Optional strMainDialogGeomParameterNames() As String = Nothing, Optional bReset As Boolean = False)
         clsBaseOperator = clsNewBaseOperator
         clsGlobalAesFunction = clsNewAesFunc
         clsGgplotFunction = clsRNewggplotFunc
+        SetLayersList()
+        strGlobalDataFrame = strNewGlobalDataFrame
+        strMainDialogGeomNames = strMainDialogGeomParameterNames
+    End Sub
+
+    Private Sub SetLayersList()
+        Dim strTempGeomName As String
+
         iLayerIndex = 0
-        iParameterPosition = 0
+        iMaxParameterPosition = 0
         lstLayers.Clear()
         lstLayerComplete.Clear()
         lstLayers.HideSelection = False
 
+        ' Sort parameters first so layers are in correct order
+        clsBaseOperator.SortParameters()
         For Each clsTempParam In clsBaseOperator.clsParameters
+            ' Note this relies on all layers having a function name starting with "geom_" or "stat_"
+            ' If this is ever not the case then GetGeomName() needs to change.
             strTempGeomName = GetGeomName(clsTempParam)
             If strTempGeomName <> "" Then
-                AddLayers(strTempGeomName, bFromLayerSubDialog:=False)
-                iParameterPosition = Math.Max(iParameterPosition, clsTempParam.Position)
+                iMaxParameterPosition = Math.Max(iMaxParameterPosition, clsTempParam.Position)
+                AddLayerToList(clsTempParam, strTempGeomName, bLayerComplete:=True)
             End If
         Next
-        strGlobalDataFrame = strNewGlobalDataFrame
+    End Sub
+
+    Private Sub AddLayerToList(clsGeomParameter As RParameter, strGeomName As String, bLayerComplete As Boolean)
+        Dim lviLayer As ListViewItem
+        Dim strLayerName As String
+
+        iLayerIndex = iLayerIndex + 1
+        strLayerName = iLayerIndex & "." & strGeomName
+        lviLayer = New ListViewItem(text:=strLayerName)
+        lviLayer.Tag = clsGeomParameter.strArgumentName
+        lstLayers.Items.Add(lviLayer)
+        lstLayerComplete.Add(bLayerComplete)
+
+        If bLayerComplete Then
+            lviLayer.ForeColor = Color.Green
+        Else
+            lviLayer.ForeColor = Color.Red
+        End If
+
+        'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
+        RaiseEvent NumberOfLayersChanged()
     End Sub
 
     Private Sub ucrAdditionalLayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -61,10 +92,10 @@ Public Class ucrAdditionalLayers
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
         Dim clsNewLocalAesFunction As New RFunction
         Dim clsNewGeomFunction As New RFunction
+        Dim clsNewGeomParameter As RParameter
 
-        'TODO add these in Ggplot default class
-        clsNewLocalAesFunction.SetPackageName("ggplot2")
-        clsNewLocalAesFunction.SetRCommand("aes")
+        clsNewLocalAesFunction = GgplotDefaults.clsAesFunction.Clone()
+
         clsNewGeomFunction.SetPackageName("ggplot2")
         clsNewGeomFunction.SetRCommand("geom_boxplot")
 
@@ -73,7 +104,16 @@ Public Class ucrAdditionalLayers
         sdgLayerOptions.tbcLayers.SelectedIndex = 0
         sdgLayerOptions.ShowDialog()
         strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()
-        AddLayers(clsNewGeomFunction.strRCommand)
+
+        clsNewGeomFunction = sdgLayerOptions.clsGeomFunction.Clone()
+        iMaxParameterPosition = iMaxParameterPosition + 1
+
+        clsNewGeomParameter = New RParameter()
+        clsNewGeomParameter.SetArgumentName(clsNewGeomFunction.strRCommand & iMaxParameterPosition)
+        clsNewGeomParameter.SetArgument(clsNewGeomFunction)
+        clsNewGeomParameter.Position = iMaxParameterPosition
+        clsBaseOperator.AddParameter(clsNewGeomParameter)
+        AddLayerToList(clsNewGeomParameter, clsNewGeomFunction.strRCommand, bLayerComplete:=sdgLayerOptions.TestForOKEnabled())
     End Sub
 
     Private Sub SetEditDeleteEnabled()
@@ -90,69 +130,28 @@ Public Class ucrAdditionalLayers
         SetEditDeleteEnabled()
     End Sub
 
-    'TODO checking needs to move out of subdialog because could be adding from a reopen
-    '     this means geom objects should also be accessible outside of geom user control
-    Public Sub AddLayers(strGeomName As String, Optional lviCurrentItem As ListViewItem = Nothing, Optional bFromLayerSubDialog As Boolean = True)
-        Dim lviLayer As ListViewItem
-        Dim strLayerName As String
-
-        If lviCurrentItem Is Nothing Then
-            iLayerIndex = iLayerIndex + 1
-            iParameterPosition = iParameterPosition + 1
-            strLayerName = iLayerIndex & "." & strGeomName
-            lviLayer = New ListViewItem(text:=strLayerName)
-            lstLayers.Items.Add(lviLayer)
-            If bFromLayerSubDialog Then
-                lstLayerComplete.Add(sdgLayerOptions.TestForOKEnabled())
-            Else
-                'temporary set to True if not checking. Eventually checking can be done in all cases
-                lstLayerComplete.Add(True)
-            End If
-        Else
-            lviLayer = lviCurrentItem
-            If bFromLayerSubDialog Then
-                lstLayerComplete(lstLayers.Items.IndexOf(lviLayer)) = sdgLayerOptions.TestForOKEnabled()
-            Else
-                lstLayerComplete(lstLayers.Items.IndexOf(lviLayer)) = True
-            End If
-            strLayerName = lviCurrentItem.Text
-        End If
-
-        If lstLayerComplete(lstLayers.Items.IndexOf(lviLayer)) Then
-            lstLayers.Items(lstLayers.Items.IndexOf(lviLayer)).ForeColor = Color.Green
-        Else
-            lstLayers.Items(lstLayers.Items.IndexOf(lviLayer)).ForeColor = Color.Red
-        End If
-
-        'Note: as the GeomFunction on sdgLayerOptions will be edited for different layers, it cannot be linked like clsGgplotFunction would, it needs to be cloned.
-        If bFromLayerSubDialog Then
-            clsBaseOperator.AddParameter(strParameterName:=strLayerName, clsRFunctionParameter:=sdgLayerOptions.clsGeomFunction.Clone(), iPosition:=iParameterPosition)
-        End If
-        'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
-        RaiseEvent NumberOfLayersChanged()
-    End Sub
-
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
         If lstLayers.SelectedItems.Count = 1 Then
-            If clsBaseOperator.ContainsParameter(lstLayers.SelectedItems(0).Text) Then
-                clsBaseOperator.RemoveParameterByName(lstLayers.SelectedItems(0).Text)
+            If strMainDialogGeomNames Is Nothing OrElse Not strMainDialogGeomNames.Contains(lstLayers.SelectedItems(0).Tag) Then
+                clsBaseOperator.RemoveParameterByName(lstLayers.SelectedItems(0).Tag)
                 lstLayerComplete.RemoveAt(lstLayers.SelectedIndices(0))
                 lstLayers.Items.Remove(lstLayers.SelectedItems(0))
                 'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
                 RaiseEvent NumberOfLayersChanged()
             Else
-                MsgBox("Sorry, you cannot delete a layer that was created on the main dialog.", MsgBoxStyle.Information, "Cannot delete layer")
+                MsgBox("You cannot delete a layer that was created on the main dialog.", MsgBoxStyle.Information, "Cannot delete layer")
             End If
         End If
     End Sub
 
     Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
+        Dim clsSelectedGeomParameter As RParameter
         Dim clsSelectedGeomFunction As RFunction
         Dim clsLocalAes As RFunction
 
-        'The selected geom is found as the RFunction of the appropriate RParameter of RSyntax. The name of that Parameter is the name of the selected item in the lstLayers. That one is fetched using .SelectedItems(0) as there can only be one selected item at a time when the edit button is clicked.
-        If clsBaseOperator.ContainsParameter(lstLayers.SelectedItems(0).Text) Then
-            clsSelectedGeomFunction = clsBaseOperator.GetParameter(lstLayers.SelectedItems(0).Text).clsArgumentCodeStructure
+        clsSelectedGeomParameter = clsBaseOperator.GetParameter(lstLayers.SelectedItems(0).Tag)
+        If clsSelectedGeomParameter IsNot Nothing Then
+            clsSelectedGeomFunction = clsSelectedGeomParameter.clsArgumentCodeStructure
             If clsSelectedGeomFunction.ContainsParameter("mapping") Then
                 clsLocalAes = clsSelectedGeomFunction.GetParameter("mapping").clsArgumentCodeStructure
             Else
@@ -167,9 +166,11 @@ Public Class ucrAdditionalLayers
             'It has been chosen to fix the value of bApplyAesGlobally to False as when a Layer is editted, the choice to apply the Aes globally should be reconsidered no matter what it has been during last edit.
             ParentForm.SendToBack() 'Otherwise sdgLayerOptions appears behind sdgPLotOptions
             sdgLayerOptions.ShowDialog()
-            AddLayers(clsSelectedGeomFunction.strRCommand, lstLayers.SelectedItems(0))
+
+            clsSelectedGeomFunction = sdgLayerOptions.clsGeomFunction.Clone()
+            clsSelectedGeomParameter.SetArgument(clsSelectedGeomFunction)
         Else
-            MsgBox("Feature not yet implemented" & Environment.NewLine & "Sorry, editing layers created on the main dialog is not currently possible in this version of R-Instat.", MsgBoxStyle.Information, "Feature not yet implemented")
+            MsgBox("Could not find layer. Delete the layer and recreate it.", MsgBoxStyle.Information, "Cannot find layer")
         End If
     End Sub
 
@@ -180,7 +181,7 @@ Public Class ucrAdditionalLayers
         If clsParam IsNot Nothing AndAlso clsParam.bIsFunction AndAlso clsParam.clsArgumentCodeStructure IsNot Nothing Then
             clsTempFunc = TryCast(clsParam.clsArgumentCodeStructure, RFunction)
             If clsTempFunc IsNot Nothing Then
-                If clsTempFunc.strRCommand.StartsWith("geom_") Then
+                If clsTempFunc.strRCommand.StartsWith("geom_") OrElse clsTempFunc.strRCommand.StartsWith("stat_") Then
                     strGeom = clsTempFunc.strRCommand
                 End If
             End If

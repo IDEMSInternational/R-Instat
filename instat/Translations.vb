@@ -20,25 +20,31 @@ Public Class Translations
         Return My.Resources.ResourceManager.GetObject(tag)
     End Function
 
-    Public Shared Sub translateEach(controls As Control.ControlCollection, ctrParent As Control)
-        Dim res As ComponentModel.ComponentResourceManager = New ComponentModel.ComponentResourceManager(ctrParent.GetType)
+    Public Shared Sub translateEach(controls As Control.ControlCollection, ctrParent As Control, Optional res As ComponentModel.ComponentResourceManager = Nothing, Optional CultureInfo As Globalization.CultureInfo = Nothing)
         Dim mnuTmp As MenuStrip
+        Dim pntLocation As Point
 
+        If res Is Nothing Then
+            res = New ComponentModel.ComponentResourceManager(ctrParent.GetType)
+        End If
+        If CultureInfo Is Nothing Then
+            CultureInfo = Threading.Thread.CurrentThread.CurrentUICulture
+        End If
         For Each aControl As Control In controls
-            'If checkboxes are translated then it overrides the text set in the dialog code
-            'If ucrPanels are translated their position is shifted on the dialog - not yet found reason but does not affect button translation
+            'Checkbox text is set in the dialog so shouldn't be translated
+            'Input controls use Text property for display value so shouldn't be translated
             If TypeOf aControl IsNot ucrCheck AndAlso TypeOf aControl IsNot ucrInput Then
-                'If TypeOf aControl Is UcrPanel OrElse TypeOf aControl Is Panel Then
-                '    translateEach(aControl.Controls, ctrParent)
-                'Else
                 If TypeOf aControl Is MenuStrip Then
                     mnuTmp = DirectCast(aControl, MenuStrip)
                     translateMenu(mnuTmp.Items, ctrParent)
-                ElseIf TypeOf aControl Is UserControl Then
-                    translateEach(aControl.Controls, aControl)
+                ElseIf TypeOf aControl Is UserControl OrElse TypeOf aControl Is Panel OrElse TypeOf aControl Is GroupBox OrElse TypeOf aControl Is TabControl OrElse TypeOf aControl Is SplitContainer OrElse TypeOf aControl Is TreeView Then
+                    translateEach(aControl.Controls, aControl, res, CultureInfo)
                 End If
-                res.ApplyResources(aControl, aControl.Name, Threading.Thread.CurrentThread.CurrentUICulture)
-                'End If
+                If aControl.Name <> "" Then
+                    pntLocation = aControl.Location
+                    res.ApplyResources(aControl, aControl.Name, CultureInfo)
+                    aControl.Location = pntLocation
+                End If
             End If
         Next
 
@@ -73,7 +79,7 @@ Public Class Translations
         'Next formControl
     End Sub
 
-    Public Shared Sub autoTranslate(ctrParent As Control)
+    Public Shared Sub autoTranslate(ctrParent As Control, Optional CultureInfo As Globalization.CultureInfo = Nothing)
         'Dim translatedString As String
 
         '' Attempt to translate the form's title if it has a tag
@@ -83,9 +89,8 @@ Public Class Translations
         '        frm.Text = translatedString
         '    End If
         'End If
-
         ' Translate all controls in object
-        translateEach(ctrParent.Controls, ctrParent)
+        translateEach(ctrParent.Controls, ctrParent, New ComponentModel.ComponentResourceManager(ctrParent.GetType()), CultureInfo)
     End Sub
 
     ' translateMenu and translateSubMenu should not be neccessary if we can improve translateEach to accept any iterable

@@ -18,13 +18,15 @@ Imports instat.Translations
 Public Class dlgClimaticSummary
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+    Private bRCodeSet As Boolean = True
     Private iReceiverMaxY As Integer
     Private iReceiverLabelMaxY As Integer
     Private bResetSubdialog As Boolean = False
-    Private clsDefaultFunction, clsSummariesList, clsDefaultFactors, clsDayFilterCalc, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
+    Private clsDefaultFunction, clsConcFunction, clsSummariesList, clsDefaultFactors, clsDayFilterCalc, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList, clsAddDateFunction As New RFunction
     Private clsFromAndToConditionOperator, clsFromConditionOperator, clsToConditionOperator As New ROperator
 
     Private Sub dlgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        bRCodeSet = False
         If bFirstload Then
             iReceiverMaxY = ucrReceiverWithinYear.Location.Y
             iReceiverLabelMaxY = lblWithinYear.Location.Y
@@ -35,9 +37,11 @@ Public Class dlgClimaticSummary
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        bRCodeSet = True
         bReset = False
         autoTranslate(Me)
         WithinYearLabelReceiverLocation()
+        SetFactors()
         TestOKEnabled()
     End Sub
 
@@ -69,28 +73,28 @@ Public Class dlgClimaticSummary
         ucrReceiverStation.SetParameter(New RParameter("station", 0, False))
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.Selector = ucrSelectorVariable
-        ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
+        ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.strSelectorHeading = "Station Variables"
 
         ucrReceiverYear.SetParameter(New RParameter("year", 1, False))
         ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.Selector = ucrSelectorVariable
-        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ucrReceiverWithinYear.SetParameter(New RParameter("within_variable", 2, False))
         ucrReceiverWithinYear.SetParameterIsString()
-        ucrReceiverWithinYear.strSelectorHeading = "Factors"
+        'ucrReceiverWithinYear.strSelectorHeading = "Factors"
         ucrReceiverWithinYear.Selector = ucrSelectorVariable
-        ucrReceiverWithinYear.SetDataType("factor")
+        ucrReceiverWithinYear.SetIncludedDataTypes({"numeric", "factor"})
 
         ' others
-        ucrReceiverDate.SetParameter(New RParameter("date", 1))
+        ucrReceiverDate.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.Selector = ucrSelectorVariable
-        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
+        ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.strSelectorHeading = "Date Variables"
 
@@ -98,7 +102,7 @@ Public Class dlgClimaticSummary
         ucrReceiverDOY.SetParameterIsRFunction()
         ucrReceiverDOY.bWithQuotes = False
         ucrReceiverDOY.Selector = ucrSelectorVariable
-        ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
+        ucrReceiverDOY.SetClimaticType("doy")
         ucrReceiverDOY.bAutoFill = True
         ucrReceiverDOY.strSelectorHeading = "Day Variables"
 
@@ -126,14 +130,19 @@ Public Class dlgClimaticSummary
         ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkDropUnusedLevels.SetRDefault("FALSE")
 
-        ucrChkOmitMissingValues.SetParameter(New RParameter("na.rm", 6))
-        ucrChkOmitMissingValues.SetText("Omit Missing Values")
-        ucrChkOmitMissingValues.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkOmitMissingValues.SetRDefault("FALSE")
+        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
+        ucrChkOmitMissing.SetText("Omit Missing Values")
+        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOmitMissing.SetRDefault("FALSE")
+
+        ucrChkAddDateColumn.SetText("Add Date Column")
+        ucrChkAddDateColumn.AddParameterPresentCondition(True, "data_name", True)
+        ucrChkAddDateColumn.AddParameterPresentCondition(False, "data_name", False)
 
         'linking controls
         ucrPnlAnnualWithin.AddToLinkedControls({ucrReceiverYear}, {rdoAnnual, rdoAnnualWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlAnnualWithin.AddToLinkedControls({ucrReceiverWithinYear}, {rdoAnnualWithinYear, rdoWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlAnnualWithin.AddToLinkedControls({ucrChkAddDateColumn}, {rdoAnnual, rdoAnnualWithinYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverYear.SetLinkedDisplayControl(lblYear)
         ucrReceiverWithinYear.SetLinkedDisplayControl(lblWithinYear)
 
@@ -144,6 +153,8 @@ Public Class dlgClimaticSummary
         clsDefaultFunction = New RFunction
         clsSummariesList = New RFunction
         clsDefaultFactors = New RFunction
+        clsConcFunction = New RFunction
+        clsAddDateFunction = New RFunction
 
         clsFromAndToConditionOperator = New ROperator
         clsDayFilterCalc = New RFunction
@@ -190,31 +201,39 @@ Public Class dlgClimaticSummary
         clsDefaultFunction.AddParameter("silent", "TRUE")
 
         clsDefaultFactors.SetRCommand("c")
+        clsConcFunction.SetRCommand("c")
 
+        clsAddDateFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
+        clsAddDateFunction.AddParameter("factors", clsRFunctionParameter:=clsDefaultFactors, iPosition:=3)
+        clsAddDateFunction.AddParameter("summaries", Chr(34) & "summary_min" & Chr(34), iPosition:=4)
+        clsAddDateFunction.AddParameter("silent", "TRUE", iPosition:=5)
+
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsFromConditionOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
+        'This is currently not working. Selector should be able to pass additional parameter pairs!
+        'ucrSelectorVariable.AddAdditionalCodeParameterPair(clsAddDateFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsToConditionOperator, bReset)
+        ucrChkAddDateColumn.SetRCode(clsAddDateFunction, bReset)
 
         ucrSelectorVariable.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverElement.SetRCode(clsDefaultFunction, bReset)
         ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
-        ucrChkOmitMissingValues.SetRCode(clsDefaultFunction, bReset)
         ucrChkPrintOutput.SetRCode(clsDefaultFunction, bReset)
+        ucrChkOmitMissing.SetRCode(clsDefaultFunction, bReset)
+        ucrReceiverDate.SetRCode(clsAddDateFunction, bReset)
 
         ucrPnlAnnualWithin.SetRCode(clsDefaultFactors, bReset)
-        ucrReceiverStation.SetRCode(clsDefaultFactors, bReset)
-        ucrReceiverYear.SetRCode(clsDefaultFactors, bReset)
-        ucrReceiverWithinYear.SetRCode(clsDefaultFactors, bReset)
     End Sub
 
     'TODO: run these things at the correct times
     Public Sub TestOKEnabled()
-        If Not clsSummariesList.clsParameters.Count = 0 AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty Then
+        If Not clsSummariesList.clsParameters.Count = 0 AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty AndAlso sdgSummaries.bOkEnabled Then
             If rdoAnnual.Checked Then
                 If Not ucrReceiverDOY.IsEmpty AndAlso (Not ucrReceiverYear.IsEmpty OrElse Not ucrReceiverStation.IsEmpty) Then
                     ucrBase.OKEnabled(True)
@@ -240,13 +259,16 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        bRCodeSet = False
         SetDefaults()
         SetRCodeForControls(True)
+        bRCodeSet = True
+        SetFactors()
         TestOKEnabled()
     End Sub
 
     Private Sub cmdSummary_Click(sender As Object, e As EventArgs) Handles cmdSummary.Click
-        sdgSummaries.SetRFunction(clsSummariesList, clsDefaultFunction, ucrSelectorVariable, bResetSubdialog)
+        sdgSummaries.SetRFunction(clsSummariesList, clsDefaultFunction, clsConcFunction, ucrSelectorVariable, bResetSubdialog)
         bResetSubdialog = False
         sdgSummaries.ShowDialog()
         TestOKEnabled()
@@ -268,17 +290,35 @@ Public Class dlgClimaticSummary
         End If
     End Sub
 
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged, ucrSelectorVariable.ControlValueChanged
+    Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
+        If clsSummariesList.ContainsParameter("summary_cor") OrElse clsSummariesList.ContainsParameter("summary_cov") Then
+            clsDefaultFunction.AddParameter("use", Chr(34) & "'na.or.complete'" & Chr(34))
+        Else
+            clsDefaultFunction.RemoveParameterByName("use")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged, ucrSelectorVariable.ControlValueChanged, ucrChkAddDateColumn.ControlValueChanged, ucrReceiverDate.ControlValueChanged
         If Not ucrReceiverDOY.IsEmpty Then
             clsDayFilterCalcFromList.AddParameter(ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strParameterValue:=ucrReceiverDOY.GetVariableNames(), iPosition:=0)
         Else
             clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        End If
+
+        If ucrChkAddDateColumn.Checked AndAlso Not ucrReceiverDate.IsEmpty Then
+            clsAddDateFunction.AddParameter("data_name", Chr(34) & ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        Else
+            clsAddDateFunction.RemoveParameterByName("data_name")
         End If
         UpdateDayFilterPreview()
     End Sub
 
     Private Sub ucrPnlAnnualWithin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualWithin.ControlValueChanged
         WithinYearLabelReceiverLocation()
+        SetFactors()
+        If (rdoWithinYear.Checked AndAlso (ucrSelectorVariable.CurrentReceiver Is ucrReceiverYear)) OrElse (rdoAnnual.Checked AndAlso (ucrSelectorVariable.CurrentReceiver Is ucrReceiverWithinYear)) Then
+            ucrReceiverElement.SetMeAsReceiver()
+        End If
     End Sub
 
     Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
@@ -303,5 +343,39 @@ Public Class dlgClimaticSummary
         Else
             ucrInputFilterPreview.SetName(clsFromAndToConditionOperator.ToScript())
         End If
+    End Sub
+
+    Private Sub SetFactors()
+        If bRCodeSet Then
+
+
+            If Not ucrReceiverStation.IsEmpty Then
+                    clsDefaultFactors.AddParameter(ucrReceiverStation.GetParameter())
+                Else
+                    clsDefaultFactors.RemoveParameterByName("station")
+                End If
+
+            If rdoAnnual.Checked Then
+                clsDefaultFactors.RemoveParameterByName("within_variable")
+                clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
+            ElseIf rdoAnnualWithinYear.Checked Then
+                clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
+                clsDefaultFactors.AddParameter(ucrReceiverYear.GetParameter())
+            ElseIf rdoWithinYear.Checked Then
+                clsDefaultFactors.RemoveParameterByName("year")
+                clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
+            End If
+
+        End If
+    End Sub
+    Private Sub ucrChkAddDateColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddDateColumn.ControlValueChanged
+        If ucrChkAddDateColumn.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddDateFunction, iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddDateFunction)
+        End If
+    End Sub
+    Private Sub Receivers_controlValueChanged(ucrChangedControl As Control) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverElement.ControlValueChanged, ucrReceiverDOY.ControlValueChanged, ucrReceiverDate.ControlValueChanged
+        SetFactors()
     End Sub
 End Class

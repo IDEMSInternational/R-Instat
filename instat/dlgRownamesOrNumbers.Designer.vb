@@ -58,6 +58,7 @@ Partial Class dlgRowNamesOrNumbers
         '
         'ucrSelectorRowNames
         '
+        Me.ucrSelectorRowNames.bDropUnusedFilterLevels = False
         Me.ucrSelectorRowNames.bShowHiddenColumns = False
         Me.ucrSelectorRowNames.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorRowNames, "ucrSelectorRowNames")

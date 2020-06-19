@@ -52,13 +52,13 @@ Partial Class dlgTwoVariableFitModel
         Me.grpParameters = New System.Windows.Forms.GroupBox()
         Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
         Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
+        Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
+        Me.lblConfidenceInterval = New System.Windows.Forms.Label()
+        Me.cmdExplanatoryFunction = New System.Windows.Forms.Button()
         Me.ucrPnlMeansAndVariance = New instat.UcrPanel()
         Me.ucrChkPairedTest = New instat.ucrCheck()
         Me.ucrNudHypothesis = New instat.ucrNud()
         Me.ucrNudCI = New instat.ucrNud()
-        Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
-        Me.lblConfidenceInterval = New System.Windows.Forms.Label()
-        Me.cmdExplanatoryFunction = New System.Windows.Forms.Button()
         Me.ucrSaveModels = New instat.ucrSave()
         Me.ucrChkConvertToVariate = New instat.ucrCheck()
         Me.ucrReceiverExplanatory = New instat.ucrReceiverSingle()
@@ -228,6 +228,35 @@ Partial Class dlgTwoVariableFitModel
         Me.rdoCompareMeans.Text = "Compare Means"
         Me.rdoCompareMeans.UseVisualStyleBackColor = True
         '
+        'lblDifferenceInMeans
+        '
+        Me.lblDifferenceInMeans.AutoSize = True
+        Me.lblDifferenceInMeans.Location = New System.Drawing.Point(10, 46)
+        Me.lblDifferenceInMeans.Name = "lblDifferenceInMeans"
+        Me.lblDifferenceInMeans.Size = New System.Drawing.Size(106, 13)
+        Me.lblDifferenceInMeans.TabIndex = 2
+        Me.lblDifferenceInMeans.Tag = ""
+        Me.lblDifferenceInMeans.Text = "Difference In Means:"
+        '
+        'lblConfidenceInterval
+        '
+        Me.lblConfidenceInterval.AutoSize = True
+        Me.lblConfidenceInterval.Location = New System.Drawing.Point(10, 21)
+        Me.lblConfidenceInterval.Name = "lblConfidenceInterval"
+        Me.lblConfidenceInterval.Size = New System.Drawing.Size(102, 13)
+        Me.lblConfidenceInterval.TabIndex = 0
+        Me.lblConfidenceInterval.Tag = ""
+        Me.lblConfidenceInterval.Text = "Confidence Interval:"
+        '
+        'cmdExplanatoryFunction
+        '
+        Me.cmdExplanatoryFunction.Location = New System.Drawing.Point(268, 186)
+        Me.cmdExplanatoryFunction.Name = "cmdExplanatoryFunction"
+        Me.cmdExplanatoryFunction.Size = New System.Drawing.Size(103, 23)
+        Me.cmdExplanatoryFunction.TabIndex = 10
+        Me.cmdExplanatoryFunction.Text = "Function..."
+        Me.cmdExplanatoryFunction.UseVisualStyleBackColor = True
+        '
         'ucrPnlMeansAndVariance
         '
         Me.ucrPnlMeansAndVariance.Location = New System.Drawing.Point(8, 67)
@@ -267,40 +296,11 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrNudCI.TabIndex = 1
         Me.ucrNudCI.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblDifferenceInMeans
-        '
-        Me.lblDifferenceInMeans.AutoSize = True
-        Me.lblDifferenceInMeans.Location = New System.Drawing.Point(10, 46)
-        Me.lblDifferenceInMeans.Name = "lblDifferenceInMeans"
-        Me.lblDifferenceInMeans.Size = New System.Drawing.Size(106, 13)
-        Me.lblDifferenceInMeans.TabIndex = 2
-        Me.lblDifferenceInMeans.Tag = ""
-        Me.lblDifferenceInMeans.Text = "Difference In Means:"
-        '
-        'lblConfidenceInterval
-        '
-        Me.lblConfidenceInterval.AutoSize = True
-        Me.lblConfidenceInterval.Location = New System.Drawing.Point(10, 21)
-        Me.lblConfidenceInterval.Name = "lblConfidenceInterval"
-        Me.lblConfidenceInterval.Size = New System.Drawing.Size(102, 13)
-        Me.lblConfidenceInterval.TabIndex = 0
-        Me.lblConfidenceInterval.Tag = ""
-        Me.lblConfidenceInterval.Text = "Confidence Interval:"
-        '
-        'cmdExplanatoryFunction
-        '
-        Me.cmdExplanatoryFunction.Location = New System.Drawing.Point(268, 186)
-        Me.cmdExplanatoryFunction.Name = "cmdExplanatoryFunction"
-        Me.cmdExplanatoryFunction.Size = New System.Drawing.Size(103, 23)
-        Me.cmdExplanatoryFunction.TabIndex = 10
-        Me.cmdExplanatoryFunction.Text = "Function..."
-        Me.cmdExplanatoryFunction.UseVisualStyleBackColor = True
-        '
         'ucrSaveModels
         '
         Me.ucrSaveModels.Location = New System.Drawing.Point(10, 390)
         Me.ucrSaveModels.Name = "ucrSaveModels"
-        Me.ucrSaveModels.Size = New System.Drawing.Size(291, 24)
+        Me.ucrSaveModels.Size = New System.Drawing.Size(258, 24)
         Me.ucrSaveModels.TabIndex = 14
         '
         'ucrChkConvertToVariate
@@ -337,6 +337,7 @@ Partial Class dlgTwoVariableFitModel
         '
         'ucrSelectorSimpleReg
         '
+        Me.ucrSelectorSimpleReg.bDropUnusedFilterLevels = False
         Me.ucrSelectorSimpleReg.bShowHiddenColumns = False
         Me.ucrSelectorSimpleReg.bUseCurrentFilter = True
         Me.ucrSelectorSimpleReg.Location = New System.Drawing.Point(10, 49)

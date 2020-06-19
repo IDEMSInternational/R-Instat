@@ -25,6 +25,7 @@ Public Class ucrButtons
     Public Event ClickOk(sender As Object, e As EventArgs)
     Public Event ClickReset(sender As Object, e As EventArgs)
     Public Event ClickClose(sender As Object, e As EventArgs)
+    Private strCurrLang As String
 
     Public Sub New()
         ' This call is required by the designer.
@@ -103,7 +104,7 @@ Public Class ucrButtons
             strComments = ""
         End If
         If Not bRun AndAlso strComments <> "" Then
-            frmMain.AddToScriptWindow("# " & strComments & Environment.NewLine)
+            frmMain.AddToScriptWindow(frmMain.clsRLink.GetFormattedComment(strComments) & Environment.NewLine)
         End If
 
         'Get this list before doing ToScript then no need for global variable name
@@ -197,9 +198,25 @@ Public Class ucrButtons
         frmMain.clsRecentItems.addToMenu(Me.Parent)
         translateEach(Controls, Me)
         If bFirstLoad Then
+            'TODO. Temp this could be done on the designer
+            txtComment.Multiline = True
+            AddButtonInCommentTextbox()
             SetDefaults()
             bFirstLoad = False
+            If frmMain.clsInstatOptions IsNot Nothing Then
+                strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
+            End If
         End If
+        If frmMain.clsInstatOptions IsNot Nothing Then
+            If frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
+                cmdHelp.Width = cmdOk.Width / 2
+                cmdLanguage.Visible = True
+            Else
+                cmdHelp.Width = cmdOk.Width
+                cmdLanguage.Visible = False
+            End If
+        End If
+
     End Sub
 
     Private Sub SetDefaults()
@@ -241,4 +258,84 @@ Public Class ucrButtons
             Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
         End If
     End Sub
+
+    Private Sub cmdLanguage_Click(sender As Object, e As EventArgs) Handles cmdLanguage.Click
+
+        If strCurrLang <> "en-GB" Then
+            strCurrLang = "en-GB"
+        Else
+            strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
+        End If
+
+        Try
+            Dim CultureInfo As New Globalization.CultureInfo(strCurrLang)
+            autoTranslate(Me.ParentForm, CultureInfo)
+        Catch ex As Exception
+            autoTranslate(Me.ParentForm)
+        End Try
+        If cmdLanguage.FlatStyle = FlatStyle.Popup Then
+            cmdLanguage.FlatStyle = FlatStyle.Flat
+        Else
+            cmdLanguage.FlatStyle = FlatStyle.Popup
+        End If
+    End Sub
+
+    Private iMyCode As Integer = 0
+
+    Private Sub AddButtonInCommentTextbox()
+        Dim btnMoreComment As New Button
+        'add the button to the comment textbox first
+        txtComment.Controls.Clear()
+        txtComment.Controls.Add(btnMoreComment)
+        
+        'then set the  button properties
+        btnMoreComment.Text = ":::" 'temp. This will be shown as centered ... An image as below commended code is preferred
+        'btn.Image = Image.FromFile("C:\patowhiz\3dots.png")
+        btnMoreComment.Size = New Size(25, txtComment.ClientSize.Height + 2)
+        btnMoreComment.TextAlign = ContentAlignment.TopCenter
+        btnMoreComment.FlatStyle = FlatStyle.Standard
+        btnMoreComment.FlatAppearance.BorderSize = 0
+        btnMoreComment.Cursor = Cursors.Default
+        btnMoreComment.Dock = DockStyle.Right
+        btnMoreComment.BackColor = cmdOk.BackColor
+        btnMoreComment.UseVisualStyleBackColor = True
+
+        'set the btn event handler
+        AddHandler btnMoreComment.Click, Sub()
+                                             'shows a popup that displays the additional comments
+                                             Dim frmPopup As New Form
+                                             Dim txtPopupComment As New TextBox
+                                             frmPopup.ShowInTaskbar = False
+                                             frmPopup.FormBorderStyle = FormBorderStyle.None
+                                             frmPopup.Size = New Size(txtComment.Width, 120)
+                                             frmPopup.Controls.Add(txtPopupComment)
+                                             'Set the text properties
+                                             txtPopupComment.Dock = DockStyle.Fill
+                                             txtPopupComment.Multiline = True
+                                             txtPopupComment.ScrollBars = ScrollBars.Vertical
+                                             txtPopupComment.WordWrap = False
+
+                                             AddHandler txtPopupComment.LostFocus, Sub()
+                                                                                       txtComment.Text = txtPopupComment.Text
+                                                                                       frmPopup.Close()
+                                                                                   End Sub
+                                             AddHandler txtPopupComment.KeyDown, Sub(sender As Object, e As KeyEventArgs)
+                                                                                     If e.Control AndAlso e.KeyCode = Keys.Enter Then
+                                                                                         txtComment.Text = txtPopupComment.Text
+                                                                                         frmPopup.Close()
+                                                                                     End If
+                                                                                 End Sub
+
+                                             Dim ctlpos As Point = txtComment.PointToScreen(New Point(0, 0)) 'Point.Empty is not function so use Point(0, 0)
+                                             frmPopup.StartPosition = FormStartPosition.Manual 'set it to manual
+                                             'if user wanted below the control. Left here for future reference
+                                             'sdgComment.Location = New Point(ctlpos.X - 2, ctlpos.Y + txtComment.Height - 2) 'then locate its position
+                                             frmPopup.Location = New Point(ctlpos.X - 2, ctlpos.Y - frmPopup.Height - 2) 'set location to show the form just above the examples button
+                                             frmPopup.Show()
+                                             txtPopupComment.Text = txtComment.Text
+                                             txtPopupComment.SelectionStart = txtPopupComment.TextLength
+                                         End Sub
+
+    End Sub
+
 End Class
