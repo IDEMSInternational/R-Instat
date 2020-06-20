@@ -13,9 +13,29 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports instat.Translations
 Public Class sdgVerificationSummaries
+    Private bControlsInitialised As Boolean = True
+    Private clsListFunction As New RFunction
+    Private lstSummaryCheckboxes As New List(Of ucrCheck)
     Private Sub sdgVerificationSummaries_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+    End Sub
 
+    Private Sub InitialiseControls()
+
+    End Sub
+
+    Public Sub SetRFunction(clsNewListFunction As RFunction, Optional bReset As Boolean = False)
+        If bControlsInitialised Then
+            InitialiseControls()
+            bControlsInitialised = False
+        End If
+
+        clsListFunction = clsNewListFunction
+
+        For Each ctr In lstSummaryCheckboxes
+            ctr.SetRCode(clsListFunction, bReset)
+        Next
     End Sub
 End Class
