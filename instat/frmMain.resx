@@ -1191,37 +1191,37 @@
     <value>Define Climatic Data...</value>
   </data>
   <data name="mnuClimaticCheckDataInventory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="mnuClimaticCheckDataInventory.Text" xml:space="preserve">
     <value>Inventory...</value>
   </data>
   <data name="mnuClimaticCheckDataDisplayDaily.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="mnuClimaticCheckDataDisplayDaily.Text" xml:space="preserve">
     <value>Display Daily...</value>
   </data>
   <data name="mnuClimaticCheckDataBoxplot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="mnuClimaticCheckDataBoxplot.Text" xml:space="preserve">
     <value>Boxplot...</value>
   </data>
   <data name="mnuClimaticCheckDataQCTemperatures.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="mnuClimaticCheckDataQCTemperatures.Text" xml:space="preserve">
     <value>QC Temperatures...</value>
   </data>
   <data name="mnuClimaticCheckDataQCRainfall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="mnuClimaticCheckDataQCRainfall.Text" xml:space="preserve">
     <value>QC Rainfall...</value>
   </data>
   <data name="mnuClimaticCheckDataHomogenization.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="mnuClimaticCheckDataHomogenization.Text" xml:space="preserve">
     <value>Homogenization...</value>
@@ -1243,12 +1243,6 @@
   </data>
   <data name="mnuClimaticPrepareConversions.Text" xml:space="preserve">
     <value>Conversions...</value>
-  </data>
-  <data name="mnuClimaticPrepareCompare.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareCompare.Text" xml:space="preserve">
-    <value>Compare...</value>
   </data>
   <data name="ToolStripSeparator37.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 6</value>
@@ -1288,6 +1282,30 @@
   </data>
   <data name="mnuClimaticPrepareExtremes.Text" xml:space="preserve">
     <value>Extremes...</value>
+  </data>
+  <data name="mnuClimaticPrepareCompareCalculation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareCompareCalculation.Text" xml:space="preserve">
+    <value>Calculation...</value>
+  </data>
+  <data name="mnuClimaticPrepareCompareSummary.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareCompareSummary.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareCompareSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareCompareSummary.Text" xml:space="preserve">
+    <value>Summary...</value>
+  </data>
+  <data name="mnuClimaticPrepareCompare.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareCompare.Text" xml:space="preserve">
+    <value>Compare</value>
   </data>
   <data name="ToolStripSeparator46.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 6</value>
@@ -4342,7 +4360,7 @@
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>29</value>
+    <value>25</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -7173,12 +7191,6 @@
   <data name="&gt;&gt;mnuClimaticPrepareConversions.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticPrepareCompare.Name" xml:space="preserve">
-    <value>mnuClimaticPrepareCompare</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticPrepareCompare.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;ToolStripSeparator37.Name" xml:space="preserve">
     <value>ToolStripSeparator37</value>
   </data>
@@ -7219,6 +7231,24 @@
     <value>mnuClimaticPrepareExtremes</value>
   </data>
   <data name="&gt;&gt;mnuClimaticPrepareExtremes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticPrepareCompare.Name" xml:space="preserve">
+    <value>mnuClimaticPrepareCompare</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticPrepareCompare.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticPrepareCompareCalculation.Name" xml:space="preserve">
+    <value>mnuClimaticPrepareCompareCalculation</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticPrepareCompareCalculation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticPrepareCompareSummary.Name" xml:space="preserve">
+    <value>mnuClimaticPrepareCompareSummary</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticPrepareCompareSummary.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator46.Name" xml:space="preserve">
