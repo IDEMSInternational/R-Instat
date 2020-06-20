@@ -1637,6 +1637,12 @@
     <Compile Include="ucrColumnMetadata.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrContinuousVerification.Designer.vb">
+      <DependentUpon>ucrContinuousVerification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrContinuousVerification.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrCore.Designer.vb">
       <DependentUpon>ucrCore.vb</DependentUpon>
     </Compile>
@@ -4318,6 +4324,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrColumnMetadata.sw-KE.resx">
       <DependentUpon>ucrColumnMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrContinuousVerification.resx">
+      <DependentUpon>ucrContinuousVerification.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrCore.resx">
       <DependentUpon>ucrCore.vb</DependentUpon>
