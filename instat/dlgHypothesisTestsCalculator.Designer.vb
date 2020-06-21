@@ -139,11 +139,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBr = New System.Windows.Forms.Button()
         Me.cmdBartels = New System.Windows.Forms.Button()
         Me.ttHypothesisTests = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
         Me.ucrChkDisplayModel = New instat.ucrCheck()
         Me.ucrChkSummaryModel = New instat.ucrCheck()
         Me.ucrTryModelling = New instat.ucrTry()
@@ -784,17 +779,12 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.grpAgricolae.Controls.Add(Me.cmdPBIB)
         Me.grpAgricolae.Controls.Add(Me.cmdAgriKruskal)
-        Me.grpAgricolae.Controls.Add(Me.Button5)
         Me.grpAgricolae.Controls.Add(Me.cmdScheffe)
-        Me.grpAgricolae.Controls.Add(Me.Button4)
         Me.grpAgricolae.Controls.Add(Me.cmdDurbin)
-        Me.grpAgricolae.Controls.Add(Me.Button3)
         Me.grpAgricolae.Controls.Add(Me.cmdAgriFriedman)
         Me.grpAgricolae.Controls.Add(Me.cmdSNK)
         Me.grpAgricolae.Controls.Add(Me.cmdWaerden)
         Me.grpAgricolae.Controls.Add(Me.cmdAgriWaller)
-        Me.grpAgricolae.Controls.Add(Me.Button2)
-        Me.grpAgricolae.Controls.Add(Me.Button1)
         Me.grpAgricolae.Controls.Add(Me.cmdAgriNonAdditivity)
         Me.grpAgricolae.Controls.Add(Me.cmdMedian)
         Me.grpAgricolae.Controls.Add(Me.cmdREGW)
@@ -1494,61 +1484,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBartels.Text = "bartels"
         Me.cmdBartels.UseVisualStyleBackColor = True
         '
-        'Button1
-        '
-        Me.Button1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button1.Location = New System.Drawing.Point(176, 45)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(86, 30)
-        Me.Button1.TabIndex = 177
-        Me.Button1.Text = "median"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button2.Location = New System.Drawing.Point(262, 45)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(86, 30)
-        Me.Button2.TabIndex = 178
-        Me.Button2.Text = "nonadditivity "
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button3.Location = New System.Drawing.Point(262, 14)
-        Me.Button3.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(86, 30)
-        Me.Button3.TabIndex = 182
-        Me.Button3.Text = "friedman"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button4.Location = New System.Drawing.Point(176, 14)
-        Me.Button4.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(86, 30)
-        Me.Button4.TabIndex = 183
-        Me.Button4.Text = "durbin"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button5
-        '
-        Me.Button5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button5.Location = New System.Drawing.Point(176, 76)
-        Me.Button5.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(86, 30)
-        Me.Button5.TabIndex = 184
-        Me.Button5.Text = "scheffe"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
         'ucrChkDisplayModel
         '
         Me.ucrChkDisplayModel.Checked = False
@@ -1832,9 +1767,4 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdSnh As Button
     Friend WithEvents ttHypothesisTests As ToolTip
     Friend WithEvents cmdZero As Button
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
 End Class
