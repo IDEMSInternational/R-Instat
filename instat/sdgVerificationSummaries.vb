@@ -16,8 +16,8 @@
 Imports instat.Translations
 Public Class sdgVerificationSummaries
     Private bControlsInitialised As Boolean = True
-    Private clsListFunction As New RFunction
-    Private lstSummaryCheckboxes As New List(Of ucrCheck)
+    Private clsSummaryFunction, clsListFunction As New RFunction
+    Private bResetSubdialog As Boolean = False
     Private Sub sdgVerificationSummaries_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -26,16 +26,16 @@ Public Class sdgVerificationSummaries
 
     End Sub
 
-    Public Sub SetRFunction(clsNewListFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewSummaryFunction As RFunction, clsNewListFunction As RFunction, Optional bReset As Boolean = False)
         If bControlsInitialised Then
             InitialiseControls()
             bControlsInitialised = False
         End If
 
         clsListFunction = clsNewListFunction
+        clsSummaryFunction = clsNewSummaryFunction
+        bResetSubdialog = bReset
 
-        For Each ctr In lstSummaryCheckboxes
-            ctr.SetRCode(clsListFunction, bReset)
-        Next
+        ucrContinuousVerification.SetRFunction(clsNewSummaryFunction:=clsSummaryFunction, clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
     End Sub
 End Class

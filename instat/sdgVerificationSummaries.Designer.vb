@@ -25,6 +25,7 @@ Partial Class sdgVerificationSummaries
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.tbSummaries = New System.Windows.Forms.TabControl()
         Me.tbContinuous = New System.Windows.Forms.TabPage()
+        Me.ucrContinuousVerification = New instat.ucrContinuousVerification()
         Me.tbBinary = New System.Windows.Forms.TabPage()
         Me.UcrCheck9 = New instat.ucrCheck()
         Me.UcrCheck8 = New instat.ucrCheck()
@@ -36,15 +37,16 @@ Partial Class sdgVerificationSummaries
         Me.UcrCheck11 = New instat.ucrCheck()
         Me.UcrCheck10 = New instat.ucrCheck()
         Me.tbSummaries.SuspendLayout()
+        Me.tbContinuous.SuspendLayout()
         Me.tbBinary.SuspendLayout()
         Me.tbCategorical.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(114, 333)
+        Me.ucrBase.Location = New System.Drawing.Point(161, 323)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(154, 39)
+        Me.ucrBase.Size = New System.Drawing.Size(154, 30)
         Me.ucrBase.TabIndex = 0
         '
         'tbSummaries
@@ -60,6 +62,7 @@ Partial Class sdgVerificationSummaries
         '
         'tbContinuous
         '
+        Me.tbContinuous.Controls.Add(Me.ucrContinuousVerification)
         Me.tbContinuous.Location = New System.Drawing.Point(4, 22)
         Me.tbContinuous.Name = "tbContinuous"
         Me.tbContinuous.Padding = New System.Windows.Forms.Padding(3)
@@ -67,6 +70,13 @@ Partial Class sdgVerificationSummaries
         Me.tbContinuous.TabIndex = 0
         Me.tbContinuous.Text = "Continuous"
         Me.tbContinuous.UseVisualStyleBackColor = True
+        '
+        'ucrContinuousVerification
+        '
+        Me.ucrContinuousVerification.Location = New System.Drawing.Point(-1, 6)
+        Me.ucrContinuousVerification.Name = "ucrContinuousVerification"
+        Me.ucrContinuousVerification.Size = New System.Drawing.Size(430, 265)
+        Me.ucrContinuousVerification.TabIndex = 0
         '
         'tbBinary
         '
@@ -164,7 +174,7 @@ Partial Class sdgVerificationSummaries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(476, 373)
+        Me.ClientSize = New System.Drawing.Size(458, 356)
         Me.Controls.Add(Me.tbSummaries)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -174,6 +184,7 @@ Partial Class sdgVerificationSummaries
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Summaries"
         Me.tbSummaries.ResumeLayout(False)
+        Me.tbContinuous.ResumeLayout(False)
         Me.tbBinary.ResumeLayout(False)
         Me.tbCategorical.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -193,4 +204,5 @@ Partial Class sdgVerificationSummaries
     Friend WithEvents UcrCheck12 As ucrCheck
     Friend WithEvents UcrCheck11 As ucrCheck
     Friend WithEvents UcrCheck10 As ucrCheck
+    Friend WithEvents ucrContinuousVerification As ucrContinuousVerification
 End Class
