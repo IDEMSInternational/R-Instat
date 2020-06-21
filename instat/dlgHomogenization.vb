@@ -224,7 +224,7 @@ Public Class dlgHomogenization
 
         ucrBase.clsRsyntax.ClearCodes()
         AddPlotSummaryParameters()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCptMeanFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSnhtFunction)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
