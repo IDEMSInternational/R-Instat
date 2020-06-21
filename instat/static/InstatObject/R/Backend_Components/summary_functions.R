@@ -1009,7 +1009,7 @@ me <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::me(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::me(sim = y, obs = x, na.rm = na.rm))
   }
 } 
 
@@ -1018,7 +1018,7 @@ mae <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::mae(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::mae(sim = y, obs = x, na.rm = na.rm))
   }
 } 
 
@@ -1027,7 +1027,7 @@ rmse <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rmse(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::rmse(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1036,7 +1036,7 @@ nrmse <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::nrmse(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::nrmse(sim = y, obs = x, na.rm = na.rm))
   }
 } 
 
@@ -1045,7 +1045,7 @@ PBIAS <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::pbias(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::pbias(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1054,7 +1054,7 @@ NSE <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::NSeff(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::NSeff(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1063,7 +1063,7 @@ mNSE <- function(x, y, j = 1, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::mNSE(sim = x, obs = y, j = j, na.rm = na.rm))
+    return(hydroGOF::mNSE(sim = y, obs = x, j = j, na.rm = na.rm))
   }
 } 
 
@@ -1072,7 +1072,7 @@ rNSE <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rNSeff(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::rNSeff(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1081,16 +1081,16 @@ d <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::d(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::d(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
-#Modified index of aggrement
+#Modified index of agreement
 md <- function(x, y, j = 1, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::md(sim = x, obs = y, j = j,  na.rm = na.rm))
+    return(hydroGOF::md(sim = y, obs = x, j = j,  na.rm = na.rm))
   }
 }
 
@@ -1100,7 +1100,7 @@ rd <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rd(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::rd(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1110,7 +1110,7 @@ R2 <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::br2(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::br2(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1119,7 +1119,7 @@ cp <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(unique(y))==1||length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::cp(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::cp(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1128,7 +1128,7 @@ KGE <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::KGE(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::KGE(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1137,7 +1137,7 @@ mse <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::mse(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::mse(sim = y, obs = x, na.rm = na.rm))
   }
 } 
 
@@ -1147,7 +1147,7 @@ rSD <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rSD(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::rSD(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1156,7 +1156,7 @@ rsr <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rsr(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::rsr(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1165,7 +1165,7 @@ ssq <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::ssq(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::ssq(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1174,7 +1174,7 @@ VE <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::VE(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::VE(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1183,20 +1183,20 @@ VE <- function(x, y, na.rm = FALSE, na_type = "", ...){
 ##Continuous/Continuous
 
 ###Mean error (ME)
-ME <- function(x, pred, frcst.type, obs.type){
-  A <- verification::verify(obs = x, pred = pred,  frcst.type = frcst.type, obs.type = obs.type)
+ME <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
   return(A$ME)  
 }
 
 ###Mean-squared error (MSE)
-MSE <- function(x, pred, frcst.type, obs.type){
-  A <- verification::verify(obs = x, pred = pred,  frcst.type = frcst.type, obs.type = obs.type)
+MSE <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
   return(A$MSE)  
 }
 
 ###Mean absolute error (MAE)
-MAE <- function(x, pred, frcst.type, obs.type){
-  A <- verification::verify(obs = x, pred = pred,  frcst.type = frcst.type, obs.type = obs.type)
+MAE <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
   return(A$MAE)  
 }
 
