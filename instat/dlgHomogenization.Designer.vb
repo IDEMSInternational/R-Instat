@@ -26,6 +26,7 @@ Partial Class dlgHomogenization
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgHomogenization))
         Me.lblElement = New System.Windows.Forms.Label()
         Me.grpMethods = New System.Windows.Forms.GroupBox()
+        Me.rdoBuishand = New System.Windows.Forms.RadioButton()
         Me.rdoPettitt = New System.Windows.Forms.RadioButton()
         Me.rdoSnht = New System.Windows.Forms.RadioButton()
         Me.rdoCptMean = New System.Windows.Forms.RadioButton()
@@ -66,7 +67,6 @@ Partial Class dlgHomogenization
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrSelectorHomogenization = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoBuishand = New System.Windows.Forms.RadioButton()
         Me.grpMethods.SuspendLayout()
         Me.grpCptOptions.SuspendLayout()
         Me.grpOutputOptions.SuspendLayout()
@@ -80,16 +80,22 @@ Partial Class dlgHomogenization
         '
         'grpMethods
         '
-        Me.grpMethods.Controls.Add(Me.rdoBuishand)
-        Me.grpMethods.Controls.Add(Me.rdoPettitt)
-        Me.grpMethods.Controls.Add(Me.rdoSnht)
         Me.grpMethods.Controls.Add(Me.rdoCptMean)
         Me.grpMethods.Controls.Add(Me.rdoCptMeanVariance)
         Me.grpMethods.Controls.Add(Me.rdoCptVariance)
+        Me.grpMethods.Controls.Add(Me.rdoBuishand)
+        Me.grpMethods.Controls.Add(Me.rdoPettitt)
+        Me.grpMethods.Controls.Add(Me.rdoSnht)
         Me.grpMethods.Controls.Add(Me.ucrPnlMethods)
         resources.ApplyResources(Me.grpMethods, "grpMethods")
         Me.grpMethods.Name = "grpMethods"
         Me.grpMethods.TabStop = False
+        '
+        'rdoBuishand
+        '
+        resources.ApplyResources(Me.rdoBuishand, "rdoBuishand")
+        Me.rdoBuishand.Name = "rdoBuishand"
+        Me.rdoBuishand.UseVisualStyleBackColor = True
         '
         'rdoPettitt
         '
@@ -375,12 +381,6 @@ Partial Class dlgHomogenization
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'rdoBuishand
-        '
-        resources.ApplyResources(Me.rdoBuishand, "rdoBuishand")
-        Me.rdoBuishand.Name = "rdoBuishand"
-        Me.rdoBuishand.UseVisualStyleBackColor = True
         '
         'dlgHomogenization
         '
