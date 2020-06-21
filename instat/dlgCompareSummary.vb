@@ -48,7 +48,7 @@ Public Class dlgCompareSummary
         ucrReceiverStation.Selector = ucrSelectorVerificationSummary
         ucrReceiverStation.SetParameterIsString()
 
-        ucrReceiverSatellite.SetParameter(New RParameter("pred", 3))
+        ucrReceiverSatellite.SetParameter(New RParameter("y", 3))
         ucrReceiverSatellite.Selector = ucrSelectorVerificationSummary
         ucrReceiverSatellite.SetParameterIsString()
 
@@ -57,12 +57,22 @@ Public Class dlgCompareSummary
         ucrReceiverMultipleFactors.strSelectorHeading = "Factors"
         ucrReceiverMultipleFactors.SetParameterIsString()
         ucrReceiverMultipleFactors.SetIncludedDataTypes({"factor"}, bStrict:=True)
+
+        ucrChkIgnoreMissing.SetParameter(New RParameter("na.rm", 7))
+        ucrChkIgnoreMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkIgnoreMissing.SetRDefault("FALSE")
+        ucrChkIgnoreMissing.SetText("Omit Missing Values")
+
+        ucrChkPrintOutput.SetParameter(New RParameter("return_output", 4))
+        ucrChkPrintOutput.SetText("Print Results to Output Window")
+        ucrChkPrintOutput.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkPrintOutput.SetRDefault("FALSE")
     End Sub
 
     Private Sub SetDefaults()
         clsSummaryFunction = New RFunction
         clsListFunction = New RFunction
-        'data_book$calculate_summary(columns_to_summarise="tmax", data_name="dodoma", factors=c("year"), y="tmin", additional_filter=day_filter, j=1, summaries=c("summary_cor", "summary_count_non_missing", "summary_count", "summary_sum"), silent=TRUE)
+
         ucrSelectorVerificationSummary.Reset()
         ucrReceiverStation.SetMeAsReceiver()
 
@@ -81,7 +91,7 @@ Public Class dlgCompareSummary
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgVerificationSummaries.SetRFunction(clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
+        sdgVerificationSummaries.SetRFunction(clsNewSummaryFunction:=clsSummaryFunction, clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
         sdgVerificationSummaries.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -107,6 +117,14 @@ Public Class dlgCompareSummary
             clsSummaryFunction.AddParameter("frcst.type", Chr(34) & "'binary'" & Chr(34), iPosition:=5)
         ElseIf rdoCategorical.Checked Then
             clsSummaryFunction.AddParameter("frcst.type", Chr(34) & "'cat'" & Chr(34), iPosition:=5)
+        End If
+    End Sub
+
+    Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
+        If ucrChkPrintOutput.Checked Then
+            ucrBase.clsRsyntax.iCallType = 2
+        Else
+            ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 

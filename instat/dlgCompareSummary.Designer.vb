@@ -35,6 +35,8 @@ Partial Class dlgCompareSummary
         Me.ucrSelectorVerificationSummary = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.cmdSummaries = New System.Windows.Forms.Button()
+        Me.ucrChkIgnoreMissing = New instat.ucrCheck()
+        Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblStation
@@ -185,11 +187,29 @@ Partial Class dlgCompareSummary
         Me.cmdSummaries.Text = "Summaries"
         Me.cmdSummaries.UseVisualStyleBackColor = True
         '
+        'ucrChkIgnoreMissing
+        '
+        Me.ucrChkIgnoreMissing.Checked = False
+        Me.ucrChkIgnoreMissing.Location = New System.Drawing.Point(10, 291)
+        Me.ucrChkIgnoreMissing.Name = "ucrChkIgnoreMissing"
+        Me.ucrChkIgnoreMissing.Size = New System.Drawing.Size(197, 20)
+        Me.ucrChkIgnoreMissing.TabIndex = 13
+        '
+        'ucrChkPrintOutput
+        '
+        Me.ucrChkPrintOutput.Checked = False
+        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(10, 265)
+        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
+        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkPrintOutput.TabIndex = 14
+        '
         'dlgCompareSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 384)
+        Me.ClientSize = New System.Drawing.Size(419, 384)
+        Me.Controls.Add(Me.ucrChkPrintOutput)
+        Me.Controls.Add(Me.ucrChkIgnoreMissing)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.rdoBinary)
         Me.Controls.Add(Me.rdoCategorical)
@@ -225,4 +245,6 @@ Partial Class dlgCompareSummary
     Friend WithEvents rdoCategorical As RadioButton
     Friend WithEvents rdoContinuous As RadioButton
     Friend WithEvents cmdSummaries As Button
+    Friend WithEvents ucrChkIgnoreMissing As ucrCheck
+    Friend WithEvents ucrChkPrintOutput As ucrCheck
 End Class
