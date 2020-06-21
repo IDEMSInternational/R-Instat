@@ -22,9 +22,13 @@ Partial Class ucrContinuousVerification
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrChkME = New instat.ucrCheck()
+        Me.components = New System.ComponentModel.Container()
         Me.grpHyroGOF = New System.Windows.Forms.GroupBox()
         Me.lblJmia = New System.Windows.Forms.Label()
+        Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.grpVerification = New System.Windows.Forms.GroupBox()
+        Me.ttVerificationSummaries = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrChkME = New instat.ucrCheck()
         Me.ucrInputJmia = New instat.ucrInputTextBox()
         Me.ucrChkRelativeIndexOfAgreement = New instat.ucrCheck()
         Me.ucrChkRatioOfStandardDeviation = New instat.ucrCheck()
@@ -42,24 +46,15 @@ Partial Class ucrContinuousVerification
         Me.ucrChkMeanError = New instat.ucrCheck()
         Me.ucrChkMeanSquaredError = New instat.ucrCheck()
         Me.ucrChkRootMeanSquaredError = New instat.ucrCheck()
-        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.ucrChkNormRootMeanSquaredError = New instat.ucrCheck()
         Me.ucrChkMeanAbsoluteError = New instat.ucrCheck()
         Me.ucrChkIndexOfAgreement = New instat.ucrCheck()
         Me.ucrChkSelectAll = New instat.ucrCheck()
         Me.ucrChkMAE = New instat.ucrCheck()
         Me.ucrChkMSE = New instat.ucrCheck()
-        Me.grpVerification = New System.Windows.Forms.GroupBox()
         Me.grpHyroGOF.SuspendLayout()
+        Me.grpVerification.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrChkME
-        '
-        Me.ucrChkME.Checked = False
-        Me.ucrChkME.Location = New System.Drawing.Point(22, 41)
-        Me.ucrChkME.Name = "ucrChkME"
-        Me.ucrChkME.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkME.TabIndex = 7
         '
         'grpHyroGOF
         '
@@ -85,7 +80,7 @@ Partial Class ucrContinuousVerification
         Me.grpHyroGOF.Controls.Add(Me.ucrChkNormRootMeanSquaredError)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkMeanAbsoluteError)
         Me.grpHyroGOF.Controls.Add(Me.ucrChkIndexOfAgreement)
-        Me.grpHyroGOF.Location = New System.Drawing.Point(11, 111)
+        Me.grpHyroGOF.Location = New System.Drawing.Point(11, 89)
         Me.grpHyroGOF.Name = "grpHyroGOF"
         Me.grpHyroGOF.Size = New System.Drawing.Size(409, 145)
         Me.grpHyroGOF.TabIndex = 11
@@ -96,18 +91,46 @@ Partial Class ucrContinuousVerification
         '
         Me.lblJmia.AutoSize = True
         Me.lblJmia.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblJmia.Location = New System.Drawing.Point(284, 125)
+        Me.lblJmia.Location = New System.Drawing.Point(284, 110)
         Me.lblJmia.Name = "lblJmia"
         Me.lblJmia.Size = New System.Drawing.Size(12, 13)
         Me.lblJmia.TabIndex = 20
         Me.lblJmia.Text = "j:"
+        '
+        'cmdHelp
+        '
+        Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdHelp.Location = New System.Drawing.Point(331, 105)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(68, 23)
+        Me.cmdHelp.TabIndex = 22
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
+        'grpVerification
+        '
+        Me.grpVerification.Controls.Add(Me.ucrChkMSE)
+        Me.grpVerification.Location = New System.Drawing.Point(11, 25)
+        Me.grpVerification.Name = "grpVerification"
+        Me.grpVerification.Size = New System.Drawing.Size(409, 58)
+        Me.grpVerification.TabIndex = 12
+        Me.grpVerification.TabStop = False
+        Me.grpVerification.Text = "Verification"
+        '
+        'ucrChkME
+        '
+        Me.ucrChkME.Checked = False
+        Me.ucrChkME.Location = New System.Drawing.Point(22, 40)
+        Me.ucrChkME.Name = "ucrChkME"
+        Me.ucrChkME.Size = New System.Drawing.Size(134, 20)
+        Me.ucrChkME.TabIndex = 7
         '
         'ucrInputJmia
         '
         Me.ucrInputJmia.AddQuotesIfUnrecognised = True
         Me.ucrInputJmia.IsMultiline = False
         Me.ucrInputJmia.IsReadOnly = False
-        Me.ucrInputJmia.Location = New System.Drawing.Point(299, 122)
+        Me.ucrInputJmia.Location = New System.Drawing.Point(299, 107)
         Me.ucrInputJmia.Name = "ucrInputJmia"
         Me.ucrInputJmia.Size = New System.Drawing.Size(32, 21)
         Me.ucrInputJmia.TabIndex = 21
@@ -115,7 +138,7 @@ Partial Class ucrContinuousVerification
         'ucrChkRelativeIndexOfAgreement
         '
         Me.ucrChkRelativeIndexOfAgreement.Checked = False
-        Me.ucrChkRelativeIndexOfAgreement.Location = New System.Drawing.Point(204, 75)
+        Me.ucrChkRelativeIndexOfAgreement.Location = New System.Drawing.Point(204, 60)
         Me.ucrChkRelativeIndexOfAgreement.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkRelativeIndexOfAgreement.Name = "ucrChkRelativeIndexOfAgreement"
         Me.ucrChkRelativeIndexOfAgreement.Size = New System.Drawing.Size(87, 20)
@@ -124,7 +147,7 @@ Partial Class ucrContinuousVerification
         'ucrChkRatioOfStandardDeviation
         '
         Me.ucrChkRatioOfStandardDeviation.Checked = False
-        Me.ucrChkRatioOfStandardDeviation.Location = New System.Drawing.Point(94, 54)
+        Me.ucrChkRatioOfStandardDeviation.Location = New System.Drawing.Point(94, 39)
         Me.ucrChkRatioOfStandardDeviation.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkRatioOfStandardDeviation.Name = "ucrChkRatioOfStandardDeviation"
         Me.ucrChkRatioOfStandardDeviation.Size = New System.Drawing.Size(87, 20)
@@ -133,7 +156,7 @@ Partial Class ucrContinuousVerification
         'ucrChkCoefDetermination
         '
         Me.ucrChkCoefDetermination.Checked = False
-        Me.ucrChkCoefDetermination.Location = New System.Drawing.Point(204, 116)
+        Me.ucrChkCoefDetermination.Location = New System.Drawing.Point(204, 101)
         Me.ucrChkCoefDetermination.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkCoefDetermination.Name = "ucrChkCoefDetermination"
         Me.ucrChkCoefDetermination.Size = New System.Drawing.Size(87, 20)
@@ -142,7 +165,7 @@ Partial Class ucrContinuousVerification
         'ucrChkRatioOfRootMeanSquaredError
         '
         Me.ucrChkRatioOfRootMeanSquaredError.Checked = False
-        Me.ucrChkRatioOfRootMeanSquaredError.Location = New System.Drawing.Point(94, 34)
+        Me.ucrChkRatioOfRootMeanSquaredError.Location = New System.Drawing.Point(94, 19)
         Me.ucrChkRatioOfRootMeanSquaredError.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkRatioOfRootMeanSquaredError.Name = "ucrChkRatioOfRootMeanSquaredError"
         Me.ucrChkRatioOfRootMeanSquaredError.Size = New System.Drawing.Size(87, 20)
@@ -151,7 +174,7 @@ Partial Class ucrContinuousVerification
         'ucrChkRelativeNashSutcliffeEff
         '
         Me.ucrChkRelativeNashSutcliffeEff.Checked = False
-        Me.ucrChkRelativeNashSutcliffeEff.Location = New System.Drawing.Point(94, 115)
+        Me.ucrChkRelativeNashSutcliffeEff.Location = New System.Drawing.Point(94, 100)
         Me.ucrChkRelativeNashSutcliffeEff.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkRelativeNashSutcliffeEff.Name = "ucrChkRelativeNashSutcliffeEff"
         Me.ucrChkRelativeNashSutcliffeEff.Size = New System.Drawing.Size(87, 20)
@@ -160,7 +183,7 @@ Partial Class ucrContinuousVerification
         'ucrChkModifiedIndexOfAgreement
         '
         Me.ucrChkModifiedIndexOfAgreement.Checked = False
-        Me.ucrChkModifiedIndexOfAgreement.Location = New System.Drawing.Point(204, 36)
+        Me.ucrChkModifiedIndexOfAgreement.Location = New System.Drawing.Point(204, 21)
         Me.ucrChkModifiedIndexOfAgreement.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkModifiedIndexOfAgreement.Name = "ucrChkModifiedIndexOfAgreement"
         Me.ucrChkModifiedIndexOfAgreement.Size = New System.Drawing.Size(87, 20)
@@ -169,7 +192,7 @@ Partial Class ucrContinuousVerification
         'ucrChkCoefPersistence
         '
         Me.ucrChkCoefPersistence.Checked = False
-        Me.ucrChkCoefPersistence.Location = New System.Drawing.Point(204, 95)
+        Me.ucrChkCoefPersistence.Location = New System.Drawing.Point(204, 80)
         Me.ucrChkCoefPersistence.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkCoefPersistence.Name = "ucrChkCoefPersistence"
         Me.ucrChkCoefPersistence.Size = New System.Drawing.Size(87, 20)
@@ -178,7 +201,7 @@ Partial Class ucrContinuousVerification
         'ucrChkNashSutcliffeEfficiency
         '
         Me.ucrChkNashSutcliffeEfficiency.Checked = False
-        Me.ucrChkNashSutcliffeEfficiency.Location = New System.Drawing.Point(94, 75)
+        Me.ucrChkNashSutcliffeEfficiency.Location = New System.Drawing.Point(94, 60)
         Me.ucrChkNashSutcliffeEfficiency.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkNashSutcliffeEfficiency.Name = "ucrChkNashSutcliffeEfficiency"
         Me.ucrChkNashSutcliffeEfficiency.Size = New System.Drawing.Size(87, 20)
@@ -187,7 +210,7 @@ Partial Class ucrContinuousVerification
         'ucrChkSumOfSquaredResiduals
         '
         Me.ucrChkSumOfSquaredResiduals.Checked = False
-        Me.ucrChkSumOfSquaredResiduals.Location = New System.Drawing.Point(306, 100)
+        Me.ucrChkSumOfSquaredResiduals.Location = New System.Drawing.Point(306, 85)
         Me.ucrChkSumOfSquaredResiduals.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkSumOfSquaredResiduals.Name = "ucrChkSumOfSquaredResiduals"
         Me.ucrChkSumOfSquaredResiduals.Size = New System.Drawing.Size(87, 20)
@@ -196,7 +219,7 @@ Partial Class ucrContinuousVerification
         'ucrChkKlingGuptaEfficiency
         '
         Me.ucrChkKlingGuptaEfficiency.Checked = False
-        Me.ucrChkKlingGuptaEfficiency.Location = New System.Drawing.Point(306, 38)
+        Me.ucrChkKlingGuptaEfficiency.Location = New System.Drawing.Point(306, 23)
         Me.ucrChkKlingGuptaEfficiency.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkKlingGuptaEfficiency.Name = "ucrChkKlingGuptaEfficiency"
         Me.ucrChkKlingGuptaEfficiency.Size = New System.Drawing.Size(87, 20)
@@ -205,7 +228,7 @@ Partial Class ucrContinuousVerification
         'ucrChkVolumetricEfficiency
         '
         Me.ucrChkVolumetricEfficiency.Checked = False
-        Me.ucrChkVolumetricEfficiency.Location = New System.Drawing.Point(306, 58)
+        Me.ucrChkVolumetricEfficiency.Location = New System.Drawing.Point(306, 43)
         Me.ucrChkVolumetricEfficiency.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkVolumetricEfficiency.Name = "ucrChkVolumetricEfficiency"
         Me.ucrChkVolumetricEfficiency.Size = New System.Drawing.Size(87, 20)
@@ -214,7 +237,7 @@ Partial Class ucrContinuousVerification
         'ucrChkPercentBias
         '
         Me.ucrChkPercentBias.Checked = False
-        Me.ucrChkPercentBias.Location = New System.Drawing.Point(8, 116)
+        Me.ucrChkPercentBias.Location = New System.Drawing.Point(8, 101)
         Me.ucrChkPercentBias.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkPercentBias.Name = "ucrChkPercentBias"
         Me.ucrChkPercentBias.Size = New System.Drawing.Size(87, 20)
@@ -223,7 +246,7 @@ Partial Class ucrContinuousVerification
         'ucrChkModNashSutcliffeEff
         '
         Me.ucrChkModNashSutcliffeEff.Checked = False
-        Me.ucrChkModNashSutcliffeEff.Location = New System.Drawing.Point(94, 95)
+        Me.ucrChkModNashSutcliffeEff.Location = New System.Drawing.Point(94, 80)
         Me.ucrChkModNashSutcliffeEff.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkModNashSutcliffeEff.Name = "ucrChkModNashSutcliffeEff"
         Me.ucrChkModNashSutcliffeEff.Size = New System.Drawing.Size(87, 20)
@@ -232,7 +255,7 @@ Partial Class ucrContinuousVerification
         'ucrChkMeanError
         '
         Me.ucrChkMeanError.Checked = False
-        Me.ucrChkMeanError.Location = New System.Drawing.Point(8, 34)
+        Me.ucrChkMeanError.Location = New System.Drawing.Point(8, 19)
         Me.ucrChkMeanError.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkMeanError.Name = "ucrChkMeanError"
         Me.ucrChkMeanError.Size = New System.Drawing.Size(87, 20)
@@ -241,7 +264,7 @@ Partial Class ucrContinuousVerification
         'ucrChkMeanSquaredError
         '
         Me.ucrChkMeanSquaredError.Checked = False
-        Me.ucrChkMeanSquaredError.Location = New System.Drawing.Point(306, 79)
+        Me.ucrChkMeanSquaredError.Location = New System.Drawing.Point(306, 64)
         Me.ucrChkMeanSquaredError.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkMeanSquaredError.Name = "ucrChkMeanSquaredError"
         Me.ucrChkMeanSquaredError.Size = New System.Drawing.Size(87, 20)
@@ -250,26 +273,16 @@ Partial Class ucrContinuousVerification
         'ucrChkRootMeanSquaredError
         '
         Me.ucrChkRootMeanSquaredError.Checked = False
-        Me.ucrChkRootMeanSquaredError.Location = New System.Drawing.Point(8, 74)
+        Me.ucrChkRootMeanSquaredError.Location = New System.Drawing.Point(8, 59)
         Me.ucrChkRootMeanSquaredError.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkRootMeanSquaredError.Name = "ucrChkRootMeanSquaredError"
         Me.ucrChkRootMeanSquaredError.Size = New System.Drawing.Size(87, 20)
         Me.ucrChkRootMeanSquaredError.TabIndex = 3
         '
-        'cmdHelp
-        '
-        Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdHelp.Location = New System.Drawing.Point(331, 120)
-        Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(68, 23)
-        Me.cmdHelp.TabIndex = 22
-        Me.cmdHelp.Text = "Help"
-        Me.cmdHelp.UseVisualStyleBackColor = True
-        '
         'ucrChkNormRootMeanSquaredError
         '
         Me.ucrChkNormRootMeanSquaredError.Checked = False
-        Me.ucrChkNormRootMeanSquaredError.Location = New System.Drawing.Point(8, 95)
+        Me.ucrChkNormRootMeanSquaredError.Location = New System.Drawing.Point(8, 80)
         Me.ucrChkNormRootMeanSquaredError.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkNormRootMeanSquaredError.Name = "ucrChkNormRootMeanSquaredError"
         Me.ucrChkNormRootMeanSquaredError.Size = New System.Drawing.Size(87, 20)
@@ -278,7 +291,7 @@ Partial Class ucrContinuousVerification
         'ucrChkMeanAbsoluteError
         '
         Me.ucrChkMeanAbsoluteError.Checked = False
-        Me.ucrChkMeanAbsoluteError.Location = New System.Drawing.Point(8, 54)
+        Me.ucrChkMeanAbsoluteError.Location = New System.Drawing.Point(8, 39)
         Me.ucrChkMeanAbsoluteError.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkMeanAbsoluteError.Name = "ucrChkMeanAbsoluteError"
         Me.ucrChkMeanAbsoluteError.Size = New System.Drawing.Size(87, 20)
@@ -287,7 +300,7 @@ Partial Class ucrContinuousVerification
         'ucrChkIndexOfAgreement
         '
         Me.ucrChkIndexOfAgreement.Checked = False
-        Me.ucrChkIndexOfAgreement.Location = New System.Drawing.Point(204, 57)
+        Me.ucrChkIndexOfAgreement.Location = New System.Drawing.Point(204, 42)
         Me.ucrChkIndexOfAgreement.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkIndexOfAgreement.Name = "ucrChkIndexOfAgreement"
         Me.ucrChkIndexOfAgreement.Size = New System.Drawing.Size(87, 20)
@@ -296,7 +309,7 @@ Partial Class ucrContinuousVerification
         'ucrChkSelectAll
         '
         Me.ucrChkSelectAll.Checked = False
-        Me.ucrChkSelectAll.Location = New System.Drawing.Point(19, 1)
+        Me.ucrChkSelectAll.Location = New System.Drawing.Point(22, 0)
         Me.ucrChkSelectAll.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkSelectAll.Name = "ucrChkSelectAll"
         Me.ucrChkSelectAll.Size = New System.Drawing.Size(87, 20)
@@ -305,7 +318,7 @@ Partial Class ucrContinuousVerification
         'ucrChkMAE
         '
         Me.ucrChkMAE.Checked = False
-        Me.ucrChkMAE.Location = New System.Drawing.Point(22, 71)
+        Me.ucrChkMAE.Location = New System.Drawing.Point(22, 59)
         Me.ucrChkMAE.Name = "ucrChkMAE"
         Me.ucrChkMAE.Size = New System.Drawing.Size(154, 20)
         Me.ucrChkMAE.TabIndex = 10
@@ -313,19 +326,10 @@ Partial Class ucrContinuousVerification
         'ucrChkMSE
         '
         Me.ucrChkMSE.Checked = False
-        Me.ucrChkMSE.Location = New System.Drawing.Point(162, 41)
+        Me.ucrChkMSE.Location = New System.Drawing.Point(204, 15)
         Me.ucrChkMSE.Name = "ucrChkMSE"
         Me.ucrChkMSE.Size = New System.Drawing.Size(161, 20)
         Me.ucrChkMSE.TabIndex = 9
-        '
-        'grpVerification
-        '
-        Me.grpVerification.Location = New System.Drawing.Point(11, 25)
-        Me.grpVerification.Name = "grpVerification"
-        Me.grpVerification.Size = New System.Drawing.Size(409, 81)
-        Me.grpVerification.TabIndex = 12
-        Me.grpVerification.TabStop = False
-        Me.grpVerification.Text = "Verification"
         '
         'ucrContinuousVerification
         '
@@ -335,12 +339,12 @@ Partial Class ucrContinuousVerification
         Me.Controls.Add(Me.grpHyroGOF)
         Me.Controls.Add(Me.ucrChkSelectAll)
         Me.Controls.Add(Me.ucrChkMAE)
-        Me.Controls.Add(Me.ucrChkMSE)
         Me.Controls.Add(Me.grpVerification)
         Me.Name = "ucrContinuousVerification"
-        Me.Size = New System.Drawing.Size(430, 265)
+        Me.Size = New System.Drawing.Size(430, 240)
         Me.grpHyroGOF.ResumeLayout(False)
         Me.grpHyroGOF.PerformLayout()
+        Me.grpVerification.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -373,4 +377,5 @@ Partial Class ucrContinuousVerification
     Friend WithEvents ucrChkMAE As ucrCheck
     Friend WithEvents ucrChkMSE As ucrCheck
     Friend WithEvents grpVerification As GroupBox
+    Friend WithEvents ttVerificationSummaries As ToolTip
 End Class
