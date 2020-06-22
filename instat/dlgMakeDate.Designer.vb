@@ -50,6 +50,8 @@ Partial Class dlgMakeDate
         Me.lblDayofYear = New System.Windows.Forms.Label()
         Me.ucrReceiverDayTwo = New instat.ucrReceiverSingle()
         Me.grpSingleColumn = New System.Windows.Forms.GroupBox()
+        Me.grpFormats = New System.Windows.Forms.GroupBox()
+        Me.txtTextDateFormats = New System.Windows.Forms.RichTextBox()
         Me.lblUnits = New System.Windows.Forms.Label()
         Me.ucrDtpSpecifyOrigin = New instat.ucrDateTimePicker()
         Me.ucrInputUnits = New instat.ucrInputComboBox()
@@ -101,13 +103,11 @@ Partial Class dlgMakeDate
         Me.ucrSaveDate = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorMakeDate = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.txtTextDateFormats = New System.Windows.Forms.RichTextBox()
-        Me.grpFormats = New System.Windows.Forms.GroupBox()
         Me.grpTwoColumns.SuspendLayout()
         Me.grpSingleColumn.SuspendLayout()
+        Me.grpFormats.SuspendLayout()
         Me.grpFormatField.SuspendLayout()
         Me.grpThreeColumns.SuspendLayout()
-        Me.grpFormats.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpTwoColumns
@@ -197,6 +197,18 @@ Partial Class dlgMakeDate
         resources.ApplyResources(Me.grpSingleColumn, "grpSingleColumn")
         Me.grpSingleColumn.Name = "grpSingleColumn"
         Me.grpSingleColumn.TabStop = False
+        '
+        'grpFormats
+        '
+        Me.grpFormats.Controls.Add(Me.txtTextDateFormats)
+        resources.ApplyResources(Me.grpFormats, "grpFormats")
+        Me.grpFormats.Name = "grpFormats"
+        Me.grpFormats.TabStop = False
+        '
+        'txtTextDateFormats
+        '
+        resources.ApplyResources(Me.txtTextDateFormats, "txtTextDateFormats")
+        Me.txtTextDateFormats.Name = "txtTextDateFormats"
         '
         'lblUnits
         '
@@ -577,18 +589,6 @@ Partial Class dlgMakeDate
         resources.ApplyResources(Me.ucrSelectorMakeDate, "ucrSelectorMakeDate")
         Me.ucrSelectorMakeDate.Name = "ucrSelectorMakeDate"
         '
-        'txtTextDateFormats
-        '
-        resources.ApplyResources(Me.txtTextDateFormats, "txtTextDateFormats")
-        Me.txtTextDateFormats.Name = "txtTextDateFormats"
-        '
-        'grpFormats
-        '
-        Me.grpFormats.Controls.Add(Me.txtTextDateFormats)
-        resources.ApplyResources(Me.grpFormats, "grpFormats")
-        Me.grpFormats.Name = "grpFormats"
-        Me.grpFormats.TabStop = False
-        '
         'dlgMakeDate
         '
         resources.ApplyResources(Me, "$this")
@@ -612,11 +612,11 @@ Partial Class dlgMakeDate
         Me.grpTwoColumns.PerformLayout()
         Me.grpSingleColumn.ResumeLayout(False)
         Me.grpSingleColumn.PerformLayout()
+        Me.grpFormats.ResumeLayout(False)
         Me.grpFormatField.ResumeLayout(False)
         Me.grpFormatField.PerformLayout()
         Me.grpThreeColumns.ResumeLayout(False)
         Me.grpThreeColumns.PerformLayout()
-        Me.grpFormats.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
