@@ -970,7 +970,7 @@
     <value>11</value>
   </data>
   <data name="cmdDisplayOptions.Text" xml:space="preserve">
-    <value>Display Options...</value>
+    <value>Display Options</value>
   </data>
   <data name="&gt;&gt;cmdDisplayOptions.Name" xml:space="preserve">
     <value>cmdDisplayOptions</value>
