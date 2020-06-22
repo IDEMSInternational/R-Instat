@@ -28,16 +28,6 @@ Public Class ucrContinuousVerification
     End Sub
 
     Private Sub InitialiseControls()
-        'Verification Options
-        ucrChkME.SetParameter(New RParameter("ME", 0), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "ME" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkME.SetText("Mean error")
-
-        ucrChkMAE.SetParameter(New RParameter("MAE", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "MAE" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkMAE.SetText("Mean absolute error")
-
-        ucrChkMSE.SetParameter(New RParameter("MSE", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "MSE" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkMSE.SetText("Mean squared error")
-
 
         'HydroGOF Options
         ucrChkMeanError.SetParameter(New RParameter("me", 31), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "me" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
@@ -120,6 +110,10 @@ Public Class ucrContinuousVerification
         ucrChkSumOfSquaredResiduals.SetText("ssq")
         ttVerificationSummaries.SetToolTip(ucrChkSumOfSquaredResiduals.chkCheck, "Sum of squared residuals")
 
+        ucrChkCorrelations.SetParameter(New RParameter("summary_cor", 49), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_cor" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkCorrelations.SetText("r")
+        ttVerificationSummaries.SetToolTip(ucrChkCorrelations.chkCheck, "Pearson Correlation")
+
         ttVerificationSummaries.SetToolTip(ucrInputJmia.txtInput, "numeric value, with the exponent to be used in the computation of the modified index of agreement. The default value is j=1")
 
         ucrInputJmia.SetParameter(New RParameter("j", 50))
@@ -129,7 +123,7 @@ Public Class ucrContinuousVerification
 
         ucrChkSelectAll.SetText("Select all")
 
-        lstSummaryCheckboxes.AddRange({ucrChkME, ucrChkMAE, ucrChkMSE, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency})
+        lstSummaryCheckboxes.AddRange({ucrChkCorrelations, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency})
 
         For Each ctr In lstSummaryCheckboxes
             ctr.SetParameterIncludeArgumentName(False)

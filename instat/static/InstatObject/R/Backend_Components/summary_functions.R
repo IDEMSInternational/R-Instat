@@ -1180,27 +1180,6 @@ VE <- function(x, y, na.rm = FALSE, na_type = "", ...){
 
 #Verification package
 
-##Continuous/Continuous
-
-###Mean error (ME)
-ME <- function(x, y, frcst.type, obs.type, ...){
-  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
-  return(A$ME)  
-}
-
-###Mean-squared error (MSE)
-MSE <- function(x, y, frcst.type, obs.type, ...){
-  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
-  return(A$MSE)  
-}
-
-###Mean absolute error (MAE)
-MAE <- function(x, y, frcst.type, obs.type, ...){
-  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
-  return(A$MAE)  
-}
-
-
 ##Categorical/Categorical
 
 ###Pierce Skill Score

@@ -226,7 +226,7 @@ Partial Class dlgCompareSummary
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgCompareSummary"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Summary"
+        Me.Text = "Verification Summaries"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

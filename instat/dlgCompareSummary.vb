@@ -128,6 +128,16 @@ Public Class dlgCompareSummary
         End If
     End Sub
 
+    Private Sub ucrChkIgnoreMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIgnoreMissing.ControlValueChanged
+        If ucrChkIgnoreMissing.Checked Then
+            If sdgVerificationSummaries.ucrContinuousVerification.ucrChkCorrelations.Checked Then
+                clsSummaryFunction.AddParameter("use", Chr(34) & "'complete.obs'" & Chr(34), iPosition:=8)
+            End If
+        Else
+            clsSummaryFunction.RemoveParameterByName("use")
+        End If
+    End Sub
+
     Private Sub ucrReceiverStation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverSatellite.ControlContentsChanged
         TestOkEnabled()
     End Sub
