@@ -78,6 +78,7 @@ Public Class dlgOneVarFitModel
 
         ucrPnlGeneralExactCase.AddRadioButton(rdoGeneralCase)
         ucrPnlGeneralExactCase.AddRadioButton(rdoTest)
+        ucrPnlGeneralExactCase.AddRadioButton(rdoEstimate)
 
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoGeneralCase, "fitdist")
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoTest, "fitdist", False)
@@ -125,7 +126,7 @@ Public Class dlgOneVarFitModel
         dctucrOperator.Add("(!=)", "!=")
 
         'Disabled for now
-        rdoTest.Enabled = False
+        rdoTest.Enabled = True
         'ucrOperator.SetItems(dctucrOperator)
         ' ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
 
