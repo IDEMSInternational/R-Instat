@@ -110,7 +110,7 @@ Partial Class dlgOneVarFitModel
         Me.rdoTest.FlatAppearance.BorderSize = 2
         Me.rdoTest.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoTest.Location = New System.Drawing.Point(194, 11)
+        Me.rdoTest.Location = New System.Drawing.Point(152, 11)
         Me.rdoTest.Name = "rdoTest"
         Me.rdoTest.Size = New System.Drawing.Size(126, 28)
         Me.rdoTest.TabIndex = 41
@@ -125,7 +125,7 @@ Partial Class dlgOneVarFitModel
         Me.rdoGeneralCase.FlatAppearance.BorderSize = 2
         Me.rdoGeneralCase.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoGeneralCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoGeneralCase.Location = New System.Drawing.Point(76, 11)
+        Me.rdoGeneralCase.Location = New System.Drawing.Point(34, 11)
         Me.rdoGeneralCase.Name = "rdoGeneralCase"
         Me.rdoGeneralCase.Size = New System.Drawing.Size(122, 28)
         Me.rdoGeneralCase.TabIndex = 40
@@ -356,9 +356,9 @@ Partial Class dlgOneVarFitModel
         '
         'ucrPnlGeneralExactCase
         '
-        Me.ucrPnlGeneralExactCase.Location = New System.Drawing.Point(67, 7)
+        Me.ucrPnlGeneralExactCase.Location = New System.Drawing.Point(34, 7)
         Me.ucrPnlGeneralExactCase.Name = "ucrPnlGeneralExactCase"
-        Me.ucrPnlGeneralExactCase.Size = New System.Drawing.Size(266, 35)
+        Me.ucrPnlGeneralExactCase.Size = New System.Drawing.Size(371, 35)
         Me.ucrPnlGeneralExactCase.TabIndex = 39
         '
         'ucrSaveModel
@@ -366,7 +366,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrSaveModel.Location = New System.Drawing.Point(10, 286)
         Me.ucrSaveModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveModel.Name = "ucrSaveModel"
-        Me.ucrSaveModel.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveModel.Size = New System.Drawing.Size(277, 24)
         Me.ucrSaveModel.TabIndex = 38
         '
         'ucrDistributionChoice
@@ -413,7 +413,7 @@ Partial Class dlgOneVarFitModel
         Me.rdoEstimate.FlatAppearance.BorderSize = 2
         Me.rdoEstimate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoEstimate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoEstimate.Location = New System.Drawing.Point(319, 11)
+        Me.rdoEstimate.Location = New System.Drawing.Point(277, 11)
         Me.rdoEstimate.Name = "rdoEstimate"
         Me.rdoEstimate.Size = New System.Drawing.Size(126, 28)
         Me.rdoEstimate.TabIndex = 45
