@@ -477,16 +477,16 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShiftNumeric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 262</value>
+    <value>17, 262</value>
   </data>
   <data name="lblShiftNumeric.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
+    <value>49, 13</value>
   </data>
   <data name="lblShiftNumeric.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
   <data name="lblShiftNumeric.Text" xml:space="preserve">
-    <value>Numeric</value>
+    <value>Numeric:</value>
   </data>
   <data name="&gt;&gt;lblShiftNumeric.Name" xml:space="preserve">
     <value>lblShiftNumeric</value>
@@ -597,16 +597,16 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShiftAbbr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 290</value>
+    <value>17, 290</value>
   </data>
   <data name="lblShiftAbbr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 13</value>
+    <value>35, 13</value>
   </data>
   <data name="lblShiftAbbr.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
   <data name="lblShiftAbbr.Text" xml:space="preserve">
-    <value>Abbr.</value>
+    <value>Abbr.:</value>
   </data>
   <data name="&gt;&gt;lblShiftAbbr.Name" xml:space="preserve">
     <value>lblShiftAbbr</value>
@@ -771,16 +771,16 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShift.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 318</value>
+    <value>17, 318</value>
   </data>
   <data name="lblShift.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 13</value>
+    <value>38, 13</value>
   </data>
   <data name="lblShift.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
   <data name="lblShift.Text" xml:space="preserve">
-    <value>Name</value>
+    <value>Name:</value>
   </data>
   <data name="&gt;&gt;lblShift.Name" xml:space="preserve">
     <value>lblShift</value>
@@ -996,16 +996,16 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblNumeric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 35</value>
+    <value>8, 36</value>
   </data>
   <data name="lblNumeric.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
+    <value>49, 13</value>
   </data>
   <data name="lblNumeric.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="lblNumeric.Text" xml:space="preserve">
-    <value>Numeric</value>
+    <value>Numeric:</value>
   </data>
   <data name="&gt;&gt;lblNumeric.Name" xml:space="preserve">
     <value>lblNumeric</value>
@@ -1176,16 +1176,16 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 91</value>
+    <value>8, 92</value>
   </data>
   <data name="lblName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 13</value>
+    <value>38, 13</value>
   </data>
   <data name="lblName.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="lblName.Text" xml:space="preserve">
-    <value>Name</value>
+    <value>Name:</value>
   </data>
   <data name="&gt;&gt;lblName.Name" xml:space="preserve">
     <value>lblName</value>
@@ -1323,16 +1323,16 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblAbbr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 63</value>
+    <value>8, 64</value>
   </data>
   <data name="lblAbbr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 13</value>
+    <value>35, 13</value>
   </data>
   <data name="lblAbbr.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
   <data name="lblAbbr.Text" xml:space="preserve">
-    <value>Abbr.</value>
+    <value>Abbr.:</value>
   </data>
   <data name="&gt;&gt;lblAbbr.Name" xml:space="preserve">
     <value>lblAbbr</value>
@@ -1374,7 +1374,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShifted.Location" type="System.Drawing.Point, System.Drawing">
-    <value>224, 19</value>
+    <value>219, 19</value>
   </data>
   <data name="lblShifted.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
@@ -1398,13 +1398,13 @@ Year (365)</value>
     <value>0</value>
   </data>
   <data name="ucrInputComboBoxStartingMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 15</value>
+    <value>99, 15</value>
   </data>
   <data name="ucrInputComboBoxStartingMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 12, 9, 12</value>
   </data>
   <data name="ucrInputComboBoxStartingMonth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>114, 21</value>
   </data>
   <data name="ucrInputComboBoxStartingMonth.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1428,7 +1428,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShiftStartingMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
+    <value>8, 19</value>
   </data>
   <data name="lblShiftStartingMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 13</value>
@@ -1519,9 +1519,6 @@ Year (365)</value>
   </data>
   <data name="&gt;&gt;ucrSelectorUseDate.ZOrder" xml:space="preserve">
     <value>28</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
