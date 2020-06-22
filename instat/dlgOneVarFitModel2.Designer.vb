@@ -70,6 +70,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.rdoEstimate = New System.Windows.Forms.RadioButton()
         Me.grpConditions.SuspendLayout()
         Me.grpVarAndWilcoxSign.SuspendLayout()
         Me.grpVarAndWilcox.SuspendLayout()
@@ -405,11 +406,27 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
+        'rdoEstimate
+        '
+        Me.rdoEstimate.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoEstimate.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoEstimate.FlatAppearance.BorderSize = 2
+        Me.rdoEstimate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoEstimate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoEstimate.Location = New System.Drawing.Point(319, 11)
+        Me.rdoEstimate.Name = "rdoEstimate"
+        Me.rdoEstimate.Size = New System.Drawing.Size(126, 28)
+        Me.rdoEstimate.TabIndex = 45
+        Me.rdoEstimate.Text = "Estimate"
+        Me.rdoEstimate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoEstimate.UseVisualStyleBackColor = True
+        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 374)
+        Me.ClientSize = New System.Drawing.Size(454, 374)
+        Me.Controls.Add(Me.rdoEstimate)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.ucrChkConvertVariate)
         Me.Controls.Add(Me.rdoTest)
@@ -473,4 +490,5 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents ucrPnlWilcoxVarTest As UcrPanel
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents cmdFittingOptions As Button
+    Friend WithEvents rdoEstimate As RadioButton
 End Class
