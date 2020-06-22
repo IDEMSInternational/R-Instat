@@ -64,7 +64,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrChkMin = New instat.ucrCheck()
         Me.ucrChkMean = New instat.ucrCheck()
         Me.rdoGraphByYear = New System.Windows.Forms.RadioButton()
-        Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrInputComboZero = New instat.ucrInputComboBox()
         Me.ucrInputComboMissing = New instat.ucrInputComboBox()
@@ -80,6 +79,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverSingleElements = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.grpGraph.SuspendLayout()
         Me.grpSummary.SuspendLayout()
         Me.SuspendLayout()
@@ -256,15 +256,6 @@ Partial Class dlgDisplayDailyData
         Me.rdoGraphByYear.Name = "rdoGraphByYear"
         Me.rdoGraphByYear.UseVisualStyleBackColor = True
         '
-        'ucrReceiverMultipleElements
-        '
-        Me.ucrReceiverMultipleElements.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultipleElements, "ucrReceiverMultipleElements")
-        Me.ucrReceiverMultipleElements.Name = "ucrReceiverMultipleElements"
-        Me.ucrReceiverMultipleElements.Selector = Nothing
-        Me.ucrReceiverMultipleElements.strNcFilePath = ""
-        Me.ucrReceiverMultipleElements.ucrSelector = Nothing
-        '
         'ucrReceiverElement
         '
         Me.ucrReceiverElement.frmParent = Me
@@ -376,14 +367,23 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverSingleElements.strNcFilePath = ""
         Me.ucrReceiverSingleElements.ucrSelector = Nothing
         '
+        'ucrReceiverMultipleElements
+        '
+        Me.ucrReceiverMultipleElements.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultipleElements, "ucrReceiverMultipleElements")
+        Me.ucrReceiverMultipleElements.Name = "ucrReceiverMultipleElements"
+        Me.ucrReceiverMultipleElements.Selector = Nothing
+        Me.ucrReceiverMultipleElements.strNcFilePath = ""
+        Me.ucrReceiverMultipleElements.ucrSelector = Nothing
+        '
         'dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverMultipleElements)
         Me.Controls.Add(Me.rdoGraphByYear)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.lblElements)
-        Me.Controls.Add(Me.ucrReceiverMultipleElements)
         Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrInputComboZero)
         Me.Controls.Add(Me.ucrInputComboMissing)
@@ -448,7 +448,6 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrInputComboMissing As ucrInputComboBox
     Friend WithEvents ucrInputComboTrace As ucrInputComboBox
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
-    Friend WithEvents ucrReceiverMultipleElements As ucrReceiverMultiple
     Friend WithEvents lblElements As Label
     Friend WithEvents ucrChkSum As ucrCheck
     Friend WithEvents ucrChkMax As ucrCheck
@@ -460,4 +459,5 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrChkSumMissing As ucrCheck
     Friend WithEvents rdoGraphByYear As RadioButton
     Friend WithEvents ucrReceiverSingleElements As ucrReceiverSingle
+    Friend WithEvents ucrReceiverMultipleElements As ucrReceiverMultiple
 End Class
