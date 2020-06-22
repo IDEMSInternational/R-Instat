@@ -178,7 +178,7 @@
     <value>True</value>
   </data>
   <data name="lblHiddenColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 34</value>
+    <value>248, 44</value>
   </data>
   <data name="lblHiddenColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -214,7 +214,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverHiddenColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 49</value>
+    <value>248, 59</value>
   </data>
   <data name="ucrReceiverHiddenColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

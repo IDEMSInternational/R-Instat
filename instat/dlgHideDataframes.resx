@@ -196,7 +196,7 @@
     <value>True</value>
   </data>
   <data name="lblHiddenDataFrames.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 34</value>
+    <value>248, 31</value>
   </data>
   <data name="lblHiddenDataFrames.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 13</value>
@@ -241,7 +241,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverMultiple.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 49</value>
+    <value>248, 46</value>
   </data>
   <data name="ucrReceiverMultiple.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
