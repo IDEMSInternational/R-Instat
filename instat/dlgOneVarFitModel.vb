@@ -643,6 +643,11 @@ Public Class dlgOneVarFitModel
         BinomialConditions()
         SetDistributions()
         DataTypeAccepted()
+        If rdoTest.Checked Then
+            ucrDistributionChoice.lblDistributionType.Text = "Test:"
+            ucrSaveModel.SetCheckBoxText("Save Test")
+            ucrSaveModel.SetPrefix("test")
+        End If
     End Sub
 
     Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
