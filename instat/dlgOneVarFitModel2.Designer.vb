@@ -413,7 +413,7 @@ Partial Class dlgOneVarFitModel
         Me.rdoEstimate.FlatAppearance.BorderSize = 2
         Me.rdoEstimate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoEstimate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoEstimate.Location = New System.Drawing.Point(319, 11)
+        Me.rdoEstimate.Location = New System.Drawing.Point(320, 11)
         Me.rdoEstimate.Name = "rdoEstimate"
         Me.rdoEstimate.Size = New System.Drawing.Size(126, 28)
         Me.rdoEstimate.TabIndex = 45

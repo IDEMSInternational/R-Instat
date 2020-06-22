@@ -81,6 +81,7 @@ Public Class dlgOneVarFitModel
 
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoGeneralCase, "fitdist")
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoTest, "fitdist", False)
+        ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoEstimate, "fitdist", False)
 
         ucrPnlStats.AddRadioButton(rdoEnorm)
         ucrPnlStats.AddRadioButton(rdoMeanWilcox)
