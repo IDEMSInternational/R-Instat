@@ -426,312 +426,6 @@
   <data name="&gt;&gt;rdoReplaceAll.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;cmdClear.Name" xml:space="preserve">
-    <value>cmdClear</value>
-  </data>
-  <data name="&gt;&gt;cmdClear.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdClear.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdClear.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlash.Name" xml:space="preserve">
-    <value>cmdBackSlash</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlash.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlash.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlash.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cmdWBackSlash.Name" xml:space="preserve">
-    <value>cmdWBackSlash</value>
-  </data>
-  <data name="&gt;&gt;cmdWBackSlash.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdWBackSlash.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdWBackSlash.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;cmdDollarSign.Name" xml:space="preserve">
-    <value>cmdDollarSign</value>
-  </data>
-  <data name="&gt;&gt;cmdDollarSign.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdDollarSign.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdDollarSign.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenCloseParenthesis.Name" xml:space="preserve">
-    <value>cmdOpenCloseParenthesis</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenCloseParenthesis.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenCloseParenthesis.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenCloseParenthesis.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashd.Name" xml:space="preserve">
-    <value>cmdBackSlashd</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashd.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashd.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashs.Name" xml:space="preserve">
-    <value>cmdBackSlashs</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashs.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashs.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;cmdPower.Name" xml:space="preserve">
-    <value>cmdPower</value>
-  </data>
-  <data name="&gt;&gt;cmdPower.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdPower.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdPower.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenBracketCaretClosedBracket.Name" xml:space="preserve">
-    <value>cmdOpenBracketCaretClosedBracket</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenBracketCaretClosedBracket.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenBracketCaretClosedBracket.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenBracketCaretClosedBracket.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;cmdPlus.Name" xml:space="preserve">
-    <value>cmdPlus</value>
-  </data>
-  <data name="&gt;&gt;cmdPlus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdPlus.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdPlus.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashw.Name" xml:space="preserve">
-    <value>cmdBackSlashw</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashw.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashw.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashw.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;cmdMultiply.Name" xml:space="preserve">
-    <value>cmdMultiply</value>
-  </data>
-  <data name="&gt;&gt;cmdMultiply.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdMultiply.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdMultiply.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenCloseBrace.Name" xml:space="preserve">
-    <value>cmdOpenCloseBrace</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenCloseBrace.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenCloseBrace.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenCloseBrace.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenClosedBracket.Name" xml:space="preserve">
-    <value>cmdOpenClosedBracket</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenClosedBracket.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenClosedBracket.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdOpenClosedBracket.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;cmdSingleQuote.Name" xml:space="preserve">
-    <value>cmdSingleQuote</value>
-  </data>
-  <data name="&gt;&gt;cmdSingleQuote.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdSingleQuote.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdSingleQuote.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;cmdQuote.Name" xml:space="preserve">
-    <value>cmdQuote</value>
-  </data>
-  <data name="&gt;&gt;cmdQuote.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdQuote.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdQuote.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;cmdQuestionMark.Name" xml:space="preserve">
-    <value>cmdQuestionMark</value>
-  </data>
-  <data name="&gt;&gt;cmdQuestionMark.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdQuestionMark.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdQuestionMark.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;cmdDBackSlah.Name" xml:space="preserve">
-    <value>cmdDBackSlah</value>
-  </data>
-  <data name="&gt;&gt;cmdDBackSlah.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdDBackSlah.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdDBackSlah.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;cmdStar.Name" xml:space="preserve">
-    <value>cmdStar</value>
-  </data>
-  <data name="&gt;&gt;cmdStar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdStar.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdStar.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;cmdBbackSlash.Name" xml:space="preserve">
-    <value>cmdBbackSlash</value>
-  </data>
-  <data name="&gt;&gt;cmdBbackSlash.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdBbackSlash.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdBbackSlash.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashb.Name" xml:space="preserve">
-    <value>cmdBackSlashb</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashb.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashb.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdBackSlashb.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;cmdSbackSlash.Name" xml:space="preserve">
-    <value>cmdSbackSlash</value>
-  </data>
-  <data name="&gt;&gt;cmdSbackSlash.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdSbackSlash.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdSbackSlash.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;cmdOr.Name" xml:space="preserve">
-    <value>cmdOr</value>
-  </data>
-  <data name="&gt;&gt;cmdOr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdOr.Parent" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;cmdOr.ZOrder" xml:space="preserve">
-    <value>22</value>
-  </data>
-  <data name="grpRegex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>423, 81</value>
-  </data>
-  <data name="grpRegex.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="grpRegex.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="grpRegex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 141</value>
-  </data>
-  <data name="grpRegex.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="grpRegex.Text" xml:space="preserve">
-    <value>Regex keyboard</value>
-  </data>
-  <data name="&gt;&gt;grpRegex.Name" xml:space="preserve">
-    <value>grpRegex</value>
-  </data>
-  <data name="&gt;&gt;grpRegex.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpRegex.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpRegex.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="cmdClear.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.75pt</value>
   </data>
@@ -1427,6 +1121,36 @@
   </data>
   <data name="&gt;&gt;cmdOr.ZOrder" xml:space="preserve">
     <value>22</value>
+  </data>
+  <data name="grpRegex.Location" type="System.Drawing.Point, System.Drawing">
+    <value>423, 81</value>
+  </data>
+  <data name="grpRegex.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="grpRegex.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="grpRegex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 141</value>
+  </data>
+  <data name="grpRegex.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="grpRegex.Text" xml:space="preserve">
+    <value>Regex Keyboard</value>
+  </data>
+  <data name="&gt;&gt;grpRegex.Name" xml:space="preserve">
+    <value>grpRegex</value>
+  </data>
+  <data name="&gt;&gt;grpRegex.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpRegex.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpRegex.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="rdoRegex.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
