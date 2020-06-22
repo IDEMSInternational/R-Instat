@@ -651,6 +651,10 @@ Public Class dlgOneVarFitModel
             ucrDistributionChoice.lblDistributionType.Text = "Estimate:"
             ucrSaveModel.SetCheckBoxText("Save Estimate")
             ucrSaveModel.SetPrefix("ci")
+        Else
+            ucrDistributionChoice.lblDistributionType.Text = "Distribution:"
+            ucrSaveModel.SetCheckBoxText("Save Model")
+            ucrSaveModel.SetPrefix("dist")
         End If
     End Sub
 
