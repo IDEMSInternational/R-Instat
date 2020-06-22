@@ -593,9 +593,9 @@ Public Class dlgOneVarFitModel
             'rdoVarSign.Visible = False
             '  rdoEnorm.Visible = False
             grpVarAndWilcoxSign.Hide()
-        ElseIf rdoTest.Checked Then
-            cmdFittingOptions.Visible = False
-            cmdDisplayOptions.Visible = False
+        ElseIf (rdoTest.Checked AndAlso rdoEstimate.Checked) Then
+            cmdFittingOptions.Visible = True
+            cmdDisplayOptions.Visible = True
             ucrChkConvertVariate.Visible = False
             grpConditions.Visible = True
             If ucrDistributionChoice.clsCurrDistribution.bIsExact = True Then
