@@ -289,7 +289,7 @@ Public Class dlgStringHandling
             Me.Size = New Size(iFullWidth, Me.Height)
         Else
             grpRegex.Visible = False
-            Me.Size = New Size(536, Me.Height)
+            Me.Size = New Size(iFullWidth / 1.29, Me.Height)
         End If
     End Sub
 
