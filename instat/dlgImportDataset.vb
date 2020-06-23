@@ -203,9 +203,6 @@ Public Class dlgImportDataset
         ucrChkStringsAsFactorsCSV.SetParameter(New RParameter("stringsAsFactors"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkStringsAsFactorsCSV.SetRDefault("FALSE")
 
-        ucrInputMissingValueStringCSV.SetParameter(New RParameter("na.strings"))
-        ucrInputMissingValueStringCSV.SetRDefault(Chr(34) & "NA" & Chr(34))
-
         ucrInputEncodingCSV.SetParameter(New RParameter("encoding", 1))
         dctucrInputEncodingCSV.Add("unknown", Chr(34) & "unknown" & Chr(34))
         dctucrInputEncodingCSV.Add("UTF-8", Chr(34) & "UTF-8" & Chr(34))
@@ -257,8 +254,6 @@ Public Class dlgImportDataset
 
         '##############################################################
         'EXCEL controls
-        'ucrInputMissingValueStringExcel.SetParameter(New RParameter("na"))
-        'ucrInputMissingValueStringExcel.SetRDefault(Chr(34) & "" & Chr(34))
 
         ucrChkTrimWSExcel.SetText("Trim Trailing White Space")
         ucrChkTrimWSExcel.SetParameter(New RParameter("trim_ws"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
@@ -510,7 +505,6 @@ Public Class dlgImportDataset
         ucrInputDecimalCSV.SetRCode(clsImportCSV, bReset)
         ucrInputEncodingCSV.SetRCode(clsImportCSV, bReset)
         ucrChkStringsAsFactorsCSV.SetRCode(clsImportCSV, bReset)
-        ucrInputMissingValueStringCSV.SetRCode(clsImportCSV, bReset)
         ucrNudRowsToSkipCSV.SetRCode(clsImportCSV, bReset)
         ucrNudMaxRowsCSV.SetRCode(clsImportCSV, bReset)
         ucrChkMaxRowsCSV.SetRCode(clsImportCSV, bReset)
@@ -526,14 +520,12 @@ Public Class dlgImportDataset
 
         'EXCEL CONTROLS
         ucrNudRowsToSkipExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("skip"), iAdditionalPairNo:=1)
-        'ucrInputMissingValueStringExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("na"), iAdditionalPairNo:=1)
         ucrChkTrimWSExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("trim_ws"), iAdditionalPairNo:=1)
         ucrChkColumnNamesExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("col_names"), iAdditionalPairNo:=1)
         ucrNudMaxRowsExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("n_max"), iAdditionalPairNo:=1)
         ucrChkMaxRowsExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("n_max"), iAdditionalPairNo:=1)
 
         ucrNudRowsToSkipExcel.SetRCode(clsImportExcel, bReset)
-        'ucrInputMissingValueStringExcel.SetRCode(clsImportExcel, bReset)
         ucrChkTrimWSExcel.SetRCode(clsImportExcel, bReset)
         ucrChkColumnNamesExcel.SetRCode(clsImportExcel, bReset)
         ucrNudMaxRowsExcel.SetRCode(clsImportExcel, bReset)
@@ -701,7 +693,6 @@ Public Class dlgImportDataset
                         'for separtor we use the function used for csv
                         clsTempImport = clsImportCSV.Clone()
                         strRowMaxParamName = "nrows"
-                        clsTempImport.AddParameter("na.strings", Chr(34) & ucrInputMissingValueStringCSV.GetText & Chr(34))
                     Else
                         clsTempImport = clsImportFixedWidthText.Clone()
                         strRowMaxParamName = "n_max"
@@ -711,7 +702,6 @@ Public Class dlgImportDataset
                 ElseIf strFileType = "CSV" Then
                     clsTempImport = clsImportCSV.Clone()
                     strRowMaxParamName = "nrows"
-                    clsTempImport.AddParameter("na.strings", Chr(34) & ucrInputMissingValueStringCSV.GetText & Chr(34))
                 ElseIf strFileType = "XLSX" OrElse strFileType = "XLS" Then
                     If dctSelectedExcelSheets.Count = 0 Then
                         bCanImport = False
@@ -741,8 +731,6 @@ Public Class dlgImportDataset
                     End If
                     clsTempImport = clsImportExcel.Clone()
                     strRowMaxParamName = "n_max"
-                    'clsTempImport.AddParameter("na", Chr(34) & ucrInputMissingValueStringExcel.GetText & Chr(34))
-                    'clsTempImport.AddParameter("na", GetMissingValueRText) 'TODO. do we really need to call this here? Check this
                 End If
                 If clsTempImport.ContainsParameter(strRowMaxParamName) Then
                     If Integer.TryParse(clsTempImport.GetParameter(strRowMaxParamName).strArgumentValue, iTemp) Then
@@ -883,8 +871,10 @@ Public Class dlgImportDataset
         'currently we have no way of knowing which control has raised this event and therefore can't do that check
         'so instead we are using the strFileType to identify which RFunctions should be updated accordingly
         If strFileType = "XLSX" OrElse strFileType = "XLS" Then
-            clsImportExcelMulti.AddParameter("na", GetMissingValueRText)
-            clsImportExcel.AddParameter("na", GetMissingValueRText)
+            clsImportExcelMulti.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()))
+            clsImportExcel.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()))
+        ElseIf strFileType = "CSV" Then
+            clsImportCSV.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()))
         End If
         RefreshFrameView()
     End Sub
@@ -1041,27 +1031,32 @@ Public Class dlgImportDataset
         Return strCleanFileName
     End Function
 
-    Private Function GetMissingValueRText() As String
-        Dim arrStr() As String = ucrInputMissingValueStringExcel.GetText().Split(",")
-        Dim strMissingValue As String
+    ''' <summary>
+    ''' Creates an R string to be used as the parameter value for na.strings and na parameters 
+    ''' </summary>
+    ''' <param name="strText">The string that will be used to create the R Text</param>
+    ''' <returns></returns>
+    Private Function GetMissingValueRString(strText As String) As String
+        Dim arrStr() As String = strText.Split(",")
+        Dim strRmissingValueString As String
 
         'if length is < 2 return an R string else return a vector of strings for R
         If arrStr.Length = 0 Then
-            strMissingValue = ""
+            strRmissingValueString = ""
         ElseIf arrStr.Length = 1 Then
-            strMissingValue = Chr(34) & ucrInputMissingValueStringExcel.GetText() & Chr(34)
+            strRmissingValueString = Chr(34) & arrStr(0) & Chr(34)
         Else
-            strMissingValue = ""
+            strRmissingValueString = ""
             For Each strTemp As String In arrStr
-                If strMissingValue = "" Then
-                    strMissingValue = Chr(34) & strTemp.Trim & Chr(34)
+                If strRmissingValueString = "" Then
+                    strRmissingValueString = Chr(34) & strTemp.Trim & Chr(34)
                 Else
-                    strMissingValue = strMissingValue & "," & Chr(34) & strTemp.Trim & Chr(34)
+                    strRmissingValueString = strRmissingValueString & "," & Chr(34) & strTemp.Trim & Chr(34)
                 End If
             Next
-            strMissingValue = "c(" & strMissingValue & ")"
+            strRmissingValueString = "c(" & strRmissingValueString & ")"
         End If
-        Return strMissingValue
+        Return strRmissingValueString
     End Function
 
 End Class
