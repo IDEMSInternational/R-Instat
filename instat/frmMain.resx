@@ -2613,38 +2613,14 @@
   <data name="mnuStructuredSurvival.Text" xml:space="preserve">
     <value>Survival</value>
   </data>
-  <data name="mnuStructuredTimeSeriesDefine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="mnuStructuredTimeSeriesDefine.Text" xml:space="preserve">
-    <value>Define...</value>
-  </data>
-  <data name="ToolStripSeparator60.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
-  </data>
-  <data name="mnuStructuredTimeSeriesDescribe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="mnuStructuredTimeSeriesDescribe.Text" xml:space="preserve">
-    <value>Describe</value>
-  </data>
-  <data name="ToolStripSeparator61.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
-  </data>
-  <data name="mnuStructuredTimeSeriesModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="mnuStructuredTimeSeriesModel.Text" xml:space="preserve">
-    <value>Model</value>
-  </data>
-  <data name="ToolStripSeparator62.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
-  </data>
   <data name="mnuStructuredTimeSeries.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
   <data name="mnuStructuredTimeSeries.Text" xml:space="preserve">
     <value>Time Series</value>
+  </data>
+  <data name="ToolStripSeparator63.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 6</value>
   </data>
   <data name="mnuStructured.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 20</value>
@@ -4434,6 +4410,21 @@
   <data name="mnuStructuredSurvivalDefine.Text" xml:space="preserve">
     <value>Define...</value>
   </data>
+  <data name="mnuStructuredTimeSeriesDefine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuStructuredTimeSeriesDefine.Text" xml:space="preserve">
+    <value>Define...</value>
+  </data>
+  <data name="ToolStripSeparator60.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 6</value>
+  </data>
+  <data name="mnuStructuredTimeSeriesDescribe.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuStructuredTimeSeriesDescribe.Text" xml:space="preserve">
+    <value>Describe</value>
+  </data>
   <data name="mnuStructuredTimeSeriesDescribeOneVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
@@ -4446,6 +4437,15 @@
   <data name="mnuStructuredTimeSeriesDescribeGeneral.Text" xml:space="preserve">
     <value>General...</value>
   </data>
+  <data name="ToolStripSeparator61.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 6</value>
+  </data>
+  <data name="mnuStructuredTimeSeriesModel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuStructuredTimeSeriesModel.Text" xml:space="preserve">
+    <value>Model</value>
+  </data>
   <data name="mnuStructuredTimeSeriesModelOneVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
@@ -4457,6 +4457,9 @@
   </data>
   <data name="mnuStructuredTimeSeriesModelGeneral.Text" xml:space="preserve">
     <value>General...</value>
+  </data>
+  <data name="ToolStripSeparator62.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 6</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -9559,6 +9562,12 @@
     <value>ToolStripSeparator62</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator62.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator63.Name" xml:space="preserve">
+    <value>ToolStripSeparator63</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator63.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

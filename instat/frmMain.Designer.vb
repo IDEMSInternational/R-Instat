@@ -613,6 +613,7 @@ Partial Class frmMain
         Me.mnuStructuredTimeSeriesModelOneVariable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredTimeSeriesModelGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator62 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator63 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3794,7 +3795,7 @@ Partial Class frmMain
         '
         'mnuStructured
         '
-        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries})
+        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries, Me.ToolStripSeparator63})
         Me.mnuStructured.Name = "mnuStructured"
         resources.ApplyResources(Me.mnuStructured, "mnuStructured")
         '
@@ -3893,6 +3894,11 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator62.Name = "ToolStripSeparator62"
         resources.ApplyResources(Me.ToolStripSeparator62, "ToolStripSeparator62")
+        '
+        'ToolStripSeparator63
+        '
+        Me.ToolStripSeparator63.Name = "ToolStripSeparator63"
+        resources.ApplyResources(Me.ToolStripSeparator63, "ToolStripSeparator63")
         '
         'frmMain
         '
@@ -4514,4 +4520,5 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredTimeSeriesModelOneVariable As ToolStripMenuItem
     Friend WithEvents mnuStructuredTimeSeriesModelGeneral As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator62 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator63 As ToolStripSeparator
 End Class
