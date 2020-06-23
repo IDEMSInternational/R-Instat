@@ -111,12 +111,45 @@ Public Class dlgCompareSummary
     End Sub
 
     Private Sub ucrPnlObservationType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlObservationType.ControlValueChanged
+        SetSelectorDataTypes()
         If rdoContinuous.Checked Then
             clsSummaryFunction.AddParameter("frcst.type", Chr(34) & "'cont'" & Chr(34), iPosition:=5)
+            sdgVerificationSummaries.tbBinary.Enabled = False
+            sdgVerificationSummaries.tbCategorical.Enabled = False
+            sdgVerificationSummaries.tbContinuous.Enabled = True
         ElseIf rdoBinary.Checked Then
             clsSummaryFunction.AddParameter("frcst.type", Chr(34) & "'binary'" & Chr(34), iPosition:=5)
+            sdgVerificationSummaries.tbBinary.Enabled = True
+            sdgVerificationSummaries.tbCategorical.Enabled = False
+            sdgVerificationSummaries.tbContinuous.Enabled = False
         ElseIf rdoCategorical.Checked Then
             clsSummaryFunction.AddParameter("frcst.type", Chr(34) & "'cat'" & Chr(34), iPosition:=5)
+            sdgVerificationSummaries.tbBinary.Enabled = False
+            sdgVerificationSummaries.tbCategorical.Enabled = True
+            sdgVerificationSummaries.tbContinuous.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverSatellite.ControlValueChanged
+        SetSelectorDataTypes()
+    End Sub
+
+    Private Sub SetSelectorDataTypes()
+        If rdoContinuous.Checked Then
+            ucrReceiverSatellite.SetIncludedDataTypes({"numeric"}, bStrict:=True)
+            ucrReceiverSatellite.strSelectorHeading = "Numerics"
+            ucrReceiverStation.SetIncludedDataTypes({"numeric"}, bStrict:=True)
+            ucrReceiverStation.strSelectorHeading = "Numerics"
+        ElseIf rdoBinary.Checked Then
+            ucrReceiverSatellite.SetIncludedDataTypes({"logical", "factor"}, bStrict:=True)
+            ucrReceiverSatellite.strSelectorHeading = "Logical and Factors"
+            ucrReceiverStation.SetIncludedDataTypes({"logical", "factor"}, bStrict:=True)
+            ucrReceiverStation.strSelectorHeading = "Logical and Factors"
+        ElseIf rdoCategorical.Checked Then
+            ucrReceiverSatellite.SetIncludedDataTypes({"factor"}, bStrict:=True)
+            ucrReceiverSatellite.strSelectorHeading = "Factors"
+            ucrReceiverStation.SetIncludedDataTypes({"factor"}, bStrict:=True)
+            ucrReceiverStation.strSelectorHeading = "Factors"
         End If
     End Sub
 
