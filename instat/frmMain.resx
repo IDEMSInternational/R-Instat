@@ -3408,6 +3408,21 @@
   <data name="mnuPrepare.Text" xml:space="preserve">
     <value>Prepare</value>
   </data>
+  <data name="ToolStripSeparator20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 6</value>
+  </data>
+  <data name="mnuStructuredCircularDefine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuStructuredCircularDefine.Text" xml:space="preserve">
+    <value>Define...</value>
+  </data>
+  <data name="mnuStructuredCircular.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuStructuredCircular.Text" xml:space="preserve">
+    <value>Circular</value>
+  </data>
   <data name="mnuStructured.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 20</value>
   </data>
@@ -9355,6 +9370,24 @@
     <value>mnuStructured</value>
   </data>
   <data name="&gt;&gt;mnuStructured.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator20.Name" xml:space="preserve">
+    <value>ToolStripSeparator20</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator20.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircular.Name" xml:space="preserve">
+    <value>mnuStructuredCircular</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircular.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularDefine.Name" xml:space="preserve">
+    <value>mnuStructuredCircularDefine</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularDefine.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
