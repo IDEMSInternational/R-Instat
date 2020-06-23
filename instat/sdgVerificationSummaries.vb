@@ -19,6 +19,7 @@ Public Class sdgVerificationSummaries
     Private bControlsInitialised As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private lstSummaryCheckboxes As New List(Of ucrCheck)
+    Private clsListFunction As New RFunction
     Private Sub sdgVerificationSummaries_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -82,6 +83,7 @@ Public Class sdgVerificationSummaries
             InitialiseControls()
             bControlsInitialised = False
         End If
+        clsListFunction = clsNewListFunction
 
         For Each ctr In lstSummaryCheckboxes
             ctr.SetRCode(clsNewListFunction, bReset)
@@ -91,7 +93,13 @@ Public Class sdgVerificationSummaries
         ucrContinuousVerification.SetRCodeForControls(clsNewSummaryFunction:=clsNewSummaryFunction, clsNewListFunction:=clsNewListFunction, bReset:=bResetSubdialog)
 
         If bReset Then
-            tbSummaries.SelectedIndex =0
+            tbSummaries.SelectedIndex = 0
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
+        If clsListFunction.clsParameters.Count = 0 Then
+            MsgBox("No verification summary selected. Ok will not be enabled on the main dialog.", Title:="No verification summary selected", Buttons:=MsgBoxStyle.Information)
         End If
     End Sub
 End Class
