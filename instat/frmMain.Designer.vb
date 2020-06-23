@@ -608,6 +608,8 @@ Partial Class frmMain
         Me.mnuStructuredTimeSeriesDescribe = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredTimeSeriesDescribeOneVariable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredTimeSeriesDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator61 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuStructuredTimeSeriesModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3833,7 +3835,7 @@ Partial Class frmMain
         '
         'mnuStructuredTimeSeries
         '
-        Me.mnuStructuredTimeSeries.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDefine, Me.ToolStripSeparator60, Me.mnuStructuredTimeSeriesDescribe})
+        Me.mnuStructuredTimeSeries.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDefine, Me.ToolStripSeparator60, Me.mnuStructuredTimeSeriesDescribe, Me.ToolStripSeparator61, Me.mnuStructuredTimeSeriesModel})
         Me.mnuStructuredTimeSeries.Name = "mnuStructuredTimeSeries"
         resources.ApplyResources(Me.mnuStructuredTimeSeries, "mnuStructuredTimeSeries")
         '
@@ -3862,6 +3864,16 @@ Partial Class frmMain
         '
         Me.mnuStructuredTimeSeriesDescribeGeneral.Name = "mnuStructuredTimeSeriesDescribeGeneral"
         resources.ApplyResources(Me.mnuStructuredTimeSeriesDescribeGeneral, "mnuStructuredTimeSeriesDescribeGeneral")
+        '
+        'ToolStripSeparator61
+        '
+        Me.ToolStripSeparator61.Name = "ToolStripSeparator61"
+        resources.ApplyResources(Me.ToolStripSeparator61, "ToolStripSeparator61")
+        '
+        'mnuStructuredTimeSeriesModel
+        '
+        Me.mnuStructuredTimeSeriesModel.Name = "mnuStructuredTimeSeriesModel"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesModel, "mnuStructuredTimeSeriesModel")
         '
         'frmMain
         '
@@ -4478,4 +4490,6 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredTimeSeriesDescribe As ToolStripMenuItem
     Friend WithEvents mnuStructuredTimeSeriesDescribeOneVariable As ToolStripMenuItem
     Friend WithEvents mnuStructuredTimeSeriesDescribeGeneral As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator61 As ToolStripSeparator
+    Friend WithEvents mnuStructuredTimeSeriesModel As ToolStripMenuItem
 End Class
