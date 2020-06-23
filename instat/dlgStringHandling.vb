@@ -120,7 +120,7 @@ Public Class dlgStringHandling
         ucrChkIncludeRegularExpressions.Checked = False
         rdoFixed.Checked = True
         rdoCount.Checked = True
-        Visibile()
+        VisibleRdo()
 
         ucrInputReplaceBy.Reset()
         ucrSaveStringHandling.Reset()
@@ -160,7 +160,7 @@ Public Class dlgStringHandling
     End Sub
 
     'temporary fix.
-    Private Sub Visibile()
+    Private Sub VisibleRdo()
         If ucrChkIncludeRegularExpressions.Checked Then
             rdoRegex.Visible = True
             rdoFixed.Visible = True
@@ -289,7 +289,7 @@ Public Class dlgStringHandling
             Me.Size = New Size(iFullWidth, Me.Height)
         Else
             grpRegex.Visible = False
-            Me.Size = New Size(iFullWidth / 1.57, Me.Height)
+            Me.Size = New Size(iFullWidth / 1.29, Me.Height)
         End If
     End Sub
 
@@ -409,10 +409,15 @@ Public Class dlgStringHandling
         ucrReceiverForRegexExpression.Clear()
     End Sub
 
-    Private Sub ucrPnlFixedRegex_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFixedRegex.ControlContentsChanged, ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverForRegexExpression.ControlValueChanged, ucrInputPattern.ControlValueChanged
-        Visibile()
+    Private Sub ucrAll_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverForRegexExpression.ControlValueChanged, ucrInputPattern.ControlValueChanged
+        VisibleRdo()
         AddRemoveParameters()
-        'ChangeSize()
+    End Sub
+
+    Private Sub ucrPnlFixedRegex_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFixedRegex.ControlContentsChanged
+        VisibleRdo()
+        AddRemoveParameters()
+        ChangeSize()
     End Sub
 
     Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrReceiverForRegexExpression.ControlContentsChanged, ucrPnlFixedRegex.ControlContentsChanged, ucrChkIncludeRegularExpressions.ControlContentsChanged, ucrSaveStringHandling.ControlContentsChanged
