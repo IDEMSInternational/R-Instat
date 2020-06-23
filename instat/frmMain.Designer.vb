@@ -600,6 +600,8 @@ Partial Class frmMain
         Me.mnuStructuredCircularDefine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredLow_Flow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredLow_FlowDefine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredSurvival = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredSurvivalDefine = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3781,7 +3783,7 @@ Partial Class frmMain
         '
         'mnuStructured
         '
-        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow})
+        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival})
         Me.mnuStructured.Name = "mnuStructured"
         resources.ApplyResources(Me.mnuStructured, "mnuStructured")
         '
@@ -3811,6 +3813,17 @@ Partial Class frmMain
         '
         Me.mnuStructuredLow_FlowDefine.Name = "mnuStructuredLow_FlowDefine"
         resources.ApplyResources(Me.mnuStructuredLow_FlowDefine, "mnuStructuredLow_FlowDefine")
+        '
+        'mnuStructuredSurvival
+        '
+        Me.mnuStructuredSurvival.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredSurvivalDefine})
+        Me.mnuStructuredSurvival.Name = "mnuStructuredSurvival"
+        resources.ApplyResources(Me.mnuStructuredSurvival, "mnuStructuredSurvival")
+        '
+        'mnuStructuredSurvivalDefine
+        '
+        Me.mnuStructuredSurvivalDefine.Name = "mnuStructuredSurvivalDefine"
+        resources.ApplyResources(Me.mnuStructuredSurvivalDefine, "mnuStructuredSurvivalDefine")
         '
         'frmMain
         '
@@ -4419,4 +4432,6 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredCircularDefine As ToolStripMenuItem
     Friend WithEvents mnuStructuredLow_Flow As ToolStripMenuItem
     Friend WithEvents mnuStructuredLow_FlowDefine As ToolStripMenuItem
+    Friend WithEvents mnuStructuredSurvival As ToolStripMenuItem
+    Friend WithEvents mnuStructuredSurvivalDefine As ToolStripMenuItem
 End Class

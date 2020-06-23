@@ -3435,6 +3435,18 @@
   <data name="mnuStructuredLow_Flow.Text" xml:space="preserve">
     <value>Low_Flow</value>
   </data>
+  <data name="mnuStructuredSurvivalDefine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuStructuredSurvivalDefine.Text" xml:space="preserve">
+    <value>Define...</value>
+  </data>
+  <data name="mnuStructuredSurvival.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuStructuredSurvival.Text" xml:space="preserve">
+    <value>Survival</value>
+  </data>
   <data name="mnuStructured.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 20</value>
   </data>
@@ -9412,6 +9424,18 @@
     <value>mnuStructuredLow_FlowDefine</value>
   </data>
   <data name="&gt;&gt;mnuStructuredLow_FlowDefine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredSurvival.Name" xml:space="preserve">
+    <value>mnuStructuredSurvival</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredSurvival.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredSurvivalDefine.Name" xml:space="preserve">
+    <value>mnuStructuredSurvivalDefine</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredSurvivalDefine.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
