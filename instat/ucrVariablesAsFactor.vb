@@ -315,7 +315,7 @@ Public Class ucrVariablesAsFactor
 
     Public Overrides Sub SetExcludedDataTypes(strExclude As String())
         ucrSingleVariable.SetExcludedDataTypes(strExclude)
-        ucrMultipleVariables.SetIncludedDataTypes(strExclude)
+        ucrMultipleVariables.SetExcludedDataTypes(strExclude)
     End Sub
 
     Public Overrides Sub SetSelectorHeading(strNewHeading As String)

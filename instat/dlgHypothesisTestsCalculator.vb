@@ -52,7 +52,7 @@ Public Class dlgHypothesisTestsCalculator
         ucrSaveResult.SetAssignToIfUncheckedValue("Last_Test")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorColumn.ucrAvailableDataFrames)
 
-        ucrInputComboRPackage.SetItems({"Stats1", "Stats2", "Agricolae", "Verification"})
+        ucrInputComboRPackage.SetItems({"Stats1", "Stats2", "Agricolae", "Verification", "Coin"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
         'Tooltips for conf & and Alt Buttons
         tpConf.SetToolTip(cmdConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
@@ -572,24 +572,36 @@ Public Class dlgHypothesisTestsCalculator
                 grpStats1.Visible = True
                 grpStats2.Visible = False
                 grpVerification.Visible = False
+                grpCoin.Visible = False
             Case "Stats2"
                 strPackageName = "stats"
                 grpAgricolae.Visible = False
                 grpStats1.Visible = False
                 grpStats2.Visible = True
                 grpVerification.Visible = False
+                grpCoin.Visible = False
             Case "Agricolae"
                 strPackageName = "agricolae"
                 grpStats1.Visible = False
                 grpStats2.Visible = False
                 grpAgricolae.Visible = True
                 grpVerification.Visible = False
+                grpCoin.Visible = False
             Case "Verification"
                 strPackageName = "verification"
                 grpStats1.Visible = False
                 grpStats2.Visible = False
                 grpAgricolae.Visible = False
                 grpVerification.Visible = True
+                grpCoin.Visible = False
+            Case "Coin"
+                strPackageName = "coin"
+                grpStats1.Visible = False
+                grpStats2.Visible = False
+                grpAgricolae.Visible = False
+                grpVerification.Visible = False
+                grpCoin.Visible = True
+
         End Select
     End Sub
 
@@ -601,6 +613,7 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Dim clsHelp As New RFunction
+
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
         clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
@@ -657,6 +670,190 @@ Public Class dlgHypothesisTestsCalculator
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         Else
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        End If
+    End Sub
+
+    Private Sub cmdOneway1_Click(sender As Object, e As EventArgs) Handles cmdOneway1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdWilcox1_Click(sender As Object, e As EventArgs) Handles cmdWilcox1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcox_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcox_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdKruskal1_Click(sender As Object, e As EventArgs) Handles cmdKruskal1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::kruskal_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::kruskal_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdNormal_Click(sender As Object, e As EventArgs) Handles cmdNormal.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::normal_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::normal_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMedian1_Click(sender As Object, e As EventArgs) Handles cmdMedian1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::median_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::median_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSavage_Click(sender As Object, e As EventArgs) Handles cmdSavage.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::savage_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::savage_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSign_Click(sender As Object, e As EventArgs) Handles cmdSign.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::sign_test(formula = , data = , subset = NULL)", 26)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::sign_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdWilcoksign_Click(sender As Object, e As EventArgs) Handles cmdWilcoxsign.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcoxsign_test(formula = , data = , subset = NULL)", 26)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcoxsign_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdFriedman1_Click(sender As Object, e As EventArgs) Handles cmdFriedman1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::friedman_test(object = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::friedman_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdQuade1_Click(sender As Object, e As EventArgs) Handles cmdQuade1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quade_test(object = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quade_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdTaha_Click(sender As Object, e As EventArgs) Handles cmdTaha.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::taha_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::taha_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdKlotz_Click(sender As Object, e As EventArgs) Handles cmdKlotz.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::klotz_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::klotz_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMood1_Click(sender As Object, e As EventArgs) Handles cmdMood1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::mood_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::mood_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAnsari1_Click(sender As Object, e As EventArgs) Handles cmdAnsari1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::ansari_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::ansari_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdFligner1_Click(sender As Object, e As EventArgs) Handles cmdFligner1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fligner_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fligner_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdConover_Click(sender As Object, e As EventArgs) Handles cmdConover.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::conover_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::conover_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSpearman_Click(sender As Object, e As EventArgs) Handles cmdSpearman.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::spearman_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::spearman_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdFisyat_Click(sender As Object, e As EventArgs) Handles cmdFisyat.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fisyat_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fisyat_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdQuadrant_Click(sender As Object, e As EventArgs) Handles cmdQuadrant.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quadrant_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quadrant_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdKoziol_Click(sender As Object, e As EventArgs) Handles cmdKoziol.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::koziol_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::koziol_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdChisq1_Click(sender As Object, e As EventArgs) Handles cmdChisq1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::chisq_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::chisq_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCmh_Click(sender As Object, e As EventArgs) Handles cmdCmh.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::cmh_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::cmh_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdLbl_Click(sender As Object, e As EventArgs) Handles cmdLbl.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::lbl_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::lbl_test()", 1)
         End If
     End Sub
 End Class
