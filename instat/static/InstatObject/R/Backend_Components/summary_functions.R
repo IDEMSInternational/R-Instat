@@ -1180,25 +1180,101 @@ VE <- function(x, y, na.rm = FALSE, na_type = "", ...){
 
 #Verification package
 
-##Categorical/Categorical
+#Categorical/Categorical
 
-###Pierce Skill Score
-###Gerrity Score 
+##Percent Correct  
+pc <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$pc)  
+}
 
-##Binary/Binary
+##Heidke Skill Score   
+hss <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$hss)  
+}
 
-###Skill Score 
-###Odds Ratio 
-###Extreme Dependency Score 
-###Standard Error for Extreme Dependence Score 
-###Symmetric Extreme Dependency Score 
-###Standard Error for Symmetric Extreme Dependency Score 
-###Extremal Dependence Index 
-###Standard Error for Extremal Dependence Index 
-###Symmetric Extremal Dependence Index 
-###Standard Error for Symmetric Extremal Dependence Index 
+##Pierce Skill Score   
+pss <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$pss)  
+}
 
-##Probabilistic/binary
+##Gerrity Score       
+GS <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$gs)  
+}
+
+#Binary/Binary
+
+##Hit rate aka PODy
+PODy <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$PODy)  
+}
+
+##Threat sccore
+TS <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$TS)  
+}
+
+##Equitable threat score
+ETS <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$ETS)  
+}
+
+##False alarm ratio
+FAR <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$FAR)  
+}
+
+##Heidke skill score
+HSS <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$HSS)  
+}
+
+##Percent correct
+PC <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$PC)  
+}
+
+##Bias
+BIAS <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$BIAS)  
+}
+
+##Extreme dependency score
+EDS <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$eds)  
+}
+
+##Symmetric extreme dependency score
+SEDS <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$seds)  
+}
+
+##Exremal dependency index
+EDI <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$EDI)  
+}
+
+##Symmetric Exremal dependence index
+SEDI <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$SEDI)  
+}
+
+##Probabilistic/binary?
 
 
 DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
