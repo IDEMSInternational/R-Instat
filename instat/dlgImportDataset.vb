@@ -742,7 +742,7 @@ Public Class dlgImportDataset
                     clsTempImport = clsImportExcel.Clone()
                     strRowMaxParamName = "n_max"
                     'clsTempImport.AddParameter("na", Chr(34) & ucrInputMissingValueStringExcel.GetText & Chr(34))
-                    clsTempImport.AddParameter("na", GetMissingValueRText) 'TODO. do we really need to call this here? Check this
+                    'clsTempImport.AddParameter("na", GetMissingValueRText) 'TODO. do we really need to call this here? Check this
                 End If
                 If clsTempImport.ContainsParameter(strRowMaxParamName) Then
                     If Integer.TryParse(clsTempImport.GetParameter(strRowMaxParamName).strArgumentValue, iTemp) Then
@@ -880,6 +880,12 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub MissingValuesInputControls_ContentsChanged() Handles ucrInputMissingValueStringText.ContentsChanged, ucrInputMissingValueStringCSV.ContentsChanged, ucrInputMissingValueStringExcel.ContentsChanged
+        'currently we have no way of knowing which control has raised this event and therefore can't do that check
+        'so instead we are using the strFileType to identify which RFunctions should be updated accordingly
+        If strFileType = "XLSX" OrElse strFileType = "XLS" Then
+            clsImportExcelMulti.AddParameter("na", GetMissingValueRText)
+            clsImportExcel.AddParameter("na", GetMissingValueRText)
+        End If
         RefreshFrameView()
     End Sub
 
@@ -1035,11 +1041,6 @@ Public Class dlgImportDataset
         Return strCleanFileName
     End Function
 
-    Private Sub ucrInputMissingValueStringExcel_ContentsChanged() Handles ucrInputMissingValueStringExcel.ContentsChanged
-        clsImportExcelMulti.AddParameter("na", GetMissingValueRText)
-        clsImportExcel.AddParameter("na", GetMissingValueRText)
-    End Sub
-
     Private Function GetMissingValueRText() As String
         Dim arrStr() As String = ucrInputMissingValueStringExcel.GetText().Split(",")
         Dim strMissingValue As String
@@ -1053,9 +1054,9 @@ Public Class dlgImportDataset
             strMissingValue = ""
             For Each strTemp As String In arrStr
                 If strMissingValue = "" Then
-                    strMissingValue = Chr(34) & strTemp & Chr(34)
+                    strMissingValue = Chr(34) & strTemp.Trim & Chr(34)
                 Else
-                    strMissingValue = strMissingValue & "," & Chr(34) & strTemp & Chr(34)
+                    strMissingValue = strMissingValue & "," & Chr(34) & strTemp.Trim & Chr(34)
                 End If
             Next
             strMissingValue = "c(" & strMissingValue & ")"
