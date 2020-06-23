@@ -48,14 +48,13 @@ Partial Class dlgDisplayDailyData
         Me.lblDayOfTheYear = New System.Windows.Forms.Label()
         Me.lblYaxisUpper = New System.Windows.Forms.Label()
         Me.grpGraph = New System.Windows.Forms.GroupBox()
-        Me.ucrSaveGraph = New instat.ucrSave()
-        Me.ucrInputRugColour = New instat.ucrInputComboBox()
         Me.lblRugColor = New System.Windows.Forms.Label()
-        Me.ucrInputBarColour = New instat.ucrInputComboBox()
         Me.lblBarColour = New System.Windows.Forms.Label()
-        Me.ucrNudUpperYaxis = New instat.ucrNud()
         Me.lblElements = New System.Windows.Forms.Label()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.rdoGraphByYear = New System.Windows.Forms.RadioButton()
+        Me.ucrChkFreeYScales = New instat.ucrCheck()
+        Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrChkSumMissing = New instat.ucrCheck()
         Me.ucrChkMax = New instat.ucrCheck()
         Me.ucrChkIQR = New instat.ucrCheck()
@@ -63,7 +62,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrChkSum = New instat.ucrCheck()
         Me.ucrChkMin = New instat.ucrCheck()
         Me.ucrChkMean = New instat.ucrCheck()
-        Me.rdoGraphByYear = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrInputComboZero = New instat.ucrInputComboBox()
         Me.ucrInputComboMissing = New instat.ucrInputComboBox()
@@ -78,8 +76,11 @@ Partial Class dlgDisplayDailyData
         Me.ucrPnlFrequencyDisplay = New instat.UcrPanel()
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrInputRugColour = New instat.ucrInputComboBox()
+        Me.ucrInputBarColour = New instat.ucrInputComboBox()
+        Me.ucrNudUpperYaxis = New instat.ucrNud()
         Me.ucrReceiverSingleElements = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.grpGraph.SuspendLayout()
         Me.grpSummary.SuspendLayout()
         Me.SuspendLayout()
@@ -147,44 +148,15 @@ Partial Class dlgDisplayDailyData
         Me.grpGraph.Name = "grpGraph"
         Me.grpGraph.TabStop = False
         '
-        'ucrSaveGraph
-        '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        '
-        'ucrInputRugColour
-        '
-        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputRugColour.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputRugColour, "ucrInputRugColour")
-        Me.ucrInputRugColour.Name = "ucrInputRugColour"
-        '
         'lblRugColor
         '
         resources.ApplyResources(Me.lblRugColor, "lblRugColor")
         Me.lblRugColor.Name = "lblRugColor"
         '
-        'ucrInputBarColour
-        '
-        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputBarColour.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputBarColour, "ucrInputBarColour")
-        Me.ucrInputBarColour.Name = "ucrInputBarColour"
-        '
         'lblBarColour
         '
         resources.ApplyResources(Me.lblBarColour, "lblBarColour")
         Me.lblBarColour.Name = "lblBarColour"
-        '
-        'ucrNudUpperYaxis
-        '
-        Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudUpperYaxis, "ucrNudUpperYaxis")
-        Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
-        Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblElements
         '
@@ -203,6 +175,31 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.grpSummary, "grpSummary")
         Me.grpSummary.Name = "grpSummary"
         Me.grpSummary.TabStop = False
+        '
+        'rdoGraphByYear
+        '
+        resources.ApplyResources(Me.rdoGraphByYear, "rdoGraphByYear")
+        Me.rdoGraphByYear.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGraphByYear.FlatAppearance.BorderSize = 2
+        Me.rdoGraphByYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGraphByYear.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoGraphByYear.Name = "rdoGraphByYear"
+        Me.rdoGraphByYear.UseVisualStyleBackColor = True
+        '
+        'ucrChkFreeYScales
+        '
+        Me.ucrChkFreeYScales.Checked = False
+        resources.ApplyResources(Me.ucrChkFreeYScales, "ucrChkFreeYScales")
+        Me.ucrChkFreeYScales.Name = "ucrChkFreeYScales"
+        '
+        'ucrReceiverMultipleElements
+        '
+        Me.ucrReceiverMultipleElements.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultipleElements, "ucrReceiverMultipleElements")
+        Me.ucrReceiverMultipleElements.Name = "ucrReceiverMultipleElements"
+        Me.ucrReceiverMultipleElements.Selector = Nothing
+        Me.ucrReceiverMultipleElements.strNcFilePath = ""
+        Me.ucrReceiverMultipleElements.ucrSelector = Nothing
         '
         'ucrChkSumMissing
         '
@@ -245,16 +242,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrChkMean.Checked = False
         resources.ApplyResources(Me.ucrChkMean, "ucrChkMean")
         Me.ucrChkMean.Name = "ucrChkMean"
-        '
-        'rdoGraphByYear
-        '
-        resources.ApplyResources(Me.rdoGraphByYear, "rdoGraphByYear")
-        Me.rdoGraphByYear.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGraphByYear.FlatAppearance.BorderSize = 2
-        Me.rdoGraphByYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGraphByYear.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoGraphByYear.Name = "rdoGraphByYear"
-        Me.rdoGraphByYear.UseVisualStyleBackColor = True
         '
         'ucrReceiverElement
         '
@@ -358,6 +345,35 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrSaveGraph
+        '
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        '
+        'ucrInputRugColour
+        '
+        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputRugColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputRugColour, "ucrInputRugColour")
+        Me.ucrInputRugColour.Name = "ucrInputRugColour"
+        '
+        'ucrInputBarColour
+        '
+        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputBarColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputBarColour, "ucrInputBarColour")
+        Me.ucrInputBarColour.Name = "ucrInputBarColour"
+        '
+        'ucrNudUpperYaxis
+        '
+        Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudUpperYaxis, "ucrNudUpperYaxis")
+        Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
+        Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrReceiverSingleElements
         '
         Me.ucrReceiverSingleElements.frmParent = Me
@@ -367,25 +383,18 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverSingleElements.strNcFilePath = ""
         Me.ucrReceiverSingleElements.ucrSelector = Nothing
         '
-        'ucrReceiverMultipleElements
-        '
-        Me.ucrReceiverMultipleElements.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultipleElements, "ucrReceiverMultipleElements")
-        Me.ucrReceiverMultipleElements.Name = "ucrReceiverMultipleElements"
-        Me.ucrReceiverMultipleElements.Selector = Nothing
-        Me.ucrReceiverMultipleElements.strNcFilePath = ""
-        Me.ucrReceiverMultipleElements.ucrSelector = Nothing
-        '
         'dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkFreeYScales)
         Me.Controls.Add(Me.ucrReceiverMultipleElements)
         Me.Controls.Add(Me.rdoGraphByYear)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.lblElements)
         Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrInputComboZero)
+        Me.Controls.Add(Me.grpGraph)
         Me.Controls.Add(Me.ucrInputComboMissing)
         Me.Controls.Add(Me.ucrInputComboTrace)
         Me.Controls.Add(Me.ucrChkMissing)
@@ -405,7 +414,6 @@ Partial Class dlgDisplayDailyData
         Me.Controls.Add(Me.ucrPnlFrequencyDisplay)
         Me.Controls.Add(Me.ucrSelectorDisplayDailyClimaticData)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.grpGraph)
         Me.Controls.Add(Me.ucrReceiverSingleElements)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -460,4 +468,5 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents rdoGraphByYear As RadioButton
     Friend WithEvents ucrReceiverSingleElements As ucrReceiverSingle
     Friend WithEvents ucrReceiverMultipleElements As ucrReceiverMultiple
+    Friend WithEvents ucrChkFreeYScales As ucrCheck
 End Class
