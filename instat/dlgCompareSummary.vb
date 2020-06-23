@@ -79,6 +79,7 @@ Public Class dlgCompareSummary
         clsSummaryFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsSummaryFunction.AddParameter("obs.type", Chr(34) & "'cont'" & Chr(34), iPosition:=1)
         clsSummaryFunction.AddParameter("summaries", clsRFunctionParameter:=clsListFunction, iPosition:=6)
+        clsListFunction.AddParameter("summary_cor", Chr(34) & "summary_cor" & Chr(34), bIncludeArgumentName:=False, iPosition:=20)
 
         clsListFunction.SetRCommand("c")
 
@@ -94,10 +95,11 @@ Public Class dlgCompareSummary
         sdgVerificationSummaries.SetRFunction(clsNewSummaryFunction:=clsSummaryFunction, clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
         sdgVerificationSummaries.ShowDialog()
         bResetSubdialog = False
+        TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverSatellite.IsEmpty OrElse ucrReceiverStation.IsEmpty Then
+        If ucrReceiverSatellite.IsEmpty OrElse ucrReceiverStation.IsEmpty OrElse clsListFunction.clsParameters.Count = 0 Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
