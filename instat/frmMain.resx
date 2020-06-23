@@ -3423,6 +3423,18 @@
   <data name="mnuStructuredCircular.Text" xml:space="preserve">
     <value>Circular</value>
   </data>
+  <data name="mnuStructuredLow_FlowDefine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuStructuredLow_FlowDefine.Text" xml:space="preserve">
+    <value>Define...</value>
+  </data>
+  <data name="mnuStructuredLow_Flow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuStructuredLow_Flow.Text" xml:space="preserve">
+    <value>Low_Flow</value>
+  </data>
   <data name="mnuStructured.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 20</value>
   </data>
@@ -9388,6 +9400,18 @@
     <value>mnuStructuredCircularDefine</value>
   </data>
   <data name="&gt;&gt;mnuStructuredCircularDefine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredLow_Flow.Name" xml:space="preserve">
+    <value>mnuStructuredLow_Flow</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredLow_Flow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredLow_FlowDefine.Name" xml:space="preserve">
+    <value>mnuStructuredLow_FlowDefine</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredLow_FlowDefine.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
