@@ -229,7 +229,7 @@ Partial Class sdgVariableTransformations
         '
         Me.ucrInputPreview.AddQuotesIfUnrecognised = True
         Me.ucrInputPreview.IsMultiline = False
-        Me.ucrInputPreview.IsReadOnly = False
+        Me.ucrInputPreview.IsReadOnly = True
         resources.ApplyResources(Me.ucrInputPreview, "ucrInputPreview")
         Me.ucrInputPreview.Name = "ucrInputPreview"
         '

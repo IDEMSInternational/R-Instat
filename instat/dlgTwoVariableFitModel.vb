@@ -16,7 +16,7 @@
 
 Imports instat
 Imports instat.Translations
-
+Imports RDotNet
 Public Class dlgTwoVariableFitModel
     Public bFirstLoad As Boolean = True
     Public clsModel, clsRGraphicsOperator, clsFunctionOperation, clsPoissonOperation, clsPoissonOperation2, clsRBinomialOperation, clsRBinomialOperation2, clsRBinomialOperation3 As New ROperator
@@ -52,6 +52,8 @@ Public Class dlgTwoVariableFitModel
     Public bResetFirstFunction As Boolean = False
 
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
+
+    Public StrMedianValue As String = ""
 
     Private Sub dlgTwoVariableFitModel_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -446,7 +448,7 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub cmdExplanatoryFunction_Click(sender As Object, e As EventArgs) Handles cmdExplanatoryFunction.Click
-        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPolynomialFunc:=clsPolynomialFunc, clsNewBrokenStickFirstOperator:=clsBrokenStickFirstOperator, clsNewBrokenStickSecondOperator:=clsBrokenStickSecondOperator, clsNewBrokenStickGeneralOperator:=clsBrokenStickGeneralOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), clsNewSplineFunc:=clsSplineFunc, clsNewYearFunc:=clsYearFunc, clsNewMonthFunc:=clsMonthFunc, clsNewAsFactorFunc:=clsAsFactorFunc, strNewCurDataType:=ucrReceiverExplanatory.strCurrDataType, strNewDataName:=ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame, bReset:=bResetFirstFunction)
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPolynomialFunc:=clsPolynomialFunc, clsNewBrokenStickFirstOperator:=clsBrokenStickFirstOperator, clsNewBrokenStickSecondOperator:=clsBrokenStickSecondOperator, clsNewBrokenStickGeneralOperator:=clsBrokenStickGeneralOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), clsNewSplineFunc:=clsSplineFunc, clsNewYearFunc:=clsYearFunc, clsNewMonthFunc:=clsMonthFunc, clsNewAsFactorFunc:=clsAsFactorFunc, strNewMedianValue:=StrMedianValue, strNewCurDataType:=ucrReceiverExplanatory.strCurrDataType, bReset:=bResetFirstFunction)
         sdgVariableTransformations.ShowDialog()
         bResetFirstFunction = False
         UpdatePreview()
@@ -789,6 +791,7 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub FirstExplanatoryFunctionEnabled()
         If Not ucrReceiverExplanatory.IsEmpty AndAlso {"numeric", "integer", "Date"}.Contains(ucrReceiverExplanatory.strCurrDataType) Then
+            GetColumnMidian()
             cmdExplanatoryFunction.Enabled = True
         Else
             cmdExplanatoryFunction.Enabled = False
@@ -869,6 +872,35 @@ Public Class dlgTwoVariableFitModel
         '        End If
         'End If
         '  End If
+    End Sub
+
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>  Finds the median of the X variable from the main dialogue and sets the
+    '''            broken stick textbox to this value
+    '''             </summary>
+    '''--------------------------------------------------------------------------------------------
+    Private Sub GetColumnMidian()
+        Dim expColumn As SymbolicExpression
+        Dim medianValue As String
+        Dim clsGetColumnMedianFunc As New RFunction
+        Dim clsGetVariablesFunc As New RFunction
+
+        clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetVariablesFunc.AddParameter("data_name", Chr(34) & ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+        clsGetVariablesFunc.AddParameter("col_names", Chr(34) & ucrReceiverExplanatory.GetVariableNames(False) & Chr(34), iPosition:=1)
+
+
+        clsGetColumnMedianFunc.SetRCommand("summary_median")
+        clsGetColumnMedianFunc.AddParameter("x", clsRFunctionParameter:=clsGetVariablesFunc, iPosition:=0)
+        clsGetColumnMedianFunc.AddParameter("na.rm", "TRUE", iPosition:=1)
+
+
+        expColumn = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnMedianFunc.ToScript, bSilent:=False)
+        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
+            medianValue = expColumn.AsCharacter(0)
+            StrMedianValue = medianValue
+        End If
     End Sub
 
     Public Sub SetEnableDists()

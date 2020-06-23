@@ -35,10 +35,9 @@ Public Class sdgVariableTransformations
     Private clsYearFunc As New RFunction
 
     Private clsPolynomialFunc As New RFunction
-    Private strDataName As String
     Private bControlsInitialised As Boolean = False
     Private strCurrentVariableName As String
-
+    Public strMedianValue As String
 
     Private Sub sdgVariableTransformations_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -69,6 +68,7 @@ Public Class sdgVariableTransformations
         ucrInputTxtBrokenStick.SetValidationTypeAsNumeric()
         ucrInputTxtBrokenStick.AddQuotesIfUnrecognised = False
 
+
         ucrNudSplineDF.SetParameter(New RParameter("df", 1))
         ucrNudSplineDF.SetMinMax(Integer.MinValue = 0, Integer.MaxValue)
 
@@ -79,7 +79,7 @@ Public Class sdgVariableTransformations
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControls(clsNewFormulaOperator As ROperator, clsNewTransformParameter As RParameter, clsNewTransformFunction As RFunction, strVariableName As String, Optional clsNewBrokenStickFirstOperator As ROperator = Nothing, Optional clsNewBrokenStickSecondOperator As ROperator = Nothing, Optional clsNewBrokenStickGeneralOperator As ROperator = Nothing, Optional clsNewSplineFunc As RFunction = Nothing, Optional clsNewPowerOperator As ROperator = Nothing, Optional clsNewPolynomialFunc As RFunction = Nothing, Optional clsNewMonthFunc As RFunction = Nothing, Optional clsNewYearFunc As RFunction = Nothing, Optional clsNewAsFactorFunc As RFunction = Nothing, Optional strNewCurDataType As String = "", Optional strNewDataName As String = "", Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControls(clsNewFormulaOperator As ROperator, clsNewTransformParameter As RParameter, clsNewTransformFunction As RFunction, strVariableName As String, Optional clsNewBrokenStickFirstOperator As ROperator = Nothing, Optional clsNewBrokenStickSecondOperator As ROperator = Nothing, Optional clsNewBrokenStickGeneralOperator As ROperator = Nothing, Optional clsNewSplineFunc As RFunction = Nothing, Optional clsNewPowerOperator As ROperator = Nothing, Optional clsNewPolynomialFunc As RFunction = Nothing, Optional clsNewMonthFunc As RFunction = Nothing, Optional clsNewYearFunc As RFunction = Nothing, Optional clsNewAsFactorFunc As RFunction = Nothing, Optional strNewCurDataType As String = "", Optional strNewMedianValue As String = "", Optional bReset As Boolean = False)
         Dim strParamName As String
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -96,9 +96,9 @@ Public Class sdgVariableTransformations
         clsAsFactorFunc = clsNewAsFactorFunc
         clsMonthFunc = clsNewMonthFunc
         clsYearFunc = clsNewYearFunc
-        strDataName = strNewDataName
 
         strParamName = clsTransformParameter.strArgumentName
+        strMedianValue = strNewMedianValue
 
         ucrPnlChooseFunction.ClearConditions()
         ucrPnlChooseFunction.AddParameterIsStringCondition(rdoIdentity, strParamName)
@@ -120,9 +120,9 @@ Public Class sdgVariableTransformations
         ucrInputTxtBrokenStick.SetRCode(clsBrokenStickFirstOperator, bReset, bCloneIfNeeded:=True)
         ucrNudSplineDF.SetRCode(clsSplineFunc, bReset, bCloneIfNeeded:=True)
 
+        ucrInputTxtBrokenStick.SetName(strMedianValue)
         showYearAndMonthFunc(strNewCurDataType)
         UpdatePreview()
-        GetColumnMidian()
     End Sub
 
     Private Sub ucrPnlGenerateFunctions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlChooseFunction.ControlValueChanged
@@ -157,44 +157,17 @@ Public Class sdgVariableTransformations
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Handles event triggered when the user changes values in the broken stick 
-    ''' textbox/SplineDf Nud/polynomial  Nud by updating the text in the preview textbox 
+    ''' <summary>   Handles event triggered when the user changes values in the 
+    ''' SplineDf Nud/polynomial  Nud by updating the text in the preview textbox 
     ''' </summary>
     '''
-    ''' <param name="ucrChangedControl ">   ucrInputTxtBrokenStick/ucrNudSplineDF/ucrNudPolynomial </param>
+    ''' <param name="ucrChangedControl ">   ucrNudSplineDF/ucrNudPolynomial </param>
     '''--------------------------------------------------------------------------------------------
-    Private Sub ucrInputTxtBrokenStick_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTxtBrokenStick.ControlContentsChanged, ucrNudSplineDF.ControlValueChanged, ucrNudPolynomial.ControlValueChanged
+    Private Sub ucrNuds_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSplineDF.ControlValueChanged, ucrNudPolynomial.ControlValueChanged
         UpdatePreview()
     End Sub
 
 
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>  Finds the median of the X variable from the main dialogue and sets the
-    '''            broken stick textbox to this value
-    '''             </summary>
-    '''--------------------------------------------------------------------------------------------
-    Private Sub GetColumnMidian()
-        Dim expColumn As SymbolicExpression
-        Dim medianValue As String
-        Dim clsGetColumnMedianFunc As New RFunction
-        Dim clsGetVariablesFunc As New RFunction
-
-        clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strDataName & Chr(34), iPosition:=0)
-        clsGetVariablesFunc.AddParameter("col_names", Chr(34) & strCurrentVariableName & Chr(34), iPosition:=1)
-
-
-        clsGetColumnMedianFunc.SetRCommand("summary_median")
-        clsGetColumnMedianFunc.AddParameter("x", clsRFunctionParameter:=clsGetVariablesFunc,iPosition:=0)
-        clsGetColumnMedianFunc.AddParameter("na.rm", "TRUE", iPosition:=1)
-
-
-        expColumn = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnMedianFunc.ToScript, bSilent:=False)
-        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
-            medianValue = expColumn.AsCharacter(0)
-            ucrInputTxtBrokenStick.SetName(medianValue)
-        End If
-    End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary> Updates the preview textbox  and converts the year/month function to factor
@@ -240,5 +213,19 @@ Public Class sdgVariableTransformations
             rdoMonth.Enabled = False
             rdoYear.Enabled = False
         End If
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Handles event triggered when the user changes values in the 
+    ''' broken stick textbox  by updating the text in the preview textbox  and updating the strMedian string
+    ''' </summary>
+    '''
+    ''' <param name="ucrChangedControl ">   ucrInputTxtBrokenStick </param>
+    '''--------------------------------------------------------------------------------------------
+    Private Sub ucrInputTxtBrokenStick_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTxtBrokenStick.ControlValueChanged
+        If Not ucrInputTxtBrokenStick.IsEmpty Then
+            strMedianValue = ucrInputTxtBrokenStick.GetText()
+        End If
+        UpdatePreview()
     End Sub
 End Class
