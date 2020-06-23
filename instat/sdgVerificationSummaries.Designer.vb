@@ -27,27 +27,38 @@ Partial Class sdgVerificationSummaries
         Me.tbContinuous = New System.Windows.Forms.TabPage()
         Me.ucrContinuousVerification = New instat.ucrContinuousVerification()
         Me.tbBinary = New System.Windows.Forms.TabPage()
-        Me.UcrCheck9 = New instat.ucrCheck()
-        Me.UcrCheck8 = New instat.ucrCheck()
-        Me.UcrCheck7 = New instat.ucrCheck()
-        Me.UcrCheck6 = New instat.ucrCheck()
+        Me.grpOrdinary = New System.Windows.Forms.GroupBox()
+        Me.ucrChkHitRate = New instat.ucrCheck()
+        Me.ucrChkFalseAlarmRatio = New instat.ucrCheck()
+        Me.ucrChkBias = New instat.ucrCheck()
+        Me.ucrChkHeidkeSkillScore = New instat.ucrCheck()
+        Me.ucrChkEquitableThreatScore = New instat.ucrCheck()
+        Me.ucrChkPercentCorrect = New instat.ucrCheck()
+        Me.ucrChkThreatScore = New instat.ucrCheck()
+        Me.grpExtreme = New System.Windows.Forms.GroupBox()
+        Me.ucrChkSymmetricExtremeDependencyScore = New instat.ucrCheck()
+        Me.ucrChkExremalDependencyIndex = New instat.ucrCheck()
+        Me.ucrChkExtremeDependencyScore = New instat.ucrCheck()
+        Me.ucrChkSymmetricExremalDependenceIndex = New instat.ucrCheck()
         Me.tbCategorical = New System.Windows.Forms.TabPage()
-        Me.UcrCheck13 = New instat.ucrCheck()
-        Me.UcrCheck12 = New instat.ucrCheck()
-        Me.UcrCheck11 = New instat.ucrCheck()
-        Me.UcrCheck10 = New instat.ucrCheck()
+        Me.ucrChkCatPercentCorrect = New instat.ucrCheck()
+        Me.ucrChkCatHeidkeSkillScore = New instat.ucrCheck()
+        Me.ucrChkCatPierceSkillScore = New instat.ucrCheck()
+        Me.ucrChkGerrityScore = New instat.ucrCheck()
         Me.tbSummaries.SuspendLayout()
         Me.tbContinuous.SuspendLayout()
         Me.tbBinary.SuspendLayout()
+        Me.grpOrdinary.SuspendLayout()
+        Me.grpExtreme.SuspendLayout()
         Me.tbCategorical.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(161, 323)
+        Me.ucrBase.Location = New System.Drawing.Point(212, 268)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(154, 30)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 1
         '
         'tbSummaries
         '
@@ -57,8 +68,8 @@ Partial Class sdgVerificationSummaries
         Me.tbSummaries.Location = New System.Drawing.Point(12, 12)
         Me.tbSummaries.Name = "tbSummaries"
         Me.tbSummaries.SelectedIndex = 0
-        Me.tbSummaries.Size = New System.Drawing.Size(443, 305)
-        Me.tbSummaries.TabIndex = 1
+        Me.tbSummaries.Size = New System.Drawing.Size(557, 255)
+        Me.tbSummaries.TabIndex = 0
         '
         'tbContinuous
         '
@@ -66,7 +77,7 @@ Partial Class sdgVerificationSummaries
         Me.tbContinuous.Location = New System.Drawing.Point(4, 22)
         Me.tbContinuous.Name = "tbContinuous"
         Me.tbContinuous.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbContinuous.Size = New System.Drawing.Size(435, 279)
+        Me.tbContinuous.Size = New System.Drawing.Size(549, 229)
         Me.tbContinuous.TabIndex = 0
         Me.tbContinuous.Text = "Continuous"
         Me.tbContinuous.UseVisualStyleBackColor = True
@@ -75,106 +86,189 @@ Partial Class sdgVerificationSummaries
         '
         Me.ucrContinuousVerification.Location = New System.Drawing.Point(-1, 6)
         Me.ucrContinuousVerification.Name = "ucrContinuousVerification"
-        Me.ucrContinuousVerification.Size = New System.Drawing.Size(430, 265)
+        Me.ucrContinuousVerification.Size = New System.Drawing.Size(544, 192)
         Me.ucrContinuousVerification.TabIndex = 0
         '
         'tbBinary
         '
-        Me.tbBinary.Controls.Add(Me.UcrCheck9)
-        Me.tbBinary.Controls.Add(Me.UcrCheck8)
-        Me.tbBinary.Controls.Add(Me.UcrCheck7)
-        Me.tbBinary.Controls.Add(Me.UcrCheck6)
+        Me.tbBinary.Controls.Add(Me.grpOrdinary)
+        Me.tbBinary.Controls.Add(Me.grpExtreme)
         Me.tbBinary.Location = New System.Drawing.Point(4, 22)
         Me.tbBinary.Name = "tbBinary"
         Me.tbBinary.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbBinary.Size = New System.Drawing.Size(435, 279)
+        Me.tbBinary.Size = New System.Drawing.Size(549, 229)
         Me.tbBinary.TabIndex = 1
         Me.tbBinary.Text = "Binary"
         Me.tbBinary.UseVisualStyleBackColor = True
         '
-        'UcrCheck9
+        'grpOrdinary
         '
-        Me.UcrCheck9.Checked = False
-        Me.UcrCheck9.Location = New System.Drawing.Point(6, 20)
-        Me.UcrCheck9.Name = "UcrCheck9"
-        Me.UcrCheck9.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck9.TabIndex = 4
+        Me.grpOrdinary.Controls.Add(Me.ucrChkHitRate)
+        Me.grpOrdinary.Controls.Add(Me.ucrChkFalseAlarmRatio)
+        Me.grpOrdinary.Controls.Add(Me.ucrChkBias)
+        Me.grpOrdinary.Controls.Add(Me.ucrChkHeidkeSkillScore)
+        Me.grpOrdinary.Controls.Add(Me.ucrChkEquitableThreatScore)
+        Me.grpOrdinary.Controls.Add(Me.ucrChkPercentCorrect)
+        Me.grpOrdinary.Controls.Add(Me.ucrChkThreatScore)
+        Me.grpOrdinary.Location = New System.Drawing.Point(6, 6)
+        Me.grpOrdinary.Name = "grpOrdinary"
+        Me.grpOrdinary.Size = New System.Drawing.Size(537, 104)
+        Me.grpOrdinary.TabIndex = 13
+        Me.grpOrdinary.TabStop = False
+        Me.grpOrdinary.Text = "Ordinary"
         '
-        'UcrCheck8
+        'ucrChkHitRate
         '
-        Me.UcrCheck8.Checked = False
-        Me.UcrCheck8.Location = New System.Drawing.Point(6, 46)
-        Me.UcrCheck8.Name = "UcrCheck8"
-        Me.UcrCheck8.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck8.TabIndex = 3
+        Me.ucrChkHitRate.Checked = False
+        Me.ucrChkHitRate.Location = New System.Drawing.Point(6, 19)
+        Me.ucrChkHitRate.Name = "ucrChkHitRate"
+        Me.ucrChkHitRate.Size = New System.Drawing.Size(136, 20)
+        Me.ucrChkHitRate.TabIndex = 4
         '
-        'UcrCheck7
+        'ucrChkFalseAlarmRatio
         '
-        Me.UcrCheck7.Checked = False
-        Me.UcrCheck7.Location = New System.Drawing.Point(127, 20)
-        Me.UcrCheck7.Name = "UcrCheck7"
-        Me.UcrCheck7.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck7.TabIndex = 2
+        Me.ucrChkFalseAlarmRatio.Checked = False
+        Me.ucrChkFalseAlarmRatio.Location = New System.Drawing.Point(6, 79)
+        Me.ucrChkFalseAlarmRatio.Name = "ucrChkFalseAlarmRatio"
+        Me.ucrChkFalseAlarmRatio.Size = New System.Drawing.Size(118, 20)
+        Me.ucrChkFalseAlarmRatio.TabIndex = 1
         '
-        'UcrCheck6
+        'ucrChkBias
         '
-        Me.UcrCheck6.Checked = False
-        Me.UcrCheck6.Location = New System.Drawing.Point(127, 46)
-        Me.UcrCheck6.Name = "UcrCheck6"
-        Me.UcrCheck6.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck6.TabIndex = 1
+        Me.ucrChkBias.Checked = False
+        Me.ucrChkBias.Location = New System.Drawing.Point(185, 59)
+        Me.ucrChkBias.Name = "ucrChkBias"
+        Me.ucrChkBias.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkBias.TabIndex = 6
+        '
+        'ucrChkHeidkeSkillScore
+        '
+        Me.ucrChkHeidkeSkillScore.Checked = False
+        Me.ucrChkHeidkeSkillScore.Location = New System.Drawing.Point(185, 19)
+        Me.ucrChkHeidkeSkillScore.Name = "ucrChkHeidkeSkillScore"
+        Me.ucrChkHeidkeSkillScore.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkHeidkeSkillScore.TabIndex = 8
+        '
+        'ucrChkEquitableThreatScore
+        '
+        Me.ucrChkEquitableThreatScore.Checked = False
+        Me.ucrChkEquitableThreatScore.Location = New System.Drawing.Point(6, 59)
+        Me.ucrChkEquitableThreatScore.Name = "ucrChkEquitableThreatScore"
+        Me.ucrChkEquitableThreatScore.Size = New System.Drawing.Size(136, 20)
+        Me.ucrChkEquitableThreatScore.TabIndex = 2
+        '
+        'ucrChkPercentCorrect
+        '
+        Me.ucrChkPercentCorrect.Checked = False
+        Me.ucrChkPercentCorrect.Location = New System.Drawing.Point(185, 39)
+        Me.ucrChkPercentCorrect.Name = "ucrChkPercentCorrect"
+        Me.ucrChkPercentCorrect.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPercentCorrect.TabIndex = 7
+        '
+        'ucrChkThreatScore
+        '
+        Me.ucrChkThreatScore.Checked = False
+        Me.ucrChkThreatScore.Location = New System.Drawing.Point(6, 39)
+        Me.ucrChkThreatScore.Name = "ucrChkThreatScore"
+        Me.ucrChkThreatScore.Size = New System.Drawing.Size(136, 20)
+        Me.ucrChkThreatScore.TabIndex = 3
+        '
+        'grpExtreme
+        '
+        Me.grpExtreme.Controls.Add(Me.ucrChkSymmetricExtremeDependencyScore)
+        Me.grpExtreme.Controls.Add(Me.ucrChkExremalDependencyIndex)
+        Me.grpExtreme.Controls.Add(Me.ucrChkExtremeDependencyScore)
+        Me.grpExtreme.Controls.Add(Me.ucrChkSymmetricExremalDependenceIndex)
+        Me.grpExtreme.Location = New System.Drawing.Point(6, 109)
+        Me.grpExtreme.Name = "grpExtreme"
+        Me.grpExtreme.Size = New System.Drawing.Size(537, 71)
+        Me.grpExtreme.TabIndex = 12
+        Me.grpExtreme.TabStop = False
+        Me.grpExtreme.Text = "Extreme"
+        '
+        'ucrChkSymmetricExtremeDependencyScore
+        '
+        Me.ucrChkSymmetricExtremeDependencyScore.Checked = False
+        Me.ucrChkSymmetricExtremeDependencyScore.Location = New System.Drawing.Point(6, 19)
+        Me.ucrChkSymmetricExtremeDependencyScore.Name = "ucrChkSymmetricExtremeDependencyScore"
+        Me.ucrChkSymmetricExtremeDependencyScore.Size = New System.Drawing.Size(171, 20)
+        Me.ucrChkSymmetricExtremeDependencyScore.TabIndex = 10
+        '
+        'ucrChkExremalDependencyIndex
+        '
+        Me.ucrChkExremalDependencyIndex.Checked = False
+        Me.ucrChkExremalDependencyIndex.Location = New System.Drawing.Point(185, 45)
+        Me.ucrChkExremalDependencyIndex.Name = "ucrChkExremalDependencyIndex"
+        Me.ucrChkExremalDependencyIndex.Size = New System.Drawing.Size(181, 20)
+        Me.ucrChkExremalDependencyIndex.TabIndex = 9
+        '
+        'ucrChkExtremeDependencyScore
+        '
+        Me.ucrChkExtremeDependencyScore.Checked = False
+        Me.ucrChkExtremeDependencyScore.Location = New System.Drawing.Point(6, 45)
+        Me.ucrChkExtremeDependencyScore.Name = "ucrChkExtremeDependencyScore"
+        Me.ucrChkExtremeDependencyScore.Size = New System.Drawing.Size(171, 20)
+        Me.ucrChkExtremeDependencyScore.TabIndex = 11
+        '
+        'ucrChkSymmetricExremalDependenceIndex
+        '
+        Me.ucrChkSymmetricExremalDependenceIndex.Checked = False
+        Me.ucrChkSymmetricExremalDependenceIndex.Location = New System.Drawing.Point(185, 19)
+        Me.ucrChkSymmetricExremalDependenceIndex.Name = "ucrChkSymmetricExremalDependenceIndex"
+        Me.ucrChkSymmetricExremalDependenceIndex.Size = New System.Drawing.Size(179, 20)
+        Me.ucrChkSymmetricExremalDependenceIndex.TabIndex = 5
         '
         'tbCategorical
         '
-        Me.tbCategorical.Controls.Add(Me.UcrCheck13)
-        Me.tbCategorical.Controls.Add(Me.UcrCheck12)
-        Me.tbCategorical.Controls.Add(Me.UcrCheck11)
-        Me.tbCategorical.Controls.Add(Me.UcrCheck10)
+        Me.tbCategorical.Controls.Add(Me.ucrChkCatPercentCorrect)
+        Me.tbCategorical.Controls.Add(Me.ucrChkCatHeidkeSkillScore)
+        Me.tbCategorical.Controls.Add(Me.ucrChkCatPierceSkillScore)
+        Me.tbCategorical.Controls.Add(Me.ucrChkGerrityScore)
         Me.tbCategorical.Location = New System.Drawing.Point(4, 22)
         Me.tbCategorical.Name = "tbCategorical"
         Me.tbCategorical.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbCategorical.Size = New System.Drawing.Size(435, 279)
+        Me.tbCategorical.Size = New System.Drawing.Size(549, 229)
         Me.tbCategorical.TabIndex = 2
         Me.tbCategorical.Text = "Categorical"
         Me.tbCategorical.UseVisualStyleBackColor = True
         '
-        'UcrCheck13
+        'ucrChkCatPercentCorrect
         '
-        Me.UcrCheck13.Checked = False
-        Me.UcrCheck13.Location = New System.Drawing.Point(6, 18)
-        Me.UcrCheck13.Name = "UcrCheck13"
-        Me.UcrCheck13.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck13.TabIndex = 4
+        Me.ucrChkCatPercentCorrect.Checked = False
+        Me.ucrChkCatPercentCorrect.Location = New System.Drawing.Point(14, 18)
+        Me.ucrChkCatPercentCorrect.Name = "ucrChkCatPercentCorrect"
+        Me.ucrChkCatPercentCorrect.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkCatPercentCorrect.TabIndex = 4
         '
-        'UcrCheck12
+        'ucrChkCatHeidkeSkillScore
         '
-        Me.UcrCheck12.Checked = False
-        Me.UcrCheck12.Location = New System.Drawing.Point(6, 44)
-        Me.UcrCheck12.Name = "UcrCheck12"
-        Me.UcrCheck12.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck12.TabIndex = 3
+        Me.ucrChkCatHeidkeSkillScore.Checked = False
+        Me.ucrChkCatHeidkeSkillScore.Location = New System.Drawing.Point(14, 40)
+        Me.ucrChkCatHeidkeSkillScore.Name = "ucrChkCatHeidkeSkillScore"
+        Me.ucrChkCatHeidkeSkillScore.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkCatHeidkeSkillScore.TabIndex = 3
         '
-        'UcrCheck11
+        'ucrChkCatPierceSkillScore
         '
-        Me.UcrCheck11.Checked = False
-        Me.UcrCheck11.Location = New System.Drawing.Point(127, 18)
-        Me.UcrCheck11.Name = "UcrCheck11"
-        Me.UcrCheck11.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck11.TabIndex = 2
+        Me.ucrChkCatPierceSkillScore.Checked = False
+        Me.ucrChkCatPierceSkillScore.Location = New System.Drawing.Point(135, 18)
+        Me.ucrChkCatPierceSkillScore.Name = "ucrChkCatPierceSkillScore"
+        Me.ucrChkCatPierceSkillScore.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkCatPierceSkillScore.TabIndex = 2
         '
-        'UcrCheck10
+        'ucrChkGerrityScore
         '
-        Me.UcrCheck10.Checked = False
-        Me.UcrCheck10.Location = New System.Drawing.Point(127, 44)
-        Me.UcrCheck10.Name = "UcrCheck10"
-        Me.UcrCheck10.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck10.TabIndex = 1
+        Me.ucrChkGerrityScore.Checked = False
+        Me.ucrChkGerrityScore.Location = New System.Drawing.Point(135, 42)
+        Me.ucrChkGerrityScore.Name = "ucrChkGerrityScore"
+        Me.ucrChkGerrityScore.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkGerrityScore.TabIndex = 1
         '
         'sdgVerificationSummaries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(458, 356)
+        Me.ClientSize = New System.Drawing.Size(578, 300)
         Me.Controls.Add(Me.tbSummaries)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -186,6 +280,8 @@ Partial Class sdgVerificationSummaries
         Me.tbSummaries.ResumeLayout(False)
         Me.tbContinuous.ResumeLayout(False)
         Me.tbBinary.ResumeLayout(False)
+        Me.grpOrdinary.ResumeLayout(False)
+        Me.grpExtreme.ResumeLayout(False)
         Me.tbCategorical.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -196,13 +292,22 @@ Partial Class sdgVerificationSummaries
     Friend WithEvents tbContinuous As TabPage
     Friend WithEvents tbBinary As TabPage
     Friend WithEvents tbCategorical As TabPage
-    Friend WithEvents UcrCheck9 As ucrCheck
-    Friend WithEvents UcrCheck8 As ucrCheck
-    Friend WithEvents UcrCheck7 As ucrCheck
-    Friend WithEvents UcrCheck6 As ucrCheck
-    Friend WithEvents UcrCheck13 As ucrCheck
-    Friend WithEvents UcrCheck12 As ucrCheck
-    Friend WithEvents UcrCheck11 As ucrCheck
-    Friend WithEvents UcrCheck10 As ucrCheck
+    Friend WithEvents ucrChkHitRate As ucrCheck
+    Friend WithEvents ucrChkThreatScore As ucrCheck
+    Friend WithEvents ucrChkEquitableThreatScore As ucrCheck
+    Friend WithEvents ucrChkFalseAlarmRatio As ucrCheck
+    Friend WithEvents ucrChkCatPercentCorrect As ucrCheck
+    Friend WithEvents ucrChkCatHeidkeSkillScore As ucrCheck
+    Friend WithEvents ucrChkCatPierceSkillScore As ucrCheck
+    Friend WithEvents ucrChkGerrityScore As ucrCheck
     Friend WithEvents ucrContinuousVerification As ucrContinuousVerification
+    Friend WithEvents ucrChkHeidkeSkillScore As ucrCheck
+    Friend WithEvents ucrChkPercentCorrect As ucrCheck
+    Friend WithEvents ucrChkBias As ucrCheck
+    Friend WithEvents ucrChkSymmetricExremalDependenceIndex As ucrCheck
+    Friend WithEvents ucrChkExtremeDependencyScore As ucrCheck
+    Friend WithEvents ucrChkSymmetricExtremeDependencyScore As ucrCheck
+    Friend WithEvents ucrChkExremalDependencyIndex As ucrCheck
+    Friend WithEvents grpExtreme As GroupBox
+    Friend WithEvents grpOrdinary As GroupBox
 End Class
