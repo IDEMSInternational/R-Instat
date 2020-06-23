@@ -257,8 +257,8 @@ Public Class dlgImportDataset
 
         '##############################################################
         'EXCEL controls
-        ucrInputMissingValueStringExcel.SetParameter(New RParameter("na"))
-        ucrInputMissingValueStringExcel.SetRDefault(Chr(34) & "" & Chr(34))
+        'ucrInputMissingValueStringExcel.SetParameter(New RParameter("na"))
+        'ucrInputMissingValueStringExcel.SetRDefault(Chr(34) & "" & Chr(34))
 
         ucrChkTrimWSExcel.SetText("Trim Trailing White Space")
         ucrChkTrimWSExcel.SetParameter(New RParameter("trim_ws"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
@@ -415,6 +415,8 @@ Public Class dlgImportDataset
         SetRCodeForControls(True)
         RefreshFrameView()
         dctSelectedExcelSheets.Clear()
+        clbSheets.Items.Clear() 'reset this here. Not set by R code
+        ucrInputMissingValueStringExcel.SetText("") 'reset this here. Not set by R code 
         TestOkEnabled()
     End Sub
 
@@ -524,14 +526,14 @@ Public Class dlgImportDataset
 
         'EXCEL CONTROLS
         ucrNudRowsToSkipExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("skip"), iAdditionalPairNo:=1)
-        ucrInputMissingValueStringExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("na"), iAdditionalPairNo:=1)
+        'ucrInputMissingValueStringExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("na"), iAdditionalPairNo:=1)
         ucrChkTrimWSExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("trim_ws"), iAdditionalPairNo:=1)
         ucrChkColumnNamesExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("col_names"), iAdditionalPairNo:=1)
         ucrNudMaxRowsExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("n_max"), iAdditionalPairNo:=1)
         ucrChkMaxRowsExcel.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("n_max"), iAdditionalPairNo:=1)
 
         ucrNudRowsToSkipExcel.SetRCode(clsImportExcel, bReset)
-        ucrInputMissingValueStringExcel.SetRCode(clsImportExcel, bReset)
+        'ucrInputMissingValueStringExcel.SetRCode(clsImportExcel, bReset)
         ucrChkTrimWSExcel.SetRCode(clsImportExcel, bReset)
         ucrChkColumnNamesExcel.SetRCode(clsImportExcel, bReset)
         ucrNudMaxRowsExcel.SetRCode(clsImportExcel, bReset)
@@ -629,8 +631,13 @@ Public Class dlgImportDataset
             strFileType = ""
         End If
         If strFileType <> "" AndAlso strFileType <> "RDS" Then
-            ucrSaveFile.Show()
-            ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
+            'ucrSaveFile.Show()
+            'ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
+            'don't ovewrite the name for excel sheets if there is a selected sheet name
+            If (strFileType <> "XLSX" OrElse strFileType <> "XLS") AndAlso clbSheets.CheckedItems.Count = 0 Then
+                ucrSaveFile.Show()
+                ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
+            End If
         Else
             ucrSaveFile.Hide()
         End If
@@ -734,7 +741,8 @@ Public Class dlgImportDataset
                     End If
                     clsTempImport = clsImportExcel.Clone()
                     strRowMaxParamName = "n_max"
-                    clsTempImport.AddParameter("na", Chr(34) & ucrInputMissingValueStringExcel.GetText & Chr(34))
+                    'clsTempImport.AddParameter("na", Chr(34) & ucrInputMissingValueStringExcel.GetText & Chr(34))
+                    clsTempImport.AddParameter("na", GetMissingValueRText) 'TODO. do we really need to call this here? Check this
                 End If
                 If clsTempImport.ContainsParameter(strRowMaxParamName) Then
                     If Integer.TryParse(clsTempImport.GetParameter(strRowMaxParamName).strArgumentValue, iTemp) Then
@@ -799,6 +807,7 @@ Public Class dlgImportDataset
     Private Sub FillExcelSheets(strFilePath As String)
         Dim expSheet As SymbolicExpression
         Dim chrSheets As CharacterVector
+        Dim lstCheckedItems As New List(Of String)
 
         expSheet = frmMain.clsRLink.RunInternalScriptGetValue(clsGetExcelSheetNames.ToScript())
         If expSheet IsNot Nothing Then
@@ -807,20 +816,24 @@ Public Class dlgImportDataset
             chrSheets = Nothing
         End If
 
+        'store the checked items first temporarily 
+        For i As Integer = 0 To clbSheets.CheckedItems.Count - 1
+            lstCheckedItems.Add(clbSheets.CheckedItems(i).ToString)
+        Next
+
         clbSheets.Items.Clear()
         If chrSheets IsNot Nothing AndAlso chrSheets.Count > 0 Then
             clbSheets.Items.AddRange(chrSheets.ToArray())
-            'If dctSelectedExcelSheets.Count = 0 Then
-            '    clbSheets.SetItemChecked(0, True)
-            'Else
-            '    'Storing the array here because the dctSeleceted indice changes on clbSheets.itemsClicked
-            '    Dim ListOfItems As Integer() = ListOfCheckedItems.ToArray
-            '    For i = 0 To ListOfItems.Length - 1
-            '        clbSheets.SetItemChecked((ListOfItems(i) - 1), True)
-            '    Next
-            'End If
-
-
+            'if there were previously checked items then restore them
+            If lstCheckedItems.Count > 0 Then
+                For i As Integer = 0 To clbSheets.Items.Count - 1
+                    For Each strSelected As String In lstCheckedItems
+                        If strSelected = clbSheets.Items(i).ToString Then
+                            clbSheets.SetItemChecked(i, True)
+                        End If
+                    Next
+                Next
+            End If
         End If
 
         'ucrInputNamedRegions.cboInput.Items.Clear()
@@ -1020,6 +1033,34 @@ Public Class dlgImportDataset
             strCleanFileName = "defaultCleanFileName"
         End If
         Return strCleanFileName
+    End Function
+
+    Private Sub ucrInputMissingValueStringExcel_ContentsChanged() Handles ucrInputMissingValueStringExcel.ContentsChanged
+        clsImportExcelMulti.AddParameter("na", GetMissingValueRText)
+        clsImportExcel.AddParameter("na", GetMissingValueRText)
+    End Sub
+
+    Private Function GetMissingValueRText() As String
+        Dim arrStr() As String = ucrInputMissingValueStringExcel.GetText().Split(",")
+        Dim strMissingValue As String
+
+        'if length is < 2 return an R string else return a vector of strings for R
+        If arrStr.Length = 0 Then
+            strMissingValue = ""
+        ElseIf arrStr.Length = 1 Then
+            strMissingValue = Chr(34) & ucrInputMissingValueStringExcel.GetText() & Chr(34)
+        Else
+            strMissingValue = ""
+            For Each strTemp As String In arrStr
+                If strMissingValue = "" Then
+                    strMissingValue = Chr(34) & strTemp & Chr(34)
+                Else
+                    strMissingValue = strMissingValue & "," & Chr(34) & strTemp & Chr(34)
+                End If
+            Next
+            strMissingValue = "c(" & strMissingValue & ")"
+        End If
+        Return strMissingValue
     End Function
 
 End Class
