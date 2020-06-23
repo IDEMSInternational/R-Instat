@@ -610,6 +610,9 @@ Partial Class frmMain
         Me.mnuStructuredTimeSeriesDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator61 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuStructuredTimeSeriesModel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredTimeSeriesModelOneVariable = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredTimeSeriesModelGeneral = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator62 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3835,7 +3838,7 @@ Partial Class frmMain
         '
         'mnuStructuredTimeSeries
         '
-        Me.mnuStructuredTimeSeries.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDefine, Me.ToolStripSeparator60, Me.mnuStructuredTimeSeriesDescribe, Me.ToolStripSeparator61, Me.mnuStructuredTimeSeriesModel})
+        Me.mnuStructuredTimeSeries.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDefine, Me.ToolStripSeparator60, Me.mnuStructuredTimeSeriesDescribe, Me.ToolStripSeparator61, Me.mnuStructuredTimeSeriesModel, Me.ToolStripSeparator62})
         Me.mnuStructuredTimeSeries.Name = "mnuStructuredTimeSeries"
         resources.ApplyResources(Me.mnuStructuredTimeSeries, "mnuStructuredTimeSeries")
         '
@@ -3872,8 +3875,24 @@ Partial Class frmMain
         '
         'mnuStructuredTimeSeriesModel
         '
+        Me.mnuStructuredTimeSeriesModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesModelOneVariable, Me.mnuStructuredTimeSeriesModelGeneral})
         Me.mnuStructuredTimeSeriesModel.Name = "mnuStructuredTimeSeriesModel"
         resources.ApplyResources(Me.mnuStructuredTimeSeriesModel, "mnuStructuredTimeSeriesModel")
+        '
+        'mnuStructuredTimeSeriesModelOneVariable
+        '
+        Me.mnuStructuredTimeSeriesModelOneVariable.Name = "mnuStructuredTimeSeriesModelOneVariable"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesModelOneVariable, "mnuStructuredTimeSeriesModelOneVariable")
+        '
+        'mnuStructuredTimeSeriesModelGeneral
+        '
+        Me.mnuStructuredTimeSeriesModelGeneral.Name = "mnuStructuredTimeSeriesModelGeneral"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesModelGeneral, "mnuStructuredTimeSeriesModelGeneral")
+        '
+        'ToolStripSeparator62
+        '
+        Me.ToolStripSeparator62.Name = "ToolStripSeparator62"
+        resources.ApplyResources(Me.ToolStripSeparator62, "ToolStripSeparator62")
         '
         'frmMain
         '
@@ -4492,4 +4511,7 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredTimeSeriesDescribeGeneral As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator61 As ToolStripSeparator
     Friend WithEvents mnuStructuredTimeSeriesModel As ToolStripMenuItem
+    Friend WithEvents mnuStructuredTimeSeriesModelOneVariable As ToolStripMenuItem
+    Friend WithEvents mnuStructuredTimeSeriesModelGeneral As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator62 As ToolStripSeparator
 End Class
