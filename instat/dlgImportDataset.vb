@@ -855,6 +855,7 @@ Public Class dlgImportDataset
         'currently we have no way of knowing which control has raised this event and therefore can't do that check
         'so instead we are using the strFileType to identify which RFunctions should be updated accordingly
         If strFileType = "XLSX" OrElse strFileType = "XLS" Then
+            'set for single imports and multiple imports 
             clsImportExcelMulti.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()))
             clsImportExcel.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()))
         ElseIf strFileType = "CSV" Then
