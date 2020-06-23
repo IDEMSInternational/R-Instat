@@ -3519,6 +3519,12 @@
   <data name="mnuStructuredProcurement.Text" xml:space="preserve">
     <value>Procurement...</value>
   </data>
+  <data name="mnuStructuredOptionByContext.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuStructuredOptionByContext.Text" xml:space="preserve">
+    <value>Options by Context</value>
+  </data>
   <data name="mnuStructured.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 20</value>
   </data>
@@ -9592,6 +9598,12 @@
     <value>mnuStructuredProcurement</value>
   </data>
   <data name="&gt;&gt;mnuStructuredProcurement.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredOptionByContext.Name" xml:space="preserve">
+    <value>mnuStructuredOptionByContext</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredOptionByContext.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
