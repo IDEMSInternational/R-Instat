@@ -602,6 +602,7 @@ Partial Class frmMain
         Me.mnuStructuredLow_FlowDefine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredSurvival = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredSurvivalDefine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredTimeSeries = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3783,7 +3784,7 @@ Partial Class frmMain
         '
         'mnuStructured
         '
-        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival})
+        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries})
         Me.mnuStructured.Name = "mnuStructured"
         resources.ApplyResources(Me.mnuStructured, "mnuStructured")
         '
@@ -3824,6 +3825,11 @@ Partial Class frmMain
         '
         Me.mnuStructuredSurvivalDefine.Name = "mnuStructuredSurvivalDefine"
         resources.ApplyResources(Me.mnuStructuredSurvivalDefine, "mnuStructuredSurvivalDefine")
+        '
+        'mnuStructuredTimeSeries
+        '
+        Me.mnuStructuredTimeSeries.Name = "mnuStructuredTimeSeries"
+        resources.ApplyResources(Me.mnuStructuredTimeSeries, "mnuStructuredTimeSeries")
         '
         'frmMain
         '
@@ -4434,4 +4440,5 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredLow_FlowDefine As ToolStripMenuItem
     Friend WithEvents mnuStructuredSurvival As ToolStripMenuItem
     Friend WithEvents mnuStructuredSurvivalDefine As ToolStripMenuItem
+    Friend WithEvents mnuStructuredTimeSeries As ToolStripMenuItem
 End Class

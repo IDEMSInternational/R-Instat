@@ -3447,6 +3447,12 @@
   <data name="mnuStructuredSurvival.Text" xml:space="preserve">
     <value>Survival</value>
   </data>
+  <data name="mnuStructuredTimeSeries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuStructuredTimeSeries.Text" xml:space="preserve">
+    <value>Time Series</value>
+  </data>
   <data name="mnuStructured.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 20</value>
   </data>
@@ -9436,6 +9442,12 @@
     <value>mnuStructuredSurvivalDefine</value>
   </data>
   <data name="&gt;&gt;mnuStructuredSurvivalDefine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredTimeSeries.Name" xml:space="preserve">
+    <value>mnuStructuredTimeSeries</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredTimeSeries.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
