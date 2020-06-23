@@ -368,9 +368,9 @@ Public Class RLink
             '    then assume command is not complete
             Dim cLastChar As Char = strTrimmedLine.Last
             Dim strLast3Chars As String = ""
-            Dim iNumOpenCurlies = strScriptCmd.Where(Function(c) c = "{"c).Count
-            Dim iNumClosedCurlies = strScriptCmd.Where(Function(c) c = "}"c).Count
-            Dim iNumDoubleQuotes = strScriptCmd.Where(Function(c) c = """"c).Count
+            Dim iNumOpenCurlies As Integer = strScriptCmd.Where(Function(c) c = "{"c).Count
+            Dim iNumClosedCurlies As Integer = strScriptCmd.Where(Function(c) c = "}"c).Count
+            Dim iNumDoubleQuotes As Integer = strScriptCmd.Where(Function(c) c = """"c).Count
             If strTrimmedLine.Length >= 3 Then
                 strLast3Chars = strTrimmedLine.Substring(strTrimmedLine.Length - 3)
             End If

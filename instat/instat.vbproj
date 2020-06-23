@@ -195,10 +195,22 @@
     <Compile Include="dlgCircular.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCompareSummary.Designer.vb">
+      <DependentUpon>dlgCompareSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCompareSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDisplayTopN.Designer.vb">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgDisplayTopN.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgHomogenization.Designer.vb">
+      <DependentUpon>dlgHomogenization.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgHomogenization.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgFiltersFromFactor.Designer.vb">
@@ -1121,6 +1133,12 @@
     <Compile Include="sdgTwoWayFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgVerificationSummaries.Designer.vb">
+      <DependentUpon>sdgVerificationSummaries.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgVerificationSummaries.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgWindrose.Designer.vb">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
     </Compile>
@@ -1617,6 +1635,12 @@
       <DependentUpon>ucrColumnMetadata.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrColumnMetadata.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrContinuousVerification.Designer.vb">
+      <DependentUpon>ucrContinuousVerification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrContinuousVerification.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrCore.Designer.vb">
@@ -2484,9 +2508,15 @@
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCompareSummary.resx">
+      <DependentUpon>dlgCompareSummary.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayTopN.resx">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHomogenization.resx">
+      <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFiltersFromFactor.resx">
       <DependentUpon>sdgFiltersFromFactor.vb</DependentUpon>
@@ -4235,6 +4265,9 @@
     <EmbeddedResource Include="sdgVariableTransformations.sw-KE.resx">
       <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgVerificationSummaries.resx">
+      <DependentUpon>sdgVerificationSummaries.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgWindrose.resx">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
     </EmbeddedResource>
@@ -4291,6 +4324,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrColumnMetadata.sw-KE.resx">
       <DependentUpon>ucrColumnMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrContinuousVerification.resx">
+      <DependentUpon>ucrContinuousVerification.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrCore.resx">
       <DependentUpon>ucrCore.vb</DependentUpon>
