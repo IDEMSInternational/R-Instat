@@ -127,13 +127,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 70</value>
+    <value>251, 80</value>
   </data>
   <data name="lblColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
   </data>
   <data name="lblColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>8</value>
   </data>
   <data name="lblColumn.Text" xml:space="preserve">
     <value>Column:</value>
@@ -157,13 +157,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblReplaceBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 155</value>
+    <value>251, 168</value>
   </data>
   <data name="lblReplaceBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
   </data>
   <data name="lblReplaceBy.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>12</value>
   </data>
   <data name="lblReplaceBy.Text" xml:space="preserve">
     <value>Replace By:</value>
@@ -187,13 +187,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblPattern.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 112</value>
+    <value>251, 122</value>
   </data>
   <data name="lblPattern.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
   </data>
   <data name="lblPattern.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>10</value>
   </data>
   <data name="lblPattern.Text" xml:space="preserve">
     <value>Pattern:</value>
@@ -220,10 +220,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 12</value>
+    <value>24, 12</value>
   </data>
   <data name="rdoCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 27</value>
+    <value>80, 27</value>
   </data>
   <data name="rdoCount.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -256,10 +256,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoReplace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>432, 12</value>
+    <value>336, 12</value>
   </data>
   <data name="rdoReplace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 27</value>
+    <value>80, 27</value>
   </data>
   <data name="rdoReplace.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -292,10 +292,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoLocate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>339, 12</value>
+    <value>258, 12</value>
   </data>
   <data name="rdoLocate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 27</value>
+    <value>80, 27</value>
   </data>
   <data name="rdoLocate.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -328,10 +328,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoExtract.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 12</value>
+    <value>180, 12</value>
   </data>
   <data name="rdoExtract.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 27</value>
+    <value>80, 27</value>
   </data>
   <data name="rdoExtract.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -364,10 +364,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoDetect.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 12</value>
+    <value>102, 12</value>
   </data>
   <data name="rdoDetect.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 27</value>
+    <value>80, 27</value>
   </data>
   <data name="rdoDetect.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -400,10 +400,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoReplaceAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>525, 12</value>
+    <value>414, 12</value>
   </data>
   <data name="rdoReplaceAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 27</value>
+    <value>80, 27</value>
   </data>
   <data name="rdoReplaceAll.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -442,7 +442,7 @@
     <value>37, 60</value>
   </data>
   <data name="cmdClear.TabIndex" type="System.Int32, mscorlib">
-    <value>145</value>
+    <value>17</value>
   </data>
   <data name="cmdClear.Text" xml:space="preserve">
     <value>Clear</value>
@@ -472,7 +472,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdBackSlash.TabIndex" type="System.Int32, mscorlib">
-    <value>140</value>
+    <value>22</value>
   </data>
   <data name="cmdBackSlash.Text" xml:space="preserve">
     <value>\ </value>
@@ -502,7 +502,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdWBackSlash.TabIndex" type="System.Int32, mscorlib">
-    <value>139</value>
+    <value>16</value>
   </data>
   <data name="cmdWBackSlash.Text" xml:space="preserve">
     <value>\ W</value>
@@ -532,7 +532,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdDollarSign.TabIndex" type="System.Int32, mscorlib">
-    <value>138</value>
+    <value>11</value>
   </data>
   <data name="cmdDollarSign.Text" xml:space="preserve">
     <value>$</value>
@@ -562,7 +562,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdOpenCloseParenthesis.TabIndex" type="System.Int32, mscorlib">
-    <value>137</value>
+    <value>5</value>
   </data>
   <data name="cmdOpenCloseParenthesis.Text" xml:space="preserve">
     <value>(  )</value>
@@ -592,7 +592,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdBackSlashd.TabIndex" type="System.Int32, mscorlib">
-    <value>136</value>
+    <value>20</value>
   </data>
   <data name="cmdBackSlashd.Text" xml:space="preserve">
     <value>\ d</value>
@@ -625,7 +625,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdBackSlashs.TabIndex" type="System.Int32, mscorlib">
-    <value>132</value>
+    <value>18</value>
   </data>
   <data name="cmdBackSlashs.Text" xml:space="preserve">
     <value>\ s</value>
@@ -655,7 +655,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdPower.TabIndex" type="System.Int32, mscorlib">
-    <value>133</value>
+    <value>10</value>
   </data>
   <data name="cmdPower.Text" xml:space="preserve">
     <value>^</value>
@@ -685,7 +685,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdOpenBracketCaretClosedBracket.TabIndex" type="System.Int32, mscorlib">
-    <value>131</value>
+    <value>3</value>
   </data>
   <data name="cmdOpenBracketCaretClosedBracket.Text" xml:space="preserve">
     <value>[ ^ ]</value>
@@ -715,7 +715,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdPlus.TabIndex" type="System.Int32, mscorlib">
-    <value>130</value>
+    <value>7</value>
   </data>
   <data name="cmdPlus.Text" xml:space="preserve">
     <value>+</value>
@@ -745,7 +745,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdBackSlashw.TabIndex" type="System.Int32, mscorlib">
-    <value>129</value>
+    <value>15</value>
   </data>
   <data name="cmdBackSlashw.Text" xml:space="preserve">
     <value>\ w</value>
@@ -775,7 +775,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdMultiply.TabIndex" type="System.Int32, mscorlib">
-    <value>128</value>
+    <value>9</value>
   </data>
   <data name="cmdMultiply.Text" xml:space="preserve">
     <value>.</value>
@@ -805,7 +805,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdOpenCloseBrace.TabIndex" type="System.Int32, mscorlib">
-    <value>127</value>
+    <value>4</value>
   </data>
   <data name="cmdOpenCloseBrace.Text" xml:space="preserve">
     <value>{  }</value>
@@ -835,7 +835,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdOpenClosedBracket.TabIndex" type="System.Int32, mscorlib">
-    <value>126</value>
+    <value>2</value>
   </data>
   <data name="cmdOpenClosedBracket.Text" xml:space="preserve">
     <value>[  ]</value>
@@ -865,7 +865,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdSingleQuote.TabIndex" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>1</value>
   </data>
   <data name="cmdSingleQuote.Text" xml:space="preserve">
     <value>' '</value>
@@ -895,7 +895,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdQuote.TabIndex" type="System.Int32, mscorlib">
-    <value>124</value>
+    <value>0</value>
   </data>
   <data name="cmdQuote.Text" xml:space="preserve">
     <value>" "</value>
@@ -925,7 +925,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdQuestionMark.TabIndex" type="System.Int32, mscorlib">
-    <value>123</value>
+    <value>8</value>
   </data>
   <data name="cmdQuestionMark.Text" xml:space="preserve">
     <value>?</value>
@@ -955,7 +955,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdDBackSlah.TabIndex" type="System.Int32, mscorlib">
-    <value>122</value>
+    <value>21</value>
   </data>
   <data name="cmdDBackSlah.Text" xml:space="preserve">
     <value>\ D</value>
@@ -985,7 +985,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdStar.TabIndex" type="System.Int32, mscorlib">
-    <value>121</value>
+    <value>6</value>
   </data>
   <data name="cmdStar.Text" xml:space="preserve">
     <value>*</value>
@@ -1015,7 +1015,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdBbackSlash.TabIndex" type="System.Int32, mscorlib">
-    <value>120</value>
+    <value>14</value>
   </data>
   <data name="cmdBbackSlash.Text" xml:space="preserve">
     <value>\ B</value>
@@ -1045,7 +1045,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdBackSlashb.TabIndex" type="System.Int32, mscorlib">
-    <value>119</value>
+    <value>13</value>
   </data>
   <data name="cmdBackSlashb.Text" xml:space="preserve">
     <value>\ b</value>
@@ -1075,7 +1075,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdSbackSlash.TabIndex" type="System.Int32, mscorlib">
-    <value>118</value>
+    <value>19</value>
   </data>
   <data name="cmdSbackSlash.Text" xml:space="preserve">
     <value>\ S</value>
@@ -1105,7 +1105,7 @@
     <value>38, 30</value>
   </data>
   <data name="cmdOr.TabIndex" type="System.Int32, mscorlib">
-    <value>117</value>
+    <value>12</value>
   </data>
   <data name="cmdOr.Text" xml:space="preserve">
     <value>|,</value>
@@ -1135,10 +1135,10 @@
     <value>239, 141</value>
   </data>
   <data name="grpRegex.TabIndex" type="System.Int32, mscorlib">
-    <value>180</value>
+    <value>18</value>
   </data>
   <data name="grpRegex.Text" xml:space="preserve">
-    <value>Regex keyboard</value>
+    <value>Regex Keyboard</value>
   </data>
   <data name="&gt;&gt;grpRegex.Name" xml:space="preserve">
     <value>grpRegex</value>
@@ -1159,13 +1159,13 @@
     <value>NoControl</value>
   </data>
   <data name="rdoRegex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>324, 215</value>
+    <value>336, 232</value>
   </data>
   <data name="rdoRegex.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 17</value>
   </data>
   <data name="rdoRegex.TabIndex" type="System.Int32, mscorlib">
-    <value>183</value>
+    <value>17</value>
   </data>
   <data name="rdoRegex.Text" xml:space="preserve">
     <value>Regex</value>
@@ -1189,13 +1189,13 @@
     <value>NoControl</value>
   </data>
   <data name="rdoFixed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 215</value>
+    <value>266, 232</value>
   </data>
   <data name="rdoFixed.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 17</value>
   </data>
   <data name="rdoFixed.TabIndex" type="System.Int32, mscorlib">
-    <value>182</value>
+    <value>16</value>
   </data>
   <data name="rdoFixed.Text" xml:space="preserve">
     <value>Fixed</value>
@@ -1213,13 +1213,13 @@
     <value>1</value>
   </data>
   <data name="ucrPnlFixedRegex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 211</value>
+    <value>258, 227</value>
   </data>
   <data name="ucrPnlFixedRegex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 25</value>
+    <value>150, 28</value>
   </data>
   <data name="ucrPnlFixedRegex.TabIndex" type="System.Int32, mscorlib">
-    <value>181</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrPnlFixedRegex.Name" xml:space="preserve">
     <value>ucrPnlFixedRegex</value>
@@ -1236,11 +1236,14 @@
   <data name="ucrSaveStringHandling.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 260</value>
   </data>
+  <data name="ucrSaveStringHandling.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrSaveStringHandling.Size" type="System.Drawing.Size, System.Drawing">
     <value>293, 24</value>
   </data>
   <data name="ucrSaveStringHandling.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="&gt;&gt;ucrSaveStringHandling.Name" xml:space="preserve">
     <value>ucrSaveStringHandling</value>
@@ -1261,16 +1264,16 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>665, 342</value>
+    <value>673, 346</value>
   </data>
   <data name="ucrChkIncludeRegularExpressions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 231</value>
+    <value>10, 232</value>
   </data>
   <data name="ucrChkIncludeRegularExpressions.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 20</value>
   </data>
   <data name="ucrChkIncludeRegularExpressions.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrChkIncludeRegularExpressions.Name" xml:space="preserve">
     <value>ucrChkIncludeRegularExpressions</value>
@@ -1285,7 +1288,7 @@
     <value>6</value>
   </data>
   <data name="ucrReceiverStringHandling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 89</value>
+    <value>250, 95</value>
   </data>
   <data name="ucrReceiverStringHandling.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1294,7 +1297,7 @@
     <value>158, 20</value>
   </data>
   <data name="ucrReceiverStringHandling.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrReceiverStringHandling.Name" xml:space="preserve">
     <value>ucrReceiverStringHandling</value>
@@ -1309,13 +1312,13 @@
     <value>13</value>
   </data>
   <data name="ucrInputReplaceBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 171</value>
+    <value>250, 183</value>
   </data>
   <data name="ucrInputReplaceBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 20</value>
   </data>
   <data name="ucrInputReplaceBy.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrInputReplaceBy.Name" xml:space="preserve">
     <value>ucrInputReplaceBy</value>
@@ -1330,7 +1333,7 @@
     <value>17</value>
   </data>
   <data name="ucrInputPattern.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 129</value>
+    <value>250, 139</value>
   </data>
   <data name="ucrInputPattern.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 20</value>
@@ -1351,7 +1354,7 @@
     <value>18</value>
   </data>
   <data name="ucrSelectorStringHandling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 45</value>
+    <value>10, 45</value>
   </data>
   <data name="ucrSelectorStringHandling.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1375,13 +1378,13 @@
     <value>19</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 290</value>
+    <value>10, 289</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>406, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -1396,10 +1399,10 @@
     <value>20</value>
   </data>
   <data name="ucrPnlStringHandling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 3</value>
+    <value>10, 8</value>
   </data>
   <data name="ucrPnlStringHandling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>560, 39</value>
+    <value>493, 39</value>
   </data>
   <data name="ucrPnlStringHandling.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1416,9 +1419,6 @@
   <data name="&gt;&gt;ucrPnlStringHandling.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -1432,7 +1432,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverForRegexExpression.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 127</value>
+    <value>250, 139</value>
   </data>
   <data name="ucrReceiverForRegexExpression.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1441,7 +1441,7 @@
     <value>158, 28</value>
   </data>
   <data name="ucrReceiverForRegexExpression.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrReceiverForRegexExpression.Name" xml:space="preserve">
     <value>ucrReceiverForRegexExpression</value>
