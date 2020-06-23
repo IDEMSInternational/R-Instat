@@ -54,7 +54,7 @@ Partial Class ucrContinuousVerification
         '
         Me.lblJmia.AutoSize = True
         Me.lblJmia.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblJmia.Location = New System.Drawing.Point(373, 176)
+        Me.lblJmia.Location = New System.Drawing.Point(423, 176)
         Me.lblJmia.Name = "lblJmia"
         Me.lblJmia.Size = New System.Drawing.Size(15, 13)
         Me.lblJmia.TabIndex = 20
@@ -65,7 +65,7 @@ Partial Class ucrContinuousVerification
         Me.ucrInputJmia.AddQuotesIfUnrecognised = True
         Me.ucrInputJmia.IsMultiline = False
         Me.ucrInputJmia.IsReadOnly = False
-        Me.ucrInputJmia.Location = New System.Drawing.Point(392, 172)
+        Me.ucrInputJmia.Location = New System.Drawing.Point(442, 172)
         Me.ucrInputJmia.Name = "ucrInputJmia"
         Me.ucrInputJmia.Size = New System.Drawing.Size(32, 21)
         Me.ucrInputJmia.TabIndex = 21
@@ -217,7 +217,7 @@ Partial Class ucrContinuousVerification
         'cmdHelp
         '
         Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdHelp.Location = New System.Drawing.Point(424, 170)
+        Me.cmdHelp.Location = New System.Drawing.Point(474, 170)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(65, 23)
         Me.cmdHelp.TabIndex = 22

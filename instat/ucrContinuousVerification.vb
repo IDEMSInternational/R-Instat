@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class ucrContinuousVerification
     Private bControlsInitialised As Boolean = True
-    Private lstSummaryCheckboxes As New List(Of ucrCheck)
+    Private lstContinuousCheckboxes As New List(Of ucrCheck)
 
     Private Sub InitialiseControls()
         'HydroGOF Options
@@ -94,9 +94,9 @@ Public Class ucrContinuousVerification
 
         ucrChkSelectAll.SetText("Select all")
 
-        lstSummaryCheckboxes.AddRange({ucrChkCorrelations, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency})
+        lstContinuousCheckboxes.AddRange({ucrChkCorrelations, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency})
 
-        For Each ctr In lstSummaryCheckboxes
+        For Each ctr In lstContinuousCheckboxes
             ctr.SetParameterIncludeArgumentName(False)
             ctr.SetRDefault(Chr(34) & Chr(34))
         Next
@@ -108,7 +108,7 @@ Public Class ucrContinuousVerification
             bControlsInitialised = False
         End If
 
-        For Each ctr In lstSummaryCheckboxes
+        For Each ctr In lstContinuousCheckboxes
             ctr.SetRCode(clsNewListFunction, bReset)
         Next
 
@@ -133,13 +133,17 @@ Public Class ucrContinuousVerification
 
     Private Sub ucrChkSelectAll_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectAll.ControlValueChanged
         If ucrChkSelectAll.Checked Then
-            For Each ctrTemp In lstSummaryCheckboxes
-                ctrTemp.Checked = True
+            For Each ctrTemp In lstContinuousCheckboxes
+                If Not ctrTemp.Checked Then
+                    ctrTemp.Checked = True
+                End If
             Next
             ucrChkSelectAll.SetText("Unselect all")
         Else
-            For Each ctrTemp In lstSummaryCheckboxes
-                ctrTemp.Checked = False
+            For Each ctrTemp In lstContinuousCheckboxes
+                If ctrTemp.Checked Then
+                    ctrTemp.Checked = False
+                End If
             Next
             ucrChkSelectAll.SetText("Select all")
         End If
