@@ -3513,6 +3513,12 @@
   <data name="mnuStructuredClimatic.Text" xml:space="preserve">
     <value>Climatic...</value>
   </data>
+  <data name="mnuStructuredProcurement.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuStructuredProcurement.Text" xml:space="preserve">
+    <value>Procurement...</value>
+  </data>
   <data name="mnuStructured.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 20</value>
   </data>
@@ -9580,6 +9586,12 @@
     <value>mnuStructuredClimatic</value>
   </data>
   <data name="&gt;&gt;mnuStructuredClimatic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredProcurement.Name" xml:space="preserve">
+    <value>mnuStructuredProcurement</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredProcurement.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
