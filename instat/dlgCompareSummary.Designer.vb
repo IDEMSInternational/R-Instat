@@ -44,9 +44,9 @@ Partial Class dlgCompareSummary
         Me.lblStation.AutoSize = True
         Me.lblStation.Location = New System.Drawing.Point(273, 76)
         Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(84, 13)
+        Me.lblStation.Size = New System.Drawing.Size(56, 13)
         Me.lblStation.TabIndex = 5
-        Me.lblStation.Text = "Station Element:"
+        Me.lblStation.Text = "Observed:"
         '
         'lblFactors
         '
@@ -62,9 +62,9 @@ Partial Class dlgCompareSummary
         Me.lblSatellite.AutoSize = True
         Me.lblSatellite.Location = New System.Drawing.Point(273, 126)
         Me.lblSatellite.Name = "lblSatellite"
-        Me.lblSatellite.Size = New System.Drawing.Size(88, 13)
+        Me.lblSatellite.Size = New System.Drawing.Size(56, 13)
         Me.lblSatellite.TabIndex = 7
-        Me.lblSatellite.Text = "Satellite Element:"
+        Me.lblSatellite.Text = "Estimated:"
         '
         'rdoContinuous
         '
