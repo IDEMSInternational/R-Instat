@@ -37,7 +37,7 @@ Public Class sdgVariableTransformations
     Private clsPolynomialFunc As New RFunction
     Private bControlsInitialised As Boolean = False
     Private strCurrentVariableName As String
-    Public strMedianValue As String
+    Public strMedianValue As String = ""
 
     Private Sub sdgVariableTransformations_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)

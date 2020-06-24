@@ -882,7 +882,6 @@ Public Class dlgTwoVariableFitModel
     '''--------------------------------------------------------------------------------------------
     Private Sub GetColumnMidian()
         Dim expColumn As SymbolicExpression
-        Dim medianValue As String
         Dim clsGetColumnMedianFunc As New RFunction
         Dim clsGetVariablesFunc As New RFunction
 
@@ -896,10 +895,9 @@ Public Class dlgTwoVariableFitModel
         clsGetColumnMedianFunc.AddParameter("na.rm", "TRUE", iPosition:=1)
 
 
-        expColumn = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnMedianFunc.ToScript, bSilent:=False)
+        expColumn = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnMedianFunc.ToScript(), bSilent:=False)
         If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
-            medianValue = expColumn.AsCharacter(0)
-            StrMedianValue = medianValue
+            StrMedianValue = expColumn.AsCharacter(0)
         End If
     End Sub
 
