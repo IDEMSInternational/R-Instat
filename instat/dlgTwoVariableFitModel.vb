@@ -791,7 +791,7 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub FirstExplanatoryFunctionEnabled()
         If Not ucrReceiverExplanatory.IsEmpty AndAlso {"numeric", "integer", "Date"}.Contains(ucrReceiverExplanatory.strCurrDataType) Then
-            GetColumnMidian()
+            GetColumnMedian()
             cmdExplanatoryFunction.Enabled = True
         Else
             cmdExplanatoryFunction.Enabled = False
@@ -880,7 +880,7 @@ Public Class dlgTwoVariableFitModel
     '''            broken stick textbox to this value
     '''             </summary>
     '''--------------------------------------------------------------------------------------------
-    Private Sub GetColumnMidian()
+    Private Sub GetColumnMedian()
         Dim expColumn As SymbolicExpression
         Dim clsGetColumnMedianFunc As New RFunction
         Dim clsGetVariablesFunc As New RFunction
