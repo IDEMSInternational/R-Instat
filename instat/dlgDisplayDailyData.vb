@@ -219,7 +219,7 @@ Public Class dlgDisplayDailyData
 
         clsXLabFunction.SetPackageName("ggplot2")
         clsXLabFunction.SetRCommand("xlab")
-        clsXLabFunction.AddParameter("label", "",, iPosition:=0, bIncludeArgumentName:=False)
+        clsXLabFunction.AddParameter("label", Chr(34) & "" & Chr(34),, iPosition:=0, bIncludeArgumentName:=False)
 
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetFunction.SetRCommand("facet_grid")
@@ -227,7 +227,7 @@ Public Class dlgDisplayDailyData
         clsFacetFunction.AddParameter("rows", "vars(variable)", iPosition:=1)
 
         clsNAFilterOperator.SetOperation("%>%")
-        clsNAFilterOperator.AddParameter("filter", "filter(!is.na(value))", iPosition:=1)
+        clsNAFilterOperator.AddParameter("filter", "filter(is.na(value))", iPosition:=1)
 
         clsDisplayDailyGraphOperator.SetOperation("")
         clsDisplayDailyTableOperator.SetOperation("")
@@ -269,6 +269,7 @@ Public Class dlgDisplayDailyData
         clsGgPlotOperator.AddParameter("theme_grey", clsRFunctionParameter:=clsThemeGreyFunction, iPosition:=3)
         clsGgPlotOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=4)
         clsGgPlotOperator.AddParameter("facet", clsRFunctionParameter:=clsFacetFunction, iPosition:=5)
+        clsGgPlotOperator.AddParameter("xlab", clsRFunctionParameter:=clsXLabFunction, iPosition:=6)
 
         clsGgPlotOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
