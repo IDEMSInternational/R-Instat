@@ -1714,6 +1714,24 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
 }
 )
 
+DataSheet$set("public", "delete_objects", function(data_name, object_names, object_type = "object") {
+  if(!object_type %in% c("object", "graph", "table","model","filter", "calculation")) stop(object_type, " must be either object (graph, table or model), filter or a calculation")
+  if(any(object_type == c("object", "graph", "table","model"))){
+      if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in overall objects list")
+      private$objects[names(private$objects) == object_names] <- NULL
+    }else if(object_type == "filter"){
+      if(!object_names %in% names(private$filters)) stop(object_names, " not found in filters list")
+      private$filters[names(private$filters) == object_names] <- NULL
+    }else if(object_type == "calculation"){
+      if(!object_names %in% names(private$calculations)) stop(object_names, " not found in calculations list")
+      private$calculations[names(private$calculations) == object_names] <- NULL
+    }
+  if(!is.null(private$.last_graph) && length(private$.last_graph) == 2 && private$.last_graph[1] == data_name && private$.last_graph[2] %in% object_names) {
+    private$.last_graph <- NULL
+  }
+}
+)
+
 DataSheet$set("public", "reorder_objects", function(new_order) {
   if(length(new_order) != length(private$objects) || !setequal(new_order, names(private$objects))) stop("new_order must be a permutation of the current object names.")
   self$set_objects(private$objects[new_order])
