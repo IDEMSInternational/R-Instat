@@ -228,8 +228,6 @@ Partial Class frmMain
         Me.mnuClimaticPrepareLengthOfSeason = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareSpells = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareExtremes = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareCompare = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareCompareCalculation = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareCompareSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator46 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticPrepareClimdex = New System.Windows.Forms.ToolStripMenuItem()
@@ -503,6 +501,29 @@ Partial Class frmMain
         Me.mnuPrepareRObjectsRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareRObjectsReorder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareRObjectsDelete = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructured = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuStructuredCircular = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularDefine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredLow_Flow = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredLow_FlowDefine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredSurvival = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredSurvivalDefine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredTimeSeries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredTimeSeriesDefine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator60 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuStructuredTimeSeriesDescribe = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredTimeSeriesDescribeOneVariable = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredTimeSeriesDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator61 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuStructuredTimeSeriesModel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredTimeSeriesModelOneVariable = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredTimeSeriesModelGeneral = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator62 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator63 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuStructuredClimatic = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredProcurement = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredOptionByContext = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurement = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDefineData = New System.Windows.Forms.ToolStripMenuItem()
@@ -580,43 +601,22 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
-        Me.ucrColumnMeta = New instat.ucrColumnMetadata()
-        Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
         Me.splLogScript = New System.Windows.Forms.SplitContainer()
-        Me.ucrLogWindow = New instat.ucrLog()
-        Me.ucrScriptWindow = New instat.ucrScript()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
-        Me.ucrDataViewer = New instat.ucrDataView()
-        Me.ucrOutput = New instat.ucrOutputWindow()
         Me.mnuRViewer = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPlotly = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructured = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuStructuredCircular = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredCircularDefine = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredLow_Flow = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredLow_FlowDefine = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredSurvival = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredSurvivalDefine = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredTimeSeries = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredTimeSeriesDefine = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator60 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuStructuredTimeSeriesDescribe = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredTimeSeriesDescribeOneVariable = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredTimeSeriesDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator61 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuStructuredTimeSeriesModel = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredTimeSeriesModelOneVariable = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredTimeSeriesModelGeneral = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator62 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator63 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuStructuredClimatic = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredProcurement = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredOptionByContext = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPrepareCompareCalculation = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ucrColumnMeta = New instat.ucrColumnMetadata()
+        Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
+        Me.ucrLogWindow = New instat.ucrLog()
+        Me.ucrScriptWindow = New instat.ucrScript()
+        Me.ucrDataViewer = New instat.ucrDataView()
+        Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.ToolStripSeparator64 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1623,7 +1623,7 @@ Partial Class frmMain
         '
         'mnuClimaticPrepare
         '
-        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticPrepareTransform, Me.mnuClimaticPrepareConversions, Me.ToolStripSeparator37, Me.mnuClimaticPrepareClimaticSummaries, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareEndOfRains, Me.mnuClimaticPrepareLengthOfSeason, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.mnuClimaticPrepareCompare, Me.ToolStripSeparator46, Me.mnuClimaticPrepareClimdex, Me.mnuClimaticPrepareSPI, Me.ToolStripSeparator51, Me.mnuClimaticPrepareEvapotranspiration, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
+        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticPrepareTransform, Me.mnuClimaticPrepareConversions, Me.ToolStripSeparator37, Me.mnuClimaticPrepareClimaticSummaries, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareEndOfRains, Me.mnuClimaticPrepareLengthOfSeason, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.ToolStripSeparator64, Me.mnuClimaticPrepareCompareCalculation, Me.mnuClimaticPrepareCompareSummary, Me.ToolStripSeparator46, Me.mnuClimaticPrepareClimdex, Me.mnuClimaticPrepareSPI, Me.ToolStripSeparator51, Me.mnuClimaticPrepareEvapotranspiration, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
         Me.mnuClimaticPrepare.Name = "mnuClimaticPrepare"
         resources.ApplyResources(Me.mnuClimaticPrepare, "mnuClimaticPrepare")
         Me.mnuClimaticPrepare.Tag = "Prepare"
@@ -1673,21 +1673,10 @@ Partial Class frmMain
         Me.mnuClimaticPrepareExtremes.Name = "mnuClimaticPrepareExtremes"
         resources.ApplyResources(Me.mnuClimaticPrepareExtremes, "mnuClimaticPrepareExtremes")
         '
-        'mnuClimaticPrepareCompare
-        '
-        Me.mnuClimaticPrepareCompare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticPrepareCompareCalculation, Me.mnuClimaticPrepareCompareSummary})
-        Me.mnuClimaticPrepareCompare.Name = "mnuClimaticPrepareCompare"
-        resources.ApplyResources(Me.mnuClimaticPrepareCompare, "mnuClimaticPrepareCompare")
-        '
-        'mnuClimaticPrepareCompareCalculation
-        '
-        Me.mnuClimaticPrepareCompareCalculation.Name = "mnuClimaticPrepareCompareCalculation"
-        resources.ApplyResources(Me.mnuClimaticPrepareCompareCalculation, "mnuClimaticPrepareCompareCalculation")
-        '
         'mnuClimaticPrepareCompareSummary
         '
-        resources.ApplyResources(Me.mnuClimaticPrepareCompareSummary, "mnuClimaticPrepareCompareSummary")
         Me.mnuClimaticPrepareCompareSummary.Name = "mnuClimaticPrepareCompareSummary"
+        resources.ApplyResources(Me.mnuClimaticPrepareCompareSummary, "mnuClimaticPrepareCompareSummary")
         '
         'ToolStripSeparator46
         '
@@ -3257,6 +3246,128 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuPrepareRObjectsDelete, "mnuPrepareRObjectsDelete")
         Me.mnuPrepareRObjectsDelete.Tag = "Delete..."
         '
+        'mnuStructured
+        '
+        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries, Me.ToolStripSeparator63, Me.mnuStructuredClimatic, Me.mnuStructuredProcurement, Me.mnuStructuredOptionByContext})
+        Me.mnuStructured.Name = "mnuStructured"
+        resources.ApplyResources(Me.mnuStructured, "mnuStructured")
+        '
+        'ToolStripSeparator20
+        '
+        Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
+        resources.ApplyResources(Me.ToolStripSeparator20, "ToolStripSeparator20")
+        '
+        'mnuStructuredCircular
+        '
+        Me.mnuStructuredCircular.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircularDefine})
+        Me.mnuStructuredCircular.Name = "mnuStructuredCircular"
+        resources.ApplyResources(Me.mnuStructuredCircular, "mnuStructuredCircular")
+        '
+        'mnuStructuredCircularDefine
+        '
+        Me.mnuStructuredCircularDefine.Name = "mnuStructuredCircularDefine"
+        resources.ApplyResources(Me.mnuStructuredCircularDefine, "mnuStructuredCircularDefine")
+        '
+        'mnuStructuredLow_Flow
+        '
+        Me.mnuStructuredLow_Flow.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredLow_FlowDefine})
+        Me.mnuStructuredLow_Flow.Name = "mnuStructuredLow_Flow"
+        resources.ApplyResources(Me.mnuStructuredLow_Flow, "mnuStructuredLow_Flow")
+        '
+        'mnuStructuredLow_FlowDefine
+        '
+        Me.mnuStructuredLow_FlowDefine.Name = "mnuStructuredLow_FlowDefine"
+        resources.ApplyResources(Me.mnuStructuredLow_FlowDefine, "mnuStructuredLow_FlowDefine")
+        '
+        'mnuStructuredSurvival
+        '
+        Me.mnuStructuredSurvival.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredSurvivalDefine})
+        Me.mnuStructuredSurvival.Name = "mnuStructuredSurvival"
+        resources.ApplyResources(Me.mnuStructuredSurvival, "mnuStructuredSurvival")
+        '
+        'mnuStructuredSurvivalDefine
+        '
+        Me.mnuStructuredSurvivalDefine.Name = "mnuStructuredSurvivalDefine"
+        resources.ApplyResources(Me.mnuStructuredSurvivalDefine, "mnuStructuredSurvivalDefine")
+        '
+        'mnuStructuredTimeSeries
+        '
+        Me.mnuStructuredTimeSeries.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDefine, Me.ToolStripSeparator60, Me.mnuStructuredTimeSeriesDescribe, Me.ToolStripSeparator61, Me.mnuStructuredTimeSeriesModel, Me.ToolStripSeparator62})
+        Me.mnuStructuredTimeSeries.Name = "mnuStructuredTimeSeries"
+        resources.ApplyResources(Me.mnuStructuredTimeSeries, "mnuStructuredTimeSeries")
+        '
+        'mnuStructuredTimeSeriesDefine
+        '
+        Me.mnuStructuredTimeSeriesDefine.Name = "mnuStructuredTimeSeriesDefine"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesDefine, "mnuStructuredTimeSeriesDefine")
+        '
+        'ToolStripSeparator60
+        '
+        Me.ToolStripSeparator60.Name = "ToolStripSeparator60"
+        resources.ApplyResources(Me.ToolStripSeparator60, "ToolStripSeparator60")
+        '
+        'mnuStructuredTimeSeriesDescribe
+        '
+        Me.mnuStructuredTimeSeriesDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDescribeOneVariable, Me.mnuStructuredTimeSeriesDescribeGeneral})
+        Me.mnuStructuredTimeSeriesDescribe.Name = "mnuStructuredTimeSeriesDescribe"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesDescribe, "mnuStructuredTimeSeriesDescribe")
+        '
+        'mnuStructuredTimeSeriesDescribeOneVariable
+        '
+        Me.mnuStructuredTimeSeriesDescribeOneVariable.Name = "mnuStructuredTimeSeriesDescribeOneVariable"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesDescribeOneVariable, "mnuStructuredTimeSeriesDescribeOneVariable")
+        '
+        'mnuStructuredTimeSeriesDescribeGeneral
+        '
+        Me.mnuStructuredTimeSeriesDescribeGeneral.Name = "mnuStructuredTimeSeriesDescribeGeneral"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesDescribeGeneral, "mnuStructuredTimeSeriesDescribeGeneral")
+        '
+        'ToolStripSeparator61
+        '
+        Me.ToolStripSeparator61.Name = "ToolStripSeparator61"
+        resources.ApplyResources(Me.ToolStripSeparator61, "ToolStripSeparator61")
+        '
+        'mnuStructuredTimeSeriesModel
+        '
+        Me.mnuStructuredTimeSeriesModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesModelOneVariable, Me.mnuStructuredTimeSeriesModelGeneral})
+        Me.mnuStructuredTimeSeriesModel.Name = "mnuStructuredTimeSeriesModel"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesModel, "mnuStructuredTimeSeriesModel")
+        '
+        'mnuStructuredTimeSeriesModelOneVariable
+        '
+        Me.mnuStructuredTimeSeriesModelOneVariable.Name = "mnuStructuredTimeSeriesModelOneVariable"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesModelOneVariable, "mnuStructuredTimeSeriesModelOneVariable")
+        '
+        'mnuStructuredTimeSeriesModelGeneral
+        '
+        Me.mnuStructuredTimeSeriesModelGeneral.Name = "mnuStructuredTimeSeriesModelGeneral"
+        resources.ApplyResources(Me.mnuStructuredTimeSeriesModelGeneral, "mnuStructuredTimeSeriesModelGeneral")
+        '
+        'ToolStripSeparator62
+        '
+        Me.ToolStripSeparator62.Name = "ToolStripSeparator62"
+        resources.ApplyResources(Me.ToolStripSeparator62, "ToolStripSeparator62")
+        '
+        'ToolStripSeparator63
+        '
+        Me.ToolStripSeparator63.Name = "ToolStripSeparator63"
+        resources.ApplyResources(Me.ToolStripSeparator63, "ToolStripSeparator63")
+        '
+        'mnuStructuredClimatic
+        '
+        Me.mnuStructuredClimatic.Name = "mnuStructuredClimatic"
+        resources.ApplyResources(Me.mnuStructuredClimatic, "mnuStructuredClimatic")
+        '
+        'mnuStructuredProcurement
+        '
+        Me.mnuStructuredProcurement.Name = "mnuStructuredProcurement"
+        resources.ApplyResources(Me.mnuStructuredProcurement, "mnuStructuredProcurement")
+        '
+        'mnuStructuredOptionByContext
+        '
+        Me.mnuStructuredOptionByContext.Name = "mnuStructuredOptionByContext"
+        resources.ApplyResources(Me.mnuStructuredOptionByContext, "mnuStructuredOptionByContext")
+        '
         'mnuProcurement
         '
         Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementOpenFromLibrary, Me.mnuProcurementDefineData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.mnuProcurementMapping, Me.mnuProcurementModel, Me.ToolStripSeparator45, Me.mnuProcurementDefineRedFlags, Me.mnuProcurementUseCRI})
@@ -3695,18 +3806,6 @@ Partial Class frmMain
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
         '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -3723,19 +3822,6 @@ Partial Class frmMain
         Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
         '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Tag = "Script_Window"
-        '
         'splDataOutput
         '
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
@@ -3751,20 +3837,6 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
-        '
-        'ucrDataViewer
-        '
-        Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
-        Me.ucrDataViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataViewer, "ucrDataViewer")
-        Me.ucrDataViewer.Name = "ucrDataViewer"
-        Me.ucrDataViewer.Tag = "Data_View"
-        '
-        'ucrOutput
-        '
-        Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrOutput, "ucrOutput")
-        Me.ucrOutput.Name = "ucrOutput"
         '
         'mnuRViewer
         '
@@ -3796,127 +3868,54 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
-        'mnuStructured
+        'mnuClimaticPrepareCompareCalculation
         '
-        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries, Me.ToolStripSeparator63, Me.mnuStructuredClimatic, Me.mnuStructuredProcurement, Me.mnuStructuredOptionByContext})
-        Me.mnuStructured.Name = "mnuStructured"
-        resources.ApplyResources(Me.mnuStructured, "mnuStructured")
+        Me.mnuClimaticPrepareCompareCalculation.Name = "mnuClimaticPrepareCompareCalculation"
+        resources.ApplyResources(Me.mnuClimaticPrepareCompareCalculation, "mnuClimaticPrepareCompareCalculation")
         '
-        'ToolStripSeparator20
+        'ucrColumnMeta
         '
-        Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
-        resources.ApplyResources(Me.ToolStripSeparator20, "ToolStripSeparator20")
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
         '
-        'mnuStructuredCircular
+        'ucrDataFrameMeta
         '
-        Me.mnuStructuredCircular.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircularDefine})
-        Me.mnuStructuredCircular.Name = "mnuStructuredCircular"
-        resources.ApplyResources(Me.mnuStructuredCircular, "mnuStructuredCircular")
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
         '
-        'mnuStructuredCircularDefine
+        'ucrLogWindow
         '
-        Me.mnuStructuredCircularDefine.Name = "mnuStructuredCircularDefine"
-        resources.ApplyResources(Me.mnuStructuredCircularDefine, "mnuStructuredCircularDefine")
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
+        Me.ucrLogWindow.Name = "ucrLogWindow"
         '
-        'mnuStructuredLow_Flow
+        'ucrScriptWindow
         '
-        Me.mnuStructuredLow_Flow.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredLow_FlowDefine})
-        Me.mnuStructuredLow_Flow.Name = "mnuStructuredLow_Flow"
-        resources.ApplyResources(Me.mnuStructuredLow_Flow, "mnuStructuredLow_Flow")
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Tag = "Script_Window"
         '
-        'mnuStructuredLow_FlowDefine
+        'ucrDataViewer
         '
-        Me.mnuStructuredLow_FlowDefine.Name = "mnuStructuredLow_FlowDefine"
-        resources.ApplyResources(Me.mnuStructuredLow_FlowDefine, "mnuStructuredLow_FlowDefine")
+        Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
+        Me.ucrDataViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataViewer, "ucrDataViewer")
+        Me.ucrDataViewer.Name = "ucrDataViewer"
+        Me.ucrDataViewer.Tag = "Data_View"
         '
-        'mnuStructuredSurvival
+        'ucrOutput
         '
-        Me.mnuStructuredSurvival.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredSurvivalDefine})
-        Me.mnuStructuredSurvival.Name = "mnuStructuredSurvival"
-        resources.ApplyResources(Me.mnuStructuredSurvival, "mnuStructuredSurvival")
+        Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrOutput, "ucrOutput")
+        Me.ucrOutput.Name = "ucrOutput"
         '
-        'mnuStructuredSurvivalDefine
+        'ToolStripSeparator64
         '
-        Me.mnuStructuredSurvivalDefine.Name = "mnuStructuredSurvivalDefine"
-        resources.ApplyResources(Me.mnuStructuredSurvivalDefine, "mnuStructuredSurvivalDefine")
-        '
-        'mnuStructuredTimeSeries
-        '
-        Me.mnuStructuredTimeSeries.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDefine, Me.ToolStripSeparator60, Me.mnuStructuredTimeSeriesDescribe, Me.ToolStripSeparator61, Me.mnuStructuredTimeSeriesModel, Me.ToolStripSeparator62})
-        Me.mnuStructuredTimeSeries.Name = "mnuStructuredTimeSeries"
-        resources.ApplyResources(Me.mnuStructuredTimeSeries, "mnuStructuredTimeSeries")
-        '
-        'mnuStructuredTimeSeriesDefine
-        '
-        Me.mnuStructuredTimeSeriesDefine.Name = "mnuStructuredTimeSeriesDefine"
-        resources.ApplyResources(Me.mnuStructuredTimeSeriesDefine, "mnuStructuredTimeSeriesDefine")
-        '
-        'ToolStripSeparator60
-        '
-        Me.ToolStripSeparator60.Name = "ToolStripSeparator60"
-        resources.ApplyResources(Me.ToolStripSeparator60, "ToolStripSeparator60")
-        '
-        'mnuStructuredTimeSeriesDescribe
-        '
-        Me.mnuStructuredTimeSeriesDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDescribeOneVariable, Me.mnuStructuredTimeSeriesDescribeGeneral})
-        Me.mnuStructuredTimeSeriesDescribe.Name = "mnuStructuredTimeSeriesDescribe"
-        resources.ApplyResources(Me.mnuStructuredTimeSeriesDescribe, "mnuStructuredTimeSeriesDescribe")
-        '
-        'mnuStructuredTimeSeriesDescribeOneVariable
-        '
-        Me.mnuStructuredTimeSeriesDescribeOneVariable.Name = "mnuStructuredTimeSeriesDescribeOneVariable"
-        resources.ApplyResources(Me.mnuStructuredTimeSeriesDescribeOneVariable, "mnuStructuredTimeSeriesDescribeOneVariable")
-        '
-        'mnuStructuredTimeSeriesDescribeGeneral
-        '
-        Me.mnuStructuredTimeSeriesDescribeGeneral.Name = "mnuStructuredTimeSeriesDescribeGeneral"
-        resources.ApplyResources(Me.mnuStructuredTimeSeriesDescribeGeneral, "mnuStructuredTimeSeriesDescribeGeneral")
-        '
-        'ToolStripSeparator61
-        '
-        Me.ToolStripSeparator61.Name = "ToolStripSeparator61"
-        resources.ApplyResources(Me.ToolStripSeparator61, "ToolStripSeparator61")
-        '
-        'mnuStructuredTimeSeriesModel
-        '
-        Me.mnuStructuredTimeSeriesModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesModelOneVariable, Me.mnuStructuredTimeSeriesModelGeneral})
-        Me.mnuStructuredTimeSeriesModel.Name = "mnuStructuredTimeSeriesModel"
-        resources.ApplyResources(Me.mnuStructuredTimeSeriesModel, "mnuStructuredTimeSeriesModel")
-        '
-        'mnuStructuredTimeSeriesModelOneVariable
-        '
-        Me.mnuStructuredTimeSeriesModelOneVariable.Name = "mnuStructuredTimeSeriesModelOneVariable"
-        resources.ApplyResources(Me.mnuStructuredTimeSeriesModelOneVariable, "mnuStructuredTimeSeriesModelOneVariable")
-        '
-        'mnuStructuredTimeSeriesModelGeneral
-        '
-        Me.mnuStructuredTimeSeriesModelGeneral.Name = "mnuStructuredTimeSeriesModelGeneral"
-        resources.ApplyResources(Me.mnuStructuredTimeSeriesModelGeneral, "mnuStructuredTimeSeriesModelGeneral")
-        '
-        'ToolStripSeparator62
-        '
-        Me.ToolStripSeparator62.Name = "ToolStripSeparator62"
-        resources.ApplyResources(Me.ToolStripSeparator62, "ToolStripSeparator62")
-        '
-        'ToolStripSeparator63
-        '
-        Me.ToolStripSeparator63.Name = "ToolStripSeparator63"
-        resources.ApplyResources(Me.ToolStripSeparator63, "ToolStripSeparator63")
-        '
-        'mnuStructuredClimatic
-        '
-        Me.mnuStructuredClimatic.Name = "mnuStructuredClimatic"
-        resources.ApplyResources(Me.mnuStructuredClimatic, "mnuStructuredClimatic")
-        '
-        'mnuStructuredProcurement
-        '
-        Me.mnuStructuredProcurement.Name = "mnuStructuredProcurement"
-        resources.ApplyResources(Me.mnuStructuredProcurement, "mnuStructuredProcurement")
-        '
-        'mnuStructuredOptionByContext
-        '
-        Me.mnuStructuredOptionByContext.Name = "mnuStructuredOptionByContext"
-        resources.ApplyResources(Me.mnuStructuredOptionByContext, "mnuStructuredOptionByContext")
+        Me.ToolStripSeparator64.Name = "ToolStripSeparator64"
+        resources.ApplyResources(Me.ToolStripSeparator64, "ToolStripSeparator64")
         '
         'frmMain
         '
@@ -4429,7 +4428,7 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticTidyandExamineOneVariableSummarize As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator50 As ToolStripSeparator
     Friend WithEvents mnuClimaticPrepareLengthOfSeason As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareCompare As ToolStripMenuItem
+    Friend WithEvents mnuClimaticPrepareCompareSummary As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileOpenandTidyShapefile As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineMerge As ToolStripMenuItem
     Friend WithEvents mnuClimaticCMSAFExporttoCMSAFRToolbox As ToolStripMenuItem
@@ -4517,8 +4516,6 @@ Partial Class frmMain
     Friend WithEvents DisplayTopNToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuModelFitModelHypothesisTestsKeyboard As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckDataHomogenization As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareCompareCalculation As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareCompareSummary As ToolStripMenuItem
     Friend WithEvents mnuStructured As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
     Friend WithEvents mnuStructuredCircular As ToolStripMenuItem
@@ -4542,4 +4539,6 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredClimatic As ToolStripMenuItem
     Friend WithEvents mnuStructuredProcurement As ToolStripMenuItem
     Friend WithEvents mnuStructuredOptionByContext As ToolStripMenuItem
+    Friend WithEvents mnuClimaticPrepareCompareCalculation As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator64 As ToolStripSeparator
 End Class
