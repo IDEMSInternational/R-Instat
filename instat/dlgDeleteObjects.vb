@@ -37,6 +37,7 @@ Public Class dlgDeleteObjects
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctTypes As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 352
 
         ' Selector
@@ -48,8 +49,16 @@ Public Class dlgDeleteObjects
         ucrReceiverObjectsToDelete.SetParameterIsString()
         ucrReceiverObjectsToDelete.Selector = ucrSelectorDeleteObject
         ucrReceiverObjectsToDelete.SetMeAsReceiver()
-        ucrReceiverObjectsToDelete.SetItemType("object")
-        ucrReceiverObjectsToDelete.strSelectorHeading = "Objects"
+
+        ucrInputComboType.SetParameter(New RParameter("object_type", 2))
+        dctTypes.Add("Objects", Chr(34) & "object" & Chr(34))
+        dctTypes.Add("Filters", Chr(34) & "filter" & Chr(34))
+        dctTypes.Add("Calculations", Chr(34) & "calculation" & Chr(34))
+        dctTypes.Add("Tables", Chr(34) & "table" & Chr(34))
+        dctTypes.Add("Graphs", Chr(34) & "graph" & Chr(34))
+        dctTypes.Add("Models", Chr(34) & "model" & Chr(34))
+        ucrInputComboType.SetItems(dctTypes)
+        ucrInputComboType.SetDropDownStyleAsNonEditable()
 
     End Sub
 
@@ -59,6 +68,8 @@ Public Class dlgDeleteObjects
         ucrSelectorDeleteObject.Reset()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_objects")
+        clsDefaultFunction.AddParameter("object_type", Chr(34) & "object" & Chr(34), iPosition:=2)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
@@ -82,6 +93,29 @@ Public Class dlgDeleteObjects
         SetDefaults()
         SetRCodeforControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrInputComboType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboType.ControlValueChanged
+        Select Case ucrInputComboType.GetValue()
+            Case "Objects"
+                ucrReceiverObjectsToDelete.SetItemType("object")
+                ucrReceiverObjectsToDelete.strSelectorHeading = "Objects"
+            Case "Filters"
+                ucrReceiverObjectsToDelete.SetItemType("filter")
+                ucrReceiverObjectsToDelete.strSelectorHeading = "Filters"
+            Case "Calculations"
+                ucrReceiverObjectsToDelete.SetItemType("calculation")
+                ucrReceiverObjectsToDelete.strSelectorHeading = "Calculations"
+            Case "Tables"
+                ucrReceiverObjectsToDelete.SetItemType("table")
+                ucrReceiverObjectsToDelete.strSelectorHeading = "Tables"
+            Case "Graphs"
+                ucrReceiverObjectsToDelete.SetItemType("graph")
+                ucrReceiverObjectsToDelete.strSelectorHeading = "Graphs"
+            Case "Models"
+                ucrReceiverObjectsToDelete.SetItemType("model")
+                ucrReceiverObjectsToDelete.strSelectorHeading = "Models"
+        End Select
     End Sub
 
     Private Sub ucrReceiverObjectsToDelete_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObjectsToDelete.ControlContentsChanged
