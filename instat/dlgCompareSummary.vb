@@ -19,6 +19,7 @@ Public Class dlgCompareSummary
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog = False
+    Private iTabIndexSelected As Integer = 0
     Private clsSummaryFunction As New RFunction
     Private clsListFunction As New RFunction
     Private Sub dlgCompareSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -92,7 +93,7 @@ Public Class dlgCompareSummary
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgVerificationSummaries.SetRFunction(clsNewSummaryFunction:=clsSummaryFunction, clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
+        sdgVerificationSummaries.SetRFunction(clsNewSummaryFunction:=clsSummaryFunction, clsNewListFunction:=clsListFunction, iNewTabIndexSelected:=iTabIndexSelected, bReset:=bResetSubdialog)
         sdgVerificationSummaries.ShowDialog()
         bResetSubdialog = False
         TestOkEnabled()
@@ -115,16 +116,19 @@ Public Class dlgCompareSummary
     Private Sub ucrPnlObservationType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlObservationType.ControlValueChanged
         SetSelectorDataTypes()
         If rdoContinuous.Checked Then
+            iTabIndexSelected = 0
             clsSummaryFunction.AddParameter("frcst.type", Chr(34) & "'cont'" & Chr(34), iPosition:=5)
             sdgVerificationSummaries.tbBinary.Enabled = False
             sdgVerificationSummaries.tbCategorical.Enabled = False
             sdgVerificationSummaries.tbContinuous.Enabled = True
         ElseIf rdoBinary.Checked Then
+            iTabIndexSelected = 1
             clsSummaryFunction.AddParameter("frcst.type", Chr(34) & "'binary'" & Chr(34), iPosition:=5)
             sdgVerificationSummaries.tbBinary.Enabled = True
             sdgVerificationSummaries.tbCategorical.Enabled = False
             sdgVerificationSummaries.tbContinuous.Enabled = False
         ElseIf rdoCategorical.Checked Then
+            iTabIndexSelected = 2
             clsSummaryFunction.AddParameter("frcst.type", Chr(34) & "'cat'" & Chr(34), iPosition:=5)
             sdgVerificationSummaries.tbBinary.Enabled = False
             sdgVerificationSummaries.tbCategorical.Enabled = True
