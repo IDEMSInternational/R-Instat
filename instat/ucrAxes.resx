@@ -1017,7 +1017,7 @@
     <value>3</value>
   </data>
   <data name="ucrInputComboDateLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 52</value>
+    <value>95, 54</value>
   </data>
   <data name="ucrInputComboDateLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 21</value>
@@ -1059,7 +1059,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputComboDateBreak.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 28</value>
+    <value>145, 31</value>
   </data>
   <data name="ucrInputComboDateBreak.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 21</value>
@@ -1114,7 +1114,7 @@
     <value>True</value>
   </data>
   <data name="lblXScalDateUpperLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 126</value>
+    <value>9, 123</value>
   </data>
   <data name="lblXScalDateUpperLimit.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -1138,7 +1138,7 @@
     <value>4</value>
   </data>
   <data name="ucrNudDateBreak.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 29</value>
+    <value>95, 31</value>
   </data>
   <data name="ucrNudDateBreak.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1159,7 +1159,7 @@
     <value>5</value>
   </data>
   <data name="ucrDtpLowerLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 98</value>
+    <value>95, 100</value>
   </data>
   <data name="ucrDtpLowerLimit.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 20</value>
@@ -1180,7 +1180,7 @@
     <value>6</value>
   </data>
   <data name="ucrDtpUpperLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 126</value>
+    <value>95, 123</value>
   </data>
   <data name="ucrDtpUpperLimit.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 20</value>
@@ -1201,7 +1201,7 @@
     <value>7</value>
   </data>
   <data name="ucrChkLimits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 74</value>
+    <value>14, 77</value>
   </data>
   <data name="ucrChkLimits.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>

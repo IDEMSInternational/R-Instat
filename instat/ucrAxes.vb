@@ -534,11 +534,13 @@ Public Class ucrAxes
     End Sub
 
     Private Sub ScaleDateFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimits.ControlValueChanged, ucrChkBreaks.ControlValueChanged
-        If ucrChkLimits.Checked Then
-            clsXYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsXYScaleDateLimitFunction, iPosition:=2)
-        End If
-        If ucrChkBreaks.Checked Then
-            clsXYScaleDateFunction.AddParameter("date_breaks", clsROperatorParameter:=clsXYScaleDateBreakOperator, iPosition:=1)
+        If bRCodeSet Then
+            If ucrChkLimits.Checked Then
+                clsXYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsXYScaleDateLimitFunction, iPosition:=2)
+            End If
+            If ucrChkBreaks.Checked Then
+                clsXYScaleDateFunction.AddParameter("date_breaks", clsROperatorParameter:=clsXYScaleDateBreakOperator, iPosition:=1)
+            End If
         End If
     End Sub
 End Class
