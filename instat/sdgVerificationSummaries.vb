@@ -78,7 +78,7 @@ Public Class sdgVerificationSummaries
         Next
     End Sub
 
-    Public Sub SetRFunction(clsNewSummaryFunction As RFunction, clsNewListFunction As RFunction, Optional bNewEnableDisableTab As Boolean = False, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewSummaryFunction As RFunction, clsNewListFunction As RFunction, Optional bNewEnableDisableTab As Boolean = False, Optional iNewTabIndexSelected As Integer = 0, Optional bReset As Boolean = False)
         If bControlsInitialised Then
             InitialiseControls()
             bControlsInitialised = False
@@ -92,9 +92,7 @@ Public Class sdgVerificationSummaries
 
         ucrContinuousVerification.SetRCodeForControls(clsNewSummaryFunction:=clsNewSummaryFunction, clsNewListFunction:=clsNewListFunction, bReset:=bResetSubdialog)
 
-        If bReset Then
-            tbSummaries.SelectedIndex = 0
-        End If
+        tbSummaries.SelectedIndex = iNewTabIndexSelected
     End Sub
 
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
