@@ -23,45 +23,19 @@ Partial Class dlgTaylorDiagram
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTaylorDiagram))
-        Me.ucrSelectorTaylorDiagram = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverSingleObserved = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMultipleGroup = New instat.ucrReceiverMultiple()
         Me.lblObserved = New System.Windows.Forms.Label()
         Me.lblEstimate = New System.Windows.Forms.Label()
         Me.lblGroup = New System.Windows.Forms.Label()
-        Me.ucrSavePlot = New instat.ucrSave()
-        Me.ucrBase = New instat.ucrButtons()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.ucrReceiverSingleStation = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSingleEstimate = New instat.ucrReceiverSingle()
         Me.ucrChkNormalise = New instat.ucrCheck()
+        Me.ucrReceiverSingleStation = New instat.ucrReceiverSingle()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSavePlot = New instat.ucrSave()
+        Me.ucrReceiverMultipleGroup = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverSingleObserved = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSingleEstimate = New instat.ucrReceiverSingle()
+        Me.ucrSelectorTaylorDiagram = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
-        '
-        'ucrSelectorTaylorDiagram
-        '
-        Me.ucrSelectorTaylorDiagram.bDropUnusedFilterLevels = False
-        Me.ucrSelectorTaylorDiagram.bShowHiddenColumns = False
-        Me.ucrSelectorTaylorDiagram.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorTaylorDiagram, "ucrSelectorTaylorDiagram")
-        Me.ucrSelectorTaylorDiagram.Name = "ucrSelectorTaylorDiagram"
-        '
-        'ucrReceiverSingleObserved
-        '
-        Me.ucrReceiverSingleObserved.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverSingleObserved, "ucrReceiverSingleObserved")
-        Me.ucrReceiverSingleObserved.Name = "ucrReceiverSingleObserved"
-        Me.ucrReceiverSingleObserved.Selector = Nothing
-        Me.ucrReceiverSingleObserved.strNcFilePath = ""
-        Me.ucrReceiverSingleObserved.ucrSelector = Nothing
-        '
-        'ucrReceiverMultipleGroup
-        '
-        Me.ucrReceiverMultipleGroup.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultipleGroup, "ucrReceiverMultipleGroup")
-        Me.ucrReceiverMultipleGroup.Name = "ucrReceiverMultipleGroup"
-        Me.ucrReceiverMultipleGroup.Selector = Nothing
-        Me.ucrReceiverMultipleGroup.strNcFilePath = ""
-        Me.ucrReceiverMultipleGroup.ucrSelector = Nothing
         '
         'lblObserved
         '
@@ -78,20 +52,16 @@ Partial Class dlgTaylorDiagram
         resources.ApplyResources(Me.lblGroup, "lblGroup")
         Me.lblGroup.Name = "lblGroup"
         '
-        'ucrSavePlot
-        '
-        resources.ApplyResources(Me.ucrSavePlot, "ucrSavePlot")
-        Me.ucrSavePlot.Name = "ucrSavePlot"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
         'lblStation
         '
         resources.ApplyResources(Me.lblStation, "lblStation")
         Me.lblStation.Name = "lblStation"
+        '
+        'ucrChkNormalise
+        '
+        Me.ucrChkNormalise.Checked = False
+        resources.ApplyResources(Me.ucrChkNormalise, "ucrChkNormalise")
+        Me.ucrChkNormalise.Name = "ucrChkNormalise"
         '
         'ucrReceiverSingleStation
         '
@@ -102,6 +72,34 @@ Partial Class dlgTaylorDiagram
         Me.ucrReceiverSingleStation.strNcFilePath = ""
         Me.ucrReceiverSingleStation.ucrSelector = Nothing
         '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrSavePlot
+        '
+        resources.ApplyResources(Me.ucrSavePlot, "ucrSavePlot")
+        Me.ucrSavePlot.Name = "ucrSavePlot"
+        '
+        'ucrReceiverMultipleGroup
+        '
+        Me.ucrReceiverMultipleGroup.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultipleGroup, "ucrReceiverMultipleGroup")
+        Me.ucrReceiverMultipleGroup.Name = "ucrReceiverMultipleGroup"
+        Me.ucrReceiverMultipleGroup.Selector = Nothing
+        Me.ucrReceiverMultipleGroup.strNcFilePath = ""
+        Me.ucrReceiverMultipleGroup.ucrSelector = Nothing
+        '
+        'ucrReceiverSingleObserved
+        '
+        Me.ucrReceiverSingleObserved.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverSingleObserved, "ucrReceiverSingleObserved")
+        Me.ucrReceiverSingleObserved.Name = "ucrReceiverSingleObserved"
+        Me.ucrReceiverSingleObserved.Selector = Nothing
+        Me.ucrReceiverSingleObserved.strNcFilePath = ""
+        Me.ucrReceiverSingleObserved.ucrSelector = Nothing
+        '
         'ucrReceiverSingleEstimate
         '
         Me.ucrReceiverSingleEstimate.frmParent = Me
@@ -111,11 +109,13 @@ Partial Class dlgTaylorDiagram
         Me.ucrReceiverSingleEstimate.strNcFilePath = ""
         Me.ucrReceiverSingleEstimate.ucrSelector = Nothing
         '
-        'ucrChkNormalise
+        'ucrSelectorTaylorDiagram
         '
-        Me.ucrChkNormalise.Checked = False
-        resources.ApplyResources(Me.ucrChkNormalise, "ucrChkNormalise")
-        Me.ucrChkNormalise.Name = "ucrChkNormalise"
+        Me.ucrSelectorTaylorDiagram.bDropUnusedFilterLevels = False
+        Me.ucrSelectorTaylorDiagram.bShowHiddenColumns = False
+        Me.ucrSelectorTaylorDiagram.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorTaylorDiagram, "ucrSelectorTaylorDiagram")
+        Me.ucrSelectorTaylorDiagram.Name = "ucrSelectorTaylorDiagram"
         '
         'dlgTaylorDiagram
         '
