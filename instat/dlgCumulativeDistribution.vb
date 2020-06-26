@@ -126,6 +126,7 @@ Public Class dlgCumulativeDistribution
         clsRaesFunction = New RFunction
         clsStatECDFFunction = New RFunction
         clsRggplotFunction = New RFunction
+        clsStatECDFAesFunction = New RFunction
 
         clsSequence = New RFunction
         clsSequence.SetRCommand("seq")
