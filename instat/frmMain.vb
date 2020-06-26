@@ -2136,6 +2136,10 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticPrepareCompareSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareCompareSummary.Click
-        'dlgCompareSummary.ShowDialog() 'not yet working
+        dlgCompareSummary.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularDefine_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularDefine.Click
+        dlgCircular.ShowDialog()
     End Sub
 End Class
