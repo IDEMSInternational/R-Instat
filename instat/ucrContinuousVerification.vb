@@ -110,6 +110,12 @@ Public Class ucrContinuousVerification
 
         For Each ctr In lstContinuousCheckboxes
             ctr.SetRCode(clsNewListFunction, bReset)
+            If ctr.Enabled = False AndAlso ctr.Checked Then
+                ctr.Checked = False
+                If ucrChkSelectAll.Checked Then
+                    ucrChkSelectAll.Checked = False
+                End If
+            End If
         Next
 
         ucrInputJmia.SetRCode(clsNewSummaryFunction, bReset)
