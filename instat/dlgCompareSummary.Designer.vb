@@ -28,15 +28,16 @@ Partial Class dlgCompareSummary
         Me.rdoContinuous = New System.Windows.Forms.RadioButton()
         Me.rdoCategorical = New System.Windows.Forms.RadioButton()
         Me.rdoBinary = New System.Windows.Forms.RadioButton()
+        Me.cmdSummaries = New System.Windows.Forms.Button()
+        Me.ucrChkPrintOutput = New instat.ucrCheck()
+        Me.ucrChkIgnoreMissing = New instat.ucrCheck()
         Me.ucrPnlObservationType = New instat.UcrPanel()
         Me.ucrReceiverMultipleFactors = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSatellite = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorVerificationSummary = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdSummaries = New System.Windows.Forms.Button()
-        Me.ucrChkIgnoreMissing = New instat.ucrCheck()
-        Me.ucrChkPrintOutput = New instat.ucrCheck()
+        Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblStation
@@ -54,7 +55,7 @@ Partial Class dlgCompareSummary
         Me.lblFactors.Location = New System.Drawing.Point(273, 172)
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Size = New System.Drawing.Size(45, 13)
-        Me.lblFactors.TabIndex = 6
+        Me.lblFactors.TabIndex = 9
         Me.lblFactors.Text = "Factors:"
         '
         'lblSatellite
@@ -77,7 +78,7 @@ Partial Class dlgCompareSummary
         Me.rdoContinuous.Location = New System.Drawing.Point(62, 12)
         Me.rdoContinuous.Name = "rdoContinuous"
         Me.rdoContinuous.Size = New System.Drawing.Size(98, 27)
-        Me.rdoContinuous.TabIndex = 9
+        Me.rdoContinuous.TabIndex = 1
         Me.rdoContinuous.TabStop = True
         Me.rdoContinuous.Text = "Continuous"
         Me.rdoContinuous.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -94,7 +95,7 @@ Partial Class dlgCompareSummary
         Me.rdoCategorical.Location = New System.Drawing.Point(254, 12)
         Me.rdoCategorical.Name = "rdoCategorical"
         Me.rdoCategorical.Size = New System.Drawing.Size(98, 27)
-        Me.rdoCategorical.TabIndex = 10
+        Me.rdoCategorical.TabIndex = 3
         Me.rdoCategorical.TabStop = True
         Me.rdoCategorical.Text = "Categorical"
         Me.rdoCategorical.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -111,18 +112,43 @@ Partial Class dlgCompareSummary
         Me.rdoBinary.Location = New System.Drawing.Point(158, 12)
         Me.rdoBinary.Name = "rdoBinary"
         Me.rdoBinary.Size = New System.Drawing.Size(98, 27)
-        Me.rdoBinary.TabIndex = 11
+        Me.rdoBinary.TabIndex = 2
         Me.rdoBinary.TabStop = True
         Me.rdoBinary.Text = "Binary"
         Me.rdoBinary.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoBinary.UseVisualStyleBackColor = True
+        '
+        'cmdSummaries
+        '
+        Me.cmdSummaries.Location = New System.Drawing.Point(273, 291)
+        Me.cmdSummaries.Name = "cmdSummaries"
+        Me.cmdSummaries.Size = New System.Drawing.Size(120, 23)
+        Me.cmdSummaries.TabIndex = 14
+        Me.cmdSummaries.Text = "Summaries"
+        Me.cmdSummaries.UseVisualStyleBackColor = True
+        '
+        'ucrChkPrintOutput
+        '
+        Me.ucrChkPrintOutput.Checked = False
+        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(10, 281)
+        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
+        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkPrintOutput.TabIndex = 12
+        '
+        'ucrChkIgnoreMissing
+        '
+        Me.ucrChkIgnoreMissing.Checked = False
+        Me.ucrChkIgnoreMissing.Location = New System.Drawing.Point(10, 307)
+        Me.ucrChkIgnoreMissing.Name = "ucrChkIgnoreMissing"
+        Me.ucrChkIgnoreMissing.Size = New System.Drawing.Size(197, 20)
+        Me.ucrChkIgnoreMissing.TabIndex = 13
         '
         'ucrPnlObservationType
         '
         Me.ucrPnlObservationType.Location = New System.Drawing.Point(58, 4)
         Me.ucrPnlObservationType.Name = "ucrPnlObservationType"
         Me.ucrPnlObservationType.Size = New System.Drawing.Size(300, 50)
-        Me.ucrPnlObservationType.TabIndex = 8
+        Me.ucrPnlObservationType.TabIndex = 0
         '
         'ucrReceiverMultipleFactors
         '
@@ -133,7 +159,7 @@ Partial Class dlgCompareSummary
         Me.ucrReceiverMultipleFactors.Selector = Nothing
         Me.ucrReceiverMultipleFactors.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverMultipleFactors.strNcFilePath = ""
-        Me.ucrReceiverMultipleFactors.TabIndex = 4
+        Me.ucrReceiverMultipleFactors.TabIndex = 10
         Me.ucrReceiverMultipleFactors.ucrSelector = Nothing
         '
         'ucrReceiverSatellite
@@ -145,7 +171,7 @@ Partial Class dlgCompareSummary
         Me.ucrReceiverSatellite.Selector = Nothing
         Me.ucrReceiverSatellite.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverSatellite.strNcFilePath = ""
-        Me.ucrReceiverSatellite.TabIndex = 3
+        Me.ucrReceiverSatellite.TabIndex = 8
         Me.ucrReceiverSatellite.ucrSelector = Nothing
         '
         'ucrReceiverStation
@@ -157,7 +183,7 @@ Partial Class dlgCompareSummary
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 2
+        Me.ucrReceiverStation.TabIndex = 6
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrSelectorVerificationSummary
@@ -169,45 +195,29 @@ Partial Class dlgCompareSummary
         Me.ucrSelectorVerificationSummary.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorVerificationSummary.Name = "ucrSelectorVerificationSummary"
         Me.ucrSelectorVerificationSummary.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorVerificationSummary.TabIndex = 1
+        Me.ucrSelectorVerificationSummary.TabIndex = 4
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 320)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 337)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 15
         '
-        'cmdSummaries
+        'ucrChkStoreResults
         '
-        Me.cmdSummaries.Location = New System.Drawing.Point(273, 291)
-        Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(120, 23)
-        Me.cmdSummaries.TabIndex = 12
-        Me.cmdSummaries.Text = "Summaries"
-        Me.cmdSummaries.UseVisualStyleBackColor = True
-        '
-        'ucrChkIgnoreMissing
-        '
-        Me.ucrChkIgnoreMissing.Checked = False
-        Me.ucrChkIgnoreMissing.Location = New System.Drawing.Point(10, 291)
-        Me.ucrChkIgnoreMissing.Name = "ucrChkIgnoreMissing"
-        Me.ucrChkIgnoreMissing.Size = New System.Drawing.Size(197, 20)
-        Me.ucrChkIgnoreMissing.TabIndex = 13
-        '
-        'ucrChkPrintOutput
-        '
-        Me.ucrChkPrintOutput.Checked = False
-        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(10, 265)
-        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
-        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkPrintOutput.TabIndex = 14
+        Me.ucrChkStoreResults.Checked = False
+        Me.ucrChkStoreResults.Location = New System.Drawing.Point(10, 255)
+        Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
+        Me.ucrChkStoreResults.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkStoreResults.TabIndex = 11
         '
         'dlgCompareSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 384)
+        Me.ClientSize = New System.Drawing.Size(419, 397)
+        Me.Controls.Add(Me.ucrChkStoreResults)
         Me.Controls.Add(Me.ucrChkPrintOutput)
         Me.Controls.Add(Me.ucrChkIgnoreMissing)
         Me.Controls.Add(Me.cmdSummaries)
@@ -247,4 +257,5 @@ Partial Class dlgCompareSummary
     Friend WithEvents cmdSummaries As Button
     Friend WithEvents ucrChkIgnoreMissing As ucrCheck
     Friend WithEvents ucrChkPrintOutput As ucrCheck
+    Friend WithEvents ucrChkStoreResults As ucrCheck
 End Class

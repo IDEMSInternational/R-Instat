@@ -68,6 +68,11 @@ Public Class dlgCompareSummary
         ucrChkPrintOutput.SetText("Print Results to Output Window")
         ucrChkPrintOutput.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkPrintOutput.SetRDefault("FALSE")
+
+        ucrChkStoreResults.SetParameter(New RParameter("store_results", 9))
+        ucrChkStoreResults.SetText("Store Results")
+        ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkStoreResults.SetRDefault("TRUE")
     End Sub
 
     Private Sub SetDefaults()
@@ -100,7 +105,7 @@ Public Class dlgCompareSummary
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverSatellite.IsEmpty OrElse ucrReceiverStation.IsEmpty OrElse clsListFunction.clsParameters.Count = 0 Then
+        If ucrReceiverSatellite.IsEmpty OrElse ucrReceiverStation.IsEmpty OrElse clsListFunction.clsParameters.Count = 0 OrElse Not (ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -179,7 +184,7 @@ Public Class dlgCompareSummary
         End If
     End Sub
 
-    Private Sub ucrReceiverStation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverSatellite.ControlContentsChanged
+    Private Sub ucrReceiverStation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverSatellite.ControlContentsChanged, ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
