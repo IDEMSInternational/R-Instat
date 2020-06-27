@@ -159,9 +159,9 @@ Public Class dlgCompareSummary
             ucrReceiverStation.SetIncludedDataTypes({"logical", "factor"}, bStrict:=True)
             ucrReceiverStation.strSelectorHeading = "Logical and Factors"
         ElseIf rdoCategorical.Checked Then
-            ucrReceiverSatellite.SetIncludedDataTypes({"factor"}, bStrict:=True)
+            ucrReceiverSatellite.SetIncludedDataTypes({"logical", "factor"}, bStrict:=True)
             ucrReceiverSatellite.strSelectorHeading = "Factors"
-            ucrReceiverStation.SetIncludedDataTypes({"factor"}, bStrict:=True)
+            ucrReceiverStation.SetIncludedDataTypes({"logical", "factor"}, bStrict:=True)
             ucrReceiverStation.strSelectorHeading = "Factors"
         End If
     End Sub
