@@ -115,6 +115,8 @@ Public Class dlgCompareSummary
 
     Private Sub ucrPnlObservationType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlObservationType.ControlValueChanged
         SetSelectorDataTypes()
+        ucrReceiverStation.Clear()
+        ucrReceiverSatellite.Clear()
         If rdoContinuous.Checked Then
             iTabIndexSelected = 0
             clsSummaryFunction.AddParameter("frcst.type", Chr(34) & "'cont'" & Chr(34), iPosition:=5)
