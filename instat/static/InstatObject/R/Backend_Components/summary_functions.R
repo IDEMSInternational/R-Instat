@@ -1211,10 +1211,10 @@ GS <- function(x, y, frcst.type, obs.type, ...){
 ##Hit rate aka PODy
 PODy <- function(x, y, frcst.type, obs.type, ...){
   A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
-  return(A$PODy)  
+  return(A$POD)  
 }
 
-##Threat sccore
+##Threat score
 TS <- function(x, y, frcst.type, obs.type, ...){
   A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
   return(A$TS)  
