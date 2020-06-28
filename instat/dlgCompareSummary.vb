@@ -120,8 +120,9 @@ Public Class dlgCompareSummary
 
     Private Sub ucrPnlObservationType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlObservationType.ControlValueChanged
         SetSelectorDataTypes()
-        ucrReceiverStation.Clear()
         ucrReceiverSatellite.Clear()
+        ucrReceiverStation.Clear()
+        ucrReceiverStation.SetMeAsReceiver()
         If rdoContinuous.Checked Then
             iTabIndexSelected = 0
             clsSummaryFunction.AddParameter("frcst.type", Chr(34) & "'cont'" & Chr(34), iPosition:=5)
@@ -154,10 +155,10 @@ Public Class dlgCompareSummary
             ucrReceiverStation.SetIncludedDataTypes({"numeric"}, bStrict:=True)
             ucrReceiverStation.strSelectorHeading = "Numerics"
         ElseIf rdoBinary.Checked Then
-            ucrReceiverSatellite.SetIncludedDataTypes({"logical", "factor"}, bStrict:=True)
-            ucrReceiverSatellite.strSelectorHeading = "Logical and Factors"
-            ucrReceiverStation.SetIncludedDataTypes({"logical", "factor"}, bStrict:=True)
-            ucrReceiverStation.strSelectorHeading = "Logical and Factors"
+            ucrReceiverSatellite.SetIncludedDataTypes({"logical", "numeric"}, bStrict:=True)
+            ucrReceiverSatellite.strSelectorHeading = "Logical and Numerics"
+            ucrReceiverStation.SetIncludedDataTypes({"logical", "numeric"}, bStrict:=True)
+            ucrReceiverStation.strSelectorHeading = "Logical and Numeric"
         ElseIf rdoCategorical.Checked Then
             ucrReceiverSatellite.SetIncludedDataTypes({"logical", "factor"}, bStrict:=True)
             ucrReceiverSatellite.strSelectorHeading = "Factors"
