@@ -2142,4 +2142,8 @@ Public Class frmMain
     Private Sub mnuStructuredCircularDefine_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularDefine.Click
         dlgCircular.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticPrepareCompareTaylor_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareCompareTaylor.Click
+        dlgTaylorDiagram.ShowDialog()
+    End Sub
 End Class

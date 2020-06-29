@@ -213,6 +213,12 @@
     <Compile Include="dlgHomogenization.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTaylorDiagram.Designer.vb">
+      <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTaylorDiagram.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgFiltersFromFactor.Designer.vb">
       <DependentUpon>sdgFiltersFromFactor.vb</DependentUpon>
     </Compile>
@@ -2517,6 +2523,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHomogenization.resx">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTaylorDiagram.resx">
+      <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFiltersFromFactor.resx">
       <DependentUpon>sdgFiltersFromFactor.vb</DependentUpon>
