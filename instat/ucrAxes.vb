@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
-
+Imports RDotNet
 Public Class ucrAxes
     Public bIsX As Boolean
     Public clsXYlabTitleFunction As New RFunction
@@ -33,6 +33,9 @@ Public Class ucrAxes
     Public bFirstLoad As Boolean = True
     Private bControlsInitialised As Boolean = False
     Private bRCodeSet As Boolean = False
+    Private ucrXYReceiverSingle As ucrReceiverSingle
+
+    Private strDataFrame As String
 
     Public Sub InitialiseControl()
         Dim dctTickMarkers As New Dictionary(Of String, String)
@@ -259,20 +262,9 @@ Public Class ucrAxes
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewXYScaleDateFuntion As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewXYScaleDateFuntion As RFunction = Nothing, Optional ucrNewXYReceiverSingle As ucrReceiverSingle = Nothing, Optional strNewDataFrame As String = "", Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempBreaksParam As RParameter
         Dim clsTempMinorBreaksParam As RParameter
-
-        clsXYScaleDateLimitFunction = New RFunction
-        clsXYScaleDateLimitFunction.SetRCommand("c")
-        clsXYScaleDateLimitFunction.AddParameter("from", clsRFunctionParameter:=ucrDtpLowerLimit.ValueAsRDate(), iPosition:=0)
-        clsXYScaleDateLimitFunction.AddParameter("to", clsRFunctionParameter:=ucrDtpLowerLimit.ValueAsRDate(), iPosition:=1)
-
-        clsXYScaleDateBreakOperator = New ROperator
-        clsXYScaleDateBreakOperator.SetOperation(" ")
-        clsXYScaleDateBreakOperator.bSpaceAroundOperation = False
-        clsXYScaleDateBreakOperator.bToScriptAsRString = True
-
 
         bRCodeSet = False
         If Not bControlsInitialised Then
@@ -298,6 +290,19 @@ Public Class ucrAxes
             ucrInputPosition.SetDefaultState("Left")
         End If
         ucrInputAxisType.SetName(strAxisType)
+
+        ucrXYReceiverSingle = ucrNewXYReceiverSingle
+        strDataFrame = strNewDataFrame
+
+        clsXYScaleDateLimitFunction = New RFunction
+        clsXYScaleDateLimitFunction.SetRCommand("c")
+        clsXYScaleDateLimitFunction.AddParameter("from", clsRFunctionParameter:=ucrDtpLowerLimit.ValueAsRDate(), iPosition:=0)
+        clsXYScaleDateLimitFunction.AddParameter("to", clsRFunctionParameter:=ucrDtpLowerLimit.ValueAsRDate(), iPosition:=1)
+
+        clsXYScaleDateBreakOperator = New ROperator
+        clsXYScaleDateBreakOperator.SetOperation(" ")
+        clsXYScaleDateBreakOperator.bSpaceAroundOperation = False
+        clsXYScaleDateBreakOperator.bToScriptAsRString = True
 
         clsXYlabTitleFunction = clsNewXYlabTitleFunction
         clsXYScaleDateFunction = clsNewXYScaleDateFuntion
@@ -398,6 +403,7 @@ Public Class ucrAxes
         bRCodeSet = True
         SetLabel()
         AddRemoveContinuousXYScales()
+        MinimumMaximumDate()
     End Sub
 
     Private Sub AddRemoveLabs()
@@ -531,6 +537,35 @@ Public Class ucrAxes
             clsXYScaleContinuousFunction.RemoveParameterByName("labels")
         End If
         AddRemoveContinuousXYScales()
+    End Sub
+
+    Private Sub MinimumMaximumDate()
+        Dim expColumn As SymbolicExpression
+        Dim n As CharacterVector
+        Dim medianValue, strTemp As String
+
+        Dim strScript As String = ""
+        Dim clsGetDateMaximumFunc, clsGetDateMinimumFunc As New RFunction
+        Dim clsGetVariablesFunc As New RFunction
+        If Not IsNothing(ucrXYReceiverSingle) AndAlso ucrXYReceiverSingle.strCurrDataType.ToLower = "date" Then
+
+
+            clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+            clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+            clsGetVariablesFunc.AddParameter("col_names", Chr(34) & ucrXYReceiverSingle.GetVariableNames(False) & Chr(34), iPosition:=1)
+
+
+            clsGetDateMaximumFunc.SetRCommand("max")
+            clsGetDateMaximumFunc.AddParameter("x", clsRFunctionParameter:=clsGetVariablesFunc, iPosition:=0)
+            clsGetDateMaximumFunc.AddParameter("na.rm", "TRUE", iPosition:=1)
+
+            strTemp = clsGetDateMaximumFunc.ToScript(strScript)
+            expColumn = frmMain.clsRLink.RunInternalScriptGetOutput(strTemp, bSilent:=False)
+            If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
+                n = expColumn.AsCharacter
+                medianValue = n(0)
+            End If
+        End If
     End Sub
 
     Private Sub ScaleDateFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimits.ControlValueChanged, ucrChkBreaks.ControlValueChanged
