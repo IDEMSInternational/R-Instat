@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.IO
 Imports instat.Translations
 Public Class dlgExportGraphAsImage
     Private bFirstload As Boolean = True
@@ -78,13 +79,22 @@ Public Class dlgExportGraphAsImage
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
-        Dim dlgSelectFile As New SaveFileDialog
-        dlgSelectFile.Title = "Save Graph As Image"
-        dlgSelectFile.Filter = "JPEG (*.jpeg)|*.jpeg|PNG(*.png)|*.png|BitMaP(*.bmp)|*.bmp|EPS(*.eps)|*.eps|PostScript(*.ps)|*.ps|SVG(*.svg)|*.svg|WMF(*.wmf)|*.wmf|PDF(*.pdf)|*.pdf"
-        dlgSelectFile.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-        If dlgSelectFile.ShowDialog() = DialogResult.OK Then
-            ucrInputFile.SetName(dlgSelectFile.FileName.Replace("\", "/"))
-        End If
+        Dim strCurrentFilePathName As String = ucrInputFile.GetText()
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save Graph As Image"
+            dlgSave.Filter = "JPEG (*.jpeg)|*.jpeg|PNG(*.png)|*.png|BitMaP(*.bmp)|*.bmp|EPS(*.eps)|*.eps|PostScript(*.ps)|*.ps|SVG(*.svg)|*.svg|WMF(*.wmf)|*.wmf|PDF(*.pdf)|*.pdf"
+            If String.IsNullOrEmpty(strCurrentFilePathName) Then
+                dlgSave.FileName = ucrSelectedGraphReceiver.GetVariableNames(bWithQuotes:=False) 'give a suggestive name (from the reciver)
+                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+            Else
+                strCurrentFilePathName = strCurrentFilePathName.Replace("/", "\")
+                dlgSave.FileName = Path.GetFileName(strCurrentFilePathName)
+                dlgSave.InitialDirectory = Path.GetDirectoryName(strCurrentFilePathName) 'use the previous path as initial dir
+            End If
+            If DialogResult.OK = dlgSave.ShowDialog() Then
+                ucrInputFile.SetName(dlgSave.FileName.Replace("\", "/")) 'R uses / slashes for file paths. so \ needs to be replaced
+            End If
+        End Using
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectedGraphReceiver.ControlContentsChanged, ucrInputFile.ControlContentsChanged

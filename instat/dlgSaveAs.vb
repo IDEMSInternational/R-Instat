@@ -80,32 +80,21 @@ Public Class dlgSaveAs
         frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
     End Sub
 
-    Private Sub cmdEditorSave_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
-        SelectFileToSave()
-    End Sub
-
-    Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
-        If ucrInputFilePath.IsEmpty() Then
-            SelectFileToSave()
-        End If
-    End Sub
-
-    Private Sub SelectFileToSave()
-        Dim strCurrentFileName As String = ucrInputFilePath.GetText()
+    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
+        Dim strCurrentFilePathName As String = ucrInputFilePath.GetText()
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save Data File"
             dlgSave.Filter = "RDS Data file (*.RDS)|*.RDS"
-            If Not String.IsNullOrEmpty(strCurrentFileName) Then
-                strCurrentFileName = strCurrentFileName.Replace("/", "\")
-                dlgSave.FileName = Path.GetFileName(strCurrentFileName)
-                dlgSave.InitialDirectory = Path.GetDirectoryName(strCurrentFileName)
-            Else
+            If String.IsNullOrEmpty(strCurrentFilePathName) Then
                 dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+            Else
+                strCurrentFilePathName = strCurrentFilePathName.Replace("/", "\")
+                dlgSave.FileName = Path.GetFileName(strCurrentFilePathName)
+                dlgSave.InitialDirectory = Path.GetDirectoryName(strCurrentFilePathName)
             End If
             If DialogResult.OK = dlgSave.ShowDialog() Then
                 ucrInputFilePath.SetName(dlgSave.FileName.Replace("\", "/"))
             End If
-            TestOKEnabled()
         End Using
     End Sub
 

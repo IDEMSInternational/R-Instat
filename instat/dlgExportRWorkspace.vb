@@ -92,20 +92,25 @@ Public Class dlgExportRWorkspace
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
-        Dim dlgSave As New SaveFileDialog
-
-        dlgSave.Title = "Export R Workspace"
-        dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-        dlgSave.Filter = "Saved R Objects (*.RData)|*.RData"
-        If dlgSave.ShowDialog = DialogResult.OK Then
-            If dlgSave.FileName <> "" Then
-                ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
+        Dim strCurrentFilePathName As String = ucrInputExportFile.GetText()
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Export R Workspace"
+            dlgSave.Filter = "Saved R Objects (*.RData)|*.RData"
+            If String.IsNullOrEmpty(strCurrentFilePathName) Then
+                'ucrReceiverMultiple is a multireceiver. So give a suggestive name if it has 1 item only
+                If ucrReceiverMultiple.GetVariableNamesList().Length = 1 Then
+                    dlgSave.FileName = ucrReceiverMultiple.GetVariableNames(bWithQuotes:=False)
+                End If
+                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+            Else
+                strCurrentFilePathName = strCurrentFilePathName.Replace("/", "\")
+                dlgSave.FileName = Path.GetFileName(strCurrentFilePathName)
+                dlgSave.InitialDirectory = Path.GetDirectoryName(strCurrentFilePathName) 'use the previous path as initial dir
             End If
-        End If
-    End Sub
-
-    Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
-        cmdBrowse_Click(sender, e)
+            If DialogResult.OK = dlgSave.ShowDialog() Then
+                ucrInputExportFile.SetName(dlgSave.FileName.Replace("\", "/")) 'R uses / slashes for file paths. so \ needs to be replaced
+            End If
+        End Using
     End Sub
 
     Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrReceiverMultiple.ControlContentsChanged

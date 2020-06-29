@@ -20,7 +20,7 @@ Public Class dlgExportDataset
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
-    Private strCurrentFileName As String
+
 
     Private Sub dlgExportDataset_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -85,25 +85,22 @@ Public Class dlgExportDataset
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
+        Dim strCurrentFilePathName As String = ucrInputExportFile.GetText()
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Export File Dialog"
             dlgSave.Filter = "Comma separated file (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|TAB-separated data (*.tsv)|*.tsv|Pipe-separated data (*.psv)|*.psv|Feather r / Python interchange format (*.feather)|*.feather|Fixed-Width format data (*.fwf)|*.fwf|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|JSON(*.json)|*.json|YAML(*.yml)|*.yml|Stata(*.dta)|*.dta|SPSS(*.sav)|*.sav|XBASE database files (*.dbf)|*.dbf| Weka Attribute - Relation File Format (*.arff)|*.arff|r syntax object (*.R)|*.R|Xml(*.xml)|*.xml|HTML(*.html)|*.html"
-            If Not String.IsNullOrEmpty(strCurrentFileName) Then
-                dlgSave.FileName = Path.GetFileName(strCurrentFileName)
-                dlgSave.InitialDirectory = Path.GetDirectoryName(strCurrentFileName)
-            Else
-                dlgSave.FileName = ucrAvailableSheets.cboAvailableDataFrames.Text
+            If String.IsNullOrEmpty(strCurrentFilePathName) Then
+                dlgSave.FileName = ucrAvailableSheets.strCurrDataFrame
                 dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+            Else
+                dlgSave.FileName = Path.GetFileName(strCurrentFilePathName)
+                dlgSave.InitialDirectory = Path.GetDirectoryName(strCurrentFilePathName)
             End If
             If dlgSave.ShowDialog = DialogResult.OK Then
                 ucrInputExportFile.SetName(dlgSave.FileName.Replace("\", "/"))
-                strCurrentFileName = dlgSave.FileName
+                strCurrentFilePathName = dlgSave.FileName
             End If
         End Using
-    End Sub
-
-    Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
-        cmdBrowse_Click(sender, e)
     End Sub
 
     Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrAvailableSheets.ControlContentsChanged
@@ -111,6 +108,6 @@ Public Class dlgExportDataset
     End Sub
 
     Private Sub ucrAvailableSheets_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrAvailableSheets.DataFrameChanged
-        strCurrentFileName = ""
+        ucrInputExportFile.SetName("") 'clears the ucrinput contents. 
     End Sub
 End Class
