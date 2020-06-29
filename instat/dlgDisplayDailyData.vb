@@ -252,6 +252,7 @@ Public Class dlgDisplayDailyData
         clsGeomRugFunction.SetPackageName("ggplot2")
         clsGeomRugFunction.SetRCommand("geom_rug")
         clsGeomRugFunction.AddParameter("data", clsROperatorParameter:=clsNAFilterOperator, iPosition:=0)
+        clsGeomRugFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=1)
 
         clsThemeGreyFunction.SetRCommand("theme_grey")
 
