@@ -24,7 +24,7 @@ Public Class dlgDisplayDailyData
     Private lstCheckboxes As New List(Of ucrCheck)
     Private clsDisplayDailyTable, clsDisplayDailyGraphFunction, clsConcFunction As New RFunction
     Private clsGGplotFunction, clsGeomLineFunction, clsGeomRugFunction, clsThemeFunction, clsThemeGreyFunction As New RFunction
-    Private clsIdVars, clsFacetFunction, clsGgplotAesFunction, clsGGplotElementText, clsXLabFunction As New RFunction
+    Private clsIdVars, clsFacetFunction, clsGgplotAesFunction, clsGGplotElementText, clsXLabFunction, clsYLabFunction As New RFunction
     Private clsGgPlotOperator, clsDisplayDailyGraphOperator, clsDisplayDailyTableOperator, clsNAFilterOperator As New ROperator
 
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -216,10 +216,15 @@ Public Class dlgDisplayDailyData
         clsNAFilterOperator = New ROperator
         clsFacetFunction = New RFunction
         clsXLabFunction = New RFunction
+        clsYLabFunction = New RFunction
 
         clsXLabFunction.SetPackageName("ggplot2")
         clsXLabFunction.SetRCommand("xlab")
         clsXLabFunction.AddParameter("label", Chr(34) & "" & Chr(34),, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsYLabFunction.SetPackageName("ggplot2")
+        clsYLabFunction.SetRCommand("ylab")
+        clsYLabFunction.AddParameter("label", Chr(34) & "" & Chr(34),, iPosition:=0, bIncludeArgumentName:=False)
 
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetFunction.SetRCommand("facet_grid")
@@ -271,6 +276,7 @@ Public Class dlgDisplayDailyData
         clsGgPlotOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=4)
         clsGgPlotOperator.AddParameter("facet", clsRFunctionParameter:=clsFacetFunction, iPosition:=5)
         clsGgPlotOperator.AddParameter("xlab", clsRFunctionParameter:=clsXLabFunction, iPosition:=6)
+        clsGgPlotOperator.AddParameter("ylab", clsRFunctionParameter:=clsYLabFunction, iPosition:=7)
 
         clsGgPlotOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
