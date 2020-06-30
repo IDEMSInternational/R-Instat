@@ -55,6 +55,7 @@ Partial Class ucrInputComboBox
         '
         'mnuRightClick
         '
+        Me.mnuRightClick.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.mnuRightClick.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRightClickCopy})
         Me.mnuRightClick.Name = "mnuRightClick"
         resources.ApplyResources(Me.mnuRightClick, "mnuRightClick")

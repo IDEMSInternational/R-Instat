@@ -122,13 +122,13 @@
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="mnuRightClickCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 22</value>
+    <value>126, 32</value>
   </data>
   <data name="mnuRightClickCopy.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="mnuRightClick.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 26</value>
+    <value>127, 36</value>
   </data>
   <data name="&gt;&gt;mnuRightClick.Name" xml:space="preserve">
     <value>mnuRightClick</value>
@@ -144,7 +144,7 @@
     <value>0, 0</value>
   </data>
   <data name="cboInput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>206, 28</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cboInput.TabIndex" type="System.Int32, mscorlib">
@@ -166,10 +166,13 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>9, 20</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>206, 32</value>
   </data>
   <data name="&gt;&gt;mnuRightClickCopy.Name" xml:space="preserve">
     <value>mnuRightClickCopy</value>
