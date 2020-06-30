@@ -45,6 +45,21 @@ Public Class sdgFiltersFromFactor
         ucrChkAndExistingFilter.SetText("AndExistingFilter")
         ucrChkAndExistingFilter.AddToLinkedControls(ucrReceiverExistingFilter, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
+
+    Private Sub Setdefaults()
+        ucrFactorReceiver.SetMeAsReceiver()
+        VariableTypeProperties()
+
+    End Sub
+
+    Private Sub VariableTypeProperties()
+        ucrFactorLevel.Visible = False
+        cmdToggleSelectAll.Visible = False
+    End Sub
+
+    Private Sub SetToggleButtonSettings()
+
+    End Sub
     Public Sub SetRcode(Optional ucrBaseSelector As ucrSelector = Nothing)
         If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
             strDataFrame = ucrBaseSelector.strCurrentDataFrame
