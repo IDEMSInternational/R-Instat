@@ -16,6 +16,7 @@
 
 Imports instat.Translations
 Public Class sdgFiltersFromFactor
+    Public strDataFrame As String
     Private Sub sdgFiltersFromFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -44,8 +45,11 @@ Public Class sdgFiltersFromFactor
         ucrChkAndExistingFilter.SetText("AndExistingFilter")
         ucrChkAndExistingFilter.AddToLinkedControls(ucrReceiverExistingFilter, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
-    Private Sub SetDefaults()
-
+    Public Sub SetRcode(Optional ucrBaseSelector As ucrSelector = Nothing)
+        If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
+            strDataFrame = ucrBaseSelector.strCurrentDataFrame
+            ucrFactorSelctor.SetDataframe(strDataFrame, False)
+        End If
     End Sub
 
 End Class
