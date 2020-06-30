@@ -128,7 +128,7 @@
     <value>Copy</value>
   </data>
   <data name="mnuRightClick.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 36</value>
+    <value>103, 26</value>
   </data>
   <data name="&gt;&gt;mnuRightClick.Name" xml:space="preserve">
     <value>mnuRightClick</value>
