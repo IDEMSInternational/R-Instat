@@ -24,7 +24,7 @@ Public Class dlgTwoVariableFitModel
     Private clsTransformFunction As New RFunction
 
     Public clsBrokenStickFirstOperator, clsBrokenStickSecondOperator, clsBrokenStickThirdOperator, clsBrokenStickGeneralOperator As New ROperator
-    Public clsBrokenStickIFunc As New RFunction
+    Public clsBrokenStickSecondOperFunction, clsBrokenStickIFunc As New RFunction
     Public clsSplineFunc As New RFunction
     'General case codes
     Public clsFormulaOperator As New ROperator
@@ -196,6 +196,7 @@ Public Class dlgTwoVariableFitModel
         clsMonthFunc = New RFunction
         clsYearFunc = New RFunction
         clsAsFactorFunc = New RFunction
+        clsBrokenStickSecondOperFunction = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -319,13 +320,17 @@ Public Class dlgTwoVariableFitModel
         clsHatvaluesFunction.SetRCommand("hatvalues")
 
         'Broken stick
+        clsBrokenStickSecondOperFunction.SetRCommand("*")
+        clsBrokenStickSecondOperFunction.AddParameter("brokenOp", clsROperatorParameter:=clsBrokenStickSecondOperator, bIncludeArgumentName:=False)
+
         clsBrokenStickFirstOperator.SetOperation("-")
 
         clsBrokenStickSecondOperator.SetOperation(">", bBracketsTemp:=False)
 
-        clsBrokenStickThirdOperator.SetOperation("*", bBracketsTemp:=False)
+        clsBrokenStickThirdOperator.SetOperation("", bBracketsTemp:=False)
+        clsBrokenStickThirdOperator.bSpaceAroundOperation = False
         clsBrokenStickThirdOperator.AddParameter("first", clsROperatorParameter:=clsBrokenStickFirstOperator, bIncludeArgumentName:=False, iPosition:=0)
-        clsBrokenStickThirdOperator.AddParameter("second", clsROperatorParameter:=clsBrokenStickSecondOperator, bIncludeArgumentName:=False, iPosition:=1)
+        clsBrokenStickThirdOperator.AddParameter("second", clsRFunctionParameter:=clsBrokenStickSecondOperFunction, bIncludeArgumentName:=False, iPosition:=1)
 
         clsBrokenStickIFunc.SetRCommand("I")
         clsBrokenStickIFunc.AddParameter(clsROperatorParameter:=clsBrokenStickThirdOperator)
