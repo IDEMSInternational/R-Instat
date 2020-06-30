@@ -168,11 +168,7 @@ Public Class dlgCompareSummary
     End Sub
 
     Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
-        If ucrChkPrintOutput.Checked Then
-            ucrBase.clsRsyntax.iCallType = 2
-        Else
-            ucrBase.clsRsyntax.iCallType = 0
-        End If
+        ucrBase.clsRsyntax.iCallType = If(ucrChkPrintOutput.Checked, 2, 0)
     End Sub
 
     Private Sub ucrChkIgnoreMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIgnoreMissing.ControlValueChanged
