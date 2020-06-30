@@ -23,52 +23,21 @@ Partial Class sdgFiltersFromFactor
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgFiltersFromFactor))
-        Me.ucrBase = New instat.ucrButtonsSubdialogue()
-        Me.ucrFactorSelctor = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblFactor = New System.Windows.Forms.Label()
-        Me.ucrFactorLevel = New instat.ucrFactor()
         Me.cmdToggleSelectAll = New System.Windows.Forms.Button()
-        Me.ucrChkAndExistingFilter = New instat.ucrCheck()
-        Me.ucrReceiverExistingFilter = New instat.ucrReceiverSingle()
         Me.lblExsistingFilter = New System.Windows.Forms.Label()
+        Me.ucrReceiverExistingFilter = New instat.ucrReceiverSingle()
+        Me.ucrChkAndExistingFilter = New instat.ucrCheck()
+        Me.ucrFactorLevel = New instat.ucrFactor()
+        Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrFactorSelctor = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrFactorSelctor
-        '
-        Me.ucrFactorSelctor.bDropUnusedFilterLevels = False
-        Me.ucrFactorSelctor.bShowHiddenColumns = False
-        Me.ucrFactorSelctor.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrFactorSelctor, "ucrFactorSelctor")
-        Me.ucrFactorSelctor.Name = "ucrFactorSelctor"
-        '
-        'ucrFactorReceiver
-        '
-        Me.ucrFactorReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrFactorReceiver, "ucrFactorReceiver")
-        Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
-        Me.ucrFactorReceiver.Selector = Nothing
-        Me.ucrFactorReceiver.strNcFilePath = ""
-        Me.ucrFactorReceiver.ucrSelector = Nothing
         '
         'lblFactor
         '
         resources.ApplyResources(Me.lblFactor, "lblFactor")
         Me.lblFactor.Name = "lblFactor"
-        '
-        'ucrFactorLevel
-        '
-        resources.ApplyResources(Me.ucrFactorLevel, "ucrFactorLevel")
-        Me.ucrFactorLevel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorLevel.clsReceiver = Nothing
-        Me.ucrFactorLevel.Name = "ucrFactorLevel"
-        Me.ucrFactorLevel.shtCurrSheet = Nothing
-        Me.ucrFactorLevel.ucrChkLevels = Nothing
         '
         'cmdToggleSelectAll
         '
@@ -76,11 +45,10 @@ Partial Class sdgFiltersFromFactor
         Me.cmdToggleSelectAll.Name = "cmdToggleSelectAll"
         Me.cmdToggleSelectAll.UseVisualStyleBackColor = True
         '
-        'ucrChkAndExistingFilter
+        'lblExsistingFilter
         '
-        Me.ucrChkAndExistingFilter.Checked = False
-        resources.ApplyResources(Me.ucrChkAndExistingFilter, "ucrChkAndExistingFilter")
-        Me.ucrChkAndExistingFilter.Name = "ucrChkAndExistingFilter"
+        resources.ApplyResources(Me.lblExsistingFilter, "lblExsistingFilter")
+        Me.lblExsistingFilter.Name = "lblExsistingFilter"
         '
         'ucrReceiverExistingFilter
         '
@@ -91,10 +59,42 @@ Partial Class sdgFiltersFromFactor
         Me.ucrReceiverExistingFilter.strNcFilePath = ""
         Me.ucrReceiverExistingFilter.ucrSelector = Nothing
         '
-        'lblExsistingFilter
+        'ucrChkAndExistingFilter
         '
-        resources.ApplyResources(Me.lblExsistingFilter, "lblExsistingFilter")
-        Me.lblExsistingFilter.Name = "lblExsistingFilter"
+        Me.ucrChkAndExistingFilter.Checked = False
+        resources.ApplyResources(Me.ucrChkAndExistingFilter, "ucrChkAndExistingFilter")
+        Me.ucrChkAndExistingFilter.Name = "ucrChkAndExistingFilter"
+        '
+        'ucrFactorLevel
+        '
+        resources.ApplyResources(Me.ucrFactorLevel, "ucrFactorLevel")
+        Me.ucrFactorLevel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrFactorLevel.clsReceiver = Nothing
+        Me.ucrFactorLevel.Name = "ucrFactorLevel"
+        Me.ucrFactorLevel.shtCurrSheet = Nothing
+        Me.ucrFactorLevel.ucrChkLevels = Nothing
+        '
+        'ucrFactorReceiver
+        '
+        Me.ucrFactorReceiver.frmParent = Me
+        resources.ApplyResources(Me.ucrFactorReceiver, "ucrFactorReceiver")
+        Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
+        Me.ucrFactorReceiver.Selector = Nothing
+        Me.ucrFactorReceiver.strNcFilePath = ""
+        Me.ucrFactorReceiver.ucrSelector = Nothing
+        '
+        'ucrFactorSelctor
+        '
+        Me.ucrFactorSelctor.bDropUnusedFilterLevels = False
+        Me.ucrFactorSelctor.bShowHiddenColumns = False
+        Me.ucrFactorSelctor.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrFactorSelctor, "ucrFactorSelctor")
+        Me.ucrFactorSelctor.Name = "ucrFactorSelctor"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'sdgFiltersFromFactor
         '

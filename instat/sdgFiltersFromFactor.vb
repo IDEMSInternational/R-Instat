@@ -17,6 +17,8 @@
 Imports instat.Translations
 Public Class sdgFiltersFromFactor
     Public strDataFrame As String
+    Public clsFilterFunction As RFunction
+    Public clsConditionsList As RFunction
     Private Sub sdgFiltersFromFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -44,6 +46,12 @@ Public Class sdgFiltersFromFactor
 
         ucrChkAndExistingFilter.SetText("AndExistingFilter")
         ucrChkAndExistingFilter.AddToLinkedControls(ucrReceiverExistingFilter, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        clsFilterFunction = New RFunction
+        clsFilterFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_filter")
+        clsConditionsList = New RFunction
+        clsConditionsList.SetRCommand("list")
+        clsFilterFunction.AddParameter("filter", clsRFunctionParameter:=clsConditionsList)
     End Sub
 
     Private Sub Setdefaults()
@@ -58,7 +66,13 @@ Public Class sdgFiltersFromFactor
     End Sub
 
     Private Sub SetToggleButtonSettings()
-
+        If ucrFactorLevel.IsAllSelected() Then
+            cmdToggleSelectAll.Text = "Deselect All Levels"
+            cmdToggleSelectAll.FlatStyle = FlatStyle.Flat
+        Else
+            cmdToggleSelectAll.Text = "Select All Levels"
+            cmdToggleSelectAll.FlatStyle = FlatStyle.Popup
+        End If
     End Sub
     Public Sub SetRcode(Optional ucrBaseSelector As ucrSelector = Nothing)
         If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
@@ -67,4 +81,7 @@ Public Class sdgFiltersFromFactor
         End If
     End Sub
 
+    Private Sub ucrFactorSelctor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorSelctor.ControlValueChanged
+        clsFilterFunction.AddParameter("data_name", Chr(34) & ucrFactorSelctor.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+    End Sub
 End Class
