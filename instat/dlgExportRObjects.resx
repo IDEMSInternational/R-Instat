@@ -153,10 +153,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>428, 288</value>
+    <value>414, 288</value>
   </data>
   <data name="ucrInputExportFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 204</value>
+    <value>79, 204</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrInputExportFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -181,7 +181,7 @@
     <value>0</value>
   </data>
   <data name="cmdBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>355, 203</value>
+    <value>334, 203</value>
   </data>
   <data name="cmdBrowse.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 23</value>
@@ -205,10 +205,10 @@
     <value>1</value>
   </data>
   <data name="lblExportFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-1, 206</value>
+    <value>10, 208</value>
   </data>
   <data name="lblExportFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 13</value>
+    <value>65, 13</value>
   </data>
   <data name="lblExportFile.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>

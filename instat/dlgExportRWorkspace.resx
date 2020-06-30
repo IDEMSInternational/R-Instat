@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>357, 251</value>
+    <value>319, 251</value>
   </data>
   <data name="cmdBrowse.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 23</value>
@@ -144,10 +144,10 @@
     <value>3</value>
   </data>
   <data name="lblExport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 255</value>
+    <value>8, 256</value>
   </data>
   <data name="lblExport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
+    <value>60, 13</value>
   </data>
   <data name="lblExport.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -247,7 +247,7 @@
     <value>10</value>
   </data>
   <data name="ucrInputExportFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 252</value>
+    <value>74, 252</value>
   </data>
   <data name="ucrInputExportFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -352,7 +352,7 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>440, 338</value>
+    <value>413, 338</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 281</value>

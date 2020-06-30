@@ -67,7 +67,7 @@ Partial Class dlgExportDataset
         '
         Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
         Me.ucrInputExportFile.IsMultiline = False
-        Me.ucrInputExportFile.IsReadOnly = False
+        Me.ucrInputExportFile.IsReadOnly = True
         resources.ApplyResources(Me.ucrInputExportFile, "ucrInputExportFile")
         Me.ucrInputExportFile.Name = "ucrInputExportFile"
         '

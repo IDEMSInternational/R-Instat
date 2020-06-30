@@ -21,7 +21,6 @@ Public Class dlgExportDataset
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
 
-
     Private Sub dlgExportDataset_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
