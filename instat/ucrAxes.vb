@@ -33,9 +33,7 @@ Public Class ucrAxes
     Public bFirstLoad As Boolean = True
     Private bControlsInitialised As Boolean = False
     Private bRCodeSet As Boolean = False
-    Private ucrXYReceiverSingle As ucrReceiverSingle
 
-    Private strDataFrame As String
 
     Public Sub InitialiseControl()
         Dim dctTickMarkers As New Dictionary(Of String, String)
@@ -193,35 +191,29 @@ Public Class ucrAxes
         ucrInputExpand.SetValidationTypeAsNumericList()
 
         'Date X Scale
-        dctDateFormat.Add("Year(4-digit)", Chr(34) & "%Y" & Chr(34))
-        dctDateFormat.Add("Month", Chr(34) & "%m" & Chr(34))
-        dctDateFormat.Add("Month_abbr", Chr(34) & "%b" & Chr(34))
+        dctDateFormat.Add("Year, with century (0000-9999)", Chr(34) & "%Y" & Chr(34))
+        dctDateFormat.Add("Year, without century (00-99)", Chr(34) & "%y" & Chr(34))
 
-        dctDateFormat.Add("Year(4-digit)-Month", Chr(34) & "%Y-%m" & Chr(34))
+        dctDateFormat.Add("month, full (January-December)", Chr(34) & "%B" & Chr(34))
+        dctDateFormat.Add("month, abbreviated (Jan-Dec)", Chr(34) & "%b" & Chr(34))
+        dctDateFormat.Add("month, numeric (01-12)", Chr(34) & "%m" & Chr(34))
 
-        dctDateFormat.Add("Year(4-digit)-Month-Day", Chr(34) & "%Y-%m-%d" & Chr(34))
-        dctDateFormat.Add("Year(4-digit)/Month/Day", Chr(34) & "%Y/%m/%d" & Chr(34))
-        dctDateFormat.Add("Year(4-digit)-Month(Full Name)-Day", Chr(34) & "%Y-%B-%d" & Chr(34))
-        dctDateFormat.Add("Year(4-digit)/Month(Full Name)/Day", Chr(34) & "%Y/%B/%d" & Chr(34))
-        dctDateFormat.Add("Year(4-digit)-Month(abbr)-Day", Chr(34) & "%Y-%b-%d" & Chr(34))
-        dctDateFormat.Add("Year(4-digit)/Month(abbr)/Day", Chr(34) & "%Y/%b/%d" & Chr(34))
-        dctDateFormat.Add("Year(4 digit)MonthDay(YEARMODA)", Chr(34) & "%Y%m%d" & Chr(34))
+        dctDateFormat.Add("day of the month (01-31)", Chr(34) & "%d" & Chr(34))
+        dctDateFormat.Add("day of the month (1-31)", Chr(34) & "%e" & Chr(34))
+        dctDateFormat.Add("day of the week, full (Monday-Sunday)", Chr(34) & "%A" & Chr(34))
+        dctDateFormat.Add("day of the week, abbreviated (Mon-Sun)", Chr(34) & "%a" & Chr(34))
 
-        dctDateFormat.Add("Year(4-digit)Doy(Julian)", Chr(34) & "%Y%j" & Chr(34))
+        dctDateFormat.Add("hour, in 24-hour clock (01-24)", Chr(34) & "%H" & Chr(34))
+        dctDateFormat.Add("hour, in 12-hour clock (01-12)", Chr(34) & "%I" & Chr(34))
+        dctDateFormat.Add("hour, in 12-hour clock (1-12)", Chr(34) & "%l" & Chr(34))
+
+        dctDateFormat.Add("minute (00-59)", Chr(34) & "%M" & Chr(34))
+        dctDateFormat.Add("second (00-59)", Chr(34) & "%S" & Chr(34))
 
         dctDateFormat.Add("Day-Month-Year(4-digit)", Chr(34) & "%d-%m-%Y" & Chr(34))
         dctDateFormat.Add("Day/Month/Year(4-digit)", Chr(34) & "%d/%m/%Y" & Chr(34))
         dctDateFormat.Add("Day-Month(Full Name)-Year(4-digit)", Chr(34) & "%d-%B-%Y" & Chr(34))
         dctDateFormat.Add("Day/Month(Full Name)/Year(4-digit)", Chr(34) & "%d/%B/%Y" & Chr(34))
-        dctDateFormat.Add("Day-Month(abbr)-Year(4-digit)", Chr(34) & "%d-%b-%Y" & Chr(34))
-        dctDateFormat.Add("Day/Month(abbr)/Year(4-digit)", Chr(34) & "%d/%b/%Y" & Chr(34))
-
-        dctDateFormat.Add("Month-Day-Year(4-digit)", Chr(34) & "%m-%d-%Y" & Chr(34))
-        dctDateFormat.Add("Month/Day/Year(4-digit)", Chr(34) & "%m/%d/%Y" & Chr(34))
-        dctDateFormat.Add("Month(Full Name)-Day-Year(4-digit)", Chr(34) & "%B-%d-%Y" & Chr(34))
-        dctDateFormat.Add("Month(Full Name)/Day/Year(4-digit)", Chr(34) & "%B/%d/%Y" & Chr(34))
-        dctDateFormat.Add("Month(abbr)-Day-Year(4-digit)", Chr(34) & "%b-%d-%Y" & Chr(34))
-        dctDateFormat.Add("Month(abbr)/Day/Year(4-digit)", Chr(34) & "%b/%d/%Y" & Chr(34))
 
 
         ucrInputComboDateLabel.SetParameter(New RParameter("date_labels", 3))
@@ -262,7 +254,7 @@ Public Class ucrAxes
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewXYScaleDateFuntion As RFunction = Nothing, Optional ucrNewXYReceiverSingle As ucrReceiverSingle = Nothing, Optional strNewDataFrame As String = "", Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewXYScaleDateFuntion As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempBreaksParam As RParameter
         Dim clsTempMinorBreaksParam As RParameter
 
@@ -290,9 +282,6 @@ Public Class ucrAxes
             ucrInputPosition.SetDefaultState("Left")
         End If
         ucrInputAxisType.SetName(strAxisType)
-
-        ucrXYReceiverSingle = ucrNewXYReceiverSingle
-        strDataFrame = strNewDataFrame
 
         clsXYScaleDateLimitFunction = New RFunction
         clsXYScaleDateLimitFunction.SetRCommand("c")
@@ -403,7 +392,6 @@ Public Class ucrAxes
         bRCodeSet = True
         SetLabel()
         AddRemoveContinuousXYScales()
-        MinimumMaximumDate()
     End Sub
 
     Private Sub AddRemoveLabs()
@@ -435,19 +423,29 @@ Public Class ucrAxes
 
     Private Sub AddRemoveContinuousXYScales()
         If clsXYScaleContinuousFunction.clsParameters.Count > 0 Then
-            clsBaseOperator.AddParameter("scale" & "_" & strAxis & "_" & strAxisType, clsRFunctionParameter:=clsXYScaleContinuousFunction)
+            clsBaseOperator.AddParameter("scale" & "_" & strAxis & "_" & "continuous", clsRFunctionParameter:=clsXYScaleContinuousFunction)
         Else
-            clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & strAxisType)
+            clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "continuous")
+        End If
+    End Sub
+
+    Private Sub AddRemoveScaleFunctions()
+        If strAxisType = "continuous" Then
+            AddRemoveContinuousXYScales()
+            clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "date")
+        ElseIf strAxisType = "date" Then
+            clsBaseOperator.AddParameter("scale" & "_" & strAxis & "_" & "date", clsRFunctionParameter:=clsXYScaleDateFunction)
+            clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "continuous")
+        Else
+            clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "continuous")
+            clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "date")
         End If
     End Sub
 
     Private Sub ucrInputAxisType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAxisType.ControlValueChanged
         SetAxisTypeControls()
-        If strAxisType.ToLower = "date" Then
-            clsBaseOperator.AddParameter("scale" & "_" & strAxis & "_" & strAxisType, clsRFunctionParameter:=clsXYScaleDateFunction)
-        Else
-            clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & strAxisType)
-        End If
+        AddRemoveScaleFunctions()
+
     End Sub
 
     Private Sub SetAxisTypeControls()
@@ -537,35 +535,6 @@ Public Class ucrAxes
             clsXYScaleContinuousFunction.RemoveParameterByName("labels")
         End If
         AddRemoveContinuousXYScales()
-    End Sub
-
-    Private Sub MinimumMaximumDate()
-        Dim expColumn As SymbolicExpression
-        Dim n As CharacterVector
-        Dim medianValue, strTemp As String
-
-        Dim strScript As String = ""
-        Dim clsGetDateMaximumFunc, clsGetDateMinimumFunc As New RFunction
-        Dim clsGetVariablesFunc As New RFunction
-        If Not IsNothing(ucrXYReceiverSingle) AndAlso ucrXYReceiverSingle.strCurrDataType.ToLower = "date" Then
-
-
-            clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-            clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
-            clsGetVariablesFunc.AddParameter("col_names", Chr(34) & ucrXYReceiverSingle.GetVariableNames(False) & Chr(34), iPosition:=1)
-
-
-            clsGetDateMaximumFunc.SetRCommand("max")
-            clsGetDateMaximumFunc.AddParameter("x", clsRFunctionParameter:=clsGetVariablesFunc, iPosition:=0)
-            clsGetDateMaximumFunc.AddParameter("na.rm", "TRUE", iPosition:=1)
-
-            strTemp = clsGetDateMaximumFunc.ToScript(strScript)
-            expColumn = frmMain.clsRLink.RunInternalScriptGetOutput(strTemp, bSilent:=False)
-            If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
-                n = expColumn.AsCharacter
-                medianValue = n(0)
-            End If
-        End If
     End Sub
 
     Private Sub ScaleDateFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimits.ControlValueChanged, ucrChkBreaks.ControlValueChanged
