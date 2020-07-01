@@ -103,4 +103,10 @@ Public Class sdgVerificationSummaries
             MsgBox("No verification summary selected. Ok will not be enabled on the main dialog.", Title:="No verification summary selected", Buttons:=MsgBoxStyle.Information)
         End If
     End Sub
+
+    Public Sub EnableDisableTabs(bEnabledDisabledContinuous As Boolean, bEnabledDisabledBinary As Boolean, bEnabledDisabledCategorical As Boolean)
+        tbContinuous.Enabled = bEnabledDisabledContinuous
+        tbBinary.Enabled = bEnabledDisabledBinary
+        tbCategorical.Enabled = bEnabledDisabledCategorical
+    End Sub
 End Class

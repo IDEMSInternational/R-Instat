@@ -127,21 +127,15 @@ Public Class dlgCompareSummary
         If rdoContinuous.Checked Then
             iTabIndexSelected = 0
             clsSummaryFunction.AddParameter("frcst.type", Chr(34) & "'cont'" & Chr(34), iPosition:=5)
-            sdgVerificationSummaries.tbBinary.Enabled = False
-            sdgVerificationSummaries.tbCategorical.Enabled = False
-            sdgVerificationSummaries.tbContinuous.Enabled = True
+            sdgVerificationSummaries.EnableDisableTabs(True, False, False)
         ElseIf rdoBinary.Checked Then
             iTabIndexSelected = 1
             clsSummaryFunction.AddParameter("frcst.type", Chr(34) & "'binary'" & Chr(34), iPosition:=5)
-            sdgVerificationSummaries.tbBinary.Enabled = True
-            sdgVerificationSummaries.tbCategorical.Enabled = False
-            sdgVerificationSummaries.tbContinuous.Enabled = False
+            sdgVerificationSummaries.EnableDisableTabs(False, True, False)
         ElseIf rdoCategorical.Checked Then
             iTabIndexSelected = 2
             clsSummaryFunction.AddParameter("frcst.type", Chr(34) & "'cat'" & Chr(34), iPosition:=5)
-            sdgVerificationSummaries.tbBinary.Enabled = False
-            sdgVerificationSummaries.tbCategorical.Enabled = True
-            sdgVerificationSummaries.tbContinuous.Enabled = False
+            sdgVerificationSummaries.EnableDisableTabs(False, False, True)
         End If
     End Sub
 
