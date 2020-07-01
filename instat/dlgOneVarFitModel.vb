@@ -63,11 +63,6 @@ Public Class dlgOneVarFitModel
         ucrChkConvertVariate.AddParameterValueFunctionNamesCondition(True, "data", "as.numeric", True)
         ucrChkConvertVariate.AddParameterValueFunctionNamesCondition(False, "data", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data", True)
 
-        ucrNudHyp.SetParameter(New RParameter("mu"))
-
-        ucrNudCI.SetParameter(New RParameter("mu"))
-
-
         ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
         ucrSaveModel.SetCheckBoxText("Save Model")
@@ -88,9 +83,6 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoGeneralCase, "fitdist")
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoTest, "fitdist", False)
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoEstimate, "fitdist", False)
-
-
-
 
         ucrPnlStats.AddRadioButton(rdoEnorm)
         ucrPnlStats.AddRadioButton(rdoMeanWilcox)
@@ -114,13 +106,12 @@ Public Class dlgOneVarFitModel
         ucrNudHyp.SetLinkedDisplayControl(lblHyp)
         ucrPnlStats.SetLinkedDisplayControl(grpConditions)
 
-        '  ucrPnlGeneralExactCase.AddToLinkedControls(ucrChkBinModify, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-
+        ucrNudCI.SetParameter(New RParameter("mu"))
         ucrNudCI.Increment = 0.05
         ucrNudCI.DecimalPlaces = 2
         ucrNudCI.SetMinMax(0, 1)
 
+        ucrNudHyp.SetParameter(New RParameter("mu"))
         ucrNudHyp.Increment = 1
         ucrNudHyp.DecimalPlaces = 2
         ucrNudHyp.SetMinMax(0.00, Integer.MaxValue)
@@ -132,14 +123,6 @@ Public Class dlgOneVarFitModel
         dctucrOperator.Add("(>)", ">")
         dctucrOperator.Add("(>=)", ">=")
         dctucrOperator.Add("(!=)", "!=")
-
-        'Disabled for now
-        rdoTest.Enabled = True
-        'ucrOperator.SetItems(dctucrOperator)
-        ' ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
-
-        'temp disabled as only works for numeric columns currently
-        '.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -203,15 +186,15 @@ Public Class dlgOneVarFitModel
         clsFamilyFunction = ucrDistributionChoice.clsCurrRFunction
         clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger, iPosition:=0)
 
-        'Exact Case
-
         'TTest
         clsRTTest.SetPackageName("stats")
         clsRTTest.SetRCommand("t.test")
         clsRTTest.AddParameter("mu", 0.00)
+
         'VarTest
         clsVarTest.SetPackageName("EnvStats")
         clsVarTest.SetRCommand("varTest")
+
         'Enorm
         clsREnormTest.SetPackageName("EnvStats")
         clsREnormTest.SetRCommand("enorm")
@@ -301,7 +284,6 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRStartValues, New RParameter("x"), iAdditionalPairNo:=6)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("x", 0), iAdditionalPairNo:=7)
 
-
         ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
 
         ucrNudHyp.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("sigma.squared"), iAdditionalPairNo:=1)
@@ -311,7 +293,6 @@ Public Class dlgOneVarFitModel
         ucrNudHyp.AddAdditionalCodeParameterPair(clsRTTest, New RParameter("mu"), iAdditionalPairNo:=5)
         ucrNudHyp.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("p"), iAdditionalPairNo:=6)
         ucrNudHyp.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("r"), iAdditionalPairNo:=7)
-        ' ucrNudHyp.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("sigma.squared"), iAdditionalPairNo:=8)
 
         ucrNudCI.AddAdditionalCodeParameterPair(clsRTTest, New RParameter("conf.level"), iAdditionalPairNo:=1)
         ucrNudCI.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("conf.level"), iAdditionalPairNo:=2)
@@ -319,7 +300,6 @@ Public Class dlgOneVarFitModel
         ucrNudCI.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("conf.level"), iAdditionalPairNo:=4)
         ucrNudCI.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("conf.level"), iAdditionalPairNo:=5)
         ucrNudCI.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
-        '  ucrNudCI.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
         bRCodeSet = True
     End Sub
 
@@ -590,24 +570,12 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    'Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
-    '    If rdoGeneralCase.Checked Then
-    '    ElseIf rdoExactCase.Checked Then
-    '        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then ' can remove this line once Bernouli residual plots are working
-    '            PlotResiduals()
-    '        End If
-    '    End If
-    'End Sub
-
     Private Sub Display()
         If rdoGeneralCase.Checked Then
             cmdFittingOptions.Visible = True
             cmdDisplayOptions.Visible = True
             grpConditions.Visible = False
             ucrInputTests.Visible = False
-            ' rdoMeanWilcox.Visible = False
-            'rdoVarSign.Visible = False
-            '  rdoEnorm.Visible = False
             grpVarAndWilcoxSign.Hide()
         ElseIf (rdoTest.Checked AndAlso rdoEstimate.Checked) Then
             cmdFittingOptions.Visible = True
@@ -620,11 +588,6 @@ Public Class dlgOneVarFitModel
                 If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Then
                     grpVarAndWilcoxSign.Hide()
                     grpVarAndWilcox.Show()
-                    'rdoMeanWilcox.Visible = True
-                    'rdoVarSign.Visible = True
-                    'rdoEnorm.Visible = True
-                    ' rdoMeanWilcox.Text = "Compare Mean"
-                    'rdoVarSign.Text = "Compare Variance"
                     If rdoVarSign.Checked Then
                         ucrNudHyp.SetMinMax(0.01, 1)
                     Else
@@ -633,21 +596,11 @@ Public Class dlgOneVarFitModel
                 ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "No_Distribution" Then
                     grpVarAndWilcox.Hide()
                     grpVarAndWilcoxSign.Show()
-                    'rdoMeanWilcox.Visible = True
-                    'rdoVarSign.Visible = True
-                    ' rdoEnorm.Visible = False
-                    ' rdoMeanWilcox.Text = "None-Wilcoxon"
-                    ' rdoVarSign.Text = "None-Sign"
                     ucrNudHyp.Minimum = ucrDistributionChoice.clsCurrDistribution.lstExact(5)
                     ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2)
                 Else
                     ucrNudHyp.Minimum = ucrDistributionChoice.clsCurrDistribution.lstExact(5)
                     ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2)
-                    'grpVarAndWilcoxSign.Hide()
-                    ' grpVarAndWilcox.Hide()
-                    'rdoMeanWilcox.Visible = False
-                    ' rdoVarSign.Visible = False
-                    ' rdoEnorm.Visible = False
                 End If
                 ucrNudHyp.Increment = ucrDistributionChoice.clsCurrDistribution.lstExact(3)
                 ucrNudHyp.DecimalPlaces = ucrDistributionChoice.clsCurrDistribution.lstExact(4)
@@ -701,7 +654,6 @@ Public Class dlgOneVarFitModel
 
     Private Sub BinomialConditions()
         If rdoTest.Checked AndAlso ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
-            'ucrChkBinModify.Enabled = True
             ucrChkBinModify.Visible = True
             If ucrChkBinModify.Checked Then
                 lblSuccessIf.Visible = True
@@ -730,7 +682,6 @@ Public Class dlgOneVarFitModel
             ucrOperator.Visible = False
             ucrVariables.Visible = False
         End If
-        ' ucrNudBinomialConditions.Value = 1
         ucrNudBinomialConditions.Maximum = Integer.MaxValue
         ucrNudBinomialConditions.Minimum = Integer.MinValue
         Display()
