@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgOneVarFitModel
     Public clsROneVarFitModel, clsFamilyFunction, clsRLogLikFunction, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart, clsRConvertVector, clsNaExclude, clsRConvertInteger, clsRConvertNumeric As New RFunction
     Public clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As RFunction
+    Public clsBionomialFunction As New RFunction
     Public clsFunctionOperator, clsFactorOperator As New ROperator
     Private WithEvents ucrDistribution As ucrDistributions
     Public bfirstload As Boolean = True
@@ -74,13 +75,22 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
         ucrSaveModel.SetPrefix("Normal")
 
+        ucrInputTests.SetParameter(New RParameter("y", 0))
+        ucrInputTests.SetDropDownStyleAsNonEditable()
+        ucrInputTests.SetItems({"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z"})
+
         ucrChkBinModify.SetText("Modify Conditions for 'Success'")
 
         ucrPnlGeneralExactCase.AddRadioButton(rdoGeneralCase)
-        ucrPnlGeneralExactCase.AddRadioButton(rdoExactCase)
+        ucrPnlGeneralExactCase.AddRadioButton(rdoTest)
+        ucrPnlGeneralExactCase.AddRadioButton(rdoEstimate)
 
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoGeneralCase, "fitdist")
-        ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoExactCase, "fitdist", False)
+        ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoTest, "fitdist", False)
+        ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoEstimate, "fitdist", False)
+
+
+
 
         ucrPnlStats.AddRadioButton(rdoEnorm)
         ucrPnlStats.AddRadioButton(rdoMeanWilcox)
@@ -96,11 +106,11 @@ Public Class dlgOneVarFitModel
         ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoWilcoxSignTest, "wilcox.test")
         ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoVarSignTest, "signmedian.test")
 
-
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrPnlStats, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudCI, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputTests, {rdoTest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrPnlStats, {rdoTest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudCI, {rdoTest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
         ucrNudCI.SetLinkedDisplayControl(lblConfidenceLimit)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudHyp, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudHyp, {rdoTest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudHyp.SetLinkedDisplayControl(lblHyp)
         ucrPnlStats.SetLinkedDisplayControl(grpConditions)
 
@@ -124,7 +134,7 @@ Public Class dlgOneVarFitModel
         dctucrOperator.Add("(!=)", "!=")
 
         'Disabled for now
-        rdoExactCase.Enabled = False
+        rdoTest.Enabled = True
         'ucrOperator.SetItems(dctucrOperator)
         ' ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
 
@@ -151,6 +161,7 @@ Public Class dlgOneVarFitModel
         clsRBinomStart = New RFunction
         clsRConvertVector = New RFunction
         clsNaExclude = New RFunction
+        clsBionomialFunction = New RFunction
 
 
         clsRConvertInteger = New RFunction
@@ -251,6 +262,9 @@ Public Class dlgOneVarFitModel
         clsRLogLikFunction.SetRCommand("llplot")
         clsRLogLikFunction.iCallType = 3
 
+        clsBionomialFunction.SetPackageName("mosaic")
+        clsBionomialFunction.SetRCommand("binom.test")
+
         SetDataParameter()
         EnableOptions()
         BinomialConditions()
@@ -285,6 +299,8 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=4)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=5)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRStartValues, New RParameter("x"), iAdditionalPairNo:=6)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("x", 0), iAdditionalPairNo:=7)
+
 
         ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
 
@@ -320,7 +336,7 @@ Public Class dlgOneVarFitModel
     Private Sub SetDistributions()
         If rdoGeneralCase.Checked Then
             ucrDistributionChoice.SetAllDistributions()
-        ElseIf rdoExactCase.Checked Then
+        ElseIf rdoTest.Checked Then
             ucrDistributionChoice.SetExactDistributions()
         End If
     End Sub
@@ -447,7 +463,7 @@ Public Class dlgOneVarFitModel
             clsRplotDenscomp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34), iPosition:=0)
             clsRplotDenscomp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel, iPosition:=1)
             clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsROneVarFitModel, iPosition:=0)
-        ElseIf rdoExactCase.Checked Then
+        ElseIf rdoTest.Checked Then
             If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
                 grpVarAndWilcoxSign.Hide()
                 grpVarAndWilcox.Hide()
@@ -460,7 +476,7 @@ Public Class dlgOneVarFitModel
             ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Then
                 grpVarAndWilcox.Show()
                 grpVarAndWilcoxSign.Hide()
-                If rdoExactCase.Checked Then
+                If rdoTest.Checked Then
                     If rdoMeanWilcox.Checked Then
                         ucrNudHyp.SetMinMax(0.00, 1)
                         clsRTTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
@@ -498,7 +514,7 @@ Public Class dlgOneVarFitModel
     Public Sub DataTypeAccepted()
         If rdoGeneralCase.Checked Then
             ucrReceiverVariable.RemoveIncludedMetadataProperty("class")
-        ElseIf rdoExactCase.Checked Then
+        ElseIf rdoTest.Checked Then
             If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
                 ucrReceiverVariable.SetIncludedDataTypes({"numeric"})
                 If (ucrReceiverVariable.strCurrDataType = "factor" OrElse ucrReceiverVariable.strCurrDataType = "character") Then
@@ -588,15 +604,18 @@ Public Class dlgOneVarFitModel
             cmdFittingOptions.Visible = True
             cmdDisplayOptions.Visible = True
             grpConditions.Visible = False
+            ucrInputTests.Visible = False
             ' rdoMeanWilcox.Visible = False
             'rdoVarSign.Visible = False
             '  rdoEnorm.Visible = False
             grpVarAndWilcoxSign.Hide()
-        ElseIf rdoExactCase.Checked Then
-            cmdFittingOptions.Visible = False
-            cmdDisplayOptions.Visible = False
+        ElseIf (rdoTest.Checked AndAlso rdoEstimate.Checked) Then
+            cmdFittingOptions.Visible = True
+            cmdDisplayOptions.Visible = True
             ucrChkConvertVariate.Visible = False
+            ucrDistributionChoice.Visible = False
             grpConditions.Visible = True
+            ucrInputTests.Visible = True
             If ucrDistributionChoice.clsCurrDistribution.bIsExact = True Then
                 If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Then
                     grpVarAndWilcoxSign.Hide()
@@ -642,6 +661,19 @@ Public Class dlgOneVarFitModel
         BinomialConditions()
         SetDistributions()
         DataTypeAccepted()
+        If rdoTest.Checked Then
+            ucrDistributionChoice.lblDistributionType.Text = "Test:"
+            ucrSaveModel.SetCheckBoxText("Save Test")
+            ucrSaveModel.SetPrefix("test")
+        ElseIf rdoEstimate.Checked Then
+            ucrDistributionChoice.lblDistributionType.Text = "Estimate:"
+            ucrSaveModel.SetCheckBoxText("Save Estimate")
+            ucrSaveModel.SetPrefix("ci")
+        Else
+            ucrDistributionChoice.lblDistributionType.Text = "Distribution:"
+            ucrSaveModel.SetCheckBoxText("Save Model")
+            ucrSaveModel.SetPrefix("dist")
+        End If
     End Sub
 
     Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
@@ -668,7 +700,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub BinomialConditions()
-        If rdoExactCase.Checked AndAlso ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
+        If rdoTest.Checked AndAlso ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
             'ucrChkBinModify.Enabled = True
             ucrChkBinModify.Visible = True
             If ucrChkBinModify.Checked Then
@@ -729,5 +761,15 @@ Public Class dlgOneVarFitModel
     Private Sub ucrChkConvertVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertVariate.ControlValueChanged
         SetDataParameter()
         Display()
+    End Sub
+
+    Private Sub ucrInputTests_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTests.ControlValueChanged
+        Select Case ucrInputTests.GetValue
+            Case "Binomial"
+                ucrBase.clsRsyntax.SetBaseRFunction(clsBionomialFunction)
+            Case "Proportion"
+
+
+        End Select
     End Sub
 End Class
