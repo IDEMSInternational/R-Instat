@@ -45,7 +45,7 @@ Partial Class dlgOneVarFitModel
         Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.rdoEstimate = New System.Windows.Forms.RadioButton()
         Me.lblTests = New System.Windows.Forms.Label()
-        Me.ucrInputTests = New instat.ucrInputComboBox()
+        Me.ucrInputComboTests = New instat.ucrInputComboBox()
         Me.ucrChkConvertVariate = New instat.ucrCheck()
         Me.ucrPnlGeneralExactCase = New instat.UcrPanel()
         Me.ucrSaveModel = New instat.ucrSave()
@@ -53,6 +53,8 @@ Partial Class dlgOneVarFitModel
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputComboEstimate = New instat.ucrInputComboBox()
+        Me.lblEstimate = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -96,7 +98,7 @@ Partial Class dlgOneVarFitModel
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(294, 286)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(312, 286)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(92, 23)
         Me.cmdDisplayOptions.TabIndex = 44
@@ -105,7 +107,7 @@ Partial Class dlgOneVarFitModel
         '
         'cmdFittingOptions
         '
-        Me.cmdFittingOptions.Location = New System.Drawing.Point(294, 262)
+        Me.cmdFittingOptions.Location = New System.Drawing.Point(312, 261)
         Me.cmdFittingOptions.Name = "cmdFittingOptions"
         Me.cmdFittingOptions.Size = New System.Drawing.Size(92, 23)
         Me.cmdFittingOptions.TabIndex = 43
@@ -136,15 +138,15 @@ Partial Class dlgOneVarFitModel
         Me.lblTests.TabIndex = 47
         Me.lblTests.Text = "Test:"
         '
-        'ucrInputTests
+        'ucrInputComboTests
         '
-        Me.ucrInputTests.AddQuotesIfUnrecognised = True
-        Me.ucrInputTests.IsReadOnly = False
-        Me.ucrInputTests.Location = New System.Drawing.Point(64, 252)
-        Me.ucrInputTests.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrInputTests.Name = "ucrInputTests"
-        Me.ucrInputTests.Size = New System.Drawing.Size(92, 21)
-        Me.ucrInputTests.TabIndex = 46
+        Me.ucrInputComboTests.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboTests.IsReadOnly = False
+        Me.ucrInputComboTests.Location = New System.Drawing.Point(45, 252)
+        Me.ucrInputComboTests.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputComboTests.Name = "ucrInputComboTests"
+        Me.ucrInputComboTests.Size = New System.Drawing.Size(92, 21)
+        Me.ucrInputComboTests.TabIndex = 46
         '
         'ucrChkConvertVariate
         '
@@ -210,13 +212,34 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
+        'ucrInputComboEstimate
+        '
+        Me.ucrInputComboEstimate.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboEstimate.IsReadOnly = False
+        Me.ucrInputComboEstimate.Location = New System.Drawing.Point(66, 252)
+        Me.ucrInputComboEstimate.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputComboEstimate.Name = "ucrInputComboEstimate"
+        Me.ucrInputComboEstimate.Size = New System.Drawing.Size(92, 21)
+        Me.ucrInputComboEstimate.TabIndex = 48
+        '
+        'lblEstimate
+        '
+        Me.lblEstimate.AutoSize = True
+        Me.lblEstimate.Location = New System.Drawing.Point(12, 256)
+        Me.lblEstimate.Name = "lblEstimate"
+        Me.lblEstimate.Size = New System.Drawing.Size(50, 13)
+        Me.lblEstimate.TabIndex = 49
+        Me.lblEstimate.Text = "Estimate:"
+        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(426, 374)
+        Me.Controls.Add(Me.lblEstimate)
+        Me.Controls.Add(Me.ucrInputComboEstimate)
         Me.Controls.Add(Me.lblTests)
-        Me.Controls.Add(Me.ucrInputTests)
+        Me.Controls.Add(Me.ucrInputComboTests)
         Me.Controls.Add(Me.rdoEstimate)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.ucrChkConvertVariate)
@@ -255,6 +278,8 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents cmdFittingOptions As Button
     Friend WithEvents rdoEstimate As RadioButton
-    Friend WithEvents ucrInputTests As ucrInputComboBox
+    Friend WithEvents ucrInputComboTests As ucrInputComboBox
     Friend WithEvents lblTests As Label
+    Friend WithEvents ucrInputComboEstimate As ucrInputComboBox
+    Friend WithEvents lblEstimate As Label
 End Class
