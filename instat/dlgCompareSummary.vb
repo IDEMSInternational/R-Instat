@@ -101,7 +101,7 @@ Public Class dlgCompareSummary
         sdgVerificationSummaries.SetRFunction(clsNewSummaryFunction:=clsSummaryFunction, clsNewListFunction:=clsListFunction, iNewTabIndexSelected:=iTabIndexSelected, bReset:=bResetSubdialog)
         sdgVerificationSummaries.ShowDialog()
         bResetSubdialog = False
-        AddUseParameter()
+        AddRemoveUseParameter()
         TestOkEnabled()
     End Sub
 
@@ -166,7 +166,7 @@ Public Class dlgCompareSummary
         ucrBase.clsRsyntax.iCallType = If(ucrChkPrintOutput.Checked, 2, 0)
     End Sub
 
-    Private Sub AddUseParameter()
+    Private Sub AddRemoveUseParameter()
         If ucrChkIgnoreMissing.Checked AndAlso clsListFunction.ContainsParameter("summary_cor") Then
             clsSummaryFunction.AddParameter("use", Chr(34) & "'complete.obs'" & Chr(34), iPosition:=8)
         Else
@@ -175,7 +175,7 @@ Public Class dlgCompareSummary
     End Sub
 
     Private Sub ucrChkIgnoreMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIgnoreMissing.ControlValueChanged
-        AddUseParameter()
+        AddRemoveUseParameter()
     End Sub
 
     Private Sub ucrReceiverStation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverSatellite.ControlContentsChanged, ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
