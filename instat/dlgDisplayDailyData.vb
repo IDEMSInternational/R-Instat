@@ -24,8 +24,9 @@ Public Class dlgDisplayDailyData
     Private lstCheckboxes As New List(Of ucrCheck)
     Private clsDisplayDailyTable, clsDisplayDailyGraphFunction, clsConcFunction As New RFunction
     Private clsGGplotFunction, clsGeomLineFunction, clsGeomRugFunction, clsThemeFunction, clsThemeGreyFunction As New RFunction
-    Private clsIdVars, clsFacetFunction, clsGgplotAesFunction, clsGGplotElementText, clsXLabFunction, clsYLabFunction As New RFunction
+    Private clsIdVars, clsFacetFunction, clsGgplotAesFunction, clsGGplotElementText, clsXLabFunction As New RFunction
     Private clsGgPlotOperator, clsDisplayDailyGraphOperator, clsDisplayDailyTableOperator, clsNAFilterOperator As New ROperator
+    Private clsFacetOperator As New ROperator
 
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -216,20 +217,16 @@ Public Class dlgDisplayDailyData
         clsNAFilterOperator = New ROperator
         clsFacetFunction = New RFunction
         clsXLabFunction = New RFunction
-        clsYLabFunction = New RFunction
+        clsFacetOperator = New ROperator
 
         clsXLabFunction.SetPackageName("ggplot2")
         clsXLabFunction.SetRCommand("xlab")
         clsXLabFunction.AddParameter("label", Chr(34) & "" & Chr(34),, iPosition:=0, bIncludeArgumentName:=False)
 
-        clsYLabFunction.SetPackageName("ggplot2")
-        clsYLabFunction.SetRCommand("ylab")
-        clsYLabFunction.AddParameter("label", Chr(34) & "" & Chr(34),, iPosition:=0, bIncludeArgumentName:=False)
 
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetFunction.SetRCommand("facet_grid")
         clsFacetFunction.AddParameter("scales", Chr(34) & "free_y" & Chr(34), iPosition:=0)
-        clsFacetFunction.AddParameter("rows", "vars(variable)", iPosition:=1)
 
         clsNAFilterOperator.SetOperation("%>%")
         clsNAFilterOperator.AddParameter("filter", "filter(is.na(value))", iPosition:=1)
@@ -254,6 +251,9 @@ Public Class dlgDisplayDailyData
         clsGeomLineFunction.SetPackageName("ggplot2")
         clsGeomLineFunction.SetRCommand("geom_line")
 
+        clsFacetOperator.SetOperation("~")
+        clsFacetOperator.AddParameter("variable", "variable", bIncludeArgumentName:=False, iPosition:=0)
+
         clsGeomRugFunction.SetPackageName("ggplot2")
         clsGeomRugFunction.SetRCommand("geom_rug")
         clsGeomRugFunction.AddParameter("data", clsROperatorParameter:=clsNAFilterOperator, iPosition:=0)
@@ -264,6 +264,7 @@ Public Class dlgDisplayDailyData
         clsThemeFunction.SetPackageName("ggplot2")
         clsThemeFunction.SetRCommand("theme")
         clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsGGplotElementText, iPosition:=0)
+        clsThemeFunction.AddParameter("legend.position", Chr(34) & "none" & Chr(34), iPosition:=1)
 
         clsGGplotElementText.SetPackageName("ggplot2")
         clsGGplotElementText.SetRCommand("element_text")
@@ -276,7 +277,6 @@ Public Class dlgDisplayDailyData
         clsGgPlotOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=4)
         clsGgPlotOperator.AddParameter("facet", clsRFunctionParameter:=clsFacetFunction, iPosition:=5)
         clsGgPlotOperator.AddParameter("xlab", clsRFunctionParameter:=clsXLabFunction, iPosition:=6)
-        clsGgPlotOperator.AddParameter("ylab", clsRFunctionParameter:=clsYLabFunction, iPosition:=7)
 
         clsGgPlotOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
@@ -391,11 +391,13 @@ Public Class dlgDisplayDailyData
             End If
         End If
         StackingFunction()
+        FacetControl()
     End Sub
 
     Private Sub ucrSelectorDisplayDailyClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDisplayDailyClimaticData.ControlValueChanged
         clsDisplayDailyGraphFunction.AddParameter("data_name", Chr(34) & ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
         StackingFunction()
+        FacetControl()
     End Sub
 
     Private Sub StackingFunction()
@@ -412,6 +414,21 @@ Public Class dlgDisplayDailyData
         End If
     End Sub
 
+    Private Sub FacetControl()
+        If rdoGraph.Checked AndAlso Not ucrReceiverStations.IsEmpty Then
+            clsFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), bIncludeArgumentName:=False, iPosition:=1)
+            clsFacetFunction.RemoveParameterByName("rows")
+            clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=1)
+            clsFacetFunction.AddParameter("space", Chr(34) & "fixed" & Chr(34), iPosition:=2)
+        Else
+            clsFacetFunction.RemoveParameterByName("facets")
+            clsFacetFunction.RemoveParameterByName("space")
+            clsFacetFunction.AddParameter("rows", "vars(variable)", iPosition:=1)
+            clsFacetFunction.RemoveParameterByName("facets")
+            clsFacetFunction.RemoveParameterByName("space")
+        End If
+
+    End Sub
     Private Sub ucrReceiverMultipleElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleElements.ControlValueChanged
         StackingFunction()
     End Sub
