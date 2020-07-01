@@ -78,7 +78,7 @@ Public Class sdgVerificationSummaries
         Next
     End Sub
 
-    Public Sub SetRFunction(clsNewSummaryFunction As RFunction, clsNewListFunction As RFunction, Optional bNewEnableDisableTab As Boolean = False, Optional iNewTabIndexSelected As Integer = 0, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewSummaryFunction As RFunction, clsNewListFunction As RFunction, Optional iNewTabIndexSelected As Integer = 0, Optional bReset As Boolean = False)
         If bControlsInitialised Then
             InitialiseControls()
             bControlsInitialised = False
