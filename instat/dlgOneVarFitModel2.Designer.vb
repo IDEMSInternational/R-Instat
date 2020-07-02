@@ -209,7 +209,7 @@ Partial Class dlgOneVarFitModel
         Me.grpConditions.Margin = New System.Windows.Forms.Padding(4)
         Me.grpConditions.Name = "grpConditions"
         Me.grpConditions.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpConditions.Size = New System.Drawing.Size(261, 162)
+        Me.grpConditions.Size = New System.Drawing.Size(261, 171)
         Me.grpConditions.TabIndex = 53
         Me.grpConditions.TabStop = False
         Me.grpConditions.Text = "Conditions"
