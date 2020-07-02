@@ -90,6 +90,12 @@ Public Class dlgOneVarFitModel
         ucrPnlStats.AddFunctionNamesCondition(rdoMeanWilcox, "t.test")
         ucrPnlStats.AddFunctionNamesCondition(rdoVarSign, "varTest")
 
+        ucrPnlWilcoxVarTest.AddRadioButton(rdoWilcoxSignTest)
+        ucrPnlWilcoxVarTest.AddRadioButton(rdoVarSignTest)
+
+        ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoWilcoxSignTest, "wilcox.test")
+        ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoVarSignTest, "signmedian.test")
+
 
         ucrNudTrim.SetParameter(New RParameter("trim", 1))
         ucrNudTrim.Maximum = 0.5
