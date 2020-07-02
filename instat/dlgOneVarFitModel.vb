@@ -87,6 +87,10 @@ Public Class dlgOneVarFitModel
         ucrNudTrim.DecimalPlaces = 2
         ucrNudTrim.Increment = 0.01
 
+        ucrNudHyp.SetParameter(New RParameter("mu"))
+
+        ucrNudCI.SetParameter(New RParameter("mu"))
+
         ucrChkIgnoreMissing.SetParameter(New RParameter("na.rm", 1))
         ucrChkIgnoreMissing.SetText("Ignore Missing")
         ucrChkIgnoreMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
