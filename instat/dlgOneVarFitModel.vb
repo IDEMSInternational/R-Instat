@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class dlgOneVarFitModel
-    Private clsROneVarFitModel, clsRLogLikFunction, clsRfitdist, clsRConvertVector, clsNaExclude, clsRConvertInteger, clsRConvertNumeric As New RFunction
+    Private clsROneVarFitModel, clsRLogLikFunction, clsRfitdist, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric, clsNaExclude As New RFunction
     Private clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As New RFunction
     Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction As New RFunction
     Private clsMeanCIFunction, clsMedianCIFunction, clsNormCIFunction, clsPoissonCIFunction, clsQuantileCIFunction, clsSdCIFunction, clsVarCIFunction As New RFunction
@@ -56,7 +56,7 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoTest, {"binom.test", "prop.test", "SignTest", "t.test", "wilcox.test", "ZTest"})
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoEstimate, {"MeanCI", "MedianCI ", "normCI", "PoissonCI", "quantileCI", "sdCI", "VarCI"})
 
-        ucrReceiverVariable.SetParameter(New RParameter("object"))
+        ucrReceiverVariable.SetParameter(New RParameter("object", 0))
         ucrReceiverVariable.Selector = ucrSelectorOneVarFitMod
         ucrReceiverVariable.SetParameterIsRFunction()
         ucrReceiverVariable.SetMeAsReceiver()
@@ -82,11 +82,24 @@ Public Class dlgOneVarFitModel
         ucrInputComboEstimate.SetItems({"mean", "median", "normal", "poisson", "quantile", "sd", "variance"})
         ucrInputComboEstimate.SetDropDownStyleAsNonEditable()
 
+        ucrNudTrim.SetParameter(New RParameter("trim", 1))
+        ucrNudTrim.Maximum = 0.5
+        ucrNudTrim.DecimalPlaces = 2
+        ucrNudTrim.Increment = 0.01
+
+        ucrChkIgnoreMissing.SetParameter(New RParameter("na.rm", 1))
+        ucrChkIgnoreMissing.SetText("Ignore Missing")
+        ucrChkIgnoreMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkIgnoreMissing.SetRDefault("FALSE")
+
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboEstimate, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrDistributionChoice, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudTrim, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrChkIgnoreMissing, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
+        ucrNudTrim.SetLinkedDisplayControl(lblTrim)
         lstCommandButtons.AddRange({cmdDisplayOptions, cmdFittingOptions})
         ucrDistributionChoice.SetLinkedDisplayControl(lstCommandButtons)
     End Sub
@@ -95,6 +108,7 @@ Public Class dlgOneVarFitModel
         clsROneVarFitModel = New RFunction
         clsRConvertInteger = New RFunction
         clsRConvertNumeric = New RFunction
+
         clsRplotFunction = New RFunction
         clsRplotPPComp = New RFunction
         clsRplotCdfcomp = New RFunction
@@ -126,31 +140,33 @@ Public Class dlgOneVarFitModel
         ucrSelectorOneVarFitMod.Reset()
         ucrSaveModel.Reset()
 
+        ucrChkConvertVariate.Visible = False 'hide convert to numeric checkbox by default
+
         'General Case
         clsROneVarFitModel.SetPackageName("fitdistrplus")
         clsROneVarFitModel.SetRCommand("fitdist")
         clsROneVarFitModel.AddParameter("method", Chr(34) & "mle" & Chr(34), iPosition:=1)
+        clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger, iPosition:=0)
 
         clsNaExclude.SetPackageName("stats")
         clsNaExclude.SetRCommand("na.exclude")
 
         clsRConvertNumeric.SetRCommand("as.numeric")
         clsRConvertNumeric.AddParameter("x", clsRFunctionParameter:=clsNaExclude, iPosition:=0)
+
         clsRConvertInteger.SetRCommand("as.integer")
         clsRConvertInteger.AddParameter("x", clsRFunctionParameter:=clsNaExclude, iPosition:=0)
 
         clsRConvertVector.SetRCommand("as.vector")
-        clsRConvertVector.AddParameter("x", clsRFunctionParameter:=clsNaExclude)
+        clsRConvertVector.AddParameter("x", clsRFunctionParameter:=clsNaExclude, iPosition:=0)
 
         clsRfitdist.SetPackageName("fitdistrplus")
         clsRfitdist.SetRCommand("fitdist")
 
-        clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger, iPosition:=0)
-
         'Display Options/Functions
         clsRplotFunction.SetPackageName("graphics")
         clsRplotFunction.SetRCommand("plot")
-        clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsROneVarFitModel)
+        clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsROneVarFitModel, iPosition:=0)
         clsRplotFunction.iCallType = 3
         clsRplotFunction.bExcludeAssignedFunctionOutput = False
 
@@ -186,7 +202,6 @@ Public Class dlgOneVarFitModel
         clsRLogLikFunction.SetRCommand("llplot")
         clsRLogLikFunction.iCallType = 3
         clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsROneVarFitModel, iPosition:=0)
-
 
         'Test
         clsBionomialFunction.SetPackageName("mosaic")
@@ -229,8 +244,6 @@ Public Class dlgOneVarFitModel
         clsVarCIFunction.SetPackageName("DescTools")
         clsVarCIFunction.SetRCommand("VarCI")
 
-        SetDataParameter()
-
         clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
         clsRLogLikFunction.SetAssignTo("last_likelihood", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_likelihood")
         clsRplotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -255,10 +268,14 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsQuantileCIFunction, New RParameter("x", 0), iAdditionalPairNo:=11)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsSdCIFunction, New RParameter("x", 0), iAdditionalPairNo:=12)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsVarCIFunction, New RParameter("x", 0), iAdditionalPairNo:=13)
+        ucrChkIgnoreMissing.AddAdditionalCodeParameterPair(clsMedianCIFunction, ucrChkIgnoreMissing.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkIgnoreMissing.AddAdditionalCodeParameterPair(clsVarCIFunction, ucrChkIgnoreMissing.GetParameter(), iAdditionalPairNo:=2)
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
         ucrChkConvertVariate.SetRCode(clsROneVarFitModel, bReset)
+        ucrNudTrim.SetRCode(clsMeanCIFunction, bReset)
+        ucrChkIgnoreMissing.SetRCode(clsMeanCIFunction, bReset)
 
         ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
     End Sub
@@ -275,39 +292,6 @@ Public Class dlgOneVarFitModel
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub SetDataParameter()
-        If Not ucrReceiverVariable.IsEmpty Then
-            If ucrReceiverVariable.strCurrDataType = "numeric" Then
-                ucrChkConvertVariate.Checked = False
-                ucrChkConvertVariate.Visible = False
-            Else
-                ucrChkConvertVariate.Visible = True
-            End If
-            If ucrChkConvertVariate.Checked Then
-                clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-            Else
-                'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
-                If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Geometric" Then
-                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger, iPosition:=0)
-                Else
-                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
-                End If
-                If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Hypergeometric" Then
-                    ' TODO llplot() no longer works with starting values. However, the mle's will not plot without starting values for these variables
-                End If
-            End If
-        Else
-            ucrChkConvertVariate.Visible = False
-            clsROneVarFitModel.RemoveParameterByName("data")
-        End If
-        If ucrDistributionChoice.lstCurrentDistributions.Count = 0 OrElse ucrReceiverVariable.IsEmpty() Then
-            ucrDistributionChoice.Enabled = False
-            ucrDistributionChoice.ucrInputDistributions.SetName("")
-        Else
-            ucrDistributionChoice.Enabled = True
-        End If
     End Sub
 
     Private Sub ResponseConvert()
@@ -366,21 +350,6 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub DataTypeAccepted()
-        If rdoGeneralCase.Checked Then
-            ucrReceiverVariable.RemoveIncludedMetadataProperty("class")
-        ElseIf rdoTest.Checked Then
-            If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
-                ucrReceiverVariable.SetIncludedDataTypes({"numeric"})
-                If (ucrReceiverVariable.strCurrDataType = "factor" OrElse ucrReceiverVariable.strCurrDataType = "character") Then
-                    ucrReceiverVariable.Clear()
-                End If
-            Else
-                ucrReceiverVariable.RemoveIncludedMetadataProperty("class")
-            End If
-        End If
-    End Sub
-
     Private Sub PlotResiduals()
         clsRfitdist.AddParameter("distr", Chr(34) & ucrDistributionChoice.clsCurrDistribution.strRName & Chr(34))
         If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
@@ -418,17 +387,14 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub ucrPnlGeneralExactCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGeneralExactCase.ControlValueChanged
-        DataTypeAccepted()
         SetSaveLabelTextAndPrefix()
         SetTestEstimateBaseFunction()
     End Sub
 
     Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
-                    clsROneVarFitModel.AddParameter("distr", Chr(34) & ucrDistributionChoice.clsCurrDistribution.strRName & Chr(34))
+        clsROneVarFitModel.AddParameter("distr", Chr(34) & ucrDistributionChoice.clsCurrDistribution.strRName & Chr(34))
         ucrSaveModel.SetPrefix(ucrDistributionChoice.clsCurrDistribution.strNameTag)
-        SetDataParameter()
         PlotResiduals()
-        DataTypeAccepted()
         StartParameterValues()
         TestOKEnabled()
     End Sub
@@ -436,18 +402,12 @@ Public Class dlgOneVarFitModel
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
         PlotResiduals()
         ResponseConvert()
-        DataTypeAccepted()
-    End Sub
-
-    Private Sub ucrChkConvertVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertVariate.ControlValueChanged
-        SetDataParameter()
     End Sub
 
     Private Sub SetTestEstimateBaseFunction()
         If rdoGeneralCase.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
             ucrBase.clsRsyntax.AddToAfterCodes(clsRplotFunction, iPosition:=1)
-            SetDataParameter()
         ElseIf rdoTest.Checked Then
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRplotFunction)
             Select Case ucrInputComboTests.GetValue

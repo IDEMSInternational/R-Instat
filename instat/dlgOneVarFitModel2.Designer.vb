@@ -45,6 +45,8 @@ Partial Class dlgOneVarFitModel
         Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.rdoEstimate = New System.Windows.Forms.RadioButton()
         Me.lblTests = New System.Windows.Forms.Label()
+        Me.lblEstimate = New System.Windows.Forms.Label()
+        Me.ucrInputComboEstimate = New instat.ucrInputComboBox()
         Me.ucrInputComboTests = New instat.ucrInputComboBox()
         Me.ucrChkConvertVariate = New instat.ucrCheck()
         Me.ucrPnlGeneralExactCase = New instat.UcrPanel()
@@ -53,8 +55,9 @@ Partial Class dlgOneVarFitModel
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputComboEstimate = New instat.ucrInputComboBox()
-        Me.lblEstimate = New System.Windows.Forms.Label()
+        Me.ucrNudTrim = New instat.ucrNud()
+        Me.lblTrim = New System.Windows.Forms.Label()
+        Me.ucrChkIgnoreMissing = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -138,6 +141,25 @@ Partial Class dlgOneVarFitModel
         Me.lblTests.TabIndex = 47
         Me.lblTests.Text = "Test:"
         '
+        'lblEstimate
+        '
+        Me.lblEstimate.AutoSize = True
+        Me.lblEstimate.Location = New System.Drawing.Point(12, 256)
+        Me.lblEstimate.Name = "lblEstimate"
+        Me.lblEstimate.Size = New System.Drawing.Size(50, 13)
+        Me.lblEstimate.TabIndex = 49
+        Me.lblEstimate.Text = "Estimate:"
+        '
+        'ucrInputComboEstimate
+        '
+        Me.ucrInputComboEstimate.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboEstimate.IsReadOnly = False
+        Me.ucrInputComboEstimate.Location = New System.Drawing.Point(66, 252)
+        Me.ucrInputComboEstimate.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputComboEstimate.Name = "ucrInputComboEstimate"
+        Me.ucrInputComboEstimate.Size = New System.Drawing.Size(92, 21)
+        Me.ucrInputComboEstimate.TabIndex = 48
+        '
         'ucrInputComboTests
         '
         Me.ucrInputComboTests.AddQuotesIfUnrecognised = True
@@ -212,30 +234,43 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrInputComboEstimate
+        'ucrNudTrim
         '
-        Me.ucrInputComboEstimate.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboEstimate.IsReadOnly = False
-        Me.ucrInputComboEstimate.Location = New System.Drawing.Point(66, 252)
-        Me.ucrInputComboEstimate.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrInputComboEstimate.Name = "ucrInputComboEstimate"
-        Me.ucrInputComboEstimate.Size = New System.Drawing.Size(92, 21)
-        Me.ucrInputComboEstimate.TabIndex = 48
+        Me.ucrNudTrim.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTrim.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTrim.Location = New System.Drawing.Point(279, 131)
+        Me.ucrNudTrim.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTrim.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTrim.Name = "ucrNudTrim"
+        Me.ucrNudTrim.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTrim.TabIndex = 50
+        Me.ucrNudTrim.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblEstimate
+        'lblTrim
         '
-        Me.lblEstimate.AutoSize = True
-        Me.lblEstimate.Location = New System.Drawing.Point(12, 256)
-        Me.lblEstimate.Name = "lblEstimate"
-        Me.lblEstimate.Size = New System.Drawing.Size(50, 13)
-        Me.lblEstimate.TabIndex = 49
-        Me.lblEstimate.Text = "Estimate:"
+        Me.lblTrim.AutoSize = True
+        Me.lblTrim.Location = New System.Drawing.Point(246, 135)
+        Me.lblTrim.Name = "lblTrim"
+        Me.lblTrim.Size = New System.Drawing.Size(30, 13)
+        Me.lblTrim.TabIndex = 51
+        Me.lblTrim.Text = "Trim:"
+        '
+        'ucrChkIgnoreMissing
+        '
+        Me.ucrChkIgnoreMissing.Checked = False
+        Me.ucrChkIgnoreMissing.Location = New System.Drawing.Point(249, 168)
+        Me.ucrChkIgnoreMissing.Name = "ucrChkIgnoreMissing"
+        Me.ucrChkIgnoreMissing.Size = New System.Drawing.Size(137, 20)
+        Me.ucrChkIgnoreMissing.TabIndex = 52
         '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(426, 374)
+        Me.Controls.Add(Me.ucrChkIgnoreMissing)
+        Me.Controls.Add(Me.lblTrim)
+        Me.Controls.Add(Me.ucrNudTrim)
         Me.Controls.Add(Me.lblEstimate)
         Me.Controls.Add(Me.ucrInputComboEstimate)
         Me.Controls.Add(Me.lblTests)
@@ -282,4 +317,7 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents lblTests As Label
     Friend WithEvents ucrInputComboEstimate As ucrInputComboBox
     Friend WithEvents lblEstimate As Label
+    Friend WithEvents ucrNudTrim As ucrNud
+    Friend WithEvents lblTrim As Label
+    Friend WithEvents ucrChkIgnoreMissing As ucrCheck
 End Class
