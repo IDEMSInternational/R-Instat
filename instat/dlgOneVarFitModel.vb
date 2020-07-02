@@ -96,6 +96,8 @@ Public Class dlgOneVarFitModel
         ucrChkIgnoreMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkIgnoreMissing.SetRDefault("FALSE")
 
+        ucrChkBinModify.SetText("Modify Conditions for 'Success'")
+
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboEstimate, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrDistributionChoice, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True)
