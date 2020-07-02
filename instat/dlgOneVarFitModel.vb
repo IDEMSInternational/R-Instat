@@ -82,6 +82,11 @@ Public Class dlgOneVarFitModel
         ucrInputComboEstimate.SetItems({"mean", "median", "normal", "poisson", "quantile", "sd", "variance"})
         ucrInputComboEstimate.SetDropDownStyleAsNonEditable()
 
+        ucrPnlStats.AddRadioButton(rdoEnorm)
+        ucrPnlStats.AddRadioButton(rdoMeanWilcox)
+        ucrPnlStats.AddRadioButton(rdoVarSign)
+
+
         ucrNudTrim.SetParameter(New RParameter("trim", 1))
         ucrNudTrim.Maximum = 0.5
         ucrNudTrim.DecimalPlaces = 2
