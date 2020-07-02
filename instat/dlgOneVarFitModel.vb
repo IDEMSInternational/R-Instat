@@ -106,6 +106,14 @@ Public Class dlgOneVarFitModel
 
         ucrNudCI.SetParameter(New RParameter("mu"))
 
+        ucrNudCI.Increment = 0.05
+        ucrNudCI.DecimalPlaces = 2
+        ucrNudCI.SetMinMax(0, 1)
+
+        ucrNudHyp.Increment = 1
+        ucrNudHyp.DecimalPlaces = 2
+        ucrNudHyp.SetMinMax(0.00, Integer.MaxValue)
+
         ucrChkIgnoreMissing.SetParameter(New RParameter("na.rm", 1))
         ucrChkIgnoreMissing.SetText("Ignore Missing")
         ucrChkIgnoreMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
