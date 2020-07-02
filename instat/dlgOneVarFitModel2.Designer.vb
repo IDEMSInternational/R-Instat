@@ -372,7 +372,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrNudBinomialConditions.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBinomialConditions.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBinomialConditions.Location = New System.Drawing.Point(180, 128)
+        Me.ucrNudBinomialConditions.Location = New System.Drawing.Point(180, 126)
         Me.ucrNudBinomialConditions.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrNudBinomialConditions.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBinomialConditions.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
