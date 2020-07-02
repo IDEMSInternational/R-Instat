@@ -290,4 +290,42 @@ Public Class dlgEnter
         End If
         SaveResults()
     End Sub
+
+    Private Sub btnExample_Click(sender As Object, e As EventArgs) Handles btnExample.Click
+        Dim objPopup As New clsPopup
+        Dim lstView As New ListView With {
+            .Scrollable = True,
+            .View = View.Details,
+            .FullRowSelect = True,
+            .ShowItemToolTips = True
+        }
+
+        'add a single column
+        lstView.Columns.Add("Commands", 450)
+
+        'add rows of sample commands
+        lstView.Items.Add(New ListViewItem({"seq(9 )"}))
+        lstView.Items.Item(0).ToolTipText = "todo. sensible tooltip here."
+
+        lstView.Items.Add(New ListViewItem({"LETTERS"}))
+        lstView.Items.Item(1).ToolTipText = "todo. sensible tooltip here."
+
+        lstView.Items.Add(New ListViewItem({"month.name"}))
+        lstView.Items.Item(2).ToolTipText = "todo. sensible tooltip here"
+
+        lstView.Items.Add(New ListViewItem({"month.abb"}))
+        lstView.Items.Item(2).ToolTipText = "todo. sensible tooltip here"
+
+
+        AddHandler lstView.DoubleClick, Sub()
+                                            If lstView.SelectedItems.Count > 1 Then
+                                                ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(lstView.SelectedItems.Item(0).SubItems(0).Text)
+                                                objPopup.Hide()
+                                            End If
+                                        End Sub
+
+        objPopup.SetContentControl(lstView)
+        objPopup.SetSize(ucrReceiverForEnterCalculation.Width, ucrReceiverForEnterCalculation.Height + 100)
+        objPopup.Show(ucrReceiverForEnterCalculation)
+    End Sub
 End Class
