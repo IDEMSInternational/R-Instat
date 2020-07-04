@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgOneVarFitModel
     Private clsROneVarFitModel, clsRLogLikFunction, clsRfitdist, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric, clsNaExclude As New RFunction
     Private clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As New RFunction
-    Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction As New RFunction
+    Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction, clsBartelFunction As New RFunction
     Private clsMeanCIFunction, clsMedianCIFunction, clsNormCIFunction, clsPoissonCIFunction, clsQuantileCIFunction, clsSdCIFunction, clsVarCIFunction As New RFunction
     Private WithEvents ucrDistribution As ucrDistributions
     Private bFirstload As Boolean = True
@@ -82,19 +82,7 @@ Public Class dlgOneVarFitModel
         ucrInputComboEstimate.SetItems({"mean", "median", "normal", "poisson", "quantile", "sd", "variance"})
         ucrInputComboEstimate.SetDropDownStyleAsNonEditable()
 
-        ucrPnlStats.AddRadioButton(rdoEnorm)
-        ucrPnlStats.AddRadioButton(rdoMeanWilcox)
-        ucrPnlStats.AddRadioButton(rdoVarSign)
 
-        ucrPnlStats.AddFunctionNamesCondition(rdoEnorm, "enorm")
-        ucrPnlStats.AddFunctionNamesCondition(rdoMeanWilcox, "t.test")
-        ucrPnlStats.AddFunctionNamesCondition(rdoVarSign, "varTest")
-
-        ucrPnlWilcoxVarTest.AddRadioButton(rdoWilcoxSignTest)
-        ucrPnlWilcoxVarTest.AddRadioButton(rdoVarSignTest)
-
-        ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoWilcoxSignTest, "wilcox.test")
-        ucrPnlWilcoxVarTest.AddFunctionNamesCondition(rdoVarSignTest, "signmedian.test")
 
 
         ucrNudTrim.SetParameter(New RParameter("trim", 1))
@@ -102,24 +90,6 @@ Public Class dlgOneVarFitModel
         ucrNudTrim.DecimalPlaces = 2
         ucrNudTrim.Increment = 0.01
 
-        ucrNudHyp.SetParameter(New RParameter("mu"))
-
-        ucrNudCI.SetParameter(New RParameter("mu"))
-
-        ucrNudCI.Increment = 0.05
-        ucrNudCI.DecimalPlaces = 2
-        ucrNudCI.SetMinMax(0, 1)
-
-        ucrNudHyp.Increment = 1
-        ucrNudHyp.DecimalPlaces = 2
-        ucrNudHyp.SetMinMax(0.00, Integer.MaxValue)
-
-        ucrChkIgnoreMissing.SetParameter(New RParameter("na.rm", 1))
-        ucrChkIgnoreMissing.SetText("Ignore Missing")
-        ucrChkIgnoreMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkIgnoreMissing.SetRDefault("FALSE")
-
-        ucrChkBinModify.SetText("Modify Conditions for 'Success'")
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboEstimate, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
@@ -129,12 +99,7 @@ Public Class dlgOneVarFitModel
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
         ucrNudTrim.SetLinkedDisplayControl(lblTrim)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrPnlStats, {rdoTest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudCI, {rdoTest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
-        ucrNudCI.SetLinkedDisplayControl(lblConfidenceLimit)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudHyp, {rdoTest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudHyp.SetLinkedDisplayControl(lblHyp)
-        ucrPnlStats.SetLinkedDisplayControl(grpConditions)
+
         lstCommandButtons.AddRange({cmdDisplayOptions, cmdFittingOptions})
         ucrDistributionChoice.SetLinkedDisplayControl(lstCommandButtons)
     End Sub
@@ -163,6 +128,7 @@ Public Class dlgOneVarFitModel
         clsTtestFunction = New RFunction
         clsWilcoxonFunction = New RFunction
         clsZTestFunction = New RFunction
+        clsBartelFunction = New RFunction
 
         clsMeanCIFunction = New RFunction
         clsMedianCIFunction = New RFunction
@@ -305,6 +271,7 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsVarCIFunction, New RParameter("x", 0), iAdditionalPairNo:=13)
         ucrChkIgnoreMissing.AddAdditionalCodeParameterPair(clsMedianCIFunction, ucrChkIgnoreMissing.GetParameter(), iAdditionalPairNo:=1)
         ucrChkIgnoreMissing.AddAdditionalCodeParameterPair(clsVarCIFunction, ucrChkIgnoreMissing.GetParameter(), iAdditionalPairNo:=2)
+
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
@@ -458,6 +425,8 @@ Public Class dlgOneVarFitModel
                     ucrBase.clsRsyntax.SetBaseRFunction(clsWilcoxonFunction)
                 Case "Z"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsZTestFunction)
+                Case "Bartel"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsBartelFunction)
             End Select
         ElseIf rdoEstimate.Checked Then
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRplotFunction)
