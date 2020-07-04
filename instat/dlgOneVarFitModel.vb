@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgOneVarFitModel
     Private clsROneVarFitModel, clsRLogLikFunction, clsRfitdist, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric, clsNaExclude As New RFunction
     Private clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As New RFunction
-    Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction, clsBartelFunction As New RFunction
+    Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction, clsBartelFunction, clsBrFunction As New RFunction
     Private clsMeanCIFunction, clsMedianCIFunction, clsNormCIFunction, clsPoissonCIFunction, clsQuantileCIFunction, clsSdCIFunction, clsVarCIFunction As New RFunction
     Private WithEvents ucrDistribution As ucrDistributions
     Private bFirstload As Boolean = True
@@ -76,7 +76,7 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
         ucrSaveModel.SetPrefix("Normal")
 
-        ucrInputComboTests.SetItems({"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z", "Bartel"})
+        ucrInputComboTests.SetItems({"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z", "Bartel", "Br"})
         ucrInputComboTests.SetDropDownStyleAsNonEditable()
 
         ucrInputComboEstimate.SetItems({"mean", "median", "normal", "poisson", "quantile", "sd", "variance"})
@@ -275,6 +275,7 @@ Public Class dlgOneVarFitModel
         ucrChkIgnoreMissing.AddAdditionalCodeParameterPair(clsMedianCIFunction, ucrChkIgnoreMissing.GetParameter(), iAdditionalPairNo:=1)
         ucrChkIgnoreMissing.AddAdditionalCodeParameterPair(clsVarCIFunction, ucrChkIgnoreMissing.GetParameter(), iAdditionalPairNo:=2)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBartelFunction, New RParameter("x", 0), iAdditionalPairNo:=14)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBrFunction, New RParameter())
 
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
