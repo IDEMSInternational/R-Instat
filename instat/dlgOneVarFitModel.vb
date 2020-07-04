@@ -129,6 +129,7 @@ Public Class dlgOneVarFitModel
         clsWilcoxonFunction = New RFunction
         clsZTestFunction = New RFunction
         clsBartelFunction = New RFunction
+        clsBrFunction = New RFunction
 
         clsMeanCIFunction = New RFunction
         clsMedianCIFunction = New RFunction
@@ -220,11 +221,15 @@ Public Class dlgOneVarFitModel
         clsWilcoxonFunction.SetPackageName("stats")
         clsWilcoxonFunction.SetRCommand("wilcox.test")
 
+
         clsZTestFunction.SetPackageName("DescTools")
         clsZTestFunction.SetRCommand("ZTest")
 
         clsBartelFunction.SetPackageName("DescTools")
         clsBartelFunction.SetRCommand("BartelsRankTest")
+
+        clsBrFunction.SetPackageName("trend")
+        clsBrFunction.SetRCommand("br.test")
 
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
@@ -275,7 +280,7 @@ Public Class dlgOneVarFitModel
         ucrChkIgnoreMissing.AddAdditionalCodeParameterPair(clsMedianCIFunction, ucrChkIgnoreMissing.GetParameter(), iAdditionalPairNo:=1)
         ucrChkIgnoreMissing.AddAdditionalCodeParameterPair(clsVarCIFunction, ucrChkIgnoreMissing.GetParameter(), iAdditionalPairNo:=2)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBartelFunction, New RParameter("x", 0), iAdditionalPairNo:=14)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBrFunction, New RParameter())
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBrFunction, New RParameter("x", 0), iAdditionalPairNo:=15)
 
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
