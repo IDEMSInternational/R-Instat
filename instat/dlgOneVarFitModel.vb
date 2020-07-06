@@ -318,6 +318,7 @@ Public Class dlgOneVarFitModel
         ucrChkIgnoreMissing.AddAdditionalCodeParameterPair(clsVarCIFunction, ucrChkIgnoreMissing.GetParameter(), iAdditionalPairNo:=2)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBartelFunction, New RParameter("x", 0), iAdditionalPairNo:=14)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBrFunction, New RParameter("x", 0), iAdditionalPairNo:=15)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRunsFunction, New RParameter("x", 0), iAdditionalPairNo:=16)
 
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
