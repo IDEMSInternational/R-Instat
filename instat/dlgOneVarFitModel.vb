@@ -447,6 +447,9 @@ Public Class dlgOneVarFitModel
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSerialCorr)
                 Case "Snh"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSnh)
+                Case "Ad"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsAd)
+
             End Select
         ElseIf rdoEstimate.Checked Then
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRplotFunction)
