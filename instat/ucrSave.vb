@@ -32,7 +32,7 @@ Imports instat
 '''             </para></summary>
 Public Class ucrSave
     'TODO SJL 06/07/20 If you refactor this class then please see the suggestions from @Patowhiz in PR #5794
-    ' 
+
     ''' <summary>   True if the control has not yet loaded. </summary>
     Public bFirstLoad As Boolean = True
 
