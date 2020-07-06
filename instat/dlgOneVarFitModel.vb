@@ -244,6 +244,12 @@ Public Class dlgOneVarFitModel
         clsRunsFunction.SetPackageName("DescTools")
         clsRunsFunction.SetRCommand("RunsTest")
 
+        clsSenFunction.SetPackageName("trend")
+        clsSenFunction.SetRCommand("sens.slope")
+
+        clsSerialCorrFunction.SetPackageName("EnvStats")
+        clsSerialCorrFunction.SetRCommand("serialCorrelationTest")
+
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
         clsMeanCIFunction.SetRCommand("MeanCI")
