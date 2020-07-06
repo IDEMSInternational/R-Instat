@@ -31,6 +31,8 @@ Imports instat
 '''             This can be the first column, the last column, or before/after an existing named column.
 '''             </para></summary>
 Public Class ucrSave
+    'TODO SJL 06/07/20 If you refactor this class then please see the suggestions from @Patowhiz in PR #5794
+    ' 
     ''' <summary>   True if the control has not yet loaded. </summary>
     Public bFirstLoad As Boolean = True
 
@@ -398,7 +400,7 @@ Public Class ucrSave
             lblSaveText.Visible = False
             ucrChkSave.Visible = True
             CheckedChanged()
-        Else 'TODO SJL This checkbox should never be reached
+        Else 'TODO SJL This check should never be reached
             ucrInputComboSave.Enabled = True
             ucrInputTextSave.Enabled = True
             lblSaveText.Visible = False
@@ -785,6 +787,9 @@ Public Class ucrSave
     '''                         assigning it to the text/combo box. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub SetName(strName As String, Optional bSilent As Boolean = False)
+        'TODO SJL 23/06/20 Patowhiz - Another opinion from me. This a perfect example of a method name used "out of context". 
+        ' The name is SetName() yet the function sets the contents of the control not the name of the control. 
+        ' And when getting the contents of the control, we use GetText not GetName().
         If bIsComboBox Then
             ucrInputComboSave.SetName(strName, bSilent)
         Else
