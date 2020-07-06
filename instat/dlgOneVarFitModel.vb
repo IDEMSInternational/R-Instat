@@ -250,6 +250,9 @@ Public Class dlgOneVarFitModel
         clsSerialCorrFunction.SetPackageName("EnvStats")
         clsSerialCorrFunction.SetRCommand("serialCorrelationTest")
 
+        clsSnhFunction.SetPackageName("trend")
+        clsSnhFunction.SetRCommand("snh.test")
+
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
         clsMeanCIFunction.SetRCommand("MeanCI")
