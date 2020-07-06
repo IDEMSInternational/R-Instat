@@ -231,6 +231,9 @@ Public Class dlgOneVarFitModel
         clsBrFunction.SetPackageName("trend")
         clsBrFunction.SetRCommand("br.test")
 
+        clsRuns.SetPackageName("DescTools")
+        clsRuns.SetRCommand("RunsTest")
+
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
         clsMeanCIFunction.SetRCommand("MeanCI")
