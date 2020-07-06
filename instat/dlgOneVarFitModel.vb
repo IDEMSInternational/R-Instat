@@ -439,6 +439,11 @@ Public Class dlgOneVarFitModel
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBartelFunction)
                 Case "Br"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBrFunction)
+                Case "Runs"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsRuns)
+                Case "Sen"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsSen)
+
             End Select
         ElseIf rdoEstimate.Checked Then
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRplotFunction)
