@@ -253,6 +253,15 @@ Public Class dlgOneVarFitModel
         clsSnhFunction.SetPackageName("trend")
         clsSnhFunction.SetRCommand("snh.test")
 
+        clsAdFunction.SetPackageName("nortest")
+        clsAdFunction.SetRCommand("ad.test")
+
+        clsCvmFunction.SetPackageName("nortest")
+        clsCvmFunction.SetRCommand("cvm.test")
+
+        clsLillieFunction.SetPackageName("nortest")
+        clsLillieFunction.SetRCommand("lillie.test")
+
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
         clsMeanCIFunction.SetRCommand("MeanCI")
