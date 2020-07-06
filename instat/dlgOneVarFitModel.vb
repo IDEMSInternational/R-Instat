@@ -453,6 +453,9 @@ Public Class dlgOneVarFitModel
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLillie)
                 Case "Pearson"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsPearson)
+                Case "Sf"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsSf)
+
             End Select
         ElseIf rdoEstimate.Checked Then
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRplotFunction)
