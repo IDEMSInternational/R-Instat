@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgOneVarFitModel
     Private clsROneVarFitModel, clsRLogLikFunction, clsRfitdist, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric, clsNaExclude As New RFunction
     Private clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As New RFunction
-    Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction, clsBartelFunction, clsBrFunction, clsRuns, clsSen, clsSerialCorr, clsSnh, clsAd, clsCvm, clsLillie, clsPearson, clsSf As New RFunction
+    Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction, clsBartelFunction, clsBrFunction, clsRunsFunction, clsSenFunction, clsSerialCorrFunction, clsSnhFunction, clsAdFunction, clsCvmFunction, clsLillieFunction, clsPearsonFunction, clsSfFunction As New RFunction
     Private clsMeanCIFunction, clsMedianCIFunction, clsNormCIFunction, clsPoissonCIFunction, clsQuantileCIFunction, clsSdCIFunction, clsVarCIFunction As New RFunction
     Private WithEvents ucrDistribution As ucrDistributions
     Private bFirstload As Boolean = True
@@ -130,6 +130,7 @@ Public Class dlgOneVarFitModel
         clsZTestFunction = New RFunction
         clsBartelFunction = New RFunction
         clsBrFunction = New RFunction
+        clsRunsFunction = New RFunction
 
         clsMeanCIFunction = New RFunction
         clsMedianCIFunction = New RFunction
@@ -231,8 +232,8 @@ Public Class dlgOneVarFitModel
         clsBrFunction.SetPackageName("trend")
         clsBrFunction.SetRCommand("br.test")
 
-        clsRuns.SetPackageName("DescTools")
-        clsRuns.SetRCommand("RunsTest")
+        clsRunsFunction.SetPackageName("DescTools")
+        clsRunsFunction.SetRCommand("RunsTest")
 
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
@@ -443,21 +444,21 @@ Public Class dlgOneVarFitModel
                 Case "Br"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBrFunction)
                 Case "Runs"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsRuns)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsRunsFunction)
                 Case "Sen"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsSen)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsSenFunction)
                 Case "Serial Corr"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsSerialCorr)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsSerialCorrFunction)
                 Case "Snh"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsSnh)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsSnhFunction)
                 Case "Ad"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsAd)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsAdFunction)
                 Case "Cvm"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsLillie)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsLillieFunction)
                 Case "Pearson"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsPearson)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsPearsonFunction)
                 Case "Sf"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsSf)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsSfFunction)
 
             End Select
         ElseIf rdoEstimate.Checked Then
