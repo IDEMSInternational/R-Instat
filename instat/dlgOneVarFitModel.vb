@@ -265,6 +265,9 @@ Public Class dlgOneVarFitModel
         clsPearsonFunction.SetPackageName("nortest")
         clsPearsonFunction.SetRCommand("pearson.test")
 
+        clsSfFunction.SetPackageName("nortest")
+        clsSfFunction.SetRCommand("sf.test")
+
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
         clsMeanCIFunction.SetRCommand("MeanCI")
