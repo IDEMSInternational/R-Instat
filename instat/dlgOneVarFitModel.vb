@@ -131,6 +131,15 @@ Public Class dlgOneVarFitModel
         clsBartelFunction = New RFunction
         clsBrFunction = New RFunction
         clsRunsFunction = New RFunction
+        clsSenFunction = New RFunction
+        clsSerialCorrFunction = New RFunction
+        clsSnhFunction = New RFunction
+        clsAdFunction = New RFunction
+        clsCvmFunction = New RFunction
+        clsLillieFunction = New RFunction
+        clsPearsonFunction = New RFunction
+        clsSfFunction = New RFunction
+
 
         clsMeanCIFunction = New RFunction
         clsMedianCIFunction = New RFunction
