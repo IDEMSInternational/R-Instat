@@ -197,7 +197,7 @@ Partial Class dlgOneVarFitModel
         Me.grpParameters.Controls.Add(Me.lblConfidenceLevel)
         Me.grpParameters.Controls.Add(Me.ucrInputMethod)
         Me.grpParameters.Controls.Add(Me.lblTrim)
-        Me.grpParameters.Location = New System.Drawing.Point(263, 118)
+        Me.grpParameters.Location = New System.Drawing.Point(263, 122)
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.Size = New System.Drawing.Size(183, 137)
         Me.grpParameters.TabIndex = 57
@@ -357,7 +357,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(530, 420)
+        Me.ClientSize = New System.Drawing.Size(521, 420)
         Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.lblEstimate)
         Me.Controls.Add(Me.ucrInputComboEstimate)

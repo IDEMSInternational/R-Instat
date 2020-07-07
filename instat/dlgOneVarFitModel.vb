@@ -100,7 +100,7 @@ Public Class dlgOneVarFitModel
         ucrNudConfidenceLevel.Maximum = 0.999
         ucrNudConfidenceLevel.Increment = 0.001
 
-        ucrNudHypothesis.SetParameter(New RParameter("r"))
+        ucrNudHypothesis.SetParameter(New RParameter("mu"))
 
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
@@ -355,6 +355,8 @@ Public Class dlgOneVarFitModel
         ucrChkConvertVariate.SetRCode(clsROneVarFitModel, bReset)
         ucrNudTrim.SetRCode(clsMeanCIFunction, bReset)
         ucrOmmitMissing.SetRCode(clsMeanCIFunction, bReset)
+        'ucrNudConfidenceLevel.SetRCode(clsTtestFunction)
+        'ucrNudHypothesis.SetRCode(clsTtestFunction)
 
         ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
     End Sub
@@ -457,19 +459,26 @@ Public Class dlgOneVarFitModel
             ucrSaveModel.SetCheckBoxText("Save Model")
             ucrSaveModel.SetPrefix("dist")
         ElseIf rdoTest.Checked Then
-            ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
             ucrSaveModel.SetCheckBoxText("Save Test")
             ucrSaveModel.SetPrefix("test")
         ElseIf rdoEstimate.Checked Then
-            ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
             ucrSaveModel.SetCheckBoxText("Save Estimate")
+            ucrSaveModel.SetAssignToIfUncheckedValue("last_estimate")
             ucrSaveModel.SetPrefix("ci")
         End If
     End Sub
 
+    Private Sub VisibilityOfgrpParameters()
+        If rdoTest.Checked Or rdoEstimate.Checked Then
+            grpParameters.Visible = True
+        Else
+            grpParameters.Visible = False
+        End If
+    End Sub
+
     Private Sub ucrPnlGeneralExactCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGeneralExactCase.ControlValueChanged
-        SetSaveLabelTextAndPrefix()
         SetTestEstimateBaseFunction()
+        VisibilityOfgrpParameters()
     End Sub
 
     Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
@@ -548,6 +557,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub ucrInputTests_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboTests.ControlValueChanged, ucrInputComboEstimate.ControlValueChanged
+        SetSaveLabelTextAndPrefix()
         SetTestEstimateBaseFunction()
     End Sub
 
