@@ -49,11 +49,15 @@ Partial Class dlgOneVarFitModel
         Me.lblTrim = New System.Windows.Forms.Label()
         Me.lblMethod = New System.Windows.Forms.Label()
         Me.lblConfidenceLevel = New System.Windows.Forms.Label()
-        Me.ucrInputMethod = New instat.ucrInputComboBox()
-        Me.ucrOmmitMissing = New instat.ucrCheck()
+        Me.grpParameters = New System.Windows.Forms.GroupBox()
+        Me.lblDifferenceInMean = New System.Windows.Forms.Label()
+        Me.ucrNudConfidenceLevel = New instat.ucrNud()
+        Me.ucrNudHypothesis = New instat.ucrNud()
         Me.ucrNudTrim = New instat.ucrNud()
+        Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.ucrInputComboEstimate = New instat.ucrInputComboBox()
         Me.ucrInputComboTests = New instat.ucrInputComboBox()
+        Me.ucrOmmitMissing = New instat.ucrCheck()
         Me.ucrChkConvertVariate = New instat.ucrCheck()
         Me.ucrPnlGeneralExactCase = New instat.UcrPanel()
         Me.ucrSaveModel = New instat.ucrSave()
@@ -61,10 +65,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpParameters = New System.Windows.Forms.GroupBox()
-        Me.ucrNudHypothesis = New instat.ucrNud()
-        Me.ucrNudConfidenceLevel = New instat.ucrNud()
-        Me.lblDifferenceInMean = New System.Windows.Forms.Label()
         Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -187,24 +187,55 @@ Partial Class dlgOneVarFitModel
         Me.lblConfidenceLevel.TabIndex = 56
         Me.lblConfidenceLevel.Text = "Confidence Level:"
         '
-        'ucrInputMethod
+        'grpParameters
         '
-        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(81, 100)
-        Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrInputMethod.Name = "ucrInputMethod"
-        Me.ucrInputMethod.Size = New System.Drawing.Size(81, 21)
-        Me.ucrInputMethod.TabIndex = 53
+        Me.grpParameters.Controls.Add(Me.lblDifferenceInMean)
+        Me.grpParameters.Controls.Add(Me.ucrNudConfidenceLevel)
+        Me.grpParameters.Controls.Add(Me.ucrNudHypothesis)
+        Me.grpParameters.Controls.Add(Me.ucrNudTrim)
+        Me.grpParameters.Controls.Add(Me.lblMethod)
+        Me.grpParameters.Controls.Add(Me.lblConfidenceLevel)
+        Me.grpParameters.Controls.Add(Me.ucrInputMethod)
+        Me.grpParameters.Controls.Add(Me.lblTrim)
+        Me.grpParameters.Location = New System.Drawing.Point(263, 118)
+        Me.grpParameters.Name = "grpParameters"
+        Me.grpParameters.Size = New System.Drawing.Size(183, 137)
+        Me.grpParameters.TabIndex = 57
+        Me.grpParameters.TabStop = False
+        Me.grpParameters.Text = "Parameters"
         '
-        'ucrOmmitMissing
+        'lblDifferenceInMean
         '
-        Me.ucrOmmitMissing.Checked = False
-        Me.ucrOmmitMissing.Location = New System.Drawing.Point(396, 94)
-        Me.ucrOmmitMissing.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrOmmitMissing.Name = "ucrOmmitMissing"
-        Me.ucrOmmitMissing.Size = New System.Drawing.Size(120, 20)
-        Me.ucrOmmitMissing.TabIndex = 52
+        Me.lblDifferenceInMean.AutoSize = True
+        Me.lblDifferenceInMean.Location = New System.Drawing.Point(5, 75)
+        Me.lblDifferenceInMean.Name = "lblDifferenceInMean"
+        Me.lblDifferenceInMean.Size = New System.Drawing.Size(101, 13)
+        Me.lblDifferenceInMean.TabIndex = 59
+        Me.lblDifferenceInMean.Text = "Difference In Mean:"
+        '
+        'ucrNudConfidenceLevel
+        '
+        Me.ucrNudConfidenceLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudConfidenceLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudConfidenceLevel.Location = New System.Drawing.Point(112, 43)
+        Me.ucrNudConfidenceLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudConfidenceLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudConfidenceLevel.Name = "ucrNudConfidenceLevel"
+        Me.ucrNudConfidenceLevel.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudConfidenceLevel.TabIndex = 58
+        Me.ucrNudConfidenceLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudHypothesis
+        '
+        Me.ucrNudHypothesis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHypothesis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHypothesis.Location = New System.Drawing.Point(113, 72)
+        Me.ucrNudHypothesis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudHypothesis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHypothesis.Name = "ucrNudHypothesis"
+        Me.ucrNudHypothesis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudHypothesis.TabIndex = 57
+        Me.ucrNudHypothesis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudTrim
         '
@@ -218,6 +249,16 @@ Partial Class dlgOneVarFitModel
         Me.ucrNudTrim.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudTrim.TabIndex = 50
         Me.ucrNudTrim.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.IsReadOnly = False
+        Me.ucrInputMethod.Location = New System.Drawing.Point(81, 100)
+        Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputMethod.Name = "ucrInputMethod"
+        Me.ucrInputMethod.Size = New System.Drawing.Size(81, 21)
+        Me.ucrInputMethod.TabIndex = 53
         '
         'ucrInputComboEstimate
         '
@@ -239,10 +280,19 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputComboTests.Size = New System.Drawing.Size(92, 21)
         Me.ucrInputComboTests.TabIndex = 46
         '
+        'ucrOmmitMissing
+        '
+        Me.ucrOmmitMissing.Checked = False
+        Me.ucrOmmitMissing.Location = New System.Drawing.Point(404, 94)
+        Me.ucrOmmitMissing.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrOmmitMissing.Name = "ucrOmmitMissing"
+        Me.ucrOmmitMissing.Size = New System.Drawing.Size(120, 20)
+        Me.ucrOmmitMissing.TabIndex = 52
+        '
         'ucrChkConvertVariate
         '
         Me.ucrChkConvertVariate.Checked = False
-        Me.ucrChkConvertVariate.Location = New System.Drawing.Point(249, 94)
+        Me.ucrChkConvertVariate.Location = New System.Drawing.Point(242, 94)
         Me.ucrChkConvertVariate.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkConvertVariate.Name = "ucrChkConvertVariate"
         Me.ucrChkConvertVariate.Size = New System.Drawing.Size(156, 20)
@@ -302,56 +352,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
-        '
-        'grpParameters
-        '
-        Me.grpParameters.Controls.Add(Me.lblDifferenceInMean)
-        Me.grpParameters.Controls.Add(Me.ucrNudConfidenceLevel)
-        Me.grpParameters.Controls.Add(Me.ucrNudHypothesis)
-        Me.grpParameters.Controls.Add(Me.ucrNudTrim)
-        Me.grpParameters.Controls.Add(Me.lblMethod)
-        Me.grpParameters.Controls.Add(Me.lblConfidenceLevel)
-        Me.grpParameters.Controls.Add(Me.ucrInputMethod)
-        Me.grpParameters.Controls.Add(Me.lblTrim)
-        Me.grpParameters.Location = New System.Drawing.Point(263, 118)
-        Me.grpParameters.Name = "grpParameters"
-        Me.grpParameters.Size = New System.Drawing.Size(183, 137)
-        Me.grpParameters.TabIndex = 57
-        Me.grpParameters.TabStop = False
-        Me.grpParameters.Text = "Parameters"
-        '
-        'ucrNudHypothesis
-        '
-        Me.ucrNudHypothesis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHypothesis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHypothesis.Location = New System.Drawing.Point(112, 72)
-        Me.ucrNudHypothesis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudHypothesis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHypothesis.Name = "ucrNudHypothesis"
-        Me.ucrNudHypothesis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudHypothesis.TabIndex = 57
-        Me.ucrNudHypothesis.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudConfidenceLevel
-        '
-        Me.ucrNudConfidenceLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudConfidenceLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudConfidenceLevel.Location = New System.Drawing.Point(112, 43)
-        Me.ucrNudConfidenceLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudConfidenceLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudConfidenceLevel.Name = "ucrNudConfidenceLevel"
-        Me.ucrNudConfidenceLevel.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudConfidenceLevel.TabIndex = 58
-        Me.ucrNudConfidenceLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblDifferenceInMean
-        '
-        Me.lblDifferenceInMean.AutoSize = True
-        Me.lblDifferenceInMean.Location = New System.Drawing.Point(5, 75)
-        Me.lblDifferenceInMean.Name = "lblDifferenceInMean"
-        Me.lblDifferenceInMean.Size = New System.Drawing.Size(101, 13)
-        Me.lblDifferenceInMean.TabIndex = 59
-        Me.lblDifferenceInMean.Text = "Difference In Mean:"
         '
         'dlgOneVarFitModel
         '

@@ -83,6 +83,7 @@ Public Class dlgOneVarFitModel
         ucrInputComboEstimate.SetDropDownStyleAsNonEditable()
 
         ucrInputMethod.SetItems({"classic", "boot"})
+        ucrInputMethod.SetDropDownStyleAsNonEditable()
 
 
 
@@ -99,6 +100,8 @@ Public Class dlgOneVarFitModel
         ucrNudConfidenceLevel.Maximum = 0.999
         ucrNudConfidenceLevel.Increment = 0.001
 
+        ucrNudHypothesis.SetParameter(New RParameter("r"))
+
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboEstimate, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
@@ -114,6 +117,8 @@ Public Class dlgOneVarFitModel
         ucrNudTrim.SetLinkedDisplayControl(grpParameters)
         ucrNudConfidenceLevel.SetLinkedDisplayControl(lblConfidenceLevel)
         ucrNudConfidenceLevel.SetLinkedDisplayControl(grpParameters)
+        ucrNudHypothesis.SetLinkedDisplayControl(lblDifferenceInMean)
+        ucrNudHypothesis.SetLinkedDisplayControl(grpParameters)
         ucrInputMethod.SetLinkedDisplayControl(lblMethod)
         ucrInputMethod.SetLinkedDisplayControl(grpParameters)
 
@@ -455,12 +460,10 @@ Public Class dlgOneVarFitModel
             ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
             ucrSaveModel.SetCheckBoxText("Save Test")
             ucrSaveModel.SetPrefix("test")
-            ucrSaveModel.SetAssignToIfUncheckedValue("last_test")
         ElseIf rdoEstimate.Checked Then
             ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
             ucrSaveModel.SetCheckBoxText("Save Estimate")
             ucrSaveModel.SetPrefix("ci")
-            ucrSaveModel.SetAssignToIfUncheckedValue("last_estimate")
         End If
     End Sub
 
