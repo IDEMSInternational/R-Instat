@@ -60,6 +60,9 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.lblMethod = New System.Windows.Forms.Label()
+        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.lblConfidenceLevel = New System.Windows.Forms.Label()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -163,7 +166,7 @@ Partial Class dlgOneVarFitModel
         'lblTrim
         '
         Me.lblTrim.AutoSize = True
-        Me.lblTrim.Location = New System.Drawing.Point(328, 166)
+        Me.lblTrim.Location = New System.Drawing.Point(328, 163)
         Me.lblTrim.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTrim.Name = "lblTrim"
         Me.lblTrim.Size = New System.Drawing.Size(40, 17)
@@ -280,7 +283,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrInputMethod.AddQuotesIfUnrecognised = True
         Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(389, 198)
+        Me.ucrInputMethod.Location = New System.Drawing.Point(387, 270)
         Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMethod.Name = "ucrInputMethod"
         Me.ucrInputMethod.Size = New System.Drawing.Size(108, 26)
@@ -289,17 +292,35 @@ Partial Class dlgOneVarFitModel
         'lblMethod
         '
         Me.lblMethod.AutoSize = True
-        Me.lblMethod.Location = New System.Drawing.Point(323, 202)
+        Me.lblMethod.Location = New System.Drawing.Point(323, 274)
         Me.lblMethod.Name = "lblMethod"
         Me.lblMethod.Size = New System.Drawing.Size(59, 17)
         Me.lblMethod.TabIndex = 54
         Me.lblMethod.Text = "Method:"
+        '
+        'NumericUpDown1
+        '
+        Me.NumericUpDown1.Location = New System.Drawing.Point(467, 192)
+        Me.NumericUpDown1.Name = "NumericUpDown1"
+        Me.NumericUpDown1.Size = New System.Drawing.Size(67, 22)
+        Me.NumericUpDown1.TabIndex = 55
+        '
+        'lblConfidenceLevel
+        '
+        Me.lblConfidenceLevel.AutoSize = True
+        Me.lblConfidenceLevel.Location = New System.Drawing.Point(329, 197)
+        Me.lblConfidenceLevel.Name = "lblConfidenceLevel"
+        Me.lblConfidenceLevel.Size = New System.Drawing.Size(121, 17)
+        Me.lblConfidenceLevel.TabIndex = 56
+        Me.lblConfidenceLevel.Text = "Confidence Level:"
         '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(663, 460)
+        Me.Controls.Add(Me.lblConfidenceLevel)
+        Me.Controls.Add(Me.NumericUpDown1)
         Me.Controls.Add(Me.lblMethod)
         Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.ucrOmmitMissing)
@@ -329,6 +350,7 @@ Partial Class dlgOneVarFitModel
         Me.Name = "dlgOneVarFitModel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "One Variable Fit Model"
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -357,4 +379,6 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents ucrOmmitMissing As ucrCheck
     Friend WithEvents lblMethod As Label
     Friend WithEvents ucrInputMethod As ucrInputComboBox
+    Friend WithEvents lblConfidenceLevel As Label
+    Friend WithEvents NumericUpDown1 As NumericUpDown
 End Class
