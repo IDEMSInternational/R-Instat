@@ -89,7 +89,9 @@ Public Class dlgOneVarFitModel
         ucrNudTrim.Maximum = 0.5
         ucrNudTrim.DecimalPlaces = 2
         ucrNudTrim.Increment = 0.01
-        ucrNudTrim.SetLinkedDisplayControl(grpParameters)
+
+
+        ucrNudConfidenceLevel.SetParameter(New RParameter("conf.level"))
 
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
@@ -100,6 +102,9 @@ Public Class dlgOneVarFitModel
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
         ucrNudTrim.SetLinkedDisplayControl(lblTrim)
+        ucrNudTrim.SetLinkedDisplayControl(grpParameters)
+        ucrNudConfidenceLevel.SetLinkedDisplayControl(lblConfidenceLevel)
+        ucrNudConfidenceLevel.SetLinkedDisplayControl(grpParameters)
 
         lstCommandButtons.AddRange({cmdDisplayOptions, cmdFittingOptions})
         ucrDistributionChoice.SetLinkedDisplayControl(lstCommandButtons)
