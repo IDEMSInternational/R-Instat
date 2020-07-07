@@ -58,6 +58,8 @@ Partial Class dlgOneVarFitModel
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputMethod = New instat.ucrInputComboBox()
+        Me.lblMethod = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -78,7 +80,7 @@ Partial Class dlgOneVarFitModel
         Me.rdoTest.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoTest.Location = New System.Drawing.Point(205, 14)
-        Me.rdoTest.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoTest.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoTest.Name = "rdoTest"
         Me.rdoTest.Size = New System.Drawing.Size(163, 34)
         Me.rdoTest.TabIndex = 41
@@ -94,7 +96,7 @@ Partial Class dlgOneVarFitModel
         Me.rdoGeneralCase.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoGeneralCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoGeneralCase.Location = New System.Drawing.Point(45, 14)
-        Me.rdoGeneralCase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoGeneralCase.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoGeneralCase.Name = "rdoGeneralCase"
         Me.rdoGeneralCase.Size = New System.Drawing.Size(163, 34)
         Me.rdoGeneralCase.TabIndex = 40
@@ -105,7 +107,7 @@ Partial Class dlgOneVarFitModel
         'cmdDisplayOptions
         '
         Me.cmdDisplayOptions.Location = New System.Drawing.Point(416, 352)
-        Me.cmdDisplayOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdDisplayOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(123, 28)
         Me.cmdDisplayOptions.TabIndex = 44
@@ -115,7 +117,7 @@ Partial Class dlgOneVarFitModel
         'cmdFittingOptions
         '
         Me.cmdFittingOptions.Location = New System.Drawing.Point(416, 321)
-        Me.cmdFittingOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdFittingOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdFittingOptions.Name = "cmdFittingOptions"
         Me.cmdFittingOptions.Size = New System.Drawing.Size(123, 28)
         Me.cmdFittingOptions.TabIndex = 43
@@ -130,7 +132,7 @@ Partial Class dlgOneVarFitModel
         Me.rdoEstimate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoEstimate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoEstimate.Location = New System.Drawing.Point(365, 14)
-        Me.rdoEstimate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoEstimate.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoEstimate.Name = "rdoEstimate"
         Me.rdoEstimate.Size = New System.Drawing.Size(163, 34)
         Me.rdoEstimate.TabIndex = 45
@@ -171,7 +173,7 @@ Partial Class dlgOneVarFitModel
         'ucrOmmitMissing
         '
         Me.ucrOmmitMissing.Checked = False
-        Me.ucrOmmitMissing.Location = New System.Drawing.Point(461, 161)
+        Me.ucrOmmitMissing.Location = New System.Drawing.Point(467, 161)
         Me.ucrOmmitMissing.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrOmmitMissing.Name = "ucrOmmitMissing"
         Me.ucrOmmitMissing.Size = New System.Drawing.Size(183, 25)
@@ -269,16 +271,37 @@ Partial Class dlgOneVarFitModel
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(13, 389)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(547, 64)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.IsReadOnly = False
+        Me.ucrInputMethod.Location = New System.Drawing.Point(389, 198)
+        Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.ucrInputMethod.Name = "ucrInputMethod"
+        Me.ucrInputMethod.Size = New System.Drawing.Size(108, 26)
+        Me.ucrInputMethod.TabIndex = 53
+        '
+        'lblMethod
+        '
+        Me.lblMethod.AutoSize = True
+        Me.lblMethod.Location = New System.Drawing.Point(323, 202)
+        Me.lblMethod.Name = "lblMethod"
+        Me.lblMethod.Size = New System.Drawing.Size(59, 17)
+        Me.lblMethod.TabIndex = 54
+        Me.lblMethod.Text = "Method:"
         '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(663, 460)
+        Me.Controls.Add(Me.lblMethod)
+        Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.ucrOmmitMissing)
         Me.Controls.Add(Me.lblTrim)
         Me.Controls.Add(Me.ucrNudTrim)
@@ -300,7 +323,7 @@ Partial Class dlgOneVarFitModel
         Me.Controls.Add(Me.ucrSelectorOneVarFitMod)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgOneVarFitModel"
@@ -332,4 +355,6 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents ucrNudTrim As ucrNud
     Friend WithEvents lblTrim As Label
     Friend WithEvents ucrOmmitMissing As ucrCheck
+    Friend WithEvents lblMethod As Label
+    Friend WithEvents ucrInputMethod As ucrInputComboBox
 End Class
