@@ -124,9 +124,12 @@
   <data name="rdoTable.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoTable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdoTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>64, 12</value>
+    <value>59, 12</value>
   </data>
   <data name="rdoTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 28</value>
@@ -165,8 +168,11 @@
   <data name="rdoGraph.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoGraph.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 12</value>
+    <value>157, 12</value>
   </data>
   <data name="rdoGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 28</value>
@@ -195,6 +201,9 @@
   <data name="lblGroupby.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblGroupby.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblGroupby.Location" type="System.Drawing.Point, System.Drawing">
     <value>260, 168</value>
   </data>
@@ -221,6 +230,9 @@
   </data>
   <data name="lblColumnfactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblColumnfactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblColumnfactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>260, 124</value>
@@ -249,6 +261,9 @@
   <data name="lblRowfactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblRowfactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblRowfactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>260, 80</value>
   </data>
@@ -272,6 +287,9 @@
   </data>
   <data name="&gt;&gt;lblRowfactor.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 227</value>
@@ -300,6 +318,9 @@
   <data name="rdoColumn.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoColumn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoColumn.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 65</value>
   </data>
@@ -326,6 +347,9 @@
   </data>
   <data name="rdoRow.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoRow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoRow.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 42</value>
@@ -354,6 +378,9 @@
   <data name="rdoCell.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoCell.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoCell.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 88</value>
   </data>
@@ -380,6 +407,9 @@
   </data>
   <data name="rdoCount.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoCount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoCount.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 19</value>
@@ -516,6 +546,9 @@
   <data name="lblGroupsby.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblGroupsby.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblGroupsby.Location" type="System.Drawing.Point, System.Drawing">
     <value>260, 212</value>
   </data>
@@ -562,7 +595,7 @@
     <value>4</value>
   </data>
   <data name="grpFreqTypeGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 261</value>
+    <value>133, 261</value>
   </data>
   <data name="grpFreqTypeGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 111</value>
@@ -597,8 +630,11 @@
   <data name="rdoBoth.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoBoth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoBoth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 12</value>
+    <value>255, 12</value>
   </data>
   <data name="rdoBoth.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 28</value>
@@ -627,8 +663,11 @@
   <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 375</value>
   </data>
+  <data name="ucrSaveGraph.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 20</value>
+    <value>255, 29</value>
   </data>
   <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -652,7 +691,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>529, 453</value>
+    <value>416, 461</value>
   </data>
   <data name="ucrReceiverGroupsBy1st.Location" type="System.Drawing.Point, System.Drawing">
     <value>260, 183</value>
@@ -772,10 +811,10 @@
     <value>12</value>
   </data>
   <data name="ucrPnlFrequencyDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 11</value>
+    <value>59, 12</value>
   </data>
   <data name="ucrPnlFrequencyDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>492, 29</value>
+    <value>296, 29</value>
   </data>
   <data name="ucrPnlFrequencyDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -793,7 +832,7 @@
     <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 400</value>
+    <value>10, 404</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>403, 52</value>
