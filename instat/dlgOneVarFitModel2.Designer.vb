@@ -60,9 +60,9 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.lblMethod = New System.Windows.Forms.Label()
-        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.ucrNudConfidenceLevel = New System.Windows.Forms.NumericUpDown()
         Me.lblConfidenceLevel = New System.Windows.Forms.Label()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ucrNudConfidenceLevel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -290,13 +290,13 @@ Partial Class dlgOneVarFitModel
         Me.lblMethod.TabIndex = 54
         Me.lblMethod.Text = "Method:"
         '
-        'NumericUpDown1
+        'ucrNudConfidenceLevel
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(343, 138)
-        Me.NumericUpDown1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(50, 20)
-        Me.NumericUpDown1.TabIndex = 55
+        Me.ucrNudConfidenceLevel.Location = New System.Drawing.Point(343, 138)
+        Me.ucrNudConfidenceLevel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ucrNudConfidenceLevel.Name = "ucrNudConfidenceLevel"
+        Me.ucrNudConfidenceLevel.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudConfidenceLevel.TabIndex = 55
         '
         'lblConfidenceLevel
         '
@@ -314,7 +314,7 @@ Partial Class dlgOneVarFitModel
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(497, 374)
         Me.Controls.Add(Me.lblConfidenceLevel)
-        Me.Controls.Add(Me.NumericUpDown1)
+        Me.Controls.Add(Me.ucrNudConfidenceLevel)
         Me.Controls.Add(Me.lblMethod)
         Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.ucrOmmitMissing)
@@ -343,7 +343,7 @@ Partial Class dlgOneVarFitModel
         Me.Name = "dlgOneVarFitModel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "One Variable Fit Model"
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ucrNudConfidenceLevel, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -373,5 +373,5 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents lblMethod As Label
     Friend WithEvents ucrInputMethod As ucrInputComboBox
     Friend WithEvents lblConfidenceLevel As Label
-    Friend WithEvents NumericUpDown1 As NumericUpDown
+    Friend WithEvents ucrNudConfidenceLevel As NumericUpDown
 End Class
