@@ -250,6 +250,9 @@ Public Class ucrInputComboBox
     Private Sub cboInput_TextChanged(sender As Object, e As EventArgs) Handles cboInput.TextChanged
         OnContentsChanged()
     End Sub
+    Private Sub cboInput_Click(sender As Object, e As EventArgs) Handles cboInput.Click
+        OnControlClicked()
+    End Sub
 
     Private Sub mnuRightClickCopy_Click(sender As Object, e As EventArgs) Handles mnuRightClickCopy.Click
         If cboInput.SelectedText <> "" Then
