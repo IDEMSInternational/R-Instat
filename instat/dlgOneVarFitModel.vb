@@ -53,7 +53,7 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddRadioButton(rdoEstimate)
 
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoGeneralCase, "fitdist")
-        ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoTest, {"binom.test", "prop.test", "SignTest", "t.test", "wilcox.test", "ZTest"})
+        ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoTest, {"binom.test", "prop.test", "SignTest", "t.test", "wilcox.test", "ZTest", "BartelsRankTest", "br.test", "RunsTest", "sens.slope"})
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoEstimate, {"MeanCI", "MedianCI ", "normCI", "PoissonCI", "quantileCI", "sdCI", "VarCI"})
 
         ucrReceiverVariable.SetParameter(New RParameter("object", 0))
