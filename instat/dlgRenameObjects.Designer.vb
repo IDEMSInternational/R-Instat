@@ -45,6 +45,8 @@ Partial Class dlgRenameObjects
         Me.lblCurrentName = New System.Windows.Forms.Label()
         Me.lblNewName = New System.Windows.Forms.Label()
         Me.ucrInputNewName = New instat.ucrInputTextBox()
+        Me.ucrInputType = New instat.ucrInputComboBox()
+        Me.lblType = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -54,6 +56,7 @@ Partial Class dlgRenameObjects
         '
         'ucrSelectorForRenameObject
         '
+        Me.ucrSelectorForRenameObject.bDropUnusedFilterLevels = False
         Me.ucrSelectorForRenameObject.bShowHiddenColumns = False
         Me.ucrSelectorForRenameObject.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForRenameObject, "ucrSelectorForRenameObject")
@@ -88,10 +91,25 @@ Partial Class dlgRenameObjects
         resources.ApplyResources(Me.ucrInputNewName, "ucrInputNewName")
         Me.ucrInputNewName.Name = "ucrInputNewName"
         '
+        'ucrInputType
+        '
+        Me.ucrInputType.AddQuotesIfUnrecognised = True
+        Me.ucrInputType.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputType, "ucrInputType")
+        Me.ucrInputType.Name = "ucrInputType"
+        '
+        'lblType
+        '
+        resources.ApplyResources(Me.lblType, "lblType")
+        Me.lblType.Name = "lblType"
+        Me.lblType.Tag = "New_Name"
+        '
         'dlgRenameObjects
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblType)
+        Me.Controls.Add(Me.ucrInputType)
         Me.Controls.Add(Me.ucrReceiverCurrentName)
         Me.Controls.Add(Me.ucrInputNewName)
         Me.Controls.Add(Me.lblNewName)
@@ -113,4 +131,6 @@ Partial Class dlgRenameObjects
     Friend WithEvents lblCurrentName As Label
     Friend WithEvents lblNewName As Label
     Friend WithEvents ucrInputNewName As ucrInputTextBox
+    Friend WithEvents ucrInputType As ucrInputComboBox
+    Friend WithEvents lblType As Label
 End Class

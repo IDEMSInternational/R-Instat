@@ -438,8 +438,8 @@ DataBook$set("public", "get_calculations", function(data_name) {
 } 
 )
 
-DataBook$set("public", "get_calculation_names", function(data_name) {
-  return(self$get_data_objects(data_name)$get_calculation_names())
+DataBook$set("public", "get_calculation_names", function(data_name, as_list = FALSE, excluded_items = c()) {
+  return(self$get_data_objects(data_name)$get_calculation_names(as_list = as_list, excluded_items = excluded_items))
 } 
 )
 
@@ -588,13 +588,13 @@ DataBook$set("public", "get_object_names", function(data_name, include_overall =
 }
 )
 
-DataBook$set("public", "rename_object", function(data_name, object_name, new_name) {
+DataBook$set("public", "rename_object", function(data_name, object_name, new_name, object_type = "object") {
   if(missing(data_name) || data_name == overall_label) {
     if(!object_name %in% names(private$.objects)) stop(object_name, " not found in overall objects list")
     if(new_name %in% names(private$.objects)) stop(new_name, " is already an object name. Cannot rename ", object_name, " to ", new_name)
     names(private$.objects)[names(private$.objects) == object_name] <- new_name
   }
-  else self$get_data_objects(data_name)$rename_object(object_name = object_name, new_name = new_name)
+  else self$get_data_objects(data_name)$rename_object(object_name = object_name, new_name = new_name, object_type = object_type)
 }
 )
 
