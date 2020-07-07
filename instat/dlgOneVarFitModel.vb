@@ -89,6 +89,7 @@ Public Class dlgOneVarFitModel
         ucrNudTrim.Maximum = 0.5
         ucrNudTrim.DecimalPlaces = 2
         ucrNudTrim.Increment = 0.01
+        ucrNudTrim.SetLinkedDisplayControl(grpParameters)
 
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
