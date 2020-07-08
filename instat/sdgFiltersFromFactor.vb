@@ -87,5 +87,10 @@ Public Class sdgFiltersFromFactor
 
     Private Sub ucrFactorSelctor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorSelctor.ControlValueChanged
         clsFilterFunction.AddParameter("data_name", Chr(34) & ucrFactorSelctor.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        SetToggleButtonSettings()
+    End Sub
+
+    Private Sub cmdToggleSelectAll_Click(sender As Object, e As EventArgs) Handles cmdToggleSelectAll.Click
+        ucrFactorLevel.SetSelectionAllLevels(Not ucrFactorLevel.IsAllSelected())
     End Sub
 End Class
