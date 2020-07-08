@@ -62,7 +62,7 @@ Public Class dlgInfillMissingValues
         ucrSaveNewColumn.SetSaveTypeAsColumn()
         ucrSaveNewColumn.SetIsComboBox()
         ucrSaveNewColumn.SetLabelText("New Column Name:")
-        ucrSaveNewColumn.SetPrefix("Estimate")
+        ucrSaveNewColumn.SetPrefix("Approximate_")
     End Sub
 
     Private Sub SetDefaults()
@@ -126,19 +126,25 @@ Public Class dlgInfillMissingValues
         ucrSaveNewColumn.SetRCode(clsApproximateFunction, bReset)
     End Sub
 
-    Private Sub ucrPnlMethods_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethods.ControlValueChanged
+    Private Sub ucrPnlMethods_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethods.ControlValueChanged, ucrReceiverElement.ControlValueChanged
         If rdoNaApproximate.Checked Then
+            ucrSaveNewColumn.SetPrefix("Approximate_" & ucrReceiverElement.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsApproximateFunction)
         ElseIf rdoNaAggregate.Checked Then
+            ucrSaveNewColumn.SetPrefix("Aggregate_" & ucrReceiverElement.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsAggregateFunction)
         ElseIf rdoNaFill.Checked Then
+            ucrSaveNewColumn.SetPrefix("NaFill_" & ucrReceiverElement.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsNaFillFunction)
+        ElseIf rdoNaStructTS.Checked Then
+            ucrSaveNewColumn.SetPrefix("StructTS_" & ucrReceiverElement.GetVariableNames(False))
+            ucrBase.clsRsyntax.SetBaseRFunction(clsStructTSFunction)
         ElseIf rdoNaSpline.Checked Then
+            ucrSaveNewColumn.SetPrefix("Spline_" & ucrReceiverElement.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsSplineFunction)
         ElseIf rdoNaLocf.Checked Then
+            ucrSaveNewColumn.SetPrefix("Nalocf_" & ucrReceiverElement.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsNaLocfFunction)
-        ElseIf rdoNaStructTS.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsStructTSFunction)
         End If
     End Sub
 
