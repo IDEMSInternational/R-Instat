@@ -16,6 +16,7 @@
 
 Imports instat.Translations
 Public Class sdgFiltersFromFactor
+    Private bControlsInitialised As Boolean = False
     Public strDataFrame As String
     Public clsFilterFunction As RFunction
     Public clsConditionsList As RFunction
@@ -75,6 +76,9 @@ Public Class sdgFiltersFromFactor
         End If
     End Sub
     Public Sub SetRcode(Optional ucrBaseSelector As ucrSelector = Nothing)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
         If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
             strDataFrame = ucrBaseSelector.strCurrentDataFrame
             ucrFactorSelctor.SetDataframe(strDataFrame, False)
