@@ -134,7 +134,7 @@ Public Class ucrContinuousVerification
         clsHelp.SetRCommand("help")
         clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
         clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from subdialog" & " " & ParentForm.Text, iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for " & strPackageName & " Package. Generated from subdialog " & ParentForm.Text, iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
     End Sub
 
     Private Sub ucrChkSelectAll_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectAll.ControlValueChanged
