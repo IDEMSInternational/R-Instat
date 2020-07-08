@@ -23,9 +23,6 @@ Partial Class dlgInfillMissingValues
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgInfillMissingValues))
-        Me.ucrSelectorInfillMissing = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.rdoNaStructTS = New System.Windows.Forms.RadioButton()
         Me.rdoNaLocf = New System.Windows.Forms.RadioButton()
         Me.rdoNaSpline = New System.Windows.Forms.RadioButton()
@@ -36,34 +33,15 @@ Partial Class dlgInfillMissingValues
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.rdoNeighbouring = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpMethods = New System.Windows.Forms.GroupBox()
         Me.ucrSaveNewColumn = New instat.ucrSave()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorInfillMissing = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpMethods.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrSelectorInfillMissing
-        '
-        Me.ucrSelectorInfillMissing.bDropUnusedFilterLevels = False
-        Me.ucrSelectorInfillMissing.bShowHiddenColumns = False
-        Me.ucrSelectorInfillMissing.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorInfillMissing, "ucrSelectorInfillMissing")
-        Me.ucrSelectorInfillMissing.Name = "ucrSelectorInfillMissing"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'rdoNaStructTS
         '
@@ -142,16 +120,6 @@ Partial Class dlgInfillMissingValues
         Me.rdoNeighbouring.TabStop = True
         Me.rdoNeighbouring.UseVisualStyleBackColor = True
         '
-        'ucrPnlOptions
-        '
-        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        '
-        'ucrPnlMethods
-        '
-        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
-        Me.ucrPnlMethods.Name = "ucrPnlMethods"
-        '
         'grpMethods
         '
         Me.grpMethods.Controls.Add(Me.rdoNaStructTS)
@@ -169,6 +137,38 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me.ucrSaveNewColumn, "ucrSaveNewColumn")
         Me.ucrSaveNewColumn.Name = "ucrSaveNewColumn"
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrSelectorInfillMissing
+        '
+        Me.ucrSelectorInfillMissing.bDropUnusedFilterLevels = False
+        Me.ucrSelectorInfillMissing.bShowHiddenColumns = False
+        Me.ucrSelectorInfillMissing.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorInfillMissing, "ucrSelectorInfillMissing")
+        Me.ucrSelectorInfillMissing.Name = "ucrSelectorInfillMissing"
+        '
+        'ucrPnlOptions
+        '
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        '
+        'ucrPnlMethods
+        '
+        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
+        Me.ucrPnlMethods.Name = "ucrPnlMethods"
         '
         'dlgInfillMissingValues
         '
