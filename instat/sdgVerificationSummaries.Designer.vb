@@ -39,7 +39,7 @@ Partial Class sdgVerificationSummaries
         Me.ucrChkSymmetricExtremeDependencyScore = New instat.ucrCheck()
         Me.ucrChkExremalDependencyIndex = New instat.ucrCheck()
         Me.ucrChkExtremeDependencyScore = New instat.ucrCheck()
-        Me.ucrChkSymmetricExremalDependenceIndex = New instat.ucrCheck()
+        Me.ucrChkSymmetricExtremalDependenceIndex = New instat.ucrCheck()
         Me.tbCategorical = New System.Windows.Forms.TabPage()
         Me.ucrChkCatPercentCorrect = New instat.ucrCheck()
         Me.ucrChkCatHeidkeSkillScore = New instat.ucrCheck()
@@ -178,7 +178,7 @@ Partial Class sdgVerificationSummaries
         Me.grpExtreme.Controls.Add(Me.ucrChkSymmetricExtremeDependencyScore)
         Me.grpExtreme.Controls.Add(Me.ucrChkExremalDependencyIndex)
         Me.grpExtreme.Controls.Add(Me.ucrChkExtremeDependencyScore)
-        Me.grpExtreme.Controls.Add(Me.ucrChkSymmetricExremalDependenceIndex)
+        Me.grpExtreme.Controls.Add(Me.ucrChkSymmetricExtremalDependenceIndex)
         Me.grpExtreme.Location = New System.Drawing.Point(6, 109)
         Me.grpExtreme.Name = "grpExtreme"
         Me.grpExtreme.Size = New System.Drawing.Size(537, 71)
@@ -210,13 +210,13 @@ Partial Class sdgVerificationSummaries
         Me.ucrChkExtremeDependencyScore.Size = New System.Drawing.Size(171, 20)
         Me.ucrChkExtremeDependencyScore.TabIndex = 11
         '
-        'ucrChkSymmetricExremalDependenceIndex
+        'ucrChkSymmetricExtremalDependenceIndex
         '
-        Me.ucrChkSymmetricExremalDependenceIndex.Checked = False
-        Me.ucrChkSymmetricExremalDependenceIndex.Location = New System.Drawing.Point(185, 19)
-        Me.ucrChkSymmetricExremalDependenceIndex.Name = "ucrChkSymmetricExremalDependenceIndex"
-        Me.ucrChkSymmetricExremalDependenceIndex.Size = New System.Drawing.Size(179, 20)
-        Me.ucrChkSymmetricExremalDependenceIndex.TabIndex = 5
+        Me.ucrChkSymmetricExtremalDependenceIndex.Checked = False
+        Me.ucrChkSymmetricExtremalDependenceIndex.Location = New System.Drawing.Point(185, 19)
+        Me.ucrChkSymmetricExtremalDependenceIndex.Name = "ucrChkSymmetricExtremalDependenceIndex"
+        Me.ucrChkSymmetricExtremalDependenceIndex.Size = New System.Drawing.Size(179, 20)
+        Me.ucrChkSymmetricExtremalDependenceIndex.TabIndex = 5
         '
         'tbCategorical
         '
@@ -304,7 +304,7 @@ Partial Class sdgVerificationSummaries
     Friend WithEvents ucrChkHeidkeSkillScore As ucrCheck
     Friend WithEvents ucrChkPercentCorrect As ucrCheck
     Friend WithEvents ucrChkBias As ucrCheck
-    Friend WithEvents ucrChkSymmetricExremalDependenceIndex As ucrCheck
+    Friend WithEvents ucrChkSymmetricExtremalDependenceIndex As ucrCheck
     Friend WithEvents ucrChkExtremeDependencyScore As ucrCheck
     Friend WithEvents ucrChkSymmetricExtremeDependencyScore As ucrCheck
     Friend WithEvents ucrChkExremalDependencyIndex As ucrCheck

@@ -55,8 +55,8 @@ Public Class sdgVerificationSummaries
         ucrChkExremalDependencyIndex.SetParameter(New RParameter("EDI", 30), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "EDI" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkExremalDependencyIndex.SetText("Exremal Dependency Index")
 
-        ucrChkSymmetricExremalDependenceIndex.SetParameter(New RParameter("SEDI", 31), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "SEDI" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkSymmetricExremalDependenceIndex.SetText("Symmetric Exremal Dependence Index")
+        ucrChkSymmetricExtremalDependenceIndex.SetParameter(New RParameter("SEDI", 31), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "SEDI" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkSymmetricExtremalDependenceIndex.SetText("Symmetric Extremal Dependence Index")
 
         ucrChkCatPercentCorrect.SetParameter(New RParameter("pc", 32), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "pc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkCatPercentCorrect.SetText("Percent Correct")
@@ -65,12 +65,12 @@ Public Class sdgVerificationSummaries
         ucrChkCatHeidkeSkillScore.SetText("Heidke Skill Score")
 
         ucrChkCatPierceSkillScore.SetParameter(New RParameter("pss", 34), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "pss" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkCatPierceSkillScore.SetText(" Pierce Skill Score")
+        ucrChkCatPierceSkillScore.SetText("Pierce Skill Score")
 
         ucrChkGerrityScore.SetParameter(New RParameter("GS", 35), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "GS" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkGerrityScore.SetText("Gerrity Score")
 
-        lstSummaryCheckboxes.AddRange({ucrChkHitRate, ucrChkThreatScore, ucrChkEquitableThreatScore, ucrChkFalseAlarmRatio, ucrChkHeidkeSkillScore, ucrChkPercentCorrect, ucrChkBias, ucrChkExtremeDependencyScore, ucrChkSymmetricExtremeDependencyScore, ucrChkExremalDependencyIndex, ucrChkSymmetricExremalDependenceIndex, ucrChkCatPercentCorrect, ucrChkCatHeidkeSkillScore, ucrChkCatPierceSkillScore, ucrChkGerrityScore})
+        lstSummaryCheckboxes.AddRange({ucrChkHitRate, ucrChkThreatScore, ucrChkEquitableThreatScore, ucrChkFalseAlarmRatio, ucrChkHeidkeSkillScore, ucrChkPercentCorrect, ucrChkBias, ucrChkExtremeDependencyScore, ucrChkSymmetricExtremeDependencyScore, ucrChkExremalDependencyIndex, ucrChkSymmetricExtremalDependenceIndex, ucrChkCatPercentCorrect, ucrChkCatHeidkeSkillScore, ucrChkCatPierceSkillScore, ucrChkGerrityScore})
 
         For Each ctr In lstSummaryCheckboxes
             ctr.SetParameterIncludeArgumentName(False)

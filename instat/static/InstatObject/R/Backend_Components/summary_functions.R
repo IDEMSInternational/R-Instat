@@ -1262,13 +1262,13 @@ SEDS <- function(x, y, frcst.type, obs.type, ...){
   return(A$seds)  
 }
 
-##Exremal dependency index
+##Extremal dependency index
 EDI <- function(x, y, frcst.type, obs.type, ...){
   A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
   return(A$EDI)  
 }
 
-##Symmetric Exremal dependence index
+##Symmetric Extremal dependence index
 SEDI <- function(x, y, frcst.type, obs.type, ...){
   A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
   return(A$SEDI)  

@@ -46,7 +46,7 @@ Public Class ucrContinuousVerification
         ucrChkNashSutcliffeEfficiency.SetText("Nash-Sutcliffe efficiency")
 
         ucrChkModNashSutcliffeEff.SetParameter(New RParameter("mNSE", 9), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "mNSE" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
-        ucrChkModNashSutcliffeEff.SetText("Modified Nash-Sutcliffe effieciency")
+        ucrChkModNashSutcliffeEff.SetText("Modified Nash-Sutcliffe efficiency")
 
         ucrChkRelativeNashSutcliffeEff.SetParameter(New RParameter("rNSE", 10), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "rNSE" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkRelativeNashSutcliffeEff.SetText("Relative Nash-Sutcliffe efficiency")
