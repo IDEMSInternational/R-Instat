@@ -313,7 +313,7 @@
     <value>48, 13</value>
   </data>
   <data name="lblElement.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>5</value>
   </data>
   <data name="lblElement.Text" xml:space="preserve">
     <value>Element:</value>
@@ -346,7 +346,7 @@
     <value>103, 27</value>
   </data>
   <data name="rdoSingle.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>1</value>
   </data>
   <data name="rdoSingle.Text" xml:space="preserve">
     <value>Single</value>
@@ -382,7 +382,7 @@
     <value>103, 27</value>
   </data>
   <data name="rdoMultiple.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>3</value>
   </data>
   <data name="rdoMultiple.Text" xml:space="preserve">
     <value>Multiple</value>
@@ -418,7 +418,7 @@
     <value>103, 27</value>
   </data>
   <data name="rdoNeighbouring.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>2</value>
   </data>
   <data name="rdoNeighbouring.Text" xml:space="preserve">
     <value>Neighbouring</value>
@@ -466,7 +466,7 @@
     <value>393, 93</value>
   </data>
   <data name="grpMethods.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>7</value>
   </data>
   <data name="grpMethods.Text" xml:space="preserve">
     <value>Methods</value>
@@ -493,7 +493,7 @@
     <value>302, 34</value>
   </data>
   <data name="ucrSaveNewColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrSaveNewColumn.Name" xml:space="preserve">
     <value>ucrSaveNewColumn</value>
@@ -523,7 +523,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -547,7 +547,7 @@
     <value>210, 180</value>
   </data>
   <data name="ucrSelectorInfillMissing.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrSelectorInfillMissing.Name" xml:space="preserve">
     <value>ucrSelectorInfillMissing</value>
@@ -568,7 +568,7 @@
     <value>120, 58</value>
   </data>
   <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrPnlOptions.Name" xml:space="preserve">
     <value>ucrPnlOptions</value>
@@ -604,7 +604,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverElement.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrReceiverElement.Name" xml:space="preserve">
     <value>ucrReceiverElement</value>
