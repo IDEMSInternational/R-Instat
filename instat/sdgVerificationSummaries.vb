@@ -87,7 +87,7 @@ Public Class sdgVerificationSummaries
 
         For Each ctr In lstSummaryCheckboxes
             ctr.SetRCode(clsNewListFunction, bReset)
-            If ctr.Enabled = False AndAlso ctr.Checked Then
+            If ctr.Enabled = False Then
                 ctr.Checked = False
             End If
         Next

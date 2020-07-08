@@ -110,11 +110,9 @@ Public Class ucrContinuousVerification
 
         For Each ctr In lstContinuousCheckboxes
             ctr.SetRCode(clsNewListFunction, bReset)
-            If ctr.Enabled = False AndAlso ctr.Checked Then
+            If ctr.Enabled = False Then
                 ctr.Checked = False
-                If ucrChkSelectAll.Checked Then
-                    ucrChkSelectAll.Checked = False
-                End If
+                ucrChkSelectAll.Checked = False
             End If
         Next
 
@@ -140,16 +138,12 @@ Public Class ucrContinuousVerification
     Private Sub ucrChkSelectAll_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectAll.ControlValueChanged
         If ucrChkSelectAll.Checked Then
             For Each ctrTemp In lstContinuousCheckboxes
-                If Not ctrTemp.Checked Then
-                    ctrTemp.Checked = True
-                End If
+                ctrTemp.Checked = True
             Next
             ucrChkSelectAll.SetText("Unselect all")
         Else
             For Each ctrTemp In lstContinuousCheckboxes
-                If ctrTemp.Checked Then
-                    ctrTemp.Checked = False
-                End If
+                ctrTemp.Checked = False
             Next
             ucrChkSelectAll.SetText("Select all")
         End If
