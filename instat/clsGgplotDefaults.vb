@@ -94,6 +94,16 @@ Public Class GgplotDefaults
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsXScaleDateFunction As RFunction
+        Get
+            Dim clsXScaleDateFunctionTemp As New RFunction
+
+            clsXScaleDateFunctionTemp.SetPackageName("ggplot2")
+            clsXScaleDateFunctionTemp.SetRCommand("scale_x_date")
+
+            Return clsXScaleDateFunctionTemp
+        End Get
+    End Property
     Public Shared ReadOnly Property clsYScaleDateFunction As RFunction
         Get
             Dim clsYlabScalesDateTempFunc As New RFunction
