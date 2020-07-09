@@ -26,12 +26,12 @@ Partial Class dlgHomogenization
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgHomogenization))
         Me.lblElement = New System.Windows.Forms.Label()
         Me.grpMethods = New System.Windows.Forms.GroupBox()
-        Me.rdoBuishand = New System.Windows.Forms.RadioButton()
-        Me.rdoPettitt = New System.Windows.Forms.RadioButton()
-        Me.rdoSnht = New System.Windows.Forms.RadioButton()
         Me.rdoCptMean = New System.Windows.Forms.RadioButton()
         Me.rdoCptMeanVariance = New System.Windows.Forms.RadioButton()
         Me.rdoCptVariance = New System.Windows.Forms.RadioButton()
+        Me.rdoBuishand = New System.Windows.Forms.RadioButton()
+        Me.rdoPettitt = New System.Windows.Forms.RadioButton()
+        Me.rdoSnht = New System.Windows.Forms.RadioButton()
         Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpCptOptions = New System.Windows.Forms.GroupBox()
         Me.ucrInputComboMeanVarDistribution = New instat.ucrInputComboBox()
@@ -56,11 +56,6 @@ Partial Class dlgHomogenization
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.rdoNeighbouring = New System.Windows.Forms.RadioButton()
         Me.lblNeighbouring = New System.Windows.Forms.Label()
-        Me.grpSnhtOptions = New System.Windows.Forms.GroupBox()
-        Me.lblPeriod = New System.Windows.Forms.Label()
-        Me.ucrNudPeriod = New instat.ucrNud()
-        Me.ucrChkRobust = New instat.ucrCheck()
-        Me.ucrChkScaled = New instat.ucrCheck()
         Me.ucrReceiverNeighbour = New instat.ucrReceiverSingle()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrSaveResult = New instat.ucrSave()
@@ -70,7 +65,6 @@ Partial Class dlgHomogenization
         Me.grpMethods.SuspendLayout()
         Me.grpCptOptions.SuspendLayout()
         Me.grpOutputOptions.SuspendLayout()
-        Me.grpSnhtOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblElement
@@ -91,24 +85,6 @@ Partial Class dlgHomogenization
         Me.grpMethods.Name = "grpMethods"
         Me.grpMethods.TabStop = False
         '
-        'rdoBuishand
-        '
-        resources.ApplyResources(Me.rdoBuishand, "rdoBuishand")
-        Me.rdoBuishand.Name = "rdoBuishand"
-        Me.rdoBuishand.UseVisualStyleBackColor = True
-        '
-        'rdoPettitt
-        '
-        resources.ApplyResources(Me.rdoPettitt, "rdoPettitt")
-        Me.rdoPettitt.Name = "rdoPettitt"
-        Me.rdoPettitt.UseVisualStyleBackColor = True
-        '
-        'rdoSnht
-        '
-        resources.ApplyResources(Me.rdoSnht, "rdoSnht")
-        Me.rdoSnht.Name = "rdoSnht"
-        Me.rdoSnht.UseVisualStyleBackColor = True
-        '
         'rdoCptMean
         '
         resources.ApplyResources(Me.rdoCptMean, "rdoCptMean")
@@ -126,6 +102,24 @@ Partial Class dlgHomogenization
         resources.ApplyResources(Me.rdoCptVariance, "rdoCptVariance")
         Me.rdoCptVariance.Name = "rdoCptVariance"
         Me.rdoCptVariance.UseVisualStyleBackColor = True
+        '
+        'rdoBuishand
+        '
+        resources.ApplyResources(Me.rdoBuishand, "rdoBuishand")
+        Me.rdoBuishand.Name = "rdoBuishand"
+        Me.rdoBuishand.UseVisualStyleBackColor = True
+        '
+        'rdoPettitt
+        '
+        resources.ApplyResources(Me.rdoPettitt, "rdoPettitt")
+        Me.rdoPettitt.Name = "rdoPettitt"
+        Me.rdoPettitt.UseVisualStyleBackColor = True
+        '
+        'rdoSnht
+        '
+        resources.ApplyResources(Me.rdoSnht, "rdoSnht")
+        Me.rdoSnht.Name = "rdoSnht"
+        Me.rdoSnht.UseVisualStyleBackColor = True
         '
         'ucrPnlMethods
         '
@@ -304,43 +298,6 @@ Partial Class dlgHomogenization
         resources.ApplyResources(Me.lblNeighbouring, "lblNeighbouring")
         Me.lblNeighbouring.Name = "lblNeighbouring"
         '
-        'grpSnhtOptions
-        '
-        Me.grpSnhtOptions.Controls.Add(Me.lblPeriod)
-        Me.grpSnhtOptions.Controls.Add(Me.ucrNudPeriod)
-        Me.grpSnhtOptions.Controls.Add(Me.ucrChkRobust)
-        Me.grpSnhtOptions.Controls.Add(Me.ucrChkScaled)
-        resources.ApplyResources(Me.grpSnhtOptions, "grpSnhtOptions")
-        Me.grpSnhtOptions.Name = "grpSnhtOptions"
-        Me.grpSnhtOptions.TabStop = False
-        '
-        'lblPeriod
-        '
-        resources.ApplyResources(Me.lblPeriod, "lblPeriod")
-        Me.lblPeriod.Name = "lblPeriod"
-        '
-        'ucrNudPeriod
-        '
-        Me.ucrNudPeriod.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPeriod.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudPeriod, "ucrNudPeriod")
-        Me.ucrNudPeriod.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPeriod.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPeriod.Name = "ucrNudPeriod"
-        Me.ucrNudPeriod.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkRobust
-        '
-        Me.ucrChkRobust.Checked = False
-        resources.ApplyResources(Me.ucrChkRobust, "ucrChkRobust")
-        Me.ucrChkRobust.Name = "ucrChkRobust"
-        '
-        'ucrChkScaled
-        '
-        Me.ucrChkScaled.Checked = False
-        resources.ApplyResources(Me.ucrChkScaled, "ucrChkScaled")
-        Me.ucrChkScaled.Name = "ucrChkScaled"
-        '
         'ucrReceiverNeighbour
         '
         Me.ucrReceiverNeighbour.frmParent = Me
@@ -386,7 +343,6 @@ Partial Class dlgHomogenization
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpSnhtOptions)
         Me.Controls.Add(Me.lblNeighbouring)
         Me.Controls.Add(Me.ucrReceiverNeighbour)
         Me.Controls.Add(Me.rdoNeighbouring)
@@ -410,8 +366,6 @@ Partial Class dlgHomogenization
         Me.grpCptOptions.ResumeLayout(False)
         Me.grpCptOptions.PerformLayout()
         Me.grpOutputOptions.ResumeLayout(False)
-        Me.grpSnhtOptions.ResumeLayout(False)
-        Me.grpSnhtOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -453,11 +407,6 @@ Partial Class dlgHomogenization
     Friend WithEvents ucrInputComboVarDistribution As ucrInputComboBox
     Friend WithEvents ucrInputComboMeanVarDistribution As ucrInputComboBox
     Friend WithEvents rdoSnht As RadioButton
-    Friend WithEvents grpSnhtOptions As GroupBox
-    Friend WithEvents lblPeriod As Label
-    Friend WithEvents ucrNudPeriod As ucrNud
-    Friend WithEvents ucrChkRobust As ucrCheck
-    Friend WithEvents ucrChkScaled As ucrCheck
     Friend WithEvents rdoPettitt As RadioButton
     Friend WithEvents rdoBuishand As RadioButton
 End Class
