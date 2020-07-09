@@ -297,7 +297,6 @@ Partial Class dlgThreeVariableFrequencies
         Me.Controls.Add(Me.lblGroupsby)
         Me.Controls.Add(Me.grpFreqTypeTable)
         Me.Controls.Add(Me.ucrReceiverGroupsBy1st)
-        Me.Controls.Add(Me.ucrReceiverWeights)
         Me.Controls.Add(Me.ucrChkWeights)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblColumnfactor)
@@ -312,6 +311,7 @@ Partial Class dlgThreeVariableFrequencies
         Me.Controls.Add(Me.ucrSelectorThreeVariableFrequencies)
         Me.Controls.Add(Me.ucrChkFlip)
         Me.Controls.Add(Me.grpFreqTypeGraph)
+        Me.Controls.Add(Me.ucrReceiverWeights)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
