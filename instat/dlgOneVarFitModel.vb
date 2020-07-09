@@ -114,13 +114,9 @@ Public Class dlgOneVarFitModel
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
         ucrNudTrim.SetLinkedDisplayControl(lblTrim)
-        ucrNudTrim.SetLinkedDisplayControl(grpParameters)
         ucrNudConfidenceLevel.SetLinkedDisplayControl(lblConfidenceLevel)
-        ucrNudConfidenceLevel.SetLinkedDisplayControl(grpParameters)
         ucrNudHypothesis.SetLinkedDisplayControl(lblDifferenceInMean)
-        ucrNudHypothesis.SetLinkedDisplayControl(grpParameters)
         ucrInputMethod.SetLinkedDisplayControl(lblMethod)
-        ucrInputMethod.SetLinkedDisplayControl(grpParameters)
 
         lstCommandButtons.AddRange({cmdDisplayOptions, cmdFittingOptions})
         ucrDistributionChoice.SetLinkedDisplayControl(lstCommandButtons)
@@ -349,16 +345,17 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsLillieFunction, New RParameter("x", 0), iAdditionalPairNo:=22)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsPearsonFunction, New RParameter("x", 0), iAdditionalPairNo:=23)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("x", 0), iAdditionalPairNo:=24)
+        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("conf.level", 1), iAdditionalPairNo:=1)
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
         ucrChkConvertVariate.SetRCode(clsROneVarFitModel, bReset)
         ucrNudTrim.SetRCode(clsMeanCIFunction, bReset)
         ucrOmmitMissing.SetRCode(clsMeanCIFunction, bReset)
-        'ucrNudConfidenceLevel.SetRCode(clsTtestFunction)
-        'ucrNudHypothesis.SetRCode(clsTtestFunction)
+        ucrNudConfidenceLevel.SetRCode(clsTtestFunction)
+        ucrNudHypothesis.SetRCode(clsTtestFunction)
 
-        ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
+        ucrSaveModel.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -468,17 +465,8 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub VisibilityOfgrpParameters()
-        If rdoTest.Checked Or rdoEstimate.Checked Then
-            grpParameters.Visible = True
-        Else
-            grpParameters.Visible = False
-        End If
-    End Sub
-
     Private Sub ucrPnlGeneralExactCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGeneralExactCase.ControlValueChanged
         SetTestEstimateBaseFunction()
-        VisibilityOfgrpParameters()
     End Sub
 
     Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
