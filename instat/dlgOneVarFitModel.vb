@@ -96,12 +96,14 @@ Public Class dlgOneVarFitModel
 
         ucrNudConfidenceLevel.SetParameter(New RParameter("conf.level"))
         ucrNudConfidenceLevel.DecimalPlaces = 2
-        ucrNudConfidenceLevel.Minimum = 0.8
-        ucrNudConfidenceLevel.Maximum = 1.0
-        ucrNudConfidenceLevel.Increment = 0.01
+        ucrNudConfidenceLevel.Increment = 0.05
+        ucrNudConfidenceLevel.SetMinMax(0, 1)
 
 
         ucrNudHypothesis.SetParameter(New RParameter("mu"))
+        ucrNudHypothesis.Increment = 1
+        ucrNudHypothesis.DecimalPlaces = 2
+        ucrNudHypothesis.SetMinMax(0.00, Integer.MaxValue)
 
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
@@ -242,6 +244,8 @@ Public Class dlgOneVarFitModel
 
         clsProportionFunction.SetPackageName("mosaic")
         clsProportionFunction.SetRCommand("prop.test")
+        clsProportionFunction.AddParameter("n", "", iPosition:=1)
+        clsProportionFunction.AddParameter("n", "", iPosition:=2)
 
         clsSignTestFunction.SetPackageName("DescTools")
         clsSignTestFunction.SetRCommand("SignTest")
@@ -349,6 +353,10 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsPearsonFunction, New RParameter("x", 0), iAdditionalPairNo:=23)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("x", 0), iAdditionalPairNo:=24)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=1)
+        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=2)
+        ucrNudHypothesis.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("mu", 1), iAdditionalPairNo:=3)
+        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("conf.level", 2), 3)
+        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("conf.level", 2), 3)
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
