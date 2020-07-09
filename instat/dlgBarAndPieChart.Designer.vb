@@ -49,6 +49,8 @@ Partial Class dlgBarAndPieChart
         Me.lblPosition = New System.Windows.Forms.Label()
         Me.lblYvariable = New System.Windows.Forms.Label()
         Me.cmdColumnChartOptions = New System.Windows.Forms.Button()
+        Me.lblYValue = New System.Windows.Forms.Label()
+        Me.ucrInputYValue = New instat.ucrInputComboBox()
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ucrInputBarChartPosition = New instat.ucrInputComboBox()
         Me.ucrSaveBar = New instat.ucrSave()
@@ -58,8 +60,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.lblYValue = New System.Windows.Forms.Label()
-        Me.ucrInputYValue = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblVariable
@@ -136,6 +136,18 @@ Partial Class dlgBarAndPieChart
         Me.cmdColumnChartOptions.Tag = "Column_Chart_Options"
         Me.cmdColumnChartOptions.UseVisualStyleBackColor = True
         '
+        'lblYValue
+        '
+        resources.ApplyResources(Me.lblYValue, "lblYValue")
+        Me.lblYValue.Name = "lblYValue"
+        '
+        'ucrInputYValue
+        '
+        Me.ucrInputYValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputYValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYValue, "ucrInputYValue")
+        Me.ucrInputYValue.Name = "ucrInputYValue"
+        '
         'ucrReceiverY
         '
         Me.ucrReceiverY.frmParent = Me
@@ -198,18 +210,6 @@ Partial Class dlgBarAndPieChart
         '
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        '
-        'lblYValue
-        '
-        resources.ApplyResources(Me.lblYValue, "lblYValue")
-        Me.lblYValue.Name = "lblYValue"
-        '
-        'ucrInputYValue
-        '
-        Me.ucrInputYValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputYValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYValue, "ucrInputYValue")
-        Me.ucrInputYValue.Name = "ucrInputYValue"
         '
         'dlgBarAndPieChart
         '
