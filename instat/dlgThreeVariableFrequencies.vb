@@ -145,7 +145,7 @@ Public Class dlgThreeVariableFrequencies
         ucrSaveGraph.SetPrefix("three_way_freq")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("save graph")
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
