@@ -113,6 +113,10 @@ Public Class dlgExportRWorkspace
         End Using
     End Sub
 
+    Private Sub ucrInputExportFile_Click() Handles ucrInputExportFile.ControlClicked
+        cmdBrowse.PerformClick()
+    End Sub
+
     Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrReceiverMultiple.ControlContentsChanged
         TestOkEnabled()
     End Sub

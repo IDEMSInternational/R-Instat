@@ -97,6 +97,10 @@ Public Class dlgExportGraphAsImage
         End Using
     End Sub
 
+    Private Sub ucrInputFile_Click() Handles ucrInputFile.ControlClicked
+        cmdBrowse.PerformClick()
+    End Sub
+
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectedGraphReceiver.ControlContentsChanged, ucrInputFile.ControlContentsChanged
         TestOkEnabled()
     End Sub

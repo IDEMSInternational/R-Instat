@@ -98,6 +98,10 @@ Public Class dlgSaveAs
         End Using
     End Sub
 
+    Private Sub ucrInputFilePath_Click() Handles ucrInputFilePath.ControlClicked
+        cmdChooseFile.PerformClick()
+    End Sub
+
     Private Sub ucrInputFilePath_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged
         TestOKEnabled()
     End Sub

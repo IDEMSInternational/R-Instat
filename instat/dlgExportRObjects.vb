@@ -106,6 +106,10 @@ Public Class dlgExportRObjects
         End Using
     End Sub
 
+    Private Sub ucrInputExportFile_Click() Handles ucrInputExportFile.ControlClicked
+        cmdBrowse.PerformClick()
+    End Sub
+
     Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverObjects.ControlContentsChanged, ucrSelectorObjects.ControlContentsChanged, ucrInputExportFile.ControlContentsChanged
         TestOkEnabled()
     End Sub
