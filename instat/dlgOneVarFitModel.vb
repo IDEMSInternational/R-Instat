@@ -95,10 +95,11 @@ Public Class dlgOneVarFitModel
 
 
         ucrNudConfidenceLevel.SetParameter(New RParameter("conf.level"))
-        ucrNudConfidenceLevel.DecimalPlaces = 3
+        ucrNudConfidenceLevel.DecimalPlaces = 2
         ucrNudConfidenceLevel.Minimum = 0.8
-        ucrNudConfidenceLevel.Maximum = 0.999
-        ucrNudConfidenceLevel.Increment = 0.001
+        ucrNudConfidenceLevel.Maximum = 1.0
+        ucrNudConfidenceLevel.Increment = 0.01
+
 
         ucrNudHypothesis.SetParameter(New RParameter("mu"))
 
@@ -236,6 +237,8 @@ Public Class dlgOneVarFitModel
         'Test
         clsBionomialFunction.SetPackageName("mosaic")
         clsBionomialFunction.SetRCommand("binom.test")
+        clsBionomialFunction.AddParameter("n", "", iPosition:=1)
+        clsBionomialFunction.AddParameter("p", "0.5", iPosition:=2)
 
         clsProportionFunction.SetPackageName("mosaic")
         clsProportionFunction.SetRCommand("prop.test")
@@ -345,15 +348,15 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsLillieFunction, New RParameter("x", 0), iAdditionalPairNo:=22)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsPearsonFunction, New RParameter("x", 0), iAdditionalPairNo:=23)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("x", 0), iAdditionalPairNo:=24)
-        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("conf.level", 1), iAdditionalPairNo:=1)
+        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=1)
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
         ucrChkConvertVariate.SetRCode(clsROneVarFitModel, bReset)
         ucrNudTrim.SetRCode(clsMeanCIFunction, bReset)
         ucrOmmitMissing.SetRCode(clsMeanCIFunction, bReset)
-        ucrNudConfidenceLevel.SetRCode(clsTtestFunction)
-        ucrNudHypothesis.SetRCode(clsTtestFunction)
+        ucrNudConfidenceLevel.SetRCode(clsTtestFunction, bReset)
+        ucrNudHypothesis.SetRCode(clsTtestFunction, bReset)
 
         ucrSaveModel.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
