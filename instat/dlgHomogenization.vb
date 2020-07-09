@@ -42,8 +42,9 @@ Public Class dlgHomogenization
         Dim dctVarDistribution As New Dictionary(Of String, String)
         Dim dctMeanVarDistribution As New Dictionary(Of String, String)
 
+        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrReceiverElement.Selector = ucrSelectorHomogenization
-        'ucrBase.clsRsyntax.iCallType = 2
 
         ucrReceiverElement.SetParameter(New RParameter("object", 0))
         ucrReceiverElement.SetMeAsReceiver()
@@ -58,19 +59,19 @@ Public Class dlgHomogenization
         ucrPnlMethods.AddFunctionNamesCondition(rdoCptMean, "cpt.mean")
         ucrPnlMethods.AddFunctionNamesCondition(rdoCptVariance, "cpt.var")
         ucrPnlMethods.AddFunctionNamesCondition(rdoCptMeanVariance, "cpt.meanvar")
-        ucrPnlMethods.AddFunctionNamesCondition(rdoSnht, "snht")
+        ucrPnlMethods.AddFunctionNamesCondition(rdoSnht, "snh.test")
         ucrPnlMethods.AddFunctionNamesCondition(rdoPettitt, "pettitt.test")
         ucrPnlMethods.AddFunctionNamesCondition(rdoBuishand, "br.test")
-        ttOptions.SetToolTip(rdoSnht, "Performs a standard normal homogeneity test on the data supplied. This test searches the data for potential changepoints.")
+        ttOptions.SetToolTip(rdoSnht, "Performes the Standard Normal Homogeinity Test (SNHT) for change-point detection of a normal variate.")
         ttOptions.SetToolTip(rdoPettitt, "Performes a non-parametric test after Pettitt in order to test for a shift in the central tendency of a time series. The H0-hypothesis, no change, is tested against the HA-Hypothesis, change")
         ttOptions.SetToolTip(rdoBuishand, "Performes the Buishand range test for change-point detection of a normal variate.")
 
         ucrPnlOptions.AddRadioButton(rdoSingle)
         ucrPnlOptions.AddRadioButton(rdoNeighbouring)
         ucrPnlOptions.AddRadioButton(rdoMultiple)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, {"cpt.mean", "cpt.var", "cpt.meanvar", "snht", "pettitt.test", "br.test"})
-        ucrPnlOptions.AddFunctionNamesCondition(rdoNeighbouring, {"cpt.mean", "cpt.var", "cpt.meanvar", "snht", "pettitt.test", "br.test"}, False)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoMultiple, {"cpt.mean", "cpt.var", "cpt.meanvar", "snht", "pettitt.test", "br.test"}, False)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test"})
+        ucrPnlOptions.AddFunctionNamesCondition(rdoNeighbouring, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test"}, False)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoMultiple, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test"}, False)
 
         ucrChkPlot.SetText("Plot")
         ucrChkPlot.AddRSyntaxContainsFunctionNamesCondition(True, {"plot"})
@@ -140,6 +141,11 @@ Public Class dlgHomogenization
         ttOptions.SetToolTip(ucrInputPenValue.txtInput, "The theoretical type I error e.g.0.05 when using the Asymptotic penalty. A vector of length 2 (min,max) if using the CROPS penalty")
 
         ucrSaveResult.SetDataFrameSelector(ucrSelectorHomogenization.ucrAvailableDataFrames)
+        ucrSaveResult.SetCheckBoxText("Save Test Object:")
+        ucrSaveResult.SetSaveTypeAsModel()
+        ucrSaveResult.SetIsComboBox()
+        ucrSaveResult.SetPrefix("Test")
+        ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
 
         ucrInputComboPenalty.AddToLinkedControls(ucrInputPenValue, {"Asymptotic", "CROPS"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrInputComboMethod.AddToLinkedControls(ucrInputQ, {"SegNeigh", "BinSeg"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
@@ -147,26 +153,11 @@ Public Class dlgHomogenization
         ucrPnlMethods.AddToLinkedControls(ucrInputComboMeanDistribution, {rdoCptMean}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrInputComboVarDistribution, {rdoCptVariance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrInputComboMeanVarDistribution, {rdoCptMeanVariance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMethods.AddToLinkedControls(ucrNudPeriod, {rdoSnht}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrInputComboMethod, {rdoCptMean, rdoCptVariance, rdoCptMeanVariance}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboMethod.SetLinkedDisplayControl(grpCptOptions)
-        ucrNudPeriod.SetLinkedDisplayControl(grpSnhtOptions)
         ucrReceiverNeighbour.SetLinkedDisplayControl(lblNeighbouring)
         ucrInputPenValue.SetLinkedDisplayControl(lblPenaltyValue)
         ucrInputQ.SetLinkedDisplayControl(lblQ)
-
-        ucrNudPeriod.SetParameter(New RParameter("period", 1))
-        ucrNudPeriod.SetMinMax(1, Integer.MaxValue)
-
-        ucrChkRobust.SetParameter(New RParameter("robust", 2))
-        ucrChkRobust.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkRobust.SetRDefault("FALSE")
-        ucrChkRobust.SetText("Robust")
-
-        ucrChkScaled.SetParameter(New RParameter("scaled", 3))
-        ucrChkScaled.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkScaled.SetRDefault("TRUE")
-        ucrChkScaled.SetText("Scaled")
 
         'Not yet working!
         rdoMultiple.Enabled = False
@@ -186,7 +177,6 @@ Public Class dlgHomogenization
 
         ucrSelectorHomogenization.Reset()
         ucrSaveResult.Reset()
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         clsCptMeanFunction.SetPackageName("changepoint")
         clsCptMeanFunction.SetRCommand("cpt.mean")
@@ -210,9 +200,10 @@ Public Class dlgHomogenization
 
         clsSummaryFunction.SetRCommand("summary")
 
-        clsSnhtFunction.SetPackageName("snht")
-        clsSnhtFunction.SetRCommand("snht")
-        clsSnhtFunction.AddParameter("period", 10, iPosition:=1)
+        clsSnhtFunction.SetPackageName("trend")
+        clsSnhtFunction.SetRCommand("snh.test")
+        clsSnhtFunction.AddParameter("x", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
+        clsSnhtFunction.AddParameter("m", 10, iPosition:=1)
 
         clsPettittFunction.SetPackageName("trend")
         clsPettittFunction.SetRCommand("pettitt.test")
@@ -221,6 +212,7 @@ Public Class dlgHomogenization
         clsBuishandFunction.SetPackageName("trend")
         clsBuishandFunction.SetRCommand("br.test")
         clsBuishandFunction.AddParameter("x", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
+        clsBuishandFunction.AddParameter("m", 10, iPosition:=1)
 
         ucrBase.clsRsyntax.ClearCodes()
         AddPlotSummaryParameters()
@@ -228,7 +220,6 @@ Public Class dlgHomogenization
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsSnhtFunction, New RParameter("data", 0), iAdditionalPairNo:=1)
         ucrReceiverElement.SetRCode(clsExcludeNAFunction, bReset)
 
         ucrInputComboPenalty.AddAdditionalCodeParameterPair(clsCptVarianceFunction, ucrInputComboPenalty.GetParameter, iAdditionalPairNo:=1)
@@ -260,14 +251,14 @@ Public Class dlgHomogenization
 
         ucrSaveResult.AddAdditionalRCode(clsCptVarianceFunction, iAdditionalPairNo:=1)
         ucrSaveResult.AddAdditionalRCode(clsCptMeanVarianceFunction, iAdditionalPairNo:=2)
+        ucrSaveResult.AddAdditionalRCode(clsPettittFunction, iAdditionalPairNo:=3)
+        ucrSaveResult.AddAdditionalRCode(clsSnhtFunction, iAdditionalPairNo:=4)
+        ucrSaveResult.AddAdditionalRCode(clsBuishandFunction, iAdditionalPairNo:=5)
+
         ucrSaveResult.SetRCode(clsCptMeanFunction, bReset)
 
         ucrChkPlot.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
-
-        ucrNudPeriod.SetRCode(clsSnhtFunction, bReset)
-        ucrChkScaled.SetRCode(clsSnhtFunction, bReset)
-        ucrChkRobust.SetRCode(clsSnhtFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -293,7 +284,6 @@ Public Class dlgHomogenization
             ucrBase.clsRsyntax.SetBaseRFunction(clsBuishandFunction)
         End If
         AddPlotSummaryParameters()
-        ChangeSaveType()
     End Sub
 
     Private Sub AddPlotSummaryParameters()
@@ -315,24 +305,6 @@ Public Class dlgHomogenization
         ElseIf rdoBuishand.Checked Then
             clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsBuishandFunction, iPosition:=0)
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsBuishandFunction, iPosition:=0)
-        End If
-    End Sub
-
-    Private Sub ChangeSaveType()
-        If rdoCptMean.Checked OrElse rdoCptVariance.Checked OrElse rdoCptMeanVariance.Checked OrElse rdoPettitt.Checked OrElse rdoBuishand.Checked Then
-            ucrSaveResult.SetCheckBoxText("Save Result:")
-            ucrSaveResult.SetSaveTypeAsModel()
-            ucrSaveResult.SetIsComboBox()
-            ucrSaveResult.SetPrefix("Result")
-            ucrSaveResult.SetAssignToIfUncheckedValue("last_result")
-            ucrBase.clsRsyntax.iCallType = 2
-        Else
-            ucrSaveResult.SetLabelText("New Dataframe Name:")
-            ucrSaveResult.SetSaveTypeAsDataFrame()
-            ucrSaveResult.SetIsTextBox()
-            ucrSaveResult.SetPrefix("Snht_dataframe")
-            ucrBase.clsRsyntax.iCallType = 0
-            clsSnhtFunction.SetAssignTo(strTemp:=ucrSelectorHomogenization.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempDataframe:=ucrSaveResult.GetText)
         End If
     End Sub
 
