@@ -64,6 +64,8 @@ Partial Class dlgOneVarFitModel
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrNudHypProportion = New instat.ucrNud()
+        Me.lblHypothesis = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -84,7 +86,7 @@ Partial Class dlgOneVarFitModel
         Me.rdoTest.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoTest.Location = New System.Drawing.Point(205, 14)
-        Me.rdoTest.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoTest.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoTest.Name = "rdoTest"
         Me.rdoTest.Size = New System.Drawing.Size(163, 34)
         Me.rdoTest.TabIndex = 41
@@ -100,7 +102,7 @@ Partial Class dlgOneVarFitModel
         Me.rdoGeneralCase.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoGeneralCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoGeneralCase.Location = New System.Drawing.Point(45, 14)
-        Me.rdoGeneralCase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoGeneralCase.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoGeneralCase.Name = "rdoGeneralCase"
         Me.rdoGeneralCase.Size = New System.Drawing.Size(163, 34)
         Me.rdoGeneralCase.TabIndex = 40
@@ -111,7 +113,7 @@ Partial Class dlgOneVarFitModel
         'cmdDisplayOptions
         '
         Me.cmdDisplayOptions.Location = New System.Drawing.Point(416, 398)
-        Me.cmdDisplayOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdDisplayOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(123, 28)
         Me.cmdDisplayOptions.TabIndex = 44
@@ -121,7 +123,7 @@ Partial Class dlgOneVarFitModel
         'cmdFittingOptions
         '
         Me.cmdFittingOptions.Location = New System.Drawing.Point(416, 367)
-        Me.cmdFittingOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdFittingOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdFittingOptions.Name = "cmdFittingOptions"
         Me.cmdFittingOptions.Size = New System.Drawing.Size(123, 28)
         Me.cmdFittingOptions.TabIndex = 43
@@ -136,7 +138,7 @@ Partial Class dlgOneVarFitModel
         Me.rdoEstimate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoEstimate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoEstimate.Location = New System.Drawing.Point(365, 14)
-        Me.rdoEstimate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoEstimate.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoEstimate.Name = "rdoEstimate"
         Me.rdoEstimate.Size = New System.Drawing.Size(163, 34)
         Me.rdoEstimate.TabIndex = 45
@@ -167,7 +169,7 @@ Partial Class dlgOneVarFitModel
         'lblTrim
         '
         Me.lblTrim.AutoSize = True
-        Me.lblTrim.Location = New System.Drawing.Point(332, 155)
+        Me.lblTrim.Location = New System.Drawing.Point(546, 126)
         Me.lblTrim.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTrim.Name = "lblTrim"
         Me.lblTrim.Size = New System.Drawing.Size(40, 17)
@@ -177,7 +179,7 @@ Partial Class dlgOneVarFitModel
         'lblMethod
         '
         Me.lblMethod.AutoSize = True
-        Me.lblMethod.Location = New System.Drawing.Point(332, 192)
+        Me.lblMethod.Location = New System.Drawing.Point(539, 168)
         Me.lblMethod.Name = "lblMethod"
         Me.lblMethod.Size = New System.Drawing.Size(59, 17)
         Me.lblMethod.TabIndex = 54
@@ -186,7 +188,7 @@ Partial Class dlgOneVarFitModel
         'lblConfidenceLevel
         '
         Me.lblConfidenceLevel.AutoSize = True
-        Me.lblConfidenceLevel.Location = New System.Drawing.Point(330, 226)
+        Me.lblConfidenceLevel.Location = New System.Drawing.Point(317, 154)
         Me.lblConfidenceLevel.Name = "lblConfidenceLevel"
         Me.lblConfidenceLevel.Size = New System.Drawing.Size(121, 17)
         Me.lblConfidenceLevel.TabIndex = 56
@@ -195,18 +197,18 @@ Partial Class dlgOneVarFitModel
         'lblDifferenceInMean
         '
         Me.lblDifferenceInMean.AutoSize = True
-        Me.lblDifferenceInMean.Location = New System.Drawing.Point(330, 258)
+        Me.lblDifferenceInMean.Location = New System.Drawing.Point(317, 186)
         Me.lblDifferenceInMean.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDifferenceInMean.Name = "lblDifferenceInMean"
-        Me.lblDifferenceInMean.Size = New System.Drawing.Size(102, 17)
+        Me.lblDifferenceInMean.Size = New System.Drawing.Size(106, 17)
         Me.lblDifferenceInMean.TabIndex = 59
-        Me.lblDifferenceInMean.Text = "NullHypothesis"
+        Me.lblDifferenceInMean.Text = "NullHypothesis:"
         '
         'ucrNudConfidenceLevel
         '
         Me.ucrNudConfidenceLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudConfidenceLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudConfidenceLevel.Location = New System.Drawing.Point(461, 222)
+        Me.ucrNudConfidenceLevel.Location = New System.Drawing.Point(448, 150)
         Me.ucrNudConfidenceLevel.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrNudConfidenceLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudConfidenceLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -219,7 +221,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrNudHypothesis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHypothesis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHypothesis.Location = New System.Drawing.Point(461, 255)
+        Me.ucrNudHypothesis.Location = New System.Drawing.Point(448, 183)
         Me.ucrNudHypothesis.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrNudHypothesis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudHypothesis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -232,7 +234,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrNudTrim.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTrim.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTrim.Location = New System.Drawing.Point(383, 151)
+        Me.ucrNudTrim.Location = New System.Drawing.Point(608, 126)
         Me.ucrNudTrim.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrNudTrim.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTrim.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -245,10 +247,10 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrInputMethod.AddQuotesIfUnrecognised = True
         Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(414, 188)
+        Me.ucrInputMethod.Location = New System.Drawing.Point(608, 159)
         Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMethod.Name = "ucrInputMethod"
-        Me.ucrInputMethod.Size = New System.Drawing.Size(108, 26)
+        Me.ucrInputMethod.Size = New System.Drawing.Size(80, 26)
         Me.ucrInputMethod.TabIndex = 53
         '
         'ucrInputComboEstimate
@@ -339,16 +341,40 @@ Partial Class dlgOneVarFitModel
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(13, 434)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(547, 64)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrNudHypProportion
+        '
+        Me.ucrNudHypProportion.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHypProportion.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHypProportion.Location = New System.Drawing.Point(448, 211)
+        Me.ucrNudHypProportion.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrNudHypProportion.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudHypProportion.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHypProportion.Name = "ucrNudHypProportion"
+        Me.ucrNudHypProportion.Size = New System.Drawing.Size(67, 25)
+        Me.ucrNudHypProportion.TabIndex = 60
+        Me.ucrNudHypProportion.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblHypothesis
+        '
+        Me.lblHypothesis.AutoSize = True
+        Me.lblHypothesis.Location = New System.Drawing.Point(327, 213)
+        Me.lblHypothesis.Name = "lblHypothesis"
+        Me.lblHypothesis.Size = New System.Drawing.Size(82, 17)
+        Me.lblHypothesis.TabIndex = 61
+        Me.lblHypothesis.Text = "Hypothesis:"
         '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(645, 517)
+        Me.ClientSize = New System.Drawing.Size(695, 517)
+        Me.Controls.Add(Me.lblHypothesis)
+        Me.Controls.Add(Me.ucrNudHypProportion)
         Me.Controls.Add(Me.ucrNudTrim)
         Me.Controls.Add(Me.ucrNudConfidenceLevel)
         Me.Controls.Add(Me.lblTrim)
@@ -376,7 +402,7 @@ Partial Class dlgOneVarFitModel
         Me.Controls.Add(Me.ucrSelectorOneVarFitMod)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgOneVarFitModel"
@@ -414,4 +440,6 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents ucrNudConfidenceLevel As ucrNud
     Friend WithEvents ucrNudHypothesis As ucrNud
     Friend WithEvents lblDifferenceInMean As Label
+    Friend WithEvents lblHypothesis As Label
+    Friend WithEvents ucrNudHypProportion As ucrNud
 End Class
