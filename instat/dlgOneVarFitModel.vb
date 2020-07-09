@@ -97,7 +97,7 @@ Public Class dlgOneVarFitModel
         ucrNudConfidenceLevel.SetParameter(New RParameter("conf.level"))
         ucrNudConfidenceLevel.DecimalPlaces = 2
         ucrNudConfidenceLevel.Increment = 0.05
-        ucrNudConfidenceLevel.SetMinMax(0, 1)
+
 
 
         ucrNudHypothesis.SetParameter(New RParameter("mu"))
@@ -354,17 +354,17 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("x", 0), iAdditionalPairNo:=24)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=1)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=2)
-        ucrNudHypothesis.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("mu", 1), iAdditionalPairNo:=3)
-        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("conf.level", 2), 3)
-        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("conf.level", 2), 3)
+        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=3)
+        ucrNudHypothesis.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
+
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
         ucrChkConvertVariate.SetRCode(clsROneVarFitModel, bReset)
         ucrNudTrim.SetRCode(clsMeanCIFunction, bReset)
         ucrOmmitMissing.SetRCode(clsMeanCIFunction, bReset)
-        ucrNudConfidenceLevel.SetRCode(clsTtestFunction, bReset)
-        ucrNudHypothesis.SetRCode(clsTtestFunction, bReset)
+        ucrNudConfidenceLevel.SetRCode(clsZTestFunction, bReset)
+        ucrNudHypothesis.SetRCode(clsZTestFunction, bReset)
 
         ucrSaveModel.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
