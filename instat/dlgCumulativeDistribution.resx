@@ -184,7 +184,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 268</value>
+    <value>231, 268</value>
   </data>
   <data name="lblScale.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
