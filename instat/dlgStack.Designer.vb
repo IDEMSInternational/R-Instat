@@ -42,6 +42,7 @@ Partial Class dlgStack
         Me.lblColumnsTostack = New System.Windows.Forms.Label()
         Me.lblStackDataInto = New System.Windows.Forms.Label()
         Me.lblFactorInto = New System.Windows.Forms.Label()
+        Me.lblSets = New System.Windows.Forms.Label()
         Me.ucrNudNoSets = New instat.ucrNud()
         Me.ucrChkStackMultipleSets = New instat.ucrCheck()
         Me.ucrSaveNewDataName = New instat.ucrSave()
@@ -52,7 +53,6 @@ Partial Class dlgStack
         Me.ucrSelectorStack = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverColumnsToBeStack = New instat.ucrReceiverMultiple()
-        Me.lblSets = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblColumnsTostack
@@ -72,6 +72,11 @@ Partial Class dlgStack
         resources.ApplyResources(Me.lblFactorInto, "lblFactorInto")
         Me.lblFactorInto.Name = "lblFactorInto"
         Me.lblFactorInto.Tag = "Factor_Into"
+        '
+        'lblSets
+        '
+        resources.ApplyResources(Me.lblSets, "lblSets")
+        Me.lblSets.Name = "lblSets"
         '
         'ucrNudNoSets
         '
@@ -146,11 +151,6 @@ Partial Class dlgStack
         Me.ucrReceiverColumnsToBeStack.Selector = Nothing
         Me.ucrReceiverColumnsToBeStack.strNcFilePath = ""
         Me.ucrReceiverColumnsToBeStack.ucrSelector = Nothing
-        '
-        'lblSets
-        '
-        resources.ApplyResources(Me.lblSets, "lblSets")
-        Me.lblSets.Name = "lblSets"
         '
         'dlgStack
         '
