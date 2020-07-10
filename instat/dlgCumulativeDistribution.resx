@@ -184,7 +184,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 268</value>
+    <value>193, 267</value>
   </data>
   <data name="lblScale.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
@@ -217,7 +217,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNudby.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 297</value>
+    <value>185, 297</value>
   </data>
   <data name="lblNudby.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 13</value>
@@ -316,7 +316,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>284, 294</value>
+    <value>246, 294</value>
   </data>
   <data name="ucrNudBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 20</value>
@@ -337,7 +337,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputComboScales.Location" type="System.Drawing.Point, System.Drawing">
-    <value>284, 264</value>
+    <value>246, 264</value>
   </data>
   <data name="ucrInputComboScales.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 26</value>
