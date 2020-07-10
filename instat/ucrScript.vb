@@ -230,8 +230,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub txtScript_KeyDown(sender As Object, e As KeyEventArgs) Handles txtScript.KeyDown
-
-        'ignore the Ctrl,Shift commands. It could be a redo action whcih w
+        'ignore the Ctrl,Shift commands. It could be a redo action whcih we want to ignore
         If Not (e.Control OrElse e.Shift OrElse e.Modifiers = (Keys.Control OrElse Keys.Shift)) Then
             bIsUserTextChangeEvent = True
         End If
@@ -255,6 +254,5 @@ Public Class ucrScript
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
     End Sub
-
 
 End Class
