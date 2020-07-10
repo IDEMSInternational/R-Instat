@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblYvariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 75</value>
+    <value>259, 60</value>
   </data>
   <data name="lblYvariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 121</value>
+    <value>259, 106</value>
   </data>
   <data name="lblFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
@@ -217,7 +217,7 @@
     <value>121, 23</value>
   </data>
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="cmdOptions.Text" xml:space="preserve">
     <value>Plot Options</value>
@@ -241,7 +241,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSecondFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 168</value>
+    <value>259, 153</value>
   </data>
   <data name="lblSecondFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -274,7 +274,7 @@
     <value>121, 23</value>
   </data>
   <data name="cmdPieChartOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>14</value>
   </data>
   <data name="cmdPieChartOptions.Text" xml:space="preserve">
     <value>Pie Chart Options</value>
@@ -409,13 +409,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 288</value>
+    <value>259, 220</value>
   </data>
   <data name="lblLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 13</value>
   </data>
   <data name="lblLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>12</value>
   </data>
   <data name="lblLabel.Text" xml:space="preserve">
     <value>Label Variable:</value>
@@ -433,13 +433,13 @@
     <value>1</value>
   </data>
   <data name="ucrChkLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 288</value>
+    <value>259, 197</value>
   </data>
   <data name="ucrChkLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 20</value>
   </data>
   <data name="ucrChkLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrChkLabel.Name" xml:space="preserve">
     <value>ucrChkLabel</value>
@@ -454,13 +454,16 @@
     <value>2</value>
   </data>
   <data name="ucrSaveSummaryBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 288</value>
+    <value>10, 290</value>
+  </data>
+  <data name="ucrSaveSummaryBar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveSummaryBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 24</value>
+    <value>257, 24</value>
   </data>
   <data name="ucrSaveSummaryBar.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrSaveSummaryBar.Name" xml:space="preserve">
     <value>ucrSaveSummaryBar</value>
@@ -481,34 +484,34 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>425, 399</value>
+    <value>425, 380</value>
   </data>
-  <data name="ucrLabelReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>219, 305</value>
+  <data name="ucrReceiverLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 236</value>
   </data>
-  <data name="ucrLabelReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrLabelReceiver.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrReceiverLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
   </data>
-  <data name="ucrLabelReceiver.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+  <data name="ucrReceiverLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
   </data>
-  <data name="&gt;&gt;ucrLabelReceiver.Name" xml:space="preserve">
-    <value>ucrLabelReceiver</value>
+  <data name="&gt;&gt;ucrReceiverLabel.Name" xml:space="preserve">
+    <value>ucrReceiverLabel</value>
   </data>
-  <data name="&gt;&gt;ucrLabelReceiver.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverLabel.Type" xml:space="preserve">
     <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrLabelReceiver.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrLabelReceiver.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ucrReceiverFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 136</value>
+    <value>259, 121</value>
   </data>
   <data name="ucrReceiverFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -532,7 +535,7 @@
     <value>14</value>
   </data>
   <data name="ucrReceiverYVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 90</value>
+    <value>259, 75</value>
   </data>
   <data name="ucrReceiverYVariable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -580,13 +583,13 @@
     <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 338</value>
+    <value>12, 322</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 53</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -621,9 +624,6 @@
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -637,7 +637,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverSecondFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 183</value>
+    <value>259, 168</value>
   </data>
   <data name="ucrReceiverSecondFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

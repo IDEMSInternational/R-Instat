@@ -57,7 +57,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrSummaryBarSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrLabelReceiver = New instat.ucrReceiverSingle()
+        Me.ucrReceiverLabel = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblYvariable
@@ -191,20 +191,20 @@ Partial Class dlgSummaryBarOrPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
-        'ucrLabelReceiver
+        'ucrReceiverLabel
         '
-        Me.ucrLabelReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrLabelReceiver, "ucrLabelReceiver")
-        Me.ucrLabelReceiver.Name = "ucrLabelReceiver"
-        Me.ucrLabelReceiver.Selector = Nothing
-        Me.ucrLabelReceiver.strNcFilePath = ""
-        Me.ucrLabelReceiver.ucrSelector = Nothing
+        Me.ucrReceiverLabel.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverLabel, "ucrReceiverLabel")
+        Me.ucrReceiverLabel.Name = "ucrReceiverLabel"
+        Me.ucrReceiverLabel.Selector = Nothing
+        Me.ucrReceiverLabel.strNcFilePath = ""
+        Me.ucrReceiverLabel.ucrSelector = Nothing
         '
         'dlgSummaryBarOrPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrLabelReceiver)
+        Me.Controls.Add(Me.ucrReceiverLabel)
         Me.Controls.Add(Me.lblLabel)
         Me.Controls.Add(Me.ucrChkLabel)
         Me.Controls.Add(Me.rdoTable)
@@ -251,5 +251,5 @@ Partial Class dlgSummaryBarOrPieChart
     Friend WithEvents rdoTable As RadioButton
     Friend WithEvents ucrChkLabel As ucrCheck
     Friend WithEvents lblLabel As Label
-    Friend WithEvents ucrLabelReceiver As ucrReceiverSingle
+    Friend WithEvents ucrReceiverLabel As ucrReceiverSingle
 End Class
