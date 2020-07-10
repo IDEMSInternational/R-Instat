@@ -154,7 +154,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFactorOptional.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 219</value>
+    <value>274, 222</value>
   </data>
   <data name="lblFactorOptional.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 13</value>
@@ -184,7 +184,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblXVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 172</value>
+    <value>274, 173</value>
   </data>
   <data name="lblXVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -241,7 +241,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 267</value>
+    <value>274, 271</value>
   </data>
   <data name="lblVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 13</value>
@@ -316,7 +316,7 @@
     <value>3</value>
   </data>
   <data name="ucrSaveScatterPlot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 285</value>
+    <value>10, 286</value>
   </data>
   <data name="ucrSaveScatterPlot.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -364,7 +364,7 @@
     <value>5</value>
   </data>
   <data name="ucrVariablesAsFactorForScatter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 30</value>
+    <value>274, 30</value>
   </data>
   <data name="ucrVariablesAsFactorForScatter.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 136</value>
@@ -385,7 +385,7 @@
     <value>6</value>
   </data>
   <data name="ucrFactorOptionalReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 234</value>
+    <value>274, 237</value>
   </data>
   <data name="ucrFactorOptionalReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -409,7 +409,7 @@
     <value>9</value>
   </data>
   <data name="ucrReceiverX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 187</value>
+    <value>274, 188</value>
   </data>
   <data name="ucrReceiverX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -466,7 +466,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 283</value>
+    <value>274, 286</value>
   </data>
   <data name="ucrReceiverLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
