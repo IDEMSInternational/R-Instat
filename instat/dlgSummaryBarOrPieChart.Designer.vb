@@ -48,7 +48,6 @@ Partial Class dlgSummaryBarOrPieChart
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
         Me.rdoPieChart = New System.Windows.Forms.RadioButton()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
-        Me.lblLabel = New System.Windows.Forms.Label()
         Me.ucrChkLabel = New instat.ucrCheck()
         Me.ucrSaveSummaryBar = New instat.ucrSave()
         Me.ucrReceiverSecondFactor = New instat.ucrReceiverSingle()
@@ -57,7 +56,6 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrSummaryBarSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrReceiverLabel = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblYvariable
@@ -130,11 +128,6 @@ Partial Class dlgSummaryBarOrPieChart
         Me.rdoTable.TabStop = True
         Me.rdoTable.UseVisualStyleBackColor = True
         '
-        'lblLabel
-        '
-        resources.ApplyResources(Me.lblLabel, "lblLabel")
-        Me.lblLabel.Name = "lblLabel"
-        '
         'ucrChkLabel
         '
         Me.ucrChkLabel.Checked = False
@@ -191,21 +184,10 @@ Partial Class dlgSummaryBarOrPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
-        'ucrReceiverLabel
-        '
-        Me.ucrReceiverLabel.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverLabel, "ucrReceiverLabel")
-        Me.ucrReceiverLabel.Name = "ucrReceiverLabel"
-        Me.ucrReceiverLabel.Selector = Nothing
-        Me.ucrReceiverLabel.strNcFilePath = ""
-        Me.ucrReceiverLabel.ucrSelector = Nothing
-        '
         'dlgSummaryBarOrPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrReceiverLabel)
-        Me.Controls.Add(Me.lblLabel)
         Me.Controls.Add(Me.ucrChkLabel)
         Me.Controls.Add(Me.rdoTable)
         Me.Controls.Add(Me.rdoPieChart)
@@ -250,6 +232,4 @@ Partial Class dlgSummaryBarOrPieChart
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents rdoTable As RadioButton
     Friend WithEvents ucrChkLabel As ucrCheck
-    Friend WithEvents lblLabel As Label
-    Friend WithEvents ucrReceiverLabel As ucrReceiverSingle
 End Class
