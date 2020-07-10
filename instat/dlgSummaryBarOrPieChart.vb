@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgSummaryBarOrPieChart
     Private clsRggplotFunction As New RFunction
     Private clsRgeomBarFunction As New RFunction
-    Private clsLabelgeomFunction As New RFunction
+    Private clsLabelGeomFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private clsAesFunction As New RFunction
     Private clsRoundFunction As New RFunction
@@ -106,24 +106,16 @@ Public Class dlgSummaryBarOrPieChart
         clsRCoordPolarParam.SetArgumentName("coord_polar")
         clsRCoordPolarParam.SetArgument(clsRCoordPolarFunction)
 
-        ucrReceiverLabel.SetParameter(New RParameter("label", 3))
-        ucrReceiverLabel.Selector = ucrSummaryBarSelector
-        ucrReceiverLabel.bWithQuotes = False
-        ucrReceiverLabel.SetParameterIsString()
-
         ucrChkLabel.SetText("Add Label")
         ucrChkLabel.AddParameterPresentCondition(True, "geom_label")
         ucrChkLabel.AddParameterPresentCondition(False, "geom_label", False)
-
-        ucrChkLabel.AddToLinkedControls(ucrReceiverLabel, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrReceiverLabel.SetLinkedDisplayControl(lblLabel)
     End Sub
 
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
         clsRggplotFunction = New RFunction
         clsRgeomBarFunction = New RFunction
-        clsLabelgeomFunction = New RFunction
+        clsLabelGeomFunction = New RFunction
         clsRaesFunction = New RFunction
         clsAesFunction = New RFunction
         clsRoundFunction = New RFunction
@@ -151,14 +143,15 @@ Public Class dlgSummaryBarOrPieChart
         clsAesFunction.AddParameter("label", clsRFunctionParameter:=clsRoundFunction, iPosition:=0)
 
         clsRoundFunction.SetRCommand("round")
+        clsRoundFunction.AddParameter("digits", 2, iPosition:=1)
 
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
         clsRgeomBarFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
 
-        clsLabelgeomFunction.SetPackageName("ggplot2")
-        clsLabelgeomFunction.SetRCommand("geom_label")
-        clsLabelgeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesFunction, iPosition:=1)
+        clsLabelGeomFunction.SetPackageName("ggplot2")
+        clsLabelGeomFunction.SetRCommand("geom_label")
+        clsLabelGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesFunction, iPosition:=1)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -178,11 +171,12 @@ Public Class dlgSummaryBarOrPieChart
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverYVariable.AddAdditionalCodeParameterPair(clsRoundFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
+
         ucrReceiverFactor.SetRCode(clsRaesFunction, bReset)
         ucrReceiverYVariable.SetRCode(clsRaesFunction, bReset)
         ucrReceiverSecondFactor.SetRCode(clsRaesFunction, bReset)
         ucrSaveSummaryBar.SetRCode(clsBaseOperator, bReset)
-        ucrReceiverLabel.SetRCode(clsRoundFunction, bReset)
         ucrSummaryBarSelector.SetRCode(clsRggplotFunction, bReset)
         ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
         ucrChkLabel.SetRCode(clsBaseOperator, bReset)
@@ -190,7 +184,7 @@ Public Class dlgSummaryBarOrPieChart
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverYVariable.IsEmpty OrElse ucrReceiverFactor.IsEmpty OrElse Not ucrSaveSummaryBar.IsComplete OrElse (ucrChkLabel.Checked AndAlso ucrReceiverLabel.IsEmpty) Then
+        If ucrReceiverYVariable.IsEmpty OrElse ucrReceiverFactor.IsEmpty OrElse Not ucrSaveSummaryBar.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -267,15 +261,13 @@ Public Class dlgSummaryBarOrPieChart
 
     Private Sub ucrChkLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabel.ControlValueChanged
         If ucrChkLabel.Checked Then
-            ucrReceiverLabel.SetMeAsReceiver()
-            clsBaseOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelgeomFunction)
+            clsBaseOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelGeomFunction)
         Else
-            ucrReceiverYVariable.SetMeAsReceiver()
             clsBaseOperator.RemoveParameterByName("geom_label")
         End If
     End Sub
 
-    Private Sub CoreControls_ContenctsChanged() Handles ucrReceiverYVariable.ControlContentsChanged, ucrReceiverFactor.ControlContentsChanged, ucrSaveSummaryBar.ControlContentsChanged, ucrChkLabel.ControlContentsChanged, ucrReceiverLabel.ControlContentsChanged
+    Private Sub CoreControls_ContenctsChanged() Handles ucrReceiverYVariable.ControlContentsChanged, ucrReceiverFactor.ControlContentsChanged, ucrSaveSummaryBar.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
