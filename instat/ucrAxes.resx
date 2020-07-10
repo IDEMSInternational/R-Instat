@@ -291,7 +291,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpAxisTitle.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrChkLabels.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 133</value>
@@ -651,7 +651,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpMajorBreaks.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrInputRelaceMissingvalues.Location" type="System.Drawing.Point, System.Drawing">
     <value>112, 103</value>
@@ -1014,7 +1014,257 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpScales.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrInputComboDateLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 54</value>
+  </data>
+  <data name="ucrInputComboDateLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 21</value>
+  </data>
+  <data name="ucrInputComboDateLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboDateLabel.Name" xml:space="preserve">
+    <value>ucrInputComboDateLabel</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboDateLabel.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboDateLabel.Parent" xml:space="preserve">
+    <value>grpScaleXDate</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboDateLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkDateLabels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 54</value>
+  </data>
+  <data name="ucrChkDateLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 20</value>
+  </data>
+  <data name="ucrChkDateLabels.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDateLabels.Name" xml:space="preserve">
+    <value>ucrChkDateLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDateLabels.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDateLabels.Parent" xml:space="preserve">
+    <value>grpScaleXDate</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDateLabels.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrInputComboDateBreak.Location" type="System.Drawing.Point, System.Drawing">
+    <value>145, 31</value>
+  </data>
+  <data name="ucrInputComboDateBreak.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 21</value>
+  </data>
+  <data name="ucrInputComboDateBreak.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboDateBreak.Name" xml:space="preserve">
+    <value>ucrInputComboDateBreak</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboDateBreak.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboDateBreak.Parent" xml:space="preserve">
+    <value>grpScaleXDate</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboDateBreak.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="lbXscaleDateLowerLimit.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lbXscaleDateLowerLimit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lbXscaleDateLowerLimit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 100</value>
+  </data>
+  <data name="lbXscaleDateLowerLimit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="lbXscaleDateLowerLimit.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lbXscaleDateLowerLimit.Text" xml:space="preserve">
+    <value>Lower Limit</value>
+  </data>
+  <data name="&gt;&gt;lbXscaleDateLowerLimit.Name" xml:space="preserve">
+    <value>lbXscaleDateLowerLimit</value>
+  </data>
+  <data name="&gt;&gt;lbXscaleDateLowerLimit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbXscaleDateLowerLimit.Parent" xml:space="preserve">
+    <value>grpScaleXDate</value>
+  </data>
+  <data name="&gt;&gt;lbXscaleDateLowerLimit.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblXScalDateUpperLimit.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXScalDateUpperLimit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 123</value>
+  </data>
+  <data name="lblXScalDateUpperLimit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="lblXScalDateUpperLimit.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblXScalDateUpperLimit.Text" xml:space="preserve">
+    <value>Upper Limit</value>
+  </data>
+  <data name="&gt;&gt;lblXScalDateUpperLimit.Name" xml:space="preserve">
+    <value>lblXScalDateUpperLimit</value>
+  </data>
+  <data name="&gt;&gt;lblXScalDateUpperLimit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblXScalDateUpperLimit.Parent" xml:space="preserve">
+    <value>grpScaleXDate</value>
+  </data>
+  <data name="&gt;&gt;lblXScalDateUpperLimit.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrNudDateBreak.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 31</value>
+  </data>
+  <data name="ucrNudDateBreak.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudDateBreak.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDateBreak.Name" xml:space="preserve">
+    <value>ucrNudDateBreak</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDateBreak.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDateBreak.Parent" xml:space="preserve">
+    <value>grpScaleXDate</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDateBreak.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrDtpLowerLimit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 100</value>
+  </data>
+  <data name="ucrDtpLowerLimit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 20</value>
+  </data>
+  <data name="ucrDtpLowerLimit.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpLowerLimit.Name" xml:space="preserve">
+    <value>ucrDtpLowerLimit</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpLowerLimit.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpLowerLimit.Parent" xml:space="preserve">
+    <value>grpScaleXDate</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpLowerLimit.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrDtpUpperLimit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 123</value>
+  </data>
+  <data name="ucrDtpUpperLimit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 20</value>
+  </data>
+  <data name="ucrDtpUpperLimit.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpUpperLimit.Name" xml:space="preserve">
+    <value>ucrDtpUpperLimit</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpUpperLimit.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpUpperLimit.Parent" xml:space="preserve">
+    <value>grpScaleXDate</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpUpperLimit.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrChkLimits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 77</value>
+  </data>
+  <data name="ucrChkLimits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkLimits.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLimits.Name" xml:space="preserve">
+    <value>ucrChkLimits</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLimits.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLimits.Parent" xml:space="preserve">
+    <value>grpScaleXDate</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLimits.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrChkBreaks.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 31</value>
+  </data>
+  <data name="ucrChkBreaks.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkBreaks.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkBreaks.Name" xml:space="preserve">
+    <value>ucrChkBreaks</value>
+  </data>
+  <data name="&gt;&gt;ucrChkBreaks.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkBreaks.Parent" xml:space="preserve">
+    <value>grpScaleXDate</value>
+  </data>
+  <data name="&gt;&gt;ucrChkBreaks.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="grpScaleXDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 90</value>
+  </data>
+  <data name="grpScaleXDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>246, 153</value>
+  </data>
+  <data name="grpScaleXDate.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="grpScaleXDate.Text" xml:space="preserve">
+    <value>Date Scales</value>
+  </data>
+  <data name="&gt;&gt;grpScaleXDate.Name" xml:space="preserve">
+    <value>grpScaleXDate</value>
+  </data>
+  <data name="&gt;&gt;grpScaleXDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpScaleXDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpScaleXDate.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrInputAxisType.Location" type="System.Drawing.Point, System.Drawing">
     <value>365, 7</value>
@@ -1035,7 +1285,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputAxisType.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="rdoMinorBreaksSeq.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1353,7 +1603,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpMinorBreaks.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
