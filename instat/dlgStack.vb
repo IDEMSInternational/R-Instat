@@ -82,10 +82,10 @@ Public Class dlgStack
         ucrNudNoSets.Minimum = 2
         ucrNudNoSets.SetLinkedDisplayControl(lblSets)
 
-        ucrSaveNewDataName.SetIsTextBox()
-        ucrSaveNewDataName.SetLabelText("New Data Frame Name:")
         ucrSaveNewDataName.SetSaveTypeAsDataFrame()
         ucrSaveNewDataName.SetDataFrameSelector(ucrSelectorStack.ucrAvailableDataFrames)
+        ucrSaveNewDataName.SetLabelText("New Data Frame Name:")
+        ucrSaveNewDataName.SetIsTextBox()
     End Sub
 
     Private Sub SetDefaults()
