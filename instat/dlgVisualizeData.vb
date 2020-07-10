@@ -66,7 +66,7 @@ Public Class dlgVisualizeData
 
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverVisualizeData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrSaveGraph.SetPrefix("graph")
+        ucrSaveGraph.SetPrefix("vis_dat")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -125,7 +125,7 @@ Public Class dlgVisualizeData
     End Sub
 
     Private Sub TestOkEnabled()
-        If rdoWholeDataFrame.Checked AndAlso ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+        If rdoWholeDataFrame.Checked AndAlso ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso ucrSaveGraph.IsComplete() Then
             ucrBase.OKEnabled(True)
         ElseIf rdoSelectedColumn.Checked AndAlso Not ucrReceiverVisualizeData.IsEmpty Then
             ucrBase.OKEnabled(True)
@@ -140,7 +140,7 @@ Public Class dlgVisualizeData
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVisualizeData.ControlContentsChanged, ucrSelectorVisualizeData.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged
+    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVisualizeData.ControlContentsChanged, ucrSelectorVisualizeData.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
