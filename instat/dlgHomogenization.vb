@@ -197,8 +197,10 @@ Public Class dlgHomogenization
         clsExcludeNAFunction.SetRCommand("na.exclude")
 
         clsPlotFunction.SetRCommand("plot")
+        clsPlotFunction.iCallType = 3
 
         clsSummaryFunction.SetRCommand("summary")
+        clsSummaryFunction.iCallType = 2
 
         clsSnhtFunction.SetPackageName("trend")
         clsSnhtFunction.SetRCommand("snh.test")
@@ -311,7 +313,6 @@ Public Class dlgHomogenization
     Private Sub ucrChkSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummary.ControlValueChanged
         If ucrChkSummary.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=0)
-            clsSummaryFunction.iCallType = 2
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
         End If
@@ -320,7 +321,6 @@ Public Class dlgHomogenization
     Private Sub ucrChkPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPlot.ControlValueChanged
         If ucrChkPlot.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsPlotFunction, iPosition:=1)
-            clsPlotFunction.iCallType = 3
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsPlotFunction)
         End If
