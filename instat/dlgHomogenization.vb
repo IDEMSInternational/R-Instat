@@ -217,8 +217,8 @@ Public Class dlgHomogenization
         clsBuishandFunction.AddParameter("m", 10, iPosition:=1)
 
         ucrBase.clsRsyntax.ClearCodes()
-        AddPlotSummaryParameters()
         ucrBase.clsRsyntax.SetBaseRFunction(clsSnhtFunction)
+        AddPlotSummaryParameters()
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
@@ -289,25 +289,8 @@ Public Class dlgHomogenization
     End Sub
 
     Private Sub AddPlotSummaryParameters()
-        If rdoCptMean.Checked Then
-            clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsCptMeanFunction, iPosition:=0)
-            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsCptMeanFunction, iPosition:=0)
-        ElseIf rdoCptVariance.Checked Then
-            clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsCptVarianceFunction, iPosition:=0)
-            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsCptVarianceFunction, iPosition:=0)
-        ElseIf rdoCptMeanVariance.Checked Then
-            clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsCptMeanVarianceFunction, iPosition:=0)
-            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsCptMeanVarianceFunction, iPosition:=0)
-        ElseIf rdoSnht.Checked Then
-            clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsSnhtFunction, iPosition:=0)
-            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSnhtFunction, iPosition:=0)
-        ElseIf rdoPettitt.Checked Then
-            clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsPettittFunction, iPosition:=0)
-            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsPettittFunction, iPosition:=0)
-        ElseIf rdoBuishand.Checked Then
-            clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsBuishandFunction, iPosition:=0)
-            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsBuishandFunction, iPosition:=0)
-        End If
+        clsPlotFunction.AddParameter("x", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction, iPosition:=0)
+        clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction, iPosition:=0)
     End Sub
 
     Private Sub ucrChkSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummary.ControlValueChanged
