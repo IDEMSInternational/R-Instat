@@ -34,13 +34,23 @@ Partial Class dlgInfillMissingValues
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.rdoNeighbouring = New System.Windows.Forms.RadioButton()
         Me.grpMethods = New System.Windows.Forms.GroupBox()
-        Me.ucrPnlMethods = New instat.UcrPanel()
+        Me.rdoInsertConstant = New System.Windows.Forms.RadioButton()
+        Me.grpStartEnd = New System.Windows.Forms.GroupBox()
+        Me.rdoExtendFill = New System.Windows.Forms.RadioButton()
+        Me.rdoLeaveAsMissing = New System.Windows.Forms.RadioButton()
+        Me.lblFunction = New System.Windows.Forms.Label()
+        Me.ucrChkCopyFromAbove = New instat.ucrCheck()
+        Me.ucrInputConstant = New instat.ucrInputTextBox()
+        Me.ucrPnlStartEnd = New instat.UcrPanel()
         Me.ucrSaveNewColumn = New instat.ucrSave()
+        Me.ucrInputComboFunction = New instat.ucrInputComboBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorInfillMissing = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpMethods.SuspendLayout()
+        Me.grpStartEnd.SuspendLayout()
         Me.SuspendLayout()
         '
         'rdoNaStructTS
@@ -133,15 +143,73 @@ Partial Class dlgInfillMissingValues
         Me.grpMethods.Name = "grpMethods"
         Me.grpMethods.TabStop = False
         '
-        'ucrPnlMethods
+        'rdoInsertConstant
         '
-        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
-        Me.ucrPnlMethods.Name = "ucrPnlMethods"
+        resources.ApplyResources(Me.rdoInsertConstant, "rdoInsertConstant")
+        Me.rdoInsertConstant.Name = "rdoInsertConstant"
+        Me.rdoInsertConstant.TabStop = True
+        Me.rdoInsertConstant.UseVisualStyleBackColor = True
+        '
+        'grpStartEnd
+        '
+        Me.grpStartEnd.Controls.Add(Me.ucrInputConstant)
+        Me.grpStartEnd.Controls.Add(Me.rdoExtendFill)
+        Me.grpStartEnd.Controls.Add(Me.rdoInsertConstant)
+        Me.grpStartEnd.Controls.Add(Me.rdoLeaveAsMissing)
+        Me.grpStartEnd.Controls.Add(Me.ucrPnlStartEnd)
+        resources.ApplyResources(Me.grpStartEnd, "grpStartEnd")
+        Me.grpStartEnd.Name = "grpStartEnd"
+        Me.grpStartEnd.TabStop = False
+        '
+        'rdoExtendFill
+        '
+        resources.ApplyResources(Me.rdoExtendFill, "rdoExtendFill")
+        Me.rdoExtendFill.Name = "rdoExtendFill"
+        Me.rdoExtendFill.TabStop = True
+        Me.rdoExtendFill.UseVisualStyleBackColor = True
+        '
+        'rdoLeaveAsMissing
+        '
+        resources.ApplyResources(Me.rdoLeaveAsMissing, "rdoLeaveAsMissing")
+        Me.rdoLeaveAsMissing.Name = "rdoLeaveAsMissing"
+        Me.rdoLeaveAsMissing.TabStop = True
+        Me.rdoLeaveAsMissing.UseVisualStyleBackColor = True
+        '
+        'lblFunction
+        '
+        resources.ApplyResources(Me.lblFunction, "lblFunction")
+        Me.lblFunction.Name = "lblFunction"
+        '
+        'ucrChkCopyFromAbove
+        '
+        Me.ucrChkCopyFromAbove.Checked = False
+        resources.ApplyResources(Me.ucrChkCopyFromAbove, "ucrChkCopyFromAbove")
+        Me.ucrChkCopyFromAbove.Name = "ucrChkCopyFromAbove"
+        '
+        'ucrInputConstant
+        '
+        Me.ucrInputConstant.AddQuotesIfUnrecognised = True
+        Me.ucrInputConstant.IsMultiline = False
+        Me.ucrInputConstant.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputConstant, "ucrInputConstant")
+        Me.ucrInputConstant.Name = "ucrInputConstant"
+        '
+        'ucrPnlStartEnd
+        '
+        resources.ApplyResources(Me.ucrPnlStartEnd, "ucrPnlStartEnd")
+        Me.ucrPnlStartEnd.Name = "ucrPnlStartEnd"
         '
         'ucrSaveNewColumn
         '
         resources.ApplyResources(Me.ucrSaveNewColumn, "ucrSaveNewColumn")
         Me.ucrSaveNewColumn.Name = "ucrSaveNewColumn"
+        '
+        'ucrInputComboFunction
+        '
+        Me.ucrInputComboFunction.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboFunction.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboFunction, "ucrInputComboFunction")
+        Me.ucrInputComboFunction.Name = "ucrInputComboFunction"
         '
         'ucrReceiverElement
         '
@@ -170,11 +238,20 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'ucrPnlMethods
+        '
+        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
+        Me.ucrPnlMethods.Name = "ucrPnlMethods"
+        '
         'dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkCopyFromAbove)
+        Me.Controls.Add(Me.grpStartEnd)
+        Me.Controls.Add(Me.lblFunction)
         Me.Controls.Add(Me.ucrSaveNewColumn)
+        Me.Controls.Add(Me.ucrInputComboFunction)
         Me.Controls.Add(Me.rdoNeighbouring)
         Me.Controls.Add(Me.rdoMultiple)
         Me.Controls.Add(Me.rdoSingle)
@@ -190,6 +267,8 @@ Partial Class dlgInfillMissingValues
         Me.Name = "dlgInfillMissingValues"
         Me.grpMethods.ResumeLayout(False)
         Me.grpMethods.PerformLayout()
+        Me.grpStartEnd.ResumeLayout(False)
+        Me.grpStartEnd.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -212,4 +291,13 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrPnlMethods As UcrPanel
     Friend WithEvents grpMethods As GroupBox
     Friend WithEvents ucrSaveNewColumn As ucrSave
+    Friend WithEvents grpStartEnd As GroupBox
+    Friend WithEvents rdoExtendFill As RadioButton
+    Friend WithEvents rdoLeaveAsMissing As RadioButton
+    Friend WithEvents ucrPnlStartEnd As UcrPanel
+    Friend WithEvents ucrInputComboFunction As ucrInputComboBox
+    Friend WithEvents lblFunction As Label
+    Friend WithEvents ucrChkCopyFromAbove As ucrCheck
+    Friend WithEvents rdoInsertConstant As RadioButton
+    Friend WithEvents ucrInputConstant As ucrInputTextBox
 End Class
