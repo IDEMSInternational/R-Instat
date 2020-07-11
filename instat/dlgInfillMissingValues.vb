@@ -84,10 +84,24 @@ Public Class dlgInfillMissingValues
         ucrChkCopyFromAbove.SetText("Copy from Above")
         ucrChkCopyFromAbove.SetRDefault("FALSE")
 
+        ucrChkBy.SetText("By:")
+        ucrChkBy.AddParameterPresentCondition(True, "by")
+        ucrChkBy.AddParameterPresentCondition(False, "by", False)
+
+        ucrReceiverByFactor.SetParameter(New RParameter("by", 1))
+        ucrReceiverByFactor.Selector = ucrSelectorInfillMissing
+        ucrReceiverByFactor.SetParameterIsRFunction()
+        ucrReceiverByFactor.SetIncludedDataTypes({"factor", "character"}, bStrict:=True)
+        ucrReceiverByFactor.strSelectorHeading = "Factors"
+        ucrReceiverByFactor.SetClimaticType("month")
+        ucrReceiverByFactor.bAutoFill = True
+
         ucrPnlStartEnd.AddToLinkedControls(ucrInputConstant, {rdoInsertConstant}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlMethods.AddToLinkedControls(ucrInputComboFunction, {rdoNaAggregate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrPnlStartEnd, {rdoNaFill}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrChkCopyFromAbove, {rdoNaLocf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMethods.AddToLinkedControls(ucrChkBy, {rdoNaAggregate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBy.AddToLinkedControls(ucrReceiverByFactor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboFunction.SetLinkedDisplayControl(lblFunction)
         ucrPnlStartEnd.SetLinkedDisplayControl(grpStartEnd)
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorInfillMissing.ucrAvailableDataFrames)
@@ -147,11 +161,13 @@ Public Class dlgInfillMissingValues
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsZooRegFunction, New RParameter("data", 0), iAdditionalPairNo:=5)
 
         ucrReceiverElement.SetRCode(clsApproximateFunction, bReset)
+        ucrReceiverByFactor.SetRCode(clsAggregateFunction, bReset)
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlMethods.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputComboFunction.SetRCode(clsAggregateFunction, bReset)
         ucrChkCopyFromAbove.SetRCode(clsNaLocfFunction, bReset)
         ucrPnlStartEnd.SetRCode(clsNaFillFunction, bReset)
+        ucrChkBy.SetRCode(clsAggregateFunction, bReset)
 
         ucrSaveNewColumn.AddAdditionalRCode(clsAggregateFunction, iAdditionalPairNo:=1)
         ucrSaveNewColumn.AddAdditionalRCode(clsSplineFunction, iAdditionalPairNo:=2)
@@ -187,6 +203,14 @@ Public Class dlgInfillMissingValues
     Private Sub ucrPnlStartEnd_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStartEnd.ControlValueChanged, ucrInputConstant.ControlValueChanged
         If rdoInsertConstant.Checked Then
             clsNaFillFunction.AddParameter("fill", ucrInputConstant.GetText(), iPosition:=1)
+        End If
+    End Sub
+
+    Private Sub ucrChkBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBy.ControlValueChanged
+        If ucrChkBy.Checked Then
+            ucrReceiverByFactor.SetMeAsReceiver()
+        Else
+            ucrReceiverElement.SetMeAsReceiver()
         End If
     End Sub
 
