@@ -89,8 +89,8 @@ Public Class dlgCumulativeDistribution
         ucrVariablesAsFactorforCumDist.bWithQuotes = False
 
         ucrInputComboScales.SetParameter(New RParameter("labels"))
-        dctScalesPairs.Add("proportion", "scales::comma")
-        dctScalesPairs.Add("percent", "scales::percent")
+        dctScalesPairs.Add("Proportion", "scales::comma")
+        dctScalesPairs.Add("Percent", "scales::percent")
         ucrInputComboScales.SetItems(dctScalesPairs)
         ucrInputComboScales.SetDropDownStyleAsNonEditable()
         ucrInputComboScales.SetRDefault("scales::comma")
@@ -113,12 +113,12 @@ Public Class dlgCumulativeDistribution
         'ucrInputComboPad.SetDropDownStyleAsNonEditable()
         'ucrInputComboPad.SetRDefault("TRUE")
 
-        ucrSaveCumDist.SetPrefix("cumulative_dist")
         ucrSaveCumDist.SetSaveTypeAsGraph()
-        ucrSaveCumDist.SetIsComboBox()
-        ucrSaveCumDist.SetCheckBoxText("Save Graph")
-        ucrSaveCumDist.SetAssignToIfUncheckedValue("last_graph")
         ucrSaveCumDist.SetDataFrameSelector(ucrCumDistSelector.ucrAvailableDataFrames)
+        ucrSaveCumDist.SetCheckBoxText("Save Graph")
+        ucrSaveCumDist.SetIsComboBox()
+        ucrSaveCumDist.SetPrefix("cumulative_dist")
+        ucrSaveCumDist.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
