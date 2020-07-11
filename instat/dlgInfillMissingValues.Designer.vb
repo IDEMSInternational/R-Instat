@@ -49,6 +49,8 @@ Partial Class dlgInfillMissingValues
         Me.ucrSelectorInfillMissing = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrPnlMethods = New instat.UcrPanel()
+        Me.ucrChkBy = New instat.ucrCheck()
+        Me.ucrReceiverByFactor = New instat.ucrReceiverSingle()
         Me.grpMethods.SuspendLayout()
         Me.grpStartEnd.SuspendLayout()
         Me.SuspendLayout()
@@ -243,10 +245,27 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
         Me.ucrPnlMethods.Name = "ucrPnlMethods"
         '
+        'ucrChkBy
+        '
+        Me.ucrChkBy.Checked = False
+        resources.ApplyResources(Me.ucrChkBy, "ucrChkBy")
+        Me.ucrChkBy.Name = "ucrChkBy"
+        '
+        'ucrReceiverByFactor
+        '
+        Me.ucrReceiverByFactor.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverByFactor, "ucrReceiverByFactor")
+        Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
+        Me.ucrReceiverByFactor.Selector = Nothing
+        Me.ucrReceiverByFactor.strNcFilePath = ""
+        Me.ucrReceiverByFactor.ucrSelector = Nothing
+        '
         'dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverByFactor)
+        Me.Controls.Add(Me.ucrChkBy)
         Me.Controls.Add(Me.ucrChkCopyFromAbove)
         Me.Controls.Add(Me.grpStartEnd)
         Me.Controls.Add(Me.lblFunction)
@@ -300,4 +319,6 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrChkCopyFromAbove As ucrCheck
     Friend WithEvents rdoInsertConstant As RadioButton
     Friend WithEvents ucrInputConstant As ucrInputTextBox
+    Friend WithEvents ucrChkBy As ucrCheck
+    Friend WithEvents ucrReceiverByFactor As ucrReceiverSingle
 End Class
