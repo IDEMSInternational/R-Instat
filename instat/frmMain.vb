@@ -2150,4 +2150,12 @@ Public Class frmMain
     Private Sub mnuClimaticCheckDataFillMissingValues_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataFillMissingValues.Click
         dlgInfillMissingValues.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticTidyandExamineVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineVisualiseData.Click
+        dlgVisualizeData.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataVisualiseData.Click
+        dlgVisualizeData.ShowDialog()
+    End Sub
 End Class
