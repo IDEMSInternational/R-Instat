@@ -178,7 +178,7 @@ Partial Class dlgVisualizeData
         Me.MinimizeBox = False
         Me.Name = "dlgVisualizeData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Visualize Data"
+        Me.Text = "Visualise Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
