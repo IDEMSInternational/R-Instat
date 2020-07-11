@@ -39,6 +39,10 @@ Partial Class dlgInfillMissingValues
         Me.rdoExtendFill = New System.Windows.Forms.RadioButton()
         Me.rdoLeaveAsMissing = New System.Windows.Forms.RadioButton()
         Me.lblFunction = New System.Windows.Forms.Label()
+        Me.ucrNudMaximum = New instat.ucrNud()
+        Me.ucrChkMaxGap = New instat.ucrCheck()
+        Me.ucrReceiverByFactor = New instat.ucrReceiverSingle()
+        Me.ucrChkBy = New instat.ucrCheck()
         Me.ucrChkCopyFromAbove = New instat.ucrCheck()
         Me.ucrInputConstant = New instat.ucrInputTextBox()
         Me.ucrPnlStartEnd = New instat.UcrPanel()
@@ -49,8 +53,6 @@ Partial Class dlgInfillMissingValues
         Me.ucrSelectorInfillMissing = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrPnlMethods = New instat.UcrPanel()
-        Me.ucrChkBy = New instat.ucrCheck()
-        Me.ucrReceiverByFactor = New instat.ucrReceiverSingle()
         Me.grpMethods.SuspendLayout()
         Me.grpStartEnd.SuspendLayout()
         Me.SuspendLayout()
@@ -182,6 +184,37 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.lblFunction, "lblFunction")
         Me.lblFunction.Name = "lblFunction"
         '
+        'ucrNudMaximum
+        '
+        Me.ucrNudMaximum.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaximum.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMaximum, "ucrNudMaximum")
+        Me.ucrNudMaximum.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaximum.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaximum.Name = "ucrNudMaximum"
+        Me.ucrNudMaximum.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkMaxGap
+        '
+        Me.ucrChkMaxGap.Checked = False
+        resources.ApplyResources(Me.ucrChkMaxGap, "ucrChkMaxGap")
+        Me.ucrChkMaxGap.Name = "ucrChkMaxGap"
+        '
+        'ucrReceiverByFactor
+        '
+        Me.ucrReceiverByFactor.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverByFactor, "ucrReceiverByFactor")
+        Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
+        Me.ucrReceiverByFactor.Selector = Nothing
+        Me.ucrReceiverByFactor.strNcFilePath = ""
+        Me.ucrReceiverByFactor.ucrSelector = Nothing
+        '
+        'ucrChkBy
+        '
+        Me.ucrChkBy.Checked = False
+        resources.ApplyResources(Me.ucrChkBy, "ucrChkBy")
+        Me.ucrChkBy.Name = "ucrChkBy"
+        '
         'ucrChkCopyFromAbove
         '
         Me.ucrChkCopyFromAbove.Checked = False
@@ -245,25 +278,12 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
         Me.ucrPnlMethods.Name = "ucrPnlMethods"
         '
-        'ucrChkBy
-        '
-        Me.ucrChkBy.Checked = False
-        resources.ApplyResources(Me.ucrChkBy, "ucrChkBy")
-        Me.ucrChkBy.Name = "ucrChkBy"
-        '
-        'ucrReceiverByFactor
-        '
-        Me.ucrReceiverByFactor.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverByFactor, "ucrReceiverByFactor")
-        Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
-        Me.ucrReceiverByFactor.Selector = Nothing
-        Me.ucrReceiverByFactor.strNcFilePath = ""
-        Me.ucrReceiverByFactor.ucrSelector = Nothing
-        '
         'dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrNudMaximum)
+        Me.Controls.Add(Me.ucrChkMaxGap)
         Me.Controls.Add(Me.ucrReceiverByFactor)
         Me.Controls.Add(Me.ucrChkBy)
         Me.Controls.Add(Me.ucrChkCopyFromAbove)
@@ -321,4 +341,6 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrInputConstant As ucrInputTextBox
     Friend WithEvents ucrChkBy As ucrCheck
     Friend WithEvents ucrReceiverByFactor As ucrReceiverSingle
+    Friend WithEvents ucrChkMaxGap As ucrCheck
+    Friend WithEvents ucrNudMaximum As ucrNud
 End Class
