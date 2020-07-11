@@ -88,6 +88,10 @@ Public Class dlgInfillMissingValues
         ucrChkBy.AddParameterPresentCondition(True, "by")
         ucrChkBy.AddParameterPresentCondition(False, "by", False)
 
+        ucrChkMaxGap.SetText("Max Gap")
+        ucrChkMaxGap.AddParameterPresentCondition(True, "maxgap")
+        ucrChkMaxGap.AddParameterPresentCondition(False, "maxgap", False)
+
         ucrReceiverByFactor.SetParameter(New RParameter("by", 1))
         ucrReceiverByFactor.Selector = ucrSelectorInfillMissing
         ucrReceiverByFactor.SetParameterIsRFunction()
@@ -96,12 +100,16 @@ Public Class dlgInfillMissingValues
         ucrReceiverByFactor.SetClimaticType("month")
         ucrReceiverByFactor.bAutoFill = True
 
+        ucrNudMaximum.SetParameter(New RParameter("maxgap", 5))
+        ucrNudMaximum.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
+
         ucrPnlStartEnd.AddToLinkedControls(ucrInputConstant, {rdoInsertConstant}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlMethods.AddToLinkedControls(ucrInputComboFunction, {rdoNaAggregate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrPnlStartEnd, {rdoNaFill}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrChkCopyFromAbove, {rdoNaLocf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrChkBy, {rdoNaAggregate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkBy.AddToLinkedControls(ucrReceiverByFactor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkMaxGap.AddToLinkedControls(ucrNudMaximum, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrInputComboFunction.SetLinkedDisplayControl(lblFunction)
         ucrPnlStartEnd.SetLinkedDisplayControl(grpStartEnd)
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorInfillMissing.ucrAvailableDataFrames)
@@ -160,6 +168,12 @@ Public Class dlgInfillMissingValues
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsNaFillFunction, ucrReceiverElement.GetParameter(), iAdditionalPairNo:=4)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsZooRegFunction, New RParameter("data", 0), iAdditionalPairNo:=5)
 
+        ucrNudMaximum.AddAdditionalCodeParameterPair(clsAggregateFunction, ucrNudMaximum.GetParameter(), iAdditionalPairNo:=1)
+        ucrNudMaximum.AddAdditionalCodeParameterPair(clsSplineFunction, ucrNudMaximum.GetParameter(), iAdditionalPairNo:=2)
+        ucrNudMaximum.AddAdditionalCodeParameterPair(clsNaLocfFunction, ucrNudMaximum.GetParameter(), iAdditionalPairNo:=3)
+        ucrNudMaximum.AddAdditionalCodeParameterPair(clsNaFillFunction, ucrNudMaximum.GetParameter(), iAdditionalPairNo:=4)
+        ucrNudMaximum.AddAdditionalCodeParameterPair(clsStructTSFunction, ucrNudMaximum.GetParameter(), iAdditionalPairNo:=5)
+
         ucrReceiverElement.SetRCode(clsApproximateFunction, bReset)
         ucrReceiverByFactor.SetRCode(clsAggregateFunction, bReset)
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -168,6 +182,8 @@ Public Class dlgInfillMissingValues
         ucrChkCopyFromAbove.SetRCode(clsNaLocfFunction, bReset)
         ucrPnlStartEnd.SetRCode(clsNaFillFunction, bReset)
         ucrChkBy.SetRCode(clsAggregateFunction, bReset)
+        ucrNudMaximum.SetRCode(clsApproximateFunction, bReset)
+        ucrChkMaxGap.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrSaveNewColumn.AddAdditionalRCode(clsAggregateFunction, iAdditionalPairNo:=1)
         ucrSaveNewColumn.AddAdditionalRCode(clsSplineFunction, iAdditionalPairNo:=2)
