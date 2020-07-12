@@ -39,6 +39,7 @@ Partial Class dlgInfillMissingValues
         Me.rdoExtendFill = New System.Windows.Forms.RadioButton()
         Me.rdoLeaveAsMissing = New System.Windows.Forms.RadioButton()
         Me.lblFunction = New System.Windows.Forms.Label()
+        Me.lblRows = New System.Windows.Forms.Label()
         Me.ucrNudMaximum = New instat.ucrNud()
         Me.ucrChkMaxGap = New instat.ucrCheck()
         Me.ucrReceiverByFactor = New instat.ucrReceiverSingle()
@@ -184,6 +185,11 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.lblFunction, "lblFunction")
         Me.lblFunction.Name = "lblFunction"
         '
+        'lblRows
+        '
+        resources.ApplyResources(Me.lblRows, "lblRows")
+        Me.lblRows.Name = "lblRows"
+        '
         'ucrNudMaximum
         '
         Me.ucrNudMaximum.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -282,6 +288,7 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblRows)
         Me.Controls.Add(Me.ucrNudMaximum)
         Me.Controls.Add(Me.ucrChkMaxGap)
         Me.Controls.Add(Me.ucrReceiverByFactor)
@@ -343,4 +350,5 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrReceiverByFactor As ucrReceiverSingle
     Friend WithEvents ucrChkMaxGap As ucrCheck
     Friend WithEvents ucrNudMaximum As ucrNud
+    Friend WithEvents lblRows As Label
 End Class

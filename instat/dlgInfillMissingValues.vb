@@ -88,7 +88,7 @@ Public Class dlgInfillMissingValues
         ucrChkBy.AddParameterPresentCondition(True, "by")
         ucrChkBy.AddParameterPresentCondition(False, "by", False)
 
-        ucrChkMaxGap.SetText("Max Gap")
+        ucrChkMaxGap.SetText("Max Gap:")
         ucrChkMaxGap.AddParameterPresentCondition(True, "maxgap")
         ucrChkMaxGap.AddParameterPresentCondition(False, "maxgap", False)
 
@@ -112,6 +112,7 @@ Public Class dlgInfillMissingValues
         ucrChkMaxGap.AddToLinkedControls(ucrNudMaximum, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrInputComboFunction.SetLinkedDisplayControl(lblFunction)
         ucrPnlStartEnd.SetLinkedDisplayControl(grpStartEnd)
+        ucrNudMaximum.SetLinkedDisplayControl(lblRows)
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorInfillMissing.ucrAvailableDataFrames)
         ucrSaveNewColumn.SetSaveTypeAsColumn()
         ucrSaveNewColumn.SetIsComboBox()
@@ -194,24 +195,24 @@ Public Class dlgInfillMissingValues
         ucrSaveNewColumn.SetRCode(clsApproximateFunction, bReset)
     End Sub
 
-    Private Sub ucrPnlMethods_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethods.ControlValueChanged
+    Private Sub ucrPnlMethods_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethods.ControlValueChanged, ucrReceiverElement.ControlValueChanged
         If rdoNaApproximate.Checked Then
-            ucrSaveNewColumn.SetPrefix("Int")
+            ucrSaveNewColumn.SetPrefix("Int_" & ucrReceiverElement.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsApproximateFunction)
         ElseIf rdoNaAggregate.Checked Then
-            ucrSaveNewColumn.SetPrefix("Ave")
+            ucrSaveNewColumn.SetPrefix("Ave_" & ucrReceiverElement.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsAggregateFunction)
         ElseIf rdoNaFill.Checked Then
-            ucrSaveNewColumn.SetPrefix("Con")
+            ucrSaveNewColumn.SetPrefix("Con_" & ucrReceiverElement.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsNaFillFunction)
         ElseIf rdoNaStructTS.Checked Then
-            ucrSaveNewColumn.SetPrefix("Str")
+            ucrSaveNewColumn.SetPrefix("Str_" & ucrReceiverElement.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsStructTSFunction)
         ElseIf rdoNaSpline.Checked Then
-            ucrSaveNewColumn.SetPrefix("Spl")
+            ucrSaveNewColumn.SetPrefix("Spl_" & ucrReceiverElement.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsSplineFunction)
         ElseIf rdoNaLocf.Checked Then
-            ucrSaveNewColumn.SetPrefix("Cop")
+            ucrSaveNewColumn.SetPrefix("Cop_" & ucrReceiverElement.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsNaLocfFunction)
         End If
     End Sub
