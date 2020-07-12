@@ -451,7 +451,7 @@
     <value>6</value>
   </data>
   <data name="grpMethods.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 264</value>
+    <value>12, 264</value>
   </data>
   <data name="grpMethods.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 99</value>
@@ -643,7 +643,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 373</value>
+    <value>167, 377</value>
   </data>
   <data name="lblFunction.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
@@ -667,7 +667,7 @@
     <value>6</value>
   </data>
   <data name="ucrNudMaximum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 369</value>
+    <value>111, 374</value>
   </data>
   <data name="ucrNudMaximum.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -688,7 +688,7 @@
     <value>0</value>
   </data>
   <data name="ucrChkMaxGap.Location" type="System.Drawing.Point, System.Drawing">
-    <value>127, 369</value>
+    <value>12, 374</value>
   </data>
   <data name="ucrChkMaxGap.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 20</value>
@@ -739,7 +739,7 @@
     <value>3</value>
   </data>
   <data name="ucrChkCopyFromAbove.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 370</value>
+    <value>167, 374</value>
   </data>
   <data name="ucrChkCopyFromAbove.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 20</value>
@@ -760,7 +760,7 @@
     <value>4</value>
   </data>
   <data name="ucrSaveNewColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 402</value>
+    <value>12, 402</value>
   </data>
   <data name="ucrSaveNewColumn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -784,7 +784,7 @@
     <value>7</value>
   </data>
   <data name="ucrInputComboFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 369</value>
+    <value>221, 373</value>
   </data>
   <data name="ucrInputComboFunction.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 21</value>
@@ -829,7 +829,7 @@
     <value>13</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 430</value>
+    <value>12, 430</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -850,7 +850,7 @@
     <value>14</value>
   </data>
   <data name="ucrSelectorInfillMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 75</value>
+    <value>12, 75</value>
   </data>
   <data name="ucrSelectorInfillMissing.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -893,9 +893,6 @@
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
     <value>16</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
