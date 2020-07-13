@@ -399,10 +399,14 @@ Public Class dlgDisplayDailyData
         StackingFunction()
         FacetControl()
     End Sub
-
+    '''--------------------------------------------------------------------------------------------
     ''' <summary> 
-    ''' This functions Manually takes all the columns in the multiple receiver, excluding date and station columns ,and stacks them 
+    ''' If the Graph radio button is checked, takes all the columns in the multiple receiver, 
+    ''' excluding date and station columns, and stacks them.
+    ''' If the radio button is unchecked, unstacks the columns in the multiple receiver.
+    ''' If the multiple receiver is empty then this subroutine does nothing.
     ''' </summary>
+    '''--------------------------------------------------------------------------------------------
     Private Sub StackingFunction()
         If Not ucrReceiverMultipleElements.IsEmpty Then
             If rdoGraph.Checked Then
@@ -417,10 +421,13 @@ Public Class dlgDisplayDailyData
         End If
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
     ''' <summary> 
-    ''' This functions add the rows,facets and space parameters to the facet function  when the Graph radio button 
-    ''' is checked else it removes this parameters
+    ''' If the Graph radio button is checked, adds the rows, facets and space parameters to the 
+    ''' facet function.
+    ''' If the radio button is unchecked, it removes these parameters.
     ''' </summary>
+    '''--------------------------------------------------------------------------------------------
     Private Sub FacetControl()
         If rdoGraph.Checked AndAlso Not ucrReceiverStations.IsEmpty Then
             clsFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), bIncludeArgumentName:=False, iPosition:=1)
