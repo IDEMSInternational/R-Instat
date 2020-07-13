@@ -14,17 +14,28 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
-
+Imports RDotNet
 Public Class dlgTwoVariableFitModel
     Public bFirstLoad As Boolean = True
     Public clsModel, clsRGraphicsOperator, clsFunctionOperation, clsPoissonOperation, clsPoissonOperation2, clsRBinomialOperation, clsRBinomialOperation2, clsRBinomialOperation3 As New ROperator
     Public clsRPoisson, clsVisReg, clsRLeverage, clsRWriteLeverage, clsRResiduals, clsRStdResiduals, clsRWriteResiduals, clsRWriteStdResiduals, clsRgeom_point, clsRWriteFitted, clsRFittedValues, clsRestpvalFunction, clsRaovpvalFunction, clsRModelFunction, clsRaovFunction, clsRTTest, clsRFTest, clsRKruskalTest, clsRBinomial, clsRWilcoxTest, clsFamilyFunction, clsRFactor, clsRFactor2, clsRNumeric, clsxFunc, clsRMean, clsRMean2, clsRGroup, clsRGroup2, clsTFunc, clsRLength As New RFunction
-    Private clsTransformFunction As RFunction
+    Private clsTransformFunction As New RFunction
 
+    Public clsBrokenStickFirstOperator, clsBrokenStickSecondOperator, clsBrokenStickThirdOperator, clsBrokenStickGeneralOperator As New ROperator
+    Public clsBrokenStickSecondOperFunction, clsBrokenStickIFunc As New RFunction
+    Public clsSplineFunc As New RFunction
     'General case codes
-    Public clsFormulaOperator, clsPowerOperator As ROperator
-    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
+    Public clsFormulaOperator As New ROperator
+    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric, clsPolynomialFunc As New RFunction
+    Public clsMonthFunc, clsYearFunc, clsAsFactorFunc As New RFunction
+
+
+
+    Private clsAttach As New RFunction
+    Private clsDetach As New RFunction
+
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
@@ -41,6 +52,8 @@ Public Class dlgTwoVariableFitModel
     Public bResetFirstFunction As Boolean = False
 
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
+
+    Public StrMedianValue As String = ""
 
     Private Sub dlgTwoVariableFitModel_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -60,6 +73,8 @@ Public Class dlgTwoVariableFitModel
     Private Sub InitialiseDialog()
         'temp disabled until implemented
         rdoTwoSample.Enabled = False
+
+        cmdExplanatoryFunction.Enabled = False
 
         ucrBase.iHelpTopicID = 366
         ucrBase.clsRsyntax.iCallType = 2
@@ -129,13 +144,16 @@ Public Class dlgTwoVariableFitModel
 
         ucrPnlMeansAndVariance.SetLinkedDisplayControl(grpParameters)
         ucrPnlMeansAndVariance.AddToLinkedControls(ucrNudHypothesis, {rdoCompareVariance}, bNewLinkedDisabledIfParameterMissing:=True)
+
+        ucrTryModelling.SetReceiver(ucrNewInputTextBox:=ucrModelPreview)
+        ucrTryModelling.SetIsModel()
     End Sub
 
     Private Sub SetDefaults()
         clsFormulaOperator = New ROperator
         clsPoissonOperation = New ROperator
         clsRGraphicsOperator = New ROperator
-        clsPowerOperator = New ROperator
+        clsPolynomialFunc = New RFunction
         clsLM = New RFunction
         clsGLM = New RFunction
         clsAsNumeric = New RFunction
@@ -169,6 +187,16 @@ Public Class dlgTwoVariableFitModel
         clsHatvaluesFunction = New RFunction
         clsResidualFunction = New RFunction
         clsFittedValuesFunction = New RFunction
+        clsBrokenStickFirstOperator = New ROperator
+        clsBrokenStickSecondOperator = New ROperator
+        clsBrokenStickThirdOperator = New ROperator
+        clsBrokenStickGeneralOperator = New ROperator
+        clsBrokenStickIFunc = New RFunction
+        clsSplineFunc = New RFunction
+        clsMonthFunc = New RFunction
+        clsYearFunc = New RFunction
+        clsAsFactorFunc = New RFunction
+        clsBrokenStickSecondOperFunction = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -189,9 +217,7 @@ Public Class dlgTwoVariableFitModel
         clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
         clsGLM.AddParameter("na.action", "na.exclude", iPosition:=4)
 
-        clsPowerOperator.SetOperation("^")
-        clsPowerOperator.AddParameter("power", 2, iPosition:=1)
-        clsPowerOperator.bBrackets = False
+        clsPolynomialFunc.SetRCommand("poly")
 
         'Residual Plots
         dctPlotFunctions = New Dictionary(Of String, RFunction)(clsRegressionDefaults.dctModelPlotFunctions)
@@ -293,9 +319,49 @@ Public Class dlgTwoVariableFitModel
 
         clsHatvaluesFunction.SetRCommand("hatvalues")
 
+        'Broken stick
+        clsBrokenStickSecondOperFunction.SetRCommand("*")
+        clsBrokenStickSecondOperFunction.AddParameter("brokenOp", clsROperatorParameter:=clsBrokenStickSecondOperator, bIncludeArgumentName:=False)
+
+        clsBrokenStickFirstOperator.SetOperation("-")
+
+        clsBrokenStickSecondOperator.SetOperation(">", bBracketsTemp:=False)
+
+        clsBrokenStickThirdOperator.SetOperation("", bBracketsTemp:=False)
+        clsBrokenStickThirdOperator.bSpaceAroundOperation = False
+        clsBrokenStickThirdOperator.AddParameter("first", clsROperatorParameter:=clsBrokenStickFirstOperator, bIncludeArgumentName:=False, iPosition:=0)
+        clsBrokenStickThirdOperator.AddParameter("second", clsRFunctionParameter:=clsBrokenStickSecondOperFunction, bIncludeArgumentName:=False, iPosition:=1)
+
+        clsBrokenStickIFunc.SetRCommand("I")
+        clsBrokenStickIFunc.AddParameter(clsROperatorParameter:=clsBrokenStickThirdOperator)
+
+        clsBrokenStickGeneralOperator.SetOperation("+")
+        clsBrokenStickGeneralOperator.AddParameter(clsRFunctionParameter:=clsBrokenStickIFunc, iPosition:=1)
+
+        clsSplineFunc.SetPackageName("splines")
+        clsSplineFunc.SetRCommand("bs")
+
+        clsAsFactorFunc.SetRCommand("as.factor")
+
+        clsMonthFunc.SetPackageName("lubridate")
+        clsMonthFunc.SetRCommand("month")
+
+        clsYearFunc.SetRCommand("year")
+        clsYearFunc.SetPackageName("lubridate")
+
+        clsAttach.SetRCommand("attach")
+        clsDetach.SetRCommand("detach")
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("unload", "TRUE")
+
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
+
+        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
 
         bResetSubDialog = True
         bResetOptionsSubDialog = True
@@ -317,6 +383,13 @@ Public Class dlgTwoVariableFitModel
 
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
 
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickGeneralOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickFirstOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickSecondOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsSplineFunc, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=4)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsPolynomialFunc, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=5)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsMonthFunc, New RParameter("month", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=6)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsYearFunc, New RParameter("year", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
         '###################################################
 
         'Two sample controls
@@ -380,7 +453,7 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub cmdExplanatoryFunction_Click(sender As Object, e As EventArgs) Handles cmdExplanatoryFunction.Click
-        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPowerOperator:=clsPowerOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), bReset:=bResetFirstFunction)
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPolynomialFunc:=clsPolynomialFunc, clsNewBrokenStickFirstOperator:=clsBrokenStickFirstOperator, clsNewBrokenStickSecondOperator:=clsBrokenStickSecondOperator, clsNewBrokenStickGeneralOperator:=clsBrokenStickGeneralOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), clsNewSplineFunc:=clsSplineFunc, clsNewYearFunc:=clsYearFunc, clsNewMonthFunc:=clsMonthFunc, clsNewAsFactorFunc:=clsAsFactorFunc, strNewMedianValue:=StrMedianValue, strNewCurDataType:=ucrReceiverExplanatory.strCurrDataType, bReset:=bResetFirstFunction)
         sdgVariableTransformations.ShowDialog()
         bResetFirstFunction = False
         UpdatePreview()
@@ -404,9 +477,6 @@ Public Class dlgTwoVariableFitModel
             If ucrReceiverExplanatory.strCurrDataType = "integer" OrElse ucrReceiverExplanatory.strCurrDataType = "numeric" OrElse ucrReceiverResponse.strCurrDataType = "positive integer" Then
                 ucrReceiverExplanatory.Clear()
             End If
-        ElseIf rdoGeneralCase.Checked Then
-            ucrReceiverResponse.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
-            ucrReceiverExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
         End If
     End Sub
 
@@ -725,7 +795,8 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub FirstExplanatoryFunctionEnabled()
-        If Not ucrReceiverExplanatory.IsEmpty AndAlso {"numeric", "integer"}.Contains(ucrReceiverExplanatory.strCurrDataType) Then
+        If Not ucrReceiverExplanatory.IsEmpty AndAlso {"numeric", "integer", "Date"}.Contains(ucrReceiverExplanatory.strCurrDataType) Then
+            GetColumnMedian()
             cmdExplanatoryFunction.Enabled = True
         Else
             cmdExplanatoryFunction.Enabled = False
@@ -806,6 +877,33 @@ Public Class dlgTwoVariableFitModel
         '        End If
         'End If
         '  End If
+    End Sub
+
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>  Finds the median of the X variable from the main dialogue and sets the
+    '''            broken stick textbox to this value
+    '''             </summary>
+    '''--------------------------------------------------------------------------------------------
+    Private Sub GetColumnMedian()
+        Dim expColumn As SymbolicExpression
+        Dim clsGetColumnMedianFunc As New RFunction
+        Dim clsGetVariablesFunc As New RFunction
+
+        clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetVariablesFunc.AddParameter("data_name", Chr(34) & ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+        clsGetVariablesFunc.AddParameter("col_names", Chr(34) & ucrReceiverExplanatory.GetVariableNames(False) & Chr(34), iPosition:=1)
+
+
+        clsGetColumnMedianFunc.SetRCommand("summary_median")
+        clsGetColumnMedianFunc.AddParameter("x", clsRFunctionParameter:=clsGetVariablesFunc, iPosition:=0)
+        clsGetColumnMedianFunc.AddParameter("na.rm", "TRUE", iPosition:=1)
+
+
+        expColumn = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnMedianFunc.ToScript(), bSilent:=False)
+        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
+            StrMedianValue = expColumn.AsCharacter(0)
+        End If
     End Sub
 
     Public Sub SetEnableDists()

@@ -124,8 +124,7 @@ Public Class dlgPICSARainfall
         ucrVariablesAsFactorForPicsa.SetParameter(New RParameter("x", 0))
         ucrVariablesAsFactorForPicsa.SetFactorReceiver(ucrReceiverColourBy)
         ucrVariablesAsFactorForPicsa.Selector = ucrSelectorPICSARainfall
-        ucrVariablesAsFactorForPicsa.SetIncludedDataTypes({"numeric"})
-        ucrVariablesAsFactorForPicsa.SetExcludedDataTypes({"Date"})
+        ucrVariablesAsFactorForPicsa.SetIncludedDataTypes({"numeric"}, True)
         ucrVariablesAsFactorForPicsa.SetSelectorHeading("Numerics")
         ucrVariablesAsFactorForPicsa.SetParameterIsString()
         ucrVariablesAsFactorForPicsa.bWithQuotes = False

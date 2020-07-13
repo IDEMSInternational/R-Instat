@@ -1767,10 +1767,6 @@ Public Class frmMain
         dlgParallelCoordinatePlot.ShowDialog()
     End Sub
 
-    Private Sub mnuModelHypothesisTests_Click(sender As Object, e As EventArgs) Handles mnuModelHypothesisTests.Click
-        dlgHypothesisTestsCalculator.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareColumnGenerateDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateGenerateDate.Click
         dlgRegularSequence.bNumericIsDefault = False
         dlgRegularSequence.ShowDialog()
@@ -1863,10 +1859,6 @@ Public Class frmMain
 
     Private Sub mnuClimaticPrepareLengthOfSeason_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareLengthOfSeason.Click
         dlgClimaticLengthOfSeason.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticPrepareCompare_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareCompare.Click
-        dlgCompare.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareCheckDataAnonymiseIDColumn_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataAnonymiseIDColumn.Click
@@ -1970,10 +1962,6 @@ Public Class frmMain
 
     Private Sub mnuClimaticTidyandExamineDuplicates_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineDuplicates.Click
         dlgDuplicates.ShowDialog()
-    End Sub
-
-    Private Sub UseModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelUseModel.Click
-        dlgUseModel.ShowDialog()
     End Sub
 
     Private Sub mnuCumExeedenceGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSACumExeedenceGraph.Click
@@ -2133,5 +2121,41 @@ Public Class frmMain
 
     Private Sub DisplayTopNToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayTopNToolStripMenuItem.Click
         dlgDisplayTopN.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelFitModelHypothesisTestsKeyboard_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelHypothesisTestsKeyboard.Click
+        dlgHypothesisTestsCalculator.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCheckDataHomogenization_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataHomogenization.Click
+        dlgHomogenization.ShowDialog() 'partially working now
+    End Sub
+
+    Private Sub mnuClimaticPrepareCompareCalculation_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareCompareCalculation.Click
+        dlgCompare.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareCompareSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareCompareSummary.Click
+        dlgCompareSummary.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularDefine_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularDefine.Click
+        dlgCircular.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareCompareTaylor_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareCompareTaylor.Click
+        dlgTaylorDiagram.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCheckDataFillMissingValues_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataFillMissingValues.Click
+        dlgInfillMissingValues.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticTidyandExamineVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineVisualiseData.Click
+        dlgVisualizeData.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataVisualiseData.Click
+        dlgVisualizeData.ShowDialog()
     End Sub
 End Class

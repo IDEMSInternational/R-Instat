@@ -52,6 +52,7 @@ Partial Class dlgHideShowColumns
         '
         'ucrSelectorForHiddenColumns
         '
+        Me.ucrSelectorForHiddenColumns.bDropUnusedFilterLevels = False
         Me.ucrSelectorForHiddenColumns.bShowHiddenColumns = False
         Me.ucrSelectorForHiddenColumns.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForHiddenColumns, "ucrSelectorForHiddenColumns")

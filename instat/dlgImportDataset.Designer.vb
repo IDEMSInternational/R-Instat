@@ -51,18 +51,51 @@ Partial Class dlgImportDataset
         Me.lblLinesToSkipCSV = New System.Windows.Forms.Label()
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.grpCSV = New System.Windows.Forms.GroupBox()
+        Me.ucrNudMaxRowsCSV = New instat.ucrNud()
+        Me.ucrChkMaxRowsCSV = New instat.ucrCheck()
         Me.lblNAStringsCSV = New System.Windows.Forms.Label()
+        Me.ucrChkStringsAsFactorsCSV = New instat.ucrCheck()
+        Me.ucrNudRowsToSkipCSV = New instat.ucrNud()
+        Me.ucrInputHeadersCSV = New instat.ucrInputComboBox()
+        Me.ucrInputMissingValueStringCSV = New instat.ucrInputTextBox()
+        Me.ucrInputDecimalCSV = New instat.ucrInputComboBox()
+        Me.ucrInputSeparatorCSV = New instat.ucrInputComboBox()
+        Me.ucrInputEncodingCSV = New instat.ucrInputComboBox()
         Me.grpExcel = New System.Windows.Forms.GroupBox()
+        Me.lblTo = New System.Windows.Forms.Label()
+        Me.ucrChkRange = New instat.ucrCheck()
+        Me.lblFrom = New System.Windows.Forms.Label()
+        Me.ucrInputTextTo = New instat.ucrInputTextBox()
+        Me.ucrInputTextFrom = New instat.ucrInputTextBox()
+        Me.ucrNudMaxRowsExcel = New instat.ucrNud()
+        Me.ucrChkColumnNamesExcel = New instat.ucrCheck()
+        Me.ucrChkMaxRowsExcel = New instat.ucrCheck()
+        Me.ucrChkTrimWSExcel = New instat.ucrCheck()
+        Me.ucrNudRowsToSkipExcel = New instat.ucrNud()
         Me.lblMissingValueStringExcel = New System.Windows.Forms.Label()
+        Me.ucrInputMissingValueStringExcel = New instat.ucrInputTextBox()
+        Me.ucrInputNamedRegions = New instat.ucrInputComboBox()
         Me.lblNamedRegion = New System.Windows.Forms.Label()
         Me.lblRowToSkipExcel = New System.Windows.Forms.Label()
         Me.grpRDS = New System.Windows.Forms.GroupBox()
+        Me.ucrChkOverwriteRDS = New instat.ucrCheck()
+        Me.ucrChkImportObjectsRDS = New instat.ucrCheck()
+        Me.ucrChkImportCalculationsRDS = New instat.ucrCheck()
+        Me.ucrChkImportChangesLogRDS = New instat.ucrCheck()
+        Me.ucrChkImportFiltersRDS = New instat.ucrCheck()
+        Me.ucrChkImportMetadataRDS = New instat.ucrCheck()
+        Me.ucrChkKeepExistingDataRDS = New instat.ucrCheck()
         Me.lblCannotImport = New System.Windows.Forms.Label()
         Me.lblNoPreview = New System.Windows.Forms.Label()
         Me.lblLinesToPreview = New System.Windows.Forms.Label()
         Me.cmdRefreshPreview = New System.Windows.Forms.Button()
         Me.grpText = New System.Windows.Forms.GroupBox()
+        Me.ucrNudMaxRowsText = New instat.ucrNud()
+        Me.ucrChkMaxRowsText = New instat.ucrCheck()
+        Me.ucrChkColumnNamesText = New instat.ucrCheck()
         Me.lblMissingValueStringText = New System.Windows.Forms.Label()
+        Me.ucrNudRowsToSkipText = New instat.ucrNud()
+        Me.ucrInputMissingValueStringText = New instat.ucrInputTextBox()
         Me.lblLinesToSkipText = New System.Windows.Forms.Label()
         Me.rdoSeparatortext = New System.Windows.Forms.RadioButton()
         Me.rdoFixedWidthText = New System.Windows.Forms.RadioButton()
@@ -71,37 +104,9 @@ Partial Class dlgImportDataset
         Me.lblSelectSheets = New System.Windows.Forms.Label()
         Me.lblImportingSheets = New System.Windows.Forms.Label()
         Me.ucrChkSheetsCheckAll = New instat.ucrCheck()
-        Me.ucrNudMaxRowsText = New instat.ucrNud()
-        Me.ucrChkMaxRowsText = New instat.ucrCheck()
-        Me.ucrChkColumnNamesText = New instat.ucrCheck()
-        Me.ucrNudRowsToSkipText = New instat.ucrNud()
-        Me.ucrInputMissingValueStringText = New instat.ucrInputTextBox()
         Me.ucrNudPreviewLines = New instat.ucrNud()
         Me.ucrPanelFixedWidthText = New instat.UcrPanel()
-        Me.ucrNudMaxRowsExcel = New instat.ucrNud()
-        Me.ucrChkColumnNamesExcel = New instat.ucrCheck()
-        Me.ucrChkMaxRowsExcel = New instat.ucrCheck()
-        Me.ucrChkTrimWSExcel = New instat.ucrCheck()
-        Me.ucrNudRowsToSkipExcel = New instat.ucrNud()
-        Me.ucrInputMissingValueStringExcel = New instat.ucrInputTextBox()
-        Me.ucrInputNamedRegions = New instat.ucrInputComboBox()
-        Me.ucrChkOverwriteRDS = New instat.ucrCheck()
-        Me.ucrChkImportObjectsRDS = New instat.ucrCheck()
-        Me.ucrChkImportCalculationsRDS = New instat.ucrCheck()
-        Me.ucrChkImportChangesLogRDS = New instat.ucrCheck()
-        Me.ucrChkImportFiltersRDS = New instat.ucrCheck()
-        Me.ucrChkImportMetadataRDS = New instat.ucrCheck()
-        Me.ucrChkKeepExistingDataRDS = New instat.ucrCheck()
         Me.ucrSaveFile = New instat.ucrSave()
-        Me.ucrNudMaxRowsCSV = New instat.ucrNud()
-        Me.ucrChkMaxRowsCSV = New instat.ucrCheck()
-        Me.ucrChkStringsAsFactorsCSV = New instat.ucrCheck()
-        Me.ucrNudRowsToSkipCSV = New instat.ucrNud()
-        Me.ucrInputHeadersCSV = New instat.ucrInputComboBox()
-        Me.ucrInputMissingValueStringCSV = New instat.ucrInputTextBox()
-        Me.ucrInputDecimalCSV = New instat.ucrInputComboBox()
-        Me.ucrInputSeparatorCSV = New instat.ucrInputComboBox()
-        Me.ucrInputEncodingCSV = New instat.ucrInputComboBox()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpCSV.SuspendLayout()
@@ -205,13 +210,86 @@ Partial Class dlgImportDataset
         Me.grpCSV.Name = "grpCSV"
         Me.grpCSV.TabStop = False
         '
+        'ucrNudMaxRowsCSV
+        '
+        Me.ucrNudMaxRowsCSV.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxRowsCSV.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMaxRowsCSV, "ucrNudMaxRowsCSV")
+        Me.ucrNudMaxRowsCSV.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxRowsCSV.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxRowsCSV.Name = "ucrNudMaxRowsCSV"
+        Me.ucrNudMaxRowsCSV.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkMaxRowsCSV
+        '
+        Me.ucrChkMaxRowsCSV.Checked = False
+        resources.ApplyResources(Me.ucrChkMaxRowsCSV, "ucrChkMaxRowsCSV")
+        Me.ucrChkMaxRowsCSV.Name = "ucrChkMaxRowsCSV"
+        '
         'lblNAStringsCSV
         '
         resources.ApplyResources(Me.lblNAStringsCSV, "lblNAStringsCSV")
         Me.lblNAStringsCSV.Name = "lblNAStringsCSV"
         '
+        'ucrChkStringsAsFactorsCSV
+        '
+        Me.ucrChkStringsAsFactorsCSV.Checked = False
+        resources.ApplyResources(Me.ucrChkStringsAsFactorsCSV, "ucrChkStringsAsFactorsCSV")
+        Me.ucrChkStringsAsFactorsCSV.Name = "ucrChkStringsAsFactorsCSV"
+        '
+        'ucrNudRowsToSkipCSV
+        '
+        Me.ucrNudRowsToSkipCSV.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowsToSkipCSV.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudRowsToSkipCSV, "ucrNudRowsToSkipCSV")
+        Me.ucrNudRowsToSkipCSV.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.ucrNudRowsToSkipCSV.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowsToSkipCSV.Name = "ucrNudRowsToSkipCSV"
+        Me.ucrNudRowsToSkipCSV.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputHeadersCSV
+        '
+        Me.ucrInputHeadersCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputHeadersCSV.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputHeadersCSV, "ucrInputHeadersCSV")
+        Me.ucrInputHeadersCSV.Name = "ucrInputHeadersCSV"
+        '
+        'ucrInputMissingValueStringCSV
+        '
+        Me.ucrInputMissingValueStringCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputMissingValueStringCSV.IsMultiline = False
+        Me.ucrInputMissingValueStringCSV.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMissingValueStringCSV, "ucrInputMissingValueStringCSV")
+        Me.ucrInputMissingValueStringCSV.Name = "ucrInputMissingValueStringCSV"
+        '
+        'ucrInputDecimalCSV
+        '
+        Me.ucrInputDecimalCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputDecimalCSV.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDecimalCSV, "ucrInputDecimalCSV")
+        Me.ucrInputDecimalCSV.Name = "ucrInputDecimalCSV"
+        '
+        'ucrInputSeparatorCSV
+        '
+        Me.ucrInputSeparatorCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparatorCSV.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSeparatorCSV, "ucrInputSeparatorCSV")
+        Me.ucrInputSeparatorCSV.Name = "ucrInputSeparatorCSV"
+        '
+        'ucrInputEncodingCSV
+        '
+        Me.ucrInputEncodingCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputEncodingCSV.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputEncodingCSV, "ucrInputEncodingCSV")
+        Me.ucrInputEncodingCSV.Name = "ucrInputEncodingCSV"
+        '
         'grpExcel
         '
+        Me.grpExcel.Controls.Add(Me.lblTo)
+        Me.grpExcel.Controls.Add(Me.ucrChkRange)
+        Me.grpExcel.Controls.Add(Me.lblFrom)
+        Me.grpExcel.Controls.Add(Me.ucrInputTextTo)
+        Me.grpExcel.Controls.Add(Me.ucrInputTextFrom)
         Me.grpExcel.Controls.Add(Me.ucrNudMaxRowsExcel)
         Me.grpExcel.Controls.Add(Me.ucrChkColumnNamesExcel)
         Me.grpExcel.Controls.Add(Me.ucrChkMaxRowsExcel)
@@ -226,10 +304,95 @@ Partial Class dlgImportDataset
         Me.grpExcel.Name = "grpExcel"
         Me.grpExcel.TabStop = False
         '
+        'lblTo
+        '
+        resources.ApplyResources(Me.lblTo, "lblTo")
+        Me.lblTo.Name = "lblTo"
+        '
+        'ucrChkRange
+        '
+        Me.ucrChkRange.Checked = False
+        resources.ApplyResources(Me.ucrChkRange, "ucrChkRange")
+        Me.ucrChkRange.Name = "ucrChkRange"
+        '
+        'lblFrom
+        '
+        resources.ApplyResources(Me.lblFrom, "lblFrom")
+        Me.lblFrom.Name = "lblFrom"
+        '
+        'ucrInputTextTo
+        '
+        Me.ucrInputTextTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextTo.IsMultiline = False
+        Me.ucrInputTextTo.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTextTo, "ucrInputTextTo")
+        Me.ucrInputTextTo.Name = "ucrInputTextTo"
+        '
+        'ucrInputTextFrom
+        '
+        Me.ucrInputTextFrom.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextFrom.IsMultiline = False
+        Me.ucrInputTextFrom.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTextFrom, "ucrInputTextFrom")
+        Me.ucrInputTextFrom.Name = "ucrInputTextFrom"
+        '
+        'ucrNudMaxRowsExcel
+        '
+        Me.ucrNudMaxRowsExcel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxRowsExcel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMaxRowsExcel, "ucrNudMaxRowsExcel")
+        Me.ucrNudMaxRowsExcel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxRowsExcel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxRowsExcel.Name = "ucrNudMaxRowsExcel"
+        Me.ucrNudMaxRowsExcel.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkColumnNamesExcel
+        '
+        Me.ucrChkColumnNamesExcel.Checked = False
+        resources.ApplyResources(Me.ucrChkColumnNamesExcel, "ucrChkColumnNamesExcel")
+        Me.ucrChkColumnNamesExcel.Name = "ucrChkColumnNamesExcel"
+        '
+        'ucrChkMaxRowsExcel
+        '
+        Me.ucrChkMaxRowsExcel.Checked = False
+        resources.ApplyResources(Me.ucrChkMaxRowsExcel, "ucrChkMaxRowsExcel")
+        Me.ucrChkMaxRowsExcel.Name = "ucrChkMaxRowsExcel"
+        '
+        'ucrChkTrimWSExcel
+        '
+        Me.ucrChkTrimWSExcel.Checked = False
+        resources.ApplyResources(Me.ucrChkTrimWSExcel, "ucrChkTrimWSExcel")
+        Me.ucrChkTrimWSExcel.Name = "ucrChkTrimWSExcel"
+        '
+        'ucrNudRowsToSkipExcel
+        '
+        Me.ucrNudRowsToSkipExcel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowsToSkipExcel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudRowsToSkipExcel, "ucrNudRowsToSkipExcel")
+        Me.ucrNudRowsToSkipExcel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRowsToSkipExcel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowsToSkipExcel.Name = "ucrNudRowsToSkipExcel"
+        Me.ucrNudRowsToSkipExcel.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'lblMissingValueStringExcel
         '
         resources.ApplyResources(Me.lblMissingValueStringExcel, "lblMissingValueStringExcel")
         Me.lblMissingValueStringExcel.Name = "lblMissingValueStringExcel"
+        '
+        'ucrInputMissingValueStringExcel
+        '
+        Me.ucrInputMissingValueStringExcel.AddQuotesIfUnrecognised = True
+        Me.ucrInputMissingValueStringExcel.IsMultiline = False
+        Me.ucrInputMissingValueStringExcel.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMissingValueStringExcel, "ucrInputMissingValueStringExcel")
+        Me.ucrInputMissingValueStringExcel.Name = "ucrInputMissingValueStringExcel"
+        '
+        'ucrInputNamedRegions
+        '
+        Me.ucrInputNamedRegions.AddQuotesIfUnrecognised = True
+        Me.ucrInputNamedRegions.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputNamedRegions, "ucrInputNamedRegions")
+        Me.ucrInputNamedRegions.Name = "ucrInputNamedRegions"
         '
         'lblNamedRegion
         '
@@ -253,6 +416,48 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.grpRDS, "grpRDS")
         Me.grpRDS.Name = "grpRDS"
         Me.grpRDS.TabStop = False
+        '
+        'ucrChkOverwriteRDS
+        '
+        Me.ucrChkOverwriteRDS.Checked = False
+        resources.ApplyResources(Me.ucrChkOverwriteRDS, "ucrChkOverwriteRDS")
+        Me.ucrChkOverwriteRDS.Name = "ucrChkOverwriteRDS"
+        '
+        'ucrChkImportObjectsRDS
+        '
+        Me.ucrChkImportObjectsRDS.Checked = False
+        resources.ApplyResources(Me.ucrChkImportObjectsRDS, "ucrChkImportObjectsRDS")
+        Me.ucrChkImportObjectsRDS.Name = "ucrChkImportObjectsRDS"
+        '
+        'ucrChkImportCalculationsRDS
+        '
+        Me.ucrChkImportCalculationsRDS.Checked = False
+        resources.ApplyResources(Me.ucrChkImportCalculationsRDS, "ucrChkImportCalculationsRDS")
+        Me.ucrChkImportCalculationsRDS.Name = "ucrChkImportCalculationsRDS"
+        '
+        'ucrChkImportChangesLogRDS
+        '
+        Me.ucrChkImportChangesLogRDS.Checked = False
+        resources.ApplyResources(Me.ucrChkImportChangesLogRDS, "ucrChkImportChangesLogRDS")
+        Me.ucrChkImportChangesLogRDS.Name = "ucrChkImportChangesLogRDS"
+        '
+        'ucrChkImportFiltersRDS
+        '
+        Me.ucrChkImportFiltersRDS.Checked = False
+        resources.ApplyResources(Me.ucrChkImportFiltersRDS, "ucrChkImportFiltersRDS")
+        Me.ucrChkImportFiltersRDS.Name = "ucrChkImportFiltersRDS"
+        '
+        'ucrChkImportMetadataRDS
+        '
+        Me.ucrChkImportMetadataRDS.Checked = False
+        resources.ApplyResources(Me.ucrChkImportMetadataRDS, "ucrChkImportMetadataRDS")
+        Me.ucrChkImportMetadataRDS.Name = "ucrChkImportMetadataRDS"
+        '
+        'ucrChkKeepExistingDataRDS
+        '
+        Me.ucrChkKeepExistingDataRDS.Checked = False
+        resources.ApplyResources(Me.ucrChkKeepExistingDataRDS, "ucrChkKeepExistingDataRDS")
+        Me.ucrChkKeepExistingDataRDS.Name = "ucrChkKeepExistingDataRDS"
         '
         'lblCannotImport
         '
@@ -288,10 +493,50 @@ Partial Class dlgImportDataset
         Me.grpText.Name = "grpText"
         Me.grpText.TabStop = False
         '
+        'ucrNudMaxRowsText
+        '
+        Me.ucrNudMaxRowsText.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxRowsText.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMaxRowsText, "ucrNudMaxRowsText")
+        Me.ucrNudMaxRowsText.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxRowsText.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxRowsText.Name = "ucrNudMaxRowsText"
+        Me.ucrNudMaxRowsText.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkMaxRowsText
+        '
+        Me.ucrChkMaxRowsText.Checked = False
+        resources.ApplyResources(Me.ucrChkMaxRowsText, "ucrChkMaxRowsText")
+        Me.ucrChkMaxRowsText.Name = "ucrChkMaxRowsText"
+        '
+        'ucrChkColumnNamesText
+        '
+        Me.ucrChkColumnNamesText.Checked = False
+        resources.ApplyResources(Me.ucrChkColumnNamesText, "ucrChkColumnNamesText")
+        Me.ucrChkColumnNamesText.Name = "ucrChkColumnNamesText"
+        '
         'lblMissingValueStringText
         '
         resources.ApplyResources(Me.lblMissingValueStringText, "lblMissingValueStringText")
         Me.lblMissingValueStringText.Name = "lblMissingValueStringText"
+        '
+        'ucrNudRowsToSkipText
+        '
+        Me.ucrNudRowsToSkipText.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowsToSkipText.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudRowsToSkipText, "ucrNudRowsToSkipText")
+        Me.ucrNudRowsToSkipText.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.ucrNudRowsToSkipText.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowsToSkipText.Name = "ucrNudRowsToSkipText"
+        Me.ucrNudRowsToSkipText.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputMissingValueStringText
+        '
+        Me.ucrInputMissingValueStringText.AddQuotesIfUnrecognised = True
+        Me.ucrInputMissingValueStringText.IsMultiline = False
+        Me.ucrInputMissingValueStringText.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMissingValueStringText, "ucrInputMissingValueStringText")
+        Me.ucrInputMissingValueStringText.Name = "ucrInputMissingValueStringText"
         '
         'lblLinesToSkipText
         '
@@ -352,46 +597,6 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrChkSheetsCheckAll, "ucrChkSheetsCheckAll")
         Me.ucrChkSheetsCheckAll.Name = "ucrChkSheetsCheckAll"
         '
-        'ucrNudMaxRowsText
-        '
-        Me.ucrNudMaxRowsText.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxRowsText.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMaxRowsText, "ucrNudMaxRowsText")
-        Me.ucrNudMaxRowsText.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaxRowsText.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxRowsText.Name = "ucrNudMaxRowsText"
-        Me.ucrNudMaxRowsText.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkMaxRowsText
-        '
-        Me.ucrChkMaxRowsText.Checked = False
-        resources.ApplyResources(Me.ucrChkMaxRowsText, "ucrChkMaxRowsText")
-        Me.ucrChkMaxRowsText.Name = "ucrChkMaxRowsText"
-        '
-        'ucrChkColumnNamesText
-        '
-        Me.ucrChkColumnNamesText.Checked = False
-        resources.ApplyResources(Me.ucrChkColumnNamesText, "ucrChkColumnNamesText")
-        Me.ucrChkColumnNamesText.Name = "ucrChkColumnNamesText"
-        '
-        'ucrNudRowsToSkipText
-        '
-        Me.ucrNudRowsToSkipText.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowsToSkipText.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudRowsToSkipText, "ucrNudRowsToSkipText")
-        Me.ucrNudRowsToSkipText.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
-        Me.ucrNudRowsToSkipText.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowsToSkipText.Name = "ucrNudRowsToSkipText"
-        Me.ucrNudRowsToSkipText.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputMissingValueStringText
-        '
-        Me.ucrInputMissingValueStringText.AddQuotesIfUnrecognised = True
-        Me.ucrInputMissingValueStringText.IsMultiline = False
-        Me.ucrInputMissingValueStringText.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMissingValueStringText, "ucrInputMissingValueStringText")
-        Me.ucrInputMissingValueStringText.Name = "ucrInputMissingValueStringText"
-        '
         'ucrNudPreviewLines
         '
         Me.ucrNudPreviewLines.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -407,173 +612,10 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrPanelFixedWidthText, "ucrPanelFixedWidthText")
         Me.ucrPanelFixedWidthText.Name = "ucrPanelFixedWidthText"
         '
-        'ucrNudMaxRowsExcel
-        '
-        Me.ucrNudMaxRowsExcel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxRowsExcel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMaxRowsExcel, "ucrNudMaxRowsExcel")
-        Me.ucrNudMaxRowsExcel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaxRowsExcel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxRowsExcel.Name = "ucrNudMaxRowsExcel"
-        Me.ucrNudMaxRowsExcel.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkColumnNamesExcel
-        '
-        Me.ucrChkColumnNamesExcel.Checked = False
-        resources.ApplyResources(Me.ucrChkColumnNamesExcel, "ucrChkColumnNamesExcel")
-        Me.ucrChkColumnNamesExcel.Name = "ucrChkColumnNamesExcel"
-        '
-        'ucrChkMaxRowsExcel
-        '
-        Me.ucrChkMaxRowsExcel.Checked = False
-        resources.ApplyResources(Me.ucrChkMaxRowsExcel, "ucrChkMaxRowsExcel")
-        Me.ucrChkMaxRowsExcel.Name = "ucrChkMaxRowsExcel"
-        '
-        'ucrChkTrimWSExcel
-        '
-        Me.ucrChkTrimWSExcel.Checked = False
-        resources.ApplyResources(Me.ucrChkTrimWSExcel, "ucrChkTrimWSExcel")
-        Me.ucrChkTrimWSExcel.Name = "ucrChkTrimWSExcel"
-        '
-        'ucrNudRowsToSkipExcel
-        '
-        Me.ucrNudRowsToSkipExcel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowsToSkipExcel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudRowsToSkipExcel, "ucrNudRowsToSkipExcel")
-        Me.ucrNudRowsToSkipExcel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRowsToSkipExcel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowsToSkipExcel.Name = "ucrNudRowsToSkipExcel"
-        Me.ucrNudRowsToSkipExcel.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputMissingValueStringExcel
-        '
-        Me.ucrInputMissingValueStringExcel.AddQuotesIfUnrecognised = True
-        Me.ucrInputMissingValueStringExcel.IsMultiline = False
-        Me.ucrInputMissingValueStringExcel.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMissingValueStringExcel, "ucrInputMissingValueStringExcel")
-        Me.ucrInputMissingValueStringExcel.Name = "ucrInputMissingValueStringExcel"
-        '
-        'ucrInputNamedRegions
-        '
-        Me.ucrInputNamedRegions.AddQuotesIfUnrecognised = True
-        Me.ucrInputNamedRegions.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNamedRegions, "ucrInputNamedRegions")
-        Me.ucrInputNamedRegions.Name = "ucrInputNamedRegions"
-        '
-        'ucrChkOverwriteRDS
-        '
-        Me.ucrChkOverwriteRDS.Checked = False
-        resources.ApplyResources(Me.ucrChkOverwriteRDS, "ucrChkOverwriteRDS")
-        Me.ucrChkOverwriteRDS.Name = "ucrChkOverwriteRDS"
-        '
-        'ucrChkImportObjectsRDS
-        '
-        Me.ucrChkImportObjectsRDS.Checked = False
-        resources.ApplyResources(Me.ucrChkImportObjectsRDS, "ucrChkImportObjectsRDS")
-        Me.ucrChkImportObjectsRDS.Name = "ucrChkImportObjectsRDS"
-        '
-        'ucrChkImportCalculationsRDS
-        '
-        Me.ucrChkImportCalculationsRDS.Checked = False
-        resources.ApplyResources(Me.ucrChkImportCalculationsRDS, "ucrChkImportCalculationsRDS")
-        Me.ucrChkImportCalculationsRDS.Name = "ucrChkImportCalculationsRDS"
-        '
-        'ucrChkImportChangesLogRDS
-        '
-        Me.ucrChkImportChangesLogRDS.Checked = False
-        resources.ApplyResources(Me.ucrChkImportChangesLogRDS, "ucrChkImportChangesLogRDS")
-        Me.ucrChkImportChangesLogRDS.Name = "ucrChkImportChangesLogRDS"
-        '
-        'ucrChkImportFiltersRDS
-        '
-        Me.ucrChkImportFiltersRDS.Checked = False
-        resources.ApplyResources(Me.ucrChkImportFiltersRDS, "ucrChkImportFiltersRDS")
-        Me.ucrChkImportFiltersRDS.Name = "ucrChkImportFiltersRDS"
-        '
-        'ucrChkImportMetadataRDS
-        '
-        Me.ucrChkImportMetadataRDS.Checked = False
-        resources.ApplyResources(Me.ucrChkImportMetadataRDS, "ucrChkImportMetadataRDS")
-        Me.ucrChkImportMetadataRDS.Name = "ucrChkImportMetadataRDS"
-        '
-        'ucrChkKeepExistingDataRDS
-        '
-        Me.ucrChkKeepExistingDataRDS.Checked = False
-        resources.ApplyResources(Me.ucrChkKeepExistingDataRDS, "ucrChkKeepExistingDataRDS")
-        Me.ucrChkKeepExistingDataRDS.Name = "ucrChkKeepExistingDataRDS"
-        '
         'ucrSaveFile
         '
         resources.ApplyResources(Me.ucrSaveFile, "ucrSaveFile")
         Me.ucrSaveFile.Name = "ucrSaveFile"
-        '
-        'ucrNudMaxRowsCSV
-        '
-        Me.ucrNudMaxRowsCSV.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxRowsCSV.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMaxRowsCSV, "ucrNudMaxRowsCSV")
-        Me.ucrNudMaxRowsCSV.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaxRowsCSV.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxRowsCSV.Name = "ucrNudMaxRowsCSV"
-        Me.ucrNudMaxRowsCSV.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkMaxRowsCSV
-        '
-        Me.ucrChkMaxRowsCSV.Checked = False
-        resources.ApplyResources(Me.ucrChkMaxRowsCSV, "ucrChkMaxRowsCSV")
-        Me.ucrChkMaxRowsCSV.Name = "ucrChkMaxRowsCSV"
-        '
-        'ucrChkStringsAsFactorsCSV
-        '
-        Me.ucrChkStringsAsFactorsCSV.Checked = False
-        resources.ApplyResources(Me.ucrChkStringsAsFactorsCSV, "ucrChkStringsAsFactorsCSV")
-        Me.ucrChkStringsAsFactorsCSV.Name = "ucrChkStringsAsFactorsCSV"
-        '
-        'ucrNudRowsToSkipCSV
-        '
-        Me.ucrNudRowsToSkipCSV.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowsToSkipCSV.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudRowsToSkipCSV, "ucrNudRowsToSkipCSV")
-        Me.ucrNudRowsToSkipCSV.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
-        Me.ucrNudRowsToSkipCSV.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowsToSkipCSV.Name = "ucrNudRowsToSkipCSV"
-        Me.ucrNudRowsToSkipCSV.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputHeadersCSV
-        '
-        Me.ucrInputHeadersCSV.AddQuotesIfUnrecognised = True
-        Me.ucrInputHeadersCSV.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputHeadersCSV, "ucrInputHeadersCSV")
-        Me.ucrInputHeadersCSV.Name = "ucrInputHeadersCSV"
-        '
-        'ucrInputMissingValueStringCSV
-        '
-        Me.ucrInputMissingValueStringCSV.AddQuotesIfUnrecognised = True
-        Me.ucrInputMissingValueStringCSV.IsMultiline = False
-        Me.ucrInputMissingValueStringCSV.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMissingValueStringCSV, "ucrInputMissingValueStringCSV")
-        Me.ucrInputMissingValueStringCSV.Name = "ucrInputMissingValueStringCSV"
-        '
-        'ucrInputDecimalCSV
-        '
-        Me.ucrInputDecimalCSV.AddQuotesIfUnrecognised = True
-        Me.ucrInputDecimalCSV.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDecimalCSV, "ucrInputDecimalCSV")
-        Me.ucrInputDecimalCSV.Name = "ucrInputDecimalCSV"
-        '
-        'ucrInputSeparatorCSV
-        '
-        Me.ucrInputSeparatorCSV.AddQuotesIfUnrecognised = True
-        Me.ucrInputSeparatorCSV.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSeparatorCSV, "ucrInputSeparatorCSV")
-        Me.ucrInputSeparatorCSV.Name = "ucrInputSeparatorCSV"
-        '
-        'ucrInputEncodingCSV
-        '
-        Me.ucrInputEncodingCSV.AddQuotesIfUnrecognised = True
-        Me.ucrInputEncodingCSV.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputEncodingCSV, "ucrInputEncodingCSV")
-        Me.ucrInputEncodingCSV.Name = "ucrInputEncodingCSV"
         '
         'ucrInputFilePath
         '
@@ -700,4 +742,9 @@ Partial Class dlgImportDataset
     Friend WithEvents lblSelectSheets As Label
     Friend WithEvents ucrChkSheetsCheckAll As ucrCheck
     Friend WithEvents lblImportingSheets As Label
+    Friend WithEvents ucrChkRange As ucrCheck
+    Friend WithEvents lblTo As Label
+    Friend WithEvents lblFrom As Label
+    Friend WithEvents ucrInputTextTo As ucrInputTextBox
+    Friend WithEvents ucrInputTextFrom As ucrInputTextBox
 End Class

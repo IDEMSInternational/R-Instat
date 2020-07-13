@@ -211,4 +211,8 @@ Public Class dlgRestrict
     Private Sub ucrNewDataFrameName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlValueChanged
         SetBaseFunction()
     End Sub
+
+    Private Sub cmdFilterFromFactors_Click(sender As Object, e As EventArgs) Handles cmdFilterFromFactors.Click
+        'sdgFiltersFromFactor.ShowDialog() 'currently work in progress will soon be enabled!
+    End Sub
 End Class
