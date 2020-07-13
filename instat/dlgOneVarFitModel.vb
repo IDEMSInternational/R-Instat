@@ -262,6 +262,7 @@ Public Class dlgOneVarFitModel
 
         clsBrFunction.SetPackageName("trend")
         clsBrFunction.SetRCommand("br.test")
+        clsBrFunction.AddParameter("mu", "20000", iPosition:=1)
 
         clsRunsFunction.SetPackageName("DescTools")
         clsRunsFunction.SetRCommand("RunsTest")
@@ -358,6 +359,7 @@ Public Class dlgOneVarFitModel
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("mu", 1), iAdditionalPairNo:=2)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsWilcoxonFunction, New RParameter("mu", 1), iAdditionalPairNo:=3)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsWilcoxonFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=6)
+
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
