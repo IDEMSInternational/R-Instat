@@ -32,6 +32,11 @@ Partial Class sdgFiltersFromFactor
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrFactorSelctor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
+        Me.lstFilters = New System.Windows.Forms.ListView()
+        Me.ucrFilterPreview = New instat.ucrInputTextBox()
+        Me.lblFilterPreview = New System.Windows.Forms.Label()
+        Me.ucrInputFilterName = New instat.ucrInputComboBox()
+        Me.lblNewFilterName = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblFactor
@@ -96,10 +101,48 @@ Partial Class sdgFiltersFromFactor
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'lstFilters
+        '
+        Me.lstFilters.HideSelection = False
+        resources.ApplyResources(Me.lstFilters, "lstFilters")
+        Me.lstFilters.Name = "lstFilters"
+        Me.lstFilters.UseCompatibleStateImageBehavior = False
+        Me.lstFilters.View = System.Windows.Forms.View.Details
+        '
+        'ucrFilterPreview
+        '
+        Me.ucrFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrFilterPreview.IsMultiline = False
+        Me.ucrFilterPreview.IsReadOnly = False
+        resources.ApplyResources(Me.ucrFilterPreview, "ucrFilterPreview")
+        Me.ucrFilterPreview.Name = "ucrFilterPreview"
+        '
+        'lblFilterPreview
+        '
+        resources.ApplyResources(Me.lblFilterPreview, "lblFilterPreview")
+        Me.lblFilterPreview.Name = "lblFilterPreview"
+        '
+        'ucrInputFilterName
+        '
+        Me.ucrInputFilterName.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFilterName, "ucrInputFilterName")
+        Me.ucrInputFilterName.Name = "ucrInputFilterName"
+        '
+        'lblNewFilterName
+        '
+        resources.ApplyResources(Me.lblNewFilterName, "lblNewFilterName")
+        Me.lblNewFilterName.Name = "lblNewFilterName"
+        '
         'sdgFiltersFromFactor
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblNewFilterName)
+        Me.Controls.Add(Me.ucrInputFilterName)
+        Me.Controls.Add(Me.lblFilterPreview)
+        Me.Controls.Add(Me.ucrFilterPreview)
+        Me.Controls.Add(Me.lstFilters)
         Me.Controls.Add(Me.lblExsistingFilter)
         Me.Controls.Add(Me.ucrReceiverExistingFilter)
         Me.Controls.Add(Me.ucrChkAndExistingFilter)
@@ -127,4 +170,9 @@ Partial Class sdgFiltersFromFactor
     Friend WithEvents ucrChkAndExistingFilter As ucrCheck
     Friend WithEvents ucrReceiverExistingFilter As ucrReceiverSingle
     Friend WithEvents lblExsistingFilter As Label
+    Friend WithEvents lstFilters As ListView
+    Friend WithEvents ucrFilterPreview As ucrInputTextBox
+    Friend WithEvents lblFilterPreview As Label
+    Friend WithEvents ucrInputFilterName As ucrInputComboBox
+    Friend WithEvents lblNewFilterName As Label
 End Class
