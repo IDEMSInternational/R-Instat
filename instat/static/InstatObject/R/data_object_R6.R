@@ -1693,7 +1693,7 @@ DataSheet$set("public", "get_last_graph", function() {
 )
 
 DataSheet$set("public", "rename_object", function(object_name, new_name, object_type = "object") {
-  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model")) stop(object_type, " must be either object (graph, table or model), filter or a calculation")
+  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model")) stop(object_type, " must be either object (graph, table or model), filter or a calculation.")
   #Temp fix:: added graph, table and model so as to distinguish this when implementing it in the dialog. Otherwise they remain as objects
   if (object_type %in% c("object", "graph", "table","model")){
     if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
@@ -1703,6 +1703,7 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
   else if (object_type == "filter"){
     if(!object_name %in% names(private$filters)) stop(object_name, " not found in filters list")
     if(new_name %in% names(private$filters)) stop(new_name, " is already a filter name. Cannot rename ", object_name, " to ", new_name)
+    if("no_filter" == object_name) stop("Renaming no_filter is not allowed.")
     names(private$filters)[names(private$filters) == object_name] <- new_name
     if(private$.current_filter$name == object_name){private$.current_filter$name <- new_name}
   } 
