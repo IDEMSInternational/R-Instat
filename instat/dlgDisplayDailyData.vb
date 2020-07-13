@@ -24,7 +24,7 @@ Public Class dlgDisplayDailyData
     Private lstCheckboxes As New List(Of ucrCheck)
     Private clsDisplayDailyTable, clsDisplayDailyGraphFunction, clsConcFunction As New RFunction
     Private clsGGplotFunction, clsGeomLineFunction, clsGeomRugFunction, clsThemeFunction, clsThemeGreyFunction As New RFunction
-    Private clsIdVars, clsFacetFunction, clsGgplotAesFunction, clsGGplotElementText, clsXLabFunction As New RFunction
+    Private clsIdVarsFunction, clsFacetFunction, clsGgplotAesFunction, clsGGplotElementText, clsXLabFunction As New RFunction
     Private clsGgPlotOperator, clsDisplayDailyGraphOperator, clsDisplayDailyTableOperator, clsNAFilterOperator As New ROperator
     Private clsFacetOperator As New ROperator
 
@@ -182,8 +182,8 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraphByYear)
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraph, "ggplot")
-        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraphByYear, "daily graph")
-        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, "daily table")
+        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraphByYear, "daily_graph")
+        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, "daily_table")
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraphByYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrReceiverMultipleElements, ucrChkFreeYScales}, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboMissing, ucrChkMissing}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -207,7 +207,7 @@ Public Class dlgDisplayDailyData
         clsThemeFunction = New RFunction
         clsGgplotAesFunction = New RFunction
         clsGGplotElementText = New RFunction
-        clsIdVars = New RFunction
+        clsIdVarsFunction = New RFunction
         clsDisplayDailyGraphOperator = New ROperator
         clsDisplayDailyTableOperator = New ROperator
 
@@ -238,7 +238,7 @@ Public Class dlgDisplayDailyData
         ucrSelectorDisplayDailyClimaticData.Reset()
         ucrReceiverElement.SetMeAsReceiver()
 
-        clsIdVars.SetRCommand("c")
+        clsIdVarsFunction.SetRCommand("c")
         clsGGplotFunction.SetPackageName("ggplot2")
         clsGGplotFunction.SetRCommand("ggplot")
         clsGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAesFunction)
@@ -290,8 +290,8 @@ Public Class dlgDisplayDailyData
         clsDisplayDailyTable.AddParameter("Misscode", Chr(34) & "m" & Chr(34), iPosition:=5)
         clsDisplayDailyGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
 
-        clsDisplayDailyGraphOperator.AddParameter("daily graph", clsRFunctionParameter:=clsDisplayDailyGraphFunction)
-        clsDisplayDailyTableOperator.AddParameter("daily table", clsRFunctionParameter:=clsDisplayDailyTable)
+        clsDisplayDailyGraphOperator.AddParameter("daily_graph", clsRFunctionParameter:=clsDisplayDailyGraphFunction)
+        clsDisplayDailyTableOperator.AddParameter("daily_table", clsRFunctionParameter:=clsDisplayDailyTable)
 
         ucrBase.clsRsyntax.SetBaseROperator(clsDisplayDailyTableOperator)
 
@@ -306,10 +306,10 @@ Public Class dlgDisplayDailyData
         ucrReceiverYear.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("year_col", 3), iAdditionalPairNo:=1)
 
         ucrReceiverStations.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("station_col", 4), iAdditionalPairNo:=1)
-        ucrReceiverStations.AddAdditionalCodeParameterPair(clsIdVars, New RParameter("station", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverStations.AddAdditionalCodeParameterPair(clsIdVarsFunction, New RParameter("station", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("date_col", 2), iAdditionalPairNo:=1)
-        ucrReceiverDate.AddAdditionalCodeParameterPair(clsIdVars, New RParameter("date", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverDate.AddAdditionalCodeParameterPair(clsIdVarsFunction, New RParameter("date", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
         ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsGGplotFunction, New RParameter("data", iNewPosition:=0), iAdditionalPairNo:=1)
         ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsNAFilterOperator, New RParameter("data", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
@@ -400,12 +400,15 @@ Public Class dlgDisplayDailyData
         FacetControl()
     End Sub
 
+    ''' <summary> 
+    ''' This functions Manually takes all the columns in the multiple receiver, excluding date and station columns ,and stacks them 
+    ''' </summary>
     Private Sub StackingFunction()
         If Not ucrReceiverMultipleElements.IsEmpty Then
             If rdoGraph.Checked Then
                 ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("stack_data", "TRUE")
                 ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("measure.vars", ucrReceiverMultipleElements.GetVariableNames())
-                ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("id.vars", clsRFunctionParameter:=clsIdVars)
+                ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("id.vars", clsRFunctionParameter:=clsIdVarsFunction)
             Else
                 ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("measure.vars")
                 ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("stack_data")
@@ -414,6 +417,10 @@ Public Class dlgDisplayDailyData
         End If
     End Sub
 
+    ''' <summary> 
+    ''' This functions add the rows,facets and space parameters to the facet function  when the Graph radio button 
+    ''' is checked else it removes this parameters
+    ''' </summary>
     Private Sub FacetControl()
         If rdoGraph.Checked AndAlso Not ucrReceiverStations.IsEmpty Then
             clsFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), bIncludeArgumentName:=False, iPosition:=1)
@@ -424,8 +431,6 @@ Public Class dlgDisplayDailyData
             clsFacetFunction.RemoveParameterByName("facets")
             clsFacetFunction.RemoveParameterByName("space")
             clsFacetFunction.AddParameter("rows", "vars(variable)", iPosition:=1)
-            clsFacetFunction.RemoveParameterByName("facets")
-            clsFacetFunction.RemoveParameterByName("space")
         End If
 
     End Sub
