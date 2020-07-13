@@ -1715,16 +1715,18 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
 )
 
 DataSheet$set("public", "delete_objects", function(data_name, object_names, object_type = "object") {
-  if(!object_type %in% c("object", "graph", "table","model","filter", "calculation")) stop(object_type, " must be either object (graph, table or model), filter or a calculation")
+  if(!object_type %in% c("object", "graph", "table","model","filter", "calculation")) stop(object_type, " must be either object (graph, table or model), filter or a calculation.")
   if(any(object_type == c("object", "graph", "table","model"))){
-      if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in overall objects list")
-      private$objects[names(private$objects) == object_names] <- NULL
+      if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in overall objects list.")
+      private$objects[names(private$objects) %in% object_names] <- NULL
     }else if(object_type == "filter"){
-      if(!object_names %in% names(private$filters)) stop(object_names, " not found in filters list")
-      private$filters[names(private$filters) == object_names] <- NULL
+      if(!all(object_names %in% names(private$filters))) stop(object_names, " not found in filters list.")
+      if("no_filter" %in% object_names) stop("no_filter cannot be deleted.")
+      if(any(private$.current_filter$name %in% object_names))stop(private$.current_filter$name, " is a current filter it cannot deleted.")
+      private$filters[names(private$filters) %in% object_names] <- NULL
     }else if(object_type == "calculation"){
-      if(!object_names %in% names(private$calculations)) stop(object_names, " not found in calculations list")
-      private$calculations[names(private$calculations) == object_names] <- NULL
+      if(!object_names %in% names(private$calculations)) stop(object_names, " not found in calculations list.")
+      private$calculations[names(private$calculations) %in% object_names] <- NULL
     }
   if(!is.null(private$.last_graph) && length(private$.last_graph) == 2 && private$.last_graph[1] == data_name && private$.last_graph[2] %in% object_names) {
     private$.last_graph <- NULL
