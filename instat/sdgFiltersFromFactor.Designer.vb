@@ -37,6 +37,7 @@ Partial Class sdgFiltersFromFactor
         Me.lblFilterPreview = New System.Windows.Forms.Label()
         Me.ucrInputFilterName = New instat.ucrInputComboBox()
         Me.lblNewFilterName = New System.Windows.Forms.Label()
+        Me.cmdAddCondition = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblFactor
@@ -134,10 +135,18 @@ Partial Class sdgFiltersFromFactor
         resources.ApplyResources(Me.lblNewFilterName, "lblNewFilterName")
         Me.lblNewFilterName.Name = "lblNewFilterName"
         '
+        'cmdAddCondition
+        '
+        resources.ApplyResources(Me.cmdAddCondition, "cmdAddCondition")
+        Me.cmdAddCondition.Name = "cmdAddCondition"
+        Me.cmdAddCondition.Tag = "Add_Condition"
+        Me.cmdAddCondition.UseVisualStyleBackColor = True
+        '
         'sdgFiltersFromFactor
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdAddCondition)
         Me.Controls.Add(Me.lblNewFilterName)
         Me.Controls.Add(Me.ucrInputFilterName)
         Me.Controls.Add(Me.lblFilterPreview)
@@ -175,4 +184,5 @@ Partial Class sdgFiltersFromFactor
     Friend WithEvents lblFilterPreview As Label
     Friend WithEvents ucrInputFilterName As ucrInputComboBox
     Friend WithEvents lblNewFilterName As Label
+    Friend WithEvents cmdAddCondition As Button
 End Class

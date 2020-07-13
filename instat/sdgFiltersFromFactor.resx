@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactor.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="cmdToggleSelectAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -178,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdToggleSelectAll.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="lblExsistingFilter.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -211,7 +211,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblExsistingFilter.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -220,13 +220,43 @@
     <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>656, 628</value>
+    <value>656, 643</value>
+  </data>
+  <data name="cmdAddCondition.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdAddCondition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>111, 322</value>
+  </data>
+  <data name="cmdAddCondition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="cmdAddCondition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 28</value>
+  </data>
+  <data name="cmdAddCondition.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="cmdAddCondition.Text" xml:space="preserve">
+    <value>Add Condition</value>
+  </data>
+  <data name="&gt;&gt;cmdAddCondition.Name" xml:space="preserve">
+    <value>cmdAddCondition</value>
+  </data>
+  <data name="&gt;&gt;cmdAddCondition.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdAddCondition.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdAddCondition.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="lblNewFilterName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblNewFilterName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 543</value>
+    <value>4, 571</value>
   </data>
   <data name="lblNewFilterName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -250,10 +280,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblNewFilterName.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrInputFilterName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 539</value>
+    <value>177, 567</value>
   </data>
   <data name="ucrInputFilterName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 7, 9, 7</value>
@@ -274,13 +304,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputFilterName.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="lblFilterPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 507</value>
+    <value>4, 535</value>
   </data>
   <data name="lblFilterPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -304,10 +334,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFilterPreview.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 507</value>
+    <value>177, 535</value>
   </data>
   <data name="ucrFilterPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>9, 7, 9, 7</value>
@@ -328,10 +358,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFilterPreview.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="lstFilters.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 323</value>
+    <value>7, 358</value>
   </data>
   <data name="lstFilters.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -352,7 +382,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lstFilters.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrChkAndExistingFilter.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -379,7 +409,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkAndExistingFilter.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="ucrFactorLevel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -406,7 +436,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFactorLevel.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>356, 32</value>
@@ -430,7 +460,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFactorReceiver.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="ucrFactorSelctor.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 9</value>
@@ -454,10 +484,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFactorSelctor.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 586</value>
+    <value>215, 599</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -478,7 +508,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -520,6 +550,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverExistingFilter.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
 </root>

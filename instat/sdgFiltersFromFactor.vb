@@ -41,6 +41,9 @@ Public Class sdgFiltersFromFactor
 
         cmdToggleSelectAll.Visible = True
 
+        lstFilters.Columns.Add("Variable")
+        lstFilters.Columns.Add("Condition")
+
         ucrFactorSelctor.SetParameter(New RParameter("factors", 0))
         ucrFactorSelctor.SetParameterIsrfunction()
 
