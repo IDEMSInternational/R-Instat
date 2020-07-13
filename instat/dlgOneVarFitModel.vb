@@ -277,6 +277,7 @@ Public Class dlgOneVarFitModel
 
         clsSnhFunction.SetPackageName("trend")
         clsSnhFunction.SetRCommand("snh.test")
+        clsSfFunction.AddParameter("m", "20000", iPosition:=2)
 
         clsAdFunction.SetPackageName("nortest")
         clsAdFunction.SetRCommand("ad.test")
@@ -363,6 +364,7 @@ Public Class dlgOneVarFitModel
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsWilcoxonFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=6)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSenFunction, New RParameter("conf.level", 1), iAdditionalPairNo:=7)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSerialCorrFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=8)
+        ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("mu", 1), iAdditionalPairNo:=4)
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
