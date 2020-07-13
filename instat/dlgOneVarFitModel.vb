@@ -100,16 +100,8 @@ Public Class dlgOneVarFitModel
 
 
 
-        ucrNudHypothesis.SetParameter(New RParameter("mu"))
-        ucrNudHypothesis.Increment = 1
-        ucrNudHypothesis.DecimalPlaces = 2
-        ucrNudHypothesis.SetMinMax(0.00, Integer.MaxValue)
-
-        ucrNudHypProportion.SetParameter(New RParameter("p"))
-        ucrNudHypProportion.Maximum = 1
-        ucrNudHypProportion.DecimalPlaces = 2
-        ucrNudHypProportion.Increment = 0.01
-
+        ucrInputNullHypothesis.SetParameter(New RParameter("mu", 1))
+        ucrInputNullHypothesis.SetText("Null Hypothesis")
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboEstimate, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
@@ -117,16 +109,15 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudTrim, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrOmmitMissing, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudHypothesis, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputNullHypothesis, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputMethod, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="classic")
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudHypProportion, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
+
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
         ucrNudTrim.SetLinkedDisplayControl(lblTrim)
         ucrNudConfidenceLevel.SetLinkedDisplayControl(lblConfidenceLevel)
-        ucrNudHypothesis.SetLinkedDisplayControl(lblDifferenceInMean)
+        ucrInputNullHypothesis.SetLinkedDisplayControl(lblNullHypothesis)
         ucrInputMethod.SetLinkedDisplayControl(lblMethod)
-        ucrNudHypProportion.SetLinkedDisplayControl(lblHypothesis)
 
         lstCommandButtons.AddRange({cmdDisplayOptions, cmdFittingOptions})
         ucrDistributionChoice.SetLinkedDisplayControl(lstCommandButtons)
@@ -361,11 +352,8 @@ Public Class dlgOneVarFitModel
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=1)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=2)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=3)
-        ucrNudHypothesis.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
+        ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=4)
-        ucrNudHypProportion.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("p", 2), iAdditionalPairNo:=1)
-        ucrNudHypProportion.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("p", 2), iAdditionalPairNo:=2)
-
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
@@ -373,7 +361,7 @@ Public Class dlgOneVarFitModel
         ucrNudTrim.SetRCode(clsMeanCIFunction, bReset)
         ucrOmmitMissing.SetRCode(clsMeanCIFunction, bReset)
         ucrNudConfidenceLevel.SetRCode(clsZTestFunction, bReset)
-        ucrNudHypothesis.SetRCode(clsZTestFunction, bReset)
+        ucrInputNullHypothesis.SetRCode(clsZTestFunction, bReset)
 
         ucrSaveModel.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
