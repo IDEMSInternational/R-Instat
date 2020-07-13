@@ -322,7 +322,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ChangeLabel()
-        lblVariable.Text = If(rdoBarChart.Checked, "X Variable", "Variable")
+        lblVariable.Text = If(rdoBarChart.Checked, "X Variable:", "Variable:")
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
@@ -335,9 +335,11 @@ Public Class dlgBarAndPieChart
     Private Sub setColumnChartOption()
         If rdoBarChart.Checked AndAlso ucrInputYValue.GetValue = "Column" Then
             ucrReceiverY.SetVisible(True)
+            ucrReceiverY.SetMeAsReceiver()
             ucrReceiverY.AddOrRemoveParameter(True)
         Else
             ucrReceiverY.SetVisible(False)
+            ucrReceiverFirst.SetMeAsReceiver()
             ucrReceiverY.AddOrRemoveParameter(False)
         End If
     End Sub
