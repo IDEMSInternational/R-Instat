@@ -393,7 +393,7 @@ Public Class dlgOneVarFitModel
         ' Additional Rcode for estimates functions
         ucrSaveModel.AddAdditionalRCode(clsMeanCIFunction, iAdditionalPairNo:=18)
         ucrSaveModel.AddAdditionalRCode(clsMedianCIFunction, iAdditionalPairNo:=19)
-
+        ucrSaveModel.AddAdditionalRCode(clsPoissonCIFunction, iAdditionalPairNo:=20)
 
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
