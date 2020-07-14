@@ -1723,7 +1723,8 @@ DataSheet$set("public", "delete_objects", function(data_name, object_names, obje
     }else if(object_type == "filter"){
       if(!all(object_names %in% names(private$filters))) stop(object_names, " not found in filters list.")
       if("no_filter" %in% object_names) stop("no_filter cannot be deleted.")
-      if(any(private$.current_filter$name %in% object_names))stop(private$.current_filter$name, " is a current filter it cannot deleted.")
+      if(any(private$.current_filter$name %in% object_names))stop(private$.current_filter$name, " is currently in use and cannot be deleted.")
+
       private$filters[names(private$filters) %in% object_names] <- NULL
     }else if(object_type == "calculation"){
       if(!object_names %in% names(private$calculations)) stop(object_names, " not found in calculations list.")
