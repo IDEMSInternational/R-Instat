@@ -258,6 +258,7 @@ Public Class dlgOneVarFitModel
 
         clsWilcoxonFunction.SetPackageName("stats")
         clsWilcoxonFunction.SetRCommand("wilcox.test")
+        clsWilcoxonFunction.AddParameter("mu", 1)
 
 
         clsZTestFunction.SetPackageName("DescTools")
@@ -368,8 +369,7 @@ Public Class dlgOneVarFitModel
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSenFunction, New RParameter("conf.level", 1), iAdditionalPairNo:=6)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSerialCorrFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=6)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
-        ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsWilcoxonFunction, New RParameter("mu", 1), iAdditionalPairNo:=2)
-        ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("mu", 1), iAdditionalPairNo:=3)
+        ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
