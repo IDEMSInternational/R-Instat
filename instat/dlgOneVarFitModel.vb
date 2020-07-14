@@ -378,6 +378,9 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.AddAdditionalRCode(clsZTestFunction, iAdditionalPairNo:=5)
         ucrSaveModel.AddAdditionalRCode(clsBartelFunction, iAdditionalPairNo:=6)
         ucrSaveModel.AddAdditionalRCode(clsBrFunction, iAdditionalPairNo:=7)
+        ucrSaveModel.AddAdditionalRCode(clsRunsFunction, iAdditionalPairNo:=8)
+        ucrSaveModel.AddAdditionalRCode(clsSenFunction, iAdditionalPairNo:=9)
+        ucrSaveModel.AddAdditionalRCode(clsSerialCorrFunction, iAdditionalPairNo:=10)
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
