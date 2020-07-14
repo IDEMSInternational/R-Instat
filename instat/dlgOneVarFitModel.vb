@@ -104,7 +104,7 @@ Public Class dlgOneVarFitModel
         ucrInputNullHypothesis.SetParameterValue(0)
         ucrInputNullHypothesis.SetText("Null Hypothesis")
         ucrInputNullHypothesis.SetValidationTypeAsNumeric()
-        ucrInputNullHypothesis.AddQuotesIfUnrecognised = False
+
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboEstimate, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
@@ -241,6 +241,7 @@ Public Class dlgOneVarFitModel
         clsBionomialFunction.SetPackageName("mosaic")
         clsBionomialFunction.SetRCommand("binom.test")
         clsBionomialFunction.AddParameter("n", "", iPosition:=1)
+        clsBionomialFunction.AddParameter("p", "0.5", iPosition:=2)
 
         clsProportionFunction.SetPackageName("mosaic")
         clsProportionFunction.SetRCommand("prop.test")
@@ -252,7 +253,7 @@ Public Class dlgOneVarFitModel
 
         clsTtestFunction.SetPackageName("mosaic")
         clsTtestFunction.SetRCommand("t.test")
-        clsTtestFunction.AddParameter("mu", 0)
+        clsTtestFunction.AddParameter("mu", 1)
 
         clsWilcoxonFunction.SetPackageName("stats")
         clsWilcoxonFunction.SetRCommand("wilcox.test")
@@ -360,7 +361,7 @@ Public Class dlgOneVarFitModel
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=1)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=2)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=3)
-        'ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
+        ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsZTestFunction, New RParameter("p", 2), iAdditionalPairNo:=1)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=4)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=5)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("mu", 1), iAdditionalPairNo:=2)
