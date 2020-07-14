@@ -270,7 +270,7 @@ Public Class dlgOneVarFitModel
 
         clsBrFunction.SetPackageName("trend")
         clsBrFunction.SetRCommand("br.test")
-        clsBrFunction.AddParameter("mu", "20000", iPosition:=1)
+        clsBrFunction.AddParameter("m", "20000", iPosition:=1)
 
         clsRunsFunction.SetPackageName("DescTools")
         clsRunsFunction.SetRCommand("RunsTest")
@@ -371,6 +371,9 @@ Public Class dlgOneVarFitModel
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("mu", 1), iAdditionalPairNo:=2)
 
+        ucrSaveModel.AddAdditionalRCode(clsBionomialFunction, iAdditionalPairNo:=1)
+        ucrSaveModel.AddAdditionalRCode(clsProportionFunction, iAdditionalPairNo:=2)
+
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
         ucrChkConvertVariate.SetRCode(clsROneVarFitModel, bReset)
@@ -379,7 +382,7 @@ Public Class dlgOneVarFitModel
         ucrNudConfidenceLevel.SetRCode(clsTtestFunction, bReset)
         ucrInputNullHypothesis.SetRCode(clsTtestFunction, bReset)
 
-        ucrSaveModel.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
