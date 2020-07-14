@@ -253,17 +253,17 @@ Public Class dlgOneVarFitModel
 
         clsTtestFunction.SetPackageName("mosaic")
         clsTtestFunction.SetRCommand("t.test")
-        clsTtestFunction.AddParameter("mu", 1)
+        clsTtestFunction.AddParameter("mu", "0", iPosition:=1)
         clsTtestFunction.AddParameter("conf.level", "0.95", iPosition:=2)
 
         clsWilcoxonFunction.SetPackageName("stats")
         clsWilcoxonFunction.SetRCommand("wilcox.test")
-        clsWilcoxonFunction.AddParameter("mu", 1)
+        clsWilcoxonFunction.AddParameter("mu", "0", iPosition:=1)
 
 
         clsZTestFunction.SetPackageName("DescTools")
         clsZTestFunction.SetRCommand("ZTest")
-        clsZTestFunction.AddParameter("mu", 2)
+        clsZTestFunction.AddParameter("mu", "0", iPosition:=2)
 
         clsBartelFunction.SetPackageName("DescTools")
         clsBartelFunction.SetRCommand("BartelsRankTest")
