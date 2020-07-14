@@ -17,61 +17,46 @@
 Imports instat.Translations
 
 Public Class dlgExtremes
+    Private clsFevdFunction As New RFunction
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+
+
     Private Sub dlgExtremes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        chkRestrictValues.Checked = False
-        lblBetween.Visible = False
-        txtBetween.Visible = False
-        lblAnd.Visible = False
-        txtAnd.Visible = False
-        chkMaximumLikelihood.Checked = False
-        chkMethodOfMoments.Checked = False
-        cboMaximumLikelihood.Visible = True
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
 
-        cboMethodOfMoments.Visible = False
-        chkProbabilityPlot.Checked = False
-
-        ucrBase.OKEnabled(False) ' temporarily for beta
-
-        ucrBase.clsRsyntax.SetFunction("gev.fit")
-        ucrBase.clsRsyntax.iCallType = 1
+        bReset = False
         autoTranslate(Me)
-        ucrReceiverDataToFit.Selector = ucrAddRemove
-        ucrReceiverDataToFit.SetMeAsReceiver()
-        ucrBase.iHelpTopicID = 488
+        TestOkEnabled()
     End Sub
 
+    Private Sub InitialiseDialog()
+        ucrSelectorExtremes.SetParameter(New RParameter("data", 0))
+        ucrSelectorExtremes.SetParameterIsrfunction()
+
+        ucrReceiverVariable.Selector = ucrSelectorExtremes
+        ucrReceiverVariable.strSelectorHeading = "Variables"
+        ucrReceiverVariable.SetParameter(New RParameter("x", 0))
+        'ucrReceiverVariable.SetParameterIsString()
+    End Sub
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverVariable.SetRCode(clsFevdFunction, bReset)
+    End Sub
     Private Sub SetDefaults()
+        clsFevdFunction = New RFunction
+
+        clsFevdFunction.SetPackageName("extRemes")
+        clsFevdFunction.SetRCommand("fevd")
     End Sub
 
-    Private Sub chkRestrictValues_CheckedChanged(sender As Object, e As EventArgs) Handles chkRestrictValues.CheckedChanged
-        If chkRestrictValues.Checked = True Then
-            lblBetween.Visible = True
-            txtBetween.Visible = True
-            lblAnd.Visible = True
-            txtAnd.Visible = True
-        Else
-            lblBetween.Visible = False
-            txtBetween.Visible = False
-            lblAnd.Visible = False
-            txtAnd.Visible = False
-        End If
-    End Sub
+    Private Sub TestOkEnabled()
 
-    Private Sub chkMaximumLikelihood_CheckedChanged(sender As Object, e As EventArgs) Handles chkMaximumLikelihood.CheckedChanged
-        If chkMaximumLikelihood.Checked = True Then
-            cboMaximumLikelihood.Visible = True
-        End If
-    End Sub
-
-    Private Sub chkMethodofMoments_CheckedChanged(sender As Object, e As EventArgs) Handles chkMethodOfMoments.CheckedChanged
-        If chkMethodOfMoments.Checked = True Then
-            cboMethodOfMoments.Visible = True
-        Else
-            cboMethodOfMoments.Visible = False
-        End If
-    End Sub
-
-    Private Sub ucrReceiverDataToFit_Leave(sender As Object, e As EventArgs) Handles ucrReceiverDataToFit.Leave
-        ucrBase.clsRsyntax.AddParameter("xdat", clsRFunctionParameter:=ucrReceiverDataToFit.GetVariables())
     End Sub
 End Class
