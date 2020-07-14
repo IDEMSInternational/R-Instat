@@ -394,6 +394,8 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.AddAdditionalRCode(clsMeanCIFunction, iAdditionalPairNo:=18)
         ucrSaveModel.AddAdditionalRCode(clsMedianCIFunction, iAdditionalPairNo:=19)
         ucrSaveModel.AddAdditionalRCode(clsPoissonCIFunction, iAdditionalPairNo:=20)
+        ucrSaveModel.AddAdditionalRCode(clsQuantileCIFunction, iAdditionalPairNo:=21)
+        ucrSaveModel.AddAdditionalRCode(clsSdCIFunction, iAdditionalPairNo:=22)
 
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
