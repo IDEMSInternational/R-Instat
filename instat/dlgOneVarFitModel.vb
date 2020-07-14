@@ -383,6 +383,8 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.AddAdditionalRCode(clsSerialCorrFunction, iAdditionalPairNo:=10)
         ucrSaveModel.AddAdditionalRCode(clsSfFunction, iAdditionalPairNo:=11)
         ucrSaveModel.AddAdditionalRCode(clsSnhFunction, iAdditionalPairNo:=12)
+        ucrSaveModel.AddAdditionalRCode(clsAdFunction, iAdditionalPairNo:=13)
+        ucrSaveModel.AddAdditionalRCode(clsCvmFunction, iAdditionalPairNo:=14)
 
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
