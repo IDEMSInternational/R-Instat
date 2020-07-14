@@ -112,7 +112,7 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudTrim, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrOmmitMissing, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputNullHypothesis, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputNullHypothesis, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputMethod, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="classic")
 
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
@@ -254,6 +254,7 @@ Public Class dlgOneVarFitModel
         clsTtestFunction.SetPackageName("mosaic")
         clsTtestFunction.SetRCommand("t.test")
         clsTtestFunction.AddParameter("mu", 1)
+        clsTtestFunction.AddParameter("conf.level", "0.95", iPosition:=2)
 
         clsWilcoxonFunction.SetPackageName("stats")
         clsWilcoxonFunction.SetRCommand("wilcox.test")
@@ -261,6 +262,7 @@ Public Class dlgOneVarFitModel
 
         clsZTestFunction.SetPackageName("DescTools")
         clsZTestFunction.SetRCommand("ZTest")
+        clsZTestFunction.AddParameter("mu", 2)
 
         clsBartelFunction.SetPackageName("DescTools")
         clsBartelFunction.SetRCommand("BartelsRankTest")
@@ -360,23 +362,21 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("x", 0), iAdditionalPairNo:=24)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=1)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=2)
-        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=3)
+        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsZTestFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=3)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=4)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsWilcoxonFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=5)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSenFunction, New RParameter("conf.level", 1), iAdditionalPairNo:=6)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSerialCorrFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=6)
-        ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsZTestFunction, New RParameter("p", 2), iAdditionalPairNo:=1)
-        ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("p", 2), iAdditionalPairNo:=2)
-        ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("mu", 1), iAdditionalPairNo:=3)
-        ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsWilcoxonFunction, New RParameter("mu", 1), iAdditionalPairNo:=4)
-        ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("mu", 1), iAdditionalPairNo:=5)
+        ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
+        ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsWilcoxonFunction, New RParameter("mu", 1), iAdditionalPairNo:=2)
+        ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("mu", 1), iAdditionalPairNo:=3)
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
         ucrChkConvertVariate.SetRCode(clsROneVarFitModel, bReset)
         ucrNudTrim.SetRCode(clsMeanCIFunction, bReset)
         ucrOmmitMissing.SetRCode(clsMeanCIFunction, bReset)
-        ucrNudConfidenceLevel.SetRCode(clsZTestFunction, bReset)
+        ucrNudConfidenceLevel.SetRCode(clsTtestFunction, bReset)
         ucrInputNullHypothesis.SetRCode(clsTtestFunction, bReset)
 
         ucrSaveModel.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
