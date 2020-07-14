@@ -371,6 +371,7 @@ Public Class dlgOneVarFitModel
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("mu", 1), iAdditionalPairNo:=2)
 
+        ' Additional Rcode for test functions
         ucrSaveModel.AddAdditionalRCode(clsBionomialFunction, iAdditionalPairNo:=1)
         ucrSaveModel.AddAdditionalRCode(clsProportionFunction, iAdditionalPairNo:=2)
         ucrSaveModel.AddAdditionalRCode(clsSignTestFunction, iAdditionalPairNo:=3)
@@ -385,7 +386,12 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.AddAdditionalRCode(clsSnhFunction, iAdditionalPairNo:=12)
         ucrSaveModel.AddAdditionalRCode(clsAdFunction, iAdditionalPairNo:=13)
         ucrSaveModel.AddAdditionalRCode(clsCvmFunction, iAdditionalPairNo:=14)
+        ucrSaveModel.AddAdditionalRCode(clsWilcoxonFunction, iAdditionalPairNo:=15)
+        ucrSaveModel.AddAdditionalRCode(clsLillieFunction, iAdditionalPairNo:=16)
+        ucrSaveModel.AddAdditionalRCode(clsPearsonFunction, iAdditionalPairNo:=17)
 
+        ' Additional Rcode for estimates functions
+        ucrSaveModel.AddAdditionalRCode(clsMeanCIFunction, iAdditionalPairNo:=18)
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
