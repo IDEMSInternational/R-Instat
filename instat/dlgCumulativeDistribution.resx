@@ -127,13 +127,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 207</value>
+    <value>243, 220</value>
   </data>
   <data name="lblFactors.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
   </data>
   <data name="lblFactors.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="lblFactors.Text" xml:space="preserve">
     <value>Factor (Optional):</value>
@@ -154,13 +154,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdPlotOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 247</value>
+    <value>10, 236</value>
   </data>
   <data name="cmdPlotOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 25</value>
   </data>
   <data name="cmdPlotOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="cmdPlotOptions.Text" xml:space="preserve">
     <value>Options</value>
@@ -177,78 +177,6 @@
   <data name="&gt;&gt;cmdPlotOptions.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="rdoCumulative.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoCumulative.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoCumulative.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoCumulative.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 13</value>
-  </data>
-  <data name="rdoCumulative.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 27</value>
-  </data>
-  <data name="rdoCumulative.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="rdoCumulative.Text" xml:space="preserve">
-    <value>Cumulative</value>
-  </data>
-  <data name="rdoCumulative.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoCumulative.Name" xml:space="preserve">
-    <value>rdoCumulative</value>
-  </data>
-  <data name="&gt;&gt;rdoCumulative.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoCumulative.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoCumulative.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="rdoExceedance.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoExceedance.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoExceedance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoExceedance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 13</value>
-  </data>
-  <data name="rdoExceedance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 27</value>
-  </data>
-  <data name="rdoExceedance.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="rdoExceedance.Text" xml:space="preserve">
-    <value>Exceedance</value>
-  </data>
-  <data name="rdoExceedance.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoExceedance.Name" xml:space="preserve">
-    <value>rdoExceedance</value>
-  </data>
-  <data name="&gt;&gt;rdoExceedance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoExceedance.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoExceedance.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="lblScale.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -256,13 +184,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, 294</value>
+    <value>193, 267</value>
   </data>
   <data name="lblScale.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
   </data>
   <data name="lblScale.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>11</value>
   </data>
   <data name="lblScale.Text" xml:space="preserve">
     <value>Scale by:</value>
@@ -280,7 +208,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblScale.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="lblNudby.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -289,13 +217,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblNudby.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 325</value>
+    <value>185, 297</value>
   </data>
   <data name="lblNudby.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 13</value>
   </data>
   <data name="lblNudby.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>13</value>
   </data>
   <data name="lblNudby.Text" xml:space="preserve">
     <value>In steps of:</value>
@@ -313,16 +241,88 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblNudby.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="rdoCumulative.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoCumulative.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoCumulative.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoCumulative.Location" type="System.Drawing.Point, System.Drawing">
+    <value>119, 14</value>
+  </data>
+  <data name="rdoCumulative.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 27</value>
+  </data>
+  <data name="rdoCumulative.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="rdoCumulative.Text" xml:space="preserve">
+    <value>Cumulative</value>
+  </data>
+  <data name="rdoCumulative.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoCumulative.Name" xml:space="preserve">
+    <value>rdoCumulative</value>
+  </data>
+  <data name="&gt;&gt;rdoCumulative.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCumulative.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoCumulative.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoExceedance.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoExceedance.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoExceedance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoExceedance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 14</value>
+  </data>
+  <data name="rdoExceedance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 27</value>
+  </data>
+  <data name="rdoExceedance.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoExceedance.Text" xml:space="preserve">
+    <value>Exceedance</value>
+  </data>
+  <data name="rdoExceedance.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoExceedance.Name" xml:space="preserve">
+    <value>rdoExceedance</value>
+  </data>
+  <data name="&gt;&gt;rdoExceedance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoExceedance.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoExceedance.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrNudBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 325</value>
+    <value>246, 294</value>
   </data>
   <data name="ucrNudBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>56, 20</value>
   </data>
   <data name="ucrNudBy.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrNudBy.Name" xml:space="preserve">
     <value>ucrNudBy</value>
@@ -334,16 +334,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudBy.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="ucrInputComboScales.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 294</value>
+    <value>246, 264</value>
   </data>
   <data name="ucrInputComboScales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 26</value>
+    <value>120, 26</value>
   </data>
   <data name="ucrInputComboScales.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;ucrInputComboScales.Name" xml:space="preserve">
     <value>ucrInputComboScales</value>
@@ -355,16 +355,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputComboScales.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
+  </data>
+  <data name="ucrPnlOption.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="ucrPnlOption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 12</value>
+    <value>101, 9</value>
   </data>
   <data name="ucrPnlOption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 30</value>
+    <value>211, 38</value>
   </data>
   <data name="ucrPnlOption.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrPnlOption.Name" xml:space="preserve">
     <value>ucrPnlOption</value>
@@ -379,13 +382,13 @@
     <value>6</value>
   </data>
   <data name="ucrChkIncludePoints.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 313</value>
+    <value>10, 300</value>
   </data>
   <data name="ucrChkIncludePoints.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 20</value>
+    <value>152, 19</value>
   </data>
   <data name="ucrChkIncludePoints.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrChkIncludePoints.Name" xml:space="preserve">
     <value>ucrChkIncludePoints</value>
@@ -400,13 +403,13 @@
     <value>7</value>
   </data>
   <data name="ucrChkCountsOnYAxis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 287</value>
+    <value>10, 274</value>
   </data>
   <data name="ucrChkCountsOnYAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 20</value>
+    <value>152, 19</value>
   </data>
   <data name="ucrChkCountsOnYAxis.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrChkCountsOnYAxis.Name" xml:space="preserve">
     <value>ucrChkCountsOnYAxis</value>
@@ -421,16 +424,16 @@
     <value>8</value>
   </data>
   <data name="ucrSaveCumDist.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 353</value>
+    <value>10, 327</value>
   </data>
   <data name="ucrSaveCumDist.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveCumDist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 25</value>
+    <value>255, 25</value>
   </data>
   <data name="ucrSaveCumDist.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrSaveCumDist.Name" xml:space="preserve">
     <value>ucrSaveCumDist</value>
@@ -451,19 +454,19 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>418, 441</value>
+    <value>415, 410</value>
   </data>
   <data name="ucrFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 229</value>
+    <value>246, 235</value>
   </data>
   <data name="ucrFactorReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrFactorReceiver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 26</value>
+    <value>120, 26</value>
   </data>
   <data name="ucrFactorReceiver.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrFactorReceiver.Name" xml:space="preserve">
     <value>ucrFactorReceiver</value>
@@ -478,7 +481,7 @@
     <value>11</value>
   </data>
   <data name="ucrCumDistSelector.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 40</value>
+    <value>10, 50</value>
   </data>
   <data name="ucrCumDistSelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -487,7 +490,7 @@
     <value>211, 180</value>
   </data>
   <data name="ucrCumDistSelector.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrCumDistSelector.Name" xml:space="preserve">
     <value>ucrCumDistSelector</value>
@@ -502,13 +505,13 @@
     <value>14</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 386</value>
+    <value>10, 354</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -535,13 +538,13 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrVariablesAsFactorforCumDist.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 50</value>
+    <value>246, 70</value>
   </data>
   <data name="ucrVariablesAsFactorforCumDist.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 136</value>
   </data>
   <data name="ucrVariablesAsFactorforCumDist.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrVariablesAsFactorforCumDist.Name" xml:space="preserve">
     <value>ucrVariablesAsFactorforCumDist</value>

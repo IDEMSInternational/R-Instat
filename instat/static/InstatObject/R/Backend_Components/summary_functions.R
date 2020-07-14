@@ -1009,7 +1009,7 @@ me <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::me(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::me(sim = y, obs = x, na.rm = na.rm))
   }
 } 
 
@@ -1018,7 +1018,7 @@ mae <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::mae(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::mae(sim = y, obs = x, na.rm = na.rm))
   }
 } 
 
@@ -1027,7 +1027,7 @@ rmse <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rmse(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::rmse(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1036,7 +1036,7 @@ nrmse <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::nrmse(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::nrmse(sim = y, obs = x, na.rm = na.rm))
   }
 } 
 
@@ -1045,7 +1045,7 @@ PBIAS <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::pbias(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::pbias(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1054,7 +1054,7 @@ NSE <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::NSeff(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::NSeff(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1063,7 +1063,7 @@ mNSE <- function(x, y, j = 1, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::mNSE(sim = x, obs = y, j = j, na.rm = na.rm))
+    return(hydroGOF::mNSE(sim = y, obs = x, j = j, na.rm = na.rm))
   }
 } 
 
@@ -1072,7 +1072,7 @@ rNSE <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rNSeff(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::rNSeff(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1081,16 +1081,16 @@ d <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::d(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::d(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
-#Modified index of aggrement
+#Modified index of agreement
 md <- function(x, y, j = 1, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::md(sim = x, obs = y, j = j,  na.rm = na.rm))
+    return(hydroGOF::md(sim = y, obs = x, j = j,  na.rm = na.rm))
   }
 }
 
@@ -1100,7 +1100,7 @@ rd <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rd(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::rd(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1110,7 +1110,7 @@ R2 <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::br2(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::br2(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1119,7 +1119,7 @@ cp <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(unique(y))==1||length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::cp(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::cp(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1128,7 +1128,7 @@ KGE <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::KGE(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::KGE(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1137,7 +1137,7 @@ mse <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::mse(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::mse(sim = y, obs = x, na.rm = na.rm))
   }
 } 
 
@@ -1147,7 +1147,7 @@ rSD <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rSD(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::rSD(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1156,7 +1156,7 @@ rsr <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::rsr(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::rsr(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1165,7 +1165,7 @@ ssq <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::ssq(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::ssq(sim = y, obs = x, na.rm = na.rm))
   }
 }
 
@@ -1174,9 +1174,108 @@ VE <- function(x, y, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if(length(x[is.na(x)])==length(x)||length(y[is.na(y)])==length(y)) return(NA)
-    return(hydroGOF::VE(sim = x, obs = y, na.rm = na.rm))
+    return(hydroGOF::VE(sim = y, obs = x, na.rm = na.rm))
   }
 }
+
+#Verification package
+
+#Categorical/Categorical
+
+##Percent Correct  
+pc <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$pc)  
+}
+
+##Heidke Skill Score   
+hss <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$hss)  
+}
+
+##Pierce Skill Score   
+pss <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$pss)  
+}
+
+##Gerrity Score       
+GS <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$gs)  
+}
+
+#Binary/Binary
+
+##Hit rate aka PODy
+PODy <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$POD)  
+}
+
+##Threat score
+TS <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$TS)  
+}
+
+##Equitable threat score
+ETS <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$ETS)  
+}
+
+##False alarm ratio
+FAR <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$FAR)  
+}
+
+##Heidke skill score
+HSS <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$HSS)  
+}
+
+##Percent correct
+PC <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$PC)  
+}
+
+##Bias
+BIAS <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$BIAS)  
+}
+
+##Extreme dependency score
+EDS <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$eds)  
+}
+
+##Symmetric extreme dependency score
+SEDS <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$seds)  
+}
+
+##Extremal dependency index
+EDI <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$EDI)  
+}
+
+##Symmetric Extremal dependence index
+SEDI <- function(x, y, frcst.type, obs.type, ...){
+  A <- verification::verify(obs = x, pred = y,  frcst.type = frcst.type, obs.type = obs.type)
+  return(A$SEDI)  
+}
+
+##TODO:Check if there are summaries that only apply to (Probabilistic-binary) types.
+
 
 DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   if(n_column_factors == 1 && length(factors) == 0) n_column_factors <- 0
