@@ -396,6 +396,7 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.AddAdditionalRCode(clsPoissonCIFunction, iAdditionalPairNo:=20)
         ucrSaveModel.AddAdditionalRCode(clsQuantileCIFunction, iAdditionalPairNo:=21)
         ucrSaveModel.AddAdditionalRCode(clsSdCIFunction, iAdditionalPairNo:=22)
+        ucrSaveModel.AddAdditionalRCode(clsVarCIFunction, iAdditionalPairNo:=23)
 
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
