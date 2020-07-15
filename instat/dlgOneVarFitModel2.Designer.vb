@@ -50,13 +50,13 @@ Partial Class dlgOneVarFitModel
         Me.lblMethod = New System.Windows.Forms.Label()
         Me.lblConfidenceLevel = New System.Windows.Forms.Label()
         Me.lblNullHypothesis = New System.Windows.Forms.Label()
+        Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.ucrInputNullHypothesis = New instat.ucrInputTextBox()
         Me.ucrNudTrim = New instat.ucrNud()
         Me.ucrNudConfidenceLevel = New instat.ucrNud()
         Me.ucrInputComboEstimate = New instat.ucrInputComboBox()
-        Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.ucrInputComboTests = New instat.ucrInputComboBox()
-        Me.ucrOmmitMissing = New instat.ucrCheck()
+        Me.ucrChkOmmitMissing = New instat.ucrCheck()
         Me.ucrChkConvertVariate = New instat.ucrCheck()
         Me.ucrPnlGeneralExactCase = New instat.UcrPanel()
         Me.ucrSaveModel = New instat.ucrSave()
@@ -167,7 +167,7 @@ Partial Class dlgOneVarFitModel
         'lblTrim
         '
         Me.lblTrim.AutoSize = True
-        Me.lblTrim.Location = New System.Drawing.Point(546, 126)
+        Me.lblTrim.Location = New System.Drawing.Point(319, 155)
         Me.lblTrim.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTrim.Name = "lblTrim"
         Me.lblTrim.Size = New System.Drawing.Size(40, 17)
@@ -177,7 +177,7 @@ Partial Class dlgOneVarFitModel
         'lblMethod
         '
         Me.lblMethod.AutoSize = True
-        Me.lblMethod.Location = New System.Drawing.Point(539, 168)
+        Me.lblMethod.Location = New System.Drawing.Point(321, 186)
         Me.lblMethod.Name = "lblMethod"
         Me.lblMethod.Size = New System.Drawing.Size(59, 17)
         Me.lblMethod.TabIndex = 54
@@ -202,6 +202,16 @@ Partial Class dlgOneVarFitModel
         Me.lblNullHypothesis.TabIndex = 59
         Me.lblNullHypothesis.Text = "Null Hypothesis:"
         '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.IsReadOnly = False
+        Me.ucrInputMethod.Location = New System.Drawing.Point(380, 177)
+        Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.ucrInputMethod.Name = "ucrInputMethod"
+        Me.ucrInputMethod.Size = New System.Drawing.Size(80, 26)
+        Me.ucrInputMethod.TabIndex = 53
+        '
         'ucrInputNullHypothesis
         '
         Me.ucrInputNullHypothesis.AddQuotesIfUnrecognised = True
@@ -217,7 +227,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrNudTrim.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTrim.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTrim.Location = New System.Drawing.Point(608, 126)
+        Me.ucrNudTrim.Location = New System.Drawing.Point(380, 150)
         Me.ucrNudTrim.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrNudTrim.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTrim.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -249,16 +259,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputComboEstimate.Size = New System.Drawing.Size(123, 26)
         Me.ucrInputComboEstimate.TabIndex = 48
         '
-        'ucrInputMethod
-        '
-        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(608, 159)
-        Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
-        Me.ucrInputMethod.Name = "ucrInputMethod"
-        Me.ucrInputMethod.Size = New System.Drawing.Size(80, 26)
-        Me.ucrInputMethod.TabIndex = 53
-        '
         'ucrInputComboTests
         '
         Me.ucrInputComboTests.AddQuotesIfUnrecognised = True
@@ -269,14 +269,14 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputComboTests.Size = New System.Drawing.Size(123, 26)
         Me.ucrInputComboTests.TabIndex = 46
         '
-        'ucrOmmitMissing
+        'ucrChkOmmitMissing
         '
-        Me.ucrOmmitMissing.Checked = False
-        Me.ucrOmmitMissing.Location = New System.Drawing.Point(333, 292)
-        Me.ucrOmmitMissing.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
-        Me.ucrOmmitMissing.Name = "ucrOmmitMissing"
-        Me.ucrOmmitMissing.Size = New System.Drawing.Size(160, 25)
-        Me.ucrOmmitMissing.TabIndex = 52
+        Me.ucrChkOmmitMissing.Checked = False
+        Me.ucrChkOmmitMissing.Location = New System.Drawing.Point(324, 215)
+        Me.ucrChkOmmitMissing.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.ucrChkOmmitMissing.Name = "ucrChkOmmitMissing"
+        Me.ucrChkOmmitMissing.Size = New System.Drawing.Size(160, 25)
+        Me.ucrChkOmmitMissing.TabIndex = 52
         '
         'ucrChkConvertVariate
         '
@@ -346,7 +346,9 @@ Partial Class dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(695, 517)
+        Me.ClientSize = New System.Drawing.Size(552, 517)
+        Me.Controls.Add(Me.lblMethod)
+        Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.ucrInputNullHypothesis)
         Me.Controls.Add(Me.ucrNudTrim)
         Me.Controls.Add(Me.ucrNudConfidenceLevel)
@@ -356,11 +358,9 @@ Partial Class dlgOneVarFitModel
         Me.Controls.Add(Me.lblEstimate)
         Me.Controls.Add(Me.ucrInputComboEstimate)
         Me.Controls.Add(Me.lblTests)
-        Me.Controls.Add(Me.lblMethod)
-        Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.ucrInputComboTests)
         Me.Controls.Add(Me.rdoEstimate)
-        Me.Controls.Add(Me.ucrOmmitMissing)
+        Me.Controls.Add(Me.ucrChkOmmitMissing)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.ucrChkConvertVariate)
         Me.Controls.Add(Me.rdoTest)
@@ -405,7 +405,7 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents lblEstimate As Label
     Friend WithEvents ucrNudTrim As ucrNud
     Friend WithEvents lblTrim As Label
-    Friend WithEvents ucrOmmitMissing As ucrCheck
+    Friend WithEvents ucrChkOmmitMissing As ucrCheck
     Friend WithEvents lblMethod As Label
     Friend WithEvents ucrInputMethod As ucrInputComboBox
     Friend WithEvents lblConfidenceLevel As Label

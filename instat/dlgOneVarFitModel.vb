@@ -93,6 +93,8 @@ Public Class dlgOneVarFitModel
         ucrNudTrim.DecimalPlaces = 2
         ucrNudTrim.Increment = 0.01
 
+        ucrChkOmmitMissing.SetText("Ommit Missing")
+
 
         ucrNudConfidenceLevel.SetParameter(New RParameter("conf.level"))
         ucrNudConfidenceLevel.DecimalPlaces = 2
@@ -110,8 +112,9 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboEstimate, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrDistributionChoice, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudTrim, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrOmmitMissing, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrChkOmmitMissing, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoEstimate}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputNullHypothesis, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputMethod, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="classic")
 
@@ -348,8 +351,8 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsQuantileCIFunction, New RParameter("x", 0), iAdditionalPairNo:=11)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsSdCIFunction, New RParameter("x", 0), iAdditionalPairNo:=12)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsVarCIFunction, New RParameter("x", 0), iAdditionalPairNo:=13)
-        ucrOmmitMissing.AddAdditionalCodeParameterPair(clsMedianCIFunction, ucrOmmitMissing.GetParameter(), iAdditionalPairNo:=1)
-        ucrOmmitMissing.AddAdditionalCodeParameterPair(clsVarCIFunction, ucrOmmitMissing.GetParameter(), iAdditionalPairNo:=2)
+        ucrChkOmmitMissing.AddAdditionalCodeParameterPair(clsMedianCIFunction, ucrChkOmmitMissing.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkOmmitMissing.AddAdditionalCodeParameterPair(clsVarCIFunction, ucrChkOmmitMissing.GetParameter(), iAdditionalPairNo:=2)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBartelFunction, New RParameter("x", 0), iAdditionalPairNo:=14)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBrFunction, New RParameter("x", 0), iAdditionalPairNo:=15)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRunsFunction, New RParameter("x", 0), iAdditionalPairNo:=16)
@@ -403,7 +406,7 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
         ucrChkConvertVariate.SetRCode(clsROneVarFitModel, bReset)
         ucrNudTrim.SetRCode(clsMeanCIFunction, bReset)
-        ucrOmmitMissing.SetRCode(clsMeanCIFunction, bReset)
+        ucrChkOmmitMissing.SetRCode(clsMeanCIFunction, bReset)
         ucrNudConfidenceLevel.SetRCode(clsTtestFunction, bReset)
         ucrInputNullHypothesis.SetRCode(clsTtestFunction, bReset)
 
@@ -512,7 +515,6 @@ Public Class dlgOneVarFitModel
             ucrSaveModel.SetPrefix("test")
         ElseIf rdoEstimate.Checked Then
             ucrSaveModel.SetCheckBoxText("Save Estimate")
-            ucrSaveModel.SetAssignToIfUncheckedValue("last_estimate")
             ucrSaveModel.SetPrefix("ci")
         End If
     End Sub
