@@ -349,6 +349,7 @@ Public Class dlgOneVarFitModel
 
         clsVarCIFunction.SetPackageName("DescTools")
         clsVarCIFunction.SetRCommand("VarCI")
+        clsVarCIFunction.AddParameter("na.rm", "TRUE", iPosition:=3)
 
         clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
         clsRLogLikFunction.SetAssignTo("last_likelihood", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_likelihood")
@@ -401,11 +402,13 @@ Public Class dlgOneVarFitModel
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSdCIFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=12)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSdCIFunction, New RParameter("conf.level", 1), iAdditionalPairNo:=13)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsMeanCIFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=14)
+        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsVarCIFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=15)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("mu", 1), iAdditionalPairNo:=2)
         ucrInputMethod.AddAdditionalCodeParameterPair(clsMedianCIFunction, New RParameter("method", 3), 1)
         ucrInputMethod.AddAdditionalCodeParameterPair(clsQuantileCIFunction, New RParameter("bootci.type", 5), 2)
         ucrInputMethod.AddAdditionalCodeParameterPair(clsPoissonCIFunction, New RParameter("method", 3), iAdditionalPairNo:=3)
+        ucrInputMethod.AddAdditionalCodeParameterPair(clsVarCIFunction, New RParameter("method", 1), iAdditionalPairNo:=4)
 
         ' Additional Rcode for test functions
         ucrSaveModel.AddAdditionalRCode(clsBionomialFunction, iAdditionalPairNo:=1)
