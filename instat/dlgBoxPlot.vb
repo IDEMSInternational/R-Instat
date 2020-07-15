@@ -47,6 +47,8 @@ Public Class dlgBoxplot
     Private clsCurrGeomFunc As New RFunction
     ' Jitter function that can be added to the boxplot/violin base layer
     Private clsAddedJitterFunc As New RFunction
+    Private clsXScaleDateFunction As New RFunction
+    Private clsYScaleDateFunction As New RFunction
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
@@ -253,6 +255,8 @@ Public Class dlgBoxplot
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
+        clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
+        clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -296,7 +300,7 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, ucrNewBaseSelector:=ucrSelectorBoxPlot, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
 
