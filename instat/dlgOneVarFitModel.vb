@@ -317,6 +317,11 @@ Public Class dlgOneVarFitModel
 
         clsNormCIFunction.SetPackageName("MKinfer")
         clsNormCIFunction.SetRCommand("normCI")
+        clsNormCIFunction.AddParameter("mean", "NULL", iPosition:=1)
+        clsNormCIFunction.AddParameter("sd", "NULL", iPosition:=2)
+        clsNormCIFunction.AddParameter("boot", "FALSE", iPosition:=4)
+        clsNormCIFunction.AddParameter("R", "9999", iPosition:=5)
+        clsNormCIFunction.AddParameter("bootci.type", "all", iPosition:=6)
 
         clsPoissonCIFunction.SetPackageName("DescTools")
         clsPoissonCIFunction.SetRCommand("PoissonCI")
@@ -376,6 +381,7 @@ Public Class dlgOneVarFitModel
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSerialCorrFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=7)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsMeanCIFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=8)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsMedianCIFunction, New RParameter("conf.level", 1), iAdditionalPairNo:=9)
+        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsNormCIFunction, New RParameter("conf.leve", 3), iAdditionalPairNo:=10)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("mu", 1), iAdditionalPairNo:=2)
 
