@@ -325,6 +325,8 @@ Public Class dlgOneVarFitModel
 
         clsPoissonCIFunction.SetPackageName("DescTools")
         clsPoissonCIFunction.SetRCommand("PoissonCI")
+        clsPoissonCIFunction.AddParameter("n", "1", iPosition:=1)
+
 
         clsQuantileCIFunction.SetPackageName("MKinfer")
         clsQuantileCIFunction.SetRCommand("quantileCI")
@@ -382,6 +384,7 @@ Public Class dlgOneVarFitModel
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsMeanCIFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=8)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsMedianCIFunction, New RParameter("conf.level", 1), iAdditionalPairNo:=9)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsNormCIFunction, New RParameter("conf.leve", 3), iAdditionalPairNo:=10)
+        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsPoissonCIFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=11)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("mu", 1), iAdditionalPairNo:=2)
 
