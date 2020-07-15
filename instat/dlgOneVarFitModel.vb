@@ -405,6 +405,7 @@ Public Class dlgOneVarFitModel
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("mu", 1), iAdditionalPairNo:=2)
         ucrInputMethod.AddAdditionalCodeParameterPair(clsMedianCIFunction, New RParameter("method", 3), 1)
         ucrInputMethod.AddAdditionalCodeParameterPair(clsQuantileCIFunction, New RParameter("bootci.type", 5), 2)
+        ucrInputMethod.AddAdditionalCodeParameterPair(clsPoissonCIFunction, New RParameter("method", 3), iAdditionalPairNo:=3)
 
         ' Additional Rcode for test functions
         ucrSaveModel.AddAdditionalRCode(clsBionomialFunction, iAdditionalPairNo:=1)
