@@ -336,6 +336,8 @@ Public Class dlgOneVarFitModel
         clsQuantileCIFunction.AddParameter("prob", "0.5", iPosition:=1)
         clsQuantileCIFunction.AddParameter("method", "exact", iPosition:=3)
         clsQuantileCIFunction.AddParameter("R", "9999", iPosition:=4)
+        clsQuantileCIFunction.AddParameter("minLength", "FALSE", iPosition:=6)
+        clsQuantileCIFunction.AddParameter("na.rm", "TRUE", iPosition:=7)
 
 
         clsSdCIFunction.SetPackageName("MKinfer")
