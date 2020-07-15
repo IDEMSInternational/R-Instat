@@ -308,6 +308,8 @@ Public Class dlgOneVarFitModel
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
         clsMeanCIFunction.SetRCommand("MeanCI")
+        clsMeanCIFunction.AddParameter("tream", "0", iPosition:=1)
+        clsMeanCIFunction.AddParameter("na.rm", "True", iPosition:=3)
 
         clsMedianCIFunction.SetPackageName("DescTools")
         clsMedianCIFunction.SetRCommand("MedianCI ")
@@ -370,7 +372,8 @@ Public Class dlgOneVarFitModel
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=4)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsWilcoxonFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=5)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSenFunction, New RParameter("conf.level", 1), iAdditionalPairNo:=6)
-        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSerialCorrFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=6)
+        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSerialCorrFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=7)
+        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsMeanCIFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=8)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("mu", 1), iAdditionalPairNo:=2)
 
