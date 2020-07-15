@@ -118,7 +118,7 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudTrim, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrChkOmmitMissing, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoEstimate}, bNewLinkedChangeParameterValue:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputNullHypothesis, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputMethod, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="classic")
 
@@ -334,6 +334,8 @@ Public Class dlgOneVarFitModel
         clsQuantileCIFunction.SetPackageName("MKinfer")
         clsQuantileCIFunction.SetRCommand("quantileCI")
         clsQuantileCIFunction.AddParameter("prob", "0.5", iPosition:=1)
+        clsQuantileCIFunction.AddParameter("method", "exact", iPosition:=3)
+        clsQuantileCIFunction.AddParameter("R", "9999", iPosition:=4)
 
 
         clsSdCIFunction.SetPackageName("MKinfer")
@@ -400,6 +402,7 @@ Public Class dlgOneVarFitModel
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("mu", 1), iAdditionalPairNo:=2)
         ucrInputMethod.AddAdditionalCodeParameterPair(clsMedianCIFunction, New RParameter("method", 3), 1)
+        ucrInputMethod.AddAdditionalCodeParameterPair(clsQuantileCIFunction, New RParameter("bootci.type", 5), 2)
 
         ' Additional Rcode for test functions
         ucrSaveModel.AddAdditionalRCode(clsBionomialFunction, iAdditionalPairNo:=1)
