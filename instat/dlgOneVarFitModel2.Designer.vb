@@ -64,8 +64,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrNudConfLevel = New instat.ucrNud()
-        Me.lblConfLevel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -169,7 +167,7 @@ Partial Class dlgOneVarFitModel
         'lblTrim
         '
         Me.lblTrim.AutoSize = True
-        Me.lblTrim.Location = New System.Drawing.Point(396, 155)
+        Me.lblTrim.Location = New System.Drawing.Point(406, 222)
         Me.lblTrim.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTrim.Name = "lblTrim"
         Me.lblTrim.Size = New System.Drawing.Size(40, 17)
@@ -179,7 +177,7 @@ Partial Class dlgOneVarFitModel
         'lblMethod
         '
         Me.lblMethod.AutoSize = True
-        Me.lblMethod.Location = New System.Drawing.Point(363, 187)
+        Me.lblMethod.Location = New System.Drawing.Point(366, 189)
         Me.lblMethod.Name = "lblMethod"
         Me.lblMethod.Size = New System.Drawing.Size(59, 17)
         Me.lblMethod.TabIndex = 54
@@ -229,7 +227,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrNudTrim.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTrim.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTrim.Location = New System.Drawing.Point(447, 150)
+        Me.ucrNudTrim.Location = New System.Drawing.Point(450, 219)
         Me.ucrNudTrim.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrNudTrim.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTrim.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -242,7 +240,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrNudConfidenceLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudConfidenceLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudConfidenceLevel.Location = New System.Drawing.Point(448, 150)
+        Me.ucrNudConfidenceLevel.Location = New System.Drawing.Point(448, 154)
         Me.ucrNudConfidenceLevel.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrNudConfidenceLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudConfidenceLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -274,10 +272,10 @@ Partial Class dlgOneVarFitModel
         'ucrChkOmmitMissing
         '
         Me.ucrChkOmmitMissing.Checked = False
-        Me.ucrChkOmmitMissing.Location = New System.Drawing.Point(319, 228)
+        Me.ucrChkOmmitMissing.Location = New System.Drawing.Point(421, 254)
         Me.ucrChkOmmitMissing.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrChkOmmitMissing.Name = "ucrChkOmmitMissing"
-        Me.ucrChkOmmitMissing.Size = New System.Drawing.Size(198, 25)
+        Me.ucrChkOmmitMissing.Size = New System.Drawing.Size(115, 25)
         Me.ucrChkOmmitMissing.TabIndex = 52
         '
         'ucrChkConvertVariate
@@ -344,35 +342,11 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase.Size = New System.Drawing.Size(547, 64)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrNudConfLevel
-        '
-        Me.ucrNudConfLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudConfLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudConfLevel.Location = New System.Drawing.Point(447, 150)
-        Me.ucrNudConfLevel.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
-        Me.ucrNudConfLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudConfLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudConfLevel.Name = "ucrNudConfLevel"
-        Me.ucrNudConfLevel.Size = New System.Drawing.Size(67, 25)
-        Me.ucrNudConfLevel.TabIndex = 61
-        Me.ucrNudConfLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblConfLevel
-        '
-        Me.lblConfLevel.AutoSize = True
-        Me.lblConfLevel.Location = New System.Drawing.Point(317, 154)
-        Me.lblConfLevel.Name = "lblConfLevel"
-        Me.lblConfLevel.Size = New System.Drawing.Size(121, 17)
-        Me.lblConfLevel.TabIndex = 62
-        Me.lblConfLevel.Text = "Confidence Level:"
-        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(552, 517)
-        Me.Controls.Add(Me.lblConfLevel)
-        Me.Controls.Add(Me.ucrNudConfLevel)
         Me.Controls.Add(Me.lblMethod)
         Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.ucrInputNullHypothesis)
@@ -438,6 +412,4 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents ucrNudConfidenceLevel As ucrNud
     Friend WithEvents ucrInputNullHypothesis As ucrInputTextBox
     Friend WithEvents lblNullHypothesis As Label
-    Friend WithEvents lblConfLevel As Label
-    Friend WithEvents ucrNudConfLevel As ucrNud
 End Class
