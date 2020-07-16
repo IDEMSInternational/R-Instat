@@ -117,10 +117,10 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrDistributionChoice, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudTrim, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrChkOmmitMissing, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoTest, rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
+        'ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputNullHypothesis, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputMethod, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputMethod, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="classic")
 
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
@@ -639,6 +639,15 @@ Public Class dlgOneVarFitModel
     Private Sub ucrInputTests_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboTests.ControlValueChanged, ucrInputComboEstimate.ControlValueChanged
         SetSaveLabelTextAndPrefix()
         SetTestEstimateBaseFunction()
+        If ucrInputComboEstimate.GetText() = "median" Then
+            ucrInputMethod.SetItems({"exact", "boot"})
+            ucrInputMethod.SetDefaultState("exact")
+        ElseIf ucrInputComboEstimate.GetText() = "mean" Then
+            ucrInputMethod.SetItems({"classic", "boot"})
+        ElseIf ucrInputComboEstimate.GetText() = "variance" Then
+            ucrInputMethod.SetItems({"classic", "bonett", "norm", "basic", "stud", "perc", "bca"})
+        End If
+
     End Sub
 
     Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlContentsChanged, ucrReceiverVariable.ControlContentsChanged
