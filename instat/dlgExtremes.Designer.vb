@@ -39,17 +39,36 @@ Partial Class dlgExtremes
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExtremes))
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.lblDataToFit = New System.Windows.Forms.Label()
+        Me.ucrInputExtremes = New instat.ucrInputComboBox()
         Me.ucrSelectorExtremes = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrDistributionsExtreme = New instat.ucrDistributions()
+        Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cmdFittingOptions = New System.Windows.Forms.Button()
+        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'lblDataToFit
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
+        resources.ApplyResources(Me.lblDataToFit, "lblDataToFit")
+        Me.lblDataToFit.Name = "lblDataToFit"
+        Me.lblDataToFit.Tag = "Data_to_be_fitted"
+        '
+        'ucrInputExtremes
+        '
+        Me.ucrInputExtremes.AddQuotesIfUnrecognised = True
+        Me.ucrInputExtremes.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputExtremes, "ucrInputExtremes")
+        Me.ucrInputExtremes.Name = "ucrInputExtremes"
+        '
+        'ucrSelectorExtremes
+        '
+        Me.ucrSelectorExtremes.bDropUnusedFilterLevels = False
+        Me.ucrSelectorExtremes.bShowHiddenColumns = False
+        Me.ucrSelectorExtremes.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorExtremes, "ucrSelectorExtremes")
+        Me.ucrSelectorExtremes.Name = "ucrSelectorExtremes"
         '
         'ucrReceiverVariable
         '
@@ -60,30 +79,36 @@ Partial Class dlgExtremes
         Me.ucrReceiverVariable.strNcFilePath = ""
         Me.ucrReceiverVariable.ucrSelector = Nothing
         '
-        'lblDataToFit
+        'ucrBase
         '
-        resources.ApplyResources(Me.lblDataToFit, "lblDataToFit")
-        Me.lblDataToFit.Name = "lblDataToFit"
-        Me.lblDataToFit.Tag = "Data_to_be_fitted"
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
-        'ucrSelectorExtremes
+        'Label1
         '
-        Me.ucrSelectorExtremes.bDropUnusedFilterLevels = False
-        Me.ucrSelectorExtremes.bShowHiddenColumns = False
-        Me.ucrSelectorExtremes.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorExtremes, "ucrSelectorExtremes")
-        Me.ucrSelectorExtremes.Name = "ucrSelectorExtremes"
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
         '
-        'ucrDistributionsExtreme
+        'cmdFittingOptions
         '
-        resources.ApplyResources(Me.ucrDistributionsExtreme, "ucrDistributionsExtreme")
-        Me.ucrDistributionsExtreme.Name = "ucrDistributionsExtreme"
+        resources.ApplyResources(Me.cmdFittingOptions, "cmdFittingOptions")
+        Me.cmdFittingOptions.Name = "cmdFittingOptions"
+        Me.cmdFittingOptions.UseVisualStyleBackColor = True
+        '
+        'cmdDisplayOptions
+        '
+        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
+        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
+        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
         'dlgExtremes
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrDistributionsExtreme)
+        Me.Controls.Add(Me.cmdDisplayOptions)
+        Me.Controls.Add(Me.cmdFittingOptions)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.ucrInputExtremes)
         Me.Controls.Add(Me.ucrSelectorExtremes)
         Me.Controls.Add(Me.lblDataToFit)
         Me.Controls.Add(Me.ucrReceiverVariable)
@@ -102,5 +127,8 @@ Partial Class dlgExtremes
     Friend WithEvents ucrReceiverVariable As ucrReceiverSingle
     Friend WithEvents lblDataToFit As Label
     Friend WithEvents ucrSelectorExtremes As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrDistributionsExtreme As ucrDistributions
+    Friend WithEvents ucrInputExtremes As ucrInputComboBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents cmdDisplayOptions As Button
+    Friend WithEvents cmdFittingOptions As Button
 End Class

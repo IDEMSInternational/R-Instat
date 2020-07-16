@@ -14,10 +14,12 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 
 Public Class dlgExtremes
     Private clsFevdFunction As New RFunction
+    Private clsPlotsFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
@@ -45,18 +47,37 @@ Public Class dlgExtremes
         ucrReceiverVariable.strSelectorHeading = "Variables"
         ucrReceiverVariable.SetParameter(New RParameter("x", 0))
         'ucrReceiverVariable.SetParameterIsString()
+
+        ucrInputExtremes.SetItems({"GEV", "GP", "PP", "Gumbel", "Exponential"}, bAddConditions:=True)
+        ucrInputExtremes.SetName("GEV")
+        ucrInputExtremes.SetDropDownStyleAsNonEditable()
+
     End Sub
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverVariable.SetRCode(clsFevdFunction, bReset)
+        ucrInputExtremes.SetRCode(clsFevdFunction, bReset)
     End Sub
     Private Sub SetDefaults()
         clsFevdFunction = New RFunction
+        clsPlotsFunction = New RFunction
+
+        clsPlotsFunction.SetPackageName("extRemes")
+        clsPlotsFunction.SetRCommand("plot")
 
         clsFevdFunction.SetPackageName("extRemes")
         clsFevdFunction.SetRCommand("fevd")
+
+        clsFevdFunction.AddParameter("type", Chr(34) & "GEV" & Chr(34), iPosition:=1)
+        clsFevdFunction.AddParameter("method", Chr(34) & "MLE" & Chr(34), iPosition:=2)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsPlotsFunction)
     End Sub
 
     Private Sub TestOkEnabled()
 
+    End Sub
+
+    Private Sub ucrInputExtremes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputExtremes.ControlValueChanged
+        clsFevdFunction.AddParameter("type", ucrInputExtremes.GetText(), iPosition:=1)
     End Sub
 End Class
