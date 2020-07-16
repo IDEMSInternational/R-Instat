@@ -646,6 +646,8 @@ Public Class dlgOneVarFitModel
             ucrInputMethod.SetItems({"classic", "boot"})
         ElseIf ucrInputComboEstimate.GetText() = "variance" Then
             ucrInputMethod.SetItems({"classic", "bonett", "norm", "basic", "stud", "perc", "bca"})
+        ElseIf ucrInputComboTests.GetText() = "poisson" Then
+            ucrInputMethod.SetItems({"exact", "score", "wald", "byar"})
         End If
 
     End Sub
