@@ -167,7 +167,7 @@ Partial Class dlgOneVarFitModel
         'lblTrim
         '
         Me.lblTrim.AutoSize = True
-        Me.lblTrim.Location = New System.Drawing.Point(406, 222)
+        Me.lblTrim.Location = New System.Drawing.Point(385, 219)
         Me.lblTrim.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTrim.Name = "lblTrim"
         Me.lblTrim.Size = New System.Drawing.Size(40, 17)
@@ -272,10 +272,10 @@ Partial Class dlgOneVarFitModel
         'ucrChkOmmitMissing
         '
         Me.ucrChkOmmitMissing.Checked = False
-        Me.ucrChkOmmitMissing.Location = New System.Drawing.Point(421, 254)
+        Me.ucrChkOmmitMissing.Location = New System.Drawing.Point(369, 256)
         Me.ucrChkOmmitMissing.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrChkOmmitMissing.Name = "ucrChkOmmitMissing"
-        Me.ucrChkOmmitMissing.Size = New System.Drawing.Size(115, 25)
+        Me.ucrChkOmmitMissing.Size = New System.Drawing.Size(167, 25)
         Me.ucrChkOmmitMissing.TabIndex = 52
         '
         'ucrChkConvertVariate

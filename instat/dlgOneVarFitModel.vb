@@ -640,14 +640,24 @@ Public Class dlgOneVarFitModel
         SetTestEstimateBaseFunction()
         If ucrInputComboEstimate.GetText() = "median" Then
             ucrInputMethod.SetItems({"exact", "boot"})
+            ucrInputMethod.SetName("exact")
         ElseIf ucrInputComboEstimate.GetText() = "mean" Then
             ucrInputMethod.SetItems({"classic", "boot"})
+            ucrInputMethod.SetName("classic")
         ElseIf ucrInputComboEstimate.GetText() = "variance" Then
             ucrInputMethod.SetItems({"classic", "bonett", "norm", "basic", "stud", "perc", "bca"})
+            ucrInputMethod.SetName("classic")
         ElseIf ucrInputComboEstimate.GetText() = "poisson" Then
             ucrInputMethod.SetItems({"exact", "score", "wald", "byar"})
+            ucrInputMethod.SetName("exact")
         ElseIf ucrInputComboEstimate.GetText() = "quantile" Then
             ucrInputMethod.SetItems({"norm", "basic", "per", "bca"})
+            ucrInputMethod.SetName("norm")
+        End If
+        If ucrInputComboEstimate.GetText() = "normal" Or ucrInputComboEstimate.GetText() = "sd" Then
+            ucrInputMethod.Visible = False
+        Else
+            ucrInputMethod.Visible = True
         End If
 
     End Sub
