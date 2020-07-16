@@ -74,7 +74,7 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetCheckBoxText("Save Model")
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
-        ucrSaveModel.SetPrefix("Normal")
+        'ucrSaveModel.SetPrefix("Normal")
 
         ucrInputComboTests.SetItems({"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z", "Bartel", "Br", "Runs", "Sen", "Serial Corr", "Snh", "Ad", "Cvm", "Lillie", "Pearson", "Sf"})
         ucrInputComboTests.SetDropDownStyleAsNonEditable()
@@ -118,7 +118,6 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudTrim, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrChkOmmitMissing, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoTest, rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
-        'ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputNullHypothesis, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputMethod, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="classic")
 
@@ -334,7 +333,7 @@ Public Class dlgOneVarFitModel
         clsQuantileCIFunction.SetPackageName("MKinfer")
         clsQuantileCIFunction.SetRCommand("quantileCI")
         clsQuantileCIFunction.AddParameter("prob", "0.5", iPosition:=1)
-        clsQuantileCIFunction.AddParameter("method", "exact", iPosition:=3)
+        clsQuantileCIFunction.AddParameter("method", Chr(34) & "exact" & Chr(34), iPosition:=3)
         clsQuantileCIFunction.AddParameter("R", "9999", iPosition:=4)
         clsQuantileCIFunction.AddParameter("minLength", "FALSE", iPosition:=6)
         clsQuantileCIFunction.AddParameter("na.rm", "TRUE", iPosition:=7)
@@ -559,6 +558,7 @@ Public Class dlgOneVarFitModel
 
     Private Sub ucrPnlGeneralExactCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGeneralExactCase.ControlValueChanged
         SetTestEstimateBaseFunction()
+        SetSaveLabelTextAndPrefix()
     End Sub
 
     Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
@@ -637,16 +637,14 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub ucrInputTests_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboTests.ControlValueChanged, ucrInputComboEstimate.ControlValueChanged
-        SetSaveLabelTextAndPrefix()
         SetTestEstimateBaseFunction()
         If ucrInputComboEstimate.GetText() = "median" Then
             ucrInputMethod.SetItems({"exact", "boot"})
-            ucrInputMethod.SetDefaultState("exact")
         ElseIf ucrInputComboEstimate.GetText() = "mean" Then
             ucrInputMethod.SetItems({"classic", "boot"})
         ElseIf ucrInputComboEstimate.GetText() = "variance" Then
             ucrInputMethod.SetItems({"classic", "bonett", "norm", "basic", "stud", "perc", "bca"})
-        ElseIf ucrInputComboTests.GetText() = "poisson" Then
+        ElseIf ucrInputComboEstimate.GetText() = "poisson" Then
             ucrInputMethod.SetItems({"exact", "score", "wald", "byar"})
         ElseIf ucrInputComboEstimate.GetText() = "quantile" Then
             ucrInputMethod.SetItems({"norm", "basic", "per", "bca"})
