@@ -40,13 +40,14 @@ Partial Class dlgExtremes
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExtremes))
         Me.lblDataToFit = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cmdFittingOptions = New System.Windows.Forms.Button()
+        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.ucrInputExtremes = New instat.ucrInputComboBox()
         Me.ucrSelectorExtremes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.cmdFittingOptions = New System.Windows.Forms.Button()
-        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
+        Me.ucrSaveExtremes = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblDataToFit
@@ -54,6 +55,23 @@ Partial Class dlgExtremes
         resources.ApplyResources(Me.lblDataToFit, "lblDataToFit")
         Me.lblDataToFit.Name = "lblDataToFit"
         Me.lblDataToFit.Tag = "Data_to_be_fitted"
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        '
+        'cmdFittingOptions
+        '
+        resources.ApplyResources(Me.cmdFittingOptions, "cmdFittingOptions")
+        Me.cmdFittingOptions.Name = "cmdFittingOptions"
+        Me.cmdFittingOptions.UseVisualStyleBackColor = True
+        '
+        'cmdDisplayOptions
+        '
+        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
+        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
+        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
         'ucrInputExtremes
         '
@@ -84,27 +102,16 @@ Partial Class dlgExtremes
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'Label1
+        'ucrSaveExtremes
         '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        '
-        'cmdFittingOptions
-        '
-        resources.ApplyResources(Me.cmdFittingOptions, "cmdFittingOptions")
-        Me.cmdFittingOptions.Name = "cmdFittingOptions"
-        Me.cmdFittingOptions.UseVisualStyleBackColor = True
-        '
-        'cmdDisplayOptions
-        '
-        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
-        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ucrSaveExtremes, "ucrSaveExtremes")
+        Me.ucrSaveExtremes.Name = "ucrSaveExtremes"
         '
         'dlgExtremes
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveExtremes)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.cmdFittingOptions)
         Me.Controls.Add(Me.Label1)
@@ -131,4 +138,5 @@ Partial Class dlgExtremes
     Friend WithEvents Label1 As Label
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents cmdFittingOptions As Button
+    Friend WithEvents ucrSaveExtremes As ucrSave
 End Class

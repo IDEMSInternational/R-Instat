@@ -220,6 +220,12 @@
     <Compile Include="dlgTaylorDiagram.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgExtremeDisplayOptions.Designer.vb">
+      <DependentUpon>sdgExtremeDisplayOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgExtremeDisplayOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgExtremesMethod.Designer.vb">
       <DependentUpon>sdgExtremesMethod.vb</DependentUpon>
     </Compile>
@@ -2533,6 +2539,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTaylorDiagram.resx">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgExtremeDisplayOptions.resx">
+      <DependentUpon>sdgExtremeDisplayOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgExtremesMethod.resx">
       <DependentUpon>sdgExtremesMethod.vb</DependentUpon>

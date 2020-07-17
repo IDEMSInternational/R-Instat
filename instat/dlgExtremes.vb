@@ -22,6 +22,7 @@ Public Class dlgExtremes
     Private clsPlotsFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetFittingOptions As Boolean = False
 
 
     Private Sub dlgExtremes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -40,26 +41,40 @@ Public Class dlgExtremes
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctFevdTypes As New Dictionary(Of String, String)
         ucrSelectorExtremes.SetParameter(New RParameter("data", 0))
         ucrSelectorExtremes.SetParameterIsrfunction()
 
         ucrReceiverVariable.Selector = ucrSelectorExtremes
         ucrReceiverVariable.strSelectorHeading = "Variables"
+        ucrReceiverVariable.SetMeAsReceiver()
         ucrReceiverVariable.SetParameter(New RParameter("x", 0))
-        'ucrReceiverVariable.SetParameterIsString()
+        ucrReceiverVariable.SetParameterIsRFunction()
 
-        ucrInputExtremes.SetItems({"GEV", "GP", "PP", "Gumbel", "Exponential"}, bAddConditions:=True)
-        ucrInputExtremes.SetName("GEV")
+        ucrInputExtremes.SetParameter(New RParameter("type", 1))
+        dctFevdTypes.Add("GEV", Chr(34) & "GEV" & Chr(34))
+        dctFevdTypes.Add("GP", Chr(34) & "GP" & Chr(34))
+        dctFevdTypes.Add("PP", Chr(34) & "PP" & Chr(34))
+        dctFevdTypes.Add("Gumbel", Chr(34) & "Gumbel" & Chr(34))
+        dctFevdTypes.Add("Exponential", Chr(34) & "Exponential" & Chr(34))
+        ucrInputExtremes.SetItems(dctFevdTypes)
         ucrInputExtremes.SetDropDownStyleAsNonEditable()
 
+        ucrSaveExtremes.SetPrefix("extreme")
+        ucrSaveExtremes.SetIsComboBox()
+        ucrSaveExtremes.SetCheckBoxText("Save Graph")
+        ucrSaveExtremes.SetSaveTypeAsModel()
+        ucrSaveExtremes.SetDataFrameSelector(ucrSelectorExtremes.ucrAvailableDataFrames)
+        ucrSaveExtremes.SetAssignToIfUncheckedValue("last_graph")
+
     End Sub
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverVariable.SetRCode(clsFevdFunction, bReset)
-        ucrInputExtremes.SetRCode(clsFevdFunction, bReset)
-    End Sub
+
     Private Sub SetDefaults()
         clsFevdFunction = New RFunction
         clsPlotsFunction = New RFunction
+
+
+        ucrSaveExtremes.Reset()
 
         clsPlotsFunction.SetPackageName("extRemes")
         clsPlotsFunction.SetRCommand("plot")
@@ -70,14 +85,29 @@ Public Class dlgExtremes
         clsFevdFunction.AddParameter("type", Chr(34) & "GEV" & Chr(34), iPosition:=1)
         clsFevdFunction.AddParameter("method", Chr(34) & "MLE" & Chr(34), iPosition:=2)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsPlotsFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsFevdFunction)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsPlotsFunction)
+
+        bResetFittingOptions = True
     End Sub
 
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverVariable.SetRCode(clsFevdFunction, bReset)
+        ucrSaveExtremes.SetRCode(clsFevdFunction, bReset)
+        ucrInputExtremes.SetRCode(clsFevdFunction, bReset)
+    End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
     Private Sub TestOkEnabled()
 
     End Sub
 
-    Private Sub ucrInputExtremes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputExtremes.ControlValueChanged
-        clsFevdFunction.AddParameter("type", ucrInputExtremes.GetText(), iPosition:=1)
+    Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
+        sdgExtremesMethod.SetRCode(clsNewFevdFunction:=clsFevdFunction, bReset:=bResetFittingOptions)
+        bResetFittingOptions = False
+        sdgExtremesMethod.ShowDialog()
     End Sub
 End Class

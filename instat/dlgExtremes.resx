@@ -148,61 +148,64 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblDataToFit.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
-  <data name="ucrInputExtremes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 211</value>
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="ucrInputExtremes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 21</value>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ucrInputExtremes.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 214</value>
   </data>
-  <data name="&gt;&gt;ucrInputExtremes.Name" xml:space="preserve">
-    <value>ucrInputExtremes</value>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
   </data>
-  <data name="&gt;&gt;ucrInputExtremes.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="&gt;&gt;ucrInputExtremes.Parent" xml:space="preserve">
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Extremes</value>
+  </data>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
+  </data>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrInputExtremes.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrSelectorExtremes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 9</value>
+  <data name="cmdFittingOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ucrSelectorExtremes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="cmdFittingOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>283, 214</value>
   </data>
-  <data name="ucrSelectorExtremes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 180</value>
+  <data name="cmdFittingOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 23</value>
   </data>
-  <data name="ucrSelectorExtremes.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="cmdFittingOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="&gt;&gt;ucrSelectorExtremes.Name" xml:space="preserve">
-    <value>ucrSelectorExtremes</value>
+  <data name="cmdFittingOptions.Text" xml:space="preserve">
+    <value>Fitting Options</value>
   </data>
-  <data name="&gt;&gt;ucrSelectorExtremes.Type" xml:space="preserve">
-    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;cmdFittingOptions.Name" xml:space="preserve">
+    <value>cmdFittingOptions</value>
   </data>
-  <data name="&gt;&gt;ucrSelectorExtremes.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdFittingOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdFittingOptions.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrSelectorExtremes.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>416, 353</value>
+  <data name="&gt;&gt;cmdFittingOptions.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="cmdDisplayOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -229,64 +232,91 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdDisplayOptions.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="cmdFittingOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 214</value>
-  </data>
-  <data name="cmdFittingOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 23</value>
-  </data>
-  <data name="cmdFittingOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="cmdFittingOptions.Text" xml:space="preserve">
-    <value>Fitting Options</value>
-  </data>
-  <data name="&gt;&gt;cmdFittingOptions.Name" xml:space="preserve">
-    <value>cmdFittingOptions</value>
-  </data>
-  <data name="&gt;&gt;cmdFittingOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdFittingOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdFittingOptions.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ucrInputExtremes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>63, 211</value>
   </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 214</value>
+  <data name="ucrInputExtremes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 21</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
+  <data name="ucrInputExtremes.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="&gt;&gt;ucrInputExtremes.Name" xml:space="preserve">
+    <value>ucrInputExtremes</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Extremes</value>
+  <data name="&gt;&gt;ucrInputExtremes.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
-  </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputExtremes.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;ucrInputExtremes.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrSelectorExtremes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 9</value>
+  </data>
+  <data name="ucrSelectorExtremes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorExtremes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorExtremes.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorExtremes.Name" xml:space="preserve">
+    <value>ucrSelectorExtremes</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorExtremes.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorExtremes.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorExtremes.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>411, 386</value>
+  </data>
+  <data name="ucrSaveExtremes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 291</value>
+  </data>
+  <data name="ucrSaveExtremes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrSaveExtremes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 24</value>
+  </data>
+  <data name="ucrSaveExtremes.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveExtremes.Name" xml:space="preserve">
+    <value>ucrSaveExtremes</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveExtremes.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveExtremes.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveExtremes.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 290</value>
+    <value>9, 323</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 51</value>
+    <value>407, 51</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -301,7 +331,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -337,6 +367,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverVariable.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
 </root>

@@ -118,26 +118,26 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="UcrPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 12</value>
+  <data name="ucrPanelExtreme.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 7</value>
   </data>
-  <data name="UcrPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 137</value>
+  <data name="ucrPanelExtreme.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 119</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="UcrPanel1.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrPanelExtreme.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;UcrPanel1.Name" xml:space="preserve">
-    <value>UcrPanel1</value>
+  <data name="&gt;&gt;ucrPanelExtreme.Name" xml:space="preserve">
+    <value>ucrPanelExtreme</value>
   </data>
-  <data name="&gt;&gt;UcrPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrPanelExtreme.Type" xml:space="preserve">
     <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrPanelExtreme.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;UcrPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrPanelExtreme.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="rdoMLE.AutoSize" type="System.Boolean, mscorlib">
@@ -148,7 +148,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoMLE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 38</value>
+    <value>12, 15</value>
   </data>
   <data name="rdoMLE.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 17</value>
@@ -178,7 +178,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoGMLE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 61</value>
+    <value>12, 38</value>
   </data>
   <data name="rdoGMLE.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 30</value>
@@ -209,7 +209,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoBayesian.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 97</value>
+    <value>12, 74</value>
   </data>
   <data name="rdoBayesian.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 17</value>
@@ -239,7 +239,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoLmoments.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 120</value>
+    <value>12, 97</value>
   </data>
   <data name="rdoLmoments.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 17</value>
@@ -263,7 +263,7 @@
     <value>1</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>46, 155</value>
+    <value>41, 132</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 30</value>
@@ -290,7 +290,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>225, 225</value>
+    <value>225, 171</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

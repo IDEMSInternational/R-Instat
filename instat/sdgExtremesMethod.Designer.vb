@@ -23,7 +23,7 @@ Partial Class sdgExtremesMethod
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgExtremesMethod))
-        Me.UcrPanel1 = New instat.UcrPanel()
+        Me.ucrPanelExtreme = New instat.UcrPanel()
         Me.rdoMLE = New System.Windows.Forms.RadioButton()
         Me.rdoGMLE = New System.Windows.Forms.RadioButton()
         Me.rdoBayesian = New System.Windows.Forms.RadioButton()
@@ -31,10 +31,10 @@ Partial Class sdgExtremesMethod
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
-        'UcrPanel1
+        'ucrPanelExtreme
         '
-        resources.ApplyResources(Me.UcrPanel1, "UcrPanel1")
-        Me.UcrPanel1.Name = "UcrPanel1"
+        resources.ApplyResources(Me.ucrPanelExtreme, "ucrPanelExtreme")
+        Me.ucrPanelExtreme.Name = "ucrPanelExtreme"
         '
         'rdoMLE
         '
@@ -78,7 +78,7 @@ Partial Class sdgExtremesMethod
         Me.Controls.Add(Me.rdoBayesian)
         Me.Controls.Add(Me.rdoGMLE)
         Me.Controls.Add(Me.rdoMLE)
-        Me.Controls.Add(Me.UcrPanel1)
+        Me.Controls.Add(Me.ucrPanelExtreme)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -88,7 +88,7 @@ Partial Class sdgExtremesMethod
 
     End Sub
 
-    Friend WithEvents UcrPanel1 As UcrPanel
+    Friend WithEvents ucrPanelExtreme As UcrPanel
     Friend WithEvents rdoMLE As RadioButton
     Friend WithEvents rdoGMLE As RadioButton
     Friend WithEvents rdoBayesian As RadioButton
