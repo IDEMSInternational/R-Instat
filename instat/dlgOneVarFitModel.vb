@@ -441,6 +441,7 @@ Public Class dlgOneVarFitModel
         ucrNudConfidenceLevel.SetRCode(clsBionomialFunction, bReset)
         ucrInputNullHypothesis.SetRCode(clsBionomialFunction, bReset)
         ucrInputMethod.SetRCode(clsMeanCIFunction, bReset)
+        ucrInputCIMethods.SetRCode(clsBionomialFunction)
 
         ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
     End Sub
@@ -655,6 +656,13 @@ Public Class dlgOneVarFitModel
             Else
                 ucrInputMethod.Visible = True
             End If
+        End If
+        If ucrInputComboTests.GetText() = "Binomial" Then
+            ucrInputCIMethods.SetItems({"Clopper-Pearson", "binom.test", "Score", "Wilson", "prop.test", "Wald", "Agresti-Coull", "Plus4"})
+            ucrInputCIMethods.SetName("Clopper-Pearson")
+        ElseIf ucrInputCIMethods.GetText() = "Bartel" Then
+            ucrInputCIMethods.SetItems({"normal", "beta", "auto"})
+            ucrInputCIMethods.SetName("normal")
         End If
 
     End Sub
