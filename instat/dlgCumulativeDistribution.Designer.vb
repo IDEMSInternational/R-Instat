@@ -41,10 +41,10 @@ Partial Class dlgCumulativeDistribution
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCumulativeDistribution))
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
-        Me.rdoCumulative = New System.Windows.Forms.RadioButton()
-        Me.rdoExceedance = New System.Windows.Forms.RadioButton()
         Me.lblScale = New System.Windows.Forms.Label()
         Me.lblNudby = New System.Windows.Forms.Label()
+        Me.rdoCumulative = New System.Windows.Forms.RadioButton()
+        Me.rdoExceedance = New System.Windows.Forms.RadioButton()
         Me.ucrNudBy = New instat.ucrNud()
         Me.ucrInputComboScales = New instat.ucrInputComboBox()
         Me.ucrPnlOption = New instat.UcrPanel()
@@ -70,20 +70,6 @@ Partial Class dlgCumulativeDistribution
         Me.cmdPlotOptions.Tag = "Plot_Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
-        'rdoCumulative
-        '
-        resources.ApplyResources(Me.rdoCumulative, "rdoCumulative")
-        Me.rdoCumulative.Name = "rdoCumulative"
-        Me.rdoCumulative.TabStop = True
-        Me.rdoCumulative.UseVisualStyleBackColor = True
-        '
-        'rdoExceedance
-        '
-        resources.ApplyResources(Me.rdoExceedance, "rdoExceedance")
-        Me.rdoExceedance.Name = "rdoExceedance"
-        Me.rdoExceedance.TabStop = True
-        Me.rdoExceedance.UseVisualStyleBackColor = True
-        '
         'lblScale
         '
         resources.ApplyResources(Me.lblScale, "lblScale")
@@ -93,6 +79,26 @@ Partial Class dlgCumulativeDistribution
         '
         resources.ApplyResources(Me.lblNudby, "lblNudby")
         Me.lblNudby.Name = "lblNudby"
+        '
+        'rdoCumulative
+        '
+        resources.ApplyResources(Me.rdoCumulative, "rdoCumulative")
+        Me.rdoCumulative.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCumulative.FlatAppearance.BorderSize = 2
+        Me.rdoCumulative.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCumulative.Name = "rdoCumulative"
+        Me.rdoCumulative.TabStop = True
+        Me.rdoCumulative.UseVisualStyleBackColor = True
+        '
+        'rdoExceedance
+        '
+        resources.ApplyResources(Me.rdoExceedance, "rdoExceedance")
+        Me.rdoExceedance.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExceedance.FlatAppearance.BorderSize = 2
+        Me.rdoExceedance.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExceedance.Name = "rdoExceedance"
+        Me.rdoExceedance.TabStop = True
+        Me.rdoExceedance.UseVisualStyleBackColor = True
         '
         'ucrNudBy
         '
@@ -169,12 +175,12 @@ Partial Class dlgCumulativeDistribution
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoExceedance)
+        Me.Controls.Add(Me.rdoCumulative)
         Me.Controls.Add(Me.ucrNudBy)
         Me.Controls.Add(Me.lblNudby)
         Me.Controls.Add(Me.ucrInputComboScales)
         Me.Controls.Add(Me.lblScale)
-        Me.Controls.Add(Me.rdoExceedance)
-        Me.Controls.Add(Me.rdoCumulative)
         Me.Controls.Add(Me.ucrPnlOption)
         Me.Controls.Add(Me.ucrChkIncludePoints)
         Me.Controls.Add(Me.ucrChkCountsOnYAxis)
@@ -205,10 +211,10 @@ Partial Class dlgCumulativeDistribution
     Friend WithEvents ucrChkIncludePoints As ucrCheck
     Friend WithEvents ucrChkCountsOnYAxis As ucrCheck
     Friend WithEvents ucrPnlOption As UcrPanel
-    Friend WithEvents rdoCumulative As RadioButton
-    Friend WithEvents rdoExceedance As RadioButton
     Friend WithEvents lblScale As Label
     Friend WithEvents ucrInputComboScales As ucrInputComboBox
     Friend WithEvents ucrNudBy As ucrNud
     Friend WithEvents lblNudby As Label
+    Friend WithEvents rdoExceedance As RadioButton
+    Friend WithEvents rdoCumulative As RadioButton
 End Class
