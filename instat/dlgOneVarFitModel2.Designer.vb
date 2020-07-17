@@ -46,13 +46,11 @@ Partial Class dlgOneVarFitModel
         Me.rdoEstimate = New System.Windows.Forms.RadioButton()
         Me.lblTests = New System.Windows.Forms.Label()
         Me.lblEstimate = New System.Windows.Forms.Label()
-        Me.lblTrim = New System.Windows.Forms.Label()
         Me.lblMethod = New System.Windows.Forms.Label()
         Me.lblConfidenceLevel = New System.Windows.Forms.Label()
         Me.lblNullHypothesis = New System.Windows.Forms.Label()
         Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.ucrInputNullHypothesis = New instat.ucrInputTextBox()
-        Me.ucrNudTrim = New instat.ucrNud()
         Me.ucrNudConfidenceLevel = New instat.ucrNud()
         Me.ucrInputComboEstimate = New instat.ucrInputComboBox()
         Me.ucrInputComboTests = New instat.ucrInputComboBox()
@@ -164,20 +162,10 @@ Partial Class dlgOneVarFitModel
         Me.lblEstimate.TabIndex = 49
         Me.lblEstimate.Text = "Estimate:"
         '
-        'lblTrim
-        '
-        Me.lblTrim.AutoSize = True
-        Me.lblTrim.Location = New System.Drawing.Point(385, 219)
-        Me.lblTrim.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblTrim.Name = "lblTrim"
-        Me.lblTrim.Size = New System.Drawing.Size(40, 17)
-        Me.lblTrim.TabIndex = 51
-        Me.lblTrim.Text = "Trim:"
-        '
         'lblMethod
         '
         Me.lblMethod.AutoSize = True
-        Me.lblMethod.Location = New System.Drawing.Point(366, 189)
+        Me.lblMethod.Location = New System.Drawing.Point(359, 218)
         Me.lblMethod.Name = "lblMethod"
         Me.lblMethod.Size = New System.Drawing.Size(59, 17)
         Me.lblMethod.TabIndex = 54
@@ -186,7 +174,7 @@ Partial Class dlgOneVarFitModel
         'lblConfidenceLevel
         '
         Me.lblConfidenceLevel.AutoSize = True
-        Me.lblConfidenceLevel.Location = New System.Drawing.Point(317, 154)
+        Me.lblConfidenceLevel.Location = New System.Drawing.Point(313, 154)
         Me.lblConfidenceLevel.Name = "lblConfidenceLevel"
         Me.lblConfidenceLevel.Size = New System.Drawing.Size(121, 17)
         Me.lblConfidenceLevel.TabIndex = 56
@@ -206,7 +194,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrInputMethod.AddQuotesIfUnrecognised = True
         Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(437, 184)
+        Me.ucrInputMethod.Location = New System.Drawing.Point(438, 215)
         Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMethod.Name = "ucrInputMethod"
         Me.ucrInputMethod.Size = New System.Drawing.Size(80, 26)
@@ -217,35 +205,22 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputNullHypothesis.AddQuotesIfUnrecognised = True
         Me.ucrInputNullHypothesis.IsMultiline = False
         Me.ucrInputNullHypothesis.IsReadOnly = False
-        Me.ucrInputNullHypothesis.Location = New System.Drawing.Point(437, 184)
+        Me.ucrInputNullHypothesis.Location = New System.Drawing.Point(439, 184)
         Me.ucrInputNullHypothesis.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputNullHypothesis.Name = "ucrInputNullHypothesis"
-        Me.ucrInputNullHypothesis.Size = New System.Drawing.Size(67, 26)
+        Me.ucrInputNullHypothesis.Size = New System.Drawing.Size(78, 26)
         Me.ucrInputNullHypothesis.TabIndex = 60
-        '
-        'ucrNudTrim
-        '
-        Me.ucrNudTrim.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTrim.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTrim.Location = New System.Drawing.Point(450, 219)
-        Me.ucrNudTrim.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
-        Me.ucrNudTrim.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTrim.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTrim.Name = "ucrNudTrim"
-        Me.ucrNudTrim.Size = New System.Drawing.Size(67, 25)
-        Me.ucrNudTrim.TabIndex = 50
-        Me.ucrNudTrim.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudConfidenceLevel
         '
         Me.ucrNudConfidenceLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudConfidenceLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudConfidenceLevel.Location = New System.Drawing.Point(448, 154)
+        Me.ucrNudConfidenceLevel.Location = New System.Drawing.Point(440, 153)
         Me.ucrNudConfidenceLevel.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrNudConfidenceLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudConfidenceLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudConfidenceLevel.Name = "ucrNudConfidenceLevel"
-        Me.ucrNudConfidenceLevel.Size = New System.Drawing.Size(67, 25)
+        Me.ucrNudConfidenceLevel.Size = New System.Drawing.Size(78, 25)
         Me.ucrNudConfidenceLevel.TabIndex = 58
         Me.ucrNudConfidenceLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -272,10 +247,10 @@ Partial Class dlgOneVarFitModel
         'ucrChkOmmitMissing
         '
         Me.ucrChkOmmitMissing.Checked = False
-        Me.ucrChkOmmitMissing.Location = New System.Drawing.Point(369, 256)
+        Me.ucrChkOmmitMissing.Location = New System.Drawing.Point(413, 50)
         Me.ucrChkOmmitMissing.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrChkOmmitMissing.Name = "ucrChkOmmitMissing"
-        Me.ucrChkOmmitMissing.Size = New System.Drawing.Size(167, 25)
+        Me.ucrChkOmmitMissing.Size = New System.Drawing.Size(111, 25)
         Me.ucrChkOmmitMissing.TabIndex = 52
         '
         'ucrChkConvertVariate
@@ -350,9 +325,7 @@ Partial Class dlgOneVarFitModel
         Me.Controls.Add(Me.lblMethod)
         Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.ucrInputNullHypothesis)
-        Me.Controls.Add(Me.ucrNudTrim)
         Me.Controls.Add(Me.ucrNudConfidenceLevel)
-        Me.Controls.Add(Me.lblTrim)
         Me.Controls.Add(Me.lblNullHypothesis)
         Me.Controls.Add(Me.lblConfidenceLevel)
         Me.Controls.Add(Me.lblEstimate)
@@ -403,8 +376,6 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents lblTests As Label
     Friend WithEvents ucrInputComboEstimate As ucrInputComboBox
     Friend WithEvents lblEstimate As Label
-    Friend WithEvents ucrNudTrim As ucrNud
-    Friend WithEvents lblTrim As Label
     Friend WithEvents ucrChkOmmitMissing As ucrCheck
     Friend WithEvents lblMethod As Label
     Friend WithEvents ucrInputMethod As ucrInputComboBox
