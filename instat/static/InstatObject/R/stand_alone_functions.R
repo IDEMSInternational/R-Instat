@@ -1276,3 +1276,7 @@ in_top_n <- function(x, n = 10, wt, fun = sum) {
   else dat <- dat %>% count(x, sort = TRUE, name = "fq")
   return(x %in% dat$x[1:n])
 }
+
+summary_sample <- function(x, size = 1, replace = FALSE){
+  if(length(x)==0){return(NA)}else{sample(x = x, size = size, replace = replace)}
+}
