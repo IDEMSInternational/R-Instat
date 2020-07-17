@@ -654,10 +654,12 @@ Public Class dlgOneVarFitModel
             ucrInputMethod.SetItems({"norm", "basic", "per", "bca"})
             ucrInputMethod.SetName("norm")
         End If
-        If ucrInputComboEstimate.GetText() = "normal" Or ucrInputComboEstimate.GetText() = "sd" Then
-            ucrInputMethod.Visible = False
-        Else
-            ucrInputMethod.Visible = True
+        If rdoEstimate.Checked Then
+            If (ucrInputComboEstimate.GetText() = "normal" Or ucrInputComboEstimate.GetText() = "sd") Then
+                ucrInputMethod.Visible = False
+            Else
+                ucrInputMethod.Visible = True
+            End If
         End If
 
     End Sub
