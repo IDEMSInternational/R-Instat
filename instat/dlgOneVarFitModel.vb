@@ -86,6 +86,10 @@ Public Class dlgOneVarFitModel
         ucrInputMethod.SetItems({"classic", "boot", "bonett", "norm", "basic", "stud", "perc", "bca", "exact", "boot", "score", "wald", "byar"})
         ucrInputMethod.SetDropDownStyleAsNonEditable()
 
+        ucrInputCIMethods.SetParameter(New RParameter("ci.method", 4))
+        ucrInputCIMethods.SetItems({"Clopper-Pearson", "binom.test", "Score", "Wilson", "prop.test", "Wald", "Agresti-Coull", "Plus4", "normal", "beta", "auto"})
+        ucrInputCIMethods.SetDropDownStyleAsNonEditable()
+
 
         ucrChkOmmitMissing.SetText("Ommit Missing")
 
@@ -112,12 +116,13 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoTest, rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputNullHypothesis, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputMethod, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="classic")
-
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputCIMethods, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Clopper-Pearson")
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
         ucrNudConfidenceLevel.SetLinkedDisplayControl(lblConfidenceLevel)
         ucrInputNullHypothesis.SetLinkedDisplayControl(lblNullHypothesis)
         ucrInputMethod.SetLinkedDisplayControl(lblMethod)
+        ucrInputCIMethods.SetLinkedDisplayControl(lblCIMethods)
 
         lstCommandButtons.AddRange({cmdDisplayOptions, cmdFittingOptions})
         ucrDistributionChoice.SetLinkedDisplayControl(lstCommandButtons)
