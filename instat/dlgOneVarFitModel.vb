@@ -147,12 +147,18 @@ Public Class dlgOneVarFitModel
 
         ucrInputNullHypothesis.SetParameter(New RParameter("p", 1))
         ucrInputNullHypothesis.SetParameterValue("0.5")
-        ucrInputNullHypothesis.SetText("Null Hypothesis")
+        'ucrInputNullHypothesis.SetText("Null Hypothesis")
         ucrInputNullHypothesis.SetValidationTypeAsNumeric(0, 1)
         ucrInputNullHypothesis.AddQuotesIfUnrecognised = False
 
+        ucrInputTxtSd.SetParameter(New RParameter("sd_pop", 2))
+        'ucrInputTxtSd.SetText("Sd_Pop:")
+        ucrInputTxtSd.SetParameterValue(1)
+        ucrInputTxtSd.SetValidationTypeAsNumeric()
+        ucrInputTxtSd.AddQuotesIfUnrecognised = False
+
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboEstimate, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboEstimate, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Mean")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrDistributionChoice, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrChkOmitMissing, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoTest, rdoEstimate}, bNewLinkedHideIfParameterMissing:=True)
@@ -163,6 +169,9 @@ Public Class dlgOneVarFitModel
         ucrInputComboEstimate.AddToLinkedControls(ucrInputComboQuantilCI, {"Quantile"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputCIMethods, {"Binomial"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputComboMethod, {"Bartel"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrNudConfidenceLevel, {"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z", "Serial Corr"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrInputNullHypothesis, {"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrInputTxtSd, {"Z"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
         ucrNudConfidenceLevel.SetLinkedDisplayControl(lblConfidenceLevel)
@@ -173,6 +182,7 @@ Public Class dlgOneVarFitModel
         ucrInputComboVarianceCI.SetLinkedDisplayControl(lblVarCI)
         ucrInputCIMethods.SetLinkedDisplayControl(lblCIMethods)
         ucrInputComboMethod.SetLinkedDisplayControl(lblMethods)
+        ucrInputTxtSd.SetLinkedDisplayControl(lblSd)
 
         lstCommandButtons.AddRange({cmdDisplayOptions, cmdFittingOptions})
         ucrDistributionChoice.SetLinkedDisplayControl(lstCommandButtons)
@@ -313,7 +323,7 @@ Public Class dlgOneVarFitModel
 
         clsZTestFunction.SetPackageName("DescTools")
         clsZTestFunction.SetRCommand("ZTest")
-        clsZTestFunction.AddParameter("mu", "0", iPosition:=2)
+        clsZTestFunction.AddParameter("mu", "0", iPosition:=1)
 
         clsBartelFunction.SetPackageName("DescTools")
         clsBartelFunction.SetRCommand("BartelsRankTest")
@@ -432,7 +442,7 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("x", 0), iAdditionalPairNo:=23)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=1)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=2)
-        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsZTestFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=3)
+        ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsZTestFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=3)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=4)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsWilcoxonFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=5)
         ucrNudConfidenceLevel.AddAdditionalCodeParameterPair(clsSenFunction, New RParameter("conf.level", 1), iAdditionalPairNo:=6)
@@ -489,6 +499,7 @@ Public Class dlgOneVarFitModel
         ucrInputComboMedianCI.SetRCode(clsMedianCIFunction, bReset)
         ucrInputComboVarianceCI.SetRCode(clsVarCIFunction, bReset)
         ucrInputComboQuantilCI.SetRCode(clsQuantileCIFunction, bReset)
+        ucrInputTxtSd.SetRCode(clsZTestFunction, bReset)
 
         ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
     End Sub
