@@ -159,8 +159,6 @@ Partial Class dlgInfillMissingValues
         '
         'grpStartEnd
         '
-        Me.grpStartEnd.Controls.Add(Me.lblValue)
-        Me.grpStartEnd.Controls.Add(Me.ucrInputConstant)
         Me.grpStartEnd.Controls.Add(Me.rdoExtendFill)
         Me.grpStartEnd.Controls.Add(Me.rdoLeaveAsMissing)
         Me.grpStartEnd.Controls.Add(Me.ucrPnlStartEnd)
@@ -320,7 +318,9 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblValue)
         Me.Controls.Add(Me.lblStation)
+        Me.Controls.Add(Me.ucrInputConstant)
         Me.Controls.Add(Me.ucrReceiverByFactor)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrChkSetSeed)

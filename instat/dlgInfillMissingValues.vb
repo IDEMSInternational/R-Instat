@@ -127,6 +127,7 @@ Public Class dlgInfillMissingValues
         ucrPnlStartEnd.SetLinkedDisplayControl(grpStartEnd)
         ucrNudMaximum.SetLinkedDisplayControl(lblRows)
         ucrReceiverStation.SetLinkedDisplayControl(lblStation)
+        ucrInputConstant.SetLinkedDisplayControl(lblValue)
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorInfillMissing.ucrAvailableDataFrames)
         ucrSaveNewColumn.SetSaveTypeAsColumn()
         ucrSaveNewColumn.SetIsComboBox()
