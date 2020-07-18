@@ -145,6 +145,11 @@ Public Class dlgOneVarFitModel
         ucrNudConfidenceLevel.Maximum = 1
         ucrNudConfidenceLevel.SetRDefault(0.95)
 
+        ucrNudQuantile.SetParameter(New RParameter("prob", 1))
+        ucrNudQuantile.DecimalPlaces = 2
+        ucrNudQuantile.Increment = 0.05
+        ucrNudQuantile.Maximum = 1
+        ucrNudQuantile.SetRDefault(0.5)
 
         ucrInputNullHypothesis.SetParameter(New RParameter("p", 1))
         ucrInputNullHypothesis.SetParameterValue("0.5")
@@ -186,7 +191,7 @@ Public Class dlgOneVarFitModel
         ucrInputComboTests.AddToLinkedControls(ucrNudConfidenceLevel, {"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z", "Serial Corr"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputNullHypothesis, {"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputTxtSd, {"Z"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboConfidenceLevel, {"Mean", "Median", "Variance", "Normal", "Quantile", "Sd"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboEstimate.AddToLinkedControls(ucrNudQuantile, {"Quantile"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
         ucrNudConfidenceLevel.SetLinkedDisplayControl(lblConfidenceLevel)
@@ -199,6 +204,7 @@ Public Class dlgOneVarFitModel
         ucrInputComboMethod.SetLinkedDisplayControl(lblMethods)
         ucrInputTxtSd.SetLinkedDisplayControl(lblSd)
         ucrInputComboConfidenceLevel.SetLinkedDisplayControl(lblCI)
+        ucrNudQuantile.SetLinkedDisplayControl(lblQuantile)
 
         lstCommandButtons.AddRange({cmdDisplayOptions, cmdFittingOptions})
         ucrDistributionChoice.SetLinkedDisplayControl(lstCommandButtons)
@@ -517,6 +523,7 @@ Public Class dlgOneVarFitModel
         ucrInputComboQuantilCI.SetRCode(clsQuantileCIFunction, bReset)
         ucrInputTxtSd.SetRCode(clsZTestFunction, bReset)
         ucrInputComboConfidenceLevel.SetRCode(clsMeanCIFunction, bReset)
+        ucrNudQuantile.SetRCode(clsQuantileCIFunction, bReset)
         ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
     End Sub
 
