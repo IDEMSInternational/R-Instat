@@ -155,13 +155,12 @@ Public Class dlgOneVarFitModel
         ucrInputNullHypothesis.SetParameterValue("0.5")
         ucrInputNullHypothesis.SetText("Null Hypothesis")
         ucrInputNullHypothesis.SetValidationTypeAsNumeric(0, 1)
-        ucrInputNullHypothesis.AddQuotesIfUnrecognised = False
 
         ucrInputTxtSd.SetParameter(New RParameter("sd_pop", 2))
         ucrInputTxtSd.SetText("Sd_Pop:")
         ucrInputTxtSd.SetParameterValue(1)
         ucrInputTxtSd.SetValidationTypeAsNumeric()
-        ucrInputTxtSd.AddQuotesIfUnrecognised = False
+
 
         ucrInputComboConfidenceLevel.SetParameter(New RParameter("conf.level", 2))
         ucrInputComboConfidenceLevel.SetValidationTypeAsNumeric(0, 1)
@@ -192,6 +191,7 @@ Public Class dlgOneVarFitModel
         ucrInputComboTests.AddToLinkedControls(ucrInputNullHypothesis, {"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputTxtSd, {"Z"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrNudQuantile, {"Quantile"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrChkOmitMissing, {"Snh", "Br", "Sen"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
         ucrNudConfidenceLevel.SetLinkedDisplayControl(lblConfidenceLevel)
@@ -346,6 +346,7 @@ Public Class dlgOneVarFitModel
         clsZTestFunction.SetPackageName("DescTools")
         clsZTestFunction.SetRCommand("ZTest")
         clsZTestFunction.AddParameter("mu", "0", iPosition:=1)
+        clsZTestFunction.AddParameter("sd_pop", "1", iPosition:=2)
 
         clsBartelFunction.SetPackageName("DescTools")
         clsBartelFunction.SetRCommand("BartelsRankTest")
