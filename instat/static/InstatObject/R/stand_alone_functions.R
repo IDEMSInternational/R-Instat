@@ -1277,6 +1277,8 @@ in_top_n <- function(x, n = 10, wt, fun = sum) {
   return(x %in% dat$x[1:n])
 }
 
-summary_sample <- function(x, size = 1, replace = FALSE){
-  if(length(x)==0){return(NA)}else{sample(x = x, size = size, replace = replace)}
+summary_sample <- function(x, size, replace = FALSE){
+  if(length(x)==0){return(NA)}
+  else if(length(x)==1){return(x)}
+  else{sample(x = x, size = size, replace = replace)}
 }
