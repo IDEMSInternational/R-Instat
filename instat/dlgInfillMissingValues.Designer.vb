@@ -48,7 +48,7 @@ Partial Class dlgInfillMissingValues
         Me.ucrNudMaximum = New instat.ucrNud()
         Me.ucrChkMaxGap = New instat.ucrCheck()
         Me.ucrChkBy = New instat.ucrCheck()
-        Me.ucrChkCopyFromAbove = New instat.ucrCheck()
+        Me.ucrChkCopyFromBelow = New instat.ucrCheck()
         Me.ucrSaveNewColumn = New instat.ucrSave()
         Me.ucrInputComboFunction = New instat.ucrInputComboBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
@@ -246,11 +246,11 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.ucrChkBy, "ucrChkBy")
         Me.ucrChkBy.Name = "ucrChkBy"
         '
-        'ucrChkCopyFromAbove
+        'ucrChkCopyFromBelow
         '
-        Me.ucrChkCopyFromAbove.Checked = False
-        resources.ApplyResources(Me.ucrChkCopyFromAbove, "ucrChkCopyFromAbove")
-        Me.ucrChkCopyFromAbove.Name = "ucrChkCopyFromAbove"
+        Me.ucrChkCopyFromBelow.Checked = False
+        resources.ApplyResources(Me.ucrChkCopyFromBelow, "ucrChkCopyFromBelow")
+        Me.ucrChkCopyFromBelow.Name = "ucrChkCopyFromBelow"
         '
         'ucrSaveNewColumn
         '
@@ -329,7 +329,7 @@ Partial Class dlgInfillMissingValues
         Me.Controls.Add(Me.ucrNudMaximum)
         Me.Controls.Add(Me.ucrChkMaxGap)
         Me.Controls.Add(Me.ucrChkBy)
-        Me.Controls.Add(Me.ucrChkCopyFromAbove)
+        Me.Controls.Add(Me.ucrChkCopyFromBelow)
         Me.Controls.Add(Me.grpStartEnd)
         Me.Controls.Add(Me.lblFunction)
         Me.Controls.Add(Me.ucrSaveNewColumn)
@@ -379,7 +379,7 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrPnlStartEnd As UcrPanel
     Friend WithEvents ucrInputComboFunction As ucrInputComboBox
     Friend WithEvents lblFunction As Label
-    Friend WithEvents ucrChkCopyFromAbove As ucrCheck
+    Friend WithEvents ucrChkCopyFromBelow As ucrCheck
     Friend WithEvents ucrInputConstant As ucrInputTextBox
     Friend WithEvents ucrChkBy As ucrCheck
     Friend WithEvents ucrChkMaxGap As ucrCheck

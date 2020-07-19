@@ -804,25 +804,25 @@
   <data name="&gt;&gt;ucrChkBy.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="ucrChkCopyFromAbove.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrChkCopyFromBelow.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 427</value>
   </data>
-  <data name="ucrChkCopyFromAbove.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrChkCopyFromBelow.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 20</value>
   </data>
-  <data name="ucrChkCopyFromAbove.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrChkCopyFromBelow.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;ucrChkCopyFromAbove.Name" xml:space="preserve">
-    <value>ucrChkCopyFromAbove</value>
+  <data name="&gt;&gt;ucrChkCopyFromBelow.Name" xml:space="preserve">
+    <value>ucrChkCopyFromBelow</value>
   </data>
-  <data name="&gt;&gt;ucrChkCopyFromAbove.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkCopyFromBelow.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkCopyFromAbove.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkCopyFromBelow.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrChkCopyFromAbove.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkCopyFromBelow.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="ucrSaveNewColumn.Location" type="System.Drawing.Point, System.Drawing">
