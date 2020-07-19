@@ -36,11 +36,11 @@ Partial Class dlgInfillMissingValues
         Me.grpMethods = New System.Windows.Forms.GroupBox()
         Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpStartEnd = New System.Windows.Forms.GroupBox()
-        Me.lblValue = New System.Windows.Forms.Label()
-        Me.ucrInputConstant = New instat.ucrInputTextBox()
         Me.rdoExtendFill = New System.Windows.Forms.RadioButton()
         Me.rdoLeaveAsMissing = New System.Windows.Forms.RadioButton()
         Me.ucrPnlStartEnd = New instat.UcrPanel()
+        Me.lblValue = New System.Windows.Forms.Label()
+        Me.ucrInputConstant = New instat.ucrInputTextBox()
         Me.lblFunction = New System.Windows.Forms.Label()
         Me.lblRows = New System.Windows.Forms.Label()
         Me.ucrChkSetSeed = New instat.ucrCheck()
@@ -166,19 +166,6 @@ Partial Class dlgInfillMissingValues
         Me.grpStartEnd.Name = "grpStartEnd"
         Me.grpStartEnd.TabStop = False
         '
-        'lblValue
-        '
-        resources.ApplyResources(Me.lblValue, "lblValue")
-        Me.lblValue.Name = "lblValue"
-        '
-        'ucrInputConstant
-        '
-        Me.ucrInputConstant.AddQuotesIfUnrecognised = True
-        Me.ucrInputConstant.IsMultiline = False
-        Me.ucrInputConstant.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputConstant, "ucrInputConstant")
-        Me.ucrInputConstant.Name = "ucrInputConstant"
-        '
         'rdoExtendFill
         '
         resources.ApplyResources(Me.rdoExtendFill, "rdoExtendFill")
@@ -197,6 +184,19 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me.ucrPnlStartEnd, "ucrPnlStartEnd")
         Me.ucrPnlStartEnd.Name = "ucrPnlStartEnd"
+        '
+        'lblValue
+        '
+        resources.ApplyResources(Me.lblValue, "lblValue")
+        Me.lblValue.Name = "lblValue"
+        '
+        'ucrInputConstant
+        '
+        Me.ucrInputConstant.AddQuotesIfUnrecognised = True
+        Me.ucrInputConstant.IsMultiline = False
+        Me.ucrInputConstant.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputConstant, "ucrInputConstant")
+        Me.ucrInputConstant.Name = "ucrInputConstant"
         '
         'lblFunction
         '
