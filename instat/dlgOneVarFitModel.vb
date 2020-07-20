@@ -138,6 +138,10 @@ Public Class dlgOneVarFitModel
         ucrInputComboMethod.SetDropDownStyleAsNonEditable()
 
         ucrChkOmitMissing.SetText("Omit Missing Values")
+        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 3))
+        ucrChkOmitMissing.SetText("Omit Missing Values")
+        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOmitMissing.SetRDefault("FALSE")
 
         ucrNudConfidenceLevel.SetParameter(New RParameter("conf.level", 2))
         ucrNudConfidenceLevel.DecimalPlaces = 2
@@ -386,7 +390,7 @@ Public Class dlgOneVarFitModel
         clsMeanCIFunction.SetPackageName("DescTools")
         clsMeanCIFunction.SetRCommand("MeanCI")
         clsMeanCIFunction.AddParameter("conf.level", "0.5", iPosition:=1)
-        clsMeanCIFunction.AddParameter("method", Chr(34) & "classic" & Chr(34), iPosition:=3)
+        clsMeanCIFunction.AddParameter("method", Chr(34) & "classic" & Chr(34), iPosition:=2)
 
 
         clsMedianCIFunction.SetPackageName("DescTools")
@@ -508,7 +512,6 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
         ucrChkConvertVariate.SetRCode(clsROneVarFitModel, bReset)
         ucrChkOmitMissing.SetRCode(clsMeanCIFunction, bReset)
-        'ucrNudConfLevel.SetRCode(clsMeanCIFunction, bReset)
         ucrNudConfidenceLevel.SetRCode(clsBionomialFunction, bReset)
         ucrInputNullHypothesis.SetRCode(clsBionomialFunction, bReset)
         ucrInputMeanCIMethod.SetRCode(clsMeanCIFunction, bReset)
@@ -631,6 +634,11 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub ucrPnlGeneralExactCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGeneralExactCase.ControlValueChanged
+        If rdoGeneralCase.Checked Then
+            ucrDistributionChoice.SetAllDistributions()
+        Else
+            ucrDistributionChoice.SetExactDistributions()
+        End If
         SetTestEstimateBaseFunction()
         SetSaveLabelTextAndPrefix()
     End Sub
