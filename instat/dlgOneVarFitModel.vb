@@ -152,29 +152,23 @@ Public Class dlgOneVarFitModel
         ucrNudQuantile.SetRDefault(0.5)
 
         ucrInputNullHypothesis.SetParameter(New RParameter("p", 1))
-        ucrInputNullHypothesis.SetParameterValue(0.5)
-        ucrInputNullHypothesis.SetText("Null Hypothesis")
-        ucrInputNullHypothesis.SetValidationTypeAsNumeric(0, 1)
+        ucrInputNullHypothesis.SetValidationTypeAsNumeric(dcmMin:=0, bIncludeMin:=False, dcmMax:=1, bIncludeMax:=False)
         ucrInputNullHypothesis.AddQuotesIfUnrecognised = False
 
         ucrInputTxtSd.SetParameter(New RParameter("sd_pop", 2))
-        ucrInputTxtSd.SetText("Sd_Pop:")
-        ucrInputTxtSd.SetParameterValue(1)
         ucrInputTxtSd.SetValidationTypeAsNumeric()
         ucrInputTxtSd.AddQuotesIfUnrecognised = False
 
 
         ucrInputComboConfidenceLevel.SetParameter(New RParameter("conf.level", 2))
-        ucrInputComboConfidenceLevel.SetValidationTypeAsNumeric(0, 1)
-        dctConfidence.Add("0.500", "0.500")
-        dctConfidence.Add("0.900", "0.900")
-        dctConfidence.Add("0.950", "0.950")
-        dctConfidence.Add("0.980", "0.980")
-        dctConfidence.Add("0.990", "0.990")
+        dctConfidence.Add("0.500", "0.5")
+        dctConfidence.Add("0.900", "0.90")
+        dctConfidence.Add("0.950", "0.95")
+        dctConfidence.Add("0.980", "0.98")
+        dctConfidence.Add("0.990", "0.99")
         dctConfidence.Add("0.999", "0.999")
         ucrInputComboConfidenceLevel.SetItems(dctConfidence)
-        ucrInputComboConfidenceLevel.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
-        'ucrInputComboConfidenceLevel.AddQuotesIfUnrecognised = False
+        ucrInputComboConfidenceLevel.SetValidationTypeAsNumeric(dcmMin:=0, dcmMax:=1)
 
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
@@ -182,7 +176,7 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrDistributionChoice, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrChkOmitMissing, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudConfidenceLevel, {rdoTest}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputNullHypothesis, {rdoTest}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputNullHypothesis, {rdoTest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboConfidenceLevel, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrInputMeanCIMethod, {"Mean"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrInputComboMedianCI, {"Median"}, bNewLinkedHideIfParameterMissing:=True)
@@ -191,8 +185,8 @@ Public Class dlgOneVarFitModel
         ucrInputComboTests.AddToLinkedControls(ucrInputCIMethods, {"Binomial"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputComboMethod, {"Bartel"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrNudConfidenceLevel, {"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z", "Serial Corr"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboTests.AddToLinkedControls(ucrInputNullHypothesis, {"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboTests.AddToLinkedControls(ucrInputTxtSd, {"Z"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrInputNullHypothesis, {"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrInputTxtSd, {"Z"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrNudQuantile, {"Quantile"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrChkOmitMissing, {"Snh", "Br", "Sen"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
@@ -326,7 +320,7 @@ Public Class dlgOneVarFitModel
         'Test
         clsBionomialFunction.SetPackageName("mosaic")
         clsBionomialFunction.SetRCommand("binom.test")
-        clsBionomialFunction.AddParameter("p", 0.5, iPosition:=1)
+        clsBionomialFunction.AddParameter("p", "0.5", iPosition:=1)
         clsBionomialFunction.AddParameter("ci.method", Chr(34) & "Clopper-Pearson" & Chr(34), iPosition:=3)
 
         clsProportionFunction.SetPackageName("mosaic")
@@ -391,8 +385,7 @@ Public Class dlgOneVarFitModel
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
         clsMeanCIFunction.SetRCommand("MeanCI")
-        clsMeanCIFunction.AddParameter("tream", "0", iPosition:=1)
-        clsMeanCIFunction.AddParameter("conf.level", "0.500", iPosition:=2)
+        clsMeanCIFunction.AddParameter("conf.level", "0.5", iPosition:=1)
         clsMeanCIFunction.AddParameter("method", Chr(34) & "classic" & Chr(34), iPosition:=3)
 
 

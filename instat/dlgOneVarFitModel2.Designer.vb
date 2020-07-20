@@ -83,7 +83,7 @@ Partial Class dlgOneVarFitModel
         'LblVariable
         '
         Me.LblVariable.AutoSize = True
-        Me.LblVariable.Location = New System.Drawing.Point(257, 69)
+        Me.LblVariable.Location = New System.Drawing.Point(246, 69)
         Me.LblVariable.Name = "LblVariable"
         Me.LblVariable.Size = New System.Drawing.Size(48, 13)
         Me.LblVariable.TabIndex = 8
@@ -173,7 +173,7 @@ Partial Class dlgOneVarFitModel
         'lblMeanCIMethod
         '
         Me.lblMeanCIMethod.AutoSize = True
-        Me.lblMeanCIMethod.Location = New System.Drawing.Point(273, 175)
+        Me.lblMeanCIMethod.Location = New System.Drawing.Point(246, 175)
         Me.lblMeanCIMethod.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblMeanCIMethod.Name = "lblMeanCIMethod"
         Me.lblMeanCIMethod.Size = New System.Drawing.Size(46, 13)
@@ -183,7 +183,7 @@ Partial Class dlgOneVarFitModel
         'lblConfidenceLevel
         '
         Me.lblConfidenceLevel.AutoSize = True
-        Me.lblConfidenceLevel.Location = New System.Drawing.Point(250, 148)
+        Me.lblConfidenceLevel.Location = New System.Drawing.Point(246, 148)
         Me.lblConfidenceLevel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblConfidenceLevel.Name = "lblConfidenceLevel"
         Me.lblConfidenceLevel.Size = New System.Drawing.Size(93, 13)
@@ -193,7 +193,7 @@ Partial Class dlgOneVarFitModel
         'lblNullHypothesis
         '
         Me.lblNullHypothesis.AutoSize = True
-        Me.lblNullHypothesis.Location = New System.Drawing.Point(255, 175)
+        Me.lblNullHypothesis.Location = New System.Drawing.Point(246, 175)
         Me.lblNullHypothesis.Name = "lblNullHypothesis"
         Me.lblNullHypothesis.Size = New System.Drawing.Size(83, 13)
         Me.lblNullHypothesis.TabIndex = 59
@@ -202,7 +202,7 @@ Partial Class dlgOneVarFitModel
         'lblCIMethods
         '
         Me.lblCIMethods.AutoSize = True
-        Me.lblCIMethods.Location = New System.Drawing.Point(265, 206)
+        Me.lblCIMethods.Location = New System.Drawing.Point(246, 206)
         Me.lblCIMethods.Name = "lblCIMethods"
         Me.lblCIMethods.Size = New System.Drawing.Size(62, 13)
         Me.lblCIMethods.TabIndex = 62
@@ -211,7 +211,7 @@ Partial Class dlgOneVarFitModel
         'lblMethods
         '
         Me.lblMethods.AutoSize = True
-        Me.lblMethods.Location = New System.Drawing.Point(265, 206)
+        Me.lblMethods.Location = New System.Drawing.Point(246, 206)
         Me.lblMethods.Name = "lblMethods"
         Me.lblMethods.Size = New System.Drawing.Size(46, 13)
         Me.lblMethods.TabIndex = 64
@@ -221,7 +221,7 @@ Partial Class dlgOneVarFitModel
         'lblMedianCIMethod
         '
         Me.lblMedianCIMethod.AutoSize = True
-        Me.lblMedianCIMethod.Location = New System.Drawing.Point(249, 175)
+        Me.lblMedianCIMethod.Location = New System.Drawing.Point(246, 175)
         Me.lblMedianCIMethod.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblMedianCIMethod.Name = "lblMedianCIMethod"
         Me.lblMedianCIMethod.Size = New System.Drawing.Size(94, 13)
@@ -231,7 +231,7 @@ Partial Class dlgOneVarFitModel
         'lblVarCI
         '
         Me.lblVarCI.AutoSize = True
-        Me.lblVarCI.Location = New System.Drawing.Point(259, 175)
+        Me.lblVarCI.Location = New System.Drawing.Point(246, 175)
         Me.lblVarCI.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblVarCI.Name = "lblVarCI"
         Me.lblVarCI.Size = New System.Drawing.Size(75, 13)
@@ -241,7 +241,7 @@ Partial Class dlgOneVarFitModel
         'lblQuantileCI
         '
         Me.lblQuantileCI.AutoSize = True
-        Me.lblQuantileCI.Location = New System.Drawing.Point(263, 175)
+        Me.lblQuantileCI.Location = New System.Drawing.Point(246, 175)
         Me.lblQuantileCI.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblQuantileCI.Name = "lblQuantileCI"
         Me.lblQuantileCI.Size = New System.Drawing.Size(67, 13)
@@ -251,7 +251,7 @@ Partial Class dlgOneVarFitModel
         'lblSd
         '
         Me.lblSd.AutoSize = True
-        Me.lblSd.Location = New System.Drawing.Point(265, 206)
+        Me.lblSd.Location = New System.Drawing.Point(246, 206)
         Me.lblSd.Name = "lblSd"
         Me.lblSd.Size = New System.Drawing.Size(48, 13)
         Me.lblSd.TabIndex = 72
@@ -260,7 +260,7 @@ Partial Class dlgOneVarFitModel
         'lblCI
         '
         Me.lblCI.AutoSize = True
-        Me.lblCI.Location = New System.Drawing.Point(245, 149)
+        Me.lblCI.Location = New System.Drawing.Point(246, 149)
         Me.lblCI.Name = "lblCI"
         Me.lblCI.Size = New System.Drawing.Size(102, 13)
         Me.lblCI.TabIndex = 74
@@ -269,7 +269,7 @@ Partial Class dlgOneVarFitModel
         'lblQuantile
         '
         Me.lblQuantile.AutoSize = True
-        Me.lblQuantile.Location = New System.Drawing.Point(265, 206)
+        Me.lblQuantile.Location = New System.Drawing.Point(246, 206)
         Me.lblQuantile.Name = "lblQuantile"
         Me.lblQuantile.Size = New System.Drawing.Size(49, 13)
         Me.lblQuantile.TabIndex = 76
@@ -412,7 +412,7 @@ Partial Class dlgOneVarFitModel
         'ucrChkOmitMissing
         '
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(257, 116)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(246, 116)
         Me.ucrChkOmitMissing.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(142, 20)
@@ -454,7 +454,7 @@ Partial Class dlgOneVarFitModel
         'ucrReceiverVariable
         '
         Me.ucrReceiverVariable.frmParent = Me
-        Me.ucrReceiverVariable.Location = New System.Drawing.Point(257, 86)
+        Me.ucrReceiverVariable.Location = New System.Drawing.Point(246, 86)
         Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
         Me.ucrReceiverVariable.Selector = Nothing
