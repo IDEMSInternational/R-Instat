@@ -568,6 +568,7 @@ Public Class dlgOneVarFitModel
         Else
             ucrDistributionChoice.Enabled = True
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub StartParameterValues()
