@@ -698,17 +698,17 @@ Public Class dlgOneVarFitModel
         ElseIf rdoEstimate.Checked Then
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRplotFunction)
             Select Case ucrInputComboEstimate.GetValue
-                Case "mean"
+                Case "Mean"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMeanCIFunction)
-                Case "median"
+                Case "Median"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMedianCIFunction)
-                Case "normal"
+                Case "Normal"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsNormCIFunction)
-                Case "quantile"
+                Case "Quantile"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileCIFunction)
-                Case "sd"
+                Case "Sd"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSdCIFunction)
-                Case "variance"
+                Case "Variance"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsVarCIFunction)
             End Select
         End If
