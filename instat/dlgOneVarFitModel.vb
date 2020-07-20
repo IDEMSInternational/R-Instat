@@ -152,14 +152,16 @@ Public Class dlgOneVarFitModel
         ucrNudQuantile.SetRDefault(0.5)
 
         ucrInputNullHypothesis.SetParameter(New RParameter("p", 1))
-        ucrInputNullHypothesis.SetParameterValue("0.5")
+        ucrInputNullHypothesis.SetParameterValue(0.5)
         ucrInputNullHypothesis.SetText("Null Hypothesis")
         ucrInputNullHypothesis.SetValidationTypeAsNumeric(0, 1)
+        ucrInputNullHypothesis.AddQuotesIfUnrecognised = False
 
         ucrInputTxtSd.SetParameter(New RParameter("sd_pop", 2))
         ucrInputTxtSd.SetText("Sd_Pop:")
         ucrInputTxtSd.SetParameterValue(1)
         ucrInputTxtSd.SetValidationTypeAsNumeric()
+        ucrInputTxtSd.AddQuotesIfUnrecognised = False
 
 
         ucrInputComboConfidenceLevel.SetParameter(New RParameter("conf.level", 2))
@@ -172,6 +174,7 @@ Public Class dlgOneVarFitModel
         dctConfidence.Add("0.999", "0.999")
         ucrInputComboConfidenceLevel.SetItems(dctConfidence)
         ucrInputComboConfidenceLevel.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
+        'ucrInputComboConfidenceLevel.AddQuotesIfUnrecognised = False
 
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
@@ -328,8 +331,7 @@ Public Class dlgOneVarFitModel
 
         clsProportionFunction.SetPackageName("mosaic")
         clsProportionFunction.SetRCommand("prop.test")
-        clsProportionFunction.AddParameter("n", "", iPosition:=1)
-        clsProportionFunction.AddParameter("p", "0.5", iPosition:=2)
+        clsProportionFunction.AddParameter("p", "0.5", iPosition:=1)
 
         clsSignTestFunction.SetPackageName("DescTools")
         clsSignTestFunction.SetRCommand("SignTest")
