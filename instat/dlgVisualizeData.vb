@@ -116,14 +116,13 @@ Public Class dlgVisualizeData
         ucrSelectorVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("data", 0, False), 2)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0), 1)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0), 2)
-        ucrSaveGraph.AddAdditionalRCode(clsVisDatFunction, iAdditionalPairNo:=1)
-        ucrSaveGraph.AddAdditionalRCode(clsVisMissFunction, iAdditionalPairNo:=2)
-        ucrSaveGraph.AddAdditionalRCode(clsVisGuessFunction, iAdditionalPairNo:=3)
+        ucrSaveGraph.AddAdditionalRCode(clsVisMissFunction, iAdditionalPairNo:=1)
+        ucrSaveGraph.AddAdditionalRCode(clsVisGuessFunction, iAdditionalPairNo:=2)
 
         ucrPnlSelectData.SetRCode(clsCurrBaseFunction, bReset)
         ucrPnlVisualizeData.SetRCode(clsCurrBaseFunction, bReset)
         ucrReceiverVisualizeData.SetRCode(clsVisDatFunction, bReset)
-        ucrSaveGraph.SetRCode(clsCurrBaseFunction, bReset)
+        ucrSaveGraph.SetRCode(clsVisDatFunction, bReset)
         ucrSelectorVisualizeData.SetRCode(clsVisDatFunction, bReset)
     End Sub
 
@@ -166,12 +165,14 @@ Public Class dlgVisualizeData
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = False
             ucrSelectorVisualizeData.btnAdd.Visible = False
             ucrSelectorVisualizeData.btnDataOptions.Visible = False
+            clsCurrBaseFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
         ElseIf rdoSelectedColumn.Checked Then
             clsCurrBaseFunction.RemoveParameterByName("data")
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = True
             ucrSelectorVisualizeData.btnAdd.Visible = True
             ucrSelectorVisualizeData.btnDataOptions.Visible = True
             ucrReceiverVisualizeData.SetMeAsReceiver()
+            clsCurrBaseFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVisualizeData.GetVariables(True), iPosition:=0)
         End If
     End Sub
 
