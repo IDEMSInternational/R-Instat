@@ -116,6 +116,9 @@ Public Class dlgVisualizeData
         ucrSelectorVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("data", 0, False), 2)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0, False), 1)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0, False), 2)
+        ucrSaveGraph.AddAdditionalRCode(clsVisDatFunction, iAdditionalPairNo:=1)
+        ucrSaveGraph.AddAdditionalRCode(clsVisMissFunction, iAdditionalPairNo:=2)
+        ucrSaveGraph.AddAdditionalRCode(clsVisGuessFunction, iAdditionalPairNo:=3)
 
         ucrPnlSelectData.SetRCode(clsCurrBaseFunction, bReset)
         ucrPnlVisualizeData.SetRCode(clsCurrBaseFunction, bReset)
@@ -125,12 +128,10 @@ Public Class dlgVisualizeData
     End Sub
 
     Private Sub TestOkEnabled()
-        If rdoWholeDataFrame.Checked AndAlso ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso ucrSaveGraph.IsComplete() Then
-            ucrBase.OKEnabled(True)
-        ElseIf rdoSelectedColumn.Checked AndAlso Not ucrReceiverVisualizeData.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" OrElse (rdoSelectedColumn.Checked AndAlso ucrReceiverVisualizeData.IsEmpty) OrElse Not ucrSaveGraph.IsComplete() Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -156,20 +157,19 @@ Public Class dlgVisualizeData
             clsCurrBaseFunction = clsVisGuessFunction
         End If
         ucrBase.clsRsyntax.SetBaseRFunction(clsCurrBaseFunction)
-        SetRCodeForControls(True)
         SelectData()
     End Sub
 
     Private Sub SelectData()
-        clsCurrBaseFunction.RemoveParameterByName("x")
-        clsCurrBaseFunction.RemoveParameterByName("data")
 
         If rdoWholeDataFrame.Checked Then
+            clsCurrBaseFunction.RemoveParameterByName("x")
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = False
             ucrSelectorVisualizeData.btnAdd.Visible = False
             ucrSelectorVisualizeData.btnDataOptions.Visible = False
             clsCurrBaseFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
         ElseIf rdoSelectedColumn.Checked Then
+            clsCurrBaseFunction.RemoveParameterByName("data")
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = True
             ucrSelectorVisualizeData.btnAdd.Visible = True
             ucrSelectorVisualizeData.btnDataOptions.Visible = True
@@ -178,11 +178,7 @@ Public Class dlgVisualizeData
         End If
     End Sub
 
-    Private Sub ucrPnlSelectData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged
-        SelectData()
-    End Sub
-
-    Private Sub ucrSelectorVisualizeData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorVisualizeData.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged
+    Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged, ucrSelectorVisualizeData.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged
         SelectData()
     End Sub
 End Class
