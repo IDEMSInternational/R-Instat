@@ -19,7 +19,8 @@ Imports instat.Translations
 Public Class dlgHomogenization
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsCptMeanFunction, clsCptVarianceFunction, clsCptMeanVarianceFunction, clsExcludeNAFunction, clsPlotFunction, clsSummaryFunction, clsSnhtFunction, clsPettittFunction, clsBuishandFunction As New RFunction
+    Private clsCptMeanFunction, clsCptVarianceFunction, clsCptMeanVarianceFunction, clsExcludeNAFunction, clsPlotFunction, clsSummaryFunction, clsSnhtFunction, clsPettittFunction, clsBuishandFunction, clsTapplyFunction, clsCompleteCasesFunction As New RFunction
+    Private clsBracketsOperator, clsLeftBracketOperator, clsRightBracketOperator As New ROperator
     Private Sub dlgHomogenization_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -44,10 +45,15 @@ Public Class dlgHomogenization
 
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrReceiverElement.Selector = ucrSelectorHomogenization
+
+        ucrReceiverStation.SetParameter(New RParameter("station", 0))
+        ucrReceiverStation.Selector = ucrSelectorHomogenization
+        ucrReceiverStation.SetParameterIsRFunction()
+        ucrReceiverStation.SetClimaticType("station")
+        ucrReceiverStation.bAutoFill = True
 
         ucrReceiverElement.SetParameter(New RParameter("object", 0))
-        ucrReceiverElement.SetMeAsReceiver()
+        ucrReceiverElement.Selector = ucrSelectorHomogenization
         ucrReceiverElement.SetParameterIsRFunction()
 
         ucrPnlMethods.AddRadioButton(rdoCptMean)
@@ -69,9 +75,9 @@ Public Class dlgHomogenization
         ucrPnlOptions.AddRadioButton(rdoSingle)
         ucrPnlOptions.AddRadioButton(rdoNeighbouring)
         ucrPnlOptions.AddRadioButton(rdoMultiple)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test"})
-        ucrPnlOptions.AddFunctionNamesCondition(rdoNeighbouring, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test"}, False)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoMultiple, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test"}, False)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test", "tapply"})
+        ucrPnlOptions.AddFunctionNamesCondition(rdoNeighbouring, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test", "tapply"}, False)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoMultiple, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test", "tapply"}, False)
 
         ucrChkPlot.SetText("Plot")
         ucrChkPlot.AddRSyntaxContainsFunctionNamesCondition(True, {"plot"})
@@ -174,13 +180,18 @@ Public Class dlgHomogenization
         clsSnhtFunction = New RFunction
         clsPettittFunction = New RFunction
         clsBuishandFunction = New RFunction
+        clsCompleteCasesFunction = New RFunction
+
+        clsBracketsOperator = New ROperator
+        clsLeftBracketOperator = New ROperator
+        clsRightBracketOperator = New ROperator
 
         ucrSelectorHomogenization.Reset()
+        ucrReceiverStation.SetMeAsReceiver()
         ucrSaveResult.Reset()
 
         clsCptMeanFunction.SetPackageName("changepoint")
         clsCptMeanFunction.SetRCommand("cpt.mean")
-        clsCptMeanFunction.AddParameter("data", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
         clsCptMeanFunction.AddParameter("Q", 5, iPosition:=5)
         clsCptMeanFunction.AddParameter("pen.value", 0, iPosition:=6)
         clsCptMeanFunction.AddParameter("penalty", Chr(34) & "None" & Chr(34), iPosition:=1)
@@ -188,11 +199,9 @@ Public Class dlgHomogenization
 
         clsCptVarianceFunction.SetPackageName("changepoint")
         clsCptVarianceFunction.SetRCommand("cpt.var")
-        clsCptVarianceFunction.AddParameter("data", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
 
         clsCptMeanVarianceFunction.SetPackageName("changepoint")
         clsCptMeanVarianceFunction.SetRCommand("cpt.meanvar")
-        clsCptMeanVarianceFunction.AddParameter("data", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
 
         clsExcludeNAFunction.SetRCommand("na.exclude")
 
@@ -204,17 +213,36 @@ Public Class dlgHomogenization
 
         clsSnhtFunction.SetPackageName("trend")
         clsSnhtFunction.SetRCommand("snh.test")
-        clsSnhtFunction.AddParameter("x", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
-        clsSnhtFunction.AddParameter("m", 10, iPosition:=1)
+        clsSnhtFunction.AddParameter("m", 5, iPosition:=1)
 
         clsPettittFunction.SetPackageName("trend")
         clsPettittFunction.SetRCommand("pettitt.test")
-        clsPettittFunction.AddParameter("x", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
 
         clsBuishandFunction.SetPackageName("trend")
         clsBuishandFunction.SetRCommand("br.test")
-        clsBuishandFunction.AddParameter("x", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
-        clsBuishandFunction.AddParameter("m", 10, iPosition:=1)
+        clsBuishandFunction.AddParameter("m", 5, iPosition:=1)
+
+        clsTapplyFunction.SetRCommand("tapply")
+        clsTapplyFunction.AddParameter("X", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
+        clsTapplyFunction.AddParameter("INDEX", clsROperatorParameter:=clsRightBracketOperator, iPosition:=1)
+        clsTapplyFunction.AddParameter("FUN", clsROperatorParameter:=clsBracketsOperator, iPosition:=2)
+
+        clsBracketsOperator.SetOperation(")")
+        clsBracketsOperator.AddParameter("left", "function(X", iPosition:=0)
+        clsBracketsOperator.bSpaceAroundOperation = False
+
+        clsCompleteCasesFunction.SetRCommand("complete.cases")
+
+        clsLeftBracketOperator.SetOperation("[")
+        clsLeftBracketOperator.AddParameter("right", clsRFunctionParameter:=clsCompleteCasesFunction, iPosition:=1)
+        clsLeftBracketOperator.bSpaceAroundOperation = False
+        clsLeftBracketOperator.bBrackets = False
+
+        clsRightBracketOperator.SetOperation("]")
+        clsRightBracketOperator.AddParameter("left", clsROperatorParameter:=clsLeftBracketOperator, iPosition:=0)
+        clsRightBracketOperator.AddParameter("right", "", iPosition:=1)
+        clsRightBracketOperator.bSpaceAroundOperation = False
+        clsRightBracketOperator.bBrackets = False
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsSnhtFunction)
@@ -222,6 +250,7 @@ Public Class dlgHomogenization
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsCompleteCasesFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverElement.SetRCode(clsExcludeNAFunction, bReset)
 
         ucrInputComboPenalty.AddAdditionalCodeParameterPair(clsCptVarianceFunction, ucrInputComboPenalty.GetParameter, iAdditionalPairNo:=1)
@@ -248,16 +277,18 @@ Public Class dlgHomogenization
         ucrInputPenValue.AddAdditionalCodeParameterPair(clsCptMeanVarianceFunction, ucrInputPenValue.GetParameter, iAdditionalPairNo:=2)
         ucrInputPenValue.SetRCode(clsCptMeanFunction, bReset)
 
+        ucrReceiverStation.SetRCode(clsLeftBracketOperator, bReset)
+
         ucrPnlMethods.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
-        ucrSaveResult.AddAdditionalRCode(clsCptVarianceFunction, iAdditionalPairNo:=1)
-        ucrSaveResult.AddAdditionalRCode(clsCptMeanVarianceFunction, iAdditionalPairNo:=2)
-        ucrSaveResult.AddAdditionalRCode(clsPettittFunction, iAdditionalPairNo:=3)
-        ucrSaveResult.AddAdditionalRCode(clsSnhtFunction, iAdditionalPairNo:=4)
-        ucrSaveResult.AddAdditionalRCode(clsBuishandFunction, iAdditionalPairNo:=5)
+        'ucrSaveResult.AddAdditionalRCode(clsCptVarianceFunction, iAdditionalPairNo:=1)
+        'ucrSaveResult.AddAdditionalRCode(clsCptMeanVarianceFunction, iAdditionalPairNo:=2)
+        'ucrSaveResult.AddAdditionalRCode(clsPettittFunction, iAdditionalPairNo:=3)
+        'ucrSaveResult.AddAdditionalRCode(clsSnhtFunction, iAdditionalPairNo:=4)
+        'ucrSaveResult.AddAdditionalRCode(clsBuishandFunction, iAdditionalPairNo:=5)
 
-        ucrSaveResult.SetRCode(clsCptMeanFunction, bReset)
+        'ucrSaveResult.SetRCode(clsCptMeanFunction, bReset)
 
         ucrChkPlot.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
@@ -271,21 +302,66 @@ Public Class dlgHomogenization
         End If
     End Sub
 
-    Private Sub ucrPnlMethods_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethods.ControlValueChanged
+    Private Sub SetBaseFunction()
         If rdoCptMean.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCptMeanFunction)
+            clsCptMeanFunction.AddParameter("data", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
         ElseIf rdoCptVariance.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCptVarianceFunction)
+            clsCptVarianceFunction.AddParameter("data", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
         ElseIf rdoCptMeanVariance.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCptMeanVarianceFunction)
+            clsCptMeanVarianceFunction.AddParameter("data", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
         ElseIf rdoSnht.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSnhtFunction)
+            clsSnhtFunction.AddParameter("x", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
         ElseIf rdoPettitt.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsPettittFunction)
+            clsPettittFunction.AddParameter("x", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
         ElseIf rdoBuishand.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsBuishandFunction)
+            clsBuishandFunction.AddParameter("x", clsRFunctionParameter:=clsExcludeNAFunction, iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub ucrPnlMethods_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethods.ControlValueChanged
+        If ucrReceiverStation.IsEmpty Then
+            SetBaseFunction()
         End If
         AddPlotSummaryParameters()
+        If rdoCptMean.Checked Then
+            clsBracketsOperator.AddParameter("right", clsRFunctionParameter:=clsCptMeanFunction, iPosition:=1)
+        ElseIf rdoCptVariance.Checked Then
+            clsBracketsOperator.AddParameter("right", clsRFunctionParameter:=clsCptVarianceFunction, iPosition:=1)
+        ElseIf rdoCptMeanVariance.Checked Then
+            clsBracketsOperator.AddParameter("right", clsRFunctionParameter:=clsCptMeanVarianceFunction, iPosition:=1)
+        ElseIf rdoSnht.Checked Then
+            clsBracketsOperator.AddParameter("right", clsRFunctionParameter:=clsSnhtFunction, iPosition:=1)
+        ElseIf rdoPettitt.Checked Then
+            clsBracketsOperator.AddParameter("right", clsRFunctionParameter:=clsPettittFunction, iPosition:=1)
+        ElseIf rdoBuishand.Checked Then
+            clsBracketsOperator.AddParameter("right", clsRFunctionParameter:=clsBuishandFunction, iPosition:=1)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
+        If Not ucrReceiverStation.IsEmpty Then
+            clsCptMeanFunction.AddParameter("X", "X", iPosition:=0, bIncludeArgumentName:=False)
+            clsCptVarianceFunction.AddParameter("X", "X", iPosition:=0, bIncludeArgumentName:=False)
+            clsCptMeanVarianceFunction.AddParameter("X", "X", iPosition:=0, bIncludeArgumentName:=False)
+            clsSnhtFunction.AddParameter("X", "X", iPosition:=0, bIncludeArgumentName:=False)
+            clsPettittFunction.AddParameter("X", "X", iPosition:=0, bIncludeArgumentName:=False)
+            clsBuishandFunction.AddParameter("X", "X", iPosition:=0, bIncludeArgumentName:=False)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsTapplyFunction)
+        Else
+            SetBaseFunction()
+            clsCptMeanFunction.RemoveParameterByName("X")
+            clsCptVarianceFunction.RemoveParameterByName("X")
+            clsCptMeanVarianceFunction.RemoveParameterByName("X")
+            clsSnhtFunction.RemoveParameterByName("X")
+            clsPettittFunction.RemoveParameterByName("X")
+            clsBuishandFunction.RemoveParameterByName("X")
+        End If
     End Sub
 
     Private Sub AddPlotSummaryParameters()
