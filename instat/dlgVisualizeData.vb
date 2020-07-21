@@ -161,20 +161,17 @@ Public Class dlgVisualizeData
     End Sub
 
     Private Sub SelectData()
-
         If rdoWholeDataFrame.Checked Then
             clsCurrBaseFunction.RemoveParameterByName("x")
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = False
             ucrSelectorVisualizeData.btnAdd.Visible = False
             ucrSelectorVisualizeData.btnDataOptions.Visible = False
-            clsCurrBaseFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
         ElseIf rdoSelectedColumn.Checked Then
             clsCurrBaseFunction.RemoveParameterByName("data")
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = True
             ucrSelectorVisualizeData.btnAdd.Visible = True
             ucrSelectorVisualizeData.btnDataOptions.Visible = True
             ucrReceiverVisualizeData.SetMeAsReceiver()
-            clsCurrBaseFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVisualizeData.GetVariables(True), bIncludeArgumentName:=False, iPosition:=0)
         End If
     End Sub
 
