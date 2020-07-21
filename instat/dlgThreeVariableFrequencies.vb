@@ -22,14 +22,12 @@ Public Class dlgThreeVariableFrequencies
     Private clsSjTab, clsSelect, clsSjPlot, clsGroupBy, clsGridArrange As New RFunction
     Private clsTableBaseOperator, clsGraphBaseOperator As New ROperator
     Private clsCurrBaseCode As RCodeStructure
-    Private iMaxWidth As Integer
     Private iMaxGraphGroupX As Integer
 
     Private Sub dlgThreeVariableFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            iMaxWidth = Me.Width
             iMaxGraphGroupX = grpFreqTypeGraph.Location.X
             bFirstLoad = False
         End If
@@ -147,7 +145,7 @@ Public Class dlgThreeVariableFrequencies
         ucrSaveGraph.SetPrefix("three_way_freq")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("save graph")
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
@@ -306,10 +304,8 @@ Public Class dlgThreeVariableFrequencies
     Private Sub ChangeLocation()
         If rdoBoth.Checked Then
             grpFreqTypeGraph.Location = New Point(iMaxGraphGroupX, grpFreqTypeGraph.Location.Y)
-            Me.Size = New Size(iMaxWidth, Me.Height)
         Else
-            grpFreqTypeGraph.Location = New Point(iMaxGraphGroupX / 1.48, grpFreqTypeGraph.Location.Y)
-            Me.Size = New Size(iMaxWidth / 1.22, Me.Height)
+            grpFreqTypeGraph.Location = New Point(grpFreqTypeTable.Location.X, grpFreqTypeTable.Location.Y)
         End If
     End Sub
 

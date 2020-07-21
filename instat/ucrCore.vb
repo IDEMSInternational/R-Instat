@@ -59,6 +59,9 @@ Public Class ucrCore
     'ContentsChanged is probably only needed for TestOK
     Public Event ControlContentsChanged(ucrChangedControl As ucrCore)
 
+    'ControlClicked is raised when the control is clicked. For some controls, this will be raised when their child controls is clicked
+    Public Event ControlClicked()
+
     'List of controls that this control links to
     'Used when this control determines aspects of other controls
     'e.g. add/remove the parameter of other controls
@@ -315,6 +318,10 @@ Public Class ucrCore
         UpdateAllParameters()
         UpdateRCode()
         RaiseEvent ControlValueChanged(Me)
+    End Sub
+
+    Public Sub OnControlClicked()
+        RaiseEvent ControlClicked()
     End Sub
 
     Public Overridable Sub SetParameter(clsNewParameter As RParameter, Optional iIndex As Integer = 0)
