@@ -156,6 +156,7 @@ Public Class dlgVisualizeData
             clsCurrBaseFunction = clsVisGuessFunction
         End If
         ucrBase.clsRsyntax.SetBaseRFunction(clsCurrBaseFunction)
+        SetRCodeForControls(True)
         SelectData()
     End Sub
 
