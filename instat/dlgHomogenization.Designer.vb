@@ -41,7 +41,7 @@ Partial Class dlgHomogenization
         Me.lblMinSegLen = New System.Windows.Forms.Label()
         Me.lblQ = New System.Windows.Forms.Label()
         Me.lblPenalty = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblMethod = New System.Windows.Forms.Label()
         Me.lblDistribution = New System.Windows.Forms.Label()
         Me.ucrNudMinSegLen = New instat.ucrNud()
         Me.ucrInputQ = New instat.ucrInputTextBox()
@@ -62,6 +62,8 @@ Partial Class dlgHomogenization
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrSelectorHomogenization = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblStation = New System.Windows.Forms.Label()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.grpMethods.SuspendLayout()
         Me.grpCptOptions.SuspendLayout()
         Me.grpOutputOptions.SuspendLayout()
@@ -135,7 +137,7 @@ Partial Class dlgHomogenization
         Me.grpCptOptions.Controls.Add(Me.lblMinSegLen)
         Me.grpCptOptions.Controls.Add(Me.lblQ)
         Me.grpCptOptions.Controls.Add(Me.lblPenalty)
-        Me.grpCptOptions.Controls.Add(Me.Label2)
+        Me.grpCptOptions.Controls.Add(Me.lblMethod)
         Me.grpCptOptions.Controls.Add(Me.lblDistribution)
         Me.grpCptOptions.Controls.Add(Me.ucrNudMinSegLen)
         Me.grpCptOptions.Controls.Add(Me.ucrInputQ)
@@ -188,10 +190,10 @@ Partial Class dlgHomogenization
         resources.ApplyResources(Me.lblPenalty, "lblPenalty")
         Me.lblPenalty.Name = "lblPenalty"
         '
-        'Label2
+        'lblMethod
         '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
+        resources.ApplyResources(Me.lblMethod, "lblMethod")
+        Me.lblMethod.Name = "lblMethod"
         '
         'lblDistribution
         '
@@ -339,10 +341,26 @@ Partial Class dlgHomogenization
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'lblStation
+        '
+        resources.ApplyResources(Me.lblStation, "lblStation")
+        Me.lblStation.Name = "lblStation"
+        '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
         'dlgHomogenization
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblStation)
+        Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.lblNeighbouring)
         Me.Controls.Add(Me.ucrReceiverNeighbour)
         Me.Controls.Add(Me.rdoNeighbouring)
@@ -390,7 +408,7 @@ Partial Class dlgHomogenization
     Friend WithEvents ucrInputComboMethod As ucrInputComboBox
     Friend WithEvents ucrInputComboPenalty As ucrInputComboBox
     Friend WithEvents lblPenalty As Label
-    Friend WithEvents Label2 As Label
+    Friend WithEvents lblMethod As Label
     Friend WithEvents lblDistribution As Label
     Friend WithEvents lblMinSegLen As Label
     Friend WithEvents lblQ As Label
@@ -409,4 +427,6 @@ Partial Class dlgHomogenization
     Friend WithEvents rdoSnht As RadioButton
     Friend WithEvents rdoPettitt As RadioButton
     Friend WithEvents rdoBuishand As RadioButton
+    Friend WithEvents lblStation As Label
+    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
 End Class
