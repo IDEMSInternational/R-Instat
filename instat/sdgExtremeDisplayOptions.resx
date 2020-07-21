@@ -122,7 +122,7 @@
     <value>6, 14</value>
   </data>
   <data name="ucrPnlExtreme.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 161</value>
+    <value>276, 136</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrPnlExtreme.TabIndex" type="System.Int32, mscorlib">
@@ -138,7 +138,7 @@
     <value>grpPlots</value>
   </data>
   <data name="&gt;&gt;ucrPnlExtreme.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="rdoZPlot.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -169,7 +169,7 @@
     <value>grpPlots</value>
   </data>
   <data name="&gt;&gt;rdoZPlot.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="rdoQQPlot.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -199,7 +199,7 @@
     <value>grpPlots</value>
   </data>
   <data name="&gt;&gt;rdoQQPlot.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="rdoQQ2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -208,7 +208,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoQQ2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 94</value>
+    <value>17, 71</value>
   </data>
   <data name="rdoQQ2.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 17</value>
@@ -229,7 +229,7 @@
     <value>grpPlots</value>
   </data>
   <data name="&gt;&gt;rdoQQ2.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="rdoProbprob.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -238,7 +238,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoProbprob.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 71</value>
+    <value>17, 48</value>
   </data>
   <data name="rdoProbprob.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 17</value>
@@ -259,7 +259,7 @@
     <value>grpPlots</value>
   </data>
   <data name="&gt;&gt;rdoProbprob.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="rdoPrimary.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -268,7 +268,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoPrimary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 48</value>
+    <value>17, 25</value>
   </data>
   <data name="rdoPrimary.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 17</value>
@@ -289,61 +289,7 @@
     <value>grpPlots</value>
   </data>
   <data name="&gt;&gt;rdoPrimary.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="rdoNoPlot.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoNoPlot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoNoPlot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 25</value>
-  </data>
-  <data name="rdoNoPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 17</value>
-  </data>
-  <data name="rdoNoPlot.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="rdoNoPlot.Text" xml:space="preserve">
-    <value>No Plot</value>
-  </data>
-  <data name="&gt;&gt;rdoNoPlot.Name" xml:space="preserve">
-    <value>rdoNoPlot</value>
-  </data>
-  <data name="&gt;&gt;rdoNoPlot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoNoPlot.Parent" xml:space="preserve">
-    <value>grpPlots</value>
-  </data>
-  <data name="&gt;&gt;rdoNoPlot.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="ucrSavePlots.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 142</value>
-  </data>
-  <data name="ucrSavePlots.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ucrSavePlots.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 24</value>
-  </data>
-  <data name="ucrSavePlots.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;ucrSavePlots.Name" xml:space="preserve">
-    <value>ucrSavePlots</value>
-  </data>
-  <data name="&gt;&gt;ucrSavePlots.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSavePlots.Parent" xml:space="preserve">
-    <value>grpPlots</value>
-  </data>
-  <data name="&gt;&gt;ucrSavePlots.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="rdoTrace.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -352,7 +298,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoTrace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 117</value>
+    <value>17, 117</value>
   </data>
   <data name="rdoTrace.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 17</value>
@@ -373,7 +319,7 @@
     <value>grpPlots</value>
   </data>
   <data name="&gt;&gt;rdoTrace.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="rdoRlplot.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -382,7 +328,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoRlplot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 117</value>
+    <value>20, 94</value>
   </data>
   <data name="rdoRlplot.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 17</value>
@@ -403,7 +349,7 @@
     <value>grpPlots</value>
   </data>
   <data name="&gt;&gt;rdoRlplot.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="rdoHist.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -433,7 +379,7 @@
     <value>grpPlots</value>
   </data>
   <data name="&gt;&gt;rdoHist.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="rdoDensity.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -463,13 +409,13 @@
     <value>grpPlots</value>
   </data>
   <data name="&gt;&gt;rdoDensity.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="grpPlots.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>
   </data>
   <data name="grpPlots.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 181</value>
+    <value>296, 161</value>
   </data>
   <data name="grpPlots.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -490,7 +436,7 @@
     <value>1</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 199</value>
+    <value>89, 179</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 30</value>
@@ -517,7 +463,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>323, 234</value>
+    <value>323, 215</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

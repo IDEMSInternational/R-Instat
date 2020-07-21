@@ -234,11 +234,35 @@
   <data name="&gt;&gt;cmdDisplayOptions.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrSaveExtremes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 291</value>
+  </data>
+  <data name="ucrSaveExtremes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrSaveExtremes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 24</value>
+  </data>
+  <data name="ucrSaveExtremes.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveExtremes.Name" xml:space="preserve">
+    <value>ucrSaveExtremes</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveExtremes.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveExtremes.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveExtremes.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrInputExtremes.Location" type="System.Drawing.Point, System.Drawing">
     <value>63, 211</value>
   </data>
   <data name="ucrInputExtremes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 21</value>
+    <value>143, 21</value>
   </data>
   <data name="ucrInputExtremes.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -288,30 +312,6 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>411, 386</value>
   </data>
-  <data name="ucrSaveExtremes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 291</value>
-  </data>
-  <data name="ucrSaveExtremes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ucrSaveExtremes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
-  </data>
-  <data name="ucrSaveExtremes.TabIndex" type="System.Int32, mscorlib">
-    <value>39</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveExtremes.Name" xml:space="preserve">
-    <value>ucrSaveExtremes</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveExtremes.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveExtremes.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveExtremes.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 323</value>
   </data>
@@ -332,6 +332,9 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

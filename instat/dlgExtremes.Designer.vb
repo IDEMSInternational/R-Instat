@@ -43,11 +43,11 @@ Partial Class dlgExtremes
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
+        Me.ucrSaveExtremes = New instat.ucrSave()
         Me.ucrInputExtremes = New instat.ucrInputComboBox()
         Me.ucrSelectorExtremes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSaveExtremes = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblDataToFit
@@ -72,6 +72,11 @@ Partial Class dlgExtremes
         resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
+        '
+        'ucrSaveExtremes
+        '
+        resources.ApplyResources(Me.ucrSaveExtremes, "ucrSaveExtremes")
+        Me.ucrSaveExtremes.Name = "ucrSaveExtremes"
         '
         'ucrInputExtremes
         '
@@ -101,11 +106,6 @@ Partial Class dlgExtremes
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrSaveExtremes
-        '
-        resources.ApplyResources(Me.ucrSaveExtremes, "ucrSaveExtremes")
-        Me.ucrSaveExtremes.Name = "ucrSaveExtremes"
         '
         'dlgExtremes
         '

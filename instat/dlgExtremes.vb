@@ -19,11 +19,11 @@ Imports instat.Translations
 
 Public Class dlgExtremes
     Private clsFevdFunction, clsNaExclude, clsConvertVector As New RFunction
-    Private clsPlotsFunction As New RFunction
+    Private clsFevdPlotsFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetFittingOptions As Boolean = False
-
+    Private bResetDisplayOptions As Boolean = False
 
     Private Sub dlgExtremes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -50,7 +50,7 @@ Public Class dlgExtremes
         ucrReceiverVariable.Selector = ucrSelectorExtremes
         ucrReceiverVariable.strSelectorHeading = "Variables"
         ucrReceiverVariable.SetMeAsReceiver()
-        ucrReceiverVariable.SetParameter(New RParameter("x", 0))
+        ucrReceiverVariable.SetParameter(New RParameter("object", 0))
         ucrReceiverVariable.SetParameterIsRFunction()
 
         ucrInputExtremes.SetParameter(New RParameter("type", 1))
@@ -73,7 +73,7 @@ Public Class dlgExtremes
 
     Private Sub SetDefaults()
         clsFevdFunction = New RFunction
-        clsPlotsFunction = New RFunction
+        clsFevdPlotsFunction = New RFunction
         clsNaExclude = New RFunction
         clsConvertVector = New RFunction
 
@@ -83,11 +83,10 @@ Public Class dlgExtremes
         clsNaExclude.SetPackageName("stats")
         clsNaExclude.SetRCommand("na.exclude")
 
-
-        clsPlotsFunction.SetPackageName("extRemes")
-        clsPlotsFunction.SetRCommand("plot.fevd.mle")
-        clsPlotsFunction.iCallType = 3
-        clsPlotsFunction.bExcludeAssignedFunctionOutput = False
+        clsFevdPlotsFunction.SetPackageName("extRemes")
+        clsFevdPlotsFunction.SetRCommand("plot.fevd")
+        clsFevdPlotsFunction.iCallType = 3
+        clsFevdPlotsFunction.bExcludeAssignedFunctionOutput = False
 
         clsFevdFunction.SetPackageName("extRemes")
         clsFevdFunction.SetRCommand("fevd")
@@ -102,13 +101,14 @@ Public Class dlgExtremes
 
 
         clsFevdFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
-        clsPlotsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsFevdPlotsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
-        clsPlotsFunction.AddParameter("x", clsRFunctionParameter:=clsFevdFunction)
+        clsFevdPlotsFunction.AddParameter("x", clsRFunctionParameter:=clsFevdFunction, iPosition:=0)
+        clsFevdPlotsFunction.AddParameter("type", Chr(34) & "primary" & Chr(34), iPosition:=1)
 
+        ucrBase.clsRsyntax.AddToAfterCodes(clsFevdPlotsFunction)
         ucrBase.clsRsyntax.SetBaseRFunction(clsFevdFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsPlotsFunction)
-
+        bResetDisplayOptions = True
         bResetFittingOptions = True
     End Sub
 
@@ -122,6 +122,13 @@ Public Class dlgExtremes
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
+
+    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+        sdgExtremeDisplayOptions.SetRCode(clsNewFevdPlotFunction:=clsFevdPlotsFunction)
+        bResetDisplayOptions = False
+        sdgExtremeDisplayOptions.ShowDialog()
+    End Sub
+
     Private Sub TestOkEnabled()
 
     End Sub

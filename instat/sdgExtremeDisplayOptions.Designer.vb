@@ -29,13 +29,11 @@ Partial Class sdgExtremeDisplayOptions
         Me.rdoQQ2 = New System.Windows.Forms.RadioButton()
         Me.rdoProbprob = New System.Windows.Forms.RadioButton()
         Me.rdoPrimary = New System.Windows.Forms.RadioButton()
-        Me.rdoNoPlot = New System.Windows.Forms.RadioButton()
         Me.grpPlots = New System.Windows.Forms.GroupBox()
-        Me.rdoDensity = New System.Windows.Forms.RadioButton()
-        Me.rdoHist = New System.Windows.Forms.RadioButton()
-        Me.rdoRlplot = New System.Windows.Forms.RadioButton()
         Me.rdoTrace = New System.Windows.Forms.RadioButton()
-        Me.ucrSavePlots = New instat.ucrSave()
+        Me.rdoRlplot = New System.Windows.Forms.RadioButton()
+        Me.rdoHist = New System.Windows.Forms.RadioButton()
+        Me.rdoDensity = New System.Windows.Forms.RadioButton()
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.grpPlots.SuspendLayout()
         Me.SuspendLayout()
@@ -75,15 +73,8 @@ Partial Class sdgExtremeDisplayOptions
         Me.rdoPrimary.Name = "rdoPrimary"
         Me.rdoPrimary.UseVisualStyleBackColor = True
         '
-        'rdoNoPlot
-        '
-        resources.ApplyResources(Me.rdoNoPlot, "rdoNoPlot")
-        Me.rdoNoPlot.Name = "rdoNoPlot"
-        Me.rdoNoPlot.UseVisualStyleBackColor = True
-        '
         'grpPlots
         '
-        Me.grpPlots.Controls.Add(Me.ucrSavePlots)
         Me.grpPlots.Controls.Add(Me.rdoTrace)
         Me.grpPlots.Controls.Add(Me.rdoRlplot)
         Me.grpPlots.Controls.Add(Me.rdoHist)
@@ -91,7 +82,6 @@ Partial Class sdgExtremeDisplayOptions
         Me.grpPlots.Controls.Add(Me.rdoZPlot)
         Me.grpPlots.Controls.Add(Me.rdoProbprob)
         Me.grpPlots.Controls.Add(Me.rdoQQPlot)
-        Me.grpPlots.Controls.Add(Me.rdoNoPlot)
         Me.grpPlots.Controls.Add(Me.rdoQQ2)
         Me.grpPlots.Controls.Add(Me.rdoPrimary)
         Me.grpPlots.Controls.Add(Me.ucrPnlExtreme)
@@ -99,17 +89,11 @@ Partial Class sdgExtremeDisplayOptions
         Me.grpPlots.Name = "grpPlots"
         Me.grpPlots.TabStop = False
         '
-        'rdoDensity
+        'rdoTrace
         '
-        resources.ApplyResources(Me.rdoDensity, "rdoDensity")
-        Me.rdoDensity.Name = "rdoDensity"
-        Me.rdoDensity.UseVisualStyleBackColor = True
-        '
-        'rdoHist
-        '
-        resources.ApplyResources(Me.rdoHist, "rdoHist")
-        Me.rdoHist.Name = "rdoHist"
-        Me.rdoHist.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoTrace, "rdoTrace")
+        Me.rdoTrace.Name = "rdoTrace"
+        Me.rdoTrace.UseVisualStyleBackColor = True
         '
         'rdoRlplot
         '
@@ -117,16 +101,17 @@ Partial Class sdgExtremeDisplayOptions
         Me.rdoRlplot.Name = "rdoRlplot"
         Me.rdoRlplot.UseVisualStyleBackColor = True
         '
-        'rdoTrace
+        'rdoHist
         '
-        resources.ApplyResources(Me.rdoTrace, "rdoTrace")
-        Me.rdoTrace.Name = "rdoTrace"
-        Me.rdoTrace.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoHist, "rdoHist")
+        Me.rdoHist.Name = "rdoHist"
+        Me.rdoHist.UseVisualStyleBackColor = True
         '
-        'ucrSavePlots
+        'rdoDensity
         '
-        resources.ApplyResources(Me.ucrSavePlots, "ucrSavePlots")
-        Me.ucrSavePlots.Name = "ucrSavePlots"
+        resources.ApplyResources(Me.rdoDensity, "rdoDensity")
+        Me.rdoDensity.Name = "rdoDensity"
+        Me.rdoDensity.UseVisualStyleBackColor = True
         '
         'ucrBase
         '
@@ -155,12 +140,10 @@ Partial Class sdgExtremeDisplayOptions
     Friend WithEvents rdoQQ2 As RadioButton
     Friend WithEvents rdoProbprob As RadioButton
     Friend WithEvents rdoPrimary As RadioButton
-    Friend WithEvents rdoNoPlot As RadioButton
     Friend WithEvents grpPlots As GroupBox
     Friend WithEvents rdoTrace As RadioButton
     Friend WithEvents rdoRlplot As RadioButton
     Friend WithEvents rdoHist As RadioButton
     Friend WithEvents rdoDensity As RadioButton
-    Friend WithEvents ucrSavePlots As ucrSave
     Friend WithEvents ucrBase As ucrButtonsSubdialogue
 End Class
