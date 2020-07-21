@@ -189,6 +189,8 @@ Public Class dlgHomogenization
         ucrSelectorHomogenization.Reset()
         ucrReceiverStation.SetMeAsReceiver()
         ucrSaveResult.Reset()
+        'TODO: Set conditions properly!
+        rdoSnht.Checked = True
 
         clsCptMeanFunction.SetPackageName("changepoint")
         clsCptMeanFunction.SetRCommand("cpt.mean")
@@ -279,7 +281,7 @@ Public Class dlgHomogenization
 
         ucrReceiverStation.SetRCode(clsLeftBracketOperator, bReset)
 
-        ucrPnlMethods.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'ucrPnlMethods.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         'ucrSaveResult.AddAdditionalRCode(clsCptVarianceFunction, iAdditionalPairNo:=1)
