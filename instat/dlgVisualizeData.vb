@@ -59,7 +59,7 @@ Public Class dlgVisualizeData
         ucrSelectorVisualizeData.SetParameter(New RParameter("data", 0, False))
         ucrSelectorVisualizeData.SetParameterIsrfunction()
 
-        ucrReceiverVisualizeData.SetParameter(New RParameter("x", 0, False))
+        ucrReceiverVisualizeData.SetParameter(New RParameter("x", 0))
         ucrReceiverVisualizeData.SetParameterIsRFunction()
         ucrReceiverVisualizeData.Selector = ucrSelectorVisualizeData
         ucrReceiverVisualizeData.bForceAsDataFrame = True
@@ -114,8 +114,8 @@ Public Class dlgVisualizeData
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("data", 0, False), 1)
         ucrSelectorVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("data", 0, False), 2)
-        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0, False), 1)
-        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0, False), 2)
+        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0), 1)
+        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0), 2)
         ucrSaveGraph.AddAdditionalRCode(clsVisDatFunction, iAdditionalPairNo:=1)
         ucrSaveGraph.AddAdditionalRCode(clsVisMissFunction, iAdditionalPairNo:=2)
         ucrSaveGraph.AddAdditionalRCode(clsVisGuessFunction, iAdditionalPairNo:=3)
