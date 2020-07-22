@@ -191,6 +191,10 @@ Public Class ucrDistributions
         Dim clsNormalDist As New Distribution
         Dim clsExponentialDist As New Distribution
         Dim clsGeometricDist As New Distribution
+        Dim clsGeneralizedParetoDist As New Distribution
+        Dim clsGeneralizedExtremeValue As New Distribution
+        Dim clsGumbelDist As New Distribution
+
         'Dim clsExtremeValueDist As New Distribution
         Dim clsWeibullDist As New Distribution
         Dim clsUniformDist As New Distribution
@@ -270,6 +274,41 @@ Public Class ucrDistributions
         'clsExtremeValueDist.AddParameter("scale", "Scale", 1)
         'clsExtremeValueDist.AddParameter("loc", "Location", 0)
         'lstAllDistributions.Add(clsExtremeValueDist)
+
+        'Generalized Pareto Distribution
+        clsGeneralizedParetoDist.strNameTag = "Generalized_Pareto"
+        clsGeneralizedParetoDist.strRName = "GP"
+        clsGeneralizedParetoDist.strRFunctionName = "rgpd"
+        clsGeneralizedParetoDist.strPFunctionName = "pgpd"
+        clsGeneralizedParetoDist.strQFunctionName = "qgpd"
+        clsGeneralizedParetoDist.strDFunctionName = "dgpd"
+        clsGeneralizedParetoDist.AddParameter("loc", "Location", 0)
+        clsGeneralizedParetoDist.AddParameter("scale", "Scale", 1)
+        clsGeneralizedParetoDist.AddParameter("shape", "Shape", 0)
+        lstAllDistributions.Add(clsGeneralizedParetoDist)
+
+        'Generalized Extreme Value Distribution
+        clsGeneralizedExtremeValue.strNameTag = "Generalized_Extreme_Value"
+        clsGeneralizedExtremeValue.strRName = "GEV"
+        clsGeneralizedExtremeValue.strRFunctionName = "rgev"
+        clsGeneralizedExtremeValue.strPFunctionName = "pgev"
+        clsGeneralizedExtremeValue.strQFunctionName = "qgev"
+        clsGeneralizedExtremeValue.strDFunctionName = "dgev"
+        clsGeneralizedExtremeValue.AddParameter("loc", "Location", 0)
+        clsGeneralizedExtremeValue.AddParameter("scale", "Scale", 1)
+        clsGeneralizedExtremeValue.AddParameter("shape", "Shape", 0)
+        lstAllDistributions.Add(clsGeneralizedExtremeValue)
+
+        'Gumbel Distribution
+        clsGumbelDist.strNameTag = "Gumbel"
+        clsGumbelDist.strRName = "gumbel"
+        clsGumbelDist.strRFunctionName = "rgumbel"
+        clsGumbelDist.strPFunctionName = "pgumbel"
+        clsGumbelDist.strQFunctionName = "qgumbel"
+        clsGumbelDist.strDFunctionName = "dgumbel"
+        clsGumbelDist.AddParameter("loc", "Location", 0)
+        clsGumbelDist.AddParameter("scale", "Scale", 1)
+        lstAllDistributions.Add(clsGumbelDist)
 
         ' Weibull Distribution
         clsWeibullDist.strNameTag = "Weibull"

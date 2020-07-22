@@ -328,7 +328,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoRlplot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 94</value>
+    <value>17, 94</value>
   </data>
   <data name="rdoRlplot.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 17</value>

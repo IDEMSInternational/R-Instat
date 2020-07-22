@@ -1698,6 +1698,11 @@
     <Compile Include="ucrDialogDisabled.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrDistributions1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ucrDistributions.resx</DependentUpon>
+    </Compile>
     <Compile Include="ucrElementRectControl.Designer.vb">
       <DependentUpon>ucrElementRectControl.vb</DependentUpon>
     </Compile>
@@ -4403,6 +4408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDistributions.resx">
       <DependentUpon>ucrDistributions.vb</DependentUpon>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ucrDistributions1.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDistributions.sw-KE.resx">
       <DependentUpon>ucrDistributions.vb</DependentUpon>

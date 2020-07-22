@@ -34,7 +34,6 @@ Public Class dlgExtremes
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
@@ -45,22 +44,11 @@ Public Class dlgExtremes
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-        Dim dctFevdTypes As New Dictionary(Of String, String)
-
         ucrReceiverVariable.Selector = ucrSelectorExtremes
         ucrReceiverVariable.strSelectorHeading = "Variables"
         ucrReceiverVariable.SetMeAsReceiver()
         ucrReceiverVariable.SetParameter(New RParameter("object", 0))
         ucrReceiverVariable.SetParameterIsRFunction()
-
-        ucrInputExtremes.SetParameter(New RParameter("type", 1))
-        dctFevdTypes.Add("GEV", Chr(34) & "GEV" & Chr(34))
-        dctFevdTypes.Add("GP", Chr(34) & "GP" & Chr(34))
-        dctFevdTypes.Add("PP", Chr(34) & "PP" & Chr(34))
-        dctFevdTypes.Add("Gumbel", Chr(34) & "Gumbel" & Chr(34))
-        dctFevdTypes.Add("Exponential", Chr(34) & "Exponential" & Chr(34))
-        ucrInputExtremes.SetItems(dctFevdTypes)
-        ucrInputExtremes.SetDropDownStyleAsNonEditable()
 
         ucrSaveExtremes.SetPrefix("extreme")
         ucrSaveExtremes.SetIsComboBox()
@@ -68,7 +56,6 @@ Public Class dlgExtremes
         ucrSaveExtremes.SetSaveTypeAsModel()
         ucrSaveExtremes.SetDataFrameSelector(ucrSelectorExtremes.ucrAvailableDataFrames)
         ucrSaveExtremes.SetAssignToIfUncheckedValue("last_model")
-
     End Sub
 
     Private Sub SetDefaults()
@@ -106,7 +93,8 @@ Public Class dlgExtremes
         clsFevdPlotsFunction.AddParameter("x", clsRFunctionParameter:=clsFevdFunction, iPosition:=0)
         clsFevdPlotsFunction.AddParameter("type", Chr(34) & "primary" & Chr(34), iPosition:=1)
 
-        ucrBase.clsRsyntax.AddToAfterCodes(clsFevdPlotsFunction)
+        ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.AddToAfterCodes(clsFevdPlotsFunction, iPosition:=1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsFevdFunction)
         bResetDisplayOptions = True
         bResetFittingOptions = True
@@ -115,7 +103,6 @@ Public Class dlgExtremes
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
         ucrSaveExtremes.SetRCode(clsFevdFunction, bReset)
-        ucrInputExtremes.SetRCode(clsFevdFunction, bReset)
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()

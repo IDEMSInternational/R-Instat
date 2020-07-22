@@ -148,37 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblDataToFit.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 214</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
-  </data>
-  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Extremes</value>
-  </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
-  </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="cmdFittingOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -205,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdFittingOptions.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="cmdDisplayOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -232,7 +202,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdDisplayOptions.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrSaveExtremes.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 291</value>
@@ -256,28 +226,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveExtremes.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrInputExtremes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 211</value>
-  </data>
-  <data name="ucrInputExtremes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 21</value>
-  </data>
-  <data name="ucrInputExtremes.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrInputExtremes.Name" xml:space="preserve">
-    <value>ucrInputExtremes</value>
-  </data>
-  <data name="&gt;&gt;ucrInputExtremes.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputExtremes.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputExtremes.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="ucrSelectorExtremes.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 9</value>
@@ -301,7 +250,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorExtremes.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -311,6 +260,27 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>411, 386</value>
+  </data>
+  <data name="UcrDistributions1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 214</value>
+  </data>
+  <data name="UcrDistributions1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 27</value>
+  </data>
+  <data name="UcrDistributions1.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="&gt;&gt;UcrDistributions1.Name" xml:space="preserve">
+    <value>UcrDistributions1</value>
+  </data>
+  <data name="&gt;&gt;UcrDistributions1.Type" xml:space="preserve">
+    <value>instat.ucrDistributions, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrDistributions1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;UcrDistributions1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 323</value>
@@ -331,7 +301,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -370,6 +340,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverVariable.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
 </root>
