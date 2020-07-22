@@ -57,6 +57,10 @@ Partial Class dlgOneVarFitModel
         Me.lblSd = New System.Windows.Forms.Label()
         Me.lblCI = New System.Windows.Forms.Label()
         Me.lblQuantile = New System.Windows.Forms.Label()
+        Me.lblNullHyp = New System.Windows.Forms.Label()
+        Me.lblNulHypothesis = New System.Windows.Forms.Label()
+        Me.ucrInputNulHypothesis = New instat.ucrInputTextBox()
+        Me.ucrInputTxtHypothesis = New instat.ucrInputTextBox()
         Me.ucrNudQuantile = New instat.ucrNud()
         Me.ucrInputComboConfidenceLevel = New instat.ucrInputComboBox()
         Me.ucrInputTxtSd = New instat.ucrInputTextBox()
@@ -78,6 +82,8 @@ Partial Class dlgOneVarFitModel
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputTextM = New instat.ucrInputTextBox()
+        Me.lblMonteCarlo = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -274,6 +280,44 @@ Partial Class dlgOneVarFitModel
         Me.lblQuantile.Size = New System.Drawing.Size(49, 13)
         Me.lblQuantile.TabIndex = 76
         Me.lblQuantile.Text = "Quantile:"
+        '
+        'lblNullHyp
+        '
+        Me.lblNullHyp.AutoSize = True
+        Me.lblNullHyp.Location = New System.Drawing.Point(246, 175)
+        Me.lblNullHyp.Name = "lblNullHyp"
+        Me.lblNullHyp.Size = New System.Drawing.Size(83, 13)
+        Me.lblNullHyp.TabIndex = 78
+        Me.lblNullHyp.Text = "Null Hypothesis:"
+        '
+        'lblNulHypothesis
+        '
+        Me.lblNulHypothesis.AutoSize = True
+        Me.lblNulHypothesis.Location = New System.Drawing.Point(248, 175)
+        Me.lblNulHypothesis.Name = "lblNulHypothesis"
+        Me.lblNulHypothesis.Size = New System.Drawing.Size(83, 13)
+        Me.lblNulHypothesis.TabIndex = 80
+        Me.lblNulHypothesis.Text = "Null Hypothesis:"
+        '
+        'ucrInputNulHypothesis
+        '
+        Me.ucrInputNulHypothesis.AddQuotesIfUnrecognised = True
+        Me.ucrInputNulHypothesis.IsMultiline = False
+        Me.ucrInputNulHypothesis.IsReadOnly = False
+        Me.ucrInputNulHypothesis.Location = New System.Drawing.Point(350, 172)
+        Me.ucrInputNulHypothesis.Name = "ucrInputNulHypothesis"
+        Me.ucrInputNulHypothesis.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputNulHypothesis.TabIndex = 79
+        '
+        'ucrInputTxtHypothesis
+        '
+        Me.ucrInputTxtHypothesis.AddQuotesIfUnrecognised = True
+        Me.ucrInputTxtHypothesis.IsMultiline = False
+        Me.ucrInputTxtHypothesis.IsReadOnly = False
+        Me.ucrInputTxtHypothesis.Location = New System.Drawing.Point(350, 172)
+        Me.ucrInputTxtHypothesis.Name = "ucrInputTxtHypothesis"
+        Me.ucrInputTxtHypothesis.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputTxtHypothesis.TabIndex = 77
         '
         'ucrNudQuantile
         '
@@ -482,11 +526,36 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
+        'ucrInputTextM
+        '
+        Me.ucrInputTextM.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextM.IsMultiline = False
+        Me.ucrInputTextM.IsReadOnly = False
+        Me.ucrInputTextM.Location = New System.Drawing.Point(350, 172)
+        Me.ucrInputTextM.Name = "ucrInputTextM"
+        Me.ucrInputTextM.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputTextM.TabIndex = 81
+        '
+        'lblMonteCarlo
+        '
+        Me.lblMonteCarlo.AutoSize = True
+        Me.lblMonteCarlo.Location = New System.Drawing.Point(248, 175)
+        Me.lblMonteCarlo.Name = "lblMonteCarlo"
+        Me.lblMonteCarlo.Size = New System.Drawing.Size(67, 13)
+        Me.lblMonteCarlo.TabIndex = 82
+        Me.lblMonteCarlo.Text = "Monte-Carlo:"
+        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(428, 420)
+        Me.Controls.Add(Me.lblMonteCarlo)
+        Me.Controls.Add(Me.ucrInputTextM)
+        Me.Controls.Add(Me.lblNulHypothesis)
+        Me.Controls.Add(Me.ucrInputNulHypothesis)
+        Me.Controls.Add(Me.lblNullHyp)
+        Me.Controls.Add(Me.ucrInputTxtHypothesis)
         Me.Controls.Add(Me.lblQuantile)
         Me.Controls.Add(Me.ucrNudQuantile)
         Me.Controls.Add(Me.lblCI)
@@ -579,4 +648,10 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents lblCI As Label
     Friend WithEvents lblQuantile As Label
     Friend WithEvents ucrNudQuantile As ucrNud
+    Friend WithEvents lblNullHyp As Label
+    Friend WithEvents ucrInputTxtHypothesis As ucrInputTextBox
+    Friend WithEvents lblNulHypothesis As Label
+    Friend WithEvents ucrInputNulHypothesis As ucrInputTextBox
+    Friend WithEvents lblMonteCarlo As Label
+    Friend WithEvents ucrInputTextM As ucrInputTextBox
 End Class
