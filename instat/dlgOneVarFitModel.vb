@@ -195,7 +195,7 @@ Public Class dlgOneVarFitModel
         ucrInputComboEstimate.AddToLinkedControls(ucrInputComboQuantilCI, {"Quantile"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputCIMethods, {"Binomial"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputComboMethod, {"Bartel"}, bNewLinkedHideIfParameterMissing:=True)
-        'ucrInputComboTests.AddToLinkedControls(ucrInputTstConfidence, {"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z", "Serial Corr", "Sen"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrInputComboConfidenceLevel, {"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z", "Serial Corr", "Sen"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputNullHypothesis, {"Binomial", "Proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputTxtSd, {"Z"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrNudQuantile, {"Quantile"}, bNewLinkedHideIfParameterMissing:=True)
