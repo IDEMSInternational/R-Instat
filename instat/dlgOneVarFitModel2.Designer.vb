@@ -71,7 +71,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputCIMethods = New instat.ucrInputComboBox()
         Me.ucrInputMeanCIMethod = New instat.ucrInputComboBox()
         Me.ucrInputNullHypothesis = New instat.ucrInputTextBox()
-        Me.ucrNudConfidenceLevel = New instat.ucrNud()
         Me.ucrInputComboEstimate = New instat.ucrInputComboBox()
         Me.ucrInputComboTests = New instat.ucrInputComboBox()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
@@ -84,6 +83,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputTextM = New instat.ucrInputTextBox()
         Me.lblMonteCarlo = New System.Windows.Forms.Label()
+        Me.ucrInputTstConfidence = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -335,7 +335,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrInputComboConfidenceLevel.AddQuotesIfUnrecognised = True
         Me.ucrInputComboConfidenceLevel.IsReadOnly = False
-        Me.ucrInputComboConfidenceLevel.Location = New System.Drawing.Point(350, 145)
+        Me.ucrInputComboConfidenceLevel.Location = New System.Drawing.Point(351, 146)
         Me.ucrInputComboConfidenceLevel.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputComboConfidenceLevel.Name = "ucrInputComboConfidenceLevel"
         Me.ucrInputComboConfidenceLevel.Size = New System.Drawing.Size(60, 21)
@@ -419,19 +419,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputNullHypothesis.Name = "ucrInputNullHypothesis"
         Me.ucrInputNullHypothesis.Size = New System.Drawing.Size(58, 21)
         Me.ucrInputNullHypothesis.TabIndex = 60
-        '
-        'ucrNudConfidenceLevel
-        '
-        Me.ucrNudConfidenceLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudConfidenceLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudConfidenceLevel.Location = New System.Drawing.Point(351, 146)
-        Me.ucrNudConfidenceLevel.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrNudConfidenceLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudConfidenceLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudConfidenceLevel.Name = "ucrNudConfidenceLevel"
-        Me.ucrNudConfidenceLevel.Size = New System.Drawing.Size(58, 20)
-        Me.ucrNudConfidenceLevel.TabIndex = 58
-        Me.ucrNudConfidenceLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputComboEstimate
         '
@@ -545,11 +532,22 @@ Partial Class dlgOneVarFitModel
         Me.lblMonteCarlo.TabIndex = 82
         Me.lblMonteCarlo.Text = "Monte-Carlo:"
         '
+        'ucrInputTstConfidence
+        '
+        Me.ucrInputTstConfidence.AddQuotesIfUnrecognised = True
+        Me.ucrInputTstConfidence.IsReadOnly = False
+        Me.ucrInputTstConfidence.Location = New System.Drawing.Point(351, 146)
+        Me.ucrInputTstConfidence.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputTstConfidence.Name = "ucrInputTstConfidence"
+        Me.ucrInputTstConfidence.Size = New System.Drawing.Size(60, 21)
+        Me.ucrInputTstConfidence.TabIndex = 83
+        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(428, 420)
+        Me.Controls.Add(Me.ucrInputTstConfidence)
         Me.Controls.Add(Me.lblMonteCarlo)
         Me.Controls.Add(Me.ucrInputTextM)
         Me.Controls.Add(Me.lblNulHypothesis)
@@ -575,7 +573,6 @@ Partial Class dlgOneVarFitModel
         Me.Controls.Add(Me.lblMeanCIMethod)
         Me.Controls.Add(Me.ucrInputMeanCIMethod)
         Me.Controls.Add(Me.ucrInputNullHypothesis)
-        Me.Controls.Add(Me.ucrNudConfidenceLevel)
         Me.Controls.Add(Me.lblNullHypothesis)
         Me.Controls.Add(Me.lblConfidenceLevel)
         Me.Controls.Add(Me.lblEstimate)
@@ -629,7 +626,6 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents lblMeanCIMethod As Label
     Friend WithEvents ucrInputMeanCIMethod As ucrInputComboBox
     Friend WithEvents lblConfidenceLevel As Label
-    Friend WithEvents ucrNudConfidenceLevel As ucrNud
     Friend WithEvents ucrInputNullHypothesis As ucrInputTextBox
     Friend WithEvents lblNullHypothesis As Label
     Friend WithEvents lblCIMethods As Label
@@ -654,4 +650,5 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents ucrInputNulHypothesis As ucrInputTextBox
     Friend WithEvents lblMonteCarlo As Label
     Friend WithEvents ucrInputTextM As ucrInputTextBox
+    Friend WithEvents ucrInputTstConfidence As ucrInputComboBox
 End Class
