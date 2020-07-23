@@ -112,7 +112,12 @@ Public Class dlgOneVarFitModel
         ucrInputComboMedianCI.SetItems(dctMedianCI)
         ucrInputComboMedianCI.SetDropDownStyleAsNonEditable()
 
-
+        ucrInputComboQMethod.SetParameter(New RParameter("method", 3))
+        DctQMethod.Add("exact", Chr(34) & "exact" & Chr(34))
+        DctQMethod.Add("asymptotic ", Chr(34) & "asymptotic " & Chr(34))
+        DctQMethod.Add("boot", Chr(34) & "boot" & Chr(34))
+        ucrInputComboQMethod.SetItems(DctQMethod)
+        ucrInputComboQMethod.SetDropDownStyleAsNonEditable()
 
         ucrInputComboVarianceCI.SetParameter(New RParameter("method", 1))
         dctVarCI.Add("Classic", Chr(34) & "classic" & Chr(34))
@@ -204,6 +209,7 @@ Public Class dlgOneVarFitModel
         ucrInputComboTests.AddToLinkedControls(ucrInputTxtHypothesis, {"sign", "Wilcoxon"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputNulHypothesis, {"t", "Z"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputTextM, {"br", "nh"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboQMethod, {"rdoEstimate", "q"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
         ucrInputNullHypothesis.SetLinkedDisplayControl(lblNullHypothesis)
@@ -219,6 +225,7 @@ Public Class dlgOneVarFitModel
         ucrInputTxtHypothesis.SetLinkedDisplayControl(lblNullHyp)
         ucrInputNulHypothesis.SetLinkedDisplayControl(lblNulHypothesis)
         ucrInputTextM.SetLinkedDisplayControl(lblMonteCarlo)
+        ucrInputComboQMethod.SetLinkedDisplayControl(lblQMethod)
 
         lstCommandButtons.AddRange({cmdDisplayOptions, cmdFittingOptions})
         ucrDistributionChoice.SetLinkedDisplayControl(lstCommandButtons)
@@ -540,6 +547,7 @@ Public Class dlgOneVarFitModel
         ucrInputComboConfidenceLevel.SetRCode(clsMeanCIFunction, bReset)
         ucrNudQuantile.SetRCode(clsQuantileCIFunction, bReset)
         ucrInputTxtHypothesis.SetRCode(clsSignTestFunction, bReset)
+        ucrInputComboQMethod.SetRCode(clsQuantileCIFunction, bReset)
         ucrInputNulHypothesis.SetRCode(clsTtestFunction, bReset)
         ucrInputTextM.SetRCode(clsBrFunction)
 
