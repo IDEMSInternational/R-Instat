@@ -46,7 +46,8 @@ Partial Class dlgExtremes
         Me.ucrSelectorExtremes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.UcrDistributions1 = New instat.ucrDistributions()
+        Me.ucrInputExtremes = New instat.ucrInputComboBox()
+        Me.lblFevdType = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblDataToFit
@@ -94,16 +95,24 @@ Partial Class dlgExtremes
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'UcrDistributions1
+        'ucrInputExtremes
         '
-        resources.ApplyResources(Me.UcrDistributions1, "UcrDistributions1")
-        Me.UcrDistributions1.Name = "UcrDistributions1"
+        Me.ucrInputExtremes.AddQuotesIfUnrecognised = True
+        Me.ucrInputExtremes.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputExtremes, "ucrInputExtremes")
+        Me.ucrInputExtremes.Name = "ucrInputExtremes"
+        '
+        'lblFevdType
+        '
+        resources.ApplyResources(Me.lblFevdType, "lblFevdType")
+        Me.lblFevdType.Name = "lblFevdType"
         '
         'dlgExtremes
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.UcrDistributions1)
+        Me.Controls.Add(Me.lblFevdType)
+        Me.Controls.Add(Me.ucrInputExtremes)
         Me.Controls.Add(Me.ucrSaveExtremes)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.cmdFittingOptions)
@@ -128,5 +137,6 @@ Partial Class dlgExtremes
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents cmdFittingOptions As Button
     Friend WithEvents ucrSaveExtremes As ucrSave
-    Friend WithEvents UcrDistributions1 As ucrDistributions
+    Friend WithEvents lblFevdType As Label
+    Friend WithEvents ucrInputExtremes As ucrInputComboBox
 End Class

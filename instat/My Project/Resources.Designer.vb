@@ -1674,24 +1674,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Generalized_Extreme_Value.
-        '''</summary>
-        Friend ReadOnly Property Generalized_Extreme_Value() As String
-            Get
-                Return ResourceManager.GetString("Generalized_Extreme_Value", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Generalized_Pareto.
-        '''</summary>
-        Friend ReadOnly Property Generalized_Pareto() As String
-            Get
-                Return ResourceManager.GetString("Generalized_Pareto", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Generate new label column from data.
         '''</summary>
         Friend ReadOnly Property Generate_new_label_column_from_data() As String

@@ -1648,10 +1648,4 @@
   <data name="Gumbel" xml:space="preserve">
     <value>Gumbel</value>
   </data>
-  <data name="Generalized_Extreme_Value" xml:space="preserve">
-    <value>Generalized_Extreme_Value</value>
-  </data>
-  <data name="Generalized_Pareto" xml:space="preserve">
-    <value>Generalized_Pareto</value>
-  </data>
 </root>
