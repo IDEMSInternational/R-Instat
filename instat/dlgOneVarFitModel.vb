@@ -82,10 +82,10 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
-        ucrInputComboTests.SetItems({"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z", "Bartel", "Br", "Runs", "Sen", "Serial Corr", "Snh", "Ad", "Cvm", "Lillie", "Pearson", "Sf"})
+        ucrInputComboTests.SetItems({"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", "Bartel", "br", "runs", "Sen", "Serial Corr", "snh", "ad", "cvm", "lillie", "pearson", "sf"})
         ucrInputComboTests.SetDropDownStyleAsNonEditable()
 
-        ucrInputComboEstimate.SetItems({"Mean", "Median", "Normal", "Quantile", "Sd", "Variance"})
+        ucrInputComboEstimate.SetItems({"mean", "median", "normal", "quantile", "sd", "variance"})
         ucrInputComboEstimate.SetDropDownStyleAsNonEditable()
 
         ucrInputMeanCIMethod.SetParameter(New RParameter("method", 3))
@@ -189,20 +189,20 @@ Public Class dlgOneVarFitModel
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputNullHypothesis, {rdoTest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboConfidenceLevel, {rdoEstimate, rdoTest}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboEstimate.AddToLinkedControls(ucrInputMeanCIMethod, {"Mean"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboMedianCI, {"Median"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboVarianceCI, {"Variance"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboQuantilCI, {"Quantile"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboTests.AddToLinkedControls(ucrInputCIMethods, {"Binomial"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboEstimate.AddToLinkedControls(ucrInputMeanCIMethod, {"mean"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboMedianCI, {"median"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboVarianceCI, {"variance"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboQuantilCI, {"quantile"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrInputCIMethods, {"binomial"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputComboMethod, {"Bartel"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboTests.AddToLinkedControls(ucrInputComboConfidenceLevel, {"Binomial", "Proportion", "Sign", "T", "Wilcoxon", "Z", "Serial Corr", "Sen"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboTests.AddToLinkedControls(ucrInputNullHypothesis, {"Binomial", "Proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrInputComboConfidenceLevel, {"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", "serial corr", "Sen"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrInputNullHypothesis, {"binomial", "proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputTxtSd, {"Z"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboEstimate.AddToLinkedControls(ucrNudQuantile, {"Quantile"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboTests.AddToLinkedControls(ucrChkOmitMissing, {"Runs"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboTests.AddToLinkedControls(ucrInputTxtHypothesis, {"Sign", "Wilcoxon"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboTests.AddToLinkedControls(ucrInputNulHypothesis, {"T", "Z"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboTests.AddToLinkedControls(ucrInputTextM, {"Br", "Snh"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboEstimate.AddToLinkedControls(ucrNudQuantile, {"quantile"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrChkOmitMissing, {"runs"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrInputTxtHypothesis, {"sign", "Wilcoxon"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrInputNulHypothesis, {"t", "Z"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrInputTextM, {"br", "nh"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
         ucrInputNullHypothesis.SetLinkedDisplayControl(lblNullHypothesis)
@@ -685,13 +685,13 @@ Public Class dlgOneVarFitModel
         ElseIf rdoTest.Checked Then
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRplotFunction)
             Select Case ucrInputComboTests.GetValue
-                Case "Binomial"
+                Case "binomial"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBionomialFunction)
-                Case "Proportion"
+                Case "proportion"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsProportionFunction)
-                Case "Sign"
+                Case "sign"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSignTestFunction)
-                Case "T"
+                Case "t"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsTtestFunction)
                 Case "Wilcoxon"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsWilcoxonFunction)
@@ -699,40 +699,40 @@ Public Class dlgOneVarFitModel
                     ucrBase.clsRsyntax.SetBaseRFunction(clsZTestFunction)
                 Case "Bartel"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBartelFunction)
-                Case "Br"
+                Case "br"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBrFunction)
-                Case "Runs"
+                Case "runs"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsRunsFunction)
-                Case "Sen"
+                Case "sen"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSenFunction)
-                Case "Serial Corr"
+                Case "serial corr"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSerialCorrFunction)
-                Case "Snh"
+                Case "snh"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSnhFunction)
-                Case "Ad"
+                Case "ad"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsAdFunction)
-                Case "Cvm"
+                Case "cvm"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLillieFunction)
-                Case "Pearson"
+                Case "pearson"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsPearsonFunction)
-                Case "Sf"
+                Case "sf"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSfFunction)
 
             End Select
         ElseIf rdoEstimate.Checked Then
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRplotFunction)
             Select Case ucrInputComboEstimate.GetValue
-                Case "Mean"
+                Case "mean"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMeanCIFunction)
-                Case "Median"
+                Case "median"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMedianCIFunction)
-                Case "Normal"
+                Case "normal"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsNormCIFunction)
-                Case "Quantile"
+                Case "quantile"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileCIFunction)
-                Case "Sd"
+                Case "sd"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSdCIFunction)
-                Case "Variance"
+                Case "variance"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsVarCIFunction)
             End Select
         End If
