@@ -48,8 +48,8 @@ Public Class dlgOneVarFitModel
         Dim dctVarCI As New Dictionary(Of String, String)
         Dim dctQuantileCI As New Dictionary(Of String, String)
         Dim dctConfidence As New Dictionary(Of String, String)
+        Dim DctQMethod As New Dictionary(Of String, String)
         Dim lstCommandButtons As New List(Of Control)
-        Dim ISelectable As Boolean = False
 
         ucrBase.iHelpTopicID = 296
         ucrBase.clsRsyntax.iCallType = 2
@@ -112,6 +112,8 @@ Public Class dlgOneVarFitModel
         ucrInputComboMedianCI.SetItems(dctMedianCI)
         ucrInputComboMedianCI.SetDropDownStyleAsNonEditable()
 
+
+
         ucrInputComboVarianceCI.SetParameter(New RParameter("method", 1))
         dctVarCI.Add("Classic", Chr(34) & "classic" & Chr(34))
         dctVarCI.Add("Bonett", Chr(34) & "bonett" & Chr(34))
@@ -163,16 +165,15 @@ Public Class dlgOneVarFitModel
         ucrNudQuantile.SetRDefault(0.5)
 
         ucrInputNullHypothesis.SetParameter(New RParameter("p", 1))
-        ucrInputNullHypothesis.SetValidationTypeAsNumeric(dcmMin:=0, bIncludeMin:=False, dcmMax:=1, bIncludeMax:=False)
+        ucrInputNullHypothesis.SetValidationTypeAsNumeric(dcmMin:=0, dcmMax:=1)
         ucrInputNullHypothesis.AddQuotesIfUnrecognised = False
 
         ucrInputTxtSd.SetParameter(New RParameter("sd_pop", 2))
-        ucrInputTxtSd.SetValidationTypeAsNumeric()
+        ucrInputTxtSd.SetValidationTypeAsNumeric(dcmMin:=0)
         ucrInputTxtSd.AddQuotesIfUnrecognised = False
 
 
         ucrInputComboConfidenceLevel.SetParameter(New RParameter("conf.level", 2))
-        dctConfidence.Add("0.500", "0.5")
         dctConfidence.Add("0.900", "0.90")
         dctConfidence.Add("0.950", "0.95")
         dctConfidence.Add("0.980", "0.98")
@@ -401,7 +402,7 @@ Public Class dlgOneVarFitModel
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
         clsMeanCIFunction.SetRCommand("MeanCI")
-        clsMeanCIFunction.AddParameter("conf.level", "0.5", iPosition:=1)
+        clsMeanCIFunction.AddParameter("conf.level", "0.95", iPosition:=1)
         clsMeanCIFunction.AddParameter("method", Chr(34) & "classic" & Chr(34), iPosition:=2)
 
 
@@ -703,7 +704,7 @@ Public Class dlgOneVarFitModel
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBrFunction)
                 Case "runs"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsRunsFunction)
-                Case "sen"
+                Case "Sen"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSenFunction)
                 Case "serial corr"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSerialCorrFunction)
