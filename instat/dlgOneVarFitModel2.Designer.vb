@@ -59,6 +59,8 @@ Partial Class dlgOneVarFitModel
         Me.lblQuantile = New System.Windows.Forms.Label()
         Me.lblNullHyp = New System.Windows.Forms.Label()
         Me.lblNulHypothesis = New System.Windows.Forms.Label()
+        Me.lblMonteCarlo = New System.Windows.Forms.Label()
+        Me.ucrInputTextM = New instat.ucrInputTextBox()
         Me.ucrInputNulHypothesis = New instat.ucrInputTextBox()
         Me.ucrInputTxtHypothesis = New instat.ucrInputTextBox()
         Me.ucrNudQuantile = New instat.ucrNud()
@@ -81,9 +83,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputTextM = New instat.ucrInputTextBox()
-        Me.lblMonteCarlo = New System.Windows.Forms.Label()
-        Me.ucrInputTstConfidence = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -299,6 +298,25 @@ Partial Class dlgOneVarFitModel
         Me.lblNulHypothesis.TabIndex = 80
         Me.lblNulHypothesis.Text = "Null Hypothesis:"
         '
+        'lblMonteCarlo
+        '
+        Me.lblMonteCarlo.AutoSize = True
+        Me.lblMonteCarlo.Location = New System.Drawing.Point(248, 175)
+        Me.lblMonteCarlo.Name = "lblMonteCarlo"
+        Me.lblMonteCarlo.Size = New System.Drawing.Size(67, 13)
+        Me.lblMonteCarlo.TabIndex = 82
+        Me.lblMonteCarlo.Text = "Monte-Carlo:"
+        '
+        'ucrInputTextM
+        '
+        Me.ucrInputTextM.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextM.IsMultiline = False
+        Me.ucrInputTextM.IsReadOnly = False
+        Me.ucrInputTextM.Location = New System.Drawing.Point(350, 172)
+        Me.ucrInputTextM.Name = "ucrInputTextM"
+        Me.ucrInputTextM.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputTextM.TabIndex = 81
+        '
         'ucrInputNulHypothesis
         '
         Me.ucrInputNulHypothesis.AddQuotesIfUnrecognised = True
@@ -513,41 +531,11 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrInputTextM
-        '
-        Me.ucrInputTextM.AddQuotesIfUnrecognised = True
-        Me.ucrInputTextM.IsMultiline = False
-        Me.ucrInputTextM.IsReadOnly = False
-        Me.ucrInputTextM.Location = New System.Drawing.Point(350, 172)
-        Me.ucrInputTextM.Name = "ucrInputTextM"
-        Me.ucrInputTextM.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputTextM.TabIndex = 81
-        '
-        'lblMonteCarlo
-        '
-        Me.lblMonteCarlo.AutoSize = True
-        Me.lblMonteCarlo.Location = New System.Drawing.Point(248, 175)
-        Me.lblMonteCarlo.Name = "lblMonteCarlo"
-        Me.lblMonteCarlo.Size = New System.Drawing.Size(67, 13)
-        Me.lblMonteCarlo.TabIndex = 82
-        Me.lblMonteCarlo.Text = "Monte-Carlo:"
-        '
-        'ucrInputTstConfidence
-        '
-        Me.ucrInputTstConfidence.AddQuotesIfUnrecognised = True
-        Me.ucrInputTstConfidence.IsReadOnly = False
-        Me.ucrInputTstConfidence.Location = New System.Drawing.Point(351, 146)
-        Me.ucrInputTstConfidence.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrInputTstConfidence.Name = "ucrInputTstConfidence"
-        Me.ucrInputTstConfidence.Size = New System.Drawing.Size(60, 21)
-        Me.ucrInputTstConfidence.TabIndex = 83
-        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(428, 420)
-        Me.Controls.Add(Me.ucrInputTstConfidence)
         Me.Controls.Add(Me.lblMonteCarlo)
         Me.Controls.Add(Me.ucrInputTextM)
         Me.Controls.Add(Me.lblNulHypothesis)
@@ -650,5 +638,4 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents ucrInputNulHypothesis As ucrInputTextBox
     Friend WithEvents lblMonteCarlo As Label
     Friend WithEvents ucrInputTextM As ucrInputTextBox
-    Friend WithEvents ucrInputTstConfidence As ucrInputComboBox
 End Class
