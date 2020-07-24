@@ -170,7 +170,7 @@ Public Class dlgOneVarFitModel
         ucrNudQuantile.SetRDefault(0.5)
 
         ucrInputNullHypothesis.SetParameter(New RParameter("p", 1))
-        ucrInputNullHypothesis.SetValidationTypeAsNumeric(dcmMin:=0, bIncludeMin:=False, dcmMax:=1, bIncludeMax:=False)
+        ucrInputNullHypothesis.SetValidationTypeAsNumeric(dcmMin:=0, bIncludeMin:=True, dcmMax:=1, bIncludeMax:=True)
         ucrInputNullHypothesis.AddQuotesIfUnrecognised = False
 
         ucrInputTxtSd.SetParameter(New RParameter("sd_pop", 2))
@@ -185,7 +185,8 @@ Public Class dlgOneVarFitModel
         dctConfidence.Add("0.990", "0.99")
         dctConfidence.Add("0.999", "0.999")
         ucrInputComboConfidenceLevel.SetItems(dctConfidence)
-        ucrInputComboConfidenceLevel.SetValidationTypeAsNumeric(dcmMin:=0, bIncludeMin:=True, dcmMax:=1, bIncludeMax:=True)
+        ucrInputComboConfidenceLevel.AddQuotesIfUnrecognised = False
+        ucrInputComboConfidenceLevel.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=False, dcmMax:=1.0, bIncludeMax:=False)
 
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
@@ -453,6 +454,7 @@ Public Class dlgOneVarFitModel
         ucrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
         bResetFittingOptions = True
         bResetFitModDisplay = True
+        ucrChkOmitMissing.Checked = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
