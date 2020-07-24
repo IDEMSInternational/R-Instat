@@ -174,7 +174,7 @@ Public Class dlgOneVarFitModel
         ucrInputNullHypothesis.AddQuotesIfUnrecognised = False
 
         ucrInputTxtSd.SetParameter(New RParameter("sd_pop", 2))
-        ucrInputTxtSd.SetValidationTypeAsNumeric(dcmMin:=0)
+        ucrInputTxtSd.SetValidationTypeAsNumeric(dcmMin:=0, bIncludeMin:=False)
         ucrInputTxtSd.AddQuotesIfUnrecognised = False
 
 
@@ -209,7 +209,7 @@ Public Class dlgOneVarFitModel
         ucrInputComboTests.AddToLinkedControls(ucrInputTxtHypothesis, {"sign", "Wilcoxon"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputNulHypothesis, {"t", "Z"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputTextM, {"br", "nh"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboQMethod, {"rdoEstimate", "q"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboQMethod, {"rdoEstimate", "quantile"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
         ucrInputNullHypothesis.SetLinkedDisplayControl(lblNullHypothesis)
