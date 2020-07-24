@@ -42,12 +42,36 @@ Partial Class dlgExtremes
         Me.lblDataToFit = New System.Windows.Forms.Label()
         Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
+        Me.lblFevdType = New System.Windows.Forms.Label()
+        Me.grpFirstCalc = New System.Windows.Forms.GroupBox()
+        Me.cmdMultiply = New System.Windows.Forms.Button()
+        Me.cmdColon = New System.Windows.Forms.Button()
+        Me.cmdPlus = New System.Windows.Forms.Button()
+        Me.cmdPower = New System.Windows.Forms.Button()
+        Me.cmdClosingBracket = New System.Windows.Forms.Button()
+        Me.cmdOpeningBracket = New System.Windows.Forms.Button()
+        Me.cmdDiv = New System.Windows.Forms.Button()
+        Me.cmdDoubleBracket = New System.Windows.Forms.Button()
+        Me.cmdClear = New System.Windows.Forms.Button()
+        Me.cmdZero = New System.Windows.Forms.Button()
+        Me.cmdMinus = New System.Windows.Forms.Button()
+        Me.grpSecondCalc = New System.Windows.Forms.GroupBox()
+        Me.cmdCos = New System.Windows.Forms.Button()
+        Me.cmdSqrt = New System.Windows.Forms.Button()
+        Me.cmdSin = New System.Windows.Forms.Button()
+        Me.cmdLog = New System.Windows.Forms.Button()
+        Me.cmdTan = New System.Windows.Forms.Button()
+        Me.cmdExp = New System.Windows.Forms.Button()
+        Me.ucrTryModelling = New instat.ucrTry()
+        Me.ucrChkExplanatoryModelForLocationParameter = New instat.ucrCheck()
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam = New instat.ucrReceiverExpression()
+        Me.ucrInputExtremes = New instat.ucrInputComboBox()
         Me.ucrSaveExtremes = New instat.ucrSave()
         Me.ucrSelectorExtremes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputExtremes = New instat.ucrInputComboBox()
-        Me.lblFevdType = New System.Windows.Forms.Label()
+        Me.grpFirstCalc.SuspendLayout()
+        Me.grpSecondCalc.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblDataToFit
@@ -67,6 +91,169 @@ Partial Class dlgExtremes
         resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
+        '
+        'lblFevdType
+        '
+        resources.ApplyResources(Me.lblFevdType, "lblFevdType")
+        Me.lblFevdType.Name = "lblFevdType"
+        '
+        'grpFirstCalc
+        '
+        Me.grpFirstCalc.Controls.Add(Me.cmdMultiply)
+        Me.grpFirstCalc.Controls.Add(Me.cmdColon)
+        Me.grpFirstCalc.Controls.Add(Me.cmdPlus)
+        Me.grpFirstCalc.Controls.Add(Me.cmdPower)
+        Me.grpFirstCalc.Controls.Add(Me.cmdClosingBracket)
+        Me.grpFirstCalc.Controls.Add(Me.cmdOpeningBracket)
+        Me.grpFirstCalc.Controls.Add(Me.cmdDiv)
+        Me.grpFirstCalc.Controls.Add(Me.cmdDoubleBracket)
+        Me.grpFirstCalc.Controls.Add(Me.cmdClear)
+        Me.grpFirstCalc.Controls.Add(Me.cmdZero)
+        Me.grpFirstCalc.Controls.Add(Me.cmdMinus)
+        resources.ApplyResources(Me.grpFirstCalc, "grpFirstCalc")
+        Me.grpFirstCalc.Name = "grpFirstCalc"
+        Me.grpFirstCalc.TabStop = False
+        '
+        'cmdMultiply
+        '
+        resources.ApplyResources(Me.cmdMultiply, "cmdMultiply")
+        Me.cmdMultiply.Name = "cmdMultiply"
+        Me.cmdMultiply.UseVisualStyleBackColor = True
+        '
+        'cmdColon
+        '
+        resources.ApplyResources(Me.cmdColon, "cmdColon")
+        Me.cmdColon.Name = "cmdColon"
+        Me.cmdColon.UseVisualStyleBackColor = True
+        '
+        'cmdPlus
+        '
+        resources.ApplyResources(Me.cmdPlus, "cmdPlus")
+        Me.cmdPlus.Name = "cmdPlus"
+        Me.cmdPlus.UseVisualStyleBackColor = True
+        '
+        'cmdPower
+        '
+        resources.ApplyResources(Me.cmdPower, "cmdPower")
+        Me.cmdPower.Name = "cmdPower"
+        Me.cmdPower.UseVisualStyleBackColor = True
+        '
+        'cmdClosingBracket
+        '
+        resources.ApplyResources(Me.cmdClosingBracket, "cmdClosingBracket")
+        Me.cmdClosingBracket.Name = "cmdClosingBracket"
+        Me.cmdClosingBracket.UseVisualStyleBackColor = True
+        '
+        'cmdOpeningBracket
+        '
+        resources.ApplyResources(Me.cmdOpeningBracket, "cmdOpeningBracket")
+        Me.cmdOpeningBracket.Name = "cmdOpeningBracket"
+        Me.cmdOpeningBracket.UseVisualStyleBackColor = True
+        '
+        'cmdDiv
+        '
+        resources.ApplyResources(Me.cmdDiv, "cmdDiv")
+        Me.cmdDiv.Name = "cmdDiv"
+        Me.cmdDiv.UseVisualStyleBackColor = True
+        '
+        'cmdDoubleBracket
+        '
+        resources.ApplyResources(Me.cmdDoubleBracket, "cmdDoubleBracket")
+        Me.cmdDoubleBracket.Name = "cmdDoubleBracket"
+        Me.cmdDoubleBracket.UseVisualStyleBackColor = True
+        '
+        'cmdClear
+        '
+        resources.ApplyResources(Me.cmdClear, "cmdClear")
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.UseVisualStyleBackColor = True
+        '
+        'cmdZero
+        '
+        resources.ApplyResources(Me.cmdZero, "cmdZero")
+        Me.cmdZero.Name = "cmdZero"
+        Me.cmdZero.UseVisualStyleBackColor = True
+        '
+        'cmdMinus
+        '
+        resources.ApplyResources(Me.cmdMinus, "cmdMinus")
+        Me.cmdMinus.Name = "cmdMinus"
+        Me.cmdMinus.UseVisualStyleBackColor = True
+        '
+        'grpSecondCalc
+        '
+        Me.grpSecondCalc.Controls.Add(Me.cmdCos)
+        Me.grpSecondCalc.Controls.Add(Me.cmdSqrt)
+        Me.grpSecondCalc.Controls.Add(Me.cmdSin)
+        Me.grpSecondCalc.Controls.Add(Me.cmdLog)
+        Me.grpSecondCalc.Controls.Add(Me.cmdTan)
+        Me.grpSecondCalc.Controls.Add(Me.cmdExp)
+        resources.ApplyResources(Me.grpSecondCalc, "grpSecondCalc")
+        Me.grpSecondCalc.Name = "grpSecondCalc"
+        Me.grpSecondCalc.TabStop = False
+        '
+        'cmdCos
+        '
+        resources.ApplyResources(Me.cmdCos, "cmdCos")
+        Me.cmdCos.Name = "cmdCos"
+        Me.cmdCos.UseVisualStyleBackColor = True
+        '
+        'cmdSqrt
+        '
+        resources.ApplyResources(Me.cmdSqrt, "cmdSqrt")
+        Me.cmdSqrt.Name = "cmdSqrt"
+        Me.cmdSqrt.UseVisualStyleBackColor = True
+        '
+        'cmdSin
+        '
+        resources.ApplyResources(Me.cmdSin, "cmdSin")
+        Me.cmdSin.Name = "cmdSin"
+        Me.cmdSin.UseVisualStyleBackColor = True
+        '
+        'cmdLog
+        '
+        resources.ApplyResources(Me.cmdLog, "cmdLog")
+        Me.cmdLog.Name = "cmdLog"
+        Me.cmdLog.UseVisualStyleBackColor = True
+        '
+        'cmdTan
+        '
+        resources.ApplyResources(Me.cmdTan, "cmdTan")
+        Me.cmdTan.Name = "cmdTan"
+        Me.cmdTan.UseVisualStyleBackColor = True
+        '
+        'cmdExp
+        '
+        resources.ApplyResources(Me.cmdExp, "cmdExp")
+        Me.cmdExp.Name = "cmdExp"
+        Me.cmdExp.UseVisualStyleBackColor = True
+        '
+        'ucrTryModelling
+        '
+        resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
+        Me.ucrTryModelling.Name = "ucrTryModelling"
+        '
+        'ucrChkExplanatoryModelForLocationParameter
+        '
+        Me.ucrChkExplanatoryModelForLocationParameter.Checked = False
+        resources.ApplyResources(Me.ucrChkExplanatoryModelForLocationParameter, "ucrChkExplanatoryModelForLocationParameter")
+        Me.ucrChkExplanatoryModelForLocationParameter.Name = "ucrChkExplanatoryModelForLocationParameter"
+        '
+        'ucrReceiverExpressionExplanatoryModelForLocParam
+        '
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverExpressionExplanatoryModelForLocParam, "ucrReceiverExpressionExplanatoryModelForLocParam")
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.Name = "ucrReceiverExpressionExplanatoryModelForLocParam"
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.Selector = Nothing
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.strNcFilePath = ""
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.ucrSelector = Nothing
+        '
+        'ucrInputExtremes
+        '
+        Me.ucrInputExtremes.AddQuotesIfUnrecognised = True
+        Me.ucrInputExtremes.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputExtremes, "ucrInputExtremes")
+        Me.ucrInputExtremes.Name = "ucrInputExtremes"
         '
         'ucrSaveExtremes
         '
@@ -95,22 +282,15 @@ Partial Class dlgExtremes
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrInputExtremes
-        '
-        Me.ucrInputExtremes.AddQuotesIfUnrecognised = True
-        Me.ucrInputExtremes.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputExtremes, "ucrInputExtremes")
-        Me.ucrInputExtremes.Name = "ucrInputExtremes"
-        '
-        'lblFevdType
-        '
-        resources.ApplyResources(Me.lblFevdType, "lblFevdType")
-        Me.lblFevdType.Name = "lblFevdType"
-        '
         'dlgExtremes
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTryModelling)
+        Me.Controls.Add(Me.grpSecondCalc)
+        Me.Controls.Add(Me.grpFirstCalc)
+        Me.Controls.Add(Me.ucrChkExplanatoryModelForLocationParameter)
+        Me.Controls.Add(Me.ucrReceiverExpressionExplanatoryModelForLocParam)
         Me.Controls.Add(Me.lblFevdType)
         Me.Controls.Add(Me.ucrInputExtremes)
         Me.Controls.Add(Me.ucrSaveExtremes)
@@ -125,6 +305,8 @@ Partial Class dlgExtremes
         Me.MinimizeBox = False
         Me.Name = "dlgExtremes"
         Me.Tag = "Fit_an_Extreme_distribution"
+        Me.grpFirstCalc.ResumeLayout(False)
+        Me.grpSecondCalc.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -139,4 +321,26 @@ Partial Class dlgExtremes
     Friend WithEvents ucrSaveExtremes As ucrSave
     Friend WithEvents lblFevdType As Label
     Friend WithEvents ucrInputExtremes As ucrInputComboBox
+    Friend WithEvents ucrReceiverExpressionExplanatoryModelForLocParam As ucrReceiverExpression
+    Friend WithEvents ucrChkExplanatoryModelForLocationParameter As ucrCheck
+    Friend WithEvents grpFirstCalc As GroupBox
+    Friend WithEvents cmdMultiply As Button
+    Friend WithEvents cmdColon As Button
+    Friend WithEvents cmdPlus As Button
+    Friend WithEvents cmdPower As Button
+    Friend WithEvents cmdClosingBracket As Button
+    Friend WithEvents cmdOpeningBracket As Button
+    Friend WithEvents cmdDiv As Button
+    Friend WithEvents cmdDoubleBracket As Button
+    Friend WithEvents cmdClear As Button
+    Friend WithEvents cmdZero As Button
+    Friend WithEvents cmdMinus As Button
+    Friend WithEvents grpSecondCalc As GroupBox
+    Friend WithEvents cmdCos As Button
+    Friend WithEvents cmdSqrt As Button
+    Friend WithEvents cmdSin As Button
+    Friend WithEvents cmdLog As Button
+    Friend WithEvents cmdTan As Button
+    Friend WithEvents cmdExp As Button
+    Friend WithEvents ucrTryModelling As ucrTry
 End Class

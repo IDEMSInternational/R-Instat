@@ -53,7 +53,7 @@ Public Class sdgExtremeDisplayOptions
             clsFevdPlotFunction.RemoveParameterByName("type")
             clsRsyntax.RemoveFromAfterCodes(clsFevdPlotFunction)
         Else
-            clsRsyntax.AddToAfterCodes(clsFevdPlotFunction)
+            clsRsyntax.AddToAfterCodes(clsFevdPlotFunction, iPosition:=0)
         End If
     End Sub
 End Class

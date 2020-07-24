@@ -18,6 +18,8 @@ Imports instat
 Imports instat.Translations
 
 Public Class dlgExtremes
+    Private clsAttach As New RFunction
+    Private clsDetach As New RFunction
     Private clsFevdFunction, clsNaExclude, clsConvertVector As New RFunction
     Private clsFevdPlotsFunction As New RFunction
     Private bFirstLoad As Boolean = True
@@ -66,6 +68,18 @@ Public Class dlgExtremes
         ucrReceiverVariable.SetParameter(New RParameter("object", 0))
         ucrReceiverVariable.SetParameterIsRFunction()
 
+        ucrChkExplanatoryModelForLocationParameter.SetText("Explanatory Model For Location Parameter")
+        ucrChkExplanatoryModelForLocationParameter.SetParameter(New RParameter(" location.fun", 3), bNewChangeParameterValue:=False)
+        ucrChkExplanatoryModelForLocationParameter.AddToLinkedControls(ucrReceiverExpressionExplanatoryModelForLocParam, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrReceiverExpressionExplanatoryModelForLocParam.SetParameter(New RParameter(" location.fun", 3))
+        ucrReceiverExpressionExplanatoryModelForLocParam.SetParameterIsString()
+        ucrReceiverExpressionExplanatoryModelForLocParam.bWithQuotes = False
+        ucrReceiverExpressionExplanatoryModelForLocParam.SetText("~1")
+
+        ucrTryModelling.SetReceiver(ucrReceiverExpressionExplanatoryModelForLocParam)
+        ucrTryModelling.SetIsModel()
+
         ucrSaveExtremes.SetPrefix("extreme")
         ucrSaveExtremes.SetIsComboBox()
         ucrSaveExtremes.SetCheckBoxText("Save Graph")
@@ -80,8 +94,12 @@ Public Class dlgExtremes
         clsNaExclude = New RFunction
         clsConvertVector = New RFunction
 
+        ucrBase.clsRsyntax.ClearCodes()
+
         ucrSaveExtremes.Reset()
         ucrSelectorExtremes.Reset()
+
+        ucrReceiverExpressionExplanatoryModelForLocParam.Selector = ucrSelectorExtremes
 
         clsNaExclude.SetPackageName("stats")
         clsNaExclude.SetRCommand("na.exclude")
@@ -109,9 +127,18 @@ Public Class dlgExtremes
         clsFevdPlotsFunction.AddParameter("x", clsRFunctionParameter:=clsFevdFunction, iPosition:=0)
         clsFevdPlotsFunction.AddParameter("type", Chr(34) & "primary" & Chr(34), iPosition:=1)
 
-        ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.AddToAfterCodes(clsFevdPlotsFunction, iPosition:=1)
+
+        clsAttach.SetRCommand("attach")
+        clsDetach.SetRCommand("detach")
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("unload", "TRUE")
+
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach, iPosition:=1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsFevdFunction)
+        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
+
         bResetDisplayOptions = True
         bResetFittingOptions = True
     End Sub
@@ -120,6 +147,8 @@ Public Class dlgExtremes
         ucrInputExtremes.SetRCode(clsFevdFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
         ucrSaveExtremes.SetRCode(clsFevdFunction, bReset)
+        ucrChkExplanatoryModelForLocationParameter.SetRCode(clsFevdFunction, bReset)
+        ucrReceiverExpressionExplanatoryModelForLocParam.SetRCode(clsFevdFunction, bReset)
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -147,7 +176,87 @@ Public Class dlgExtremes
         sdgExtremesMethod.ShowDialog()
     End Sub
 
+    Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("+")
+    End Sub
+
+    Private Sub cmdColon_Click(sender As Object, e As EventArgs) Handles cmdColon.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition(":")
+    End Sub
+
+    Private Sub cmdMultiply_Click(sender As Object, e As EventArgs) Handles cmdMultiply.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("*")
+    End Sub
+
+    Private Sub cmdDiv_Click(sender As Object, e As EventArgs) Handles cmdDiv.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("/")
+    End Sub
+
+    Private Sub cmdDoubleBracket_Click(sender As Object, e As EventArgs) Handles cmdDoubleBracket.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("( )", 2)
+    End Sub
+
+    Private Sub cmdOpeningBracket_Click(sender As Object, e As EventArgs) Handles cmdOpeningBracket.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("(")
+    End Sub
+
+    Private Sub cmdClosingBracket_Click(sender As Object, e As EventArgs) Handles cmdClosingBracket.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition(")")
+    End Sub
+
+    Private Sub cmdPower_Click(sender As Object, e As EventArgs) Handles cmdPower.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("^")
+    End Sub
+
+    Private Sub cmdMinus_Click(sender As Object, e As EventArgs) Handles cmdMinus.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("-")
+    End Sub
+
+    Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("I()", 1)
+    End Sub
+
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.Clear()
+    End Sub
+
+    Private Sub cmdSqrt_Click(sender As Object, e As EventArgs) Handles cmdSqrt.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("sqrt( )", 2)
+    End Sub
+
+    Private Sub cmdCos_Click(sender As Object, e As EventArgs) Handles cmdCos.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("cos( )", 2)
+    End Sub
+
+    Private Sub cmdLog_Click(sender As Object, e As EventArgs) Handles cmdLog.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("log( )", 2)
+    End Sub
+
+    Private Sub cmdSin_Click(sender As Object, e As EventArgs) Handles cmdSin.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("sin( )", 2)
+    End Sub
+
+    Private Sub cmdExp_Click(sender As Object, e As EventArgs) Handles cmdExp.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("exp( )", 2)
+    End Sub
+
+    Private Sub cmdTan_Click(sender As Object, e As EventArgs) Handles cmdTan.Click
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("tan( )", 2)
+    End Sub
+
+
+
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkExplanatoryModelForLocationParameter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExplanatoryModelForLocationParameter.ControlValueChanged
+        If ucrChkExplanatoryModelForLocationParameter.Checked Then
+            grpFirstCalc.Visible = True
+            grpSecondCalc.Visible = True
+        Else
+            grpFirstCalc.Visible = False
+            grpSecondCalc.Visible = False
+        End If
     End Sub
 End Class
