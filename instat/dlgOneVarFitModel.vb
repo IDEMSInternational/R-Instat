@@ -170,7 +170,7 @@ Public Class dlgOneVarFitModel
         ucrNudQuantile.SetRDefault(0.5)
 
         ucrInputNullHypothesis.SetParameter(New RParameter("p", 1))
-        ucrInputNullHypothesis.SetValidationTypeAsNumeric(dcmMin:=0, dcmMax:=1)
+        ucrInputNullHypothesis.SetValidationTypeAsNumeric(dcmMin:=0, bIncludeMin:=False, dcmMax:=1, bIncludeMax:=False)
         ucrInputNullHypothesis.AddQuotesIfUnrecognised = False
 
         ucrInputTxtSd.SetParameter(New RParameter("sd_pop", 2))
@@ -185,7 +185,7 @@ Public Class dlgOneVarFitModel
         dctConfidence.Add("0.990", "0.99")
         dctConfidence.Add("0.999", "0.999")
         ucrInputComboConfidenceLevel.SetItems(dctConfidence)
-        ucrInputComboConfidenceLevel.SetValidationTypeAsNumeric(dcmMin:=0, dcmMax:=1)
+        ucrInputComboConfidenceLevel.SetValidationTypeAsNumeric(dcmMin:=0, bIncludeMin:=True, dcmMax:=1, bIncludeMax:=True)
 
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
@@ -378,7 +378,6 @@ Public Class dlgOneVarFitModel
 
         clsRunsFunction.SetPackageName("DescTools")
         clsRunsFunction.SetRCommand("RunsTest")
-        clsRunsFunction.AddParameter("na.rm", "True", iPosition:=1)
 
         clsSenFunction.SetPackageName("trend")
         clsSenFunction.SetRCommand("sens.slope")
@@ -389,7 +388,6 @@ Public Class dlgOneVarFitModel
 
         clsSnhFunction.SetPackageName("trend")
         clsSnhFunction.SetRCommand("snh.test")
-        clsSfFunction.AddParameter("m", "20000", iPosition:=2)
 
         clsAdFunction.SetPackageName("nortest")
         clsAdFunction.SetRCommand("ad.test")
