@@ -23,25 +23,21 @@ Partial Class sdgExtremeDisplayOptions
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgExtremeDisplayOptions))
-        Me.ucrPnlExtreme = New instat.UcrPanel()
         Me.rdoZPlot = New System.Windows.Forms.RadioButton()
         Me.rdoQQPlot = New System.Windows.Forms.RadioButton()
         Me.rdoQQ2 = New System.Windows.Forms.RadioButton()
         Me.rdoProbprob = New System.Windows.Forms.RadioButton()
         Me.rdoPrimary = New System.Windows.Forms.RadioButton()
         Me.grpPlots = New System.Windows.Forms.GroupBox()
+        Me.rdoNoPlot = New System.Windows.Forms.RadioButton()
         Me.rdoTrace = New System.Windows.Forms.RadioButton()
         Me.rdoRlplot = New System.Windows.Forms.RadioButton()
         Me.rdoHist = New System.Windows.Forms.RadioButton()
         Me.rdoDensity = New System.Windows.Forms.RadioButton()
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
+        Me.ucrPnlExtreme = New instat.UcrPanel()
         Me.grpPlots.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrPnlExtreme
-        '
-        resources.ApplyResources(Me.ucrPnlExtreme, "ucrPnlExtreme")
-        Me.ucrPnlExtreme.Name = "ucrPnlExtreme"
         '
         'rdoZPlot
         '
@@ -75,6 +71,7 @@ Partial Class sdgExtremeDisplayOptions
         '
         'grpPlots
         '
+        Me.grpPlots.Controls.Add(Me.rdoNoPlot)
         Me.grpPlots.Controls.Add(Me.rdoTrace)
         Me.grpPlots.Controls.Add(Me.rdoRlplot)
         Me.grpPlots.Controls.Add(Me.rdoHist)
@@ -88,6 +85,12 @@ Partial Class sdgExtremeDisplayOptions
         resources.ApplyResources(Me.grpPlots, "grpPlots")
         Me.grpPlots.Name = "grpPlots"
         Me.grpPlots.TabStop = False
+        '
+        'rdoNoPlot
+        '
+        resources.ApplyResources(Me.rdoNoPlot, "rdoNoPlot")
+        Me.rdoNoPlot.Name = "rdoNoPlot"
+        Me.rdoNoPlot.UseVisualStyleBackColor = True
         '
         'rdoTrace
         '
@@ -118,6 +121,11 @@ Partial Class sdgExtremeDisplayOptions
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrPnlExtreme
+        '
+        resources.ApplyResources(Me.ucrPnlExtreme, "ucrPnlExtreme")
+        Me.ucrPnlExtreme.Name = "ucrPnlExtreme"
+        '
         'sdgExtremeDisplayOptions
         '
         resources.ApplyResources(Me, "$this")
@@ -146,4 +154,5 @@ Partial Class sdgExtremeDisplayOptions
     Friend WithEvents rdoHist As RadioButton
     Friend WithEvents rdoDensity As RadioButton
     Friend WithEvents ucrBase As ucrButtonsSubdialogue
+    Friend WithEvents rdoNoPlot As RadioButton
 End Class

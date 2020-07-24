@@ -1,6 +1,8 @@
-﻿Imports instat.Translations
+﻿Imports instat
+Imports instat.Translations
 Public Class sdgExtremeDisplayOptions
     Public clsFevdPlotFunction As New RFunction
+    Public clsRsyntax As New RSyntax
     Public bControlsInitialised As Boolean = False
     Private Sub sdgExtremeDisplayOtions(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -19,7 +21,9 @@ Public Class sdgExtremeDisplayOptions
         ucrPnlExtreme.AddRadioButton(rdoRlplot, Chr(34) & "rl" & Chr(34))
         ucrPnlExtreme.AddRadioButton(rdoZPlot, Chr(34) & "Zplot" & Chr(34))
         ucrPnlExtreme.AddRadioButton(rdoTrace, Chr(34) & "trace" & Chr(34))
+        ucrPnlExtreme.AddRadioButton(rdoNoPlot)
 
+        ucrPnlExtreme.AddParameterPresentCondition(rdoNoPlot, "type", False)
         ucrPnlExtreme.AddParameterValuesCondition(rdoPrimary, "type", Chr(34) & "primary" & Chr(34))
         ucrPnlExtreme.AddParameterValuesCondition(rdoDensity, "type", Chr(34) & "density" & Chr(34))
         ucrPnlExtreme.AddParameterValuesCondition(rdoHist, "type", Chr(34) & "hist" & Chr(34))
@@ -33,13 +37,23 @@ Public Class sdgExtremeDisplayOptions
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewFevdPlotFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewFevdPlotFunction As RFunction, clsNewRSyntax As RSyntax, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
 
+        clsRsyntax = clsNewRSyntax
         clsFevdPlotFunction = clsNewFevdPlotFunction
 
         ucrPnlExtreme.SetRCode(clsFevdPlotFunction, bReset)
+    End Sub
+
+    Private Sub ucrPnlExtreme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExtreme.ControlValueChanged
+        If rdoNoPlot.Checked Then
+            clsFevdPlotFunction.RemoveParameterByName("type")
+            clsRsyntax.RemoveFromAfterCodes(clsFevdPlotFunction)
+        Else
+            clsRsyntax.AddToAfterCodes(clsFevdPlotFunction)
+        End If
     End Sub
 End Class

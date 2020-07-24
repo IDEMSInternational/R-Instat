@@ -128,7 +128,7 @@ Public Class dlgExtremes
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgExtremeDisplayOptions.SetRCode(clsNewFevdPlotFunction:=clsFevdPlotsFunction)
+        sdgExtremeDisplayOptions.SetRCode(clsNewFevdPlotFunction:=clsFevdPlotsFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
         bResetDisplayOptions = False
         sdgExtremeDisplayOptions.ShowDialog()
     End Sub
