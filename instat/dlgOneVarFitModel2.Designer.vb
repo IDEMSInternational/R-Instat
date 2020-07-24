@@ -59,6 +59,8 @@ Partial Class dlgOneVarFitModel
         Me.lblNullHyp = New System.Windows.Forms.Label()
         Me.lblNulHypothesis = New System.Windows.Forms.Label()
         Me.lblMonteCarlo = New System.Windows.Forms.Label()
+        Me.lblQMethod = New System.Windows.Forms.Label()
+        Me.ucrInputComboQMethod = New instat.ucrInputComboBox()
         Me.ucrInputTextM = New instat.ucrInputTextBox()
         Me.ucrInputNulHypothesis = New instat.ucrInputTextBox()
         Me.ucrInputTxtHypothesis = New instat.ucrInputTextBox()
@@ -82,8 +84,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputComboQMethod = New instat.ucrInputComboBox()
-        Me.lblQMethod = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -179,7 +179,7 @@ Partial Class dlgOneVarFitModel
         'lblMeanCIMethod
         '
         Me.lblMeanCIMethod.AutoSize = True
-        Me.lblMeanCIMethod.Location = New System.Drawing.Point(248, 175)
+        Me.lblMeanCIMethod.Location = New System.Drawing.Point(248, 169)
         Me.lblMeanCIMethod.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblMeanCIMethod.Name = "lblMeanCIMethod"
         Me.lblMeanCIMethod.Size = New System.Drawing.Size(46, 13)
@@ -189,7 +189,7 @@ Partial Class dlgOneVarFitModel
         'lblNullHypothesis
         '
         Me.lblNullHypothesis.AutoSize = True
-        Me.lblNullHypothesis.Location = New System.Drawing.Point(248, 175)
+        Me.lblNullHypothesis.Location = New System.Drawing.Point(248, 169)
         Me.lblNullHypothesis.Name = "lblNullHypothesis"
         Me.lblNullHypothesis.Size = New System.Drawing.Size(83, 13)
         Me.lblNullHypothesis.TabIndex = 59
@@ -198,7 +198,7 @@ Partial Class dlgOneVarFitModel
         'lblCIMethods
         '
         Me.lblCIMethods.AutoSize = True
-        Me.lblCIMethods.Location = New System.Drawing.Point(248, 206)
+        Me.lblCIMethods.Location = New System.Drawing.Point(248, 200)
         Me.lblCIMethods.Name = "lblCIMethods"
         Me.lblCIMethods.Size = New System.Drawing.Size(62, 13)
         Me.lblCIMethods.TabIndex = 62
@@ -207,7 +207,7 @@ Partial Class dlgOneVarFitModel
         'lblMethods
         '
         Me.lblMethods.AutoSize = True
-        Me.lblMethods.Location = New System.Drawing.Point(248, 206)
+        Me.lblMethods.Location = New System.Drawing.Point(248, 200)
         Me.lblMethods.Name = "lblMethods"
         Me.lblMethods.Size = New System.Drawing.Size(46, 13)
         Me.lblMethods.TabIndex = 64
@@ -217,7 +217,7 @@ Partial Class dlgOneVarFitModel
         'lblMedianCIMethod
         '
         Me.lblMedianCIMethod.AutoSize = True
-        Me.lblMedianCIMethod.Location = New System.Drawing.Point(248, 175)
+        Me.lblMedianCIMethod.Location = New System.Drawing.Point(248, 169)
         Me.lblMedianCIMethod.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblMedianCIMethod.Name = "lblMedianCIMethod"
         Me.lblMedianCIMethod.Size = New System.Drawing.Size(94, 13)
@@ -227,7 +227,7 @@ Partial Class dlgOneVarFitModel
         'lblVarCI
         '
         Me.lblVarCI.AutoSize = True
-        Me.lblVarCI.Location = New System.Drawing.Point(248, 175)
+        Me.lblVarCI.Location = New System.Drawing.Point(248, 169)
         Me.lblVarCI.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblVarCI.Name = "lblVarCI"
         Me.lblVarCI.Size = New System.Drawing.Size(75, 13)
@@ -237,7 +237,7 @@ Partial Class dlgOneVarFitModel
         'lblQuantileCI
         '
         Me.lblQuantileCI.AutoSize = True
-        Me.lblQuantileCI.Location = New System.Drawing.Point(248, 175)
+        Me.lblQuantileCI.Location = New System.Drawing.Point(248, 169)
         Me.lblQuantileCI.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblQuantileCI.Name = "lblQuantileCI"
         Me.lblQuantileCI.Size = New System.Drawing.Size(67, 13)
@@ -247,7 +247,7 @@ Partial Class dlgOneVarFitModel
         'lblSd
         '
         Me.lblSd.AutoSize = True
-        Me.lblSd.Location = New System.Drawing.Point(248, 206)
+        Me.lblSd.Location = New System.Drawing.Point(248, 200)
         Me.lblSd.Name = "lblSd"
         Me.lblSd.Size = New System.Drawing.Size(48, 13)
         Me.lblSd.TabIndex = 72
@@ -256,7 +256,7 @@ Partial Class dlgOneVarFitModel
         'lblCI
         '
         Me.lblCI.AutoSize = True
-        Me.lblCI.Location = New System.Drawing.Point(238, 149)
+        Me.lblCI.Location = New System.Drawing.Point(245, 143)
         Me.lblCI.Name = "lblCI"
         Me.lblCI.Size = New System.Drawing.Size(102, 13)
         Me.lblCI.TabIndex = 74
@@ -265,7 +265,7 @@ Partial Class dlgOneVarFitModel
         'lblQuantile
         '
         Me.lblQuantile.AutoSize = True
-        Me.lblQuantile.Location = New System.Drawing.Point(248, 206)
+        Me.lblQuantile.Location = New System.Drawing.Point(248, 200)
         Me.lblQuantile.Name = "lblQuantile"
         Me.lblQuantile.Size = New System.Drawing.Size(49, 13)
         Me.lblQuantile.TabIndex = 76
@@ -274,7 +274,7 @@ Partial Class dlgOneVarFitModel
         'lblNullHyp
         '
         Me.lblNullHyp.AutoSize = True
-        Me.lblNullHyp.Location = New System.Drawing.Point(248, 175)
+        Me.lblNullHyp.Location = New System.Drawing.Point(248, 169)
         Me.lblNullHyp.Name = "lblNullHyp"
         Me.lblNullHyp.Size = New System.Drawing.Size(83, 13)
         Me.lblNullHyp.TabIndex = 78
@@ -283,7 +283,7 @@ Partial Class dlgOneVarFitModel
         'lblNulHypothesis
         '
         Me.lblNulHypothesis.AutoSize = True
-        Me.lblNulHypothesis.Location = New System.Drawing.Point(248, 175)
+        Me.lblNulHypothesis.Location = New System.Drawing.Point(248, 169)
         Me.lblNulHypothesis.Name = "lblNulHypothesis"
         Me.lblNulHypothesis.Size = New System.Drawing.Size(83, 13)
         Me.lblNulHypothesis.TabIndex = 80
@@ -292,18 +292,37 @@ Partial Class dlgOneVarFitModel
         'lblMonteCarlo
         '
         Me.lblMonteCarlo.AutoSize = True
-        Me.lblMonteCarlo.Location = New System.Drawing.Point(248, 175)
+        Me.lblMonteCarlo.Location = New System.Drawing.Point(248, 169)
         Me.lblMonteCarlo.Name = "lblMonteCarlo"
         Me.lblMonteCarlo.Size = New System.Drawing.Size(67, 13)
         Me.lblMonteCarlo.TabIndex = 82
         Me.lblMonteCarlo.Text = "Monte-Carlo:"
+        '
+        'lblQMethod
+        '
+        Me.lblQMethod.AutoSize = True
+        Me.lblQMethod.Location = New System.Drawing.Point(248, 229)
+        Me.lblQMethod.Name = "lblQMethod"
+        Me.lblQMethod.Size = New System.Drawing.Size(60, 13)
+        Me.lblQMethod.TabIndex = 84
+        Me.lblQMethod.Text = "Q. Method:"
+        '
+        'ucrInputComboQMethod
+        '
+        Me.ucrInputComboQMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboQMethod.IsReadOnly = False
+        Me.ucrInputComboQMethod.Location = New System.Drawing.Point(350, 225)
+        Me.ucrInputComboQMethod.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputComboQMethod.Name = "ucrInputComboQMethod"
+        Me.ucrInputComboQMethod.Size = New System.Drawing.Size(60, 21)
+        Me.ucrInputComboQMethod.TabIndex = 83
         '
         'ucrInputTextM
         '
         Me.ucrInputTextM.AddQuotesIfUnrecognised = True
         Me.ucrInputTextM.IsMultiline = False
         Me.ucrInputTextM.IsReadOnly = False
-        Me.ucrInputTextM.Location = New System.Drawing.Point(350, 172)
+        Me.ucrInputTextM.Location = New System.Drawing.Point(350, 166)
         Me.ucrInputTextM.Name = "ucrInputTextM"
         Me.ucrInputTextM.Size = New System.Drawing.Size(61, 21)
         Me.ucrInputTextM.TabIndex = 81
@@ -313,7 +332,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputNulHypothesis.AddQuotesIfUnrecognised = True
         Me.ucrInputNulHypothesis.IsMultiline = False
         Me.ucrInputNulHypothesis.IsReadOnly = False
-        Me.ucrInputNulHypothesis.Location = New System.Drawing.Point(350, 172)
+        Me.ucrInputNulHypothesis.Location = New System.Drawing.Point(350, 166)
         Me.ucrInputNulHypothesis.Name = "ucrInputNulHypothesis"
         Me.ucrInputNulHypothesis.Size = New System.Drawing.Size(61, 21)
         Me.ucrInputNulHypothesis.TabIndex = 79
@@ -323,7 +342,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputTxtHypothesis.AddQuotesIfUnrecognised = True
         Me.ucrInputTxtHypothesis.IsMultiline = False
         Me.ucrInputTxtHypothesis.IsReadOnly = False
-        Me.ucrInputTxtHypothesis.Location = New System.Drawing.Point(350, 172)
+        Me.ucrInputTxtHypothesis.Location = New System.Drawing.Point(350, 166)
         Me.ucrInputTxtHypothesis.Name = "ucrInputTxtHypothesis"
         Me.ucrInputTxtHypothesis.Size = New System.Drawing.Size(61, 21)
         Me.ucrInputTxtHypothesis.TabIndex = 77
@@ -332,7 +351,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrNudQuantile.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudQuantile.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudQuantile.Location = New System.Drawing.Point(350, 201)
+        Me.ucrNudQuantile.Location = New System.Drawing.Point(350, 195)
         Me.ucrNudQuantile.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudQuantile.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudQuantile.Name = "ucrNudQuantile"
@@ -344,7 +363,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrInputComboConfidenceLevel.AddQuotesIfUnrecognised = True
         Me.ucrInputComboConfidenceLevel.IsReadOnly = False
-        Me.ucrInputComboConfidenceLevel.Location = New System.Drawing.Point(351, 146)
+        Me.ucrInputComboConfidenceLevel.Location = New System.Drawing.Point(351, 140)
         Me.ucrInputComboConfidenceLevel.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputComboConfidenceLevel.Name = "ucrInputComboConfidenceLevel"
         Me.ucrInputComboConfidenceLevel.Size = New System.Drawing.Size(60, 21)
@@ -355,7 +374,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputTxtSd.AddQuotesIfUnrecognised = True
         Me.ucrInputTxtSd.IsMultiline = False
         Me.ucrInputTxtSd.IsReadOnly = False
-        Me.ucrInputTxtSd.Location = New System.Drawing.Point(350, 201)
+        Me.ucrInputTxtSd.Location = New System.Drawing.Point(350, 195)
         Me.ucrInputTxtSd.Name = "ucrInputTxtSd"
         Me.ucrInputTxtSd.Size = New System.Drawing.Size(61, 21)
         Me.ucrInputTxtSd.TabIndex = 71
@@ -364,7 +383,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrInputComboQuantilCI.AddQuotesIfUnrecognised = True
         Me.ucrInputComboQuantilCI.IsReadOnly = False
-        Me.ucrInputComboQuantilCI.Location = New System.Drawing.Point(350, 172)
+        Me.ucrInputComboQuantilCI.Location = New System.Drawing.Point(350, 166)
         Me.ucrInputComboQuantilCI.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputComboQuantilCI.Name = "ucrInputComboQuantilCI"
         Me.ucrInputComboQuantilCI.Size = New System.Drawing.Size(61, 21)
@@ -374,7 +393,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrInputComboMedianCI.AddQuotesIfUnrecognised = True
         Me.ucrInputComboMedianCI.IsReadOnly = False
-        Me.ucrInputComboMedianCI.Location = New System.Drawing.Point(350, 172)
+        Me.ucrInputComboMedianCI.Location = New System.Drawing.Point(350, 166)
         Me.ucrInputComboMedianCI.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputComboMedianCI.Name = "ucrInputComboMedianCI"
         Me.ucrInputComboMedianCI.Size = New System.Drawing.Size(60, 21)
@@ -384,7 +403,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrInputComboVarianceCI.AddQuotesIfUnrecognised = True
         Me.ucrInputComboVarianceCI.IsReadOnly = False
-        Me.ucrInputComboVarianceCI.Location = New System.Drawing.Point(350, 172)
+        Me.ucrInputComboVarianceCI.Location = New System.Drawing.Point(350, 166)
         Me.ucrInputComboVarianceCI.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputComboVarianceCI.Name = "ucrInputComboVarianceCI"
         Me.ucrInputComboVarianceCI.Size = New System.Drawing.Size(60, 21)
@@ -394,7 +413,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrInputComboMethod.AddQuotesIfUnrecognised = True
         Me.ucrInputComboMethod.IsReadOnly = False
-        Me.ucrInputComboMethod.Location = New System.Drawing.Point(350, 201)
+        Me.ucrInputComboMethod.Location = New System.Drawing.Point(350, 195)
         Me.ucrInputComboMethod.Name = "ucrInputComboMethod"
         Me.ucrInputComboMethod.Size = New System.Drawing.Size(60, 21)
         Me.ucrInputComboMethod.TabIndex = 63
@@ -403,7 +422,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrInputCIMethods.AddQuotesIfUnrecognised = True
         Me.ucrInputCIMethods.IsReadOnly = False
-        Me.ucrInputCIMethods.Location = New System.Drawing.Point(350, 201)
+        Me.ucrInputCIMethods.Location = New System.Drawing.Point(350, 195)
         Me.ucrInputCIMethods.Name = "ucrInputCIMethods"
         Me.ucrInputCIMethods.Size = New System.Drawing.Size(60, 21)
         Me.ucrInputCIMethods.TabIndex = 61
@@ -412,7 +431,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrInputMeanCIMethod.AddQuotesIfUnrecognised = True
         Me.ucrInputMeanCIMethod.IsReadOnly = False
-        Me.ucrInputMeanCIMethod.Location = New System.Drawing.Point(350, 172)
+        Me.ucrInputMeanCIMethod.Location = New System.Drawing.Point(350, 166)
         Me.ucrInputMeanCIMethod.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputMeanCIMethod.Name = "ucrInputMeanCIMethod"
         Me.ucrInputMeanCIMethod.Size = New System.Drawing.Size(60, 21)
@@ -423,7 +442,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputNullHypothesis.AddQuotesIfUnrecognised = True
         Me.ucrInputNullHypothesis.IsMultiline = False
         Me.ucrInputNullHypothesis.IsReadOnly = False
-        Me.ucrInputNullHypothesis.Location = New System.Drawing.Point(351, 172)
+        Me.ucrInputNullHypothesis.Location = New System.Drawing.Point(351, 166)
         Me.ucrInputNullHypothesis.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputNullHypothesis.Name = "ucrInputNullHypothesis"
         Me.ucrInputNullHypothesis.Size = New System.Drawing.Size(58, 21)
@@ -452,10 +471,10 @@ Partial Class dlgOneVarFitModel
         'ucrChkOmitMissing
         '
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(248, 116)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 289)
         Me.ucrChkOmitMissing.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(142, 20)
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkOmitMissing.TabIndex = 52
         '
         'ucrChkConvertVariate
@@ -521,25 +540,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
-        '
-        'ucrInputComboQMethod
-        '
-        Me.ucrInputComboQMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboQMethod.IsReadOnly = False
-        Me.ucrInputComboQMethod.Location = New System.Drawing.Point(350, 231)
-        Me.ucrInputComboQMethod.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrInputComboQMethod.Name = "ucrInputComboQMethod"
-        Me.ucrInputComboQMethod.Size = New System.Drawing.Size(60, 21)
-        Me.ucrInputComboQMethod.TabIndex = 83
-        '
-        'lblQMethod
-        '
-        Me.lblQMethod.AutoSize = True
-        Me.lblQMethod.Location = New System.Drawing.Point(248, 235)
-        Me.lblQMethod.Name = "lblQMethod"
-        Me.lblQMethod.Size = New System.Drawing.Size(60, 13)
-        Me.lblQMethod.TabIndex = 84
-        Me.lblQMethod.Text = "Q. Method:"
         '
         'dlgOneVarFitModel
         '
