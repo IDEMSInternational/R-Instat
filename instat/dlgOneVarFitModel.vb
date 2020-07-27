@@ -48,7 +48,8 @@ Public Class dlgOneVarFitModel
         Dim dctVarCI As New Dictionary(Of String, String)
         Dim dctQuantileCI As New Dictionary(Of String, String)
         Dim dctConfidence As New Dictionary(Of String, String)
-        Dim DctQMethod As New Dictionary(Of String, String)
+        Dim dctQMethod As New Dictionary(Of String, String)
+        Dim dctConfidenceInterval As New Dictionary(Of String, String)
         Dim lstCommandButtons As New List(Of Control)
 
         ucrBase.iHelpTopicID = 296
@@ -82,7 +83,7 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
-        ucrInputComboTests.SetItems({"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", "Bartel", "br", "runs", "Sen", "Serial Corr", "snh", "ad", "cvm", "lillie", "pearson", "sf"})
+        ucrInputComboTests.SetItems({"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", "Bartel", "br", "runs", "Sen", "serial corr", "snh", "ad", "cvm", "lillie", "pearson", "sf"})
         ucrInputComboTests.SetDropDownStyleAsNonEditable()
 
         ucrInputComboEstimate.SetItems({"mean", "median", "normal", "quantile", "sd", "variance"})
@@ -186,31 +187,39 @@ Public Class dlgOneVarFitModel
         dctConfidence.Add("0.999", "0.999")
         ucrInputComboConfidenceLevel.SetItems(dctConfidence)
         ucrInputComboConfidenceLevel.AddQuotesIfUnrecognised = False
-        ucrInputComboConfidenceLevel.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=False, dcmMax:=1.0, bIncludeMax:=False)
+        ucrInputComboConfidenceLevel.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=1.0, bIncludeMax:=True)
+
+        ucrInputConfidenceInterval.SetParameter(New RParameter("conf.level", 2))
+        dctConfidenceInterval.Add("0.900", "0.90")
+        dctConfidenceInterval.Add("0.950", "0.95")
+        dctConfidenceInterval.Add("0.980", "0.98")
+        dctConfidenceInterval.Add("0.990", "0.99")
+        dctConfidenceInterval.Add("0.999", "0.999")
+        ucrInputConfidenceInterval.SetItems(dctConfidenceInterval)
+        ucrInputConfidenceInterval.AddQuotesIfUnrecognised = False
+        ucrInputConfidenceInterval.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=1.0, bIncludeMax:=True)
 
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboEstimate, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Mean")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrDistributionChoice, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrChkOmitMissing, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputNullHypothesis, {rdoTest}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboConfidenceLevel, {rdoEstimate, rdoTest}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboConfidenceLevel, {"mean", "median", "normal", "quantile", "sd", "variance"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrInputMeanCIMethod, {"mean"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrInputComboMedianCI, {"median"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrInputComboVarianceCI, {"variance"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrInputComboQuantilCI, {"quantile"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputCIMethods, {"binomial"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputComboMethod, {"Bartel"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboTests.AddToLinkedControls(ucrInputComboConfidenceLevel, {"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", "serial corr", "Sen"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboTests.AddToLinkedControls(ucrInputNullHypothesis, {"binomial", "proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrInputConfidenceInterval, {"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", "serial corr", "Sen"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrInputNullHypothesis, {"binomial", "proportion"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputTxtSd, {"Z"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrNudQuantile, {"quantile"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrChkOmitMissing, {"runs"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputTxtHypothesis, {"sign", "Wilcoxon"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputNulHypothesis, {"t", "Z"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboTests.AddToLinkedControls(ucrInputTextM, {"br", "nh"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboQMethod, {"rdoEstimate", "quantile"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboTests.AddToLinkedControls(ucrInputTextM, {"br", "snh"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboQMethod, {"quantile"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
         ucrInputNullHypothesis.SetLinkedDisplayControl(lblNullHypothesis)
@@ -227,6 +236,7 @@ Public Class dlgOneVarFitModel
         ucrInputNulHypothesis.SetLinkedDisplayControl(lblNulHypothesis)
         ucrInputTextM.SetLinkedDisplayControl(lblMonteCarlo)
         ucrInputComboQMethod.SetLinkedDisplayControl(lblQMethod)
+        ucrInputConfidenceInterval.SetLinkedDisplayControl(lblConfidenceLevel)
 
         lstCommandButtons.AddRange({cmdDisplayOptions, cmdFittingOptions})
         ucrDistributionChoice.SetLinkedDisplayControl(lstCommandButtons)
@@ -245,6 +255,8 @@ Public Class dlgOneVarFitModel
         clsRLogLikFunction = New RFunction
 
         ucrDistribution = New ucrDistributions
+        ucrChkOmitMissing.Checked = True
+
 
         clsRfitdist = New RFunction
         clsRConvertVector = New RFunction
@@ -346,6 +358,7 @@ Public Class dlgOneVarFitModel
         clsBionomialFunction.SetPackageName("mosaic")
         clsBionomialFunction.SetRCommand("binom.test")
         clsBionomialFunction.AddParameter("p", "0.5", iPosition:=1)
+        clsBionomialFunction.AddParameter("conf.level", "0.95", iPosition:=2)
         clsBionomialFunction.AddParameter("ci.method", Chr(34) & "Clopper-Pearson" & Chr(34), iPosition:=3)
 
         clsProportionFunction.SetPackageName("mosaic")
@@ -454,7 +467,6 @@ Public Class dlgOneVarFitModel
         ucrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
         bResetFittingOptions = True
         bResetFitModDisplay = True
-        ucrChkOmitMissing.Checked = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -475,6 +487,7 @@ Public Class dlgOneVarFitModel
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsSdCIFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=3)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsNormCIFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=4)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsQuantileCIFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=5)
+        ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsRunsFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=6)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBartelFunction, New RParameter("x", 0), iAdditionalPairNo:=13)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBrFunction, New RParameter("x", 0), iAdditionalPairNo:=14)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRunsFunction, New RParameter("x", 0), iAdditionalPairNo:=15)
@@ -492,14 +505,13 @@ Public Class dlgOneVarFitModel
         ucrInputComboConfidenceLevel.AddAdditionalCodeParameterPair(clsSdCIFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=4)
         ucrInputComboConfidenceLevel.AddAdditionalCodeParameterPair(clsSdCIFunction, New RParameter("conf.level", 1), iAdditionalPairNo:=5)
         ucrInputComboConfidenceLevel.AddAdditionalCodeParameterPair(clsVarCIFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=6)
-        ucrInputComboConfidenceLevel.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=7)
-        ucrInputComboConfidenceLevel.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=8)
-        ucrInputComboConfidenceLevel.AddAdditionalCodeParameterPair(clsZTestFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=9)
-        ucrInputComboConfidenceLevel.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=10)
-        ucrInputComboConfidenceLevel.AddAdditionalCodeParameterPair(clsWilcoxonFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=11)
-        ucrInputComboConfidenceLevel.AddAdditionalCodeParameterPair(clsSenFunction, New RParameter("conf.level", 1), iAdditionalPairNo:=12)
-        ucrInputComboConfidenceLevel.AddAdditionalCodeParameterPair(clsSerialCorrFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=13)
-        ucrInputComboConfidenceLevel.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=14)
+        ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=1)
+        ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=2)
+        ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsZTestFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=3)
+        ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=4)
+        ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsWilcoxonFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=5)
+        ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsSenFunction, New RParameter("conf.level", 1), iAdditionalPairNo:=6)
+        ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsSerialCorrFunction, New RParameter("conf.level", 2), iAdditionalPairNo:=7)
         ucrInputTxtHypothesis.AddAdditionalCodeParameterPair(clsWilcoxonFunction, New RParameter("mu", 2), iAdditionalPairNo:=1)
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsSfFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
         ucrInputNulHypothesis.AddAdditionalCodeParameterPair(clsZTestFunction, New RParameter("mu", 1), iAdditionalPairNo:=1)
@@ -539,6 +551,7 @@ Public Class dlgOneVarFitModel
         ucrInputNullHypothesis.SetRCode(clsBionomialFunction, bReset)
         ucrInputMeanCIMethod.SetRCode(clsMeanCIFunction, bReset)
         ucrInputCIMethods.SetRCode(clsBionomialFunction, bReset)
+        ucrInputConfidenceInterval.SetRCode(clsBionomialFunction, bReset)
         ucrInputComboMethod.SetRCode(clsBartelFunction, bReset)
         ucrInputComboMedianCI.SetRCode(clsMedianCIFunction, bReset)
         ucrInputComboVarianceCI.SetRCode(clsVarCIFunction, bReset)
