@@ -481,7 +481,7 @@
     <value>415, 411</value>
   </data>
   <data name="ucrInputBarChartPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 190</value>
+    <value>255, 291</value>
   </data>
   <data name="ucrInputBarChartPosition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>21, 17, 21, 17</value>
@@ -679,7 +679,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 190</value>
+    <value>255, 191</value>
   </data>
   <data name="ucrReceiverY.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

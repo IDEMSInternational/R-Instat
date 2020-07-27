@@ -50,6 +50,8 @@ Partial Class dlgMakeDate
         Me.lblDayofYear = New System.Windows.Forms.Label()
         Me.ucrReceiverDayTwo = New instat.ucrReceiverSingle()
         Me.grpSingleColumn = New System.Windows.Forms.GroupBox()
+        Me.grpFormats = New System.Windows.Forms.GroupBox()
+        Me.txtTextDateFormats = New System.Windows.Forms.RichTextBox()
         Me.lblUnits = New System.Windows.Forms.Label()
         Me.ucrDtpSpecifyOrigin = New instat.ucrDateTimePicker()
         Me.ucrInputUnits = New instat.ucrInputComboBox()
@@ -95,8 +97,6 @@ Partial Class dlgMakeDate
         Me.rdoThreeColumns = New System.Windows.Forms.RadioButton()
         Me.rdoTwoColumns = New System.Windows.Forms.RadioButton()
         Me.rdoSingleColumn = New System.Windows.Forms.RadioButton()
-        Me.grpFormats = New System.Windows.Forms.GroupBox()
-        Me.txtTextDateFormats = New System.Windows.Forms.RichTextBox()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.ttMakeDate = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrPnlDate = New instat.UcrPanel()
@@ -105,9 +105,9 @@ Partial Class dlgMakeDate
         Me.ucrSelectorMakeDate = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpTwoColumns.SuspendLayout()
         Me.grpSingleColumn.SuspendLayout()
+        Me.grpFormats.SuspendLayout()
         Me.grpFormatField.SuspendLayout()
         Me.grpThreeColumns.SuspendLayout()
-        Me.grpFormats.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpTwoColumns
@@ -182,6 +182,7 @@ Partial Class dlgMakeDate
         '
         'grpSingleColumn
         '
+        Me.grpSingleColumn.Controls.Add(Me.grpFormats)
         Me.grpSingleColumn.Controls.Add(Me.lblUnits)
         Me.grpSingleColumn.Controls.Add(Me.ucrDtpSpecifyOrigin)
         Me.grpSingleColumn.Controls.Add(Me.ucrInputUnits)
@@ -196,6 +197,18 @@ Partial Class dlgMakeDate
         resources.ApplyResources(Me.grpSingleColumn, "grpSingleColumn")
         Me.grpSingleColumn.Name = "grpSingleColumn"
         Me.grpSingleColumn.TabStop = False
+        '
+        'grpFormats
+        '
+        Me.grpFormats.Controls.Add(Me.txtTextDateFormats)
+        resources.ApplyResources(Me.grpFormats, "grpFormats")
+        Me.grpFormats.Name = "grpFormats"
+        Me.grpFormats.TabStop = False
+        '
+        'txtTextDateFormats
+        '
+        resources.ApplyResources(Me.txtTextDateFormats, "txtTextDateFormats")
+        Me.txtTextDateFormats.Name = "txtTextDateFormats"
         '
         'lblUnits
         '
@@ -547,18 +560,6 @@ Partial Class dlgMakeDate
         Me.rdoSingleColumn.Name = "rdoSingleColumn"
         Me.rdoSingleColumn.UseVisualStyleBackColor = True
         '
-        'grpFormats
-        '
-        Me.grpFormats.Controls.Add(Me.txtTextDateFormats)
-        resources.ApplyResources(Me.grpFormats, "grpFormats")
-        Me.grpFormats.Name = "grpFormats"
-        Me.grpFormats.TabStop = False
-        '
-        'txtTextDateFormats
-        '
-        resources.ApplyResources(Me.txtTextDateFormats, "txtTextDateFormats")
-        Me.txtTextDateFormats.Name = "txtTextDateFormats"
-        '
         'cmdHelp
         '
         resources.ApplyResources(Me.cmdHelp, "cmdHelp")
@@ -592,7 +593,6 @@ Partial Class dlgMakeDate
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpFormats)
         Me.Controls.Add(Me.grpSingleColumn)
         Me.Controls.Add(Me.grpThreeColumns)
         Me.Controls.Add(Me.cmdHelp)
@@ -612,11 +612,11 @@ Partial Class dlgMakeDate
         Me.grpTwoColumns.PerformLayout()
         Me.grpSingleColumn.ResumeLayout(False)
         Me.grpSingleColumn.PerformLayout()
+        Me.grpFormats.ResumeLayout(False)
         Me.grpFormatField.ResumeLayout(False)
         Me.grpFormatField.PerformLayout()
         Me.grpThreeColumns.ResumeLayout(False)
         Me.grpThreeColumns.PerformLayout()
-        Me.grpFormats.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -665,8 +665,6 @@ Partial Class dlgMakeDate
     Friend WithEvents rdoTwoColumns As RadioButton
     Friend WithEvents rdoSingleColumn As RadioButton
     Friend WithEvents ucrPnlDate As UcrPanel
-    Friend WithEvents grpFormats As GroupBox
-    Friend WithEvents txtTextDateFormats As RichTextBox
     Friend WithEvents cmdHelp As Button
     Friend WithEvents ttMakeDate As ToolTip
     Friend WithEvents ucrDtpSpecifyOrigin As ucrDateTimePicker
@@ -684,4 +682,6 @@ Partial Class dlgMakeDate
     Friend WithEvents ucrPnlDayType As UcrPanel
     Friend WithEvents lblUnits As Label
     Friend WithEvents ucrInputUnits As ucrInputComboBox
+    Friend WithEvents grpFormats As GroupBox
+    Friend WithEvents txtTextDateFormats As RichTextBox
 End Class
