@@ -34,8 +34,9 @@ Partial Class sdgExtremeDisplayOptions
         Me.rdoRlplot = New System.Windows.Forms.RadioButton()
         Me.rdoHist = New System.Windows.Forms.RadioButton()
         Me.rdoDensity = New System.Windows.Forms.RadioButton()
-        Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.ucrPnlExtreme = New instat.UcrPanel()
+        Me.ucrBase = New instat.ucrButtonsSubdialogue()
+        Me.ucrSavePlots = New instat.ucrSave()
         Me.grpPlots.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -71,6 +72,7 @@ Partial Class sdgExtremeDisplayOptions
         '
         'grpPlots
         '
+        Me.grpPlots.Controls.Add(Me.ucrSavePlots)
         Me.grpPlots.Controls.Add(Me.rdoNoPlot)
         Me.grpPlots.Controls.Add(Me.rdoTrace)
         Me.grpPlots.Controls.Add(Me.rdoRlplot)
@@ -116,15 +118,20 @@ Partial Class sdgExtremeDisplayOptions
         Me.rdoDensity.Name = "rdoDensity"
         Me.rdoDensity.UseVisualStyleBackColor = True
         '
+        'ucrPnlExtreme
+        '
+        resources.ApplyResources(Me.ucrPnlExtreme, "ucrPnlExtreme")
+        Me.ucrPnlExtreme.Name = "ucrPnlExtreme"
+        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrPnlExtreme
+        'ucrSavePlots
         '
-        resources.ApplyResources(Me.ucrPnlExtreme, "ucrPnlExtreme")
-        Me.ucrPnlExtreme.Name = "ucrPnlExtreme"
+        resources.ApplyResources(Me.ucrSavePlots, "ucrSavePlots")
+        Me.ucrSavePlots.Name = "ucrSavePlots"
         '
         'sdgExtremeDisplayOptions
         '
@@ -155,4 +162,5 @@ Partial Class sdgExtremeDisplayOptions
     Friend WithEvents rdoDensity As RadioButton
     Friend WithEvents ucrBase As ucrButtonsSubdialogue
     Friend WithEvents rdoNoPlot As RadioButton
+    Friend WithEvents ucrSavePlots As ucrSave
 End Class

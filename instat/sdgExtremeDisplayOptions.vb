@@ -34,6 +34,13 @@ Public Class sdgExtremeDisplayOptions
         ucrPnlExtreme.AddParameterValuesCondition(rdoZPlot, "type", Chr(34) & "Zplot" & Chr(34))
         ucrPnlExtreme.AddParameterValuesCondition(rdoTrace, "type", Chr(34) & "trace" & Chr(34))
 
+        ucrSavePlots.SetPrefix("plot")
+        ucrSavePlots.SetSaveTypeAsGraph()
+        ucrSavePlots.SetDataFrameSelector(dlgExtremes.ucrSelectorExtremes.ucrAvailableDataFrames)
+        ucrSavePlots.SetCheckBoxText("Save Graph")
+        ucrSavePlots.SetIsComboBox()
+        ucrSavePlots.SetAssignToIfUncheckedValue("last_graph")
+
         bControlsInitialised = True
     End Sub
 
@@ -45,7 +52,8 @@ Public Class sdgExtremeDisplayOptions
         clsRsyntax = clsNewRSyntax
         clsFevdPlotFunction = clsNewFevdPlotFunction
 
-        ucrPnlExtreme.SetRCode(clsFevdPlotFunction, bReset)
+        ucrPnlExtreme.SetRCode(clsFevdPlotFunction, bReset, bCloneIfNeeded:=True)
+        ucrSavePlots.SetRCode(clsFevdPlotFunction, bReset, bCloneIfNeeded:=True)
     End Sub
 
     Private Sub ucrPnlExtreme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExtreme.ControlValueChanged

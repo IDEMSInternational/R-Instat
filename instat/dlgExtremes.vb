@@ -68,7 +68,7 @@ Public Class dlgExtremes
         ucrReceiverVariable.SetParameter(New RParameter("object", 0))
         ucrReceiverVariable.SetParameterIsRFunction()
 
-        ucrChkExplanatoryModelForLocationParameter.SetText("Explanatory Model For Location Parameter")
+        ucrChkExplanatoryModelForLocationParameter.SetText("Explanatory Model for Location")
         ucrChkExplanatoryModelForLocationParameter.SetParameter(New RParameter(" location.fun", 3), bNewChangeParameterValue:=False)
         ucrChkExplanatoryModelForLocationParameter.AddToLinkedControls(ucrReceiverExpressionExplanatoryModelForLocParam, {True}, bNewLinkedHideIfParameterMissing:=True)
 
@@ -98,7 +98,6 @@ Public Class dlgExtremes
 
         ucrSaveExtremes.Reset()
         ucrSelectorExtremes.Reset()
-
         ucrReceiverExpressionExplanatoryModelForLocParam.Selector = ucrSelectorExtremes
 
         clsNaExclude.SetPackageName("stats")
@@ -121,12 +120,9 @@ Public Class dlgExtremes
         clsFevdFunction.AddParameter("method", Chr(34) & "MLE" & Chr(34), iPosition:=2)
 
 
-        clsFevdFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
+        clsFevdFunction.SetAssignTo(ucrSaveExtremes.GetText(), strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
         clsFevdPlotsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-
         clsFevdPlotsFunction.AddParameter("x", clsRFunctionParameter:=clsFevdFunction, iPosition:=0)
-        clsFevdPlotsFunction.AddParameter("type", Chr(34) & "primary" & Chr(34), iPosition:=1)
-
 
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
