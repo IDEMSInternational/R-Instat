@@ -370,7 +370,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblYvariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 177</value>
+    <value>252, 176</value>
   </data>
   <data name="lblYvariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -454,7 +454,7 @@
     <value>255, 142</value>
   </data>
   <data name="ucrInputYValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 21</value>
+    <value>107, 21</value>
   </data>
   <data name="ucrInputYValue.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -481,7 +481,7 @@
     <value>415, 411</value>
   </data>
   <data name="ucrInputBarChartPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 291</value>
+    <value>255, 190</value>
   </data>
   <data name="ucrInputBarChartPosition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>21, 17, 21, 17</value>
@@ -663,9 +663,6 @@
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -679,7 +676,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 191</value>
+    <value>255, 190</value>
   </data>
   <data name="ucrReceiverY.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
