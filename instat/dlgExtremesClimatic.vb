@@ -86,7 +86,7 @@ Public Class dlgExtremesClimatic
         ucrReceiverDOY.bWithQuotes = False
         ucrReceiverDOY.Selector = ucrSelectorClimaticExtremes
         ucrReceiverDOY.bAutoFill = True
-        ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
+        ucrReceiverDOY.SetClimaticType("doy")
         ucrReceiverDOY.strSelectorHeading = "Day Variables"
 
         ucrReceiverElement.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))

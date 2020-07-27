@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgThreeVariableModelling
 
@@ -25,7 +24,7 @@ Public Class dlgThreeVariableModelling
     Public bResetFirstFunction As Boolean = False
     Public bResetSecondFunction As Boolean = False
     Public bRCodeSet As Boolean = False
-    Public clsFamilyFunction, clsVisReg, clsAutoPlot As New RFunction
+    Public clsFamilyFunction, clsVisReg As New RFunction
     Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
     Public clsFormulaOperator As ROperator
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
@@ -39,6 +38,7 @@ Public Class dlgThreeVariableModelling
     Private clsSecondTransformFunction As RFunction
     Private clsSecondPowerOperator As ROperator
 
+    Private dctPlotFunctions As New Dictionary(Of String, RFunction)
     Private Sub dlgThreeVariableModelling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -112,7 +112,7 @@ Public Class dlgThreeVariableModelling
         clsSummaryFunction = New RFunction
         clsConfint = New RFunction
         clsVisReg = New RFunction
-        clsAutoPlot = New RFunction
+
 
         clsFirstTransformFunction = New RFunction
         clsFirstPowerOperator = New ROperator
@@ -166,8 +166,8 @@ Public Class dlgThreeVariableModelling
         clsSecondPowerOperator.bBrackets = False
 
         'Residual Plots
-        clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
-        clsAutoPlot.bExcludeAssignedFunctionOutput = False
+        dctPlotFunctions = New Dictionary(Of String, RFunction)(clsRegressionDefaults.dctModelPlotFunctions)
+
 
         'Model
         clsFormulaFunction = clsRegressionDefaults.clsDefaultFormulaFunction.Clone
@@ -205,7 +205,6 @@ Public Class dlgThreeVariableModelling
 
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsAutoPlot, 5)
         clsLMOrGLM = clsLM
 
 
@@ -305,7 +304,7 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesFunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames, bReset:=bResetDisplayOptions)
+        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, dctNewPlot:=dctPlotFunctions, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesFunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames, bReset:=bResetDisplayOptions)
         sdgSimpleRegOptions.ShowDialog()
         GraphAssignTo()
         bResetDisplayOptions = False
@@ -330,7 +329,11 @@ Public Class dlgThreeVariableModelling
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
-            clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+
+            For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
+                kvp.Value.AddParameter("x", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            Next
+
             clsResidualFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsFittedValuesFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
@@ -433,6 +436,14 @@ Public Class dlgThreeVariableModelling
     Private Sub GraphAssignTo()
         'temp fix for graph display problem with RDotNet
         clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
-        clsAutoPlot.SetAssignTo("last_autoplot", strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_autoplot")
+        'Dim lstPlotNames As New List(Of String)
+        'Dim i As Integer = 0
+
+        'lstPlotNames = New List(Of String)({"last_residplot", "last_qqplot", "last_scaleloc", "last_cooksdist", "last_residlev", "last_cookslev"})
+
+        'For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
+        '    kvp.Value.SetAssignTo(lstPlotNames(index:=i), strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=lstPlotNames(index:=i))
+        '    i = i + 1
+        'Next
     End Sub
 End Class

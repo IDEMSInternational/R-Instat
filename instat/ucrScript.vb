@@ -70,10 +70,14 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuRunCurrentLine_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLine.Click
+        Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
+
         If txtScript.TextLength > 0 Then
             Dim lineNum As Integer = txtScript.GetLineFromCharIndex(txtScript.GetFirstCharIndexOfCurrentLine())
             If lineNum < txtScript.Lines.Length Then
-                RunText(txtScript.Lines(lineNum))
+                'add the new text to any unexecuted script remaining from previous calls to this function
+                strScriptCmd &= vbCrLf & txtScript.Lines(lineNum) 'insert carriage return to ensure that new text starts on new line
+                strScriptCmd = RunText(strScriptCmd)
                 If lineNum < txtScript.Lines.Length - 1 Then
                     txtScript.SelectionStart = txtScript.GetFirstCharIndexFromLine(lineNum + 1)
                     txtScript.ScrollToCaret()
@@ -82,11 +86,12 @@ Public Class ucrScript
         End If
     End Sub
 
-    Private Sub RunText(strText As String)
+    Private Function RunText(strText As String) As String
         If strText <> "" Then
-            frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
+            strText = frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
         End If
-    End Sub
+        Return strText
+    End Function
 
     Private Sub mnuOpenScript_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptasFile.Click
         Dim strScriptFilename As String = ""

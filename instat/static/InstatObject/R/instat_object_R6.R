@@ -438,8 +438,8 @@ DataBook$set("public", "get_calculations", function(data_name) {
 } 
 )
 
-DataBook$set("public", "get_calculation_names", function(data_name) {
-  return(self$get_data_objects(data_name)$get_calculation_names())
+DataBook$set("public", "get_calculation_names", function(data_name, as_list = FALSE, excluded_items = c()) {
+  return(self$get_data_objects(data_name)$get_calculation_names(as_list = as_list, excluded_items = excluded_items))
 } 
 )
 
@@ -588,13 +588,13 @@ DataBook$set("public", "get_object_names", function(data_name, include_overall =
 }
 )
 
-DataBook$set("public", "rename_object", function(data_name, object_name, new_name) {
+DataBook$set("public", "rename_object", function(data_name, object_name, new_name, object_type = "object") {
   if(missing(data_name) || data_name == overall_label) {
     if(!object_name %in% names(private$.objects)) stop(object_name, " not found in overall objects list")
     if(new_name %in% names(private$.objects)) stop(new_name, " is already an object name. Cannot rename ", object_name, " to ", new_name)
     names(private$.objects)[names(private$.objects) == object_name] <- new_name
   }
-  else self$get_data_objects(data_name)$rename_object(object_name = object_name, new_name = new_name)
+  else self$get_data_objects(data_name)$rename_object(object_name = object_name, new_name = new_name, object_type = object_type)
 }
 )
 
@@ -1361,12 +1361,16 @@ DataBook$set("public", "add_climdex_indices", function(data_name, indices = list
 
 DataBook$set("public", "add_single_climdex_index", function(data_name, indices, index_name = "", freq = "annual", year, month) {
   if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label)) stop("Data must be defined as climatic to calculate climdex indices.")
-  
+  col_year <- self$get_columns_from_data(data_name = data_name, col_names = year)
+  year_class <- class(col_year)
   if(freq == "annual") {
-    ind_data <- data.frame(factor(names(indices)), indices, row.names = NULL)
+    ind_data <- data.frame(names(indices), indices)
     names(ind_data) <- c(year, index_name)
     linked_data_name <- self$get_linked_to_data_name(data_name, year)
     if(length(linked_data_name) == 0) {
+      if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, sep = "_")
       new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
@@ -1403,6 +1407,9 @@ DataBook$set("public", "add_single_climdex_index", function(data_name, indices, 
     ind_data[[month]] <- as.numeric(ind_data[[month]])
     linked_data_name <- self$get_linked_to_data_name(data_name, c(year, month))
     if(length(linked_data_name) == 0) {
+      if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, month, sep = "_")
       new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
@@ -2042,6 +2049,14 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     names(data_list) <- new_name
     self$import_data(data_tables=data_list)
   }
+}
+)
+
+DataBook$set("public","get_geometry", function(data) {
+  if(missing(data)) stop("data_name is required")
+  else if("sf" %in% class(data)) return(attr(data, "sf_column"))
+  else if("geometry" %in% colnames(data)) return("geometry")
+  else return("")
 }
 )
 DataBook$set("public","package_check", function(package) {

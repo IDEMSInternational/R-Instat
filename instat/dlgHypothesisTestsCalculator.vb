@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgHypothesisTestsCalculator
@@ -22,6 +23,7 @@ Public Class dlgHypothesisTestsCalculator
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
     Private strPackageName As String
+    Private clsSummary As New RFunction
     Private Sub dlgHypothesisTestsCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -40,6 +42,8 @@ Public Class dlgHypothesisTestsCalculator
         ucrReceiverForTestColumn.SetMeAsReceiver()
         ucrChkIncludeArguments.SetText("Include Arguments")
         ucrChkBy.SetText("By")
+        ucrChkDisplayModel.SetText("Display Model")
+        ucrChkSummaryModel.SetText("Summary Model")
         ucrBase.clsRsyntax.SetCommandString("")
         ucrSaveResult.SetPrefix("Test")
         ucrSaveResult.SetIsComboBox()
@@ -48,11 +52,32 @@ Public Class dlgHypothesisTestsCalculator
         ucrSaveResult.SetAssignToIfUncheckedValue("Last_Test")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorColumn.ucrAvailableDataFrames)
 
-        ucrInputComboRPackage.SetItems({"Stats1", "Stats2", "Agricolae"})
+        ucrInputComboRPackage.SetItems({"Stats1", "Stats2", "Agricolae", "Verification", "Coin", "Trend"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
         'Tooltips for conf & and Alt Buttons
-        tpConf.SetToolTip(cmdConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
-        tpAlt.SetToolTip(cmdAlt, " For some hypotheses the alternative hypothesis is two sided by default, but can be changed to ""greater"" or ""less""")
+        ttHypothesisTests.SetToolTip(cmdConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
+        ttHypothesisTests.SetToolTip(cmdAlt, " For some hypotheses the alternative hypothesis is two sided by default, but can be changed to ""greater"" or ""less""")
+
+        'Tooltips for the trend kyboard buttons
+        ttHypothesisTests.SetToolTip(cmdBartels, "A rank version of von Neumann’s ratio test proposed by Bartels")
+        ttHypothesisTests.SetToolTip(cmdBr, "The Buishand range test for change-point detection of a normal variate")
+        ttHypothesisTests.SetToolTip(cmdBu, "The Buishand U test for change-point detection of a normal variate")
+        ttHypothesisTests.SetToolTip(cmdCs, "The non-parametric Cox and Stuart trend test")
+        ttHypothesisTests.SetToolTip(cmdCsmk, "The seasonal Mann-Kendall test under the presence of correlated seasons")
+        ttHypothesisTests.SetToolTip(cmdLanzante, "The non-parametric Lanzante test for a shift in the central tendency of a time series")
+        ttHypothesisTests.SetToolTip(cmdMk, "The Mann-Kendall trend test")
+        ttHypothesisTests.SetToolTip(cmdMmk, "The multivariate (multisite) Mann-Kendall test")
+        ttHypothesisTests.SetToolTip(cmdPcor, "The partial correlation trend test")
+        ttHypothesisTests.SetToolTip(cmdPmk, "The partial Mann-Kendall trend test")
+        ttHypothesisTests.SetToolTip(cmdPettitt, "Pettitt’s test for change-point detection")
+        ttHypothesisTests.SetToolTip(cmdRrod, "The Fligner-Pollicello robust rank-order distributional test for location")
+        ttHypothesisTests.SetToolTip(cmdSsens, "The seasonal Sen’s slope for linear rate of change")
+        ttHypothesisTests.SetToolTip(cmdSens, "Sen’s slope for linear rate of change and corresponding confidence interval")
+        ttHypothesisTests.SetToolTip(cmdSmk, "Seasonal Mann-Kendall trend test (Hirsch-Slack test)")
+        ttHypothesisTests.SetToolTip(cmdSnh, "The standard normal homogeneity test (SNHT) for change-point detection of a normal variate")
+        ttHypothesisTests.SetToolTip(cmdWm, "The Wallis and Moore phase-frequency test")
+        ttHypothesisTests.SetToolTip(cmdWw, "The non-parametric Wald-Wolfowitz test for independence and stationarity")
+
         'Temporarily disabled: Not yet functioning.
         ucrChkBy.Enabled = False
         ucrReceiverMultiple.Enabled = False
@@ -69,12 +94,16 @@ Public Class dlgHypothesisTestsCalculator
         ucrBase.clsRsyntax.SetAssignTo("Last_Test", strTempModel:="Last_Test", strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
+        ucrChkDisplayModel.Checked = True
         ucrChkIncludeArguments.Checked = False
+        ucrChkSummaryModel.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"}, bNewIsPositive:=True)
         ucrInputComboRPackage.SetName("Stats1")
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
+        clsSummary.SetRCommand("summary")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsSummary.AddParameter("object", clsRCodeStructureParameter:=ucrBase.clsRsyntax.clsBaseCommandString, iPosition:=0)
         clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
@@ -563,16 +592,50 @@ Public Class dlgHypothesisTestsCalculator
                 grpAgricolae.Visible = False
                 grpStats1.Visible = True
                 grpStats2.Visible = False
+                grpVerification.Visible = False
+                grpCoin.Visible = False
+                grpTrend.Visible = False
             Case "Stats2"
                 strPackageName = "stats"
                 grpAgricolae.Visible = False
                 grpStats1.Visible = False
                 grpStats2.Visible = True
+                grpVerification.Visible = False
+                grpCoin.Visible = False
+                grpTrend.Visible = False
             Case "Agricolae"
                 strPackageName = "agricolae"
                 grpStats1.Visible = False
                 grpStats2.Visible = False
                 grpAgricolae.Visible = True
+                grpVerification.Visible = False
+                grpCoin.Visible = False
+                grpTrend.Visible = False
+            Case "Verification"
+                strPackageName = "verification"
+                grpStats1.Visible = False
+                grpStats2.Visible = False
+                grpAgricolae.Visible = False
+                grpVerification.Visible = True
+                grpCoin.Visible = False
+                grpTrend.Visible = False
+            Case "Coin"
+                strPackageName = "coin"
+                grpStats1.Visible = False
+                grpStats2.Visible = False
+                grpAgricolae.Visible = False
+                grpVerification.Visible = False
+                grpCoin.Visible = True
+                grpTrend.Visible = False
+            Case "Trend"
+                strPackageName = "trend"
+                grpStats1.Visible = False
+                grpStats2.Visible = False
+                grpAgricolae.Visible = False
+                grpVerification.Visible = False
+                grpCoin.Visible = False
+                grpTrend.Visible = True
+
         End Select
     End Sub
 
@@ -584,6 +647,7 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Dim clsHelp As New RFunction
+
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
         clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
@@ -599,4 +663,379 @@ Public Class dlgHypothesisTestsCalculator
         ucrReceiverForTestColumn.AddtoCombobox(ucrReceiverForTestColumn.GetText)
     End Sub
 
+    Private Sub cmdBinary_Click(sender As Object, e As EventArgs) Handles cmdBinary.Click
+        clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs = , pred, p = NULL, baseline = NULL, frcst.type = ""prob"", obs.type = ""binary"",thresholds = seq(0,1,0.1), show = TRUE, bins = TRUE,fudge = 0.01)", 142)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs = , pred = , frcst.type = ""bin"", obs.type = ""bin"" )", 50)
+        End If
+    End Sub
+
+    Private Sub cmdCat_Click(sender As Object, e As EventArgs) Handles cmdCat.Click
+        clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs = , pred, p = NULL, baseline = NULL, frcst.type = ""prob"", obs.type = ""binary"",thresholds = seq(0,1,0.1), show = TRUE, bins = TRUE,fudge = 0.01)", 142)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs = , pred = , frcst.type = ""cat"", obs.type = ""cat"" )", 50)
+        End If
+    End Sub
+
+    Private Sub cmdCont_Click(sender As Object, e As EventArgs) Handles cmdCont.Click
+        clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs = , pred, p = NULL, baseline = NULL, frcst.type = ""prob"", obs.type = ""binary"",thresholds = seq(0,1,0.1), show = TRUE, bins = TRUE,fudge = 0.01)", 142)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("verification::verify(obs = , pred = , frcst.type = ""cont"", obs.type = ""cont"" )", 52)
+        End If
+    End Sub
+
+    Private Sub ucrChkSummaryDisplayModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummaryModel.ControlValueChanged
+        If ucrChkSummaryModel.Checked Then
+            clsSummary.iCallType = 2
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSummary, 0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummary)
+        End If
+    End Sub
+
+    Private Sub ucrChkDisplayModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayModel.ControlValueChanged
+        If ucrChkDisplayModel.Checked Then
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        Else
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        End If
+    End Sub
+
+    Private Sub cmdOneway1_Click(sender As Object, e As EventArgs) Handles cmdOneway1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::oneway_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdWilcox1_Click(sender As Object, e As EventArgs) Handles cmdWilcox1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcox_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcox_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdKruskal1_Click(sender As Object, e As EventArgs) Handles cmdKruskal1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::kruskal_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::kruskal_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdNormal_Click(sender As Object, e As EventArgs) Handles cmdNormal.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::normal_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::normal_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMedian1_Click(sender As Object, e As EventArgs) Handles cmdMedian1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::median_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::median_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSavage_Click(sender As Object, e As EventArgs) Handles cmdSavage.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::savage_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::savage_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSign_Click(sender As Object, e As EventArgs) Handles cmdSign.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::sign_test(formula = , data = , subset = NULL)", 26)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::sign_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdWilcoksign_Click(sender As Object, e As EventArgs) Handles cmdWilcoxsign.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcoxsign_test(formula = , data = , subset = NULL)", 26)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::wilcoxsign_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdFriedman1_Click(sender As Object, e As EventArgs) Handles cmdFriedman1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::friedman_test(object = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::friedman_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdQuade1_Click(sender As Object, e As EventArgs) Handles cmdQuade1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quade_test(object = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quade_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdTaha_Click(sender As Object, e As EventArgs) Handles cmdTaha.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::taha_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::taha_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdKlotz_Click(sender As Object, e As EventArgs) Handles cmdKlotz.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::klotz_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::klotz_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMood1_Click(sender As Object, e As EventArgs) Handles cmdMood1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::mood_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::mood_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAnsari1_Click(sender As Object, e As EventArgs) Handles cmdAnsari1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::ansari_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::ansari_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdFligner1_Click(sender As Object, e As EventArgs) Handles cmdFligner1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fligner_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fligner_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdConover_Click(sender As Object, e As EventArgs) Handles cmdConover.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::conover_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::conover_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSpearman_Click(sender As Object, e As EventArgs) Handles cmdSpearman.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::spearman_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::spearman_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdFisyat_Click(sender As Object, e As EventArgs) Handles cmdFisyat.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fisyat_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::fisyat_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdQuadrant_Click(sender As Object, e As EventArgs) Handles cmdQuadrant.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quadrant_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::quadrant_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdKoziol_Click(sender As Object, e As EventArgs) Handles cmdKoziol.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::koziol_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::koziol_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdChisq1_Click(sender As Object, e As EventArgs) Handles cmdChisq1.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::chisq_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::chisq_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCmh_Click(sender As Object, e As EventArgs) Handles cmdCmh.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::cmh_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::cmh_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdLbl_Click(sender As Object, e As EventArgs) Handles cmdLbl.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::lbl_test(formula = , data = , subset = NULL, weights = NULL)", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("coin::lbl_test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdBartels_Click(sender As Object, e As EventArgs) Handles cmdBartels.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::bartels.test(x = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::bartels.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdBr_Click(sender As Object, e As EventArgs) Handles cmdBr.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::br.test(x = , m = 20000)", 13)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::br.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdBu_Click(sender As Object, e As EventArgs) Handles cmdBu.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::bu.test(x = , m = 20000)", 13)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::bu.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCs_Click(sender As Object, e As EventArgs) Handles cmdCs.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::cs.test(x = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::cs.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCsmk_Click(sender As Object, e As EventArgs) Handles cmdCsmk.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::csmk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""))", 51)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::csmk.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdLanzante_Click(sender As Object, e As EventArgs) Handles cmdLanzante.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::lanzante.test(x = , method = c(""wilcox.test"", ""rrod.test""))", 42)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::lanzante.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMk_Click(sender As Object, e As EventArgs) Handles cmdMk.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::mk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""), continuity = TRUE)", 70)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::mk.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMmk_Click(sender As Object, e As EventArgs) Handles cmdMmk.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::mult.mk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""))", 51)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::mult.mk.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPcor_Click(sender As Object, e As EventArgs) Handles cmdPcor.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::partial.cor.trend.test(x = , z = , method = c(""pearson"", ""spearman""))", 43)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::partial.cor.trend.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPmk_Click(sender As Object, e As EventArgs) Handles cmdPmk.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::partial.mk.test(x = , y = , alternative = c(""two.sided"", ""greater"", ""less""))", 57)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::partial.mk.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPettitt_Click(sender As Object, e As EventArgs) Handles cmdPettitt.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::pettitt.test(x = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::pettitt.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdRrod_Click(sender As Object, e As EventArgs) Handles cmdRrod.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::rrod.test(x = , y = , alternative = c(""two.sided"", ""less"", ""greater""))", 57)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::rrod.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSsens_Click(sender As Object, e As EventArgs) Handles cmdSsens.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::sea.sens.slope(x = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::sea.sens.slope()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSens_Click(sender As Object, e As EventArgs) Handles cmdSens.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::sens.slope(x = , conf.level = 0.95)", 21)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::sens.slope()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSmk_Click(sender As Object, e As EventArgs) Handles cmdSmk.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::smk.test(x = , alternative = c(""two.sided"", ""greater"", ""less""), continuity = TRUE)", 70)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::smk.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdSnh_Click(sender As Object, e As EventArgs) Handles cmdSnh.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::snh.test(x = , m = 20000)", 13)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::snh.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdWw_Click(sender As Object, e As EventArgs) Handles cmdWw.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::ww.test(x = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::ww.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdWm_Click(sender As Object, e As EventArgs) Handles cmdWm.Click
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::wm.test(x = )", 2)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::wm.test()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("I()", 1)
+    End Sub
 End Class

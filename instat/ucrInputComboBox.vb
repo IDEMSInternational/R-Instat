@@ -250,6 +250,9 @@ Public Class ucrInputComboBox
     Private Sub cboInput_TextChanged(sender As Object, e As EventArgs) Handles cboInput.TextChanged
         OnContentsChanged()
     End Sub
+    Private Sub cboInput_Click(sender As Object, e As EventArgs) Handles cboInput.Click
+        OnControlClicked()
+    End Sub
 
     Private Sub mnuRightClickCopy_Click(sender As Object, e As EventArgs) Handles mnuRightClickCopy.Click
         If cboInput.SelectedText <> "" Then
@@ -315,5 +318,9 @@ Public Class ucrInputComboBox
         If strValueMember <> "" Then
             cboInput.ValueMember = strValueMember
         End If
+    End Sub
+
+    Friend Sub AddToReceiverAtCursorPosition(v As String)
+        Throw New NotImplementedException()
     End Sub
 End Class
