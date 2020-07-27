@@ -63,9 +63,9 @@ Partial Class dlgImportDataset
         Me.ucrInputEncodingCSV = New instat.ucrInputComboBox()
         Me.grpExcel = New System.Windows.Forms.GroupBox()
         Me.lblTo = New System.Windows.Forms.Label()
+        Me.ucrChkRange = New instat.ucrCheck()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.ucrInputTextTo = New instat.ucrInputTextBox()
-        Me.ucrChkRange = New instat.ucrCheck()
         Me.ucrInputTextFrom = New instat.ucrInputTextBox()
         Me.ucrNudMaxRowsExcel = New instat.ucrNud()
         Me.ucrChkColumnNamesExcel = New instat.ucrCheck()
@@ -309,6 +309,12 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.lblTo, "lblTo")
         Me.lblTo.Name = "lblTo"
         '
+        'ucrChkRange
+        '
+        Me.ucrChkRange.Checked = False
+        resources.ApplyResources(Me.ucrChkRange, "ucrChkRange")
+        Me.ucrChkRange.Name = "ucrChkRange"
+        '
         'lblFrom
         '
         resources.ApplyResources(Me.lblFrom, "lblFrom")
@@ -321,12 +327,6 @@ Partial Class dlgImportDataset
         Me.ucrInputTextTo.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputTextTo, "ucrInputTextTo")
         Me.ucrInputTextTo.Name = "ucrInputTextTo"
-        '
-        'ucrChkRange
-        '
-        Me.ucrChkRange.Checked = False
-        resources.ApplyResources(Me.ucrChkRange, "ucrChkRange")
-        Me.ucrChkRange.Name = "ucrChkRange"
         '
         'ucrInputTextFrom
         '
