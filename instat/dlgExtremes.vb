@@ -22,6 +22,7 @@ Public Class dlgExtremes
     Private clsDetach As New RFunction
     Private clsFevdFunction, clsNaExclude, clsConvertVector As New RFunction
     Private clsFevdPlotsFunction As New RFunction
+    Private clsLocationParamOperator As New ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetFittingOptions As Boolean = False
@@ -46,7 +47,6 @@ Public Class dlgExtremes
 
         ucrReceiverVariable.Selector = ucrSelectorExtremes
         ucrReceiverVariable.strSelectorHeading = "Variables"
-        ucrReceiverVariable.SetMeAsReceiver()
         ucrReceiverVariable.SetParameter(New RParameter("x", 0))
         ucrReceiverVariable.SetParameterIsRFunction()
 
@@ -69,13 +69,13 @@ Public Class dlgExtremes
         ucrReceiverVariable.SetParameterIsRFunction()
 
         ucrChkExplanatoryModelForLocationParameter.SetText("Explanatory Model for Location")
-        ucrChkExplanatoryModelForLocationParameter.SetParameter(New RParameter(" location.fun", 3), bNewChangeParameterValue:=False)
-        ucrChkExplanatoryModelForLocationParameter.AddToLinkedControls(ucrReceiverExpressionExplanatoryModelForLocParam, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkExplanatoryModelForLocationParameter.AddParameterPresentCondition(True, "location.fun", True)
+        ucrChkExplanatoryModelForLocationParameter.AddParameterPresentCondition(False, "location.fun", False)
+        ucrChkExplanatoryModelForLocationParameter.AddToLinkedControls(ucrReceiverExpressionExplanatoryModelForLocParam, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
-        ucrReceiverExpressionExplanatoryModelForLocParam.SetParameter(New RParameter(" location.fun", 3))
+        ucrReceiverExpressionExplanatoryModelForLocParam.SetParameter(New RParameter(" locationParam", 1, bNewIncludeArgumentName:=False))
         ucrReceiverExpressionExplanatoryModelForLocParam.SetParameterIsString()
         ucrReceiverExpressionExplanatoryModelForLocParam.bWithQuotes = False
-        ucrReceiverExpressionExplanatoryModelForLocParam.SetText("~1")
 
         ucrTryModelling.SetReceiver(ucrReceiverExpressionExplanatoryModelForLocParam)
         ucrTryModelling.SetIsModel()
@@ -93,12 +93,18 @@ Public Class dlgExtremes
         clsFevdPlotsFunction = New RFunction
         clsNaExclude = New RFunction
         clsConvertVector = New RFunction
+        clsLocationParamOperator = New ROperator
 
         ucrBase.clsRsyntax.ClearCodes()
 
-        ucrSaveExtremes.Reset()
+        ucrReceiverVariable.SetMeAsReceiver()
         ucrSelectorExtremes.Reset()
+        ucrReceiverExpressionExplanatoryModelForLocParam.SetText("1")
         ucrReceiverExpressionExplanatoryModelForLocParam.Selector = ucrSelectorExtremes
+
+        clsLocationParamOperator.SetOperation("~")
+        clsLocationParamOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
+        clsLocationParamOperator.bSpaceAroundOperation = False
 
         clsNaExclude.SetPackageName("stats")
         clsNaExclude.SetRCommand("na.exclude")
@@ -118,6 +124,7 @@ Public Class dlgExtremes
         clsFevdFunction.AddParameter("x", clsRFunctionParameter:=clsConvertVector, iPosition:=0)
         clsFevdFunction.AddParameter("type", Chr(34) & "GEV" & Chr(34), iPosition:=1)
         clsFevdFunction.AddParameter("method", Chr(34) & "MLE" & Chr(34), iPosition:=2)
+
 
 
         clsFevdFunction.SetAssignTo(ucrSaveExtremes.GetText(), strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
@@ -144,7 +151,7 @@ Public Class dlgExtremes
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
         ucrSaveExtremes.SetRCode(clsFevdFunction, bReset)
         ucrChkExplanatoryModelForLocationParameter.SetRCode(clsFevdFunction, bReset)
-        ucrReceiverExpressionExplanatoryModelForLocParam.SetRCode(clsFevdFunction, bReset)
+        ucrReceiverExpressionExplanatoryModelForLocParam.SetRCode(clsLocationParamOperator, bReset)
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -248,9 +255,12 @@ Public Class dlgExtremes
 
     Private Sub ucrChkExplanatoryModelForLocationParameter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExplanatoryModelForLocationParameter.ControlValueChanged
         If ucrChkExplanatoryModelForLocationParameter.Checked Then
+            clsFevdFunction.AddParameter("location.fun", clsROperatorParameter:=clsLocationParamOperator, iPosition:=3)
             grpFirstCalc.Visible = True
             grpSecondCalc.Visible = True
         Else
+            clsFevdFunction.RemoveParameterByName("location.fun")
+            ucrReceiverVariable.SetMeAsReceiver()
             grpFirstCalc.Visible = False
             grpSecondCalc.Visible = False
         End If
