@@ -19,7 +19,9 @@ Imports instat.Translations
 Public Class dlgInfillMissingValues
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsApproximateFunction, clsAggregateFunction, clsNaLocfFunction, clsSplineFunction, clsNaFillFunction, clsStructTSFunction, clsZooRegFunction As New RFunction
+    Private clsApproximateFunction, clsAggregateFunction, clsNaLocfFunction, clsSplineFunction, clsNaFillFunction, clsStructTSFunction, clsZooRegFunction, clsSetSeedFunction, clsAveFunction As New RFunction
+    Private clsBracketOperator As New ROperator
+    Private clsNewObject As New RCodeStructure
     Private Sub dlgInfillMissingValues_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -40,7 +42,7 @@ Public Class dlgInfillMissingValues
         rdoNeighbouring.Enabled = False
         rdoMultiple.Enabled = False
         ucrPnlOptions.AddRadioButton(rdoSingle)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, {"na.approx", "na.aggregate", "na.fill", "na.locf", "na.StructTS", "na.spline"})
+        ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, {"ave", "na.aggregate"})
 
         ucrPnlMethods.AddRadioButton(rdoNaAggregate)
         ucrPnlMethods.AddRadioButton(rdoNaApproximate)
@@ -56,33 +58,35 @@ Public Class dlgInfillMissingValues
         ucrPnlMethods.AddFunctionNamesCondition(rdoNaStructTS, "na.StructTS")
         ucrPnlMethods.AddFunctionNamesCondition(rdoNaSpline, "na.spline")
 
-        ucrPnlStartEnd.SetParameter(New RParameter("fill", 1))
-        ucrPnlStartEnd.AddRadioButton(rdoLeaveAsMissing, "list(NA, ""extend"", NA)")
-        ucrPnlStartEnd.AddRadioButton(rdoExtendFill, Chr(34) & "extend" & Chr(34))
-        ucrPnlStartEnd.AddRadioButton(rdoInsertConstant)
-        ucrPnlStartEnd.AddParameterValuesCondition(rdoLeaveAsMissing, "fill", "list(NA, ""extend"", NA)")
-        ucrPnlStartEnd.AddParameterValuesCondition(rdoExtendFill, "fill", Chr(34) & "extend" & Chr(34))
-        ucrPnlStartEnd.AddParameterValuesCondition(rdoInsertConstant, "fill", {"list(NA, ""extend"", NA)", Chr(34) & "extend" & Chr(34)}, False)
+        ucrPnlStartEnd.AddRadioButton(rdoLeaveAsMissing)
+        ucrPnlStartEnd.AddRadioButton(rdoExtendFill)
 
-        ucrReceiverElement.SetParameter(New RParameter("object", 0))
+        ucrReceiverElement.SetParameter(New RParameter("x", 0))
         ucrReceiverElement.Selector = ucrSelectorInfillMissing
         ucrReceiverElement.SetParameterIsRFunction()
         ucrReceiverElement.bUseFilteredData = False
+
+        ucrReceiverStation.SetParameter(New RParameter("factor", 1, bNewIncludeArgumentName:=False))
+        ucrReceiverStation.Selector = ucrSelectorInfillMissing
+        ucrReceiverStation.SetParameterIsRFunction()
+        ucrReceiverStation.SetClimaticType("station")
+        ucrReceiverStation.bUseFilteredData = False
+        ucrReceiverStation.bAutoFill = True
 
         ucrInputConstant.SetValidationTypeAsNumeric()
         ucrInputConstant.AddQuotesIfUnrecognised = False
 
         ucrInputComboFunction.SetParameter(New RParameter("FUN", 2))
-        dctFunctionNames.Add("Mean", "mean")
-        dctFunctionNames.Add("Median", "median")
+        dctFunctionNames.Add("Mean", "summary_mean")
+        dctFunctionNames.Add("Median", "summary_median")
+        dctFunctionNames.Add("Sample", "summary_sample")
         ucrInputComboFunction.SetItems(dctFunctionNames)
         ucrInputComboFunction.SetDropDownStyleAsNonEditable()
-        ucrInputComboFunction.SetRDefault("mean")
 
-        ucrChkCopyFromAbove.SetParameter(New RParameter("fromLast", 1))
-        ucrChkCopyFromAbove.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
-        ucrChkCopyFromAbove.SetText("Copy from Above")
-        ucrChkCopyFromAbove.SetRDefault("FALSE")
+        ucrChkCopyFromBelow.SetParameter(New RParameter("fromLast", 1))
+        ucrChkCopyFromBelow.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkCopyFromBelow.SetText("Copy from Below")
+        ucrChkCopyFromBelow.SetRDefault("FALSE")
 
         ucrChkBy.SetText("By:")
         ucrChkBy.AddParameterPresentCondition(True, "by")
@@ -92,27 +96,38 @@ Public Class dlgInfillMissingValues
         ucrChkMaxGap.AddParameterPresentCondition(True, "maxgap")
         ucrChkMaxGap.AddParameterPresentCondition(False, "maxgap", False)
 
-        ucrReceiverByFactor.SetParameter(New RParameter("by", 1))
+        ucrReceiverByFactor.SetParameter(New RParameter("by", 1, bNewIncludeArgumentName:=False))
         ucrReceiverByFactor.Selector = ucrSelectorInfillMissing
         ucrReceiverByFactor.SetParameterIsRFunction()
         ucrReceiverByFactor.SetIncludedDataTypes({"factor", "character"}, bStrict:=True)
-        ucrReceiverByFactor.strSelectorHeading = "Factors"
+        ucrReceiverByFactor.strSelectorHeading = "Factors and Characters"
         ucrReceiverByFactor.SetClimaticType("month")
         ucrReceiverByFactor.bAutoFill = True
 
         ucrNudMaximum.SetParameter(New RParameter("maxgap", 5))
         ucrNudMaximum.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
 
-        ucrPnlStartEnd.AddToLinkedControls(ucrInputConstant, {rdoInsertConstant}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrPnlMethods.AddToLinkedControls(ucrInputComboFunction, {rdoNaAggregate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
+
+        ucrChkSetSeed.SetText("Set Seed:")
+        ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(True, {"set.seed"})
+        ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(False, {"set.seed"}, False)
+
+        ucrPnlStartEnd.AddToLinkedControls(ucrInputConstant, {rdoLeaveAsMissing, rdoExtendFill}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMethods.AddToLinkedControls(ucrInputComboFunction, {rdoNaAggregate}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMethods.AddToLinkedControls(ucrReceiverStation, {rdoNaApproximate, rdoNaFill, rdoNaSpline, rdoNaLocf, rdoNaStructTS}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrPnlStartEnd, {rdoNaFill}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMethods.AddToLinkedControls(ucrChkCopyFromAbove, {rdoNaLocf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMethods.AddToLinkedControls(ucrChkCopyFromBelow, {rdoNaLocf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrChkBy, {rdoNaAggregate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkBy.AddToLinkedControls(ucrReceiverByFactor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkMaxGap.AddToLinkedControls(ucrNudMaximum, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrInputComboFunction.AddToLinkedControls(ucrChkSetSeed, {"Sample"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrInputComboFunction.SetLinkedDisplayControl(lblFunction)
         ucrPnlStartEnd.SetLinkedDisplayControl(grpStartEnd)
         ucrNudMaximum.SetLinkedDisplayControl(lblRows)
+        ucrReceiverStation.SetLinkedDisplayControl(lblStation)
+        ucrInputConstant.SetLinkedDisplayControl(lblValue)
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorInfillMissing.ucrAvailableDataFrames)
         ucrSaveNewColumn.SetSaveTypeAsColumn()
         ucrSaveNewColumn.SetIsComboBox()
@@ -127,29 +142,41 @@ Public Class dlgInfillMissingValues
         clsNaFillFunction = New RFunction
         clsStructTSFunction = New RFunction
         clsZooRegFunction = New RFunction
+        clsSetSeedFunction = New RFunction
+        clsAveFunction = New RFunction
+
+        clsBracketOperator = New ROperator
 
         ucrSelectorInfillMissing.Reset()
         ucrReceiverElement.SetMeAsReceiver()
         ucrSaveNewColumn.Reset()
         'Temp fix: Set panel conditions properly!
         rdoLeaveAsMissing.Checked = True
+        rdoNaApproximate.Checked = True
+        ucrInputConstant.SetName("0")
 
         clsApproximateFunction.SetPackageName("zoo")
         clsApproximateFunction.SetRCommand("na.approx")
+        clsApproximateFunction.AddParameter("x", "x", iPosition:=0, bIncludeArgumentName:=False)
         clsApproximateFunction.AddParameter("rule", 2, iPosition:=1)
 
         clsAggregateFunction.SetPackageName("zoo")
         clsAggregateFunction.SetRCommand("na.aggregate")
+        clsAggregateFunction.AddParameter("FUN", "summary_mean", iPosition:=2)
+
+        clsSetSeedFunction.SetRCommand("set.seed")
 
         clsNaLocfFunction.SetPackageName("zoo")
-        clsNaLocfFunction.SetRCommand("na.locf")
+        clsNaLocfFunction.SetRCommand("na.locf0")
+        clsNaLocfFunction.AddParameter("x", "x", iPosition:=0, bIncludeArgumentName:=False)
 
         clsSplineFunction.SetPackageName("zoo")
         clsSplineFunction.SetRCommand("na.spline")
+        clsSplineFunction.AddParameter("x", "x", iPosition:=0, bIncludeArgumentName:=False)
 
         clsNaFillFunction.SetPackageName("zoo")
         clsNaFillFunction.SetRCommand("na.fill")
-        clsNaFillFunction.AddParameter("fill", "list(NA, ""extend"", NA)", iPosition:=1)
+        clsNaFillFunction.AddParameter("x", "x", iPosition:=0, bIncludeArgumentName:=False)
 
         clsStructTSFunction.SetPackageName("zoo")
         clsStructTSFunction.SetRCommand("na.StructTS")
@@ -158,16 +185,23 @@ Public Class dlgInfillMissingValues
         clsZooRegFunction.SetPackageName("zoo")
         clsZooRegFunction.SetRCommand("zooreg")
         clsZooRegFunction.AddParameter("frequency", 2, iPosition:=0)
+        clsZooRegFunction.AddParameter("x", "x", iPosition:=0, bIncludeArgumentName:=False)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsApproximateFunction)
+        clsAveFunction.SetPackageName("stats")
+        clsAveFunction.SetRCommand("ave")
+
+        clsBracketOperator.SetOperation(")")
+        clsBracketOperator.AddParameter("left", "function(x", iPosition:=0)
+        clsBracketOperator.bBrackets = False
+        clsBracketOperator.bSpaceAroundOperation = False
+
+        ucrBase.clsRsyntax.ClearCodes()
+        clsNewObject = clsAggregateFunction
+        ucrBase.clsRsyntax.SetBaseRFunction(clsAveFunction)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsAggregateFunction, ucrReceiverElement.GetParameter(), iAdditionalPairNo:=1)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsSplineFunction, ucrReceiverElement.GetParameter(), iAdditionalPairNo:=2)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsNaLocfFunction, ucrReceiverElement.GetParameter(), iAdditionalPairNo:=3)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsNaFillFunction, ucrReceiverElement.GetParameter(), iAdditionalPairNo:=4)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsZooRegFunction, New RParameter("data", 0), iAdditionalPairNo:=5)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsAggregateFunction, New RParameter("object", 0), iAdditionalPairNo:=1)
 
         ucrNudMaximum.AddAdditionalCodeParameterPair(clsAggregateFunction, ucrNudMaximum.GetParameter(), iAdditionalPairNo:=1)
         ucrNudMaximum.AddAdditionalCodeParameterPair(clsSplineFunction, ucrNudMaximum.GetParameter(), iAdditionalPairNo:=2)
@@ -175,51 +209,58 @@ Public Class dlgInfillMissingValues
         ucrNudMaximum.AddAdditionalCodeParameterPair(clsNaFillFunction, ucrNudMaximum.GetParameter(), iAdditionalPairNo:=4)
         ucrNudMaximum.AddAdditionalCodeParameterPair(clsStructTSFunction, ucrNudMaximum.GetParameter(), iAdditionalPairNo:=5)
 
-        ucrReceiverElement.SetRCode(clsApproximateFunction, bReset)
+        ucrReceiverElement.SetRCode(clsAveFunction, bReset)
+        ucrReceiverStation.SetRCode(clsAveFunction, bReset)
         ucrReceiverByFactor.SetRCode(clsAggregateFunction, bReset)
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlMethods.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'ucrPnlMethods.SetRCode(clsNewObject, bReset)
         ucrInputComboFunction.SetRCode(clsAggregateFunction, bReset)
-        ucrChkCopyFromAbove.SetRCode(clsNaLocfFunction, bReset)
-        ucrPnlStartEnd.SetRCode(clsNaFillFunction, bReset)
+        ucrChkCopyFromBelow.SetRCode(clsNaLocfFunction, bReset)
         ucrChkBy.SetRCode(clsAggregateFunction, bReset)
         ucrNudMaximum.SetRCode(clsApproximateFunction, bReset)
         ucrChkMaxGap.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrNudSetSeed.SetRCode(clsSetSeedFunction, bReset)
+        ucrChkSetSeed.SetRSyntax(ucrBase.clsRsyntax, bReset)
 
         ucrSaveNewColumn.AddAdditionalRCode(clsAggregateFunction, iAdditionalPairNo:=1)
-        ucrSaveNewColumn.AddAdditionalRCode(clsSplineFunction, iAdditionalPairNo:=2)
-        ucrSaveNewColumn.AddAdditionalRCode(clsNaLocfFunction, iAdditionalPairNo:=3)
-        ucrSaveNewColumn.AddAdditionalRCode(clsNaFillFunction, iAdditionalPairNo:=4)
-        ucrSaveNewColumn.AddAdditionalRCode(clsStructTSFunction, iAdditionalPairNo:=5)
 
-        ucrSaveNewColumn.SetRCode(clsApproximateFunction, bReset)
+        ucrSaveNewColumn.SetRCode(clsAveFunction, bReset)
     End Sub
 
     Private Sub ucrPnlMethods_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethods.ControlValueChanged, ucrReceiverElement.ControlValueChanged
+        ucrBase.clsRsyntax.SetBaseRFunction(clsAveFunction)
+        clsNewObject = clsBracketOperator
         If rdoNaApproximate.Checked Then
             ucrSaveNewColumn.SetPrefix("Int_" & ucrReceiverElement.GetVariableNames(False))
-            ucrBase.clsRsyntax.SetBaseRFunction(clsApproximateFunction)
+            clsBracketOperator.AddParameter("right", clsRFunctionParameter:=clsApproximateFunction, iPosition:=1)
         ElseIf rdoNaAggregate.Checked Then
-            ucrSaveNewColumn.SetPrefix("Ave_" & ucrReceiverElement.GetVariableNames(False))
+            ucrReceiverElement.SetMeAsReceiver()
+            ucrSaveNewColumn.SetPrefix("Typ_" & ucrReceiverElement.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsAggregateFunction)
+            clsNewObject = clsAggregateFunction
         ElseIf rdoNaFill.Checked Then
             ucrSaveNewColumn.SetPrefix("Con_" & ucrReceiverElement.GetVariableNames(False))
-            ucrBase.clsRsyntax.SetBaseRFunction(clsNaFillFunction)
+            clsBracketOperator.AddParameter("right", clsRFunctionParameter:=clsNaFillFunction, iPosition:=1)
         ElseIf rdoNaStructTS.Checked Then
             ucrSaveNewColumn.SetPrefix("Str_" & ucrReceiverElement.GetVariableNames(False))
-            ucrBase.clsRsyntax.SetBaseRFunction(clsStructTSFunction)
+            clsBracketOperator.AddParameter("right", clsRFunctionParameter:=clsStructTSFunction, iPosition:=1)
         ElseIf rdoNaSpline.Checked Then
             ucrSaveNewColumn.SetPrefix("Spl_" & ucrReceiverElement.GetVariableNames(False))
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSplineFunction)
+            clsBracketOperator.AddParameter("right", clsRFunctionParameter:=clsSplineFunction, iPosition:=1)
         ElseIf rdoNaLocf.Checked Then
             ucrSaveNewColumn.SetPrefix("Cop_" & ucrReceiverElement.GetVariableNames(False))
-            ucrBase.clsRsyntax.SetBaseRFunction(clsNaLocfFunction)
+            clsBracketOperator.AddParameter("right", clsRFunctionParameter:=clsNaLocfFunction, iPosition:=1)
         End If
+        clsAveFunction.AddParameter("FUN", clsROperatorParameter:=clsBracketOperator, iPosition:=2)
     End Sub
 
     Private Sub ucrPnlStartEnd_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStartEnd.ControlValueChanged, ucrInputConstant.ControlValueChanged
-        If rdoInsertConstant.Checked Then
-            clsNaFillFunction.AddParameter("fill", ucrInputConstant.GetText(), iPosition:=1)
+        If rdoLeaveAsMissing.Checked Then
+            clsNaFillFunction.AddParameter("fill", "list(" & "NA," & ucrInputConstant.GetValue() & ",NA" & ")", iPosition:=1)
+        ElseIf rdoExtendFill.Checked Then
+            clsNaFillFunction.AddParameter("fill", "list(" & Chr(34) & "extend" & Chr(34) & "," & ucrInputConstant.GetValue() & "," & Chr(34) & "extend" & Chr(34) & ")", iPosition:=1)
+        Else
+            clsNaFillFunction.RemoveParameterByName("fill")
         End If
     End Sub
 
@@ -231,8 +272,25 @@ Public Class dlgInfillMissingValues
         End If
     End Sub
 
+    Private Sub ucrInputComboFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboFunction.ControlValueChanged, ucrPnlMethods.ControlValueChanged, ucrChkSetSeed.ControlValueChanged
+        If rdoNaAggregate.Checked Then
+            If ucrChkSetSeed.Checked Then
+                Select Case ucrInputComboFunction.GetValue()
+                    Case "Sample"
+                        ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeedFunction, 0)
+                    Case Else
+                        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
+                End Select
+            Else
+                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
+            End If
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
+        End If
+    End Sub
+
     Private Sub TestOkEnabled()
-        If ucrReceiverElement.IsEmpty OrElse Not ucrSaveNewColumn.IsComplete Then
+        If ucrReceiverElement.IsEmpty OrElse Not ucrSaveNewColumn.IsComplete OrElse (rdoNaFill.Checked AndAlso ((rdoLeaveAsMissing.Checked OrElse rdoExtendFill.Checked) AndAlso ucrInputConstant.IsEmpty)) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -245,7 +303,7 @@ Public Class dlgInfillMissingValues
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged
+    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged, ucrPnlStartEnd.ControlContentsChanged, ucrInputConstant.ControlContentsChanged, ucrPnlMethods.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

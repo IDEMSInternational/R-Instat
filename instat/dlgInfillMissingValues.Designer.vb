@@ -34,26 +34,30 @@ Partial Class dlgInfillMissingValues
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.rdoNeighbouring = New System.Windows.Forms.RadioButton()
         Me.grpMethods = New System.Windows.Forms.GroupBox()
-        Me.rdoInsertConstant = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpStartEnd = New System.Windows.Forms.GroupBox()
         Me.rdoExtendFill = New System.Windows.Forms.RadioButton()
         Me.rdoLeaveAsMissing = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlStartEnd = New instat.UcrPanel()
+        Me.lblValue = New System.Windows.Forms.Label()
+        Me.ucrInputConstant = New instat.ucrInputTextBox()
         Me.lblFunction = New System.Windows.Forms.Label()
         Me.lblRows = New System.Windows.Forms.Label()
+        Me.ucrChkSetSeed = New instat.ucrCheck()
+        Me.ucrNudSetSeed = New instat.ucrNud()
         Me.ucrNudMaximum = New instat.ucrNud()
         Me.ucrChkMaxGap = New instat.ucrCheck()
-        Me.ucrReceiverByFactor = New instat.ucrReceiverSingle()
         Me.ucrChkBy = New instat.ucrCheck()
-        Me.ucrChkCopyFromAbove = New instat.ucrCheck()
-        Me.ucrInputConstant = New instat.ucrInputTextBox()
-        Me.ucrPnlStartEnd = New instat.UcrPanel()
+        Me.ucrChkCopyFromBelow = New instat.ucrCheck()
         Me.ucrSaveNewColumn = New instat.ucrSave()
         Me.ucrInputComboFunction = New instat.ucrInputComboBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorInfillMissing = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrPnlMethods = New instat.UcrPanel()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
+        Me.lblStation = New System.Windows.Forms.Label()
         Me.grpMethods.SuspendLayout()
         Me.grpStartEnd.SuspendLayout()
         Me.SuspendLayout()
@@ -148,18 +152,14 @@ Partial Class dlgInfillMissingValues
         Me.grpMethods.Name = "grpMethods"
         Me.grpMethods.TabStop = False
         '
-        'rdoInsertConstant
+        'ucrPnlMethods
         '
-        resources.ApplyResources(Me.rdoInsertConstant, "rdoInsertConstant")
-        Me.rdoInsertConstant.Name = "rdoInsertConstant"
-        Me.rdoInsertConstant.TabStop = True
-        Me.rdoInsertConstant.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
+        Me.ucrPnlMethods.Name = "ucrPnlMethods"
         '
         'grpStartEnd
         '
-        Me.grpStartEnd.Controls.Add(Me.ucrInputConstant)
         Me.grpStartEnd.Controls.Add(Me.rdoExtendFill)
-        Me.grpStartEnd.Controls.Add(Me.rdoInsertConstant)
         Me.grpStartEnd.Controls.Add(Me.rdoLeaveAsMissing)
         Me.grpStartEnd.Controls.Add(Me.ucrPnlStartEnd)
         resources.ApplyResources(Me.grpStartEnd, "grpStartEnd")
@@ -180,6 +180,24 @@ Partial Class dlgInfillMissingValues
         Me.rdoLeaveAsMissing.TabStop = True
         Me.rdoLeaveAsMissing.UseVisualStyleBackColor = True
         '
+        'ucrPnlStartEnd
+        '
+        resources.ApplyResources(Me.ucrPnlStartEnd, "ucrPnlStartEnd")
+        Me.ucrPnlStartEnd.Name = "ucrPnlStartEnd"
+        '
+        'lblValue
+        '
+        resources.ApplyResources(Me.lblValue, "lblValue")
+        Me.lblValue.Name = "lblValue"
+        '
+        'ucrInputConstant
+        '
+        Me.ucrInputConstant.AddQuotesIfUnrecognised = True
+        Me.ucrInputConstant.IsMultiline = False
+        Me.ucrInputConstant.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputConstant, "ucrInputConstant")
+        Me.ucrInputConstant.Name = "ucrInputConstant"
+        '
         'lblFunction
         '
         resources.ApplyResources(Me.lblFunction, "lblFunction")
@@ -189,6 +207,22 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me.lblRows, "lblRows")
         Me.lblRows.Name = "lblRows"
+        '
+        'ucrChkSetSeed
+        '
+        Me.ucrChkSetSeed.Checked = False
+        resources.ApplyResources(Me.ucrChkSetSeed, "ucrChkSetSeed")
+        Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
+        '
+        'ucrNudSetSeed
+        '
+        Me.ucrNudSetSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSetSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSetSeed, "ucrNudSetSeed")
+        Me.ucrNudSetSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSetSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSetSeed.Name = "ucrNudSetSeed"
+        Me.ucrNudSetSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudMaximum
         '
@@ -206,39 +240,17 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.ucrChkMaxGap, "ucrChkMaxGap")
         Me.ucrChkMaxGap.Name = "ucrChkMaxGap"
         '
-        'ucrReceiverByFactor
-        '
-        Me.ucrReceiverByFactor.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverByFactor, "ucrReceiverByFactor")
-        Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
-        Me.ucrReceiverByFactor.Selector = Nothing
-        Me.ucrReceiverByFactor.strNcFilePath = ""
-        Me.ucrReceiverByFactor.ucrSelector = Nothing
-        '
         'ucrChkBy
         '
         Me.ucrChkBy.Checked = False
         resources.ApplyResources(Me.ucrChkBy, "ucrChkBy")
         Me.ucrChkBy.Name = "ucrChkBy"
         '
-        'ucrChkCopyFromAbove
+        'ucrChkCopyFromBelow
         '
-        Me.ucrChkCopyFromAbove.Checked = False
-        resources.ApplyResources(Me.ucrChkCopyFromAbove, "ucrChkCopyFromAbove")
-        Me.ucrChkCopyFromAbove.Name = "ucrChkCopyFromAbove"
-        '
-        'ucrInputConstant
-        '
-        Me.ucrInputConstant.AddQuotesIfUnrecognised = True
-        Me.ucrInputConstant.IsMultiline = False
-        Me.ucrInputConstant.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputConstant, "ucrInputConstant")
-        Me.ucrInputConstant.Name = "ucrInputConstant"
-        '
-        'ucrPnlStartEnd
-        '
-        resources.ApplyResources(Me.ucrPnlStartEnd, "ucrPnlStartEnd")
-        Me.ucrPnlStartEnd.Name = "ucrPnlStartEnd"
+        Me.ucrChkCopyFromBelow.Checked = False
+        resources.ApplyResources(Me.ucrChkCopyFromBelow, "ucrChkCopyFromBelow")
+        Me.ucrChkCopyFromBelow.Name = "ucrChkCopyFromBelow"
         '
         'ucrSaveNewColumn
         '
@@ -279,21 +291,45 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
-        'ucrPnlMethods
+        'ucrReceiverStation
         '
-        resources.ApplyResources(Me.ucrPnlMethods, "ucrPnlMethods")
-        Me.ucrPnlMethods.Name = "ucrPnlMethods"
+        Me.ucrReceiverStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrReceiverByFactor
+        '
+        Me.ucrReceiverByFactor.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverByFactor, "ucrReceiverByFactor")
+        Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
+        Me.ucrReceiverByFactor.Selector = Nothing
+        Me.ucrReceiverByFactor.strNcFilePath = ""
+        Me.ucrReceiverByFactor.ucrSelector = Nothing
+        '
+        'lblStation
+        '
+        resources.ApplyResources(Me.lblStation, "lblStation")
+        Me.lblStation.Name = "lblStation"
         '
         'dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblValue)
+        Me.Controls.Add(Me.lblStation)
+        Me.Controls.Add(Me.ucrInputConstant)
+        Me.Controls.Add(Me.ucrReceiverByFactor)
+        Me.Controls.Add(Me.ucrReceiverStation)
+        Me.Controls.Add(Me.ucrChkSetSeed)
+        Me.Controls.Add(Me.ucrNudSetSeed)
         Me.Controls.Add(Me.lblRows)
         Me.Controls.Add(Me.ucrNudMaximum)
         Me.Controls.Add(Me.ucrChkMaxGap)
-        Me.Controls.Add(Me.ucrReceiverByFactor)
         Me.Controls.Add(Me.ucrChkBy)
-        Me.Controls.Add(Me.ucrChkCopyFromAbove)
+        Me.Controls.Add(Me.ucrChkCopyFromBelow)
         Me.Controls.Add(Me.grpStartEnd)
         Me.Controls.Add(Me.lblFunction)
         Me.Controls.Add(Me.ucrSaveNewColumn)
@@ -343,12 +379,16 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrPnlStartEnd As UcrPanel
     Friend WithEvents ucrInputComboFunction As ucrInputComboBox
     Friend WithEvents lblFunction As Label
-    Friend WithEvents ucrChkCopyFromAbove As ucrCheck
-    Friend WithEvents rdoInsertConstant As RadioButton
+    Friend WithEvents ucrChkCopyFromBelow As ucrCheck
     Friend WithEvents ucrInputConstant As ucrInputTextBox
     Friend WithEvents ucrChkBy As ucrCheck
-    Friend WithEvents ucrReceiverByFactor As ucrReceiverSingle
     Friend WithEvents ucrChkMaxGap As ucrCheck
     Friend WithEvents ucrNudMaximum As ucrNud
     Friend WithEvents lblRows As Label
+    Friend WithEvents ucrNudSetSeed As ucrNud
+    Friend WithEvents lblValue As Label
+    Friend WithEvents ucrChkSetSeed As ucrCheck
+    Friend WithEvents lblStation As Label
+    Friend WithEvents ucrReceiverByFactor As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
 End Class

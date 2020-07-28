@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ucrChkTwoDigitYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 34</value>
+    <value>133, 34</value>
   </data>
   <data name="ucrChkTwoDigitYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 20</value>
@@ -141,7 +141,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudCutoff.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 76</value>
+    <value>133, 74</value>
   </data>
   <data name="ucrNudCutoff.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
@@ -169,7 +169,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCutOffTwo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>127, 57</value>
+    <value>130, 57</value>
   </data>
   <data name="lblCutOffTwo.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 13</value>
@@ -193,7 +193,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputComboBoxMonthTwo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 100</value>
+    <value>133, 100</value>
   </data>
   <data name="ucrInputComboBoxMonthTwo.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 21</value>
@@ -220,7 +220,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblYearTwo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 19</value>
+    <value>9, 19</value>
   </data>
   <data name="lblYearTwo.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -253,13 +253,13 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>597, 477</value>
+    <value>517, 477</value>
   </data>
   <data name="txtTextDateFormats.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 17</value>
   </data>
   <data name="txtTextDateFormats.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 144</value>
+    <value>238, 134</value>
   </data>
   <data name="txtTextDateFormats.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -299,13 +299,13 @@ Examples:
     <value>0</value>
   </data>
   <data name="grpFormats.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 215</value>
+    <value>6, 169</value>
   </data>
   <data name="grpFormats.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 168</value>
+    <value>254, 161</value>
   </data>
   <data name="grpFormats.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>12</value>
   </data>
   <data name="grpFormats.Text" xml:space="preserve">
     <value>Format Description</value>
@@ -317,7 +317,7 @@ Examples:
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;grpFormats.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;grpFormats.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -329,16 +329,16 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="lblUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 144</value>
+    <value>111, 144</value>
   </data>
   <data name="lblUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 13</value>
+    <value>34, 13</value>
   </data>
   <data name="lblUnits.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="lblUnits.Text" xml:space="preserve">
-    <value>Units</value>
+    <value>Units:</value>
   </data>
   <data name="&gt;&gt;lblUnits.Name" xml:space="preserve">
     <value>lblUnits</value>
@@ -350,13 +350,13 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;lblUnits.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrDtpSpecifyOrigin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 110</value>
+    <value>110, 110</value>
   </data>
   <data name="ucrDtpSpecifyOrigin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 21</value>
+    <value>128, 21</value>
   </data>
   <data name="ucrDtpSpecifyOrigin.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -371,13 +371,13 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrDtpSpecifyOrigin.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrInputUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 140</value>
+    <value>145, 140</value>
   </data>
   <data name="ucrInputUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 21</value>
+    <value>93, 21</value>
   </data>
   <data name="ucrInputUnits.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -392,7 +392,7 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrInputUnits.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -599,10 +599,10 @@ Examples:
     <value>7</value>
   </data>
   <data name="grpFormatField.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 172</value>
+    <value>7, 169</value>
   </data>
   <data name="grpFormatField.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 124</value>
+    <value>254, 124</value>
   </data>
   <data name="grpFormatField.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -620,7 +620,7 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;grpFormatField.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="rdoSpecifyFormat.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -650,7 +650,7 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;rdoSpecifyFormat.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="rdoOrigin.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -680,7 +680,7 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;rdoOrigin.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="rdoDefaultFormat.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -710,7 +710,7 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;rdoDefaultFormat.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="ucrPnlFormat.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 47</value>
@@ -731,7 +731,7 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrPnlFormat.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="ucrReceiverForDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 25</value>
@@ -755,13 +755,13 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrReceiverForDate.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="ucrInputFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 110</value>
+    <value>110, 110</value>
   </data>
   <data name="ucrInputFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 21</value>
+    <value>128, 21</value>
   </data>
   <data name="ucrInputFormat.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -776,13 +776,13 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrInputFormat.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrInputOrigin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 80</value>
+    <value>110, 80</value>
   </data>
   <data name="ucrInputOrigin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 21</value>
+    <value>128, 21</value>
   </data>
   <data name="ucrInputOrigin.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -797,13 +797,13 @@ Examples:
     <value>grpSingleColumn</value>
   </data>
   <data name="&gt;&gt;ucrInputOrigin.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="grpSingleColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 51</value>
+    <value>238, 51</value>
   </data>
   <data name="grpSingleColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 336</value>
+    <value>267, 336</value>
   </data>
   <data name="grpSingleColumn.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -821,7 +821,7 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpSingleColumn.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="ucrInputDayThree.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 247</value>
@@ -1232,7 +1232,7 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="lblDayofMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 194</value>
+    <value>9, 194</value>
   </data>
   <data name="lblDayofMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 13</value>
@@ -1262,7 +1262,7 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="lblMonthThree.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 110</value>
+    <value>9, 110</value>
   </data>
   <data name="lblMonthThree.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
@@ -1292,7 +1292,7 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="lblYearThree.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 19</value>
+    <value>9, 19</value>
   </data>
   <data name="lblYearThree.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -1430,7 +1430,7 @@ Examples:
     <value>21</value>
   </data>
   <data name="grpThreeColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 51</value>
+    <value>238, 51</value>
   </data>
   <data name="grpThreeColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>267, 292</value>
@@ -1451,13 +1451,13 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpThreeColumns.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="cmdHelp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 389</value>
+    <value>406, 389</value>
   </data>
   <data name="cmdHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 22</value>
@@ -1478,7 +1478,7 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdHelp.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="rdoThreeColumns.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1490,7 +1490,7 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="rdoThreeColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 11</value>
+    <value>324, 8</value>
   </data>
   <data name="rdoThreeColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 28</value>
@@ -1514,7 +1514,7 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoThreeColumns.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="rdoTwoColumns.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1526,7 +1526,7 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="rdoTwoColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>214, 11</value>
+    <value>189, 8</value>
   </data>
   <data name="rdoTwoColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 28</value>
@@ -1550,7 +1550,7 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoTwoColumns.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="rdoSingleColumn.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1562,7 +1562,7 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="rdoSingleColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 11</value>
+    <value>54, 8</value>
   </data>
   <data name="rdoSingleColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 28</value>
@@ -1586,13 +1586,13 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoSingleColumn.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="ucrPnlDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 7</value>
+    <value>10, 4</value>
   </data>
   <data name="ucrPnlDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 35</value>
+    <value>495, 35</value>
   </data>
   <data name="ucrPnlDate.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1607,10 +1607,13 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlDate.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="ucrSaveDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 394</value>
+  </data>
+  <data name="ucrSaveDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>237, 24</value>
@@ -1628,7 +1631,7 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveDate.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 422</value>
@@ -1649,7 +1652,7 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="ucrSelectorMakeDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 51</value>
@@ -1673,7 +1676,7 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorMakeDate.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -1694,7 +1697,7 @@ Examples:
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverYearTwo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 34</value>
+    <value>12, 34</value>
   </data>
   <data name="ucrReceiverYearTwo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1724,7 +1727,7 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="lblDayofYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 86</value>
+    <value>9, 86</value>
   </data>
   <data name="lblDayofYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
@@ -1748,7 +1751,7 @@ Examples:
     <value>6</value>
   </data>
   <data name="ucrReceiverDayTwo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 101</value>
+    <value>12, 101</value>
   </data>
   <data name="ucrReceiverDayTwo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1772,10 +1775,10 @@ Examples:
     <value>7</value>
   </data>
   <data name="grpTwoColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 51</value>
+    <value>238, 51</value>
   </data>
   <data name="grpTwoColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 139</value>
+    <value>267, 139</value>
   </data>
   <data name="grpTwoColumns.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1793,7 +1796,7 @@ Examples:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpTwoColumns.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <metadata name="ttMakeDate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
