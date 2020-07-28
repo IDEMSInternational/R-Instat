@@ -201,7 +201,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverFirst.SetRCode(clsBarAesFunction, bReset)
         ucrReceiverFirst.AddAdditionalCodeParameterPair(clsPieAesFunction, New RParameter("fill", 0), iAdditionalPairNo:=1)
         ucrReceiverY.SetRCode(clsBarAesFunction, bReset)
-        ucrReceiverY.AddAdditionalCodeParameterPair(clsPieAesFunction,New RParameter("y",1), iAdditionalPairNo:=1)
+        ucrReceiverY.AddAdditionalCodeParameterPair(clsPieAesFunction, New RParameter("y", 1), iAdditionalPairNo:=1)
         ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
         ucrSaveBar.SetRCode(clsBaseOperator, bReset)
         ucrBarChartSelector.SetRCode(clsRggplotFunction, bReset)
@@ -352,13 +352,5 @@ Public Class dlgBarAndPieChart
 
     Private Sub CoreControls_ContentsChanged() Handles ucrReceiverFirst.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub CoreControls_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBar.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrReceiverFirst.ControlContentsChanged
-
-    End Sub
-
-    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
-
     End Sub
 End Class
