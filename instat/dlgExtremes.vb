@@ -43,6 +43,9 @@ Public Class dlgExtremes
     End Sub
 
     Private Sub InitialiseDialog()
+        grpFirstCalc.Visible = False
+        grpSecondCalc.Visible = False
+
         Dim dctFevdTypes As New Dictionary(Of String, String)
 
         ucrReceiverVariable.Selector = ucrSelectorExtremes
@@ -73,6 +76,11 @@ Public Class dlgExtremes
         ucrChkExplanatoryModelForLocationParameter.AddParameterPresentCondition(False, "location.fun", False)
         ucrChkExplanatoryModelForLocationParameter.AddToLinkedControls(ucrReceiverExpressionExplanatoryModelForLocParam, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
+        ucrInputThreshold.SetParameter(New RParameter("threshold", 4))
+        ucrInputThreshold.SetValidationTypeAsNumeric()
+        ucrInputThreshold.AddQuotesIfUnrecognised = False
+        ucrInputThreshold.SetLinkedDisplayControl(lblThreshold)
+
         ucrReceiverExpressionExplanatoryModelForLocParam.SetParameter(New RParameter(" locationParam", 1, bNewIncludeArgumentName:=False))
         ucrReceiverExpressionExplanatoryModelForLocParam.SetParameterIsString()
         ucrReceiverExpressionExplanatoryModelForLocParam.bWithQuotes = False
@@ -82,7 +90,7 @@ Public Class dlgExtremes
 
         ucrSaveExtremes.SetPrefix("extreme")
         ucrSaveExtremes.SetIsComboBox()
-        ucrSaveExtremes.SetCheckBoxText("Save Graph")
+        ucrSaveExtremes.SetCheckBoxText("Save Model")
         ucrSaveExtremes.SetSaveTypeAsModel()
         ucrSaveExtremes.SetDataFrameSelector(ucrSelectorExtremes.ucrAvailableDataFrames)
         ucrSaveExtremes.SetAssignToIfUncheckedValue("last_model")
@@ -125,8 +133,6 @@ Public Class dlgExtremes
         clsFevdFunction.AddParameter("type", Chr(34) & "GEV" & Chr(34), iPosition:=1)
         clsFevdFunction.AddParameter("method", Chr(34) & "MLE" & Chr(34), iPosition:=2)
 
-
-
         clsFevdFunction.SetAssignTo(ucrSaveExtremes.GetText(), strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
         clsFevdPlotsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsFevdPlotsFunction.AddParameter("x", clsRFunctionParameter:=clsFevdFunction, iPosition:=0)
@@ -150,6 +156,7 @@ Public Class dlgExtremes
         ucrInputExtremes.SetRCode(clsFevdFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
         ucrSaveExtremes.SetRCode(clsFevdFunction, bReset)
+        ucrInputThreshold.SetRCode(clsFevdFunction, bReset)
         ucrChkExplanatoryModelForLocationParameter.SetRCode(clsFevdFunction, bReset)
         ucrReceiverExpressionExplanatoryModelForLocParam.SetRCode(clsLocationParamOperator, bReset)
     End Sub
@@ -264,5 +271,19 @@ Public Class dlgExtremes
             grpFirstCalc.Visible = False
             grpSecondCalc.Visible = False
         End If
+    End Sub
+
+    Private Sub control_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputExtremes.ControlValueChanged, ucrReceiverVariable.ControlValueChanged
+        If ucrInputExtremes.GetText() = "GP" OrElse ucrInputExtremes.GetText() = "PP" Then
+            ucrInputThreshold.Visible = True
+            clsFevdFunction.AddParameter("threshold", ucrInputThreshold.GetText(), iPosition:=4)
+        Else
+            ucrInputThreshold.Visible = False
+            clsFevdFunction.RemoveParameterByName("threshold")
+        End If
+
+        ucrTryModelling.ucrInputTryMessage.SetName("")
+        ucrTryModelling.ucrInputTryMessage.txtInput.BackColor = Color.White
+        ucrTryModelling.ucrInputTryMessage.txtInput.Controls.Clear()
     End Sub
 End Class

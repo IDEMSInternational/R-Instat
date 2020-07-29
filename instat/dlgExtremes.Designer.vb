@@ -70,6 +70,8 @@ Partial Class dlgExtremes
         Me.ucrSelectorExtremes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblThreshold = New System.Windows.Forms.Label()
+        Me.ucrInputThreshold = New instat.ucrInputTextBox()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpSecondCalc.SuspendLayout()
         Me.SuspendLayout()
@@ -282,10 +284,25 @@ Partial Class dlgExtremes
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'lblThreshold
+        '
+        resources.ApplyResources(Me.lblThreshold, "lblThreshold")
+        Me.lblThreshold.Name = "lblThreshold"
+        '
+        'ucrInputThreshold
+        '
+        Me.ucrInputThreshold.AddQuotesIfUnrecognised = True
+        Me.ucrInputThreshold.IsMultiline = False
+        Me.ucrInputThreshold.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputThreshold, "ucrInputThreshold")
+        Me.ucrInputThreshold.Name = "ucrInputThreshold"
+        '
         'dlgExtremes
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputThreshold)
+        Me.Controls.Add(Me.lblThreshold)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.grpSecondCalc)
         Me.Controls.Add(Me.grpFirstCalc)
@@ -343,4 +360,6 @@ Partial Class dlgExtremes
     Friend WithEvents cmdTan As Button
     Friend WithEvents cmdExp As Button
     Friend WithEvents ucrTryModelling As ucrTry
+    Friend WithEvents ucrInputThreshold As ucrInputTextBox
+    Friend WithEvents lblThreshold As Label
 End Class
