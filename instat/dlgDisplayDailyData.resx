@@ -129,7 +129,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdoTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 12</value>
+    <value>54, 12</value>
   </data>
   <data name="rdoTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 29</value>
@@ -154,7 +154,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoTable.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>22</value>
   </data>
   <data name="rdoGraph.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -172,7 +172,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 12</value>
+    <value>152, 12</value>
   </data>
   <data name="rdoGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 29</value>
@@ -196,7 +196,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoGraph.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>23</value>
   </data>
   <data name="lblStation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -226,7 +226,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblStation.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>20</value>
   </data>
   <data name="lblElement.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -256,7 +256,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblElement.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>19</value>
   </data>
   <data name="lblDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -286,7 +286,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblDate.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="lblYear.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -316,7 +316,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblYear.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>14</value>
   </data>
   <data name="lblDayOfTheYear.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -346,7 +346,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblDayOfTheYear.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>16</value>
   </data>
   <data name="lblYaxisUpper.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -380,6 +380,9 @@
   </data>
   <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 106</value>
+  </data>
+  <data name="ucrSaveGraph.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 24</value>
@@ -526,7 +529,7 @@
     <value>5</value>
   </data>
   <data name="grpGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 231</value>
+    <value>9, 228</value>
   </data>
   <data name="grpGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>276, 137</value>
@@ -547,7 +550,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpGraph.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>7</value>
   </data>
   <data name="lblElements.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -577,7 +580,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblElements.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="ucrChkSumMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 97</value>
@@ -748,6 +751,69 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpSummary.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="rdoGraphByYear.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoGraphByYear.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="rdoGraphByYear.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="rdoGraphByYear.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoGraphByYear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoGraphByYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 12</value>
+  </data>
+  <data name="rdoGraphByYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 29</value>
+  </data>
+  <data name="rdoGraphByYear.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="rdoGraphByYear.Text" xml:space="preserve">
+    <value>Graph by Year</value>
+  </data>
+  <data name="rdoGraphByYear.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoGraphByYear.Name" xml:space="preserve">
+    <value>rdoGraphByYear</value>
+  </data>
+  <data name="&gt;&gt;rdoGraphByYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoGraphByYear.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoGraphByYear.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkFreeYScales.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 237</value>
+  </data>
+  <data name="ucrChkFreeYScales.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkFreeYScales.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFreeYScales.Name" xml:space="preserve">
+    <value>ucrChkFreeYScales</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFreeYScales.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFreeYScales.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFreeYScales.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -781,7 +847,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverElement.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="ucrInputComboZero.Location" type="System.Drawing.Point, System.Drawing">
     <value>121, 422</value>
@@ -802,7 +868,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputComboZero.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="ucrInputComboMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>121, 368</value>
@@ -823,7 +889,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputComboMissing.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="ucrInputComboTrace.Location" type="System.Drawing.Point, System.Drawing">
     <value>121, 395</value>
@@ -844,7 +910,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputComboTrace.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="ucrChkMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 371</value>
@@ -865,7 +931,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkMissing.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="ucrChkZero.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 424</value>
@@ -886,7 +952,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkZero.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="ucrChkTrace.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 396</value>
@@ -907,7 +973,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkTrace.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="ucrReceiverYear.Location" type="System.Drawing.Point, System.Drawing">
     <value>289, 209</value>
@@ -931,7 +997,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverYear.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>13</value>
   </data>
   <data name="ucrReceiverDayOfYear.Location" type="System.Drawing.Point, System.Drawing">
     <value>289, 166</value>
@@ -955,7 +1021,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverDayOfYear.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>17</value>
   </data>
   <data name="ucrReceiverDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>289, 124</value>
@@ -979,7 +1045,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverDate.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>18</value>
   </data>
   <data name="ucrReceiverStations.Location" type="System.Drawing.Point, System.Drawing">
     <value>289, 80</value>
@@ -1003,16 +1069,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverStations.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>21</value>
   </data>
   <data name="ucrPnlFrequencyDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 12</value>
+    <value>54, 12</value>
   </data>
   <data name="ucrPnlFrequencyDisplay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrPnlFrequencyDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 29</value>
+    <value>297, 29</value>
   </data>
   <data name="ucrPnlFrequencyDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1027,7 +1093,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlFrequencyDisplay.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>24</value>
   </data>
   <data name="ucrSelectorDisplayDailyClimaticData.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 43</value>
@@ -1051,7 +1117,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorDisplayDailyClimaticData.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>25</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 447</value>
@@ -1075,10 +1141,31 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>26</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="ucrReceiverSingleElements.Location" type="System.Drawing.Point, System.Drawing">
+    <value>289, 253</value>
+  </data>
+  <data name="ucrReceiverSingleElements.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSingleElements.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 20</value>
+  </data>
+  <data name="ucrReceiverSingleElements.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSingleElements.Name" xml:space="preserve">
+    <value>ucrReceiverSingleElements</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSingleElements.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSingleElements.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSingleElements.ZOrder" xml:space="preserve">
+    <value>27</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -1093,16 +1180,16 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverMultipleElements.Location" type="System.Drawing.Point, System.Drawing">
-    <value>289, 253</value>
+    <value>288, 252</value>
   </data>
   <data name="ucrReceiverMultipleElements.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverMultipleElements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 100</value>
+    <value>126, 100</value>
   </data>
   <data name="ucrReceiverMultipleElements.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>25</value>
   </data>
   <data name="&gt;&gt;ucrReceiverMultipleElements.Name" xml:space="preserve">
     <value>ucrReceiverMultipleElements</value>
@@ -1114,6 +1201,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverMultipleElements.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
 </root>
