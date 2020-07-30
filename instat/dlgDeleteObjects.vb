@@ -16,7 +16,8 @@
 
 Imports instat.Translations
 Public Class dlgDeleteObjects
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
+    Private dctTypes As New Dictionary(Of String, String)
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
 
@@ -37,7 +38,6 @@ Public Class dlgDeleteObjects
     End Sub
 
     Private Sub InitialiseDialog()
-        Dim dctTypes As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 352
 
         ' Selector
@@ -96,26 +96,19 @@ Public Class dlgDeleteObjects
     End Sub
 
     Private Sub ucrInputComboType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboType.ControlValueChanged
-        Select Case ucrInputComboType.GetValue()
-            Case "Objects"
-                ucrReceiverObjectsToDelete.SetItemType("object")
-                ucrReceiverObjectsToDelete.strSelectorHeading = "Objects"
-            Case "Filters"
-                ucrReceiverObjectsToDelete.SetItemType("filter")
-                ucrReceiverObjectsToDelete.strSelectorHeading = "Filters"
-            Case "Calculations"
-                ucrReceiverObjectsToDelete.SetItemType("calculation")
-                ucrReceiverObjectsToDelete.strSelectorHeading = "Calculations"
-            Case "Tables"
-                ucrReceiverObjectsToDelete.SetItemType("table")
-                ucrReceiverObjectsToDelete.strSelectorHeading = "Tables"
-            Case "Graphs"
-                ucrReceiverObjectsToDelete.SetItemType("graph")
-                ucrReceiverObjectsToDelete.strSelectorHeading = "Graphs"
-            Case "Models"
-                ucrReceiverObjectsToDelete.SetItemType("model")
-                ucrReceiverObjectsToDelete.strSelectorHeading = "Models"
-        End Select
+        Dim value As String
+        Dim key As String
+
+        If dctTypes.Count <> 0 Then
+            value = dctTypes.Values(ucrInputComboType.cboInput.SelectedIndex)
+            key = dctTypes.Keys(ucrInputComboType.cboInput.SelectedIndex)
+            If (dctTypes.ContainsKey(key) AndAlso dctTypes.ContainsValue(value)) Then
+                ucrReceiverObjectsToDelete.SetItemType(value.Replace(Chr(34), ""))
+                ucrReceiverObjectsToDelete.strSelectorHeading = key
+            End If
+        Else
+            Exit Sub
+        End If
     End Sub
 
     Private Sub ucrReceiverObjectsToDelete_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObjectsToDelete.ControlContentsChanged
