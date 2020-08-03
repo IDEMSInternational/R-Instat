@@ -59,6 +59,7 @@ Public Class dlgCalculator
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
         ucrCalc.ucrTryCalculator.SetRSyntax(ucrBase.clsRsyntax)
+        ucrCalc.ucrSaveResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
         ucrBase.Visible = True
     End Sub
 
@@ -158,19 +159,10 @@ Public Class dlgCalculator
 
     Private Sub chkSaveResultInto_CheckedChanged() Handles ucrCalc.SaveResultsCheckedChanged
         SaveResults()
-        ShowControl()
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrCalc.DataFrameChanged
         ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
         SaveResults()
-    End Sub
-
-    Private Sub ShowControl()
-        If ucrCalc.chkSaveResultInto.Checked Then
-            ucrCalc.ucrSaveResultInto.Visible = True
-        Else
-            ucrCalc.ucrSaveResultInto.Visible = False
-        End If
     End Sub
 End Class
