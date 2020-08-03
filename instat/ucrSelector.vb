@@ -462,7 +462,8 @@ Public Class ucrSelector
 
     ''' <summary>
     ''' Adds passed enumerable of receivers to the end of the receivers list
-    ''' The reciver is only added if it does not exist in the list
+    ''' The receiver is only added if it does not exist in the list
+
     ''' </summary>
     ''' <param name="ucrNewReceivers"></param>
     Public Overridable Sub AddReceiver(ucrNewReceivers As IEnumerable(Of ucrReceiver))
