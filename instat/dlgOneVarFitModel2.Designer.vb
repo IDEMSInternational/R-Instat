@@ -86,6 +86,8 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputConfidenceInterval = New instat.ucrInputComboBox()
         Me.lblConfidenceLevel = New System.Windows.Forms.Label()
+        Me.ucrInputSuccess = New instat.ucrInputTextBox()
+        Me.lblSuccess = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -562,11 +564,32 @@ Partial Class dlgOneVarFitModel
         Me.lblConfidenceLevel.TabIndex = 86
         Me.lblConfidenceLevel.Text = "Confidence Level:"
         '
+        'ucrInputSuccess
+        '
+        Me.ucrInputSuccess.AddQuotesIfUnrecognised = True
+        Me.ucrInputSuccess.IsMultiline = False
+        Me.ucrInputSuccess.IsReadOnly = False
+        Me.ucrInputSuccess.Location = New System.Drawing.Point(348, 249)
+        Me.ucrInputSuccess.Name = "ucrInputSuccess"
+        Me.ucrInputSuccess.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputSuccess.TabIndex = 87
+        '
+        'lblSuccess
+        '
+        Me.lblSuccess.AutoSize = True
+        Me.lblSuccess.Location = New System.Drawing.Point(248, 252)
+        Me.lblSuccess.Name = "lblSuccess"
+        Me.lblSuccess.Size = New System.Drawing.Size(51, 13)
+        Me.lblSuccess.TabIndex = 88
+        Me.lblSuccess.Text = "Success:"
+        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(428, 420)
+        Me.Controls.Add(Me.lblSuccess)
+        Me.Controls.Add(Me.ucrInputSuccess)
         Me.Controls.Add(Me.lblConfidenceLevel)
         Me.Controls.Add(Me.ucrInputConfidenceInterval)
         Me.Controls.Add(Me.lblQMethod)
@@ -675,4 +698,6 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents ucrInputComboQMethod As ucrInputComboBox
     Friend WithEvents lblConfidenceLevel As Label
     Friend WithEvents ucrInputConfidenceInterval As ucrInputComboBox
+    Friend WithEvents lblSuccess As Label
+    Friend WithEvents ucrInputSuccess As ucrInputTextBox
 End Class
