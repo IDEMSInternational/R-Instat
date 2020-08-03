@@ -77,7 +77,8 @@ Public Class ucrReceiver
     Public bForceVariablesAsList As Boolean = False
 
     'used by the selector to autoswitch from the current receiver
-    Public bAutoSwitchFromReceiver As Boolean = True
+    Public bAutoSwitchFromReceiver As Boolean = False
+
 
     Public Sub New()
         ' This call is required by the designer.
