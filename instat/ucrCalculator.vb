@@ -983,7 +983,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub chkSaveResultInto_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResultInto.CheckedChanged
+    Private Sub chkSaveResultInto_CheckedChanged(sender As Object, e As EventArgs)
         RaiseEvent SaveResultsCheckedChanged()
     End Sub
 
@@ -1230,7 +1230,7 @@ Public Class ucrCalculator
         RaiseEvent SelectionChanged()
     End Sub
 
-    Private Sub ucrSaveResultInto_NameChanged() Handles ucrSaveResultInto.NameChanged
+    Private Sub ucrSaveResultInto_NameChanged()
         RaiseEvent SaveNameChanged()
     End Sub
 
