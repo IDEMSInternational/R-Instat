@@ -59,7 +59,6 @@ Public Class dlgCalculator
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
         ucrCalc.ucrTryCalculator.SetRSyntax(ucrBase.clsRsyntax)
-        ucrCalc.ucrSaveResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
         ucrBase.Visible = True
     End Sub
 
@@ -82,7 +81,7 @@ Public Class dlgCalculator
         ucrBase.clsRsyntax.SetCommandString("")
         ucrCalc.ucrSaveResultInto.SetSaveTypeAsColumn()
         ucrCalc.ucrSaveResultInto.SetIsTextBox()
-        ucrCalc.ucrSaveResultInto.SetText("Save Result Into")
+        ucrCalc.ucrSaveResultInto.SetLabelText("Save Result Into:")
         ucrCalc.ucrSaveResultInto.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrSelectorForCalculations.Reset()
@@ -95,7 +94,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub SaveResults()
-        If ucrCalc.chkSaveResultInto.Checked Then
+        If ucrCalc.ucrSaveResultInto.Iscomplete Then
             ucrBase.clsRsyntax.SetAssignTo(ucrCalc.ucrSaveResultInto.GetText(), strTempColumn:=ucrCalc.ucrSaveResultInto.GetText(), strTempDataframe:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
@@ -155,10 +154,6 @@ Public Class dlgCalculator
             Case Else
                 Me.Size = New System.Drawing.Size(iBasicWidth, Me.Height)
         End Select
-    End Sub
-
-    Private Sub chkSaveResultInto_CheckedChanged() Handles ucrCalc.SaveResultsCheckedChanged
-        SaveResults()
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrCalc.DataFrameChanged
