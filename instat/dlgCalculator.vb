@@ -41,10 +41,10 @@ Public Class dlgCalculator
 
     Private Sub TestOKEnabled()
         If Not ucrCalc.ucrReceiverForCalculation.IsEmpty Then
-            If ucrCalc.chkSaveResultInto.Checked AndAlso ucrCalc.ucrSaveResultInto.IsEmpty Then
-                ucrBase.OKEnabled(False)
-            Else
+            If ucrCalc.ucrSaveResultInto.IsComplete Then
                 ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
             End If
         Else
             ucrBase.OKEnabled(False)
@@ -56,7 +56,6 @@ Public Class dlgCalculator
         ucrCalc.ucrInputCalOptions.SetName("Basic")
         ucrCalc.Reset()
         ucrCalc.chkShowParameters.Checked = False
-        ucrCalc.chkSaveResultInto.Checked = True
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
         ucrCalc.ucrTryCalculator.SetRSyntax(ucrBase.clsRsyntax)
