@@ -96,18 +96,12 @@ Public Class dlgDeleteObjects
     End Sub
 
     Private Sub ucrInputComboType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboType.ControlValueChanged
-        Dim value As String
-        Dim key As String
+        Dim key As String = dctTypes.Keys(ucrInputComboType.cboInput.SelectedIndex)
+        Dim value As String = ""
 
-        If dctTypes.Count <> 0 Then
-            value = dctTypes.Values(ucrInputComboType.cboInput.SelectedIndex)
-            key = dctTypes.Keys(ucrInputComboType.cboInput.SelectedIndex)
-            If (dctTypes.ContainsKey(key) AndAlso dctTypes.ContainsValue(value)) Then
-                ucrReceiverObjectsToDelete.SetItemType(value.Replace(Chr(34), ""))
-                ucrReceiverObjectsToDelete.strSelectorHeading = key
-            End If
-        Else
-            Exit Sub
+        If key IsNot Nothing AndAlso dctTypes.TryGetValue(key, value) Then
+            ucrReceiverObjectsToDelete.strSelectorHeading = key
+            ucrReceiverObjectsToDelete.SetItemType(value.Replace(Chr(34), ""))
         End If
     End Sub
 
