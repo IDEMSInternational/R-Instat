@@ -22,6 +22,7 @@ Public Class ucrTry
     Private CommandModel As String = ""
     Private bIsModel As Boolean
     Private strError As String
+    Private WithEvents ucrMultipleReceiver As New List(Of ucrReceiverExpression)
     Private WithEvents ucrReceiverScript As New ucrReceiverExpression
     Private WithEvents ucrModelPreview As New ucrInputTextBox
     Private clsRSyntax As RSyntax
@@ -36,6 +37,12 @@ Public Class ucrTry
         strError = ""
         clsRSyntax = New RSyntax
         bstrVecOutput = False
+    End Sub
+
+    Public Sub SetMultipleReceiver(Optional MultiReceivers As List(Of ucrReceiverExpression) = Nothing)
+        If MultiReceivers IsNot Nothing Then
+            ucrMultipleReceiver = MultiReceivers
+        End If
     End Sub
 
     Public Sub SetReceiver(Optional ucrNewReceiverScript As ucrReceiverExpression = Nothing, Optional ucrNewInputTextBox As ucrInputTextBox = Nothing)

@@ -76,13 +76,25 @@ Public Class dlgExtremes
         ucrChkExplanatoryModelForLocationParameter.AddParameterPresentCondition(False, "location.fun", False)
         ucrChkExplanatoryModelForLocationParameter.AddToLinkedControls(ucrReceiverExpressionExplanatoryModelForLocParam, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
-        ucrInputThreshold.SetParameter(New RParameter("threshold", 4))
-        ucrInputThreshold.SetValidationTypeAsNumeric()
-        ucrInputThreshold.AddQuotesIfUnrecognised = False
-        ucrInputThreshold.SetLinkedDisplayControl(lblThreshold)
+        ucrChkExplanatoryModelForScaleParameter.SetText("Explanatory Model for Scale")
+        ucrChkExplanatoryModelForScaleParameter.AddParameterPresentCondition(True, "scale.fun ", True)
+        ucrChkExplanatoryModelForScaleParameter.AddParameterPresentCondition(False, "scale.fun ", False)
+        ucrChkExplanatoryModelForScaleParameter.AddToLinkedControls(ucrReceiverExpressionModelForScaleParam, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
+        ucrReceiverExpressionModelForScaleParam.SetParameter(New RParameter(" scaleParam", 1, bNewIncludeArgumentName:=False))
+        ucrReceiverExpressionModelForScaleParam.SetParameterIsString()
+        ucrReceiverExpressionModelForScaleParam.SetRDefault(1)
+        ucrReceiverExpressionModelForScaleParam.bWithQuotes = False
+
+        ucrInputThresholdforLocation.SetParameter(New RParameter("threshold", 4))
+        ucrInputThresholdforLocation.SetRDefault(0)
+        ucrInputThresholdforLocation.SetValidationTypeAsNumeric()
+        ucrInputThresholdforLocation.AddQuotesIfUnrecognised = False
+        ucrInputThresholdforLocation.SetLinkedDisplayControl(lblThreshold)
 
         ucrReceiverExpressionExplanatoryModelForLocParam.SetParameter(New RParameter(" locationParam", 1, bNewIncludeArgumentName:=False))
         ucrReceiverExpressionExplanatoryModelForLocParam.SetParameterIsString()
+        ucrReceiverExpressionExplanatoryModelForLocParam.SetRDefault(1)
         ucrReceiverExpressionExplanatoryModelForLocParam.bWithQuotes = False
 
         ucrTryModelling.SetReceiver(ucrReceiverExpressionExplanatoryModelForLocParam)
@@ -107,7 +119,6 @@ Public Class dlgExtremes
 
         ucrReceiverVariable.SetMeAsReceiver()
         ucrSelectorExtremes.Reset()
-        ucrReceiverExpressionExplanatoryModelForLocParam.SetText("1")
         ucrReceiverExpressionExplanatoryModelForLocParam.Selector = ucrSelectorExtremes
 
         clsLocationParamOperator.SetOperation("~")
@@ -156,8 +167,9 @@ Public Class dlgExtremes
         ucrInputExtremes.SetRCode(clsFevdFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
         ucrSaveExtremes.SetRCode(clsFevdFunction, bReset)
-        ucrInputThreshold.SetRCode(clsFevdFunction, bReset)
+        ucrInputThresholdforLocation.SetRCode(clsFevdFunction, bReset)
         ucrChkExplanatoryModelForLocationParameter.SetRCode(clsFevdFunction, bReset)
+        ucrChkExplanatoryModelForScaleParameter.SetRCode(clsFevdFunction, bReset)
         ucrReceiverExpressionExplanatoryModelForLocParam.SetRCode(clsLocationParamOperator, bReset)
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -274,11 +286,11 @@ Public Class dlgExtremes
     End Sub
 
     Private Sub control_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputExtremes.ControlValueChanged, ucrReceiverVariable.ControlValueChanged
-        If ucrInputExtremes.GetText() = "GP" OrElse ucrInputExtremes.GetText() = "PP" Then
-            ucrInputThreshold.Visible = True
-            clsFevdFunction.AddParameter("threshold", ucrInputThreshold.GetText(), iPosition:=4)
+        If ucrInputExtremes.GetText() = "GP" OrElse ucrInputExtremes.GetText() = "PP" OrElse ucrInputExtremes.GetText() = "Exponential" Then
+            ucrInputThresholdforLocation.Visible = True
+            clsFevdFunction.AddParameter("threshold", ucrInputThresholdforLocation.GetText(), iPosition:=4)
         Else
-            ucrInputThreshold.Visible = False
+            ucrInputThresholdforLocation.Visible = False
             clsFevdFunction.RemoveParameterByName("threshold")
         End If
 

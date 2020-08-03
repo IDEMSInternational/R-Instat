@@ -62,6 +62,8 @@ Partial Class dlgExtremes
         Me.cmdLog = New System.Windows.Forms.Button()
         Me.cmdTan = New System.Windows.Forms.Button()
         Me.cmdExp = New System.Windows.Forms.Button()
+        Me.lblThreshold = New System.Windows.Forms.Label()
+        Me.ucrInputThresholdforLocation = New instat.ucrInputTextBox()
         Me.ucrTryModelling = New instat.ucrTry()
         Me.ucrChkExplanatoryModelForLocationParameter = New instat.ucrCheck()
         Me.ucrReceiverExpressionExplanatoryModelForLocParam = New instat.ucrReceiverExpression()
@@ -70,8 +72,8 @@ Partial Class dlgExtremes
         Me.ucrSelectorExtremes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblThreshold = New System.Windows.Forms.Label()
-        Me.ucrInputThreshold = New instat.ucrInputTextBox()
+        Me.ucrChkExplanatoryModelForScaleParameter = New instat.ucrCheck()
+        Me.ucrReceiverExpressionModelForScaleParam = New instat.ucrReceiverExpression()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpSecondCalc.SuspendLayout()
         Me.SuspendLayout()
@@ -230,6 +232,19 @@ Partial Class dlgExtremes
         Me.cmdExp.Name = "cmdExp"
         Me.cmdExp.UseVisualStyleBackColor = True
         '
+        'lblThreshold
+        '
+        resources.ApplyResources(Me.lblThreshold, "lblThreshold")
+        Me.lblThreshold.Name = "lblThreshold"
+        '
+        'ucrInputThresholdforLocation
+        '
+        Me.ucrInputThresholdforLocation.AddQuotesIfUnrecognised = True
+        Me.ucrInputThresholdforLocation.IsMultiline = False
+        Me.ucrInputThresholdforLocation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputThresholdforLocation, "ucrInputThresholdforLocation")
+        Me.ucrInputThresholdforLocation.Name = "ucrInputThresholdforLocation"
+        '
         'ucrTryModelling
         '
         resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
@@ -284,24 +299,28 @@ Partial Class dlgExtremes
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'lblThreshold
+        'ucrChkExplanatoryModelForScaleParameter
         '
-        resources.ApplyResources(Me.lblThreshold, "lblThreshold")
-        Me.lblThreshold.Name = "lblThreshold"
+        Me.ucrChkExplanatoryModelForScaleParameter.Checked = False
+        resources.ApplyResources(Me.ucrChkExplanatoryModelForScaleParameter, "ucrChkExplanatoryModelForScaleParameter")
+        Me.ucrChkExplanatoryModelForScaleParameter.Name = "ucrChkExplanatoryModelForScaleParameter"
         '
-        'ucrInputThreshold
+        'ucrReceiverExpressionModelForScaleParam
         '
-        Me.ucrInputThreshold.AddQuotesIfUnrecognised = True
-        Me.ucrInputThreshold.IsMultiline = False
-        Me.ucrInputThreshold.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputThreshold, "ucrInputThreshold")
-        Me.ucrInputThreshold.Name = "ucrInputThreshold"
+        Me.ucrReceiverExpressionModelForScaleParam.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverExpressionModelForScaleParam, "ucrReceiverExpressionModelForScaleParam")
+        Me.ucrReceiverExpressionModelForScaleParam.Name = "ucrReceiverExpressionModelForScaleParam"
+        Me.ucrReceiverExpressionModelForScaleParam.Selector = Nothing
+        Me.ucrReceiverExpressionModelForScaleParam.strNcFilePath = ""
+        Me.ucrReceiverExpressionModelForScaleParam.ucrSelector = Nothing
         '
         'dlgExtremes
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrInputThreshold)
+        Me.Controls.Add(Me.ucrReceiverExpressionModelForScaleParam)
+        Me.Controls.Add(Me.ucrChkExplanatoryModelForScaleParameter)
+        Me.Controls.Add(Me.ucrInputThresholdforLocation)
         Me.Controls.Add(Me.lblThreshold)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.grpSecondCalc)
@@ -360,6 +379,8 @@ Partial Class dlgExtremes
     Friend WithEvents cmdTan As Button
     Friend WithEvents cmdExp As Button
     Friend WithEvents ucrTryModelling As ucrTry
-    Friend WithEvents ucrInputThreshold As ucrInputTextBox
+    Friend WithEvents ucrInputThresholdforLocation As ucrInputTextBox
     Friend WithEvents lblThreshold As Label
+    Friend WithEvents ucrChkExplanatoryModelForScaleParameter As ucrCheck
+    Friend WithEvents ucrReceiverExpressionModelForScaleParam As ucrReceiverExpression
 End Class
