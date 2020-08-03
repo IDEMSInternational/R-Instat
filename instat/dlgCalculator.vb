@@ -79,11 +79,11 @@ Public Class dlgCalculator
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
         ucrBase.clsRsyntax.SetCommandString("")
-        ucrCalc.ucrSaveResultInto.SetItemsTypeAsColumns()
-        ucrCalc.ucrSaveResultInto.SetDefaultTypeAsColumn()
+        ucrCalc.ucrSaveResultInto.SetSaveTypeAsColumn()
+        ucrCalc.ucrSaveResultInto.SetIsTextBox()
+        ucrCalc.ucrSaveResultInto.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrSelectorForCalculations.Reset()
-        ucrCalc.ucrSaveResultInto.SetValidationTypeAsRVariable()
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
     End Sub
 
