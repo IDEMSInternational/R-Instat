@@ -81,6 +81,7 @@ Public Class dlgCalculator
         ucrBase.clsRsyntax.SetCommandString("")
         ucrCalc.ucrSaveResultInto.SetSaveTypeAsColumn()
         ucrCalc.ucrSaveResultInto.SetIsTextBox()
+        ucrCalc.ucrSaveResultInto.SetText("Save Result Into")
         ucrCalc.ucrSaveResultInto.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrSelectorForCalculations.Reset()
