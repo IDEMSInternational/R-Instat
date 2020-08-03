@@ -23,6 +23,7 @@ Public Class dlgExtremes
     Private clsFevdFunction, clsNaExclude, clsConvertVector As New RFunction
     Private clsFevdPlotsFunction As New RFunction
     Private clsLocationParamOperator As New ROperator
+    Private clsScaleParamOperator As New ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetFittingOptions As Boolean = False
@@ -77,8 +78,8 @@ Public Class dlgExtremes
         ucrChkExplanatoryModelForLocationParameter.AddToLinkedControls(ucrReceiverExpressionExplanatoryModelForLocParam, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrChkExplanatoryModelForScaleParameter.SetText("Explanatory Model for Scale")
-        ucrChkExplanatoryModelForScaleParameter.AddParameterPresentCondition(True, "scale.fun ", True)
-        ucrChkExplanatoryModelForScaleParameter.AddParameterPresentCondition(False, "scale.fun ", False)
+        ucrChkExplanatoryModelForScaleParameter.AddParameterPresentCondition(True, "scale.fun", True)
+        ucrChkExplanatoryModelForScaleParameter.AddParameterPresentCondition(False, "scale.fun", False)
         ucrChkExplanatoryModelForScaleParameter.AddToLinkedControls(ucrReceiverExpressionModelForScaleParam, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrReceiverExpressionModelForScaleParam.SetParameter(New RParameter(" scaleParam", 1, bNewIncludeArgumentName:=False))
@@ -114,16 +115,23 @@ Public Class dlgExtremes
         clsNaExclude = New RFunction
         clsConvertVector = New RFunction
         clsLocationParamOperator = New ROperator
+        clsScaleParamOperator = New ROperator
 
         ucrBase.clsRsyntax.ClearCodes()
 
         ucrReceiverVariable.SetMeAsReceiver()
         ucrSelectorExtremes.Reset()
         ucrReceiverExpressionExplanatoryModelForLocParam.Selector = ucrSelectorExtremes
+        ucrReceiverExpressionModelForScaleParam.Selector = ucrSelectorExtremes
 
         clsLocationParamOperator.SetOperation("~")
         clsLocationParamOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
         clsLocationParamOperator.bSpaceAroundOperation = False
+
+
+        clsScaleParamOperator.SetOperation("~")
+        clsScaleParamOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
+        clsScaleParamOperator.bSpaceAroundOperation = False
 
         clsNaExclude.SetPackageName("stats")
         clsNaExclude.SetRCommand("na.exclude")
@@ -170,6 +178,7 @@ Public Class dlgExtremes
         ucrInputThresholdforLocation.SetRCode(clsFevdFunction, bReset)
         ucrChkExplanatoryModelForLocationParameter.SetRCode(clsFevdFunction, bReset)
         ucrChkExplanatoryModelForScaleParameter.SetRCode(clsFevdFunction, bReset)
+        ucrReceiverExpressionModelForScaleParam.SetRCode(clsScaleParamOperator, bReset)
         ucrReceiverExpressionExplanatoryModelForLocParam.SetRCode(clsLocationParamOperator, bReset)
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -275,14 +284,11 @@ Public Class dlgExtremes
     Private Sub ucrChkExplanatoryModelForLocationParameter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExplanatoryModelForLocationParameter.ControlValueChanged
         If ucrChkExplanatoryModelForLocationParameter.Checked Then
             clsFevdFunction.AddParameter("location.fun", clsROperatorParameter:=clsLocationParamOperator, iPosition:=3)
-            grpFirstCalc.Visible = True
-            grpSecondCalc.Visible = True
         Else
-            clsFevdFunction.RemoveParameterByName("location.fun")
             ucrReceiverVariable.SetMeAsReceiver()
-            grpFirstCalc.Visible = False
-            grpSecondCalc.Visible = False
+            clsFevdFunction.RemoveParameterByName("location.fun")
         End If
+        HideAndShowKeyboard()
     End Sub
 
     Private Sub control_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputExtremes.ControlValueChanged, ucrReceiverVariable.ControlValueChanged
@@ -297,5 +303,25 @@ Public Class dlgExtremes
         ucrTryModelling.ucrInputTryMessage.SetName("")
         ucrTryModelling.ucrInputTryMessage.txtInput.BackColor = Color.White
         ucrTryModelling.ucrInputTryMessage.txtInput.Controls.Clear()
+    End Sub
+
+    Private Sub ucrChkExplanatoryModelForScaleParameter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExplanatoryModelForScaleParameter.ControlValueChanged
+        If ucrChkExplanatoryModelForScaleParameter.Checked Then
+            clsFevdFunction.AddParameter("scale.fun", clsROperatorParameter:=clsScaleParamOperator, iPosition:=5)
+        Else
+            ucrReceiverVariable.SetMeAsReceiver()
+            clsFevdFunction.RemoveParameterByName("scale.fun")
+        End If
+        HideAndShowKeyboard()
+    End Sub
+
+    Private Sub HideAndShowKeyboard()
+        If ucrChkExplanatoryModelForScaleParameter.Checked OrElse ucrChkExplanatoryModelForLocationParameter.Checked Then
+            grpFirstCalc.Visible = True
+            grpSecondCalc.Visible = True
+        Else
+            grpFirstCalc.Visible = False
+            grpSecondCalc.Visible = False
+        End If
     End Sub
 End Class
