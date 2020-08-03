@@ -1190,7 +1190,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticCheckDataInventory_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataInventory.Click
-        dlgInventoryPlot.ShowDialog()
+        dlgInventory.ShowDialog()
     End Sub
 
     Private Sub mnuClimateFileImportFromClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportFromClimSoft.Click

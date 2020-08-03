@@ -1908,10 +1908,10 @@
     <Compile Include="dlgInventoryMethod.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgInventoryPlot.designer.vb">
-      <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
+    <Compile Include="dlgInventory.designer.vb">
+      <DependentUpon>dlgInventory.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgInventoryPlot.vb">
+    <Compile Include="dlgInventory.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgLabelsLevels.Designer.vb">
@@ -3950,11 +3950,11 @@
     <EmbeddedResource Include="dlgInventoryMethod.sw-KE.resx">
       <DependentUpon>dlgInventoryMethod.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgInventoryPlot.resx">
-      <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgInventory.resx">
+      <DependentUpon>dlgInventory.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgInventoryPlot.sw-KE.resx">
-      <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgInventory.sw-KE.resx">
+      <DependentUpon>dlgInventory.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgLabelsLevels.resx">
       <DependentUpon>dlgLabelsLevels.vb</DependentUpon>
