@@ -301,7 +301,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 3</value>
+    <value>202, 3</value>
   </data>
   <data name="cmdGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
