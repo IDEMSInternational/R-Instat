@@ -229,7 +229,6 @@ Public Class ucrFilter
         lstFilters.Columns(1).Width = -2
         ucrFilterPreview.SetName(clsFilterView.ToScript())
         ucrFilterByReceiver.Clear()
-        ucrReceiverExpression.Clear()
         RaiseEvent FilterChanged()
     End Sub
 
