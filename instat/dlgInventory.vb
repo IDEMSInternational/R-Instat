@@ -76,8 +76,8 @@ Public Class dlgInventory
 
         ucrChkOmitStart.SetParameter(New RParameter("omit_start", 7))
         ucrChkOmitStart.SetText("Omit Start")
-        ucrChkDetails.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkDetails.SetRDefault("TRUE")
+        ucrChkOmitStart.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOmitStart.SetRDefault("TRUE")
 
         ucrChkOmitEnd.SetParameter(New RParameter("omit_end", 8))
         ucrChkOmitEnd.SetText("Omit End")
