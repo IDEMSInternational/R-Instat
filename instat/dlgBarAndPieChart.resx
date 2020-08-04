@@ -370,7 +370,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblYvariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 177</value>
+    <value>252, 176</value>
   </data>
   <data name="lblYvariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -454,7 +454,7 @@
     <value>255, 142</value>
   </data>
   <data name="ucrInputYValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 21</value>
+    <value>107, 21</value>
   </data>
   <data name="ucrInputYValue.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -662,9 +662,6 @@
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
     <value>20</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
