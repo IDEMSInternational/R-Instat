@@ -72,8 +72,6 @@ Partial Class dlgExtremes
         Me.ucrSelectorExtremes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkExplanatoryModelForScaleParameter = New instat.ucrCheck()
-        Me.ucrReceiverExpressionModelForScaleParam = New instat.ucrReceiverExpression()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpSecondCalc.SuspendLayout()
         Me.SuspendLayout()
@@ -299,27 +297,10 @@ Partial Class dlgExtremes
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrChkExplanatoryModelForScaleParameter
-        '
-        Me.ucrChkExplanatoryModelForScaleParameter.Checked = False
-        resources.ApplyResources(Me.ucrChkExplanatoryModelForScaleParameter, "ucrChkExplanatoryModelForScaleParameter")
-        Me.ucrChkExplanatoryModelForScaleParameter.Name = "ucrChkExplanatoryModelForScaleParameter"
-        '
-        'ucrReceiverExpressionModelForScaleParam
-        '
-        Me.ucrReceiverExpressionModelForScaleParam.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverExpressionModelForScaleParam, "ucrReceiverExpressionModelForScaleParam")
-        Me.ucrReceiverExpressionModelForScaleParam.Name = "ucrReceiverExpressionModelForScaleParam"
-        Me.ucrReceiverExpressionModelForScaleParam.Selector = Nothing
-        Me.ucrReceiverExpressionModelForScaleParam.strNcFilePath = ""
-        Me.ucrReceiverExpressionModelForScaleParam.ucrSelector = Nothing
-        '
         'dlgExtremes
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrReceiverExpressionModelForScaleParam)
-        Me.Controls.Add(Me.ucrChkExplanatoryModelForScaleParameter)
         Me.Controls.Add(Me.ucrInputThresholdforLocation)
         Me.Controls.Add(Me.lblThreshold)
         Me.Controls.Add(Me.ucrTryModelling)
@@ -381,6 +362,4 @@ Partial Class dlgExtremes
     Friend WithEvents ucrTryModelling As ucrTry
     Friend WithEvents ucrInputThresholdforLocation As ucrInputTextBox
     Friend WithEvents lblThreshold As Label
-    Friend WithEvents ucrChkExplanatoryModelForScaleParameter As ucrCheck
-    Friend WithEvents ucrReceiverExpressionModelForScaleParam As ucrReceiverExpression
 End Class
