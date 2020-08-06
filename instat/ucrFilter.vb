@@ -160,12 +160,13 @@ Public Class ucrFilter
 
     Private Sub ucrFilterReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFilterByReceiver.ControlContentsChanged
         'for logical columns add {"==", "is.na", "!is.na"} only
-        Dim selectedIndex As Integer = ucrFilterOperation.cboInput.SelectedIndex
+        Dim selectedIndex As Integer = ucrFilterOperation.GetSetSelectedIndex
         ucrFilterOperation.SetItems(If(ucrFilterByReceiver.strCurrDataType.ToLower = "logical", {"==", "is.na", "! is.na"}, {"==", "<", "<=", ">", ">=", "!=", "is.na", "! is.na"}))
-        If ucrFilterByReceiver.strCurrDataType.ToLower = "logical" AndAlso selectedIndex > 2 Then
-            ucrFilterOperation.cboInput.SelectedIndex = 0
+        Dim ItemsCount As Integer = ucrFilterOperation.GetItemsCount()
+        If ucrFilterByReceiver.strCurrDataType.ToLower = "logical" AndAlso selectedIndex > ItemsCount Then
+            ucrFilterOperation.GetSetSelectedIndex = 0
         Else
-            ucrFilterOperation.cboInput.SelectedIndex = selectedIndex
+            ucrFilterOperation.GetSetSelectedIndex = selectedIndex
         End If
         VariableTypeProperties()
         CheckAddEnabled()
