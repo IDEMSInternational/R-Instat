@@ -162,7 +162,7 @@ Public Class ucrFilter
         'for logical columns add {"==", "is.na", "!is.na"} only
         Dim selectedIndex As Integer = ucrFilterOperation.GetSetSelectedIndex
         ucrFilterOperation.SetItems(If(ucrFilterByReceiver.strCurrDataType.ToLower = "logical", {"==", "is.na", "! is.na"}, {"==", "<", "<=", ">", ">=", "!=", "is.na", "! is.na"}))
-        If ucrFilterByReceiver.strCurrDataType.ToLower IsNot "logical" OrElse selectedIndex < ucrFilterOperation.GetItemsCount Then
+        If ucrFilterByReceiver.strCurrDataType.ToLower IsNot "logical" AndAlso selectedIndex < ucrFilterOperation.GetItemsCount Then
             ucrFilterOperation.GetSetSelectedIndex = selectedIndex
         Else
             ucrFilterOperation.GetSetSelectedIndex = 0
