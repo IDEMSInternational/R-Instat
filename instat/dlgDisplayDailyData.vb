@@ -54,6 +54,7 @@ Public Class dlgDisplayDailyData
         Dim dctMissingvalues As New Dictionary(Of String, String)
         Dim dctTracevalues As New Dictionary(Of String, String)
         Dim dctZeroValues As New Dictionary(Of String, String)
+        'Dim dctFacetBy As New Dictionary(Of String)
         lstCheckboxes = New List(Of ucrCheck)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -171,6 +172,8 @@ Public Class dlgDisplayDailyData
         ucrInputComboZero.SetItems(dctZeroValues)
         ucrInputComboZero.bAllowNonConditionValues = True
 
+        ucrInputFacetBy.SetLinkedDisplayControl(lblFacetby)
+
         ucrSaveGraph.SetPrefix("Graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames)
@@ -221,11 +224,11 @@ Public Class dlgDisplayDailyData
 
         clsXLabFunction.SetPackageName("ggplot2")
         clsXLabFunction.SetRCommand("xlab")
-        clsXLabFunction.AddParameter("label", Chr(34) & "" & Chr(34),, iPosition:=0, bIncludeArgumentName:=False)
+        clsXLabFunction.AddParameter("label", "NULL", iPosition:=0, bIncludeArgumentName:=False)
 
 
         clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetFunction.SetRCommand("facet_grid")
+        clsFacetFunction.SetRCommand("facet_wrap")
         clsFacetFunction.AddParameter("scales", Chr(34) & "free_y" & Chr(34), iPosition:=0)
 
         clsNAFilterOperator.SetOperation("%>%")
@@ -236,7 +239,7 @@ Public Class dlgDisplayDailyData
 
 
         ucrSelectorDisplayDailyClimaticData.Reset()
-        ucrReceiverElement.SetMeAsReceiver()
+        ucrReceiverMultipleElements.SetMeAsReceiver()
 
         clsIdVarsFunction.SetRCommand("c")
         clsGGplotFunction.SetPackageName("ggplot2")
@@ -293,7 +296,7 @@ Public Class dlgDisplayDailyData
         clsDisplayDailyGraphOperator.AddParameter("daily_graph", clsRFunctionParameter:=clsDisplayDailyGraphFunction)
         clsDisplayDailyTableOperator.AddParameter("daily_table", clsRFunctionParameter:=clsDisplayDailyTable)
 
-        ucrBase.clsRsyntax.SetBaseROperator(clsDisplayDailyTableOperator)
+        ucrBase.clsRsyntax.SetBaseROperator(clsGgPlotOperator)
 
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
@@ -382,6 +385,7 @@ Public Class dlgDisplayDailyData
         Else
             ucrSelectorDisplayDailyClimaticData.SetParameterIsString()
             If rdoGraphByYear.Checked Then
+                ucrReceiverElement.SetMeAsReceiver()
                 ucrBase.clsRsyntax.iCallType = 3
                 ucrBase.clsRsyntax.SetBaseROperator(clsDisplayDailyGraphOperator)
             Else
