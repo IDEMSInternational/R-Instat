@@ -239,7 +239,8 @@ Public Class ucrScript
 
     Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
         cmdRun.Enabled = (txtScript.TextLength > 0)
-        'only enabled undo if text was change was directly caused by user   
+        'Only enabled undo if the text was changed directly by the user.  
+
         If bIsUserTextChangeEvent AndAlso Not mnuUndo.Enabled Then
             txtScript.ClearUndo() 'Clear undo, because this is now a new text input by the user.
 
