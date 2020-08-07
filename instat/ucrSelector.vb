@@ -43,8 +43,10 @@ Public Class ucrSelector
 
     Protected bSilentDataFrameChange As Boolean = False
 
-    'this list is used to hold a list of receivers listening to this selector.
-    'the receivers are ordered by tab index and are used in autoswitching receiver after selection change
+    '''<summary> The list of receivers listening to this selector. 
+    '''          The receivers are ordered by tab index. This list is used to automatically switch 
+    '''          focus to the next receiver whenever this selector changes selection.
+    '''</summary>
     Private lstOrderedReceivers As New List(Of ucrReceiver)
 
     Public Sub New()
