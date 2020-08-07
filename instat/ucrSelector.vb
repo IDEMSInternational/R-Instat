@@ -454,21 +454,23 @@ Public Class ucrSelector
 
 
     ''' <summary>
-    ''' Adds passed receiver to the end of the receivers list
-    ''' The receiver is only added if it does not exist in the list
+    ''' if <paramref name="ucrNewReceiver"/> is not yet in the list of receivers listening to 
+    ''' this selector, then inserts the receiver into the list. This list is ordered by tab index.
+    ''' If <paramref name="ucrNewReceiver"/> is already in the list then the receiver is not inserted.
     ''' </summary>
-    ''' <param name="ucrNewReceiver"></param>
+    ''' <param name="ucrNewReceiver"> The receiver to insert into the list.</param>
     Public Overridable Sub AddReceiver(ucrNewReceiver As ucrReceiver)
-        AddReceiver({ucrNewReceiver})
+        AddReceivers({ucrNewReceiver})
     End Sub
 
     ''' <summary>
-    ''' Adds passed enumerable of receivers to the end of the receivers list
-    ''' The receiver is only added if it does not exist in the list
-
+    ''' For each reciever in <paramref name="ucrNewReceivers"/>, if the receiver is not yet in 
+    ''' the list of receivers listening to this selector, then inserts the receiver into the list.  
+    ''' This list is ordered by tab index.
+    ''' If the receiver is already in the list then the receiver is not inserted.
     ''' </summary>
-    ''' <param name="ucrNewReceivers"></param>
-    Public Overridable Sub AddReceiver(ucrNewReceivers As IEnumerable(Of ucrReceiver))
+    ''' <param name="ucrNewReceivers"> The receivers to insert into the list.</param>
+    Public Overridable Sub AddReceivers(ucrNewReceivers As IEnumerable(Of ucrReceiver))
         'add the receiver to the list if it's not already added
         For Each ucr As ucrReceiver In ucrNewReceivers
             If Not lstOrderedReceivers.Contains(ucr) Then
