@@ -231,7 +231,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub txtScript_KeyDown(sender As Object, e As KeyEventArgs) Handles txtScript.KeyDown
-        'ignore the Ctrl,Shift commands. It could be a redo action whcih we want to ignore
+        'Ignore the Ctrl, Shift commands. It could be a redo action which we want to ignore.
         If Not (e.Control OrElse e.Shift OrElse e.Modifiers = (Keys.Control OrElse Keys.Shift)) Then
             bIsUserTextChangeEvent = True
         End If
