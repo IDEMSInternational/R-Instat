@@ -492,9 +492,12 @@ Public Class ucrSelector
     End Function
 
     ''' <summary>
-    ''' changes the focus of the next receiver from passed receiver and sets it as the 'current receiver' of the selector
+    ''' This subroutine is used to automatically switch focus to the next receiver whenever this 
+    ''' selector changes selection. 
+    ''' This subroutine sets the current receiver to be the next visible/enabled receiver in the 
+    ''' list of receivers listening to this selector.  This list is ordered by tab index. 
     ''' </summary>
-    ''' <param name="FromSelectedReceiver"></param>
+    ''' <param name="FromSelectedReceiver"> The receiver that has the current focus.</param>
     Private Sub AutoSwitchCurrentReceiver(FromSelectedReceiver As ucrReceiver)
         Dim ucrNewCurrentReceiver As ucrReceiver
         For i As Integer = 0 To lstOrderedReceivers.Count - 2
