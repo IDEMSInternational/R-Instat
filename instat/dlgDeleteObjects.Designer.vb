@@ -43,6 +43,8 @@ Partial Class dlgDeleteObjects
         Me.ucrReceiverObjectsToDelete = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDeleteObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputComboType = New instat.ucrInputComboBox()
+        Me.lblType = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblObjectsToDelete
@@ -62,6 +64,7 @@ Partial Class dlgDeleteObjects
         '
         'ucrSelectorDeleteObject
         '
+        Me.ucrSelectorDeleteObject.bDropUnusedFilterLevels = False
         Me.ucrSelectorDeleteObject.bShowHiddenColumns = False
         Me.ucrSelectorDeleteObject.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorDeleteObject, "ucrSelectorDeleteObject")
@@ -72,10 +75,24 @@ Partial Class dlgDeleteObjects
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrInputComboType
+        '
+        Me.ucrInputComboType.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboType.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboType, "ucrInputComboType")
+        Me.ucrInputComboType.Name = "ucrInputComboType"
+        '
+        'lblType
+        '
+        resources.ApplyResources(Me.lblType, "lblType")
+        Me.lblType.Name = "lblType"
+        '
         'dlgDeleteObjects
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblType)
+        Me.Controls.Add(Me.ucrInputComboType)
         Me.Controls.Add(Me.ucrReceiverObjectsToDelete)
         Me.Controls.Add(Me.lblObjectsToDelete)
         Me.Controls.Add(Me.ucrSelectorDeleteObject)
@@ -94,4 +111,6 @@ Partial Class dlgDeleteObjects
     Friend WithEvents ucrSelectorDeleteObject As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblObjectsToDelete As Label
     Friend WithEvents ucrReceiverObjectsToDelete As ucrReceiverMultiple
+    Friend WithEvents lblType As Label
+    Friend WithEvents ucrInputComboType As ucrInputComboBox
 End Class
