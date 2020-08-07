@@ -217,7 +217,8 @@ Public Class ucrScript
         End If
     End Sub
 
-    Private Sub menu_Redo(sender As Object, e As EventArgs) Handles mnuRedo.Click
+    Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
+
         'Determine if last operation can be undone in text box.   
         If txtScript.CanUndo Then
             bIsUserTextChangeEvent = False
