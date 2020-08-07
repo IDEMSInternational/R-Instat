@@ -20,11 +20,16 @@ Public Class sdgFiltersFromFactor
     Public strDataFrame As String
     Public clsFilterFunction As RFunction
     Public clsConditionsList As RFunction
+    Public clsFilterView As ROperator
     Private Sub sdgFiltersFromFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
     Public Sub InitialiseControls()
+
+        clsFilterView = New ROperator
+        clsFilterView.strOperation = "&"
+        clsFilterView.bForceIncludeOperation = False
 
         ucrFactorReceiver.Selector = ucrFactorSelctor
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
@@ -46,6 +51,12 @@ Public Class sdgFiltersFromFactor
 
         ucrFactorSelctor.SetParameter(New RParameter("factors", 0))
         ucrFactorSelctor.SetParameterIsrfunction()
+
+        lstFilters.Columns.Add("variables")
+        lstFilters.Columns.Add("conditios")
+
+        ucrFilterPreview.txtInput.ReadOnly = True
+
 
 
         ucrChkAndExistingFilter.SetText("AndExistingFilter")
@@ -96,4 +107,40 @@ Public Class sdgFiltersFromFactor
     Private Sub cmdToggleSelectAll_Click(sender As Object, e As EventArgs) Handles cmdToggleSelectAll.Click
         ucrFactorLevel.SetSelectionAllLevels(Not ucrFactorLevel.IsAllSelected())
     End Sub
+
+    Private Sub cmdAddCondition_Click(sender As Object, e As EventArgs) Handles cmdAddCondition.Click
+        Dim clsCurrentConditionView As New ROperator
+        Dim clsCurrentConditionList As New RFunction
+        Dim strCondition As String
+        Dim lviCondition As ListViewItem
+
+        clsCurrentConditionList.SetRCommand("list")
+        clsCurrentConditionView.AddParameter(iPosition:=0, strParameterValue:=ucrFactorReceiver.GetVariableNames(False))
+        clsCurrentConditionList.AddParameter("column", ucrFactorReceiver.GetVariableNames())
+        If ucrFactorReceiver.strCurrDataType.Contains("factor") Then
+            clsCurrentConditionView.SetOperation("%in%")
+            clsCurrentConditionList.AddParameter("operation", Chr(34) & "%in%" & Chr(34))
+            strCondition = ucrFactorLevel.GetSelectedLevels()
+        End If
+        clsConditionsList.AddParameter("C" & clsConditionsList.clsParameters.Count, clsRFunctionParameter:=(clsCurrentConditionList))
+        lviCondition = New ListViewItem({ucrFactorReceiver.GetVariableNames(), clsCurrentConditionView.strOperation & " " & strCondition})
+        lstFilters.Items.Add(lviCondition)
+        If clsFilterView.clsParameters.Count = 0 Then
+            clsFilterView.AddParameter(iPosition:=0, clsROperatorParameter:=(clsCurrentConditionView))
+        Else
+            clsFilterView.AddParameter(strParameterName:="Condition" & clsFilterView.clsParameters.Count - 1, clsROperatorParameter:=(clsCurrentConditionView))
+        End If
+        lstFilters.Columns(0).Width = -2
+        lstFilters.Columns(1).Width = -2
+        ucrFilterPreview.SetName(clsFilterView.ToScript())
+        ucrFactorReceiver.Clear()
+    End Sub
+
+    Private Sub ClearConditions()
+        clsFilterView.ClearParameters()
+        clsConditionsList.ClearParameters()
+        lstFilters.Items.Clear()
+        ucrFilterPreview.SetName("")
+    End Sub
+
 End Class
