@@ -305,20 +305,21 @@ Public Class dlgEnter
 
         'add rows of sample commands
         lstView.Items.Add(New ListViewItem({"seq(9 )"}))
-        lstView.Items.Item(0).ToolTipText = "todo. sensible tooltip here."
+        lstView.Items.Item(0).ToolTipText = "seq(9 )" 'todo. sensible tooltip here.
 
         lstView.Items.Add(New ListViewItem({"LETTERS"}))
-        lstView.Items.Item(1).ToolTipText = "todo. sensible tooltip here."
+        lstView.Items.Item(1).ToolTipText = "LETTERS" 'todo. sensible tooltip here.
 
         lstView.Items.Add(New ListViewItem({"month.name"}))
-        lstView.Items.Item(2).ToolTipText = "todo. sensible tooltip here"
+        lstView.Items.Item(2).ToolTipText = "month.name" 'todo. sensible tooltip here.
 
         lstView.Items.Add(New ListViewItem({"month.abb"}))
-        lstView.Items.Item(2).ToolTipText = "todo. sensible tooltip here"
+        lstView.Items.Item(2).ToolTipText = "month.abb" 'todo. sensible tooltip here.
 
 
         AddHandler lstView.DoubleClick, Sub()
-                                            If lstView.SelectedItems.Count > 1 Then
+                                            If lstView.SelectedItems.Count > 0 Then
+                                                ucrReceiverForEnterCalculation.Clear()
                                                 ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(lstView.SelectedItems.Item(0).SubItems(0).Text)
                                                 objPopup.Hide()
                                             End If
