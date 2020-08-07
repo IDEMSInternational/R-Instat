@@ -150,20 +150,20 @@
     <value>True</value>
   </data>
   <data name="lblData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 26</value>
+    <value>10, 25</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblData.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
+    <value>33, 13</value>
   </data>
   <data name="lblData.TabIndex" type="System.Int32, mscorlib">
     <value>152</value>
   </data>
   <data name="lblData.Text" xml:space="preserve">
-    <value>Data</value>
+    <value>Data:</value>
   </data>
   <data name="&gt;&gt;lblData.Name" xml:space="preserve">
     <value>lblData</value>
@@ -1187,9 +1187,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>10</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

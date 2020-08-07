@@ -322,6 +322,7 @@ Partial Class dlgEnter
         'ucrSaveEnterResultInto
         '
         Me.ucrSaveEnterResultInto.AddQuotesIfUnrecognised = True
+        Me.ucrSaveEnterResultInto.GetSetSelectedIndex = -1
         Me.ucrSaveEnterResultInto.IsReadOnly = False
         resources.ApplyResources(Me.ucrSaveEnterResultInto, "ucrSaveEnterResultInto")
         Me.ucrSaveEnterResultInto.Name = "ucrSaveEnterResultInto"
