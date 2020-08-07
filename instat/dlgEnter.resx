@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="chkShowEnterArguments.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 23</value>
+    <value>371, 18</value>
   </data>
   <data name="chkShowEnterArguments.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 17</value>
@@ -150,7 +150,7 @@
     <value>True</value>
   </data>
   <data name="lblData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 25</value>
+    <value>10, 20</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblData.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -178,19 +178,19 @@
     <value>8</value>
   </data>
   <data name="chkSaveEnterResultInto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 259</value>
+    <value>11, 248</value>
   </data>
   <data name="chkSaveEnterResultInto.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="chkSaveEnterResultInto.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 17</value>
+    <value>110, 17</value>
   </data>
   <data name="chkSaveEnterResultInto.TabIndex" type="System.Int32, mscorlib">
     <value>157</value>
   </data>
   <data name="chkSaveEnterResultInto.Text" xml:space="preserve">
-    <value>Save Result into</value>
+    <value>Save Result Into:</value>
   </data>
   <data name="&gt;&gt;chkSaveEnterResultInto.Name" xml:space="preserve">
     <value>chkSaveEnterResultInto</value>
@@ -616,7 +616,7 @@
     <value>0</value>
   </data>
   <data name="grpEnterKeybord1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 58</value>
+    <value>163, 48</value>
   </data>
   <data name="grpEnterKeybord1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1033,7 +1033,7 @@
     <value>0</value>
   </data>
   <data name="grpEnterKeyboard2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>364, 58</value>
+    <value>364, 48</value>
   </data>
   <data name="grpEnterKeyboard2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1060,13 +1060,13 @@
     <value>2</value>
   </data>
   <data name="ucrSaveEnterResultInto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>195, 254</value>
+    <value>124, 244</value>
   </data>
   <data name="ucrSaveEnterResultInto.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="ucrSaveEnterResultInto.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 22</value>
+    <value>266, 22</value>
   </data>
   <data name="ucrSaveEnterResultInto.TabIndex" type="System.Int32, mscorlib">
     <value>158</value>
@@ -1084,7 +1084,7 @@
     <value>3</value>
   </data>
   <data name="ucrDataFrameEnter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 65</value>
+    <value>11, 55</value>
   </data>
   <data name="ucrDataFrameEnter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1114,13 +1114,13 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>573, 346</value>
+    <value>573, 336</value>
   </data>
   <data name="btnExample.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnExample.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 21</value>
+    <value>301, 16</value>
   </data>
   <data name="btnExample.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1147,7 +1147,7 @@
     <value>0</value>
   </data>
   <data name="ucrTryModelling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 215</value>
+    <value>3, 202</value>
   </data>
   <data name="ucrTryModelling.Size" type="System.Drawing.Size, System.Drawing">
     <value>480, 33</value>
@@ -1168,7 +1168,7 @@
     <value>1</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 286</value>
+    <value>11, 278</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>452, 52</value>
@@ -1201,7 +1201,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverForEnterCalculation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 21</value>
+    <value>44, 16</value>
   </data>
   <data name="ucrReceiverForEnterCalculation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
