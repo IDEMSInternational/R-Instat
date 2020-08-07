@@ -1693,7 +1693,7 @@ DataSheet$set("public", "get_last_graph", function() {
 )
 
 DataSheet$set("public", "rename_object", function(object_name, new_name, object_type = "object") {
-  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model")) stop(object_type, " must be either object (graph, table or model), filter or a calculation")
+  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model")) stop(object_type, " must be either object (graph, table or model), filter or a calculation.")
   #Temp fix:: added graph, table and model so as to distinguish this when implementing it in the dialog. Otherwise they remain as objects
   if (object_type %in% c("object", "graph", "table","model")){
     if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
@@ -1703,6 +1703,7 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
   else if (object_type == "filter"){
     if(!object_name %in% names(private$filters)) stop(object_name, " not found in filters list")
     if(new_name %in% names(private$filters)) stop(new_name, " is already a filter name. Cannot rename ", object_name, " to ", new_name)
+    if("no_filter" == object_name) stop("Renaming no_filter is not allowed.")
     names(private$filters)[names(private$filters) == object_name] <- new_name
     if(private$.current_filter$name == object_name){private$.current_filter$name <- new_name}
   } 
@@ -1710,6 +1711,26 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
     if(!object_name %in% names(private$calculations)) stop(object_name, " not found in calculations list")
     if(new_name %in% names(private$calculations)) stop(new_name, " is already a calculation name. Cannot rename ", object_name, " to ", new_name)
     names(private$calculations)[names(private$calculations) == object_name] <- new_name
+  }
+}
+)
+
+DataSheet$set("public", "delete_objects", function(data_name, object_names, object_type = "object") {
+  if(!object_type %in% c("object", "graph", "table","model","filter", "calculation")) stop(object_type, " must be either object (graph, table or model), filter or a calculation.")
+  if(any(object_type == c("object", "graph", "table","model"))){
+      if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in overall objects list.")
+      private$objects[names(private$objects) %in% object_names] <- NULL
+    }else if(object_type == "filter"){
+      if(!all(object_names %in% names(private$filters))) stop(object_names, " not found in filters list.")
+      if("no_filter" %in% object_names) stop("no_filter cannot be deleted.")
+      if(any(private$.current_filter$name %in% object_names))stop(private$.current_filter$name, " is currently in use and cannot be deleted.")
+      private$filters[names(private$filters) %in% object_names] <- NULL
+    }else if(object_type == "calculation"){
+      if(!object_names %in% names(private$calculations)) stop(object_names, " not found in calculations list.")
+      private$calculations[names(private$calculations) %in% object_names] <- NULL
+    }
+  if(!is.null(private$.last_graph) && length(private$.last_graph) == 2 && private$.last_graph[1] == data_name && private$.last_graph[2] %in% object_names) {
+    private$.last_graph <- NULL
   }
 }
 )

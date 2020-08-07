@@ -128,8 +128,9 @@ Public Class ucrReceiverExpression
     End Function
 
     Public Sub AddtoCombobox(strNew As String)
-        cboExpression.Items.Insert(0, strNew)
-
+        If Not cboExpression.Items.Contains(strNew) Then
+            cboExpression.Items.Insert(0, strNew)
+        End If
     End Sub
 
     Private Sub cboExpression_KeyUp(sender As Object, e As KeyEventArgs) Handles cboExpression.KeyUp
