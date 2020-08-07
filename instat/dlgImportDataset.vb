@@ -580,11 +580,13 @@ Public Class dlgImportDataset
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
             ucrPanelFixedWidthText.Show()
             grpCSV.Text = "Import Text Options"
+            grpCSV.Location = New System.Drawing.Point(9, 99) 'set the location of the groupbox to adjust gaps in the form UI
             grpCSV.Show()
         ElseIf strFileExt = ".csv" Then
             strFileType = "CSV"
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
             grpCSV.Text = "Import CSV Options"
+            grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
             grpCSV.Show()
         ElseIf strFileExt = ".dat" Then
             strFileType = "DAT"
