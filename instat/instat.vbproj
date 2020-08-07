@@ -226,6 +226,18 @@
     <Compile Include="dlgTaylorDiagram.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgExtremesDisplayOptions.Designer.vb">
+      <DependentUpon>sdgExtremesDisplayOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgExtremesDisplayOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgExtremesMethod.Designer.vb">
+      <DependentUpon>sdgExtremesMethod.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgExtremesMethod.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgFiltersFromFactor.Designer.vb">
       <DependentUpon>sdgFiltersFromFactor.vb</DependentUpon>
     </Compile>
