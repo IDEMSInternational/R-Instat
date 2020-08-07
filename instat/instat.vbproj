@@ -179,6 +179,7 @@
     <Compile Include="clsCustomRenderer.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
+    <Compile Include="clsPopup.vb" />
     <Compile Include="clsQualityControl.vb" />
     <Compile Include="clsRCodeStructure.vb" />
     <Compile Include="clsRegressionDefaults.vb" />
@@ -211,6 +212,30 @@
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgHomogenization.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgInfillMissingValues.Designer.vb">
+      <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgInfillMissingValues.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTaylorDiagram.Designer.vb">
+      <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTaylorDiagram.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgExtremesDisplayOptions.Designer.vb">
+      <DependentUpon>sdgExtremesDisplayOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgExtremesDisplayOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgExtremesMethod.Designer.vb">
+      <DependentUpon>sdgExtremesMethod.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgExtremesMethod.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgFiltersFromFactor.Designer.vb">
@@ -2517,6 +2542,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHomogenization.resx">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInfillMissingValues.resx">
+      <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTaylorDiagram.resx">
+      <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFiltersFromFactor.resx">
       <DependentUpon>sdgFiltersFromFactor.vb</DependentUpon>

@@ -22,7 +22,8 @@ Public Class ucrTry
     Private CommandModel As String = ""
     Private bIsModel As Boolean
     Private strError As String
-    Private WithEvents ucrReceiverScript As ucrReceiverExpression
+    Private WithEvents ucrReceiverScript As New ucrReceiverExpression
+    Private WithEvents ucrModelPreview As New ucrInputTextBox
     Private clsRSyntax As RSyntax
     Private bstrVecOutput As Boolean
 
@@ -37,8 +38,14 @@ Public Class ucrTry
         bstrVecOutput = False
     End Sub
 
-    Public Sub SetReceiver(ucrNewReceiverScript As ucrReceiverExpression)
-        ucrReceiverScript = ucrNewReceiverScript
+    Public Sub SetReceiver(Optional ucrNewReceiverScript As ucrReceiverExpression = Nothing, Optional ucrNewInputTextBox As ucrInputTextBox = Nothing)
+        If ucrNewReceiverScript IsNot Nothing Then
+            ucrReceiverScript = ucrNewReceiverScript
+        End If
+
+        If ucrNewInputTextBox IsNot Nothing Then
+            ucrModelPreview = ucrNewInputTextBox
+        End If
     End Sub
 
     Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
@@ -94,9 +101,10 @@ Public Class ucrTry
 
         Try
             setToCommandOrModel()
-            If ucrReceiverScript.IsEmpty Then
+            If (ucrReceiverScript.IsEmpty() AndAlso ucrModelPreview.IsEmpty()) Then
                 ucrInputTryMessage.SetName("")
             Else
+
                 For Each clsTempCode In clsRSyntax.lstBeforeCodes
                     clsCodeClone = clsTempCode.Clone()
                     strBeforeAfterScript = ""
@@ -221,6 +229,18 @@ Public Class ucrTry
     End Sub
 
     Private Sub ucrReceiverScript_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverScript.SelectionChanged
+        ResetInputTryMessage()
+    End Sub
+    Private Sub ucrModelPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrModelPreview.ControlValueChanged
+        ResetInputTryMessage()
+    End Sub
+
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary> Clears the ucrInputTryMessage textbox and sets its colour to white incase the 
+    ''' ucrReceiverScript selection changes on the value for the ucrModelPreview changes    </summary>
+    '''--------------------------------------------------------------------------------------------
+    Private Sub ResetInputTryMessage()
         ucrInputTryMessage.SetName("")
         ucrInputTryMessage.txtInput.BackColor = Color.White
         ucrInputTryMessage.txtInput.Controls.Clear()

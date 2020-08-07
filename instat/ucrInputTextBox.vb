@@ -77,6 +77,10 @@ Public Class ucrInputTextBox
         OnContentsChanged()
     End Sub
 
+    Private Sub txtInput_Click(sender As Object, e As EventArgs) Handles txtInput.Click
+        OnControlClicked()
+    End Sub
+
     Public Property IsMultiline As Boolean
         Get
             Return txtInput.Multiline
