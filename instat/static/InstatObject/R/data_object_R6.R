@@ -1468,7 +1468,7 @@ DataSheet$set("public", "set_protected_columns", function(col_names) {
 }
 )
 
-DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE, is_no_filter = FALSE) {
+DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE, is_no_filter = FALSE, and_or = "and") {
   if(missing(filter)) stop("filter is required")
   if(filter_name == "") filter_name = next_default_item("Filter", names(private$filters))
   
@@ -1483,7 +1483,7 @@ DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace
   }
   else {
     if(filter_name %in% names(private$filters)) message("A filter named ", filter_name, " already exists. It will be replaced by the new filter.")
-    filter_calc = calculation$new(type = "filter", filter_conditions = filter, name = filter_name, parameters = list(na.rm = na.rm, is_no_filter = is_no_filter))
+    filter_calc = calculation$new(type = "filter", filter_conditions = filter, name = filter_name, parameters = list(na.rm = na.rm, is_no_filter = is_no_filter, and_or = and_or))
     private$filters[[filter_name]] <- filter_calc
     self$append_to_changes(list(Added_filter, filter_name))
     if(set_as_current) {
@@ -1550,7 +1550,11 @@ DataSheet$set("public", "get_filter_as_logical", function(filter_name) {
       }
       i = i + 1
     }
-    out <- apply(result, 1, all)
+    and_or <- curr_filter$parameters[["and_or"]] 
+    if(is.null(and_or)) and_or <- "and"
+    if(and_or == "and") out <- apply(result, 1, all) 
+    else if (and_or == "or") out <- apply(result, 1, any)
+    else stop(and_or, " should be and or or.")
     out[is.na(out)] <- !curr_filter$parameters[["na.rm"]]
   }
   return(out)
