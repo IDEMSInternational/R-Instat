@@ -314,7 +314,7 @@ Public Class dlgEnter
         lstView.Items.Item(2).ToolTipText = "month.name" 'todo. sensible tooltip here.
 
         lstView.Items.Add(New ListViewItem({"month.abb"}))
-        lstView.Items.Item(2).ToolTipText = "month.abb" 'todo. sensible tooltip here.
+        lstView.Items.Item(3).ToolTipText = "month.abb" 'todo. sensible tooltip here.
 
 
         AddHandler lstView.DoubleClick, Sub()
