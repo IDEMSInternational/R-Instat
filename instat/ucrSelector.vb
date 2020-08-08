@@ -504,7 +504,6 @@ Public Class ucrSelector
             If lstOrderedReceivers.Item(i) Is FromSelectedReceiver Then
                 ucrNewCurrentReceiver = lstOrderedReceivers.Item(i + 1)
                 If ucrNewCurrentReceiver.Visible AndAlso ucrNewCurrentReceiver.Enabled Then
-
                     ucrNewCurrentReceiver.Focus() 'sets current focus enabling correct tab navigation
                     SetCurrentReceiver(ucrNewCurrentReceiver)
                 Else
