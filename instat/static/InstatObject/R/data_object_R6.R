@@ -1468,7 +1468,7 @@ DataSheet$set("public", "set_protected_columns", function(col_names) {
 }
 )
 
-DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE, is_no_filter = FALSE, and_or = "and") {
+DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE, is_no_filter = FALSE, and_or = "&") {
   if(missing(filter)) stop("filter is required")
   if(filter_name == "") filter_name = next_default_item("Filter", names(private$filters))
   
@@ -1551,10 +1551,10 @@ DataSheet$set("public", "get_filter_as_logical", function(filter_name) {
       i = i + 1
     }
     and_or <- curr_filter$parameters[["and_or"]] 
-    if(is.null(and_or)) and_or <- "and"
-    if(and_or == "and") out <- apply(result, 1, all) 
-    else if (and_or == "or") out <- apply(result, 1, any)
-    else stop(and_or, " should be and or or.")
+    if(is.null(and_or)) and_or <- "&"
+    if(and_or == "&") out <- apply(result, 1, all) 
+    else if (and_or == "|") out <- apply(result, 1, any)
+    else stop(and_or, " should be & or |.")
     out[is.na(out)] <- !curr_filter$parameters[["na.rm"]]
   }
   return(out)
@@ -1594,7 +1594,7 @@ DataSheet$set("public", "filter_string", function(filter_name) {
   out = "("
   i = 1
   for(condition in curr_filter$filter_conditions) {
-    if(i != 1) out = paste(out, "&")
+    if(i != 1) out = paste(out, curr_filter$parameters[["and_or"]])
     out = paste0(out, " (", condition[["column"]], " ", condition[["operation"]])
     if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(paste0("'", condition[["value"]], "'"), collapse = ","), ")")
     else out = paste(out, condition[["value"]])

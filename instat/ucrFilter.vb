@@ -373,13 +373,13 @@ Public Class ucrFilter
         If cmdCombineWithAndOr.Text.Contains("All combined with |") Then
             clsFilterView.strOperation = "&"
             ucrFilterPreview.SetName(clsFilterView.ToScript())
-            clsFilterFunction.AddParameter("and_or", Chr(34) & "and" & Chr(34), iPosition:=3)
+            clsFilterFunction.AddParameter("and_or", Chr(34) & "&" & Chr(34), iPosition:=3)
             cmdCombineWithAndOr.Text = " All combined with &&"
             ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (year > 1990) & (year < 2021) they have all to be TRUE.")
         Else
             clsFilterView.strOperation = "|"
             ucrFilterPreview.SetName(clsFilterView.ToScript())
-            clsFilterFunction.AddParameter("and_or", Chr(34) & "or" & Chr(34), iPosition:=3)
+            clsFilterFunction.AddParameter("and_or", Chr(34) & "|" & Chr(34), iPosition:=3)
             cmdCombineWithAndOr.Text = "All combined with |"
             ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (sunhrs >14) | (sunhrs <0) then just one need be TRUE.")
         End If
