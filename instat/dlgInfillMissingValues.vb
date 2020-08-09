@@ -218,7 +218,7 @@ Public Class dlgInfillMissingValues
         ucrChkCopyFromBelow.SetRCode(clsNaLocfFunction, bReset)
         ucrChkBy.SetRCode(clsAggregateFunction, bReset)
         ucrNudMaximum.SetRCode(clsApproximateFunction, bReset)
-        ucrChkMaxGap.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkMaxGap.SetRCode(clsAggregateFunction, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeedFunction, bReset)
         ucrChkSetSeed.SetRSyntax(ucrBase.clsRsyntax, bReset)
 
