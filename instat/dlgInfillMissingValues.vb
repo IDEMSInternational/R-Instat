@@ -178,9 +178,11 @@ Public Class dlgInfillMissingValues
         clsNaFillFunction.SetRCommand("na.fill")
         clsNaFillFunction.AddParameter("x", "x", iPosition:=0, bIncludeArgumentName:=False)
 
-        clsStructTSFunction.SetPackageName("zoo")
-        clsStructTSFunction.SetRCommand("na.StructTS")
-        clsStructTSFunction.AddParameter("object", clsRFunctionParameter:=clsZooRegFunction, iPosition:=1)
+        clsStructTSFunction.SetPackageName("imputeTS")
+        clsStructTSFunction.SetRCommand("na_kalman")
+        clsStructTSFunction.AddParameter("x", "x", iPosition:=0, bIncludeArgumentName:=False)
+        clsStructTSFunction.AddParameter("model", Chr(34) & "StructTS" & Chr(34), iPosition:=1)
+        clsStructTSFunction.AddParameter("smooth", "TRUE", iPosition:=2)
 
         clsZooRegFunction.SetPackageName("zoo")
         clsZooRegFunction.SetRCommand("zooreg")
