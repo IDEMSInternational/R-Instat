@@ -4440,6 +4440,9 @@
     <EmbeddedResource Include="ucrFactor.sw-KE.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrFilePath.resx">
+      <DependentUpon>ucrFilePath.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrFilter.resx">
       <DependentUpon>ucrFilter.vb</DependentUpon>
     </EmbeddedResource>
