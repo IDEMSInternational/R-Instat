@@ -1710,6 +1710,12 @@
     <Compile Include="ucrElementRectControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrFilePath.Designer.vb">
+      <DependentUpon>ucrFilePath.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFilePath.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrFilter.Designer.vb">
       <DependentUpon>ucrFilter.vb</DependentUpon>
     </Compile>
