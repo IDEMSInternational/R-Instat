@@ -37,8 +37,57 @@ Partial Class ucrFilePath
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
+        Me.ucrInputExportFile = New instat.ucrInputTextBox()
+        Me.cmdBrowse = New System.Windows.Forms.Button()
+        Me.lblName = New System.Windows.Forms.Label()
+        Me.SuspendLayout()
+        '
+        'ucrInputExportFile
+        '
+        Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
+        Me.ucrInputExportFile.IsMultiline = False
+        Me.ucrInputExportFile.IsReadOnly = True
+        Me.ucrInputExportFile.Location = New System.Drawing.Point(56, 2)
+        Me.ucrInputExportFile.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputExportFile.Name = "ucrInputExportFile"
+        Me.ucrInputExportFile.Size = New System.Drawing.Size(240, 23)
+        Me.ucrInputExportFile.TabIndex = 7
+        '
+        'cmdBrowse
+        '
+        Me.cmdBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdBrowse.Location = New System.Drawing.Point(297, 1)
+        Me.cmdBrowse.Name = "cmdBrowse"
+        Me.cmdBrowse.Size = New System.Drawing.Size(50, 23)
+        Me.cmdBrowse.TabIndex = 8
+        Me.cmdBrowse.Text = "Browse"
+        Me.cmdBrowse.UseVisualStyleBackColor = True
+        '
+        'lblName
+        '
+        Me.lblName.AutoSize = True
+        Me.lblName.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblName.Location = New System.Drawing.Point(2, 6)
+        Me.lblName.Name = "lblName"
+        Me.lblName.Size = New System.Drawing.Size(50, 13)
+        Me.lblName.TabIndex = 6
+        Me.lblName.Text = "Save As:"
+        '
+        'ucrFilePath
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputExportFile)
+        Me.Controls.Add(Me.cmdBrowse)
+        Me.Controls.Add(Me.lblName)
+        Me.Name = "ucrFilePath"
+        Me.Size = New System.Drawing.Size(351, 27)
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
     End Sub
 
+    Friend WithEvents ucrInputExportFile As ucrInputTextBox
+    Friend WithEvents cmdBrowse As Button
+    Friend WithEvents lblName As Label
 End Class
