@@ -406,14 +406,6 @@ Public Class ucrCore
         'UpdateControl()
     End Sub
 
-    ''Set a linked paramter name and what the control should do when the parameter is not in the R code
-    'Public Sub SetLinkedParameterName(strNewLinkedParameterName As String, Optional bNewHideIfLinkedParameterMissing As Boolean = False, Optional bNewDisableIfLinkedParameterMissing As Boolean = False)
-    '    strLinkedParameterName = strNewLinkedParameterName
-    '    bHideIfParameterMissing = bNewHideIfLinkedParameterMissing
-    '    bDisabledIfParameterMissing = bNewDisableIfLinkedParameterMissing
-    'End Sub
-
-    'Set the Text property of the control(s) inside this control (should only be one). Implemented different by each VB control.
 
     ''' <summary> Set the Text property of the control(s) inside this control (should only be one). 
     ''' Implemented different by each VB control. </summary>
@@ -622,6 +614,7 @@ Public Class ucrCore
     Private Sub ucrCore_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         SetLinkedDisplayControlVisibility()
     End Sub
+
     ''' <summary>
     ''' Set the linked control to display to be visible property and return the contains groupbox.
     ''' </summary>
