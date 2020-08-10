@@ -83,7 +83,7 @@ Partial Class ucrFilePath
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.lblName)
         Me.Name = "ucrFilePath"
-        Me.Size = New System.Drawing.Size(351, 27)
+        Me.Size = New System.Drawing.Size(351, 26)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
