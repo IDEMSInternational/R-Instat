@@ -63,8 +63,15 @@ Partial Class dlgDisplayDailyData
         Me.ucrChkSum = New instat.ucrCheck()
         Me.ucrChkMin = New instat.ucrCheck()
         Me.ucrChkMean = New instat.ucrCheck()
+        Me.grpFacet = New System.Windows.Forms.GroupBox()
+        Me.lblScales = New System.Windows.Forms.Label()
+        Me.ucrInputScale = New instat.ucrInputComboBox()
+        Me.lblFacetby = New System.Windows.Forms.Label()
+        Me.ucrNudNumberOfColumns = New instat.ucrNud()
+        Me.ucrInputFacetBy = New instat.ucrInputComboBox()
+        Me.lblNumberOfColumns = New System.Windows.Forms.Label()
+        Me.ucrChkNumberOfColumns = New instat.ucrCheck()
         Me.rdoGraphByYear = New System.Windows.Forms.RadioButton()
-        Me.ucrChkFreeYScales = New instat.ucrCheck()
         Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrInputComboZero = New instat.ucrInputComboBox()
@@ -81,10 +88,9 @@ Partial Class dlgDisplayDailyData
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverSingleElements = New instat.ucrReceiverSingle()
-        Me.ucrInputFacetBy = New instat.ucrInputComboBox()
-        Me.lblFacetby = New System.Windows.Forms.Label()
         Me.grpGraph.SuspendLayout()
         Me.grpSummary.SuspendLayout()
+        Me.grpFacet.SuspendLayout()
         Me.SuspendLayout()
         '
         'rdoTable
@@ -249,6 +255,64 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.ucrChkMean, "ucrChkMean")
         Me.ucrChkMean.Name = "ucrChkMean"
         '
+        'grpFacet
+        '
+        Me.grpFacet.Controls.Add(Me.lblScales)
+        Me.grpFacet.Controls.Add(Me.ucrInputScale)
+        Me.grpFacet.Controls.Add(Me.lblFacetby)
+        Me.grpFacet.Controls.Add(Me.ucrNudNumberOfColumns)
+        Me.grpFacet.Controls.Add(Me.ucrInputFacetBy)
+        Me.grpFacet.Controls.Add(Me.lblNumberOfColumns)
+        Me.grpFacet.Controls.Add(Me.ucrChkNumberOfColumns)
+        resources.ApplyResources(Me.grpFacet, "grpFacet")
+        Me.grpFacet.Name = "grpFacet"
+        Me.grpFacet.TabStop = False
+        '
+        'lblScales
+        '
+        resources.ApplyResources(Me.lblScales, "lblScales")
+        Me.lblScales.Name = "lblScales"
+        '
+        'ucrInputScale
+        '
+        Me.ucrInputScale.AddQuotesIfUnrecognised = True
+        Me.ucrInputScale.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputScale, "ucrInputScale")
+        Me.ucrInputScale.Name = "ucrInputScale"
+        '
+        'lblFacetby
+        '
+        resources.ApplyResources(Me.lblFacetby, "lblFacetby")
+        Me.lblFacetby.Name = "lblFacetby"
+        '
+        'ucrNudNumberOfColumns
+        '
+        Me.ucrNudNumberOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNumberOfColumns, "ucrNudNumberOfColumns")
+        Me.ucrNudNumberOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Name = "ucrNudNumberOfColumns"
+        Me.ucrNudNumberOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputFacetBy
+        '
+        Me.ucrInputFacetBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputFacetBy.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFacetBy, "ucrInputFacetBy")
+        Me.ucrInputFacetBy.Name = "ucrInputFacetBy"
+        '
+        'lblNumberOfColumns
+        '
+        resources.ApplyResources(Me.lblNumberOfColumns, "lblNumberOfColumns")
+        Me.lblNumberOfColumns.Name = "lblNumberOfColumns"
+        '
+        'ucrChkNumberOfColumns
+        '
+        Me.ucrChkNumberOfColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkNumberOfColumns, "ucrChkNumberOfColumns")
+        Me.ucrChkNumberOfColumns.Name = "ucrChkNumberOfColumns"
+        '
         'rdoGraphByYear
         '
         resources.ApplyResources(Me.rdoGraphByYear, "rdoGraphByYear")
@@ -258,12 +322,6 @@ Partial Class dlgDisplayDailyData
         Me.rdoGraphByYear.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoGraphByYear.Name = "rdoGraphByYear"
         Me.rdoGraphByYear.UseVisualStyleBackColor = True
-        '
-        'ucrChkFreeYScales
-        '
-        Me.ucrChkFreeYScales.Checked = False
-        resources.ApplyResources(Me.ucrChkFreeYScales, "ucrChkFreeYScales")
-        Me.ucrChkFreeYScales.Name = "ucrChkFreeYScales"
         '
         'ucrReceiverMultipleElements
         '
@@ -385,32 +443,18 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverSingleElements.strNcFilePath = ""
         Me.ucrReceiverSingleElements.ucrSelector = Nothing
         '
-        'ucrInputFacetBy
-        '
-        Me.ucrInputFacetBy.AddQuotesIfUnrecognised = True
-        Me.ucrInputFacetBy.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFacetBy, "ucrInputFacetBy")
-        Me.ucrInputFacetBy.Name = "ucrInputFacetBy"
-        '
-        'lblFacetby
-        '
-        resources.ApplyResources(Me.lblFacetby, "lblFacetby")
-        Me.lblFacetby.Name = "lblFacetby"
-        '
         'dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblFacetby)
-        Me.Controls.Add(Me.ucrInputFacetBy)
-        Me.Controls.Add(Me.ucrChkFreeYScales)
+        Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.ucrReceiverMultipleElements)
         Me.Controls.Add(Me.rdoGraphByYear)
-        Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.lblElements)
         Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrInputComboZero)
         Me.Controls.Add(Me.grpGraph)
+        Me.Controls.Add(Me.grpFacet)
         Me.Controls.Add(Me.ucrInputComboMissing)
         Me.Controls.Add(Me.ucrInputComboTrace)
         Me.Controls.Add(Me.ucrChkMissing)
@@ -438,6 +482,8 @@ Partial Class dlgDisplayDailyData
         Me.grpGraph.ResumeLayout(False)
         Me.grpGraph.PerformLayout()
         Me.grpSummary.ResumeLayout(False)
+        Me.grpFacet.ResumeLayout(False)
+        Me.grpFacet.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -484,7 +530,12 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents rdoGraphByYear As RadioButton
     Friend WithEvents ucrReceiverSingleElements As ucrReceiverSingle
     Friend WithEvents ucrReceiverMultipleElements As ucrReceiverMultiple
-    Friend WithEvents ucrChkFreeYScales As ucrCheck
     Friend WithEvents lblFacetby As Label
     Friend WithEvents ucrInputFacetBy As ucrInputComboBox
+    Friend WithEvents ucrChkNumberOfColumns As ucrCheck
+    Friend WithEvents ucrNudNumberOfColumns As ucrNud
+    Friend WithEvents lblNumberOfColumns As Label
+    Friend WithEvents grpFacet As GroupBox
+    Friend WithEvents lblScales As Label
+    Friend WithEvents ucrInputScale As ucrInputComboBox
 End Class
