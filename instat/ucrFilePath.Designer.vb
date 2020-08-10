@@ -45,6 +45,7 @@ Partial Class ucrFilePath
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = True
         Me.ucrInputFilePath.Location = New System.Drawing.Point(56, 2)
@@ -55,6 +56,7 @@ Partial Class ucrFilePath
         '
         'btnBrowse
         '
+        Me.btnBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.btnBrowse.Location = New System.Drawing.Point(297, 1)
         Me.btnBrowse.Name = "btnBrowse"
