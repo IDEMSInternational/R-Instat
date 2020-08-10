@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.IO
 Imports instat.Translations
 Public Class dlgExportRWorkspace
     Private bFirstLoad As Boolean = True
@@ -36,7 +35,6 @@ Public Class dlgExportRWorkspace
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 555
-        ucrInputExportFile.IsReadOnly = True
 
         ucrReceiverMultiple.SetParameter(New RParameter("data_names", 0))
         ucrReceiverMultiple.SetParameterIsString()
@@ -44,7 +42,7 @@ Public Class dlgExportRWorkspace
         ucrReceiverMultiple.strSelectorHeading = "Data Frames"
         ucrReceiverMultiple.SetItemType("dataframe")
 
-        ucrInputExportFile.SetParameter(New RParameter("file", 1))
+        ucrFilePath.SetPathControlParameter(New RParameter("file", 1))
 
         ucrChkMetadata.SetParameter(New RParameter("include_metadata", 2))
         ucrChkMetadata.SetText("Include Metadata")
@@ -65,7 +63,7 @@ Public Class dlgExportRWorkspace
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
 
-        ucrInputExportFile.SetName("")
+        ucrFilePath.ResetPathControl()
         ucrSelectorForDataFrames.Reset()
         ucrReceiverMultiple.SetMeAsReceiver()
 
@@ -74,15 +72,16 @@ Public Class dlgExportRWorkspace
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'ucrSelectorForDataFrames.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)  'todo. check if needed
+        ucrReceiverMultiple.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkMetadata.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkGraphs.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkModels.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrFilePath.SetPathControlRcode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrInputExportFile.IsEmpty AndAlso Not ucrReceiverMultiple.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrFilePath.IsEmpty AndAlso Not ucrReceiverMultiple.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -91,33 +90,13 @@ Public Class dlgExportRWorkspace
         TestOkEnabled()
     End Sub
 
-    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
-        Dim strCurrentFilePathName As String = ucrInputExportFile.GetText()
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Export R Workspace"
-            dlgSave.Filter = "Saved R Objects (*.RData)|*.RData"
-            If String.IsNullOrEmpty(strCurrentFilePathName) Then
-                'ucrReceiverMultiple is a multireceiver. So give a suggestive name if it has 1 item only
-                If ucrReceiverMultiple.GetVariableNamesList().Length = 1 Then
-                    dlgSave.FileName = ucrReceiverMultiple.GetVariableNames(bWithQuotes:=False)
-                End If
-                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            Else
-                strCurrentFilePathName = strCurrentFilePathName.Replace("/", "\")
-                dlgSave.FileName = Path.GetFileName(strCurrentFilePathName)
-                dlgSave.InitialDirectory = Path.GetDirectoryName(strCurrentFilePathName) 'use the previous path as initial dir
-            End If
-            If DialogResult.OK = dlgSave.ShowDialog() Then
-                ucrInputExportFile.SetName(dlgSave.FileName.Replace("\", "/")) 'R uses / slashes for file paths. so \ needs to be replaced
-            End If
-        End Using
+    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverMultiple.ControlContentsChanged
+        'ucrReceiverMultiple is a multireceiver. So give a suggestive name if it has 1 item only
+        ucrFilePath.DefaultFileSuggestionName = If(ucrReceiverMultiple.GetVariableNamesList().Length = 1, ucrReceiverMultiple.GetVariableNames(bWithQuotes:=False), "")
+        TestOkEnabled()
     End Sub
 
-    Private Sub ucrInputExportFile_Click() Handles ucrInputExportFile.ControlClicked
-        cmdBrowse.PerformClick()
-    End Sub
-
-    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrReceiverMultiple.ControlContentsChanged
+    Private Sub ucrFilePath_FilePathChanged() Handles ucrFilePath.FilePathChanged
         TestOkEnabled()
     End Sub
 End Class

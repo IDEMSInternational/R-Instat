@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.IO
 Imports instat.Translations
 Public Class dlgExportGraphAsImage
     Private bFirstload As Boolean = True
@@ -37,7 +36,8 @@ Public Class dlgExportGraphAsImage
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 556
-        ucrInputFile.SetParameter(New RParameter("filename", 0))
+
+        ucrFilePath.SetPathControlParameter(New RParameter("filename", 0))
 
         ucrSelectedGraphReceiver.SetParameter(New RParameter("plot", 1))
         ucrSelectedGraphReceiver.SetParameterIsRFunction()
@@ -51,9 +51,8 @@ Public Class dlgExportGraphAsImage
     Private Sub SetDefaults()
         clsggSave = New RFunction
 
-        ucrInputFile.Reset()
         ucrSelectorGraphAsImage.Reset()
-        ucrInputFile.SetName("")
+        ucrFilePath.ResetPathControl()
 
         clsggSave.SetPackageName("ggplot2")
         clsggSave.SetRCommand("ggsave")
@@ -61,15 +60,12 @@ Public Class dlgExportGraphAsImage
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorGraphAsImage.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrFilePath.SetPathControlRcode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrSelectedGraphReceiver.IsEmpty AndAlso Not ucrInputFile.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrSelectedGraphReceiver.IsEmpty AndAlso Not ucrFilePath.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -78,30 +74,14 @@ Public Class dlgExportGraphAsImage
         TestOkEnabled()
     End Sub
 
-    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
-        Dim strCurrentFilePathName As String = ucrInputFile.GetText()
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save Graph As Image"
-            dlgSave.Filter = "JPEG (*.jpeg)|*.jpeg|PNG(*.png)|*.png|BitMaP(*.bmp)|*.bmp|EPS(*.eps)|*.eps|PostScript(*.ps)|*.ps|SVG(*.svg)|*.svg|WMF(*.wmf)|*.wmf|PDF(*.pdf)|*.pdf"
-            If String.IsNullOrEmpty(strCurrentFilePathName) Then
-                dlgSave.FileName = ucrSelectedGraphReceiver.GetVariableNames(bWithQuotes:=False) 'give a suggestive name (from the reciver)
-                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            Else
-                strCurrentFilePathName = strCurrentFilePathName.Replace("/", "\")
-                dlgSave.FileName = Path.GetFileName(strCurrentFilePathName)
-                dlgSave.InitialDirectory = Path.GetDirectoryName(strCurrentFilePathName) 'use the previous path as initial dir
-            End If
-            If DialogResult.OK = dlgSave.ShowDialog() Then
-                ucrInputFile.SetName(dlgSave.FileName.Replace("\", "/")) 'R uses / slashes for file paths. so \ needs to be replaced
-            End If
-        End Using
-    End Sub
-
-    Private Sub ucrInputFile_Click() Handles ucrInputFile.ControlClicked
-        cmdBrowse.PerformClick()
-    End Sub
-
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectedGraphReceiver.ControlContentsChanged, ucrInputFile.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectedGraphReceiver.ControlContentsChanged
+        'give a suggestive name from the receiver
+        ucrFilePath.DefaultFileSuggestionName = ucrSelectedGraphReceiver.GetVariableNames(bWithQuotes:=False)
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrFilePath_FilePathChanged() Handles ucrFilePath.FilePathChanged
+        TestOkEnabled()
+    End Sub
+
 End Class

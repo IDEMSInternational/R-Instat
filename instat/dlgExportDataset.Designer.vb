@@ -39,37 +39,16 @@ Partial Class dlgExportDataset
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportDataset))
-        Me.cmdBrowse = New System.Windows.Forms.Button()
-        Me.lblExport = New System.Windows.Forms.Label()
-        Me.lblConfirmText = New System.Windows.Forms.Label()
-        Me.ucrInputExportFile = New instat.ucrInputTextBox()
+        Me.lblConfirm = New System.Windows.Forms.Label()
         Me.ucrAvailableSheets = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrFilePath = New instat.ucrFilePath()
         Me.SuspendLayout()
         '
-        'cmdBrowse
+        'lblConfirm
         '
-        resources.ApplyResources(Me.cmdBrowse, "cmdBrowse")
-        Me.cmdBrowse.Name = "cmdBrowse"
-        Me.cmdBrowse.UseVisualStyleBackColor = True
-        '
-        'lblExport
-        '
-        resources.ApplyResources(Me.lblExport, "lblExport")
-        Me.lblExport.Name = "lblExport"
-        '
-        'lblConfirmText
-        '
-        resources.ApplyResources(Me.lblConfirmText, "lblConfirmText")
-        Me.lblConfirmText.Name = "lblConfirmText"
-        '
-        'ucrInputExportFile
-        '
-        Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
-        Me.ucrInputExportFile.IsMultiline = False
-        Me.ucrInputExportFile.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputExportFile, "ucrInputExportFile")
-        Me.ucrInputExportFile.Name = "ucrInputExportFile"
+        resources.ApplyResources(Me.lblConfirm, "lblConfirm")
+        Me.lblConfirm.Name = "lblConfirm"
         '
         'ucrAvailableSheets
         '
@@ -83,16 +62,25 @@ Partial Class dlgExportDataset
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrFilePath
+        '
+        Me.ucrFilePath.DefaultFileSuggestionName = ""
+        Me.ucrFilePath.FilePath = ""
+        Me.ucrFilePath.FilePathBrowseText = "Browse"
+        Me.ucrFilePath.FilePathDialogFilter = resources.GetString("ucrFilePath.FilePathDialogFilter")
+        Me.ucrFilePath.FilePathDialogTitle = "Export Data File"
+        Me.ucrFilePath.FilePathLabel = "Export File:"
+        resources.ApplyResources(Me.ucrFilePath, "ucrFilePath")
+        Me.ucrFilePath.Name = "ucrFilePath"
+        '
         'dlgExportDataset
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblConfirmText)
-        Me.Controls.Add(Me.cmdBrowse)
-        Me.Controls.Add(Me.ucrInputExportFile)
+        Me.Controls.Add(Me.ucrFilePath)
+        Me.Controls.Add(Me.lblConfirm)
         Me.Controls.Add(Me.ucrAvailableSheets)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.lblExport)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -104,9 +92,7 @@ Partial Class dlgExportDataset
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents cmdBrowse As Button
-    Friend WithEvents lblExport As Label
     Friend WithEvents ucrAvailableSheets As ucrDataFrame
-    Friend WithEvents ucrInputExportFile As ucrInputTextBox
-    Friend WithEvents lblConfirmText As Label
+    Friend WithEvents lblConfirm As Label
+    Friend WithEvents ucrFilePath As ucrFilePath
 End Class
