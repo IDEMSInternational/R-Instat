@@ -279,7 +279,7 @@ Public Class ucrFactor
                 If strSelectedLevels IsNot Nothing AndAlso strSelectedLevels.Count > 0 Then
                     bSelect = strSelectedLevels.Contains(shtCurrSheet(i, 0))
                 Else
-                    bSelect = (i = 0)
+                    bSelect = False
                 End If
                 shtCurrSheet(i, iSelectorColumnIndex) = bSelect
             Next
