@@ -295,11 +295,16 @@ Public Class ucrVariablesAsFactor
             Return MyBase.Selector
         End Get
         Set(ucrNewSelector As ucrSelector)
-            'this by default adds the parent receiver to the list of receivers in the selector
+            'This line automatically adds ucrVariablesAsFactor (Me) as the receiver of ucrNewSelector. 
+            'This is undesirable because ucrVariablesAsFactor is a receiver that has two receivers 
+            '(its child controls) which it uses to manipulate data. 
             MyBase.Selector = ucrNewSelector
-            'we remove it here because the selector will manipulate the children receivers only
-            'todo. Currently the selector only uses the list of receiver to manipulate the focus switching, 
-            'in future the usage of the receivers could change which may require this implementation to be changed 
+            'Therefore remove ucrVariablesAsFactor (Me) and leave only it's child controls in the 
+            'list of receivers used for autoswitching.
+            ' 
+            'TODO Currently the selector only uses the list of receivers to manipulate the focus 
+            'switching. In future the usage of the receivers could change which may require this 
+            'implementation to be changed 
             If MyBase.Selector IsNot Nothing Then
                 MyBase.Selector.RemoveReceiver(Me)
             End If
