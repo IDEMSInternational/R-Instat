@@ -2549,6 +2549,12 @@
     <EmbeddedResource Include="dlgTaylorDiagram.resx">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgExtremesDisplayOptions.resx">
+      <DependentUpon>sdgExtremesDisplayOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgExtremesMethod.resx">
+      <DependentUpon>sdgExtremesMethod.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgFiltersFromFactor.resx">
       <DependentUpon>sdgFiltersFromFactor.vb</DependentUpon>
     </EmbeddedResource>
