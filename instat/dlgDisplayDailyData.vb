@@ -184,7 +184,7 @@ Public Class dlgDisplayDailyData
         ucrInputComboZero.bAllowNonConditionValues = True
 
         ucrInputFacetBy.SetLinkedDisplayControl(lblFacetby)
-        ucrInputFacetBy.SetItems({"Station-Element", "Element-Station", "Station", "Element"})
+        ucrInputFacetBy.SetItems({"Element"})
 
         ucrSaveGraph.SetPrefix("Graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -238,7 +238,7 @@ Public Class dlgDisplayDailyData
         clsStationElementFacetOperator = New ROperator
         clsElementFacetOperator = New ROperator
 
-        ucrInputFacetBy.SetText("Station-Element")
+        ucrInputFacetBy.SetText("Element")
 
         clsElementFacetOperator.SetOperation("~")
         clsElementFacetOperator.AddParameter("first", "", iPosition:=0)
@@ -432,7 +432,17 @@ Public Class dlgDisplayDailyData
         StackingFunction()
     End Sub
 
-    Private Sub ucrSelectorDisplayDailyClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDisplayDailyClimaticData.ControlValueChanged
+    Private Sub ucrSelectorDisplayDailyClimaticData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDisplayDailyClimaticData.ControlValueChanged, ucrReceiverStations.ControlContentsChanged
+        If rdoGraph.Checked Then
+            If Not ucrReceiverStations.IsEmpty Then
+                ucrInputFacetBy.SetItems({"Station-Element", "Element-Station", "Station"})
+                ucrInputFacetBy.SetText("Station-Element")
+            Else
+                ucrInputFacetBy.SetItems({"Element"})
+                ucrInputFacetBy.SetText("Element")
+            End If
+        End If
+
         clsDisplayDailyGraphFunction.AddParameter("data_name", Chr(34) & ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
         StackingFunction()
     End Sub
@@ -466,21 +476,19 @@ Public Class dlgDisplayDailyData
         clsGgplotAesFunction.AddParameter("x", ucrReceiverDate.GetVariableNames(False), iPosition:=0)
     End Sub
 
-
-
     Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrReceiverMultipleElements.ControlValueChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrChkSum.ControlContentsChanged, ucrChkMax.ControlContentsChanged, ucrChkMin.ControlContentsChanged, ucrChkMean.ControlContentsChanged, ucrChkMedian.ControlContentsChanged, ucrChkIQR.ControlContentsChanged, ucrChkSumMissing.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
     Private Sub ucrInputFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFacetBy.ControlValueChanged
         If ucrInputFacetBy.GetText = "Station-Element" Then
-            clsStationElementFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(), iPosition:=0)
+            clsStationElementFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=0)
             clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsStationElementFacetOperator, iPosition:=2)
         ElseIf ucrInputFacetBy.GetText = "Element-Station" Then
-            clsElementStationFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(), iPosition:=1)
+            clsElementStationFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=1)
             clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsElementStationFacetOperator, iPosition:=2)
         ElseIf ucrInputFacetBy.GetText = "Station" Then
-            clsStationFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(), iPosition:=1)
+            clsStationFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=1)
             clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsStationFacetOperator, iPosition:=2)
         ElseIf ucrInputFacetBy.GetText = "Element" Then
             clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsElementFacetOperator, iPosition:=2)
