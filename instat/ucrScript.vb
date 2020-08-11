@@ -19,7 +19,7 @@ Public Class ucrScript
     Private strComment As String = "Code run from Script Window"
     Private strCurrentDirectory As String = ""
     Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
-    Private bIsUserTextChangeEvent As Boolean = False
+    Private bUserTextChanged As Boolean = False
 
     Public Sub CopyText()
         txtScript.Copy()
@@ -56,7 +56,7 @@ Public Class ucrScript
         If txtScript.TextLength > 0 Then
             If MessageBox.Show("Are you sure you want to clear the contents of the script window?" & Me.Text,
                                "Clear " & Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                bIsUserTextChangeEvent = True
+                bUserTextChanged = True
                 'This was preferred over txtScript.Clear() , to support undo
                 txtScript.Focus()
                 txtScript.SelectAll()
@@ -157,7 +157,7 @@ Public Class ucrScript
 
     Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
         If txtScript.SelectionLength > 0 Then
-            bIsUserTextChangeEvent = False
+            bUserTextChanged = False
             mnuUndo.Enabled = True
             CutText()
         End If
@@ -165,7 +165,7 @@ Public Class ucrScript
 
     Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
         If Clipboard.ContainsData(DataFormats.Text) Then
-            bIsUserTextChangeEvent = False
+            bUserTextChanged = False
             mnuUndo.Enabled = True
             txtScript.Paste()
         Else
@@ -210,7 +210,7 @@ Public Class ucrScript
     Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
         'Determine if last operation can be undone in text box.   
         If txtScript.CanUndo Then
-            bIsUserTextChangeEvent = False
+            bUserTextChanged = False
             txtScript.Undo() 'Undo the last operation.
             mnuUndo.Enabled = False
             mnuRedo.Enabled = True
@@ -221,7 +221,7 @@ Public Class ucrScript
 
         'Determine if last operation can be undone in text box.   
         If txtScript.CanUndo Then
-            bIsUserTextChangeEvent = False
+            bUserTextChanged = False
             'This is an equivalent of redo in this case. 
             'because calling undo twice gets the last undone text to be redone
             txtScript.Undo()
@@ -233,7 +233,7 @@ Public Class ucrScript
     Private Sub txtScript_KeyDown(sender As Object, e As KeyEventArgs) Handles txtScript.KeyDown
         'Ignore the Ctrl, Shift commands. It could be a redo action which we want to ignore.
         If Not (e.Control OrElse e.Shift OrElse e.Modifiers = (Keys.Control OrElse Keys.Shift)) Then
-            bIsUserTextChangeEvent = True
+            bUserTextChanged = True
         End If
     End Sub
 
@@ -241,13 +241,13 @@ Public Class ucrScript
         cmdRun.Enabled = (txtScript.TextLength > 0)
         'Only enabled undo if the text was changed directly by the user.  
 
-        If bIsUserTextChangeEvent AndAlso Not mnuUndo.Enabled Then
+        If bUserTextChanged AndAlso Not mnuUndo.Enabled Then
             txtScript.ClearUndo() 'Clear undo, because this is now a new text input by the user.
 
             mnuUndo.Enabled = True
             mnuRedo.Enabled = False
         End If
-        bIsUserTextChangeEvent = False 'reset flag
+        bUserTextChanged = False 'reset flag
     End Sub
 
     Private Sub mnuRunAllText_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click
