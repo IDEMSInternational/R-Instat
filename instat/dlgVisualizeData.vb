@@ -92,7 +92,7 @@ Public Class dlgVisualizeData
         clsVisMissFunction.SetPackageName("visdat")
         clsVisMissFunction.SetRCommand("vis_miss")
         clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-        clsVisMissFunction.AddParameter("cluster", "TRUE", iPosition:=1)
+        clsVisMissFunction.AddParameter("cluster", "FALSE", iPosition:=1)
         clsVisMissFunction.AddParameter("sort_miss", "FALSE", iPosition:=2)
         clsVisMissFunction.AddParameter("show_perc", "TRUE", iPosition:=3)
         clsVisMissFunction.AddParameter("show_perc_col", "TRUE", iPosition:=4)
