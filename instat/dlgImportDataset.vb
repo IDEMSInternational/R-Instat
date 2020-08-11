@@ -1025,24 +1025,24 @@ Public Class dlgImportDataset
     ''' <returns></returns>
     Private Function GetMissingValueRString(strText As String) As String
         Dim arrStr() As String = strText.Split(",")
-        Dim strRmissingValueString As String
 
         'if length is < 2 return an R string else return a vector of strings for R
         If arrStr.Length = 0 Then
-            strRmissingValueString = ""
-        ElseIf arrStr.Length = 1 Then
-            strRmissingValueString = Chr(34) & arrStr(0) & Chr(34)
-        Else
-            strRmissingValueString = ""
-            For Each strTemp As String In arrStr
-                If strRmissingValueString = "" Then
-                    strRmissingValueString = Chr(34) & strTemp.Trim & Chr(34)
-                Else
-                    strRmissingValueString = strRmissingValueString & "," & Chr(34) & strTemp.Trim & Chr(34)
-                End If
-            Next
-            strRmissingValueString = "c(" & strRmissingValueString & ")"
+            Return ""
         End If
+        If arrStr.Length = 1 Then
+            Return Chr(34) & arrStr(0) & Chr(34)
+        End If
+
+        Dim strRmissingValueString As String = ""
+        For Each strTemp As String In arrStr
+            If strRmissingValueString = "" Then
+                strRmissingValueString = Chr(34) & strTemp.Trim & Chr(34)
+            Else
+                strRmissingValueString = strRmissingValueString & "," & Chr(34) & strTemp.Trim & Chr(34)
+            End If
+        Next
+        strRmissingValueString = "c(" & strRmissingValueString & ")"
         Return strRmissingValueString
     End Function
 
