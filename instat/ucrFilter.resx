@@ -151,7 +151,7 @@
     <value>17</value>
   </data>
   <data name="cmdAddCondition.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="cmdAddCondition.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -160,7 +160,7 @@
     <value>278, 64</value>
   </data>
   <data name="cmdAddCondition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 27</value>
+    <value>110, 29</value>
   </data>
   <data name="cmdAddCondition.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -211,7 +211,7 @@
     <value>5, 195</value>
   </data>
   <data name="lstFilters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>251, 132</value>
+    <value>271, 132</value>
   </data>
   <data name="lstFilters.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -262,7 +262,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFilterBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 27</value>
+    <value>281, 27</value>
   </data>
   <data name="lblFilterBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -289,10 +289,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdClearConditions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 298</value>
+    <value>277, 298</value>
   </data>
   <data name="cmdClearConditions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 29</value>
+    <value>110, 29</value>
   </data>
   <data name="cmdClearConditions.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -319,10 +319,10 @@
     <value>NoControl</value>
   </data>
   <data name="mcdEditCondition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 230</value>
+    <value>277, 230</value>
   </data>
   <data name="mcdEditCondition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 29</value>
+    <value>110, 29</value>
   </data>
   <data name="mcdEditCondition.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -349,10 +349,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdRemoveCondition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 264</value>
+    <value>277, 264</value>
   </data>
   <data name="cmdRemoveCondition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 29</value>
+    <value>110, 29</value>
   </data>
   <data name="cmdRemoveCondition.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -991,7 +991,7 @@
     <value>18</value>
   </data>
   <data name="grpNumeric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>419, 68</value>
+    <value>398, 66</value>
   </data>
   <data name="grpNumeric.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1123,7 +1123,7 @@
     <value>7, 6, 7, 6</value>
   </data>
   <data name="ucrFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 21</value>
+    <value>280, 21</value>
   </data>
   <data name="ucrFilterPreview.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1168,7 +1168,7 @@
     <value>True</value>
   </data>
   <data name="ucrFactorLevels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>413, 65</value>
+    <value>398, 65</value>
   </data>
   <data name="ucrFactorLevels.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1192,7 +1192,7 @@
     <value>18</value>
   </data>
   <data name="ucrFilterByReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 42</value>
+    <value>278, 43</value>
   </data>
   <data name="ucrFilterByReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1240,16 +1240,16 @@
     <value>20</value>
   </data>
   <data name="cmdCombineWithAndOr.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="cmdCombineWithAndOr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdCombineWithAndOr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 196</value>
+    <value>277, 196</value>
   </data>
   <data name="cmdCombineWithAndOr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 29</value>
+    <value>110, 29</value>
   </data>
   <data name="cmdCombineWithAndOr.TabIndex" type="System.Int32, mscorlib">
     <value>182</value>
