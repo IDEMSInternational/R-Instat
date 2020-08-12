@@ -172,7 +172,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, 12</value>
+    <value>56, 12</value>
   </data>
   <data name="rdoGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 29</value>
@@ -967,7 +967,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoGraphByYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 12</value>
+    <value>154, 12</value>
   </data>
   <data name="rdoGraphByYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 29</value>
@@ -1343,6 +1343,9 @@
   </data>
   <data name="&gt;&gt;ucrReceiverSingleElements.ZOrder" xml:space="preserve">
     <value>27</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
