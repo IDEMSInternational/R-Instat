@@ -369,6 +369,9 @@ Public Class ucrFilter
         ucrReceiverExpression.Clear()
     End Sub
 
+    ''' <summary> Handles event triggered when cmdCombineWithAndOr Button is clicked.</summary>
+    ''' <param name="sender"> Not used. </param>
+    ''' <param name="e"> Not used. </param>
     Private Sub cmdCombineWithAndOr_Click(sender As Object, e As EventArgs) Handles cmdCombineWithAndOr.Click
         If cmdCombineWithAndOr.Text.Contains("All combined with |") Then
             clsFilterView.strOperation = "&"
