@@ -38,12 +38,18 @@ Public Class ucrCore
     'The first item in each list can be accessed through the properties clsRCode and clsRParameter
     'There may be duplicate values in the lists. For example, one parameter being added into multiple functions.
 
-    ''' <summary> These lists contain pairs of (R commands and parameters) associated with the user control.  
-    ''' The first pair considered primary pair can be accessed directly using the properties 'clsRCode' and 'clsRParameter'  (these just reference the first element in the lists).
+    ''' <summary> The 'lstAllRCodes' and 'lstAllRParameters' lists contain pairs of R commands and 
+    '''           parameters associated with the user control. 
+    '''           The first pair is considered the primary pair and can be accessed directly using 
+    '''           the properties 'clsRCode' and 'clsRParameter' (these just reference the first 
+    '''           element in the lists).
     ''' </summary>
     Protected lstAllRCodes As List(Of RCodeStructure) = New List(Of RCodeStructure)({Nothing})
-    ''' <summary> These lists contain pairs of (R commands and parameters) associated with the user control.  
-    ''' The first pair considered primary pair can be accessed directly using the properties 'clsRCode' and 'clsRParameter'  (these just reference the first element in the lists).
+    ''' <summary> The 'lstAllRCodes' and 'lstAllRParameters' lists contain pairs of R commands and 
+    '''           parameters associated with the user control. 
+    '''           The first pair is considered the primary pair and can be accessed directly using 
+    '''           the properties 'clsRCode' and 'clsRParameter' (these just reference the first 
+    '''           element in the lists).
     ''' </summary>
     Protected lstAllRParameters As List(Of RParameter) = New List(Of RParameter)({Nothing})
 
