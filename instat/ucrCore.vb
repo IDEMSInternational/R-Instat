@@ -82,13 +82,15 @@ Public Class ucrCore
     'e.g. nud may not add/remove parameter, only change its value
 
     ''' <summary> If true then this user control can add/remove parameters.
+    '''  Used in combination with 'bChangeParameterValue'.
     '''  (e.g. check box may not change parameter value, only add/remove it
     '''  For this bAddRemoveParameter = True and bChangeParameterValue = False)
     ''' </summary>
     Public bAddRemoveParameter As Boolean = True
 
     ''' <summary> If true then this user control may change the value of parameters.
-    ''' (e.g. check box may not change parameter value, only add/remove it
+    '''  Used in combination with 'bAddRemoveParameter'.
+    '''  (e.g. check box may not change parameter value, only add/remove it
     '''  For this bAddRemoveParameter = True and bChangeParameterValue = False)
     ''' </summary>
     Public bChangeParameterValue As Boolean = True
