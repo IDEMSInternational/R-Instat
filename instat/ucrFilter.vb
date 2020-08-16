@@ -369,7 +369,13 @@ Public Class ucrFilter
         ucrReceiverExpression.Clear()
     End Sub
 
-    ''' <summary> Handles event triggered when cmdCombineWithAndOr Button is clicked.</summary>
+    ''' <summary> Handles event triggered when cmdCombineWithAndOr Button is clicked.
+    ''' The purpose of this button is to change the filter operator which to either AND(&amp;) or OR(|).
+    ''' The user clicks the button to trigger a change in the operator. 
+    ''' This subroutine changes the oparator, passes "and_or" parameter into clsFilterFunction, updates the button label and set the tooltip text for the button.
+    ''' Filter preview is also updated.
+    ''' Button text and the tooltip displayed on hover is changed whenever the button is clicked.
+    ''' </summary>
     ''' <param name="sender"> Not used. </param>
     ''' <param name="e"> Not used. </param>
     Private Sub cmdCombineWithAndOr_Click(sender As Object, e As EventArgs) Handles cmdCombineWithAndOr.Click
