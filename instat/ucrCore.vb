@@ -214,10 +214,17 @@ Public Class ucrCore
     ''' (Currently only implemented for receivers) </summary>
     Protected strValuesToIgnore As String()
 
-
-    ''' <summary> Updates the control, and the linked controls, based upon the values of the parameters in the command-parameter pair list. </summary>
-    ''' <param name="bReset"> (Optional) Should the control reset to the default value if the parameter is not present in the code </param>
-    ''' <param name="bCloneIfNeeded"> (Optional) Should the control control if needed when the parameter is present in the code </param>
+    ''' <summary> Updates the control, and the linked controls, based upon the values of the 
+    '''           parameters in the command-parameter pair list. This ensures that the control’s 
+    '''           (and linked controls’) UI elements (text boxes, check boxes etc.) show the 
+    '''           correct values when the control is displayed.
+    '''           </summary>
+    ''' <param name="bReset"> (Optional) If true then reset the linked controls to their default 
+    '''                       state (but only if a number of other specified conditions are met, 
+    '''                       see the 'UpdateLinkedControls' function for details). </param>
+    ''' <param name="bCloneIfNeeded"> (Optional) If true then clone each of the control's parameters
+    '''                       (but only if the command does not already contain the parameter, 
+    '''                       or a cloned parameter with the same name). </param>
     Public Overridable Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempRCode As RCodeStructure
         Dim clsTempRParameter As RParameter
