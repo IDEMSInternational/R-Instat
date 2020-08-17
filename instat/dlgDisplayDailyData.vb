@@ -26,7 +26,7 @@ Public Class dlgDisplayDailyData
     Private clsGGplotFunction, clsGeomLineFunction, clsGeomRugFunction, clsThemeFunction, clsThemeGreyFunction As New RFunction
     Private clsIdVarsFunction, clsFacetFunction, clsGgplotAesFunction, clsGGplotElementText, clsXLabFunction As New RFunction
     Private clsGgPlotOperator, clsDisplayDailyGraphOperator, clsDisplayDailyTableOperator, clsNAFilterOperator As New ROperator
-    Private clsStationElementFacetOperator, clsElementStationFacetOperator, clsStationFacetOperator, clsElementFacetOperator As New ROperator
+    Private clsStationElemFacetOperator As New ROperator
 
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -238,29 +238,11 @@ Public Class dlgDisplayDailyData
         clsNAFilterOperator = New ROperator
         clsFacetFunction = New RFunction
         clsXLabFunction = New RFunction
-        clsStationFacetOperator = New ROperator
-        clsElementStationFacetOperator = New ROperator
-        clsStationElementFacetOperator = New ROperator
-        clsElementFacetOperator = New ROperator
+        clsStationElemFacetOperator = New ROperator
 
         ucrNudNumberOfColumns.SetText("1")
 
-        clsElementFacetOperator.SetOperation("~")
-        clsElementFacetOperator.AddParameter("first", "", iPosition:=0)
-        clsElementFacetOperator.AddParameter("variable", "variable", bIncludeArgumentName:=False, iPosition:=1)
-
-        clsStationFacetOperator.SetOperation("~")
-        clsStationFacetOperator.AddParameter("First", "", iPosition:=0)
-        clsStationFacetOperator.bBrackets = False
-
-        clsElementStationFacetOperator.SetOperation("~")
-        clsElementStationFacetOperator.AddParameter("variable", "variable", iPosition:=0)
-        clsElementStationFacetOperator.bBrackets = False
-
-        clsStationElementFacetOperator.SetOperation("~")
-        clsStationElementFacetOperator.AddParameter("variable", "variable", iPosition:=1)
-        clsStationElementFacetOperator.bBrackets = False
-
+        clsStationElemFacetOperator.SetOperation("~")
 
         clsXLabFunction.SetPackageName("ggplot2")
         clsXLabFunction.SetRCommand("xlab")
@@ -271,6 +253,7 @@ Public Class dlgDisplayDailyData
         clsFacetFunction.SetRCommand("facet_wrap")
         clsFacetFunction.AddParameter("scales", Chr(34) & "free_y" & Chr(34), iPosition:=0)
         clsFacetFunction.AddParameter("ncol", 1, iPosition:=1)
+        clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsStationElemFacetOperator, iPosition:=2)
 
         clsNAFilterOperator.SetOperation("%>%")
         clsNAFilterOperator.AddParameter("filter", "filter(is.na(value))", iPosition:=1)
@@ -438,7 +421,7 @@ Public Class dlgDisplayDailyData
         StackingFunction()
     End Sub
 
-    Private Sub ucrSelectorDisplayDailyClimaticData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDisplayDailyClimaticData.ControlValueChanged, ucrReceiverStations.ControlContentsChanged
+    Private Sub ucrSelectorDisplayDailyClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDisplayDailyClimaticData.ControlValueChanged, ucrReceiverStations.ControlValueChanged
         clsDisplayDailyGraphFunction.AddParameter("data_name", Chr(34) & ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
         StackingFunction()
     End Sub
@@ -476,7 +459,18 @@ Public Class dlgDisplayDailyData
     Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrReceiverMultipleElements.ControlValueChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrChkSum.ControlContentsChanged, ucrChkMax.ControlContentsChanged, ucrChkMin.ControlContentsChanged, ucrChkMean.ControlContentsChanged, ucrChkMedian.ControlContentsChanged, ucrChkIQR.ControlContentsChanged, ucrChkSumMissing.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary> 
+    ''' If the station receiver is not empty and the multiple element receiver  has more one element  the 
+    '''  facet combobox text is set to  "Station-Element "  and "Element - station"
+    '''If the station receiver is not empty and the multiple element receiver  has no or one element  the facet combobox
+    ''' text is set to  "Station" 
+    ''' If the station receiver is empty and the multiple element receiver  has more than one element  the facet combobox
+    ''' text is set to  "Element" 
+    '''  If the station receiver is empty and the multiple element receiver  has no element  the facet combobox
+    ''' text is set to  "No Facets"
+    ''' </summary>
+    '''--------------------------------------------------------------------------------------------
     Private Sub SetFacetItems()
         If Not ucrReceiverStations.IsEmpty AndAlso ucrReceiverMultipleElements.GetCount > 1 Then
             ucrInputFacetBy.SetItems({"Station-Element", "Element-Station"})
@@ -494,18 +488,20 @@ Public Class dlgDisplayDailyData
     End Sub
 
     Private Sub ucrInputFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFacetBy.ControlValueChanged
+        clsStationElemFacetOperator.ClearParameters()
         Select Case ucrInputFacetBy.GetText()
             Case "Station-Element"
-                clsStationElementFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=0)
-                clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsStationElementFacetOperator, iPosition:=2)
+                clsStationElemFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=0)
+                clsStationElemFacetOperator.AddParameter("variable", "variable", iPosition:=1)
             Case "Element-Station"
-                clsElementStationFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=1)
-                clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsElementStationFacetOperator, iPosition:=2)
+                clsStationElemFacetOperator.AddParameter("variable", "variable", iPosition:=0)
+                clsStationElemFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=1)
             Case "Station"
-                clsStationFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=1)
-                clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsStationFacetOperator, iPosition:=2)
+                clsStationElemFacetOperator.AddParameter("First", "", iPosition:=0)
+                clsStationElemFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=1)
             Case "Element"
-                clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsElementFacetOperator, iPosition:=2)
+                clsStationElemFacetOperator.AddParameter("variable", "variable", iPosition:=1)
+                clsStationElemFacetOperator.AddParameter("First", "", iPosition:=0)
         End Select
 
         If ucrInputFacetBy.GetText() = "Station-Element" OrElse ucrInputFacetBy.GetText() = "Element-Station" Then
@@ -513,19 +509,6 @@ Public Class dlgDisplayDailyData
         Else
             clsFacetFunction.RemoveParameterByName("labeller")
         End If
-
-        'If ucrInputFacetBy.GetText = "Station-Element" Then
-        '    clsStationElementFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=0)
-        '    clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsStationElementFacetOperator, iPosition:=2)
-        'ElseIf ucrInputFacetBy.GetText = "Element-Station" Then
-        '    clsElementStationFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=1)
-        '    clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsElementStationFacetOperator, iPosition:=2)
-        'ElseIf ucrInputFacetBy.GetText = "Station" Then
-        '    clsStationFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=1)
-        '    clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsStationFacetOperator, iPosition:=2)
-        'ElseIf ucrInputFacetBy.GetText = "Element" Then
-        '    clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsElementFacetOperator, iPosition:=2)
-        'End If
     End Sub
 
     Private Sub ucrSelectorDisplayDailyClimaticData_DataFrameChanged() Handles ucrSelectorDisplayDailyClimaticData.DataFrameChanged
