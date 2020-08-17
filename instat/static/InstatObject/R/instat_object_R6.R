@@ -598,15 +598,11 @@ DataBook$set("public", "rename_object", function(data_name, object_name, new_nam
 }
 )
 
-DataBook$set("public", "delete_objects", function(data_name, object_names) {
+DataBook$set("public", "delete_objects", function(data_name, object_names, object_type = "object") {
   if(missing(data_name) || data_name == overall_label) {
     if(!all(object_names %in% names(private$.objects))) stop("Not all object_names found in overall objects list")
-    private$.objects[names(private$.objects) == object_names] <- NULL
   }
-  else self$get_data_objects(data_name)$delete_objects(object_names = object_names)
-  if(!is.null(private$.last_graph) && length(private$.last_graph) == 2 && private$.last_graph[1] == data_name && private$.last_graph[2] %in% object_names) {
-    private$.last_graph <- NULL
-  }
+  else self$get_data_objects(data_name)$delete_objects(object_names = object_names, object_type = object_type)
 }
 )
 
@@ -716,9 +712,9 @@ DataBook$set("public", "get_table_names", function(data_name, include_overall = 
 }
 )
 
-DataBook$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE, na.rm = TRUE, is_no_filter = FALSE) {
+DataBook$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE, na.rm = TRUE, is_no_filter = FALSE, and_or = "&") {
   if(missing(filter)) stop("filter is required")
-  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter, na.rm = na.rm, is_no_filter = is_no_filter)
+  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter, na.rm = na.rm, is_no_filter = is_no_filter, and_or = and_or)
 }
 ) 
 
