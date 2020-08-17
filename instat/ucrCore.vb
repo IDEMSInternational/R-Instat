@@ -396,8 +396,11 @@ Public Class ucrCore
     End Sub
 
 
-    ''' <summary> Update the R code by adding/removing  parameter. </summary>
-    ''' <param name="bReset"> (Optional) The control should reset to the default value. </param>
+    ''' <summary> Updates the control’s R code to reflect the current state of the control’s 
+    '''           parameters. 
+    '''           </summary>
+    ''' <param name="bReset"> (Optional) If true then reset the linked controls to their default
+    '''                       state (but only if a number of other specified conditions are met). </param>
     Public Overridable Sub UpdateRCode(Optional bReset As Boolean = False)
         If bAddRemoveParameter Then
             AddOrRemoveParameter(CanAddParameter())
