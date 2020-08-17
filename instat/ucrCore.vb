@@ -172,8 +172,9 @@ Public Class ucrCore
     ''' these booleans specify how the parent control can modify this control. </summary>
     Public bLinkedChangeParameterValue As Boolean = False
 
-    ''' <summary> List all the controls to display linked to this control,
-    ''' set the visible/enabled property of these controls (e.g. a checkbox that shows/hides set of controls)
+    ''' <summary> Lists all the controls to display linked to this control.
+    ''' Sets the visible/enabled property of these controls (e.g. a checkbox that shows/hides set of controls).
+
     ''' </summary>
     Protected lstCtrLinkedDisplayControls As List(Of Control)
 
