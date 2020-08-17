@@ -404,8 +404,9 @@ Public Class ucrCore
         UpdateControl(bReset, bCloneIfNeeded:=bCloneIfNeeded)
     End Sub
 
-    ''' <summary> Can update the parameter into the R codes.  </summary>
-    ''' <returns> The parameter updated. </returns>
+    ''' <summary> Returns true if the control's R code can be safely updated. </summary>
+    ''' <returns> True if the primary parameter is defined but is not part of the control's R code. 
+    '''           Else returns false. </returns>
     Protected Overridable Function CanUpdate()
         Return (clsParameter IsNot Nothing AndAlso (Not clsRCode.ContainsParameter(clsParameter.strArgumentName)) AndAlso clsParameter.HasValue())
     End Function
