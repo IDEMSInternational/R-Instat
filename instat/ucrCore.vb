@@ -135,7 +135,8 @@ Public Class ucrCore
     Public Event ControlContentsChanged(ucrChangedControl As ucrCore)
 
     ''' <summary> ControlClicked is raised when the control is clicked.
-    ''' For some controls, this will be raised when their child controls is clicked.
+    ''' For some controls, this will be raised when one of their child controls is clicked.
+
     ''' </summary>
     Public Event ControlClicked()
 
