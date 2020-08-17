@@ -517,7 +517,9 @@ Public Class ucrCore
         Next
     End Sub
 
-    ''' <summary> Adds a new linked control to the 'lstValuesAndControl' list. </summary>
+    ''' <summary> Adds a list of linked control to the 'lstValuesAndControl' list. 
+    '''           The linked control’s modification booleans are set to the values in the parameters. 
+    '''           </summary>
     ''' <param name="lstLinked">  The parameter's control. </param>
     ''' <param name="objValues"> The object parameter. </param>
     ''' <param name="bNewLinkedAddRemoveParameter"> Add/Remove parameter of the new linked control. </param>
