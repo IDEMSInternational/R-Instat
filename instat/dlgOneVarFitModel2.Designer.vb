@@ -84,8 +84,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputConfidenceInterval = New instat.ucrInputComboBox()
-        Me.lblConfidenceLevel = New System.Windows.Forms.Label()
         Me.ucrInputSuccess = New instat.ucrInputTextBox()
         Me.lblSuccess = New System.Windows.Forms.Label()
         Me.SuspendLayout()
@@ -545,25 +543,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrInputConfidenceInterval
-        '
-        Me.ucrInputConfidenceInterval.AddQuotesIfUnrecognised = True
-        Me.ucrInputConfidenceInterval.IsReadOnly = False
-        Me.ucrInputConfidenceInterval.Location = New System.Drawing.Point(351, 140)
-        Me.ucrInputConfidenceInterval.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrInputConfidenceInterval.Name = "ucrInputConfidenceInterval"
-        Me.ucrInputConfidenceInterval.Size = New System.Drawing.Size(60, 21)
-        Me.ucrInputConfidenceInterval.TabIndex = 85
-        '
-        'lblConfidenceLevel
-        '
-        Me.lblConfidenceLevel.AutoSize = True
-        Me.lblConfidenceLevel.Location = New System.Drawing.Point(248, 143)
-        Me.lblConfidenceLevel.Name = "lblConfidenceLevel"
-        Me.lblConfidenceLevel.Size = New System.Drawing.Size(93, 13)
-        Me.lblConfidenceLevel.TabIndex = 86
-        Me.lblConfidenceLevel.Text = "Confidence Level:"
-        '
         'ucrInputSuccess
         '
         Me.ucrInputSuccess.AddQuotesIfUnrecognised = True
@@ -590,8 +569,6 @@ Partial Class dlgOneVarFitModel
         Me.ClientSize = New System.Drawing.Size(428, 420)
         Me.Controls.Add(Me.lblSuccess)
         Me.Controls.Add(Me.ucrInputSuccess)
-        Me.Controls.Add(Me.lblConfidenceLevel)
-        Me.Controls.Add(Me.ucrInputConfidenceInterval)
         Me.Controls.Add(Me.lblQMethod)
         Me.Controls.Add(Me.ucrInputComboQMethod)
         Me.Controls.Add(Me.lblMonteCarlo)
@@ -696,8 +673,6 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents ucrInputTextM As ucrInputTextBox
     Friend WithEvents lblQMethod As Label
     Friend WithEvents ucrInputComboQMethod As ucrInputComboBox
-    Friend WithEvents lblConfidenceLevel As Label
-    Friend WithEvents ucrInputConfidenceInterval As ucrInputComboBox
     Friend WithEvents lblSuccess As Label
     Friend WithEvents ucrInputSuccess As ucrInputTextBox
 End Class
