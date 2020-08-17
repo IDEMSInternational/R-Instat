@@ -61,12 +61,27 @@ Public Class ucrCore
 
 
 
-    ''' <summary> The object default is the control's default value
-    ''' for the primary parameter (i.e. the value that R will assume if the primary parameter is not included in the script). </summary>
+    ''' <summary> The R environment’s default value for the primary parameter (i.e. the value that 
+    '''           R will assume if the primary parameter is not included in the script, aka the 
+    '''           'R default'). <para>
+    '''           It is used in combination with 'objDefaultState' (the control’s default value for 
+    '''           the primary parameter, aka the 'object default').</para><para>
+    '''           The object default is used for the R script functionality, and the R default is 
+    '''           used for the R script’s appearance in the output window (whether the parameter 
+    '''           is included in the command shown in the output window, even if including the 
+    '''           parameter makes no difference to the functionality).</para><para>
+    '''           Both defaults are needed. The object default is enough on its own to determine 
+    '''           which default value is used in the R environment. However the R default is also 
+    '''           needed to ensure that the R script explicitly contains the R parameters that the 
+    '''           user expects to see (and doesn’t include long lists of parameters with default 
+    '''           values that the user doesn’t expect to see).</para>
+    ''' </summary>
     Protected objRDefault As Object = Nothing
 
-    ''' <summary> The object default is the control's default value 
-    ''' for the primary parameter (i.e. the value that R will assume if the primary parameter is not included in the script). </summary>
+    ''' <summary> The control’s default value for the primary parameter, aka the 'object default'.
+    '''           It is used in combination with 'objRDefault'. For more details, see the comments 
+    '''           for 'objRDefault'.
+    ''' </summary>
     Protected objDefaultState As Object = Nothing
 
     'Protected typControlType As Type = Object
