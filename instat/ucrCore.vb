@@ -117,7 +117,8 @@ Public Class ucrCore
     ''' ValueChanged is raised when a new value has been set in the control (e.g. the user enters text in a textbox)
 
     ''' </summary>
-    ''' <param name="ucrChangedControl"> Refer to the control changed </param>
+    ''' <param name="ucrChangedControl"> The control that triggered this event. </param>
+
     Public Event ControlValueChanged(ucrChangedControl As ucrCore)
 
 
