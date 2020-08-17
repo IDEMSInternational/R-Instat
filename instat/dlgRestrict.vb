@@ -68,10 +68,10 @@ Public Class dlgRestrict
         'rdoApplyAsSubset.Enabled = False
 
         ' ucrSave
-        ucrNewDataFrameName.SetIsTextBox()
         ucrNewDataFrameName.SetSaveTypeAsDataFrame()
         ucrNewDataFrameName.SetLabelText("New Data Frame Name:")
         ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorFilter.ucrAvailableDataFrames)
+        ucrNewDataFrameName.SetIsTextBox()
     End Sub
 
     Private Sub SetDefaults()
