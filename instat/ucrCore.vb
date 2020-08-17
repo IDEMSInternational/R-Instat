@@ -125,8 +125,9 @@ Public Class ucrCore
     ''' <summary>
     ''' ContentsChanged is raised when the content of the control has changed, 
     ''' but possibly the value has not been set (e.g. text in a textbox changes, 
-    ''' but the value is not changed until the user leaves the text box)
-    ''' When ValueChanged is raised, so is ContentsChanged
+    ''' but the value is not changed until the user leaves the text box).
+    ''' When ValueChanged is raised, so is ContentsChanged.
+
     ''' ContentsChanged is probably only needed for TestOK
     ''' </summary>
     ''' <param name="ucrChangedControl"> Refer to the control changed </param>
