@@ -338,8 +338,23 @@ Public Class ucrCore
         End If
     End Function
 
-    ''' <summary> Updates all the controls linked to this control (hereafter called 'child' and 'parent' respectively) </summary>
-    ''' <param name="bReset"> (Optional) The control should reset to the default value. </param>
+    ''' <summary> Updates all the controls linked to this control (hereafter called ‘child’ and 
+    '''           ‘parent’ respectively). This ensures that if the parent’s value changes then the 
+    '''           child controls’ values stay consistent.<para>
+    '''           The parent stores details of its children In 'lstValuesAndControl’. This lists 
+    '''           every child control whose value may potentially need to change if the state of 
+    '''           the parent changes. The list is a key-value pair. The ‘key’ is the child control 
+    '''           and the ‘value’ lists all parent control values that will trigger a change to the 
+    '''           child control’s value.</para><para>
+    '''           If the parent is visible then for each child control, it compares the parent's 
+    '''           state to the child’s trigger values. If the parent’s state matches one of the 
+    '''           trigger values, then the child control is updated.</para><para>
+    '''           If the parent's state is not in the child’s trigger list, then the child is not 
+    '''           updated. The only exception is that under certain conditions the child may be 
+    '''           reset to its default value.</para>
+    ''' </summary>
+    ''' <param name="bReset"> (Optional) If true then reset the linked controls to their default
+    '''                       state (but only if a number of other specified conditions are met). </param>
     Public Overridable Sub UpdateLinkedControls(Optional bReset As Boolean = False)
         Dim ucrControl As ucrCore
         Dim lstValues As Object()
