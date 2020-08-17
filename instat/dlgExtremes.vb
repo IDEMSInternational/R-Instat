@@ -43,7 +43,7 @@ Public Class dlgExtremes
     Private Sub SetDefaults()
     End Sub
 
-    Private Sub chkRestrictValues_CheckedChanged(sender As Object, e As EventArgs) Handles chkRestrictValues.CheckedChanged
+    Private Sub chkRestrictValues_CheckedChanged(sender As Object, e As EventArgs) 
         If chkRestrictValues.Checked = True Then
             lblBetween.Visible = True
             txtBetween.Visible = True
@@ -57,13 +57,13 @@ Public Class dlgExtremes
         End If
     End Sub
 
-    Private Sub chkMaximumLikelihood_CheckedChanged(sender As Object, e As EventArgs) Handles chkMaximumLikelihood.CheckedChanged
+    Private Sub chkMaximumLikelihood_CheckedChanged(sender As Object, e As EventArgs) 
         If chkMaximumLikelihood.Checked = True Then
             cboMaximumLikelihood.Visible = True
         End If
     End Sub
 
-    Private Sub chkMethodofMoments_CheckedChanged(sender As Object, e As EventArgs) Handles chkMethodOfMoments.CheckedChanged
+    Private Sub chkMethodofMoments_CheckedChanged(sender As Object, e As EventArgs) 
         If chkMethodOfMoments.Checked = True Then
             cboMethodOfMoments.Visible = True
         Else
@@ -71,7 +71,7 @@ Public Class dlgExtremes
         End If
     End Sub
 
-    Private Sub ucrReceiverDataToFit_Leave(sender As Object, e As EventArgs) Handles ucrReceiverDataToFit.Leave
+    Private Sub ucrReceiverDataToFit_Leave(sender As Object, e As EventArgs) 
         ucrBase.clsRsyntax.AddParameter("xdat", clsRFunctionParameter:=ucrReceiverDataToFit.GetVariables())
     End Sub
 End Class
