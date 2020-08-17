@@ -130,7 +130,8 @@ Public Class ucrCore
 
     ''' ContentsChanged is probably only needed for TestOK
     ''' </summary>
-    ''' <param name="ucrChangedControl"> Refer to the control changed </param>
+    ''' <param name="ucrChangedControl"> The control that triggered this event. </param>
+
     Public Event ControlContentsChanged(ucrChangedControl As ucrCore)
 
     ''' <summary> ControlClicked is raised when the control is clicked.
