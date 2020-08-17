@@ -114,7 +114,8 @@ Public Class ucrCore
     Public objValueToRemoveParameter As Object
 
     ''' <summary>
-    ''' ValueChanged is raised when a new value has been set in the control (e.g. the user set a text in a textbox)
+    ''' ValueChanged is raised when a new value has been set in the control (e.g. the user enters text in a textbox)
+
     ''' </summary>
     ''' <param name="ucrChangedControl"> Refer to the control changed </param>
     Public Event ControlValueChanged(ucrChangedControl As ucrCore)
