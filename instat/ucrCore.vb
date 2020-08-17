@@ -22,21 +22,45 @@ Imports instat
 ''' Any class that inherits from ucrCore is called a core control. 
 ''' There are also some non-core controls such as the selector (which does not correspond to any R command or parameter). </para>
 ''' <para> The comments for this class use the following terminology: </para>
-''' <list type="bullet"><item><description> Control </description></item>
-''' <item><description> Core control </description></item>
-''' <item><description> Control's value </description></item>
-''' <item><description> Control’s R code </description></item>
-''' <item><description> Primary pair </description></item>
-''' <item><description> Non-primary pair(s) </description></item>
-''' <item><description> Linked control </description></item>
-''' <item><description>	Parent control </description></item>
+''' <list type="bullet">
+''' <item><description> Control <para><list type="bullet">
+''' <item><description> Refers to a core control (unless specifically stated) </description>
+'''                     </item></list></para> </description></item>
+''' <item><description> Core control <para><list type="bullet">
+''' <item><description> A control that inherits from ucrCore </description>
+'''                     </item></list></para> </description></item>
+''' <item><description> Control's value <para><list type="bullet">
+''' <item><description> The value entered/updated by the user (e.g. the text in a text box) </description>
+'''                     </item></list></para></description></item>
+''' <item><description> Control's R code <para><list type="bullet">
+''' <item><description> The R code associated with the control. 
+'''                     This is encapsulated by the command-parameter pair(s) </description>
+'''                     </item></list></para></description></item>
+''' <item><description> Primary pair <para><list type="bullet">
+''' <item><description> The main command and parameter that are affected by this control. 
+'''                     The first elements in the command-parameter lists. 
+'''                     The primary pair can be accessed directly using the properties ‘clsRCode’ and 
+'''                     ‘clsRParameter’ (these just reference the first element in the lists). </description>
+'''                     </item></list></para></description></item>
+''' <item><description> Non-primary pair(s) <para><list type="bullet">
+''' <item><description> Any additional command-parameter pairs associated with this control. </description>
+'''                     </item></list></para></description></item>
+''' <item><description> Linked control <para><list type="bullet">
+''' <item><description> A control whose value is dependent on the parent’s control value 
+'''                     (i.e. if the parent control changes then the linked control potentially changes). 
+'''                     For example, if a text box needs to be made visible when a check box is checked,
+'''                     then the parent control is the check box and the linked control is the text box. </description>
+'''                     </item></list></para></description></item>
+''' <item><description>	Parent control <para><list type="bullet">
+''' <item><description> This term is used in text about the linking mechanism to refer to the current control.
+'''                     In the rest of the document the current control is referred to as ‘this control’. 
+'''                     But using ‘this control’ in the linking description proved confusing so the
+'''                     term ‘parent control’ is used to be more explicit. </description>
+'''                     </item></list></para></description></item>
 ''' </list>
 ''' </summary>
 
 Public Class ucrCore
-    'These lists are intended to be pairs of (RCode, RParameter) which this control may manage
-    'The first item in each list can be accessed through the properties clsRCode and clsRParameter
-    'There may be duplicate values in the lists. For example, one parameter being added into multiple functions.
 
     ''' <summary> The 'lstAllRCodes' and 'lstAllRParameters' lists contain pairs of R commands and 
     '''           parameters associated with the user control. 
@@ -84,18 +108,6 @@ Public Class ucrCore
     ''' </summary>
     Protected objDefaultState As Object = Nothing
 
-    'Protected typControlType As Type = Object
-
-    ''A control it's linked to i.e. dependant on/depends on 
-    'Protected ucrLinkedControl As ucrCore
-    ''The name of a parameter linked to the control which determines if the control is visible/enabled
-    'Protected strLinkedParameterName As String
-
-    'Sets what aspects of clsParameter this control can change
-    'e.g. check box may not change parameter value, only add/remove it
-    '     For this bAddRemoveParameter = True and bChangeParameterValue = False
-    'e.g. nud may not add/remove parameter, only change its value
-
     ''' <summary> If true then this user control can add/remove parameters.
     '''  Used in combination with 'bChangeParameterValue'.
     '''  (e.g. check box may not change parameter value, only add/remove it
@@ -115,7 +127,6 @@ Public Class ucrCore
 
     ''' <summary>
     ''' ValueChanged is raised when a new value has been set in the control (e.g. the user enters text in a textbox)
-
     ''' </summary>
     ''' <param name="ucrChangedControl"> The control that triggered this event. </param>
 
@@ -127,7 +138,6 @@ Public Class ucrCore
     ''' but possibly the value has not been set (e.g. text in a textbox changes, 
     ''' but the value is not changed until the user leaves the text box).
     ''' When ValueChanged is raised, so is ContentsChanged.
-
     ''' ContentsChanged is probably only needed for TestOK
     ''' </summary>
     ''' <param name="ucrChangedControl"> The control that triggered this event. </param>
@@ -136,7 +146,6 @@ Public Class ucrCore
 
     ''' <summary> ControlClicked is raised when the control is clicked.
     ''' For some controls, this will be raised when one of their child controls is clicked.
-
     ''' </summary>
     Public Event ControlClicked()
 
@@ -174,7 +183,6 @@ Public Class ucrCore
 
     ''' <summary> Lists all the controls to display linked to this control.
     ''' Sets the visible/enabled property of these controls (e.g. a checkbox that shows/hides set of controls).
-
     ''' </summary>
     Protected lstCtrLinkedDisplayControls As List(Of Control)
 
@@ -186,7 +194,7 @@ Public Class ucrCore
     Public bUpdateRCodeFromControl As Boolean = False
 
 
-       ''' <summary> This dictionary is used to set the control’s value (i.e. the value displayed to 
+    ''' <summary> This dictionary is used to set the control’s value (i.e. the value displayed to 
     '''           the user in the control’s dialog box), from the control’s R code. <para>
     '''           It is part of the two-way process that allows R code to be set from the control 
     '''           value; and in the other direction, also allows the control value to be set from 
@@ -230,34 +238,51 @@ Public Class ucrCore
         Dim clsTempRParameter As RParameter
         Dim clsTempCloneParameter As RParameter
 
+        ' The main functionality is at the end of the subroutine in the calls to ‘SetControlValue’ 
+        ' and ‘UpdateLinkedControls’. However, before these functions are called, this subroutine 
+        ' first ensures that the commands reference the correct parameter objects. This is needed 
+        ' because parameters are sometimes cloned.
+
+        'For each command in the control’s command-parameter pair list
         For i As Integer = 0 To lstAllRCodes.Count - 1
+
+            'Get the paired parameter
             clsTempRCode = lstAllRCodes(i)
             clsTempRParameter = lstAllRParameters(i)
+
             If clsTempRCode IsNot Nothing Then
                 If clsTempRParameter IsNot Nothing Then
+                    'If the command does not already contain the paired parameter
                     If Not clsTempRCode.ContainsParameter(clsTempRParameter) Then
+                        'If the command already has a parameter with the same name as the paired 
+                        '    parameter (i.e. a cloned parameter)
                         If clsTempRCode.ContainsParameter(clsTempRParameter.strArgumentName) Then
+                            'Set the paired parameter to reference the cloned parameter
                             SetParameter(clsTempRCode.GetParameter(clsTempRParameter.strArgumentName), i)
-                        Else
-                            'This causes an issue if this parameter is contained in another control
-                            'because the link is broken
-                            'Not an issue if controls do not need to share parameters
-                            'This is needed so that if this parameter is contained in functions in multiple dialogs,
-                            'the parameter only changes the functions in the currently open dialog
+                        Else 'if the command doesn't already contain the parameter, or a cloned parameter with the same name
+                            'If needed, clone the paired parameter
+                            'Note: Cloning is used in sub-dialogs. If a sub-dialog control 
+                            '      parameter is not cloned then all instances of the sub-dialog will 
+                            '      reference the same parameter. This could cause unexpected 
+                            '      behaviour if the sub-dialog is used by more than one dialog.
                             If bCloneIfNeeded Then
                                 clsTempCloneParameter = GetParameter(i).Clone()
                             Else
                                 clsTempCloneParameter = GetParameter(i)
                             End If
 
+                            'If needed, clear all the parameter arguments
                             If Not bUpdateRCodeFromControl AndAlso bChangeParameterValue AndAlso objDefaultState Is Nothing Then
                                 clsTempCloneParameter.ClearAllArguments()
                             End If
+
                             SetParameter(clsTempCloneParameter, i)
 
-                            'If the control has a default state then it's linked control will set the value and we should not set to R default
+                            'If the control does not have an object default, 
+                            '    but does have an  R default
                             If objDefaultState Is Nothing Then
                                 If objRDefault IsNot Nothing Then
+                                    'Set the parameter to the 'R default’
                                     SetToRDefault()
                                 End If
                                 'If there is no R default the value should remain nothing and SetControlValue() will set an apppropriate "empty" value
@@ -267,7 +292,7 @@ Public Class ucrCore
                 Else
                 End If
             Else
-                clsTempRCode = New RCodeStructure
+                clsTempRCode = New RCodeStructure 'TODO SJL 13/08/20 this line does nothing - remove?
             End If
         Next
         SetControlValue()
@@ -277,8 +302,10 @@ Public Class ucrCore
     ''' <summary> Updates the control value from the control’s R code.
     ''' <para> It does this by checking all the control’s conditions: </para>
     ''' <list type="bullet">
-    ''' <item><description> If one (and only one) condition is met then the control's value is set to the value associated with the condition. </description></item>
-    ''' <item><description> If no conditions are met and 'bAllowNonConditionValues' is true then the control’s value is set from the primary parameter. </description></item>
+    ''' <item><description> If one (and only one) condition is met
+    '''                     then the control's value is set to the value associated with the condition. </description></item>
+    ''' <item><description> If no conditions are met and 'bAllowNonConditionValues' is true 
+    '''                     then the control’s value is set from the primary parameter. </description></item>
     ''' <item><description> Else a developer error is thrown. </description></item>
     ''' </list>
     ''' It is common for simple controls (e.g. text boxes) not to have any conditions. 
@@ -361,6 +388,7 @@ Public Class ucrCore
         Dim bTemp As Boolean
         Dim objTempDefaultState As Object
 
+        'For each key-value pair in the list of child controls
         For Each kvpTemp As KeyValuePair(Of ucrCore, Object()) In lstValuesAndControl
             lstValues = kvpTemp.Value
             ucrControl = kvpTemp.Key
@@ -369,7 +397,9 @@ Public Class ucrCore
                 ucrControl.SetRCode(clsRCode)
             End If
             If ucrControl.bLinkedChangeToDefaultState AndAlso bReset Then
+                'If the linked control does not have any valid command-parameter pairs
                 If ucrControl.clsRCode Is Nothing OrElse ucrControl.clsParameter Is Nothing OrElse (ucrControl.clsRCode IsNot Nothing AndAlso ucrControl.clsParameter IsNot Nothing AndAlso ucrControl.clsParameter.strArgumentName IsNot Nothing AndAlso (Not ucrControl.clsRCode.ContainsParameter(ucrControl.clsParameter.strArgumentName))) Then
+                    'Set the child control to its default state
                     ucrControl.SetToDefaultState()
                 End If
             End If
@@ -391,6 +421,7 @@ Public Class ucrCore
             If ucrControl.bLinkedDisabledIfParameterMissing Then
                 ucrControl.Enabled = bTemp
             End If
+            'Update the child control’s own child controls (recursion)
             ucrControl.UpdateLinkedControls(bReset)
         Next
     End Sub
@@ -398,6 +429,7 @@ Public Class ucrCore
 
     ''' <summary> Updates the control’s R code to reflect the current state of the control’s 
     '''           parameters. 
+    '''           For each command-parameter pair, add/remove the parameter directly to/from the command.
     '''           </summary>
     ''' <param name="bReset"> (Optional) If true then reset the linked controls to their default
     '''                       state (but only if a number of other specified conditions are met). </param>
@@ -408,12 +440,27 @@ Public Class ucrCore
         UpdateLinkedControls(bReset)
     End Sub
 
+
     'Private Sub RemoveParameterFromRCode()
     '    If Not clsRCode Is Nothing Then
     '        clsRCode.RemoveParameter(clsParameter)
     '    End If
     'End Sub
 
+    ''' <summary> Sets the control's R code. It then updates
+    '''           the control, and the linked controls, based upon the values of the updated
+    '''           parameters in the command-parameter pair list.
+    '''             </summary>
+    ''' <param name="clsNewCodeStructure">  The new R code structure. </param>
+    ''' <param name="bReset">               (Optional) If true then reset the linked controls to
+    '''                                     their default state (but only if a number of other
+    '''                                     specified conditions are met, see the
+    '''                                     'UpdateLinkedControls' function for details). </param>
+    ''' <param name="bUpdate">              (Optional) True to update. </param>
+    ''' <param name="bCloneIfNeeded">       (Optional) If true then clone each of the control's
+    '''                                     parameters (but only if the command does not already
+    '''                                     contain the parameter, or a cloned parameter with the
+    '''                                     same name). </param>
     Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True, Optional bCloneIfNeeded As Boolean = False)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
             '    If Not clsRCode Is Nothing Then
@@ -1004,10 +1051,14 @@ Public Class ucrCore
         If iAdditionalPairNo = -1 Then
             iAdditionalPairNo = lstAllRCodes.Count
         End If
+
+        'If the specified pair number already exists in the list
         If iAdditionalPairNo < lstAllRCodes.Count Then
+            'Update the pair with the new values
             lstAllRCodes(iAdditionalPairNo) = clsNewRCode
             lstAllRParameters(iAdditionalPairNo) = clsNewRParameter
-        ElseIf iAdditionalPairNo = lstAllRCodes.Count Then
+        ElseIf iAdditionalPairNo = lstAllRCodes.Count Then 'Else position is specified to be next available index position in list
+            'Add the new pair to the list
             lstAllRCodes.Add(clsNewRCode)
             lstAllRParameters.Add(clsNewRParameter)
         Else
