@@ -281,7 +281,9 @@ Public Class ucrCore
     ''' <item><description> If no conditions are met and 'bAllowNonConditionValues' is true then the control’s value is set from the primary parameter. </description></item>
     ''' <item><description> Else a developer error is thrown. </description></item>
     ''' </list>
-    ''' 
+    ''' It is common for simple controls (e.g. text boxes) not to have any conditions. 
+    ''' Conditions are important for controls that have a finite number of states 
+    ''' (e.g. radio boxes or combo boxes).
     ''' </summary>
     Protected Overridable Sub SetControlValue()
         Dim bConditionsMet As Boolean = False
