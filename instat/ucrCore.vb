@@ -423,8 +423,9 @@ Public Class ucrCore
         objValueToRemoveParameter = objNewValue
     End Sub
 
-
-    ''' <summary> Set an object to R default. </summary>
+    ''' <summary> Sets the R environment’s default value for the primary parameter (i.e. the value 
+    '''           that R will assume if the primary parameter is not included in the script, aka 
+    '''           the 'R default').</summary>
     Public Overridable Sub SetToRDefault()
         If clsParameter IsNot Nothing AndAlso objRDefault IsNot Nothing Then
             clsParameter.SetArgumentValue(objRDefault.ToString())
