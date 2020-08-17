@@ -50,6 +50,7 @@ Public Class dlgDisplayDailyData
 
         Dim dctBarColour As New Dictionary(Of String, String)
         Dim dctRugColour As New Dictionary(Of String, String)
+        Dim dctGRugColour As New Dictionary(Of String, String)
         Dim dctSummary As New Dictionary(Of String, String)
         Dim dctMissingvalues As New Dictionary(Of String, String)
         Dim dctTracevalues As New Dictionary(Of String, String)
@@ -99,6 +100,17 @@ Public Class dlgDisplayDailyData
 
         ucrNudUpperYaxis.SetParameter(New RParameter("upper_limit", 9))
         ucrNudUpperYaxis.SetMinMax(0, Integer.MaxValue)
+
+
+        ucrInputGRugColur.SetParameter(New RParameter("colour", 1))
+        dctGRugColour.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctGRugColour.Add("Red", Chr(34) & "red" & Chr(34))
+        dctGRugColour.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctGRugColour.Add("Green", Chr(34) & "green" & Chr(34))
+        dctGRugColour.Add("Violet", Chr(34) & "violet" & Chr(34))
+        ucrInputGRugColur.SetItems(dctGRugColour)
+        ucrInputGRugColur.SetDropDownStyleAsEditable(True)
+
 
         ucrInputBarColour.SetParameter(New RParameter("bar_colour", 7))
         dctBarColour.Add("Blue", Chr(34) & "blue" & Chr(34))
@@ -202,7 +214,7 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, "daily_table")
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraphByYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrReceiverMultipleElements, ucrInputFacetBy, ucrChkNumberOfColumns}, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputScale}, {rdoGraph}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputScale, ucrInputGRugColur}, {rdoGraph}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboMissing, ucrChkMissing}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboTrace, ucrChkTrace}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboZero, ucrChkZero}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -212,6 +224,7 @@ Public Class dlgDisplayDailyData
         ucrChkSum.SetLinkedDisplayControl(grpSummary)
         ucrInputScale.SetLinkedDisplayControl(grpFacet)
         ucrInputScale.SetLinkedDisplayControl(lblScales)
+        ucrInputGRugColur.SetLinkedDisplayControl(lblGRugColour)
 
         ucrChkMissing.AddToLinkedControls({ucrInputComboMissing}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTrace.AddToLinkedControls({ucrInputComboTrace}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="tr")
@@ -283,7 +296,7 @@ Public Class dlgDisplayDailyData
         clsGeomRugFunction.SetPackageName("ggplot2")
         clsGeomRugFunction.SetRCommand("geom_rug")
         clsGeomRugFunction.AddParameter("data", clsROperatorParameter:=clsNAFilterOperator, iPosition:=0)
-        clsGeomRugFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=1)
+        clsGeomRugFunction.AddParameter("colour", Chr(34) & "red" & Chr(34), iPosition:=1)
 
         clsThemeGreyFunction.SetRCommand("theme_grey")
 
@@ -368,6 +381,7 @@ Public Class dlgDisplayDailyData
         ucrInputScale.SetRCode(clsFacetFunction, bReset)
         ucrNudNumberOfColumns.SetRCode(clsFacetFunction, bReset)
         ucrChkNumberOfColumns.SetRCode(clsFacetFunction, bReset)
+        ucrInputGRugColur.SetRCode(clsGeomRugFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()

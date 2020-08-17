@@ -57,6 +57,8 @@ Partial Class dlgDisplayDailyData
         Me.lblFacetby = New System.Windows.Forms.Label()
         Me.lblNumberOfColumns = New System.Windows.Forms.Label()
         Me.rdoGraphByYear = New System.Windows.Forms.RadioButton()
+        Me.lblGRugColour = New System.Windows.Forms.Label()
+        Me.ucrInputGRugColur = New instat.ucrInputComboBox()
         Me.ucrChkSumMissing = New instat.ucrCheck()
         Me.ucrChkMax = New instat.ucrCheck()
         Me.ucrChkIQR = New instat.ucrCheck()
@@ -221,6 +223,18 @@ Partial Class dlgDisplayDailyData
         Me.rdoGraphByYear.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoGraphByYear.Name = "rdoGraphByYear"
         Me.rdoGraphByYear.UseVisualStyleBackColor = True
+        '
+        'lblGRugColour
+        '
+        resources.ApplyResources(Me.lblGRugColour, "lblGRugColour")
+        Me.lblGRugColour.Name = "lblGRugColour"
+        '
+        'ucrInputGRugColur
+        '
+        Me.ucrInputGRugColur.AddQuotesIfUnrecognised = True
+        Me.ucrInputGRugColur.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputGRugColur, "ucrInputGRugColur")
+        Me.ucrInputGRugColur.Name = "ucrInputGRugColur"
         '
         'ucrChkSumMissing
         '
@@ -447,7 +461,9 @@ Partial Class dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputGRugColur)
         Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.lblGRugColour)
         Me.Controls.Add(Me.ucrReceiverMultipleElements)
         Me.Controls.Add(Me.rdoGraphByYear)
         Me.Controls.Add(Me.lblElements)
@@ -538,4 +554,6 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents grpFacet As GroupBox
     Friend WithEvents lblScales As Label
     Friend WithEvents ucrInputScale As ucrInputComboBox
+    Friend WithEvents lblGRugColour As Label
+    Friend WithEvents ucrInputGRugColur As ucrInputComboBox
 End Class
