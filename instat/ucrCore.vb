@@ -432,10 +432,16 @@ Public Class ucrCore
     'TODO in future may want to set RCode and RSyntax together if both needed for conditions
     '     then would need method to add both at the same time
 
-    ''' <summary> Set the R syntax to the control.  </summary>
+    ''' <summary> Sets the control's R syntax and (if conditions are met) R code. It then updates 
+    '''           the control, and the linked controls, based upon the values of the updated
+    '''           parameters in the command-parameter pair list.
+    '''           </summary>
     ''' <param name="clsNewRSyntax"> The new R syntax. </param>
-    ''' <param name="bReset"> If true reset to default </param>
-    ''' <param name="bCloneIfNeeded"> (Optional) The control should reset to the default value. </param>
+    ''' <param name="bReset"> (Optional) If true then reset the linked controls to their default
+    '''                       state (but only if a number of other specified conditions are met). </param>
+    ''' <param name="bCloneIfNeeded"> (Optional) If true then clone each of the control's parameters
+    '''                       (but only if the command does not already contain the parameter, 
+    '''                       or a cloned parameter with the same name). </param>
     Public Overridable Sub SetRSyntax(clsNewRSyntax As RSyntax, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         If clsRSyntax Is Nothing OrElse Not clsRSyntax.Equals(clsNewRSyntax) Then
             clsRSyntax = clsNewRSyntax
