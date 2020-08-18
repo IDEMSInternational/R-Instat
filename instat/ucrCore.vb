@@ -745,10 +745,8 @@ Public Class ucrCore
 
     End Sub
 
-    ''' <summary>
-    ''' Set the link of the new control with other controls linked to display to be visible.
-    ''' </summary>
-    ''' <param name="lstCtrNewControls"> The list of new controls to be linked to other </param>
+    ''' <summary>  Sets each control in <paramref name="lstCtrNewControls"/> to 'Visible'.  </summary>
+    ''' <param name="lstCtrNewControls"> The list of controls to be set to 'Visible' </param>
     Public Sub SetLinkedDisplayControl(lstCtrNewControls As List(Of Control))
         lstCtrLinkedDisplayControls = lstCtrNewControls
         SetLinkedDisplayControlVisibility()
