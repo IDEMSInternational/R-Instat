@@ -163,8 +163,8 @@ Public Class ucrCore
     Protected lstValuesAndControl As New List(Of KeyValuePair(Of ucrCore, Object()))
 
 
-    ''' <summary> If this control is in another control's lstLinkedControls then these booleans specify
-    ''' how the parent control can modify this control. </summary>
+    ''' <summary> If this control is in another control's lstLinkedControls then these booleans 
+    ''' specify how the parent control can modify this control. </summary>
     Public bLinkedAddRemoveParameter As Boolean = False
 
     ''' <summary> If this control is in another control's lstLinkedControls then
