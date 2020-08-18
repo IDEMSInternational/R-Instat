@@ -19,6 +19,7 @@ Imports instat.Translations
 Public Class dlgDisplayDailyData
     Private iBasicHeight As Integer
     Private iBaseMaxY As Integer
+    Private iSaveYLocation As Integer
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private lstCheckboxes As New List(Of ucrCheck)
@@ -27,12 +28,14 @@ Public Class dlgDisplayDailyData
     Private clsIdVarsFunction, clsFacetFunction, clsGgplotAesFunction, clsGGplotElementText, clsXLabFunction As New RFunction
     Private clsGgPlotOperator, clsDisplayDailyGraphOperator, clsDisplayDailyTableOperator, clsNAFilterOperator As New ROperator
     Private clsStationElemFacetOperator As New ROperator
+    Private clsLabelWrapGenFunction As New RFunction
 
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             iBasicHeight = Me.Height
             iBaseMaxY = ucrBase.Location.Y
+            iSaveYLocation = ucrSaveGraph.Location.Y
             InitialiseDialog()
             bFirstLoad = False
         End If
@@ -252,6 +255,7 @@ Public Class dlgDisplayDailyData
         clsFacetFunction = New RFunction
         clsXLabFunction = New RFunction
         clsStationElemFacetOperator = New ROperator
+        clsLabelWrapGenFunction = New RFunction
 
         ucrNudNumberOfColumns.SetText("1")
 
@@ -260,6 +264,9 @@ Public Class dlgDisplayDailyData
         clsXLabFunction.SetPackageName("ggplot2")
         clsXLabFunction.SetRCommand("xlab")
         clsXLabFunction.AddParameter("label", "NULL", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsLabelWrapGenFunction.SetRCommand("label_wrap_gen")
+        clsLabelWrapGenFunction.AddParameter("multi_line", "FALSE", iPosition:=0)
 
 
         clsFacetFunction.SetPackageName("ggplot2")
@@ -377,6 +384,7 @@ Public Class dlgDisplayDailyData
         ucrReceiverElement.SetRCode(clsDisplayDailyTable, bReset)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsDisplayDailyGraphFunction, New RParameter("climatic_element", 1), iAdditionalPairNo:=1)
         ucrSaveGraph.SetRCode(clsDisplayDailyGraphFunction, bReset)
+        ucrSaveGraph.AddAdditionalRCode(clsGgPlotOperator)
         ucrPnlFrequencyDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
         ucrInputScale.SetRCode(clsFacetFunction, bReset)
         ucrNudNumberOfColumns.SetRCode(clsFacetFunction, bReset)
@@ -406,7 +414,7 @@ Public Class dlgDisplayDailyData
         If rdoGraphByYear.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.86)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.2)
-        ElseIf rdoTable.Checked Then
+        ElseIf rdoTable.Checked OrElse rdoGraph.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
         End If
@@ -461,7 +469,7 @@ Public Class dlgDisplayDailyData
         End If
     End Sub
 
-    Private Sub ucrReceiverMultipleElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleElements.ControlContentsChanged, ucrReceiverStations.ControlValueChanged
+    Private Sub ucrReceiverMultipleElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleElements.ControlValueChanged, ucrReceiverStations.ControlValueChanged
         SetFacetItems()
         StackingFunction()
     End Sub
@@ -470,7 +478,7 @@ Public Class dlgDisplayDailyData
         clsGgplotAesFunction.AddParameter("x", ucrReceiverDate.GetVariableNames(False), iPosition:=0)
     End Sub
 
-    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrReceiverMultipleElements.ControlValueChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrChkSum.ControlContentsChanged, ucrChkMax.ControlContentsChanged, ucrChkMin.ControlContentsChanged, ucrChkMean.ControlContentsChanged, ucrChkMedian.ControlContentsChanged, ucrChkIQR.ControlContentsChanged, ucrChkSumMissing.ControlContentsChanged
+    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrReceiverMultipleElements.ControlContentsChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrChkSum.ControlContentsChanged, ucrChkMax.ControlContentsChanged, ucrChkMin.ControlContentsChanged, ucrChkMean.ControlContentsChanged, ucrChkMedian.ControlContentsChanged, ucrChkIQR.ControlContentsChanged, ucrChkSumMissing.ControlContentsChanged
         TestOkEnabled()
     End Sub
     '''--------------------------------------------------------------------------------------------
@@ -519,7 +527,7 @@ Public Class dlgDisplayDailyData
         End Select
 
         If ucrInputFacetBy.GetText() = "Station-Element" OrElse ucrInputFacetBy.GetText() = "Element-Station" Then
-            clsFacetFunction.AddParameter("labeller", "label_wrap_gen(multi_line=FALSE)", iPosition:=3)
+            clsFacetFunction.AddParameter("labeller", clsRFunctionParameter:=clsLabelWrapGenFunction, iPosition:=3)
         Else
             clsFacetFunction.RemoveParameterByName("labeller")
         End If
