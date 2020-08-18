@@ -577,7 +577,8 @@ Public Class ucrCore
     ''' <summary> Set the parameter in the R code. </summary>
     ''' 
     ''' <param name="clsNewParameter"> The new parameter to set. </param>
-    ''' <param name="iIndex"> (Optional) The relative position of the parameter in this object's parameter list. </param>
+    ''' <param name="iIndex"> (Optional) The relative position of the parameter in this object's 
+    '''                       parameter list. </param>
     Public Overridable Sub SetParameter(clsNewParameter As RParameter, Optional iIndex As Integer = 0)
         ''this should be removing the old parameter from the rcode before replacing it. Currently only implemented for iIndex =0
         'If iIndex = 0 Then
