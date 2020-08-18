@@ -207,8 +207,8 @@ Public Class ucrCore
     '''           It is part of the two-way process that allows R code to be set from the control 
     '''           value; and in the other direction, also allows the control value to be set from 
     '''           the R code. </para><para>
-    '''           This dictionary contains a collection Of key-value pairs. Each dictionary entry 
-    '''           represents a possible valid value For this control, together With the list of 
+    '''           This dictionary contains a collection of key-value pairs. Each dictionary entry 
+    '''           represents a possible valid value for this control, together with the list of 
     '''           conditions that define when this value must be used. </para><para>
     '''           If all the conditions In the list are met, then this control's value is set to 
     '''           the list’s key value.</para>
