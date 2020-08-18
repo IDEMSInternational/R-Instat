@@ -197,7 +197,8 @@ Public Class ucrCore
     ''' <summary> If true then the control's value can be set from the control's R code. </summary>
     Public bIsActiveRControl As Boolean = True
 
-    ''' <summary> If true, then update the control's associated commands and parameters whenever the control's value changes. </summary>
+    ''' <summary> If true, then update the control's associated commands and parameters whenever 
+    ''' the control's value changes. </summary>
     Public bUpdateRCodeFromControl As Boolean = False
 
 
