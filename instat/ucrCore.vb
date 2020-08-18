@@ -217,8 +217,10 @@ Public Class ucrCore
 
     Protected dctConditions As New Dictionary(Of Object, List(Of Condition))
 
-    ''' <summary> If true then allow the control's value to be set to a value that is not one of the pre-defined valid values in the 'dctConditions' dictionary.
-    ''' If false, then only pre-defined values are allowed (e.g. a check box sets a value to either true or false). </summary>
+    ''' <summary> If true then allow the control's value to be set to a value that is not one of 
+    ''' the pre-defined valid values in the 'dctConditions' dictionary.
+    ''' If false, then only pre-defined values are allowed (e.g. a check box sets a value to either 
+    ''' true or false). </summary>
     Public bAllowNonConditionValues As Boolean = True
 
     ''' <summary> If true then set visible property of this control </summary>
