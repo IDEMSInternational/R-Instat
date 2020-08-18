@@ -126,7 +126,7 @@ Public Class ucrCore
     ''' </summary>
     Public bChangeParameterValue As Boolean = True
 
-    ''' <summary> If parameter has this value the it will be removed from the RCodeStructure </summary>
+    ''' <summary> If parameter has this value then it will be removed from the RCodeStructure </summary>
     Public objValueToRemoveParameter As Object
 
     ''' <summary>
