@@ -92,7 +92,7 @@ Public Class dlgInfillMissingValues
         ucrChkBy.AddParameterPresentCondition(True, "by")
         ucrChkBy.AddParameterPresentCondition(False, "by", False)
 
-        ucrChkMaxGap.SetText("Max Gap:")
+        ucrChkMaxGap.SetText("Maximum Gap:")
         ucrChkMaxGap.AddParameterPresentCondition(True, "maxgap")
         ucrChkMaxGap.AddParameterPresentCondition(False, "maxgap", False)
 
@@ -120,7 +120,7 @@ Public Class dlgInfillMissingValues
         ucrPnlMethods.AddToLinkedControls(ucrChkCopyFromBelow, {rdoNaLocf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrChkBy, {rdoNaAggregate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkBy.AddToLinkedControls(ucrReceiverByFactor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkMaxGap.AddToLinkedControls(ucrNudMaximum, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkMaxGap.AddToLinkedControls(ucrNudMaximum, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboFunction.AddToLinkedControls(ucrChkSetSeed, {"Sample"}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrInputComboFunction.SetLinkedDisplayControl(lblFunction)
@@ -159,6 +159,7 @@ Public Class dlgInfillMissingValues
         clsApproximateFunction.SetRCommand("na.approx")
         clsApproximateFunction.AddParameter("x", "x", iPosition:=0, bIncludeArgumentName:=False)
         clsApproximateFunction.AddParameter("rule", 2, iPosition:=1)
+        clsApproximateFunction.AddParameter("maxgap", 10, iPosition:=5)
 
         clsAggregateFunction.SetPackageName("zoo")
         clsAggregateFunction.SetRCommand("na.aggregate")
@@ -178,9 +179,11 @@ Public Class dlgInfillMissingValues
         clsNaFillFunction.SetRCommand("na.fill")
         clsNaFillFunction.AddParameter("x", "x", iPosition:=0, bIncludeArgumentName:=False)
 
-        clsStructTSFunction.SetPackageName("zoo")
-        clsStructTSFunction.SetRCommand("na.StructTS")
-        clsStructTSFunction.AddParameter("object", clsRFunctionParameter:=clsZooRegFunction, iPosition:=1)
+        clsStructTSFunction.SetPackageName("imputeTS")
+        clsStructTSFunction.SetRCommand("na_kalman")
+        clsStructTSFunction.AddParameter("x", "x", iPosition:=0, bIncludeArgumentName:=False)
+        clsStructTSFunction.AddParameter("model", Chr(34) & "StructTS" & Chr(34), iPosition:=1)
+        clsStructTSFunction.AddParameter("smooth", "TRUE", iPosition:=2)
 
         clsZooRegFunction.SetPackageName("zoo")
         clsZooRegFunction.SetRCommand("zooreg")
@@ -218,7 +221,7 @@ Public Class dlgInfillMissingValues
         ucrChkCopyFromBelow.SetRCode(clsNaLocfFunction, bReset)
         ucrChkBy.SetRCode(clsAggregateFunction, bReset)
         ucrNudMaximum.SetRCode(clsApproximateFunction, bReset)
-        ucrChkMaxGap.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkMaxGap.SetRCode(clsApproximateFunction, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeedFunction, bReset)
         ucrChkSetSeed.SetRSyntax(ucrBase.clsRsyntax, bReset)
 
