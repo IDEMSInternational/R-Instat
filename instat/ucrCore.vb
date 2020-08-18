@@ -194,7 +194,7 @@ Public Class ucrCore
     Protected lstCtrLinkedDisplayControls As List(Of Control)
 
 
-    ''' <summary> If true then the control's value can be set from the control's R code (if false, then it cannot be set). </summary>
+    ''' <summary> If true then the control's value can be set from the control's R code. </summary>
     Public bIsActiveRControl As Boolean = True
 
     ''' <summary> If true, then update the control's associated commands and parameters whenever the control's value changes. </summary>
