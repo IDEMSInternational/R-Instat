@@ -756,19 +756,20 @@ Public Class ucrCore
         SetLinkedDisplayControlVisibility()
     End Sub
 
-    ''' <summary>
-    ''' Set the linked control to display to be visible property and return the contains groupbox.
-    ''' </summary>
+    ''' <summary> Set each control to display linked to this control, to 'Visible'. </summary>
     Private Sub SetLinkedDisplayControlVisibility()
         SetLinkedDisplayControlVisibilityAndReturnContainsGroupBox(Visible)
     End Sub
 
 
     ''' <summary>
-    ''' Set the linked control to display to be visible property and return the contains groupbox. 
+    ''' For each control to display linked to this control, set the visibility to 
+    ''' <paramref name="bVisible"/>. If any of these linked controls is a group box then return 
+    ''' true. 
     ''' </summary>
-    ''' <param name="bVisible"> True then visible property of the controls. </param>
-    ''' <returns> True is if the type of control is a groupbox. </returns>
+    ''' <param name="bVisible"> If true then make the linked controls visible, else make them
+    '''                         not visible. </param>
+    ''' <returns> True if any control to display, linked to this control, is a group box. </returns>
     Private Function SetLinkedDisplayControlVisibilityAndReturnContainsGroupBox(bVisible As Boolean) As Boolean
         Dim ctr As Control
         Dim bContainsGroupBox As Boolean = False
@@ -787,14 +788,16 @@ Public Class ucrCore
         Return bContainsGroupBox
     End Function
 
-    ''' <summary> Set the value to the object. </summary>
-    ''' <param name="objTemp"> The parameter's object value.</param>
+    ''' <summary> Does nothing. May be overridden to set the control based 
+    ''' on <paramref name="objTemp"/>. </summary>
+    ''' <param name="objTemp"> The object used to set the control.</param>
     Public Overridable Sub SetToValue(objTemp As Object)
     End Sub
 
-    ''' <summary> Add a condition to the object. </summary>
-    ''' <param name="objControlState"> The parameter that control the state of the object </param>
-    ''' <param name="clsCond"> The parameter of the condition to add </param>
+    ''' <summary> Adds condition <paramref name="clsCond"/> for when to set this control to 
+    '''           value <paramref name="objControlState"/>. </summary>
+    ''' <param name="objControlState"> The value for this control </param>
+    ''' <param name="clsCond"> The condition to add for this control value. </param>
     Public Sub AddCondition(objControlState As Object, clsCond As Condition)
         If dctConditions.ContainsKey(objControlState) Then
             dctConditions(objControlState).Add(clsCond)
@@ -803,10 +806,12 @@ Public Class ucrCore
         End If
     End Sub
 
-    ''' <summary> Add the condition to the valus of the parameter </summary>
-    ''' <param name="objControlState"> The parameter that control the state of the object. </param>
+    ''' <summary> Creates a new condition based on <paramref name="strParamName"/>, 
+    '''           <paramref name="strParamValue"/> and <paramref name="bNewIsPositive"/>.
+    '''           Adds this condition to value <paramref name="objControlState"/>.</summary>
+    ''' <param name="objControlState"> The value for this control. </param>
     ''' <param name="strParamName"> The parameter's name.</param>
-    ''' <param name="strParamValue"> The parameter's name. </param>
+    ''' <param name="strParamValue"> The parameter's value. </param>
     ''' <param name="bNewIsPositive"> (Optional) If true then add condition to the parameter values. </param>
     Public Sub AddParameterValuesCondition(objControlState As Object, strParamName As String, strParamValue As String, Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
@@ -816,8 +821,10 @@ Public Class ucrCore
     End Sub
 
 
-    ''' <summary> Add the condition to the valus of the parameter </summary>
-    ''' <param name="objControlState"> The parameter that control the state of the object. </param>
+    ''' <summary> Creates a new condition based on <paramref name="strParamName"/>, 
+    '''           <paramref name="lstParamValues"/> and <paramref name="bNewIsPositive"/>.
+    '''           Adds this condition to value <paramref name="objControlState"/>.</summary>
+    ''' <param name="objControlState"> The value for this control. </param>
     ''' <param name="strParamName"> The parameter's name. </param>
     ''' <param name="lstParamValues"> The parameter's values list.</param>
     ''' <param name="bNewIsPositive"> (Optional) If true then add condition to the parameter values. </param>
@@ -829,9 +836,10 @@ Public Class ucrCore
     End Sub
 
 
-    ''' <summary> Add condition to the current parameter.
-    ''' </summary>
-    ''' <param name="objControlState"> The parameter that control the state of the object. </param>
+    ''' <summary> Creates a new condition based on <paramref name="strParamName"/>, 
+    '''           and <paramref name="bNewIsPositive"/>.
+    '''           Adds this condition to value <paramref name="objControlState"/>.</summary>
+    ''' <param name="objControlState"> The value for this control. </param>
     ''' <param name="strParamName"> The parameter's name. </param>
     ''' <param name="bNewIsPositive"> (Optional) If true then add condition to the parameter. </param>
     Public Sub AddParameterPresentCondition(objControlState As Object, strParamName As String, Optional bNewIsPositive As Boolean = True)
@@ -842,10 +850,11 @@ Public Class ucrCore
     End Sub
 
 
-    ''' <summary> Add condition to the current parameter.
-    ''' </summary>
-    ''' <param name="objControlState"> The parameter that control the state of the object. </param>
-    ''' <param name="lstParamName"> The parameter's list. </param>
+    ''' <summary> Creates a new condition based on <paramref name="lstParamName"/>, 
+    '''           and <paramref name="bNewIsPositive"/>.
+    '''           Adds this condition to value <paramref name="objControlState"/>.</summary>
+    ''' <param name="objControlState"> The value for this control. </param>
+    ''' <param name="lstParamName"> The list of parameter names. </param>
     ''' <param name="bNewIsPositive"> (Optional) If true then add condition to the parameter. </param>
     Public Sub AddParameterPresentCondition(objControlState As Object, lstParamName As String(), Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
@@ -855,10 +864,11 @@ Public Class ucrCore
     End Sub
 
 
-    ''' <summary> Add condition name to the function.
-    ''' </summary>
-    ''' <param name="objControlState"> The parameter that control the state of the object. </param>
-    ''' <param name="strFunctionName"> The parameter's function. </param>
+    ''' <summary> Creates a new condition based on <paramref name="strFunctionName"/>, 
+    '''           and <paramref name="bNewIsPositive"/>.
+    '''           Adds this condition to value <paramref name="objControlState"/>.</summary>
+    ''' <param name="objControlState"> The value for this control. </param>
+    ''' <param name="strFunctionName"> The function name to use in the condition. </param>
     ''' <param name="bNewIsPositive"> (Optional) If true then add condition name to the function. </param>
     Public Sub AddFunctionNamesCondition(objControlState As Object, strFunctionName As String, Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
@@ -867,9 +877,9 @@ Public Class ucrCore
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-    ''' <summary> Add condition to the R function is a R codes.
-    ''' </summary>
-    ''' <param name="objControlState"> The parameter that control the state of the object. </param>
+    ''' <summary> Creates a new functionn name condition based on <paramref name="bNewIsPositive"/>.
+    '''           Adds this condition to value <paramref name="objControlState"/>.</summary>
+    ''' <param name="objControlState"> The value for this control. </param>
     ''' <param name="bNewIsPositive"> (Optional) If true then add condition name to the function. </param>
     Public Sub AddRCodeIsRFunctionCondition(objControlState As Object, Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
@@ -878,10 +888,11 @@ Public Class ucrCore
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-    ''' <summary> Add condition name to the function.
-    ''' </summary>
-    ''' <param name="objControlState"> The parameter that control the state of the object. </param>
-    ''' <param name="lstFunctionNames"> The parameter's function list. </param>
+    ''' <summary> Creates a new function names condition based on 
+    '''           <paramref name="lstFunctionNames"/> and <paramref name="bNewIsPositive"/>.
+    '''           Adds this condition to value <paramref name="objControlState"/>.</summary>
+    ''' <param name="objControlState"> The value for this control. </param>
+    ''' <param name="lstFunctionNames"> The condition's function list. </param>
     ''' <param name="bNewIsPositive"> (Optional) If true then add condition name to the function. </param>
     Public Sub AddFunctionNamesCondition(objControlState As Object, lstFunctionNames As String(), Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
@@ -890,9 +901,10 @@ Public Class ucrCore
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-    ''' <summary> dd condition to the parameter is string.
-    ''' Set the parameter's name to <paramref name="strParameterName"/>. </summary>
-    ''' <param name="objControlState"> The parameter control the object in the R syntax. </param>
+    ''' <summary> Creates a new parameter type condition based on 
+    '''           <paramref name="strParameterName"/> and <paramref name="bNewIsPositive"/>.
+    '''           Adds this condition to value <paramref name="objControlState"/>.</summary>
+    ''' <param name="objControlState"> The value for this control. </param>
     ''' <param name="strParameterName"> The parameter's name. </param>
     ''' <param name="bNewIsPositive"> The relative position the object in the R syntax. </param>
     Public Sub AddParameterIsStringCondition(objControlState As Object, strParameterName As String, Optional bNewIsPositive As Boolean = True)
@@ -903,10 +915,10 @@ Public Class ucrCore
     End Sub
 
 
-    ''' <summary> Add a condition to the parameter is the R function.
-    ''' Sets parameter's name to <paramref name="strParameterName"/>.
-    ''' </summary>
-    ''' <param name="objControlState"> The parameter control the object in the R codes.</param>
+    ''' <summary> Creates a new R function type condition based on 
+    '''           <paramref name="strParameterName"/> and <paramref name="bNewIsPositive"/>.
+    '''           Adds this condition to value <paramref name="objControlState"/>.</summary>
+    ''' <param name="objControlState"> The value for this control. </param>
     ''' <param name="strParameterName"> Name of the parameter. </param>
     ''' <param name="bNewIsPositive"> (Optional) The relative position the object in the R syntax. </param>
     Public Sub AddParameterIsRFunctionCondition(objControlState As Object, strParameterName As String, Optional bNewIsPositive As Boolean = True)
@@ -917,10 +929,10 @@ Public Class ucrCore
     End Sub
 
 
-    ''' <summary> Add a condition to the parameter is the R opertor.
-    ''' Sets parameter's name to <paramref name="strParameterName"/>.
-    ''' </summary>
-    ''' <param name="objControlState"> The parameter control the object in the R codes.</param>
+    ''' <summary> Creates a new R operator type condition based on 
+    '''           <paramref name="strParameterName"/> and <paramref name="bNewIsPositive"/>.
+    '''           Adds this condition to value <paramref name="objControlState"/>.</summary>
+    ''' <param name="objControlState"> The value for this control. </param>
     ''' <param name="strParameterName"> Name of the parameter. </param>
     ''' <param name="bNewIsPositive"> (Optional) The relative position the object in the R syntax. </param>
     Public Sub AddParameterIsROperatorCondition(objControlState As Object, strParameterName As String, Optional bNewIsPositive As Boolean = True)
@@ -931,9 +943,11 @@ Public Class ucrCore
     End Sub
 
 
-    ''' <summary>  Add the condition to the parameter value and function names.
-    ''' Sets parameter's name to <paramref name="strParameterName"/> and function'name to <paramref name="strFunctionName"/>.</summary>
-    ''' <param name="objControlState"> The parameter control the object in the R codes. </param>
+    ''' <summary> Creates a new R function name type condition based on 
+    '''           <paramref name="strParameterName"/>, <paramref name="strFunctionName"/> and 
+    '''           <paramref name="bNewIsPositive"/>.
+    '''           Adds this condition to value <paramref name="objControlState"/>.</summary>
+    ''' <param name="objControlState"> The value for this control. </param>
     ''' <param name="strParameterName"> Name of the parameter. </param>
     ''' <param name="strFunctionName"> Name of the function. </param>
     ''' <param name="bNewIsPositive"> (Optional) The relative position the object in the R syntax. </param>
@@ -945,12 +959,12 @@ Public Class ucrCore
     End Sub
 
 
-    ''' <summary> Add a condition to the parameter value and function name of the R codes.
-    ''' Sets parameter's name to <paramref name="strParameterName"/> and function's name to <paramref name="strFunctionNames"/>.</summary>
-    ''' 
-    ''' <param name="objControlState"> The parameter control the object in the R codes. </param>
+    ''' <summary> Creates a new parameter type condition based on 
+    '''           <paramref name="strParameterName"/>, <paramref name="strFunctionNames"/> and 
+    '''           <paramref name="bNewIsPositive"/>.</summary>
+    ''' <param name="objControlState"> The value for this control. </param>
     ''' <param name="strParameterName"> Name of the parameter. </param>
-    ''' <param name="strFunctionNames"> Name of the function. </param>
+    ''' <param name="strFunctionNames"> List of functions. </param>
     ''' <param name="bNewIsPositive">  (Optional) The relative position the object in the R codes. </param>
     Public Sub AddParameterValueFunctionNamesCondition(objControlState As Object, strParameterName As String, strFunctionNames As String(), Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
@@ -960,10 +974,9 @@ Public Class ucrCore
     End Sub
 
 
-    ''' <summary> Add a conditon to the R syntax contains the function name.
-    ''' Set the function's name  to <paramref name="strFunctionNames"/>.</summary>
-    '''
-    ''' <param name="objControlState"> The parameter control the object in the R syntax. </param>
+    ''' <summary> Creates a new RSyntax type condition based on 
+    '''           <paramref name="strFunctionNames"/> and <paramref name="bNewIsPositive"/>.</summary>
+    ''' <param name="objControlState"> The value for this control. </param>
     ''' <param name="strFunctionNames"> Name of the function. </param>
     ''' <param name="bNewIsPositive"> The relative position the object in the R syntax. </param>
     Public Sub AddRSyntaxContainsFunctionNamesCondition(objControlState As Object, strFunctionNames As String(), Optional bNewIsPositive As Boolean = True)
@@ -973,8 +986,9 @@ Public Class ucrCore
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-    ''' <summary> Add a condition to the code contain the R syntax. </summary>
-    ''' <param name="objControlState"> The parameter control the R state. </param>
+    ''' <summary> Creates a new RSyntax containing code type condition based on 
+    '''           <paramref name="bNewIsPositive"/>.</summary>
+    ''' <param name="objControlState"> The value for this control. </param>
     ''' <param name="bNewIsPositive"> The relative position the object in the R syntax. </param>
     Public Sub AddRSyntaxContainCodeCondition(objControlState As Object, Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
@@ -986,6 +1000,13 @@ Public Class ucrCore
 
     ''' <summary> Set visible a control. </summary>
     ''' <param name="bVisible"> If true then set a control visible property. </param>
+    ''' <summary>
+    ''' For each control (display) linked to this control, set the visibility to 
+    ''' <paramref name="bVisible"/> If none of these linked controls is a group box then set
+    '''                             'Visible' to 'bVisible'.
+    ''' </summary>
+    ''' <param name="bVisible"> If true then make the linked controls visible, else make them
+    '''                         not visible. </param>```
     Public Sub SetVisible(bVisible As Boolean)
         'TODO: check how this should behave with linked group boxes
         If Not SetLinkedDisplayControlVisibilityAndReturnContainsGroupBox(bVisible) Then
@@ -996,20 +1017,24 @@ Public Class ucrCore
 
     End Sub
 
-    ''' <summary> Set to default state an object. </summary>
-    ''' <param name="objState"> The object to set default. </param>
+    ''' <summary> Set the control’s default value for the primary parameter, aka 
+    '''           the 'object default', to <paramref name="objState"/>. </summary>
+    ''' <param name="objState"> The new default value. </param>
     Public Sub SetDefaultState(objState As Object)
         objDefaultState = objState
     End Sub
 
 
-    ''' <summary> Set to default state an object. </summary>
+    ''' <summary> Sets the control to the control’s default value for the primary parameter.
+    '''           The 'SetToValue' function must be overridden, else this function does nothing.
+    '''            </summary>
     Protected Overridable Sub SetToDefaultState()
         SetToValue(objDefaultState)
     End Sub
 
 
-    ''' <summary> This should be used very cautiously, only if you want to change the parameter name and keep all other properties the same. </summary>
+    ''' <summary> This should be used very cautiously, only if you want to change the parameter 
+    '''           name and keep all other properties the same. </summary>
     ''' <param name="strNewName"> The parameter's name. </param>
     ''' <param name="bClearConditions"> If true then clear the condition. </param>
     Public Overridable Sub ChangeParameterName(strNewName As String, Optional bClearConditions As Boolean = True)
@@ -1051,9 +1076,12 @@ Public Class ucrCore
 
     ''' <summary> Adds/updates a command-parameter pair to/in the control’s lists:
     ''' <list type="bullet">
-    ''' <item><description> If the specified pair number is -1 (the default) or is the index of the next available list element, then the new pair is added to the list. </description></item>
-    ''' <item><description> If the specified pair number already exists in the list, then that pair is updated with the new values. </description></item>
-    ''' <item><description> If the pair number is greater than the number of list elements, then throws a developer error </description></item>
+    ''' <item><description> If the specified pair number is -1 (the default) or is the index of 
+    '''       the next available list element, then the new pair is added to the list. </description></item>
+    ''' <item><description> If the specified pair number already exists in the list, then that pair 
+    '''       is updated with the new values. </description></item>
+    ''' <item><description> If the pair number is greater than the number of list elements, then 
+    '''       throws a developer error </description></item>
     ''' </list>
     ''' </summary>
     ''' <param name="clsNewRCode"> The new R code. </param>
@@ -1080,8 +1108,9 @@ Public Class ucrCore
     End Sub
 
 
-    ''' <summary> Update all the parameters in the R script.
-    '''In general this should not be overrided. Only for controls which use parameters in very different way e.g. ucrSave
+    ''' <summary> Update all the parameters in the R script. In general this should not be 
+    '''           overridden. Only for controls which use parameters in very different ways
+    '''           e.g. ucrSave.
     ''' </summary>
     Protected Overridable Sub UpdateAllParameters()
         For i As Integer = 0 To lstAllRParameters.Count - 1
@@ -1115,8 +1144,8 @@ Public Class ucrCore
         End If
     End Sub
 
-    ''' <summary> List of all the Parameters. </summary>
-    ''' <returns> List all Parameters. </returns>
+    ''' <summary> The primary parameter. </summary>
+    ''' <returns> The primary parameter. </returns>
     Private Property clsParameter As RParameter
         Get
             Return lstAllRParameters(0)
@@ -1127,8 +1156,8 @@ Public Class ucrCore
         End Set
     End Property
 
-    ''' <summary> List of all the R codes. </summary>
-    ''' <returns> List all R codes</returns>
+    ''' <summary> The primary R command. </summary>
+    ''' <returns> The primary R command. </returns>
     Private Property clsRCode As RCodeStructure
         Get
             Return lstAllRCodes(0)
