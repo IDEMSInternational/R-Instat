@@ -353,13 +353,17 @@ Public Class ucrCore
         End If
     End Sub
 
-    ''' <summary> Returns the value of the primary parameter (the first parameter in the command-parameter list): 
-    ''' <list type="bullet">
-    ''' <item><description> If the parameter's argument is a string then returns a string object. 
-    ''' Please note that all arguments that are not functions or operators (e.g. names, integers, reals, booleans etc.) are returned as strings </description></item>
-    ''' <item><description> If the parameter's argument is a function or operator, then returns an 'RCodeStructure' </description></item>
-    ''' <item><description> Else returns 'nothing'. </description></item>
-    ''' </list>
+    ''' <summary> Returns the value of the primary parameter (the first parameter in the 
+    ''' command-parameter list): 
+    ''' <list type="bullet"><item><description> 
+    '''     If the parameter's argument is a string then returns a string object. 
+    '''     Please note that all arguments that are not functions or operators (e.g. names, 
+    '''     integers, reals, booleans etc.) are returned as strings 
+    ''' </description></item><item><description> 
+    '''     If the parameter's argument is a function or operator, then returns an 'RCodeStructure' 
+    ''' </description></item><item><description> 
+    '''     Else returns 'nothing'. 
+    ''' </description></item></list>
     ''' </summary>
     Public Overridable Function GetValueToSet() As Object
         If clsParameter IsNot Nothing Then
