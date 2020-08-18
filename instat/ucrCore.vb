@@ -171,7 +171,8 @@ Public Class ucrCore
     ''' these booleans specify how the parent control can modify this control. </summary>
     Public bLinkedUpdateFunction As Boolean = False
 
-    ''' <summary> If this control is in another control's lstLinkedControls then these booleans specify how the parent control can modify this control. </summary>
+    ''' <summary> If this control is in another control's lstLinkedControls then these booleans 
+    ''' specify how the parent control can modify this control. </summary>
     Public bLinkedDisabledIfParameterMissing As Boolean = False
 
     ''' <summary> If this control is in another control's lstLinkedControls then 
