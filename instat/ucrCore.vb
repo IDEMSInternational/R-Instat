@@ -717,10 +717,10 @@ Public Class ucrCore
         Return bTemp
     End Function
 
-    ''' <summary> Get the list of all the R parameters.
+    ''' <summary> Returns the parameter with index <paramref name="iIndex"/>.
     ''' </summary>
-    ''' <param name="iIndex"> The position that needs to count the list of R parameters </param>
-    ''' <returns> A list of All the R parameters or Nothing. </returns>
+    ''' <param name="iIndex"> The parameter index. </param>
+    ''' <returns> The parameter with index <paramref name="iIndex"/>. </returns>
     Public Overridable Function GetParameter(Optional iIndex As Integer = 0) As RParameter
         If iIndex < lstAllRParameters.Count Then
             Return lstAllRParameters(iIndex)
