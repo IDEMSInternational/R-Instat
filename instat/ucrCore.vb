@@ -674,10 +674,10 @@ Public Class ucrCore
     End Sub
 
 
-    ''' <summary> Check if the control is linked to another control.
+    ''' <summary> Returns true if <paramref name="ucrControl"/> is linked to this control.
     ''' </summary>
-    ''' <param name="ucrControl"> parameter refering to the control</param>
-    ''' <returns> Temporary control value. </returns>
+    ''' <param name="ucrControl"> the control to search for</param>
+    ''' <returns> true if <paramref name="ucrControl"/> is linked to this control. </returns>
     Public Function IsLinkedTo(ucrControl) As Boolean
         Dim bTemp As Boolean = False
 
