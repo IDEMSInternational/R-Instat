@@ -696,8 +696,8 @@ Public Class ucrCore
         Return clsParameter IsNot Nothing AndAlso clsParameter.strArgumentValue IsNot Nothing AndAlso objRDefault IsNot Nothing AndAlso objRDefault.Equals(clsParameter.strArgumentValue)
     End Function
 
-    ''' <summary> Can add parameter in the R code. </summary>
-    ''' <returns> True if it's not a default R code. False otherwise. </returns>
+    ''' <summary> Returns true if the primary parameter's value is not the R default. </summary>
+    ''' <returns> True if the primary parameter's value is not the R default. </returns>
     Public Overridable Function CanAddParameter() As Boolean
         Return Not IsRDefault()
     End Function
