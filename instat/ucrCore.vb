@@ -729,8 +729,8 @@ Public Class ucrCore
         End If
     End Function
 
-    ''' <summary> Get the R codes.  </summary>
-    ''' <returns> R codes.  </returns>
+    ''' <summary> Returns the primary R command.  </summary>
+    ''' <returns> The primary R command.  </returns>
     Public Overridable Function GetRCode() As RCodeStructure
         Return clsRCode
     End Function
