@@ -154,9 +154,11 @@ Public Class ucrCore
     Public Event ControlClicked()
 
 
-    ''' <summary> Lists all the controls linked to this control (hereafter called 'child control' and 'parent control' respectively).
-    ''' Used when this control determines aspects of other controls (e.g. add/remove the parameter of other controls)
-    ''' set the visible/enabled property of other controls (e.g. a checkbox that shows/hides set of controls)
+    ''' <summary> Lists all the controls linked to this control (hereafter called 'child control' 
+    ''' and 'parent control' respectively).  Used when this control determines aspects of other 
+    ''' controls (e.g. by adding or removing the other control's parameters or setting the 
+    ''' visible/enabled properties of other controls). For example a checkbox may shows/hide a set
+    ''' of controls.
     ''' </summary>
     Protected lstValuesAndControl As New List(Of KeyValuePair(Of ucrCore, Object()))
 
