@@ -703,8 +703,8 @@ Public Class ucrCore
     End Function
 
 
-    ''' <summary> True if the is a present linked controls parameters otherwise False. </summary>
-    ''' <returns> Temporary control value </returns>
+    ''' <summary> TODO SJL 18/08/20  This function is unused. Remove? </summary>
+    ''' <returns> True if this control has at least one child control with a parameter. </returns>
     Public Function LinkedControlsParametersPresent() As Boolean
         Dim bTemp As Boolean = False
 
