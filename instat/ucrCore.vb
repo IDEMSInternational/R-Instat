@@ -690,8 +690,8 @@ Public Class ucrCore
         Return bTemp
     End Function
 
-    ''' <summary> If the parameter is a default R code. </summary>
-    ''' <returns> Parameter. </returns>
+    ''' <summary> Returns true if the primary parameter's value is the R default. </summary>
+    ''' <returns> True if the primary parameter's value is the R default. </returns>
     Public Overridable Function IsRDefault() As Boolean
         Return clsParameter IsNot Nothing AndAlso clsParameter.strArgumentValue IsNot Nothing AndAlso objRDefault IsNot Nothing AndAlso objRDefault.Equals(clsParameter.strArgumentValue)
     End Function
