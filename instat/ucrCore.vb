@@ -605,9 +605,11 @@ Public Class ucrCore
     End Function
 
 
-    ''' <summary> Control the value contained in the control. </summary>
-    ''' <param name="lstTemp"> The parameter of the control. </param>
-    ''' <returns> Return False. </returns>
+    ''' <summary> Always returns false. This function may be overridden by a function that returns 
+    '''           true if this control has one of the values listed in 'lstTemp'. </summary>
+    ''' <param name="lstTemp"> The list of values to check against (only used if this function is
+    '''                        overridden). </param>
+    ''' <returns> False (unless function is overridden). </returns>
     Public Overridable Function ControlValueContainedIn(lstTemp As Object()) As Boolean
         Return False
     End Function
