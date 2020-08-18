@@ -735,10 +735,8 @@ Public Class ucrCore
         Return clsRCode
     End Function
 
-    ''' <summary>
-    ''' Set the link of the new control with other controls linked to display.
-    ''' </summary>
-    ''' <param name="ctrNewControl"> The new control to be linked to other </param>
+    ''' <summary> Sets <paramref name="ctrNewControl"/> to 'Visible'. </summary>
+    ''' <param name="ctrNewControl"> The  control to be set to 'Visible' </param>
     Public Sub SetLinkedDisplayControl(ctrNewControl As Control)
         Dim lstCtrNewControls As New List(Of Control)
         lstCtrNewControls.Add(ctrNewControl)
