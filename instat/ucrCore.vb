@@ -121,8 +121,8 @@ Public Class ucrCore
 
     ''' <summary> If true then this user control may change the value of parameters.
     '''  Used in combination with 'bAddRemoveParameter'.
-    '''  (e.g. check box may not change parameter value, only add/remove it
-    '''  For this bAddRemoveParameter = True and bChangeParameterValue = False)
+    '''  (e.g. if a check box may not change a parameter value, but only add/remove it, then set
+    '''  bAddRemoveParameter = True and bChangeParameterValue = False)
     ''' </summary>
     Public bChangeParameterValue As Boolean = True
 
