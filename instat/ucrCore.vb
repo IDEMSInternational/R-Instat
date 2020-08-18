@@ -16,47 +16,51 @@
 
 Imports instat
 
-''' <summary> The ucrCore class inherits from the 'System.Windows.Forms.UserControl' class.
-''' It is an empty control that is used as the foundation class for the other R-Instat controls.
-''' <para> Each R-Instat user control class is prefixed with 'ucr' (e.g. ucrButtons, ucrCalculator, ucrCheck etc.).
-''' Any class that inherits from ucrCore is called a core control. 
-''' There are also some non-core controls such as the selector (which does not correspond to any R command or parameter). </para>
+''' <summary> 
+''' The R-Instat user interface is implemented using Windows Forms. Windows Forms provides a set of 
+''' ‘controls’ such as labels, text boxes and buttons. These controls display data and/or accept 
+''' input. Controls also react to events triggered when the user interacts with the interface.<para>
+''' This class inherits from the Windows Forms ‘UserControl’ class. It is used to create the 
+''' R-Instat user controls. Each R-Instat user control class is prefixed with ‘ucr’ 
+''' (e.g. ucrButtons, ucrCalculator, ucrCheck etc.). </para><para>
+''' The R-Instat user controls, either directly replace a Windows Forms user control, or they 
+''' group other controls together into a single control (e.g. to provide a receiver, selector or 
+''' set of base buttons). These controls are the building blocks for the R-Instat dialog boxes. 
+''' </para><para>
+''' These controls typically corresponds to a single parameter in an R command. Composite core 
+''' controls may correspond to one or more R commands or parameters.
+''' </para>
 ''' <para> The comments for this class use the following terminology: </para>
 ''' <list type="bullet">
 ''' <item><description> Control <para><list type="bullet">
-''' <item><description> Refers to a core control (unless specifically stated) </description>
-'''                     </item></list></para> </description></item>
+''' <item><description> Refers to a core control (unless specifically stated) 
+'''                     </description></item></list></para></description></item>
 ''' <item><description> Core control <para><list type="bullet">
-''' <item><description> A control that inherits from ucrCore </description>
-'''                     </item></list></para> </description></item>
+''' <item><description> A control that inherits from ucrCore.
+'''                     </description></item></list></para></description></item>
 ''' <item><description> Control's value <para><list type="bullet">
-''' <item><description> The value entered/updated by the user (e.g. the text in a text box) </description>
-'''                     </item></list></para></description></item>
+''' <item><description> The value entered/updated by the user (e.g. the text in a text box)
+'''                     </description></item></list></para></description></item>
 ''' <item><description> Control's R code <para><list type="bullet">
 ''' <item><description> The R code associated with the control. 
-'''                     This is encapsulated by the command-parameter pair(s) </description>
-'''                     </item></list></para></description></item>
+'''                     This is encapsulated by the command-parameter pair(s)
+'''                     </description></item></list></para></description></item>
 ''' <item><description> Primary pair <para><list type="bullet">
 ''' <item><description> The main command and parameter that are affected by this control. 
 '''                     The first elements in the command-parameter lists. 
-'''                     The primary pair can be accessed directly using the properties ‘clsRCode’ and 
-'''                     ‘clsRParameter’ (these just reference the first element in the lists). </description>
-'''                     </item></list></para></description></item>
+'''                     The primary pair can be accessed directly using the properties ‘clsRCode’ 
+'''                     and ‘clsRParameter’ (these just reference the first element in the lists).
+'''                     </description></item></list></para></description></item>
 ''' <item><description> Non-primary pair(s) <para><list type="bullet">
-''' <item><description> Any additional command-parameter pairs associated with this control. </description>
-'''                     </item></list></para></description></item>
+''' <item><description> Any additional command-parameter pairs associated with this control.
+'''                     </description></item></list></para></description></item>
 ''' <item><description> Linked control <para><list type="bullet">
 ''' <item><description> A control whose value is dependent on the parent’s control value 
-'''                     (i.e. if the parent control changes then the linked control potentially changes). 
-'''                     For example, if a text box needs to be made visible when a check box is checked,
-'''                     then the parent control is the check box and the linked control is the text box. </description>
-'''                     </item></list></para></description></item>
-''' <item><description>	Parent control <para><list type="bullet">
-''' <item><description> This term is used in text about the linking mechanism to refer to the current control.
-'''                     In the rest of the document the current control is referred to as ‘this control’. 
-'''                     But using ‘this control’ in the linking description proved confusing so the
-'''                     term ‘parent control’ is used to be more explicit. </description>
-'''                     </item></list></para></description></item>
+'''                     (i.e. if the parent control changes then the linked control potentially 
+'''                     changes). For example, if a text box needs to be made visible when a check 
+'''                     box is checked, then the parent control is the check box and the linked 
+'''                     control is the text box.
+'''                     </description></item></list></para></description></item>
 ''' </list>
 ''' </summary>
 
