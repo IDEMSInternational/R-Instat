@@ -77,6 +77,7 @@ Public Class ucrFilter
         ucrSelectorForFitler.btnDataOptions.Visible = False
         ucrLogicalCombobox.SetItems({"TRUE", "FALSE"})
         ucrLogicalCombobox.SetDropDownStyleAsNonEditable()
+        ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (year > 1990) & (year < 2021) they have all to be TRUE.")
     End Sub
 
     Private Sub SetDefaults()
@@ -120,12 +121,11 @@ Public Class ucrFilter
     End Sub
 
     Private Sub CheckAddEnabled()
-        If ucrFilterByReceiver.IsEmpty() AndAlso ucrReceiverExpression.IsEmpty() Then
+        If (ucrFilterByReceiver.IsEmpty() AndAlso ucrReceiverExpression.bIsVisible AndAlso ucrReceiverExpression.IsEmpty()) OrElse ucrFilterByReceiver.IsEmpty() Then
             cmdAddCondition.Enabled = False
         Else
             If ucrFilterByReceiver.strCurrDataType.ToLower.Contains("factor") Then
                 cmdAddCondition.Enabled = Not String.IsNullOrEmpty(ucrFactorLevels.GetSelectedLevels())
-
             Else
                 Select Case ucrFilterOperation.GetText()
                     Case "is.na", "! is.na"
@@ -367,5 +367,30 @@ Public Class ucrFilter
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
         ucrReceiverExpression.Clear()
+    End Sub
+
+    ''' <summary> Handles event triggered when cmdCombineWithAndOr Button is clicked.
+    ''' The purpose of this button is to change the filter operator to either AND(&amp;) or OR(|).
+    ''' The user clicks the button to trigger a change in the operator. 
+    ''' This subroutine changes the oparator, passes "and_or" parameter into clsFilterFunction, 
+    ''' updates the button label and set the tooltip text for the button.
+    ''' Filter preview is also updated.
+    ''' Button text and the tooltip displayed on hover is changed whenever the button is clicked.
+    ''' </summary>
+    ''' <param name="sender"> Not used. </param>
+    ''' <param name="e"> Not used. </param>
+    Private Sub cmdCombineWithAndOr_Click(sender As Object, e As EventArgs) Handles cmdCombineWithAndOr.Click
+        If cmdCombineWithAndOr.Text.Contains("All combined with |") Then
+            clsFilterView.strOperation = "&"
+            clsFilterFunction.AddParameter("and_or", Chr(34) & "&" & Chr(34), iPosition:=3)
+            cmdCombineWithAndOr.Text = " All combined with &&"
+            ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (year > 1990) & (year < 2021) they have all to be TRUE.")
+        Else
+            clsFilterView.strOperation = "|"
+            clsFilterFunction.AddParameter("and_or", Chr(34) & "|" & Chr(34), iPosition:=3)
+            cmdCombineWithAndOr.Text = "All combined with |"
+            ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (sunhrs >14) | (sunhrs <0) then just one need be TRUE.")
+        End If
+        ucrFilterPreview.SetName(clsFilterView.ToScript())
     End Sub
 End Class
