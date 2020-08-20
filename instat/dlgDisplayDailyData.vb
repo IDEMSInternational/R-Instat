@@ -112,7 +112,6 @@ Public Class dlgDisplayDailyData
         dctGRugColour.Add("Green", Chr(34) & "green" & Chr(34))
         dctGRugColour.Add("Violet", Chr(34) & "violet" & Chr(34))
         ucrInputGRugColur.SetItems(dctGRugColour)
-        ucrInputGRugColur.SetDropDownStyleAsEditable(True)
 
 
         ucrInputBarColour.SetParameter(New RParameter("bar_colour", 7))
@@ -222,6 +221,7 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboTrace, ucrChkTrace}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboZero, ucrChkZero}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkSum, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoGraphByYear}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkNumberOfColumns.AddToLinkedControls(ucrNudNumberOfColumns, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrNudNumberOfColumns.SetLinkedDisplayControl(lblNumberOfColumns)
         ucrChkSum.SetLinkedDisplayControl(grpSummary)
@@ -414,14 +414,23 @@ Public Class dlgDisplayDailyData
         If rdoGraphByYear.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.86)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.2)
+            ucrSaveGraph.Location = New Point(ucrSaveGraph.Location.X, iSaveYLocation / 1.2)
         ElseIf rdoTable.Checked OrElse rdoGraph.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
+            If rdoGraph.Checked Then
+                ucrSaveGraph.Location = New Point(ucrSaveGraph.Location.X, iSaveYLocation)
+            End If
         End If
     End Sub
 
     Private Sub ucrPnlFrequencyDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencyDisplay.ControlValueChanged
         DialogSize()
+        If rdoGraphByYear.Checked Then
+            ucrSaveGraph.SetPrefix("Graph_by_Year")
+        ElseIf rdoGraph.checked Then
+            ucrSaveGraph.SetPrefix("Graph")
+        End If
         If rdoGraph.Checked Then
             ucrBase.clsRsyntax.iCallType = 3
             ucrReceiverMultipleElements.SetMeAsReceiver()

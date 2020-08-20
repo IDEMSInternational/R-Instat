@@ -147,7 +147,6 @@ Partial Class dlgDisplayDailyData
         '
         'grpGraph
         '
-        Me.grpGraph.Controls.Add(Me.ucrSaveGraph)
         Me.grpGraph.Controls.Add(Me.ucrInputRugColour)
         Me.grpGraph.Controls.Add(Me.lblRugColor)
         Me.grpGraph.Controls.Add(Me.ucrInputBarColour)
@@ -461,6 +460,7 @@ Partial Class dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrInputGRugColur)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.lblGRugColour)
