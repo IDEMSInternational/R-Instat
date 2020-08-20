@@ -40,15 +40,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrCalc.ucrReceiverForCalculation.IsEmpty Then
-            If ucrCalc.ucrSaveResultInto.IsComplete Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrCalc.ucrReceiverForCalculation.IsEmpty AndAlso ucrCalc.ucrSaveResultInto.IsComplete)
     End Sub
 
     Private Sub SetDefaults()
