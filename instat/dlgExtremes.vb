@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgExtremes
@@ -26,8 +25,6 @@ Public Class dlgExtremes
     Private clsLocationParamOperator As New ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private bResetFittingOptions As Boolean = False
-    Private bResetDisplayOptions As Boolean = False
     Private bResettingDialogue As Boolean = False
 
     Private Sub dlgExtremes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -86,13 +83,14 @@ Public Class dlgExtremes
         ucrReceiverExpressionExplanatoryModelForLocParam.SetParameterIsString()
         ucrReceiverExpressionExplanatoryModelForLocParam.SetRDefault(1)
         ucrReceiverExpressionExplanatoryModelForLocParam.bWithQuotes = False
+        ucrReceiverExpressionExplanatoryModelForLocParam.Selector = ucrSelectorExtremes
 
         ucrTryModelling.SetReceiver(ucrReceiverExpressionExplanatoryModelForLocParam)
         ucrTryModelling.SetIsModel()
 
         ucrSaveExtremes.SetPrefix("extreme")
         ucrSaveExtremes.SetIsComboBox()
-        ucrSaveExtremes.SetCheckBoxText("Save Model")
+        ucrSaveExtremes.SetCheckBoxText("Save Model:")
         ucrSaveExtremes.SetSaveTypeAsModel()
         ucrSaveExtremes.SetDataFrameSelector(ucrSelectorExtremes.ucrAvailableDataFrames)
         ucrSaveExtremes.SetAssignToIfUncheckedValue("last_model")
@@ -111,7 +109,7 @@ Public Class dlgExtremes
         ucrReceiverVariable.SetMeAsReceiver()
         ucrSelectorExtremes.Reset()
         ucrInputThresholdforLocation.SetText("0")
-        ucrReceiverExpressionExplanatoryModelForLocParam.Selector = ucrSelectorExtremes
+
 
         clsLocationScaleResetOperator.SetOperation("")
         clsLocationScaleResetOperator.bBrackets = False
@@ -145,17 +143,14 @@ Public Class dlgExtremes
 
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame)
-        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame)
-        clsDetach.AddParameter("unload", "TRUE")
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsDetach.AddParameter("unload", "TRUE", iPosition:=2)
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach, iPosition:=1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsFevdFunction)
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
-
-        bResetDisplayOptions = True
-        bResetFittingOptions = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -165,6 +160,7 @@ Public Class dlgExtremes
         ucrChkExplanatoryModelForLocationParameter.SetRCode(clsLocationScaleResetOperator, bReset)
         ucrReceiverExpressionExplanatoryModelForLocParam.SetRCode(clsLocationParamOperator, bReset)
     End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         bResettingDialogue = True
         SetDefaults()
@@ -175,7 +171,6 @@ Public Class dlgExtremes
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgExtremesDisplayOptions.SetRCode(clsNewFevdPlotFunction:=clsFevdPlotsFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
-        bResetDisplayOptions = False
         sdgExtremesDisplayOptions.ShowDialog()
     End Sub
 
@@ -186,10 +181,8 @@ Public Class dlgExtremes
             ucrBase.OKEnabled(True)
         End If
     End Sub
-
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
-        sdgExtremesMethod.SetRCode(clsNewFevdFunction:=clsFevdFunction, bReset:=bResetFittingOptions)
-        bResetFittingOptions = False
+        sdgExtremesMethod.SetRCode(clsNewFevdFunction:=clsFevdFunction)
         sdgExtremesMethod.ShowDialog()
     End Sub
 
@@ -260,8 +253,6 @@ Public Class dlgExtremes
     Private Sub cmdTan_Click(sender As Object, e As EventArgs) Handles cmdTan.Click
         ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("tan( )", 2)
     End Sub
-
-
 
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
         TestOkEnabled()
