@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 34</value>
+    <value>267, 44</value>
   </data>
   <data name="lblFactors.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 15</value>
@@ -154,13 +154,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblSeparator.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 188</value>
+    <value>264, 194</value>
   </data>
   <data name="lblSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
   </data>
   <data name="lblSeparator.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>4</value>
   </data>
   <data name="lblSeparator.Text" xml:space="preserve">
     <value>Separator:</value>
@@ -178,13 +178,13 @@
     <value>0</value>
   </data>
   <data name="ucrChkLexOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 216</value>
+    <value>267, 219</value>
   </data>
   <data name="ucrChkLexOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 20</value>
   </data>
   <data name="ucrChkLexOrder.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrChkLexOrder.Name" xml:space="preserve">
     <value>ucrChkLexOrder</value>
@@ -199,13 +199,13 @@
     <value>1</value>
   </data>
   <data name="ucrInputSeparator.Location" type="System.Drawing.Point, System.Drawing">
-    <value>359, 180</value>
+    <value>321, 192</value>
   </data>
   <data name="ucrInputSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 21</value>
   </data>
   <data name="ucrInputSeparator.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrInputSeparator.Name" xml:space="preserve">
     <value>ucrInputSeparator</value>
@@ -220,13 +220,16 @@
     <value>2</value>
   </data>
   <data name="ucrNewColName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 245</value>
+    <value>10, 246</value>
+  </data>
+  <data name="ucrNewColName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewColName.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 24</value>
   </data>
   <data name="ucrNewColName.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrNewColName.Name" xml:space="preserve">
     <value>ucrNewColName</value>
@@ -241,7 +244,7 @@
     <value>3</value>
   </data>
   <data name="ucrChkDropUnusedLevels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 153</value>
+    <value>267, 165</value>
   </data>
   <data name="ucrChkDropUnusedLevels.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 20</value>
@@ -268,7 +271,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -289,7 +292,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>452, 333</value>
+    <value>420, 333</value>
   </data>
   <data name="ucrSelectorCombineFactors.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -328,7 +331,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrFactorsReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 50</value>
+    <value>267, 60</value>
   </data>
   <data name="ucrFactorsReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
