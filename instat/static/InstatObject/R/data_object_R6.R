@@ -2143,9 +2143,9 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
 
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
 DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE,  weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE,  dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1, days_in_month = FALSE) {
-  col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+    col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!lubridate::is.Date(col_data)) stop("This column must be a date or time!")
-  
+
   s_shift <- s_start_day_in_month > 1 || s_start_month > 1
   is_climatic <- self$is_climatic_data()
   
@@ -3628,3 +3628,27 @@ DataSheet$set("public", "get_variable_sets", function(set_names, force_as_list) 
   return(out)
 }
 )
+
+DataSheet$set("public", "patch_climate_element", function(date_col_name = "", var = "",  vars = c(), max_mean_bias = NA, max_stdev_bias = NA, print_summary = FALSE){
+  if(missing(date_col_name))stop("date is missing with no default")
+  if(missing(var))stop("var is missing with no default")
+  if(missing(vars))stop("vars is missing with no default")
+  date_col <- self$get_columns_from_data(date_col_name, use_current_filter = FALSE)
+  if(!lubridate::is.Date(date_col)) stop("This column must be a date or time!")
+  var_col <- self$get_columns_from_data(var, use_current_filter = FALSE)
+  Year <- lubridate::year(date_col); Month <- lubridate::month(date_col); Day <- lubridate::day(date_col)
+  weather <- data.frame(Year, Month, Day, var_col)
+  colnames(weather)[4] <- var
+  patch_weather <- list()
+  for (i in seq_along(vars)) {
+    col <- self$get_columns_from_data(vars[i], use_current_filter = FALSE)
+    patch_weather[[i]] <- data.frame(Year, Month, Day, col)
+    colnames(patch_weather[[i]])[4] <- var
+  }
+  out <-  chillR::patch_daily_temperatures(weather = weather, patch_weather = patch_weather, vars = var, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias)
+  self$add_columns_to_data(col_name = paste0(var,"_Infilled"), col_data = out[[1]][,var])
+  if(print_summary) print(out[[2]])
+}
+)
+
+
