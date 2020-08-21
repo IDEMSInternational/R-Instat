@@ -43,6 +43,8 @@ Partial Class dlgInfillMissingValues
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblEstimated = New System.Windows.Forms.Label()
         Me.lblObserved = New System.Windows.Forms.Label()
+        Me.lblMultipleStation = New System.Windows.Forms.Label()
+        Me.ucrReceiverMultipleStation = New instat.ucrReceiverSingle()
         Me.ucrInputStdBias = New instat.ucrInputTextBox()
         Me.ucrInputMeanBias = New instat.ucrInputTextBox()
         Me.ucrChkStdBias = New instat.ucrCheck()
@@ -209,6 +211,20 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me.lblObserved, "lblObserved")
         Me.lblObserved.Name = "lblObserved"
+        '
+        'lblMultipleStation
+        '
+        resources.ApplyResources(Me.lblMultipleStation, "lblMultipleStation")
+        Me.lblMultipleStation.Name = "lblMultipleStation"
+        '
+        'ucrReceiverMultipleStation
+        '
+        Me.ucrReceiverMultipleStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultipleStation, "ucrReceiverMultipleStation")
+        Me.ucrReceiverMultipleStation.Name = "ucrReceiverMultipleStation"
+        Me.ucrReceiverMultipleStation.Selector = Nothing
+        Me.ucrReceiverMultipleStation.strNcFilePath = ""
+        Me.ucrReceiverMultipleStation.ucrSelector = Nothing
         '
         'ucrInputStdBias
         '
@@ -395,6 +411,8 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblMultipleStation)
+        Me.Controls.Add(Me.ucrReceiverMultipleStation)
         Me.Controls.Add(Me.ucrInputStdBias)
         Me.Controls.Add(Me.ucrInputMeanBias)
         Me.Controls.Add(Me.ucrChkStdBias)
@@ -488,4 +506,6 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrChkMeanBias As ucrCheck
     Friend WithEvents ucrInputStdBias As ucrInputTextBox
     Friend WithEvents ucrInputMeanBias As ucrInputTextBox
+    Friend WithEvents lblMultipleStation As Label
+    Friend WithEvents ucrReceiverMultipleStation As ucrReceiverSingle
 End Class
