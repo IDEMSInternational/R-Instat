@@ -32,7 +32,6 @@ Partial Class dlgInfillMissingValues
         Me.lblElement = New System.Windows.Forms.Label()
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
-        Me.rdoNeighbouring = New System.Windows.Forms.RadioButton()
         Me.grpMethods = New System.Windows.Forms.GroupBox()
         Me.grpStartEnd = New System.Windows.Forms.GroupBox()
         Me.rdoExtendFill = New System.Windows.Forms.RadioButton()
@@ -41,6 +40,17 @@ Partial Class dlgInfillMissingValues
         Me.lblFunction = New System.Windows.Forms.Label()
         Me.lblRows = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
+        Me.lblDate = New System.Windows.Forms.Label()
+        Me.lblEstimated = New System.Windows.Forms.Label()
+        Me.lblObserved = New System.Windows.Forms.Label()
+        Me.ucrInputStdBias = New instat.ucrInputTextBox()
+        Me.ucrInputMeanBias = New instat.ucrInputTextBox()
+        Me.ucrChkStdBias = New instat.ucrCheck()
+        Me.ucrChkMeanBias = New instat.ucrCheck()
+        Me.ucrChkPrintSummary = New instat.ucrCheck()
+        Me.ucrReceiverObserved = New instat.ucrReceiverSingle()
+        Me.ucrReceiverEstimatedElements = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrInputConstant = New instat.ucrInputTextBox()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
@@ -129,16 +139,6 @@ Partial Class dlgInfillMissingValues
         Me.rdoMultiple.TabStop = True
         Me.rdoMultiple.UseVisualStyleBackColor = True
         '
-        'rdoNeighbouring
-        '
-        resources.ApplyResources(Me.rdoNeighbouring, "rdoNeighbouring")
-        Me.rdoNeighbouring.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoNeighbouring.FlatAppearance.BorderSize = 2
-        Me.rdoNeighbouring.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoNeighbouring.Name = "rdoNeighbouring"
-        Me.rdoNeighbouring.TabStop = True
-        Me.rdoNeighbouring.UseVisualStyleBackColor = True
-        '
         'grpMethods
         '
         Me.grpMethods.Controls.Add(Me.rdoNaStructTS)
@@ -194,6 +194,82 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me.lblStation, "lblStation")
         Me.lblStation.Name = "lblStation"
+        '
+        'lblDate
+        '
+        resources.ApplyResources(Me.lblDate, "lblDate")
+        Me.lblDate.Name = "lblDate"
+        '
+        'lblEstimated
+        '
+        resources.ApplyResources(Me.lblEstimated, "lblEstimated")
+        Me.lblEstimated.Name = "lblEstimated"
+        '
+        'lblObserved
+        '
+        resources.ApplyResources(Me.lblObserved, "lblObserved")
+        Me.lblObserved.Name = "lblObserved"
+        '
+        'ucrInputStdBias
+        '
+        Me.ucrInputStdBias.AddQuotesIfUnrecognised = True
+        Me.ucrInputStdBias.IsMultiline = False
+        Me.ucrInputStdBias.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputStdBias, "ucrInputStdBias")
+        Me.ucrInputStdBias.Name = "ucrInputStdBias"
+        '
+        'ucrInputMeanBias
+        '
+        Me.ucrInputMeanBias.AddQuotesIfUnrecognised = True
+        Me.ucrInputMeanBias.IsMultiline = False
+        Me.ucrInputMeanBias.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMeanBias, "ucrInputMeanBias")
+        Me.ucrInputMeanBias.Name = "ucrInputMeanBias"
+        '
+        'ucrChkStdBias
+        '
+        Me.ucrChkStdBias.Checked = False
+        resources.ApplyResources(Me.ucrChkStdBias, "ucrChkStdBias")
+        Me.ucrChkStdBias.Name = "ucrChkStdBias"
+        '
+        'ucrChkMeanBias
+        '
+        Me.ucrChkMeanBias.Checked = False
+        resources.ApplyResources(Me.ucrChkMeanBias, "ucrChkMeanBias")
+        Me.ucrChkMeanBias.Name = "ucrChkMeanBias"
+        '
+        'ucrChkPrintSummary
+        '
+        Me.ucrChkPrintSummary.Checked = False
+        resources.ApplyResources(Me.ucrChkPrintSummary, "ucrChkPrintSummary")
+        Me.ucrChkPrintSummary.Name = "ucrChkPrintSummary"
+        '
+        'ucrReceiverObserved
+        '
+        Me.ucrReceiverObserved.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverObserved, "ucrReceiverObserved")
+        Me.ucrReceiverObserved.Name = "ucrReceiverObserved"
+        Me.ucrReceiverObserved.Selector = Nothing
+        Me.ucrReceiverObserved.strNcFilePath = ""
+        Me.ucrReceiverObserved.ucrSelector = Nothing
+        '
+        'ucrReceiverEstimatedElements
+        '
+        Me.ucrReceiverEstimatedElements.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverEstimatedElements, "ucrReceiverEstimatedElements")
+        Me.ucrReceiverEstimatedElements.Name = "ucrReceiverEstimatedElements"
+        Me.ucrReceiverEstimatedElements.Selector = Nothing
+        Me.ucrReceiverEstimatedElements.strNcFilePath = ""
+        Me.ucrReceiverEstimatedElements.ucrSelector = Nothing
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrInputConstant
         '
@@ -319,6 +395,17 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputStdBias)
+        Me.Controls.Add(Me.ucrInputMeanBias)
+        Me.Controls.Add(Me.ucrChkStdBias)
+        Me.Controls.Add(Me.ucrChkMeanBias)
+        Me.Controls.Add(Me.ucrChkPrintSummary)
+        Me.Controls.Add(Me.lblObserved)
+        Me.Controls.Add(Me.ucrReceiverObserved)
+        Me.Controls.Add(Me.lblEstimated)
+        Me.Controls.Add(Me.ucrReceiverEstimatedElements)
+        Me.Controls.Add(Me.lblDate)
+        Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.lblValue)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrInputConstant)
@@ -335,7 +422,6 @@ Partial Class dlgInfillMissingValues
         Me.Controls.Add(Me.lblFunction)
         Me.Controls.Add(Me.ucrSaveNewColumn)
         Me.Controls.Add(Me.ucrInputComboFunction)
-        Me.Controls.Add(Me.rdoNeighbouring)
         Me.Controls.Add(Me.rdoMultiple)
         Me.Controls.Add(Me.rdoSingle)
         Me.Controls.Add(Me.lblElement)
@@ -367,7 +453,6 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents rdoNaLocf As RadioButton
     Friend WithEvents rdoNaStructTS As RadioButton
     Friend WithEvents lblElement As Label
-    Friend WithEvents rdoNeighbouring As RadioButton
     Friend WithEvents rdoMultiple As RadioButton
     Friend WithEvents rdoSingle As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
@@ -392,4 +477,15 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverByFactor As ucrReceiverMultiple
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
+    Friend WithEvents lblDate As Label
+    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
+    Friend WithEvents lblEstimated As Label
+    Friend WithEvents ucrReceiverEstimatedElements As ucrReceiverMultiple
+    Friend WithEvents lblObserved As Label
+    Friend WithEvents ucrReceiverObserved As ucrReceiverSingle
+    Friend WithEvents ucrChkPrintSummary As ucrCheck
+    Friend WithEvents ucrChkStdBias As ucrCheck
+    Friend WithEvents ucrChkMeanBias As ucrCheck
+    Friend WithEvents ucrInputStdBias As ucrInputTextBox
+    Friend WithEvents ucrInputMeanBias As ucrInputTextBox
 End Class
