@@ -89,7 +89,6 @@ Partial Class dlgFindNonnumericValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblColumnName)
         Me.Controls.Add(Me.ucrInputColumnName)
         Me.Controls.Add(Me.ucrChkFilterNonumerics)
         Me.Controls.Add(Me.ucrChkShowSummary)
@@ -97,6 +96,7 @@ Partial Class dlgFindNonnumericValues
         Me.Controls.Add(Me.ucrReceiverColumn)
         Me.Controls.Add(Me.ucrSelectorShowNonNumericValues)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.lblColumnName)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MinimizeBox = False
         Me.Name = "dlgFindNonnumericValues"
