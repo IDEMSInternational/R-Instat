@@ -2143,9 +2143,8 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
 
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
 DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE,  weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE,  dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1, days_in_month = FALSE) {
-    col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!lubridate::is.Date(col_data)) stop("This column must be a date or time!")
-
   s_shift <- s_start_day_in_month > 1 || s_start_month > 1
   is_climatic <- self$is_climatic_data()
   
