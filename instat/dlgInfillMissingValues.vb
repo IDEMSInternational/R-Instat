@@ -172,7 +172,6 @@ Public Class dlgInfillMissingValues
 
         ucrChkPrintSummary.SetParameter(New RParameter("print_summary", 6))
         ucrChkPrintSummary.SetText("Print summary")
-        ucrChkPrintSummary.SetRDefault("FALSE")
 
         ucrChkMeanBias.SetText("Maximum mean bias:")
         ucrChkMeanBias.AddParameterPresentCondition(True, "max_mean_bias")
@@ -258,6 +257,7 @@ Public Class dlgInfillMissingValues
         clsBracketOperator.bSpaceAroundOperation = False
 
         clsPatchClimateElementFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$patch_climate_element")
+        clsPatchClimateElementFunction.AddParameter("print_summary", "TRUE", iPosition:=6)
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsAveFunction)
