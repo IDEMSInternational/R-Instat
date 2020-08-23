@@ -52,7 +52,6 @@ Partial Class dlgInfillMissingValues
         Me.ucrInputMeanBias = New instat.ucrInputTextBox()
         Me.ucrChkStdBias = New instat.ucrCheck()
         Me.ucrChkMeanBias = New instat.ucrCheck()
-        Me.ucrChkPrintSummary = New instat.ucrCheck()
         Me.ucrReceiverObserved = New instat.ucrReceiverSingle()
         Me.ucrReceiverEstimatedElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -271,12 +270,6 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.ucrChkMeanBias, "ucrChkMeanBias")
         Me.ucrChkMeanBias.Name = "ucrChkMeanBias"
         '
-        'ucrChkPrintSummary
-        '
-        Me.ucrChkPrintSummary.Checked = False
-        resources.ApplyResources(Me.ucrChkPrintSummary, "ucrChkPrintSummary")
-        Me.ucrChkPrintSummary.Name = "ucrChkPrintSummary"
-        '
         'ucrReceiverObserved
         '
         Me.ucrReceiverObserved.frmParent = Me
@@ -434,7 +427,6 @@ Partial Class dlgInfillMissingValues
         Me.Controls.Add(Me.ucrInputMeanBias)
         Me.Controls.Add(Me.ucrChkStdBias)
         Me.Controls.Add(Me.ucrChkMeanBias)
-        Me.Controls.Add(Me.ucrChkPrintSummary)
         Me.Controls.Add(Me.lblObserved)
         Me.Controls.Add(Me.ucrReceiverObserved)
         Me.Controls.Add(Me.lblEstimated)
@@ -518,7 +510,6 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrReceiverEstimatedElements As ucrReceiverMultiple
     Friend WithEvents lblObserved As Label
     Friend WithEvents ucrReceiverObserved As ucrReceiverSingle
-    Friend WithEvents ucrChkPrintSummary As ucrCheck
     Friend WithEvents ucrChkStdBias As ucrCheck
     Friend WithEvents ucrChkMeanBias As ucrCheck
     Friend WithEvents ucrInputStdBias As ucrInputTextBox
