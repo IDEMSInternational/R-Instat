@@ -3628,7 +3628,7 @@ DataSheet$set("public", "get_variable_sets", function(set_names, force_as_list) 
 }
 )
 
-DataSheet$set("public", "patch_climate_element", function(date_col_name = "", var = "",  vars = c(), max_mean_bias = NA, max_stdev_bias = NA, print_summary = FALSE, column_name){
+DataSheet$set("public", "patch_climate_element", function(date_col_name = "", var = "",  vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name){
   if(missing(date_col_name))stop("date is missing with no default")
   if(missing(var))stop("var is missing with no default")
   if(missing(vars))stop("vars is missing with no default")
@@ -3646,7 +3646,7 @@ DataSheet$set("public", "patch_climate_element", function(date_col_name = "", va
   }
   out <-  chillR::patch_daily_temperatures(weather = weather, patch_weather = patch_weather, vars = var, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias)
   self$add_columns_to_data(col_name = column_name, col_data = out[[1]][,var])
-  if(print_summary) print(out[[2]])
+  return(out[[2]])
 }
 )
 
