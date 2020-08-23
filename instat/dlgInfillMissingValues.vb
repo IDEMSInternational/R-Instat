@@ -346,18 +346,14 @@ Public Class dlgInfillMissingValues
         End If
     End Sub
 
-    Private Sub ucrInputComboFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboFunction.ControlValueChanged, ucrPnlMethods.ControlValueChanged, ucrChkSetSeed.ControlValueChanged
-        If rdoNaAggregate.Checked Then
-            If ucrChkSetSeed.Checked Then
-                Select Case ucrInputComboFunction.GetValue()
-                    Case "Sample"
-                        ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeedFunction, 0)
-                    Case Else
-                        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
-                End Select
-            Else
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
-            End If
+    Private Sub ucrInputComboFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboFunction.ControlValueChanged, ucrPnlMethods.ControlValueChanged, ucrChkSetSeed.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+        If rdoSingle.Checked AndAlso rdoNaAggregate.Checked AndAlso ucrChkSetSeed.Checked Then
+            Select Case ucrInputComboFunction.GetValue()
+                Case "Sample"
+                    ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeedFunction, 0)
+                Case Else
+                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
+            End Select
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
         End If
