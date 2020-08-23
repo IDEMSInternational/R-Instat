@@ -382,7 +382,7 @@
     <value>103, 27</value>
   </data>
   <data name="rdoMultiple.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="rdoMultiple.Text" xml:space="preserve">
     <value>Multiple</value>
@@ -430,7 +430,7 @@
     <value>210, 99</value>
   </data>
   <data name="grpMethods.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>21</value>
   </data>
   <data name="grpMethods.Text" xml:space="preserve">
     <value>Methods</value>
@@ -535,7 +535,7 @@
     <value>181, 66</value>
   </data>
   <data name="grpStartEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>22</value>
   </data>
   <data name="grpStartEnd.Text" xml:space="preserve">
     <value>Start and End</value>
@@ -565,7 +565,7 @@
     <value>37, 13</value>
   </data>
   <data name="lblValue.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+    <value>23</value>
   </data>
   <data name="lblValue.Text" xml:space="preserve">
     <value>Value:</value>
@@ -625,7 +625,7 @@
     <value>35, 13</value>
   </data>
   <data name="lblRows.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>18</value>
   </data>
   <data name="lblRows.Text" xml:space="preserve">
     <value>row(s)</value>
@@ -685,7 +685,7 @@
     <value>33, 13</value>
   </data>
   <data name="lblDate.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
+    <value>6</value>
   </data>
   <data name="lblDate.Text" xml:space="preserve">
     <value>Date:</value>
@@ -715,7 +715,7 @@
     <value>56, 13</value>
   </data>
   <data name="lblEstimated.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
+    <value>11</value>
   </data>
   <data name="lblEstimated.Text" xml:space="preserve">
     <value>Estimated:</value>
@@ -745,7 +745,7 @@
     <value>56, 13</value>
   </data>
   <data name="lblObserved.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
+    <value>9</value>
   </data>
   <data name="lblObserved.Text" xml:space="preserve">
     <value>Observed:</value>
@@ -775,7 +775,7 @@
     <value>43, 13</value>
   </data>
   <data name="lblMultipleStation.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
+    <value>4</value>
   </data>
   <data name="lblMultipleStation.Text" xml:space="preserve">
     <value>Station:</value>
@@ -859,7 +859,7 @@
     <value>47, 21</value>
   </data>
   <data name="ucrInputStdBias.TabIndex" type="System.Int32, mscorlib">
-    <value>39</value>
+    <value>20</value>
   </data>
   <data name="&gt;&gt;ucrInputStdBias.Name" xml:space="preserve">
     <value>ucrInputStdBias</value>
@@ -880,7 +880,7 @@
     <value>47, 21</value>
   </data>
   <data name="ucrInputMeanBias.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;ucrInputMeanBias.Name" xml:space="preserve">
     <value>ucrInputMeanBias</value>
@@ -901,7 +901,7 @@
     <value>127, 20</value>
   </data>
   <data name="ucrChkStdBias.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
+    <value>19</value>
   </data>
   <data name="&gt;&gt;ucrChkStdBias.Name" xml:space="preserve">
     <value>ucrChkStdBias</value>
@@ -922,7 +922,7 @@
     <value>127, 20</value>
   </data>
   <data name="ucrChkMeanBias.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrChkMeanBias.Name" xml:space="preserve">
     <value>ucrChkMeanBias</value>
@@ -946,7 +946,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverObserved.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrReceiverObserved.Name" xml:space="preserve">
     <value>ucrReceiverObserved</value>
@@ -970,7 +970,7 @@
     <value>120, 100</value>
   </data>
   <data name="ucrReceiverEstimatedElements.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;ucrReceiverEstimatedElements.Name" xml:space="preserve">
     <value>ucrReceiverEstimatedElements</value>
@@ -994,7 +994,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverDate.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrReceiverDate.Name" xml:space="preserve">
     <value>ucrReceiverDate</value>
@@ -1015,7 +1015,7 @@
     <value>47, 21</value>
   </data>
   <data name="ucrInputConstant.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>24</value>
   </data>
   <data name="&gt;&gt;ucrInputConstant.Name" xml:space="preserve">
     <value>ucrInputConstant</value>
@@ -1084,7 +1084,7 @@
     <value>76, 20</value>
   </data>
   <data name="ucrChkSetSeed.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>27</value>
   </data>
   <data name="&gt;&gt;ucrChkSetSeed.Name" xml:space="preserve">
     <value>ucrChkSetSeed</value>
@@ -1105,7 +1105,7 @@
     <value>48, 20</value>
   </data>
   <data name="ucrNudSetSeed.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>28</value>
   </data>
   <data name="&gt;&gt;ucrNudSetSeed.Name" xml:space="preserve">
     <value>ucrNudSetSeed</value>
@@ -1126,7 +1126,7 @@
     <value>48, 20</value>
   </data>
   <data name="ucrNudMaximum.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrNudMaximum.Name" xml:space="preserve">
     <value>ucrNudMaximum</value>
@@ -1147,7 +1147,7 @@
     <value>96, 20</value>
   </data>
   <data name="ucrChkMaxGap.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrChkMaxGap.Name" xml:space="preserve">
     <value>ucrChkMaxGap</value>
@@ -1189,7 +1189,7 @@
     <value>110, 20</value>
   </data>
   <data name="ucrChkCopyFromBelow.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>25</value>
   </data>
   <data name="&gt;&gt;ucrChkCopyFromBelow.Name" xml:space="preserve">
     <value>ucrChkCopyFromBelow</value>
@@ -1213,7 +1213,7 @@
     <value>302, 25</value>
   </data>
   <data name="ucrSaveNewColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>29</value>
   </data>
   <data name="&gt;&gt;ucrSaveNewColumn.Name" xml:space="preserve">
     <value>ucrSaveNewColumn</value>
@@ -1234,7 +1234,7 @@
     <value>66, 21</value>
   </data>
   <data name="ucrInputComboFunction.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>26</value>
   </data>
   <data name="&gt;&gt;ucrInputComboFunction.Name" xml:space="preserve">
     <value>ucrInputComboFunction</value>
@@ -1279,7 +1279,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+    <value>30</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -1303,7 +1303,7 @@
     <value>210, 180</value>
   </data>
   <data name="ucrSelectorInfillMissing.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrSelectorInfillMissing.Name" xml:space="preserve">
     <value>ucrSelectorInfillMissing</value>
@@ -1360,7 +1360,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverMultipleStation.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrReceiverMultipleStation.Name" xml:space="preserve">
     <value>ucrReceiverMultipleStation</value>
