@@ -388,11 +388,11 @@ Partial Class ucrCalculator
         Me.cmdD = New System.Windows.Forms.Button()
         Me.cmdCp = New System.Windows.Forms.Button()
         Me.cmdBr2 = New System.Windows.Forms.Button()
+        Me.ucrSaveResultInto = New instat.ucrSave()
         Me.ucrTryCalculator = New instat.ucrTry()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.ucrSaveResultInto = New instat.ucrSave()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -2841,6 +2841,11 @@ Partial Class ucrCalculator
         Me.cmdBr2.Name = "cmdBr2"
         Me.cmdBr2.UseVisualStyleBackColor = True
         '
+        'ucrSaveResultInto
+        '
+        resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
+        Me.ucrSaveResultInto.Name = "ucrSaveResultInto"
+        '
         'ucrTryCalculator
         '
         resources.ApplyResources(Me.ucrTryCalculator, "ucrTryCalculator")
@@ -2869,11 +2874,6 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.Selector = Nothing
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
-        '
-        'ucrSaveResultInto
-        '
-        resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
-        Me.ucrSaveResultInto.Name = "ucrSaveResultInto"
         '
         'ucrCalculator
         '
