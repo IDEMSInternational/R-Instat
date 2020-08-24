@@ -1494,6 +1494,13 @@ DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace
 }
 )
 
+DataSheet$set("public","add_filter_as_levels", function(filter_levels, column){
+  for (i in seq_along(filter_levels)) {
+    filter_cond <- list(C0 = list(column = column, operation = "==", value = filter_levels[i]))
+    self$add_filter(filter = filter_cond, filter_name = filter_levels[i])
+  }
+})
+
 DataSheet$set("public", "get_current_filter", function() {
   return(private$.current_filter)
 }
