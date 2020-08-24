@@ -113,6 +113,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement2.Selector = ucrSelectorTemperature
         ucrReceiverElement2.SetParameter(New RParameter("x", 1, bNewIncludeArgumentName:=False))
         ucrReceiverElement2.SetParameterIsString()
+        ucrReceiverElement2.bAutoFill = True
         ucrReceiverElement2.bWithQuotes = False
 
         'Checkboxes for options
